@@ -6160,6 +6160,17567 @@ INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcounty
 GO
 INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1424, 47, N'NAIROBI', 285, N'EMBAKASI EAST', 1424, N'UTAWALA')
 GO
+DELETE FROM [dbo].[FacilityList]
+GO
+SET IDENTITY_INSERT [dbo].[FacilityList] ON 
+
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1, N'22691', N'Palis Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2, N'22675', N'Unicure Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3, N'22674', N'Endoscopy and Diagnostic Center Kerugoya')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4, N'22672', N'Githima Disp')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5, N'22663', N'LOKORKOR DISPENSARY')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6, N'22652', N'Fountain Healthcare Ltd Bungoma')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7, N'22643', N'Bliss CVS Healthcare Limited Kapsabet')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8, N'22642', N'Marysyl Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (9, N'22623', N'Nzoia Medical Centre Chwele')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (10, N'22622', N'Oltumusoi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (11, N'22619', N'Koinange Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (12, N'22614', N'AFYALINK MEDICAL LABARATORIES')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (13, N'22610', N'Gitunduti Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (14, N'22609', N'ACK NGUNI CBHC ANNEX CLINIC')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (15, N'22607', N'Goshen Medical clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (16, N'22606', N'Interlink Optical and Care Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (17, N'22582', N'KEMRI ALUPE HOSPITAL')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (18, N'22581', N'KARI TRC HOSPITAL')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (19, N'22580', N'KARI HOSPTAL')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (20, N'22579', N'Mutunyi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (21, N'22577', N'Baibariu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (22, N'22575', N'Kayos Dispensary Puiblic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (23, N'22572', N'Kayos Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (24, N'22571', N'Nyakoigwana Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (25, N'22570', N'Khalwenge Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (26, N'22569', N'Matumbei Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (27, N'22568', N'Twiga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (28, N'22567', N'Kapkarwa')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (29, N'22557', N'CENTER VIEW MEDICAL HEALTH CARE')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (30, N'22556', N'Kiptenden')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (31, N'22554', N'ST Marys'' Health Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (32, N'22551', N'MILIMANI DISPENSARY')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (33, N'22549', N'Karaus Disp')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (34, N'22548', N'Soy Mining Disp')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (35, N'22547', N'Marinda Disp')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (36, N'22545', N'Biketi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (37, N'22544', N'BUYEMI DISPENSARY')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (38, N'22541', N'Kaptain Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (39, N'22538', N'Imani Medical Centre(Kitui Central)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (40, N'22523', N'Bliss GVS Health care Limited')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (41, N'22522', N'Diamension medical Labolatory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (42, N'22520', N'Makololwe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (43, N'22519', N'Namang''ofulo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (44, N'22515', N'Muromutua Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (45, N'22514', N'Kilera Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (46, N'22513', N'Kairuru Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (47, N'22501', N'Namwatikho Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (48, N'22500', N'Bukokholo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (49, N'22495', N'Nduumoni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (50, N'22490', N'Mwomo dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (51, N'22488', N'Tupado Drop in Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (52, N'22486', N'Kajiado west medical clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (53, N'22484', N'Graceheal Health Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (54, N'22483', N'Otamba Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (55, N'22482', N'St. Jane Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (56, N'22481', N'Kilifi GK Prison VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (57, N'22480', N'Mwangaza Gen/Eye Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (58, N'22478', N'KIPASI COMMUNITY HEALTH CENTRE')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (59, N'22477', N'Kimbo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (60, N'22476', N'LITARE COMMUNITY HEALTH CENTRE')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (61, N'22475', N'Bamako Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (62, N'22473', N'Rithika Medical And Counselling Centre Kangeta')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (63, N'22472', N'Rithika Medical And Counselling Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (64, N'22471', N'Ubuntu Afya Manyatta')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (65, N'22464', N'Mwangea Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (66, N'22448', N'Nyaramba Junction Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (67, N'22447', N'Buxton Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (68, N'22446', N'GATEWAY PEDIATRIC MEDICAL CLINIC')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (69, N'22445', N'GATAMAIYU BENJAMIN WELLNESS CENTRE')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (70, N'22444', N'Linax medical centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (71, N'22443', N'OptimuM current health care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (72, N'22442', N'CELIPHAM MEDICAL CLINIC')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (73, N'22412', N'Elwak Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (74, N'22410', N'ULTRAMED HEALTH CARE')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (75, N'22408', N'Sasa')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (76, N'22407', N'Obwogre Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (77, N'22406', N'Uloma Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (78, N'22392', N'Tumaini DISC Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (79, N'22383', N'Matibabu Ugunja Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (80, N'22381', N'Kithia Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (81, N'22380', N'Sere Dispensary (Nyamira north)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (82, N'22378', N'Nuclear Medical Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (83, N'22377', N'Lilyon Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (84, N'22376', N'Sagatia Medical centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (85, N'22375', N'Jowasi Medical clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (86, N'22370', N'Musyi Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (87, N'22369', N'Sun Rise Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (88, N'22365', N'Mt.Sinai Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (89, N'22364', N'Chogoria Cospital Chuka Medical Center')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (90, N'22363', N'Lomidat dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (91, N'22359', N'locheredome dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (92, N'22357', N'sukut dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (93, N'22356', N'The Almond Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (94, N'22355', N'Chrizah Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (95, N'22354', N'Kisumu Specialist Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (96, N'22352', N'KOMAROCK MODERN HOSPITAL UTAWALA')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (97, N'22351', N'EURAKA MEDICAL CENTRE')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (98, N'22349', N'SWOP CLINIC DONHOLM')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (99, N'22348', N'Facility Official Name * Nyamage')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (100, N'22347', N'Gomba Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (101, N'22343', N'Bacasavi Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (102, N'22341', N'Mutambo dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (103, N'22340', N'KIBORMOS DISPENSARY')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (104, N'22338', N'MFANGANO COMMUNITY HEALTH CENTRE')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (105, N'22337', N'Maviaume Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (106, N'22336', N'Rapha Healthcare Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (107, N'22335', N'IOM MIGRATION HEALTH ASSESMENT CENTRE,KAKUMA')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (108, N'22333', N'Avenue Health  Care Garden City Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (109, N'22329', N'Gateway Health Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (110, N'22325', N'mogondo dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (111, N'22323', N'Chaka Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (112, N'22322', N'Medicross Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (113, N'22321', N'Juja Modern Hospital & Maternity')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (114, N'22319', N'Talana specialist centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (115, N'22316', N'REHOBOTH MEDICAL CLINIC')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (116, N'22311', N'ISHIARA HEALTH CARE CLINIC')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (117, N'22310', N'Machakos Central Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (118, N'22307', N'ISHIARA FOCUS MEDICAL CARE')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (119, N'22305', N'Homabay Central Medical Clinic (Homa Bay Central)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (120, N'22302', N'Oasis Doctors Plaza')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (121, N'22301', N'Rachare Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (122, N'22300', N'Mazola Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (123, N'22299', N'Nabuala Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (124, N'22293', N'Phoenix Healthcare (Maua)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (125, N'22289', N'Nairiri Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (126, N'22272', N'Galaxy Medical Centre-Ngatataek')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (127, N'22271', N'Whiterose Medical centre Gategi satellite')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (128, N'22270', N'Makutano Dispensary (Mwea)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (129, N'22269', N'Kangungi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (130, N'13382', N'Korakora Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (131, N'22267', N'Damasa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (132, N'22265', N'Gari Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (133, N'22264', N'Bambo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (134, N'22262', N'Kabo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (135, N'22261', N'Alungu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (136, N'21541', N'Mkondoni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (137, N'21542', N'Sosobora Dispesary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (138, N'22258', N'Gianchere Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (139, N'22256', N'Makdavis Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (140, N'22255', N'Lagsure Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (141, N'22254', N'Didkuro Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (142, N'22253', N'Qarsahama Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (143, N'22252', N'El-Danada Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (144, N'22251', N'Alpha Hill Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (145, N'22239', N'Arrow Web Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (146, N'22238', N'KIHOME DISPENSARY')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (147, N'22236', N'THUNGURI DISPENSARY')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (148, N'22229', N'Kyondoni Dispensary (Kauwi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (149, N'22222', N'MAISHA CLINIC')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (150, N'22220', N'Nyalunya Community Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (151, N'22215', N'Kenya Red Cross Kalobeyei Health centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (152, N'22207', N'Wasio  dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (153, N'22206', N'Roses Healthcare Clinc')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (154, N'22205', N'GALAXY MEDICAL CENTRE')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (155, N'22204', N'LADACA')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (156, N'22201', N'THE AVENUE MEDICAL AND DIAGNOSTIC CENTRE.')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (157, N'22200', N'Prince Alvin Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (158, N'22199', N'Thika Heart Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (159, N'22198', N'Kirege Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (160, N'22197', N'Avenue Health Care-Eldoret Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (161, N'22193', N'Velma Memorial Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (162, N'22192', N'Bongu Konyango Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (163, N'22191', N'Vuyika Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (164, N'22189', N'Sigma Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (165, N'22188', N'Uae Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (166, N'22185', N'Bethsaida Family Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (167, N'22183', N'Emmanuel community health clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (168, N'22182', N'Faith medical Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (169, N'22181', N'Hope community Nursing services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (170, N'22178', N'Mary Immaculate (Kingongo)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (171, N'22176', N'The Agha Khan Medical Centre-Rigeways(Kiambu Rd.)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (172, N'22175', N'Springs Health Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (173, N'22174', N'Mary Immaculate (Ruringu)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (174, N'22173', N'TUMAINI DISC-SIAYA')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (175, N'22172', N'Providence Medical Centre - Mathare North')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (176, N'22171', N'Imani 44 Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (177, N'22170', N'Mercylight  Hospital-Lucky Summer')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (178, N'22169', N'Nelly Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (179, N'22168', N'Mulot stand alone (Bomet)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (180, N'22167', N'Rosemed clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (181, N'22166', N'ST. JULIANS MEDICAL CLINIC')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (182, N'22165', N'AAR Nyali Heal')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (183, N'22164', N'Ebenezar Medical clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (184, N'22162', N'GALAXY')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (185, N'22161', N'KIRIA-INI HEALTH CARE')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (186, N'22160', N'CFW Cheera')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (187, N'22156', N'Sipili maternity and nursing home (Githiga)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (188, N'22154', N'North Gate School - Koma Hill Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (189, N'22153', N'SAINT GABRIEL HOSPITAL AND WELLNESS CENTER')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (190, N'22152', N'Kitololoni Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (191, N'22151', N'ST.Bakhita Mission')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (192, N'22150', N'SVG Health Care Limited')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (193, N'22149', N'Dr. Mazaher Hassan Jaffer')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (194, N'22148', N'Dr. Racheal Muthoni Rukaria')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (195, N'22147', N'FURAHA MEDICAL CARE')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (196, N'22146', N'Columbia Africa Health Care Ltd')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (197, N'22145', N'Nyaronde(Borabu)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (198, N'22142', N'Mailo Inya Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (199, N'22141', N'MEDICARE HEALTH- SATELITTE')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (200, N'22138', N'Ndumberi Clinical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (201, N'22137', N'Dr Paul S Njuguna (Healthwise Medical centre Ltd)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (202, N'22136', N'Kimbimbi Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (203, N'22135', N'Sugubo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (204, N'22134', N'Hillsway Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (205, N'22128', N'St. Peters Medical Centre Bulwani')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (206, N'22126', N'Kyase Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (207, N'22125', N'Mulenyu dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (208, N'22124', N'Kawala Medical clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (209, N'22123', N'Pala Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (210, N'22122', N'Kyeeko Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (211, N'22121', N'Nyaroha Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (212, N'22117', N'Hayat Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (213, N'22115', N'Sikia dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (214, N'22113', N'Maeta Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (215, N'22112', N'Getrudes Mathare Outreach Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (216, N'22110', N'Nyamagongwi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (217, N'22109', N'Transcom Health Network Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (218, N'22108', N'st lukes medical and diabetes cenre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (219, N'22107', N'Kiambu Plains Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (220, N'22106', N'Precious care medical centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (221, N'22105', N'Hope for Widows & Children Foundation  Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (222, N'22097', N'Paradise Medical clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (223, N'22096', N'Chimoi Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (224, N'22095', N'Lifespan medical centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (225, N'22094', N'MAAYGO Dice')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (226, N'22090', N'mara  medical clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (227, N'22089', N'TRINITY MEDICAL CENTRE')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (228, N'22086', N'Ziwa la ngo''mbe Health centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (229, N'22085', N'Athi Mission Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (230, N'22084', N'Equity Afia Buruburu')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (231, N'22083', N'kelonget dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (232, N'22082', N'Marie Stopes Kenya')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (233, N'22081', N'OBER OGUNGA DISPENSARY')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (234, N'22080', N'Machakos Doctors'' Plaza')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (235, N'22079', N'Universal Family Health Services( Machakos)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (236, N'22078', N'WESPRAM MEDICAL CENTRE')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (237, N'22077', N'Jaralam Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (238, N'22076', N'KITALE HOSPITAL LIMITED')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (239, N'22075', N'Pongwe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (240, N'22074', N'Dadas VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (241, N'22073', N'Samawati medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (242, N'22072', N'Kisharu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (243, N'22071', N'Kapserton Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (244, N'22070', N'JOYRIDE MEDICAL CENTRE')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (245, N'22069', N'Chelambut Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (246, N'22067', N'Lopuski Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (247, N'22066', N'SANIAK DISPENSARY')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (248, N'22065', N'GALILEE MEDICAL CENTER MILIMANI KITALE LIMITED')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (249, N'22064', N'Dunga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (250, N'22062', N'Tana River County Beyond Zero Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (251, N'22061', N'Nyatalio Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (252, N'22060', N'Gazi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (253, N'22059', N'Alwalidayn Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (254, N'22058', N'Mwachande Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (255, N'22057', N'Munje Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (256, N'22055', N'NARAMAT MEDICAL AND DENTAL CLINIC')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (257, N'22054', N'Caritas community hospital (Hospital)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (258, N'22053', N'Agakhan Medical Centre-Busia')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (259, N'22052', N'Medigold')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (260, N'22050', N'Shiraz Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (261, N'22049', N'Deviruco Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (262, N'22048', N'Nairutia Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (263, N'22047', N'Smile Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (264, N'22045', N'Alliance community medical centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (265, N'22043', N'Hope Eastwards Medical Services (Kikuyu)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (266, N'22042', N'Nyangori dispensary (Masaba north)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (267, N'22041', N'Neemma Medical clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (268, N'22040', N'Hope Cure Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (269, N'22030', N'Nairobi County Beyond Zero Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (270, N'22027', N'Domiciliary Health Care Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (271, N'22025', N'SILIBWET YOUTH CENTRE')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (272, N'22024', N'Kanco wellness centre Mariakani')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (273, N'22023', N'Chebu healthcare services ltd')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (274, N'22022', N'KABUNGUT DISPENSARY')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (275, N'22021', N'Norman Munyiri Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (276, N'22020', N'Exodan Medical clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (277, N'22019', N'St James medical centre and health servics')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (278, N'22018', N'Kenya Airways Pride Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (279, N'22017', N'Kamuchege Dispensary (Mirangine)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (280, N'22014', N'St  Francis  Health services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (281, N'22013', N'COSMOS MEDICAL CLINIC')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (282, N'22011', N'MOFA-AFYA')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (283, N'22006', N'Kayuyu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (284, N'22005', N'Kimkan Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (285, N'22003', N'Chebukutumi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (286, N'22002', N'Annex loc.Medical clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (287, N'21999', N'ABRAR HEALTH SERVICES-BANISA')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (288, N'21998', N'Jope Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (289, N'21996', N'Lifesprings Health Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (290, N'21995', N'Mumui Dispensary (Githioro)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (291, N'21992', N'Galaxy medicare consultants ltd')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (292, N'21991', N'Kwale Medical Center')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (293, N'21989', N'Dima Mwangaza Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (294, N'21988', N'Haradhaal Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (295, N'21987', N'Pearl Medicare Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (296, N'21986', N'Family Health Optons')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (297, N'21985', N'Njogu-ini Medical servics')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (298, N'21984', N'Imani Medical Clinic Gachie')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (299, N'21983', N'Medicross Limited Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (300, N'21982', N'ST. ANN HOSPITAL')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (301, N'21981', N'AAR HEALTH CARE RUAKA')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (302, N'21977', N'Kamayech')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (303, N'21972', N'GEDMED MEDICAL CENTER AND NURSING HOME')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (304, N'21971', N'Kifables Chemist')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (305, N'21970', N'Munje Chemist')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (306, N'21969', N'Mwanika dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (307, N'21968', N'Marathi dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (308, N'21967', N'St James Opticals Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (309, N'21966', N'survivors organization clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (310, N'21965', N'Holy Rosary Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (311, N'21962', N'Kimurgoi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (312, N'21961', N'OREDHO HEALTH CENTRE')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (313, N'21960', N'St Padre Pio Medical and Surgical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (314, N'21958', N'Chobosta Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (315, N'21957', N'Segero Central Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (316, N'21956', N'Chepterit Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (317, N'21955', N'Rayaan Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (318, N'21954', N'Kahuhia Girls School Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (319, N'21951', N'Gaceuni dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (320, N'21950', N'Eluanata Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (321, N'21949', N'Rukindu  Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (322, N'21943', N'Kitabisi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (323, N'21941', N'SCAN LAB KITENGELA LIMITED')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (324, N'21940', N'Makanyanya Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (325, N'21939', N'KYANZASU DISPENSARY')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (326, N'21938', N'KITANGA DISPENSARY')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (327, N'21937', N'Mbuvori Prime')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (328, N'21936', N'FRANKMART MEDICAL CENTRE')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (329, N'21935', N'Sheywe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (330, N'21932', N'Wajir East  nomadic clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (331, N'21931', N'Medlink Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (332, N'21930', N'Gods Favour CNS')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (333, N'21929', N'Kapkaremba Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (334, N'21928', N'Chesra Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (335, N'21926', N'BEYOND ZERO MOBILE CLINIC')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (336, N'21925', N'Afya International Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (337, N'21923', N'Romkan Medical Cetre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (338, N'21922', N'JUMUIA HOSPITALS KAKAMEGA')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (339, N'21920', N'Kilifi Tumaini Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (340, N'21919', N'Noor Foundation Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (341, N'21916', N'Mama Amany Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (342, N'21912', N'CJ CARNELY')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (343, N'21911', N'Swahilati Medical clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (344, N'21909', N'CARE MEDICAL CLINIC (Kiamaina)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (345, N'21908', N'Vinkmed healthcareclinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (346, N'21907', N'Kericho Women''s Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (347, N'21906', N'Nakuru west central store')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (348, N'21905', N'THE AGAKHAN HEALTH SERVICES KAKAMEGA')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (349, N'21904', N'Osarai Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (350, N'21903', N'Blessed Medicare Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (351, N'21902', N'By-Faith Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (352, N'21901', N'Kiaga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (353, N'21900', N'Chamunga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (354, N'21899', N'Kotunga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (355, N'21898', N'Kamuiru Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (356, N'21897', N'Huduma Centre- Bungoma')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (357, N'21896', N'Sambocho Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (358, N'21895', N'Kamwangu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (359, N'21894', N'Chemalal Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (360, N'21893', N'Emkwen Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (361, N'21892', N'Chebarus dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (362, N'21890', N'Muchorwe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (363, N'21889', N'Horec Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (364, N'21888', N'Capital clinics - Kathonzweni')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (365, N'21887', N'Yordanos Health Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (366, N'21886', N'Poneni Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (367, N'21885', N'Mikulinzi Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (368, N'21884', N'Cheptiret Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (369, N'21883', N'Kamuyu  Dispensary (Cheptiret/kipchamo)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (370, N'21881', N'MUGEKA HEALTH CLINIC')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (371, N'21880', N'Murang''a County Beyond Zero Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (372, N'21879', N'Nandi County Beyond Zero Mobile Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (373, N'21878', N'Consolata Maternity and Children''s Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (374, N'21873', N'Dr C. Mwangi Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (375, N'21872', N'Vihiga County Beyond Zero Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (376, N'21871', N'Hullow Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (377, N'21867', N'Sunshine Medical  Clinc')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (378, N'21866', N'Ngong View dental clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (379, N'21865', N'Kwetu Medical centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (380, N'21864', N'Joysprings medical clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (381, N'21863', N'Tabernacle health  clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (382, N'21862', N'AAR Ngong Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (383, N'21861', N'Karen hospital rongai')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (384, N'21860', N'Sinai hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (385, N'21859', N'Little woods medical centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (386, N'21858', N'Trinity care centre (Ngong)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (387, N'21857', N'KIGANE DISPENSARY')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (388, N'21856', N'Uzima White Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (389, N'21853', N'TUMBURA DISPENSARY')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (390, N'21852', N'RUKURINI DISPENSARY')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (391, N'21850', N'Amani Mary Ballard Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (392, N'21849', N'EVANS HEALTHCARE CLINIC (West Kamagak)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (393, N'21847', N'Charryl MC')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (394, N'21846', N'Capital MC')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (395, N'21845', N'Bliss GVS Healthcare Kitale')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (396, N'21842', N'Safecare Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (397, N'21840', N'Pap Oriang''')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (398, N'21839', N'SIGONA MEDICAL CLINIC')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (399, N'21835', N'Weru Dispensary (Muthambi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (400, N'21834', N'MAVIRIVIRINI DESPENSARY')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (401, N'21833', N'CHIGATO DISPENSARY')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (402, N'21832', N'Kathathani Medical Centre  Annex')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (403, N'21830', N'NKARINI DISPENSARY')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (404, N'21827', N'KMC')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (405, N'21824', N'RUUNGU DISPENSARY')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (406, N'21822', N'Mukwa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (407, N'21821', N'Mateka Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (408, N'21818', N'Christ Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (409, N'21816', N'IRUMA DISPENSARY')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (410, N'21814', N'Emmanuel Community Health Clinic (Mutira)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (411, N'21813', N'kirundi dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (412, N'21812', N'Utugi Healthcare Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (413, N'21811', N'University of Kabianga Health Unit')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (414, N'21810', N'Pemah Nursing and Maternity Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (415, N'21807', N'Mwamanga')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (416, N'21806', N'Machakos University College Clinic Machakos')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (417, N'21805', N'Jirani Diagnostic Centre Machakos')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (418, N'21804', N'Konza Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (419, N'21803', N'Athipoint Medical centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (420, N'21802', N'KANCO DIC Kakamega')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (421, N'21800', N'ST. Nicholas MC')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (422, N'21799', N'New Point MC')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (423, N'21798', N'Goodcare MC')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (424, N'21797', N'New Point Medical Center')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (425, N'21796', N'Thung''ari Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (426, N'21794', N'Mwanyas Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (427, N'21793', N'KUTAYU DISPENSARY')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (428, N'21792', N'Got Koyembe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (429, N'21790', N'ST. ANNAH')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (430, N'21789', N'Mundaha Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (431, N'21788', N'Eshibinga Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (432, N'21787', N'Mulunguni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (433, N'21786', N'Miumoni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (434, N'21785', N'Radiant Medical Clinic (Kiambu )')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (435, N'21783', N'Misikhu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (436, N'21782', N'Uhembo Community Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (437, N'21781', N'Thika high school')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (438, N'21780', N'Kiboko farm dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (439, N'21778', N'Ndeya Medical Clinic Magut')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (440, N'21777', N'Koromaiti Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (441, N'21776', N'Beyond Zero Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (442, N'21775', N'Beyond Zero Mobile Clinic (Kirinyaga)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (443, N'21774', N'Gakanga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (444, N'21773', N'Mulachi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (445, N'21772', N'Nomadic Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (446, N'21771', N'Namarambi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (447, N'21768', N'Shallom Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (448, N'21767', N'Mung''oma Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (449, N'21766', N'St. Jairus Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (450, N'21757', N'KIAMWERI DISPENSARY')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (451, N'21756', N'The Green Park Health Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (452, N'21754', N'Grace memorial clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (453, N'21753', N'Nasaka Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (454, N'21752', N'Port Florence Community Hospital-Kericho')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (455, N'21751', N'Scanlab centre Nakuru')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (456, N'21749', N'Beyond Zero mobile clinic -Busia')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (457, N'21748', N'Tuwan Highway Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (458, N'21747', N'Trans Nzoia Wellness Centre (Neighbours In Action Kenya)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (459, N'21742', N'Femicare Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (460, N'21739', N'Kakimanyi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (461, N'21738', N'Equity Afia Ongata Rongai')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (462, N'21736', N'Sitikho Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (463, N'21734', N'Jamii Medical and Diagnostic centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (464, N'21733', N'The Hope spring Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (465, N'21732', N'Pioneer medical clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (466, N'21730', N'kiganjo medical clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (467, N'21709', N'Emmanuel Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (468, N'21708', N'Korr Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (469, N'21707', N'Liza Medical clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (470, N'21706', N'St. Lydia Okore Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (471, N'21705', N'Kuoyo Health Center')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (472, N'21704', N'Inuka Medical Center')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (473, N'21703', N'Utugi Cfw Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (474, N'21702', N'Outspan Hospital-Embu Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (475, N'21701', N'Musikoma Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (476, N'21700', N'Ndengelwa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (477, N'21698', N'West Oljoroorok Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (478, N'21696', N'VINYUNDUNI DISPENSARY')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (479, N'21685', N'Timiza Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (480, N'21683', N'St James Health Services Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (481, N'21682', N'Kaguma Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (482, N'21681', N'Gitauga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (483, N'21680', N'Rays of Hope')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (484, N'21677', N'Mikuyu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (485, N'21676', N'RAPHA HOSPITAL -MAKUENI')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (486, N'21675', N'Mutuyu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (487, N'21672', N'Ikulu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (488, N'21671', N'Kochieng Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (489, N'21670', N'Syotuvali Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (490, N'21668', N'BEYOND ZERO MOBILE CLINIC(TRANS NZOIA COUNTY)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (491, N'21667', N'Garissa Beyond Zero Mobile Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (492, N'21666', N'Jubilee Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (493, N'21657', N'Kadhiambo dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (494, N'21655', N'MARY BALLARD COMMUNITY CLINIC')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (495, N'21652', N'TUIYOBEI AGC DISPENSARY')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (496, N'21648', N'Bondo Awino')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (497, N'21646', N'Beyond Zero Clinic Lamu')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (498, N'21645', N'Gibea Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (499, N'21640', N'Imani Medical Centre Kiamunyi')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (500, N'21639', N'The Samari-Med')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (501, N'21461', N'Dr. Bashir')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (502, N'21460', N'Mary Magdaline Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (503, N'21459', N'Dr. C.K Jandu')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (504, N'21458', N'Makadara Sub County  Office')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (505, N'21457', N'Charolyn Specialist Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (506, N'21456', N'Kisasi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (507, N'21454', N'Development Pamoja Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (508, N'21451', N'ST Faustine"s Health Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (509, N'21450', N'Soliat Dispensary(Eldoret )')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (510, N'21448', N'Suva health services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (511, N'21447', N'Magogoni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (512, N'21443', N'Ngaru Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (513, N'21442', N'Jirena Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (514, N'21441', N'Riziki Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (515, N'21439', N'Tumaini Letu Health Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (516, N'21437', N'Kambu Life Care Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (517, N'21435', N'Olchorro Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (518, N'21434', N'Marie Stopes Kakamega Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (519, N'21433', N'Lupe Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (520, N'21432', N'Rehemah Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (521, N'21428', N'St. Joseph Medical Clinic-Kangundo')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (522, N'21426', N'Mombasa Golden Care Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (523, N'21425', N'Pankad Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (524, N'21424', N'Robarisia Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (525, N'21423', N'Border View Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (526, N'21422', N'Musunguti Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (527, N'21420', N'Narumoru Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (528, N'21417', N'Mariira Community Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (529, N'21416', N'Aberdare Medical C.Ltd')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (530, N'21413', N'Kenneth Matiba Eye and Dental Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (531, N'21412', N'Mukuyu Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (532, N'21411', N'Kamsaki Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (533, N'21410', N'PACE Dental Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (534, N'21409', N'Bahati Medical Clinic(Nyandarua)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (535, N'21408', N'Nyandarua Prisons Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (536, N'21407', N'Laikipia Medical Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (537, N'21406', N'Lukhokhwe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (538, N'21403', N'Tumaini Brigadier Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (539, N'21402', N'Impact RDO Clinic-Nyatike')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (540, N'21401', N'Beyond Zero Nyandarua')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (541, N'21400', N'St. Teresa Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (542, N'21399', N'Roman Maternity and Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (543, N'21398', N'Charity Medical Clinic ( Nyandarua)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (544, N'21395', N'Kanga Onditi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (545, N'21394', N'Nakapelewoi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (546, N'21386', N'Brisil Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (547, N'21385', N'St Michael Medical Clinic-Nyali')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (548, N'21383', N'Tsavo Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (549, N'21380', N'Lulis Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (550, N'21379', N'Choroko Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (551, N'21378', N'Birkan Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (552, N'21377', N'Embu County Beyond Zero Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (553, N'21370', N'Fina Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (554, N'21360', N'Oneno  Nam')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (555, N'21357', N'Kapseret Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (556, N'21356', N'Emurua Dikirr VCT Stand Alone')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (557, N'21355', N'ACK Ikulu Faith Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (558, N'21354', N'Open Heart Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (559, N'21352', N'Nyamira County Beyond Zero Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (560, N'21345', N'Lokichar Sub County Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (561, N'21335', N'Kakuma Sub County Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (562, N'21329', N'Kericho Out Patient Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (563, N'21328', N'Fig Tree Health Options-Kericho')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (564, N'21327', N'Nina Slopes Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (565, N'21326', N'Mukende Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (566, N'21323', N'Olchoro Oirowa')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (567, N'21322', N'Ilmotiok')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (568, N'21321', N'Iloirero Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (569, N'21320', N'Babito Health Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (570, N'21317', N'Luciuti Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (571, N'21313', N'Karuko Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (572, N'21312', N'Maggy star and sons clinic Lokori')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (573, N'21310', N'Komwaga Health Center')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (574, N'21303', N'Lwako Ubuntu Afya Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (575, N'21302', N'Barani Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (576, N'21300', N'Cheboror Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (577, N'21299', N'Chemengwa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (578, N'21298', N'Kakimirai Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (579, N'21297', N'Cheboin Dispensary (Bomet)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (580, N'21296', N'Kwetu Home Of Peace Dispensary(Ruai)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (581, N'21295', N'Heri Wema Health Centre (Ruai)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (582, N'21294', N'Adopta Life Foundation (Ruai)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (583, N'21293', N'Aga Khan University Hospital(Njiru)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (584, N'21291', N'Imara Mediplus Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (585, N'21290', N'Bomet GK Prison Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (586, N'21289', N'Good Shepherd Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (587, N'21288', N'Gachui Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (588, N'21287', N'Refuge Point International')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (589, N'21286', N'Avenue House Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (590, N'21284', N'Family Health Options Kenya')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (591, N'21283', N'Nairobi Women''s Kitengela')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (592, N'21282', N'Nyamadede Community Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (593, N'21281', N'The Zambezi Hospital Limited')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (594, N'21278', N'Wapate initiative centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (595, N'21277', N'Pamoja Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (596, N'21270', N'Vision Medical Clinic- Esibuye')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (597, N'21269', N'Fame Outreach Rescue Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (598, N'21268', N'ST. Mark Ndutumi (ACK) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (599, N'21263', N'Hekima Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (600, N'21262', N'Lolwe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (601, N'21252', N'Opemble Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (602, N'21251', N'Mayanja St. Pauls Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (603, N'21250', N'St.Anne Medical Clinic (Ndumberi )')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (604, N'21248', N'Naibor Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (605, N'21247', N'Magao Dispesnsary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (606, N'21246', N'Kodula Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (607, N'21245', N'Kapkuikui Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (608, N'21244', N'Tinomoi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (609, N'21243', N'PCEA Makupa Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (610, N'21242', N'Kapchemibei Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (611, N'21241', N'Kipajit Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (612, N'21240', N'Kamirai Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (613, N'21239', N'Kijebi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (614, N'21238', N'Baharini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (615, N'21237', N'St Michaels Uzima Laboratories Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (616, N'21235', N'Chelopoy Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (617, N'21233', N'Global Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (618, N'21231', N'Kefri Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (619, N'21230', N'Shacolas Orthodox Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (620, N'21229', N'By Faith (PCEA)Mai-A-ihii women''s Guild Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (621, N'21228', N'Joy Medical Clinic (Lusigetti)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (622, N'21227', N'Caros Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (623, N'21226', N'Imani Medical and Laboratory Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (624, N'21225', N'Tumaini Medical and Laboratory Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (625, N'21223', N'Jalaram Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (626, N'21219', N'Bliss Health Care Limited')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (627, N'21218', N'B & L Healthcare(Naivasha)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (628, N'21215', N'Emerging Infectious Disease Center')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (629, N'21213', N'Mjanaheri Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (630, N'21212', N'Kokech Mirondo Health Center')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (631, N'21210', N'Nguguini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (632, N'21209', N'St Francis of Assis Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (633, N'21208', N'Mainga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (634, N'21207', N'Paloma Medical International')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (635, N'21206', N'KYC Transmara')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (636, N'21204', N'Bahati Hospital(Joska)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (637, N'21205', N'St Joseph''s Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (638, N'21203', N'Koma Hill Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (639, N'21202', N'Kory Family Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (640, N'21201', N'Creative Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (641, N'21198', N'Afya Medical Clinic(Mwingi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (642, N'21196', N'Mosi Flower Farm Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (643, N'21195', N'Medizone Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (644, N'21192', N'Nyamilu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (645, N'21191', N'Masaria Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (646, N'21190', N'Qalanqalesa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (647, N'21187', N'Matisi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (648, N'21186', N'Sunrise (K) Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (649, N'21185', N'Oasis of Hope Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (650, N'21184', N'Midodo Obuya Joy Haugesend')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (651, N'21183', N'Hareri Hosle Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (652, N'21182', N'Odha Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (653, N'21180', N'Sake dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (654, N'21178', N'Tumaini Golden Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (655, N'21176', N'Home Ground Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (656, N'21175', N'CFW Clinic Ugunja')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (657, N'21174', N'Doctors Worldwide Tembo Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (658, N'21173', N'Enkipai Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (659, N'21172', N'Ngendalel Dispensary (Transmara)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (660, N'21171', N'Bomet County Beyond Zero Mobile Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (661, N'21170', N'Kitui County Beyond Zero Campaign Mobile Clinic (3)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (662, N'21169', N'Kitui County Beyond Zero Campaign Mobile Clinic KCA 423 F')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (663, N'21167', N'Shalom Community Wamunyu Satellite Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (664, N'21165', N'Afya Bora Medical Clinic (Mirangine)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (665, N'21164', N'Njoroge Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (666, N'21163', N'Orego Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (667, N'21162', N'St.Lawrence Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (668, N'21158', N'Access Afya Medical Centre Viwandani')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (669, N'21157', N'Kogelo Oasis Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (670, N'21156', N'Portland dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (671, N'21153', N'Ndarasha Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (672, N'21151', N'Rurii  Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (673, N'21150', N'Kizimani mission Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (674, N'21149', N'Alphond Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (675, N'21148', N'CFW Clinics Kibagare')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (676, N'21147', N'Lions Sightfirst Eye Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (677, N'21146', N'Eagle Health Care Solution')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (678, N'21145', N'Mutituni Hope Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (679, N'21144', N'University of Nairobi MARPS Project')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (680, N'21143', N'Topcare Subukia Medical Center')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (681, N'21142', N'Barut Medical clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (682, N'21141', N'Neema Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (683, N'21139', N'Kinoo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (684, N'21138', N'P&D Health Clinic Ulanda')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (685, N'21137', N'Aga Khan')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (686, N'21136', N'Appex Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (687, N'21135', N'Janeiro Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (688, N'21129', N'Oasis Care Centre Andapol Clinic Awendo')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (689, N'21128', N'Mausa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (690, N'21127', N'Nkoilale Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (691, N'21122', N'East Laikipia Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (692, N'21120', N'Mumoni Maternity and Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (693, N'21118', N'Asumbi Teachers Training College')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (694, N'21117', N'University of Nairobi MARPS Project Embu DICE')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (695, N'21116', N'Chriska M edical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (696, N'21114', N'Kibabii University Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (697, N'21112', N'Salaam Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (698, N'21111', N'Neema  Medical Clinic (Shimo La Tewa)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (699, N'21110', N'Kevote Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (700, N'21108', N'Sacred Heart of Jesus')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (701, N'21106', N'Mbale Specialist Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (702, N'21105', N'Express Medical Clinic (Kirinyaga)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (703, N'21104', N'Tiba Medical Center')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (704, N'21103', N'Akidiva Kehancha Outpatient Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (705, N'21102', N'Kohanga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (706, N'21101', N'Nyankore Health Center')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (707, N'21100', N'Musango Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (708, N'21099', N'Mohamed Dahir Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (709, N'21098', N'Kericho Teachers Training College Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (710, N'21091', N'Chesanga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (711, N'21088', N'Chepkombe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (712, N'21087', N'JANCAM Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (713, N'21086', N'Maiko Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (714, N'21080', N'Turesia Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (715, N'21079', N'Ketigoi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (716, N'21078', N'Teber Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (717, N'21076', N'Jomvu Wellness Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (718, N'21071', N'Shanga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (719, N'21070', N'Mtangawanda Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (720, N'21069', N'Gathuthuma Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (721, N'21068', N'Komba Belio Dispensary Kiptabus')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (722, N'21066', N'Katir Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (723, N'21064', N'St. Lukes Busiada Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (724, N'21059', N'Namusala Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (725, N'21058', N'Mafubu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (726, N'21057', N'Turning Point Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (727, N'21056', N'Morpus Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (728, N'21055', N'Naduat Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (729, N'21053', N'Nyaura Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (730, N'21050', N'Blissgvs Health Care Pipeline')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (731, N'21049', N'Kisii Blood Satellite')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (732, N'21047', N'Orongo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (733, N'21046', N'Musokoto Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (734, N'21045', N'Segero Dispensary (Nambale)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (735, N'21044', N'Mundembu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (736, N'21042', N'Mayenje Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (737, N'21041', N'Burumba Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (738, N'21039', N'Rang''ul Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (739, N'21035', N'Apetit Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (740, N'21034', N'Akiriamasi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (741, N'21033', N'Kwangamor Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (742, N'21032', N'Family Care Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (743, N'21031', N'Caring Cross Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (744, N'21029', N'Agakhan Kisii')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (745, N'21027', N'Kyumbi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (746, N'21025', N'Elgeyo Marakwet County Beyond Zero Mobile Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (747, N'21024', N'Kamuriai Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (748, N'21023', N'Kajiado County Beyond Zero Campaign Mobile Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (749, N'21022', N'Taita Taveta Beyond Zero Campaign Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (750, N'21021', N'Siaya County Referral Beyond Zero Mobile Clinic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (751, N'21020', N'Kakamega County Beyond Zero Mobile Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (752, N'21018', N'Kisii County Beyond Zero Mobile Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (753, N'21016', N'Homabay County Beyond Zero Mobile Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (754, N'21015', N'Meru Beyond Zero Mobile Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (755, N'21013', N'Marsabit County Beyond Zero Mobile Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (756, N'21012', N'Kwale County Beyond Zero Mobile Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (757, N'21010', N'Daima Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (758, N'21009', N'Kisayani Medical Clinic-kibwezi west')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (759, N'21008', N'Rapha Medical Clinic-Makindu')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (760, N'21005', N'Laikipia county Beyond Zero mobile clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (761, N'21004', N'Bungoma Beyond Zero Mobile Unit')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (762, N'21001', N'Kericho County Beyond Zero Mobile Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (763, N'20997', N'Maiani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (764, N'20996', N'Prince Jims Medical Clinic (Machinery)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (765, N'20994', N'Mutheu Edel Medical Clinic (Ulilinzi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (766, N'20993', N'Tsavo West Medical Clinic (Mtito Andei)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (767, N'20992', N'Alpha Medical Clinic (Kambu)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (768, N'20991', N'Chyulu Medicare services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (769, N'20990', N'Narok Beyond Zero Campaign Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (770, N'20987', N'Mbitini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (771, N'20986', N'Maspa Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (772, N'20985', N'Kawala Dispensary-Makueni')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (773, N'20984', N'Samburu Beyond Zero Mobile Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (774, N'20980', N'Our Lady Of Mercy')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (775, N'20977', N'Innocent Med Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (776, N'20976', N'DG Peters Med Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (777, N'20975', N'Makueni county beyond zero mobile clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (778, N'20974', N'Haifa Med Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (779, N'20968', N'Baringo County Beyond Zero Mobile Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (780, N'20966', N'Turkana County Beyond Zero Campaign Mobile Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (781, N'20965', N'Kisumu Beyond Zero Mobile Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (782, N'20964', N'Kisumu Diagnostic Center')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (783, N'20963', N'AL Nur Medical Clinic & Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (784, N'20962', N'Helsamy Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (785, N'20961', N'Lanet medical centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (786, N'20960', N'Ogongo Community Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (787, N'20959', N'Gosebe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (788, N'20957', N'Meridian Medical Centre-Kisumu')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (789, N'20956', N'AAR Health Care-Kisumu')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (790, N'20954', N'Crystal Cottage Hospital & Medical Clinic Ltd')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (791, N'20953', N'Dr.Finn consultants')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (792, N'20950', N'Githakwa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (793, N'20949', N'The Aurora Health Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (794, N'20948', N'Kamanau Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (795, N'20947', N'Sarmach Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (796, N'20946', N'Gram''s Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (797, N'20945', N'Virgin Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (798, N'20942', N'Sachoran Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (799, N'20940', N'AAR Thika out Patient Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (800, N'20938', N'Oasis Laboratory Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (801, N'20937', N'Kilimani Assessment Center')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (802, N'20936', N'Bobaracho Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (803, N'20935', N'Kilifi County Beyond Zero Campaign Mobile Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (804, N'20933', N'Nguluni Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (805, N'20930', N'Glory medical Clinic-Masinga')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (806, N'20929', N'Alpha Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (807, N'20928', N'Kivaa medical')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (808, N'20926', N'Ubuntu Afya Ninalakeside Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (809, N'20921', N'Ikhanyi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (810, N'20919', N'Lenmek Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (811, N'20918', N'By Grace Medical Clinic and Laboratory Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (812, N'20917', N'Gracious Day Medical Centre(Tala)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (813, N'20916', N'Atakara Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (814, N'20915', N'Enaramatishoreki Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (815, N'20914', N'St Cathene Ichuni Mission')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (816, N'20913', N'Nyalkembo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (817, N'20910', N'Hope for today VCT Centre (sosiot)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (818, N'20907', N'Miranga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (819, N'20906', N'Kibos Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (820, N'20905', N'Maseno University AIDS Control Unit(City Campus)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (821, N'20904', N'Savani Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (822, N'20903', N'Makuri Distensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (823, N'20902', N'Golden Gates Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (824, N'20890', N'Lodeng''o Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (825, N'20886', N'Getrudes Children''s Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (826, N'20885', N'Kikuyu Public Health Office')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (827, N'20884', N'Rays Clinette')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (828, N'20883', N'Jubilee Care Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (829, N'20882', N'Alika Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (830, N'20881', N'Gicharani Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (831, N'20874', N'Light Medicare Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (832, N'20870', N'Mukhuyu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (833, N'20868', N'Chemororoch Dispensary (Waldai)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (834, N'20865', N'Nyeri Medical & Diabetic Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (835, N'20862', N'Kahuho Community Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (836, N'20861', N'Nachu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (837, N'20860', N'Gikambura Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (838, N'20859', N'Hifadhi Siha Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (839, N'20858', N'Kampala MEdical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (840, N'20857', N'Favour Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (841, N'20855', N'Makwa Community Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (842, N'20851', N'Mpeli Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (843, N'20850', N'Caregivers Community Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (844, N'20847', N'Eskot Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (845, N'20846', N'Sosiot Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (846, N'20845', N'Joy Youth Centre Kapsoit')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (847, N'20844', N'Dr. Sangani''s Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (848, N'20841', N'Leng''orok Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (849, N'20838', N'Demanje Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (850, N'20836', N'St. Monica Hospital Town Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (851, N'20832', N'Torah Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (852, N'20831', N'Alphine Health Care Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (853, N'20830', N'Afyafirst Medical Center')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (854, N'20829', N'Duse Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (855, N'20828', N'Trinity care centre (Olkeri)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (856, N'20827', N'Meridian Hospital Kiserian')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (857, N'20824', N'Aga Khan MC Kitale')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (858, N'20823', N'Ace Africa (k) Wellness Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (859, N'20822', N'Khamulati  Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (860, N'20821', N'St Mary''s Medical Clinic(Mwingi Central)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (861, N'20820', N'Gertrudes Children Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (862, N'20819', N'Ting''ang''a Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (863, N'20818', N'Nayanaeangikalalio Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (864, N'20815', N'Dalcoo Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (865, N'20814', N'Chebunyo Stand Alone VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (866, N'20813', N'Lumu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (867, N'20812', N'Mbukuni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (868, N'20806', N'Nthunguni Dispensary (Kibwezi East)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (869, N'20804', N'Kiteng''ei Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (870, N'20803', N'Eshisiru Medical Cottage')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (871, N'20800', N'Ngaakaa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (872, N'20792', N'Kisayani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (873, N'20791', N'Naitiri Private Wing Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (874, N'20787', N'Mathanguni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (875, N'20786', N'Nzeeni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (876, N'20785', N'Maaueli Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (877, N'20784', N'Itumbule (Makueni) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (878, N'20783', N'Kwamutula (Kaliini) dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (879, N'20768', N'Biliqo Marara Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (880, N'20764', N'Lchakwai  Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (881, N'20762', N'Kuku Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (882, N'20761', N'Oloirien Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (883, N'20752', N'Buyangu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (884, N'20750', N'Motagara Health Centre (Nyamira)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (885, N'20748', N'Prima Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (886, N'20746', N'Nice View Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (887, N'20742', N'Portreitz Youth Friendly Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (888, N'20741', N'Regional Blood Transfusion Center (Coast)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (889, N'20740', N'Chepkerer Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (890, N'20739', N'Daaba Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (891, N'20738', N'Eagles Health Solution Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (892, N'20736', N'AIDS Health Care Foundation Parklands Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (893, N'20735', N'Cheptagum Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (894, N'20734', N'County Gate Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (895, N'20733', N'Kalukuni Mission Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (896, N'20730', N'KRICH Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (897, N'20729', N'Lirhanda Mission Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (898, N'20728', N'Kiwa Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (899, N'20726', N'Bodo Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (900, N'20722', N'Makueni GK Prison Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (901, N'20712', N'Janju Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (902, N'20711', N'Beramo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (903, N'20708', N'Ogaralle Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (904, N'20707', N'Burmayow Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (905, N'20706', N'Dureweey Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (906, N'20705', N'Kajaja 2 Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (907, N'20704', N'Wargadud Dispensary(Tarbaj)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (908, N'20703', N'St. Rita Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (909, N'20702', N'Raphamed Health Care Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (910, N'20701', N'Paragon Health Care Ltd')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (911, N'20699', N'Earnest Medical Point Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (912, N'20698', N'Lolkuta North Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (913, N'20697', N'Barmil Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (914, N'20692', N'Vigetse Women Group Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (915, N'20690', N'Lakole Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (916, N'20689', N'Abdiwaqo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (917, N'20688', N'Anole Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (918, N'20687', N'Dadhantaly Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (919, N'20686', N'Balatula Amin Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (920, N'20683', N'Gilgil Centre of Hope')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (921, N'20682', N'Kitogo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (922, N'20678', N'Wang''any Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (923, N'20677', N'Kisera Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (924, N'20676', N'Kirinyaga University College Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (925, N'20675', N'Sostin  Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (926, N'20674', N'Kamuchisu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (927, N'20673', N'Ekambuli Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (928, N'20672', N'Mungungune Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (929, N'20671', N'Lubanga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (930, N'20670', N'Cana Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (931, N'20669', N'Roselyne Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (932, N'20668', N'St Agnes Health Care Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (933, N'20666', N'Okana Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (934, N'20663', N'Kimbo Healthcare Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (935, N'20660', N'Narengewoi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (936, N'20657', N'St Mary''s Mission International Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (937, N'20655', N'Prestige Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (938, N'20654', N'Kiriri Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (939, N'20653', N'Planet Clinic Ltd')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (940, N'20652', N'Rehema Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (941, N'20651', N'Kulamawe Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (942, N'20650', N'Koibarak Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (943, N'20648', N'Hillcrest Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (944, N'20647', N'Rongo University College Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (945, N'20644', N'Kamburu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (946, N'20642', N'Becca Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (947, N'20641', N'Congo medical services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (948, N'20638', N'Napak Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (949, N'20637', N'Karebur Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (950, N'20635', N'Kapkirwa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (951, N'20633', N'Nduuri Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (952, N'20630', N'Jamii Health Services ( Marmanet)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (953, N'20628', N'Avenue Healthcare Thika')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (954, N'20627', N'Soweto West Community Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (955, N'20625', N'Karanja Road Community Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (956, N'20624', N'Makina Community Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (957, N'20623', N'Lindi Community Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (958, N'20622', N'Silanga Community Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (959, N'20621', N'Kianda 42 Community Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (960, N'20619', N'Oasis Specialist Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (961, N'20618', N'Mungetho Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (962, N'20617', N'Sasimua Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (963, N'20616', N'Hillside medical centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (964, N'20615', N'St. Mary Magdalene Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (965, N'20614', N'Kliniq')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (966, N'20613', N'Shalom Community Hospital Mukuyuni Satelite')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (967, N'20612', N'Wajir Beyond Zero Mobile Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (968, N'20610', N'Marigo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (969, N'20609', N'Kargi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (970, N'20608', N'Parkishon Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (971, N'20604', N'Nopri Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (972, N'20599', N'Medisol Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (973, N'20597', N'Mombasa Road Medical centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (974, N'20596', N'Munanda Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (975, N'20595', N'Tetu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (976, N'20593', N'Katilia Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (977, N'20592', N'Lotubae (A.I.C) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (978, N'20590', N'Kiima Kimwe')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (979, N'20589', N'Baranga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (980, N'20588', N'Star clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (981, N'20587', N'Qatar Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (982, N'20585', N'Malomani Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (983, N'20584', N'TB Central Reference Lab')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (984, N'20583', N'Microbiology Reference Lab')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (985, N'20582', N'Oncology Reference Lab')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (986, N'20581', N'National Blood Transfusion Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (987, N'20580', N'National HIV Reference Lab')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (988, N'20578', N'Maritati Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (989, N'20577', N'Ntirimiti Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (990, N'20576', N'Kibirichia Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (991, N'20574', N'Suba Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (992, N'20572', N'Bumala CFW clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (993, N'20571', N'Wema Centre Medical Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (994, N'20570', N'Muhuru Bay VCT Centre (Nyarami)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (995, N'20569', N'Lwanda Konyango VCT Centre (Nyarami)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (996, N'20568', N'Obware Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (997, N'20567', N'Thinyaine Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (998, N'20566', N'Mephibosheth Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (999, N'20564', N'Dr Shanti Haria')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1000, N'20562', N'Mamlaka Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1001, N'20559', N'Kangutu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1002, N'20558', N'Njaina Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1003, N'20557', N'Aga Khan Health Service Bungoma Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1004, N'20556', N'I Choose Life - Africa(Kileleshwa)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1005, N'20555', N'Karirana Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1006, N'20553', N'Dr Babu Bora clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1007, N'20552', N'Dr B.K.Kariuki')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1008, N'20551', N'Dr Osore''s Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1009, N'20546', N'Ilmotiok Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1010, N'20545', N'Shabab Intergrated Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1011, N'20544', N'matar-arba')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1012, N'20543', N'Kiarukungu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1013, N'20542', N'Toto Medicare')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1014, N'20540', N'Technical university of Kenya Student/Staff Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1015, N'20539', N'Interfelk Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1016, N'20538', N'Aimon med clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1017, N'20537', N'Miliki Afya Limited')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1018, N'20536', N'Khayega Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1019, N'20531', N'Koduol Reru Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1020, N'20529', N'Doulos Youth Friendly And VCT (KCC)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1021, N'20525', N'Kamundugi dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1022, N'20524', N'Absalom Wangulu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1023, N'20523', N'Tumaini DiCE Kisumu')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1024, N'20521', N'malaylay dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1025, N'20520', N'Nacet Reproductive Health Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1026, N'20519', N'Fenway Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1027, N'20518', N'Chepkosa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1028, N'20517', N'Kiriba Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1029, N'20516', N'Mundobelwa Health centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1030, N'20515', N'Ebuhala Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1031, N'20514', N'Ngendaptich Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1032, N'20513', N'Tsunza Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1033, N'20512', N'Manyatta Community Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1034, N'20511', N'Malikini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1035, N'20508', N'Kanduri Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1036, N'20506', N'Stage View Medical Clinic - Likoni')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1037, N'20504', N'Sunrise City Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1038, N'20503', N'Jaber Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1039, N'20502', N'Karurina Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1040, N'20501', N'Nyangore Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1041, N'20500', N'Nyakunguru Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1042, N'20496', N'Giika')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1043, N'20495', N'Weyeta clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1044, N'20494', N'Bewa Medical clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1045, N'20493', N'Makhonge dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1046, N'20491', N'Junda Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1047, N'20489', N'Dessein Health Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1048, N'20488', N'Lelgut Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1049, N'20487', N'Orokwo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1050, N'20486', N'Magonoi Dispensary (Kabarnet)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1051, N'20485', N'Kasoiyo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1052, N'20484', N'Kongoli Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1053, N'20483', N'Ranje Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1054, N'20479', N'Adoma Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1055, N'20475', N'Ayatya Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1056, N'20474', N'Rebeko Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1057, N'20470', N'Tiloi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1058, N'20469', N'Tunoiwo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1059, N'20468', N'ST.James Memorial Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1060, N'20467', N'Kapkombe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1061, N'20457', N'Akwichatis Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1062, N'20456', N'Krezze Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1063, N'20454', N'FAO Hope Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1064, N'20453', N'Magaoni Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1065, N'20452', N'Denticheck Clinical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1066, N'20451', N'Medecins Du Monde/France (Kangemi Kang''ora)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1067, N'20450', N'Josiah Community Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1068, N'20448', N'Kitui Dice')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1069, N'20444', N'Ugua Pole Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1070, N'20443', N'Equator Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1071, N'20442', N'Jobefar Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1072, N'20440', N'Kiboson Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1073, N'20439', N'Kimaya Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1074, N'20438', N'Tilangok Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1075, N'20436', N'Chemasusu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1076, N'20435', N'Sinonin Dispensary (Koibatek)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1077, N'20434', N'Saos Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1078, N'20433', N'Muserechi  Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1079, N'20427', N'Wara')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1080, N'20426', N'Relief Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1081, N'20411', N'Ndooni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1082, N'20408', N'International Medical Corps Tekelza DiCE Kisii')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1083, N'20407', N'Neema Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1084, N'20406', N'Lina Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1085, N'20405', N'AAR Health Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1086, N'20402', N'Support For Addiction Prevention & Treatment In Africa')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1087, N'20401', N'Mutati Community Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1088, N'20399', N'Florensis Kenya LTD Medical Clinic(Naivasha)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1089, N'20398', N'Umbrella Health Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1090, N'20397', N'Dr.K.Gicheru(Upper Hill Centre)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1091, N'20396', N'Dr.P.W.Kamau&Associates(Upper Hill Medical Centre)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1092, N'20395', N'South Ngariama Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1093, N'20394', N'Dr.Henry Wellington Alube (landmark plaza)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1094, N'20393', N'Dr.Charles.J.R.Opondo (landmark plaza)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1095, N'20392', N'Kambini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1096, N'20389', N'Kernan Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1097, N'20387', N'Wankam Medical clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1098, N'20386', N'SOS Children Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1099, N'20385', N'Lwala Nyarago Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1100, N'20384', N'LELA Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1101, N'20383', N'Radiant Group of Hospital (Kiambu)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1102, N'20382', N'Bay Leaf Health Center')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1103, N'20381', N'LIFOG Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1104, N'20380', N'Afya Health System Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1105, N'20379', N'Malongo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1106, N'20377', N'Dago Jonyo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1107, N'20376', N'ICRH-DROP-IN-CENTRE Ukunda')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1108, N'20373', N'Mt. Pleasant  Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1109, N'20372', N'Illasit Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1110, N'20371', N'Kenya Police Staff College Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1111, N'20369', N'CMIA Grace Children''s Centre Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1112, N'20368', N'Kongelai Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1113, N'20367', N'Paraywa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1114, N'20366', N'Chepnyal GOK Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1115, N'20365', N'Kalemrekai Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1116, N'20364', N'Ringa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1117, N'20362', N'Takaywa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1118, N'20360', N'Maximum medical centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1119, N'20359', N'Garissa Children Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1120, N'20356', N'Kalemung''orok Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1121, N'20353', N'Kasaka')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1122, N'20352', N'Kasha Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1123, N'20351', N'Equity Medical Clinic Embulbul')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1124, N'20350', N'Ufalme Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1125, N'20349', N'Ndumbini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1126, N'20348', N'Lewa''s Family Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1127, N'20347', N'Kome Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1128, N'20346', N'AAR Adams Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1129, N'20345', N'Kijana Heri Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1130, N'20344', N'Karimboni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1131, N'20343', N'Nakuru Heart Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1132, N'20341', N'Mutomo Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1133, N'20340', N'KTTID Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1134, N'20338', N'Uturini Community Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1135, N'20334', N'Yago Community Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1136, N'20333', N'Nyamwetureko')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1137, N'20332', N'Milenye Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1138, N'20331', N'Ramula Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1139, N'20329', N'Cheptiangwa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1140, N'20328', N'Chemotong Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1141, N'20327', N'Cheptya Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1142, N'20325', N'Kibera CFW Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1143, N'20324', N'kitende Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1144, N'20323', N'Bungoma West Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1145, N'20322', N'Tabani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1146, N'20317', N'Onoch Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1147, N'20315', N'Nyang''aita Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1148, N'20314', N'Star of the Sea Health Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1149, N'20313', N'Zombe medical clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1150, N'20309', N'Bore Singwaya Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1151, N'20307', N'Shomella Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1152, N'20304', N'Selma medical clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1153, N'20303', N'Kenya Institute of Special Education Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1154, N'20302', N'PJ Dave Company Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1155, N'20301', N'Seniors Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1156, N'20300', N'Mshongoleni Community Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1157, N'20298', N'Nzikani community centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1158, N'20297', N'Ngura Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1159, N'20295', N'The Great Lakes Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1160, N'20288', N'St. Tresa''s Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1161, N'20287', N'Joseph Memorial Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1162, N'20286', N'Glory Medical Clinic (Gilgil)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1163, N'20285', N'Lwanda kobita')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1164, N'20282', N'Kenlands Health Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1165, N'20279', N'Sinai clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1166, N'20278', N'Rehoboth Maternity and Nursing Home(Mwingi Central)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1167, N'20277', N'Nuu Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1168, N'20276', N'Maria Medical Clinic And Diadetic centre(Saika)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1169, N'20274', N'Jeluto Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1170, N'20272', N'Kiaora Farm Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1171, N'20271', N'Mbuvo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1172, N'20270', N'Yinthungu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1173, N'20269', N'Manza dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1174, N'20264', N'Nairobi East Hospital Ltd')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1175, N'20263', N'Providence Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1176, N'20262', N'ST Francis dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1177, N'20260', N'Baraka Medical Clinic (Mbitini)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1178, N'20259', N'Gibea Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1179, N'20254', N'Agha Khan University Hospital (Kikuyu Medical Centre)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1180, N'20253', N'Thogoto Medical clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1181, N'20252', N'Wanemed Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1182, N'20249', N'Aliki Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1183, N'20248', N'St.Paul Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1184, N'20247', N'Kemakoba Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1185, N'20246', N'Sulwe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1186, N'20243', N'Port Florence (Ndhiwa)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1187, N'20242', N'Unga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1188, N'20241', N'Kobodo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1189, N'20240', N'Cherwa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1190, N'20239', N'Hope and Health Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1191, N'20238', N'Roadway Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1192, N'20237', N'Mzee Paurana Community Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1193, N'20236', N'Aga Khan Clinic (Eastleigh)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1194, N'20235', N'Sam-link medical centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1195, N'20234', N'Drugnet Medical centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1196, N'20233', N'Blue Cross Medical Clicnic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1197, N'20232', N'Mercy Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1198, N'20231', N'SACODEN VCT Center')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1199, N'20230', N'Community Evolution Network VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1200, N'20228', N'Ladopharma Medical Center')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1201, N'20226', N'Agakhan Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1202, N'20225', N'Port Florence Community Hospital Mbita')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1203, N'20224', N'St Pauls Ndumbuli Community Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1204, N'20223', N'Kamasielo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1205, N'20222', N'Kakong Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1206, N'20220', N'Everest Health Care(Mwingi Central)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1207, N'20219', N'Kamuge Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1208, N'20217', N'Greenview Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1209, N'20215', N'Ngiluni Dispensary (Kaiti)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1210, N'20214', N'Kwakalui dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1211, N'20213', N'Amalya Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1212, N'20212', N'Kerwa Catholic Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1213, N'20211', N'Ideal Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1214, N'20210', N'Complete Care Health Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1215, N'20209', N'Onyuongo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1216, N'20207', N'Mitini Miracle Revival Church Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1217, N'20205', N'Aga Khan University Hospital Kiambu Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1218, N'20204', N'Embu Univesity College Health Unit')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1219, N'20203', N'University of Nairobi Marps Project Mwingi')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1220, N'20201', N'Mwaki Healthcare')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1221, N'20200', N'Metropolitan Medical Clinic - Kehancha')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1222, N'20199', N'Mbaka Oromo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1223, N'20198', N'Ntunyigi Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1224, N'20197', N'Kwakalusya Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1225, N'20196', N'Kyanganda Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1226, N'20195', N'Debomart Med Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1227, N'20194', N'Shianda Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1228, N'20191', N'Kurum Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1229, N'20189', N'Dagoretti Community Dispesary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1230, N'20188', N'Buyemi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1231, N'20187', N'Umoja III Medical Centre(Njiru)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1232, N'20186', N'Sango Kabuyefwe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1233, N'20184', N'Kaalem Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1234, N'20182', N'Kathome Dispensary (Kangundo)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1235, N'20181', N'Ngelechom Community Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1236, N'20179', N'Ebenezer Health Care Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1237, N'20178', N'Havillan Medical Center')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1238, N'20176', N'Aga Khan Medical Centre Kericho')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1239, N'20173', N'Ndere Community Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1240, N'20172', N'Nyangajo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1241, N'20171', N'Esikulu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1242, N'20170', N'Among''ura Community Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1243, N'20169', N'Kangri Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1244, N'20168', N'Ngeta Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1245, N'20167', N'Pesi Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1246, N'20164', N'Trinity Mission Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1247, N'20163', N'Proact Healthservices')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1248, N'20162', N'Sikhendu Disp')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1249, N'20161', N'Ilbrah Counseling Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1250, N'20159', N'Chebukwabi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1251, N'20158', N'IOM International Organization for migration(girigiri)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1252, N'20157', N'Vigarace Health services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1253, N'20156', N'Lunakwe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1254, N'20155', N'Kianjokoma  Muungano SHG Community Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1255, N'20148', N'Copeman Health Care Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1256, N'20147', N'Neema Highway Medical Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1257, N'20146', N'KEMRI/CDC Health Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1258, N'20145', N'IDEWES')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1259, N'20143', N'Devlink Africa VCT, Mbita')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1260, N'20140', N'AAR Mountain mall')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1261, N'20136', N'AMEC Laboratories')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1262, N'20135', N'Psyco Africa Consultancy')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1263, N'20134', N'Kochola Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1264, N'20133', N'Nyamokenye Health Centre(Sameta)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1265, N'20131', N'Goldenlife Medical Centre Naivasha')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1266, N'20126', N'Thwake Community Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1267, N'20124', N'Youth Empowerment Center Ngong')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1268, N'20123', N'Avenue Hospital Kisumu')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1269, N'20121', N'Jilango Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1270, N'20120', N'Mango Tree VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1271, N'20118', N'Syokimau Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1272, N'20117', N'St John Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1273, N'20116', N'Amurt Health care Centre (Malindi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1274, N'20115', N'Family Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1275, N'20114', N'Mosocho Market Disp')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1276, N'20113', N'Kioge Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1277, N'20112', N'Bouti Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1278, N'20111', N'Ndumbi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1279, N'20110', N'Utuneni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1280, N'20109', N'Ewang''ane Suswa')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1281, N'20108', N'Kinyambu Kwitu Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1282, N'20106', N'Dr Maina Ruga Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1283, N'20105', N'Dr Paul Ondiege Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1284, N'20104', N'Meridian Medical centre(Nation Centre Bldg )')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1285, N'20103', N'The Savannah Health Services Ltd')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1286, N'20102', N'Gethsemane Garden Mission Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1287, N'20101', N'Wananchi Medical Clinic (Nyambari)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1288, N'20100', N'Wekoye Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1289, N'20096', N'MYSA VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1290, N'20095', N'Kipawa Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1291, N'20094', N'Kuira District Disability Network Kuria - Isebania HTC Center')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1292, N'20093', N'Hekima HTC Center')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1293, N'20092', N'Itetani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1294, N'20089', N'Marist International University College Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1295, N'20087', N'Yunasi')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1296, N'20086', N'Dr Barnados House clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1297, N'20084', N'Kanyerus Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1298, N'20083', N'Kiwawa GOK Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1299, N'20082', N'Wananchi Clinic Githunguri- Kiambu')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1300, N'20081', N'Kasarani VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1301, N'20080', N'St Anselmo Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1302, N'20079', N'Community Action for Rural Developement  VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1303, N'20078', N'Farmers choice wellness centre clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1304, N'20077', N'Manyatta Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1305, N'20076', N'Lorugum Medical Services Ltd')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1306, N'20075', N'Nyasoko Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1307, N'20073', N'Thimjope Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1308, N'20072', N'Melchizedek Hospital Karen')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1309, N'20071', N'AIC Mununga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1310, N'20070', N'Kabati Medicare Health Services Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1311, N'20069', N'Osewre Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1312, N'20068', N'Quebee Health Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1313, N'20067', N'Post Bank Staff Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1314, N'20066', N'Mowlem Diagnostic Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1315, N'20064', N'Jeffrey Medical & Diagnostic Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1316, N'20063', N'Hoymas VCT (Nairobi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1317, N'20061', N'Nairobi Women''s Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1318, N'20060', N'Cheboin Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1319, N'20059', N'Drop In Service Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1320, N'20058', N'Talau Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1321, N'20057', N'Sagam Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1322, N'20055', N'Murkwijit Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1323, N'20053', N'Meru Kmtc Student/Staff Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1324, N'20052', N'Shujaa Satellite Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1325, N'20049', N'Msf- Green House Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1326, N'20045', N'Natunyi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1327, N'20044', N'Kisembe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1328, N'20043', N'Butingo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1329, N'20042', N'Musavani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1330, N'20041', N'Sisokhe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1331, N'20039', N'Emukaba Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1332, N'20038', N'Nyayiera Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1333, N'20037', N'St Mathews Kandaria Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1334, N'20035', N'Fofcom VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1335, N'20034', N'Mesedith Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1336, N'20030', N'Aina Onlus')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1337, N'20029', N'Sindo Drop In Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1338, N'20028', N'Shalom Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1339, N'20027', N'Westgates Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1340, N'20026', N'Kitere Minhaj Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1341, N'20024', N'Otieno Owala Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1342, N'20022', N'Aphia Plus Marps Dic Nanyuki')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1343, N'20021', N'Kithito Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1344, N'20020', N'St Akidiva Mindira Hospital - Mabera')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1345, N'20019', N'Imc Tekeleza Dice - Isebania')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1346, N'20018', N'Milele Integrated Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1347, N'20017', N'Wilwinns Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1348, N'20016', N'Careplus Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1349, N'20015', N'Mwangaza Tana Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1350, N'20014', N'Bygrace Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1351, N'20012', N'Mama Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1352, N'20011', N'Kiptoim Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1353, N'20010', N'Emsos Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1354, N'20009', N'Kimose Dispenary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1355, N'20008', N'Rosoga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1356, N'20007', N'Kabogor Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1357, N'20006', N'Kimngorom Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1358, N'20005', N'Mogotio Town Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1359, N'20004', N'Tian Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1360, N'20003', N'Kingorani Community Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1361, N'20002', N'Maili Saba Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1362, N'20000', N'Lolupe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1363, N'19997', N'Wema Private Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1364, N'19996', N'Kenyoro Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1365, N'19994', N'Slum Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1366, N'19992', N'Kathathani Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1367, N'19990', N'Racecourse Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1368, N'19985', N'Child & Family Wellness Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1369, N'19984', N'Egetuki GOK Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1370, N'19980', N'Acacia Clinic (Kilimani)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1371, N'19976', N'Ilatu Dispensary (Makindu)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1372, N'19975', N'Pentapharm Limited')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1373, N'19974', N'Central Bank Staff Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1374, N'19973', N'Springs of Patmos Health Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1375, N'19971', N'Ekialo Kiano VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1376, N'19970', N'Hamsadam Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1377, N'19969', N'Jehovah Shalom Medical Clinic Lodwar')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1378, N'19968', N'Githima Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1379, N'19967', N'Kimathi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1380, N'19966', N'Afya Bora Clinic Karia')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1381, N'19965', N'Gathangari Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1382, N'19964', N'Mbari Ya Igi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1383, N'19963', N'Holy Family Mission Hospital Githunguri')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1384, N'19962', N'Bora Imani Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1385, N'19960', N'Sakali Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1386, N'19959', N'Menelik Chest Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1387, N'19958', N'AAR Gwh Health Care Ltd')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1388, N'19957', N'Sister Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1389, N'19956', N'Royal Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1390, N'19955', N'Heri Tana Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1391, N'19954', N'Gamba Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1392, N'19953', N'Linda Maternity')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1393, N'19952', N'Joy Medical Clinic Chuka')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1394, N'19951', N'Letuaih VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1395, N'19950', N'Misikhu Main Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1396, N'19948', N'United States International University VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1397, N'19947', N'Wima Medical Clinic (Samburu East)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1398, N'19946', N'Ndonyo Nasipa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1399, N'19945', N'Kiltamany Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1400, N'19942', N'Nkaroni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1401, N'19941', N'Super Drug Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1402, N'19940', N'Rotu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1403, N'19938', N'CFW Kiamugumo Glory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1404, N'19937', N'Kagio Nursing Home (Kerugoya)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1405, N'19933', N'Mutwangombe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1406, N'19930', N'Imc Tekeleza Dice Clinic Muhuru')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1407, N'19929', N'Imc Tekeleza Dice Clinic Karungu')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1408, N'19928', N'Got Kachola Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1409, N'19927', N'Global Providers International Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1410, N'19926', N'Kwamaiko Health Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1411, N'19921', N'Bethsaida Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1412, N'19920', N'Medlink Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1413, N'19919', N'Catmag Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1414, N'19917', N'Kiobegi Dispensary (Nyamache)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1415, N'19916', N'Gionsaria Health Centre (Nyamache)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1416, N'19914', N'Lea Toto Kawangware')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1417, N'19913', N'Good Samaritan Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1418, N'19912', N'Matercare Maternity Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1419, N'19911', N'Victory &Hope Medical Clinic Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1420, N'19910', N'Ololulunga VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1421, N'19909', N'Wikondiek Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1422, N'19908', N'Harmony Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1423, N'19907', N'Gogo Disp')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1424, N'19901', N'Positive Partner Network VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1425, N'19900', N'Ikomero Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1426, N'19899', N'Eshiabwali Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1427, N'19897', N'Abundant Life Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1428, N'19895', N'Green Cross Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1429, N'19894', N'Riakithiga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1430, N'19893', N'Kinyambu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1431, N'19892', N'Machinery Health Care Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1432, N'19891', N'Ivingoni Dispensary (Kibwezi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1433, N'19890', N'Hope World Wide (Makindu)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1434, N'19889', N'World Provision Wellness Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1435, N'19888', N'Katulye Dispensary (Kibwezi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1436, N'19887', N'Nasira Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1437, N'19885', N'Ainamoi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1438, N'19884', N'Kapket Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1439, N'19883', N'Kipkonyo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1440, N'19882', N'Marps -University of Nairobi')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1441, N'19881', N'Mutelai Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1442, N'19880', N'Alpha Medical Agency')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1443, N'19879', N'Marps Clinic (Meru)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1444, N'19878', N'Police Central Workshop Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1445, N'19877', N'Hillday Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1446, N'19876', N'Highway Medical Clinic Iten')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1447, N'19875', N'Port Florence Community Hospital Homa Bay Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1448, N'19873', N'Best Healthlife Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1449, N'19872', N'Kapteldet')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1450, N'19869', N'Kisumu Police Lines Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1451, N'19868', N'Nduga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1452, N'19867', N'Nyambare Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1453, N'19866', N'Obuya Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1454, N'19864', N'Nyawita Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1455, N'19863', N'Nyawawa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1456, N'19862', N'Gazi Bay Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1457, N'19861', N'Koduogo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1458, N'19860', N'Nyarut Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1459, N'19859', N'Pala Masogo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1460, N'19858', N'Makongeni Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1461, N'19857', N'Mt Elgon Annex Clinics -Dr Manuthu')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1462, N'19855', N'Wema Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1463, N'19852', N'Supreme Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1464, N'19851', N'Dr F Kanyingi Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1465, N'19850', N'Lakipia Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1466, N'19849', N'Cheboet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1467, N'19848', N'Muiywek Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1468, N'19842', N'County Medical Health Clinic (Wanguru)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1469, N'19841', N'CFW Mwea Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1470, N'19839', N'Kibomet Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1471, N'19837', N'Chemichemi Medical Clinic (Nyandarua)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1472, N'19836', N'Elite Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1473, N'19835', N'Front Line Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1474, N'19825', N'St Anne CFW Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1475, N'19834', N'Medical Plaza Clinic Banana')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1476, N'19833', N'Ndenderu Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1477, N'19832', N'Kikinga Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1478, N'19831', N'Muchatha Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1479, N'19829', N'Ngurubani Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1480, N'19828', N'St Francis Health Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1481, N'19823', N'Humanity Medical Clinic (Kir South)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1482, N'19821', N'Elephant Dental Clinic-Kerugoya')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1483, N'19820', N'Medkam Pharmacy')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1484, N'19819', N'Jamii Medical Clinic (Kirinyaga North)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1485, N'19818', N'Jamii Medical Clinic (KARUMANDI)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1486, N'19817', N'Airborne No Twist Huduma Bora Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1487, N'19816', N'Lex Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1488, N'19815', N'Agro Chemical Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1489, N'19814', N'Joskar CFW Clinic (Kibingiti)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1490, N'19811', N'Olifras Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1491, N'19810', N'Vision Medical Clinic (Kerugoya)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1492, N'19809', N'Dr Ndambuki Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1493, N'19808', N'Imani Medical Clinic (Nyandarua)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1494, N'19807', N'Fly Over Health Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1495, N'19806', N'Fly Over Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1496, N'19805', N'Remedy Laboratory Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1497, N'19804', N'Githabai Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1498, N'19803', N'Mwenda andu Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1499, N'19802', N'Afya Medical Clinic (Gwakungu)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1500, N'19801', N'Haraka Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1501, N'19800', N'Igwamiti Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1502, N'19797', N'Dr L N Wagana Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1503, N'19796', N'Utugi (Olk) Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1504, N'19795', N'Thuti Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1505, N'19794', N'Afya Bora Health Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1506, N'19793', N'Modern Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1507, N'19792', N'Kipipiri Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1508, N'19791', N'Miharate Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1509, N'19789', N'Wananchi Medical Clinic (Nyandarua)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1510, N'19787', N'High Way Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1511, N'19786', N'Jamii Medical Clinic (North Kinangop)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1512, N'19785', N'Optica Clinic Nyeri')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1513, N'19784', N'Nyeri Primary School Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1514, N'19783', N'Dr Il Muturi Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1515, N'19782', N'Mountain Healthcare services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1516, N'19781', N'Dr Thuo Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1517, N'19779', N'Tabby Plaza ENT & Orthopaedic Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1518, N'19778', N'Kagumo Boys High School Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1519, N'19777', N'Kamwenja Teachers Training College')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1520, N'19776', N'Neno Optical')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1521, N'19775', N'Kagumo Teachers College Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1522, N'19771', N'Kangubiri Girls High School Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1523, N'19770', N'Kirimara Optical')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1524, N'19769', N'Karundu Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1525, N'19768', N'Nyeri Good Shepherd Primary Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1526, N'19767', N'Nyeri High School Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1527, N'19766', N'Mt Kenya Junior Academy')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1528, N'19764', N'Afya Yako Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1529, N'19763', N'Nyeri Technical Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1530, N'19761', N'Arara ENT Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1531, N'19760', N'Cherangany Nursing Home Outpatient Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1532, N'19759', N'Ninami Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1533, N'19758', N'Vision Dental Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1534, N'19757', N'Sarara Chemistry')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1535, N'19756', N'Bwayi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1536, N'19755', N'Harrison Mudoga Mc')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1537, N'19754', N'Jimron Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1538, N'19752', N'Keiyo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1539, N'19751', N'Muungano Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1540, N'19749', N'Norident Dental Clinic Kitale')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1541, N'19746', N'Mabariri Medical Clinic (Nyamira North)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1542, N'19742', N'Mt Elgon Annex Clinics')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1543, N'19741', N'St John''s Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1544, N'19739', N'Sunview Maternity & Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1545, N'19738', N'Olesere Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1546, N'19735', N'Wundanyi GK Prisons')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1547, N'19733', N'Santa Lucia Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1548, N'19732', N'Murarandia Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1549, N'19731', N'Rau Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1550, N'19730', N'Endarasha Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1551, N'19729', N'St John Afya Bora Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1552, N'19728', N'Samilo Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1553, N'19727', N'Kamacharia Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1554, N'19725', N'Escutar Health Partners Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1555, N'19724', N'Ilparakuo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1556, N'19723', N'Marura Nursing Home Kiambu Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1557, N'19719', N'Swop Kawangware')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1558, N'19718', N'Garden Park Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1559, N'19717', N'Destiny Medical Clinic (Kinoro-Imenti South)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1560, N'19716', N'St Ann Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1561, N'19714', N'Karen Hospital (Karatina)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1562, N'19713', N'Siloam Medical Clinic (Kieni East)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1563, N'19710', N'Universal Medical Clinic (Nyeri North)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1564, N'19709', N'Bevans Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1565, N'19708', N'Elite Medical Clinic (Mathira West)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1566, N'19707', N'Karatina University Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1567, N'19706', N'Sarova Hotels')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1568, N'19703', N'Dap Health Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1569, N'19701', N'Batian Clinical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1570, N'19700', N'PCEA Pipeline Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1571, N'19696', N'Meridian Medical Centre Kitengela')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1572, N'19692', N'Wanainchi Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1573, N'19690', N'Dr Karuu Mc')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1574, N'19689', N'Causqurow Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1575, N'19688', N'Laini Moja Mc & Lab')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1576, N'19687', N'Dr James Murgor Mc')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1577, N'19686', N'Jawabu Modern Med Lab')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1578, N'19685', N'Crescent-Davina Med Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1579, N'19684', N'Kitale Sch Sanatorium')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1580, N'19676', N'Ilkilorit Dispeensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1581, N'19674', N'Dr Akoto Mc')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1582, N'19672', N'St Jude Theddeus Mc')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1583, N'19671', N'Marambach Mc')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1584, N'19670', N'Kitale Eye Care Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1585, N'19669', N'Jesus Heals Mc')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1586, N'19667', N'Viebe MC')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1587, N'19666', N'Dr Kiptum Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1588, N'19665', N'Karai Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1589, N'19664', N'Kaloleni Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1590, N'19662', N'Afya Bora Mc')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1591, N'19661', N'Dr Khisa Mc')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1592, N'19658', N'Ngurumo Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1593, N'19657', N'St Mark Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1594, N'19656', N'Amazing Grace M C')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1595, N'19653', N'Alms House Dispensary (Tudor)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1596, N'19652', N'Tyaa Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1597, N'19651', N'ACK Mwingi CHBC Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1598, N'19650', N'Luisoi Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1599, N'19648', N'Mugi Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1600, N'19647', N'Tumaini Baraka Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1601, N'19645', N'Afya Medicare Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1602, N'19644', N'Kims Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1603, N'19638', N'Orwa Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1604, N'19635', N'Siloam Medical Clinic ( Pokot Central)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1605, N'19633', N'Mid-Point Health Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1606, N'19632', N'Express Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1607, N'19630', N'Viva Afya Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1608, N'19629', N'Al-Firdaus Health Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1609, N'19628', N'Kisiwani VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1610, N'19627', N'Umoja Medical Clinic- Bombolulu')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1611, N'19626', N'Nzukini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1612, N'19625', N'Kinmed Medical Clinic (Dandora)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1613, N'19624', N'Terminus Medical Clinic (Dandora)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1614, N'19622', N'Malaika Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1615, N'19621', N'Afya Medical Clinic (Dandora)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1616, N'19619', N'Good Neighbours Medical Clinic (Dandora)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1617, N'19617', N'Dandora Medical and Laboratory Services (Kojwang)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1618, N'19616', N'Recovery Medical Clinic (Kariobangi South)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1619, N'19613', N'Sam Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1620, N'19612', N'Toric''s Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1621, N'19606', N'Mrima CDF Health Cenre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1622, N'19605', N'Heri Medical Cilinic Bombolulu')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1623, N'19604', N'Badri Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1624, N'19603', N'St Judes Nursing Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1625, N'19602', N'Bibirioni Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1626, N'19599', N'Kenya Long Distance Truck Drivers Union VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1627, N'19598', N'Mary Help Mission Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1628, N'19597', N'Health Source Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1629, N'19596', N'Dawa Jema Medical Cl')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1630, N'19594', N'Mtaro Estate Dispensary and Family Planning')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1631, N'19591', N'Kipsitet Baptist Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1632, N'19590', N'Kapkara Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1633, N'19589', N'Chiromo Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1634, N'19582', N'Health Matters Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1635, N'19580', N'Nairobi Eye Associates')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1636, N'19576', N'Dr Rosaline Thara Dental Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1637, N'19574', N'Imenti Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1638, N'19572', N'Eyeclinic (Nairobi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1639, N'19571', N'Dr Stephen Macharia Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1640, N'19569', N'Dr Ngathia Dental Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1641, N'19568', N'Dr Kishor J D Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1642, N'19566', N'Hazina Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1643, N'19565', N'Dr Eliud Njuguna (Parklands)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1644, N'19564', N'Dr David Chew Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1645, N'19563', N'Dr Henry Abwao')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1646, N'19562', N'Abraham Memorial Nursing Home (Westlands)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1647, N'19560', N'Artisan Dental Laboratory (Nairobi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1648, N'19559', N'Dr Ashwin Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1649, N'19557', N'Bafana Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1650, N'19555', N'Tusker House Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1651, N'19553', N'Tusker Dental Laboratory Services & Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1652, N'19551', N'Afya Bora Medical Clinic (Westlands)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1653, N'19550', N'Meridian Medical Centre (Penson Towers)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1654, N'19548', N'Jesus Is Alive Dental Clinic (Nairobi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1655, N'19546', N'Meridian Medical Centre (Kileleshwa)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1656, N'19545', N'Damic Dental X-Ray Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1657, N'19544', N'Rimaal Medical Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1658, N'19543', N'The Mater Hospital (Westlands)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1659, N'19542', N'Maisha Poa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1660, N'19541', N'Kaka Medical Centre (Race Course Rd)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1661, N'19540', N'Pharmat Health Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1662, N'19539', N'Focus Outreach Medical Mission')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1663, N'19538', N'Gitanga Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1664, N'19536', N'Kangemi Gichagi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1665, N'19534', N'Dr Praful M Sanghani')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1666, N'19531', N'Central Park Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1667, N'19529', N'Baraka Medical Cenre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1668, N'19524', N'Wide Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1669, N'19522', N'Dr J L Amugugaba Clinic (Nairobi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1670, N'19520', N'Aculaser Institute')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1671, N'19519', N'Medisafe Medical Labaratoty')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1672, N'19515', N'Afya Bora Health Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1673, N'19513', N'Kawangware Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1674, N'19512', N'Mafra Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1675, N'19508', N'Local Aid Organization')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1676, N'19506', N'Professional Diagnostic Centre (Nairobi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1677, N'19504', N'Child Doctor Kenya')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1678, N'19503', N'Latema Medical Services (Nairobi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1679, N'19499', N'Nyalego Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1680, N'19498', N'Premier Laboratory (Nairobi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1681, N'19494', N'Westlands Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1682, N'19492', N'Odeon Medical Centre (Nairobi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1683, N'19491', N'Victory Medicare')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1684, N'19490', N'Jellin Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1685, N'19489', N'Ignane Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1686, N'19488', N'Kamili Organization')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1687, N'19487', N'Rafiki Medical Clinic (Westlands)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1688, N'19486', N'Credible Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1689, N'19484', N'Abby Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1690, N'19483', N'Philis Medical Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1691, N'19482', N'Medanta Africare')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1692, N'19481', N'Lumumba Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1693, N'19480', N'Dr Parmar Medical Clinic (Nairobi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1694, N'19479', N'Nile Medical Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1695, N'19478', N'Millenium Dental Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1696, N'19477', N'Nairobi Outreach Services Trust')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1697, N'19476', N'Upendo Clinic Makadara')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1698, N'19475', N'Rinah Health Consultants')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1699, N'19473', N'Maendereo Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1700, N'19472', N'Hamza Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1701, N'19471', N'Iom Wellness Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1702, N'19470', N'Corner Hse Med Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1703, N'19469', N'Imani Health Servises')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1704, N'19468', N'Dr Jemmah & Nyawange Med Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1705, N'19467', N'Access Afya')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1706, N'19466', N'Remer Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1707, N'19465', N'Orient Medical Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1708, N'19463', N'Metropolitan Dr Plaza')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1709, N'19462', N'Avenue Health Care (Makadara)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1710, N'19461', N'Al-Ramah Healthcare')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1711, N'19460', N'Garissa Pride Healthcare')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1712, N'19459', N'Iqlas Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1713, N'19458', N'Innercore Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1714, N'19457', N'Aga Khan Greenspam Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1715, N'19455', N'Communal Oriented Service International Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1716, N'19452', N'Eastern Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1717, N'19451', N'Primed Medical Services Komarock')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1718, N'19450', N'Connections Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1719, N'19449', N'Scion Healthcare Ltd Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1720, N'19448', N'St John Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1721, N'19447', N'Provide International Hospital Mukuru')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1722, N'19446', N'Jamii Medical Clinic Mukuru')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1723, N'19445', N'Santi Meridian Health Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1724, N'19444', N'Trocare Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1725, N'19443', N'Exodus Community Health Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1726, N'19442', N'Mwera Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1727, N'19441', N'Abra Health Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1728, N'19440', N'Primed Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1729, N'19439', N'Corban Health Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1730, N'19438', N'St Maurice Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1731, N'19437', N'Embakasi Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1732, N'19436', N'Kings Cross Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1733, N'19435', N'PCEA Kayole Parish Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1734, N'19434', N'The Mater Embakasi Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1735, N'19433', N'Jamii Yadah Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1736, N'19432', N'Mariakani Cottage Hospital Utawala Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1737, N'19431', N'Kiamuthambi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1738, N'19429', N'Swop Outreach Project Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1739, N'19428', N'Bans Optical (Nairobi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1740, N'19427', N'Goldmed Chemists & Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1741, N'19426', N'Dr Parmar Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1742, N'19425', N'Dr George Munene Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1743, N'19424', N'Parkroad Dental Clinic (Ngara)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1744, N'19423', N'Dr Nzuki Hildapaed Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1745, N'19422', N'Starehe Boys Centre School Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1746, N'19421', N'Iran Medical Clinic (Ngara)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1747, N'19420', N'Dr M S Saroya Medical Clinic (Nairobi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1748, N'19419', N'Dr Maina Skin Clinic (Ngara)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1749, N'19418', N'Dr Chaundry Dental Services (Nairobi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1750, N'19416', N'Dr Musili Clinic (Afya Centre-Nairobi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1751, N'19413', N'Acacia Medical Centre (Nairobi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1752, N'19411', N'Betta Health Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1753, N'19410', N'Isiolo Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1754, N'19409', N'Maua Diagnostic Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1755, N'19408', N'Iqra Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1756, N'19406', N'Quality Health Care Clinic (Naivasha)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1757, N'19405', N'Bridging Out-Patient')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1758, N'19404', N'Annex Health Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1759, N'19403', N'Max Family Health Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1760, N'19401', N'Rosadett Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1761, N'19400', N'Sharifik Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1762, N'19399', N'Unity Health Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1763, N'19398', N'Jozi Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1764, N'19397', N'Afyamax Medical & Centre Dental')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1765, N'19395', N'Meridian Medical Centre (Loita Street)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1766, N'19394', N'Swop Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1767, N'19393', N'Social Service League (Nairobi )')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1768, N'19392', N'Crescent Medical Aid (Jamia Towers)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1769, N'19389', N'Sosio Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1770, N'19388', N'Kapsokwony Medicare')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1771, N'19387', N'Maraa Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1772, N'19385', N'Mt Elgon Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1773, N'19384', N'Ravine Medical and ENT Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1774, N'19382', N'Royolk Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1775, N'19381', N'Success Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1776, N'19380', N'St Teresa Medical Clinic ( Zimmerman)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1777, N'19379', N'Sanitas Lotus Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1778, N'19378', N'Zimma Health Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1779, N'19377', N'Delight Chemist & Lab')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1780, N'19376', N'The Arcade Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1781, N'19373', N'Horeb Medical Clinic ( Hunters)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1782, N'19370', N'Radiant Hosp Kasarani')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1783, N'19369', N'Kamwitha Medcal Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1784, N'19366', N'Kibisem Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1785, N'19358', N'Nandi Hills Medicare Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1786, N'19357', N'Reddys Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1787, N'19356', N'Alphine Dental Centre (Kencom Hse)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1788, N'19355', N'Supreme Health Care (Ktda House-Nairobi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1789, N'19354', N'Abdallah Dental Clinic (Barclays Plaza-Nairobi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1790, N'19353', N'Plaza X-Ray Services (Re-Insurance Plaza-Nairobi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1791, N'19351', N'Sunshine Medical & Diagnostic Centre (Nairobi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1792, N'19348', N'Isinya Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1793, N'19347', N'Manna Medical Clinic Isinya')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1794, N'19344', N'Aldai Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1795, N'19338', N'Nasaruni Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1796, N'19336', N'Ndonyo Medical Clinic (Naivasha Kwa Muya)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1797, N'19335', N'Aga Khan University Hospital Clinic (Naivasha)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1798, N'19334', N'Light Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1799, N'19333', N'Index Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1800, N'19332', N'St Michael Community Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1801, N'19331', N'Soin Health Care - Mfangano Street)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1802, N'19330', N'Kimathi Street Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1803, N'19329', N'Elatiai Health Ccare Services Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1804, N'19328', N'Family Care Medical Centre Eye Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1805, N'19327', N'Imarba Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1806, N'19325', N'Serotec Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1807, N'19324', N'Eldama Ravine Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1808, N'19323', N'Nazareth Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1809, N'19322', N'Eldama Ravine Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1810, N'19320', N'Makindu Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1811, N'19319', N'Mercy Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1812, N'19318', N'Juja Road Hospital (Nairobi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1813, N'19316', N'Lad Nan Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1814, N'19315', N'Shalom Medical Clinical')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1815, N'19314', N'Gertrudes Chiildren Clinic (Pangani)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1816, N'19313', N'Kam Health Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1817, N'19312', N'Kam ENT Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1818, N'19311', N'Sasa Centre-Ngara')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1819, N'19308', N'Maisha House VCT (Noset)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1820, N'19306', N'Baraka Medical Clinic (Makindu)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1821, N'19304', N'Makamu Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1822, N'19303', N'Mfariji Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1823, N'19302', N'Hunters Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1824, N'19300', N'Josnik Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1825, N'19295', N'Ramah Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1826, N'19294', N'Kaproret Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1827, N'19293', N'Isiolo Central Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1828, N'19289', N'Peace Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1829, N'19286', N'Imani Medical Clinic ( Mathare A 4)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1830, N'19284', N'Wayside Medical & Dental Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1831, N'19283', N'Tazama Dentel Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1832, N'19282', N'Kiptenden Dspensary (Nandi Central)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1833, N'19280', N'St Louis Community Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1834, N'19279', N'Narzareth Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1835, N'19278', N'Hope Medical Clinic ( Githurai)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1836, N'19277', N'Mother & Child Meridian & Lab Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1837, N'19276', N'Stars General Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1838, N'19275', N'Prestige Health Centre (Zimerman)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1839, N'19270', N'Emanuel Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1840, N'19269', N'Ilbissil Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1841, N'19268', N'Olepolos Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1842, N'19267', N'Oloimirmir Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1843, N'19265', N'Devki Staff Clinic (Ruiru)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1844, N'19264', N'Githurai Health Care and Dental Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1845, N'19263', N'Maua Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1846, N'19262', N'Milimani Eye Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1847, N'19261', N'Maua East Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1848, N'19260', N'Mitume Dispensary Kitale')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1849, N'19258', N'Malabot Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1850, N'19256', N'Sarimo Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1851, N'19254', N'Loitokitok Medicare Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1852, N'19253', N'Mawenzi Care Clinics')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1853, N'19250', N'Mosoriot Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1854, N'19248', N'Cheptarit Med Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1855, N'19247', N'The Hanna Medicare Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1856, N'19246', N'Chepnoet Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1857, N'19245', N'Moso Cheptarit Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1858, N'19244', N'Chepnoet Private Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1859, N'19243', N'Burjon Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1860, N'19241', N'Peoples Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1861, N'19240', N'Dawa Mart Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1862, N'19239', N'Mwema Health Care Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1863, N'19238', N'Current Medical Ciinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1864, N'19237', N'Mutuati Catholic Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1865, N'19236', N'Ngumba Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1866, N'19231', N'St Marks Kigari Teachers College Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1867, N'19230', N'Tender Loving Care CFW Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1868, N'19229', N'By Faith Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1869, N'19228', N'Joy Clinic Manyatta')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1870, N'19227', N'Kathangari CFW Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1871, N'19226', N'Nguviu Boys High School Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1872, N'19225', N'CFW Mbuvori Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1873, N'19224', N'CDF Kiriari Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1874, N'19223', N'Aga Khan University Hospital - Embu')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1875, N'19222', N'Makkah Medical Clinic and Lab')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1876, N'19221', N'Dr Mushtaq Muhammad')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1877, N'19220', N'Madina Health Care Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1878, N'19219', N'Frontier Health Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1879, N'19218', N'Durdur Medical Clinic and Lab')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1880, N'19217', N'County Medical Clinic and Lab Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1881, N'19215', N'Amaal Annex Nursing')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1882, N'19214', N'Bulla Mpya Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1883, N'19213', N'Rainbow Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1884, N'19212', N'Millenium Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1885, N'19210', N'Digfer Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1886, N'19208', N'Naretisho Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1887, N'19207', N'Chemamul Dispensary (Tinderet)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1888, N'19206', N'North Star Alliance Wellness Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1889, N'19205', N'Gynocare Centre Maternity Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1890, N'19202', N'Sawa Makutano Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1891, N'19201', N'Sawa Ikombe Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1892, N'19200', N'Comet Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1893, N'19197', N'Highway Medical Clinic Yatta')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1894, N'19196', N'Katangi Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1895, N'19195', N'Kyandu Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1896, N'19194', N'St Michael Medical Clinic -Kangundo')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1897, N'19193', N'Imani Medical Clinic Yatta')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1898, N'19192', N'Laare Maternity')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1899, N'19191', N'Nyota Njema Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1900, N'19190', N'Mwanainchi Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1901, N'19189', N'Kamkomani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1902, N'19188', N'Machungulu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1903, N'19187', N'Mcf Ndalani')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1904, N'19186', N'Nkirina Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1905, N'19185', N'Athirunjine Runjine Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1906, N'19182', N'MCF Yatta')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1907, N'19180', N'Lanet Kiondoo Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1908, N'19179', N'Mercy Medical Clinic (Ntunene)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1909, N'19177', N'Dr Thuo''s Clinic Kitengela')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1910, N'19176', N'Meds Pharmaciticals Ongata Rongai')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1911, N'19173', N'Fountain Healthcare')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1912, N'19171', N'Prestige Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1913, N'19169', N'Choice Health Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1914, N'19168', N'Bulla Medina Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1915, N'19167', N'Bismillahi Medical Clinic (Garissa)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1916, N'19166', N'Better Medical Clinic (Township)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1917, N'19165', N'Al Qudus Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1918, N'19162', N'Afwene Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1919, N'19158', N'New Southlands X-Ray Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1920, N'19157', N'Kapsongoi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1921, N'19155', N'Chebon Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1922, N'19150', N'Konton Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1923, N'19148', N'Kathungi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1924, N'19147', N'Mangina Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1925, N'19145', N'Kitundu Dispensary (Katulani District)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1926, N'19144', N'Boarder Medical Clinic Namanga')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1927, N'19143', N'Kirimampio Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1928, N'19140', N'Uzima Medical Clinic (Meru)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1929, N'19139', N'Mai Mahiu Maternity and Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1930, N'19137', N'Family Care Doctor''s Plaza')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1931, N'19136', N'Dom Spark')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1932, N'19135', N'Meru Hospice')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1933, N'19134', N'Kibirichia Health & Laboratory Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1934, N'19133', N'Twins Bell')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1935, N'19132', N'Neema Afya Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1936, N'19131', N'Afya Medical Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1937, N'19130', N'Sr Rhoda Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1938, N'19129', N'Ruiri MCK Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1939, N'19128', N'Hope Medical Laboratory (Ruiru/rwawera)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1940, N'19127', N'Timau Dental Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1941, N'19126', N'Tropical Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1942, N'19125', N'Batian Flowers Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1943, N'19123', N'Northstar Alliance Wellness Centre (Mai Mahiu)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1944, N'19122', N'Gundua Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1945, N'19121', N'St James Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1946, N'19118', N'Nazarene Medical Clinic (Kitui West)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1947, N'19117', N'Abby Health Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1948, N'19116', N'Lemoru Trinity')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1949, N'19115', N'Sala Health center')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1950, N'19113', N'Meru Funeral Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1951, N'19112', N'Heshima Medical Clinic-Masinga')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1952, N'19111', N'Precious Life Health Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1953, N'19110', N'Kiatineni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1954, N'19106', N'Royal Medical Clinic (Meru)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1955, N'19105', N'Dental Clinic Dr Mwiti Jm')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1956, N'19104', N'Prime Dental Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1957, N'19103', N'Minoptic Eye Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1958, N'19102', N'Meru Gynecologist Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1959, N'19101', N'The Nairobi Hospital Out-Patient Centre Galeria')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1960, N'19098', N'Qarsadamu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1961, N'19097', N'KHE Farm Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1962, N'19096', N'St Annes Medical Clinic Ongata Rongai')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1963, N'19095', N'Dr Ndanya Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1964, N'19092', N'Tumaini Clinic Voi')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1965, N'19091', N'Ongata Rongai X-Ray Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1966, N'19090', N'Voi Medical Clinix')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1967, N'19089', N'Voi Dental')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1968, N'19088', N'Bahati Medical Clinic (West Pokot)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1969, N'19087', N'Lilyon Clinical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1970, N'19085', N'Sere Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1971, N'19083', N'Avenue Health Care Ongata Rongai')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1972, N'19079', N'Garlands Medical Centree')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1973, N'19077', N'New Age VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1974, N'19076', N'Kawongo Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1975, N'19075', N'Amani Medical Clinic (Meru)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1976, N'19074', N'District Public Health Office (Meru)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1977, N'19073', N'Meru Cytology Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1978, N'19072', N'CCM Kaare')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1979, N'19071', N'Clinix Health Care Limited (Meru)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1980, N'19069', N'Tudor Healthcare Services (Mikindani)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1981, N'19068', N'Dalsan Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1982, N'19067', N'Word of Faith Church Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1983, N'19065', N'Nyali Childrens Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1984, N'19064', N'Elim Dental Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1985, N'19063', N'Meru X-Ray Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1986, N'19062', N'Dr Rajesh Gandhi Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1987, N'19060', N'Ngong Medicare Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1988, N'19059', N'Miliki Afya')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1989, N'19057', N'St Anns Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1990, N'19056', N'Providenve Health Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1991, N'19055', N'Melchizedek Hospital Ngong Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1992, N'19053', N'Beula''s Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1993, N'19052', N'Sunshine Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1994, N'19051', N'Bethsaida Grandcure Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1995, N'19050', N'Mikeu PCEA Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1996, N'19048', N'Women Initiative Health Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1997, N'19047', N'Warsan Health Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1998, N'19046', N'Tulah Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (1999, N'19045', N'Towfiq Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2000, N'19044', N'Tawaheed Community Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2001, N'19043', N'Tawaheed Community Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2002, N'19042', N'Tawakal Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2003, N'19041', N'Solution Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2004, N'19040', N'Alpha Medical Clinic Mile Tisa')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2005, N'19039', N'Safa Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2006, N'19038', N'Mwananchi Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2007, N'19037', N'Medina Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2008, N'19035', N'Chonesus Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2009, N'19032', N'Elele Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2010, N'19027', N'Tahidi Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2011, N'19025', N'Patrona Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2012, N'19023', N'Swiss Cottage Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2013, N'19022', N'Amina Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2014, N'19021', N'St Trizah Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2015, N'19020', N'Zahri Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2016, N'19019', N'Mephi Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2017, N'19018', N'Kaplelach Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2018, N'19017', N'Kamuskut Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2019, N'19016', N'Blue Nile Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2020, N'19015', N'Highway Medical Clinic (Pokot Central)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2021, N'19014', N'Ortum Central Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2022, N'19013', N'Kapkres Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2023, N'19012', N'Murpus Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2024, N'19011', N'Chepkono Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2025, N'19010', N'Medina Diagnostic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2026, N'19009', N'Iftin Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2027, N'19008', N'Hilwa Pharmacy and Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2028, N'19007', N'Gule Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2029, N'19006', N'Gatwell/Lab Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2030, N'19005', N'Emirates Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2031, N'19004', N'Dhanun Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2032, N'19003', N'Bulla Hagar Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2033, N'19002', N'Bulla Game Medical Clinic and Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2034, N'19001', N'Amani Clinic (Garissa)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2035, N'18999', N'Alliance Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2036, N'18998', N'Al-Faruq Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2037, N'18997', N'Al Iklas Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2038, N'18996', N'Al Amin Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2039, N'18995', N'Dam Pharmacy and Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2040, N'18994', N'Hope Medical Clinic (Loitokitok)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2041, N'18992', N'Rosade Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2042, N'18989', N'Mwendantu Amani Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2043, N'18984', N'Kibera Highway Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2044, N'18980', N'St Andrews Medical Clinic - Eldoret')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2045, N'18979', N'Naisula Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2046, N'18975', N'Good Shephered Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2047, N'18974', N'Mercy Medical Clinic Engineer')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2048, N'18973', N'Stralight Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2049, N'18971', N'Nalala Initiative Community Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2050, N'18969', N'Geva Family Health Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2051, N'18968', N'Jolly Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2052, N'18967', N'Wa Tonny Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2053, N'18965', N'Acc&S Kariua Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2054, N'18961', N'Mwathene Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2055, N'18960', N'Nogoi Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2056, N'18959', N'Mogotio Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2057, N'18954', N'Lexa Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2058, N'18953', N'Isra Walmiraj Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2059, N'18952', N'Shalom Community Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2060, N'18951', N'Mumui Dispensary (Kianjai)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2061, N'18950', N'Holiday Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2062, N'18949', N'Ushirika Medical Clinic Maara')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2063, N'18948', N'March Medicare')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2064, N'18947', N'Mwendantu Baraka Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2065, N'18946', N'Mamakate Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2066, N'18945', N'Mtoni Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2067, N'18943', N'Pona VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2068, N'18942', N'Kamiti Maximum Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2069, N'18941', N'Imanga Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2070, N'18939', N'Butere Iranda Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2071, N'18937', N'Kaciongo Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2072, N'18936', N'Robins Health Care Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2073, N'18935', N'Bethezda Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2074, N'18934', N'Appex Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2075, N'18933', N'Wananchi Medical Clinic Maara')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2076, N'18931', N'Mutethia Clinic Magutuni')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2077, N'18930', N'Namarei Dispensary (Marsabit South)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2078, N'18928', N'Kaka Health Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2079, N'18927', N'Rejoice Medical Clinic Lusiola')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2080, N'18926', N'Jamii Medical Clinic Vihiga')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2081, N'18925', N'Nyambene Medical & Surgical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2082, N'18924', N'Highway Medical Clinic Maua')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2083, N'18923', N'Angels Health Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2084, N'18922', N'Springs Health Care Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2085, N'18919', N'Network Israel Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2086, N'18918', N'West End Medical Solutions')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2087, N'18917', N'Clinix Medical Clinic (Machakos)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2088, N'18916', N'Meridian Medical Centre (Machakos)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2089, N'18915', N'Baraka Dental Clinic (Maara)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2090, N'18911', N'Mutomo Health Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2091, N'18909', N'Stadia Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2092, N'18908', N'Kasolina Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2093, N'18907', N'Universal M Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2094, N'18903', N'Central Medical Clinic (Kitui Central)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2095, N'18901', N'Clay Hill Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2096, N'18899', N'Muthale Mission Hospital Satelite Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2097, N'18898', N'Ladopharma Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2098, N'18897', N'Dice Clinic Migori')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2099, N'18896', N'Swop Thika Road')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2100, N'18895', N'Korogocho Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2101, N'18894', N'Embakasi Medical Centre (Aun)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2102, N'18893', N'Emmanuel Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2103, N'18892', N'Ong''amo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2104, N'18891', N'Cheptais Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2105, N'18890', N'Maendeleo Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2106, N'18889', N'Paradise Medical Centre (Cheptais)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2107, N'18888', N'Consolata Shrine Dispensary (Deep Sea Nairobi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2108, N'18887', N'Githogoro Runda Baptist Clinic (Getrudes Nairobi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2109, N'18885', N'Kimkan Health Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2110, N'18884', N'Lugpharm Medicals Limited')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2111, N'18883', N'Ikuu CFW Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2112, N'18880', N'South Eastern Kenya University (Seku) Health Unit')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2113, N'18879', N'Kenyatta University Kitui Campus Health Unit')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2114, N'18878', N'Kiganjo Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2115, N'18877', N'Otange Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2116, N'18876', N'Kachuth Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2117, N'18875', N'Hope World Wide Nakuru')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2118, N'18874', N'Got Kamondi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2119, N'18873', N'Wondeni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2120, N'18871', N'Ankamia Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2121, N'18870', N'Optimum Care Medical')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2122, N'18867', N'Nyabondo Rehabilitation Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2123, N'18865', N'Nyabola CDF Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2124, N'18864', N'Igarii Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2125, N'18863', N'Mulika Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2126, N'18862', N'Nyara Tea Estate Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2127, N'18861', N'Eldoret Regional Blood Bank')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2128, N'18860', N'Wellness Program KWS Hq')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2129, N'18859', N'AAR Healthcare Limited (Karen)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2130, N'18858', N'Maungu Model Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2131, N'18857', N'Logologo Model Health Centre (Marsabit South)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2132, N'18856', N'Laisamis Health Centre (Marsabit South)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2133, N'18854', N'Jirime Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2134, N'18853', N'Boru Haro Model Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2135, N'18852', N'Lumboka Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2136, N'18851', N'Mandera West Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2137, N'18850', N'Kiroone Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2138, N'18849', N'Ngongo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2139, N'18847', N'Kathithine Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2140, N'18846', N'Eliye Springs Community Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2141, N'18845', N'Afya Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2142, N'18844', N'Highrise Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2143, N'18843', N'St Richard Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2144, N'18842', N'Darajani Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2145, N'18840', N'Faith Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2146, N'18839', N'Destiny Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2147, N'18838', N'Mariakani Cottage Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2148, N'18837', N'Bluebells Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2149, N'18835', N'AIC Biribiriet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2150, N'18834', N'Wheel Kenya Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2151, N'18832', N'Karatina Maternity & Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2152, N'18831', N'Malabot Dispensary (North Horr)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2153, N'18830', N'Burgabo Dispensary (Chalbi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2154, N'18829', N'Primo Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2155, N'18828', N'Lea Toto Mwiki')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2156, N'18827', N'Kwosp (Korogocho)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2157, N'18826', N'Vorhca VCT Stand Alone')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2158, N'18825', N'Jehova Rapha Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2159, N'18824', N'Mbaruk Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2160, N'18823', N'Kabarak University Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2161, N'18821', N'Abakaile Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2162, N'18820', N'Shura Dispensary (Chalbi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2163, N'18819', N'Syokimau Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2164, N'18817', N'Avenue Health Care Nakuru')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2165, N'18816', N'Annointed Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2166, N'18813', N'Bgp Block 10Ba Base Camp Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2167, N'18812', N'County Medicare Ltd (Maralal Nursing Home)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2168, N'18811', N'Kalima Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2169, N'18810', N'Montana Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2170, N'18809', N'Tutini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2171, N'18805', N'Bodaki Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2172, N'18804', N'AHF Soko Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2173, N'18801', N'Hamey Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2174, N'18800', N'Oren Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2175, N'18799', N'Ifo 2 Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2176, N'18798', N'Nist Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2177, N'18797', N'Olive Link Health Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2178, N'18796', N'Sasa Centre (Makadara)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2179, N'18795', N'Church Army Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2180, N'18793', N'Little Angels Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2181, N'18791', N'Sportlight Empowerment Group')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2182, N'18790', N'Aphiaplus Drop-In Centre (Naivasha)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2183, N'18789', N'Chuka University Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2184, N'18788', N'Muhamarani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2185, N'18786', N'Nyandusi')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2186, N'18783', N'Axis Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2187, N'18782', N'Chamuka (CDF) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2188, N'18781', N'Gatimu Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2189, N'18780', N'Fountain of Hope Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2190, N'18779', N'Mugai Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2191, N'18778', N'Dr Florence Murila (Ngong Road)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2192, N'18776', N'St Lukes Orthopaedic and Trauma Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2193, N'18775', N'Kamarandi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2194, N'18772', N'Omosocho Medical Clinic (Manga)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2195, N'18770', N'Andulus Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2196, N'18769', N'Al Amin Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2197, N'18767', N'Marps Drop In Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2198, N'18765', N'Jena Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2199, N'18764', N'Akicha Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2200, N'18762', N'Lang''ata Dispensary (Ruiru)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2201, N'18761', N'Spa Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2202, N'18760', N'Kamuthini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2203, N'18758', N'Jalsonga Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2204, N'18755', N'Family Dental Care (Ayany)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2205, N'18754', N'Clinix Health Care (Kibra)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2206, N'18753', N'Mucharage Mlc')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2207, N'18751', N'Ash Community Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2208, N'18749', N'Serena Beach Hotel & Spa Staff Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2209, N'18748', N'Comfort The Chidren International (Ctc) Naivasha')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2210, N'18747', N'Vegpro Delamere Pivot Medical Clinic (Naivasha)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2211, N'18746', N'Tionybei Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2212, N'18745', N'Comboni Missionary Sisters Health Programm')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2213, N'18744', N'Premium Health Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2214, N'18743', N'Kariobangi EDARP')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2215, N'18742', N'Kiptome Dispensary (Belgut)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2216, N'18741', N'Vipawa Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2217, N'18740', N'Green Valley Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2218, N'18739', N'Eagle Wings Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2219, N'18738', N'Aga Khan University Hospital -New Machakos Medical')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2220, N'18737', N'Lobei Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2221, N'18736', N'Huruma Medical Clinc')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2222, N'18735', N'Madaraka Health Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2223, N'18734', N'New Generation Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2224, N'18733', N'Makutano Medical Clinic (Meru)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2225, N'18732', N'Kenya Assemblies of God Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2226, N'18731', N'Meru Consultant Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2227, N'18730', N'Afya Medical Clinic (Meru)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2228, N'18729', N'Kefra Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2229, N'18728', N'Dr Muthuri Jj Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2230, N'18727', N'Umoja Medical Clinic (Imenti North)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2231, N'18726', N'Upendo Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2232, N'18725', N'Pedo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2233, N'18723', N'Diplomatic Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2234, N'18721', N'Kandaria Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2235, N'18720', N'House of Hope Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2236, N'18719', N'Everest Medical/Dental Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2237, N'18717', N'Slopes Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2238, N'18716', N'Dr Kiara Medical Clinic (Timau)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2239, N'18714', N'Mummy Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2240, N'18713', N'Pr Health Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2241, N'18712', N'Nazarene Sister''s Dispensary Rwarera')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2242, N'18711', N'Philia Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2243, N'18710', N'Tumaini Medical Clinic (Yatta)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2244, N'18709', N'Ruiri Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2245, N'18708', N'Path Care Kenya')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2246, N'18707', N'Mutindwa Clinic and Lab')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2247, N'18704', N'Tumaini Medical Clinic (Meru)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2248, N'18703', N'Gakoromone Health Care Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2249, N'18702', N'Mirigamieru Health Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2250, N'18701', N'Mayo Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2251, N'18699', N'Thuura Health Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2252, N'18698', N'Magana Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2253, N'18695', N'Khaburu Chemist (Ntima East)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2254, N'18691', N'Mercy Mission Medical Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2255, N'18690', N'Maria Salus Infirmorum Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2256, N'18689', N'Kikule Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2257, N'18686', N'Ngelani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2258, N'18676', N'Mastoo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2259, N'18673', N'Muthungue Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2260, N'18671', N'Aphia Disc 1 Nanyuki Transport')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2261, N'18670', N'Karimaini Community Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2262, N'18666', N'Bingwa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2263, N'18665', N'Lelaitich Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2264, N'18664', N'Koimiret Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2265, N'18662', N'Senate Health Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2266, N'18661', N'Assumption Sisters Mbooni Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2267, N'18660', N'Musoa SDA Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2268, N'18659', N'Florex Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2269, N'18658', N'Mundoro Community Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2270, N'18657', N'Village Hope Core International')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2271, N'18655', N'Philips Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2272, N'18653', N'Meru Eye Care Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2273, N'18651', N'Wajir Tb Manyatta Sub - District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2274, N'18648', N'Meru Lab Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2275, N'18647', N'Medicare Stores Chemist')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2276, N'18645', N'Friends Chemist')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2277, N'18643', N'Kithoka Chemist (Ntima East)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2278, N'18640', N'Johani Chemist')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2279, N'18639', N'Mmak''s Homecare Pharmacy')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2280, N'18635', N'Uzima Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2281, N'18634', N'Soceno Pharmacy')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2282, N'18633', N'Dr Kiome Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2283, N'18632', N'Eye Care Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2284, N'18631', N'Meridian Medical Centre (Meru)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2285, N'18630', N'Gababa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2286, N'18629', N'CID HQS Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2287, N'18628', N'Uthiru Muthua Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2288, N'18626', N'Beggs Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2289, N'18625', N'Mlimani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2290, N'18624', N'Lumino Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2291, N'18623', N'Premier Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2292, N'18622', N'Skyhill Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2293, N'18621', N'Uzima Medicare Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2294, N'18620', N'Kendi Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2295, N'18619', N'Vichabem Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2296, N'18618', N'Antodevi Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2297, N'18616', N'GK Prisons Medium Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2298, N'18614', N'Sumba Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2299, N'18613', N'Glory Health Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2300, N'18612', N'Fremo Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2301, N'18611', N'Lithi Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2302, N'18608', N'Gachororo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2303, N'18606', N'St Mark Medical Clinic (Shaabab)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2304, N'18604', N'Ngenia Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2305, N'18603', N'St Mary''s Mother & Child Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2306, N'18601', N'St Joseph Mission Dispensary Chumvini')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2307, N'18600', N'Salgaa Intergrated VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2308, N'18599', N'North Star Alliance VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2309, N'18598', N'PCEA Mwangaza Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2310, N'18597', N'Mercylight Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2311, N'18596', N'Kambu Model Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2312, N'18595', N'Shallom Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2313, N'18594', N'Joy Nursing Home and Maternity')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2314, N'18593', N'SDA Health Services Likoni Road Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2315, N'18592', N'Ravine Glory Health Care Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2316, N'18590', N'Lengo Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2317, N'18589', N'Laikipia University Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2318, N'18588', N'Bahari Medical Clinic Diani Beach')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2319, N'18585', N'Gertrudes Chidrens Clinic (Ongata Rongai)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2320, N'18584', N'Chemses Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2321, N'18582', N'Chesinende Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2322, N'18581', N'Mlolongo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2323, N'18580', N'Mosobeti Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2324, N'18579', N'Coping Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2325, N'18578', N'Thigirichi Mukui')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2326, N'18577', N'Kamujohn Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2327, N'18576', N'Mong''oni')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2328, N'18575', N'Kenya Assemblies of God Medical Clinic (Kag Naivas')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2329, N'18574', N'Strathmore University Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2330, N'18573', N'Pona Medical and Eye Care Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2331, N'18572', N'Royal Run Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2332, N'18571', N'Sasa Centre Naivasha (Drop In Service Centre-Disc)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2333, N'18569', N'Thaene Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2334, N'18568', N'Family Nursing Home and Maternity  ( Mwingi Central)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2335, N'18567', N'Kanzui Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2336, N'18566', N'Nzinia Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2337, N'18565', N'Mutanda Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2338, N'18564', N'Chianda Dispensary (Rarieda)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2339, N'18563', N'Chemwa Bridge Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2340, N'18560', N'Jeikei Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2341, N'18558', N'Kwihota Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2342, N'18557', N'Tumaini DiSC -  Asembo Bay')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2343, N'18556', N'Prescort Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2344, N'18555', N'Shalome Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2345, N'18554', N'Nazarene Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2346, N'18553', N'Marura Nursing Home (Ruiru)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2347, N'18551', N'Syokithumbi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2348, N'18550', N'Maseki Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2349, N'18549', N'Creadis Htc Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2350, N'18548', N'St Paul Kiamuri (ACK) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2351, N'18547', N'Rheno Medicare Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2352, N'18546', N'County Medical Centre - Embu Ltd')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2353, N'18545', N'Kasarani Medical Clinic Wote')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2354, N'18543', N'Hope Worldwide Kenya VCT (Makadara)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2355, N'18538', N'Leo Surgery')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2356, N'18536', N'Mukanga Dispensary (Muranga North)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2357, N'18535', N'Adventist Centre For Care and Support (Kilimani)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2358, N'18534', N'Pinnacle Health Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2359, N'18532', N'Bidii Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2360, N'18531', N'Koywech Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2361, N'18530', N'Ragwe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2362, N'18529', N'Kivani Dispensary (Kitui West)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2363, N'18527', N'Quarry VCT Ongata Rongai')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2364, N'18526', N'Kipyosit Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2365, N'18524', N'Kimuchul Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2366, N'18518', N'University of Nairobi Marps Project Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2367, N'18516', N'Kalulini Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2368, N'18515', N'St Raphael Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2369, N'18512', N'Itando Mission of Hope and Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2370, N'18511', N'Olturoto Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2371, N'18509', N'Masimba')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2372, N'18508', N'Kanyongonyo')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2373, N'18506', N'Kapisimba Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2374, N'18505', N'KEMRI Mimosa')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2375, N'18503', N'Tuungane Centre Awendo')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2376, N'18502', N'Tuungane Centre Rongo')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2377, N'18501', N'St Thomas The Apostle Athi Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2378, N'18497', N'Chepsire Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2379, N'18496', N'Pendo Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2380, N'18493', N'Hope Worldwide Htc Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2381, N'18492', N'Xposha VCT Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2382, N'18491', N'Namanga Wellness Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2383, N'18490', N'Shujaa Project Namanga')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2384, N'18489', N'Grace Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2385, N'18488', N'Jacaranda Special School')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2386, N'18486', N'Afya Health Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2387, N'18485', N'Ruaraka Uhai Neema Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2388, N'18484', N'Catholic Dispensary Kariobangi')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2389, N'18483', N'Christamarianne Medical Clinic (Suneka)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2390, N'18482', N'Mavueni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2391, N'18481', N'DRIC (Naivasha)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2392, N'18480', N'Mbuyu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2393, N'18478', N'Tumaini Medical Clinic (Kabaa)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2394, N'18477', N'St Pauline Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2395, N'18476', N'The Mater Hospital Thika Satellite')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2396, N'18475', N'Jamia Islamic Intergrated')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2397, N'18474', N'Cornerstone Medical Clinic (Nyeri Central)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2398, N'18473', N'Ngamwa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2399, N'18472', N'Flomed Med Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2400, N'18471', N'Shekina Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2401, N'18470', N'Levice Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2402, N'18468', N'Bar Hostess Empowerment Support Program VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2403, N'18467', N'Cheptarit Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2404, N'18465', N'St Clare Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2405, N'18464', N'Utawala Estate Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2406, N'18463', N'Mukuru Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2407, N'18462', N'Ndumoni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2408, N'18461', N'The Kitui Marternity and Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2409, N'18459', N'Savannah Likoni Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2410, N'18457', N'Derkale Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2411, N'18456', N'Impact Research-Tuungane (Nyando)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2412, N'18455', N'Westwood Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2413, N'18454', N'Likoni HIV Resource Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2414, N'18451', N'Mulimani Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2415, N'18450', N'KWS VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2416, N'18449', N'Kwa Mutalia Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2417, N'18448', N'What Matters Mission Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2418, N'18447', N'Moogi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2419, N'18446', N'Nyanturago Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2420, N'18445', N'Hessed Clinic Masiro')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2421, N'18444', N'Mufutu Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2422, N'18443', N'Child Welfare Society of Kenya Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2423, N'18442', N'Mbuni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2424, N'18441', N'Kitambaasye Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2425, N'18440', N'Afya Medical Clinic (Nakuru)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2426, N'18439', N'AIC Parkview Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2427, N'18438', N'Sunton CFW Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2428, N'18436', N'Oasis Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2429, N'18435', N'St Thomas Maternity')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2430, N'18433', N'Karibaribi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2431, N'18432', N'Makongeni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2432, N'18430', N'Magina Health Center')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2433, N'18428', N'Afya Nursing Home (Moyale)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2434, N'18427', N'University of Nairobi Staff Students Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2435, N'18426', N'Siala Kaduol')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2436, N'18425', N'Karbururi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2437, N'18424', N'Rawana Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2438, N'18423', N'Badan-Rero Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2439, N'18422', N'Oriang Kanyadwera Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2440, N'18421', N'Katolo-Manyatta Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2441, N'18420', N'Nyakweri Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2442, N'18418', N'Tesorie Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2443, N'18417', N'Mamboleo Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2444, N'18416', N'Ruma Youth Friendly VCT (Rarieda)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2445, N'18415', N'The Hope Medical Centre-Awasi')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2446, N'18414', N'Masaba Hospital Kisumu')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2447, N'18412', N'Nalis Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2448, N'18411', N'St John Medical Surgical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2449, N'18410', N'Maina Kiganjo Health Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2450, N'18409', N'St Veronica EDARP Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2451, N'18408', N'St John''s Community Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2452, N'18407', N'Just Meno Limited')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2453, N'18406', N'Real Healthcare Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2454, N'18405', N'St Christopher Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2455, N'18404', N'Al-Mumtaz Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2456, N'18403', N'Nep Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2457, N'18402', N'Penda Health Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2458, N'18401', N'Kitengela Centre of Hope Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2459, N'18398', N'Ajam VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2460, N'18397', N'Makyau Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2461, N'18396', N'Barding Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2462, N'18395', N'Getrude Embakasi Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2463, N'18394', N'Nairobi Earc St Anne Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2464, N'18393', N'3Kl Maternity & Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2465, N'18391', N'Mugutha (CDF) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2466, N'18389', N'Dreamline Medical Clinic Kamulu')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2467, N'18388', N'Divine Mercy Kariobangi')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2468, N'18387', N'Paradise Medical Centre (Dandora Area Iv)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2469, N'18386', N'Saika Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2470, N'18385', N'Kenya Association of Pofessional Counsellors (Kapc')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2471, N'18383', N'Wema Medical Clinic-Mshomoroni')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2472, N'18382', N'Afraha Maternity and Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2473, N'18381', N'Bargain Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2474, N'18379', N'Matutu Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2475, N'18378', N'Cdn VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2476, N'18376', N'PCEA Upendo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2477, N'18375', N'Restore Life Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2478, N'18374', N'Ziani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2479, N'18373', N'Helpers of Mary Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2480, N'18372', N'Advent Med & Dentist Care Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2481, N'18371', N'Meridian Medical Centre Nakuru')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2482, N'18367', N'Modaan Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2483, N'18365', N'Mutanda Community Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2484, N'18362', N'Khalala Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2485, N'18361', N'Eluche')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2486, N'18360', N'Ngiitakito Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2487, N'18359', N'Educational Assessment and Resource Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2488, N'18358', N'Kahaaro Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2489, N'18357', N'Kemsa Staff Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2490, N'18355', N'Nasiger Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2491, N'18354', N'Nakechichok Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2492, N'18352', N'University of Nairobi Centre of HIV Prevention and')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2493, N'18351', N'Meridian Medical Centre (Shimanzi/ganjoni)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2494, N'18350', N'Mwangaza Medical Clinic (Bakarani)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2495, N'18349', N'Mutithi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2496, N'18346', N'Kamukuywa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2497, N'18345', N'Uon Thika Drop In Centre Ii (Chivpr)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2498, N'18340', N'Igorera Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2499, N'18339', N'Gachua Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2500, N'18338', N'Nehemiah International Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2501, N'18337', N'Kabebero AIPCA Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2502, N'18336', N'Keragia Dispensary (Gucha)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2503, N'18335', N'True Light Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2504, N'18334', N'Unity Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2505, N'18333', N'Jacky Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2506, N'18332', N'Galmagalla Nomadic Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2507, N'18331', N'Kiembeni Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2508, N'18330', N'Mavindu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2509, N'18329', N'Children''s Support Centre Emurembe')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2510, N'18328', N'The Aga Khan University Hospital (Meru)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2511, N'18327', N'The Karen Hospital (Meru)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2512, N'18326', N'Rafiki Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2513, N'18324', N'Pumzika Medical Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2514, N'18323', N'Vostrum Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2515, N'18322', N'Partners In Prevention VCT Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2516, N'18321', N'Got Osimbo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2517, N'18320', N'Ligala Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2518, N'18319', N'Arimi Clinic and Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2519, N'18318', N'Pacific Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2520, N'18316', N'Kaunguni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2521, N'18315', N'Bukwala SDA Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2522, N'18314', N'Rongai Orthopaedics Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2523, N'18313', N'Corner Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2524, N'18312', N'Bura Health Centre Taita')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2525, N'18311', N'New Mtongwe Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2526, N'18307', N'Rosewo VCT Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2527, N'18305', N'St Patricks Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2528, N'18304', N'The Co-Operative University College of Kenya Dispe')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2529, N'18303', N'St Luke''s The Physician Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2530, N'18301', N'Kemri Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2531, N'18299', N'Narok University College Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2532, N'18294', N'Imani Yako Medical Clinic (Joska)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2533, N'18293', N'Kiban Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2534, N'18292', N'Matungulu Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2535, N'18291', N'Ahero Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2536, N'18290', N'Melkasons Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2537, N'18289', N'Mutunguru PCEA Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2538, N'18288', N'Grace Medical Clinic (Imenti South)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2539, N'18287', N'Ludomic Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2540, N'18286', N'Tom Mboyaschool Cp Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2541, N'18285', N'Tumaini Childrens Home Out Patient Clinic(Kisauni)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2542, N'18284', N'Ngatu CDF')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2543, N'18283', N'Wanganga Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2544, N'18282', N'Glovnet VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2545, N'18281', N'Sunbeam Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2546, N'18279', N'Mwafrika Institute of Development')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2547, N'18278', N'Healthways Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2548, N'18277', N'British American Tobacco Kenya Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2549, N'18272', N'Angaza VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2550, N'18271', N'Bristal Park Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2551, N'18267', N'Bomu Medical Centre (Mariakani)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2552, N'18266', N'Mediheal Hospital Nakuru')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2553, N'18265', N'Losho Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2554, N'18264', N'GOK Prison Siaya')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2555, N'18263', N'Dzanikeni Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2556, N'18261', N'Kenya Airports Employees Association')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2557, N'18260', N'Emali Model Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2558, N'18259', N'Riyadh Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2559, N'18258', N'Tasia Family Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2560, N'18257', N'Oloibon Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2561, N'18256', N'Mlolongo VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2562, N'18255', N'Ray Comprehensive Youth Centre (Kanco)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2563, N'18254', N'New Hope Community Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2564, N'18253', N'World Provision Centre VCT (Athi River)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2565, N'18252', N'Ngiini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2566, N'18251', N'Illikeek Oodupa Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2567, N'18250', N'Langi Kawino Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2568, N'18247', N'Milaani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2569, N'18246', N'Katothya Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2570, N'18245', N'Ndela Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2571, N'18244', N'Kaewa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2572, N'18243', N'Uzima Medical Clinic (Nandi Central)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2573, N'18239', N'Family Health Centre (Embu)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2574, N'18238', N'Ngong Rapha Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2575, N'18236', N'Cheboin Dispensary (Bureti)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2576, N'18234', N'Wendani Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2577, N'18233', N'Umoja VCT Centre Stand Alone')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2578, N'18230', N'Kauthulini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2579, N'18229', N'Wamboo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2580, N'18228', N'Kimathi University College Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2581, N'18227', N'Kagioini Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2582, N'18226', N'First Baptist Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2583, N'18225', N'Nyaweri Deaf VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2584, N'18224', N'Baraka Medical Clinic Kitengela')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2585, N'18223', N'Aga Khan Clinic Kitengela')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2586, N'18222', N'St John''s Community Clinic Njiru')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2587, N'18221', N'Ruai (SDA) Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2588, N'18220', N'Dandora Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2589, N'18219', N'St Alice (EDARP) Dandora')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2590, N'18217', N'Family Health Option of Kenya')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2591, N'18216', N'Kitum Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2592, N'18215', N'Ukuu MCK Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2593, N'18214', N'Woodshaven Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2594, N'18212', N'Kenya Ports Authority Staff Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2595, N'18211', N'Railway Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2596, N'18203', N'Wumiisyo Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2597, N'18202', N'Vegpro In House Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2598, N'18201', N'I Choose Life Africa')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2599, N'18200', N'Kalimoni Hospital (Ruiru)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2600, N'18197', N'Edkar Health Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2601, N'18195', N'Nairobi Women Hospital Ongata Rongai')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2602, N'18192', N'Neema Medical Clinic Kitengela')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2603, N'18191', N'Gertrudes Children Clinic (Kitengela)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2604, N'18190', N'St Paul''s Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2605, N'18189', N'Topcare Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2606, N'18188', N'Chepkoiyo')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2607, N'18187', N'Mahandakini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2608, N'18184', N'Ruiru Health Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2609, N'18183', N'Dr Sharma Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2610, N'18182', N'Dr Ogaro Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2611, N'18180', N'Blue Haven Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2612, N'18178', N'AAR Eldoret')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2613, N'18176', N'Sex Workers Outreach Program (Lang''ata)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2614, N'18174', N'Mbiri (ACK) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2615, N'18173', N'St Mary Magdalene Kanjuu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2616, N'18172', N'Life Water Ndege Mobile Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2617, N'18170', N'El Kambere Nomadic Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2618, N'18169', N'Athi Complex Community Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2619, N'18168', N'Kyazabe Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2620, N'18166', N'Wajir North Nomadic Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2621, N'18165', N'Emahene Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2622, N'18164', N'Walmer Eye Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2623, N'18162', N'Parayon Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2624, N'18159', N'Nunguni Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2625, N'18156', N'Noble Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2626, N'18148', N'Kapsang''ar Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2627, N'18147', N'Gitombani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2628, N'18146', N'Elis Medicare')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2629, N'18145', N'Sikusi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2630, N'18144', N'Wote Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2631, N'18143', N'Ponya Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2632, N'18142', N'Urafiki Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2633, N'18141', N'Vicodec Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2634, N'18140', N'Ponya Surgicals Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2635, N'18139', N'Makueni Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2636, N'18138', N'Sunshine Family Health Medicare Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2637, N'18136', N'Victoria Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2638, N'18135', N'Mercy Medical Clinic (Wote)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2639, N'18134', N'Eunik Highway Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2640, N'18133', N'Wote Health Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2641, N'18132', N'Mutini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2642, N'18131', N'Ngondu Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2643, N'18128', N'Rural Education and Environmental Program')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2644, N'18127', N'Mubwekas Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2645, N'18126', N'Busia Trailer Park Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2646, N'18121', N'Mombasa Roadside Wellness Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2647, N'18120', N'Buburi Community Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2648, N'18119', N'Cornestone Baptist Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2649, N'18118', N'Malkich Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2650, N'18116', N'PCEA Smyrna')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2651, N'18115', N'St Basil''s Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2652, N'18114', N'St Nicholas Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2653, N'18113', N'St Antony Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2654, N'18111', N'Nzoia Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2655, N'18110', N'Primarosa Flower Ltd')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2656, N'18108', N'Victoria Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2657, N'18106', N'Mathigu Road Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2658, N'18105', N'Transcon Wendo Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2659, N'18104', N'Mwisho Wa Lami Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2660, N'18103', N'Turi AIC Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2661, N'18102', N'Mutukanio ACK Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2662, N'18101', N'Kakamega Police Line VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2663, N'18100', N'Kakamega VCT Centre (Stand Alone)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2664, N'18099', N'Nadung''a Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2665, N'18098', N'Port Health Dispensary Lokichoggio')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2666, N'18097', N'Bondo University Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2667, N'18095', N'Matumbi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2668, N'18094', N'Shammah Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2669, N'18091', N'Namenya CFW Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2670, N'18090', N'Ukasi Model Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2671, N'18089', N'Eremit Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2672, N'18088', N'Oloosirkon Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2673, N'18086', N'Oriang'' Alwala Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2674, N'18085', N'Meridian Medical Centre Ongata Rongai')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2675, N'18084', N'Mariakani Cottage Hospital Ongatta Rongai')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2676, N'18083', N'Kyambiti Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2677, N'18081', N'Awendo Jiwdendi')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2678, N'18080', N'Gatunga Model Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2679, N'18079', N'Kaliakakya Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2680, N'18076', N'Ng''odhe Dispensary (Main Land)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2681, N'18075', N'Miorre Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2682, N'18073', N'Embomos Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2683, N'18071', N'Barsheba Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2684, N'18070', N'Napeikar Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2685, N'18068', N'Rosewood Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2686, N'18067', N'Alpha Community Health Clinic (Migori)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2687, N'18065', N'Kabirirsang Youth Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2688, N'18064', N'Kapchebwai Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2689, N'18063', N'Homa Bay Central Widows VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2690, N'18062', N'Upendo VCT Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2691, N'18061', N'Neema Hospital (Ruiru)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2692, N'18059', N'Provide Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2693, N'18056', N'Homebase Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2694, N'18053', N'Bondo Nyironge Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2695, N'18051', N'Nyawango Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2696, N'18050', N'Kopiata Beach Dispensary (Rarieda)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2697, N'18048', N'Liberty Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2698, N'18045', N'Soget Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2699, N'18044', N'Sahla Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2700, N'18043', N'Catholic Archdiocese of Mombasa CHBC & AIDS Relief')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2701, N'18041', N'The Haven Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2702, N'18040', N'Meditrust Health Care Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2703, N'18039', N'Asembo Bay Health Clinic (Rarieda)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2704, N'18032', N'Kiambu Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2705, N'18031', N'Elite Medical Clinic (Bungoma East)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2706, N'18030', N'Nkutuk Elmuget Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2707, N'18029', N'Thome Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2708, N'18028', N'Marie Stopes Clinic (Laikipia East)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2709, N'18023', N'Ichuga Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2710, N'18022', N'Highway Mediacl Clinic (Nyeri North)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2711, N'18021', N'Afya Njema Medical Clinic (Nyeri North)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2712, N'18020', N'Kihinga Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2713, N'18019', N'Sheikh Nurein Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2714, N'18018', N'Station Side Makupa Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2715, N'18017', N'St Peter''s Catholic Dispensary (Ng''onyi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2716, N'18014', N'Kiawa Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2717, N'18011', N'Sisto Mazoldi Dispensary (Rongai)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2718, N'18009', N'Algadir Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2719, N'18007', N'New Partners Initiative Scaling Up HIV and AIDS Pr')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2720, N'18006', N'Cargo Human Care Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2721, N'18005', N'South B Hospital Ltd')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2722, N'18004', N'Kilisa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2723, N'18003', N'Dr Eshtera Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2724, N'18002', N'Innoculation Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2725, N'18001', N'Prudent Medical Clinic Kariobangi')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2726, N'18000', N'Skymed Medical Clinic Githunguri')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2727, N'17999', N'Kimulot Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2728, N'17998', N'Rays International Clinic Kariobangi')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2729, N'17997', N'Dandora Health Service')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2730, N'17996', N'Precious Life Medical Clinic Ruai')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2731, N'17995', N'Karomo Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2732, N'17994', N'Namanjalala Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2733, N'17993', N'Soteni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2734, N'17992', N'Neema Medical Clinic (Muranga North)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2735, N'17990', N'Sirakaru Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2736, N'17989', N'St Anns Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2737, N'17988', N'Simboiyon Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2738, N'17986', N'Sango Natiri Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2739, N'17983', N'St Peters (ACK) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2740, N'17981', N'Jowama Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2741, N'17980', N'ACK Kanunga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2742, N'17979', N'Shalom Community Hospital (Athi River)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2743, N'17978', N'Calvary Family Health Care Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2744, N'17975', N'Tayabi Medical and Dental Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2745, N'17974', N'St Jude Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2746, N'17969', N'Taiba Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2747, N'17968', N'Thika Sasa Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2748, N'17961', N'Kaki Family Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2749, N'17960', N'Gil Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2750, N'17959', N'Sky Way Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2751, N'17958', N'Keega Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2752, N'17957', N'Sani Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2753, N'17956', N'Uzima VCT Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2754, N'17955', N'Nuru Lutheran Media Ministry')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2755, N'17953', N'Kiaibabu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2756, N'17952', N'New Hope VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2757, N'17951', N'Josma Medical Clinic (Kasarani)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2758, N'17950', N'Thika Road Health Services Ltd (Kasarani)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2759, N'17948', N'Kasarani Claycity Medical Centre (Kasarani)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2760, N'17945', N'Sos Medical Clinic (Eldoret East)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2761, N'17942', N'Githurai Liverpool VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2762, N'17939', N'Kyaango Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2763, N'17937', N'Vote Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2764, N'17935', N'Kiati Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2765, N'17933', N'St Joseph Nursing Home (Eastleigh North)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2766, N'17932', N'Rafiki Kenia (Private) Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2767, N'17931', N'Mirere Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2768, N'17930', N'St Pauls Ejinja Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2769, N'17929', N'Indangalasia Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2770, N'17928', N'Perani Private Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2771, N'17927', N'MCK Kiirigu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2772, N'17926', N'Homa Bay Community Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2773, N'17922', N'Catholic Mission Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2774, N'17921', N'PCEA Kibwezi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2775, N'17919', N'Kalimani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2776, N'17918', N'Iiani Dispensary (Kibwezi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2777, N'17917', N'Tumaini Maternity and Nursing Home (Kibwezi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2778, N'17916', N'Equity Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2779, N'17914', N'Tumaini Health Services (Makindu)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2780, N'17913', N'Kamunyange Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2781, N'17912', N'Kirathe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2782, N'17911', N'Kisauni Dispensary (Ziwa La Ng''ombe)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2783, N'17910', N'Engos Health Cente')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2784, N'17909', N'Thome Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2785, N'17906', N'World Provision VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2786, N'17905', N'Ray Youth Consortium VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2787, N'17904', N'Devki Staff Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2788, N'17903', N'Kmc Staff Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2789, N'17902', N'Madoadi Dispensary (Sololo)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2790, N'17899', N'Albilal Medical Clinic (Moyale)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2791, N'17893', N'Mzizima (CDF) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2792, N'17892', N'Zigira (Community) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2793, N'17891', N'Majira Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2794, N'17889', N'Withare Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2795, N'17887', N'Venoma Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2796, N'17886', N'Al-Amin Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2797, N'17885', N'Imani Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2798, N'17884', N'Serena Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2799, N'17883', N'Munyange Gikoe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2800, N'17882', N'Baraka Medical Clinic (Runyenjes)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2801, N'17881', N'Khalaba Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2802, N'17880', N'Sotik Town VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2803, N'17879', N'Huruma Medical Clinic (Kanja)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2804, N'17878', N'PCEA Mau-Summit Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2805, N'17877', N'G K Prisons (Thika)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2806, N'17872', N'Muuani Rural Health Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2807, N'17871', N'Baobab Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2808, N'17870', N'Burabor Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2809, N'17869', N'Hope Medical Clinic (Mariakani)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2810, N'17866', N'Tumaini Medical Clinic (Thika West)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2811, N'17863', N'Zaro Nursing Clinic (Likoni)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2812, N'17862', N'Mainland Health Centre (Changamwe)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2813, N'17860', N'Silibwet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2814, N'17859', N'Tendwet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2815, N'17854', N'Pona Services Opd')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2816, N'17853', N'Maloba Health Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2817, N'17852', N'Oyuma Dispensary (Rachuonyo)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2818, N'17851', N'Pona Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2819, N'17849', N'Vision Medical Clinic Butere')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2820, N'17847', N'Alliance Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2821, N'17846', N'International Medical Corps Mobile VCT (Mbita)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2822, N'17845', N'Uviluni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2823, N'17844', N'Mlolongo Wellness Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2824, N'17843', N'Gitaraka Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2825, N'17842', N'Kyaluma Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2826, N'17841', N'Waia Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2827, N'17839', N'Mbavani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2828, N'17838', N'Utangwa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2829, N'17837', N'Gituamba Community Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2830, N'17836', N'Goodwill Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2831, N'17834', N'Kanyenyaini ACK Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2832, N'17831', N'Kamuyu Dispensary (Kamakwa/mukaro)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2833, N'17830', N'Cheptigit Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2834, N'17829', N'Ngelel Tarit Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2835, N'17828', N'Santa Maria Medical Clinic (Kwale)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2836, N'17827', N'Sunshine Medical Clinic (Kwale)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2837, N'17826', N'J A Comenius Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2838, N'17825', N'Siloam Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2839, N'17824', N'Christ The Healer')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2840, N'17822', N'Miritini (MCM) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2841, N'17821', N'Kijani (Mirera) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2842, N'17819', N'Afya Bora Clinic (Mutomo)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2843, N'17818', N'Kiimani Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2844, N'17817', N'Ndakani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2845, N'17816', N'Muangeni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2846, N'17814', N'Nduu Ndune Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2847, N'17813', N'Enkongu Narok Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2848, N'17810', N'Kararia Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2849, N'17804', N'Nile Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2850, N'17802', N'Olchekut Community Based Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2851, N'17801', N'Taunet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2852, N'17797', N'Plesian Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2853, N'17795', N'Pakase Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2854, N'17793', N'Barut Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2855, N'17792', N'Miloreni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2856, N'17791', N'Ruguru Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2857, N'17790', N'Subati Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2858, N'17789', N'Montezuma Monalisa Funeral Home (Lang''ata)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2859, N'17785', N'Nkutuk Elmuget Dispensary (Duplicate)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2860, N'17783', N'Leshuta Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2861, N'17782', N'Chemwokter Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2862, N'17780', N'Salabwek Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2863, N'17778', N'Voo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2864, N'17774', N'Waso AIPCA Dispensary (Isiolo)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2865, N'17771', N'Karandini Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2866, N'17770', N'Akemo Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2867, N'17769', N'Chuka Unversity Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2868, N'17768', N'Dr L M Macharia Dental Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2869, N'17767', N'Tropical Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2870, N'17766', N'Kabururu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2871, N'17765', N'Singawa Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2872, N'17763', N'California Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2873, N'17762', N'Borehole Five Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2874, N'17759', N'Timbwani Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2875, N'17757', N'Baraka Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2876, N'17756', N'Kapkwen Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2877, N'17755', N'Lovic Dermacare Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2878, N'17752', N'Ngosuani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2879, N'17750', N'Ilkiremisho Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2880, N'17748', N'St Mary Medical Clinic Gatundu')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2881, N'17747', N'Good Shepherd Ang''iya')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2882, N'17746', N'Endoinyo Narasha')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2883, N'17745', N'Nembu Med')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2884, N'17744', N'Makoror Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2885, N'17742', N'Kiti Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2886, N'17741', N'St Michael Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2887, N'17739', N'Masii Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2888, N'17738', N'Nyarami VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2889, N'17737', N'Migori Health Station Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2890, N'17733', N'Bahati Medical Clinic Migori')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2891, N'17731', N'Brase Clinic and Eye Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2892, N'17730', N'Ensakia Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2893, N'17729', N'Junction Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2894, N'17728', N'GK Prison Dispensary (Migori)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2895, N'17727', N'Meridian Medical Donholm Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2896, N'17726', N'Osani Community Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2897, N'17725', N'Gertrude Komarock Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2898, N'17723', N'St Barkita Dispensary Utawala')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2899, N'17722', N'Kapchumbe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2900, N'17721', N'Frankstar Medical Clinic (Manga)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2901, N'17720', N'Lea Toto Community Mukuru Reuben')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2902, N'17719', N'EDARP Komarock Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2903, N'17718', N'Antubangai Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2904, N'17717', N'Komarock Morden Medical Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2905, N'17716', N'G S U Kinisa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2906, N'17715', N'Ndoleli MCK Dispensay')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2907, N'17714', N'Nyaore Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2908, N'17713', N'Mogonga Maternity and Nursing Home (Kenyenya)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2909, N'17712', N'Kenyenya Medical Centre (Kenyenya)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2910, N'17711', N'Ngeri Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2911, N'17709', N'Kiandiu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2912, N'17708', N'Ncooro Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2913, N'17707', N'Kibiru Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2914, N'17705', N'Arosa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2915, N'17704', N'Voi Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2916, N'17703', N'Voi Roadside Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2917, N'17700', N'Stops Medical Clinic Kenya Ltd')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2918, N'17698', N'New Chaani Healthcare Clinic & Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2919, N'17697', N'Mangani Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2920, N'17696', N'Central Medical Clinic and Labaratory (Changamwe)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2921, N'17695', N'Kajabdar Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2922, N'17694', N'Mpeketoni Health Sevices (Witu)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2923, N'17693', N'Sowa Medcal Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2924, N'17692', N'Mapenya Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2925, N'17691', N'New Mbita Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2926, N'17690', N'Young Generation Centre Dispensary (Med 25)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2927, N'17687', N'Viva Afya Kayole')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2928, N'17686', N'Susamed Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2929, N'17685', N'Imara Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2930, N'17684', N'Hope World Wide Kenya Mukuru Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2931, N'17683', N'St Raphael''s Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2932, N'17681', N'Manda Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2933, N'17680', N'Osieko Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2934, N'17679', N'Misikhu Medicalcclinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2935, N'17678', N'Rikenye Dispensary (Masaba)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2936, N'17677', N'Kenyenya Medical Clinic (Kenyenya)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2937, N'17676', N'ST Olivia Health Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2938, N'17675', N'Olive Health Care International')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2939, N'17674', N'Hema Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2940, N'17672', N'Mbaga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2941, N'17671', N'Oldoinyo Oibor Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2942, N'17670', N'Garissa Mother and Child Care Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2943, N'17669', N'Imani Medical Centre (Athi River)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2944, N'17667', N'Waye Godha Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2945, N'17666', N'Sololo Makutano Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2946, N'17664', N'Liverpool VCT (Machakos)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2947, N'17663', N'Discordant Couples of Kenya VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2948, N'17662', N'Pwani University College Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2949, N'17661', N'Mutethia Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2950, N'17660', N'Kama Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2951, N'17659', N'Gitathi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2952, N'17658', N'Marimanti Med Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2953, N'17657', N'The Mater Hospital Buruburu')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2954, N'17655', N'AIC Liten VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2955, N'17653', N'Lughpharm Medical Services (Machakos)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2956, N'17652', N'Masingu Health Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2957, N'17651', N'Msf Olympic Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2958, N'17649', N'Ap Buru Buru Disp')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2959, N'17648', N'Kadija Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2960, N'17647', N'Shafshafey Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2961, N'17646', N'Nyango Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2962, N'17645', N'Giithu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2963, N'17644', N'Lanyiru Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2964, N'17643', N'Kititu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2965, N'17642', N'Kapkibimbir Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2966, N'17641', N'Ngenybogurio Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2967, N'17640', N'Kamurguiywa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2968, N'17639', N'Koibem Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2969, N'17638', N'Kaptildil Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2970, N'17637', N'Kipsugur Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2971, N'17636', N'Chemokonja Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2972, N'17633', N'Kokwet Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2973, N'17632', N'Kapsabet Health Care Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2974, N'17631', N'Kapsirichoi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2975, N'17630', N'Seaside Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2976, N'17629', N'Cheplengu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2977, N'17628', N'Al Azhar Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2978, N'17627', N'Mombasa Polytechnic Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2979, N'17626', N'Kabwareng Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2980, N'17624', N'Amani VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2981, N'17622', N'Mbaraki Police VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2982, N'17621', N'Mombasa Medicare Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2983, N'17620', N'Reachout Center')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2984, N'17618', N'Jamia Mosque Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2985, N'17616', N'Kathaana Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2986, N'17615', N'Kawauni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2987, N'17614', N'Uamani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2988, N'17613', N'Miu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2989, N'17612', N'Kikuyuni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2990, N'17611', N'Kyevaluki Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2991, N'17610', N'Ikutha Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2992, N'17609', N'Blueturtle')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2993, N'17608', N'Luucho Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2994, N'17607', N'Ombo Bita Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2995, N'17606', N'Muthue Dispenary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2996, N'17605', N'Kimweli Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2997, N'17604', N'Mwengea Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2998, N'17603', N'Muamba Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (2999, N'17602', N'Kalambani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3000, N'17601', N'Monguni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3001, N'17600', N'Ekani Dispenasry')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3002, N'17599', N'Mikongoni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3003, N'17598', N'Yaathi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3004, N'17597', N'Mugomari Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3005, N'17596', N'Shinyalu Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3006, N'17595', N'Kabarnet Womens'' Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3007, N'17594', N'Rusinga Island of Hope Humanist Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3008, N'17592', N'Faith Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3009, N'17591', N'Seretut Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3010, N'17590', N'Kericho Youth Centre (Ainamoi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3011, N'17589', N'Live With Hope')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3012, N'17587', N'Oriang VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3013, N'17585', N'Integrated Development Fund (IDF) VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3014, N'17584', N'Yofak VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3015, N'17583', N'Mogonjet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3016, N'17582', N'AIC Ebenezer')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3017, N'17581', N'Manyatta Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3018, N'17580', N'Huruma Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3019, N'17579', N'Yaballo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3020, N'17577', N'Afya Bora Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3021, N'17576', N'St Joseph Brothers')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3022, N'17575', N'Solio Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3023, N'17574', N'Emmanuel Community Health Clinic (Mukurwe-Ini Central)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3024, N'17572', N'Aqua Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3025, N'17571', N'Kiarithaini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3026, N'17570', N'St John''s Dispensary (Kithoka)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3027, N'17569', N'Shekinah Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3028, N'17568', N'Mt Zion Mission Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3029, N'17566', N'Afya Medical Clinic (Munyaka)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3030, N'17565', N'Uzima Medical Clinic (Githamba)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3031, N'17564', N'Kiambogo Medical Clinic (Wanjohi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3032, N'17563', N'Care Medical Clinic (Geta Bush)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3033, N'17561', N'Amani Medical Clinic (Murungaru)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3034, N'17560', N'Njabini Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3035, N'17559', N'Amani Medical Clinic Magumu')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3036, N'17557', N'Engineer Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3037, N'17554', N'K-Met Corkran')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3038, N'17553', N'Kisumu International Airport Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3039, N'17552', N'Oloropil Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3040, N'17549', N'Sa/Ahf Kithituni Health Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3041, N'17548', N'EDARP Njiru Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3042, N'17546', N'Van Den Berg Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3043, N'17545', N'Kings Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3044, N'17544', N'Kentalya Farm Cilinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3045, N'17543', N'Wildfire Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3046, N'17542', N'Bethania Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3047, N'17541', N'Namunyak Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3048, N'17540', N'Lusop Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3049, N'17539', N'Likii VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3050, N'17537', N'Deteni Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3051, N'17536', N'Siwadhe Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3052, N'17535', N'Nyadhi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3053, N'17534', N'Kenyatta University Health Unit Mombasa Campus')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3054, N'17533', N'Karuoth Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3055, N'17532', N'Uhembo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3056, N'17531', N'Kabura Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3057, N'17530', N'Umer Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3058, N'17529', N'Matibabu Ukwala Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3059, N'17527', N'Kambare Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3060, N'17525', N'Lidha Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3061, N'17524', N'Ashburn Ohuru Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3062, N'17523', N'Mur Malanga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3063, N'17522', N'Future Life Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3064, N'17521', N'Randago Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3065, N'17519', N'Enanga Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3066, N'17518', N'Masogo Dispensary (Gem)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3067, N'17517', N'St Lawrence Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3068, N'17516', N'Gongo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3069, N'17515', N'Oding Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3070, N'17514', N'Mary Mission')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3071, N'17513', N'Njete Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3072, N'17512', N'Lihanda Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3073, N'17511', N'North Star Alliance Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3074, N'17510', N'Muga Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3075, N'17507', N'Musau Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3076, N'17504', N'Kema Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3077, N'17503', N'St Thadeus Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3078, N'17502', N'Mabanga Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3079, N'17501', N'Musco Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3080, N'17499', N'Kwa Mbekenya Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3081, N'17492', N'Kabarnet Faith Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3082, N'17491', N'Victory Revival Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3083, N'17490', N'Nazareth Hospital (Ruiru)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3084, N'17488', N'St Raphael Arch Medical')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3085, N'17486', N'12 Engineers')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3086, N'17484', N'Mariestopes')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3087, N'17483', N'Speak and Act')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3088, N'17481', N'Bonjoge Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3089, N'17480', N'Lochorekuyen Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3090, N'17479', N'Longech Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3091, N'17478', N'Naotin Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3092, N'17477', N'Kaitese Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3093, N'17476', N'Kangalita Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3094, N'17475', N'Kangirisae Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3095, N'17474', N'Provincial Police Hq VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3096, N'17473', N'ACK Tumaini Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3097, N'17472', N'Dakarh Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3098, N'17470', N'Soweto Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3099, N'17468', N'Kiamiriru MCK Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3100, N'17467', N'Nopri Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3101, N'17466', N'Mercy Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3102, N'17463', N'Lagboqol Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3103, N'17462', N'St Peter Orthodox Church Dispenasary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3104, N'17460', N'Kulaaley Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3105, N'17458', N'Njemuka Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3106, N'17454', N'Ngecha (PCEA) Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3107, N'17453', N'Faith Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3108, N'17450', N'Muthale East Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3109, N'17449', N'Kabati Maternity Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3110, N'17448', N'Kabati Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3111, N'17447', N'Musengo Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3112, N'17446', N'Hope Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3113, N'17445', N'AHF EMALI  Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3114, N'17444', N'PCEA Karungaru Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3115, N'17443', N'Kiima Kiu Health Care Services Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3116, N'17442', N'Vololo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3117, N'17441', N'Uvete Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3118, N'17440', N'St Stephen''s Children Clinic Gatondo')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3119, N'17439', N'Lieta Health Centre (Rarieda)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3120, N'17438', N'Wagoro Dispensary (Rarieda)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3121, N'17437', N'Rambugu Dispensary (Rarieda)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3122, N'17436', N'Uzima Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3123, N'17435', N'Keera Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3124, N'17434', N'Kariobangi South Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3125, N'17433', N'Katulye Dispensary-Nzaui')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3126, N'17432', N'Bethany Health Services Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3127, N'17431', N'AIC Kalamba Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3128, N'17430', N'Enzai Afya Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3129, N'17429', N'St Stephen''s Kiandagae (ACK) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3130, N'17428', N'Oljabet Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3131, N'17427', N'Mwea Dental Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3132, N'17426', N'Baraka Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3133, N'17425', N'Emmah Medial Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3134, N'17423', N'Gitura Dispensary-Kenol')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3135, N'17421', N'Giatutu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3136, N'17420', N'Wanyaga Community Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3137, N'17418', N'Chomei Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3138, N'17417', N'Kapkoi Disp')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3139, N'17414', N'Wananchi Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3140, N'17411', N'Mama Lucy Kibaki Hospital - Embakasi')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3141, N'17410', N'Mwikalikha Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3142, N'17409', N'Emalindi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3143, N'17408', N'Gitura Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3144, N'17406', N'St Stephen (ACK) Cura Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3145, N'17404', N'Uhuru Presitige Health Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3146, N'17402', N'Cura Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3147, N'17398', N'Women''s Guild (PCEA) Uplands Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3148, N'17396', N'Kiambaa Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3149, N'17395', N'Orthodox Maternity and Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3150, N'17394', N'Wema Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3151, N'17393', N'Huduma Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3152, N'17392', N'St Pery''s Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3153, N'17390', N'Southern Health Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3154, N'17389', N'Shree Cutchhi Leva Samaj Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3155, N'17385', N'Tumaini Medical Centre (Sarang''ombe)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3156, N'17384', N'Lang''ata Comprehensive Medical Service')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3157, N'17379', N'Mutiokiama Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3158, N'17377', N'Karanjee Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3159, N'17376', N'Victoria Sub District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3160, N'17375', N'Sharom Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3161, N'17373', N'Renguti (PCEA) Women''s Guild Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3162, N'17372', N'Primary Health Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3163, N'17371', N'Tumaini Clinic (Kiambu West)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3164, N'17365', N'Gichagini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3165, N'17364', N'Heritage Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3166, N'17363', N'Most Precious Blood Sisters Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3167, N'17362', N'St Angela Melici Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3168, N'17357', N'Ningaini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3169, N'17355', N'Jowhar Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3170, N'17354', N'Hargal Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3171, N'17353', N'Dunto Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3172, N'17352', N'Barnet Memorial Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3173, N'17347', N'Rikendo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3174, N'17346', N'Makande Healthcare Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3175, N'17345', N'Ndege Oriedo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3176, N'17344', N'Kolwal Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3177, N'17343', N'Piny Owacho Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3178, N'17342', N'Midida Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3179, N'17339', N'Maalimin Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3180, N'17337', N'Ilan Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3181, N'17336', N'Hagarbul Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3182, N'17335', N'Afwein Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3183, N'17334', N'Cheptangulgei Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3184, N'17333', N'Muchatha Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3185, N'17332', N'Kengen Staff Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3186, N'17331', N'Sugoi A Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3187, N'17330', N'Neema Medical Clinic (Huruma)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3188, N'17328', N'Chemamit Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3189, N'17327', N'Keyian SDA Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3190, N'17325', N'Ndamama Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3191, N'17324', N'Shartuka Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3192, N'17321', N'Kapune Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3193, N'17320', N'Entargeti Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3194, N'17319', N'Chemegong')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3195, N'17318', N'Kapkures Dispensary (Kericho)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3196, N'17317', N'Kapchanga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3197, N'17316', N'Kiplelgutik Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3198, N'17314', N'Gechiriet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3199, N'17313', N'Kapsiya')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3200, N'17310', N'Chepsoo')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3201, N'17309', N'Mungaria Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3202, N'17308', N'Kalyongwet')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3203, N'17307', N'Kinyona Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3204, N'17305', N'Gatiaini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3205, N'17304', N'Ruona Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3206, N'17303', N'Mairi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3207, N'17302', N'Bararget Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3208, N'17301', N'Kaplamai Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3209, N'17299', N'Kiplobotwo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3210, N'17298', N'Lukoye Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3211, N'17297', N'Mabole Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3212, N'17295', N'Jesmah CFW Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3213, N'17293', N'Kapkelei')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3214, N'17292', N'Dr J K Kimani')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3215, N'17290', N'Kamboo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3216, N'17289', N'Garseyqoftu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3217, N'17287', N'Mboroga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3218, N'17284', N'Kapkessum Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3219, N'17282', N'Chororget Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3220, N'17281', N'Epkee Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3221, N'17277', N'Muruangai Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3222, N'17276', N'Lpartuk Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3223, N'17275', N'Lesidai Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3224, N'17274', N'Angata Nanyokie Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3225, N'17273', N'Baawa Community Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3226, N'17272', N'Emeroka Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3227, N'17271', N'Sagala Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3228, N'17270', N'Bensu Health Care Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3229, N'17269', N'Mt Zion Community Health Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3230, N'17268', N'Kakutha Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3231, N'17267', N'Seth Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3232, N'17266', N'Meru Technical Training College Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3233, N'17261', N'Kamuchege Dispensary (Kamburu)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3234, N'17260', N'Mbau-Ini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3235, N'17256', N'Mavivye Model Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3236, N'17255', N'Tarakwa Dispensary (Eldoret West)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3237, N'17254', N'Kaptoror Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3238, N'17253', N'Githambo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3239, N'17252', N'St Jude Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3240, N'17251', N'Meswo Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3241, N'17250', N'Rwamburi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3242, N'17249', N'Napeitom Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3243, N'17247', N'Sironoi SDA Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3244, N'17246', N'Loperot Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3245, N'17245', N'Okook Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3246, N'17243', N'Reale Hospital Eldoret')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3247, N'17242', N'Kamolo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3248, N'17241', N'Itumbule Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3249, N'17237', N'Trinity Githiga (ACK) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3250, N'17233', N'Maweni CDF Dispensary (Kongowea)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3251, N'17232', N'Kerobo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3252, N'17231', N'Kalimapus Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3253, N'17230', N'El-Ram Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3254, N'17229', N'El-Golicha Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3255, N'17226', N'Ngarendare Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3256, N'17221', N'Enesampulai Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3257, N'17220', N'Ziwa SDA')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3258, N'17218', N'I Choose Life Baraton')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3259, N'17217', N'Eshikulu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3260, N'17216', N'Katheri Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3261, N'17214', N'Kiija Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3262, N'17213', N'Nthungululu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3263, N'17212', N'Kamahindu (AIC) Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3264, N'17211', N'Nandi Hills Doctors Scheme Association Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3265, N'17210', N'Ketitui Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3266, N'17209', N'Kamasega Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3267, N'17203', N'St Anthony Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3268, N'17201', N'Kamirithu Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3269, N'17198', N'Kimlea Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3270, N'17196', N'Lokaburu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3271, N'17193', N'Bituyu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3272, N'17191', N'Murindoku Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3273, N'17190', N'Bahai Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3274, N'17189', N'Lolmolog Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3275, N'17187', N'Soko Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3276, N'17186', N'Kadokony Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3277, N'17185', N'Al -Arbrar Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3278, N'17184', N'Emesc Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3279, N'17183', N'Uradi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3280, N'17182', N'Givole Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3281, N'17180', N'Rehema Children Medical Clinic Lodwar')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3282, N'17177', N'Sironoi GOK Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3283, N'17176', N'Tiryo Dispensary (Nandi Central)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3284, N'17175', N'Sunga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3285, N'17174', N'Lwala Kadawa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3286, N'17173', N'Onyinjo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3287, N'17172', N'Kolenyo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3288, N'17171', N'Kuoyo Kaila Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3289, N'17170', N'Tala Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3290, N'17169', N'St Luke Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3291, N'17165', N'Ikonzo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3292, N'17164', N'Embu-Mbeere Hospice')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3293, N'17162', N'Musingini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3294, N'17161', N'Kyasioni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3295, N'17158', N'Bukhalalire Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3296, N'17157', N'Masendebale Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3297, N'17156', N'Bukalama Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3298, N'17155', N'Lwanyange Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3299, N'17154', N'Kiplombe Dispensary (Koibatek)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3300, N'17152', N'Kapkoris Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3301, N'17151', N'Simotwet Dispensary ( Koibatek)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3302, N'17150', N'Malaha Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3303, N'17149', N'Hakati Dspensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3304, N'17148', N'Sipili Maternity and Nursing Home (Ol-Moran)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3305, N'17147', N'Kikumini Dispensary (Makueni)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3306, N'17145', N'Lkuroto Dispensary ((Maralal))')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3307, N'17144', N'Cheronget')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3308, N'17143', N'Samutet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3309, N'17142', N'St Annes Health Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3310, N'17141', N'St Peters Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3311, N'17139', N'Kapsuser')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3312, N'17138', N'Kapsoit')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3313, N'17137', N'Nyabangi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3314, N'17135', N'Robinson Medical Clinic (Manga)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3315, N'17134', N'Magombo Community Dispensary (Manga)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3316, N'17133', N'Eshirembe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3317, N'17132', N'Mwea Diabetes / Hypertension Community Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3318, N'17131', N'Chebilat Dispensary (Nandi South)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3319, N'17130', N'Kaptien Community Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3320, N'17129', N'Mitunguu Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3321, N'17127', N'Manoa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3322, N'17124', N'Pefa Mercy Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3323, N'17123', N'Sinai Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3324, N'17122', N'Ngeteti Community Health Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3325, N'17121', N'Mama Plister Blair Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3326, N'17120', N'Shelemba')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3327, N'17118', N'Holo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3328, N'17117', N'Nalondo Health Centre (Model)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3329, N'17116', N'Luuya Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3330, N'17115', N'Moigutwo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3331, N'17111', N'Mashambani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3332, N'17110', N'Koru Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3333, N'17108', N'Masol Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3334, N'17105', N'Kaonyweni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3335, N'17104', N'Kwa Mwatu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3336, N'17102', N'Kibiryokwonin Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3337, N'17101', N'Rondonin Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3338, N'17100', N'Kalabata Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3339, N'17099', N'Kipsogon Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3340, N'17098', N'Kamar Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3341, N'17097', N'Ng''endalel Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3342, N'17096', N'Waseges Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3343, N'17094', N'Tinganga Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3344, N'17093', N'Sugumerga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3345, N'17092', N'Sachora Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3346, N'17091', N'Kipkitur Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3347, N'17089', N'Kalamene Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3348, N'17088', N'Kibias Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3349, N'17087', N'Kabiyet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3350, N'17085', N'Belgut Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3351, N'17083', N'Kembu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3352, N'17082', N'Nyaporo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3353, N'17080', N'Wayu Boru')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3354, N'17078', N'Haroresa')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3355, N'17077', N'Roka')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3356, N'17075', N'Bura Nomadic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3357, N'17071', N'Rei Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3358, N'17070', N'Grace Medical Care Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3359, N'17069', N'Yala Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3360, N'17067', N'Antubochiu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3361, N'17065', N'Kangeta G K Prison Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3362, N'17063', N'Dry''s Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3363, N'17062', N'Amwamba Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3364, N'17061', N'Mbugiti Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3365, N'17060', N'Kiarutara Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3366, N'17059', N'Ithangarari Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3367, N'17058', N'Gathanji Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3368, N'17055', N'Mwingi Medicare Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3369, N'17053', N'Ilchalai Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3370, N'17051', N'Siruti Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3371, N'17050', N'Angaga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3372, N'17049', N'Kaiani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3373, N'17048', N'Parua Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3374, N'17047', N'Chesupet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3375, N'17046', N'Dubai Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3376, N'17045', N'Wakor Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3377, N'17043', N'Kapsait Dispensary (Pokot South)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3378, N'17040', N'Kenya Medical Training College Lodwar')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3379, N'17039', N'Ombo Kowiti Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3380, N'17038', N'Koloo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3381, N'17037', N'Glory Ministry Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3382, N'17036', N'St John''s Nyabite')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3383, N'17035', N'Burduras Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3384, N'17034', N'Location Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3385, N'17033', N'Muruku Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3386, N'17032', N'Unison Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3387, N'17029', N'Segera Mission Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3388, N'17028', N'Kimuri Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3389, N'17027', N'Sitatunga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3390, N'17026', N'Kambe Kikomani Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3391, N'17024', N'Cheptingwich Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3392, N'17023', N'Kaboi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3393, N'17022', N'Toretmoi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3394, N'17021', N'Menengai Health Care Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3395, N'17020', N'Taito Community Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3396, N'17019', N'Kapkomoi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3397, N'17018', N'Chesongo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3398, N'17017', N'Kokotoni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3399, N'17015', N'Maragi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3400, N'17014', N'Kipkoror Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3401, N'17013', N'Cheptilil Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3402, N'17011', N'Bulla Mzuri Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3403, N'17010', N'Kuno Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3404, N'17009', N'Abdisamad Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3405, N'17008', N'Health Bridge Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3406, N'17006', N'Dagahley Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3407, N'17005', N'Kyalilini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3408, N'17004', N'Mikuyuni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3409, N'17003', N'Kiraone Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3410, N'16999', N'Muruguru Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3411, N'16997', N'Zombe Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3412, N'16995', N'St Joseph Kavisuni Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3413, N'16994', N'Kanzau Dispensary (Mbitini)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3414, N'16993', N'Syathani (Kyathani) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3415, N'16992', N'Nzangathi health centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3416, N'16991', N'Katulani Sub District Hospital (Kitui)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3417, N'16988', N'Nyangweta Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3418, N'16987', N'Asumbi Annex Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3419, N'16986', N'Nyalkinyi (Jersey) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3420, N'16985', N'Oneno Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3421, N'16984', N'Motonto Dispensary (Sameta)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3422, N'16983', N'Hope Compassionate (ACK) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3423, N'16982', N'Mongorisi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3424, N'16981', N'Riakinaro Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3425, N'16980', N'Kenyambi Health Centre (Nyamira)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3426, N'16979', N'Emusire Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3427, N'16978', N'St Peters Gaitheri (ACK) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3428, N'16977', N'Prisca Wakarima (ACK) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3429, N'16976', N'Gaturi Catholic Parish Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3430, N'16975', N'Eburi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3431, N'16974', N'Bokimai Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3432, N'16973', N'Openda Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3433, N'16972', N'Miangeni Dispensary (Makueni)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3434, N'16971', N'Kagunduini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3435, N'16970', N'Mariaini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3436, N'16969', N'Katipanga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3437, N'16968', N'Mbuini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3438, N'16967', N'Kyenzenzeni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3439, N'16965', N'Kyau Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3440, N'16963', N'Yekanga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3441, N'16962', N'Kambimawe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3442, N'16961', N'Kaia Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3443, N'16960', N'Kee Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3444, N'16959', N'Kithuni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3445, N'16958', N'Ikalyoni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3446, N'16957', N'Itithini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3447, N'16956', N'Mwaani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3448, N'16955', N'Nthimbani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3449, N'16954', N'Nthangu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3450, N'16953', N'Waso Rongai Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3451, N'16952', N'Kumahumato Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3452, N'16936', N'Mulinde Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3453, N'16935', N'Ngiluni Dispensary (Mwingi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3454, N'16934', N'Itoloni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3455, N'16933', N'Kwa Kavoo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3456, N'16931', N'Kanyekini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3457, N'16929', N'Nzauni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3458, N'16928', N'Kasevi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3459, N'16927', N'Mathyakani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3460, N'16926', N'Kilulu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3461, N'16925', N'Wikithuki Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3462, N'16924', N'Muliluni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3463, N'16923', N'Nduu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3464, N'16922', N'Ndunduni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3465, N'16921', N'Kiliku Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3466, N'14455', N'Endebess District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3467, N'16853', N'Gikuuri Dispensary (CDF)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3468, N'16838', N'Gatimbi Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3469, N'16874', N'Almacy Medical  Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3470, N'16854', N'Kaathari Dispensary (CDF)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3471, N'16843', N'Juzippos Health Care Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3472, N'16806', N'Lereshwa Dispensary (Kipipiri)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3473, N'16877', N'Nyandiwa Baptist Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3474, N'16855', N'Kasafari Dispensary (CDF)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3475, N'16836', N'Royal Clinic & Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3476, N'16849', N'Kithaku Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3477, N'16802', N'Jonalifa Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3478, N'16820', N'Turi (PCEA) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3479, N'16825', N'Kibirichia Medcare')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3480, N'16875', N'Lombi Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3481, N'16847', N'Good Hope Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3482, N'16796', N'AAR Clinic Sarit Centre (Westlands)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3483, N'16801', N'Al-Gadhir Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3484, N'16798', N'Mawamu Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3485, N'16803', N'Gatina United Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3486, N'16815', N'Lord of Mercy Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3487, N'16800', N'Lea Toto Clinic (Westlands)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3488, N'16821', N'St Lukes (Molo)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3489, N'16852', N'Gaatia Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3490, N'16880', N'Nyabiosi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3491, N'16881', N'Nyagichenche (SDA) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3492, N'16868', N'Kerumbe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3493, N'16816', N'Narumoru Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3494, N'16867', N'Ematiha Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3495, N'16858', N'Nguuni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3496, N'16862', N'Kalatine Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3497, N'16864', N'Ngongoni Dispensary (Kyuso)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3498, N'16863', N'Mukong''a Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3499, N'16793', N'Hungai Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3500, N'16814', N'Kiandutu Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3501, N'16882', N'St Jones &Ring Road Health Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3502, N'16878', N'Nyamagiri Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3503, N'16822', N'Mercy Dispensary (Lare)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3504, N'16799', N'Gichago Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3505, N'16859', N'Thonzweni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3506, N'16865', N'Musembe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3507, N'16807', N'Munyaka Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3508, N'16857', N'Regional Blood Transfusion Centre (Embu)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3509, N'16812', N'Neboi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3510, N'16870', N'St Jane Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3511, N'16872', N'Apex Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3512, N'16795', N'Nairobi Womens Hospital Adams')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3513, N'16808', N'Wachoro Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3514, N'16826', N'Right Choice Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3515, N'16866', N'Avarende Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3516, N'16876', N'Nyaoga Community Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3517, N'16835', N'Njuthine Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3518, N'16879', N'Itembu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3519, N'10375', N'Jesmond (ACK) Dispensary (Mburi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3520, N'10229', N'Gatugura Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3521, N'15264', N'Muyengwet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3522, N'10555', N'Kiang''ombe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3523, N'10388', N'Kabare Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3524, N'10565', N'Kianyaga Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3525, N'16446', N'PCEA Gateway')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3526, N'10232', N'Gatumbi (SDA) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3527, N'16349', N'Emc Kimumu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3528, N'10504', N'Karumandi  Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3529, N'13852', N'Ng''iya Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3530, N'13795', N'Mawego Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3531, N'14437', N'Elgeyo Boader Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3532, N'10197', N'Gaciongo Dispensary (Kirinyaga)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3533, N'10545', N'Kiamutugu Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3534, N'10458', N'Kamweti Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3535, N'10379', N'Joshua Memorial Mbai Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3536, N'10002', N'Aberdare Medical & Surgical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3537, N'12218', N'Katethya Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3538, N'11088', N'Tewas Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3539, N'10795', N'Muthuthiini Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3540, N'16447', N'Safi Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3541, N'10206', N'Gatamu Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3542, N'11168', N'Wanduta Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3543, N'10108', N'Diana Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3544, N'10754', N'Mukarara Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3545, N'12089', N'Imani Yako Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3546, N'10611', N'Kimondo Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3547, N'10835', N'Ndonyero Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3548, N'11137', N'Upendo Medical Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3549, N'10811', N'Mweiga Rural Health Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3550, N'13377', N'Jaribu Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3551, N'10142', N'Dr Mulingwa')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3552, N'11944', N'Salem Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3553, N'15734', N'Top Station Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3554, N'11181', N'Wellness Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3555, N'10908', N'Obeys Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3556, N'10106', N'Delina Health Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3557, N'10074', N'Boore Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3558, N'10710', N'Mayos Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3559, N'10707', N'Mathingira Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3560, N'10882', N'Njika Wega Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3561, N'10022', N'Alpha Family Health Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3562, N'10297', N'Good Samaritan Health Services (Kirinyaga)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3563, N'10879', N'Njambi Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3564, N'13888', N'Nyalenda Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3565, N'10121', N'Dr Gachiri')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3566, N'10144', N'Dr Mwangi Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3567, N'10325', N'Hope Medical Clinic (Kirinyaga)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3568, N'10680', N'Manjo Health Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3569, N'10356', N'Itara Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3570, N'10341', N'Ihururu Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3571, N'10792', N'Muthinga Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3572, N'11154', N'Waihara Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3573, N'16774', N'Faith Medical Clinic (Nyeri South)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3574, N'12371', N'Kituneni Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3575, N'11109', N'Tonys Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3576, N'11102', N'Thunguri Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3577, N'11028', N'St Austine Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3578, N'16088', N'Ojm Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3579, N'14037', N'Rapcom Nursing and Maternity Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3580, N'14489', N'St Faith Medical Clinic (Kimana)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3581, N'10137', N'Dr Muhiu Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3582, N'11077', N'Subuku Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3583, N'11298', N'Danrose Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3584, N'10921', N'Othaya Medical Services Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3585, N'11863', N'Tumaini Medical Cl Dzitsoni')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3586, N'12771', N'St Philomena Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3587, N'10784', N'Muruguru Medical Clinic (Nyeri South)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3588, N'10352', N'Iriaini Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3589, N'10721', N'Mercy Medical Clinic (Othaya)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3590, N'11091', N'Thangathi Health Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3591, N'10812', N'Mwendwa Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3592, N'16508', N'Mwea Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3593, N'11015', N'Soldier Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3594, N'16132', N'Sonak Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3595, N'15803', N'Apostles Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3596, N'10557', N'Kiangai Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3597, N'15880', N'Equator Nursing and Maternity Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3598, N'16347', N'Burnt Forest Rhdc (Eldoret East)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3599, N'10998', N'Samkim Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3600, N'15806', N'Bay Way Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3601, N'10612', N'Kimunyu (PCEA) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3602, N'10628', N'Kirichu Market Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3603, N'10185', N'Fr Baldo Cath Disp')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3604, N'11867', N'Ukunda Diani Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3605, N'10320', N'Holy Family Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3606, N'16500', N'Genesis Community Bamako Initiative')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3607, N'15962', N'Luanda Mch/Fp Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3608, N'16186', N'Dagamra Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3609, N'11131', N'Ukweli Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3610, N'10803', N'Muwa M Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3611, N'11413', N'Hongwe Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3612, N'12770', N'St Paul Medical Clinic (Makutano)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3613, N'11622', N'Mission K Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3614, N'16516', N'Ahadi Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3615, N'16039', N'Mummy''s Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3616, N'12574', N'Mumbuni Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3617, N'12066', N'Ismc')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3618, N'10677', N'Mamuki Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3619, N'11150', N'Vision Medical Clinic (Naromoru/kiamathaga)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3620, N'11912', N'Oasis Medical Center')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3621, N'16505', N'M K M Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3622, N'11624', N'Mivumoni (Catholic) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3623, N'11651', N'Mrima (Catholic) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3624, N'10767', N'Mundoro Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3625, N'11400', N'Godo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3626, N'12473', N'Marsabit Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3627, N'10284', N'Gitwe Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3628, N'10442', N'Kamakwa Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3629, N'12113', N'Josan Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3630, N'16776', N'Sugarbaker Memorial Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3631, N'11192', N'Zawadi Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3632, N'10313', N'Heshima Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3633, N'10914', N'Oljororok Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3634, N'10899', N'Nyeri High School Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3635, N'10380', N'Joskae Clinic Kibingoti')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3636, N'11235', N'Bakarani Maternity and Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3637, N'14134', N'Suna Nursing and Maternity Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3638, N'11712', N'Ngathini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3639, N'11105', N'Time Health Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3640, N'14529', N'Gloria Health Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3641, N'10917', N'Pollen Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3642, N'10844', N'Neema Medicare Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3643, N'15782', N'Winners Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3644, N'10935', N'Phase Ten Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3645, N'10947', N'Prime Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3646, N'15438', N'Ongata Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3647, N'16225', N'Kaithe Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3648, N'10497', N'Karinga Mission')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3649, N'10760', N'Mukurwe (PCEA) Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3650, N'16509', N'Olive Health Care/Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3651, N'10553', N'Kiandu Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3652, N'12552', N'Mugas Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3653, N'10228', N'Gatugi Mission Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3654, N'10956', N'Rehema Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3655, N'10370', N'Jamii Medical Clinic (Gatundu)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3656, N'10585', N'Kigongo Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3657, N'10054', N'Bcj Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3658, N'10296', N'Good Samaritan (ACK) Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3659, N'10697', N'Marua Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3660, N'13070', N'Marura Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3661, N'14430', N'Elburgon Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3662, N'10524', N'Khilna Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3663, N'10769', N'Mungu Aponya Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3664, N'10804', N'Mwangaza Medical Clinic (Thika)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3665, N'14487', N'X-Cellent Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3666, N'15460', N'Peka Maga Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3667, N'12952', N'Getrude Donholm Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3668, N'12835', N'Uzima Medical Clinic (Imenti South)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3669, N'16634', N'Timau Integrated Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3670, N'12958', N'Coni Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3671, N'12949', N'Genessaret Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3672, N'12915', N'Delta Medical Clinic Dandora')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3673, N'12873', N'Aski Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3674, N'10578', N'Kibutha Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3675, N'10934', N'Phase 7 Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3676, N'10939', N'Pilot Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3677, N'10595', N'Kihoya Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3678, N'15504', N'Rusana Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3679, N'13011', N'Kasarani Maternity')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3680, N'13776', N'Marie Stopes Nursing Home (Kisumu)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3681, N'10997', N'Samaritan Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3682, N'16267', N'Chemin Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3683, N'16256', N'Alfa Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3684, N'13554', N'Firmview Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3685, N'10377', N'Jirani Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3686, N'11145', N'Uzima Medical Clinic (Thika)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3687, N'13835', N'Mv Patel Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3688, N'13520', N'Central Clinic (Kisumu East)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3689, N'13490', N'Avenue Health Care Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3690, N'16751', N'New Hope Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3691, N'10364', N'Jaima Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3692, N'10036', N'Arcade Medical Clinic (Ruiru)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3693, N'12034', N'Gatunga Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3694, N'16659', N'Furqan Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3695, N'16621', N'New Southlands Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3696, N'16622', N'New Southlands Med Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3697, N'16596', N'Marble Medical Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3698, N'16264', N'Omwabo Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3699, N'11110', N'Trans-Saharan Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3700, N'16747', N'Ithanga Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3701, N'12060', N'Highway Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3702, N'16746', N'Mercy Afya Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3703, N'11000', N'Sawa Medical Consultants')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3704, N'10135', N'Dr Maina')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3705, N'16758', N'Queen of Peace Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3706, N'16757', N'Penta Flowers Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3707, N'11188', N'Wote Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3708, N'10955', N'Redland Roses Ltd Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3709, N'13508', N'Bondo Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3710, N'16685', N'St James Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3711, N'14266', N'Bonzina Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3712, N'16750', N'Trinity Clinic (Ruiru)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3713, N'10966', N'Royal Medical Clinic (Thika)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3714, N'13033', N'Kikoshep Kenya (Mugumoini)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3715, N'12221', N'Kathande Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3716, N'16626', N'Optician Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3717, N'16637', N'Tumaini Medial Clinic (Miriga Mieru West)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3718, N'11193', N'Zena Roses Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3719, N'16639', N'Tumaini Medical Clinic Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3720, N'16640', N'Upendo Medical Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3721, N'16597', N'Mayo Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3722, N'16623', N'Nica Kaunjira Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3723, N'16642', N'Wananchi Health Services Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3724, N'12106', N'Jambu Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3725, N'16304', N'Sunrise Medical Clinic (Mandera East)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3726, N'10205', N'Garrissa Highway Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3727, N'16305', N'Tawakal Medical Clinic (Mandera East)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3728, N'16641', N'Wananchi Health Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3729, N'16635', N'Town Clinic Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3730, N'16308', N'Amal Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3731, N'16594', N'Makutano Medical Clinic/Lab')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3732, N'16592', N'Kirogine Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3733, N'16615', N'Mutindwa Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3734, N'16602', N'Meru Dental Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3735, N'16624', N'Ntima Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3736, N'16617', N'Myopic Eye Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3737, N'16618', N'Nehema Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3738, N'16682', N'Tonymed Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3739, N'16600', N'Meru Consultants')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3740, N'16224', N'Kaithe Stage Medcare Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3741, N'16605', N'Meru Medical /ENT Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3742, N'16604', N'Meru Dignostic / Laboratory Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3743, N'16603', N'Meru Diagnostic Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3744, N'16587', N'Kaithe Stage Medcare')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3745, N'16601', N'Meru Consultants Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3746, N'16588', N'Kamuti Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3747, N'16599', N'Meru Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3748, N'16598', N'Mayo Medical Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3749, N'16608', N'Meru Medical Plaza Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3750, N'16581', N'Imenti X-Ray Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3751, N'16585', N'Jamii Medical Clinic (Meru)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3752, N'16576', N'Huruma Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3753, N'16573', N'Generation Medical Clinic/Lab')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3754, N'16616', N'Mutindwa Med Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3755, N'16571', N'General Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3756, N'16568', N'Eastern Medical Consultants')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3757, N'16562', N'Dorjos Health Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3758, N'16595', N'Marble Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3759, N'16570', N'Gakoromone Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3760, N'12885', N'Blue House Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3761, N'11901', N'Wema Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3762, N'13269', N'Afya Medical Clinic (Garissa)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3763, N'13263', N'Iftin Medical and Lab Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3764, N'12173', N'Kangaru Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3765, N'11099', N'Thuita Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3766, N'10273', N'Githurai Community Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3767, N'11005', N'Shammah Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3768, N'11017', N'Somo Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3769, N'11012', N'Simbi Roses Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3770, N'11002', N'Shalom Medical Clinic (Thika)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3771, N'10367', N'James Clinic and Lab Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3772, N'10384', N'Joyland Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3773, N'10747', N'Mugumo-Ini Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3774, N'15450', N'Osotua Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3775, N'16306', N'Bullampya Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3776, N'12350', N'Kithatu Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3777, N'12324', N'Kinoro Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3778, N'11155', N'Wairungu Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3779, N'12380', N'Kmc Clinic Mwichune')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3780, N'16319', N'Times Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3781, N'12076', N'St John Baptist Ikalaasa Mission Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3782, N'10126', N'Dr Kariuki')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3783, N'16297', N'Banadir Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3784, N'10640', N'Kirwara Health Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3785, N'11133', N'Umoja Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3786, N'12671', N'Ntemwene Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3787, N'12669', N'Ntharene Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3788, N'12535', N'Mitunguu Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3789, N'16557', N'Almed Health Products')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3790, N'10080', N'Canan Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3791, N'16301', N'Northern Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3792, N'10010', N'Afya Medical Clinic (Muranga North)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3793, N'10032', N'Annex Medical Clinic (Muranga North)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3794, N'10626', N'Kiriaini Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3795, N'14552', N'Huruma Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3796, N'12925', N'Dr MOHamed Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3797, N'12491', N'Maua Cottage')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3798, N'13215', N'St Mary''s Medical Clinic (Umoja II)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3799, N'16168', N'Revival Home Based Care Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3800, N'12890', N'Canaan Health Providers (Nairobi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3801, N'12861', N'AAR City Centre Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3802, N'11194', N'AAR Medical Services (Docks)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3803, N'12863', N'AAR Thika Road Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3804, N'11482', N'Kingstone Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3805, N'12068', N'Ideal Medical Clinic (Kangundo)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3806, N'12111', N'Jordan Medical Clinic (Kangundo)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3807, N'16303', N'Paramount Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3808, N'10092', N'Christian Community Services Clinic Base Kerugoya')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3809, N'15877', N'Emukaya Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3810, N'16155', N'Upendo Clinic (Navakholo)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3811, N'12348', N'Kisukioni Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3812, N'12746', N'St David''s Health Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3813, N'11809', N'St Ann''s Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3814, N'11716', N'Nguuni Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3815, N'11710', N'New Road Medical Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3816, N'11771', N'Sau Health Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3817, N'11937', N'Athi River Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3818, N'12055', N'Hardship Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3819, N'12632', N'Nairobi Pathologist Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3820, N'11435', N'Joint Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3821, N'11403', N'Gorofani Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3822, N'11386', N'Geca Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3823, N'11815', N'St Grace Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3824, N'11606', N'Michaela Denis Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3825, N'11287', N'Chizi Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3826, N'11259', N'Bomu Medical Centre (Likoni)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3827, N'12065', N'Huruma Medical Clinic (Kangundo)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3828, N'12946', N'Gaimu Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3829, N'16441', N'Bona Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3830, N'12924', N'Dr Aziz Mohamed Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3831, N'14129', N'Star Maternity & Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3832, N'11487', N'Kisauni Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3833, N'11979', N'Crossroad Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3834, N'11767', N'Samba Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3835, N'16519', N'Pendo Medical Clinic (Kinango)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3836, N'16520', N'Samburu Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3837, N'16518', N'Kinango Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3838, N'12310', N'Kilawani Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3839, N'11948', N'Bethsaida Medical Clinic (Kangundo)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3840, N'11664', N'Mtangani Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3841, N'11668', N'Mtondia Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3842, N'12704', N'Pona Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3843, N'16184', N'Bombululu Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3844, N'14504', N'Loltulelei Friends Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3845, N'12040', N'Gitaru Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3846, N'12527', N'Milimani Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3847, N'11755', N'Rea Vipingo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3848, N'12983', N'Imperial Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3849, N'11661', N'Mt Harmony Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3850, N'11458', N'Kemri Staff Clinic and VCT Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3851, N'11217', N'Amani Medical Clinic (Kilifi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3852, N'12999', N'Kaloleni Health Servics')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3853, N'12784', N'Tala Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3854, N'11773', N'Sevani Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3855, N'13199', N'St Bridget''s Mother & Child')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3856, N'13083', N'Medicare Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3857, N'13066', N'Marie Stopes Clinic (Pangani)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3858, N'13065', N'Marie Stopes Clinic (Kencom)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3859, N'12209', N'Kasilili Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3860, N'13451', N'Wajir Bor Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3861, N'11209', N'Al Riyadh Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3862, N'11234', N'Bahari Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3863, N'13040', N'Landmawe Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3864, N'12908', N'Dabliu Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3865, N'12936', N'Emmaus Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3866, N'13079', N'Mayflower Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3867, N'12440', N'Machakos Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3868, N'13102', N'Mundoro Medical Clinic Dandora')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3869, N'13106', N'Mwatate Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3870, N'13142', N'Pine Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3871, N'13170', N'Ruai Community Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3872, N'13176', N'Samaritan Medical Services (Dandora)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3873, N'13198', N'St Begson Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3874, N'13211', N'St Jude''s Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3875, N'11611', N'Mikanjuni Family Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3876, N'11218', N'Amani Medical Clinic (Likoni)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3877, N'13038', N'Komarock Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3878, N'13251', N'Wamunga Health Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3879, N'13252', N'Wangu Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3880, N'11152', N'Wahundura Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3881, N'11943', N'Baraka Afya Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3882, N'11440', N'Joy Medical Clinic (Jomvu)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3883, N'12790', N'Embu Children Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3884, N'16575', N'Huduma Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3885, N'16638', N'Tumaini Medical Clinic (Buuri)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3886, N'11781', N'Shalom Health Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3887, N'11471', N'Kikambala Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3888, N'12726', N'Samaritan Health Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3889, N'12463', N'Mama Ken Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3890, N'11828', N'St Valeria Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3891, N'11849', N'Thureya Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3892, N'11856', N'Travellers Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3893, N'13222', N'St Patrick Health Care Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3894, N'11540', N'Mainview Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3895, N'11516', N'Latulla Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3896, N'11376', N'Freedom Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3897, N'11530', N'Mackinnon Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3898, N'13094', N'Mkunga Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3899, N'11571', N'Marikebuni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3900, N'12137', N'Kakululo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3901, N'10099', N'Comrade Nurising Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3902, N'10690', N'Marie Stopes Nursing Home (Muranga)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3903, N'12825', N'Upendo Clinic (Imenti North)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3904, N'10475', N'Kanyenyaini Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3905, N'11175', N'Warazo Medical Clinic (Ruiru)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3906, N'16569', N'Filhia Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3907, N'10529', N'Kiairegi Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3908, N'10678', N'Manesh Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3909, N'12715', N'Ros Megg Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3910, N'11772', N'Savana Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3911, N'12753', N'St Joseph Medical Clinic (Kangundo)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3912, N'13531', N'Daraja Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3913, N'10779', N'Murarandia Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3914, N'11919', N'Afya Bora Clinic (Meru South)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3915, N'11431', N'Jericho Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3916, N'11408', N'Hekima Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3917, N'11370', N'Family Medical Centre (Kisauni)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3918, N'11198', N'Adu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3919, N'16612', N'Muguna West Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3920, N'13763', N'Mama Fridah Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3921, N'10523', N'Kesma Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3922, N'12117', N'K K Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3923, N'11153', N'Waiganjo Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3924, N'16632', N'Ruiri Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3925, N'13664', N'Kehancha Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3926, N'11106', N'Times Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3927, N'11095', N'Tevica Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3928, N'16630', N'Pr Medical Clinic (Buuri)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3929, N'13762', N'Mama Caro Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3930, N'11938', N'Azimio Medical Clinic (Meru South)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3931, N'13571', N'Getontira Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3932, N'13610', N'Huduma Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3933, N'12672', N'Ntha Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3934, N'12116', N'K K Chogoria Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3935, N'13512', N'Border Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3936, N'16322', N'Maralal Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3937, N'13615', N'Ikerege Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3938, N'12158', N'Kamacabi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3939, N'10604', N'Akshar Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3940, N'10201', N'Gakira Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3941, N'11270', N'Canaan Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3942, N'12735', N'Siloam Mediacl Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3943, N'11245', N'Baraka Medical Clinic (Vikwatani)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3944, N'11786', N'Shiloh Nursing Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3945, N'13100', N'Mukuru Crescent Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3946, N'12577', N'Mundu Ta Mundu Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3947, N'11465', N'Kibokoni Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3948, N'16321', N'Alpha Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3949, N'12667', N'Nkubu Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3950, N'16261', N'Moshi Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3951, N'16311', N'Bismillahi Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3952, N'15157', N'Mau Summit Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3953, N'13715', N'Komomange Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3954, N'12335', N'Kirin Agribio (Yoder) Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3955, N'15052', N'Loitokitok Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3956, N'14494', N'Fatima Maternity Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3957, N'11336', N'Dr Kariuki R F Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3958, N'11454', N'Kanamai Health Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3959, N'13002', N'Kapu Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3960, N'12639', N'Nduva Na Mwene Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3961, N'16552', N'Ukunda Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3962, N'11922', N'Air Port Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3963, N'16532', N'Bakarani Community Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3964, N'12992', N'Juhudi Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3965, N'11506', N'Kwa Ndomo Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3966, N'12439', N'Machakos Health Care Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3967, N'16537', N'Corner Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3968, N'12809', N'Tumaini Rh Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3969, N'11233', N'Badria Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3970, N'12826', N'Upendo Medical Clinic (Kitui)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3971, N'12464', N'Mama Vero Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3972, N'14201', N'Amboseli Serena Lodge Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3973, N'15436', N'Oltukai Lodge Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3974, N'11731', N'Palani Health Care Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3975, N'14061', N'Royal Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3976, N'11851', N'Timboni Community Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3977, N'11911', N'Yeshua Medical')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3978, N'11205', N'Memon Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3979, N'10695', N'Martmerg Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3980, N'10881', N'Njemuka Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3981, N'10660', N'Lilian Wachuka Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3982, N'12522', N'Micii Mikuru Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3983, N'14113', N'St Jude''s Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3984, N'11793', N'Shukrani Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3985, N'12581', N'Muriri Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3986, N'11902', N'Wema Centre Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3987, N'13185', N'Shepherds Medical Clinic Maringo')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3988, N'11371', N'Family Medical Centre (Malindi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3989, N'10161', N'Ebenezer Medical Clinic (Thika)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3990, N'12756', N'St Joy Afya Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3991, N'11783', N'Shanzu Teachers College Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3992, N'12731', N'Shalom Medical Clinic (Embu)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3993, N'14567', N'Illasit Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3994, N'16528', N'Subira Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3995, N'11556', N'Malindi Care Services Limited')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3996, N'14955', N'Kkit Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3997, N'11670', N'Mtopanga Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3998, N'11759', N'Royal Health Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (3999, N'16526', N'St Bennedticto Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4000, N'11597', N'Medina Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4001, N'11855', N'Town Centre Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4002, N'11360', N'Dzitsoni Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4003, N'11736', N'Pendo Medical Clinic (Kilindini)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4004, N'11564', N'Marereni Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4005, N'11362', N'Ebenezer Medical Clinic (Malindi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4006, N'11623', N'Mission Medical Clinic (Bahari)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4007, N'11707', N'Neema Medical Clinic (Malindi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4008, N'11226', N'Ashraf Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4009, N'11232', N'Azimio Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4010, N'11008', N'Shwak Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4011, N'15297', N'Namelok Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4012, N'13876', N'Nyagoto Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4013, N'11824', N'St Peter''s Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4014, N'10740', N'Mt Sinai Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4015, N'11313', N'Dr Awimbo E Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4016, N'11314', N'Dr Bernad M Oduor Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4017, N'12260', N'Kavisuni Health Care Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4018, N'11358', N'Dr Yunus Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4019, N'16541', N'Kuze Health Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4020, N'12773', N'Tereza D''Lima Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4021, N'11632', N'David Kariuki Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4022, N'11678', N'Muyeye Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4023, N'11528', N'Maamba Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4024, N'11364', N'Egah Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4025, N'11696', N'Mwawesa Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4026, N'11921', N'Afya Njema Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4027, N'12367', N'Kitui Quality Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4028, N'11791', N'Shree Cuteh Sat Sanf Swaminara')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4029, N'14934', N'Kipture Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4030, N'12243', N'Rehoboth Maternity Nursing Home(Mwingi North)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4031, N'10383', N'Joy Town Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4032, N'11864', N'Tumaini Medical Clinic (Kilindini)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4033, N'11796', N'Siloam Medical Clinic (Malindi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4034, N'12352', N'Kithayoni Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4035, N'16536', N'Community Medical Centre (Kongowea)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4036, N'16534', N'Bombolulu Staff Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4037, N'16551', N'Tawakal Medical Clinic (Msambweni)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4038, N'11858', N'Trinity Medical Clinic (Kilindini)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4039, N'11816', N'St Hillarias Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4040, N'11425', N'Jambo Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4041, N'11424', N'Jambo Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4042, N'11807', N'Sparki Health Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4043, N'16442', N'Genesis Medicare')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4044, N'12408', N'Kyanzavi Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4045, N'11721', N'Nyali Health Care Limited')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4046, N'12450', N'Makadara Health Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4047, N'11870', N'Upendo Health Care Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4048, N'12474', N'Mary Goretti Health Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4049, N'11719', N'Nuru Health Care Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4050, N'11935', N'Athi River Community Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4051, N'15442', N'Opiroi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4052, N'12833', N'Utugi Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4053, N'11992', N'EAPC Kigumo Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4054, N'14137', N'Sunrise Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4055, N'15748', N'Tumaini Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4056, N'15888', N'Family Health Care Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4057, N'12707', N'Premier Medical Clinic (Kitui)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4058, N'11352', N'Dr Safdar S Saeed Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4059, N'13078', N'Mathare Police Depot')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4060, N'11450', N'Kahada Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4061, N'16550', N'St Joseph Maledi Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4062, N'16185', N'Bengo Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4063, N'11808', N'St Andrews Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4064, N'11372', N'Family Medical Centre (Mombasa)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4065, N'11913', N'Ziwa La Ng''ombe Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4066, N'11423', N'Jaffery Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4067, N'11402', N'Gongoni Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4068, N'16548', N'Mwachande Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4069, N'16250', N'St Michael Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4070, N'14138', N'Swindon Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4071, N'13637', N'K- Met Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4072, N'14122', N'St Norah''s Clinc')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4073, N'13169', N'EDARP Ruai Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4074, N'13977', N'Olps Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4075, N'13829', N'MTC Clinic (Kisumu)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4076, N'10425', N'Kahuro Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4077, N'11975', N'Ciama Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4078, N'11375', N'Family Health Options Kenya (FHOK) Mombasa')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4079, N'14125', N'St Ruth Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4080, N'10952', N'Ramos Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4081, N'13599', N'Happy Magwagwa Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4082, N'12710', N'Redeemed Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4083, N'16663', N'Tuungane Youth Centre (Kisumu East)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4084, N'13801', N'Medicare Medical Clinic (Manga)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4085, N'10033', N'Annunciation Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4086, N'12679', N'Ntonyiri Health Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4087, N'11207', N'Al-Agsa Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4088, N'11048', N'St Mary (ACK) Dispensary (Ngariama)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4089, N'16244', N'Galilee Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4090, N'15153', N'Matasia Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4091, N'14065', N'Samora Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4092, N'10006', N'Afya Link Ngurubani Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4093, N'11030', N'St Charles Lwanga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4094, N'12624', N'Mwendwa Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4095, N'13553', N'Family Saver Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4096, N'12533', N'Mitunguu Ccs Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4097, N'12067', N'Ichomba Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4098, N'11954', N'Bright Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4099, N'12725', N'Salama Dawa Health Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4100, N'16412', N'Mau-Narok Health Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4101, N'13819', N'Mokason Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4102, N'10561', N'Kiangwenyi Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4103, N'10242', N'Genesis Clinic (Kirinyaga)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4104, N'14443', N'Emmaus Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4105, N'13500', N'Bekam Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4106, N'10422', N'Kahuhia (ACK) Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4107, N'13534', N'Disciples of Mercy Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4108, N'13767', N'Manga Getobo Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4109, N'12224', N'Kathangariri (ACK) Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4110, N'11775', N'Skans Health Care Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4111, N'11682', N'Mwachinga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4112, N'10418', N'Kahatia Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4113, N'12897', N'Cidi Mukuru Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4114, N'14127', N'St Vincent Clinic (Kisumu East)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4115, N'11627', N'Mkang''ombe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4116, N'10433', N'Kairo Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4117, N'13774', N'Marie Stopes Clinic (Kisii)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4118, N'12899', N'Crescent Medical Aid Murang''a Road')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4119, N'16662', N'Liverpool VCT (Kisumu East)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4120, N'14396', N'Consolata Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4121, N'12614', N'Muutine Med Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4122, N'12629', N'Mwonge Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4123, N'11031', N'St David Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4124, N'16307', N'Drugmart Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4125, N'13661', N'Kegati Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4126, N'16257', N'Ogembo Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4127, N'15705', N'Tamough Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4128, N'12278', N'Kianjokoma (ACK) Trinity Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4129, N'11939', N'B/Valley (PCEA) Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4130, N'13132', N'Ofafa I Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4131, N'12969', N'Hono Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4132, N'13007', N'Kariokor Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4133, N'11446', N'Kaderboy Medical Clinic (Old Town)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4134, N'11679', N'Mvita Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4135, N'13163', N'Rhodes Chest Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4136, N'16565', N'Dr Ngatia''s Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4137, N'10098', N'Complex Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4138, N'16760', N'Joytown Special School')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4139, N'14115', N'Jamii Clinical Services Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4140, N'13151', N'Provide International Clinic (Kayole)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4141, N'13793', N'Matoso Health Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4142, N'12021', N'Frontier Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4143, N'12971', N'Provide International Mutindwa Umoja Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4144, N'11123', N'Tumutumu Community Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4145, N'13861', N'Nyabite Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4146, N'11021', N'St Andrews Kabare (ACK) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4147, N'13718', N'Kopanga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4148, N'16243', N'Dr Amardeep Singh Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4149, N'12869', N'Alice Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4150, N'12883', N'Biafra Lions Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4151, N'13175', N'Salama Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4152, N'11239', N'Bamburi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4153, N'16754', N'Thika High School For The Blind')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4154, N'10488', N'Karatina Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4155, N'15160', N'Mauche Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4156, N'10102', N'Cura (ACK) Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4157, N'14598', N'Joppa Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4158, N'13613', N'Igare Medical Clinic (Sameta)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4159, N'12900', N'Crescent Medical Aid (Pangani)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4160, N'16749', N'Partners In Prevention')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4161, N'11741', N'Port Reitz MTC Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4162, N'13148', N'Provide Internatinal Clinic (Dandora)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4163, N'16668', N'Drop Inn Ray Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4164, N'12889', N'Cana Family Life Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4165, N'16755', N'Thika Primary School For The Blind Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4166, N'12843', N'Watoto Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4167, N'13004', N'The Karen Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4168, N'10109', N'Difathas Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4169, N'11519', N'Light For Christ Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4170, N'14117', N'St Luke''s Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4171, N'10522', N'Kerugoya Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4172, N'13970', N'Ojele Memorial Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4173, N'13247', N'Victory Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4174, N'13257', N'Wentworth Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4175, N'10819', N'Naidu Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4176, N'13090', N'Metropolitan Hospital Nairobi')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4177, N'12758', N'St Lucy''s Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4178, N'12965', N'Guru Nanak Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4179, N'13202', N'St Francis Com Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4180, N'13158', N'Radiant Pangani Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4181, N'13014', N'Kayole Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4182, N'13465', N'Aga Khan Hospital (Kisumu)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4183, N'16236', N'Meru university Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4184, N'12228', N'Kathelwa Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4185, N'13669', N'Kengen Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4186, N'13181', N'SGRR Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4187, N'16759', N'Mangu High School Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4188, N'15600', N'Enkitok Joy Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4189, N'16661', N'Dunga Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4190, N'15463', N'Pioneer Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4191, N'11434', N'Jocham Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4192, N'12110', N'Jordan Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4193, N'12730', N'Shalom Community Hospital (Machakos)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4194, N'11381', N'Galana Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4195, N'11203', N'Aga Khan Hospital (Mombasa)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4196, N'13086', N'Melchezedek Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4197, N'12986', N'Jamii Medical Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4198, N'13042', N'Langata Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4199, N'14073', N'Sega Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4200, N'13109', N'Meridian Equator Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4201, N'13115', N'Nairobi West Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4202, N'13618', N'Inuka Hospital & Maternity Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4203, N'16543', N'Nyali Children Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4204, N'13098', N'Mp Shah Hospital (Westlands)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4205, N'12950', N'Gertrudes Childrens Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4206, N'14064', N'Sagam Community Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4207, N'11734', N'Pandya Memorial Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4208, N'14101', N'St Akidiva Memorial Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4209, N'13241', N'Umoja Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4210, N'10089', N'Charity Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4211, N'13156', N'Pumwani Maternity Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4212, N'14103', N'St Camillus Mission Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4213, N'10806', N'Mwea Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4214, N'12867', N'Aga Khan Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4215, N'13150', N'Provide International Korogocho')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4216, N'13000', N'Kamiti Prison Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4217, N'12587', N'Muthale Mission Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4218, N'11972', N'Chuka Cottage Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4219, N'11225', N'Mrs - 77 Artillery Battallion (Mariakani)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4220, N'14017', N'Port Florence Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4221, N'13856', N'Nightingale Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4222, N'13680', N'Keumbu Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4223, N'13925', N'Nyangena Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4224, N'13087', N'Memorial Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4225, N'14028', N'Ram Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4226, N'11573', N'Mary Immaculate Cottage Hospital (Mombasa)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4227, N'13218', N'St Mary''s Mission Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4228, N'13074', N'The Mater Hospital Mukuru')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4229, N'10378', N'Jkuat Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4230, N'13095', N'Moi Air Base Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4231, N'13493', N'Bama Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4232, N'12230', N'Kathiani District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4233, N'11468', N'Kiembeni Community')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4234, N'11643', N'Mombasa Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4235, N'15008', N'Lanet Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4236, N'11541', N'Majengo Dispensary (Mombasa)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4237, N'12545', N'Moyale Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4238, N'13527', N'Christamarianne Mission Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4239, N'11600', N'Mewa Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4240, N'12303', N'St Theresa Kiirua Hospital (Kiirua)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4241, N'13781', N'Maseno Mission Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4242, N'16030', N'Mukumu Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4243, N'10698', N'Mary Help of The Sick Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4244, N'13913', N'Nyamira Maternity and Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4245, N'12984', N'Jamaa Mission Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4246, N'10825', N'Nazareth Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4247, N'12769', N'St Orsola Mission Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4248, N'10890', N'Nyahururu District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4249, N'11977', N'Cottolengo Mission Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4250, N'14139', N'Tabaka Mission Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4251, N'13515', N'Bosongo Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4252, N'13603', N'Hema Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4253, N'10603', N'Kikuyu (PCEA) Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4254, N'10916', N'Olkalou Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4255, N'12492', N'Maua Methodist Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4256, N'12743', N'St Ann Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4257, N'11432', N'Jibana Sub District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4258, N'13476', N'Ambira Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4259, N'16316', N'Sumoiyot Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4260, N'12976', N'Huruma Nursing Home & Maternity')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4261, N'11896', N'Watamu Maternity and Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4262, N'10936', N'Phatholab Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4263, N'10091', N'Chemat For Health Solutions Kamweti')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4264, N'10575', N'Kiburu Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4265, N'10316', N'Hezeman Afya Bora')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4266, N'11108', N'Tom King''s Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4267, N'11054', N'St Mary Laboratory (Mwea)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4268, N'10608', N'Kimbimbi Medical Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4269, N'10850', N'New Line Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4270, N'15482', N'Rehema Dental Health')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4271, N'10179', N'Family Dental Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4272, N'16781', N'Dr P K Kapombe Dental Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4273, N'11976', N'Consolata Hospital (Nkubu)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4274, N'12739', N'Sololo Mission Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4275, N'11774', N'Sayyida Fatimah Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4276, N'12734', N'Sikh Temple Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4277, N'13864', N'Nyabondo Mission Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4278, N'11843', N'Tawfiq Muslim Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4279, N'10427', N'Kahuru Dispensary (Nyeri North)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4280, N'14833', N'Kericho Municipal Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4281, N'16503', N'Kiangai Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4282, N'13174', N'Rural Aid VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4283, N'13187', N'Single Mothers Association of Kenya (Smak)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4284, N'16507', N'Mugumo Clinic/Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4285, N'13059', N'Makkah Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4286, N'13050', N'Liverpool VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4287, N'13075', N'Mathare 3A (EDARP)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4288, N'12875', N'Babadogo (EDARP)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4289, N'13235', N'Teachers Service Commission')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4290, N'13262', N'Zinduka Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4291, N'13119', N'NASCOP VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4292, N'12957', N'Githurai VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4293, N'12906', N'Corner Stone')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4294, N'13025', N'Kesha VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4295, N'11132', N'Ultra Sound & X-Ray Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4296, N'10898', N'Nyeri Health Care X Ray Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4297, N'16492', N'Apha Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4298, N'10057', N'Bens Labs')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4299, N'15493', N'Rongai Diagnstic Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4300, N'10797', N'Mutira Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4301, N'12240', N'Kathyaka Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4302, N'14575', N'Industrial Area Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4303, N'10308', N'Kahawa Wendani Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4304, N'13013', N'Kenya AIDS Vaccine Initiative (KAVI)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4305, N'13120', N'New Life Home Childrens Home (Kilimani)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4306, N'13131', N'Nyumbani Diagnostic Laboratory and Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4307, N'12907', N'Cotolengo Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4308, N'10514', N'Kenwa-Nyeri')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4309, N'10900', N'Nyeri Hospice')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4310, N'16739', N'Glory Medical Clinic (Kangundo)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4311, N'16740', N'Plateau Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4312, N'16741', N'Uvoosyo Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4313, N'10035', N'Rescue Centre (Thika)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4314, N'10723', N'Metro Optician')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4315, N'13045', N'Lea Toto')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4316, N'13108', N'Nairobi Deaf (Liverpool)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4317, N'13048', N'Lea Toto Kibera')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4318, N'13046', N'Lea Toto Dagoretti')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4319, N'13188', N'Sokoni Arcade VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4320, N'13206', N'St Johns Ambulance')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4321, N'13233', N'Supkem (Liverpool)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4322, N'13031', N'Kie/Kapc')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4323, N'12994', N'Kabete Barracks Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4324, N'11280', N'Changamwe Maternity')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4325, N'11515', N'Langoni Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4326, N'11676', N'Muhaka Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4327, N'15717', N'Tenduet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4328, N'11891', N'Wananchi Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4329, N'11436', N'Jomvu Model Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4330, N'13575', N'Girango Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4331, N'13513', N'Boro Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4332, N'13632', N'Jalaram Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4333, N'14098', N'Sori Lakeside Nursing and Maternity Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4334, N'16037', N'Matungu Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4335, N'14133', N'Sumba Community Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4336, N'12146', N'Kalandini Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4337, N'12745', N'St Assisi Sisters of Mary Immaculate Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4338, N'11156', N'Waka Maternity Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4339, N'10662', N'Limuru Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4340, N'11071', N'St Teresa Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4341, N'15732', N'Tom Mboya Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4342, N'15844', N'Kakamega Central Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4343, N'13973', N'Okitta Maternity Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4344, N'16062', N'Nala Maternity and Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4345, N'15464', N'Plateau Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4346, N'14693', N'Kapchemogen Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4347, N'11673', N'Mtwapa Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4348, N'13068', N'Marie Stopes Nursing Home (Eastleigh)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4349, N'13260', N'Woodstreet Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4350, N'13993', N'Oruba Nursing and Maternity Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4351, N'12266', N'Kawiria Maternity Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4352, N'13403', N'Mandera Medicare Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4353, N'13307', N'Blue Light Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4354, N'10691', N'Mariine Maternity Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4355, N'10162', N'Eddiana Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4356, N'10756', N'Mukindu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4357, N'11746', N'Pwani Maternity and Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4358, N'15770', N'Wanainchi Jamii Materinty and Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4359, N'11988', N'Donyo Sabuk Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4360, N'13287', N'Al-Siha Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4361, N'12978', N'Pipeline Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4362, N'12850', N'Woodlands Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4363, N'15657', N'St Mathews Maternity and Lab Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4364, N'13516', N'Boya Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4365, N'13526', N'Chinato Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4366, N'16409', N'St Joseph Nursing Home (Sirikwa)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4367, N'11613', N'Mikindani (MCM) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4368, N'13345', N'Garissa Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4369, N'13636', N'Johpas Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4370, N'12114', N'Joykim Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4371, N'13180', N'Sex Workers Operation Project (Swop)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4372, N'14070', N'Sayyid Aysha Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4373, N'12385', N'Korr Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4374, N'16167', N'Marie Stopes Clinic (Langata)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4375, N'11654', N'St Marys Msabaha Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4376, N'11639', N'Moa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4377, N'14106', N'St Elizabeth Chiga Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4378, N'12939', N'Family Health Options Phoenix')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4379, N'16764', N'Masinde Muliro University of Science and Technolog')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4380, N'13595', N'Gucha Maternity and Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4381, N'13698', N'Kipkebe Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4382, N'12921', N'Dorkcare Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4383, N'13055', N'Madina Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4384, N'12934', N'Edna Maternity')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4385, N'11634', N'Mlaleo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4386, N'15971', N'Lumino Maternity and Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4387, N'13995', N'Osano Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4388, N'12768', N'St Michael Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4389, N'16149', N'Tanaka Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4390, N'15204', N'Moi Teaching Refferal Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4391, N'13221', N'St. Odilia''s Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4392, N'13209', N'St Joseph W Dispensary (Westlands)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4393, N'15405', N'Oljogi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4394, N'10247', N'Giakaibei Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4395, N'10207', N'Gatanga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4396, N'14123', N'St Paul Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4397, N'14126', N'Manyuanda St Teresas CFW Clinic (Rarieda)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4398, N'12801', N'Timau Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4399, N'10495', N'Karima Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4400, N'10484', N'Karatina Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4401, N'13552', N'Family Health Options Kenya (FHOPK) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4402, N'12451', N'Makandune Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4403, N'14012', N'Pand Pieri Community Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4404, N'11986', N'Dirib Gombo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4405, N'12891', N'Carolina For Kibera VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4406, N'14987', N'Kongoro Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4407, N'12446', N'Maikona Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4408, N'12765', N'St Marys Nguviu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4409, N'12791', N'Acef Ena Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4410, N'10773', N'Munyange (AIPCA) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4411, N'14111', N'St Joseph''s Obaga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4412, N'16233', N'Presbyterian Ttc Rubate Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4413, N'15667', N'St Therese Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4414, N'13189', N'SOS Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4415, N'11074', N'St Veronica Dispensary Mukurweini')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4416, N'11196', N'ADC Danisa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4417, N'11929', N'Amungeti Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4418, N'11753', N'Ramada Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4419, N'12713', N'Ripples International Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4420, N'13057', N'Makadara Mercy Sisters Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4421, N'11514', N'Nawaco Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4422, N'14445', N'Embul - Bul Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4423, N'13866', N'Nyabururu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4424, N'12197', N'Karare Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4425, N'13210', N'St Joseph''s Dispensary (Dagoretti)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4426, N'10750', N'Mugunda Mission Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4427, N'15989', N'Makhanga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4428, N'16651', N'Tumaini Medical Centre (Masii)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4429, N'12997', N'Kahawa West Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4430, N'13659', N'Kebaroti Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4431, N'13643', N'Kager Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4432, N'12138', N'Kakungu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4433, N'16355', N'Dr Nyandiko Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4434, N'15439', N'Ongata Naado Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4435, N'12972', N'Huruma (NCCK) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4436, N'14198', N'Amakuriat Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4437, N'14428', N'Elburgon (PCEA) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4438, N'12569', N'Mulutu Mission Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4439, N'12762', N'St Marys Dispensary (Mwala)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4440, N'12752', N'St Joseph Dispensary (Kabaa)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4441, N'13036', N'Kivuli Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4442, N'14044', N'Riakworo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4443, N'10927', N'Passenga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4444, N'15357', N'Njoro (PCEA) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4445, N'16198', N'Shirikisho Methodist Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4446, N'13010', N'Kasarani Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4447, N'10537', N'Kiambogo Dispensary (Nyandarua South)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4448, N'15918', N'Kamukuywa (ACK) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4449, N'16715', N'Masaba Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4450, N'15366', N'Nolasit Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4451, N'16137', N'St Claire Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4452, N'15852', N'Chelelemuk (St.Boniface Mwanda B) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4453, N'15499', N'Roret Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4454, N'15221', N'Morijo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4455, N'12609', N'Mutune Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4456, N'10646', N'Kutus Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4457, N'13208', N'St Joseph Mukasa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4458, N'13225', N'St Teresa''s Parish Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4459, N'14991', N'Korokou Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4460, N'14651', N'Kajiado Christian Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4461, N'10597', N'Kihumbuini (PCEA) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4462, N'10020', N'Gituamba (AIPCA) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4463, N'12780', N'Syongila (ACK) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4464, N'13173', N'Reuben Mukuru Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4465, N'12518', N'Miambani Catholic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4466, N'12599', N'Mutito Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4467, N'13072', N'Mary Immaculate Sisters Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4468, N'11645', N'Mother Amadea Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4469, N'11041', N'St Joseph Catholic Dispensary (Ruiru)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4470, N'13230', N'St Vincent Catholic Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4471, N'12073', N'Iiani Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4472, N'11614', N'Mikindani Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4473, N'14746', N'Kapnyeberai Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4474, N'14280', N'Cedar Associate Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4475, N'15491', N'Romosha Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4476, N'12368', N'Kitundu (SDA) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4477, N'11392', N'Giriama Mission Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4478, N'13498', N'Bar Korwa Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4479, N'12864', N'Abandoned Child Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4480, N'11059', N'St Mathews and Sarah Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4481, N'11060', N'St Michael Dispensary (Kangaita)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4482, N'13067', N'Marie Stopes Clinic (Kilimani)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4483, N'13186', N'Silanga (MSF Belgium) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4484, N'12938', N'Family Health Medical Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4485, N'12860', N'AIC Zombe  Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4486, N'12755', N'St Joseph School (Kabaa)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4487, N'11837', N'Tarasaa Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4488, N'10420', N'Kaheti Dispensary & Maternity')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4489, N'13959', N'Ochuna Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4490, N'13482', N'Anyuongi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4491, N'10398', N'Kagio Catholic Dispensary (Mary Immucate Catholic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4492, N'12680', N'Nuu Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4493, N'15047', N'Lodokejek Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4494, N'15674', N'State Lodge Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4495, N'16135', N'Soysambu (ACK) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4496, N'15848', N'Chebukaka Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4497, N'13275', N'Al-Faruq Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4498, N'12673', N'Nthagaiya Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4499, N'16140', N'St Mary''s Health Unit Chelelemuk')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4500, N'15861', N'Chwele Friends Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4501, N'15505', N'Sabatia Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4502, N'11961', N'Makindu Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4503, N'12648', N'Ngelani (AIC) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4504, N'14554', N'Huruma Mobile Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4505, N'12582', N'Musalala Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4506, N'15173', N'Mercy Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4507, N'10399', N'Kagio Nursing Home (Kagio)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4508, N'12127', N'Kaiani (ABC) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4509, N'12594', N'Muthetheni Mission Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4510, N'11844', N'Tawheed Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4511, N'10551', N'Kiandegwa (Methodist Church of Kenya) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4512, N'11467', N'Kichaka Simba Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4513, N'12507', N'Mbooni (AIC) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4514, N'12409', N'Kyasila (AIC) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4515, N'13268', N'Africa Inland Church Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4516, N'10281', N'Gitundu (ACK) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4517, N'15635', N'St Clare Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4518, N'12183', N'Kanyangi Mission Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4519, N'12213', N'Katakani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4520, N'16763', N'Eshisiru Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4521, N'15902', N'Ingotse Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4522, N'15978', N'Lutaso Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4523, N'14469', N'Entasopia Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4524, N'10468', N'Kangaru Dispensary (Kirinyaga)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4525, N'12431', N'Liviero Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4526, N'12194', N'Karaba Wango Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4527, N'15327', N'Ndonyo Wasin Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4528, N'10494', N'Kariko Dispensary (Nyeri South)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4529, N'12670', N'Ntemwene Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4530, N'13890', N'Nyalunya Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4531, N'10552', N'Kiandere Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4532, N'10402', N'Kagumo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4533, N'10729', N'Mihuti Dispensary (Nyeri South)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4534, N'11397', N'Shimo Borstal Dispensary (GK Prison)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4535, N'12417', N'Kyome (AIC) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4536, N'11384', N'Garashi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4537, N'12398', N'Kwakavisi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4538, N'12091', N'Inyuu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4539, N'10634', N'Kiriogo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4540, N'15065', N'Lokusero Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4541, N'10830', N'Ndathi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4542, N'10766', N'Mumbuini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4543, N'16546', N'Gombato Dispensary (CDF)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4544, N'12071', N'Igoki Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4545, N'14094', N'Siriba Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4546, N'13935', N'Nyansangio Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4547, N'15914', N'Kakamega Forest Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4548, N'10239', N'Gatwe Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4549, N'10361', N'Itundu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4550, N'14518', N'GK Prison Dispensary (Nandi Central)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4551, N'10873', N'Nguka Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4552, N'12340', N'Kisasi Health Centre (Kitui)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4553, N'13759', N'Makindu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4554, N'10224', N'Gatondo Dispensary (Nyeri North)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4555, N'13425', N'Riba Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4556, N'13940', N'Nyarongi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4557, N'11496', N'Kizingitini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4558, N'13313', N'Burder Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4559, N'10601', N'Kihuyo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4560, N'10043', N'Baari Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4561, N'11255', N'Bomani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4562, N'13987', N'Ong''ielo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4563, N'10305', N'Gumba Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4564, N'13306', N'Biyamadhow Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4565, N'13997', N'Osogo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4566, N'10439', N'Kamacharia Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4567, N'12583', N'Museve Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4568, N'10252', N'Gichuru Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4569, N'10635', N'Kirogo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4570, N'12054', N'Gus Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4571, N'10213', N'Gathambi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4572, N'12142', N'Kalacha Hospital (Chalbi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4573, N'13978', N'Ombek Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4574, N'14257', N'Biribiriet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4575, N'13430', N'Saka Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4576, N'10333', N'Ichamara Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4577, N'11559', N'Mambrui Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4578, N'12149', N'Kali Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4579, N'12188', N'Kanyuru Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4580, N'13292', N'Arbaqueranso Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4581, N'13617', N'Ikonge Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4582, N'11888', N'Waa Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4583, N'12700', N'Ontulili Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4584, N'11126', N'Turasha Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4585, N'11581', N'Matuga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4586, N'11836', N'Takaungu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4587, N'13752', N'Magombo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4588, N'11713', N'Ngerenya Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4589, N'12701', N'Pepo La Tumaini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4590, N'10983', N'Ruruguti Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4591, N'14761', N'Kapsisiywo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4592, N'10396', N'Kagere Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4593, N'16650', N'Kavumbu Dispensary (Mwala)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4594, N'11136', N'Unjiru Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4595, N'12832', N'Usueni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4596, N'13926', N'Nyangiela Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4597, N'13386', N'Kulan Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4598, N'12359', N'Kithimu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4599, N'12239', N'Kathunguri Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4600, N'13051', N'Loco Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4601, N'14226', N'Banita Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4602, N'13521', N'Chemelil GOK Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4603, N'10749', N'Mugunda Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4604, N'10613', N'Kinale Forest Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4605, N'13839', N'Ndeda Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4606, N'10814', N'Mweru Dispensary (Nyeri South)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4607, N'10419', N'Kahembe Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4608, N'10681', N'Manunga Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4609, N'13816', N'Miwani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4610, N'12170', N'Kamwathu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4611, N'16237', N'Karuguaru Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4612, N'12814', N'Tupendane Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4613, N'14869', N'Kimanjo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4614, N'13328', N'Diff Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4615, N'13329', N'Dilmanyaley Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4616, N'11129', N'Tuthu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4617, N'10638', N'Kirurumi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4618, N'11182', N'Wendiga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4619, N'12259', N'Kavisuni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4620, N'13077', N'Mathare North Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4621, N'13408', N'Medina Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4622, N'12454', N'Makima Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4623, N'12501', N'Mbita Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4624, N'14726', N'Kapkormom Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4625, N'15729', N'Tirimionin Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4626, N'16721', N'Mogori-Komasimo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4627, N'10705', N'Mathakwaini (PCEA) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4628, N'11138', N'Uplands Forest Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4629, N'12047', N'GK Prison Dispensary (Kitui)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4630, N'10643', N'Kiuu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4631, N'10337', N'Igana Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4632, N'10836', N'Ndugamano Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4633, N'13437', N'Shanta Abaq Dispensary (Wajir West)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4634, N'11895', N'Watamu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4635, N'10546', N'Kiamuya Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4636, N'12625', N'Mweronkaga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4637, N'11593', N'Mbuwani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4638, N'13956', N'Obumba Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4639, N'14846', N'Kianjoya Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4640, N'11659', N'Msumarini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4641, N'10706', N'Matharite Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4642, N'11578', N'Matolani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4643, N'10331', N'Ichagachiru Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4644, N'12486', N'Matinyani Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4645, N'14836', N'Keringet  Sub County Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4646, N'10490', N'Karemeno Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4647, N'12372', N'Kitungati Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4648, N'12007', N'Ena Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4649, N'12838', N'Wachoro Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4650, N'12122', N'Kabuguri Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4651, N'10574', N'Kiburu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4652, N'13713', N'Kombe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4653, N'13569', N'Getongoroma Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4654, N'13435', N'Sarif Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4655, N'10027', N'Amboni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4656, N'10828', N'Ndakaini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4657, N'14144', N'Taranganya Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4658, N'13907', N'Nyamekongoroto Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4659, N'13630', N'Itumbe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4660, N'13706', N'Kituka Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4661, N'13267', N'Ademasajida Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4662, N'13387', N'Kursin Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4663, N'13343', N'Ganyure Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4664, N'14374', N'Cheptuech Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4665, N'13480', N'Anjego Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4666, N'14237', N'Barsaloi GK Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4667, N'10837', N'Ndula Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4668, N'13824', N'Motemorabu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4669, N'13941', N'Nyasese Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4670, N'13324', N'Danyere Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4671, N'15263', N'Muthegera Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4672, N'10528', N'Kiairathe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4673, N'10335', N'Ichichi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4674, N'12840', N'Walda Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4675, N'13416', N'Ogorji Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4676, N'13304', N'Batalu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4677, N'10210', N'Gatei Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4678, N'12699', N'Ol-Torot Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4679, N'16443', N'Elele Nomadic Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4680, N'13456', N'Yabicho Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4681, N'13455', N'Wargadud Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4682, N'13424', N'Rhamudimtu Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4683, N'14820', N'Kauriong Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4684, N'13348', N'Girissa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4685, N'11927', N'Ambalo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4686, N'13310', N'Bore Hole 11 Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4687, N'13294', N'Ashabito Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4688, N'11586', N'Maziwa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4689, N'14328', N'Chepakundi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4690, N'10744', N'Mugeka Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4691, N'13587', N'Gongo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4692, N'10477', N'Karaha Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4693, N'13830', N'Muchebe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4694, N'13017', N'Soweto Kayole PHC Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4695, N'16476', N'Muchuro Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4696, N'10562', N'Kianjege Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4697, N'15203', N'Moi Ndabi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4698, N'13681', N'Kiagware Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4699, N'13538', N'Egetonto Dispensary (Gucha)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4700, N'13990', N'Opapla Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4701, N'13577', N'Gisage Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4702, N'13558', N'Gesabakwa Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4703, N'10354', N'Iruri Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4704, N'15721', N'Teret Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4705, N'13845', N'Ndori Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4706, N'12027', N'Gakoromone Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4707, N'15728', N'Tinet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4708, N'13806', N'Migori T T C Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4709, N'13655', N'Kapiyo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4710, N'12346', N'Kiseveni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4711, N'12160', N'Kamandio Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4712, N'16194', N'Mwina Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4713, N'15213', N'Molo Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4714, N'11780', N'Sera Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4715, N'12397', N'Kwakala Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4716, N'13396', N'Libehiya Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4717, N'11256', N'Bombi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4718, N'13446', N'Tarbaj Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4719, N'10888', N'Nyagiti Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4720, N'10863', N'Ngelelya Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4721, N'12815', N'Turbi Dispensary (Marsabit North)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4722, N'12812', N'Tungutu HC')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4723, N'15172', N'Mentera Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4724, N'13757', N'Mahaya Health Centre (Rarieda)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4725, N'11167', N'Wandumbi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4726, N'13524', N'Chiga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4727, N'10244', N'Geta Bush Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4728, N'12630', N'Mwonge Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4729, N'10304', N'Gsu Dispensary (Ruiru)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4730, N'14402', N'Dentomed Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4731, N'13379', N'Khalalio Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4732, N'12470', N'Manyatta Jillo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4733, N'12121', N'Kabaa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4734, N'12373', N'Kituruni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4735, N'12187', N'Kanyungu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4736, N'12001', N'El-Molo Bay Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4737, N'13809', N'Minyenya Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4738, N'13877', N'Nyaguda Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4739, N'11631', N'Mkunumbi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4740, N'11941', N'Balesa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4741, N'12977', N'Patanisho Maternity and Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4742, N'15812', N'Budonga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4743, N'15810', N'Buchangu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4744, N'13974', N'Olando Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4745, N'13529', N'Chuowe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4746, N'13530', N'Chuthber Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4747, N'15340', N'Ngatataek Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4748, N'10496', N'Karima Dispensary (Nyeri South)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4749, N'12033', N'Gatunduri Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4750, N'12032', N'Gatumbi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4751, N'15270', N'Nachola Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4752, N'10796', N'Mutira (ACK) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4753, N'14650', N'Kajiado (AIC) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4754, N'12894', N'Kibera Chemi Chemi Ya Uzima Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4755, N'13135', N'Orthodox Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4756, N'12761', N'St Marks Dispensary (Kariene)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4757, N'12202', N'Karimonga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4758, N'13290', N'Arabia Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4759, N'12510', N'St John Marieni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4760, N'12156', N'Kalulini Dispensary (Kibwezi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4761, N'12302', N'Kiirua Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4762, N'14062', N'Rusinga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4763, N'12328', N'Kionyo Dispensary (Imenti South)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4764, N'12212', N'Katagini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4765, N'13965', N'Ogen Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4766, N'12607', N'Mutukya Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4767, N'13191', N'EDARP Soweto Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4768, N'15804', N'Approved Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4769, N'13769', N'Manyatta (SDA) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4770, N'12035', N'Getrude Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4771, N'13981', N'Omiro Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4772, N'15603', N'Sochoi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4773, N'12443', N'Magenka Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4774, N'13871', N'Nyagesenda Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4775, N'13860', N'Nyabikomu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4776, N'10531', N'Kiamagunyi (ACK) Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4777, N'13881', N'Nyakach (AIC) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4778, N'13960', N'Ogada Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4779, N'13911', N'Nyamira Adventist Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4780, N'13794', N'Matutu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4781, N'10266', N'Githuani (ACK) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4782, N'14852', N'Kibini Hill (PCEA) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4783, N'11666', N'Mtepeni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4784, N'10478', N'Karaini (ACK) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4785, N'14534', N'Grace Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4786, N'11826', N'St Theresa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4787, N'15129', N'Marioshoni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4788, N'13728', N'Kwamo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4789, N'10841', N'Nduriri (AIC) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4790, N'15443', N'Orinie (AIC) Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4791, N'12026', N'Gaitu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4792, N'11470', N'Kikambala Catholic Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4793, N'13334', N'Elnoor Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4794, N'13041', N'Langata Health Centre (Mugumo-Ini)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4795, N'12559', N'Mukangu (ACK) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4796, N'12332', N'Kiriari (ACK) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4797, N'13101', N'Mukuru Mmm Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4798, N'15589', N'Sipili Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4799, N'13914', N'Nyamonye Mission Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4800, N'14236', N'Barsaloi Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4801, N'10519', N'Kerugoya Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4802, N'12751', N'St Joseph Catholic Dispensary (Igembe)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4803, N'10989', N'Sacred Heart Kangaita Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4804, N'12674', N'Nthambiro Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4805, N'11412', N'Hongwe Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4806, N'10862', N'Ngecha Orthodox Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4807, N'12070', N'Igandene Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4808, N'12351', N'Divine Mercy Kithatu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4809, N'13895', N'Nyamakoroto Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4810, N'11963', N'Christian Community Services Dispensary(Maua)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4811, N'12277', N'Kiangondu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4812, N'12131', N'Kajiampau Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4813, N'10423', N'Kahuho I (AIC) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4814, N'16213', N'Logologo AIC Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4815, N'14220', N'Atiar Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4816, N'12086', N'Illaut Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4817, N'10979', N'Rurii (ACK) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4818, N'10915', N'Olkalou (ACK) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4819, N'14032', N'Ranen (SDA) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4820, N'10669', N'Magutu (PCEA) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4821, N'15586', N'Siongi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4822, N'16252', N'Sacred Heart Dispensary (Nzaikoni)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4823, N'14008', N'Oyani (SDA) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4824, N'16231', N'Nkunjumu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4825, N'12299', N'Kigogo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4826, N'13649', N'Kamagambo Dispenasry')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4827, N'13640', N'Kadem Tb & Leprosy Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4828, N'10321', N'Holy Cross Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4829, N'13744', N'Macalder Mission Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4830, N'15125', N'Maralal Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4831, N'12199', N'Kargi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4832, N'16657', N'St Monica Catholic Dispensary (Nguutani)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4833, N'12437', N'Machaka Mission Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4834, N'13061', N'Maria Dominica Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4835, N'12929', N'Dreams Centre Dispensary (Langata)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4836, N'13485', N'Aro (SDA) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4837, N'12845', N'Weru Dispensary (Mariani)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4838, N'10713', N'Mbiriri Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4839, N'11980', N'Curran Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4840, N'13962', N'Ogande Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4841, N'15191', N'Mobet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4842, N'15380', N'Nys Karate Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4843, N'11968', N'Cheera Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4844, N'13859', N'Nyabikaye Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4845, N'11035', N'St James Angilcan Church of Kenya Kiaritha Dispens')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4846, N'10670', N'Mahiga (PCEA) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4847, N'10093', N'Christian Community Services Wang''uru Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4848, N'12044', N'Gitoro Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4849, N'13755', N'Magwagwa (SDA) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4850, N'13918', N'Nyanchwa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4851, N'10403', N'Kagumo Live Giving Dispensary/Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4852, N'12229', N'Kathera Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4853, N'16232', N'Gaturi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4854, N'10040', N'Assumption of Mary Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4855, N'10081', N'Caritas Mariah')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4856, N'13904', N'Nyambare Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4857, N'10599', N'Kihuro (ACK) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4858, N'12028', N'Gangara Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4859, N'13113', N'Nairobi South Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4860, N'12069', N'Igamatundu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4861, N'13155', N'Pumwani Majengo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4862, N'13736', N'Luciel Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4863, N'15401', N'Oletukat Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4864, N'11761', N'Sabaki Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4865, N'11379', N'Fundi Issa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4866, N'13609', N'Hongo Ogosa Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4867, N'11410', N'Hindi Prison Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4868, N'10286', N'GK Prison Dispensary (Kingongo)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4869, N'12275', N'Kiamuriuki Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4870, N'13099', N'Dsc Karen Dispensary (Armed Forces)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4871, N'13138', N'Pangani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4872, N'13121', N'Ngaira Rhodes Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4873, N'12990', N'Jinnah Ave Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4874, N'11499', N'Kongowea Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4875, N'13259', N'Woodley Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4876, N'16220', N'Leparua Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4877, N'13193', N'Special Treatment Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4878, N'11669', N'Mtongwe (MCM) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4879, N'13165', N'Riruta Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4880, N'11577', N'Mata Dispensary (Taveta)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4881, N'14053', N'Riongige Dispensry')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4882, N'13546', N'Eramba Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4883, N'13862', N'Nyabokarange Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4884, N'11122', N'Tumaini National Youth Service Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4885, N'10400', N'Kagonye Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4886, N'15379', N'Nys Dispensary (Kirimun)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4887, N'14027', N'Railways Dispensary (Kisumu)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4888, N'12708', N'Ramata Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4889, N'12744', N'St Anne Kariene Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4890, N'15370', N'Nyakiambi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4891, N'15509', N'Sachang''wan Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4892, N'12369', N'Kitundu (GOK) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4893, N'14023', N'Radier Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4894, N'13892', N'Nyamagundo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4895, N'11685', N'Mwaluvanga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4896, N'11437', N'Jomvu Kuu (MCM) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4897, N'13591', N'Got Nyabondo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4898, N'13231', N'State House Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4899, N'13009', N'Karura Health Centre (Kiambu Rd)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4900, N'15361', N'Nkama Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4901, N'14450', N'Emumwenyi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4902, N'12022', N'Gacabari Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4903, N'11702', N'Ndilidau Dispensary (Jipe)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4904, N'13144', N'South B Police Band Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4905, N'12048', N'GK Prison Dispensary (Machakos)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4906, N'11931', N'Apdk Dispensary (Machakos)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4907, N'12200', N'Karia Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4908, N'15878', N'Emusenjeli Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4909, N'13497', N'Bar Aluru Dispensary (Rarieda)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4910, N'13024', N'Kenyatta University Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4911, N'10220', N'Gatina Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4912, N'16786', N'Benga Bi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4913, N'12728', N'School For The Deaf (Machakos)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4914, N'12919', N'Dog Unit Dispensary (O P Kenya Police)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4915, N'13161', N'Nairobi Remand Prison Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4916, N'13740', N'Lwala Community Health Center')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4917, N'12576', N'Mumoni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4918, N'16059', N'Nabongo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4919, N'13126', N'Njiru Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4920, N'14174', N'Wire Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4921, N'12466', N'Mananja Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4922, N'15963', N'Luanda Town Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4923, N'13943', N'Nyasore Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4924, N'13143', N'Pipeline Medical Health Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4925, N'12918', N'Dod Mrs Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4926, N'13168', N'Railway Training Institute Dispensary South B')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4927, N'12886', N'Bomas of Kenya Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4928, N'16425', N'Isamwera Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4929, N'13242', N'University of Nairobi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4930, N'16253', N'Kitonyoni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4931, N'16422', N'Ekerubo Dispensary (Kisii South)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4932, N'13018', N'Multi Media University Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4933, N'14517', N'GK Prison Dispensary (Athi River)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4934, N'15883', N'Eshiongo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4935, N'16287', N'Garissa Teacher Training College Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4936, N'14263', N'Bondeni Dispensary (Nakuru Central)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4937, N'10417', N'Kaharo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4938, N'13917', N'Nyanchonori Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4939, N'11958', N'Butiye Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4940, N'13029', N'Kibera D O Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4941, N'12006', N'Ex Lewa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4942, N'13146', N'Port Health Dispensary (Langata)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4943, N'12961', N'Gsu Dispensary (Nairobi West)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4944, N'12051', N'Golole Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4945, N'16431', N'Murantawa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4946, N'16414', N'Kapsimbeiywo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4947, N'14722', N'Kapkoi Mission Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4948, N'12963', N'Gsu Hq Dispensary (Ruaraka)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4949, N'15865', N'Ebukanga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4950, N'16423', N'Nyabioto Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4951, N'13954', N'Ober Kamoth Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4952, N'15874', N'Elwesero Dispensary(Model Health Centre)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4953, N'14079', N'Siabai Makonge Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4954, N'10406', N'Kagumoini Dispensary (Muranga South)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4955, N'12322', N'Kinisa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4956, N'13447', N'Tulatula Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4957, N'10728', N'Mihuti Dispensary (Muranga North)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4958, N'12290', N'Kiburine Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4959, N'16403', N'Total Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4960, N'13836', N'Mwongori Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4961, N'11433', N'Jilore Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4962, N'11531', N'Mackinon Road Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4963, N'16753', N'Hamundia Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4964, N'11545', N'Makamini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4965, N'11701', N'Ndavaya Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4966, N'11681', N'Mwabila Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4967, N'10912', N'Old Mawingu Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4968, N'13494', N'Bande Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4969, N'13321', N'Dambas Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4970, N'10257', N'Gitare Health Centre (Gatundu)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4971, N'14143', N'Taragai Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4972, N'10794', N'Muthuthiini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4973, N'13711', N'Kogweno Oriang'' Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4974, N'14172', N'Wiga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4975, N'12441', N'Machang''a Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4976, N'15830', N'Burinda Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4977, N'12564', N'Mukuuri Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4978, N'16677', N'Kabati Dispensary (Laikipia West)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4979, N'14135', N'Suna Rabuor Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4980, N'16214', N'Lontolio Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4981, N'15560', N'Shompole Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4982, N'12572', N'Mumbuni Dispensary (Mwala)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4983, N'13323', N'Dandu Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4984, N'10386', N'Juja Farm Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4985, N'11517', N'Lenga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4986, N'13815', N'Misori Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4987, N'11093', N'Thigio Dispensary (Kiambu West)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4988, N'13097', N'Mow Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4989, N'10280', N'Gitugi Dispensary (Nyeri South)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4990, N'10672', N'Maina Village Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4991, N'10581', N'Kiganjo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4992, N'13560', N'Gesuguri Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4993, N'16413', N'Gsu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4994, N'13353', N'Guba Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4995, N'14972', N'Koiwalelach Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4996, N'10340', N'Ihururu Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4997, N'10223', N'Gatondo Dispensary (Kipipiri)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4998, N'13469', N'Airport Dispensary (Kisumu)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (4999, N'11904', N'Werugha Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5000, N'10834', N'Ndivai Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5001, N'15283', N'Najile Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5002, N'11024', N'St Anne (ACK) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5003, N'10745', N'Mugoiri Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5004, N'10624', N'Kiria Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5005, N'16221', N'Narrapu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5006, N'10625', N'Kiria-Ini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5007, N'11476', N'Kilimangodo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5008, N'16404', N'Kiptororo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5009, N'10472', N'Kanjama Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5010, N'10227', N'Gatuanyaga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5011, N'16314', N'Takaba Nomadic Mobile')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5012, N'11722', N'Nyali Barracks Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5013, N'13381', N'Kiliweheri Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5014, N'15041', N'Ilpolosat Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5015, N'11448', N'Kafuduni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5016, N'15515', N'Sajiloni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5017, N'13800', N'Mecheo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5018, N'13337', N'Eymole Health Centre (Kilwehiri)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5019, N'10461', N'Kandongu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5020, N'11723', N'Nys Dispensary (Kilindini)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5021, N'13466', N'Agawo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5022, N'12045', N'GK Prison Dispensary (Embu)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5023, N'15942', N'Kibingei Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5024, N'16766', N'Miniambo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5025, N'14520', N'GK Prisons Dispensary (Kapenguria)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5026, N'10761', N'Mukurwe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5027, N'11846', N'Tchundwa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5028, N'13903', N'Nyamasibi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5029, N'11418', N'Idsowe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5030, N'14145', N'Tindereti Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5031, N'10405', N'Kagumoini Dispensary (Muranga North)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5032, N'11579', N'Matondoni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5033, N'12125', N'Kagoji Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5034, N'13675', N'Kenyerere Dispensary (Masaba)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5035, N'13818', N'Mochenwa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5036, N'12233', N'Kathiranga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5037, N'14049', N'Rietago Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5038, N'11494', N'Kiwayuu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5039, N'11880', N'Vigurungani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5040, N'13563', N'Gesusu (SDA) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5041, N'13942', N'Nyasike Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5042, N'15087', N'Lorngoswa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5043, N'16265', N'Nyamagesa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5044, N'11735', N'Patte Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5045, N'11637', N'Mnazini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5046, N'11594', N'Mbwajumwali Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5047, N'13695', N'Kineni Dispensary (Esise)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5048, N'16470', N'Segetet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5049, N'11725', N'Oda Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5050, N'11751', N'Rainbow Community Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5051, N'11544', N'Majoreni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5052, N'10931', N'Pesi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5053, N'15226', N'Mosiro Dispensary (Kajiado North)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5054, N'16369', N'Losam Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5055, N'16370', N'Orolwo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5056, N'16373', N'Kangoletiang Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5057, N'16375', N'Kamketo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5058, N'13853', N'Ngodhe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5059, N'15425', N'Olooseos Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5060, N'14051', N'Rigoma Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5061, N'10443', N'Kambirwa Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5062, N'15513', N'Saikeri Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5063, N'12321', N'Kinanie Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5064, N'11560', N'Mangai Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5065, N'14891', N'Kipeto Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5066, N'13362', N'Hareri Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5067, N'16485', N'Sikarira Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5068, N'13340', N'Fino Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5069, N'16406', N'Turi Dispensary (CDF)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5070, N'13922', N'Nyandoche Ibere Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5071, N'16428', N'Kilinito Dispensary (CDF)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5072, N'13338', N'Fafi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5073, N'16019', N'Miluki Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5074, N'16290', N'Eldere Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5075, N'11778', N'Semikaro Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5076, N'13746', N'Machururiati Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5077, N'16427', N'Esonorua Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5078, N'11687', N'Mwanda Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5079, N'11838', N'Taru Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5080, N'11464', N'Kibandaongo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5081, N'11479', N'Kinagoni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5082, N'11527', N'Lutsangani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5083, N'13826', N'Motontera Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5084, N'10262', N'Githanga (ACK) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5085, N'13232', N'State House Dispensary (Nairobi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5086, N'14526', N'Maralal GK Prison Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5087, N'14019', N'Rabondo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5088, N'14029', N'Ramasha Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5089, N'12388', N'Katwala Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5090, N'12661', N'Nguuku Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5091, N'10436', N'Kanjinji Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5092, N'11090', N'Thangathi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5093, N'15359', N'Njukini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5094, N'11951', N'Boji Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5095, N'14303', N'Chebulbai Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5096, N'11744', N'Pumwani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5097, N'13933', N'Nyansakia Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5098, N'13579', N'GK Prisons Dispensary (Kibos)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5099, N'11304', N'Diani Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5100, N'13645', N'Kahawa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5101, N'11854', N'Tononoka Administration Police Dispensary & VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5102, N'10432', N'Kairo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5103, N'15474', N'Pwani (GOK) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5104, N'13541', N'Ekerubo Dispensary (Masaba)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5105, N'16684', N'Likia Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5106, N'12280', N'Kibaranyaki Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5107, N'14099', N'Sosera Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5108, N'13683', N'Kiamokama Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5109, N'12383', N'Konyu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5110, N'15012', N'Langata Enkima Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5111, N'16714', N'Elwangale Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5112, N'12709', N'Rapsu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5113, N'13432', N'Sangole Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5114, N'13383', N'Korisa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5115, N'13385', N'Kotile Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5116, N'12550', N'Mufu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5117, N'15004', N'Lakeview Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5118, N'14042', N'Rera Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5119, N'10447', N'Kamburaini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5120, N'10790', N'Muthaara Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5121, N'10533', N'Kiamara Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5122, N'15676', N'Stream of Life Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5123, N'10559', N'Kiangunyi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5124, N'10577', N'Kibutha Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5125, N'10594', N'Kihoya Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5126, N'13992', N'Oroche Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5127, N'10536', N'Kiamathaga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5128, N'16190', N'Vishakani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5129, N'16191', N'Chalani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5130, N'15122', N'Maparasha Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5131, N'16192', N'Kambe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5132, N'11466', N'Kibuyuni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5133, N'14093', N'Sirembe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5134, N'11636', N'Mnarani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5135, N'16791', N'Umala Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5136, N'16235', N'Kiguchwa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5137, N'12695', N'Nzunguni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5138, N'15934', N'Kharanda Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5139, N'13889', N'Nyalgosi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5140, N'13361', N'Hara Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5141, N'13084', N'Meridian Medical Centre (Buruburu)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5142, N'10169', N'Emmaus Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5143, N'15429', N'Olosho-Oibor Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5144, N'16785', N'Bar-Sauri Dispensry')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5145, N'14084', N'Sifuyo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5146, N'14409', N'Dr Kalyas Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5147, N'14159', N'Urenga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5148, N'14147', N'Tingare Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5149, N'14091', N'Simenya Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5150, N'12292', N'Kiegoi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5151, N'10076', N'Burguret Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5152, N'11667', N'Mtondia Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5153, N'10234', N'Gatunyu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5154, N'14460', N'Enkirgir Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5155, N'16790', N'Segere Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5156, N'16783', N'Asayi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5157, N'16418', N'St Mary''s Yala Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5158, N'10558', N'Kiangochi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5159, N'13874', N'Nyagoko Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5160, N'11004', N'Shamata Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5161, N'10482', N'Karangi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5162, N'16445', N'Kariko Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5163, N'14411', N'Dr Karania Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5164, N'10642', N'Kiunyu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5165, N'10357', N'Ithanga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5166, N'14451', N'Emurua Dikir Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5167, N'12178', N'Kaningo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5168, N'12662', N'Nguungani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5169, N'16513', N'St Jude Medical Clinic (Maragua)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5170, N'15625', N'St Ann Medical Clinic (Naivasha)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5171, N'13908', N'Nyamemiso Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5172, N'11728', N'Ozi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5173, N'15403', N'Olgumi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5174, N'14222', N'Bagaria Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5175, N'15419', N'Oloiyangalani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5176, N'14556', N'Icross Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5177, N'14423', N'Dr Wenyaa Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5178, N'15046', N'Loodoariak Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5179, N'16789', N'Rambula Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5180, N'11483', N'Kipao Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5181, N'12097', N'Ithimbari Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5182, N'14087', N'Sikalame Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5183, N'13495', N'Bar Achuth Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5184, N'13496', N'Bar Agulu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5185, N'13634', N'Jera Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5186, N'15434', N'Oltepesi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5187, N'13930', N'Nyangu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5188, N'14071', N'Sega Cottage Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5189, N'14448', N'Emotoroki Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5190, N'15582', N'Singiraine Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5191, N'10540', N'Kiambu Institute of Science and Technology Dispens')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5192, N'16293', N'Lafey Nomadic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5193, N'14405', N'Dr Aluvaala Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5194, N'15182', N'Meto Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5195, N'15418', N'Oloika Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5196, N'11456', N'Kau Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5197, N'11831', N'State House Dispensary (Mombasa)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5198, N'15109', N'Mailwa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5199, N'13955', N'Oboch Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5200, N'16393', N'Tulwet Dispensary (Kuresoi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5201, N'10584', N'Kigetuini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5202, N'11658', N'Msulwa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5203, N'12281', N'Kiaoni Dispensary (Kibwezi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5204, N'14565', N'Ilkilinyet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5205, N'11789', N'Shimoni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5206, N'10776', N'Munyu-Ini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5207, N'12081', N'Ikuu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5208, N'15132', N'Marie Stopes ( Nakuru)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5209, N'13957', N'Obunga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5210, N'16765', N'Kijawa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5211, N'16768', N'Amoyo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5212, N'13288', N'Amuma Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5213, N'13056', N'Makadara Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5214, N'14190', N'Agc Baby Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5215, N'14361', N'Chepseon Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5216, N'15024', N'Lemook Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5217, N'10248', N'Giathanini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5218, N'16199', N'Galili Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5219, N'13619', N'Iraha Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5220, N'10598', N'Kihumbu-Ini Community Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5221, N'14024', N'Rae Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5222, N'15393', N'Oldonyo Nyokie Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5223, N'10166', N'Embaringo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5224, N'12741', N'Songa Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5225, N'12794', N'Tharaka Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5226, N'13556', N'Gairoro Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5227, N'10980', N'Rurii Kiandegwa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5228, N'14230', N'Baraka Maternity Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5229, N'14957', N'Kmq Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5230, N'13849', N'Ngegu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5231, N'13578', N'GK Prison Dispensary (Homa Bay)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5232, N'13686', N'Kiasa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5233, N'13855', N'Nguku Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5234, N'16258', N'Maram Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5235, N'13979', N'Ombo Kachieng'' Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5236, N'13952', N'Ober Kabuoch Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5237, N'14015', N'Ponge Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5238, N'16259', N'Okok Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5239, N'13761', N'Malela Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5240, N'11563', N'Marereni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5241, N'16788', N'Mwer Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5242, N'16787', N'Masumbi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5243, N'14018', N'Rabar Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5244, N'13710', N'Kogelo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5245, N'14988', N'Konyao Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5246, N'13243', N'Upendo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5247, N'15745', N'Tuiyotich Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5248, N'15286', N'Nakuru Clinical Unit')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5249, N'14962', N'Kodich Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5250, N'13944', N'Nyathengo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5251, N'13923', N'Nyangande Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5252, N'10703', N'Mataara Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5253, N'13648', N'Kaluo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5254, N'14160', N'Uriri Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5255, N'13834', N'Mulaha Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5256, N'16280', N'Kenyerere Health Centre (Nyamira)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5257, N'12846', N'Wii Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5258, N'10041', N'Athi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5259, N'16114', N'Eshimukoko Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5260, N'14031', N'Randung'' Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5261, N'16691', N'Savimbi Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5262, N'10753', N'Mukarara Community Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5263, N'10421', N'Kahiga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5264, N'15590', N'Sirata Oirobi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5265, N'16239', N'Kamaguna Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5266, N'14807', N'Kasei Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5267, N'15316', N'Nauyapong Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5268, N'11229', N'Assa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5269, N'14170', N'Wath Onger Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5270, N'13958', N'Obwanda Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5271, N'11620', N'Miritini CDF Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5272, N'12315', N'Kimachia Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5273, N'12429', N'Limoro Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5274, N'11254', N'Bokole CDF Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5275, N'10355', N'Island Farms Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5276, N'14197', N'Arjijo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5277, N'16738', N'Gakurungu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5278, N'10212', N'Gathaithi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5279, N'10780', N'Mureru Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5280, N'13499', N'Bar Olengo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5281, N'14697', N'Kapchumba Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5282, N'13258', N'Westlands Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5283, N'15672', N'Starlite Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5284, N'14082', N'Sibuoche Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5285, N'16241', N'Rukenya Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5286, N'12135', N'Kako Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5287, N'16216', N'Kamboe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5288, N'10258', N'Gitaro Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5289, N'10883', N'Njoguini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5290, N'12806', N'Tulia Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5291, N'10279', N'Gitugi Dispensary (Muranga North)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5292, N'14158', N'Ulungo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5293, N'12053', N'Goro Rukesa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5294, N'14083', N'Sieka Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5295, N'12157', N'Kalunga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5296, N'10389', N'Kabati Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5297, N'13966', N'Ogero Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5298, N'12423', N'Lailuba Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5299, N'13803', N'Midhine Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5300, N'10530', N'Kiamabara Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5301, N'14047', N'Riat Dispensary (Migori)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5302, N'13999', N'Otati Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5303, N'10096', N'Ciagini  Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5304, N'16115', N'Eshinutsa Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5305, N'16113', N'Shikusi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5306, N'14038', N'Rariw Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5307, N'16147', N'Sivilie Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5308, N'14466', N'Enoosaen Zh Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5309, N'12326', N'Kinoru Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5310, N'16277', N'Ondong Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5311, N'10871', N'Ngorika Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5312, N'16394', N'Githiriga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5313, N'15079', N'Loosuk GK Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5314, N'13848', N'Nduru Kadero Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5315, N'13449', N'Wagalla Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5316, N'10397', N'Kagicha Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5317, N'14561', N'Ilpolei Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5318, N'10261', N'Githagara Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5319, N'13674', N'Kenyerere Dispensary (Sameta)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5320, N'13804', N'Midoti Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5321, N'13817', N'Mnara Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5322, N'12675', N'Nthambiro Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5323, N'11536', N'Mafisini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5324, N'13748', N'Magena Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5325, N'12262', N'Kavuta Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5326, N'11186', N'Witima Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5327, N'12249', N'Katutu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5328, N'12800', N'Tii Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5329, N'10431', N'Kairini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5330, N'12461', N'Malka Daka Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5331, N'13463', N'Adiedo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5332, N'11415', N'Horesha Medicalicare')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5333, N'11970', N'Chogoria (PCEA) Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5334, N'10208', N'Gatangara Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5335, N'13436', N'Sarman Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5336, N'12139', N'Kakuuni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5337, N'16218', N'Mansile Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5338, N'10696', N'Marua Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5339, N'16205', N'Hulahula Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5340, N'14906', N'Kiropket Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5341, N'13652', N'Kandege Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5342, N'14483', N'Ewaso Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5343, N'12428', N'Limauru Dispensay')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5344, N'12319', N'Kina Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5345, N'12449', N'Makaani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5346, N'13899', N'Nyamarimba Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5347, N'16643', N'Kalii Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5348, N'11625', N'Mizijini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5349, N'13467', N'Agenga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5350, N'13409', N'Meri Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5351, N'13593', N'Gotichaki Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5352, N'13317', N'Dadajabula Sub District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5353, N'13685', N'Kiaruta Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5354, N'14348', N'Chepkumia Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5355, N'11945', N'Barambate Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5356, N'15761', N'Unilever Central Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5357, N'13900', N'Nyamasare Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5358, N'13464', N'Administration Police Dispensary (Kisumu East)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5359, N'11738', N'Pingilikani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5360, N'11380', N'Gahaleni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5361, N'12468', N'Mangala Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5362, N'13934', N'Nyansancha Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5363, N'15076', N'Longewan Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5364, N'12162', N'Kambandi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5365, N'12405', N'Kyandui Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5366, N'10216', N'Gatheru Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5367, N'11404', N'Gotani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5368, N'13503', N'Bodi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5369, N'13627', N'Itibo Eramani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5370, N'14251', N'Bethsaida (AIC) Clinic (Nakuru)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5371, N'16436', N'Kimiti Model Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5372, N'12644', N'Ngai Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5373, N'10509', N'Kasuku Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5374, N'13844', N'Ndiwa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5375, N'13320', N'Damajaley Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5376, N'15992', N'Makutano Dispensary (Soysambu/mitua)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5377, N'12509', N'Mbusyani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5378, N'14573', N'Immurtot Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5379, N'13646', N'Kajieyi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5380, N'12718', N'Rukira Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5381, N'15909', N'Kaboywo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5382, N'16286', N'Arbajahan Nomadic Mobile Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5383, N'11139', N'Uruku Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5384, N'13545', N'Entanda Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5385, N'13511', N'Borangi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5386, N'11758', N'Roka Maweni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5387, N'13884', N'Nyakongo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5388, N'11887', N'Vyongwani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5389, N'10434', N'Kairuthi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5390, N'16052', N'Musitinyi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5391, N'13265', N'Abakore Sub District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5392, N'12394', N'Kwa Mutonga Dispenasry')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5393, N'11189', N'Zaina Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5394, N'11693', N'Mwapala Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5395, N'14498', N'Fitc Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5396, N'15543', N'Seketet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5397, N'12248', N'Katumbu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5398, N'10833', N'Ndimaini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5399, N'12740', N'Somare Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5400, N'12852', N'Yanzuu Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5401, N'13332', N'Elben Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5402, N'13647', N'Gita Sub County Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5403, N'12818', N'Twimyua Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5404, N'12931', N'Eden Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5405, N'13863', N'Nyabola Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5406, N'13658', N'Kauma Health Centre (Rachuonyo)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5407, N'13305', N'Benane Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5408, N'12298', N'Kigaa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5409, N'14681', N'Kanakurudio Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5410, N'10630', N'Kirima Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5411, N'12803', N'Tiva Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5412, N'14924', N'Kiptagich Model Health centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5413, N'10722', N'Mere Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5414, N'10429', N'Kaimbaga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5415, N'15214', N'Molo South Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5416, N'12828', N'Uran Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5417, N'13302', N'Barwaqo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5418, N'14733', N'Kapkures Dispensary (Nakuru Central)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5419, N'12665', N'Nkondi Health centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5420, N'10778', N'Murarandia Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5421, N'12042', N'Gitine Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5422, N'12252', N'Kauma Dispensary (Kitui)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5423, N'10894', N'Nyaribo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5424, N'13394', N'Leheley Sub District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5425, N'13724', N'Kuja Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5426, N'13872', N'Nyagiki Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5427, N'15801', N'Ap Line Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5428, N'15426', N'Olorika Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5429, N'13712', N'Kokwanyo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5430, N'13708', N'Kobuya Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5431, N'12553', N'Mugui Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5432, N'15854', N'Chepkube Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5433, N'15159', N'Mauche Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5434, N'13687', N'Kibigori Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5435, N'15017', N'Ledero Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5436, N'12024', N'Gaciongo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5437, N'11983', N'Dakabaricha Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5438, N'13573', N'Giatunda Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5439, N'13820', N'Mokomoni Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5440, N'16437', N'Kituluni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5441, N'13743', N'Mabinju Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5442, N'14131', N'Suguta Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5443, N'14312', N'Chemaner Dispensary (Kuresoi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5444, N'12403', N'Kyamatu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5445, N'13614', N'Igena-Itambe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5446, N'13364', N'Hodhan Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5447, N'14007', N'Oyamo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5448, N'11180', N'Weithaga (ACK) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5449, N'12008', N'Endau Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5450, N'12677', N'Nthongoni Health Centre (Kitui)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5451, N'13898', N'Nyamaranya Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5452, N'10951', N'Ragia Forest Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5453, N'13248', N'Vision Peoples Inter Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5454, N'12647', N'Ngaremara Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5455, N'11998', N'Eldera Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5456, N'13784', N'Masogo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5457, N'13350', N'GK Prison Dispensary (Garissa)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5458, N'12207', N'Kasikeu Catholic Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5459, N'12678', N'Nthwanguu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5460, N'12813', N'Tunyai Health centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5461, N'12151', N'Kaliku Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5462, N'12830', N'Uruku GK Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5463, N'13325', N'Dasheq Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5464, N'12354', N'Kitheo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5465, N'13391', N'Lafaley Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5466, N'11940', N'Badassa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5467, N'14136', N'Suna Ragana Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5468, N'14077', N'Serawongo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5469, N'12118', N'Kaani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5470, N'14057', N'Rodi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5471, N'12217', N'Katani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5472, N'11610', N'Mijomboni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5473, N'10473', N'Kanjuiri Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5474, N'13551', N'Etono Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5475, N'10911', N'Olborosat Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5476, N'14880', N'Kimsaw Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5477, N'14447', N'Emitik Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5478, N'13882', N'Nyakegogi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5479, N'13741', N'Lwanda Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5480, N'11785', N'Shika Adabu (MCM) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5481, N'16027', N'Muhaka Dispensary(Khwisero)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5482, N'15402', N'Olgulului Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5483, N'14089', N'Simbi Kogembo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5484, N'15096', N'Lowarengak Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5485, N'11805', N'Sosoni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5486, N'12822', N'Ukia Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5487, N'13506', N'Bonde Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5488, N'14515', N'Kirimun GK Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5489, N'13716', N'Komosoko Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5490, N'11382', N'Ganda Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5491, N'16432', N'Donyo Sabuk Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5492, N'13505', N'Boige Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5493, N'13654', N'Kanyagwal Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5494, N'13976', N'Olasi Dispensary (Nyando)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5495, N'12286', N'Kiboko Dispensary (Makindu)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5496, N'14943', N'Kisima Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5497, N'14291', N'Chebaraa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5498, N'15468', N'Porro Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5499, N'13837', N'Naya Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5500, N'10256', N'Gikui Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5501, N'12165', N'Kamusiliu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5502, N'15872', N'Elukhambi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5503, N'13592', N'Got Oyaro Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5504, N'12223', N'Kathangari Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5505, N'12549', N'Muchagori Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5506, N'15927', N'Karima Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5507, N'14814', N'Kataboi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5508, N'13536', N'Eberege Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5509, N'10799', N'Mutitu Community Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5510, N'13549', N'Esianyi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5511, N'11171', N'Wanjengi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5512, N'12195', N'Karama Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5513, N'12143', N'Kalala Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5514, N'11601', N'Mgamboni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5515, N'13572', N'Gianchore Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5516, N'10852', N'New Tumaini  Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5517, N'11994', N'Ebenezer Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5518, N'16386', N'Gatuto Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5519, N'13998', N'Otacho Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5520, N'12432', N'Loiyangalani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5521, N'12098', N'Itoleka Dispenasry')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5522, N'10200', N'Gakawa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5523, N'12273', N'Kiamuchii Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5524, N'13486', N'Arombe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5525, N'13896', N'Nyamanga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5526, N'10532', N'Kiamanyeki Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5527, N'15979', N'Lwanda Dispensary (Bungoma West)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5528, N'11957', N'Bulesa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5529, N'13689', N'Kibos Sugar Research Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5530, N'12025', N'Gafarsa Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5531, N'12820', N'Ugweri Disp')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5532, N'16653', N'Itheng''eli Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5533, N'14967', N'Koitaburot Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5534, N'12613', N'Muusini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5535, N'12534', N'Mitunguu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5536, N'13566', N'Getare Health Centre(Manga)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5537, N'14213', N'Arimi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5538, N'14142', N'Taracha Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5539, N'13311', N'Bour-Algy Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5540, N'16655', N'Kiomo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5541, N'12447', N'Mailiari Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5542, N'12171', N'Kangalu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5543, N'12851', N'Yakalia Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5544, N'11537', N'Magodzoni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5545, N'14141', N'Tamu Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5546, N'13478', N'Aneko Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5547, N'11930', N'Anona Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5548, N'14481', N'Eureka Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5549, N'12611', N'Mutyangome Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5550, N'12531', N'Mitamisyi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5551, N'11999', N'Elgade Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5552, N'14200', N'Amboseli Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5553, N'15232', N'Mother Kevin Dispensary (Catholic)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5554, N'12540', N'Modogashe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5555, N'12361', N'Kithunguriri Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5556, N'13224', N'St Philips Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5557, N'15856', N'Chesikaki Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5558, N'13504', N'Bogwendo Health Centre(Manga)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5559, N'12412', N'Kyawango Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5560, N'12057', N'Heillu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5561, N'13786', N'Masongo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5562, N'16391', N'Korao Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5563, N'12317', N'Kimutwa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5564, N'12687', N'Nzaini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5565, N'13561', N'Gesure Dispensary (Sameta)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5566, N'11967', N'Charuru Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5567, N'11247', N'Bargoni Nys Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5568, N'13994', N'Orwaki Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5569, N'12083', N'Ilalambyu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5570, N'14151', N'Tombe Health Centre (Manga)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5571, N'13684', N'Kiangoso Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5572, N'13963', N'Ogango Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5573, N'11306', N'Didewaride Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5574, N'13562', N'Gesure Health Centre (Manga)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5575, N'13642', N'Kageno Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5576, N'12085', N'Ilika Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5577, N'13920', N'Nyandiwa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5578, N'15985', N'Madende Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5579, N'15826', N'Bumutiru Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5580, N'15840', N'Bwaliro Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5581, N'14946', N'Kitalale Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5582, N'14183', N'AAR Nakuru Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5583, N'13172', N'Ruaraka Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5584, N'13729', N'Kwoyo Kodalo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5585, N'14165', N'Uyawi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5586, N'12655', N'Ngongoni Dispensary (Mwingi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5587, N'14778', N'Kaptel Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5588, N'16269', N'Kipingi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5589, N'14068', N'Saradidi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5590, N'12210', N'Kasunguni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5591, N'12153', N'Kalimani Disensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5592, N'12161', N'Kamanyaki Health centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5593, N'12666', N'Nkubu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5594, N'12653', N'Ngoleni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5595, N'12573', N'Mumbuni Dispensary (Mwingi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5596, N'12214', N'Katalwa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5597, N'12689', N'Nzatani Dispensary (Mwingi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5598, N'11473', N'Kilibasi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5599, N'12268', N'Kea Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5600, N'11526', N'Lungalunga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5601, N'12011', N'Enziu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5602, N'14207', N'Annex Hospital (Nakuru)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5603, N'14909', N'Kipsaiya Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5604, N'12541', N'Mosa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5605, N'12617', N'Muyuni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5606, N'12578', N'Muono Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5607, N'10647', N'Kutus Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5608, N'11984', N'Dallas Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5609, N'16366', N'Nakwijit Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5610, N'13116', N'Nairobi West Men''s Prison Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5611, N'12469', N'Mango Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5612, N'11799', N'Siu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5613, N'13814', N'Misesi Dispensary (Gucha)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5614, N'12808', N'Tulimani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5615, N'14060', N'Rota Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5616, N'13295', N'Athibohol Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5617, N'13525', N'China Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5618, N'16434', N'Katheka Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5619, N'12211', N'Kasyala Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5620, N'12225', N'Kathangariri Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5621, N'15673', N'State House Dispensary (Nakuru)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5622, N'12389', N'Kula Mawe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5623, N'13434', N'Saretho Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5624, N'12353', N'Kithegi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5625, N'12095', N'Itabua Police Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5626, N'10765', N'St Mulumba Mission Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5627, N'13537', N'Ebiosi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5628, N'14000', N'Othach Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5629, N'13651', N'Kambajo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5630, N'13868', N'Nyachenge Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5631, N'13938', N'Nyansira Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5632, N'16313', N'Buruburu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5633, N'13961', N'Ogam Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5634, N'12049', N'GK Prison Dispensary (Meru)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5635, N'12602', N'Mutituni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5636, N'11985', N'Dambalafachana Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5637, N'16217', N'Merille Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5638, N'12638', N'Ndiuni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5639, N'13919', N'Nyandago Koweru Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5640, N'12723', N'Sagante Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5641, N'13983', N'Nyamogonchoro Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5642, N'14050', N'Rigoko Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5643, N'12480', N'Mataka Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5644, N'15995', N'Malanga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5645, N'11953', N'Iresaboru Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5646, N'15324', N'Ndarugu (PCEA) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5647, N'16153', N'Tuikut Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5648, N'14663', N'Kalokol (AIC) Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5649, N'13590', N'Got Matar Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5650, N'11543', N'Majimoto Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5651, N'12261', N'Kavumbu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5652, N'13756', N'Magwagwa Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5653, N'16281', N'Getiesi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5654, N'11266', N'Bwagamoyo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5655, N'12238', N'Kathulumbi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5656, N'12548', N'Mua Hills Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5657, N'12782', N'Syumile Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5658, N'12563', N'Mukuuni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5659, N'13450', N'Wagberi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5660, N'13421', N'Qudama Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5661, N'12267', N'Kayatta Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5662, N'12377', N'Kivani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5663, N'13850', N'Ngere Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5664, N'14876', N'Kimondi Forest Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5665, N'12163', N'Kambusu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5666, N'13749', N'Magenche Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5667, N'12616', N'Muvuti Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5668, N'12360', N'Kithuki Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5669, N'14048', N'Riechieri Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5670, N'12167', N'Kamuthanga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5671, N'13356', N'Gurufa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5672, N'12711', N'Riachina Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5673, N'15926', N'Kaptanai Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5674, N'11711', N'Ngao District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5675, N'12660', N'Ngurunit Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5676, N'12152', N'Kalikuvu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5677, N'12395', N'Kwa Nguu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5678, N'13676', N'Kenyoro Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5679, N'13975', N'Olasi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5680, N'11276', N'Chakama Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5681, N'13878', N'Nyaguta Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5682, N'11497', N'Kizingo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5683, N'16229', N'Mweru Dispensary (Imenti South)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5684, N'12072', N'Iiani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5685, N'13688', N'Kibogo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5686, N'12584', N'Mutembuku Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5687, N'13580', N'GK Prisons Dispensary (Kisii)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5688, N'13986', N'Omosaria Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5689, N'12621', N'Chandaria Mwania Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5690, N'13543', N'Embonga Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5691, N'12496', N'Maweli Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5692, N'16440', N'Sengani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5693, N'13750', N'Mageta Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5694, N'11629', N'Mkongani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5695, N'16118', N'Shisaba Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5696, N'12314', N'Kilungu Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5697, N'12781', N'Syongila Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5698, N'13671', N'Kenyambi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5699, N'11293', N'Cowdray Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5700, N'15365', N'Nku West Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5701, N'11884', N'Vitsangalaweni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5702, N'12855', N'Yimwaa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5703, N'11630', N'Mkundi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5704, N'14324', N'Chemundu Dispensary (Nandi Central)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5705, N'12378', N'Kiviu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5706, N'13502', N'Bitare Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5707, N'12370', N'Kitunduni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5708, N'11590', N'Mbuguni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5709, N'12337', N'Kirogine Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5710, N'14668', N'Kamara Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5711, N'10582', N'Kiganjo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5712, N'13796', N'Mawere Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5713, N'11083', N'Tambaya Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5714, N'10851', N'New Mawingu Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5715, N'14536', N'Grassland Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5716, N'15435', N'Oltiasika Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5717, N'12181', N'Kanyakine District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5718, N'13583', N'God Kwer Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5719, N'16656', N'Mathunzini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5720, N'12792', N'Thaana Nzau Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5721, N'13886', N'Nyakwana Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5722, N'12600', N'Mutitu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5723, N'13825', N'Moticho Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5724, N'12096', N'Ithaeni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5725, N'12421', N'Kyusyani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5726, N'12571', N'Mumbuni Dispensary (Makueni)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5727, N'16246', N'Mbondoni Dispensary (Mwingi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5728, N'13948', N'Nyenye Misori Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5729, N'12191', N'Kanzokea Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5730, N'11368', N'Eshu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5731, N'15500', N'Rotary Doctors General Outreach')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5732, N'11684', N'Mwaluphamba Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5733, N'12080', N'Ikutha Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5734, N'11547', N'Makanzani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5735, N'10922', N'Othaya Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5736, N'12155', N'Kalitini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5737, N'12567', N'Mulangoni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5738, N'12435', N'Lundi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5739, N'13697', N'Kionyo Health Centre (Nyamache)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5740, N'12857', N'Yumbu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5741, N'15892', N'GK Prisons Dispensary (Kakamega Central)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5742, N'14022', N'Rachuonyo District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5743, N'12393', N'Kwa Mulungu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5744, N'13639', N'Kabuto Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5745, N'11784', N'Shella Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5746, N'16238', N'Embu Kmtc Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5747, N'12837', N'Vyulya Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5748, N'12807', N'Tulila Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5749, N'10653', N'Lamuria Dispensary (Nyeri North)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5750, N'13780', N'Masala Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5751, N'12220', N'Kathama Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5752, N'14164', N'Usigu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5753, N'13931', N'Nyanko Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5754, N'13945', N'Nyatike Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5755, N'12180', N'Kanyaa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5756, N'12099', N'Itongolani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5757, N'12495', N'Mavui Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5758, N'11689', N'Mwangatini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5759, N'12104', N'Ivuusya Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5760, N'12619', N'Mwambiu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5761, N'12556', N'Mui Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5762, N'12436', N'Maai Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5763, N'12798', N'Thitha Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5764, N'13092', N'Ministry of Education (Moest) VCT Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5765, N'16247', N'Musukini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5766, N'16055', N'Emutsesa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5767, N'12396', N'Kwa Vonza Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5768, N'13996', N'Osingo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5769, N'16234', N'Miathene District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5770, N'16660', N'Nderema Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5771, N'11952', N'Bori Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5772, N'11558', N'Mamba Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5773, N'12276', N'Kiangini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5774, N'16254', N'Kyuasini Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5775, N'12404', N'Kyambeke Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5776, N'13330', N'Dugo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5777, N'15070', N'Lolminingai Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5778, N'16435', N'Mukunike Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5779, N'12652', N'Ngiluni Dispensary (Kitui)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5780, N'14408', N'Dr Gacheru Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5781, N'15920', N'Kanganga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5782, N'15923', N'Kapsambu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5783, N'10516', N'Kenya Nut Company Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5784, N'12732', N'Mitaboni Mission Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5785, N'15686', N'Sunrise Evans Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5786, N'13699', N'Kiptenden Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5787, N'10807', N'Mwea Medical Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5788, N'10424', N'Kahuho Private Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5789, N'10967', N'Ruera Estate Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5790, N'12956', N'Githurai Medical Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5791, N'13754', N'Magura Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5792, N'12955', N'Giovanna Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5793, N'12937', N'Family Care Clinic Kasarani')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5794, N'14378', N'Cherangan Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5795, N'13596', N'Guru Nanak Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5796, N'13677', N'Keritor Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5797, N'11529', N'Mabati Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5798, N'13035', N'Kisembo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5799, N'16504', N'Kibirigwi Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5800, N'14225', N'Bangii Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5801, N'10517', N'Kenya Police College Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5802, N'10667', N'Mabroukie Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5803, N'12884', N'Biafra Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5804, N'16744', N'Kisasi Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5805, N'15907', N'Jamii Health Services Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5806, N'13730', N'Lake Basin Development Authority (Lbda) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5807, N'15999', N'Manyala Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5808, N'11833', N'Sun N'' Sand Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5809, N'12941', N'Family Life Promotions and Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5810, N'10437', N'Kakuzi Limited Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5811, N'13237', N'Transcom Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5812, N'15236', N'Mpalla Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5813, N'11621', N'Mishoroni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5814, N'10996', N'Samaria Maternity Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5815, N'11894', N'Watamu Community Health Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5816, N'13071', N'Marurui Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5817, N'12881', N'Baraka Dispensary (Nairobi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5818, N'13261', N'Zimmerman Medical Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5819, N'13246', N'Uzima Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5820, N'10637', N'Kiruri Dispensary (Muranga North)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5821, N'12003', N'Embori Farm Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5822, N'14100', N'Sotik Highlands Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5823, N'10480', N'Karangaita Socfinaf Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5824, N'13063', N'Maria Maternity and Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5825, N'13667', N'Kendu Adventist Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5826, N'14925', N'Kiptagich Tegat Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5827, N'14666', N'Kamaget Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5828, N'16716', N'Able Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5829, N'13929', N'Nyang''oma Mission Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5830, N'15095', N'Loving Care (MCK) Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5831, N'14196', N'Alale (AIC) Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5832, N'13739', N'St Elizabeth Lwak Mission Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5833, N'14128', N'St Vincents De Paul Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5834, N'13062', N'Maria Immaculate Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5835, N'13557', N'Gekano Health Centre (Manga)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5836, N'12816', N'Tuuru Catholic Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5837, N'15289', N'Nakuru War Memorial Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5838, N'13133', N'Ogwedhi Dispensary (Nairobi North)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5839, N'13149', N'Provide Inter Math Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5840, N'13008', N'Karma Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5841, N'13022', N'Kenya Utalii Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5842, N'12426', N'Lewa Downs Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5843, N'12960', N'Good Shepherd Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5844, N'13245', N'Ushirika Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5845, N'10809', N'Mweiga Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5846, N'16047', N'Murhanda Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5847, N'14839', N'Kerol Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5848, N'12030', N'Gatab Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5849, N'14033', N'Rangala Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5850, N'14166', N'Verna Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5851, N'12524', N'Mikinduri Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5852, N'11565', N'Maria Teressa Nuzzo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5853, N'15288', N'Nakuru Provincial General Hospital (PGH)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5854, N'13822', N'St Barbara Mosocho Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5855, N'14055', N'Ritumbe Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5856, N'14463', N'Enkorika Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5857, N'10023', N'Ama (Africa Muslim Agency) Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5858, N'12560', N'Mukothima Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5859, N'12433', N'Loiyangalani Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5860, N'14043', N'Reusse Troyer Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5861, N'14072', N'Sega Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5862, N'14503', N'Fr andrian Heath Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5863, N'14104', N'St Clare Bolo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5864, N'12775', N'St Theresas Riiji Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5865, N'13058', N'Makina Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5866, N'12306', N'Kikoko Mission Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5867, N'15372', N'Nyamamithi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5868, N'12668', N'North Horr Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5869, N'13717', N'Komotobo Mission Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5870, N'15490', N'Rombo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5871, N'14124', N'St Paul''s Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5872, N'10048', N'Baricho Catholic Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5873, N'13622', N'Isana Maternity and Nursing')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5874, N'14076', N'Sengera Health Centre (Gucha)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5875, N'14121', N'St Monica Rapogi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5876, N'13719', N'Koru Mission Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5877, N'13629', N'Itierio Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5878, N'12176', N'Kangundo Community Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5879, N'13473', N'Aluor Mission Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5880, N'13832', N'Muhoroni Sugar Company (Musco) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5881, N'13089', N'Mercy Mission Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5882, N'13522', N'Chemelil Sugar Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5883, N'13985', N'Omorembe Health Centre (Gucha)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5884, N'13936', N'St Joseph''s Nyansiongo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5885, N'12748', N'St Francis Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5886, N'14034', N'Rangenyo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5887, N'15652', N'St Mary Health Centre (Kiserian)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5888, N'12716', N'Ruiri Catholic Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5889, N'13628', N'Itibo Mission Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5890, N'10105', N'Del Monte Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5891, N'16144', N'Chief Milimu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5892, N'16065', N'Namasoli Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5893, N'12696', N'Oll Mwea Hospital Clinic Embu (Satelite)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5894, N'13488', N'Asumbi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5895, N'14097', N'Sony Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5896, N'14951', N'Kitengela Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5897, N'12537', N'Miu Sub-Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5898, N'10615', N'Kinunga Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5899, N'12841', N'Wamunyu Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5900, N'12942', N'Family Care Medical Centre & Maternity')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5901, N'14161', N'Uriri Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5902, N'14021', N'Rachar Sugar Belt Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5903, N'12536', N'Mituntu Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5904, N'14120', N'St Monica Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5905, N'14922', N'Kipsyenan Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5906, N'14052', N'Riokindo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5907, N'12789', N'Tei Wa Yesu Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5908, N'13357', N'Habaswein District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5909, N'15864', N'Dreamland Mc Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5910, N'16433', N'Kakuyuni Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5911, N'12323', N'Kinna Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5912, N'13489', N'Atemo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5913, N'16284', N'Oriang (SDA) Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5914, N'14168', N'Wagwe Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5915, N'11905', N'Westlands Health Care Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5916, N'13662', N'Kegogi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5917, N'11176', N'Warazo Rural Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5918, N'11642', N'Mokowe Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5919, N'13779', N'Masaba Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5920, N'12870', N'Amurt Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5921, N'13709', N'Kodiaga Prison Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5922, N'11401', N'Gongoni Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5923, N'13968', N'Ogra Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5924, N'10294', N'Good Hope Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5925, N'10831', N'Ndeiya Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5926, N'10055', N'Bellevue Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5927, N'10732', N'Mirangine Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5928, N'11034', N'St Gabriel Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5929, N'13657', N'Katito Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5930, N'11729', N'Pablo Hortsman Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5931, N'12519', N'Miambani Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5932, N'10870', N'Ngorano Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5933, N'10251', N'Gichira Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5934, N'10249', N'Gichiche Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5935, N'13249', N'Waithaka Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5936, N'11969', N'Chiakariga Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5937, N'10781', N'Murinduko Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5938, N'10462', N'Kangaita Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5939, N'14232', N'Baraton MCH')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5940, N'10110', N'Difathas Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5941, N'14704', N'Kapkangani Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5942, N'13969', N'Ogwedhi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5943, N'13272', N'Ajawa Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5944, N'10869', N'Ngoliba Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5945, N'11787', N'Shimba Hills Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5946, N'11677', N'Municipal Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5947, N'10895', N'Nyathuna Sub District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5948, N'13989', N'Ongo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5949, N'12876', N'Babadogo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5950, N'13006', N'Kariobangi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5951, N'14096', N'Sondu Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5952, N'13768', N'Mangima SDA Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5953, N'14090', N'Simbiri Nanbell Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5954, N'13812', N'Miriu Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5955, N'16466', N'Kiritiri Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5956, N'15904', N'Ipali Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5957, N'10859', N'Ngarariga Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5958, N'12283', N'Kiarago Health Centre (Imenti South)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5959, N'10636', N'Kirogo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5960, N'12132', N'Kajuki Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5961, N'13139', N'Parkroad Nursing Home (Nairobi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5962, N'11484', N'Kipini Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5963, N'13964', N'Ogango Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5964, N'12962', N'GSUTraining School')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5965, N'13927', N'Nyangoge Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5966, N'13043', N'7Kr Mrs Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5967, N'14020', N'Rabuor Sub county Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5968, N'11853', N'Tiwi Rhtc')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5969, N'14149', N'Tisinye Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5970, N'14419', N'Dr Njoroge Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5971, N'13523', N'Chepngombe Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5972, N'13620', N'Iranda Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5973, N'14085', N'Sigomere Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5974, N'13600', N'Hawinga Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5975, N'12244', N'Katulani Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5976, N'11748', N'Rabai Rural Health Demonstration Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5977, N'13641', N'Kadenge Ratuoro Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5978, N'14063', N'Rwambwa Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5979, N'14148', N'Ting''wangi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5980, N'13130', N'National Youth Service Hq Dispensary (Ruaraka)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5981, N'13773', N'Marenyo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5982, N'10617', N'Kinyangi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5983, N'15294', N'Namanga Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5984, N'11472', N'Kikoneni Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5985, N'12991', N'Jkia Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5986, N'13760', N'Malanga Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5987, N'13533', N'Dienya Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5988, N'13471', N'Akala Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5989, N'13787', N'Matangwe Community Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5990, N'12521', N'Mbitini Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5991, N'13777', N'Marindi Sub county Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5992, N'13953', N'Ober Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5993, N'13843', N'Ndiru Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5994, N'12198', N'Karau Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5995, N'13623', N'Isecha Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5996, N'11130', N'Ucheru Community Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5997, N'11768', N'Samburu Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5998, N'12546', N'Mpukoni Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (5999, N'13044', N'Langata Women Prison Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6000, N'12615', N'Muutiokiama Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6001, N'14259', N'Bisil Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6002, N'15440', N'Ongata Rongai Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6003, N'14950', N'Kitengela Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6004, N'15156', N'Mau Narok Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6005, N'13550', N'Etago Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6006, N'10236', N'Gatura Healh Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6007, N'13947', N'Nyawara Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6008, N'13840', N'Ndere Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6009, N'16439', N'Matungulu Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6010, N'10864', N'Ngenda Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6011, N'11562', N'Marafa Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6012, N'12309', N'Kilala Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6013, N'14030', N'Ramula Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6014, N'13897', N'Nyamaraga Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6015, N'13723', N'Kugitimo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6016, N'15916', N'Kambiri Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6017, N'16104', N'Shamakhubu Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6018, N'15900', N'Ileho Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6019, N'14467', N'Entarara Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6020, N'12031', N'Gatimbi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6021, N'13611', N'Ibacho Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6022, N'10666', N'Lussigetti Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6023, N'15358', N'Njoro Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6024, N'16367', N'Alale Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6025, N'12232', N'Kathigu Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6026, N'12593', N'Muthetheni Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6027, N'12691', N'Nzeluni Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6028, N'12475', N'Masii Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6029, N'12831', N'Uruku Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6030, N'14045', N'Riana Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6031, N'11173', N'Wanjohi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6032, N'10822', N'Naromoru Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6033, N'14146', N'Tinga Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6034, N'13991', N'Oresi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6035, N'12258', N'Kavindu Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6036, N'13322', N'Danaba Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6037, N'12376', N'Kivaani Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6038, N'10049', N'Baricho Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6039, N'12642', N'Nembure Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6040, N'16079', N'Ndalu Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6041, N'16066', N'Nambale Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6042, N'12849', N'Winzyeei Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6043, N'13127', N'Nsis Health Centre (Ruaraka)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6044, N'12996', N'Kahawa Garrison Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6045, N'13893', N'Nyamagwa Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6046, N'12493', N'Mavindini Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6047, N'14003', N'Othoro Sub District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6048, N'13909', N'Nyametaburo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6049, N'12174', N'Kangeta Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6050, N'13333', N'Eldas Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6051, N'10856', N'Ngano Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6052, N'12257', N'Kaviani Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6053, N'12102', N'Iuani Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6054, N'12530', N'Mitaboni Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6055, N'16683', N'Kuresoi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6056, N'12236', N'Kathonzweni Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6057, N'16555', N'Theere Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6058, N'12839', N'Waita Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6059, N'15682', N'Suguta Marmar Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6060, N'11990', N'Dukana Health Centre (North Horr)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6061, N'16121', N'Shitsitswi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6062, N'13548', N'Esani Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6063, N'15150', N'Mashuru Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6064, N'13589', N'Got Kojowi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6065, N'11387', N'Gede Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6066, N'15866', N'Ebusiratsi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6067, N'12503', N'Mbiuni Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6068, N'13160', N'Redemeed Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6069, N'12414', N'Kyethani Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6070, N'12690', N'Nzawa Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6071, N'12797', N'Thitani Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6072, N'11923', N'Akachiu Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6073, N'12422', N'Laare Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6074, N'10170', N'Endarasha Rural Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6075, N'12365', N'Kitise Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6076, N'11395', N'Shimo-La Tewa Health Centre (GK Prison)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6077, N'12192', N'Kaongo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6078, N'12848', N'Wingemi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6079, N'12483', N'Mathuki Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6080, N'12186', N'Kanyunga Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6081, N'12654', N'Ngomeni Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6082, N'12805', N'Tseikuru Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6083, N'13428', N'Sabuli Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6084, N'16004', N'Matayos Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6085, N'15823', N'Bumala A Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6086, N'15994', N'Malakisi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6087, N'16282', N'Kasongo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6088, N'13461', N'Abidha Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6089, N'12717', N'Ruiri Rural Health Demonstration Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6090, N'14086', N'Sigoti Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6091, N'11936', N'Athi River Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6092, N'11928', N'Amugaa Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6093, N'14054', N'Riotanchi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6094, N'15013', N'Lare Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6095, N'13778', N'Mariwa Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6096, N'10872', N'Ngorongo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6097, N'12829', N'Uringu Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6098, N'10657', N'Leshau Pondo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6099, N'10893', N'Nyakianga Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6100, N'10661', N'Limuru Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6101, N'11881', N'Vipingo Rural Demonstration Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6102, N'12657', N'Nguluni Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6103, N'12390', N'Kunati Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6104, N'13770', N'Manyuanda Sub county Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6105, N'12565', N'Mukuyuni Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6106, N'12242', N'Katse Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6107, N'14868', N'Kimana Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6108, N'13370', N'Ijara Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6109, N'12179', N'Kanja Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6110, N'16465', N'Kiambere Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6111, N'12539', N'Mivukoni Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6112, N'11258', N'Bomu Medical Hospital (Changamwe)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6113, N'10489', N'Karatu Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6114, N'11170', N'Wangige Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6115, N'15574', N'Simba Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6116, N'10338', N'Igegania Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6117, N'14582', N'Isinya Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6118, N'13771', N'Manyuanda Health Centre (Rarieda)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6119, N'16438', N'Kyeleni Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6120, N'12288', N'Kibugua Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6121, N'14404', N'Doldol Sub District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6122, N'11282', N'Chasimba Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6123, N'13517', N'Bugumbe Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6124, N'14009', N'Oyani Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6125, N'12150', N'Kaliani Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6126, N'15870', N'Ekwanda Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6127, N'11385', N'Garsen Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6128, N'12341', N'Kisau Sub District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6129, N'15940', N'Khwisero Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6130, N'12087', N'Illeret Health Centre (North Horr)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6131, N'15185', N'Mile 46 Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6132, N'12729', N'Sericho Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6133, N'13398', N'Liboi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6134, N'16463', N'Gategi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6135, N'10655', N'Lari Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6136, N'16180', N'New Heri Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6137, N'13112', N'Nairobi South Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6138, N'13213', N'St Lukes (Kona) Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6139, N'13227', N'St Teresa''s Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6140, N'13256', N'Wema Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6141, N'15143', N'Mars Associate Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6142, N'13200', N'St Catherine''s Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6143, N'13201', N'St Florence Medical Care Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6144, N'13049', N'Lianas Clinic Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6145, N'13137', N'Padens Medicare Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6146, N'13111', N'Nairobi Outpatient Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6147, N'13159', N'Ray of Hope Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6148, N'13474', N'Amani Medical Centre (Suneka)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6149, N'13091', N'Mid Hill Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6150, N'12944', N'Frepals Community Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6151, N'13103', N'Muteithania Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6152, N'11489', N'Kisimani Health Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6153, N'13216', N'St Mary''s Medical Clinic (Sarang''ombe)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6154, N'13212', N'Spacecare Health Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6155, N'13704', N'Kisumu County Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6156, N'11818', N'St Luke''s (ACK) Hospital Kaloleni')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6157, N'14426', N'Egerton University')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6158, N'13805', N'Migori District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6159, N'11474', N'Kilifi District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6160, N'12525', N'Mikinduri Sub-District Hospial')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6161, N'13772', N'Marani District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6162, N'13880', N'Nyahera Sub District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6163, N'13714', N'Kombewa Sub County Refferal Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6164, N'12029', N'Garbatulla District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6165, N'13921', N'Nyakach Sub County Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6166, N'13380', N'Khorof Harar Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6167, N'10627', N'Kiria-Ini Mission Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6168, N'13217', N'St Mary''s Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6169, N'12366', N'Kitui District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6170, N'16664', N'Usoma Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6171, N'12420', N'Kyuso District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6172, N'13406', N'Ijara District Hospital - Masalani')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6173, N'13359', N'Hagadera Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6174, N'15629', N'St Augustine Youth Friendly Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6175, N'13810', N'Miranga Sub County Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6176, N'13392', N'Lafey Sub-County Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6177, N'13625', N'Isibania Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6178, N'11124', N'Tumutumu (PCEA) Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6179, N'15836', N'Butere District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6180, N'15946', N'Kima Mission Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6181, N'13679', N'Keumbu Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6182, N'12802', N'Timau Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6183, N'13528', N'Chulaimbo Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6184, N'11973', N'Chuka District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6185, N'10233', N'Gatundu District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6186, N'13612', N'Ibeno Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6187, N'12799', N'St. John of God Hospital Tigania')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6188, N'13411', N'Modogashe Sub-County Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6189, N'10700', N'Mary Immaculate Hospital (Nyeri North)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6190, N'14749', N'Kapsabet County Referral Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6191, N'12455', N'Makindu Sub-County Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6192, N'13339', N'Bura District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6193, N'12184', N'Kanyangi Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6194, N'10485', N'Karatina District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6195, N'11655', N'Msambweni District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6196, N'13891', N'Nyamache District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6197, N'12605', N'Mutuati Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6198, N'12457', N'Makueni District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6199, N'13638', N'Kabondo Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6200, N'12282', N'Kibirichia Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6201, N'11512', N'Lamu District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6202, N'10639', N'Kirwara Sub District')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6203, N'12508', N'Mbooni District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6204, N'13314', N'Bute District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6205, N'11649', N'Mpeketoni Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6206, N'12601', N'Mutitu Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6207, N'12618', N'Mwala Subcounty Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6208, N'12787', N'Tawa Sub-Distrct Hospial')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6209, N'10470', N'Kangema Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6210, N'10438', N'Kalimoni Hospital (Thika)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6211, N'14431', N'Elburgon Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6212, N'12998', N'Kaloleni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6213, N'12681', N'Nuu Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6214, N'15950', N'Kimilili Subcounty Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6215, N'13833', N'Muhuru Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6216, N'13352', N'Griftu District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6217, N'13766', N'Manga District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6218, N'16078', N'Navakholo Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6219, N'10777', N'Murang''a District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6220, N'14175', N'Yala Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6221, N'13668', N'Kendu Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6222, N'15212', N'Molo District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6223, N'12526', N'Mikumbune Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6224, N'13653', N'Kandiege Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6225, N'13588', N'Got Agulu Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6226, N'13445', N'Mandera West Sub County Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6227, N'10782', N'Muriranjas Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6228, N'15398', N'Olenguruone Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6229, N'13673', N'Kenyenya District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6230, N'10763', N'Mukurweini District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6231, N'11566', N'Mariakani District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6232, N'13841', N'Ndhiwa Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6233, N'13747', N'Madiany Sub County  Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6234, N'16130', N'Sirisia Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6235, N'14080', N'Siaya District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6236, N'11507', N'Kwale District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6237, N'14652', N'Kajiado District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6238, N'13867', N'Nyacheki Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6239, N'12516', N'Meru District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6240, N'11094', N'Thika Level 5 Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6241, N'12041', N'Githongo District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6242, N'13312', N'Buna Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6243, N'12523', N'Migwani Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6244, N'14036', N'Rangwe Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6245, N'13402', N'Mandera County Refferal Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6246, N'12500', N'Mbeu Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6247, N'13696', N'Kiogoro Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6248, N'13726', N'Kuria District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6249, N'13335', N'Mandera Central Sub county Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6250, N'12544', N'Moyale District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6251, N'13847', N'Nduru District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6252, N'14634', N'Kacheliba District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6253, N'13507', N'Bondo District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6254, N'12795', N'Tharaka District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6255, N'12472', N'Marsabit District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6256, N'11208', N'Al Farooq Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6257, N'11104', N'Tigoni District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6258, N'13858', N'Ntimaru Sub-County Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6259, N'13369', N'Iftin Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6260, N'13365', N'Hulugho Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6261, N'13916', N'Nyamusi Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6262, N'13540', N'Ekerenyo Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6263, N'15351', N'Ngong Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6264, N'12626', N'Mwingi District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6265, N'10924', N'Outspan Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6266, N'11097', N'Thika Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6267, N'13080', N'Mbagathi District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6268, N'13423', N'Mandera North Sub county Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6269, N'14058', N'Rongo District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6270, N'13631', N'Iyabe District Hospital (Kisii South)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6271, N'13564', N'Gesusu Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6272, N'13594', N'Gucha District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6273, N'13656', N'Karungu Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6274, N'13783', N'Masimba Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6275, N'13608', N'Homa Bay County Teaching and Referral Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6276, N'13663', N'Kegonga Sub County Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6277, N'10083', N'Central Memorial Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6278, N'10609', N'Kimbimbi Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6279, N'13912', N'Nyamira District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6280, N'13678', N'Masaba District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6281, N'15051', N'Loitokitok District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6282, N'15107', N'Magadi Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6283, N'13346', N'Garissa Provincial General Hospital (PGH)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6284, N'10903', N'Nyeri Provincial General Hospital (PGH)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6285, N'10368', N'Jamii Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6286, N'15126', N'Maralal District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6287, N'13351', N'Godoma Health Centre (Nep)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6288, N'12177', N'Kangundo District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6289, N'11740', N'Port Reitz District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6290, N'13374', N'Jalish Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6291, N'12004', N'Embu Provincial General Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6292, N'13703', N'Kisii Hospital (Level 5)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6293, N'14169', N'Wakula Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6294, N'14176', N'Yokia Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6295, N'11289', N'Coast Province General Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6296, N'13650', N'Kamasengere Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6297, N'13854', N'Ng''odhe Island Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6298, N'14119', N'St Mary''s Health Centre (Mbita)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6299, N'14154', N'Tuungane Youth Centre (Mbita)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6300, N'10167', N'Emmanuel M/C VCT Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6301, N'13308', N'Bodhai Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6302, N'13950', N'Obalwanda Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6303, N'14016', N'Ponge Dispensary (Mbita)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6304, N'13842', N'Ndhuru Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6305, N'14162', N'Usao Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6306, N'13742', N'Lwanda Gwassi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6307, N'13700', N'Kisaku Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6308, N'13707', N'Kiwa Island Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6309, N'14059', N'St Mercelline Roo Dispensary (Suba)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6310, N'13879', N'Nyagwethe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6311, N'13764', N'Mama Josphene Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6312, N'13691', N'Kigwa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6313, N'16407', N'Sururu Health Centre (CDF)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6314, N'13023', N'Kenyatta National Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6315, N'14720', N'Kapkoi Health Centre (Kwanza)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6316, N'12002', N'Emali Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6317, N'11946', N'Barazani Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6318, N'12467', N'Emali Manchester Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6319, N'16285', N'Bultohama Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6320, N'13701', N'Kisegi Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6321, N'14130', N'Suba District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6322, N'13798', N'Mbita District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6323, N'14593', N'Jawabu Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6324, N'14579', N'Kakuma Refugee Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6325, N'13967', N'Ogongo Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6326, N'14075', N'Sena Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6327, N'14155', N'Ugina Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6328, N'14140', N'Takawiri Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6329, N'14095', N'Soklo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6330, N'14150', N'Tom Mboya Memorial Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6331, N'13705', N'Kitare Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6332, N'14167', N'Viagenco Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6333, N'13753', N'Magunga Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6334, N'14152', N'Tonga Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6335, N'13585', N'Godbura Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6336, N'14074', N'Seka Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6337, N'13828', N'Msare Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6338, N'13915', N'Nyamrisra Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6339, N'14981', N'Kolongolo C.M Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6340, N'12312', N'Kilili Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6341, N'12478', N'Masumba Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6342, N'12596', N'Mutiluni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6343, N'12610', N'Mutyambua Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6344, N'12622', N'Mwanyani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6345, N'12623', N'Mweini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6346, N'12399', N'Kwale Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6347, N'14637', N'Kaeris Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6348, N'14654', N'Kakuma Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6349, N'14885', N'Halfeez Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6350, N'16417', N'Terige Dispensary (CDF)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6351, N'15092', N'Loruth Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6352, N'12462', N'Malka Galla Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6353, N'12046', N'GK Prison Dispensary (Isiolo)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6354, N'11933', N'Apu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6355, N'12330', N'Kipsing Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6356, N'15352', N'Ngoron Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6357, N'14979', N'Kolowa Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6358, N'15053', N'Loiwat Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6359, N'14235', N'Barpello Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6360, N'12384', N'Korbesa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6361, N'13016', N'Kayole II Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6362, N'12724', N'Salama (Baptist) Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6363, N'12502', N'Mbitini Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6364, N'12484', N'Matiliku Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6365, N'12374', N'Kiu (AIC) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6366, N'15303', N'Nanam Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6367, N'15445', N'Oropoi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6368, N'14655', N'Kakuma Mission Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6369, N'14974', N'Kokiselei Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6370, N'14636', N'Kachoda Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6371, N'15310', N'Nariokotome Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6372, N'14662', N'Kalobeyei Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6373, N'15063', N'Lokore Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6374, N'12419', N'Kyumbe (AIC) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6375, N'15082', N'Lopur Dispensary (Lopur)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6376, N'14643', N'Kaikor Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6377, N'15117', N'Makutano Health Centre (Turkana West)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6378, N'11924', N'Alfalah Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6379, N'11947', N'Basa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6380, N'11950', N'Bisan Biliqo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6381, N'13443', N'Shimbrey Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6382, N'16745', N'Kambi Garba Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6383, N'12697', N'Oldonyiro Dispensary (Isiolo)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6384, N'14983', N'Komolion Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6385, N'12093', N'AIC Dispensary (Isiolo)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6386, N'15059', N'Lokichogio (AIC) Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6387, N'12499', N'Mbenuu H Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6388, N'15060', N'Lokipoto Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6389, N'15186', N'Milima Tatu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6390, N'14209', N'Aposta Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6391, N'15315', N'Natira Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6392, N'14996', N'Koyasa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6393, N'15055', N'Lokangae Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6394, N'14604', N'Kaaleng Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6395, N'15054', N'Lokamarinyang Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6396, N'15058', N'Lokichoggio Military Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6397, N'15271', N'Nachukui Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6398, N'12777', N'Sultan Hamud Sub District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6399, N'12558', N'AIC Mukaa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6400, N'14975', N'Kokuro Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6401, N'13088', N'Mercillin Afya Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6402, N'13887', N'Nyalenda Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6403, N'14392', N'Churo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6404, N'16728', N'Chesirimion Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6405, N'14978', N'Kokwototo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6406, N'14958', N'Kobos Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6407, N'15483', N'Rhein Valley Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6408, N'14551', N'Finlays Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6409, N'15571', N'Siloam Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6410, N'16331', N'Kamangunet VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6411, N'15766', N'Vuma VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6412, N'16377', N'Revival Baptist VCT Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6413, N'16461', N'Rehema VCT Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6414, N'15274', N'Nadapal Primary Health Care Programme')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6415, N'15656', N'St Mary''s Kalokol Primary Health Care Programme')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6416, N'13327', N'Dertu Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6417, N'11817', N'St Joseph''s Shelter of Hope')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6418, N'15062', N'Lokitaung Sub County Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6419, N'15081', N'Lopiding Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6420, N'12094', N'Isiolo District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6421, N'12263', N'Kavuthu H/Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6422, N'13422', N'Raya Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6423, N'15828', N'Bungoma County Referal Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6424, N'15077', N'Longisa District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6425, N'15565', N'Sigor Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6426, N'12514', N'Merti Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6427, N'13122', N'Ngara Health Centre (City Council of Nairobi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6428, N'15738', N'Tot Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6429, N'15322', N'Ndanai')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6430, N'14321', N'Chemolingot District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6431, N'14762', N'Kapsitwet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6432, N'11399', N'Glory Medical Clinic (Tana River)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6433, N'14949', N'Kitale Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6434, N'14194', N'Akemo Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6435, N'14438', N'Elgon View Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6436, N'14380', N'Cherangany Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6437, N'15446', N'Ortum Mission Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6438, N'15654', N'St Mary''s Hospital (Gilgil)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6439, N'15304', N'Nanyuki Cottage Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6440, N'14890', N'Kipchimchim M Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6441, N'14872', N'Kiminini Cottage Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6442, N'15740', N'Transmara Medicare')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6443, N'15649', N'St Leonard Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6444, N'14538', N'Greenview Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6445, N'15466', N'Polyclinic Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6446, N'14834', N'Kericho Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6447, N'11299', N'Dawida Maternity Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6448, N'11201', N'Afya Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6449, N'14319', N'Chemogondany Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6450, N'13299', N'Balich Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6451, N'15764', N'Valley Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6452, N'14741', N'Kaplong Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6453, N'15719', N'Tenwek Mission Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6454, N'15174', N'Mercy Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6455, N'11996', N'Ekalakala Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6456, N'14770', N'Kapsuser Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6457, N'12511', N'Mercy Clinic (Ikutha)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6458, N'11694', N'Mwatate Sisal Estate Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6459, N'11680', N'Mvono Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6460, N'11757', N'Riflot Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6461, N'11647', N'Mount View Nursing & Maternity Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6462, N'11441', N'Joy Medical Clinic (Mwatate)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6463, N'15133', N'Marie Stopes (Naivasha)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6464, N'15003', N'Kwanza Sub County Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6465, N'15479', N'Rapha Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6466, N'13298', N'Balambala Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6467, N'16390', N'Kihingo Dispensary (CDF)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6468, N'12013', N'Faith Nursing Home (Ikutha)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6469, N'11989', N'Dr Mutuma Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6470, N'13433', N'Sankuri Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6471, N'13184', N'Shauri Moyo Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6472, N'16146', N'St Susan Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6473, N'16048', N'Murudef Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6474, N'15998', N'Malinya Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6475, N'16053', N'Musoli Health Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6476, N'16693', N'Baraka Medical Clinic (Trans Nzoia East)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6477, N'14865', N'Kilgoris Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6478, N'16670', N'Baraka Medical Clinic (Samburu East)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6479, N'16356', N'Mwangaza Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6480, N'16469', N'Chepseon-VCT Site')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6481, N'13319', N'Daley Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6482, N'14594', N'Jehova Rapha Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6483, N'14665', N'Kalyet Clinic (Kipkelion)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6484, N'14208', N'Annex Medical Clinic (Trans Nzoia West)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6485, N'14548', N'Highway Medical Clinic (Trans Nzoia East)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6486, N'14231', N'Baraka Medical Clinic (Turkana Central)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6487, N'14883', N'Kamulat Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6488, N'14492', N'Family Health Opition Kenya Clinic (Buret)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6489, N'16706', N'Bokoli Base Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6490, N'14742', N'Kaplong Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6491, N'16353', N'Dr Nabakwe Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6492, N'14422', N'Dr Somba Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6493, N'14542', N'Guyana Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6494, N'15050', N'Loima Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6495, N'15010', N'Langa Medical Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6496, N'13782', N'Maseno University Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6497, N'14826', N'Kenegut Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6498, N'11265', N'Bura Mission Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6499, N'16694', N'Med Afric Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6500, N'12208', N'Kasikeu Dispensary ')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6501, N'14258', N'Birunda (Lyavo Project) Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6502, N'16340', N'Kayanet Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6503, N'16342', N'Burnt Forest Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6504, N'16341', N'Nazareth Medical Clinic (Wareng)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6505, N'13738', N'Lumumba Sub County Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6506, N'14399', N'Crystal Medical  Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6507, N'16709', N'Jaggery Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6508, N'16707', N'Emmanuel Medical Clinic (Bungoma East)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6509, N'16708', N'Highway Medical Clinic (Bungoma East)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6510, N'14413', N'Dr Manyara Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6511, N'14416', N'Dr Muthiora Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6512, N'15175', N'Mercy Mobile Clinic (Kipkelion)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6513, N'15458', N'Makutano (PCEA) Medical Clinic (Trans Nzoia East)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6514, N'15476', N'Racecourse Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6515, N'15480', N'Rapha Maternity (Nakuru Central)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6516, N'15535', N'Savannah Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6517, N'15115', N'Majoh Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6518, N'13376', N'Jarajara Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6519, N'15293', N'Nalepo Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6520, N'15329', N'Neema Medical Clinic (Trans Nzoia West)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6521, N'15376', N'Nyonjoro Medical Clinic (Nakuru)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6522, N'15584', N'Chitugul Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6523, N'15569', N'Sikhendu Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6524, N'16646', N'Mwikia Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6525, N'16647', N'Ponya Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6526, N'15563', N'Sigilai (Cmc) Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6527, N'14118', N'St Mark''s Lela Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6528, N'12557', N'Mujwa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6529, N'13331', N'Dujis Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6530, N'16482', N'Mulembe Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6531, N'16020', N'Mission of Mercy Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6532, N'15317', N'Chemororoch dispensary (Kapkures)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6533, N'10448', N'Kamburu (PCEA) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6534, N'14401', N'Delamere Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6535, N'15765', N'Vinet Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6536, N'14533', N'Gosheni Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6537, N'14871', N'New Kimilili Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6538, N'15407', N'Ol-Njorowa Flower Farm Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6539, N'14253', N'Better Health Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6540, N'14278', N'Camp Brethren Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6541, N'14255', N'Bigot Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6542, N'11006', N'Shanka Medical')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6543, N'11016', N'Solea Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6544, N'10959', N'Roadside Clinic (Kagunduini)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6545, N'10771', N'Mununga Health Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6546, N'10455', N'Kamunyaka Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6547, N'15282', N'Naivasha (AIC) Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6548, N'10241', N'Generations Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6549, N'15687', N'Sun-Shine Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6550, N'14905', N'Kipngchoch Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6551, N'14279', N'Canaan (ACK) Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6552, N'16686', N'Hope Medical Clinic (Nakuru)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6553, N'10272', N'Githunguri Medical Plaza Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6554, N'15272', N'Nacoharg Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6555, N'14482', N'Euvan Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6556, N'10651', N'Kwa Ng''ang''a Medicare')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6557, N'16376', N'Lamorna Farm Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6558, N'15775', N'Wayside Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6559, N'14210', N'Aquilla Farm Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6560, N'16164', N'Kabras Action Group (KAG) Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6561, N'10412', N'Kagwe Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6562, N'13633', N'Jawabu (Community) Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6563, N'14265', N'Bondeni Maternity')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6564, N'16337', N'Lelmolok Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6565, N'15974', N'Lunyito Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6566, N'10271', N'Githunguri Heathwatch Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6567, N'16127', N'Sinoko Dispensary (Likuyani)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6568, N'15981', N'Lwandeti Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6569, N'16139', N'St Mary''s Dispensary (Lugari)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6570, N'14861', N'Kihia Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6571, N'15688', N'Sun-Shine Medical Clinic Annex')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6572, N'10270', N'Githunguri Health Services Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6573, N'11841', N'Taveta Meditech Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6574, N'16095', N'Rukala Model Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6575, N'15851', N'Chekalini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6576, N'14701', N'Kapenguria District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6577, N'16157', N'Vihiga District Hosptial')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6578, N'14961', N'Kocholwo Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6579, N'16128', N'Sio Port District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6580, N'14300', N'Cheborgei Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6581, N'14178', N'AIC Litein Mission Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6582, N'12338', N'Kiroo Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6583, N'14642', N'Kaigat (SDA) Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6584, N'14769', N'Kapsoya Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6585, N'15108', N'Mai Mahiu Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6586, N'14897', N'Kipkelion Sub District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6587, N'14606', N'Kabarak Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6588, N'14465', N'Enoosaen Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6589, N'14330', N'Chepareria Sub District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6590, N'14549', N'Holy Spirit Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6591, N'15089', N'St Elizabeth Lorugum Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6592, N'15628', N'St Antony Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6593, N'15639', N'St Francis Health Centre (Nakuru Central)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6594, N'15280', N'Naivasha District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6595, N'15894', N'Hamisi Sub District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6596, N'15889', N'Givudimbuli Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6597, N'13405', N'Mansabubu Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6598, N'14287', N'Changoi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6599, N'15849', N'Chebwai Mission Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6600, N'14313', N'Chemartin Tea Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6601, N'14229', N'Baraka Medical Clinic (Pokot Central)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6602, N'15634', N'St Catherine''s Napetet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6603, N'15273', N'Nadapal Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6604, N'10072', N'Blessed Louis Palazzolo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6605, N'14329', N'Chepareria (SDA) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6606, N'12588', N'Muthambi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6607, N'15299', N'Namoruputh (PAG) Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6608, N'15113', N'Maji Moto Dispensary (Narok South)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6609, N'15147', N'Mary Immaculate Dispensary (Eldoret East)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6610, N'14576', N'Intrepids Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6611, N'14387', N'Chesta Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6612, N'16697', N'Lokwatubwa (PAG) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6613, N'14181', N'3KR Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6614, N'14244', N'Base Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6615, N'15281', N'Naivasha Max Prison Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6616, N'10269', N'Githunguri Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6617, N'15564', N'Sigor Sub District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6618, N'16554', N'Mwashuma Dispensary (CDF)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6619, N'14716', N'Kapkiamo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6620, N'14777', N'Kaptebengwo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6621, N'14938', N'Kiricha Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6622, N'14286', N'Changach Barak Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6623, N'13413', N'Nanighi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6624, N'14667', N'Kamaget Dispensary (Trans Mara)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6625, N'14660', N'Kalemungorok Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6626, N'14659', N'Kalalu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6627, N'14452', N'Emurua Dikirr  Health centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6628, N'14539', N'Gsu Dispensary (Kabarak)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6629, N'14521', N'GK Prisons Dispensary (Kericho)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6630, N'14522', N'GK Prisons Dispensary (Laikipia East)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6631, N'15713', N'Tebesonik Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6632, N'15715', N'Tegego Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6633, N'15723', N'Thigio Dispensary (Laikipia West)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6634, N'15097', N'Lower Solai Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6635, N'15048', N'Lodungokwe Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6636, N'15007', N'Lamuria Dispensary (Laikipia East)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6637, N'15020', N'Lelechwet Dispensary (Kipkelion)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6638, N'14919', N'Kipsitet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6639, N'14844', N'Khartoum Tea Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6640, N'15484', N'Khems Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6641, N'12910', N'PCEA Dandora Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6642, N'15218', N'Mombwo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6643, N'15217', N'Molosirwe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6644, N'14784', N'Kaptimbor Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6645, N'14790', N'Kaptumin Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6646, N'13378', N'Kamuthe Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6647, N'16069', N'Namuduru Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6648, N'16421', N'Changara (GOK) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6649, N'15578', N'Simotwo Dispensary (Keiyo)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6650, N'16101', N'Savane Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6651, N'16122', N'Shivanga Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6652, N'15947', N'Kimaeti Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6653, N'15105', N'Mabasi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6654, N'14837', N'Keringet Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6655, N'15367', N'Ntulele Health centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6656, N'11278', N'Challa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6657, N'15385', N'Okilgei Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6658, N'15602', N'Sochoi (AIC) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6659, N'15196', N'Mogoon Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6660, N'15140', N'Mariwa Dispensary (Kipkelion)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6661, N'15102', N'Luoniek Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6662, N'15461', N'Pesi Dispensary (Laikipia West)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6663, N'15462', N'Piave Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6664, N'16676', N'GOK Rumuruti Prisons Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6665, N'15944', N'Kibuke Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6666, N'15538', N'Sego Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6667, N'11285', N'Chifiri Dispensary (LATIF)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6668, N'11117', N'Tumaini Medical Clinic (Makuyu)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6669, N'16514', N'Woodpark Med Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6670, N'16679', N'Mahianyu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6671, N'10688', N'Maranjau Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6672, N'10290', N'GK Prisons Dispensary (Kiambu)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6673, N'10353', N'Irigiro Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6674, N'10441', N'Kamahuha Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6675, N'10445', N'Kambiti Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6676, N'12295', N'Kieni Model Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6677, N'11705', N'Ndovu Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6678, N'11548', N'Makere Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6679, N'15404', N'Oljabet Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6680, N'15301', N'Namukuse Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6681, N'15170', N'Melwa Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6682, N'15546', N'Sereng Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6683, N'14845', N'Kiambogo Dispensary (Naivasha)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6684, N'11915', N'Ziwani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6685, N'15250', N'Mulemi Maternity Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6686, N'15898', N'Ingavira Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6687, N'16163', N'Webuye Surgical')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6688, N'16678', N'Kiruri Dispensary (Laikipia West)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6689, N'15241', N'Mt Longonot Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6690, N'16648', N'Kilawa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6691, N'12917', N'Diwopa Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6692, N'12485', N'Matiliku District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6693, N'15647', N'St Joseph Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6694, N'11195', N'Acode Medical Clinic Maungu')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6695, N'15668', N'St Theresia of Jesus')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6696, N'14177', N'Family Healthoptions Kenya (Nakuru)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6697, N'15456', N'Panda Flowers Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6698, N'15653', N'St Mary Medical Clinic (Nakuru North)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6699, N'11745', N'Ndongo Purple Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6700, N'15772', N'Wangu Maternity Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6701, N'11656', N'Msau Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6702, N'15035', N'Likii Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6703, N'14671', N'Kamawoi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6704, N'16564', N'Dr Kiomes Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6705, N'14509', N'Gilgil Community Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6706, N'12255', N'Kauwi Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6707, N'14995', N'Kositei Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6708, N'15707', N'Tangulbei Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6709, N'12719', N'Runyenjes District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6710, N'13946', N'Nyatoto Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6711, N'14171', N'Waware Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6712, N'14116', N'St Luke''s Health Centre (Mbita)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6713, N'16219', N'Kambi Ya Juu Catholic Dispensary (Isiolo)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6714, N'11918', N'ACK Dispensary (Isiolo)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6715, N'15860', N'Chwele Sub district hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6716, N'11459', N'Kenya Navy (Mir) Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6717, N'13468', N'Ahero County Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6718, N'13745', N'Macalder Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6719, N'12591', N'Muthara Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6720, N'15031', N'Letea Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6721, N'12308', N'Kikumini Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6722, N'15559', N'Karuturi Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6723, N'12363', N'Kithyoko Mercy Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6724, N'15637', N'St Elizabeth Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6725, N'15254', N'Murgor Hills Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6726, N'16328', N'Olchobosei Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6727, N'11394', N'GK Prison Dispensary (Malindi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6728, N'15939', N'Khunyangu Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6729, N'12203', N'Karurumo Rhtc')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6730, N'13870', N'Nyadenda Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6731, N'13479', N'Ang''iya Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6732, N'14011', N'Pala Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6733, N'13692', N'Kijauri Sub District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6734, N'15820', N'Bukura Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6735, N'10450', N'Kamoko Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6736, N'13355', N'Gurar Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6737, N'12598', N'Mutionjuri Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6738, N'14025', N'Raganga Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6739, N'10829', N'Ndaragwa Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6740, N'13125', N'Nimoli Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6741, N'12877', N'Babadogo Medical Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6742, N'10738', N'Mt Kenya (ACK) Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6743, N'11555', N'Malindi District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6744, N'10100', N'Consolata Mission Hospital (Mathari)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6745, N'10739', N'Mt Kenya Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6746, N'12325', N'Kinoro Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6747, N'13452', N'Wajir County Referral Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6748, N'16539', N'Dr Rati S Shah')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6749, N'16074', N'Nasewa Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6750, N'13751', N'Magina Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6751, N'13607', N'Homa Lime Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6752, N'16116', N'Shiraha Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6753, N'15833', N'Bushiri Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6754, N'11522', N'Likoni District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6755, N'10994', N'Sagana Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6756, N'13384', N'Korondille Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6757, N'15885', N'Esiarambatsi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6758, N'13626', N'Isoge Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6759, N'12631', N'Naari Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6760, N'10671', N'Maina & Mwangi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6761, N'14829', N'Kepchomo Tea Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6762, N'13928', N'Nyang''oma Sub county Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6763, N'13114', N'Nairobi West Chidren Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6764, N'13660', N'Kebirigo Mission Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6765, N'13791', N'Matongo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6766, N'13894', N'Nyamaiya Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6767, N'12658', N'Nguni Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6768, N'11161', N'Wamagana Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6769, N'14040', N'Ratta Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6770, N'12201', N'Karimba Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6771, N'12479', N'Masyungwa Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6772, N'12287', N'Kibugu Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6773, N'13509', N'Bora Bora Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6774, N'13001', N'Kangemi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6775, N'11172', N'Wanjerere Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6776, N'14026', N'Rageng''ni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6777, N'10191', N'Gacharageini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6778, N'12129', N'Kairungu Dispensary (Mwingi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6779, N'14005', N'Ouya Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6780, N'12916', N'Diani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6781, N'16410', N'Matumaini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6782, N'10853', N'Ngamba Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6783, N'12959', N'Good Samaritan Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6784, N'12951', N'Gertrudes Othaya Road Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6785, N'13167', N'Round About Medical Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6786, N'13624', N'Isibania Mission Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6787, N'14114', N'St Kizito Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6788, N'10564', N'Kianyaga Catholic Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6789, N'12995', N'Kabiro Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6790, N'11907', N'Witu Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6791, N'14368', N'Chepterit Mission Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6792, N'12947', N'Garrison Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6793, N'15669', N'St Ursula Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6794, N'13980', N'Omboga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6795, N'12646', N'Ngangani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6796, N'12927', N'Dr Muasya Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6797, N'12154', N'Kalisasi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6798, N'16654', N'Kalanga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6799, N'15659', N'St Monica Medical Clinic (Dundori)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6800, N'11248', N'Baricho Dispensary (Malindi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6801, N'13905', N'Nyambari Geke Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6802, N'13616', N'Ikobe Health Centre(Manga)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6803, N'11303', N'King''orani Prison Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6804, N'11714', N'Ng''ombeni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6805, N'16292', N'Mansa Nomadic Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6806, N'16549', N'Mwananyamala (CDF) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6807, N'12693', N'Nziu Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6808, N'11971', N'Chugu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6809, N'11076', N'Subuku Dispensary (Nyandarua North)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6810, N'12196', N'Karandini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6811, N'15331', N'Neissuit Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6812, N'11633', N'Mkwiro Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6813, N'11534', N'Madunguni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6814, N'11481', N'Kinarani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6815, N'10988', N'Sacred Heart Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6816, N'12344', N'Kiseuni Dispensary (Kitui)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6817, N'12854', N'Yatwa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6818, N'14547', N'Heshima Medical Clinic (Nakuru North)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6819, N'12038', N'Gichiche Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6820, N'13282', N'Alinjugur Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6821, N'15917', N'Kamenjo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6822, N'15511', N'Ndonyo Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6823, N'13514', N'Bosiango Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6824, N'12222', N'Kathangacini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6825, N'13519', N'Bware Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6826, N'11756', N'Ribe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6827, N'13581', N'Gobei  Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6828, N'11672', N'Mtwapa Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6829, N'11009', N'Silibwet Health Centre (Nyandaruawest)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6830, N'11393', N'Shimo La Tewa Annex Dispensary (GK Prison)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6831, N'13293', N'Argane Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6832, N'12134', N'Kakeani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6833, N'10884', N'Njoki Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6834, N'10832', N'Ndemi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6835, N'10339', N'Ihuririo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6836, N'14066', N'Sango Rota Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6837, N'11365', N'Divine Mercy Eldoro (Catholic) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6838, N'16784', N'Bar Ndege Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6839, N'10394', N'Kagaa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6840, N'14441', N'Emaroro Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6841, N'13758', N'Makararangwe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6842, N'12078', N'Ikombe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6843, N'11178', N'Watuka Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6844, N'14326', N'Chemuswo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6845, N'11892', N'Wasini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6846, N'10586', N'Kigoro Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6847, N'16189', N'Shangia Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6848, N'15395', N'Oldorko Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6849, N'13582', N'God Jope Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6850, N'13281', N'Alimaow Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6851, N'11640', N'Moi Airport Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6852, N'12568', N'Mulundi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6853, N'15887', N'Esitsaba Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6854, N'13404', N'Mansa Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6855, N'11498', N'Kombeni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6856, N'14916', N'Kipsigak Dispensary (Nandi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6857, N'12804', N'Township Dispensary (Kitui)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6858, N'13429', N'Sabuli Nomadic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6859, N'12305', N'Kikesa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6860, N'13005', N'Kari Health Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6861, N'15980', N'Lwandanyi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6862, N'14541', N'Gsu Field Dispensary (Kajiado)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6863, N'16387', N'Mukangu Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6864, N'15615', N'Sosiana Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6865, N'12993', N'Kabete Approved School Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6866, N'10986', N'Rwathia Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6867, N'11297', N'Dagamra Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6868, N'13300', N'Banisa Sub County Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6869, N'11794', N'Silaloni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6870, N'10285', N'GK Prison Dispensary (Gathigiriri )')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6871, N'13477', N'Anding''o Opanga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6872, N'11700', N'Ndau Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6873, N'16368', N'Tiinei Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6874, N'13559', N'Gesima Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6875, N'16266', N'Nyagancha Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6876, N'14046', N'Riat Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6877, N'12159', N'Kamaindi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6878, N'16395', N'Mwangate Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6879, N'11580', N'Matsangoni Model Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6880, N'16792', N'Wagai Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6881, N'15409', N'Olkiramatian Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6882, N'12327', N'Kinyaata Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6883, N'14218', N'Assumption Sisters Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6884, N'12269', N'Kevote Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6885, N'16288', N'Libahlow Nomadic Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6886, N'13604', N'Holy Family Oriang Mission Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6887, N'11956', N'Bubisa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6888, N'12141', N'Kalacha (AIC) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6889, N'13052', N'Lower Kabete Dispensary (Kabete)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6890, N'15875', N'Ematsuli Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6891, N'13162', N'Rgc Jipe Moyo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6892, N'10746', N'St Mary (ACK) Mugumo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6893, N'12100', N'Itugururu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6894, N'13666', N'Kemera Dispensary (Manga)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6895, N'14102', N'St Barnabas Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6896, N'13491', N'Awasi Mission Health Center')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6897, N'13802', N'Metaburo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6898, N'10274', N'Githure (ACK) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6899, N'10288', N'GK Prison Dispensary (Ruiru)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6900, N'13576', N'Giribe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6901, N'13239', N'Uhuru Camp Dispensary (O P Admin Police)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6902, N'13702', N'Kisii Campus Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6903, N'15180', N'Merueshi Village Community Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6904, N'12297', N'Kiereni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6905, N'12355', N'Kitheuni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6906, N'13289', N'Amuma Mobile Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6907, N'14035', N'Rangwe (SDA) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6908, N'16762', N'Emusanda Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6909, N'10017', N'Aguthi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6910, N'10556', N'Kiangai Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6911, N'12019', N'Forolle Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6912, N'13885', N'Nyakuru Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6913, N'13358', N'Hadado Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6914, N'13484', N'Arito Langi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6915, N'11525', N'Lukore Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6916, N'10842', N'Ndururumo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6917, N'10287', N'GK Prison Dispensary (Murang''a)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6918, N'13982', N'Omobera Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6919, N'10733', N'Mitubiri Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6920, N'13388', N'Kotulo Health Centre (Mandera Central)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6921, N'12231', N'Nkathiari Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6922, N'12520', N'Miangeni Dispensary (Mbooni)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6923, N'11715', N'Ngomeni Dispensary (Malindi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6924, N'13644', N'Kagwa Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6925, N'13026', N'Kibera Human Development Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6926, N'12119', N'Kaanwa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6927, N'10957', N'Riabai Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6928, N'14078', N'Shirikisho Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6929, N'13789', N'Matata Nursing Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6930, N'13869', N'Nyachogochogo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6931, N'16698', N'Lomelo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6932, N'13665', N'Kehancha Nursing and Maternity Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6933, N'11539', N'Mainland Health Centre (Magongo)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6934, N'13937', N'Nyansiongo Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6935, N'13030', N'Kibera South (Msf Belgium) Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6936, N'15000', N'Kumpa Cmf Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6937, N'12235', N'Kathonzweni Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6938, N'12892', N'Catholic University Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6939, N'12566', N'Mulango (AIC) Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6940, N'11893', N'Watamu (SDA) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6941, N'10919', N'Othaya Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6942, N'15651', N'St Martin De Porres (Static)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6943, N'14069', N'Saro Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6944, N'10880', N'Njegas Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6945, N'11409', N'Hindi Magogoni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6946, N'16291', N'Port Health Dispensary (Wajir East)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6947, N'10474', N'Kanyenyaini Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6948, N'10839', N'Ndunyu Chege Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6949, N'10128', N'Dr Kimani Gicharo Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6950, N'10155', N'Dr Waihenya')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6951, N'16456', N'Kaptech Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6952, N'12643', N'New Ngei Road Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6953, N'10711', N'Mbici Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6954, N'13984', N'Omogwa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6955, N'16497', N'Kiamutugu CFW Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6956, N'16207', N'Marsabit Modern Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6957, N'10622', N'Kirathimo Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6958, N'10430', N'Kairi Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6959, N'10007', N'Afya Bora Medical Clinic (Muchagara)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6960, N'11427', N'Jamii Clinic (Lamu)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6961, N'10547', N'Kiamwathi Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6962, N'10259', N'Gitata Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6963, N'10318', N'Highway Medical Clinic (Kirinyaga)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6964, N'14163', N'Usenge Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6965, N'11244', N'Baolala Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6966, N'10717', N'Grace Baricho Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6967, N'15151', N'Masurura Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6968, N'10154', N'Dr Wachira')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6969, N'11691', N'Mwangulu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6970, N'12627', N'Mwingi Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6971, N'10177', N'Faith Medical Clinic (Nyeri North)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6972, N'11148', N'Viewpoint Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6973, N'16620', N'New Avenue Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6974, N'10178', N'Family Care Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6975, N'16226', N'Kithoka Outreach Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6976, N'15494', N'Rongai First Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6977, N'12868', N'Aga Khan University Hospital (Buruburu)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6978, N'11049', N'St Margret Family Care Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6979, N'10920', N'Othaya Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6980, N'12872', N'Arrow Web Maternity and Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6981, N'10291', N'Glory Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6982, N'16206', N'Mountain Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6983, N'11848', N'Tezo Community Health Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6984, N'16491', N'Afya Bora Medical Clinic (CFW Clinic Gichugu)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6985, N'10676', N'Mama Margaret Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6986, N'13720', N'Korwenje Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6987, N'12481', N'Materi Girls Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6988, N'16458', N'Kimogoi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6989, N'15104', N'Maasai Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6990, N'10058', N'Beta Care Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6991, N'11221', N'Amurt Health Centre (Likoni)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6992, N'12056', N'Kibwezi Health Care Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6993, N'13214', N'St Mark Medical Clinic (Nairobi East)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6994, N'16193', N'Jamii Medical Clinic (Malindi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6995, N'12494', N'Mavoko Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6996, N'11770', N'Santa Maria Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6997, N'16298', N'Mowlana Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6998, N'14395', N'Community Medical and Lab Services Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (6999, N'16610', N'Mirigamieru Health Facility')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7000, N'16607', N'Meru Medical Plaza')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7001, N'16567', N'Eastern Consultans Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7002, N'16591', N'Kiramburune Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7003, N'15375', N'Nyonjoro Maternity Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7004, N'12109', N'Jetma Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7005, N'11140', N'Dr B K Njuguna')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7006, N'12077', N'Ikanga Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7007, N'11788', N'Shimo La Tewa High School Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7008, N'16320', N'Pims Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7009, N'11429', N'Jamii Health Care Clinic (Kisauni)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7010, N'16527', N'Stanbridge Care Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7011, N'16538', N'Crystal Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7012, N'11240', N'Bamburi Medicare')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7013, N'12750', N'St Immaculate Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7014, N'10938', N'Piemu Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7015, N'11010', N'Siloam Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7016, N'10527', N'Kiahuria Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7017, N'11657', N'Msikiti Noor Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7018, N'11291', N'Corner Chaani Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7019, N'11444', N'Junju Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7020, N'15306', N'Top Choice Maternity and Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7021, N'11832', N'Stella Maris Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7022, N'11779', N'Senior Staff Medical Clinic (MCM)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7023, N'12410', N'Kyatune Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7024, N'10512', N'Kenol Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7025, N'11520', N'Likoni Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7026, N'13207', N'St Joseph (EDARP) Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7027, N'12904', N'Coptic Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7028, N'12714', N'Rolex Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7029, N'12471', N'Marie Stopes Clinic (Imenti North)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7030, N'12911', N'Dandora (EDARP) Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7031, N'13220', N'EDARP Donholm Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7032, N'13906', N'Nyambunwa Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7033, N'13481', N'Annex Clinic (Kenyenya)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7034, N'13047', N'Lea Toto Clinic Kariobangi South')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7035, N'16545', N'Vikwatani Community Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7036, N'11204', N'Airport View Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7037, N'11626', N'Mjeni Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7038, N'11388', N'Gede Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7039, N'16525', N'San Marco Project Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7040, N'11447', N'Kadzinuni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7041, N'12343', N'Kisesini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7042, N'12856', N'Yongela Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7043, N'16498', N'Dave Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7044, N'10319', N'Highway Medical Enterprises')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7045, N'16212', N'Oasis Diagnostic Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7046, N'13808', N'Milimani Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7047, N'11570', N'Marie Stopes Mombasa Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7048, N'11955', N'Bishop Kioko Catholic Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7049, N'14110', N'St Joseph Mission Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7050, N'12759', N'St Lukes Cottage Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7051, N'11861', N'Tudor District Hospital (Mombasa)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7052, N'12874', N'Avenue Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7053, N'14014', N'Pastor Machage Memorial Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7054, N'13205', N'St John Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7055, N'13096', N'Mother & Child Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7056, N'16756', N'Family Health Options Kenya Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7057, N'12903', N'Conerstone Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7058, N'10237', N'Gaturi Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7059, N'16523', N'Mwavizi Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7060, N'14260', N'Boma La Tumaini VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7061, N'15742', N'Tugumoi Dispensary (Lembus Kwen)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7062, N'14316', N'Chemasis Maternity Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7063, N'16699', N'Lopedur Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7064, N'14622', N'Kabitungu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7065, N'16389', N'Matulo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7066, N'14272', N'Bungwet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7067, N'14968', N'Koitebes Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7068, N'14718', N'Kapkisiara Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7069, N'16742', N'St Mark Maternity')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7070, N'12517', N'Kenya Methodist University Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7071, N'13019', N'Kemri VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7072, N'12391', N'Kunene Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7073, N'12216', N'Katangi Mission Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7074, N'14558', N'Igwamiti Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7075, N'16362', N'Kiminini Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7076, N'15685', N'Sumek Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7077, N'14684', N'Kandutura Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7078, N'11769', N'Sangekoro Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7079, N'11763', N'Sagaighu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7080, N'11652', N'Mrughua Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7081, N'14507', N'Getarwet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7082, N'15746', N'Tulwet Dispensary (Buret)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7083, N'15228', N'Mosore Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7084, N'12636', N'Ndatani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7085, N'15932', N'Khalumuli Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7086, N'14931', N'Kiptulos Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7087, N'15683', N'Sumbeiywet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7088, N'15252', N'Mungwa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7089, N'14691', N'Kapchebau Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7090, N'14383', N'Chesiyo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7091, N'14474', N'Equator Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7092, N'16388', N'Mahanga Dispensary (Bokoli)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7093, N'16028', N'Mukhe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7094, N'14780', N'Kaptembwo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7095, N'13725', N'Kunya Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7096, N'13532', N'Dede Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7097, N'14217', N'Arsim Lutheran Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7098, N'12215', N'Katangi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7099, N'15533', N'Satiet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7100, N'15733', N'Toniok Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7101, N'14619', N'Kabimoi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7102, N'15298', N'Nameyana Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7103, N'14656', N'Kakwanyang Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7104, N'14347', N'Chepkoton Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7105, N'14683', N'Kanawoi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7106, N'15307', N'Naoros Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7107, N'14682', N'Kanaodon Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7108, N'15056', N'Lokapel Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7109, N'14787', N'Kaptoboiti Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7110, N'14765', N'Kapsomboch Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7111, N'14860', N'Kihato Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7112, N'15368', N'Nturukuma Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7113, N'15084', N'Lorengelup Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7114, N'16054', N'Muting''ong''o Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7115, N'14690', N'Kapchebar Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7116, N'14001', N'Othoch Rakuom Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7117, N'12296', N'Kieni Kia Ndege Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7118, N'12424', N'Lamba Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7119, N'16674', N'Kapletingi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7120, N'15085', N'Lorengippi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7121, N'15043', N'Locheremoit Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7122, N'14359', N'Chepseon Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7123, N'15072', N'Lomil Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7124, N'15230', N'Mosoriot TTC Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7125, N'14180', N'10 Engineer VCT')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7126, N'14795', N'Kapua Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7127, N'14293', N'Chebewor Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7128, N'14578', N'Iraa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7129, N'16688', N'Meguara Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7130, N'15356', N'Njipiship Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7131, N'15094', N'Loturerei Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7132, N'16711', N'Lukusi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7133, N'15890', N'GK Prison Dispensary ( Bungoma South)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7134, N'14702', N'Kapindasim Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7135, N'14835', N'Keringani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7136, N'10190', N'Gacharage Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7137, N'16325', N'Mashangwa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7138, N'12037', N'Gianchuku Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7139, N'12075', N'Ikaatini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7140, N'12103', N'Iuuma Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7141, N'16453', N'Jepkoyai Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7142, N'12270', N'Kiairugu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7143, N'12101', N'Itunduimuni Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7144, N'11119', N'Tumaini Medical Clinic (Nyeri North)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7145, N'11903', N'Wenje Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7146, N'14985', N'Kondamet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7147, N'14516', N'GK Prison Annex Dispensary (Naivasha)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7148, N'12084', N'Ilengi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7149, N'15382', N'Ochii Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7150, N'15527', N'Sandai Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7151, N'16327', N'Mogoiywet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7152, N'10253', N'Gikoe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7153, N'10029', N'Anmer Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7154, N'11469', N'Kighombo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7155, N'11477', N'Kimorigho Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7156, N'11398', N'GK Prisons Dispensary (Tana River)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7157, N'16202', N'Baraka Medical Clinic (Lamu)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7158, N'10268', N'Githunguri Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7159, N'10283', N'AIC Gituru Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7160, N'10410', N'Kaguthi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7161, N'10726', N'Miguta Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7162, N'11262', N'Bughuta Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7163, N'10727', N'Mihang''o Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7164, N'10275', N'Gitiha Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7165, N'11889', N'Waldena Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7166, N'15390', N'Oldanyati Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7167, N'11900', N'Wayu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7168, N'15275', N'Nadoto Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7169, N'15448', N'Osinoni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7170, N'16473', N'Kiprengwet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7171, N'15850', N'Chegulo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7172, N'15857', N'Chevoso Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7173, N'16326', N'Kuresiet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7174, N'12320', N'Kinakoni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7175, N'12272', N'Kiamuchairu Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7176, N'12307', N'Kikumini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7177, N'12362', N'Kithyoko Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7178, N'12301', N'Kiini Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7179, N'14563', N'Ilkerin Dispensary (Narok South)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7180, N'10757', N'Mukoe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7181, N'10500', N'Kariua Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7182, N'10499', N'Kariti Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7183, N'10874', N'Ngurweini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7184, N'10465', N'Kangari Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7185, N'10460', N'Kanderendu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7186, N'10785', N'Muruka Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7187, N'10791', N'Mutheru Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7188, N'10759', N'Mukuria Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7189, N'10097', N'Cianda Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7190, N'10793', N'Muthithi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7191, N'10748', N'Mugumoini Dispensary (Muranga South)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7192, N'10817', N'Naaro Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7193, N'11451', N'Kajire Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7194, N'11463', N'Kiangachinyi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7195, N'11457', N'David Kayanda Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7196, N'16553', N'Ukunda Primary Health Care Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7197, N'11455', N'Kasigau Rdch')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7198, N'12241', N'Katilini Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7199, N'12878', N'Bahati Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7200, N'10214', N'Gathanga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7201, N'16119', N'Shiseso Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7202, N'15009', N'Langa Langa Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7203, N'12251', N'Katyethoka Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7204, N'11572', N'Marungu Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7205, N'11686', N'Mwambirwa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7206, N'11688', N'Mwanda Health Centre (Taita Taveta)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7207, N'11704', N'Ndome Dispensary (Taita)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7208, N'12339', N'Kirumi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7209, N'12246', N'Katulye Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7210, N'12237', N'Kathukini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7211, N'12637', N'Ndithini Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7212, N'12650', N'Ngetani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7213, N'12148', N'Kalewa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7214, N'12345', N'Kiseuni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7215, N'12349', N'Kitangani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7216, N'16533', N'Beta Medical & Skin Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7217, N'12357', N'Kithimani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7218, N'12190', N'Kanziku Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7219, N'12416', N'Kyoani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7220, N'12418', N'Kyondoni Dispensary ( Kivaa)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7221, N'12204', N'Kasaala Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7222, N'12136', N'Kakongo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7223, N'12561', N'Mukui Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7224, N'12562', N'Mukusu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7225, N'12570', N'Mumbuni Dispensary (Maara)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7226, N'12592', N'Muthesya Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7227, N'11508', N'Kwa-Mnegwa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7228, N'11561', N'Manyani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7229, N'11300', N'Dawson Mwanyumba Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7230, N'11283', N'Chewani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7231, N'11390', N'Ghazi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7232, N'11542', N'Majengo Dispensary (Tana River)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7233, N'11302', N'Dembwa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7234, N'11491', N'Kitobo Dispensary (Taveta)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7235, N'11488', N'Kishushe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7236, N'11591', N'Mbulia Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7237, N'10816', N'NYS (National Youth Service) Dispensary Yatta')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7238, N'11605', N'Miasenyi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7239, N'11347', N'Surgery Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7240, N'11603', N'Mgange Nyika Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7241, N'12166', N'Kamutei Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7242, N'15400', N'Olereko Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7243, N'13015', N'Kayole I Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7244, N'15373', N'Nyamathi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7245, N'15377', N'Nys Dispensary (Gilgil)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7246, N'15381', N'Nzoia Dispensary (Trans Nzoia East)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7247, N'15256', N'Muricho Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7248, N'15242', N'Mtaragon Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7249, N'15234', N'Motosiet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7250, N'15408', N'Olkinyei Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7251, N'15190', N'Miti-Mingi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7252, N'15219', N'Momoniat Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7253, N'10827', N'Ndakaini Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7254, N'15222', N'Morijo Loita Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7255, N'10579', N'Kids Alive Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7256, N'12586', N'Mutha Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7257, N'15227', N'Mosiro Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7258, N'14355', N'Chepngoror Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7259, N'14356', N'Chepnyal Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7260, N'15261', N'Mutara Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7261, N'14362', N'Chepsir Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7262, N'15378', N'Nys Dispensary (Keiyo)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7263, N'15391', N'Oldepesi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7264, N'15233', N'Motiret Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7265, N'15223', N'Mormorio Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7266, N'14352', N'Cheplambus Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7267, N'14247', N'Benmac Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7268, N'11378', N'Frontline Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7269, N'15215', N'Molok Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7270, N'15386', N'Ol-Arabel Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7271, N'15525', N'Sambut Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7272, N'14350', N'Chepkunyuk Dispensary (Kipkelion)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7273, N'15545', N'Serem Health Centre (Nandi South)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7274, N'15541', N'Sekenani Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7275, N'15607', N'Soliat Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7276, N'15529', N'Sang''alo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7277, N'14344', N'Chepkoiyo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7278, N'15392', N'Olderkesi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7279, N'15363', N'Nkareta Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7280, N'15247', N'Muhotetu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7281, N'15537', N'Segero Dispensary (Segeroi/barsombe)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7282, N'15177', N'Merewet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7283, N'15245', N'Mugumoini Dispensary (Kipkelion)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7284, N'15595', N'Sisiya Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7285, N'15530', N'Sangurur Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7286, N'15539', N'Segut Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7287, N'15374', N'Nyaru Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7288, N'12705', N'Pondeni Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7289, N'12358', N'Kithimani Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7290, N'15532', N'Saruchat Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7291, N'15583', N'Singorwet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7292, N'15244', N'Mugango Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7293, N'15540', N'Segutiet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7294, N'15243', N'Muchukwo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7295, N'15246', N'Mugurin Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7296, N'15566', N'Sigoro Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7297, N'15606', N'Solian Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7298, N'11974', N'Chuluni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7299, N'15558', N'Shankoe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7300, N'15556', N'Setek Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7301, N'15417', N'Olmoran Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7302, N'16262', N'Victoria Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7303, N'12585', N'Mutethya Medical Clnic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7304, N'14354', N'Cheplaskei Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7305, N'14364', N'Cheptabach Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7306, N'12342', N'Kisayani Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7307, N'10345', N'Imani Medical Clinic (Kiambu West)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7308, N'15279', N'Naisoya Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7309, N'14351', N'Chepkunyuk Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7310, N'15547', N'Sereolipi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7311, N'15328', N'Ndurumo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7312, N'15267', N'Mwituria Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7313, N'14375', N'Cheptuiyet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7314, N'15598', N'Siwo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7315, N'15550', N'Seretut Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7316, N'15168', N'Megwara Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7317, N'15268', N'Nabkoi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7318, N'15554', N'Sergoit Dispensary (Keiyo)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7319, N'14306', N'Chegilet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7320, N'15193', N'Mogil Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7321, N'15410', N'Olkokwe Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7322, N'15593', N'Sirwa Dispensary (Mogotio)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7323, N'15144', N'Marti Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7324, N'14223', N'Bahati Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7325, N'15165', N'Mbogoini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7326, N'15266', N'Mwenje Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7327, N'16015', N'Miendo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7328, N'16064', N'Namagara Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7329, N'15997', N'Malekha Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7330, N'14264', N'Bondeni Health Centre (Trans Nzoia - Saboti)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7331, N'14211', N'Arama Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7332, N'16072', N'Nangina Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7333, N'16068', N'Nambuku Model Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7334, N'16096', N'Rumbiye Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7335, N'15790', N'Agenga Dispensary (Samia)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7336, N'15912', N'Kabula Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7337, N'16034', N'Mumbule Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7338, N'16014', N'Mechimeru Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7339, N'14242', N'Bartolimo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7340, N'14193', N'Aiyebo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7341, N'15562', N'Sibilo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7342, N'16075', N'Nasianda Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7343, N'14715', N'Kapkiam Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7344, N'15337', N'Nganayio Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7345, N'15355', N'Ngutuk-Engiron Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7346, N'15349', N'Ngobit Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7347, N'15345', N'Ngeria South Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7348, N'15987', N'Mahanga Dispensary (Lwandeti)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7349, N'12603', N'Mutomo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7350, N'15344', N'Ngenyilel Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7351, N'15343', N'Ngendalel Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7352, N'15921', N'Kapchemwani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7353, N'14234', N'Barotion (AIC) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7354, N'14185', N'Adurkoit Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7355, N'15342', N'Ngechek Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7356, N'15960', N'Likindu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7357, N'15949', N'Kimangeti Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7358, N'15959', N'Kuvasali Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7359, N'16109', N'Shihome Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7360, N'16105', N'Shamberere Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7361, N'16108', N'Shihalia Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7362, N'15821', N'Bulondo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7363, N'15110', N'Maina Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7364, N'14297', N'Chebirbelek Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7365, N'15346', N'Ngetmoi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7366, N'12604', N'Mutomo Mission Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7367, N'14246', N'Bekibon Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7368, N'15712', N'Tebei Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7369, N'15112', N'Maji Moto Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7370, N'15111', N'Maji Mazuri Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7371, N'15121', N'Manyoror Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7372, N'15118', N'Makyolok Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7373, N'15124', N'Maraigushu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7374, N'15119', N'Mangu Dispensary (Rongai)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7375, N'15776', N'Wei Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7376, N'12488', N'Matuu District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7377, N'15412', N'Ollessos Holy Family Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7378, N'15786', N'Ywalateke Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7379, N'13731', N'Lambwe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7380, N'15784', N'Wiyumiririe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7381, N'15783', N'Wiyeta Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7382, N'15149', N'Masaita/ Miti-Tatu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7383, N'15364', N'Nkorinkori Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7384, N'15318', N'Ndabibi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7385, N'15389', N'Olchorro Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7386, N'15415', N'Olmesutie Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7387, N'15777', N'Weonia Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7388, N'15142', N'Maron-Marichor Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7389, N'14256', N'Biretwa health centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7390, N'16318', N'Kapkures Dispensary (Sotik)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7391, N'15321', N'Ndamichonik Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7392, N'15116', N'Makimeny Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7393, N'15585', N'Siomo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7394, N'15465', N'Poi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7395, N'15785', N'Yatya Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7396, N'14241', N'Bartabwa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7397, N'12489', N'Matuu Mission Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7398, N'15216', N'Molos Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7399, N'15470', N'Prison Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7400, N'14340', N'Chepkero Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7401, N'16335', N'Kaparon Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7402, N'16172', N'Kianjugu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7403, N'14342', N'Chepkopegh Dipensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7404, N'16117', N'Shiru Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7405, N'16171', N'Gikono Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7406, N'14318', N'Chemelil Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7407, N'16203', N'Kiwalwa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7408, N'14320', N'Chemoiben Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7409, N'14341', N'Chepkigen Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7410, N'16484', N'Imalaba Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7411, N'16483', N'Shikumu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7412, N'12487', N'Matuu Cottage Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7413, N'14327', N'Chemworor Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7414, N'12703', N'Pona Haraka Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7415, N'16333', N'Tugumoi Dispensary (Metkei)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7416, N'14373', N'Cheptongei Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7417, N'15993', N'Malaba Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7418, N'16420', N'Ochude Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7419, N'16024', N'Moru Karisa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7420, N'15968', N'Lukolis Model Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7421, N'16087', N'Obekai Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7422, N'12532', N'Mituki Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7423, N'15497', N'Rongena Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7424, N'12930', N'Eastleigh Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7425, N'15431', N'Olposimoru Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7426, N'15467', N'Poole Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7427, N'15451', N'Osupuko Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7428, N'15449', N'Osorongai Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7429, N'15187', N'Minjore Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7430, N'15489', N'Rocco Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7431, N'16323', N'Annet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7432, N'16704', N'Pserum Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7433, N'15179', N'Merto Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7434, N'13117', N'Nairobi Womens Hospital (Hurlingham)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7435, N'12063', N'Kibwezi Huruma Medical Clinic and Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7436, N'16026', N'Muhabini Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7437, N'13510', N'Borabu Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7438, N'12542', N'Mother Land Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7439, N'12879', N'Bahati Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7440, N'15891', N'GK Prisons Dispensary (Busia)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7441, N'14377', N'Cheramei Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7442, N'15520', N'Salama Health Centre (Laikipia West)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7443, N'15262', N'Mutarakwa Dispensary (Molo)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7444, N'12953', N'Getrudes Hospital (Nairobi West Clinic)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7445, N'14363', N'Chepsiro Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7446, N'11273', N'Cdc Ganjoni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7447, N'15901', N'Imbiakalo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7448, N'12786', N'Tana Medical Clinic (Yatta)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7449, N'11862', N'Tudor Health Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7450, N'16579', N'Imani Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7451, N'14372', N'Cheptobot Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7452, N'15485', N'Rimoi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7453, N'16334', N'Kimoloi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7454, N'15695', N'Tabare Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7455, N'15575', N'Simbi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7456, N'15487', N'Riwo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7457, N'12490', N'The Mediance Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7458, N'15506', N'Sabor Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7459, N'15919', N'Kamuneru Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7460, N'13865', N'Nyaburi Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7461, N'15477', N'Radat Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7462, N'16151', N'Tigoi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7463, N'14336', N'Chepkechir Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7464, N'14333', N'Chepcholiet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7465, N'15580', N'Sina Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7466, N'14569', N'Iltilal Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7467, N'14337', N'Chepkemel Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7468, N'15437', N'Ongata Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7469, N'16263', N'Soamam Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7470, N'11439', N'Jordan Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7471, N'15473', N'Ptoyo Dipensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7472, N'12347', N'Kisiiki Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7473, N'11615', N'Mikindani Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7474, N'15188', N'Mirugi Kariuki Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7475, N'16658', N'Women Care Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7476, N'15432', N'Ol-Rongai Dispensary (Rongai)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7477, N'11421', N'Jadi Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7478, N'11732', N'Pamar Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7479, N'12465', N'Mamba Dispensary (Yatta)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7480, N'12498', N'Mbembani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7481, N'11582', N'Maunguja Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7482, N'11210', N'Al-Bir Medical Centre (Kilindini)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7483, N'12635', N'Ndalani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7484, N'15444', N'Oromodei Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7485, N'11890', N'Wananchi Medical Clinic (Kilindini)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7486, N'15428', N'Olorte Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7487, N'14381', N'Cherara Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7488, N'13021', N'Kenya Airways Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7489, N'15239', N'Mt Elgon Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7490, N'15609', N'Sondany Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7491, N'16481', N'Imulama Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7492, N'12686', N'NYS Dispensary (Mavoloni)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7493, N'16680', N'Chesetan Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7494, N'15796', N'Amagoro Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7495, N'12757', N'St Kizito Mission')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7496, N'15789', N'Aboloi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7497, N'13123', N'Ngong Road Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7498, N'15797', N'Amase Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7499, N'15802', N'Apokor Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7500, N'16317', N'Kapletundo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7501, N'15178', N'Merigi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7502, N'12928', N'Dr Were Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7503, N'13721', N'Kosele Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7504, N'13518', N'Bunde Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7505, N'14805', N'Karunga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7506, N'14799', N'Kapyemit Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7507, N'14823', N'Kebeneti Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7508, N'12974', N'Huruma Lions Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7509, N'14754', N'Kapsasian Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7510, N'14819', N'Katuiyo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7511, N'11260', N'Borabu Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7512, N'14821', N'Keben Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7513, N'14824', N'Kedowa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7514, N'14832', N'Kericho Forest Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7515, N'11873', N'Utange Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7516, N'11612', N'Mikanjuni Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7517, N'16695', N'Benon Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7518, N'16358', N'Starlight Mti Moja')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7519, N'12935', N'Embakasi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7520, N'14764', N'Kapsogut Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7521, N'16296', N'Mandera Medicare Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7522, N'15067', N'Lokwii Health center')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7523, N'14370', N'Chepterwo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7524, N'16344', N'St Getrude Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7525, N'15032', N'Liavo Medical Clinic (Kwanza)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7526, N'15064', N'Lokori (AIC) Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7527, N'15536', N'Seed of Hope Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7528, N'14367', N'Cheptebo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7529, N'14700', N'Kapelibok Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7530, N'14601', N'Juluk Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7531, N'16671', N'Kimawit-Uswet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7532, N'11962', N'Kambu Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7533, N'14863', N'Kikton Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7534, N'14186', N'Afya Bora Medical Clinic (Turkana Central)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7535, N'15749', N'Tumaini Medical Clinic (Turkana Central)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7536, N'14191', N'Ahero Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7537, N'15225', N'Morulem Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7538, N'15066', N'Lokwamosing Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7539, N'16700', N'Nakukulas Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7540, N'14376', N'Chepwostuiyet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7541, N'15189', N'Miskwony Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7542, N'15269', N'Nachecheyet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7543, N'15780', N'West Gate Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7544, N'12506', N'Mbonzuki Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7545, N'14725', N'Kapkondo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7546, N'15320', N'Ndalat Gaa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7547, N'12985', N'Jamii Clinic (Westlands)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7548, N'13972', N'Okiki Amayo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7549, N'11879', N'Vanga Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7550, N'13606', N'Homa Hills Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7551, N'11982', N'Dabel Health Centre (Moyale)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7552, N'11492', N'Kiunga Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7553, N'11373', N'Faza Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7554, N'10349', N'Immaculate Heart of Mary Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7555, N'14827', N'Kenene Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7556, N'12036', N'Giaki Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7557, N'10974', N'Ruiru Hospital Limited')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7558, N'14540', N'Gsu Dispensary (Kibish)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7559, N'14828', N'Kenyagoro Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7560, N'14810', N'Kasisit Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7561, N'14812', N'Kasok Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7562, N'10768', N'Mung''ang''a (ACK) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7563, N'12664', N'Nkabune Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7564, N'11067', N'St Philips (ACK) Dispensary Ndiriti')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7565, N'13401', N'Malkamari Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7566, N'11253', N'Bofu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7567, N'13341', N'Fincharo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7568, N'16748', N'Githunguri Health Centre (Ruiru)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7569, N'11662', N'Mtaa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7570, N'11585', N'Mazeras Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7571, N'10486', N'Karatina Home Based Care Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7572, N'12721', N'Rwanyange Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7573, N'12304', N'Kiitini Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7574, N'12698', N'Odda Dispensary (Moyale)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7575, N'12050', N'Godoma Model Health Centre (Moyale)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7576, N'12411', N'Kyawalia Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7577, N'12227', N'Kathanjuri Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7578, N'12234', N'Kathithi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7579, N'12144', N'Kalama Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7580, N'11628', N'Mkokoni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7581, N'10907', N'Oaklands Estate Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7582, N'10715', N'Mchana Estate Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7583, N'11638', N'Mnyenzeni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7584, N'16673', N'Sorok Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7585, N'12676', N'Nthongoni Dispensary (Kibwezi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7586, N'16778', N'St Mary Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7587, N'10665', N'Lucimed Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7588, N'16773', N'Manyatta Medical Clinic (Nyeri South)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7589, N'10805', N'Mwea Medical Clinic Kagio')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7590, N'11144', N'Uzima Medical Clinic (Nyeri North)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7591, N'15335', N'Ngai Murunya Health Service')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7592, N'10940', N'Plainsview Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7593, N'15663', N'St Peter Claver R Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7594, N'13472', N'Alum Beach Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7595, N'13440', N'Shimbir Fatuma Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7596, N'12336', N'Kirindine Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7597, N'16782', N'Kiawaithanji Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7598, N'14809', N'Kasiela Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7599, N'12692', N'Nzeveni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7600, N'16227', N'Joska Medical Care Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7601, N'16586', N'Joska Medical Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7602, N'16222', N'Mutethia Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7603, N'13284', N'Al-Maqdis ENT Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7604, N'16578', N'Ideal Medical /Fp Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7605, N'16577', N'Ideal Health Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7606, N'11007', N'Shikamoo Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7607, N'16223', N'Giaki Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7608, N'16590', N'Kim''s Intergrated Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7609, N'10972', N'Ruiru East Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7610, N'16752', N'Imani Medical Clinic (Ruiru)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7611, N'15633', N'St Camellus Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7612, N'16228', N'Thimangiri Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7613, N'14759', N'Kapsimotwa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7614, N'10971', N'Ruiru Diagnostic Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7615, N'10973', N'Ruiru Sub-County Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7616, N'11991', N'Dwa Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7617, N'12858', N'Yururu Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7618, N'12888', N'Buruburu Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7619, N'14789', N'Kaptumek Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7620, N'11898', N'Wayani Medical Clinic (Changamwe)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7621, N'16260', N'St Agnes Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7622, N'11055', N'St Mary''s Medical Clinic (Ruiru)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7623, N'11043', N'St Josef Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7624, N'12580', N'Muringombugi Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7625, N'12364', N'Kithyululu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7626, N'14756', N'Kapsengere Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7627, N'14766', N'Kapsorok Dispenasry')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7628, N'14751', N'Kapsamoch Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7629, N'10001', N'Abel Migwi Johana Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7630, N'16777', N'Othaya Dental Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7631, N'14755', N'Kapseger Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7632, N'12975', N'Huruma Maternity Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7633, N'10101', N'Coffee Research Staff Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7634, N'14056', N'Roadblock Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7635, N'12477', N'Masongaleni Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7636, N'15001', N'Kunyak Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7637, N'14772', N'Kaptabuk Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7638, N'14791', N'Kaptumo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7639, N'14758', N'Kapsetek Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7640, N'14825', N'Kemeloi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7641, N'14796', N'Kaputir Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7642, N'14797', N'Kapweria Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7643, N'14800', N'Karaba Dispensary (Laikipia West)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7644, N'14782', N'Kaptich Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7645, N'14788', N'Kaptum Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7646, N'14816', N'Katee Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7647, N'14798', N'Kapyego Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7648, N'14773', N'Kaptagat Forest Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7649, N'14768', N'Kapsowar Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7650, N'14747', N'Kapoleseroi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7651, N'14785', N'Kaptiony Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7652, N'14817', N'Katibel Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7653, N'14708', N'Kapkeburu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7654, N'14689', N'Kanyarkwat Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7655, N'14707', N'Kapkeben Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7656, N'14711', N'Kapkenyeloi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7657, N'15704', N'Tamkal Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7658, N'14724', N'Kapkolei Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7659, N'14736', N'Kaplelach Chepyakwai')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7660, N'12663', N'Ngwata Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7661, N'14737', N'Kaplelach Tumoge')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7662, N'14738', N'Kaplelartet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7663, N'14389', N'Chuiyat Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7664, N'14717', N'Kapkimolwa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7665, N'14723', N'Kapkole Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7666, N'14739', N'Kaplenge Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7667, N'14705', N'Kapkata Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7668, N'14692', N'Kapchelal Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7669, N'12988', N'Jericho Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7670, N'14714', N'Kapkesosio Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7671, N'14694', N'Kapchepkor Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7672, N'14710', N'Kapkelelwa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7673, N'14735', N'Kaplel Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7674, N'14729', N'Kapkuei Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7675, N'14811', N'Kasitet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7676, N'14843', N'Keturwo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7677, N'14999', N'Kuinet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7678, N'15002', N'Kurangurik Health centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7679, N'14657', N'Kalaacha Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7680, N'14618', N'Kabiemit Dispensary (Mosop)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7681, N'14621', N'Kabisaga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7682, N'14625', N'Kaboeito Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7683, N'14626', N'Kabolecho Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7684, N'14627', N'Kaborok Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7685, N'14687', N'Kangatosa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7686, N'14632', N'Kabunyeria Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7687, N'14641', N'Kaibos Dipensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7688, N'14645', N'Kainuk Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7689, N'14649', N'Kaitui Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7690, N'14801', N'Karagita Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7691, N'14744', N'Kapngetuny Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7692, N'14672', N'Kamelil Dispensary (Tinderet)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7693, N'14653', N'Kakiptui Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7694, N'14686', N'Kangakipur Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7695, N'14345', N'Chepkongony Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7696, N'14679', N'Kamwingi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7697, N'14388', N'Chesubet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7698, N'14675', N'Kamoi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7699, N'14674', N'Kamogo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7700, N'14664', N'Kalwal Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7701, N'14617', N'Kabiemit Dispensary (Keiyo)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7702, N'11925', N'Amani Medical Clinic (Kambu)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7703, N'14676', N'Kamongil Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7704, N'12966', N'Gynapaed Dispensary (Kilimani-)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7705, N'14562', N'Ilaiser Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7706, N'14484', N'Ewaso Ngiro Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7707, N'14436', N'Elelea Sub-county Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7708, N'14527', N'GK Prisons Dispensary (Turkana Central)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7709, N'14528', N'GK Remand Prisons Dispensary (Trans Nzoia West)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7710, N'14471', N'Entontol Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7711, N'11934', N'Athi Kamunyuni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7712, N'14454', N'Enaibor Ajijik Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7713, N'14506', N'Geta Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7714, N'14588', N'Jagoror Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7715, N'14425', N'Eburru Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7716, N'14458', N'Engashura Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7717, N'14283', N'Cengalo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7718, N'14640', N'Kaiboi Mission Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7719, N'14499', N'Flax Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7720, N'14605', N'Kabalwat Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7721, N'14449', N'Emsea Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7722, N'14273', N'Burgei Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7723, N'14295', N'Chebilat Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7724, N'14585', N'Itembe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7725, N'14285', N'Chamalal Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7726, N'14568', N'Illinga''rua Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7727, N'14292', N'Cheberen Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7728, N'10731', N'Mikaro Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7729, N'13129', N'Nyina Wa Mumbi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7730, N'15700', N'Takitech Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7731, N'15693', N'Swari Model Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7732, N'15164', N'Mbogo Valley Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7733, N'15694', N'Sweet Waters Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7734, N'15618', N'Sosit Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7735, N'15614', N'Sosian Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7736, N'15611', N'Songonyet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7737, N'14457', N'Endoinyo Erinka Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7738, N'15621', N'South Horr Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7739, N'14524', N'GK Prisons Dispensary (Ngeria)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7740, N'14523', N'GK Prisons Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7741, N'12090', N'Kambu Integrated Health Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7742, N'10061', N'Bethel Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7743, N'14514', N'GK Farm Prisons Dispensary (Trans Nzoia)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7744, N'12438', N'Machakos Level 5 Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7745, N'15677', N'Subukia Dispensary (Kipkelion)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7746, N'14305', N'Chechan Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7747, N'13597', N'Gwitembe Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7748, N'10184', N'Focus Medical Clinic and Counselling Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7749, N'14531', N'Gorgor Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7750, N'15964', N'Lugari Forest Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7751, N'13003', N'Karen Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7752, N'12547', N'Mtito andei Sub District')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7753, N'14505', N'Gelegele Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7754, N'12651', N'Ngiluni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7755, N'16572', N'General Medical Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7756, N'12612', N'Muumandu Health Center')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7757, N'15624', N'Soymet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7758, N'14290', N'Chebango Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7759, N'14302', N'Cheboyo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7760, N'14304', N'Chebunyo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7761, N'15701', N'Talai Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7762, N'15613', N'Sore Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7763, N'14557', N'Igure Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7764, N'12763', N'St Marys Medical Clinic (Kiaragana)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7765, N'12015', N'Family Care Medical Centre (Meru)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7766, N'16606', N'Meru Medical Diagnostic Imaging Centre Ltd')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7767, N'12634', N'Nana Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7768, N'13219', N'St Michael Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7769, N'16559', N'Buuri Chemist / Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7770, N'13492', N'Awendo Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7771, N'16324', N'Lokori Primary Health Care Programme')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7772, N'15152', N'Matanya Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7773, N'16629', N'Posland Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7774, N'12694', N'Nzoila Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7775, N'15698', N'Tachasis Mission Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7776, N'16556', N'Afya Medical Clinic (KIBIRICHIA)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7777, N'14088', N'Simba Opepo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7778, N'13910', N'Nyametembe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7779, N'15154', N'Matharu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7780, N'15754', N'Turkwel Health Centre (Loima)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7781, N'15759', N'Uhuru Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7782, N'15757', N'Tuum Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7783, N'15680', N'Sugoi B Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7784, N'15708', N'Tapach Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7785, N'12018', N'Suleman Farooq Memorial Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7786, N'13081', N'Mbotela Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7787, N'12061', N'Hurri-Hills Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7788, N'15752', N'Tunyo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7789, N'15756', N'Tuturung Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7790, N'14612', N'Kabetwa Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7791, N'15155', N'Matira Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7792, N'14308', N'Chelelach Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7793, N'15710', N'Tarakwa Health centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7794, N'14584', N'Itare Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7795, N'15730', N'Tirriondonin Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7796, N'14270', N'Bossei Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7797, N'15684', N'Sumeiyon Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7798, N'15724', N'Timboiywo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7799, N'14269', N'Borrowonin Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7800, N'15727', N'Tinet Dispensary (Koibatek)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7801, N'14311', N'Chemaner Dispensary (Bomet)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7802, N'14838', N'Kerio Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7803, N'14959', N'Kobujoi Forest')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7804, N'15038', N'Lingwai Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7805, N'15045', N'Lochwaangikamatak Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7806, N'14954', N'Kiwamu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7807, N'14878', N'Kimong Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7808, N'14882', N'Kimugul Dispensary (Kipkelion)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7809, N'15078', N'Longonot Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7810, N'15021', N'Lelechwet Dispensary (Rongai)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7811, N'15061', N'Lokiriama Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7812, N'15086', N'Lorien Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7813, N'15088', N'Lorogon Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7814, N'15093', N'Losogwa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7815, N'15039', N'Litein Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7816, N'15026', N'Lemotit Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7817, N'13785', N'Masogo Sub County Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7818, N'15027', N'Lengenet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7819, N'15028', N'Lerrata Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7820, N'15030', N'Lessos Community Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7821, N'13110', N'Nairobi Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7822, N'12126', N'ABC Thange Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7823, N'11942', N'Baragu Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7824, N'15025', N'Lemoru Ngeny Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7825, N'14884', N'Kimuren Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7826, N'12737', N'Kibwezi Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7827, N'12682', N'Nyaani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7828, N'15100', N'Lugumek Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7829, N'16636', N'Town Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7830, N'16619', N'Nehema Medical Lab')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7831, N'16561', N'Diplomat Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7832, N'10607', N'Kimbimbi Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7833, N'14982', N'Kombe Dispensary (Nandi Central)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7834, N'13487', N'Asat Beach Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7835, N'11733', N'Pandanguo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7836, N'16279', N'Yago Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7837, N'16275', N'Nyakurungoto Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7838, N'11452', N'Kakoneni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7839, N'16099', N'Sacha Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7840, N'12291', N'Kibwezi Sub County Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7841, N'15036', N'Likwon Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7842, N'14881', N'Kimugul Dispensary (Baringo North)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7843, N'14889', N'Kipcherere Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7844, N'15042', N'Loboi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7845, N'14913', N'Kipsegi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7846, N'10385', N'Jubilee Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7847, N'14914', N'Kipsigak Baibai Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7848, N'14930', N'Kiptome Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7849, N'14904', N'Kiplombe AIC Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7850, N'10014', N'Afya Medical Clinic (Nyeri South)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7851, N'14268', N'Border Medical Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7852, N'16181', N'Union Medical Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7853, N'16208', N'Bravo Medical Clinic (Marsabit)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7854, N'10323', N'Hope Medical Clinic (Gatundu South)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7855, N'16057', N'Mwichio Amua Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7856, N'10718', N'Highway Medical Clinic Kibingoti')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7857, N'10483', N'Karangia Health Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7858, N'11046', N'St Jude Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7859, N'10077', N'By Faith Clinic (Kirinyaga)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7860, N'10079', N'By Grace Medical (Kutus) Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7861, N'10173', N'Eunice Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7862, N'10656', N'Leshau Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7863, N'14973', N'Kojonga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7864, N'15023', N'Lelu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7865, N'12402', N'Kyaani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7866, N'10629', N'Kiriita Forest Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7867, N'13544', N'Endiba Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7868, N'10015', N'Afya Medical Clinic (Juja)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7869, N'10371', N'Jamii Medical Clinic (Muranga North)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7870, N'10632', N'Kirimukuyu Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7871, N'15488', N'Robana Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7872, N'11098', N'Three In One Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7873, N'11584', N'Maximillan Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7874, N'13694', N'Kinasia Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7875, N'11236', N'Bakhita Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7876, N'15073', N'Lomut Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7877, N'11027', N'St Augastine')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7878, N'13145', N'Pona Mat Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7879, N'13085', N'Med-Point Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7880, N'13147', N'Prime Health Services Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7881, N'14267', N'Borana Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7882, N'12529', N'Misyani Catholic Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7883, N'12147', N'Kalawa Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7884, N'16283', N'Kadinda Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7885, N'12871', N'APTC Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7886, N'13727', N'Kusa Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7887, N'15755', N'Turkwel Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7888, N'14512', N'Gitwamba Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7889, N'15838', N'Butula Mission Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7890, N'16021', N'Moding Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7891, N'13875', N'Nyagoro Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7892, N'14493', N'Fatima Health Centre (Lenkism)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7893, N'15945', N'Kilingili Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7894, N'15855', N'Cheptais Sub District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7895, N'10798', N'Mutithi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7896, N'15029', N'Lesirikan Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7897, N'15627', N'St Antony''s Abossi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7898, N'15626', N'St Anthony Lemek Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7899, N'11840', N'Taveta District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7900, N'15769', N'Catholic Hospital Wamba')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7901, N'16158', N'Vihiga Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7902, N'15822', N'Bulwani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7903, N'15906', N'Jamia Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7904, N'16102', N'Seregeya Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7905, N'16089', N'Pan M Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7906, N'12205', N'PCEA Kasasule Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7907, N'13194', N'National Spinal Injury Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7908, N'14873', N'Kimintet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7909, N'15005', N'Laliat Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7910, N'15022', N'Lelmokwo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7911, N'16644', N'St Martin Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7912, N'15014', N'Latakweny Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7913, N'15083', N'Lopur Dispensary (Turkana South)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7914, N'14977', N'Kokwet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7915, N'14992', N'Korongoi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7916, N'14921', N'Kipsuter Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7917, N'14939', N'Kiromwok Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7918, N'14952', N'Kitoben Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7919, N'14993', N'Koroto Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7920, N'14907', N'Kipsacho Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7921, N'14990', N'Koriema Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7922, N'13105', N'Mutuini Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7923, N'11602', N'Mgange Dawida Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7924, N'11141', N'Uthiru Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7925, N'16665', N'Girigiri Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7926, N'14870', N'Kimout Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7927, N'14929', N'Kiptewit Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7928, N'14895', N'Kipkeikei Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7929, N'14857', N'Kibwareng Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7930, N'14856', N'Kibugat Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7931, N'14945', N'Kisor Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7932, N'14866', N'Kilibwoni Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7933, N'14887', N'King''wal Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7934, N'14926', N'Kiptangwanyi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7935, N'14427', N'Elangata Enterit Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7936, N'15049', N'Lodwar County Referral Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7937, N'14434', N'Eldoret Airport Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7938, N'13565', N'Getambwega Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7939, N'15696', N'Tabolwa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7940, N'13039', N'Lagos Road Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7941, N'14849', N'Kibendo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7942, N'14892', N'Kipkabus Forest Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7943, N'14325', N'Chemursoi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7944, N'14564', N'Ilkerin Dispensary (Trans Mara)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7945, N'14932', N'Kiptulwa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7946, N'14875', N'Kimolwet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7947, N'15231', N'Mother Franciscan Mission Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7948, N'15630', N'St Boniface Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7949, N'14644', N'Kaimosi Tea Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7950, N'14903', N'Kiplelji Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7951, N'14927', N'Kiptenden Dispensary (Buret)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7952, N'14888', N'Kinyach Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7953, N'14855', N'Kiboino Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7954, N'15016', N'Lebolos Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7955, N'13076', N'Mathari Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7956, N'14933', N'Kiptuno Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7957, N'12905', N'Coptic Hospital (Ngong Road)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7958, N'14917', N'Kapsikak Tea Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7959, N'14901', N'Kipkoimet Tea Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7960, N'14763', N'Kapsiwon Tea Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7961, N'14629', N'Kaboswa Tea Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7962, N'14858', N'Kibwari Tea Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7963, N'14696', N'Kapchorua Tea Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7964, N'15383', N'Ogirgir Tea Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7965, N'15512', N'Sagat Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7966, N'14842', N'Ketepa Dispensary (Kericho)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7967, N'15597', N'Sitoi Tea Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7968, N'15591', N'Siret Tea Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7969, N'15211', N'Mokong Tea Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7970, N'14964', N'Eldama Ravine (AIC) Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7971, N'14647', N'Kaisugu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7972, N'15726', N'Tinderet Tea Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7973, N'14900', N'Kipkoigen Tea Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7974, N'15158', N'Mau Tea Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7975, N'15481', N'Karen Roses Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7976, N'12722', N'Rwika Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7977, N'16475', N'Chagaik Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7978, N'14322', N'Chemomi Tea Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7979, N'14966', N'Koisagat Tea Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7980, N'14673', N'Kamkong Tea Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7981, N'15699', N'Taito Tea Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7982, N'16085', N'Nzoia Sugar Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7983, N'14894', N'Kipkeibon Tea Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7984, N'14608', N'Kabarnet High School Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7985, N'15534', N'Savani Tea Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7986, N'16672', N'Kisonei Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7987, N'12649', N'Ngeru Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7988, N'14638', N'KIagai (PCEA) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7989, N'14793', N'Kapturo Dispensary (Bartabwa)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7990, N'14661', N'St Bridgit Kalemunyang Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7991, N'15347', N'Nginyang Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7992, N'15711', N'Tea Resaerch Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7993, N'14310', N'Chemamul Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7994, N'14596', N'JFK Engineering Disp')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7995, N'14331', N'Chepchabas Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7996, N'14760', N'Kapsinendet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7997, N'14384', N'Chesoen Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7998, N'14830', N'Kerenga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (7999, N'14314', N'Chemase Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8000, N'14709', N'Kapkein Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8001, N'14620', N'Kabinga (CHBC) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8002, N'14592', N'Jamji Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8003, N'14597', N'JFK Ii Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8004, N'15220', N'Monirre Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8005, N'11552', N'Makwasinyi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8006, N'11509', N'KWS Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8007, N'14847', N'Kibabet Tea Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8008, N'14748', N'Kaprachoge Tea Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8009, N'16761', N'Ebenezer Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8010, N'15967', N'Lukhuna Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8011, N'16152', N'Tongaren Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8012, N'16176', N'Care Medical Clinic (North Kinangop)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8013, N'16110', N'Shikokho Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8014, N'15040', N'Liter (AIC) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8015, N'15139', N'Marinyin Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8016, N'15510', N'Sacho School Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8017, N'14912', N'Kipsaraman Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8018, N'16092', N'Pwani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8019, N'15973', N'Lungai Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8020, N'15943', N'Kibisi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8021, N'15044', N'Lochoraikeny Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8022, N'14227', N'Baragoi Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8023, N'12120', N'Kaare Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8024, N'15548', N'Sererit Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8025, N'15990', N'Makhonge Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8026, N'16076', N'Nasusi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8027, N'15986', N'Maeni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8028, N'10481', N'Karangatha Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8029, N'15338', N'Ngarua Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8030, N'15472', N'Psigor Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8031, N'15588', N'Sipili Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8032, N'15662', N'St Patrick''s Kanamkemer Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8033, N'16071', N'Namwaya Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8034, N'15452', N'Our Lady of Lords Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8035, N'15869', N'Ekitale Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8036, N'16489', N'Mayanja Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8037, N'12528', N'Minugu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8038, N'15646', N'St Joseph Catholic Dispensary (Laikipia East)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8039, N'15501', N'Rumuruti Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8040, N'12683', N'Nyagani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8041, N'15524', N'Samburu Lodge Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8042, N'16713', N'Jordan Baptist Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8043, N'15148', N'Mary Immaculate Dispensary (Laikipia East)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8044, N'16710', N'Kayaya Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8045, N'16126', N'Sinoko Dispensary (Bungoma East)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8046, N'10820', N'Nandarasi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8047, N'16124', N'Siboti Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8048, N'15308', N'Napeililim Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8049, N'16148', N'Tamlega Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8050, N'15958', N'Korosiandet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8051, N'15837', N'Butonge Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8052, N'15416', N'Olmoran Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8053, N'14685', N'Kangagetei Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8054, N'15924', N'Kaptalelio Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8055, N'15910', N'Kaborom Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8056, N'15925', N'Kaptama (Friends) Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8057, N'15956', N'Kopsiro Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8058, N'15098', N'Loyapat Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8059, N'14440', N'Eliye Springs (AIC) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8060, N'11981', N'D Comboni Mission')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8061, N'15813', N'Buduta Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8062, N'15935', N'Khasoko Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8063, N'10426', N'Kahuru Dispensary (Nyandarua South)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8064, N'15661', N'St Monica''s Nakwamekwi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8065, N'15966', N'Lukhome Dispensary (Bungoma West)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8066, N'15333', N'Nerkwo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8067, N'15922', N'Kapkateny Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8068, N'15835', N'Busibwabo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8069, N'11183', N'Weru Health Centre (Nyandarua South)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8070, N'16080', N'New Busia Maternity & Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8071, N'16486', N'Musibiriri Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8072, N'15975', N'Lupida Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8073, N'15475', N'Quadalupe Sisters Roret')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8074, N'16165', N'Your Family Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8075, N'15816', N'Bujumba Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8076, N'15897', N'Igara Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8077, N'15853', N'Chemasiri (ACK) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8078, N'15937', N'Khayo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8079, N'15834', N'Busia District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8080, N'16332', N'Tambach T T College Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8081, N'15743', N'Tuina Dipensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8082, N'15702', N'Talek Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8083, N'10322', N'Holy Rosary Ikinu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8084, N'10770', N'Mununga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8085, N'16043', N'Munongo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8086, N'16336', N'Chesoi Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8087, N'10513', N'Kenton Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8088, N'11760', N'Rumangao Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8089, N'15819', N'Bukembe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8090, N'16160', N'Webuye Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8091, N'15411', N'Olkoroi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8092, N'14595', N'Jemunada Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8093, N'16138', N'St Damiano Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8094, N'12092', N'Iriga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8095, N'14670', N'Kamasia Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8096, N'15871', N'Elgon View Medical Cottage')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8097, N'15123', N'Mara Serena Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8098, N'11964', N'Ccs Kiritiri Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8099, N'11959', N'By Faith Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8100, N'12023', N'Gachuriri Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8101, N'12645', N'Nganduri Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8102, N'12274', N'Kiamuringa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8103, N'10840', N'Ndunyu Njeru Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8104, N'15387', N'Olasiti (AIC) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8105, N'12712', N'Riakanau Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8106, N'12193', N'Karaba Dispensary (Mbeere)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8107, N'12300', N'Kigumo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8108, N'12413', N'Consolata Kyeni Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8109, N'12742', N'St Agnes Kiaganari')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8110, N'12824', N'Universal Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8111, N'14459', N'Ngilai Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8112, N'16242', N'Ccs Macumo Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8113, N'12720', N'Kaune''s Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8114, N'12387', N'Kr Memorial Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8115, N'12764', N'St Marys Medical Clinic (Runyenjes)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8116, N'12452', N'Makengi Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8117, N'12453', N'Makengi Dispensary (Embu)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8118, N'12168', N'Kamuthatha Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8119, N'16345', N'St Ladislaus Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8120, N'12005', N'Emmanuel Kigari (ACK) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8121, N'12130', N'Kairuri Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8122, N'11909', N'Wusi-Wutesia (ACK) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8123, N'15146', N'Mary Finch Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8124, N'12062', N'Huruma Clinic (Embu)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8125, N'11966', N'CFW Kimangaru Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8126, N'12505', N'Mbondoni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8127, N'12448', N'Majengo (PCEA) Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8128, N'12172', N'Kangaru Dispensary (Embu)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8129, N'16343', N'Patrician Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8130, N'16669', N'Ndubusat Bethel Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8131, N'11086', N'Tata Hannah (African Christian Churches and School')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8132, N'15454', N'P O M Dipensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8133, N'16352', N'Hospice Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8134, N'13426', N'Ruqa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8135, N'16329', N'Inkoirienito Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8136, N'16289', N'Baraki Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8137, N'13438', N'Shantaabaq Health Centre (Lagdera)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8138, N'16359', N'Kibulgeny Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8139, N'15198', N'Mogotio Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8140, N'13274', N'Al-Aqsa Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8141, N'13367', N'Ifmaho Medical Clinic and Laboratory')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8142, N'13442', N'Sisters Maternity Home (Simaho)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8143, N'13448', N'Utawala Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8144, N'16067', N'Namboboto Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8145, N'12427', N'Liberty Maternity and Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8146, N'10215', N'Gathara Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8147, N'15915', N'Kakamega Provincial General Hospital (PGH)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8148, N'14112', N'St Jude Health Centre (Icipe)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8149, N'14971', N'Koiwa Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8150, N'14941', N'Kiserian Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8151, N'10788', N'Mutarakwa Dispensary (Nyandarua South)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8152, N'14479', N'Entasekera Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8153, N'15594', N'Sirwa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8154, N'14859', N'Kichwa Tembo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8155, N'14221', N'Bible Faith Church Medical Services Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8156, N'14864', N'Kilgoris (Cog) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8157, N'12331', N'Kiriani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8158, N'13813', N'Mirogi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8159, N'13670', N'Kenya Acorn Project (Acorn) Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8160, N'13732', N'Lambwe Forest Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8161, N'13902', N'Nyamasi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8162, N'11852', N'Titila (AIC) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8163, N'13605', N'Homa Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8164, N'12079', N'Ikumbo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8165, N'13373', N'Islamic Relief Agency')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8166, N'15251', N'Mulot Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8167, N'13733', N'Lela (Community) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8168, N'14039', N'Raruowa Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8169, N'12597', N'Mutindwa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8170, N'14390', N'Chukura Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8171, N'16666', N'Nyaitara Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8172, N'16330', N'Olenkasurai Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8173, N'14092', N'Sino Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8174, N'13873', N'Nyagowa Elck Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8175, N'16477', N'Badana Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8176, N'15199', N'Mogotio Plantation Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8177, N'16338', N'Bindura Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8178, N'15666', N'St Teresa Olokirikirai Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8179, N'10446', N'Kambui (PCEA) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8180, N'14281', N'Cedar Medical Clinic (Kimana)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8181, N'14581', N'Isinet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8182, N'14002', N'Othoro Health Centre (Rachuonyo)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8183, N'10219', N'Gathiruini (PCEA) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8184, N'12659', N'Nguruki-Iruma Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8185, N'14461', N'Enkirotet Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8186, N'10506', N'Karura (SDA) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8187, N'10984', N'Rwanyambo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8188, N'11296', N'Daba (AIC) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8189, N'11538', N'Magongo (MCM) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8190, N'15737', N'Torosei Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8191, N'14911', N'Kipsaos Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8192, N'16462', N'Kariakomo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8193, N'12579', N'Murambani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8194, N'11445', N'Kadaina Community Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8195, N'14546', N'Helmon Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8196, N'14462', N'Enkitoria Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8197, N'15296', N'Namelok Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8198, N'14156', N'Ukwala Sub County Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8199, N'16645', N'Makengi Dispensary (Maara)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8200, N'10755', N'Mukeu (AIC) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8201, N'14815', N'Kataret Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8202, N'14757', N'Kapset Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8203, N'14740', N'Kaplomboi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8204, N'15309', N'Napusimoru Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8205, N'14239', N'Barsombe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8206, N'15751', N'Tumoi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8207, N'14918', N'Kipsingei Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8208, N'14840', N'Kerol Health Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8209, N'14360', N'Chepseon Health Care Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8210, N'15824', N'Bumala B Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8211, N'15831', N'Busembe Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8212, N'15792', N'Akichelesit Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8213, N'16131', N'Sisenye Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8214, N'15555', N'Setano Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8215, N'14695', N'Kapcherop Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8216, N'15658', N'St Michael Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8217, N'14848', N'Kibagenge Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8218, N'14915', N'Kipsigak Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8219, N'14948', N'Kitale Mobile Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8220, N'14994', N'Kosikiria Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8221, N'14274', N'Burnt Forest Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8222, N'13342', N'Galmagalla Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8223, N'12039', N'Gitare Dispensary (Embu)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8224, N'13420', N'Police Line Dispensary (Garissa)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8225, N'10965', N'Royal Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8226, N'14980', N'Koloch Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8227, N'12727', N'Samburu Complex')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8228, N'13458', N'Young Muslim Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8229, N'13336', N'Excel Health Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8230, N'13360', N'Handaro Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8231, N'13459', N'Yumbis Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8232, N'12513', N'Merti Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8233, N'11960', N'Catholic Dispensary (Isiolo)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8234, N'14886', N'Kings Medical Centre (Delivarance) Nakuru')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8235, N'15948', N'Kimalewa Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8236, N'14502', N'Fountain Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8237, N'15858', N'Chimoi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8238, N'15911', N'Kabuchai Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8239, N'16063', N'Nalondo Cbm Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8240, N'16081', N'Ngalasia Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8241, N'10312', N'Heni Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8242, N'14298', N'Chebitet Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8243, N'14947', N'Kitale  County Refferal  Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8244, N'11274', N'Chaani (MCM) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8245, N'16175', N'Muthithi (PCEA) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8246, N'10692', N'Mariira Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8247, N'14358', N'Chepsaita Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8248, N'15526', N'Sancta Maria Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8249, N'15787', N'Zam Zam Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8250, N'12684', N'Nyambene District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8251, N'15314', N'Nasolot Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8252, N'13069', N'Maringo Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8253, N'16169', N'Lady Northey Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8254, N'15636', N'St Elizabeth Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8255, N'16384', N'Our Lady of Mercy (Magumu)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8256, N'16112', N'Shikusa Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8257, N'15414', N'Olmekenyu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8258, N'15348', N'Ngito Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8259, N'15938', N'Khumsalaba Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8260, N'16045', N'Munyanza Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8261, N'16033', N'Mulwanda Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8262, N'16718', N'Shimuli Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8263, N'16143', N'St Pauline Nursing Home and Marternity')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8264, N'16040', N'Mundoli Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8265, N'15128', N'Mararianta Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8266, N'12444', N'Magundu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8267, N'16056', N'Mwasi Med Clinc')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8268, N'15134', N'Marie Stopes Clinic (Kitale)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8269, N'15130', N'Marich Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8270, N'15369', N'Nturumeti Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8271, N'16058', N'Mwihila Mission Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8272, N'14986', N'Kongoni Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8273, N'15697', N'Tabuga (PCEA) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8274, N'15237', N'Mpata Club Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8275, N'16016', N'Mihuu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8276, N'15397', N'Olendeem Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8277, N'16675', N'Toror Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8278, N'14719', N'Kapkitony Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8279, N'16125', N'Sikulu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8280, N'14365', N'Cheptabes Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8281, N'10674', N'Makuyu Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8282, N'15779', N'West Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8283, N'10687', N'Maragua Ridge Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8284, N'11650', N'Mpinzinyi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8285, N'10112', N'Don Bosco Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8286, N'10969', N'Ruchu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8287, N'14590', N'Jamii Clinical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8288, N'15983', N'Mabusi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8289, N'14602', N'June Mar Maternity and Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8290, N'15276', N'Naikara Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8291, N'15278', N'Nairasirasa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8292, N'15762', N'ASN Upendo Village Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8293, N'16170', N'Sabasaba Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8294, N'15882', N'Eshikhuyu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8295, N'14277', N'Bwena Dipensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8296, N'15957', N'St Charles Lwanga Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8297, N'14391', N'Chumvi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8298, N'14896', N'Kipkelion (CHFC) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8299, N'14403', N'Diguna Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8300, N'11683', N'Mwakirunge Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8301, N'13104', N'Muthurwa Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8302, N'14357', N'Cheppemma (AIC) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8303, N'14771', N'Kaptabuk Dispensary (Marakwet)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8304, N'15984', N'Machwele Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8305, N'15521', N'Salawa Catholic Mission Dispensary PHC')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8306, N'15137', N'Marigat Catholic Mission')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8307, N'14215', N'Arroket Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8308, N'15422', N'Ololpironito Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8309, N'10865', N'Ngewa Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8310, N'10507', N'Karuri Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8311, N'10493', N'Karia Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8312, N'10263', N'Githiga Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8313, N'11908', N'Wundanyi Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8314, N'13316', N'Dadaab Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8315, N'11764', N'Sagala Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8316, N'11995', N'Ekalakala Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8317, N'11718', N'Njukini Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8318, N'11720', N'Nyache Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8319, N'11589', N'Mbale Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8320, N'12375', N'Kivaa Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8321, N'12589', N'Muthambi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8322, N'11839', N'Tausa Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8323, N'15166', N'Medical Reception Service - Ist Kr')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8324, N'10588', N'Kigumo Sub County Hospital (Kigumo)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8325, N'10587', N'Kigumo Health Centre (Kiambu East)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8326, N'13788', N'Matare Mission Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8327, N'12476', N'Masinga Sub County Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8328, N'15421', N'Olokyin Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8329, N'15551', N'Serewo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8330, N'14613', N'Kabianga Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8331, N'15605', N'Sogoo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8332, N'13939', N'Jaramogi Oginga Odinga Teaching  Referral Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8333, N'14734', N'Kaplamai Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8334, N'15200', N'Mogotio Rhdc')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8335, N'14615', N'Kabichbich Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8336, N'14841', N'Kesses Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8337, N'15495', N'Rongai Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8338, N'15516', N'Sakutiek Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8339, N'15601', N'Soba River Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8340, N'14779', N'Kapteldon Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8341, N'15229', N'Mosoriot Rural Health Training Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8342, N'14623', N'Kabiyet Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8343, N'15498', N'Roret Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8344, N'16547', N'Kinondo Kwetu Community Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8345, N'14728', N'Kapkoros Sub-County Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8346, N'14781', N'Kapteren Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8347, N'15953', N'Kolanya Salvation Army Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8348, N'15587', N'Siongiroi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8349, N'14998', N'Kuikui Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8350, N'15522', N'Salawa Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8351, N'15197', N'Mogorwa Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8352, N'11243', N'Baobab Clinic - Bamburi Cement')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8353, N'15549', N'Seretunin Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8354, N'14677', N'Kampi Samaki Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8355, N'15106', N'Maiela Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8356, N'11592', N'Mbuta Model Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8357, N'14611', N'Kabazi Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8358, N'16103', N'Serem Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8359, N'14442', N'Emarti Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8360, N'15753', N'Turbo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8361, N'15747', N'Tulwet Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8362, N'15692', N'Suwerwa Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8363, N'15678', N'Subukia SDH')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8364, N'15617', N'Sosiot Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8365, N'15616', N'Sosiani Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8366, N'15114', N'Maji Tamu Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8367, N'14965', N'Koilot Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8368, N'10171', N'Engineer District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8369, N'12912', N'Dandora II Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8370, N'15019', N'Lelboinet Health Centre (Keiyo)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8371, N'15798', N'Amukura Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8372, N'15825', N'Bumula Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8373, N'15800', N'Angurai Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8374, N'15619', N'Sotik Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8375, N'15714', N'Tegat Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8376, N'15735', N'Torongo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8377, N'14477', N'Esageri Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8378, N'15799', N'Amukura Mission Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8379, N'14424', N'Dundori Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8380, N'15312', N'Naroosura Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8381, N'15763', N'Upper Solai Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8382, N'16018', N'Milo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8383, N'14610', N'Kabatini Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8384, N'14453', N'Enabelbel Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8385, N'15362', N'Nkararo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8386, N'14997', N'Koyo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8387, N'15277', N'Nairagie-Enkare Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8388, N'15208', N'Moi''s Bridge Catholic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8389, N'14893', N'Kipkabus Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8390, N'15205', N'Moi University Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8391, N'15805', N'Banja Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8392, N'14935', N'Kipwastuiyo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8393, N'15859', N'Chombeli Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8394, N'15238', N'Msekekwa Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8395, N'14920', N'Kipsonoi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8396, N'15388', N'Olbutyo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8397, N'14580', N'Irwaga Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8398, N'15195', N'Mogogosiek Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8399, N'14970', N'Koiwa Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8400, N'15285', N'Nakurio Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8401, N'14923', N'Kiptagich Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8402, N'14953', N'Kituro Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8403, N'14867', N'Kimalel Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8404, N'14446', N'Emining Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8405, N'14940', N'Kisanana Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8406, N'10887', N'North Kinangop Catholic Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8407, N'16025', N'Mt Elgon Sub County Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8408, N'14550', N'Holy Trinity Health Centre (Mai Mahiu)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8409, N'15447', N'Oserian Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8410, N'15136', N'Marie Stopes Health Centre (Kericho)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8411, N'14205', N'Angata Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8412, N'14338', N'Chepkemel Health Centre (Kericho)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8413, N'14315', N'Chemase Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8414, N'14339', N'Chepkemel Health Centre (Mosop)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8415, N'14192', N'Ainamoi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8416, N'14501', N'Forttenan Sub District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8417, N'15406', N'Ol-Jorai Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8418, N'10520', N'Kerugoya District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8419, N'15325', N'Ndindika Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8420, N'15339', N'Ngarua Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8421, N'14555', N'Huruma District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8422, N'14379', N'Cherangany Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8423, N'14346', N'Chepkorio Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8424, N'15260', N'Muskut Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8425, N'14261', N'Bomet Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8426, N'14289', N'Chebangang Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8427, N'14243', N'Barwessa Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8428, N'10786', N'Murungaru Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8429, N'10641', N'Kiumbu Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8430, N'15319', N'Ndalat (PCEA) Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8431, N'10332', N'Ichagaki (Mission) Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8432, N'16350', N'Ainabkoi (RCEA) Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8433, N'10454', N'Kamung''ang''a (ACK) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8434, N'16720', N'Kimng''oror (ACK) Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8435, N'15292', N'Nakwamoru Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8436, N'14822', N'Kebeneti (SDA) Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8437, N'14624', N'Kabobo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8438, N'12774', N'St Theresa Thatha Mission Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8439, N'15057', N'Lokichar (RCEA) Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8440, N'11587', N'Mazumalume Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8441, N'14960', N'Kobujoi Mission Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8442, N'13389', N'Kutulo Health Centre (Wajir East)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8443, N'14478', N'Esther Memorial Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8444, N'14212', N'Archers Post Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8445, N'15209', N'Moi''s Bridge Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8446, N'14545', N'Hekima Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8447, N'15623', N'Soy Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8448, N'15353', N'Ngubereti Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8449, N'16145', N'St Pius Musoli Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8450, N'14394', N'Cmf Aitong Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8451, N'10877', N'Njabini Maternity and Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8452, N'14500', N'Flourspar Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8453, N'14628', N'Kaboson Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8454, N'10686', N'Maragua District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8455, N'11906', N'Wesu District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8456, N'15643', N'St John Cottage Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8457, N'15622', N'South Horr Catholic Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8458, N'14572', N'Ime (AIC) Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8459, N'15778', N'Wesley Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8460, N'15640', N'St Francis Tinga Health Centre (Kipkelion)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8461, N'15722', N'Thessalia Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8462, N'15839', N'Buyangu Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8463, N'11366', N'St Raphael Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8464, N'15632', N'St Brigitas Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8465, N'15655', N'St Mary''s Kapsoya Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8466, N'14476', N'Ereto Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8467, N'14553', N'Huruma Health Centre (Laikipia East)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8468, N'14398', N'Crater Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8469, N'10044', N'Bamboo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8470, N'10539', N'Kiambu District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8471, N'15881', N'Eregi Mission Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8472, N'10449', N'Kamfas Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8473, N'15832', N'Bushiangala Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8474, N'14216', N'Arror Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8475, N'14385', N'Chesoi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8476, N'14456', N'Endo Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8477, N'14386', N'Chesongoch Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8478, N'15941', N'Kibabii Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8479, N'15788', N'Ziwa Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8480, N'15768', N'Wamba Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8481, N'14179', N'Nandi Hills District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8482, N'15996', N'Malava District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8483, N'14224', N'Bahati District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8484, N'14792', N'Kaptumo Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8485, N'14831', N'Kericho District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8486, N'15068', N'Lolgorian Sub District Hosp')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8487, N'15305', N'Nanyuki District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8488, N'15074', N'Londiani District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8489, N'11641', N'Moi District Hospital Voi')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8490, N'14353', N'Cheplanget Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8491, N'11695', N'Mwatate Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8492, N'10905', N'Nyeri Town Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8493, N'12445', N'Magutuni District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8494, N'11411', N'Hola District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8495, N'10591', N'Kihara Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8496, N'14511', N'Gilgil Military Regional Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8497, N'14706', N'Kapkatet District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8498, N'15311', N'Narok County Referral Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8499, N'14818', N'Katilu Sub County Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8500, N'14366', N'Cheptalal Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8501, N'15703', N'Tambach Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8502, N'10758', N'Mukungi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8503, N'15037', N'Limo Surgical Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8504, N'15913', N'Kaimosi Mission Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8505, N'15423', N'Ololulunga District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8506, N'15502', N'Rumuruti District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8507, N'15181', N'Meteitei Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8508, N'15508', N'Saboti Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8509, N'15568', N'Sigowet Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8510, N'14228', N'Baragoi Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8511, N'13012', N'Mwiki CFW')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8512, N'16107', N'Shibwe Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8513, N'10471', N'Kangu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8514, N'14307', N'Cheindoi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8515, N'15739', N'Transmara District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8516, N'15899', N'Iguhu County Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8517, N'14607', N'Baringo County Refferal Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8518, N'15808', N'Bokoli Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8519, N'14753', N'Kapsara District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8520, N'15138', N'Marigat Sub District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8521, N'14432', N'Eldama Ravine District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8522, N'14369', N'Chepterwai Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8523, N'14586', N'Iten District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8524, N'14776', N'Kaptarakwa Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8525, N'16150', N'Teso  North Sub county Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8526, N'15795', N'Alupe Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8527, N'14609', N'Kabartonjo District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8528, N'14013', N'Pap Kodero Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8529, N'10878', N'Njabini Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8530, N'15928', N'Kegondi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8531, N'12893', N'Chandaria Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8532, N'16012', N'Mbale Rural Health Training Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8533, N'16032', N'Mulele Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8534, N'15815', N'Bugina Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8535, N'16161', N'Webuye Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8536, N'16060', N'Nadanya Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8537, N'16061', N'Naitiri Sub-County Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8538, N'16044', N'Munoywa Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8539, N'15903', N'Inyali Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8540, N'15896', N'Iduku Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8541, N'15814', N'Bugamangi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8542, N'16449', N'Egago Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8543, N'16013', N'Mbaleway Side Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8544, N'16017', N'Mijay Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8545, N'15794', N'Alliance Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8546, N'15842', N'Carol Afandi Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8547, N'16448', N'Jasho Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8548, N'13093', N'Mji Wa Huruma Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8549, N'16450', N'Junction Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8550, N'16097', N'Sabatia Eye Hospital Mission')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8551, N'15167', N'Mediheal Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8552, N'14699', N'Kapedo Sub-County Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8553, N'10267', N'Githumu Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8554, N'16073', N'Holy Family Nangina Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8555, N'15965', N'Lugulu Friends Mission Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8556, N'14767', N'Kapsowar (AIC) Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8557, N'16098', N'Sabatia Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8558, N'15845', N'Chamakanga Mission')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8559, N'15879', N'Enzaro Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8560, N'15982', N'Lyanaginga Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8561, N'15847', N'Chavogere Mission')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8562, N'16141', N'St Mary''s Hospital (Mumias)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8563, N'16091', N'Port Victoria Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8564, N'15905', N'Ivona Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8565, N'16093', N'Rophy Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8566, N'15807', N'Beberion Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8567, N'16364', N'Matunda  Sub county Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8568, N'15954', N'Kona Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8569, N'15893', N'Go Down Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8570, N'15843', N'Central Clinic (Lugari)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8571, N'16084', N'Nzoia (ACK) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8572, N'16038', N'Mumias Sugar Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8573, N'16049', N'Musanda (ACK) Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8574, N'15841', N'Canaan Clinic (Matete)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8575, N'16416', N'Mulukaka Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8576, N'16029', N'Mukhobola Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8577, N'16129', N'Sirimba Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8578, N'15811', N'Budalangi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8579, N'15873', N'Elwasambi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8580, N'16001', N'Marakusi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8581, N'16011', N'Mbagara Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8582, N'16031', N'Mukuyu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8583, N'16086', N'Nzoia Matete Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8584, N'16046', N'Munyuki Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8585, N'15988', N'Majengo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8586, N'16371', N'Kamla Community Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8587, N'16051', N'Musembe Dispensary (Lugari)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8588, N'15970', N'Lumani Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8589, N'16009', N'Maturu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8590, N'16154', N'Turbo Forest Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8591, N'16100', N'Sango Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8592, N'16007', N'Matunda Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8593, N'16134', N'Soy Sambu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8594, N'16035', N'Mumias Model Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8595, N'10808', N'Mwea Mission (Our Lady of Lourdes) Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8596, N'15818', N'Bukaya Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8597, N'15936', N'Khaunga Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8598, N'16042', N'Mung''ung''u Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8599, N'16123', N'Shibanze Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8600, N'16070', N'Namulungu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8601, N'15972', N'Lung''anyiro Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8602, N'16077', N'National Youth Service Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8603, N'16000', N'Mapengo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8604, N'12901', N'Community Health Foundation')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8605, N'15817', N'Bukaya Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8606, N'16005', N'Matete Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8607, N'16111', N'Shikunga Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8608, N'15955', N'Kongoni Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8609, N'15827', N'Bungasi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8610, N'15977', N'Lusheya Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8611, N'15991', N'Makunga Rhdc')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8612, N'16041', N'Mung''ang''a Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8613, N'15931', N'Khalaba Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8614, N'13971', N'Ojola Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8615, N'15131', N'Maridadi RCEA Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8616, N'14877', N'Kimondo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8617, N'14332', N'Chepchoina Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8618, N'16008', N'Matunda Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8619, N'12406', N'Kyangunga Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8620, N'12819', N'Tyaa Kamuthale Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8621, N'15961', N'Likuyani Sub-District Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8622, N'16010', N'Mautuma Sub County Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8623, N'14646', N'Kaisagat Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8624, N'15933', N'Khaoya Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8625, N'11092', N'Thiba Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8626, N'15240', N'Mt Elgon National Park Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8627, N'10960', N'Roadside Medical Clinic Kiangai')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8628, N'11164', N'Wamumu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8629, N'10991', N'Sagana Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8630, N'10975', N'Rukanga  Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8631, N'10221', N'Gatithi Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8632, N'10571', N'Kibirigwi Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8633, N'10217', N'Gathigiriri Health Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8634, N'10566', N'Kiaragana Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8635, N'12456', N'Makueni Catholic Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8636, N'14639', N'Kaibei Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8637, N'14203', N'Andersen Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8638, N'15573', N'Siloam Medical clinic(Kwanza)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8639, N'14630', N'Kabirirsang Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8640, N'15791', N'Ahmadiya Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8641, N'13831', N'Muhoroni County Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8642, N'12685', N'Nyambene Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8643, N'15969', N'Lumakanda Sub County Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8644, N'12606', N'Mutuati Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8645, N'12294', N'Kiengu Maternity and Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8646, N'11897', N'Watamu Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8647, N'12641', N'Neema Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8648, N'14508', N'Gilgil Astu Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8649, N'14006', N'Owens Nursing Home')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8650, N'10038', N'Asantey Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8651, N'10143', N'Dr Muraya Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8652, N'10491', N'Karen Hospital Annex')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8653, N'10127', N'Dr Kariuki N M Psychiatric Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8654, N'10141', N'Dr Mukui F K Psychiatric Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8655, N'14296', N'Chebirbei Dspensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8656, N'10906', N'Nyeri Youth Heath Centre (Family Health Options Ke')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8657, N'10783', N'Muruguru Medical Clinic (Nyeri North)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8658, N'14245', N'Batian Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8659, N'14250', N'Bethelm Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8660, N'15295', N'Namayiana Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8661, N'10188', N'Frayjoy Clinic (Dr Tumbo)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8662, N'15496', N'Rongai Uzima Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8663, N'14189', N'Aga Khan University Hospital O/R Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8664, N'15184', N'Mid Hill Medical Clinic Ngong')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8665, N'15161', N'Mawepi Medical and VCT Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8666, N'14187', N'Afya Frank Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8667, N'16204', N'Tumaini Medical Clinic (Marsabit)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8668, N'16348', N'Family Health Options Kenya (Eldoret)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8669, N'10013', N'Afya Medical Clinic (Nyeri North)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8670, N'11288', N'Roka Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8671, N'10133', N'Dr M M Mburu Gynae / Obstretric Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8672, N'11084', N'Tambaya Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8673, N'10334', N'Ichamara Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8674, N'10751', N'Muguo Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8675, N'10009', N'Afya Health Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8676, N'10925', N'Pacco Ebenezer Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8677, N'10067', N'Bethsaida Medical Clinic (Gatundu)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8678, N'10699', N'Mary Hill Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8679, N'10059', N'Bethany Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8680, N'15103', N'Maasai Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8681, N'10298', N'Good Shepherd Medical Clinic (Nyeri North)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8682, N'10008', N'Afya Bora Medical Clinic (Nyeri South)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8683, N'15886', N'Esirulo Imani Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8684, N'11177', N'Warui Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8685, N'15210', N'Moka Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8686, N'10981', N'Ruringu Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8687, N'16667', N'Beacon of Hope Clinic (Kajiado)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8688, N'10073', N'Blue Line Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8689, N'10088', N'Caritas community hospital (Township)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8690, N'13344', N'Garissa Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8691, N'14184', N'Acacia Medicare Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8692, N'11147', N'Victory Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8693, N'10198', N'Gadi Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8694, N'11792', N'Shuffa Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8695, N'10538', N'Kiambogo Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8696, N'15120', N'Manyatta Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8697, N'11101', N'Thunguma Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8698, N'11417', N'Ibnusina Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8699, N'10977', N'Rural Medical Clinic (Nyeri South)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8700, N'10469', N'Kangema Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8701, N'11085', N'Tana Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8702, N'10211', N'Gateways Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8703, N'14439', N'Elite Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8704, N'10037', N'Arcade Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8705, N'10086', N'Chalo Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8706, N'14544', N'Healthway Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8707, N'15771', N'Wananchi Medical Clinic (Kajiado)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8708, N'13635', N'Jevros Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8709, N'10487', N'Karatina Medical Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8710, N'11166', N'Wananchi Medical Centre')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8711, N'10521', N'Eastend Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8712, N'10119', N'Dr E K Ritho Paediatric Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8713, N'10702', N'Masa Medical Clinic (Nyeri North)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8714, N'10563', N'Mercy Medical (Kianugu) Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8715, N'10944', N'Pona Medical Clinic (Nyeri North)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8716, N'10148', N'Dr Nguhiu')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8717, N'10961', N'Rosa Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8718, N'10373', N'Jehova Jireh Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8719, N'10019', N'Mangu (Aip) Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8720, N'10508', N'Karure Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8721, N'10590', N'Kihaaro Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8722, N'10993', N'Sagana Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8723, N'10250', N'Gichiche Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8724, N'10708', N'Matura Medical Care')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8725, N'10953', N'Rapha Afya Medical Clinic (Kirinyaga)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8726, N'11292', N'Cornerstone Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8727, N'11877', N'Uzima Medical Clinic (Lamu)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8728, N'11675', N'Mugos Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8729, N'11830', N'Star of Good Hope Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8730, N'11648', N'Mpeketoni Health Services Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8731, N'11039', N'St John Ndururumo Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8732, N'15665', N'St Peter''s Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8733, N'10122', N'Dr Irungu Mwangi Dermatology Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8734, N'14435', N'Eldoret Hospital')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8735, N'10139', N'Dr Mukui')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8736, N'10060', N'Bethany Family Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8737, N'10138', N'Thika Arcade Health Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8738, N'10226', N'Gatuamba Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8739, N'10231', N'Gatukuyu Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8740, N'10090', N'Charity Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8741, N'10709', N'Mayols Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8742, N'11118', N'Tumaini Medical Clinic (Nyandarua North)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8743, N'12772', N'St Teresa Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8744, N'12108', N'Jamii Medical Clinic (Mwala)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8745, N'11135', N'Unique Tambaya Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8746, N'10910', N'Ol Jororok Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8747, N'12736', N'Sisi Kwa Sisi Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8748, N'11200', N'Afya Bora Medical Clinic (Malindi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8749, N'16188', N'Mariakani Community Health Care Services')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8750, N'10359', N'Ithe-Kahuno Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8751, N'14898', N'Kipkenyo Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8752, N'10652', N'Labura/Babito Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8753, N'10278', N'Gituamba Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8754, N'10616', N'Kinunga Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8755, N'10800', N'Mutitu Gikondi Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8756, N'10042', N'Atlas Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8757, N'10730', N'Mihuti Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8758, N'11019', N'Ssema Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8759, N'10679', N'Manguo Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8760, N'11125', N'Tunuku Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8761, N'12124', N'Kageni Med Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8762, N'10605', N'Kimahuri Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8763, N'10393', N'Kabuti Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8764, N'10358', N'Ithare Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8765, N'16182', N'Khadija Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8766, N'10741', N'Mt Kenya Narumoru Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8767, N'10849', N'New Kihoya Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8768, N'11820', N'St Mary''s Medical Clinic (Malindi)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8769, N'10047', N'Baraka Medical Clinic (Muranga North)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8770, N'13460', N'Zakma Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8771, N'13326', N'Dertu Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8772, N'14989', N'Kopeeto Dispensary')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8773, N'10156', N'Dr Wanjohi')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8774, N'10168', N'Emmanuel Medical Clinic (Nyeri North)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8775, N'10416', N'Kahara Medical Clinic')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8776, N'10160', N'Ebenezer Medical Clinic (Nyeri South)')
+GO
+INSERT [dbo].[FacilityList] ([id], [MFLCode], [Name]) VALUES (8777, N'10501', N'Kariumba Medical Clinic')
+GO
+SET IDENTITY_INSERT [dbo].[FacilityList] OFF
+GO
 
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Unknown',1 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Unknown'  ) ItemId FROM LookupMaster  WHERE Name='MaritalStatus') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Widowed',1 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Widowed'  ) ItemId FROM LookupMaster  WHERE Name='MaritalStatus') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
