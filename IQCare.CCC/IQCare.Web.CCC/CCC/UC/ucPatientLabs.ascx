@@ -589,10 +589,13 @@
                         }                      
                         $("#tblAddLabs tr:gt(0)").remove();
                         
-                       // $('#tblPendingLabs tr').find('th:last, td:last').remove();
+                        // $('#tblPendingLabs tr').find('th:last, td:last').remove();
+
                         table ="<tr><td></td><td>" + $(tr).find('td:eq(2)').text() + "</td><td>" + $(tr).find('td:eq(3)').text() + "</td><td>" +labOrderDate+ "</td><td>" + "Pending" + "</td></tr>";
 
-                        $('#tblPendingLabs tr:last').remove();
+                        // $('#tblPendingLabs tr:last').remove();
+                       // $('#tblPendingLabs td').not(':contains("Test")').parents("tr").remove();
+                        $('#tblPendingLabs  tr').find('td:eq(2):empty').parent().remove();
                         $("#tblPendingLabs>tbody:first").append(table);
 
                         $('#tblPendingLabs tr:not(:first-child').each(function(idx){

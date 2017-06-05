@@ -1228,6 +1228,7 @@
                             var radio = RB1.getElementsByTagName("input");
  
                             for (var i = 0; i < radio.length; i++) {
+                                radio[i].disabled = true;
                                 if (radio[i].value == patientDetails.PatientType) {
                                     radio[i].checked = true;
                                 }
@@ -1238,6 +1239,7 @@
                             $("#personMName").val(patientDetails.MiddleName);
                             $("#personLName").val(patientDetails.LastName);
                             $("#Gender").val(patientDetails.Gender);
+                            $("#Gender").prop('disabled', true);
                             
                             /*Social Status*/
                             $('#MyDateOfBirth').datepicker('setDate', patientDetails.PersonDoB);
