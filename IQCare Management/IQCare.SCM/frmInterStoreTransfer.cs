@@ -419,6 +419,7 @@ namespace IQCare.SCM
                 theColumnItemCode.Name = "ItemCode";
                 theColumnItemCode.DataPropertyName = "ItemCode";
                 theColumnItemCode.ReadOnly = true;
+                theColumnItemCode.Visible = false;
 
                 DataGridViewTextBoxColumn theColumnUnit = new DataGridViewTextBoxColumn();
                 theColumnUnit.HeaderText = "Purchase Units";
