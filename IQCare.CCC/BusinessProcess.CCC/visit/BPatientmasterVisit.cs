@@ -207,5 +207,17 @@ namespace BusinessProcess.CCC.visit
                 return patientVisitList;
             }
         }
+
+        public List<PatientMasterVisit> GetNonEnrollmentVisits(int patientId, int visitType)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                List<PatientMasterVisit> patientMasterVisits =
+                    unitOfWork.PatientMasterVisitRepository
+                        .FindBy(x => x.PatientId == patientId && (x.VisitType == null || x.VisitType != visitType)).ToList();
+                unitOfWork.Dispose();
+                return patientMasterVisits;
+            }
+        }
     }
 }

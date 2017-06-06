@@ -389,9 +389,10 @@ namespace IQCare.Web.CCC.WebService
             try
             {
                 var patientPK = Convert.ToInt32(Session["PatientPK"]);
-                var patientManager = new PatientManager();
                 var patientEnrollment = new PatientEnrollmentManager();
                 var patientIdentifier = new PatientIdentifierManager();
+                var patientMasterVisitManager = new PatientMasterVisitManager();
+                var patientManager = new PatientLookupManager();
 
                 var lookupLogic = new LookupLogic();
                 var patientIdentifiers = lookupLogic.GetItemIdByGroupAndDisplayName("PatientIdentifier", serviceName);
@@ -401,12 +402,40 @@ namespace IQCare.Web.CCC.WebService
                     identifierId = patientIdentifiers[0].ItemId;
                 }
 
+                var patient = patientManager.GetPatientDetailSummary(patientPK);
+                if (DateTime.Parse(enrollmentDate) < DateTime.Parse(patient.DateOfBirth.ToString()))
+                {
+                    var DOBexception = new SoapException("Enrollment Date: " + enrollmentDate + " should not be before the date of birth " + DateTime.Parse(patient.DateOfBirth.ToString()).ToString("dd-MM-yyyy"), SoapException.ClientFaultCode);
+                    throw DOBexception;
+                }
+
+                var enrollmentIdentifiers = lookupLogic.GetItemIdByGroupAndDisplayName("VisitType", "Enrollment");
+                var itemId = 0;
+                if (enrollmentIdentifiers.Count > 0)
+                {
+                    itemId = enrollmentIdentifiers[0].ItemId;
+                }
+
+                List<PatientMasterVisit> visitsNonEnrollments  = patientMasterVisitManager.GetNonEnrollmentVisits(patientPK, itemId);
+
                 var identifierTypesCheck = patientIdentifier.CheckIfIdentifierNumberIsUsed(enrollmentNo, identifierId);
 
                 if (identifierTypesCheck.Count > 0)
                 {
                     var exception = new SoapException("No: " + enrollmentNo + " already exists", SoapException.ClientFaultCode);
                     throw exception;
+                }
+
+                if (visitsNonEnrollments.Count > 0)
+                {
+                    foreach (var items in visitsNonEnrollments)
+                    {
+                        if (DateTime.Parse(enrollmentDate) > items.VisitDate)
+                        {
+                            var newexception = new SoapException("Enrollment Date: " + enrollmentDate + " is after encounters in the system", SoapException.ClientFaultCode);
+                            throw newexception;
+                        }
+                    }
                 }
 
                 StringBuilder sbData = new StringBuilder();
