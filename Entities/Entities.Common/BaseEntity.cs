@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Web;
+using System.Xml.Serialization;
 
 namespace Entities.Common
 {
     [Serializable]
     public class BaseEntity : IAuditEntity
-    {       
+    {
+        [XmlIgnore]
         public string AuditData { get; set; }
         public DateTime CreateDate { get; set; }
         public int CreatedBy { get; set; }

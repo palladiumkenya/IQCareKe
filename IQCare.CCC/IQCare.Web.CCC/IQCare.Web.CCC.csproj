@@ -63,11 +63,14 @@
     <Content Include="CCC\Scripts\css\mbExtruder.css" />
     <Content Include="CCC\Scripts\css\mdb.css" />
     <Content Include="CCC\Scripts\css\patientSummary.css" />
+    <Content Include="CCC\Scripts\css\prism.css" />
     <Content Include="CCC\Scripts\css\style.css" />
+    <Content Include="CCC\Scripts\css\stylechosen.css" />
     <Content Include="CCC\Scripts\css\typeaheadjs.css" />
     <Content Include="CCC\Encounter\VitalSigns.aspx" />
     <Content Include="CCC\Scripts\js\bootbox.js" />
     <Content Include="CCC\Scripts\js\chosen.jquery.js" />
+    <Content Include="CCC\Scripts\js\init.js" />
     <Content Include="CCC\Scripts\js\jquery-ui.min.css" />
     <Content Include="CCC\Scripts\js\jquery-ui.min.js" />
     <Content Include="CCC\Scripts\js\jquery.hoverIntent.min.js" />
@@ -91,6 +94,7 @@
     <Content Include="CCC\Scripts\css\jquery-ui.css" />
     <Content Include="CCC\Scripts\css\exporting.css" />
     <Content Include="CCC\Scripts\js\highcharts.js" />
+    <Content Include="CCC\Scripts\js\prism.js" />
     <Content Include="CCC\Scripts\js\tether.js" />
     <Content Include="CCC\Scripts\js\typeahead.js" />
     <Content Include="CCC\Scripts\js\vl_linegraph.js" />

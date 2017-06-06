@@ -148,15 +148,6 @@ namespace IQCare.Web.CCC.Enrollment {
         protected global::System.Web.UI.WebControls.Label lblServiceName;
         
         /// <summary>
-        /// updateMflCode control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox updateMflCode;
-        
-        /// <summary>
         /// updateEnrollmentNo control.
         /// </summary>
         /// <remarks>

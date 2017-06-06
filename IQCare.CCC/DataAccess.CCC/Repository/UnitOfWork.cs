@@ -65,6 +65,7 @@ namespace DataAccess.CCC.Repository
         private ILookupFacilityStatisticsRepository _lookupFacilityStatisticsRepository;
         private IPatientTreatmentTrackerLookupRepository _patientTreatmentTrackerLookupRepository;
         private IPersonGreenCardLookupRepository _personGreenCardLookupRepository;
+        private IFacilityListRepository _facilityListRepository;
 
         /* visit */
         private IPatientMasterVisitRepository _patientMasterVisitRepository;
@@ -504,6 +505,15 @@ namespace DataAccess.CCC.Repository
             get
             {
                 return _patientTreatmentTrackerLookupRepository??(_patientTreatmentTrackerLookupRepository=new PatientTreatmentTrackerLookupRepository((LookupContext)_context));
+            }
+        }
+
+        public IFacilityListRepository FacilityListRepository
+        {
+            get
+            {
+                return _facilityListRepository ?? (_facilityListRepository =
+                           new FacilityListRepository((LookupContext) _context));
             }
         }
 

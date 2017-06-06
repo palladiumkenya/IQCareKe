@@ -79,6 +79,7 @@
     <Compile Include="IPersonLocationManager.cs" />
     <Compile Include="IPersonManager.cs" />
     <Compile Include="IPersonRelationshipManager.cs" />
+    <Compile Include="Lookup\IFacilityList.cs" />
     <Compile Include="Lookup\ILookupManager.cs" />
     <Compile Include="Lookup\IPatientBaselineLookupManager.cs" />
     <Compile Include="Lookup\IPatientLookupmanager.cs" />

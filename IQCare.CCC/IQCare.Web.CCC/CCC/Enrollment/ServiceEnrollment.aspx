@@ -252,7 +252,10 @@
                 <div id="AppPosID">
                     <asp:HiddenField ID="PatientType" runat="server" ClientIDMode="Static" />
                     <div class="col-md-12"><label id="AppPosID" class="required pull-left  control-label">MFL CODE</label></div>
-                    <div class="col-md-10" style="padding-right: 0;"><input type="text" id="txtAppPosID" value="<%=Session["AppPosID"] %>" class="form-control input-sm" readonly="readonly" /></div>
+                    <div class="col-md-10" style="padding-right: 0;">
+                        <select id="txtAppPosID" data-placeholder="Choose a Facility..." class="chosen-select form-control input-sm" tabindex="2">
+                        </select>
+                    </div>
                     <div class="col-md-2" style="padding: 0;">-</div>
                 </div>
             </div>
@@ -324,38 +327,40 @@
                     <div class="row">
 
                         <div class="col-md-12 form-group">
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <label class="control-label pull-left">Service Name:</label></div>
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 <asp:Label ID="lblServiceName" runat="server"></asp:Label>
                             </div>
                         </div>
 
                         <div class="col-md-12 form-group">
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <label class="control-label pull-left">MFL CODE:</label>
                             </div>
                             
-                            <div class="col-md-6">
-                                <label class="control-label pull-left">Enrollment No#:</label>
+                            <div class="col-md-8">
+                                <select id="updateMflCode" data-placeholder="Choose a Facility..." class="chosen-select" tabindex="2" style="width: 100%;">
+                                </select>
                             </div>
+
                         </div>
 
-                        <div class="col-md-12 form-group">
-                            <div class="col-md-3">
-                                <asp:TextBox ID="updateMflCode" runat="server" CssClass="pull-left form-control" ClientIDMode="Static" data-parsley-required="true" data-parsley-length="[5,5]"></asp:TextBox>
+                        <div class="col-md-12 form-group">        
+                            <div class="col-md-4">
+                                <label class="control-label pull-left">Enrollment No#:</label>
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 <asp:TextBox ID="updateEnrollmentNo" runat="server" CssClass="pull-left form-control" ClientIDMode="Static" data-parsley-required="true" data-parsley-length="[5,5]"></asp:TextBox>
                             </div>
 
                         </div>
 
                         <div class="col-md-12 form-group">
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <label class="control-label pull-left">Enrollment Date:</label></div>
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 <div class="datepicker fuelux form-group" id="UpDateEnrollmentDate">
                                     <div class="input-group">
                                         <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="UpdatedEnrollmentDate" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>        
@@ -464,12 +469,19 @@
 
     </div>
     
+    <style type="text/css">
+        .chosen-container-single {
+            width: 100% !important;
+        }
+    </style>
+    
     <script type="text/javascript">
         $(document).ready(function () {
 
             $("#OtherSpecificEntryPoint").hide();
             $("#IsCCCEnrolled").val("");
-            
+
+            var code = "<%=Session["AppPosID"]%>";
 
             $("#entryPoint").change(function () {
                 $(this).find(":selected").text();
@@ -560,6 +572,16 @@
                 error: function (msg) {
                     alert(msg);
                 }
+            });
+
+            $.when(getFacilityList()).then(function () {
+                setTimeout(function() {
+                    $('#txtAppPosID').chosen();
+                    $('#updateMflCode').chosen();
+
+                }, 2000);
+
+                $("#txtAppPosID").val(code).trigger('chosen:updated');
             });
 
             getPatientEnrollments();
@@ -712,6 +734,9 @@
                     var nationalId = $("#NationalId").val();
                     var patientType = $("#PatientType").val();
                     var mflCode = $('#txtAppPosID').val();
+                    if (mflCode == '' || mflCode == null) {
+                        mflCode = code;
+                    }
                     var dobPrecision = '<%=Session["DobPrecision"]%>';
 
                     if (nationalId == null || nationalId == '') {
@@ -767,6 +792,9 @@
                     var nationalId = $("#NationalId").val();
                     var patientType = $("#PatientType").val();
                     var mflCode = $('#txtAppPosID').val();
+                    if (mflCode == '' || mflCode == null) {
+                        mflCode = code;
+                    }
                     var dobPrecision = '<%=Session["DobPrecision"]%>';
 
                     if (nationalId == null || nationalId == '') {
@@ -867,7 +895,27 @@
                                 var mfl_code = item.EnrollmentNumber.split("-")[0];
                                 var enrollment_no = item.EnrollmentNumber.split("-")[1];
 
-                                $("#<%=updateMflCode.ClientID%>").val(mfl_code);
+                                if (enrollment_no == null || enrollment_no == "") {
+                                    var sln = item.EnrollmentNumber.length;
+                                    if (sln >= 10) {
+                                        mfl_code = item.EnrollmentNumber.substring(0, 5);
+                                        enrollment_no = item.EnrollmentNumber.substring(5);
+                                    }else {
+                                        mfl_code = null;
+                                        enrollment_no = item.EnrollmentNumber;
+                                    }
+                                    //if (sln > 5) {
+                                    //    mfl_code = item.EnrollmentNumber.substring(0, 5);
+                                    //    enrollment_no = item.EnrollmentNumber.substring(5);
+                                    //} else {
+                                    //    enrollment_no = mfl_code;
+                                    //    mfl_code = null;
+                                    //}
+                                }
+
+                                console.log(mfl_code);
+                                $("#updateMflCode").val(mfl_code).trigger('chosen:updated');
+
                                 $("#<%=updateEnrollmentNo.ClientID%>").val(enrollment_no);
                                 $('#UpDateEnrollmentDate').datepicker('setDate', moment(item.EnrollmentDate).format('DD-MMM-YYYY'));
                             }
@@ -909,7 +957,7 @@
                 }
 
                 var enrollment_no = $("#<%=updateEnrollmentNo.ClientID%>").val();
-                var mfl_code = $("#<%=updateMflCode.ClientID%>").val();
+                var mfl_code = $("#updateMflCode").val();
 
                 var enrollmentNo = mfl_code + "-" + enrollment_no;
 
@@ -946,7 +994,45 @@
                 });
             });
 
+            //$('#txtAppPosID').chosen();
         });
+
+
+        function getFacilityList() {
+            $.ajax({
+                type: "GET",
+                url: "../WebService/EnrollmentService.asmx/GetFacilitiesList",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var responseData = JSON.parse(response.d);
+
+                    $("#txtAppPosID").prepend("<option value=''></option>");
+                    $("#updateMflCode").prepend("<option value=''></option>");
+
+                    $.each(responseData, function (key, value) {
+                        //console.log(value);
+                        $('#txtAppPosID').append($("<option/>", {
+                            value: value.MFLCode,
+                            text: value.Name
+                        }));
+
+                        $("#updateMflCode").append($("<option/>", {
+                            value: value.MFLCode,
+                            text: value.Name
+                        }));
+                    });
+                    //console.log(responseData);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR.responseText);
+                    console.log(textStatus);
+                    console.log(errorThrown);
+
+                    //toastr.error(response.d, "Error Enrollment");
+                }
+            });
+        }
     </script>
 
 </asp:Content>

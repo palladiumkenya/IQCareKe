@@ -92,6 +92,7 @@
     <Compile Include="Enrollment\PatientEnrollmentManager.cs" />
     <Compile Include="Enrollment\PatientEntryPointManager.cs" />
     <Compile Include="Enrollment\PatientIdentifierManager.cs" />
+    <Compile Include="FacilityListManager.cs" />
     <Compile Include="LookupLogic.cs" />
     <Compile Include="MstPatientLogic.cs" />
     <Compile Include="PatientAdherenceAssessmentManager.cs" />
@@ -130,6 +131,7 @@
     <Compile Include="Tb\PatientIptManager.cs" />
     <Compile Include="Tb\PatientIptOutcome.cs" />
     <Compile Include="Tb\PatientIptWorkup.cs" />
+    <Compile Include="AuditDataUtility\AuditDataUtility.cs" />
     <Compile Include="Visit\PatientMasterVisitManager.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -98,6 +98,7 @@
     <Compile Include="Enrollment\PatientEntityEnrollment.cs" />
     <Compile Include="Enrollment\PatientEntryPoint.cs" />
     <Compile Include="Encounter\LabOrderEntity.cs" />
+    <Compile Include="Lookup\FacilityList.cs" />
     <Compile Include="Lookup\LookupFacility.cs" />
     <Compile Include="Lookup\LookupFacilityStatistics.cs" />
     <Compile Include="Lookup\LookupFacilityViralLoad.cs" />

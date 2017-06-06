@@ -1554,10 +1554,10 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>107</SubTestId>
-    <MinBoundaryValue>50.00</MinBoundaryValue>
-    <MaxBoundaryValue>2000000.00</MaxBoundaryValue>
-    <MinNormalRange>50.00</MinNormalRange>
-    <MaxNormalRange>2000000.00</MaxNormalRange>
+    <MinBoundaryValue>0.00</MinBoundaryValue>
+    <MaxBoundaryValue>500.00</MaxBoundaryValue>
+    <MinNormalRange>0.00</MinNormalRange>
+    <MaxNormalRange>500.00</MaxNormalRange>
     <TextNormalRange />
     <DefaultUnit>true</DefaultUnit>
     <UnitId>129</UnitId>
