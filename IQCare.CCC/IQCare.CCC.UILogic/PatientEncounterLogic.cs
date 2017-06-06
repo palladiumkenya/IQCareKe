@@ -279,7 +279,7 @@ namespace IQCare.CCC.UILogic
                         TreeNode theFrmRoot = new TreeNode();
                         theFrmRoot.Text = theDR["VisitName"].ToString() + " ( " + ((DateTime)theDR["visitDate"]).ToString(HttpContext.Current.Session["AppDateFormat"].ToString()) + " ) - " + theDR["UserName"].ToString();
                         string _VisitName = theDR["VisitName"].ToString();
-                        theFrmRoot.ImageUrl = "~/images/15px-Yes_check.svg.png";
+                        
                         //if (Convert.ToString(Session["TechnicalAreaId"]) == Convert.ToString(theDR["Module"]) || theDR["VisitName"].ToString() == "Patient Registration")
                         //{
                         //    if (DQ != "")
@@ -370,17 +370,35 @@ namespace IQCare.CCC.UILogic
                         //    }
                         //}
 
-                        if(theDR["VisitName"].ToString() == "Encounter")
+                        if (theDR["VisitName"].ToString() == "Encounter")
                         {
                             theFrmRoot.NavigateUrl = "PatientEncounter.aspx?visitId=" + theDR["visitID"].ToString();
+                            theFrmRoot.ImageUrl = "~/images/15px-Yes_check.svg.png";
                         }
                         else if(theDR["VisitName"].ToString() == "Pharmacy")
                         {
                             theFrmRoot.NavigateUrl = "PharmacyPrescription.aspx?visitId=" + theDR["visitID"].ToString();
+
+                            if(theDR["status"].ToString() == "2")
+                            {
+                                theFrmRoot.ImageUrl = "~/images/15px-Yes_check.svg.png";
+                            }
+                            else
+                            {
+                                theFrmRoot.ImageUrl = "~/images/caution.png";
+                            }
                         }
                         else if (theDR["VisitName"].ToString() == "Lab Order")
                         {
                             theFrmRoot.NavigateUrl = "LabOrder.aspx?visitId=" + theDR["visitID"].ToString();
+                            if (theDR["status"].ToString() == "Complete")
+                            {
+                                theFrmRoot.ImageUrl = "~/images/15px-Yes_check.svg.png";
+                            }
+                            else
+                            {
+                                theFrmRoot.ImageUrl = "~/images/caution.png";
+                            }
                         }
 
                         theFrmRoot.Value = "";// Convert.ToInt32(PId) + "%" + theDR["OrderNo"].ToString() + "%" + theDR["LocationID"].ToString() + "%" + PtnARTStatus + "%" + theDR["Module"].ToString() + "%" + theDR["VisitName"].ToString();
