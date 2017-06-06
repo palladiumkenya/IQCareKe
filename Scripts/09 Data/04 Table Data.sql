@@ -1618,3 +1618,30 @@ And O.ItemName Is Null;
 Go
  Alter table dbo.dtl_PatientItemsOrder Alter Column ItemName  varchar(250) Not Null
  Go
+UPDATE mst_generic
+  SET
+      GenericAbbrevation = 'LOP/r'
+WHERE GenericAbbrevation = 'LOPr';
+GO
+UPDATE mst_generic
+  SET
+      GenericAbbrevation = 'ATV'
+WHERE GenericAbbrevation = 'ATR';
+GO
+IF NOT EXISTS
+(
+    SELECT *
+    FROM mst_generic
+    WHERE GenericName = N'Atazanavir/Ritonavir'
+          AND GenericAbbrevation = N'ATV/r'
+)
+    BEGIN
+        INSERT INTO [dbo].[mst_Generic]
+        ([GenericName],
+         [GenericAbbrevation]
+        )
+        VALUES
+        ('Atazanavir/Ritonavir',
+         'ATV/r'
+        );
+    END;
