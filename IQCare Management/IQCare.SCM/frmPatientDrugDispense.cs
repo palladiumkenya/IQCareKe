@@ -32,6 +32,8 @@ namespace IQCare.SCM
         private string lastdispensedARV = "";
         private string ARVBeingDispensed = "";
 
+        double qtyAvailableInBatch = 0;
+
         private bool dispenseReady = false;
         /// <summary>
         /// The int process
@@ -522,8 +524,8 @@ namespace IQCare.SCM
                 DataGridViewTextBoxColumn colItemId = new DataGridViewTextBoxColumn();
                 colItemId.HeaderText = "ItemId";
                 colItemId.Name = colItemId.DataPropertyName = "ItemId";
-                colItemId.Width = 5;
-                colItemId.Visible = false;
+                colItemId.Width = 35;
+                //colItemId.Visible = false;
                 colItemId.ReadOnly = true;
 
                 DataGridViewTextBoxColumn colDrugName = new DataGridViewTextBoxColumn();
@@ -548,11 +550,12 @@ namespace IQCare.SCM
                 DataGridViewTextBoxColumn colBatchId = new DataGridViewTextBoxColumn();
                 colBatchId.HeaderText = "BatchId";
                 colBatchId.Name = colBatchId.DataPropertyName = "BatchId";
-                colBatchId.Width = 5;
-                colBatchId.Visible = false;
+                colBatchId.Width = 25;
+                //colBatchId.Visible = false;
                 colBatchId.ReadOnly = true;
 
                 DataGridViewTextBoxColumn colBatch = new DataGridViewTextBoxColumn();
+                //DataGridViewComboBoxColumn colBatch = new DataGridViewComboBoxColumn();
                 colBatch.HeaderText = "Batch No";
                 colBatch.Name = colBatch.DataPropertyName = "BatchNo";
                 colBatch.Width = 100;
@@ -560,13 +563,13 @@ namespace IQCare.SCM
 
                 DataGridViewTextBoxColumn colExpiryDate = new DataGridViewTextBoxColumn();
                 colExpiryDate.HeaderText = "Expiry Date";
-                colExpiryDate.DataPropertyName = "ExpiryDate";
+                colExpiryDate.Name = colExpiryDate.DataPropertyName = "ExpiryDate";
                 colExpiryDate.Width = 100;
                 colExpiryDate.ReadOnly = true;
 
                 DataGridViewTextBoxColumn colQtyDispensed = new DataGridViewTextBoxColumn();
                 colQtyDispensed.HeaderText = "Qty Dispensed";
-                colExpiryDate.Name = colQtyDispensed.DataPropertyName = "QtyDisp";
+                colQtyDispensed.Name = colQtyDispensed.DataPropertyName = "QtyDisp";
                 colQtyDispensed.Width = 80;
                 if (!(this.makeGridEditable == "Yes"))
                     colQtyDispensed.ReadOnly = true;
@@ -3412,6 +3415,83 @@ namespace IQCare.SCM
             this.lblReturnIQNumber.Text = currentRow.Cells["P_PatientFacilityId"].Value.ToString();
             GetSelectedPatient();
             GetSelectedPrescription();
+        }
+
+        private void grdDrugDispense_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            this.cmbGrdDrugDispense.Hide();
+            this.cmbGrdDrugDispenseFreq.Hide();
+
+            if (grdDrugDispense.SelectedCells[0].ColumnIndex == 5)
+            {
+                if (makeGridEditable == "Yes")
+                {
+                    DataView dv = thePharmacyMaster.Tables[1].DefaultView;
+                    //MessageBox.Show(dv.ToTable().Rows[0][1].ToString());
+                    dv.RowFilter = "Drug_Pk = '" + grdDrugDispense.Rows[grdDrugDispense.SelectedCells[0].RowIndex].Cells[0].Value.ToString() + "' and BatchNo <> ''";
+
+                    cmbGrdDrugDispense.DataSource = dv.ToTable();
+                    cmbGrdDrugDispense.DisplayMember = "BatchQty";
+                    cmbGrdDrugDispense.ValueMember = "BatchId";
+                    //cmbGrdDrugDispense.
+                    cmbGrdDrugDispense.Location = grdDrugDispense.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).Location;
+                    //cmbAutoGrid.SelectedValue = grdDrugDispense.CurrentCell.Value;
+                    cmbGrdDrugDispense.Width = grdDrugDispense.CurrentCell.Size.Width;
+                    cmbGrdDrugDispense.Show();
+                    //clsGlobal.iStudentID = Convert.ToInt32(dgvStudents.Rows[dgvStudents.SelectedCells[0].RowIndex].Cells[7].Value);
+                    //clsGlobal.sStudentName = dgvStudents.Rows[dgvStudents.SelectedCells[0].RowIndex].Cells[8].Value.ToString();
+                    //clsGlobal.sAdmNo = dgvStudents.Rows[dgvStudents.SelectedCells[0].RowIndex].Cells[0].Value.ToString();
+                }
+            }
+
+            if (grdDrugDispense.SelectedCells[0].ColumnIndex == 8)
+            {
+                if (makeGridEditable == "Yes")
+                {
+                    fill_DrugFreq();
+                    cmbGrdDrugDispenseFreq.Location = grdDrugDispense.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).Location;
+                    cmbGrdDrugDispenseFreq.Width = grdDrugDispense.CurrentCell.Size.Width;
+                    cmbGrdDrugDispenseFreq.Show();
+                }
+            }
+        }
+
+        public void fill_DrugFreq()
+        {
+            XMLPharDS.Clear();
+            XMLPharDS.ReadXml(GblIQCare.GetXMLPath() + "\\DrugMasters.con");
+            BindFunctions theBindManager1 = new BindFunctions();
+            DataView theDV1 = new DataView(XMLPharDS.Tables["mst_Frequency"]);
+            theDV1.RowFilter = "(DeleteFlag =0 or DeleteFlag is null)";
+            DataTable theDT1 = theDV1.ToTable();
+            theBindManager1.Win_BindCombo(cmbGrdDrugDispenseFreq, theDT1, "Name", "Id");
+        }
+
+        private void cmbGrdDrugDispense_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string s = cmbGrdDrugDispense.Text;
+            string[] values = s.Split('~');
+
+            this.grdDrugDispense.CurrentCell.Value = values[0].ToString();
+            grdDrugDispense.Rows[grdDrugDispense.SelectedCells[0].RowIndex].Cells["ExpiryDate"].Value = values[1].ToString();
+            grdDrugDispense.Rows[grdDrugDispense.SelectedCells[0].RowIndex].Cells["BatchId"].Value = cmbGrdDrugDispense.SelectedValue;
+            this.cmbGrdDrugDispense.Hide();
+
+            
+
+            //DataView theDV = thePharmacyMaster.Tables[1].DefaultView;
+            //theDV.RowFilter = "Drug_Pk = '" + grdDrugDispense.Rows[grdDrugDispense.SelectedCells[0].RowIndex].Cells[0].Value.ToString() + "' and BatchID ='" + grdDrugDispense.Rows[grdDrugDispense.SelectedCells[0].RowIndex].Cells[5].Value.ToString() + "' and AvailQty is not null";
+            //DataTable qtyAvailableDT = theDV.ToTable();
+            //if (qtyAvailableDT.Rows.Count != 0)
+            //{
+            //    qtyAvailableInBatch = Convert.ToDouble(qtyAvailableDT.Rows[0][10].ToString());
+            //    //KNHsellingPrice = Convert.ToDouble(qtyAvailableDT.Rows[0][6].ToString());
+            //    //KNHexpiryDate = ((DateTime)qtyAvailableDT.Rows[0][8]).ToString(GblIQCare.AppDateFormat);
+            //    grdDrugDispense.Rows[grdDrugDispense.SelectedCells[0].RowIndex].Cells["ExpiryDate"].Value = ((DateTime)qtyAvailableDT.Rows[0][9]).ToString(GblIQCare.AppDateFormat); ;
+            //    //MessageBox.Show(((DateTime)qtyAvailableDT.Rows[0][8]).ToString(GblIQCare.AppDateFormat));
+            //    //txtExpirydate.Text = ((DateTime)theDV[0]["ExpiryDate"]).ToString(GblIQCare.AppDateFormat);
+            //    //MessageBox.Show("Available " + qtyAvailable.ToString() + "sellingPrice " + sellingPrice.ToString() + "ExpiryDate " + expiryDate);
+            //}
         }
     }
 }
