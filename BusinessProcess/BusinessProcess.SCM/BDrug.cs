@@ -285,6 +285,7 @@ namespace BusinessProcess.SCM
                     ClsUtility.AddExtendedParameters("@Drug_Pk", SqlDbType.Int, Convert.ToInt32(row["ItemId"]));
                     ClsUtility.AddExtendedParameters("@StrengthId", SqlDbType.Int, row["StrengthId"].ToString());
                     ClsUtility.AddExtendedParameters("@FrequencyId", SqlDbType.Int, row["FrequencyId"].ToString());
+                    ClsUtility.AddExtendedParameters("@pillCount", SqlDbType.Int, row["PillCount"].ToString() != "" ? row["PillCount"].ToString() : "0");
                     ClsUtility.AddExtendedParameters("@DispensedQuantity", SqlDbType.Int, Convert.ToInt32(row["QtyDisp"]));
                     ClsUtility.AddExtendedParameters("@Prophylaxis", SqlDbType.Int, row["Prophylaxis"].ToString());
                     ClsUtility.AddExtendedParameters("@BatchId", SqlDbType.Int, row["BatchId"].ToString());

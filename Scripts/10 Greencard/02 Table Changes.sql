@@ -108,4 +108,8 @@ IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'transactionType'AND Objec
     BEGIN
         ALTER TABLE dtl_stocktransaction ADD transactionType nvarchar(50);
     END;
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'pillCount'AND Object_ID = OBJECT_ID(N'dtl_patientPharmacyOrder'))
+    BEGIN
+        ALTER TABLE dtl_patientPharmacyOrder ADD pillCount int;
+    END;
 
