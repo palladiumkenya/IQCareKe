@@ -66,6 +66,7 @@ namespace DataAccess.CCC.Repository
         private IPatientTreatmentTrackerLookupRepository _patientTreatmentTrackerLookupRepository;
         private IPersonGreenCardLookupRepository _personGreenCardLookupRepository;
         private IFacilityListRepository _facilityListRepository;
+        private IPatientRegistrationLookupRepository _patientRegistrationLookupRepository;
 
         /* visit */
         private IPatientMasterVisitRepository _patientMasterVisitRepository;
@@ -80,6 +81,8 @@ namespace DataAccess.CCC.Repository
         private IPatientEnrollmentRepository _patientEnrollmentRepository;
         private IPatientEntryPointRepository _patientEntryPointRepository;
         private IPatientIdentifierRepository _patientIdentifierRepository;
+        private IServiceAreaIdentifiersRepository _serviceAreaIdentifiersRepository;
+        private IIdentifierRepository _identifierRepository;
 
         /* Patient */
         private IPatientRepository _patientRepository;
@@ -316,6 +319,24 @@ namespace DataAccess.CCC.Repository
             get { return _patientIdentifierRepository ?? (_patientIdentifierRepository = new PatientIdentifierRepository((GreencardContext)_context)); }
         }
 
+        public IServiceAreaIdentifiersRepository ServiceAreaIdentifiersRepository
+        {
+            get
+            {
+                return _serviceAreaIdentifiersRepository ?? (_serviceAreaIdentifiersRepository =
+                           new ServiceAreaIdentifiersRepository((GreencardContext) _context));
+            }
+        }
+
+        public IIdentifierRepository IdentifierRepository
+        {
+            get
+            {
+                return _identifierRepository ?? (_identifierRepository =
+                           new IdentifierRepository((GreencardContext) _context));
+            }
+        }
+
         public IPatientCareEndingRepository PatientCareEndingRepository
         {
             get
@@ -514,6 +535,15 @@ namespace DataAccess.CCC.Repository
             {
                 return _facilityListRepository ?? (_facilityListRepository =
                            new FacilityListRepository((LookupContext) _context));
+            }
+        }
+
+        public IPatientRegistrationLookupRepository PatientRegistrationLookupRepository
+        {
+            get
+            {
+                return _patientRegistrationLookupRepository ?? (_patientRegistrationLookupRepository =
+                           new PatientRegistrationLookupRepository((LookupContext) _context));
             }
         }
 

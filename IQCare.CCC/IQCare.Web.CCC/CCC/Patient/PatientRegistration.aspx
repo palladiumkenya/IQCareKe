@@ -1608,7 +1608,7 @@
                             window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientHome.aspx?patient=")%>' + _fp["PatientId"];
                         } else {
                             var personId = _fp["PersonId"];
-                            <%Session["PatientType"] = "1285"; %>;
+                            getPatientTypeId("PatientType", "New");
 
                             $.ajax({
                                 type: "POST",
@@ -1648,6 +1648,16 @@
                     $(this).addClass("active");
                     console.log(_fp);
                 });
+
+                function getPatientTypeId(groupName, patientTypeName) {
+                    $.ajax({
+                        type: "POST",
+                        url: "../WebService/PersonService.asmx/GetPatientType",
+                        contentType: "application/json; charset=utf-8",
+                        data: "{'groupName': '" + groupName + "','patientTypeName':'" + patientTypeName +"'}",
+                        dataType: "json"
+                    });
+                }
 
         });
     </script>

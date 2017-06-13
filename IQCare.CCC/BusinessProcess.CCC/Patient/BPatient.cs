@@ -103,5 +103,22 @@ namespace BusinessProcess.CCC.Patient
                 //return patientTypeId.FirstOrDefault();
             }
         }
+
+        public int GetPatientIdByPersonId(int personId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                int patientId = -1;
+                bool patientExists = unitOfWork.PatientRegistrationLookupRepository.FindBy(x => x.PersonId == personId)
+                    .Any();
+                if (patientExists)
+                {
+                    patientId = unitOfWork.PatientRegistrationLookupRepository.FindBy(x => x.PersonId == personId)
+                        .FirstOrDefault().Id;
+                }
+                unitOfWork.Dispose();
+                return patientId;
+            }
+        }
     }
 }

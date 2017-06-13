@@ -89,9 +89,11 @@
     <Compile Include="Baseline\PatientTransferInmanager.cs" />
     <Compile Include="Baseline\PatientTreatmentInitiationManager.cs" />
     <Compile Include="Baseline\PatientVaccinationManager.cs" />
+    <Compile Include="Enrollment\IdentifierManager.cs" />
     <Compile Include="Enrollment\PatientEnrollmentManager.cs" />
     <Compile Include="Enrollment\PatientEntryPointManager.cs" />
     <Compile Include="Enrollment\PatientIdentifierManager.cs" />
+    <Compile Include="Enrollment\ServiceAreaIdentifiersManager.cs" />
     <Compile Include="FacilityListManager.cs" />
     <Compile Include="LookupLogic.cs" />
     <Compile Include="MstPatientLogic.cs" />

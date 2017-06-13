@@ -56,6 +56,7 @@
     <Content Include="CCC\Encounter\PharmacyPrescription.aspx" />
     <Content Include="CCC\Patient\PatientCareEnded.aspx" />
     <Content Include="CCC\Patient\PatientConsent.aspx" />
+    <Content Include="CCC\Scripts\css\bootstrap-datetimepicker.css" />
     <Content Include="CCC\Scripts\css\bootstrap.css" />
     <Content Include="CCC\Scripts\css\chosen.css" />
     <Content Include="CCC\Scripts\css\customCss.css" />
@@ -69,7 +70,9 @@
     <Content Include="CCC\Scripts\css\typeaheadjs.css" />
     <Content Include="CCC\Encounter\VitalSigns.aspx" />
     <Content Include="CCC\Scripts\js\bootbox.js" />
+    <Content Include="CCC\Scripts\js\bootstrap-datetimepicker.js" />
     <Content Include="CCC\Scripts\js\chosen.jquery.js" />
+    <Content Include="CCC\Scripts\js\collapse.js" />
     <Content Include="CCC\Scripts\js\init.js" />
     <Content Include="CCC\Scripts\js\jquery-ui.min.css" />
     <Content Include="CCC\Scripts\js\jquery-ui.min.js" />
@@ -96,6 +99,7 @@
     <Content Include="CCC\Scripts\js\highcharts.js" />
     <Content Include="CCC\Scripts\js\prism.js" />
     <Content Include="CCC\Scripts\js\tether.js" />
+    <Content Include="CCC\Scripts\js\transition.js" />
     <Content Include="CCC\Scripts\js\typeahead.js" />
     <Content Include="CCC\Scripts\js\vl_linegraph.js" />
     <Content Include="CCC\Scripts\js\jquery-ui-1.9.1.js" />

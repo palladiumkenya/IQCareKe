@@ -967,5 +967,28 @@ namespace IQCare.Web.CCC.WebService
             return Msg;
         }
 
+        [WebMethod(EnableSession = true)]
+        public void GetPatientType(string groupName, string patientTypeName)
+        {
+            try
+            {
+                var patientTypeId = 0;
+
+                var lookUpLogic = new LookupLogic();
+                var patientTypes = lookUpLogic.GetItemIdByGroupAndItemName(groupName, patientTypeName);
+                if (patientTypes.Count > 0)
+                {
+                    patientTypeId = patientTypes[0].ItemId;
+                }
+
+                Session["PatientType"] = patientTypeId;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
     }
 }

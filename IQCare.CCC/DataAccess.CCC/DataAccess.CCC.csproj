@@ -83,9 +83,11 @@
     <Compile Include="Interface\Encounter\IPatientLabDetailsRepository.cs" />
     <Compile Include="Interface\Encounter\IPatientLabOrderRepository .cs" />
     <Compile Include="Interface\Encounter\IPatientLabResultsRepository.cs" />
+    <Compile Include="Interface\enrollment\IIdentifierRepository.cs" />
     <Compile Include="Interface\enrollment\IPatientEnrollmentRepository.cs" />
     <Compile Include="Interface\enrollment\IPatientEntryPointRepository.cs" />
     <Compile Include="Interface\enrollment\IPatientIdentifierRepository.cs" />
+    <Compile Include="Interface\enrollment\IServiceAreaIdentifiersRepository.cs" />
     <Compile Include="Interface\Lookup\IFacilityListRepository.cs" />
     <Compile Include="Interface\Lookup\ILookupFacilityStatisticsRepository.cs" />
     <Compile Include="Interface\Lookup\ILookupFacilityViralLoad.cs" />
@@ -93,6 +95,7 @@
     <Compile Include="Interface\Lookup\ILookupPatientAdherenceRepository.cs" />
     <Compile Include="Interface\Lookup\ILookupPatientRegimenMap.cs" />
     <Compile Include="Interface\Lookup\Interface1.cs" />
+    <Compile Include="Interface\Lookup\IPatientRegistrationLookupRepository.cs" />
     <Compile Include="Interface\Lookup\IPatientTreatmentTrackerLookupRepository.cs" />
     <Compile Include="Interface\Lookup\IPatientServiceEnrollmentLookupRepository.cs" />
     <Compile Include="Interface\Lookup\IPatientTreatmentSupporterLookupRepository.cs" />
@@ -148,8 +151,10 @@
     <Compile Include="Repository\Encounter\PatientLabDetailsRepository.cs" />
     <Compile Include="Repository\Encounter\PatientLabOrderRepository .cs" />
     <Compile Include="Repository\Encounter\PatientLabResultsRepository.cs" />
+    <Compile Include="Repository\Enrollment\IdentifierRepository.cs" />
     <Compile Include="Repository\Enrollment\PatientEnrollmentRepository.cs" />
     <Compile Include="Repository\Enrollment\PatientEntrypointRepository.cs" />
+    <Compile Include="Repository\Enrollment\ServiceAreaIdentifiersRepository.cs" />
     <Compile Include="Repository\Lookup\FacilityListRepository.cs" />
     <Compile Include="Repository\Lookup\LookupFacilityRepository.cs" />
     <Compile Include="Repository\Lookup\LookupFacilityStatisticsRepository.cs" />
@@ -160,6 +165,7 @@
     <Compile Include="Repository\Lookup\PatientBaselineLookupRepository.cs" />
     <Compile Include="Repository\Lookup\PatientLookupAdherenceRepository.cs" />
     <Compile Include="Repository\Lookup\PatientLookupRepository.cs" />
+    <Compile Include="Repository\Lookup\PatientRegistrationLookupRepository.cs" />
     <Compile Include="Repository\Lookup\PatientServiceEnrollmentLookupRepository.cs" />
     <Compile Include="Repository\Lookup\PatientTreatmentSupporterLookupRepository.cs" />
     <Compile Include="Repository\Lookup\PatientTreatmentTrackerLookupRepository.cs" />
