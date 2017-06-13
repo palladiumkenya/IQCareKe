@@ -194,19 +194,19 @@
                   <div class="col-md-12 col-xs-12 col-sm-12">
                     <div class="input-group">
                          <span class="input-group-addon">Systolic</span>
-                         <asp:TextBox runat="server" ID="systolic" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="systolic.." Type="Number" data-parsley-range="[60, 200]" data-parsley-range-message="Systolic reading is out of reasonable range"></asp:TextBox>
+                         <asp:TextBox runat="server" ID="systolic" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="systolic.." Type="Number" data-parsley-range="[100, 120]" data-parsley-range-message="Systolic reading is out of reasonable range"></asp:TextBox>
                          <span class="input-group-addon">mm[Hg]</span>
                     </div>
-                    <label class="help-block pull-left"><strong>Range: (60-200)</strong></label>
+                    <label class="help-block pull-left"><strong>Range: (100-120)</strong></label>
                  </div>
 
                   <div class="col-md-12 col-xs-12 col-sm-12 form-group" style=" padding-bottom: 0%">
                      <div class="input-group">
                          <span class="input-group-addon">Diastolic</span>
-                         <asp:TextBox runat="server" ID="distolic" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="diastolic.." Type="Number" data-parsley-range="[30, 110]" data-parsley-range-message="Diastolic reading is out of reasonable range"></asp:TextBox>
+                         <asp:TextBox runat="server" ID="distolic" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="diastolic.." Type="Number" data-parsley-range="[60, 80]" data-parsley-range-message="Diastolic reading is out of reasonable range"></asp:TextBox>
                          <span class="input-group-addon">mm[Hg]</span>
                      </div>
-                      <p class="help-block pull-left"><strong>Range: (30-110)</strong></p>
+                      <p class="help-block pull-left"><strong>Range: (60-80)</strong></p>
                   </div>
                 
             </div> 
