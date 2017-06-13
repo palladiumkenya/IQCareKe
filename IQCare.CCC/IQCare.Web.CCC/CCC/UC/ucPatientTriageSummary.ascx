@@ -130,8 +130,8 @@
 <script type="text/javascript">
     $(document).ready(function() {
 
-        var systolic  = "<%=bpDiastolic%>";
-        var diastolic  = "<%=bpSystloic%>";
+        var systolic  = "<%=bpSystloic%>";
+        var diastolic  = "<%=bpDiastolic%>";
 
         var patientGender = "<%=PatientGender%>";
 

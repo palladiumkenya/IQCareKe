@@ -461,6 +461,7 @@ namespace IQCare.Management
             this.mnuGoodReceivedNote.Name = "mnuGoodReceivedNote";
             this.mnuGoodReceivedNote.Size = new System.Drawing.Size(278, 22);
             this.mnuGoodReceivedNote.Text = "Goods Received Note";
+            this.mnuGoodReceivedNote.Visible = false;
             this.mnuGoodReceivedNote.Click += new System.EventHandler(this.goodsRecievedNoteToolStripMenuItem_Click);
             // 
             // counterRequisitionToolStripMenuItem
@@ -475,6 +476,7 @@ namespace IQCare.Management
             this.issueVoucherToolStripMenuItem.Name = "issueVoucherToolStripMenuItem";
             this.issueVoucherToolStripMenuItem.Size = new System.Drawing.Size(278, 22);
             this.issueVoucherToolStripMenuItem.Text = "Issue Voucher";
+            this.issueVoucherToolStripMenuItem.Visible = false;
             this.issueVoucherToolStripMenuItem.Click += new System.EventHandler(this.issueVoucherToolStripMenuItem_Click);
             // 
             // toolStripSeparator12

@@ -37,8 +37,8 @@ namespace IQCare.Web.CCC.UC
                 vitalsWeight.Text = patientTriage.Weight.ToString();
                 vitalsCircumference.Text = patientTriage.HeadCircumference.ToString();
                 vitalsMUAC.Text = patientTriage.Muac.ToString();
-                vitalBloodPressure.Text = patientTriage.Bpdiastolic.ToString() + '/' +
-                                          patientTriage.BpSystolic.ToString();
+                vitalBloodPressure.Text = patientTriage.BpSystolic.ToString() + '/' +
+                                          patientTriage.Bpdiastolic.ToString();
                 vitalTemperature.Text = patientTriage.Temperature.ToString();
                 vitalRespiratoryRate.Text = patientTriage.RespiratoryRate.ToString();
                 lblOxygenSaturation.Text = patientTriage.SpO2.ToString();
