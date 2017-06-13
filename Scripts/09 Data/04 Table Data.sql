@@ -1,7 +1,7 @@
 SET NOCOUNT ON;
 Go
 -- Update version
-Update AppAdmin Set AppVer='Ver 1.0 Kenya HMIS', DBVer='Ver 1.0 Kenya HMIS', RelDate='20170501 00:00:00.000', VersionName = 'Kenya HMIS'
+Update AppAdmin Set AppVer='Ver 1.0.0.1 Kenya HMIS', DBVer='Ver 1.0.0.1 Kenya HMIS', RelDate='20170501 00:00:00.000', VersionName = 'Kenya HMIS'
 
 Go
 
@@ -1618,3 +1618,30 @@ And O.ItemName Is Null;
 Go
  Alter table dbo.dtl_PatientItemsOrder Alter Column ItemName  varchar(250) Not Null
  Go
+UPDATE mst_generic
+  SET
+      GenericAbbrevation = 'LOP/r'
+WHERE GenericAbbrevation = 'LOPr';
+GO
+UPDATE mst_generic
+  SET
+      GenericAbbrevation = 'ATV'
+WHERE GenericAbbrevation = 'ATR';
+GO
+IF NOT EXISTS
+(
+    SELECT *
+    FROM mst_generic
+    WHERE GenericName = N'Atazanavir/Ritonavir'
+          AND GenericAbbrevation = N'ATV/r'
+)
+    BEGIN
+        INSERT INTO [dbo].[mst_Generic]
+        ([GenericName],
+         [GenericAbbrevation]
+        )
+        VALUES
+        ('Atazanavir/Ritonavir',
+         'ATV/r'
+        );
+    END;

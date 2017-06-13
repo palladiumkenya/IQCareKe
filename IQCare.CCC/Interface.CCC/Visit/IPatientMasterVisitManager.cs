@@ -17,6 +17,6 @@ namespace Interface.CCC.Visit
        void PatientMasterVisitAutoClosure(int patientId);
        DateTime GetPatientLastVisitDate(int patientId);
        List<PatientMasterVisit> GetByDate(DateTime date);
-
-    }
+       List<PatientMasterVisit> GetNonEnrollmentVisits(int patientId, int visitType);
+   }
 }

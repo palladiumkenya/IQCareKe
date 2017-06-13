@@ -149,7 +149,7 @@
             this.dgwItemSubitemDetails.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dgwItemSubitemDetails.Location = new System.Drawing.Point(0, 100);
             this.dgwItemSubitemDetails.Name = "dgwItemSubitemDetails";
-            this.dgwItemSubitemDetails.Size = new System.Drawing.Size(929, 273);
+            this.dgwItemSubitemDetails.Size = new System.Drawing.Size(1034, 273);
             this.dgwItemSubitemDetails.TabIndex = 10;
             this.dgwItemSubitemDetails.Tag = "dgwDataGridView";
             this.dgwItemSubitemDetails.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwItemSubitemDetails_CellEndEdit);
@@ -165,7 +165,7 @@
             this.lblTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTotal.AutoSize = true;
             this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotal.Location = new System.Drawing.Point(741, 383);
+            this.lblTotal.Location = new System.Drawing.Point(846, 383);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(40, 13);
             this.lblTotal.TabIndex = 57;
@@ -185,7 +185,7 @@
             this.panel1.Controls.Add(this.ddlPreparedBy);
             this.panel1.Location = new System.Drawing.Point(0, 399);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(929, 57);
+            this.panel1.Size = new System.Drawing.Size(1034, 57);
             this.panel1.TabIndex = 20;
             this.panel1.Tag = "lblPanelSCM";
             // 
@@ -239,7 +239,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(929, 70);
+            this.panel3.Size = new System.Drawing.Size(1034, 70);
             this.panel3.TabIndex = 1;
             this.panel3.Tag = "pnlSubPanelSCM";
             // 
@@ -336,7 +336,7 @@
             this.panel2.Location = new System.Drawing.Point(0, 467);
             this.panel2.Margin = new System.Windows.Forms.Padding(0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(929, 37);
+            this.panel2.Size = new System.Drawing.Size(1034, 37);
             this.panel2.TabIndex = 30;
             this.panel2.Tag = "pnlSubPanel";
             // 
@@ -344,7 +344,7 @@
             // 
             this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPrint.BackColor = System.Drawing.SystemColors.Window;
-            this.btnPrint.Location = new System.Drawing.Point(768, 10);
+            this.btnPrint.Location = new System.Drawing.Point(873, 10);
             this.btnPrint.Margin = new System.Windows.Forms.Padding(0);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(80, 25);
@@ -358,7 +358,7 @@
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSave.BackColor = System.Drawing.SystemColors.Window;
-            this.btnSave.Location = new System.Drawing.Point(688, 10);
+            this.btnSave.Location = new System.Drawing.Point(793, 10);
             this.btnSave.Margin = new System.Windows.Forms.Padding(0);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(80, 25);
@@ -372,7 +372,7 @@
             // 
             this.btnclose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnclose.BackColor = System.Drawing.SystemColors.Window;
-            this.btnclose.Location = new System.Drawing.Point(848, 10);
+            this.btnclose.Location = new System.Drawing.Point(953, 10);
             this.btnclose.Margin = new System.Windows.Forms.Padding(0);
             this.btnclose.Name = "btnclose";
             this.btnclose.Size = new System.Drawing.Size(80, 25);
@@ -387,7 +387,7 @@
             this.lblTotalAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTotalAmount.AutoSize = true;
             this.lblTotalAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalAmount.Location = new System.Drawing.Point(781, 383);
+            this.lblTotalAmount.Location = new System.Drawing.Point(886, 383);
             this.lblTotalAmount.Name = "lblTotalAmount";
             this.lblTotalAmount.Size = new System.Drawing.Size(82, 13);
             this.lblTotalAmount.TabIndex = 65;
@@ -516,7 +516,7 @@
             // 
             this.ItemName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.ItemName.DataPropertyName = "ItemId";
-            this.ItemName.FillWeight = 6.969072F;
+            this.ItemName.FillWeight = 512.64F;
             this.ItemName.HeaderText = "Item Name";
             this.ItemName.Name = "ItemName";
             this.ItemName.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -535,7 +535,7 @@
             // 
             this.Units.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Units.DataPropertyName = "Units";
-            this.Units.FillWeight = 0.6701031F;
+            this.Units.FillWeight = 49.29231F;
             this.Units.HeaderText = "Purchase Units";
             this.Units.Name = "Units";
             this.Units.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -543,7 +543,8 @@
             // UnitQuantity
             // 
             this.UnitQuantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.UnitQuantity.FillWeight = 0.6701031F;
+            this.UnitQuantity.DataPropertyName = "UnitQuantity";
+            this.UnitQuantity.FillWeight = 49.29231F;
             this.UnitQuantity.HeaderText = "Unit Qty";
             this.UnitQuantity.Name = "UnitQuantity";
             // 
@@ -551,7 +552,7 @@
             // 
             this.OrderQuantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.OrderQuantity.DataPropertyName = "OrderQuantity";
-            this.OrderQuantity.FillWeight = 0.6701031F;
+            this.OrderQuantity.FillWeight = 49.29231F;
             this.OrderQuantity.HeaderText = "Order Qty";
             this.OrderQuantity.Name = "OrderQuantity";
             this.OrderQuantity.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -560,7 +561,7 @@
             // 
             this.IssuedQuantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.IssuedQuantity.DataPropertyName = "IssuedQuantity";
-            this.IssuedQuantity.FillWeight = 0.6701031F;
+            this.IssuedQuantity.FillWeight = 49.29231F;
             this.IssuedQuantity.HeaderText = "Issued Qty - Purchasing Unit";
             this.IssuedQuantity.Name = "IssuedQuantity";
             this.IssuedQuantity.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -576,7 +577,7 @@
             // 
             this.Price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Price.DataPropertyName = "Price";
-            this.Price.FillWeight = 0.6701031F;
+            this.Price.FillWeight = 49.29231F;
             this.Price.HeaderText = "Price/Unit";
             this.Price.Name = "Price";
             this.Price.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -585,7 +586,7 @@
             // 
             this.TotPrice.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.TotPrice.DataPropertyName = "TotPrice";
-            this.TotPrice.FillWeight = 0.6701031F;
+            this.TotPrice.FillWeight = 49.29231F;
             this.TotPrice.HeaderText = "Total Price";
             this.TotPrice.Name = "TotPrice";
             this.TotPrice.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -594,7 +595,7 @@
             // 
             this.ExpiryDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.ExpiryDate.DataPropertyName = "ExpiryDate";
-            this.ExpiryDate.FillWeight = 0.6701031F;
+            this.ExpiryDate.FillWeight = 49.29231F;
             this.ExpiryDate.HeaderText = "Expiry Date";
             this.ExpiryDate.Name = "ExpiryDate";
             this.ExpiryDate.ReadOnly = true;
@@ -603,7 +604,7 @@
             // 
             this.BatchName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.BatchName.DataPropertyName = "BatchName";
-            this.BatchName.FillWeight = 0.6701031F;
+            this.BatchName.FillWeight = 49.29231F;
             this.BatchName.HeaderText = "Batch #";
             this.BatchName.Name = "BatchName";
             this.BatchName.ReadOnly = true;
@@ -622,7 +623,7 @@
             // 
             this.AvailableQTY.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.AvailableQTY.DataPropertyName = "AvailableQTY";
-            this.AvailableQTY.FillWeight = 0.6701031F;
+            this.AvailableQTY.FillWeight = 49.29231F;
             this.AvailableQTY.HeaderText = "Available Qty";
             this.AvailableQTY.Name = "AvailableQTY";
             this.AvailableQTY.ReadOnly = true;
@@ -633,7 +634,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(929, 504);
+            this.ClientSize = new System.Drawing.Size(1034, 504);
             this.Controls.Add(this.lblTotalAmount);
             this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.panel1);

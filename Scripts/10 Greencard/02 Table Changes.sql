@@ -1,4 +1,33 @@
 ALTER TABLE ord_LabOrder ALTER COLUMN OrderNumber VARCHAR(50) NULL
+ALTER TABLE PatientHivDiagnosis ALTER COLUMN ARTInitiationDate DATETIME NULL
+IF EXISTS(SELECT * FROM sys.columns WHERE Name = N'Void'AND Object_ID = OBJECT_ID(N'ServiceArea'))
+    BEGIN
+ALTER TABLE [dbo].[ServiceArea] DROP  CONSTRAINT [DF_ServiceArea_Void]  
+ALTER TABLE ServiceArea DROP COLUMN Void
+    END;
+IF EXISTS(SELECT * FROM sys.columns WHERE Name = N'VoidDate'AND Object_ID = OBJECT_ID(N'ServiceArea'))
+    BEGIN
+ALTER TABLE [dbo].[ServiceArea] DROP  CONSTRAINT [DF_ServiceArea_VoidDate] 
+ALTER TABLE ServiceArea DROP COLUMN VoidDate
+    END;
+IF EXISTS(SELECT * FROM sys.columns WHERE Name = N'VoidBy'AND Object_ID = OBJECT_ID(N'ServiceArea'))
+    BEGIN
+ALTER TABLE [dbo].[ServiceArea] DROP  CONSTRAINT [DF_ServiceArea_VoidBy] 
+ALTER TABLE ServiceArea DROP COLUMN VoidBy
+    END;
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'DeleteFlag'AND Object_ID = OBJECT_ID(N'ServiceArea'))
+    BEGIN
+ALTER TABLE ServiceArea ADD  DeleteFlag BIT NULL
+ALTER TABLE [dbo].[ServiceArea] ADD  CONSTRAINT [DF_ServiceArea_DeleteFlag]  DEFAULT ((0)) FOR [DeleteFlag]
+    END;
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'CreatedBy'AND Object_ID = OBJECT_ID(N'ServiceArea'))
+    BEGIN
+EXEC sp_rename 'ServiceArea.CreateBy', 'CreatedBy', 'COLUMN';
+    END;
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'AuditData'AND Object_ID = OBJECT_ID(N'ServiceArea'))
+    BEGIN
+ALTER TABLE ServiceArea ADD AuditData XML NULL;
+    END;
 IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'VisitDate'AND Object_ID = OBJECT_ID(N'PregnancyIndicator'))
     BEGIN
         ALTER TABLE PregnancyIndicator ADD VisitDate DATETIME;
@@ -78,5 +107,9 @@ IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'IssuedQuantity'AND Object
 IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'transactionType'AND Object_ID = OBJECT_ID(N'dtl_stocktransaction'))
     BEGIN
         ALTER TABLE dtl_stocktransaction ADD transactionType nvarchar(50);
+    END;
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'pillCount'AND Object_ID = OBJECT_ID(N'dtl_patientPharmacyOrder'))
+    BEGIN
+        ALTER TABLE dtl_patientPharmacyOrder ADD pillCount int;
     END;
 
