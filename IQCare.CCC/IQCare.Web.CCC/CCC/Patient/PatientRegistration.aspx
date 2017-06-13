@@ -1600,12 +1600,16 @@
                 var _fp = [];
 
                 $("#btnOk").click(function() {
-                    console.log("here");
-                    console.log(_fp);
-
+                    //console.log("here");
+                    //console.log(_fp);
+                    //return false;
                     if (Object.keys(_fp).length > 0) {
                         if (_fp["IsPatient"] == 1) {
-                            window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientHome.aspx?patient=")%>' + _fp["PatientId"];
+                            $.when(setPatientIdSession(_fp["PatientId"])).then(function () {
+                                setTimeout(function () {
+                                    window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientHome.aspx")%>';
+                                }, 2000);
+                            });                         
                         } else {
                             var personId = _fp["PersonId"];
                             getPatientTypeId("PatientType", "New");
@@ -1655,6 +1659,16 @@
                         url: "../WebService/PersonService.asmx/GetPatientType",
                         contentType: "application/json; charset=utf-8",
                         data: "{'groupName': '" + groupName + "','patientTypeName':'" + patientTypeName +"'}",
+                        dataType: "json"
+                    });
+                }
+
+                function setPatientIdSession(patientId) {
+                    $.ajax({
+                        type: "POST",
+                        url: "../WebService/PersonService.asmx/SetPatientSession",
+                        contentType: "application/json; charset=utf-8",
+                        data: "{'patientPk': '" + patientId + "'}",
                         dataType: "json"
                     });
                 }

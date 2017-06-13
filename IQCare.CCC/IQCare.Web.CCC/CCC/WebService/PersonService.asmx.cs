@@ -990,5 +990,14 @@ namespace IQCare.Web.CCC.WebService
             }
         }
 
+        [WebMethod(EnableSession = true)]
+        public void SetPatientSession(int patientPk)
+        {
+            if (patientPk > 0)
+            {
+                Session["PatientPK"] = patientPk;
+            }
+        }
+
     }
 }

@@ -62,5 +62,17 @@ namespace IQCare.CCC.UILogic.Enrollment
                 throw;
             }
         }
+
+        public List<PatientEntityIdentifier> GetPatientEntityIdentifiersByPatientId(int patientId, int identifierTypeId)
+        {
+            try
+            {
+                return _mgr.GetPatientEntityIdentifiersByPatientId(patientId, identifierTypeId);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

@@ -1,23 +1,17 @@
-﻿using IQCare.CCC.UILogic;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
-using System.Web;
-using System.Web.Services;
-using System.Web.Script.Serialization;
-using System.Web.Script.Services;
-using System.Web.Services.Protocols;
-using System.Xml;
-using System.Xml.Serialization;
-using Application.Common;
-using Entities.CCC.Visit;
-using IQCare.CCC.UILogic.Visit;
-using Entities.CCC.Enrollment;
+﻿using Entities.CCC.Enrollment;
 using Entities.CCC.Lookup;
+using Entities.CCC.Visit;
+using IQCare.CCC.UILogic;
 using IQCare.CCC.UILogic.AuditDataUtility;
 using IQCare.CCC.UILogic.Enrollment;
+using IQCare.CCC.UILogic.Visit;
 using Microsoft.JScript;
+using System;
+using System.Collections.Generic;
+using System.Web.Script.Serialization;
+using System.Web.Script.Services;
+using System.Web.Services;
+using System.Web.Services.Protocols;
 using Convert = System.Convert;
 
 namespace IQCare.Web.CCC.WebService
@@ -110,17 +104,18 @@ namespace IQCare.Web.CCC.WebService
 
                 if (isPersonEnrolled == 0)
                 {
-                    int patientId = patientManager.GetPatientIdByPersonId(PersonId);
+                    List<PatientRegistrationLookup> patientsByPersonId = patientManager.GetPatientIdByPersonId(PersonId);
                     var patientIndex = datevalue.Year.ToString() + '-' + PersonId;
                     PatientEntity patient = new PatientEntity();
-                    if (patientId != -1)
+                    if (patientsByPersonId.Count > 0)
                     {
                         patient.FacilityId = facilityId;
                         patient.DateOfBirth = DateTime.Parse(personDateOfBirth);
                         patient.NationalId = nationalId;
-                        patient.ptn_pk = 0;
+                        patient.ptn_pk = patientsByPersonId[0].ptn_pk > 0 ? patientsByPersonId[0].ptn_pk : 0;
 
-                        patientManager.UpdatePatient(patient, patientId);
+                        patientManager.UpdatePatient(patient, patientsByPersonId[0].Id);
+                        patientId = patientsByPersonId[0].Id;
                     }
                     else
                     {
@@ -157,7 +152,8 @@ namespace IQCare.Web.CCC.WebService
                         patientEnrollmentId =
                             patientEnrollmentManager.addPatientEnrollment(patientId, enrollmentDate, userId);
                         //Add enrollment entry point
-                        patientEntryPointId = patientEntryPointManager.addPatientEntryPoint(patientId, entryPointId, userId);
+                        patientEntryPointId =
+                            patientEntryPointManager.addPatientEntryPoint(patientId, entryPointId, userId);
 
                         //Get User Details to be used in BLUE CARD
                         var patient_person_details = personLookUp.GetPersonById(PersonId);
@@ -166,7 +162,8 @@ namespace IQCare.Web.CCC.WebService
 
                         if (patient_person_details != null)
                         {
-                            var maritalStatus = new PersonMaritalStatusManager().GetCurrentPatientMaritalStatus(PersonId);
+                            var maritalStatus =
+                                new PersonMaritalStatusManager().GetCurrentPatientMaritalStatus(PersonId);
                             personContacts = personContactLookUpManager.GetPersonContactByPersonId(PersonId);
                             var address = "";
                             var phone = "";
@@ -229,9 +226,14 @@ namespace IQCare.Web.CCC.WebService
 
                         if (patientMasterVisitId > 0)
                         {
-                            patientIdentifierId = patientIdentifierManager.addPatientIdentifier(patientId, patientEnrollmentId, identifierTypeId, enrollmentNo);
+                            patientIdentifierId = patientIdentifierManager.addPatientIdentifier(patientId,
+                                patientEnrollmentId, identifierTypeId, enrollmentNo);
                             if (greencardptnpk.Count == 0)
-                                mstPatientLogic.AddOrdVisit(ptn_Pk, facilityId, DateTime.Now, patientIdentifierId, userId, DateTime.Now, 203);
+                            {
+                                mstPatientLogic.AddOrdVisit(ptn_Pk, facilityId, DateTime.Now, patientIdentifierId,
+                                    userId, DateTime.Now, 203);
+                            }
+                                
 
                             message.errorcode = 0;
                             message.msg += "<p>Successfully enrolled patient.</p>";
@@ -239,6 +241,38 @@ namespace IQCare.Web.CCC.WebService
 
                     }
                 }
+                else
+                {
+                    var patientLookManager = new PatientLookupManager();
+                    List<PatientLookup> patient = patientLookManager.GetPatientByPersonId(PersonId);
+
+                    if (patient.Count > 0)
+                    {
+                        Session["PatientPK"] = patient[0].Id;
+
+                        int patientMasterVisitId = patientMasterVisitManager.PatientMasterVisitCheckin(patient[0].Id, userId);
+                        Session["PatientMasterVisitId"] = patientMasterVisitId;
+
+                        var identifiersByPatientId = patientIdentifierManager
+                            .GetPatientEntityIdentifiersByPatientId(patient[0].Id, identifierTypeId);
+
+                        if (identifiersByPatientId.Count > 0)
+                        {
+                            identifiersByPatientId[0].IdentifierValue = enrollmentNo;
+                            patientIdentifierManager.UpdatePatientIdentifier(identifiersByPatientId[0]);
+                        }
+                        else
+                        {
+                            patientEnrollmentId = patientEnrollmentManager.addPatientEnrollment(patient[0].Id, enrollmentDate, userId);
+                            patientEntryPointId = patientEntryPointManager.addPatientEntryPoint(patient[0].Id, entryPointId, userId);
+                            patientIdentifierId = patientIdentifierManager.addPatientIdentifier(patient[0].Id,
+                                patientEnrollmentId, identifierTypeId, enrollmentNo);
+                        }
+
+                        //List<PatientEntityEnrollment> entityEnrollment = patientEnrollmentManager.GetPatientEnrollmentByPatientId(patient[0].Id);
+                    }
+                }
+
             }
             catch (SoapException ex)
             {

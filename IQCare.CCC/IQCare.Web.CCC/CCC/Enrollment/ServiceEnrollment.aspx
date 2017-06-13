@@ -6,29 +6,6 @@
    
     
     <div class="col-md-12" id="enrollmentTab" data-parsley-validate="true" data-show-errors="true">
-        <!--<div class="col-md-12">
-            <label class="control-lable pull-left">Services Enrolled </label>
-        </div>
-
-        <div class="col-md-12">
-            <table class="table table-striped" id="patientEnrollments">
-                <thead>
-                    <tr>
-                        <th>Service Name</th>
-                        <th>Enrollment Number</th>
-                        <th>Enrollment Date</th>
-                        <th>Status</th>
-                        <th>&nbsp;</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="no-data">
-                        <td colspan="4">No Enrollments Yet</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>-->
-
         <div class="col-md-12">
             <label class="control-lable pull-left"> Patient Enrollment </label>
             <asp:HiddenField ID="PatientType" runat="server" ClientIDMode="Static" />
@@ -180,7 +157,7 @@
             if (personDOB != null && personDOB !="") {
                 $("#DateOfBirth").addClass("noneevents");
                 personDOB = new Date(personDOB);
-                $('#DateOfBirth').datepicker('setDate', moment(personDOB.toISOString()).format('DD-MMM-YYYY'));
+                $('#PersonDOB').val(moment(personDOB.toISOString()).format('DD-MMM-YYYY'));
             }
 
             if (nationalId != null && nationalId != "") {

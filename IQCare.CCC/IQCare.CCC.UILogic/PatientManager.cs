@@ -3,6 +3,7 @@ using Entities.CCC.Enrollment;
 using Interface.CCC.Patient;
 using System;
 using System.Collections.Generic;
+using Entities.CCC.Lookup;
 
 namespace IQCare.CCC.UILogic
 {
@@ -57,7 +58,7 @@ namespace IQCare.CCC.UILogic
             return patientType;
         }
 
-        public int GetPatientIdByPersonId(int personId)
+        public List<PatientRegistrationLookup> GetPatientIdByPersonId(int personId)
         {
             try
             {
