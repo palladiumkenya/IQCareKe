@@ -3441,6 +3441,8 @@ namespace IQCare.Web.Pharmacy
                 {
                     theDT = (DataTable)theUtils.CreateTableFromDataView(theDV);
                     theBindMgr.BindCombo(ddlregimenLine, theDT, "Name", "Id");
+                    //Interface.SCM.IDrug regimen = (Interface.SCM.IDrug)ObjectFactory.CreateInstance("BusinessProcess.SCM.BDrug, BusinessProcess.SCM");
+                    //theBindMgr.BindCombo(ddlregimenLine, regimen.GetPharmacyRegimenClassification(), "DisplayName", "LookUpItemId");
                     theDV.Dispose();
                     theDT.Clear();
                 }

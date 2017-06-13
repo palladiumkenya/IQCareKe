@@ -164,5 +164,17 @@ namespace BusinessProcess.SCM
             ClsObject objPOdetails = new ClsObject();
              return   (DataTable) objPOdetails.ReturnObject(ClsUtility.theParams, "SCM_StockSummaryLineList",   ClsUtility.ObjectEnum.DataTable);
         }
+
+        public DataSet GetExpectedActualVisits(string date)
+        {
+            lock (this)
+            {
+                ClsUtility.Init_Hashtable();
+                ClsObject objPOdetails = new ClsObject();
+                ClsUtility.AddParameters("@Date", SqlDbType.VarChar, date);
+                return (DataSet)objPOdetails.ReturnObject(ClsUtility.theParams, "sp_getPharmacyPatientsExpected", ClsUtility.ObjectEnum.DataSet);
+            }
+            
+        }
     }
 }
