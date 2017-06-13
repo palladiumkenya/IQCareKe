@@ -547,22 +547,6 @@
                                          <div class="errorBlockPatientType" style="color: red;"> Please select one option </div>
 		                            </div>
 
-                                     <!--<div class="col-md-12 radio">
-                                         
-                                          <label class="radio-custom  pull-left" data-initialize="radio" id="GenPopulation">
-                                              <input type="radio" name="Population" value="General Population" class="sr-only" id="rdbGenPopulation" />
-                                              General Population
-                                          </label>
-                                     </div>
-                                     
-                                     <div class="col-md-12 radio checked">
-                                          <label class="radio-custom pull-left" data-initialize="radio" id="KeyPopulation">
-                                              <input type="radio" name="Population" value="Key Population" class="sr-only" id="rdbKeyPopulation" />
-                                              
-                                                Key population
-                                          </label>
-                                     </div>-->
-
                                 </div>
                                 
                                 <div class="col-md-3">
