@@ -1,7 +1,7 @@
-
-USE [IQCareDefault]
+/***** Object:  Trigger [dbo].[Insert_Results_LabTracker]    Script Date: 5/26/2017 8:57:46 AM *****/
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Insert_Results_LabTracker]') AND type in (N'T'))
+DROP TRIGGER [dbo].[Insert_Results_LabTracker]
 GO
-/****** Object:  Trigger [dbo].[Insert_Results_LabTracker]    Script Date: 5/26/2017 8:57:46 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -12,7 +12,7 @@ GO
 -- =============================================
 
 
-ALTER TRIGGER [dbo].[Insert_Results_LabTracker]
+CREATE TRIGGER [dbo].[Insert_Results_LabTracker]
 ON [dbo].[dtl_LabOrderTestResult]
 
  AFTER UPDATE
@@ -22,9 +22,9 @@ AS
       UPDATE c
             SET ResultValues = COALESCE(i.ResultValue,i.DetectionLimit,50),
           ResultTexts = i.ResultText,
-		  ResultOptions = i.ResultOption,
-	      ResultDate = i.StatusDate,
-		  ResultUnits = i.ResultUnit,
+    ResultOptions = i.ResultOption,
+       ResultDate = i.StatusDate,
+    ResultUnits = i.ResultUnit,
           Results = 'Complete'    
         FROM PatientLabTracker AS c
           JOIN inserted AS i
@@ -37,9 +37,9 @@ AS
     OR d.ResultText IS NULL)
     OR ( i.ResultOption <> d.ResultOption
     OR d.ResultOption IS NULL)
-	OR ( i.DetectionLimit <> d.DetectionLimit
+ OR ( i.DetectionLimit <> d.DetectionLimit
     OR d.DetectionLimit IS NULL)
-	OR ( i.Undetectable <> d.Undetectable
+ OR ( i.Undetectable <> d.Undetectable
     OR d.Undetectable IS NULL)
          );
     END ;
