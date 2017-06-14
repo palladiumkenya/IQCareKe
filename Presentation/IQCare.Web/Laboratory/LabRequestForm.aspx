@@ -318,7 +318,8 @@
                                 </tr>
                                 <tr>
                                     <td class="pad18 center form" colspan="2">
-                                        <span style='display: <%= sHasData %>'>
+                                        <%--<span style='display: <%= sHasData %>'>--%>
+                                        <span>
                                             <asp:Button ID="buttonSave" runat="server" CssClass="btn btn-info" Text="Save Request" OnClick="btnSave_Click" />&nbsp;&nbsp;&nbsp;</span>
                                         <asp:Button ID="btnclose" runat="server" CssClass="btn btn-danger" Text="Exit Request"
                                             OnClick="ExitPage" />

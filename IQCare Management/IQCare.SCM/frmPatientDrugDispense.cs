@@ -1354,9 +1354,10 @@ namespace IQCare.SCM
         {
             grpExistingRec.Visible = true;
             grpExistingRec.Left = 68;
-            grpExistingRec.Top = 56;
+            grpExistingRec.Top = 2;
             grpExistingRec.Width = 530;
             grpExistingRec.Height = 230;
+            grpExistingRec.BringToFront();
 
             IDrug thePharmacyManager = (IDrug)ObjectFactory.CreateInstance("BusinessProcess.SCM.BDrug, BusinessProcess.SCM");
             DataTable theDT = thePharmacyManager.GetPharmacyExistingRecord(this.thePatientId, GblIQCare.intStoreId);
@@ -1928,262 +1929,262 @@ namespace IQCare.SCM
         /// <param name="e">The <see cref="DataGridViewCellEventArgs"/> instance containing the event data.</param>
         private void grdDrugDispense_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            int PresdispenceQty = 0;
-            decimal totalOqdQty = 0;
-            int rowIndex = grdDrugDispense.CurrentRow.Index;
-            //if (grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[10].Value.ToString() != "" && grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[10].Value.ToString() != "0")
-            if (grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[11].Value.ToString() != "")
-            {
-                if (theOrderId > 0 && theOrderStatus == "Partial Dispense")
-                {
-                    IQCareWindowMsgBox.ShowWindow("PharmacyCannotAlterRow", this);
-                    return;
-                }
-                else if (!Convert.ToInt32(grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[11].Value).Equals(System.DBNull.Value))
-                {
-                    theDispCurrentRow = grdDrugDispense.CurrentRow.Index;
-                    PresdispenceQty = Convert.ToInt32(grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[11].Value);
+            //int PresdispenceQty = 0;
+            //decimal totalOqdQty = 0;
+            //int rowIndex = grdDrugDispense.CurrentRow.Index;
+            ////if (grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[10].Value.ToString() != "" && grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[10].Value.ToString() != "0")
+            //if (grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[11].Value.ToString() != "")
+            //{
+            //    if (theOrderId > 0 && theOrderStatus == "Partial Dispense")
+            //    {
+            //        IQCareWindowMsgBox.ShowWindow("PharmacyCannotAlterRow", this);
+            //        return;
+            //    }
+            //    else if (!Convert.ToInt32(grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[11].Value).Equals(System.DBNull.Value))
+            //    {
+            //        theDispCurrentRow = grdDrugDispense.CurrentRow.Index;
+            //        PresdispenceQty = Convert.ToInt32(grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[11].Value);
 
-                    thePrecribeAmt = PresdispenceQty;
+            //        thePrecribeAmt = PresdispenceQty;
 
-                    string itemID = grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[0].Value.ToString();
-                    DataTable dtGrd = ((DataTable)(grdDrugDispense.DataSource)).Copy();
-                    DataView dv = dtGrd.DefaultView;
-                    dv.RowFilter = "ItemId=" + itemID;
+            //        string itemID = grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[0].Value.ToString();
+            //        DataTable dtGrd = ((DataTable)(grdDrugDispense.DataSource)).Copy();
+            //        DataView dv = dtGrd.DefaultView;
+            //        dv.RowFilter = "ItemId=" + itemID;
 
-                    DataTable dt1 = dv.ToTable();// Table;
+            //        DataTable dt1 = dv.ToTable();// Table;
 
-                    foreach (DataRow dr in dt1.Rows)
-                    {
-                        if(dr["QtyDisp"].ToString() != "")
-                            totalOqdQty = totalOqdQty + Convert.ToDecimal(dr["QtyDisp"].ToString());
-                    }
-                    //if (PresdispenceQty <= totalOqdQty)
-                    //{
-                    //    IQCareWindowMsgBox.ShowWindow("PharmacyCannotAlterRow", this);
-                    //    return;
-                    //}
-                    //Already Dispensed Order
-                    if (theOrderId > 0 && theOrderStatus == "Already Dispensed Order")
-                    {
-                        IQCareWindowMsgBox.ShowWindow("PharmacyCannotAlterRow", this);
-                        return;
-                    }
-                }
-            }
-            else if (theOrderId > 0 && theOrderStatus != "New Order")
-            {
-                IQCareWindowMsgBox.ShowWindow("PharmacyCannotAlterRow", this);
-                return;
-            }
-            theItemId = Convert.ToInt32(grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[0].Value);
-            DataView theDV = new DataView(thePharmacyMaster.Tables[1]);
+            //        foreach (DataRow dr in dt1.Rows)
+            //        {
+            //            if(dr["QtyDisp"].ToString() != "")
+            //                totalOqdQty = totalOqdQty + Convert.ToDecimal(dr["QtyDisp"].ToString());
+            //        }
+            //        //if (PresdispenceQty <= totalOqdQty)
+            //        //{
+            //        //    IQCareWindowMsgBox.ShowWindow("PharmacyCannotAlterRow", this);
+            //        //    return;
+            //        //}
+            //        //Already Dispensed Order
+            //        if (theOrderId > 0 && theOrderStatus == "Already Dispensed Order")
+            //        {
+            //            IQCareWindowMsgBox.ShowWindow("PharmacyCannotAlterRow", this);
+            //            return;
+            //        }
+            //    }
+            //}
+            //else if (theOrderId > 0 && theOrderStatus != "New Order")
+            //{
+            //    IQCareWindowMsgBox.ShowWindow("PharmacyCannotAlterRow", this);
+            //    return;
+            //}
+            //theItemId = Convert.ToInt32(grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[0].Value);
+            //DataView theDV = new DataView(thePharmacyMaster.Tables[1]);
 
-            // Add && theOrderStatus != "Partial Dispense"  below line
-            if (theOrderStatus != "New Order" && theOrderStatus != "Partial Dispense")
-            {
-                theDV.RowFilter = "Drug_Pk = " + theItemId.ToString() + " and BatchId = " + grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[4].Value.ToString() +
-                    " and ExpiryDate='" + grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[6].Value.ToString() + "'";
-            }
-            else
-            {
-                theDV.RowFilter = "Drug_Pk = " + theItemId.ToString();
-            }
-            if (theDV.Count < 1)
-            {
-                IQCareWindowMsgBox.ShowWindow("NoAvailQty", this);
-                return;
-            }
+            //// Add && theOrderStatus != "Partial Dispense"  below line
+            //if (theOrderStatus != "New Order" && theOrderStatus != "Partial Dispense")
+            //{
+            //    theDV.RowFilter = "Drug_Pk = " + theItemId.ToString() + " and BatchId = " + grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[4].Value.ToString() +
+            //        " and ExpiryDate='" + grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[6].Value.ToString() + "'";
+            //}
+            //else
+            //{
+            //    theDV.RowFilter = "Drug_Pk = " + theItemId.ToString();
+            //}
+            //if (theDV.Count < 1)
+            //{
+            //    IQCareWindowMsgBox.ShowWindow("NoAvailQty", this);
+            //    return;
+            //}
 
-            if ((theDV.ToTable().Rows.Count == 0) && (Convert.ToInt32(grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[9].Value) == 0))
-            {
-                IQCareWindowMsgBox.ShowWindow("NoAvailQty", this);
-                return;
-            }
-            else
-            {
-                txtItemName.Text = theDV[0]["DrugName"].ToString();
+            //if ((theDV.ToTable().Rows.Count == 0) && (Convert.ToInt32(grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[9].Value) == 0))
+            //{
+            //    IQCareWindowMsgBox.ShowWindow("NoAvailQty", this);
+            //    return;
+            //}
+            //else
+            //{
+            //    txtItemName.Text = theDV[0]["DrugName"].ToString();
 
-                if (theOrderStatus == "New Order")
-                {
-                    try
-                    {
-                        string frequency = grdDrugDispense.Rows[rowIndex].Cells["FrequencyId"].Value.ToString();
+            //    if (theOrderStatus == "New Order")
+            //    {
+            //        try
+            //        {
+            //            string frequency = grdDrugDispense.Rows[rowIndex].Cells["FrequencyId"].Value.ToString();
 
-                        cmbFrequency.SelectedValue = frequency;
-                        //grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[17].Value.ToString();
-                    }
-                    catch { }
-                    txtSellingPrice.Text = "";
-                    txtBatchNo.Text = "";
-                    theBatchId = 0;
-                    txtExpirydate.Text = "";
-                    if (grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[7].Value.ToString() != "")
-                    {
-                        txtDose.Text = grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[7].Value.ToString();
-                    }
-                    else
-                    {
-                        txtDose.Text = "";
-                    }
-                    if (grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[9].Value.ToString() != "")
-                    {
-                        txtDuration.Text = grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[9].Value.ToString();
-                    }
-                    else
-                    {
-                        txtDuration.Text = "";
-                    }
-                    if (grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[10].Value.ToString() != "")
-                    {
-                        txtQtyPrescribed.Text = grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[10].Value.ToString();
-                        if (theExistingDrugs.Rows.Count > 0)
-                        {
-                            DataRow[] theexistrow = theExistingDrugs.Select("ItemId=" + theItemId.ToString());
-                            if (theexistrow.Length > 0)
-                                txtQtyPrescribed.Enabled = false;
-                        }
-                    }
-                    else
-                    {
-                        txtQtyPrescribed.Text = "";
-                    }
-                    if (grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[11].Value.ToString() != "0.00")
-                    {
-                        txtQtyDispensed.Text = grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[11].Value.ToString();
-                    }
-                    else
-                    {
-                        txtQtyDispensed.Text = "";
-                    }
-                    if (grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[14].Value.ToString() != "")
-                    {
-                        txtSellingPrice.Text = grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[14].Value.ToString();
-                    }
-                    else
-                    {
-                        txtSellingPrice.Text = "";
-                    }
-                    //print prescription
-                    //if (grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[19].Value.ToString() != "0")
-                    //{
-                    //    chkPrintPrescription.Checked = true;
-                    //}
-                    //else
-                    //{
-                    //    chkPrintPrescription.Checked = false;
-                    //}
-                    if (grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[20].Value.ToString() != "")
-                    {
-                        txtPatientInstructions.Text = grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[20].Value.ToString();
-                    }
-                    else
-                    {
-                        txtPatientInstructions.Text = "";
-                    }
+            //            cmbFrequency.SelectedValue = frequency;
+            //            //grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[17].Value.ToString();
+            //        }
+            //        catch { }
+            //        txtSellingPrice.Text = "";
+            //        txtBatchNo.Text = "";
+            //        theBatchId = 0;
+            //        txtExpirydate.Text = "";
+            //        if (grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[7].Value.ToString() != "")
+            //        {
+            //            txtDose.Text = grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[7].Value.ToString();
+            //        }
+            //        else
+            //        {
+            //            txtDose.Text = "";
+            //        }
+            //        if (grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[9].Value.ToString() != "")
+            //        {
+            //            txtDuration.Text = grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[9].Value.ToString();
+            //        }
+            //        else
+            //        {
+            //            txtDuration.Text = "";
+            //        }
+            //        if (grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[10].Value.ToString() != "")
+            //        {
+            //            txtQtyPrescribed.Text = grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[10].Value.ToString();
+            //            if (theExistingDrugs.Rows.Count > 0)
+            //            {
+            //                DataRow[] theexistrow = theExistingDrugs.Select("ItemId=" + theItemId.ToString());
+            //                if (theexistrow.Length > 0)
+            //                    txtQtyPrescribed.Enabled = false;
+            //            }
+            //        }
+            //        else
+            //        {
+            //            txtQtyPrescribed.Text = "";
+            //        }
+            //        if (grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[11].Value.ToString() != "0.00")
+            //        {
+            //            txtQtyDispensed.Text = grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[11].Value.ToString();
+            //        }
+            //        else
+            //        {
+            //            txtQtyDispensed.Text = "";
+            //        }
+            //        if (grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[14].Value.ToString() != "")
+            //        {
+            //            txtSellingPrice.Text = grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[14].Value.ToString();
+            //        }
+            //        else
+            //        {
+            //            txtSellingPrice.Text = "";
+            //        }
+            //        //print prescription
+            //        //if (grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[19].Value.ToString() != "0")
+            //        //{
+            //        //    chkPrintPrescription.Checked = true;
+            //        //}
+            //        //else
+            //        //{
+            //        //    chkPrintPrescription.Checked = false;
+            //        //}
+            //        if (grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[20].Value.ToString() != "")
+            //        {
+            //            txtPatientInstructions.Text = grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[20].Value.ToString();
+            //        }
+            //        else
+            //        {
+            //            txtPatientInstructions.Text = "";
+            //        }
 
-                    theprevbatchId = 1;
-                    theSellingPrice = 0;
-                    this.priceBundled = false;
-                    theConfigSellingPrice = 0;
-                    theCostPrice = 0;
-                    theItemTypeId = 0;
-                    theMargin = 0;
-                    theDispensingUnit = 0;
-                    theDispensingUnitName = "";
-                    theFunded = 0;
-                    theAvailQty = 0;
-                    theStrength = 0;
-                    theItemType = Convert.ToInt32(theDV[0]["DrugTypeId"]);
-                    txtItemName.Select();
-                    KeyEventArgs theArg = new KeyEventArgs(Keys.Enter);
-                    txtItemName_KeyUp(txtItemName, theArg);
-                }
-                else
-                {
-                    KeyEventArgs theArg1 = new KeyEventArgs(Keys.Enter);
-                    txtItemName_KeyUp(txtItemName, theArg1);
+            //        theprevbatchId = 1;
+            //        theSellingPrice = 0;
+            //        this.priceBundled = false;
+            //        theConfigSellingPrice = 0;
+            //        theCostPrice = 0;
+            //        theItemTypeId = 0;
+            //        theMargin = 0;
+            //        theDispensingUnit = 0;
+            //        theDispensingUnitName = "";
+            //        theFunded = 0;
+            //        theAvailQty = 0;
+            //        theStrength = 0;
+            //        theItemType = Convert.ToInt32(theDV[0]["DrugTypeId"]);
+            //        txtItemName.Select();
+            //        KeyEventArgs theArg = new KeyEventArgs(Keys.Enter);
+            //        txtItemName_KeyUp(txtItemName, theArg);
+            //    }
+            //    else
+            //    {
+            //        KeyEventArgs theArg1 = new KeyEventArgs(Keys.Enter);
+            //        txtItemName_KeyUp(txtItemName, theArg1);
 
-                    txtBatchNo.Text = theDV[0]["BatchNo"].ToString();
-                    theBatchId = Convert.ToInt32(theDV[0]["BatchId"]);
-                    txtExpirydate.Text = ((DateTime)theDV[0]["ExpiryDate"]).ToString(GblIQCare.AppDateFormat);
+            //        txtBatchNo.Text = theDV[0]["BatchNo"].ToString();
+            //        theBatchId = Convert.ToInt32(theDV[0]["BatchId"]);
+            //        txtExpirydate.Text = ((DateTime)theDV[0]["ExpiryDate"]).ToString(GblIQCare.AppDateFormat);
 
-                    theSellingPrice = Convert.ToDecimal(theDV[0]["SellingPrice"]);
-                    theItemTypeId = Convert.ToInt32(theDV[0]["ItemTypeID"]);
-                    this.GetPrice(theItemId, theItemTypeId);
-                    theConfigSellingPrice = Convert.ToDecimal(theDV[0]["ConfigSellingPrice"]);
-                    theCostPrice = Convert.ToDecimal(theDV[0]["CostPrice"]);
-                    theMargin = Convert.ToDecimal(theDV[0]["DispensingMargin"]);
-                    theDispensingUnit = Convert.ToInt32(theDV[0]["DispensingId"]);
-                    theDispensingUnitName = theDV[0]["DispensingUnit"].ToString();
-                    theFunded = Convert.ToInt32(theDV[0]["Funded"]);
-                    theAvailQty = Convert.ToInt32(theDV[0]["AvailQty"]);
-                    theStrength = Convert.ToInt32(theDV[0]["StrengthId"]);
-                    theItemType = Convert.ToInt32(theDV[0]["DrugTypeId"]);
+            //        theSellingPrice = Convert.ToDecimal(theDV[0]["SellingPrice"]);
+            //        theItemTypeId = Convert.ToInt32(theDV[0]["ItemTypeID"]);
+            //        this.GetPrice(theItemId, theItemTypeId);
+            //        theConfigSellingPrice = Convert.ToDecimal(theDV[0]["ConfigSellingPrice"]);
+            //        theCostPrice = Convert.ToDecimal(theDV[0]["CostPrice"]);
+            //        theMargin = Convert.ToDecimal(theDV[0]["DispensingMargin"]);
+            //        theDispensingUnit = Convert.ToInt32(theDV[0]["DispensingId"]);
+            //        theDispensingUnitName = theDV[0]["DispensingUnit"].ToString();
+            //        theFunded = Convert.ToInt32(theDV[0]["Funded"]);
+            //        theAvailQty = Convert.ToInt32(theDV[0]["AvailQty"]);
+            //        theStrength = Convert.ToInt32(theDV[0]["StrengthId"]);
+            //        theItemType = Convert.ToInt32(theDV[0]["DrugTypeId"]);
 
-                    if (grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[7].Value.ToString() != "")
-                    {
-                        if (!Convert.ToInt32(grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[7].Value).Equals(System.DBNull.Value))
-                        {
-                            txtDose.Text = Convert.ToDecimal(grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[7].Value).ToString();
-                        }
-                    }
-                    if (grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[10].Value.ToString() != "")
-                    {
-                        if (!Convert.ToInt32(grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[10].Value).Equals(System.DBNull.Value))
-                        {
-                            txtDuration.Text = Convert.ToDecimal(grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[10].Value).ToString();
-                        }
-                    }
-                    // txtDose.Text = Convert.ToDecimal(grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[7].Value).ToString();
-                    //  txtDuration.Text = Convert.ToDecimal(grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[9].Value).ToString();
-                    //cmbFrequency.SelectedValue = grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[17].Value.ToString();
-                    cmbFrequency.SelectedText = grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[17].Value.ToString();
+            //        if (grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[7].Value.ToString() != "")
+            //        {
+            //            if (!Convert.ToInt32(grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[7].Value).Equals(System.DBNull.Value))
+            //            {
+            //                txtDose.Text = Convert.ToDecimal(grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[7].Value).ToString();
+            //            }
+            //        }
+            //        if (grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[10].Value.ToString() != "")
+            //        {
+            //            if (!Convert.ToInt32(grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[10].Value).Equals(System.DBNull.Value))
+            //            {
+            //                txtDuration.Text = Convert.ToDecimal(grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[10].Value).ToString();
+            //            }
+            //        }
+            //        // txtDose.Text = Convert.ToDecimal(grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[7].Value).ToString();
+            //        //  txtDuration.Text = Convert.ToDecimal(grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[9].Value).ToString();
+            //        //cmbFrequency.SelectedValue = grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[17].Value.ToString();
+            //        cmbFrequency.SelectedText = grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[17].Value.ToString();
 
-                    if (grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[11].Value.ToString() != "0.00")
-                    {
-                        txtQtyDispensed.Text = Convert.ToDecimal(grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[11].Value).ToString();
-                    }
+            //        if (grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[11].Value.ToString() != "0.00")
+            //        {
+            //            txtQtyDispensed.Text = Convert.ToDecimal(grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[11].Value).ToString();
+            //        }
 
-                    txtQtyPrescribed.Text = Convert.ToDecimal(grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[10].Value).ToString();
-                    //if (txtQtyPrescribed.Text != "")
-                    //{
-                    //    txtQtyPrescribed.Enabled = false;
-                    //}
+            //        txtQtyPrescribed.Text = Convert.ToDecimal(grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[10].Value).ToString();
+            //        //if (txtQtyPrescribed.Text != "")
+            //        //{
+            //        //    txtQtyPrescribed.Enabled = false;
+            //        //}
 
-                    if (grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[14].Value.ToString() != "")
-                    {
-                        if (!Convert.ToInt32(grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[14].Value).Equals(System.DBNull.Value))
-                        {
-                            txtSellingPrice.Text = Convert.ToDecimal(grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[14].Value).ToString();
-                        }
-                    }
-                    if (PresdispenceQty > totalOqdQty)
-                    {
-                        txtItemName.Enabled = true;
-                    }
-                    else
-                    {
-                        txtItemName.Enabled = false;
-                    }
+            //        if (grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[14].Value.ToString() != "")
+            //        {
+            //            if (!Convert.ToInt32(grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[14].Value).Equals(System.DBNull.Value))
+            //            {
+            //                txtSellingPrice.Text = Convert.ToDecimal(grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[14].Value).ToString();
+            //            }
+            //        }
+            //        if (PresdispenceQty > totalOqdQty)
+            //        {
+            //            txtItemName.Enabled = true;
+            //        }
+            //        else
+            //        {
+            //            txtItemName.Enabled = false;
+            //        }
 
-                    if (theItemType == 37 && cmbprogram.SelectedValue.ToString() == "223")
-                        theProphylaxis = 1;
-                    else
-                        theProphylaxis = 0;
-                    theGenericAbb = theDV[0]["GenericAbb"].ToString();
+            //        if (theItemType == 37 && cmbprogram.SelectedValue.ToString() == "223")
+            //            theProphylaxis = 1;
+            //        else
+            //            theProphylaxis = 0;
+            //        theGenericAbb = theDV[0]["GenericAbb"].ToString();
 
-                    //if (grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[19].Value.ToString() != "0")
-                    //{
-                    //    chkPrintPrescription.Checked = true;
-                    //}
-                    //else
-                    //{
-                    //    chkPrintPrescription.Checked = false;
-                    //}
-                    txtPatientInstructions.Text = grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[20].Value.ToString();
-                }
-            }
+            //        //if (grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[19].Value.ToString() != "0")
+            //        //{
+            //        //    chkPrintPrescription.Checked = true;
+            //        //}
+            //        //else
+            //        //{
+            //        //    chkPrintPrescription.Checked = false;
+            //        //}
+            //        txtPatientInstructions.Text = grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[20].Value.ToString();
+            //    }
+            //}
         }
 
         //this.images is an ImageList with your bitmaps

@@ -327,6 +327,7 @@ namespace IQCare.Web.Laboratory
 
             };
             thisTest.Id = -1;
+            thisTest.TestId = this.LabTestId;
             thisTest.TestNotes = txtTestNotes.Text;
             _order.OrderedTest.Add(thisTest);
             this.OrderedLabs = _order;
