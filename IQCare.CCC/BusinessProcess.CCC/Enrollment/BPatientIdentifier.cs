@@ -74,5 +74,16 @@ namespace BusinessProcess.CCC.Enrollment
                 return identifiers;
             }
         }
+
+        public List<PatientEntityIdentifier> GetPatientEntityIdentifiersByPatientId(int patientId, int identifierTypeId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var patientIdentifiers = unitOfWork.PatientIdentifierRepository
+                    .FindBy(x => x.PatientId == patientId && x.IdentifierTypeId == identifierTypeId).ToList();
+                unitOfWork.Dispose();
+                return patientIdentifiers;
+            }
+        }
     }
 }

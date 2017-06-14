@@ -10,11 +10,21 @@ namespace IQCare.CCC.UILogic.Enrollment
     {
         IPatientEnrollmentManager _mgr = (IPatientEnrollmentManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Enrollment.BPatientEnrollment, BusinessProcess.CCC");
 
-        public int addPatientEnrollment(PatientEntityEnrollment patientEnrollment)
+        public int addPatientEnrollment(int patientId, string enrollmentDate, int userId)
         {
             int returnValue;
             try
             {
+                PatientEntityEnrollment patientEnrollment = new PatientEntityEnrollment
+                {
+                    PatientId = patientId,
+                    ServiceAreaId = 1,
+                    EnrollmentDate = DateTime.Parse(enrollmentDate),
+                    CreatedBy = userId,
+                    CreateDate = DateTime.Now,
+                    DeleteFlag = false
+                };
+
                 returnValue = _mgr.AddPatientEnrollment(patientEnrollment);
                 return returnValue;
             }

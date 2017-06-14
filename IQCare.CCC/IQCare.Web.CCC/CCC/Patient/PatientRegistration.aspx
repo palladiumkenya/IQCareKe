@@ -547,22 +547,6 @@
                                          <div class="errorBlockPatientType" style="color: red;"> Please select one option </div>
 		                            </div>
 
-                                     <!--<div class="col-md-12 radio">
-                                         
-                                          <label class="radio-custom  pull-left" data-initialize="radio" id="GenPopulation">
-                                              <input type="radio" name="Population" value="General Population" class="sr-only" id="rdbGenPopulation" />
-                                              General Population
-                                          </label>
-                                     </div>
-                                     
-                                     <div class="col-md-12 radio checked">
-                                          <label class="radio-custom pull-left" data-initialize="radio" id="KeyPopulation">
-                                              <input type="radio" name="Population" value="Key Population" class="sr-only" id="rdbKeyPopulation" />
-                                              
-                                                Key population
-                                          </label>
-                                     </div>-->
-
                                 </div>
                                 
                                 <div class="col-md-3">
@@ -1600,15 +1584,19 @@
                 var _fp = [];
 
                 $("#btnOk").click(function() {
-                    console.log("here");
-                    console.log(_fp);
-
+                    //console.log("here");
+                    //console.log(_fp);
+                    //return false;
                     if (Object.keys(_fp).length > 0) {
                         if (_fp["IsPatient"] == 1) {
-                            window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientHome.aspx?patient=")%>' + _fp["PatientId"];
+                            $.when(setPatientIdSession(_fp["PatientId"])).then(function () {
+                                setTimeout(function () {
+                                    window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientHome.aspx")%>';
+                                }, 2000);
+                            });                         
                         } else {
                             var personId = _fp["PersonId"];
-                            <%Session["PatientType"] = "1285"; %>;
+                            getPatientTypeId("PatientType", "New");
 
                             $.ajax({
                                 type: "POST",
@@ -1648,6 +1636,26 @@
                     $(this).addClass("active");
                     console.log(_fp);
                 });
+
+                function getPatientTypeId(groupName, patientTypeName) {
+                    $.ajax({
+                        type: "POST",
+                        url: "../WebService/PersonService.asmx/GetPatientType",
+                        contentType: "application/json; charset=utf-8",
+                        data: "{'groupName': '" + groupName + "','patientTypeName':'" + patientTypeName +"'}",
+                        dataType: "json"
+                    });
+                }
+
+                function setPatientIdSession(patientId) {
+                    $.ajax({
+                        type: "POST",
+                        url: "../WebService/PersonService.asmx/SetPatientSession",
+                        contentType: "application/json; charset=utf-8",
+                        data: "{'patientPk': '" + patientId + "'}",
+                        dataType: "json"
+                    });
+                }
 
         });
     </script>

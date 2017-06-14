@@ -3,6 +3,7 @@ using Entities.CCC.Enrollment;
 using Interface.CCC.Patient;
 using System;
 using System.Collections.Generic;
+using Entities.CCC.Lookup;
 
 namespace IQCare.CCC.UILogic
 {
@@ -10,7 +11,7 @@ namespace IQCare.CCC.UILogic
     {
         IPatientManager _mgr = (IPatientManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Patient.BPatient, BusinessProcess.CCC");
 
-        public int AddPatient(Entities.CCC.Enrollment.PatientEntity patient)
+        public int AddPatient(PatientEntity patient)
         {
             int returnValue;
 
@@ -55,6 +56,18 @@ namespace IQCare.CCC.UILogic
             int patientTypeId = _mgr.GetPatientType(patientId);
             string patientType = LookupLogic.GetLookupNameById(patientTypeId);
             return patientType;
+        }
+
+        public List<PatientRegistrationLookup> GetPatientIdByPersonId(int personId)
+        {
+            try
+            {
+                return _mgr.GetPatientIdByPersonId(personId);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public static string CalculateYourAge(DateTime Dob)

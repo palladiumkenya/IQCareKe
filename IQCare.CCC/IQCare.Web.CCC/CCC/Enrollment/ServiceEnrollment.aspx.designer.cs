@@ -13,6 +13,15 @@ namespace IQCare.Web.CCC.Enrollment {
     public partial class ServiceEnrollment {
         
         /// <summary>
+        /// PatientType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField PatientType;
+        
+        /// <summary>
         /// PersonDOB control.
         /// </summary>
         /// <remarks>
@@ -76,40 +85,13 @@ namespace IQCare.Web.CCC.Enrollment {
         protected global::System.Web.UI.WebControls.DropDownList IdentifierTypeId;
         
         /// <summary>
-        /// PatientType control.
+        /// placeholder control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField PatientType;
-        
-        /// <summary>
-        /// IdentifierValue control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox IdentifierValue;
-        
-        /// <summary>
-        /// btnAdd control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnAdd;
-        
-        /// <summary>
-        /// tblEnrollment control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTable tblEnrollment;
+        protected global::System.Web.UI.WebControls.Panel placeholder;
         
         /// <summary>
         /// btnEnroll control.
@@ -137,41 +119,5 @@ namespace IQCare.Web.CCC.Enrollment {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnClose;
-        
-        /// <summary>
-        /// lblServiceName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblServiceName;
-        
-        /// <summary>
-        /// updateMflCode control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox updateMflCode;
-        
-        /// <summary>
-        /// updateEnrollmentNo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox updateEnrollmentNo;
-        
-        /// <summary>
-        /// UpdatedEnrollmentDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox UpdatedEnrollmentDate;
     }
 }

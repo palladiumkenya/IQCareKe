@@ -21,6 +21,7 @@ namespace Entities.CCC.Enrollment
         public virtual PatientEntityEnrollment PatientEnrollment { get; set; }
         public int IdentifierTypeId { get; set; }
         public string IdentifierValue { get; set; }
-
+        [ForeignKey("IdentifierTypeId")]
+        public virtual Identifier Identifiers { get; set; }
     }
 }

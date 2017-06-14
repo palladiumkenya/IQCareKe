@@ -9,6 +9,7 @@ using DataAccess.CCC.Repository;
 using DataAccess.Common;
 using DataAccess.Entity;
 using Entities.CCC.Enrollment;
+using Entities.CCC.Lookup;
 
 namespace BusinessProcess.CCC.Patient
 {
@@ -101,6 +102,23 @@ namespace BusinessProcess.CCC.Patient
                 unitOfWork.Dispose();
                 return patientTypeId;
                 //return patientTypeId.FirstOrDefault();
+            }
+        }
+
+        public List<PatientRegistrationLookup> GetPatientIdByPersonId(int personId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                List<PatientRegistrationLookup> patientRegistrationLookups = new List<PatientRegistrationLookup>();
+
+                bool patientExists = unitOfWork.PatientRegistrationLookupRepository.FindBy(x => x.PersonId == personId)
+                    .Any();
+                if (patientExists)
+                {
+                    patientRegistrationLookups = unitOfWork.PatientRegistrationLookupRepository.FindBy(x => x.PersonId == personId).ToList();
+                }
+                unitOfWork.Dispose();
+                return patientRegistrationLookups;
             }
         }
     }

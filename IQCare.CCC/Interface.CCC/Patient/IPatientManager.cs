@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Entities.CCC.Lookup;
 
 namespace Interface.CCC.Patient
 {
@@ -14,5 +15,6 @@ namespace Interface.CCC.Patient
         PatientEntity GetPatient(int id);
         List<PatientEntity> CheckPersonEnrolled(int persionId);
         int GetPatientType(int patientId);
+        List<PatientRegistrationLookup> GetPatientIdByPersonId(int personId);
     }
 }
