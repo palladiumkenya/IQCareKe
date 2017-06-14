@@ -5,471 +5,141 @@
       <%--  <uc:PatientDetails ID="PatientSummary" runat="server" />--%>
    
     
-    <div class="col-md-12 bs-callout bs-callout-info" id="enrollmentTab" data-parsley-validate="true" data-show-errors="true">
-        <div class="col-md-12">
-            <label class="control-lable pull-left">Services Enrolled </label>
-        </div>
-
-        <div class="col-md-12">
-            <table class="table table-striped" id="patientEnrollments">
-                <thead>
-                    <tr>
-                        <th>Service Name</th>
-                        <th>Enrollment Number</th>
-                        <th>Enrollment Date</th>
-                        <th>Status</th>
-                        <th>&nbsp;</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="no-data">
-                        <td colspan="4">No Enrollments Yet</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
+    <div class="col-md-12" id="enrollmentTab" data-parsley-validate="true" data-show-errors="true">
         <div class="col-md-12">
             <label class="control-lable pull-left"> Patient Enrollment </label>
+            <asp:HiddenField ID="PatientType" runat="server" ClientIDMode="Static" />
         </div>
         
-        <div class="col-md-12"><hr /></div>
-        
-        <div class="row">
-            <div class="col-xs-3">
-                <div class="col-md-12"><label class="required control-label pull-left">Date Of Birth</label></div>
-                <div class="col-md-12">
-                    <div class="datepicker fuelux form-group" id="DateOfBirth">
-                        <div class="input-group">
-                            <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="PersonDOB" data-parsley-required="true"></asp:TextBox>        
-                            <div class="input-group-btn">
-                                <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                                <span class="sr-only">Toggle Calendar</span>
-                                </button>
-                                <div class="dropdown-menu dropdown-menu-right datepicker-calendar-wrapper" role="menu">
-                                    <div class="datepicker-calendar">
-                                        <div class="datepicker-calendar-header">
-                                            <button type="button" class="prev"><span class="glyphicon glyphicon-chevron-left input-sm"></span><span class="sr-only">Previous Month</span></button>
-                                            <button type="button" class="next"><span class="glyphicon glyphicon-chevron-right input-sm"></span><span class="sr-only">Next Month</span></button>
-                                            <button type="button" class="title" data-month="11" data-year="2014">
-                                                <span class="month">
-                                                    <span data-month="0">January</span>
-                                                    <span data-month="1">February</span>
-                                                    <span data-month="2">March</span>
-                                                    <span data-month="3">April</span>
-                                                    <span data-month="4">May</span>
-                                                    <span data-month="5">June</span>
-                                                    <span data-month="6">July</span>
-                                                    <span data-month="7">August</span>
-                                                    <span data-month="8">September</span>
-                                                    <span data-month="9">October</span>
-                                                    <span data-month="10">November</span>
-                                                    <span data-month="11" class="current">December</span>
-                                                </span> <span class="year">2014</span>
-                                            </button>
-                                        </div>
-                                        <table class="datepicker-calendar-days">
-                                        <thead>
-                                        <tr>
-                                            <th>Su</th>
-                                            <th>Mo</th>
-                                            <th>Tu</th>
-                                            <th>We</th>
-                                            <th>Th</th>
-                                            <th>Fr</th>
-                                            <th>Sa</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody></tbody>
-                                        </table>
-                                        <div class="datepicker-calendar-footer">
-                                        <button type="button" class="datepicker-today">Today</button>
-                                        </div>
-                                    </div>
-                                    <div class="datepicker-wheels" aria-hidden="true">
-                                        <div class="datepicker-wheels-month">
-                                        <h2 class="header">Month</h2>
-                                        <ul>
-                                            <li data-month="0"><button type="button">Jan</button></li>
-                                            <li data-month="1"><button type="button">Feb</button></li>
-                                            <li data-month="2"><button type="button">Mar</button></li>
-                                            <li data-month="3"><button type="button">Apr</button></li>
-                                            <li data-month="4"><button type="button">May</button></li>
-                                            <li data-month="5"><button type="button">Jun</button></li>
-                                            <li data-month="6"><button type="button">Jul</button></li>
-                                            <li data-month="7"><button type="button">Aug</button></li>
-                                            <li data-month="8"><button type="button">Sep</button></li>
-                                            <li data-month="9"><button type="button">Oct</button></li>
-                                            <li data-month="10"><button type="button">Nov</button></li>
-                                            <li data-month="11"><button type="button">Dec</button></li>
-                                        </ul>
-                                        </div>
-                                        <div class="datepicker-wheels-year">
-                                        <h2 class="header">Year</h2>
-                                        <ul></ul>
-                                        </div>
-                                        <div class="datepicker-wheels-footer clearfix">
-                                        <button type="button" class="btn datepicker-wheels-back"><span class="glyphicon glyphicon-arrow-left"></span><span class="sr-only">Return to Calendar</span></button>
-                                        <button type="button" class="btn datepicker-wheels-select">Select <span class="sr-only">Month and Year</span></button>
-                                        </div>
+
+        <div class="col-md-12">
+            <div class="panel-group">
+                <div class="panel panel-info">
+                    <div class="panel-body">
+                        <div class="col-md-12">
+                            <div class="col-md-5">
+                                <div class="col-md-12"><label class="required control-label pull-left">Date Of Birth</label></div>
+
+                                <div class="col-md-12 form-group">
+                                    <div class='input-group date' id='PersonDOBdatepicker'>
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                        <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="PersonDOB" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>        
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-xs-3">
-                <div class="col-md-12"><label class="control-label pull-left">National Id/Passport No</label></div>
-                <div class="col-sm-10">
-                    <asp:HiddenField ID="IsCCCEnrolled" runat="server" ClientIDMode="Static" />
-                    <asp:TextBox runat="server" CssClass="form-control input-sm" ID="NationalId" ClientIDMode="Static" data-parsley-length="[7,8]" />
-                </div>
-            </div>
-
-            <div class="col-xs-3">
-                <div class="col-md-12"><label class="required control-label pull-left">Enrollment Date </label></div>
-                <div class="col-md-12">
-                    <div class="datepicker fuelux form-group" id="EnrollmentDate">
-                        <div class="input-group">
-                            <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="DateOfEnrollment" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>        
-                            <%-- <input ClientIDMode="Static" class="form-control input-sm" runat="server" id="DateOfBirth" type="date" />--%>
-                            <div class="input-group-btn">
-                                <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                                <span class="sr-only">Toggle Calendar</span>
-                                </button>
-                                <div class="dropdown-menu dropdown-menu-right datepicker-calendar-wrapper" role="menu">
-                                    <div class="datepicker-calendar">
-                                        <div class="datepicker-calendar-header">
-                                            <button type="button" class="prev"><span class="glyphicon glyphicon-chevron-left input-sm"></span><span class="sr-only">Previous Month</span></button>
-                                            <button type="button" class="next"><span class="glyphicon glyphicon-chevron-right input-sm"></span><span class="sr-only">Next Month</span></button>
-                                            <button type="button" class="title" data-month="11" data-year="2014">
-                                                <span class="month">
-                                                    <span data-month="0">January</span>
-                                                    <span data-month="1">February</span>
-                                                    <span data-month="2">March</span>
-                                                    <span data-month="3">April</span>
-                                                    <span data-month="4">May</span>
-                                                    <span data-month="5">June</span>
-                                                    <span data-month="6">July</span>
-                                                    <span data-month="7">August</span>
-                                                    <span data-month="8">September</span>
-                                                    <span data-month="9">October</span>
-                                                    <span data-month="10">November</span>
-                                                    <span data-month="11" class="current">December</span>
-                                                </span> <span class="year">2014</span>
-                                            </button>
-                                        </div>
-                                        <table class="datepicker-calendar-days">
-                                        <thead>
-                                        <tr>
-                                            <th>Su</th>
-                                            <th>Mo</th>
-                                            <th>Tu</th>
-                                            <th>We</th>
-                                            <th>Th</th>
-                                            <th>Fr</th>
-                                            <th>Sa</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody></tbody>
-                                        </table>
-                                        <div class="datepicker-calendar-footer">
-                                        <button type="button" class="datepicker-today">Today</button>
-                                        </div>
-                                    </div>
-                                    <div class="datepicker-wheels" aria-hidden="true">
-                                        <div class="datepicker-wheels-month">
-                                        <h2 class="header">Month</h2>
-                                        <ul>
-                                            <li data-month="0"><button type="button">Jan</button></li>
-                                            <li data-month="1"><button type="button">Feb</button></li>
-                                            <li data-month="2"><button type="button">Mar</button></li>
-                                            <li data-month="3"><button type="button">Apr</button></li>
-                                            <li data-month="4"><button type="button">May</button></li>
-                                            <li data-month="5"><button type="button">Jun</button></li>
-                                            <li data-month="6"><button type="button">Jul</button></li>
-                                            <li data-month="7"><button type="button">Aug</button></li>
-                                            <li data-month="8"><button type="button">Sep</button></li>
-                                            <li data-month="9"><button type="button">Oct</button></li>
-                                            <li data-month="10"><button type="button">Nov</button></li>
-                                            <li data-month="11"><button type="button">Dec</button></li>
-                                        </ul>
-                                        </div>
-                                        <div class="datepicker-wheels-year">
-                                        <h2 class="header">Year</h2>
-                                        <ul></ul>
-                                        </div>
-                                        <div class="datepicker-wheels-footer clearfix">
-                                        <button type="button" class="btn datepicker-wheels-back"><span class="glyphicon glyphicon-arrow-left"></span><span class="sr-only">Return to Calendar</span></button>
-                                        <button type="button" class="btn datepicker-wheels-select">Select <span class="sr-only">Month and Year</span></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-xs-3 form-group">
-                <div class="col-xs-12"><label class="required control-label pull-left" for="entrypoint">Entry Point</label></div>
-                <div class="col-md-12">
-                    <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="entryPoint" ClientIDMode="Static" data-parsley-required="true"/>
-                </div>
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-xs-3 form-group" id="OtherSpecificEntryPoint">
-                <div class="col-xs-12"><label class="control-label pull-left" for="otherentrypoint">Specify Other Entry Point</label></div>
-                <div class="col-xs-12">
-                    <asp:TextBox runat="server" CssClass="form-control input-sm" ID="SpecificEntryPoint" ClientIDMode="Static"/>
-                </div>
-            </div>
-        </div>
-        
-        
-        <div class="col-md-12"><hr /></div>
-
-        <div class="row form-group">
-            
-            
-            <div class="col-md-3">
-                  <div class="col-md-12"><label class="required pull-left control-label">Enrollment Identifier</label></div>
-                  <div class="col-md-12">
-                       <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="IdentifierTypeId" ClientIDMode="Static" data-parsley-required="true"/>
-                  </div>
-             </div>
-
-            <div class="col-md-3">
-                
-                <div id="AppPosID">
-                    <asp:HiddenField ID="PatientType" runat="server" ClientIDMode="Static" />
-                    <div class="col-md-12"><label id="AppPosID" class="required pull-left  control-label">MFL CODE</label></div>
-                    <div class="col-md-10" style="padding-right: 0;"><input type="text" id="txtAppPosID" value="<%=Session["AppPosID"] %>" class="form-control input-sm" readonly="readonly" /></div>
-                    <div class="col-md-2" style="padding: 0;">-</div>
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="col-md-12"><label id="enrollmentLabel" class="required pull-left  control-label">Enrollment No.#</label></div>
-                <div class="col-md-12" style="padding-left: 0;">
-                    <asp:TextBox runat="server" CssClass="form-control input-sm" ClientIDMode="Static" ID="IdentifierValue" Placeholder="Registration No#..." data-parsley-type="digits" data-parsley-required="true" data-parsley-minlength="5"></asp:TextBox>
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="col-md-12"><label class="control-label text-danger">Action</label></div>      
-                <div class="col-md-12 pull-right">
-                    <asp:LinkButton runat="server" ID="btnAdd"  ClientIDMode="Static" OnClientClick="return false" CssClass="btn btn-info fa fa-plus-circle"> Add Identifier</asp:LinkButton>
-                </div>
-            </div>
-        </div> 
-            
-            
-            <div class="col-md-12 form-group">
-                <div class="col-md-12 bg-primary"><span class="pull-left"></span> Identifier Parameters </div>
-                <table class="table table-striped table-condensed" id="tblEnrollment" clientidmode="Static" runat="server">
-                    <thead>
-                        <tr >
-                            <th>#</th>
-                            <th> <i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true"> Enrollement Identifier</i> </th>
-                             <th style="display: none;"> <i class="fa fa-arrow-circle-o-right " aria-hidden="true"> Identifier Id</i> </th>
-                            <th> <i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true"> Enrollment Number </i></th>
-                            <th><span class="fa fa-times text-danger text-primary pull-right"> Action</span></th>
-                        </tr>
-                    </thead>
-                    <tbody>
                         
-                    </tbody>
-                </table>
-
-            </div>
-            <div class="col-md-12">
-                <div class="col-md-3"></div>
-                <div class="col-md-7">
-                     <div class="col-md-4">
-                          <asp:LinkButton runat="server" ID="btnEnroll" CssClass="btn btn-info btn-lg fa fa-plus-circle" ClientIDMode="Static" OnClientClick="return false;"> Enroll and Continue </asp:LinkButton>
-                     </div>
-                    <div class="col-md-4">
-                          <asp:LinkButton runat="server" ID="btnRese" CssClass="btn btn-warning btn-lg fa fa-refresh" ClientIDMode="Static" OnClientClick="return false;"> Enroll and Register New</asp:LinkButton>
-                     </div>
-                    <div class="col-md-4">
-                          <asp:LinkButton runat="server" ID="btnClose" CssClass="btn btn-danger btn-lg fa fa-times" ClientIDMode="Static" OnClientClick="return false;"> Close Enrollemnt</asp:LinkButton>
-                     </div>
+                            <div class="col-md-5">
+                                <div class="col-md-12"><label class="control-label pull-left">National Id/Passport No</label></div>
+                            
+                                <div class="col-md-12 form-group">
+                                    <asp:HiddenField ID="IsCCCEnrolled" runat="server" ClientIDMode="Static" />
+                                    <asp:TextBox runat="server" CssClass="form-control input-sm" ID="NationalId" ClientIDMode="Static" data-parsley-length="[7,8]" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-3"></div>
+                
+                <div class="panel panel-info">
+                    <div class="panel-body">
+                        <div class="col-md-12">
+                            <div class="col-md-5">
+                                <div class="col-md-12"><label class="required control-label pull-left">Enrollment Date </label></div>
+                            
+                                <div class="col-md-12 form-group">
+                                    <div class='input-group date' id='DateOfEnrollmentdatepicker'>
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                        <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="DateOfEnrollment" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-12">
+                            <div class="col-md-5">
+                                <div class="col-xs-12"><label class="required control-label pull-left" for="entrypoint">Entry Point</label></div>
+                            
+                                <div class="col-md-12 form-group">
+                                    <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="entryPoint" ClientIDMode="Static" data-parsley-required="true" data-parsley-min="1" data-parsley-min-message="Please select Entry Point"/>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-5" id="OtherSpecificEntryPoint">
+                                <div class="col-xs-12"><label class="control-label pull-left" for="otherentrypoint">Specify Other Entry Point</label></div>
+                            
+                                <div class="col-md-12 form-group">
+                                    <asp:TextBox runat="server" CssClass="form-control input-sm" ID="SpecificEntryPoint" ClientIDMode="Static"/>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-12">
+                            <div class="col-md-5">
+                                <div class="col-md-12"><label class="required pull-left control-label">Enrollment Identifier</label></div>
+                                <div class="col-md-12 form-group">
+                                    <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="IdentifierTypeId" ClientIDMode="Static" data-parsley-required="true" data-parsley-min="1" data-parsley-min-message="Please select Identifier"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="col-md-12">
+                            <asp:Panel ID="placeholder" runat="server"></asp:Panel>
+                        </div>            
+                    </div>
+                </div>
             </div>
-         
+        </div>
+        
+    <div class="col-md-12">
+        &nbsp;
+    </div>
+
+    <div class="col-md-12">
+        <div class="col-md-3"></div>
+        <div class="col-md-7">
+                <div class="col-md-4">
+                    <asp:LinkButton runat="server" ID="btnEnroll" CssClass="btn btn-info btn-lg fa fa-plus-circle" ClientIDMode="Static" OnClientClick="return false;"> Enroll and Continue </asp:LinkButton>
+                </div>
+            <div class="col-md-4">
+                    <asp:LinkButton runat="server" ID="btnRese" CssClass="btn btn-warning btn-lg fa fa-refresh" ClientIDMode="Static" OnClientClick="return false;"> Enroll and Register New</asp:LinkButton>
+                </div>
+            <div class="col-md-4">
+                    <asp:LinkButton runat="server" ID="btnClose" CssClass="btn btn-danger btn-lg fa fa-times" ClientIDMode="Static" OnClientClick="return false;"> Close Enrollemnt</asp:LinkButton>
+                </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
              
     </div>
     
-    <!-- Modal -->
-    <div id="patientEnrollmentUpdateModal" class="modal fade" role="dialog" data-parsley-validate="true" data-show-errors="true">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header bg-info">
-                    <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
-                    <h4 class="modal-title">Update Enrollment</h4>
-
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-
-                        <div class="col-md-12 form-group">
-                            <div class="col-md-3">
-                                <label class="control-label pull-left">Service Name:</label></div>
-                            <div class="col-md-6">
-                                <asp:Label ID="lblServiceName" runat="server"></asp:Label>
-                            </div>
-                        </div>
-
-                        <div class="col-md-12 form-group">
-                            <div class="col-md-3">
-                                <label class="control-label pull-left">MFL CODE:</label>
-                            </div>
-                            
-                            <div class="col-md-6">
-                                <label class="control-label pull-left">Enrollment No#:</label>
-                            </div>
-                        </div>
-
-                        <div class="col-md-12 form-group">
-                            <div class="col-md-3">
-                                <asp:TextBox ID="updateMflCode" runat="server" CssClass="pull-left form-control" ClientIDMode="Static" data-parsley-required="true" data-parsley-length="[5,5]"></asp:TextBox>
-                            </div>
-
-                            <div class="col-md-6">
-                                <asp:TextBox ID="updateEnrollmentNo" runat="server" CssClass="pull-left form-control" ClientIDMode="Static" data-parsley-required="true" data-parsley-length="[5,5]"></asp:TextBox>
-                            </div>
-
-                        </div>
-
-                        <div class="col-md-12 form-group">
-                            <div class="col-md-3">
-                                <label class="control-label pull-left">Enrollment Date:</label></div>
-                            <div class="col-md-6">
-                                <div class="datepicker fuelux form-group" id="UpDateEnrollmentDate">
-                                    <div class="input-group">
-                                        <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="UpdatedEnrollmentDate" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>        
-                                        <%-- <input ClientIDMode="Static" class="form-control input-sm" runat="server" id="DateOfBirth" type="date" />--%>
-                                        <div class="input-group-btn">
-                                            <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
-                                                <span class="glyphicon glyphicon-calendar"></span>
-                                                <span class="sr-only">Toggle Calendar</span>
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-right datepicker-calendar-wrapper" role="menu">
-                                                <div class="datepicker-calendar">
-                                                    <div class="datepicker-calendar-header">
-                                                        <button type="button" class="prev"><span class="glyphicon glyphicon-chevron-left input-sm"></span><span class="sr-only">Previous Month</span></button>
-                                                        <button type="button" class="next"><span class="glyphicon glyphicon-chevron-right input-sm"></span><span class="sr-only">Next Month</span></button>
-                                                        <button type="button" class="title" data-month="11" data-year="2014">
-                                                            <span class="month">
-                                                                <span data-month="0">January</span>
-                                                                <span data-month="1">February</span>
-                                                                <span data-month="2">March</span>
-                                                                <span data-month="3">April</span>
-                                                                <span data-month="4">May</span>
-                                                                <span data-month="5">June</span>
-                                                                <span data-month="6">July</span>
-                                                                <span data-month="7">August</span>
-                                                                <span data-month="8">September</span>
-                                                                <span data-month="9">October</span>
-                                                                <span data-month="10">November</span>
-                                                                <span data-month="11" class="current">December</span>
-                                                            </span> <span class="year">2014</span>
-                                                        </button>
-                                                    </div>
-                                                    <table class="datepicker-calendar-days">
-                                                        <thead>
-                                                        <tr>
-                                                            <th>Su</th>
-                                                            <th>Mo</th>
-                                                            <th>Tu</th>
-                                                            <th>We</th>
-                                                            <th>Th</th>
-                                                            <th>Fr</th>
-                                                            <th>Sa</th>
-                                                        </tr>
-                                                        </thead>
-                                                        <tbody></tbody>
-                                                    </table>
-                                                    <div class="datepicker-calendar-footer">
-                                                        <button type="button" class="datepicker-today">Today</button>
-                                                    </div>
-                                                </div>
-                                                <div class="datepicker-wheels" aria-hidden="true">
-                                                    <div class="datepicker-wheels-month">
-                                                        <h2 class="header">Month</h2>
-                                                        <ul>
-                                                            <li data-month="0"><button type="button">Jan</button></li>
-                                                            <li data-month="1"><button type="button">Feb</button></li>
-                                                            <li data-month="2"><button type="button">Mar</button></li>
-                                                            <li data-month="3"><button type="button">Apr</button></li>
-                                                            <li data-month="4"><button type="button">May</button></li>
-                                                            <li data-month="5"><button type="button">Jun</button></li>
-                                                            <li data-month="6"><button type="button">Jul</button></li>
-                                                            <li data-month="7"><button type="button">Aug</button></li>
-                                                            <li data-month="8"><button type="button">Sep</button></li>
-                                                            <li data-month="9"><button type="button">Oct</button></li>
-                                                            <li data-month="10"><button type="button">Nov</button></li>
-                                                            <li data-month="11"><button type="button">Dec</button></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="datepicker-wheels-year">
-                                                        <h2 class="header">Year</h2>
-                                                        <ul></ul>
-                                                    </div>
-                                                    <div class="datepicker-wheels-footer clearfix">
-                                                        <button type="button" class="btn datepicker-wheels-back"><span class="glyphicon glyphicon-arrow-left"></span><span class="sr-only">Return to Calendar</span></button>
-                                                        <button type="button" class="btn datepicker-wheels-select">Select <span class="sr-only">Month and Year</span></button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <div class="col-md-12 form-group">
-
-                        <div class="col-md-6">
-                            <button type="button" id="btnSaveEnrollmentUpdate" class="btn btn-default" onclientclick="return false;">Save</button>
-                        </div>
-
-                        <div class="col-md-6">
-                            <button type="button" id="btnCancelEnrollmentUpdate" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
-
-                    </div>
-
-
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
+    <style type="text/css">
+        .chosen-container-single {
+            width: 100% !important;
+        }
+    </style>
     
     <script type="text/javascript">
         $(document).ready(function () {
+            $('#PersonDOBdatepicker').datetimepicker({
+                format: 'DD-MMM-YYYY'
+            });
+
+            $('#DateOfEnrollmentdatepicker').datetimepicker({
+                format: 'DD-MMM-YYYY'
+            });
 
             $("#OtherSpecificEntryPoint").hide();
             $("#IsCCCEnrolled").val("");
-            
+
+            var code = "<%=Session["AppPosID"]%>";
 
             $("#entryPoint").change(function () {
                 $(this).find(":selected").text();
@@ -480,36 +150,15 @@
                 }
             });
 
-            $('#EnrollmentDate').datepicker({
-                date:null,
-                allowPastDates: true,
-                momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
-            });
-
-            $("#DateOfBirth").datepicker({
-                date: null,
-                allowPastDates: true,
-                momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
-            });
-
-            $("#UpDateEnrollmentDate").datepicker({
-                date: null,
-                allowPastDates: true,
-                momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
-            });
-
-            var identifierList = new Array();
-            var enrollmentNoList = new Array();
-
             
             var personDOB = '<%=Session["PersonDob"]%>';
             var nationalId = '<%=Session["NationalId"]%>';
             var patientType = '<%=Session["PatientType"]%>';
-            
+            console.log(patientType);
             if (personDOB != null && personDOB !="") {
                 $("#DateOfBirth").addClass("noneevents");
                 personDOB = new Date(personDOB);
-                $('#DateOfBirth').datepicker('setDate', moment(personDOB.toISOString()).format('DD-MMM-YYYY'));
+                $('#PersonDOB').val(moment(personDOB.toISOString()).format('DD-MMM-YYYY'));
             }
 
             if (nationalId != null && nationalId != "") {
@@ -519,28 +168,6 @@
             if (patientType != null && patientType != "") {
                 $("#PatientType").val(patientType);
             }
-            
-
-            /*.. Load the list of identifiers */
-            $.ajax({
-                type: "POST",
-                url: "../WebService/LookupService.asmx/GetLookUpItemByName",
-                data: "{'itemName':'PatientIdentifier'}",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (response) {
-                    var itemList = JSON.parse(response.d);
-                    $("#<%=IdentifierTypeId.ClientID%>").find('option').remove().end();
-                    $("#<%=IdentifierTypeId.ClientID%>").append('<option value="0">Select</option>');
-                    $.each(itemList, function (index, itemList) {
-                        $("#<%=IdentifierTypeId.ClientID%>").append('<option value="' + itemList.ItemId + '">' + itemList.ItemDisplayName + '</option>');
-                    }); 
-                },
-                error: function (msg) {
-                    alert(msg);
-                }
-            });
-
 
             $.ajax({
                 type: "POST",
@@ -562,129 +189,16 @@
                 }
             });
 
-            getPatientEnrollments();
-
             $("#btnClose").click(function () {
                 window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientHome.aspx")%>';
             });
 
+            $("#btnRese").click(function (e) {
+                var enrollmentDate = $('#DateOfEnrollment').val();
+                var personDateOfBirth = $("#PersonDOB").val();
 
-
-            $("#btnAdd").click(function (e) {
-
-                if (!$('#enrollmentTab').parsley().validate()) {
-                    console.log("there");
-                    return false;
-                } else {
-
-                    console.log("here");
-
-                    var identifierCount = 0;
-                    var identifierFound = 0;
-                    var enrollmentNoFound = 0;
-
-                    var enrollmentDate = $('#EnrollmentDate').datepicker('getDate');
-                    var identifierId = $("#<%=IdentifierTypeId.ClientID%>").find(':selected').val();
-                    var identifier = $("#<%=IdentifierTypeId.ClientID%>").find(":selected").text();
-                    var enrollmentNo = $("#<%=IdentifierValue.ClientID%>").val();
-                    var mflcode = $("#txtAppPosID").val();
-                    
-
-                    if (identifier == "CCC Registration Number" && (enrollmentNo.length < 5 || enrollmentNo.length > 5)) {
-                        toastr.error("error", "Enrollment number should be Five Characters");
-                        return false;
-                    }
-
-                    if (identifier == "CCC Registration Number" && (mflcode == "" || mflcode==null)) {
-                        toastr.error("error", "MFL CODE should not be blank");
-                        return false;
-                    }
-
-                    //if (identifier == "CCC Registration Number" && (mflcode.length < 5 || mflcode.length > 5)) {
-                    //    toastr.error("error", "MFL CODE should be Five Characters");
-                    //    return false;
-                    //}
-
-                    if (identifier == "CCC Registration Number") {
-                        enrollmentNo = mflcode + "-" + enrollmentNo;
-                    }
-
-                    if (moment('' + enrollmentDate.toISOString() + '').isAfter()) {
-                        toastr.error("Future dates not allowed during the patient enrollment process.","Patient Enrollment");
-                        return false;
-                    }
-
-                    if (!moment('' + enrollmentDate.toISOString() + '').isValid()) {
-                        toastr.error("error", "Please select an enrollment date");
-                        return false;
-                    }
-
-                    if (identifierId < 1) {
-                        toastr.error("error", "Please select at least One(1) Identifier Type from the List");
-                        return false;
-                    }
-                    
-
-                    identifierFound = $.inArray("" + identifier + "", identifierList);
-                    enrollmentNoFound = $.inArray("" + enrollmentNo + "", enrollmentNoList);
-
-                    console.log(enrollmentNoList); 
-
-                    if (identifierFound > -1) {
-
-                        toastr.error("error", identifier + " Identifier already exists in the List");
-                        return false; // message box herer
-                    } else {
-
-                        identifierList.push("" + identifier + "");
-                        enrollmentNoList.push("" + enrollmentNo + "");
-                        var tr = "<tr><td align='left'></td><td align='left'>" +
-                            identifier +
-                            "</td><td style='display:none;' align='left'>" +
-                            identifierId +
-                            "</td><td align='left'>" +
-                            enrollmentNo +
-                            "</td><td align='right'><button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button></td></tr>";
-                        $("#tblEnrollment>tbody:first").append('' + tr + '');
-
-                        resetElements();
-                    }
-
-                    e.preventDefault();
-                }
-            });
-
-            function resetElements(parameters) {
-                $("#IdentifierTypeId").val("");
-                $("#IdentifierValue").val("");
-            }
-
-            $("#tblEnrollment").on('click', '.btnDelete', function () {
-                $(this).closest('tr').remove();
-                var x = $(this).closest('tr').find('td').eq(0).html();
-
-                identifierList.splice($.inArray(x, identifierList), 1);
-                enrollmentNoList.splice($.inArray(x, enrollmentNoList), 1);
-            });
-
-            $("#btnRese").click(function(e) {
-                var _fp = [];
-                var data = $('#tblEnrollment tr').each(function (row, tr) {
-                    _fp[row] = {
-                        "enrollmentIdentifier": $(tr).find('td:eq(1)').text()
-                     , "identifierId": $(tr).find('td:eq(2)').text()
-                     , "enrollmentNo": $(tr).find('td:eq(3)').text()
-                    }
-                });
-                _fp.shift();//first row will be empty -so remove
-
-                var cccRegNumber = $.inArray("CCC Registration Number", identifierList);
-                var isCCCenrolled = $("#IsCCCEnrolled").val();
-                //console.log(cccRegNumber);
-                //console.log(isCCCenrolled);
-
-                var enrollmentDate = $('#EnrollmentDate').datepicker('getDate');
-                var personDateOfBirth = $("#DateOfBirth").datepicker('getDate');
+                //console.log(personDateOfBirth);
+                //console.log(enrollmentDate);
 
                 var isEnrollmentDateBeforeDob = moment(moment(enrollmentDate).format('DD-MMM-YYYY')).isBefore(moment(personDateOfBirth).format('DD-MMM-YYYY'));
 
@@ -693,91 +207,63 @@
                     return false;
                 }
 
+                var entryPointId = $("#entryPoint").val();
+                var nationalId = $("#NationalId").val();
+                var patientType = $("#PatientType").val();
+                var mflCode = $('#ctl00_IQCareContentPlaceHolder_txtmfl_code').val();
+                if (mflCode == '' || mflCode == null) {
+                    mflCode = code;
+                }
+                var dobPrecision = '<%=Session["DobPrecision"]%>';
 
-                if (cccRegNumber == -1 && isCCCenrolled!="CCC") {
-                    toastr.error("error", "You have not listed CCC Registraion Number as an identifier.");
-                    return false;
+                if (nationalId == null || nationalId == '') {
+                    nationalId = 99999999;
                 }
 
-                if ($.isEmptyObject(_fp)) {
-                    toastr.error("error", "You have not added any identifiers");
-                    return false;
-                } else if ($("#entryPoint").val() == 0) {
-                    toastr.error("error", "You have not selected an entry point");
-                    return false;
-                } else {
-                    var entryPointId = $("#entryPoint").val();
-                    var enrollmentDate = $('#EnrollmentDate').datepicker('getDate');
-                    var personDateOfBirth = $("#DateOfBirth").datepicker('getDate');
-                    var nationalId = $("#NationalId").val();
-                    var patientType = $("#PatientType").val();
-                    var mflCode = $('#txtAppPosID').val();
-                    var dobPrecision = '<%=Session["DobPrecision"]%>';
-
-                    if (nationalId == null || nationalId == '') {
-                        nationalId = 99999999;
-                    }
-
-                    addPatientRegister(_fp, entryPointId, moment(enrollmentDate).format('DD-MMM-YYYY'), moment(personDateOfBirth).format('DD-MMM-YYYY'), nationalId, patientType, mflCode, dobPrecision);
-                }
+                    //addPatientRegister(_fp, entryPointId, moment(enrollmentDate).format('DD-MMM-YYYY'), moment(personDateOfBirth).format('DD-MMM-YYYY'), nationalId, patientType, mflCode, dobPrecision);
             });
 
 
             $("#btnEnroll").click(function (e) {
-                var _fp = [];
-                var data = $('#tblEnrollment tr').each(function (row, tr) {
-                    _fp[row] = {
-                        "enrollmentIdentifier": $(tr).find('td:eq(1)').text()
-                     , "identifierId": $(tr).find('td:eq(2)').text()
-                     , "enrollmentNo": $(tr).find('td:eq(3)').text()
-                    }
-                });
-                _fp.shift();//first row will be empty -so remove
+                if (!$('#enrollmentTab').parsley().validate()) {
+                    return false;
+                }
 
+                var enrollmentDate = $('#DateOfEnrollment').val();
+                var personDateOfBirth = $("#PersonDOB").val();
 
-                var cccRegNumber = $.inArray("CCC Registration Number", identifierList);
-                var isCCCenrolled = $("#IsCCCEnrolled").val();
-                var enrollmentDate = $('#EnrollmentDate').datepicker('getDate');
-                var personDateOfBirth = $("#DateOfBirth").datepicker('getDate');
+                //console.log(moment(enrollmentDate).format('DD-MMM-YYYY'));
+                //console.log(personDateOfBirth);
 
-                //console.log(cccRegNumber);
-                //console.log(isCCCenrolled);
-                var isEnrollmentDateBeforeDob = moment(moment(enrollmentDate).format('DD-MMM-YYYY')).isBefore(moment(personDateOfBirth).format('DD-MMM-YYYY'));
+                var entryPointId = $("#entryPoint").val();
+
+                var isEnrollmentDateBeforeDob = moment(moment(moment(enrollmentDate, 'DD-MMM-YYYYY').toDate()).format('DD-MMM-YYYY')).isBefore(moment(moment(personDateOfBirth, 'DD-MMM-YYYYY').toDate()).format('DD-MMM-YYYY'));
 
                 if (isEnrollmentDateBeforeDob) {
                     toastr.error("Enrollment Date should not be before date of birth", "Patient Enrollment");
                     return false;
                 }
+                
+                var nationalId = $("#NationalId").val();
+                var patientType = $("#PatientType").val();
+                var dobPrecision = '<%=Session["DobPrecision"]%>';
+                var identifierTypeId = $("#IdentifierTypeId").val();
 
-                if (cccRegNumber == -1 && isCCCenrolled != "CCC") {
-                    toastr.error("error", "You have not listed CCC Registraion Number as an identifier.");
-                    return false;
+                if (nationalId == null || nationalId == '') {
+                    nationalId = 99999999;
                 }
 
-                if ($.isEmptyObject(_fp)) {
-                    toastr.error("error", "You have not added any identifiers");
-                    return false;
-                } else if ($("#entryPoint").val() == 0) {
-                    toastr.error("error", "You have not selected an entry point");
-                    return false;
-                } else {
-                    var entryPointId = $("#entryPoint").val();
-                    var enrollmentDate = $('#EnrollmentDate').datepicker('getDate');
-                    var personDateOfBirth = $("#DateOfBirth").datepicker('getDate');
-                    var nationalId = $("#NationalId").val();
-                    var patientType = $("#PatientType").val();
-                    var mflCode = $('#txtAppPosID').val();
-                    var dobPrecision = '<%=Session["DobPrecision"]%>';
-
-                    if (nationalId == null || nationalId == '') {
-                        nationalId = 99999999;
-                    }
-
-                    console.log(_fp);
-                    addPatient(_fp, entryPointId, moment(enrollmentDate).format('DD-MMM-YYYY'), moment(personDateOfBirth).format('DD-MMM-YYYY'), nationalId, patientType, mflCode, dobPrecision);
+                var mfl_code = $("#ctl00_IQCareContentPlaceHolder_txtmfl_code").val();
+                var enrollment_no = $("#ctl00_IQCareContentPlaceHolder_txtCCCNumber").val();
+                
+                //console.log(mfl_code);
+                //console.log(enrollment_no);
+                //var x = identifierTypeId, string enrollmentNo
+                if (mfl_code != "" && mfl_code != null) {
+                    enrollment_no = mfl_code + "-" + enrollment_no;
                 }
 
-                //addPatient(_fp);
+                addPatient(entryPointId, enrollmentDate, personDateOfBirth, nationalId, patientType, mfl_code, dobPrecision, identifierTypeId, enrollment_no);
             });
 
             function addPatientRegister(_fp, entryPointId, enrollmentDate, personDateOfBirth, nationalId, patientType, mflCode, dobPrecision) {
@@ -808,15 +294,19 @@
                 });
             }
 
-            function addPatient(_fp, entryPointId, enrollmentDate, personDateOfBirth, nationalId, patientType, mflCode, dobPrecision) {
-                var enrollments = JSON.stringify(_fp);
-
-                console.log(enrollments);
+            function addPatient(entryPointId, enrollmentDate, personDateOfBirth, nationalId, patientType, mflCode, dobPrecision, identifierTypeId, enrollment_no) {
+                console.log(entryPointId);
+                console.log(enrollmentDate);
+                console.log(personDateOfBirth);
+                console.log(nationalId);
+                console.log(patientType);
+                console.log(mflCode);
+                console.log(dobPrecision);
 
                 $.ajax({
                     type: "POST",
                     url: "../WebService/EnrollmentService.asmx/AddPatient",
-                    data: "{'facilityId':'" + mflCode + "','enrollment': '" + enrollments + "','entryPointId': '" + entryPointId + "','enrollmentDate':'" + enrollmentDate + "','personDateOfBirth':'" + personDateOfBirth + "', 'nationalId':'" + nationalId + "','patientType':'" + patientType + "','dobPrecision':'" + dobPrecision + "'}",
+                    data: "{'facilityId':'" + mflCode + "','entryPointId': '" + entryPointId + "','enrollmentDate':'" + enrollmentDate + "','personDateOfBirth':'" + personDateOfBirth + "', 'nationalId':'" + nationalId + "','patientType':'" + patientType + "','dobPrecision':'" + dobPrecision + "','identifierTypeId':'" + identifierTypeId + "','enrollmentNo':'" + enrollment_no + "'}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
@@ -840,112 +330,7 @@
                 });
             }
 
-            function getPatientEnrollments() {
-                $.ajax(
-                {
-                    type: "POST",
-                    url: "../WebService/EnrollmentService.asmx/GetPatientEnrollments",
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    cache: false,
-                    success: function (response) {
-                        console.log(response.d);
-                        //$("#tblCareEnded > tbody").empty();
-                        //$('#patientEnrollments tr:not(:first)').remove();
-                        console.log(response.d);
-                        var itemList = response.d;
-                        var table = '';
-                        itemList.forEach(function (item, i) {
-                            n = i + 1;
-                            if (item.PatientId) {
-                                table += '<tr><td style="text-align: left">' + item.ServiceArea + '</td><td style="text-align:left">' + item.EnrollmentNumber + '</td><td style="text-align: left">' + moment(item.EnrollmentDate).format('DD-MMM-YYYY') + '</td><td style="text-align: left">' + item.PatientStatus + '</td><td><button type="button" class="btn btn-info btn-sm pull-left fa fa-cog" data-toggle="modal" data-target="#patientEnrollmentUpdateModal">Update Enrollment</button></td></tr>';
-                                if (item.ServiceArea == "CCC Registration Number") {
-                                    $("#IsCCCEnrolled").val("CCC");
-                                }
-                                $("#<%=lblServiceName.ClientID%>").text(item.ServiceArea);
-                                console.log(item.EnrollmentNumber.split("-"));
-                                var mfl_code = item.EnrollmentNumber.split("-")[0];
-                                var enrollment_no = item.EnrollmentNumber.split("-")[1];
-
-                                $("#<%=updateMflCode.ClientID%>").val(mfl_code);
-                                $("#<%=updateEnrollmentNo.ClientID%>").val(enrollment_no);
-                                $('#UpDateEnrollmentDate').datepicker('setDate', moment(item.EnrollmentDate).format('DD-MMM-YYYY'));
-                            }
-                                
-                        });
-
-                        if (table != '') {
-                            $('#patientEnrollments tr:not(:first)').remove();
-                            $('#patientEnrollments').append(table);
-                        }
-                    },
-
-                    error: function (xhr, errorType, exception) {
-                        var jsonError = jQuery.parseJSON(xhr.responseText);
-                        toastr.error("" + xhr.status + "" + jsonError.Message + " ");
-                        return false;
-                    }
-                });
-            }
-
-            $("#IdentifierTypeId").change(function() {
-                if ($("#<%=IdentifierTypeId.ClientID%>").find(":selected").text() == "CCC Registration Number") {
-                    $("#AppPosID").show();
-                    if ('<%=patType%>' == "Transit" || '<%=patType%>' == "Transfer-In") {
-                        $('#txtAppPosID').val("");
-                        $('#txtAppPosID').removeAttr('readonly');
-                    } else {
-                        $('#txtAppPosID').attr('readonly');
-                    }
-                    
-                } else {
-                    $("#AppPosID").css("display", 'none');
-                }
-            });
-
-            $("#btnSaveEnrollmentUpdate").click(function() {
-                if (!$('#patientEnrollmentUpdateModal').parsley().validate()) {
-                    return false;
-                }
-
-                var enrollment_no = $("#<%=updateEnrollmentNo.ClientID%>").val();
-                var mfl_code = $("#<%=updateMflCode.ClientID%>").val();
-
-                var enrollmentNo = mfl_code + "-" + enrollment_no;
-
-                var enrollment_date = moment($('#UpDateEnrollmentDate').datepicker('getDate')).format('DD-MMM-YYYY');
-                var service_name = document.getElementById("<%=lblServiceName.ClientID %>").innerHTML;
-
-                console.log(enrollmentNo);
-                console.log(enrollment_date);
-                console.log(service_name);
-
-                $.ajax({
-                    type: "POST",
-                    url: "../WebService/EnrollmentService.asmx/UpdatePatientEnrollment",
-                    data: "{'enrollmentNo':'" + enrollmentNo + "', 'enrollmentDate':'" + enrollment_date + "', 'serviceName':'" + service_name + "'}",
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
-                        console.log(response.d);
-                        var messageResponse = JSON.parse(response.d);
-
-                        if (messageResponse.errorcode == 1) {
-                            toastr.error(messageResponse.msg, "Update Enrollment");
-                            return false;
-                        } else {
-                            toastr.success(messageResponse.msg, "Update Enrollment");
-                            $("#patientEnrollmentUpdateModal").modal('hide');
-                            getPatientEnrollments();
-                            return false;
-                        }
-                    },
-                    error: function (response) {
-                        toastr.error(response.d, "Error Updating Enrollment");
-                    }
-                });
-            });
-
+            $('#ctl00_IQCareContentPlaceHolder_txtmfl_code').chosen();
         });
     </script>
 

@@ -19,7 +19,6 @@ namespace IQCare.CCC.UILogic.Baseline
         private readonly IPersonManager _personManager = (IPersonManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPersonManager, BusinessProcess.CCC");
         private readonly IPersonRelationshipManager _personRelationshipManager = (IPersonRelationshipManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPersonRelationshipManager, BusinessProcess.CCC");
         PersonLookUpManager personLookUp = new PersonLookUpManager();
-        Utility _utility = new Utility();
 
         public int AddPatientFamilyTestings(PatientFamilyTesting p, int userId)
         {
