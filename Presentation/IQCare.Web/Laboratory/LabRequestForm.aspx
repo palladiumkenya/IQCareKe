@@ -72,10 +72,12 @@
 
         #divwidth {
             width: 400px !important;
+            text-align: left;
         }
 
             #divwidth div {
                 width: 400px !important;
+                text-align: left;
             }
     </style>
     <div class="row" style="padding: 8px;">
@@ -99,16 +101,16 @@
                     </asp:UpdatePanel>
                     <asp:UpdatePanel ID="divTestComponent" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
-                            <div class="border pad5" id="divSelectLab" style="display: <%= sEdit %>">
+                            <div class="pad5" id="divSelectLab" style="display: <%= sEdit %>">
                                 <%-- <table cellspacing="6" cellpadding="0" style="margin-top: 10px" width="100%" border="0">
                             <tbody>
                                 <tr>
                                     <td colspan="2" style=" padding-bottom:20px" align="left">--%>
                                 <div class="col-md-12">
-                                    <label class="reuired control-label pull-left" style="margin-left: 10px">Select Lab:</label>
-                                    <asp:TextBox ID="textSelectLab" CssClass="form-control" runat="server" AutoPostBack="true" Width="50%"
-                                        AutoComplete="off" Font-Names="Courier New" OnTextChanged="LabNameChanged" Font-Size="Medium"></asp:TextBox>
-                                    <div id="divwidth" style="width: 63%">
+                                    <div class="col-md-2"><label class="reuired control-label pull-left" style="margin-left: 10px">Select Lab:</label></div>
+                                    <div class="col-md-10"><asp:TextBox ID="textSelectLab" CssClass="form-control" runat="server" AutoPostBack="true" Width="50%"
+                                        AutoComplete="off" Font-Names="Courier New" OnTextChanged="LabNameChanged" Font-Size="Medium"></asp:TextBox></div>
+                                    <div id="divwidth" style="width: 100%">
                                     </div>
                                     <ajaxToolkit:AutoCompleteExtender ServiceMethod="Searchlab" MinimumPrefixLength="2"
                                         CompletionInterval="30" EnableCaching="false" CompletionSetCount="10" TargetControlID="textSelectLab"
@@ -152,9 +154,10 @@
                                 </tr>
                                 <tr style="display: <%= sDataEntry %>">
                                     <td colspan="2">--%>
+                             
                                 <div class="col-md-12" style="display: <%= sDataEntry %>">
-                                    <label class="required pull-left control-label" style="margin-left: 10px" for="txtTestNotes">Description:</label>
-                                    <asp:TextBox ID="txtTestNotes" runat="server" CssClass="form-control" MaxLength="255" Width="50%"></asp:TextBox>
+                                    <div class="col-md-2"><label class="pull-left control-label" style="margin-left: 10px" for="txtTestNotes">Description:</label></div>
+                                    <div class="col-md-10"><asp:TextBox ID="txtTestNotes" runat="server" CssClass="form-control" MaxLength="255" Width="50%"></asp:TextBox></div>
                                 </div>
                                 <%-- </td>
                                 </tr>--%>
@@ -178,11 +181,12 @@
                             <asp:AsyncPostBackTrigger ControlID="textSelectLab" EventName="TextChanged" />
                         </Triggers>
                     </asp:UpdatePanel>
+                    <hr />
                     <asp:UpdatePanel ID="divGridComponent" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
                             <div class="whitebg border pad5" id="pnllabtest" style="overflow: auto; min-height: 200px">
                                 <div class="grid">
-                                    <div class="rounded">
+                                    <div >
                                         <div class="mid-outer">
                                             <div class="mid-inner">
                                                 <div class="mid" style="height: 200px; overflow: auto">
