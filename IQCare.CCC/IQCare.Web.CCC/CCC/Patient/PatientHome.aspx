@@ -1724,19 +1724,38 @@
             var feb_height = "";
             var mar_height = "";
             var apr_height = "";
-            var may_height = "";           
+            var may_height = ""; 
+            var jun_height = "";
+            var jul_height = "";
+            var aug_height = "";
+            var sep_height = "";
+            var oct_height = "";
+            var nov_height = "";
+            var dec_height = "";
             var jan_weight = "";
             var feb_weight = "";
             var mar_weight = "";
             var apr_weight = "";
-            var may_weight = "";            
+            var may_weight = "";
+            var jun_weight = "";
+            var jul_weight = "";
+            var aug_weight = "";
+            var sep_weight = "";
+            var oct_weight = "";
+            var nov_weight = "";
+            var dec_weight = "";
             var jan_BMI = "";
             var feb_BMI = "";
             var mar_BMI = "";
             var apr_BMI = "";
             var may_BMI = "";
             var jun_BMI = "";
-            var jul_BMI = "";           
+            var jul_BMI = "";  
+            var aug_BMI = "";
+            var sep_BMI = "";
+            var oct_BMI = "";
+            var nov_BMI = "";
+            var dec_BMI = "";
 
             window.onload = function() {
 
@@ -1914,8 +1933,50 @@
                                 may_weight = item.Weight;
                                 may_BMI = item.BMI;
                                 
-                            }
+                            
+                        } else if (item.Month === 6) {
 
+                            jun_height = item.Height;
+                            jun_weight = item.Weight;
+                            jun_BMI = item.BMI;
+                                
+                        }else if (item.Month === 7) {
+
+                            jul_height = item.Height;
+                            jul_weight = item.Weight;
+                            jul_BMI = item.BMI;
+                                
+                        }else if (item.Month === 8) {
+
+                            aug_height = item.Height;
+                            aug_weight = item.Weight;
+                            aug_BMI = item.BMI;
+                                
+                        }else if (item.Month === 9) {
+
+                            sep_height = item.Height;
+                            sep_weight = item.Weight;
+                            sep_BMI = item.BMI;
+                                
+                        }else if (item.Month === 10) {
+
+                            oct_height = item.Height;
+                            oct_weight = item.Weight;
+                            oct_BMI = item.BMI;
+                                
+                        }else if (item.Month === 11) {
+
+                            nov_height = item.Height;
+                            nov_weight = item.Weight;
+                            nov_BMI = item.BMI;
+                                
+                        }else if (item.Month === 12) {
+
+                            dec_height = item.Height;
+                            dec_weight = item.Weight;
+                            dec_BMI = item.BMI;
+                                
+                        }
 
                         });
 
@@ -1964,15 +2025,15 @@
                     series: [
                         {
                             name: 'Height',
-                            data: [jan_height, feb_height, mar_height, apr_height, may_height, "", "", "", "", "", "", ""]
+                            data: [jan_height, feb_height, mar_height, apr_height, may_height, jun_height, jul_height, aug_height, sep_height, oct_height, nov_height, dec_height]
                         },
                         {
                             name: 'Weight',
-                            data: [jan_weight, feb_weight, mar_weight, apr_weight, may_weight, "", "", "", "", "", "", ""]
+                            data: [jan_weight, feb_weight, mar_weight, apr_weight, may_weight, jun_weight, jul_weight, aug_weight, sep_weight, oct_weight, nov_weight, dec_weight]
                         },
                         {
                             name: 'BMI',
-                            data: [jan_BMI, feb_BMI, mar_BMI, apr_BMI, may_BMI, "", "","", "", "", "", ""]
+                            data: [jan_BMI, feb_BMI, mar_BMI, apr_BMI, may_BMI, jun_BMI, jul_BMI, aug_BMI, sep_BMI, oct_BMI, nov_BMI, dec_BMI]
                         }
                     ]
                 });

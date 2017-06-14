@@ -736,7 +736,7 @@
                                 }
 
                             }
-
+                            location.reload();
                         },
                         error: function(xhr, errorType, exception) {
                             var jsonError = jQuery.parseJSON(xhr.responseText);
