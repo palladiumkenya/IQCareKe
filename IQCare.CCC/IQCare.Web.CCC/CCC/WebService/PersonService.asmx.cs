@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
@@ -14,6 +15,7 @@ using Application.Common;
 using Entities.CCC.Lookup;
 using IQCare.CCC.UILogic.Enrollment;
 using Microsoft.JScript;
+using Newtonsoft.Json;
 using Convert = System.Convert;
 
 namespace IQCare.Web.CCC.WebService
@@ -59,7 +61,7 @@ namespace IQCare.Web.CCC.WebService
         public string tsMiddleName { get; internal set; }
         public string population { get; internal set; }
         public int populationTypeId { get; internal set; }
-        public int PopulationCategoryId { get; internal set; }
+        public int[] PopulationCategoryId { get; internal set; }
         public string PopulationCategoryString { get; set; }
         public int GuardianId { get; set; }
         public int PatientTreatmentSupporterId { get; set; }
@@ -672,7 +674,7 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true )]
-        public string AddPersonPopulation(int personId, string populationtypeId,int populationCategory,int userId, string patientId)
+        public string AddPersonPopulation(int personId, string populationtypeId, string populationCategory,int userId, string patientId)
         {
             try
             {
@@ -689,24 +691,34 @@ namespace IQCare.Web.CCC.WebService
                     PersonId = patient.PersonId;
                 }
 
+                var popCatgs = JsonConvert.DeserializeObject<IEnumerable<object>>(populationCategory);
+
                 var personPoulation = new PatientPopulationManager();
                 var population = personPoulation.GetCurrentPatientPopulations(PersonId);
                 if (population.Count > 0)
                 {
-                    population[0].PopulationCategory = populationCategory;
-                    population[0].PopulationType = populationtypeId;
-
-                    personPoulation.UpdatePatientPopulation(population[0]);
-
+                    personPoulation.ResetPatientPopulation(PersonId);
+                    foreach (var catg in popCatgs)
+                    {
+                        Result = personPoulation.AddPatientPopulation(PersonId, populationtypeId, Convert.ToInt32(catg.ToString()), userId);
+                        if (Result > 0)
+                        {
+                            Msg += "<p>Person Population Status Recorded Successfully!</p>";
+                        }
+                    }
+                    
                     Msg += "<p>Person Population Edited Successfully.</p>";
 
                 }
                 else
                 {
-                    Result = personPoulation.AddPatientPopulation(PersonId, populationtypeId, populationCategory, userId);
-                    if (Result > 0)
+                    foreach (var catg in popCatgs)
                     {
-                        Msg += "<p>Person Population Status Recorded Successfully!</p>";
+                        Result = personPoulation.AddPatientPopulation(PersonId, populationtypeId, Convert.ToInt32(catg.ToString()), userId);
+                        if (Result > 0)
+                        {
+                            Msg += "<p>Person Population Status Recorded Successfully!</p>";
+                        }
                     }
                 }
             }
@@ -886,8 +898,13 @@ namespace IQCare.Web.CCC.WebService
                     //Key Population
                     if (keyPopulation.Count > 0)
                     {
+                        patientDetails.PopulationCategoryId = new int[keyPopulation.Count];
+                        for (int i = 0; i < keyPopulation.Count; i++)
+                        {
+                            patientDetails.PopulationCategoryId[i] = keyPopulation[i].PopulationCategory;
+                        }
                         patientDetails.population = keyPopulation[0].PopulationType;
-                        patientDetails.PopulationCategoryId = keyPopulation[0].PopulationCategory;
+                        //patientDetails.PopulationCategoryId = keyPopulation[0].PopulationCategory;
                         patientDetails.PopulationCategoryString =
                             LookupLogic.GetLookupNameById(keyPopulation[0].PopulationCategory);
 
@@ -899,7 +916,7 @@ namespace IQCare.Web.CCC.WebService
                             {
                                 patientDetails.populationTypeId = items[0].ItemId;
                             }
-                            
+
                         }
                         else
                         {

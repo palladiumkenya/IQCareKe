@@ -57,7 +57,7 @@ namespace IQCare.Web.CCC.WebService
                         population[0].PopulationCategory = keyPop;
                         population[0].PopulationType = bioPatientPopulation;
 
-                        personPoulation.UpdatePatientPopulation(population[0]);
+                        //personPoulation.UpdatePatientPopulation(population[0]);
 
                         msg += "<p>Person Population Edited Successfully.</p>";
 

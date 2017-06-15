@@ -230,7 +230,7 @@ namespace IQCare.Web.CCC.WebService
                                 patientEnrollmentId, identifierTypeId, enrollmentNo);
                             if (greencardptnpk.Count == 0)
                             {
-                                mstPatientLogic.AddOrdVisit(ptn_Pk, facilityId, DateTime.Now, patientIdentifierId,
+                                mstPatientLogic.AddOrdVisit(ptn_Pk, facilityId, DateTime.Now, 110,
                                     userId, DateTime.Now, 203);
                             }
                                 

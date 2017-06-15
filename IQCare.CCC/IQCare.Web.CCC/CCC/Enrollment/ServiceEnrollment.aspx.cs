@@ -79,7 +79,7 @@ namespace IQCare.Web.CCC.Enrollment
                             thePrefixNumberText.ID = "txt" + PrefixType;
                             thePrefixNumberText.CssClass = "chosen-select form-control input-sm";
                             thePrefixNumberText.Width = 180;
-                            //thePrefixNumberText.MaxLength = 50;
+                            
                             thePrefixNumberText.Attributes.Add("data-parsley-min", "1");
                             thePrefixNumberText.Attributes.Add("data-parsley-min-message", "Please select a facility");
 
@@ -90,7 +90,7 @@ namespace IQCare.Web.CCC.Enrollment
                             {
                                 thePrefixNumberText.Items.Add(new ListItem(k.Name, k.MFLCode.ToString()));
                             }
-
+                            thePrefixNumberText.SelectedValue = Session["AppPosID"].ToString();
                             placeholder.Controls.Add(thePrefixNumberText);
                             //BindTextboxes(FieldName);
                             //theNumberText.Attributes.Add("onKeyup", "chkNumeric('" + theNumberText.ClientID + "')");
@@ -121,61 +121,6 @@ namespace IQCare.Web.CCC.Enrollment
                         placeholder.Controls.Add(new LiteralControl("</td>"));
                         placeholder.Controls.Add(new LiteralControl("</tr>"));
                         placeholder.Controls.Add(new LiteralControl("</table>"));
-
-                        //if (!String.IsNullOrWhiteSpace(PrefixType))
-                        //{
-                        //    HtmlGenericControl labelDiv = new HtmlGenericControl("div");
-                        //    labelDiv.Attributes.Add("class", "col-md-12");
-
-                        //    Label lbprefixname = new Label();
-                        //    lbprefixname.ID = "lb" + PrefixType;
-                        //    lbprefixname.Text = PrefixType;
-                        //    lbprefixname.CssClass = "pull-left";
-
-                        //    labelDiv.Controls.Add(lbprefixname);
-                        //    prefixDiv.Controls.Add(labelDiv);
-
-
-                        //    HtmlGenericControl labelPrefixDataDiv = new HtmlGenericControl("div");
-                        //    labelPrefixDataDiv.Attributes.Add("class", "col-md-12 form-group");
-
-                        //    TextBox txtprefixbox = new TextBox();
-                        //    txtprefixbox.ID = "txt" + PrefixType;
-                        //    txtprefixbox.Attributes.Add("data-parsley-required", "true");
-                        //    txtprefixbox.CssClass = "form-control input-sm";
-                        //    labelPrefixDataDiv.Controls.Add(txtprefixbox);
-                        //    prefixDiv.Controls.Add(labelPrefixDataDiv);
-
-                        //    placeholder.Controls.Add(prefixDiv);
-                        //}
-
-                        //HtmlGenericControl labelDataDiv = new HtmlGenericControl("div");
-                        //labelDataDiv.Attributes.Add("class", "col-md-12");
-
-                        //Label lbcustomename = new Label();
-                        //lbcustomename.ID = "lb" + FieldName;
-                        //lbcustomename.Text = FieldName;
-                        //lbcustomename.CssClass = "pull-left";
-
-                        //labelDataDiv.Controls.Add(lbcustomename);
-                        //dataDiv.Controls.Add(labelDataDiv);
-
-                        //HtmlGenericControl labelNumericDataDiv = new HtmlGenericControl("div");
-                        //labelNumericDataDiv.Attributes.Add("class", "col-md-12 form-group");
-
-                        //TextBox txtcustombox = new TextBox();
-                        //txtcustombox.ID = "txt" + FieldName;
-                        //txtcustombox.Text = FieldValue;
-                        //txtcustombox.CssClass = "form-control input-sm";
-                        //txtcustombox.Attributes.Add("data-parsley-type", "digits");
-                        //if (bool.Parse(Required))
-                        //{
-                        //    txtcustombox.Attributes.Add("data-parsley-required", "true");
-                        //}
-
-                        //labelNumericDataDiv.Controls.Add(txtcustombox);
-                        //dataDiv.Controls.Add(labelNumericDataDiv);
-                        //placeholder.Controls.Add(dataDiv);
                     }
                 }
             }
