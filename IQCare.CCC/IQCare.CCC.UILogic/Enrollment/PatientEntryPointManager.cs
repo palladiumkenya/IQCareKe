@@ -37,6 +37,18 @@ namespace IQCare.CCC.UILogic.Enrollment
             }
         }
 
+        public int UpdatePatientEntryPoint(PatientEntryPoint patientEntryPoint)
+        {
+            try
+            {
+                return _mgr.UpdatePatientEntryPoint(patientEntryPoint);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
         public List<PatientEntryPoint> GetPatientEntryPoints(int patientId)
         {
             try

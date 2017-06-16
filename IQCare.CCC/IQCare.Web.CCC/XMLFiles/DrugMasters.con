@@ -9526,7 +9526,7 @@
   <Mst_Drug>
     <Drug_PK>1166</Drug_PK>
     <DrugId>0</DrugId>
-    <DrugName>Tenofovir DF-TDF300/FTC200/EFV600 300mg/200mg/600mg</DrugName>
+    <DrugName>Tenofovir DF-TDF300/3TC200/EFV600 300mg/200mg/600mg</DrugName>
     <DeleteFlag>false</DeleteFlag>
   </Mst_Drug>
   <Mst_Drug>
@@ -9930,7 +9930,7 @@
   <Mst_Generic>
     <GenericId>22</GenericId>
     <GenericName>Atazanavir</GenericName>
-    <GenericAbbrevation>ATR</GenericAbbrevation>
+    <GenericAbbrevation>ATV</GenericAbbrevation>
   </Mst_Generic>
   <Mst_Generic>
     <GenericId>23</GenericId>
@@ -10568,7 +10568,7 @@
   <Mst_Generic>
     <GenericId>182</GenericId>
     <GenericName>Lopinavir/Ritonavir</GenericName>
-    <GenericAbbrevation>LOPr</GenericAbbrevation>
+    <GenericAbbrevation>LOP/r</GenericAbbrevation>
   </Mst_Generic>
   <Mst_Generic>
     <GenericId>183</GenericId>
@@ -11713,37 +11713,30 @@
   <Mst_Generic>
     <GenericId>478</GenericId>
     <GenericName>Diphtheria and tetanus toxoid with whole cell pert</GenericName>
-    <GenericAbbrevation />
   </Mst_Generic>
   <Mst_Generic>
     <GenericId>479</GenericId>
     <GenericName>Measles Vaccine</GenericName>
-    <GenericAbbrevation />
   </Mst_Generic>
   <Mst_Generic>
     <GenericId>480</GenericId>
     <GenericName>Yellow fever vaccine</GenericName>
-    <GenericAbbrevation />
   </Mst_Generic>
   <Mst_Generic>
     <GenericId>481</GenericId>
     <GenericName>Diph and TT whole cell pertussis Hib and HepB vacc</GenericName>
-    <GenericAbbrevation />
   </Mst_Generic>
   <Mst_Generic>
     <GenericId>482</GenericId>
     <GenericName>Human Papillomavirus vaccine</GenericName>
-    <GenericAbbrevation />
   </Mst_Generic>
   <Mst_Generic>
     <GenericId>483</GenericId>
     <GenericName>Pneumococcal conjugate vaccine</GenericName>
-    <GenericAbbrevation />
   </Mst_Generic>
   <Mst_Generic>
     <GenericId>484</GenericId>
     <GenericName>Rabies vaccine</GenericName>
-    <GenericAbbrevation />
   </Mst_Generic>
   <Mst_Generic>
     <GenericId>485</GenericId>
@@ -12169,6 +12162,11 @@
     <GenericId>590</GenericId>
     <GenericName>Darunavir</GenericName>
     <GenericAbbrevation>DRV</GenericAbbrevation>
+  </Mst_Generic>
+  <Mst_Generic>
+    <GenericId>591</GenericId>
+    <GenericName>Atazanavir/Ritonavir</GenericName>
+    <GenericAbbrevation>ATV/r</GenericAbbrevation>
   </Mst_Generic>
   <Mst_DrugType>
     <DrugTypeId>1</DrugTypeId>

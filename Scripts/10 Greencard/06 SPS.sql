@@ -3448,8 +3448,8 @@ BEGIN
     
 		--Insert into Treatment Supporter
 		DECLARE Treatment_Supporter_cursor CURSOR FOR
-		SELECT SUBSTRING(TreatmentSupporterName,0,charindex(',',TreatmentSupporterName))as firstname ,
-		SUBSTRING(TreatmentSupporterName,charindex(',',TreatmentSupporterName) + 1,len(TreatmentSupporterName)+1)as lastname,
+		SELECT SUBSTRING(TreatmentSupporterName,0,charindex(' ',TreatmentSupporterName))as firstname ,
+		SUBSTRING(TreatmentSupporterName,charindex(' ',TreatmentSupporterName) + 1,len(TreatmentSupporterName)+1)as lastname,
 		TreatmentSupportTelNumber, CreateDate, UserID
 		from dtl_PatientContacts WHERE ptn_pk = @ptn_pk;
 

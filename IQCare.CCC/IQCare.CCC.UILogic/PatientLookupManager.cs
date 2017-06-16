@@ -19,6 +19,17 @@ namespace IQCare.CCC.UILogic
             return patientDetails;
         }
 
+        public int GetPatientSexId(int patientId)
+        {
+            try
+            {
+                return _patientLookupmanager.GetPatientSexId(patientId);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
 
         public List<PatientLookup> GetPatientSearchListPayload()
         {

@@ -698,12 +698,16 @@ namespace IQCare.Web.CCC.WebService
                 if (population.Count > 0)
                 {
                     personPoulation.ResetPatientPopulation(PersonId);
-                    foreach (var catg in popCatgs)
+                    int count = popCatgs.Count();
+                    if (count > 0)
                     {
-                        Result = personPoulation.AddPatientPopulation(PersonId, populationtypeId, Convert.ToInt32(catg.ToString()), userId);
-                        if (Result > 0)
+                        foreach (var catg in popCatgs)
                         {
-                            Msg += "<p>Person Population Status Recorded Successfully!</p>";
+                            Result = personPoulation.AddPatientPopulation(PersonId, populationtypeId, Convert.ToInt32(catg.ToString()), userId);
+                            if (Result > 0)
+                            {
+                                Msg += "<p>Person Population Status Recorded Successfully!</p>";
+                            }
                         }
                     }
                     
@@ -712,14 +716,18 @@ namespace IQCare.Web.CCC.WebService
                 }
                 else
                 {
-                    foreach (var catg in popCatgs)
+                    int count = popCatgs.Count();
+                    if (count > 0)
                     {
-                        Result = personPoulation.AddPatientPopulation(PersonId, populationtypeId, Convert.ToInt32(catg.ToString()), userId);
-                        if (Result > 0)
+                        foreach (var catg in popCatgs)
                         {
-                            Msg += "<p>Person Population Status Recorded Successfully!</p>";
+                            Result = personPoulation.AddPatientPopulation(PersonId, populationtypeId, Convert.ToInt32(catg.ToString()), userId);
+                            if (Result > 0)
+                            {
+                                Msg += "<p>Person Population Status Recorded Successfully!</p>";
+                            }
                         }
-                    }
+                    }                    
                 }
             }
             catch (SoapException e)
@@ -902,11 +910,21 @@ namespace IQCare.Web.CCC.WebService
                         for (int i = 0; i < keyPopulation.Count; i++)
                         {
                             patientDetails.PopulationCategoryId[i] = keyPopulation[i].PopulationCategory;
+                            if (patientDetails.PopulationCategoryString == null)
+                            {
+                                patientDetails.PopulationCategoryString =
+                                    LookupLogic.GetLookupNameById(keyPopulation[i].PopulationCategory);
+                            }
+                            else
+                            {
+                                patientDetails.PopulationCategoryString +=
+                                    " , " + LookupLogic.GetLookupNameById(keyPopulation[i].PopulationCategory);
+                            }
+                            
                         }
                         patientDetails.population = keyPopulation[0].PopulationType;
                         //patientDetails.PopulationCategoryId = keyPopulation[0].PopulationCategory;
-                        patientDetails.PopulationCategoryString =
-                            LookupLogic.GetLookupNameById(keyPopulation[0].PopulationCategory);
+                        
 
                         if (keyPopulation[0].PopulationType == "General Population")
                         {

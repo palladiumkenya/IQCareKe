@@ -50,6 +50,12 @@ namespace IQCare.CCC.UILogic.Enrollment
             return _mgr.GetPatientEntityIdentifiers(patientId, patientEnrollmentId, identifierTypeId);
         }
 
+        public List<PatientEntityIdentifier> GetEntityIdentifiersByPatientIdEnrollmentId(int patientId,
+            int patientEnrollmentId)
+        {
+            return _mgr.GetEntityIdentifiersByPatientIdEnrollmentId(patientId, patientEnrollmentId);
+        }
+
         public List<PatientEntityIdentifier> CheckIfIdentifierNumberIsUsed(string identifierValue, int identifierTypeId)
         {
             try
@@ -73,6 +79,11 @@ namespace IQCare.CCC.UILogic.Enrollment
             {
                 throw new Exception(e.Message);
             }
+        }
+
+        public List<PatientEntityIdentifier> GetAllPatientEntityIdentifiers(int patientId)
+        {
+            return _mgr.GetAllPatientEntityIdentifiers(patientId);
         }
     }
 }

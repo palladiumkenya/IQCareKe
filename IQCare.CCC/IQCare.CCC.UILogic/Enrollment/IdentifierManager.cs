@@ -38,5 +38,10 @@ namespace IQCare.CCC.UILogic.Enrollment
                 throw new Exception(e.Message);
             }
         }
+
+        public Identifier GetIdentifierByCode(string code)
+        {
+            return mgr.GetIdentifierByCode(code);
+        }
     }
 }

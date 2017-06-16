@@ -115393,20 +115393,11 @@
   <Mst_Facility>
     <FacilityName>Wamunyu Health Centre</FacilityName>
     <FacilityID>755</FacilityID>
-    <PosID>12841</PosID>
+    <PosID>841</PosID>
     <DeleteFlag>0</DeleteFlag>
     <SatelliteID>0</SatelliteID>
     <SystemID>1</SystemID>
-    <FacilityAddress>254</FacilityAddress>
-    <FacilityTel>09</FacilityTel>
-    <FacilityCell />
-    <FacilityFax />
-    <FacilityEmail />
-    <FacilityURL />
-    <FacilityFooter />
     <FacilityTemplate>0</FacilityTemplate>
-    <FacilityLogo>Wamunyu Health Centre.jpg</FacilityLogo>
-    <StrongPassFlag>0</StrongPassFlag>
   </Mst_Facility>
   <Mst_Facility>
     <FacilityName>mwala D/H</FacilityName>
@@ -117599,6 +117590,11 @@
   <Mst_Module>
     <ModuleID>6</ModuleID>
     <ModuleName>TB</ModuleName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Module>
+  <Mst_Module>
+    <ModuleID>30</ModuleID>
+    <ModuleName>PM/SCM With Same point dispense</ModuleName>
     <DeleteFlag>false</DeleteFlag>
   </Mst_Module>
   <Mst_Module>

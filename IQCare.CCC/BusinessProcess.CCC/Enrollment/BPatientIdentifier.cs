@@ -63,6 +63,29 @@ namespace BusinessProcess.CCC.Enrollment
             }
         }
 
+        public List<PatientEntityIdentifier> GetEntityIdentifiersByPatientIdEnrollmentId(int patientId,
+            int patientEnrollmentId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var identifierList = unitOfWork.PatientIdentifierRepository
+                    .FindBy(x => x.PatientId == patientId && x.PatientEnrollmentId == patientEnrollmentId).ToList();
+                unitOfWork.Dispose();
+                return identifierList;
+            }
+        }
+
+        public List<PatientEntityIdentifier> GetAllPatientEntityIdentifiers(int patientId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var identifierList = unitOfWork.PatientIdentifierRepository
+                    .FindBy(x => x.PatientId == patientId).ToList();
+                unitOfWork.Dispose();
+                return identifierList;
+            }
+        }
+
         public List<PatientEntityIdentifier> CheckIfIdentifierNumberIsUsed(string identifierValue, int identifierTypeId)
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))

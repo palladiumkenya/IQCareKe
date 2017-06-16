@@ -77,14 +77,14 @@
                             </div>
                         </div>
                         
-                        <div class="col-md-12">
+                       <%-- <div class="col-md-12">
                             <div class="col-md-5">
                                 <div class="col-md-12"><label class="required pull-left control-label">Enrollment Identifier</label></div>
                                 <div class="col-md-12 form-group">
                                     <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="IdentifierTypeId" ClientIDMode="Static" data-parsley-required="true" data-parsley-min="1" data-parsley-min-message="Please select Identifier"/>
                                 </div>
                             </div>
-                        </div>
+                        </div>--%>
                     </div>
                 </div>
                 
@@ -194,35 +194,46 @@
             });
 
             $("#btnRese").click(function (e) {
+                if (!$('#enrollmentTab').parsley().validate()) {
+                    return false;
+                }
+
                 var enrollmentDate = $('#DateOfEnrollment').val();
                 var personDateOfBirth = $("#PersonDOB").val();
 
-                //console.log(personDateOfBirth);
-                //console.log(enrollmentDate);
+                var entryPointId = $("#entryPoint").val();
 
-                var isEnrollmentDateBeforeDob = moment(moment(enrollmentDate).format('DD-MMM-YYYY')).isBefore(moment(personDateOfBirth).format('DD-MMM-YYYY'));
+                var isEnrollmentDateBeforeDob = moment(moment(moment(enrollmentDate, 'DD-MMM-YYYYY').toDate()).format('DD-MMM-YYYY')).isBefore(moment(moment(personDateOfBirth, 'DD-MMM-YYYYY').toDate()).format('DD-MMM-YYYY'));
 
                 if (isEnrollmentDateBeforeDob) {
                     toastr.error("Enrollment Date should not be before date of birth", "Patient Enrollment");
                     return false;
                 }
 
-                var entryPointId = $("#entryPoint").val();
                 var nationalId = $("#NationalId").val();
                 var patientType = $("#PatientType").val();
-                var mflCode = $('#ctl00_IQCareContentPlaceHolder_txtmfl_code').val();
-                if (mflCode == '' || mflCode == null) {
-                    mflCode = code;
-                }
                 var dobPrecision = '<%=Session["DobPrecision"]%>';
 
                 if (nationalId == null || nationalId == '') {
                     nationalId = 99999999;
                 }
 
-                    //addPatientRegister(_fp, entryPointId, moment(enrollmentDate).format('DD-MMM-YYYY'), moment(personDateOfBirth).format('DD-MMM-YYYY'), nationalId, patientType, mflCode, dobPrecision);
-            });
+                var fields = getDynamicFields();
+                var prefix = null;
+                var mflCode = code;
+                var fieldName = null;
+                var identifiers = {};
+                $.each(fields, function (index, value) {
+                    fieldName = $("#" + value.Code).val();
+                    if (value.Prefix != null) {
+                        prefix = $("#" + value.Prefix).val();
+                        fieldName = prefix + "-" + fieldName;
+                    }
+                    identifiers[value.ID] = fieldName;
+                });
 
+                addPatientRegister(entryPointId, enrollmentDate, personDateOfBirth, nationalId, patientType, mflCode, dobPrecision, JSON.stringify(identifiers));
+            });
 
             $("#btnEnroll").click(function (e) {
                 if (!$('#enrollmentTab').parsley().validate()) {
@@ -231,9 +242,6 @@
 
                 var enrollmentDate = $('#DateOfEnrollment').val();
                 var personDateOfBirth = $("#PersonDOB").val();
-
-                //console.log(moment(enrollmentDate).format('DD-MMM-YYYY'));
-                //console.log(personDateOfBirth);
 
                 var entryPointId = $("#entryPoint").val();
 
@@ -247,32 +255,33 @@
                 var nationalId = $("#NationalId").val();
                 var patientType = $("#PatientType").val();
                 var dobPrecision = '<%=Session["DobPrecision"]%>';
-                var identifierTypeId = $("#IdentifierTypeId").val();
 
                 if (nationalId == null || nationalId == '') {
                     nationalId = 99999999;
                 }
 
-                var mfl_code = $("#ctl00_IQCareContentPlaceHolder_txtmfl_code").val();
-                var enrollment_no = $("#ctl00_IQCareContentPlaceHolder_txtCCCNumber").val();
-                
-                //console.log(mfl_code);
-                //console.log(enrollment_no);
-                //var x = identifierTypeId, string enrollmentNo
-                if (mfl_code != "" && mfl_code != null) {
-                    enrollment_no = mfl_code + "-" + enrollment_no;
-                }
+                var fields = getDynamicFields();
+                var prefix = null;
+                var mflCode = code;
+                var fieldName = null;
+                var identifiers = {};
+                $.each(fields, function (index, value) {
+                    fieldName = $("#" + value.Code).val();
+                    if (value.Prefix != null) {
+                        prefix = $("#" + value.Prefix).val();
+                        fieldName = prefix + "-" + fieldName;
+                    }
+                    identifiers[value.ID] = fieldName;
+                });
 
-                addPatient(entryPointId, enrollmentDate, personDateOfBirth, nationalId, patientType, mfl_code, dobPrecision, identifierTypeId, enrollment_no);
+                addPatient(entryPointId, enrollmentDate, personDateOfBirth, nationalId, patientType, mflCode, dobPrecision, JSON.stringify(identifiers));
             });
 
-            function addPatientRegister(_fp, entryPointId, enrollmentDate, personDateOfBirth, nationalId, patientType, mflCode, dobPrecision) {
-                var enrollments = JSON.stringify(_fp);
-
+            function addPatientRegister(entryPointId, enrollmentDate, personDateOfBirth, nationalId, patientType, mflCode, dobPrecision, identifiers) {
                 $.ajax({
                     type: "POST",
                     url: "../WebService/EnrollmentService.asmx/AddPatient",
-                    data: "{'facilityId':'" + mflCode + "','enrollment': '" + enrollments + "','entryPointId': '" + entryPointId + "','enrollmentDate':'" + enrollmentDate + "','personDateOfBirth':'" + personDateOfBirth + "', 'nationalId':'" + nationalId + "','patientType':'" + patientType + "','dobPrecision':'" + dobPrecision + "'}",
+                    data: "{'facilityId':'" + mflCode + "','entryPointId': '" + entryPointId + "','enrollmentDate':'" + enrollmentDate + "','personDateOfBirth':'" + personDateOfBirth + "', 'nationalId':'" + nationalId + "','patientType':'" + patientType + "','dobPrecision':'" + dobPrecision + "','identifiersList':'" + identifiers + "'}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
@@ -294,19 +303,12 @@
                 });
             }
 
-            function addPatient(entryPointId, enrollmentDate, personDateOfBirth, nationalId, patientType, mflCode, dobPrecision, identifierTypeId, enrollment_no) {
-                console.log(entryPointId);
-                console.log(enrollmentDate);
-                console.log(personDateOfBirth);
-                console.log(nationalId);
-                console.log(patientType);
-                console.log(mflCode);
-                console.log(dobPrecision);
+            function addPatient(entryPointId, enrollmentDate, personDateOfBirth, nationalId, patientType, mflCode, dobPrecision, identifiers) {
 
                 $.ajax({
                     type: "POST",
                     url: "../WebService/EnrollmentService.asmx/AddPatient",
-                    data: "{'facilityId':'" + mflCode + "','entryPointId': '" + entryPointId + "','enrollmentDate':'" + enrollmentDate + "','personDateOfBirth':'" + personDateOfBirth + "', 'nationalId':'" + nationalId + "','patientType':'" + patientType + "','dobPrecision':'" + dobPrecision + "','identifierTypeId':'" + identifierTypeId + "','enrollmentNo':'" + enrollment_no + "'}",
+                    data: "{'facilityId':'" + mflCode + "','entryPointId': '" + entryPointId + "','enrollmentDate':'" + enrollmentDate + "','personDateOfBirth':'" + personDateOfBirth + "', 'nationalId':'" + nationalId + "','patientType':'" + patientType + "','dobPrecision':'" + dobPrecision + "','identifiersList':'" + identifiers + "'}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
@@ -330,7 +332,204 @@
                 });
             }
 
-            $('#ctl00_IQCareContentPlaceHolder_txtmfl_code').chosen();
+            $('#ctl00_IQCareContentPlaceHolder_mfl_code').chosen();
+
+            
+            $.when(createDynamicElements()).then(function () {
+                setTimeout(function() {
+                    $.when(getFacilitiesList()).then(function() {
+                        getPatientEnrollmentDetails();
+                    });
+                },3000);
+            });
+
+            function getDynamicFields() {
+                var result = "";
+                $.ajax({
+                    type: "POST",
+                    url: "../WebService/EnrollmentService.asmx/GetDynamicFields",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: false,
+                    success: function (response) {
+                        //generate('success', '<p>,</p>' + response.d);
+                        var messageResponse = JSON.parse(response.d);
+                        result = messageResponse;
+                    },
+                    error: function (xhr, errorType, exception) {
+                        var jsonError = jQuery.parseJSON(xhr.responseText);
+                        toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);
+                        return false;
+                    }
+                });
+
+                return result;
+            }
+
+            function createDynamicElements() {
+                $.ajax({
+                    type: "POST",
+                    url: "../WebService/EnrollmentService.asmx/GetDynamicFields",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        //generate('success', '<p>,</p>' + response.d);
+                        var messageResponse = JSON.parse(response.d);
+                        //console.log(messageResponse);
+                        var table = "<table width='100%'>";
+                        for (var i = 0; i < messageResponse.length; i++) {
+                            console.log(messageResponse[i]);
+                            table += "<tr>";
+
+                            table += "<td>";
+                            table += "<label align='center'>Identifier :</label>";
+                            table += "</td>";
+
+                            table += "<td>";
+                            table += "<select disabled id=" + messageResponse[i].ID + " class='form-control'><option value=" + messageResponse[i].ID + ">" + messageResponse[i].IdentifierName + "</option></select>";
+                            table += "</td>";
+
+                            if (messageResponse[i].Prefix != null) {
+                                table += "<td>";
+                                table += "<label align='center'>" + messageResponse[i].Prefix + " :</label>";
+                                table += "</td>";
+
+
+                                if (messageResponse[i].Required == true) {
+                                    table += "<td>";
+                                    if (messageResponse[i].Prefix == "mfl_code") {
+                                        table += "<select id=" + messageResponse[i].Prefix + " class='form-control' data-parsley-required='true'></select>";
+                                    } else {
+                                        table += "<input type='text' id=" + messageResponse[i].Prefix + " class='form-control' data-parsley-required='true' data-parsley-type='digits' />";
+                                    }                                 
+                                    table += "</td>";
+                                } else {
+                                    table += "<td>";
+                                    if (messageResponse[i].Prefix == "mfl_code") {
+                                        table += "<select id=" + messageResponse[i].Prefix + " class='form-control'></select>";
+                                    } else {
+                                        table += "<input type='text' id=" + messageResponse[i].Prefix + " class='form-control' data-parsley-type='digits' />  ";
+                                    }                                   
+                                    table += "</td>";
+                                }
+
+                            }
+
+                            table += "<td>";
+                            table += "<label align='center'>" + messageResponse[i].Label + " :</label>";
+                            table += "</td>";
+
+                            if (messageResponse[i].DataType == "Numeric") {
+                                table += "<td>";
+                                if (messageResponse[i].Required == true) {
+                                    table += "<input type='text' id=" + messageResponse[i].Code + " class='form-control' data-parsley-type='digits' data-parsley-required='true' data-parsley-length='[5, 5]' />";
+                                } else {
+                                    table += "<input type='text' id=" + messageResponse[i].Code + " class='form-control' data-parsley-type='digits' data-parsley-length='[5, 5]' />";
+                                }
+                                
+                                table += "</td>";
+                            } else if (messageResponse[i].DataType == "") {
+                                
+                            }
+
+
+                            table += "</tr>";
+                            table += "<tr><td>&nbsp;</td></tr>";
+                        }
+                        table += "</table>";
+
+                        $("#ctl00_IQCareContentPlaceHolder_placeholder").append(table);
+                    },
+                    error: function (xhr, errorType, exception) {
+                        //var jsonError = jQuery.parseJSON(xhr.responseText);
+                        //toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);
+                        //return false;
+                    }
+                });
+            }
+
+            function getFacilitiesList() {
+                $.ajax({
+                    type: "GET",
+                    url: "../WebService/EnrollmentService.asmx/GetFacilitiesList",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        //generate('success', '<p>,</p>' + response.d);
+                        var messageResponse = JSON.parse(response.d);
+
+                        $('#mfl_code').append($('<option></option>'));
+
+                        $.each(messageResponse, function (index, value) {
+                            $('#mfl_code').append($('<option>', {
+                                value: value.MFLCode,
+                                text: value.Name
+                            }));
+                            //console.log(index + ": " + value);
+                        });
+
+                        $("#mfl_code").select2({
+                            placeholder: "Select Facility"
+                        });
+                        $("#mfl_code").val(code).trigger("change");
+                        console.log(code);
+                    },
+                    error: function (xhr, errorType, exception) {
+                        var jsonError = jQuery.parseJSON(xhr.responseText);
+                        toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);
+                        return false;
+                    }
+                });
+            }
+
+            function getPatientEnrollmentDetails() {
+                $.ajax({
+                    type: "POST",
+                    url: "../WebService/EnrollmentService.asmx/GetPatientEnrollmentDetails",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        //generate('success', '<p>,</p>' + response.d);
+                        var messageResponse = JSON.parse(response.d);
+
+                        //console.log(messageResponse);
+                        if (messageResponse.DOB != null)
+                            $("#PersonDOB").val(messageResponse.DOB);
+                        if (messageResponse.NationalId)
+                            $("#NationalId").val(messageResponse.NationalId);
+                        if (messageResponse.EnrollmentDate != null)
+                            $("#DateOfEnrollment").val(messageResponse.EnrollmentDate);
+                        if (messageResponse.EntryPointIdUnknown == false) {
+                            $("#entryPoint").val(messageResponse.EntryPointId);
+                        }
+
+                        var fields = getDynamicFields();
+                        $.each(fields, function (index, value) {
+                            $.each(messageResponse.IndentifiersList, function (key, val) {
+                                if (val.Code == value.Code) {
+                                    if (value.Prefix != null) {
+                                        //console.log(value.Prefix);
+                                        //console.log(val);
+                                        $("#" + value.Prefix).val(val.PrefixType).trigger("change");
+                                    }
+                                    $("#" + value.Code).val(val.DataType);
+                                }
+                            });
+                            
+                            //console.log(value);
+                        });
+                        //console.log(fields);
+                        //$("#IdentifierTypeId").val(messageResponse.IndentifierId);
+                        //$("#mfl_code").val(messageResponse.Prefix);
+                        //$("#CCCNumber").val(messageResponse.EnrollmentValue);
+                    },
+                    error: function (xhr, errorType, exception) {
+                        var jsonError = jQuery.parseJSON(xhr.responseText);
+                        toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);
+                        return false;
+                    }
+                });
+            }
         });
     </script>
 
