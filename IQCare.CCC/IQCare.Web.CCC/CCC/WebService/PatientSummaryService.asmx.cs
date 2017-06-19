@@ -57,13 +57,24 @@ namespace IQCare.Web.CCC.WebService
                 {
                     if (population.Count > 0)
                     {
-                        personPoulation.ResetPatientPopulation(personId);
-                        foreach (var catg in popCatgs)
+                        if (bioPatientPopulation == "General Population")
                         {
-                            int Result = personPoulation.AddPatientPopulation(personId, bioPatientPopulation, Convert.ToInt32(catg.ToString()), userId);
+                            int Result = personPoulation.AddPatientPopulation(personId, bioPatientPopulation, 0, userId);
                             if (Result > 0)
                             {
                                 msg += "<p>Person Population Status Recorded Successfully!</p>";
+                            }
+                        }
+                        else
+                        {
+                            personPoulation.ResetPatientPopulation(personId);
+                            foreach (var catg in popCatgs)
+                            {
+                                int Result = personPoulation.AddPatientPopulation(personId, bioPatientPopulation, Convert.ToInt32(catg.ToString()), userId);
+                                if (Result > 0)
+                                {
+                                    msg += "<p>Person Population Status Recorded Successfully!</p>";
+                                }
                             }
                         }
 
@@ -72,12 +83,23 @@ namespace IQCare.Web.CCC.WebService
                     }
                     else
                     {
-                        foreach (var catg in popCatgs)
+                        if (bioPatientPopulation == "General Population")
                         {
-                            int Result = personPoulation.AddPatientPopulation(personId, bioPatientPopulation, Convert.ToInt32(catg.ToString()), userId);
+                            int Result = personPoulation.AddPatientPopulation(personId, bioPatientPopulation, 0, userId);
                             if (Result > 0)
                             {
                                 msg += "<p>Person Population Status Recorded Successfully!</p>";
+                            }
+                        }
+                        else
+                        {
+                            foreach (var catg in popCatgs)
+                            {
+                                int Result = personPoulation.AddPatientPopulation(personId, bioPatientPopulation, Convert.ToInt32(catg.ToString()), userId);
+                                if (Result > 0)
+                                {
+                                    msg += "<p>Person Population Status Recorded Successfully!</p>";
+                                }
                             }
                         }
                     }
