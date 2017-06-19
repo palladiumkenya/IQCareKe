@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucFemaleVitals.ascx.cs" Inherits="IQCare.Web.CCC.UC.ucFemaleVitals" %>
 
-<div class="col-md-12 col-xs-12 col-sm-12 bs-callout bs-callout-primary well well-sm" id="divFemalVitals">
+<div class="col-md-12 col-xs-12 col-sm-12" id="divFemalVitals">
     
    <div class="col-md-12" id="FemaleVitals" data-parsley-validate="true" data-show-errors="true">
 
@@ -355,7 +355,7 @@
                                                         <label class="control-label  pull-left">FP Method</label>
                                                     </div>
                                                     <div class="col-md-12">
-                                                        <asp:ListBox runat="server" ID="fpMethod" ClientIDMode="Static" CssClass="form-control input-sm" SelectionMode="Multiple" />           
+                                                        <asp:DropDownList ID="fpMethod" runat="server" ClientIDMode="Static" CssClass="form-control input-sm select" multiple tabindex="3" Width="300" placeholder="FP Method"></asp:DropDownList>
                                                     </div>
                                                 </div>
 
@@ -546,10 +546,11 @@
             fpId = $("#<%=onFP.ClientID%>").find(":selected").val();
             var fpName = $("#<%=onFP.ClientID%>").find(":selected").text();
             notOnFpId=$("#<%=ddlNoFP.ClientID%>").find(":selected").val();
-            var fpMethod=[];
+            <%--var fpMethod=[];
             $("#<%=fpMethod.ClientID%>:selected").each(function (i, selected) {
                 fpMethod[i] = $(selected).val();
-            });
+            });--%>
+            var fpMethod = $("#fpMethod").val();
 
             
             //$("input:radio[name=ANC]").click(function() {
@@ -619,9 +620,7 @@
             }
 
             function addFamilyPlanningMethod() {
-                
                 $.each(fpMethod, function (index, value) {
-                    alert(value);
                     $.ajax({
 		                type: "POST",
 		                url: "../WebService/FemaleVitalsWebservice.asmx/AddPatientFamilyPlanningMethod",
@@ -735,8 +734,25 @@
                                     addPregnancyIndicator();
                                 }
 
+                                /* save family planning */
+
+                                if (fName !== 'Pregnant(PG)') {
+
+                                    if (fpName === "No Family Planning(NOFP)") {
+                                        addFamilyPlanning();
+                                    } else {
+                                        $.when(addFamilyPlanning()).then(addFamilyPlanningMethod());
+
+                                    }
+                                }
+
+                                /* patient screening*/
+                                $.when(addPatientScreeningcacx()).then(addPatientScreeningSti());
+                                $.when(addPatientScreeningStiNotification()).then(function () {
+                                    $("#FemaleVitals").hide("fast");
+                                });
                             }
-                            location.reload();
+                            //location.reload();
                         },
                         error: function(xhr, errorType, exception) {
                             var jsonError = jQuery.parseJSON(xhr.responseText);
@@ -744,32 +760,17 @@
                         }
                     });
 
-                    /* save family planning */
-
-                    if (fName !== 'Pregnant(PG)') {
-
-                        if (fpName === "No Family Planning(NOFP)") {
-                            addFamilyPlanning();
-                        } else {
-                            $.when(addFamilyPlanning()).then(addFamilyPlanningMethod());
-                           
-                        }
-                    }
-
-                    /* patient screening*/
-                    $.when(addPatientScreeningcacx()).then(addPatientScreeningSti());
-                    $.when(addPatientScreeningStiNotification()).then(function()
-                    {
-                        $("#FemaleVitals").hide("fast");
-                    });
-
         }else{
                         stepError = $('.parsley-error').length === 0;
                                 totalError += stepError;
                                 evt.preventDefault();
              }
-        });/* -- end button */
- 
+            });/* -- end button */
+
+            $("#fpMethod").select2({
+                placeholder: "Select FP Method",
+                allowClear: true
+            });
 
         });
  </script>
