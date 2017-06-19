@@ -22,7 +22,7 @@ namespace BusinessProcess.CCC.Triage
                 _unitOfWork.PatientFamilyPlanningRepository.Add(a);
                 Result= _unitOfWork.Complete();
                 _unitOfWork.Dispose();
-                return Result;
+                return a.Id;
             }
         }
 

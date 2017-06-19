@@ -79,6 +79,8 @@ namespace IQCare.Web.CCC.WebService
 
                 var familyPlanning = new PatientFamilyPlanningManager();
                 result = familyPlanning.AddFamilyPlanningStatus(patientId, patientMasterVisitId,visitDate, FamilyPlanningStatusId, ReasonNoOnFp, Convert.ToInt32(HttpContext.Current.Session["AppUserId"]));
+                if(result>0)
+                    Session["FamilyPlanningStatus"] = result;
                 jsonMessage = (result > 0) ? "Family planning status added successfuly" : "";
 
             }
@@ -98,7 +100,8 @@ namespace IQCare.Web.CCC.WebService
                 patientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientmasterVisitId"]);
 
                 var fpMethod = new PatientFamilyPlanningMethodManager();
-                result = fpMethod.AddFamilyPlanningMethod(patientId,PatientFPId, Convert.ToInt32(HttpContext.Current.Session["AppUserId"]));
+                int familyPlanningStatus = Convert.ToInt32(Session["FamilyPlanningStatus"].ToString());
+                result = fpMethod.AddFamilyPlanningMethod(patientId, familyPlanningStatus, PatientFPId, Convert.ToInt32(HttpContext.Current.Session["AppUserId"]));
                 jsonMessage = (result > 0) ? "family planning status addedd successfully" : "";
             }
             catch (Exception e)

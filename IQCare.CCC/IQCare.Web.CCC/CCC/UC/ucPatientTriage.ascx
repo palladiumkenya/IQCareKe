@@ -1,11 +1,11 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucPatientTriage.ascx.cs" Inherits="IQCare.Web.CCC.UC.ucPatientTriage" %>
 
-<div class="col-md-12 bs-callout bs-callout-primary well well-sm">
+<div class="col-md-12">
 
     <div class="col-md-12" id="vitalsform" data-parsley-validate="true" data-show-errors="true">
         <div class="col-md-12"> <h2 class="text-muted text-Warning pull-left"> Vital Signs | </h2>  <h6> <label class="control-label text-primary pull-left text-muted">Routine Vital Signs Capture</label></h6></div>
 
-         <div class="col-md-12">  <hr style="padding-top:1%" /> </div>
+         <div class="col-md-12">  <hr/> </div>
         
         <div class="col-md-12">
             
@@ -99,8 +99,7 @@
                 
 
         </div><!-- .col-md-12 -->
-        
-        <div class="col-md-12"><div class="col-md-12"><hr/></div></div>
+
         <div class="col-md-12 col-xs-12 col-sm-12 form-group" id="anthropometricMeasurement" data-parsley-validate="true" data-show-errors="true">
             
             <div class="col-md-12">
@@ -242,8 +241,8 @@
         </div>
         
         <div class="col-md-12">
-        <div class="col-md-8"></div>
-        <div class="col-md-4">
+        <div class="col-md-7"></div>
+        <div class="col-md-5">
             <div class="col-md-4 col-xs-12 col-sm-12">
                 <asp:LinkButton runat="server" ID="btnSaveTriage" CssClass="btn btn-info fa fa-plus-circle btn-lg" ClientIDMode="Static" OnClientClick="return false;"> Save Triage </asp:LinkButton>
             </div>
