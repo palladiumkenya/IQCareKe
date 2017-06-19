@@ -182,7 +182,7 @@
                                                     <div class="col-md-3">
                                                         <label class="control-label pull-left">Select if Key.Pop:</label></div>
                                                     <div class="col-md-6">
-                                                        <asp:DropDownList ID="bioPatientKeyPopulation" runat="server" ClientIDMode="Static" CssClass="pull-left form-control"></asp:DropDownList>
+                                                        <asp:DropDownList ID="bioPatientKeyPopulation" runat="server" ClientIDMode="Static" CssClass="pull-left form-control" class="select" multiple tabindex="3" Width="250" placeholder="Select Key Population"></asp:DropDownList>
                                                     </div>
                                                 </div>
 
@@ -1480,6 +1480,10 @@
             var patientType = '<%=PatientType%>';
             var gender = "<%=PatientGender%>";
 
+            $("#bioPatientKeyPopulation").select2({
+                placeholder: "Select Key Population Type",
+                allowClear: true
+            });
             /* populate patient baseline information */
             $.ajax({
                 type: "POST",
@@ -2135,7 +2139,7 @@
                         $("#<%=patMobile.ClientID%>").val(MobileNumber);
                         $("#<%=patEmailAddress.ClientID%>").val(patientDetails.EmailAddress);
                         $("#<%=patAlternativeMobile.ClientID%>").val(patientDetails.AlternativeNumber);
-                        $("#<%=bioPatientKeyPopulation.ClientID%>").val(patientDetails.PopulationCategoryId);
+                        $("#<%=bioPatientKeyPopulation.ClientID%>").val(patientDetails.PopulationCategoryId).trigger("change");
                         $("#<%=Gender.ClientID%>").val(patientDetails.Gender);
                         if (patientDetails.GenderString != null && patientDetails.GenderString != "")
                             $("#<%=lblSexP.ClientID%>").text(patientDetails.GenderString);
@@ -2208,10 +2212,8 @@
                 }
 
                 var sex = $("#<%=Gender.ClientID%>").find('option:selected').text();
-                var optionType = $("#<%=bioPatientKeyPopulation.ClientID%>").find('option:selected').text();
                 var bioPatientPopulation = $("#<%=bioPatientPopulation.ClientID%>").find('option:selected').text();
                 console.log(sex);
-                console.log(optionType);
 
                 if (bioPatientPopulation == "select" && patientType !="Transit") {
                     toastr.error("Select Patient Population Type", "Person Population Error");
@@ -2222,27 +2224,18 @@
                     bioPatientPopulation = "";
                 }
 
-                if (sex === "Male" && optionType==="Female Sex Worker") {
-                    toastr.error("Cannot select 'Female Sex Worker (FSW)' for a male person", "Person Population Error");
-                    return false;
-                }
-                else if (sex === "Female" && optionType === "Men having Sex with Men") {
-                    toastr.error("Cannot select 'Men having Sex with Men (MSM)' for a female person",
-                        "Person Population Error");
-                    return false;
-                }
-
                 var bioFirstName = escape($("#<%=bioFirstName.ClientID%>").val().trim());
                 var bioMiddleName = escape($("#<%=bioMiddleName.ClientID%>").val().trim());
                 var bioLastName = escape($("#<%=bioLastName.ClientID%>").val().trim());
                 
-                var keyPop = $("#<%=bioPatientKeyPopulation.ClientID%>").val();
+                var keyPop = JSON.stringify($("#<%=bioPatientKeyPopulation.ClientID%>").val());
                 var userId = <%=UserId%>;
 
                 console.log(bioFirstName);
                 console.log(bioMiddleName);
                 console.log(bioLastName);
                 console.log(bioPatientPopulation);
+                console.log(keyPop);
 
                 if (patientId > 0) {
                     updatePatientBio(patientId, bioFirstName, bioMiddleName, bioLastName, userId, bioPatientPopulation, keyPop);

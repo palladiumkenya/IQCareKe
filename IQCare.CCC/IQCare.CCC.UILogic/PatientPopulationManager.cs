@@ -25,7 +25,17 @@ namespace IQCare.CCC.UILogic
 
         public int UpdatePatientPopulation(PatientPopulation patientPopulation)
         {
-            return _result = _mgr.UpdatePatientPopulation(patientPopulation);
+            return _mgr.UpdatePatientPopulation(patientPopulation);
+        }
+
+        public void ResetPatientPopulation(int personId)
+        {
+            var list = _mgr.GetAllPatientPopulations(personId);
+            foreach (var itemPopulation in list)
+            {
+                itemPopulation.DeleteFlag = true;
+                _mgr.UpdatePatientPopulation(itemPopulation);
+            }
         }
 
         public int DeletePatientPopulation(int id)

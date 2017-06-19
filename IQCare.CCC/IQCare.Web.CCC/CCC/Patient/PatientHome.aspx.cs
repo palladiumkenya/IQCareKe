@@ -156,10 +156,24 @@ namespace IQCare.Web.CCC.Patient
                 List<LookupItemView> keyPopList = mgr.GetLookItemByGroup("KeyPopulation");
                 if (keyPopList != null && keyPopList.Count > 0)
                 {
-                    bioPatientKeyPopulation.Items.Add(new ListItem("select", "0"));
+                    var patientLookUp = new PatientLookupManager();
+                    int sex = patientLookUp.GetPatientSexId(Convert.ToInt32(Session["PatientPK"]));
+                    string gender = LookupLogic.GetLookupNameById(sex);
+                    //bioPatientKeyPopulation.Items.Add(new ListItem("select", "0"));
                     foreach (var item in keyPopList)
                     {
-                        bioPatientKeyPopulation.Items.Add(new ListItem(item.ItemDisplayName, item.ItemId.ToString()));
+                        if (gender == "Female" && item.DisplayName == "Men having Sex with Men")
+                        {
+
+                        }
+                        else if (gender == "Male" && item.DisplayName == "Female Sex Worker")
+                        {
+
+                        }
+                        else
+                        {
+                            bioPatientKeyPopulation.Items.Add(new ListItem(item.ItemDisplayName, item.ItemId.ToString()));
+                        }       
                     }
                 }
 

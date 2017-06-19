@@ -34,7 +34,13 @@ namespace BusinessProcess.CCC.Enrollment
 
         public int UpdatePatientEntryPoint(PatientEntryPoint patientEntryPoint)
         {
-            throw new NotImplementedException();
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                unitOfWork.PatientEntryPointRepository.Update(patientEntryPoint);
+                unitOfWork.Complete();
+                unitOfWork.Dispose();
+                return patientEntryPoint.Id;
+            }
         }
 
         public List<PatientEntryPoint> GetPatientEntryPoints(int patientId)
@@ -44,9 +50,7 @@ namespace BusinessProcess.CCC.Enrollment
                 var entryPointList= _unitOfWork.PatientEntryPointRepository.FindBy(x => x.PatientId == patientId && !x.DeleteFlag).ToList();
                 _unitOfWork.Dispose();
                 return entryPointList;
-            }
-
-            
+            }       
         }
     }
 }
