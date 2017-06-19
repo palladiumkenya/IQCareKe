@@ -41,7 +41,7 @@ namespace IQCare.Web.CCC.UC
             lblAge.Text = "<strong><i>" + patientAge.Replace("Age:", "") + "</i></strong>";
             if (patientTriage != null)
             {
-                lblDatetaken.Text = "Date Taken : "+ Convert.ToDateTime(patientTriage.VisitDate).ToString("dd-MMM-yyyy");
+                lblDatetaken.Text = Convert.ToDateTime(patientTriage.VisitDate).ToString("dd-MMM-yyyy");
                 bmi = Convert.ToDouble(patientTriage.BMI);
                 bmiZ = Convert.ToString(patientTriage.BMIZ);
                 diastolic = Convert.ToDecimal(patientTriage.Bpdiastolic);

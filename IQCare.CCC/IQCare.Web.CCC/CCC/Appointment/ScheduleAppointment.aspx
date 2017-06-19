@@ -179,8 +179,8 @@
                 <hr />
             </div>
             <div class="col-md-12">
-                <div class="col-md-6"></div>
-                <div class="col-md-6">
+                <div class="col-md-3"></div>
+                <div class="col-md-9">
                     <div class="col-md-3"></div>
                     <div class="col-md-3">
                         <asp:LinkButton runat="server" ID="btnSaveAppointment" CssClass="btn btn-info fa fa-plus-circle btn-lg" ClientIDMode="Static" OnClientClick="return false;"> Save Appointment </asp:LinkButton>
@@ -201,10 +201,24 @@
 
     </div>
 
-    <div class="modal fade" tabindex="-1" role="dialog" ClientIDMode="Static" Id ="AlertModal">
-        <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content" id="ModalMessage" clientidmode="Static">
-                ...
+    <!-- Modal -->
+    <div id="AlertModal" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header bg-info">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Appointments</h4>
+
+                </div>
+                <div class="modal-body">
+                    <div class="row" id="ModalMessage"></div>
+                </div>
+
+                <div class="modal-footer">
+                    <button id="btnOk" type="button" class="btn btn-default" onclientclick="return false;">OK</button>
+                    <button id="btnDismiss" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
@@ -237,6 +251,15 @@
             $("#btnCancel").click(function () {
                 window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>';
             });
+
+            $("#btnOk").click(function () {
+                $('#AlertModal').modal('hide');
+            });
+
+            $("#btnDismiss").click(function () {
+                resetFields();
+            });
+
         });
 
         $("#AppointmentDate").change(function () {
@@ -274,7 +297,7 @@
                 cache: false,
                 success: function(response) {
                     var count = response.d;
-                    var message = count + " appointment(s) scheduled on the chosen date.";
+                    var message = count + " appointment(s) scheduled on " + date;
                     document.getElementById("ModalMessage").innerHTML = message;
                     $('#AlertModal').modal('show');
                 },
