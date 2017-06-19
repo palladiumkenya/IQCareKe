@@ -1301,6 +1301,8 @@ DECLARE @FirstName varbinary(max), @MiddleName varbinary(max), @LastName varbina
 
 DECLARE @FirstNameT varchar(50), @LastNameT varchar(50), @TreatmentSupportTelNumber varbinary(max), 
 			@CreateDateT datetime, @UserIDT int, @IDT int;
+			
+DECLARE @TreatmentSupportTelNumber_VARCHAR varchar(100);
   
 PRINT '-------- Patients Report --------'; 
 SELECT @message = '----- ptn_pk ' + CAST(@ptn_pk as varchar(50));
@@ -1386,7 +1388,7 @@ BEGIN
 				BEGIN
 					-- Patient Identifier
 					INSERT INTO [dbo].[PatientIdentifier] ([PatientId], [PatientEnrollmentId], [IdentifierTypeId], [IdentifierValue] ,[DeleteFlag] ,[CreatedBy] ,[CreateDate] ,[Active] ,[AuditData])
-					VALUES (@PatientId , @EnrollmentId ,(SELECT Id FROM LookupItem WHERE Name='CCCNumber') ,@CCCNumber ,0 ,@UserID ,@CreateDate ,0 ,NULL);
+					VALUES (@PatientId , @EnrollmentId ,(select top 1 Id from Identifiers where Code='CCCNumber') ,@CCCNumber ,0 ,@UserID ,@CreateDate ,0 ,NULL);
 
 					SELECT @PatientIdentifierId=@@IDENTITY;
 					SELECT @message = 'Created PatientIdentifier Id: ' + CAST(@PatientIdentifierId as varchar);
@@ -1437,14 +1439,13 @@ BEGIN
     
 			--Insert into Treatment Supporter
 			DECLARE Treatment_Supporter_cursor CURSOR FOR
-			SELECT SUBSTRING(TreatmentSupporterName,0,charindex(',',TreatmentSupporterName))as firstname ,
-			SUBSTRING(TreatmentSupporterName,charindex(',',TreatmentSupporterName) + 1,len(TreatmentSupporterName)+1)as lastname,
+			SELECT SUBSTRING(TreatmentSupporterName,0,charindex(' ',TreatmentSupporterName))as firstname ,
+			SUBSTRING(TreatmentSupporterName,charindex(' ',TreatmentSupporterName) + 1,len(TreatmentSupporterName)+1)as lastname,
 			TreatmentSupportTelNumber, CreateDate, UserID
 			from dtl_PatientContacts WHERE ptn_pk = @ptn_pk;
 
-
 			OPEN Treatment_Supporter_cursor
-			FETCH NEXT FROM Treatment_Supporter_cursor INTO @FirstNameT, @LastNameT, @TreatmentSupportTelNumber, @CreateDateT , @UserIDT
+			FETCH NEXT FROM Treatment_Supporter_cursor INTO @FirstNameT, @LastNameT, @TreatmentSupportTelNumber_VARCHAR, @CreateDateT , @UserIDT
 
 			IF @@FETCH_STATUS <> 0   
 				PRINT '         <<None>>'       
@@ -1454,7 +1455,7 @@ BEGIN
 
 				--SELECT @message = '         ' + @product  
 				--PRINT @message
-				SET @TreatmentSupportTelNumber = ENCRYPTBYKEY(KEY_GUID('Key_CTC'),@TreatmentSupportTelNumber);
+				--SET @TreatmentSupportTelNumber = ENCRYPTBYKEY(KEY_GUID('Key_CTC'),@TreatmentSupportTelNumber_VARCHAR);
 				IF @FirstNameT IS NOT NULL AND @LastNameT IS NOT NULL 
 					BEGIN
 						Insert into Person(FirstName, MidName, LastName, Sex, Active, DeleteFlag, CreateDate, CreatedBy)
@@ -1464,8 +1465,8 @@ BEGIN
 						SELECT @message = 'Created Person Treatment Supporter Id: ' + CAST(@IDT as varchar(50));
 						PRINT @message;
 
-						IF @TreatmentSupportTelNumber IS NOT NULL
-						 SET @TreatmentSupportTelNumber = ENCRYPTBYKEY(KEY_GUID('Key_CTC'),@TreatmentSupportTelNumber)
+						IF @TreatmentSupportTelNumber_VARCHAR IS NOT NULL
+						 SET @TreatmentSupportTelNumber = ENCRYPTBYKEY(KEY_GUID('Key_CTC'),@TreatmentSupportTelNumber_VARCHAR)
 
 						INSERT INTO PatientTreatmentSupporter(PersonId, [SupporterId], [MobileContact], [DeleteFlag], [CreatedBy], [CreateDate])
 						VALUES(@Id, @IDT, @TreatmentSupportTelNumber, 0, @UserIDT, @CreateDateT);
@@ -1475,7 +1476,7 @@ BEGIN
 						PRINT @message;
 					END
 
-				FETCH NEXT FROM Treatment_Supporter_cursor INTO  @FirstNameT, @LastNameT, @TreatmentSupportTelNumber, @CreateDateT, @UserIDT
+				FETCH NEXT FROM Treatment_Supporter_cursor INTO  @FirstNameT, @LastNameT, @TreatmentSupportTelNumber_VARCHAR, @CreateDateT, @UserIDT
 				END  
 
 			CLOSE Treatment_Supporter_cursor  
@@ -1528,7 +1529,7 @@ BEGIN
 					BEGIN
 						-- Patient Identifier
 						INSERT INTO [dbo].[PatientIdentifier] ([PatientId], [PatientEnrollmentId], [IdentifierTypeId], [IdentifierValue] ,[DeleteFlag] ,[CreatedBy] ,[CreateDate] ,[Active] ,[AuditData])
-						VALUES (@PatientId , @EnrollmentId ,(SELECT Id FROM LookupItem WHERE Name='CCCNumber') ,@CCCNumber ,0 ,@UserID ,@CreateDate ,0 ,NULL);
+						VALUES (@PatientId , @EnrollmentId ,(select top 1 Id from Identifiers where Code='CCCNumber') ,@CCCNumber ,0 ,@UserID ,@CreateDate ,0 ,NULL);
 
 						SELECT @PatientIdentifierId=@@IDENTITY;
 						SELECT @message = 'Created PatientIdentifier Id: ' + CAST(@PatientIdentifierId as varchar);
@@ -1537,7 +1538,7 @@ BEGIN
 				ELSE
 					BEGIN
 						UPDATE PatientIdentifier
-						SET IdentifierTypeId = (SELECT Id FROM LookupItem WHERE Name='CCCNumber'), IdentifierValue = @CCCNumber, DeleteFlag = 0, CreatedBy = @UserID, CreateDate = @CreateDate, Active = 0
+						SET IdentifierTypeId = (select top 1 Id from Identifiers where Code='CCCNumber'), IdentifierValue = @CCCNumber, DeleteFlag = 0, CreatedBy = @UserID, CreateDate = @CreateDate, Active = 0
 						WHERE PatientId = @PatientId AND PatientEnrollmentId = @EnrollmentId AND IdentifierTypeId = (SELECT Id FROM LookupItem WHERE Name='CCCNumber')
 					END
 				END
@@ -1547,7 +1548,12 @@ BEGIN
 			IF @ReferredFrom > 0
 				BEGIN
 					SET @entryPoint = (select TOP 1 ItemId from [dbo].[LookupItemView] where ItemName like '%' + (SELECT Name FROM mst_Decode WHERE ID=@ReferredFrom AND CodeID=17) + '%');
-				
+					
+					IF @entryPoint IS NULL
+						BEGIN
+							SET @entryPoint = (select top 1 ItemId from LookupItemView where MasterName = 'Unknown' and ItemName = 'Unknown');
+						END
+						
 					UPDATE ServiceEntryPoint
 					SET EntryPointId = @entryPoint, CreatedBy = @UserID, CreateDate = @CreateDate
 					WHERE PatientId = @PatientId;
@@ -1577,14 +1583,14 @@ BEGIN
 
 			--Update into Treatment Supporter
 			DECLARE Treatment_Supporter_cursor CURSOR FOR
-			SELECT SUBSTRING(TreatmentSupporterName,0,charindex(',',TreatmentSupporterName))as firstname ,
-			SUBSTRING(TreatmentSupporterName,charindex(',',TreatmentSupporterName) + 1,len(TreatmentSupporterName)+1)as lastname,
+			SELECT SUBSTRING(TreatmentSupporterName,0,charindex(' ',TreatmentSupporterName))as firstname ,
+			SUBSTRING(TreatmentSupporterName,charindex(' ',TreatmentSupporterName) + 1,len(TreatmentSupporterName)+1)as lastname,
 			TreatmentSupportTelNumber, CreateDate, UserID
 			from dtl_PatientContacts WHERE ptn_pk = @ptn_pk;
 
 
 			OPEN Treatment_Supporter_cursor
-			FETCH NEXT FROM Treatment_Supporter_cursor INTO @FirstNameT, @LastNameT, @TreatmentSupportTelNumber, @CreateDateT , @UserIDT
+			FETCH NEXT FROM Treatment_Supporter_cursor INTO @FirstNameT, @LastNameT, @TreatmentSupportTelNumber_VARCHAR, @CreateDateT , @UserIDT
 
 			IF @@FETCH_STATUS <> 0   
 				PRINT '         <<None>>'       
@@ -1592,7 +1598,7 @@ BEGIN
 			WHILE @@FETCH_STATUS = 0  
 			BEGIN
 
-				SET @TreatmentSupportTelNumber = ENCRYPTBYKEY(KEY_GUID('Key_CTC'),@TreatmentSupportTelNumber);
+				--SET @TreatmentSupportTelNumber = ENCRYPTBYKEY(KEY_GUID('Key_CTC'),@TreatmentSupportTelNumber);
 				IF @FirstNameT IS NOT NULL AND @LastNameT IS NOT NULL
 					BEGIN
 						IF NOT EXISTS (SELECT PersonId FROM PatientTreatmentSupporter WHERE PersonId = @Id)
@@ -1604,8 +1610,8 @@ BEGIN
 								SELECT @message = 'Created Person Treatment Supporter Id: ' + CAST(@IDT as varchar(50));
 								PRINT @message;
 
-								IF @TreatmentSupportTelNumber IS NOT NULL
-								SET @TreatmentSupportTelNumber = ENCRYPTBYKEY(KEY_GUID('Key_CTC'),@TreatmentSupportTelNumber)
+								IF @TreatmentSupportTelNumber_VARCHAR IS NOT NULL
+								SET @TreatmentSupportTelNumber = ENCRYPTBYKEY(KEY_GUID('Key_CTC'),@TreatmentSupportTelNumber_VARCHAR)
 
 								INSERT INTO PatientTreatmentSupporter(PersonId, [SupporterId], [MobileContact], [DeleteFlag], [CreatedBy], [CreateDate])
 								VALUES(@Id, @IDT, @TreatmentSupportTelNumber, 0, @UserIDT, @CreateDateT);
@@ -1619,8 +1625,8 @@ BEGIN
 								SET FirstName = ENCRYPTBYKEY(KEY_GUID('Key_CTC'),@FirstNameT), LastName = ENCRYPTBYKEY(KEY_GUID('Key_CTC'),@LastNameT)
 								WHERE Id = @IDT;
 
-								IF @TreatmentSupportTelNumber IS NOT NULL
-								SET @TreatmentSupportTelNumber = ENCRYPTBYKEY(KEY_GUID('Key_CTC'),@TreatmentSupportTelNumber)
+								IF @TreatmentSupportTelNumber_VARCHAR IS NOT NULL
+								SET @TreatmentSupportTelNumber = ENCRYPTBYKEY(KEY_GUID('Key_CTC'),@TreatmentSupportTelNumber_VARCHAR)
 
 								UPDATE PatientTreatmentSupporter
 								SET MobileContact = @TreatmentSupportTelNumber
@@ -1629,8 +1635,8 @@ BEGIN
 							END
 						END
 
-				FETCH NEXT FROM Treatment_Supporter_cursor INTO  @FirstNameT, @LastNameT, @TreatmentSupportTelNumber, @CreateDateT, @UserIDT
-				END  
+				FETCH NEXT FROM Treatment_Supporter_cursor INTO  @FirstNameT, @LastNameT, @TreatmentSupportTelNumber_VARCHAR, @CreateDateT, @UserIDT
+				END 
 
 			CLOSE Treatment_Supporter_cursor  
 			DEALLOCATE Treatment_Supporter_cursor
@@ -3357,7 +3363,7 @@ BEGIN
 				BEGIN
 					-- Patient Identifier
 					INSERT INTO [dbo].[PatientIdentifier] ([PatientId], [PatientEnrollmentId], [IdentifierTypeId], [IdentifierValue] ,[DeleteFlag] ,[CreatedBy] ,[CreateDate] ,[Active] ,[AuditData])
-					VALUES (@PatientId , @EnrollmentId ,(SELECT TOP 1 Id FROM LookupItem WHERE Name='CCCNumber') ,@CCCNumber ,0 ,@UserID ,@CreateDate ,0 ,NULL);
+					VALUES (@PatientId , @EnrollmentId ,(select top 1 Id from Identifiers where Code='CCCNumber') ,@CCCNumber ,0 ,@UserID ,@CreateDate ,0 ,NULL);
 
 					IF @@ERROR <> 0
 						BEGIN
@@ -3442,8 +3448,8 @@ BEGIN
     
 		--Insert into Treatment Supporter
 		DECLARE Treatment_Supporter_cursor CURSOR FOR
-		SELECT SUBSTRING(TreatmentSupporterName,0,charindex(',',TreatmentSupporterName))as firstname ,
-		SUBSTRING(TreatmentSupporterName,charindex(',',TreatmentSupporterName) + 1,len(TreatmentSupporterName)+1)as lastname,
+		SELECT SUBSTRING(TreatmentSupporterName,0,charindex(' ',TreatmentSupporterName))as firstname ,
+		SUBSTRING(TreatmentSupporterName,charindex(' ',TreatmentSupporterName) + 1,len(TreatmentSupporterName)+1)as lastname,
 		TreatmentSupportTelNumber, CreateDate, UserID
 		from dtl_PatientContacts WHERE ptn_pk = @ptn_pk;
 
@@ -3777,6 +3783,7 @@ BEGIN
 			END
 		--ending baseline
 		Update mst_Patient Set MovedToPatientTable =1 Where Ptn_Pk=@ptn_pk;
+		INSERT INTO [dbo].[GreenCardBlueCard_Transactional] ([PersonId] ,[Ptn_Pk]) VALUES (@PersonId , @ptn_pk);
 		COMMIT;
 		-- Get the next mst_patient.
 		FETCH NEXT FROM mstPatient_cursor   

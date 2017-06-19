@@ -13,11 +13,24 @@ namespace IQCare.CCC.UILogic.Visit
        private readonly IPatientMasterVisitManager _patientMasterVisitManager = (IPatientMasterVisitManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientmasterVisit, BusinessProcess.CCC");
         private int _result=0;
 
-        public int AddPatientMasterVisit(PatientMasterVisit patientMasterVisit)
+        public int AddPatientMasterVisit(int patientId, int userId, int visitType)
         {
             try
             {
-                return _result = _patientMasterVisitManager.AddPatientmasterVisit(patientMasterVisit);
+                PatientMasterVisit visit = new PatientMasterVisit
+                {
+                    PatientId = patientId,
+                    ServiceId = 1,
+                    Start = DateTime.Now,
+                    Active = true,
+                    CreateDate = DateTime.Now,
+                    DeleteFlag = false,
+                    VisitDate = DateTime.Now,
+                    CreatedBy = userId,
+                    VisitType = visitType
+                };
+
+                return _result = _patientMasterVisitManager.AddPatientmasterVisit(visit);
             }
             catch (Exception ex)
             {

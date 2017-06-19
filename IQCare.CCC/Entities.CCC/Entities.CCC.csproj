@@ -95,9 +95,13 @@
     <Compile Include="Encounter\PhysicalExamination.cs" />
     <Compile Include="Encounter\Pregnancy.cs" />
     <Compile Include="Encounter\PregnancyIndicator.cs" />
+    <Compile Include="Enrollment\Identifier.cs" />
     <Compile Include="Enrollment\PatientEntityEnrollment.cs" />
     <Compile Include="Enrollment\PatientEntryPoint.cs" />
     <Compile Include="Encounter\LabOrderEntity.cs" />
+    <Compile Include="Enrollment\ServiceArea.cs" />
+    <Compile Include="Enrollment\ServiceAreaIdentifiers.cs" />
+    <Compile Include="Lookup\FacilityList.cs" />
     <Compile Include="Lookup\LookupFacility.cs" />
     <Compile Include="Lookup\LookupFacilityStatistics.cs" />
     <Compile Include="Lookup\LookupFacilityViralLoad.cs" />
@@ -112,6 +116,7 @@
     <Compile Include="Lookup\LookupMasterItem.cs" />
     <Compile Include="Enrollment\PatientEntity.cs" />
     <Compile Include="Lookup\LookupTestParameter.cs" />
+    <Compile Include="Lookup\PatientRegistrationLookup.cs" />
     <Compile Include="Lookup\PatientTreatmentTrackerLookup.cs" />
     <Compile Include="Lookup\PatientBaselineLookup.cs" />
     <Compile Include="Lookup\PatientLookup.cs" />

@@ -13,5 +13,9 @@ namespace Interface.CCC.Enrollment
         int DeletePatientIdentifier(int id);
         List<PatientEntityIdentifier> GetPatientEntityIdentifiers(int patientId, int patientEnrollmentId, int identifierTypeId);
         List<PatientEntityIdentifier> CheckIfIdentifierNumberIsUsed(string identifierValue, int identifierTypeId);
+        List<PatientEntityIdentifier> GetPatientEntityIdentifiersByPatientId(int patientId, int identifierTypeId);
+        List<PatientEntityIdentifier> GetEntityIdentifiersByPatientIdEnrollmentId(int patientId,
+            int patientEnrollmentId);
+        List<PatientEntityIdentifier> GetAllPatientEntityIdentifiers(int patientId);
     }
 }

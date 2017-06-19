@@ -104,9 +104,12 @@
     <Compile Include="BPersonManager.cs" />
     <Compile Include="BPersonContactManager.cs" />
     <Compile Include="BPersonRelationshipManager.cs" />
+    <Compile Include="Enrollment\BIdentifier.cs" />
     <Compile Include="Enrollment\BPatientEntryPoint.cs" />
     <Compile Include="Enrollment\BPatientIdentifier.cs" />
     <Compile Include="Enrollment\BPatientEnrollment.cs" />
+    <Compile Include="Enrollment\BServiceAreaIdentifiers.cs" />
+    <Compile Include="Lookup\BFacilityListManager.cs" />
     <Compile Include="Lookup\BPatientBaselineLookupManager.cs" />
     <Compile Include="Lookup\BPatientServiceEnrollmentLookupManager.cs" />
     <Compile Include="Lookup\BPatientTreatmentSupporterLookupManager.cs" />

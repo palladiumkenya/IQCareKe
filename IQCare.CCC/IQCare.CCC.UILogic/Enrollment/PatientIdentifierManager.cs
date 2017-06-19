@@ -10,11 +10,25 @@ namespace IQCare.CCC.UILogic.Enrollment
     {
         IPatientIdentifierManager _mgr = (IPatientIdentifierManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Enrollment.BPatientIdentifier, BusinessProcess.CCC");
 
-        public int addPatientIdentifier(PatientEntityIdentifier patientIdentifier)
+        public int addPatientIdentifier(int patientId, int patientEnrollmentId, int identifierId, string enrollmentNo)
         {
-            int returnValue;
-            returnValue = _mgr.AddPatientIdentifier(patientIdentifier);
-            return returnValue;
+            try
+            {
+                PatientEntityIdentifier patientidentifier = new PatientEntityIdentifier()
+                {
+                    PatientId = patientId,
+                    PatientEnrollmentId = patientEnrollmentId,
+                    IdentifierTypeId = identifierId,
+                    IdentifierValue = enrollmentNo
+                };
+
+                int returnValue = _mgr.AddPatientIdentifier(patientidentifier);
+                return returnValue;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public int UpdatePatientIdentifier(PatientEntityIdentifier patientIdentifier)
@@ -36,6 +50,12 @@ namespace IQCare.CCC.UILogic.Enrollment
             return _mgr.GetPatientEntityIdentifiers(patientId, patientEnrollmentId, identifierTypeId);
         }
 
+        public List<PatientEntityIdentifier> GetEntityIdentifiersByPatientIdEnrollmentId(int patientId,
+            int patientEnrollmentId)
+        {
+            return _mgr.GetEntityIdentifiersByPatientIdEnrollmentId(patientId, patientEnrollmentId);
+        }
+
         public List<PatientEntityIdentifier> CheckIfIdentifierNumberIsUsed(string identifierValue, int identifierTypeId)
         {
             try
@@ -47,6 +67,23 @@ namespace IQCare.CCC.UILogic.Enrollment
                 Console.WriteLine(e);
                 throw;
             }
+        }
+
+        public List<PatientEntityIdentifier> GetPatientEntityIdentifiersByPatientId(int patientId, int identifierTypeId)
+        {
+            try
+            {
+                return _mgr.GetPatientEntityIdentifiersByPatientId(patientId, identifierTypeId);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        public List<PatientEntityIdentifier> GetAllPatientEntityIdentifiers(int patientId)
+        {
+            return _mgr.GetAllPatientEntityIdentifiers(patientId);
         }
     }
 }

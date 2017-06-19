@@ -13,17 +13,39 @@ namespace IQCare.CCC.UILogic.Enrollment
     {
         IPatientEntryPointManager _mgr = (IPatientEntryPointManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Enrollment.BPatientEntryPoint, BusinessProcess.CCC");
 
-        public int addPatientEntryPoint(PatientEntryPoint patientEntryPoint)
+        public int addPatientEntryPoint(int patientId, int entryPointId, int userId)
         {
             int returnValue;
             try
             {
+                PatientEntryPoint patientEntryPoint = new PatientEntryPoint
+                {
+                    PatientId = patientId,
+                    ServiceAreaId = 1,
+                    EntryPointId = entryPointId,
+                    CreatedBy = userId,
+                    CreateDate = DateTime.Now,
+                    DeleteFlag = false
+                };
+
                 returnValue = _mgr.AddPatientEntryPoint(patientEntryPoint);
                 return returnValue;
             }
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        public int UpdatePatientEntryPoint(PatientEntryPoint patientEntryPoint)
+        {
+            try
+            {
+                return _mgr.UpdatePatientEntryPoint(patientEntryPoint);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
             }
         }
 

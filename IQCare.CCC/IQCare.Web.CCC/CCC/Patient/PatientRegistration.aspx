@@ -232,7 +232,8 @@
                                         <div class="modal-content">
                                           <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            <h4 class="modal-title">Please check for duplicates</h4>
+                                            <h2 class="modal-title">Please check for duplicates</h2>
+                                            <h3>Select the duplicate patient and click OK</h3>
                                           </div>
                                           <div class="modal-body">
                                               <table id="duplicateNames" class="table table-striped table-inverse">
@@ -547,29 +548,12 @@
                                          <div class="errorBlockPatientType" style="color: red;"> Please select one option </div>
 		                            </div>
 
-                                     <!--<div class="col-md-12 radio">
-                                         
-                                          <label class="radio-custom  pull-left" data-initialize="radio" id="GenPopulation">
-                                              <input type="radio" name="Population" value="General Population" class="sr-only" id="rdbGenPopulation" />
-                                              General Population
-                                          </label>
-                                     </div>
-                                     
-                                     <div class="col-md-12 radio checked">
-                                          <label class="radio-custom pull-left" data-initialize="radio" id="KeyPopulation">
-                                              <input type="radio" name="Population" value="Key Population" class="sr-only" id="rdbKeyPopulation" />
-                                              
-                                                Key population
-                                          </label>
-                                     </div>-->
-
                                 </div>
                                 
                                 <div class="col-md-3">
                                     <div class="col-md-12"><label class="control-label pull-left">Select if Key.Pop</label></div>
                                     <div class="col-md-12">
-                                        <asp:DropDownList runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="KeyPopulationCategoryId" data-parsley-min="1"/>
-                                       
+                                        <asp:DropDownList runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="KeyPopulationCategoryId" class="select" multiple tabindex="3" Width="300" placeholder="Select Key Population" />                                   
                                     </div>        
                                </div>
                                 
@@ -601,7 +585,7 @@
 
                 var personAge = 0;
                 var userId=<%=UserId%>;
-                var personId=0;
+                var personId = 0;
 
                 /*----- make readonly by default ----- */
                 $("#<%=ChildOrphan.ClientID%>").attr('disabled', 'disbaled');
@@ -799,31 +783,23 @@
                                     }
 
                                     if (populationType == "Key Population") {
-
+                                        var populationCategoryId = $("#<%=KeyPopulationCategoryId.ClientID%>").val();
+                                        if (populationCategoryId == null) {
+                                            toastr.error("Please select a Key Population Type ", "Key Population");
+                                            return false;
+                                        }
+                                        //console.log(populationCategoryId); 
                                     }
 
-                                    var sex = $("#Gender").find(":selected").text();
-                                    var optionType = $("#KeyPopulationCategoryId").find(":selected").text();
-
-                                    if (sex == "Male" && optionType == "Female Sex Worker (FSW)") {
-                                        toastr.error("Cannot select 'Female Sex Worker (FSW)' for a male person",
-                                            "Person Population Error");
-                                        return false;
-                                    } else if (sex == "Female" && optionType == "Men having Sex with Men (MSM)") {
-                                        toastr
-                                            .error("Cannot select 'Men having Sex with Men (MSM)' for a female person",
-                                                "Person Population Error");
-                                        return false;
-                                    } else {
-                                        $.when(addPersonPopulation()).then(function() {
-                                            setTimeout(function() {
+                                    $.when(addPersonPopulation()).then(function () {
+                                        setTimeout(function() {
                                                     window.location
                                                         .href =
                                                         '<%=ResolveClientUrl( "~/CCC/Enrollment/ServiceEnrollment.aspx")%>';
                                                 },
                                                 2000);
-                                        });
-                                    }
+                                    });
+
                                 } else {
 
                                     stepError = $('.parsley-error').length === 0;
@@ -1131,12 +1107,14 @@
                     var populationType = checked_radio.closest("td").find("label").html();
 
                     //var populationType = $('input[name="Population"]').value;
-                    var populationCategoryId = $("#<%=KeyPopulationCategoryId.ClientID%>").find(":selected").val();
-
+                    var populationCategoryId = $("#<%=KeyPopulationCategoryId.ClientID%>").val();
+                    //console.log(populationCategoryId);
+                    //return false;
+                    var popTypes = JSON.stringify(populationCategoryId);
                     $.ajax({
                         type: "POST",
                         url: "../WebService/PersonService.asmx/AddPersonPopulation",
-                        data: "{'personId':'" + personId + "','populationtypeId':'" + populationType + "','populationCategory':'" + populationCategoryId + "','userId':'" + userId + "','patientId':'" + isPatientSet + "'}",
+                        data: "{'personId':'" + personId + "','populationtypeId':'" + populationType + "','populationCategory':'" + popTypes + "','userId':'" + userId + "','patientId':'" + isPatientSet + "'}",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
@@ -1153,6 +1131,8 @@
 
                 function getPopulationTypes() {
                     var itemName = "KeyPopulation";
+                    var sex = $("#Gender").find(":selected").text();
+
                     $("#<%=KeyPopulationCategoryId.ClientID%>").prop('disabled', false);
                     $.ajax({
                         type: "POST",
@@ -1164,10 +1144,22 @@
                                 
                             var itemList = JSON.parse(response.d);
                             $("#<%=KeyPopulationCategoryId.ClientID%>").find('option').remove().end();
-                            $("#<%=KeyPopulationCategoryId.ClientID%>").append('<option value="0">Select</option>');
                             $.each(itemList, function (index, itemList) {
-                                $("#<%=KeyPopulationCategoryId.ClientID%>").append('<option value="' + itemList.ItemId + '">' + itemList.ItemDisplayName + ' ('+itemList.ItemName+')</option>');
-                            }); 
+                                if (itemList.ItemDisplayName == "Female Sex Worker" && sex == "Male") {
+                                    
+                                }
+                                else if (itemList.ItemDisplayName == "Men having Sex with Men" && sex == "Female") {
+
+                                } else {
+                                    $("#<%=KeyPopulationCategoryId.ClientID%>").append('<option value="' + itemList.ItemId + '">' + itemList.ItemDisplayName + ' (' + itemList.ItemName + ')</option>');
+                                }                       
+                            });
+
+                            //$("#KeyPopulationCategoryId").chosen();
+                            $("#KeyPopulationCategoryId").select2({
+                                placeholder: "Select Key Population Type",
+                                allowClear: true
+                            });
                         },
                         error: function (xhr, errorType, exception) {
                             var jsonError = jQuery.parseJSON(xhr.responseText);
@@ -1333,7 +1325,7 @@
                                 $("#<%=KeyPopulationCategoryId.ClientID%>").prop('disabled', true);
                             } else {
                                 setTimeout(function(){
-                                    $("#KeyPopulationCategoryId").val(patientDetails.PopulationCategoryId);
+                                    $("#KeyPopulationCategoryId").val(patientDetails.PopulationCategoryId).trigger("change");
                                 }, 2000);                               
                             }
                         },
@@ -1600,15 +1592,19 @@
                 var _fp = [];
 
                 $("#btnOk").click(function() {
-                    console.log("here");
-                    console.log(_fp);
-
+                    //console.log("here");
+                    //console.log(_fp);
+                    //return false;
                     if (Object.keys(_fp).length > 0) {
                         if (_fp["IsPatient"] == 1) {
-                            window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientHome.aspx?patient=")%>' + _fp["PatientId"];
+                            $.when(setPatientIdSession(_fp["PatientId"])).then(function () {
+                                setTimeout(function () {
+                                    window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientHome.aspx")%>';
+                                }, 2000);
+                            });                         
                         } else {
                             var personId = _fp["PersonId"];
-                            <%Session["PatientType"] = "1285"; %>;
+                            getPatientTypeId("PatientType", "New");
 
                             $.ajax({
                                 type: "POST",
@@ -1648,6 +1644,26 @@
                     $(this).addClass("active");
                     console.log(_fp);
                 });
+
+                function getPatientTypeId(groupName, patientTypeName) {
+                    $.ajax({
+                        type: "POST",
+                        url: "../WebService/PersonService.asmx/GetPatientType",
+                        contentType: "application/json; charset=utf-8",
+                        data: "{'groupName': '" + groupName + "','patientTypeName':'" + patientTypeName +"'}",
+                        dataType: "json"
+                    });
+                }
+
+                function setPatientIdSession(patientId) {
+                    $.ajax({
+                        type: "POST",
+                        url: "../WebService/PersonService.asmx/SetPatientSession",
+                        contentType: "application/json; charset=utf-8",
+                        data: "{'patientPk': '" + patientId + "'}",
+                        dataType: "json"
+                    });
+                }
 
         });
     </script>
