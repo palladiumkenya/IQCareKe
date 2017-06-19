@@ -136,5 +136,16 @@ namespace BusinessProcess.CCC
                 return patientTypeId;
             }
         }
+
+        public int GetPatientSexId(int patientId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                int sexId = unitOfWork.PatientLookupRepository.FindBy(x => x.Id == patientId).Select(y => y.Sex)
+                    .FirstOrDefault();
+                unitOfWork.Dispose();
+                return sexId;
+            }
+        }
     }
 }

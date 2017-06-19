@@ -6,6 +6,7 @@ using System.Web.Services;
 using Entities.PatientCore;
 using IQCare.CCC.UILogic;
 using Microsoft.JScript;
+using Newtonsoft.Json;
 using Convert = System.Convert;
 
 namespace IQCare.Web.CCC.WebService
@@ -29,7 +30,7 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string UpdatePatientBio(int patientId, string bioFirstName, string bioMiddleName, string bioLastName, int userId, string bioPatientPopulation, int keyPop)
+        public string UpdatePatientBio(int patientId, string bioFirstName, string bioMiddleName, string bioLastName, int userId, string bioPatientPopulation, string keyPop)
         {
             int personId = 0;
             int gender = 0;
@@ -45,6 +46,8 @@ namespace IQCare.Web.CCC.WebService
                 personId = patient.PersonId;
                 gender = patient.Sex;
 
+                var popCatgs = JsonConvert.DeserializeObject<IEnumerable<object>>(keyPop);
+
                 personManager.UpdatePerson(bioFirstName, bioMiddleName, bioLastName, gender, userId, personId);
                 msg = "<p>Patient Bio Updated Successfully</p>";
 
@@ -54,21 +57,50 @@ namespace IQCare.Web.CCC.WebService
                 {
                     if (population.Count > 0)
                     {
-                        population[0].PopulationCategory = keyPop;
-                        population[0].PopulationType = bioPatientPopulation;
-
-                        personPoulation.UpdatePatientPopulation(population[0]);
+                        if (bioPatientPopulation == "General Population")
+                        {
+                            int Result = personPoulation.AddPatientPopulation(personId, bioPatientPopulation, 0, userId);
+                            if (Result > 0)
+                            {
+                                msg += "<p>Person Population Status Recorded Successfully!</p>";
+                            }
+                        }
+                        else
+                        {
+                            personPoulation.ResetPatientPopulation(personId);
+                            foreach (var catg in popCatgs)
+                            {
+                                int Result = personPoulation.AddPatientPopulation(personId, bioPatientPopulation, Convert.ToInt32(catg.ToString()), userId);
+                                if (Result > 0)
+                                {
+                                    msg += "<p>Person Population Status Recorded Successfully!</p>";
+                                }
+                            }
+                        }
 
                         msg += "<p>Person Population Edited Successfully.</p>";
 
                     }
                     else
                     {
-                        int Result =
-                            personPoulation.AddPatientPopulation(personId, bioPatientPopulation, keyPop, userId);
-                        if (Result > 0)
+                        if (bioPatientPopulation == "General Population")
                         {
-                            msg += "<p>Person Population Status Recorded Successfully!</p>";
+                            int Result = personPoulation.AddPatientPopulation(personId, bioPatientPopulation, 0, userId);
+                            if (Result > 0)
+                            {
+                                msg += "<p>Person Population Status Recorded Successfully!</p>";
+                            }
+                        }
+                        else
+                        {
+                            foreach (var catg in popCatgs)
+                            {
+                                int Result = personPoulation.AddPatientPopulation(personId, bioPatientPopulation, Convert.ToInt32(catg.ToString()), userId);
+                                if (Result > 0)
+                                {
+                                    msg += "<p>Person Population Status Recorded Successfully!</p>";
+                                }
+                            }
                         }
                     }
                 }

@@ -1388,7 +1388,7 @@ BEGIN
 				BEGIN
 					-- Patient Identifier
 					INSERT INTO [dbo].[PatientIdentifier] ([PatientId], [PatientEnrollmentId], [IdentifierTypeId], [IdentifierValue] ,[DeleteFlag] ,[CreatedBy] ,[CreateDate] ,[Active] ,[AuditData])
-					VALUES (@PatientId , @EnrollmentId ,(SELECT Id FROM LookupItem WHERE Name='CCCNumber') ,@CCCNumber ,0 ,@UserID ,@CreateDate ,0 ,NULL);
+					VALUES (@PatientId , @EnrollmentId ,(select top 1 Id from Identifiers where Code='CCCNumber') ,@CCCNumber ,0 ,@UserID ,@CreateDate ,0 ,NULL);
 
 					SELECT @PatientIdentifierId=@@IDENTITY;
 					SELECT @message = 'Created PatientIdentifier Id: ' + CAST(@PatientIdentifierId as varchar);
@@ -1529,7 +1529,7 @@ BEGIN
 					BEGIN
 						-- Patient Identifier
 						INSERT INTO [dbo].[PatientIdentifier] ([PatientId], [PatientEnrollmentId], [IdentifierTypeId], [IdentifierValue] ,[DeleteFlag] ,[CreatedBy] ,[CreateDate] ,[Active] ,[AuditData])
-						VALUES (@PatientId , @EnrollmentId ,(SELECT Id FROM LookupItem WHERE Name='CCCNumber') ,@CCCNumber ,0 ,@UserID ,@CreateDate ,0 ,NULL);
+						VALUES (@PatientId , @EnrollmentId ,(select top 1 Id from Identifiers where Code='CCCNumber') ,@CCCNumber ,0 ,@UserID ,@CreateDate ,0 ,NULL);
 
 						SELECT @PatientIdentifierId=@@IDENTITY;
 						SELECT @message = 'Created PatientIdentifier Id: ' + CAST(@PatientIdentifierId as varchar);
@@ -1538,7 +1538,7 @@ BEGIN
 				ELSE
 					BEGIN
 						UPDATE PatientIdentifier
-						SET IdentifierTypeId = (SELECT Id FROM LookupItem WHERE Name='CCCNumber'), IdentifierValue = @CCCNumber, DeleteFlag = 0, CreatedBy = @UserID, CreateDate = @CreateDate, Active = 0
+						SET IdentifierTypeId = (select top 1 Id from Identifiers where Code='CCCNumber'), IdentifierValue = @CCCNumber, DeleteFlag = 0, CreatedBy = @UserID, CreateDate = @CreateDate, Active = 0
 						WHERE PatientId = @PatientId AND PatientEnrollmentId = @EnrollmentId AND IdentifierTypeId = (SELECT Id FROM LookupItem WHERE Name='CCCNumber')
 					END
 				END
@@ -3363,7 +3363,7 @@ BEGIN
 				BEGIN
 					-- Patient Identifier
 					INSERT INTO [dbo].[PatientIdentifier] ([PatientId], [PatientEnrollmentId], [IdentifierTypeId], [IdentifierValue] ,[DeleteFlag] ,[CreatedBy] ,[CreateDate] ,[Active] ,[AuditData])
-					VALUES (@PatientId , @EnrollmentId ,(SELECT TOP 1 Id FROM LookupItem WHERE Name='CCCNumber') ,@CCCNumber ,0 ,@UserID ,@CreateDate ,0 ,NULL);
+					VALUES (@PatientId , @EnrollmentId ,(select top 1 Id from Identifiers where Code='CCCNumber') ,@CCCNumber ,0 ,@UserID ,@CreateDate ,0 ,NULL);
 
 					IF @@ERROR <> 0
 						BEGIN
@@ -3448,8 +3448,8 @@ BEGIN
     
 		--Insert into Treatment Supporter
 		DECLARE Treatment_Supporter_cursor CURSOR FOR
-		SELECT SUBSTRING(TreatmentSupporterName,0,charindex(',',TreatmentSupporterName))as firstname ,
-		SUBSTRING(TreatmentSupporterName,charindex(',',TreatmentSupporterName) + 1,len(TreatmentSupporterName)+1)as lastname,
+		SELECT SUBSTRING(TreatmentSupporterName,0,charindex(' ',TreatmentSupporterName))as firstname ,
+		SUBSTRING(TreatmentSupporterName,charindex(' ',TreatmentSupporterName) + 1,len(TreatmentSupporterName)+1)as lastname,
 		TreatmentSupportTelNumber, CreateDate, UserID
 		from dtl_PatientContacts WHERE ptn_pk = @ptn_pk;
 
@@ -3783,6 +3783,7 @@ BEGIN
 			END
 		--ending baseline
 		Update mst_Patient Set MovedToPatientTable =1 Where Ptn_Pk=@ptn_pk;
+		INSERT INTO [dbo].[GreenCardBlueCard_Transactional] ([PersonId] ,[Ptn_Pk]) VALUES (@PersonId , @ptn_pk);
 		COMMIT;
 		-- Get the next mst_patient.
 		FETCH NEXT FROM mstPatient_cursor   
