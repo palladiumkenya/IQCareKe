@@ -3783,6 +3783,7 @@ BEGIN
 			END
 		--ending baseline
 		Update mst_Patient Set MovedToPatientTable =1 Where Ptn_Pk=@ptn_pk;
+		INSERT INTO [dbo].[GreenCardBlueCard_Transactional] ([PersonId] ,[Ptn_Pk]) VALUES (@PersonId , @ptn_pk);
 		COMMIT;
 		-- Get the next mst_patient.
 		FETCH NEXT FROM mstPatient_cursor   

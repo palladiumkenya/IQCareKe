@@ -115393,11 +115393,20 @@
   <Mst_Facility>
     <FacilityName>Wamunyu Health Centre</FacilityName>
     <FacilityID>755</FacilityID>
-    <PosID>841</PosID>
+    <PosID>12841</PosID>
     <DeleteFlag>0</DeleteFlag>
     <SatelliteID>0</SatelliteID>
     <SystemID>1</SystemID>
+    <FacilityAddress>wwe</FacilityAddress>
+    <FacilityTel>2321</FacilityTel>
+    <FacilityCell />
+    <FacilityFax />
+    <FacilityEmail />
+    <FacilityURL />
+    <FacilityFooter />
     <FacilityTemplate>0</FacilityTemplate>
+    <FacilityLogo>Wamunyu Health Centre.jpg</FacilityLogo>
+    <StrongPassFlag>0</StrongPassFlag>
   </Mst_Facility>
   <Mst_Facility>
     <FacilityName>mwala D/H</FacilityName>
