@@ -110,7 +110,7 @@ namespace IQCare.Web.Laboratory
         {
             get
             {
-                return (Authentication.HasFeatureRight("LABORATORY_RESULT", (DataTable)Session["UserRight"]) == true);
+                return (Authentication.HasFeatureRight("LABORATORY", (DataTable)Session["UserRight"]) == true);
             }
         }
         protected string hPerm

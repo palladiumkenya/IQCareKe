@@ -1633,6 +1633,18 @@ namespace IQCare.SCM
                     //    return;
                     //}
 
+                    if(cmbprogram.SelectedValue.ToString() == "0")
+                    {
+                        MessageBox.Show("Please select the Treatment Program");
+                        return;
+                    }
+
+                    if (cmbRegimenLine.SelectedValue.ToString() == "0")
+                    {
+                        MessageBox.Show("Please select the Regimen Line");
+                        return;
+                    }
+
                     DateTime dispenseDate = Convert.ToDateTime(dtDispensedDate.Text);
                     if (theOrderId > 0)
                     {
@@ -3439,6 +3451,7 @@ namespace IQCare.SCM
                 MsgBuilder theBuilder = new MsgBuilder();
                 theBuilder.DataElements["MessageText"] = "No pending orders for the selected date";
                 IQCareWindowMsgBox.ShowWindowConfirm("#C1", theBuilder, this);
+                gridPendingOrder.DataSource = theDT;
                 return;
             }
             gridPendingOrder.AutoGenerateColumns = false;

@@ -47,13 +47,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -77,6 +70,13 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle47 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle48 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle49 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPatientDrugDispense));
             this.DispenseTab = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -132,6 +132,11 @@
             this.label28 = new System.Windows.Forms.Label();
             this.lblPayAmount = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.grpExistingRec = new System.Windows.Forms.GroupBox();
+            this.btnCloseExisting = new System.Windows.Forms.Button();
+            this.grdExitingPharDisp = new System.Windows.Forms.DataGridView();
+            this.label33 = new System.Windows.Forms.Label();
+            this.btnExitingRecClose = new System.Windows.Forms.Button();
             this.grpHivCareTrtPharmacyField = new System.Windows.Forms.GroupBox();
             this.label27 = new System.Windows.Forms.Label();
             this.btnHIVCareTrtPharFld = new System.Windows.Forms.Button();
@@ -139,11 +144,6 @@
             this.labelLastRegimen = new System.Windows.Forms.Label();
             this.labelLastDispense = new System.Windows.Forms.Label();
             this.labelLastRegimenDate = new System.Windows.Forms.Label();
-            this.grpExistingRec = new System.Windows.Forms.GroupBox();
-            this.btnCloseExisting = new System.Windows.Forms.Button();
-            this.grdExitingPharDisp = new System.Windows.Forms.DataGridView();
-            this.label33 = new System.Windows.Forms.Label();
-            this.btnExitingRecClose = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.textPrescriptionNote = new System.Windows.Forms.TextBox();
             this.txtWhyPartial = new System.Windows.Forms.TextBox();
@@ -214,20 +214,6 @@
             this.PendingTab = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.gridPendingOrder = new System.Windows.Forms.DataGridView();
-            this.P_PatientFacilityId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pFirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pMiddleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pLastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pSex = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Age = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PrescriptionNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PrescribedBy = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ptnPk = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OrderId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.patDOB = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.lblActual = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
@@ -290,6 +276,20 @@
             this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.P_PatientFacilityId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pFirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pMiddleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pLastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pSex = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Age = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PrescriptionNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PrescribedBy = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ptnPk = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OrderId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.patDOB = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DispenseTab.SuspendLayout();
             this.panel1.SuspendLayout();
             this.grpBoxLastDispense.SuspendLayout();
@@ -297,9 +297,9 @@
             this.groupBox1.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel4.SuspendLayout();
-            this.grpHivCareTrtPharmacyField.SuspendLayout();
             this.grpExistingRec.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdExitingPharDisp)).BeginInit();
+            this.grpHivCareTrtPharmacyField.SuspendLayout();
             this.pnlGrdDrugDispense.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdDrugDispense)).BeginInit();
             this.FindPatientTab.SuspendLayout();
@@ -355,6 +355,8 @@
             // 
             // grpBoxLastDispense
             // 
+            this.grpBoxLastDispense.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.grpBoxLastDispense.BackColor = System.Drawing.Color.Silver;
             this.grpBoxLastDispense.Controls.Add(this.labelOrderValue);
             this.grpBoxLastDispense.Controls.Add(this.labelOrdertext);
@@ -711,6 +713,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.valuePrescriptionDate);
             this.groupBox1.Controls.Add(this.labelPrescriptionDate);
             this.groupBox1.Controls.Add(this.lblIQNumber);
@@ -816,7 +820,7 @@
             this.lblPatientName.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblPatientName.AutoSize = true;
             this.lblPatientName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPatientName.Location = new System.Drawing.Point(88, 8);
+            this.lblPatientName.Location = new System.Drawing.Point(88, 10);
             this.lblPatientName.Name = "lblPatientName";
             this.lblPatientName.Size = new System.Drawing.Size(93, 20);
             this.lblPatientName.TabIndex = 57;
@@ -935,6 +939,7 @@
             // 
             // label28
             // 
+            this.label28.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label28.AutoSize = true;
             this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label28.Location = new System.Drawing.Point(903, 581);
@@ -946,6 +951,7 @@
             // 
             // lblPayAmount
             // 
+            this.lblPayAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblPayAmount.AutoSize = true;
             this.lblPayAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPayAmount.Location = new System.Drawing.Point(1098, 581);
@@ -957,6 +963,8 @@
             // 
             // panel4
             // 
+            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel4.BackColor = System.Drawing.Color.Silver;
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel4.Controls.Add(this.grpExistingRec);
@@ -996,93 +1004,6 @@
             this.panel4.Size = new System.Drawing.Size(1256, 184);
             this.panel4.TabIndex = 71;
             this.panel4.Paint += new System.Windows.Forms.PaintEventHandler(this.panel4_Paint);
-            // 
-            // grpHivCareTrtPharmacyField
-            // 
-            this.grpHivCareTrtPharmacyField.BackColor = System.Drawing.Color.Silver;
-            this.grpHivCareTrtPharmacyField.Controls.Add(this.label27);
-            this.grpHivCareTrtPharmacyField.Controls.Add(this.btnHIVCareTrtPharFld);
-            this.grpHivCareTrtPharmacyField.Controls.Add(this.lastRegimenValue);
-            this.grpHivCareTrtPharmacyField.Controls.Add(this.labelLastRegimen);
-            this.grpHivCareTrtPharmacyField.Controls.Add(this.labelLastDispense);
-            this.grpHivCareTrtPharmacyField.Controls.Add(this.labelLastRegimenDate);
-            this.grpHivCareTrtPharmacyField.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.grpHivCareTrtPharmacyField.Location = new System.Drawing.Point(556, 10);
-            this.grpHivCareTrtPharmacyField.Name = "grpHivCareTrtPharmacyField";
-            this.grpHivCareTrtPharmacyField.Size = new System.Drawing.Size(595, 227);
-            this.grpHivCareTrtPharmacyField.TabIndex = 92;
-            this.grpHivCareTrtPharmacyField.TabStop = false;
-            this.grpHivCareTrtPharmacyField.Visible = false;
-            // 
-            // label27
-            // 
-            this.label27.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label27.Location = new System.Drawing.Point(1, 2);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(594, 22);
-            this.label27.TabIndex = 1;
-            this.label27.Text = "HIV Care and Treatement Pharmacy Field";
-            this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // btnHIVCareTrtPharFld
-            // 
-            this.btnHIVCareTrtPharFld.BackColor = System.Drawing.Color.Gray;
-            this.btnHIVCareTrtPharFld.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHIVCareTrtPharFld.Location = new System.Drawing.Point(506, 195);
-            this.btnHIVCareTrtPharFld.Name = "btnHIVCareTrtPharFld";
-            this.btnHIVCareTrtPharFld.Size = new System.Drawing.Size(80, 25);
-            this.btnHIVCareTrtPharFld.TabIndex = 77;
-            this.btnHIVCareTrtPharFld.Text = "Close";
-            this.btnHIVCareTrtPharFld.UseVisualStyleBackColor = false;
-            this.btnHIVCareTrtPharFld.Click += new System.EventHandler(this.btnHIVCareTrtPharFld_Click);
-            // 
-            // lastRegimenValue
-            // 
-            this.lastRegimenValue.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lastRegimenValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lastRegimenValue.Location = new System.Drawing.Point(400, 47);
-            this.lastRegimenValue.Name = "lastRegimenValue";
-            this.lastRegimenValue.Size = new System.Drawing.Size(172, 18);
-            this.lastRegimenValue.TabIndex = 58;
-            this.lastRegimenValue.Tag = "";
-            this.lastRegimenValue.Text = "LastRegimen";
-            // 
-            // labelLastRegimen
-            // 
-            this.labelLastRegimen.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.labelLastRegimen.AutoSize = true;
-            this.labelLastRegimen.Location = new System.Drawing.Point(269, 47);
-            this.labelLastRegimen.Name = "labelLastRegimen";
-            this.labelLastRegimen.Size = new System.Drawing.Size(128, 13);
-            this.labelLastRegimen.TabIndex = 53;
-            this.labelLastRegimen.Tag = "";
-            this.labelLastRegimen.Text = "Last Regimen Dispensed:";
-            this.labelLastRegimen.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // labelLastDispense
-            // 
-            this.labelLastDispense.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelLastDispense.AutoSize = true;
-            this.labelLastDispense.Location = new System.Drawing.Point(16, 47);
-            this.labelLastDispense.Name = "labelLastDispense";
-            this.labelLastDispense.Size = new System.Drawing.Size(109, 13);
-            this.labelLastDispense.TabIndex = 60;
-            this.labelLastDispense.Tag = "lblLabel";
-            this.labelLastDispense.Text = "Last Dispensed Date:";
-            this.labelLastDispense.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // labelLastRegimenDate
-            // 
-            this.labelLastRegimenDate.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.labelLastRegimenDate.AutoSize = true;
-            this.labelLastRegimenDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelLastRegimenDate.Location = new System.Drawing.Point(138, 47);
-            this.labelLastRegimenDate.Name = "labelLastRegimenDate";
-            this.labelLastRegimenDate.Size = new System.Drawing.Size(71, 13);
-            this.labelLastRegimenDate.TabIndex = 61;
-            this.labelLastRegimenDate.Tag = "lblLabel";
-            this.labelLastRegimenDate.Text = "LastDispDate";
             // 
             // grpExistingRec
             // 
@@ -1178,6 +1099,93 @@
             this.btnExitingRecClose.Text = "&Close";
             this.btnExitingRecClose.UseVisualStyleBackColor = false;
             this.btnExitingRecClose.Click += new System.EventHandler(this.btnExitingRecClose_Click);
+            // 
+            // grpHivCareTrtPharmacyField
+            // 
+            this.grpHivCareTrtPharmacyField.BackColor = System.Drawing.Color.Silver;
+            this.grpHivCareTrtPharmacyField.Controls.Add(this.label27);
+            this.grpHivCareTrtPharmacyField.Controls.Add(this.btnHIVCareTrtPharFld);
+            this.grpHivCareTrtPharmacyField.Controls.Add(this.lastRegimenValue);
+            this.grpHivCareTrtPharmacyField.Controls.Add(this.labelLastRegimen);
+            this.grpHivCareTrtPharmacyField.Controls.Add(this.labelLastDispense);
+            this.grpHivCareTrtPharmacyField.Controls.Add(this.labelLastRegimenDate);
+            this.grpHivCareTrtPharmacyField.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.grpHivCareTrtPharmacyField.Location = new System.Drawing.Point(556, 10);
+            this.grpHivCareTrtPharmacyField.Name = "grpHivCareTrtPharmacyField";
+            this.grpHivCareTrtPharmacyField.Size = new System.Drawing.Size(595, 227);
+            this.grpHivCareTrtPharmacyField.TabIndex = 92;
+            this.grpHivCareTrtPharmacyField.TabStop = false;
+            this.grpHivCareTrtPharmacyField.Visible = false;
+            // 
+            // label27
+            // 
+            this.label27.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label27.Location = new System.Drawing.Point(1, 2);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(594, 22);
+            this.label27.TabIndex = 1;
+            this.label27.Text = "HIV Care and Treatement Pharmacy Field";
+            this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // btnHIVCareTrtPharFld
+            // 
+            this.btnHIVCareTrtPharFld.BackColor = System.Drawing.Color.Gray;
+            this.btnHIVCareTrtPharFld.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHIVCareTrtPharFld.Location = new System.Drawing.Point(506, 195);
+            this.btnHIVCareTrtPharFld.Name = "btnHIVCareTrtPharFld";
+            this.btnHIVCareTrtPharFld.Size = new System.Drawing.Size(80, 25);
+            this.btnHIVCareTrtPharFld.TabIndex = 77;
+            this.btnHIVCareTrtPharFld.Text = "Close";
+            this.btnHIVCareTrtPharFld.UseVisualStyleBackColor = false;
+            this.btnHIVCareTrtPharFld.Click += new System.EventHandler(this.btnHIVCareTrtPharFld_Click);
+            // 
+            // lastRegimenValue
+            // 
+            this.lastRegimenValue.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lastRegimenValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lastRegimenValue.Location = new System.Drawing.Point(400, 47);
+            this.lastRegimenValue.Name = "lastRegimenValue";
+            this.lastRegimenValue.Size = new System.Drawing.Size(172, 18);
+            this.lastRegimenValue.TabIndex = 58;
+            this.lastRegimenValue.Tag = "";
+            this.lastRegimenValue.Text = "LastRegimen";
+            // 
+            // labelLastRegimen
+            // 
+            this.labelLastRegimen.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.labelLastRegimen.AutoSize = true;
+            this.labelLastRegimen.Location = new System.Drawing.Point(269, 47);
+            this.labelLastRegimen.Name = "labelLastRegimen";
+            this.labelLastRegimen.Size = new System.Drawing.Size(128, 13);
+            this.labelLastRegimen.TabIndex = 53;
+            this.labelLastRegimen.Tag = "";
+            this.labelLastRegimen.Text = "Last Regimen Dispensed:";
+            this.labelLastRegimen.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // labelLastDispense
+            // 
+            this.labelLastDispense.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelLastDispense.AutoSize = true;
+            this.labelLastDispense.Location = new System.Drawing.Point(16, 47);
+            this.labelLastDispense.Name = "labelLastDispense";
+            this.labelLastDispense.Size = new System.Drawing.Size(109, 13);
+            this.labelLastDispense.TabIndex = 60;
+            this.labelLastDispense.Tag = "lblLabel";
+            this.labelLastDispense.Text = "Last Dispensed Date:";
+            this.labelLastDispense.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // labelLastRegimenDate
+            // 
+            this.labelLastRegimenDate.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.labelLastRegimenDate.AutoSize = true;
+            this.labelLastRegimenDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelLastRegimenDate.Location = new System.Drawing.Point(138, 47);
+            this.labelLastRegimenDate.Name = "labelLastRegimenDate";
+            this.labelLastRegimenDate.Size = new System.Drawing.Size(71, 13);
+            this.labelLastRegimenDate.TabIndex = 61;
+            this.labelLastRegimenDate.Tag = "lblLabel";
+            this.labelLastRegimenDate.Text = "LastDispDate";
             // 
             // label4
             // 
@@ -1532,6 +1540,8 @@
             this.grdDrugDispense.AllowUserToAddRows = false;
             this.grdDrugDispense.AllowUserToResizeColumns = false;
             this.grdDrugDispense.AllowUserToResizeRows = false;
+            this.grdDrugDispense.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.grdDrugDispense.BackgroundColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
@@ -2090,152 +2100,6 @@
             this.gridPendingOrder.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridPendingOrder_CellClick);
             this.gridPendingOrder.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridPendingOrder_CellContentDoubleClick);
             // 
-            // P_PatientFacilityId
-            // 
-            this.P_PatientFacilityId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.P_PatientFacilityId.DataPropertyName = "PatientFacilityId";
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.P_PatientFacilityId.DefaultCellStyle = dataGridViewCellStyle18;
-            this.P_PatientFacilityId.FillWeight = 284.2639F;
-            this.P_PatientFacilityId.HeaderText = "Patient #";
-            this.P_PatientFacilityId.Name = "P_PatientFacilityId";
-            this.P_PatientFacilityId.ReadOnly = true;
-            this.P_PatientFacilityId.Width = 140;
-            // 
-            // pFirstName
-            // 
-            this.pFirstName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.pFirstName.DataPropertyName = "FirstName";
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.pFirstName.DefaultCellStyle = dataGridViewCellStyle19;
-            this.pFirstName.FillWeight = 35.77122F;
-            this.pFirstName.HeaderText = "First Name";
-            this.pFirstName.Name = "pFirstName";
-            this.pFirstName.ReadOnly = true;
-            this.pFirstName.Width = 120;
-            // 
-            // pMiddleName
-            // 
-            this.pMiddleName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.pMiddleName.DataPropertyName = "MiddleName";
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.pMiddleName.DefaultCellStyle = dataGridViewCellStyle20;
-            this.pMiddleName.FillWeight = 35.77122F;
-            this.pMiddleName.HeaderText = "Middle Name";
-            this.pMiddleName.Name = "pMiddleName";
-            this.pMiddleName.ReadOnly = true;
-            this.pMiddleName.Width = 120;
-            // 
-            // pLastName
-            // 
-            this.pLastName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.pLastName.DataPropertyName = "LastName";
-            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.pLastName.DefaultCellStyle = dataGridViewCellStyle21;
-            this.pLastName.FillWeight = 35.77122F;
-            this.pLastName.HeaderText = "Last Name";
-            this.pLastName.Name = "pLastName";
-            this.pLastName.ReadOnly = true;
-            this.pLastName.Width = 120;
-            // 
-            // pSex
-            // 
-            this.pSex.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.pSex.DataPropertyName = "Sex";
-            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.pSex.DefaultCellStyle = dataGridViewCellStyle22;
-            this.pSex.FillWeight = 35.77122F;
-            this.pSex.HeaderText = "Sex";
-            this.pSex.Name = "pSex";
-            this.pSex.ReadOnly = true;
-            this.pSex.Width = 70;
-            // 
-            // Age
-            // 
-            this.Age.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Age.DataPropertyName = "Age";
-            this.Age.HeaderText = "Age";
-            this.Age.Name = "Age";
-            this.Age.ReadOnly = true;
-            this.Age.Width = 80;
-            // 
-            // dataGridViewTextBoxColumn9
-            // 
-            this.dataGridViewTextBoxColumn9.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.dataGridViewTextBoxColumn9.DataPropertyName = "CreateDate";
-            dataGridViewCellStyle23.Format = "d";
-            dataGridViewCellStyle23.NullValue = null;
-            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewTextBoxColumn9.DefaultCellStyle = dataGridViewCellStyle23;
-            this.dataGridViewTextBoxColumn9.FillWeight = 31.2364F;
-            this.dataGridViewTextBoxColumn9.HeaderText = "Prescription Date";
-            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            this.dataGridViewTextBoxColumn9.ReadOnly = true;
-            this.dataGridViewTextBoxColumn9.Width = 120;
-            // 
-            // dataGridViewTextBoxColumn8
-            // 
-            this.dataGridViewTextBoxColumn8.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.dataGridViewTextBoxColumn8.DataPropertyName = "Duration";
-            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.dataGridViewTextBoxColumn8.DefaultCellStyle = dataGridViewCellStyle24;
-            this.dataGridViewTextBoxColumn8.FillWeight = 363.3851F;
-            this.dataGridViewTextBoxColumn8.HeaderText = "Duration";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            this.dataGridViewTextBoxColumn8.ReadOnly = true;
-            this.dataGridViewTextBoxColumn8.Width = 72;
-            // 
-            // PrescriptionNumber
-            // 
-            this.PrescriptionNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.PrescriptionNumber.DataPropertyName = "PrescriptionNumber";
-            this.PrescriptionNumber.FillWeight = 46.79312F;
-            this.PrescriptionNumber.HeaderText = "Prescription #";
-            this.PrescriptionNumber.Name = "PrescriptionNumber";
-            this.PrescriptionNumber.ReadOnly = true;
-            // 
-            // PrescribedBy
-            // 
-            this.PrescribedBy.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.PrescribedBy.DataPropertyName = "PrescribedBy";
-            this.PrescribedBy.FillWeight = 31.2364F;
-            this.PrescribedBy.HeaderText = "Prescribed By";
-            this.PrescribedBy.Name = "PrescribedBy";
-            this.PrescribedBy.ReadOnly = true;
-            this.PrescribedBy.Width = 160;
-            // 
-            // ptnPk
-            // 
-            this.ptnPk.DataPropertyName = "Ptn_pk";
-            this.ptnPk.HeaderText = "Ptn_pk";
-            this.ptnPk.Name = "ptnPk";
-            this.ptnPk.ReadOnly = true;
-            this.ptnPk.Visible = false;
-            // 
-            // OrderId
-            // 
-            this.OrderId.DataPropertyName = "OrderId";
-            this.OrderId.HeaderText = "OrderId";
-            this.OrderId.Name = "OrderId";
-            this.OrderId.ReadOnly = true;
-            this.OrderId.Visible = false;
-            // 
-            // patDOB
-            // 
-            this.patDOB.DataPropertyName = "dob";
-            this.patDOB.HeaderText = "dob";
-            this.patDOB.Name = "patDOB";
-            this.patDOB.ReadOnly = true;
-            this.patDOB.Visible = false;
-            // 
-            // pStatus
-            // 
-            this.pStatus.DataPropertyName = "Status";
-            this.pStatus.HeaderText = "Status";
-            this.pStatus.Name = "pStatus";
-            this.pStatus.ReadOnly = true;
-            this.pStatus.Visible = false;
-            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.lblActual);
@@ -2318,10 +2182,9 @@
             // 
             // label13
             // 
-            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label13.Location = new System.Drawing.Point(-296, 17);
+            this.label13.Location = new System.Drawing.Point(28, 14);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(425, 14);
+            this.label13.Size = new System.Drawing.Size(122, 17);
             this.label13.TabIndex = 5;
             this.label13.Tag = "lblLabel";
             this.label13.Text = "Prescription Date:";
@@ -2737,6 +2600,7 @@
             // 
             // btnPrintLabel
             // 
+            this.btnPrintLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPrintLabel.Location = new System.Drawing.Point(1149, 13);
             this.btnPrintLabel.Name = "btnPrintLabel";
             this.btnPrintLabel.Size = new System.Drawing.Size(99, 25);
@@ -3021,6 +2885,152 @@
             this.dataGridViewTextBoxColumn23.Visible = false;
             this.dataGridViewTextBoxColumn23.Width = 10;
             // 
+            // P_PatientFacilityId
+            // 
+            this.P_PatientFacilityId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.P_PatientFacilityId.DataPropertyName = "PatientFacilityId";
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.P_PatientFacilityId.DefaultCellStyle = dataGridViewCellStyle18;
+            this.P_PatientFacilityId.FillWeight = 284.2639F;
+            this.P_PatientFacilityId.HeaderText = "Patient #";
+            this.P_PatientFacilityId.Name = "P_PatientFacilityId";
+            this.P_PatientFacilityId.ReadOnly = true;
+            this.P_PatientFacilityId.Width = 140;
+            // 
+            // pFirstName
+            // 
+            this.pFirstName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.pFirstName.DataPropertyName = "FirstName";
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.pFirstName.DefaultCellStyle = dataGridViewCellStyle19;
+            this.pFirstName.FillWeight = 35.77122F;
+            this.pFirstName.HeaderText = "First Name";
+            this.pFirstName.Name = "pFirstName";
+            this.pFirstName.ReadOnly = true;
+            this.pFirstName.Width = 120;
+            // 
+            // pMiddleName
+            // 
+            this.pMiddleName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.pMiddleName.DataPropertyName = "MiddleName";
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.pMiddleName.DefaultCellStyle = dataGridViewCellStyle20;
+            this.pMiddleName.FillWeight = 35.77122F;
+            this.pMiddleName.HeaderText = "Middle Name";
+            this.pMiddleName.Name = "pMiddleName";
+            this.pMiddleName.ReadOnly = true;
+            this.pMiddleName.Width = 120;
+            // 
+            // pLastName
+            // 
+            this.pLastName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.pLastName.DataPropertyName = "LastName";
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.pLastName.DefaultCellStyle = dataGridViewCellStyle21;
+            this.pLastName.FillWeight = 35.77122F;
+            this.pLastName.HeaderText = "Last Name";
+            this.pLastName.Name = "pLastName";
+            this.pLastName.ReadOnly = true;
+            this.pLastName.Width = 120;
+            // 
+            // pSex
+            // 
+            this.pSex.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.pSex.DataPropertyName = "Sex";
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.pSex.DefaultCellStyle = dataGridViewCellStyle22;
+            this.pSex.FillWeight = 35.77122F;
+            this.pSex.HeaderText = "Sex";
+            this.pSex.Name = "pSex";
+            this.pSex.ReadOnly = true;
+            this.pSex.Width = 70;
+            // 
+            // Age
+            // 
+            this.Age.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Age.DataPropertyName = "Age";
+            this.Age.HeaderText = "Age";
+            this.Age.Name = "Age";
+            this.Age.ReadOnly = true;
+            this.Age.Width = 80;
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.dataGridViewTextBoxColumn9.DataPropertyName = "CreateDate";
+            dataGridViewCellStyle23.Format = "d";
+            dataGridViewCellStyle23.NullValue = null;
+            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewTextBoxColumn9.DefaultCellStyle = dataGridViewCellStyle23;
+            this.dataGridViewTextBoxColumn9.FillWeight = 31.2364F;
+            this.dataGridViewTextBoxColumn9.HeaderText = "Prescription Date";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            this.dataGridViewTextBoxColumn9.ReadOnly = true;
+            this.dataGridViewTextBoxColumn9.Width = 120;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.dataGridViewTextBoxColumn8.DataPropertyName = "Duration";
+            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.dataGridViewTextBoxColumn8.DefaultCellStyle = dataGridViewCellStyle24;
+            this.dataGridViewTextBoxColumn8.FillWeight = 363.3851F;
+            this.dataGridViewTextBoxColumn8.HeaderText = "Duration (Mins)";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.ReadOnly = true;
+            this.dataGridViewTextBoxColumn8.Width = 120;
+            // 
+            // PrescriptionNumber
+            // 
+            this.PrescriptionNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.PrescriptionNumber.DataPropertyName = "PrescriptionNumber";
+            this.PrescriptionNumber.FillWeight = 46.79312F;
+            this.PrescriptionNumber.HeaderText = "Prescription #";
+            this.PrescriptionNumber.Name = "PrescriptionNumber";
+            this.PrescriptionNumber.ReadOnly = true;
+            // 
+            // PrescribedBy
+            // 
+            this.PrescribedBy.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.PrescribedBy.DataPropertyName = "PrescribedBy";
+            this.PrescribedBy.FillWeight = 31.2364F;
+            this.PrescribedBy.HeaderText = "Prescribed By";
+            this.PrescribedBy.Name = "PrescribedBy";
+            this.PrescribedBy.ReadOnly = true;
+            this.PrescribedBy.Width = 160;
+            // 
+            // ptnPk
+            // 
+            this.ptnPk.DataPropertyName = "Ptn_pk";
+            this.ptnPk.HeaderText = "Ptn_pk";
+            this.ptnPk.Name = "ptnPk";
+            this.ptnPk.ReadOnly = true;
+            this.ptnPk.Visible = false;
+            // 
+            // OrderId
+            // 
+            this.OrderId.DataPropertyName = "OrderId";
+            this.OrderId.HeaderText = "OrderId";
+            this.OrderId.Name = "OrderId";
+            this.OrderId.ReadOnly = true;
+            this.OrderId.Visible = false;
+            // 
+            // patDOB
+            // 
+            this.patDOB.DataPropertyName = "dob";
+            this.patDOB.HeaderText = "dob";
+            this.patDOB.Name = "patDOB";
+            this.patDOB.ReadOnly = true;
+            this.patDOB.Visible = false;
+            // 
+            // pStatus
+            // 
+            this.pStatus.DataPropertyName = "Status";
+            this.pStatus.HeaderText = "Status";
+            this.pStatus.Name = "pStatus";
+            this.pStatus.ReadOnly = true;
+            this.pStatus.Visible = false;
+            // 
             // frmPatientDrugDispense
             // 
             this.AcceptButton = this.btnFind;
@@ -3031,12 +3041,12 @@
             this.Controls.Add(this.panelSave);
             this.Controls.Add(this.MainTab);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmPatientDrugDispense";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Tag = "frmForm";
             this.Text = "Find Patient";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmPatientDrugDispense_Load);
             this.DispenseTab.ResumeLayout(false);
             this.DispenseTab.PerformLayout();
@@ -3051,10 +3061,10 @@
             this.panel6.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
-            this.grpHivCareTrtPharmacyField.ResumeLayout(false);
-            this.grpHivCareTrtPharmacyField.PerformLayout();
             this.grpExistingRec.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdExitingPharDisp)).EndInit();
+            this.grpHivCareTrtPharmacyField.ResumeLayout(false);
+            this.grpHivCareTrtPharmacyField.PerformLayout();
             this.pnlGrdDrugDispense.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdDrugDispense)).EndInit();
             this.FindPatientTab.ResumeLayout(false);
@@ -3281,6 +3291,10 @@
         private System.Windows.Forms.Panel pnlGrdDrugDispense;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.TextBox txtPillCount;
+        private System.Windows.Forms.Label lblActual;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label lblExpected;
+        private System.Windows.Forms.Label label20;
         private System.Windows.Forms.DataGridViewTextBoxColumn P_PatientFacilityId;
         private System.Windows.Forms.DataGridViewTextBoxColumn pFirstName;
         private System.Windows.Forms.DataGridViewTextBoxColumn pMiddleName;
@@ -3295,9 +3309,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn OrderId;
         private System.Windows.Forms.DataGridViewTextBoxColumn patDOB;
         private System.Windows.Forms.DataGridViewTextBoxColumn pStatus;
-        private System.Windows.Forms.Label lblActual;
-        private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.Label lblExpected;
-        private System.Windows.Forms.Label label20;
     }
 }
