@@ -134,7 +134,7 @@
                                 </div>
                             </div>
                             <!-- Modal -->
-                            <div id="patientBioModal" class="modal fade" role="dialog" data-parsley-validate="true" data-show-errors="true">
+                            <div id="patientBioModal" class="modal fade" role="dialog" data-parsley-validate="true" data-show-errors="true" data-keyboard="false" data-backdrop="static">
                                 <div class="modal-dialog">
                                     <!-- Modal content-->
                                     <div class="modal-content">
@@ -215,7 +215,7 @@
 
 
                             <!-- Modal -->
-                            <div id="treatmentSupporterModal" class="modal fade" role="dialog" data-parsley-validate="true" data-show-errors="true">
+                            <div id="treatmentSupporterModal" class="modal fade" role="dialog" data-parsley-validate="true" data-show-errors="true" data-keyboard="false" data-backdrop="static">
                                 <div class="modal-dialog">
                                     <!-- Modal content-->
                                     <div class="modal-content">
@@ -351,7 +351,7 @@
                             </div>
 
                             <!-- Modal -->
-                            <div id="patientLocationModal" class="modal fade" role="dialog" data-parsley-validate="true" data-show-errors="true">
+                            <div id="patientLocationModal" class="modal fade" role="dialog" data-parsley-validate="true" data-show-errors="true" data-keyboard="false" data-backdrop="static">
                                 <div class="modal-dialog">
                                     <!-- Modal content-->
                                     <div class="modal-content">
@@ -507,7 +507,7 @@
                             </div>
 
                             <!-- Modal -->
-                            <div id="patientContactModal" class="modal fade" role="dialog" data-parsley-validate="true" data-show-errors="true">
+                            <div id="patientContactModal" class="modal fade" role="dialog" data-parsley-validate="true" data-show-errors="true" data-keyboard="false" data-backdrop="static">
                                 <div class="modal-dialog">
                                     <!-- Modal content-->
                                     <div class="modal-content">
@@ -595,7 +595,7 @@
                         </div>
 
                         <!-- Modal -->
-                        <div id="patientSummaryModal" class="modal fade" role="dialog" data-parsley-validate="true" data-show-errors="true">
+                        <div id="patientSummaryModal" class="modal fade" role="dialog" data-parsley-validate="true" data-show-errors="true" data-keyboard="false" data-backdrop="static">
                             <div class="modal-dialog" style="width: 90%">
                                 <!-- Modal content-->
                                 <div class="modal-content">

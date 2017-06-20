@@ -19,6 +19,8 @@ namespace IQCare.Web.CCC.Appointment
         {
             this.GetSessionDetails();
 
+            IQCareMsgBox.Show("Yes", AppointmentDate);
+
             ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
 
             List<LookupItemView> statuses = mgr.GetLookItemByGroup("AppointmentStatus");

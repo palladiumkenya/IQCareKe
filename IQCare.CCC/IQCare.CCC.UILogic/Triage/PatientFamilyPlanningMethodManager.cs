@@ -10,14 +10,15 @@ namespace IQCare.CCC.UILogic.Triage
     {
         private IPatientFamilyPlanningMethodManager _PatientFamilyPlanningMethod = (IPatientFamilyPlanningMethodManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Triage.BPatientFamilyPlanningMethod, BusinessProcess.CCC");
 
-        public int AddFamilyPlanningMethod(int patientId,int PatientFPId,int userId)
+        public int AddFamilyPlanningMethod(int patientId, int familyPlanningStatus, int PatientFPId,int userId)
         {
             try
             {
                 var FPLoad = new PatientFamilyPlanningMethod()
                 {
                     PatientId = patientId,
-                    PatientFPId = PatientFPId,
+                    PatientFPId = familyPlanningStatus,
+                    FPMethodId = PatientFPId,
                     CreatedBy = userId
                 };
 
