@@ -493,8 +493,11 @@
                         var messageResponse = JSON.parse(response.d);
 
                         console.log(messageResponse);
-                        if (messageResponse.DOB != null)
+                        if (messageResponse.DOB != null) {
                             $("#PersonDOB").val(messageResponse.DOB);
+                            $("#PersonDOB").prop('disable', true);
+                        }
+                            
                         if (messageResponse.NationalId)
                             $("#NationalId").val(messageResponse.NationalId);
                         if (messageResponse.EnrollmentDate != null)
