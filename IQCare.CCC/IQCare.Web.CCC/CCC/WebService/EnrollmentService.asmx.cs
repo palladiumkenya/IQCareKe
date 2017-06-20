@@ -304,6 +304,14 @@ namespace IQCare.Web.CCC.WebService
                     {
                         Session["PatientPK"] = patient[0].Id;
 
+                        PatientEntity updatePatient = new PatientEntity();
+                        updatePatient.ptn_pk = patient[0].ptn_pk;
+                        updatePatient.DateOfBirth = patient[0].DateOfBirth;
+                        updatePatient.NationalId = nationalId;
+                        updatePatient.FacilityId = patient[0].FacilityId;
+
+                        patientManager.UpdatePatient(updatePatient, patient[0].Id);
+
                         int patientMasterVisitId = patientMasterVisitManager.PatientMasterVisitCheckin(patient[0].Id, userId);
                         Session["PatientMasterVisitId"] = patientMasterVisitId;
 
