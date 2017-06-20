@@ -154,7 +154,7 @@
             var personDOB = '<%=Session["PersonDob"]%>';
             var nationalId = '<%=Session["NationalId"]%>';
             var patientType = '<%=Session["PatientType"]%>';
-            console.log(patientType);
+            //console.log(patientType);
             if (personDOB != null && personDOB !="") {
                 $("#DateOfBirth").addClass("noneevents");
                 personDOB = new Date(personDOB);
@@ -177,7 +177,7 @@
                 dataType: "json",
                 success: function (response) {
                     var itemList = JSON.parse(response.d);
-                    console.log(itemList);
+                    //console.log(itemList);
                     $("#<%=entryPoint.ClientID%>").find('option').remove().end();
                     $("#<%=entryPoint.ClientID%>").append('<option value="0">Select</option>');
                     $.each(itemList, function (index, itemList) {
@@ -378,7 +378,7 @@
                         //console.log(messageResponse);
                         var table = "<table width='100%'>";
                         for (var i = 0; i < messageResponse.length; i++) {
-                            console.log(messageResponse[i]);
+                            //console.log(messageResponse[i]);
                             table += "<tr>";
 
                             table += "<td>";
@@ -472,7 +472,7 @@
                             placeholder: "Select Facility"
                         });
                         $("#mfl_code").val(code).trigger("change");
-                        console.log(code);
+                        //console.log(code);
                     },
                     error: function (xhr, errorType, exception) {
                         var jsonError = jQuery.parseJSON(xhr.responseText);
@@ -492,7 +492,7 @@
                         //generate('success', '<p>,</p>' + response.d);
                         var messageResponse = JSON.parse(response.d);
 
-                        //console.log(messageResponse);
+                        console.log(messageResponse);
                         if (messageResponse.DOB != null)
                             $("#PersonDOB").val(messageResponse.DOB);
                         if (messageResponse.NationalId)

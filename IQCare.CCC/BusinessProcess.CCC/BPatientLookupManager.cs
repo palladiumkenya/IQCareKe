@@ -31,7 +31,7 @@ namespace BusinessProcess.CCC
         {
             using (UnitOfWork u = new UnitOfWork(new LookupContext()))
             {
-                return u.PatientLookupRepository.FindBy(x => x.PersonId == personId && x.Active).ToList();
+                return u.PatientLookupRepository.FindBy(x => x.PersonId == personId).ToList();
             }
         }
       
