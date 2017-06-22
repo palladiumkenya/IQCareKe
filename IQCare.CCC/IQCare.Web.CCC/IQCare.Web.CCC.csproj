@@ -68,6 +68,7 @@
     <Content Include="CCC\Scripts\css\select2.css" />
     <Content Include="CCC\Scripts\css\style.css" />
     <Content Include="CCC\Scripts\css\stylechosen.css" />
+    <Content Include="CCC\Scripts\css\sweetalert2.css" />
     <Content Include="CCC\Scripts\css\typeaheadjs.css" />
     <Content Include="CCC\Encounter\VitalSigns.aspx" />
     <Content Include="CCC\Scripts\js\bootbox.js" />
@@ -100,6 +101,7 @@
     <Content Include="CCC\Scripts\js\highcharts.js" />
     <Content Include="CCC\Scripts\js\prism.js" />
     <Content Include="CCC\Scripts\js\select2.min.js" />
+    <Content Include="CCC\Scripts\js\sweetalert2.js" />
     <Content Include="CCC\Scripts\js\tether.js" />
     <Content Include="CCC\Scripts\js\transition.js" />
     <Content Include="CCC\Scripts\js\typeahead.js" />
