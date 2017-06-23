@@ -281,9 +281,9 @@
                                                     <td style="width: 35%" align="center">
                                                         <div class="col-md-6 pull-left">
                                                             <label class="patientInfo pull-left">
-                                                                Weight (Kg):</label><label class="smalllabel text-info" id="dtwt" runat="server">
+                                                                Weight (Kg):</label><label class="smalllabel text-info" id="dtwt" runat="server"></label>
                                                                     <asp:TextBox ID="txtWeight" CssClass="form-control" MaxLength="4" runat="server"></asp:TextBox>
-                                                                </label>
+                                                                
                                                             <div>
                                                     </td>
                                                     <td style="width: 35%" align="center">

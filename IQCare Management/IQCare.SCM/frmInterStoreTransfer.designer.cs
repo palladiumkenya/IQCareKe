@@ -516,7 +516,6 @@
             // 
             this.ItemName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.ItemName.DataPropertyName = "ItemId";
-            this.ItemName.FillWeight = 512.64F;
             this.ItemName.HeaderText = "Item Name";
             this.ItemName.Name = "ItemName";
             this.ItemName.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -535,7 +534,7 @@
             // 
             this.Units.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Units.DataPropertyName = "Units";
-            this.Units.FillWeight = 49.29231F;
+            this.Units.FillWeight = 28.0222F;
             this.Units.HeaderText = "Purchase Units";
             this.Units.Name = "Units";
             this.Units.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -544,7 +543,7 @@
             // 
             this.UnitQuantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.UnitQuantity.DataPropertyName = "UnitQuantity";
-            this.UnitQuantity.FillWeight = 49.29231F;
+            this.UnitQuantity.FillWeight = 28.0222F;
             this.UnitQuantity.HeaderText = "Unit Qty";
             this.UnitQuantity.Name = "UnitQuantity";
             // 
@@ -552,7 +551,7 @@
             // 
             this.OrderQuantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.OrderQuantity.DataPropertyName = "OrderQuantity";
-            this.OrderQuantity.FillWeight = 49.29231F;
+            this.OrderQuantity.FillWeight = 28.0222F;
             this.OrderQuantity.HeaderText = "Order Qty";
             this.OrderQuantity.Name = "OrderQuantity";
             this.OrderQuantity.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -561,7 +560,7 @@
             // 
             this.IssuedQuantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.IssuedQuantity.DataPropertyName = "IssuedQuantity";
-            this.IssuedQuantity.FillWeight = 49.29231F;
+            this.IssuedQuantity.FillWeight = 28.0222F;
             this.IssuedQuantity.HeaderText = "Issued Qty - Purchasing Unit";
             this.IssuedQuantity.Name = "IssuedQuantity";
             this.IssuedQuantity.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -577,7 +576,7 @@
             // 
             this.Price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Price.DataPropertyName = "Price";
-            this.Price.FillWeight = 49.29231F;
+            this.Price.FillWeight = 28.0222F;
             this.Price.HeaderText = "Price/Unit";
             this.Price.Name = "Price";
             this.Price.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -586,7 +585,7 @@
             // 
             this.TotPrice.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.TotPrice.DataPropertyName = "TotPrice";
-            this.TotPrice.FillWeight = 49.29231F;
+            this.TotPrice.FillWeight = 28.0222F;
             this.TotPrice.HeaderText = "Total Price";
             this.TotPrice.Name = "TotPrice";
             this.TotPrice.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -595,7 +594,7 @@
             // 
             this.ExpiryDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.ExpiryDate.DataPropertyName = "ExpiryDate";
-            this.ExpiryDate.FillWeight = 49.29231F;
+            this.ExpiryDate.FillWeight = 28.0222F;
             this.ExpiryDate.HeaderText = "Expiry Date";
             this.ExpiryDate.Name = "ExpiryDate";
             this.ExpiryDate.ReadOnly = true;
@@ -604,7 +603,7 @@
             // 
             this.BatchName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.BatchName.DataPropertyName = "BatchName";
-            this.BatchName.FillWeight = 49.29231F;
+            this.BatchName.FillWeight = 28.0222F;
             this.BatchName.HeaderText = "Batch #";
             this.BatchName.Name = "BatchName";
             this.BatchName.ReadOnly = true;
@@ -623,7 +622,7 @@
             // 
             this.AvailableQTY.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.AvailableQTY.DataPropertyName = "AvailableQTY";
-            this.AvailableQTY.FillWeight = 49.29231F;
+            this.AvailableQTY.FillWeight = 28.0222F;
             this.AvailableQTY.HeaderText = "Available Qty";
             this.AvailableQTY.Name = "AvailableQTY";
             this.AvailableQTY.ReadOnly = true;

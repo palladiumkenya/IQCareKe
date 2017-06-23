@@ -92,6 +92,7 @@ namespace IQCare.Web.UILogic
                                   Currency = row["Currency"].ToString(),
                                   MasterIndex = row["PosID"].ToString(),
                                   PaperLess = Convert.ToBoolean(row["Paperless"]),
+                                  Preffered = Convert.ToBoolean(row["Preferred"]),
                                   Id = Convert.ToInt32(row["FacilityID"]),
                                   Name = Convert.ToString(row["FacilityName"]),
                                   GracePeriod = Convert.ToInt32(row["AppGracePeriod"]),
