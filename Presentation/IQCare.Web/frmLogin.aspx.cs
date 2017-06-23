@@ -98,7 +98,7 @@ namespace IQCare.Web
             List<Entities.Administration.Facility> facilities = SystemSetting.CurrentSystem.Facilities;
             if (chkPref.Checked == true)
             {
-                facilities = facilities.Where(f => f.Preffered == false).ToList();
+                facilities = facilities.Where(f => f.Preffered == true).ToList();
 
                 //DataView theDV = new DataView(theDT);
                 // theDV.RowFilter = "Preferred = 1";
