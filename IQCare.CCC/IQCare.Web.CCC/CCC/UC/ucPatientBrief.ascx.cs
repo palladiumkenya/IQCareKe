@@ -41,6 +41,7 @@ namespace IQCare.Web.CCC.UC
                 Session["PatientId"] = thisPatient.ptn_pk;
                 Session["SystemId"] = 1;
                 Session["DateOfBirth"] = thisPatient.DateOfBirth.ToString("dd-MMM-yyyy");
+                Session["PersonId"] = thisPatient.PersonId;
                 //Don't decrypt at this level. the use Logic project for this
 
                 //lblPatientNames.Text = _utility.Decrypt(thisPatient.LastName) + ", " + _utility.Decrypt(x.FirstName) + " " +

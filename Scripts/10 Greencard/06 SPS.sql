@@ -3256,7 +3256,7 @@ BEGIN
 	DECLARE mstPatient_cursor CURSOR FOR   
 	SELECT mst_Patient.Ptn_Pk, FirstName, MiddleName ,LastName,Sex, [Status], DeleteFlag, mst_Patient.CreateDate, mst_Patient.UserID, PatientFacilityId, PosId, DOB, DobPrecision, [ID/PassportNo], PatientEnrollmentID, [ReferredFrom], [RegistrationDate], MaritalStatus, DistrictName, Address, Phone, LocationID
 	FROM mst_Patient INNER JOIN  dbo.Lnk_PatientProgramStart ON dbo.mst_Patient.Ptn_Pk = dbo.Lnk_PatientProgramStart.Ptn_pk
-	WHERE (dbo.Lnk_PatientProgramStart.ModuleId = 203)  and MovedToPatientTable =0
+	WHERE MovedToPatientTable =0
 	ORDER BY mst_Patient.Ptn_Pk;
   
 	OPEN mstPatient_cursor;
@@ -3367,24 +3367,55 @@ BEGIN
 		SELECT @message = 'Created Patient Id: ' + CAST(@PatientId as varchar);
 		PRINT @message;
 
-			-- Insert to PatientEnrollment
-			INSERT INTO [dbo].[PatientEnrollment] ([PatientId] ,[ServiceAreaId] ,[EnrollmentDate] ,[EnrollmentStatusId] ,[TransferIn] ,[CareEnded] ,[DeleteFlag] ,[CreatedBy] ,[CreateDate] ,[AuditData])
-			VALUES (@PatientId,1,(SELECT top 1 StartDate FROM Lnk_PatientProgramStart WHERE Ptn_pk=@ptn_pk and ModuleId=203),0, @transferIn, @Status ,0 ,@UserID ,@CreateDate ,NULL);
+		--Insert into Enrollment Table
+		DECLARE Enrollment_cursor CURSOR FOR
+		SELECT ModuleId, [StartDate], [UserID], [CreateDate] FROM Lnk_PatientProgramStart WHERE Ptn_pk=@ptn_pk;
 
-			IF @@ERROR <> 0
-				BEGIN
-					-- Rollback the transaction
-					ROLLBACK
+		DECLARE @ModuleId int, @StartDate datetime, @UserID_Enrollment int, @CreateDate_Enrollment datetime;
 
-					-- Raise an error and return
-					--RAISERROR ('Error in deleting employees in DeleteDepartment.', 16, 1)
-					PRINT 'Error Occurred inserting into patient enrollment';
-					RETURN
-				END
+		OPEN Enrollment_cursor
+		FETCH NEXT FROM Enrollment_cursor INTO @ModuleId, @StartDate, @UserID_Enrollment, @CreateDate_Enrollment
+
+		IF @@FETCH_STATUS <> 0   
+			PRINT '         <<None>>'       
+
+		WHILE @@FETCH_STATUS = 0  
+		BEGIN
+			
+			IF @ModuleId = 203
+			BEGIN 
+				INSERT INTO [dbo].[PatientEnrollment] ([PatientId] ,[ServiceAreaId] ,[EnrollmentDate] ,[EnrollmentStatusId] ,[TransferIn] ,[CareEnded] ,[DeleteFlag] ,[CreatedBy] ,[CreateDate] ,[AuditData])
+				VALUES (@PatientId,1, @StartDate,0, @transferIn, @Status ,0 ,@UserID_Enrollment ,@CreateDate_Enrollment ,NULL);
+
+				SELECT @EnrollmentId = SCOPE_IDENTITY();
+				SELECT @message = 'Created PatientEnrollment Id: ' + CAST(@EnrollmentId as varchar);
+				PRINT @message;
+			END
+
+			FETCH NEXT FROM Enrollment_cursor INTO  @ModuleId, @StartDate, @UserID_Enrollment, @CreateDate_Enrollment
+			END  
+
+		CLOSE Enrollment_cursor  
+		DEALLOCATE Enrollment_cursor
+
+			---- Insert to PatientEnrollment
+			--INSERT INTO [dbo].[PatientEnrollment] ([PatientId] ,[ServiceAreaId] ,[EnrollmentDate] ,[EnrollmentStatusId] ,[TransferIn] ,[CareEnded] ,[DeleteFlag] ,[CreatedBy] ,[CreateDate] ,[AuditData])
+			--VALUES (@PatientId,1,(SELECT top 1 StartDate FROM Lnk_PatientProgramStart WHERE Ptn_pk=@ptn_pk and ModuleId=203),0, @transferIn, @Status ,0 ,@UserID ,@CreateDate ,NULL);
+
+			--IF @@ERROR <> 0
+			--	BEGIN
+			--		-- Rollback the transaction
+			--		ROLLBACK
+
+			--		-- Raise an error and return
+			--		--RAISERROR ('Error in deleting employees in DeleteDepartment.', 16, 1)
+			--		PRINT 'Error Occurred inserting into patient enrollment';
+			--		RETURN
+			--	END
 		
-			SELECT @EnrollmentId = SCOPE_IDENTITY();
-			SELECT @message = 'Created PatientEnrollment Id: ' + CAST(@EnrollmentId as varchar);
-			PRINT @message;
+			--SELECT @EnrollmentId = SCOPE_IDENTITY();
+			--SELECT @message = 'Created PatientEnrollment Id: ' + CAST(@EnrollmentId as varchar);
+			--PRINT @message;
 
 			IF @CCCNumber IS NOT NULL
 				BEGIN

@@ -62,7 +62,7 @@
                 },
 
                 error: function (msg) {
-                    alert(msg.responseText);
+                    //alert(msg.responseText);
                 }
             });
             $("#btnClose").click(function () {

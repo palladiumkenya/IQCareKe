@@ -1,8 +1,11 @@
 ﻿using IQCare.CCC.UILogic.Screening;
 using IQCare.CCC.UILogic.Triage;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 using System.Web.Services;
+using Newtonsoft.Json;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -92,7 +95,7 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string AddPatientFamilyPlanningMethod(int patientId, int PatientFPId, int userId)
+        public string AddPatientFamilyPlanningMethod(int patientId, string PatientFPId, int userId)
         {
             try
             {
@@ -101,8 +104,20 @@ namespace IQCare.Web.CCC.WebService
 
                 var fpMethod = new PatientFamilyPlanningMethodManager();
                 int familyPlanningStatus = Convert.ToInt32(Session["FamilyPlanningStatus"].ToString());
-                result = fpMethod.AddFamilyPlanningMethod(patientId, familyPlanningStatus, PatientFPId, Convert.ToInt32(HttpContext.Current.Session["AppUserId"]));
-                jsonMessage = (result > 0) ? "family planning status addedd successfully" : "";
+                var familyPlanningMethods = JsonConvert.DeserializeObject<IEnumerable<object>>(PatientFPId);
+
+                int count = familyPlanningMethods.Count();
+                if (count > 0)
+                {
+                    foreach (var iteMethod in familyPlanningMethods)
+                    {
+                        result = fpMethod.AddFamilyPlanningMethod(patientId, familyPlanningStatus, Convert.ToInt32(iteMethod.ToString()), Convert.ToInt32(HttpContext.Current.Session["AppUserId"]));
+                        jsonMessage = (result > 0) ? "family planning status addedd successfully" : "";
+                    }
+                    
+                }
+
+                
             }
             catch (Exception e)
             {
