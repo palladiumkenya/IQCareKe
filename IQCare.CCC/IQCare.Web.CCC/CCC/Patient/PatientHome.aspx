@@ -95,6 +95,15 @@
             <div class="col-md-12 form-group"></div>
             <div class="tab-content">
                 <div id="Registration" class="tab-pane">
+                    <div class="col-md-12  col-xs-12">
+                        <div class="col-md-4 col-xs-8 col-sm-8">
+                            <asp:HyperLink ID="updateEnrollment" runat="server" CssClass="pull-left label label-warning" aria-hidden="true" NavigateUrl="~/CCC/Enrollment/ServiceEnrollment.aspx"><span class="fa fa-2x fa-pencil-square-o">Update Enrollment</span></asp:HyperLink>
+                        </div>
+                        <div class="col-md-8 col-xs-8 col-sm-8">
+                            &nbsp;
+                        </div>
+                    </div>
+                    <div class="col-md-12">&nbsp;</div>
                     <div class="col-md-12 col-xs-12">
 
                         <div class="col-md-4 col-xs-4 col-sm-4">

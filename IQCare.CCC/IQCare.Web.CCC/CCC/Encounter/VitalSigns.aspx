@@ -45,13 +45,13 @@
         
          $("#btnFemalVitals").click(function () {
 
-             $("#PatientVitals").hide("fast", function () { $("#femaleVitals").show("fast"); $(window).scrollTop($('#femaleVitals').offset().top) });
+             $("#PatientVitals").hide("fast", function () { $("#femaleVitals").show("fast"); $("#FemaleVisitDate").focus(); /*$(window).scrollTop($('#femaleVitals').offset().top)*/ });
              $("#panelVitals").hide("fast");
              //;
          });
 
          $("#btnLoadTriage").click(function () {
-             $("#femaleVitals").hide("fast", function () { $("#PatientVitals").show("fast"); $(window).scrollTop($('#PatientVitals').offset().top) });
+             $("#femaleVitals").hide("fast", function () { $("#PatientVitals").show("fast"); $("#VisitDatedatepicker").focus(); /*$(window).scrollTop($('#PatientVitals').offset().top)*/ });
              $("#panelVitals").hide("fast");
              //$("#PatientVitals").attr("tabindex",-1).focus();
          });

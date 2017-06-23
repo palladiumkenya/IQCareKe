@@ -19,7 +19,7 @@ namespace IQCare.Web.CCC.UC {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText femaleDateOfVisit;
+        protected global::System.Web.UI.WebControls.TextBox femaleDateOfVisit;
         
         /// <summary>
         /// examinationPregnancyStatus control.
@@ -37,7 +37,7 @@ namespace IQCare.Web.CCC.UC {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText lmp;
+        protected global::System.Web.UI.WebControls.TextBox lmp;
         
         /// <summary>
         /// ExpectedDateOfChildBirth control.
@@ -46,7 +46,7 @@ namespace IQCare.Web.CCC.UC {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText ExpectedDateOfChildBirth;
+        protected global::System.Web.UI.WebControls.TextBox ExpectedDateOfChildBirth;
         
         /// <summary>
         /// ancYes control.
