@@ -5,6 +5,8 @@ using DataAccess.Base;
 using DataAccess.Common;
 using DataAccess.Entity;
 using Interface.Pharmacy;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BusinessProcess.Pharmacy
 {
@@ -224,6 +226,15 @@ namespace BusinessProcess.Pharmacy
                         theRegimen = theRegimen.Trim();
                     }
                 }
+
+                List<string> s = theRegimen.Split('/').ToList();
+                List<string> distinctS = s.Distinct().ToList();
+                string distinctRegimen = "";
+                for (int i = 0; i < distinctS.Count; i++)
+                {
+                    distinctRegimen += distinctS[i].ToString() + "/";
+                }
+                theRegimen = distinctRegimen.TrimEnd('/');
 
                 #endregion "Regimen"
 

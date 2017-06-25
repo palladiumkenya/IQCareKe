@@ -232,7 +232,7 @@
                                     <div class="input-group">
                                         <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="txtDateDispensed" onBlur="ValidateDispensedDate();DateFormat(this,this.value,event,false,'3');" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
                                         <div class="input-group-btn">
-                                            <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
+                                            <button id="btnDateDisp" type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                 <span class="glyphicon glyphicon-calendar"></span>
                                                 <span class="sr-only">Toggle Calendar</span>
                                             </button>
@@ -367,16 +367,23 @@
             drugList(1);
             $("#ddlBatch").prop('disabled', false);
             $("#txtQuantityDisp").prop('disabled', false);
+            $("#txtDateDispensed").prop('disabled', false);
+            $("#btnDateDisp").prop('disabled', false);
+            
         }
         else if (pmscm === "PM/SCM") {
             drugList(1);
             $("#ddlBatch").prop('disabled', true);
             $("#txtQuantityDisp").prop('disabled', true);
+            $("#txtDateDispensed").prop('disabled', true);
+            $("#btnDateDisp").prop('disabled', true);
         }
         else {
             drugList(0);
             $("#ddlBatch").prop('disabled', true);
             $("#txtQuantityDisp").prop('disabled', false);
+            $("#txtDateDispensed").prop('disabled', false);
+            $("#btnDateDisp").prop('disabled', false);
         }
 
         $('#PrescriptionDate').datepicker({
