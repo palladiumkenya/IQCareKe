@@ -255,12 +255,15 @@
                 return false;
             }
         });
-        $("#btnReset").click(function() {
+
+        $("#btnResets").click(function() {
             resetElements();
         });
-        $("#btnCancel").click(function () {
+
+        $("#btnCancels").click(function () {
             window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>';
         });
+
     });
     $("#Heights").change(function () {
         var bmi = calcBMI();
@@ -347,6 +350,7 @@
         $("#RespiratoryRate").val("");
         $("#HeartRate").val("");
         $("#bosaturation").val("");
+        $("#PersonDoB").val("");
     }
 
     function calcZScore()

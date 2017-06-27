@@ -34,6 +34,7 @@ namespace BusinessProcess.CCC.Baseline
         x => x.PatientId == patientTreatmentInitiation.PatientId & !x.DeleteFlag).FirstOrDefault();
                 if (patientTreatment != null)
                 {
+                    patientTreatment.ldl = patientTreatmentInitiation.ldl;
                     patientTreatment.BaselineViralload = patientTreatmentInitiation.BaselineViralload;
                     patientTreatment.BaselineViralloadDate = patientTreatmentInitiation.BaselineViralloadDate;
                     patientTreatment.Cohort = patientTreatmentInitiation.Cohort;

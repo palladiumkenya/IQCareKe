@@ -27,6 +27,7 @@ namespace Entities.CCC.Baseline
         /// cannot be mapped in the lookup table
         /// </summary>
         public string RegimenCode { get; set; }
+        public bool ldl { get; set; }
         public decimal BaselineViralload { get; set; }
         public DateTime BaselineViralloadDate { get; set; }
         [ForeignKey("PatientId")]

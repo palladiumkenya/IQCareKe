@@ -281,9 +281,27 @@ namespace BusinessProcess.CCC
                     unitOfWork.LookupRepository.FindBy(x => x.ItemId == regimenId)
                         .Select(x => x.MasterName)
                         .FirstOrDefault();
+
+                if (masterName == "AdultFirstLineRegimen")
+                {
+                    masterName = "AdultARTFirstLine";
+                }else if (masterName== "AdultSecondlineRegimen")
+                {
+                    masterName = "AdultARTSecondLine";
+                }else if (masterName == "AdultThirdlineRegimen")
+                {
+                    masterName = "AdultARTThirdLine";
+                }else if (masterName == "PaedsFirstLineRegimen")
+                {
+                    masterName = "PaedsARTFirstLine";
+                }else if (masterName == "PaedsSecondlineRegimen")
+                {
+                    masterName = "PaedsARTSecondLine";
+                }
                 int regmineId = unitOfWork.LookupRepository.FindBy(x => x.ItemName == masterName)
                     .Select(x => x.ItemId)
                     .FirstOrDefault();
+
                 unitOfWork.Dispose();
                 return regmineId;
             }

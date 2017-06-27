@@ -960,7 +960,7 @@
 							   <div class="col-md-12"> <hr /></div>
 							</div>
 							<div class="col-md-12 form-group">
-								<div class="col-md-3">
+								<div class="col-md-4">
 									<div class="col-md-12">
 										<label class="control-label pull-left">Date Started On 1st Line</label></div>
 									<div class="col-md-12">
@@ -1056,20 +1056,33 @@
 										</div>
 									</div>
 								</div>
-								<div class="col-md-3">
+								<div class="col-md-4">
 									<div class="col-md-12">
 										<label class="control-label pull-left">ART Cohort</label></div>
 									<div class="col-md-12">
 										<asp:TextBox runat="server" ID="ARTCohort" CssClass="form-control input-sm" ClientIDMode="Static" ReadOnly="True"></asp:TextBox>
 									</div>
 								</div>
-								<div class="col-md-3">
+                            </div>
+
+						    <div class="col-md-12 form-group">
+                                <div class="col-md-1">
+                                    <div class="col-md-12">&nbsp;</div>                              
+                                    <label class="checkbox-custom checkbox-inline highlight pull-left" data-initialize="checkbox" id="chkLDL_label">
+                                        <input class="sr-only" type="checkbox" id="chkLDL" value="true">
+                                        <span class="checkbox-label">LDL</span>
+                                    </label>
+                                </div>
+
+								<div class="col-md-2">
 									<div class="col-md-12">
-										<label class="control-label pull-left">Baseline Viralload</label></div>
+										<label class="control-label pull-left" style="font-size: 65%">Baseline Viralload</label>
+									</div>
 									<div class="col-md-12">
 										<asp:TextBox runat="server" CssClass="form-control input-sm" ID="BaselineViralload" ClientIDMode="Static" data-parsley-required="true" data-parsley-min="2"></asp:TextBox>
 									</div>
 								</div>
+
 								<div class="col-md-3">
 									<div class="col-md-12">
 										<label class="control-label pull-left">Baseline Viraload Date</label></div>
@@ -1167,9 +1180,7 @@
 										</div>
 									</div>
 								</div>
-							</div>
-
-							<div class="col-md-12 form-group">
+							
 								<div class="col-md-3">
 									<div class="col-md-12">
 										<label class="control-label pull-left">Regimen Category</label></div>
@@ -1177,6 +1188,7 @@
 										<asp:DropDownList runat="server" ID="InitiationRegimen" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-min="0" />
 									</div>
 								</div>
+
 								<div class="col-md-3">
 									<div class="col-md-12">
 										<label class="control-label pull-left">Regimen</label></div>
@@ -1184,8 +1196,7 @@
 										<asp:DropDownList runat="server" ID="RegimenInitiationId" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-min="0" />
 									</div>
 								</div>
-								<div class="col-md-3"></div>
-								<div class="col-md-3"></div>
+
 							</div>
 						</div>
 
@@ -1224,7 +1235,8 @@
 			var breastfeeding = false;
 			var pregnancy = false;
 			var bHiV = false;
-			var tbInfection = false;
+            var tbInfection = false;
+		    var ldl = false;
 
 			var today = new Date();
 
@@ -1581,7 +1593,21 @@
 					$("#PrEP").checkbox('uncheck');
 					$("#RegimenPurpose").val("");
 					noneChecked();
-				});
+                });
+		    $("#chkLDL_label").on("checked.fu.checkbox",
+		        function() {
+                    $("#BaselineViralload").prop("disabled", true);
+		            ldl = true;
+		            //$("#TreatmeantInitiationBaselineViralloadDate").prop("disabled", true);
+		        });
+
+		    $("#chkLDL_label").on("unchecked.fu.checkbox",
+		        function () {
+                    $("#BaselineViralload").prop("disabled", false);
+		            ldl = false;
+		            //$("#TreatmeantInitiationBaselineViralloadDate").prop("disabled", true);
+		        });
+
 
 
 			$("#AddPriorHistory").click(function(e) {
@@ -1836,7 +1862,13 @@
 									
 									$("#DateStartedOnFirstLine").datepicker('setDate', moment(obj.DateStartedOnFirstline) .format('DD-MMM-YYYY'));
 									$("#<%=ARTCohort.ClientID%>").val(obj.Cohort);
-									$("#BaselineViralload").val(obj.BaselineViralLoad);
+                                    $("#BaselineViralload").val(obj.BaselineViralLoad);
+                                    if (obj.ldl) {
+                                        $("#chkLDL_label").checkbox('check');
+                                    } else {
+                                        $("#chkLDL_label").checkbox('uncheck');
+                                    }
+                                    
 
 									$("#BaselineViralloadDate")
 										.datepicker('setDate', moment(obj.BaselineViralLoadDate).format('DD-MMM-YYYY'));
@@ -1954,7 +1986,7 @@
 										dataType: "json",
 										success: function(response) {
 											$("#<%=InitiationRegimen.ClientID%>").val(response.d);
-
+                                            console.log(response.d);
 											var reg = $("#<%=InitiationRegimen.ClientID%>").find(":selected").text();
 											var str = reg.replace(/\s+/g, '');
 
@@ -2058,8 +2090,9 @@
 
 							    
 								if (transferIn === 1) {
-									$.when(managePatientBaselineAssessment()).then(managePatientTreatmentInitiation());
-								    
+                                    $.when(managePatientBaselineAssessment()).then(function () { setTimeout(function () { managePatientTreatmentInitiation(); }, 2000); });
+
+
                                     if (data.direction === 'next') {
                                                window.location.href = '<%=ResolveClientUrl( "~/CCC/Patient/PatientHome.aspx")%>';
 								                 toastr.success("Patient Baseline Assessment and Treatment initiation Completed successfully...");
@@ -2324,7 +2357,7 @@
 				$.ajax({
 					type: "POST",
 					url: "../WebService/PatientBaselineService.asmx/ManagePatientTreatmentInitiation",
-					data: "{'id':'" + id + "','patientId':'" + ptnId + "','patientMasterVisitid':'" + ptnmasterVisitId + "','dateStartedOnFirstLine':'" + firstlineStartDate + "','cohort':'" + artCohort + "','regimen':'" + startRegimen + "','baselineViralload':'" + viralLoad + "','baselineViralLoadDate':'" + viralLoadDate + "','userId':'" + userId +
+					data: "{'id':'" + id + "','patientId':'" + ptnId + "','patientMasterVisitid':'" + ptnmasterVisitId + "','dateStartedOnFirstLine':'" + firstlineStartDate + "','cohort':'" + artCohort + "','regimen':'" + startRegimen + "', 'ldl': '" + ldl + "','baselineViralload':'" + viralLoad + "','baselineViralLoadDate':'" + viralLoadDate + "','userId':'" + userId +
 						"'}",
 					contentType: "application/json; charset=utf-8",
 					dataType: "json",
