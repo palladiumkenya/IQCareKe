@@ -100,6 +100,11 @@ IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'RegimenCode'AND Object_ID
     BEGIN
         ALTER TABLE PatientTreatmentInitiation ADD RegimenCode int NULL;
     END;
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'ldl' AND Object_ID = OBJECT_ID(N'PatientTreatmentInitiation'))
+	BEGIN
+		ALTER TABLE PatientTreatmentInitiation ADD ldl bit NULL;
+		ALTER TABLE [dbo].[PatientTreatmentInitiation] ADD  CONSTRAINT [DF_PatientTreatmentInitiation_ldl]  DEFAULT ((0)) FOR [ldl]
+	END;
 IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'IssuedQuantity'AND Object_ID = OBJECT_ID(N'Dtl_PurchaseItem'))
     BEGIN
         ALTER TABLE Dtl_PurchaseItem ADD IssuedQuantity int;

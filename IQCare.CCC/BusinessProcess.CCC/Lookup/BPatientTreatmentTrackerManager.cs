@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using DataAccess.Base;
 using DataAccess.CCC.Context;
 using DataAccess.CCC.Repository;
@@ -64,5 +65,15 @@ namespace BusinessProcess.CCC.Lookup
             }
         }
 
+        public bool HasPatientTreatmentStarted(int patientId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                bool treatmentHasStarted = unitOfWork.PatientTreatmentTrackerLookupRepository
+                    .FindBy(x => x.PatientId == patientId).Any();
+                unitOfWork.Dispose();
+                return treatmentHasStarted;
+            }
+        }
     }
 }

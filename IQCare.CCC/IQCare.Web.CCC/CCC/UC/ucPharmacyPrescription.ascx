@@ -330,9 +330,9 @@
                                             
                     <div class="col-md-8">
                     <%--<div class="col-md-2"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-info btn-sm fa fa-plus-circle" OnClick="saveUpdatePharmacy();"> Save Prescription</asp:LinkButton></div>--%>
-                        <div class="col-md-2"><button type="button" Class="btn btn-info btn-sm fa fa-plus-circle" onclick="saveUpdatePharmacy();">Save Prescription</button></div>
-                        <div class="col-md-2"><button type="button" Class="btn btn-warning btn-sm fa fa-refresh" onclick="resetPharmacyForm();">Reset Prescription</button></div>
-                        <div class="col-md-2"><button type="button" Class="btn btn-danger btn-sm  fa fa-times" data-dismiss="modal">Close Prescription</button></div>
+                        <div class="col-md-3"><button type="button" Class="btn btn-info btn-sm fa fa-plus-circle" onclick="saveUpdatePharmacy();">Save Prescription</button></div>
+                        <div class="col-md-3"><button type="button" Class="btn btn-warning btn-sm fa fa-refresh" onclick="resetPharmacyForm();">Reset Prescription</button></div>
+                        <div class="col-md-3"><button type="button" Class="btn btn-danger btn-sm  fa fa-times" data-dismiss="modal">Close Prescription</button></div>
                     </div>
                                              
             </div>
@@ -348,6 +348,7 @@
     var pmscmFlag = "0";
     var prescriptionDate = "<%= this.prescriptionDate %>";
     var dispenseDate = "<%= this.dispenseDate %>";
+    var startTreatment = "<%=StartTreatment %>";
     //Date processing
     var today = new Date();
     var tomorrow = new Date();
@@ -391,6 +392,24 @@
             momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' },
             date: dispenseDate,
             restricted: [{ from: tomorrow, to: Infinity }]
+        });
+
+        $("#<%=ddlTreatmentProgram.ClientID%>").change(function () {
+            
+        });
+
+        $("#<%=ddlTreatmentPlan.ClientID%>").change(function () {
+            var treatmentProgram = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
+            var treatmentPlan = $("#<%=ddlTreatmentPlan.ClientID%>").find(":selected").text();
+
+            console.log(treatmentProgram);
+            console.log(treatmentPlan);
+            console.log(startTreatment);
+
+            if (startTreatment == true && treatmentProgram == "ART" && treatmentPlan == "Start Treatment") {
+                $("#<%=ddlTreatmentPlan.ClientID%>").val("");
+                toastr.error("The Patient has already started treatment", "Error");
+            }
         });
 
     });

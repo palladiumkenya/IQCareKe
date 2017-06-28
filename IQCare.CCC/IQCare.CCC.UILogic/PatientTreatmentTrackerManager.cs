@@ -75,5 +75,17 @@ namespace IQCare.CCC.UILogic
                 throw;
             }
         }
+
+        public bool HasPatientTreatmentStarted(int patientId)
+        {
+            try
+            {
+                return _patientTreatmentTrackerManager.HasPatientTreatmentStarted(patientId);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }
