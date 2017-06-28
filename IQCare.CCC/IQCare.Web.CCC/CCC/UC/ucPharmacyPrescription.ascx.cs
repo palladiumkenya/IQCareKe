@@ -17,6 +17,8 @@ namespace IQCare.Web.CCC.UC
         public string PMSCMSAmePointDispense = "0";
         public string prescriptionDate = "";
         public string dispenseDate = "";
+        public bool StartTreatment { get; set; }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Request.QueryString["visitId"] != null)
@@ -33,6 +35,10 @@ namespace IQCare.Web.CCC.UC
                     PMSCMSAmePointDispense = Session["SCMSamePointDispense"].ToString();
 
                 LookupLogic lookUp = new LookupLogic();
+                PatientTreatmentTrackerManager treatmentTrackerManager = new PatientTreatmentTrackerManager();
+
+                StartTreatment = treatmentTrackerManager.HasPatientTreatmentStarted(Convert.ToInt32(Session["PatientPK"].ToString()));
+
                 //lookUp.populateDDL(ddlTreatmentProgram, "TreatmentProgram");
                 lookUp.populateDDL(ddlPeriodTaken, "PeriodDrugsTaken");
                 lookUp.populateDDL(ddlTreatmentPlan, "TreatmentPlan");
@@ -50,14 +56,15 @@ namespace IQCare.Web.CCC.UC
                 PatientEncounterLogic pel = new PatientEncounterLogic();
                 pel.getPharmacyTreatmentProgram(ddlTreatmentProgram);
 
-                loadExistingData();
+                LoadExistingData();
             }
         }
 
-        void loadExistingData()
+        void LoadExistingData()
         {
             LookupLogic lookUp = new LookupLogic();
             PatientEncounterLogic encounterLogic = new PatientEncounterLogic();
+
             List<Entities.CCC.Encounter.PatientEncounter.PharmacyFields> lst = encounterLogic.getPharmacyFields(Session["PatientMasterVisitId"].ToString());
             if (lst.Count > 0)
             {

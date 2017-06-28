@@ -10,5 +10,6 @@ namespace Interface.CCC.Lookup
         List<PatientTreamentTrackerLookup> GetPatientTreatmentSwitchesList(int patientId);
         List<PatientTreamentTrackerLookup> GetPatientTreatmentInterrupList(int patientId);
         List<PatientTreamentTrackerLookup> GetPatientTreatmentSubstitutionList(int patientId);
+        bool HasPatientTreatmentStarted(int patientId);
     }
 }
