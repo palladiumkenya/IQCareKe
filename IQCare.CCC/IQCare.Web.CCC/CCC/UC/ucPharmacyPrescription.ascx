@@ -348,7 +348,9 @@
     var pmscmFlag = "0";
     var prescriptionDate = "<%= this.prescriptionDate %>";
     var dispenseDate = "<%= this.dispenseDate %>";
-    var startTreatment = "<%=StartTreatment %>";
+    var startTreatment = "<%=StartTreatment.ToString().ToLower() %>";
+    var gender = "<%=Session["Gender"]%>";
+    var age = "<%=Session["Age"]%>";
     //Date processing
     var today = new Date();
     var tomorrow = new Date();
@@ -395,18 +397,23 @@
         });
 
         $("#<%=ddlTreatmentProgram.ClientID%>").change(function () {
-            
+             if (gender == "Female" && age >= 9) {
+
+             } else {
+                 toastr.error("PMTCT is for female patients only who are older than 9 years", "Error");
+                 $("#<%=ddlTreatmentProgram.ClientID%>").val("");
+             }
         });
 
         $("#<%=ddlTreatmentPlan.ClientID%>").change(function () {
             var treatmentProgram = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
             var treatmentPlan = $("#<%=ddlTreatmentPlan.ClientID%>").find(":selected").text();
 
-            console.log(treatmentProgram);
-            console.log(treatmentPlan);
-            console.log(startTreatment);
+            //console.log(treatmentProgram);
+            //console.log(treatmentPlan);
+            //console.log(startTreatment);
 
-            if (startTreatment == true && treatmentProgram == "ART" && treatmentPlan == "Start Treatment") {
+            if (startTreatment == "true" && treatmentProgram == "ART" && treatmentPlan == "Start Treatment") {
                 $("#<%=ddlTreatmentPlan.ClientID%>").val("");
                 toastr.error("The Patient has already started treatment", "Error");
             }
@@ -607,12 +614,67 @@
 
     function treatmentProgram() {
         var valSelected = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
+        //console.log(startTreatment);
+
         if (valSelected === "PMTCT") {
             $("#<%=ddlPeriodTaken.ClientID%>").prop('disabled', false);
-        }
-        else {
+            $("#<%=ddlPeriodTaken.ClientID%>").val("");
+            $("#<%=ddlTreatmentPlan.ClientID%>").prop('disabled', false);
+            $("#<%=ddlTreatmentPlan.ClientID%>").val("");
+            $("#<%=ddlSwitchInterruptionReason.ClientID%>").prop('disabled', false);
+            $("#<%=ddlSwitchInterruptionReason.ClientID%>").val("");
+            $("#<%=regimenLine.ClientID%>").prop('disabled', false);
+            $("#<%=regimenLine.ClientID%>").val("");
+            $("#<%=ddlRegimen.ClientID%>").prop('disabled', false);
+            $("#<%=ddlRegimen.ClientID%>").val("");
+        } else if (startTreatment == "false" && valSelected == "ART") {
+            $("#<%=ddlTreatmentPlan.ClientID%> option").each(function () {
+                if ($(this).text() == "Start Treatment") {
+                    $("#<%=ddlPeriodTaken.ClientID%>").prop('disabled', true);
+                    $("#<%=ddlPeriodTaken.ClientID%>").val("");
+                    $("#<%=ddlTreatmentPlan.ClientID%>").val($(this).val());
+                    $("#<%=ddlTreatmentPlan.ClientID%>").prop("disabled", true);
+                    drugSwitchInterruptionReason();
+                    $("#<%=regimenLine.ClientID%>").prop('disabled', false);
+                    $("#<%=regimenLine.ClientID%>").val("");
+                    $("#<%=ddlRegimen.ClientID%>").prop('disabled', false);
+                    $("#<%=ddlRegimen.ClientID%>").val("");
+                }
+            });
+        } else if (startTreatment == "true" && valSelected == "ART") {
+            $("#<%=ddlTreatmentPlan.ClientID%> option").each(function () {
+                if ($(this).text() == "Continue current treatment") {
+                    $("#<%=ddlPeriodTaken.ClientID%>").prop('disabled', true);
+                    $("#<%=ddlPeriodTaken.ClientID%>").val("");
+                    $("#<%=ddlTreatmentPlan.ClientID%>").val($(this).val());
+                    $("#<%=ddlTreatmentPlan.ClientID%>").prop("disabled", false);
+                    drugSwitchInterruptionReason();
+                    getCurrentRegimen();
+                }
+            });
+        }else if (valSelected == "Non-ART" || valSelected == "HBV") {
+            $("#<%=ddlPeriodTaken.ClientID%>").prop('disabled', true);
+            $("#<%=ddlPeriodTaken.ClientID%>").val("");
+            $("#<%=ddlTreatmentPlan.ClientID%>").prop('disabled', true);
+            $("#<%=ddlTreatmentPlan.ClientID%>").val("");
+            $("#<%=ddlSwitchInterruptionReason.ClientID%>").prop('disabled', true);
+            $("#<%=ddlSwitchInterruptionReason.ClientID%>").val("");
+            $("#<%=regimenLine.ClientID%>").prop('disabled', true);
+            $("#<%=regimenLine.ClientID%>").val("");
+            $("#<%=ddlRegimen.ClientID%>").prop('disabled', true);
+            $("#<%=ddlRegimen.ClientID%>").val("");
+        } else {
             $("#ddlPeriodTaken").val("0");
             $("#<%=ddlPeriodTaken.ClientID%>").prop('disabled', true);
+            $("#<%=ddlPeriodTaken.ClientID%>").val("");
+            $("#<%=ddlTreatmentPlan.ClientID%>").prop('disabled', false);
+            $("#<%=ddlTreatmentPlan.ClientID%>").val("");
+            $("#<%=ddlSwitchInterruptionReason.ClientID%>").prop('disabled', false);
+            $("#<%=ddlSwitchInterruptionReason.ClientID%>").val("");
+            $("#<%=regimenLine.ClientID%>").prop('disabled', false);
+            $("#<%=regimenLine.ClientID%>").val("");
+            $("#<%=ddlRegimen.ClientID%>").prop('disabled', false);
+            $("#<%=ddlRegimen.ClientID%>").val("");
         }
     }
 
