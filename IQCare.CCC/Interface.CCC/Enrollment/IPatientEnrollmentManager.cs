@@ -14,5 +14,6 @@ namespace Interface.CCC.Enrollment
         DateTime GetPatientEnrollmentDate(int patientId);
         List<PatientEntityEnrollment> GetPatientEnrollmentByPatientId(int patientId);
         PatientEntityEnrollment GetPatientEntityEnrollment(int id);
+        List<PatientEntityEnrollment> GetPatientByPatientIdCareEnded(int patientId);
     }
 }

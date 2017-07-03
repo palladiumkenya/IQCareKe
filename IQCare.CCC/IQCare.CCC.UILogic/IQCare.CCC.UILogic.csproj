@@ -93,6 +93,7 @@
     <Compile Include="Enrollment\PatientEnrollmentManager.cs" />
     <Compile Include="Enrollment\PatientEntryPointManager.cs" />
     <Compile Include="Enrollment\PatientIdentifierManager.cs" />
+    <Compile Include="Enrollment\PatientReEnrollmentManager.cs" />
     <Compile Include="Enrollment\ServiceAreaIdentifiersManager.cs" />
     <Compile Include="FacilityListManager.cs" />
     <Compile Include="LookupLogic.cs" />

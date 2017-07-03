@@ -39,18 +39,19 @@ namespace DataAccess.CCC.Repository.Lookup
                 x.PatientId == patientId &               
                 x.Results == complete);
 
-          
-            DateTime? maxLabDate = null;
-            if (myList.ToList().Count > 0) {
+            myList = myList.OrderByDescending(x => x.Id).Take(5);
 
-                maxLabDate = myList.Max(x => x.ResultDate);
-            }
-            
+            //DateTime? maxLabDate = null;
+            //if (myList.ToList().Count > 0) {
+
+            //    maxLabDate = myList.Max(x => x.ResultDate);
+            //}
+
             ////gets max laborder           
-            var list = myList.Where(x => x.ResultDate == maxLabDate);
+            //var list = myList.Where(x => x.ResultDate == maxLabDate);
 
-            return list.ToList();
-
+            //return list.ToList();
+            return myList.ToList();
 
 
         }

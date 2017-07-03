@@ -40,6 +40,7 @@ namespace DataAccess.CCC.Context
         public DbSet<PersonGreenCardLookup> PersonGreenCardLookup { get; set; }
         public DbSet<ServiceAreaIdentifiers> ServiceAreaIdentifiers { get; set; }
         public DbSet<Identifier> Identifiers { get; set; }
+        public DbSet<PatientReEnrollment> ReEnrollments { get; set; }
 
         //Screening
         public DbSet<PatientScreening> PatientScreenings { get; set; }

@@ -220,9 +220,6 @@
 
                             </div>
 
-
-
-
                             <!-- Modal -->
                             <div id="treatmentSupporterModal" class="modal fade" role="dialog" data-parsley-validate="true" data-show-errors="true" data-keyboard="false" data-backdrop="static">
                                 <div class="modal-dialog">
@@ -1507,7 +1504,7 @@
                         function(index, itemList) {
                             if (itemList.patientId > 0) {
                                 
-                                console.log(itemList);
+                                //console.log(itemList);
                                 /* transferin status */
                               
                                 if (patientType === 'Transfer-In') {
@@ -1680,7 +1677,7 @@
                                     success: function (response) {
                                         var itemList = JSON.parse(response.d);
 
-                                        console.log(itemList);
+                                        //console.log(itemList);
 
                                         if (itemList.length > 0) {
                                             $("#<%=lblTreatmentType.ClientID%>").text(itemList[0].TreatmentType);
@@ -1904,7 +1901,7 @@
             };
 
             function getVitals() {
-                console.log("get vitals called");
+                //console.log("get vitals called");
                 $.ajax({
                     url: '../WebService/PatientVitals.asmx/GetVitals',
                     type: 'POST',
@@ -1912,7 +1909,7 @@
                     contentType: "application/json; charset=utf-8",
                     cache: false,
                     success: function(response) {
-                        console.log(response.d);
+                        //console.log(response.d);
                         var items = response.d;
                         items.forEach(function(item, i) {
 
@@ -2061,7 +2058,7 @@
                     dataType: "json",
                     success: function (response) {
                         var patientDetails = JSON.parse(response.d);
-                        console.log(patientDetails);
+                        //console.log(patientDetails);
 
                         
                         $("#<%=bioFirstName.ClientID%>").val(patientDetails.FirstName);
@@ -2097,9 +2094,15 @@
                         if (patientDetails.tsFname == null && patientDetails.tsLastName == null) {
                             names = 'unknown';
                         } else {
+                            var middleName = "";
+                            if (patientDetails.tsMiddleName == null) {
+                                middleName = "";
+                            } else {
+                                middleName = patientDetails.tsMiddleName;
+                            }
                             names = patientDetails.tsFname +
                                 " " +
-                                patientDetails.tsMiddleName +
+                                middleName +
                                 " " +
                                 patientDetails.tsLastName;
                         }
@@ -2348,7 +2351,10 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
-                    console.log(response.d);
+                    //console.log(response.d);
+                    var names = firstName + " " + middleName + " " + lastName;
+                    $("#<%=txtSupporterNames.ClientID%>").text(names);
+                    //$("#txtSupporterNames").val(names);
                     toastr.success(response.d, "Changing Treatment Supporter");
                 },
                 error: function (response) {
@@ -2365,7 +2371,9 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
-                    console.log(response.d);
+                    //console.log(response.d);
+                    $("#<%=txtPostalAddress.ClientID%>").text(physicalAddress);
+                    $("#<%=txtMobile.ClientID%>").text(mobileNumber);
                     toastr.success(response.d, "Change Contacts");
                 },
                 error: function (response) {
@@ -2382,7 +2390,9 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
-                    console.log(response.d);
+                    //console.log(response.d);
+                    $.when(GetLookupNameById(county)).then();
+                    $("#<%=txtNearestHealthCentre.ClientID%>").text(nearestHc);
                     toastr.success(response.d, "Change Location");
                 },
                 error: function (response) {
@@ -2492,16 +2502,16 @@
             }
 
             function getPatientVitals() {
-                console.log();
+                //console.log();
                 $.ajax({
                     type: "POST",
                     url: "../WebService/PatientVitals.asmx/GetByPatientId",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
-                        console.log(response.d);
+                        //console.log(response.d);
                         var patientVitals = response.d;
-                        console.log(patientVitals);
+                        //console.log(patientVitals);
 
                         if (patientVitals != null) {
                             $("#<%=lblWeightP.ClientID%>").text(patientVitals.Weight);
@@ -2517,6 +2527,28 @@
                         }
 
                     },
+                error: function (xhr, errorType, exception) {
+                    var jsonError = jQuery.parseJSON(xhr.responseText);
+                    toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);
+                    return false;
+                }
+            });
+            }
+
+        function reEnrollPatient(reEnrollmentDate) {
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientReEnrollment.asmx/AddReEnrollment",
+                data: "{'reEnrollmentDate':'" + reEnrollmentDate + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    //console.log(response.d);
+                    toastr.success(response.d, "Re-Enrollment");
+
+                    setTimeout(function () { window.location.reload(); },2000);
+
+                },
                 error: function (xhr, errorType, exception) {
                     var jsonError = jQuery.parseJSON(xhr.responseText);
                     toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);

@@ -236,27 +236,24 @@
                     </div>
                 </div>
     </div>
-                <div class="col-md-12">
-                    <hr />
-                </div>
-<div class="col-md-12">
+            <div class="col-md-12">
+                <hr />
+            </div>
+
+            <div class="col-md-12">
                 <div class="col-md-7"></div>
                 <div class="col-md-5">
-                    <div class="col-md-3">
+                    <div class="col-md-4">
 
                         <asp:LinkButton runat="server" ID="btnSaveLab" OnClientClick="return false" CssClass="btn btn-info fa fa-plus-circle" ClientIDMode="Static"> Save Order</asp:LinkButton>
                     </div>                  
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <asp:LinkButton runat="server" ID="btnResetOrder" OnClientClick="return false" CssClass="btn btn-warning fa fa-refresh" ClientIDMode="Static"> Reset Order</asp:LinkButton>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                          <button type="button" Class="btn btn-danger btn-sm  fa fa-times" data-dismiss="modal">Close Lab Order</button>
-                        <%--<asp:LinkButton runat="server" ID="btnCancelOrder" OnClientClick="return false" CssClass="btn btn-danger fa fa-times" ClientIDMode="Static"> Cancel Order</asp:LinkButton>--%>
-                      <%-- <asp:LinkButton runat="server" ID="btnClose" OnClientClick="return false" Class="btn btn-danger btn-sm  fa fa-times" data-dismiss="modal" ClientIDMode="Static">Close Lab Order</asp:LinkButton>--%>
                     </div>
                 </div>
-
-                <%--</div>--%>
             </div>
  <!-- ajax begin -->
     <script type="text/javascript">
@@ -452,15 +449,20 @@
                 var labName = $("#labTestTypes").val();
                 var labNameId=val2key(labName, labtests);              
                 var labOrderReason = $("#orderReason").find(":selected").text();
+                var orderReasonIsDisabled = $('#orderReason').prop('disabled');
+                //console.log(labOrderReason);
                 var labOrderNotes = $("#labNotes").val();
 
                 if (labName < 1) {
                     toastr.error("Please select at least One(1) Lab Type from the List");
                     return false;
                 }
-                if (labOrderReason < 1) {
+
+                if (labOrderReason == "Select" && orderReasonIsDisabled == false) {
                     toastr.error("Please select at least One(1) Lab Order Reason from the List");
                     return false;
+                } else if (labOrderReason == "Select" && orderReasonIsDisabled == true) {
+                    labOrderReason = "";
                 }
 
                 labOrderFound = $.inArray("" + labName + "", LabOrderList);
@@ -503,6 +505,16 @@
       
             $("#btnResetOrder").click(function (e) {   
                 resetLabOrder();
+            });
+
+            $("#labTestTypes").change(function() {
+                
+                var labType = $("#labTestTypes").val();
+                if (labType != "Viral Load" && labType != "CD4" && labType != "CD4 Percent") {
+                    $("#orderReason").prop("disabled", true);
+                } else {
+                    $("#orderReason").prop("disabled", false);
+                }
             });
 
             <%--$("#btnClose").click(function (e) {

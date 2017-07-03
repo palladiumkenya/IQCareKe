@@ -1579,7 +1579,7 @@
                 }
 
                 function estimateDob(personAge) {
-                    console.log(personAge);
+                    //console.log(personAge);
                     var currentDate = new Date();
                     currentDate.setDate(15);
                     currentDate.setMonth(5);
