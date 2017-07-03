@@ -13,5 +13,6 @@ namespace Interface.CCC.Encounter
         int DeletePatientCareEnding(int id);
         List<PatientCareEnding> GetPatientCareEndings(int patientId);
         string PatientCareEndingStatus(int patientId);
+        int ResetPatientCareEnding(PatientCareEnding patientCareEnding);
     }
 }

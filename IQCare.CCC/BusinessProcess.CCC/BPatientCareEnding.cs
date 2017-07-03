@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using DataAccess.Base;
 using DataAccess.CCC.Context;
@@ -98,6 +99,18 @@ namespace BusinessProcess.CCC
                 }
                 unitOfWork.Dispose();
                 return careendingStatus.ToString();
+            }
+        }
+
+        public int ResetPatientCareEnding(PatientCareEnding patientCareEnding)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                unitOfWork.PatientCareEndingRepository.Update(patientCareEnding);
+                unitOfWork.Complete();
+                int Id = patientCareEnding.Id;
+                unitOfWork.Dispose();
+                return Id;
             }
         }
     }

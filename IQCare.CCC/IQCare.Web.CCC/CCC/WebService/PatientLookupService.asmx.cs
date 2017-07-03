@@ -60,7 +60,8 @@ namespace IQCare.Web.CCC.WebService
 
                     if (!string.IsNullOrWhiteSpace(patientId))
                     {
-                        jsonData = jsonData.Where(x => x.EnrollmentNumber == patientId).ToList();
+                        //jsonData = jsonData.Where(x => x.EnrollmentNumber == patientId).ToList();
+                        jsonData = jsonData.Where(x => x.EnrollmentNumber.Contains(patientId)).ToList();
                     }
 
                     if (!string.IsNullOrWhiteSpace(firstName))

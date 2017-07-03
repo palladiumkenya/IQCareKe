@@ -83,5 +83,15 @@ namespace BusinessProcess.CCC.Enrollment
                 return enrollmentDate;
             }
         }
+
+        public List<PatientEntityEnrollment> GetPatientByPatientIdCareEnded(int patientId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var enrollmentCareEnded = unitOfWork.PatientEnrollmentRepository.FindBy(x => x.PatientId == patientId && x.CareEnded).ToList();
+                unitOfWork.Dispose();
+                return enrollmentCareEnded;
+            }
+        }
     }
 }
