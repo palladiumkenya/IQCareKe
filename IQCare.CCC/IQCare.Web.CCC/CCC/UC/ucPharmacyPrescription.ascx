@@ -397,9 +397,11 @@
         });
 
         $("#<%=ddlTreatmentProgram.ClientID%>").change(function () {
-             if (gender == "Female" && age >= 9) {
+            var treatmentProgram = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
 
-             } else {
+            if (gender == "Female" && age >= 9 && treatmentProgram == "PMTCT") {
+
+            } else if (treatmentProgram == "PMTCT" && (gender != "Female" || age < 9)) {
                  toastr.error("PMTCT is for female patients only who are older than 9 years", "Error");
                  $("#<%=ddlTreatmentProgram.ClientID%>").val("");
              }
