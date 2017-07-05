@@ -1682,6 +1682,7 @@
 			// $("#lblwhostage").checkbox('uncheck');
 			//$("#lblCD4Count").checkbox('uncheck');
 			$("#lblBVCoInfection").checkbox('uncheck');
+            $("#chkLDL_label").checkbox('uncheck');
 			//$("#lblPregnancy").checkbox('uncheck');
 			//$("#lblBreastFeeding").checkbox('uncheck');
 			$("#lblBHIV").checkbox('uncheck');

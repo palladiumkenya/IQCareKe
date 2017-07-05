@@ -70,7 +70,10 @@
             });
 
             $("#AddAppointment").click(function () {
-                window.location.href = '<%=ResolveClientUrl("~/CCC/Appointment/ScheduleAppointment.aspx") %>';
+                setTimeout(function() {
+                        window.location.href = '<%=ResolveClientUrl("~/CCC/Appointment/ScheduleAppointment.aspx") %>';
+                    },
+                    2000);
             });
         })
 
