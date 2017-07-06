@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
+using Entities.CCC.Triage;
 using Newtonsoft.Json;
 
 namespace IQCare.Web.CCC.WebService
@@ -159,6 +160,36 @@ namespace IQCare.Web.CCC.WebService
                 jsonMessage = e.Message;
             }
             return result;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string AddPregnancyOutcome(int outcome, string outcomeDate)
+        {
+            try
+            {
+                var patientPregnancy = new PatientPregnancyManager();
+                patientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
+
+                List<PatientPreganancy> patientListPregnancy = patientPregnancy.GetPatientPregnancy(patientId);
+
+                foreach (var preg in patientListPregnancy)
+                {
+                    if (preg.Outcome == 0)
+                    {
+                        preg.Outcome = outcome;
+                        preg.DateOfOutcome = DateTime.Parse(outcomeDate);
+                        //DateTime EDD = Convert.ToDateTime(preg.EDD);
+
+                        result = patientPregnancy.UpdatePatientPregnancyOutcome(preg);
+                    }
+                }
+                jsonMessage = (result > 0) ? "Patient Pregnancy Outcome Added successfully!" : "";
+            }
+            catch (Exception e)
+            {
+                jsonMessage = e.Message;
+            }
+            return jsonMessage;
         }
     }
 }

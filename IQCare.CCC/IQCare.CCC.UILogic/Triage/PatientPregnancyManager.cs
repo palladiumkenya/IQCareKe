@@ -97,5 +97,18 @@ namespace IQCare.CCC.UILogic.Triage
                 throw;
             }
         }
+
+        public int UpdatePatientPregnancyOutcome(PatientPreganancy pregnancy)
+        {
+            try
+            {
+                return _PatientPregnancy.UpdatePatientPregnancyOutcome(pregnancy);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }

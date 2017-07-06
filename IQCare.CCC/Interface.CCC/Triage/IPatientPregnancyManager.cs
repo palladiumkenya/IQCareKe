@@ -10,5 +10,6 @@ namespace Interface.CCC.Triage
         int DeletePatientPregnancy(int id);
         List<PatientPreganancy> GetPatientPregnancy(int patientId);
         int CheckIfPatientPregnancyExisists(int patientId);
+        int UpdatePatientPregnancyOutcome(PatientPreganancy pregnancy);
     }
 }

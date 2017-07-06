@@ -85,5 +85,16 @@ namespace BusinessProcess.CCC.Triage
                 return pg;
             }
         }
+
+        public int UpdatePatientPregnancyOutcome(PatientPreganancy pregnancy)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                unitOfWork.PatientPregnancyRepository.Update(pregnancy);
+                unitOfWork.Complete();
+                unitOfWork.Dispose();
+                return pregnancy.Id;
+            }
+        }
     }
 }
