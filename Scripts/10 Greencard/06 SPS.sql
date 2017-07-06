@@ -3417,7 +3417,7 @@ BEGIN
 			--SELECT @message = 'Created PatientEnrollment Id: ' + CAST(@EnrollmentId as varchar);
 			--PRINT @message;
 
-			IF @CCCNumber IS NOT NULL
+			IF @CCCNumber IS NOT NULL AND @ModuleId = 203
 				BEGIN
 					-- Patient Identifier
 					INSERT INTO [dbo].[PatientIdentifier] ([PatientId], [PatientEnrollmentId], [IdentifierTypeId], [IdentifierValue] ,[DeleteFlag] ,[CreatedBy] ,[CreateDate] ,[Active] ,[AuditData])
