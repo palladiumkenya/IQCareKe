@@ -491,7 +491,7 @@
                                          2000);
                                  });
                              } else {
-                                 addPregnancyIndicator();
+                                 setTimeout(function() { addPregnancyIndicator(); }, 2000);
                              }
 
                              /* save family planning */
@@ -501,27 +501,33 @@
                                  if (fpName === "No Family Planning(NOFP)") {
                                      addFamilyPlanning();
                                  } else {
-                                     $.when(addFamilyPlanning()).then(function() {
-                                         setTimeout(function () {
-                                                 addFamilyPlanningMethod();
-                                             },
-                                             2000);
-                                     });
+                                     setTimeout(function() {
+                                             $.when(addFamilyPlanning()).then(function() {
+                                                 setTimeout(function() {
+                                                         addFamilyPlanningMethod();
+                                                     },
+                                                     2000);
+                                             });
+                                         },
+                                         2000);
                                  }
                              }
 
-                             /* patient screening*/
-                             $.when(addPatientScreeningcacx()).then(function() {
-                                 setTimeout(function () {
-                                         addPatientScreeningSti();
-                                     },
-                                     2000);
-                             });
-                             $.when(addPatientScreeningStiNotification()).then(function () {
-                                 $("#FemaleVitals").hide("fast");
-                             });
-                         }
-                         location.reload();
+                             setTimeout(function() {
+                                     /* patient screening*/
+                                     $.when(addPatientScreeningcacx()).then(function() {
+                                         setTimeout(function() {
+                                                 addPatientScreeningSti();
+                                             },
+                                             2000);
+                                     });
+                                     $.when(addPatientScreeningStiNotification()).then(function() {
+                                         $("#FemaleVitals").hide("fast");
+                                         //location.reload();
+                                     });
+                                 },
+                                 2000);
+                         }        
                      },
                      error: function (xhr, errorType, exception) {
                          var jsonError = jQuery.parseJSON(xhr.responseText);
