@@ -7,10 +7,7 @@ SET
 	RelDate='01-Jun-2017',
 	VersionName='Kenya HMIS Ver 1.0.0.2'
 	
-TRUNCATE TABLE [dbo].[LookupMaster]
-GO
-TRUNCATE TABLE [dbo].[LookupItem]
-GO
+
 TRUNCATE TABLE [dbo].[LookupMasterItem]
 GO
 Set Nocount on
