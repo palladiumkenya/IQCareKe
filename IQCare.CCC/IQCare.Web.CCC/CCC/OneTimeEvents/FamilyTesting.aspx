@@ -955,7 +955,7 @@
                     var middleName = escape($("#<%=MiddleName.ClientID%>").val());
                     var lastName = escape($("#<%=LastName.ClientID%>").val());
                     var sex = $("#<%=Sex.ClientID%>").val();
-                    var dob = $("#<%=Dob.ClientID%>").val();
+                    var dob = $("#DateOfBirth").datepicker('getDate');
                     var name = $("#<%=FirstName.ClientID%>").val() + ' ' + $("#<%=MiddleName.ClientID%>").val() + ' ' + $("#<%=LastName.ClientID%>").val();
                     var relationshipId = $("#<%=Relationship.ClientID%>").val();
                     var relationship = $("#Relationship :selected").text();
@@ -969,6 +969,11 @@
                     var cccReferalNumber = $("#<%=cccNumber.ClientID%>").val();
                     var previousDate = moment().subtract(1, 'days').format('DD-MMM-YYYY');
                     var adult = moment().subtract(10, 'years').format('DD-MMM-YYYY');
+
+                    var today = new Date();
+                    var birthDate = new Date(dob);
+                    var age = today.getFullYear() - birthDate.getFullYear();
+
                     //validations
                     if (moment('' + dob + '').isAfter()) {
                         toastr.error("Date of birth cannot be a future date.");
@@ -1127,7 +1132,7 @@
                             } else {
                                 baselineDate = "";
                             }
-
+                            console.log(moment(item.DateOfBirth).format('DD-MMM-YYYY'));
                             var testingDate = item.HivStatusResultDate;
                             if (testingDate != null) {
                                 testingDate = moment(item.HivStatusResultDate).format('DD-MMM-YYYY');
@@ -1330,7 +1335,7 @@
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientService.asmx/AddPatientFamilyTesting",
-                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','firstName': '" + firstName + "','middleName': '" + middleName + "','lastName': '" + lastName + "','sex': '" + sex + "','dob': '" + dob + "','relationshipId': '" + relationshipId + "','baselineHivStatusId': '" + baselineHivStatusId + "','baselineHivStatusDate': '" + baselineHivStatusDate + "','hivTestingresultId': '" + hivTestingresultId + "','hivTestingresultDate': '" + hivTestingresultDate + "','cccreferal': '" + cccreferal + "','cccReferalNumber': '" + cccReferalNumber + "','userId': '" + userId +"'}",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','firstName': '" + firstName + "','middleName': '" + middleName + "','lastName': '" + lastName + "','sex': '" + sex + "','dob': '" + moment(dob).format('DD-MMM-YYYY') + "','relationshipId': '" + relationshipId + "','baselineHivStatusId': '" + baselineHivStatusId + "','baselineHivStatusDate': '" + baselineHivStatusDate + "','hivTestingresultId': '" + hivTestingresultId + "','hivTestingresultDate': '" + hivTestingresultDate + "','cccreferal': '" + cccreferal + "','cccReferalNumber': '" + cccReferalNumber + "','userId': '" + userId +"'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {

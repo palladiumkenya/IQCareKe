@@ -46,6 +46,6 @@ namespace Entities.CCC.Lookup
         public decimal? Weight { get; set; }
         public decimal? Height { get; set; }
         public decimal? BMI { get; set; }
-
+        public bool? ldl { get; set; }
     }
 }

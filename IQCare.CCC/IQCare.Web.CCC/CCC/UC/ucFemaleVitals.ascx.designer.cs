@@ -19,7 +19,7 @@ namespace IQCare.Web.CCC.UC {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText femaleDateOfVisit;
+        protected global::System.Web.UI.WebControls.TextBox femaleDateOfVisit;
         
         /// <summary>
         /// examinationPregnancyStatus control.
@@ -37,7 +37,7 @@ namespace IQCare.Web.CCC.UC {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText lmp;
+        protected global::System.Web.UI.WebControls.TextBox lmp;
         
         /// <summary>
         /// ExpectedDateOfChildBirth control.
@@ -46,7 +46,7 @@ namespace IQCare.Web.CCC.UC {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText ExpectedDateOfChildBirth;
+        protected global::System.Web.UI.WebControls.TextBox ExpectedDateOfChildBirth;
         
         /// <summary>
         /// ancYes control.
@@ -119,6 +119,60 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList stiPartnerNotification;
+        
+        /// <summary>
+        /// lblPregnancyStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPregnancyStatus;
+        
+        /// <summary>
+        /// lblLMP control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblLMP;
+        
+        /// <summary>
+        /// lblEDD control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblEDD;
+        
+        /// <summary>
+        /// PregnancyOutCome control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList PregnancyOutCome;
+        
+        /// <summary>
+        /// outcomeDatetime control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox outcomeDatetime;
+        
+        /// <summary>
+        /// btnOutcome control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnOutcome;
         
         /// <summary>
         /// btnSave control.

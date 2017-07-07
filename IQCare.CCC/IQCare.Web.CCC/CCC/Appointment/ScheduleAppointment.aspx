@@ -303,7 +303,7 @@
                 },
 
                 error: function(msg) {
-                    alert(msg.responseText);
+                    //alert(msg.responseText);
                 }
             });
         }
@@ -331,7 +331,7 @@
                     addPatientAppointment();
                 },
                 error: function (msg) {
-                    alert(msg.responseText);
+                    //alert(msg.responseText);
                 }
             });
         }

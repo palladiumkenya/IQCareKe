@@ -61,5 +61,17 @@ namespace IQCare.CCC.UILogic.Enrollment
         {
             return _mgr.GetPatientEntityEnrollment(id);
         }
+
+        public List<PatientEntityEnrollment> GetPatientByPatientIdCareEnded(int patientId)
+        {
+            try
+            {
+                return _mgr.GetPatientByPatientIdCareEnded(patientId);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

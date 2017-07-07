@@ -12,7 +12,7 @@ namespace IQCare.CCC.UILogic.Baseline
         private int _id = 0;
         private int _result =0;
 
-        public int ManagePatientTreatmentInititation(int id,int patientId,int patientMasterVisitid,DateTime dateStartedOnFirstLine,string cohort,int regimen,decimal baselineViralload,DateTime baselineViralLoadDate,int userId)
+        public int ManagePatientTreatmentInititation(int id, int patientId, int patientMasterVisitid, DateTime dateStartedOnFirstLine, string cohort, int regimen, bool ldl, decimal baselineViralload, DateTime baselineViralLoadDate, int userId)
         {
             _id = _patientTreatmentInitiation.CheckIfPatientTreatmentExists(patientId);
 
@@ -24,6 +24,7 @@ namespace IQCare.CCC.UILogic.Baseline
                 DateStartedOnFirstline = dateStartedOnFirstLine,
                 Cohort = cohort,
                 Regimen = regimen,
+                ldl = ldl,
                 BaselineViralload = baselineViralload,
                 BaselineViralloadDate = baselineViralLoadDate,
                 CreatedBy = userId
@@ -34,7 +35,7 @@ namespace IQCare.CCC.UILogic.Baseline
             return _result;
         }
 
-        public int UpdatePatientTreatmentInititation(int id,int patientId, int patientMasterVisitid, DateTime dateStartedOnFirstLine, string cohort, int regimen, decimal baselineViralload, DateTime baselineViralLoadDate)
+        public int UpdatePatientTreatmentInititation(int id,int patientId, int patientMasterVisitid, DateTime dateStartedOnFirstLine, string cohort, int regimen, bool ldl, decimal baselineViralload, DateTime baselineViralLoadDate)
         {
             var patientTreatmentInitiationUpdate = new PatientTreatmentInitiation
             {
@@ -42,6 +43,7 @@ namespace IQCare.CCC.UILogic.Baseline
                 DateStartedOnFirstline = dateStartedOnFirstLine,
                 Cohort = cohort,
                 Regimen = regimen,
+                ldl = ldl,
                 BaselineViralload = baselineViralload,
                 BaselineViralloadDate = baselineViralLoadDate
             };

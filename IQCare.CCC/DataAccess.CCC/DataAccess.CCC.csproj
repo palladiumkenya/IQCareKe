@@ -87,6 +87,7 @@
     <Compile Include="Interface\enrollment\IPatientEnrollmentRepository.cs" />
     <Compile Include="Interface\enrollment\IPatientEntryPointRepository.cs" />
     <Compile Include="Interface\enrollment\IPatientIdentifierRepository.cs" />
+    <Compile Include="Interface\enrollment\IPatientReEnrollmentRepository.cs" />
     <Compile Include="Interface\enrollment\IServiceAreaIdentifiersRepository.cs" />
     <Compile Include="Interface\Lookup\IFacilityListRepository.cs" />
     <Compile Include="Interface\Lookup\ILookupFacilityStatisticsRepository.cs" />
@@ -154,6 +155,7 @@
     <Compile Include="Repository\Enrollment\IdentifierRepository.cs" />
     <Compile Include="Repository\Enrollment\PatientEnrollmentRepository.cs" />
     <Compile Include="Repository\Enrollment\PatientEntrypointRepository.cs" />
+    <Compile Include="Repository\Enrollment\PatientReEnrollmentRepository.cs" />
     <Compile Include="Repository\Enrollment\ServiceAreaIdentifiersRepository.cs" />
     <Compile Include="Repository\Lookup\FacilityListRepository.cs" />
     <Compile Include="Repository\Lookup\LookupFacilityRepository.cs" />

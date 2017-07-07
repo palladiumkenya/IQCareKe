@@ -41,6 +41,9 @@ namespace IQCare.Web.CCC.UC
                 Session["PatientId"] = thisPatient.ptn_pk;
                 Session["SystemId"] = 1;
                 Session["DateOfBirth"] = thisPatient.DateOfBirth.ToString("dd-MMM-yyyy");
+                Session["PersonId"] = thisPatient.PersonId;
+                Session["PatientType"] = thisPatient.PatientType;
+                Session["PatientStatus"] = thisPatient.PatientStatus;
                 //Don't decrypt at this level. the use Logic project for this
 
                 //lblPatientNames.Text = _utility.Decrypt(thisPatient.LastName) + ", " + _utility.Decrypt(x.FirstName) + " " +
@@ -55,15 +58,16 @@ namespace IQCare.Web.CCC.UC
                 }
                 else
                 {
-                    lblPatientStatus.Text = "<i class=fa fa-user-o text-danger' aria-hidden='true'></i><strong> Inactive</strong>";
+                    lblPatientStatus.Text = "<i class='fa fa-user-o text-danger' aria-hidden='true'></i><strong class='label label-danger fa-1x'>" + thisPatient.PatientStatus + "</strong>";
                 }
+
                 // string femaleIcon = "<i class='fa fa-female' aria-hidden='true'></i>";
                 // string maleIcon = "<i class='fa fa-male' aria-hidden='true'></i>";
 
                 //todo patientManagershould have the lookups resolved
                 //if (x.Sex == 62)
                 //{
-                   Session["Gender"] = lblGender.Text = LookupLogic.GetLookupNameById(thisPatient.Sex);
+                Session["Gender"] = lblGender.Text = LookupLogic.GetLookupNameById(thisPatient.Sex);
                 //_lookupManager.GetLookupNameFromId(thisPatient.Sex);
                 //    Session["Gender"] = _lookupManager.GetLookupNameFromId(x.Sex).ToLower();
                 //}

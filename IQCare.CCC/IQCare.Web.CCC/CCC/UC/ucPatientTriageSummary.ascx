@@ -2,36 +2,35 @@
 <%@ Import Namespace="Entities.CCC.Lookup" %>
 <%@ Import Namespace="Entities.PatientCore" %>
 <div class="col-md-12 col-xs-12 col-sm-12">
-    <style type="text/css">
-        .table tbody tr td, .table tbody tr th {
-            border: none !important;
-        }
-    </style>
 
     <div class="panel panel-default" id="panelVitals">
         <div class="panel-body">
             <div class="table-responsive">
-                <table class="table table-condensed">
+                <table class="table table-condensed table-bordered">
                     <tbody>
                         <tr>
                             <td>Date Taken:</td>
                             <td><asp:Label runat="server" ID="lblDatetaken" CssClass="pull-left "> #</asp:Label></td>
                             <td>Age:</td>
                             <td><asp:Label runat="server" ID="lblAge" CssClass="text-info pull-left"> 0 Years</asp:Label></td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
                         </tr>
                         <tr>
                             <td>Temperature:</td> 
                             <td><asp:Label runat="server" ID="lblTemperature" CssClass="text-info pull-left"> 0 °C</asp:Label></td>    
                             <td>BMI(Z):</td>
                             <td><asp:Label runat="server" ID="lblBMI" CssClass="text-info pull-left"> 0 Kg/M2</asp:Label></td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
                         </tr>
                         <tr>
                             <td>Blood Pressure:</td>
                             <td><asp:Label runat="server" ID="lblbloodpressure" CssClass="text-info pull-left"> 0 mm[Hg]</asp:Label></td>
-                            <td><div class="progress"><div class="progress-bar progress-bar-info" id="bgSystolic" style="width: 0;"aria-valuemax="200"></div></div></td>
-                            <td><asp:Label runat="server"> (Systolic)</asp:Label></td>
-                            <td><div class="progress"><div class="progress-bar progress-bar-info" id="pgDiastolic" style="width: 0;"aria-valuemax="110"></div></div></td>
-                            <td><asp:Label runat="server"> (Diastolic)</asp:Label></td>
+                            <td><div class="progress"><div class="progress-bar progress-bar-info" id="bgSystolic" style="width: 0;"aria-valuemax="200"><asp:Label runat="server"> (Systolic)</asp:Label></div></div></td>
+                            <td><div class="progress"><div class="progress-bar progress-bar-info" id="pgDiastolic" style="width: 0;"aria-valuemax="110"><asp:Label runat="server"> (Diastolic)</asp:Label></div></div></td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
                         </tr>
                         <tr>
                             <td>Pulse Rate:</td>
@@ -44,7 +43,7 @@
                     </tbody>
                 </table>
             </div>
-
+            
             <div class="col-md-12 col-xs-12 col-sm-12">
                 <div class="col-md-12"><h4 class="pull-left"><asp:Label runat="server"> Patient Appointment </asp:Label></h4></div>
                 <div class="table-responsive col-md-12">

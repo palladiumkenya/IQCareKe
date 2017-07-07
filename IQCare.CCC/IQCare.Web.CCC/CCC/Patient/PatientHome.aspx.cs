@@ -35,6 +35,11 @@ namespace IQCare.Web.CCC.Patient
         {
             get { return Convert.ToString(Session["Gender"]); }
         }
+
+        protected string PatientStatus
+        {
+            get { return Convert.ToString(Session["PatientStatus"]); }
+        }
         protected string PatientType
         {
 
@@ -178,24 +183,24 @@ namespace IQCare.Web.CCC.Patient
                 }
 
                 // Get Patient Regimen Map:
-                //IPatientTreatmentTrackerManager patientTreatmentTrackerManager = (IPatientTreatmentTrackerManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Lookup.BPatientTreatmentTrackerManager, BusinessProcess.CCC");
-                //var curentRegimen = patientTreatmentTrackerManager.GetCurrentPatientRegimen(PatientId);
+                IPatientTreatmentTrackerManager patientTreatmentTrackerManager = (IPatientTreatmentTrackerManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Lookup.BPatientTreatmentTrackerManager, BusinessProcess.CCC");
+                var curentRegimen = patientTreatmentTrackerManager.GetCurrentPatientRegimen(PatientId);
 
-                //if (curentRegimen != null)
-                //{
-                //    if (curentRegimen.RegimenId > 0)
-                //    {
-                //        lblCurrentRegimen.Text = "< span class='label label-success'>" + curentRegimen.TreatmentStatus.ToString() + "</span>";
-                //    }
-                //    else
-                //    {
-                //        lblCurrentRegimen.Text = "<span class='label label-danger'>Patient NOT on ARVs</span>";
-                //    }
-                //}
-                //else
-                //{
-                //    lblCurrentRegimen.Text = "<span class='label label-danger'>Patient NOT on ARVs</span>";
-                //}
+                if (curentRegimen != null)
+                {
+                    if (curentRegimen.RegimenId > 0)
+                    {
+                        lblCurrentRegimen.Text = "<span class='label label-success'>" + curentRegimen.Regimen.ToString() + "</span>";
+                    }
+                    else
+                    {
+                        lblCurrentRegimen.Text = "<span class='label label-danger'>Patient NOT on ARVs</span>";
+                    }
+                }
+                else
+                {
+                    lblCurrentRegimen.Text = "<span class='label label-danger'>Patient NOT on ARVs</span>";
+                }
 
                 //Get Adherance Status
                 ILookupManager patientAdheLookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");

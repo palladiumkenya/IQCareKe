@@ -1,7 +1,7 @@
 SET NOCOUNT ON;
 Go
 -- Update version
-Update AppAdmin Set AppVer='Ver 1.0.0.1 Kenya HMIS', DBVer='Ver 1.0.0.1 Kenya HMIS', RelDate='20170501 00:00:00.000', VersionName = 'Kenya HMIS'
+Update AppAdmin Set AppVer='Ver 1.0.0.1 Kenya HMIS', DBVer='Ver 1.0.0.1 Kenya HMIS', RelDate='20170501 00:00:00.000', VersionName = 'Kenya HMIS Ver 1.0.0.1'
 
 Go
 
@@ -299,6 +299,18 @@ Begin
 	values ('Pharmacy Refill',26,3,0,1,GETDATE(),1)
 End
 Go
+IF NOT EXISTS(SELECT 1 FROM mst_decode WHERE Name = 'PREP')
+	BEGIN
+		INSERT INTO mst_decode(Name,CodeId,SRNO,DeleteFlag,UserId,CreateDate,SystemId)
+		VALUES('PREP', 33, 5, 0, 1, GETDATE(), 1);
+	END
+GO
+IF NOT EXISTS(SELECT 1 FROM mst_decode WHERE Name = 'HBV')
+	BEGIN
+		INSERT INTO mst_decode(Name,CodeId,SRNO,DeleteFlag,UserId,CreateDate,SystemId)
+		VALUES('HBV', 33, 6, 0, 1, GETDATE(), 1);
+	END
+GO
  if not exists(select 1 from lnk_ControlBusinessRule where controlid=7 and businessruleid=1)
 begin
 insert into lnk_ControlBusinessRule(ControlId,BusinessRuleId,UserId,CreateDate)

@@ -737,8 +737,8 @@ namespace IQCare.SCM
                         {
                             if (Convert.ToDecimal(dgwDataGrid.Rows[e.RowIndex].Cells["OrderQuantity"].Value.ToString()) < Convert.ToDecimal(dgwDataGrid.Rows[e.RowIndex].Cells["IssuedQuantity"].Value.ToString()))
                             {
-                                MessageBox.Show("Quantity issued cannot be greater than Quantity Ordered");
-                                dgwDataGrid.Rows[e.RowIndex].Cells["IssuedQuantity"].Value = 0;
+                                MessageBox.Show("Quantity issued is greater than Quantity Ordered.");
+                                //dgwDataGrid.Rows[e.RowIndex].Cells["IssuedQuantity"].Value = 0;
 
                             }
                         }

@@ -399,7 +399,7 @@ namespace IQCare.SCM
                 {
                     if (dgwStoreName.Rows[e.RowIndex].Cells["SRNo"].Value.ToString() != "")
                     {
-                        PId = Convert.ToInt32(dgwStoreName.Rows[e.RowIndex].Cells["SRNo"].Value.ToString());
+                        PId = Convert.ToInt32(dgwStoreName.Rows[e.RowIndex].Cells["SRNo"].Value);
                     }
                     txtStoreID.Text = dgwStoreName.Rows[e.RowIndex].Cells["StoreId"].Value.ToString();
                     StoreId = txtStoreID.Text;

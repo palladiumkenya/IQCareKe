@@ -87,7 +87,7 @@ namespace IQCare.CCC.UILogic
 
 
 
-        public List<PatientCareEnding> GetPatientCareEndings(int patientId )
+        public List<PatientCareEnding> GetPatientCareEndings(int patientId)
         {
             return mgr.GetPatientCareEndings(patientId);
         }
@@ -96,6 +96,18 @@ namespace IQCare.CCC.UILogic
         public string PatientCareEndingStatus(int patientId)
         {
             return mgr.PatientCareEndingStatus(patientId);
+        }
+
+        public int ResetPatientCareEnding(PatientCareEnding patientCareEnding)
+        {
+            try
+            {
+                return mgr.ResetPatientCareEnding(patientCareEnding);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
     }
 }

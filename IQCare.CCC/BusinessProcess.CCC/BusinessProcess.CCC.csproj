@@ -108,6 +108,7 @@
     <Compile Include="Enrollment\BPatientEntryPoint.cs" />
     <Compile Include="Enrollment\BPatientIdentifier.cs" />
     <Compile Include="Enrollment\BPatientEnrollment.cs" />
+    <Compile Include="Enrollment\BPatientReEnrollment.cs" />
     <Compile Include="Enrollment\BServiceAreaIdentifiers.cs" />
     <Compile Include="Lookup\BFacilityListManager.cs" />
     <Compile Include="Lookup\BPatientBaselineLookupManager.cs" />

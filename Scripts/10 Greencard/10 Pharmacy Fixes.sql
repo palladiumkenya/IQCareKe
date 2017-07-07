@@ -1,4 +1,5 @@
 update mst_generic set genericabbrevation = 'LPV/r' where genericabbrevation = 'LOPr'
+update mst_generic set genericabbrevation = 'LPV/r' where genericabbrevation = 'LOP/r'
 
 update mst_generic set genericabbrevation = 'ATV' where genericabbrevation = 'ATR'
 

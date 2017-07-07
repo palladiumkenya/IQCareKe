@@ -128,12 +128,18 @@
     
     <script type="text/javascript">
         $(document).ready(function () {
+            var today = new Date();
+
             $('#PersonDOBdatepicker').datetimepicker({
-                format: 'DD-MMM-YYYY'
+                format: 'DD-MMM-YYYY',
+                allowInputToggle: true,
+                useCurrent: false
             });
 
             $('#DateOfEnrollmentdatepicker').datetimepicker({
-                format: 'DD-MMM-YYYY'
+                format: 'DD-MMM-YYYY',
+                allowInputToggle: true,
+                useCurrent: false
             });
 
             $("#OtherSpecificEntryPoint").hide();
@@ -154,7 +160,8 @@
             var personDOB = '<%=Session["PersonDob"]%>';
             var nationalId = '<%=Session["NationalId"]%>';
             var patientType = '<%=Session["PatientType"]%>';
-            //console.log(patientType);
+            var patType = '<%=patType%>';
+            //console.log(code);
             if (personDOB != null && personDOB !="") {
                 $("#DateOfBirth").addClass("noneevents");
                 personDOB = new Date(personDOB);
@@ -232,6 +239,11 @@
                     identifiers[value.ID] = fieldName;
                 });
 
+                if (patType == "Transit" && (code == prefix)) {
+                    toastr.error("You selected the home facility for a transit patient", "Patient Enrollment");
+                    return false;
+                }
+
                 addPatientRegister(entryPointId, enrollmentDate, personDateOfBirth, nationalId, patientType, mflCode, dobPrecision, JSON.stringify(identifiers));
             });
 
@@ -273,6 +285,11 @@
                     }
                     identifiers[value.ID] = fieldName;
                 });
+
+                if (patType == "Transit" && (code == prefix)) {
+                    toastr.error("You selected the home facility for a transit patient", "Patient Enrollment");
+                    return false;
+                }
 
                 addPatient(entryPointId, enrollmentDate, personDateOfBirth, nationalId, patientType, mflCode, dobPrecision, JSON.stringify(identifiers));
             });
@@ -331,9 +348,6 @@
                     }
                 });
             }
-
-            $('#ctl00_IQCareContentPlaceHolder_mfl_code').chosen();
-
             
             $.when(createDynamicElements()).then(function () {
                 setTimeout(function() {
@@ -471,7 +485,10 @@
                         $("#mfl_code").select2({
                             placeholder: "Select Facility"
                         });
-                        $("#mfl_code").val(code).trigger("change");
+                        if (patType == "New") {
+                            $("#mfl_code").val(code).trigger("change");
+                            $("#mfl_code").prop('disabled', true);
+                        }       
                         //console.log(code);
                     },
                     error: function (xhr, errorType, exception) {
@@ -492,13 +509,20 @@
                         //generate('success', '<p>,</p>' + response.d);
                         var messageResponse = JSON.parse(response.d);
 
-                        console.log(messageResponse);
-                        if (messageResponse.DOB != null)
+                        //console.log(messageResponse);
+                        if (messageResponse.DOB != null) {
                             $("#PersonDOB").val(messageResponse.DOB);
-                        if (messageResponse.NationalId)
+                            $("#PersonDOB").prop('disabled', true);
+                        }
+
+                        if (messageResponse.NationalId != null) {
                             $("#NationalId").val(messageResponse.NationalId);
-                        if (messageResponse.EnrollmentDate != null)
+                        }
+                            
+                        if (messageResponse.EnrollmentDate != null) {
                             $("#DateOfEnrollment").val(messageResponse.EnrollmentDate);
+                        }
+
                         if (messageResponse.EntryPointIdUnknown == false) {
                             $("#entryPoint").val(messageResponse.EntryPointId);
                         }
@@ -510,9 +534,14 @@
                                     if (value.Prefix != null) {
                                         //console.log(value.Prefix);
                                         //console.log(val);
-                                        $("#" + value.Prefix).val(val.PrefixType).trigger("change");
+                                        if (val.PrefixType != null) {
+                                            $("#" + value.Prefix).val(val.PrefixType).trigger("change");
+                                        }                                       
                                     }
-                                    $("#" + value.Code).val(val.DataType);
+
+                                    if (val.DataType != null) {
+                                        $("#" + value.Code).val(val.DataType);
+                                    }                              
                                 }
                             });
                             

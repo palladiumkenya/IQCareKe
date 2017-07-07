@@ -65,6 +65,7 @@
     <Compile Include="Enrollment\IPatientEnrollmentManager.cs" />
     <Compile Include="Enrollment\IPatientEntryPointManager.cs" />
     <Compile Include="Enrollment\IPatientIdentifierManager.cs" />
+    <Compile Include="Enrollment\IPatientReEnrollmentManager.cs" />
     <Compile Include="Enrollment\IServiceAreaIdentifiers.cs" />
     <Compile Include="IMst_PatientInsert.cs" />
     <Compile Include="IPatientAppointment.cs" />
