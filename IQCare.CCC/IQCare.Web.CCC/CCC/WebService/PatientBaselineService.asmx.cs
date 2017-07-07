@@ -136,7 +136,7 @@ namespace IQCare.Web.CCC.WebService
         [WebMethod(EnableSession = true)]
         public string ManagePatientTreatmentInitiation(int id, int patientId, int patientMasterVisitid,
             DateTime dateStartedOnFirstLine, string cohort, int regimen, string ldl, decimal baselineViralload,
-            DateTime baselineViralLoadDate, int userId)
+            string baselineViralLoadDate, int userId)
         {
             try
             {

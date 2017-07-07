@@ -28,8 +28,8 @@ namespace Entities.CCC.Baseline
         /// </summary>
         public string RegimenCode { get; set; }
         public bool ldl { get; set; }
-        public decimal BaselineViralload { get; set; }
-        public DateTime BaselineViralloadDate { get; set; }
+        public decimal? BaselineViralload { get; set; }
+        public DateTime? BaselineViralloadDate { get; set; }
         [ForeignKey("PatientId")]
         public virtual PatientEntity Patient { get; set; }
         [ForeignKey("PatientMasterVisitId")]

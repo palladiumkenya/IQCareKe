@@ -332,7 +332,10 @@
                     <%--<div class="col-md-2"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-info btn-sm fa fa-plus-circle" OnClick="saveUpdatePharmacy();"> Save Prescription</asp:LinkButton></div>--%>
                         <div class="col-md-3"><button type="button" Class="btn btn-info btn-sm fa fa-plus-circle" onclick="saveUpdatePharmacy();">Save Prescription</button></div>
                         <div class="col-md-3"><button type="button" Class="btn btn-warning btn-sm fa fa-refresh" onclick="resetPharmacyForm();">Reset Prescription</button></div>
-                        <div class="col-md-3"><button type="button" Class="btn btn-danger btn-sm  fa fa-times" data-dismiss="modal">Close Prescription</button></div>
+                        <div class="col-md-3">
+                            <button type="button" Class="btn btn-danger btn-sm  fa fa-times" id="btnClosePrecriptionModal" data-dismiss="modal">Close Prescription</button>
+                            <button type="button" class="btn btn-danger btn-sm  fa fa-times" id="btnClosePrecription">Close Prescription</button>
+                        </div>
                     </div>
                                              
             </div>
@@ -421,6 +424,19 @@
             }
         });
 
+
+        if ($('#pharmacyModal').is(':visible')) {
+            $("#btnClosePrecriptionModal").show("fast");
+            $("#btnClosePrecription").hide("fast");
+        } else {
+            $("#btnClosePrecriptionModal").hide("fast");
+            $("#btnClosePrecription").show("fast");
+        }
+
+        $("#btnClosePrecription").click(function() {
+            setTimeout(function () {
+                window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientHome.aspx")%>';}, 2000);
+        });
     });
 
     $(function () {
@@ -756,6 +772,10 @@
             var regimenText = $("#<%=ddlRegimen.ClientID%>").find(":selected").text();
             var datePrescribed = $("#txtPrescriptionDate").val();
             var dateDispensed = $("#txtDateDispensed").val();
+
+            //console.log(datePrescribed);
+            //console.log(dateDispensed);
+            //return false;
 
             if (!DrugPrescriptionTable.data().any()) {
                 toastr.error("Drug Prescription Error", "Add drugs to prescribe.");
