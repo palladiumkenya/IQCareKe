@@ -1664,7 +1664,7 @@
                         </div>
 
                         <div class="col-md-12">
-                            <button type="button" class="btn btn-info btn-sm pull-left" data-toggle="modal" data-target="#pharmacyModal">Prescibe Drugs</button>
+                            <button type="button" class="btn btn-info btn-sm pull-left" data-toggle="modal" data-target="#pharmacyModal" id="prescribeDrugs">Prescibe Drugs</button>
                             <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" data-toggle="modal" id="AddAppointment" onclientclick="return false">Add Appointment</button>
 
                         </div>
@@ -1780,6 +1780,11 @@
             restricted: [{from: tomorrow, to: Infinity}],
             momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
             //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+        });
+
+        $("#prescribeDrugs").click(function() {
+            $("#btnClosePrecriptionModal").show("fast");
+            $("#btnClosePrecription").hide("fast");
         });
         
         $('#PCDateOfOnset').datepicker({
