@@ -1,12 +1,3 @@
-update mst_generic set genericabbrevation = 'LPV/r' where genericabbrevation = 'LOPr'
-update mst_generic set genericabbrevation = 'LPV/r' where genericabbrevation = 'LOP/r'
-
-update mst_generic set genericabbrevation = 'ATV' where genericabbrevation = 'ATR'
-
-if not exists(select 1 from mst_generic where GenericName = 'Atazanavir/Ritonavir')
-begin
-insert into mst_generic (GenericName,GenericAbbrevation,deleteflag) values('Atazanavir/Ritonavir','ATV/r',0)
-end
 
 --------------------------------------------------------------------------------------------------
 If Not Exists(Select 1 From lnk_DrugGeneric  Where Drug_pk=1147 And GenericID = 1) Begin
@@ -112,3 +103,16 @@ from dtl_RegimenMap A inner join Drugs B on A.Visit_Pk = B.VisitID
 where a.Ptn_Pk = b.Ptn_pk and A.orderid = B.ptn_pharmacy_pk and len(A.RegimenType) < 9
 Go
 ------------------------------------------------------------------------------------------
+
+update dtl_regimenmap set regimenType = isnull(dbo.[FN_DistinctList](regimentype,'/'),'')
+Go
+update mst_generic set genericabbrevation = 'LPV/r' where genericabbrevation = 'LOPr'
+Go
+update mst_generic set genericabbrevation = 'LPV/r' where genericabbrevation = 'LOP/r'
+Go
+update mst_generic set genericabbrevation = 'ATV' where genericabbrevation = 'ATR'
+Go
+--if not exists(select 1 from mst_generic where GenericName = 'Atazanavir/Ritonavir')
+--begin
+--insert into mst_generic (GenericName,GenericAbbrevation,deleteflag) values('Atazanavir/Ritonavir','ATV/r',0)
+--end

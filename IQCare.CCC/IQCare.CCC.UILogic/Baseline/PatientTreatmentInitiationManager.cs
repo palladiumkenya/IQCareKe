@@ -12,23 +12,53 @@ namespace IQCare.CCC.UILogic.Baseline
         private int _id = 0;
         private int _result =0;
 
-        public int ManagePatientTreatmentInititation(int id, int patientId, int patientMasterVisitid, DateTime dateStartedOnFirstLine, string cohort, int regimen, bool ldl, decimal baselineViralload, DateTime baselineViralLoadDate, int userId)
+        public int ManagePatientTreatmentInititation(int id, int patientId, int patientMasterVisitid, DateTime dateStartedOnFirstLine, string cohort, int regimen, bool ldl, decimal baselineViralload, string baselineViralLoadDate, int userId)
         {
             _id = _patientTreatmentInitiation.CheckIfPatientTreatmentExists(patientId);
 
-            var patientTreatmentInitiationInsert = new PatientTreatmentInitiation
+            var patientTreatmentInitiationInsert = new PatientTreatmentInitiation();
+
+            if (baselineViralLoadDate == "")
             {
-                Id = 0,
-                PatientId = patientId,
-                PatientMasterVisitId = patientMasterVisitid,
-                DateStartedOnFirstline = dateStartedOnFirstLine,
-                Cohort = cohort,
-                Regimen = regimen,
-                ldl = ldl,
-                BaselineViralload = baselineViralload,
-                BaselineViralloadDate = baselineViralLoadDate,
-                CreatedBy = userId
-            };
+                patientTreatmentInitiationInsert.Id = 0;
+                patientTreatmentInitiationInsert.PatientId = patientId;
+                patientTreatmentInitiationInsert.PatientMasterVisitId = patientMasterVisitid;
+                patientTreatmentInitiationInsert.DateStartedOnFirstline = dateStartedOnFirstLine;
+                patientTreatmentInitiationInsert.Cohort = cohort;
+                patientTreatmentInitiationInsert.Regimen = regimen;
+                patientTreatmentInitiationInsert.ldl = ldl;
+                patientTreatmentInitiationInsert.BaselineViralload = baselineViralload;
+                //patientTreatmentInitiationInsert.BaselineViralloadDate = baselineViralLoadDate;
+                patientTreatmentInitiationInsert.CreatedBy = userId;
+            }
+            else
+            {
+                patientTreatmentInitiationInsert.Id = 0;
+                patientTreatmentInitiationInsert.PatientId = patientId;
+                patientTreatmentInitiationInsert.PatientMasterVisitId = patientMasterVisitid;
+                patientTreatmentInitiationInsert.DateStartedOnFirstline = dateStartedOnFirstLine;
+                patientTreatmentInitiationInsert.Cohort = cohort;
+                patientTreatmentInitiationInsert.Regimen = regimen;
+                patientTreatmentInitiationInsert.ldl = ldl;
+                patientTreatmentInitiationInsert.BaselineViralload = baselineViralload;
+                patientTreatmentInitiationInsert.BaselineViralloadDate = DateTime.Parse(baselineViralLoadDate);
+                patientTreatmentInitiationInsert.CreatedBy = userId;
+
+                //var patientTreatmentInitiationInsert = new PatientTreatmentInitiation
+                //{
+                //    Id = 0,
+                //    PatientId = patientId,
+                //    PatientMasterVisitId = patientMasterVisitid,
+                //    DateStartedOnFirstline = dateStartedOnFirstLine,
+                //    Cohort = cohort,
+                //    Regimen = regimen,
+                //    ldl = ldl,
+                //    BaselineViralload = baselineViralload,
+                //    BaselineViralloadDate = baselineViralLoadDate,
+                //    CreatedBy = userId
+                //};
+            }
+            
 
             _result = (_id > 0)
                 ? _patientTreatmentInitiation.UpdatePatientTreatmentInitiation(patientTreatmentInitiationInsert): _patientTreatmentInitiation.AddPatientTreatmentInitiation(patientTreatmentInitiationInsert);

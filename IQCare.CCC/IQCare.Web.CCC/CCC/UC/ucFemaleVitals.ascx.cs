@@ -4,6 +4,7 @@ using System.Web.UI.WebControls;
 using Application.Presentation;
 using Entities.CCC.Lookup;
 using Interface.CCC.Lookup;
+using IQCare.CCC.UILogic.Triage;
 
 namespace IQCare.Web.CCC.UC
 {
@@ -106,12 +107,40 @@ namespace IQCare.Web.CCC.UC
                 }
             }
 
-            
+            List<LookupItemView> pregnancyOutCome = lookupManager.GetLookItemByGroup("PregnancyOutcome");
+            if (pregnancyOutCome != null && pregnancyOutCome.Count > 0)
+            {
+                PregnancyOutCome.Items.Add(new ListItem("select", "0"));
+                foreach (var item in pregnancyOutCome)
+                {
+                    PregnancyOutCome.Items.Add(new ListItem(item.ItemDisplayName + "(" + item.ItemName + ")", item.ItemId.ToString()));
+                }
+            }
 
+            string gender = Session["Gender"].ToString();
 
+            if (gender == "Female")
+            {
+                var pregnancyStatus = new PatientPregnancyManager();
+                int pgStatus = pregnancyStatus.CheckIfPatientPregnancyExisists(PatientId);
+                var pregnancyList = pregnancyStatus.GetPatientPregnancy(PatientId);
+                if (pgStatus > 0)
+                {
+                    lblPregnancyStatus.Text = "<span class='label label-info'> Pregnant </span> ";
+                    if (pregnancyList != null)
+                    {
+                        foreach (var item in pregnancyList)
+                        {
+                            lblLMP.Text = "<span class='label label-info'>LMP : " + item.LMP.ToString("dd-MMM-yyyy") +
+                                          "</span>";
 
+                            lblEDD.Text = "<span class='label label-info'>EDD : " +
+                                          Convert.ToDateTime(item.EDD).ToString("dd-MMM-yyyy") + "</span>";
 
-
+                        }
+                    }
+                }
+            }
         }
     }
 }

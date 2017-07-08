@@ -1079,7 +1079,7 @@
 										<label class="control-label pull-left" style="font-size: 65%">Baseline Viralload</label>
 									</div>
 									<div class="col-md-12">
-										<asp:TextBox runat="server" CssClass="form-control input-sm" ID="BaselineViralload" ClientIDMode="Static" data-parsley-required="true" data-parsley-min="2"></asp:TextBox>
+										<asp:TextBox runat="server" CssClass="form-control input-sm" ID="BaselineViralload" ClientIDMode="Static"></asp:TextBox>
 									</div>
 								</div>
 
@@ -1089,7 +1089,7 @@
 									<div class="col-md-12">
 										<div class="datepicker fuelux" id="BaselineViralloadDate">
 											<div class="input-group">
-												<input class="form-control input-sm" id="TreatmeantInitiationBaselineViralloadDate" type="text" data-parsley-require="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')" />
+												<input class="form-control input-sm" id="TreatmeantInitiationBaselineViralloadDate" type="text" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')" />
 												<div class="input-group-btn">
 													<button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
 														<span class="glyphicon glyphicon-calendar"></span>
@@ -2103,7 +2103,7 @@
 								} else {
 								    $.when(managePatientBaselineAssessment()).then()
                                         
-                                            if (data.direction === 'next') {
+                                    if (data.direction === 'next') {
                                                 window.location.href = '<%=ResolveClientUrl( "~/CCC/Patient/PatientHome.aspx")%>';
                                             toastr.success("Patient Baseline Assessment and ARV History Completed successfully...");
                                             }
@@ -2345,7 +2345,7 @@
 			function managePatientTreatmentInitiation() {
 				
 				var viralLoad= $("#<%=BaselineViralload.ClientID%>").val(); 
-				var viralLoadDate= moment($("#BaselineViralloadDate").datepicker("getDate")).format('DD-MMM-YYYY');
+                var viralLoadDate = moment($("#BaselineViralloadDate").datepicker("getDate")).format("DD-MMM-YYYY");
 				var artCohort= $("#<%=ARTCohort.ClientID%>").val(); 
 				var firstlineStartDate= moment($("#DateStartedOnFirstLine").datepicker('getDate')).format('DD-MMM-YYYY');
 				var startRegimen = $("#<%=RegimenInitiationId.ClientID%>").find(":selected").val();
@@ -2353,7 +2353,11 @@
 					viralLoad = 0;}
 				var id = 0;
 				var ptnId = patientId;
-				var ptnmasterVisitId = patientMasterVisitId;
+                var ptnmasterVisitId = patientMasterVisitId;
+
+                if (viralLoadDate == "Invalid date") {
+                    viralLoadDate = "";
+                }
 
 				$.ajax({
 					type: "POST",

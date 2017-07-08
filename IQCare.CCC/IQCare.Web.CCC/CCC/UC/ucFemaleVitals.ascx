@@ -32,151 +32,212 @@
           <div class="col-md-12 form-group">
             <div class="col-md-12"><hr/></div>
         </div>
+       
+       <div id="pregnancyStatusfolloUp">
+           <div class="col-md-12 form-group">
+               <div class="col-md-4">
+                   <div class="col-md-12 form-group">
+                       <div class="col-md-12">
+                           <label class="control-label  pull-left">Pregnancy Status</label>
+                       </div>
 
-        <div class="col-md-12 form-group">
-            <div class="col-md-4">
-                <div class="col-md-12 form-group">
-                    <div class="col-md-12">
-                        <label class="control-label  pull-left">Pregnancy Status</label>
-                    </div>
+                       <div class="col-md-12">
+                           <asp:DropDownList runat="server" ID="examinationPregnancyStatus" CssClass="form-control input-sm" ClientIDMode="Static" data-parsley-required="true" data-parsley-min="1" />
+                       </div>
+                   </div>
 
-                    <div class="col-md-12">
-                        <asp:DropDownList runat="server" ID="examinationPregnancyStatus" CssClass="form-control input-sm" ClientIDMode="Static" data-parsley-required="true" data-parsley-min="1" />
-                    </div>
-                </div>
+                   <div class="col-md-12 form-group" id="divFemaleLMP">
+                       <div class="col-md-12">
+                           <label class="control-label  pull-left">Female LMP</label>
+                       </div>
 
-                <div class="col-md-12 form-group" id="divFemaleLMP">
-                    <div class="col-md-12">
-                        <label class="control-label  pull-left">Female LMP</label>
-                    </div>
+                       <div class="col-md-12">
+                           <div class='input-group date' id='FemaleLMP'>
+                               <span class="input-group-addon">
+                                   <span class="glyphicon glyphicon-calendar"></span>
+                               </span>
+                               <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="lmp" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>        
+                           </div>
+                       </div>
+                   </div>
 
-                    <div class="col-md-12">
-                        <div class='input-group date' id='FemaleLMP'>
-                            <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
-                            <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="lmp" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>        
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-12 form-group" id="divEDD">
-                    <div class="col-md-12">
-                        <label class="control-label  pull-left">EDD</label>
-                    </div>
-                    <div class="col-md-12">
-                        <div class='input-group date' id='EDCD'>
-                            <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
-                            <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="ExpectedDateOfChildBirth" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>        
-                        </div>
-                    </div>
-                </div>
-            </div>
+                   <div class="col-md-12 form-group" id="divEDD">
+                       <div class="col-md-12">
+                           <label class="control-label  pull-left">EDD</label>
+                       </div>
+                       <div class="col-md-12">
+                           <div class='input-group date' id='EDCD'>
+                               <span class="input-group-addon">
+                                   <span class="glyphicon glyphicon-calendar"></span>
+                               </span>
+                               <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="ExpectedDateOfChildBirth" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>        
+                           </div>
+                       </div>
+                   </div>
+               </div>
                
-            <div class="col-md-4">
-                <div class="col-md-12 form-group">
-                    <div class="col-md-12">
-                        <label class="control-label  pull-left">ANC/PNC Profile</label>
-                    </div>
+               <div class="col-md-4">
+                   <div class="col-md-12 form-group">
+                       <div class="col-md-12">
+                           <label class="control-label  pull-left">ANC/PNC Profile</label>
+                       </div>
 
-                    <div class="col-md-12 pull-left">
-                        <label class="pull-left" style="padding-right:10px">
-                            <input id="ancYes" runat="server" type="radio" name="ANC" value="yes" ClientIDMode="Static"  runat="server" />Yes
-                        </label>
-                        <label class="pull-left" style="padding-right:10px">
-                            <input id="ancNo" runat="server" type="radio" name="ANC" value="no" ClientIDMode="Static" runat="server" />No
-                        </label>
-                    </div>
-                </div>
+                       <div class="col-md-12 pull-left">
+                           <label class="pull-left" style="padding-right:10px">
+                               <input id="ancYes" runat="server" type="radio" name="ANC" value="yes" ClientIDMode="Static"  runat="server" />Yes
+                           </label>
+                           <label class="pull-left" style="padding-right:10px">
+                               <input id="ancNo" runat="server" type="radio" name="ANC" value="no" ClientIDMode="Static" runat="server" />No
+                           </label>
+                       </div>
+                   </div>
 
-                <div class="col-md-12 form-group" id="FP">
-                    <div class="col-md-12">
-                        <label class="control-label  pull-left">On Family Planning</label>
-                    </div>
-                    <div class="col-md-12">
-                        <asp:DropDownList runat="server" ID="onFP" ClientIDMode="Static" CssClass="form-control input-sm" />
-                    </div>
-                </div>
+                   <div class="col-md-12 form-group" id="FP">
+                       <div class="col-md-12">
+                           <label class="control-label  pull-left">On Family Planning</label>
+                       </div>
+                       <div class="col-md-12">
+                           <asp:DropDownList runat="server" ID="onFP" ClientIDMode="Static" CssClass="form-control input-sm" />
+                       </div>
+                   </div>
 
-                <div class="col-md-12 form-group" id="divOnFP">
-                    <div class="col-md-12">
-                        <label class="control-label  pull-left">FP Method</label>
-                    </div>
-                    <div class="col-md-12">
-                        <asp:DropDownList ID="fpMethod" runat="server" ClientIDMode="Static" CssClass="form-control input-sm select" multiple tabindex="3" Width="300" placeholder="FP Method"></asp:DropDownList>
-                    </div>
-                </div>
+                   <div class="col-md-12 form-group" id="divOnFP">
+                       <div class="col-md-12">
+                           <label class="control-label  pull-left">FP Method</label>
+                       </div>
+                       <div class="col-md-12">
+                           <asp:DropDownList ID="fpMethod" runat="server" ClientIDMode="Static" CssClass="form-control input-sm select" multiple tabindex="3" Width="300" placeholder="FP Method"></asp:DropDownList>
+                       </div>
+                   </div>
 
-                <div class="col-md-12 form-group" id="divNoFP" >
-                    <div class="col-md-12">
-                        <label class="control-label  pull-left">Reason not on FP</label>
-                    </div>
-                    <div class="col-md-12">
-                        <asp:DropDownList runat="server" ID="ddlNoFP" ClientIDMode="Static" CssClass="form-control input-sm" />
-                    </div>
-                </div>
+                   <div class="col-md-12 form-group" id="divNoFP" >
+                       <div class="col-md-12">
+                           <label class="control-label  pull-left">Reason not on FP</label>
+                       </div>
+                       <div class="col-md-12">
+                           <asp:DropDownList runat="server" ID="ddlNoFP" ClientIDMode="Static" CssClass="form-control input-sm" />
+                       </div>
+                   </div>
 
-            </div>
+               </div>
                
-            <div class="col-md-4">
-                <div class="col-md-12 form-group">
-                    <div class="col-md-12">
-                        <label class="control-label  pull-left">CaCX Screeing</label>
-                    </div>
-                    <div class="col-md-12">
-                        <asp:DropDownList runat="server" ID="cacxscreening" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-required="true" data-parsley-min="1" />
-                    </div>
-                </div>
+               <div class="col-md-4">
+                   <div class="col-md-12 form-group">
+                       <div class="col-md-12">
+                           <label class="control-label  pull-left">CaCX Screeing</label>
+                       </div>
+                       <div class="col-md-12">
+                           <asp:DropDownList runat="server" ID="cacxscreening" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-required="true" data-parsley-min="1" />
+                       </div>
+                   </div>
 
-                <div class="col-md-12 form-group">
-                    <div class="col-md-12">
-                        <label class="control-label  pull-left">STI Screeing</label>
-                    </div>
-                    <div class="col-md-12">
-                        <asp:DropDownList runat="server" ID="stiScreening" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-required="true" data-parsley-min="1" />
-                    </div>
-                </div>
+                   <div class="col-md-12 form-group">
+                       <div class="col-md-12">
+                           <label class="control-label  pull-left">STI Screeing</label>
+                       </div>
+                       <div class="col-md-12">
+                           <asp:DropDownList runat="server" ID="stiScreening" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-required="true" data-parsley-min="1" />
+                       </div>
+                   </div>
 
-                <div class="col-md-12 form-group">
-                    <div class="col-md-12">
-                        <label class="control-label  pull-left">STI Partner Notification</label>
-                    </div>
-                    <div class="col-md-12">
-                        <asp:DropDownList runat="server" ID="stiPartnerNotification" CssClass="form-control input-sm" ClientIDMode="Static" data-parsley-required="true" data-parsley-min="1"/>
-                    </div>
-                </div>
-            </div>
+                   <div class="col-md-12 form-group">
+                       <div class="col-md-12">
+                           <label class="control-label  pull-left">STI Partner Notification</label>
+                       </div>
+                       <div class="col-md-12">
+                           <asp:DropDownList runat="server" ID="stiPartnerNotification" CssClass="form-control input-sm" ClientIDMode="Static" data-parsley-required="true" data-parsley-min="1"/>
+                       </div>
+                   </div>
+               </div>
 
            </div><!-- .col-md-12 -->
+       </div>
        
-          <div class="col-md-12">
-        <hr />
-    </div>
+       <!-- Modal -->
+       <div id="myModal" class="modal fade" role="dialog">
+           <div class="modal-dialog">
+               <!-- Modal content-->
+               <div class="modal-content">
+                   <div class="modal-header">
+                       <button type="button" class="close" data-dismiss="modal">&times;</button>
+                       <h2 class="modal-title">Pregnancy Outcome</h2>
+                   </div>
+                   <div class="modal-body">
+                       <div class="row">
+                           <div class="col-md-1">&nbsp;</div>
+                           <div class="col-md-3">
+                               <div class="col-md-12"><asp:Label runat="server" CssClass="control-label pull-left" ID="lblPregnancyStatus">N/A</asp:Label></div>
+                           </div>
+                           <div class="col-md-4">
+                               <div class="col-md-12"><asp:Label runat="server" CssClass="control-label pull-left" ID="lblLMP">N/A</asp:Label></div>
+                           </div>
+                           <div class="col-md-4">
+                               <div class="col-md-12"><asp:Label runat="server" CssClass="control-label pull-left" ID="lblEDD">N/A</asp:Label></div>
+                           </div>
+                       </div>
+                       <div class="row">&nbsp;</div>
+                       <div class="row">
+                           <div class="col-md-12 form-group">
+                                <div class="col-md-12 form-group">
+                                    <div class="col-md-4">
+                                        <label class="control-label  pull-left">Pregnancy Outcome</label>
+                                    </div>
+
+                                    <div class="col-md-8">
+                                        <asp:DropDownList runat="server" ID="PregnancyOutCome" CssClass="form-control input-sm" ClientIDMode="Static" />
+                                    </div>
+                                </div>
+                               
+                               <div class="col-md-12 form-group">
+                                   <div class="col-md-4">
+                                       <label class="control-label  pull-left">Date of Outcome</label>
+                                   </div>
+                                   <div class="col-md-8">
+                                       <div class='input-group date' id='OutcomeDate'>
+                                           <span class="input-group-addon">
+                                               <span class="glyphicon glyphicon-calendar"></span>
+                                           </span>
+                                           <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="outcomeDatetime" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>        
+                                       </div>
+                                   </div>
+                               </div>
+                            </div>
+                       </div>
+                   </div>
+                   <div class="modal-footer">
+                       <button type="button" id="btnSaveOutcome" class="btn btn-success" OnClientClick="return false;">Save</button>
+                       <button type="button" id="btnModalClose" class="btn btn-default" data-dismiss="modal">Close</button>
+                   </div>
+               </div>
+
+           </div>
+       </div>
        
-          <div class="col-md-12" id="btnFemaleVitals">
-        <div class="col-md-6">
-            <div class="col-md-4">
-                 <%--<asp:LinkButton runat="server" ID="btnPregnancyOutCome" CssClass="btn btn-primary fa fa-plus-circle btn-lg" ClientIDMode="Static" OnClientClick="return false;"> Set Pregnancy Outcome </asp:LinkButton>--%>
+       <div class="col-md-12"><hr /></div>
+       
+       <div class="col-md-12" id="btnFemaleVitals">
+           <div class="col-md-6">
+               <div class="col-md-4">
+                   <asp:LinkButton runat="server" ID="btnOutcome" CssClass="btn btn-info fa fa-plus-circle btn-lg" ClientIDMode="Static" OnClientClick="return false;" data-toggle="modal" data-target="#myModal"> Pregnancy Outcome </asp:LinkButton>
+               </div>
+               <div class="col-md-4"></div>
+               <div class="col-md-4"></div>
 
-            </div>
-             <div class="col-md-4"></div>
-             <div class="col-md-4"></div>
-        </div>
-        <div class="col-md-6">
-            <div class="col-md-4 col-xs-12 col-sm-12">
-                 <asp:LinkButton runat="server" ID="btnSave" CssClass="btn btn-info fa fa-plus-circle btn-lg" ClientIDMode="Static" OnClientClick="return false;"> Save History </asp:LinkButton>
-            </div>
+           </div>
+           
+           <div class="col-md-6">
+               <div class="col-md-4 col-xs-12 col-sm-12">
+                     <asp:LinkButton runat="server" ID="btnSave" CssClass="btn btn-info fa fa-plus-circle btn-lg" ClientIDMode="Static" OnClientClick="return false;"> Save History </asp:LinkButton>
+               </div>
 
-            <div class="col-md-4 col-xs-12 col-sm-12">
-                <asp:LinkButton runat="server" ID="btnReset" CssClass="btn btn-warning  fa fa-refresh btn-lg " ClientIDMode="Static" OnClientClick="return false;"> Reset History </asp:LinkButton>
-            </div>
+               <div class="col-md-4 col-xs-12 col-sm-12">
+                   <asp:LinkButton runat="server" ID="btnReset" CssClass="btn btn-warning  fa fa-refresh btn-lg " ClientIDMode="Static" OnClientClick="return false;"> Reset History </asp:LinkButton>
+               </div>
 
-            <div class="col-md-4 col-xs-12 col-sm-12">
-                    <asp:LinkButton runat="server" ID="btnCancel" CssClass="btn btn-danger fa fa-times btn-lg" ClientIDMode="Static" OnClientClick="return false;"> Close History </asp:LinkButton>
-             </div>
-        </div>
+               <div class="col-md-4 col-xs-12 col-sm-12">
+                        <asp:LinkButton runat="server" ID="btnCancel" CssClass="btn btn-danger fa fa-times btn-lg" ClientIDMode="Static" OnClientClick="return false;"> Close History </asp:LinkButton>
+               </div>
+          </div>
 
      </div>
                          
@@ -218,6 +279,12 @@
          });
 
          $('#EDCD').datetimepicker({
+             format: 'DD-MMM-YYYY',
+             allowInputToggle: true,
+             useCurrent: false
+         });
+
+         $('#OutcomeDate').datetimepicker({
              format: 'DD-MMM-YYYY',
              allowInputToggle: true,
              useCurrent: false
@@ -301,6 +368,8 @@
             $("#<%=fpMethod.ClientID%>:selected").each(function (i, selected) {
                 fpMethod[i] = $(selected).val();
             });--%>
+
+         doesPregnancyExists();
 
          function addPregnancy() {
 
@@ -456,6 +525,28 @@
              });
          }
 
+         function doesPregnancyExists() {
+             $.ajax({
+                 type: "POST",
+                 url: "../WebService/FemaleVitalsWebservice.asmx/PregnancyExists",
+                 data: "{'patientId':'" + patientId + "'}",
+                 contentType: "application/json; charset=utf-8",
+                 dataType: "json",
+                 success: function (response) {
+                     if (response.d > 0) {
+                         $('#btnOutcome').show('slow');
+                     } else {
+                         $('#btnOutcome').hide('slow');
+                     }
+
+                     //console.log(response.d);
+                 },error: function (xhr, errorType, exception) {
+                     var jsonError = jQuery.parseJSON(xhr.responseText);
+                     toastr.error("" + xhr.status + "" + jsonError.Message);
+                 }
+             });
+         }
+
          $("#btnSave").click(function () {
 
              if ($('#FemaleVitals').parsley().validate()) {
@@ -491,7 +582,7 @@
                                          2000);
                                  });
                              } else {
-                                 addPregnancyIndicator();
+                                 setTimeout(function() { addPregnancyIndicator(); }, 2000);
                              }
 
                              /* save family planning */
@@ -501,27 +592,33 @@
                                  if (fpName === "No Family Planning(NOFP)") {
                                      addFamilyPlanning();
                                  } else {
-                                     $.when(addFamilyPlanning()).then(function() {
-                                         setTimeout(function () {
-                                                 addFamilyPlanningMethod();
-                                             },
-                                             2000);
-                                     });
+                                     setTimeout(function() {
+                                             $.when(addFamilyPlanning()).then(function() {
+                                                 setTimeout(function() {
+                                                         addFamilyPlanningMethod();
+                                                     },
+                                                     2000);
+                                             });
+                                         },
+                                         2000);
                                  }
                              }
 
-                             /* patient screening*/
-                             $.when(addPatientScreeningcacx()).then(function() {
-                                 setTimeout(function () {
-                                         addPatientScreeningSti();
-                                     },
-                                     2000);
-                             });
-                             $.when(addPatientScreeningStiNotification()).then(function () {
-                                 $("#FemaleVitals").hide("fast");
-                             });
-                         }
-                         location.reload();
+                             setTimeout(function() {
+                                     /* patient screening*/
+                                     $.when(addPatientScreeningcacx()).then(function() {
+                                         setTimeout(function() {
+                                                 addPatientScreeningSti();
+                                             },
+                                             2000);
+                                     });
+                                     $.when(addPatientScreeningStiNotification()).then(function() {
+                                         $("#FemaleVitals").hide("fast");
+                                         //location.reload();
+                                     });
+                                 },
+                                 2000);
+                         }        
                      },
                      error: function (xhr, errorType, exception) {
                          var jsonError = jQuery.parseJSON(xhr.responseText);
@@ -539,6 +636,32 @@
          $("#fpMethod").select2({
              placeholder: "Select FP Method",
              allowClear: true
+         });
+
+         $("#btnSaveOutcome").click(function() {
+             var PregnancyOutcome = $("#PregnancyOutCome").val();
+             var outcomeDatetime = $("#outcomeDatetime").val();
+
+             if (PregnancyOutcome == 0) {
+                 toastr.error("Please select one pregnancy option", "Pregnancy Outcome");
+                 return false;
+             }
+
+
+             $.ajax({
+                 type: "POST",
+                 url: "../WebService/FemaleVitalsWebservice.asmx/AddPregnancyOutcome",
+                 data: "{'outcome':'" + PregnancyOutcome + "','outcomeDate':'" + outcomeDatetime + "'}",
+                 contentType: "application/json; charset=utf-8",
+                 dataType: "json",
+                 success: function (response) {
+                     toastr.success(response.d, "Pregnancy Outcome");
+                     setTimeout(function() { location.reload(); return false; }, 3000);
+                 }, error: function (xhr, errorType, exception) {
+                     var jsonError = jQuery.parseJSON(xhr.responseText);
+                     toastr.error("" + xhr.status + "" + jsonError.Message);
+                 }
+             });
          });
 
      });

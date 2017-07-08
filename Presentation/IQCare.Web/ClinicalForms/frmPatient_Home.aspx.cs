@@ -1134,15 +1134,15 @@ namespace IQCare.Web.Clinical
             if (theDS.Tables[44].Rows.Count > 0)
             {
 
-                string bVL = theDS.Tables[44].Rows[0]["baselineVL"].ToString();
+                //string bVL = theDS.Tables[44].Rows[0]["baselineVL"].ToString();
                 string VL=theDS.Tables[44].Rows[0]["ResultValue"].ToString();
 
                 //lblviralload.Text = 
-                    bVL += " copies/ml";
+                    //bVL += " copies/ml";
                     VL += " copies/ml";
                     lblviralload.Text = VL.ToString();
                     latestVL.Text = VL.ToString();
-                    baselineVL.Text = bVL.ToString();
+                    //baselineVL.Text = bVL.ToString();
                     
 
                 lblVLDueDate.Text = Convert.ToDateTime(theDS.Tables[44].Rows[0]["ViralLoadDueDate"]).ToString("dd-MMM-yyyy");
