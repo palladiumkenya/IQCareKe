@@ -42,7 +42,6 @@ namespace Entities.Lab
         public int TestId
         {
             get {return Test.Id; }
-            set { }
         }
                
         [NotMapped]
