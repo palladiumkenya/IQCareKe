@@ -99,7 +99,7 @@
          </div>
         
         <div class="col-md-12 col-xs-12 col-sm-12" style="padding: 5px; text-align: left;" id="infoGridMessage">
-            <strong><h4>Double Click To Select Patient</h4></strong>
+            <%--<strong><h4>Double Click To Select Patient</h4></strong>--%>
         </div>
 
          <div class="col-md-12 col-sm-12 col-xs-12 form-group" id="PatientSearch">
@@ -298,7 +298,7 @@
              });
 
             //row selection
-          $('#tblFindPatient').on('dblclick', 'tbody tr', function () {
+          $('#tblFindPatient').on('click', 'tbody tr', function () {
               // window.location.href = $(this).attr('href');
               var patientId = $(this).find('td').first().text();
               PageMethods.SetSelectedPatient(patientId);

@@ -3336,6 +3336,15 @@ INSERT INTO LookupMasterItem (LookupMasterId,LookupItemId,DisplayName,OrdRank) V
 INSERT INTO LookupMasterItem (LookupMasterId,LookupItemId,DisplayName,OrdRank) VALUES((SELECT Id from lookupmaster WHERE Name='PeriodDrugsTaken'),(SELECT Id FROM LookupItem WHERE Name='During Labour'),'During Labour',2)
 INSERT INTO LookupMasterItem (LookupMasterId,LookupItemId,DisplayName,OrdRank) VALUES((SELECT Id from lookupmaster WHERE Name='PeriodDrugsTaken'),(SELECT Id FROM LookupItem WHERE Name='Post Natal'),'Post Natal',3)
 
+if not exists(select 1 from mst_Decode where name='PrEP')
+begin
+insert into mst_Decode values('PrEP',33,5,null,0,1,getdate(),null,0,null,null)
+end
+if not exists(select 1 from mst_Decode where name='Hepatitis B')
+begin
+insert into mst_Decode values('Hepatitis B',33,6,null,0,1,getdate(),null,0,null,null)
+end
+
 --insert PM/SCM With Same point dispense module
 SET IDENTITY_INSERT mst_module ON
 
