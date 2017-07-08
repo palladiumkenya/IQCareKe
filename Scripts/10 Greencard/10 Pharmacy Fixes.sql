@@ -112,7 +112,7 @@ update mst_generic set genericabbrevation = 'LPV/r' where genericabbrevation = '
 Go
 update mst_generic set genericabbrevation = 'ATV' where genericabbrevation = 'ATR'
 Go
-if not exists(select 1 from mst_generic where GenericName = 'Atazanavir/Ritonavir')
-begin
-insert into mst_generic (GenericName,GenericAbbrevation,deleteflag) values('Atazanavir/Ritonavir','ATV/r',0)
-end
+--if not exists(select 1 from mst_generic where GenericName = 'Atazanavir/Ritonavir')
+--begin
+--insert into mst_generic (GenericName,GenericAbbrevation,deleteflag) values('Atazanavir/Ritonavir','ATV/r',0)
+--end

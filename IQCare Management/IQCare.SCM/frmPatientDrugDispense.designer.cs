@@ -335,7 +335,7 @@
             this.DispenseTab.Location = new System.Drawing.Point(4, 34);
             this.DispenseTab.Name = "DispenseTab";
             this.DispenseTab.Padding = new System.Windows.Forms.Padding(3);
-            this.DispenseTab.Size = new System.Drawing.Size(1263, 654);
+            this.DispenseTab.Size = new System.Drawing.Size(1263, 634);
             this.DispenseTab.TabIndex = 1;
             this.DispenseTab.Tag = "pnlSubPanel";
             this.DispenseTab.Text = "Dispense";
@@ -349,7 +349,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1255, 207);
+            this.panel1.Size = new System.Drawing.Size(1255, 192);
             this.panel1.TabIndex = 63;
             this.panel1.Tag = "pnlPanel";
             // 
@@ -381,11 +381,11 @@
             this.grpBoxLastDispense.Controls.Add(this.cmdPeriodTaken);
             this.grpBoxLastDispense.Controls.Add(this.labelDrugProvider);
             this.grpBoxLastDispense.Controls.Add(this.labelRegimenLine);
-            this.grpBoxLastDispense.Location = new System.Drawing.Point(-4, 90);
+            this.grpBoxLastDispense.Location = new System.Drawing.Point(-4, 81);
             this.grpBoxLastDispense.Margin = new System.Windows.Forms.Padding(0);
             this.grpBoxLastDispense.Name = "grpBoxLastDispense";
             this.grpBoxLastDispense.Padding = new System.Windows.Forms.Padding(0);
-            this.grpBoxLastDispense.Size = new System.Drawing.Size(1258, 110);
+            this.grpBoxLastDispense.Size = new System.Drawing.Size(1258, 111);
             this.grpBoxLastDispense.TabIndex = 104;
             this.grpBoxLastDispense.TabStop = false;
             this.grpBoxLastDispense.Tag = "";
@@ -723,7 +723,7 @@
             this.groupBox1.Controls.Add(this.label31);
             this.groupBox1.Controls.Add(this.label29);
             this.groupBox1.Controls.Add(this.lblPatientName);
-            this.groupBox1.Location = new System.Drawing.Point(6, 51);
+            this.groupBox1.Location = new System.Drawing.Point(6, 42);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(1245, 37);
             this.groupBox1.TabIndex = 63;
@@ -837,7 +837,7 @@
             this.panel6.Controls.Add(this.btnART);
             this.panel6.Location = new System.Drawing.Point(6, 3);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(935, 44);
+            this.panel6.Size = new System.Drawing.Size(935, 42);
             this.panel6.TabIndex = 99;
             // 
             // lblStoreName
@@ -942,7 +942,7 @@
             this.label28.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label28.AutoSize = true;
             this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label28.Location = new System.Drawing.Point(903, 581);
+            this.label28.Location = new System.Drawing.Point(903, 565);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(135, 13);
             this.label28.TabIndex = 64;
@@ -954,7 +954,7 @@
             this.lblPayAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblPayAmount.AutoSize = true;
             this.lblPayAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPayAmount.Location = new System.Drawing.Point(1098, 581);
+            this.lblPayAmount.Location = new System.Drawing.Point(1098, 565);
             this.lblPayAmount.Name = "lblPayAmount";
             this.lblPayAmount.Size = new System.Drawing.Size(32, 13);
             this.lblPayAmount.TabIndex = 65;
@@ -999,23 +999,23 @@
             this.panel4.Controls.Add(this.checkProphylaxis);
             this.panel4.Controls.Add(this.label16);
             this.panel4.Controls.Add(this.txtPillCount);
-            this.panel4.Location = new System.Drawing.Point(2, 206);
+            this.panel4.Location = new System.Drawing.Point(2, 199);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1256, 184);
+            this.panel4.Size = new System.Drawing.Size(1256, 183);
             this.panel4.TabIndex = 71;
             this.panel4.Paint += new System.Windows.Forms.PaintEventHandler(this.panel4_Paint);
             // 
             // grpExistingRec
             // 
             this.grpExistingRec.BackColor = System.Drawing.Color.Gray;
-            this.grpExistingRec.Controls.Add(this.btnCloseExisting);
             this.grpExistingRec.Controls.Add(this.grdExitingPharDisp);
+            this.grpExistingRec.Controls.Add(this.btnCloseExisting);
             this.grpExistingRec.Controls.Add(this.label33);
             this.grpExistingRec.Controls.Add(this.btnExitingRecClose);
             this.grpExistingRec.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.grpExistingRec.Location = new System.Drawing.Point(10, 3);
+            this.grpExistingRec.Location = new System.Drawing.Point(9, 5);
             this.grpExistingRec.Name = "grpExistingRec";
-            this.grpExistingRec.Size = new System.Drawing.Size(551, 230);
+            this.grpExistingRec.Size = new System.Drawing.Size(537, 208);
             this.grpExistingRec.TabIndex = 66;
             this.grpExistingRec.TabStop = false;
             this.grpExistingRec.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.grpExistingRec_PreviewKeyDown);
@@ -1025,7 +1025,7 @@
             this.btnCloseExisting.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnCloseExisting.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCloseExisting.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnCloseExisting.Location = new System.Drawing.Point(440, 7);
+            this.btnCloseExisting.Location = new System.Drawing.Point(425, 7);
             this.btnCloseExisting.Margin = new System.Windows.Forms.Padding(0);
             this.btnCloseExisting.Name = "btnCloseExisting";
             this.btnCloseExisting.Size = new System.Drawing.Size(80, 25);
@@ -1070,7 +1070,7 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.grdExitingPharDisp.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.grdExitingPharDisp.Size = new System.Drawing.Size(521, 166);
+            this.grdExitingPharDisp.Size = new System.Drawing.Size(521, 139);
             this.grdExitingPharDisp.TabIndex = 1;
             this.grdExitingPharDisp.Tag = "dgwDataGridView";
             this.grdExitingPharDisp.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdExitingPharDisp_CellDoubleClick);
@@ -1081,7 +1081,7 @@
             this.label33.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label33.Location = new System.Drawing.Point(2, 7);
             this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(435, 23);
+            this.label33.Size = new System.Drawing.Size(401, 23);
             this.label33.TabIndex = 0;
             this.label33.Text = "View Existing Record";
             this.label33.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1090,7 +1090,7 @@
             // 
             this.btnExitingRecClose.BackColor = System.Drawing.SystemColors.Window;
             this.btnExitingRecClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExitingRecClose.Location = new System.Drawing.Point(323, 202);
+            this.btnExitingRecClose.Location = new System.Drawing.Point(323, 174);
             this.btnExitingRecClose.Margin = new System.Windows.Forms.Padding(0);
             this.btnExitingRecClose.Name = "btnExitingRecClose";
             this.btnExitingRecClose.Size = new System.Drawing.Size(80, 25);
@@ -1510,7 +1510,7 @@
             this.pnlGrdDrugDispense.Controls.Add(this.cmbGrdDrugDispenseFreq);
             this.pnlGrdDrugDispense.Controls.Add(this.cmbGrdDrugDispense);
             this.pnlGrdDrugDispense.Controls.Add(this.grdDrugDispense);
-            this.pnlGrdDrugDispense.Location = new System.Drawing.Point(2, 396);
+            this.pnlGrdDrugDispense.Location = new System.Drawing.Point(2, 384);
             this.pnlGrdDrugDispense.Name = "pnlGrdDrugDispense";
             this.pnlGrdDrugDispense.Size = new System.Drawing.Size(1257, 169);
             this.pnlGrdDrugDispense.TabIndex = 102;
@@ -1538,8 +1538,6 @@
             // grdDrugDispense
             // 
             this.grdDrugDispense.AllowUserToAddRows = false;
-            this.grdDrugDispense.AllowUserToResizeColumns = false;
-            this.grdDrugDispense.AllowUserToResizeRows = false;
             this.grdDrugDispense.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grdDrugDispense.BackgroundColor = System.Drawing.SystemColors.Window;
@@ -1560,7 +1558,7 @@
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.grdDrugDispense.DefaultCellStyle = dataGridViewCellStyle5;
-            this.grdDrugDispense.Location = new System.Drawing.Point(0, 0);
+            this.grdDrugDispense.Location = new System.Drawing.Point(0, 1);
             this.grdDrugDispense.Name = "grdDrugDispense";
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
@@ -1592,7 +1590,7 @@
             this.FindPatientTab.Location = new System.Drawing.Point(4, 34);
             this.FindPatientTab.Name = "FindPatientTab";
             this.FindPatientTab.Padding = new System.Windows.Forms.Padding(3);
-            this.FindPatientTab.Size = new System.Drawing.Size(1263, 654);
+            this.FindPatientTab.Size = new System.Drawing.Size(1263, 634);
             this.FindPatientTab.TabIndex = 0;
             this.FindPatientTab.Tag = "pnlSubPanel";
             this.FindPatientTab.Text = "Find Patient ";
@@ -1602,7 +1600,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(22, 109);
+            this.label7.Location = new System.Drawing.Point(22, 114);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(131, 13);
             this.label7.TabIndex = 48;
@@ -1646,7 +1644,7 @@
             dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.grdResultView.DefaultCellStyle = dataGridViewCellStyle15;
-            this.grdResultView.Location = new System.Drawing.Point(12, 125);
+            this.grdResultView.Location = new System.Drawing.Point(12, 130);
             this.grdResultView.MultiSelect = false;
             this.grdResultView.Name = "grdResultView";
             this.grdResultView.ReadOnly = true;
@@ -1661,7 +1659,7 @@
             this.grdResultView.RowHeadersWidth = 30;
             this.grdResultView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.grdResultView.ShowEditingIcon = false;
-            this.grdResultView.Size = new System.Drawing.Size(1216, 348);
+            this.grdResultView.Size = new System.Drawing.Size(1216, 391);
             this.grdResultView.TabIndex = 47;
             this.grdResultView.Tag = "dgwDataGridView";
             this.grdResultView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdResultView_CellContentClick);
@@ -1896,7 +1894,7 @@
             // 
             this.btnFind.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnFind.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFind.Location = new System.Drawing.Point(283, 94);
+            this.btnFind.Location = new System.Drawing.Point(283, 96);
             this.btnFind.Name = "btnFind";
             this.btnFind.Size = new System.Drawing.Size(122, 25);
             this.btnFind.TabIndex = 46;
@@ -2008,7 +2006,7 @@
             this.MainTab.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.MainTab.RightToLeftLayout = true;
             this.MainTab.SelectedIndex = 0;
-            this.MainTab.Size = new System.Drawing.Size(1271, 692);
+            this.MainTab.Size = new System.Drawing.Size(1271, 672);
             this.MainTab.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.MainTab.TabIndex = 0;
             this.MainTab.Tag = "pnlPanel";
@@ -2721,7 +2719,7 @@
             this.panelSave.Controls.Add(this.cmdSave);
             this.panelSave.Controls.Add(this.cmdClose);
             this.panelSave.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelSave.Location = new System.Drawing.Point(0, 638);
+            this.panelSave.Location = new System.Drawing.Point(0, 618);
             this.panelSave.Margin = new System.Windows.Forms.Padding(0);
             this.panelSave.Name = "panelSave";
             this.panelSave.Size = new System.Drawing.Size(1271, 54);
@@ -3037,7 +3035,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(1271, 692);
+            this.ClientSize = new System.Drawing.Size(1271, 672);
             this.Controls.Add(this.panelSave);
             this.Controls.Add(this.MainTab);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
