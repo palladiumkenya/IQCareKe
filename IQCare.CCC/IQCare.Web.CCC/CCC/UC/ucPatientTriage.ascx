@@ -310,7 +310,7 @@
         if (diastolic === '') { diastolic = 0 }
         var systolic = $("#<%=systolic.ClientID%>").val();
         if (systolic === '') { systolic = 0 }
-        var tempreture = $("#<%=Tempreture.ClientID%>").val();
+        var tempreture = $("#<%=Temperature.ClientID%>").val();
         if (tempreture === '') { tempreture = 0 }
         var respiratoryRate = $("#<%=RespiratoryRate.ClientID%>").val();
         if (respiratoryRate === '') { respiratoryRate = 0 }

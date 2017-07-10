@@ -1420,7 +1420,7 @@
                                 <label class="control-label pull-left">Lab Order</label>
                             </div>
                             <div class="form-group col-md-12" style="text-align: left">
-                                <button type="button" class="btn btn-info btn-sm pull-left" data-toggle="modal" data-target="#labModal">Order Lab Tests</button>
+                                <button type="button" class="btn btn-info btn-sm pull-left" data-toggle="modal" data-target="#labModal" id="btnOrderLabTests">Order Lab Tests</button>
                             </div>
                         </div>
 
@@ -1785,6 +1785,11 @@
         $("#prescribeDrugs").click(function() {
             $("#btnClosePrecriptionModal").show("fast");
             $("#btnClosePrecription").hide("fast");
+        });
+
+        $("#btnOrderLabTests").click(function () {
+            $("#btnCloseLabOrderModal").show("fast");
+            $("#btnCloseLabOrder").hide("fast");
         });
         
         $('#PCDateOfOnset').datepicker({
