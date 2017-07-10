@@ -34,16 +34,20 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession =true)]
-        public string AddPatientPregnancyIndicator(int patientId, int patientMasterVisitId,DateTime visitDate, DateTime lmp, DateTime edd, int pregnancyStatusId, int ancProfile, DateTime ancProfileDate, int userId)
+        public string AddPatientPregnancyIndicator(int patientId, int patientMasterVisitId,DateTime visitDate, string lmp, string edd, int pregnancyStatusId, string ancProfile, string ancProfileDate, int userId)
         {
+            int ancProfile_value = 0;
             try
             {
                 var patientPreganancyIndicator = new PatientPregnancyIndicatorManager();
-               // userId= Convert.ToInt32(HttpContext.Current.Session["AppUserId"]);
+                // userId= Convert.ToInt32(HttpContext.Current.Session["AppUserId"]);
+
+                ancProfile_value = ancProfile == "true" ? 1 : 0;
+
                 patientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
                 patientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientmasterVisitId"]);
 
-                result = patientPreganancyIndicator.AddPregnancyIndicator(patientId, patientMasterVisitId,visitDate, lmp, edd, pregnancyStatusId, ancProfile, ancProfileDate, Convert.ToInt32(HttpContext.Current.Session["AppUserId"]));
+                result = patientPreganancyIndicator.AddPregnancyIndicator(patientId, patientMasterVisitId,visitDate, lmp, edd, pregnancyStatusId, ancProfile_value, ancProfileDate, Convert.ToInt32(HttpContext.Current.Session["AppUserId"]));
                 jsonMessage=(result>0)? "Pregnancy Indicator added successfully" : "";
             }
             catch (Exception e)

@@ -25,11 +25,7 @@ namespace Entities.CCC.Triage
         public virtual PatientMasterVisit PatientMasterVisit { get; set; }
 
         public DateTime? VisitDate { get; set; }
-        [Required]
-        public DateTime LMP { get; set; }
-
-
-        [Required]
+        public DateTime? LMP { get; set; }
         public DateTime? EDD { get; set; }
 
         [Required]
