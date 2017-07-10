@@ -73,6 +73,7 @@ namespace BusinessProcess.CCC.Patient
             ClsUtility.AddExtendedParameters("@DateOfBirth", SqlDbType.DateTime, patient.DateOfBirth);
             ClsUtility.AddExtendedParameters("@NationalId", SqlDbType.VarChar, patient.NationalId);
             ClsUtility.AddExtendedParameters("@FacilityId", SqlDbType.Int, patient.FacilityId);
+            ClsUtility.AddExtendedParameters("@AuditData", SqlDbType.Xml, patient.AuditData);
             ClsUtility.AddExtendedParameters("@Id", SqlDbType.Int, id);
 
             DataTable dt = (DataTable)obj.ReturnObject(ClsUtility.theParams, "Patient_Update", ClsUtility.ObjectEnum.DataTable);

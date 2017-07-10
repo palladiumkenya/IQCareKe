@@ -304,11 +304,20 @@ namespace IQCare.Web.CCC.WebService
                     {
                         Session["PatientPK"] = patient[0].Id;
 
+                        List<PatientEntity> listPatient = new List<PatientEntity>();
+                        var entity = patient.ConvertAll(x => new PatientEntity { Id = x.Id, Active = x.Active, DateOfBirth = x.DateOfBirth, ptn_pk = x.ptn_pk, PatientType = x.PatientType, PatientIndex = x.PatientIndex, NationalId = x.NationalId, FacilityId = x.FacilityId });
+                        var patientAuditData = AuditDataUtility.Serializer(entity);
+
                         PatientEntity updatePatient = new PatientEntity();
                         updatePatient.ptn_pk = patient[0].ptn_pk;
                         updatePatient.DateOfBirth = patient[0].DateOfBirth;
                         updatePatient.NationalId = nationalId;
                         updatePatient.FacilityId = patient[0].FacilityId;
+
+
+                        //listPatient.Add(entity);
+                        updatePatient.AuditData = patientAuditData;
+                        //var enrollmentAuditData = AuditDataUtility.Serializer(patient);
 
                         patientManager.UpdatePatient(updatePatient, patient[0].Id);
 
@@ -319,7 +328,11 @@ namespace IQCare.Web.CCC.WebService
 
                         if (entryPoints.Count > 0)
                         {
+                            var entryPointAuditData = AuditDataUtility.Serializer(entryPoints);
+
                             entryPoints[0].EntryPointId = entryPointId;
+                            entryPoints[0].AuditData = entryPointAuditData;
+
                             patientEntryPointManager.UpdatePatientEntryPoint(entryPoints[0]);
                         }
                         foreach (var item in identifiersObjects)
@@ -335,12 +348,18 @@ namespace IQCare.Web.CCC.WebService
 
                                     PatientEntityEnrollment entityEnrollment =
                                         patientEnrollmentManager.GetPatientEntityEnrollment(enrollmentId);
+                                    List<PatientEntityEnrollment> listEnrollment = new List<PatientEntityEnrollment>();
+                                    listEnrollment.Add(entityEnrollment);
+                                    var enrollmentAuditData = AuditDataUtility.Serializer(listEnrollment);
 
                                     entityEnrollment.EnrollmentDate = DateTime.Parse(enrollmentDate);
+                                    entityEnrollment.AuditData = enrollmentAuditData;
 
                                     patientEnrollmentManager.updatePatientEnrollment(entityEnrollment);
 
+                                    var entityIdentifierAuditData = AuditDataUtility.Serializer(identifiersByPatientId);
                                     entityIdentifier.IdentifierValue = item.Value;
+                                    entityIdentifier.AuditData = entityIdentifierAuditData;
                                     patientIdentifierManager.UpdatePatientIdentifier(entityIdentifier);
                                 }
                             }
