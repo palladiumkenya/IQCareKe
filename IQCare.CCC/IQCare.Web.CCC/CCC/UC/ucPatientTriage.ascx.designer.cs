@@ -94,13 +94,13 @@ namespace IQCare.Web.CCC.UC {
         protected global::System.Web.UI.WebControls.TextBox circumference;
         
         /// <summary>
-        /// Tempreture control.
+        /// Temperature control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Tempreture;
+        protected global::System.Web.UI.WebControls.TextBox Temperature;
         
         /// <summary>
         /// systolic control.
