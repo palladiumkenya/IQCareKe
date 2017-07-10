@@ -224,11 +224,13 @@
 
                           
 							  <asp:LinkButton ID="LinkButton2" ClientIDMode="Static"  runat="server" OnClick="EncounterHistory_Click" CssClass="list-group-item">
-								  <span class="fa fa-file-text-o fa-2x pull-left text-info"></span><strong class="text-info">Encounter History</strong></asp:LinkButton>
+								  <span class="fa fa-file-text-o fa-2x pull-left text-info"></span><strong class="text-info">Encounter History</strong>
 
-                             		<a href='<%=ResolveClientUrl("~/ClinicalForms/frmPatient_History.aspx") %>' class="list-group-item" id="menuMoH257">
-									<span class="iq iq-awareness-ribbon fa-2x  text-info pull-left"></span><strong class="text-info">Bluecard Encounters </strong>
-								</a>
+							  </asp:LinkButton>
+
+                             <asp:LinkButton ID="menuMoH257" runat="server" ClientIDMode="Static" OnClick="menuMoH257_Click" CssClass="list-group-item">
+                                 <span class="iq iq-awareness-ribbon fa-2x  text-info pull-left"></span><strong class="text-info">Bluecard Encounters </strong>
+                             </asp:LinkButton>
 
 								<!--<a  href="/CCC/Enrollment/ServiceEnrollment.aspx" class="list-group-item">
 									<span class="fa fa-arrow-circle-o-right fa-1x pull-left text-danger"></span> Enrollment  <span class="badge">8</span>

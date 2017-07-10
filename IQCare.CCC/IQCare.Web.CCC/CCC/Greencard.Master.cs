@@ -198,5 +198,11 @@ namespace IQCare.Web.CCC
         {
             Response.Redirect("~/CCC/Encounter/LabOrder.aspx");
         }
+
+        protected void menuMoH257_Click(object sender, EventArgs e)
+        {
+            Session["urlOrigin"] = "greencard";
+            Response.Redirect("~/ClinicalForms/frmPatient_History.aspx");
+        }
     }
 }
