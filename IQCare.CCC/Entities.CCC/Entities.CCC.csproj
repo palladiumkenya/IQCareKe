@@ -99,6 +99,7 @@
     <Compile Include="Enrollment\PatientEntityEnrollment.cs" />
     <Compile Include="Enrollment\PatientEntryPoint.cs" />
     <Compile Include="Encounter\LabOrderEntity.cs" />
+    <Compile Include="Enrollment\PatientReEnrollment.cs" />
     <Compile Include="Enrollment\ServiceArea.cs" />
     <Compile Include="Enrollment\ServiceAreaIdentifiers.cs" />
     <Compile Include="Lookup\FacilityList.cs" />

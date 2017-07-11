@@ -224,11 +224,13 @@
 
                           
 							  <asp:LinkButton ID="LinkButton2" ClientIDMode="Static"  runat="server" OnClick="EncounterHistory_Click" CssClass="list-group-item">
-								  <span class="fa fa-file-text-o fa-2x pull-left text-info"></span><strong class="text-info">Encounter History</strong></asp:LinkButton>
+								  <span class="fa fa-file-text-o fa-2x pull-left text-info"></span><strong class="text-info">Encounter History</strong>
 
-                             		<a href='<%=ResolveClientUrl("~/ClinicalForms/frmPatient_History.aspx") %>' class="list-group-item" id="menuMoH257">
-									<span class="iq iq-awareness-ribbon fa-2x  text-info pull-left"></span><strong class="text-info">Bluecard Encounters </strong>
-								</a>
+							  </asp:LinkButton>
+
+                             <asp:LinkButton ID="menuMoH257" runat="server" ClientIDMode="Static" OnClick="menuMoH257_Click" CssClass="list-group-item">
+                                 <span class="iq iq-awareness-ribbon fa-2x  text-info pull-left"></span><strong class="text-info">Bluecard Encounters </strong>
+                             </asp:LinkButton>
 
 								<!--<a  href="/CCC/Enrollment/ServiceEnrollment.aspx" class="list-group-item">
 									<span class="fa fa-arrow-circle-o-right fa-1x pull-left text-danger"></span> Enrollment  <span class="badge">8</span>
@@ -249,6 +251,41 @@
 					</div>
 				</div>
 			  
+		      <!-- Modal -->
+		      <div id="reenrollmentModal" class="modal fade" role="dialog" data-parsley-validate="true" data-show-errors="true" data-keyboard="false" data-backdrop="static">
+		          <div class="modal-dialog">
+		              <div class="modal-content">
+		                  <div class="modal-header bg-info">
+		                      <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+		                      <h4 class="modal-title">Re-Enroll Patient</h4>
+
+		                  </div>
+		                  <div class="modal-body">
+		                      <div class="row">
+		                          <div class="col-md-12 form-group">
+		                              <div class="col-md-4">
+		                                  <label class="control-label pull-left">Re-Enrollment Date:</label>
+		                              </div>
+		                              <div class="col-md-8">
+		                                  <div class="col-md-12 form-group">
+		                                      <div class='input-group date' id='Re-enrollmentdatepicker'>
+		                                          <span class="input-group-addon">
+		                                              <span class="glyphicon glyphicon-calendar"></span>
+		                                          </span>
+		                                          <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="renrollmentDate" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>        
+		                                      </div>
+		                                  </div>
+		                              </div>                
+		                          </div>
+		                     </div>
+		                  </div>
+		                  <div class="modal-footer">
+		                        <button type="button" id="btnSaveReenrollment" class="btn btn-default" onclientclick="return false;">Save</button>
+		                        <button type="button" id="btnCancelReenrollment" class="btn btn-default" data-dismiss="modal">Close</button>
+		                  </div>
+		              </div>
+		          </div>
+		      </div>
 			  
 
 
@@ -303,7 +340,13 @@
 		    var encounterStatusId = <%=EncounterStatusId%>;
 		    var linkText = "Register Patient";
 
-		    $('#<%=lblRegistration.ClientID%>').text("Register Patient");
+            $('#<%=lblRegistration.ClientID%>').text("Register Patient");
+
+            $('#Re-enrollmentdatepicker').datetimepicker({
+		        format: 'DD-MMM-YYYY',
+		        allowInputToggle: true,
+		        useCurrent: false
+		    });
 
 			if (patientId < 1) {
 				encounterStatusId = 0;
@@ -343,7 +386,8 @@
 						var deathDate;
 						var exitReason;
 						var notes;
-						var data = response.d;
+                        var data = response.d;
+					    console.log(response.d);
 						//$.each(data,function(idx, obj) {
 						//        exitDate = obj.ExitDate;
 						//        deathDate = obj.DateOfDeath;
@@ -380,17 +424,25 @@
 								}
 							});  /*end of checking*/ 
 						} else { /*patient is careended stop checkin and show details*/
-						   
-							var dialog = bootbox.dialog({
-								title: ' <h3 class="text-danger">This patient has been careended!</h3>',
-								message: 'Please re-enroll the patient before checkin' 
-									//'<div class="col-md-12 form-group"> ' +
-									//    '<div class="col-md-3"><div class="div class="col-md-12"><label class="control-label">Care Ending Reason: </label></div></div>' +
-									//    ' <div class="col-md-3"><div class="div class="col-md-12"><label class="control-label">Care Ending Date: </label></div></div>' +
-									//    ' <div class="col-md-3"><div class="div class="col-md-12"><label class="control-label">Death Date: </label></div></div>' +
-									//    ' <div class="col-md-3"><div class="div class="col-md-"><label class="control-label">Care Ending Notes: </label></div></div> ' +
-									//' </div>'
-							});
+						    bootbox.confirm({
+                                title: '<h3 class="text-danger">This patient has been careended!</h3>',
+                                message: "Please Re-Enroll the Patient before checkin. Do you want to Re-Enroll the Patient?",
+						        buttons: {
+						            cancel: {
+						                label: '<i class="fa fa-times"></i> Cancel'
+						            },
+						            confirm: {
+						                label: '<i class="fa fa-check"></i> Confirm'
+						            }
+						        },
+						        callback: function (result) {
+                                    //console.log('This was logged in the callback: ' + result);
+                                    if (result) {
+                                        //generateAlert();
+                                        $('#reenrollmentModal').modal('show');
+                                    }					            
+						        }
+						    });
 						}
 
 
@@ -511,7 +563,26 @@
 			    $("#LinkButton2").hide();
 				$("#menuStartEncounter").hide();
                 $('#<%=lblRegistration.ClientID%>').text("Register Patient");
-		    }
+            }
+
+		    $("#btnSaveReenrollment").click(function() {
+                if (!$('#reenrollmentModal').parsley().validate()) {
+		            return false;
+                }
+
+                var reenrollmentDate = $("#renrollmentDate").val();
+		        var today = new Date();
+
+                var isEnrollmentDateAfterToday = moment(moment(moment(reenrollmentDate, 'DD-MMM-YYYYY').toDate()).format('DD-MMM-YYYY')).isAfter(moment(moment(today, 'DD-MMM-YYYYY').toDate()).format('DD-MMM-YYYY'));
+
+                if (isEnrollmentDateAfterToday) {
+		            toastr.error("Enrollment Date should not be in the future", "Patient Enrollment");
+		            return false;
+                }
+
+                reEnrollPatient(reenrollmentDate);
+
+		    });
 
 		});
 	</script>

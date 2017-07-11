@@ -25,9 +25,11 @@
             <tr >
                 <th> <i class="control-label text-warning pull-right" aria-hidden="true"> # </i> </th>
                 <th> <i class="control-label text-warning pull-right" aria-hidden="true">Lab Test</i> </th>
+                <%--<th> <i class="control-label text-warning pull-right" aria-hidden="true">Test Parameter</i> </th>--%>
                 <th> <i class="control-label text-warning pull-right" aria-hidden="true">Order Reason</i> </th>
                 <th> <i class="control-label text-warning pull-right " aria-hidden="true">Order Date</i> </th>
-                <th> <i class="control-label text-warning pull-right" aria-hidden="true"> Results </i></th>
+                <th> <i class="control-label text-warning pull-right" aria-hidden="true"> Result</i></th>
+                <%--<th> <i class="control-label text-warning pull-right" aria-hidden="true">Result Date</i> </th>--%>
             </tr>
         </thead>
         <tbody>                        
@@ -45,7 +47,7 @@
             dataType: 'json',
             cache: false,
             success: function (response) {
-               console.log(response.d);
+               //console.log(response.d);
                 var itemList = JSON.parse(response.d);
                 var table = '';
                 //itemList.forEach(function (item) {
@@ -85,8 +87,9 @@
             dataType: 'json',
             cache: false,
             success: function (response) {
-                console.log(response.d);
+                //console.log(response.d);
                 var itemList = JSON.parse(response.d);
+                console.log(itemList);
                 var table = '';
                 //itemList.forEach(function (item) {
                 $.each(itemList, function (index, itemList) {
@@ -106,12 +109,10 @@
                     var resultOptions = itemList.ResultOptions;
                     var resultUnits = itemList.ResultUnits;
                    
-                    var labResults;
+                    var labResults = "";
                     //Results units
                     if (resultUnits == null) {
                         resultUnits = "";
-                    } else {
-                        resultUnits = resultUnits;
                     }
                     
                     //Results values==>Text==>Options

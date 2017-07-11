@@ -157,7 +157,7 @@ namespace Entities.Lab
         {
             get
             {
-                if (ResultValue.HasValue || !(ResultText != null && string.IsNullOrEmpty(ResultText)) || !(ResultOption != null && string.IsNullOrEmpty(ResultOption)))
+                if (ResultValue.HasValue || !(ResultText != null && string.IsNullOrEmpty(ResultText)) || !(ResultOption != null && string.IsNullOrEmpty(ResultOption)) || Undetectable == true)
                 {
                     return true;
                 }

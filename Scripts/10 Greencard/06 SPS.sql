@@ -510,6 +510,7 @@ ALTER PROCEDURE [dbo].[Patient_Update]
  @DateOfBirth datetime,
  @NationalId varchar(100),
  @FacilityId int,
+ @AuditData xml=null,
  @Id int
 AS
 BEGIN
@@ -523,7 +524,8 @@ BEGIN
   ptn_pk = @ptn_pk,
   DateOfBirth = @DateOfBirth,
   NationalId=ENCRYPTBYKEY(KEY_GUID('Key_CTC'),@NationalId),
-  FacilityId=@FacilityId
+  FacilityId=@FacilityId,
+  AuditData=@AuditData
  WHERE
   Id=@Id
 END
@@ -3417,7 +3419,7 @@ BEGIN
 			--SELECT @message = 'Created PatientEnrollment Id: ' + CAST(@EnrollmentId as varchar);
 			--PRINT @message;
 
-			IF @CCCNumber IS NOT NULL
+			IF @CCCNumber IS NOT NULL AND @ModuleId = 203
 				BEGIN
 					-- Patient Identifier
 					INSERT INTO [dbo].[PatientIdentifier] ([PatientId], [PatientEnrollmentId], [IdentifierTypeId], [IdentifierValue] ,[DeleteFlag] ,[CreatedBy] ,[CreateDate] ,[Active] ,[AuditData])

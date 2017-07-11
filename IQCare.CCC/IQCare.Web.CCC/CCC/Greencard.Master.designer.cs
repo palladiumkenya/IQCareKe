@@ -211,6 +211,15 @@ namespace IQCare.Web.CCC {
         protected global::System.Web.UI.WebControls.LinkButton LinkButton2;
         
         /// <summary>
+        /// menuMoH257 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton menuMoH257;
+        
+        /// <summary>
         /// lblAppointments control.
         /// </summary>
         /// <remarks>
@@ -218,6 +227,15 @@ namespace IQCare.Web.CCC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblAppointments;
+        
+        /// <summary>
+        /// renrollmentDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox renrollmentDate;
         
         /// <summary>
         /// Label2 control.

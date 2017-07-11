@@ -35,6 +35,11 @@ namespace IQCare.Web.CCC.Patient
         {
             get { return Convert.ToString(Session["Gender"]); }
         }
+
+        protected string PatientStatus
+        {
+            get { return Convert.ToString(Session["PatientStatus"]); }
+        }
         protected string PatientType
         {
 

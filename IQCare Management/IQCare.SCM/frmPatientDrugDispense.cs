@@ -276,12 +276,12 @@ namespace IQCare.SCM
             DataTable theDTProvider = theDV.ToTable();
             theBindManager.Win_BindCombo(cmbProvider, theDTProvider, "Name", "Id");
 
-            theDV = new DataView(XMLDS.Tables["mst_RegimenLine"]);
-            theDV.RowFilter = "(DeleteFlag =0 or DeleteFlag is null)";
-            DataTable theDTRegimenLine = theDV.ToTable();
-            theBindManager.Win_BindCombo(cmbRegimenLine, theDTRegimenLine, "Name", "Id");
-            //IDrug regimen = (IDrug)ObjectFactory.CreateInstance("BusinessProcess.SCM.BDrug, BusinessProcess.SCM");
-            //theBindManager.Win_BindCombo(cmbRegimenLine, regimen.GetPharmacyRegimenClassification(), "DisplayName", "LookUpItemId");
+            //theDV = new DataView(XMLDS.Tables["mst_RegimenLine"]);
+            //theDV.RowFilter = "(DeleteFlag =0 or DeleteFlag is null)";
+            //DataTable theDTRegimenLine = theDV.ToTable();
+            //theBindManager.Win_BindCombo(cmbRegimenLine, theDTRegimenLine, "Name", "Id");
+            IDrug regimen = (IDrug)ObjectFactory.CreateInstance("BusinessProcess.SCM.BDrug, BusinessProcess.SCM");
+            theBindManager.Win_BindCombo(cmbRegimenLine, regimen.GetPharmacyRegimenClassification(), "DisplayName", "LookUpItemId");
 
             theDV = new DataView(XMLDS.Tables["mst_Decode"]);
             theDV.RowFilter = "CodeId = 26 and (DeleteFlag =0 or DeleteFlag is null)";
@@ -1671,6 +1671,14 @@ namespace IQCare.SCM
                         }
                     }
                     //string str = !(this.dtRefillApp.CustomFormat == " ") ? this.dtRefillApp.Text : "01-01-1900";
+                    List<string> s = theRegimen.Split('/').ToList();
+                    List<string> distinctS = s.Distinct().ToList();
+                    string distinctRegimen = "";
+                    for(int i = 0; i < distinctS.Count; i++)
+                    {
+                        distinctRegimen += distinctS[i].ToString() + "/";
+                    }
+                    theRegimen = distinctRegimen.TrimEnd('/');
 
                     DateTime? refillDate = null;
 

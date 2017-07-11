@@ -41,7 +41,11 @@ namespace Entities.Lab
         //[ForeignKey("Test")]
         public int TestId
         {
-            get {return Test.Id; }
+            get
+            {
+                return Test.Id;
+            }
+            set {  }
         }
                
         [NotMapped]

@@ -10568,7 +10568,7 @@
   <Mst_Generic>
     <GenericId>182</GenericId>
     <GenericName>Lopinavir/Ritonavir</GenericName>
-    <GenericAbbrevation>LOP/r</GenericAbbrevation>
+    <GenericAbbrevation>LPV/r</GenericAbbrevation>
   </Mst_Generic>
   <Mst_Generic>
     <GenericId>183</GenericId>
@@ -12665,21 +12665,21 @@
     <Id>5</Id>
     <Name>TID</Name>
     <SRNO>5.00</SRNO>
-    <Deleteflag>1</Deleteflag>
-    <multiplier>0</multiplier>
+    <Deleteflag>0</Deleteflag>
+    <multiplier>3</multiplier>
   </Mst_Frequency>
   <Mst_Frequency>
     <Id>6</Id>
     <Name>QID</Name>
     <SRNO>6.00</SRNO>
-    <Deleteflag>1</Deleteflag>
-    <multiplier>0</multiplier>
+    <Deleteflag>0</Deleteflag>
+    <multiplier>4</multiplier>
   </Mst_Frequency>
   <Mst_Frequency>
     <Id>7</Id>
     <Name>PRN</Name>
     <SRNO>7.00</SRNO>
-    <Deleteflag>1</Deleteflag>
+    <Deleteflag>0</Deleteflag>
     <multiplier>0</multiplier>
   </Mst_Frequency>
   <Mst_Frequency>
@@ -12687,7 +12687,7 @@
     <Name>TD</Name>
     <SRNO>8.00</SRNO>
     <Deleteflag>1</Deleteflag>
-    <multiplier>3</multiplier>
+    <multiplier>0</multiplier>
   </Mst_Frequency>
   <Mst_Frequency>
     <Id>9</Id>

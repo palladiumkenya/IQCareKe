@@ -232,7 +232,7 @@
                                     <div class="input-group">
                                         <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="txtDateDispensed" onBlur="ValidateDispensedDate();DateFormat(this,this.value,event,false,'3');" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
                                         <div class="input-group-btn">
-                                            <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
+                                            <button id="btnDateDisp" type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                 <span class="glyphicon glyphicon-calendar"></span>
                                                 <span class="sr-only">Toggle Calendar</span>
                                             </button>
@@ -332,7 +332,10 @@
                     <%--<div class="col-md-2"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-info btn-sm fa fa-plus-circle" OnClick="saveUpdatePharmacy();"> Save Prescription</asp:LinkButton></div>--%>
                         <div class="col-md-3"><button type="button" Class="btn btn-info btn-sm fa fa-plus-circle" onclick="saveUpdatePharmacy();">Save Prescription</button></div>
                         <div class="col-md-3"><button type="button" Class="btn btn-warning btn-sm fa fa-refresh" onclick="resetPharmacyForm();">Reset Prescription</button></div>
-                        <div class="col-md-3"><button type="button" Class="btn btn-danger btn-sm  fa fa-times" data-dismiss="modal">Close Prescription</button></div>
+                        <div class="col-md-3">
+                            <button type="button" Class="btn btn-danger btn-sm  fa fa-times" id="btnClosePrecriptionModal" data-dismiss="modal">Close Prescription</button>
+                            <button type="button" class="btn btn-danger btn-sm  fa fa-times" id="btnClosePrecription">Close Prescription</button>
+                        </div>
                     </div>
                                              
             </div>
@@ -370,16 +373,23 @@
             drugList(1);
             $("#ddlBatch").prop('disabled', false);
             $("#txtQuantityDisp").prop('disabled', false);
+            $("#txtDateDispensed").prop('disabled', false);
+            $("#btnDateDisp").prop('disabled', false);
+            
         }
         else if (pmscm === "PM/SCM") {
             drugList(1);
             $("#ddlBatch").prop('disabled', true);
             $("#txtQuantityDisp").prop('disabled', true);
+            $("#txtDateDispensed").prop('disabled', true);
+            $("#btnDateDisp").prop('disabled', true);
         }
         else {
             drugList(0);
             $("#ddlBatch").prop('disabled', true);
             $("#txtQuantityDisp").prop('disabled', false);
+            $("#txtDateDispensed").prop('disabled', false);
+            $("#btnDateDisp").prop('disabled', false);
         }
 
         $('#PrescriptionDate').datepicker({
@@ -397,9 +407,11 @@
         });
 
         $("#<%=ddlTreatmentProgram.ClientID%>").change(function () {
-             if (gender == "Female" && age >= 9) {
+            var treatmentProgram = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
 
-             } else {
+            if (gender == "Female" && age >= 9 && treatmentProgram == "PMTCT") {
+
+            } else if (treatmentProgram == "PMTCT" && (gender != "Female" || age < 9)) {
                  toastr.error("PMTCT is for female patients only who are older than 9 years", "Error");
                  $("#<%=ddlTreatmentProgram.ClientID%>").val("");
              }
@@ -419,6 +431,19 @@
             }
         });
 
+
+        if ($('#pharmacyModal').is(':visible')) {
+            $("#btnClosePrecriptionModal").show("fast");
+            $("#btnClosePrecription").hide("fast");
+        } else {
+            $("#btnClosePrecriptionModal").hide("fast");
+            $("#btnClosePrecription").show("fast");
+        }
+
+        $("#btnClosePrecription").click(function() {
+            setTimeout(function () {
+                window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientHome.aspx")%>';}, 2000);
+        });
     });
 
     $(function () {
@@ -754,6 +779,10 @@
             var regimenText = $("#<%=ddlRegimen.ClientID%>").find(":selected").text();
             var datePrescribed = $("#txtPrescriptionDate").val();
             var dateDispensed = $("#txtDateDispensed").val();
+
+            //console.log(datePrescribed);
+            //console.log(dateDispensed);
+            //return false;
 
             if (!DrugPrescriptionTable.data().any()) {
                 toastr.error("Drug Prescription Error", "Add drugs to prescribe.");

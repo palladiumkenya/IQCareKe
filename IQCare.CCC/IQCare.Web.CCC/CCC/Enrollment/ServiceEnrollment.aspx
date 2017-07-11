@@ -128,6 +128,8 @@
     
     <script type="text/javascript">
         $(document).ready(function () {
+            var today = new Date();
+
             $('#PersonDOBdatepicker').datetimepicker({
                 format: 'DD-MMM-YYYY',
                 allowInputToggle: true,
@@ -159,7 +161,7 @@
             var nationalId = '<%=Session["NationalId"]%>';
             var patientType = '<%=Session["PatientType"]%>';
             var patType = '<%=patType%>';
-            //console.log(patType);
+            //console.log(code);
             if (personDOB != null && personDOB !="") {
                 $("#DateOfBirth").addClass("noneevents");
                 personDOB = new Date(personDOB);
@@ -237,6 +239,11 @@
                     identifiers[value.ID] = fieldName;
                 });
 
+                if (patType == "Transit" && (code == prefix)) {
+                    toastr.error("You selected the home facility for a transit patient", "Patient Enrollment");
+                    return false;
+                }
+
                 addPatientRegister(entryPointId, enrollmentDate, personDateOfBirth, nationalId, patientType, mflCode, dobPrecision, JSON.stringify(identifiers));
             });
 
@@ -278,6 +285,11 @@
                     }
                     identifiers[value.ID] = fieldName;
                 });
+
+                if (patType == "Transit" && (code == prefix)) {
+                    toastr.error("You selected the home facility for a transit patient", "Patient Enrollment");
+                    return false;
+                }
 
                 addPatient(entryPointId, enrollmentDate, personDateOfBirth, nationalId, patientType, mflCode, dobPrecision, JSON.stringify(identifiers));
             });
@@ -497,7 +509,7 @@
                         //generate('success', '<p>,</p>' + response.d);
                         var messageResponse = JSON.parse(response.d);
 
-                        console.log(messageResponse);
+                        //console.log(messageResponse);
                         if (messageResponse.DOB != null) {
                             $("#PersonDOB").val(messageResponse.DOB);
                             $("#PersonDOB").prop('disabled', true);

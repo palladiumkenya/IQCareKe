@@ -1,7 +1,13 @@
-TRUNCATE TABLE [dbo].[LookupMaster]
-GO
-TRUNCATE TABLE [dbo].[LookupItem]
-GO
+
+-- version changes
+UPDATE AppAdmin
+SET
+	AppVer='Ver 1.0.0.2 Kenya HMIS',
+	DBVer='Ver 1.0.0.2 Kenya HMIS',
+	RelDate='01-Jun-2017',
+	VersionName='Kenya HMIS Ver 1.0.0.2'
+	
+
 TRUNCATE TABLE [dbo].[LookupMasterItem]
 GO
 Set Nocount on
@@ -105,6 +111,7 @@ If Not Exists(Select 1 From LookupMaster where Name='IptOutcome') Begin INSERT I
 If Not Exists(Select 1 From LookupMaster where Name='Unknown') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Unknown','Unknown',0); End
 If Not Exists(Select 1 From LookupMaster where Name='RegimenClassificationAdult') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('RegimenClassificationAdult','Regimen Classification Adult',0); End
 If Not Exists(Select 1 From LookupMaster where Name='RegimenClassificationPaeds') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('RegimenClassificationPaeds','Regimen Classification Paeds',0); End
+If Not Exists(Select 1 From LookupMaster where Name='PregnancyOutcome') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PregnancyOutcome','Pregnancy Outcome',0); End
 
 --Lookup items
 If Not Exists(Select 1 From LookupItem where Name='FP') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('FP','Family Planning',0); End
@@ -372,6 +379,13 @@ If Not Exists(Select 1 From LookupItem where Name='Transfer Out') Begin INSERT I
 
 If Not Exists(Select 1 From LookupItem where Name='HIV Negative') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('HIV Negative','HIV Negative',0); End
 If Not Exists(Select 1 From LookupItem where Name='Confirmed HIV Negative') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Confirmed HIV Negative','Confirmed HIV Negative',0); End
+
+If Not Exists(Select 1 From LookupItem where Name='Spontaneous abortion') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Spontaneous abortion','Spontaneous abortion',0); End
+If Not Exists(Select 1 From LookupItem where Name='STILLBIRTH') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('STILLBIRTH','STILLBIRTH',0); End
+If Not Exists(Select 1 From LookupItem where Name='Term birth of newborn') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Term birth of newborn','Term birth of newborn',0); End
+If Not Exists(Select 1 From LookupItem where Name='Preterm Delivery (Maternal Condition)') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Preterm Delivery (Maternal Condition)','Preterm Delivery (Maternal Condition)',0); End
+If Not Exists(Select 1 From LookupItem where Name='Therapeutic abortion procedure') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Therapeutic abortion procedure','Therapeutic abortion procedure',0); End
+If Not Exists(Select 1 From LookupItem where Name='Liveborn, (Single, Twin, or Multiple)') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Liveborn, (Single, Twin, or Multiple)','Liveborn, (Single, Twin, or Multiple)',0); End
 
 If Not Exists(Select 1 From LookupItem where Name='SW') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('SW','Switched regimen',0); End
 If Not Exists(Select 1 From LookupItem where Name='Dos') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Dos','Changed dose',0); End
@@ -3310,9 +3324,26 @@ Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) 
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'During Labour',1 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='During Labour'  )         ItemId  FROM LookupMaster  WHERE Name='PeriodDrugsTaken') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'During Pregnancy',2 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='During Pregnancy'  )         ItemId  FROM LookupMaster  WHERE Name='PeriodDrugsTaken') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
 
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Spontaneous abortion',1 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Spontaneous abortion'  )         ItemId  FROM LookupMaster  WHERE Name='PregnancyOutcome') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'STILLBIRTH',2 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='STILLBIRTH'  )         ItemId  FROM LookupMaster  WHERE Name='PregnancyOutcome') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Term birth of newborn',3 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Term birth of newborn'  )         ItemId  FROM LookupMaster  WHERE Name='PregnancyOutcome') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Preterm Delivery (Maternal Condition)',4 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Preterm Delivery (Maternal Condition)'  )         ItemId  FROM LookupMaster  WHERE Name='PregnancyOutcome') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Therapeutic abortion procedure',5 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Therapeutic abortion procedure'  )         ItemId  FROM LookupMaster  WHERE Name='PregnancyOutcome') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Liveborn, (Single, Twin, or Multiple)',6 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Liveborn, (Single, Twin, or Multiple)'  )         ItemId  FROM LookupMaster  WHERE Name='PregnancyOutcome') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Unknown',7 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Unknown'  )         ItemId  FROM LookupMaster  WHERE Name='PregnancyOutcome') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+
 INSERT INTO LookupMasterItem (LookupMasterId,LookupItemId,DisplayName,OrdRank) VALUES((SELECT Id from lookupmaster WHERE Name='PeriodDrugsTaken'),(SELECT Id FROM LookupItem WHERE Name='During Pregnancy'),'During Pregnancy',1)
 INSERT INTO LookupMasterItem (LookupMasterId,LookupItemId,DisplayName,OrdRank) VALUES((SELECT Id from lookupmaster WHERE Name='PeriodDrugsTaken'),(SELECT Id FROM LookupItem WHERE Name='During Labour'),'During Labour',2)
 INSERT INTO LookupMasterItem (LookupMasterId,LookupItemId,DisplayName,OrdRank) VALUES((SELECT Id from lookupmaster WHERE Name='PeriodDrugsTaken'),(SELECT Id FROM LookupItem WHERE Name='Post Natal'),'Post Natal',3)
+
+if not exists(select 1 from mst_Decode where name='PrEP')
+begin
+insert into mst_Decode values('PrEP',33,5,null,0,1,getdate(),null,0,null,null)
+end
+if not exists(select 1 from mst_Decode where name='Hepatitis B')
+begin
+insert into mst_Decode values('Hepatitis B',33,6,null,0,1,getdate(),null,0,null,null)
+end
 
 --insert PM/SCM With Same point dispense module
 SET IDENTITY_INSERT mst_module ON
