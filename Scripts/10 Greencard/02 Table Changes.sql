@@ -32,6 +32,14 @@ IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'VisitDate'AND Object_ID =
     BEGIN
         ALTER TABLE PregnancyIndicator ADD VisitDate DATETIME;
     END;
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'DateOfBirth' AND Object_ID = OBJECT_ID(N'Person'))
+	BEGIN
+		ALTER TABLE Person ADD DateOfBirth DATETIME NULL;
+	END;
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'DobPrecision' AND Object_ID = OBJECT_ID(N'Person'))
+	BEGIN
+		ALTER TABLE Person ADD DobPrecision BIT NULL;
+	END;
 IF EXISTS(SELECT * FROM sys.columns WHERE Name = N'LMP'AND Object_ID = OBJECT_ID(N'PregnancyIndicator'))
     BEGIN
         ALTER TABLE PregnancyIndicator ALTER COLUMN LMP DATETIME NULL;

@@ -310,7 +310,7 @@
 								<div class="col-md-12">
 									<asp:Label runat="server" CssClass="control-label pull-left" ID="lblfacility">Facility Transferred from :</asp:Label></div>
 								<div class="col-md-12">
-									<asp:TextBox runat="server" ID="TransferFromFacility" CssClass="form-control input-sm" placeholder="facility name.." ClientIDMode="Static" data-parsley-required="true" data-parsley-minlegth="4"></asp:TextBox>
+                                    <asp:DropDownList ID="TransferFromFacility" runat="server" CssClass="form-control input-sm" ClientIDMode="Static"></asp:DropDownList>
 								</div>
 							</div>
 							<div class="col-md-4">
@@ -1324,7 +1324,11 @@
 				// 18.5 to 25  Normal
 				// 25-30           Overweight
 				// More than 30    Obese
-			}
+            }
+
+            $("#TransferFromFacility").select2({
+                placeholder: "Select Facility"
+            });
 
 			/*Get Patient Type */
 			$(window).on("load", checkPatientStatus);
@@ -1837,8 +1841,9 @@
 										moment(obj.ARTInitiationDate).format('DD-MMM-YYYY'));
 									$("#WHOStageAtEnrollment").val(obj.EnrollmentWHOStage);
 
-									$("#<%=TransferFromCounty.ClientID%>").val(obj.CountyFrom);
-									$("#<%=TransferFromFacility.ClientID%>").val(obj.FacilityFrom);
+                                    $("#<%=TransferFromCounty.ClientID%>").val(obj.CountyFrom);
+                                    var value = $("#<%=TransferFromFacility.ClientID%> option:contains('" + obj.FacilityFrom + "')").val();
+                                    $("#<%=TransferFromFacility.ClientID%>").val(value).trigger("change");
 									$("#<%=FacilityMFLCode.ClientID%>").val(obj.mflcode);
 									$("#<%=transferInNotes.ClientID%>").val(obj.TransferInNotes);
 
@@ -2210,8 +2215,10 @@
 				var serviceAreaId = 0;
 				var transferInDate = moment($('#TIDate').datepicker('getDate')).format('DD-MMM-YYYY');
 				var treatmentStartDate = moment($('#<%=lblARTStartDate.ClientID%>').datepicker('getDate')).format('DD-MMM-YYYY');
-				var currentTreatment = $('#<%=RegimenId.ClientID%>').find(":selected").val();
-				var facilityFrom = $('#<%=TransferFromFacility.ClientID%>').val();
+                var currentTreatment = $('#<%=RegimenId.ClientID%>').find(":selected").val();
+                var TransferFromFacility = $('#<%=TransferFromFacility.ClientID%>').select2('data');
+		<%--		var facilityFrom = $('#<%=TransferFromFacility.ClientID%>').val();--%>
+                var facilityFrom = TransferFromFacility[0].text;
 				var mflCode = $('#<%=FacilityMFLCode.ClientID%>').val();
 				var countyFrom = $('#<%=TransferFromCounty.ClientID%>').find(":selected").val();
 				var transferInNotes = $('#<%=transferInNotes.ClientID%>').val();
@@ -2409,72 +2416,16 @@
 					}
 				});
 
-			}
+            }
+
+            $("#TransferFromFacility").change(function () {
+                var value = $(this).val();
+
+                $("#FacilityMFLCode").val(value);
+                //console.log(value);
+            });
 
 		});
 	</script>
 
 </asp:Content>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -104937,7 +104937,7 @@
     <ListName>ARV Therapy Plan</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>357</ID>
+    <ID>359</ID>
     <Name>To be filled in by the clinician</Name>
     <CodeID>24</CodeID>
     <SRNo>0.00</SRNo>
@@ -105161,7 +105161,7 @@
     <ListName>ART Pregnant Status</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>358</ID>
+    <ID>360</ID>
     <Name>Cashier</Name>
     <CodeID>214</CodeID>
     <SRNo>1.00</SRNo>
@@ -105181,7 +105181,7 @@
     <ListName>ARV Eligibility</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>346</ID>
+    <ID>348</ID>
     <Name>Clinical Form</Name>
     <CodeID>1010</CodeID>
     <SRNo>1.00</SRNo>
@@ -105192,7 +105192,7 @@
     <ListName>Feature Type</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>341</ID>
+    <ID>343</ID>
     <Name>Standard</Name>
     <CodeID>1008</CodeID>
     <SRNo>1.00</SRNo>
@@ -105203,7 +105203,7 @@
     <ListName>Billing Price Plans</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>342</ID>
+    <ID>344</ID>
     <Name>Enrollment</Name>
     <CodeID>1009</CodeID>
     <SRNo>1.00</SRNo>
@@ -105214,7 +105214,7 @@
     <ListName>Form Category</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>364</ID>
+    <ID>366</ID>
     <Name>Under 5</Name>
     <CodeID>1011</CodeID>
     <SRNo>1.00</SRNo>
@@ -105223,7 +105223,7 @@
     <ListName>Payment Exemption</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>365</ID>
+    <ID>367</ID>
     <Name>Maternity</Name>
     <CodeID>1011</CodeID>
     <SRNo>1.00</SRNo>
@@ -105232,7 +105232,7 @@
     <ListName>Payment Exemption</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>366</ID>
+    <ID>368</ID>
     <Name>Prisoner</Name>
     <CodeID>1011</CodeID>
     <SRNo>1.00</SRNo>
@@ -105241,7 +105241,7 @@
     <ListName>Payment Exemption</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>382</ID>
+    <ID>400</ID>
     <Name>Under 5</Name>
     <CodeID>1011</CodeID>
     <SRNo>1.00</SRNo>
@@ -105250,7 +105250,7 @@
     <ListName>Payment Exemption</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>383</ID>
+    <ID>401</ID>
     <Name>Maternity</Name>
     <CodeID>1011</CodeID>
     <SRNo>1.00</SRNo>
@@ -105259,7 +105259,7 @@
     <ListName>Payment Exemption</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>384</ID>
+    <ID>402</ID>
     <Name>Prisoner</Name>
     <CodeID>1011</CodeID>
     <SRNo>1.00</SRNo>
@@ -105490,7 +105490,7 @@
     <ListName>Laboratory Unit</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>343</ID>
+    <ID>345</ID>
     <Name>Consultation</Name>
     <CodeID>1009</CodeID>
     <SRNo>2.00</SRNo>
@@ -105501,7 +105501,7 @@
     <ListName>Form Category</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>347</ID>
+    <ID>349</ID>
     <Name>Facility Report</Name>
     <CodeID>1010</CodeID>
     <SRNo>2.00</SRNo>
@@ -105670,7 +105670,7 @@
     <ListName>EmergenecyContactRelation</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>348</ID>
+    <ID>350</ID>
     <Name>Patient Report</Name>
     <CodeID>1010</CodeID>
     <SRNo>3.00</SRNo>
@@ -105681,7 +105681,7 @@
     <ListName>Feature Type</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>344</ID>
+    <ID>346</ID>
     <Name>Care Termination</Name>
     <CodeID>1009</CodeID>
     <SRNo>3.00</SRNo>
@@ -105801,7 +105801,7 @@
     <ListName>Laboratory Test Location</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>367</ID>
+    <ID>369</ID>
     <Name>VisitType</Name>
     <CodeID>202</CodeID>
     <SRNo>4.00</SRNo>
@@ -105809,7 +105809,7 @@
     <ListName>Item Type</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>370</ID>
+    <ID>372</ID>
     <Name>Lab Tests</Name>
     <CodeID>202</CodeID>
     <SRNo>4.00</SRNo>
@@ -105895,7 +105895,7 @@
     <ListName>ARV Eligibility</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>345</ID>
+    <ID>347</ID>
     <Name>Registration</Name>
     <CodeID>1009</CodeID>
     <SRNo>4.00</SRNo>
@@ -105906,7 +105906,7 @@
     <ListName>Form Category</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>349</ID>
+    <ID>351</ID>
     <Name>List</Name>
     <CodeID>1010</CodeID>
     <SRNo>4.00</SRNo>
@@ -105917,7 +105917,7 @@
     <ListName>Feature Type</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>372</ID>
+    <ID>374</ID>
     <Name>Lactating</Name>
     <CodeID>1007</CodeID>
     <SRNo>4.00</SRNo>
@@ -105926,7 +105926,7 @@
     <ListName>ARV Eligibility</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>359</ID>
+    <ID>361</ID>
     <Name>Consultation</Name>
     <CodeID>214</CodeID>
     <SRNo>4.00</SRNo>
@@ -106084,7 +106084,7 @@
     <ListName>MaritalStatus</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>373</ID>
+    <ID>375</ID>
     <Name>Under 10 Years</Name>
     <CodeID>1007</CodeID>
     <SRNo>5.00</SRNo>
@@ -106093,7 +106093,7 @@
     <ListName>ARV Eligibility</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>350</ID>
+    <ID>352</ID>
     <Name>Admin Actions</Name>
     <CodeID>1010</CodeID>
     <SRNo>5.00</SRNo>
@@ -106143,7 +106143,7 @@
     <ListName>Exit Reason</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>377</ID>
+    <ID>341</ID>
     <Name>PREP</Name>
     <CodeID>33</CodeID>
     <SRNo>5.00</SRNo>
@@ -106172,7 +106172,7 @@
     <ListName>Item Type</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>368</ID>
+    <ID>370</ID>
     <Name>Billables</Name>
     <CodeID>202</CodeID>
     <SRNo>6.00</SRNo>
@@ -106200,7 +106200,7 @@
     <ListName>ART Ended Reason</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>378</ID>
+    <ID>342</ID>
     <Name>HBV</Name>
     <CodeID>33</CodeID>
     <SRNo>6.00</SRNo>
@@ -106246,7 +106246,7 @@
     <ListName>Laboratory Unit</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>351</ID>
+    <ID>353</ID>
     <Name>Patient Actions</Name>
     <CodeID>1010</CodeID>
     <SRNo>6.00</SRNo>
@@ -106257,7 +106257,7 @@
     <ListName>Feature Type</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>374</ID>
+    <ID>376</ID>
     <Name>Discordant Couple</Name>
     <CodeID>1007</CodeID>
     <SRNo>6.00</SRNo>
@@ -106391,7 +106391,7 @@
     <ListName>ARV Eligibility</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>375</ID>
+    <ID>377</ID>
     <Name>HEI (Positive PCR)</Name>
     <CodeID>1007</CodeID>
     <SRNo>7.00</SRNo>
@@ -106400,7 +106400,7 @@
     <ListName>ARV Eligibility</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>352</ID>
+    <ID>354</ID>
     <Name>Module Actions</Name>
     <CodeID>1010</CodeID>
     <SRNo>7.00</SRNo>
@@ -106439,7 +106439,7 @@
     <ListName>ART Ended Reason</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>369</ID>
+    <ID>371</ID>
     <Name>Clinical Services</Name>
     <CodeID>202</CodeID>
     <SRNo>7.00</SRNo>
@@ -106447,7 +106447,7 @@
     <ListName>Item Type</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>371</ID>
+    <ID>373</ID>
     <Name>Ward Admission</Name>
     <CodeID>202</CodeID>
     <SRNo>8.00</SRNo>
@@ -106483,7 +106483,7 @@
     <ListName>Laboratory Unit</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>353</ID>
+    <ID>355</ID>
     <Name>Module Report</Name>
     <CodeID>1010</CodeID>
     <SRNo>8.00</SRNo>
@@ -106494,7 +106494,7 @@
     <ListName>Feature Type</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>376</ID>
+    <ID>378</ID>
     <Name>Hepatitis B+</Name>
     <CodeID>1007</CodeID>
     <SRNo>8.00</SRNo>
@@ -106735,7 +106735,7 @@
     <ListName>Laboratory Unit</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>360</ID>
+    <ID>362</ID>
     <Name>Laboratory</Name>
     <CodeID>214</CodeID>
     <SRNo>14.00</SRNo>
@@ -106764,7 +106764,7 @@
     <ListName>Laboratory Unit</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>361</ID>
+    <ID>363</ID>
     <Name>Pharmacy</Name>
     <CodeID>214</CodeID>
     <SRNo>19.00</SRNo>
@@ -106775,7 +106775,7 @@
     <ListName>Waiting List</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>362</ID>
+    <ID>364</ID>
     <Name>Triage</Name>
     <CodeID>214</CodeID>
     <SRNo>26.00</SRNo>
@@ -106786,7 +106786,7 @@
     <ListName>Waiting List</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>363</ID>
+    <ID>365</ID>
     <Name>Clinical Service</Name>
     <CodeID>214</CodeID>
     <SRNo>26.00</SRNo>
@@ -123396,44 +123396,28 @@
     <UserId>7</UserId>
     <SystemUserName>Edwin</SystemUserName>
     <Name>Edwin Mageto</Name>
-    <EmployeeName>Edwin Mageto                                            </EmployeeName>
     <UserDeleteFlag>0</UserDeleteFlag>
-    <EmployeeId>22</EmployeeId>
-    <DesignationId>3</DesignationId>
-    <Designation>Lab Technician</Designation>
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
   <Users>
     <UserId>11</UserId>
     <SystemUserName>Eric</SystemUserName>
     <Name>Eric Ndungu</Name>
-    <EmployeeName>Eric Ndungu                                            </EmployeeName>
     <UserDeleteFlag>0</UserDeleteFlag>
-    <EmployeeId>23</EmployeeId>
-    <DesignationId>10</DesignationId>
-    <Designation>Other</Designation>
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
   <Users>
     <UserId>10</UserId>
     <SystemUserName>Esther</SystemUserName>
     <Name>Esther Githinji</Name>
-    <EmployeeName>Esther Githinji                                          </EmployeeName>
     <UserDeleteFlag>0</UserDeleteFlag>
-    <EmployeeId>21</EmployeeId>
-    <DesignationId>3</DesignationId>
-    <Designation>Lab Technician</Designation>
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
   <Users>
     <UserId>4</UserId>
     <SystemUserName>Evans</SystemUserName>
     <Name>Evans Lule</Name>
-    <EmployeeName>Evans Lule                                              </EmployeeName>
     <UserDeleteFlag>0</UserDeleteFlag>
-    <EmployeeId>20</EmployeeId>
-    <DesignationId>10</DesignationId>
-    <Designation>Other</Designation>
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
   <Users>
@@ -123454,22 +123438,14 @@
     <UserId>6</UserId>
     <SystemUserName>Mawasi</SystemUserName>
     <Name>Martin Wanyonyi</Name>
-    <EmployeeName>Martin Wanyonyi                                          </EmployeeName>
     <UserDeleteFlag>0</UserDeleteFlag>
-    <EmployeeId>13</EmployeeId>
-    <DesignationId>1</DesignationId>
-    <Designation>Physician/Clinical Officer</Designation>
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
   <Users>
     <UserId>5</UserId>
     <SystemUserName>Rajab</SystemUserName>
     <Name>Rajab Ibrahim</Name>
-    <EmployeeName>Rajab AbdulHakim                                        </EmployeeName>
     <UserDeleteFlag>0</UserDeleteFlag>
-    <EmployeeId>18</EmployeeId>
-    <DesignationId>4</DesignationId>
-    <Designation>M&amp;E</Designation>
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
   <Users>

@@ -29,7 +29,7 @@ namespace BusinessProcess.CCC
             ClsUtility.AddExtendedParameters("@MidName", SqlDbType.VarChar, person.MidName);
             ClsUtility.AddExtendedParameters("@LastName", SqlDbType.VarChar, person.LastName);
             ClsUtility.AddExtendedParameters("@Sex", SqlDbType.Int, person.Sex);
-            //ClsUtility.AddExtendedParameters("@DateOfBirth",SqlDbType.DateTime,person.DateOfBirth);
+            ClsUtility.AddExtendedParameters("@DateOfBirth", SqlDbType.DateTime, person.DateOfBirth);
             //ClsUtility.AddExtendedParameters("@NationalId", SqlDbType.VarChar, person.NationalId);
             ClsUtility.AddExtendedParameters("@UserId", SqlDbType.Int, person.CreatedBy);
 
@@ -77,7 +77,7 @@ namespace BusinessProcess.CCC
             ClsUtility.AddExtendedParameters("@LastName", SqlDbType.VarChar, person.LastName);
             ClsUtility.AddExtendedParameters("@Sex", SqlDbType.Int, person.Sex);
             //ClsUtility.AddExtendedParameters("@NationalId", SqlDbType.VarChar, person.NationalId);
-            //ClsUtility.AddExtendedParameters("@DateOfBirth", SqlDbType.DateTime, person.DateOfBirth);
+            ClsUtility.AddExtendedParameters("@DateOfBirth", SqlDbType.DateTime, person.DateOfBirth);
             ClsUtility.AddExtendedParameters("@Id", SqlDbType.Int, id);
 
             DataTable dt = (DataTable)obj.ReturnObject(ClsUtility.theParams, "Person_Update", ClsUtility.ObjectEnum.DataTable);

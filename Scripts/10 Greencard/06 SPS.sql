@@ -597,7 +597,8 @@ ALTER PROCEDURE [dbo].[Person_Insert]
  @MidName varchar(100)= Null,
  @LastName varchar(100),
  @Sex int,
- --@DateOfBirth date,
+ @DateOfBirth datetime = NULL,
+ @DobPrecision bit = NULL,
  --@NationalId varchar(100) = null,
  @UserId int
 AS
@@ -614,7 +615,8 @@ BEGIN
   ENCRYPTBYKEY(KEY_GUID('Key_CTC'),@MidName),
   ENCRYPTBYKEY(KEY_GUID('Key_CTC'),@LastName),
   @Sex,
-  --@DateOfBirth,
+  @DateOfBirth,
+  @DobPrecision,
   --ENCRYPTBYKEY(KEY_GUID('Key_CTC'),@NationalId),
   1,
   0,
@@ -640,7 +642,7 @@ ALTER PROCEDURE [dbo].[Person_Update]
  @MidName varchar(100)= Null,
  @LastName varchar(100),
  @Sex int,
- --@DateOfBirth date,
+ @DateOfBirth datetime = NULL,
  --@NationalId varchar(100) = null,
  @Id int
 AS
@@ -655,8 +657,8 @@ BEGIN
   FirstName=ENCRYPTBYKEY(KEY_GUID('Key_CTC'),@FirstName),
   MidName=ENCRYPTBYKEY(KEY_GUID('Key_CTC'),@MidName),
   LastName=ENCRYPTBYKEY(KEY_GUID('Key_CTC'),@LastName),
-  Sex=@Sex
-  --DateOfBirth=@DateOfBirth,
+  Sex=@Sex,
+  DateOfBirth=@DateOfBirth
   --NationalId=ENCRYPTBYKEY(KEY_GUID('Key_CTC'),@NationalId)
  WHERE
    Id=@Id;
