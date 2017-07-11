@@ -74,6 +74,7 @@ end
 Go
 Update ord_PatientLabOrder_Old Set Migrated = 0 Where Migrated  Is Null
 Update ord_PatientLabOrder_Old set LabNumber = (Select Random_String From vw_GenNewId)  where nullif(labnumber,'') is null
+update lnk_TestParameter_Old set DeleteFlag= 1 Where subtestname='ViralLoad Undetectable'
 Go
 If Not exists (Select * From sys.columns Where Name = N'Migrated' And Object_ID = Object_id(N'dtl_patientlabresults_Old'))    
 Begin
@@ -440,6 +441,8 @@ Print Convert(varchar(10),@@ROWCOUNT) + ' Lab Tests Parameters Migrated'
 SET IDENTITY_INSERT [dbo].[Mst_LabTestParameter] Off
 
 Update O Set Migrated = 1 From lnk_TestParameter_Old  O Inner Join #New_TestParameter N On N.New_Id=O.SubTestID;
+
+update Mst_LabTestParameter set DeleteFlag= 1 Where ParameterName='ViralLoad Undetectable'
 
 -- Config
 

@@ -277,7 +277,7 @@ namespace RemServer.Service
                         if (backupInProgress == false)
                         {
                             backupInProgress = true;
-
+                            UpdateNextRunDate(backupTaskName, backupOffset);
                             SqlCommand cmdTest;
                             cmdTest = new SqlCommand("pr_SystemAdmin_GetBackupTime_Constella", connectionEMR);
                             cmdTest.CommandType = CommandType.StoredProcedure;
