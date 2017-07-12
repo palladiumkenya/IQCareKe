@@ -16,5 +16,7 @@ namespace Entities.CCC.Lookup
         public string MiddleName { get; set; }
         public string LastName { get; set; }
         public int Sex { get; set; }
+        public DateTime? DateOfBirth { get; set; }
+        public bool? DobPrecision { get; set; }
     }
 }

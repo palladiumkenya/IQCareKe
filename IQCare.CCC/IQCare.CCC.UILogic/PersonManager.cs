@@ -42,6 +42,35 @@ namespace IQCare.CCC.UILogic
             return retval;
         }
 
+        public int AddPersonUiLogic(string firstName, string midName, string lastName, int gender, int userId, DateTime dateOfBirth)
+        {
+            int retval;
+
+            try
+            {
+                //disable double encryption
+                Person p = new Person()
+                {
+                    FirstName = (_textInfo.ToTitleCase(firstName)),
+                    MidName = (_textInfo.ToTitleCase(midName)),
+                    LastName = (_textInfo.ToTitleCase(lastName)),
+                    Sex = gender,
+                    DateOfBirth = dateOfBirth,
+                    //NationalId = util.Encrypt(nationalId),
+                    CreatedBy = userId
+                };
+                retval = _mgr.AddPerson(p);
+                //HttpContext.Current.Session["PersonId"] = p.Id;
+            }
+            catch (Exception exception)
+            {
+
+                throw new Exception(exception.Message);
+            }
+
+            return retval;
+        }
+
         public int AddPersonTreatmentSupporterUiLogic(string firstName, string midName, string lastName, int gender, int userId)
         {
             int retval;
@@ -85,6 +114,23 @@ namespace IQCare.CCC.UILogic
 
             _mgr.UpdatePerson(person,id);
         }
+
+        public void UpdatePerson(string firstname, string middlename, string lastname, int gender, int userId, int id, DateTime dateOfBirth)
+        {
+            Person person = new Person()
+            {
+                FirstName = (_textInfo.ToTitleCase(firstname)),
+                MidName = (_textInfo.ToTitleCase(middlename)),
+                LastName = (_textInfo.ToTitleCase(lastname)),
+                Sex = gender,
+                DateOfBirth = dateOfBirth,
+                //NationalId = util.Encrypt(nationalId),
+                CreatedBy = userId
+            };
+
+            _mgr.UpdatePerson(person, id);
+        }
+
 
         public void DeletePerson(int id)
         {

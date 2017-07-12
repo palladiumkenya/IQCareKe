@@ -120,11 +120,13 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod]
-        public string AddPatientFamilyTesting(int patientId, int patientMasterVisitId, string firstName, string middleName, string lastName, int sex, DateTime dob, int relationshipId, int baselineHivStatusId, DateTime baselineHivStatusDate, int hivTestingresultId, DateTime hivTestingresultDate, bool cccreferal, string cccReferalNumber,  int userId)
+        public string AddPatientFamilyTesting(int patientId, int patientMasterVisitId, string firstName, string middleName, string lastName, int sex, string dob, int relationshipId, int baselineHivStatusId, DateTime baselineHivStatusDate, string hivTestingresultId, string hivTestingresultDate, bool cccreferal, string cccReferalNumber,  int userId)
         {
             firstName = GlobalObject.unescape(firstName);
             middleName = GlobalObject.unescape(middleName);
             lastName = GlobalObject.unescape(lastName);
+            int hivresultId = hivTestingresultId == "" ? 0 : Convert.ToInt32(hivTestingresultId);
+
             PatientFamilyTesting patientAppointment = new PatientFamilyTesting()
             {
                 PatientId = patientId,
@@ -133,16 +135,18 @@ namespace IQCare.Web.CCC.WebService
                 MiddleName = middleName,
                 LastName = lastName,
                 Sex = sex,
-                DateOfBirth = dob,
+                DateOfBirth = DateTime.Parse(dob),
                 RelationshipId = relationshipId,
                 BaseLineHivStatusId = baselineHivStatusId,
                 BaselineHivStatusDate = baselineHivStatusDate,
-                HivTestingResultsDate = hivTestingresultDate,
-                HivTestingResultsId = hivTestingresultId,
+                //HivTestingResultsDate = hivTestingresultDate,
+                HivTestingResultsId = hivresultId,
                 CccReferal = cccreferal,
                 CccReferaalNumber = cccReferalNumber,
 
             };
+            if (hivTestingresultDate != "")
+                patientAppointment.HivTestingResultsDate = DateTime.Parse(hivTestingresultDate);
             try
             {
                 var testing = new PatientFamilyTestingManager();
@@ -174,11 +178,13 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod]
-        public string UpdatePatientFamilyTesting(int patientId, int patientMasterVisitId, string firstName, string middleName, string lastName, int sex, DateTime dob, int relationshipId, int baselineHivStatusId, DateTime baselineHivStatusDate, int hivTestingresultId, DateTime hivTestingresultDate, bool cccreferal, string cccReferalNumber, int userId, int personRelationshipId, int hivTestingId, int personId)
+        public string UpdatePatientFamilyTesting(int patientId, int patientMasterVisitId, string firstName, string middleName, string lastName, int sex, string dob, int relationshipId, int baselineHivStatusId, DateTime baselineHivStatusDate, string hivTestingresultId, string hivTestingresultDate, bool cccreferal, string cccReferalNumber, int userId, int personRelationshipId, int hivTestingId, int personId)
         {
             firstName = GlobalObject.unescape(firstName);
             middleName = GlobalObject.unescape(middleName);
             lastName = GlobalObject.unescape(lastName);
+            int hivresultId = hivTestingresultId == "" ? 0 : Convert.ToInt32(hivTestingresultId);
+            //DateTime? testingResultsDate = hivTestingresultDate == "" ?  : DateTime.Parse(hivTestingresultDate);
             PatientFamilyTesting patientAppointment = new PatientFamilyTesting()
             {
                 PatientId = patientId,
@@ -187,18 +193,21 @@ namespace IQCare.Web.CCC.WebService
                 MiddleName = middleName,
                 LastName = lastName,
                 Sex = sex,
-                DateOfBirth = dob,
+                DateOfBirth = DateTime.Parse(dob),
                 RelationshipId = relationshipId,
                 BaseLineHivStatusId = baselineHivStatusId,
                 BaselineHivStatusDate = baselineHivStatusDate,
-                HivTestingResultsDate = hivTestingresultDate,
-                HivTestingResultsId = hivTestingresultId,
+                //HivTestingResultsDate = testingResultsDate,
+                HivTestingResultsId = hivresultId,
                 CccReferal = cccreferal,
                 CccReferaalNumber = cccReferalNumber,
                 PersonRelationshipId = personRelationshipId,
                 HivTestingId = hivTestingId,
                 PersonId = personId
             };
+
+            if(hivTestingresultDate != "")
+                patientAppointment.HivTestingResultsDate = DateTime.Parse(hivTestingresultDate);
             try
             {
                 var testing = new PatientFamilyTestingManager();

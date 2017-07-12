@@ -91,7 +91,7 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TransferFromFacility;
+        protected global::System.Web.UI.WebControls.DropDownList TransferFromFacility;
         
         /// <summary>
         /// lblmflcode control.
