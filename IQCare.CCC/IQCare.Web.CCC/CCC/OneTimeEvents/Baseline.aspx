@@ -310,7 +310,7 @@
 								<div class="col-md-12">
 									<asp:Label runat="server" CssClass="control-label pull-left" ID="lblfacility">Facility Transferred from :</asp:Label></div>
 								<div class="col-md-12">
-									<asp:TextBox runat="server" ID="TransferFromFacility" CssClass="form-control input-sm" placeholder="facility name.." ClientIDMode="Static" data-parsley-required="true" data-parsley-minlegth="4"></asp:TextBox>
+                                    <asp:DropDownList ID="TransferFromFacility" runat="server" CssClass="form-control input-sm" ClientIDMode="Static"></asp:DropDownList>
 								</div>
 							</div>
 							<div class="col-md-4">
@@ -1079,7 +1079,7 @@
 										<label class="control-label pull-left" style="font-size: 65%">Baseline Viralload</label>
 									</div>
 									<div class="col-md-12">
-										<asp:TextBox runat="server" CssClass="form-control input-sm" ID="BaselineViralload" ClientIDMode="Static" data-parsley-required="true" data-parsley-min="2"></asp:TextBox>
+										<asp:TextBox runat="server" CssClass="form-control input-sm" ID="BaselineViralload" ClientIDMode="Static"></asp:TextBox>
 									</div>
 								</div>
 
@@ -1089,7 +1089,7 @@
 									<div class="col-md-12">
 										<div class="datepicker fuelux" id="BaselineViralloadDate">
 											<div class="input-group">
-												<input class="form-control input-sm" id="TreatmeantInitiationBaselineViralloadDate" type="text" data-parsley-require="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')" />
+												<input class="form-control input-sm" id="TreatmeantInitiationBaselineViralloadDate" type="text" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')" />
 												<div class="input-group-btn">
 													<button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
 														<span class="glyphicon glyphicon-calendar"></span>
@@ -1324,7 +1324,11 @@
 				// 18.5 to 25  Normal
 				// 25-30           Overweight
 				// More than 30    Obese
-			}
+            }
+
+            $("#TransferFromFacility").select2({
+                placeholder: "Select Facility"
+            });
 
 			/*Get Patient Type */
 			$(window).on("load", checkPatientStatus);
@@ -1837,8 +1841,9 @@
 										moment(obj.ARTInitiationDate).format('DD-MMM-YYYY'));
 									$("#WHOStageAtEnrollment").val(obj.EnrollmentWHOStage);
 
-									$("#<%=TransferFromCounty.ClientID%>").val(obj.CountyFrom);
-									$("#<%=TransferFromFacility.ClientID%>").val(obj.FacilityFrom);
+                                    $("#<%=TransferFromCounty.ClientID%>").val(obj.CountyFrom);
+                                    var value = $("#<%=TransferFromFacility.ClientID%> option:contains('" + obj.FacilityFrom + "')").val();
+                                    $("#<%=TransferFromFacility.ClientID%>").val(value).trigger("change");
 									$("#<%=FacilityMFLCode.ClientID%>").val(obj.mflcode);
 									$("#<%=transferInNotes.ClientID%>").val(obj.TransferInNotes);
 
@@ -2103,7 +2108,7 @@
 								} else {
 								    $.when(managePatientBaselineAssessment()).then()
                                         
-                                            if (data.direction === 'next') {
+                                    if (data.direction === 'next') {
                                                 window.location.href = '<%=ResolveClientUrl( "~/CCC/Patient/PatientHome.aspx")%>';
                                             toastr.success("Patient Baseline Assessment and ARV History Completed successfully...");
                                             }
@@ -2210,8 +2215,10 @@
 				var serviceAreaId = 0;
 				var transferInDate = moment($('#TIDate').datepicker('getDate')).format('DD-MMM-YYYY');
 				var treatmentStartDate = moment($('#<%=lblARTStartDate.ClientID%>').datepicker('getDate')).format('DD-MMM-YYYY');
-				var currentTreatment = $('#<%=RegimenId.ClientID%>').find(":selected").val();
-				var facilityFrom = $('#<%=TransferFromFacility.ClientID%>').val();
+                var currentTreatment = $('#<%=RegimenId.ClientID%>').find(":selected").val();
+                var TransferFromFacility = $('#<%=TransferFromFacility.ClientID%>').select2('data');
+		<%--		var facilityFrom = $('#<%=TransferFromFacility.ClientID%>').val();--%>
+                var facilityFrom = TransferFromFacility[0].text;
 				var mflCode = $('#<%=FacilityMFLCode.ClientID%>').val();
 				var countyFrom = $('#<%=TransferFromCounty.ClientID%>').find(":selected").val();
 				var transferInNotes = $('#<%=transferInNotes.ClientID%>').val();
@@ -2345,7 +2352,7 @@
 			function managePatientTreatmentInitiation() {
 				
 				var viralLoad= $("#<%=BaselineViralload.ClientID%>").val(); 
-				var viralLoadDate= moment($("#BaselineViralloadDate").datepicker("getDate")).format('DD-MMM-YYYY');
+                var viralLoadDate = moment($("#BaselineViralloadDate").datepicker("getDate")).format("DD-MMM-YYYY");
 				var artCohort= $("#<%=ARTCohort.ClientID%>").val(); 
 				var firstlineStartDate= moment($("#DateStartedOnFirstLine").datepicker('getDate')).format('DD-MMM-YYYY');
 				var startRegimen = $("#<%=RegimenInitiationId.ClientID%>").find(":selected").val();
@@ -2353,7 +2360,11 @@
 					viralLoad = 0;}
 				var id = 0;
 				var ptnId = patientId;
-				var ptnmasterVisitId = patientMasterVisitId;
+                var ptnmasterVisitId = patientMasterVisitId;
+
+                if (viralLoadDate == "Invalid date") {
+                    viralLoadDate = "";
+                }
 
 				$.ajax({
 					type: "POST",
@@ -2405,72 +2416,16 @@
 					}
 				});
 
-			}
+            }
+
+            $("#TransferFromFacility").change(function () {
+                var value = $(this).val();
+
+                $("#FacilityMFLCode").val(value);
+                //console.log(value);
+            });
 
 		});
 	</script>
 
 </asp:Content>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

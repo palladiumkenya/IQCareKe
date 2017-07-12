@@ -13,12 +13,12 @@
                 <div class="col-md-12">
 
                     <div class="col-md-12">
-                        <small>Person Details</small><hr />
+                        <h3>Person Details</h3><hr />
                     </div>
                     <div class="col-md-6">
                         <div class="col-md-12 form-group">
                             <div class="col-md-6">
-                                <label class="control-label pull-left">First Name</label>
+                                <label class="required control-label pull-left">First Name</label>
                             </div>
                             <div class="col-md-6">
                                 <input id="FirstName" class="form-control input-sm" type="text" runat="server" placeholder="First Name" required="true" />
@@ -34,7 +34,7 @@
                         </div>
                         <div class="col-md-12 form-group">
                             <div class="col-md-6">
-                                <label class="control-label pull-left">Last Name</label>
+                                <label class="required control-label pull-left">Last Name</label>
                             </div>
                             <div class="col-md-6">
                                 <input id="LastName" class="form-control input-sm" type="text" runat="server" placeholder="Last Name" required="true" />
@@ -45,7 +45,7 @@
                     <div class="col-md-6">
                         <div class="col-md-12 form-group">
                             <div class="col-md-6">
-                                <label class="control-label pull-left">Relationship</label>
+                                <label class="required control-label pull-left">Relationship</label>
                             </div>
                             <div class="col-md-6">
                                 <asp:DropDownList runat="server" ID="Relationship" ClientIDMode="Static" CssClass="form-control input-sm" required="true" onchange=" RelationshipChanged();" />
@@ -53,7 +53,7 @@
                         </div>
                         <div class="col-md-12 form-group">
                             <div class="col-md-6">
-                                <label class="control-label pull-left">Sex</label>
+                                <label class="required control-label pull-left">Sex</label>
                             </div>
                             <div class="col-md-6">
                                 <select runat="server" id="Sex" class="form-control input-sm" required="true"></select>
@@ -61,99 +61,14 @@
                         </div>
                         <div class="col-md-12 form-group">
                             <div class="col-md-6">
-                                <label class="control-label pull-left">Date of Birth</label>
+                                <label class="required control-label pull-left">Date of Birth</label>
                             </div>
                             <div class="col-md-6">
-                                <div class="datepicker fuelux form-group" id="DateOfBirth">
-                                    <div class="input-group">
-                                        <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="Dob" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
-                                        <div class="input-group-btn">
-                                            <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
-                                                <span class="glyphicon glyphicon-calendar"></span>
-                                                <span class="sr-only">Toggle Calendar</span>
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-right datepicker-calendar-wrapper" role="menu">
-                                                <div class="datepicker-calendar">
-                                                    <div class="datepicker-calendar-header">
-                                                        <button type="button" class="prev"><span class="glyphicon glyphicon-chevron-left input-sm"></span><span class="sr-only">Previous Month</span></button>
-                                                        <button type="button" class="next"><span class="glyphicon glyphicon-chevron-right input-sm"></span><span class="sr-only">Next Month</span></button>
-                                                        <button type="button" class="title" data-month="11" data-year="2014">
-                                                            <span class="month">
-                                                                <span data-month="0">January</span>
-                                                                <span data-month="1">February</span>
-                                                                <span data-month="2">March</span>
-                                                                <span data-month="3">April</span>
-                                                                <span data-month="4">May</span>
-                                                                <span data-month="5">June</span>
-                                                                <span data-month="6">July</span>
-                                                                <span data-month="7">August</span>
-                                                                <span data-month="8">September</span>
-                                                                <span data-month="9">October</span>
-                                                                <span data-month="10">November</span>
-                                                                <span data-month="11" class="current">December</span>
-                                                            </span><span class="year">2017</span>
-                                                        </button>
-                                                    </div>
-                                                    <table class="datepicker-calendar-days">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Su</th>
-                                                                <th>Mo</th>
-                                                                <th>Tu</th>
-                                                                <th>We</th>
-                                                                <th>Th</th>
-                                                                <th>Fr</th>
-                                                                <th>Sa</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody></tbody>
-                                                    </table>
-                                                    <div class="datepicker-calendar-footer">
-                                                        <button type="button" class="datepicker-today">Today</button>
-                                                    </div>
-                                                </div>
-                                                <div class="datepicker-wheels" aria-hidden="true">
-                                                    <div class="datepicker-wheels-month">
-                                                        <h2 class="header">Month</h2>
-                                                        <ul>
-                                                            <li data-month="0">
-                                                                <button type="button">Jan</button></li>
-                                                            <li data-month="1">
-                                                                <button type="button">Feb</button></li>
-                                                            <li data-month="2">
-                                                                <button type="button">Mar</button></li>
-                                                            <li data-month="3">
-                                                                <button type="button">Apr</button></li>
-                                                            <li data-month="4">
-                                                                <button type="button">May</button></li>
-                                                            <li data-month="5">
-                                                                <button type="button">Jun</button></li>
-                                                            <li data-month="6">
-                                                                <button type="button">Jul</button></li>
-                                                            <li data-month="7">
-                                                                <button type="button">Aug</button></li>
-                                                            <li data-month="8">
-                                                                <button type="button">Sep</button></li>
-                                                            <li data-month="9">
-                                                                <button type="button">Oct</button></li>
-                                                            <li data-month="10">
-                                                                <button type="button">Nov</button></li>
-                                                            <li data-month="11">
-                                                                <button type="button">Dec</button></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="datepicker-wheels-year">
-                                                        <h2 class="header">Year</h2>
-                                                        <ul></ul>
-                                                    </div>
-                                                    <div class="datepicker-wheels-footer clearfix">
-                                                        <button type="button" class="btn datepicker-wheels-back"><span class="glyphicon glyphicon-arrow-left"></span><span class="sr-only">Return to Calendar</span></button>
-                                                        <button type="button" class="btn datepicker-wheels-select">Select <span class="sr-only">Month and Year</span></button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class='input-group date' id='PersonDOBdatepicker'>
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                    <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="Dob" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>        
                                 </div>
                             </div>
                         </div>
@@ -162,12 +77,12 @@
                 <div class="col-md-12">
 
                     <div class="col-md-12">
-                        <small>HIV Testing information</small><hr />
+                        <h3>HIV Testing information</h3><hr />
                     </div>
                     <div class="col-md-4">
                         <div class="col-md-12 form-group">
                             <div class="col-md-12">
-                                <label class="control-label pull-left">Baseline HIV Status</label>
+                                <label class="required control-label pull-left">Baseline HIV Status</label>
                             </div>
                             <div class="col-md-12">
                                 <select runat="server" id="BaselineHIVStatus" class="form-control input-sm" required="true" clientidmode="Static" onchange="BaselineEnabled();"></select>
@@ -425,6 +340,7 @@
                                 <tr>
                                     <th class="text-primary">#</th>
                                     <th><span class="text-primary" aria-hidden="true">Name</span> </th>
+                                    <th><span class="text-primary" aria-hidden="true">Date Of Birth</span></th>
                                     <th><span class="text-primary" aria-hidden="true">Relationship</span> </th>
                                     <th><span class="text-primary" aria-hidden="true">Baserline HIV Status</span> </th>
                                     <th><span class="text-primary" aria-hidden="true">Baseline HIV Status Date</span> </th>
@@ -445,9 +361,9 @@
 
             <div class="col-md-12">
                 <hr />
-                <div class="col-md-7"></div>
+                <div class="col-md-4"></div>
 
-                <div class="col-md-5">
+                <div class="col-md-8">
 
                     <div class="col-md-4">
                         <asp:LinkButton runat="server" ID="btnSave" CssClass=" btn btn-info btn-lg fa fa-arrow-circle-o-right" ClientIDMode="Static" OnClientClick="return false;"> Save Family Testing</asp:LinkButton>
@@ -468,6 +384,7 @@
                     <tr class="active">
                         <th class="text-primary">#</th>
                         <th><span class="text-primary" aria-hidden="true">Name</span> </th>
+                        <th><span class="text-primary" aria-hidden="true">Date Of Birth</span> </th>
                         <th><span class="text-primary" aria-hidden="true">Relationship</span> </th>
                         <th><span class="text-primary" aria-hidden="true">Baseline HIV Status</span> </th>
                         <th><span class="text-primary" aria-hidden="true">Baseline HIV Status Date</span> </th>
@@ -488,7 +405,7 @@
 
         <%--Edit Modal--%>
         <div id="editFamilyTestingModal" class="modal fade" role="dialog" data-parsley-validate="true" data-show-errors="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog" style="width: 90%">
                 <div class="modal-content">
                     <div class="modal-header bg-info">
                         <h4 class="modal-title">Edit Family Testing</h4>
@@ -498,7 +415,7 @@
                             <div class="col-md-12">
 
                                 <div class="col-md-12">
-                                    <small>Person Details</small><hr />
+                                    <h3>Person Details</h3><hr />
                                 </div>
                                 <div class="col-md-6">
                                     <div class="col-md-12 form-group">
@@ -647,7 +564,7 @@
                             <div class="col-md-12">
 
                                 <div class="col-md-12">
-                                    <small>HIV Testing information</small><hr />
+                                    <h3>HIV Testing information</h3><hr />
                                 </div>
                                 <div class="col-md-4">
                                     <div class="col-md-12 form-group">
@@ -926,9 +843,18 @@
                 date:0,
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
             });
-            $('#DateOfBirth').datepicker({
-                allowPastDates: true,
-                momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+
+            //$('#DateOfBirth').datepicker({
+            //    allowPastDates: true,
+            //    momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+            //});
+            var todayDate = new Date();
+
+            $('#PersonDOBdatepicker').datetimepicker({
+                format: 'DD-MMM-YYYY',
+                allowInputToggle: true,
+                useCurrent: false,
+                maxDate: todayDate
             });
 
             $('#BaselineHIVStatusDMod').datepicker({
@@ -950,12 +876,18 @@
             loadFamilyTesting();
 
             $("#btnAdd").click(function (e) {
+                $('#FamilyTestingForm').parsley().destroy();
+                $('#FamilyTestingForm').parsley({
+                    excluded:
+                    "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
+                });
+
                 if ($('#FamilyTestingForm').parsley().validate()) {
                     var firstName = escape($("#<%=FirstName.ClientID%>").val());
                     var middleName = escape($("#<%=MiddleName.ClientID%>").val());
                     var lastName = escape($("#<%=LastName.ClientID%>").val());
                     var sex = $("#<%=Sex.ClientID%>").val();
-                    var dob = $("#DateOfBirth").datepicker('getDate');
+                    var dob = $("#Dob").val();
                     var name = $("#<%=FirstName.ClientID%>").val() + ' ' + $("#<%=MiddleName.ClientID%>").val() + ' ' + $("#<%=LastName.ClientID%>").val();
                     var relationshipId = $("#<%=Relationship.ClientID%>").val();
                     var relationship = $("#Relationship :selected").text();
@@ -964,6 +896,7 @@
                     var baselineHivStatusDate = $("#<%=BaselineHIVStatusDate.ClientID%>").val();
                     var hivTestingresultId = $("#<%=hivtestingresult.ClientID%>").val();
                     var hivTestingresult = $("#hivtestingresult :selected").text();
+                    hivTestingresult = hivTestingresult == "select" ? "" : hivTestingresult;
                     var hivTestingresultDate = $("#<%=HIVTestingDate.ClientID%>").val();
                     var cccreferal = $("#<%=CccReferal.ClientID%>").val();
                     var cccReferalNumber = $("#<%=cccNumber.ClientID%>").val();
@@ -1034,6 +967,8 @@
                         var table = "<tr><td align='left'></td><td align='left'>" +
                             name +
                             "</td><td align='left'>" +
+                            dob +
+                            "<td align='left'>" +
                             relationship +
                             "</td><td align='left'>" +
                             baselineHivStatus +
@@ -1139,7 +1074,7 @@
                             } else {
                                 testingDate = "";
                             }
-                            table += '<tr><td style="text-align: left">' + n + '</td><td style="text-align: left">' + name + '</td><td style="text-align: left">' + item.Relationship + '</td><td style="text-align: left">' + item.BaseLineHivStatus + '</td><td style="text-align: left">' + baselineDate + '</td><td style="text-align: left">' + item.HivStatusResult + '</td><td style="text-align: left">' + testingDate + '</td><td style="text-align: left">' + item.CccReferal + "</td><td align='right'><button type='button' id= 'btnEditTesting' class='btn btn-link btn-sm pull-right' data-toggle='modal' data-target='#editFamilyTestingModal' onClick='editFamilyTesting(this)'> View/Edit</button></td></tr>";
+                            table += '<tr><td style="text-align: left">' + n + '</td><td style="text-align: left">' + name + '</td><td style="text-align:left;">' + moment(item.DateOfBirth).format('DD-MMM-YYYY') + '</td><td style="text-align: left">' + item.Relationship + '</td><td style="text-align: left">' + item.BaseLineHivStatus + '</td><td style="text-align: left">' + baselineDate + '</td><td style="text-align: left">' + item.HivStatusResult + '</td><td style="text-align: left">' + testingDate + '</td><td style="text-align: left">' + item.CccReferal + "</td><td align='right'><button type='button' id= 'btnEditTesting' class='btn btn-link btn-sm pull-right' data-toggle='modal' data-target='#editFamilyTestingModal' onClick='editFamilyTesting(this)'> View/Edit</button></td></tr>";
                         });
                    
                         $('#tableFamilymembers').append(table);
@@ -1152,9 +1087,16 @@
                 });
             }
 
-            $('#DateOfBirth').on('changed.fu.datepicker dateClicked.fu.datepicker', function(event,date) {
-                Dobchanged();
+            $('#Dob').change(function() {
+                
             });
+
+            $("#PersonDOBdatepicker").on("dp.change", function (e) {
+                //Get new date value from the field on change
+                var date = new Date(e.date);
+                Dobchanged(date);
+            });
+
         });
 
         function editFamilyTesting(x) {
@@ -1215,6 +1157,8 @@
                 }
             }
             $("#<%=cccNumberMod.ClientID%>").val(familyTesting.CccReferalNumber);
+
+            BaselineEnabledMod();
         }
 
         function resetElements(parameters) {
@@ -1222,6 +1166,12 @@
         }
 
         function updateFamilyTesting() {
+            $('#editFamilyTestingModal').parsley().destroy();
+            $('#editFamilyTestingModal').parsley({
+                excluded:
+                "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
+            });
+
             if ($('#editFamilyTestingModal').parsley().validate()) {
                 var patientId = <%=PatientId%>;
                 var patientMasterVisitId = <%=PatientMasterVisitId%>;
@@ -1361,14 +1311,35 @@
             }
     }
       
-    function BaselineEnabled() {
-        if ($("#BaselineHIVStatus :selected").text() === "Never Tested") {
-            $("#<%=cccNumber.ClientID%>").prop('disabled',true);
-                $("#<%=CccReferal.ClientID%>").prop('disabled',true);
-                $("#<%=BaselineHIVStatusDate.ClientID%>").prop('disabled',true);
+        function BaselineEnabled() {
+            var baselinehivstatus = $("#BaselineHIVStatus :selected").text();
+            if (baselinehivstatus === "Never Tested") {
+                $("#<%=cccNumber.ClientID%>").prop('disabled', true);
+                $("#<%=CccReferal.ClientID%>").prop('disabled', true);
+                $("#<%=BaselineHIVStatusDate.ClientID%>").prop('disabled', true);
                 $("#BaselineHIVStatusD").addClass('noneevents');
+
+                $("#hivtestingresult").val("");
+                $("#hivtestingresult").prop('disabled', false);
+                $("#HIVTestingDate").val("");
+                $("#HIVTestingDate").prop('disabled', false);
+                $("#TestingDate").removeClass('noneevents');
+            } else if (baselinehivstatus === "Tested Positive") {
+                $("#hivtestingresult").val("");
+                $("#hivtestingresult").prop('disabled', true);
+                $("#HIVTestingDate").val("");
+                $("#HIVTestingDate").prop('disabled', true);
+                $("#TestingDate").addClass('noneevents');
+
+                $("#<%=BaselineHIVStatusDate.ClientID%>").val("");
+                $("#<%=BaselineHIVStatusDate.ClientID%>").prop('disabled', false);
+                $("#BaselineHIVStatusD").removeClass('noneevents');
+
+                $("#<%=cccNumber.ClientID%>").prop('disabled', false);
+                $("#<%=CccReferal.ClientID%>").prop('disabled', false);
+
             } else {
-                $("#<%=cccNumber.ClientID%>").prop('disabled',false);
+                $("#<%=cccNumber.ClientID%>").prop('disabled', false);
                 $("#<%=CccReferal.ClientID%>").prop('disabled',false);
                 $("#BaselineHIVStatusD").removeClass('noneevents');
                 $("#<%=BaselineHIVStatusDate.ClientID%>").prop('disabled',false);
@@ -1402,12 +1373,34 @@
     }
       
     function BaselineEnabledMod() {
-        if ($("#bHivStatusMod :selected").text() === "Never Tested") {
+        var baselinehivstatus = $("#bHivStatusMod :selected").text();
+        if (baselinehivstatus === "Never Tested") {
             $("#<%=cccNumberMod.ClientID%>").prop('disabled',true);
-                $("#<%=cccReferalMod.ClientID%>").prop('disabled',true);
-                $("#<%=bHivStatusDateMod.ClientID%>").prop('disabled',true);
-                $("#BaselineHIVStatusDMod").addClass('noneevents');
-            } else {
+            $("#<%=cccReferalMod.ClientID%>").prop('disabled',true);
+            $("#<%=bHivStatusDateMod.ClientID%>").prop('disabled',true);
+            $("#BaselineHIVStatusDMod").addClass('noneevents');
+
+            //$("#testingStatusMod").val("");
+            $("#testingStatusMod").prop('disabled', false);
+            //$("#testingStatusDateMod").val("");
+            $("#testingStatusDateMod").prop('disabled', false);
+            $("#TestingDateMod").removeClass('noneevents');
+
+        } else if (baselinehivstatus == "Tested Positive"){
+            //$("#testingStatusMod").val("");
+            $("#testingStatusMod").prop('disabled', true);
+            //$("#testingStatusDateMod").val("");
+            $("#testingStatusDateMod").prop('disabled', true);
+            $("#TestingDateMod").addClass('noneevents');
+
+            <%--$("#<%=bHivStatusDateMod.ClientID%>").val("");--%>
+            $("#<%=bHivStatusDateMod.ClientID%>").prop('disabled', false);
+            $("#BaselineHIVStatusDMod").removeClass('noneevents');
+
+
+            $("#<%=cccNumberMod.ClientID%>").prop('disabled', false);
+            $("#<%=cccReferalMod.ClientID%>").prop('disabled', false);
+        } else {
                 $("#<%=cccNumberMod.ClientID%>").prop('disabled',false);
                 $("#<%=cccReferalMod.ClientID%>").prop('disabled',false);
                 $("#BaselineHIVStatusDMod").removeClass('noneevents');
@@ -1445,8 +1438,8 @@
             }
         }
 
-        function Dobchanged() {
-            var dob = $("#<%=Dob.ClientID%>").val();
+        function Dobchanged(dob) {
+            //console.log(dob);
             var adult = moment().subtract(10, 'years').format('DD-MMM-YYYY');
             if ((moment('' + dob + '').isAfter(adult)) && (($("#Relationship :selected").text() === "Spouse")))  {
                 toastr.error("A child cannot have a spouse.");

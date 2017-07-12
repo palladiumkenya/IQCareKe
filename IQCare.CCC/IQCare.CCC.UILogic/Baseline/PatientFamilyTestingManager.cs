@@ -23,7 +23,7 @@ namespace IQCare.CCC.UILogic.Baseline
         public int AddPatientFamilyTestings(PatientFamilyTesting p, int userId)
         {
             PersonManager pm = new PersonManager();
-            int personId =  pm.AddPersonUiLogic(p.FirstName, p.MiddleName, p.LastName, p.Sex, userId);
+            int personId =  pm.AddPersonUiLogic(p.FirstName, p.MiddleName, p.LastName, p.Sex, userId, p.DateOfBirth);
             //Person person = new Person()
             //{
             //    FirstName = _utility.Encrypt(p.FirstName),
@@ -80,7 +80,7 @@ namespace IQCare.CCC.UILogic.Baseline
         {
             PersonManager pm = new PersonManager();
             int personId = p.PersonId;
-            pm.UpdatePerson(p.FirstName, p.MiddleName, p.LastName, p.Sex, userId, p.PersonId);
+            pm.UpdatePerson(p.FirstName, p.MiddleName, p.LastName, p.Sex, userId, p.PersonId, p.DateOfBirth);
             //Person person = new Person()
             //{
             //    FirstName = _utility.Encrypt(p.FirstName),
@@ -136,7 +136,7 @@ namespace IQCare.CCC.UILogic.Baseline
                             MiddleName = (person.MiddleName),
                             LastName = (person.LastName),
                             Sex = person.Sex,
-                            //DateOfBirth = person.DateOfBirth,
+                            DateOfBirth = person.DateOfBirth == null? DateTime.Now: (DateTime)person.DateOfBirth.Value,
                             PersonId = relationship.PersonId,
                             RelationshipId = relationship.RelationshipTypeId,
                             BaseLineHivStatusId = hivTesting.BaselineResult,

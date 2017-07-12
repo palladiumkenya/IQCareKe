@@ -65,7 +65,7 @@
                             Visible="True" OnItemDataBound="repeaterLabTest_ItemDataBound" OnItemCommand="repeaterLabTest_ItemCommand">
                             <FooterTemplate>
                                 <%--</table>--%>
-                                </div>
+                                <%--</div>--%>
                             </FooterTemplate>
                             <HeaderTemplate>
                                 <div class="container-fluid">
@@ -153,6 +153,7 @@
                                                                     <label class="pull-left control-label"><b>Reference Range</b></label>
                                                                 </div>
                                                             </div>
+                                                       </div>
                                                     </HeaderTemplate>
                                                     <ItemTemplate>
                                                         <div class="row">
@@ -189,16 +190,22 @@
                                                         </div>
 
                                                     </ItemTemplate>
+                                                    
+                                                    
                                                     <FooterTemplate>
-                                                        </div>
+                                                        
                                                     </FooterTemplate>
+                                                  
                                                 </asp:Repeater>
+                                                
                                             </td>
                                         </tr>
                                     </table>
+                                    
                                 </div>
-
+                                
                             </ItemTemplate>
+                            
                         </asp:Repeater>
                     </div>
                    

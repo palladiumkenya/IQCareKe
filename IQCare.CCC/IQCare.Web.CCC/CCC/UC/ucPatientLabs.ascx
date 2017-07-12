@@ -251,7 +251,8 @@
                         <asp:LinkButton runat="server" ID="btnResetOrder" OnClientClick="return false" CssClass="btn btn-warning fa fa-refresh" ClientIDMode="Static"> Reset Order</asp:LinkButton>
                     </div>
                     <div class="col-md-4">
-                         <button type="button" Class="btn btn-danger btn-sm  fa fa-times" data-dismiss="modal">Close Lab Order</button>
+                         <button type="button" Class="btn btn-danger btn-sm  fa fa-times" id="btnCloseLabOrderModal" data-dismiss="modal">Close Lab Order</button>
+                         <button type="button" class="btn btn-danger btn-sm  fa fa-times" id="btnCloseLabOrder">Close Lab Order</button>
                     </div>
                 </div>
             </div>
@@ -649,7 +650,21 @@
             $("#addResults").click(function (e) {
                 window.location.href = '<%=ResolveClientUrl("~/laboratory/request/findlaborder.aspx")%>'; 
               
-            });           
+            });
+
+            if ($('#labModal').is(':visible')) {
+                $("#btnCloseLabOrderModal").show("fast");
+                $("#btnCloseLabOrder").hide("fast");
+            } else {
+                $("#btnCloseLabOrderModal").hide("fast");
+                $("#btnCloseLabOrder").show("fast");
+            }
+
+            $("#btnCloseLabOrder").click(function () {
+                setTimeout(function () {
+                    window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientHome.aspx")%>';
+                }, 2000);
+            });
            
         });
 

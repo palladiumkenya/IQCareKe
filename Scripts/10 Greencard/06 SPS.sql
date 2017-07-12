@@ -510,6 +510,7 @@ ALTER PROCEDURE [dbo].[Patient_Update]
  @DateOfBirth datetime,
  @NationalId varchar(100),
  @FacilityId int,
+ @AuditData xml=null,
  @Id int
 AS
 BEGIN
@@ -523,7 +524,8 @@ BEGIN
   ptn_pk = @ptn_pk,
   DateOfBirth = @DateOfBirth,
   NationalId=ENCRYPTBYKEY(KEY_GUID('Key_CTC'),@NationalId),
-  FacilityId=@FacilityId
+  FacilityId=@FacilityId,
+  AuditData=@AuditData
  WHERE
   Id=@Id
 END
@@ -595,7 +597,8 @@ ALTER PROCEDURE [dbo].[Person_Insert]
  @MidName varchar(100)= Null,
  @LastName varchar(100),
  @Sex int,
- --@DateOfBirth date,
+ @DateOfBirth datetime = NULL,
+ @DobPrecision bit = NULL,
  --@NationalId varchar(100) = null,
  @UserId int
 AS
@@ -612,7 +615,8 @@ BEGIN
   ENCRYPTBYKEY(KEY_GUID('Key_CTC'),@MidName),
   ENCRYPTBYKEY(KEY_GUID('Key_CTC'),@LastName),
   @Sex,
-  --@DateOfBirth,
+  @DateOfBirth,
+  @DobPrecision,
   --ENCRYPTBYKEY(KEY_GUID('Key_CTC'),@NationalId),
   1,
   0,
@@ -638,7 +642,7 @@ ALTER PROCEDURE [dbo].[Person_Update]
  @MidName varchar(100)= Null,
  @LastName varchar(100),
  @Sex int,
- --@DateOfBirth date,
+ @DateOfBirth datetime = NULL,
  --@NationalId varchar(100) = null,
  @Id int
 AS
@@ -653,8 +657,8 @@ BEGIN
   FirstName=ENCRYPTBYKEY(KEY_GUID('Key_CTC'),@FirstName),
   MidName=ENCRYPTBYKEY(KEY_GUID('Key_CTC'),@MidName),
   LastName=ENCRYPTBYKEY(KEY_GUID('Key_CTC'),@LastName),
-  Sex=@Sex
-  --DateOfBirth=@DateOfBirth,
+  Sex=@Sex,
+  DateOfBirth=@DateOfBirth
   --NationalId=ENCRYPTBYKEY(KEY_GUID('Key_CTC'),@NationalId)
  WHERE
    Id=@Id;

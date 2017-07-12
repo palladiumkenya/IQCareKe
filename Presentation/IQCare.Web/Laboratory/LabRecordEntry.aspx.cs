@@ -138,7 +138,10 @@ namespace IQCare.Web.Laboratory
             {
                 _order.OrderedTest = new List<LabOrderTest>();
             }
-            thisTest = new LabOrderTest();
+            thisTest = new LabOrderTest()
+            {
+                TestId = this.LabTestId
+            };
             thisTest.Test = new LabTest()
             {
                 Id = this.LabTestId,

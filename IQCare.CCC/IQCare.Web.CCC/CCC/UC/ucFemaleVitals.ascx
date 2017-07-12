@@ -350,6 +350,15 @@
                  $("#divEDD").show("fast");
                  //$("#divFemaleLMP").show("fast");
                  $("#divOnFP").hide("fast", function () { $("#FP").hide("fast"); });
+
+                 $('#FemaleVitals').parsley().destroy();
+
+                 //set required attribute on input to false
+                 $('#lmp').attr('data-parsley-required', 'true');
+                 $('#ExpectedDateOfChildBirth').attr('data-parsley-required', 'true');
+                 //reinitialize parsley
+                 $('#FemaleVitals').parsley();
+
              } else {
                  $("#ancNo").prop("checked", true);
                  $("#divOnFP").show("fast", function () { $("#FP").show("fast"); });
@@ -357,6 +366,23 @@
                  $("#lmp_Female").val("");
                  $("#divEDD").hide("fast");
                  $("#ExpectedDateOfChildBirth").val("");
+
+                 if (patientAge >= 45) {
+                     //destroy parsley
+                     $('#FemaleVitals').parsley().destroy();
+
+                     //set required attribute on input to false
+                     $('#lmp').attr('data-parsley-required', 'false');
+                     $('#ExpectedDateOfChildBirth').attr('data-parsley-required', 'false');
+                     //reinitialize parsley
+                     $('#FemaleVitals').parsley();
+
+                     //$("#lmp").prop("disabled", true);
+                     //$("#FemaleLMP").prop("disabled", true);
+                     //$("#ExpectedDateOfChildBirth").prop("disabled", true);
+                     //$("#EDCD").prop("disabled", true);
+                 }
+
              }
          });
 
@@ -396,6 +422,10 @@
          function addPregnancyIndicator() {
 
              var eddDate = $("#ExpectedDateOfChildBirth").val();
+
+             if (typeof lmpDate == "undefined") {
+                 lmpDate = "";
+             }
              $.ajax({
                  type: "POST",
                  url: "../WebService/FemaleVitalsWebservice.asmx/AddPatientPregnancyIndicator",
@@ -548,6 +578,11 @@
          }
 
          $("#btnSave").click(function () {
+             $('#FemaleVitals').parsley().destroy();
+             $('#FemaleVitals').parsley({
+                 excluded:
+                     "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
+             });
 
              if ($('#FemaleVitals').parsley().validate()) {
                  var fpMethod = $("#fpMethod").val();

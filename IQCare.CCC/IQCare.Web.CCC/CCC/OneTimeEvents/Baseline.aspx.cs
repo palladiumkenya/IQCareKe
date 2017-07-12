@@ -115,7 +115,17 @@ namespace IQCare.Web.CCC.OneTimeEvents
                 BaselineBMI.Text = Convert.ToString(ptnVitals.BMI);
 
             }
+            var facilityListManager = new FacilityListManager();
+            var result = facilityListManager.GetFacilitiesList();
 
+            if(result !=null && result.Count > 0)
+            {
+                TransferFromFacility.Items.Add(new ListItem("", ""));
+                foreach (var facility in result)
+                {
+                    TransferFromFacility.Items.Add(new ListItem(facility.Name, facility.MFLCode));
+                }
+            }
         }
     }
 }

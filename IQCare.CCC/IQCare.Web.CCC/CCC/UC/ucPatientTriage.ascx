@@ -96,7 +96,7 @@
                  <div class="col-md-4 col-xs-12 col-sm-12">
                     <div class="input-group">
                         <span class="input-group-addon">Temperature (°C)</span>
-                        <asp:TextBox runat="server" ID="Tempreture" ClientIDMode="Static" CssClass="form-control input-sm" placeholder=".." Type="Number" Min="25" Max="50" data-parsley-range="[25, 50]" data-parsley-range-message="Tempreture is out of reasonable range"></asp:TextBox>
+                        <asp:TextBox runat="server" ID="Temperature" ClientIDMode="Static" CssClass="form-control input-sm" placeholder=".." Type="Number" Min="25" Max="50" data-parsley-range="[25, 50]" data-parsley-range-message="Temperature is out of reasonable range"></asp:TextBox>
                     </div>
                     <p class="help-block pull-left"><strong>Normal 36.5–37.5 °C </strong></p>
                 </div>   
@@ -114,19 +114,19 @@
                   <div class="col-md-12 col-xs-12 col-sm-12">
                     <div class="input-group">
                          <span class="input-group-addon">Systolic</span>
-                         <asp:TextBox runat="server" ID="systolic" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="systolic.." Type="Number" data-parsley-range="[100, 120]" data-parsley-range-message="Systolic reading is out of reasonable range"></asp:TextBox>
+                         <asp:TextBox runat="server" ID="systolic" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="systolic.." Type="Number" data-parsley-range="[80, 180]" data-parsley-range-message="Systolic reading is out of reasonable range"></asp:TextBox>
                          <span class="input-group-addon">mm[Hg]</span>
                     </div>
-                    <label class="help-block pull-left"><strong>Range: (100-120)</strong></label>
+                    <label class="help-block pull-left"><strong>Range: (80-180)</strong></label>
                  </div>
 
                   <div class="col-md-12 col-xs-12 col-sm-12 form-group" style=" padding-bottom: 0%">
                      <div class="input-group">
                          <span class="input-group-addon">Diastolic</span>
-                         <asp:TextBox runat="server" ID="distolic" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="diastolic.." Type="Number" data-parsley-range="[60, 80]" data-parsley-range-message="Diastolic reading is out of reasonable range"></asp:TextBox>
+                         <asp:TextBox runat="server" ID="distolic" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="diastolic.." Type="Number" data-parsley-range="[40, 100]" data-parsley-range-message="Diastolic reading is out of reasonable range"></asp:TextBox>
                          <span class="input-group-addon">mm[Hg]</span>
                      </div>
-                      <p class="help-block pull-left"><strong>Range: (60-80)</strong></p>
+                      <p class="help-block pull-left"><strong>Range: (40-100)</strong></p>
                   </div>
                 
             </div> 
@@ -310,7 +310,7 @@
         if (diastolic === '') { diastolic = 0 }
         var systolic = $("#<%=systolic.ClientID%>").val();
         if (systolic === '') { systolic = 0 }
-        var tempreture = $("#<%=Tempreture.ClientID%>").val();
+        var tempreture = $("#<%=Temperature.ClientID%>").val();
         if (tempreture === '') { tempreture = 0 }
         var respiratoryRate = $("#<%=RespiratoryRate.ClientID%>").val();
         if (respiratoryRate === '') { respiratoryRate = 0 }

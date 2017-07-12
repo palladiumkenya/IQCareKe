@@ -10,22 +10,47 @@ namespace IQCare.CCC.UILogic.Triage
     {
         private IpatientPregnancyIndicatorManager _PregnancyIndicator = (IpatientPregnancyIndicatorManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Triage.PatientPregnancyIndicatorManager, BusinessProcess.CCC");
 
-        public int AddPregnancyIndicator(int patientId,int patientMasterVisitId,DateTime visitDate ,DateTime lmp,DateTime edd,int pregnancyStatusId,int ancProfile,DateTime ancProfileDate,int userId)
+        public int AddPregnancyIndicator(int patientId,int patientMasterVisitId,DateTime visitDate ,string lmp,string edd,int pregnancyStatusId,int ancProfile,string ancProfileDate,int userId)
         {
             try
             {
-                var pg = new PatientPregnancyIndicator()
+                var pg = new PatientPregnancyIndicator();
+
+                if (lmp != null && lmp != "")
                 {
-                    PatientId = patientId,
-                    PatientMasterVisitId = patientMasterVisitId,
-                    VisitDate = visitDate,
-                    LMP = lmp,
-                    EDD = edd,
-                    PregnancyStatusId = pregnancyStatusId,
-                    AncProfile = ancProfile,
-                    AncProfileDate = ancProfileDate,
-                    CreatedBy = userId
-                };
+                    pg.LMP = DateTime.Parse(lmp);
+                }
+
+                if (edd != null && edd != "")
+                {
+                    pg.EDD = DateTime.Parse(edd);
+                }
+
+                pg.PatientId = patientId;
+                pg.PatientMasterVisitId = patientMasterVisitId;
+                pg.VisitDate = visitDate;
+                pg.PregnancyStatusId = pregnancyStatusId;
+                pg.AncProfile = ancProfile;
+                if(ancProfileDate!=null && ancProfileDate != "")
+                {
+                    pg.AncProfileDate = DateTime.Parse(ancProfileDate);
+                }
+                
+                pg.CreatedBy = userId;
+
+
+                //var pg = new PatientPregnancyIndicator()
+                //{
+                //    PatientId = patientId,
+                //    PatientMasterVisitId = patientMasterVisitId,
+                //    VisitDate = visitDate,
+                //    LMP = lmp,
+                //    EDD = edd,
+                //    PregnancyStatusId = pregnancyStatusId,
+                //    AncProfile = ancProfile,
+                //    AncProfileDate = ancProfileDate,
+                //    CreatedBy = userId
+                //};
 
                 return _PregnancyIndicator.AddPregnancyIndicator(pg);
             }
