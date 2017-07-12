@@ -6203,40 +6203,63 @@ INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcounty
 GO
 INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1424, 47, N'NAIROBI', 285, N'EMBAKASI EAST', 1424, N'UTAWALA')
 GO
-DELETE FROM [dbo].[ServiceArea]
-GO
-SET IDENTITY_INSERT [dbo].[ServiceArea] ON
-GO
-INSERT INTO [dbo].[ServiceArea] ([Id], [Name] ,[Code] ,[DisplayName] ,[DeleteFlag] ,[CreatedBy] ,[CreateDate] ,[AuditData]) VALUES (1, N'HIV COMPREHENSIVE CARE CLINIC', N'CCC', N'CCC Clinic', 0, 1, GETDATE(), NULL)
-GO
-SET IDENTITY_INSERT [dbo].[ServiceArea] OFF
-GO
-DELETE FROM [dbo].[Identifiers]
-GO
-SET IDENTITY_INSERT [dbo].[Identifiers] ON
-GO
-INSERT INTO [dbo].[Identifiers] ([Id], [Name], [Code], [DisplayName], [DataType], [PrefixType], [SuffixType], [DeleteFlag], [CreatedBy], [CreateDate] ,[AuditData]) VALUES (1, N'CCC Registration Number', N'CCCNumber', N'CCC Number', N'Numeric', N'mfl_code', NULL, 0, 1, GETDATE(), NULL)
-GO
-INSERT INTO [dbo].[Identifiers] ([Id], [Name], [Code], [DisplayName], [DataType], [PrefixType], [SuffixType], [DeleteFlag], [CreatedBy], [CreateDate] ,[AuditData]) VALUES (2, N'TB Registration Number', N'TBNumber', N'TB Number', N'Numeric', NULL, NULL, 0, 1, GETDATE(), NULL)
-GO
-INSERT INTO [dbo].[Identifiers] ([Id], [Name], [Code], [DisplayName], [DataType], [PrefixType], [SuffixType], [DeleteFlag], [CreatedBy], [CreateDate] ,[AuditData]) VALUES (3, N'ANC Registration Number', N'ANCNumber', N'ANC Registration Number', N'Numeric', NULL, NULL, 0, 1, GETDATE(), NULL)
-GO
-INSERT INTO [dbo].[Identifiers] ([Id], [Name], [Code], [DisplayName], [DataType], [PrefixType], [SuffixType], [DeleteFlag], [CreatedBy], [CreateDate] ,[AuditData]) VALUES (4, N'PMTCT Registration Number', N'PMTCTNumber', N'PMTCT Number', N'Numeric', NULL, NULL, 0, 1, GETDATE(), NULL)
-GO
-INSERT INTO [dbo].[Identifiers] ([Id], [Name], [Code], [DisplayName], [DataType], [PrefixType], [SuffixType], [DeleteFlag], [CreatedBy], [CreateDate] ,[AuditData]) VALUES (5, N'HEI Registration Number', N'HEIRegistration', N'HEI Registration Number', N'Numeric', NULL, NULL, 0, 1, GETDATE(), NULL)
-GO
-INSERT INTO [dbo].[Identifiers] ([Id], [Name], [Code], [DisplayName], [DataType], [PrefixType], [SuffixType], [DeleteFlag], [CreatedBy], [CreateDate] ,[AuditData]) VALUES (6, N'Patient Number', N'PatientId', N'Patient Number', N'Numeric', NULL, NULL, 0, 1, GETDATE(), NULL)
-GO
-SET IDENTITY_INSERT [dbo].[Identifiers] OFF
-GO
-DELETE FROM [dbo].[ServiceAreaIdentifiers]
-GO
-SET IDENTITY_INSERT [dbo].[ServiceAreaIdentifiers] ON
-GO
-INSERT INTO [dbo].[ServiceAreaIdentifiers] ([Id] ,[ServiceAreaId] ,[IdentifierId] ,[RequiredFlag]) VALUES (1, 1, 1, 1)
-GO
-SET IDENTITY_INSERT [dbo].[ServiceAreaIdentifiers] OFF
-GO
+
+IF NOT EXISTS(SELECT TOP 1 Id FROM ServiceArea WHERE Name = N'HIV COMPREHENSIVE CARE CLINIC')
+BEGIN
+	SET IDENTITY_INSERT [dbo].[ServiceArea] ON
+	INSERT INTO [dbo].[ServiceArea] ([Id], [Name] ,[Code] ,[DisplayName] ,[DeleteFlag] ,[CreatedBy] ,[CreateDate] ,[AuditData]) VALUES (1, N'HIV COMPREHENSIVE CARE CLINIC', N'CCC', N'CCC Clinic', 0, 1, GETDATE(), NULL);
+	SET IDENTITY_INSERT [dbo].[ServiceArea] OFF
+END;
+
+IF NOT EXISTS(SELECT TOP 1 Id FROM Identifiers WHERE Name = N'CCC Registration Number')
+BEGIN
+	SET IDENTITY_INSERT [dbo].[Identifiers] ON
+	INSERT INTO [dbo].[Identifiers] ([Id], [Name], [Code], [DisplayName], [DataType], [PrefixType], [SuffixType], [DeleteFlag], [CreatedBy], [CreateDate] ,[AuditData]) VALUES (1, N'CCC Registration Number', N'CCCNumber', N'CCC Number', N'Numeric', N'mfl_code', NULL, 0, 1, GETDATE(), NULL);
+	SET IDENTITY_INSERT [dbo].[Identifiers] OFF
+END;
+
+IF NOT EXISTS(SELECT TOP 1 Id FROM Identifiers WHERE Name = N'TB Registration Number')
+BEGIN
+	SET IDENTITY_INSERT [dbo].[Identifiers] ON
+	INSERT INTO [dbo].[Identifiers] ([Id], [Name], [Code], [DisplayName], [DataType], [PrefixType], [SuffixType], [DeleteFlag], [CreatedBy], [CreateDate] ,[AuditData]) VALUES (2, N'TB Registration Number', N'TBNumber', N'TB Number', N'Numeric', NULL, NULL, 0, 1, GETDATE(), NULL);
+	SET IDENTITY_INSERT [dbo].[Identifiers] OFF
+END;
+
+IF NOT EXISTS(SELECT TOP 1 Id FROM Identifiers WHERE Name = N'ANC Registration Number')
+BEGIN
+	SET IDENTITY_INSERT [dbo].[Identifiers] ON
+	INSERT INTO [dbo].[Identifiers] ([Id], [Name], [Code], [DisplayName], [DataType], [PrefixType], [SuffixType], [DeleteFlag], [CreatedBy], [CreateDate] ,[AuditData]) VALUES (3, N'ANC Registration Number', N'ANCNumber', N'ANC Registration Number', N'Numeric', NULL, NULL, 0, 1, GETDATE(), NULL);
+	SET IDENTITY_INSERT [dbo].[Identifiers] OFF
+END;
+
+IF NOT EXISTS(SELECT TOP 1 Id FROM Identifiers WHERE Name = N'PMTCT Registration Number')
+BEGIN
+	SET IDENTITY_INSERT [dbo].[Identifiers] ON
+	INSERT INTO [dbo].[Identifiers] ([Id], [Name], [Code], [DisplayName], [DataType], [PrefixType], [SuffixType], [DeleteFlag], [CreatedBy], [CreateDate] ,[AuditData]) VALUES (4, N'PMTCT Registration Number', N'PMTCTNumber', N'PMTCT Number', N'Numeric', NULL, NULL, 0, 1, GETDATE(), NULL);
+	SET IDENTITY_INSERT [dbo].[Identifiers] OFF
+END;
+
+IF NOT EXISTS(SELECT TOP 1 Id FROM Identifiers WHERE Name = N'HEI Registration Number')
+BEGIN
+	SET IDENTITY_INSERT [dbo].[Identifiers] ON
+	INSERT INTO [dbo].[Identifiers] ([Id], [Name], [Code], [DisplayName], [DataType], [PrefixType], [SuffixType], [DeleteFlag], [CreatedBy], [CreateDate] ,[AuditData]) VALUES (5, N'HEI Registration Number', N'HEIRegistration', N'HEI Registration Number', N'Numeric', NULL, NULL, 0, 1, GETDATE(), NULL);
+	SET IDENTITY_INSERT [dbo].[Identifiers] OFF
+END;
+
+IF NOT EXISTS(SELECT TOP 1 Id FROM Identifiers WHERE Name = N'Patient Number')
+BEGIN
+	SET IDENTITY_INSERT [dbo].[Identifiers] ON
+	INSERT INTO [dbo].[Identifiers] ([Id], [Name], [Code], [DisplayName], [DataType], [PrefixType], [SuffixType], [DeleteFlag], [CreatedBy], [CreateDate] ,[AuditData]) VALUES (6, N'Patient Number', N'PatientId', N'Patient Number', N'Numeric', NULL, NULL, 0, 1, GETDATE(), NULL);
+	SET IDENTITY_INSERT [dbo].[Identifiers] OFF
+END;
+
+IF NOT EXISTS(SELECT TOP 1 Id FROM ServiceAreaIdentifiers WHERE ServiceAreaId = 1)
+BEGIN
+	SET IDENTITY_INSERT [dbo].[ServiceAreaIdentifiers] ON
+	INSERT INTO [dbo].[ServiceAreaIdentifiers] ([Id] ,[ServiceAreaId] ,[IdentifierId] ,[RequiredFlag]) VALUES (1, 1, 1, 1);
+	SET IDENTITY_INSERT [dbo].[ServiceAreaIdentifiers] OFF
+END;
+
 DELETE FROM [dbo].[FacilityList]
 GO
 SET IDENTITY_INSERT [dbo].[FacilityList] ON 
