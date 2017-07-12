@@ -1017,7 +1017,7 @@
                 }
                 
                 //delay to show success message before redirect
-                <%--setTimeout(function() { window.location.href = '<%=ResolveClientUrl("~/CCC/OneTimeEvents/FamilyTesting.aspx") %>'; }, 2500);--%>
+                setTimeout(function() { window.location.href = '<%=ResolveClientUrl("~/CCC/OneTimeEvents/FamilyTesting.aspx") %>'; }, 2500);
             });
 
             $("#btnClose").click(function () {
