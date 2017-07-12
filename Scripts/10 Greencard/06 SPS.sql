@@ -62,6 +62,10 @@ GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SP_mst_PatientToGreencardRegistration]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[SP_mst_PatientToGreencardRegistration]
 GO
+/****** Object:  StoredProcedure [dbo].[FamilyTesting_To_Greencard]    Script Date: 5/9/2017 3:16:05 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[FamilyTesting_To_Greencard]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[FamilyTesting_To_Greencard]
+GO
 /****** Object:  StoredProcedure [dbo].[sp_getZScores]    Script Date: 5/9/2017 3:16:05 PM ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_getZScores]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[sp_getZScores]
@@ -609,7 +613,7 @@ BEGIN
 
  --if(@DateOfBirth is null)BEGIN SET @DateOfBirth='1989-06-15' END
     -- Insert statements for procedure here
- Insert Into Person(FirstName, MidName,LastName,Sex,Active,DeleteFlag,CreateDate,CreatedBy)
+ Insert Into Person(FirstName, MidName,LastName,Sex,DateOfBirth,DobPrecision,Active,DeleteFlag,CreateDate,CreatedBy)
  Values(
   ENCRYPTBYKEY(KEY_GUID('Key_CTC'),@FirstName),
   ENCRYPTBYKEY(KEY_GUID('Key_CTC'),@MidName),
@@ -3218,6 +3222,168 @@ End
 End
 
 
+GO
+/****** Object:  StoredProcedure [dbo].[FamilyTesting_To_Greencard]    Script Date: 7/12/2017 11:47:51 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[FamilyTesting_To_Greencard]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[FamilyTesting_To_Greencard] AS' 
+END
+GO
+-- =============================================
+-- Author: Felix
+-- Create date: 12-Jul-2017
+-- Description:	move family testing to greencard
+-- =============================================
+ALTER PROCEDURE [dbo].[FamilyTesting_To_Greencard]
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	DECLARE @Ptn_pk int, @RFirstName varbinary(max), @RLastName varbinary(max), @Sex int, @AgeYear int, @AgeMonth int,
+			@RelationshipDate datetime, @RelationshipType int, @HivStatus int, @HivCareStatus int, @RegistrationNo int,
+			@FileNo int, @ReferenceId int, @UserId int, @DeleteFlag int, @CreateDate datetime, @UpdateDate datetime,
+			@message varchar(100), @DOB datetime, @StartDate datetime, @PersonId int, @PatientId int, @RelationshipTypeId int,
+			@BaselineResult int, @HivStatusString varchar(20), @PatientMasterVisitId int, @VisitType int;
+
+	PRINT '-------- Family Testing Migration --------';  
+	exec pr_OpenDecryptedSession;
+
+	DECLARE familyTesting_cursor CURSOR FOR  
+	SELECT dbo.dtl_FamilyInfo.Ptn_pk, RFirstName, RLastName, Sex, AgeYear, AgeMonth, RelationshipDate, RelationshipType, HivStatus, HivCareStatus, RegistrationNo, FileNo, ReferenceId, dbo.dtl_FamilyInfo.UserId, DeleteFlag, dbo.dtl_FamilyInfo.CreateDate, dbo.dtl_FamilyInfo.UpdateDate, dbo.Lnk_PatientProgramStart.StartDate
+	FROM    dbo.dtl_FamilyInfo INNER JOIN dbo.Lnk_PatientProgramStart ON dbo.dtl_FamilyInfo.Ptn_pk = dbo.Lnk_PatientProgramStart.Ptn_pk
+	WHERE dbo.Lnk_PatientProgramStart.ModuleId = 203;
+
+	OPEN familyTesting_cursor;
+
+	FETCH NEXT FROM familyTesting_cursor   
+	INTO @ptn_pk, @RFirstName, @RLastName, @Sex, @AgeYear, @AgeMonth, @RelationshipDate, @RelationshipType, @HivStatus, @HivCareStatus, @RegistrationNo, @FileNo, @ReferenceId, @UserId, @DeleteFlag, @CreateDate, @UpdateDate, @StartDate
+
+	WHILE @@FETCH_STATUS = 0
+	BEGIN
+		BEGIN TRANSACTION
+
+		PRINT ' '  
+		SELECT @message = '----- Family Testing: ' + CAST(@ptn_pk as varchar(50));
+
+		IF @Sex IS NOT NULL
+			BEGIN
+				IF ((select top 1  Name from mst_Decode where id = @Sex) = 'Male' OR (select top 1 Name from mst_Decode where id = @Sex) = 'Female')
+					BEGIN
+						SET @Sex = (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName like '%gender%' and ItemName like + (select top 1  Name from mst_Decode where id = @Sex) + '%');
+					END
+				ELSE
+					SET @Sex = (select top 1  ItemId from LookupItemView where MasterName = 'Unknown' and ItemName = 'Unknown');
+			END
+		ELSE
+			SET @Sex = (select top 1  ItemId from LookupItemView where MasterName = 'Unknown' and ItemName = 'Unknown');
+
+		BEGIN
+			SET @DOB = DATEADD(year, -@AgeYear, @StartDate);
+			SET @DOB = DATEADD(month, -@AgeMonth, @DOB);
+		END;
+
+		IF @CreateDate IS NULL
+			BEGIN
+				SET @CreateDate = @StartDate;
+			END
+
+		INSERT INTO Person(FirstName, MidName, LastName, Sex, DateOfBirth, DobPrecision, Active, DeleteFlag, CreateDate, CreatedBy)
+		VALUES(@RFirstName, NULL, @RLastName, @Sex, @DOB, 1, 1, 0, @CreateDate, @UserId);
+
+		IF @@ERROR <> 0
+			BEGIN
+				-- Rollback the transaction
+				ROLLBACK
+
+				-- Raise an error and return
+				--RAISERROR ('Error in deleting employees in DeleteDepartment.', 16, 1)
+				PRINT 'Error Occurred inserting into person';
+				RETURN
+			END
+
+		SELECT @PersonId = SCOPE_IDENTITY();
+		SELECT @message = 'Created Person Id: ' + CAST(@PersonId as varchar(50));
+		PRINT @message;
+
+		SET @PatientId = (select Id from Patient where ptn_pk = @Ptn_pk);
+
+		IF @RelationshipType IS NOT NULL
+			BEGIN
+				IF EXISTS ((SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName like '%Relationship%' and ItemName like + '%' + (select top 1  Name from mst_Decode where id = @RelationshipType) + '%'))
+					BEGIN
+						SET @RelationshipTypeId = (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName like '%Relationship%' and ItemName like + '%' + (select top 1  Name from mst_Decode where id = @RelationshipType) + '%');
+					END
+				ELSE
+					SET @RelationshipTypeId = (select top 1  ItemId from LookupItemView where MasterName = 'Unknown' and ItemName = 'Unknown');
+			END
+		ELSE
+			SET @RelationshipTypeId = (select top 1  ItemId from LookupItemView where MasterName = 'Unknown' and ItemName = 'Unknown');
+
+
+		INSERT INTO [dbo].[PersonRelationship](PersonId, RelatedTo, RelationshipTypeId, DeleteFlag, CreatedBy, CreateDate)
+		VALUES(@PersonId, @PatientId, @RelationshipTypeId, 0, @UserId, @CreateDate);
+
+		IF @@ERROR <> 0
+			BEGIN
+				-- Rollback the transaction
+				ROLLBACK
+
+				-- Raise an error and return
+				--RAISERROR ('Error in deleting employees in DeleteDepartment.', 16, 1)
+				PRINT 'Error Occurred inserting into PersonRelationship';
+				RETURN
+			END
+
+		SELECT @message = 'Created PersonRelationship Id: ' + CAST(SCOPE_IDENTITY() as varchar(50));
+		PRINT @message;
+
+
+		SET @HivStatusString = (SELECT TOP 1 Name FROM mst_Decode WHERE CodeID=10 AND ID=@HivStatus);
+
+
+		SET @BaselineResult = CASE @HivStatusString  
+			 WHEN 'Positive' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='BaseLineHivStatus' AND ItemName like '%' + @HivStatusString + '%') 
+			 WHEN 'Negative' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='BaseLineHivStatus' AND ItemName like '%' + @HivStatusString + '%')   
+			 WHEN 'Unknown' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='BaseLineHivStatus' AND ItemName = 'Never Tested')
+			 ELSE (select TOP 1 ItemId from LookupItemView where MasterName = 'Unknown' and ItemName = 'Unknown')
+		  END
+
+		SET @VisitType = (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='VisitType' AND ItemName='Enrollment');
+
+		SET @PatientMasterVisitId = (SELECT TOP 1 Id FROM PatientMasterVisit where VisitType = @VisitType and PatientId = @PatientId);
+
+		INSERT INTO HIVTesting(PersonId, BaselineResult, BaselineDate, TestingDate, TestingResult, ReferredToCare, CCCNumber, EnrollmentId, DeleteFlag, CreatedBy, CreateDate, AuditData, PatientMasterVisitId)
+		VALUES(@PersonId, @BaselineResult, @CreateDate, NULL, 0, 0, NULL, 0, 0, @UserId, @CreateDate, NULL, @PatientMasterVisitId);
+
+		IF @@ERROR <> 0
+			BEGIN
+				-- Rollback the transaction
+				ROLLBACK
+
+				-- Raise an error and return
+				--RAISERROR ('Error in deleting employees in DeleteDepartment.', 16, 1)
+				PRINT 'Error Occurred inserting into HIVTesting';
+				RETURN
+			END
+
+		SELECT @message = 'Created HIVTesting Id: ' + CAST(SCOPE_IDENTITY() as varchar(50));
+		PRINT @message;
+
+	END;
+
+	FETCH NEXT FROM familyTesting_cursor   
+	INTO @ptn_pk, @RFirstName, @RLastName, @Sex, @AgeYear, @AgeMonth, @RelationshipDate, @RelationshipType, @HivStatus, @HivCareStatus, @RegistrationNo, @FileNo, @ReferenceId, @UserId, @DeleteFlag, @CreateDate, @UpdateDate, @StartDate
+
+	CLOSE familyTesting_cursor;  
+	DEALLOCATE familyTesting_cursor;  
+END
 
 
 GO
