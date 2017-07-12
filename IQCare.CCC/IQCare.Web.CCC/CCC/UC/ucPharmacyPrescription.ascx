@@ -954,7 +954,7 @@
                         var serverData = data.d;
                         $("#<%=regimenLine.ClientID%>").val(serverData[0][0]);
                         selectRegimens(serverData[0][0]);
-                        loadDataContinueCurrentTreatment();
+                        //loadDataContinueCurrentTreatment();
 
                         function waitForRegimens(callback) {
                             window.setTimeout(function () {  //acting like this is an Ajax call
