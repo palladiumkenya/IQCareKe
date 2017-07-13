@@ -11,7 +11,6 @@
         <div class="col-md-12 bs-callout bs-callout-info" id="FamilyTestingDetails">
             <div class="col-md-12" id="FamilyTestingForm" data-parsley-validate="true" data-show-errors="true">
                 <div class="col-md-12">
-
                     <div class="col-md-12">
                         <h3>Person Details</h3><hr />
                     </div>
