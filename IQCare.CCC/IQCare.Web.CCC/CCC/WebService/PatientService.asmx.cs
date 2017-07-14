@@ -16,9 +16,26 @@ using IQCare.CCC.UILogic.Baseline;
 using IQCare.CCC.UILogic.Screening;
 using Microsoft.JScript;
 using Convert = System.Convert;
+using Newtonsoft.Json;
+using System.Web;
 
 namespace IQCare.Web.CCC.WebService
 {
+    public class FamilyMembers
+    {
+        public string firstName { get; set; }
+        public string middleName { get; set; }
+        public string lastName { get; set; }
+        public int sex { get; set; }
+        public string dob { get; set; }
+        public int relationshipId { get; set; }
+        public int baselineHivStatusId { get; set; }
+        public string baselineHivStatusDate { get; set; }
+        public string hivTestingresultId { get; set; }
+        public string hivTestingresultDate { get; set; }
+        public bool cccreferal { get; set; }
+        public string cccReferalNumber { get; set; }
+    }
     /// <summary>
     /// Summary description for PatientService
     /// </summary>
@@ -119,61 +136,87 @@ namespace IQCare.Web.CCC.WebService
             return Msg;
         }
 
-        [WebMethod]
-        public string AddPatientFamilyTesting(int patientId, int patientMasterVisitId, string firstName, string middleName, string lastName, int sex, string dob, int relationshipId, int baselineHivStatusId, DateTime baselineHivStatusDate, string hivTestingresultId, string hivTestingresultDate, bool cccreferal, string cccReferalNumber,  int userId)
+        [WebMethod(EnableSession = true)]
+        public string AddPatientFamilyTesting(string familyMembers)
         {
-            firstName = GlobalObject.unescape(firstName);
-            middleName = GlobalObject.unescape(middleName);
-            lastName = GlobalObject.unescape(lastName);
-            int hivresultId = hivTestingresultId == "" ? 0 : Convert.ToInt32(hivTestingresultId);
+            int patientId; int patientMasterVisitId; string firstName; string middleName; string lastName; int sex; string dob; int relationshipId; int baselineHivStatusId; string baselineHivStatusDate; string hivTestingresultId; string hivTestingresultDate; bool cccreferal; string cccReferalNumber;  int userId;
 
-            PatientFamilyTesting patientAppointment = new PatientFamilyTesting()
+            FamilyMembers[] familyMembrs = JsonConvert.DeserializeObject<FamilyMembers[]>(familyMembers);
+            int count = familyMembrs.Length;
+            for(int i=0; i < count; i++)
             {
-                PatientId = patientId,
-                PatientMasterVisitId = patientMasterVisitId,
-                FirstName = firstName,
-                MiddleName = middleName,
-                LastName = lastName,
-                Sex = sex,
-                DateOfBirth = DateTime.Parse(dob),
-                RelationshipId = relationshipId,
-                BaseLineHivStatusId = baselineHivStatusId,
-                BaselineHivStatusDate = baselineHivStatusDate,
-                //HivTestingResultsDate = hivTestingresultDate,
-                HivTestingResultsId = hivresultId,
-                CccReferal = cccreferal,
-                CccReferaalNumber = cccReferalNumber,
+                patientId = int.Parse(HttpContext.Current.Session["PatientPK"].ToString());
+                patientMasterVisitId = int.Parse(Session["PatientMasterVisitId"].ToString());
+                userId = Convert.ToInt32(Session["AppUserId"]);
 
-            };
-            if (hivTestingresultDate != "")
-                patientAppointment.HivTestingResultsDate = DateTime.Parse(hivTestingresultDate);
-            try
-            {
-                var testing = new PatientFamilyTestingManager();
-                var fam =
-                    testing.GetPatientFamilyList(patientId)
-                        .Where(
-                            x =>
-                                x.FirstName == firstName && x.MiddleName == middleName && x.LastName == lastName &&
-                                x.RelationshipId == relationshipId);
-                if (!fam.Any())
+                firstName = GlobalObject.unescape(familyMembrs[i].firstName);
+                middleName = GlobalObject.unescape(familyMembrs[i].middleName);
+                lastName = GlobalObject.unescape(familyMembrs[i].lastName);
+                int hivresultId = familyMembrs[i].hivTestingresultId == "" ? 0 : Convert.ToInt32(familyMembrs[i].hivTestingresultId);
+                sex = familyMembrs[i].sex;
+                dob = familyMembrs[i].dob;
+                relationshipId = familyMembrs[i].relationshipId;
+                baselineHivStatusId = familyMembrs[i].baselineHivStatusId;
+                baselineHivStatusDate = familyMembrs[i].baselineHivStatusDate;
+                cccreferal = familyMembrs[i].cccreferal;
+                cccReferalNumber = familyMembrs[i].cccReferalNumber;
+                hivTestingresultDate = familyMembrs[i].hivTestingresultDate;
+
+                PatientFamilyTesting patientAppointment = new PatientFamilyTesting()
                 {
-                    Result = testing.AddPatientFamilyTestings(patientAppointment, userId);
-                    if (Result > 0)
+                    PatientId = patientId,
+                    PatientMasterVisitId = patientMasterVisitId,
+                    FirstName = firstName,
+                    MiddleName = middleName,
+                    LastName = lastName,
+                    Sex = sex,
+                    DateOfBirth = DateTime.Parse(dob),
+                    RelationshipId = relationshipId,
+                    BaseLineHivStatusId = baselineHivStatusId,
+                    //BaselineHivStatusDate = baselineHivStatusDate,
+                    //HivTestingResultsDate = hivTestingresultDate,
+                    HivTestingResultsId = hivresultId,
+                    CccReferal = cccreferal,
+                    CccReferaalNumber = cccReferalNumber,
+
+                };
+
+                if (hivTestingresultDate != "")
+                    patientAppointment.HivTestingResultsDate = DateTime.Parse(hivTestingresultDate);
+                if (baselineHivStatusDate != "")
+                    patientAppointment.BaselineHivStatusDate = DateTime.Parse(baselineHivStatusDate);
+
+
+                try
+                {
+                    var testing = new PatientFamilyTestingManager();
+                    var fam =
+                        testing.GetPatientFamilyList(patientId)
+                            .Where(
+                                x =>
+                                    x.FirstName == firstName && x.MiddleName == middleName && x.LastName == lastName &&
+                                    x.RelationshipId == relationshipId);
+                    if (!fam.Any())
                     {
-                        Msg = "Patient family testing Added Successfully!";
+                        Result = testing.AddPatientFamilyTestings(patientAppointment, userId);
+                        if (Result > 0)
+                        {
+                            Msg = "Patient family testing Added Successfully!";
+                        }
                     }
+                    else
+                    {
+                        Msg = firstName + " " + middleName + " " + lastName + " Not saved. Family member already exists!";
+                    }
+
                 }
-                else
+                catch (Exception e)
                 {
-                    Msg = "Not saved. Family member already exists!";
+                    Msg = e.Message;
                 }
-                
             }
-            catch (Exception e)
-            {
-                Msg = e.Message;
-            }
+
+
             return Msg;
         }
 
