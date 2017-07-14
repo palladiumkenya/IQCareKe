@@ -767,7 +767,13 @@
        }
 
 
-    function saveUpdatePharmacy() {
+       function saveUpdatePharmacy() {
+        $('#PharmacySection').parsley().destroy();
+        $('#PharmacySection').parsley({
+            excluded:
+            "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
+        });
+
         if ($('#PharmacySection').parsley().validate()) {
 
             var treatmentProgram = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").val();
@@ -792,6 +798,9 @@
 
             if (regimen === undefined)
                 regimen = '0';
+            if (treatmentPlanReason == typeof undefined || treatmentPlanReason === treatmentPlanReason) {
+                treatmentPlanReason = 0;
+            }
 
 
             var allAbbr = "";

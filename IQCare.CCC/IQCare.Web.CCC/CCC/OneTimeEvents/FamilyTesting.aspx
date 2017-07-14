@@ -1011,12 +1011,11 @@
                     toastr.error("error", "Please insert at least One(1) family member");
                     return false;
                 }
-                for (var i = 0, len = familyMembers.length; i < len; i++) {
-                    addFamilyTesting(familyMembers[i]);
-                }
-                
-                //delay to show success message before redirect
-                setTimeout(function() { window.location.href = '<%=ResolveClientUrl("~/CCC/OneTimeEvents/FamilyTesting.aspx") %>'; }, 2500);
+                //for (var i = 0, len = familyMembers.length; i < len; i++) {
+                //    addFamilyTesting(familyMembers[i]);
+                //}
+
+                addFamilyTesting(familyMembers);
             });
 
             $("#btnClose").click(function () {
@@ -1266,7 +1265,7 @@
         }
 
         function addFamilyTesting(testing) {
-            var firstName = testing.firstName;
+            <%--var firstName = testing.firstName;
             var middleName = testing.middleName;
             var lastName = testing.lastName;
             var sex = testing.sex;
@@ -1280,15 +1279,21 @@
             var cccReferalNumber = testing.cccReferalNumber;
             var patientId = <%=PatientId%>;
             var patientMasterVisitId = <%=PatientMasterVisitId%>;
-            var userId = <%=UserId%>;
+            var userId = <%=UserId%>;--%>
+
+            var familyMembers = JSON.stringify(testing);
+
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientService.asmx/AddPatientFamilyTesting",
-                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','firstName': '" + firstName + "','middleName': '" + middleName + "','lastName': '" + lastName + "','sex': '" + sex + "','dob': '" + moment(dob).format('DD-MMM-YYYY') + "','relationshipId': '" + relationshipId + "','baselineHivStatusId': '" + baselineHivStatusId + "','baselineHivStatusDate': '" + baselineHivStatusDate + "','hivTestingresultId': '" + hivTestingresultId + "','hivTestingresultDate': '" + hivTestingresultDate + "','cccreferal': '" + cccreferal + "','cccReferalNumber': '" + cccReferalNumber + "','userId': '" + userId +"'}",
+                data: "{'familyMembers': '" + familyMembers +"'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
                     toastr.success(response.d, "Family testing saved successfully");
+
+                    //delay to show success message before redirect
+                    setTimeout(function() { window.location.href = '<%=ResolveClientUrl("~/CCC/OneTimeEvents/FamilyTesting.aspx") %>'; }, 2500);
                 },
                 error: function (response) {
                     toastr.error(response.d, "Family testing not saved");

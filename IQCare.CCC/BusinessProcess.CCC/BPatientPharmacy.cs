@@ -25,19 +25,19 @@ namespace BusinessProcess.CCC
                 ClsUtility.Init_Hashtable();
                 ClsUtility.AddParameters("@PatientMasterVisitID", SqlDbType.Int, PatientMasterVisitID);
                 ClsUtility.AddParameters("@PatientId", SqlDbType.Int, PatientId);
-                ClsUtility.AddParameters("@LocationID", SqlDbType.VarChar, LocationID);
-                ClsUtility.AddParameters("@OrderedBy", SqlDbType.VarChar, OrderedBy);
-                ClsUtility.AddParameters("@UserID", SqlDbType.VarChar, UserID);
+                ClsUtility.AddParameters("@LocationID", SqlDbType.Int, LocationID);
+                ClsUtility.AddParameters("@OrderedBy", SqlDbType.Int, OrderedBy);
+                ClsUtility.AddParameters("@UserID", SqlDbType.Int, UserID);
                 ClsUtility.AddParameters("@RegimenType", SqlDbType.VarChar, RegimenType);
-                ClsUtility.AddParameters("@DispensedBy", SqlDbType.VarChar, DispensedBy);
-                ClsUtility.AddParameters("@RegimenLine", SqlDbType.VarChar, RegimenLine);
-                ClsUtility.AddParameters("@ModuleID", SqlDbType.VarChar, ModuleID);
+                ClsUtility.AddParameters("@DispensedBy", SqlDbType.Int, DispensedBy);
+                ClsUtility.AddParameters("@RegimenLine", SqlDbType.Int, RegimenLine);
+                ClsUtility.AddParameters("@ModuleID", SqlDbType.Int, ModuleID);
 
-                ClsUtility.AddParameters("@TreatmentProgram", SqlDbType.VarChar, TreatmentProgram);
-                ClsUtility.AddParameters("@PeriodTaken", SqlDbType.VarChar, PeriodTaken);
-                ClsUtility.AddParameters("@TreatmentPlan", SqlDbType.VarChar, TreatmentPlan);
-                ClsUtility.AddParameters("@TreatmentPlanReason", SqlDbType.VarChar, TreatmentPlanReason);
-                ClsUtility.AddParameters("@Regimen", SqlDbType.VarChar, Regimen);
+                ClsUtility.AddParameters("@TreatmentProgram", SqlDbType.Int, TreatmentProgram);
+                ClsUtility.AddParameters("@PeriodTaken", SqlDbType.Int, PeriodTaken);
+                ClsUtility.AddParameters("@TreatmentPlan", SqlDbType.Int, TreatmentPlan);
+                ClsUtility.AddParameters("@TreatmentPlanReason", SqlDbType.Int, TreatmentPlanReason);
+                ClsUtility.AddParameters("@Regimen", SqlDbType.Int, Regimen);
                 ClsUtility.AddParameters("@PrescribedDate", SqlDbType.VarChar, prescriptionDate);
                 ClsUtility.AddParameters("@DispensedDate", SqlDbType.VarChar, dispensedDate);
 
