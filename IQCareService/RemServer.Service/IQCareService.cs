@@ -134,7 +134,7 @@ namespace RemServer.Service
             string appointmentTaskName = "Appointment.Update";
             string backupTaskName = "Database.Backup";
             string iqtoolTaskName = "IQTools.Update";
-
+			string bluecardSyncTaskName ="Bluecard.Sync";
             if (backupInProgress == false)
             {
                 //clean up the waiting list
@@ -177,7 +177,27 @@ namespace RemServer.Service
                 {
                     theLog.WriteEntry(ex.Message + ex.StackTrace);
                 }
-
+				//Sync bluecard with greencard
+				try
+                {
+                    ClsObject obj = new ClsObject();
+                    ScheduledTask syncTask = (tasks.FirstOrDefault(t => t.TaskName == bluecardSyncTaskName));
+                    if (syncTask != null)
+                    {
+                        if (syncTask.NextRunDate == nullDate || syncTask.NextRunDate < DateTime.Now)
+                        {
+                            int syncOffset = 60;
+                           
+                            UpdateNextRunDate(syncTask.TaskName, syncOffset);
+                            //call procedure
+                            DataTable dt = (DataTable)obj.ReturnObject(ClsUtility.theParams, "BlueCardGreencard_sync", ClsUtility.ObjectEnum.DataTable);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    theLog.WriteEntry(ex.Message + ex.StackTrace);
+                }
                 //update appointments
                 try
                 {

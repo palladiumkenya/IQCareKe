@@ -25,10 +25,10 @@ namespace Application.Presentation
 
         public GblIQCare()
         {
-            AppVersion = "Ver 1.0.0.1 Kenya HMIS";
-            ReleaseDate = "01-Jun-2017";
-            VersionName = "Kenya HMIS Ver 1.0.0.1";
-            DbVersion = "Ver 1.0.0.1 Kenya HMIS";
+            AppVersion = "Ver 1.0.0.2 Kenya HMIS";
+            ReleaseDate = "17-Jul-2017";
+            VersionName = "Kenya HMIS Ver 1.0.0.2";
+            DbVersion = "Ver 1.0.0.2 Kenya HMIS";
         }
         public static int iFormMode;
 
