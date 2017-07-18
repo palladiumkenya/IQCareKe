@@ -14,7 +14,7 @@
                                 <label class="control-label pull-left">Consent Type</label>
                             </div>
                             <div class="col-md-12">
-                                <select runat="server" id="ConsentType" class="form-control input-sm" required="true" clientidmode="Static"></select>
+                                <select runat="server" id="ConsentType" class="form-control input-sm" required="true" clientidmode="Static" data-parsley-required="true" data-parsley-min="1" data-parsley-min-message="Please select Consent Type"></select>
                             </div>
                         </div>
                     </div>
@@ -24,7 +24,7 @@
                         </div>
                         <div class="datepicker fuelux form-group" id="DateofConsent">
                             <div class="input-group">
-                                <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="ConsentDate"></asp:TextBox>
+                                <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="ConsentDate" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
                                 <div class="input-group-btn">
                                     <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                         <span class="glyphicon glyphicon-calendar"></span>
@@ -132,7 +132,7 @@
                         <table class="table table-hover" id="tblPatientConsent" clientidmode="Static" runat="server">
                             <thead>
                                 <tr>
-                                    <th class="text-primary">#</th>
+                                    <th class="text-primary" style='display:none;'>#</th>
                                     <th><span class="text-primary" aria-hidden="true">Consent Type</span> </th>
                                     <th><span class="text-primary" aria-hidden="true">Consent Date</span> </th>
                                     <th><span class="text-danger text-primary pull-right">Action</span></th>
@@ -199,7 +199,7 @@
                     var consentTypeId = $("#<%=ConsentType.ClientID%>").val();
                     var consentType = $("#ConsentType :selected").text();
                     var consentDate = $("#<%=ConsentDate.ClientID%>").val();
-                        var table = "<tr><td align='left'></td><td align='left'>" +
+                    var table = "<tr><td align='left' style='display:none;'>" + consentTypeId + "</td><td align='left'>" +
                             consentType +
                             "</td><td align='left'>" +
                             consentDate +
@@ -221,7 +221,7 @@
 
             $("#btnSave").click(function () {
                 if (patientConsent.length < 1) {
-                    toastr.error("error", "Please insert at least One(1) family member");
+                    toastr.error("error", "Please insert at least One(1) consent type");
                     return false;
                 }
                 for (var i = 0, len = patientConsent.length; i < len; i++) {
@@ -237,6 +237,14 @@
 
             $("#tblPatientConsent").on('click', '.btnDelete', function () {
                 $(this).closest('tr').remove();
+                var x = $(this).closest('tr').find('td').eq(0).html();
+                $.each(patientConsent, function (key, value) {
+                    //console.log(key);
+                    console.log(value);
+                    if (typeof (value.consentType) !== "undefined" && value.consentType == x) {
+                        patientConsent.splice(key, 1);
+                    }
+                });
             });
 
             $("#btnReset").click(function () {

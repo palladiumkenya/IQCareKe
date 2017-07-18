@@ -425,7 +425,7 @@
                             labtests[key] = val;
                         }
 
-                        console.log(labtests);
+                        //console.log(labtests);
                         awesomplete.list = labtests;
                     }
                 });
@@ -517,6 +517,7 @@
                     $("#orderReason").prop("disabled", false);
                 }
             });
+
 
             <%--$("#btnClose").click(function (e) {
                window.location.href = '<%=ResolveClientUrl("../Patient/patientHome.aspx") %>';

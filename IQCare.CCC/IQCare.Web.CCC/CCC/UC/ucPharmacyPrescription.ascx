@@ -366,7 +366,7 @@
         dispenseDate = 0;
     
     $(document).ready(function () {
-        treatmentProgram();
+        
         //alert(pmscmSamePointDispense);
         if (pmscmSamePointDispense === "PM/SCM With Same point dispense") {
             pmscmFlag = "1";
@@ -444,6 +444,8 @@
             setTimeout(function () {
                 window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientHome.aspx")%>';}, 2000);
         });
+
+        treatmentProgram();
     });
 
     $(function () {
@@ -649,9 +651,9 @@
             $("#<%=ddlSwitchInterruptionReason.ClientID%>").prop('disabled', false);
             $("#<%=ddlSwitchInterruptionReason.ClientID%>").val("");
             $("#<%=regimenLine.ClientID%>").prop('disabled', false);
-            $("#<%=regimenLine.ClientID%>").val("");
+           <%-- $("#<%=regimenLine.ClientID%>").val("");--%>
             $("#<%=ddlRegimen.ClientID%>").prop('disabled', false);
-            $("#<%=ddlRegimen.ClientID%>").val("");
+            <%--$("#<%=ddlRegimen.ClientID%>").val("");--%>
         } else if (startTreatment == "false" && valSelected == "ART") {
             $("#<%=ddlTreatmentPlan.ClientID%> option").each(function () {
                 if ($(this).text() == "Start Treatment") {
@@ -661,9 +663,9 @@
                     $("#<%=ddlTreatmentPlan.ClientID%>").prop("disabled", true);
                     drugSwitchInterruptionReason();
                     $("#<%=regimenLine.ClientID%>").prop('disabled', false);
-                    $("#<%=regimenLine.ClientID%>").val("");
+                    <%--$("#<%=regimenLine.ClientID%>").val("");--%>
                     $("#<%=ddlRegimen.ClientID%>").prop('disabled', false);
-                    $("#<%=ddlRegimen.ClientID%>").val("");
+                  <%--  $("#<%=ddlRegimen.ClientID%>").val("");--%>
                 }
             });
         } else if (startTreatment == "true" && valSelected == "ART") {
@@ -685,9 +687,9 @@
             $("#<%=ddlSwitchInterruptionReason.ClientID%>").prop('disabled', true);
             $("#<%=ddlSwitchInterruptionReason.ClientID%>").val("");
             $("#<%=regimenLine.ClientID%>").prop('disabled', true);
-            $("#<%=regimenLine.ClientID%>").val("");
+            <%--$("#<%=regimenLine.ClientID%>").val("");--%>
             $("#<%=ddlRegimen.ClientID%>").prop('disabled', true);
-            $("#<%=ddlRegimen.ClientID%>").val("");
+           <%-- $("#<%=ddlRegimen.ClientID%>").val("");--%>
         } else {
             $("#ddlPeriodTaken").val("0");
             $("#<%=ddlPeriodTaken.ClientID%>").prop('disabled', true);
@@ -697,9 +699,9 @@
             $("#<%=ddlSwitchInterruptionReason.ClientID%>").prop('disabled', false);
             $("#<%=ddlSwitchInterruptionReason.ClientID%>").val("");
             $("#<%=regimenLine.ClientID%>").prop('disabled', false);
-            $("#<%=regimenLine.ClientID%>").val("");
+           <%-- $("#<%=regimenLine.ClientID%>").val("");--%>
             $("#<%=ddlRegimen.ClientID%>").prop('disabled', false);
-            $("#<%=ddlRegimen.ClientID%>").val("");
+            <%--$("#<%=ddlRegimen.ClientID%>").val("");--%>
         }
     }
 
@@ -830,7 +832,9 @@
             catch (ex) { }
             //////////////////////////////////////////////////////////////////
             allAbbr = allAbbr.replace(/\/$/, "");
-            
+
+            console.log(allAbbr);
+
             var sumAllAbbr = 0;
             var sumSelectedRegimen = 0;
             try {
@@ -950,7 +954,8 @@
     function getCurrentRegimen() {
         var treatmentPlan = $("#<%=ddlTreatmentPlan.ClientID%>").find(":selected").text();
         var treatmentPlanId = $("#<%=ddlTreatmentPlan.ClientID%>").find(":selected").val();
-        
+
+        console.log("here");
 
         if (treatmentPlan == "Continue current treatment") {
             $.ajax({

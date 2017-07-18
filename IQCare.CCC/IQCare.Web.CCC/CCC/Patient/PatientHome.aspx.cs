@@ -237,8 +237,8 @@ namespace IQCare.Web.CCC.Patient
                     var ptnTreatmentBaseline = patientTreatmentManager.GetPatientbaselineRegimenLookup(PatientId);
                     if (ptnTreatmentInitiation != null)
                     {
-                        lblFirstline.Text = ptnTreatmentBaseline.CreateDate.ToString("dd-MMM-yyyy");
-                        lblcohort.Text = ptnTreatmentBaseline.CreateDate.ToString("MMM") + "-" + ptnTreatmentInitiation.CreateDate.Year;
+                        lblFirstline.Text = ptnTreatmentBaseline.DispensedByDate.ToString("dd-MMM-yyyy");
+                        lblcohort.Text = ptnTreatmentBaseline.DispensedByDate.ToString("MMM") + "-" + ptnTreatmentInitiation.CreateDate.Year;
                         lblRegimenName.Text = ptnTreatmentInitiation.Regimen.ToString();
                         lblCurrentRegimen.Text = "<span class='label label-success'>" + ptnTreatmentBaseline.Regimen.ToString() + "</span>";
                         lblARTInitiationDate.Text = ptnTreatmentBaseline.CreateDate.ToString("dd-MMM-yyyy");
