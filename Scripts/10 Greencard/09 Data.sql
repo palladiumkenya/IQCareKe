@@ -4,7 +4,7 @@ UPDATE AppAdmin
 SET
 	AppVer='Ver 1.0.0.2 Kenya HMIS',
 	DBVer='Ver 1.0.0.2 Kenya HMIS',
-	RelDate='17-Jul-2017',
+	RelDate='01-Jul-2017',
 	VersionName='Kenya HMIS Ver 1.0.0.2'
 	
 
