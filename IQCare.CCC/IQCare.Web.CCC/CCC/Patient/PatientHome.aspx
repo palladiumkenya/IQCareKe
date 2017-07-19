@@ -26,9 +26,7 @@
     <div class="col-md-12 col-xs-12 col-sm-12">
         <div class="panel panel-default">
             <div class="panel-body">
-                <div class="col-md-12">
-
-                    <div class="col-md-11">
+                <div class="row">
                         <div class="col-md-3 col-xs-12 col-sm-12">
                             <div class="col-md-12 col-xs-12 col-sm-12">
                                 <h5 class="pull-left">
@@ -70,7 +68,6 @@
                                     <asp:Label runat="server" ClientIDMode="Static" ID="lblAdheranceStatus" CssClass="text-info pull-left"> </asp:Label></h6>
                             </div>
                         </div>
-                    </div>
                 </div>
                 <!-- .col-md-12 -->
 
@@ -97,7 +94,7 @@
                 <div id="Registration" class="tab-pane">
                     <div class="col-md-12  col-xs-12">
                         <div class="col-md-4 col-xs-8 col-sm-8">
-                            <asp:HyperLink ID="updateEnrollment" ClientIDMode="Static" runat="server" CssClass="pull-left label label-warning" aria-hidden="true" NavigateUrl="~/CCC/Enrollment/ServiceEnrollment.aspx"><span class="fa fa-2x fa-pencil-square-o">Update Enrollment</span></asp:HyperLink>
+                            <asp:HyperLink ID="updateEnrollment" ClientIDMode="Static" runat="server" CssClass="pull-left btn btn-info btn-sm" aria-hidden="true" NavigateUrl="~/CCC/Enrollment/ServiceEnrollment.aspx"><span class="fa fa-2x fa-pencil-square-o">Update Enrollment</span></asp:HyperLink>
                         </div>
                         <div class="col-md-8 col-xs-8 col-sm-8">
                             &nbsp;
@@ -1564,7 +1561,6 @@
                                 } else{
                                     $("#<%=lblcd4.ClientID%>").text("Not Taken");
                                 }
-                               
 
                                 if (patientType === 'Transfer-In') {
                                     /*check if patient patient is new or transferIN*/
@@ -1574,8 +1570,8 @@
                                         $("#<%=lblheight.ClientID%>").text(itemList.Height);
                                         $("#<%=lblbmi.ClientID%>").text(itemList.BMI.toFixed(2));
                                     }
-                                }else if (patientType === 'New') {
-
+                                }else if (patientType == 'New') {
+                                    //console.log("new");
                                     $.ajax({
                                         type: "POST",
                                         url: "../WebService/PatientBaselineService.asmx/GetNewPatientBaselineVitals",
