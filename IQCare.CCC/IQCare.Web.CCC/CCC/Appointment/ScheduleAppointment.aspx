@@ -127,7 +127,7 @@
                                 <label class="control-label pull-left">Service Area</label>
                             </div>
                             <div class="col-md-12 pull-right">
-                                <asp:DropDownList runat="server" ID="ServiceArea" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1" />
+                                <asp:DropDownList runat="server" ID="ServiceArea" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1" data-parsley-min-message="Select the service area"/>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -136,7 +136,7 @@
                                     <label for="reason" class="control-label pull-left">Reason</label>
                                 </div>
                                 <div class="col-md-12">
-                                    <asp:DropDownList runat="server" ID="Reason" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1" />
+                                    <asp:DropDownList runat="server" ID="Reason" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1" data-parsley-min-message="Select the reason"/>
                                 </div>
                             </div>
                         </div>
@@ -148,7 +148,7 @@
                                     <label for="reason" class="control-label pull-left">Differentiated Care</label>
                                 </div>
                                 <div class="col-md-12">
-                                    <asp:DropDownList runat="server" ID="DifferentiatedCare" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1" />
+                                    <asp:DropDownList runat="server" ID="DifferentiatedCare" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1" data-parsley-min-message="Select differentiated care"/>
                                 </div>
                             </div>
                         </div>
@@ -225,7 +225,7 @@
 
     <script type="text/javascript">
         $('#PersonAppointmentDate').datepicker({
-            allowPastDates: true,
+            allowPastDates: false,
             Date: 0,
             momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
         });

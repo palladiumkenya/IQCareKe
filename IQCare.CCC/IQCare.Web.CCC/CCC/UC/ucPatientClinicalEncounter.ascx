@@ -406,7 +406,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-12 form-group" clientidmode="Static" id="IcfForm">
-                                                
+
                                                 <div class="col-md-3 form-group">
                                                     <div class="col-md-12">
                                                         <label class="control-label pull-left">Cough</label>
@@ -1664,11 +1664,169 @@
                         </div>
 
                         <div class="col-md-12">
-                            <button type="button" class="btn btn-info btn-sm pull-left" data-toggle="modal" data-target="#pharmacyModal" id="prescribeDrugs">Prescibe Drugs</button>
-                            <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" data-toggle="modal" id="AddAppointment" onclientclick="return false">Add Appointment</button>
-
+                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#pharmacyModal" id="prescribeDrugs">Prescibe Drugs</button>
                         </div>
-
+                        <div class="col-md-12">
+                            <div class="col-md-12" id="AppointmentForm" data-parsley-validate="true" data-show-errors="true">
+                                <div class="col-md-12 form-group">
+                                    <label class="control-label pull-left">Schedule Appointment</label>
+                                </div>
+                                   <div class="col-md-12 form-group">
+                                        <div class="col-md-12">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <label class="control-label pull-left">Date</label>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="datepicker fuelux form-group" id="PersonAppointmentDate">
+                                                            <div class="input-group">
+                                                                <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="AppointmentDate"></asp:TextBox>
+                                                                <div class="input-group-btn">
+                                                                    <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
+                                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                                        <span class="sr-only">Toggle Calendar</span>
+                                                                    </button>
+                                                                    <div class="dropdown-menu dropdown-menu-right datepicker-calendar-wrapper" role="menu">
+                                                                        <div class="datepicker-calendar">
+                                                                            <div class="datepicker-calendar-header">
+                                                                                <button type="button" class="prev"><span class="glyphicon glyphicon-chevron-left input-sm"></span><span class="sr-only">Previous Month</span></button>
+                                                                                <button type="button" class="next"><span class="glyphicon glyphicon-chevron-right input-sm"></span><span class="sr-only">Next Month</span></button>
+                                                                                <button type="button" class="title" data-month="11" data-year="2014">
+                                                                                    <span class="month">
+                                                                                        <span data-month="0">January</span>
+                                                                                        <span data-month="1">February</span>
+                                                                                        <span data-month="2">March</span>
+                                                                                        <span data-month="3">April</span>
+                                                                                        <span data-month="4">May</span>
+                                                                                        <span data-month="5">June</span>
+                                                                                        <span data-month="6">July</span>
+                                                                                        <span data-month="7">August</span>
+                                                                                        <span data-month="8">September</span>
+                                                                                        <span data-month="9">October</span>
+                                                                                        <span data-month="10">November</span>
+                                                                                        <span data-month="11" class="current">December</span>
+                                                                                    </span><span class="year">2017</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <table class="datepicker-calendar-days">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th>Su</th>
+                                                                                        <th>Mo</th>
+                                                                                        <th>Tu</th>
+                                                                                        <th>We</th>
+                                                                                        <th>Th</th>
+                                                                                        <th>Fr</th>
+                                                                                        <th>Sa</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody></tbody>
+                                                                            </table>
+                                                                            <div class="datepicker-calendar-footer">
+                                                                                <button type="button" class="datepicker-today">Today</button>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="datepicker-wheels" aria-hidden="true">
+                                                                            <div class="datepicker-wheels-month">
+                                                                                <h2 class="header">Month</h2>
+                                                                                <ul>
+                                                                                    <li data-month="0">
+                                                                                        <button type="button">Jan</button></li>
+                                                                                    <li data-month="1">
+                                                                                        <button type="button">Feb</button></li>
+                                                                                    <li data-month="2">
+                                                                                        <button type="button">Mar</button></li>
+                                                                                    <li data-month="3">
+                                                                                        <button type="button">Apr</button></li>
+                                                                                    <li data-month="4">
+                                                                                        <button type="button">May</button></li>
+                                                                                    <li data-month="5">
+                                                                                        <button type="button">Jun</button></li>
+                                                                                    <li data-month="6">
+                                                                                        <button type="button">Jul</button></li>
+                                                                                    <li data-month="7">
+                                                                                        <button type="button">Aug</button></li>
+                                                                                    <li data-month="8">
+                                                                                        <button type="button">Sep</button></li>
+                                                                                    <li data-month="9">
+                                                                                        <button type="button">Oct</button></li>
+                                                                                    <li data-month="10">
+                                                                                        <button type="button">Nov</button></li>
+                                                                                    <li data-month="11">
+                                                                                        <button type="button">Dec</button></li>
+                                                                                </ul>
+                                                                            </div>
+                                                                            <div class="datepicker-wheels-year">
+                                                                                <h2 class="header">Year</h2>
+                                                                                <ul></ul>
+                                                                            </div>
+                                                                            <div class="datepicker-wheels-footer clearfix">
+                                                                                <button type="button" class="btn datepicker-wheels-back"><span class="glyphicon glyphicon-arrow-left"></span><span class="sr-only">Return to Calendar</span></button>
+                                                                                <button type="button" class="btn datepicker-wheels-select">Select <span class="sr-only">Month and Year</span></button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="col-md-12">
+                                                    <label class="control-label pull-left">Service Area</label>
+                                                </div>
+                                                <div class="col-md-12 pull-right">
+                                                    <asp:DropDownList runat="server" ID="ServiceArea" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1" data-parsley-min-message="Select the service area"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <label for="reason" class="control-label pull-left">Reason</label>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <asp:DropDownList runat="server" ID="Reason" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1" data-parsley-min-message="Select the reason" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <label for="reason" class="control-label pull-left">Differentiated Care</label>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <asp:DropDownList runat="server" ID="DifferentiatedCare" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1" data-parsley-min-message="Select differentiated care"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <label for="description" class="control-label pull-left">Description</label>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <asp:TextBox runat="server" ID="description" CssClass="form-control input-sm" ClientIDMode="Static" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <label for="status" class="control-label pull-left">Status</label>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <asp:DropDownList runat="server" ID="status" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
                         <div class="col-md-12">
                             <hr />
                         </div>
@@ -1698,14 +1856,14 @@
     document.getElementById('txtAllergyId').style.display = 'none';
     document.getElementById('txtReactionTypeID').style.display = 'none';
     document.getElementById('txtDiagnosisID').style.display = 'none';
-    
+
 
     $(document).ready(function () {
         $('.errorBlock1').hide();
         $('.errorBlock2').hide();
         $('.errorBlock3').hide();
         $('.errorBlock4').hide();
-        if (($("#cough").val() === 'True')||($("#fever").val() === 'True')||($("#weightLoss").val() === 'True')||($("#nightSweats").val() === 'True')) {
+        if (($("#cough").val() === 'True') || ($("#fever").val() === 'True') || ($("#weightLoss").val() === 'True') || ($("#nightSweats").val() === 'True')) {
             $("#IcfActionForm").show();
         } else {
             $("#IcfActionForm").hide();
@@ -1716,7 +1874,7 @@
         $("#IptClientWorkupForm").hide();
         $("#IptDetailsForm").hide();
         $("#IptOutcomeDetailsForm").hide();
-        $("#onIpt").prop("disabled",true);
+        $("#onIpt").prop("disabled", true);
         //showHideFPControls();
         loadPresentingComplaints();
         loadAllergies();
@@ -1730,25 +1888,23 @@
 
         var txtBmi = $("#<%=txtBMI.ClientID%>").val();
         if (txtBmi < 16) {
-            $("#nutritionscreeningstatus option").filter(function() {return $(this).text() === 'Severe Acute Malnutrition';}).prop('selected', true);
+            $("#nutritionscreeningstatus option").filter(function () { return $(this).text() === 'Severe Acute Malnutrition'; }).prop('selected', true);
         } else if (txtBmi >= 16 && txtBmi < 18.5) {
-            $("#nutritionscreeningstatus option").filter(function() {return $(this).text() === 'Moderate Acute Malnutrition';}).prop('selected', true);
-        }else if (txtBmi >= 18.5 && txtBmi < 25) {
-            $("#nutritionscreeningstatus option").filter(function() {return $(this).text() === 'Normal';}).prop('selected', true);
-        } else if(txtBmi >= 25) {
-            $("#nutritionscreeningstatus option").filter(function() {return $(this).text() === 'Overweight/Obese';}).prop('selected', true);
+            $("#nutritionscreeningstatus option").filter(function () { return $(this).text() === 'Moderate Acute Malnutrition'; }).prop('selected', true);
+        } else if (txtBmi >= 18.5 && txtBmi < 25) {
+            $("#nutritionscreeningstatus option").filter(function () { return $(this).text() === 'Normal'; }).prop('selected', true);
+        } else if (txtBmi >= 25) {
+            $("#nutritionscreeningstatus option").filter(function () { return $(this).text() === 'Overweight/Obese'; }).prop('selected', true);
         }
 
         //set IPT weight
         var weightVal = <%=Weight%>;
         $("#weight").val(weightVal);
 
-        if(Age > 14)
-        {
+        if (Age > 14) {
             document.getElementById('divAntigenToday').style.display = 'none';
         }
-        else
-        {
+        else {
             document.getElementById('divAntigenToday').style.display = 'block';
         }
 
@@ -1757,7 +1913,7 @@
         var getFemaleLMPVal = "<%= this.LMPval %>";
         var getEDDPVal = "<%= this.EDDval %>";
         var getNxtAppDateVal = "<%= this.nxtAppDateval %>";
-    
+
         if (getVisitDateVal == '' || getVisitDateVal == '01-Jan-1900')
             getVisitDateVal = 0;
 
@@ -1767,7 +1923,7 @@
         if (getEDDPVal == '' || getEDDPVal == '01-Jan-1900')
             getEDDPVal = 0;
 
-        if (getNxtAppDateVal == '' || getVisitDateVal == '01-Jan-1900') 
+        if (getNxtAppDateVal == '' || getVisitDateVal == '01-Jan-1900')
             getNxtAppDateVal = 0;
         //Date processing
         var today = new Date();
@@ -1777,12 +1933,12 @@
         $('#DateOfVisit').datepicker({
             allowPastDates: true,
             date: getVisitDateVal,
-            restricted: [{from: tomorrow, to: Infinity}],
+            restricted: [{ from: tomorrow, to: Infinity }],
             momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
             //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
         });
 
-        $("#prescribeDrugs").click(function() {
+        $("#prescribeDrugs").click(function () {
             $("#btnClosePrecriptionModal").show("fast");
             $("#btnClosePrecription").hide("fast");
         });
@@ -1791,35 +1947,35 @@
             $("#btnCloseLabOrderModal").show("fast");
             $("#btnCloseLabOrder").hide("fast");
         });
-        
+
         $('#PCDateOfOnset').datepicker({
             allowPastDates: true,
             momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' },
             date: 0,
-            restricted: [{from: tomorrow, to: Infinity}]
+            restricted: [{ from: tomorrow, to: Infinity }]
             //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
         });
         $('#OnsetDate').datepicker({
             allowPastDates: true,
             momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' },
-            restricted: [{from: tomorrow, to: Infinity}],
+            restricted: [{ from: tomorrow, to: Infinity }],
             //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
         });
-           
+
         $('#ChronicIllnessOnsetDate').datepicker({
             allowPastDates: true,
             momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' },
             date: 0,
-            restricted: [{from: tomorrow, to: Infinity}],
+            restricted: [{ from: tomorrow, to: Infinity }],
             //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
         });
-        
+
         $('#FemaleLMP').datepicker({
             allowPastDates: true,
             date: getFemaleLMPVal,
-            restricted: [{from: tomorrow, to: Infinity}],
+            restricted: [{ from: tomorrow, to: Infinity }],
             momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
-                
+
             //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
         });
         $('#EDCD').datepicker({
@@ -1831,7 +1987,7 @@
         $('#AllergyDate').datepicker({
             allowPastDates: true,
             date: 0,
-            restricted: [{from: tomorrow, to: Infinity}],
+            restricted: [{ from: tomorrow, to: Infinity }],
             momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
             //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
         });
@@ -1843,14 +1999,42 @@
         $('#vaccineDate').datepicker({
             allowPastDates: true,
             date: 0,
-            restricted: [{from: tomorrow, to: Infinity}],
+            restricted: [{ from: tomorrow, to: Infinity }],
             momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
             //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
         });
-        $('#PCDateOfOnset').on('changed.fu.datepicker dateClicked.fu.datepicker', function(event,date) {
+
+        $('#PersonAppointmentDate').datepicker({
+            allowPastDates: false,
+            momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+        });
+
+        $("#AppointmentDate").change(function () {
+            var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
+            var appDate = $("#<%=AppointmentDate.ClientID%>").val();
+            if (moment('' + appDate + '').isAfter(futureDate)) {
+                toastr.error("Appointment date cannot be set to over 7 months");
+                $("#<%=AppointmentDate.ClientID%>").val("");
+                return false;
+            }
+            appointmentCount();
+        });
+
+        $('#PersonAppointmentDate').on('changed.fu.datepicker dateClicked.fu.datepicker', function (event, date) {
+            var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
+            var appDate = $("#<%=AppointmentDate.ClientID%>").val();
+            if (moment('' + appDate + '').isAfter(futureDate)) {
+                toastr.error("Appointment date cannot be set to over 7 months");
+                $("#<%=AppointmentDate.ClientID%>").val("");
+                return false;
+            }
+            appointmentCount();
+        });
+
+        $('#PCDateOfOnset').on('changed.fu.datepicker dateClicked.fu.datepicker', function (event, date) {
             presentingComplaintsDateChange();
         });
-          
+
         ////////////////////////////////////////////////////////////////////////////////////////////
         //Gender validations
         var male = "Male";
@@ -1868,11 +2052,11 @@
             info: false,
             ordering: false,
             columnDefs: [
-            {
-                "targets": [0],
-                "visible": false,
-                "searchable": false
-            }
+                {
+                    "targets": [0],
+                    "visible": false,
+                    "searchable": false
+                }
             ]
         });
 
@@ -1890,11 +2074,11 @@
             info: false,
             ordering: false,
             columnDefs: [
-            {
-                "targets": [0],
-                "visible": false,
-                "searchable": false
-            }
+                {
+                    "targets": [0],
+                    "visible": false,
+                    "searchable": false
+                }
             ]
         });
 
@@ -1911,21 +2095,21 @@
             info: false,
             ordering: false,
             columnDefs: [
-            {
-                "targets": [0],
-                "visible": false,
-                "searchable": false
-            },
-            {
-                "targets": [1],
-                "visible": false,
-                "searchable": false
-            },
-            {
-                "targets": [2],
-                "visible": false,
-                "searchable": false
-            }
+                {
+                    "targets": [0],
+                    "visible": false,
+                    "searchable": false
+                },
+                {
+                    "targets": [1],
+                    "visible": false,
+                    "searchable": false
+                },
+                {
+                    "targets": [2],
+                    "visible": false,
+                    "searchable": false
+                }
             ]
         });
 
@@ -1942,16 +2126,16 @@
             info: false,
             ordering: false,
             columnDefs: [
-            {
-                "targets": [0],
-                "visible": false,
-                "searchable": false
-            },
-            {
-                "targets": [1],
-                "visible": false,
-                "searchable": false
-            }
+                {
+                    "targets": [0],
+                    "visible": false,
+                    "searchable": false
+                },
+                {
+                    "targets": [1],
+                    "visible": false,
+                    "searchable": false
+                }
             ]
         });
 
@@ -1968,16 +2152,16 @@
             info: false,
             ordering: false,
             columnDefs: [
-            {
-                "targets": [0],
-                "visible": false,
-                "searchable": false
-            },
-            {
-                "targets": [1],
-                "visible": false,
-                "searchable": false
-            }
+                {
+                    "targets": [0],
+                    "visible": false,
+                    "searchable": false
+                },
+                {
+                    "targets": [1],
+                    "visible": false,
+                    "searchable": false
+                }
             ]
         });
 
@@ -1994,11 +2178,11 @@
             info: false,
             ordering: false,
             columnDefs: [
-            {
-                "targets": [0],
-                "visible": false,
-                "searchable": false
-            }
+                {
+                    "targets": [0],
+                    "visible": false,
+                    "searchable": false
+                }
             ]
         });
 
@@ -2016,11 +2200,11 @@
             info: false,
             ordering: false,
             columnDefs: [
-            {
-                "targets": [0],
-                "visible": false,
-                "searchable": false
-            }
+                {
+                    "targets": [0],
+                    "visible": false,
+                    "searchable": false
+                }
             ]
         });
 
@@ -2098,7 +2282,7 @@
                 if (index1 > -1) {
                     vaccineStageList.splice(index1, 1);
                 }
-                   
+
             });
 
 
@@ -2115,7 +2299,7 @@
                 if (index > -1) {
                     physicalExamList.splice(index, 1);
                 }
-                    
+
             });
 
         ////dtlDiagnosis
@@ -2131,7 +2315,7 @@
                 if (index > -1) {
                     diagnosisList.splice(index, 1);
                 }
-                    
+
             });
 
         ////dtlPresentingComplaints
@@ -2147,28 +2331,28 @@
                 if (index > -1) {
                     PresentingComplaintsList.splice(index, 1);
                 }
-                    
+
             });
-            
+
         ///////////////////////////////////////////////////////////////////////////////////////////////////
 
         //Save patient IPT client workup
-        $("#btnSaveIptWorkup").click(function() {
+        $("#btnSaveIptWorkup").click(function () {
             addPatientIptWorkup();
             $('#IptClientWorkupModal').modal('hide');
         });
 
         //Save patient IPT Details
-        $("#btnSaveIptDetails").click(function() {
+        $("#btnSaveIptDetails").click(function () {
             if ($('#IptFormDetails').parsley().validate()) {
                 var dob = $("#IptDateCollected").val();
                 if (moment('' + dob + '').isAfter()) {
                     toastr.error("Date collected cannot be a future date.");
                     return false;
-                } 
+                }
                 else {
                     addIpt();
-                    $('#IptDetailsModal').modal('hide');                   
+                    $('#IptDetailsModal').modal('hide');
                 }
             } else {
                 return false;
@@ -2176,121 +2360,136 @@
         });
 
         //Save patient IPT Outcome
-        $("#btnSaveIptOutcome").click(function() {
+        $("#btnSaveIptOutcome").click(function () {
             addPatientIptOutcome();
             $('#IptOutcomeModal').modal('hide');
         });
 
         //$('#myWizard').wizard();
         $("#myWizard")
-                .on("actionclicked.fu.wizard", function (evt, data) {
-                    var currentStep = data.step;
-                    var nextStep = 0;
-                    var previousStep = 0;
-                    var totalError = 0;
-                    var stepError = 0;
-                    /*var form = $("form[name='form1']");*/
+            .on("actionclicked.fu.wizard", function (evt, data) {
+                var currentStep = data.step;
+                var nextStep = 0;
+                var previousStep = 0;
+                var totalError = 0;
+                var stepError = 0;
+                /*var form = $("form[name='form1']");*/
 
-                    if (data.direction === 'next')
-                        nextStep = currentStep += 1;
-                    else
-                        previousStep = nextStep -= 1;
-                    if (data.step === 1) {
-                        $("#peripheralNeoropathy").prop('required',false);
-                        $("#rash").prop('required',false);
-                        $("#hepatotoxicity").prop('required',false);
-                        if (($("#cough").val() === 'True')||($("#fever").val() === 'True')||($("#weightLoss").val() === 'True')||($("#nightSweats").val() === 'True')) {
-                            $("#sputum").prop('required',true);
-                            $("#chest").prop('required',true);
-                            $("#antiTb").prop('required',true);
-                            $("#contactsInvitation").prop('required',true);
-                            $("#iptEvaluation").prop('required',true);
+                if (data.direction === 'next')
+                    nextStep = currentStep += 1;
+                else
+                    previousStep = nextStep -= 1;
+                if (data.step === 1) {
+                    $("#peripheralNeoropathy").prop('required', false);
+                    $("#rash").prop('required', false);
+                    $("#hepatotoxicity").prop('required', false);
+                    if (($("#cough").val() === 'True') || ($("#fever").val() === 'True') || ($("#weightLoss").val() === 'True') || ($("#nightSweats").val() === 'True')) {
+                        $("#sputum").prop('required', true);
+                        $("#chest").prop('required', true);
+                        $("#antiTb").prop('required', true);
+                        $("#contactsInvitation").prop('required', true);
+                        $("#iptEvaluation").prop('required', true);
+                    }
+
+                    /* add constraints based on age*/
+
+                    if ($('#datastep1').parsley().validate()) {
+                        addPatientIcf();
+                        if (($("#cough").val() === 'True') || ($("#fever").val() === 'True') || ($("#weightLoss").val() === 'True') || ($("#nightSweats").val() === 'True')) {
+                            addPatientIcfAction();
                         }
-                        
-                        /* add constraints based on age*/
+                        savePatientEncounterPresentingComplaint();
+                    } else {
+                        stepError = $('.parsley-error').length === 0;
+                        totalError += stepError;
+                        evt.preventDefault();
+                    }
+                }
+                else if (data.step === 2) {
+                    savePatientEncounterChronicIllness();
+                    //if ($("#datastep2").parsley().validate()) {
 
-                        if ($('#datastep1').parsley().validate()) {
-                            addPatientIcf();
-                            if (($("#cough").val() === 'True')||($("#fever").val() === 'True')||($("#weightLoss").val() === 'True')||($("#nightSweats").val() === 'True')) {
-                                addPatientIcfAction();
-                            }
-                            savePatientEncounterPresentingComplaint();
-                        } else {
-                            stepError = $('.parsley-error').length === 0;
-                            totalError += stepError;
-                            evt.preventDefault();
+                    //} else {
+                    //    stepError = $('.parsley-error').length === 0;
+                    //    totalError += stepError;
+                    //    evt.preventDefault();
+                    //}
+                }
+                else if (data.step === 3) {
+                    savePatientPhysicalExams();
+
+                    //if ($("#datastep3").parsley().validate()) {
+
+                    //} else {
+                    //    stepError = $('.parsley-error').length === 0;
+                    //    totalError += stepError;
+                    //    evt.preventDefault();
+                    //}
+                }
+                else if (data.step === 4) {
+                    //savePatientPatientManagement();
+                    if ($('#AppointmentForm').parsley().validate()) {
+                        var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
+                        var appDate = $("#<%=AppointmentDate.ClientID%>").val();
+                        if (moment('' + appDate + '').isAfter(futureDate)) {
+                            toastr.error("Appointment date cannot be set to over 7 months");
+                            return false;
                         }
-                    }
-                    else if (data.step === 2) {
-                        savePatientEncounterChronicIllness();
-                        //if ($("#datastep2").parsley().validate()) {
-
-                        //} else {
-                        //    stepError = $('.parsley-error').length === 0;
-                        //    totalError += stepError;
-                        //    evt.preventDefault();
-                        //}
-                    }
-                    else if (data.step === 3) {
-                        savePatientPhysicalExams();
-                        
-                        //if ($("#datastep3").parsley().validate()) {
-
-                        //} else {
-                        //    stepError = $('.parsley-error').length === 0;
-                        //    totalError += stepError;
-                        //    evt.preventDefault();
-                        //}
-                    }
-                    else if (data.step === 4) {
-                        //savePatientPatientManagement();
-                        $.when(savePatientPatientManagement()).then(function() {
-                            setTimeout(function() {
-                                window.location
-                                    .href =
-                                    '<%=ResolveClientUrl( "~/CCC/Patient/PatientHome.aspx")%>';
-                            },
-                                            2000);
+                        //save patient management
+                        $.when(savePatientPatientManagement()).then(function () {
+                            setTimeout(function () {
+                                    window.location
+                                        .href =
+                                        '<%=ResolveClientUrl( "~/CCC/Patient/PatientHome.aspx")%>';
+                                },
+                                2000);
                         });
+
+                        //save appointment
+                        checkExistingAppointment();
+                    } else {
+                        return false;
                     }
-                })
-                    .on("changed.fu.wizard",
-                        function () {
 
-                        })
-                    .on('stepclicked.fu.wizard',
-                        function () {
+                    
+                    }
+            })
+            .on("changed.fu.wizard",
+            function () {
 
-                        })
-                    .on('finished.fu.wizard',
-                        function (e) {
+            })
+            .on('stepclicked.fu.wizard',
+            function () {
 
-                        });
+            })
+            .on('finished.fu.wizard',
+            function (e) {
+
+            });
 
         function savePatientEncounterPresentingComplaint() {
             var visitDate = $("#<%=VisitDate.ClientID%>").val();
             var visitScheduled = $("input[name$=Scheduled]:checked").val();
-            
+
             var visitBy = $("#<%=ddlVisitBy.ClientID%>").find(":selected").val();
             var anyComplaints = $("input[name$=anyComplaints]:checked").val();
             var complaints = $("#<%=complaints.ClientID%>").val();
             var tbscreening = $("#<%=tbscreeningstatus.ClientID%>").find(":selected").val();
             var nutritionscreening = $("#<%=nutritionscreeningstatus.ClientID%>").find(":selected").val();
-            
+
             /////////////////////////////////////////////////////
-            if(anyComplaints == 1)
-            {
-                if ( ! presentingComplaintsTable.data().any() ) {
+            if (anyComplaints == 1) {
+                if (!presentingComplaintsTable.data().any()) {
                     toastr.error("Presenting Complaints", "Presenting complaints missing.");
                     evt.preventDefault();
                 }
             }
-                
+
             ///////////////////////////////////////////////////////
             var rowCount = $('#dtlAdverseEvents tbody tr').length;
             var adverseEventsArray = new Array();
             try {
-                for (var i = 0 ; i < rowCount; i++) {
+                for (var i = 0; i < rowCount; i++) {
                     adverseEventsArray[i] = {
                         "adverseSeverityID": advEventsTable.row(i).data()[0],
                         "adverseEvent": advEventsTable.row(i).data()[1],
@@ -2300,14 +2499,14 @@
                     }
                 }
             }
-            catch (ex) {  }
+            catch (ex) { }
 
-            
+
 
             var rowCount = $('#dtlPresentingComplaints tbody tr').length;
             var presentingComplaintsArray = new Array();
             try {
-                for (var i = 0 ; i < rowCount; i++) {
+                for (var i = 0; i < rowCount; i++) {
                     presentingComplaintsArray[i] = {
                         "presentingComplaintID": presentingComplaintsTable.row(i).data()[0],
                         "presentingComplaint": presentingComplaintsTable.row(i).data()[1],
@@ -2315,9 +2514,9 @@
                     }
                 }
             }
-            catch (ex) {  }
+            catch (ex) { }
 
-            
+
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientEncounterService.asmx/savePatientEncounterPresentingComplaints",
@@ -2325,22 +2524,22 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
-                            
+
                     console.log(response.d);
                     if (response.d > 0)
-                               
+
                         toastr.success(response.d, "Presenting Complaints");
                     else
-                           
-                        toastr.error(response.d,"Error occured while saving Presenting Complaints");
+
+                        toastr.error(response.d, "Error occured while saving Presenting Complaints");
                 },
                 error: function (response) {
-                         
+
                     toastr.error(response.d, "Error occured while saving Presenting Complaints");
                 }
             });
         }
-       
+
 
 
         function savePatientEncounterChronicIllness() {
@@ -2348,13 +2547,13 @@
             var chronicIllnessArray = new Array();
             try {
                 var active = 0;
-                for (var i = 0 ; i < rowCount; i++) {
+                for (var i = 0; i < rowCount; i++) {
 
                     if ($('#chkChronic' + chronicTable.row(i).data()[0] + '').is(":checked"))
                         active = 1;
                     else
                         active = 0;
-          
+
                     chronicIllnessArray[i] = {
                         "chronicIllnessID": chronicTable.row(i).data()[0],
                         "chronicIllness": chronicTable.row(i).data()[1],
@@ -2381,7 +2580,7 @@
             var rowCount = $('#dtlAllergy tbody tr').length;
             var AllergyArray = new Array();
             try {
-                for (var i = 0 ; i < rowCount; i++) {
+                for (var i = 0; i < rowCount; i++) {
                     AllergyArray[i] = {
                         "allergyID": allergyTable.row(i).data()[0],
                         "reactionID": allergyTable.row(i).data()[1],
@@ -2398,7 +2597,7 @@
             var rowCount = $('#dtlVaccines tbody tr').length;
             var vaccineArray = new Array();
             try {
-                for (var i = 0 ; i < rowCount; i++) {
+                for (var i = 0; i < rowCount; i++) {
                     vaccineArray[i] = {
                         "vaccineID": vaccineTable.row(i).data()[0],
                         "vaccineStageID": vaccineTable.row(i).data()[1],
@@ -2410,7 +2609,7 @@
                 }
             }
             catch (ex) { }
-               
+
 
             $.ajax({
                 type: "POST",
@@ -2430,15 +2629,14 @@
         function savePatientPhysicalExams() {
             var rowCount = $('#dtlPhysicalExam tbody tr').length;
             var generalExamination = getCheckBoxListItemsChecked('<%= cblGeneralExamination.ClientID %>');
-            if(generalExamination == "")
-            {
+            if (generalExamination == "") {
                 toastr.error(generalExamination, "Please check at least one General Examination.");
                 evt.preventDefault();
                 return false;
             }
             var physicalExamArray = new Array();
             try {
-                for (var i = 0 ; i < rowCount; i++) {
+                for (var i = 0; i < rowCount; i++) {
                     physicalExamArray[i] = {
                         "examTypeID": examTable.row(i).data()[0],
                         "examID": examTable.row(i).data()[1],
@@ -2468,7 +2666,7 @@
 
 
         function savePatientPatientManagement() {
-            var workPlan =  $("#<%=txtWorkPlan.ClientID%>").val();
+            var workPlan = $("#<%=txtWorkPlan.ClientID%>").val();
             var phdp = getCheckBoxListItemsChecked('<%= cblPHDP.ClientID %>');
             var arvAdherence = $("#<%=arvAdherance.ClientID%>").find(":selected").val();
             var ctxAdherence = $("#<%=ctxAdherance.ClientID%>").find(":selected").val();
@@ -2476,7 +2674,7 @@
             var rowCount = $('#dtlDiagnosis tbody tr').length;
             var diagnosisArray = new Array();
             try {
-                for (var i = 0 ; i < rowCount; i++) {
+                for (var i = 0; i < rowCount; i++) {
                     diagnosisArray[i] = {
                         "diagnosis": diagnosisTable.row(i).data()[0],
                         "treatment": diagnosisTable.row(i).data()[2]
@@ -2484,7 +2682,7 @@
                 }
             }
             catch (ex) { }
-                
+
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientEncounterService.asmx/savePatientManagement",
@@ -2513,7 +2711,7 @@
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientTbService.asmx/AddPatientIcf",
-                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','cough': '" + cough + "','fever': '" + fever + "','nightSweats': '" + nightSweats + "','weightLoss': '" + weightLoss + "','onAntiTbDrugs': '" + onAntiTbDrugs + "','onIpt': '" + onIpt +"'}",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','cough': '" + cough + "','fever': '" + fever + "','nightSweats': '" + nightSweats + "','weightLoss': '" + weightLoss + "','onAntiTbDrugs': '" + onAntiTbDrugs + "','onIpt': '" + onIpt + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
@@ -2536,7 +2734,7 @@
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientTbService.asmx/AddPatientIcfAction",
-                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','chestXray': '" + chestXray + "','evaluatedForIpt': '" + evaluatedForIpt + "','invitationOfContacts': '" + invitationOfContacts + "','sputumSmear': '" + sputumSmear +  "','startAntiTb': '" + startAntiTb + "'}",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','chestXray': '" + chestXray + "','evaluatedForIpt': '" + evaluatedForIpt + "','invitationOfContacts': '" + invitationOfContacts + "','sputumSmear': '" + sputumSmear + "','startAntiTb': '" + startAntiTb + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
@@ -2567,7 +2765,7 @@
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientTbService.asmx/AddIpt",
-                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','weight': '" + weight + "','iptDueDate': '" + iptDueDate + "','iptDateCollected': '" + iptDateCollected + "','hepatotoxicity': '" + hepatotoxicity +  "','peripheralneoropathy': '" + peripheralneoropathy + "','rash': '" + rash + "','adheranceMeasurement': '" + adheranceMeasurement + "','hepatotoxicityAction': '" + hepatotoxicityAction + "','peripheralneoropathyAction': '" + peripheralneoropathyAction + "','rashAction': '" + rashAction + "','adheranceMeasurementAction': '" + adheranceMeasurementAction +"'}",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','weight': '" + weight + "','iptDueDate': '" + iptDueDate + "','iptDateCollected': '" + iptDateCollected + "','hepatotoxicity': '" + hepatotoxicity + "','peripheralneoropathy': '" + peripheralneoropathy + "','rash': '" + rash + "','adheranceMeasurement': '" + adheranceMeasurement + "','hepatotoxicityAction': '" + hepatotoxicityAction + "','peripheralneoropathyAction': '" + peripheralneoropathyAction + "','rashAction': '" + rashAction + "','adheranceMeasurementAction': '" + adheranceMeasurementAction + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
@@ -2590,7 +2788,7 @@
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientTbService.asmx/AddPatientIptWorkup",
-                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','abdominalTenderness': '" + abdominalTenderness + "','numbness': '" + numbness + "','yellowColouredUrine': '" + yellowColouredUrine + "','yellownessOfEyes': '" + yellownessOfEyes +  "','liverFunctionTests': '" + liverFunctionTests +  "'}",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','abdominalTenderness': '" + abdominalTenderness + "','numbness': '" + numbness + "','yellowColouredUrine': '" + yellowColouredUrine + "','yellownessOfEyes': '" + yellownessOfEyes + "','liverFunctionTests': '" + liverFunctionTests + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
@@ -2610,7 +2808,7 @@
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientTbService.asmx/AddPatientIptOutcome",
-                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','iptEvent': '" + iptEvent + "','reasonForDiscontinuation': '" + reasonForDiscontinuation +  "'}",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','iptEvent': '" + iptEvent + "','reasonForDiscontinuation': '" + reasonForDiscontinuation + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
@@ -2621,6 +2819,7 @@
                 }
             });
         }
+
 
         function getCheckBoxListItemsChecked(elementId) {
             var elementRef = document.getElementById(elementId);
@@ -2644,7 +2843,7 @@
             return checkedValues;
         }
 
-        $("#btnAdherenceAssessment").click(function() {
+        $("#btnAdherenceAssessment").click(function () {
 
             var question1 = parseInt($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question1']:checked").val());
             var question2 = parseInt($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question2']:checked").val());
@@ -2714,19 +2913,19 @@
             });
         });
 
-        $('input[type=radio][name="ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question1"]').change(function() {
+        $('input[type=radio][name="ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question1"]').change(function () {
             calculateAdherenceScore();
         });
 
-        $('input[type=radio][name="ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question2"]').change(function() {
+        $('input[type=radio][name="ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question2"]').change(function () {
             calculateAdherenceScore();
         });
 
-        $('input[type=radio][name="ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question3"]').change(function() {
+        $('input[type=radio][name="ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question3"]').change(function () {
             calculateAdherenceScore();
         });
 
-        $('input[type=radio][name="ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question4"]').change(function() {
+        $('input[type=radio][name="ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question4"]').change(function () {
             calculateAdherenceScore();
         });
 
@@ -2760,56 +2959,138 @@
         }
 
 
-        function getSelectedItemsList(elementId)
-        {
+        function getSelectedItemsList(elementId) {
             var x = document.getElementById(elementId);
             var selectedValues = '';
             for (var i = 0; i < x.options.length; i++) {
-                if(x.options[i].selected){
+                if (x.options[i].selected) {
                     selectedValues += x.options[i].value + ',';
                 }
             }
             return selectedValues;
         }
+        
+        $("#AppointmentDate").val("");
+
     });
+
+
+    //Appointment 
+
+    function checkExistingAppointment() {
+        var patientId = "<%=PatientId%>";
+        var appointmentDate = $("#<%=AppointmentDate.ClientID%>").val();
+        var serviceArea = $("#<%=ServiceArea.ClientID%>").val();
+        var reason = $("#<%=Reason.ClientID%>").val();
+        jQuery.support.cors = true;
+        $.ajax(
+            {
+                type: "POST",
+                url: "../WebService/PatientService.asmx/GetExistingPatientAppointment",
+                data: "{'patientId':'" + patientId + "','appointmentDate': '" + appointmentDate + "','serviceAreaId': '" + serviceArea + "','reasonId': '" + reason + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                async: false,
+                cache: false,
+                success: function (response) {
+                    if (response.d != null) {
+                        toastr.error("Appointment already exists");
+                        return false;
+                    }
+                    addPatientAppointment();
+                },
+                error: function (msg) {
+                    alert(msg.responseText);
+                }
+            });
+    }
+
+    function addPatientAppointment() {
+        var serviceArea = $("#<%=ServiceArea.ClientID%>").val();
+        var reason = $("#<%=Reason.ClientID%>").val();
+        var description = $("#<%=description.ClientID%>").val();
+        var status = $("#<%=status.ClientID%>").val();
+        var differentiatedCareId = $("#<%=DifferentiatedCare.ClientID%>").val();
+        /*if (status === '') { status = null }*/
+        var appointmentDate = $("#<%=AppointmentDate.ClientID%>").val();
+        var patientId = <%=PatientId%>;
+        var patientMasterVisitId = <%=PatientMasterVisitId%>;
+        $.ajax({
+            type: "POST",
+            url: "../WebService/PatientService.asmx/AddPatientAppointment",
+            data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','appointmentDate': '" + appointmentDate + "','description': '" + description + "','reasonId': '" + reason + "','serviceAreaId': '" + serviceArea + "','statusId': '" + status + "','differentiatedCareId': '" + differentiatedCareId + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                toastr.success(response.d, "Appointment saved successfully");
+                resetAppointmentFields();
+            },
+            error: function (response) {
+                toastr.error(response.d, "Appointment not saved");
+            }
+        });
+    }
+
+    function appointmentCount() {
+        jQuery.support.cors = true;
+        var date = $("#<%=AppointmentDate.ClientID%>").val();
+        $.ajax(
+            {
+                type: "POST",
+                url: "../WebService/PatientService.asmx/GetPatientAppointmentCount",
+                data: "{'date':'" + date + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                cache: false,
+                success: function (response) {
+                    var count = response.d;
+                    var message = count + " appointment(s) scheduled on the chosen date.";
+                    alert(message);
+                },
+
+                error: function (msg) {
+                    alert(msg.responseText);
+                }
+            });
+    }
 
     function tbInfectedChange() {
         if ($("#tbInfected").val() === 'False') {
             $("#IptForm").show();
             $("#IcfForm").show();
-            $("#tbscreeningstatus option").filter(function() {return $(this).text() === 'NoTB';}).prop('selected', true);
-            $("#onIpt").prop("disabled",false);
+            $("#tbscreeningstatus option").filter(function () { return $(this).text() === 'NoTB'; }).prop('selected', true);
+            $("#onIpt").prop("disabled", false);
         } else {
-            $("#IptForm").hide(); 
+            $("#IptForm").hide();
             $("#IcfForm").hide();
             $("#IcfActionForm").hide();
-            $("#tbscreeningstatus option").filter(function() {return $(this).text() === 'TBRx';}).prop('selected', true);
-            $("#onIpt").prop("disabled",true);
+            $("#tbscreeningstatus option").filter(function () { return $(this).text() === 'TBRx'; }).prop('selected', true);
+            $("#onIpt").prop("disabled", true);
             $("#onIpt").val("False");
         }
-            
+
     }
 
     function onIptChange() {
         if ($("#onIpt").val() === 'False') {
-            $("#btnAddIptWorkUp").prop("disabled",false);
-            $("#btnAddIptOutcome").prop("disabled",true);
+            $("#btnAddIptWorkUp").prop("disabled", false);
+            $("#btnAddIptOutcome").prop("disabled", true);
         } else {
-            $("#btnAddIptWorkUp").prop("disabled",true);
-            $("#btnAddIptOutcome").prop("disabled",false);
+            $("#btnAddIptWorkUp").prop("disabled", true);
+            $("#btnAddIptOutcome").prop("disabled", false);
         }
-            
+
     }
 
     function IcfChange() {
-        if (($("#cough").val() === 'True')||($("#fever").val() === 'True')||($("#weightLoss").val() === 'True')||($("#nightSweats").val() === 'True')) {
+        if (($("#cough").val() === 'True') || ($("#fever").val() === 'True') || ($("#weightLoss").val() === 'True') || ($("#nightSweats").val() === 'True')) {
             $("#IcfActionForm").show();
-            $("#tbscreeningstatus option").filter(function() {return $(this).text() === 'PrTB';}).prop('selected', true);
+            $("#tbscreeningstatus option").filter(function () { return $(this).text() === 'PrTB'; }).prop('selected', true);
         } else {
             $("#IcfActionForm").hide();
-            $("#tbscreeningstatus option").filter(function() {return $(this).text() === 'NoTB';}).prop('selected', true);
-            $("#btnAddIptWorkUp").prop("disabled",false);
-            $("#btnAddIpt").prop("disabled",false);
+            $("#tbscreeningstatus option").filter(function () { return $(this).text() === 'NoTB'; }).prop('selected', true);
+            $("#btnAddIptWorkUp").prop("disabled", false);
+            $("#btnAddIpt").prop("disabled", false);
             $("#sputum").val("");
             $("#chest").val("");
             $("#antiTb").val("");
@@ -2820,14 +3101,14 @@
     }
 
     function IcfActionChange() {
-        if (($("#sputum").val() === 'True')||($("#chest").val() === 'True')||($("#antiTb").val() === 'True')||($("#contactsInvitation").val() === 'True')||($("#iptEvaluation").val() === 'True')) {
-            $("#btnAddIptWorkUp").prop("disabled",true);
-            $("#btnAddIpt").prop("disabled",true);
-            $("#tbscreeningstatus option").filter(function() {return $(this).text() === 'PrTB';}).prop('selected', true);
+        if (($("#sputum").val() === 'True') || ($("#chest").val() === 'True') || ($("#antiTb").val() === 'True') || ($("#contactsInvitation").val() === 'True') || ($("#iptEvaluation").val() === 'True')) {
+            $("#btnAddIptWorkUp").prop("disabled", true);
+            $("#btnAddIpt").prop("disabled", true);
+            $("#tbscreeningstatus option").filter(function () { return $(this).text() === 'PrTB'; }).prop('selected', true);
         } else {
-            $("#btnAddIptWorkUp").prop("disabled",false);
-            $("#btnAddIpt").prop("disabled",false);
-            $("#tbscreeningstatus option").filter(function() {return $(this).text() === 'NoTB';}).prop('selected', true);
+            $("#btnAddIptWorkUp").prop("disabled", false);
+            $("#btnAddIpt").prop("disabled", false);
+            $("#tbscreeningstatus option").filter(function () { return $(this).text() === 'NoTB'; }).prop('selected', true);
         }
     }
 
@@ -2849,13 +3130,13 @@
         $("#IptDetailsForm").hide();
     }
 
-    function loadPresentingComplaints() {      
+    function loadPresentingComplaints() {
         var pcInput = document.getElementById('<%= txtPresentingComplaints.ClientID %>');
         var awesomplete = new Awesomplete(pcInput, {
             minChars: 1
         });
-               
-        document.getElementById('<%= txtPresentingComplaints.ClientID %>').addEventListener('awesomplete-selectcomplete',function(){
+
+        document.getElementById('<%= txtPresentingComplaints.ClientID %>').addEventListener('awesomplete-selectcomplete', function () {
             var result = this.value.split("~");
             $("#<%=txtPresentingComplaintsID.ClientID%>").val(result[0]);
             $("#<%=txtPresentingComplaints.ClientID%>").val(result[1]);
@@ -2866,115 +3147,115 @@
             url: "../WebService/PatientEncounterService.asmx/GetPresentingComplaints",
             dataType: "json",
             contentType: "application/json; charset=utf-8",
-     
+
             success: function (data) {
                 var serverData = data.d;
                 var PCList = [];
-                       
+
                 for (var i = 0; i < serverData.length; i++) {
                     //drugList.push(serverData[i][1]);
                     PCList.push({ label: serverData[i][1], value: serverData[i][0] });
                 }
                 awesomplete.list = PCList;
             }
-        });    
-                
+        });
+
     }
 
-    function loadAllergies() {      
+    function loadAllergies() {
         var pcInput = document.getElementById('<%= txtAllergy.ClientID %>');
         var awesomplete = new Awesomplete(pcInput, {
             minChars: 1
         });
-               
-        document.getElementById('<%= txtAllergy.ClientID %>').addEventListener('awesomplete-selectcomplete',function(){
-                   var result = this.value.split("~");
-                   $("#<%=txtAllergyId.ClientID%>").val(result[0]);
-            $("#<%=txtAllergy.ClientID%>").val(result[1]);
-               });
 
-               $.ajax({
-                   type: "POST",
-                   url: "../WebService/PatientEncounterService.asmx/loadAllergies",
-                   dataType: "json",
-                   contentType: "application/json; charset=utf-8",
-     
-                   success: function (data) {
-                       var serverData = data.d;
-                       var PCList = [];
-                       
-                       for (var i = 0; i < serverData.length; i++) {
-                           //drugList.push(serverData[i][1]);
-                           PCList.push({ label: serverData[i][1], value: serverData[i][0] });
-                       }
-                       awesomplete.list = PCList;
-                   }
-               });    
-                
-           }
-
-           function loadAllergyReactions() {      
-               var pcInput = document.getElementById('<%= txtReactionType.ClientID %>');
-        var awesomplete = new Awesomplete(pcInput, {
-            minChars: 1
+        document.getElementById('<%= txtAllergy.ClientID %>').addEventListener('awesomplete-selectcomplete', function () {
+            var result = this.value.split("~");
+            $("#<%=txtAllergyId.ClientID%>").val(result[0]);
+                   $("#<%=txtAllergy.ClientID%>").val(result[1]);
         });
-               
-        document.getElementById('<%= txtReactionType.ClientID %>').addEventListener('awesomplete-selectcomplete',function(){
-                   var result = this.value.split("~");
-                   $("#<%=txtReactionTypeID.ClientID%>").val(result[0]);
-            $("#<%=txtReactionType.ClientID%>").val(result[1]);
-               });
 
-               $.ajax({
-                   type: "POST",
-                   url: "../WebService/PatientEncounterService.asmx/loadAllergyReactions",
-                   dataType: "json",
-                   contentType: "application/json; charset=utf-8",
-     
-                   success: function (data) {
-                       var serverData = data.d;
-                       var PCList = [];
-                       
-                       for (var i = 0; i < serverData.length; i++) {
-                           //drugList.push(serverData[i][1]);
-                           PCList.push({ label: serverData[i][1], value: serverData[i][0] });
-                       }
-                       awesomplete.list = PCList;
-                   }
-               });    
-                
-           }
+        $.ajax({
+            type: "POST",
+            url: "../WebService/PatientEncounterService.asmx/loadAllergies",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
 
-           function loadDiagnosis() {      
-               var diagnosisInput = document.getElementById('<%= Diagnosis.ClientID %>');
-        var awesomplete = new Awesomplete(diagnosisInput, {
-            minChars: 1
+            success: function (data) {
+                var serverData = data.d;
+                var PCList = [];
+
+                for (var i = 0; i < serverData.length; i++) {
+                    //drugList.push(serverData[i][1]);
+                    PCList.push({ label: serverData[i][1], value: serverData[i][0] });
+                }
+                awesomplete.list = PCList;
+            }
         });
-               
-        document.getElementById('<%= Diagnosis.ClientID %>').addEventListener('awesomplete-selectcomplete',function(){
-                   var result = this.value.split("~");
-                   $("#<%=txtDiagnosisID.ClientID%>").val(result[0]);
-            $("#<%=Diagnosis.ClientID%>").val(result[1]);
+
+    }
+
+    function loadAllergyReactions() {
+        var pcInput = document.getElementById('<%= txtReactionType.ClientID %>');
+               var awesomplete = new Awesomplete(pcInput, {
+                   minChars: 1
                });
 
-               $.ajax({
-                   type: "POST",
-                   url: "../WebService/PatientEncounterService.asmx/loadDiagnosis",
-                   dataType: "json",
-                   contentType: "application/json; charset=utf-8",
-     
-                   success: function (data) {
-                       var serverData = data.d;
-                       var DiagnosisList = [];
-                       
-                       for (var i = 0; i < serverData.length; i++) {
-                           //drugList.push(serverData[i][1]);
-                           DiagnosisList.push({ label: serverData[i][1], value: serverData[i][0] });
-                       }
-                       awesomplete.list = DiagnosisList;
-                   }
-               });    
-                
+               document.getElementById('<%= txtReactionType.ClientID %>').addEventListener('awesomplete-selectcomplete', function () {
+            var result = this.value.split("~");
+            $("#<%=txtReactionTypeID.ClientID%>").val(result[0]);
+                   $("#<%=txtReactionType.ClientID%>").val(result[1]);
+        });
+
+        $.ajax({
+            type: "POST",
+            url: "../WebService/PatientEncounterService.asmx/loadAllergyReactions",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+                var serverData = data.d;
+                var PCList = [];
+
+                for (var i = 0; i < serverData.length; i++) {
+                    //drugList.push(serverData[i][1]);
+                    PCList.push({ label: serverData[i][1], value: serverData[i][0] });
+                }
+                awesomplete.list = PCList;
+            }
+        });
+
+    }
+
+    function loadDiagnosis() {
+        var diagnosisInput = document.getElementById('<%= Diagnosis.ClientID %>');
+               var awesomplete = new Awesomplete(diagnosisInput, {
+                   minChars: 1
+               });
+
+               document.getElementById('<%= Diagnosis.ClientID %>').addEventListener('awesomplete-selectcomplete', function () {
+            var result = this.value.split("~");
+            $("#<%=txtDiagnosisID.ClientID%>").val(result[0]);
+                   $("#<%=Diagnosis.ClientID%>").val(result[1]);
+        });
+
+        $.ajax({
+            type: "POST",
+            url: "../WebService/PatientEncounterService.asmx/loadDiagnosis",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+                var serverData = data.d;
+                var DiagnosisList = [];
+
+                for (var i = 0; i < serverData.length; i++) {
+                    //drugList.push(serverData[i][1]);
+                    DiagnosisList.push({ label: serverData[i][1], value: serverData[i][0] });
+                }
+                awesomplete.list = DiagnosisList;
+            }
+        });
+
            }
 
            function loadSystemReviews() {
@@ -2986,45 +3267,43 @@
                    data: "{'masterName': '" + systemReviewName + "'}",
                    dataType: "json",
                    contentType: "application/json; charset=utf-8",
-     
+
                    success: function (data) {
                        var serverData = data.d;
                        var obj = $.parseJSON(serverData);
-                
+
                        $("#<%=ddlExamination.ClientID%>").find('option').remove().end();
-                $("#<%=ddlExamination.ClientID%>").append('<option value="0">Select</option>');
-                for (var i = 0; i < obj.length; i++) {
-                    $("#<%=ddlExamination.ClientID%>").append('<option value="' + obj[i]["ItemId"] + '">' + obj[i]["DisplayName"] + '</option>');
-                       }
-            }
-        });         
+                       $("#<%=ddlExamination.ClientID%>").append('<option value="0">Select</option>');
+                       for (var i = 0; i < obj.length; i++) {
+                           $("#<%=ddlExamination.ClientID%>").append('<option value="' + obj[i]["ItemId"] + '">' + obj[i]["DisplayName"] + '</option>');
+                }
+                   }
+               });
            }
 
-           function showHidePresentingComplaintsDivs() { 
+           function showHidePresentingComplaintsDivs() {
                var anyComplaints = $("input[name$=anyComplaints]:checked").val();
-               if(anyComplaints == 1)
-               {
+               if (anyComplaints == 1) {
                    document.getElementById('presentingComplaintsCtrls').style.display = 'block';
                    document.getElementById('presentingComplaintsTable').style.display = 'block';
                    document.getElementById('presentingComplaintsNotes').style.display = 'block';
                }
-               else{
+               else {
                    document.getElementById('presentingComplaintsCtrls').style.display = 'none';
                    document.getElementById('presentingComplaintsTable').style.display = 'none';
                    document.getElementById('presentingComplaintsNotes').style.display = 'none';
                }
            }
 
-           function showHideVisitByTS() { 
+           function showHideVisitByTS() {
                var visitByTS = $('#ddlVisitBy').find(":selected").text();
 
-               if(visitByTS == "Treatment Supporter")
-               {
+               if (visitByTS == "Treatment Supporter") {
                    document.getElementById('divTreatmentSupporter').style.display = 'block';
                    document.getElementById('step1Div').style.display = 'none';
                    document.getElementById('prevNextButton').style.display = 'none';
                }
-               else{
+               else {
                    document.getElementById('divTreatmentSupporter').style.display = 'none';
                    document.getElementById('step1Div').style.display = 'block';
                    document.getElementById('prevNextButton').style.display = 'block';
@@ -3033,9 +3312,9 @@
 
            function savePatientEncounterTS() {
                var visitDate = $("#<%=VisitDate.ClientID%>").val();
-        var visitScheduled = $("input[name$=Scheduled]:checked").val();
-        var visitBy = $("#<%=ddlVisitBy.ClientID%>").find(":selected").val();
-        
+               var visitScheduled = $("input[name$=Scheduled]:checked").val();
+               var visitBy = $("#<%=ddlVisitBy.ClientID%>").find(":selected").val();
+
         $.ajax({
             type: "POST",
             url: "../WebService/PatientEncounterService.asmx/savePatientEncounterTS",
@@ -3043,38 +3322,37 @@
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (response) {
-                            
+
                 console.log(response.d);
-                if (response.d > 0)    
-                {
+                if (response.d > 0) {
                     toastr.success(response.d, "Presenting Complaints");
 
-                    setTimeout(function() {
+                    setTimeout(function () {
                         window.location
                             .href =
                             '<%=ResolveClientUrl( "~/CCC/Patient/PatientHome.aspx")%>';
                     },
-                                    2000);
+                        2000);
                 }
-                        
+
                 else
-                           
-                    toastr.error(response.d,"Error occured while saving Presenting Complaints");
+
+                    toastr.error(response.d, "Error occured while saving Presenting Complaints");
             },
             error: function (response) {
-                         
+
                 toastr.error(response.d, "Error occured while saving Presenting Complaints");
             }
         });
-    }
+           }
 
 
-    function presentingComplaintsDateChange() {
-        var pcDate = $("#<%=txtPCOnsetDate.ClientID%>").val();
+           function presentingComplaintsDateChange() {
+               var pcDate = $("#<%=txtPCOnsetDate.ClientID%>").val();
         if (moment('' + pcDate + '').isAfter()) {
             toastr.error("Presenting complaints date cannot be a future date.");
             $("#<%=txtPCOnsetDate.ClientID%>").val("");
-                return false;
-            }
+            return false;
         }
+           }
 </script>

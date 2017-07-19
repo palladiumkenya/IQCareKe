@@ -98,7 +98,7 @@
     <div class="modal"  id="AppointmentModal" tabindex="-1" role="dialog" aria-labelledby="Appointmentlabel" aria-hidden="true" clientidmode="Static">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content" >
-                <div class="col-md-12" id="AppointmentForm" data-parsley-validate="true" data-show-errors="true">
+               <%-- <div class="col-md-12" id="AppointmentForm" data-parsley-validate="true" data-show-errors="true">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title" id="myModalLabel">Appointment Details</h4>
@@ -265,7 +265,7 @@
                             <asp:LinkButton runat="server" ID="btnSaveAppointment" CssClass="btn btn-info fa fa-plus-circle btn-lg" ClientIDMode="Static" OnClientClick="return false;"> Save Appointment </asp:LinkButton>                        
                         </div>
                     </div>
-                </div>
+                </div>--%>
             </div>
         </div>
     </div>
@@ -375,44 +375,6 @@
                     alert(msg.responseText);
                 }
             });
-
-           
-            $('#PersonAppointmentDate').datepicker({
-                allowPastDates: false,
-                momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
-            });
-
-            $("#AppointmentDate").change(function () {
-                AppointmentCount();
-            });
-
-            $('#PersonAppointmentDate').on('changed.fu.datepicker dateClicked.fu.datepicker', function(event,date) {
-                AppointmentCount();
-            });
-
-            $("#AppointmentDate").val("");
-            $("#btnSaveAppointment").click(function () {
-                if ($('#AppointmentForm').parsley().validate()) {
-                    var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
-                    var appDate = $("#<%=AppointmentDate.ClientID%>").val();
-                    if (moment('' + appDate + '').isAfter(futureDate)) {
-                        toastr.error("Appointment date cannot be set to over 7 months");
-                        return false;
-                    }
-                    checkExistingAppointment();
-                } else {
-                    return false;
-                }
-            });
-
-            $("#AddAppointment").click(function () {
-                $("#peripheralNeoropathy").prop('required',false);
-                $("#rash").prop('required',false);
-                $("#hepatotoxicity").prop('required',false);
-                $('#AppointmentModal').modal('show');
-                $('#AppointmentDate').val('');
-            });
-            
           
             function getViralLoad() {
                 
@@ -549,83 +511,6 @@
         });
        
         ////////////////////////////////////End doc ready///////////////////////////////////////////////////////////////////////////////
-
-        function checkExistingAppointment() {
-            var patientId = "<%=PatientId%>";
-            var appointmentDate = $("#<%=AppointmentDate.ClientID%>").val();
-            var serviceArea = $("#<%=ServiceArea.ClientID%>").val();
-            var reason = $("#<%=Reason.ClientID%>").val();
-            jQuery.support.cors = true;
-            $.ajax(
-            {
-                type: "POST",
-                url: "../WebService/PatientService.asmx/GetExistingPatientAppointment",
-                data: "{'patientId':'" + patientId + "','appointmentDate': '" + appointmentDate + "','serviceAreaId': '" + serviceArea + "','reasonId': '" + reason + "'}",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                async:false,
-                cache: false,
-                success: function (response) {
-                    if (response.d != null) {
-                        toastr.error("Appointment already exists");
-                        return false;
-                    }
-                    addPatientAppointment();
-                },
-                error: function (msg) {
-                    alert(msg.responseText);
-                }
-            });
-        }
-        
-        function addPatientAppointment() {
-            var serviceArea = $("#<%=ServiceArea.ClientID%>").val();
-            var reason = $("#<%=Reason.ClientID%>").val();
-            var description = $("#<%=description.ClientID%>").val();
-            var status = $("#<%=status.ClientID%>").val();
-            var differentiatedCareId = $("#<%=DifferentiatedCare.ClientID%>").val();
-            /*if (status === '') { status = null }*/
-            var appointmentDate = $("#<%=AppointmentDate.ClientID%>").val();
-            var patientId = <%=PatientId%>;
-            var patientMasterVisitId = <%=PatientMasterVisitId%>;
-            $.ajax({
-                type: "POST",
-                url: "../WebService/PatientService.asmx/AddPatientAppointment",
-                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','appointmentDate': '" + appointmentDate + "','description': '" + description + "','reasonId': '" + reason + "','serviceAreaId': '" + serviceArea + "','statusId': '" + status + "','differentiatedCareId': '" + differentiatedCareId + "'}",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (response) {
-                    toastr.success(response.d, "Appointment saved successfully");
-                    resetAppointmentFields();
-                },
-                error: function (response) {
-                    toastr.error(response.d, "Appointment not saved");
-                }
-            });
-        }
-
-        function AppointmentCount() {
-            jQuery.support.cors = true;
-            var date = $("#<%=AppointmentDate.ClientID%>").val();
-            $.ajax(
-            {
-                type: "POST",
-                url: "../WebService/PatientService.asmx/GetPatientAppointmentCount",
-                data: "{'date':'" + date + "'}",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                cache: false,
-                success: function(response) {
-                    var count = response.d;
-                    var message = count + " appointment(s) scheduled on the chosen date.";
-                    alert(message);
-                },
-
-                error: function(msg) {
-                    alert(msg.responseText);
-                }
-            });
-        }
 
         function resetAppointmentFields(parameters) {
             $("#ServiceArea").val("");
