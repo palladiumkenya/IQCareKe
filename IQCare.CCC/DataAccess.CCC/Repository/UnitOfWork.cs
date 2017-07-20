@@ -110,6 +110,7 @@ namespace DataAccess.CCC.Repository
 
         /*Appointment*/
         private IPatientAppointmentRepository _patientAppointmentRepository;
+        private IBluecardAppointmentRepository _bluecardAppointmentRepository;
         /*Encounter*/
         private IPatientCareEndingRepository _patientCareEndingRepository;
         private IPatientAdherenceAssessmentRepository _patientAdherenceAssessmentRepository;
@@ -447,6 +448,11 @@ namespace DataAccess.CCC.Repository
         public IPatientAppointmentRepository PatientAppointmentRepository
         {
             get { return _patientAppointmentRepository ?? (_patientAppointmentRepository = new PatientAppointmentRepository((GreencardContext)_context)); }
+        }
+
+        public IBluecardAppointmentRepository BluecardAppointmentRepository
+        {
+            get { return _bluecardAppointmentRepository ?? (_bluecardAppointmentRepository = new BluecardAppointmentRepository((GreencardContext)_context)); }
         }
 
         public IPatientTreatmentInitiationRepository PatientTreatmentInitiationRepository
