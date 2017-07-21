@@ -474,7 +474,6 @@
     </Compile>
     <Compile Include="CCC\WebService\PatientService.asmx.cs">
       <DependentUpon>PatientService.asmx</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="CCC\WebService\PatientSummaryService.asmx.cs">
       <DependentUpon>PatientSummaryService.asmx</DependentUpon>

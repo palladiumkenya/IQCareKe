@@ -47,7 +47,7 @@
                                 <label class="required control-label pull-left">Relationship</label>
                             </div>
                             <div class="col-md-6">
-                                <asp:DropDownList runat="server" ID="Relationship" ClientIDMode="Static" CssClass="form-control input-sm" required="true" onchange=" RelationshipChanged();" />
+                                <asp:DropDownList runat="server" ID="Relationship" ClientIDMode="Static" CssClass="form-control input-sm" required="true" />
                             </div>
                         </div>
                         <div class="col-md-12 form-group">
@@ -69,6 +69,15 @@
                                     </span>
                                     <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="Dob" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>        
                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 form-group">
+                            <div class="col-md-6">
+                                <label class="control-label pull-left">Age(Years)</label>
+                            </div>
+                            <div class="col-md-6">
+                                <asp:TextBox ID="personAge" runat="server" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="0" required="true" min="0"></asp:TextBox>
                             </div>
                         </div>
                     </div>
@@ -832,6 +841,9 @@
             window.patientDateOfBirth= date;
             var familyMembers = [];
             $("#<%=CccReferal.ClientID%>").val("False");
+            var gender = '<%=Gender%>';
+            console.log(gender);
+
             $('#BaselineHIVStatusD').datepicker({
                 allowPastDates: true,
                 date:0,
@@ -852,8 +864,7 @@
             $('#PersonDOBdatepicker').datetimepicker({
                 format: 'DD-MMM-YYYY',
                 allowInputToggle: true,
-                useCurrent: false,
-                maxDate: todayDate
+                useCurrent: false
             });
 
             $('#BaselineHIVStatusDMod').datepicker({
@@ -866,9 +877,28 @@
                 date:0,
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
             });
+
             $('#DateOfBirthMod').datepicker({
                 allowPastDates: true,
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+            });
+
+            $("#personAge").keyup(function () {
+                var personAge = parseInt($("#personAge").val());
+
+                if (personAge <= 0) {
+                    $("#Dob").val("");
+                    toastr.error("Patient's Age should not be zero", "Person Age");
+                    return false;
+                } else if (personAge > 120) {
+                    $("#Dob").val("");
+                    toastr.error("Patient's Age should not be more 120 years", "Person Age");
+                    return false;
+                }
+
+                if (personAge != null && personAge != "" && (personAge > 0 || personAge <= 120)) {
+                    $('#Dob').val(estimateDob(personAge));
+                }
             });
 
             $("#FamilyTestingDetails").hide();
@@ -1093,6 +1123,38 @@
                 //Get new date value from the field on change
                 var date = new Date(e.date);
                 Dobchanged(date);
+            });
+
+            $("#Relationship").change(function () {
+
+                if (((patientAge < 18) && (($("#Relationship :selected").text() === "Spouse")) && gender == "Male")) {
+                    $("#Relationship").val(0);
+                    toastr.error("A Male patient less than 18 years old should not have a spouse.");
+                    return false;
+                } else if (((patientAge < 15) && (($("#Relationship :selected").text() === "Spouse")) && gender == "Female")) {
+                    $("#Relationship").val(0);
+                    toastr.error("A Female patient less than 15 years old should not have a spouse.");
+                    return false;
+                }
+
+                if (patientAge < 18 && (($("#Relationship :selected").text() === "Partner"))) {
+                    $("#Relationship").val(0);
+                    toastr.error("Partner should be selected for patient above 18 years.");
+                    return false;
+                }
+
+                if (patientAge < 10 && (($("#Relationship :selected").text() === "Child"))) {
+                    $("#Relationship").val(0);
+                    toastr.error("A child cannot have a child.");
+                    return false;
+                }
+
+                if (patientAge > 18 && (($("#Relationship :selected").text() === "Mother") || ($("#Relationship :selected").text() === "Father"))) {
+                    $("#Relationship").val(0);
+                    toastr.error("Father and Mother options should be selected for children under 18 years");
+                    return false;
+                }
+
             });
 
         });
@@ -1424,24 +1486,6 @@
             }
         }
 
-        function RelationshipChanged() {
-            if (patientAge < 10 && (($("#Relationship :selected").text() === "Spouse"))) {
-                $("#Relationship").val(0);
-                toastr.error("A child cannot have a spouse.");
-                return false;
-            }
-            if (patientAge < 10 && (($("#Relationship :selected").text() === "Partner"))) {
-                $("#Relationship").val(0);
-                toastr.error("A child cannot have a partner.");
-                return false;
-            }
-            if (patientAge < 10 && (($("#Relationship :selected").text() === "Child"))) {
-                $("#Relationship").val(0);
-                toastr.error("A child cannot have a child.");
-                return false;
-            }
-        }
-
         function Dobchanged(dob) {
             //console.log(dob);
             var adult = moment().subtract(10, 'years').format('DD-MMM-YYYY');
@@ -1470,6 +1514,16 @@
                 $("#Dob").val("");
                 return false;
             }
+        }
+
+        function estimateDob(personAge) {
+            var currentDate = new Date();
+            currentDate.setDate(15);
+            currentDate.setMonth(5);
+            console.log(currentDate);
+            var estDob = moment(currentDate.toISOString());
+            var dob = estDob.add((personAge * -1), 'years');
+            return moment(dob).format('DD-MMM-YYYY');
         }
 
     </script>
