@@ -102,6 +102,7 @@
     <Compile Include="Interface\Lookup\IPatientTreatmentSupporterLookupRepository.cs" />
     <Compile Include="Interface\Lookup\IPersonGreenCardLookupRepository.cs" />
     <Compile Include="Interface\Patient\IBluecardAppointmentRepository.cs" />
+    <Compile Include="Interface\Patient\IPatientCategorizationRepository.cs" />
     <Compile Include="Interface\Screening\IPatientScreeningRepository.cs" />
     <Compile Include="Interface\Lookup\ILookupCounty.cs" />
     <Compile Include="Interface\Lookup\ILookupFacility.cs" />
@@ -178,6 +179,7 @@
     <Compile Include="Repository\OneTimeEvent\OneTimeEventTrackerRepository.cs" />
     <Compile Include="Repository\Patient\BluecardAppointmentRepository.cs" />
     <Compile Include="Repository\Patient\PatientAppointmentRepository.cs" />
+    <Compile Include="Repository\Patient\PatientCategorizationRepository.cs" />
     <Compile Include="Repository\Patient\PatientConsentRepository.cs" />
     <Compile Include="Repository\Patient\PatientContactRepository.cs" />
     <Compile Include="Repository\Patient\PatientLocationRepository.cs" />

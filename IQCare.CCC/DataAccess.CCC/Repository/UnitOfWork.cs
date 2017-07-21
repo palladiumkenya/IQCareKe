@@ -125,6 +125,9 @@ namespace DataAccess.CCC.Repository
         private IPatientIptOutcomeRepository _patientIptOutcomeRepository;
         private IPatientIptWorkupRepository _patientIptWorkupRepository;
 
+        /*Patient categorization*/
+        private IPatientCategorizationRepository _patientCategorizationRepository;
+
         public UnitOfWork(BaseContext context)
         {
             if (context == null)
@@ -570,6 +573,11 @@ namespace DataAccess.CCC.Repository
                        (_personGreenCardLookupRepository =
                            new PersonGreenCardLookupRepository((GreencardContext) _context));
             }
+        }
+
+        public IPatientCategorizationRepository PatientCategorizationRepository
+        {
+            get { return _patientCategorizationRepository ?? (_patientCategorizationRepository = new PatientCategorizationRepository((GreencardContext)_context)); }
         }
 
         public int Complete()
