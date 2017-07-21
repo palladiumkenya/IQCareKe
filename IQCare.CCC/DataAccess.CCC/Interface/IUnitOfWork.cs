@@ -75,6 +75,7 @@ namespace DataAccess.CCC.Interface
 
         /*Appointment*/
         IPatientAppointmentRepository PatientAppointmentRepository { get; }
+        IBluecardAppointmentRepository BluecardAppointmentRepository { get; }
 
         /*Consent*/
         IPatientConsentRepository PatientConsentRepository { get; }

@@ -8,6 +8,7 @@ namespace Interface.CCC
     {
         int AddPatientAppointments(PatientAppointment p);
         PatientAppointment GetPatientAppointments(int id);
+        List<BlueCardAppointment> GetBluecardPatientAppointmentsBypatientId(int patientId);
         void DeletePatientAppointments(int id);
         int UpdatePatientAppointments(PatientAppointment p);
         List<PatientAppointment> GetByPatientId(int patientId);

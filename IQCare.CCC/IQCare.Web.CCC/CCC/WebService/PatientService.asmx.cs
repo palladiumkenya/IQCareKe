@@ -308,17 +308,26 @@ namespace IQCare.Web.CCC.WebService
         public List<PatientAppointmentDisplay> GetPatientAppointments(string patientId)
         {
             List<PatientAppointmentDisplay> appointmentsDisplay = new List<PatientAppointmentDisplay>();
-            List<PatientAppointment> appointments = new List<PatientAppointment>();
+            var appointments = new List<PatientAppointment>();
+            var bluecardAppointments = new List<BlueCardAppointment>();
             try
             {
                 var patientAppointment = new PatientAppointmentManager();
                 int id = Convert.ToInt32(patientId);
                 appointments = patientAppointment.GetByPatientId(id);
+                bluecardAppointments = patientAppointment.GetBluecardAppointmentsByPatientId(id);
                 foreach (var appointment in appointments)
                 {
                     PatientAppointmentDisplay appointmentDisplay = Mapappointments(appointment);
                     appointmentsDisplay.Add(appointmentDisplay);
                 }
+
+                foreach (var appointment in bluecardAppointments)
+                {
+                    PatientAppointmentDisplay appointmentDisplay = MapBluecardappointments(appointment);
+                    appointmentsDisplay.Add(appointmentDisplay);
+                }
+                appointmentsDisplay.OrderByDescending(n => n.AppointmentDate);
 
             }
             catch (Exception e)
@@ -532,6 +541,22 @@ namespace IQCare.Web.CCC.WebService
                 Description = a.Description,
                 Status = status,
                 DifferentiatedCare = differentiatedCare
+            };
+
+            return appointment;
+        }
+
+        private PatientAppointmentDisplay MapBluecardappointments(BlueCardAppointment bluecardAppointment)
+        {
+            ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+            PatientAppointmentDisplay appointment = new PatientAppointmentDisplay()
+            {
+                ServiceArea = bluecardAppointment.ServiceArea,
+                Reason = bluecardAppointment.Reason,
+                AppointmentDate = bluecardAppointment.AppointmentDate,
+                Description = bluecardAppointment.Description,
+                Status = bluecardAppointment.AppointmentStatus,
+                DifferentiatedCare = " "
             };
 
             return appointment;
