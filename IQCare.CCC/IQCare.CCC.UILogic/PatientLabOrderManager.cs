@@ -38,7 +38,7 @@ namespace IQCare.CCC.UILogic
             int visitId = 0;
             int orderId = 0;
             int testId = 0;
-            int _paramId = 0;
+            //int _paramId = 0;
             DateTime orderDate = Convert.ToDateTime(labOrderDate);
             // DateTime orderDate = DateTime.Now;
             //DateTime orderDate = DateTime.Parse(labOrderDate);

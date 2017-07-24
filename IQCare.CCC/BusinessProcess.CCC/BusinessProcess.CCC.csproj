@@ -82,6 +82,7 @@
     <Compile Include="Baseline\BPatientArvHistoryManager.cs" />
     <Compile Include="Baseline\BPatientDisclosure.cs" />
     <Compile Include="Baseline\BPatientHivDiagnosisManager.cs" />
+    <Compile Include="Baseline\BPatientLinkageManager.cs" />
     <Compile Include="Baseline\BPatientTreatmentInitiationManager.cs" />
     <Compile Include="Baseline\BPatientVaccination.cs" />
     <Compile Include="Baseline\BPatientHivTestingManager.cs" />

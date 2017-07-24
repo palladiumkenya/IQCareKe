@@ -70,6 +70,7 @@
     <Compile Include="Baseline\PatientHivDiagnosis.cs" />
     <Compile Include="Baseline\PatientDisclosure.cs" />
     <Compile Include="Baseline\PatientHivEnrollmentBaseline.cs" />
+    <Compile Include="Baseline\PatientLinkage.cs" />
     <Compile Include="Baseline\PatientTransferIn.cs" />
     <Compile Include="Baseline\PatientTreatmentInitiation.cs" />
     <Compile Include="Consent\PatientConsent.cs" />

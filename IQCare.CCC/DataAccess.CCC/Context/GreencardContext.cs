@@ -51,9 +51,9 @@ namespace DataAccess.CCC.Context
         public DbSet<PatientChronicIllness> PatientChronicIllnesses { get; set; }
         public DbSet<PatientVital> PatientVitals { get; set; }
         public DbSet<Entities.CCC.Triage.PatientFamilyPlanningMethod> PatientFamilyPlanningMethod { get; set; }
-            public DbSet<Entities.CCC.Triage.PatientFamilyPlanning> PatientFamilyPlanning { get; set; }
-            public DbSet<PatientPreganancy> PatientPregnancy { get; set; }
-            public DbSet<PatientPregnancyIndicator> PatientPregnancyIndicator { get; set; }
+        public DbSet<Entities.CCC.Triage.PatientFamilyPlanning> PatientFamilyPlanning { get; set; }
+        public DbSet<PatientPreganancy> PatientPregnancy { get; set; }
+        public DbSet<PatientPregnancyIndicator> PatientPregnancyIndicator { get; set; }
 
         //Visit
         public DbSet<PatientMasterVisit> PatientMasterVisit { get; set; }
@@ -96,6 +96,7 @@ namespace DataAccess.CCC.Context
        
         public DbSet<LabResultsEntity> LabResults { get; set; }
         public DbSet<PatientAdherenceAssessment> PatientAdherenceAssessments { get; set; }
+        public DbSet<PatientLinkage> PatientLinkages { get; set; }
 
         //Appointment and Labs
         public DbSet<PatientAppointment> PatientAppointments { get; set; }

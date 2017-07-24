@@ -5,7 +5,10 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using IQCare.CCC.UILogic;
 using System.Web.UI.WebControls;
+using Application.Presentation;
 using Entities.CCC.Enrollment;
+using Entities.CCC.Lookup;
+using Interface.CCC.Lookup;
 using IQCare.CCC.UILogic.Enrollment;
 
 namespace IQCare.Web.CCC.Enrollment
@@ -20,6 +23,35 @@ namespace IQCare.Web.CCC.Enrollment
             {
                 var patientType = int.Parse(Session["PatientType"].ToString());
                 patType = LookupLogic.GetLookupNameById(patientType);
+            }
+
+            if (!IsPostBack)
+            {
+                ILookupManager mgr =
+                    (ILookupManager)
+                    ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+
+                List<LookupItemView> ms = mgr.GetLookItemByGroup("YesNo");
+                if (ms != null && ms.Count > 0)
+                {
+                    ReconfirmatoryTest.Items.Add(new ListItem("select", "0"));
+                    foreach (var k in ms)
+                    {
+                        ReconfirmatoryTest.Items.Add(new ListItem(k.ItemName, k.ItemId.ToString()));
+                    }
+                }
+
+                List<LookupItemView> ReConfirmatoryTest = mgr.GetLookItemByGroup("ReConfirmatoryTest");
+                if (ReConfirmatoryTest != null && ReConfirmatoryTest.Count > 0)
+                {
+                    ResultReConfirmatoryTest.Items.Add(new ListItem("select", "0"));
+                    foreach (var k in ReConfirmatoryTest)
+                    {
+                        ResultReConfirmatoryTest.Items.Add(new ListItem(k.ItemName, k.ItemId.ToString()));
+                    }
+                }
+
+                //ReconfirmatoryTest.Items.Add();
             }
 
             //var identifierManager = new IdentifierManager();
