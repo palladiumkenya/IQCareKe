@@ -18,6 +18,7 @@ using Microsoft.JScript;
 using Convert = System.Convert;
 using Newtonsoft.Json;
 using System.Web;
+using System.Web.Script.Serialization;
 using Entities.CCC.Encounter;
 
 namespace IQCare.Web.CCC.WebService
@@ -436,16 +437,21 @@ namespace IQCare.Web.CCC.WebService
         public string AddPatientCategorization(int patientId, int patientMasterVisitId, string artRegimenPeriod, string activeOis, string visitsAdherant, string vlCopies, string ipt, string bmi, string age, string healthcareConcerns)
         {
             PatientCategorizationStatus categorizationStatus;
+            string[] arr1 = new string[]{};
+
             if (Convert.ToBoolean(activeOis) && Convert.ToBoolean(artRegimenPeriod) && Convert.ToBoolean(visitsAdherant) && Convert.ToBoolean(vlCopies) && Convert.ToBoolean(ipt) && Convert.ToBoolean(age) && Convert.ToBoolean(healthcareConcerns) && Convert.ToBoolean(bmi))
                 categorizationStatus = PatientCategorizationStatus.Stable;
             else
-                categorizationStatus = PatientCategorizationStatus.Unstable;
+                categorizationStatus = PatientCategorizationStatus.UnStable;
+
+            int MasterVisitId = int.Parse(Session["PatientMasterVisitId"].ToString());
 
             var patientCategorization = new PatientCategorization()
             {
                 PatientId = patientId,
                 Categorization = categorizationStatus,
-                DateAssessed = DateTime.Now
+                DateAssessed = DateTime.Now,
+                PatientMasterVisitId = MasterVisitId
             };
             try
             {
@@ -454,13 +460,27 @@ namespace IQCare.Web.CCC.WebService
                 if (Result > 0)
                 {
                     Msg = "Patient Categorization Added Successfully!";
+
+                    PatientCategorizationStatus catStatus = (PatientCategorizationStatus) categorizationStatus;
+
+                    var lookUpLogic = new LookupLogic();
+                    var status = lookUpLogic.GetItemIdByGroupAndItemName("StabilityAssessment", catStatus.ToString());
+                    var itemId = 0;
+                    if (status.Count > 0)
+                    {
+                        itemId = status[0].ItemId;
+                    }
+
+                    arr1 = new string[] { Msg, itemId.ToString() };
+
                 }
             }
             catch (Exception e)
             {
                 Msg = e.Message;
             }
-            return Msg;
+
+            return new JavaScriptSerializer().Serialize(arr1);
         }
 
         private PatientFamilyDisplay MapMembers(PatientFamilyTesting member)
