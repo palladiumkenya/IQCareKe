@@ -104,7 +104,7 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string AddPatientIcfAction(int patientId, int patientMasterVisitId, string chestXray, bool evaluatedForIpt, bool invitationOfContacts, string sputumSmear, bool startAntiTb)
+        public string AddPatientIcfAction(int patientId, int patientMasterVisitId, string chestXray, bool evaluatedForIpt, bool invitationOfContacts, string sputumSmear, bool startAntiTb, string geneXpert)
         {
             PatientIcfAction patientIcfAction = new PatientIcfAction()
             {
@@ -115,6 +115,7 @@ namespace IQCare.Web.CCC.WebService
                 InvitationOfContacts = invitationOfContacts,
                 SputumSmear = Convert.ToInt32(sputumSmear),
                 StartAntiTb = startAntiTb,
+                GeneXpert = Convert.ToInt32(geneXpert)
             };
             try
             {

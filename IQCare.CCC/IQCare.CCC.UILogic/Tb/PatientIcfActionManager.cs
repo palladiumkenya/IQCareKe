@@ -22,6 +22,7 @@ namespace IQCare.CCC.UILogic.Tb
                 InvitationOfContacts = p.InvitationOfContacts,
                 SputumSmear = p.SputumSmear,
                 StartAntiTb = p.StartAntiTb,
+                GeneXpert = p.GeneXpert
             };
             return _patientIcfAction.AddPatientIcfAction(patientIcfAction);
         }
@@ -49,6 +50,7 @@ namespace IQCare.CCC.UILogic.Tb
                 InvitationOfContacts = p.InvitationOfContacts,
                 SputumSmear = p.SputumSmear,
                 StartAntiTb = p.StartAntiTb,
+                GeneXpert = p.GeneXpert
             };
             return _patientIcfAction.UpdatePatientIcfAction(patientIcfAction);
         }

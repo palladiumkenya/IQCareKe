@@ -410,7 +410,7 @@
                                                     <label class="control-label pull-left">Ever been on IPT?</label>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="EverBeenOnIpt" ClientIDMode="Static" onChange="onIptChange();" required="true" data-parsley-required="true">
+                                                    <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="EverBeenOnIpt" ClientIDMode="Static" onChange="EverBeenOnIptChange();" required="true" data-parsley-required="true">
                                                         <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
                                                         <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
                                                         <asp:ListItem Text="No" Value="False"></asp:ListItem>
@@ -482,13 +482,29 @@
                                         <div class="col-md-12 form-group">
                                             <div class="col-md-4">
                                                 <div class="col-md-12">
-                                                    <label class="control-label pull-left">Sputum Smear/ Gene Xpert</label>
+                                                    <label class="control-label pull-left">Sputum Smear</label>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="sputum" ClientIDMode="Static" onChange="IcfActionChange();">
                                                         <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
+                                                        <asp:ListItem Text="Ordered" Value="2"></asp:ListItem>
                                                         <asp:ListItem Text="Positive" Value="1"></asp:ListItem>
                                                         <asp:ListItem Text="Negative" Value="0"></asp:ListItem>
+                                                        <asp:ListItem Text="Not Done" Value="3"></asp:ListItem>
+                                                    </asp:DropDownList>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="col-md-12">
+                                                    <label class="control-label pull-left">Gene Xpert</label>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="geneXpert" ClientIDMode="Static" onChange="IcfActionChange();">
+                                                        <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
+                                                        <asp:ListItem Text="Ordered" Value="2"></asp:ListItem>
+                                                        <asp:ListItem Text="Positive" Value="1"></asp:ListItem>
+                                                        <asp:ListItem Text="Negative" Value="0"></asp:ListItem>
+                                                        <asp:ListItem Text="Not Done" Value="3"></asp:ListItem>
                                                     </asp:DropDownList>
                                                 </div>
                                             </div>
@@ -499,8 +515,10 @@
                                                 <div class="col-md-12">
                                                     <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="chest" ClientIDMode="Static" onChange="IcfActionChange();">
                                                         <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
+                                                        <asp:ListItem Text="Ordered" Value="2"></asp:ListItem>
                                                         <asp:ListItem Text="Suggestive" Value="1"></asp:ListItem>
                                                         <asp:ListItem Text="Normal" Value="0"></asp:ListItem>
+                                                        <asp:ListItem Text="Not Done" Value="3"></asp:ListItem>
                                                     </asp:DropDownList>
                                                 </div>
                                             </div>
@@ -516,8 +534,6 @@
                                                     </asp:DropDownList>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-12 form-group">
                                             <div class="col-md-4">
                                                 <div class="col-md-12">
                                                     <label class="control-label pull-left">Invitation of Contacts</label>
@@ -558,13 +574,13 @@
 
                                         <div class="col-md-12 form-group">
                                             <div class="col-md-4">
-                                                <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddIptWorkUp" data-toggle="modal" data-target="#IptClientWorkupModal">IPT Client Workup</button>
+                                                <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddIptWorkUp" data-toggle="modal" data-target="#IptClientWorkupModal"> IPT Client Workup</button>
                                             </div>
                                             <div class="col-md-4">
-                                                <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddIpt" data-toggle="modal" data-target="#IptDetailsModal">IPT</button>
+                                                <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddIpt" data-toggle="modal" data-target="#IptDetailsModal"> IPT Follow Up</button>
                                             </div>
                                             <div class="col-md-4">
-                                                <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddIptOutcome" data-toggle="modal" data-target="#IptOutcomeModal">IPT Outcome</button>
+                                                <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddIptOutcome" data-toggle="modal" data-target="#IptOutcomeModal"> IPT Outcome</button>
                                             </div>
                                         </div>
 
@@ -1887,6 +1903,7 @@
         $("#IptDetailsForm").hide();
         $("#IptOutcomeDetailsForm").hide();
         $("#onIpt").prop("disabled", true);
+        $("#EverBeenOnIpt").prop("disabled", true);
         //showHideFPControls();
         loadPresentingComplaints();
         loadAllergies();
@@ -2738,6 +2755,7 @@
         function addPatientIcfAction() {
             var chestXray = $("#<%=chest.ClientID%>").val();
             var sputumSmear = $("#<%=sputum.ClientID%>").val();
+            var geneXpert = $("#<%=geneXpert.ClientID%>").val();
             var invitationOfContacts = $("#<%=contactsInvitation.ClientID%>").val();
             var evaluatedForIpt = $("#<%=iptEvaluation.ClientID%>").val();
             var startAntiTb = $("#<%=antiTb.ClientID%>").val();
@@ -2746,7 +2764,7 @@
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientTbService.asmx/AddPatientIcfAction",
-                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','chestXray': '" + chestXray + "','evaluatedForIpt': '" + evaluatedForIpt + "','invitationOfContacts': '" + invitationOfContacts + "','sputumSmear': '" + sputumSmear + "','startAntiTb': '" + startAntiTb + "'}",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','chestXray': '" + chestXray + "','evaluatedForIpt': '" + evaluatedForIpt + "','invitationOfContacts': '" + invitationOfContacts + "','sputumSmear': '" + sputumSmear + "','startAntiTb': '" + startAntiTb + "','geneXpert': '" + geneXpert + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
@@ -3072,6 +3090,7 @@
             $("#IcfForm").show();
             $("#tbscreeningstatus option").filter(function () { return $(this).text() === 'NoTB'; }).prop('selected', true);
             $("#onIpt").prop("disabled", false);
+            $("#onIpt").val("");
         } else {
             $("#IptForm").hide();
             $("#IcfForm").hide();
@@ -3079,12 +3098,28 @@
             $("#tbscreeningstatus option").filter(function () { return $(this).text() === 'TBRx'; }).prop('selected', true);
             $("#onIpt").prop("disabled", true);
             $("#onIpt").val("False");
+            $("#EverBeenOnIpt").prop("disabled", true);
+            $("#EverBeenOnIpt").val("");
         }
 
     }
 
     function onIptChange() {
         if ($("#onIpt").val() === 'False') {
+            $("#btnAddIptWorkUp").prop("disabled", false);
+            $("#btnAddIptOutcome").prop("disabled", true);
+            $("#EverBeenOnIpt").prop("disabled", false);
+        } else {
+            $("#btnAddIptWorkUp").prop("disabled", true);
+            $("#btnAddIptOutcome").prop("disabled", false);
+            $("#EverBeenOnIpt").prop("disabled", true);
+            $("#EverBeenOnIpt").val("False");
+        }
+
+    }
+
+    function EverBeenOnIptChange() {
+        if ($("#EverBeenOnIpt").val() === 'False') {
             $("#btnAddIptWorkUp").prop("disabled", false);
             $("#btnAddIptOutcome").prop("disabled", true);
         } else {
@@ -3113,7 +3148,7 @@
     }
 
     function IcfActionChange() {
-        if (($("#sputum").val() === 'True') || ($("#chest").val() === 'True') || ($("#antiTb").val() === 'True') || ($("#contactsInvitation").val() === 'True') || ($("#iptEvaluation").val() === 'True')) {
+        if (($("#sputum").val() === '1') || ($("#sputum").val() === '2') || ($("#geneXpert").val() === '1') || ($("#geneXpert").val() === '2') || ($("#chest").val() === '1') || ($("#chest").val() === '2') || ($("#antiTb").val() === '1') || ($("#contactsInvitation").val() === '1') || ($("#iptEvaluation").val() === '1')) {
             $("#btnAddIptWorkUp").prop("disabled", true);
             $("#btnAddIpt").prop("disabled", true);
             $("#tbscreeningstatus option").filter(function () { return $(this).text() === 'PrTB'; }).prop('selected', true);
