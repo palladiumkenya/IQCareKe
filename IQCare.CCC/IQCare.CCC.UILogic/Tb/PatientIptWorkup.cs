@@ -19,7 +19,9 @@ namespace IQCare.CCC.UILogic.Tb
                 LiverFunctionTests = p.LiverFunctionTests,
                 Numbness = p.Numbness,
                 YellowColouredUrine = p.YellowColouredUrine,
-                YellownessOfEyes = p.YellownessOfEyes
+                YellownessOfEyes = p.YellownessOfEyes,
+                IptStartDate = p.IptStartDate,
+                StartIpt = p.StartIpt
             };
             return _patientIptWorkup.AddPatientIptWorkup(patientIptWorkup);
         }
@@ -46,7 +48,9 @@ namespace IQCare.CCC.UILogic.Tb
                 LiverFunctionTests = p.LiverFunctionTests,
                 Numbness = p.Numbness,
                 YellowColouredUrine = p.YellowColouredUrine,
-                YellownessOfEyes = p.YellownessOfEyes
+                YellownessOfEyes = p.YellownessOfEyes,
+                IptStartDate = p.IptStartDate,
+                StartIpt = p.StartIpt
             };
             return _patientIptWorkup.UpdatePatientIptWorkup(patientIptWorkup);
         }

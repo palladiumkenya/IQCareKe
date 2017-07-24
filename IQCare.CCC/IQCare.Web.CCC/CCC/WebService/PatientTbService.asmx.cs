@@ -110,12 +110,12 @@ namespace IQCare.Web.CCC.WebService
             {
                 PatientId = patientId,
                 PatientMasterVisitId = patientMasterVisitId,
-                ChestXray = Convert.ToInt32(chestXray),
+                ChestXray = (IcfRadiologyOptions)Convert.ToInt32(chestXray),
                 EvaluatedForIpt = evaluatedForIpt,
                 InvitationOfContacts = invitationOfContacts,
-                SputumSmear = Convert.ToInt32(sputumSmear),
+                SputumSmear = (IcfTestOptions)Convert.ToInt32(sputumSmear),
                 StartAntiTb = startAntiTb,
-                GeneXpert = Convert.ToInt32(geneXpert)
+                GeneXpert = (IcfTestOptions)Convert.ToInt32(geneXpert)
             };
             try
             {
@@ -143,7 +143,7 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string AddPatientIptWorkup(int patientId, int patientMasterVisitId, bool abdominalTenderness, bool numbness, bool yellowColouredUrine, bool yellownessOfEyes, string liverFunctionTests)
+        public string AddPatientIptWorkup(int patientId, int patientMasterVisitId, bool abdominalTenderness, bool numbness, bool yellowColouredUrine, bool yellownessOfEyes, string liverFunctionTests, bool startIpt, DateTime iptStartDate)
         {
             PatientIptWorkup patientIptWorkup = new PatientIptWorkup()
             {
@@ -153,7 +153,9 @@ namespace IQCare.Web.CCC.WebService
                 LiverFunctionTests = liverFunctionTests,
                 Numbness = numbness,
                 YellowColouredUrine = yellowColouredUrine,
-                YellownessOfEyes = yellownessOfEyes
+                YellownessOfEyes = yellownessOfEyes,
+                IptStartDate = iptStartDate,
+                StartIpt = startIpt
             };
             try
             {

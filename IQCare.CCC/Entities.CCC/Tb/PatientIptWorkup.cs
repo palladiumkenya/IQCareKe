@@ -18,5 +18,7 @@ namespace Entities.CCC.Tb
         public bool YellownessOfEyes { get; set; }
         public bool AbdominalTenderness { get; set; }
         public string  LiverFunctionTests { get; set; }
+        public bool ? StartIpt { get; set; }
+        public DateTime ? IptStartDate { get; set; }
     }
 }
