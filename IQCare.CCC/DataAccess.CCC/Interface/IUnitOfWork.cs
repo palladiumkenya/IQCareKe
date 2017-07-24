@@ -87,5 +87,8 @@ namespace DataAccess.CCC.Interface
         IPatientIptOutcomeRepository PatientIptOutcomeRepository { get; }
         IPatientIptWorkupRepository PatientIptWorkupRepository { get; }
 
+        /*Patient categorization*/
+        IPatientCategorizationRepository PatientCategorizationRepository { get; }
+
     }
 }

@@ -113,5 +113,8 @@ namespace DataAccess.CCC.Context
         public DbSet<PatientIptOutcome> PatientIptOutcomes { get; set; }
         public DbSet<PatientIptWorkup> PatientIptWorkups { get; set; }
 
+
+        //Patient categorization
+        public DbSet<PatientCategorization> PatientCategorizations { get; set; }
     }
 }

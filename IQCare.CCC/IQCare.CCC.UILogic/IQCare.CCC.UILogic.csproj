@@ -102,6 +102,7 @@
     <Compile Include="PatientAppointmentManager.cs" />
     <Compile Include="PatientBaselineLookupManager.cs" />
     <Compile Include="PatientCareEndingManager.cs" />
+    <Compile Include="PatientCategorizationManager.cs" />
     <Compile Include="PatientConsentManager.cs" />
     <Compile Include="PatientEncounterLogic.cs" />
     <Compile Include="PatientDisclosureManager.cs" />

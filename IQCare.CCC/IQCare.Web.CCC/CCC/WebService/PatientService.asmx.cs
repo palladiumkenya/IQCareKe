@@ -18,6 +18,7 @@ using Microsoft.JScript;
 using Convert = System.Convert;
 using Newtonsoft.Json;
 using System.Web;
+using Entities.CCC.Encounter;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -429,6 +430,36 @@ namespace IQCare.Web.CCC.WebService
             return consentDisplays;
         }
 
+        [WebMethod]
+        public string AddPatientCategorization(int patientId, int patientMasterVisitId, string artRegimenPeriod, string activeOis, string visitsAdherant, string vlCopies, string ipt, string bmi, string age, string healthcareConcerns)
+        {
+            PatientCategorizationStatus categorizationStatus;
+            if (Convert.ToBoolean(activeOis) && Convert.ToBoolean(artRegimenPeriod) && Convert.ToBoolean(visitsAdherant) && Convert.ToBoolean(vlCopies) && Convert.ToBoolean(ipt) && Convert.ToBoolean(age) && Convert.ToBoolean(healthcareConcerns) && Convert.ToBoolean(bmi))
+                categorizationStatus = PatientCategorizationStatus.Stable;
+            else
+                categorizationStatus = PatientCategorizationStatus.Unstable;
+
+            var patientCategorization = new PatientCategorization()
+            {
+                PatientId = patientId,
+                Categorization = categorizationStatus,
+                DateAssessed = DateTime.Now
+            };
+            try
+            {
+                var categorization = new PatientCategorizationManager();
+                Result = categorization.AddPatientCategorization(patientCategorization);
+                if (Result > 0)
+                {
+                    Msg = "Patient Categorization Added Successfully!";
+                }
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message;
+            }
+            return Msg;
+        }
 
         private PatientFamilyDisplay MapMembers(PatientFamilyTesting member)
         {

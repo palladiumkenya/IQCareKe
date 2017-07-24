@@ -381,7 +381,7 @@
                                         </div>
 
                                         <div class="col-md-12 form-group">
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                                 <div class="col-md-12">
                                                     <label class="control-label pull-left">On Anti TB drugs?</label>
                                                 </div>
@@ -393,12 +393,24 @@
                                                     </asp:DropDownList>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                                 <div class="col-md-12">
-                                                    <label class="control-label pull-left">On IPT?</label>
+                                                    <label class="control-label pull-left">Currently on IPT?</label>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="onIpt" ClientIDMode="Static" onChange="onIptChange();" required="true" data-parsley-required="true">
+                                                        <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
+                                                        <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
+                                                        <asp:ListItem Text="No" Value="False"></asp:ListItem>
+                                                    </asp:DropDownList>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="col-md-12">
+                                                    <label class="control-label pull-left">Ever been on IPT?</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="EverBeenOnIpt" ClientIDMode="Static" onChange="onIptChange();" required="true" data-parsley-required="true">
                                                         <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
                                                         <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
                                                         <asp:ListItem Text="No" Value="False"></asp:ListItem>
