@@ -27,6 +27,6 @@ namespace Entities.CCC.Encounter
     {
         None,
         Stable,
-        Unstable
+        UnStable
     }
 }

@@ -19,7 +19,7 @@ namespace IQCare.CCC.UILogic
             PersonRelationship personRelatioship =new PersonRelationship()
             {
                 PersonId = personId,
-               RelatedTo = relatedTo,
+               //RelatedTo = relatedTo,
                RelationshipTypeId = relationshipType
 
             };
@@ -30,7 +30,7 @@ namespace IQCare.CCC.UILogic
         {
             PersonRelationship personRelatioship = new PersonRelationship()
             {
-                RelatedTo = relatedTo,
+                //RelatedTo = relatedTo,
                 RelationshipTypeId = relationshipType
 
             };

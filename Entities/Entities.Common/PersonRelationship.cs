@@ -12,7 +12,9 @@ namespace Entities.Common
         [ForeignKey("Person")]
         public int PersonId { get; set; }
         public virtual Person Person { get; set; }
-        public int RelatedTo { get; set; }
+        public int PatientId { get; set; }
         public int RelationshipTypeId { get; set; }
+        public int BaselineResult { get; set; }
+        public DateTime? BaselineDate { get; set; }
     }
 }

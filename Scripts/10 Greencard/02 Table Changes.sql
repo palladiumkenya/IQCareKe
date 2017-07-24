@@ -15,6 +15,24 @@ IF EXISTS(SELECT * FROM sys.columns WHERE Name = N'VoidBy'AND Object_ID = OBJECT
 ALTER TABLE [dbo].[ServiceArea] DROP  CONSTRAINT [DF_ServiceArea_VoidBy] 
 ALTER TABLE ServiceArea DROP COLUMN VoidBy
     END;
+
+IF EXISTS(SELECT * FROM sys.columns WHERE Name = N'BaselineResult'AND Object_ID = OBJECT_ID(N'HIVTesting'))
+BEGIN
+	ALTER TABLE [dbo].[HIVTesting] DROP  COLUMN BaselineResult;
+	ALTER TABLE [dbo].[HIVTesting] DROP  COLUMN BaselineDate;
+	ALTER TABLE [dbo].[HIVTesting] DROP  COLUMN CCCNumber;
+	ALTER TABLE [dbo].[HIVTesting] DROP  COLUMN EnrollmentId;
+END;
+
+
+IF EXISTS(SELECT * FROM sys.columns WHERE Name = N'RelatedTo'AND Object_ID = OBJECT_ID(N'PersonRelationship'))
+BEGIN
+	ALTER TABLE [dbo].[PersonRelationship] DROP COLUMN RelatedTo;
+	ALTER TABLE [dbo].[HIVTesting] ADD PatientId int;
+	ALTER TABLE [dbo].[HIVTesting] ADD BaselineResult int;
+	ALTER TABLE [dbo].[HIVTesting] ADD BaselineDate DATETIME NULL;
+END;
+
 IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'DeleteFlag'AND Object_ID = OBJECT_ID(N'ServiceArea'))
     BEGIN
 ALTER TABLE ServiceArea ADD  DeleteFlag BIT NULL
