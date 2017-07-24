@@ -2814,12 +2814,15 @@
             var yellowColouredUrine = $("#urineColour").val();
             var numbness = $("#numbness").val();
             var liverFunctionTests = $("#liverTest").val();
+            var startIpt = $("#startIpt").val();;
+            var iptStartDate = moment($("#iptStartDate").val()).format('DD-MMM-YYYY');
             var patientId = <%=PatientId%>;
             var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            debugger;
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientTbService.asmx/AddPatientIptWorkup",
-                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','abdominalTenderness': '" + abdominalTenderness + "','numbness': '" + numbness + "','yellowColouredUrine': '" + yellowColouredUrine + "','yellownessOfEyes': '" + yellownessOfEyes + "','liverFunctionTests': '" + liverFunctionTests + "'}",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','abdominalTenderness': '" + abdominalTenderness + "','numbness': '" + numbness + "','yellowColouredUrine': '" + yellowColouredUrine + "','yellownessOfEyes': '" + yellownessOfEyes + "','liverFunctionTests': '" + liverFunctionTests + "','startIpt': '" + startIpt + "','iptStartDate': '" + iptStartDate + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
