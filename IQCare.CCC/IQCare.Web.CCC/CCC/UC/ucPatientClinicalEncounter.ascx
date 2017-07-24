@@ -487,8 +487,8 @@
                                                 <div class="col-md-12">
                                                     <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="sputum" ClientIDMode="Static" onChange="IcfActionChange();">
                                                         <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
-                                                        <asp:ListItem Text="Positive" Value="True"></asp:ListItem>
-                                                        <asp:ListItem Text="Negative" Value="False"></asp:ListItem>
+                                                        <asp:ListItem Text="Positive" Value="1"></asp:ListItem>
+                                                        <asp:ListItem Text="Negative" Value="0"></asp:ListItem>
                                                     </asp:DropDownList>
                                                 </div>
                                             </div>
@@ -499,8 +499,8 @@
                                                 <div class="col-md-12">
                                                     <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="chest" ClientIDMode="Static" onChange="IcfActionChange();">
                                                         <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
-                                                        <asp:ListItem Text="Suggestive" Value="True"></asp:ListItem>
-                                                        <asp:ListItem Text="Normal" Value="False"></asp:ListItem>
+                                                        <asp:ListItem Text="Suggestive" Value="1"></asp:ListItem>
+                                                        <asp:ListItem Text="Normal" Value="0"></asp:ListItem>
                                                     </asp:DropDownList>
                                                 </div>
                                             </div>
