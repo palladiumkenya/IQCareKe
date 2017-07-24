@@ -252,7 +252,7 @@ namespace IQCare.Web.CCC.Patient
                     }
                     else
                     {
-                        lblDateOfARTInitiation.Text = "<span class='label label-danger'> NO dispensing</span>";
+                        lblDateOfARTInitiation.Text = "<span class='label'> Not dispensed</span>";
                         lblcohort.Text = "<span class='label label-danger'>N/A</span>";
                         lblCurrentRegimen.Text = "<span class='label label-danger'>PATIENT NOT ON ARVs</span>";
 
@@ -364,6 +364,12 @@ namespace IQCare.Web.CCC.Patient
                     }
                 }
             }
+
+            var age = Convert.ToInt32(Session["Age"]);
+            if (age >= 20)
+                AgeYes.Checked = true;
+            else
+                AgeNo.Checked = true;
         }                        
       }
    }

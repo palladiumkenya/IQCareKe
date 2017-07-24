@@ -121,6 +121,15 @@ namespace IQCare.Web.CCC.UC {
         protected global::System.Web.UI.WebControls.DropDownList onIpt;
         
         /// <summary>
+        /// EverBeenOnIpt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList EverBeenOnIpt;
+        
+        /// <summary>
         /// cough control.
         /// </summary>
         /// <remarks>
@@ -623,5 +632,59 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::IQCare.Web.CCC.UC.ucPatientLabs ucPatientLabs;
+        
+        /// <summary>
+        /// AppointmentDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox AppointmentDate;
+        
+        /// <summary>
+        /// ServiceArea control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ServiceArea;
+        
+        /// <summary>
+        /// Reason control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList Reason;
+        
+        /// <summary>
+        /// DifferentiatedCare control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DifferentiatedCare;
+        
+        /// <summary>
+        /// description control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox description;
+        
+        /// <summary>
+        /// status control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList status;
     }
 }

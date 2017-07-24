@@ -147,4 +147,13 @@ IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'pillCount'AND Object_ID =
     BEGIN
         ALTER TABLE dtl_patientPharmacyOrder ADD pillCount int;
     END;
-
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'EverBeenOnIpt'AND Object_ID = OBJECT_ID(N'PatientIcf'))
+    BEGIN
+        ALTER TABLE PatientIcf ADD EverBeenOnIpt bit;
+    END;
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'GeneXpert'AND Object_ID = OBJECT_ID(N'PatientIcfAction'))
+    BEGIN
+        ALTER TABLE PatientIcfAction ADD GeneXpert int;
+    END;
+ALTER TABLE PatientIcfAction ALTER COLUMN SputumSmear INT NULL
+ALTER TABLE PatientIcfAction ALTER COLUMN ChestXray INT NULL

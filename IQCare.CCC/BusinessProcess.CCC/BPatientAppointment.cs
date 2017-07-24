@@ -36,6 +36,17 @@ namespace BusinessProcess.CCC
           
         }
 
+        public List<BlueCardAppointment> GetBluecardPatientAppointmentsBypatientId(int patientId)
+        {
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                List<BlueCardAppointment> appointments = _unitOfWork.BluecardAppointmentRepository.GetBluecardPatientAppointmentsBypatientId(patientId);
+                _unitOfWork.Dispose();
+                return appointments;
+            }
+
+        }
+
         public void DeletePatientAppointments(int id)
         {
             using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))

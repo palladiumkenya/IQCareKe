@@ -75,6 +75,7 @@ namespace DataAccess.CCC.Interface
 
         /*Appointment*/
         IPatientAppointmentRepository PatientAppointmentRepository { get; }
+        IBluecardAppointmentRepository BluecardAppointmentRepository { get; }
 
         /*Consent*/
         IPatientConsentRepository PatientConsentRepository { get; }
@@ -85,6 +86,9 @@ namespace DataAccess.CCC.Interface
         IPatientIptRepository PatientIptRepository { get; }
         IPatientIptOutcomeRepository PatientIptOutcomeRepository { get; }
         IPatientIptWorkupRepository PatientIptWorkupRepository { get; }
+
+        /*Patient categorization*/
+        IPatientCategorizationRepository PatientCategorizationRepository { get; }
 
     }
 }

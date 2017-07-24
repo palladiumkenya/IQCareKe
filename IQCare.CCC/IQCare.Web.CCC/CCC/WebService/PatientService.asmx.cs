@@ -18,6 +18,7 @@ using Microsoft.JScript;
 using Convert = System.Convert;
 using Newtonsoft.Json;
 using System.Web;
+using Entities.CCC.Encounter;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -310,17 +311,26 @@ namespace IQCare.Web.CCC.WebService
         public List<PatientAppointmentDisplay> GetPatientAppointments(string patientId)
         {
             List<PatientAppointmentDisplay> appointmentsDisplay = new List<PatientAppointmentDisplay>();
-            List<PatientAppointment> appointments = new List<PatientAppointment>();
+            var appointments = new List<PatientAppointment>();
+            var bluecardAppointments = new List<BlueCardAppointment>();
             try
             {
                 var patientAppointment = new PatientAppointmentManager();
                 int id = Convert.ToInt32(patientId);
                 appointments = patientAppointment.GetByPatientId(id);
+                bluecardAppointments = patientAppointment.GetBluecardAppointmentsByPatientId(id);
                 foreach (var appointment in appointments)
                 {
                     PatientAppointmentDisplay appointmentDisplay = Mapappointments(appointment);
                     appointmentsDisplay.Add(appointmentDisplay);
                 }
+
+                foreach (var appointment in bluecardAppointments)
+                {
+                    PatientAppointmentDisplay appointmentDisplay = MapBluecardappointments(appointment);
+                    appointmentsDisplay.Add(appointmentDisplay);
+                }
+                appointmentsDisplay.OrderByDescending(n => n.AppointmentDate);
 
             }
             catch (Exception e)
@@ -422,6 +432,36 @@ namespace IQCare.Web.CCC.WebService
             return consentDisplays;
         }
 
+        [WebMethod]
+        public string AddPatientCategorization(int patientId, int patientMasterVisitId, string artRegimenPeriod, string activeOis, string visitsAdherant, string vlCopies, string ipt, string bmi, string age, string healthcareConcerns)
+        {
+            PatientCategorizationStatus categorizationStatus;
+            if (Convert.ToBoolean(activeOis) && Convert.ToBoolean(artRegimenPeriod) && Convert.ToBoolean(visitsAdherant) && Convert.ToBoolean(vlCopies) && Convert.ToBoolean(ipt) && Convert.ToBoolean(age) && Convert.ToBoolean(healthcareConcerns) && Convert.ToBoolean(bmi))
+                categorizationStatus = PatientCategorizationStatus.Stable;
+            else
+                categorizationStatus = PatientCategorizationStatus.Unstable;
+
+            var patientCategorization = new PatientCategorization()
+            {
+                PatientId = patientId,
+                Categorization = categorizationStatus,
+                DateAssessed = DateTime.Now
+            };
+            try
+            {
+                var categorization = new PatientCategorizationManager();
+                Result = categorization.AddPatientCategorization(patientCategorization);
+                if (Result > 0)
+                {
+                    Msg = "Patient Categorization Added Successfully!";
+                }
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message;
+            }
+            return Msg;
+        }
 
         private PatientFamilyDisplay MapMembers(PatientFamilyTesting member)
         {
@@ -535,6 +575,22 @@ namespace IQCare.Web.CCC.WebService
                 Description = a.Description,
                 Status = status,
                 DifferentiatedCare = differentiatedCare
+            };
+
+            return appointment;
+        }
+
+        private PatientAppointmentDisplay MapBluecardappointments(BlueCardAppointment bluecardAppointment)
+        {
+            ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+            PatientAppointmentDisplay appointment = new PatientAppointmentDisplay()
+            {
+                ServiceArea = bluecardAppointment.ServiceArea,
+                Reason = bluecardAppointment.Reason,
+                AppointmentDate = bluecardAppointment.AppointmentDate,
+                Description = bluecardAppointment.Description,
+                Status = bluecardAppointment.AppointmentStatus,
+                DifferentiatedCare = " "
             };
 
             return appointment;

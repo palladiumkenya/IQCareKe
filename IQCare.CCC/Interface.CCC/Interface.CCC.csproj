@@ -71,6 +71,7 @@
     <Compile Include="IMst_PatientInsert.cs" />
     <Compile Include="IPatientAppointment.cs" />
     <Compile Include="Baseline\IPatientHivTestingManager.cs" />
+    <Compile Include="IPatientCategorizationmanager.cs" />
     <Compile Include="IPatientConsent.cs" />
     <Compile Include="IPatientMaritalStatusManager.cs" />
     <Compile Include="IPatientOVCStatusmanager.cs" />
