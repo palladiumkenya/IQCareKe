@@ -20,7 +20,7 @@ namespace IQCare.Web.CCC.WebService
         private int Result { get; set; }
 
         [WebMethod(EnableSession = true)]
-        public string AddPatientIcf(int patientId, int patientMasterVisitId, bool cough, bool fever, bool nightSweats, bool weightLoss, bool onAntiTbDrugs, bool onIpt)
+        public string AddPatientIcf(int patientId, int patientMasterVisitId, bool cough, bool fever, bool nightSweats, bool weightLoss, bool onAntiTbDrugs, bool onIpt, bool everBeenOnIpt)
         {
             PatientIcf patientIcf = new PatientIcf()
             {
@@ -31,7 +31,8 @@ namespace IQCare.Web.CCC.WebService
                 NightSweats = nightSweats,
                 WeightLoss = weightLoss,
                 OnIpt = onIpt,
-                OnAntiTbDrugs = onAntiTbDrugs
+                OnAntiTbDrugs = onAntiTbDrugs,
+                EverBeenOnIpt = everBeenOnIpt
             };
             try
             {
