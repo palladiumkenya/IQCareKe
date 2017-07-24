@@ -21,5 +21,6 @@ namespace Entities.CCC.Baseline
         public string CccReferaalNumber { get; set; }
         public int PersonRelationshipId { get; set; }
         public int HivTestingId { get; set; }
+        public DateTime? LinkageDate { get; set; }
     }
 }

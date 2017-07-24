@@ -18,33 +18,28 @@ namespace IQCare.CCC.UILogic.Baseline
         private readonly IPatientHivTestingManager _hivTestingManager = (IPatientHivTestingManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Baseline.BPatientHivTestingManager, BusinessProcess.CCC");
         private readonly IPersonManager _personManager = (IPersonManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPersonManager, BusinessProcess.CCC");
         private readonly IPersonRelationshipManager _personRelationshipManager = (IPersonRelationshipManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPersonRelationshipManager, BusinessProcess.CCC");
+
+        private readonly IPatientLinkageManager linkageManager =
+            (IPatientLinkageManager) ObjectFactory.CreateInstance("BusinessProcess.CCC.Baseline.BPatientLinkageManager, BusinessProcess.CCC");
+
         PersonLookUpManager personLookUp = new PersonLookUpManager();
 
         public int AddPatientFamilyTestings(PatientFamilyTesting p, int userId)
         {
             PersonManager pm = new PersonManager();
             int personId =  pm.AddPersonUiLogic(p.FirstName, p.MiddleName, p.LastName, p.Sex, userId, p.DateOfBirth);
-            //Person person = new Person()
-            //{
-            //    FirstName = _utility.Encrypt(p.FirstName),
-            //    MidName = _utility.Encrypt(p.MiddleName),
-            //    LastName = _utility.Encrypt(p.LastName),
-            //    Sex = p.Sex,
-            //    //DateOfBirth = p.DateOfBirth,
-            //};
-            //int personId = _personManager.AddPerson(person);
 
             PersonRelationship relationship = new PersonRelationship()
             {
                 PersonId = personId,
-                RelatedTo = p.PatientId,
-                RelationshipTypeId = p.RelationshipId
+                PatientId = p.PatientId,
+                BaselineResult = p.BaseLineHivStatusId,
+                BaselineDate = p.BaselineHivStatusDate,
+                RelationshipTypeId = p.RelationshipId,
+                CreatedBy = userId
             };
             _personRelationshipManager.AddPersonRelationship(relationship);
 
-            DateTime ? baselineDate = p.BaselineHivStatusDate;
-            if (baselineDate == DateTime.MinValue)
-                baselineDate = null;
             DateTime? testingDate = p.HivTestingResultsDate;
             if (testingDate == DateTime.MinValue)
                 testingDate = null;
@@ -53,15 +48,26 @@ namespace IQCare.CCC.UILogic.Baseline
             {
                 PersonId = personId,
                 PatientMasterVisitId = p.PatientMasterVisitId,
-                BaselineResult = p.BaseLineHivStatusId,
-                BaselineDate = baselineDate,
                 TestingResult = p.HivTestingResultsId,
                 TestingDate = testingDate,
                 ReferredToCare = p.CccReferal,
-                CccNumber = p.CccReferaalNumber
+                CreatedBy = userId
             };
             int hivTestingId = _hivTestingManager.AddPatientHivTesting(familyTesting);
-            pm = null;
+
+            if (p.CccReferal == true)
+            {
+                PatientLinkage patientLinkage = new PatientLinkage()
+                {
+                    PersonId = personId,
+                    LinkageDate = (DateTime)p.LinkageDate,
+                    CCCNumber = p.CccReferaalNumber,
+                    CreatedBy = userId
+                };
+
+                linkageManager.AddPatientLinkage(patientLinkage);
+            }
+            
             return hivTestingId;
         }
 
@@ -95,7 +101,7 @@ namespace IQCare.CCC.UILogic.Baseline
             {
                 Id = p.PersonRelationshipId,
                 PersonId = personId,
-                RelatedTo = p.PatientId,
+                //RelatedTo = p.PatientId,
                 RelationshipTypeId = p.RelationshipId
             };
             _personRelationshipManager.UpdatePersonRelationship(relationship);
@@ -105,12 +111,12 @@ namespace IQCare.CCC.UILogic.Baseline
                 Id = p.HivTestingId,
                 PersonId = personId,
                 PatientMasterVisitId = p.PatientMasterVisitId,
-                BaselineResult = p.BaseLineHivStatusId,
-                BaselineDate = p.BaselineHivStatusDate,
+                //BaselineResult = p.BaseLineHivStatusId,
+                //BaselineDate = p.BaselineHivStatusDate,
                 TestingResult = p.HivTestingResultsId,
                 TestingDate = p.HivTestingResultsDate,
                 ReferredToCare = p.CccReferal,
-                CccNumber = p.CccReferaalNumber
+                //CccNumber = p.CccReferaalNumber
             };
             int hivTestingId = _hivTestingManager.UpdatePatientHivTesting(familyTesting);
             pm = null;
@@ -128,6 +134,8 @@ namespace IQCare.CCC.UILogic.Baseline
             {
                 var hivTesting = _hivTestingManager.GetAll().FirstOrDefault(n => n.PersonId == relationship.PersonId);
                 PersonLookUp person = personLookUp.GetPersonById(relationship.PersonId);
+                var linkage = linkageManager.GetPatientLinkage(relationship.PersonId).FirstOrDefault();
+
                 if (person != null)
                     if (hivTesting != null)
                         familyTesting = new PatientFamilyTesting()
@@ -139,15 +147,21 @@ namespace IQCare.CCC.UILogic.Baseline
                             DateOfBirth = person.DateOfBirth == null? DateTime.Now: (DateTime)person.DateOfBirth.Value,
                             PersonId = relationship.PersonId,
                             RelationshipId = relationship.RelationshipTypeId,
-                            BaseLineHivStatusId = hivTesting.BaselineResult,
-                            BaselineHivStatusDate = hivTesting.BaselineDate,
+                            BaseLineHivStatusId = relationship.BaselineResult,
+                            BaselineHivStatusDate = relationship.BaselineDate,
                             HivTestingResultsId = hivTesting.TestingResult,
                             HivTestingResultsDate = hivTesting.TestingDate,
                             CccReferal = hivTesting.ReferredToCare,
-                            CccReferaalNumber = hivTesting.CccNumber,
+                            //CccReferaalNumber = linkage.CCCNumber,
+                            //LinkageDate = linkage.LinkageDate,
                             PersonRelationshipId = relationship.Id,
                             HivTestingId = hivTesting.Id
                         };
+                if (linkage != null)
+                {
+                    familyTesting.CccReferaalNumber = linkage.CCCNumber;
+                    familyTesting.LinkageDate = linkage.LinkageDate;
+                }
                 patientFamilyTestings.Add(familyTesting);
             }
             return patientFamilyTestings;

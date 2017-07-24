@@ -36,6 +36,7 @@ namespace IQCare.Web.CCC.WebService
         public string hivTestingresultDate { get; set; }
         public bool cccreferal { get; set; }
         public string cccReferalNumber { get; set; }
+        public DateTime? cccReferalDate { get; set; }
     }
     /// <summary>
     /// Summary description for PatientService
@@ -141,6 +142,7 @@ namespace IQCare.Web.CCC.WebService
         public string AddPatientFamilyTesting(string familyMembers)
         {
             int patientId; int patientMasterVisitId; string firstName; string middleName; string lastName; int sex; string dob; int relationshipId; int baselineHivStatusId; string baselineHivStatusDate; string hivTestingresultId; string hivTestingresultDate; bool cccreferal; string cccReferalNumber;  int userId;
+            DateTime? linkageDate;
 
             FamilyMembers[] familyMembrs = JsonConvert.DeserializeObject<FamilyMembers[]>(familyMembers);
             int count = familyMembrs.Length;
@@ -162,8 +164,9 @@ namespace IQCare.Web.CCC.WebService
                 cccreferal = familyMembrs[i].cccreferal;
                 cccReferalNumber = familyMembrs[i].cccReferalNumber;
                 hivTestingresultDate = familyMembrs[i].hivTestingresultDate;
+                linkageDate = familyMembrs[i].cccReferalDate;
 
-                PatientFamilyTesting patientAppointment = new PatientFamilyTesting()
+                PatientFamilyTesting patientFamilyTesting = new PatientFamilyTesting()
                 {
                     PatientId = patientId,
                     PatientMasterVisitId = patientMasterVisitId,
@@ -179,14 +182,13 @@ namespace IQCare.Web.CCC.WebService
                     HivTestingResultsId = hivresultId,
                     CccReferal = cccreferal,
                     CccReferaalNumber = cccReferalNumber,
-
+                    LinkageDate = linkageDate
                 };
 
                 if (hivTestingresultDate != "")
-                    patientAppointment.HivTestingResultsDate = DateTime.Parse(hivTestingresultDate);
+                    patientFamilyTesting.HivTestingResultsDate = DateTime.Parse(hivTestingresultDate);
                 if (baselineHivStatusDate != "")
-                    patientAppointment.BaselineHivStatusDate = DateTime.Parse(baselineHivStatusDate);
-
+                    patientFamilyTesting.BaselineHivStatusDate = DateTime.Parse(baselineHivStatusDate);
 
                 try
                 {
@@ -199,7 +201,7 @@ namespace IQCare.Web.CCC.WebService
                                     x.RelationshipId == relationshipId);
                     if (!fam.Any())
                     {
-                        Result = testing.AddPatientFamilyTestings(patientAppointment, userId);
+                        Result = testing.AddPatientFamilyTestings(patientFamilyTesting, userId);
                         if (Result > 0)
                         {
                             Msg = "Patient family testing Added Successfully!";
@@ -509,7 +511,8 @@ namespace IQCare.Web.CCC.WebService
                 CccReferalNumber = member.CccReferaalNumber,
                 PersonRelationshipId = member.PersonRelationshipId,
                 HivTestingId = member.HivTestingId,
-                PersonId = member.PersonId
+                PersonId = member.PersonId,
+                LinkageDate = member.LinkageDate
             };
             return familyMemberDisplay;
         }
@@ -621,6 +624,7 @@ namespace IQCare.Web.CCC.WebService
         public int PersonRelationshipId { get; set; }
         public int HivTestingId { get; set; }
         public int PersonId { get; set; }
+        public DateTime? LinkageDate { get; set; }
     }
 
     public class PatientConsentDisplay

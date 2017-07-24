@@ -659,7 +659,7 @@ namespace IQCare.Web.CCC.WebService
             try
             {
                 var personRelationship=new PersonRelationshipManager();
-                Result = personRelationship.AddPersonRelationship(PersonId, relationship.RelatedTo, relationship.RelationshipTypeId);
+                Result = personRelationship.AddPersonRelationship(PersonId, relationship.PatientId, relationship.RelationshipTypeId);
                 if (Result > 0)
                 {
                     Msg = "PersonRelationship Added successfully!";

@@ -270,11 +270,11 @@
 
         <div class="col-md-3 col-xs-12 col-sm-12">
             <div class="col-md-12 label label-info">
-                <label class="label label-info fa fa-line-chart fa-2x"> Family Index Testing </label>
+                <label class="label label-info fa fa-line-chart fa-2x"> Family/Partner Testing </label>
             </div>
             <div class="col-md-12" style="padding-bottom:2%"></div>
             <div class="col-md-12">
-                <div class="col-md-10"><label class="control-label pull-left">Total Persons Indexed:</label></div>
+                <div class="col-md-10"><label class="control-label pull-left">Total Contacts Listed:</label></div>
                 <div class="col-md-2 pull-right">
                     <asp:Label runat="server" ClientIDMode="Static" ID="Label1" CssClass="control-label text-success pull-right"><span class="badge pull-right">0</span></asp:Label>
                 </div>
@@ -283,7 +283,7 @@
             <div class="col-md-12"><hr></div>
 
             <div class="col-md-12">
-                <div class="col-md-10"><label class="control-label pull-left">Total Positive Indexed :</label></div>
+                <div class="col-md-10"><label class="control-label pull-left">Contacts with known status:</label></div>
                 <div class="col-md-2 pull-right">
                     <asp:Label runat="server" ClientIDMode="Static" ID="Label2" CssClass="control-label text-success pull-right"><span class="badge">0</span></asp:Label>
                 </div>
@@ -292,7 +292,7 @@
             <div class="col-md-12"><hr></div>
 
             <div class="col-md-12">
-                <div class="col-md-10"><label class="control-label pull-left">Total Negative Index :</label></div>
+                <div class="col-md-10"><label class="control-label pull-left">Total Contacts Positive:</label></div>
                 <div class="col-md-2 pull-right">
                     <asp:Label runat="server" ClientIDMode="Static" ID="Label3" CssClass="control-label text-success pull-right"><span class="badge">0</span></asp:Label>
                 </div>
@@ -301,9 +301,18 @@
             <div class="col-md-12"><hr></div>
 
             <div class="col-md-12">
-                <div class="col-md-10"><label class="control-label pull-left">Total Unknown Indexed :</label></div>
+                <div class="col-md-10"><label class="control-label pull-left">Contacts linked to care:</label></div>
                 <div class="col-md-2 pull-right">
                     <asp:Label runat="server" ClientIDMode="Static" ID="Label4" CssClass="control-label text-success pull-right"><span class="badge">0</span></asp:Label>
+                </div>
+            </div>
+            
+            <div class="col-md-12"><hr></div>
+
+            <div class="col-md-12">
+                <div class="col-md-10"><label class="control-label pull-left">Contacts with unknown status:</label></div>
+                <div class="col-md-2 pull-right">
+                    <asp:Label runat="server" ClientIDMode="Static" ID="Label5" CssClass="control-label text-success pull-right"><span class="badge">0</span></asp:Label>
                 </div>
             </div>
         </div>
