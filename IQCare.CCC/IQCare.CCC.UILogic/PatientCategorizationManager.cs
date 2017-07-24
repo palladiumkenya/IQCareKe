@@ -12,6 +12,8 @@ namespace IQCare.CCC.UILogic
         {
             var categorization = new PatientCategorization()
             {
+                PatientId = p.PatientId,
+                PatientMasterVisitId = p.PatientMasterVisitId,
                 Categorization = p.Categorization,
                 DateAssessed = p.DateAssessed
             };

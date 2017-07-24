@@ -2,10 +2,12 @@
 using DataAccess.CCC.Repository;
 using Entities.CCC.Encounter;
 using System.Linq;
+using DataAccess.Base;
+using Interface.CCC;
 
 namespace BusinessProcess.CCC
 {
-    public class BPatientCategorization
+    public class BPatientCategorization : ProcessBase, IPatientCategorizationManager
     {
         private int _result;
 

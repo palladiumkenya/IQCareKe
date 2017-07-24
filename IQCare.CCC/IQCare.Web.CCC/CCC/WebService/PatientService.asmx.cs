@@ -18,6 +18,7 @@ using Microsoft.JScript;
 using Convert = System.Convert;
 using Newtonsoft.Json;
 using System.Web;
+using Entities.CCC.Encounter;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -427,6 +428,38 @@ namespace IQCare.Web.CCC.WebService
                 Msg = e.Message;
             }
             return consentDisplays;
+        }
+
+        [WebMethod]
+        public string AddPatientRegistration(int patientId, int patientMasterVisitId, bool artRegimenPeriod, bool activeOis, bool visitsAdherant, bool vlCopies, bool ipt, bool bmi, bool age, bool healthcareConcerns)
+        {
+            PatientCategorizationStatus categorizationStatus;
+            if (activeOis && artRegimenPeriod && visitsAdherant && vlCopies && ipt && age && healthcareConcerns && bmi)
+                categorizationStatus = PatientCategorizationStatus.Stable;
+            else
+                categorizationStatus = PatientCategorizationStatus.Unstable;
+
+            var patientCategorization = new PatientCategorization()
+            {
+                PatientId = patientId,
+                PatientMasterVisitId = patientMasterVisitId,
+                Categorization = categorizationStatus,
+                DateAssessed = DateTime.Now
+            };
+            try
+            {
+                var categorization = new PatientCategorizationManager();
+                Result = categorization.AddPatientCategorization(patientCategorization);
+                if (Result > 0)
+                {
+                    Msg = "Patient Categorization Added Successfully!";
+                }
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message;
+            }
+            return Msg;
         }
 
 

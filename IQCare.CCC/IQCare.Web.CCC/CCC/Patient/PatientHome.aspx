@@ -84,8 +84,7 @@
             <li><a data-toggle="tab" href="#Registration">Registration Summary </a></li>
             <li><a data-toggle="tab" href="#EntryPoint"><strong>Entry Point & Transfer Status</strong></a> </li>
             <li><a data-toggle="tab" href="#Baseline">Baseline Assessment & Treament Initiation </a></li>
-
-
+            <li><a data-toggle="tab" href="#Categorization">Patient Categorization Checklist </a></li>
         </ul>
 
         <div class="col-md-12 col-xs-12 col-xs-12 form-group">
@@ -1446,6 +1445,162 @@
 
                     </div>
                 </div>
+                
+            <div id="Categorization" class="tab-pane fade">
+                <div class="col-md-12 col-xs-12 col-sm-12">
+                    <div class="col-md-12">
+                        <hr style="margin-top: 1%" class="bg-info" />
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-8">
+                            <label class="control-lable pull-left">On their current ART regimen for ≥ 12 months</label></div>
+                        <div class="col-md-4">
+                            <div class="col-md-12">
+                                <label class="pull-left" style="padding-right: 10px">
+                                    <input id="ArtRegimenYes" type="radio" name="ArtRegimenPeriod" value="1" clientidmode="Static" runat="server" />Yes
+                                </label>
+                                <label class="pull-left" style="padding-right: 10px">
+                                    <input id="ArtRegimenNo" type="radio" name="ArtRegimenPeriod" value="0" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <hr>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="col-md-8">
+                            <label class="control-lable pull-left">No active OIs (including TB) in the previous 6 months</label></div>
+                        <div class="col-md-4">
+                            <div class="col-md-12">
+                                <label class="pull-left" style="padding-right: 10px">
+                                    <input id="OiYes" type="radio" name="ActiveOis" value="1" clientidmode="Static" runat="server" />Yes
+                                </label>
+                                <label class="pull-left" style="padding-right: 10px">
+                                    <input id="OiNo" type="radio" name="ActiveOis" value="0" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <hr>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="col-md-8">
+                            <label class="control-lable pull-left">Adherent to scheduled clinic visits for the previous 6 months</label></div>
+                        <div class="col-md-4">
+                            <div class="col-md-12">
+                                <label class="pull-left" style="padding-right: 10px">
+                                    <input id="VisitsAdherantYes" type="radio" name="VisitsAdherant" value="1" clientidmode="Static" runat="server" />Yes
+                                </label>
+                                <label class="pull-left" style="padding-right: 10px">
+                                    <input id="VisitsAdherantNo" type="radio" name="VisitsAdherant" value="0" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <hr>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="col-md-8">
+                            <label class="control-lable pull-left">Most recent VL < 1,000 copies/ml</label></div>
+                        <div class="col-md-4">
+                            <div class="col-md-12">
+                                <label class="pull-left" style="padding-right: 10px">
+                                    <input id="VlCopiesYes" type="radio" name="VlCopies" value="1" clientidmode="Static" runat="server" />Yes
+                                </label>
+                                <label class="pull-left" style="padding-right: 10px">
+                                    <input id="VlCopiesNo" type="radio" name="VlCopies" value="0" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <hr>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-8">
+                            <label class="control-lable pull-left">Has completed 6 months of IPT</label></div>
+                        <div class="col-md-4">
+                            <div class="col-md-12">
+                                <label class="pull-left" style="padding-right: 10px">
+                                    <input id="IptYes" type="radio" name="Ipt" value="1" clientidmode="Static" runat="server" />Yes
+                                </label>
+                                <label class="pull-left" style="padding-right: 10px">
+                                    <input id="IptNo" type="radio" name="Ipt" value="0" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <hr>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-8">
+                            <label class="control-lable pull-left">BMI ≥ 18.5</label></div>
+                        <div class="col-md-4">
+                            <div class="col-md-12">
+                                <label class="pull-left" style="padding-right: 10px">
+                                    <input id="BmiYes" type="radio" name="Bmi" value="1" clientidmode="Static" runat="server" />Yes
+                                </label>
+                                <label class="pull-left" style="padding-right: 10px">
+                                    <input id="BmiNo" type="radio" name="Bmi" value="0" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <hr>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-8">
+                            <label class="control-lable pull-left">Age ≥ 20 years</label></div>
+                        <div class="col-md-4">
+                            <div class="col-md-12">
+                                <label class="pull-left" style="padding-right: 10px">
+                                    <input id="AgeYes" type="radio" name="Age" value="1" clientidmode="Static" runat="server" />Yes
+                                </label>
+                                <label class="pull-left" style="padding-right: 10px">
+                                    <input id="AgeNo" type="radio" name="Age" value="0" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <hr>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-8">
+                            <label class="control-lable pull-left">Healthcare team does not have concerns about providing longer follow-up intervals for the patient</label></div>
+                        <div class="col-md-4">
+                            <div class="col-md-12">
+                                <label class="pull-left" style="padding-right: 10px">
+                                    <input id="HealthcareConcernsYes" type="radio" name="HealthcareConcerns" value="1" clientidmode="Static" runat="server" />Yes
+                                </label>
+                                <label class="pull-left" style="padding-right: 10px">
+                                    <input id="HealthcareConcernsNo" type="radio" name="HealthcareConcerns" value="0" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <hr>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <asp:LinkButton runat="server" ID="btnSaveCategorization" CssClass="btn btn-info" ClientIDMode="Static" OnClientClick="return false;">Update Categorization</asp:LinkButton>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <hr>
+                    </div>
+                </div>
+            </div>
                 <!-- diagnosis -->
                 <div id="Trending" class="tab-pane  fade in active">
 
@@ -1457,7 +1612,7 @@
 
                     <div class="col-md-6 col-xs-12 col-sm-12">
                         <%--  <div id="vitals_container" margin: 0 auto"></div>  --%>
-                        <div id="vitals_container" style="min-width: 450px; height: 300px; margin: 0"></div>
+                     l   <div id="vitals_container" style="min-width: 450px; height: 300px; margin: 0"></div>
                     </div>
                     <!-- .bs-component-->
 
@@ -2554,6 +2709,35 @@
 
                     setTimeout(function () { window.location.reload(); },2000);
 
+                },
+                error: function (xhr, errorType, exception) {
+                    var jsonError = jQuery.parseJSON(xhr.responseText);
+                    toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);
+                    return false;
+                }
+            });
+            }
+
+        function AddPatientRegistration() {
+            var artRegimenPeriod = $("input[name$=ArtRegimenPeriod]:checked").val();
+            var activeOis = $("input[name$=ActiveOis]:checked").val();
+            var visitsAdherant = $("input[name$=VisitsAdherant]:checked").val();
+            var vlCopies = $("input[name$=VlCopies]:checked").val();
+            var ipt = $("input[name$=Ipt]:checked").val();
+            var bmi = $("input[name$=Bmi]:checked").val();
+            var age = $("input[name$=Age]:checked").val();
+            var healthcareConcerns = $("input[name$=HealthcareConcerns]:checked").val();
+            var patientId = <%=PatientId%>;
+            var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            $.ajax({
+                type: "POST",
+                url: "../WebService/Patient.asmx/AddPatientRegistration",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','artRegimenPeriod': '" + artRegimenPeriod + "','activeOis': '" + activeOis + "','visitsAdherant': '" + visitsAdherant + "','vlCopies': '" + vlCopies + "','ipt': '" + ipt + "','bmi': '" + bmi + "','age': '" + age + "','healthcareConcerns': '" + healthcareConcerns + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    toastr.success(response.d, "Patient Categorization");
+                    setTimeout(function () { window.location.reload(); }, 2000);
                 },
                 error: function (xhr, errorType, exception) {
                     var jsonError = jQuery.parseJSON(xhr.responseText);
