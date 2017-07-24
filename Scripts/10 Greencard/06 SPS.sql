@@ -3329,11 +3329,7 @@ BEGIN
 						SET @RelationshipTypeId = (select top 1  ItemId from LookupItemView where MasterName = 'Unknown' and ItemName = 'Unknown');
 
 
-					INSERT INTO [dbo].[PersonRelationship](PersonId, RelatedTo, RelationshipTypeId, DeleteFlag, CreatedBy, CreateDate)
-					VALUES(@PersonId, @PatientId, @RelationshipTypeId, 0, @UserId, @CreateDate);
-
-					SELECT @message = 'Created PersonRelationship Id: ' + CAST(SCOPE_IDENTITY() as varchar(50));
-					PRINT @message;
+					
 
 					SET @HivStatusString = (SELECT TOP 1 Name FROM mst_Decode WHERE CodeID=10 AND ID=@HivStatus);
 
@@ -3348,11 +3344,17 @@ BEGIN
 
 					SET @PatientMasterVisitId = (SELECT TOP 1 Id FROM PatientMasterVisit where VisitType = @VisitType and PatientId = @PatientId);
 
-					INSERT INTO HIVTesting(PersonId, BaselineResult, BaselineDate, TestingDate, TestingResult, ReferredToCare, CCCNumber, EnrollmentId, DeleteFlag, CreatedBy, CreateDate, AuditData, PatientMasterVisitId)
-					VALUES(@PersonId, @BaselineResult, @CreateDate, NULL, 0, 0, NULL, 0, 0, @UserId, @CreateDate, NULL, @PatientMasterVisitId);
+					INSERT INTO [dbo].[PersonRelationship](PersonId, PatientId, RelationshipTypeId, BaselineResult, BaselineDate, DeleteFlag, CreatedBy, CreateDate)
+					VALUES(@PersonId, @PatientId, @RelationshipTypeId, @BaselineResult, @CreateDate, 0, @UserId, @CreateDate);
 
-					SELECT @message = 'Created HIVTesting Id: ' + CAST(SCOPE_IDENTITY() as varchar(50));
+					SELECT @message = 'Created PersonRelationship Id: ' + CAST(SCOPE_IDENTITY() as varchar(50));
 					PRINT @message;
+
+					--INSERT INTO HIVTesting(PersonId, PatientMasterVisitId, TestingDate, TestingResult, ReferredToCare, CCCNumber, EnrollmentId, DeleteFlag, CreatedBy, CreateDate, AuditData)
+					--VALUES(@PersonId, @PatientMasterVisitId, NULL, 0, 0, NULL, 0, 0, @UserId, @CreateDate, NULL);
+
+					--SELECT @message = 'Created HIVTesting Id: ' + CAST(SCOPE_IDENTITY() as varchar(50));
+					--PRINT @message;
 
 				COMMIT
 

@@ -63,6 +63,7 @@ namespace IQCare.Web.CCC.UC
                 lookUp.populateDDL(arvAdherance, "ARVAdherence");
                 lookUp.populateDDL(ctxAdherance, "CTXAdherence");
                 lookUp.populateDDL(ddlAllergySeverity, "ADRSeverity");
+                lookUp.populateDDL(stabilityStatus, "StabilityAssessment");
 
                 var patientVitals = new PatientVitalsManager();
                 PatientVital patientTriage = patientVitals.GetByPatientId(Convert.ToInt32(Session["PatientPK"].ToString()));
