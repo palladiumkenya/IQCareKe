@@ -431,10 +431,10 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod]
-        public string AddPatientRegistration(int patientId, int patientMasterVisitId, bool artRegimenPeriod, bool activeOis, bool visitsAdherant, bool vlCopies, bool ipt, bool bmi, bool age, bool healthcareConcerns)
+        public string AddPatientCategorization(int patientId, int patientMasterVisitId, string artRegimenPeriod, string activeOis, string visitsAdherant, string vlCopies, string ipt, string bmi, string age, string healthcareConcerns)
         {
             PatientCategorizationStatus categorizationStatus;
-            if (activeOis && artRegimenPeriod && visitsAdherant && vlCopies && ipt && age && healthcareConcerns && bmi)
+            if (Convert.ToBoolean(activeOis) && Convert.ToBoolean(artRegimenPeriod) && Convert.ToBoolean(visitsAdherant) && Convert.ToBoolean(vlCopies) && Convert.ToBoolean(ipt) && Convert.ToBoolean(age) && Convert.ToBoolean(healthcareConcerns) && Convert.ToBoolean(bmi))
                 categorizationStatus = PatientCategorizationStatus.Stable;
             else
                 categorizationStatus = PatientCategorizationStatus.Unstable;
@@ -442,7 +442,6 @@ namespace IQCare.Web.CCC.WebService
             var patientCategorization = new PatientCategorization()
             {
                 PatientId = patientId,
-                PatientMasterVisitId = patientMasterVisitId,
                 Categorization = categorizationStatus,
                 DateAssessed = DateTime.Now
             };
@@ -461,7 +460,6 @@ namespace IQCare.Web.CCC.WebService
             }
             return Msg;
         }
-
 
         private PatientFamilyDisplay MapMembers(PatientFamilyTesting member)
         {

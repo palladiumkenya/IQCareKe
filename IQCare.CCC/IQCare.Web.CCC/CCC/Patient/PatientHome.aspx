@@ -608,9 +608,9 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="row">
-                                            <div class="col-md-12">
+                                            <%--<div class="col-md-12">
                                                 <h2 class="text-muted text-Warning pull-left">Bio </h2>
-                                            </div>
+                                            </div>--%>
 
                                             <div class="col-md-12">
                                                 <div class="col-md-12">
@@ -623,7 +623,7 @@
 
                                                 <div class="table">
 
-                                                    <div class="rowa header blue">
+                                                    <div class="rowa">
                                                         <div class="cell">
                                                             CCC No
                                                         </div>
@@ -708,7 +708,7 @@
 
                                                 <div class="table" id="isAdult">
 
-                                                    <div class="rowa header blue">
+                                                    <div class="rowa ">
                                                         <div class="cell">
                                                             ID Number/National ID
                                                         </div>
@@ -749,7 +749,7 @@
                                                 </div>
 
                                                 <div class="table">
-                                                    <div class="rowa header blue">
+                                                    <div class="rowa ">
                                                         <div class="cell">
                                                             Date of HIV diagnosis
                                                         </div>
@@ -792,7 +792,7 @@
                                                 </div>
 
                                                 <div class="table">
-                                                    <div class="rowa header blue">
+                                                    <div class="rowa ">
                                                         <div class="cell">
                                                             Treatment Type
                                                         </div>
@@ -838,7 +838,7 @@
                                                 </div>
 
                                                 <div class="table">
-                                                    <div class="rowa header blue">
+                                                    <div class="rowa">
                                                         <div class="cell">
                                                             HBV infected
                                                         </div>
@@ -893,9 +893,9 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-12">
+                                            <%--<div class="col-md-12">
                                                 <h2 class="text-muted text-Warning pull-left">Triage </h2>
-                                            </div>
+                                            </div>--%>
                                             <div class="wrapper">
                                                 <div class="col-md-12">
                                                     <div class="col-md-12">
@@ -905,7 +905,7 @@
                                                 </div>
 
                                                 <div class="table">
-                                                    <div class="rowa header blue">
+                                                    <div class="rowa">
 
                                                         <div class="cell">
                                                             Weight
@@ -961,7 +961,7 @@
 
 
                                                 <div class="table">
-                                                    <div class="rowa header blue">
+                                                    <div class="rowa ">
 
                                                         <div class="cell">
                                                             Systolic
@@ -993,7 +993,7 @@
                                                 </div>
 
                                                 <div class="table">
-                                                    <div class="rowa header blue">
+                                                    <div class="rowa ">
 
                                                         <div class="cell">
                                                             Pulse Rate
@@ -1446,7 +1446,7 @@
                     </div>
                 </div>
                 
-            <div id="Categorization" class="tab-pane fade">
+            <div id="Categorization" class="tab-pane fade"  data-parsley-validate="true" data-show-errors="true">
                 <div class="col-md-12 col-xs-12 col-sm-12">
                     <div class="col-md-12">
                         <hr style="margin-top: 1%" class="bg-info" />
@@ -1457,10 +1457,10 @@
                         <div class="col-md-4">
                             <div class="col-md-12">
                                 <label class="pull-left" style="padding-right: 10px">
-                                    <input id="ArtRegimenYes" type="radio" name="ArtRegimenPeriod" value="1" clientidmode="Static" runat="server" />Yes
+                                    <input id="ArtRegimenYes" type="radio" name="ArtRegimenPeriod" value="true" clientidmode="Static" runat="server" />Yes
                                 </label>
                                 <label class="pull-left" style="padding-right: 10px">
-                                    <input id="ArtRegimenNo" type="radio" name="ArtRegimenPeriod" value="0" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                    <input id="ArtRegimenNo" type="radio" name="ArtRegimenPeriod" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
                                 </label>
                             </div>
                         </div>
@@ -1476,10 +1476,10 @@
                         <div class="col-md-4">
                             <div class="col-md-12">
                                 <label class="pull-left" style="padding-right: 10px">
-                                    <input id="OiYes" type="radio" name="ActiveOis" value="1" clientidmode="Static" runat="server" />Yes
+                                    <input id="OiYes" type="radio" name="ActiveOis" value="true" clientidmode="Static" runat="server" />Yes
                                 </label>
                                 <label class="pull-left" style="padding-right: 10px">
-                                    <input id="OiNo" type="radio" name="ActiveOis" value="0" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                    <input id="OiNo" type="radio" name="ActiveOis" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
                                 </label>
                             </div>
                         </div>
@@ -1494,10 +1494,10 @@
                         <div class="col-md-4">
                             <div class="col-md-12">
                                 <label class="pull-left" style="padding-right: 10px">
-                                    <input id="VisitsAdherantYes" type="radio" name="VisitsAdherant" value="1" clientidmode="Static" runat="server" />Yes
+                                    <input id="VisitsAdherantYes" type="radio" name="VisitsAdherant" value="true" clientidmode="Static" runat="server" />Yes
                                 </label>
                                 <label class="pull-left" style="padding-right: 10px">
-                                    <input id="VisitsAdherantNo" type="radio" name="VisitsAdherant" value="0" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                    <input id="VisitsAdherantNo" type="radio" name="VisitsAdherant" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
                                 </label>
                             </div>
                         </div>
@@ -1505,17 +1505,16 @@
                     <div class="col-md-12">
                         <hr>
                     </div>
-
                     <div class="col-md-12">
                         <div class="col-md-8">
                             <label class="control-lable pull-left">Most recent VL < 1,000 copies/ml</label></div>
                         <div class="col-md-4">
                             <div class="col-md-12">
                                 <label class="pull-left" style="padding-right: 10px">
-                                    <input id="VlCopiesYes" type="radio" name="VlCopies" value="1" clientidmode="Static" runat="server" />Yes
+                                    <input id="VlCopiesYes" type="radio" name="VlCopies" value="true" clientidmode="Static" runat="server" />Yes
                                 </label>
                                 <label class="pull-left" style="padding-right: 10px">
-                                    <input id="VlCopiesNo" type="radio" name="VlCopies" value="0" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                    <input id="VlCopiesNo" type="radio" name="VlCopies" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
                                 </label>
                             </div>
                         </div>
@@ -1529,10 +1528,10 @@
                         <div class="col-md-4">
                             <div class="col-md-12">
                                 <label class="pull-left" style="padding-right: 10px">
-                                    <input id="IptYes" type="radio" name="Ipt" value="1" clientidmode="Static" runat="server" />Yes
+                                    <input id="IptYes" type="radio" name="Ipt" value="true" clientidmode="Static" runat="server" />Yes
                                 </label>
                                 <label class="pull-left" style="padding-right: 10px">
-                                    <input id="IptNo" type="radio" name="Ipt" value="0" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                    <input id="IptNo" type="radio" name="Ipt" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
                                 </label>
                             </div>
                         </div>
@@ -1546,10 +1545,10 @@
                         <div class="col-md-4">
                             <div class="col-md-12">
                                 <label class="pull-left" style="padding-right: 10px">
-                                    <input id="BmiYes" type="radio" name="Bmi" value="1" clientidmode="Static" runat="server" />Yes
+                                    <input id="BmiYes" type="radio" name="Bmi" value="true" clientidmode="Static" runat="server" />Yes
                                 </label>
                                 <label class="pull-left" style="padding-right: 10px">
-                                    <input id="BmiNo" type="radio" name="Bmi" value="0" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                    <input id="BmiNo" type="radio" name="Bmi" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
                                 </label>
                             </div>
                         </div>
@@ -1563,10 +1562,10 @@
                         <div class="col-md-4">
                             <div class="col-md-12">
                                 <label class="pull-left" style="padding-right: 10px">
-                                    <input id="AgeYes" type="radio" name="Age" value="1" clientidmode="Static" runat="server" />Yes
+                                    <input id="AgeYes" type="radio" name="Age" value="true" clientidmode="Static" runat="server" />Yes
                                 </label>
                                 <label class="pull-left" style="padding-right: 10px">
-                                    <input id="AgeNo" type="radio" name="Age" value="0" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                    <input id="AgeNo" type="radio" name="Age" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
                                 </label>
                             </div>
                         </div>
@@ -1580,10 +1579,10 @@
                         <div class="col-md-4">
                             <div class="col-md-12">
                                 <label class="pull-left" style="padding-right: 10px">
-                                    <input id="HealthcareConcernsYes" type="radio" name="HealthcareConcerns" value="1" clientidmode="Static" runat="server" />Yes
+                                    <input id="HealthcareConcernsYes" type="radio" name="HealthcareConcerns" value="true" clientidmode="Static" runat="server" />Yes
                                 </label>
                                 <label class="pull-left" style="padding-right: 10px">
-                                    <input id="HealthcareConcernsNo" type="radio" name="HealthcareConcerns" value="0" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                    <input id="HealthcareConcernsNo" type="radio" name="HealthcareConcerns" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
                                 </label>
                             </div>
                         </div>
@@ -1642,6 +1641,14 @@
             $("#bioPatientKeyPopulation").select2({
                 placeholder: "Select Key Population Type",
                 allowClear: true
+            });
+
+            $("#btnSaveCategorization").click(function () {
+                if ($('#Categorization').parsley().validate()) {
+                    AddPatientCategorization();
+                } else {
+                    return false;
+                }
             });
             /* populate patient baseline information */
             $.ajax({
@@ -2718,7 +2725,7 @@
             });
             }
 
-        function AddPatientRegistration() {
+        function AddPatientCategorization() {
             var artRegimenPeriod = $("input[name$=ArtRegimenPeriod]:checked").val();
             var activeOis = $("input[name$=ActiveOis]:checked").val();
             var visitsAdherant = $("input[name$=VisitsAdherant]:checked").val();
@@ -2729,9 +2736,10 @@
             var healthcareConcerns = $("input[name$=HealthcareConcerns]:checked").val();
             var patientId = <%=PatientId%>;
             var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            debugger;
             $.ajax({
                 type: "POST",
-                url: "../WebService/Patient.asmx/AddPatientRegistration",
+                url: "../WebService/PatientService.asmx/AddPatientCategorization",
                 data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','artRegimenPeriod': '" + artRegimenPeriod + "','activeOis': '" + activeOis + "','visitsAdherant': '" + visitsAdherant + "','vlCopies': '" + vlCopies + "','ipt': '" + ipt + "','bmi': '" + bmi + "','age': '" + age + "','healthcareConcerns': '" + healthcareConcerns + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
