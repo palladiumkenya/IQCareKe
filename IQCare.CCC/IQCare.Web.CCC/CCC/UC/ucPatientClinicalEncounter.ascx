@@ -410,7 +410,7 @@
                                                     <label class="control-label pull-left">Ever been on IPT?</label>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="EverBeenOnIpt" ClientIDMode="Static" onChange="onIptChange();" required="true" data-parsley-required="true">
+                                                    <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="EverBeenOnIpt" ClientIDMode="Static" onChange="EverBeenOnIptChange();" required="true" data-parsley-required="true">
                                                         <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
                                                         <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
                                                         <asp:ListItem Text="No" Value="False"></asp:ListItem>
@@ -482,13 +482,29 @@
                                         <div class="col-md-12 form-group">
                                             <div class="col-md-4">
                                                 <div class="col-md-12">
-                                                    <label class="control-label pull-left">Sputum Smear/ Gene Xpert</label>
+                                                    <label class="control-label pull-left">Sputum Smear</label>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="sputum" ClientIDMode="Static" onChange="IcfActionChange();">
                                                         <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
+                                                        <asp:ListItem Text="Ordered" Value="2"></asp:ListItem>
                                                         <asp:ListItem Text="Positive" Value="1"></asp:ListItem>
                                                         <asp:ListItem Text="Negative" Value="0"></asp:ListItem>
+                                                        <asp:ListItem Text="Not Done" Value="3"></asp:ListItem>
+                                                    </asp:DropDownList>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="col-md-12">
+                                                    <label class="control-label pull-left">Gene Xpert</label>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="geneXpert" ClientIDMode="Static" onChange="IcfActionChange();">
+                                                        <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
+                                                        <asp:ListItem Text="Ordered" Value="2"></asp:ListItem>
+                                                        <asp:ListItem Text="Positive" Value="1"></asp:ListItem>
+                                                        <asp:ListItem Text="Negative" Value="0"></asp:ListItem>
+                                                        <asp:ListItem Text="Not Done" Value="3"></asp:ListItem>
                                                     </asp:DropDownList>
                                                 </div>
                                             </div>
@@ -499,8 +515,10 @@
                                                 <div class="col-md-12">
                                                     <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="chest" ClientIDMode="Static" onChange="IcfActionChange();">
                                                         <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
+                                                        <asp:ListItem Text="Ordered" Value="2"></asp:ListItem>
                                                         <asp:ListItem Text="Suggestive" Value="1"></asp:ListItem>
                                                         <asp:ListItem Text="Normal" Value="0"></asp:ListItem>
+                                                        <asp:ListItem Text="Not Done" Value="3"></asp:ListItem>
                                                     </asp:DropDownList>
                                                 </div>
                                             </div>
@@ -516,8 +534,6 @@
                                                     </asp:DropDownList>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-12 form-group">
                                             <div class="col-md-4">
                                                 <div class="col-md-12">
                                                     <label class="control-label pull-left">Invitation of Contacts</label>
@@ -558,13 +574,13 @@
 
                                         <div class="col-md-12 form-group">
                                             <div class="col-md-4">
-                                                <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddIptWorkUp" data-toggle="modal" data-target="#IptClientWorkupModal">IPT Client Workup</button>
+                                                <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddIptWorkUp" data-toggle="modal" data-target="#IptClientWorkupModal"> IPT Client Workup</button>
                                             </div>
                                             <div class="col-md-4">
-                                                <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddIpt" data-toggle="modal" data-target="#IptDetailsModal">IPT</button>
+                                                <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddIpt" data-toggle="modal" data-target="#IptDetailsModal"> IPT Follow Up</button>
                                             </div>
                                             <div class="col-md-4">
-                                                <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddIptOutcome" data-toggle="modal" data-target="#IptOutcomeModal">IPT Outcome</button>
+                                                <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddIptOutcome" data-toggle="modal" data-target="#IptOutcomeModal"> IPT Outcome</button>
                                             </div>
                                         </div>
 
@@ -1526,6 +1542,23 @@
                             </div>
 
                         </div>
+                        
+                        <div class="col-md-12">
+                            <div class="col-md-2">
+                                <button type="button" class="btn btn-info btn-sm pull-left" data-toggle="modal" data-target="#differentiatedModal">Stability Assessment</button>
+                            </div>
+                            
+                            <div class="col-md-5">
+                                <div class="col-md-12 form-group">
+                                    <div class="col-md-6">
+                                        <label class="control-label pull-left">Stability Status</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <asp:DropDownList runat="server" ID="stabilityStatus" CssClass="form-control input-sm" ClientIDMode="Static" Enabled="False" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                         <!-- Modal -->
                         <div id="adherenceAssessmentModal" class="modal fade" role="dialog" data-parsley-validate="true" data-show-errors="true">
@@ -1643,6 +1676,172 @@
 
                             </div>
 
+                        </div>
+                        
+                        <div id="differentiatedModal" class="modal fade" role="dialog" data-parsley-validate="true" data-show-errors="true">
+                            <div class="modal-dialog" style="width: 80%">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                    <div class="row">
+                                        <div id="Categorization"  data-parsley-validate="true" data-show-errors="true">
+                                            <div class="col-md-12 col-xs-12 col-sm-12">
+                                                <div class="col-md-12">
+                                                    <hr style="margin-top: 1%" class="bg-info" />
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="col-md-8">
+                                                        <label class="control-lable pull-left">On their current ART regimen for ≥ 12 months</label></div>
+                                                    <div class="col-md-4">
+                                                        <div class="col-md-12">
+                                                            <label class="pull-left" style="padding-right: 10px">
+                                                                <input id="ArtRegimenYes" type="radio" name="ArtRegimenPeriod" value="true" clientidmode="Static" runat="server" />Yes
+                                                            </label>
+                                                            <label class="pull-left" style="padding-right: 10px">
+                                                                <input id="ArtRegimenNo" type="radio" name="ArtRegimenPeriod" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <hr>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="col-md-8">
+                                                        <label class="control-lable pull-left">No active OIs (including TB) in the previous 6 months</label></div>
+                                                    <div class="col-md-4">
+                                                        <div class="col-md-12">
+                                                            <label class="pull-left" style="padding-right: 10px">
+                                                                <input id="OiYes" type="radio" name="ActiveOis" value="true" clientidmode="Static" runat="server" />Yes
+                                                            </label>
+                                                            <label class="pull-left" style="padding-right: 10px">
+                                                                <input id="OiNo" type="radio" name="ActiveOis" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <hr>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="col-md-8">
+                                                        <label class="control-lable pull-left">Adherent to scheduled clinic visits for the previous 6 months</label></div>
+                                                    <div class="col-md-4">
+                                                        <div class="col-md-12">
+                                                            <label class="pull-left" style="padding-right: 10px">
+                                                                <input id="VisitsAdherantYes" type="radio" name="VisitsAdherant" value="true" clientidmode="Static" runat="server" />Yes
+                                                            </label>
+                                                            <label class="pull-left" style="padding-right: 10px">
+                                                                <input id="VisitsAdherantNo" type="radio" name="VisitsAdherant" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <hr>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="col-md-8">
+                                                        <label class="control-lable pull-left">Most recent VL < 1,000 copies/ml</label></div>
+                                                    <div class="col-md-4">
+                                                        <div class="col-md-12">
+                                                            <label class="pull-left" style="padding-right: 10px">
+                                                                <input id="VlCopiesYes" type="radio" name="VlCopies" value="true" clientidmode="Static" runat="server" />Yes
+                                                            </label>
+                                                            <label class="pull-left" style="padding-right: 10px">
+                                                                <input id="VlCopiesNo" type="radio" name="VlCopies" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <hr>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="col-md-8">
+                                                        <label class="control-lable pull-left">Has completed 6 months of IPT</label></div>
+                                                    <div class="col-md-4">
+                                                        <div class="col-md-12">
+                                                            <label class="pull-left" style="padding-right: 10px">
+                                                                <input id="IptYes" type="radio" name="Ipt" value="true" clientidmode="Static" runat="server" />Yes
+                                                            </label>
+                                                            <label class="pull-left" style="padding-right: 10px">
+                                                                <input id="IptNo" type="radio" name="Ipt" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <hr>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="col-md-8">
+                                                        <label class="control-lable pull-left">BMI ≥ 18.5</label></div>
+                                                    <div class="col-md-4">
+                                                        <div class="col-md-12">
+                                                            <label class="pull-left" style="padding-right: 10px">
+                                                                <input id="BmiYes" type="radio" name="Bmi" value="true" clientidmode="Static" runat="server" />Yes
+                                                            </label>
+                                                            <label class="pull-left" style="padding-right: 10px">
+                                                                <input id="BmiNo" type="radio" name="Bmi" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <hr>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="col-md-8">
+                                                        <label class="control-lable pull-left">Age ≥ 20 years</label></div>
+                                                    <div class="col-md-4">
+                                                        <div class="col-md-12">
+                                                            <label class="pull-left" style="padding-right: 10px">
+                                                                <input id="AgeYes" type="radio" name="Age" value="true" clientidmode="Static" runat="server" />Yes
+                                                            </label>
+                                                            <label class="pull-left" style="padding-right: 10px">
+                                                                <input id="AgeNo" type="radio" name="Age" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <hr>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="col-md-8">
+                                                        <label class="control-lable pull-left">Healthcare team does not have concerns about providing longer follow-up intervals for the patient</label></div>
+                                                    <div class="col-md-4">
+                                                        <div class="col-md-12">
+                                                            <label class="pull-left" style="padding-right: 10px">
+                                                                <input id="HealthcareConcernsYes" type="radio" name="HealthcareConcerns" value="true" clientidmode="Static" runat="server" />Yes
+                                                            </label>
+                                                            <label class="pull-left" style="padding-right: 10px">
+                                                                <input id="HealthcareConcernsNo" type="radio" name="HealthcareConcerns" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <hr>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="col-md-12">
+                                                        <asp:LinkButton runat="server" ID="btnSaveCategorization" CssClass="btn btn-info" ClientIDMode="Static" OnClientClick="return false;">Update Categorization</asp:LinkButton>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <hr>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
                         </div>
 
                         <div id="pharmacyModal" class="modal fade" role="dialog" data-parsley-validate="true" data-show-errors="true" style="width: 100%">
@@ -1887,6 +2086,7 @@
         $("#IptDetailsForm").hide();
         $("#IptOutcomeDetailsForm").hide();
         $("#onIpt").prop("disabled", true);
+        $("#EverBeenOnIpt").prop("disabled", true);
         //showHideFPControls();
         loadPresentingComplaints();
         loadAllergies();
@@ -2719,11 +2919,12 @@
             var onAntiTbDrugs = $("#<%=tbInfected.ClientID%>").val();
             var patientId = <%=PatientId%>;
             var patientMasterVisitId = <%=PatientMasterVisitId%>;
-            debugger;
+            var everBeenOnIpt = $("#<%=EverBeenOnIpt.ClientID%>").val();
+
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientTbService.asmx/AddPatientIcf",
-                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','cough': '" + cough + "','fever': '" + fever + "','nightSweats': '" + nightSweats + "','weightLoss': '" + weightLoss + "','onAntiTbDrugs': '" + onAntiTbDrugs + "','onIpt': '" + onIpt + "'}",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','cough': '" + cough + "','fever': '" + fever + "','nightSweats': '" + nightSweats + "','weightLoss': '" + weightLoss + "','onAntiTbDrugs': '" + onAntiTbDrugs + "','onIpt': '" + onIpt + "','everBeenOnIpt': '" + everBeenOnIpt + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
@@ -2738,6 +2939,7 @@
         function addPatientIcfAction() {
             var chestXray = $("#<%=chest.ClientID%>").val();
             var sputumSmear = $("#<%=sputum.ClientID%>").val();
+            var geneXpert = $("#<%=geneXpert.ClientID%>").val();
             var invitationOfContacts = $("#<%=contactsInvitation.ClientID%>").val();
             var evaluatedForIpt = $("#<%=iptEvaluation.ClientID%>").val();
             var startAntiTb = $("#<%=antiTb.ClientID%>").val();
@@ -2746,7 +2948,7 @@
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientTbService.asmx/AddPatientIcfAction",
-                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','chestXray': '" + chestXray + "','evaluatedForIpt': '" + evaluatedForIpt + "','invitationOfContacts': '" + invitationOfContacts + "','sputumSmear': '" + sputumSmear + "','startAntiTb': '" + startAntiTb + "'}",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','chestXray': '" + chestXray + "','evaluatedForIpt': '" + evaluatedForIpt + "','invitationOfContacts': '" + invitationOfContacts + "','sputumSmear': '" + sputumSmear + "','startAntiTb': '" + startAntiTb + "','geneXpert': '" + geneXpert + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
@@ -2795,12 +2997,15 @@
             var yellowColouredUrine = $("#urineColour").val();
             var numbness = $("#numbness").val();
             var liverFunctionTests = $("#liverTest").val();
+            var startIpt = $("#startIpt").val();;
+            var iptStartDate = moment($("#iptStartDate").val()).format('DD-MMM-YYYY');
             var patientId = <%=PatientId%>;
             var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            debugger;
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientTbService.asmx/AddPatientIptWorkup",
-                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','abdominalTenderness': '" + abdominalTenderness + "','numbness': '" + numbness + "','yellowColouredUrine': '" + yellowColouredUrine + "','yellownessOfEyes': '" + yellownessOfEyes + "','liverFunctionTests': '" + liverFunctionTests + "'}",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','abdominalTenderness': '" + abdominalTenderness + "','numbness': '" + numbness + "','yellowColouredUrine': '" + yellowColouredUrine + "','yellownessOfEyes': '" + yellownessOfEyes + "','liverFunctionTests': '" + liverFunctionTests + "','startIpt': '" + startIpt + "','iptStartDate': '" + iptStartDate + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
@@ -2910,7 +3115,7 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
-                    console.log(response.d);
+                    //console.log(response.d);
                     var returnValue = JSON.parse(response.d);
                     toastr.success(returnValue[0], "Adherence Assessment");
                     $("#<%=arvAdherance.ClientID%>").val(returnValue[1]);
@@ -2924,6 +3129,16 @@
                 }
             });
         });
+
+
+        $("#btnSaveCategorization").click(function() {
+            if ($('#Categorization').parsley().validate()) {
+                AddPatientCategorization();
+            } else {
+                return false;
+            }
+        });
+
 
         $('input[type=radio][name="ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question1"]').change(function () {
             calculateAdherenceScore();
@@ -2968,6 +3183,41 @@
             //var adherenceScore = question1 + question2 + question3 + question4;
             //console.log(adherenceScore);
             $("#<%=adherenceScore.ClientID%>").text(adherenceScore + "/4");
+        }
+
+        function AddPatientCategorization() {
+            var artRegimenPeriod = $("input[name$=ArtRegimenPeriod]:checked").val();
+            var activeOis = $("input[name$=ActiveOis]:checked").val();
+            var visitsAdherant = $("input[name$=VisitsAdherant]:checked").val();
+            var vlCopies = $("input[name$=VlCopies]:checked").val();
+            var ipt = $("input[name$=Ipt]:checked").val();
+            var bmi = $("input[name$=Bmi]:checked").val();
+            var age = $("input[name$=Age]:checked").val();
+            var healthcareConcerns = $("input[name$=HealthcareConcerns]:checked").val();
+            var patientId = <%=PatientId%>;
+            var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            debugger;
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientService.asmx/AddPatientCategorization",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','artRegimenPeriod': '" + artRegimenPeriod + "','activeOis': '" + activeOis + "','visitsAdherant': '" + visitsAdherant + "','vlCopies': '" + vlCopies + "','ipt': '" + ipt + "','bmi': '" + bmi + "','age': '" + age + "','healthcareConcerns': '" + healthcareConcerns + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    console.log(response.d);
+                    var returnValue = JSON.parse(response.d);
+
+                    toastr.success(returnValue[0], "Patient Categorization");
+
+                    $("#<%=stabilityStatus.ClientID%>").val(returnValue[1]);
+                    setTimeout(function () { $('#differentiatedModal').modal('hide');  }, 2000);
+                },
+                error: function (xhr, errorType, exception) {
+                    var jsonError = jQuery.parseJSON(xhr.responseText);
+                    toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);
+                    return false;
+                }
+            });
         }
 
 
@@ -3072,6 +3322,7 @@
             $("#IcfForm").show();
             $("#tbscreeningstatus option").filter(function () { return $(this).text() === 'NoTB'; }).prop('selected', true);
             $("#onIpt").prop("disabled", false);
+            $("#onIpt").val("");
         } else {
             $("#IptForm").hide();
             $("#IcfForm").hide();
@@ -3079,12 +3330,28 @@
             $("#tbscreeningstatus option").filter(function () { return $(this).text() === 'TBRx'; }).prop('selected', true);
             $("#onIpt").prop("disabled", true);
             $("#onIpt").val("False");
+            $("#EverBeenOnIpt").prop("disabled", true);
+            $("#EverBeenOnIpt").val("");
         }
 
     }
 
     function onIptChange() {
         if ($("#onIpt").val() === 'False') {
+            $("#btnAddIptWorkUp").prop("disabled", false);
+            $("#btnAddIptOutcome").prop("disabled", true);
+            $("#EverBeenOnIpt").prop("disabled", false);
+        } else {
+            $("#btnAddIptWorkUp").prop("disabled", true);
+            $("#btnAddIptOutcome").prop("disabled", false);
+            $("#EverBeenOnIpt").prop("disabled", true);
+            $("#EverBeenOnIpt").val("False");
+        }
+
+    }
+
+    function EverBeenOnIptChange() {
+        if ($("#EverBeenOnIpt").val() === 'False') {
             $("#btnAddIptWorkUp").prop("disabled", false);
             $("#btnAddIptOutcome").prop("disabled", true);
         } else {
@@ -3113,7 +3380,7 @@
     }
 
     function IcfActionChange() {
-        if (($("#sputum").val() === 'True') || ($("#chest").val() === 'True') || ($("#antiTb").val() === 'True') || ($("#contactsInvitation").val() === 'True') || ($("#iptEvaluation").val() === 'True')) {
+        if (($("#sputum").val() === '1') || ($("#sputum").val() === '2') || ($("#geneXpert").val() === '1') || ($("#geneXpert").val() === '2') || ($("#chest").val() === '1') || ($("#chest").val() === '2') || ($("#antiTb").val() === '1') || ($("#contactsInvitation").val() === '1') || ($("#iptEvaluation").val() === '1')) {
             $("#btnAddIptWorkUp").prop("disabled", true);
             $("#btnAddIpt").prop("disabled", true);
             $("#tbscreeningstatus option").filter(function () { return $(this).text() === 'PrTB'; }).prop('selected', true);

@@ -157,3 +157,15 @@ IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'GeneXpert'AND Object_ID =
     END;
 ALTER TABLE PatientIcfAction ALTER COLUMN SputumSmear INT NULL
 ALTER TABLE PatientIcfAction ALTER COLUMN ChestXray INT NULL
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'StartIpt'AND Object_ID = OBJECT_ID(N'PatientIptWorkup'))
+    BEGIN
+        ALTER TABLE PatientIptWorkup ADD StartIpt bit;
+    END;
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'IptStartDate'AND Object_ID = OBJECT_ID(N'PatientIptWorkup'))
+    BEGIN
+        ALTER TABLE PatientIptWorkup ADD IptStartDate Datetime;
+    END;
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'IptRegimen'AND Object_ID = OBJECT_ID(N'PatientIptWorkup'))
+    BEGIN
+        ALTER TABLE PatientIptWorkup ADD IptRegimen int;
+    END;
