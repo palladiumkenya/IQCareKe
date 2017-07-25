@@ -19,18 +19,47 @@ ALTER TABLE ServiceArea DROP COLUMN VoidBy
 IF EXISTS(SELECT * FROM sys.columns WHERE Name = N'BaselineResult'AND Object_ID = OBJECT_ID(N'HIVTesting'))
 BEGIN
 	ALTER TABLE [dbo].[HIVTesting] DROP  COLUMN BaselineResult;
+END;
+
+IF EXISTS(SELECT * FROM sys.columns WHERE Name = N'BaselineDate'AND Object_ID = OBJECT_ID(N'HIVTesting'))
+BEGIN
 	ALTER TABLE [dbo].[HIVTesting] DROP  COLUMN BaselineDate;
+END;
+
+IF EXISTS(SELECT * FROM sys.columns WHERE Name = N'CCCNumber'AND Object_ID = OBJECT_ID(N'HIVTesting'))
+BEGIN
 	ALTER TABLE [dbo].[HIVTesting] DROP  COLUMN CCCNumber;
+END;
+
+IF EXISTS(SELECT * FROM sys.columns WHERE Name = N'EnrollmentId'AND Object_ID = OBJECT_ID(N'HIVTesting'))
+BEGIN
 	ALTER TABLE [dbo].[HIVTesting] DROP  COLUMN EnrollmentId;
 END;
 
+ALTER TABLE PersonRelationship
+DROP CONSTRAINT [PK_PersonRelationship]
+
+ALTER TABLE PersonRelationship
+ADD CONSTRAINT [PK_PersonRelationship] PRIMARY KEY (Id)
 
 IF EXISTS(SELECT * FROM sys.columns WHERE Name = N'RelatedTo'AND Object_ID = OBJECT_ID(N'PersonRelationship'))
 BEGIN
 	ALTER TABLE [dbo].[PersonRelationship] DROP COLUMN RelatedTo;
-	ALTER TABLE [dbo].[HIVTesting] ADD PatientId int;
-	ALTER TABLE [dbo].[HIVTesting] ADD BaselineResult int;
-	ALTER TABLE [dbo].[HIVTesting] ADD BaselineDate DATETIME NULL;
+END;
+
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'PatientId'AND Object_ID = OBJECT_ID(N'PersonRelationship'))
+BEGIN
+	ALTER TABLE [dbo].[PersonRelationship] ADD PatientId int;
+END;
+
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'BaselineResult'AND Object_ID = OBJECT_ID(N'PersonRelationship'))
+BEGIN
+	ALTER TABLE [dbo].[PersonRelationship] ADD BaselineResult int;
+END;
+
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'BaselineDate'AND Object_ID = OBJECT_ID(N'PersonRelationship'))
+BEGIN
+	ALTER TABLE [dbo].[PersonRelationship] ADD BaselineDate DATETIME NULL;
 END;
 
 IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'DeleteFlag'AND Object_ID = OBJECT_ID(N'ServiceArea'))
