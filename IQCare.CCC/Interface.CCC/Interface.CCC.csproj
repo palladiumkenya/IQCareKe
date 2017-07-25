@@ -62,6 +62,7 @@
     <Compile Include="Encounter\IPatientCareEnding.cs" />
     <Compile Include="Encounter\IPatientLabDetails.cs" />
     <Compile Include="Encounter\IPatientLabOrder.cs" />
+    <Compile Include="Enrollment\IHivReConfirmatoryTestManager.cs" />
     <Compile Include="Enrollment\IIdentifiersManager.cs" />
     <Compile Include="Enrollment\IPatientEnrollmentManager.cs" />
     <Compile Include="Enrollment\IPatientEntryPointManager.cs" />

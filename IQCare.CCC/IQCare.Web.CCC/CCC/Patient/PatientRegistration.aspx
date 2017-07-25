@@ -220,7 +220,7 @@
                                     <div class="form-group">
                                         <div class="col-md-12"><label for="personAge" class="control-label pull-left">Age(years)</label></div>
                                         <div class="col-md-12">
-                                            <asp:TextBox runat="server" ID="personAge" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="0" required="true" min="0" value="0"></asp:TextBox>
+                                            <asp:TextBox runat="server" ID="personAge" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="0" required="true" min="0"></asp:TextBox>
                                         </div>
                                     </div>
                                     
@@ -563,6 +563,9 @@
 	                  </div><%-- .step-content-4--%>
 
                  </div><%-- .step-content--%>
+                
+                <button type="button" class="btn btn-default btn-prev" id="btnWizardPrev"><span class="glyphicon glyphicon-arrow-left"></span>Prev</button>
+                <button type="button" class="btn btn-primary" id="btnWizardNext" >Next<span class="glyphicon glyphicon-arrow-right"></span></button>
 
             </div><%-- .wizard--%>
         </div><%-- .col-md-12--%>
@@ -643,6 +646,12 @@
                     duplicateCheck();
                 });
 
+                $('#btnWizardPrev').on('click', function () {
+                    $('#myWizard').wizard('previous');
+                });
+                $('#btnWizardNext').on('click', function () {
+                    $('#myWizard').wizard('next');
+                });
 
                 //$('#keyPopulationCategories').multiselect();
 
@@ -1200,7 +1209,7 @@
 
                 var PatientId = '<%=Session["PatientEditId"]%>';
 
-                console.log(PatientId);
+                //console.log(PatientId);
 
                 if (PatientId > 0) {
                     $.ajax({
@@ -1402,10 +1411,10 @@
                     var personLName = $("#<%=personLName.ClientID%>").val();
                     var dateOfBirth = $('#MyDateOfBirth').datepicker('getDate');
                     var PatientId = '<%=Session["PatientEditId"]%>';
-                    console.log(PatientId);
+                    //console.log(PatientId);
 
                     var dob = moment(dateOfBirth).format('DD-MMM-YYYY');
-                    console.log(dob);
+                    //console.log(dob);
 
                     //console.log(personFname);
                     //console.log(personMName);
@@ -1478,7 +1487,7 @@
                     var checked_radio = $("[id*=PatientTypeId] input:checked");
                     var patientType = checked_radio.closest("td").find("label").html();
 
-                    console.log(patientType);
+                    //console.log(patientType);
 
                     //console.log(personAge);
 
@@ -1583,7 +1592,7 @@
                     var currentDate = new Date();
                     currentDate.setDate(15);
                     currentDate.setMonth(5);
-                    console.log(currentDate);
+                    //console.log(currentDate);
                     var estDob = moment(currentDate.toISOString());
                     var dob = estDob.add((personAge * -1), 'years');
                     <% Session["DobPrecision"] = "true"; %>;

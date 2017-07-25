@@ -386,6 +386,33 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
+        public string AddReconfirmatoryTest(int reconfirmatoryTest , int resultReConfirmatoryTest, string reConfirmatoryTestDate)
+        {
+            ExMessage message = new ExMessage();
+            try
+            {
+                PersonId = int.Parse(Session["PersonId"].ToString());
+                int userId = Convert.ToInt32(Session["AppUserId"]);
+
+                HivReConfirmatoryTestManager hivReConfirmatoryTestManager = new HivReConfirmatoryTestManager();
+                int result = hivReConfirmatoryTestManager.AddHivReConfirmatoryTest(PersonId, reconfirmatoryTest, resultReConfirmatoryTest, reConfirmatoryTestDate, userId);
+
+                if (result > 0)
+                {
+                    message.errorcode = 0;
+                    message.msg += "<p>Successfully added patient re-confirmation test.</p>";
+                }
+            }
+            catch (SoapException ex)
+            {
+                message.errorcode = 1;
+                message.msg = ex.Message;
+            }
+
+            return Msg = new JavaScriptSerializer().Serialize(message);
+        }
+
+        [WebMethod(EnableSession = true)]
         public string UpdatePatientEnrollment(string enrollmentNo , string enrollmentDate, string serviceName)
         {
             ExMessage message = new ExMessage();
