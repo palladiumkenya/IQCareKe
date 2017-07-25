@@ -1837,8 +1837,13 @@
 									$("#DHID")
 										.datepicker('setDate', moment(obj.HivDiagnosisDate).format('DD-MMM-YYYY'));
 									$("#DOE").datepicker('setDate', moment(obj.EnrollmentDate).format('DD-MMM-YYYY'));
-									$("#DARTI").datepicker('setDate',
-										moment(obj.ARTInitiationDate).format('DD-MMM-YYYY'));
+
+                                    if (obj.ARTInitiationDate) {
+                                        $("#DARTI").datepicker('setDate', moment(obj.ARTInitiationDate).format('DD-MMM-YYYY'));
+                                    } else {
+                                        $("#DARTI").datepicker('setDate', moment(obj.ARTInitiationDateNew).format('DD-MMM-YYYY'));
+                                    }
+                                    
 									$("#WHOStageAtEnrollment").val(obj.EnrollmentWHOStage);
 
                                     $("#<%=TransferFromCounty.ClientID%>").val(obj.CountyFrom);

@@ -11,7 +11,7 @@
                               <div class="col-md-11 col-xs-11 col-sm-11"><h6 class="pull-left">DOB : </h6>  <h6 class="pull-left"><asp:Label runat="server" ID="lblDOB" CssClass="text-info pull-left"></asp:Label></h6></div>
                           </div>--%>
 					  </div>
-                    <div class="col-md-7 col-xs-7 col-sm-7" style="padding-left: 1%">
+                    <div class="col-md-4 col-xs-7 col-sm-7" style="padding-left: 1%">
                           <div class="col-md-12 pull-left"><h4 class="pull-left"><asp:Label runat="server" ID="lblPatientNames" CssClass="text-info"> #PatientNames</asp:Label></h4><h4 class="pull-left"><asp:Label runat="server"  ID="lblCCCRegNo"></asp:Label></h4></div> 
                            
                           <div class="col-md-12 col-xs-12 col-sm-12" style="padding-top: 0%">
@@ -24,9 +24,20 @@
 
 
                       </div>
+                    <div class="col-md-3">
+                        <div class="col-md-12">
+                             <div class="col-md-11 col-xs-11 col-sm-11"><h6 class="pull-left">TB Status : </h6>  <h6 class=""><asp:Label runat="server" ID="lbltbstatus" CssClass="text-info"></asp:Label></h6></div>
+                        </div>
+                        <div class="col-md-12">
+                             <div class="col-md-11 col-xs-11 col-sm-11"><h6 class="pull-left">Nutrition Status : </h6>  <h6 class=""><asp:Label runat="server" ID="lblnutritionstatus" CssClass="text-info"></asp:Label></h6></div>
+                        </div>
+                        <div class="col-md-12">
+                             <div class="col-md-11 col-xs-11 col-sm-11"><h6 class="pull-left">Categorization: </h6>  <h6 class=""><asp:Label runat="server" ID="lblcategorization" CssClass="text-info"></asp:Label></h6></div>
+                        </div>
+                    </div>
                     <div class="col-md-4 col-xs-4 col-sm-4 pull-right">
                         
-                         <div class="col-md-12 col-xs-12 col-sm-12" style="padding-top: 0%">
+                         <div class="col-md-12 col-xs-12 col-sm-12 pull-right" style="padding-top: 0%">
                               <div class="col-md-11 col-xs-11 col-sm-11"><h6 class="pull-left">Enrollment Date : </h6>  <h6 class=""><asp:Label runat="server" ID="lblEnrollmentDate" CssClass="text-info"></asp:Label></h6></div>
                           </div>
                           <div class="col-md-12 col-xs-12 col-sm-12" style="padding-top: 0%">

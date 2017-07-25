@@ -6,6 +6,7 @@
 <%@ Register Src="~/CCC/UC/ucPharmacyPrescription.ascx" TagPrefix="uc" TagName="ucPharmacyPrescription" %>
 <%@ Register Src="~/CCC/UC/ucPatientClinicalEncounter.ascx" TagPrefix="uc" TagName="ucPatientClinicalEncounter" %>
 <%@ Register Src="~/CCC/UC/ucPatientLabs.ascx" TagPrefix="uc" TagName="ucPatientLabs" %>
+<%@ Register Src="~/CCC/UC/ucPatientSychosocialCriteria.ascx" TagPrefix="uc" TagName="ucPatientPsycho" %>
 
 
 
@@ -18,7 +19,8 @@
     <div class="col-md-12 col-xs-12">
 
         <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#encounter" aria-controls="encounter" role="tab" data-toggle="tab"><i class="fa fa-exchange fa-lg" aria-hidden="true"></i>Clinical Encounter</a></li>
+            <li role="presentation" class="active"><a href="#ARTReadiness" aria-controls="ARTReadiness" role="tab" data-toggle="tab"><i class="fa fa-flask fa-lg" aria-hidden="true"></i>ART Readiness Assessment</a></li>
+            <li role="presentation" class=""><a href="#encounter" aria-controls="encounter" role="tab" data-toggle="tab"><i class="fa fa-exchange fa-lg" aria-hidden="true"></i>Clinical Encounter</a></li>
             <li role="presentation"><a href="#vlTracker" aria-controls="vlTracker" role="tab" data-toggle="tab"><i class="fa fa-line-chart fa-lg" aria-hidden="true"></i>Viraload Tracker</a></li>
             <%--<li role="presentation"><a href="#Laboratory" aria-controls="Laboratory" role="tab" data-toggle="tab"><i class="fa fa-flask fa-lg" aria-hidden="true"></i>Laboratory</a></li>
             <li role="presentation"><a href="#Pharmacy" aria-controls="Pharmacy" role="tab" data-toggle="tab"><i class="fa fa-tint fa-lg" aria-hidden="true"></i>Pharmacy</a></li>--%>
@@ -30,10 +32,18 @@
 
          <div class="tab-content">
 
-            <div role="tabpanel" class="tab-pane active" id="encounter">
+            <div role="tabpanel" class="tab-pane fade" id="encounter">
                
                 <uc:ucPatientClinicalEncounter runat="server" id="ucPatientClinicalEncounter" />
             </div>
+
+             <div role="tabpanel" class="tab-pane active" id="ARTReadiness">
+
+                
+                    <uc:ucPatientPsycho runat="server" id="ucPatientPsycho" />
+                
+             </div>
+
 
             <div role="tabpanel" class="tab-pane fade" id="vlTracker">
 

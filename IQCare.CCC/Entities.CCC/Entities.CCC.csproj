@@ -65,6 +65,8 @@
   <ItemGroup>
     <Compile Include="Appointment\BlueCardAppointment.cs" />
     <Compile Include="Appointment\PatientAppointment.cs" />
+    <Compile Include="Assessment\PatientPsychoscialCriteria.cs" />
+    <Compile Include="Assessment\PatientSupportSystemCriteria.cs" />
     <Compile Include="Baseline\INHProphylaxis.cs" />
     <Compile Include="Baseline\PatientBaselineAssessment.cs" />
     <Compile Include="Baseline\PatientArvHistory.cs" />
