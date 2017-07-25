@@ -17,12 +17,21 @@ namespace IQCare.Web.CCC.Enrollment
     {
         public string patType { get; set; }
         public int PersonId { get; set; }
+        public int PatientExists { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["PatientType"] !=null && Session["PatientType"].ToString() != null)
             {
                 var patientType = int.Parse(Session["PatientType"].ToString());
                 patType = LookupLogic.GetLookupNameById(patientType);
+            }
+
+            var patientLookManager = new PatientLookupManager();
+            int person = int.Parse(Session["PersonId"].ToString());
+            List<PatientLookup> patient = patientLookManager.GetPatientByPersonId(person);
+            if (patient.Count > 0)
+            {
+                PatientExists = patient[0].Id;
             }
 
             if (!IsPostBack)

@@ -84,6 +84,7 @@ namespace DataAccess.CCC.Repository
         private IServiceAreaIdentifiersRepository _serviceAreaIdentifiersRepository;
         private IIdentifierRepository _identifierRepository;
         private IPatientReEnrollmentRepository _patientReEnrollmentRepository;
+        private IHivReConfirmatoryTestRepository _hivReConfirmatoryTestRepository;
 
         /* Patient */
         private IPatientRepository _patientRepository;
@@ -351,6 +352,13 @@ namespace DataAccess.CCC.Repository
                            new PatientReEnrollmentRepository((GreencardContext) _context));
             }
         }
+
+        public IHivReConfirmatoryTestRepository HivReConfirmatoryTestRepository { get
+            {
+                return _hivReConfirmatoryTestRepository ?? (_hivReConfirmatoryTestRepository =
+                           new HivReConfirmatoryTestRepository((GreencardContext) _context));
+            } }
+
         public IPatientCareEndingRepository PatientCareEndingRepository
         {
             get

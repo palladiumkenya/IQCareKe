@@ -346,7 +346,16 @@
                     return false;
                 }
 
-                addPatient(entryPointId, enrollmentDate, personDateOfBirth, nationalId, patientType, mflCode, dobPrecision, JSON.stringify(identifiers));
+                var reconfirmatoryTest = $("#ReconfirmatoryTest").val();
+                var resultReConfirmatoryTest = $("#ResultReConfirmatoryTest").val();
+                var reConfirmatoryTestDate = $("#ReConfirmatoryTestDate").val();
+
+                $.when(addReconfirmatoryTest(reconfirmatoryTest, resultReConfirmatoryTest, reConfirmatoryTestDate))
+                    .then(function() {
+                        setTimeout(function() {
+                            addPatient(entryPointId, enrollmentDate, personDateOfBirth, nationalId, patientType, mflCode, dobPrecision, JSON.stringify(identifiers));
+                        }, 2000);
+                    });      
             });
 
             function addPatientRegister(entryPointId, enrollmentDate, personDateOfBirth, nationalId, patientType, mflCode, dobPrecision, identifiers) {
@@ -395,6 +404,31 @@
                             window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientHome.aspx")%>';
                         }
                         
+                    },
+                    error: function (xhr, errorType, exception) {
+                        var jsonError = jQuery.parseJSON(xhr.responseText);
+                        toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);
+                        return false;
+                    }
+                });
+            }
+
+            function addReconfirmatoryTest(reconfirmatoryTest, resultReConfirmatoryTest, reConfirmatoryTestDate) {
+                $.ajax({
+                    type: "POST",
+                    url: "../WebService/EnrollmentService.asmx/AddReconfirmatoryTest",
+                    data: "{'reconfirmatoryTest':'" + reconfirmatoryTest + "','resultReConfirmatoryTest':'" + resultReConfirmatoryTest + "', 'reConfirmatoryTestDate':'" + reConfirmatoryTestDate + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function(response) {
+                        var messageResponse = JSON.parse(response.d);
+                        if (messageResponse.errorcode == 1) {
+                            toastr.error(messageResponse.msg, "Patient Re-Confirmatory Test");
+                            return false;
+                        } else {
+                            toastr.success(messageResponse.msg, "Patient Re-Confirmatory Test");
+                            return false;
+                        }
                     },
                     error: function (xhr, errorType, exception) {
                         var jsonError = jQuery.parseJSON(xhr.responseText);
@@ -620,8 +654,10 @@
         function ReConfirmatoryTestChanged() {
             var reconfirmTest = $("#ReconfirmatoryTest :selected").text();
             var patientType = '<%=patType%>';
-            //console.log(patientType);
-            if (patientType != "New") {
+            var patientExists = '<%=PatientExists%>';
+
+            console.log(patientExists);
+            if (patientType != "New" || patientExists > 0) {
                 $("#ReconfirmatoryTest").prop("disabled", true);
                 $("#ReConfirmatory").hide();
             } else {

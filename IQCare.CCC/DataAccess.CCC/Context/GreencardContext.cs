@@ -41,6 +41,7 @@ namespace DataAccess.CCC.Context
         public DbSet<ServiceAreaIdentifiers> ServiceAreaIdentifiers { get; set; }
         public DbSet<Identifier> Identifiers { get; set; }
         public DbSet<PatientReEnrollment> ReEnrollments { get; set; }
+        public DbSet<HivReConfirmatoryTest> HivReConfirmatoryTests { get; set; }
 
         //Screening
         public DbSet<PatientScreening> PatientScreenings { get; set; }
