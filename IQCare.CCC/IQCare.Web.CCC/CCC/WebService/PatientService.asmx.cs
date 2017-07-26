@@ -444,14 +444,12 @@ namespace IQCare.Web.CCC.WebService
             else
                 categorizationStatus = PatientCategorizationStatus.UnStable;
 
-            int MasterVisitId = int.Parse(Session["PatientMasterVisitId"].ToString());
-
             var patientCategorization = new PatientCategorization()
             {
                 PatientId = patientId,
                 Categorization = categorizationStatus,
                 DateAssessed = DateTime.Now,
-                PatientMasterVisitId = MasterVisitId
+                PatientMasterVisitId = patientMasterVisitId
             };
             try
             {
@@ -461,10 +459,8 @@ namespace IQCare.Web.CCC.WebService
                 {
                     Msg = "Patient Categorization Added Successfully!";
 
-                    PatientCategorizationStatus catStatus = (PatientCategorizationStatus) categorizationStatus;
-
                     var lookUpLogic = new LookupLogic();
-                    var status = lookUpLogic.GetItemIdByGroupAndItemName("StabilityAssessment", catStatus.ToString());
+                    var status = lookUpLogic.GetItemIdByGroupAndItemName("StabilityAssessment", categorizationStatus.ToString());
                     var itemId = 0;
                     if (status.Count > 0)
                     {

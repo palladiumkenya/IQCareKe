@@ -14,7 +14,6 @@ namespace IQCare.Web.CCC.Patient
 {
     public partial class PatientHome : System.Web.UI.Page
     {
-        public int PatientMasterVisitId;
         public decimal march_height;
         protected int ptnPk = 0;
         protected int labTestId = 0;
@@ -24,6 +23,11 @@ namespace IQCare.Web.CCC.Patient
         protected int PatientId
         {
             get { return Convert.ToInt32(Session["PatientPK"]); }
+        }
+
+        protected int PatientMasterVisitId
+        {
+            get { return Convert.ToInt32(Session["PatientMasterVisitId"]); }
         }
 
         protected int UserId

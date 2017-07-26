@@ -410,7 +410,7 @@
                                                     <label class="control-label pull-left">Ever been on IPT?</label>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="EverBeenOnIpt" ClientIDMode="Static" onChange="EverBeenOnIptChange();" required="true" data-parsley-required="true">
+                                                    <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="EverBeenOnIpt" ClientIDMode="Static" onChange="EverBeenOnIptChange();"  required="true" data-parsley-required="true">
                                                         <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
                                                         <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
                                                         <asp:ListItem Text="No" Value="False"></asp:ListItem>
@@ -2920,7 +2920,7 @@
             var patientId = <%=PatientId%>;
             var patientMasterVisitId = <%=PatientMasterVisitId%>;
             var everBeenOnIpt = $("#<%=EverBeenOnIpt.ClientID%>").val();
-
+            debugger;
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientTbService.asmx/AddPatientIcf",
@@ -3330,7 +3330,7 @@
             $("#tbscreeningstatus option").filter(function () { return $(this).text() === 'TBRx'; }).prop('selected', true);
             $("#onIpt").prop("disabled", true);
             $("#onIpt").val("False");
-            $("#EverBeenOnIpt").prop("disabled", true);
+            $("#EverBeenOnIpt").prop("disabled", false);
             $("#EverBeenOnIpt").val("");
         }
 
