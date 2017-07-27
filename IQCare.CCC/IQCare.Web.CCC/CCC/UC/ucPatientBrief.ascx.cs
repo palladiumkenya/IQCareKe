@@ -19,6 +19,9 @@ namespace IQCare.Web.CCC.UC
         {
             var myDate = DateTime.Now.Year;
             var myDateMonth = DateTime.Now.Month;
+            string TBStatus="unknown";
+            string NutritionStatus = "unknown";
+            string categorization = "none";
 
             int patientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
             
@@ -105,6 +108,76 @@ namespace IQCare.Web.CCC.UC
                 // lblCCCReg.Text = x.EnrollmentNumber;
                 lblCCCRegNo.Text = " (" + thisPatient.EnrollmentNumber+") ";
                 lblEnrollmentDate.Text = "" + thisPatient.EnrollmentDate.ToString("dd-MMM-yyyy");
+
+                //SET TB STATUS
+                if(thisPatient.TBStatus<1)
+                {
+                    lbltbstatus.Text = "<span class='fa fa-info-circle text-danger'> " + TBStatus + "<span>";
+                }
+                else
+                {
+                    TBStatus= LookupLogic.GetLookupNameById(thisPatient.TBStatus).ToString().ToUpper();
+                    switch(TBStatus)
+                    {
+                        case "TBRx":
+                            lbltbstatus.Text = "<span class='label label-danger'>"+TBStatus+"</span>";
+                            break;
+                        case "INH":
+                            lbltbstatus.Text = "<span class='label label-warning'>" + TBStatus + "</span>";
+                            break;
+                        case "PrTB":
+                            lbltbstatus.Text = "<span class='label label-warning'>" + TBStatus + "</span>";
+                            break;
+                        default:
+                            lbltbstatus.Text = "<span class='label label-success'>" + TBStatus + "</span>";
+                            break;
+                    }
+                }
+
+                // SET NUTRITION STATUS
+                if (thisPatient.TBStatus < 1)
+                {
+                    lblnutritionstatus.Text = "<span class='fa fa-info-circle text-danger'> " + NutritionStatus+"<span>";
+                }
+                else
+                {
+                    NutritionStatus = LookupLogic.GetLookupNameById(thisPatient.NutritionStatus).ToString().ToUpper();
+                    switch(NutritionStatus)
+                    {
+                        case "O":
+                            lblnutritionstatus.Text= "<span class='label label-warning'> Obese </span>";
+                            break;
+                        case "MAM":
+                              lblnutritionstatus.Text = "<span class='label label-warning'>" + NutritionStatus + "</span>";
+                            break;
+                        case "SAM":
+                            lblnutritionstatus.Text = "<span class='label label-danger'>" + NutritionStatus + "</span>";
+                            break;
+                        default:
+                            lblnutritionstatus.Text = "<span class='label label-success'>" + NutritionStatus + "</span>";
+                            break;
+                    }
+                }
+
+                // SET categorization:
+                if (thisPatient.categorization < 1)
+                {
+                    lblcategorization.Text = "<span class='fa fa-info-circle text-danger'>" + categorization+"</span>";
+                }
+                else
+                {
+                    categorization= LookupLogic.GetLookupNameById(thisPatient.categorization).ToString().ToUpper();
+                    switch (categorization)
+                    {
+                        case "Stable":
+                            lblnutritionstatus.Text = "<span class='label label-success'>" + categorization + "</span>";
+                            break;
+                        case "Unstable":
+                            lblnutritionstatus.Text = "<span class='label label-danger'>" + categorization + "</span>";
+                            break;
+                    }
+                }
+
 
             }
 

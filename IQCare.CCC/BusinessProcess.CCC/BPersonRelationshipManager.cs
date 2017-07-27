@@ -65,7 +65,7 @@ namespace BusinessProcess.CCC
                 {
                     var myList =
                         unitOfWork.PersonRelationshipRepository.FindBy(
-                            x => x.RelatedTo == patientId & x.DeleteFlag == false);
+                            x => x.PatientId == patientId & x.DeleteFlag == false);
                     return myList.ToList();
                 }
                 catch (Exception e)

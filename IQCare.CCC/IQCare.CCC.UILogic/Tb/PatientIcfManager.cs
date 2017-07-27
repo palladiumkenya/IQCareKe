@@ -20,7 +20,8 @@ namespace IQCare.CCC.UILogic.Tb
                 NightSweats = p.NightSweats,
                 WeightLoss = p.WeightLoss,
                 OnAntiTbDrugs = p.OnAntiTbDrugs,
-                OnIpt = p.OnIpt
+                OnIpt = p.OnIpt,
+                EverBeenOnIpt = p.EverBeenOnIpt
             };
             return _patientIcf.AddPatientIcf(patientIcf);
         }
@@ -48,7 +49,8 @@ namespace IQCare.CCC.UILogic.Tb
                 NightSweats = p.NightSweats,
                 WeightLoss = p.WeightLoss,
                 OnIpt = p.OnIpt,
-                OnAntiTbDrugs = p.OnAntiTbDrugs
+                OnAntiTbDrugs = p.OnAntiTbDrugs,
+                EverBeenOnIpt = p.EverBeenOnIpt
             };
             return _patientIcf.UpdatePatientIcf(patientIcf);
         }

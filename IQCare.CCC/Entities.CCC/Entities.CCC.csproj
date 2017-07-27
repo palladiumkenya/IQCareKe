@@ -63,13 +63,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Appointment\BlueCardAppointment.cs" />
     <Compile Include="Appointment\PatientAppointment.cs" />
+    <Compile Include="Assessment\PatientPsychoscialCriteria.cs" />
+    <Compile Include="Assessment\PatientSupportSystemCriteria.cs" />
     <Compile Include="Baseline\INHProphylaxis.cs" />
     <Compile Include="Baseline\PatientBaselineAssessment.cs" />
     <Compile Include="Baseline\PatientArvHistory.cs" />
     <Compile Include="Baseline\PatientHivDiagnosis.cs" />
     <Compile Include="Baseline\PatientDisclosure.cs" />
     <Compile Include="Baseline\PatientHivEnrollmentBaseline.cs" />
+    <Compile Include="Baseline\PatientLinkage.cs" />
     <Compile Include="Baseline\PatientTransferIn.cs" />
     <Compile Include="Baseline\PatientTreatmentInitiation.cs" />
     <Compile Include="Consent\PatientConsent.cs" />
@@ -79,6 +83,7 @@
     <Compile Include="Encounter\PatientAdherenceAssessment.cs" />
     <Compile Include="Encounter\PatientAdherenceOutcome.cs" />
     <Compile Include="Encounter\PatientCareEnding.cs" />
+    <Compile Include="Encounter\PatientCategorization.cs" />
     <Compile Include="Encounter\PatientClinicalDiagnosis.cs" />
     <Compile Include="Encounter\PatientClinicalNotes.cs" />
     <Compile Include="Encounter\PatientDiagnosis.cs" />
@@ -95,6 +100,7 @@
     <Compile Include="Encounter\PhysicalExamination.cs" />
     <Compile Include="Encounter\Pregnancy.cs" />
     <Compile Include="Encounter\PregnancyIndicator.cs" />
+    <Compile Include="Enrollment\HivReConfirmatoryTest.cs" />
     <Compile Include="Enrollment\Identifier.cs" />
     <Compile Include="Enrollment\PatientEntityEnrollment.cs" />
     <Compile Include="Enrollment\PatientEntryPoint.cs" />

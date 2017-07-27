@@ -61,6 +61,8 @@
     <Content Include="CCC\Scripts\css\chosen.css" />
     <Content Include="CCC\Scripts\css\customCss.css" />
     <Content Include="CCC\Scripts\css\jquery-ui-1.9.1.css" />
+    <Content Include="CCC\Scripts\css\jquery.onoff.css" />
+    <Content Include="CCC\Scripts\css\lobipanel.css" />
     <Content Include="CCC\Scripts\css\mbExtruder.css" />
     <Content Include="CCC\Scripts\css\mdb.css" />
     <Content Include="CCC\Scripts\css\patientSummary.css" />
@@ -80,6 +82,8 @@
     <Content Include="CCC\Scripts\js\jquery-ui.min.js" />
     <Content Include="CCC\Scripts\js\jquery.hoverIntent.min.js" />
     <Content Include="CCC\Scripts\js\jquery.mb.flipText.js" />
+    <Content Include="CCC\Scripts\js\jquery.onoff.js" />
+    <Content Include="CCC\Scripts\js\lobipanel.js" />
     <Content Include="CCC\Scripts\js\mbExtruder.js" />
     <Content Include="CCC\Scripts\js\mdb.js" />
     <Content Include="CCC\Scripts\js\PatientEncounter.js" />
@@ -120,6 +124,7 @@
     <Content Include="CCC\UC\ucPatientDetails.ascx" />
     <Content Include="CCC\UC\ucPatientLabs.ascx" />
     <Content Include="CCC\UC\ucPatientLabsExtruder.ascx" />
+    <Content Include="CCC\UC\ucPatientSychosocialCriteria.ascx" />
     <Content Include="CCC\UC\ucPatientTriage.ascx" />
     <Content Include="CCC\UC\ucPatientTriageSummary.ascx" />
     <Content Include="CCC\UC\ucPatientVitalsExtruder.ascx" />
@@ -393,6 +398,13 @@
     <Compile Include="CCC\UC\ucPatientLabsExtruder.ascx.designer.cs">
       <DependentUpon>ucPatientLabsExtruder.ascx</DependentUpon>
     </Compile>
+    <Compile Include="CCC\UC\ucPatientSychosocialCriteria.ascx.cs">
+      <DependentUpon>ucPatientSychosocialCriteria.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucPatientSychosocialCriteria.ascx.designer.cs">
+      <DependentUpon>ucPatientSychosocialCriteria.ascx</DependentUpon>
+    </Compile>
     <Compile Include="CCC\UC\ucPatientTriage.ascx.cs">
       <DependentUpon>ucPatientTriage.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -474,7 +486,6 @@
     </Compile>
     <Compile Include="CCC\WebService\PatientService.asmx.cs">
       <DependentUpon>PatientService.asmx</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="CCC\WebService\PatientSummaryService.asmx.cs">
       <DependentUpon>PatientSummaryService.asmx</DependentUpon>

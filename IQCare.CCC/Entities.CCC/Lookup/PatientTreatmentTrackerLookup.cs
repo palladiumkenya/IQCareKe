@@ -29,6 +29,6 @@ namespace Entities.CCC.Lookup
         public string TreatmentReason { get; set; }
         public int CreatedBy { get; set; }
         public DateTime CreateDate { get; set; }
-
+        public DateTime? DispensedByDate { get; set; }
     }
 }

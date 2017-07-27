@@ -20,7 +20,7 @@ namespace IQCare.Web.CCC.WebService
         private int Result { get; set; }
 
         [WebMethod(EnableSession = true)]
-        public string AddPatientIcf(int patientId, int patientMasterVisitId, bool cough, bool fever, bool nightSweats, bool weightLoss, bool onAntiTbDrugs, bool onIpt)
+        public string AddPatientIcf(int patientId, int patientMasterVisitId, bool cough, bool fever, bool nightSweats, bool weightLoss, bool onAntiTbDrugs, bool onIpt, bool everBeenOnIpt)
         {
             PatientIcf patientIcf = new PatientIcf()
             {
@@ -31,7 +31,8 @@ namespace IQCare.Web.CCC.WebService
                 NightSweats = nightSweats,
                 WeightLoss = weightLoss,
                 OnIpt = onIpt,
-                OnAntiTbDrugs = onAntiTbDrugs
+                OnAntiTbDrugs = onAntiTbDrugs,
+                EverBeenOnIpt = everBeenOnIpt
             };
             try
             {
@@ -103,17 +104,18 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string AddPatientIcfAction(int patientId, int patientMasterVisitId, bool chestXray, bool evaluatedForIpt, bool invitationOfContacts, bool sputumSmear, bool startAntiTb)
+        public string AddPatientIcfAction(int patientId, int patientMasterVisitId, string chestXray, bool evaluatedForIpt, bool invitationOfContacts, string sputumSmear, bool startAntiTb, string geneXpert)
         {
             PatientIcfAction patientIcfAction = new PatientIcfAction()
             {
                 PatientId = patientId,
                 PatientMasterVisitId = patientMasterVisitId,
-                ChestXray = chestXray,
+                ChestXray = (IcfRadiologyOptions)Convert.ToInt32(chestXray),
                 EvaluatedForIpt = evaluatedForIpt,
                 InvitationOfContacts = invitationOfContacts,
-                SputumSmear = sputumSmear,
+                SputumSmear = (IcfTestOptions)Convert.ToInt32(sputumSmear),
                 StartAntiTb = startAntiTb,
+                GeneXpert = (IcfTestOptions)Convert.ToInt32(geneXpert)
             };
             try
             {
@@ -141,7 +143,7 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string AddPatientIptWorkup(int patientId, int patientMasterVisitId, bool abdominalTenderness, bool numbness, bool yellowColouredUrine, bool yellownessOfEyes, string liverFunctionTests)
+        public string AddPatientIptWorkup(int patientId, int patientMasterVisitId, bool abdominalTenderness, bool numbness, bool yellowColouredUrine, bool yellownessOfEyes, string liverFunctionTests, bool startIpt, DateTime iptStartDate)
         {
             PatientIptWorkup patientIptWorkup = new PatientIptWorkup()
             {
@@ -151,7 +153,9 @@ namespace IQCare.Web.CCC.WebService
                 LiverFunctionTests = liverFunctionTests,
                 Numbness = numbness,
                 YellowColouredUrine = yellowColouredUrine,
-                YellownessOfEyes = yellownessOfEyes
+                YellownessOfEyes = yellownessOfEyes,
+                IptStartDate = iptStartDate,
+                StartIpt = startIpt
             };
             try
             {

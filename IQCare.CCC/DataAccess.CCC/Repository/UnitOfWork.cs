@@ -84,6 +84,7 @@ namespace DataAccess.CCC.Repository
         private IServiceAreaIdentifiersRepository _serviceAreaIdentifiersRepository;
         private IIdentifierRepository _identifierRepository;
         private IPatientReEnrollmentRepository _patientReEnrollmentRepository;
+        private IHivReConfirmatoryTestRepository _hivReConfirmatoryTestRepository;
 
         /* Patient */
         private IPatientRepository _patientRepository;
@@ -107,9 +108,11 @@ namespace DataAccess.CCC.Repository
         private IPatientVaccinationRepository _patientVaccinationRepository;
         private IPatientHvTestingRepository _patientHivTestingRepository;
         private IPatientTreatmentInitiationRepository _patientTreatmentInitiationRepository;
+        private IPatientLinkageRepository _patientLinkageRepository;
 
         /*Appointment*/
         private IPatientAppointmentRepository _patientAppointmentRepository;
+        private IBluecardAppointmentRepository _bluecardAppointmentRepository;
         /*Encounter*/
         private IPatientCareEndingRepository _patientCareEndingRepository;
         private IPatientAdherenceAssessmentRepository _patientAdherenceAssessmentRepository;
@@ -123,6 +126,9 @@ namespace DataAccess.CCC.Repository
         private IPatientIptRepository _patientIptRepository;
         private IPatientIptOutcomeRepository _patientIptOutcomeRepository;
         private IPatientIptWorkupRepository _patientIptWorkupRepository;
+
+        /*Patient categorization*/
+        private IPatientCategorizationRepository _patientCategorizationRepository;
 
         public UnitOfWork(BaseContext context)
         {
@@ -346,6 +352,13 @@ namespace DataAccess.CCC.Repository
                            new PatientReEnrollmentRepository((GreencardContext) _context));
             }
         }
+
+        public IHivReConfirmatoryTestRepository HivReConfirmatoryTestRepository { get
+            {
+                return _hivReConfirmatoryTestRepository ?? (_hivReConfirmatoryTestRepository =
+                           new HivReConfirmatoryTestRepository((GreencardContext) _context));
+            } }
+
         public IPatientCareEndingRepository PatientCareEndingRepository
         {
             get
@@ -449,6 +462,11 @@ namespace DataAccess.CCC.Repository
             get { return _patientAppointmentRepository ?? (_patientAppointmentRepository = new PatientAppointmentRepository((GreencardContext)_context)); }
         }
 
+        public IBluecardAppointmentRepository BluecardAppointmentRepository
+        {
+            get { return _bluecardAppointmentRepository ?? (_bluecardAppointmentRepository = new BluecardAppointmentRepository((GreencardContext)_context)); }
+        }
+
         public IPatientTreatmentInitiationRepository PatientTreatmentInitiationRepository
         {
             get
@@ -458,6 +476,16 @@ namespace DataAccess.CCC.Repository
                            new PatientTreatmentInitiationRepository((GreencardContext)_context));
             }
         }
+
+        public IPatientLinkageRepository PatientLinkageRepository
+        {
+            get
+            {
+                return _patientLinkageRepository ?? (_patientLinkageRepository =
+                           new PatientLinkageRepository((GreencardContext) _context));
+            }
+        }
+
         public IPatientHvTestingRepository PatientHivTestingRepository
         {
             get { return _patientHivTestingRepository ?? (_patientHivTestingRepository = new PatientHivTestingRepository((GreencardContext)_context)); }
@@ -564,6 +592,11 @@ namespace DataAccess.CCC.Repository
                        (_personGreenCardLookupRepository =
                            new PersonGreenCardLookupRepository((GreencardContext) _context));
             }
+        }
+
+        public IPatientCategorizationRepository PatientCategorizationRepository
+        {
+            get { return _patientCategorizationRepository ?? (_patientCategorizationRepository = new PatientCategorizationRepository((GreencardContext)_context)); }
         }
 
         public int Complete()

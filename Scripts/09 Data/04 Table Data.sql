@@ -1590,6 +1590,11 @@ If Not Exists(Select 1 From ScheduledTask Where TaskName='IQTools.Update') Begin
 	Values('IQTools.Update',null,getdate(),1);
 End
 Go
+If Not Exists(Select 1 From ScheduledTask Where TaskName='Bluecard.Sync') Begin
+	Insert Into ScheduledTask(TaskName,LastRunDate,NextRunDate,Active)
+	Values('Bluecard.Sync',null,getdate(),1);
+End
+Go
 Update Mst_Store Set StoreCategory =
 Case
 			When centralstore = 1 Then 'Purchasing'

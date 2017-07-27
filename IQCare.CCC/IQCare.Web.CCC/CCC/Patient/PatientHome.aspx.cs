@@ -237,15 +237,22 @@ namespace IQCare.Web.CCC.Patient
                     var ptnTreatmentBaseline = patientTreatmentManager.GetPatientbaselineRegimenLookup(PatientId);
                     if (ptnTreatmentInitiation != null)
                     {
-                        lblFirstline.Text = ptnTreatmentBaseline.CreateDate.ToString("dd-MMM-yyyy");
-                        lblcohort.Text = ptnTreatmentBaseline.CreateDate.ToString("MMM") + "-" + ptnTreatmentInitiation.CreateDate.Year;
+                        if (ptnTreatmentBaseline.DispensedByDate.HasValue)
+                        {
+                            DateTime DispensedByDate = (DateTime)ptnTreatmentBaseline.DispensedByDate;
+
+                            lblFirstline.Text = DispensedByDate.ToString("dd-MMM-yyyy");
+                            lblcohort.Text = DispensedByDate.ToString("MMM") + "-" + DispensedByDate.Year;
+                        }
+                        
+                        
                         lblRegimenName.Text = ptnTreatmentInitiation.Regimen.ToString();
                         lblCurrentRegimen.Text = "<span class='label label-success'>" + ptnTreatmentBaseline.Regimen.ToString() + "</span>";
                         lblARTInitiationDate.Text = ptnTreatmentBaseline.CreateDate.ToString("dd-MMM-yyyy");
                     }
                     else
                     {
-                        lblDateOfARTInitiation.Text = "<span class='label label-danger'> NO dispensing</span>";
+                        lblDateOfARTInitiation.Text = "<span class='label'> Not dispensed</span>";
                         lblcohort.Text = "<span class='label label-danger'>N/A</span>";
                         lblCurrentRegimen.Text = "<span class='label label-danger'>PATIENT NOT ON ARVs</span>";
 
@@ -357,6 +364,12 @@ namespace IQCare.Web.CCC.Patient
                     }
                 }
             }
+
+            var age = Convert.ToInt32(Session["Age"]);
+            if (age >= 20)
+                AgeYes.Checked = true;
+            else
+                AgeNo.Checked = true;
         }                        
       }
    }

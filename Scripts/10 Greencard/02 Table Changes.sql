@@ -15,6 +15,53 @@ IF EXISTS(SELECT * FROM sys.columns WHERE Name = N'VoidBy'AND Object_ID = OBJECT
 ALTER TABLE [dbo].[ServiceArea] DROP  CONSTRAINT [DF_ServiceArea_VoidBy] 
 ALTER TABLE ServiceArea DROP COLUMN VoidBy
     END;
+
+IF EXISTS(SELECT * FROM sys.columns WHERE Name = N'BaselineResult'AND Object_ID = OBJECT_ID(N'HIVTesting'))
+BEGIN
+	ALTER TABLE [dbo].[HIVTesting] DROP  COLUMN BaselineResult;
+END;
+
+IF EXISTS(SELECT * FROM sys.columns WHERE Name = N'BaselineDate'AND Object_ID = OBJECT_ID(N'HIVTesting'))
+BEGIN
+	ALTER TABLE [dbo].[HIVTesting] DROP  COLUMN BaselineDate;
+END;
+
+IF EXISTS(SELECT * FROM sys.columns WHERE Name = N'CCCNumber'AND Object_ID = OBJECT_ID(N'HIVTesting'))
+BEGIN
+	ALTER TABLE [dbo].[HIVTesting] DROP  COLUMN CCCNumber;
+END;
+
+IF EXISTS(SELECT * FROM sys.columns WHERE Name = N'EnrollmentId'AND Object_ID = OBJECT_ID(N'HIVTesting'))
+BEGIN
+	ALTER TABLE [dbo].[HIVTesting] DROP  COLUMN EnrollmentId;
+END;
+
+ALTER TABLE PersonRelationship
+DROP CONSTRAINT [PK_PersonRelationship]
+
+ALTER TABLE PersonRelationship
+ADD CONSTRAINT [PK_PersonRelationship] PRIMARY KEY (Id)
+
+IF EXISTS(SELECT * FROM sys.columns WHERE Name = N'RelatedTo'AND Object_ID = OBJECT_ID(N'PersonRelationship'))
+BEGIN
+	ALTER TABLE [dbo].[PersonRelationship] DROP COLUMN RelatedTo;
+END;
+
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'PatientId'AND Object_ID = OBJECT_ID(N'PersonRelationship'))
+BEGIN
+	ALTER TABLE [dbo].[PersonRelationship] ADD PatientId int;
+END;
+
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'BaselineResult'AND Object_ID = OBJECT_ID(N'PersonRelationship'))
+BEGIN
+	ALTER TABLE [dbo].[PersonRelationship] ADD BaselineResult int;
+END;
+
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'BaselineDate'AND Object_ID = OBJECT_ID(N'PersonRelationship'))
+BEGIN
+	ALTER TABLE [dbo].[PersonRelationship] ADD BaselineDate DATETIME NULL;
+END;
+
 IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'DeleteFlag'AND Object_ID = OBJECT_ID(N'ServiceArea'))
     BEGIN
 ALTER TABLE ServiceArea ADD  DeleteFlag BIT NULL
@@ -129,4 +176,25 @@ IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'pillCount'AND Object_ID =
     BEGIN
         ALTER TABLE dtl_patientPharmacyOrder ADD pillCount int;
     END;
-
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'EverBeenOnIpt'AND Object_ID = OBJECT_ID(N'PatientIcf'))
+    BEGIN
+        ALTER TABLE PatientIcf ADD EverBeenOnIpt bit;
+    END;
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'GeneXpert'AND Object_ID = OBJECT_ID(N'PatientIcfAction'))
+    BEGIN
+        ALTER TABLE PatientIcfAction ADD GeneXpert int;
+    END;
+ALTER TABLE PatientIcfAction ALTER COLUMN SputumSmear INT NULL
+ALTER TABLE PatientIcfAction ALTER COLUMN ChestXray INT NULL
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'StartIpt'AND Object_ID = OBJECT_ID(N'PatientIptWorkup'))
+    BEGIN
+        ALTER TABLE PatientIptWorkup ADD StartIpt bit;
+    END;
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'IptStartDate'AND Object_ID = OBJECT_ID(N'PatientIptWorkup'))
+    BEGIN
+        ALTER TABLE PatientIptWorkup ADD IptStartDate Datetime;
+    END;
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'IptRegimen'AND Object_ID = OBJECT_ID(N'PatientIptWorkup'))
+    BEGIN
+        ALTER TABLE PatientIptWorkup ADD IptRegimen int;
+    END;

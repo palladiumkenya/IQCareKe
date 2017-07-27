@@ -29,6 +29,7 @@ namespace Entities.CCC.Lookup
         public int? EnrollmentWHOStage { get; set; }
         public string EnrollmentWHOStageName { get; set; }
         public DateTime? ARTInitiationDate { get; set; }
+        public DateTime? ARTInitiationDateNew { get; set; }
         public DateTime? DateStartedOnFirstline { get; set; }
         public string Cohort { get; set; }
         public int? Regimen { get; set; }

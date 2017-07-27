@@ -1074,7 +1074,7 @@
     <SubTestId>107</SubTestId>
     <SubTestName>ViralLoad Undetectable</SubTestName>
     <TestId>3</TestId>
-    <DeleteFlag>false</DeleteFlag>
+    <DeleteFlag>true</DeleteFlag>
   </Lnk_TestParameter>
   <Lnk_TestParameter>
     <SubTestId>108</SubTestId>

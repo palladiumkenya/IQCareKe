@@ -13,11 +13,28 @@ namespace Entities.CCC.Tb
         public int Id { get; set; }
         public int PatientMasterVisitId { get; set; }
         public int PatientId { get; set; }
-        public bool SputumSmear { get; set; }
-        public bool ChestXray { get; set; }
+        public IcfTestOptions SputumSmear { get; set; }
+        public IcfTestOptions? GeneXpert { get; set; }
+        public IcfRadiologyOptions ChestXray { get; set; }
         public bool StartAntiTb { get; set; }
         public bool InvitationOfContacts { get; set; }
         public bool EvaluatedForIpt { get; set; }
 
+    }
+
+    public enum IcfTestOptions
+    {
+        Ordered = 2,
+        Positive = 1,
+        Negative = 0,
+        NotDone = 3,
+    }
+
+    public enum IcfRadiologyOptions
+    {
+        Ordered = 2,
+        Positive = 1,
+        Negative = 0,
+        NotDone = 3,
     }
 }

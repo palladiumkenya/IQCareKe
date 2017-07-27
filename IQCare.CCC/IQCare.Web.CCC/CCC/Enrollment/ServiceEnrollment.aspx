@@ -42,6 +42,42 @@
                     </div>
                 </div>
                 
+                <div class="panel panel-info" id="ReConfirmatory">
+                    <div class="panel-body">
+                        <div class="col-md-12">
+                            <div class="col-md-5">
+                                <div class="col-md-12"><label class="required control-label pull-left">ReConfirmatory test done?</label></div>
+                                <div class="col-md-5 form-group">
+                                    <asp:DropDownList ID="ReconfirmatoryTest" runat="server" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-required="true" data-parsley-min="1" data-parsley-min-message="Please select whether reconfirmatory test was done" onChange="ReConfirmatoryTestChanged();"></asp:DropDownList>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-12">
+                            <div class="col-md-5">
+                                <div class="col-md-12"><label class="required control-label pull-left">Result of ReConfirmatory Test</label></div>
+
+                                <div class="col-md-12 form-group">
+                                    <asp:DropDownList ID="ResultReConfirmatoryTest" runat="server" ClientIDMode="Static" CssClass="form-control input-sm" onChange="ResultReConfirmatoryTestFunc();"></asp:DropDownList>
+                                </div>
+                            </div>
+
+                            <div class="col-md-5">
+                                <div class="col-md-12"><label class="required control-label pull-left">Date of ReConfirmatory Test</label></div>
+
+                                <div class="col-md-12 form-group">
+                                    <div class='input-group date' id='ReConfirmatoryTestdatepicker'>
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                        <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="ReConfirmatoryTestDate" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="panel panel-info">
                     <div class="panel-body">
                         <div class="col-md-12">
@@ -105,15 +141,15 @@
     <div class="col-md-12">
         <div class="col-md-3"></div>
         <div class="col-md-7">
-                <div class="col-md-4">
-                    <asp:LinkButton runat="server" ID="btnEnroll" CssClass="btn btn-info btn-lg fa fa-plus-circle" ClientIDMode="Static" OnClientClick="return false;"> Enroll and Continue </asp:LinkButton>
-                </div>
+            <div class="col-md-4" id="EnrollmentContinue">
+                <asp:LinkButton runat="server" ID="btnEnroll" CssClass="btn btn-info btn-lg fa fa-plus-circle" ClientIDMode="Static" OnClientClick="return false;"> Enroll and Continue </asp:LinkButton>
+            </div>
+            <div class="col-md-4" id="EnrollmentReset">
+                <asp:LinkButton runat="server" ID="btnRese" CssClass="btn btn-warning btn-lg fa fa-refresh" ClientIDMode="Static" OnClientClick="return false;"> Enroll and Register New</asp:LinkButton>
+            </div>
             <div class="col-md-4">
-                    <asp:LinkButton runat="server" ID="btnRese" CssClass="btn btn-warning btn-lg fa fa-refresh" ClientIDMode="Static" OnClientClick="return false;"> Enroll and Register New</asp:LinkButton>
-                </div>
-            <div class="col-md-4">
-                    <asp:LinkButton runat="server" ID="btnClose" CssClass="btn btn-danger btn-lg fa fa-times" ClientIDMode="Static" OnClientClick="return false;"> Close Enrollemnt</asp:LinkButton>
-                </div>
+                <asp:LinkButton runat="server" ID="btnClose" CssClass="btn btn-danger btn-lg fa fa-times" ClientIDMode="Static" OnClientClick="return false;"> Close Enrollemnt</asp:LinkButton>
+            </div>
         </div>
         <div class="col-md-3"></div>
     </div>
@@ -140,6 +176,12 @@
                 format: 'DD-MMM-YYYY',
                 allowInputToggle: true,
                 useCurrent: false
+            });
+
+            $("#ReConfirmatoryTestdatepicker").datetimepicker({
+                format: 'DD-MMM-YYYY',
+                allowInputToggle: true,
+                useCurrent: true
             });
 
             $("#OtherSpecificEntryPoint").hide();
@@ -201,9 +243,16 @@
             });
 
             $("#btnRese").click(function (e) {
+                $('#enrollmentTab').parsley().destroy();
+                $('#enrollmentTab').parsley({
+                    excluded:
+                        "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
+                });
+
                 if (!$('#enrollmentTab').parsley().validate()) {
                     return false;
                 }
+
 
                 var enrollmentDate = $('#DateOfEnrollment').val();
                 var personDateOfBirth = $("#PersonDOB").val();
@@ -248,6 +297,12 @@
             });
 
             $("#btnEnroll").click(function (e) {
+                $('#enrollmentTab').parsley().destroy();
+                $('#enrollmentTab').parsley({
+                    excluded:
+                        "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
+                });
+
                 if (!$('#enrollmentTab').parsley().validate()) {
                     return false;
                 }
@@ -291,7 +346,16 @@
                     return false;
                 }
 
-                addPatient(entryPointId, enrollmentDate, personDateOfBirth, nationalId, patientType, mflCode, dobPrecision, JSON.stringify(identifiers));
+                var reconfirmatoryTest = $("#ReconfirmatoryTest").val();
+                var resultReConfirmatoryTest = $("#ResultReConfirmatoryTest").val();
+                var reConfirmatoryTestDate = $("#ReConfirmatoryTestDate").val();
+
+                $.when(addReconfirmatoryTest(reconfirmatoryTest, resultReConfirmatoryTest, reConfirmatoryTestDate))
+                    .then(function() {
+                        setTimeout(function() {
+                            addPatient(entryPointId, enrollmentDate, personDateOfBirth, nationalId, patientType, mflCode, dobPrecision, JSON.stringify(identifiers));
+                        }, 2000);
+                    });      
             });
 
             function addPatientRegister(entryPointId, enrollmentDate, personDateOfBirth, nationalId, patientType, mflCode, dobPrecision, identifiers) {
@@ -340,6 +404,31 @@
                             window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientHome.aspx")%>';
                         }
                         
+                    },
+                    error: function (xhr, errorType, exception) {
+                        var jsonError = jQuery.parseJSON(xhr.responseText);
+                        toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);
+                        return false;
+                    }
+                });
+            }
+
+            function addReconfirmatoryTest(reconfirmatoryTest, resultReConfirmatoryTest, reConfirmatoryTestDate) {
+                $.ajax({
+                    type: "POST",
+                    url: "../WebService/EnrollmentService.asmx/AddReconfirmatoryTest",
+                    data: "{'reconfirmatoryTest':'" + reconfirmatoryTest + "','resultReConfirmatoryTest':'" + resultReConfirmatoryTest + "', 'reConfirmatoryTestDate':'" + reConfirmatoryTestDate + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function(response) {
+                        var messageResponse = JSON.parse(response.d);
+                        if (messageResponse.errorcode == 1) {
+                            toastr.error(messageResponse.msg, "Patient Re-Confirmatory Test");
+                            return false;
+                        } else {
+                            toastr.success(messageResponse.msg, "Patient Re-Confirmatory Test");
+                            return false;
+                        }
                     },
                     error: function (xhr, errorType, exception) {
                         var jsonError = jQuery.parseJSON(xhr.responseText);
@@ -551,6 +640,7 @@
                         //$("#IdentifierTypeId").val(messageResponse.IndentifierId);
                         //$("#mfl_code").val(messageResponse.Prefix);
                         //$("#CCCNumber").val(messageResponse.EnrollmentValue);
+                        ReConfirmatoryTestChanged();
                     },
                     error: function (xhr, errorType, exception) {
                         var jsonError = jQuery.parseJSON(xhr.responseText);
@@ -560,6 +650,89 @@
                 });
             }
         });
+
+        function ReConfirmatoryTestChanged() {
+            var reconfirmTest = $("#ReconfirmatoryTest :selected").text();
+            var patientType = '<%=patType%>';
+            var patientExists = '<%=PatientExists%>';
+
+            console.log(patientExists);
+            if (patientType != "New" || patientExists > 0) {
+                $("#ReconfirmatoryTest").prop("disabled", true);
+                $("#ReConfirmatory").hide();
+            } else {
+                if (reconfirmTest == "No") {
+                    $("#ResultReConfirmatoryTest").prop("disabled", true);
+                    $("#ReConfirmatoryTestDate").prop("disabled", true);
+                    $("#DateOfEnrollment").prop("disabled", true);
+                    $("#entryPoint").prop("disabled", true);
+                    $("#CCCNumber").prop("disabled", true);
+                    $("#mfl_code").prop("disabled", true);
+
+                    $("#btnEnroll").prop("disabled", false);
+                    $("#btnEnroll").addClass("noneevents");
+                    $("#btnRese").prop("disabled", false);
+                    $("#btnRese").addClass("noneevents");
+                } else if (reconfirmTest == "Yes") {
+                    $("#ResultReConfirmatoryTest").prop("disabled", false);
+                    $("#ReConfirmatoryTestDate").prop("disabled", false);
+                    $("#DateOfEnrollment").prop("disabled", false);
+                    $("#entryPoint").prop("disabled", false);
+                    $("#CCCNumber").prop("disabled", false);
+                    if (patientType != "New") {
+                        $("#mfl_code").prop("disabled", false);
+                    }
+                } else {
+                    $("#ResultReConfirmatoryTest").prop("disabled", true);
+                    $("#ReConfirmatoryTestDate").prop("disabled", true);
+                    $("#DateOfEnrollment").prop("disabled", true);
+                    $("#entryPoint").prop("disabled", true);
+                    $("#CCCNumber").prop("disabled", true);
+                    $("#mfl_code").prop("disabled", true);
+                }
+            }
+            //console.log(reconfirmTest);
+        }
+
+        function ResultReConfirmatoryTestFunc() {
+            var result = $("#ResultReConfirmatoryTest :selected").text();
+            var patientType = '<%=patType%>';
+
+            if (result == "Positive") {
+                $("#DateOfEnrollment").prop("disabled", false);
+                $("#entryPoint").prop("disabled", false);
+                $("#CCCNumber").prop("disabled", false);
+                if (patientType != "New") {
+                    $("#mfl_code").prop("disabled", false);
+                }
+
+                $("#btnEnroll").prop("disabled", false);
+                $("#btnEnroll").removeClass("noneevents");
+                $("#btnRese").prop("disabled", false);
+                $("#btnRese").removeClass("noneevents");
+            } else if (result == "Negative") {
+                $("#DateOfEnrollment").prop("disabled", true);
+                $("#entryPoint").prop("disabled", true);
+                $("#CCCNumber").prop("disabled", true);
+                $("#mfl_code").prop("disabled", true);
+
+                $("#btnEnroll").prop("disabled", true);
+                $("#btnEnroll").addClass("noneevents");
+                $("#btnRese").prop("disabled", true);
+                $("#btnRese").addClass("noneevents");
+            } else {
+                $("#DateOfEnrollment").prop("disabled", true);
+                $("#entryPoint").prop("disabled", true);
+                $("#CCCNumber").prop("disabled", true);
+                $("#mfl_code").prop("disabled", true);
+
+                $("#btnEnroll").prop("disabled", true);
+                $("#btnEnroll").addClass("noneevents");
+                $("#btnRese").prop("disabled", true);
+                $("#btnRese").addClass("noneevents");
+            }
+        }
+
     </script>
 
 </asp:Content>

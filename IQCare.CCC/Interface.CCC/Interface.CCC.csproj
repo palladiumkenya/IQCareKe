@@ -53,6 +53,7 @@
     <Compile Include="Baseline\IPatientArvHistoryManager.cs" />
     <Compile Include="Baseline\IPatientDisclosureManager.cs" />
     <Compile Include="Baseline\IPatientHivDiagnosisManager.cs" />
+    <Compile Include="Baseline\IPatientLinkageManager.cs" />
     <Compile Include="Baseline\IPatientTreatmentInitiationManager.cs" />
     <Compile Include="Baseline\IPatientVaccinationManager.cs" />
     <Compile Include="Baseline\IPatientHivEnrolmetBaselineManager.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="Encounter\IPatientCareEnding.cs" />
     <Compile Include="Encounter\IPatientLabDetails.cs" />
     <Compile Include="Encounter\IPatientLabOrder.cs" />
+    <Compile Include="Enrollment\IHivReConfirmatoryTestManager.cs" />
     <Compile Include="Enrollment\IIdentifiersManager.cs" />
     <Compile Include="Enrollment\IPatientEnrollmentManager.cs" />
     <Compile Include="Enrollment\IPatientEntryPointManager.cs" />
@@ -70,6 +72,7 @@
     <Compile Include="IMst_PatientInsert.cs" />
     <Compile Include="IPatientAppointment.cs" />
     <Compile Include="Baseline\IPatientHivTestingManager.cs" />
+    <Compile Include="IPatientCategorizationmanager.cs" />
     <Compile Include="IPatientConsent.cs" />
     <Compile Include="IPatientMaritalStatusManager.cs" />
     <Compile Include="IPatientOVCStatusmanager.cs" />

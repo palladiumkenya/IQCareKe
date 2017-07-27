@@ -33,6 +33,12 @@ namespace IQCare.CCC.UILogic
             return appointment;
         }
 
+        public List<BlueCardAppointment> GetBluecardAppointmentsByPatientId(int patientId)
+        {
+            var appointments = _appointment.GetBluecardPatientAppointmentsBypatientId(patientId);
+            return appointments;
+        }
+
         public void DeletePatientAppointments(int id)
         {
             _appointment.DeletePatientAppointments(id);
@@ -64,7 +70,8 @@ namespace IQCare.CCC.UILogic
         public int GetCountByPatientId(int patientId)
         {
             var appointment = _appointment.GetByPatientId(patientId);
-            return appointment.Count;
+            var bluecardappointment = _appointment.GetBluecardPatientAppointmentsBypatientId(patientId);
+            return appointment.Count + bluecardappointment.Count;
         }
 
         public List<PatientAppointment> GetByDate(DateTime date)
