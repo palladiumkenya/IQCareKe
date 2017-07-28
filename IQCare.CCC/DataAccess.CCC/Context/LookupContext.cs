@@ -44,5 +44,7 @@ namespace DataAccess.CCC.Context
         public DbSet<PatientTreamentTrackerLookup> PatientTreamentTrackerLookups { get; set; }
         public DbSet<FacilityList> FacilityLists { get; set; }
         public DbSet<PatientRegistrationLookup> PatientRegistrationLookups { get; set; }
+        public DbSet<TestingSummaryStatistics> TestingSummaryStatistics { get; set; }
+        public DbSet<PatientStabilitySummary> PatientStabilitySummaries { get; set; }
     }
 }

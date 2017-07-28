@@ -2,6 +2,7 @@
 using System.Web;
 using Application.Presentation;
 using Interface.CCC.Lookup;
+using IQCare.CCC.UILogic;
 
 namespace IQCare.Web.CCC
 {
@@ -27,6 +28,60 @@ namespace IQCare.Web.CCC
                 totalDocumetedLTFU.Text = "<span class='badge pull-right'>" + item.LostToFollowUp.ToString() + "</span>";
                 
                 //lblctx.Text = "<span class='badge pull-right'>" + +"</span>";
+            }
+
+
+            if (!IsPostBack)
+            {
+                TestingSummaryStatisticsManager statistics = new TestingSummaryStatisticsManager();
+                PatientStabilitySummaryManager summaryManager = new PatientStabilitySummaryManager();
+
+                var statList = statistics.GetAllStatistics();
+                var summaryList = summaryManager.GetAllStabilitySummaries();
+
+                if (statList.Count > 0)
+                {
+                    var html = "";
+                    var Label = "";
+
+                    for (int i = 0; i < statList.Count; i++)
+                    {
+                        Label = "label" + i;
+                        html += "<div class='col-md-12'>";
+                        html += "<div class='col-md-10'>";
+                        html += "<label class='control-label pull-left'>" + statList[i].Name + ":</label>";
+                        html += "</div>";
+                        html += "<div class='col-md-2 pull-right'>";
+                        html += "<label for='value' id='" + Label + "' class='control-label text-success pull-right'>";
+                        html += "<span class='badge pull-right'>" + statList[i].Value + "</span>";
+                        html += "</div>";
+                        html += "</div>";
+                        html += "<div class='col-md-12'><hr></div>";
+                    }
+                    testingSummaryStatistics.InnerHtml = html;
+                }
+
+                if (summaryList.Count > 0)
+                {
+                    var html = "";
+                    var Label = "";
+
+                    for (int i = 0; i < summaryList.Count; i++)
+                    {
+                        Label = "label" + i;
+                        html += "<div class='col-md-12'>";
+                        html += "<div class='col-md-10'>";
+                        html += "<label class='control-label pull-left'>" + summaryList[i].Category + ":</label>";
+                        html += "</div>";
+                        html += "<div class='col-md-2 pull-right'>";
+                        html += "<label for='value' id='" + Label + "' class='control-label text-success pull-right'>";
+                        html += "<span class='badge pull-right'>" + summaryList[i].Value + "</span>";
+                        html += "</div>";
+                        html += "</div>";
+                        html += "<div class='col-md-12'><hr></div>";
+                    }
+                    stabilitySummaryStatictics.InnerHtml = html;
+                }
             }
         }
         

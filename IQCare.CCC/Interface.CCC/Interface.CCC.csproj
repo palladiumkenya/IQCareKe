@@ -90,11 +90,13 @@
     <Compile Include="Lookup\IPatientBaselineLookupManager.cs" />
     <Compile Include="Lookup\IPatientLookupmanager.cs" />
     <Compile Include="Lookup\IPatientServiceEnrollmentLookupManager.cs" />
+    <Compile Include="Lookup\IPatientStabilitySummaryManager.cs" />
     <Compile Include="Lookup\IPatientTreatmentSupporterLookupManager.cs" />
     <Compile Include="Lookup\IPatientTreatmentTrackerManager.cs" />
     <Compile Include="Lookup\IPersonContactLookUpManager.cs" />
     <Compile Include="Lookup\IPersonGreenCardLookupManager.cs" />
     <Compile Include="Lookup\IPersonLookUpManager.cs" />
+    <Compile Include="Lookup\ITestingSummaryStatisticsManager.cs" />
     <Compile Include="OneTimeEvent\IOneTimeEventsTrackerManager.cs" />
     <Compile Include="Patient\IPatientManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
