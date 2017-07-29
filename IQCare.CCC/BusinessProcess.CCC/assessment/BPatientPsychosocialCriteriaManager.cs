@@ -27,7 +27,7 @@ namespace BusinessProcess.CCC.assessment
         {
             using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                result = _unitOfWork.PatientPsychosocialCriteriaRepository.FindBy(x => x.PatientId == patientId).Select(x => x.Id).FirstOrDefault();
+                result = _unitOfWork.PatientPsychosocialCriteriaRepository.FindBy(x => x.PatientId == patientId).Select(x => x.Id).Count();
                 _unitOfWork.Dispose();
             }
 

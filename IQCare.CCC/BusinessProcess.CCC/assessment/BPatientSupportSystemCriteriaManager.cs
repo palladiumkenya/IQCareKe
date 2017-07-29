@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace BusinessProcess.CCC.assessment
 {
-    public class PatientSupportSystemCriteriaManager :ProcessBase, IPatientSupportSystemsCriteriaManager
+    public class BPatientSupportSystemCriteriaManager :ProcessBase, IPatientSupportSystemsCriteriaManager
     {
         private int result;
 
@@ -28,7 +28,7 @@ namespace BusinessProcess.CCC.assessment
         {
             using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                result = _unitOfWork.PatientSupportSystemCriteriaRepository.FindBy(x => x.PatientId == patientId).Select(x => x.Id).FirstOrDefault();
+                result = _unitOfWork.PatientSupportSystemCriteriaRepository.FindBy(x => x.PatientId == patientId).Select(x => x.Id).Count();
                 _unitOfWork.Dispose();
             }
 

@@ -6,7 +6,7 @@ namespace IQCare.CCC.UILogic.assessment
 {
     public class PatientSupportSystemCriteriaManager 
     {
-        private PatientSupportSystemCriteriaManager _PatientSupportSystemCriteriaManager = (PatientSupportSystemCriteriaManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Baseline.BPatientSupportSystemCriteriaManager, BusinessProcess.CCC");
+        private PatientSupportSystemCriteriaManager _PatientSupportSystemCriteriaManager = (PatientSupportSystemCriteriaManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.assessment.BPatientSupportSystemCriteriaManager, BusinessProcess.CCC");
       
 
         public int AddPreparation(PatientSupportSystemCriteria _PatientSupportSystemCriteria)

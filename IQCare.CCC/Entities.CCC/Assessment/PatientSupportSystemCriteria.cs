@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.CCC.Assessment
@@ -7,7 +8,8 @@ namespace Entities.CCC.Assessment
     [Table("PatientSupportSystemCriteria")]
    public  class PatientSupportSystemCriteria
     {
-        public int Id;
+        [Key]
+        public int Id { get; set; }
         public int PatientId { get; set; }
         [ForeignKey("PatientId")]
         public virtual Entities.CCC.Enrollment.PatientEntity Patient { get; set; }

@@ -7,7 +7,7 @@ namespace IQCare.CCC.UILogic.assessment
 {
     public class PatientPsychosocialCriteriaManager
     {
-        private PatientPsychosicialCriteriaManager _PatientPsychosicialCriteriaManager = (PatientPsychosicialCriteriaManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Baseline.BPatientPsychosocialManager, BusinessProcess.CCC");
+        private PatientPsychosicialCriteriaManager _PatientPsychosicialCriteriaManager = (PatientPsychosicialCriteriaManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.assessment.BPatientPsychosocialCriteriaManager, BusinessProcess.CCC");
         private int result;
 
         public int CheckIfARTPreparationExists(int patientId)
