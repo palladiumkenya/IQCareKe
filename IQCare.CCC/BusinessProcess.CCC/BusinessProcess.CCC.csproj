@@ -77,6 +77,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="assessment\BPatientPsychosocialCriteriaManager.cs" />
+    <Compile Include="assessment\BPatientSupportSystemCriteriaManager.cs" />
     <Compile Include="Baseline\BINHProphylaxis.cs" />
     <Compile Include="Baseline\BPatientBaselineAssessmentManager.cs" />
     <Compile Include="Baseline\BPatientArvHistoryManager.cs" />

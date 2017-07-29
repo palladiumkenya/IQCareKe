@@ -19,5 +19,6 @@ namespace Entities.CCC.Assessment
         public bool AdministerART { get; set; }
         public bool AdherenceBarriers { get; set; }
         public bool AccurateLocator { get; set; }
+        
     }
 }

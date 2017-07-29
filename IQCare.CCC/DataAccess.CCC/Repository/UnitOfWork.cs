@@ -24,6 +24,8 @@ using PatientLabResultsRepository = DataAccess.CCC.Repository.Encounter.PatientL
 using DataAccess.CCC.Interface.Triage;
 using DataAccess.CCC.Repository.Triage;
 using DataAccess.CCC.Repository.Screening;
+using DataAccess.CCC.Interface.assessment;
+using DataAccess.CCC.Repository.assessment;
 
 namespace DataAccess.CCC.Repository
 {
@@ -128,6 +130,10 @@ namespace DataAccess.CCC.Repository
 
         /*Patient categorization*/
         private IPatientCategorizationRepository _patientCategorizationRepository;
+
+        /*ART Treatment Preparation */
+        private IPatientPsychosocialCriteriaRepository _patientPsychosocialCriteriaRepository;
+        private IPatientSupportSystemCriteriaRepository _patientSupportSystemCriteriaRepository;
 
         public UnitOfWork(BaseContext context)
         {
@@ -590,6 +596,18 @@ namespace DataAccess.CCC.Repository
         {
             get { return _patientCategorizationRepository ?? (_patientCategorizationRepository = new PatientCategorizationRepository((GreencardContext)_context)); }
         }
+
+        /*ART Treatment Preparation */
+        public IPatientPsychosocialCriteriaRepository PatientPsychosocialCriteriaRepository
+        {
+            get { return  _patientPsychosocialCriteriaRepository ?? (_patientPsychosocialCriteriaRepository=new PatientPsychosocialCriteriaRepository((GreencardContext)_context)); }
+        }
+
+        public IPatientSupportSystemCriteriaRepository PatientSupportSystemCriteriaRepository
+        {
+            get { return _patientSupportSystemCriteriaRepository ?? (_patientSupportSystemCriteriaRepository = new PatientSupportSystemCriteriaRepository((GreencardContext)_context)); }
+        }
+
 
         public int Complete()
         {

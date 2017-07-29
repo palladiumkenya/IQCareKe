@@ -48,6 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="assessment\IPatientPsychosocialCriteriamanager.cs" />
+    <Compile Include="assessment\IPatientSupportSystemsCriteriaManager.cs" />
     <Compile Include="Baseline\IINHProphylaxisManager.cs" />
     <Compile Include="Baseline\IPatientBaselineAssessmentManager.cs" />
     <Compile Include="Baseline\IPatientArvHistoryManager.cs" />

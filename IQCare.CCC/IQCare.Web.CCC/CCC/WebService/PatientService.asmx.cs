@@ -444,7 +444,7 @@ namespace IQCare.Web.CCC.WebService
             else
                 categorizationStatus = PatientCategorizationStatus.UnStable;
 
-            int MasterVisitId = int.Parse(Session["PatientMasterVisitId"].ToString());
+            int MasterVisitId = patientMasterVisitId;// int.Parse(Session["PatientMasterVisitId"].ToString());
 
             var patientCategorization = new PatientCategorization()
             {

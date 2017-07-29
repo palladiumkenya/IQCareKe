@@ -80,6 +80,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="assessment\PatientPsychosocialCriteriaManager.cs" />
+    <Compile Include="assessment\PatientSupportSystemCriteriaManager.cs" />
     <Compile Include="Baseline\INHProphylaxisManager.cs" />
     <Compile Include="Baseline\PatientBaselineAssessmentManager.cs" />
     <Compile Include="Baseline\PatientArvHistoryManager.cs" />
@@ -139,6 +141,10 @@
     <Compile Include="Visit\PatientMasterVisitManager.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BusinessProcess.CCC\BusinessProcess.CCC.csproj">
+      <Project>{5C3B0D75-6637-49B9-B801-1358B7E55A10}</Project>
+      <Name>BusinessProcess.CCC</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DataAccess.CCC\DataAccess.CCC.csproj">
       <Project>{8CC162FB-01FB-42AE-B63F-47E007E469E6}</Project>
       <Name>DataAccess.CCC</Name>

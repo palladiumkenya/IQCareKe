@@ -203,32 +203,25 @@ counselling session?</label>
                
             }   
         });
-$('input[type=checkbox]').onoff();
+
+	    $("#benefitsART").onoff();
+		$("#screenAlcohol").onoff();
+		$("#depression").onoff();
+		$("#disclosure").onoff();
+		$("#administerART").onoff();
+		$("#effectsART").onoff();
+		$("#dependents").onoff();
+		$("#adherenceBarriers").onoff();
+		$("#locator").onoff();
+		$("#caregiver").onoff();
+		$("#convinient").onoff();
+		$("#TSIdentified").onoff();
+		$("#supportGroup").onoff();
+		$("#EnrollSMSReminder").onoff();
+		$("#OtherSupportSystem").onoff();
 
     });
 
-    $('selector').lobiPanel({
-        reload: {
-            icon: 'fa fa-refresh'
-        },
-        editTitle: {
-            icon: 'fa fa-edit',
-            icon2: 'fa fa-save'
-        },
-        unpin: {
-            icon: 'fa fa-arrows'
-        },
-        minimize: {
-            icon: 'fa fa-chevron-up',
-            icon2: 'fa fa-chevron-down'
-        },
-        close: {
-            icon: 'fa fa-times-circle'
-        },
-        expand: {
-            icon: 'fa fa-expand',
-            icon2: 'fa fa-compress'
-        }
-    });
+
 
  </script>

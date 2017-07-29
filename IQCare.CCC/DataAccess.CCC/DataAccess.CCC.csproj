@@ -68,6 +68,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\LookupContext.cs" />
+    <Compile Include="Interface\assessment\IPatientPsychosocialCriteriaRepository.cs" />
+    <Compile Include="Interface\assessment\IPatientSupportSystemCriteriaRepository.cs" />
     <Compile Include="Interface\Baseline\IINHProphylaxisRepository.cs" />
     <Compile Include="Interface\Baseline\IPatientArvHistoryRepository.cs" />
     <Compile Include="Interface\Baseline\IPatientHivDiagnosisRepository.cs" />
@@ -140,6 +142,8 @@
     <Compile Include="Interface\visit\IPatientLabTrackerRepository.cs" />
     <Compile Include="Interface\visit\IPatientMasterVisitRepository.cs" />
     <Compile Include="Interface\visit\IPatientVisitRepository.cs" />
+    <Compile Include="Repository\assessment\PatientPsychosocialCriteriaRepository.cs" />
+    <Compile Include="Repository\assessment\PatientSupportSystemCriteriaRepository.cs" />
     <Compile Include="Repository\Baseline\INHProphylaxisRepository.cs" />
     <Compile Include="Repository\Baseline\PatientArvHistoryRepository.cs" />
     <Compile Include="Repository\Baseline\PatientHivDiagnosisRepository.cs" />
