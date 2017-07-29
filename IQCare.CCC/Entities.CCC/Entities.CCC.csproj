@@ -100,6 +100,7 @@
     <Compile Include="Encounter\PhysicalExamination.cs" />
     <Compile Include="Encounter\Pregnancy.cs" />
     <Compile Include="Encounter\PregnancyIndicator.cs" />
+    <Compile Include="Enrollment\HivReConfirmatoryTest.cs" />
     <Compile Include="Enrollment\Identifier.cs" />
     <Compile Include="Enrollment\PatientEntityEnrollment.cs" />
     <Compile Include="Enrollment\PatientEntryPoint.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="Enrollment\PatientEntity.cs" />
     <Compile Include="Lookup\LookupTestParameter.cs" />
     <Compile Include="Lookup\PatientRegistrationLookup.cs" />
+    <Compile Include="Lookup\PatientStabilitySummary.cs" />
     <Compile Include="Lookup\PatientTreatmentTrackerLookup.cs" />
     <Compile Include="Lookup\PatientBaselineLookup.cs" />
     <Compile Include="Lookup\PatientLookup.cs" />
@@ -132,6 +134,7 @@
     <Compile Include="Lookup\PersonContactLookUp.cs" />
     <Compile Include="Lookup\PersonGreenCardLookup.cs" />
     <Compile Include="Lookup\PersonLookUp.cs" />
+    <Compile Include="Lookup\TestingSummaryStatistics.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Screening\PatientScreening.cs" />
     <Compile Include="Tb\PatientIcf.cs" />

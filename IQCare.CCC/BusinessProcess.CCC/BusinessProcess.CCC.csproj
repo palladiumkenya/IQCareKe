@@ -108,6 +108,7 @@
     <Compile Include="BPersonManager.cs" />
     <Compile Include="BPersonContactManager.cs" />
     <Compile Include="BPersonRelationshipManager.cs" />
+    <Compile Include="Enrollment\BHivReConfirmatoryTest.cs" />
     <Compile Include="Enrollment\BIdentifier.cs" />
     <Compile Include="Enrollment\BPatientEntryPoint.cs" />
     <Compile Include="Enrollment\BPatientIdentifier.cs" />
@@ -117,10 +118,12 @@
     <Compile Include="Lookup\BFacilityListManager.cs" />
     <Compile Include="Lookup\BPatientBaselineLookupManager.cs" />
     <Compile Include="Lookup\BPatientServiceEnrollmentLookupManager.cs" />
+    <Compile Include="Lookup\BPatientStabilitySummaryManager.cs" />
     <Compile Include="Lookup\BPatientTreatmentSupporterLookupManager.cs" />
     <Compile Include="Lookup\BPatientTreatmentTrackerManager.cs" />
     <Compile Include="Lookup\BPersonContactLookUpManager.cs" />
     <Compile Include="Lookup\BPersonGreenCardLookupManager.cs" />
+    <Compile Include="Lookup\BTestingSummaryStatisticsManager.cs" />
     <Compile Include="PatientMaritalStatusManager.cs" />
     <Compile Include="PatientOvcStatusManager.cs" />
     <Compile Include="Patient\BPatient.cs" />

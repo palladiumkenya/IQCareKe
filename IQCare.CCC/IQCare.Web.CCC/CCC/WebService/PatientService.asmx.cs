@@ -225,7 +225,7 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod]
-        public string UpdatePatientFamilyTesting(int patientId, int patientMasterVisitId, string firstName, string middleName, string lastName, int sex, string dob, int relationshipId, int baselineHivStatusId, DateTime baselineHivStatusDate, string hivTestingresultId, string hivTestingresultDate, bool cccreferal, string cccReferalNumber, int userId, int personRelationshipId, int hivTestingId, int personId)
+        public string UpdatePatientFamilyTesting(int patientId, int patientMasterVisitId, string firstName, string middleName, string lastName, int sex, string dob, int relationshipId, int baselineHivStatusId, DateTime baselineHivStatusDate, string hivTestingresultId, string hivTestingresultDate, bool cccreferal, string cccReferalNumber, int userId, int personRelationshipId, int hivTestingId, int personId, string cccReferalModDate)
         {
             firstName = GlobalObject.unescape(firstName);
             middleName = GlobalObject.unescape(middleName);
@@ -250,7 +250,8 @@ namespace IQCare.Web.CCC.WebService
                 CccReferaalNumber = cccReferalNumber,
                 PersonRelationshipId = personRelationshipId,
                 HivTestingId = hivTestingId,
-                PersonId = personId
+                PersonId = personId,
+                LinkageDate = DateTime.Parse(cccReferalModDate)
             };
 
             if(hivTestingresultDate != "")
@@ -444,14 +445,14 @@ namespace IQCare.Web.CCC.WebService
             else
                 categorizationStatus = PatientCategorizationStatus.UnStable;
 
-            int MasterVisitId = patientMasterVisitId;// int.Parse(Session["PatientMasterVisitId"].ToString());
+            //int MasterVisitId = int.Parse(Session["PatientMasterVisitId"].ToString());
 
             var patientCategorization = new PatientCategorization()
             {
                 PatientId = patientId,
                 Categorization = categorizationStatus,
                 DateAssessed = DateTime.Now,
-                PatientMasterVisitId = MasterVisitId
+                //PatientMasterVisitId = MasterVisitId
             };
             try
             {

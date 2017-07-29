@@ -5,16 +5,16 @@ using Entities.CCC.Lookup;
 
 namespace DataAccess.CCC.Repository.Lookup
 {
-    public class FacilityListRepository : BaseRepository<FacilityList>, IFacilityListRepository
+    public class TestingSummaryStatisticsRepository:BaseRepository<TestingSummaryStatistics>,ITestingSummaryStatisticsRepository
     {
         private readonly LookupContext _context;
 
-        public FacilityListRepository() : this(new LookupContext())
+        public TestingSummaryStatisticsRepository() : this(new LookupContext())
         {
-            
+
         }
 
-        public FacilityListRepository(LookupContext context) : base(context)
+        public TestingSummaryStatisticsRepository(LookupContext context) : base(context)
         {
             _context = context;
         }

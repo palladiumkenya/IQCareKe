@@ -69,6 +69,8 @@ namespace DataAccess.CCC.Repository
         private IPersonGreenCardLookupRepository _personGreenCardLookupRepository;
         private IFacilityListRepository _facilityListRepository;
         private IPatientRegistrationLookupRepository _patientRegistrationLookupRepository;
+        private ITestingSummaryStatisticsRepository _testingSummaryStatisticsRepository;
+        private IPatientStabilitySummaryRepository _patientStabilitySummaryRepository;
 
         /* visit */
         private IPatientMasterVisitRepository _patientMasterVisitRepository;
@@ -86,6 +88,7 @@ namespace DataAccess.CCC.Repository
         private IServiceAreaIdentifiersRepository _serviceAreaIdentifiersRepository;
         private IIdentifierRepository _identifierRepository;
         private IPatientReEnrollmentRepository _patientReEnrollmentRepository;
+        private IHivReConfirmatoryTestRepository _hivReConfirmatoryTestRepository;
 
         /* Patient */
         private IPatientRepository _patientRepository;
@@ -357,6 +360,13 @@ namespace DataAccess.CCC.Repository
                            new PatientReEnrollmentRepository((GreencardContext) _context));
             }
         }
+
+        public IHivReConfirmatoryTestRepository HivReConfirmatoryTestRepository { get
+            {
+                return _hivReConfirmatoryTestRepository ?? (_hivReConfirmatoryTestRepository =
+                           new HivReConfirmatoryTestRepository((GreencardContext) _context));
+            } }
+
         public IPatientCareEndingRepository PatientCareEndingRepository
         {
             get
@@ -581,6 +591,18 @@ namespace DataAccess.CCC.Repository
                            new PatientRegistrationLookupRepository((LookupContext) _context));
             }
         }
+
+        public ITestingSummaryStatisticsRepository TestingSummaryStatisticsRepository { get
+            {
+                return _testingSummaryStatisticsRepository ?? (_testingSummaryStatisticsRepository =
+                           new TestingSummaryStatisticsRepository((LookupContext) _context));
+            } }
+
+        public IPatientStabilitySummaryRepository PatientStabilitySummaryRepository { get
+            {
+                return _patientStabilitySummaryRepository ?? (_patientStabilitySummaryRepository =
+                           new PatientStabilitySummaryRepository((LookupContext) _context));
+            } }
 
         public IPersonGreenCardLookupRepository PersonGreenCardLookupRepository
         {

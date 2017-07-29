@@ -64,6 +64,7 @@
     <Compile Include="Encounter\IPatientCareEnding.cs" />
     <Compile Include="Encounter\IPatientLabDetails.cs" />
     <Compile Include="Encounter\IPatientLabOrder.cs" />
+    <Compile Include="Enrollment\IHivReConfirmatoryTestManager.cs" />
     <Compile Include="Enrollment\IIdentifiersManager.cs" />
     <Compile Include="Enrollment\IPatientEnrollmentManager.cs" />
     <Compile Include="Enrollment\IPatientEntryPointManager.cs" />
@@ -91,11 +92,13 @@
     <Compile Include="Lookup\IPatientBaselineLookupManager.cs" />
     <Compile Include="Lookup\IPatientLookupmanager.cs" />
     <Compile Include="Lookup\IPatientServiceEnrollmentLookupManager.cs" />
+    <Compile Include="Lookup\IPatientStabilitySummaryManager.cs" />
     <Compile Include="Lookup\IPatientTreatmentSupporterLookupManager.cs" />
     <Compile Include="Lookup\IPatientTreatmentTrackerManager.cs" />
     <Compile Include="Lookup\IPersonContactLookUpManager.cs" />
     <Compile Include="Lookup\IPersonGreenCardLookupManager.cs" />
     <Compile Include="Lookup\IPersonLookUpManager.cs" />
+    <Compile Include="Lookup\ITestingSummaryStatisticsManager.cs" />
     <Compile Include="OneTimeEvent\IOneTimeEventsTrackerManager.cs" />
     <Compile Include="Patient\IPatientManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
