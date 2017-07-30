@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entities.Common;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -6,7 +7,7 @@ namespace Entities.CCC.Assessment
 {
     [Serializable]
     [Table("PatientSupportSystemCriteria")]
-   public  class PatientSupportSystemCriteria
+   public  class PatientSupportSystemCriteria:BaseEntity
     {
         [Key]
         public int Id { get; set; }

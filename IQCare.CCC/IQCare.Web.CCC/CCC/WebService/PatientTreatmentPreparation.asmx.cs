@@ -48,7 +48,7 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string AddPatientPsychosocialCriteria(int patientId, int patientmastervisitId, bool benefitART, bool Alcohol, bool depression, bool disclosure, bool administerART, bool adherence, bool locator)
+        public string AddPatientPsychosocialCriteria(int patientId, int patientmastervisitId, bool benefitART, bool Alcohol, bool depression, bool disclosure, bool administerART,bool effectsART,bool dependents, bool adherence, bool locator,bool caregiver)
         {
             string msg = "";
             int result = 0;
@@ -66,8 +66,11 @@ namespace IQCare.Web.CCC.WebService
                     Depression = depression,
                     Disclosure = disclosure,
                     AdministerART = administerART,
+                    effectsART=effectsART,
+                    dependents=dependents,
                     AdherenceBarriers = adherence,
-                    AccurateLocator = locator
+                    AccurateLocator = locator,
+                    startART=caregiver
                 };
 
                 result = _PatientPsychosocialCriteriaManager.AddPreparation(_patientPsychosocialCriteria);

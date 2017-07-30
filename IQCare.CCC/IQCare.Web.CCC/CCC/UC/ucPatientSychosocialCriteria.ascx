@@ -1,5 +1,17 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucPatientSychosocialCriteria.ascx.cs" Inherits="IQCare.Web.CCC.UC.ucPatientSychosocialCriteria" %>
 <div class="col-md-12" style="padding-top:4%">
+    
+
+    <div class="alert alert-danger" id="divMessage">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <p id="danger"></p>
+    </div>
+    <div class="alert alert-success" id="divsuccess">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <p id="success"></p>
+    </div>
+
+
     <div class="panel panel-default" id="psychoCriteria" data-state="collapsed">
     <div class="panel-heading">
         <div class="panel-title">
@@ -123,6 +135,15 @@ daily administration of ART, and meets the criteria above?</label>
             </div>
        </div>
 
+         <div class="col-md-12"><hr /></div>
+        <div class="col-md-12">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <button id="btnPsychosocialCriterial" class="btn btn-sm btn-primary">Save Pyschosocial Criteria</button>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+
     </div>
 </div>
 </div>
@@ -192,41 +213,50 @@ counselling session?</label>
          <div class="col-md-12"><hr /></div>
 
         </div>
+
+        <div class="col-md-12">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <button id="btnSupportSystemCriteria" class="btn btn-sm btn-primary">Save Support System Criteria</button>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
     </div>
 </div>
 
 <script type="text/javascript">
     $(document).ready(function () {
 
-        $('.panel').lobiPanel({ options: { }  });
+        $("#divMessage").hide('fast', function () { $("#divsuccess").hide();});
+
+        $('.panel').lobiPanel({ options: {} });
 
 	    $("#benefitsART").onoff();$("#screenAlcohol").onoff();$("#depression").onoff();$("#disclosure").onoff();$("#administerART").onoff();$("#effectsART").onoff();
 		$("#dependents").onoff();$("#adherenceBarriers").onoff();$("#locator").onoff();$("#caregiver").onoff();
 
 		$("#convinient").onoff();$("#TSIdentified").onoff();$("#supportGroup").onoff();$("#EnrollSMSReminder").onoff(); $("#OtherSupportSystem").onoff();
 
-        var benefitsART;var screenAlcohol;var depression;var isclosure;var administerART;var effectsART;var dependents; var adherenceBarriers; var locator;var caregiver;
-        var convinient; var TSIdentified; var supportGroup; var EnrollSMSReminder; var OtherSupportSystem;
+        var benefitsART = false; var screenAlcohol = false; var depression = false; var disclosure = false; var administerART = false; var effectsART = false; var dependents = false; var adherenceBarriers = false; var locator = false; var caregiver = false;
+        var convinient = false; var TSIdentified = false; var supportGroup = false; var EnrollSMSReminder = false; var OtherSupportSystem = false;
 
-        /* Psychosocial ART assessment */
-
-        $("#benefitsART").on('change', function () { benefitsART = this.checked ? 1 : 0; }).change();
-        $("#screenAlcohol").on('change', function () { screenAlcohol = this.checked ? 1 : 0; }).change();
-        $("#depression").on('change', function () { depression = this.checked ? 1 : 0; }).change();
-        $("#disclosure").on('change', function () { disclosure = this.checked ? 1 : 0; }).change();
-        $("#administerART").on('change', function () { administerART = this.checked ? 1 : 0; }).change();
-        $("#effectsART").on('change', function () { effectsART = this.checked ? 1 : 0; }).change();
-        $("#dependents").on('change', function () { dependents = this.checked ? 1 : 0; }).change();
-        $("#adherenceBarriers").on('change', function () { adherenceBarriers = this.checked ? 1 : 0; }).change();
-        $("#locator").on('change', function () { locator = this.checked ? 1 : 0; }).change();
-        $("#caregiver").on('change', function () { caregiver = this.checked ? 1 : 0; }).change();
 
         /* Support system criteria */
-        $("#convinient").on('change', function () { convinient = this.checked ? 1 : 0; }).change();
-        $("#TSIdentified").on('change', function () { TSIdentified = this.checked ? 1 : 0; }).change();
-        $("#supportGroup").on('change', function () { supportGroup = this.checked ? 1 : 0; }).change();
-        $("#EnrollSMSReminder").on('change', function () { EnrollSMSReminder = this.checked ? 1 : 0; }).change();
-        $("#OtherSupportSystem").on('change', function () { OtherSupportSystem = this.checked ? 1 : 0; }).change();
+        $("#convinient").on('change', function () { convinient = this.checked ? true : false; }).change();
+        $("#TSIdentified").on('change', function () { TSIdentified = this.checked ? true : false; }).change();
+        $("#supportGroup").on('change', function () { supportGroup = this.checked ? true : false; }).change();
+        $("#EnrollSMSReminder").on('change', function () { EnrollSMSReminder = this.checked ? true : false; }).change();
+        $("#OtherSupportSystem").on('change', function () { OtherSupportSystem = this.checked ? true : false; }).change();
+
+        $("#benefitsART").on('change', function () { benefitsART = this.checked ? true : false; }).change();
+        $("#screenAlcohol").on('change', function () { screenAlcohol = this.checked ? true : false; }).change();
+        $("#depression").on('change', function () { depression = this.checked ? true : false; }).change();
+        $("#disclosure").on('change', function () { disclosure = this.checked ? true : false; }).change();
+        $("#administerART").on('change', function () { administerART = this.checked ? true : false; }).change();
+        $("#effectsART").on('change', function () { effectsART = this.checked ? true : false; }).change();
+        $("#dependents").on('change', function () { dependents = this.checked ? true : false; }).change();
+        $("#adherenceBarriers").on('change', function () { adherenceBarriers = this.checked ? true : false; }).change();
+        $("#locator").on('change', function () { locator = this.checked ? true : false; }).change();
+        $("#caregiver").on('change', function () { caregiver = this.checked ? true : false; }).change();
 
 
         var patientId ="<%=PatientId%>";
@@ -242,13 +272,72 @@ counselling session?</label>
             dataType: "json",
             success: function (response) {
                 isDonePyschosocialCriteria = response.d;
-                alert(isDonePyschosocialCriteria);
+                if (isDonePyschosocialCriteria < 1) {
+
+                $("#divMessage").show('fast', function () { $("#danger").append("ART Treatment Preparation Assessment is PENDING! --for this Client"); });                   
+                } else {
+                    $("#divsuccess").show('fast', function () { $("#success").append("ART Treatment Preparation Completed! | View Answers for the ART prep Questions"); });   
+                }
+
+                $.ajax({
+                    type: "POST",
+                    url: "../WebService/PatientTreatmentpreparation.asmx/GetPatientPsychosocialCriteria",
+                    data: "{'patientId':'" + patientId + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        
+                        var itemList = response.d;
+                        $.each(itemList, function (index, itemList) {
+                            alert(response.d);
+                            if (itemList.BenefitART == true) { $("#benefitsART").prop("checked", true); }
+                            if (itemList.Alcohol) { $("#screenAlcohol").prop("checked", true); }
+                            if (itemList.Depression) { $("#depression").prop("checked", true); }
+                            if (itemList.Disclosure) { $("#disclosure").prop("checked", true); }
+                            if (itemList.AdministerART) { $("#administerART").prop("checked", true); }
+                            if (itemList.effectsART) { $("#effectsART").prop("checked", true); }
+                            if (itemList.dependents) { $("#dependents").prop("checked", true); }
+                            if (itemList.AdherenceBarriers) { $("#adherenceBarriers").prop("checked", true); }
+                            if (itemList.AccurateLocator) { $("#locator").prop("checked", true); }
+                            if (itemList.startART) { $("#caregiver").prop("checked", true); }
+                        });
+                        $("#btnPsychosocialCriterial").prop('disabled', true);
+                    },
+                    error: function (xhr, errorType, exception) {
+                        var jsonError = jQuery.parseJSON(xhr.responseText);
+                        toastr.error("" + xhr.status + "" + jsonError.Message);
+                    }
+                });
+               
             },
             error: function (xhr, errorType, exception) {
                 var jsonError = jQuery.parseJSON(xhr.responseText);
                 toastr.error("" + xhr.status + "" + jsonError.Message);
             }
         });
+
+        /* insert is ART preparation is missing */
+        
+            $("#btnPsychosocialCriterial").click(function () {
+
+                if (isDonePyschosocialCriteria == 0) {
+                    $.ajax({
+                        type: "POST",
+                        url: "../WebService/PatientTreatmentpreparation.asmx/AddPatientPsychosocialCriteria",
+                        data: "{'patientId':'" + patientId + "','patientmastervisitId':'" + patientMasterVisitId + "','benefitART':'" + benefitsART + "','Alcohol':'" + screenAlcohol + "','depression':'" + depression + "','disclosure':'" + disclosure + "','administerART':'" + administerART + "','adherence':'" + adherenceBarriers + "','locator':'" + locator + "','caregiver':'" + caregiver + "'}",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (response) {
+                            toastr.success(response.d);
+                        },
+                        error: function (xhr, errorType, exception) {
+                            var jsonError = jQuery.parseJSON(xhr.responseText);
+                            toastr.error("" + xhr.status + "" + jsonError.Message);
+                        }
+                    });
+                }
+            });
+         
 
         $.ajax({
             type: "POST",
