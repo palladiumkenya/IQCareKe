@@ -3345,14 +3345,6 @@ begin
 insert into mst_Decode values('Hepatitis B',33,6,null,0,1,getdate(),null,0,null,null)
 end
 
-if not exists(select 1 from mst_code where name = 'ServiceRegisteredForAtPharmacy')
-begin
-insert into mst_code values('ServiceRegisteredForAtPharmacy',0,1,getdate(),null)
-insert into mst_decode values('Hepatitis B',ident_current('mst_code'),1,0,0,1,getdate(),null,0,null,null)
-insert into mst_decode values('PEP',ident_current('mst_code'),2,0,0,1,getdate(),null,0,null,null)
-insert into mst_decode values('Goldstar',ident_current('mst_code'),3,0,0,1,getdate(),null,0,null,null)
-end
-
 update Mst_LabTestParameter set deleteflag=1 where id=107 and ParameterName = 'ViralLoad Undetectable'
 
 --insert PM/SCM With Same point dispense module
