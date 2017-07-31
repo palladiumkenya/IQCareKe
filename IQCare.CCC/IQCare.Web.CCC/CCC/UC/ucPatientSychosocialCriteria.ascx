@@ -212,15 +212,17 @@ counselling session?</label>
 
          <div class="col-md-12"><hr /></div>
 
-        </div>
-
-        <div class="col-md-12">
+            <div class="col-md-12 formgroup">
             <div class="col-md-4"></div>
             <div class="col-md-4">
                 <button id="btnSupportSystemCriteria" class="btn btn-sm btn-primary">Save Support System Criteria</button>
             </div>
             <div class="col-md-4"></div>
         </div>
+
+    </div>
+
+        
     </div>
 </div>
 
@@ -289,7 +291,7 @@ counselling session?</label>
                         
                         var itemList = response.d;
                         $.each(itemList, function (index, itemList) {
-                            alert(response.d);
+                            
                             if (itemList.BenefitART == true) { $("#benefitsART").prop("checked", true); }
                             if (itemList.Alcohol) { $("#screenAlcohol").prop("checked", true); }
                             if (itemList.Depression) { $("#depression").prop("checked", true); }
@@ -338,8 +340,7 @@ counselling session?</label>
                 }
             });
          
-
-        $.ajax({
+       $.ajax({
             type: "POST",
             url: "../WebService/PatientTreatmentpreparation.asmx/CheckIfSupportSystemCriteriaExists",
             data: "{'patientId':'" + patientId + "'}",
@@ -347,14 +348,60 @@ counselling session?</label>
             dataType: "json",
             success: function (response) {
                 isDoneSupportSystemCriteria = response.d;
-                alert(isDoneSupportSystemCriteria);
+
+                $.ajax({
+                    type: "POST",
+                    url: "../WebService/PatientTreatmentpreparation.asmx/GetPatientSupportSystemCriteria",
+                    data: "{'patientId':'" + patientId + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        var itemList = response.d;
+                        $.each(itemList, function (index, itemList) {
+
+                            if (itemList.TakingART == true) { $("#convinient").prop("checked", true); }
+                            if (itemList.TSIdentified == true) { $("#TSIdentified").prop("checked", true); }
+                            if (itemList.supportGroup == true) { $("#supportGroup").prop("checked", true); }
+                            if (itemList.EnrollSMSReminder == true) { $("#EnrollSMSReminder").prop("checked", true); }
+                            if (itemList.OtherSupportSystem == true) { $("#OtherSupportSystem").prop("checked", true); }
+                        });
+                        $("#btnSupportSystemCriteria").prop('disabled', true);
+
+                    },
+                    error: function (xhr, errorType, exception) {
+                        var jsonError = jQuery.parseJSON(xhr.responseText);
+                        toastr.error("" + xhr.status + "" + jsonError.Message);
+                    }
+                });
+                
             },
             error: function (xhr, errorType, exception) {
                 var jsonError = jQuery.parseJSON(xhr.responseText);
                 toastr.error("" + xhr.status + "" + jsonError.Message);
             }
-        });
+            });
 
+
+       $("#btnSupportSystemCriteria").click(function () {
+            if (isDoneSupportSystemCriteria == 0) {
+                $.ajax({
+                    type: "POST",
+                    url: "../WebService/PatientTreatmentpreparation.asmx/AddPatientSupportSystemCriteria",
+                    data: "{'patientId':'" + patientId + "','patientmastervisitId':'" + patientMasterVisitId + "','takingART':'" + convinient + "','TSIdentified':'" + TSIdentified + "','smsreminder':'" + EnrollSMSReminder + "','othersupport':'" + OtherSupportSystem + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        toastr.success(response.d);
+                    },
+                    error: function (xhr, errorType, exception) {
+                        var jsonError = jQuery.parseJSON(xhr.responseText);
+                        toastr.error("" + xhr.status + "" + jsonError.Message);
+                    }
+                });
+            }
+       });
+
+      
     });
 
 

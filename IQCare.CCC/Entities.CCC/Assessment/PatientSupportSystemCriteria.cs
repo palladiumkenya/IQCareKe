@@ -16,6 +16,7 @@ namespace Entities.CCC.Assessment
         public virtual Entities.CCC.Enrollment.PatientEntity Patient { get; set; }
         public int PatientMasterVisitId { get; set; }
         public bool TakingART { get; set; }
+        public bool supportGroup { get; set; }
         public bool TSIdentified { get; set; }
         public bool EnrollSMSReminder { get; set; }
         public bool OtherSupportSystems { get; set; }

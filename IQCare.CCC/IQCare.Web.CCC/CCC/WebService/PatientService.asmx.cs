@@ -225,7 +225,7 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod]
-        public string UpdatePatientFamilyTesting(int patientId, int patientMasterVisitId, string firstName, string middleName, string lastName, int sex, string dob, int relationshipId, int baselineHivStatusId, DateTime baselineHivStatusDate, string hivTestingresultId, string hivTestingresultDate, bool cccreferal, string cccReferalNumber, int userId, int personRelationshipId, int hivTestingId, int personId)
+        public string UpdatePatientFamilyTesting(int patientId, int patientMasterVisitId, string firstName, string middleName, string lastName, int sex, string dob, int relationshipId, int baselineHivStatusId, DateTime baselineHivStatusDate, string hivTestingresultId, string hivTestingresultDate, bool cccreferal, string cccReferalNumber, int userId, int personRelationshipId, int hivTestingId, int personId,string cccReferalModDate)
         {
             firstName = GlobalObject.unescape(firstName);
             middleName = GlobalObject.unescape(middleName);

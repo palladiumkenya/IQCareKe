@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using Entities.CCC.Assessment;
 using Application.Presentation;
+using Interface.CCC.assessment;
 
 namespace IQCare.CCC.UILogic.assessment
 {
     public class PatientSupportSystemCriteriaManager 
     {
-        private PatientSupportSystemCriteriaManager _PatientSupportSystemCriteriaManager = (PatientSupportSystemCriteriaManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.assessment.BPatientSupportSystemCriteriaManager, BusinessProcess.CCC");
+        private IPatientSupportSystemsCriteriaManager _PatientSupportSystemCriteriaManager = (IPatientSupportSystemsCriteriaManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.assessment.BPatientSupportSystemCriteriaManager, BusinessProcess.CCC");
       
 
         public int AddPreparation(PatientSupportSystemCriteria _PatientSupportSystemCriteria)
