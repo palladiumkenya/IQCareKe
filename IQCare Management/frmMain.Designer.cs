@@ -83,6 +83,7 @@ namespace IQCare.Management
             this.mnuConfigureBudget = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuVisitConfiguration = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuBudgetView = new System.Windows.Forms.ToolStripMenuItem();
+            this.registerPatientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuAbout = new System.Windows.Forms.ToolStripMenuItem();
@@ -408,6 +409,7 @@ namespace IQCare.Management
             this.mnuPMSCM.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.masterListToolStripMenuItem,
             this.mnuPatientDrugDispense,
+            this.registerPatientToolStripMenuItem,
             this.toolStripSeparator10,
             this.mnuPurchaseOrder,
             this.mnuGoodReceivedNote,
@@ -558,6 +560,13 @@ namespace IQCare.Management
             this.mnuBudgetView.Size = new System.Drawing.Size(278, 22);
             this.mnuBudgetView.Text = "Budget View";
             this.mnuBudgetView.Click += new System.EventHandler(this.holisticBudgetViewToolStripMenuItem_Click);
+            // 
+            // registerPatientToolStripMenuItem
+            // 
+            this.registerPatientToolStripMenuItem.Name = "registerPatientToolStripMenuItem";
+            this.registerPatientToolStripMenuItem.Size = new System.Drawing.Size(278, 22);
+            this.registerPatientToolStripMenuItem.Text = "Register Patient";
+            this.registerPatientToolStripMenuItem.Click += new System.EventHandler(this.registerPatientToolStripMenuItem_Click);
             // 
             // mnuHelp
             // 
@@ -999,6 +1008,7 @@ namespace IQCare.Management
         private System.Windows.Forms.ToolStripMenuItem issueVoucherToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
+        private ToolStripMenuItem registerPatientToolStripMenuItem;
     }
 }
 

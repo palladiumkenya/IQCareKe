@@ -3376,6 +3376,8 @@ begin
 insert into mst_Decode values('Hepatitis B',33,6,null,0,1,getdate(),null,0,null,null)
 end
 
+update Mst_LabTestParameter set deleteflag=1 where id=107 and ParameterName = 'ViralLoad Undetectable'
+
 --insert PM/SCM With Same point dispense module
 SET IDENTITY_INSERT mst_module ON
 
