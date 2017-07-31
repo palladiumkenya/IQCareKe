@@ -30,6 +30,7 @@ namespace IQCare.Web.CCC.WebService
         public string lastName { get; set; }
         public int sex { get; set; }
         public string dob { get; set; }
+        public string dobPrecision { get; set; }
         public int relationshipId { get; set; }
         public int baselineHivStatusId { get; set; }
         public string baselineHivStatusDate { get; set; }
@@ -144,6 +145,7 @@ namespace IQCare.Web.CCC.WebService
         {
             int patientId; int patientMasterVisitId; string firstName; string middleName; string lastName; int sex; string dob; int relationshipId; int baselineHivStatusId; string baselineHivStatusDate; string hivTestingresultId; string hivTestingresultDate; bool cccreferal; string cccReferalNumber;  int userId;
             DateTime? linkageDate;
+            bool dobPrecision;
 
             FamilyMembers[] familyMembrs = JsonConvert.DeserializeObject<FamilyMembers[]>(familyMembers);
             int count = familyMembrs.Length;
@@ -159,6 +161,7 @@ namespace IQCare.Web.CCC.WebService
                 int hivresultId = familyMembrs[i].hivTestingresultId == "" ? 0 : Convert.ToInt32(familyMembrs[i].hivTestingresultId);
                 sex = familyMembrs[i].sex;
                 dob = familyMembrs[i].dob;
+                dobPrecision = Convert.ToBoolean(familyMembrs[i].dobPrecision);
                 relationshipId = familyMembrs[i].relationshipId;
                 baselineHivStatusId = familyMembrs[i].baselineHivStatusId;
                 baselineHivStatusDate = familyMembrs[i].baselineHivStatusDate;
@@ -176,6 +179,7 @@ namespace IQCare.Web.CCC.WebService
                     LastName = lastName,
                     Sex = sex,
                     DateOfBirth = DateTime.Parse(dob),
+                    DobPrecision = dobPrecision,
                     RelationshipId = relationshipId,
                     BaseLineHivStatusId = baselineHivStatusId,
                     //BaselineHivStatusDate = baselineHivStatusDate,
@@ -523,6 +527,7 @@ namespace IQCare.Web.CCC.WebService
                 LastName = member.LastName,
                 Sex = sex,
                 DateOfBirth = member.DateOfBirth,
+                DobPrecision = member.DobPrecision,
                 Relationship = relationship,
                 BaseLineHivStatus = baselineHivStatus,
                 BaseLineHivStatusDate = member.BaselineHivStatusDate,
@@ -635,6 +640,7 @@ namespace IQCare.Web.CCC.WebService
         public string LastName { get; set; }
         public string Relationship { get; set; }
         public DateTime DateOfBirth { get; set; }
+        public bool DobPrecision { get; set; }
         public string Sex { get; set; }
         public string BaseLineHivStatus { get; set; }
         public DateTime ? BaseLineHivStatusDate { get; set; }
