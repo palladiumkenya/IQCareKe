@@ -43,6 +43,7 @@ namespace DataAccess.CCC.Context
         public DbSet<Identifier> Identifiers { get; set; }
         public DbSet<PatientReEnrollment> ReEnrollments { get; set; }
         public DbSet<HivReConfirmatoryTest> HivReConfirmatoryTests { get; set; }
+        public DbSet<PatientArtDistribution> PatientArtDistributions { get; set; }
 
         //Screening
         public DbSet<PatientScreening> PatientScreenings { get; set; }

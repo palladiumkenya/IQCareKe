@@ -53,6 +53,7 @@ namespace DataAccess.CCC.Interface
         IPatientEnrollmentRepository PatientEnrollmentRepository { get; }
         IPatientEntryPointRepository PatientEntryPointRepository { get; }
         IPatientIdentifierRepository PatientIdentifierRepository { get; }
+        IPatientArtDistributionRepository PatientArtDistributionRepository { get; }
 
         /*Triage*/
         IPatientVitalsRepository PatientVitalsRepository { get; }
