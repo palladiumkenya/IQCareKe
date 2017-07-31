@@ -184,15 +184,6 @@ namespace IQCare.Web.CCC.Encounter {
         protected global::System.Web.UI.WebControls.TextBox fpmethod;
         
         /// <summary>
-        /// pregnancyStatus control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList pregnancyStatus;
-        
-        /// <summary>
         /// refYes control.
         /// </summary>
         /// <remarks>
@@ -211,13 +202,22 @@ namespace IQCare.Web.CCC.Encounter {
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton refNo;
         
         /// <summary>
-        /// TextBox3 control.
+        /// AppointmentDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox3;
+        protected global::System.Web.UI.WebControls.TextBox AppointmentDate;
+        
+        /// <summary>
+        /// pregnancyStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList pregnancyStatus;
         
         /// <summary>
         /// btnSave control.
