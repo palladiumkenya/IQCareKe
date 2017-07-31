@@ -45,7 +45,7 @@ namespace Entities.Lab
             {
                 return Test.Id;
             }
-            set { TestId = value; }
+            set {  }
         }
                
         [NotMapped]

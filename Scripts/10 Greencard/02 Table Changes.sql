@@ -117,4 +117,14 @@ IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'pillCount'AND Object_ID =
     BEGIN
         ALTER TABLE dtl_patientPharmacyOrder ADD pillCount int;
     END;
+	
+	IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'RegisteredAtPharmacy'AND Object_ID = OBJECT_ID(N'mst_patient'))
+    BEGIN
+        ALTER TABLE mst_patient ADD RegisteredAtPharmacy int;
+    END;
+	
+	IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'ServiceRegisteredForAtPharmacy'AND Object_ID = OBJECT_ID(N'mst_patient'))
+    BEGIN
+        ALTER TABLE mst_patient ADD ServiceRegisteredForAtPharmacy int;
+    END;
 

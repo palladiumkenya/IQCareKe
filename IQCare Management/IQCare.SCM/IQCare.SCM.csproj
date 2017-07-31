@@ -135,6 +135,12 @@
     <Compile Include="frmPrintLabel.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmRegisterNewPatient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRegisterNewPatient.Designer.cs">
+      <DependentUpon>frmRegisterNewPatient.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmStockSummaryLine.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -432,6 +438,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmPrintLabel.resx">
       <DependentUpon>frmPrintLabel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRegisterNewPatient.resx">
+      <DependentUpon>frmRegisterNewPatient.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmStockSummaryLine.resx">
       <DependentUpon>frmStockSummaryLine.cs</DependentUpon>

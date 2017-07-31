@@ -391,7 +391,32 @@ namespace BusinessProcess.SCM
             }
         }
 
+        public int saveUpdatePatientRegistration(string fname, string mname, string lname, string enrollment, string dob,string gender,
+            string locationid,string regDate, string userid, string serviceid)
+        {
+            ClsObject PharmacyManager = new ClsObject();
+            ClsUtility.Init_Hashtable();
+            ClsUtility.AddParameters("@firstName", SqlDbType.VarChar, fname);
+            ClsUtility.AddParameters("@middleName", SqlDbType.VarChar, mname);
+            ClsUtility.AddParameters("@lastName", SqlDbType.VarChar, lname);
+            ClsUtility.AddParameters("@patientEnrollmentID", SqlDbType.VarChar, enrollment);
+            ClsUtility.AddParameters("@DOB", SqlDbType.VarChar, dob);
+            ClsUtility.AddParameters("@gender", SqlDbType.VarChar, gender);
+            ClsUtility.AddParameters("@locationID", SqlDbType.VarChar, locationid);
+            ClsUtility.AddParameters("@regDate", SqlDbType.VarChar, regDate);
+            ClsUtility.AddParameters("@userID", SqlDbType.VarChar, userid);
+            ClsUtility.AddParameters("@serviceId", SqlDbType.VarChar, serviceid);
 
+            return (int)PharmacyManager.ReturnObject(ClsUtility.theParams, "sp_SaveUpdatePharmacyRegistration", ClsUtility.ObjectEnum.ExecuteNonQuery);
+        }
+
+        public DataTable getPatientsRegistered()
+        {
+            ClsObject PharmacyManager = new ClsObject();
+            ClsUtility.Init_Hashtable();
+
+            return (DataTable)PharmacyManager.ReturnObject(ClsUtility.theParams, "sp_getAllPatientsRegisteredAtPharmacy", ClsUtility.ObjectEnum.DataTable);
+        }
 
     }
 }
