@@ -118,7 +118,7 @@
                                 <label class="control-label pull-left">HIV Testing Results</label>
                             </div>
                             <div class="col-md-12">
-                                <asp:DropDownList runat="server" ID="hivtestingresult" ClientIDMode="Static" CssClass="form-control input-sm" required="true" onChange="HivEnabled();CccEnabled();" />
+                                <asp:DropDownList runat="server" ID="hivtestingresult" ClientIDMode="Static" CssClass="form-control input-sm" required="true" onChange="CccEnabled();" />
                             </div>
                         </div>
                         <div class="col-md-12 form-group">
@@ -169,7 +169,7 @@
                                 <label class="control-label pull-left">CCC Number</label>
                             </div>
                             <div class="col-md-12" id="cccnum">
-                                <input id="cccNumber" class="form-control input-sm" type="text" runat="server" data-parsley-trigger="keyup" data-parsley-pattern-message="Please enter a valid CCC Number. Format ((XXXXX-XXXXX))" data-parsley-pattern="/^[0-9]{5}-[0-9]{5}$/" />
+                                <input id="cccNumber" class="form-control input-sm" type="text" runat="server" data-parsley-required="true" data-parsley-trigger="keyup" data-parsley-pattern-message="Please enter a valid CCC Number. Format ((XXXXX-XXXXX))" data-parsley-pattern="/^[0-9]{5}-[0-9]{5}$/" />
                             </div>
                         </div>
                     </div>
@@ -398,7 +398,7 @@
                                             <label class="control-label pull-left">HIV Testing Results</label>
                                         </div>
                                         <div class="col-md-12">
-                                            <asp:DropDownList runat="server" ID="testingStatusMod" ClientIDMode="Static" CssClass="form-control input-sm" required="true" onChange="HivEnabledMod();CccEnabledMod();" />
+                                            <asp:DropDownList runat="server" ID="testingStatusMod" ClientIDMode="Static" CssClass="form-control input-sm" required="true" onChange="CccEnabledMod();" />
                                         </div>
                                     </div>
                                     <div class="col-md-12 form-group">
@@ -741,6 +741,11 @@
                             (el.dob ===dob) &&
                             (el.relationshipId === relationshipId);
                     });
+
+                    if (cccreferal == "") {
+                        cccreferal = false;
+                    }
+
                     if (fam.length > 0) {
                         toastr.error("Family member already added!");
                         return false;
@@ -867,6 +872,7 @@
 
                             var referred = "";
                             var action = "";
+                            var enrollment = "";
 
                             if (item.BaseLineHivStatus != "Tested Positive" && item.HivStatusResult !="Tested Positive") {
                                 action = "<button type='button' id= 'btnEditTesting' class='btn btn-link btn-sm pull-right' data-toggle='modal' data-target='#testFollowupModal' onClick='editFamilyTesting(this)'>Follow-up Test</button>";
@@ -874,8 +880,8 @@
                                 referred = "Referred";
                             } else if (item.BaseLineHivStatus == "Tested Positive" && item.CccReferal == "False") {
                                 referred = "Not Referred";
-                                action =
-                                    "<button type='button' id= 'btnEditTesting' class='btn btn-link btn-sm pull-right' data-toggle='modal' data-target='#editFamilyTestingModal' onClick='editFamilyTesting(this)'>Enroll to CCC</button>";
+                                action = "<button type='button' id= 'btnEditTesting' class='btn btn-link btn-sm pull-right' data-toggle='modal' data-target='#editFamilyTestingModal' onClick='editFamilyTesting(this)'>Refer to CCC</button>";
+                                enrollment = "<button type='button' id= 'btnEditTesting' class='btn btn-link btn-sm pull-right' data-toggle='modal' data-target='#editFamilyTestingModal' onClick='editFamilyTesting(this)'>Enroll to Facility</button>";
                             }
 
                             table += '<tr><td style="text-align: left">' + n + '</td><td style="text-align: left">' + name + '</td>' +
@@ -888,7 +894,7 @@
                                 '<td style="text-align: left">' + referred + "</td>" +
                                 '<td style="text-align: left">' + linkageDate + "</td>" +
                                 '<td style="text-align: left">' + action + '</td>' +
-                                '<td align="right">&nbsp;&nbsp;&nbsp;dddd action fff &nbsp;&nbsp;&nbsp;</td></tr>';
+                                '<td align="right">' + enrollment + '</td></tr>';
                         });
                    
                         $('#tableFamilymembers').append(table);
@@ -1146,9 +1152,11 @@
         }
 
         function CccEnabled() {
-            if (($("#hivtestingresult :selected").text() === "Tested Negative") || ($("#hivtestingresult :selected").text() === "Never Tested")) {
+            var testingResult = $("#hivtestingresult :selected").text();
+
+            if ((testingResult === "Tested Negative" || testingResult == "Never Tested")) {
                 $("#<%=cccNumber.ClientID%>").prop('disabled',true);
-                $("#<%=CccReferal.ClientID%>").val("False");
+                $("#<%=CccReferal.ClientID%>").val();
                 $("#<%=CccReferal.ClientID%>").prop('disabled', true);
                 $("#CCCReferalDate").prop('disabled', true);
             }
@@ -1160,7 +1168,7 @@
                 $("#<%=CccReferal.ClientID%>").prop('disabled', false);
                 $("#CCCReferalDate").prop('disabled', false);
             }
-    }
+        }
       
         function BaselineEnabled() {
             var baselinehivstatus = $("#BaselineHIVStatus :selected").text();
@@ -1198,6 +1206,12 @@
                 $("#<%=CccReferal.ClientID%>").prop('disabled', false);
 
             } else if (baselinehivstatus === "Tested Negative") {
+                $("#hivtestingresult").val("");
+                $("#hivtestingresult").prop('disabled', false);
+                $("#HIVTestingDate").val("");
+                $("#HIVTestingDate").prop('disabled', false);
+                $("#TestingDate").removeClass('noneevents');
+
                 $("#<%=cccNumber.ClientID%>").prop('disabled', true);
                 $("#<%=CccReferal.ClientID%>").prop('disabled', true);
 
@@ -1215,7 +1229,7 @@
             }
         }
 
-        function HivEnabled() {
+        <%--function HivEnabled() {
             if ($("#hivtestingresult :selected").text() === "Never Tested") {
               
                 $("#<%=HIVTestingDate.ClientID%>").prop('disabled',true);
@@ -1225,19 +1239,24 @@
                 $("#<%=HIVTestingDate.ClientID%>").prop('disabled',false);
                 $("#TestingDate").removeClass('noneevents');
             }
-        }
+        }--%>
 
         function CccEnabledMod() {
-            if (($("#testingStatusMod :selected").text() === "Tested Negative") || ($("#testingStatusMod :selected").text() === "Never Tested")) {
+            var testingStatusMod = $("#testingStatusMod :selected").text();
+
+            if ((testingStatusMod === "Tested Negative")) {
                 $("#<%=cccNumberMod.ClientID%>").prop('disabled',true);
-                $("#<%=CccReferal.ClientID%>").val("False");
-                $("#<%=cccReferalMod.ClientID%>").prop('disabled',true);
+                $("#<%=cccReferalMod.ClientID%>").val("False");
+                $("#<%=cccReferalMod.ClientID%>").prop('disabled', true);
+                $("#CccReferalModDDate").prop('disabled', true);
             }
             else if ($("#cccReferalMod").val() === 'False') {
-                $("#<%=cccNumberMod.ClientID%>").prop('disabled',true);
+                $("#<%=cccNumberMod.ClientID%>").prop('disabled', true);
+                $("#CccReferalModDDate").prop('disabled', true);
             } else {
                 $("#<%=cccNumberMod.ClientID%>").prop('disabled',false);
-                $("#<%=cccReferalMod.ClientID%>").prop('disabled',false);
+                $("#<%=cccReferalMod.ClientID%>").prop('disabled', false);
+                $("#CccReferalModDDate").prop('disabled', false);
             }
     }
       

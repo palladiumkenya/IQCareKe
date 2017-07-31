@@ -255,6 +255,11 @@ namespace IQCare.Web.CCC.WebService
 
             if(hivTestingresultDate != "")
                 patientAppointment.HivTestingResultsDate = DateTime.Parse(hivTestingresultDate);
+            if (cccReferalModDate != "")
+            {
+                patientAppointment.LinkageDate = DateTime.Parse(cccReferalModDate);
+            }
+
             try
             {
                 var testing = new PatientFamilyTestingManager();
