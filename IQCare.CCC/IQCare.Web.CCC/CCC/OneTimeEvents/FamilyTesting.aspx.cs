@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Application.Presentation;
 using Entities.CCC.Lookup;
 using Interface.CCC.Lookup;
+using IQCare.CCC.UILogic;
 
 namespace IQCare.Web.CCC.OneTimeEvents
 {
@@ -86,6 +88,18 @@ namespace IQCare.Web.CCC.OneTimeEvents
             UserId = Convert.ToInt32(HttpContext.Current.Session["AppUserId"]);
             PatientAge = Convert.ToInt32(HttpContext.Current.Session["Age"]);
             PatientDateOfBirth = Convert.ToDateTime(HttpContext.Current.Session["DateOfBirth"]).Date;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public static void SetEnrollmentSession(int personId)
+        {
+            HttpContext.Current.Session["PersonId"] = personId;
+            LookupLogic logic = new LookupLogic();
+            var items = logic.GetItemIdByGroupAndItemName("PatientType", "New");
+            if (items.Count > 0)
+            {
+                HttpContext.Current.Session["PatientType"] = items[0].ItemId;
+            }          
         }
     }
 }

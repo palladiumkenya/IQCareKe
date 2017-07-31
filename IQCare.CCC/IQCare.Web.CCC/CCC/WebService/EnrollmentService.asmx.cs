@@ -10,10 +10,14 @@ using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
+using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.Script.Services;
 using System.Web.Services;
 using System.Web.Services.Protocols;
+using Application.Presentation;
+using Entities.CCC.Baseline;
+using Interface.CCC.Baseline;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Convert = System.Convert;
@@ -53,6 +57,7 @@ namespace IQCare.Web.CCC.WebService
     public class EnrollmentDetails
     {
         public string DOB { get; set; }
+        public bool DobPrecision { get; set; }
         public string NationalId { get; set; }
         public string EnrollmentDate { get; set; }
         public int EntryPointId { get; set; }
@@ -87,6 +92,9 @@ namespace IQCare.Web.CCC.WebService
         private int patientEntryPointId { get; set; }
         private int PersonId { get; set; }
         private int ptn_Pk { get; set; }
+
+        private readonly IPatientLinkageManager linkageManager = (IPatientLinkageManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Baseline.BPatientLinkageManager, BusinessProcess.CCC");
+        private readonly IPatientHivTestingManager _hivTestingManager = (IPatientHivTestingManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Baseline.BPatientHivTestingManager, BusinessProcess.CCC");
 
         [WebMethod]
         public string HelloWorld()
@@ -280,6 +288,33 @@ namespace IQCare.Web.CCC.WebService
                             {
                                 patientIdentifierId = patientIdentifierManager.addPatientIdentifier(patientId,
                                 patientEnrollmentId, item.Key, item.Value);
+                                
+                                var identifierManager = new IdentifierManager();
+                                var identifierList = identifierManager.GetIdentifiersById(item.Key);
+                                var hivtesting = _hivTestingManager.GetAll().OrderByDescending(y => y.Id).FirstOrDefault(n => n.PersonId == PersonId);
+                                if (identifierList.Count > 0)
+                                {
+                                    if (identifierList[0].Code == "CCCNumber")
+                                    {
+                                        if (hivtesting != null)
+                                        {
+                                            hivtesting.ReferredToCare = true;
+                                            _hivTestingManager.UpdatePatientHivTesting(hivtesting);
+
+                                            PatientLinkage patLinkage = new PatientLinkage();
+                                            patLinkage.LinkageDate = DateTime.Parse(enrollmentDate);
+                                            patLinkage.CCCNumber = item.Value;
+                                            patLinkage.PersonId = PersonId;
+                                            patLinkage.CreatedBy = userId;
+                                            patLinkage.Enrolled = true;
+                                            patLinkage.PatientId = patientId;
+
+                                            linkageManager.AddPatientLinkage(patLinkage);
+                                        }
+                                    }
+                                }
+
+                                
                             }
                                 
                             if (greencardptnpk.Count == 0)
@@ -604,12 +639,23 @@ namespace IQCare.Web.CCC.WebService
                 PatientEntryPointManager entryPointManager = new PatientEntryPointManager();
                 PatientIdentifierManager identifierManager = new PatientIdentifierManager();
                 IdentifierManager ideManager = new IdentifierManager();
+                PersonLookUpManager personLookUp = new PersonLookUpManager();
 
                 List<PatientLookup> patientList = patientLookupManager.GetPatientByPersonId(PersonId);
 
                 if (patientList.Count > 0)
                 {
                     enrollmentDetails.DOB = String.Format("{0:dd-MMM-yyyy}", patientList[0].DateOfBirth);
+                    enrollmentDetails.DobPrecision = patientList[0].DobPrecision;
+                    if (enrollmentDetails.DOB == null)
+                    {
+                        PersonLookUp person = personLookUp.GetPersonById(PersonId);
+                        if (person.DateOfBirth != null)
+                        {
+                            enrollmentDetails.DOB = String.Format("{0:dd-MMM-yyyy}", person.DateOfBirth);
+                            enrollmentDetails.DobPrecision = person.DobPrecision==null?false:Convert.ToBoolean(person.DobPrecision);
+                        }                   
+                    }
                     enrollmentDetails.NationalId = patientList[0].NationalId;
                     enrollmentDetails.EnrollmentDate = String.Format("{0:dd-MMM-yyyy}", patientList[0].EnrollmentDate);
 
@@ -693,6 +739,16 @@ namespace IQCare.Web.CCC.WebService
                     //    enrollmentDetails.EnrollmentValue = patientList[0].EnrollmentNumber;
                     //}
                 }
+                else
+                {
+                    PersonLookUp person = personLookUp.GetPersonById(PersonId);
+                    if (person.DateOfBirth != null)
+                    {
+                        enrollmentDetails.DOB = String.Format("{0:dd-MMM-yyyy}", person.DateOfBirth);
+                        enrollmentDetails.DobPrecision = person.DobPrecision == null ? false : Convert.ToBoolean(person.DobPrecision);
+                    }
+                }
+
                 return new JavaScriptSerializer().Serialize(enrollmentDetails);
             }
             catch (Exception e)

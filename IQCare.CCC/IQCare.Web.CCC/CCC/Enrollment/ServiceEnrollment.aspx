@@ -26,6 +26,7 @@
                                             <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
                                         <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="PersonDOB" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>        
+                                        <asp:HiddenField ID="dobPrecision" runat="server" ClientIDMode="Static" />
                                     </div>
                                 </div>
                             </div>
@@ -268,7 +269,8 @@
 
                 var nationalId = $("#NationalId").val();
                 var patientType = $("#PatientType").val();
-                var dobPrecision = '<%=Session["DobPrecision"]%>';
+                <%--var dobPrecision = '<%=Session["DobPrecision"]%>';--%>
+                var dobPrecision = $("#<%=dobPrecision.ClientID%>").val();
 
                 if (nationalId == null || nationalId == '') {
                     nationalId = 99999999;
@@ -321,7 +323,8 @@
                 
                 var nationalId = $("#NationalId").val();
                 var patientType = $("#PatientType").val();
-                var dobPrecision = '<%=Session["DobPrecision"]%>';
+                <%--var dobPrecision = '<%=Session["DobPrecision"]%>';--%>
+                var dobPrecision = $("#<%=dobPrecision.ClientID%>").val();
 
                 if (nationalId == null || nationalId == '') {
                     nationalId = 99999999;
@@ -601,6 +604,7 @@
                         //console.log(messageResponse);
                         if (messageResponse.DOB != null) {
                             $("#PersonDOB").val(messageResponse.DOB);
+                            $("#<%=dobPrecision.ClientID%>").val(messageResponse.DobPrecision);
                             $("#PersonDOB").prop('disabled', true);
                         }
 

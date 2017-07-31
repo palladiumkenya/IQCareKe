@@ -27,7 +27,7 @@ namespace IQCare.CCC.UILogic.Baseline
         public int AddPatientFamilyTestings(PatientFamilyTesting p, int userId)
         {
             PersonManager pm = new PersonManager();
-            int personId =  pm.AddPersonUiLogic(p.FirstName, p.MiddleName, p.LastName, p.Sex, userId, p.DateOfBirth);
+            int personId =  pm.AddPersonUiLogic(p.FirstName, p.MiddleName, p.LastName, p.Sex, userId, p.DateOfBirth, p.DobPrecision);
 
             PersonRelationship relationship = new PersonRelationship()
             {
@@ -113,7 +113,8 @@ namespace IQCare.CCC.UILogic.Baseline
                 PatientMasterVisitId = p.PatientMasterVisitId,
                 TestingResult = p.HivTestingResultsId,
                 TestingDate = p.HivTestingResultsDate,
-                ReferredToCare = p.CccReferal
+                ReferredToCare = p.CccReferal,
+                CreatedBy = userId
             };
 
             int hivTestingId = _hivTestingManager.AddPatientHivTesting(familyTesting);
@@ -154,6 +155,7 @@ namespace IQCare.CCC.UILogic.Baseline
                             LastName = (person.LastName),
                             Sex = person.Sex,
                             DateOfBirth = person.DateOfBirth == null? DateTime.Now: (DateTime)person.DateOfBirth.Value,
+                            DobPrecision = person.DobPrecision == null? false: Convert.ToBoolean(person.DobPrecision),
                             PersonId = relationship.PersonId,
                             RelationshipId = relationship.RelationshipTypeId,
                             BaseLineHivStatusId = relationship.BaselineResult,
