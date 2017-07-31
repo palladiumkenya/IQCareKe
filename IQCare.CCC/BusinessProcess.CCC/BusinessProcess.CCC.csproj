@@ -77,6 +77,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="assessment\BPatientPsychosocialCriteriaManager.cs" />
+    <Compile Include="assessment\BPatientSupportSystemCriteriaManager.cs" />
     <Compile Include="Baseline\BINHProphylaxis.cs" />
     <Compile Include="Baseline\BPatientBaselineAssessmentManager.cs" />
     <Compile Include="Baseline\BPatientArvHistoryManager.cs" />
@@ -116,10 +118,12 @@
     <Compile Include="Lookup\BFacilityListManager.cs" />
     <Compile Include="Lookup\BPatientBaselineLookupManager.cs" />
     <Compile Include="Lookup\BPatientServiceEnrollmentLookupManager.cs" />
+    <Compile Include="Lookup\BPatientStabilitySummaryManager.cs" />
     <Compile Include="Lookup\BPatientTreatmentSupporterLookupManager.cs" />
     <Compile Include="Lookup\BPatientTreatmentTrackerManager.cs" />
     <Compile Include="Lookup\BPersonContactLookUpManager.cs" />
     <Compile Include="Lookup\BPersonGreenCardLookupManager.cs" />
+    <Compile Include="Lookup\BTestingSummaryStatisticsManager.cs" />
     <Compile Include="PatientMaritalStatusManager.cs" />
     <Compile Include="PatientOvcStatusManager.cs" />
     <Compile Include="Patient\BPatient.cs" />

@@ -145,7 +145,7 @@
                                 <asp:DropDownList ID="CccReferal" runat="server" AutoPostBack="False" CssClass="form-control input-sm" onChange="CccEnabled();" ClientIDMode="Static" data-parsley-required="true">
                                     <asp:ListItem Text="Select" Value=""></asp:ListItem>
                                     <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
-                                    <asp:ListItem Text="No" Value="False" Selected="True"></asp:ListItem>
+                                    <asp:ListItem Text="No" Value="False"></asp:ListItem>
                                 </asp:DropDownList>
                             </div>
                         </div>
@@ -248,6 +248,7 @@
                         <th><span class="text-primary" aria-hidden="true">CCC Referal</span></th>
                         <th><span class="text-primary" aria-hidden="true">CCC Referal Date</span></th>
                         <th><span class="text-primary pull-right">Action</span></th>
+                        <th><span class="text-primary pull-right">Enroll in Facility</span></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -259,8 +260,8 @@
         </div>
 
 
-        <%--Edit Modal--%>
-        <div id="editFamilyTestingModal" class="modal fade" role="dialog" data-parsley-validate="true" data-show-errors="true">
+        <%--Test Follow-up Modal--%>
+        <div id="testFollowupModal" class="modal fade" role="dialog" data-parsley-validate="true" data-show-errors="true">
             <div class="modal-dialog" style="width: 90%">
                 <div class="modal-content">
                     <div class="modal-header bg-info">
@@ -271,7 +272,10 @@
                             <div class="col-md-12">
 
                                 <div class="col-md-12">
-                                    <h3>Person Details</h3><hr />
+                                    <h3 class="pull-left">Person Details</h3>
+                                </div>
+                                <div class="col-md-12">
+                                    <hr/>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="col-md-12 form-group">
@@ -317,219 +321,75 @@
                                             <select runat="server" id="sexMod" class="form-control input-sm" required="true" clientidmode="Static"></select>
                                         </div>
                                     </div>
+                                    
                                     <div class="col-md-12 form-group">
                                         <div class="col-md-6">
                                             <label class="control-label pull-left">Date of Birth</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <div class="datepicker fuelux form-group" id="DateOfBirthMod">
-                                                <div class="input-group">
-                                                    <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="dobMod" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
-                                                    <div class="input-group-btn">
-                                                        <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
-                                                            <span class="glyphicon glyphicon-calendar"></span>
-                                                            <span class="sr-only">Toggle Calendar</span>
-                                                        </button>
-                                                        <div class="dropdown-menu dropdown-menu-right datepicker-calendar-wrapper" role="menu">
-                                                            <div class="datepicker-calendar">
-                                                                <div class="datepicker-calendar-header">
-                                                                    <button type="button" class="prev"><span class="glyphicon glyphicon-chevron-left input-sm"></span><span class="sr-only">Previous Month</span></button>
-                                                                    <button type="button" class="next"><span class="glyphicon glyphicon-chevron-right input-sm"></span><span class="sr-only">Next Month</span></button>
-                                                                    <button type="button" class="title" data-month="11" data-year="2014">
-                                                                        <span class="month">
-                                                                            <span data-month="0">January</span>
-                                                                            <span data-month="1">February</span>
-                                                                            <span data-month="2">March</span>
-                                                                            <span data-month="3">April</span>
-                                                                            <span data-month="4">May</span>
-                                                                            <span data-month="5">June</span>
-                                                                            <span data-month="6">July</span>
-                                                                            <span data-month="7">August</span>
-                                                                            <span data-month="8">September</span>
-                                                                            <span data-month="9">October</span>
-                                                                            <span data-month="10">November</span>
-                                                                            <span data-month="11" class="current">December</span>
-                                                                        </span><span class="year">2017</span>
-                                                                    </button>
-                                                                </div>
-                                                                <table class="datepicker-calendar-days">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>Su</th>
-                                                                            <th>Mo</th>
-                                                                            <th>Tu</th>
-                                                                            <th>We</th>
-                                                                            <th>Th</th>
-                                                                            <th>Fr</th>
-                                                                            <th>Sa</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody></tbody>
-                                                                </table>
-                                                                <div class="datepicker-calendar-footer">
-                                                                    <button type="button" class="datepicker-today">Today</button>
-                                                                </div>
-                                                            </div>
-                                                            <div class="datepicker-wheels" aria-hidden="true">
-                                                                <div class="datepicker-wheels-month">
-                                                                    <h2 class="header">Month</h2>
-                                                                    <ul>
-                                                                        <li data-month="0">
-                                                                            <button type="button">Jan</button></li>
-                                                                        <li data-month="1">
-                                                                            <button type="button">Feb</button></li>
-                                                                        <li data-month="2">
-                                                                            <button type="button">Mar</button></li>
-                                                                        <li data-month="3">
-                                                                            <button type="button">Apr</button></li>
-                                                                        <li data-month="4">
-                                                                            <button type="button">May</button></li>
-                                                                        <li data-month="5">
-                                                                            <button type="button">Jun</button></li>
-                                                                        <li data-month="6">
-                                                                            <button type="button">Jul</button></li>
-                                                                        <li data-month="7">
-                                                                            <button type="button">Aug</button></li>
-                                                                        <li data-month="8">
-                                                                            <button type="button">Sep</button></li>
-                                                                        <li data-month="9">
-                                                                            <button type="button">Oct</button></li>
-                                                                        <li data-month="10">
-                                                                            <button type="button">Nov</button></li>
-                                                                        <li data-month="11">
-                                                                            <button type="button">Dec</button></li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="datepicker-wheels-year">
-                                                                    <h2 class="header">Year</h2>
-                                                                    <ul></ul>
-                                                                </div>
-                                                                <div class="datepicker-wheels-footer clearfix">
-                                                                    <button type="button" class="btn datepicker-wheels-back"><span class="glyphicon glyphicon-arrow-left"></span><span class="sr-only">Return to Calendar</span></button>
-                                                                    <button type="button" class="btn datepicker-wheels-select">Select <span class="sr-only">Month and Year</span></button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                            <div class='input-group date' id='PersonDOBModdatepicker'>
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                                <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="dobMod" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>        
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="col-md-12 form-group">
+                                        <div class="col-md-6">
+                                            <label class="control-label pull-left">Age(Years)</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <asp:TextBox ID="TextBox2" runat="server" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="0" required="true" min="0"></asp:TextBox>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
+                            
                             <div class="col-md-12">
-
                                 <div class="col-md-12">
-                                    <h3>HIV Testing information</h3><hr />
+                                    <h3  class="pull-left">Baseline HIV Results</h3>
                                 </div>
+                            </div>
+                            
+                            <div class="col-md-12">
                                 <div class="col-md-4">
                                     <div class="col-md-12 form-group">
                                         <div class="col-md-12">
                                             <label class="control-label pull-left">Baseline HIV Status</label>
                                         </div>
                                         <div class="col-md-12">
-                                            <select runat="server" id="bHivStatusMod" class="form-control input-sm" required="true" clientidmode="Static" onchange="BaselineEnabledMod();"></select>
+                                            <select runat="server" id="bHivStatusMod" class="form-control input-sm" clientidmode="Static"></select>
                                         </div>
                                     </div>
+                                </div>
+
+                                <div class="col-md-4">
                                     <div class="col-md-12 form-group">
                                         <div class="col-md-12">
                                             <label class="control-label pull-left">Baseline HIV Status Date</label>
                                         </div>
                                         <div class="col-md-12">
-                                            <div class="datepicker fuelux form-group" id="BaselineHIVStatusDMod">
-                                                <div class="input-group">
-                                                    <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="bHivStatusDateMod" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
-                                                    <div class="input-group-btn">
-                                                        <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown" clientidmode="Static" id="btnBaselineHIVStatusDate">
-                                                            <span class="glyphicon glyphicon-calendar"></span>
-                                                            <span class="sr-only">Toggle Calendar</span>
-                                                        </button>
-                                                        <div class="dropdown-menu dropdown-menu-right datepicker-calendar-wrapper" role="menu">
-                                                            <div class="datepicker-calendar">
-                                                                <div class="datepicker-calendar-header">
-                                                                    <button type="button" class="prev"><span class="glyphicon glyphicon-chevron-left input-sm"></span><span class="sr-only">Previous Month</span></button>
-                                                                    <button type="button" class="next"><span class="glyphicon glyphicon-chevron-right input-sm"></span><span class="sr-only">Next Month</span></button>
-                                                                    <button type="button" class="title" data-month="11" data-year="2014">
-                                                                        <span class="month">
-                                                                            <span data-month="0">January</span>
-                                                                            <span data-month="1">February</span>
-                                                                            <span data-month="2">March</span>
-                                                                            <span data-month="3">April</span>
-                                                                            <span data-month="4">May</span>
-                                                                            <span data-month="5">June</span>
-                                                                            <span data-month="6">July</span>
-                                                                            <span data-month="7">August</span>
-                                                                            <span data-month="8">September</span>
-                                                                            <span data-month="9">October</span>
-                                                                            <span data-month="10">November</span>
-                                                                            <span data-month="11" class="current">December</span>
-                                                                        </span><span class="year">2017</span>
-                                                                    </button>
-                                                                </div>
-                                                                <table class="datepicker-calendar-days">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>Su</th>
-                                                                            <th>Mo</th>
-                                                                            <th>Tu</th>
-                                                                            <th>We</th>
-                                                                            <th>Th</th>
-                                                                            <th>Fr</th>
-                                                                            <th>Sa</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody></tbody>
-                                                                </table>
-                                                                <div class="datepicker-calendar-footer">
-                                                                    <button type="button" class="datepicker-today">Today</button>
-                                                                </div>
-                                                            </div>
-                                                            <div class="datepicker-wheels" aria-hidden="true">
-                                                                <div class="datepicker-wheels-month">
-                                                                    <h2 class="header">Month</h2>
-                                                                    <ul>
-                                                                        <li data-month="0">
-                                                                            <button type="button">Jan</button></li>
-                                                                        <li data-month="1">
-                                                                            <button type="button">Feb</button></li>
-                                                                        <li data-month="2">
-                                                                            <button type="button">Mar</button></li>
-                                                                        <li data-month="3">
-                                                                            <button type="button">Apr</button></li>
-                                                                        <li data-month="4">
-                                                                            <button type="button">May</button></li>
-                                                                        <li data-month="5">
-                                                                            <button type="button">Jun</button></li>
-                                                                        <li data-month="6">
-                                                                            <button type="button">Jul</button></li>
-                                                                        <li data-month="7">
-                                                                            <button type="button">Aug</button></li>
-                                                                        <li data-month="8">
-                                                                            <button type="button">Sep</button></li>
-                                                                        <li data-month="9">
-                                                                            <button type="button">Oct</button></li>
-                                                                        <li data-month="10">
-                                                                            <button type="button">Nov</button></li>
-                                                                        <li data-month="11">
-                                                                            <button type="button">Dec</button></li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="datepicker-wheels-year">
-                                                                    <h2 class="header">Year</h2>
-                                                                    <ul></ul>
-                                                                </div>
-                                                                <div class="datepicker-wheels-footer clearfix">
-                                                                    <button type="button" class="btn datepicker-wheels-back"><span class="glyphicon glyphicon-arrow-left"></span><span class="sr-only">Return to Calendar</span></button>
-                                                                    <button type="button" class="btn datepicker-wheels-select">Select <span class="sr-only">Month and Year</span></button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                            <div class='input-group date' id='BaselineHIVStatusDMod'>
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                                <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="bHivStatusDateMod" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>        
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
 
+                            <div class="col-md-12">
+
+                                <div class="col-md-12">
+                                    <h3  class="pull-left">HIV Testing information</h3>
+                                </div>
+                                <div class="col-md-12">
+                                    <hr/>
                                 </div>
 
                                 <div class="col-md-4">
@@ -648,11 +508,30 @@
                                         </div>
                                         <div class="col-md-12">
                                             <asp:DropDownList ID="cccReferalMod" runat="server" AutoPostBack="False" CssClass="form-control input-sm" onChange="CccEnabledMod();" ClientIDMode="Static">
+                                                <asp:ListItem Text="select" Value=""></asp:ListItem>
                                                 <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
-                                                <asp:ListItem Text="No" Value="False" Selected="True"></asp:ListItem>
+                                                <asp:ListItem Text="No" Value="False"></asp:ListItem>
                                             </asp:DropDownList>
                                         </div>
                                     </div>
+                                    
+                                    <div class="col-md-12 form-group">
+                                        <div class="col-md-12">
+                                            <label class="control-label pull-left">Date Referred to CCC</label>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class='input-group date' id='CCCReferalDdatepicker'>
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                                <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="CccReferalModDDate" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>        
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                
+                                <div class="col-md-4">
                                     <div class="col-md-12 form-group">
                                         <div class="col-md-12">
                                             <label class="control-label pull-left">CCC Number</label>
@@ -670,8 +549,6 @@
                         <div class="col-md-12 form-group">
                             <div class="col-md-6">
                                 <button type="button" id="btnSaveFamilyTesting" class="btn btn-default" onclientclick="return false;">Save</button>
-                            </div>
-                            <div class="col-md-6">
                                 <button type="button" id="btnCancelFamilyTesting" class="btn btn-default" data-dismiss="modal">Cancel</button>
                             </div>
                         </div>
@@ -729,17 +606,24 @@
                 useCurrent: false
             });
 
+            $('#CCCReferalDdatepicker').datetimepicker({
+                format: 'DD-MMM-YYYY',
+                allowInputToggle: true,
+                useCurrent: false
+            });     
+
             $('#CCCReferaldatepicker').datetimepicker({
                 format: 'DD-MMM-YYYY',
                 allowInputToggle: true,
                 useCurrent: false
             });
 
-            $('#BaselineHIVStatusDMod').datepicker({
-                allowPastDates: true,
-                date:0,
-                momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
-            });
+            //$('#BaselineHIVStatusDMod').datepicker({
+            //    allowPastDates: true,
+            //    date:0,
+            //    momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+            //});
+
             $('#TestingDateMod').datepicker({
                 allowPastDates: true,
                 date:0,
@@ -939,7 +823,7 @@
 
             //update family testing
             $("#btnSaveFamilyTesting").click(function() {
-                updateFamilyTesting();
+                followUpTestFamilyTesting();
             });
 
             function loadFamilyTesting() {
@@ -955,7 +839,7 @@
                     cache: false,
                     success: function (response) {
                         window.itemList = response.d;
-                        console.log(response.d);
+                        //console.log(response.d);
 
                         var table = '';
                         itemList.forEach(function (item, i) {
@@ -982,10 +866,16 @@
                             }
 
                             var referred = "";
-                            if (item.CccReferal == "True") {
+                            var action = "";
+
+                            if (item.BaseLineHivStatus != "Tested Positive" && item.HivStatusResult !="Tested Positive") {
+                                action = "<button type='button' id= 'btnEditTesting' class='btn btn-link btn-sm pull-right' data-toggle='modal' data-target='#testFollowupModal' onClick='editFamilyTesting(this)'>Follow-up Test</button>";
+                            } else if ((item.CccReferal == "True" && item.BaseLineHivStatus == "Tested Positive") || (item.CccReferal == "True" && item.HivStatusResult == "Tested Positive")) {
                                 referred = "Referred";
-                            } else {
+                            } else if (item.BaseLineHivStatus == "Tested Positive" && item.CccReferal == "False") {
                                 referred = "Not Referred";
+                                action =
+                                    "<button type='button' id= 'btnEditTesting' class='btn btn-link btn-sm pull-right' data-toggle='modal' data-target='#editFamilyTestingModal' onClick='editFamilyTesting(this)'>Enroll to CCC</button>";
                             }
 
                             table += '<tr><td style="text-align: left">' + n + '</td><td style="text-align: left">' + name + '</td>' +
@@ -997,7 +887,8 @@
                                 '<td style="text-align: left">' + testingDate + '</td>' +
                                 '<td style="text-align: left">' + referred + "</td>" +
                                 '<td style="text-align: left">' + linkageDate + "</td>" +
-                                "<td align='right'><button type='button' id= 'btnEditTesting' class='btn btn-link btn-sm pull-right' data-toggle='modal' data-target='#editFamilyTestingModal' onClick='editFamilyTesting(this)'> View/Edit</button></td></tr>";
+                                '<td style="text-align: left">' + action + '</td>' +
+                                '<td align="right">&nbsp;&nbsp;&nbsp;dddd action fff &nbsp;&nbsp;&nbsp;</td></tr>';
                         });
                    
                         $('#tableFamilymembers').append(table);
@@ -1028,9 +919,19 @@
             window.row = x.parentNode.parentNode.rowIndex;
             var rowIndex = row - 1;
             window.familyTesting = itemList[rowIndex];
+
+            $("#<%=fName.ClientID%>").prop("disabled", true);
+            $("#<%=mName.ClientID%>").prop("disabled", true);
+            $("#<%=lName.ClientID%>").prop("disabled", true);
+            $("#<%=sexMod.ClientID%>").prop("disabled", true);
+            $("#<%=relationshipMod.ClientID%>").prop("disabled", true);
+            $("#<%=dobMod.ClientID%>").prop("disabled", true);
+            $("#<%=TextBox2.ClientID%>").prop("disabled", true);
+
             $("#<%=fName.ClientID%>").val(familyTesting.FirstName);
             $("#<%=mName.ClientID%>").val(familyTesting.MiddleName);
             $("#<%=lName.ClientID%>").val(familyTesting.LastName);
+
             var dd = document.getElementById('sexMod');
             for (var i = 0; i < dd.options.length; i++) {
                 if (dd.options[i].text === familyTesting.Sex) {
@@ -1038,6 +939,7 @@
                     break;
                 }
             }
+
             $("#<%=dobMod.ClientID%>").val(moment(familyTesting.DateOfBirth).format('DD-MMM-YYYY'));
             var dd = document.getElementById('relationshipMod');
             for (var i = 0; i < dd.options.length; i++) {
@@ -1046,6 +948,8 @@
                     break;
                 }
             }
+
+            $("#bHivStatusMod").prop("disabled", true);
             var dd = document.getElementById('bHivStatusMod');
             for (var i = 0; i < dd.options.length; i++) {
                 if (dd.options[i].text === familyTesting.BaseLineHivStatus) {
@@ -1053,6 +957,7 @@
                     break;
                 }
             }
+            
             var baselineDate = familyTesting.BaseLineHivStatusDate;
             if (baselineDate != null) {
                 $("#<%=bHivStatusDateMod.ClientID%>").val(moment(familyTesting.BaseLineHivStatusDate).format('DD-MMM-YYYY'));
@@ -1060,44 +965,50 @@
             } else {
                 $("#<%=bHivStatusDateMod.ClientID%>").val("");                
             }
-            var dd = document.getElementById('testingStatusMod');
-            for (var i = 0; i < dd.options.length; i++) {
-                if (dd.options[i].text === familyTesting.HivStatusResult) {
-                    dd.selectedIndex = i;
-                    break;
-                }
-            }
-            var testingDate = familyTesting.HivStatusResultDate;
+
+            $("#bHivStatusDateMod").attr('disabled', 'disabled');
+            //$("#BaselineHIVStatusDMod").addClass("noneevents");
+
+            //var dd = document.getElementById('testingStatusMod');
+            //for (var i = 0; i < dd.options.length; i++) {
+            //    if (dd.options[i].text === familyTesting.HivStatusResult) {
+            //        dd.selectedIndex = i;
+            //        break;
+            //    }
+            //}
+
+            <%--var testingDate = familyTesting.HivStatusResultDate;
             if (testingDate != null) {
                 $("#<%=testingStatusDateMod.ClientID%>").val(moment(familyTesting.HivStatusResultDate).format('DD-MMM-YYYY'));
 
             } else {
                 $("#<%=testingStatusDateMod.ClientID%>").val("");                
-            }
-            var dd = document.getElementById('cccReferalMod');
+            }--%>
+
+            <%--var dd = document.getElementById('cccReferalMod');
             for (var i = 0; i < dd.options.length; i++) {
                 if (dd.options[i].text === familyTesting.CccReferal) {
                     dd.selectedIndex = i;
                     break;
                 }
             }
-            $("#<%=cccNumberMod.ClientID%>").val(familyTesting.CccReferalNumber);
+            $("#<%=cccNumberMod.ClientID%>").val(familyTesting.CccReferalNumber);--%>
 
-            BaselineEnabledMod();
+            //BaselineEnabledMod();
         }
 
         function resetElements(parameters) {
             $(".input-sm").val("");
         }
 
-        function updateFamilyTesting() {
-            $('#editFamilyTestingModal').parsley().destroy();
-            $('#editFamilyTestingModal').parsley({
+        function followUpTestFamilyTesting() {
+            $('#testFollowupModal').parsley().destroy();
+            $('#testFollowupModal').parsley({
                 excluded:
                 "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
             });
 
-            if ($('#editFamilyTestingModal').parsley().validate()) {
+            if ($('#testFollowupModal').parsley().validate()) {
                 var patientId = <%=PatientId%>;
                 var patientMasterVisitId = <%=PatientMasterVisitId%>;
                 var hivTestingId = familyTesting.HivTestingId;
@@ -1118,7 +1029,11 @@
                 var cccReferalNumber = $("#<%=cccNumberMod.ClientID%>").val();
                 var previousDate = moment().subtract(1, 'days').format('DD-MMM-YYYY');
                 var adult = moment().subtract(15, 'years').format('DD-MMM-YYYY');
-                //validations
+                var cccReferalModDate = $("#CccReferalModDDate").val();
+                //console.log(CccReferalModDate);
+                ////validations
+                //return false;
+
                 if (moment('' + dob + '').isAfter()) {
                     toastr.error("Date of birth cannot be a future date.");
                     return false;
@@ -1174,7 +1089,7 @@
                     $.ajax({
                         type: "POST",
                         url: "../WebService/PatientService.asmx/UpdatePatientFamilyTesting",
-                        data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','firstName': '" + firstName + "','middleName': '" + middleName + "','lastName': '" + lastName + "','sex': '" + sex + "','dob': '" + dob + "','relationshipId': '" + relationshipId + "','baselineHivStatusId': '" + baselineHivStatusId + "','baselineHivStatusDate': '" + baselineHivStatusDate + "','hivTestingresultId': '" + hivTestingresultId + "','hivTestingresultDate': '" + hivTestingresultDate + "','cccreferal': '" + cccreferal + "','cccReferalNumber': '" + cccReferalNumber + "','userId': '" + userId + "','personRelationshipId': '" + personRelationshipId + "','hivTestingId': '" + hivTestingId + "','personId': '" + personId +"'}",
+                        data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','firstName': '" + firstName + "','middleName': '" + middleName + "','lastName': '" + lastName + "','sex': '" + sex + "','dob': '" + dob + "','relationshipId': '" + relationshipId + "','baselineHivStatusId': '" + baselineHivStatusId + "','baselineHivStatusDate': '" + baselineHivStatusDate + "','hivTestingresultId': '" + hivTestingresultId + "','hivTestingresultDate': '" + hivTestingresultDate + "','cccreferal': '" + cccreferal + "','cccReferalNumber': '" + cccReferalNumber + "','userId': '" + userId + "','personRelationshipId': '" + personRelationshipId + "','hivTestingId': '" + hivTestingId + "','personId': '" + personId + "','cccReferalModDate':'" + cccReferalModDate + "'}",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {

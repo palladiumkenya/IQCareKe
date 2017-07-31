@@ -68,6 +68,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\LookupContext.cs" />
+    <Compile Include="Interface\assessment\IPatientPsychosocialCriteriaRepository.cs" />
+    <Compile Include="Interface\assessment\IPatientSupportSystemCriteriaRepository.cs" />
     <Compile Include="Interface\Baseline\IINHProphylaxisRepository.cs" />
     <Compile Include="Interface\Baseline\IPatientArvHistoryRepository.cs" />
     <Compile Include="Interface\Baseline\IPatientHivDiagnosisRepository.cs" />
@@ -99,10 +101,12 @@
     <Compile Include="Interface\Lookup\ILookupPatientRegimenMap.cs" />
     <Compile Include="Interface\Lookup\Interface1.cs" />
     <Compile Include="Interface\Lookup\IPatientRegistrationLookupRepository.cs" />
+    <Compile Include="Interface\Lookup\IPatientStabilitySummaryRepository.cs" />
     <Compile Include="Interface\Lookup\IPatientTreatmentTrackerLookupRepository.cs" />
     <Compile Include="Interface\Lookup\IPatientServiceEnrollmentLookupRepository.cs" />
     <Compile Include="Interface\Lookup\IPatientTreatmentSupporterLookupRepository.cs" />
     <Compile Include="Interface\Lookup\IPersonGreenCardLookupRepository.cs" />
+    <Compile Include="Interface\Lookup\ITestingSummaryStatisticsRepository.cs" />
     <Compile Include="Interface\Patient\IBluecardAppointmentRepository.cs" />
     <Compile Include="Interface\Patient\IPatientCategorizationRepository.cs" />
     <Compile Include="Interface\Screening\IPatientScreeningRepository.cs" />
@@ -141,6 +145,8 @@
     <Compile Include="Interface\visit\IPatientLabTrackerRepository.cs" />
     <Compile Include="Interface\visit\IPatientMasterVisitRepository.cs" />
     <Compile Include="Interface\visit\IPatientVisitRepository.cs" />
+    <Compile Include="Repository\assessment\PatientPsychosocialCriteriaRepository.cs" />
+    <Compile Include="Repository\assessment\PatientSupportSystemCriteriaRepository.cs" />
     <Compile Include="Repository\Baseline\INHProphylaxisRepository.cs" />
     <Compile Include="Repository\Baseline\PatientArvHistoryRepository.cs" />
     <Compile Include="Repository\Baseline\PatientHivDiagnosisRepository.cs" />
@@ -175,11 +181,13 @@
     <Compile Include="Repository\Lookup\PatientLookupRepository.cs" />
     <Compile Include="Repository\Lookup\PatientRegistrationLookupRepository.cs" />
     <Compile Include="Repository\Lookup\PatientServiceEnrollmentLookupRepository.cs" />
+    <Compile Include="Repository\Lookup\PatientStabilitySummaryRepository.cs" />
     <Compile Include="Repository\Lookup\PatientTreatmentSupporterLookupRepository.cs" />
     <Compile Include="Repository\Lookup\PatientTreatmentTrackerLookupRepository.cs" />
     <Compile Include="Repository\Lookup\PersonContactLookUpRepository.cs" />
     <Compile Include="Repository\Lookup\PersonGreenCardLookupRepository.cs" />
     <Compile Include="Repository\Lookup\PersonLookUpRepository.cs" />
+    <Compile Include="Repository\Lookup\TestingSummaryStatisticsRepository.cs" />
     <Compile Include="Repository\OneTimeEvent\OneTimeEventTrackerRepository.cs" />
     <Compile Include="Repository\Patient\BluecardAppointmentRepository.cs" />
     <Compile Include="Repository\Patient\PatientAppointmentRepository.cs" />
