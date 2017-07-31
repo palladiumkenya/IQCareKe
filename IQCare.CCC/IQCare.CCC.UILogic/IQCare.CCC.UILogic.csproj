@@ -93,6 +93,7 @@
     <Compile Include="Baseline\PatientVaccinationManager.cs" />
     <Compile Include="Enrollment\HivReConfirmatoryTestManager.cs" />
     <Compile Include="Enrollment\IdentifierManager.cs" />
+    <Compile Include="Enrollment\PatientArtDistributionManager.cs" />
     <Compile Include="Enrollment\PatientEnrollmentManager.cs" />
     <Compile Include="Enrollment\PatientEntryPointManager.cs" />
     <Compile Include="Enrollment\PatientIdentifierManager.cs" />

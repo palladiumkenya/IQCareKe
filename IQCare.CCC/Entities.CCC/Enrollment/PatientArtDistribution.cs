@@ -16,7 +16,7 @@ namespace Entities.CCC.Enrollment
 
         [ForeignKey("PatientId")]
         public virtual PatientEntity Patient { get; set; }
-
+        public int PatientMasterVisitId { get; set; }
         public string ArtRefillModel { get; set; }
         public bool MissedArvDoses { get; set; }
         public int MissedArvDosesCount { get; set; }

@@ -110,6 +110,7 @@
     <Compile Include="BPersonRelationshipManager.cs" />
     <Compile Include="Enrollment\BHivReConfirmatoryTest.cs" />
     <Compile Include="Enrollment\BIdentifier.cs" />
+    <Compile Include="Enrollment\BPatientArtDistribution.cs" />
     <Compile Include="Enrollment\BPatientEntryPoint.cs" />
     <Compile Include="Enrollment\BPatientIdentifier.cs" />
     <Compile Include="Enrollment\BPatientEnrollment.cs" />
