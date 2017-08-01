@@ -670,45 +670,18 @@
 						</div>
 
 						<div class="form-group col-md-12">
-							<div class="col-md-12">
-								<asp:Label runat="server" CssClass="control-label pull-left" ID="lblARTUse"><i class="fa fa-history" aria-hidden="true"></i> History of ART Use </asp:Label></div>
+							<div class="col-md-2"><asp:Label runat="server" CssClass="control-label pull-left" ID="lblARTUse"><i aria-hidden="true"></i>History of ART Use?</asp:Label></div>
+                            <div class="col-md-2">
+                                <asp:DropDownList ID="ARTUseHistory" runat="server" ClientIDMode="Static" data-parsley-required="true" CssClass="form-control input-sm pull-left"></asp:DropDownList>
+                            </div>
 						</div>
-
-						<div class="form-group col-md-12">
-
-							 <div class="form-group col-md-3 pull-left">
-								<label class="checkbox-custom checkbox-inline highlight" data-initialize="checkbox" id="PrEP">
-									<asp:CheckBox runat="server" Text="PEP" ClientIDMode="Static" CssClass="sr-only" />
-									PREP (Pre exposure prophylaxis)
-								</label>
-							</div>
-
-							 <div class="form-group col-md-3">
-								<label class="checkbox-custom checkbox-inline highlight" data-initialize="checkbox" id="lblPMTCT">
-									<asp:CheckBox runat="server" CssClass="sr-only" ID="PMTCT" ClientIDMode="Static" Text="PMTCT" /><span class="checkbox-label"> PMTCT (Prevention of mother to child Transmission of HIV)</span>
-								</label>
-							</div>
-
-							 <div class="form-group col-md-3">
-								<label class="checkbox-custom checkbox-inline highlight" data-initialize="checkbox" id="lblPEP">
-									<asp:CheckBox runat="server" CssClass="sr-only" ID="CheckBox1" ClientIDMode="Static" Text="PMTCT" /><span class="checkbox-label"> PEP (Post exposure prophylaxis)</span>
-								</label>
-							</div>
-
-							 <div class="form-group col-md-3">
-								<label class="checkbox-custom checkbox-inline highlight" data-initialize="checkbox" id="lblNONE">
-									<asp:CheckBox runat="server" CssClass="sr-only" ID="NONE" ClientIDMode="Static" Text="NONE" /><span class="checkbox-label"> NONE</span>
-								</label>
-							</div>
-						</div>
-
 
 						<div class="form-group col-md-12">
 							<div class="col-md-4">
 								<div class="col-md-12">
 									<label class="control-label pull-left">Purpose</label></div>
 								<div class="col-md-12">
-									<asp:TextBox runat="server" CssClass="form-control input-sm" ID="RegimenPurpose" ClientIDMode="Static" data-parsley-required="true" />
+                                    <asp:DropDownList ID="RegimenPurpose" runat="server" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-required="true" data-parsley-min="1" data-parsley-min-message="Please select purpose"></asp:DropDownList>
 								</div>
 							</div>
 
@@ -1221,6 +1194,7 @@
 			var patientId = <%=PatientId%>;
 			var patientMasterVisitId = <%=PatientMasterVisitId%>;
 
+		    var purposeCount = 1;
 			var transferIn = 0;
 			var treatmentType = 0;
 			var patientType = "";
@@ -1487,7 +1461,10 @@
 						return false;
                     }
 
-		        });
+                });
+
+		    $("#DateOfARTInitiation").prop("disabled", true);
+		    $("#DARTI").addClass("noneevents");
 
 			/* limit future dates viralload baseline date*/
 			$("#BaselineViralloadDate").on('changed.fu.datepicker dateClicked.fu.datepicker',
@@ -1523,7 +1500,16 @@
 						var startYear = dateStarted.getUTCFullYear();
 						$("#ARTCohort").val(startMonth + '-' + startYear);
 					}
-				});
+                });
+
+		    $("#ARTUseHistory").change(function() {
+                var ARTHistory = $("#ARTUseHistory").val();
+                if (ARTHistory == "True") {
+                    noneUnchecked();
+                } else {
+                    noneChecked();
+                }
+		    });
 
 			/* clientside validation */
 			//disableIfNotTransferIn();
@@ -1559,45 +1545,46 @@
 			//        $("#lblTransferInYes").checkbox('uncheck');
 			//        disableIfNotTransferIn();
 			//    });
-			$("#PrEP").on("checked.fu.checkbox",
-				function() {
-					treatmentType = 1;
-					$("#lblPMTCT").checkbox('uncheck');
-					$("#lblPEP").checkbox('uncheck');
-					$("#lblNONE").checkbox('uncheck');
-					$("#RegimenPurpose").val();
-					$("#RegimenPurpose").val("PrEP");
-					noneUnchecked();
-				});
-			$("#lblPEP").on("checked.fu.checkbox",
-				function() {
-					treatmentType = 2;
-					$("#lblPMTCT").checkbox('uncheck');
-					$("#PrEP").checkbox('uncheck');
-					$("#lblNONE").checkbox('uncheck');
-					$("#RegimenPurpose").val();
-					$("#RegimenPurpose").val("PEP");
-					noneUnchecked();
-				});
-			$("#lblPMTCT").on("checked.fu.checkbox",
-				function() {
-					treatmentType = 3;
-					$("#PrEP").checkbox('uncheck');
-					$("#lblPEP").checkbox('uncheck');
-					$("#lblNONE").checkbox('uncheck');
-					$("#RegimenPurpose").val();
-					$("#RegimenPurpose").val("PMTCT");
-					noneUnchecked();
-				});
-			$("#lblNONE").on("checked.fu.checkbox",
-				function() {
-					treatmentType = 4;
-					$("#lblPMTCT").checkbox('uncheck');
-					$("#lblPEP").checkbox('uncheck');
-					$("#PrEP").checkbox('uncheck');
-					$("#RegimenPurpose").val("");
-					noneChecked();
-                });
+			//$("#PrEP").on("checked.fu.checkbox",
+			//	function() {
+			//		treatmentType = 1;
+			//		$("#lblPMTCT").checkbox('uncheck');
+			//		$("#lblPEP").checkbox('uncheck');
+			//		$("#lblNONE").checkbox('uncheck');
+			//		$("#RegimenPurpose").val();
+			//		$("#RegimenPurpose").val("PrEP");
+			//		noneUnchecked();
+   //             });
+
+			//$("#lblPEP").on("checked.fu.checkbox",
+			//	function() {
+			//		treatmentType = 2;
+			//		$("#lblPMTCT").checkbox('uncheck');
+			//		$("#PrEP").checkbox('uncheck');
+			//		$("#lblNONE").checkbox('uncheck');
+			//		$("#RegimenPurpose").val();
+			//		$("#RegimenPurpose").val("PEP");
+			//		noneUnchecked();
+			//	});
+			//$("#lblPMTCT").on("checked.fu.checkbox",
+			//	function() {
+			//		treatmentType = 3;
+			//		$("#PrEP").checkbox('uncheck');
+			//		$("#lblPEP").checkbox('uncheck');
+			//		$("#lblNONE").checkbox('uncheck');
+			//		$("#RegimenPurpose").val();
+			//		$("#RegimenPurpose").val("PMTCT");
+			//		noneUnchecked();
+			//	});
+			//$("#lblNONE").on("checked.fu.checkbox",
+			//	function() {
+			//		treatmentType = 4;
+			//		$("#lblPMTCT").checkbox('uncheck');
+			//		$("#lblPEP").checkbox('uncheck');
+			//		$("#PrEP").checkbox('uncheck');
+			//		$("#RegimenPurpose").val("");
+			//		noneChecked();
+   //             });
 		    $("#chkLDL_label").on("checked.fu.checkbox",
 		        function() {
                     $("#BaselineViralload").prop("disabled", true);
@@ -1615,12 +1602,10 @@
 
 
 			$("#AddPriorHistory").click(function(e) {
-
-				var purposeCount = 0;
 				var pusposeFound = 0;
 				var regimenId = 1;
 
-				var purpose = $("#<%=RegimenPurpose.ClientID%>").val();
+				var purpose = $("#<%=RegimenPurpose.ClientID%>").find(":selected").text();
 				// var regimenId = $("#<%=HistoryRegimen%>").find(":selected").val();
 				var regimen = $("#<%=HistoryRegimen.ClientID%>").val();
 				var dateLastUsed = moment($("#DLUsed").datepicker('getDate'));
@@ -1653,13 +1638,13 @@
 
 				if (pusposeFound > -1) {
 
-					toastr.warning(identifier + "Identifier already exisits in the Lits,", "Baseline Assessment ");
+                    toastr.warning(purpose + "Identifier already exisits in the List,", "Baseline Assessment ");
 					return false; // message box herer
 				} else {
 
 					purposeList.push("" + purpose + "");
 					var tr = '<tr><td align="left">' +
-						regimenId +
+					    purposeCount +
 						'</td><td align="left">' +
 						purpose +
 						'</td><td align="left">' +
@@ -1667,7 +1652,14 @@
 						'</td><td align="left">' +
 						moment(dateLastUsed).format('DD-MMM-YYYY') +
 						'</td><td align="right"><button type="button" class="btnDelete btn btn-danger fa fa-minus-circle btn-fill" > Remove</button></td></tr>';
-					$("#tblARVUseHistory>tbody:first").append('' + tr + '');
+                    $("#tblARVUseHistory>tbody:first").append('' + tr + '');
+
+
+				    <%--$("#<%=RegimenPurpose.ClientID%>").val("");
+				    $("#<%=HistoryRegimen.ClientID%>").val("");
+                    $("#RegimenDateLastUsed").val("");--%>
+
+				    purposeCount += 1;
 				}
 
 				e.preventDefault();
@@ -1773,8 +1765,11 @@
 
 			function noneChecked() {
 				$("#<%=RegimenPurpose.ClientID%>").prop('disabled', true);
+				$("#<%=RegimenPurpose.ClientID%>").val("");
 				$("#<%=HistoryRegimen.ClientID%>").prop('disabled', true);
-				$("#DLUsed").datepicker("disable");
+				$("#<%=HistoryRegimen.ClientID%>").val("");
+                $("#DLUsed").datepicker("disable");
+			    $("#RegimenDateLastUsed").val("");
 				$("#<%=AddPriorHistory.ClientID%>").attr("disabled");
 			}
 
@@ -2283,8 +2278,14 @@
 				var id = 0;
 				var ptnId = patientId;
 				var ptnmasterVisitId = patientMasterVisitId;
-				var treatment;
-				if(treatmentType===1){treatment='PrEP'} else if(treatmentType===2){ treatment='PEP'} else if(treatmentType===3){treatment='PMTCT'}
+				var treatment = 'ART';
+				//if (treatmentType === 1) {
+				//    treatment = 'PrEP';
+				//} else if (treatmentType === 2) {
+				//    treatment = 'PEP';
+				//} else if (treatmentType === 3) {
+				//    treatment = 'PMTCT';
+				//}
 
 				var artuseHistoryTable = new Array();
 				$("#tblARVUseHistory tr").each(function(row, tr) {
