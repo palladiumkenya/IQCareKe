@@ -1893,6 +1893,24 @@ namespace IQCare.SCM
             // MainTab.SelectedTab = MainTab.TabPages["FindPatientTab"];
             txtPatientIdentification.Select();
             ActaulExpectedVisits();
+            fillPendingOrdersGrid();
+        }
+
+        private void fillPendingOrdersGrid()
+        {
+            DateTime filterDate = dtpFilterDate.Value;
+            IDrug obj = (IDrug)ObjectFactory.CreateInstance("BusinessProcess.SCM.BDrug, BusinessProcess.SCM");
+            DataTable theDT = obj.GetPrescriptionList(GblIQCare.AppLocationId, filterDate, 1);
+            if (theDT.Rows.Count == 0)
+            {
+                MsgBuilder theBuilder = new MsgBuilder();
+                theBuilder.DataElements["MessageText"] = "No pending orders for the selected date";
+                IQCareWindowMsgBox.ShowWindowConfirm("#C1", theBuilder, this);
+                gridPendingOrder.DataSource = theDT;
+                return;
+            }
+            gridPendingOrder.AutoGenerateColumns = false;
+            gridPendingOrder.DataSource = theDT;
         }
 
         /// <summary>
@@ -3474,24 +3492,24 @@ namespace IQCare.SCM
 
         private void gridPendingOrder_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            this.clearPopup();
-            int rowIndex = this.gridPendingOrder.CurrentRow.Index;
-            DataGridViewRow currentRow = this.gridPendingOrder.CurrentRow;
-            this.thePatientId = Convert.ToInt32(currentRow.Cells["ptnPk"].Value);
-            this.theDOB = Convert.ToDateTime(currentRow.Cells["patDOB"].Value);
-            this.dtDispensedDate.Text = GblIQCare.CurrentDate;
-            this.theOrderId = Convert.ToInt32(currentRow.Cells["OrderId"].Value);
-            this.theOrderStatus = currentRow.Cells["pStatus"].Value.ToString();
+            //this.clearPopup();
+            //int rowIndex = this.gridPendingOrder.CurrentRow.Index;
+            //DataGridViewRow currentRow = this.gridPendingOrder.CurrentRow;
+            //this.thePatientId = Convert.ToInt32(currentRow.Cells["ptnPk"].Value);
+            //this.theDOB = Convert.ToDateTime(currentRow.Cells["patDOB"].Value);
+            //this.dtDispensedDate.Text = GblIQCare.CurrentDate;
+            //this.theOrderId = Convert.ToInt32(currentRow.Cells["OrderId"].Value);
+            //this.theOrderStatus = currentRow.Cells["pStatus"].Value.ToString();
 
-            this.MainTab.SelectedTab = this.MainTab.TabPages["DispenseTab"];
-            string patientName = string.Format("{0} {1} {2}", currentRow.Cells["pFirstName"].Value, currentRow.Cells["pMiddleName"].Value, currentRow.Cells["pLastName"].Value);
-            this.lblPatientName.Text = patientName;
-            this.lblReturnPatName.Text = patientName;
-            this.lblIQNumber.BackColor = this.BackColor;
-            lblIQNumber.Text = currentRow.Cells["P_PatientFacilityId"].Value.ToString();
-            this.lblReturnIQNumber.Text = currentRow.Cells["P_PatientFacilityId"].Value.ToString();
-            GetSelectedPatient();
-            GetSelectedPrescription();
+            //this.MainTab.SelectedTab = this.MainTab.TabPages["DispenseTab"];
+            //string patientName = string.Format("{0} {1} {2}", currentRow.Cells["pFirstName"].Value, currentRow.Cells["pMiddleName"].Value, currentRow.Cells["pLastName"].Value);
+            //this.lblPatientName.Text = patientName;
+            //this.lblReturnPatName.Text = patientName;
+            //this.lblIQNumber.BackColor = this.BackColor;
+            //lblIQNumber.Text = currentRow.Cells["P_PatientFacilityId"].Value.ToString();
+            //this.lblReturnIQNumber.Text = currentRow.Cells["P_PatientFacilityId"].Value.ToString();
+            //GetSelectedPatient();
+            //GetSelectedPrescription();
         }
 
         private void grdDrugDispense_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -3647,5 +3665,50 @@ namespace IQCare.SCM
                 lblActual.Text = theDS.Tables[1].Rows[0][0].ToString();
             }
         }
+
+        private void gridPendingOrder_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            this.clearPopup();
+            int rowIndex = this.gridPendingOrder.CurrentRow.Index;
+            DataGridViewRow currentRow = this.gridPendingOrder.CurrentRow;
+            this.thePatientId = Convert.ToInt32(currentRow.Cells["ptnPk"].Value);
+            this.theDOB = Convert.ToDateTime(currentRow.Cells["patDOB"].Value);
+            this.dtDispensedDate.Text = GblIQCare.CurrentDate;
+            this.theOrderId = Convert.ToInt32(currentRow.Cells["OrderId"].Value);
+            this.theOrderStatus = currentRow.Cells["pStatus"].Value.ToString();
+
+            this.MainTab.SelectedTab = this.MainTab.TabPages["DispenseTab"];
+            string patientName = string.Format("{0} {1} {2}", currentRow.Cells["pFirstName"].Value, currentRow.Cells["pMiddleName"].Value, currentRow.Cells["pLastName"].Value);
+            this.lblPatientName.Text = patientName;
+            this.lblReturnPatName.Text = patientName;
+            this.lblIQNumber.BackColor = this.BackColor;
+            lblIQNumber.Text = currentRow.Cells["P_PatientFacilityId"].Value.ToString();
+            this.lblReturnIQNumber.Text = currentRow.Cells["P_PatientFacilityId"].Value.ToString();
+            GetSelectedPatient();
+            GetSelectedPrescription();
+        }
+
+        private DataTable ToDataTable(DataGridView dataGridView)
+        {
+            DataTable dt3 = new DataTable();
+            foreach (DataGridViewColumn col in dataGridView.Columns)
+            {
+                //dt3.Columns.Add(col.HeaderText);
+                dt3.Columns.Add(col.DataPropertyName);
+            }
+
+            foreach (DataGridViewRow row in dataGridView.Rows)
+            {
+                DataRow dRow = dt3.NewRow();
+                foreach (DataGridViewCell cell in row.Cells)
+                {
+                    dRow[cell.ColumnIndex] = cell.Value;
+                }
+                dt3.Rows.Add(dRow);
+            }
+
+            return dt3;
+        }
+
     }
 }

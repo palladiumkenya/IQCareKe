@@ -133,8 +133,8 @@
             this.lblPayAmount = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.grpExistingRec = new System.Windows.Forms.GroupBox();
-            this.btnCloseExisting = new System.Windows.Forms.Button();
             this.grdExitingPharDisp = new System.Windows.Forms.DataGridView();
+            this.btnCloseExisting = new System.Windows.Forms.Button();
             this.label33 = new System.Windows.Forms.Label();
             this.btnExitingRecClose = new System.Windows.Forms.Button();
             this.grpHivCareTrtPharmacyField = new System.Windows.Forms.GroupBox();
@@ -1020,21 +1020,6 @@
             this.grpExistingRec.TabStop = false;
             this.grpExistingRec.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.grpExistingRec_PreviewKeyDown);
             // 
-            // btnCloseExisting
-            // 
-            this.btnCloseExisting.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.btnCloseExisting.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCloseExisting.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnCloseExisting.Location = new System.Drawing.Point(425, 7);
-            this.btnCloseExisting.Margin = new System.Windows.Forms.Padding(0);
-            this.btnCloseExisting.Name = "btnCloseExisting";
-            this.btnCloseExisting.Size = new System.Drawing.Size(80, 25);
-            this.btnCloseExisting.TabIndex = 47;
-            this.btnCloseExisting.Tag = "Close";
-            this.btnCloseExisting.Text = "&Close";
-            this.btnCloseExisting.UseVisualStyleBackColor = false;
-            this.btnCloseExisting.Click += new System.EventHandler(this.btnCloseExisting_Click);
-            // 
             // grdExitingPharDisp
             // 
             this.grdExitingPharDisp.AllowUserToAddRows = false;
@@ -1074,6 +1059,21 @@
             this.grdExitingPharDisp.TabIndex = 1;
             this.grdExitingPharDisp.Tag = "dgwDataGridView";
             this.grdExitingPharDisp.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdExitingPharDisp_CellDoubleClick);
+            // 
+            // btnCloseExisting
+            // 
+            this.btnCloseExisting.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnCloseExisting.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCloseExisting.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnCloseExisting.Location = new System.Drawing.Point(425, 7);
+            this.btnCloseExisting.Margin = new System.Windows.Forms.Padding(0);
+            this.btnCloseExisting.Name = "btnCloseExisting";
+            this.btnCloseExisting.Size = new System.Drawing.Size(80, 25);
+            this.btnCloseExisting.TabIndex = 47;
+            this.btnCloseExisting.Tag = "Close";
+            this.btnCloseExisting.Text = "&Close";
+            this.btnCloseExisting.UseVisualStyleBackColor = false;
+            this.btnCloseExisting.Click += new System.EventHandler(this.btnCloseExisting_Click);
             // 
             // label33
             // 
@@ -2019,7 +2019,7 @@
             this.PendingTab.Location = new System.Drawing.Point(4, 34);
             this.PendingTab.Name = "PendingTab";
             this.PendingTab.Padding = new System.Windows.Forms.Padding(3);
-            this.PendingTab.Size = new System.Drawing.Size(1263, 654);
+            this.PendingTab.Size = new System.Drawing.Size(1263, 634);
             this.PendingTab.TabIndex = 5;
             this.PendingTab.Text = "Pending Orders";
             this.PendingTab.UseVisualStyleBackColor = true;
@@ -2097,6 +2097,7 @@
             this.gridPendingOrder.Tag = "dgwDataGridView";
             this.gridPendingOrder.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridPendingOrder_CellClick);
             this.gridPendingOrder.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridPendingOrder_CellContentDoubleClick);
+            this.gridPendingOrder.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridPendingOrder_CellDoubleClick);
             // 
             // P_PatientFacilityId
             // 
@@ -2350,7 +2351,7 @@
             this.ReturnTab.Location = new System.Drawing.Point(4, 34);
             this.ReturnTab.Name = "ReturnTab";
             this.ReturnTab.Padding = new System.Windows.Forms.Padding(3);
-            this.ReturnTab.Size = new System.Drawing.Size(1263, 654);
+            this.ReturnTab.Size = new System.Drawing.Size(1263, 634);
             this.ReturnTab.TabIndex = 3;
             this.ReturnTab.Tag = "pnlSubPanel";
             this.ReturnTab.Text = "Return";
@@ -2645,7 +2646,7 @@
             this.IQCareWeb.Controls.Add(this.IQBrowser);
             this.IQCareWeb.Location = new System.Drawing.Point(4, 34);
             this.IQCareWeb.Name = "IQCareWeb";
-            this.IQCareWeb.Size = new System.Drawing.Size(1263, 654);
+            this.IQCareWeb.Size = new System.Drawing.Size(1263, 634);
             this.IQCareWeb.TabIndex = 4;
             this.IQCareWeb.Text = "IQCare";
             this.IQCareWeb.UseVisualStyleBackColor = true;
@@ -2656,7 +2657,7 @@
             this.IQBrowser.Location = new System.Drawing.Point(0, 0);
             this.IQBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.IQBrowser.Name = "IQBrowser";
-            this.IQBrowser.Size = new System.Drawing.Size(1263, 654);
+            this.IQBrowser.Size = new System.Drawing.Size(1263, 634);
             this.IQBrowser.TabIndex = 2;
             this.IQBrowser.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.IQBrowser_DocumentCompleted);
             // 

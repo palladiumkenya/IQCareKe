@@ -23,6 +23,7 @@ namespace Entities.CCC.Lookup
         public DateTime EnrollmentDate { get; set; }
         public bool TransferIn { get; set; }
         public DateTime DateOfBirth { get; set; }
+        public bool DobPrecision { get; set; }
         public string NationalId { get; set; }
         public int FacilityId { get; set; }
         public int PatientType { get; set; }

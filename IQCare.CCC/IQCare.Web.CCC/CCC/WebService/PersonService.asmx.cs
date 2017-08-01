@@ -100,7 +100,7 @@ namespace IQCare.Web.CCC.WebService
         readonly TextInfo _textInfo = new CultureInfo("en-US", false).TextInfo;
 
         [WebMethod(EnableSession = true)]
-        public string AddPerson(string firstname, string middlename, string lastname, int gender, int maritalStatusId, int userId, string dob, string nationalId, string patientid, string patientType)
+        public string AddPerson(string firstname, string middlename, string lastname, int gender, int maritalStatusId, int userId, string dob, string nationalId, string patientid, string patientType, string dobPrecision)
         {
             patientid = patientid == "null" ? null : patientid;
             patientid = patientid == "" ? null : patientid;
@@ -134,7 +134,7 @@ namespace IQCare.Web.CCC.WebService
                         personId = patient.PersonId;
                     }
 
-                    personManager.UpdatePerson(firstname, middlename, lastname, gender, userId , personId);
+                    personManager.UpdatePerson(firstname, middlename, lastname, gender, userId , personId, DateTime.Parse(dob), Convert.ToBoolean(dobPrecision));
                     Session["PersonId"] = personId;
 
                     Msg = "<p>Person Updated successfully</p>";
@@ -221,7 +221,7 @@ namespace IQCare.Web.CCC.WebService
                 {
                     var personLogic = new PersonManager();
 
-                    PersonId = personLogic.AddPersonUiLogic(firstname, middlename, lastname, gender, userId);
+                    PersonId = personLogic.AddPersonUiLogic(firstname, middlename, lastname, gender, userId, DateTime.Parse(dob), Convert.ToBoolean(dobPrecision));
                     Session["PersonId"] = PersonId;
                     if (PersonId > 0)
                     {

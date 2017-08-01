@@ -20,7 +20,7 @@
                     </li>
 
                     <li data-step="2">
-                        <span class="badge">2</span>Patient Chronic Illness
+                        <span class="badge">2</span>Additional History
 			                    <span class="chevron"></span>
                     </li>
                     <li data-step="3" id="dsPatientExamination" data-name="">
@@ -398,7 +398,7 @@
                                                     <label class="control-label pull-left">Currently on IPT?</label>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="onIpt" ClientIDMode="Static" onChange="onIptChange();" required="true" data-parsley-required="true">
+                                                    <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="onIpt" ClientIDMode="Static" onChange="onIptChange();" required="false" data-parsley-required="false">
                                                         <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
                                                         <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
                                                         <asp:ListItem Text="No" Value="False"></asp:ListItem>
@@ -410,7 +410,7 @@
                                                     <label class="control-label pull-left">Ever been on IPT?</label>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="EverBeenOnIpt" ClientIDMode="Static" onChange="EverBeenOnIptChange();" required="true" data-parsley-required="true">
+                                                    <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="EverBeenOnIpt" ClientIDMode="Static" onChange="EverBeenOnIptChange();"  required="true" data-parsley-required="true">
                                                         <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
                                                         <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
                                                         <asp:ListItem Text="No" Value="False"></asp:ListItem>
@@ -1433,7 +1433,7 @@
 
                         <div class="col-md-12">
                             <div class="col-md-12 form-group">
-                                <label class="control-label pull-left">Select services offered from the list below</label>
+                                <label class="control-label pull-left">Select PHDP services offered from the list below</label>
                             </div>
                             <div class="form-group col-md-12" style="text-align: left">
                                 <asp:CheckBoxList ID="cblPHDP" runat="server" RepeatDirection="Horizontal" RepeatColumns="3" Width="100%"></asp:CheckBoxList>
@@ -2086,7 +2086,7 @@
         $("#IptDetailsForm").hide();
         $("#IptOutcomeDetailsForm").hide();
         $("#onIpt").prop("disabled", true);
-        $("#EverBeenOnIpt").prop("disabled", true);
+        //  $("#EverBeenOnIpt").prop("disabled", true);
         //showHideFPControls();
         loadPresentingComplaints();
         loadAllergies();
@@ -2650,10 +2650,10 @@
                         //save patient management
                         $.when(savePatientPatientManagement()).then(function () {
                             setTimeout(function () {
-                                    window.location
-                                        .href =
+                                window.location
+                                    .href =
                                         '<%=ResolveClientUrl( "~/CCC/Patient/PatientHome.aspx")%>';
-                                },
+                            },
                                 2000);
                         });
 
@@ -2663,8 +2663,8 @@
                         return false;
                     }
 
-                    
-                    }
+
+                }
             })
             .on("changed.fu.wizard",
             function () {
@@ -2920,7 +2920,7 @@
             var patientId = <%=PatientId%>;
             var patientMasterVisitId = <%=PatientMasterVisitId%>;
             var everBeenOnIpt = $("#<%=EverBeenOnIpt.ClientID%>").val();
-
+            debugger;
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientTbService.asmx/AddPatientIcf",
@@ -3131,7 +3131,7 @@
         });
 
 
-        $("#btnSaveCategorization").click(function() {
+        $("#btnSaveCategorization").click(function () {
             if ($('#Categorization').parsley().validate()) {
                 AddPatientCategorization();
             } else {
@@ -3210,7 +3210,7 @@
                     toastr.success(returnValue[0], "Patient Categorization");
 
                     $("#<%=stabilityStatus.ClientID%>").val(returnValue[1]);
-                    setTimeout(function () { $('#differentiatedModal').modal('hide');  }, 2000);
+                    setTimeout(function () { $('#differentiatedModal').modal('hide'); }, 2000);
                 },
                 error: function (xhr, errorType, exception) {
                     var jsonError = jQuery.parseJSON(xhr.responseText);
@@ -3231,7 +3231,7 @@
             }
             return selectedValues;
         }
-        
+
         $("#AppointmentDate").val("");
 
     });
@@ -3330,8 +3330,8 @@
             $("#tbscreeningstatus option").filter(function () { return $(this).text() === 'TBRx'; }).prop('selected', true);
             $("#onIpt").prop("disabled", true);
             $("#onIpt").val("False");
-            $("#EverBeenOnIpt").prop("disabled", true);
-            $("#EverBeenOnIpt").val("");
+            //$("#EverBeenOnIpt").prop("disabled", true);
+            // $("#EverBeenOnIpt").val("");
         }
 
     }
@@ -3340,12 +3340,12 @@
         if ($("#onIpt").val() === 'False') {
             $("#btnAddIptWorkUp").prop("disabled", false);
             $("#btnAddIptOutcome").prop("disabled", true);
-            $("#EverBeenOnIpt").prop("disabled", false);
+            // $("#EverBeenOnIpt").prop("disabled", false);
         } else {
             $("#btnAddIptWorkUp").prop("disabled", true);
             $("#btnAddIptOutcome").prop("disabled", false);
-            $("#EverBeenOnIpt").prop("disabled", true);
-            $("#EverBeenOnIpt").val("False");
+            // $("#EverBeenOnIpt").prop("disabled", true);
+            // $("#EverBeenOnIpt").val("False");
         }
 
     }
@@ -3450,7 +3450,7 @@
         document.getElementById('<%= txtAllergy.ClientID %>').addEventListener('awesomplete-selectcomplete', function () {
             var result = this.value.split("~");
             $("#<%=txtAllergyId.ClientID%>").val(result[0]);
-                   $("#<%=txtAllergy.ClientID%>").val(result[1]);
+            $("#<%=txtAllergy.ClientID%>").val(result[1]);
         });
 
         $.ajax({
@@ -3475,140 +3475,140 @@
 
     function loadAllergyReactions() {
         var pcInput = document.getElementById('<%= txtReactionType.ClientID %>');
-               var awesomplete = new Awesomplete(pcInput, {
-                   minChars: 1
+        var awesomplete = new Awesomplete(pcInput, {
+            minChars: 1
+        });
+
+        document.getElementById('<%= txtReactionType.ClientID %>').addEventListener('awesomplete-selectcomplete', function () {
+                   var result = this.value.split("~");
+                   $("#<%=txtReactionTypeID.ClientID%>").val(result[0]);
+            $("#<%=txtReactionType.ClientID%>").val(result[1]);
                });
-
-               document.getElementById('<%= txtReactionType.ClientID %>').addEventListener('awesomplete-selectcomplete', function () {
-            var result = this.value.split("~");
-            $("#<%=txtReactionTypeID.ClientID%>").val(result[0]);
-                   $("#<%=txtReactionType.ClientID%>").val(result[1]);
-        });
-
-        $.ajax({
-            type: "POST",
-            url: "../WebService/PatientEncounterService.asmx/loadAllergyReactions",
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-
-            success: function (data) {
-                var serverData = data.d;
-                var PCList = [];
-
-                for (var i = 0; i < serverData.length; i++) {
-                    //drugList.push(serverData[i][1]);
-                    PCList.push({ label: serverData[i][1], value: serverData[i][0] });
-                }
-                awesomplete.list = PCList;
-            }
-        });
-
-    }
-
-    function loadDiagnosis() {
-        var diagnosisInput = document.getElementById('<%= Diagnosis.ClientID %>');
-               var awesomplete = new Awesomplete(diagnosisInput, {
-                   minChars: 1
-               });
-
-               document.getElementById('<%= Diagnosis.ClientID %>').addEventListener('awesomplete-selectcomplete', function () {
-            var result = this.value.split("~");
-            $("#<%=txtDiagnosisID.ClientID%>").val(result[0]);
-                   $("#<%=Diagnosis.ClientID%>").val(result[1]);
-        });
-
-        $.ajax({
-            type: "POST",
-            url: "../WebService/PatientEncounterService.asmx/loadDiagnosis",
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-
-            success: function (data) {
-                var serverData = data.d;
-                var DiagnosisList = [];
-
-                for (var i = 0; i < serverData.length; i++) {
-                    //drugList.push(serverData[i][1]);
-                    DiagnosisList.push({ label: serverData[i][1], value: serverData[i][0] });
-                }
-                awesomplete.list = DiagnosisList;
-            }
-        });
-
-           }
-
-           function loadSystemReviews() {
-               var systemReviewName = $('#ddlExaminationType').find(":selected").text();
 
                $.ajax({
                    type: "POST",
-                   url: "../WebService/LookupService.asmx/GetLookUpItemViewByMasterName",
-                   data: "{'masterName': '" + systemReviewName + "'}",
+                   url: "../WebService/PatientEncounterService.asmx/loadAllergyReactions",
                    dataType: "json",
                    contentType: "application/json; charset=utf-8",
 
                    success: function (data) {
                        var serverData = data.d;
-                       var obj = $.parseJSON(serverData);
+                       var PCList = [];
 
-                       $("#<%=ddlExamination.ClientID%>").find('option').remove().end();
-                       $("#<%=ddlExamination.ClientID%>").append('<option value="0">Select</option>');
-                       for (var i = 0; i < obj.length; i++) {
-                           $("#<%=ddlExamination.ClientID%>").append('<option value="' + obj[i]["ItemId"] + '">' + obj[i]["DisplayName"] + '</option>');
-                }
+                       for (var i = 0; i < serverData.length; i++) {
+                           //drugList.push(serverData[i][1]);
+                           PCList.push({ label: serverData[i][1], value: serverData[i][0] });
+                       }
+                       awesomplete.list = PCList;
                    }
                });
-           }
 
-           function showHidePresentingComplaintsDivs() {
-               var anyComplaints = $("input[name$=anyComplaints]:checked").val();
-               if (anyComplaints == 1) {
-                   document.getElementById('presentingComplaintsCtrls').style.display = 'block';
-                   document.getElementById('presentingComplaintsTable').style.display = 'block';
-                   document.getElementById('presentingComplaintsNotes').style.display = 'block';
-               }
-               else {
-                   document.getElementById('presentingComplaintsCtrls').style.display = 'none';
-                   document.getElementById('presentingComplaintsTable').style.display = 'none';
-                   document.getElementById('presentingComplaintsNotes').style.display = 'none';
-               }
-           }
+    }
 
-           function showHideVisitByTS() {
-               var visitByTS = $('#ddlVisitBy').find(":selected").text();
+    function loadDiagnosis() {
+        var diagnosisInput = document.getElementById('<%= Diagnosis.ClientID %>');
+        var awesomplete = new Awesomplete(diagnosisInput, {
+            minChars: 1
+        });
 
-               if (visitByTS == "Treatment Supporter") {
-                   document.getElementById('divTreatmentSupporter').style.display = 'block';
-                   document.getElementById('step1Div').style.display = 'none';
-                   document.getElementById('prevNextButton').style.display = 'none';
-               }
-               else {
-                   document.getElementById('divTreatmentSupporter').style.display = 'none';
-                   document.getElementById('step1Div').style.display = 'block';
-                   document.getElementById('prevNextButton').style.display = 'block';
-               }
-           }
+        document.getElementById('<%= Diagnosis.ClientID %>').addEventListener('awesomplete-selectcomplete', function () {
+                   var result = this.value.split("~");
+                   $("#<%=txtDiagnosisID.ClientID%>").val(result[0]);
+            $("#<%=Diagnosis.ClientID%>").val(result[1]);
+               });
 
-           function savePatientEncounterTS() {
-               var visitDate = $("#<%=VisitDate.ClientID%>").val();
-               var visitScheduled = $("input[name$=Scheduled]:checked").val();
-               var visitBy = $("#<%=ddlVisitBy.ClientID%>").find(":selected").val();
+               $.ajax({
+                   type: "POST",
+                   url: "../WebService/PatientEncounterService.asmx/loadDiagnosis",
+                   dataType: "json",
+                   contentType: "application/json; charset=utf-8",
+
+                   success: function (data) {
+                       var serverData = data.d;
+                       var DiagnosisList = [];
+
+                       for (var i = 0; i < serverData.length; i++) {
+                           //drugList.push(serverData[i][1]);
+                           DiagnosisList.push({ label: serverData[i][1], value: serverData[i][0] });
+                       }
+                       awesomplete.list = DiagnosisList;
+                   }
+               });
+
+    }
+
+    function loadSystemReviews() {
+        var systemReviewName = $('#ddlExaminationType').find(":selected").text();
 
         $.ajax({
             type: "POST",
-            url: "../WebService/PatientEncounterService.asmx/savePatientEncounterTS",
-            data: "{'VisitDate':'" + visitDate + "','VisitScheduled':'" + visitScheduled + "','VisitBy':'" + visitBy + "'}",
-            contentType: "application/json; charset=utf-8",
+            url: "../WebService/LookupService.asmx/GetLookUpItemViewByMasterName",
+            data: "{'masterName': '" + systemReviewName + "'}",
             dataType: "json",
-            success: function (response) {
+            contentType: "application/json; charset=utf-8",
 
-                console.log(response.d);
-                if (response.d > 0) {
-                    toastr.success(response.d, "Presenting Complaints");
+            success: function (data) {
+                var serverData = data.d;
+                var obj = $.parseJSON(serverData);
 
-                    setTimeout(function () {
-                        window.location
-                            .href =
+                $("#<%=ddlExamination.ClientID%>").find('option').remove().end();
+                       $("#<%=ddlExamination.ClientID%>").append('<option value="0">Select</option>');
+                       for (var i = 0; i < obj.length; i++) {
+                           $("#<%=ddlExamination.ClientID%>").append('<option value="' + obj[i]["ItemId"] + '">' + obj[i]["DisplayName"] + '</option>');
+                       }
+                   }
+               });
+    }
+
+    function showHidePresentingComplaintsDivs() {
+        var anyComplaints = $("input[name$=anyComplaints]:checked").val();
+        if (anyComplaints == 1) {
+            document.getElementById('presentingComplaintsCtrls').style.display = 'block';
+            document.getElementById('presentingComplaintsTable').style.display = 'block';
+            document.getElementById('presentingComplaintsNotes').style.display = 'block';
+        }
+        else {
+            document.getElementById('presentingComplaintsCtrls').style.display = 'none';
+            document.getElementById('presentingComplaintsTable').style.display = 'none';
+            document.getElementById('presentingComplaintsNotes').style.display = 'none';
+        }
+    }
+
+    function showHideVisitByTS() {
+        var visitByTS = $('#ddlVisitBy').find(":selected").text();
+
+        if (visitByTS == "Treatment Supporter") {
+            document.getElementById('divTreatmentSupporter').style.display = 'block';
+            document.getElementById('step1Div').style.display = 'none';
+            document.getElementById('prevNextButton').style.display = 'none';
+        }
+        else {
+            document.getElementById('divTreatmentSupporter').style.display = 'none';
+            document.getElementById('step1Div').style.display = 'block';
+            document.getElementById('prevNextButton').style.display = 'block';
+        }
+    }
+
+    function savePatientEncounterTS() {
+        var visitDate = $("#<%=VisitDate.ClientID%>").val();
+               var visitScheduled = $("input[name$=Scheduled]:checked").val();
+               var visitBy = $("#<%=ddlVisitBy.ClientID%>").find(":selected").val();
+
+               $.ajax({
+                   type: "POST",
+                   url: "../WebService/PatientEncounterService.asmx/savePatientEncounterTS",
+                   data: "{'VisitDate':'" + visitDate + "','VisitScheduled':'" + visitScheduled + "','VisitBy':'" + visitBy + "'}",
+                   contentType: "application/json; charset=utf-8",
+                   dataType: "json",
+                   success: function (response) {
+
+                       console.log(response.d);
+                       if (response.d > 0) {
+                           toastr.success(response.d, "Presenting Complaints");
+
+                           setTimeout(function () {
+                               window.location
+                                   .href =
                             '<%=ResolveClientUrl( "~/CCC/Patient/PatientHome.aspx")%>';
                     },
                         2000);
@@ -3622,16 +3622,16 @@
 
                 toastr.error(response.d, "Error occured while saving Presenting Complaints");
             }
-        });
+               });
            }
 
 
            function presentingComplaintsDateChange() {
                var pcDate = $("#<%=txtPCOnsetDate.ClientID%>").val();
-        if (moment('' + pcDate + '').isAfter()) {
-            toastr.error("Presenting complaints date cannot be a future date.");
-            $("#<%=txtPCOnsetDate.ClientID%>").val("");
+               if (moment('' + pcDate + '').isAfter()) {
+                   toastr.error("Presenting complaints date cannot be a future date.");
+                   $("#<%=txtPCOnsetDate.ClientID%>").val("");
             return false;
-        }
+               }
            }
 </script>

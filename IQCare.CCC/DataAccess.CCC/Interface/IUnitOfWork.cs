@@ -11,6 +11,7 @@ using DataAccess.CCC.Interface.Triage;
 using DataAccess.CCC.Interface.Encounter;
 using DataAccess.CCC.Repository.person;
 using Interface.CCC.Lookup;
+using DataAccess.CCC.Interface.assessment;
 
 namespace DataAccess.CCC.Interface
 {
@@ -89,6 +90,10 @@ namespace DataAccess.CCC.Interface
 
         /*Patient categorization*/
         IPatientCategorizationRepository PatientCategorizationRepository { get; }
+
+        /* Patient ART Preparation */
+        IPatientPsychosocialCriteriaRepository PatientPsychosocialCriteriaRepository { get; }
+        IPatientSupportSystemCriteriaRepository PatientSupportSystemCriteriaRepository { get;}
 
     }
 }

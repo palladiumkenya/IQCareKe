@@ -3078,7 +3078,9 @@ Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) 
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Tested Negative',2 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Tested Negetive'  )         ItemId  FROM LookupMaster  WHERE Name='BaseLineHivStatus') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Tested Negative',2 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Tested Negetive'  )         ItemId  FROM LookupMaster  WHERE Name='HivTestingResult') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
 
-Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Inconclusive',1 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Inconclusive'  )         ItemId  FROM LookupMaster  WHERE Name='HivTestingResult') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Never Tested',1 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Never Tested'  )         ItemId  FROM LookupMaster  WHERE Name='HivTestingResult') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+
+--Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Inconclusive',1 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Inconclusive'  )         ItemId  FROM LookupMaster  WHERE Name='HivTestingResult') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
 
 
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Positive',1 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Positive'  )         ItemId  FROM LookupMaster  WHERE Name='ReConfirmatoryTest') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
@@ -3373,6 +3375,8 @@ if not exists(select 1 from mst_Decode where name='Hepatitis B')
 begin
 insert into mst_Decode values('Hepatitis B',33,6,null,0,1,getdate(),null,0,null,null)
 end
+
+update Mst_LabTestParameter set deleteflag=1 where id=107 and ParameterName = 'ViralLoad Undetectable'
 
 --insert PM/SCM With Same point dispense module
 SET IDENTITY_INSERT mst_module ON

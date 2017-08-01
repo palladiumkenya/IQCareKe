@@ -1065,10 +1065,12 @@ namespace IQCare.Management
 
         }
 
-
-
-
-
-
+        private void registerPatientToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            theForm = (Form)Activator.CreateInstance(Type.GetType("IQCare.SCM.frmRegisterNewPatient, IQCare.SCM"));
+            theForm.MdiParent = this;
+            GblIQCare.theArea = "Register";
+            theForm.Show();
+        }
     }
 }
