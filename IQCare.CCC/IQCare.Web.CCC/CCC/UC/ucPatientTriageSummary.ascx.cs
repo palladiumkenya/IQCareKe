@@ -109,28 +109,23 @@ namespace IQCare.Web.CCC.UC
 
                     if (diastolic <= 80 & systolic <= 120)
                     {
-                        bpAnalysis = "<span class='label label-success'>" + Convert.ToString(diastolic) + "/" +
-                                     Convert.ToString(systolic) + "mm[Hg] |Normal </span>";
+                        bpAnalysis = "<span class='label label-success'>" + Convert.ToString(systolic) + "/" + Convert.ToString(diastolic) + "mm[Hg] |Normal </span>";
                     }
                     else if (diastolic > 85 & systolic > 140)
                     {
-                        bpAnalysis = "<span class='label label-success'>" + Convert.ToString(diastolic) + "/" +
-                                     Convert.ToString(systolic) + "mm[Hg]  | Normal </span>";
+                        bpAnalysis = "<span class='label label-success'>" + Convert.ToString(systolic) + "/" + Convert.ToString(diastolic) + "mm[Hg]  | Normal </span>";
                     }
                     else if (diastolic > 90 & systolic > 140)
                     {
-                        bpAnalysis = "<span class='label label-warning'> " + Convert.ToString(diastolic) + "/" +
-                                     Convert.ToString(systolic) + "mm[Hg]  | Border Line</span>";
+                        bpAnalysis = "<span class='label label-warning'> " + Convert.ToString(systolic) + "/" + Convert.ToString(diastolic) + "mm[Hg]  | Border Line</span>";
                     }
                     else if (diastolic > 90 & systolic > 160)
                     {
-                        bpAnalysis = "<span class='label label-danger'> " + Convert.ToString(diastolic) + "/" +
-                                     Convert.ToString(systolic) + " |mm[Hg]  Suspect Hypertension</span>";
+                        bpAnalysis = "<span class='label label-danger'> " + Convert.ToString(systolic) + "/" + Convert.ToString(diastolic) + " |mm[Hg]  Suspect Hypertension</span>";
                     }
                     else
                     {
-                        bpAnalysis = "<span class='label label-warning'> " + Convert.ToString(diastolic) + "/" +
-                                     Convert.ToString(systolic) + " |mm[Hg]  </span>";
+                        bpAnalysis = "<span class='label label-warning'> " + Convert.ToString(systolic) + "/" + Convert.ToString(diastolic) + " |mm[Hg]  </span>";
                     }
 
                     lblbloodpressure.Text = bpAnalysis;

@@ -295,7 +295,15 @@
                     return false;
                 }
 
-                addPatientRegister(entryPointId, enrollmentDate, personDateOfBirth, nationalId, patientType, mflCode, dobPrecision, JSON.stringify(identifiers));
+                var reconfirmatoryTest = $("#ReconfirmatoryTest").val();
+                var resultReConfirmatoryTest = $("#ResultReConfirmatoryTest").val();
+                var reConfirmatoryTestDate = $("#ReConfirmatoryTestDate").val();
+
+                if (patType == "New") {
+                    $.when(addReconfirmatoryTest(reconfirmatoryTest, resultReConfirmatoryTest, reConfirmatoryTestDate)).then(function () { setTimeout(function () { addPatientRegister(entryPointId, enrollmentDate, personDateOfBirth, nationalId, patientType, mflCode, dobPrecision, JSON.stringify(identifiers)); }, 1000); });
+                } else {
+                    addPatientRegister(entryPointId, enrollmentDate,personDateOfBirth,nationalId,patientType,mflCode,dobPrecision,JSON.stringify(identifiers));
+                }
             });
 
             $("#btnEnroll").click(function (e) {
@@ -353,12 +361,11 @@
                 var resultReConfirmatoryTest = $("#ResultReConfirmatoryTest").val();
                 var reConfirmatoryTestDate = $("#ReConfirmatoryTestDate").val();
 
-                $.when(addReconfirmatoryTest(reconfirmatoryTest, resultReConfirmatoryTest, reConfirmatoryTestDate))
-                    .then(function() {
-                        setTimeout(function() {
-                            addPatient(entryPointId, enrollmentDate, personDateOfBirth, nationalId, patientType, mflCode, dobPrecision, JSON.stringify(identifiers));
-                        }, 2000);
-                    });      
+                if (patType == "New") {
+                    $.when(addReconfirmatoryTest(reconfirmatoryTest, resultReConfirmatoryTest, reConfirmatoryTestDate)).then(function() { setTimeout(function() { addPatient(entryPointId, enrollmentDate, personDateOfBirth, nationalId, patientType, mflCode, dobPrecision, JSON.stringify(identifiers)); }, 1000); });
+                } else {
+                    addPatient(entryPointId,enrollmentDate,personDateOfBirth,nationalId,patientType,mflCode,dobPrecision,JSON.stringify(identifiers));
+                }
             });
 
             function addPatientRegister(entryPointId, enrollmentDate, personDateOfBirth, nationalId, patientType, mflCode, dobPrecision, identifiers) {

@@ -85,6 +85,17 @@ namespace IQCare.Web.CCC.OneTimeEvents
                     }
                 }
 
+                //History of ART Use
+                List<LookupItemView> lk = mgr.GetLookItemByGroup("HistoryARTUse");
+                if (lk != null && lk.Count > 0)
+                {
+                    RegimenPurpose.Items.Add(new ListItem("select", "0"));
+                    foreach (var k in lk)
+                    {
+                        RegimenPurpose.Items.Add(new ListItem(k.DisplayName, k.ItemId.ToString()));
+                    }
+                }
+
                 /* Regimen classification*/
                 List<LookupItemView> lookupItem;
                 if (Age > 15)
@@ -128,6 +139,11 @@ namespace IQCare.Web.CCC.OneTimeEvents
                         TransferFromFacility.Items.Add(new ListItem(facility.Name, facility.MFLCode));
                     }
                 }
+
+                ARTUseHistory.Items.Add(new ListItem("select", ""));
+                ARTUseHistory.Items.Add(new ListItem("Yes", "True"));
+                ARTUseHistory.Items.Add(new ListItem("No", "False"));
+
             }
         }
     }
