@@ -60,6 +60,16 @@ namespace IQCare.Web.CCC.Enrollment
                     }
                 }
 
+                List<LookupItemView> testTypes = mgr.GetLookItemByGroup("HivTestTypes");
+                if (testTypes != null && testTypes.Count > 0)
+                {
+                    TypeOfReConfirmatoryTest.Items.Add(new ListItem("select", ""));
+                    foreach (var item in testTypes)
+                    {
+                        TypeOfReConfirmatoryTest.Items.Add(new ListItem(item.ItemName, item.ItemId.ToString()));
+                    }
+                }
+
                 //ReconfirmatoryTest.Items.Add();
             }
 

@@ -115,6 +115,7 @@ If Not Exists(Select 1 From LookupMaster where Name='PregnancyOutcome') Begin IN
 If Not Exists(Select 1 From LookupMaster where Name='ReConfirmatoryTest') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('ReConfirmatoryTest','ReConfirmatory Test',0); End
 If Not Exists(Select 1 From LookupMaster where Name='StabilityAssessment') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('StabilityAssessment','Stability Assessment',0); End
 If Not Exists(Select 1 From LookupMaster where Name='HistoryARTUse') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('HistoryARTUse','History ART Use',0); End
+If Not Exists(Select 1 From LookupMaster where Name='HivTestTypes') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('HivTestTypes','Test Types',0); End
 
 
 --Lookup items
@@ -386,6 +387,9 @@ If Not Exists(Select 1 From LookupItem where Name='Confirmed HIV Negative') Begi
 If Not Exists(Select 1 From LookupItem where Name='PrEP') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('PrEP','PrEP',0); End
 If Not Exists(Select 1 From LookupItem where Name='PMTCT') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('PMTCT','PMTCT',0); End
 If Not Exists(Select 1 From LookupItem where Name='PEP') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('PEP','PEP',0); End
+If Not Exists(Select 1 From LookupItem where Name='PCR') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('PCR','PCR',0); End
+If Not Exists(Select 1 From LookupItem where Name='Rapid Test') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Rapid Test','Rapid Test',0); End
+
 
 
 If Not Exists(Select 1 From LookupItem where Name='Spontaneous abortion') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Spontaneous abortion','Spontaneous abortion',0); End
@@ -3089,6 +3093,8 @@ Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) 
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'PrEP',1 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='PrEP'  )         ItemId  FROM LookupMaster  WHERE Name='HistoryARTUse') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'PMTCT',2 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='PMTCT'  )         ItemId  FROM LookupMaster  WHERE Name='HistoryARTUse') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'PEP',1 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='PEP'  )         ItemId  FROM LookupMaster  WHERE Name='HistoryARTUse') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'PCR',1 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='PCR'  )         ItemId  FROM LookupMaster  WHERE Name='HivTestTypes') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Rapid Test',2 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Rapid Test'  )         ItemId  FROM LookupMaster  WHERE Name='HivTestTypes') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
 
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Positive',1 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Positive'  )         ItemId  FROM LookupMaster  WHERE Name='ReConfirmatoryTest') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Negative',2 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Negative'  )         ItemId  FROM LookupMaster  WHERE Name='ReConfirmatoryTest') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;

@@ -28,6 +28,7 @@ namespace IQCare.Web.CCC.WebService
         public int Gender { get; set; }
         public string GenderString { get; set; }
         public string PersonDoB { get; set; }
+        public bool DateOfBirthPrecision { get; set; }
         public string EnrollmentNumber { get; set; }
         public string EnrollmentDate { get; set; }
         public int ChildOrphan { get; set; }
@@ -840,6 +841,7 @@ namespace IQCare.Web.CCC.WebService
                     patientDetails.Gender = thisPatient.Sex;
                     patientDetails.GenderString = LookupLogic.GetLookupNameById(thisPatient.Sex);
                     patientDetails.PersonDoB = String.Format("{0:dd-MMM-yyyy}", thisPatient.DateOfBirth);
+                    patientDetails.DateOfBirthPrecision = thisPatient.DobPrecision;
                     patientDetails.EnrollmentDate = String.Format("{0:dd-MMM-yyyy}", thisPatient.EnrollmentDate);
                     patientDetails.Age = patientDetails.GetAge(thisPatient.DateOfBirth);
 
