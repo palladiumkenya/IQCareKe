@@ -12,10 +12,12 @@ namespace IQCare.Web.CCC.Encounter
     {
         public int PatientId;
         public int PatientMasterVisitId;
+        public string Gender;
         protected void Page_Load(object sender, EventArgs e)
         {
             ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
             GetSessionDetails();
+            pregnancySection.Visible = Gender != "Male";
             List<LookupItemView> areas = mgr.GetLookItemByGroup("PregnancyStatus");
             if (areas != null && areas.Count > 0)
             {
@@ -30,6 +32,7 @@ namespace IQCare.Web.CCC.Encounter
         {
             PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
             PatientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientMasterVisitId"]);
+            Gender = Convert.ToString(HttpContext.Current.Session["Gender"]);
         }
     }
 }

@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Entities.CCC.Enrollment
 {
     [Serializable]
-    [Table("PatientEnrollment")]
+    [Table("PatientArtDistribution")]
     public class PatientArtDistribution : BaseEntity
     {
         [Key]
@@ -27,7 +27,7 @@ namespace Entities.CCC.Enrollment
         public bool Cough { get; set; }
         public bool Rash { get; set; }
         public bool GenitalSore { get; set; }
-        public bool OtherSymptom { get; set; }
+        public string OtherSymptom { get; set; }
         public bool NewMedication { get; set; }
         public string NewMedicationText { get; set; }
         public bool FamilyPlanning { get; set; }

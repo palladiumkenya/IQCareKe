@@ -42,10 +42,10 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label class="pull-left" style="padding-right: 10px">
-                                        <input id="mYes" type="radio" name="missedArvDoses" value="1" clientidmode="Static" runat="server" />Yes
+                                        <input id="mYes" type="radio" name="missedArvDoses" value="True" clientidmode="Static" runat="server" onclick="showHideMissedArv();"/>Yes
                                     </label>
                                     <label class="pull-left" style="padding-right: 10px">
-                                        <input id="mNo" type="radio" name="missedArvDoses" value="0" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                        <input id="mNo" type="radio" name="missedArvDoses" value="False" clientidmode="Static" runat="server" data-parsley-required="true" onclick="showHideMissedArv();"/>No
                                     </label>
                                 </div>
                             </div>
@@ -170,10 +170,10 @@
                                     </div>
                                     <div class="col-md-12">
                                         <label class="pull-left" style="padding-right: 10px">
-                                            <input id="medYes" type="radio" name="newMedication" value="1" clientidmode="Static" runat="server" />Yes
+                                            <input id="medYes" type="radio" name="newMedication" value="True" clientidmode="Static" runat="server" onclick="showNewMedicine();"/>Yes
                                         </label>
                                         <label class="pull-left" style="padding-right: 10px">
-                                            <input id="medNo" type="radio" name="newMedication" value="0" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                            <input id="medNo" type="radio" name="newMedication" value="False" clientidmode="Static" runat="server" data-parsley-required="true" onclick="showNewMedicine();"/>No
                                         </label>
                                     </div>
                                 </div>
@@ -185,7 +185,7 @@
                                         <label for="missedDosesCount" class="control-label pull-left">If Yes, specify:</label>
                                     </div>
                                     <div class="col-md-12">
-                                        <asp:TextBox runat="server" ID="TextBox1" CssClass="form-control input-sm" ClientIDMode="Static" Type="Number" Min="1" />
+                                        <asp:TextBox runat="server" ID="newMedicineText" CssClass="form-control input-sm" ClientIDMode= "Static"/>
                                     </div>
                                 </div>
                             </div>
@@ -198,10 +198,10 @@
                                     </div>
                                     <div class="col-md-12">
                                         <label class="pull-left" style="padding-right: 10px">
-                                            <input id="fpYes" type="radio" name="familyPlanning" value="1" clientidmode="Static" runat="server" />Yes
+                                            <input id="fpYes" type="radio" name="familyPlanning" value="True" clientidmode="Static" runat="server" onclick="showFamilyPlanning();"/>Yes
                                         </label>
                                         <label class="pull-left" style="padding-right: 10px">
-                                            <input id="fpNo" type="radio" name="familyPlanning" value="0" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                            <input id="fpNo" type="radio" name="familyPlanning" value="False" clientidmode="Static" runat="server" data-parsley-required="true" onclick="showFamilyPlanning();" />No
                                         </label>
                                     </div>
                                 </div>
@@ -212,7 +212,7 @@
                                         <label for="missedDosesCount" class="control-label pull-left">If Yes, specify:</label>
                                     </div>
                                     <div class="col-md-12">
-                                        <asp:TextBox runat="server" ID="fpmethod" CssClass="form-control input-sm" ClientIDMode="Static" Type="Number" Min="1" />
+                                        <asp:TextBox runat="server" ID="fpmethod" CssClass="form-control input-sm" ClientIDMode="Static" />
                                     </div>
                                 </div>
                             </div>
@@ -225,10 +225,10 @@
                                     </div>
                                     <div class="col-md-12">
                                         <label class="pull-left" style="padding-right: 10px">
-                                            <input id="refYes" type="radio" name="referredToClinic" value="1" clientidmode="Static" runat="server" />Yes
+                                            <input id="refYes" type="radio" name="referredToClinic" value="True" clientidmode="Static" runat="server" onclick="showAppointmentDate();" />Yes
                                         </label>
                                         <label class="pull-left" style="padding-right: 10px">
-                                            <input id="refNo" type="radio" name="referredToClinic" value="0" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                            <input id="refNo" type="radio" name="referredToClinic" value="False" clientidmode="Static" runat="server" data-parsley-required="true" onclick="showAppointmentDate();" />No
                                         </label>
                                     </div>
                                 </div>
@@ -254,8 +254,8 @@
                                                                 <button type="button" class="next"><span class="glyphicon glyphicon-chevron-right input-sm"></span><span class="sr-only">Next Month</span></button>
                                                                 <button type="button" class="title" data-month="11" data-year="2014">
                                                                     <span class="month">
-                                                                        <span data-month="0">January</span>
-                                                                        <span data-month="1">February</span>
+                                                                        <span data-month="False">January</span>
+                                                                        <span data-month="True">February</span>
                                                                         <span data-month="2">March</span>
                                                                         <span data-month="3">April</span>
                                                                         <span data-month="4">May</span>
@@ -291,9 +291,9 @@
                                                             <div class="datepicker-wheels-month">
                                                                 <h2 class="header">Month</h2>
                                                                 <ul>
-                                                                    <li data-month="0">
+                                                                    <li data-month="False">
                                                                         <button type="button">Jan</button></li>
-                                                                    <li data-month="1">
+                                                                    <li data-month="True">
                                                                         <button type="button">Feb</button></li>
                                                                     <li data-month="2">
                                                                         <button type="button">Mar</button></li>
@@ -334,11 +334,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12">
+                        <asp:Panel class="col-md-12" runat="server" ID="pregnancySection" ClientIDMode="Static">
                             <div class="col-md-8">
                                 <div class="form-group">
                                     <div class="col-md-12">
-                                        <label for="missedDoses" class="control-label pull-left">Pregnancy Status:</label>
+                                        <label for="pregnancyStatus" class="control-label pull-left">Pregnancy Status:</label>
                                     </div>
                                     <div class="col-md-6">
                                         <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="pregnancyStatus" ClientIDMode="Static">
@@ -348,7 +348,7 @@
                             </div>
                             <div class="col-md-4">
                             </div>
-                        </div>
+                        </asp:Panel>
                     </div>
                 </div>
             </div>
@@ -375,7 +375,7 @@
             </div>
         </div>
     </div>
-    <div class="modal" id="PharmacyModal" tabindex="-1" role="dialog" aria-labelledby="PharmacyLabel" aria-hidden="true" clientidmode="Static">
+    <div class="modal" id="PharmacyModal" tabindex="-True" role="dialog" aria-labelledby="PharmacyLabel" aria-hidden="true" clientidmode="Static">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content" style="width: 100%">
                 <div class="modal-header">
@@ -397,6 +397,27 @@
             momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
         });
         $(document).ready(function () {
+
+            $("#<%=missedDosesCount.ClientID%>").prop('disabled', true);
+            $("#<%=newMedicineText.ClientID%>").prop('disabled', true);
+            $("#<%=fpmethod.ClientID%>").prop('disabled', true);
+            $("#<%=AppointmentDate.ClientID%>").prop('disabled', true);
+            $("#PersonAppointmentDate").addClass('noneevents');
+
+            $("#btnSave").click(function () {
+                if ($('#AppointmentForm').parsley().validate()) {
+                    var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
+                    var appDate = $("#<%=AppointmentDate.ClientID%>").val();
+                    if (moment('' + appDate + '').isAfter(futureDate)) {
+                        toastr.error("Appointment date cannot be set to over 7 months");
+                        return false;
+                    }
+                    addArtDistribution();
+                } else {
+                    return false;
+                }
+            });
+
             $("#AppointmentDate").val("");
 
             $("#btnReset").click(function () {
@@ -406,6 +427,99 @@
                 window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>';
             });
         });
+
+        function addArtDistribution() {
+            var artRefillModel = $("#<%=ArtRefill.ClientID%>").val();
+            var missedArvDoses = $("input[name$=missedArvDoses]:checked").val();
+            var missedDosesCount = $("#<%=missedDosesCount.ClientID%>").val();
+            if (missedDosesCount === "") { missedDosesCount = 0 }
+            var fatigue = $("#<%=fatigue.ClientID%>").val();
+            var fever = $("#<%=fever.ClientID%>").val();
+            var nausea = $("#<%=nausea.ClientID%>").val();
+            var diarrhea = $("#<%=diarrhea.ClientID%>").val();
+            var cough = $("#<%=rash.ClientID%>").val();
+            var rash = $("#<%=rash.ClientID%>").val();
+            var genitalSore = $("#<%=genitalSore.ClientID%>").val();
+            var otherSymptom = $("#<%=otherSymptom.ClientID%>").val();
+            var newMedication = $("input[name$=newMedication]:checked").val();
+            var newMedicineText = $("#<%=newMedicineText.ClientID%>").val();
+            var familyPlanning = $("input[name$=familyPlanning]:checked").val();
+            var fpmethod = $("#<%=fpmethod.ClientID%>").val();
+            var referredToClinic = $("input[name$=referredToClinic]:checked").val();
+            var appointmentDate = $("#<%=AppointmentDate.ClientID%>").val();
+            var pregnancyStatus = $("#<%=pregnancyStatus.ClientID%>").val();
+            if (pregnancyStatus === undefined) { pregnancyStatus = 0 }
+            var patientId = <%=PatientId%>;
+            var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientEncounterService.asmx/AddArtDistribution",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','artRefillModel': '" + artRefillModel + "','missedArvDoses': '" + missedArvDoses +
+                "','missedDosesCount': '" + missedDosesCount + "','fatigue': '" + fatigue + "','fever': '" + fever + "','nausea': '" + nausea + "','diarrhea': '" + diarrhea + "','cough': '" + cough + "','rash': '" + rash +
+                "','genitalSore': '" + genitalSore + "','otherSymptom': '" + otherSymptom + "','newMedication': '" + newMedication + "','newMedicineText': '" + newMedicineText + "','familyPlanning': '" + familyPlanning +
+                "','fpmethod': '" + fpmethod + "','referredToClinic': '" + referredToClinic + "','appointmentDate': '" + appointmentDate + "','pregnancyStatus': '" + pregnancyStatus + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    toastr.success(response.d, "Fast track form saved successfully");
+                    resetFields();
+                    setTimeout(function () { window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>'; }, 2500);
+                },
+                error: function (response) {
+                    toastr.error(response.d, "fast track not saved");
+                }
+            });
+        }
+
+        function showHideMissedArv() {
+            var missedArvs = $("input[name$=missedArvDoses]:checked").val();
+            if (missedArvs === "True") {
+                $("#<%=missedDosesCount.ClientID%>").prop('disabled', false);
+                $("#<%=missedDosesCount.ClientID%>").prop('required', true);
+            }
+            else {
+                $("#<%=missedDosesCount.ClientID%>").prop('disabled', true);
+                $("#<%=missedDosesCount.ClientID%>").prop('required', false);
+            }
+        }
+
+        function showNewMedicine() {
+            var missedArvs = $("input[name$=newMedication]:checked").val();
+            if (missedArvs === "True") {
+                $("#<%=newMedicineText.ClientID%>").prop('disabled', false);
+                $("#<%=newMedicineText.ClientID%>").prop('required', true);
+            }
+            else {
+                $("#<%=newMedicineText.ClientID%>").prop('disabled', true);
+                $("#<%=newMedicineText.ClientID%>").prop('required', false);
+            }
+        }
+
+        function showFamilyPlanning() {
+            var missedArvs = $("input[name$=familyPlanning]:checked").val();
+            if (missedArvs === "True") {
+                $("#<%=fpmethod.ClientID%>").prop('disabled', false);
+                $("#<%=fpmethod.ClientID%>").prop('required', true);
+            }
+            else {
+                $("#<%=fpmethod.ClientID%>").prop('disabled', true);
+                $("#<%=fpmethod.ClientID%>").prop('required', false);
+            }
+        }
+
+        function showAppointmentDate() {
+            var missedArvs = $("input[name$=referredToClinic]:checked").val();
+            if (missedArvs === "True") {
+                $("#<%=AppointmentDate.ClientID%>").prop('disabled', false);
+                $("#PersonAppointmentDate").removeClass('noneevents');
+                $("#<%=AppointmentDate.ClientID%>").prop('required', true);
+            }
+            else {
+                $("#<%=AppointmentDate.ClientID%>").prop('disabled', true);
+                $("#PersonAppointmentDate").addClass('noneevents');
+                $("#<%=AppointmentDate.ClientID%>").prop('required', false);
+            }
+        }
 
         function resetFields(parameters) {
             $("#fatigue").val("");

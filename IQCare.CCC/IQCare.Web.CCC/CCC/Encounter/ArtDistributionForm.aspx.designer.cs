@@ -148,13 +148,13 @@ namespace IQCare.Web.CCC.Encounter {
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton medNo;
         
         /// <summary>
-        /// TextBox1 control.
+        /// newMedicineText control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.TextBox newMedicineText;
         
         /// <summary>
         /// fpYes control.
@@ -209,6 +209,15 @@ namespace IQCare.Web.CCC.Encounter {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox AppointmentDate;
+        
+        /// <summary>
+        /// pregnancySection control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pregnancySection;
         
         /// <summary>
         /// pregnancyStatus control.
