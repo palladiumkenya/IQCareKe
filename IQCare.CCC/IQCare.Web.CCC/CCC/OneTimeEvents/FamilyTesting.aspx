@@ -78,6 +78,7 @@
                             </div>
                             <div class="col-md-6">
                                 <asp:TextBox ID="personAge" runat="server" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="0" required="true" min="0"></asp:TextBox>
+                                <asp:HiddenField ID="dobPrecision" runat="server" ClientIDMode="Static" />
                             </div>
                         </div>
                     </div>
@@ -265,7 +266,7 @@
             <div class="modal-dialog" style="width: 90%">
                 <div class="modal-content">
                     <div class="modal-header bg-info">
-                        <h4 class="modal-title">Edit Family Testing</h4>
+                        <h4 class="modal-title">Family Testing</h4>
                     </div>
                     <div class="modal-body">
                         <div class="row">
@@ -556,7 +557,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 
     <script type="text/javascript">
@@ -651,6 +651,8 @@
                 if (personAge != null && personAge != "" && (personAge > 0 || personAge <= 120)) {
                     $('#Dob').val(estimateDob(personAge));
                 }
+
+                $("#dobPrecision").val("false");
             });
 
             $("#FamilyTestingDetails").hide();
@@ -669,6 +671,7 @@
                     var lastName = escape($("#<%=LastName.ClientID%>").val());
                     var sex = $("#<%=Sex.ClientID%>").val();
                     var dob = $("#Dob").val();
+                    var dobPrecision = $("#dobPrecision").val();
                     var name = $("#<%=FirstName.ClientID%>").val() + ' ' + $("#<%=MiddleName.ClientID%>").val() + ' ' + $("#<%=LastName.ClientID%>").val();
                     var relationshipId = $("#<%=Relationship.ClientID%>").val();
                     var relationship = $("#Relationship :selected").text();
@@ -776,6 +779,7 @@
                             lastName: lastName,
                             sex: sex,
                             dob: dob,
+                            dobPrecision: dobPrecision,
                             relationshipId: relationshipId,
                             baselineHivStatusId: baselineHivStatusId,
                             baselineHivStatusDate: baselineHivStatusDate,
@@ -878,10 +882,10 @@
                                 action = "<button type='button' id= 'btnEditTesting' class='btn btn-link btn-sm pull-right' data-toggle='modal' data-target='#testFollowupModal' onClick='editFamilyTesting(this)'>Follow-up Test</button>";
                             } else if ((item.CccReferal == "True" && item.BaseLineHivStatus == "Tested Positive") || (item.CccReferal == "True" && item.HivStatusResult == "Tested Positive")) {
                                 referred = "Referred";
-                            } else if (item.BaseLineHivStatus == "Tested Positive" && item.CccReferal == "False") {
+                            } else if ((item.BaseLineHivStatus == "Tested Positive" && item.CccReferal == "False") || (item.HivStatusResult == "Tested Positive" && item.CccReferal == "False")) {
                                 referred = "Not Referred";
-                                action = "<button type='button' id= 'btnEditTesting' class='btn btn-link btn-sm pull-right' data-toggle='modal' data-target='#editFamilyTestingModal' onClick='editFamilyTesting(this)'>Refer to CCC</button>";
-                                enrollment = "<button type='button' id= 'btnEditTesting' class='btn btn-link btn-sm pull-right' data-toggle='modal' data-target='#editFamilyTestingModal' onClick='editFamilyTesting(this)'>Enroll to Facility</button>";
+                                action = "<button type='button' id= 'btnEditTesting' class='btn btn-link btn-sm pull-right' data-toggle='modal' data-target='#testFollowupModal' onClick='editFamilyTesting(this, true)'>Refer to another CCC</button>";
+                                enrollment = "<button type='button' id= 'btnEditTesting' class='btn btn-link btn-sm pull-right' onClick='enrollFamilyTesting(this)'>Enroll to this Facility</button>";
                             }
 
                             table += '<tr><td style="text-align: left">' + n + '</td><td style="text-align: left">' + name + '</td>' +
@@ -917,11 +921,13 @@
                 Dobchanged(date);
                 var age = getAge(date);
                 $("#personAge").val(age);
+
+                $("#dobPrecision").val("true");
             });
 
         });
 
-        function editFamilyTesting(x) {
+        function editFamilyTesting(x, referToCcc) {
             window.row = x.parentNode.parentNode.rowIndex;
             var rowIndex = row - 1;
             window.familyTesting = itemList[rowIndex];
@@ -947,6 +953,7 @@
             }
 
             $("#<%=dobMod.ClientID%>").val(moment(familyTesting.DateOfBirth).format('DD-MMM-YYYY'));
+            $("#<%=dobPrecision.ClientID%>").val(familyTesting.DobPrecision);
             var dd = document.getElementById('relationshipMod');
             for (var i = 0; i < dd.options.length; i++) {
                 if (dd.options[i].text === familyTesting.Relationship) {
@@ -973,34 +980,54 @@
             }
 
             $("#bHivStatusDateMod").attr('disabled', 'disabled');
-            //$("#BaselineHIVStatusDMod").addClass("noneevents");
 
-            //var dd = document.getElementById('testingStatusMod');
-            //for (var i = 0; i < dd.options.length; i++) {
-            //    if (dd.options[i].text === familyTesting.HivStatusResult) {
-            //        dd.selectedIndex = i;
-            //        break;
-            //    }
-            //}
 
-            <%--var testingDate = familyTesting.HivStatusResultDate;
-            if (testingDate != null) {
-                $("#<%=testingStatusDateMod.ClientID%>").val(moment(familyTesting.HivStatusResultDate).format('DD-MMM-YYYY'));
-
-            } else {
-                $("#<%=testingStatusDateMod.ClientID%>").val("");                
-            }--%>
-
-            <%--var dd = document.getElementById('cccReferalMod');
-            for (var i = 0; i < dd.options.length; i++) {
-                if (dd.options[i].text === familyTesting.CccReferal) {
-                    dd.selectedIndex = i;
-                    break;
+            //console.log(referToCcc);
+            if (referToCcc === true) {
+                var dd = document.getElementById('testingStatusMod');
+                for (var i = 0; i < dd.options.length; i++) {
+                    if (dd.options[i].text === familyTesting.HivStatusResult) {
+                        dd.selectedIndex = i;
+                        break;
+                    }
                 }
-            }
-            $("#<%=cccNumberMod.ClientID%>").val(familyTesting.CccReferalNumber);--%>
 
+                $("#testingStatusMod").prop("disabled", true);
+
+                var testingDate = familyTesting.HivStatusResultDate;
+                if (testingDate != null) {
+                    $("#<%=testingStatusDateMod.ClientID%>").val(moment(familyTesting.HivStatusResultDate).format('DD-MMM-YYYY'));
+                } else {
+                    $("#<%=testingStatusDateMod.ClientID%>").val("");                
+                }
+                $("#testingStatusDateMod").prop("disabled", true);
+
+                <%--var dd = document.getElementById('cccReferalMod');
+                for (var i = 0; i < dd.options.length; i++) {
+                    if (dd.options[i].text === familyTesting.CccReferal) {
+                        dd.selectedIndex = i;
+                        break;
+                    }
+                }
+                console.log(familyTesting.CccReferal);
+                $("#<%=cccNumberMod.ClientID%>").val(familyTesting.CccReferalNumber);--%>
+
+            }
+            //$("#BaselineHIVStatusDMod").addClass("noneevents");
             //BaselineEnabledMod();
+        }
+
+        function enrollFamilyTesting(member) {
+            window.row = member.parentNode.parentNode.rowIndex;
+            var rowIndex = row - 1;
+            window.familyTestingMember = itemList[rowIndex];
+
+            console.log(familyTestingMember);
+            var personId = familyTestingMember.PersonId;
+
+            PageMethods.SetEnrollmentSession(personId);
+
+            setTimeout(function () { window.location.href = '<%=ResolveClientUrl("~/CCC/Enrollment/ServiceEnrollment.aspx") %>'; }, 1000);
         }
 
         function resetElements(parameters) {
@@ -1026,6 +1053,7 @@
                 var lastName = escape($("#<%=lName.ClientID%>").val());
                 var sex = $("#<%=sexMod.ClientID%>").val();
                 var dob = $("#<%=dobMod.ClientID%>").val();
+                var dobPrecision = $("#dobPrecision").val();
                 var relationshipId = $("#<%=relationshipMod.ClientID%>").val();
                 var baselineHivStatusId = $("#<%=bHivStatusMod.ClientID%>").val();
                 var baselineHivStatusDate = $("#<%=bHivStatusDateMod.ClientID%>").val();
@@ -1100,6 +1128,7 @@
                         dataType: "json",
                         success: function (response) {
                             toastr.success(response.d, "Family testing updated successfully");
+                            setTimeout(function () { window.location.href = '<%=ResolveClientUrl("~/CCC/OneTimeEvents/FamilyTesting.aspx") %>'; }, 2500);
                         },
                         error: function (response) {
                             toastr.error(response.d, "Family testing not updated");
@@ -1154,11 +1183,17 @@
         function CccEnabled() {
             var testingResult = $("#hivtestingresult :selected").text();
 
-            if ((testingResult === "Tested Negative" || testingResult == "Never Tested")) {
+            if ((testingResult === "Tested Negative")) {
                 $("#<%=cccNumber.ClientID%>").prop('disabled',true);
                 $("#<%=CccReferal.ClientID%>").val();
                 $("#<%=CccReferal.ClientID%>").prop('disabled', true);
                 $("#CCCReferalDate").prop('disabled', true);
+            } else if (testingResult == "Never Tested") {
+                $("#<%=cccNumber.ClientID%>").prop('disabled', true);
+                $("#<%=CccReferal.ClientID%>").val();
+                $("#<%=CccReferal.ClientID%>").prop('disabled', true);
+                $("#CCCReferalDate").prop('disabled', true);
+                $("#HIVTestingDate").prop('disabled', true);
             }
             else if ($("#CccReferal").val() === 'False') {
                 $("#<%=cccNumber.ClientID%>").prop('disabled', true);
@@ -1244,7 +1279,7 @@
         function CccEnabledMod() {
             var testingStatusMod = $("#testingStatusMod :selected").text();
 
-            if ((testingStatusMod === "Tested Negative")) {
+            if ((testingStatusMod === "Tested Negative") || (testingStatusMod === "Never Tested")) {
                 $("#<%=cccNumberMod.ClientID%>").prop('disabled',true);
                 $("#<%=cccReferalMod.ClientID%>").val("False");
                 $("#<%=cccReferalMod.ClientID%>").prop('disabled', true);

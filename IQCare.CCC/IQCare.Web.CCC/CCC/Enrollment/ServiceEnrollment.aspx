@@ -26,6 +26,7 @@
                                             <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
                                         <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="PersonDOB" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>        
+                                        <asp:HiddenField ID="dobPrecision" runat="server" ClientIDMode="Static" />
                                     </div>
                                 </div>
                             </div>
@@ -268,60 +269,8 @@
 
                 var nationalId = $("#NationalId").val();
                 var patientType = $("#PatientType").val();
-                var dobPrecision = '<%=Session["DobPrecision"]%>';
-
-                if (nationalId == null || nationalId == '') {
-                    nationalId = 99999999;
-                }
-
-                var fields = getDynamicFields();
-                var prefix = null;
-                var mflCode = code;
-                var fieldName = null;
-                var identifiers = {};
-                $.each(fields, function (index, value) {
-                    fieldName = $("#" + value.Code).val();
-                    if (value.Prefix != null) {
-                        prefix = $("#" + value.Prefix).val();
-                        fieldName = prefix + "-" + fieldName;
-                    }
-                    identifiers[value.ID] = fieldName;
-                });
-
-                if (patType == "Transit" && (code == prefix)) {
-                    toastr.error("You selected the home facility for a transit patient", "Patient Enrollment");
-                    return false;
-                }
-
-                addPatientRegister(entryPointId, enrollmentDate, personDateOfBirth, nationalId, patientType, mflCode, dobPrecision, JSON.stringify(identifiers));
-            });
-
-            $("#btnEnroll").click(function (e) {
-                $('#enrollmentTab').parsley().destroy();
-                $('#enrollmentTab').parsley({
-                    excluded:
-                        "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
-                });
-
-                if (!$('#enrollmentTab').parsley().validate()) {
-                    return false;
-                }
-
-                var enrollmentDate = $('#DateOfEnrollment').val();
-                var personDateOfBirth = $("#PersonDOB").val();
-
-                var entryPointId = $("#entryPoint").val();
-
-                var isEnrollmentDateBeforeDob = moment(moment(moment(enrollmentDate, 'DD-MMM-YYYYY').toDate()).format('DD-MMM-YYYY')).isBefore(moment(moment(personDateOfBirth, 'DD-MMM-YYYYY').toDate()).format('DD-MMM-YYYY'));
-
-                if (isEnrollmentDateBeforeDob) {
-                    toastr.error("Enrollment Date should not be before date of birth", "Patient Enrollment");
-                    return false;
-                }
-                
-                var nationalId = $("#NationalId").val();
-                var patientType = $("#PatientType").val();
-                var dobPrecision = '<%=Session["DobPrecision"]%>';
+                <%--var dobPrecision = '<%=Session["DobPrecision"]%>';--%>
+                var dobPrecision = $("#<%=dobPrecision.ClientID%>").val();
 
                 if (nationalId == null || nationalId == '') {
                     nationalId = 99999999;
@@ -350,12 +299,73 @@
                 var resultReConfirmatoryTest = $("#ResultReConfirmatoryTest").val();
                 var reConfirmatoryTestDate = $("#ReConfirmatoryTestDate").val();
 
-                $.when(addReconfirmatoryTest(reconfirmatoryTest, resultReConfirmatoryTest, reConfirmatoryTestDate))
-                    .then(function() {
-                        setTimeout(function() {
-                            addPatient(entryPointId, enrollmentDate, personDateOfBirth, nationalId, patientType, mflCode, dobPrecision, JSON.stringify(identifiers));
-                        }, 2000);
-                    });      
+                if (patType == "New") {
+                    $.when(addReconfirmatoryTest(reconfirmatoryTest, resultReConfirmatoryTest, reConfirmatoryTestDate)).then(function () { setTimeout(function () { addPatientRegister(entryPointId, enrollmentDate, personDateOfBirth, nationalId, patientType, mflCode, dobPrecision, JSON.stringify(identifiers)); }, 1000); });
+                } else {
+                    addPatientRegister(entryPointId, enrollmentDate,personDateOfBirth,nationalId,patientType,mflCode,dobPrecision,JSON.stringify(identifiers));
+                }
+            });
+
+            $("#btnEnroll").click(function (e) {
+                $('#enrollmentTab').parsley().destroy();
+                $('#enrollmentTab').parsley({
+                    excluded:
+                        "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
+                });
+
+                if (!$('#enrollmentTab').parsley().validate()) {
+                    return false;
+                }
+
+                var enrollmentDate = $('#DateOfEnrollment').val();
+                var personDateOfBirth = $("#PersonDOB").val();
+
+                var entryPointId = $("#entryPoint").val();
+
+                var isEnrollmentDateBeforeDob = moment(moment(moment(enrollmentDate, 'DD-MMM-YYYYY').toDate()).format('DD-MMM-YYYY')).isBefore(moment(moment(personDateOfBirth, 'DD-MMM-YYYYY').toDate()).format('DD-MMM-YYYY'));
+
+                if (isEnrollmentDateBeforeDob) {
+                    toastr.error("Enrollment Date should not be before date of birth", "Patient Enrollment");
+                    return false;
+                }
+                
+                var nationalId = $("#NationalId").val();
+                var patientType = $("#PatientType").val();
+                <%--var dobPrecision = '<%=Session["DobPrecision"]%>';--%>
+                var dobPrecision = $("#<%=dobPrecision.ClientID%>").val();
+
+                if (nationalId == null || nationalId == '') {
+                    nationalId = 99999999;
+                }
+
+                var fields = getDynamicFields();
+                var prefix = null;
+                var mflCode = code;
+                var fieldName = null;
+                var identifiers = {};
+                $.each(fields, function (index, value) {
+                    fieldName = $("#" + value.Code).val();
+                    if (value.Prefix != null) {
+                        prefix = $("#" + value.Prefix).val();
+                        fieldName = prefix + "-" + fieldName;
+                    }
+                    identifiers[value.ID] = fieldName;
+                });
+
+                if (patType == "Transit" && (code == prefix)) {
+                    toastr.error("You selected the home facility for a transit patient", "Patient Enrollment");
+                    return false;
+                }
+
+                var reconfirmatoryTest = $("#ReconfirmatoryTest").val();
+                var resultReConfirmatoryTest = $("#ResultReConfirmatoryTest").val();
+                var reConfirmatoryTestDate = $("#ReConfirmatoryTestDate").val();
+
+                if (patType == "New") {
+                    $.when(addReconfirmatoryTest(reconfirmatoryTest, resultReConfirmatoryTest, reConfirmatoryTestDate)).then(function() { setTimeout(function() { addPatient(entryPointId, enrollmentDate, personDateOfBirth, nationalId, patientType, mflCode, dobPrecision, JSON.stringify(identifiers)); }, 1000); });
+                } else {
+                    addPatient(entryPointId,enrollmentDate,personDateOfBirth,nationalId,patientType,mflCode,dobPrecision,JSON.stringify(identifiers));
+                }
             });
 
             function addPatientRegister(entryPointId, enrollmentDate, personDateOfBirth, nationalId, patientType, mflCode, dobPrecision, identifiers) {
@@ -601,6 +611,7 @@
                         //console.log(messageResponse);
                         if (messageResponse.DOB != null) {
                             $("#PersonDOB").val(messageResponse.DOB);
+                            $("#<%=dobPrecision.ClientID%>").val(messageResponse.DobPrecision);
                             $("#PersonDOB").prop('disabled', true);
                         }
 

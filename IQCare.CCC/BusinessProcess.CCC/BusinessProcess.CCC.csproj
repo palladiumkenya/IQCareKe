@@ -78,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="assessment\BPatientPsychosocialCriteriaManager.cs" />
+    <Compile Include="assessment\BPatientSupportCriteriaManager.cs" />
     <Compile Include="assessment\BPatientSupportSystemCriteriaManager.cs" />
     <Compile Include="Baseline\BINHProphylaxis.cs" />
     <Compile Include="Baseline\BPatientBaselineAssessmentManager.cs" />
