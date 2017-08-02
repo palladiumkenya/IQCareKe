@@ -13,12 +13,12 @@
 					  </div>
                     <div class="col-md-4 col-xs-4 col-sm-4" style="padding-left: 1%; padding-right: 1px;">
                           <div class="col-md-12 pull-left">
-                              <h2 class="pull-left">
-                                  <asp:Label runat="server" ID="lblPatientNames" CssClass="text-info"> #PatientNames</asp:Label>
-                              </h2>
                               <h3 class="pull-left">
-                                  <asp:Label runat="server"  ID="lblCCCRegNo"></asp:Label>
+                                  <asp:Label runat="server" ID="lblPatientNames" CssClass="text-info"> #PatientNames</asp:Label>
                               </h3>
+                              <h4 class="pull-left">
+                                  <asp:Label runat="server"  ID="lblCCCRegNo"></asp:Label>
+                              </h4>
                           </div> 
                            
                           <div class="col-md-12 col-xs-12 col-sm-12" style="padding-top: 0%">

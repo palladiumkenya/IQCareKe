@@ -55,7 +55,14 @@
                         </div>
                         
                         <div class="col-md-12">
-                            <div class="col-md-5">
+                            <div class="col-md-3">
+                                <div class="col-md-12"><label class="required control-label pull-left">Type of Test</label></div>
+                                <div class="col-md-12 form-group">
+                                    <asp:DropDownList ID="TypeOfReConfirmatoryTest" runat="server" ClientIDMode="Static" CssClass="form-control input-sm"></asp:DropDownList>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
                                 <div class="col-md-12"><label class="required control-label pull-left">Result of ReConfirmatory Test</label></div>
 
                                 <div class="col-md-12 form-group">
@@ -63,7 +70,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-5">
+                            <div class="col-md-3">
                                 <div class="col-md-12"><label class="required control-label pull-left">Date of ReConfirmatory Test</label></div>
 
                                 <div class="col-md-12 form-group">
@@ -197,6 +204,29 @@
                 } else {
                     $("#OtherSpecificEntryPoint").hide();
                 }
+            });
+
+            $("#DateOfEnrollmentdatepicker").on('dp.change', function(e) {
+                var formatedValue = e.date.format(e.date._f);
+                //console.log(formatedValue);
+
+                var reconfirmationTest = $("#ReConfirmatoryTestDate").val();
+
+                reconfirmationTest = moment(reconfirmationTest);
+
+                if (moment('' + formatedValue + '').isAfter()) {
+                    toastr.error("Enrollment Date. Future dates not allowed.", "Patient Enrollment");
+                    $("#DateOfEnrollment").val("");
+                    return false;
+                }
+
+                var isBeforeReconfirmationDate = moment(reconfirmationTest).isBefore(formatedValue);
+                if (!isBeforeReconfirmationDate) {
+                    toastr.error("Enrollment date should not be before Reconfirmation Test Date", "Patient Enrollment");
+                    $("#DateOfEnrollment").val("");
+                    return false;
+                }
+
             });
 
             
