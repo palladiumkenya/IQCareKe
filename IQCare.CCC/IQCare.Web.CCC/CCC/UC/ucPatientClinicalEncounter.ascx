@@ -383,7 +383,7 @@
                                         <div class="col-md-12 form-group">
                                             <div class="col-md-4">
                                                 <div class="col-md-12">
-                                                    <label class="control-label pull-left">On Anti TB drugs?</label>
+                                                    <label class="control-label pull-left  text-primary">Currently on Anti TB drugs?</label>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="tbInfected" ClientIDMode="Static" onChange="tbInfectedChange();" required="true" data-parsley-required="true">
@@ -395,7 +395,7 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="col-md-12">
-                                                    <label class="control-label pull-left">Currently on IPT?</label>
+                                                    <label class="control-label pull-left  text-primary">Currently on IPT?</label>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="onIpt" ClientIDMode="Static" onChange="onIptChange();" required="false" data-parsley-required="false">
@@ -407,10 +407,10 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="col-md-12">
-                                                    <label class="control-label pull-left">Ever been on IPT?</label>
+                                                    <label class="control-label pull-left  text-primary">Ever been on IPT?</label>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="EverBeenOnIpt" ClientIDMode="Static" onChange="EverBeenOnIptChange();"  required="true" data-parsley-required="true">
+                                                    <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="EverBeenOnIpt" ClientIDMode="Static" onChange="EverBeenOnIptChange();" required="true" data-parsley-required="true">
                                                         <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
                                                         <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
                                                         <asp:ListItem Text="No" Value="False"></asp:ListItem>
@@ -574,13 +574,13 @@
 
                                         <div class="col-md-12 form-group">
                                             <div class="col-md-4">
-                                                <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddIptWorkUp" data-toggle="modal" data-target="#IptClientWorkupModal"> IPT Client Workup</button>
+                                                <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddIptWorkUp" data-toggle="modal" data-target="#IptClientWorkupModal">IPT Client Workup</button>
                                             </div>
                                             <div class="col-md-4">
-                                                <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddIpt" data-toggle="modal" data-target="#IptDetailsModal"> IPT Follow Up</button>
+                                                <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddIpt" data-toggle="modal" data-target="#IptDetailsModal">IPT Follow Up</button>
                                             </div>
                                             <div class="col-md-4">
-                                                <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddIptOutcome" data-toggle="modal" data-target="#IptOutcomeModal"> IPT Outcome</button>
+                                                <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddIptOutcome" data-toggle="modal" data-target="#IptOutcomeModal">IPT Outcome</button>
                                             </div>
                                         </div>
 
@@ -1344,66 +1344,88 @@
                                 <hr />
                             </div>
 
-                            <div class="col-md-12 form-group">
-                                <div class="col-md-3 form-group">
-                                    <div class="col-md-12">
-                                        <label for="ChronicIllnessName" class="control-label pull-left">Review of Systems</label>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <asp:DropDownList runat="server" ID="ddlExaminationType" CssClass="form-control input-sm" ClientIDMode="Static" onchange="loadSystemReviews();" />
-                                    </div>
-                                </div>
 
-                                <div class="col-md-3 form-group">
-                                    <div class="col-md-12">
-                                        <label class="control-label pull-left">Findings</label>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <asp:DropDownList runat="server" ID="ddlExamination" CssClass="form-control input-sm" ClientIDMode="Static" />
-                                    </div>
-                                </div>
 
-                                <div class="col-md-5 form-group">
-                                    <div class="col-md-12">
-                                        <label class="control-label pull-left">Findings Notes..</label>
-                                    </div>
-                                    <div class="col-md-12">
+                            <div class="panel panel-info">
+                                <div class="panel-body" >
+                                    <div class="col-md-12 form-group">
+                                        <div>
+                                            <label class="control-label  pull-left text-primary">*Are all systems okay</label>
+                                        </div>
 
-                                        <asp:TextBox runat="server" ID="txtExamFindings" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="Findings.." Rows="3" TextMode="MultiLine"></asp:TextBox>
-                                    </div>
-                                </div>
+                                        <div>
+                                            <label class="pull-left" style="padding-right: 10px">
+                                                <input id="systemsOkYes" type="radio" name="systemsOkay" value="1" clientidmode="Static" runat="server" onclick="showHideSystemsOkayDivs();" />Yes
+                                            </label>
+                                            <label class="pull-left" style="padding-right: 10px">
+                                                <input id="systemsOkNo" type="radio" name="systemsOkay" value="0" clientidmode="Static" runat="server" data-parsley-required="true" onclick="showHideSystemsOkayDivs();" />No
+                                            </label>
 
-                                <div class="col-md-1">
-                                    <div class="col-md-12">
-                                        <label class="control-label pull-left"><span class="fa fa-cog">Action</span></label>
+                                        </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddPhysicalExam" onclick="AddPhysicalExam();">Add</button>
+                                    <div class="col-md-12 form-group" id="systemsOkayCtrls" clientidmode="Static">
+                                    <div class="col-md-12 form-group">
+                                        <div class="col-md-3 form-group">
+                                            <div class="col-md-12">
+                                                <label for="ChronicIllnessName" class="control-label pull-left">Review of Systems</label>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <asp:DropDownList runat="server" ID="ddlExaminationType" CssClass="form-control input-sm" ClientIDMode="Static" onchange="loadSystemReviews();" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3 form-group">
+                                            <div class="col-md-12">
+                                                <label class="control-label pull-left">Findings</label>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <asp:DropDownList runat="server" ID="ddlExamination" CssClass="form-control input-sm" ClientIDMode="Static" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-5 form-group">
+                                            <div class="col-md-12">
+                                                <label class="control-label pull-left">Findings Notes..</label>
+                                            </div>
+                                            <div class="col-md-12">
+
+                                                <asp:TextBox runat="server" ID="txtExamFindings" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="Findings.." Rows="3" TextMode="MultiLine"></asp:TextBox>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-1">
+                                            <div class="col-md-12">
+                                                <label class="control-label pull-left"><span class="fa fa-cog">Action</span></label>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddPhysicalExam" onclick="AddPhysicalExam();">Add</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 form-group">
+                                        <div class="panel panel-primary">
+                                            <div class="panel-heading">Patient Examination</div>
+                                            <div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden;">
+                                                <table id="dtlPhysicalExam" class="table table-bordered table-striped" width="100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th><span class="text-primary">ExaminationTypeID</span></th>
+                                                            <th><span class="text-primary">ExaminationID</span></th>
+                                                            <th><span class="text-primary">Review of systems</span></th>
+                                                            <th><span class="text-primary">Findings</span></th>
+                                                            <th><span class="text-primary">Findings</span></th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                    </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="col-md-12 form-group">
-                                <div class="panel panel-primary">
-                                    <div class="panel-heading">Patient Examination</div>
-                                    <div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden;">
-                                        <table id="dtlPhysicalExam" class="table table-bordered table-striped" width="100%">
-                                            <thead>
-                                                <tr>
-                                                    <th><span class="text-primary">ExaminationTypeID</span></th>
-                                                    <th><span class="text-primary">ExaminationID</span></th>
-                                                    <th><span class="text-primary">Review of systems</span></th>
-                                                    <th><span class="text-primary">Findings</span></th>
-                                                    <th><span class="text-primary">Findings</span></th>
-                                                    <th></th>
-                                                </tr>
-                                            </thead>
-                                        </table>
-
-                                    </div>
-                                </div>
-                            </div>
-
                         </div>
                     </div>
 
@@ -1542,12 +1564,12 @@
                             </div>
 
                         </div>
-                        
+
                         <div class="col-md-12">
                             <div class="col-md-2">
                                 <button type="button" class="btn btn-info btn-sm pull-left" data-toggle="modal" data-target="#differentiatedModal">Stability Assessment</button>
                             </div>
-                            
+
                             <div class="col-md-5">
                                 <div class="col-md-12 form-group">
                                     <div class="col-md-6">
@@ -1677,170 +1699,178 @@
                             </div>
 
                         </div>
-                        
+
                         <div id="differentiatedModal" class="modal fade" role="dialog" data-parsley-validate="true" data-show-errors="true">
                             <div class="modal-dialog" style="width: 80%">
                                 <!-- Modal content-->
                                 <div class="modal-content">
                                     <div class="modal-body">
-                                    <div class="row">
-                                        <div id="Categorization"  data-parsley-validate="true" data-show-errors="true">
-                                            <div class="col-md-12 col-xs-12 col-sm-12">
-                                                <div class="col-md-12">
-                                                    <hr style="margin-top: 1%" class="bg-info" />
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="col-md-8">
-                                                        <label class="control-lable pull-left">On their current ART regimen for ≥ 12 months</label></div>
-                                                    <div class="col-md-4">
-                                                        <div class="col-md-12">
-                                                            <label class="pull-left" style="padding-right: 10px">
-                                                                <input id="ArtRegimenYes" type="radio" name="ArtRegimenPeriod" value="true" clientidmode="Static" runat="server" />Yes
-                                                            </label>
-                                                            <label class="pull-left" style="padding-right: 10px">
-                                                                <input id="ArtRegimenNo" type="radio" name="ArtRegimenPeriod" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-12">
-                                                    <hr>
-                                                </div>
-
-                                                <div class="col-md-12">
-                                                    <div class="col-md-8">
-                                                        <label class="control-lable pull-left">No active OIs (including TB) in the previous 6 months</label></div>
-                                                    <div class="col-md-4">
-                                                        <div class="col-md-12">
-                                                            <label class="pull-left" style="padding-right: 10px">
-                                                                <input id="OiYes" type="radio" name="ActiveOis" value="true" clientidmode="Static" runat="server" />Yes
-                                                            </label>
-                                                            <label class="pull-left" style="padding-right: 10px">
-                                                                <input id="OiNo" type="radio" name="ActiveOis" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <hr>
-                                                </div>
-
-                                                <div class="col-md-12">
-                                                    <div class="col-md-8">
-                                                        <label class="control-lable pull-left">Adherent to scheduled clinic visits for the previous 6 months</label></div>
-                                                    <div class="col-md-4">
-                                                        <div class="col-md-12">
-                                                            <label class="pull-left" style="padding-right: 10px">
-                                                                <input id="VisitsAdherantYes" type="radio" name="VisitsAdherant" value="true" clientidmode="Static" runat="server" />Yes
-                                                            </label>
-                                                            <label class="pull-left" style="padding-right: 10px">
-                                                                <input id="VisitsAdherantNo" type="radio" name="VisitsAdherant" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <hr>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="col-md-8">
-                                                        <label class="control-lable pull-left">Most recent VL < 1,000 copies/ml</label></div>
-                                                    <div class="col-md-4">
-                                                        <div class="col-md-12">
-                                                            <label class="pull-left" style="padding-right: 10px">
-                                                                <input id="VlCopiesYes" type="radio" name="VlCopies" value="true" clientidmode="Static" runat="server" />Yes
-                                                            </label>
-                                                            <label class="pull-left" style="padding-right: 10px">
-                                                                <input id="VlCopiesNo" type="radio" name="VlCopies" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <hr>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="col-md-8">
-                                                        <label class="control-lable pull-left">Has completed 6 months of IPT</label></div>
-                                                    <div class="col-md-4">
-                                                        <div class="col-md-12">
-                                                            <label class="pull-left" style="padding-right: 10px">
-                                                                <input id="IptYes" type="radio" name="Ipt" value="true" clientidmode="Static" runat="server" />Yes
-                                                            </label>
-                                                            <label class="pull-left" style="padding-right: 10px">
-                                                                <input id="IptNo" type="radio" name="Ipt" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <hr>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="col-md-8">
-                                                        <label class="control-lable pull-left">BMI ≥ 18.5</label></div>
-                                                    <div class="col-md-4">
-                                                        <div class="col-md-12">
-                                                            <label class="pull-left" style="padding-right: 10px">
-                                                                <input id="BmiYes" type="radio" name="Bmi" value="true" clientidmode="Static" runat="server" />Yes
-                                                            </label>
-                                                            <label class="pull-left" style="padding-right: 10px">
-                                                                <input id="BmiNo" type="radio" name="Bmi" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <hr>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="col-md-8">
-                                                        <label class="control-lable pull-left">Age ≥ 20 years</label></div>
-                                                    <div class="col-md-4">
-                                                        <div class="col-md-12">
-                                                            <label class="pull-left" style="padding-right: 10px">
-                                                                <input id="AgeYes" type="radio" name="Age" value="true" clientidmode="Static" runat="server" />Yes
-                                                            </label>
-                                                            <label class="pull-left" style="padding-right: 10px">
-                                                                <input id="AgeNo" type="radio" name="Age" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <hr>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="col-md-8">
-                                                        <label class="control-lable pull-left">Healthcare team does not have concerns about providing longer follow-up intervals for the patient</label></div>
-                                                    <div class="col-md-4">
-                                                        <div class="col-md-12">
-                                                            <label class="pull-left" style="padding-right: 10px">
-                                                                <input id="HealthcareConcernsYes" type="radio" name="HealthcareConcerns" value="true" clientidmode="Static" runat="server" />Yes
-                                                            </label>
-                                                            <label class="pull-left" style="padding-right: 10px">
-                                                                <input id="HealthcareConcernsNo" type="radio" name="HealthcareConcerns" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <hr>
-                                                </div>
-                                                <div class="col-md-12">
+                                        <div class="row">
+                                            <div id="Categorization" data-parsley-validate="true" data-show-errors="true">
+                                                <div class="col-md-12 col-xs-12 col-sm-12">
                                                     <div class="col-md-12">
-                                                        <asp:LinkButton runat="server" ID="btnSaveCategorization" CssClass="btn btn-info" ClientIDMode="Static" OnClientClick="return false;">Update Categorization</asp:LinkButton>
+                                                        <hr style="margin-top: 1%" class="bg-info" />
                                                     </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <hr>
+                                                    <div class="col-md-12">
+                                                        <div class="col-md-8">
+                                                            <label class="control-lable pull-left">On their current ART regimen for ≥ 12 months</label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="col-md-12">
+                                                                <label class="pull-left" style="padding-right: 10px">
+                                                                    <input id="ArtRegimenYes" type="radio" name="ArtRegimenPeriod" value="true" clientidmode="Static" runat="server" />Yes
+                                                                </label>
+                                                                <label class="pull-left" style="padding-right: 10px">
+                                                                    <input id="ArtRegimenNo" type="radio" name="ArtRegimenPeriod" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-12">
+                                                        <hr>
+                                                    </div>
+
+                                                    <div class="col-md-12">
+                                                        <div class="col-md-8">
+                                                            <label class="control-lable pull-left">No active OIs (including TB) in the previous 6 months</label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="col-md-12">
+                                                                <label class="pull-left" style="padding-right: 10px">
+                                                                    <input id="OiYes" type="radio" name="ActiveOis" value="true" clientidmode="Static" runat="server" />Yes
+                                                                </label>
+                                                                <label class="pull-left" style="padding-right: 10px">
+                                                                    <input id="OiNo" type="radio" name="ActiveOis" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <hr>
+                                                    </div>
+
+                                                    <div class="col-md-12">
+                                                        <div class="col-md-8">
+                                                            <label class="control-lable pull-left">Adherent to scheduled clinic visits for the previous 6 months</label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="col-md-12">
+                                                                <label class="pull-left" style="padding-right: 10px">
+                                                                    <input id="VisitsAdherantYes" type="radio" name="VisitsAdherant" value="true" clientidmode="Static" runat="server" />Yes
+                                                                </label>
+                                                                <label class="pull-left" style="padding-right: 10px">
+                                                                    <input id="VisitsAdherantNo" type="radio" name="VisitsAdherant" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <hr>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="col-md-8">
+                                                            <label class="control-lable pull-left">Most recent VL < 1,000 copies/ml</label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="col-md-12">
+                                                                <label class="pull-left" style="padding-right: 10px">
+                                                                    <input id="VlCopiesYes" type="radio" name="VlCopies" value="true" clientidmode="Static" runat="server" />Yes
+                                                                </label>
+                                                                <label class="pull-left" style="padding-right: 10px">
+                                                                    <input id="VlCopiesNo" type="radio" name="VlCopies" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <hr>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="col-md-8">
+                                                            <label class="control-lable pull-left">Has completed 6 months of IPT</label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="col-md-12">
+                                                                <label class="pull-left" style="padding-right: 10px">
+                                                                    <input id="IptYes" type="radio" name="Ipt" value="true" clientidmode="Static" runat="server" />Yes
+                                                                </label>
+                                                                <label class="pull-left" style="padding-right: 10px">
+                                                                    <input id="IptNo" type="radio" name="Ipt" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <hr>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="col-md-8">
+                                                            <label class="control-lable pull-left">BMI ≥ 18.5</label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="col-md-12">
+                                                                <label class="pull-left" style="padding-right: 10px">
+                                                                    <input id="BmiYes" type="radio" name="Bmi" value="true" clientidmode="Static" runat="server" />Yes
+                                                                </label>
+                                                                <label class="pull-left" style="padding-right: 10px">
+                                                                    <input id="BmiNo" type="radio" name="Bmi" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <hr>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="col-md-8">
+                                                            <label class="control-lable pull-left">Age ≥ 20 years</label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="col-md-12">
+                                                                <label class="pull-left" style="padding-right: 10px">
+                                                                    <input id="AgeYes" type="radio" name="Age" value="true" clientidmode="Static" runat="server" />Yes
+                                                                </label>
+                                                                <label class="pull-left" style="padding-right: 10px">
+                                                                    <input id="AgeNo" type="radio" name="Age" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <hr>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="col-md-8">
+                                                            <label class="control-lable pull-left">Healthcare team does not have concerns about providing longer follow-up intervals for the patient</label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="col-md-12">
+                                                                <label class="pull-left" style="padding-right: 10px">
+                                                                    <input id="HealthcareConcernsYes" type="radio" name="HealthcareConcerns" value="true" clientidmode="Static" runat="server" />Yes
+                                                                </label>
+                                                                <label class="pull-left" style="padding-right: 10px">
+                                                                    <input id="HealthcareConcernsNo" type="radio" name="HealthcareConcerns" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <hr>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="col-md-12">
+                                                            <asp:LinkButton runat="server" ID="btnSaveCategorization" CssClass="btn btn-info" ClientIDMode="Static" OnClientClick="return false;">Update Categorization</asp:LinkButton>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <hr>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                             </div>
                         </div>
 
@@ -1882,100 +1912,99 @@
                                 <div class="col-md-12 form-group">
                                     <label class="control-label pull-left">Schedule Appointment</label>
                                 </div>
-                                   <div class="col-md-12 form-group">
-                                        <div class="col-md-12">
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <div class="col-md-12">
-                                                        <label class="control-label pull-left">Date</label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <div class="datepicker fuelux form-group" id="PersonAppointmentDate">
-                                                            <div class="input-group">
-                                                                <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="AppointmentDate"></asp:TextBox>
-                                                                <div class="input-group-btn">
-                                                                    <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
-                                                                        <span class="glyphicon glyphicon-calendar"></span>
-                                                                        <span class="sr-only">Toggle Calendar</span>
-                                                                    </button>
-                                                                    <div class="dropdown-menu dropdown-menu-right datepicker-calendar-wrapper" role="menu">
-                                                                        <div class="datepicker-calendar">
-                                                                            <div class="datepicker-calendar-header">
-                                                                                <button type="button" class="prev"><span class="glyphicon glyphicon-chevron-left input-sm"></span><span class="sr-only">Previous Month</span></button>
-                                                                                <button type="button" class="next"><span class="glyphicon glyphicon-chevron-right input-sm"></span><span class="sr-only">Next Month</span></button>
-                                                                                <button type="button" class="title" data-month="11" data-year="2014">
-                                                                                    <span class="month">
-                                                                                        <span data-month="0">January</span>
-                                                                                        <span data-month="1">February</span>
-                                                                                        <span data-month="2">March</span>
-                                                                                        <span data-month="3">April</span>
-                                                                                        <span data-month="4">May</span>
-                                                                                        <span data-month="5">June</span>
-                                                                                        <span data-month="6">July</span>
-                                                                                        <span data-month="7">August</span>
-                                                                                        <span data-month="8">September</span>
-                                                                                        <span data-month="9">October</span>
-                                                                                        <span data-month="10">November</span>
-                                                                                        <span data-month="11" class="current">December</span>
-                                                                                    </span><span class="year">2017</span>
-                                                                                </button>
-                                                                            </div>
-                                                                            <table class="datepicker-calendar-days">
-                                                                                <thead>
-                                                                                    <tr>
-                                                                                        <th>Su</th>
-                                                                                        <th>Mo</th>
-                                                                                        <th>Tu</th>
-                                                                                        <th>We</th>
-                                                                                        <th>Th</th>
-                                                                                        <th>Fr</th>
-                                                                                        <th>Sa</th>
-                                                                                    </tr>
-                                                                                </thead>
-                                                                                <tbody></tbody>
-                                                                            </table>
-                                                                            <div class="datepicker-calendar-footer">
-                                                                                <button type="button" class="datepicker-today">Today</button>
-                                                                            </div>
+                                <div class="col-md-12 form-group">
+                                    <div class="col-md-12">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <div class="col-md-12">
+                                                    <label class="control-label pull-left">Date</label>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="datepicker fuelux form-group" id="PersonAppointmentDate">
+                                                        <div class="input-group">
+                                                            <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="AppointmentDate"></asp:TextBox>
+                                                            <div class="input-group-btn">
+                                                                <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
+                                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                                    <span class="sr-only">Toggle Calendar</span>
+                                                                </button>
+                                                                <div class="dropdown-menu dropdown-menu-right datepicker-calendar-wrapper" role="menu">
+                                                                    <div class="datepicker-calendar">
+                                                                        <div class="datepicker-calendar-header">
+                                                                            <button type="button" class="prev"><span class="glyphicon glyphicon-chevron-left input-sm"></span><span class="sr-only">Previous Month</span></button>
+                                                                            <button type="button" class="next"><span class="glyphicon glyphicon-chevron-right input-sm"></span><span class="sr-only">Next Month</span></button>
+                                                                            <button type="button" class="title" data-month="11" data-year="2014">
+                                                                                <span class="month">
+                                                                                    <span data-month="0">January</span>
+                                                                                    <span data-month="1">February</span>
+                                                                                    <span data-month="2">March</span>
+                                                                                    <span data-month="3">April</span>
+                                                                                    <span data-month="4">May</span>
+                                                                                    <span data-month="5">June</span>
+                                                                                    <span data-month="6">July</span>
+                                                                                    <span data-month="7">August</span>
+                                                                                    <span data-month="8">September</span>
+                                                                                    <span data-month="9">October</span>
+                                                                                    <span data-month="10">November</span>
+                                                                                    <span data-month="11" class="current">December</span>
+                                                                                </span><span class="year">2017</span>
+                                                                            </button>
                                                                         </div>
-                                                                        <div class="datepicker-wheels" aria-hidden="true">
-                                                                            <div class="datepicker-wheels-month">
-                                                                                <h2 class="header">Month</h2>
-                                                                                <ul>
-                                                                                    <li data-month="0">
-                                                                                        <button type="button">Jan</button></li>
-                                                                                    <li data-month="1">
-                                                                                        <button type="button">Feb</button></li>
-                                                                                    <li data-month="2">
-                                                                                        <button type="button">Mar</button></li>
-                                                                                    <li data-month="3">
-                                                                                        <button type="button">Apr</button></li>
-                                                                                    <li data-month="4">
-                                                                                        <button type="button">May</button></li>
-                                                                                    <li data-month="5">
-                                                                                        <button type="button">Jun</button></li>
-                                                                                    <li data-month="6">
-                                                                                        <button type="button">Jul</button></li>
-                                                                                    <li data-month="7">
-                                                                                        <button type="button">Aug</button></li>
-                                                                                    <li data-month="8">
-                                                                                        <button type="button">Sep</button></li>
-                                                                                    <li data-month="9">
-                                                                                        <button type="button">Oct</button></li>
-                                                                                    <li data-month="10">
-                                                                                        <button type="button">Nov</button></li>
-                                                                                    <li data-month="11">
-                                                                                        <button type="button">Dec</button></li>
-                                                                                </ul>
-                                                                            </div>
-                                                                            <div class="datepicker-wheels-year">
-                                                                                <h2 class="header">Year</h2>
-                                                                                <ul></ul>
-                                                                            </div>
-                                                                            <div class="datepicker-wheels-footer clearfix">
-                                                                                <button type="button" class="btn datepicker-wheels-back"><span class="glyphicon glyphicon-arrow-left"></span><span class="sr-only">Return to Calendar</span></button>
-                                                                                <button type="button" class="btn datepicker-wheels-select">Select <span class="sr-only">Month and Year</span></button>
-                                                                            </div>
+                                                                        <table class="datepicker-calendar-days">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>Su</th>
+                                                                                    <th>Mo</th>
+                                                                                    <th>Tu</th>
+                                                                                    <th>We</th>
+                                                                                    <th>Th</th>
+                                                                                    <th>Fr</th>
+                                                                                    <th>Sa</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody></tbody>
+                                                                        </table>
+                                                                        <div class="datepicker-calendar-footer">
+                                                                            <button type="button" class="datepicker-today">Today</button>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="datepicker-wheels" aria-hidden="true">
+                                                                        <div class="datepicker-wheels-month">
+                                                                            <h2 class="header">Month</h2>
+                                                                            <ul>
+                                                                                <li data-month="0">
+                                                                                    <button type="button">Jan</button></li>
+                                                                                <li data-month="1">
+                                                                                    <button type="button">Feb</button></li>
+                                                                                <li data-month="2">
+                                                                                    <button type="button">Mar</button></li>
+                                                                                <li data-month="3">
+                                                                                    <button type="button">Apr</button></li>
+                                                                                <li data-month="4">
+                                                                                    <button type="button">May</button></li>
+                                                                                <li data-month="5">
+                                                                                    <button type="button">Jun</button></li>
+                                                                                <li data-month="6">
+                                                                                    <button type="button">Jul</button></li>
+                                                                                <li data-month="7">
+                                                                                    <button type="button">Aug</button></li>
+                                                                                <li data-month="8">
+                                                                                    <button type="button">Sep</button></li>
+                                                                                <li data-month="9">
+                                                                                    <button type="button">Oct</button></li>
+                                                                                <li data-month="10">
+                                                                                    <button type="button">Nov</button></li>
+                                                                                <li data-month="11">
+                                                                                    <button type="button">Dec</button></li>
+                                                                            </ul>
+                                                                        </div>
+                                                                        <div class="datepicker-wheels-year">
+                                                                            <h2 class="header">Year</h2>
+                                                                            <ul></ul>
+                                                                        </div>
+                                                                        <div class="datepicker-wheels-footer clearfix">
+                                                                            <button type="button" class="btn datepicker-wheels-back"><span class="glyphicon glyphicon-arrow-left"></span><span class="sr-only">Return to Calendar</span></button>
+                                                                            <button type="button" class="btn datepicker-wheels-select">Select <span class="sr-only">Month and Year</span></button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1984,58 +2013,59 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
-                                                <div class="col-md-12">
-                                                    <label class="control-label pull-left">Service Area</label>
-                                                </div>
-                                                <div class="col-md-12 pull-right">
-                                                    <asp:DropDownList runat="server" ID="ServiceArea" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1" data-parsley-min-message="Select the service area"/>
-                                                </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="col-md-12">
+                                                <label class="control-label pull-left">Service Area</label>
                                             </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <div class="col-md-12">
-                                                        <label for="reason" class="control-label pull-left">Reason</label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <asp:DropDownList runat="server" ID="Reason" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1" data-parsley-min-message="Select the reason" />
-                                                    </div>
-                                                </div>
+                                            <div class="col-md-12 pull-right">
+                                                <asp:DropDownList runat="server" ID="ServiceArea" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1" data-parsley-min-message="Select the service area" />
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <div class="col-md-12">
-                                                        <label for="reason" class="control-label pull-left">Differentiated Care</label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <asp:DropDownList runat="server" ID="DifferentiatedCare" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1" data-parsley-min-message="Select differentiated care"/>
-                                                    </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <div class="col-md-12">
+                                                    <label for="reason" class="control-label pull-left">Reason</label>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <div class="col-md-12">
-                                                        <label for="description" class="control-label pull-left">Description</label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <asp:TextBox runat="server" ID="description" CssClass="form-control input-sm" ClientIDMode="Static" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <div class="col-md-12">
-                                                        <label for="status" class="control-label pull-left">Status</label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <asp:DropDownList runat="server" ID="status" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1" />
-                                                    </div>
+                                                <div class="col-md-12">
+                                                    <asp:DropDownList runat="server" ID="Reason" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1" data-parsley-min-message="Select the reason" />
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-md-12">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <div class="col-md-12">
+                                                    <label for="reason" class="control-label pull-left">Differentiated Care</label>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <asp:DropDownList runat="server" ID="DifferentiatedCare" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1" data-parsley-min-message="Select differentiated care" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <div class="col-md-12">
+                                                    <label for="description" class="control-label pull-left">Description</label>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <asp:TextBox runat="server" ID="description" CssClass="form-control input-sm" ClientIDMode="Static" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <div class="col-md-12">
+                                                    <label for="status" class="control-label pull-left">Status</label>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <asp:DropDownList runat="server" ID="status" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -2093,6 +2123,7 @@
         loadAllergyReactions();
         loadDiagnosis();
         showHidePresentingComplaintsDivs();
+        showHideSystemsOkayDivs();
         showHideVisitByTS();
 
 
@@ -2595,8 +2626,11 @@
                     $("#peripheralNeoropathy").prop('required', false);
                     $("#rash").prop('required', false);
                     $("#hepatotoxicity").prop('required', false);
+                    $("#adheranceMeasurement").prop('required', false);
+
                     if (($("#cough").val() === 'True') || ($("#fever").val() === 'True') || ($("#weightLoss").val() === 'True') || ($("#nightSweats").val() === 'True')) {
                         $("#sputum").prop('required', true);
+                        $("#geneXpert").prop('required', true);
                         $("#chest").prop('required', true);
                         $("#antiTb").prop('required', true);
                         $("#contactsInvitation").prop('required', true);
@@ -2604,7 +2638,6 @@
                     }
 
                     /* add constraints based on age*/
-
                     if ($('#datastep1').parsley().validate()) {
                         addPatientIcf();
                         if (($("#cough").val() === 'True') || ($("#fever").val() === 'True') || ($("#weightLoss").val() === 'True') || ($("#nightSweats").val() === 'True')) {
@@ -2920,7 +2953,6 @@
             var patientId = <%=PatientId%>;
             var patientMasterVisitId = <%=PatientMasterVisitId%>;
             var everBeenOnIpt = $("#<%=EverBeenOnIpt.ClientID%>").val();
-            debugger;
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientTbService.asmx/AddPatientIcf",
@@ -2975,7 +3007,6 @@
             var adheranceMeasurementAction = $("#adheranceAction").val();
             var patientId = <%=PatientId%>;
             var patientMasterVisitId = <%=PatientMasterVisitId%>;
-            debugger;
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientTbService.asmx/AddIpt",
@@ -3001,7 +3032,6 @@
             var iptStartDate = moment($("#iptStartDate").val()).format('DD-MMM-YYYY');
             var patientId = <%=PatientId%>;
             var patientMasterVisitId = <%=PatientMasterVisitId%>;
-            debugger;
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientTbService.asmx/AddPatientIptWorkup",
@@ -3196,7 +3226,6 @@
             var healthcareConcerns = $("input[name$=HealthcareConcerns]:checked").val();
             var patientId = <%=PatientId%>;
             var patientMasterVisitId = <%=PatientMasterVisitId%>;
-            debugger;
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientService.asmx/AddPatientCategorization",
@@ -3352,11 +3381,20 @@
 
     function EverBeenOnIptChange() {
         if ($("#EverBeenOnIpt").val() === 'False') {
+            $("#onIpt").prop("disabled", false);
             $("#btnAddIptWorkUp").prop("disabled", false);
             $("#btnAddIptOutcome").prop("disabled", true);
+            if ($("#tbInfected").val() === 'False') {
+                $("#IptForm").show();
+            } else {
+                $("#IptForm").hide();
+            }
+
         } else {
+            $("#onIpt").prop("disabled", true);
             $("#btnAddIptWorkUp").prop("disabled", true);
-            $("#btnAddIptOutcome").prop("disabled", false);
+            $("#btnAddIptOutcome").prop("disabled", true);
+            $("#IptForm").hide();
         }
 
     }
@@ -3480,28 +3518,28 @@
         });
 
         document.getElementById('<%= txtReactionType.ClientID %>').addEventListener('awesomplete-selectcomplete', function () {
-                   var result = this.value.split("~");
-                   $("#<%=txtReactionTypeID.ClientID%>").val(result[0]);
-            $("#<%=txtReactionType.ClientID%>").val(result[1]);
-               });
+            var result = this.value.split("~");
+            $("#<%=txtReactionTypeID.ClientID%>").val(result[0]);
+                   $("#<%=txtReactionType.ClientID%>").val(result[1]);
+        });
 
-               $.ajax({
-                   type: "POST",
-                   url: "../WebService/PatientEncounterService.asmx/loadAllergyReactions",
-                   dataType: "json",
-                   contentType: "application/json; charset=utf-8",
+        $.ajax({
+            type: "POST",
+            url: "../WebService/PatientEncounterService.asmx/loadAllergyReactions",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
 
-                   success: function (data) {
-                       var serverData = data.d;
-                       var PCList = [];
+            success: function (data) {
+                var serverData = data.d;
+                var PCList = [];
 
-                       for (var i = 0; i < serverData.length; i++) {
-                           //drugList.push(serverData[i][1]);
-                           PCList.push({ label: serverData[i][1], value: serverData[i][0] });
-                       }
-                       awesomplete.list = PCList;
-                   }
-               });
+                for (var i = 0; i < serverData.length; i++) {
+                    //drugList.push(serverData[i][1]);
+                    PCList.push({ label: serverData[i][1], value: serverData[i][0] });
+                }
+                awesomplete.list = PCList;
+            }
+        });
 
     }
 
@@ -3512,28 +3550,28 @@
         });
 
         document.getElementById('<%= Diagnosis.ClientID %>').addEventListener('awesomplete-selectcomplete', function () {
-                   var result = this.value.split("~");
-                   $("#<%=txtDiagnosisID.ClientID%>").val(result[0]);
-            $("#<%=Diagnosis.ClientID%>").val(result[1]);
-               });
+            var result = this.value.split("~");
+            $("#<%=txtDiagnosisID.ClientID%>").val(result[0]);
+                   $("#<%=Diagnosis.ClientID%>").val(result[1]);
+        });
 
-               $.ajax({
-                   type: "POST",
-                   url: "../WebService/PatientEncounterService.asmx/loadDiagnosis",
-                   dataType: "json",
-                   contentType: "application/json; charset=utf-8",
+        $.ajax({
+            type: "POST",
+            url: "../WebService/PatientEncounterService.asmx/loadDiagnosis",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
 
-                   success: function (data) {
-                       var serverData = data.d;
-                       var DiagnosisList = [];
+            success: function (data) {
+                var serverData = data.d;
+                var DiagnosisList = [];
 
-                       for (var i = 0; i < serverData.length; i++) {
-                           //drugList.push(serverData[i][1]);
-                           DiagnosisList.push({ label: serverData[i][1], value: serverData[i][0] });
-                       }
-                       awesomplete.list = DiagnosisList;
-                   }
-               });
+                for (var i = 0; i < serverData.length; i++) {
+                    //drugList.push(serverData[i][1]);
+                    DiagnosisList.push({ label: serverData[i][1], value: serverData[i][0] });
+                }
+                awesomplete.list = DiagnosisList;
+            }
+        });
 
     }
 
@@ -3552,12 +3590,12 @@
                 var obj = $.parseJSON(serverData);
 
                 $("#<%=ddlExamination.ClientID%>").find('option').remove().end();
-                       $("#<%=ddlExamination.ClientID%>").append('<option value="0">Select</option>');
-                       for (var i = 0; i < obj.length; i++) {
-                           $("#<%=ddlExamination.ClientID%>").append('<option value="' + obj[i]["ItemId"] + '">' + obj[i]["DisplayName"] + '</option>');
+                $("#<%=ddlExamination.ClientID%>").append('<option value="0">Select</option>');
+                for (var i = 0; i < obj.length; i++) {
+                    $("#<%=ddlExamination.ClientID%>").append('<option value="' + obj[i]["ItemId"] + '">' + obj[i]["DisplayName"] + '</option>');
                        }
-                   }
-               });
+            }
+        });
     }
 
     function showHidePresentingComplaintsDivs() {
@@ -3571,6 +3609,16 @@
             document.getElementById('presentingComplaintsCtrls').style.display = 'none';
             document.getElementById('presentingComplaintsTable').style.display = 'none';
             document.getElementById('presentingComplaintsNotes').style.display = 'none';
+        }
+    }
+
+    function showHideSystemsOkayDivs() {
+        var systems = $("input[name$=systemsOkay]:checked").val();
+        if (systems == 1 || systems == undefined) {
+            $("#systemsOkayCtrls").hide();
+        }
+        else {
+            $("#systemsOkayCtrls").show();
         }
     }
 
@@ -3591,8 +3639,8 @@
 
     function savePatientEncounterTS() {
         var visitDate = $("#<%=VisitDate.ClientID%>").val();
-               var visitScheduled = $("input[name$=Scheduled]:checked").val();
-               var visitBy = $("#<%=ddlVisitBy.ClientID%>").find(":selected").val();
+        var visitScheduled = $("input[name$=Scheduled]:checked").val();
+        var visitBy = $("#<%=ddlVisitBy.ClientID%>").find(":selected").val();
 
                $.ajax({
                    type: "POST",
@@ -3610,28 +3658,28 @@
                                window.location
                                    .href =
                             '<%=ResolveClientUrl( "~/CCC/Patient/PatientHome.aspx")%>';
-                    },
-                        2000);
-                }
+                           },
+                               2000);
+                       }
 
-                else
+                       else
 
-                    toastr.error(response.d, "Error occured while saving Presenting Complaints");
-            },
-            error: function (response) {
+                           toastr.error(response.d, "Error occured while saving Presenting Complaints");
+                   },
+                   error: function (response) {
 
-                toastr.error(response.d, "Error occured while saving Presenting Complaints");
-            }
+                       toastr.error(response.d, "Error occured while saving Presenting Complaints");
+                   }
                });
-           }
+    }
 
 
-           function presentingComplaintsDateChange() {
-               var pcDate = $("#<%=txtPCOnsetDate.ClientID%>").val();
+    function presentingComplaintsDateChange() {
+        var pcDate = $("#<%=txtPCOnsetDate.ClientID%>").val();
                if (moment('' + pcDate + '').isAfter()) {
                    toastr.error("Presenting complaints date cannot be a future date.");
                    $("#<%=txtPCOnsetDate.ClientID%>").val("");
-            return false;
+                   return false;
                }
-           }
+    }
 </script>
