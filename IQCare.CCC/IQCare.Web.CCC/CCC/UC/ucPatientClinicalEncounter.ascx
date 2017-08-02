@@ -833,6 +833,20 @@
                                                 <asp:DropDownList runat="server" ID="ChronicIllnessName" CssClass="form-control input-sm" ClientIDMode="Static" />
                                             </div>
                                         </div>
+                                        
+                                        <div class="col-md-3 form-group">
+                                            <div class="col-md-12">
+                                                <label class="control-label pull-left">Onset Date</label>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class='input-group date' id='ChronicIllnessOnsetDate'>
+                                                    <span class="input-group-addon">
+                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                    </span>
+                                                    <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="txtOnsetDate" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
+                                                </div>
+                                            </div>
+                                        </div>
 
                                         <div class="col-md-3 form-group">
                                             <div class="col-md-12">
@@ -851,106 +865,7 @@
                                                 <asp:TextBox runat="server" ID="treatmentDose" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="dose.."></asp:TextBox>
                                             </div>
                                         </div>
-                                        <div class="col-md-3 form-group">
-                                            <div class="col-md-12">
-                                                <label class="control-label pull-left">Onset Date</label>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="col-md-12">
-                                                    <div class="datepicker fuelux" id="ChronicIllnessOnsetDate">
-                                                        <div class="input-group pull-left">
-                                                            <input class="form-control input-sm pull-left" id="txtOnsetDate" type="text" runat="server" clientidmode="Static" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')" />
-                                                            <div class="input-group-btn">
-                                                                <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
-                                                                    <span class="glyphicon glyphicon-calendar"></span>
-                                                                    <span class="sr-only">Toggle Calendar</span>
-                                                                </button>
-                                                                <div class="dropdown-menu dropdown-menu-right datepicker-calendar-wrapper" role="menu">
-                                                                    <div class="datepicker-calendar">
-                                                                        <div class="datepicker-calendar-header">
-                                                                            <button type="button" class="prev"><span class="glyphicon glyphicon-chevron-left input-sm"></span><span class="sr-only">Previous Month</span></button>
-                                                                            <button type="button" class="next"><span class="glyphicon glyphicon-chevron-right input-sm"></span><span class="sr-only">Next Month</span></button>
-                                                                            <button type="button" class="title" data-month="11" data-year="2014">
-                                                                                <span class="month">
-                                                                                    <span data-month="0">January</span>
-                                                                                    <span data-month="1">February</span>
-                                                                                    <span data-month="2">March</span>
-                                                                                    <span data-month="3">April</span>
-                                                                                    <span data-month="4">May</span>
-                                                                                    <span data-month="5">June</span>
-                                                                                    <span data-month="6">July</span>
-                                                                                    <span data-month="7">August</span>
-                                                                                    <span data-month="8">September</span>
-                                                                                    <span data-month="9">October</span>
-                                                                                    <span data-month="10">November</span>
-                                                                                    <span data-month="11" class="current">December</span>
-                                                                                </span><span class="year">2014</span>
-                                                                            </button>
-                                                                        </div>
-                                                                        <table class="datepicker-calendar-days">
-                                                                            <thead>
-                                                                                <tr>
-                                                                                    <th>Su</th>
-                                                                                    <th>Mo</th>
-                                                                                    <th>Tu</th>
-                                                                                    <th>We</th>
-                                                                                    <th>Th</th>
-                                                                                    <th>Fr</th>
-                                                                                    <th>Sa</th>
-                                                                                </tr>
-                                                                            </thead>
-                                                                            <tbody></tbody>
-                                                                        </table>
-                                                                        <div class="datepicker-calendar-footer">
-                                                                            <button type="button" class="datepicker-today">Today</button>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="datepicker-wheels" aria-hidden="true">
-                                                                        <div class="datepicker-wheels-month">
-                                                                            <h2 class="header">Month</h2>
-                                                                            <ul>
-                                                                                <li data-month="0">
-                                                                                    <button type="button">Jan</button></li>
-                                                                                <li data-month="1">
-                                                                                    <button type="button">Feb</button></li>
-                                                                                <li data-month="2">
-                                                                                    <button type="button">Mar</button></li>
-                                                                                <li data-month="3">
-                                                                                    <button type="button">Apr</button></li>
-                                                                                <li data-month="4">
-                                                                                    <button type="button">May</button></li>
-                                                                                <li data-month="5">
-                                                                                    <button type="button">Jun</button></li>
-                                                                                <li data-month="6">
-                                                                                    <button type="button">Jul</button></li>
-                                                                                <li data-month="7">
-                                                                                    <button type="button">Aug</button></li>
-                                                                                <li data-month="8">
-                                                                                    <button type="button">Sep</button></li>
-                                                                                <li data-month="9">
-                                                                                    <button type="button">Oct</button></li>
-                                                                                <li data-month="10">
-                                                                                    <button type="button">Nov</button></li>
-                                                                                <li data-month="11">
-                                                                                    <button type="button">Dec</button></li>
-                                                                            </ul>
-                                                                        </div>
-                                                                        <div class="datepicker-wheels-year">
-                                                                            <h2 class="header">Year</h2>
-                                                                            <ul></ul>
-                                                                        </div>
-                                                                        <div class="datepicker-wheels-footer clearfix">
-                                                                            <button type="button" class="btn datepicker-wheels-back"><span class="glyphicon glyphicon-arrow-left"></span><span class="sr-only">Return to Calendar</span></button>
-                                                                            <button type="button" class="btn datepicker-wheels-select">Select <span class="sr-only">Month and Year</span></button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        
 
                                         <div class="col-md-1">
                                             <div class="col-md-12">
@@ -1562,7 +1477,7 @@
 
                         <!-- Modal -->
                         <div id="adherenceAssessmentModal" class="modal fade" role="dialog" data-parsley-validate="true" data-show-errors="true">
-                            <div class="modal-dialog">
+                            <div class="modal-dialog" style="width: 70%">
                                 <!-- Modal content-->
                                 <div class="modal-content">
                                     <div class="modal-header bg-info">
@@ -1583,7 +1498,7 @@
 
                                             <div class="col-md-12 form-group">
                                                 <div class="col-md-9">
-                                                    <label class="control-label pull-left">Do you ever forget to take your medicine?</label>
+                                                    <label class="control-label pull-left">1. Do you ever forget to take your medicine?</label>
                                                 </div>
                                                 <div class="col-md-3">
 
@@ -1601,7 +1516,7 @@
 
                                             <div class="col-md-12 form-group">
                                                 <div class="col-md-9">
-                                                    <label class="control-label pull-left">Are you careless at times about taking your medicine?</label>
+                                                    <label class="control-label pull-left">2. Are you careless at times about taking your medicine?</label>
                                                 </div>
                                                 <div class="col-md-3">
 
@@ -1620,7 +1535,7 @@
 
                                             <div class="col-md-12 form-group">
                                                 <div class="col-md-9">
-                                                    <label class="control-label pull-left">Sometimes if you feel worse when you take the medicine, do you stop taking it?</label>
+                                                    <label class="control-label pull-left">3. Sometimes if you feel worse when you take the medicine, do you stop taking it?</label>
                                                 </div>
                                                 <div class="col-md-3">
 
@@ -1639,7 +1554,7 @@
 
                                             <div class="col-md-12 form-group">
                                                 <div class="col-md-9">
-                                                    <label class="control-label pull-left">When you feel better do you sometimes stop taking your medicine?</label>
+                                                    <label class="control-label pull-left">4. When you feel better do you sometimes stop taking your medicine?</label>
                                                 </div>
                                                 <div class="col-md-3">
 
@@ -1654,13 +1569,92 @@
                                                     <div class="errorBlock4" style="color: red;">Please select one option </div>
                                                 </div>
                                             </div>
+                                            
+                                            <div class="col-md-12 form-group">
+                                                <div class="col-md-4 pull-left">(MMAS-4) Score</div>
+                                                <div class="col-md-2 pull-left" style="background-color: gray;"><asp:Label ID="adherenceScore" runat="server"></asp:Label></div>
+                                                <div class="col-md-3 pull-left">Adherence Rating:</div>
+                                                <div class="col-md-3 pull-left" style="background-color: gray;"><asp:Label ID="adherenceRating" runat="server"></asp:Label></div>
+                                            </div>
+                                            
+                                            <div id="MMAS8">
+                                                <div class="col-md-12 form-group">
+                                                    <div class="col-md-9">
+                                                        <label class="control-label pull-left">5. Did you take your medicine yesterday?</label>
+                                                    </div>
+                                                    <div class="col-md-3">
 
-                                            <div class="col-md-12 form-group" style="background-color: lightblue;">
-                                                <div class="col-md-9 pull-left">Total Score</div>
-                                                <div class="col-md-3 pull-left">
-                                                    <asp:Label ID="adherenceScore" runat="server"></asp:Label>
+                                                        <div class="col-md-6">
+                                                            <asp:RadioButton ID="Question5_Yes" runat="server" GroupName="Question5" ClientIDMode="Static" Value="0" />
+                                                        </div>
 
+                                                        <div class="col-md-6">
+                                                            <asp:RadioButton ID="Question5_No" runat="server" GroupName="Question5" ClientIDMode="Static" Value="1" />
+                                                        </div>
+
+                                                        <div class="errorBlock5" style="color: red;">Please select one option </div>
+                                                    </div>
                                                 </div>
+                                            
+                                                <div class="col-md-12 form-group">
+                                                    <div class="col-md-9">
+                                                        <label class="control-label pull-left">6. When you feel like your symptoms are under control, do you sometimes stop taking your medicine?</label>
+                                                    </div>
+                                                    <div class="col-md-3">
+
+                                                        <div class="col-md-6">
+                                                            <asp:RadioButton ID="Question6_Yes" runat="server" GroupName="Question6" ClientIDMode="Static" Value="0" />
+                                                        </div>
+
+                                                        <div class="col-md-6">
+                                                            <asp:RadioButton ID="Question6_No" runat="server" GroupName="Question6" ClientIDMode="Static" Value="1" />
+                                                        </div>
+
+                                                        <div class="errorBlock6" style="color: red;">Please select one option </div>
+                                                    </div>
+                                                </div>
+                                            
+                                                <div class="col-md-12 form-group">
+                                                    <div class="col-md-9">
+                                                        <label class="control-label pull-left">7. Taking medication every day is a real inconvenience for some people. Do you ever feel under pressure about sticking to your treatment plan?</label>
+                                                    </div>
+                                                    <div class="col-md-3">
+
+                                                        <div class="col-md-6">
+                                                            <asp:RadioButton ID="Question7_Yes" runat="server" GroupName="Question7" ClientIDMode="Static" Value="0" />
+                                                        </div>
+
+                                                        <div class="col-md-6">
+                                                            <asp:RadioButton ID="Question7_No" runat="server" GroupName="Question7" ClientIDMode="Static" Value="1" />
+                                                        </div>
+
+                                                        <div class="errorBlock7" style="color: red;">Please select one option </div>
+                                                    </div>
+                                                </div>
+                                            
+                                                <div class="col-md-12 form-group">
+                                                    <div class="col-md-9">
+                                                        <label class="control-label pull-left">8. How often do you have difficulty remembering to take all your medications?</label>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <asp:DropDownList ID="Question8" runat="server" ClientIDMode="Static" CssClass="form-control input-sm">
+                                                            <asp:ListItem Text="select" Value=""></asp:ListItem>
+                                                            <asp:ListItem Text="A. Never/Rarely" Value="0"></asp:ListItem>
+                                                            <asp:ListItem Text="B. Once in a while" Value="0.25"></asp:ListItem>
+                                                            <asp:ListItem Text="C. Sometimes" Value="0.5"></asp:ListItem>
+                                                            <asp:ListItem Text="D. Usually" Value="0.75"></asp:ListItem>
+                                                            <asp:ListItem Text="E. All the time" Value="1"></asp:ListItem>
+                                                        </asp:DropDownList>
+                                                        <div class="errorBlock8" style="color: red;">Please select one option </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-md-12 form-group">
+                                                <div class="col-md-4 pull-left">(MMAS-8) Score</div>
+                                                <div class="col-md-2 pull-left" style="background-color: gray;"><asp:Label ID="mmas8Score" runat="server"></asp:Label></div>
+                                                <div class="col-md-3 pull-left">Score:</div>
+                                                <div class="col-md-3 pull-left" style="background-color: gray;"><asp:Label ID="mmas8Adherence" runat="server"></asp:Label></div>
                                             </div>
 
                                         </div>
@@ -2056,13 +2050,13 @@
         </div>
     </div>
 
-
 </div>
 
 <script type="text/javascript">
     var genderId = <%=genderID%>;
     var gender = "<%=gender%>";
     var Age = "<%=age%>";
+
     document.getElementById('txtPresentingComplaintsID').style.display = 'none';
     document.getElementById('txtAllergyId').style.display = 'none';
     document.getElementById('txtReactionTypeID').style.display = 'none';
@@ -2070,10 +2064,18 @@
 
 
     $(document).ready(function () {
+        var encounterExists = "<%=PatientEncounterExists%>";
+
         $('.errorBlock1').hide();
         $('.errorBlock2').hide();
         $('.errorBlock3').hide();
         $('.errorBlock4').hide();
+
+        $('.errorBlock5').hide();
+        $('.errorBlock6').hide();
+        $('.errorBlock7').hide();
+        $('.errorBlock8').hide();
+
         if (($("#cough").val() === 'True') || ($("#fever").val() === 'True') || ($("#weightLoss").val() === 'True') || ($("#nightSweats").val() === 'True')) {
             $("#IcfActionForm").show();
         } else {
@@ -2086,6 +2088,7 @@
         $("#IptDetailsForm").hide();
         $("#IptOutcomeDetailsForm").hide();
         $("#onIpt").prop("disabled", true);
+        $("#MMAS8").hide();
         //  $("#EverBeenOnIpt").prop("disabled", true);
         //showHideFPControls();
         loadPresentingComplaints();
@@ -2174,12 +2177,18 @@
             //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
         });
 
-        $('#ChronicIllnessOnsetDate').datepicker({
-            allowPastDates: true,
-            momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' },
-            date: 0,
-            restricted: [{ from: tomorrow, to: Infinity }],
-            //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+        //$('#ChronicIllnessOnsetDate').datepicker({
+        //    allowPastDates: true,
+        //    momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' },
+        //    date: 0,
+        //    restricted: [{ from: tomorrow, to: Infinity }],
+        //    //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+        //});
+
+        $("#ChronicIllnessOnsetDate").datetimepicker({
+            format: 'DD-MMM-YYYY',
+            allowInputToggle: true,
+            useCurrent: false
         });
 
         $('#FemaleLMP').datepicker({
@@ -2592,6 +2601,9 @@
                 else
                     previousStep = nextStep -= 1;
                 if (data.step === 1) {
+                    if (data.direction === 'previous') {
+                        return;
+                    }
                     $("#peripheralNeoropathy").prop('required', false);
                     $("#rash").prop('required', false);
                     $("#hepatotoxicity").prop('required', false);
@@ -2618,6 +2630,9 @@
                     }
                 }
                 else if (data.step === 2) {
+                    if (data.direction === 'previous') {
+                        return;
+                    }
                     savePatientEncounterChronicIllness();
                     //if ($("#datastep2").parsley().validate()) {
 
@@ -2628,6 +2643,9 @@
                     //}
                 }
                 else if (data.step === 3) {
+                    if (data.direction === 'previous') {
+                        return;
+                    }
                     savePatientPhysicalExams();
 
                     //if ($("#datastep3").parsley().validate()) {
@@ -2639,6 +2657,9 @@
                     //}
                 }
                 else if (data.step === 4) {
+                    if (data.direction === 'previous') {
+                        return;
+                    }
                     //savePatientPatientManagement();
                     if ($('#AppointmentForm').parsley().validate()) {
                         var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
@@ -3066,11 +3087,20 @@
             var question2 = parseInt($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question2']:checked").val());
             var question3 = parseInt($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question3']:checked").val());
             var question4 = parseInt($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question4']:checked").val());
+            var question5 = parseFloat($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question5']:checked").val());
+            var question6 = parseFloat($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question6']:checked").val());
+            var question7 = parseFloat($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question7']:checked").val());
+            var question8 = parseFloat($("#<%=Question8.ClientID%>").val());
 
             $('.errorBlock1').hide();
             $('.errorBlock2').hide();
             $('.errorBlock3').hide();
             $('.errorBlock4').hide();
+
+            $('.errorBlock5').hide();
+            $('.errorBlock6').hide();
+            $('.errorBlock7').hide();
+            $('.errorBlock8').hide();
 
             if (isNaN(question1)) {
                 $('.errorBlock1').show();
@@ -3092,10 +3122,35 @@
                 return false;
             }
 
+            if (isNaN(question5)) {
+                $('.errorBlock5').show();
+                return false;
+            }
+
+            if (isNaN(question6)) {
+                $('.errorBlock6').show();
+                return false;
+            }
+
+            if (isNaN(question7)) {
+                $('.errorBlock7').show();
+                return false;
+            }
+
+            if (isNaN(question8)) {
+                $('.errorBlock8').show();
+                return false;
+            }
+
             $('.errorBlock1').hide();
             $('.errorBlock2').hide();
             $('.errorBlock3').hide();
             $('.errorBlock4').hide();
+
+            $('.errorBlock5').hide();
+            $('.errorBlock6').hide();
+            $('.errorBlock7').hide();
+            $('.errorBlock8').hide();
 
             /*
             console.log(question1);
@@ -3156,14 +3211,35 @@
             calculateAdherenceScore();
         });
 
+        $('input[type=radio][name="ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question5"]').change(function () {
+            calculateAdherenceScore();
+        });
+
+        $('input[type=radio][name="ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question6"]').change(function () {
+            calculateAdherenceScore();
+        });
+
+        $('input[type=radio][name="ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question7"]').change(function () {
+            calculateAdherenceScore();
+        });
+
+        $("#<%=Question8.ClientID%>").change(function() {
+            calculateAdherenceScore();
+        });
+
 
         function calculateAdherenceScore() {
             var question1 = parseInt($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question1']:checked").val());
             var question2 = parseInt($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question2']:checked").val());
             var question3 = parseInt($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question3']:checked").val());
             var question4 = parseInt($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question4']:checked").val());
+            var question5 = parseFloat($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question5']:checked").val());
+            var question6 = parseFloat($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question6']:checked").val());
+            var question7 = parseFloat($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question7']:checked").val());
+            var question8 = parseFloat($("#<%=Question8.ClientID%>").val());
 
             var adherenceScore = 0;
+            var mmas8Score = 0;
 
             if (!isNaN(question1)) {
                 adherenceScore = adherenceScore + question1;
@@ -3180,9 +3256,61 @@
             if (!isNaN(question4)) {
                 adherenceScore = adherenceScore + question4;
             }
+
+            if (!isNaN(question5)) {
+                mmas8Score = parseFloat(mmas8Score) + question5;
+            }
+
+            if (!isNaN(question6)) {
+                mmas8Score = parseFloat(mmas8Score) + question6;
+            }
+
+            if (!isNaN(question7)) {
+                mmas8Score = parseFloat(mmas8Score) + question7;
+            }
+
+            if (!isNaN(question8)) {
+                mmas8Score = parseFloat(mmas8Score) + question8;
+            }
+
+            mmas8Score = parseFloat(mmas8Score) + parseFloat(adherenceScore);
             //var adherenceScore = question1 + question2 + question3 + question4;
             //console.log(adherenceScore);
             $("#<%=adherenceScore.ClientID%>").text(adherenceScore + "/4");
+            $("#<%=mmas8Score.ClientID%>").text(mmas8Score + "/8");
+
+
+            if (!isNaN(question1) && !isNaN(question2) && !isNaN(question3) && !isNaN(question4)) {
+                var score = question1 + question2 + question3 + question4;
+                var adherenceRating = "";
+
+                if (score == 0) {
+                    adherenceRating = "Good";
+                    $("#MMAS8").hide();
+                } else if (score >= 1 && score <= 2) {
+                    adherenceRating = "Fair";
+                    $("#MMAS8").show();
+                } else if (score >= 3 && score <= 4) {
+                    adherenceRating = "Poor";
+                    $("#MMAS8").show();
+                }
+
+                $("#<%=adherenceRating.ClientID%>").text(adherenceRating);
+
+            }
+
+            if (!isNaN(question1) && !isNaN(question2) && !isNaN(question3) && !isNaN(question4)) {
+                var MMAS8Score = "";
+
+                if (mmas8Score === 0) {
+                    MMAS8Score = "Good";
+                } else if (mmas8Score >= 1 && score <= 2) {
+                    MMAS8Score = "Inadequate";
+                } else if (score >= 3 && score <= 8) {
+                    MMAS8Score = "Poor";
+                }
+                $("#<%=mmas8Adherence.ClientID%>").text(MMAS8Score);        
+            }
         }
 
         function AddPatientCategorization() {
@@ -3233,6 +3361,20 @@
         }
 
         $("#AppointmentDate").val("");
+
+        if (encounterExists > 0) {
+            //var $wizard = $('#myWizard').wizard();
+            //var wizard = $wizard.data('wizard');
+            //$wizard.off('click', 'li.complete');
+            //$wizard.on('click', 'li', $.proxy(wizard.stepclicked, wizard));
+
+            $('#myWizard').wizard();
+            $('#myWizard').find('ul.steps li').toggleClass('complete', true);
+
+            $('#myWizard').on('changed.fu.wizard', function (evt, data) {
+                $('#myWizard').find('ul.steps li').toggleClass('complete', true);
+            });
+        }
 
     });
 
