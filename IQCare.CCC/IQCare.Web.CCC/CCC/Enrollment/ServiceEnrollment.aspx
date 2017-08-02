@@ -58,15 +58,15 @@
                             <div class="col-md-3">
                                 <div class="col-md-12"><label class="required control-label pull-left">Type of Test</label></div>
                                 <div class="col-md-12 form-group">
-                                    <asp:DropDownList ID="TypeOfReConfirmatoryTest" runat="server" ClientIDMode="Static" CssClass="form-control input-sm"></asp:DropDownList>
+                                    <asp:DropDownList ID="TypeOfReConfirmatoryTest" runat="server" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-required="true"></asp:DropDownList>
                                 </div>
                             </div>
 
                             <div class="col-md-3">
-                                <div class="col-md-12"><label class="required control-label pull-left">Result of ReConfirmatory Test</label></div>
+                                <div class="col-md-12"><label class="required control-label pull-left">ReConfirmatory Result</label></div>
 
                                 <div class="col-md-12 form-group">
-                                    <asp:DropDownList ID="ResultReConfirmatoryTest" runat="server" ClientIDMode="Static" CssClass="form-control input-sm" onChange="ResultReConfirmatoryTestFunc();"></asp:DropDownList>
+                                    <asp:DropDownList ID="ResultReConfirmatoryTest" runat="server" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-required="true" onChange="ResultReConfirmatoryTestFunc();"></asp:DropDownList>
                                 </div>
                             </div>
 
@@ -328,9 +328,11 @@
                 var reconfirmatoryTest = $("#ReconfirmatoryTest").val();
                 var resultReConfirmatoryTest = $("#ResultReConfirmatoryTest").val();
                 var reConfirmatoryTestDate = $("#ReConfirmatoryTestDate").val();
+                var typeOfReConfirmatoryTest = $("#TypeOfReConfirmatoryTest").val();
+                var patientExists = '<%=PatientExists%>';
 
-                if (patType == "New") {
-                    $.when(addReconfirmatoryTest(reconfirmatoryTest, resultReConfirmatoryTest, reConfirmatoryTestDate)).then(function () { setTimeout(function () { addPatientRegister(entryPointId, enrollmentDate, personDateOfBirth, nationalId, patientType, mflCode, dobPrecision, JSON.stringify(identifiers)); }, 1000); });
+                if (patType == "New" && patientExists == 0) {
+                    $.when(addReconfirmatoryTest(typeOfReConfirmatoryTest, resultReConfirmatoryTest, reConfirmatoryTestDate)).then(function () { setTimeout(function () { addPatientRegister(entryPointId, enrollmentDate, personDateOfBirth, nationalId, patientType, mflCode, dobPrecision, JSON.stringify(identifiers)); }, 1000); });
                 } else {
                     addPatientRegister(entryPointId, enrollmentDate,personDateOfBirth,nationalId,patientType,mflCode,dobPrecision,JSON.stringify(identifiers));
                 }
@@ -390,9 +392,11 @@
                 var reconfirmatoryTest = $("#ReconfirmatoryTest").val();
                 var resultReConfirmatoryTest = $("#ResultReConfirmatoryTest").val();
                 var reConfirmatoryTestDate = $("#ReConfirmatoryTestDate").val();
+                var typeOfReConfirmatoryTest = $("#TypeOfReConfirmatoryTest").val();
+                var patientExists = '<%=PatientExists%>';
 
-                if (patType == "New") {
-                    $.when(addReconfirmatoryTest(reconfirmatoryTest, resultReConfirmatoryTest, reConfirmatoryTestDate)).then(function() { setTimeout(function() { addPatient(entryPointId, enrollmentDate, personDateOfBirth, nationalId, patientType, mflCode, dobPrecision, JSON.stringify(identifiers)); }, 1000); });
+                if (patType == "New" && patientExists == 0) {
+                    $.when(addReconfirmatoryTest(typeOfReConfirmatoryTest, resultReConfirmatoryTest, reConfirmatoryTestDate)).then(function() { setTimeout(function() { addPatient(entryPointId, enrollmentDate, personDateOfBirth, nationalId, patientType, mflCode, dobPrecision, JSON.stringify(identifiers)); }, 1000); });
                 } else {
                     addPatient(entryPointId,enrollmentDate,personDateOfBirth,nationalId,patientType,mflCode,dobPrecision,JSON.stringify(identifiers));
                 }
@@ -704,6 +708,7 @@
             } else {
                 if (reconfirmTest == "No") {
                     $("#ResultReConfirmatoryTest").prop("disabled", true);
+                    $("#TypeOfReConfirmatoryTest").prop("disabled", true);
                     $("#ReConfirmatoryTestDate").prop("disabled", true);
                     $("#DateOfEnrollment").prop("disabled", true);
                     $("#entryPoint").prop("disabled", true);
@@ -716,6 +721,7 @@
                     $("#btnRese").addClass("noneevents");
                 } else if (reconfirmTest == "Yes") {
                     $("#ResultReConfirmatoryTest").prop("disabled", false);
+                    $("#TypeOfReConfirmatoryTest").prop("disabled", false);
                     $("#ReConfirmatoryTestDate").prop("disabled", false);
                     $("#DateOfEnrollment").prop("disabled", false);
                     $("#entryPoint").prop("disabled", false);
@@ -725,6 +731,7 @@
                     }
                 } else {
                     $("#ResultReConfirmatoryTest").prop("disabled", true);
+                    $("#TypeOfReConfirmatoryTest").prop("disabled", true);
                     $("#ReConfirmatoryTestDate").prop("disabled", true);
                     $("#DateOfEnrollment").prop("disabled", true);
                     $("#entryPoint").prop("disabled", true);

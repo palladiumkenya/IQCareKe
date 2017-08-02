@@ -302,6 +302,7 @@
               // window.location.href = $(this).attr('href');
               var patientId = $(this).find('td').first().text();
               PageMethods.SetSelectedPatient(patientId);
+              console.log(patientId);
               window.location.href = "../patient/patientHome.aspx?patient="+patientId;
              // alert(rowIndex);
           });

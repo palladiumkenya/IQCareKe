@@ -33,6 +33,10 @@ namespace IQCare.Web.CCC.Enrollment
             {
                 PatientExists = patient[0].Id;
             }
+            else
+            {
+                PatientExists = 0;
+            }
 
             if (!IsPostBack)
             {
@@ -53,7 +57,7 @@ namespace IQCare.Web.CCC.Enrollment
                 List<LookupItemView> ReConfirmatoryTest = mgr.GetLookItemByGroup("ReConfirmatoryTest");
                 if (ReConfirmatoryTest != null && ReConfirmatoryTest.Count > 0)
                 {
-                    ResultReConfirmatoryTest.Items.Add(new ListItem("select", "0"));
+                    ResultReConfirmatoryTest.Items.Add(new ListItem("select", ""));
                     foreach (var k in ReConfirmatoryTest)
                     {
                         ResultReConfirmatoryTest.Items.Add(new ListItem(k.ItemName, k.ItemId.ToString()));
