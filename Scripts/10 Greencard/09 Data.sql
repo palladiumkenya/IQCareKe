@@ -2,10 +2,10 @@
 -- version changes
 UPDATE AppAdmin
 SET
-	AppVer='Ver 1.0.0.2 Kenya HMIS',
-	DBVer='Ver 1.0.0.2 Kenya HMIS',
-	RelDate='01-Jul-2017',
-	VersionName='Kenya HMIS Ver 1.0.0.2'
+	AppVer='Ver 1.0.0.3 Kenya HMIS',
+	DBVer='Ver 1.0.0.3 Kenya HMIS',
+	RelDate='01-Aug-2017',
+	VersionName='Kenya HMIS Ver 1.0.0.3'
 	
 
 TRUNCATE TABLE [dbo].[LookupMasterItem]
@@ -100,7 +100,10 @@ If Not Exists(Select 1 From LookupMaster where Name='Chest') Begin INSERT INTO L
 If Not Exists(Select 1 From LookupMaster where Name='CVS') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('CVS','CVS',0); End
 If Not Exists(Select 1 From LookupMaster where Name='Abdomen') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Abdomen','Abdomen',0); End
 If Not Exists(Select 1 From LookupMaster where Name='CNS') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('CNS','CNS',0); End
-If Not Exists(Select 1 From LookupMaster where Name='GUS') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('GUS','GUS',0); End
+
+update LookupMaster set name='Genito-urinary', DisplayName='Genito-urinary' Where Name='GUS'
+If Not Exists(Select 1 From LookupMaster where Name='Genito-urinary') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Genito-urinary','Genito-urinary',0); End
+
 If Not Exists(Select 1 From LookupMaster where Name='ICD10') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('ICD10','ICD10',0); End
 If Not Exists(Select 1 From LookupMaster where Name='PresentingComplaints') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PresentingComplaints','Presenting Complaints',0); End
 If Not Exists(Select 1 From LookupMaster where Name='Allergies') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Allergies','Allergies',0); End
@@ -226,6 +229,10 @@ If Not Exists(Select 1 From LookupItem where Name='N/A') Begin INSERT INTO Looku
 If Not Exists(Select 1 From LookupItem where Name='Mild') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Mild','Mild',0); End
 If Not Exists(Select 1 From LookupItem where Name='Moderate') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Moderate','Moderate',0); End
 If Not Exists(Select 1 From LookupItem where Name='Severe') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Severe','Severe',0); End
+
+If Not Exists(Select 1 From LookupItem where Name='Fatal') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Fatal','Fatal',0); End
+
+
 If Not Exists(Select 1 From LookupItem where Name='S') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('S','Self',0); End
 If Not Exists(Select 1 From LookupItem where Name='TS') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('TS','Treatment Supporter',0); End
 If Not Exists(Select 1 From LookupItem where Name='WP') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('WP','Wants to get pregnant',0); End
@@ -394,9 +401,15 @@ If Not Exists(Select 1 From LookupItem where Name='SW') Begin INSERT INTO Lookup
 If Not Exists(Select 1 From LookupItem where Name='Dos') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Dos','Changed dose',0); End
 If Not Exists(Select 1 From LookupItem where Name='Sub') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Sub','Substituted drug',0); End
 If Not Exists(Select 1 From LookupItem where Name='Stopped(s)') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Stopped(s)','Stopped',0); End
+
+If Not Exists(Select 1 From LookupItem where Name='Dose reduced') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Dose reduced','Dose reduced',0); End
+If Not Exists(Select 1 From LookupItem where Name='Dose increased') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Dose increased','Dose increased',0); End
+If Not Exists(Select 1 From LookupItem where Name='Dose not changed') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Dose not changed','Dose not changed',0); End
+If Not Exists(Select 1 From LookupItem where Name='St') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('St','Stopped drug',0); End
+
 If Not Exists(Select 1 From LookupItem where Name='ConsentToSendSMS') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('ConsentToSendSMS','Consent To Send SMS',0); End
 If Not Exists(Select 1 From LookupItem where Name='ConsentToHomeVisit') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('ConsentToHomeVisit','Consent To Home Visit',0); End
-If Not Exists(Select 1 From LookupItem where Name='St') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('St','Stopped drug',0); End
+
 If Not Exists(Select 1 From LookupItem where Name='First-Line Regimens') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('First-Line Regimens','First-Line Regimens',0); End
 If Not Exists(Select 1 From LookupItem where Name='Second-Line Regimens') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Second-Line Regimens','Second-Line Regimens',0); End
 If Not Exists(Select 1 From LookupItem where Name='Third-Line Regimens') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Third-Line Regimens','Third-Line Regimens',0); End
@@ -429,7 +442,11 @@ If Not Exists(Select 1 From LookupItem where Name='Chest') Begin INSERT INTO Loo
 If Not Exists(Select 1 From LookupItem where Name='CVS') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('CVS','CVS',0); End
 If Not Exists(Select 1 From LookupItem where Name='Abdomen') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Abdomen','Abdomen',0); End
 If Not Exists(Select 1 From LookupItem where Name='CNS') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('CNS','CNS',0); End
-If Not Exists(Select 1 From LookupItem where Name='GUS') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('GUS','GUS',0); End
+
+update LookupItem set name='Genito-urinary', DisplayName='Genito-urinary' Where Name='GUS'
+If Not Exists(Select 1 From LookupItem where Name='Genito-urinary') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Genito-urinary','Genito-urinary',0); End
+
+
 If Not Exists(Select 1 From LookupItem where Name='Enrollment') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Enrollment','Enrollment',0); End
 If Not Exists(Select 1 From LookupItem where Name='ART') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('ART','ART',0); End
 If Not Exists(Select 1 From LookupItem where Name='PMTCT') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('PMTCT','PMTCT',0); End
@@ -2723,11 +2740,15 @@ Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) 
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'',2 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='LostToFollowUp'  )         ItemId  FROM LookupMaster  WHERE Name='CareEnded') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Lost To Follow Up',2 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='LostToFollowUp'  )         ItemId  FROM LookupMaster  WHERE Name='IptOutcome') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Completed',1 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Completed'  )         ItemId  FROM LookupMaster  WHERE Name='IptOutcome') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
-Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Vaginal discharge',5 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Vaginal discharge'  )         ItemId  FROM LookupMaster  WHERE Name='GUS') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
-Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Urethral discharge',4 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Urethral discharge'  )         ItemId  FROM LookupMaster  WHERE Name='GUS') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
-Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Ulceration',3 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Ulceration'  )         ItemId  FROM LookupMaster  WHERE Name='GUS') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
-Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Discharge',2 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Discharge'  )         ItemId  FROM LookupMaster  WHERE Name='GUS') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
-Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Bleeding',1 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Bleeding'  )         ItemId  FROM LookupMaster  WHERE Name='GUS') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Vaginal discharge',5 FROM( SELECT Id MasterId,(SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Vaginal discharge'  ) ItemId  FROM LookupMaster  WHERE Name='Genito-urinary') X 
+			where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+			
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Urethral discharge',4 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Urethral discharge'  )         ItemId  FROM LookupMaster  WHERE Name='Genito-urinary') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Ulceration',3 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Ulceration'  )         ItemId  FROM LookupMaster  WHERE Name='Genito-urinary') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Discharge',2 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Discharge'  )         ItemId  FROM LookupMaster  WHERE Name='Genito-urinary') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Bleeding',1 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Bleeding'  )         ItemId  FROM LookupMaster  WHERE Name='Genito-urinary') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Neck stiffness',7 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Neck stiffness'  )         ItemId  FROM LookupMaster  WHERE Name='CNS') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Limb Weakness',6 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Limb Weakness'  )         ItemId  FROM LookupMaster  WHERE Name='CNS') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Kernings positive',5 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Kernings positive'  )         ItemId  FROM LookupMaster  WHERE Name='CNS') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
@@ -3050,10 +3071,22 @@ Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) 
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'ART',1 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='ART'  )         ItemId  FROM LookupMaster  WHERE Name='TreatmentProgram') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Drug Switches',3 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='DrugSwitches'  )         ItemId  FROM LookupMaster  WHERE Name='TreatmentPlan') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'PMTCT Regimens',7 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='PMTCT Regimens'  )         ItemId  FROM LookupMaster  WHERE Name='RegimenClassification') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
-Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Changed dose',3 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='ConsentToHomeVisit'  )         ItemId  FROM LookupMaster  WHERE Name='AdverseEventsActions') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
-Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Consent To Home Visit',2 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='ConsentToHomeVisit'  )         ItemId  FROM LookupMaster  WHERE Name='ConsentType') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
-Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Switched regimen',4 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='ConsentToSendSMS'  )         ItemId  FROM LookupMaster  WHERE Name='AdverseEventsActions') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Consent To Send SMS',1 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='ConsentToSendSMS'  )         ItemId  FROM LookupMaster  WHERE Name='ConsentType') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Consent To Home Visit',2 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='ConsentToHomeVisit'  )         ItemId  FROM LookupMaster  WHERE Name='ConsentType') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+
+-- Adverse Events Actions taken
+delete mi from LookupItemView v inner join lookupmasteritem mi on mi.LookupMasterId=v.MasterId and mi.LookupItemId=v.ItemId where mastername='AdverseEventsActions'
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Drug withdrawn',1 FROM (SELECT Id MasterId, ( SELECT TOP 1 Id FROM LookupItem WHERE Name='ST') ItemId  FROM LookupMaster  WHERE Name='AdverseEventsActions') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0 and x.ItemId Is Not Null;
+
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Dose increased',2 FROM (SELECT Id MasterId, ( SELECT TOP 1 Id FROM LookupItem WHERE Name='Dose increased') ItemId  FROM LookupMaster WHERE Name='AdverseEventsActions') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0 and x.ItemId Is Not Null;
+
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Dose reduced',3 FROM ( SELECT Id MasterId,(SELECT TOP 1 Id  FROM LookupItem WHERE Name='Dose reduced'  ) ItemId  FROM LookupMaster  WHERE Name='AdverseEventsActions') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0 and x.ItemId Is Not Null;
+
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Dose not changed',4 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Dose not changed'  ) ItemId  FROM LookupMaster  WHERE Name='AdverseEventsActions') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0 and x.ItemId Is Not Null;
+
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Unknown',4 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Unknown' ) ItemId  FROM LookupMaster  WHERE Name='AdverseEventsActions') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0 and x.ItemId Is Not Null;
+
+
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'NULL',1 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Transfer Out'  )         ItemId  FROM LookupMaster  WHERE Name='CareEnded') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'NULL',1 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Death'  )         ItemId  FROM LookupMaster  WHERE Name='CareEnded') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'NULL',1 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='HIV Negative'  )         ItemId  FROM LookupMaster  WHERE Name='CareEnded') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
