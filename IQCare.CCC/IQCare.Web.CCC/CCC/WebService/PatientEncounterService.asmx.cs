@@ -7,7 +7,10 @@ using System.Web.Script.Serialization;
 using System.Web.Script.Services;
 using System.Web.Services;
 using Application.Presentation;
+using Entities.CCC.Enrollment;
 using Interface.CCC.Visit;
+using IQCare.CCC.UILogic.Enrollment;
+
 //using static Entities.CCC.Encounter.PatientEncounter;
 
 namespace IQCare.Web.CCC.WebService
@@ -23,6 +26,8 @@ namespace IQCare.Web.CCC.WebService
 
     public class PatientEncounterService : System.Web.Services.WebService
     {
+        private string Msg { get; set; }
+        private int Result { get; set; }
         private readonly IPatientMasterVisitManager _visitManager = (IPatientMasterVisitManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientmasterVisit, BusinessProcess.CCC");
         [WebMethod(EnableSession = true)]
         public int savePatientEncounterPresentingComplaints(string VisitDate,string VisitScheduled, string VisitBy, string anyComplaints, string Complaints, int TBScreening, int NutritionalStatus, string adverseEvent, string presentingComplaints)
@@ -733,6 +738,51 @@ namespace IQCare.Web.CCC.WebService
             }
             else
                 return "An error occured";
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string AddArtDistribution(int patientId, int patientMasterVisitId, string artRefillModel, bool missedArvDoses,
+            int missedDosesCount, bool fatigue, bool fever, bool nausea, bool diarrhea, bool cough, bool rash,
+            bool genitalSore, string otherSymptom, bool newMedication, string newMedicineText, bool familyPlanning, 
+            string fpmethod, bool referredToClinic,  DateTime ? appointmentDate, int pregnancyStatus)
+        {
+            try
+            {
+                var patientArvDistribution = new PatientArtDistribution()
+                {
+                    PatientId = patientId,
+                    PatientMasterVisitId = patientMasterVisitId,
+                    ArtRefillModel = artRefillModel,
+                    Cough = cough,
+                    Diarrhea = diarrhea,
+                    FamilyPlanning = familyPlanning,
+                    FamilyPlanningMethod = fpmethod,
+                    Fatigue = fatigue,
+                    Fever = fever,
+                    MissedArvDoses = missedArvDoses,
+                    GenitalSore = genitalSore,
+                    MissedArvDosesCount = missedDosesCount,
+                    Nausea = nausea,
+                    NewMedication = newMedication,
+                    NewMedicationText = newMedicineText,
+                    OtherSymptom = otherSymptom,
+                    PregnancyStatus = pregnancyStatus,
+                    Rash = rash,
+                    ReferedToClinic = referredToClinic,
+                    ReferedToClinicDate = appointmentDate,
+                };
+                var artDistribution = new PatientArtDistributionManager();
+                Result = artDistribution.AddPatientArtDistribution(patientArvDistribution);
+                if (Result > 0)
+                {
+                    Msg = "Patient ART Distribution Added Successfully!";
+                }
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message;
+            }
+            return Msg;
         }
 
     }

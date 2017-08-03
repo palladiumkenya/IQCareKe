@@ -29,9 +29,15 @@ namespace BusinessProcess.CCC
             ClsUtility.AddExtendedParameters("@MidName", SqlDbType.VarChar, person.MidName);
             ClsUtility.AddExtendedParameters("@LastName", SqlDbType.VarChar, person.LastName);
             ClsUtility.AddExtendedParameters("@Sex", SqlDbType.Int, person.Sex);
+
             if (person.DateOfBirth.HasValue)
             {
                 ClsUtility.AddExtendedParameters("@DateOfBirth", SqlDbType.DateTime, person.DateOfBirth);
+            }
+
+            if (person.DobPrecision.HasValue)
+            {
+                ClsUtility.AddExtendedParameters("@DobPrecision", SqlDbType.Bit, person.DobPrecision);
             }
             //ClsUtility.AddExtendedParameters("@NationalId", SqlDbType.VarChar, person.NationalId);
             ClsUtility.AddExtendedParameters("@UserId", SqlDbType.Int, person.CreatedBy);

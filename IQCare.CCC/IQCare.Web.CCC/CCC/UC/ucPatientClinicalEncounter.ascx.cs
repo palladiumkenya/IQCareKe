@@ -12,6 +12,8 @@ namespace IQCare.Web.CCC.UC
 {
     public partial class ucPatientClinicalEncounter : System.Web.UI.UserControl
     {
+        public int PatientEncounterExists { get; set; }
+
         PatientEncounterLogic PEL = new PatientEncounterLogic();
         public string visitdateval = "";
         public string LMPval = "";
@@ -35,6 +37,7 @@ namespace IQCare.Web.CCC.UC
             if (Request.QueryString["visitId"] != null)
             {
                 Session["PatientMasterVisitId"] = Request.QueryString["visitId"].ToString();
+                PatientEncounterExists = Convert.ToInt32(Request.QueryString["visitId"].ToString());
             }
 
             // Get Gender

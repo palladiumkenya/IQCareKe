@@ -221,6 +221,7 @@
                                         <div class="col-md-12"><label for="personAge" class="control-label pull-left">Age(years)</label></div>
                                         <div class="col-md-12">
                                             <asp:TextBox runat="server" ID="personAge" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="0" required="true" min="0"></asp:TextBox>
+                                            <asp:HiddenField ID="dobPrecision" runat="server" ClientIDMode="Static" />
                                         </div>
                                     </div>
                                     
@@ -624,6 +625,8 @@
                     $('#<%=personAge.ClientID%>').val(getAge(x));
                     personAgeRule();
                     duplicateCheck();
+                    $("#dobPrecision").val("true");
+                    PageMethods.SetDobPrecisionSession(true);
                 });
 
                 $('#<%=countyId.ClientID%>').on("change", function() {
@@ -931,6 +934,7 @@
                     var natId = escape($("#<%=NationalId.ClientID%>").val().trim());
                     var userId = <%=UserId%>;
                     var dateOfBirth = $('#MyDateOfBirth').datepicker('getDate');
+                    var dateofBirthPrecision = $("#dobPrecision").val();
                     var maritalstatusId = $("#<%=MaritalStatusId.ClientID%>").find(":selected").val();
                     //var patientType = $("#PatientTypeId").find(":selected").val();
                     var patientType = $('#<%= PatientTypeId.ClientID %> input:checked').val();
@@ -938,7 +942,7 @@
                     $.ajax({
                         type: "POST",
                         url: "../WebService/PersonService.asmx/AddPerson",
-                        data: "{'firstname':'" + fname + "','middlename':'" + mname + "','lastname':'" + lname + "','gender':" + sex + ", 'maritalStatusId':'" + maritalstatusId + "','userId':'" + userId + "','dob':'" + moment(dateOfBirth).format('DD-MMM-YYYY') + "','nationalId':'" + natId + "', 'patientid': '" + isPatientSet + "', 'patientType':'" + patientType + "'}",
+                        data: "{'firstname':'" + fname + "','middlename':'" + mname + "','lastname':'" + lname + "','gender':" + sex + ", 'maritalStatusId':'" + maritalstatusId + "','userId':'" + userId + "','dob':'" + moment(dateOfBirth).format('DD-MMM-YYYY') + "','nationalId':'" + natId + "', 'patientid': '" + isPatientSet + "', 'patientType':'" + patientType + "','dobPrecision':'" + dateofBirthPrecision + "'}",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
@@ -1244,6 +1248,7 @@
                             
                             /*Social Status*/
                             $('#MyDateOfBirth').datepicker('setDate', patientDetails.PersonDoB);
+                            $("#<%=dobPrecision.ClientID%>").val(patientDetails.DateOfBirthPrecision);
                             $("#ChildOrphan").val(patientDetails.ChildOrphan);
                             $("#Inschool").val(patientDetails.Inschool);
                             $("#personAge").val(patientDetails.Age);
@@ -1595,7 +1600,8 @@
                     //console.log(currentDate);
                     var estDob = moment(currentDate.toISOString());
                     var dob = estDob.add((personAge * -1), 'years');
-                    <% Session["DobPrecision"] = "true"; %>;
+                    $("#dobPrecision").val("false");
+                    PageMethods.SetDobPrecisionSession(false);
                     return moment(dob).format('DD-MMM-YYYY');
                 };
                 var _fp = [];

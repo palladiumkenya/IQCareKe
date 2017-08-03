@@ -143,7 +143,7 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string AddPatientIptWorkup(int patientId, int patientMasterVisitId, bool abdominalTenderness, bool numbness, bool yellowColouredUrine, bool yellownessOfEyes, string liverFunctionTests, bool startIpt, DateTime iptStartDate)
+        public string AddPatientIptWorkup(int patientId, int patientMasterVisitId, bool abdominalTenderness, bool numbness, bool yellowColouredUrine, bool yellownessOfEyes, string liverFunctionTests, bool startIpt, DateTime ? iptStartDate)
         {
             PatientIptWorkup patientIptWorkup = new PatientIptWorkup()
             {

@@ -98,12 +98,12 @@ function AddChronicIllness() {
    chronicIllnessFound = $.inArray("" + chronicIllness + "", chronicIllnessList);
 
 
-   if (chronicIllnessFound > -1) {
-       toastr.error("Error", "Chronic Illness already exists.");
-       return false;
-    }
+   //if (chronicIllnessFound > -1) {
+   //    toastr.error("Error", "Chronic Illness already exists.");
+   //    return false;
+   // }
 
-    else {
+    //else {
        
        chronicIllnessList.push("" + chronicIllness + "");
         arrChronicIllnessUI = [];
@@ -116,7 +116,7 @@ function AddChronicIllness() {
         $("#illnessTreatment").val("");
         $('#treatmentDose').val("");
         $('#txtOnsetDate').val("");
-    }
+    //}
 }
 
 var AllergyList = new Array();

@@ -48,6 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="assessment\IPatientPsychosocialCriteriamanager.cs" />
+    <Compile Include="assessment\IPatientSupportSystemsCriteriaManager.cs" />
     <Compile Include="Baseline\IINHProphylaxisManager.cs" />
     <Compile Include="Baseline\IPatientBaselineAssessmentManager.cs" />
     <Compile Include="Baseline\IPatientArvHistoryManager.cs" />
@@ -64,6 +66,7 @@
     <Compile Include="Encounter\IPatientLabOrder.cs" />
     <Compile Include="Enrollment\IHivReConfirmatoryTestManager.cs" />
     <Compile Include="Enrollment\IIdentifiersManager.cs" />
+    <Compile Include="Enrollment\IPatientArvDistributionManager.cs" />
     <Compile Include="Enrollment\IPatientEnrollmentManager.cs" />
     <Compile Include="Enrollment\IPatientEntryPointManager.cs" />
     <Compile Include="Enrollment\IPatientIdentifierManager.cs" />

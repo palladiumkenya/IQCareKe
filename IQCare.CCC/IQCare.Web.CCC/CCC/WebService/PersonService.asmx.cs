@@ -28,6 +28,7 @@ namespace IQCare.Web.CCC.WebService
         public int Gender { get; set; }
         public string GenderString { get; set; }
         public string PersonDoB { get; set; }
+        public bool DateOfBirthPrecision { get; set; }
         public string EnrollmentNumber { get; set; }
         public string EnrollmentDate { get; set; }
         public int ChildOrphan { get; set; }
@@ -100,7 +101,7 @@ namespace IQCare.Web.CCC.WebService
         readonly TextInfo _textInfo = new CultureInfo("en-US", false).TextInfo;
 
         [WebMethod(EnableSession = true)]
-        public string AddPerson(string firstname, string middlename, string lastname, int gender, int maritalStatusId, int userId, string dob, string nationalId, string patientid, string patientType)
+        public string AddPerson(string firstname, string middlename, string lastname, int gender, int maritalStatusId, int userId, string dob, string nationalId, string patientid, string patientType, string dobPrecision)
         {
             patientid = patientid == "null" ? null : patientid;
             patientid = patientid == "" ? null : patientid;
@@ -134,7 +135,7 @@ namespace IQCare.Web.CCC.WebService
                         personId = patient.PersonId;
                     }
 
-                    personManager.UpdatePerson(firstname, middlename, lastname, gender, userId , personId);
+                    personManager.UpdatePerson(firstname, middlename, lastname, gender, userId , personId, DateTime.Parse(dob), Convert.ToBoolean(dobPrecision));
                     Session["PersonId"] = personId;
 
                     Msg = "<p>Person Updated successfully</p>";
@@ -221,7 +222,7 @@ namespace IQCare.Web.CCC.WebService
                 {
                     var personLogic = new PersonManager();
 
-                    PersonId = personLogic.AddPersonUiLogic(firstname, middlename, lastname, gender, userId);
+                    PersonId = personLogic.AddPersonUiLogic(firstname, middlename, lastname, gender, userId, DateTime.Parse(dob), Convert.ToBoolean(dobPrecision));
                     Session["PersonId"] = PersonId;
                     if (PersonId > 0)
                     {
@@ -840,6 +841,7 @@ namespace IQCare.Web.CCC.WebService
                     patientDetails.Gender = thisPatient.Sex;
                     patientDetails.GenderString = LookupLogic.GetLookupNameById(thisPatient.Sex);
                     patientDetails.PersonDoB = String.Format("{0:dd-MMM-yyyy}", thisPatient.DateOfBirth);
+                    patientDetails.DateOfBirthPrecision = thisPatient.DobPrecision;
                     patientDetails.EnrollmentDate = String.Format("{0:dd-MMM-yyyy}", thisPatient.EnrollmentDate);
                     patientDetails.Age = patientDetails.GetAge(thisPatient.DateOfBirth);
 

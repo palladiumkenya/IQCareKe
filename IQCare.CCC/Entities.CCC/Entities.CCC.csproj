@@ -100,6 +100,7 @@
     <Compile Include="Encounter\PhysicalExamination.cs" />
     <Compile Include="Encounter\Pregnancy.cs" />
     <Compile Include="Encounter\PregnancyIndicator.cs" />
+    <Compile Include="Enrollment\PatientArtDistribution.cs" />
     <Compile Include="Enrollment\HivReConfirmatoryTest.cs" />
     <Compile Include="Enrollment\Identifier.cs" />
     <Compile Include="Enrollment\PatientEntityEnrollment.cs" />

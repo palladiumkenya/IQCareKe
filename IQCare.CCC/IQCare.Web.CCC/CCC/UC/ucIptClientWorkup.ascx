@@ -67,20 +67,20 @@
                 <label class="control-label pull-left">Start IPT</label>
             </div>
             <div class="col-md-12">
-                <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="startIpt" ClientIDMode="Static">
+                <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="startIpt" ClientIDMode="Static" onclick="showStartDate();" >
                     <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
                     <asp:ListItem Text="No" Value="False" Selected="True"></asp:ListItem>
                 </asp:DropDownList>
             </div>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-12 form-group" clientidmode="Static" id="DateForm">
             <div class="col-md-12">
                 <label class="control-label pull-left">Date IPT Started</label>
             </div>
         <div class="col-md-12">
             <div class="datepicker fuelux form-group" id="iptDateStarted">
                 <div class="input-group">
-                    <asp:TextBox ID="iptStartDate" runat="server" class="form-control input-sm" data-parsley-required="true"></asp:TextBox>
+                    <asp:TextBox ID="iptStartDate" runat="server" class="form-control input-sm"></asp:TextBox>
                     <%--<input class="form-control input-sm" id="VisitDate" type="text" runat="server" data-parsley-required="true" />--%>
                     <div class="input-group-btn">
                         <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
@@ -181,6 +181,17 @@
             allowPastDates: true,
             momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
         });
+        $("#<%=iptStartDate.ClientID%>").val("");
+        showStartDate();
     });
+
+    function showStartDate() {
+        if ($("#startIpt").val() === 'False') {
+            $("#DateForm").hide();
+        }
+        else {
+            $("#DateForm").show();
+        }
+    }
 
 </script>

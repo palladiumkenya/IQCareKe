@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Web;
+using System.Web.Services;
 using System.Web.UI.WebControls;
 using Application.Presentation;
 using Entities.CCC.Lookup;
@@ -144,6 +146,12 @@ namespace IQCare.Web.CCC.Patient
             //        WardId.Items.Add(new ListItem(items.WardName, items.WardId.ToString()));
             //    }
             //}
+        }
+
+        [WebMethod(EnableSession = true)]
+        public static void SetDobPrecisionSession(bool dobPrecision)
+        {
+            HttpContext.Current.Session["DobPrecision"] = dobPrecision;
         }
     }
 }

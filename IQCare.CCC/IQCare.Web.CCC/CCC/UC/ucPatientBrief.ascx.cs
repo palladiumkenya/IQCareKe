@@ -21,7 +21,7 @@ namespace IQCare.Web.CCC.UC
             var myDateMonth = DateTime.Now.Month;
             string TBStatus="unknown";
             string NutritionStatus = "unknown";
-            string categorization = "none";
+            string categorization = "Not done";
 
             int patientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
             
@@ -106,7 +106,7 @@ namespace IQCare.Web.CCC.UC
                 lblAge.Text = "<strong><i>" + age.Replace("Age:","") + "</i></strong>";
                 Session["Age"] = Convert.ToString(myDate - DoB.Year);
                 // lblCCCReg.Text = x.EnrollmentNumber;
-                lblCCCRegNo.Text = " (" + thisPatient.EnrollmentNumber+") ";
+                lblCCCRegNo.Text = thisPatient.EnrollmentNumber;
                 lblEnrollmentDate.Text = "" + thisPatient.EnrollmentDate.ToString("dd-MMM-yyyy");
 
                 //SET TB STATUS
@@ -135,7 +135,7 @@ namespace IQCare.Web.CCC.UC
                 }
 
                 // SET NUTRITION STATUS
-                if (thisPatient.TBStatus < 1)
+                if (thisPatient.NutritionStatus < 1)
                 {
                     lblnutritionstatus.Text = "<span class='fa fa-info-circle text-danger'> " + NutritionStatus+"<span>";
                 }
@@ -166,14 +166,15 @@ namespace IQCare.Web.CCC.UC
                 }
                 else
                 {
-                    categorization= LookupLogic.GetLookupNameById(thisPatient.categorization).ToString().ToUpper();
+                    //categorization= LookupLogic.GetLookupNameById(thisPatient.categorization).ToString().ToUpper();
+                    categorization = thisPatient.categorization.ToString();
                     switch (categorization)
                     {
-                        case "Stable":
-                            lblnutritionstatus.Text = "<span class='label label-success'>" + categorization + "</span>";
+                        case "1":
+                            lblcategorization.Text = "<span class='label label-success'>Stable</span>";
                             break;
-                        case "Unstable":
-                            lblnutritionstatus.Text = "<span class='label label-danger'>" + categorization + "</span>";
+                        case "2":
+                            lblcategorization.Text = "<span class='label label-danger'>Unstable</span>";
                             break;
                     }
                 }

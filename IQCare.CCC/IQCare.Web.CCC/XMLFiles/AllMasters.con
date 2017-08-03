@@ -105241,7 +105241,7 @@
     <ListName>Payment Exemption</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>407</ID>
+    <ID>425</ID>
     <Name>Under 5</Name>
     <CodeID>1011</CodeID>
     <SRNo>1.00</SRNo>
@@ -105250,7 +105250,7 @@
     <ListName>Payment Exemption</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>408</ID>
+    <ID>426</ID>
     <Name>Maternity</Name>
     <CodeID>1011</CodeID>
     <SRNo>1.00</SRNo>
@@ -105259,7 +105259,7 @@
     <ListName>Payment Exemption</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>409</ID>
+    <ID>427</ID>
     <Name>Prisoner</Name>
     <CodeID>1011</CodeID>
     <SRNo>1.00</SRNo>
@@ -123391,7 +123391,11 @@
     <UserId>3</UserId>
     <SystemUserName>winnie</SystemUserName>
     <Name>Achieng winnie</Name>
+    <EmployeeName>Winnie Achieng   </EmployeeName>
     <UserDeleteFlag>0</UserDeleteFlag>
+    <EmployeeId>1</EmployeeId>
+    <DesignationId>10</DesignationId>
+    <Designation>Other</Designation>
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
   <Users>
@@ -123447,7 +123451,11 @@
     <UserId>6</UserId>
     <SystemUserName>Mawasi</SystemUserName>
     <Name>Martin Wanyonyi</Name>
+    <EmployeeName>Martin Wanyonyi                                          </EmployeeName>
     <UserDeleteFlag>0</UserDeleteFlag>
+    <EmployeeId>13</EmployeeId>
+    <DesignationId>1</DesignationId>
+    <Designation>Physician/Clinical Officer</Designation>
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
   <Users>
