@@ -89,6 +89,7 @@ namespace DataAccess.CCC.Repository
         private IIdentifierRepository _identifierRepository;
         private IPatientReEnrollmentRepository _patientReEnrollmentRepository;
         private IHivReConfirmatoryTestRepository _hivReConfirmatoryTestRepository;
+        private IPatientArtDistributionRepository _patientArtDistributionRepository;
 
         /* Patient */
         private IPatientRepository _patientRepository;
@@ -628,6 +629,11 @@ namespace DataAccess.CCC.Repository
         public IPatientSupportSystemCriteriaRepository PatientSupportSystemCriteriaRepository
         {
             get { return _patientSupportSystemCriteriaRepository ?? (_patientSupportSystemCriteriaRepository = new PatientSupportSystemCriteriaRepository((GreencardContext)_context)); }
+        }
+
+        public IPatientArtDistributionRepository PatientArtDistributionRepository
+        {
+            get { return _patientArtDistributionRepository ?? (_patientArtDistributionRepository= new PatientArtDistributionRepository((GreencardContext)_context)); }
         }
 
 

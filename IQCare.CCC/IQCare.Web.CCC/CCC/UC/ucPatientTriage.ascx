@@ -96,7 +96,7 @@
                  <div class="col-md-4 col-xs-12 col-sm-12">
                     <div class="input-group">
                         <span class="input-group-addon">Temperature (°C)</span>
-                        <asp:TextBox runat="server" ID="Temperature" ClientIDMode="Static" CssClass="form-control input-sm" placeholder=".." Type="Number" Min="25" Max="50" data-parsley-range="[25, 50]" data-parsley-range-message="Temperature is out of reasonable range"></asp:TextBox>
+                        <asp:TextBox runat="server" ID="Temperature" ClientIDMode="Static" CssClass="form-control input-sm" placeholder=".." Type="Number" Min="25" Max="43" data-parsley-range="[25, 43]" data-parsley-range-message="Temperature is out of reasonable range"></asp:TextBox>
                     </div>
                     <p class="help-block pull-left"><strong>Normal 36.5–37.5 °C </strong></p>
                 </div>   
