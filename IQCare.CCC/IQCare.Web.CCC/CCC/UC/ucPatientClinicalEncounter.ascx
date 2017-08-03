@@ -1239,7 +1239,7 @@
                 </div>
                 <%-- .data-step-2--%>
 
-                <div class="step-pane sample-pane" id="datastep3" data-step="3">
+                <div class="step-pane sample-pane" id="datastep3"  data-parsley-validate="true" data-show-errors="true" data-step="3">
                     <div class="col-md-12"><small class="muted pull-left"><strong>PATIENT Examination</strong></small></div>
                     <div class="col-md-12">
                         <hr />
@@ -1259,11 +1259,12 @@
                                 <hr />
                             </div>
 
-
-
                             <div class="panel panel-info">
+                                <div class="col-md-12" >
+                                    <small class="muted pull-left"><strong>Review of Systems</strong></small>
+                                </div>   
                                 <div class="panel-body" >
-                                    <div class="col-md-12 form-group">
+                                    <div class="col-md-6 form-group">
                                         <div>
                                             <label class="control-label  pull-left text-primary">*Are all systems okay</label>
                                         </div>
@@ -1278,11 +1279,12 @@
 
                                         </div>
                                     </div>
+                                    <div class="col-md-6"></div>
                                     <div class="col-md-12 form-group" id="systemsOkayCtrls" clientidmode="Static">
                                     <div class="col-md-12 form-group">
                                         <div class="col-md-3 form-group">
                                             <div class="col-md-12">
-                                                <label for="ChronicIllnessName" class="control-label pull-left">Review of Systems</label>
+                                                <label for="ChronicIllnessName" class="control-label pull-left">Systems</label>
                                             </div>
                                             <div class="col-md-12">
                                                 <asp:DropDownList runat="server" ID="ddlExaminationType" CssClass="form-control input-sm" ClientIDMode="Static" onchange="loadSystemReviews();" />
@@ -1369,6 +1371,9 @@
                         </div>
 
                         <div class="col-md-12">
+                            <div class="col-md-12 form-group">
+                                <label class="control-label pull-left">PHDP</label>
+                            </div>
                             <div class="col-md-12 form-group">
                                 <label class="control-label pull-left">Select PHDP services offered from the list below</label>
                             </div>
@@ -1916,7 +1921,7 @@
                                                 <div class="col-md-12">
                                                     <div class="datepicker fuelux form-group" id="PersonAppointmentDate">
                                                         <div class="input-group">
-                                                            <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="AppointmentDate"></asp:TextBox>
+                                                            <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="AppointmentDate" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')" required ="True" data-parsley-min-message="Input the appointment date"></asp:TextBox>
                                                             <div class="input-group-btn">
                                                                 <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -2133,7 +2138,7 @@
         //set nutrition status
 
         var txtBmi = $("#<%=txtBMI.ClientID%>").val();
-        if (txtBmi < 16) {
+        if (txtBmi > 0 && txtBmi < 16) {
             $("#nutritionscreeningstatus option").filter(function () { return $(this).text() === 'Severe Acute Malnutrition'; }).prop('selected', true);
         } else if (txtBmi >= 16 && txtBmi < 18.5) {
             $("#nutritionscreeningstatus option").filter(function () { return $(this).text() === 'Moderate Acute Malnutrition'; }).prop('selected', true);
@@ -2679,15 +2684,15 @@
                     if (data.direction === 'previous') {
                         return;
                     }
-                    savePatientPhysicalExams();
 
-                    //if ($("#datastep3").parsley().validate()) {
-
-                    //} else {
-                    //    stepError = $('.parsley-error').length === 0;
-                    //    totalError += stepError;
-                    //    evt.preventDefault();
-                    //}
+                    if ($("#datastep3").parsley().validate()) {
+                        debugger;
+                        savePatientPhysicalExams();
+                    } else {
+                        stepError = $('.parsley-error').length === 0;
+                        totalError += stepError;
+                        evt.preventDefault();
+                    }
                 }
                 else if (data.step === 4) {
                     if (data.direction === 'previous') {
