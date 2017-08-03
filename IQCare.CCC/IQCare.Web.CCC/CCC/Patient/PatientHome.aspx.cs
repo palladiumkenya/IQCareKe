@@ -368,12 +368,6 @@ namespace IQCare.Web.CCC.Patient
                     }
                 }
             }
-
-            var age = Convert.ToInt32(Session["Age"]);
-            if (age >= 20)
-                AgeYes.Checked = true;
-            else
-                AgeNo.Checked = true;
         }                        
       }
    }

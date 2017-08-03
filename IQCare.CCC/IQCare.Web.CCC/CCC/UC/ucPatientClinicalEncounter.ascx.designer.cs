@@ -454,6 +454,24 @@ namespace IQCare.Web.CCC.UC {
         protected global::System.Web.UI.WebControls.CheckBoxList cblGeneralExamination;
         
         /// <summary>
+        /// systemsOkYes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton systemsOkYes;
+        
+        /// <summary>
+        /// systemsOkNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton systemsOkNo;
+        
+        /// <summary>
         /// ddlExaminationType control.
         /// </summary>
         /// <remarks>
