@@ -80,6 +80,11 @@ namespace IQCare.CCC.UILogic
             return appointment;
         }
 
+        public List<AppointmentSummary>GetAppointmentSummaryByDate(DateTime date)
+        {
+            var _appointments = _appointment.GetAppointmentSummaryByDate(date);
+            return _appointments;
+        }
         public List<PatientAppointment> GetByDateRange(DateTime startDate, DateTime endDate)
         {
             var appointment = _appointment.GetByDateRange(startDate, endDate);

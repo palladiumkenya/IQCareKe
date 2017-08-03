@@ -3237,7 +3237,7 @@ Order By Visit_OrderbyDate Desc
 				Inner Join Mst_LabTestParameter As P On P.Id = R.ParameterId
 				Inner Join mst_LabTestMaster As T On T.Id = R.LabTestId
 				Inner Join ord_LabOrder As O On O.Id = R.LabOrderId And O.Id = OT.LabOrderId
-				Where (P.ReferenceId = 'CD4')
+				Where (P.ReferenceId in ('CD4','CD4COUNT'))
 					And (R.DeleteFlag = 0)
 					And (O.DeleteFlag = 0)
 					And (O.Ptn_Pk = @PatientId)
@@ -3270,7 +3270,7 @@ Order By O.OrderDate Asc
 	From dtl_LabOrderTestResult R
 	Inner Join Mst_LabTestParameter P On P.Id = R.ParameterId
 	Inner Join ord_LabOrder O On O.Id = R.LabOrderId
-	Where P.ReferenceId In ('CD4','VIRAL_LOAD')
+	Where P.ReferenceId In ('CD4','CD4COUNT','VIRAL_LOAD')
 		And R.DeleteFlag = 0
 		And O.DeleteFlag = 0
 		And O.Ptn_Pk = @PatientId
@@ -4726,6 +4726,7 @@ Begin
 		,	Visit_pk
 		,	ARTStartDate
 		,	ConfirmHIVPosDate
+		,   DateEnrolledInCare
 		,	UserId
 		,	CreateDate)
 	Values (
@@ -4734,6 +4735,7 @@ Begin
 		,	@VisitId
 		,	@DateARTStarted
 		,	@ConfirmHIVPosDate
+		,   @EnrolledinHIVCare
 		,	@UserId
 		,	getdate())
 	--4                      

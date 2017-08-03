@@ -103,6 +103,7 @@ namespace DataAccess.CCC.Context
 
         //Appointment and Labs
         public DbSet<PatientAppointment> PatientAppointments { get; set; }
+        public DbSet<AppointmentSummary> AppointmentSummary { get; set; }
         public DbSet<BlueCardAppointment> BlueCardAppointments { get; set; }
         public DbSet<PatientLabTracker> PatientLabTracker { get; set; }
         public DbSet<LabDetailsEntity> PatientLabDetails { get; set; }

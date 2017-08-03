@@ -443,6 +443,8 @@ SET IDENTITY_INSERT [dbo].[Mst_LabTestParameter] Off
 Update O Set Migrated = 1 From lnk_TestParameter_Old  O Inner Join #New_TestParameter N On N.New_Id=O.SubTestID;
 
 update Mst_LabTestParameter set DeleteFlag= 1 Where ParameterName='ViralLoad Undetectable'
+update mst_labtestparameter set LabTestId=(select Id from mst_labtestmaster where referenceid='CD4_PERCENT') Where parametername='CD4 Percent'
+update mst_labtestparameter set Name='CD4 Count', ReferenceId='CD4COUNT' Where parametername='CD4'
 
 -- Config
 

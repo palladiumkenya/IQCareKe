@@ -301,15 +301,6 @@ namespace IQCare.Web.CCC.UC {
         protected global::System.Web.UI.WebControls.TextBox adverseEvent;
         
         /// <summary>
-        /// AdverseEventCause control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox AdverseEventCause;
-        
-        /// <summary>
         /// ddlAdverseEventSeverity control.
         /// </summary>
         /// <remarks>
@@ -317,6 +308,15 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlAdverseEventSeverity;
+        
+        /// <summary>
+        /// AdverseEventCause control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox AdverseEventCause;
         
         /// <summary>
         /// AdverseEventAction control.

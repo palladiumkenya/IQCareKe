@@ -748,20 +748,21 @@
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="col-md-12">
-                                                    <label class="control-label">Medicine Causing A/E</label>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <asp:TextBox runat="server" CssClass="form-control input-sm" ID="AdverseEventCause" ClientIDMode="Static" placeholder="cause..."></asp:TextBox>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="col-md-12">
                                                     <label class="control-label pull-left">Severity</label>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ddlAdverseEventSeverity" ClientIDMode="Static" />
                                                 </div>
                                             </div>
+                                            <div class="col-md-3">
+                                                <div class="col-md-12">
+                                                    <label class="control-label">Medicine Causing A/E</label>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <asp:TextBox runat="server" CssClass="form-control input-sm" ID="AdverseEventCause" ClientIDMode="Static" placeholder="cause..."></asp:TextBox>
+                                                </div>
+                                            </div>
+                                            
                                             <div class="col-md-2">
                                                 <div class="col-md-12">
                                                     <label class="control-label pull-left">Action</label>
