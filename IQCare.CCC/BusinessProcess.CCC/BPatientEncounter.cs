@@ -137,7 +137,7 @@ namespace BusinessProcess.CCC
                     ClsUtility.AddParameters("@PatientMasterVisitID", SqlDbType.Int, masterVisitID);
                     ClsUtility.AddParameters("@PatientID", SqlDbType.Int, patientID);
 
-                    int a = (int)obj.ReturnObject(ClsUtility.theParams, "sp_deletePatientEncounterChronicIllness", ClsUtility.ObjectEnum.ExecuteNonQuery);
+                    //int a = (int)obj.ReturnObject(ClsUtility.theParams, "sp_deletePatientEncounterChronicIllness", ClsUtility.ObjectEnum.ExecuteNonQuery);
 
                     foreach (var chrIll in chronicIllness)
                     {
@@ -181,7 +181,7 @@ namespace BusinessProcess.CCC
                     ClsUtility.AddParameters("@PatientMasterVisitID", SqlDbType.Int, masterVisitID);
                     ClsUtility.AddParameters("@PatientID", SqlDbType.Int, patientID);
 
-                    int q = (int)objAllergy.ReturnObject(ClsUtility.theParams, "sp_deletePatientEncounterAllergies", ClsUtility.ObjectEnum.ExecuteNonQuery);
+                    //int q = (int)objAllergy.ReturnObject(ClsUtility.theParams, "sp_deletePatientEncounterAllergies", ClsUtility.ObjectEnum.ExecuteNonQuery);
 
                     foreach (var all in allergies)
                     {
@@ -308,7 +308,7 @@ namespace BusinessProcess.CCC
                         ClsUtility.AddParameters("@PatientMasterVisitID", SqlDbType.Int, PatientMasterVisitID);
                         ClsUtility.AddParameters("@PatientID", SqlDbType.Int, PatientID);
 
-                        int b = (int)obj.ReturnObject(ClsUtility.theParams, "sp_deletePatientEncounterDiagnosis", ClsUtility.ObjectEnum.ExecuteNonQuery);
+                        //int b = (int)obj.ReturnObject(ClsUtility.theParams, "sp_deletePatientEncounterDiagnosis", ClsUtility.ObjectEnum.ExecuteNonQuery);
                     //}
 
                     foreach (var diag in diagnosis)

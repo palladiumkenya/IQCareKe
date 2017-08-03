@@ -172,7 +172,10 @@
     
     <script type="text/javascript">
         $(document).ready(function () {
-            var today = new Date();
+            var newdate = new Date();
+            var today = moment(newdate).add(2, 'hours');
+            var patType = '<%=patType%>';
+            //console.log(today);
 
             $('#PersonDOBdatepicker').datetimepicker({
                 format: 'DD-MMM-YYYY',
@@ -183,13 +186,15 @@
             $('#DateOfEnrollmentdatepicker').datetimepicker({
                 format: 'DD-MMM-YYYY',
                 allowInputToggle: true,
+                maxDate: today,
                 useCurrent: false
             });
 
             $("#ReConfirmatoryTestdatepicker").datetimepicker({
                 format: 'DD-MMM-YYYY',
                 allowInputToggle: true,
-                useCurrent: true
+                useCurrent: false,
+                maxDate: today
             });
 
             $("#OtherSpecificEntryPoint").hide();
@@ -207,21 +212,26 @@
             });
 
             $("#DateOfEnrollmentdatepicker").on('dp.change', function(e) {
-                var formatedValue = e.date.format(e.date._f);
+                var formatedValue = moment($("#DateOfEnrollment").val(), 'DD-MMM-YYYY').format('DD-MM-YYYY');
                 //console.log(formatedValue);
 
                 var reconfirmationTest = $("#ReConfirmatoryTestDate").val();
 
-                reconfirmationTest = moment(reconfirmationTest);
+                reconfirmationTest = moment(reconfirmationTest, 'DD-MMM-YYYY').format('DD-MM-YYYY');
 
-                if (moment('' + formatedValue + '').isAfter()) {
-                    toastr.error("Enrollment Date. Future dates not allowed.", "Patient Enrollment");
-                    $("#DateOfEnrollment").val("");
-                    return false;
-                }
+                var x = moment(formatedValue, 'DD-MM-YYYY')._d;
+                var y = moment(reconfirmationTest, 'DD-MM-YYYY')._d;
+                //console.log(x);
+                //console.log(y);
+                //if (moment('' + formatedValue + '').isAfter()) {
+                //    toastr.error("Enrollment Date. Future dates not allowed.", "Patient Enrollment");
+                //    $("#DateOfEnrollment").val("");
+                //    return false;
+                //}
 
-                var isBeforeReconfirmationDate = moment(reconfirmationTest).isBefore(formatedValue);
-                if (!isBeforeReconfirmationDate) {
+                var isBeforeReconfirmationDate = moment(x).isBefore(y);
+                //console.log(isBeforeReconfirmationDate);
+                if (isBeforeReconfirmationDate && patType == "New") {
                     toastr.error("Enrollment date should not be before Reconfirmation Test Date", "Patient Enrollment");
                     $("#DateOfEnrollment").val("");
                     return false;
@@ -233,7 +243,7 @@
             var personDOB = '<%=Session["PersonDob"]%>';
             var nationalId = '<%=Session["NationalId"]%>';
             var patientType = '<%=Session["PatientType"]%>';
-            var patType = '<%=patType%>';
+            
             //console.log(code);
             if (personDOB != null && personDOB !="") {
                 $("#DateOfBirth").addClass("noneevents");

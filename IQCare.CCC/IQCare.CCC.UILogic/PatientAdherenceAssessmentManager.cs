@@ -37,6 +37,40 @@ namespace IQCare.CCC.UILogic
             }
         }
 
+        public int AddPatientAdherenceAssessment(int patientId, int patientMasterVisitId, int createdBy, bool feelBetter, bool carelessAboutMedicine, bool feelWorse, bool forgetMedicine, bool takeMedicine, bool stopMedicine, bool underPressure, decimal difficultyRemembering)
+        {
+            try
+            {
+                PatientAdherenceAssessment adherenceAssessment = new PatientAdherenceAssessment();
+
+                adherenceAssessment.PatientId = patientId;
+                adherenceAssessment.PatientMasterVisitId = patientMasterVisitId;
+
+                adherenceAssessment.FeelBetter = feelBetter;
+                adherenceAssessment.CarelessAboutMedicine = carelessAboutMedicine;
+                adherenceAssessment.FeelWorse = feelWorse;
+                adherenceAssessment.ForgetMedicine = forgetMedicine;
+
+
+                adherenceAssessment.TakeMedicine = takeMedicine;
+                adherenceAssessment.StopMedicine = stopMedicine;
+                adherenceAssessment.UnderPressure = underPressure;
+                adherenceAssessment.DifficultyRemembering = difficultyRemembering;
+
+
+                adherenceAssessment.DeleteFlag = false;
+                adherenceAssessment.CreatedBy = createdBy;
+                adherenceAssessment.CreateDate = DateTime.Now;
+
+                return _patientAdherenceAssessessment.AddPatientAdherenceAssessment(adherenceAssessment);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
         public int UpdateAdherenceAssessment(PatientAdherenceAssessment patientAdherenceAssessment)
         {
             try
