@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Application.Presentation;
+﻿using Application.Presentation;
 using Entities.CCC.Lookup;
 using Interface.CCC.Lookup;
+using System;
+using System.Collections.Generic;
 
 namespace IQCare.CCC.UILogic
 {
