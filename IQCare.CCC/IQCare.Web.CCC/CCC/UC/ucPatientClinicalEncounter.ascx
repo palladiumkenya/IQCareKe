@@ -941,7 +941,7 @@
 
                                         <div class="col-md-3">
                                             <div class="col-md-12">
-                                                <label class="control-label  pull-left">Allergy Date</label>
+                                                <label class="control-label  pull-left">Onset Date</label>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="datepicker fuelux" id="AllergyDate">
