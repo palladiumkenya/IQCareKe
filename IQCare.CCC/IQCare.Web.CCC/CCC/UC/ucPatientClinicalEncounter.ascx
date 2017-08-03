@@ -182,6 +182,55 @@
                         </div>
 
                     </div>
+
+                    <div class="col-md-12 form-group">
+                        <div class="col-md-12">
+                            <div class="panel panel-info">
+                                <div class="panel-body">
+                                    <div class="col-md-12 form-group">
+                                        <label class="control-label pull-left">Nutrition Assessment</label>
+                                    </div>
+
+                                    <div class="col-md-12 form-group">
+                                        <div class="col-md-3">
+                                            <div class="col-md-12">
+                                                <label class="control-label pull-left input-sm">Height (cm)</label>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <asp:TextBox ID="txtHeight" CssClass="form-control input-sm" ClientIDMode="Static" Enabled="false" runat="server"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="col-md-12">
+                                                <label class="control-label pull-left input-sm">Weight (Kg)</label>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <asp:TextBox ID="txtWeight" CssClass="form-control input-sm" ClientIDMode="Static" Enabled="false" runat="server"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="col-md-12">
+                                                <label class="control-label pull-left input-sm">BMI</label>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <asp:TextBox ID="txtBMI" CssClass="form-control input-sm" ClientIDMode="Static" Enabled="false" runat="server"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="col-md-12">
+                                                <label class="control-label pull-left input-sm text-primary" for="nutritionscreeningstatus">*Nutrition Status</label>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <asp:DropDownList runat="server" CssClass="form-control" ID="nutritionscreeningstatus" ClientIDMode="Static" data-parsley-min="1" data-parsley-min-message="Value Required" />
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="col-md 12 form-group">
                         <div class="col-md-4"></div>
                         <div class="col-md-4"></div>
@@ -684,43 +733,6 @@
                                                     <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="tbscreeningstatus" ClientIDMode="Static" data-parsley-min="1" data-parsley-min-message="Value Required" />
                                                 </div>
                                             </div>
-                                            <div class="col-md-6  form-group"></div>
-                                            <div class="col-md-12 form-group">
-                                                <div class="col-md-3">
-                                                    <div class="col-md-12">
-                                                        <label class="control-label pull-left input-sm">Height (cm)</label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <asp:TextBox ID="txtHeight" CssClass="form-control input-sm" ClientIDMode="Static" Enabled="false" runat="server"></asp:TextBox>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <div class="col-md-12">
-                                                        <label class="control-label pull-left input-sm">Weight (Kg)</label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <asp:TextBox ID="txtWeight" CssClass="form-control input-sm" ClientIDMode="Static" Enabled="false" runat="server"></asp:TextBox>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <div class="col-md-12">
-                                                        <label class="control-label pull-left input-sm">BMI</label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <asp:TextBox ID="txtBMI" CssClass="form-control input-sm" ClientIDMode="Static" Enabled="false" runat="server"></asp:TextBox>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <div class="col-md-12">
-                                                        <label class="control-label pull-left input-sm text-primary" for="nutritionscreeningstatus">*Nutrition Status</label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <asp:DropDownList runat="server" CssClass="form-control" ID="nutritionscreeningstatus" ClientIDMode="Static" data-parsley-min="1" data-parsley-min-message="Value Required" />
-
-                                                    </div>
-                                                </div>
-                                            </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -1338,6 +1350,19 @@
                                             </div>
                                         </div>
                                     </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="panel panel-primary">
+                                <div class="panel-body">
+                                    <div class="col-md-12 form-group">
+                                        <div class="col-md-4">
+                                            <label class="control-label  pull-left text-primary">*WHO Stage</label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <asp:DropDownList ID="WHOStage" CssClass="form-control input-sm" runat="server" ClientIDMode="Static" data-parsley-required="true"></asp:DropDownList>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -2897,7 +2922,7 @@
             var generalExamination = getCheckBoxListItemsChecked('<%= cblGeneralExamination.ClientID %>');
             if (generalExamination == "") {
                 toastr.error(generalExamination, "Please check at least one General Examination.");
-                evt.preventDefault();
+                //evt.preventDefault();
                 return false;
             }
             var physicalExamArray = new Array();
@@ -3117,10 +3142,13 @@
             var question2 = parseInt($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question2']:checked").val());
             var question3 = parseInt($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question3']:checked").val());
             var question4 = parseInt($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question4']:checked").val());
+
             var question5 = parseFloat($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question5']:checked").val());
             var question6 = parseFloat($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question6']:checked").val());
             var question7 = parseFloat($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question7']:checked").val());
             var question8 = parseFloat($("#<%=Question8.ClientID%>").val());
+
+            console.log(question8);
 
             $('.errorBlock1').hide();
             $('.errorBlock2').hide();
@@ -3152,22 +3180,24 @@
                 return false;
             }
 
-            if (isNaN(question5)) {
+            var adherenceScore = question1 + question2 + question3 + question4;
+
+            if (isNaN(question5) && adherenceScore > 0) {
                 $('.errorBlock5').show();
                 return false;
             }
 
-            if (isNaN(question6)) {
+            if (isNaN(question6) && adherenceScore > 0) {
                 $('.errorBlock6').show();
                 return false;
             }
 
-            if (isNaN(question7)) {
+            if (isNaN(question7) && adherenceScore > 0) {
                 $('.errorBlock7').show();
                 return false;
             }
 
-            if (isNaN(question8)) {
+            if (isNaN(question8) && adherenceScore > 0) {
                 $('.errorBlock8').show();
                 return false;
             }
@@ -3189,14 +3219,12 @@
             console.log(question4);
             */
 
-            var adherenceScore = question1 + question2 + question3 + question4;
-
             //console.log(adherenceScore);
 
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientEncounterService.asmx/SavePatientAdherenceAssessment",
-                data: "{'feelBetter': '" + question4 + "', 'carelessAboutMedicine': '" + question2 + "', 'feelWorse': '" + question3 + "', 'forgetMedicine': '" + question1 + "'}",
+                data: "{'feelBetter': '" + question4 + "', 'carelessAboutMedicine': '" + question2 + "', 'feelWorse': '" + question3 + "', 'forgetMedicine': '" + question1 + "','takeMedicine':'" + question5 + "', 'stopMedicine':'" + question6 + "', 'underPressure':'" + question7 + "', 'difficultyRemembering':'" + question8 + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {

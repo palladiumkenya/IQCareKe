@@ -2409,7 +2409,7 @@
 							getPatientBaselinePreloadValues();
 							getPatientEnrollmentDate();
 						}else if(transferIn===2){
-							 getPatientEnrollmentDate();
+                            getPatientEnrollmentDate();
 						}
 		   
 					   

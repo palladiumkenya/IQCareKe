@@ -44,7 +44,7 @@ namespace IQCare.Web.CCC.UC
                 lookUp.populateDDL(ddlTreatmentPlan, "TreatmentPlan");
                 if(Convert.ToInt32(Session["Age"]) > 14)
                 {
-                    lookUp.populateDDL(regimenLine, "RegimenClassificationAdult");
+                    lookUp.populateDDL(regimenLine, "RegimenClassificationAdult", "RegimenClassificationPaeds");
                 }
                 else
                 {
