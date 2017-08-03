@@ -85,13 +85,13 @@ namespace IQCare.Web.CCC.UC {
         protected global::System.Web.UI.WebControls.TextBox txtPresentingComplaints;
         
         /// <summary>
-        /// txtPCOnsetDate control.
+        /// numberOfDays control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPCOnsetDate;
+        protected global::System.Web.UI.WebControls.TextBox numberOfDays;
         
         /// <summary>
         /// complaints control.
@@ -499,6 +499,33 @@ namespace IQCare.Web.CCC.UC {
         protected global::System.Web.UI.WebControls.TextBox txtExamFindings;
         
         /// <summary>
+        /// arvAdherance control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList arvAdherance;
+        
+        /// <summary>
+        /// ctxAdherance control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ctxAdherance;
+        
+        /// <summary>
+        /// stabilityStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList stabilityStatus;
+        
+        /// <summary>
         /// txtWorkPlan control.
         /// </summary>
         /// <remarks>
@@ -542,33 +569,6 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText DiagnosisTreatment;
-        
-        /// <summary>
-        /// arvAdherance control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList arvAdherance;
-        
-        /// <summary>
-        /// ctxAdherance control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ctxAdherance;
-        
-        /// <summary>
-        /// stabilityStatus control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList stabilityStatus;
         
         /// <summary>
         /// Question1_Yes control.
