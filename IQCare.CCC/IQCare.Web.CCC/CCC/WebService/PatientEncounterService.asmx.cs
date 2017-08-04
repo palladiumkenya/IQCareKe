@@ -7,6 +7,7 @@ using System.Web.Script.Serialization;
 using System.Web.Script.Services;
 using System.Web.Services;
 using Application.Presentation;
+using Entities.CCC.Encounter;
 using Entities.CCC.Enrollment;
 using Interface.CCC.Visit;
 using IQCare.CCC.UILogic.Enrollment;
@@ -72,7 +73,16 @@ namespace IQCare.Web.CCC.WebService
             int patientId = Convert.ToInt32(Session["PatientPK"].ToString());
             int patientMasterVisitId = Convert.ToInt32(Session["PatientMasterVisitID"].ToString());
 
-            whoStageManager.addPatientWhoStage(patientId, patientMasterVisitId, whoStage);
+            PatientWhoStage PatientWhoStage = whoStageManager.GetPatientWhoStage(patientId, patientMasterVisitId);
+            if (PatientWhoStage != null)
+            {
+                PatientWhoStage.WHOStage = whoStage;
+                whoStageManager.UpdatePatientWhoStage(PatientWhoStage);
+            }
+            else
+            {
+                whoStageManager.addPatientWhoStage(patientId, patientMasterVisitId, whoStage);
+            }
         }
 
         [WebMethod(EnableSession = true)]
@@ -701,6 +711,7 @@ namespace IQCare.Web.CCC.WebService
             PatientAdherenceAssessmentManager patientAdherenceAssessment = new PatientAdherenceAssessmentManager();
             int adherenceScore = 0;
             string adherenceRating = null;
+            decimal mmas8Score;
 
             int patientId = Convert.ToInt32(Session["PatientPK"].ToString());
             int patientMasterVisitId = Convert.ToInt32(Session["PatientMasterVisitId"].ToString());
@@ -727,6 +738,22 @@ namespace IQCare.Web.CCC.WebService
             {
                 adherenceRating = "Poor";
             }
+
+            if (adherenceScore > 0)
+            {
+                mmas8Score = Convert.ToDecimal(adherenceScore) + Convert.ToDecimal(take_medicine) +
+                             Convert.ToDecimal(stop_Medicine) + Convert.ToDecimal(under_Pressure) + Convert.ToDecimal(difficulty_Remembering);
+
+                if (mmas8Score >= 1 && mmas8Score <= 2)
+                {
+                    adherenceRating = "Inadequate";
+                }
+                else if (mmas8Score >= 3 && mmas8Score <= 8)
+                {
+                    adherenceRating = "Poor";
+                }
+            }
+
 
             var history = patientAdherenceAssessment.GetActiveAdherenceAssessment(patientId);
 
