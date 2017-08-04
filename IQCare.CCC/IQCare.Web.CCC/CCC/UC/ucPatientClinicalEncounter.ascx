@@ -182,6 +182,55 @@
                         </div>
 
                     </div>
+
+                    <div class="col-md-12 form-group">
+                        <div class="col-md-12">
+                            <div class="panel panel-info">
+                                <div class="panel-body">
+                                    <div class="col-md-12 form-group">
+                                        <label class="control-label pull-left">Nutrition Assessment</label>
+                                    </div>
+
+                                    <div class="col-md-12 form-group">
+                                        <div class="col-md-3">
+                                            <div class="col-md-12">
+                                                <label class="control-label pull-left input-sm">Height (cm)</label>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <asp:TextBox ID="txtHeight" CssClass="form-control input-sm" ClientIDMode="Static" Enabled="false" runat="server"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="col-md-12">
+                                                <label class="control-label pull-left input-sm">Weight (Kg)</label>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <asp:TextBox ID="txtWeight" CssClass="form-control input-sm" ClientIDMode="Static" Enabled="false" runat="server"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="col-md-12">
+                                                <label class="control-label pull-left input-sm">BMI</label>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <asp:TextBox ID="txtBMI" CssClass="form-control input-sm" ClientIDMode="Static" Enabled="false" runat="server"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="col-md-12">
+                                                <label class="control-label pull-left input-sm text-primary" for="nutritionscreeningstatus">*Nutrition Status</label>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <asp:DropDownList runat="server" CssClass="form-control" ID="nutritionscreeningstatus" ClientIDMode="Static" data-parsley-min="1" data-parsley-min-message="Value Required" />
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="col-md 12 form-group">
                         <div class="col-md-4"></div>
                         <div class="col-md-4"></div>
@@ -233,101 +282,10 @@
                                             </div>
                                             <div class="col-md-5">
                                                 <div class="col-md-12">
-                                                    <label class="control-label  pull-left">Onset Date</label>
+                                                    <label class="control-label  pull-left">Number of days</label>
                                                 </div>
                                                 <div class="col-md-12">
-                                                    <div class="datepicker" id="PCDateOfOnset">
-                                                        <div class="input-group">
-                                                            <asp:TextBox ID="txtPCOnsetDate" runat="server" class="form-control input-sm" ClientIDMode="Static" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
-                                                            <%--<input class="form-control input-sm" id="VisitDate" type="text" runat="server" data-parsley-required="true" />--%>
-                                                            <div class="input-group-btn">
-                                                                <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
-                                                                    <span class="glyphicon glyphicon-calendar"></span>
-                                                                    <span class="sr-only">Toggle Calendar</span>
-                                                                </button>
-                                                                <div class="dropdown-menu dropdown-menu-right datepicker-calendar-wrapper" role="menu">
-                                                                    <div class="datepicker-calendar">
-                                                                        <div class="datepicker-calendar-header">
-                                                                            <button type="button" class="prev"><span class="glyphicon glyphicon-chevron-left input-sm"></span><span class="sr-only">Previous Month</span></button>
-                                                                            <button type="button" class="next"><span class="glyphicon glyphicon-chevron-right input-sm"></span><span class="sr-only">Next Month</span></button>
-                                                                            <button type="button" class="title" data-month="11" data-year="2014">
-                                                                                <span class="month">
-                                                                                    <span data-month="0">January</span>
-                                                                                    <span data-month="1">February</span>
-                                                                                    <span data-month="2">March</span>
-                                                                                    <span data-month="3">April</span>
-                                                                                    <span data-month="4">May</span>
-                                                                                    <span data-month="5">June</span>
-                                                                                    <span data-month="6">July</span>
-                                                                                    <span data-month="7">August</span>
-                                                                                    <span data-month="8">September</span>
-                                                                                    <span data-month="9">October</span>
-                                                                                    <span data-month="10">November</span>
-                                                                                    <span data-month="11" class="current">December</span>
-                                                                                </span><span class="year">2014</span>
-                                                                            </button>
-                                                                        </div>
-                                                                        <table class="datepicker-calendar-days">
-                                                                            <thead>
-                                                                                <tr>
-                                                                                    <th>Su</th>
-                                                                                    <th>Mo</th>
-                                                                                    <th>Tu</th>
-                                                                                    <th>We</th>
-                                                                                    <th>Th</th>
-                                                                                    <th>Fr</th>
-                                                                                    <th>Sa</th>
-                                                                                </tr>
-                                                                            </thead>
-                                                                            <tbody></tbody>
-                                                                        </table>
-                                                                        <div class="datepicker-calendar-footer">
-                                                                            <button type="button" class="datepicker-today">Today</button>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="datepicker-wheels" aria-hidden="true">
-                                                                        <div class="datepicker-wheels-month">
-                                                                            <h2 class="header">Month</h2>
-                                                                            <ul>
-                                                                                <li data-month="0">
-                                                                                    <button type="button">Jan</button></li>
-                                                                                <li data-month="1">
-                                                                                    <button type="button">Feb</button></li>
-                                                                                <li data-month="2">
-                                                                                    <button type="button">Mar</button></li>
-                                                                                <li data-month="3">
-                                                                                    <button type="button">Apr</button></li>
-                                                                                <li data-month="4">
-                                                                                    <button type="button">May</button></li>
-                                                                                <li data-month="5">
-                                                                                    <button type="button">Jun</button></li>
-                                                                                <li data-month="6">
-                                                                                    <button type="button">Jul</button></li>
-                                                                                <li data-month="7">
-                                                                                    <button type="button">Aug</button></li>
-                                                                                <li data-month="8">
-                                                                                    <button type="button">Sep</button></li>
-                                                                                <li data-month="9">
-                                                                                    <button type="button">Oct</button></li>
-                                                                                <li data-month="10">
-                                                                                    <button type="button">Nov</button></li>
-                                                                                <li data-month="11">
-                                                                                    <button type="button">Dec</button></li>
-                                                                            </ul>
-                                                                        </div>
-                                                                        <div class="datepicker-wheels-year">
-                                                                            <h2 class="header">Year</h2>
-                                                                            <ul></ul>
-                                                                        </div>
-                                                                        <div class="datepicker-wheels-footer clearfix">
-                                                                            <button type="button" class="btn datepicker-wheels-back"><span class="glyphicon glyphicon-arrow-left"></span><span class="sr-only">Return to Calendar</span></button>
-                                                                            <button type="button" class="btn datepicker-wheels-select">Select <span class="sr-only">Month and Year</span></button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    <asp:TextBox runat="server" CssClass="form-control input-sm" ID="numberOfDays" ClientIDMode="Static" Type="Number"></asp:TextBox>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
@@ -684,43 +642,6 @@
                                                     <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="tbscreeningstatus" ClientIDMode="Static" data-parsley-min="1" data-parsley-min-message="Value Required" />
                                                 </div>
                                             </div>
-                                            <div class="col-md-6  form-group"></div>
-                                            <div class="col-md-12 form-group">
-                                                <div class="col-md-3">
-                                                    <div class="col-md-12">
-                                                        <label class="control-label pull-left input-sm">Height (cm)</label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <asp:TextBox ID="txtHeight" CssClass="form-control input-sm" ClientIDMode="Static" Enabled="false" runat="server"></asp:TextBox>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <div class="col-md-12">
-                                                        <label class="control-label pull-left input-sm">Weight (Kg)</label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <asp:TextBox ID="txtWeight" CssClass="form-control input-sm" ClientIDMode="Static" Enabled="false" runat="server"></asp:TextBox>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <div class="col-md-12">
-                                                        <label class="control-label pull-left input-sm">BMI</label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <asp:TextBox ID="txtBMI" CssClass="form-control input-sm" ClientIDMode="Static" Enabled="false" runat="server"></asp:TextBox>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <div class="col-md-12">
-                                                        <label class="control-label pull-left input-sm text-primary" for="nutritionscreeningstatus">*Nutrition Status</label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <asp:DropDownList runat="server" CssClass="form-control" ID="nutritionscreeningstatus" ClientIDMode="Static" data-parsley-min="1" data-parsley-min-message="Value Required" />
-
-                                                    </div>
-                                                </div>
-                                            </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -1240,7 +1161,7 @@
                 </div>
                 <%-- .data-step-2--%>
 
-                <div class="step-pane sample-pane" id="datastep3" data-step="3">
+                <div class="step-pane sample-pane" id="datastep3"  data-parsley-validate="true" data-show-errors="true" data-step="3">
                     <div class="col-md-12"><small class="muted pull-left"><strong>PATIENT Examination</strong></small></div>
                     <div class="col-md-12">
                         <hr />
@@ -1260,11 +1181,12 @@
                                 <hr />
                             </div>
 
-
-
                             <div class="panel panel-info">
+                                <div class="col-md-12" >
+                                    <small class="muted pull-left"><strong>Review of Systems</strong></small>
+                                </div>   
                                 <div class="panel-body" >
-                                    <div class="col-md-12 form-group">
+                                    <div class="col-md-6 form-group">
                                         <div>
                                             <label class="control-label  pull-left text-primary">*Are all systems okay</label>
                                         </div>
@@ -1278,12 +1200,14 @@
                                             </label>
 
                                         </div>
+                                        <div class="errorBlock" style="color: red;"> Please select one option </div>
                                     </div>
+                                    <div class="col-md-6"></div>
                                     <div class="col-md-12 form-group" id="systemsOkayCtrls" clientidmode="Static">
                                     <div class="col-md-12 form-group">
                                         <div class="col-md-3 form-group">
                                             <div class="col-md-12">
-                                                <label for="ChronicIllnessName" class="control-label pull-left">Review of Systems</label>
+                                                <label for="ChronicIllnessName" class="control-label pull-left">Systems</label>
                                             </div>
                                             <div class="col-md-12">
                                                 <asp:DropDownList runat="server" ID="ddlExaminationType" CssClass="form-control input-sm" ClientIDMode="Static" onchange="loadSystemReviews();" />
@@ -1342,6 +1266,19 @@
                                     </div>
                                 </div>
                             </div>
+                            
+                            <div class="panel panel-primary">
+                                <div class="panel-body">
+                                    <div class="col-md-12 form-group">
+                                        <div class="col-md-4">
+                                            <label class="control-label  pull-left text-primary">*WHO Stage</label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <asp:DropDownList ID="WHOStage" CssClass="form-control input-sm" runat="server" ClientIDMode="Static" data-parsley-required="true" data-parsley-min="1"></asp:DropDownList>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -1356,6 +1293,55 @@
 
 
                     <div class="col-md-12">
+                        
+                    <div class="col-md-12">
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-info btn-sm pull-left" data-toggle="modal" data-target="#adherenceAssessmentModal">Adherence Assessment</button>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="col-md-12 form-group">
+                                <div class="col-md-6">
+                                    <label class="control-label pull-left">ARV Adherence</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <asp:DropDownList runat="server" ID="arvAdherance" CssClass="form-control input-sm" ClientIDMode="Static" Enabled="False" />
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="col-md-5">
+                            <div class="col-md-12 form-group">
+                                <div class="col-md-6">
+                                    <label class="control-label pull-left">CTX/Dapsone Adherence</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ctxAdherance" ClientIDMode="Static" Enabled="False" />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-info btn-sm pull-left" data-toggle="modal" data-target="#differentiatedModal">Stability Assessment</button>
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="col-md-12 form-group">
+                                <div class="col-md-6">
+                                    <label class="control-label pull-left">Stability Status</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <asp:DropDownList runat="server" ID="stabilityStatus" CssClass="form-control input-sm" ClientIDMode="Static" Enabled="False" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <hr />
+                    </div>
 
                         <div class="col-md-12">
                             <div class="col-md-12 form-group">
@@ -1370,6 +1356,9 @@
                         </div>
 
                         <div class="col-md-12">
+                            <div class="col-md-12 form-group">
+                                <label class="control-label pull-left">PHDP</label>
+                            </div>
                             <div class="col-md-12 form-group">
                                 <label class="control-label pull-left">Select PHDP services offered from the list below</label>
                             </div>
@@ -1447,56 +1436,6 @@
                             </div>
                         </div>
 
-
-                        <div class="col-md-12">
-                            <hr />
-                        </div>
-
-                        <div class="col-md-12">
-                            <div class="col-md-2">
-                                <button type="button" class="btn btn-info btn-sm pull-left" data-toggle="modal" data-target="#adherenceAssessmentModal">Adherence Assessment</button>
-                            </div>
-                            <div class="col-md-5">
-                                <div class="col-md-12 form-group">
-                                    <div class="col-md-6">
-                                        <label class="control-label pull-left">ARV Adherence</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <asp:DropDownList runat="server" ID="arvAdherance" CssClass="form-control input-sm" ClientIDMode="Static" Enabled="False" />
-                                    </div>
-                                </div>
-
-
-                            </div>
-                            <div class="col-md-5">
-                                <div class="col-md-12 form-group">
-                                    <div class="col-md-6">
-                                        <label class="control-label pull-left">CTX/Dapsone Adherence</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ctxAdherance" ClientIDMode="Static" Enabled="True" />
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="col-md-12">
-                            <div class="col-md-2">
-                                <button type="button" class="btn btn-info btn-sm pull-left" data-toggle="modal" data-target="#differentiatedModal">Stability Assessment</button>
-                            </div>
-
-                            <div class="col-md-5">
-                                <div class="col-md-12 form-group">
-                                    <div class="col-md-6">
-                                        <label class="control-label pull-left">Stability Status</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <asp:DropDownList runat="server" ID="stabilityStatus" CssClass="form-control input-sm" ClientIDMode="Static" Enabled="False" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
                         <!-- Modal -->
                         <div id="adherenceAssessmentModal" class="modal fade" role="dialog" data-parsley-validate="true" data-show-errors="true">
@@ -1917,7 +1856,7 @@
                                                 <div class="col-md-12">
                                                     <div class="datepicker fuelux form-group" id="PersonAppointmentDate">
                                                         <div class="input-group">
-                                                            <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="AppointmentDate"></asp:TextBox>
+                                                            <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="AppointmentDate" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')" required ="True" data-parsley-min-message="Input the appointment date"></asp:TextBox>
                                                             <div class="input-group-btn">
                                                                 <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -2106,6 +2045,7 @@
         $('.errorBlock6').hide();
         $('.errorBlock7').hide();
         $('.errorBlock8').hide();
+        $('.errorBlock').hide();
 
         if (($("#cough").val() === 'True') || ($("#fever").val() === 'True') || ($("#weightLoss").val() === 'True') || ($("#nightSweats").val() === 'True')) {
             $("#IcfActionForm").show();
@@ -2134,7 +2074,7 @@
         //set nutrition status
 
         var txtBmi = $("#<%=txtBMI.ClientID%>").val();
-        if (txtBmi < 16) {
+        if (txtBmi > 0 && txtBmi < 16) {
             $("#nutritionscreeningstatus option").filter(function () { return $(this).text() === 'Severe Acute Malnutrition'; }).prop('selected', true);
         } else if (txtBmi >= 16 && txtBmi < 18.5) {
             $("#nutritionscreeningstatus option").filter(function () { return $(this).text() === 'Moderate Acute Malnutrition'; }).prop('selected', true);
@@ -2666,8 +2606,9 @@
                 else if (data.step === 2) {
                     if (data.direction === 'previous') {
                         return;
+                    } else {
+                        savePatientEncounterChronicIllness();
                     }
-                    savePatientEncounterChronicIllness();
                     //if ($("#datastep2").parsley().validate()) {
 
                     //} else {
@@ -2679,9 +2620,30 @@
                 else if (data.step === 3) {
                     if (data.direction === 'previous') {
                         return;
-                    }
-                    savePatientPhysicalExams();
+                    } else {
+                        $('#datastep3').parsley().destroy();
+                        $('#datastep3').parsley({
+                            excluded:
+                                "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
+                        });
 
+                        if ($('input[name="ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$systemsOkay"]:checked').length >0) {
+                            $('.errorBlock').hide();
+                        } else {
+                            $('.errorBlock').show();
+                            return false;
+                        }
+
+                        if ($('#datastep3').parsley().validate()) {
+                            $.when(savePatientPhysicalExams(evt)).then(function () {
+                                setTimeout(function () { saveWhoStage(); },2000);
+                            });
+                        } else {
+                            stepError = $('.parsley-error').length === 0;
+                            totalError += stepError;
+                            evt.preventDefault();
+                        }
+                    }
                     //if ($("#datastep3").parsley().validate()) {
 
                     //} else {
@@ -2693,31 +2655,33 @@
                 else if (data.step === 4) {
                     if (data.direction === 'previous') {
                         return;
-                    }
-                    //savePatientPatientManagement();
-                    if ($('#AppointmentForm').parsley().validate()) {
-                        var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
-                        var appDate = $("#<%=AppointmentDate.ClientID%>").val();
-                        if (moment('' + appDate + '').isAfter(futureDate)) {
-                            toastr.error("Appointment date cannot be set to over 7 months");
-                            return false;
-                        }
-                        //save patient management
-                        $.when(savePatientPatientManagement()).then(function () {
-                            setTimeout(function () {
-                                window.location
-                                    .href =
-                                        '<%=ResolveClientUrl( "~/CCC/Patient/PatientHome.aspx")%>';
-                            },
-                                2000);
-                        });
-
-                        //save appointment
-                        checkExistingAppointment();
                     } else {
-                        return false;
-                    }
+                        //savePatientPatientManagement();
+                        if ($('#AppointmentForm').parsley().validate()) {
+                            var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
+                            var appDate = $("#<%=AppointmentDate.ClientID%>").val();
+                            if (moment('' + appDate + '').isAfter(futureDate)) {
+                                toastr.error("Appointment date cannot be set to over 7 months");
+                                return false;
+                            }
+                            //save patient management
+                            $.when(savePatientPatientManagement()).then(function() {
+                                setTimeout(function() {
+                                        window.location
+                                            .href =
+                                            '<%=ResolveClientUrl( "~/CCC/Patient/PatientHome.aspx")%>';
+                                    },
+                                    2000);
+                            });
 
+                            //save appointment
+                            checkExistingAppointment();
+                        } else {
+                            stepError = $('.parsley-error').length === 0;
+                            totalError += stepError;
+                            evt.preventDefault();
+                        }
+                    }
 
                 }
             })
@@ -2893,7 +2857,7 @@
             });
         }
 
-        function savePatientPhysicalExams() {
+        function savePatientPhysicalExams(evt) {
             var rowCount = $('#dtlPhysicalExam tbody tr').length;
             var generalExamination = getCheckBoxListItemsChecked('<%= cblGeneralExamination.ClientID %>');
             if (generalExamination == "") {
@@ -2931,6 +2895,23 @@
             });
         }
 
+        function saveWhoStage() {
+            var whostage = $("#<%=WHOStage.ClientID%>").val();
+
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientEncounterService.asmx/savePatientWhoStage",
+                data: "{'whoStage':'" + whostage + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    toastr.success(response.d, "WHO Stage");
+                },
+                error: function (response) {
+                    toastr.error(response.d, "WHO Stage Error");
+                }
+            });
+        }
 
         function savePatientPatientManagement() {
             var workPlan = $("#<%=txtWorkPlan.ClientID%>").val();
@@ -3118,10 +3099,13 @@
             var question2 = parseInt($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question2']:checked").val());
             var question3 = parseInt($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question3']:checked").val());
             var question4 = parseInt($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question4']:checked").val());
+
             var question5 = parseFloat($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question5']:checked").val());
             var question6 = parseFloat($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question6']:checked").val());
             var question7 = parseFloat($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question7']:checked").val());
             var question8 = parseFloat($("#<%=Question8.ClientID%>").val());
+
+            console.log(question8);
 
             $('.errorBlock1').hide();
             $('.errorBlock2').hide();
@@ -3153,22 +3137,24 @@
                 return false;
             }
 
-            if (isNaN(question5)) {
+            var adherenceScore = question1 + question2 + question3 + question4;
+
+            if (isNaN(question5) && adherenceScore > 0) {
                 $('.errorBlock5').show();
                 return false;
             }
 
-            if (isNaN(question6)) {
+            if (isNaN(question6) && adherenceScore > 0) {
                 $('.errorBlock6').show();
                 return false;
             }
 
-            if (isNaN(question7)) {
+            if (isNaN(question7) && adherenceScore > 0) {
                 $('.errorBlock7').show();
                 return false;
             }
 
-            if (isNaN(question8)) {
+            if (isNaN(question8) && adherenceScore > 0) {
                 $('.errorBlock8').show();
                 return false;
             }
@@ -3190,14 +3176,28 @@
             console.log(question4);
             */
 
-            var adherenceScore = question1 + question2 + question3 + question4;
+            if (isNaN(question5)) {
+                question5 = 0;
+            }
+
+            if (isNaN(question6)) {
+                question6 = 0;
+            }
+
+            if (isNaN(question7)) {
+                question7 = 0;
+            }
+
+            if (isNaN(question8)) {
+                question8 = 0;
+            }
 
             //console.log(adherenceScore);
 
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientEncounterService.asmx/SavePatientAdherenceAssessment",
-                data: "{'feelBetter': '" + question4 + "', 'carelessAboutMedicine': '" + question2 + "', 'feelWorse': '" + question3 + "', 'forgetMedicine': '" + question1 + "'}",
+                data: "{'feelBetter': '" + question4 + "', 'carelessAboutMedicine': '" + question2 + "', 'feelWorse': '" + question3 + "', 'forgetMedicine': '" + question1 + "','takeMedicine':'" + question5 + "', 'stopMedicine':'" + question6 + "', 'underPressure':'" + question7 + "', 'difficultyRemembering':'" + question8 + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
@@ -3335,9 +3335,9 @@
 
                 if (mmas8Score === 0) {
                     MMAS8Score = "Good";
-                } else if (mmas8Score >= 1 && score <= 2) {
+                } else if (mmas8Score >= 1 && mmas8Score <= 2) {
                     MMAS8Score = "Inadequate";
-                } else if (score >= 3 && score <= 8) {
+                } else if (mmas8Score >= 3 && mmas8Score <= 8) {
                     MMAS8Score = "Poor";
                 }
                 $("#<%=mmas8Adherence.ClientID%>").text(MMAS8Score);        
@@ -3759,9 +3759,11 @@
         var systems = $("input[name$=systemsOkay]:checked").val();
         if (systems == 1 || systems == undefined) {
             $("#systemsOkayCtrls").hide();
+            $('.errorBlock').hide();
         }
         else {
             $("#systemsOkayCtrls").show();
+            $('.errorBlock').hide();
         }
     }
 
@@ -3816,13 +3818,4 @@
                });
     }
 
-
-    function presentingComplaintsDateChange() {
-        var pcDate = $("#<%=txtPCOnsetDate.ClientID%>").val();
-               if (moment('' + pcDate + '').isAfter()) {
-                   toastr.error("Presenting complaints date cannot be a future date.");
-                   $("#<%=txtPCOnsetDate.ClientID%>").val("");
-                   return false;
-               }
-    }
 </script>

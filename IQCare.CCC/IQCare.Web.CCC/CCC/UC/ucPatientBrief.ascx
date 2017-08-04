@@ -47,7 +47,7 @@
                              <div class="col-md-12 col-xs-12 col-sm-12"><h6 class="pull-left">Nutrition Status : </h6>  <h6 class=""><asp:Label runat="server" ID="lblnutritionstatus" CssClass="text-info"></asp:Label></h6></div>
                         </div>
                         <div class="col-md-12">
-                             <div class="col-md-12 col-xs-12 col-sm-12"><h6 class="pull-left">Categorization: </h6>  <h6 class=""><asp:Label runat="server" ID="lblcategorization" CssClass="text-info"></asp:Label></h6></div>
+                             <div class="col-md-12 col-xs-12 col-sm-12"><h6 class="pull-left">Categorization: </h6>  <h6 class=""><asp:Label runat="server" ID="lblcategorization" CssClass="text-info" ClientIDMode="Static"></asp:Label></h6></div>
                         </div>
                     </div>
                     <div class="col-md-4 col-xs-4 col-sm-4 pull-right">

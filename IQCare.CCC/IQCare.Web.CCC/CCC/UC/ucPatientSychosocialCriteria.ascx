@@ -303,7 +303,7 @@ counselling session?</label>
                             if (itemList.AccurateLocator) { $("#locator").prop("checked", true); }
                             if (itemList.startART) { $("#caregiver").prop("checked", true); }
                         });
-                        $("#btnPsychosocialCriterial").prop('disabled', true);
+                        //$("#btnPsychosocialCriterial").prop('disabled', true);
                     },
                     error: function (xhr, errorType, exception) {
                         var jsonError = jQuery.parseJSON(xhr.responseText);
@@ -365,7 +365,7 @@ counselling session?</label>
                             if (itemList.EnrollSMSReminder == true) { $("#EnrollSMSReminder").prop("checked", true); }
                             if (itemList.OtherSupportSystem == true) { $("#OtherSupportSystem").prop("checked", true); }
                         });
-                        $("#btnSupportSystemCriteria").prop('disabled', true);
+                        //$("#btnSupportSystemCriteria").prop('disabled', true);
 
                     },
                     error: function (xhr, errorType, exception) {

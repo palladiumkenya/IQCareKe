@@ -97,6 +97,7 @@
     <Compile Include="Encounter\PatientTbTreatmentTracker.cs" />
     <Compile Include="Encounter\PatientTreatmentEventTracker.cs" />
     <Compile Include="Encounter\PatientVaccination.cs" />
+    <Compile Include="Encounter\PatientWhoStage.cs" />
     <Compile Include="Encounter\PhysicalExamination.cs" />
     <Compile Include="Encounter\Pregnancy.cs" />
     <Compile Include="Encounter\PregnancyIndicator.cs" />
