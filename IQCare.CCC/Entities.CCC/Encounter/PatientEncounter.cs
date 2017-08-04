@@ -106,6 +106,7 @@ namespace Entities.CCC.Encounter
         {
             public string OnAntiTB { get; set; }
             public string OnIPT { get; set; }
+            public string EverBeenOnIPT { get; set; }
             public string Cough { get; set; }
             public string Fever { get; set; }
             public string NoticeableWeightLoss { get; set; }

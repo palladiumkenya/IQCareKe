@@ -407,6 +407,7 @@ namespace BusinessProcess.CCC
                     pce.NightSweats = theDS.Tables[9].Rows[0]["NightSweats"].ToString();
                     pce.OnAntiTB = theDS.Tables[9].Rows[0]["OnAntiTBDrugs"].ToString();
                     pce.OnIPT = theDS.Tables[9].Rows[0]["OnIpt"].ToString();
+                    pce.EverBeenOnIPT = theDS.Tables[9].Rows[0]["EverBeenOnIPT"].ToString();
                 }
 
                 if (theDS.Tables[10].Rows.Count > 0)
