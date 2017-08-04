@@ -165,6 +165,7 @@ namespace IQCare.Web.CCC.UC
             complaints.Value = pce.complaints;
             tbInfected.SelectedValue = pce.OnAntiTB;
             onIpt.SelectedValue = pce.OnIPT;
+            EverBeenOnIpt.SelectedValue = pce.EverBeenOnIPT;
 
             tbscreeningstatus.SelectedValue = pce.tbScreening;
             nutritionscreeningstatus.SelectedValue = pce.nutritionStatus;
