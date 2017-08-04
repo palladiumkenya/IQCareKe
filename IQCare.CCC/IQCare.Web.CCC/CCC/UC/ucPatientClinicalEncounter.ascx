@@ -1474,7 +1474,7 @@
                                         <label class="control-label pull-left">CTX/Dapsone Adherence</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ctxAdherance" ClientIDMode="Static" Enabled="False" />
+                                        <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ctxAdherance" ClientIDMode="Static" Enabled="True" />
                                     </div>
                                 </div>
                             </div>
@@ -1671,15 +1671,15 @@
                                                         <div class="errorBlock8" style="color: red;">Please select one option </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            
-                                            <div class="col-md-12 form-group">
-                                                <div class="col-md-4 pull-left">(MMAS-8) Score</div>
-                                                <div class="col-md-2 pull-left" style="background-color: gray;"><asp:Label ID="mmas8Score" runat="server"></asp:Label></div>
-                                                <div class="col-md-3 pull-left">Score:</div>
-                                                <div class="col-md-3 pull-left" style="background-color: gray;"><asp:Label ID="mmas8Adherence" runat="server"></asp:Label></div>
-                                            </div>
 
+                                                <div class="col-md-12 form-group">
+                                                    <div class="col-md-4 pull-left">(MMAS-8) Score</div>
+                                                    <div class="col-md-2 pull-left" style="background-color: gray;"><asp:Label ID="mmas8Score" runat="server"></asp:Label></div>
+                                                    <div class="col-md-3 pull-left">Score:</div>
+                                                    <div class="col-md-3 pull-left" style="background-color: gray;"><asp:Label ID="mmas8Adherence" runat="server"></asp:Label></div>
+                                                </div>
+
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -3205,7 +3205,7 @@
                     var returnValue = JSON.parse(response.d);
                     toastr.success(returnValue[0], "Adherence Assessment");
                     $("#<%=arvAdherance.ClientID%>").val(returnValue[1]);
-                    $("#<%=ctxAdherance.ClientID%>").val(returnValue[1]);
+               
                     $('#adherenceAssessmentModal').modal('hide');
                 },
                 error: function (xhr, errorType, exception) {

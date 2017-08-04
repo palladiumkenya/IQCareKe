@@ -32,7 +32,7 @@
                 <div class="col-md-4 col-xs-12 col-sm-12">
                         <div class="input-group">
                             <span class="input-group-addon"><small class="text-danger">*</small> Weight(kgs)</span>
-                            <asp:TextBox runat="server" ID="weights" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="kgs.." required="true" data-parsley-required="true" Type="Number" Min="0"></asp:TextBox>
+                            <asp:TextBox runat="server" ID="weights" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="kgs.." required="true" data-parsley-required="true" Type="Number" Min="0" data-parsley-range="[0, 400]"></asp:TextBox>
                         </div>
                  </div>
 
@@ -114,19 +114,19 @@
                   <div class="col-md-12 col-xs-12 col-sm-12">
                     <div class="input-group">
                          <span class="input-group-addon">Systolic</span>
-                         <asp:TextBox runat="server" ID="systolic" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="systolic.." Type="Number" data-parsley-range="[80, 250]" data-parsley-range-message="Systolic reading is out of reasonable range"></asp:TextBox>
+                         <asp:TextBox runat="server" ID="systolic" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="systolic.." data-parsley-trigger="keyup" data-parsley-type="number" data-parsley-range="[0, 400]" data-parsley-range-message="Systolic reading is out of reasonable range"></asp:TextBox>
                          <span class="input-group-addon">mm[Hg]</span>
                     </div>
-                    <label class="help-block pull-left"><strong>Range: (80-180)</strong></label>
+                    <label class="help-block pull-left"><strong>Normal Range: (80-180)</strong></label>
                  </div>
 
                   <div class="col-md-12 col-xs-12 col-sm-12 form-group" style=" padding-bottom: 0%">
                      <div class="input-group">
                          <span class="input-group-addon">Diastolic</span>
-                         <asp:TextBox runat="server" ID="distolic" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="diastolic.." Type="Number" data-parsley-range="[40, 100]" data-parsley-range-message="Diastolic reading is out of reasonable range"></asp:TextBox>
+                         <asp:TextBox runat="server" ID="distolic" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="diastolic.." data-parsley-trigger="keyup" data-parsley-type="number" data-parsley-range="[0, 200]" data-parsley-range-message="Diastolic reading is out of reasonable range"></asp:TextBox>
                          <span class="input-group-addon">mm[Hg]</span>
                      </div>
-                      <p class="help-block pull-left"><strong>Range: (40-100)</strong></p>
+                      <p class="help-block pull-left"><strong>Normal Range: (40-100)</strong></p>
                   </div>
                 
             </div> 
@@ -136,7 +136,7 @@
                  <div class="col-md-12 colxs-12 col-sm-12 form-group">
                       <div class="input-group">
                            <span class="input-group-addon">Pulse Rate</span>                      
-                           <asp:TextBox runat="server" ID="HeartRate" ClientIDMode="Static" CssClass="form-control input-sm" placeholder=".." Type="Number" Min="0"></asp:TextBox>
+                           <asp:TextBox runat="server" ID="HeartRate" ClientIDMode="Static" CssClass="form-control input-sm" placeholder=".." data-parsley-trigger="keyup" data-parsley-type="number" Min="0" Max="200" data-parsley-range="[0, 200]" ></asp:TextBox>
                            <span class="input-group-addon">/Min</span>
                       </div>
                      <p class="help-block pull-left"><strong>60-100 beats /min-Adults</strong></p>
@@ -144,7 +144,7 @@
                  <div class="col-md-12 col-xs-12 col-cm-12 form-group">
                     <div class="input-group">
                         <span class="input-group-addon">Respiration Rate</span>  
-                        <asp:TextBox runat="server" ID="RespiratoryRate" ClientIDMode="Static" CssClass="form-control input-sm" placeholder=".." Type="Number" Min="0"></asp:TextBox>
+                        <asp:TextBox runat="server" ID="RespiratoryRate" ClientIDMode="Static" CssClass="form-control input-sm" placeholder=".." data-parsley-trigger="keyup" data-parsley-type="number" Min="0" Max="100" data-parsley-range="[0, 1700]"></asp:TextBox>
                         <span class="input-group-addon">/Min</span>
                     </div>
                     <p class="help-block pull-left"><strong>12-20 breaths /min-Adults</strong></p>
@@ -152,7 +152,7 @@
                  <div class="col-md-12 col-xs-12 col-sm-12">
                      <div class="input-group">
                           <span class="input-group-addon">Blood Oxygen Saturation</span> 
-                          <asp:TextBox runat="server" ID="bosaturation" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="%.." Type="Number" Min="0" Max="100"></asp:TextBox>
+                          <asp:TextBox runat="server" ID="bosaturation" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="%.." data-parsley-trigger="keyup" data-parsley-type="number" Min="0" Max="100"></asp:TextBox>
                          <span class="input-group-addon">%</span> 
                      </div>
                      <p class="help-block pull-left"><strong>95-100 %</strong></p>
