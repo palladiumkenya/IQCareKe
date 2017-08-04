@@ -326,7 +326,7 @@ counselling session?</label>
                     $.ajax({
                         type: "POST",
                         url: "../WebService/PatientTreatmentpreparation.asmx/AddPatientPsychosocialCriteria",
-                        data: "{'patientId':'" + patientId + "','patientmastervisitId':'" + patientMasterVisitId + "','benefitART':'" + benefitsART + "','Alcohol':'" + screenAlcohol + "','depression':'" + depression + "','disclosure':'" + disclosure + "','administerART':'" + administerART + "','adherence':'" + adherenceBarriers + "','locator':'" + locator + "','caregiver':'" + caregiver + "'}",
+                        data: "{'patientId':'" + patientId + "','patientmastervisitId':'" + patientMasterVisitId + "','benefitART':'" + benefitsART + "','alcohol':'" + screenAlcohol + "','depression':'" + depression + "','disclosure':'" + disclosure + "','administerART':'" + administerART + "','adherence':'" + adherenceBarriers + "','locator':'" + locator + "','caregiver':'" + caregiver + "'}",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
@@ -383,6 +383,7 @@ counselling session?</label>
 
 
        $("#btnSupportSystemCriteria").click(function () {
+           debugger;
             if (isDoneSupportSystemCriteria == 0) {
                 $.ajax({
                     type: "POST",
