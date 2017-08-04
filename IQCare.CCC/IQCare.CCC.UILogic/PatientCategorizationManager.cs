@@ -1,13 +1,14 @@
-﻿using Entities.CCC.Encounter;
+﻿using Application.Presentation;
+using Entities.CCC.Encounter;
 using Interface.CCC;
-using System;
-using Application.Presentation;
+using System.Collections.Generic;
 
 namespace IQCare.CCC.UILogic
 {
     public class PatientCategorizationManager
     {
         private IPatientCategorizationManager _categorization = (IPatientCategorizationManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientCategorization, BusinessProcess.CCC");
+
         public int AddPatientCategorization(PatientCategorization p)
         {
             var categorization = new PatientCategorization()
@@ -39,6 +40,12 @@ namespace IQCare.CCC.UILogic
                 DateAssessed = p.DateAssessed
             };
             return _categorization.UpdatePatientCategorization(categorization);
+        }
+
+        public List<PatientCategorization> GetByPatientId(int patientId)
+        {
+            var categorization = _categorization.GetByPatientId(patientId);
+            return categorization;
         }
     }
 }
