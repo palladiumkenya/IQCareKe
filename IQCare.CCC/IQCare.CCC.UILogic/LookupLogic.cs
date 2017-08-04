@@ -172,6 +172,20 @@ namespace IQCare.CCC.UILogic
             }
         }
 
+        public void populateDDL(DropDownList ddl, string groupName, string anotherGroupName)
+        {
+            ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+            List<LookupItemView> vw = mgr.GetLookItemByGroup(groupName, anotherGroupName);
+            ddl.Items.Add(new ListItem("Select", "0"));
+            if (vw != null && vw.Count > 0)
+            {
+                foreach (var item in vw)
+                {
+                    ddl.Items.Add(new ListItem(item.ItemDisplayName, item.ItemId.ToString()));
+                }
+            }
+        }
+
         public void PopulateListBox(ListBox lb, string groupName)
         {
             ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");

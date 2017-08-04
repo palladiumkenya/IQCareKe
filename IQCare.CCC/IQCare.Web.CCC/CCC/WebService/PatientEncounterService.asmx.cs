@@ -685,7 +685,7 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string SavePatientAdherenceAssessment(string feelBetter, string carelessAboutMedicine, string feelWorse, string forgetMedicine)
+        public string SavePatientAdherenceAssessment(string feelBetter, string carelessAboutMedicine, string feelWorse, string forgetMedicine, string takeMedicine, string stopMedicine, string underPressure, string difficultyRemembering)
         {
             PatientAdherenceAssessmentManager patientAdherenceAssessment = new PatientAdherenceAssessmentManager();
             int adherenceScore = 0;
@@ -698,6 +698,10 @@ namespace IQCare.Web.CCC.WebService
             bool careless_Medicine = Convert.ToBoolean(Convert.ToInt32(carelessAboutMedicine));
             bool feel_Worse = Convert.ToBoolean(Convert.ToInt32(feelWorse));
             bool forget_Medicine = Convert.ToBoolean(Convert.ToInt32(forgetMedicine));
+            bool take_medicine = Convert.ToBoolean(Convert.ToInt32(takeMedicine));
+            bool stop_Medicine = Convert.ToBoolean(Convert.ToInt32(stopMedicine));
+            bool under_Pressure = Convert.ToBoolean(Convert.ToInt32(underPressure));
+            decimal difficulty_Remembering = Convert.ToDecimal(difficultyRemembering);
 
             adherenceScore = Convert.ToInt32(feelBetter) + Convert.ToInt32(carelessAboutMedicine) +
                              Convert.ToInt32(feelWorse) + Convert.ToInt32(forgetMedicine);
@@ -721,8 +725,18 @@ namespace IQCare.Web.CCC.WebService
                 patientAdherenceAssessment.UpdateAdherenceAssessment(history[0]);
             }
 
-            int result = patientAdherenceAssessment.AddPatientAdherenceAssessment(patientId, patientMasterVisitId, createdBy, feel_Better, careless_Medicine, feel_Worse, forget_Medicine);
+            int result;
 
+            if (adherenceScore > 0)
+            {
+                result = patientAdherenceAssessment.AddPatientAdherenceAssessment(patientId, patientMasterVisitId,
+                    createdBy, feel_Better, careless_Medicine, feel_Worse, forget_Medicine, take_medicine, stop_Medicine, under_Pressure, difficulty_Remembering);
+            }
+            else
+            {
+                result = patientAdherenceAssessment.AddPatientAdherenceAssessment(patientId, patientMasterVisitId,
+                    createdBy, feel_Better, careless_Medicine, feel_Worse, forget_Medicine);
+            }
             if (result > 0)
             {
                 var lookUpLogic =  new LookupLogic();

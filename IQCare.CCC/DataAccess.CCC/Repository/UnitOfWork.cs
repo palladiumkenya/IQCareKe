@@ -80,6 +80,7 @@ namespace DataAccess.CCC.Repository
         private IPatientLabOrderRepository _patientLabOrderRepository;
         private IPatientLabDetailsRepository _patientLabDetailsRepository;
         private IPatientLabResultsRepository _patientLabResultsRepository;
+        private IPatientWHOStageRepository _patientWhoStageRepository;
 
         /* Enrollment */
         private IPatientEnrollmentRepository _patientEnrollmentRepository;
@@ -319,6 +320,12 @@ namespace DataAccess.CCC.Repository
         {
             get { return _patientLabResultsRepository ?? (_patientLabResultsRepository = new PatientLabResultsRepository((GreencardContext)_context)); }
         }
+
+        public IPatientWHOStageRepository PatientWhoStageRepository { get
+            {
+                return _patientWhoStageRepository ?? (_patientWhoStageRepository =
+                           new PatientWhoStageRepository((GreencardContext) _context));
+            } }
 
         public IPatientEnrollmentRepository PatientEnrollmentRepository
         {

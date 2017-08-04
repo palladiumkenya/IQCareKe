@@ -14,5 +14,12 @@ namespace Interface.CCC
         List<PatientAppointment> GetByPatientId(int patientId);
         List<PatientAppointment> GetByDate(DateTime date);
         List<PatientAppointment> GetByDateRange(DateTime startDate, DateTime endDate);
+
+        /// <summary>
+        /// Gets the appointment summary by date.
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <returns></returns>
+        List<AppointmentSummary> GetAppointmentSummaryByDate(DateTime date);
     }
 }

@@ -29,11 +29,23 @@ namespace IQCare.Web.CCC.WebService
             {
                 var appointment = new PatientAppointmentManager();
                 var masterVisit = new PatientMasterVisitManager();
+                /* JN - Hit the database once
                 statistics.TotalAppointments = appointment.GetByDate(date).Count;
                 statistics.MetAppointments = appointment.GetByDate(date).Count(n => n.StatusId==1241);
                 statistics.MissedAppointments = appointment.GetByDate(date).Count(n => n.StatusId == 1240);
                 statistics.WalkIns = masterVisit.GetByDate(date).Count(n => n.VisitScheduled == 0); ;
-
+                */
+               var apps = appointment.GetAppointmentSummaryByDate(date).FirstOrDefault();
+                statistics.TotalAppointments = 0;
+                statistics.MetAppointments = 0;
+                statistics.MissedAppointments = 0;
+                if (apps != null)
+                {
+                    statistics.TotalAppointments = apps.Total;
+                    statistics.MetAppointments = apps.Met;
+                    statistics.MissedAppointments = apps.Missed + apps.PreviouslyMissed;
+                }
+                statistics.WalkIns = masterVisit.GetByDate(date).Count(n => n.VisitScheduled == 0); ;
             }
             catch (Exception e)
             {

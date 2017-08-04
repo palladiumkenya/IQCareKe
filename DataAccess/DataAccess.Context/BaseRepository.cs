@@ -40,7 +40,10 @@ namespace DataAccess.Context
         {
             _dbSet.Add(entity);
         }
-
+        public virtual int Count()
+        {
+            return _dbSet.Count();
+        }
         public virtual int AddRange(IEnumerable<T> entity)
         {
             return entity.Count();

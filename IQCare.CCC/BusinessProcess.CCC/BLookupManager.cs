@@ -35,6 +35,17 @@ namespace BusinessProcess.CCC
             }
         }
 
+        public List<LookupItemView> GetLookItemByGroup(string groupname, string anotherGroupname)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                var items = unitOfWork.LookupRepository.FindBy(
+                    y => y.MasterName == groupname || y.MasterName == anotherGroupname);
+                unitOfWork.Dispose();
+                return items;
+            }
+        }
+
         public List<LookupCounty> GetLookupCounties()
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))

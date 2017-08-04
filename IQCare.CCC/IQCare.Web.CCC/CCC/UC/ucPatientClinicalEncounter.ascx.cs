@@ -67,6 +67,7 @@ namespace IQCare.Web.CCC.UC
                 lookUp.populateDDL(ctxAdherance, "CTXAdherence");
                 lookUp.populateDDL(ddlAllergySeverity, "ADRSeverity");
                 lookUp.populateDDL(stabilityStatus, "StabilityAssessment");
+                //lookUp.populateDDL(WHOStage, "WHOStage");
 
                 var patientVitals = new PatientVitalsManager();
                 PatientVital patientTriage = patientVitals.GetByPatientId(Convert.ToInt32(Session["PatientPK"].ToString()));
@@ -94,6 +95,16 @@ namespace IQCare.Web.CCC.UC
                 }
                 status.SelectedIndex = 1;
                 status.Enabled = false;
+            }
+
+            List<LookupItemView> whoStage = mgr.GetLookItemByGroup("WHOStage");
+            if (whoStage != null && whoStage.Count > 0)
+            {
+                WHOStage.Items.Add(new ListItem("select", ""));
+                foreach (var k in whoStage)
+                {
+                    WHOStage.Items.Add(new ListItem(k.ItemName, k.ItemId.ToString()));
+                }
             }
 
             List<LookupItemView> areas = mgr.GetLookItemByGroup("ServiceArea");

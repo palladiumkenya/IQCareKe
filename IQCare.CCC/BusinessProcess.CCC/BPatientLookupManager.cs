@@ -104,7 +104,7 @@ namespace BusinessProcess.CCC
             int totalCount = 0;
             using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                totalCount = unitOfWork.PatientLookupRepository.GetAll().Count();
+                totalCount = unitOfWork.PatientLookupRepository.Count();//.GetAll().Count();
 
                 unitOfWork.Dispose();
 
