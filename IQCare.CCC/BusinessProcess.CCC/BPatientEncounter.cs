@@ -418,6 +418,11 @@ namespace BusinessProcess.CCC
                     pce.EvaluatedForIPT = theDS.Tables[10].Rows[0]["EvaluatedForIPT"].ToString();
                 }
 
+                if (theDS.Tables[14].Rows.Count > 0)
+                {
+                    pce.WhoStage = theDS.Tables[14].Rows[0]["WHOStage"].ToString();
+                }
+
 
                 return pce;
             }

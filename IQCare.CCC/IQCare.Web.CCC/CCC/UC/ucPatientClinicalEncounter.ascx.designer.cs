@@ -508,7 +508,6 @@ namespace IQCare.Web.CCC.UC {
         protected global::System.Web.UI.WebControls.DropDownList WHOStage;
         
         /// <summary>
-        /// txtWorkPlan control.
         /// arvAdherance control.
         /// </summary>
         /// <remarks>

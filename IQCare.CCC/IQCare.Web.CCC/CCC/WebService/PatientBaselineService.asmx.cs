@@ -188,6 +188,27 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
+        public string GetPatientARTInitiation(int patientId)
+        {
+            var patientTreatmentManager = new PatientTreatmentTrackerManager();
+            try
+            {
+                String dateARTInitiation = null;
+                var ptnTreatmentBaseline = patientTreatmentManager.GetPatientbaselineRegimenLookup(patientId);
+                if (ptnTreatmentBaseline!=null && ptnTreatmentBaseline.DispensedByDate.HasValue)
+                {
+                    dateARTInitiation = ptnTreatmentBaseline.DispensedByDate.ToString();
+                }
+
+                return dateARTInitiation;
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+
+        [WebMethod(EnableSession = true)]
         public string GetPatientBaseline(int patientId)
         {
             try

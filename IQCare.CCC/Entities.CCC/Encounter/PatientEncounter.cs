@@ -96,7 +96,7 @@ namespace Entities.CCC.Encounter
             public string nextAppointmentType { get; set; }
             public string[] phdp { get; set; }
             public string[] generalExams { get; set; }
-            
+            public string WhoStage { get; set; }
             
 
         }

@@ -1803,7 +1803,24 @@
 						toastr.error("" + xhr.status + "" + jsonError.Message);
 					}
 				});
-			}
+            }
+
+            function getPatientDateARTInitiation() {
+                $.ajax({
+                    type: "POST",
+                    url: "../WebService/PatientBaselineService.asmx/GetPatientARTInitiation",
+                    data: "{'patientId':'" + patientId + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        $("#DARTI").datepicker('setDate', moment(response.d).format('DD-MMM-YYYY'));
+                    },
+                    error: function (xhr, errorType, exception) {
+                        var jsonError = jQuery.parseJSON(xhr.responseText);
+                        toastr.error("" + xhr.status + "" + jsonError.Message);
+                    }
+                });
+            }
 
 			/* autopopulate values if filled before */
 			function getPatientBaselinePreloadValues() {
@@ -2410,6 +2427,7 @@
 							getPatientEnrollmentDate();
 						}else if(transferIn===2){
                             getPatientEnrollmentDate();
+						    getPatientDateARTInitiation();
 						}
 		   
 					   

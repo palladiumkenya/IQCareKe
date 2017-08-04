@@ -36,6 +36,29 @@ BEGIN
 	ALTER TABLE [dbo].[HIVTesting] DROP  COLUMN EnrollmentId;
 END;
 
+
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'TakeMedicine'AND Object_ID = OBJECT_ID(N'AdherenceAssessment'))
+BEGIN
+	ALTER TABLE [dbo].[AdherenceAssessment] ADD TakeMedicine bit null;
+END;
+
+
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'StopMedicine'AND Object_ID = OBJECT_ID(N'AdherenceAssessment'))
+BEGIN
+	ALTER TABLE [dbo].[AdherenceAssessment] ADD StopMedicine bit NULL;
+END;
+
+
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'UnderPressure'AND Object_ID = OBJECT_ID(N'AdherenceAssessment'))
+BEGIN
+	ALTER TABLE [dbo].[AdherenceAssessment] ADD UnderPressure bit NULL;
+END;
+
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'DifficultyRemembering'AND Object_ID = OBJECT_ID(N'AdherenceAssessment'))
+BEGIN
+	ALTER TABLE [dbo].[AdherenceAssessment] ADD DifficultyRemembering decimal(10,2) NULL;
+END;
+
 ALTER TABLE PersonRelationship
 DROP CONSTRAINT [PK_PersonRelationship]
 

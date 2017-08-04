@@ -2655,31 +2655,33 @@
                 else if (data.step === 4) {
                     if (data.direction === 'previous') {
                         return;
-                    }
-                    //savePatientPatientManagement();
-                    if ($('#AppointmentForm').parsley().validate()) {
-                        var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
-                        var appDate = $("#<%=AppointmentDate.ClientID%>").val();
-                        if (moment('' + appDate + '').isAfter(futureDate)) {
-                            toastr.error("Appointment date cannot be set to over 7 months");
-                            return false;
-                        }
-                        //save patient management
-                        $.when(savePatientPatientManagement()).then(function () {
-                            setTimeout(function () {
-                                window.location
-                                    .href =
-                                        '<%=ResolveClientUrl( "~/CCC/Patient/PatientHome.aspx")%>';
-                            },
-                                2000);
-                        });
-
-                        //save appointment
-                        checkExistingAppointment();
                     } else {
-                        return false;
-                    }
+                        //savePatientPatientManagement();
+                        if ($('#AppointmentForm').parsley().validate()) {
+                            var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
+                            var appDate = $("#<%=AppointmentDate.ClientID%>").val();
+                            if (moment('' + appDate + '').isAfter(futureDate)) {
+                                toastr.error("Appointment date cannot be set to over 7 months");
+                                return false;
+                            }
+                            //save patient management
+                            $.when(savePatientPatientManagement()).then(function() {
+                                setTimeout(function() {
+                                        window.location
+                                            .href =
+                                            '<%=ResolveClientUrl( "~/CCC/Patient/PatientHome.aspx")%>';
+                                    },
+                                    2000);
+                            });
 
+                            //save appointment
+                            checkExistingAppointment();
+                        } else {
+                            stepError = $('.parsley-error').length === 0;
+                            totalError += stepError;
+                            evt.preventDefault();
+                        }
+                    }
 
                 }
             })
@@ -3174,6 +3176,22 @@
             console.log(question4);
             */
 
+            if (isNaN(question5)) {
+                question5 = 0;
+            }
+
+            if (isNaN(question6)) {
+                question6 = 0;
+            }
+
+            if (isNaN(question7)) {
+                question7 = 0;
+            }
+
+            if (isNaN(question8)) {
+                question8 = 0;
+            }
+
             //console.log(adherenceScore);
 
             $.ajax({
@@ -3317,9 +3335,9 @@
 
                 if (mmas8Score === 0) {
                     MMAS8Score = "Good";
-                } else if (mmas8Score >= 1 && score <= 2) {
+                } else if (mmas8Score >= 1 && mmas8Score <= 2) {
                     MMAS8Score = "Inadequate";
-                } else if (score >= 3 && score <= 8) {
+                } else if (mmas8Score >= 3 && mmas8Score <= 8) {
                     MMAS8Score = "Poor";
                 }
                 $("#<%=mmas8Adherence.ClientID%>").text(MMAS8Score);        
