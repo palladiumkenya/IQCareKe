@@ -1,4 +1,5 @@
-﻿using DataAccess.CCC.Context;
+﻿using System.Collections.Generic;
+using DataAccess.CCC.Context;
 using DataAccess.CCC.Repository;
 using Entities.CCC.Encounter;
 using System.Linq;
@@ -26,11 +27,11 @@ namespace BusinessProcess.CCC
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                var consent = unitOfWork.PatientCategorizationRepository.FindBy(x => x.PatientId == id)
+                var categorization = unitOfWork.PatientCategorizationRepository.FindBy(x => x.PatientId == id)
                     .OrderBy(x => x.Id)
                     .FirstOrDefault();
                 unitOfWork.Dispose();
-                return consent;
+                return categorization;
             }
         }
 
@@ -58,6 +59,16 @@ namespace BusinessProcess.CCC
                 _result = unitOfWork.Complete();
                 unitOfWork.Dispose();
                 return _result;
+            }
+        }
+
+        public List<PatientCategorization> GetByPatientId(int patientId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                List<PatientCategorization> categorization = unitOfWork.PatientCategorizationRepository.GetByPatientId(patientId);
+                unitOfWork.Dispose();
+                return categorization;
             }
         }
     }

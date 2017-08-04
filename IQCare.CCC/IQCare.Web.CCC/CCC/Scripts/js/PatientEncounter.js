@@ -311,8 +311,8 @@ function AddPresentingComplaints() {
     var presentingComplaintsID = $("#txtPresentingComplaintsID").val();
     
     var presentingComplaints = $('#txtPresentingComplaints').val();
-    var onsetDate = $('#txtPCOnsetDate').val();
-
+    var numberOfDays = $('#numberOfDays').val();
+    var onsetDate = moment($('#VisitDate').val()).subtract(numberOfDays, 'd').format('DD-MM-YYYY');
     //Validate duplication
     var presentingComplaintFound = 0;
 
@@ -342,7 +342,7 @@ function AddPresentingComplaints() {
         DrawDataTable("dtlPresentingComplaints", arrPresentingComplaintUI);
 
         $('#txtPresentingComplaints').val("");
-        $('#txtPCOnsetDate').val("");
+        $('#numberOfDays').val("");
     }
 }
 
