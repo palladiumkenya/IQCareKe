@@ -1252,7 +1252,7 @@
                 </div>
                 <%-- .data-step-2--%>
 
-                <div class="step-pane sample-pane" id="datastep3" data-step="3">
+                <div class="step-pane sample-pane" id="datastep3" data-step="3" data-parsley-validate="true" data-show-errors="true">
                     <div class="col-md-12"><small class="muted pull-left"><strong>PATIENT Examination</strong></small></div>
                     <div class="col-md-12">
                         <hr />
@@ -1290,6 +1290,7 @@
                                             </label>
 
                                         </div>
+                                        <div class="errorBlock" style="color: red;"> Please select one option </div>
                                     </div>
                                     <div class="col-md-12 form-group" id="systemsOkayCtrls" clientidmode="Static">
                                     <div class="col-md-12 form-group">
@@ -1362,7 +1363,7 @@
                                             <label class="control-label  pull-left text-primary">*WHO Stage</label>
                                         </div>
                                         <div class="col-md-4">
-                                            <asp:DropDownList ID="WHOStage" CssClass="form-control input-sm" runat="server" ClientIDMode="Static" data-parsley-required="true"></asp:DropDownList>
+                                            <asp:DropDownList ID="WHOStage" CssClass="form-control input-sm" runat="server" ClientIDMode="Static" data-parsley-required="true" data-parsley-min="1"></asp:DropDownList>
                                         </div>
                                     </div>
                                 </div>
@@ -2131,6 +2132,7 @@
         $('.errorBlock6').hide();
         $('.errorBlock7').hide();
         $('.errorBlock8').hide();
+        $('.errorBlock').hide();
 
         if (($("#cough").val() === 'True') || ($("#fever").val() === 'True') || ($("#weightLoss").val() === 'True') || ($("#nightSweats").val() === 'True')) {
             $("#IcfActionForm").show();
@@ -2691,8 +2693,9 @@
                 else if (data.step === 2) {
                     if (data.direction === 'previous') {
                         return;
+                    } else {
+                        savePatientEncounterChronicIllness();
                     }
-                    savePatientEncounterChronicIllness();
                     //if ($("#datastep2").parsley().validate()) {
 
                     //} else {
@@ -2704,9 +2707,30 @@
                 else if (data.step === 3) {
                     if (data.direction === 'previous') {
                         return;
-                    }
-                    savePatientPhysicalExams();
+                    } else {
+                        $('#datastep3').parsley().destroy();
+                        $('#datastep3').parsley({
+                            excluded:
+                                "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
+                        });
 
+                        if ($('input[name="ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$systemsOkay"]:checked').length >0) {
+                            $('.errorBlock').hide();
+                        } else {
+                            $('.errorBlock').show();
+                            return false;
+                        }
+
+                        if ($('#datastep3').parsley().validate()) {
+                            $.when(savePatientPhysicalExams(evt)).then(function () {
+                                setTimeout(function () { saveWhoStage(); },2000);
+                            });
+                        } else {
+                            stepError = $('.parsley-error').length === 0;
+                            totalError += stepError;
+                            evt.preventDefault();
+                        }
+                    }
                     //if ($("#datastep3").parsley().validate()) {
 
                     //} else {
@@ -2918,12 +2942,12 @@
             });
         }
 
-        function savePatientPhysicalExams() {
+        function savePatientPhysicalExams(evt) {
             var rowCount = $('#dtlPhysicalExam tbody tr').length;
             var generalExamination = getCheckBoxListItemsChecked('<%= cblGeneralExamination.ClientID %>');
             if (generalExamination == "") {
                 toastr.error(generalExamination, "Please check at least one General Examination.");
-                //evt.preventDefault();
+                evt.preventDefault();
                 return false;
             }
             var physicalExamArray = new Array();
@@ -2956,6 +2980,23 @@
             });
         }
 
+        function saveWhoStage() {
+            var whostage = $("#<%=WHOStage.ClientID%>").val();
+
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientEncounterService.asmx/savePatientWhoStage",
+                data: "{'whoStage':'" + whostage + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    toastr.success(response.d, "WHO Stage");
+                },
+                error: function (response) {
+                    toastr.error(response.d, "WHO Stage Error");
+                }
+            });
+        }
 
         function savePatientPatientManagement() {
             var workPlan = $("#<%=txtWorkPlan.ClientID%>").val();
@@ -3787,9 +3828,11 @@
         var systems = $("input[name$=systemsOkay]:checked").val();
         if (systems == 1 || systems == undefined) {
             $("#systemsOkayCtrls").hide();
+            $('.errorBlock').hide();
         }
         else {
             $("#systemsOkayCtrls").show();
+            $('.errorBlock').hide();
         }
     }
 

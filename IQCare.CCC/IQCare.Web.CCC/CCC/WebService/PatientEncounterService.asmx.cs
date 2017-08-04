@@ -65,6 +65,17 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
+        public void savePatientWhoStage(int whoStage)
+        {
+            PatientWhoStageManager whoStageManager = new PatientWhoStageManager();
+
+            int patientId = Convert.ToInt32(Session["PatientPK"].ToString());
+            int patientMasterVisitId = Convert.ToInt32(Session["PatientMasterVisitID"].ToString());
+
+            whoStageManager.addPatientWhoStage(patientId, patientMasterVisitId, whoStage);
+        }
+
+        [WebMethod(EnableSession = true)]
         public void savePatientManagement(string workplan, string phdp,string ARVAdherence,string CTXAdherence,string diagnosis)
         {
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
