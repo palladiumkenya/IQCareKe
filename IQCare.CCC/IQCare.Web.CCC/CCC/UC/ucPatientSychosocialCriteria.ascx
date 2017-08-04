@@ -303,7 +303,7 @@ counselling session?</label>
                             if (itemList.AccurateLocator) { $("#locator").prop("checked", true); }
                             if (itemList.startART) { $("#caregiver").prop("checked", true); }
                         });
-                        $("#btnPsychosocialCriterial").prop('disabled', true);
+                        //$("#btnPsychosocialCriterial").prop('disabled', true);
                     },
                     error: function (xhr, errorType, exception) {
                         var jsonError = jQuery.parseJSON(xhr.responseText);
@@ -326,7 +326,7 @@ counselling session?</label>
                     $.ajax({
                         type: "POST",
                         url: "../WebService/PatientTreatmentpreparation.asmx/AddPatientPsychosocialCriteria",
-                        data: "{'patientId':'" + patientId + "','patientmastervisitId':'" + patientMasterVisitId + "','benefitART':'" + benefitsART + "','Alcohol':'" + screenAlcohol + "','depression':'" + depression + "','disclosure':'" + disclosure + "','administerART':'" + administerART + "','adherence':'" + adherenceBarriers + "','locator':'" + locator + "','caregiver':'" + caregiver + "'}",
+                        data: "{'patientId':'" + patientId + "','patientmastervisitId':'" + patientMasterVisitId + "','benefitART':'" + benefitsART + "','alcohol':'" + screenAlcohol + "','depression':'" + depression + "','disclosure':'" + disclosure + "','administerART':'" + administerART + "','adherence':'" + adherenceBarriers + "','locator':'" + locator + "','caregiver':'" + caregiver + "'}",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
@@ -365,7 +365,7 @@ counselling session?</label>
                             if (itemList.EnrollSMSReminder == true) { $("#EnrollSMSReminder").prop("checked", true); }
                             if (itemList.OtherSupportSystem == true) { $("#OtherSupportSystem").prop("checked", true); }
                         });
-                        $("#btnSupportSystemCriteria").prop('disabled', true);
+                        //$("#btnSupportSystemCriteria").prop('disabled', true);
 
                     },
                     error: function (xhr, errorType, exception) {
@@ -383,6 +383,7 @@ counselling session?</label>
 
 
        $("#btnSupportSystemCriteria").click(function () {
+           debugger;
             if (isDoneSupportSystemCriteria == 0) {
                 $.ajax({
                     type: "POST",
