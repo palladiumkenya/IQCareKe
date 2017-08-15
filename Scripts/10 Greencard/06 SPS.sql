@@ -3532,7 +3532,16 @@ BEGIN
 												PRINT @message;
 
 												 IF @ModuleId = 203
-													BEGIN 
+													BEGIN
+														DECLARE @DateEnrolledInCare DATETIME;
+														IF @transferIn = 1
+															BEGIN
+																SET @DateEnrolledInCare = (select top 1 [DateEnrolledInCare] from dtl_PatientHivPrevCareEnrollment where ptn_pk = @ptn_pk);
+															END;
+
+														IF @DateEnrolledInCare IS NOT NULL
+														BEGIN SET @UserID_Enrollment = @DateEnrolledInCare END;
+
 														INSERT INTO [dbo].[PatientEnrollment] ([PatientId] ,[ServiceAreaId] ,[EnrollmentDate] ,[EnrollmentStatusId] ,[TransferIn] ,[CareEnded] ,[DeleteFlag] ,[CreatedBy] ,[CreateDate] ,[AuditData])
 														VALUES (@PatientId,1, @StartDate,0, @transferIn, @Status ,0 ,@UserID_Enrollment ,@CreateDate_Enrollment ,NULL);
 
