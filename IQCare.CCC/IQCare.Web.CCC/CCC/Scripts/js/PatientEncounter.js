@@ -312,7 +312,7 @@ function AddPresentingComplaints() {
     
     var presentingComplaints = $('#txtPresentingComplaints').val();
     var numberOfDays = $('#numberOfDays').val();
-    var onsetDate = moment($('#VisitDate').val()).subtract(numberOfDays, 'd').format('DD-MM-YYYY');
+    var onsetDate = moment($('#VisitDate').val()).subtract(numberOfDays, 'd').format('DD-MMM-YYYY');
     //Validate duplication
     var presentingComplaintFound = 0;
 
