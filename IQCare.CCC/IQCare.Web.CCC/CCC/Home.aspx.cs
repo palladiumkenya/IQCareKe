@@ -47,14 +47,12 @@ namespace IQCare.Web.CCC
                     for (int i = 0; i < statList.Count; i++)
                     {
                         Label = "label" + i;
-                        html += "<div class='col-md-12'>";
                         html += "<div class='col-md-10'>";
                         html += "<label class='control-label pull-left'>" + statList[i].Name + ":</label>";
                         html += "</div>";
                         html += "<div class='col-md-2 pull-right'>";
                         html += "<label for='value' id='" + Label + "' class='control-label text-success pull-right'>";
                         html += "<span class='badge pull-right'>" + statList[i].Value + "</span>";
-                        html += "</div>";
                         html += "</div>";
                         html += "<div class='col-md-12'><hr></div>";
                     }

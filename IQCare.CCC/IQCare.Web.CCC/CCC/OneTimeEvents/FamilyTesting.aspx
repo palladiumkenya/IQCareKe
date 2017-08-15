@@ -567,6 +567,10 @@
             var familyMembers = [];
             $("#<%=CccReferal.ClientID%>").val("False");
             var gender = '<%=Gender%>';
+
+            var todayDate = new Date();
+            var todayDatePicker = moment(todayDate).add(2, 'hours');
+
             //console.log(gender);
 
             //$('#BaselineHIVStatusD').datepicker({
@@ -578,7 +582,8 @@
             $("#BaselineHIVStatusdatepicker").datetimepicker({
                 format: 'DD-MMM-YYYY',
                 allowInputToggle: true,
-                useCurrent: false
+                useCurrent: false,
+                maxDate: todayDatePicker
             });
 
 
@@ -591,31 +596,34 @@
             $('#TestingDate').datetimepicker({
                 format: 'DD-MMM-YYYY',
                 allowInputToggle: true,
-                useCurrent: false
+                useCurrent: false,
+                maxDate: todayDatePicker
             });
 
             //$('#DateOfBirth').datepicker({
             //    allowPastDates: true,
             //    momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
             //});
-            var todayDate = new Date();
 
             $('#PersonDOBdatepicker').datetimepicker({
                 format: 'DD-MMM-YYYY',
                 allowInputToggle: true,
-                useCurrent: false
+                useCurrent: false,
+                maxDate: todayDatePicker
             });
 
             $('#CCCReferalDdatepicker').datetimepicker({
                 format: 'DD-MMM-YYYY',
                 allowInputToggle: true,
-                useCurrent: false
+                useCurrent: false,
+                maxDate: todayDatePicker
             });     
 
             $('#CCCReferaldatepicker').datetimepicker({
                 format: 'DD-MMM-YYYY',
                 allowInputToggle: true,
-                useCurrent: false
+                useCurrent: false,
+                maxDate: todayDatePicker
             });
 
             //$('#BaselineHIVStatusDMod').datepicker({

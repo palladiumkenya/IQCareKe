@@ -3669,6 +3669,10 @@ BEGIN
 						--Starting baseline
 						print 'starting baseline';
 
+						DECLARE @DEFAULTDATE DATETIME;
+						SET @DEFAULTDATE = ISNULL(@DEFAULTDATE, CONVERT(datetime, '1900-15-06', 104));
+						PRINT @DEFAULTDATE;
+
 						DECLARE @HBVInfected bit, @Pregnant bit, @TBinfected bit, @WHOStage int, @WHOStageString varchar(50), @BreastFeeding bit, 
 								@CD4Count decimal , @MUAC decimal, @Weight decimal, @Height decimal, @artstart datetime,
 								@ClosestARVDate datetime, @PatientMasterVisitId int, @HIVDiagnosisDate datetime, @EnrollmentDate datetime,
@@ -3789,7 +3793,7 @@ BEGIN
 						  END
 		  
 						SET @VisitDate = (SELECT TOP 1 [VisitDate] FROM [dbo].[ord_Visit] where [Ptn_Pk] = @ptn_pk AND [VisitType] in(18, 19));
-						IF @EnrollmentDate IS NULL BEGIN SET @EnrollmentDate = GETDATE(); END;
+						IF @EnrollmentDate IS NULL BEGIN SET @EnrollmentDate =@StartDate; END;
 
 						INSERT INTO PatientMasterVisit(PatientId, ServiceId, Start, [End], Active, VisitDate, VisitScheduled, VisitBy, VisitType, [Status], CreateDate, DeleteFlag, CreatedBy)
 						VALUES(@PatientId, 1, @EnrollmentDate, NULL, 0, @VisitDate, NULL, NULL, (SELECT top 1 ItemId FROM LookupItemView WHERE	MasterName like '%VisitType%' and ItemName like '%Enrollment%'), NULL, GETDATE(), 0 , @UserID);
@@ -3843,6 +3847,28 @@ BEGIN
 								SET @CreateDateTransfer = (SELECT TOP 1 CreateDate FROM dtl_PatientHivPrevCareIE WHERE Ptn_pk = @ptn_pk);
 
 								SET @MFLCODE = (select TOP 1 PosId from mst_Patient WHERE Ptn_pk = @ptn_pk);
+								SET @TreatmentStartDate = ISNULL(@TreatmentStartDate, @artstart);
+								SET @TreatmentStartDate = ISNULL(@TreatmentStartDate, @DEFAULTDATE);
+
+								SET @MFLCODE = (select TOP 1 PosId from mst_Patient WHERE Ptn_pk = @ptn_pk);
+								SET @FacilityFrom = ISNULL(@FacilityFrom, 'Unknown');
+								SET @CurrentART = ISNULL(@CurrentART, (select top 1 ItemId from LookupItemView where MasterName = 'Unknown' and ItemName = 'Unknown'));
+
+								SELECT @message = '@TransferInDate: ' + CAST(@TransferInDate as varchar);
+								PRINT @message;
+
+								SELECT @message = '@TreatmentStartDate: ' + CAST(@TreatmentStartDate as varchar);
+								PRINT @message;
+
+								SELECT @message = '@CurrentART: ' + CAST(@CurrentART as varchar);
+								PRINT @message;
+
+								SELECT @message = '@FacilityFrom: ' + CAST(@FacilityFrom as varchar);
+								PRINT @message;
+
+								SELECT @message = '@MFLCODE: ' + CAST(@MFLCODE as varchar);
+								PRINT @message;
+
 
 								IF @TransferInDate IS NOT NULL AND @TreatmentStartDate IS NOT NULL AND @CurrentART IS NOT NULL AND @FacilityFrom IS NOT NULL AND @MFLCODE IS NOT NULL
 									BEGIN
@@ -3863,10 +3889,10 @@ BEGIN
 								SET @Regimen = (select TOP 1 a.Regimen [Regimen] From dtl_PatientBlueCardPriorART a Inner Join Mst_Decode b On a.PurposeID = b.ID WHERE ptn_pk = @ptn_pk);
 								SET @DateLastUsed = (select TOP 1 a.DateLastUsed [RegLastUsed] From dtl_PatientBlueCardPriorART a Inner Join Mst_Decode b On a.PurposeID = b.ID WHERE ptn_pk = @ptn_pk);
 
-								IF @TreatmentType IS NOT NULL AND @Purpose IS NOT NULL AND @Regimen IS NOT NULL AND @DateLastUsed IS NOT NULL
+								IF @TreatmentType IS NOT NULL AND @Purpose IS NOT NULL AND @Regimen IS NOT NULL
 									BEGIN
 									INSERT INTO [dbo].[PatientARVHistory]([PatientId], [PatientMasterVisitId], [TreatmentType], [Purpose] , [Regimen], [DateLastUsed], [DeleteFlag] , [CreatedBy] , [CreateDate])
-									VALUES(@PatientId, @PatientMasterVisitId, @TreatmentType, @Purpose, @Regimen, @DateLastUsed, 0, @UserID, @CreateDate);
+									VALUES(@PatientId, @PatientMasterVisitId, @TreatmentType, @Purpose, @Regimen, ISNULL(@DateLastUsed, @DEFAULTDATE), 0, @UserID, @CreateDate);
 									END
 
 									SELECT @message = 'Created PatientARVHistory Id: ' + CAST(SCOPE_IDENTITY() as varchar);
@@ -3880,8 +3906,8 @@ BEGIN
 
 								IF @DateStartedOnFirstLine IS NULL
 									BEGIN
-										SET @DateStartedOnFirstLine = GETDATE();
-										SET @Cohort = (select  convert(char(3),GETDATE() , 0) + ' ' + CONVERT(varchar(10), year(GETDATE())));
+										SET @DateStartedOnFirstLine = @DEFAULTDATE;
+										SET @Cohort = (select  convert(char(3),@DateStartedOnFirstLine , 0) + ' ' + CONVERT(varchar(10), year(@DateStartedOnFirstLine)));
 									END
 					
 								INSERT INTO [dbo].[PatientTreatmentInitiation]([PatientMasterVisitId], [PatientId], [DateStartedOnFirstLine], [Cohort], Regimen, [RegimenCode] , [BaselineViralload] , [BaselineViralloadDate] , [DeleteFlag] , [CreatedBy] , [CreateDate] )
@@ -3890,6 +3916,10 @@ BEGIN
 									SELECT @message = 'Created PatientTreatmentInitiation Id: ' + CAST(SCOPE_IDENTITY() as varchar);
 									PRINT @message;
 							END
+
+						SET @HIVDiagnosisDate = ISNULL(@HIVDiagnosisDate, @DEFAULTDATE);
+						SET @EnrollmentDate = ISNULL(@EnrollmentDate, @DEFAULTDATE);
+						SET @artstart = ISNULL(@artstart, @DEFAULTDATE);
 
 						IF @HIVDiagnosisDate IS NOT NULL AND @EnrollmentDate IS NOT NULL AND @EnrollmentWHOStage IS NOT NULL AND @artstart IS NOT NULL
 							BEGIN
