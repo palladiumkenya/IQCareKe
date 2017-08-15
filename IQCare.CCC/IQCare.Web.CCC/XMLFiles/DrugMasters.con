@@ -2810,6 +2810,31 @@
     <StrengthName>12mg/60mg/100mg</StrengthName>
     <DeleteFlag>false</DeleteFlag>
   </Mst_Strength>
+  <Mst_Strength>
+    <StrengthId>548</StrengthId>
+    <StrengthName>150mg/75mg</StrengthName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Strength>
+  <Mst_Strength>
+    <StrengthId>549</StrengthId>
+    <StrengthName>350mg</StrengthName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Strength>
+  <Mst_Strength>
+    <StrengthId>550</StrengthId>
+    <StrengthName>150mg/75mg/100mg</StrengthName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Strength>
+  <Mst_Strength>
+    <StrengthId>551</StrengthId>
+    <StrengthName>300/100</StrengthName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Strength>
+  <Mst_Strength>
+    <StrengthId>552</StrengthId>
+    <StrengthName>300mg/100mg</StrengthName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Strength>
   <Mst_FrequencyUnits>
     <Id>1</Id>
     <Name>OD</Name>
@@ -9841,6 +9866,86 @@
     <DrugName>Stavudine/Lamivudine/Nevirapine-d4T12/3TC60/NVP100 12mg/60mg/100mg</DrugName>
     <DeleteFlag>false</DeleteFlag>
   </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1221</Drug_PK>
+    <DrugName>Zidovudine/Lamivudine-Zidovudine  300mg/150mg</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1222</Drug_PK>
+    <DrugName>Zidovudine/Lamivudine-Zidovudine  150mg/75mg</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1223</Drug_PK>
+    <DrugName>Abacavir/Lamivudine-Abacavir  300mg/150mg</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1224</Drug_PK>
+    <DrugName>Abacavir/Lamivudine-Abacavir  150mg/75mg</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1225</Drug_PK>
+    <DrugName>Nevirapine-nevirapine 200mg</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1226</Drug_PK>
+    <DrugName>Nevirapine-nevirapine 100mg</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1227</Drug_PK>
+    <DrugName>Efavirenz-efevirenz 350mg</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1228</Drug_PK>
+    <DrugName>Efavirenz-efevirenz 200mg</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1229</Drug_PK>
+    <DrugName>Efavirenz-efevirenz 250mg</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1230</Drug_PK>
+    <DrugName>Efavirenz-efevirenz 300mg</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1231</Drug_PK>
+    <DrugName>Zidovudine/Lamivudine/Nevirapine-zidovudine/lamivudine/nevirapine 300mg/150mg/200mg</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1232</Drug_PK>
+    <DrugName>Zidovudine/Lamivudine/Nevirapine-zidovudine/lamivudine/nevirapine 150mg/75mg/100mg</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1233</Drug_PK>
+    <DrugName>Abacavir/Lamivudine/Nevirapine-abacavir/lamivudine/nevirapine 150mg/75mg/100mg</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1234</Drug_PK>
+    <DrugName>Zidovudine-zidovudine 300mg</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1235</Drug_PK>
+    <DrugName>Stavudine/Lamivudine/Nevirapine-stavudine/lamivudine/nevirapine 30mg/150mg/200mg</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1236</Drug_PK>
+    <DrugName>ATAZANAVIR/RITONAVIR-atazanavir/ritonavir 300mg/100mg</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
   <Mst_Generic>
     <GenericId>1</GenericId>
     <GenericName>Abacavir</GenericName>
@@ -12165,7 +12270,7 @@
   </Mst_Generic>
   <Mst_Generic>
     <GenericId>591</GenericId>
-    <GenericName>Atazanavir/Ritonavir</GenericName>
+    <GenericName>ATAZANAVIR/RITONAVIR</GenericName>
     <GenericAbbrevation>ATV/r</GenericAbbrevation>
   </Mst_Generic>
   <Mst_DrugType>

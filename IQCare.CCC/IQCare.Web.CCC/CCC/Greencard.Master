@@ -342,7 +342,10 @@
 			var stopEncounter=0; /* starts encounter flags starts at false */
 
 			var patientId = <%=PatientId%>;
-			var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            var patientMasterVisitId = <%=PatientMasterVisitId%>;
+
+		    var newdate = new Date();
+		    var today = moment(newdate).add(2, 'hours');
 
 		    var encounterStatusId = <%=EncounterStatusId%>;
 		    var linkText = "Register Patient";
@@ -352,7 +355,8 @@
             $('#Re-enrollmentdatepicker').datetimepicker({
 		        format: 'DD-MMM-YYYY',
 		        allowInputToggle: true,
-		        useCurrent: false
+                useCurrent: false,
+		        maxDate: today
 		    });
 
 			if (patientId < 1) {
