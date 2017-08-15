@@ -1,7 +1,7 @@
 SET NOCOUNT ON;
 Go
 -- Update version
-Update AppAdmin Set AppVer='Ver 1.0.0.1 Kenya HMIS', DBVer='Ver 1.0.0.1 Kenya HMIS', RelDate='20170501 00:00:00.000', VersionName = 'Kenya HMIS Ver 1.0.0.1'
+Update AppAdmin Set AppVer='Ver 1.0.0.3 Kenya HMIS', DBVer='Ver 1.0.0.3 Kenya HMIS', RelDate='20170801 00:00:00.000', VersionName = 'Kenya HMIS Ver 1.0.0.3'
 
 Go
 

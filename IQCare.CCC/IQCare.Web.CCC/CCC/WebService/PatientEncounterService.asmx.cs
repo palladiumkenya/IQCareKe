@@ -7,6 +7,7 @@ using System.Web.Script.Serialization;
 using System.Web.Script.Services;
 using System.Web.Services;
 using Application.Presentation;
+using Entities.CCC.Encounter;
 using Entities.CCC.Enrollment;
 using Interface.CCC.Visit;
 using IQCare.CCC.UILogic.Enrollment;
@@ -62,6 +63,26 @@ namespace IQCare.Web.CCC.WebService
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
 
             patientEncounter.savePatientEncounterPhysicalExam(Session["PatientMasterVisitID"].ToString(), Session["PatientPK"].ToString(), Session["AppUserId"].ToString(), physicalExam, generalExam);
+        }
+
+        [WebMethod(EnableSession = true)]
+        public void savePatientWhoStage(int whoStage)
+        {
+            PatientWhoStageManager whoStageManager = new PatientWhoStageManager();
+
+            int patientId = Convert.ToInt32(Session["PatientPK"].ToString());
+            int patientMasterVisitId = Convert.ToInt32(Session["PatientMasterVisitID"].ToString());
+
+            PatientWhoStage PatientWhoStage = whoStageManager.GetPatientWhoStage(patientId, patientMasterVisitId);
+            if (PatientWhoStage != null)
+            {
+                PatientWhoStage.WHOStage = whoStage;
+                whoStageManager.UpdatePatientWhoStage(PatientWhoStage);
+            }
+            else
+            {
+                whoStageManager.addPatientWhoStage(patientId, patientMasterVisitId, whoStage);
+            }
         }
 
         [WebMethod(EnableSession = true)]
@@ -685,11 +706,12 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string SavePatientAdherenceAssessment(string feelBetter, string carelessAboutMedicine, string feelWorse, string forgetMedicine)
+        public string SavePatientAdherenceAssessment(string feelBetter, string carelessAboutMedicine, string feelWorse, string forgetMedicine, string takeMedicine, string stopMedicine, string underPressure, string difficultyRemembering)
         {
             PatientAdherenceAssessmentManager patientAdherenceAssessment = new PatientAdherenceAssessmentManager();
             int adherenceScore = 0;
             string adherenceRating = null;
+            decimal mmas8Score;
 
             int patientId = Convert.ToInt32(Session["PatientPK"].ToString());
             int patientMasterVisitId = Convert.ToInt32(Session["PatientMasterVisitId"].ToString());
@@ -698,6 +720,10 @@ namespace IQCare.Web.CCC.WebService
             bool careless_Medicine = Convert.ToBoolean(Convert.ToInt32(carelessAboutMedicine));
             bool feel_Worse = Convert.ToBoolean(Convert.ToInt32(feelWorse));
             bool forget_Medicine = Convert.ToBoolean(Convert.ToInt32(forgetMedicine));
+            bool take_medicine = Convert.ToBoolean(Convert.ToInt32(takeMedicine));
+            bool stop_Medicine = Convert.ToBoolean(Convert.ToInt32(stopMedicine));
+            bool under_Pressure = Convert.ToBoolean(Convert.ToInt32(underPressure));
+            decimal difficulty_Remembering = Convert.ToDecimal(difficultyRemembering);
 
             adherenceScore = Convert.ToInt32(feelBetter) + Convert.ToInt32(carelessAboutMedicine) +
                              Convert.ToInt32(feelWorse) + Convert.ToInt32(forgetMedicine);
@@ -713,6 +739,22 @@ namespace IQCare.Web.CCC.WebService
                 adherenceRating = "Poor";
             }
 
+            if (adherenceScore > 0)
+            {
+                mmas8Score = Convert.ToDecimal(adherenceScore) + Convert.ToDecimal(take_medicine) +
+                             Convert.ToDecimal(stop_Medicine) + Convert.ToDecimal(under_Pressure) + Convert.ToDecimal(difficulty_Remembering);
+
+                if (mmas8Score >= 1 && mmas8Score <= 2)
+                {
+                    adherenceRating = "Inadequate";
+                }
+                else if (mmas8Score >= 3 && mmas8Score <= 8)
+                {
+                    adherenceRating = "Poor";
+                }
+            }
+
+
             var history = patientAdherenceAssessment.GetActiveAdherenceAssessment(patientId);
 
             if (history.Count > 0)
@@ -721,8 +763,18 @@ namespace IQCare.Web.CCC.WebService
                 patientAdherenceAssessment.UpdateAdherenceAssessment(history[0]);
             }
 
-            int result = patientAdherenceAssessment.AddPatientAdherenceAssessment(patientId, patientMasterVisitId, createdBy, feel_Better, careless_Medicine, feel_Worse, forget_Medicine);
+            int result;
 
+            if (adherenceScore > 0)
+            {
+                result = patientAdherenceAssessment.AddPatientAdherenceAssessment(patientId, patientMasterVisitId,
+                    createdBy, feel_Better, careless_Medicine, feel_Worse, forget_Medicine, take_medicine, stop_Medicine, under_Pressure, difficulty_Remembering);
+            }
+            else
+            {
+                result = patientAdherenceAssessment.AddPatientAdherenceAssessment(patientId, patientMasterVisitId,
+                    createdBy, feel_Better, careless_Medicine, feel_Worse, forget_Medicine);
+            }
             if (result > 0)
             {
                 var lookUpLogic =  new LookupLogic();

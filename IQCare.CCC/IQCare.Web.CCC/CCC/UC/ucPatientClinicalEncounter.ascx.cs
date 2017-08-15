@@ -48,41 +48,6 @@ namespace IQCare.Web.CCC.UC
             LookupItemView genderType = _lookupItemManager.GetPatientGender(genderID);
             gender = genderType.ItemName;
 
-            if (!IsPostBack)
-            {
-                LookupLogic lookUp = new LookupLogic();
-                lookUp.populateDDL(tbscreeningstatus, "TBStatus");
-                lookUp.populateDDL(nutritionscreeningstatus, "NutritionStatus");
-                lookUp.populateDDL(AdverseEventAction, "AdverseEventsActions");
-                lookUp.populateDDL(ddlAdverseEventSeverity, "ADRSeverity");
-                lookUp.populateDDL(ddlVisitBy, "VisitBy");
-                lookUp.populateDDL(ChronicIllnessName, "ChronicIllness");
-                lookUp.populateDDL(ddlVaccine, "Vaccinations");
-                lookUp.populateDDL(ddlVaccineStage, "VaccinationStages");
-                lookUp.populateDDL(ddlExaminationType, "ReviewOfSystems");
-                //lookUp.populateDDL(ddlExamination, "PhysicalExamination");
-                lookUp.populateCBL(cblGeneralExamination, "GeneralExamination");
-                lookUp.populateCBL(cblPHDP, "PHDP");
-                lookUp.populateDDL(arvAdherance, "ARVAdherence");
-                lookUp.populateDDL(ctxAdherance, "CTXAdherence");
-                lookUp.populateDDL(ddlAllergySeverity, "ADRSeverity");
-                lookUp.populateDDL(stabilityStatus, "StabilityAssessment");
-
-                var patientVitals = new PatientVitalsManager();
-                PatientVital patientTriage = patientVitals.GetByPatientId(Convert.ToInt32(Session["PatientPK"].ToString()));
-                if(patientTriage != null)
-                {
-                    Weight = patientTriage.Weight.ToString();
-                    txtWeight.Text = Weight;
-                    txtHeight.Text = patientTriage.Height.ToString();
-                    txtBMI.Text = patientTriage.BMI.ToString();
-                }
-                
-
-                if (Convert.ToInt32(Session["PatientMasterVisitId"]) > 0)
-                    loadPatientEncounter();
-
-            }
             ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
             List<LookupItemView> statuses = mgr.GetLookItemByGroup("AppointmentStatus");
             if (statuses != null && statuses.Count > 0)
@@ -94,6 +59,16 @@ namespace IQCare.Web.CCC.UC
                 }
                 status.SelectedIndex = 1;
                 status.Enabled = false;
+            }
+
+            List<LookupItemView> whoStage = mgr.GetLookItemByGroup("WHOStage");
+            if (whoStage != null && whoStage.Count > 0)
+            {
+                WHOStage.Items.Add(new ListItem("select", ""));
+                foreach (var k in whoStage)
+                {
+                    WHOStage.Items.Add(new ListItem(k.ItemName, k.ItemId.ToString()));
+                }
             }
 
             List<LookupItemView> areas = mgr.GetLookItemByGroup("ServiceArea");
@@ -125,6 +100,43 @@ namespace IQCare.Web.CCC.UC
                     DifferentiatedCare.Items.Add(new ListItem(k.ItemDisplayName, k.ItemId.ToString()));
                 }
             }
+
+            if (!IsPostBack)
+            {
+                LookupLogic lookUp = new LookupLogic();
+                lookUp.populateDDL(tbscreeningstatus, "TBStatus");
+                lookUp.populateDDL(nutritionscreeningstatus, "NutritionStatus");
+                lookUp.populateDDL(AdverseEventAction, "AdverseEventsActions");
+                lookUp.populateDDL(ddlAdverseEventSeverity, "ADRSeverity");
+                lookUp.populateDDL(ddlVisitBy, "VisitBy");
+                lookUp.populateDDL(ChronicIllnessName, "ChronicIllness");
+                lookUp.populateDDL(ddlVaccine, "Vaccinations");
+                lookUp.populateDDL(ddlVaccineStage, "VaccinationStages");
+                lookUp.populateDDL(ddlExaminationType, "ReviewOfSystems");
+                //lookUp.populateDDL(ddlExamination, "PhysicalExamination");
+                lookUp.populateCBL(cblGeneralExamination, "GeneralExamination");
+                lookUp.populateCBL(cblPHDP, "PHDP");
+                lookUp.populateDDL(arvAdherance, "ARVAdherence");
+                lookUp.populateDDL(ctxAdherance, "CTXAdherence");
+                lookUp.populateDDL(ddlAllergySeverity, "ADRSeverity");
+                lookUp.populateDDL(stabilityStatus, "StabilityAssessment");
+                //lookUp.populateDDL(WHOStage, "WHOStage");
+
+                var patientVitals = new PatientVitalsManager();
+                PatientVital patientTriage = patientVitals.GetByPatientId(Convert.ToInt32(Session["PatientPK"].ToString()));
+                if (patientTriage != null)
+                {
+                    Weight = patientTriage.Weight.ToString();
+                    txtWeight.Text = Weight;
+                    txtHeight.Text = patientTriage.Height.ToString();
+                    txtBMI.Text = patientTriage.BMI.ToString();
+                }
+
+
+                if (Convert.ToInt32(Session["PatientMasterVisitId"]) > 0)
+                    loadPatientEncounter();
+
+            }
         }
 
         private void loadPatientEncounter()
@@ -153,6 +165,7 @@ namespace IQCare.Web.CCC.UC
             complaints.Value = pce.complaints;
             tbInfected.SelectedValue = pce.OnAntiTB;
             onIpt.SelectedValue = pce.OnIPT;
+            EverBeenOnIpt.SelectedValue = pce.EverBeenOnIPT;
 
             tbscreeningstatus.SelectedValue = pce.tbScreening;
             nutritionscreeningstatus.SelectedValue = pce.nutritionStatus;
@@ -184,6 +197,7 @@ namespace IQCare.Web.CCC.UC
 
             arvAdherance.SelectedValue = pce.ARVAdherence;
             ctxAdherance.SelectedValue = pce.CTXAdherence;
+            WHOStage.SelectedValue = pce.WhoStage;
 
         }
     }

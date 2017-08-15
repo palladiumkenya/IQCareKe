@@ -39,6 +39,7 @@ namespace IQCare.Web.CCC.UC
             DateTime DoB = Convert.ToDateTime(thisPatient.DateOfBirth);
             var patientAge = PatientManager.CalculateYourAge(DoB);
             lblAge.Text = "<strong><i>" + patientAge.Replace("Age:", "") + "</i></strong>";
+            string notTaken = "<span class='label label-danger'>Not Taken!</span>";
             if (patientTriage != null)
             {
                 lblDatetaken.Text = Convert.ToDateTime(patientTriage.VisitDate).ToString("dd-MMM-yyyy");
@@ -165,13 +166,21 @@ namespace IQCare.Web.CCC.UC
 
 
                 lblBMI.Text = bmiAnalysis;
-                lblPulseRate.Text = "<span class='label label-info'>"+patientTriage.HeartRate+" beats/min</span>";
-                lblOxygenSaturation.Text = "<span class='label label-info'>"+patientTriage.SpO2+" %</span>";
-                lblRespiratoryRate.Text = "<span class='label label-info'>"+patientTriage.RespiratoryRate+" breaths/min</span>";
+                if((int)patientTriage.HeartRate==0)
+                    lblPulseRate.Text = notTaken;
+                else
+                    lblPulseRate.Text = "<span class='label label-info'>" + patientTriage.HeartRate + " beats/min</span>";
+                if ((int)patientTriage.SpO2 == 0)
+                    lblOxygenSaturation.Text = notTaken;
+                else
+                    lblOxygenSaturation.Text = "<span class='label label-info'>" + patientTriage.SpO2 + " %</span>";
+                if ((int)patientTriage.RespiratoryRate == 0)
+                     lblRespiratoryRate.Text = notTaken;
+                else
+                    lblRespiratoryRate.Text = "<span class='label label-info'>" + patientTriage.RespiratoryRate + " breaths/min</span>";
             }
             else
             {
-                string notTaken = "<span class='label label-danger'>Not Taken!</span>";
                 lblTemperature.Text = notTaken;
                 lblbloodpressure.Text = notTaken;
                 lblBMI.Text = notTaken;

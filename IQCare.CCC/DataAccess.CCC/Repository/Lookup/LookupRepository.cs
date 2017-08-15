@@ -31,10 +31,12 @@ namespace DataAccess.CCC.Repository.Lookup
 
         public List<LookupItemView> GetLookupItemViews(string listGroup)
         {
-            ILookupRepository x = new LookupRepository();
-            var myList = x.FindBy(g => g.MasterName == listGroup.ToString()).OrderBy(y=>y.OrdRank).ToList();
-            return myList;//.OrderBy(l => l.OrdRank).ToList();
-          //  return myList;
+            //ILookupRepository x = new LookupRepository();
+            var myList = _context.Lookups.Where(g => g.MasterName == listGroup).OrderBy(y => y.OrdRank).ToList();
+            
+                //FindBy(g => g.MasterName == listGroup.ToString()).OrderBy(y=>y.OrdRank).ToList();
+           // return myList;//.OrderBy(l => l.OrdRank).ToList();
+           return myList;
         }
         /* pw GetLookupLabs implementation   */
         public List<LookupItemView> GetLabsList(string lab)
@@ -47,7 +49,8 @@ namespace DataAccess.CCC.Repository.Lookup
         public LookupItemView GetPatientGender(int genderId)
         {
             ILookupRepository lookupGender = new LookupRepository();
-            var genderType = lookupGender.FindBy(x => x.ItemId == genderId).FirstOrDefault();
+           var genderType = lookupGender.GetById(genderId);
+            //var genderType = lookupGender.FindBy(x => x.ItemId == genderId).FirstOrDefault();
             return genderType;
 
         }

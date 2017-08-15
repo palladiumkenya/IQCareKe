@@ -30,7 +30,7 @@
                                 <div class="col-md-12">
                                     <div class="datepicker fuelux form-group" id="PersonAppointmentDate">
                                         <div class="input-group">
-                                            <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="AppointmentDate" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
+                                            <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="AppointmentDate" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"  required ="True" data-parsley-min-message="Input the appointment date"></asp:TextBox>
                                             <div class="input-group-btn">
                                                 <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                     <span class="glyphicon glyphicon-calendar"></span>

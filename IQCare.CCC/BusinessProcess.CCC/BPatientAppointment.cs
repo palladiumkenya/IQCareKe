@@ -104,5 +104,15 @@ namespace BusinessProcess.CCC
                 return appointments;
             }
         }
+
+        public List<AppointmentSummary> GetAppointmentSummaryByDate(DateTime date)
+        {
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                List<AppointmentSummary> summary = _unitOfWork.PatientAppointmentRepository.GetAppointmentSummaryByDate(date);
+                _unitOfWork.Dispose();
+                return summary;
+            }
+        }
     }
 }

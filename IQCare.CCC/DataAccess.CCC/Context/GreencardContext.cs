@@ -100,9 +100,11 @@ namespace DataAccess.CCC.Context
         public DbSet<LabResultsEntity> LabResults { get; set; }
         public DbSet<PatientAdherenceAssessment> PatientAdherenceAssessments { get; set; }
         public DbSet<PatientLinkage> PatientLinkages { get; set; }
+        public DbSet<PatientWhoStage> PatientWhoStages { get; set; }
 
         //Appointment and Labs
         public DbSet<PatientAppointment> PatientAppointments { get; set; }
+        public DbSet<AppointmentSummary> AppointmentSummary { get; set; }
         public DbSet<BlueCardAppointment> BlueCardAppointments { get; set; }
         public DbSet<PatientLabTracker> PatientLabTracker { get; set; }
         public DbSet<LabDetailsEntity> PatientLabDetails { get; set; }

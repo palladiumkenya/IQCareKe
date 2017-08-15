@@ -555,14 +555,26 @@
 
             // Save lab order
             $("#btnSaveLab").click(function (e) {
-                var labOrderDate = $("#<%=LabDate.ClientID%>").val();   
+                <%--var labOrderDate = $("#<%=LabDate.ClientID%>").val();--%>
+                var labOrderDate = $("#LabDatePicker").datepicker('getDate');
                 var orderNotes = $("#orderNotes").val();
                 var _fp = [];
                 var table = "";
-                var labDate = getFormattedDate(labOrderDate);
-              //using momentjs
-               enrollmentDate = moment(enrollmentDate);
-               var isBeforeEnrollmentDate = moment(labDate).isBefore(enrollmentDate);        
+
+                var labDate = moment(labOrderDate, 'DD-MMM-YYYY').format('DD-MM-YYYY');
+
+                var x = moment(labDate, 'DD-MM-YYYY')._d;
+                var y = moment(enrollmentDate, 'DD-MM-YYYY')._d;
+
+                var isBeforeEnrollmentDate = moment(x).isBefore(y);
+
+                labOrderDate = moment(labDate, 'DD-MM-YYYY').format('DD-MMM-YYYY');
+                enrollmentDate = moment(enrollmentDate);
+
+              //  var labDate = moment(labOrderDate);
+              ////using momentjs
+              // enrollmentDate = moment(enrollmentDate);
+              // var isBeforeEnrollmentDate = moment(labDate).isBefore(enrollmentDate);        
 
               
                 var data = $('#tblAddLabs tr').each(function (row, tr) {

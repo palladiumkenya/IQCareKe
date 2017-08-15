@@ -137,7 +137,7 @@ namespace BusinessProcess.CCC
                     ClsUtility.AddParameters("@PatientMasterVisitID", SqlDbType.Int, masterVisitID);
                     ClsUtility.AddParameters("@PatientID", SqlDbType.Int, patientID);
 
-                    int a = (int)obj.ReturnObject(ClsUtility.theParams, "sp_deletePatientEncounterChronicIllness", ClsUtility.ObjectEnum.ExecuteNonQuery);
+                    //int a = (int)obj.ReturnObject(ClsUtility.theParams, "sp_deletePatientEncounterChronicIllness", ClsUtility.ObjectEnum.ExecuteNonQuery);
 
                     foreach (var chrIll in chronicIllness)
                     {
@@ -181,7 +181,7 @@ namespace BusinessProcess.CCC
                     ClsUtility.AddParameters("@PatientMasterVisitID", SqlDbType.Int, masterVisitID);
                     ClsUtility.AddParameters("@PatientID", SqlDbType.Int, patientID);
 
-                    int q = (int)objAllergy.ReturnObject(ClsUtility.theParams, "sp_deletePatientEncounterAllergies", ClsUtility.ObjectEnum.ExecuteNonQuery);
+                    //int q = (int)objAllergy.ReturnObject(ClsUtility.theParams, "sp_deletePatientEncounterAllergies", ClsUtility.ObjectEnum.ExecuteNonQuery);
 
                     foreach (var all in allergies)
                     {
@@ -308,7 +308,7 @@ namespace BusinessProcess.CCC
                         ClsUtility.AddParameters("@PatientMasterVisitID", SqlDbType.Int, PatientMasterVisitID);
                         ClsUtility.AddParameters("@PatientID", SqlDbType.Int, PatientID);
 
-                        int b = (int)obj.ReturnObject(ClsUtility.theParams, "sp_deletePatientEncounterDiagnosis", ClsUtility.ObjectEnum.ExecuteNonQuery);
+                        //int b = (int)obj.ReturnObject(ClsUtility.theParams, "sp_deletePatientEncounterDiagnosis", ClsUtility.ObjectEnum.ExecuteNonQuery);
                     //}
 
                     foreach (var diag in diagnosis)
@@ -407,6 +407,7 @@ namespace BusinessProcess.CCC
                     pce.NightSweats = theDS.Tables[9].Rows[0]["NightSweats"].ToString();
                     pce.OnAntiTB = theDS.Tables[9].Rows[0]["OnAntiTBDrugs"].ToString();
                     pce.OnIPT = theDS.Tables[9].Rows[0]["OnIpt"].ToString();
+                    pce.EverBeenOnIPT = theDS.Tables[9].Rows[0]["EverBeenOnIPT"].ToString();
                 }
 
                 if (theDS.Tables[10].Rows.Count > 0)
@@ -416,6 +417,11 @@ namespace BusinessProcess.CCC
                     pce.startAntiTB = theDS.Tables[10].Rows[0]["StartAntiTb"].ToString();
                     pce.InvitationOfContacts = theDS.Tables[10].Rows[0]["InvitationOfContacts"].ToString();
                     pce.EvaluatedForIPT = theDS.Tables[10].Rows[0]["EvaluatedForIPT"].ToString();
+                }
+
+                if (theDS.Tables[14].Rows.Count > 0)
+                {
+                    pce.WhoStage = theDS.Tables[14].Rows[0]["WHOStage"].ToString();
                 }
 
 

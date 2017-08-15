@@ -26,5 +26,9 @@ namespace Entities.CCC.Encounter
         public bool CarelessAboutMedicine { get; set; }
         public bool FeelWorse { get; set; }
         public bool FeelBetter { get; set; }
+        public bool? TakeMedicine { get; set; }
+        public bool? StopMedicine { get; set; }
+        public bool? UnderPressure { get; set; }
+        public decimal? DifficultyRemembering { get; set; }
     }
 }

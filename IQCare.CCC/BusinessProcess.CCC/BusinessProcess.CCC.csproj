@@ -104,6 +104,7 @@
     <Compile Include="BPatientPopulationManager.cs" />
     <Compile Include="BPatientTreatmentSupporterManager.cs" />
     <Compile Include="BPatientVitals.cs" />
+    <Compile Include="BPatientWhoStageManager.cs" />
     <Compile Include="BPersonLocationmanager.cs" />
     <Compile Include="BPersonLookUpManager.cs" />
     <Compile Include="BPersonManager.cs" />

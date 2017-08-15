@@ -12,5 +12,6 @@ namespace Interface.CCC
         PatientCategorization GetPatientCategorization(int id);
         void DeletePatientCategorization(int id);
         int UpdatePatientCategorization(PatientCategorization p);
+        List<PatientCategorization> GetByPatientId(int patientId);
     }
 }
