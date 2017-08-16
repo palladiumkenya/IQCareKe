@@ -102,7 +102,7 @@ If Not Exists(Select 1 From LookupMaster where Name='Abdomen') Begin INSERT INTO
 If Not Exists(Select 1 From LookupMaster where Name='CNS') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('CNS','CNS',0); End
 
 update LookupMaster set name='GUS', DisplayName='Genito-urinary' Where Name='GUS'
-If Not Exists(Select 1 From LookupMaster where Name='GUS') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Genito-urinary','Genito-urinary',0); End
+If Not Exists(Select 1 From LookupMaster where Name='GUS') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('GUS','Genito-urinary',0); End
 
 If Not Exists(Select 1 From LookupMaster where Name='ICD10') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('ICD10','ICD10',0); End
 If Not Exists(Select 1 From LookupMaster where Name='PresentingComplaints') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PresentingComplaints','Presenting Complaints',0); End
