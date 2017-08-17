@@ -83,12 +83,36 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12">
 
-                    <div class="col-md-12">
-                        <h3>HIV Testing information</h3><hr />
+                <div class="col-md-12">
+                    <div class="col-md-6">
+                        <div class="col-md-12 form-group">
+                            <div class="col-md-6">
+                                <label class="control-label pull-left">Registered at this clinic:</label>
+                            </div>
+                            <div class="col-md-6">
+                                <asp:DropDownList ID="RegisteredInClinic" runat="server" ClientIDMode="Static" CssClass="form-control input-sm"></asp:DropDownList>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-4">
+                    
+                    <div class="col-md-6" id="searchButton">
+                        <div class="col-md-12 form-group">
+                            <div class="col-md-6">
+                                <asp:LinkButton ID="btnSearch" runat="server" ClientIDMode="Static" CssClass="btn btn-info btn-lg fa fa-search-minus" OnClientClick="return false;"> Find Patient</asp:LinkButton>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="hivTestingInfo">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <h3>HIV Testing information</h3><hr />
+
+                        </div>
+
+                        <div class="col-md-4">
                         <div class="col-md-12 form-group">
                             <div class="col-md-12">
                                 <label class="required control-label pull-left">Baseline HIV Status</label>
@@ -96,7 +120,9 @@
                             <div class="col-md-12">
                                 <select runat="server" id="BaselineHIVStatus" class="form-control input-sm" clientidmode="Static" onchange="BaselineEnabled();"></select>
                             </div>
+
                         </div>
+
                         <div class="col-md-12 form-group">
                             <div class="col-md-12">
                                 <label class="control-label pull-left">Baseline HIV Status Date</label>
@@ -113,7 +139,7 @@
 
                     </div>
 
-                    <div class="col-md-4">
+                        <div class="col-md-4">
                         <div class="col-md-12 form-group">
                             <div class="col-md-12">
                                 <label class="control-label pull-left">HIV Testing Results</label>
@@ -137,7 +163,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-4">
+                        <div class="col-md-4">
                         <div class="col-md-12 form-group">
                             <div class="col-md-12">
                                 <label class="control-label pull-left">Referred to CCC</label>
@@ -175,42 +201,46 @@
                         </div>
                     </div>
 
-                </div>
-                <div class="col-md-12">
-                    <hr />
-                </div>
-                <div class="col-md-12">
-                    <asp:LinkButton runat="server" ID="btnAdd" ClientIDMode="Static" OnClientClick="return false" CssClass=" btn btn-info btn-lg fa fa-plus-circle"> Add Member</asp:LinkButton>
-                </div>
-
-                <div class="col-md-12">
-                    <hr />
-                </div>
-
-                <div class="col-md-12">
-                    <div class="col-md-12 form-group">
-                        <div class="col-md-12 bg-primary"><span class="pull-left"></span>Family Members </div>
-                        <table class="table table-hover" id="tblFamilyTesting" clientidmode="Static" runat="server">
-                            <thead>
-                                <tr>
-                                    <th class="text-primary">#</th>
-                                    <th><span class="text-primary" aria-hidden="true">Name</span> </th>
-                                    <th><span class="text-primary" aria-hidden="true">Date Of Birth</span></th>
-                                    <th><span class="text-primary" aria-hidden="true">Relationship</span> </th>
-                                    <th><span class="text-primary" aria-hidden="true">Baseline HIV Status</span> </th>
-                                    <th><span class="text-primary" aria-hidden="true">Baseline HIV Status Date</span> </th>
-                                    <th><span class="text-primary" aria-hidden="true">HIV Testing Results</span> </th>
-                                    <th><span class="text-primary" aria-hidden="true">HIV Testing Results Date</span> </th>
-                                    <th><span class="text-primary" aria-hidden="true">CCC Referal</span></th>
-                                    <th><span class="text-primary pull-right">Action</span></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-
                     </div>
-                    <div class="col-md-10"></div>
+
+                    <div class="col-md-12">
+                        <hr />
+                    </div>
+
+                    <div class="col-md-12">
+                        <asp:LinkButton runat="server" ID="btnAdd" ClientIDMode="Static" OnClientClick="return false" CssClass="btn btn-info btn-lg fa fa-plus-circle"> Add Member</asp:LinkButton>
+                    </div>
+                
+
+                    <div class="col-md-12">
+                        <hr />
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="col-md-12 form-group">
+                            <div class="col-md-12 bg-primary"><span class="pull-left"></span>Family Members </div>
+                            <table class="table table-hover" id="tblFamilyTesting" clientidmode="Static" runat="server">
+                                <thead>
+                                    <tr>
+                                        <th class="text-primary">#</th>
+                                        <th><span class="text-primary" aria-hidden="true">Name</span> </th>
+                                        <th><span class="text-primary" aria-hidden="true">Date Of Birth</span></th>
+                                        <th><span class="text-primary" aria-hidden="true">Relationship</span> </th>
+                                        <th><span class="text-primary" aria-hidden="true">Baseline HIV Status</span> </th>
+                                        <th><span class="text-primary" aria-hidden="true">Baseline HIV Status Date</span> </th>
+                                        <th><span class="text-primary" aria-hidden="true">HIV Testing Results</span> </th>
+                                        <th><span class="text-primary" aria-hidden="true">HIV Testing Results Date</span> </th>
+                                        <th><span class="text-primary" aria-hidden="true">CCC Referal</span></th>
+                                        <th><span class="text-primary pull-right">Action</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <div class="col-md-10"></div>
+                    </div>
                 </div>
             </div>
 
@@ -664,7 +694,26 @@
             });
 
             $("#FamilyTestingDetails").hide();
+            $("#hivTestingInfo").hide();
+            $("#searchButton").hide();
+
             loadFamilyTesting();
+
+            $("#RegisteredInClinic").change(function() {
+                var registeredInClinic = $("#RegisteredInClinic").find(":selected").text();
+
+                if (registeredInClinic == "Yes") {
+                    $("#hivTestingInfo").hide();
+                    $("#searchButton").show();
+                } else if (registeredInClinic == "No") {
+                    $("#hivTestingInfo").show();
+                    $("#searchButton").hide();
+                }
+            });
+
+            $("#btnSearch").click(function() {
+                
+            });
 
             $("#btnAdd").click(function (e) {
                 $('#FamilyTestingForm').parsley().destroy();
@@ -886,7 +935,7 @@
                             var action = "";
                             var enrollment = "";
 
-                            if (item.BaseLineHivStatus != "Tested Positive" && item.HivStatusResult !="Tested Positive") {
+                            if ((item.BaseLineHivStatus != "Tested Positive" && item.HivStatusResult != "Tested Positive") || (item.BaseLineHivStatus != "Tested Positive")) {
                                 action = "<button type='button' id= 'btnEditTesting' class='btn btn-link btn-sm pull-right' data-toggle='modal' data-target='#testFollowupModal' onClick='editFamilyTesting(this)'>Follow-up Test</button>";
                             } else if ((item.CccReferal == "True" && item.BaseLineHivStatus == "Tested Positive") || (item.CccReferal == "True" && item.HivStatusResult == "Tested Positive")) {
                                 referred = "Referred";

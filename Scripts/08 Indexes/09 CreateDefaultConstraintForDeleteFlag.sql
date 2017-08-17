@@ -1,37 +1,24 @@
-Set Nocount On;
-Go
-SET ANSI_NULLS ON
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Create_DefaultConstraints]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[Create_DefaultConstraints]
 GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
-SET ANSI_PADDING ON
-GO
-IF OBJECT_ID('tempdb..#DeleteFlags') IS NOT NULL Drop Table #DeleteFlags
-Go
-Create Table #DeleteFlags(	
+Create PROCEDURE [dbo].[Update_SRNOColumn]
+AS
+BEGIN
+Declare @DeleteFlags Table(	
 	tablename varchar(50),
 	ColumnName varchar(10)
 );
 Go
-Insert Into #DeleteFlags
-SELECT  t.name AS table_name,
---SCHEMA_NAME(schema_id) AS schema_name,
-c.name AS column_name
-FROM sys.tables AS t
-INNER JOIN sys.columns c ON t.OBJECT_ID = c.OBJECT_ID
-WHERE c.name LIKE 'DeleteFlag';
-Go
-Declare @Query varchar(250)
-		,@tablename varchar(50)
-		,@update varchar(250);
-While Exists(Select 1 From #DeleteFlags) Begin
+Insert Into @DeleteFlags
+SELECT  t.name AS table_name, c.name AS column_name
+FROM sys.tables AS t INNER JOIN sys.columns c ON t.OBJECT_ID = c.OBJECT_ID WHERE c.name LIKE 'DeleteFlag';
 
-	Select @Query = 'Alter table ['+tablename + '] ADD CONSTRAINT DF_'+replace(tablename,' ','')+'_DeleteFlag'+' DEFAULT 0 FOR DeleteFlag; ', @tablename = tablename From #DeleteFlags;
+Declare @Query varchar(250)	,@tablename varchar(50)		,@update varchar(250);
+
+While Exists(Select 1 From @DeleteFlags) Begin
+	Select @Query = 'Alter table ['+tablename + '] ADD CONSTRAINT DF_'+replace(tablename,' ','')+'_DeleteFlag'+' DEFAULT 0 FOR DeleteFlag; ', @tablename = tablename From @DeleteFlags;
 	Select @update = 'Update ['+@tablename +'] Set DeleteFlag = 0 Where DeleteFlag Is Null;'
-	--Print @update
-	--Print 'table name == [' +@tablename+']'
+
 	Exec (@update);
 	If Not Exists (Select 1      from sys.all_columns c
       join sys.tables t on t.object_id = c.object_id
@@ -42,11 +29,14 @@ While Exists(Select 1 From #DeleteFlags) Begin
 		--Print @Query
 		Exec(@Query)
 	 End
-	--
 	
-	Delete From #DeleteFlags where tablename = @tablename
+	Delete From @DeleteFlags where tablename = @tablename
 	
 End
+End
+
 GO
-SET ANSI_PADDING OFF
-GO
+Execute Create_DefaultConstraints
+Go
+DROP PROCEDURE [dbo].[Create_DefaultConstraints]
+Go

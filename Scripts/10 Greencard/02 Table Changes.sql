@@ -65,24 +65,29 @@ DROP CONSTRAINT [PK_PersonRelationship]
 ALTER TABLE PersonRelationship
 ADD CONSTRAINT [PK_PersonRelationship] PRIMARY KEY (Id)
 
-IF EXISTS(SELECT * FROM sys.columns WHERE Name = N'RelatedTo'AND Object_ID = OBJECT_ID(N'PersonRelationship'))
+IF EXISTS(SELECT * FROM sys.columns WHERE Name = N'RelatedTo' AND Object_ID = OBJECT_ID(N'PersonRelationship'))
 BEGIN
 	ALTER TABLE [dbo].[PersonRelationship] DROP COLUMN RelatedTo;
 END;
 
-IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'PatientId'AND Object_ID = OBJECT_ID(N'PersonRelationship'))
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'PatientId' AND Object_ID = OBJECT_ID(N'PersonRelationship'))
 BEGIN
 	ALTER TABLE [dbo].[PersonRelationship] ADD PatientId int;
 END;
 
-IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'BaselineResult'AND Object_ID = OBJECT_ID(N'PersonRelationship'))
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'BaselineResult' AND Object_ID = OBJECT_ID(N'PersonRelationship'))
 BEGIN
 	ALTER TABLE [dbo].[PersonRelationship] ADD BaselineResult int;
 END;
 
-IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'BaselineDate'AND Object_ID = OBJECT_ID(N'PersonRelationship'))
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'BaselineDate' AND Object_ID = OBJECT_ID(N'PersonRelationship'))
 BEGIN
 	ALTER TABLE [dbo].[PersonRelationship] ADD BaselineDate DATETIME NULL;
+END;
+
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'FamilyInfoId' AND Object_ID = OBJECT_ID(N'PersonRelationship'))
+BEGIN
+	ALTER TABLE [dbo].[PersonRelationship] ADD FamilyInfoId int NOT NULL;
 END;
 
 IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'DeleteFlag'AND Object_ID = OBJECT_ID(N'ServiceArea'))
@@ -221,13 +226,48 @@ IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'IptRegimen'AND Object_ID 
     BEGIN
         ALTER TABLE PatientIptWorkup ADD IptRegimen int;
     END;
-	
-IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'RegisteredAtPharmacy'AND Object_ID = OBJECT_ID(N'mst_patient'))
-    BEGIN
-        ALTER TABLE mst_patient ADD RegisteredAtPharmacy int;
-    END;
-	
-IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'ServiceRegisteredForAtPharmacy'AND Object_ID = OBJECT_ID(N'mst_patient'))
-    BEGIN
-        ALTER TABLE mst_patient ADD ServiceRegisteredForAtPharmacy int;
-    END;
+
+Go
+IF Not Exists (SELECT * FROM sys.columns WHERE Name = 'HeadCircumference' AND object_id = OBJECT_ID('dbo.PatientVitals'))
+    ALTER TABLE PatientVitals ADD HeadCircumference DECIMAL(8,2);
+GO 
+IF Not Exists (SELECT * FROM sys.columns WHERE Name = 'BMI' AND object_id = OBJECT_ID('dbo.PatientVitals'))
+    ALTER TABLE PatientVitals ADD BMI DECIMAL(8,2);
+GO
+IF   EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[County]') AND name = N'IX_County_SubCountyId') Begin
+DROP INDEX [IX_County_SubCountyId] ON [dbo].[County]
+End
+Go
+IF   EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[County]') AND name = N'IX_County_CountyId') Begin
+DROP INDEX [IX_County_CountyId] ON [dbo].[County]
+End
+Go
+CREATE NONCLUSTERED INDEX [IX_County_CountyId] ON [dbo].[County]([CountyId] ASC)
+Go
+
+CREATE NONCLUSTERED INDEX [IX_County_SubCountyId] ON [dbo].[County]([SubCountyId] ASC)
+
+GO
+IF   EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[County]') AND name = N'IX_County_SubCountyId') Begin
+DROP INDEX [IX_County_SubCountyId] ON [dbo].[County]
+End
+Go
+IF   EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[County]') AND name = N'IX_County_CountyId') Begin
+DROP INDEX [IX_County_CountyId] ON [dbo].[County]
+End
+Go
+CREATE NONCLUSTERED INDEX [IX_County_CountyId] ON [dbo].[County]([CountyId] ASC)
+Go
+CREATE NONCLUSTERED INDEX [IX_County_SubCountyId] ON [dbo].[County]([SubCountyId] ASC)
+GO
+IF   EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[FacilityList]') AND name = N'IX_FacilityList_Name') Begin
+DROP INDEX [IX_FacilityList_Name] ON [dbo].[FacilityList]
+End
+Go
+CREATE NONCLUSTERED INDEX [IX_FacilityList_Name] ON [dbo].[FacilityList](	[Name] ASC)
+Go
+IF   EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[FacilityList]') AND name = N'IX_FacilityList')
+DROP INDEX [IX_FacilityList] ON [dbo].[FacilityList]
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [IX_FacilityList] ON [dbo].[FacilityList](	[MFLCode] ASC)INCLUDE ( 	[Name]) 
+Go

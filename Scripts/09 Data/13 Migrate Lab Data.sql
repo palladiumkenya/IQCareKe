@@ -109,72 +109,79 @@ BEGIN
 -- SET NOCOUNT ON added to prevent extra result sets from
 -- interfering with SELECT statements.
 	Set Nocount On;
-	If object_id('tempdb..#LabTest') Is Not Null Drop Table #LabTest
-	If object_id('tempdb..#New_LabTest') Is Not Null Drop Table #New_LabTest
-	If object_id('tempdb..#TestParameter') Is Not Null Drop Table #TestParameter
-	If object_id('tempdb..#New_TestParameter') Is Not Null Drop Table #New_TestParameter
-	If object_id('tempdb..#ParamConfig') Is Not Null Drop Table #ParamConfig
-	If object_id('tempdb..#New_ParamConfig') Is Not Null Drop Table #New_ParamConfig
-	If object_id('tempdb..#ResultOption') Is Not Null Drop Table #ResultOption
-	If object_id('tempdb..#New_ResultOption') Is Not Null Drop Table #New_ResultOption
-	If object_id('tempdb..#Group') Is Not Null Drop Table #Group
-	If object_id('tempdb..#New_Group') Is Not Null Drop Table #New_Group
-	If object_id('tempdb..#Order') Is Not Null Drop Table #Order
-	If object_id('tempdb..#New_Order') Is Not Null Drop Table #New_Order
-	If object_id('tempdb..#OrderTest') Is Not Null Drop Table #OrderTest
-	If object_id('tempdb..#New_OrderTest') Is Not Null Drop Table #New_OrderTest
-	If object_id('tempdb..#TestResult') Is Not Null Drop Table #TestResult
-	If object_id('tempdb..#New_TestResult') Is Not Null Drop Table #New_TestResult
+	If object_id('Temp_LabTest') Is Not Null Drop Table Temp_LabTest
+	If object_id('Temp_New_LabTest') Is Not Null Drop Table Temp_New_LabTest
+	If object_id('Temp_TestParameter') Is Not Null Drop Table Temp_TestParameter
+	If object_id('Temp_New_TestParameter') Is Not Null Drop Table Temp_New_TestParameter
+	If object_id('Temp_ParamConfig') Is Not Null Drop Table Temp_ParamConfig
+	If object_id('Temp_New_ParamConfig') Is Not Null Drop Table Temp_New_ParamConfig
+	If object_id('Temp_ResultOption') Is Not Null Drop Table Temp_ResultOption
+	If object_id('Temp_New_ResultOption') Is Not Null Drop Table Temp_New_ResultOption
+	If object_id('Temp_Group') Is Not Null Drop Table Temp_Group
+	If object_id('Temp_New_Group') Is Not Null Drop Table Temp_New_Group
+	If object_id('Temp_Order') Is Not Null Drop Table Temp_Order
+	If object_id('Temp_New_Order') Is Not Null Drop Table Temp_New_Order
+	If object_id('Temp_OrderTest') Is Not Null Drop Table Temp_OrderTest
+	If object_id('Temp_New_OrderTest') Is Not Null Drop Table Temp_New_OrderTest
+	If object_id('Temp_TestResult') Is Not Null Drop Table Temp_TestResult
+	If object_id('Temp_New_TestResult') Is Not Null Drop Table Temp_New_TestResult
 
-	Create Table #LabTest(Id int Primary Key, ReferenceId varchar(36), Name varchar(100), IsGroup bit, DepartmentId int, Active bit, DeleteFlag bit);
+	Create Table Temp_LabTest(Id int Primary Key, ReferenceId varchar(36), Name varchar(100), IsGroup bit, DepartmentId int, Active bit, DeleteFlag bit, Migrated bit);
 
-	Create Table #New_LabTest(New_Id int, Old_Id int);
+	Create Table Temp_New_LabTest(New_Id int, Old_Id int);
 
-	Create Table #TestParameter(Id int Primary Key, ReferenceId varchar(36), ParameterName varchar(100), LabTestId int, DataType varchar(15), OrdRank decimal(4, 2), DeleteFlag bit);
+	Create Table Temp_TestParameter(Id int Primary Key, ReferenceId varchar(36), ParameterName varchar(100), LabTestId int, DataType varchar(15), OrdRank decimal(4, 2), DeleteFlag bit,Migrated bit);
 
-	Create Table #New_TestParameter(New_Id int, Old_Id int, Old_TestId int);
+	Create Table Temp_New_TestParameter(New_Id int, Old_Id int, Old_TestId int);
 
-	Create Table #ParamConfig(Id int Primary Key, ParameterId int, MinBoundary decimal(10, 2), MaxBoundary decimal(10, 2), MinNormalRange decimal(10, 2),
-	MaxNormalRange decimal(10, 2), UnitId int, DefaultUnit bit, DetectionLimit decimal(10, 2), DeleteFlag bit);
+	Create Table Temp_ParamConfig(Id int Primary Key, ParameterId int, MinBoundary decimal(10, 2), MaxBoundary decimal(10, 2), MinNormalRange decimal(10, 2),
+	MaxNormalRange decimal(10, 2), UnitId int, DefaultUnit bit, DetectionLimit decimal(10, 2), DeleteFlag bit,Migrated bit);
 
-	Create Table #New_ParamConfig(New_Id int, Old_Id int, Old_ParameterId int);
+	Create Table Temp_New_ParamConfig(New_Id int, Old_Id int, Old_ParameterId int);
 
-	Create Table #ResultOption(Id int Primary Key, ParameterId int, Value varchar(50), DeleteFlag bit);
+	Create Table Temp_ResultOption(Id int Primary Key, ParameterId int, Value varchar(50), DeleteFlag bit,Migrated bit);
 
-	Create Table #New_ResultOption(New_Id int, Old_Id int, Old_ParameterId int);
+	Create Table Temp_New_ResultOption(New_Id int, Old_Id int, Old_ParameterId int);
 
-	Create Table #Group(LabGroupTestId int, LabTestId int);
+	Create Table Temp_Group(LabGroupTestId int, LabTestId int);
 
-	Create Table #New_Group(New_Id int, Old_Id int);
+	Create Table Temp_New_Group(New_Id int, Old_Id int);
 
-	Create Table #Order(Id int Primary Key, Ptn_Pk int, LocationId int, VisitId int, ModuleId int, OrderedBy bigint, OrderDate datetime, PreClinicLabDate datetime,
+	Create Table Temp_Order(Id int Primary Key, Ptn_Pk int, LocationId int, VisitId int, ModuleId int, OrderedBy bigint, OrderDate datetime, PreClinicLabDate datetime,
 	ClinicalOrderNotes varchar(400), OrderNumber varchar(50), CreatedBy int, CreateDate datetime, OrderStatus varchar(50), UserId int,
-	UpdateDate datetime, DeleteFlag bit);
+	UpdateDate datetime, DeleteFlag bit,Migrated bit);
 
-	Create Table #New_Order(New_Id int, VisitId int);
+	Create Table Temp_New_Order(New_Id int, VisitId int);
 
-	Create Table #OrderTest(OrderId int, LabTestId int, IsParent bit, ParentTestId int, DeleteFlag bit, ResultStatus varchar(50),
-	ResultBy bigint, ResultDate datetime, UserId int, StatusDate datetime);
+	Create Table Temp_OrderTest(OrderId int, LabTestId int, IsParent bit, ParentTestId int, DeleteFlag bit, ResultStatus varchar(50),
+	ResultBy bigint, ResultDate datetime, UserId int, StatusDate datetime,Migrated bit);
 
-	Create Table #New_OrderTest(New_Id int, OrderId int, LabTestId int);
+	Create Table Temp_New_OrderTest(New_Id int, OrderId int, LabTestId int);
 
-	Create Table #TestResult(OrderId int, LabTestId int, TestName varchar(100), ParameterId int, ParameterName varchar(100), ResultValue decimal(10, 2), ResultText varchar(400),
+	Create Table Temp_TestResult(OrderId int, LabTestId int, TestName varchar(100), ParameterId int, ParameterName varchar(100), ResultValue decimal(10, 2), ResultText varchar(400),
 	ResultOptionId int, ResultOption varchar(50), ResultUnit varchar(50), ResultUnitId int, ResultConfigId int, Undetectable bit, DetectionLimit decimal(10, 2),
-	UserId int, DeleteFlag bit, CreateDate datetime, CreatedBy int, StatusDate datetime);
+	UserId int, DeleteFlag bit, CreateDate datetime, CreatedBy int, StatusDate datetime,Migrated bit);
 
-	Create Table #New_TestResult(New_Id int, OrderId int, LabTestId int, ParameterId int);
+	Create Table Temp_New_TestResult(New_Id int, OrderId int, LabTestId int, ParameterId int);
 
 -- LabTests
-	Insert Into #LabTest (Id, ReferenceId, Name, IsGroup, DepartmentId, Active, DeleteFlag)
-	Select	LabTestID					Id
-			,Case
-				When LabName = 'CD4' Then 'CD4'
-				When LabName = 'CD4 Percent' Then 'CD4_PERCENT'
-				When LabName = 'Viral Load' Then 'VIRAL_LOAD'
-				Else dbo.RemoveNonAlphaCharacters(LabName) + 
-				Case row_number() Over(Partition by Labname Order by LabTestID) When 1 Then '' Else '-'+Convert(varchar,(row_number() Over(Partition by Labname Order by LabTestID))) End				 
-			End							As ReferenceId
+	Insert Into Temp_LabTest (Id, ReferenceId, Name, IsGroup, DepartmentId, Active, DeleteFlag,Migrated)
+	select Id,
+		Case
+				When X.Name = 'CD4' Then 'CD4'
+				When X.Name = 'CD4 Percent' Then 'CD4_PERCENT'
+				When X.Name = 'Viral Load' Then 'VIRAL_LOAD'
+				Else dbo.RemoveNonAlphaCharacters(X.Name) +	Case X.RowNum When 1 Then '' Else '-'+Convert(varchar,X.RowNum) End				 
+			End							As ReferenceId,
+	   Name,
+	   X.IsGroup,
+	   X.DepartmentId,
+	   Case When X.RowNum > 1 Then 0 Else 1 End As Active,
+	   Case When X.RowNum > 1 Then 1 Else X.DeleteFlag End As DeleteFlag,
+	   X.Migrated
+ From (Select	LabTestID					Id
 			,LabName					Name	
+			, row_number() Over(Partition by dbo.RemoveNonAlphaCharacters(LabName) order by LabTestID) RowNum
 			,IsGroup =					
 						Case
 							When Exists (
@@ -186,15 +193,49 @@ BEGIN
 			,LabDepartmentID			DepartmentId
 			,~convert(bit, DeleteFlag)	Active
 			,DeleteFlag
+			,O.Migrated
 	From Mst_LabTest_Old O
-	Where LabDepartmentID <> 8
-		And Migrated = 0
+	Where LabDepartmentID <> 8 --And Migrated= 0
+	) X
+
+	--Select R.* From dtl_PatientLabResults_Old R  inner join #LabTest T On T.Id=R.LabTestID
+	--Select	LabTestID					Id
+	--		,Case
+	--			When LabName = 'CD4' Then 'CD4'
+	--			When LabName = 'CD4 Percent' Then 'CD4_PERCENT'
+	--			When LabName = 'Viral Load' Then 'VIRAL_LOAD'
+	--			Else dbo.RemoveNonAlphaCharacters(LabName) + 
+	--			Case row_number() Over(Partition by Labname Order by LabTestID) When 1 Then '' Else '-'+Convert(varchar,(row_number() Over(Partition by Labname Order by LabTestID))) End				 
+	--		End							As ReferenceId
+	--		,LabName					Name	
+	--		,IsGroup =					
+	--					Case
+	--						When Exists (
+	--								Select 1
+	--								From Dtl_LabGroupItems G
+	--								Where G.LabGroupTestId = O.LabTestId) Then 1
+	--						Else 0
+	--					End
+	--		,LabDepartmentID			DepartmentId
+	--		,~convert(bit, DeleteFlag)	Active
+	--		,DeleteFlag
+	--From Mst_LabTest_Old O
+	--Where LabDepartmentID <> 8
+		--And Migrated = 0
 
 --matching Parameters only
-	Insert Into #TestParameter (Id, ReferenceId, ParameterName, LabTestId, DataType, OrdRank, DeleteFlag)
-	Select	SubTestID																Id
-			,dbo.RemoveNonAlphaCharacters(SubTestName)+ 
-				Case row_number() Over(Partition by SubTestName Order by LabTestID) When 1 Then '' Else '-'+Convert(varchar,(row_number() Over(Partition by SubTestName Order by SubTestID))) End								ReferenceId
+	Insert Into Temp_TestParameter (Id, ReferenceId, ParameterName, LabTestId, DataType, OrdRank, DeleteFlag,Migrated)
+		Select Id,
+			dbo.RemoveNonAlphaCharacters(P.ParameterName)+Case P.RowNum When 1 Then '' Else '-'+Convert(varchar,P.RowNum) End ReferenceId,
+			P.ParameterName,
+			P.LabTestId,
+			P.DataType,
+			P.OrdRank,
+			Case When P.RowNum > 1 Then 1 Else P.DeleteFlag End As DeleteFlag	,
+			P.Migrated	
+	From
+	(Select	SubTestID																Id
+			,row_number() Over(Partition by dbo.RemoveNonAlphaCharacters(SubTestName) Order by LabTestID) RowNum		
 			,SubTestName															ParameterName
 			,TestID																	LabTestId
 			,DataType =																
@@ -213,13 +254,39 @@ BEGIN
 						End
 			,row_number() Over (Partition By T.LabTestID Order By P.SubTestName)	OrdRank
 			,P.DeleteFlag
+			, P.Migrated
 	From lnk_TestParameter_Old P
 	Inner Join Mst_LabTest_Old T On P.TestID = T.LabTestID
-	Where LabDepartmentID <> 8
-		And P.Migrated = 0 --And P.DeleteFlag = 0 And T.DeleteFlag = 0
+	Where LabDepartmentID <> 8		
+	)P
+	--Select	SubTestID																Id
+	--		,dbo.RemoveNonAlphaCharacters(SubTestName)+ 
+	--			Case row_number() Over(Partition by SubTestName Order by LabTestID) When 1 Then '' Else '-'+Convert(varchar,(row_number() Over(Partition by SubTestName Order by SubTestID))) End								ReferenceId
+	--		,SubTestName															ParameterName
+	--		,TestID																	LabTestId
+	--		,DataType =																
+	--					Case
+	--						When T.DataType Is Not Null And
+	--							T.DataType <> 'Group' Then T.DataType
+	--						When Exists (
+	--								Select 1
+	--								From lnk_LabValue_Old V
+	--								Where V.SubTestID = P.SubTestID) Then 'NUMERIC'
+	--						When Exists (
+	--								Select 1
+	--								From lnk_parameterresult_Old R
+	--								Where R.ParameterID = P.SubTestID) Then 'SELECTLIST'
+	--						Else 'TEXT'
+	--					End
+	--		,row_number() Over (Partition By T.LabTestID Order By P.SubTestName)	OrdRank
+	--		,P.DeleteFlag
+	--From lnk_TestParameter_Old P
+	--Inner Join Mst_LabTest_Old T On P.TestID = T.LabTestID
+	--Where LabDepartmentID <> 8
+	--	And P.Migrated = 0 --And P.DeleteFlag = 0 And T.DeleteFlag = 0
 
 -- Result Config
-Insert Into #ParamConfig (Id, ParameterId, MinBoundary, MaxBoundary, MinNormalRange, MaxNormalRange, UnitId, DefaultUnit, DetectionLimit, DeleteFlag)
+Insert Into Temp_ParamConfig (Id, ParameterId, MinBoundary, MaxBoundary, MinNormalRange, MaxNormalRange, UnitId, DefaultUnit, DetectionLimit, DeleteFlag,Migrated)
 	Select	V.Id
 			,P.SubTestID		ParameterId
 			,V.MinBoundaryValue	MinBoundary
@@ -230,27 +297,29 @@ Insert Into #ParamConfig (Id, ParameterId, MinBoundary, MaxBoundary, MinNormalRa
 			,V.DefaultUnit
 			,0.0				DetectionLimit
 			,V.DeleteFlag
+			,P.Migrated
 	From lnk_LabValue_Old V
 	Inner Join lnk_TestParameter_Old P On P.SubTestID = V.SubTestID
-	Where V.Migrated = 0
+	--Where V.Migrated = 0
 --Where V.DeleteFlag = 0 And P.DeleteFlag = 0
 
 
 
 --Result Options
-Insert Into #ResultOption (Id, ParameterId, Value, DeleteFlag)
+Insert Into Temp_ResultOption (Id, ParameterId, Value, DeleteFlag,Migrated)
 	Select	R.ResultID		Id
 			,R.ParameterID	ParameterId
 			,R.Result		Value
 			,0				DeleteFlag
+			,P.Migrated
 	From lnk_parameterresult_Old R
 	Inner Join lnk_TestParameter_Old P On P.SubTestID = R.ParameterID
 	Where Result Is Not Null
-		And R.Migrated = 0
+		--And R.Migrated = 0
 --And P.DeleteFlag = 0
 
 -- Group Labs[dbo].[lnk_LabValue_Old]
-Insert Into #Group (LabGroupTestId, LabTestId)
+Insert Into Temp_Group (LabGroupTestId, LabTestId)
 	Select Distinct	G.LabGroupTestID	LabGroupTestId
 					,G.LabTestID		LabTestId
 	From Dtl_LabGroupItems G
@@ -261,8 +330,8 @@ Insert Into #Group (LabGroupTestId, LabTestId)
 
 
 --Orders
-Insert Into #Order(Id,Ptn_Pk,LocationId,VisitId,ModuleId,OrderedBy,OrderDate,PreClinicLabDate,ClinicalOrderNotes, OrderNumber,CreatedBy,CreateDate,
-OrderStatus,UserId,UpdateDate,DeleteFlag)
+Insert Into Temp_Order(Id,Ptn_Pk,LocationId,VisitId,ModuleId,OrderedBy,OrderDate,PreClinicLabDate,ClinicalOrderNotes, OrderNumber,CreatedBy,CreateDate,
+OrderStatus,UserId,UpdateDate,DeleteFlag,Migrated)
 select 
 	LabId Id,
 	Ptn_Pk,
@@ -279,17 +348,18 @@ select
 	OrderStatus = Case When ReportedByDate Is Null Then 'Pending' Else 'Complete' End,
 	UserId,
 	UpdateDate,
-	DeleteFlag
- From ord_PatientLabOrder_Old O where  Migrated=0
- And Exists(Select 1 From dtl_PatientLabResults_Old R  inner join #LabTest T On T.Id=R.LabTestID Where R.LabID = O.LabID )
+	DeleteFlag,
+	O.Migrated
+ From ord_PatientLabOrder_Old O where   Exists(Select 1 From dtl_PatientLabResults_Old R  inner join Temp_LabTest T On T.Id=R.LabTestID Where R.LabID = O.LabID )
 
+ --Select * From #Order
  -- OrderedTest
 
 ;With tests As(Select  Distinct	labid,
-				labtestid
+				labtestid,Migrated
 From dtl_PatientLabResults_Old Where Migrated=0
 )
-Insert Into #OrderTest(OrderId,LabTestId,IsParent,ParentTestId,DeleteFlag,ResultBy,ResultDate,UserId,ResultStatus,StatusDate)
+Insert Into Temp_OrderTest(OrderId,LabTestId,IsParent,ParentTestId,DeleteFlag,ResultBy,ResultDate,UserId,ResultStatus,StatusDate,Migrated)
 Select T.LabId OrderId, 
 LabTestId,
 0 IsParent,
@@ -299,13 +369,15 @@ nullif(ReportedByName,0) ResultBy,
 ReportedByDate ResultDate,
 O.UserId,
 ResultStatus =Case When ReportedByDate Is Null Then 'Pending' Else 'Received' End,
-O.CreateDate StatusDate
- From tests T Inner Join ord_PatientLabOrder_Old O On T.LabId = O.LabId  Inner JOin #Order LO on LO.Id = O.LabID
- inner  join #LabTest L On L.Id = T.LabTestId
+O.CreateDate StatusDate,
+T.Migrated
+ From tests T Inner Join ord_PatientLabOrder_Old O On T.LabId = O.LabId  Inner JOin Temp_Order LO on LO.Id = O.LabID
+ inner  join Temp_LabTest L On L.Id = T.LabTestId
+
 
 
  -- Test Results
-		Insert Into #TestResult (
+		Insert Into Temp_TestResult (
 			OrderId,
 			LabTestId,
 			TestName,
@@ -323,7 +395,8 @@ O.CreateDate StatusDate
 			DeleteFlag,
 			CreateDate,
 			CreatedBy,
-			StatusDate)
+			StatusDate,
+			Migrated)
 			Select	d.LabID OrderId,
 					LabTestID LabTestId,
 					TestName =(	Select	LabName	From Mst_LabTest_Old p		Where P.LabTestID = d.LabTestID),
@@ -342,10 +415,11 @@ O.CreateDate StatusDate
 					0 As DeleteFlag,
 					d.CreateDate,
 					d.UserID CreatedBy,
-					isnull(o.ReportedbyDate, O.OrderedbyDate) StatusDate
+					isnull(o.ReportedbyDate, O.OrderedbyDate) StatusDate,
+					d.Migrated
 			From [dbo].[dtl_PatientLabResults_Old] d, [ord_PatientLabOrder_Old] o
 			Where d.LabID = o.LabID
-			And d.Migrated=0
+			--And d.Migrated=0
 			And d.parameterid <> 107
 		And LabTestID In
 		(
@@ -369,12 +443,12 @@ O.CreateDate StatusDate
 						0 As DeleteFlag,
 						d.CreateDate,
 						d.UserID CreatedBy,
-						Isnull(o.ReportedbyDate,o.OrderedbyDate) StatusDate
+						Isnull(o.ReportedbyDate,o.OrderedbyDate) StatusDate,
+						d.Migrated 
 		From [dbo].[dtl_PatientLabResults_Old] d, [ord_PatientLabOrder_Old] o
 		Where d.LabID = o.LabID   and d.parameterid = 107 
-		And d.Migrated=0
+		--And d.Migrated=0
 
-	
 
 	SET IDENTITY_INSERT [dbo].[mst_LabTestMaster] ON
 
@@ -388,7 +462,7 @@ O.CreateDate StatusDate
 		CreateDate,
 		Active,
 		DeleteFlag)
-	Output INSERTED.Id,INSERTED.Id Into #New_LabTest(New_Id,Old_Id)
+	Output INSERTED.Id,INSERTED.Id Into Temp_New_LabTest(New_Id,Old_Id)
 	Select	T.Id,
 			T.ReferenceId,
 			T.Name,
@@ -397,16 +471,16 @@ O.CreateDate StatusDate
 			getdate(),
 			T.Active,
 			T.DeleteFlag
-	From #LabTest T;
+	From Temp_LabTest T Where T.Migrated = 0 --And ReferenceId Not In (Select ReferenceId From mst_LabTestMaster);
 
 Print Convert(varchar(10),@@ROWCOUNT) + ' Lab Tests Migrated'
 
 SET IDENTITY_INSERT [dbo].[mst_LabTestMaster] Off
 
 
-Update O Set Migrated = 1 From Mst_LabTest_Old  O Inner Join #New_LabTest N On N.New_Id=O.LabTestID;
+Update O Set Migrated = 1 From Mst_LabTest_Old  O Inner Join Temp_New_LabTest N On N.New_Id=O.LabTestID;
 
--- parameters
+ --parameters
 
 
 
@@ -423,7 +497,7 @@ Insert Into Mst_LabTestParameter (
 	UserId,
 	CreateDate,
 	DeleteFlag)
-Output INSERTED.Id,INSERTED.LabTestId Into #New_TestParameter(New_Id,Old_TestId)
+Output INSERTED.Id,INSERTED.LabTestId Into Temp_New_TestParameter(New_Id,Old_TestId)
 Select	P.Id,
 		P.ReferenceId,
 		ParameterName,
@@ -433,14 +507,14 @@ Select	P.Id,
 		1,
 		getdate(),
 		P.DeleteFlag
-From #TestParameter P
-Inner Join mst_LabTestMaster T On T.Id = P.LabTestId;
+From Temp_TestParameter P
+Inner Join mst_LabTestMaster T On T.Id = P.LabTestId and P.Migrated= 0;
 
 Print Convert(varchar(10),@@ROWCOUNT) + ' Lab Tests Parameters Migrated'
 
 SET IDENTITY_INSERT [dbo].[Mst_LabTestParameter] Off
 
-Update O Set Migrated = 1 From lnk_TestParameter_Old  O Inner Join #New_TestParameter N On N.New_Id=O.SubTestID;
+Update O Set Migrated = 1 From lnk_TestParameter_Old  O Inner Join Temp_New_TestParameter N On N.New_Id=O.SubTestID;
 
 update Mst_LabTestParameter set DeleteFlag= 1 Where ParameterName='ViralLoad Undetectable'
 update mst_labtestparameter set LabTestId=(select Id from mst_labtestmaster where referenceid='CD4_PERCENT') Where parametername='CD4 Percent'
@@ -461,7 +535,7 @@ Insert Into dtl_LabTestParameterConfig (
 	DefaultUnit,
 	DetectionLimit,
 	DeleteFlag)
-Output INSERTED.Id,INSERTED.ParameterId Into #New_ParamConfig(New_Id,Old_ParameterId)
+Output INSERTED.Id,INSERTED.ParameterId Into Temp_New_ParamConfig(New_Id,Old_ParameterId)
 Select	C.Id,
 		C.ParameterId,
 		C.MinBoundary,
@@ -472,15 +546,15 @@ Select	C.Id,
 		C.DefaultUnit,
 		C.DetectionLimit,
 		C.DeleteFlag
-From #ParamConfig C
-Inner Join Mst_LabTestParameter P On P.Id = C.ParameterId;
+From Temp_ParamConfig C
+Inner Join Mst_LabTestParameter P On P.Id = C.ParameterId and C.Migrated=0;
 
 Print Convert(varchar(10),@@ROWCOUNT) + ' Parameters Configuration Migrated'
 
 
 SET IDENTITY_INSERT [dbo].[dtl_LabTestParameterConfig] Off
 
-Update O Set Migrated = 1 From lnk_LabValue_Old  O Inner Join #New_ParamConfig N On N.New_Id=O.ID and O.SubTestID = N.Old_ParameterId;
+Update O Set Migrated = 1 From lnk_LabValue_Old  O Inner Join Temp_New_ParamConfig N On N.New_Id=O.ID and O.SubTestID = N.Old_ParameterId;
 
 --options
 
@@ -492,19 +566,19 @@ Insert Into dtl_LabTestParameterResultOption (
 	ParameterId,
 	Value,
 	DeleteFlag)
-Output INSERTED.Id, INSERTED.ParameterId Into #New_ResultOption(New_Id,Old_ParameterId)
+Output INSERTED.Id, INSERTED.ParameterId Into Temp_New_ResultOption(New_Id,Old_ParameterId)
 Select	O.Id,
 		o.ParameterId,
 		o.Value,
 		o.DeleteFlag
-From #ResultOption O
-Inner Join Mst_LabTestParameter P On O.ParameterId = P.Id;
+From Temp_ResultOption O
+Inner Join Mst_LabTestParameter P On O.ParameterId = P.Id and O.Migrated = 0;
 
 Print Convert(varchar(10),@@ROWCOUNT) + ' Result Options'
 
 SET IDENTITY_INSERT [dbo].[dtl_LabTestParameterResultOption] Off
 
-Update O Set Migrated = 1 From lnk_parameterresult_Old  O Inner Join #New_ResultOption N On N.New_Id= O.ResultID and O.ParameterID = N.Old_ParameterId;
+Update O Set Migrated = 1 From lnk_parameterresult_Old  O Inner Join Temp_New_ResultOption N On N.New_Id= O.ResultID and O.ParameterID = N.Old_ParameterId;
 
 -- orders
 
@@ -528,7 +602,7 @@ Insert Into ord_LabOrder (
 	UserId,
 	DeleteFlag,
 	UpdateDate)
-Output Inserted.Id, Inserted.VisitId Into #New_Order(New_Id,VisitId)
+Output Inserted.Id, Inserted.VisitId Into Temp_New_Order(New_Id,VisitId)
 Select	Id,
 		O.Ptn_Pk,
 		O.LocationId,
@@ -545,18 +619,13 @@ Select	Id,
 		O.UserId,
 		Isnull(O.DeleteFlag,0),
 		O.UpdateDate
-From #Order O;
+From Temp_Order O where O.Migrated=0;
 
 Print Convert(varchar(10),@@ROWCOUNT) + ' Lab Orders'
 
 SET IDENTITY_INSERT [dbo].ord_LabOrder Off
 
-Update O Set Migrated = 1 From ord_PatientLabOrder_Old  O Inner Join #New_Order N On N.New_Id= O.LabID and O.VisitId = N.VisitId;
-
-
-
-
---SET IDENTITY_INSERT [dbo].dtl_LabOrderTest On
+Update O Set Migrated = 1 From ord_PatientLabOrder_Old  O Inner Join Temp_New_Order N On N.New_Id= O.LabID and O.VisitId = N.VisitId;
 
 Insert Into dtl_LabOrderTest (
 	LabOrderId,
@@ -571,7 +640,7 @@ Insert Into dtl_LabOrderTest (
 	ResultStatus,
 	UserId,
 	StatusDate)
-	Output INSERTED.Id, INSERTED.LabOrderId, INSERTED.LabTestId Into #New_OrderTest(new_id,OrderId,LabTestId)
+	Output INSERTED.Id, INSERTED.LabOrderId, INSERTED.LabTestId Into Temp_New_OrderTest(new_id,OrderId,LabTestId)
 	Select	T.OrderId,
 			T.LabTestId,
 			Null,
@@ -584,15 +653,11 @@ Insert Into dtl_LabOrderTest (
 			T.ResultStatus,
 			T.UserId,
 			T.StatusDate
-	From #OrderTest T
-	Inner Join ord_LabOrder O On O.Id = T.OrderId;
+	From Temp_OrderTest T
+	Inner Join ord_LabOrder O On O.Id = T.OrderId where T.Migrated= 0;
 
 	Print Convert(varchar(10),@@ROWCOUNT) + ' Orders Tests Migrated'
-
---SET IDENTITY_INSERT [dbo].dtl_LabOrderTest Off
-
---SET IDENTITY_INSERT [dbo].dtl_LabOrderTestResult on
-
+	
 Insert Into dtl_LabOrderTestResult (
 	LabOrderId,
 	LabTestId,
@@ -612,7 +677,7 @@ Insert Into dtl_LabOrderTestResult (
 	CreateDate,
 	CreatedBy,
 	StatusDate)
-Output Inserted.Id, Inserted.LabOrderId, Inserted.LabTestId,Inserted.ParameterId Into #New_TestResult(New_Id  ,OrderId , LabTestId , ParameterId )
+Output Inserted.Id, Inserted.LabOrderId, Inserted.LabTestId,Inserted.ParameterId Into Temp_New_TestResult(New_Id  ,OrderId , LabTestId , ParameterId )
 Select	R.OrderId,
 		R.LabTestId,
 		T.Id,
@@ -631,30 +696,38 @@ Select	R.OrderId,
 		Isnull(R.CreateDate,getdate()),
 		R.CreatedBy,
 		R.StatusDate
-From #TestResult R
+From Temp_TestResult R
 Inner Join dtl_LabOrderTest T On R.LabTestId = T.LabTestId
 		And T.LabOrderId = R.OrderId
-Inner Join #New_OrderTest OT On OT.OrderId = T.LabOrderId
+Inner Join Temp_New_OrderTest OT On OT.OrderId = T.LabOrderId
 		And OT.LabTestId = T.LabTestId
-		And OT.New_Id = T.Id;
+		And OT.New_Id = T.Id Where R.Migrated=0;
 
 Print Convert(varchar(10),@@ROWCOUNT) + ' Test Results Migrated'
-
-
---SET IDENTITY_INSERT [dbo].dtl_LabOrderTestResult Off
-
-Update O Set Migrated = 1 From dtl_PatientLabResults_Old  O Inner Join #New_TestResult N On O.LabId = N.OrderId And O.LabTestId = N.LabTestId And O.ParameterId = N.ParameterId
-
-
-
-End
-
-
-Go
-
-If Not Exists(Select 1 From mst_LabTestMaster) Begin
-	DECLARE @RC int
--- TODO: Set parameter values here.
-	EXECUTE @RC = [dbo].[Laboratory_MigrateData] 
+Update O Set Migrated = 1 From dtl_PatientLabResults_Old  O Inner Join Temp_New_TestResult N On O.LabId = N.OrderId And O.LabTestId = N.LabTestId And O.ParameterId = N.ParameterId
 End
 Go
+	EXECUTE sp_msforeachtable 'ALTER TABLE ? disable trigger ALL'
+	Go
+	EXECUTE  [dbo].[Laboratory_MigrateData] 
+	Go
+	EXECUTE sp_msforeachtable 'ALTER TABLE ? enable trigger ALL'
+	Go
+	If object_id('Temp_LabTest') Is Not Null Drop Table Temp_LabTest
+	If object_id('Temp_New_LabTest') Is Not Null Drop Table Temp_New_LabTest
+	If object_id('Temp_TestParameter') Is Not Null Drop Table Temp_TestParameter
+	If object_id('Temp_New_TestParameter') Is Not Null Drop Table Temp_New_TestParameter
+	If object_id('Temp_ParamConfig') Is Not Null Drop Table Temp_ParamConfig
+	If object_id('Temp_New_ParamConfig') Is Not Null Drop Table Temp_New_ParamConfig
+	If object_id('Temp_ResultOption') Is Not Null Drop Table Temp_ResultOption
+	If object_id('Temp_New_ResultOption') Is Not Null Drop Table Temp_New_ResultOption
+	If object_id('Temp_Group') Is Not Null Drop Table Temp_Group
+	If object_id('Temp_New_Group') Is Not Null Drop Table Temp_New_Group
+	If object_id('Temp_Order') Is Not Null Drop Table Temp_Order
+	If object_id('Temp_New_Order') Is Not Null Drop Table Temp_New_Order
+	If object_id('Temp_OrderTest') Is Not Null Drop Table Temp_OrderTest
+	If object_id('Temp_New_OrderTest') Is Not Null Drop Table Temp_New_OrderTest
+	If object_id('Temp_TestResult') Is Not Null Drop Table Temp_TestResult
+	If object_id('Temp_New_TestResult') Is Not Null Drop Table Temp_New_TestResult
+	DROP PROCEDURE [dbo].[Laboratory_MigrateData]
+	Go

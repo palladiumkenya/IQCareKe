@@ -3251,7 +3251,7 @@ BEGIN
 	SET XACT_ABORT ON;
 
     -- Insert statements for procedure here
-	DECLARE @Ptn_pk int, @RFirstName varbinary(max), @RLastName varbinary(max), @Sex int, @AgeYear int, @AgeMonth int, @RelationshipDate datetime, @RelationshipType int, @HivStatus int, @HivCareStatus int, @RegistrationNo int, @FileNo int, @ReferenceId int, @UserId int, @DeleteFlag int, @CreateDate datetime, @UpdateDate datetime, @message varchar(100), @DOB datetime, @StartDate datetime, @PersonId int, @PatientId int, @RelationshipTypeId int, @BaselineResult int, @HivStatusString varchar(20), @PatientMasterVisitId int, @VisitType int;
+	DECLARE @Ptn_pk int, @RFirstName varbinary(max), @RLastName varbinary(max), @Sex int, @AgeYear int, @AgeMonth int, @RelationshipDate datetime, @RelationshipType int, @HivStatus int, @HivCareStatus int, @RegistrationNo int, @FileNo int, @ReferenceId int, @UserId int, @DeleteFlag int, @CreateDate datetime, @UpdateDate datetime, @message varchar(100), @DOB datetime, @StartDate datetime, @PersonId int, @PatientId int, @RelationshipTypeId int, @BaselineResult int, @HivStatusString varchar(20), @PatientMasterVisitId int, @VisitType int, @MovedToFamilyTestingTable bit, @FamilyInfoId int;
 
 	DECLARE @i INT = 1;
 	DECLARE @count INT;
@@ -3260,14 +3260,14 @@ BEGIN
 	(
 		Id INT IDENTITY(1,1), Ptn_pk int, RFirstName varbinary(max), RLastName varbinary(max), Sex int, AgeYear int, AgeMonth int, 
 		RelationshipDate datetime, RelationshipType int, HivStatus int, HivCareStatus int, RegistrationNo varchar, FileNo varchar, 
-		ReferenceId int, UserId int, DeleteFlag int, CreateDate datetime, UpdateDate datetime, StartDate datetime
+		ReferenceId int, UserId int, DeleteFlag int, CreateDate datetime, UpdateDate datetime, StartDate datetime, MovedToFamilyTestingTable bit, FamilyInfoId int
 	 ); 
 	 --Insert data to temporary table #Tdtl_FamilyInfo 
 	INSERT INTO #Tdtl_FamilyInfo(Ptn_pk, RFirstName, RLastName, Sex, AgeYear, AgeMonth, 
 		RelationshipDate, RelationshipType, HivStatus, HivCareStatus, RegistrationNo, FileNo, 
-		ReferenceId, UserId, DeleteFlag, CreateDate, UpdateDate, StartDate) 
+		ReferenceId, UserId, DeleteFlag, CreateDate, UpdateDate, StartDate, MovedToFamilyTestingTable, FamilyInfoId) 
 	
-		SELECT dbo.dtl_FamilyInfo.Ptn_pk, RFirstName, RLastName, Sex, AgeYear, AgeMonth, RelationshipDate, RelationshipType, HivStatus, HivCareStatus, RegistrationNo, FileNo, ReferenceId, dbo.dtl_FamilyInfo.UserId, DeleteFlag, dbo.dtl_FamilyInfo.CreateDate, dbo.dtl_FamilyInfo.UpdateDate, dbo.Lnk_PatientProgramStart.StartDate
+		SELECT dbo.dtl_FamilyInfo.Ptn_pk, RFirstName, RLastName, Sex, AgeYear, AgeMonth, RelationshipDate, RelationshipType, HivStatus, HivCareStatus, RegistrationNo, FileNo, ReferenceId, dbo.dtl_FamilyInfo.UserId, DeleteFlag, dbo.dtl_FamilyInfo.CreateDate, dbo.dtl_FamilyInfo.UpdateDate, dbo.Lnk_PatientProgramStart.StartDate, [dbo].[dtl_FamilyInfo].[MovedToFamilyTestingTable], dbo.dtl_FamilyInfo.Id
 		FROM    dbo.dtl_FamilyInfo INNER JOIN dbo.Lnk_PatientProgramStart ON dbo.dtl_FamilyInfo.Ptn_pk = dbo.Lnk_PatientProgramStart.Ptn_pk
 		WHERE dbo.Lnk_PatientProgramStart.ModuleId = 203;
 
@@ -3277,7 +3277,7 @@ BEGIN
 			SELECT @ptn_pk = Ptn_pk, @RFirstName = RFirstName, @RLastName = RLastName, @Sex = Sex, @AgeYear = AgeYear, @AgeMonth = AgeMonth, 
 					@RelationshipDate = RelationshipDate, @RelationshipType = RelationshipType, @HivStatus = HivStatus, @HivCareStatus = HivCareStatus, 
 					@RegistrationNo = RegistrationNo, @FileNo = FileNo, @ReferenceId = ReferenceId, @UserId = UserId, @DeleteFlag = DeleteFlag, @CreateDate = CreateDate, 
-					@UpdateDate = UpdateDate, @StartDate = StartDate FROM #Tdtl_FamilyInfo WHERE Id = @i;
+					@UpdateDate = UpdateDate, @StartDate = StartDate, @MovedToFamilyTestingTable = MovedToFamilyTestingTable, @FamilyInfoId = FamilyInfoId FROM #Tdtl_FamilyInfo WHERE Id = @i;
 
 			BEGIN TRY
 				BEGIN TRANSACTION
@@ -3297,6 +3297,10 @@ BEGIN
 					ELSE
 						SET @Sex = (select top 1  ItemId from LookupItemView where MasterName = 'Unknown' and ItemName = 'Unknown');
 
+					DECLARE @SexName varchar(50);
+
+					SET @SexName = (select top 1  ItemName from LookupItemView where ItemId = @Sex);
+
 					BEGIN
 						SET @DOB = DATEADD(year, -@AgeYear, @StartDate);
 						SET @DOB = DATEADD(month, -@AgeMonth, @DOB);
@@ -3307,60 +3311,101 @@ BEGIN
 							SET @CreateDate = @StartDate;
 						END
 
-					INSERT INTO Person(FirstName, MidName, LastName, Sex, DateOfBirth, DobPrecision, Active, DeleteFlag, CreateDate, CreatedBy)
-					VALUES(@RFirstName, NULL, @RLastName, @Sex, @DOB, 1, 1, 0, @CreateDate, @UserId);
-
-					SELECT @PersonId = SCOPE_IDENTITY();
-					SELECT @message = 'Created Person Id: ' + CAST(@PersonId as varchar(50));
-					PRINT @message;
-
 					SET @PatientId = (select Id from Patient where ptn_pk = @Ptn_pk);
 
 					IF @RelationshipType IS NOT NULL
 						BEGIN
-							IF EXISTS ((SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName like '%Relationship%' and ItemName like + '%' + (select top 1  Name from mst_Decode where id = @RelationshipType) + '%'))
-								BEGIN
-									SET @RelationshipTypeId = (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName like '%Relationship%' and ItemName like + '%' + (select top 1  Name from mst_Decode where id = @RelationshipType) + '%');
-								END
-							ELSE
-								SET @RelationshipTypeId = (select top 1  ItemId from LookupItemView where MasterName = 'Unknown' and ItemName = 'Unknown');
+							DECLARE @RelationTypeName varchar(20);
+
+							SET @RelationTypeName = (select top 1  Name from [dbo].[mst_RelationshipType] where id = @RelationshipType);
+							SET @RelationshipTypeId = CASE
+								WHEN @RelationTypeName = 'Parent' and @SexName = 'Male' THEN (select top 1  ItemId from LookupItemView where MasterName = 'Relationship' and ItemName = 'Father')
+								WHEN @RelationTypeName = 'Parent' and @SexName = 'Female' THEN (select top 1  ItemId from LookupItemView where MasterName = 'Relationship' and ItemName = 'Mother')
+								WHEN @RelationTypeName = 'Aunt/Uncle' THEN (select top 1  ItemId from LookupItemView where MasterName = 'Relationship' and ItemName = 'Other')
+								WHEN @RelationTypeName = 'Brother/Sister' THEN (select top 1  ItemId from LookupItemView where MasterName = 'Relationship' and ItemName = 'Sibling')
+								WHEN @RelationTypeName = 'Child' THEN (select top 1  ItemId from LookupItemView where MasterName = 'Relationship' and ItemName = 'Child')
+								WHEN @RelationTypeName = 'Cousin' THEN (select top 1  ItemId from LookupItemView where MasterName = 'Relationship' and ItemName = 'Other')
+								WHEN @RelationTypeName = 'GrandChild' THEN (select top 1  ItemId from LookupItemView where MasterName = 'Relationship' and ItemName = 'Other')
+								WHEN @RelationTypeName = 'GrandParent' THEN (select top 1  ItemId from LookupItemView where MasterName = 'Relationship' and ItemName = 'Other')
+								WHEN @RelationTypeName = 'Niece/Nephew' THEN (select top 1  ItemId from LookupItemView where MasterName = 'Relationship' and ItemName = 'Other')
+								WHEN @RelationTypeName = 'Not Family' THEN (select top 1  ItemId from LookupItemView where MasterName = 'Relationship' and ItemName = 'Other')
+								WHEN @RelationTypeName = 'Other' THEN (select top 1  ItemId from LookupItemView where MasterName = 'Relationship' and ItemName = 'Other')
+								WHEN @RelationTypeName = 'Spouse/Partner' THEN (select top 1  ItemId from LookupItemView where MasterName = 'Relationship' and ItemName = 'Partner')
+							END
 						END
 					ELSE
-						SET @RelationshipTypeId = (select top 1  ItemId from LookupItemView where MasterName = 'Unknown' and ItemName = 'Unknown');
-
-
-					
+						SET @RelationshipTypeId = (select top 1  ItemId from LookupItemView where MasterName = 'Relationship' and ItemName = 'Other');
 
 					SET @HivStatusString = (SELECT TOP 1 Name FROM mst_Decode WHERE CodeID=10 AND ID=@HivStatus);
 
 					SET @BaselineResult = CASE @HivStatusString  
-						 WHEN 'Positive' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='BaseLineHivStatus' AND ItemName like '%' + @HivStatusString + '%') 
-						 WHEN 'Negative' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='BaseLineHivStatus' AND ItemName like '%' + @HivStatusString + '%')   
-						 WHEN 'Unknown' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='BaseLineHivStatus' AND ItemName = 'Never Tested')
-						 ELSE (select TOP 1 ItemId from LookupItemView where MasterName = 'Unknown' and ItemName = 'Unknown')
-					  END
+							WHEN 'Positive' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='BaseLineHivStatus' AND ItemName like '%' + @HivStatusString + '%') 
+							WHEN 'Negative' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='BaseLineHivStatus' AND ItemName like '%' + @HivStatusString + '%')   
+							WHEN 'Unknown' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='BaseLineHivStatus' AND ItemName = 'Never Tested')
+						END
+
+					SET @BaselineResult = CASE WHEN @BaselineResult IS NULL THEN (select TOP 1 ItemId from LookupItemView where MasterName = 'Unknown' and ItemName = 'Unknown') ELSE @BaselineResult END;
+
 
 					SET @VisitType = (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='VisitType' AND ItemName='Enrollment');
 
 					SET @PatientMasterVisitId = (SELECT TOP 1 Id FROM PatientMasterVisit where VisitType = @VisitType and PatientId = @PatientId);
 
-					INSERT INTO [dbo].[PersonRelationship](PersonId, PatientId, RelationshipTypeId, BaselineResult, BaselineDate, DeleteFlag, CreatedBy, CreateDate)
-					VALUES(@PersonId, @PatientId, @RelationshipTypeId, @BaselineResult, @CreateDate, 0, @UserId, @CreateDate);
 
-					SELECT @message = 'Created PersonRelationship Id: ' + CAST(SCOPE_IDENTITY() as varchar(50));
-					PRINT @message;
+					IF @MovedToFamilyTestingTable = 1
+						BEGIN
+							SET @PersonId = (SELECT TOP 1 PersonId FROM PersonRelationship WHERE FamilyInfoId = @FamilyInfoId);
 
+							SELECT @message = '----- Update Family Testing: ' + CAST(@PersonId as varchar(50));
+							PRINT @message;
+
+							SELECT @message = '----- Relationship Name: ' + CAST(@RelationTypeName as varchar(50));
+							PRINT @message;
+
+							SELECT @message = '----- Relationship Type: ' + CAST(@RelationshipTypeId as varchar(50));
+							PRINT @message;
+
+							SELECT @message = '----- PersonId: ' + CAST(@PersonId as varchar(50));
+							PRINT @message;
+
+							SELECT @message = '----- PatientId: ' + CAST(@PatientId as varchar(50));
+							PRINT @message;
+
+							SELECT @message = '----- BaselineResult: ' + CAST(@BaselineResult as varchar(50));
+							PRINT @message;
+
+							UPDATE Person SET FirstName = @RFirstName, LastName = @RLastName, Sex = @Sex, DateOfBirth = @DOB WHERE Id = @PersonId;
+
+							UPDATE PersonRelationship SET RelationshipTypeId = @RelationshipTypeId, BaselineResult = @BaselineResult WHERE PersonId = @PersonId AND PatientId = @PatientId;
+						END
+					ELSE
+						BEGIN
+							INSERT INTO Person(FirstName, MidName, LastName, Sex, DateOfBirth, DobPrecision, Active, DeleteFlag, CreateDate, CreatedBy)
+							VALUES(@RFirstName, NULL, @RLastName, @Sex, @DOB, 1, 1, 0, @CreateDate, @UserId);
+
+							SELECT @PersonId = SCOPE_IDENTITY();
+							SELECT @message = 'Created Person Id: ' + CAST(@PersonId as varchar(50));
+							PRINT @message;
+
+							INSERT INTO [dbo].[PersonRelationship](PersonId, PatientId, RelationshipTypeId, BaselineResult, BaselineDate, DeleteFlag, CreatedBy, CreateDate, FamilyInfoId)
+							VALUES(@PersonId, @PatientId, @RelationshipTypeId, @BaselineResult, @CreateDate, 0, @UserId, @CreateDate, @FamilyInfoId);
+
+							SELECT @message = 'Created PersonRelationship Id: ' + CAST(SCOPE_IDENTITY() as varchar(50));
+							PRINT @message;
+
+							UPDATE dtl_FamilyInfo SET MovedToFamilyTestingTable = 1 WHERE Ptn_pk = @Ptn_pk AND Id = @FamilyInfoId;
+						END
 					--INSERT INTO HIVTesting(PersonId, PatientMasterVisitId, TestingDate, TestingResult, ReferredToCare, CCCNumber, EnrollmentId, DeleteFlag, CreatedBy, CreateDate, AuditData)
 					--VALUES(@PersonId, @PatientMasterVisitId, NULL, 0, 0, NULL, 0, 0, @UserId, @CreateDate, NULL);
 
 					--SELECT @message = 'Created HIVTesting Id: ' + CAST(SCOPE_IDENTITY() as varchar(50));
 					--PRINT @message;
 
-				COMMIT
+				COMMIT TRANSACTION
 
 			END TRY
 			BEGIN CATCH
-			  ROLLBACK
+			  ROLLBACK TRANSACTION
 			END CATCH
 
 			SELECT @i = @i + 1

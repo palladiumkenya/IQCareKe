@@ -40,7 +40,7 @@ namespace BusinessProcess.CCC
                     ClsUtility.AddParameters("@PatientMasterVisitID", SqlDbType.Int, PatientMasterVisitID);
                     ClsUtility.AddParameters("@PatientID", SqlDbType.Int, PatientID);
 
-                    int a = (int)delAadvEvents.ReturnObject(ClsUtility.theParams, "sp_deletePatientEncounterAdverseEvents", ClsUtility.ObjectEnum.ExecuteNonQuery);
+                    //int a = (int)delAadvEvents.ReturnObject(ClsUtility.theParams, "sp_deletePatientEncounterAdverseEvents", ClsUtility.ObjectEnum.ExecuteNonQuery);
 
 
                     foreach (var advEvnts in adverseEvents)

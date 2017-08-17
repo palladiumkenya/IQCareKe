@@ -20,8 +20,12 @@ IF Not  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[o
 CREATE NONCLUSTERED INDEX [NCI_Ord_Visit_VisitType_IX] ON [dbo].[ord_Visit] ([VisitType]) INCLUDE ([Visit_Id],[Ptn_Pk],[LocationID],[VisitDate])
 End
 Go
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[ord_Visit]') AND name = N'NCI_Ord_Visit_VisitType_IXUser')
+ DROP INDEX [NCI_Ord_Visit_VisitType_IXUser] ON [dbo].[ord_Visit]
+GO
+
 IF Not  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[ord_Visit]') AND name = N'NCI_Ord_Visit_VisitType_IXUserId') Begin
-CREATE NONCLUSTERED INDEX [NCI_Ord_Visit_VisitType_IXUser] ON [dbo].[ord_Visit] ([VisitType]) INCLUDE ([Visit_Id],[Ptn_Pk],[VisitDate],UserId)
+CREATE NONCLUSTERED INDEX [NCI_Ord_Visit_VisitType_IXUserId] ON [dbo].[ord_Visit] ([VisitType]) INCLUDE ([Visit_Id],[Ptn_Pk],[VisitDate],UserId)
 End
 Go
 IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[dtl_PatientClinicalStatus]') AND name = N'IX_PatientClinicalStatus_VisitPk_Inc')
