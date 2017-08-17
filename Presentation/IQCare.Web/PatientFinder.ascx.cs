@@ -603,9 +603,9 @@ namespace IQCare.Web
         {
             try
             {
-                SystemSetting.CurrentSystem.Facilities.Where(f => f.DeleteFlag == false);
+                //SystemSetting.CurrentSystem.Facilities.Where(f => f.DeleteFlag == false);
 
-                ddFacility.DataSource = SystemSetting.CurrentSystem.Facilities.OrderBy(f=> f.Id);
+                ddFacility.DataSource = SystemSetting.CurrentSystem.Facilities.Where(f=> f.DeleteFlag== false).OrderBy(f=> f.Id);
                 ddFacility.DataTextField = "Name";
                 ddFacility.DataValueField = "Id";
                 ddFacility.DataBind();
