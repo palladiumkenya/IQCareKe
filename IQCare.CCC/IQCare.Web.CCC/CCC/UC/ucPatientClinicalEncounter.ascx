@@ -655,10 +655,23 @@
 
                                     <div class="panel-body">
                                         <div class="col-md-12 form-group">
-                                            <label class="control-label pull-left">Adverse Event(s)</label>
+                                            <div>
+                                                <label class="control-label pull-left text-primary">*Any Adverse Event(s)</label>
+                                            </div>
+
+                                            <div>
+                                                <label class="pull-left" style="padding-right: 10px">
+                                                    <input id="rdAnyAdverseEventsYes" type="radio" name="adverseEvents" value="1" clientidmode="Static" runat="server" onclick="showHideAdverseEventsDivs();" />Yes
+                                                </label>
+                                                <label class="pull-left" style="padding-right: 10px">
+                                                    <input id="rdAnyAdverseEventsNo" type="radio" name="adverseEvents" value="0" clientidmode="Static" runat="server" data-parsley-required="true" onclick="showHideAdverseEventsDivs();" />No
+                                                </label>
+
+                                            </div>
+
                                         </div>
 
-                                        <div class="col-md-12 form-group">
+                                        <div id="adverseEventCtrls" class="col-md-12 form-group">
                                             <div class="col-md-3">
                                                 <div class="col-md-12">
                                                     <label class="control-label pull-left">Adverse event</label>
@@ -704,7 +717,7 @@
                                         </div>
                                     </div>
                                     <%--.panel-body--%>
-                                    <div class="panel panel-primary">
+                                    <div id="adverseEventsTable" class="panel panel-primary">
                                         <div class="panel-heading">Adverse Events</div>
                                         <div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden;">
                                             <table id="dtlAdverseEvents" class="table table-bordered table-striped" style="width: 100%">
@@ -1316,7 +1329,7 @@
                                     <label class="control-label pull-left">CTX/Dapsone Adherence</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ctxAdherance" ClientIDMode="Static" Enabled="False" />
+                                    <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ctxAdherance" ClientIDMode="Static" />
                                 </div>
                             </div>
                         </div>
@@ -2067,6 +2080,7 @@
         loadAllergyReactions();
         loadDiagnosis();
         showHidePresentingComplaintsDivs();
+        showHideAdverseEventsDivs();
         showHideSystemsOkayDivs();
         showHideVisitByTS();
 
@@ -2704,6 +2718,7 @@
 
             var visitBy = $("#<%=ddlVisitBy.ClientID%>").find(":selected").val();
             var anyComplaints = $("input[name$=anyComplaints]:checked").val();
+            var adverseEvents = $("input[name$=adverseEvents]:checked").val();
             var complaints = $("#<%=complaints.ClientID%>").val();
             var tbscreening = $("#<%=tbscreeningstatus.ClientID%>").find(":selected").val();
             var nutritionscreening = $("#<%=nutritionscreeningstatus.ClientID%>").find(":selected").val();
@@ -2712,6 +2727,13 @@
             if (anyComplaints == 1) {
                 if (!presentingComplaintsTable.data().any()) {
                     toastr.error("Presenting Complaints", "Presenting complaints missing.");
+                    evt.preventDefault();
+                }
+            }
+
+            if (adverseEvents == 1) {
+                if (!advEventsTable.data().any()) {
+                    toastr.error("Adverse Event(s)", "Adverse Event(s) missing.");
                     evt.preventDefault();
                 }
             }
@@ -3752,6 +3774,19 @@
             document.getElementById('presentingComplaintsCtrls').style.display = 'none';
             document.getElementById('presentingComplaintsTable').style.display = 'none';
             document.getElementById('presentingComplaintsNotes').style.display = 'none';
+        }
+    }
+
+    function showHideAdverseEventsDivs() {
+        var adverseEvents = $("input[name$=adverseEvents]:checked").val();
+
+        if (adverseEvents == 1) {
+            document.getElementById('adverseEventCtrls').style.display = 'block';
+            document.getElementById('adverseEventsTable').style.display = 'block';
+        }
+        else {
+            document.getElementById('adverseEventCtrls').style.display = 'none';
+            document.getElementById('adverseEventsTable').style.display = 'none';
         }
     }
 

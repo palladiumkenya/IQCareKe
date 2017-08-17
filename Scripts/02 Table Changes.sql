@@ -41,19 +41,14 @@ Begin
 	ALTER TABLE [dbo].[dtl_PatientHivPrevCareIE] ADD [FromDistrict2] [varchar](200) NULL
 End
 GO
-declare @d2 int, @d0 int;
 
 If Exists (Select 1 From sys.columns Where Name = N'FromDistrict2' And Object_ID = Object_id(N'dtl_PatientHivPrevCareIE')  ) Begin
 	If Exists (Select 1 From sys.columns Where Name = N'FromDistrict' And Object_ID = Object_id(N'dtl_PatientHivPrevCareIE')) Begin
-	UPDATE [dbo].[dtl_PatientHivPrevCareIE] SET [FromDistrict2] = (SELECT [Name]  FROM [dbo].[mst_District]  where SystemId = 1 and ID = FromDistrict)
+	exec ('UPDATE [dbo].[dtl_PatientHivPrevCareIE] SET [FromDistrict2] = (SELECT [Name]  FROM [dbo].[mst_District]  where SystemId = 1 and ID = FromDistrict) where FromDistrict2 Is Not Null');
+	exec ('ALTER TABLE [dbo].[dtl_PatientHivPrevCareIE] DROP COLUMN [FromDistrict]');
 End 
 End
 Go
-If not Exists (Select * From sys.columns Where Name = N'FromDistrict' And Object_ID = Object_id(N'dtl_PatientHivPrevCareIE')And system_type_id=TYPE_ID('varchar'))  Begin
-	ALTER TABLE [dbo].[dtl_PatientHivPrevCareIE] DROP COLUMN [FromDistrict]
-End
-GO
-
 If Exists (Select * From sys.columns Where Name = N'FromDistrict2' And Object_ID = Object_id(N'dtl_PatientHivPrevCareIE') And system_type_id=TYPE_ID('varchar'))    
 Begin
 	EXEC sp_RENAME '[dbo].[dtl_PatientHivPrevCareIE].[FromDistrict2]' , 'FromDistrict', 'COLUMN'
@@ -426,6 +421,12 @@ Go
 If Not Exists (Select * From sys.columns Where Name = N'MovedToPatientTable' And Object_ID = Object_id(N'mst_Patient'))    
 Begin
   Alter table dbo.mst_Patient Add MovedToPatientTable  bit not null Constraint DF_mst_Patient_MovedToPatientTable Default 0
+End
+Go
+
+If Not Exists (Select * From sys.columns Where Name = N'MovedToFamilyTestingTable' And Object_ID = Object_id(N'dtl_FamilyInfo'))    
+Begin
+  Alter table dbo.dtl_FamilyInfo Add MovedToFamilyTestingTable  bit not null Constraint DF_dtl_FamilyInfo_MovedToFamilyTestingTable Default 0
 End
 Go
 
@@ -946,14 +947,7 @@ IF Not Exists (SELECT * FROM sys.key_constraints WHERE type = 'PK' AND parent_ob
 
 GO
 GO
-IF Not Exists (SELECT * FROM sys.columns WHERE Name = 'HeadCircumference' AND object_id = OBJECT_ID('dbo.PatientVitals'))
-    ALTER TABLE PatientVitals ADD HeadCircumference DECIMAL(8,2);
-GO 
-IF Not Exists (SELECT * FROM sys.columns WHERE Name = 'BMI' AND object_id = OBJECT_ID('dbo.PatientVitals'))
-    ALTER TABLE PatientVitals ADD BMI DECIMAL(8,2);
-GO
---Update mst_facility Set Billing = 1, Wards=1 Where DeleteFlag = 0;
---Go
+
 
 IF Exists (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[dtl_PatientLabResults]') AND type in (N'U'))
 Begin		
@@ -1001,70 +995,67 @@ Where RI > 1
 And M.DeleteFlag = 1
 Go
 
-Set Nocount On;
-Go
-SET ANSI_NULLS ON
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Update_SRNOColumn]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[Update_SRNOColumn]
 GO
+Create PROCEDURE [dbo].[Update_SRNOColumn]
+AS
+BEGIN
 
-SET QUOTED_IDENTIFIER ON
-GO
+	Declare @SRNo Table(	
+		tablename varchar(50),
+		ColumnName varchar(10)
+	);
+	Insert Into @SRNo
+	SELECT  t.name AS table_name,
+	--SCHEMA_NAME(schema_id) AS schema_name,
+	c.name AS column_name
+	FROM sys.tables AS t
+	INNER JOIN sys.columns c ON t.OBJECT_ID = c.OBJECT_ID
+	WHERE c.name LIKE 'SRNo' And system_type_id=TYPE_ID('int');
 
-SET ANSI_PADDING ON
-GO
-IF OBJECT_ID('tempdb..#SrNo') IS NOT NULL Drop Table #SrNo
-Go
-Create Table #SrNo(	
-	tablename varchar(50),
-	ColumnName varchar(10)
-);
-Go
-Insert Into #SrNo
-SELECT  t.name AS table_name,
---SCHEMA_NAME(schema_id) AS schema_name,
-c.name AS column_name
-FROM sys.tables AS t
-INNER JOIN sys.columns c ON t.OBJECT_ID = c.OBJECT_ID
-WHERE c.name LIKE 'SRNo' And system_type_id=TYPE_ID('int');
-Go
 --Select * From #SrNo
 
-Declare @Query varchar(250)
-		, @command varchar(400)
-		,@tablename varchar(50)
-		,@update varchar(250);
-While Exists(Select 1 From #SrNo) Begin
-	Select top 1 @tablename= tableName from #SrNo
-	If Exists(Select 1      from sys.all_columns c
-      join sys.tables t on t.object_id = c.object_id
-      join sys.schemas s on s.schema_id = t.schema_id
-      join sys.default_constraints d on c.default_object_id = d.object_id
-		where t.name = @tablename      And c.name = 'SrNo')  Begin
-	select @Command = 'ALTER TABLE dbo.' + @tablename + ' drop constraint ' + d.name
-	 from sys.tables t	  join    sys.default_constraints d	   on d.parent_object_id = t.object_id
-	  join    sys.columns c	   on c.object_id = t.object_id		and c.column_id = d.parent_column_id
-	 where t.name = @tablename
-	  and t.schema_id = schema_id('dbo')
-	  and c.name = 'SRNo'
-	  exec (@command)
-	  End
-		Select @Query = 'Alter table ['+@tablename + '] Alter Column SrNo decimal(5,2) ';	
-		Exec (@Query);
-	Select @Query = 'Alter table ['+@tablename + '] ADD CONSTRAINT DF_'+replace(@tablename,' ','')+'_SRNo'+' DEFAULT 0.00 FOR SRNo; ';
+	Declare @Query varchar(250)
+			, @command varchar(400)
+			,@tablename varchar(50)
+			,@update varchar(250);
+	While Exists(Select 1 From @SRNo) Begin
+		Select top 1 @tablename= tableName from @SRNo
+		If Exists(Select 1      from sys.all_columns c
+		  join sys.tables t on t.object_id = c.object_id
+		  join sys.schemas s on s.schema_id = t.schema_id
+		  join sys.default_constraints d on c.default_object_id = d.object_id
+			where t.name = @tablename      And c.name = 'SrNo')  Begin
+		select @Command = 'ALTER TABLE dbo.' + @tablename + ' drop constraint ' + d.name
+		 from sys.tables t	  join    sys.default_constraints d	   on d.parent_object_id = t.object_id
+		  join    sys.columns c	   on c.object_id = t.object_id		and c.column_id = d.parent_column_id
+		 where t.name = @tablename
+		  and t.schema_id = schema_id('dbo')
+		  and c.name = 'SRNo'
+		  exec (@command)
+		  End
+			Select @Query = 'Alter table ['+@tablename + '] Alter Column SrNo decimal(5,2) ';	
+			Exec (@Query);
+		Select @Query = 'Alter table ['+@tablename + '] ADD CONSTRAINT DF_'+replace(@tablename,' ','')+'_SRNo'+' DEFAULT 0.00 FOR SRNo; ';
 	
-	If Not Exists (Select 1      from sys.all_columns c
-      join sys.tables t on t.object_id = c.object_id
-      join sys.schemas s on s.schema_id = t.schema_id
-      join sys.default_constraints d on c.default_object_id = d.object_id
-		where t.name = @tablename      And c.name = 'SrNo')
-      Begin
-		--Print @Query		
-		Exec(@Query)
-	 End
+		If Not Exists (Select 1      from sys.all_columns c
+		  join sys.tables t on t.object_id = c.object_id
+		  join sys.schemas s on s.schema_id = t.schema_id
+		  join sys.default_constraints d on c.default_object_id = d.object_id
+			where t.name = @tablename      And c.name = 'SrNo')
+		  Begin
+			--Print @Query		
+			Exec(@Query)
+		 End
 	
 	
-	Delete From #SrNo where tablename = @tablename
-	
+		Delete From @SRNo where tablename = @tablename
+	End
 End
-GO
-SET ANSI_PADDING OFF
-GO
+Go
+
+Execute Update_SRNOColumn
+Go
+DROP PROCEDURE [dbo].[Update_SRNOColumn]
+Go

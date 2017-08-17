@@ -147,33 +147,43 @@ namespace IQCare.CCC.UILogic.Baseline
                 var linkage = linkageManager.GetPatientLinkage(relationship.PersonId).FirstOrDefault();
 
                 if (person != null)
-                    if (hivTesting != null)
-                        familyTesting = new PatientFamilyTesting()
-                        {
-                            FirstName = (person.FirstName),
-                            MiddleName = (person.MiddleName),
-                            LastName = (person.LastName),
-                            Sex = person.Sex,
-                            DateOfBirth = person.DateOfBirth == null? DateTime.Now: (DateTime)person.DateOfBirth.Value,
-                            DobPrecision = person.DobPrecision == null? false: Convert.ToBoolean(person.DobPrecision),
-                            PersonId = relationship.PersonId,
-                            RelationshipId = relationship.RelationshipTypeId,
-                            BaseLineHivStatusId = relationship.BaselineResult,
-                            BaselineHivStatusDate = relationship.BaselineDate,
-                            HivTestingResultsId = hivTesting.TestingResult,
-                            HivTestingResultsDate = hivTesting.TestingDate,
-                            CccReferal = hivTesting.ReferredToCare,
-                            //CccReferaalNumber = linkage.CCCNumber,
-                            //LinkageDate = linkage.LinkageDate,
-                            PersonRelationshipId = relationship.Id,
-                            HivTestingId = hivTesting.Id
-                        };
-                if (linkage != null)
                 {
-                    familyTesting.CccReferaalNumber = linkage.CCCNumber;
-                    familyTesting.LinkageDate = linkage.LinkageDate;
+                    familyTesting = new PatientFamilyTesting()
+                    {
+                        FirstName = (person.FirstName),
+                        MiddleName = (person.MiddleName),
+                        LastName = (person.LastName),
+                        Sex = person.Sex,
+                        DateOfBirth = person.DateOfBirth == null ? DateTime.Now : (DateTime)person.DateOfBirth.Value,
+                        DobPrecision = person.DobPrecision == null ? false : Convert.ToBoolean(person.DobPrecision),
+                        PersonId = relationship.PersonId,
+                        RelationshipId = relationship.RelationshipTypeId,
+                        BaseLineHivStatusId = relationship.BaselineResult,
+                        BaselineHivStatusDate = relationship.BaselineDate,
+                        //HivTestingResultsId = hivTesting.TestingResult,
+                        //HivTestingResultsDate = hivTesting.TestingDate,
+                        //CccReferal = hivTesting.ReferredToCare,
+                        //CccReferaalNumber = linkage.CCCNumber,
+                        //LinkageDate = linkage.LinkageDate,
+                        PersonRelationshipId = relationship.Id
+                        //HivTestingId = hivTesting.Id
+                    };
+
+                    if (hivTesting != null)
+                    {
+                        familyTesting.HivTestingResultsId = hivTesting.TestingResult;
+                        familyTesting.HivTestingResultsDate = hivTesting.TestingDate;
+                        familyTesting.CccReferal = hivTesting.ReferredToCare;
+                        familyTesting.HivTestingId = hivTesting.Id;
+                    }
+
+                    if (linkage != null)
+                    {
+                        familyTesting.CccReferaalNumber = linkage.CCCNumber;
+                        familyTesting.LinkageDate = linkage.LinkageDate;
+                    }
+                    patientFamilyTestings.Add(familyTesting);
                 }
-                patientFamilyTestings.Add(familyTesting);
             }
             return patientFamilyTestings;
         }
