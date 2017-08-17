@@ -193,11 +193,20 @@ namespace IQCare.Web.UILogic
         {
             get
             {
-                if ((HttpContext.Current != null) && (HttpContext.Current.Session != null))
+                if ((HttpContext.Current != null) && (HttpContext.Current.Session != null) && (HttpContext.Current.Session["SystemSettings"] != null))
                 {
                     return (SystemSetting)HttpContext.Current.Session["SystemSettings"];
                 }
-                return null;
+                else
+                {
+                    SystemSetting cSS = new SystemSetting();
+                    if (cSS.isValid)
+                    {
+                        HttpContext.Current.Session["SystemSettings"] = cSS;
+                    }
+                    return cSS;
+                }
+               // return null;
             }
         }
         /// <summary>
