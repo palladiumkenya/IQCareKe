@@ -84,7 +84,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-12">
+                <div class="col-md-12" id="isRegisteredInClinic">
                     <div class="col-md-6">
                         <div class="col-md-12 form-group">
                             <div class="col-md-6">
@@ -694,7 +694,9 @@
             });
 
             $("#FamilyTestingDetails").hide();
-            $("#hivTestingInfo").hide();
+            //$("#hivTestingInfo").hide();
+            $("#isRegisteredInClinic").hide();
+
             $("#searchButton").hide();
 
             loadFamilyTesting();
@@ -749,6 +751,8 @@
                     var birthDate = new Date(dob);
                     var age = today.getFullYear() - birthDate.getFullYear();
 
+                    console.log(baselineHivStatusDate);
+
                     //validations
                     if (moment('' + dob + '').isAfter()) {
                         toastr.error("Date of birth cannot be a future date.");
@@ -766,11 +770,11 @@
                         toastr.error("HIV testing result date cannot be a future date.");
                         return false;
                     }
-                    if ((!moment('' + baselineHivStatusDate + '').isValid())&&(baselineHivStatusDate !=="")) {
+                    if (((baselineHivStatusDate !== "") && !moment('' + baselineHivStatusDate + '').isValid())) {
                         toastr.error("Baseline HIV status date invalid.");
                         return false;
                     }
-                    if ((!moment('' + hivTestingresultDate + '').isValid())&&(hivTestingresultDate !=="")) {
+                    if (((hivTestingresultDate !== "") && !moment('' + hivTestingresultDate + '').isValid())) {
                         toastr.error("HIV testing result date invalid.");
                         return false;
                     }
