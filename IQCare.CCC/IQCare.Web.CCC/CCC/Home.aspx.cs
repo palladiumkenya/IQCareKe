@@ -67,14 +67,12 @@ namespace IQCare.Web.CCC
                     for (int i = 0; i < summaryList.Count; i++)
                     {
                         Label = "label" + i;
-                        html += "<div class='col-md-12'>";
-                        html += "<div class='col-md-10'>";
+                        html += "<div class='col-md-9'>";
                         html += "<label class='control-label pull-left'>" + summaryList[i].Category + ":</label>";
                         html += "</div>";
                         html += "<div class='col-md-2 pull-right'>";
                         html += "<label for='value' id='" + Label + "' class='control-label text-success pull-right'>";
                         html += "<span class='badge pull-right'>" + summaryList[i].Value + "</span>";
-                        html += "</div>";
                         html += "</div>";
                         html += "<div class='col-md-12'><hr></div>";
                     }

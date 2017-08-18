@@ -3585,7 +3585,7 @@ BEGIN
 															END;
 
 														IF @DateEnrolledInCare IS NOT NULL
-														BEGIN SET @UserID_Enrollment = @DateEnrolledInCare END;
+														BEGIN SET @StartDate = @DateEnrolledInCare END;
 
 														INSERT INTO [dbo].[PatientEnrollment] ([PatientId] ,[ServiceAreaId] ,[EnrollmentDate] ,[EnrollmentStatusId] ,[TransferIn] ,[CareEnded] ,[DeleteFlag] ,[CreatedBy] ,[CreateDate] ,[AuditData])
 														VALUES (@PatientId,1, @StartDate,0, @transferIn, @Status ,0 ,@UserID_Enrollment ,@CreateDate_Enrollment ,NULL);
