@@ -13720,7 +13720,8 @@ Insert Into FacilityList(Id, MFLCode,Name)
  Select 8774 ,10168 , 'Emmanuel Medical Clinic (Nyeri North)' Union All  
  Select 8775 ,10416 , 'Kahara Medical Clinic' Union All  
  Select 8776 ,10160 , 'Ebenezer Medical Clinic (Nyeri South)' Union All  
- Select 8777 ,10501 , 'Kariumba Medical Clinic' 
+ Select 8777 ,10501 , 'Kariumba Medical Clinic' Union All
+ Select 8778 ,14510 , 'Gilgil Sub-District Hospital'
  Go
  SET IDENTITY_INSERT [dbo].[FacilityList] Off 
 Go

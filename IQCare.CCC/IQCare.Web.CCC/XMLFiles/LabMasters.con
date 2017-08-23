@@ -1159,7 +1159,7 @@
   <Lnk_LabValue>
     <SubTestId>6</SubTestId>
     <MinBoundaryValue>1.50</MinBoundaryValue>
-    <MaxBoundaryValue>30.00</MaxBoundaryValue>
+    <MaxBoundaryValue>20.00</MaxBoundaryValue>
     <MinNormalRange>8.00</MinNormalRange>
     <MaxNormalRange>14.00</MaxNormalRange>
     <TextNormalRange />
@@ -1555,7 +1555,7 @@
   <Lnk_LabValue>
     <SubTestId>107</SubTestId>
     <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>1000.00</MaxBoundaryValue>
+    <MaxBoundaryValue>500.00</MaxBoundaryValue>
     <MinNormalRange>0.00</MinNormalRange>
     <MaxNormalRange>500.00</MaxNormalRange>
     <TextNormalRange />

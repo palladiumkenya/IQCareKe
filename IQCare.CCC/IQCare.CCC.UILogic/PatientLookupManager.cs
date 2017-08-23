@@ -10,7 +10,6 @@ namespace IQCare.CCC.UILogic
     public class PatientLookupManager
     {
         readonly IPatientLookupmanager _patientLookupmanager = (IPatientLookupmanager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientLookupManager, BusinessProcess.CCC");
-        Utility _utility=new Utility();
         
        public PatientLookup GetPatientDetailSummary(int id)
         {
@@ -91,6 +90,19 @@ namespace IQCare.CCC.UILogic
             var person = _patientLookupmanager.GetPatientByPersonId(personId);
             var retVal = person.Count > 0 ? person[0].Id : 0;
             return retVal;
+        }
+
+        public List<PatientLookup> GetPatientListByParams(int patientId, string firstName, string middleName, string lastName,int sex)
+        {
+            try
+            {
+                return _patientLookupmanager.GetPatientListByParams(patientId, firstName, middleName, lastName, sex);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
     }
 }

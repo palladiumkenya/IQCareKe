@@ -71,6 +71,42 @@ namespace IQCare.CCC.UILogic.Baseline
             return hivTestingId;
         }
 
+        public void AddLinkedPatientFamilyTesting(int personId, int patientId, int patientMasterVisitId, int baselineResult, DateTime baselineDate, int relationshipTypeId, int userId, string cccNumber)
+        {
+            PersonRelationship relationship = new PersonRelationship();
+            relationship.PersonId = personId;
+            relationship.PatientId = patientId;
+            relationship.BaselineResult = baselineResult;
+            relationship.BaselineDate = baselineDate;
+            relationship.RelationshipTypeId = relationshipTypeId;
+            relationship.CreatedBy = userId;
+
+
+            _personRelationshipManager.AddPersonRelationship(relationship);
+
+            PatientHivTesting familyTesting = new PatientHivTesting()
+            {
+                PersonId = personId,
+                PatientMasterVisitId = patientMasterVisitId,
+                TestingResult = 0,
+                TestingDate = null,
+                ReferredToCare = true,
+                CreatedBy = userId
+            };
+
+            int hivTestingId = _hivTestingManager.AddPatientHivTesting(familyTesting);
+
+            PatientLinkage patientLinkage = new PatientLinkage()
+            {
+                PersonId = personId,
+                LinkageDate = DateTime.Now,
+                CCCNumber = cccNumber,
+                CreatedBy = userId
+            };
+
+            linkageManager.AddPatientLinkage(patientLinkage);
+        }
+
         public PatientHivTesting GetPatientFamilyTestings(int id)
         {
             var familyTesting = _hivTestingManager.GetPatientHivTesting(id);
