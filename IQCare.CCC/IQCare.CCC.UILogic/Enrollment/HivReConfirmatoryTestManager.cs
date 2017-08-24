@@ -35,5 +35,17 @@ namespace IQCare.CCC.UILogic.Enrollment
 
             return result;
         }
+
+        public HivReConfirmatoryTest GetPersonLastestReConfirmatoryTest(int personId, int positiveResult)
+        {
+            try
+            {
+                return mgr.GetPersonLastestReConfirmatoryTest(personId, positiveResult);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

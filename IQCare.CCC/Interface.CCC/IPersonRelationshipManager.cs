@@ -12,6 +12,6 @@ namespace Interface.CCC
         int UpdatePersonRelationship(PersonRelationship personRelationship);
         int DeletePersonRelationship(int id);
         List<PersonRelationship> GetAllPersonRelationship(int patientId);
-
+        bool PersonLinkedToPatient(int personId, int patientId);
     }
 }

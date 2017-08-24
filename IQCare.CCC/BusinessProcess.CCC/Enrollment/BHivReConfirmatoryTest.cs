@@ -2,6 +2,7 @@
 using Entities.CCC.Enrollment;
 using Interface.CCC.Enrollment;
 using System;
+using System.Linq;
 using DataAccess.CCC.Context;
 using DataAccess.CCC.Repository;
 
@@ -17,6 +18,17 @@ namespace BusinessProcess.CCC.Enrollment
                 unitOfWork.Complete();
                 unitOfWork.Dispose();
                 return hivReConfirmatoryTest.Id;
+            }
+        }
+
+        public HivReConfirmatoryTest GetPersonLastestReConfirmatoryTest(int personId, int positiveResult)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                HivReConfirmatoryTest hivReConfirmatoryTest = unitOfWork.HivReConfirmatoryTestRepository.FindBy(x => x.PersonId == personId && x.TestResult == positiveResult)
+                    .OrderByDescending(x => x.TestResultDate).FirstOrDefault();
+                unitOfWork.Dispose();
+                return hivReConfirmatoryTest;
             }
         }
     }

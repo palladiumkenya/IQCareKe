@@ -99,6 +99,37 @@ namespace BusinessProcess.CCC
             }
         }
 
+        public List<PatientLookup> GetPatientListByParams(int patientId, string firstName, string middleName, string lastName,
+            int sex)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                List<PatientLookup> patientLookups;
+                if (!System.String.IsNullOrEmpty(middleName))
+                {
+                    patientLookups = unitOfWork.PatientLookupRepository
+                        .FindBy(x => x.FirstName.ToLower().Contains(firstName.ToLower()) &&
+                                     x.MiddleName.ToLower().Contains(middleName.ToLower()) &&
+                                     x.LastName.ToLower().Contains(lastName.ToLower()) && x.Id != patientId).ToList();
+                }
+                else
+                {
+                    patientLookups = unitOfWork.PatientLookupRepository
+                        .FindBy(x => x.FirstName.ToLower().Contains(firstName.ToLower()) &&
+                                     x.LastName.ToLower().Contains(lastName.ToLower()) && x.Id != patientId).ToList();
+                }
+
+                if (sex > 0)
+                {
+                    patientLookups = patientLookups.Where(y => y.Sex == sex).ToList();
+                }
+
+                return patientLookups;
+            }
+        }
+
+
+
         public int GetTotalpatientCount()
         {
             int totalCount = 0;
