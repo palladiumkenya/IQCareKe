@@ -246,7 +246,7 @@
                         <hr />
                     </div>
                     <%--to here--%>
-
+                    <div class="col-md-12">
                     <div id="step1Div">
 
                         <div class="col-md-12 form-group" <%-- style="height:100%"--%>>
@@ -744,6 +744,7 @@
                             <%--col-md-11--%>
                         </div>
                     </div>
+                        </div>
                 </div>
                 <%-- .data-step-1--%>
 

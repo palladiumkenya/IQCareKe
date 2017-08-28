@@ -25,6 +25,7 @@ namespace IQCare.Web.CCC
                 lbltransferin.Text = "<span class='badge pull-right'>" + item.TotalTransferIn.ToString()+"</span>";
                 lbldead.Text = "<span class='badge pull-right'>" + item.TotalPatientsDead.ToString() +"</span>";
                 lbltransferout.Text = "<span class='badge pull-right'>" + item.TotalPatientsTransferedOut.ToString() +"</span>";
+                lblundocumentedltf.Text = "<span class='badge pull-right'>" + item.TotalUndocumentedLTFU.ToString() + "</span>";
                 totalDocumetedLTFU.Text = "<span class='badge pull-right'>" + item.LostToFollowUp.ToString() + "</span>";
                 
                 //lblctx.Text = "<span class='badge pull-right'>" + +"</span>";
