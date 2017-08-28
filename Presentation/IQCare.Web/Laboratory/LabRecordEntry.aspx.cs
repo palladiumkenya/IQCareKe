@@ -85,12 +85,12 @@ namespace IQCare.Web.Laboratory
         {
             if (Session["Paperless"].ToString() == "1")
             {
-               
-                    string theUrl = string.Format("{0}", "~/Laboratory/LabRequestForm.aspx");
-                    //Response.Redirect(theUrl);
-                    System.Web.HttpContext.Current.ApplicationInstance.CompleteRequest();
-                    Response.Redirect(theUrl, true);
-                
+
+                string theUrl = string.Format("{0}", "~/Laboratory/LabRequestForm.aspx");
+                //Response.Redirect(theUrl);
+                System.Web.HttpContext.Current.ApplicationInstance.CompleteRequest();
+                Response.Redirect(theUrl, true);
+
             }
             txtlaborderedbydate.Attributes.Add("onkeyup", "DateFormat(this,this.value,event,false,'3')");
             txtlaborderedbydate.Attributes.Add("onblur", "DateFormat(this,this.value,event,true,'3')");
@@ -122,7 +122,7 @@ namespace IQCare.Web.Laboratory
         {
             this.BindTestParameterResults();
             divError.Visible = isError;
-            
+
         }
         decimal? nullDecimal = null;
         protected void AddLabRecord(object sender, EventArgs e)
@@ -178,7 +178,7 @@ namespace IQCare.Web.Laboratory
                 TextBox txtLimit = dataItem.FindControl("textDetectionLimit") as TextBox;
                 TextBox txtResultValue = dataItem.FindControl("textResultValue") as TextBox;
 
-                hasResult = txtResultValue.Text.Trim() != "" || (ddlResultList.SelectedValue!="" && Convert.ToInt32(ddlResultList.SelectedValue) > 0) || txtResultText.Text.Trim() != "";
+                hasResult = txtResultValue.Text.Trim() != "" || (ddlResultList.SelectedValue != "" && Convert.ToInt32(ddlResultList.SelectedValue) > 0) || txtResultText.Text.Trim() != "";
                 if (!hasResult)
                 {
                     this.isDataEntry = true;
@@ -192,8 +192,9 @@ namespace IQCare.Web.Laboratory
                     LabOrderId = this.LabOrderId,
                     LabOrderTestId = this.LabOrderTestId,
                     UserId = this.UserId,
-                    DeleteFlag = false
-                    
+                    DeleteFlag = false,
+                    ParameterId = paramId
+
                 };
                 _result.Parameter = new TestParameter()
                 {
@@ -203,17 +204,21 @@ namespace IQCare.Web.Laboratory
                     LabTestId = this.LabTestId,
                     DeleteFlag = false
                 };
-                                if (_dataType == "NUMERIC")
+                if (_dataType == "NUMERIC")
                 {
 
                     _result.ResultValue = string.IsNullOrEmpty(txtResultValue.Text) ? nullDecimal : Convert.ToDecimal(txtResultValue.Text.Trim());
                     _result.Undetectable = cBox.Checked;
                     _result.DetectionLimit = string.IsNullOrEmpty(txtLimit.Text) ? nullDecimal : Convert.ToDecimal(txtLimit.Text.Trim());
-                    _result.ResultUnit = new ResultUnit() { Id = Convert.ToInt32(ddlResultUnit.SelectedValue), Text = ddlResultUnit.SelectedItem.Text };
-
-                    RadComboBoxItem item = ddlResultUnit.SelectedItem;
                     try
                     {
+                        if (ddlResultUnit.SelectedIndex > -1)
+                        {
+                            _result.ResultUnit = new ResultUnit() { Id = Convert.ToInt32(ddlResultUnit.SelectedValue), Text = ddlResultUnit.SelectedItem.Text };
+                        }
+
+                        RadComboBoxItem item = ddlResultUnit.SelectedItem;
+
                         string min_value = item.Attributes["min"].ToString();
                         string max_value = item.Attributes["max"].ToString();
                         string min_normal = item.Attributes["min_normal"].ToString();
@@ -230,7 +235,7 @@ namespace IQCare.Web.Laboratory
                             MinNormalRange = Convert.ToDecimal(min_normal),
                             MaxNormalRange = Convert.ToDecimal(max_normal)
                         };
-                        
+
                     }
                     catch { }
 
@@ -262,16 +267,16 @@ namespace IQCare.Web.Laboratory
             //base.Session["LAB_REQTEST"] = null;
             //base.Session["OrderedLabs"] = null;
             this.BindLabTest();
-        }        
-        private bool FieldValidation(string labtobedone, string orderbydate, string orderby, string appcurrentdate,string resultdate, string resultBy)
-        {          
-            DateTime _theCurrentDate = SystemSetting.SystemDate;           
+        }
+        private bool FieldValidation(string labtobedone, string orderbydate, string orderby, string appcurrentdate, string resultdate, string resultBy)
+        {
+            DateTime _theCurrentDate = SystemSetting.SystemDate;
             IQCareUtils theUtils = new IQCareUtils();
 
             Page page = HttpContext.Current.Handler as Page;
             if (orderby == "0")
             {
-                IQCareMsgBox.NotifyAction("Ordered By is not selected", "Field Validation", true,this, "javascript:HideModalPopup();return false;");
+                IQCareMsgBox.NotifyAction("Ordered By is not selected", "Field Validation", true, this, "javascript:HideModalPopup();return false;");
                 return false;
             }
             else if (orderbydate == "")
@@ -324,7 +329,7 @@ namespace IQCare.Web.Laboratory
             string laborderResultdate = txtlabReportedbyDate.Text;
             string appcurrdate = hdappcurrentdate.Value;
             string strClinicalNotes = txtClinicalNotes.Text;
-            if (FieldValidation(labtobedone, laborderdate, laborder, appcurrdate,laborderResultdate, laborderResultBy) == false)
+            if (FieldValidation(labtobedone, laborderdate, laborder, appcurrdate, laborderResultdate, laborderResultBy) == false)
             {
                 return;
             }
@@ -349,19 +354,20 @@ namespace IQCare.Web.Laboratory
                 order.ClinicalNotes = strClinicalNotes;
                 order.UserId = this.UserId;
 
-                order.OrderedTest.ForEach(o=> 
+                order.OrderedTest.ForEach(o =>
                 {
                     o.ResultBy = Convert.ToInt32(ddlLabReportedbyName.SelectedValue);
                     o.ResultDate = Convert.ToDateTime(txtlabReportedbyDate.Text);
                     //o.ParameterResults.ForEach(p =>
                     //{
-                       
+
                     //});
                 });
 
 
-                LabOrder _saveOrder = requestMgr.SaveLabOrder(order,this.UserId,this.LocationId);
-                IQCareMsgBox.NotifyAction(string.Format("Lab Order number {0}, saved successfully", _saveOrder.OrderNumber), "Lab Order", false,this,
+                LabOrder _saveOrder = requestMgr.SaveLabOrder(order, this.UserId, this.LocationId);
+                this.OrderedLabs = _saveOrder;
+                IQCareMsgBox.NotifyAction(string.Format("Lab Order number {0}, saved successfully", _saveOrder.OrderNumber), "Lab Order", false, this,
                    string.Format("javascript:window.location='{0}'; return false;", this.RedirectUrl));
             }
         }
@@ -383,7 +389,7 @@ namespace IQCare.Web.Laboratory
             base.Session["LAB_REQTEST"] = null;
             base.Session["OrderedLabs"] = null;
         }
-            
+
 
         protected int LabTestId
         {
@@ -463,7 +469,7 @@ namespace IQCare.Web.Laboratory
 
                 return val;
             }
-             set
+            set
             {
                 HLabOrderId.Value = value.ToString();
             }
@@ -541,7 +547,7 @@ namespace IQCare.Web.Laboratory
             {
                 if (base.Session["OrderedLabs"] == null)
                 {
-                    
+
                     return new LabOrder()
                     {
                         PatientPk = this.PatientPk,
@@ -613,7 +619,7 @@ namespace IQCare.Web.Laboratory
                     this.Department = _testDepartment;
                     this.TestReferenceId = _refId;
                     this.ParameterCount = _paramCount;
-                   
+
                     List<TestParameter> parameters = labMgr.GetLabTestParameters(_testId);
 
                     DataTable thisTest = this.SelectedTestParameters;
@@ -634,7 +640,7 @@ namespace IQCare.Web.Laboratory
                         thisTest.Rows.Add(paramRow);
                     });
                     thisTest.AcceptChanges();
-                    this.SelectedTestParameters = thisTest;                   
+                    this.SelectedTestParameters = thisTest;
                     this.isDataEntry = true;
                     this.BindTestParameterResults();
                 }
@@ -675,7 +681,7 @@ namespace IQCare.Web.Laboratory
             DataTable theDT = dv.ToTable();
             repeaterResult.DataSource = theDT;
             repeaterResult.DataBind();
-            
+
         }
 
         /// <summary>
@@ -765,7 +771,7 @@ namespace IQCare.Web.Laboratory
             }
         }
 
-       
+
 
         private void InjectScript(ref CheckBox cBox, ref TextBox txtBox)
         {
@@ -792,7 +798,7 @@ namespace IQCare.Web.Laboratory
             {
                 ddlControl.Items.Clear();
                 ddlControl.ClearSelection();
-              //  ddlControl.Items.Add(new RadComboBoxItem())
+                //  ddlControl.Items.Add(new RadComboBoxItem())
                 if (config.Count > 1)
                 {
                     ddlControl.Items.Add(new RadComboBoxItem("Select...", "-1"));
@@ -871,7 +877,7 @@ namespace IQCare.Web.Laboratory
                     txtcntrl.Attributes.Add("onkeyup", "chkDecimal('" + txtcntrl.ClientID + "')");
                     txtcntrl.Attributes.Add("data-resultType", "num");
                 }
-                
+
 
             }
         }
@@ -898,24 +904,24 @@ namespace IQCare.Web.Laboratory
 
                 fteLimit.Enabled = fteValue.Enabled =
                     cBox.Enabled = ddlResultUnit.Enabled =
-                      txtResultValue.Enabled = strDataType == "NUMERIC";  
+                      txtResultValue.Enabled = strDataType == "NUMERIC";
                 if (strDataType == "NUMERIC")
                 {
                     txtLimit.Attributes.Add("disabled", "disabled");
-                  
+
                     if (null != cBox)
                     {
                         this.InjectScript(ref cBox, ref txtLimit);
                     }
-                    
+
                     this.PopulateUnits(ref ddlResultUnit, ref txtLimit, int.Parse(strParameterId));
-                
+
                 }
-                
+
                 else if (strDataType == "SELECTLIST")
                 {
                     this.PopulateSelectList(ref ddlResultList, int.Parse(strParameterId));
-                    
+
                 }
             }
         }
@@ -949,7 +955,7 @@ namespace IQCare.Web.Laboratory
                 //}
             }
         }
-        
+
         protected void ddlaborderedbyname_DataBound(object sender, EventArgs e)
         {
 
@@ -974,7 +980,7 @@ namespace IQCare.Web.Laboratory
                 return dt;
             }
         }
-      
+
         private void BindUserDropDown(ref DropDownList dropDownList, String userId = "")
         {
             //DataSet theDS = new DataSet();
@@ -1057,7 +1063,7 @@ namespace IQCare.Web.Laboratory
 
         protected void gridTestRequested_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            
+
         }
     }
 

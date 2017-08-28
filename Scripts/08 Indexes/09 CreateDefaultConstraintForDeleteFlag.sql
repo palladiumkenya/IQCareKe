@@ -1,14 +1,14 @@
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Create_DefaultConstraints]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[Create_DefaultConstraints]
 GO
-Create PROCEDURE [dbo].[Update_SRNOColumn]
+Create PROCEDURE [dbo].[Create_DefaultConstraints]
 AS
 BEGIN
 Declare @DeleteFlags Table(	
 	tablename varchar(50),
 	ColumnName varchar(10)
-);
-Go
+)
+
 Insert Into @DeleteFlags
 SELECT  t.name AS table_name, c.name AS column_name
 FROM sys.tables AS t INNER JOIN sys.columns c ON t.OBJECT_ID = c.OBJECT_ID WHERE c.name LIKE 'DeleteFlag';

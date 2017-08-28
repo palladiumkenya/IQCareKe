@@ -1,3 +1,11 @@
+IF Not  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[dtl_LabOrderTestResult]') AND name = N'NCI_dtl_LabOrderTestResult_DeleteFlag_INC') Begin
+CREATE NONCLUSTERED INDEX [NCI_dtl_LabOrderTestResult_DeleteFlag_INC] ON [dbo].[dtl_LabOrderTestResult]([DeleteFlag] ASC)
+INCLUDE ( 	[LabOrderId],[ParameterId],	[ResultValue]) 
+End
+Go
+If Exists(SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[dtl_LabOrderTestResult]') AND name = N'NCI_TestResult_OrderIdDeleteFlag_INC')
+CREATE NONCLUSTERED INDEX [NCI_TestResult_OrderIdDeleteFlag_INC] ON [dbo].[dtl_LabOrderTestResult](	[LabOrderId] ASC,	[DeleteFlag] ASC) INCLUDE ( [ParameterId],	[ResultValue])
+Go
 IF Not  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[Dtl_PurchaseItem]') AND name = N'NCI_Dtl_PurchaseItem_POIDItemId') Begin
 CREATE NONCLUSTERED INDEX [NCI_Dtl_PurchaseItem_POIDItemId] ON [dbo].[Dtl_PurchaseItem]
 (
@@ -81,6 +89,12 @@ ON [dbo].[dtl_PatientStage] ([WHOStage])
 INCLUDE ([Visit_Pk])
 Go
 
+declare @sql NVARCHAR(1200)
+SELECT @sql = 'ALTER TABLE dbo.dtl_PatientClinicalStatus DROP CONSTRAINT ' + name + ';'
+    FROM sys.key_constraints    WHERE [type] = 'PK'    AND [parent_object_id] = OBJECT_ID('dbo.dtl_PatientClinicalStatus');
+
+EXEC sp_executeSQL @sql;
+Go
 IF  Exists (SELECT * FROM sys.key_constraints WHERE type = 'PK' AND parent_object_id = OBJECT_ID('dbo.dtl_PatientClinicalStatus') AND Name = 'PK_dtl_PatientClinicalStatus')
    ALTER TABLE dbo.dtl_PatientClinicalStatus	DROP CONSTRAINT PK_dtl_PatientClinicalStatus
 GO

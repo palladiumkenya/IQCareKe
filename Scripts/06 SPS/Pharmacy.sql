@@ -1378,7 +1378,7 @@ BEGIN
 	Select @StartDate = dateadd(second, 0, dateadd(day, datediff(day, 0, @PrescriptionDate), 0)) ,	@EndDate = dateadd(second, -1, dateadd(day, datediff(day, 0, @PrescriptionDate)+1, 0))
     -- Insert statements for procedure here
 	Select	PV.Ptn_pk
-		,	PatientFacilityId
+		,	PatientEnrollmentID PatientFacilityId
 		,	ptn_pharmacy_pk	OrderId
 		,	ReportingID		PrescriptionNumber
 		,	FirstName
@@ -1386,14 +1386,15 @@ BEGIN
 		,	LastName
 		,	DOB
 		,	Sex
-		,	OrderedByDate
+		,	convert(varchar(20),OrderedByDate,106) OrderedByDate
 		,	Case
 				When PO.OrderStatus = 1 Then 'New Order'
 				When PO.OrderStatus = 3 Then 'Partial Dispense'
 				Else 'Already Dispensed Order'
 			End [Status]
-		,  PO.CreateDate
-		,	cast(datediff(Hour, PO.CreateDate, getdate()) As varchar) + ' hrs ' + cast(datediff(Minute, PO.CreateDate, getdate()) % 60 As varchar) + ' mins' Duration
+		,  convert(varchar(20),PO.CreateDate,106) CreateDate
+		--,	cast(datediff(Hour, PO.CreateDate, getdate()) As varchar) + ' hrs ' + cast(datediff(Minute, PO.CreateDate, getdate()) % 60 As varchar) + ' mins' Duration
+		, cast(datediff(Minute, PO.CreateDate, getdate()) as varchar) + ' mins' Duration
 		,	(
 			Select UserFirstName + ' ' + UserLastName
 			From mst_User U
@@ -1405,7 +1406,8 @@ BEGIN
 	Where orderstatus = @PrescriptionStatus
 	And PO.DeleteFlag = 0 And PV.DeleteFlag = 0 And OrderedByDate Between @StartDate And @EndDate
 	And PO.LocationId = @LocationId
+	order by Duration desc
 END
 
-GO
 
+GO

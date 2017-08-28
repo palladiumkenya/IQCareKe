@@ -17,6 +17,12 @@ Alter table dbo.AppAdmin Alter Column DBVer  varchar(50) Not Null
 Go
 Alter table dbo.AppAdmin Alter Column RelDate  datetime Not Null
 Go
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[dtl_LabOrderTestResult]') AND name = N'NCI_dtl_LabOrderTestResult_DeleteFlag_INC')
+ DROP INDEX [NCI_dtl_LabOrderTestResult_DeleteFlag_INC] ON [dbo].[dtl_LabOrderTestResult]
+GO
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[dtl_LabOrderTestResult]') AND name = N'NCI_TestResult_OrderIdDeleteFlag_INC')
+DROP INDEX [NCI_TestResult_OrderIdDeleteFlag_INC] ON [dbo].[dtl_LabOrderTestResult]
+Go
 Alter table dtl_LabOrderTestResult drop column HasResult
 Go
 Alter table dtl_LabOrderTestResult alter column ResultValue [decimal](18,2)

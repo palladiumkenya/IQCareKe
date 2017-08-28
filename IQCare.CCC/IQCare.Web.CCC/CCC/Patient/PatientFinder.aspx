@@ -137,31 +137,6 @@
 
                     </table>
                 </div>
-
-<%--        <div class="col-md-12">
-            <table id="example" class="display" cellspacing="0" width="100%">
-        <thead>
-            <tr>
-                <th>First name</th>
-                <th>Last name</th>
-                <th>Position</th>
-                <th>Office</th>
-                <th>Start date</th>
-                <th>Salary</th>
-            </tr>
-        </thead>
-        <tfoot>
-            <tr>
-                <th>First name</th>
-                <th>Last name</th>
-                <th>Position</th>
-                <th>Office</th>
-                <th>Start date</th>
-                <th>Salary</th>
-            </tr>
-        </tfoot>
-    </table>
-        </div>--%>
         <style type="text/css">
             .sorting_1 {
                 display: none;

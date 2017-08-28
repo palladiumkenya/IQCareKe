@@ -138,28 +138,28 @@ GO
 If Not Exists(Select 1 From mst_module where ModuleName ='Billing')
 Begin
 	
-	Insert into mst_module (ModuleID,ModuleName,DeleteFlag,UserID,CreateDate,UpdateDate,Status,UpdateFlag,Identifier,PharmacyFlag ,CanEnroll,DisplayName)
-	values (210,'Billing',0,1,GETDATE(),null,2,0,1,0,0,'BILLING')
+	Insert into mst_module (ModuleID,ModuleName,DeleteFlag,UserID,CreateDate,UpdateDate,Status,UpdateFlag,Identifier,PharmacyFlag ,CanEnroll,DisplayName,ModuleFlag)
+	values (210,'Billing',0,1,GETDATE(),null,2,0,1,0,0,'BILLING',1)
 End
 If Not Exists(Select 1 From mst_module where ModuleName ='Pharmacy')
 Begin
 	
-	Insert into mst_module (ModuleID,ModuleName,DeleteFlag,UserID,CreateDate,UpdateDate,Status,UpdateFlag,Identifier,PharmacyFlag ,CanEnroll,DisplayName)
-	values (204,'Pharmacy',0,1,GETDATE(),null,2,0,1,1,0,'Pharmacy')
+	Insert into mst_module (ModuleID,ModuleName,DeleteFlag,UserID,CreateDate,UpdateDate,Status,UpdateFlag,Identifier,PharmacyFlag ,CanEnroll,DisplayName,ModuleFlag)
+	values (204,'Pharmacy',0,1,GETDATE(),null,2,0,1,1,0,'Pharmacy',1)
 End
 Go
 If Not Exists(Select 1 From mst_module where ModuleName ='Laboratory')
 Begin
 	
-	Insert into mst_module (ModuleID,ModuleName,DeleteFlag,UserID,CreateDate,UpdateDate,Status,UpdateFlag,Identifier,PharmacyFlag ,CanEnroll,DisplayName)
-	values (205,'Laboratory',0,1,GETDATE(),null,2,0,1,0,0,'Laboratory')
+	Insert into mst_module (ModuleID,ModuleName,DeleteFlag,UserID,CreateDate,UpdateDate,Status,UpdateFlag,Identifier,PharmacyFlag ,CanEnroll,DisplayName,ModuleFlag)
+	values (205,'Laboratory',0,1,GETDATE(),null,2,0,1,0,0,'Laboratory',1)
 End
 Go
 If Not Exists(Select 1 From mst_module where ModuleName ='Ward Admission')
 Begin
 	
-	Insert into mst_module (ModuleID,ModuleName,DeleteFlag,UserID,CreateDate,UpdateDate,Status,UpdateFlag,Identifier,PharmacyFlag ,CanEnroll,DisplayName)
-	values (206,'Ward Admission',0,1,GETDATE(),null,2,0,1,0,0,'Ward Admission')
+	Insert into mst_module (ModuleID,ModuleName,DeleteFlag,UserID,CreateDate,UpdateDate,Status,UpdateFlag,Identifier,PharmacyFlag ,CanEnroll,DisplayName,ModuleFlag)
+	values (206,'Ward Admission',0,1,GETDATE(),null,2,0,1,0,0,'Ward Admission',1)
 End
 Go
 SET IDENTITY_INSERT mst_module OFF
