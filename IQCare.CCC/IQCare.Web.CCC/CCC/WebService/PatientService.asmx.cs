@@ -535,6 +535,12 @@ namespace IQCare.Web.CCC.WebService
             return new JavaScriptSerializer().Serialize(arr1);
         }
 
+        [WebMethod]
+        public bool CccNumberExists(string cccNumber)
+        {
+            PatientLinkageManager linkageManager = new PatientLinkageManager();
+            return linkageManager.CccNumberExists(cccNumber);
+        }
         private PatientFamilyDisplay MapMembers(PatientFamilyTesting member)
         {
             ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");

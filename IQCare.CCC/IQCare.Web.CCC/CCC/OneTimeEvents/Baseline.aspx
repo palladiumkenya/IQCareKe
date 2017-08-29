@@ -1700,11 +1700,12 @@
 				$("#<%=BaselineMUAC.ClientID%>").prop('disabled', true);
 			}
 
-			if (pgStatus > 0) {
+			if (pgStatus > 0 && age >= 10) {
 				$("#<%=BaselineMUAC.ClientID%>").prop('disabled', false);
-			} else {
+			} else if(age >= 10) {
 				 $("#<%=BaselineMUAC.ClientID%>").prop('disabled', true);
 			}
+
 			/* when checked */
 			// $("#lblwhostage").on('checked.fu.checkbox',function () { whostage = true; });
 			// $("#lblCD4Count").on('checked.fu.checkbox', function () { cD4Count = true; });
