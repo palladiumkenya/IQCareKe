@@ -206,10 +206,6 @@ GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_deletePatientEncounterAdverseEvents]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[sp_deletePatientEncounterAdverseEvents]
 GO
-/****** Object:  StoredProcedure [dbo].[SP_Bluecard_ToGreenCard]    Script Date: 5/9/2017 3:16:05 PM ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SP_Bluecard_ToGreenCard]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [dbo].[SP_Bluecard_ToGreenCard]
-GO
 /****** Object:  StoredProcedure [dbo].[Pr_SF_GetPatientSearchresults]    Script Date: 5/9/2017 3:16:05 PM ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Pr_SF_GetPatientSearchresults]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[Pr_SF_GetPatientSearchresults]

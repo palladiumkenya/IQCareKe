@@ -1,3 +1,600 @@
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_SCM_GetBatchSummary_Futures]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[pr_SCM_GetBatchSummary_Futures]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[pr_SCM_GetBatchSummary_Futures]                            
+@StoreId int=NULL,                        
+@ItemId int=NULL,                        
+@FromDate datetime=NULL,                        
+@ToDate datetime=NULL                        
+                            
+AS                                      
+BEGIN                                   
+                
+--0 For use bind item data by storeID                   
+           
+ set @Todate = dateadd(dd,1,@Todate)          
+           
+ Select ls.StoreId[StoreId], md.Drug_pk, md.DrugName[DrugName]                                  
+ from lnk_storeitem ls inner join mst_drug md on ls.ItemId=md.Drug_pk                           
+ inner join dtl_StockTransaction dt on md.Drug_pk=dt.ItemId                                     
+ where ls.StoreId=@StoreId group by ls.StoreId, md.Drug_pk, md.DrugName order by md.DrugName asc            
+    
+-- 1 use to get report details behalf of store when item is not selected           
+Select  VWBS.ItemId, VWBS.ItemName[Item Description], VWBS.DispensingUnit[Unit],VWBS.BatchId, mb.Name[Batch Name],     
+replace(convert(varchar,isnull(VWBS.ExpiryDate,''),106),' ','-')[Expiry Date],    
+Case when VWBS.OpeningStock <0 then 0 else VWBS.OpeningStock end[Opening Stock],VWBS.QtyRecieved [Recieved Quantity],
+VWBS.QtyDispensed[Dispensed Quantity], VWBS.ClosingQty[Closing Quantity]     
+from(           
+select Drg.Drug_Pk[ItemId],Drg.DrugName[ItemName],Unit.Name[DispensingUnit],    
+r.BatchId, r.ExpiryDate, Sum(r.OpeningQuantity)[OpeningStock],            
+sum(r.RecQty)[QtyRecieved], abs(Sum(r.IssQty))[QtyDispensed],            
+(isnull(sum(r.OpeningQuantity),0)+isnull(Sum(r.RecQty),0))-isnull(abs(Sum(r.IssQty)),0)[ClosingQty],            
+(Select Id from Mst_Store where Id = @StoreId)[StoreId],            
+(Select Name from Mst_Store where Id = @StoreId)[StoreName]            
+from Mst_Drug Drg Inner Join Mst_DispensingUnit Unit on Drg.DispensingUnit = Unit.Id             
+Left Outer Join             
+(select tmp.drug_pk,tmp.drugname,tmp.dispensingunit, tmp.BatchId, tmp.ExpiryDate,     
+ sum(tmp.openingquantity)[OpeningQuantity],''[RecQty], ''[IssQty] from           
+ (select a.Drug_Pk,a.DrugName,c.Name [DispensingUnit],b.BatchId, b.ExpiryDate, sum(b.Quantity)[OpeningQuantity]            
+ from mst_drug a Left Outer join dtl_stocktransaction b on a.Drug_Pk = b.ItemId            
+ Inner Join Mst_DispensingUnit c on a.DispensingUnit = c.Id           
+ where b.storeid = @StoreId and b.ExpiryDate>=@FromDate and           
+ b.transactiondate>=@FromDate and b.transactiondate<@ToDate  and openingstock = 1            
+ group by a.drug_pk,a.drugname,c.name,b.BatchId, b.ExpiryDate          
+ union          
+ select a.Drug_Pk,a.DrugName,c.Name [DispensingUnit],d.BatchId, d.ExpiryDate,           
+ nullif(dbo.fn_GetItemOpeningStock(a.Drug_pk,@StoreId,@FromDate),0)[OpeningQuanitity]          
+ from mst_drug a Inner Join Mst_DispensingUnit c on a.DispensingUnit = c.Id   
+ inner join dtl_stocktransaction d on a.Drug_Pk = d.ItemId and d.StoreId=@StoreId and d.ExpiryDate >= GetDate()  
+ inner join mst_batch e on d.BatchId=e.Id   
+ group by a.drug_pk,a.drugname,c.name,d.BatchId, d.ExpiryDate         
+ union          
+ select a.Drug_Pk,a.DrugName,c.Name [DispensingUnit], b.BatchId, b.ExpiryDate,sum(b.Quantity)[OpeningQuantity]              
+ from mst_drug a Left Outer join dtl_stocktransaction b on a.Drug_Pk = b.ItemId              
+ Inner Join Mst_DispensingUnit c on a.DispensingUnit = c.Id              
+ where b.storeid = @StoreId and b.ExpiryDate>=@FromDate and             
+ b.transactiondate>=@FromDate and b.transactiondate<@ToDate  and POID IS NULL and          
+ GRNId IS NULL and DisposeId IS NULL and Ptn_Pharmacy_Pk IS NULL and PtnPk IS NULL           
+ and OpeningStock IS NULL               
+ group by a.drug_pk,a.drugname,c.name,b.BatchId, b.ExpiryDate          
+)tmp group by tmp.drug_pk,tmp.drugname,tmp.dispensingunit,tmp.BatchId, tmp.ExpiryDate    
+UNION    
+select a.Drug_Pk,a.DrugName,c.Name [DispensingUnit], b.BatchId, b.ExpiryDate, ''[OpeningQuantity], Sum(b.Quantity)[RecQty], ''[IssQty]      
+from mst_drug a Inner join dtl_stocktransaction b on a.Drug_Pk = b.ItemId            
+Inner Join Mst_DispensingUnit c on a.DispensingUnit = c.Id          
+Inner Join Mst_Batch mb on b.BatchId=mb.Id           
+where b.storeid = @StoreId and (b.GrnId is not null or b.GrnId > 0)           
+and b.ExpiryDate>=@FromDate and b.transactiondate>=@FromDate and b.transactiondate<@ToDate            
+group by a.drug_pk,a.drugname,c.name, b.BatchId, b.ExpiryDate     
+UNION    
+select a.Drug_Pk,a.DrugName,c.Name [DispensingUnit],b.BatchId, b.ExpiryDate,''[OpeningQuantity], ''[RecQty], Sum(b.Quantity)[IssQty]              
+from mst_drug a inner join dtl_stocktransaction b on a.Drug_Pk = b.ItemId            
+Inner Join Mst_DispensingUnit c on a.DispensingUnit = c.Id            
+Inner Join Mst_Batch mb on b.BatchId=mb.Id           
+where b.storeid = @StoreId and b.Ptn_Pharmacy_pk > 0             
+and b.ExpiryDate>=@FromDate and b.transactiondate>=@FromDate and b.transactiondate<@ToDate            
+group by b.StoreId, a.drug_pk,a.drugname,c.name, b.BatchId, b.ExpiryDate)r on Drg.Drug_Pk = r.Drug_Pk     
+where (r.OpeningQuantity is not null or r.RecQty is not null or r.IssQty is not null)   
+group by Drg.Drug_Pk,Drg.DrugName,Unit.Name,r.BatchId, r.ExpiryDate   
+)VWBS inner join           
+dtl_stocktransaction ds on VWBS.StoreId=ds.StoreId and VWBS.ItemId=ds.ItemId and VWBS.BatchId=ds.BatchId    
+and VWBS.ExpiryDate=ds.ExpiryDate      
+inner join mst_batch mb on ds.BatchId=mb.Id   
+group by VWBS.ItemId, VWBS.ItemName, VWBS.DispensingUnit,  
+VWBS.OpeningStock,     
+VWBS.QtyRecieved,VWBS.QtyDispensed, VWBS.ClosingQty,  
+VWBS.BatchId, mb.Name, VWBS.ExpiryDate     
+having VWBS.OpeningStock> 0 and VWBS.QtyRecieved>0 or VWBS.QtyDispensed>0 or VWBS.ClosingQty>0     
+  
+-- 2 for behalf of store and ITem      
+Select  VWBS.ItemId, VWBS.ItemName[Item Description], VWBS.DispensingUnit[Unit],VWBS.BatchId, mb.Name[Batch Name],     
+replace(convert(varchar,isnull(VWBS.ExpiryDate,''),106),' ','-')[Expiry Date],    
+VWBS.OpeningStock [Opening Stock],
+--Case when VWBS.OpeningStock < 0 then 0 else VWBS.OpeningStock end[Opening Stock],
+VWBS.QtyRecieved [Recieved Quantity],
+VWBS.QtyDispensed[Dispensed Quantity], VWBS.ClosingQty[Closing Quantity]     
+from(           
+select Drg.Drug_Pk[ItemId],Drg.DrugName[ItemName],Unit.Name[DispensingUnit],    
+r.BatchId, r.ExpiryDate, Sum(r.OpeningQuantity)[OpeningStock],            
+sum(r.RecQty)[QtyRecieved], abs(Sum(r.IssQty))[QtyDispensed],            
+(isnull(sum(r.OpeningQuantity),0)+isnull(Sum(r.RecQty),0))-isnull(abs(Sum(r.IssQty)),0)[ClosingQty],            
+(Select Id from Mst_Store where Id = @StoreId)[StoreId],            
+(Select Name from Mst_Store where Id = @StoreId)[StoreName]            
+from Mst_Drug Drg Inner Join Mst_DispensingUnit Unit on Drg.DispensingUnit = Unit.Id             
+Left Outer Join             
+(select tmp.drug_pk,tmp.drugname,tmp.dispensingunit, tmp.BatchId, tmp.ExpiryDate,     
+ sum(tmp.openingquantity)[OpeningQuantity],''[RecQty], ''[IssQty] from           
+ (select a.Drug_Pk,a.DrugName,c.Name [DispensingUnit],b.BatchId, b.ExpiryDate, sum(b.Quantity)[OpeningQuantity]            
+ from mst_drug a Left Outer join dtl_stocktransaction b on a.Drug_Pk = b.ItemId            
+ Inner Join Mst_DispensingUnit c on a.DispensingUnit = c.Id           
+ where b.storeid = @StoreId and b.ExpiryDate>=@FromDate and           
+ b.transactiondate>=@FromDate and transactiondate<@ToDate  and openingstock = 1            
+ group by a.drug_pk,a.drugname,c.name,b.BatchId, b.ExpiryDate          
+ union          
+ select a.Drug_Pk,a.DrugName,c.Name [DispensingUnit],''BatchId, ''ExpiryDate,           
+ nullif(dbo.fn_GetItemOpeningStock(a.Drug_pk,@StoreId,@FromDate),0)[OpeningQuanitity]          
+ from mst_drug a Inner Join Mst_DispensingUnit c on a.DispensingUnit = c.Id        
+ union          
+ select a.Drug_Pk,a.DrugName,c.Name [DispensingUnit], b.BatchId, b.ExpiryDate,sum(b.Quantity)[OpeningQuantity]              
+ from mst_drug a Left Outer join dtl_stocktransaction b on a.Drug_Pk = b.ItemId              
+ Inner Join Mst_DispensingUnit c on a.DispensingUnit = c.Id              
+ where b.storeid = @StoreId and b.ExpiryDate>=@FromDate and             
+ transactiondate>=@FromDate and transactiondate<@ToDate  and POID IS NULL and          
+ GRNId IS NULL and DisposeId IS NULL and Ptn_Pharmacy_Pk IS NULL and PtnPk IS NULL           
+ and OpeningStock IS NULL               
+ group by a.drug_pk,a.drugname,c.name,b.BatchId, b.ExpiryDate          
+)tmp group by tmp.drug_pk,tmp.drugname,tmp.dispensingunit,tmp.BatchId, tmp.ExpiryDate    
+UNION    
+select a.Drug_Pk,a.DrugName,c.Name [DispensingUnit], b.BatchId, b.ExpiryDate, ''[OpeningQuantity], Sum(b.Quantity)[RecQty], ''[IssQty]      
+from mst_drug a Inner join dtl_stocktransaction b on a.Drug_Pk = b.ItemId            
+Inner Join Mst_DispensingUnit c on a.DispensingUnit = c.Id          
+Inner Join Mst_Batch mb on b.BatchId=mb.Id           
+where b.storeid = @StoreId and (b.GrnId is not null or b.GrnId > 0)             
+and b.ExpiryDate>=@FromDate and b.transactiondate>=@FromDate and b.transactiondate<@ToDate            
+group by a.drug_pk,a.drugname,c.name, b.BatchId, b.ExpiryDate    
+UNION    
+select a.Drug_Pk,a.DrugName,c.Name [DispensingUnit],b.BatchId, b.ExpiryDate,''[OpeningQuantity], ''[RecQty], Sum(b.Quantity)[IssQty]              
+from mst_drug a inner join dtl_stocktransaction b on a.Drug_Pk = b.ItemId            
+Inner Join Mst_DispensingUnit c on a.DispensingUnit = c.Id            
+Inner Join Mst_Batch mb on b.BatchId=mb.Id           
+where b.storeid = @StoreId and b.Ptn_Pharmacy_pk > 0             
+and b.ExpiryDate>=@FromDate and b.transactiondate>=@FromDate and b.transactiondate<@ToDate            
+group by b.StoreId, a.drug_pk,a.drugname,c.name, b.BatchId, b.ExpiryDate)r on Drg.Drug_Pk = r.Drug_Pk     
+where (r.OpeningQuantity is not null or r.RecQty is not null or r.IssQty is not null)    
+group by Drg.Drug_Pk,Drg.DrugName,Unit.Name,r.BatchId, r.ExpiryDate     
+)VWBS inner join           
+dtl_stocktransaction ds on VWBS.StoreId=ds.StoreId and VWBS.ItemId=ds.ItemId and VWBS.BatchId=ds.BatchId    
+and VWBS.ExpiryDate=ds.ExpiryDate    
+inner join mst_batch mb on ds.BatchId=mb.Id  where VWBS.ItemId=@ItemId    
+group by VWBS.ItemId, VWBS.ItemName, VWBS.DispensingUnit,VWBS.OpeningStock,     
+VWBS.QtyRecieved,VWBS.QtyDispensed, VWBS.ClosingQty,VWBS.BatchId, mb.Name, VWBS.ExpiryDate     
+    
+END
+Go
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SCM_SavePurchaseOrderItem_Combined]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[SCM_SavePurchaseOrderItem_Combined]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE Procedure [dbo].[SCM_SavePurchaseOrderItem_Combined]  
+(    
+	@POId  int = null,      
+	@ItemId int = null,  
+	@ItemTypeId int =null,    
+	@OrderedQuantity int = null, 
+	@IssuedQuantity int = null,  
+	@IssuedQuantityDU int = null,    
+	@PurchasePrice decimal(9,2)= 0.0,      	 
+	@UserId int = null,  
+	@BatchId int = null,  
+	@AvaliableQty int = null,  
+	@ExpiryDate datetime = null,
+	@UnitQuantity int = null,
+	@SupplierId int= null,
+	@SourceStoreID int = null,
+	@DestinationStoreID int = null,
+	@BatchName varchar(50) = null,
+	@IsPOorIST int = null  -- 1 for Purchase order and 2 for Inter store transfer 
+)
+as       
+begin
+
+	if(@BatchName IS NOT null)
+	BEGIN
+		declare @tempBatchId int, @tempbatchname varchar(100), @tempExpiryDate datetime, @Indexofdelimeter int,	@maxbatchSrno int;
+                         
+		Select @tempBatchId = ID From Mst_Batch	Where Name = @BatchName	And ItemID = @ItemId;
+	
+		If(@tempBatchId Is Null) 
+		Begin
+			Select @maxbatchSrno = Max(SRNO)	From Mst_Batch;
+			Insert Into Mst_Batch (name, UserId, CreateDate, SRNO, ItemID, ExpiryDate)
+			Values (@BatchName, @UserId, Getdate(), (@maxbatchSrno + 1), @ItemId, @ExpiryDate);
+			Select @tempBatchId = SCOPE_IDENTITY();
+		End
+
+		SET @BatchId = @tempBatchId
+	END
+
+
+
+
+	declare @rowCount int;
+	Insert Into Dtl_PurchaseItem (POId,ItemId,Quantity,IssuedQuantity,PurchasePrice,UserId,CreateDate,BatchID,AvaliableQty,ExpiryDate,UnitQuantity)
+	Values (@POId,@ItemId,@OrderedQuantity,@IssuedQuantity,@PurchasePrice,@UserId,getdate(),@BatchID,@AvaliableQty,@ExpiryDate,@UnitQuantity);
+
+
+	Declare @tempQtyPerPurchaseUnit int, @tempTotalRecievedQuantity int, @transactionType nvarchar(50)
+	Select	@tempQtyPerPurchaseUnit = QtyPerPurchaseUnit From Mst_Drug Where Drug_pk = @ItemId;
+
+	Select @transactionType =  Case 
+			When @IsPOorIST = 2 Then 'Inter store transfer' 
+			Else  'Purchase Order' End;
+
+	--Select @tempTotalRecievedQuantity =  Case 
+	--		When @IsPOorIST = 2 Then @IssuedQuantity 
+	--		Else  @IssuedQuantity * @tempQtyPerPurchaseUnit End; 
+	--Select @tempTotalRecievedQuantity =  @IssuedQuantity * @tempQtyPerPurchaseUnit; 
+
+	Insert Into dtl_stocktransaction (ItemId,BatchId,POId,StoreId,TransactionDate,Quantity,ExpiryDate,UserId,CreateDate,transactionType)
+	Values (@ItemId,@BatchID,@POId,@DestinationStoreID,Getdate(),@IssuedQuantityDU,@ExpiryDate,@UserId,Getdate(),@transactionType);
+
+	If (@IsPOorIST = 2) 
+	Begin
+		Insert Into dtl_stocktransaction (ItemId,BatchId,POId,StoreId,TransactionDate,Quantity,ExpiryDate,UserId,CreateDate,transactionType)
+		Values (@ItemId,@BatchID,@POId,@SourceStoreID,Getdate(),-@IssuedQuantityDU,@ExpiryDate,@UserId,Getdate(),@transactionType);
+	end
+
+
+
+	If (@SupplierId Is Not Null) 
+	Begin
+		Select @rowCount = Count(*) From  Lnk_SupplierItem Where SupplierId = @SupplierId And ItemId=@ItemId And ItemTypeId=@ItemTypeId;
+		If(@rowCount = 0) 
+		Begin
+			Insert Into Lnk_SupplierItem(SupplierId,ItemId, ItemTypeId,UserId,CreateDate) Values(@SupplierId,@ItemId,@ItemTypeId,@UserId,getdate());
+		End
+	End
+
+	declare @TotalRecievedQuantity int,
+			@TotalQuantity int,
+			@POstatus int;
+
+	Select @TotalRecievedQuantity = Sum(a.IssuedQuantity)
+	From Dtl_PurchaseItem a
+	Inner Join
+		ord_PurchaseOrder g On g.Poid = a.POId
+	Where a.POId = @POId;
+
+	Select @TotalQuantity = Sum(Quantity)	From dtl_PurchaseItem	Where POId = @POId;
+
+	Update ord_PurchaseOrder Set
+		Status = Case 
+						When (@TotalRecievedQuantity = @TotalQuantity) Then 3 
+						When (@TotalRecievedQuantity < @TotalQuantity) Then 4
+						Else [Status] End --@POstatus
+	Where POId = @POId;
+End
+
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_SCM_SavePharmacyReturnDetail_Futures]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[pr_SCM_SavePharmacyReturnDetail_Futures]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[pr_SCM_SavePharmacyReturnDetail_Futures]        
+@Ptn_Pk int,        
+@StoreId int,        
+@VisitId int,        
+@Ptn_Pharmacy_Pk int,        
+@Drug_Pk int,        
+@StrengthId int,        
+@FrequencyId int,        
+@ReturnQuantity int,        
+@ReturnReason int,      
+@Prophylaxis int,        
+@BatchId int,        
+@CostPrice decimal(18,2),        
+@Margin decimal(18,2),        
+@SellingPrice decimal(18,2),        
+@BillAmount decimal(18,2),        
+@ExpiryDate datetime,        
+@DispensingUnit int,        
+@ReturnDate datetime,        
+@LocationId int,        
+@UserId int        
+as        
+        
+begin        
+      
+  declare @IssueQty int      
+  
+  if not exists(select Ptn_Pharmacy_Pk from dtl_patientpharmacyReturn where Ptn_Pharmacy_Pk = @Ptn_Pharmacy_Pk and Drug_pk = @Drug_Pk  
+  and batchId = @BatchId and ExpiryDate = @ExpiryDate)  
+    begin   
+       insert into dbo.Dtl_PatientPharmacyReturn(Ptn_Pharmacy_Pk, Drug_Pk,StrengthId,FrequencyId,BatchId,ReturnQty,      
+    ReturnReason,UserId,ExpiryDate,CreateDate)      
+    values(@Ptn_Pharmacy_Pk,@Drug_pk,@StrengthId,@FrequencyId,@BatchId,@ReturnQuantity,@ReturnReason,@UserId,@ExpiryDate,getdate())      
+    end  
+  else  
+    begin  
+        Update dbo.Dtl_PatientPharmacyReturn set ReturnQty = @ReturnQuantity,UpdateDate=getdate(),UserId=@UserId where 
+        Ptn_Pharmacy_Pk = @Ptn_Pharmacy_Pk and Drug_pk = @Drug_Pk  
+        and batchId = @BatchId  
+    end  
+      
+  select @IssueQty = DispensedQuantity from dbo.Dtl_PatientPharmacyOrder where Ptn_Pharmacy_Pk = @Ptn_Pharmacy_Pk      
+  and Drug_Pk = @Drug_Pk and BatchNo = @BatchId and ExpiryDate = @ExpiryDate      
+           
+  Update dbo.Dtl_PatientPharmacyOrder set DispensedQuantity = (@IssueQty-@ReturnQuantity)        
+  where Ptn_Pharmacy_Pk = @Ptn_Pharmacy_Pk and Drug_Pk = @Drug_Pk and BatchNo = @BatchId and ExpiryDate = @ExpiryDate      
+        
+  Insert into dbo.Dtl_PatientBillTransaction(Ptn_Pk,VisitId,LocationId,TransactionDate,LabId,PharmacyId,ItemId,BatchId,        
+  DispensingUnit,Quantity,SellingPrice,CostPrice,Margin,ConsultancyFee,AdminFee,BillAmount,DoctorId,UserId,CreateDate)        
+  Values(@Ptn_Pk, @VisitId,@LocationId,@ReturnDate,0,@Ptn_Pharmacy_pk,@Drug_Pk,@BatchId,@DispensingUnit,        
+  ('-'+convert(varchar,@ReturnQuantity)),@SellingPrice,@CostPrice,@Margin,0,0,@BillAmount,0,@UserId,getdate())        
+        
+  Insert into dbo.Dtl_StockTransaction(ItemId,BatchId,Ptn_Pharmacy_Pk,PtnPk,StoreId,TransactionDate,Quantity,ExpiryDate,PurchasePrice,        
+  SellingPrice,Margin,UserId,CreateDate,transactionType)        
+  Values(@Drug_Pk,@BatchId,@Ptn_Pharmacy_Pk,@Ptn_Pk,@StoreId,@ReturnDate,@ReturnQuantity,@ExpiryDate,@CostPrice,@SellingPrice,        
+  @Margin,@UserId,getdate(),'Returns')        
+        
+end
+
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_SCM_SaveDisposeItems_Futures]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[pr_SCM_SaveDisposeItems_Futures]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[pr_SCM_SaveDisposeItems_Futures]                                 
+@LocationId int=NULL,                        
+@StoreId int=NULL,      
+@DisposeDate datetime=NULL,        
+@DisposePreparedBy int=NULL,  
+@DisposeAuthorisedBy int=NULL,     
+@UserId int=NULL,   
+@ItemId int=NULL,  
+@DisposeId int=NULL,  
+@BatchId int=NULL,  
+@Quantity int=NULL,  
+@ExpiryDate datetime=NULL,  
+@TransactionDate datetime=NULL  
+                                
+AS                                
+BEGIN           
+  
+if not exists(Select * from Ord_DisposeStock where DisposeId=@DisposeId)  
+ Begin                                               
+  insert into Ord_DisposeStock(LocationId, StoreId, DisposeDate, DisposePreparedBy, DisposeAuthorisedBy, UserId,CreateDate)                                 
+  values(@LocationId,@StoreId,getdate(), @UserId, @UserId, @UserId,getdate())       
+  Select ident_current('Ord_DisposeStock')[DisposeId];                           
+ End  
+if (@DisposeId > 0)   
+ Begin                           
+  insert into Dtl_StockTransaction(ItemId, DisposeId,BatchId, StoreId, Quantity, ExpiryDate, TransactionDate, UserID,CreateDate,transactionType)                                 
+  values(@ItemId,@DisposeId, @BatchId,@StoreId,@Quantity, @ExpiryDate, getdate(),@UserId,getdate(),'Dispose')                                
+    End                                         
+END
+
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_SCM_SaveUpdateItemMaster_Futures]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[pr_SCM_SaveUpdateItemMaster_Futures]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[pr_SCM_SaveUpdateItemMaster_Futures]  
+@Drug_Pk int,  
+@ItemCode varchar(50),  
+@FDACode varchar(50),  
+@DispensingUnit int,  
+@PurchaseUnit int,  
+@PurchaseUnitQty int,  
+@PurchaseUnitPrice decimal(18,2),  
+@Manufacturer int,  
+@DispensingUnitPrice decimal(18,2),  
+@DispensingMargin decimal(18,2),  
+@SellingPrice decimal(18,2),  
+@EffectiveDate datetime,  
+@Status int,  
+@MinStock int,  
+@MaxStock int,
+@UserId int  
+  
+as  
+  
+begin  
+   Update mst_itemmaster set itemcode = @ItemCode,FDACode = @FDACode,DispensingUnit = @DispensingUnit, MaxStock=@MaxStock,MinStock = @MinStock,  
+   PurchaseUnit=@PurchaseUnit,QtyPerPurchaseUnit=@PurchaseUnitQty,PurchaseUnitPrice=@PurchaseUnitPrice,Manufacturer=@Manufacturer,  
+   DispensingUnitPrice = @DispensingUnitPrice,DispensingMargin = @DispensingMargin,  
+   DeleteFlag = @Status, CreatedBy = @UserId, UpdateDate = getdate() where Item_Pk = @Drug_Pk  
+
+end
+
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_SCM_SetPharmacyRefillAppointment]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[pr_SCM_SetPharmacyRefillAppointment]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE procedure [dbo].[pr_SCM_SetPharmacyRefillAppointment] 
+	@PtnPk int,
+	@LocationId int,
+	@VisitPk int,
+	@AppDate datetime ,
+	@UserId int,
+	@EmpID int
+As                       
+Begin 
+	declare @AppReason int,@ModuleId int;
+
+	SELECT @AppReason = id
+	FROM mst_decode
+	WHERE name = 'Pharmacy Refill'
+
+
+	Select @ModuleId = ModuleId From mst_module Where ModuleName='Pharmacy'
+
+	IF (@AppDate IS NOT NULL AND @AppDate > GETDATE() And @AppReason Is Not Null) BEGIN
+		INSERT INTO dtl_patientappointment (
+			ptn_pk
+			,LocationId
+			,Visit_pk
+			,AppDate
+			,AppReason
+			,AppStatus
+			,EmployeeId
+			,UserId
+			,CreateDate
+			,ModuleID
+			,AppNote)
+		VALUES (
+			@PtnPk
+			,@LocationId
+			,@VisitPk
+			,@AppDate
+			,@AppReason
+			,12
+			,@EmpID
+			,@UserId
+			,GETDATE()
+			,@ModuleId
+			,NULL);
+	END
+END
+
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_SCM_DeletePurchaseOrderItem_Futures]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[pr_SCM_DeletePurchaseOrderItem_Futures]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE Procedure [dbo].[pr_SCM_DeletePurchaseOrderItem_Futures]    
+@POId  int    
+as     
+begin     
+delete dtl_purchaseItem where POId =  @POId  
+delete dtl_StockTransaction where POId =  @POId  
+
+end
+
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_SCM_GetPharmacyDetailsByDispenced_Futures]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[pr_SCM_GetPharmacyDetailsByDispenced_Futures]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE Procedure [dbo].[pr_SCM_GetPharmacyDetailsByDispenced_Futures]
+@Ptn_Pharmacy_Pk int                    
+                    
+as                    
+                    
+begin                    
+                    
+ select 
+ case when a.Weight = 0 then isnull(c.weight,0) else isnull(a.weight,0) end as [Weight],
+ case when a.Height = 0 then isnull(c.height,0) else isnull(a.height,0) end as [Height],
+ a.ProgID,a.PharmacyPeriodTaken,a.ProviderID,
+a.RegimenLine ,b.AppDate,isnull(b.AppReason,0)AppReason
+from ord_PatientPharmacyOrder a left outer join  dtl_PatientAppointment b on a.visitid=b.Visit_pk 
+left outer join dtl_patientvitals c on a.visitid = c.visit_pk
+where a.ptn_pharmacy_pk=@Ptn_Pharmacy_Pk                   
+end
+
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_SCM_BINCard_Futures]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[pr_SCM_BINCard_Futures]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[pr_SCM_BINCard_Futures]                                                        
+@StoreId int,                                                    
+@ItemId int,                                                    
+@FromDate datetime,                                                    
+@ToDate datetime,
+@LocationId int                                                    
+                                                        
+AS                                                                  
+BEGIN                                                               
+--0    
+select dr.drugid,dr.drugname,du.name[disUnit] from mst_drug dr inner join mst_dispensingunit du
+on dr.dispensingunit = du.id where dr.drug_pk=@ItemId
+--1
+select name[storeName],@FromDate[dateFrom],@ToDate[dateTo]  from mst_store where id = @StoreId
+--2
+--select dtl.transactiondate,usr.username,
+--case when dtl.quantity >=0 then dtl.quantity else 0 end [Receipts],
+--case when dtl.quantity <0 then dtl.quantity else 0 end [Issues],
+--bch.name,dtl.expirydate 
+--from dtl_stocktransaction dtl inner join mst_user usr
+--on dtl.userid = usr.userid left join mst_batch bch on dtl.batchid = bch.id
+--where dtl.itemid = @ItemId and dtl.transactiondate >= @FromDate and dtl.transactiondate <= @ToDate
+
+DECLARE @tempTbl TABLE 
+([Date] datetime,VoucherNo varchar(50),username varchar(50),Receipts int,Issues int,BatchNo varchar(50),ExpiryDate datetime, Balance int)
+ 
+DECLARE @transactiodate datetime,@voucherNo varchar(50),@username varchar(50),@receipts int,@issues int,@batch varchar(50),@expirydate datetime,
+@balance int, @balanceBF int
+ 
+SET @balance = 0
+ 
+DECLARE rt_cursor CURSOR
+FOR
+--------------------------balance b/f----------------------
+select @FromDate transactiondate,'Balance b/f' OrderNo,'' username,
+0 [Receipts], 0 [Issues], '' name, null expirydate, isnull(sum(quantity),0) balanceBF 
+from dtl_stocktransaction dtl
+where dtl.itemid = @ItemId and dtl.storeid = @StoreId and dtl.TransactionDate < @FromDate
+--order by dtl.transactiondate
+UNION
+-------------------------------------------------
+select dtl.transactiondate,ord.OrderNo,usr.username,
+case when dtl.quantity >=0 then dtl.quantity else 0 end [Receipts],
+case when dtl.quantity <0 then dtl.quantity else 0 end [Issues],
+bch.name,dtl.expirydate, 0 balanceBF 
+from dtl_stocktransaction dtl inner join mst_user usr on dtl.userid = usr.userid 
+inner join mst_store store on dtl.storeid = store.id
+inner join mst_batch bch on dtl.batchid = bch.id
+left join ord_purchaseorder ord on dtl.POId = ord.POId
+where dtl.itemid = @ItemId and dtl.storeid = @StoreId 
+and CONVERT(datetime,CONVERT(VARCHAR(10),dtl.transactiondate,10)) >= CONVERT(datetime,CONVERT(VARCHAR(10),@FromDate,10)) 
+and CONVERT(datetime,CONVERT(VARCHAR(10),dtl.transactiondate,10)) <= CONVERT(datetime,CONVERT(VARCHAR(10),@ToDate,10))
+--order by dtl.transactiondate asc
+ 
+OPEN rt_cursor
+ 
+FETCH NEXT FROM rt_cursor INTO @transactiodate,@voucherNo,@username,@receipts,@issues,@batch,@expirydate,@balanceBF
+ 
+WHILE @@FETCH_STATUS = 0
+ BEGIN
+ SET @balance = @balance + @receipts + @issues + @balanceBF
+ INSERT @tempTbl VALUES (@transactiodate,@voucherNo,@username,@receipts,@issues,@batch,@expirydate,@balance)
+ FETCH NEXT FROM rt_cursor INTO @transactiodate,@voucherNo,@username,@receipts,@issues,@batch,@expirydate,@balanceBF
+ END
+ 
+CLOSE rt_cursor
+DEALLOCATE rt_cursor
+ 
+SELECT * FROM @tempTbl order by [Date] asc
+
+-----3
+select facilitylogo from mst_facility where facilityid = @LocationId                                           
+                        
+                                     
+END
+
+GO
+
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SCM_StockSummaryLineList]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[SCM_StockSummaryLineList]
 GO
@@ -42,7 +639,7 @@ END
 
 GO
 
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SCM_StockSummaryLineList]') AND type in (N'P', N'PC'))
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_SCM_SavePurchaseOrderItem_Futures]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[pr_SCM_SavePurchaseOrderItem_Futures]
 GO
 
@@ -187,13 +784,7 @@ End
 
 GO
 
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_SCM_GetPharmacyOrderDetail_Futures]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [dbo].[pr_SCM_GetPharmacyOrderDetail_Futures]
-GO
-/****** Object:  StoredProcedure [dbo].[pr_SCM_SavePharmacyDispenseOrderDetail_Futures]    Script Date: 5/12/2016 5:15:04 PM ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_SCM_SavePharmacyDispenseOrderDetail_Futures]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [dbo].[pr_SCM_SavePharmacyDispenseOrderDetail_Futures]
-GO
+
 /****** Object:  StoredProcedure [dbo].[Pr_SCM_GetPurchaseDetailsForGRN_Futures]    Script Date: 04/02/2015 09:17:30 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Pr_SCM_GetPurchaseDetailsForGRN_Futures]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[Pr_SCM_GetPurchaseDetailsForGRN_Futures]
@@ -492,8 +1083,6 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-
-
 CREATE Procedure [dbo].[Pr_SCM_GetPharmacyDispenseMasters_Futures]                  
 @Ptn_Pk int,                  
 @StoreId int                  
@@ -607,7 +1196,7 @@ Left Outer Join (
 	And (M.DeleteFlag Is Not Null Or M.DeleteFlag = 0)
 	And RegimenType Is Not Null
 	And O.DispensedByDate Is Not Null
-	Order By 1
+	order by O.DispensedByDate desc
 ) CR On CR.Ptn_Pk = A.Ptn_pk
 Where (a.DeleteFlag = 0 Or a.DeleteFlag Is Null)
 And (a.Ptn_pk = @Ptn_Pk)
@@ -641,6 +1230,7 @@ As (
 			,(convert(varchar, a.Drug_Pk) + '-' + convert(varchar, c.Id) + '-' + convert(varchar(11), isnull(b.ExpiryDate, ''), 113))	[DisplayItemId]
 			,dbo.fn_GetDrugTypeId_futures(a.Drug_Pk)																					[DrugTypeId]
 			,isnull(dbo.fn_Drug_Abbrev_Constella(a.Drug_Pk), '')																		[GenericAbb]
+			,isnull(c.Name, '') + '(' + convert(varchar(20), dbo.fn_GetItemStock_Futures(a.Drug_Pk, c.Id, b.ExpiryDate, @StoreId)) + ')' + '~' + isnull(convert(varchar(20), b.ExpiryDate, 106), '') [BatchQty]
 	From dbo.Mst_Drug a
 	Left Outer Join dbo.Dtl_StockTransaction b On a.Drug_Pk = b.ItemId
 	Inner Join dbo.Lnk_DrugStrength s On s.DrugId = a.Drug_Pk
@@ -659,9 +1249,7 @@ As (
 	And  (a.DeleteFlag Is Null OR a.DeleteFlag = 0 )
 	Group By a.Drug_Pk, a.DrugName, c.Name, c.Id, d.Name, d.Id, a.SellingUnitPrice, a.ItemTypeID, b.ExpiryDate, z.ItemId, t.StrengthId, a.dispensingunitprice, a.Dispensingmargin
 )
-Select *
-From CTE
-Where AvailQty > 0
+Select * From CTE Where AvailQty > 0 order by ExpiryDate asc
 
 
 End
@@ -1651,9 +2239,8 @@ Select	convert(varchar(100), a.Drug_Pk) + '-' + convert(varchar(100), Stock.Batc
 		isnull(Stock.BatchName, '') [Batch],
 		 [BatchId],
 		Stock.StoreID,
-		a.Drug_Pk [StockItemID],
-	
-		Stock.[AvailableQTY],
+		a.Drug_Pk [StockItemID],	
+		Stock.[AvailableQTY] / a.QtyPerPurchaseUnit [AvailableQTY],
 		replace(convert(varchar, Stock.ExpiryDate, 106), ' ', '-') [ExpiryDate]
 From dbo.Mst_Drug a
 	Inner Join
@@ -2076,15 +2663,37 @@ End
 
 GO
 
-/****** Object:  StoredProcedure [dbo].[Pr_SCM_SaveStockTransAdjust_Futures]    Script Date: 01/14/2016 14:25:16 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_SCM_SaveOpeningStock_Futures]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[pr_SCM_SaveOpeningStock_Futures]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[pr_SCM_SaveOpeningStock_Futures]                                 
+@ItemId int,                        
+@BatchId int,      
+@StoreId int,                        
+@Quantity int,        
+@ExpiryDate varchar(11),   
+@TransactionDate Datetime,     
+@UserId int      
+                                   
+AS                                
+BEGIN                                                                     
+insert into Dtl_StockTransaction(ItemId, BatchId, StoreId, Quantity, ExpiryDate, TransactionDate, OpeningStock,UserID,CreateDate,transactionType)                                 
+values(@ItemId,@BatchId,@StoreId,@Quantity, @ExpiryDate, @TransactionDate, 1, @UserId,getdate(),'Opening Stock')                               
+                                           
+END
+
+GO
+
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Pr_SCM_SaveStockTransAdjust_Futures]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[Pr_SCM_SaveStockTransAdjust_Futures]
 GO
 
-/****** Object:  StoredProcedure [dbo].[Pr_SCM_SaveStockTransAdjust_Futures]    Script Date: 01/14/2016 14:25:16 ******/
 SET ANSI_NULLS ON
 GO
-
 SET QUOTED_IDENTIFIER ON
 GO
 
@@ -2135,7 +2744,8 @@ BEGIN
 		Quantity,
 		UserId,
 		CreateDate,
-		UpdateDate)
+		UpdateDate,
+		transactionType)
 	Values (
 		@TransactionId,
 		@ItemId,
@@ -2146,12 +2756,12 @@ BEGIN
 		@AdjustmentQuantity,
 		@UserId,
 		getdate(),
-		getdate() )
+		getdate(),
+		'Stock Adjustment' )
 
 End
 
 GO
-
 
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_SCM_GetPharmacyPrescription_Futures]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[pr_SCM_GetPharmacyPrescription_Futures]
@@ -2296,10 +2906,11 @@ End
 
 GO
 
-/****** Object:  StoredProcedure [dbo].[pr_SCM_SavePharmacyDispenseOrderDetail_Futures]    Script Date: 5/12/2016 5:15:04 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_SCM_SavePharmacyDispenseOrderDetail_Futures]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[pr_SCM_SavePharmacyDispenseOrderDetail_Futures]
+GO
 SET ANSI_NULLS ON
 GO
-
 SET QUOTED_IDENTIFIER ON
 GO
 
@@ -2330,7 +2941,8 @@ CREATE procedure [dbo].[pr_SCM_SavePharmacyDispenseOrderDetail_Futures]
 	@PrintPrescriptionStatus int,  
 	@PatientInstructions varchar(500),
 	@WhyPartial varchar(255) =null,
-	@BatchNo varchar(50)  
+	@BatchNo varchar(50) = null,
+	@pillCount int = 0  
 As Begin                        
           
 	declare @EntryStatus int;
@@ -2343,6 +2955,7 @@ As Begin
 
 		Update dbo.Dtl_PatientPharmacyOrder Set
 			DispensedQuantity = @DispensedQuantity
+			,pillCount = @pillCount
 			, BatchNo = @BatchId
 			, ExpiryDate = @ExpiryDate
 			, UserId = @UserId
@@ -2410,7 +3023,8 @@ As Begin
 			,SellingPrice
 			,Margin
 			,UserId
-			,CreateDate)
+			,CreateDate
+			,transactionType)
 		Values (
 			@Drug_Pk
 			,@BatchId
@@ -2424,7 +3038,8 @@ As Begin
 			,@SellingPrice
 			,@Margin
 			,@UserId
-			,GETDATE())
+			,GETDATE()
+			,'Dispense')
 	End
 
 
@@ -2448,7 +3063,8 @@ As Begin
 			,OrderedQuantity
 			,PrintPrescriptionStatus
 			,WhyPartial
-			,PatientInstructions)
+			,PatientInstructions
+			,pillCount)
 		Values (
 			@Ptn_Pharmacy_Pk
 			,@Drug_Pk
@@ -2466,7 +3082,8 @@ As Begin
 			,@PrescribeOrderedQuantity
 			,@PrintPrescriptionStatus
 			,nullif(@WhyPartial,'')
-			,@PatientInstructions)
+			,@PatientInstructions
+			,@pillCount)
 
 		Insert Into dbo.Dtl_PatientBillTransaction (
 			Ptn_Pk
@@ -2521,7 +3138,8 @@ As Begin
 			,SellingPrice
 			,Margin
 			,UserId
-			,CreateDate)
+			,CreateDate
+			,transactionType)
 		Values (
 			@Drug_Pk
 			,@BatchId
@@ -2535,7 +3153,8 @@ As Begin
 			,@SellingPrice
 			,@Margin
 			,@UserId
-			,GETDATE())
+			,GETDATE()
+			,'Dispense')
 	End
 
 	If (@EntryStatus = 0 And @DataStatus = 1) Begin
@@ -2556,7 +3175,8 @@ As Begin
 			,OrderedQuantity
 			,PrintPrescriptionStatus
 			,WhyPartial
-			,PatientInstructions)
+			,PatientInstructions
+			,pillCount)
 		Values (
 			@Ptn_Pharmacy_Pk
 			,@Drug_Pk
@@ -2574,7 +3194,8 @@ As Begin
 			,@PrescribeOrderedQuantity
 			,@PrintPrescriptionStatus
 			,nullif(@WhyPartial,'')
-			,@PatientInstructions);
+			,@PatientInstructions
+			,@pillCount);
 
 		Declare @duraction1 decimal(18, 2), @Qty1 decimal(18, 2);
 
@@ -2648,7 +3269,8 @@ As Begin
 			,SellingPrice
 			,Margin
 			,UserId
-			,CreateDate)
+			,CreateDate
+			,transactionType)
 		Values (
 			@Drug_Pk
 			,@BatchId
@@ -2662,21 +3284,24 @@ As Begin
 			,@SellingPrice
 			,@Margin
 			,@UserId
-			,GETDATE())
+			,GETDATE()
+			,'Dispense')
 	End
 	
-	Declare @OrderedQuantity decimal(18, 2), @TotalDispensedQuantity decimal(18, 2);
+	Declare @OrderedQuantity decimal(18, 2), @TotalDispensedQuantity decimal(18, 2), @TotalPillCount decimal(18, 2);
 
 	Select @OrderedQuantity = orderedquantity	
-	From dtl_patientpharmacyorder	Where ptn_pharmacy_pk = @ptn_Pharmacy_Pk	And Drug_Pk = @Drug_Pk;
+	From dtl_patientpharmacyorder Where ptn_pharmacy_pk = @ptn_Pharmacy_Pk And Drug_Pk = @Drug_Pk;
 
 
 	Select @TotalDispensedQuantity = SUM(DispensedQuantity)
-	From dtl_patientpharmacyorder
-	Where ptn_pharmacy_pk = @ptn_Pharmacy_Pk
-	And Drug_Pk = @Drug_Pk;
+	From dtl_patientpharmacyorder Where ptn_pharmacy_pk = @ptn_Pharmacy_Pk And Drug_Pk = @Drug_Pk;
 
-	Declare @OrderedQuantity1 decimal(18, 2),@TotalDispensedQuantity1 decimal(18, 2);
+	Select @TotalPillCount = SUM(PillCount)
+	From dtl_patientpharmacyorder Where ptn_pharmacy_pk = @ptn_Pharmacy_Pk And Drug_Pk = @Drug_Pk;
+
+
+	Declare @OrderedQuantity1 decimal(18, 2),@TotalDispensedQuantity1 decimal(18, 2),@TotalPillCount1 decimal(18, 2);
 
 	Select @OrderedQuantity1 = SUM(z.OrderedQuantity)
 	From (
@@ -2689,10 +3314,15 @@ As Begin
 	From dtl_patientpharmacyorder
 	Where ptn_pharmacy_pk = @ptn_Pharmacy_Pk;
 
+	Select @TotalPillCount1 = SUM(PillCount)
+	From dtl_patientpharmacyorder
+	Where ptn_pharmacy_pk = @ptn_Pharmacy_Pk;
+
 	Select @OrderedQuantity1
 	Select @TotalDispensedQuantity1
+	select @TotalPillCount1
 
-	If (@OrderedQuantity1 <= @TotalDispensedQuantity1) Begin
+	If (@OrderedQuantity1 <= (@TotalDispensedQuantity1 + @TotalPillCount1)) Begin
 		Update ord_PatientPharmacyOrder		Set 
 			OrderStatus = 2
 		Where DispensedByDate Is Not Null
@@ -2703,9 +3333,10 @@ As Begin
 		OrderStatus = 3
 	Where DispensedByDate Is Not Null
 	And ptn_pharmacy_pk = @ptn_pharmacy_pk
-	And @OrderedQuantity > @TotalDispensedQuantity
+	And @OrderedQuantity > (@TotalDispensedQuantity + @TotalPillCount)
 
 End
+
 GO
 
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_SCM_GetPharmacyOrderDetail_Futures]') AND type in (N'P', N'PC'))
@@ -2734,6 +3365,7 @@ Select Distinct	a.Drug_Pk [ItemId]
 				,a.FrequencyId
 				,a.FrequencyName
 				,CONVERT(varchar(11), a.ExpiryDate, 113) [ExpiryDate]
+				,a.pillCount
 				,a.DispensedQuantity [QtyDisp]
 				,a.WhyPartial
 				,a.CostPrice
@@ -2755,7 +3387,8 @@ Select Distinct	a.Drug_Pk [ItemId]
 				,a.PatientInstructions,
 				a.DispensedByDate,
 				Isnull(ProgId,0) ProgId,
-				Convert(bit, 1) Valid
+				Convert(bit, 1) Valid,
+				a.FreqMultiplier
 From vw_patientpharmacy a
 Where a.ptn_Pharmacy_Pk = @Ptn_Pharmacy_Pk;
 
@@ -2777,7 +3410,7 @@ Where O.ptn_pharmacy_pk = @Ptn_Pharmacy_Pk
 
 End
 GO
-  /****** Object:  StoredProcedure [dbo].[pr_SCM_GetItemListSupplier_Futures]    Script Date: 5/12/2016 5:25:41 PM ******/
+
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_SCM_GetItemListSupplier_Futures]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[pr_SCM_GetItemListSupplier_Futures]
 GO
@@ -2848,10 +3481,8 @@ GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_SCM_GetStockSummary_Futures]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[pr_SCM_GetStockSummary_Futures]
 GO
-
 SET ANSI_NULLS ON
 GO
-
 SET QUOTED_IDENTIFIER ON
 GO
 
@@ -2945,7 +3576,7 @@ Inner Join dtl_stocktransaction b On a.Drug_Pk = b.ItemId
 Left Outer Join Mst_DispensingUnit c On a.DispensingUnit = c.Id
 Where b.Openingstock Is Null 
 	And b.AdjustId Is Null 
-	And b.storeid = @StoreId And (b.GrnId Is Not Null Or b.GrnId > 0) 
+	And b.storeid = @StoreId --And (b.GrnId Is Not Null Or b.GrnId > 0) 
 	And b.Quantity > 0 
 	And b.ExpiryDate >= @FromDate
 	 And b.transactiondate >= @FromDate And b.transactiondate < @ToDate
@@ -2985,7 +3616,7 @@ Left Outer Join (
 	Inner Join dtl_stocktransaction b On a.Drug_Pk = b.ItemId
 	Left Outer Join Mst_DispensingUnit c On a.DispensingUnit = c.Id
 	Where b.storeid = @StoreId 
-		And (b.GrnId Is Not Null Or b.GrnId > 0) 
+		--And (b.GrnId Is Not Null Or b.GrnId > 0) 
 		And b.Quantity < 0 And b.ExpiryDate >= @FromDate 
 		And b.transactiondate >= @FromDate
 		And b.transactiondate < @ToDate
@@ -3020,13 +3651,13 @@ Order By Drg.DrugName
 
 
 End
+
 GO
+
 
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_SCM_GetPurchaseOrderDetailsByPoid_Futures]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[pr_SCM_GetPurchaseOrderDetailsByPoid_Futures]
 GO
-
-/****** Object:  StoredProcedure [dbo].[pr_SCM_GetPurchaseOrderDetailsByPoid_Futures]    Script Date: 21-Mar-2017 6:33:31 PM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -3207,3 +3838,15 @@ AS
 GO
 
 
+
+
+
+
+
+
+
+
+
+
+
+GO

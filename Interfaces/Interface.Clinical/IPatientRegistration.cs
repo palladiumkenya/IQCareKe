@@ -90,7 +90,8 @@ namespace Interface.Clinical
             int ModuleId = 999, 
             int MaxRecords=100,
             string ruleFilter= "",
-            string phoneNumber="");
+            string phoneNumber="",
+            string identifierName = "");
 
         /// <summary>
         /// Gets the patient service lines.
@@ -104,5 +105,7 @@ namespace Interface.Clinical
         ServiceArea GetServiceAreaById(int id, int locationId);
 
         void BlueCardToGreenCardSyncronise(int ptn_Pk);
+
+        DataTable GetIdentifiersByServiceAreaId(int serviceAreaId = 0);
     }
 }

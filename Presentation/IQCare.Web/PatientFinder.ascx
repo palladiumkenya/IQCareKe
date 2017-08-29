@@ -23,13 +23,22 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group  col-md-10">
-                                    <label id="lblidentificationno" class="control-label pull-left" runat="server">
+
+                                      <label id="lblidentificationno" class="control-label pull-left" runat="server">
                                         Identification Number:</label>
-                                    <asp:TextBox ID="txtidentificationno" CssClass="form-control input-sm" runat="server"
-                                        MaxLength="20"></asp:TextBox>
-                                    <ajaxToolkit:FilteredTextBoxExtender ID="FTEID" runat="server" FilterType="Numbers, UppercaseLetters, LowercaseLetters,Custom"
-                                        TargetControlID="txtidentificationno" ValidChars="-@*/\ ">
-                                    </ajaxToolkit:FilteredTextBoxExtender>
+                               
+                                       <asp:DropDownList ID="ddlIdentifier" runat="server" class="form-control" Style="height: inherit;display:none">
+                                                <asp:ListItem Text=" Identifier:"></asp:ListItem>
+                                            </asp:DropDownList>
+                                        <asp:TextBox ID="txtidentificationno" CssClass="form-control input-sm" runat="server"
+                                            MaxLength="20" placeholder="Identifier"></asp:TextBox>
+                                       
+
+                                        <ajaxToolkit:FilteredTextBoxExtender ID="FTEID" runat="server" FilterType="Numbers, UppercaseLetters, LowercaseLetters,Custom"
+                                            TargetControlID="txtidentificationno" ValidChars="-@*/\_()| ">
+                                        </ajaxToolkit:FilteredTextBoxExtender>
+                                  
+
                                 </div>
                                 <div class="form-group col-md-10">
                                     <label for="FTEPhnoe" class="control-label pull-left">
@@ -112,27 +121,28 @@
                                     </asp:DropDownList>
                                 </div>
                                 <div class="form-group col-md-10">
-                                <div class="form-group col-md-5">
-                                    <label for="ddSex" class="control-label pull-left">
-                                        Sex/ Gender :</label>
-                                    <asp:DropDownList ID="ddSex" CssClass="form-control input-sm" runat="server">
-                                        <asp:ListItem Selected="True" Value="">-Select-</asp:ListItem>
-                                        <asp:ListItem Value="16">Male</asp:ListItem>
-                                        <asp:ListItem Value="17">Female</asp:ListItem>
-                                    </asp:DropDownList>
-                                </div>
-                                <!-- .form-group -->
-                                <div class="form-group col-md-5" style="display: <% = showStatus %>">
-                                    <div>
-                                        <label class="control-label pull-left" for="ddCareEndedStatus">
-                                            Patient Status:</label>
-                                        <asp:DropDownList CssClass="form-control input-sm" ID="ddCareEndedStatus" runat="server">
-                                            <asp:ListItem Value="" Selected="True">-Any-</asp:ListItem>
-                                            <asp:ListItem Value="0">Active</asp:ListItem>
-                                            <asp:ListItem Value="1">Care Ended</asp:ListItem>
+                                    <div class="form-group col-md-5">
+                                        <label for="ddSex" class="control-label pull-left">
+                                            Sex/ Gender :</label>
+                                        <asp:DropDownList ID="ddSex" CssClass="form-control input-sm" runat="server">
+                                            <asp:ListItem Selected="True" Value="">-Select-</asp:ListItem>
+                                            <asp:ListItem Value="16">Male</asp:ListItem>
+                                            <asp:ListItem Value="17">Female</asp:ListItem>
                                         </asp:DropDownList>
                                     </div>
-                                </div></div>
+                                    <!-- .form-group -->
+                                    <div class="form-group col-md-5" style="display: <% = showStatus %>">
+                                        <div>
+                                            <label class="control-label pull-left" for="ddCareEndedStatus">
+                                                Patient Status:</label>
+                                            <asp:DropDownList CssClass="form-control input-sm" ID="ddCareEndedStatus" runat="server">
+                                                <asp:ListItem Value="" Selected="True">-Any-</asp:ListItem>
+                                                <asp:ListItem Value="0">Active</asp:ListItem>
+                                                <asp:ListItem Value="1">Care Ended</asp:ListItem>
+                                            </asp:DropDownList>
+                                        </div>
+                                    </div>
+                                </div>
                                 <!--.form-group -->
                             </div>
                             <!-- .col-md-4 -->
@@ -218,14 +228,15 @@
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
                                                     <asp:BoundField DataField="PatientFacilityId" HeaderText="Facility ID" />
+                                                     <asp:BoundField DataField="PatientEnrollmentID" HeaderText="CCC Number" />
                                                     <asp:BoundField DataField="firstname" HeaderText="First Name" />
                                                     <asp:BoundField DataField="middlename" HeaderText="Middle Name" />
                                                     <asp:BoundField DataField="lastname" HeaderText="Last Name" />
                                                     <asp:BoundField DataField="dob" HeaderText="DOB" DataFormatString="{0:dd-MMM-yyyy}" />
                                                     <asp:BoundField DataField="sex" HeaderText="Sex" />
                                                     <asp:BoundField DataField="RegistrationDate" DataFormatString="{0:dd-MMM-yyyy}" HeaderText="Reg Date" />
-                                                     <asp:BoundField DataField="Phone" HeaderText="Phone" />
-                                                    <asp:BoundField DataField="FacilityName" HeaderText="Facility" />
+                                                    <asp:BoundField DataField="Phone" HeaderText="Phone" />
+                                                    <asp:BoundField DataField="FacilityName" HeaderText="Facility" Visible="false" />
                                                     <asp:BoundField DataField="Status" HeaderText="Status" />
                                                     <asp:TemplateField>
                                                         <ItemTemplate>
@@ -310,7 +321,7 @@
                                             <td style="width: 5px; height: 19px;"></td>
                                             <td style="width: 100%; height: 19px;">
                                                 <span style="font-weight: bold;">
-                                                    <asp:Label ID="labelParamTitle" runat="server">Request For Reversal </asp:Label><asp:Label
+                                                    <asp:Label ID="labelParamTitle" runat="server">Identifiers </asp:Label><asp:Label
                                                         ID="labelReceipt" runat="server" /></span>
                                             </td>
                                             <td style="width: 5px; height: 19px;"></td>

@@ -1733,7 +1733,7 @@ END
 ' 
 END
 GO
- /****** Object:  StoredProcedure [dbo].[Pr_Clinical_GetPatientSearchresults]    Script Date: 12/11/2014 16:16:40 ******/
+
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Pr_Clinical_GetPatientSearchresults]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[Pr_Clinical_GetPatientSearchresults]
 GO
@@ -1742,6 +1742,7 @@ GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 
@@ -1758,7 +1759,7 @@ CREATE PROCEDURE [dbo].[Pr_Clinical_GetPatientSearchresults]
 	@MiddleName varchar(50) = Null, 
 	@DOB datetime = Null, 
 	@RegistrationDate datetime = Null,
-	@EnrollmentType int = null,
+	@IdentifierName  varchar(50) = null,
 	@EnrollmentId varchar(50) = Null, 
 	@FacilityId int = Null,  
 	@Status int = Null,
@@ -1779,10 +1780,11 @@ BEGIN
 	Declare @Query nvarchar(max), 
 			@ParamDefinition nvarchar(2000),
 			@Identifiers varchar(4000),
+			@IdentifierSQL varchar(200),
 			@ByModule varchar(1000), @ByStatus varchar(120);
 			
 	Declare @SymKey nvarchar(400)	;	 
-	Select	@Identifiers = '',@ByModule='',@ByStatus=' Status =  Null ,';
+	Select	@Identifiers = '',@ByModule='',@ByStatus=' Status =  Null ,',@IdentifierSQL='PatientEnrollmentId Identifier';
 			
 	 --                                                                                    
 	 --Set @SymKey = 'Open symmetric key Key_CTC decryption by password='+ @password + ''                                                                                        
@@ -1802,19 +1804,26 @@ Select @EnrollmentId = Convert(varchar,Nullif(Ltrim(Rtrim(@EnrollmentID)), ''));
 
 Select @PhoneNumber =Nullif(ltrim(rtrim(@PhoneNumber)),'');
 
+Select @IdentifierName = nullif(ltrim(rtrim(@IdentifierName)),'');
+
 If (@EnrollmentId Is Not Null) 
 Begin
-	declare @SS varchar(1000)
-	Select @ss = Substring((Select ',P.[' + Convert(varchar(Max), FieldName) + ']'
-			From dbo.mst_patientidentifier
-			Order By Id
-			For xml Path (''))
-		, 2, 1000);
-	Select @Identifiers = ' AND(' + Replace(@SS, ',', ' = ''' + Convert(varchar,@enrollmentid) + ''' or ') + ' = ''' 
-	+ Convert(varchar,@enrollmentid) + ''' or P.IQNumber=''' + Convert(varchar,@enrollmentid) 
-	+ ''' or P.PatientFacilityID = ''' + Convert(varchar,@enrollmentid) + ''')';
-
-
+	declare @SS varchar(1000);
+	if(@IdentifierName Is Null) Begin
+		Select @ss = Substring((Select ',P.[' + Convert(varchar(Max), FieldName) + ']'
+				From dbo.mst_patientidentifier
+				Order By Id
+				For xml Path (''))
+			, 2, 1000);
+		Select @Identifiers = ' AND(' + Replace(@SS, ',', ' like ''%' + Convert(varchar,@enrollmentid) + ''' or ') + ' = ''' 
+		+ Convert(varchar,@enrollmentid) + ''' or P.IQNumber=''' + Convert(varchar,@enrollmentid) 
+		
+	End
+	Else Begin
+		 Select @Identifiers = ' AND  P.['  + @IdentifierName +']'+ ' Like ''' +  @enrollmentid + '%'''  ;
+		 Select @IdentifierSQL = ' P.['  + @IdentifierName +'] As  Identifier ';
+	End
+	
 End
 If(@ModuleID <> 999)
 Begin
@@ -1829,7 +1838,7 @@ End
 
 
 Set @Query=N'Select Top (@top) * From (Select  P.Ptn_Pk PatientId,Convert(varchar(50), Decryptbykey(FirstName)) As FirstName, Convert(varchar(50), Decryptbykey(MiddleName)) As Middlename,
-		Convert(varchar(50), Decryptbykey(LastName)) As LastName,IQNumber, PatientFacilityId, LocationId,	F.FacilityName,
+		Convert(varchar(50), Decryptbykey(LastName)) As LastName,IQNumber, PatientFacilityId,PatientEnrollmentID, '+ @IdentifierSQL +', LocationId,	F.FacilityName,
 		Case DOBPrecision	When 0 Then ''No'' When 1 Then ''Yes'' End As [Precision],Dob ,	Convert(varchar(100), Decryptbykey([Address])) [Address],	Convert(varchar(100), Decryptbykey(Phone)) [Phone],
 		convert(decimal(5,2),round(cast(datediff(dd,P.DOB,isnull(P.DateofDeath,getdate()))/365.25 as decimal(5,2)),2)) Age,	P.RegistrationDate,'+@ByStatus +' Sex = Case P.Sex When 16 Then ''Male'' Else ''Female'' End
 From dbo.mst_Patient As P Inner Join dbo.mst_Facility F	On F.FacilityID = P.LocationID'+ @ByModule +' Where  (P.DeleteFlag = 0 OR P.DeleteFlag Is Null)
@@ -1841,14 +1850,15 @@ And Case When @PhoneNumber Is  Null Or Convert(varchar(50), decryptbykey(P.Phone
 And (@FacilityID Is Null Or P.LocationID=@FacilityID)' +@Identifiers + ') P '+ @RuleFilter  ;
 
 Set @Query = @Query + ' Order By [Status],P.RegistrationDate';
-	  
+print @Query
 Set @ParamDefinition= N'@Sex int = Null, 
 	@Firstname varchar(50) = Null, 
 	@LastName varchar(50) = Null, 
 	@MiddleName varchar(50) = Null, 
 	@DOB datetime = Null, 
 	@RegistrationDate datetime = Null,
-	@EnrollmentID varchar(50) = Null,  
+	@EnrollmentID varchar(50) = Null,
+	@IdentifierName varchar(50) = null,  
 	@FacilityID int = Null,  
 	@Status int = Null,
 	@Password varchar(50) = Null,    
@@ -1858,15 +1868,11 @@ Set @ParamDefinition= N'@Sex int = Null,
 							 
 --Set @SymKey = 'Open symmetric key Key_CTC decryption by password=' + @password ;
 --Exec sp_executesql @SymKey ;
-Execute sp_Executesql @Query, @ParamDefinition, @Sex, @Firstname,@LastName,@MiddleName,@DOB,@RegistrationDate,@EnrollmentID,@FacilityID,@status,@password,@moduleId,@PhoneNumber,@top;
+Execute sp_Executesql @Query, @ParamDefinition, @Sex, @Firstname,@LastName,@MiddleName,@DOB,@RegistrationDate,@EnrollmentID,@IdentifierName,@FacilityID,@status,@password,@moduleId,@PhoneNumber,@top;
 	 
 End	   
-  
-	  
 GO
 
-	
-/****** Object:  StoredProcedure [dbo].[Pr_Clinical_GetDuplicatePatientSearchresults_COnstella]    Script Date: 01/07/2015 16:24:41 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Pr_Clinical_GetDuplicatePatientSearchresults_COnstella]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[Pr_Clinical_GetDuplicatePatientSearchresults_COnstella]
 GO	  
@@ -3031,6 +3037,7 @@ GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 CREATE procedure [dbo].[pr_Clinical_PatientDetails_Constella]   ( 
 	@PatientId int,                                                                                                                                                                                
 	@SystemId int,                                  
@@ -3259,7 +3266,7 @@ From dtl_LabOrderTestResult R
 Inner Join Mst_LabTestParameter P On P.Id = R.ParameterId
 Inner Join dtl_LabOrderTest OT On R.LabOrderTestId=OT.Id
 Inner Join ord_LabOrder O On O.Id = R.LabOrderId
-Where P.ReferenceId = 'VIRAL_LOAD'
+Where  (P.ReferenceId in ('VIRALLOAD','VIRAL_LOAD'))
 	And R.DeleteFlag = 0
 	And O.Ptn_Pk =@PatientId
 Order By O.OrderDate Asc
@@ -3270,7 +3277,7 @@ Order By O.OrderDate Asc
 	From dtl_LabOrderTestResult R
 	Inner Join Mst_LabTestParameter P On P.Id = R.ParameterId
 	Inner Join ord_LabOrder O On O.Id = R.LabOrderId
-	Where P.ReferenceId In ('CD4','CD4COUNT','VIRAL_LOAD')
+	Where P.ReferenceId In ('CD4','CD4COUNT','VIRALLOAD','VIRAL_LOAD')
 		And R.DeleteFlag = 0
 		And O.DeleteFlag = 0
 		And O.Ptn_Pk = @PatientId
@@ -3737,11 +3744,12 @@ End
 -- Table 44 --3 Viral Load due date
 declare @ParameterId int;
 
-Select Top (1) @ParameterId = Id from Mst_LabTestParameter As P Where (P.ReferenceId = 'VIRAL_LOAD');
+Select Top (1) @ParameterId = Id from Mst_LabTestParameter As P Where (P.ReferenceId In ('VIRALLOAD','VIRAL_LOAD')) And DeleteFlag=0;
 
-declare @LatestViralLoad float ;
+declare @LatestViralLoad float;
 Set @LatestViralLoad = (
-Select Top (1) dtl.ResultValue
+--Select Top (1) dtl.ResultValue
+Select Top (1) isnull(dtl.ResultValue, dtl.undetectable)
 From dtl_LabOrderTest As ord
 Inner Join dtl_LabOrderTestResult As dtl On ord.LabOrderId = dtl.LabOrderId
 Inner Join ord_LabOrder As L On L.Id = ord.LabOrderId
@@ -3751,12 +3759,22 @@ Where (dtl.ParameterId = @ParameterId)
 	And (ord.DeleteFlag Is Null Or ord.DeleteFlag = 0)
 	And (L.OrderDate <> '')
 	And (L.OrderDate Is Not Null)
+	and isnull(dtl.ResultValue, dtl.undetectable) is not null
 Order By L.OrderDate Desc
 )
 
 IF(@LatestViralLoad is null)
 begin
        select ''[ViralLoadDueDate] from [dbo].[ord_LabOrder] where Ptn_pk=-1
+end
+else IF(@LatestViralLoad = 1.00)
+begin
+	select TOP 1 DATEADD(MONTH, 12, ord.ResultDate) [ViralLoadDueDate],'Undetectable VL' ResultValue from dtl_LabOrderTest ord inner JOIN dtl_LabOrderTestResult dtl on ord.LabOrderId = dtl.LabOrderId 
+       inner JOIN [dbo].[ord_LabOrder] L ON L.Id=ord.LabOrderId
+     --  inner JOIN ord_Visit ordV ON L.VisitId = ordV.Visit_Id
+       where dtl.ParameterId =@ParameterId and L.Ptn_pk = @PatientId and (ord.DeleteFlag IS NULL OR ord.DeleteFlag=0) and ord.ResultDate <> '' 
+       and ord.ResultDate is NOT NULL
+       order BY ord.ResultDate desc
 end
 else IF(@LatestViralLoad > 1000)
 begin
@@ -3765,6 +3783,7 @@ begin
       -- inner JOIN ord_Visit ordV ON L.VisitId = ordV.Visit_Id
        where dtl.ParameterId = @ParameterId and L.Ptn_pk = @PatientId and (ord.DeleteFlag IS NULL OR ord.DeleteFlag=0) and ord.ResultDate <> '' 
        and ord.ResultDate is NOT NULL
+	   and dtl.ResultValue is not null
        order BY ord.ResultDate desc
 end
 else
@@ -3779,10 +3798,9 @@ end
 --Close Symmetric Key Key_CTC
 End
 
+
 GO
 
-
-/****** Object:  StoredProcedure [dbo].[pr_Clinical_GetARTHistoryData_Futures]    Script Date: 12/11/2014 16:16:40 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_Clinical_GetARTHistoryData_Futures]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[pr_Clinical_GetARTHistoryData_Futures]
 GO

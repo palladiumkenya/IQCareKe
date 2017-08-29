@@ -172,7 +172,7 @@ namespace BusinessProcess.SCM
                 ClsUtility.Init_Hashtable();
                 ClsObject objPOdetails = new ClsObject();
                 ClsUtility.AddParameters("@Date", SqlDbType.VarChar, date);
-                return (DataSet)objPOdetails.ReturnObject(ClsUtility.theParams, "sp_getPharmacyPatientsExpected", ClsUtility.ObjectEnum.DataSet);
+                return (DataSet)objPOdetails.ReturnObject(ClsUtility.theParams, "Pharmacy_GetExpectedPatients", ClsUtility.ObjectEnum.DataSet);
             }
             
         }

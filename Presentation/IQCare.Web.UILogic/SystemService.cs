@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Configuration;
 using Application.Logger;
+using Interface.Clinical;
 
 namespace IQCare.Web.UILogic
 {
@@ -238,6 +239,10 @@ namespace IQCare.Web.UILogic
                 return theDTime;
             }
         }
-
+        public static DataTable GetPatientIdentifiers(int serviceAreaId = 0)
+        {
+            IPatientRegistration ipr = (IPatientRegistration)ObjectFactory.CreateInstance("BusinessProcess.Clinical.BPatientRegistration, BusinessProcess.Clinical");
+            return ipr.GetIdentifiersByServiceAreaId(serviceAreaId);
+        }
     }
 }

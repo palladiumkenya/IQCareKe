@@ -475,7 +475,8 @@ namespace IQCare.Web.UILogic
             DateTime? registrationDate,           
             int moduleId = 999,
             int maxRecords = 100,
-             string phoneNumber ="")
+             string phoneNumber ="",
+             string identifierName="")
         {
             IPatientRegistration pMgr = (IPatientRegistration)ObjectFactory.CreateInstance("BusinessProcess.Clinical.BPatientRegistration, BusinessProcess.Clinical");
 
@@ -588,7 +589,7 @@ namespace IQCare.Web.UILogic
                     rowFilter = " Where " + ruletwo;
                 }
             }
-            DataTable dtPatient = pMgr.GetPatientSearchResults(facilityId, lastname, middlename, firstname, enrollment, gender, status, dob, registrationDate, moduleId, maxRecords, rowFilter,phoneNumber);
+            DataTable dtPatient = pMgr.GetPatientSearchResults(facilityId, lastname, middlename, firstname, enrollment, gender, status, dob, registrationDate, moduleId, maxRecords, rowFilter,phoneNumber,identifierName);
             // DataTable dt = dtPatient.DefaultView.ToTable();
             return dtPatient;
 

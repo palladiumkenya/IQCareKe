@@ -1,28 +1,18 @@
-
-/****** Object:  StoredProcedure [dbo].[pr_Pharmacy_GetPatientPharmacyOrderList]    Script Date: 12/11/2014 16:16:40 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_Pharmacy_GetPatientPharmacyOrderList]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[pr_Pharmacy_GetPatientPharmacyOrderList]
 GO
-/****** Object:  StoredProcedure [dbo].[pr_Pharmacy_GetPatientRecordformStatus]    Script Date: 04/01/2015 11:33:11 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_Pharmacy_GetPatientRecordformStatus]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[pr_Pharmacy_GetPatientRecordformStatus]
 GO
-/****** Object:  StoredProcedure [dbo].[pr_Pharmacy_SaveUpdatePediatric_Constella]    Script Date: 04/01/2015 11:33:11 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_Pharmacy_SaveUpdatePediatric_Constella]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[pr_Pharmacy_SaveUpdatePediatric_Constella]
 GO
-/****** Object:  StoredProcedure [dbo].[pr_Pharmacy_FindDrugByName]    Script Date: 09/04/2015 13:20:55 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_Pharmacy_FindDrugByName]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[pr_Pharmacy_FindDrugByName]
 GO
-
-/****** Object:  StoredProcedure [dbo].[pr_Pharmacy_SavePatientPediatric_Constella]    Script Date: 01/13/2016 10:14:34 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_Pharmacy_SavePatientPediatric_Constella]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[pr_Pharmacy_SavePatientPediatric_Constella]
 GO
-
-
-/****** Object:  StoredProcedure [dbo].[pr_Pharmacy_GetPatientPharmacyOrderList]    Script Date: 12/11/2014 16:16:40 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -82,8 +72,6 @@ END
 ' 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[pr_Pharmacy_GetPatientRecordformStatus]    Script Date: 12/11/2014 16:16:40 ******/
-/****** Object:  StoredProcedure [dbo].[pr_Pharmacy_GetPatientRecordformStatus]    Script Date: 04/01/2015 11:33:11 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -600,8 +588,6 @@ End
 ' 
 END
 GO
-
-/****** Object:  StoredProcedure [dbo].[pr_Pharmacy_SaveUpdatePediatric_Constella]    Script Date: 09/10/2015 13:07:44 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -933,12 +919,7 @@ Begin
 	End
 End
 Go
-/*
-Correct the bug where ptn_pharmacy_pk was hardcoded to 89
 
-*/
-
-/****** Object:  StoredProcedure [dbo].[pr_Pharmacy_SavePatientPediatric_Constella]    Script Date: 03/11/2015 12:54:56 ******/
 Set Ansi_nulls On
 Go
 
@@ -1378,7 +1359,8 @@ BEGIN
 	Select @StartDate = dateadd(second, 0, dateadd(day, datediff(day, 0, @PrescriptionDate), 0)) ,	@EndDate = dateadd(second, -1, dateadd(day, datediff(day, 0, @PrescriptionDate)+1, 0))
     -- Insert statements for procedure here
 	Select	PV.Ptn_pk
-		,	PatientEnrollmentID PatientFacilityId
+		,	PatientEnrollmentID 
+		,	PatientFacilityId
 		,	ptn_pharmacy_pk	OrderId
 		,	ReportingID		PrescriptionNumber
 		,	FirstName
@@ -1404,10 +1386,159 @@ BEGIN
 	From ord_PatientPharmacyOrder PO
 	Inner Join PatientView PV On PV.Ptn_Pk = PO.Ptn_pk 
 	Where orderstatus = @PrescriptionStatus
-	And PO.DeleteFlag = 0 And PV.DeleteFlag = 0 And OrderedByDate Between @StartDate And @EndDate
+	And	CONVERT(date, OrderedByDate) = CONVERT(date, @PrescriptionDate) -- Between @StartDate And @EndDate
 	And PO.LocationId = @LocationId
 	order by Duration desc
 END
 
+
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_getPharmacyPatientsExpected]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_getPharmacyPatientsExpected]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Pharmacy_GetExpectedPatients]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[Pharmacy_GetExpectedPatients]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		John Macharia
+-- Create date: 14th Feb 2017
+-- Description:	get number of patients expected to come for pharmacy
+-- =============================================
+CREATE PROCEDURE [dbo].[Pharmacy_GetExpectedPatients]
+	-- Add the parameters for the stored procedure here
+	@Date datetime
+
+AS
+BEGIN
+-- SET NOCOUNT ON added to prevent extra result sets from
+-- interfering with SELECT statements.
+Set Nocount On;
+	declare @pharmacyReason int = (select top 1 id from mst_decode where name = 'Pharmacy Refill')
+	--0 expected
+	select count(*) expected from dtl_patientappointment 
+	--where appreason = @pharmacyReason and (deleteflag = 0 or deleteflag is null) and cast(AppDate as date) = cast(@Date as date)
+	where (deleteflag = 0 or deleteflag is null) and cast(AppDate as date) = cast(@Date as date)
+
+	--1 Actual
+	select count(*) actual  from ord_patientpharmacyorder 
+	where (deleteflag=0 or deleteflag is null) and cast(dispensedbydate as date) = cast(@Date as date)
+	
+End
+Go
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Pharmacy_GetAllRegisteredPatients]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[Pharmacy_GetAllRegisteredPatients]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_getAllPatientsRegisteredAtPharmacy]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_getAllPatientsRegisteredAtPharmacy]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[Pharmacy_GetAllRegisteredPatients] 
+	-- Add the parameters for the stored procedure here
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	Select Ptn_Pk
+	  ,	   convert(varchar(50), decryptbykey(FirstName))							 fname
+	  ,	   convert(varchar(50), decryptbykey(MiddleName))							 mname
+	  ,	   convert(varchar(50), decryptbykey(LastName))								 lname
+	  ,	   PatientEnrollmentID
+	  ,	   cast(round(datediff(Hour, DOB, getdate()) / 8766.0, 2) As numeric(18, 2)) age
+	  ,	   b.name																	 gender
+	  ,	   c.name																	 [service]
+	From mst_patient a
+	Left Join mst_decode b On a.sex = b.id
+	Left Join mst_decode c On a.ServiceRegisteredForAtPharmacy = c.id
+	Where RegisteredAtPharmacy = 1
+	
+END
+
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_SaveUpdatePharmacyRegistration]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_SaveUpdatePharmacyRegistration]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Pharmacy_SaveUpdateRegistration]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[Pharmacy_SaveUpdateRegistration]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[Pharmacy_SaveUpdateRegistration] 
+	-- Add the parameters for the stored procedure here
+	@firstName varchar(100) = null,
+	@middleName varchar(100) = null,
+	@lastName varchar(100) = null,
+	@patientEnrollmentID varchar(50) = null,
+	@DOB datetime = null,
+	@gender int = null,
+	@locationID int = null,
+	@regDate datetime = null,
+	@userID int = null,
+	@serviceId int = null
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+	Declare @SymKey varchar(400) ;
+	declare @ptn_pk int                                                             
+	
+	
+    -- Insert statements for procedure here
+		Insert Into mst_Patient (
+				Status
+		   ,	FirstName
+		   ,	MiddleName
+		   ,	LastName
+		   ,	PatientEnrollmentID
+		   ,	LocationID
+		   ,	RegistrationDate
+		   ,	Sex
+		   ,	DOB
+		   ,	UserID
+		   ,	CreateDate
+		   ,	RegisteredAtPharmacy
+		   ,	ServiceRegisteredForAtPharmacy)
+		Values (
+				'0'
+		   ,	encryptbykey(key_guid('Key_CTC'), @firstName)
+		   ,	encryptbykey(key_guid('Key_CTC'), @middleName)
+		   ,	encryptbykey(key_guid('Key_CTC'), @lastName)
+		   ,	@patientEnrollmentID
+		   ,	@locationID
+		   ,	@regDate
+		   ,	@gender
+		   ,	@DOB
+		   ,	@userID
+		   ,	getdate()
+		   ,	1
+		   ,	@serviceId);
+
+	Select @ptn_pk = SCOPE_IDENTITY();
+	
+	
+END
 
 GO

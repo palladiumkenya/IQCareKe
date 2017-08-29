@@ -192,18 +192,7 @@ IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'ldl' AND Object_ID = OBJE
 		ALTER TABLE PatientTreatmentInitiation ADD ldl bit NULL;
 		ALTER TABLE [dbo].[PatientTreatmentInitiation] ADD  CONSTRAINT [DF_PatientTreatmentInitiation_ldl]  DEFAULT ((0)) FOR [ldl]
 	END;
-IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'IssuedQuantity'AND Object_ID = OBJECT_ID(N'Dtl_PurchaseItem'))
-    BEGIN
-        ALTER TABLE Dtl_PurchaseItem ADD IssuedQuantity int;
-    END;
-IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'transactionType'AND Object_ID = OBJECT_ID(N'dtl_stocktransaction'))
-    BEGIN
-        ALTER TABLE dtl_stocktransaction ADD transactionType nvarchar(50);
-    END;
-IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'pillCount'AND Object_ID = OBJECT_ID(N'dtl_patientPharmacyOrder'))
-    BEGIN
-        ALTER TABLE dtl_patientPharmacyOrder ADD pillCount int;
-    END;
+
 IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'EverBeenOnIpt'AND Object_ID = OBJECT_ID(N'PatientIcf'))
     BEGIN
         ALTER TABLE PatientIcf ADD EverBeenOnIpt bit;

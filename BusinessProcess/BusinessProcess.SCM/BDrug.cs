@@ -407,7 +407,7 @@ namespace BusinessProcess.SCM
             ClsUtility.AddParameters("@userID", SqlDbType.VarChar, userid);
             ClsUtility.AddParameters("@serviceId", SqlDbType.VarChar, serviceid);
 
-            return (int)PharmacyManager.ReturnObject(ClsUtility.theParams, "sp_SaveUpdatePharmacyRegistration", ClsUtility.ObjectEnum.ExecuteNonQuery);
+            return (int)PharmacyManager.ReturnObject(ClsUtility.theParams, "Pharmacy_SaveUpdateRegistration", ClsUtility.ObjectEnum.ExecuteNonQuery);
         }
 
         public DataTable getPatientsRegistered()
@@ -415,7 +415,7 @@ namespace BusinessProcess.SCM
             ClsObject PharmacyManager = new ClsObject();
             ClsUtility.Init_Hashtable();
 
-            return (DataTable)PharmacyManager.ReturnObject(ClsUtility.theParams, "sp_getAllPatientsRegisteredAtPharmacy", ClsUtility.ObjectEnum.DataTable);
+            return (DataTable)PharmacyManager.ReturnObject(ClsUtility.theParams, "Pharmacy_GetAllRegisteredPatients", ClsUtility.ObjectEnum.DataTable);
         }
 
     }

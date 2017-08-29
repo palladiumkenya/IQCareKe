@@ -41,6 +41,18 @@ Alter table dtl_LabTestParameterConfig alter column [DetectionLimit] [decimal](1
 Go
 Alter table dtl_LabOrderTestResult add  [HasResult]  AS (CONVERT([bit],case when [resultvalue] IS NULL AND [resulttext] IS NULL AND [resultoption] IS NULL AND [Undetectable] IS NULL AND [DetectionLimit] IS NULL then (0) else (1) end,(0)))
 Go
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'IssuedQuantity'AND Object_ID = OBJECT_ID(N'Dtl_PurchaseItem'))
+    BEGIN
+        ALTER TABLE Dtl_PurchaseItem ADD IssuedQuantity int;
+    END;
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'transactionType'AND Object_ID = OBJECT_ID(N'dtl_stocktransaction'))
+    BEGIN
+        ALTER TABLE dtl_stocktransaction ADD transactionType nvarchar(50);
+    END;
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'pillCount'AND Object_ID = OBJECT_ID(N'dtl_patientPharmacyOrder'))
+    BEGIN
+        ALTER TABLE dtl_patientPharmacyOrder ADD pillCount int;
+    END;
 --Migrate the ART History filled in district from int to text
 If not Exists (Select * From sys.columns Where Name = N'FromDistrict' And Object_ID = Object_id(N'dtl_PatientHivPrevCareIE') And system_type_id=TYPE_ID('varchar'))    
 Begin
@@ -273,6 +285,10 @@ If Not Exists (Select * From sys.columns Where Name = N'RequiredFlag' And Object
 Begin
   Alter table dbo.lnk_PatientModuleIdentifier Add RequiredFlag  bit Default 0
 End
+If Not Exists (Select * From sys.columns Where Name = N'DisplayFlag' And Object_ID = Object_id(N'lnk_PatientModuleIdentifier'))    
+Begin
+  Alter table dbo.lnk_PatientModuleIdentifier Add DisplayFlag  bit Default 0
+End
 Go
 If Not Exists (Select * From sys.columns Where Name = N'SpO2' And Object_ID = Object_id(N'PatientVitals'))    
 Begin
@@ -433,6 +449,18 @@ Go
 If Not Exists (Select * From sys.columns Where Name = N'MovedToFamilyTestingTable' And Object_ID = Object_id(N'dtl_FamilyInfo'))    
 Begin
   Alter table dbo.dtl_FamilyInfo Add MovedToFamilyTestingTable  bit not null Constraint DF_dtl_FamilyInfo_MovedToFamilyTestingTable Default 0
+End
+Go
+
+If Not Exists (Select * From sys.columns Where Name = N'RegisteredAtPharmacy' And Object_ID = Object_id(N'mst_Patient'))    
+Begin
+  Alter table dbo.mst_Patient Add RegisteredAtPharmacy  int not null Constraint DF_mst_Patient_RegisteredAtPharmacy Default 0
+End
+Go
+
+If Not Exists (Select * From sys.columns Where Name = N'ServiceRegisteredForAtPharmacy' And Object_ID = Object_id(N'mst_Patient'))    
+Begin
+  Alter table dbo.mst_Patient Add ServiceRegisteredForAtPharmacy  int not null Constraint DF_mst_Patient_ServiceRegisteredForAtPharmacy Default 0
 End
 Go
 
