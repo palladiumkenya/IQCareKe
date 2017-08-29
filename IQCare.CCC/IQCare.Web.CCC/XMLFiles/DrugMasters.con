@@ -2810,6 +2810,11 @@
     <StrengthName>12mg/60mg/100mg</StrengthName>
     <DeleteFlag>false</DeleteFlag>
   </Mst_Strength>
+  <Mst_Strength>
+    <StrengthId>548</StrengthId>
+    <StrengthName>Other</StrengthName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Strength>
   <Mst_FrequencyUnits>
     <Id>1</Id>
     <Name>OD</Name>
@@ -9841,6 +9846,146 @@
     <DrugName>Stavudine/Lamivudine/Nevirapine-d4T12/3TC60/NVP100 12mg/60mg/100mg</DrugName>
     <DeleteFlag>false</DeleteFlag>
   </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1221</Drug_PK>
+    <DrugName>Stavudine(D4T)/Lamivudine(3TC)/Efavirenz(EFV)</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1222</Drug_PK>
+    <DrugName>Zidovudine(AZT)/Lamivudine(3TC)/Efavirenz(EFV)</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1223</Drug_PK>
+    <DrugName>Zidovudine(AZT)/Didanosine(DDI)/Lopinavir/Ritonavir(LOPr)</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1224</Drug_PK>
+    <DrugName>Zidovudine(AZT)/Didanosine(DDI)/Nelfinavir(NFV)</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1225</Drug_PK>
+    <DrugName>Abacavir(ABC)/Didanosine(DDI)/Lopinavir/Ritonavir(LOPr)</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1226</Drug_PK>
+    <DrugName>Abacavir(ABC)/Didanosine(DDI)/Nelfinavir(NFV)</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1227</Drug_PK>
+    <DrugName>Zidovudine(AZT)/Didanosine(DDI)/Indinavir(IDV)</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1228</Drug_PK>
+    <DrugName>Tenofovir DF(TDF)/Abacavir(ABC)/Lopinavir/Ritonavir(LOPr)</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1229</Drug_PK>
+    <DrugName>Tenofovir DF(TDF)/Zidovudine(AZT)/Lopinavir/Ritonavir(LOPr)</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1230</Drug_PK>
+    <DrugName>Stavudine(D4T)/Abacavir(ABC)/Lopinavir/Ritonavir(LOPr)</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1231</Drug_PK>
+    <DrugName>Stavudine(D4T)/Abacavir(ABC)/Nelfinavir(NFV)</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1232</Drug_PK>
+    <DrugName>Zidovudine(AZT)/Abacavir(ABC)/Lopinavir/Ritonavir(LOPr)</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1233</Drug_PK>
+    <DrugName>Zidovudine(AZT)/Abacavir(ABC)/Nelfinavir(NFV)</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1234</Drug_PK>
+    <DrugName>Zidovudine(AZT)/Lamivudine(3TC)/Lopinavir/Ritonavir(LOPr)</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1235</Drug_PK>
+    <DrugName>Tenofovir DF(TDF)/Lamivudine(3TC)/Nevirapine(NVP)</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1236</Drug_PK>
+    <DrugName>Tenofovir DF(TDF)/Lamivudine(3TC)/Efavirenz(EFV)</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1237</Drug_PK>
+    <DrugName>Abacavir(ABC)/Lamivudine(3TC)/Efavirenz(EFV)</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1238</Drug_PK>
+    <DrugName>Abacavir(ABC)/Lamivudine(3TC)/Nevirapine(NVP)</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1239</Drug_PK>
+    <DrugName>Abacavir(ABC)/Lamivudine(3TC)/Lopinavir/Ritonavir(LOPr)</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1240</Drug_PK>
+    <DrugName>Abacavir(ABC)/Lamivudine(3TC)/Zidovudine(AZT)</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1241</Drug_PK>
+    <DrugName>Stavudine(D4T)/Lamivudine(3TC)/Lopinavir/Ritonavir(LOPr)</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1242</Drug_PK>
+    <DrugName>Tenofovir DF(TDF)/Lamivudine(3TC)/Lopinavir/Ritonavir(LOPr)</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1243</Drug_PK>
+    <DrugName>Zidovudine(AZT)/Lamivudine(3TC)/Abacavir(ABC)</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1244</Drug_PK>
+    <DrugName>Tenofovir DF(TDF)/Lamivudine(3TC)/Zidovudine(AZT)</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1245</Drug_PK>
+    <DrugName>Stavudine(D4T)/Lamivudine(3TC)/Abacavir(ABC)</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1246</Drug_PK>
+    <DrugName>Zidovudine(AZT)/Lamivudine(3TC)/Atazanavir(ATR)</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1247</Drug_PK>
+    <DrugName>Tenofovir DF(TDF)/Lamivudine(3TC)/Atazanavir(ATR)</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1248</Drug_PK>
+    <DrugName>Zidovudine(AZT)/Lamivudine(3TC)/Indinavir(IDV)</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
   <Mst_Generic>
     <GenericId>1</GenericId>
     <GenericName>Abacavir</GenericName>
@@ -12665,21 +12810,21 @@
     <Id>5</Id>
     <Name>TID</Name>
     <SRNO>5.00</SRNO>
-    <Deleteflag>0</Deleteflag>
-    <multiplier>3</multiplier>
+    <Deleteflag>1</Deleteflag>
+    <multiplier>0</multiplier>
   </Mst_Frequency>
   <Mst_Frequency>
     <Id>6</Id>
     <Name>QID</Name>
     <SRNO>6.00</SRNO>
-    <Deleteflag>0</Deleteflag>
-    <multiplier>4</multiplier>
+    <Deleteflag>1</Deleteflag>
+    <multiplier>0</multiplier>
   </Mst_Frequency>
   <Mst_Frequency>
     <Id>7</Id>
     <Name>PRN</Name>
     <SRNO>7.00</SRNO>
-    <Deleteflag>0</Deleteflag>
+    <Deleteflag>1</Deleteflag>
     <multiplier>0</multiplier>
   </Mst_Frequency>
   <Mst_Frequency>
@@ -12687,7 +12832,7 @@
     <Name>TD</Name>
     <SRNO>8.00</SRNO>
     <Deleteflag>1</Deleteflag>
-    <multiplier>0</multiplier>
+    <multiplier>3</multiplier>
   </Mst_Frequency>
   <Mst_Frequency>
     <Id>9</Id>

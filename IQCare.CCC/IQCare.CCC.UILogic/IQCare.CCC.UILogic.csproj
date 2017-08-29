@@ -88,6 +88,7 @@
     <Compile Include="Baseline\PatientFamilyTestingManager.cs" />
     <Compile Include="Baseline\PatientHivDiagnosisManager.cs" />
     <Compile Include="Baseline\PatientHivEnrollmentBaselineManager.cs" />
+    <Compile Include="Baseline\PatientLinkageManager.cs" />
     <Compile Include="Baseline\PatientTransferInmanager.cs" />
     <Compile Include="Baseline\PatientTreatmentInitiationManager.cs" />
     <Compile Include="Baseline\PatientVaccinationManager.cs" />

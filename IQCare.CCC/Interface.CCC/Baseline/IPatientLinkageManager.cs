@@ -10,5 +10,6 @@ namespace Interface.CCC.Baseline
     {
         int AddPatientLinkage(PatientLinkage patientLinkage);
         List<PatientLinkage> GetPatientLinkage(int personId);
+        bool CccNumberExists(string cccNumber);
     }
 }
