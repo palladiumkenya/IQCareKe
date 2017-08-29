@@ -787,7 +787,7 @@
                     var relationship = $("#Relationship :selected").text();
                     var baselineHivStatusId = $("#<%=BaselineHIVStatus.ClientID%>").val();
                     var baselineHivStatus = $("#BaselineHIVStatus :selected").text();
-                    var baselineHivStatusDate = moment($("#<%=BaselineHIVStatusDate.ClientID%>").val(), 'DD-MMM-YYYY');
+                    var baselineHivStatusDate = $("#<%=BaselineHIVStatusDate.ClientID%>").val();
                     var hivTestingresultId = $("#<%=hivtestingresult.ClientID%>").val();
                     var hivTestingresult = $("#hivtestingresult :selected").text();
                     hivTestingresult = hivTestingresult == "select" ? "" : hivTestingresult;
@@ -833,7 +833,9 @@
                         toastr.error("HIV testing result date cannot be a future date.");
                         return false;
                     }
-                    if (((baselineHivStatusDate !== "") && !baselineHivStatusDate.isValid())) {
+                    console.log(baselineHivStatusDate);
+
+                    if (((baselineHivStatusDate !== "") && !moment(baselineHivStatusDate, 'DD-MMM-YYYY').isValid())) {
                         toastr.error("Baseline HIV status date invalid.");
                         return false;
                     }
@@ -873,7 +875,10 @@
                     if (cccreferal == "") {
                         cccreferal = false;
                     }
-                    baselineHivStatusDate = moment(baselineHivStatusDate).format("DD-MMM-YYYY");
+                    if (baselineHivStatusDate != "") {
+                        baselineHivStatusDate = moment(baselineHivStatusDate).format("DD-MMM-YYYY");
+                    }
+                    
                     if (fam.length > 0) {
                         toastr.error("Family member already added!");
                         return false;
@@ -1016,7 +1021,7 @@
                                 var action = "";
                                 var enrollment = "";
 
-                                if ((item.BaseLineHivStatus != "Tested Positive" && item.HivStatusResult != "Tested Positive") || (item.BaseLineHivStatus != "Tested Positive")) {
+                                if ((item.BaseLineHivStatus != "Tested Positive" && item.HivStatusResult != "Tested Positive")) {
                                     action = "<button type='button' id= 'btnEditTesting' class='btn btn-link btn-sm pull-right' data-toggle='modal' data-target='#testFollowupModal' onClick='editFamilyTesting(this)'>Follow-up Test</button>";
                                 } else if ((item.CccReferal == "True" && item.BaseLineHivStatus == "Tested Positive") || (item.CccReferal == "True" && item.HivStatusResult == "Tested Positive")) {
                                     referred = "Referred";
