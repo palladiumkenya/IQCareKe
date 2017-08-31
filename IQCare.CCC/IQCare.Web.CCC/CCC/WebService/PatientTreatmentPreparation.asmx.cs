@@ -195,7 +195,7 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string AddPatientSupportSystemCriteria(int patientId, int patientmastervisitId, bool takingART, bool TSIdentified, bool smsreminder, bool othersupport)
+        public string AddPatientSupportSystemCriteria(int patientId, int patientmastervisitId, bool takingART,bool supportGroup, bool TSIdentified, bool smsreminder, bool othersupport)
         {
             string msg = "";
             int result = 0;
@@ -209,6 +209,7 @@ namespace IQCare.Web.CCC.WebService
                     PatientId = patientId,
                     PatientMasterVisitId = patientmastervisitId,
                     TakingART = takingART,
+                    supportGroup=supportGroup,
                     TSIdentified = TSIdentified,
                     EnrollSMSReminder = smsreminder,
                     OtherSupportSystems = othersupport
@@ -230,7 +231,7 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string EditPatientSupportSystemCriteria(int patientId, int patientmastervisitId, bool takingART, bool TSIdentified, bool smsreminder, bool othersupport)
+        public string EditPatientSupportSystemCriteria(int patientId, int patientmastervisitId, bool takingART,bool supportGroup, bool TSIdentified, bool smsreminder, bool othersupport)
         {
             string msg = "";
             int result = 0;
@@ -245,6 +246,7 @@ namespace IQCare.Web.CCC.WebService
                     PatientId = patientId,
                     PatientMasterVisitId = patientmastervisitId,
                     TakingART = takingART,
+                    supportGroup=supportGroup,
                     TSIdentified = TSIdentified,
                     EnrollSMSReminder = smsreminder,
                     OtherSupportSystems = othersupport
