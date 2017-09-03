@@ -18,7 +18,21 @@ namespace BusinessProcess.CCC.Lookup
             {
                 var facilityList = unitOfWork.FacilityListRepository.GetAll().ToList();
                 unitOfWork.Dispose();
-                return facilityList;
+                return facilityList.ToList();
+            }
+        }
+
+        public List<FacilityList> GetFacilitiesList(string name)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                var facilityList = unitOfWork.FacilityListRepository.GetAll();
+                if (!System.String.IsNullOrEmpty(name))
+                {
+                    facilityList = facilityList.Where(x => x.Name.ToLower().Contains(name.ToLower()));
+                }
+                unitOfWork.Dispose();
+                return facilityList.ToList();
             }
         }
     }

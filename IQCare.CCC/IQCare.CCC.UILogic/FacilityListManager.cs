@@ -16,6 +16,18 @@ namespace IQCare.CCC.UILogic
             (IFacilityList) ObjectFactory.CreateInstance(
                 "BusinessProcess.CCC.Lookup.BFacilityListManager, BusinessProcess.CCC");
 
+        public List<FacilityList> GetFacilitiesList(string name)
+        {
+            try
+            {
+                return mgr.GetFacilitiesList(name);
+            }
+            catch (Exception exception)
+            {
+                throw new Exception(exception.Message);
+            }
+        }
+
         public List<FacilityList> GetFacilitiesList()
         {
             try
