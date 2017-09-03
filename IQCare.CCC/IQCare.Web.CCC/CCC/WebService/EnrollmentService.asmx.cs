@@ -778,6 +778,15 @@ namespace IQCare.Web.CCC.WebService
             }
         }
 
+        [WebMethod]
+        public string GetSelectedFacility(string mflcode)
+        {
+            var serializer = new JavaScriptSerializer();
+            var facilityList = new FacilityListManager();
+
+            return serializer.Serialize(facilityList.GetSelectedFacility(mflcode));
+        }
+
         [WebMethod(EnableSession = true)]
         public string GetDynamicFields()
         {

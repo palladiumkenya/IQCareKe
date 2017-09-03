@@ -39,5 +39,17 @@ namespace IQCare.CCC.UILogic
                 throw new Exception(exception.Message);
             }
         }
+
+        public FacilityList GetSelectedFacility(string mflCode)
+        {
+            try
+            {
+                return mgr.GetSelectedFacility(mflCode);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

@@ -10,5 +10,6 @@ namespace Interface.CCC.Lookup
     {
         List<FacilityList> GetFacilitiesList(string name);
         List<FacilityList> GetFacilitiesList();
+        FacilityList GetSelectedFacility(string mflCode);
     }
 }

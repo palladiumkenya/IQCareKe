@@ -513,7 +513,7 @@
                             getPatientEnrollmentDetails();
                         });
                     }
-                },1000);
+                },500);
             });
 
             function getDynamicFields() {
@@ -721,7 +721,9 @@
                                         //console.log(value.Prefix);
                                         //console.log(val);
                                         if (val.PrefixType != null) {
-                                            $("#" + value.Prefix).val(val.PrefixType).trigger("change");
+                                            //$("#" + value.Prefix).append($('<option>', { value: val.PrefixType, text: "dsdd" }));
+                                            //$("#" + value.Prefix).val(val.PrefixType).trigger("change");
+                                            GetSelectedFacility(val.PrefixType, value.Prefix);
                                         }                                       
                                     }
 
@@ -831,6 +833,24 @@
                 $("#btnRese").prop("disabled", true);
                 $("#btnRese").addClass("noneevents");
             }
+        }
+
+        function GetSelectedFacility(mflcode, prefix) {
+            $.ajax({
+                type: "POST",
+                url: "../WebService/EnrollmentService.asmx/GetSelectedFacility",
+                data: "{'mflcode':'" + mflcode + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var results = JSON.parse(response.d);
+                    var name = results.Name;
+                    $("#" + prefix).append($('<option>', { value: mflcode, text: name }));
+                },
+                error: function (response) {
+                    toastr.error(response.d, "Person Profile Error");
+                }
+            });
         }
 
     </script>

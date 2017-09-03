@@ -35,5 +35,15 @@ namespace BusinessProcess.CCC.Lookup
                 return facilityList.ToList();
             }
         }
+
+        public FacilityList GetSelectedFacility(string mflCode)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                var facility = unitOfWork.FacilityListRepository.FindBy(x => x.MFLCode == mflCode).FirstOrDefault();
+                unitOfWork.Dispose();
+                return facility;
+            }
+        }
     }
 }
