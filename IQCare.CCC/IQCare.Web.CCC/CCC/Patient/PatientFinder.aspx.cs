@@ -37,10 +37,10 @@ namespace IQCare.Web.CCC.Patient
         }
 
         [System.Web.Services.WebMethod(EnableSession =true)]
-        public static void SetSelectedPatient(int patientId)
+        public static string SetSelectedPatient(int patientId)
         {
                       HttpContext.Current.Session["PatientPK"] = patientId;
-
+            return "success";
         }
 
             
