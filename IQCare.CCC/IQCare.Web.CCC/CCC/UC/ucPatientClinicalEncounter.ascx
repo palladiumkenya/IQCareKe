@@ -1185,7 +1185,7 @@
                             <div class="panel panel-primary">
                                 <div class="panel-heading">General Examination</div>
                                 <div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden; text-align: left; padding-left: 10px">
-                                    <asp:CheckBoxList ID="cblGeneralExamination" runat="server" RepeatDirection="Horizontal" RepeatColumns="3" Width="100%" ClientIDMode="Static"></asp:CheckBoxList>
+                                    <asp:CheckBoxList ID="cblGeneralExamination" runat="server" RepeatDirection="Horizontal" RepeatColumns="3" Width="100%" ClientIDMode="Static" onChange="cblGeneralExaminationChange(); return false;"></asp:CheckBoxList>
                                 </div>
                             </div>
 
@@ -1955,6 +1955,7 @@
     var genderId = <%=genderID%>;
     var gender = "<%=gender%>";
     var Age = "<%=age%>";
+    var isNoneChecked = false;
 
     document.getElementById('txtPresentingComplaintsID').style.display = 'none';
     document.getElementById('txtAllergyId').style.display = 'none';
@@ -3788,6 +3789,62 @@
                        toastr.error(response.d, "Error occured while saving Presenting Complaints");
                    }
                });
+    }
+
+    function cblGeneralExaminationChange() {
+        var cblGeneralExamination = document.getElementById("cblGeneralExamination");
+        var checkOptions =   cblGeneralExamination.getElementsByTagName('input');
+        var checkedValues = null;
+
+        for(var i = 0; i < checkOptions.length; i++)
+        {
+            var checkBoxRef = checkOptions[i];
+            if (checkBoxRef.checked == true) {
+                var labelArray = checkBoxRef.parentNode.getElementsByTagName('label');
+                checkedValues = labelArray[0].innerHTML;
+                if (checkedValues == "None" && isNoneChecked == false) {
+                    isNoneChecked = true;
+                    CheckAll();
+                }
+            } else {
+                var labelArrayUnchecked = checkBoxRef.parentNode.getElementsByTagName('label');
+                checkedValues = labelArrayUnchecked[0].innerHTML;
+                if (checkedValues == "None" && isNoneChecked == true) {
+                    isNoneChecked = false;
+                    UnCheckAll();
+                }
+            }
+        }
+    }
+
+    function CheckAll() {
+        var listBox = document.getElementById("cblGeneralExamination");
+        var inputItems = listBox.getElementsByTagName("input");
+
+        for(var i = 0; i < inputItems.length; i++) {
+            var opt = inputItems[i];
+            var labelArray = opt.parentNode.getElementsByTagName('label');
+            if (labelArray.length > 0) {
+                if (labelArray[0].innerHTML != "None") {
+                    opt.disabled = true;
+                    opt.checked=false;
+                }
+            }
+        }
+    }
+
+    function UnCheckAll() {
+        var chkControlId = document.getElementById("cblGeneralExamination");
+        var options = chkControlId.getElementsByTagName('input');
+
+        for(var i = 0; i < options.length; i++)
+        {
+            var opt = options[i];
+            var labelArray = opt.parentNode.getElementsByTagName('label');
+            if (labelArray.length > 0) {
+                opt.disabled = false;
+            }
+        }
     }
 
 </script>

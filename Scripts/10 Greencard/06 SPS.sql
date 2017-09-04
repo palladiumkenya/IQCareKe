@@ -3808,7 +3808,13 @@ BEGIN
 			
 						print 'set @BreastFeeding';
 
-						SET @HIVDiagnosisDate = (select top 1 ConfirmHIVPosDate from dtl_PatientHivPrevCareEnrollment where ptn_pk = @ptn_pk);
+						SET @HIVDiagnosisDate = (SELECT TOP 1 dbo.dtl_PatientHivPrevCareEnrollment.ConfirmHIVPosDate
+						FROM dbo.dtl_PatientHivPrevCareEnrollment INNER JOIN
+						 dbo.ord_Visit ON dbo.dtl_PatientHivPrevCareEnrollment.ptn_pk = dbo.ord_Visit.Ptn_Pk 
+						 AND dbo.dtl_PatientHivPrevCareEnrollment.Visit_pk = dbo.ord_Visit.Visit_Id INNER JOIN
+                         dbo.mst_VisitType ON dbo.ord_Visit.VisitType = dbo.mst_VisitType.VisitTypeID
+						 WHERE (dbo.mst_VisitType.VisitName = 'ART History') AND dbo.dtl_PatientHivPrevCareEnrollment.ptn_pk = @ptn_pk);
+
 						print 'set @HIVDiagnosisDate';
 						SET @EnrollmentDate = (select TOP 1 DateEnrolledInCare from dtl_PatientHivPrevCareEnrollment where ptn_pk=@ptn_pk);
 						print 'set @EnrollmentDate';
