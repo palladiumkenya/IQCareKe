@@ -623,7 +623,7 @@
 
             function getFacilitiesList() {
                 $("#mfl_code").select2({
-                    minimumInputLength: 1,
+                    minimumInputLength: 3,
                     width: '100%',
                     placeholder: 'Select a Health Facility',
                     ajax: {
