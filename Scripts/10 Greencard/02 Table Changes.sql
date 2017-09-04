@@ -276,3 +276,13 @@ DROP INDEX [IX_FacilityList] ON [dbo].[FacilityList]
 GO
 CREATE UNIQUE NONCLUSTERED INDEX [IX_FacilityList] ON [dbo].[FacilityList](	[MFLCode] ASC)INCLUDE ( 	[Name]) 
 Go
+
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'RegisteredAtPharmacy'AND Object_ID = OBJECT_ID(N'mst_patient'))
+    BEGIN
+        ALTER TABLE mst_patient ADD RegisteredAtPharmacy int;
+    END;
+	
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'ServiceRegisteredForAtPharmacy'AND Object_ID = OBJECT_ID(N'mst_patient'))
+    BEGIN
+        ALTER TABLE mst_patient ADD ServiceRegisteredForAtPharmacy int;
+    END;
