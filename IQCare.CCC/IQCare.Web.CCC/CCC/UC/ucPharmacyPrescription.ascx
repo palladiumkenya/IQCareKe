@@ -360,45 +360,50 @@
     var tomorrow = new Date();
     tomorrow.setDate(today.getDate() + 1);
 
-    if (prescriptionDate == '' || prescriptionDate == '01-Jan-1900')
+    if (prescriptionDate === '' || prescriptionDate === '01-Jan-1900')
         prescriptionDate = 0;
 
-    if (dispenseDate == '' || dispenseDate == '01-Jan-1900')
+    if (dispenseDate === '' || dispenseDate === '01-Jan-1900')
         dispenseDate = 0;
     
     $(document).ready(function () {
         
         //alert(pmscmSamePointDispense);
+        $("#<%=ddlTreatmentProgram.ClientID%>").on('change',
+            function () {
+                if (pmscmSamePointDispense === "PM/SCM With Same point dispense") {
+                    tp = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
+                   
+                    pmscmFlag = "1";
+                    drugList(1, tp);
+                    $("#ddlBatch").prop('disabled', false);
+                    $("#txtQuantityDisp").prop('disabled', false);
+                    $("#txtDateDispensed").prop('disabled', false);
+                    $("#btnDateDisp").prop('disabled', false);
 
-        if (pmscmSamePointDispense === "PM/SCM With Same point dispense") {
-            tp = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
-            alert(tp);
-            pmscmFlag = "1";
-            drugList(1,tp);
-            $("#ddlBatch").prop('disabled', false);
-            $("#txtQuantityDisp").prop('disabled', false);
-            $("#txtDateDispensed").prop('disabled', false);
-            $("#btnDateDisp").prop('disabled', false);
-            
-        }
-        else if (pmscm === "PM/SCM") {
-            tp = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
-            alert(tp);
-            drugList(1,tp);
-            $("#ddlBatch").prop('disabled', true);
-            $("#txtQuantityDisp").prop('disabled', true);
-            $("#txtDateDispensed").prop('disabled', true);
-            $("#btnDateDisp").prop('disabled', true);
-        }
-        else {
-            tp = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
-            alert(tp);
-            drugList(0,tp);
-            $("#ddlBatch").prop('disabled', true);
-            $("#txtQuantityDisp").prop('disabled', false);
-            $("#txtDateDispensed").prop('disabled', false);
-            $("#btnDateDisp").prop('disabled', false);
-        }
+                }
+                else if (pmscm === "PM/SCM") {
+                    tp = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
+                    
+                    drugList(1, tp);
+                    $("#ddlBatch").prop('disabled', true);
+                    $("#txtQuantityDisp").prop('disabled', true);
+                    $("#txtDateDispensed").prop('disabled', true);
+                    $("#btnDateDisp").prop('disabled', true);
+                }
+                else {
+                    tp = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
+                    
+                    drugList(0, tp);
+                    $("#ddlBatch").prop('disabled', true);
+                    $("#txtQuantityDisp").prop('disabled', false);
+                    $("#txtDateDispensed").prop('disabled', false);
+                    $("#btnDateDisp").prop('disabled', false);
+                }
+
+         });
+
+
 
         $('#PrescriptionDate').datepicker({
             allowPastDates: true,
@@ -417,9 +422,9 @@
         $("#<%=ddlTreatmentProgram.ClientID%>").change(function () {
             var treatmentProgram = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
             tp = treatmentProgram;
-            if (gender == "Female" && age >= 9 && treatmentProgram == "PMTCT") {
+            if (gender === "Female" && age >= 9 && treatmentProgram === "PMTCT") {
 
-            } else if (treatmentProgram == "PMTCT" && (gender != "Female" || age < 9)) {
+            } else if (treatmentProgram === "PMTCT" && (gender != "Female" || age < 9)) {
                  toastr.error("PMTCT is for female patients only who are older than 9 years", "Error");
                  $("#<%=ddlTreatmentProgram.ClientID%>").val("");
              }
@@ -662,9 +667,9 @@
            <%-- $("#<%=regimenLine.ClientID%>").val("");--%>
             $("#<%=ddlRegimen.ClientID%>").prop('disabled', false);
             <%--$("#<%=ddlRegimen.ClientID%>").val("");--%>
-        } else if (startTreatment == "false" && valSelected == "ART") {
+        } else if (startTreatment === "false" && valSelected === "ART") {
             $("#<%=ddlTreatmentPlan.ClientID%> option").each(function () {
-                if ($(this).text() == "Start Treatment") {
+                if ($(this).text() === "Start Treatment") {
                     $("#<%=ddlPeriodTaken.ClientID%>").prop('disabled', true);
                     $("#<%=ddlPeriodTaken.ClientID%>").val("");
                     $("#<%=ddlTreatmentPlan.ClientID%>").val($(this).val());
@@ -676,9 +681,9 @@
                   <%--  $("#<%=ddlRegimen.ClientID%>").val("");--%>
                 }
             });
-        } else if (startTreatment == "true" && valSelected == "ART") {
+        } else if (startTreatment === "true" && valSelected === "ART") {
             $("#<%=ddlTreatmentPlan.ClientID%> option").each(function () {
-                if ($(this).text() == "Continue current treatment") {
+                if ($(this).text() === "Continue current treatment") {
                     $("#<%=ddlPeriodTaken.ClientID%>").prop('disabled', true);
                     $("#<%=ddlPeriodTaken.ClientID%>").val("");
                     $("#<%=ddlTreatmentPlan.ClientID%>").val($(this).val());
