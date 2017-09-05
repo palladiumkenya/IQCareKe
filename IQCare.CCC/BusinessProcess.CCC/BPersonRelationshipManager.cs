@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using DataAccess.Base;
+using DataAccess.CCC.Context;
 using DataAccess.CCC.Repository;
 using DataAccess.Context;
 using Entities.Common;
@@ -77,6 +78,15 @@ namespace BusinessProcess.CCC
                 {
                     unitOfWork.Dispose();
                 }
+            }
+        }
+
+        public bool PersonLinkedToPatient(int personId, int patientId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new PersonContext()))
+            {
+                return unitOfWork.PersonRelationshipRepository
+                    .FindBy(x => x.PersonId == personId && x.PatientId == patientId).Any();
             }
         }
 

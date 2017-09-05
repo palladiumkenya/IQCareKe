@@ -175,6 +175,7 @@
             var newdate = new Date();
             var today = moment(newdate).add(2, 'hours');
             var patType = '<%=patType%>';
+            var appLocation = '<%=AppLocation%>';
             //console.log(today);
 
             $('#PersonDOBdatepicker').datetimepicker({
@@ -493,11 +494,26 @@
             }
             
             $.when(createDynamicElements()).then(function () {
-                setTimeout(function() {
-                    $.when(getFacilitiesList()).then(function() {
+                setTimeout(function () {
+                    if (patType == "New") {
+                        $('#mfl_code').append($('<option></option>'));
+
+                        $('#mfl_code').append($('<option>',
+                            {
+                                value: code,
+                                text: appLocation
+                            }));
+
+                        $("#mfl_code").val(code).trigger("change");
+                        $("#mfl_code").prop('disabled', true);
+
                         getPatientEnrollmentDetails();
-                    });
-                },3000);
+                    } else {
+                        $.when(getFacilitiesList()).then(function() {
+                            getPatientEnrollmentDetails();
+                        });
+                    }
+                },500);
             });
 
             function getDynamicFields() {
@@ -606,40 +622,66 @@
             }
 
             function getFacilitiesList() {
-                $.ajax({
-                    type: "GET",
-                    url: "../WebService/EnrollmentService.asmx/GetFacilitiesList",
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
-                        //generate('success', '<p>,</p>' + response.d);
-                        var messageResponse = JSON.parse(response.d);
+                $("#mfl_code").select2({
+                    minimumInputLength: 3,
+                    width: '100%',
+                    placeholder: 'Select a Health Facility',
+                    ajax: {
+                        type: "POST",
+                        url: "../WebService/EnrollmentService.asmx/GetFacilitiesList",
+                        contentType: 'application/json; charset=utf-8',
+                        dataType: 'json',
+                        cache: true,
+                        data: function (term, page) {
+                            var q = term["term"];
+                            //return JSON.stringify({'q':q});
+                            return "{'q':'" + q + "'}";
+                            //return JSON.stringify({
+                            //    q: term["term"]
+                            //});
+                        },
+                        processResults: function (data) {
+                            var returnedValue = JSON.parse(data.d);
+                            //return { results: JSON.parse(data.d) };
+                            var arr = [];
+                            //value(data.MFLCode)
+                            //    .text(data.Name);
+                            $.each(returnedValue, function (index, value) {
+                                //console.log(value);
+                                //console.log(index);
 
-                        $('#mfl_code').append($('<option></option>'));
+                                arr.push({
+                                    id: value.MFLCode,
+                                    text: value.Name
+                                });
+                            });
 
-                        $.each(messageResponse, function (index, value) {
-                            $('#mfl_code').append($('<option>', {
-                                value: value.MFLCode,
-                                text: value.Name
-                            }));
-                            //console.log(index + ": " + value);
-                        });
-
-                        $("#mfl_code").select2({
-                            placeholder: "Select Facility"
-                        });
-                        if (patType == "New") {
-                            $("#mfl_code").val(code).trigger("change");
-                            $("#mfl_code").prop('disabled', true);
-                        }       
-                        //console.log(code);
+                            return {
+                                results: arr
+                            };
+                        }
+                        //cache: true
                     },
-                    error: function (xhr, errorType, exception) {
-                        var jsonError = jQuery.parseJSON(xhr.responseText);
-                        toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);
-                        return false;
-                    }
+                    escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+                    //minimumInputLength: 1,
+                    //templateResult: formatResult, // omitted for brevity, see the source of this page
+                    //templateSelection: template // omitted for brevity, see the source of this page
                 });
+            }
+
+            function formatResult(res) {
+                //console.log(res);
+                //console.log("res");
+                var markup = "<div>" + res.Name + "</div>";
+                return markup;
+            }
+
+            function template(data, container) {
+                console.log(data);
+                console.log("data");
+                return $('<strong></strong>')
+                    .value(data.MFLCode)
+                    .text(data.Name);
             }
 
             function getPatientEnrollmentDetails() {
@@ -679,7 +721,9 @@
                                         //console.log(value.Prefix);
                                         //console.log(val);
                                         if (val.PrefixType != null) {
-                                            $("#" + value.Prefix).val(val.PrefixType).trigger("change");
+                                            //$("#" + value.Prefix).append($('<option>', { value: val.PrefixType, text: "dsdd" }));
+                                            //$("#" + value.Prefix).val(val.PrefixType).trigger("change");
+                                            GetSelectedFacility(val.PrefixType, value.Prefix);
                                         }                                       
                                     }
 
@@ -789,6 +833,24 @@
                 $("#btnRese").prop("disabled", true);
                 $("#btnRese").addClass("noneevents");
             }
+        }
+
+        function GetSelectedFacility(mflcode, prefix) {
+            $.ajax({
+                type: "POST",
+                url: "../WebService/EnrollmentService.asmx/GetSelectedFacility",
+                data: "{'mflcode':'" + mflcode + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var results = JSON.parse(response.d);
+                    var name = results.Name;
+                    $("#" + prefix).append($('<option>', { value: mflcode, text: name }));
+                },
+                error: function (response) {
+                    toastr.error(response.d, "Person Profile Error");
+                }
+            });
         }
 
     </script>

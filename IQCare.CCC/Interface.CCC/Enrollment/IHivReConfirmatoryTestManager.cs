@@ -9,5 +9,6 @@ namespace Interface.CCC.Enrollment
     public interface IHivReConfirmatoryTestManager
     {
         int AddHivReConfirmatoryTest(HivReConfirmatoryTest hivReConfirmatoryTest);
+        HivReConfirmatoryTest GetPersonLastestReConfirmatoryTest(int personId, int positiveResult);
     }
 }

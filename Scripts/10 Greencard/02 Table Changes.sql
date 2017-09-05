@@ -87,8 +87,13 @@ END;
 
 IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'FamilyInfoId' AND Object_ID = OBJECT_ID(N'PersonRelationship'))
 BEGIN
-	ALTER TABLE [dbo].[PersonRelationship] ADD FamilyInfoId int NOT NULL;
+	ALTER TABLE [dbo].[PersonRelationship] ADD FamilyInfoId int NULL;
 END;
+
+IF EXISTS (SELECT * FROM sys.columns WHERE Name = N'FamilyInfoId' AND Object_ID = OBJECT_ID(N'PersonRelationship'))
+BEGIN
+	ALTER TABLE [dbo].[PersonRelationship] ALTER COLUMN FamilyInfoId int NULL;
+END
 
 IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'DeleteFlag'AND Object_ID = OBJECT_ID(N'ServiceArea'))
     BEGIN
@@ -271,3 +276,13 @@ DROP INDEX [IX_FacilityList] ON [dbo].[FacilityList]
 GO
 CREATE UNIQUE NONCLUSTERED INDEX [IX_FacilityList] ON [dbo].[FacilityList](	[MFLCode] ASC)INCLUDE ( 	[Name]) 
 Go
+
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'RegisteredAtPharmacy'AND Object_ID = OBJECT_ID(N'mst_patient'))
+    BEGIN
+        ALTER TABLE mst_patient ADD RegisteredAtPharmacy int;
+    END;
+	
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'ServiceRegisteredForAtPharmacy'AND Object_ID = OBJECT_ID(N'mst_patient'))
+    BEGIN
+        ALTER TABLE mst_patient ADD ServiceRegisteredForAtPharmacy int;
+    END;

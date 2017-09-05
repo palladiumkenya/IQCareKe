@@ -759,8 +759,8 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
-        public string GetFacilitiesList()
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string GetFacilitiesList(string q)
         {
             try
             {
@@ -768,7 +768,7 @@ namespace IQCare.Web.CCC.WebService
                 serializer.MaxJsonLength = Int32.MaxValue;
 
                 var facilityListManager = new FacilityListManager();
-                var result = serializer.Serialize(facilityListManager.GetFacilitiesList());
+                var result = serializer.Serialize(facilityListManager.GetFacilitiesList(q));
                 return result;
             }
             catch (Exception e)
@@ -776,6 +776,15 @@ namespace IQCare.Web.CCC.WebService
                 Console.WriteLine(e);
                 throw;
             }
+        }
+
+        [WebMethod]
+        public string GetSelectedFacility(string mflcode)
+        {
+            var serializer = new JavaScriptSerializer();
+            var facilityList = new FacilityListManager();
+
+            return serializer.Serialize(facilityList.GetSelectedFacility(mflcode));
         }
 
         [WebMethod(EnableSession = true)]
