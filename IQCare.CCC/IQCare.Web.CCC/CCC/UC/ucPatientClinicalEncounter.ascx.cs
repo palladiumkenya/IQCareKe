@@ -130,6 +130,7 @@ namespace IQCare.Web.CCC.UC
                     txtWeight.Text = Weight;
                     txtHeight.Text = patientTriage.Height.ToString();
                     txtBMI.Text = patientTriage.BMI.ToString();
+                    txtBMIZ.Text = patientTriage.BMIZ.ToString();
                 }
 
 

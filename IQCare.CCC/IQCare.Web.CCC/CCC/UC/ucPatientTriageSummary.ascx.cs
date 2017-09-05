@@ -51,8 +51,8 @@ namespace IQCare.Web.CCC.UC
                 bpDiastolic = Convert.ToInt32(diastolic);
                 bpSystloic = Convert.ToInt32(systolic);
 
-
-
+                bgSystolicT.Text = bpSystloic.ToString() + " (Systolic)";
+                pgDiastolicT.Text = bpDiastolic.ToString() + " (Diastolic)";
 
                 if (patientTriage.Temperature > 0)
                 {
