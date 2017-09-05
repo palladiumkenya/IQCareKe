@@ -14,7 +14,7 @@ namespace Interface.CCC
             List<DrugPrescription> drugPrescription, string pmscmFlag, string TreatmentProgram,
             string PeriodTaken, string TreatmentPlan, string TreatmentPlanReason, string Regimen, string prescriptionDate,
             string dispensedDate);
-        DataTable getPharmacyDrugList(string PMSCM);
+        DataTable getPharmacyDrugList(string PMSCM,string treatmentPlan);
         List<DrugFrequency> getPharmacyDrugFrequency();
         List<DrugBatch> getPharmacyDrugBatch(string DrugPk);
         DataTable getPharmacyDrugSubstitutionInterruptionReason(string TreatmentPlan);
