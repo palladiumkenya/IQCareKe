@@ -10,7 +10,7 @@ using Interface.SCM;
 
 namespace IQCare.SCM
 {
-    public partial class frmInterRequistionIssue : Form
+    public partial class frmInterRequisitionIssue : Form
     {
         public int StoreID = 0;
         DataSet dsPOItems = new DataSet();
@@ -35,33 +35,11 @@ namespace IQCare.SCM
         /// </summary>
         bool IsPOUpdated = false;
 
-        public frmInterStoreTransfer()
+        public frmInterRequisitionIssue()
         {
             InitializeComponent();
         }
-        
-        private void frmInterStoretransfer_Load(object sender, EventArgs e)
-        {
-            lblTotalAmount.Text = "";
-            SetRights();
-            dtpOrderDate.CustomFormat = "dd-MMM-yyyy";
-            dtpOrderDate.Text = GblIQCare.CurrentDate;
-            dtpOrderDate.Enabled = false;
-            clsCssStyle theStyle = new clsCssStyle();
-            chkRejectedStatus.Visible = false;
-            theStyle.setStyle(this);
-            dgwItemSubitemDetails.AllowUserToAddRows = false;
-            BindStoreName();
-            ddlDestinationStore.Enabled = false;
-            lblSourceStore.Tag = "lblLabelRequired";
-            theStyle.setStyle(lblSourceStore);
-            if (GblIQCare.PurchaseOrderID != 0)
-            {
-                formInit();
-            }
-           
-        }
-
+      
         public void SetRights()
         {
             //form level permission set
@@ -770,39 +748,7 @@ namespace IQCare.SCM
            
             
         }
-
-        //void txtItem_KeyUp(object sender, KeyEventArgs e)
-        //{
-        //    if (txtItem.Text != "")
-        //    {
-        //        lstSearch.Visible = true;
-        //        lstSearch.Width = txtItem.Width;
-        //        lstSearch.Left = txtItem.Left;
-        //        lstSearch.Top = txtItem.Top + txtItem.Height;
-        //        lstSearch.Height = 300;
-        //        DataView theDV = new DataView(dsPOItems.Tables[0]);
-        //        theDV.RowFilter = "ItemName like '%" + txtItem.Text + "%'";
-        //        if (theDV.Count > 0)
-        //        {
-        //            DataTable theDT = theDV.ToTable();
-        //            BindFunctions theBindManager = new BindFunctions();
-        //            theBindManager.Win_BindListBox(lstSearch, theDT, "ItemName", "ItemId");
-        //        }
-        //        else
-        //        {
-        //            lstSearch.DataSource = null;
-        //        }
-
-        //    }
-        //    else
-        //    {
-        //        lstSearch.Visible = false;
-        //    }
-        //    if (e.KeyCode == Keys.Down)
-        //        lstSearch.Select();
-
-        //}
-         void txtQuantity_KeyPress(object sender, KeyPressEventArgs e)
+        void txtQuantity_KeyPress(object sender, KeyPressEventArgs e)
         {
              BindFunctions theBind = new BindFunctions();
              theBind.Win_decimal(e);
@@ -1151,40 +1097,10 @@ namespace IQCare.SCM
 
         private void dgwItemSubitemDetails_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-           //DataGridViewRow row = dgwItemSubitemDetails.Rows[e.RowIndex];
-           // if (row != null)
-           // {
-              ////  if (!String.IsNullOrEmpty(Convert.ToString(row.Cells["IsFunded"].Value)))
-            ////    {
-            ////        int Status = Convert.ToInt32(row.Cells["IsFunded"].Value);
-            ////        switch (Status)
-            ////        {
-            ////            case (1):
-            ////                e.CellStyle.BackColor = Color.Cyan;
-            ////                break;
-
-            ////            default:
-            ////                break;
-            ////        }
-            ////    }
-               
-
-           //}  
         }
 
         private void dgwItemSubitemDetails_KeyDown(object sender, KeyEventArgs e)
-        {
-
-           // Btndelete.PerformClick();
-            //if (dgwItemSubitemDetails.SelectedRows.Count > 0 && e.KeyData == Keys.Delete)
-            //{
-            //    foreach (DataGridViewRow row in dgwItemSubitemDetails.SelectedRows)
-            //    {
-            //        dgwItemSubitemDetails.Rows.Remove(row);
-            //    }
-            //} 
-
-        }
+        { }
 
        
 
@@ -1284,34 +1200,25 @@ namespace IQCare.SCM
 
         }
 
-      
-
-     
-
-       
-
-        //private void dgwItemSubitemDetails_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        //{
-        //    //if (dgwItemSubitemDetails.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex !=-1)
-        //    //{
-        //    //    if (dgwItemSubitemDetails.Rows.Count > 0)
-        //    //        dgwItemSubitemDetails.Rows.RemoveAt(e.RowIndex);
-
-        //    //        if (dgwItemSubitemDetails.Rows.Count == 0)
-        //    //        {
-        //    //            dgwItemSubitemDetails.AllowUserToAddRows = true;
-        //    //        }
-               
-        //    //}
- 
-        //  }
-
-
-
+        private void FormLoad(object sender, EventArgs e)
+        {
+            lblTotalAmount.Text = "";
+            SetRights();
+            dtpOrderDate.CustomFormat = "dd-MMM-yyyy";
+            dtpOrderDate.Text = GblIQCare.CurrentDate;
+            dtpOrderDate.Enabled = false;
+            clsCssStyle theStyle = new clsCssStyle();
+            chkRejectedStatus.Visible = false;
+            theStyle.setStyle(this);
+            dgwItemSubitemDetails.AllowUserToAddRows = false;
+            BindStoreName();
+            ddlDestinationStore.Enabled = false;
+            lblSourceStore.Tag = "lblLabelRequired";
+            theStyle.setStyle(lblSourceStore);
+            if (GblIQCare.PurchaseOrderID != 0)
+            {
+                formInit();
+            }
         }
-
-       
-
-      
-    
+    }
 }

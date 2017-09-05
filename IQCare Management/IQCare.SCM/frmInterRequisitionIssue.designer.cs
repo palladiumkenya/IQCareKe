@@ -1,6 +1,6 @@
 ﻿namespace IQCare.SCM
 {
-    partial class frmInterRequistionIssue
+    partial class frmInterRequisitionIssue
     {
         /// <summary>
         /// Required designer variable.
@@ -28,12 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmInterStoreTransfer));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmInterRequisitionIssue));
             this.ddlAuthorisedBy = new System.Windows.Forms.ComboBox();
             this.lblAuthorizedBy = new System.Windows.Forms.Label();
             this.ddlPreparedBy = new System.Windows.Forms.ComboBox();
             this.lblPreparedBy = new System.Windows.Forms.Label();
             this.dgwItemSubitemDetails = new System.Windows.Forms.DataGridView();
+            this.ItemName = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.ItemCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Units = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UnitQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OrderQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IssuedQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IssuedQuantityDU = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TotPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ExpiryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BatchName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BatchID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AvailableQTY = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblTotal = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.Btndelete = new System.Windows.Forms.Button();
@@ -65,19 +78,6 @@
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ItemName = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.ItemCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Units = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UnitQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OrderQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IssuedQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IssuedQuantityDU = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TotPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ExpiryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BatchName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BatchID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AvailableQTY = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgwItemSubitemDetails)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -128,7 +128,7 @@
             // 
             this.dgwItemSubitemDetails.AllowUserToResizeColumns = false;
             this.dgwItemSubitemDetails.AllowUserToResizeRows = false;
-            this.dgwItemSubitemDetails.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.dgwItemSubitemDetails.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgwItemSubitemDetails.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgwItemSubitemDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -160,6 +160,121 @@
             this.dgwItemSubitemDetails.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgwItemSubitemDetails_EditingControlShowing);
             this.dgwItemSubitemDetails.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgwItemSubitemDetails_KeyDown);
             // 
+            // ItemName
+            // 
+            this.ItemName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ItemName.DataPropertyName = "ItemId";
+            this.ItemName.HeaderText = "Item Name";
+            this.ItemName.Name = "ItemName";
+            this.ItemName.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // ItemCode
+            // 
+            this.ItemCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ItemCode.DataPropertyName = "ItemCode";
+            this.ItemCode.FillWeight = 1F;
+            this.ItemCode.HeaderText = "Item Code";
+            this.ItemCode.Name = "ItemCode";
+            this.ItemCode.ReadOnly = true;
+            this.ItemCode.Visible = false;
+            // 
+            // Units
+            // 
+            this.Units.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Units.DataPropertyName = "Units";
+            this.Units.FillWeight = 28.0222F;
+            this.Units.HeaderText = "Purchase Units";
+            this.Units.Name = "Units";
+            this.Units.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // UnitQuantity
+            // 
+            this.UnitQuantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.UnitQuantity.DataPropertyName = "UnitQuantity";
+            this.UnitQuantity.FillWeight = 28.0222F;
+            this.UnitQuantity.HeaderText = "Unit Qty";
+            this.UnitQuantity.Name = "UnitQuantity";
+            // 
+            // OrderQuantity
+            // 
+            this.OrderQuantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.OrderQuantity.DataPropertyName = "OrderQuantity";
+            this.OrderQuantity.FillWeight = 28.0222F;
+            this.OrderQuantity.HeaderText = "Order Qty";
+            this.OrderQuantity.Name = "OrderQuantity";
+            this.OrderQuantity.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // IssuedQuantity
+            // 
+            this.IssuedQuantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.IssuedQuantity.DataPropertyName = "IssuedQuantity";
+            this.IssuedQuantity.FillWeight = 28.0222F;
+            this.IssuedQuantity.HeaderText = "Issued Qty - Purchasing Unit";
+            this.IssuedQuantity.Name = "IssuedQuantity";
+            this.IssuedQuantity.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // IssuedQuantityDU
+            // 
+            this.IssuedQuantityDU.DataPropertyName = "IssuedQuantityDU";
+            this.IssuedQuantityDU.HeaderText = "IssuedQty - Disp Unit";
+            this.IssuedQuantityDU.Name = "IssuedQuantityDU";
+            this.IssuedQuantityDU.ReadOnly = true;
+            // 
+            // Price
+            // 
+            this.Price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Price.DataPropertyName = "Price";
+            this.Price.FillWeight = 28.0222F;
+            this.Price.HeaderText = "Price/Unit";
+            this.Price.Name = "Price";
+            this.Price.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // TotPrice
+            // 
+            this.TotPrice.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.TotPrice.DataPropertyName = "TotPrice";
+            this.TotPrice.FillWeight = 28.0222F;
+            this.TotPrice.HeaderText = "Total Price";
+            this.TotPrice.Name = "TotPrice";
+            this.TotPrice.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // ExpiryDate
+            // 
+            this.ExpiryDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ExpiryDate.DataPropertyName = "ExpiryDate";
+            this.ExpiryDate.FillWeight = 28.0222F;
+            this.ExpiryDate.HeaderText = "Expiry Date";
+            this.ExpiryDate.Name = "ExpiryDate";
+            this.ExpiryDate.ReadOnly = true;
+            // 
+            // BatchName
+            // 
+            this.BatchName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.BatchName.DataPropertyName = "BatchName";
+            this.BatchName.FillWeight = 28.0222F;
+            this.BatchName.HeaderText = "Batch #";
+            this.BatchName.Name = "BatchName";
+            this.BatchName.ReadOnly = true;
+            // 
+            // BatchID
+            // 
+            this.BatchID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.BatchID.DataPropertyName = "BatchID";
+            this.BatchID.FillWeight = 1F;
+            this.BatchID.HeaderText = "BatchID";
+            this.BatchID.Name = "BatchID";
+            this.BatchID.ReadOnly = true;
+            this.BatchID.Visible = false;
+            // 
+            // AvailableQTY
+            // 
+            this.AvailableQTY.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.AvailableQTY.DataPropertyName = "AvailableQTY";
+            this.AvailableQTY.FillWeight = 28.0222F;
+            this.AvailableQTY.HeaderText = "Available Qty";
+            this.AvailableQTY.Name = "AvailableQTY";
+            this.AvailableQTY.ReadOnly = true;
+            // 
             // lblTotal
             // 
             this.lblTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -174,7 +289,7 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.Btndelete);
@@ -512,122 +627,7 @@
             this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
             this.dataGridViewTextBoxColumn12.ReadOnly = true;
             // 
-            // ItemName
-            // 
-            this.ItemName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ItemName.DataPropertyName = "ItemId";
-            this.ItemName.HeaderText = "Item Name";
-            this.ItemName.Name = "ItemName";
-            this.ItemName.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // ItemCode
-            // 
-            this.ItemCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ItemCode.DataPropertyName = "ItemCode";
-            this.ItemCode.FillWeight = 1F;
-            this.ItemCode.HeaderText = "Item Code";
-            this.ItemCode.Name = "ItemCode";
-            this.ItemCode.ReadOnly = true;
-            this.ItemCode.Visible = false;
-            // 
-            // Units
-            // 
-            this.Units.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Units.DataPropertyName = "Units";
-            this.Units.FillWeight = 28.0222F;
-            this.Units.HeaderText = "Purchase Units";
-            this.Units.Name = "Units";
-            this.Units.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // UnitQuantity
-            // 
-            this.UnitQuantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.UnitQuantity.DataPropertyName = "UnitQuantity";
-            this.UnitQuantity.FillWeight = 28.0222F;
-            this.UnitQuantity.HeaderText = "Unit Qty";
-            this.UnitQuantity.Name = "UnitQuantity";
-            // 
-            // OrderQuantity
-            // 
-            this.OrderQuantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.OrderQuantity.DataPropertyName = "OrderQuantity";
-            this.OrderQuantity.FillWeight = 28.0222F;
-            this.OrderQuantity.HeaderText = "Order Qty";
-            this.OrderQuantity.Name = "OrderQuantity";
-            this.OrderQuantity.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // IssuedQuantity
-            // 
-            this.IssuedQuantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.IssuedQuantity.DataPropertyName = "IssuedQuantity";
-            this.IssuedQuantity.FillWeight = 28.0222F;
-            this.IssuedQuantity.HeaderText = "Issued Qty - Purchasing Unit";
-            this.IssuedQuantity.Name = "IssuedQuantity";
-            this.IssuedQuantity.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // IssuedQuantityDU
-            // 
-            this.IssuedQuantityDU.DataPropertyName = "IssuedQuantityDU";
-            this.IssuedQuantityDU.HeaderText = "IssuedQty - Disp Unit";
-            this.IssuedQuantityDU.Name = "IssuedQuantityDU";
-            this.IssuedQuantityDU.ReadOnly = true;
-            // 
-            // Price
-            // 
-            this.Price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Price.DataPropertyName = "Price";
-            this.Price.FillWeight = 28.0222F;
-            this.Price.HeaderText = "Price/Unit";
-            this.Price.Name = "Price";
-            this.Price.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // TotPrice
-            // 
-            this.TotPrice.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.TotPrice.DataPropertyName = "TotPrice";
-            this.TotPrice.FillWeight = 28.0222F;
-            this.TotPrice.HeaderText = "Total Price";
-            this.TotPrice.Name = "TotPrice";
-            this.TotPrice.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // ExpiryDate
-            // 
-            this.ExpiryDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ExpiryDate.DataPropertyName = "ExpiryDate";
-            this.ExpiryDate.FillWeight = 28.0222F;
-            this.ExpiryDate.HeaderText = "Expiry Date";
-            this.ExpiryDate.Name = "ExpiryDate";
-            this.ExpiryDate.ReadOnly = true;
-            // 
-            // BatchName
-            // 
-            this.BatchName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.BatchName.DataPropertyName = "BatchName";
-            this.BatchName.FillWeight = 28.0222F;
-            this.BatchName.HeaderText = "Batch #";
-            this.BatchName.Name = "BatchName";
-            this.BatchName.ReadOnly = true;
-            // 
-            // BatchID
-            // 
-            this.BatchID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.BatchID.DataPropertyName = "BatchID";
-            this.BatchID.FillWeight = 1F;
-            this.BatchID.HeaderText = "BatchID";
-            this.BatchID.Name = "BatchID";
-            this.BatchID.ReadOnly = true;
-            this.BatchID.Visible = false;
-            // 
-            // AvailableQTY
-            // 
-            this.AvailableQTY.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.AvailableQTY.DataPropertyName = "AvailableQTY";
-            this.AvailableQTY.FillWeight = 28.0222F;
-            this.AvailableQTY.HeaderText = "Available Qty";
-            this.AvailableQTY.Name = "AvailableQTY";
-            this.AvailableQTY.ReadOnly = true;
-            // 
-            // frmInterStoreTransfer
+            // frmInterRequistionIssue
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -641,13 +641,13 @@
             this.Controls.Add(this.dgwItemSubitemDetails);
             this.Controls.Add(this.panel3);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "frmInterStoreTransfer";
+            this.Name = "frmInterRequistionIssue";
             this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Tag = "frmForm";
             this.Text = "Counter Requisition And Issue Voucher";
-            this.Load += new System.EventHandler(this.frmInterStoretransfer_Load);
+            this.Load += new System.EventHandler(this.FormLoad);
             ((System.ComponentModel.ISupportInitialize)(this.dgwItemSubitemDetails)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

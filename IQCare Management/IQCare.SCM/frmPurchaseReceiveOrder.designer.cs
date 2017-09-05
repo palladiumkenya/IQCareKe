@@ -522,7 +522,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Tag = "frmForm";
             this.Text = "Purchase & Receive Order";
-            this.Load += new System.EventHandler(this.frmPurchaseOrder_Load);
+            this.Load += new System.EventHandler(this.FormLoad);
             ((System.ComponentModel.ISupportInitialize)(this.dgwItemSubitemDetails)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

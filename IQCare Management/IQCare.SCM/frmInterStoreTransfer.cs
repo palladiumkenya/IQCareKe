@@ -114,17 +114,14 @@ namespace IQCare.SCM
             dtOrderItem.Columns.Add("ItemName", typeof(String));
             dtOrderItem.Columns.Add("PurchaseUnit", typeof(int));
             dtOrderItem.Columns.Add("Quantity", typeof(int));
-            dtOrderItem.Columns.Add("IssuedQuantity", typeof(int));
-            dtOrderItem.Columns.Add("IssuedQuantityDU", typeof(int));
             dtOrderItem.Columns.Add("priceperunit", typeof(decimal));
             dtOrderItem.Columns.Add("totPrice", typeof(int));
             dtOrderItem.Columns.Add("BatchID", typeof(int));
             dtOrderItem.Columns.Add("AvaliableQty", typeof(int));
             dtOrderItem.Columns.Add("ExpiryDate", typeof(DateTime));
             dtOrderItem.Columns.Add("UnitQuantity", typeof(int));
-            dtOrderItem.Columns.Add("IsPOorIST", typeof(int));
             //dtOrderItem.Columns.Add("Delete", typeof(String));
-            // dtOrderItem.Columns.Add("IsFunded", typeof(int));
+           // dtOrderItem.Columns.Add("IsFunded", typeof(int));
             return dtOrderItem;
         }
 
@@ -204,34 +201,18 @@ namespace IQCare.SCM
                             IQCareWindowMsgBox.ShowWindow("PurchaseOrderQuantityZero", this);
                             return;
                         }
-                    if (Convert.ToString(dgwItemSubitemDetails.Rows[i].Cells["IssuedQuantity"].Value) == "0")
-                    {
-                        MessageBox.Show("Issued quantity should be greater than 0");
-                        return;
-                    }
-                    if (String.IsNullOrEmpty(Convert.ToString(dgwItemSubitemDetails.Rows[i].Cells["IssuedQuantity"].Value)))
-                    {
-                        dgwItemSubitemDetails.Rows[i].Cells["IssuedQuantity"].Value = 0;
-                        MessageBox.Show("Issued quantity should be greater than 0");
-                        return;
-                    }
-                    if (Convert.ToString(dgwItemSubitemDetails.Rows[i].Cells["IssuedQuantityDU"].Value) == "0")
-                    {
-                        MessageBox.Show("Issued quantity should be greater than 0");
-                        return;
-                    }
-                    //if (Convert.ToString(dgwItemSubitemDetails.Rows[i].Cells["Price"].Value) == "0")
-                    //{
-                    //    IQCareWindowMsgBox.ShowWindow("PurchaseOrderPriceZero", this);
-                    //    return;
-                    //}
-                    //if (Convert.ToString(dgwItemSubitemDetails.Rows[i].Cells["Price"].Value) == "0")
-                    //{
-                    //    IQCareWindowMsgBox.ShowWindow("PurchaseOrderPriceZero", this);
-                    //    return;
-                    //}
-
-                    DataRow theDRowItem = dtOrderItem.NewRow();
+                        //if (Convert.ToString(dgwItemSubitemDetails.Rows[i].Cells["Price"].Value) == "0")
+                        //{
+                        //    IQCareWindowMsgBox.ShowWindow("PurchaseOrderPriceZero", this);
+                        //    return;
+                        //}
+                        //if (Convert.ToString(dgwItemSubitemDetails.Rows[i].Cells["Price"].Value) == "0")
+                        //{
+                        //    IQCareWindowMsgBox.ShowWindow("PurchaseOrderPriceZero", this);
+                        //    return;
+                        //}
+                       
+                        DataRow theDRowItem = dtOrderItem.NewRow();
                         if(GblIQCare.ModePurchaseOrder == 2)
                         {
                             String strItemId = Convert.ToString(dgwItemSubitemDetails.Rows[i].Cells[0].Value);
@@ -247,12 +228,9 @@ namespace IQCare.SCM
 
                         theDRowItem["ItemName"] = dgwItemSubitemDetails.Rows[i].Cells[0].FormattedValue.ToString();
                         theDRowItem["Quantity"] = Convert.ToInt32(dgwItemSubitemDetails.Rows[i].Cells["OrderQuantity"].Value);
-                    theDRowItem["IssuedQuantity"] = Convert.ToInt32(dgwItemSubitemDetails.Rows[i].Cells["IssuedQuantity"].Value);
-                    theDRowItem["IssuedQuantityDU"] = Convert.ToInt32(dgwItemSubitemDetails.Rows[i].Cells["IssuedQuantityDU"].Value);
-                    theDRowItem["priceperunit"] = Convert.ToDecimal(dgwItemSubitemDetails.Rows[i].Cells["Price"].Value);
+                        theDRowItem["priceperunit"] = Convert.ToDecimal(dgwItemSubitemDetails.Rows[i].Cells["Price"].Value);
                         theDRowItem["UnitQuantity"] = Convert.ToDecimal(dgwItemSubitemDetails.Rows[i].Cells["UnitQuantity"].Value);
-                    theDRowItem["IsPOorIST"] = 2;
-                    
+                        
                         dtOrderItem.Rows.Add(theDRowItem);
                     }
                 }
@@ -393,33 +371,35 @@ namespace IQCare.SCM
                 dgwItemSubitemDetails.AllowUserToAddRows = false;
                // dgwItemSubitemDetails.Columns["ItemName"]
                 DataGridViewComboBoxColumn theColumnItemName = dgwItemSubitemDetails.Columns["ItemName"] as DataGridViewComboBoxColumn;//new DataGridViewComboBoxColumn();
-                // ComboBox theColumnItemName = new ComboBox();
-                theColumnItemName.HeaderText = "Item Name";
-                theColumnItemName.Name = "ItemName";
-                theColumnItemName.DataPropertyName = "ItemId";
-                
-                DataRow drItemSelect;
-                drItemSelect = theDS.Tables[0].NewRow();
-                drItemSelect["ItemId"] = 0;
-                drItemSelect["ItemName"] = "Select";
-                theDS.Tables[0].Rows.InsertAt(drItemSelect, 0);
+                                                                                                                                       // ComboBox theColumnItemName = new ComboBox();
+                try
+                {
+                    theColumnItemName.HeaderText = "Item Name";
+                    theColumnItemName.Name = "ItemName";
+                    theColumnItemName.DataPropertyName = "ItemId";
 
-                theColumnItemName.DataSource = theDS.Tables[0];
-                
-                theColumnItemName.DisplayMember = "ItemName";
-                theColumnItemName.ValueMember = "ItemId";
-               // theColumnItemName.Width = 350;
-                theColumnItemName.ReadOnly = false;
-                //theColumnItemName.AutoComplete = true;
-                theColumnItemName.DefaultCellStyle.NullValue = "Select";
-                
+                    DataRow drItemSelect;
+                    drItemSelect = theDS.Tables[0].NewRow();
+                    drItemSelect["ItemId"] = 0;
+                    drItemSelect["ItemName"] = "Select";
+                    theDS.Tables[0].Rows.InsertAt(drItemSelect, 0);
+
+                    theColumnItemName.DataSource = theDS.Tables[0];
+
+                    theColumnItemName.DisplayMember = "ItemName";
+                    theColumnItemName.ValueMember = "ItemId";
+                    // theColumnItemName.Width = 350;
+                    theColumnItemName.ReadOnly = false;
+                    //theColumnItemName.AutoComplete = true;
+                    theColumnItemName.DefaultCellStyle.NullValue = "Select";
+                }
+                catch { }
 
                 DataGridViewTextBoxColumn theColumnItemCode = new DataGridViewTextBoxColumn();
                 theColumnItemCode.HeaderText = "Item Code";
                 theColumnItemCode.Name = "ItemCode";
                 theColumnItemCode.DataPropertyName = "ItemCode";
                 theColumnItemCode.ReadOnly = true;
-                theColumnItemCode.Visible = false;
 
                 DataGridViewTextBoxColumn theColumnUnit = new DataGridViewTextBoxColumn();
                 theColumnUnit.HeaderText = "Purchase Units";
@@ -438,18 +418,6 @@ namespace IQCare.SCM
                 theColumnQuantity.DataPropertyName = "OrderQuantity";
                 theColumnQuantity.Name = "OrderQuantity";
                 theColumnQuantity.ReadOnly = false;
-
-                DataGridViewTextBoxColumn theColumnIssuedQuantity = new DataGridViewTextBoxColumn();
-                theColumnIssuedQuantity.HeaderText = "Issued Qty - Purchase Unit";
-                theColumnIssuedQuantity.DataPropertyName = "IssuedQuantity";
-                theColumnIssuedQuantity.Name = "IssuedQuantity";
-                theColumnIssuedQuantity.ReadOnly = false;
-
-                DataGridViewTextBoxColumn theColumnIssuedQuantityDU = new DataGridViewTextBoxColumn();
-                theColumnIssuedQuantityDU.HeaderText = "Issued Qty - Disp Unit";
-                theColumnIssuedQuantityDU.DataPropertyName = "IssuedQuantityDU";
-                theColumnIssuedQuantityDU.Name = "IssuedQuantityDU";
-                theColumnIssuedQuantityDU.ReadOnly = false;
 
                 DataGridViewTextBoxColumn theColumnPrice = new DataGridViewTextBoxColumn();
                 theColumnPrice.HeaderText = "Price /Unit";
@@ -548,174 +516,11 @@ namespace IQCare.SCM
                 return;
             }
         }
+       
 
-        private void BindGridExisting(DataTable theDT)
-        {
-            try
-            {
-                //dgwItemSubitemDetails.Columns.Clear();
-                dgwItemSubitemDetails.AutoGenerateColumns = false;
-                dgwItemSubitemDetails.AllowUserToAddRows = false;
-                // dgwItemSubitemDetails.Columns["ItemName"]
-                DataGridViewComboBoxColumn theColumnItemName = dgwItemSubitemDetails.Columns["ItemName"] as DataGridViewComboBoxColumn;//new DataGridViewComboBoxColumn();
-                // ComboBox theColumnItemName = new ComboBox();
-                theColumnItemName.HeaderText = "Item Name";
-                theColumnItemName.Name = "ItemName";
-                theColumnItemName.DataPropertyName = "ItemId";
+       
 
-                //DataRow drItemSelect;
-                //drItemSelect = theDT.NewRow();
-                //drItemSelect["ItemId"] = 0;
-                //drItemSelect["ItemName"] = "Select";
-                //theDT.Rows.InsertAt(drItemSelect, 0);
-
-                theColumnItemName.DataSource = theDT;
-
-                theColumnItemName.DisplayMember = "ItemName";
-                theColumnItemName.ValueMember = "ItemId";
-                // theColumnItemName.Width = 350;
-                theColumnItemName.ReadOnly = true;
-                //theColumnItemName.AutoComplete = true;
-                //theColumnItemName.DefaultCellStyle.NullValue = "Select";
-
-
-                DataGridViewTextBoxColumn theColumnItemCode = new DataGridViewTextBoxColumn();
-                theColumnItemCode.HeaderText = "Item Code";
-                theColumnItemCode.Name = "ItemCode";
-                theColumnItemCode.DataPropertyName = "ItemCode";
-                theColumnItemCode.ReadOnly = true;
-                theColumnItemCode.Visible = false;
-
-                DataGridViewTextBoxColumn theColumnUnit = new DataGridViewTextBoxColumn();
-                theColumnUnit.HeaderText = "Purchase Units";
-                theColumnUnit.Name = "Units";
-                theColumnUnit.DataPropertyName = "Units";
-                theColumnUnit.ReadOnly = true;
-
-                DataGridViewTextBoxColumn theColumnUnitQuantity = new DataGridViewTextBoxColumn();
-                theColumnUnitQuantity.HeaderText = "Unit Qty";
-                theColumnUnitQuantity.DataPropertyName = "UnitQuantity";
-                theColumnUnitQuantity.Name = "UnitQuantity";
-                theColumnUnitQuantity.ReadOnly = false;
-
-                DataGridViewTextBoxColumn theColumnQuantity = new DataGridViewTextBoxColumn();
-                theColumnQuantity.HeaderText = "Ordered Qty";
-                theColumnQuantity.DataPropertyName = "OrderQuantity";
-                theColumnQuantity.Name = "OrderQuantity";
-                theColumnQuantity.ReadOnly = false;
-
-                DataGridViewTextBoxColumn theColumnIssuedQuantity = new DataGridViewTextBoxColumn();
-                theColumnIssuedQuantity.HeaderText = "Issued Qty - Purchase Unit";
-                theColumnIssuedQuantity.DataPropertyName = "IssuedQuantity";
-                theColumnIssuedQuantity.Name = "IssuedQuantity";
-                theColumnIssuedQuantity.ReadOnly = false;
-
-                DataGridViewTextBoxColumn theColumnIssuedQuantityDU = new DataGridViewTextBoxColumn();
-                theColumnIssuedQuantityDU.HeaderText = "Issued Qty - Disp Unit";
-                theColumnIssuedQuantityDU.DataPropertyName = "IssuedQuantityDU";
-                theColumnIssuedQuantityDU.Name = "IssuedQuantityDU";
-                theColumnIssuedQuantityDU.ReadOnly = false;
-
-                DataGridViewTextBoxColumn theColumnPrice = new DataGridViewTextBoxColumn();
-                theColumnPrice.HeaderText = "Price /Unit";
-                theColumnPrice.DataPropertyName = "Price";
-                theColumnPrice.Name = "Price";
-                theColumnPrice.ReadOnly = true;
-
-                DataGridViewTextBoxColumn theColumnTotPrice = new DataGridViewTextBoxColumn();
-                theColumnTotPrice.HeaderText = "Total Price";
-                theColumnTotPrice.DataPropertyName = "TotPrice";
-                theColumnTotPrice.Name = "TotPrice";
-                theColumnTotPrice.ReadOnly = true;
-
-                ////DataGridViewButtonColumn theColumnDelete = new DataGridViewButtonColumn();
-                ////theColumnDelete.DataPropertyName = "Delete";
-                ////theColumnDelete.Name = "Delete";
-                ////theColumnDelete.Text = "Delete";
-                ////theColumnDelete.Width = 150;
-                // theColumnDelete.ReadOnly = true;
-
-                ////DataGridViewTextBoxColumn theColumnIsFunded = new DataGridViewTextBoxColumn();
-                ////theColumnIsFunded.DataPropertyName = "IsFunded";
-                ////theColumnIsFunded.Name = "IsFunded";
-                ////theColumnIsFunded.Width = 10;
-                ////theColumnIsFunded.Visible = false;
-
-
-                dgwItemSubitemDetails.DataSource = dsPOItems.Tables[2];
-                // dgwItemSubitemDetails.Columns.Add(theColumnItemName);
-                //  dgwItemSubitemDetails.Columns.Add(theColumnItemCode);
-                //  dgwItemSubitemDetails.Columns.Add(theColumnUnit);
-                //  dgwItemSubitemDetails.Columns.Add(theColumnUnitQuantity);
-                //  dgwItemSubitemDetails.Columns.Add(theColumnQuantity);
-                //  dgwItemSubitemDetails.Columns.Add(theColumnPrice);
-                if (GblIQCare.ModePurchaseOrder == 1)
-                {
-                    // theColumnItemCode.Width = 100;
-                    //  theColumnUnit.Width = 90;
-                    // theColumnQuantity.Width = 90;
-                    // theColumnPrice.Width = 90;
-                    //theColumnTotPrice.Width = 85;
-                }
-                else if (GblIQCare.ModePurchaseOrder == 2)
-                {
-                    //  theColumnItemCode.Width = 60;
-                    //  theColumnUnit.Width = 60;
-                    //  theColumnQuantity.Width = 60;
-                    //  theColumnPrice.Width = 60;
-                    //  theColumnTotPrice.Width = 60;
-                    //  theColumnUnitQuantity.Width = 60;
-
-                    DataGridViewTextBoxColumn theColumnExpiryDate = new DataGridViewTextBoxColumn();
-                    theColumnExpiryDate.HeaderText = "Expiry Date";
-                    theColumnExpiryDate.Name = "ExpiryDate";
-                    theColumnExpiryDate.DataPropertyName = "ExpiryDate";
-                    // theColumnExpiryDate.Width = 80;
-                    theColumnExpiryDate.ReadOnly = true;
-
-                    DataGridViewTextBoxColumn theColumnBatchName = new DataGridViewTextBoxColumn();
-                    theColumnBatchName.HeaderText = "Batch No.";
-                    theColumnBatchName.Name = "BatchName";
-                    theColumnBatchName.DataPropertyName = "BatchName";
-                    //   theColumnBatchName.Width = 100;
-                    theColumnBatchName.ReadOnly = true;
-
-                    DataGridViewTextBoxColumn theColumnBatchID = new DataGridViewTextBoxColumn();
-                    theColumnBatchID.HeaderText = "BatchID";
-                    theColumnBatchID.Name = "BatchID";
-                    theColumnBatchID.DataPropertyName = "BatchID";
-                    // theColumnBatchID.Width = 150;
-                    theColumnBatchID.ReadOnly = true;
-                    theColumnBatchID.Visible = false;
-
-                    DataGridViewTextBoxColumn theColumnAvailableQTY = new DataGridViewTextBoxColumn();
-                    theColumnAvailableQTY.HeaderText = "Available Qty";
-                    theColumnAvailableQTY.Name = "AvailableQTY";
-                    theColumnAvailableQTY.DataPropertyName = "AvailableQTY";
-                    // theColumnAvailableQTY.Width = 60;
-                    theColumnAvailableQTY.ReadOnly = true;
-
-                    // dgwItemSubitemDetails.Columns.Add(theColumnExpiryDate);
-                    //dgwItemSubitemDetails.Columns.Add(theColumnBatchName);
-                    // //dgwItemSubitemDetails.Columns.Add(theColumnBatchID);
-                    //  dgwItemSubitemDetails.Columns.Add(theColumnAvailableQTY);
-                }
-                // dgwItemSubitemDetails.Columns.Add(theColumnTotPrice);
-                // dgwItemSubitemDetails.Columns.Add(theColumnDelete);
-                // dgwItemSubitemDetails.Columns.Add(theColumnIsFunded);
-
-            }
-            catch (Exception err)
-            {
-                MsgBuilder theBuilder = new MsgBuilder();
-                theBuilder.DataElements["MessageText"] = err.Message.ToString();
-                IQCareWindowMsgBox.ShowWindow("#C1", theBuilder, this);
-                return;
-            }
-        }
-
-
-        // TextBox txtItem;
+       // TextBox txtItem;
         private void dgwItemSubitemDetails_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
             if (e.Control.GetType().ToString() == "System.Windows.Forms.DataGridViewComboBoxEditingControl")
@@ -739,27 +544,6 @@ namespace IQCare.SCM
                 if (txtQuantity != null)
                 {
                     txtQuantity.KeyPress += new KeyPressEventHandler(txtQuantity_KeyPress);
-                    //IsHandleAdded = true;
-                }
-            }
-            if (dgwDataGridForEvent.CurrentCell.OwningColumn.Name == "IssuedQuantity")//.ColumnIndex==3)
-            {
-                int f = dgwDataGridForEvent.CurrentCell.ColumnIndex;
-                TextBox txtIssuedQuantity = e.Control as TextBox;
-                if (txtIssuedQuantity != null)
-                {
-                    txtIssuedQuantity.KeyPress += new KeyPressEventHandler(txtQuantity_KeyPress);
-                    //IsHandleAdded = true;
-                }
-            }
-
-            if (dgwDataGridForEvent.CurrentCell.OwningColumn.Name == "IssuedQuantityDU")//.ColumnIndex==3)
-            {
-                int f = dgwDataGridForEvent.CurrentCell.ColumnIndex;
-                TextBox txtIssuedQuantityDU = e.Control as TextBox;
-                if (txtIssuedQuantityDU != null)
-                {
-                    txtIssuedQuantityDU.KeyPress += new KeyPressEventHandler(txtQuantity_KeyPress);
                     //IsHandleAdded = true;
                 }
             }
@@ -849,8 +633,6 @@ namespace IQCare.SCM
                                 else { dgwItemSubitemDetails.CurrentRow.Cells["UnitQuantity"].Value = ""; }
                                 dgwItemSubitemDetails.CurrentRow.Cells["UnitQuantity"].ReadOnly = true;
                                 dgwItemSubitemDetails.CurrentRow.Cells["OrderQuantity"].Value = 0;
-                                dgwItemSubitemDetails.CurrentRow.Cells["IssuedQuantity"].Value = 0;
-                                dgwItemSubitemDetails.CurrentRow.Cells["IssuedQuantityDU"].Value = 0;
                                 dgwItemSubitemDetails.CurrentRow.Cells["TotPrice"].ReadOnly = true;
 
                                 //For Inter store Transfer 
@@ -993,43 +775,6 @@ namespace IQCare.SCM
                         }
                         lblTotalAmount.Text = Convert.ToString(SumPrice);
                     }
-
-                    if (dgwDataGrid.Columns[e.ColumnIndex].Name == "IssuedQuantity" && dgwDataGrid.Rows[e.RowIndex].Cells["IssuedQuantity"].Value != null)
-                    {
-                        if (Convert.ToString(dgwDataGrid.Rows[e.RowIndex].Cells["OrderQuantity"].Value) != "" && Convert.ToString(dgwDataGrid.Rows[e.RowIndex].Cells["IssuedQuantity"].Value) != "")
-                        {
-                            if (Convert.ToDecimal(dgwDataGrid.Rows[e.RowIndex].Cells["OrderQuantity"].Value.ToString()) < Convert.ToDecimal(dgwDataGrid.Rows[e.RowIndex].Cells["IssuedQuantity"].Value.ToString()))
-                            {
-                                MessageBox.Show("Quantity issued is greater than Quantity Ordered");
-                                //dgwDataGrid.Rows[e.RowIndex].Cells["IssuedQuantity"].Value = 0;
-
-                            }
-                        }
-                    }
-
-                    if (dgwDataGrid.Columns[e.ColumnIndex].Name == "IssuedQuantity" && dgwDataGrid.Rows[e.RowIndex].Cells["IssuedQuantity"].Value != null)
-                    {
-                        if (Convert.ToString(dgwDataGrid.Rows[e.RowIndex].Cells["UnitQuantity"].Value) != "" && Convert.ToString(dgwDataGrid.Rows[e.RowIndex].Cells["IssuedQuantity"].Value) != "")
-                        {
-                            if (Convert.ToString(dgwDataGrid.Rows[e.RowIndex].Cells["UnitQuantity"].Value) == "" && Convert.ToString(dgwDataGrid.Rows[e.RowIndex].Cells["UnitQuantity"].Value) == "0")
-                            {
-                                MessageBox.Show("Kindly Configure this item. Unit quantity for purchase unit is missing");
-                                dgwDataGrid.Rows[e.RowIndex].Cells["IssuedQuantityDU"].Value = 0;
-                            }
-                            else
-                            {
-                                dgwDataGrid.Rows[e.RowIndex].Cells["IssuedQuantityDU"].Value = Convert.ToDecimal(dgwDataGrid.Rows[e.RowIndex].Cells["UnitQuantity"].Value.ToString()) * Convert.ToDecimal(dgwDataGrid.Rows[e.RowIndex].Cells["IssuedQuantity"].Value.ToString());
-                            }
-
-
-                            //if (Convert.ToDecimal(dgwDataGrid.Rows[e.RowIndex].Cells["UnitQuantity"].Value.ToString()) < Convert.ToDecimal(dgwDataGrid.Rows[e.RowIndex].Cells["IssuedQuantity"].Value.ToString()))
-                            //{
-                            //    MessageBox.Show("Quantity issued cannot be greater than Quantity Ordered");
-                            //    dgwDataGrid.Rows[e.RowIndex].Cells["IssuedQuantity"].Value = 0;
-
-                            //}
-                        }
-                    }
                 }
             }
             catch (Exception err)
@@ -1069,18 +814,7 @@ namespace IQCare.SCM
                 {
                     if (dsPOItemsDetail.Tables[0].Rows.Count > 0)
                     {
-                        //if (Convert.ToInt32(dsPOItemsDetail.Tables[0].Rows[0]["SupplierID"]) > 0 && Convert.ToInt32(dsPOItemsDetail.Tables[0].Rows[0]["SourceStoreID"]) == 0)
-                        //{
-                        //    // set IsPurchaseOrder = 1;
-                        //    rdoPurchaseOrder.Checked = true;
-                        //    rdoInterStoreTransfer.Enabled = false;
-                        //}
-                        //else if (Convert.ToInt32(dsPOItemsDetail.Tables[0].Rows[0]["SupplierID"]) == 0 && Convert.ToInt32(dsPOItemsDetail.Tables[0].Rows[0]["SourceStoreID"]) > 0)
-                        //{
-                        //    //set  IsPurchaseOrder = 0;
-                        //    rdoInterStoreTransfer.Checked = true;
-                        //    rdoPurchaseOrder.Enabled = false;
-                        //}
+                        
                         dtpOrderDate.Text = dsPOItemsDetail.Tables[0].Rows[0]["OrderDate"].ToString();
                         dtpOrderDate.CustomFormat = "dd-MMM-yyyy";
                         dtpOrderDate.Enabled = false;
@@ -1132,7 +866,7 @@ namespace IQCare.SCM
 
                         }
                         lblTotalAmount.Text = dsPOItemsDetail.Tables[1].Rows[0]["TotalAmount"].ToString();
-                        BindGridExisting(dsPOItemsDetail.Tables[1]);
+                        BindGrid(dsPOItems);
                         dgwItemSubitemDetails.AllowUserToAddRows = true;
                         dgwItemSubitemDetails.DataSource = dsPOItemsDetail.Tables[1];
 
@@ -1284,11 +1018,19 @@ namespace IQCare.SCM
 
         }
 
-      
+        private void dgwItemSubitemDetails_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if (e.RowIndex > 0)
+            {
 
-     
+               // string n = dgwItemSubitemDetails.Columns[e.ColumnIndex].Name;
+            }
 
-       
+
+        }
+
+
+
 
         //private void dgwItemSubitemDetails_CellContentClick(object sender, DataGridViewCellEventArgs e)
         //{
@@ -1301,14 +1043,14 @@ namespace IQCare.SCM
         //    //        {
         //    //            dgwItemSubitemDetails.AllowUserToAddRows = true;
         //    //        }
-               
+
         //    //}
- 
+
         //  }
 
 
 
-        }
+    }
 
        
 

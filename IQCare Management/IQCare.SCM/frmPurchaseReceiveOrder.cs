@@ -37,36 +37,9 @@ namespace IQCare.SCM
         /// </summary>
         bool IsPOUpdated = false;
 
-        public frmPurchaseOrder()
+        public frmPurchaseReceiveOrder()
         {
             InitializeComponent();
-        }
-
-        private void frmPurchaseOrder_Load(object sender, EventArgs e)
-        {
-            SetRights();
-            dtpOrderDate.CustomFormat = "dd-MMM-yyyy";
-            dtpOrderDate.Text = GblIQCare.CurrentDate;
-            dtpOrderDate.Enabled = false;
-            clsCssStyle theStyle = new clsCssStyle();
-            chkRejectedStatus.Visible = false;
-            theStyle.setStyle(this);
-            dgwItemSubitemDetails.AllowUserToAddRows = false;
-            BindStoreName();
-            lblSupplier.Tag = "lblLabelRequired";
-            ddlDestinationStore.Enabled = false;
-            ddlSupplier.Enabled = true;
-            BindSupplierDropdown();
-            theStyle.setStyle(lblSupplier);
-          
-            if (GblIQCare.PurchaseOrderID != 0)
-            {
-                formInit();
-            }
-            else
-            {
-                BindGrid(GblIQCare.ModePurchaseOrder);
-            }
         }
 
         public void SetRights()
@@ -970,7 +943,10 @@ namespace IQCare.SCM
 
         }
 
-       
+        private void FormLoad(object sender, EventArgs e)
+        {
+
+        }
     }
 
 
