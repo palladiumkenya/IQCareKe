@@ -70,7 +70,8 @@ namespace IQCare.Web.CCC.UC
                 //todo patientManagershould have the lookups resolved
                 //if (x.Sex == 62)
                 //{
-                Session["Gender"] = lblGender.Text = LookupLogic.GetLookupNameById(thisPatient.Sex);
+                Session["Gender"] = Session["PatientSex"] = lblGender.Text = LookupLogic.GetLookupNameById(thisPatient.Sex);
+                 
                 //_lookupManager.GetLookupNameFromId(thisPatient.Sex);
                 //    Session["Gender"] = _lookupManager.GetLookupNameFromId(x.Sex).ToLower();
                 //}
