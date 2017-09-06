@@ -34,6 +34,13 @@
             this.ddlPreparedBy = new System.Windows.Forms.ComboBox();
             this.lblPreparedBy = new System.Windows.Forms.Label();
             this.dgwItemSubitemDetails = new System.Windows.Forms.DataGridView();
+            this.ItemName = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Itemcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Units = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UnitQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.orderQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PriceUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TotalPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblTotal = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.Btndelete = new System.Windows.Forms.Button();
@@ -57,22 +64,8 @@
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.calendarColumn1 = new IQCare.SCM.CalendarColumn();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ItemName = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.Itemcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BatchNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ExpiryDate = new IQCare.SCM.CalendarColumn();
-            this.Units = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UnitQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.orderQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IssuedQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IssuedQuantityDU = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PriceUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TotalPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgwItemSubitemDetails)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -123,26 +116,20 @@
             // 
             this.dgwItemSubitemDetails.AllowUserToResizeColumns = false;
             this.dgwItemSubitemDetails.AllowUserToResizeRows = false;
-            this.dgwItemSubitemDetails.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgwItemSubitemDetails.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgwItemSubitemDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgwItemSubitemDetails.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ItemName,
             this.Itemcode,
-            this.BatchNo,
-            this.ExpiryDate,
             this.Units,
             this.UnitQty,
             this.orderQuantity,
-            this.IssuedQuantity,
-            this.IssuedQuantityDU,
             this.PriceUnit,
             this.TotalPrice});
             this.dgwItemSubitemDetails.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dgwItemSubitemDetails.Location = new System.Drawing.Point(0, 107);
             this.dgwItemSubitemDetails.Name = "dgwItemSubitemDetails";
-            this.dgwItemSubitemDetails.Size = new System.Drawing.Size(1122, 273);
+            this.dgwItemSubitemDetails.Size = new System.Drawing.Size(928, 273);
             this.dgwItemSubitemDetails.TabIndex = 10;
             this.dgwItemSubitemDetails.Tag = "dgwDataGridView";
             this.dgwItemSubitemDetails.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwItemSubitemDetails_CellEndEdit);
@@ -152,6 +139,50 @@
             this.dgwItemSubitemDetails.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgwItemSubitemDetails_DataError);
             this.dgwItemSubitemDetails.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgwItemSubitemDetails_EditingControlShowing);
             this.dgwItemSubitemDetails.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgwItemSubitemDetails_KeyDown);
+            // 
+            // ItemName
+            // 
+            this.ItemName.HeaderText = "Item Name";
+            this.ItemName.Name = "ItemName";
+            this.ItemName.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.ItemName.Width = 200;
+            // 
+            // Itemcode
+            // 
+            this.Itemcode.HeaderText = "Item Code";
+            this.Itemcode.Name = "Itemcode";
+            this.Itemcode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Itemcode.Width = 200;
+            // 
+            // Units
+            // 
+            this.Units.HeaderText = "Purchase Units";
+            this.Units.Name = "Units";
+            this.Units.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // UnitQty
+            // 
+            this.UnitQty.HeaderText = "Unit Quantity";
+            this.UnitQty.Name = "UnitQty";
+            // 
+            // orderQuantity
+            // 
+            this.orderQuantity.HeaderText = "Order Quantity";
+            this.orderQuantity.Name = "orderQuantity";
+            this.orderQuantity.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // PriceUnit
+            // 
+            this.PriceUnit.HeaderText = "Price/Unit";
+            this.PriceUnit.Name = "PriceUnit";
+            this.PriceUnit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.PriceUnit.Width = 83;
+            // 
+            // TotalPrice
+            // 
+            this.TotalPrice.HeaderText = "Total Price";
+            this.TotalPrice.Name = "TotalPrice";
+            this.TotalPrice.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // lblTotal
             // 
@@ -165,8 +196,6 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.Btndelete);
             this.panel1.Controls.Add(this.chkRejectedStatus);
@@ -176,7 +205,7 @@
             this.panel1.Controls.Add(this.ddlPreparedBy);
             this.panel1.Location = new System.Drawing.Point(0, 399);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1122, 57);
+            this.panel1.Size = new System.Drawing.Size(940, 57);
             this.panel1.TabIndex = 20;
             this.panel1.Tag = "lblPanelSCM";
             // 
@@ -216,8 +245,6 @@
             // 
             // panel3
             // 
-            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel3.Controls.Add(this.ddlDestinationStore);
             this.panel3.Controls.Add(this.lblOrderDate);
@@ -229,7 +256,7 @@
             this.panel3.Controls.Add(this.lblSupplier);
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1122, 96);
+            this.panel3.Size = new System.Drawing.Size(852, 96);
             this.panel3.TabIndex = 1;
             this.panel3.Tag = "pnlSubPanelSCM";
             // 
@@ -245,6 +272,7 @@
             // 
             // lblOrderDate
             // 
+            this.lblOrderDate.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblOrderDate.AutoSize = true;
             this.lblOrderDate.Location = new System.Drawing.Point(512, 15);
             this.lblOrderDate.Name = "lblOrderDate";
@@ -255,6 +283,7 @@
             // 
             // lblDestinationstore
             // 
+            this.lblDestinationstore.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblDestinationstore.AutoSize = true;
             this.lblDestinationstore.Location = new System.Drawing.Point(483, 57);
             this.lblDestinationstore.Name = "lblDestinationstore";
@@ -282,6 +311,7 @@
             // 
             // lblOrderNumber
             // 
+            this.lblOrderNumber.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblOrderNumber.AutoSize = true;
             this.lblOrderNumber.Location = new System.Drawing.Point(102, 15);
             this.lblOrderNumber.Name = "lblOrderNumber";
@@ -302,6 +332,7 @@
             // 
             // lblSupplier
             // 
+            this.lblSupplier.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblSupplier.AutoSize = true;
             this.lblSupplier.Location = new System.Drawing.Point(128, 57);
             this.lblSupplier.Name = "lblSupplier";
@@ -312,8 +343,7 @@
             // 
             // panel2
             // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(208)))), ((int)(((byte)(255)))));
             this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -324,7 +354,7 @@
             this.panel2.Location = new System.Drawing.Point(0, 457);
             this.panel2.Margin = new System.Windows.Forms.Padding(0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1122, 47);
+            this.panel2.Size = new System.Drawing.Size(940, 47);
             this.panel2.TabIndex = 30;
             this.panel2.Tag = "pnlSubPanel";
             // 
@@ -401,13 +431,6 @@
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // calendarColumn1
-            // 
-            this.calendarColumn1.HeaderText = "Expiry Date";
-            this.calendarColumn1.MaxDate = new System.DateTime(2050, 6, 10, 0, 0, 0, 0);
-            this.calendarColumn1.MinDate = new System.DateTime(1950, 5, 1, 0, 0, 0, 0);
-            this.calendarColumn1.Name = "calendarColumn1";
-            // 
             // dataGridViewTextBoxColumn5
             // 
             this.dataGridViewTextBoxColumn5.HeaderText = "Price/Unit";
@@ -421,94 +444,13 @@
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             this.dataGridViewTextBoxColumn6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // dataGridViewTextBoxColumn7
-            // 
-            this.dataGridViewTextBoxColumn7.HeaderText = "Price/Unit";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dataGridViewTextBoxColumn7.Width = 83;
-            // 
-            // dataGridViewTextBoxColumn8
-            // 
-            this.dataGridViewTextBoxColumn8.HeaderText = "Total Price";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            this.dataGridViewTextBoxColumn8.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // ItemName
-            // 
-            this.ItemName.HeaderText = "Item Name";
-            this.ItemName.MinimumWidth = 100;
-            this.ItemName.Name = "ItemName";
-            this.ItemName.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.ItemName.Width = 250;
-            // 
-            // Itemcode
-            // 
-            this.Itemcode.HeaderText = "Item Code";
-            this.Itemcode.Name = "Itemcode";
-            this.Itemcode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // BatchNo
-            // 
-            this.BatchNo.HeaderText = "Batch No";
-            this.BatchNo.Name = "BatchNo";
-            this.BatchNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // ExpiryDate
-            // 
-            this.ExpiryDate.HeaderText = "Expiry Date";
-            this.ExpiryDate.MaxDate = new System.DateTime(2050, 6, 10, 0, 0, 0, 0);
-            this.ExpiryDate.MinDate = new System.DateTime(1950, 5, 1, 0, 0, 0, 0);
-            this.ExpiryDate.Name = "ExpiryDate";
-            // 
-            // Units
-            // 
-            this.Units.HeaderText = "Purchase Units";
-            this.Units.Name = "Units";
-            this.Units.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // UnitQty
-            // 
-            this.UnitQty.HeaderText = "Unit Quantity";
-            this.UnitQty.Name = "UnitQty";
-            // 
-            // orderQuantity
-            // 
-            this.orderQuantity.HeaderText = "Order Quantity";
-            this.orderQuantity.Name = "orderQuantity";
-            this.orderQuantity.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // IssuedQuantity
-            // 
-            this.IssuedQuantity.HeaderText = "Issued Quantity (Purchase Units)";
-            this.IssuedQuantity.Name = "IssuedQuantity";
-            this.IssuedQuantity.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // IssuedQuantityDU
-            // 
-            this.IssuedQuantityDU.HeaderText = "Issued Quantity (Dispensing Units)";
-            this.IssuedQuantityDU.Name = "IssuedQuantityDU";
-            // 
-            // PriceUnit
-            // 
-            this.PriceUnit.HeaderText = "Price/Unit";
-            this.PriceUnit.Name = "PriceUnit";
-            this.PriceUnit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.PriceUnit.Width = 83;
-            // 
-            // TotalPrice
-            // 
-            this.TotalPrice.HeaderText = "Total Price";
-            this.TotalPrice.Name = "TotalPrice";
-            this.TotalPrice.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
             // frmPurchaseOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(1134, 508);
+            this.ClientSize = new System.Drawing.Size(940, 504);
             this.Controls.Add(this.lblTotalAmount);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel3);
@@ -516,6 +458,8 @@
             this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.dgwItemSubitemDetails);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmPurchaseOrder";
             this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
@@ -559,6 +503,13 @@
         private System.Windows.Forms.ListBox lstSearch;
         private System.Windows.Forms.CheckBox chkRejectedStatus;
         private System.Windows.Forms.Button Btndelete;
+        private System.Windows.Forms.DataGridViewComboBoxColumn ItemName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Itemcode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Units;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UnitQty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn orderQuantity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PriceUnit;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TotalPrice;
         private System.Windows.Forms.Button btnPrint;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
@@ -566,19 +517,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private CalendarColumn calendarColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
-        private System.Windows.Forms.DataGridViewComboBoxColumn ItemName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Itemcode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BatchNo;
-        private CalendarColumn ExpiryDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Units;
-        private System.Windows.Forms.DataGridViewTextBoxColumn UnitQty;
-        private System.Windows.Forms.DataGridViewTextBoxColumn orderQuantity;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IssuedQuantity;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IssuedQuantityDU;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PriceUnit;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TotalPrice;
     }
 }

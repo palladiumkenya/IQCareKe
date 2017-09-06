@@ -807,7 +807,7 @@ namespace IQCare.Web.Pharmacy
                 else
                 {
                 }
-              
+
                 DataTable theDT1 = new DataTable();
                 theDT1.Columns.Add("DrugId", Type.GetType("System.Int32"));
                 theDT1.Columns.Add("DrugName", Type.GetType("System.String"));
@@ -819,7 +819,7 @@ namespace IQCare.Web.Pharmacy
                 OIDrugs = theDT1.Copy();
                 VaccineDrugs = theDT1.Copy();
                 //NonARVDrugs = theDT1.Copy();
-               
+
 
                 foreach (DataRow theDR in theExistDS.Tables[0].Rows)
                 {
@@ -883,7 +883,7 @@ namespace IQCare.Web.Pharmacy
                 LoadAdditionalDrugs(OIDrugs, PnlOIARV);
                 LoadAdditionalDrugs(VaccineDrugs, panelVaccine);
 
-         
+
 
                 foreach (DataRow dr in theExistDS.Tables[0].Rows)
                 {
@@ -1259,7 +1259,7 @@ namespace IQCare.Web.Pharmacy
                         Response.Redirect("../frmFindAddPatient.aspx");
                 }
                 BSF_Attributes();
-       
+
                 if (mainDataSet != null)
                 {
                     DataTable theDT = new DataTable();
@@ -1284,7 +1284,7 @@ namespace IQCare.Web.Pharmacy
                     //Changes for Duplicate Drug Name--Amitava Sinha
                     ViewState["MasterDrugTable"] = theDT;
                 }
-              
+
                 if (ViewState["OldDS"] == null)
                 {
                     if (this.theExistDS.Tables.Count > 0 && this.theExistDS.Tables[0].Rows.Count == 0)
@@ -2654,8 +2654,8 @@ namespace IQCare.Web.Pharmacy
                 theLabel5.Width = 55;
                 theLabel5.Attributes.Add("Style", "text-align:center");
                 theheaderPnl.Controls.Add(theLabel5);
-                
-              
+
+
 
                 //Label theLabel3 = new Label();
                 //theLabel3.ID = "lblTBDrgUnits";
@@ -2669,7 +2669,7 @@ namespace IQCare.Web.Pharmacy
                 theLabel4.Width = 80;
                 theheaderPnl.Controls.Add(theLabel4);
 
-             
+
 
                 Label theLabel6 = new Label();
                 theLabel6.ID = "lblVacDrgPrescribed";
@@ -2677,7 +2677,7 @@ namespace IQCare.Web.Pharmacy
                 theLabel6.Width = 75;
                 theLabel6.Attributes.Add("Style", "text-align:center");
                 theheaderPnl.Controls.Add(theLabel6);
-         
+
                 Label theLabel7 = new Label();
                 theLabel7.ID = "lblVacDrgDispensed";
                 theLabel7.Text = "Quantity Dispensed";
@@ -2685,7 +2685,7 @@ namespace IQCare.Web.Pharmacy
                 theLabel7.Attributes.Add("Style", "text-align:center");
                 theheaderPnl.Controls.Add(theLabel7);
 
-               
+
                 Label lblStSp2 = new Label();
                 lblStSp2.Width = 10;
                 lblStSp2.ID = "stSpace2" + drugId + "^" + genericId;
@@ -2728,9 +2728,9 @@ namespace IQCare.Web.Pharmacy
                 lblStSp.ID = "stSpace" + drugId + "^" + genericId;
                 lblStSp.Text = "";
                 lblStSp.Height = 45;
-              
+
                 thePnl.Controls.Add(lblStSp);
-               
+
 
                 DataView theDV;
                 DataSet theDS = (DataSet)ViewState["MasterData"];
@@ -2757,20 +2757,20 @@ namespace IQCare.Web.Pharmacy
                 theDrugNm.Text = theDV[0][1].ToString();
                 theDrugNm.Width = 280;
                 thePnl.Controls.Add(theDrugNm);
-              
+
                 /////// Space//////
                 Label theSpace = new Label();
                 theSpace.ID = "theSpace" + drugId + "^" + genericId;
                 theSpace.Width = 10;
                 theSpace.Text = "";
                 thePnl.Controls.Add(theSpace);
-                
+
                 ////////////////////
                 //Vaccination Schedule
                 DropDownList ddlVacSchedule = new DropDownList();
                 ddlVacSchedule.ID = "drgVacSchedule" + drugId + "^" + genericId;
                 ddlVacSchedule.Width = 70;
-             
+
                 //IDrugMst drgMst = (IDrugMst)ObjectFactory.CreateInstance("BusinessProcess.Administration.BDrugMst, BusinessProcess.Administration");
 
                 //DataTable dtSchedule = drgMst.GetScheduleByDrugID(drugId);
@@ -2778,7 +2778,7 @@ namespace IQCare.Web.Pharmacy
                 //theBindMgr.BindCombo(ddlVacSchedule, dtSchedule, "Name", "Id");
                 BindScheduleList(drugId, ref ddlVacSchedule);
                 thePnl.Controls.Add(ddlVacSchedule);
-            
+
                 Label theSpace8 = new Label();
                 theSpace8.ID = "theSpace8*" + drugId + "^" + genericId;
                 theSpace8.Width = 10;
@@ -2791,7 +2791,7 @@ namespace IQCare.Web.Pharmacy
                 theDose.Text = "";
                 theDose.Load += new EventHandler(Control_Load);
                 thePnl.Controls.Add(theDose);
-             
+
                 BindFunctions theBindMgr = new BindFunctions();
                 /////// Space//////
                 Label theSpace2 = new Label();
@@ -2817,7 +2817,7 @@ namespace IQCare.Web.Pharmacy
                 theSpace3.Width = 10;
                 theSpace3.Text = "";
                 thePnl.Controls.Add(theSpace3);
-               
+
                 TextBox theDuration = new TextBox();
                 theDuration.ID = "drgDuration" + drugId + "^" + genericId;
                 theDuration.Attributes.Add("OnBlur", "CalculateTotalDailyDose('ctl00_IQCareContentPlaceHolder_drgDose" + drugId + "^" + genericId + "', 'ctl00_IQCareContentPlaceHolder_drgFrequency" + drugId + "^" + genericId + "','ctl00_IQCareContentPlaceHolder_drgDuration" + drugId + "^" + genericId + "','ctl00_IQCareContentPlaceHolder_drgQtyPrescribed" + drugId + "^" + genericId + "');");
@@ -2825,7 +2825,7 @@ namespace IQCare.Web.Pharmacy
                 theDuration.Text = "1";
                 theDuration.Load += new EventHandler(Control_Load);
                 thePnl.Controls.Add(theDuration);
-           
+
                 ////////////Space////////////////////////
                 Label theSpace4 = new Label();
                 theSpace4.ID = "theSpace4*" + drugId + "^" + genericId;
@@ -2851,7 +2851,7 @@ namespace IQCare.Web.Pharmacy
                 theQtyDispensed.ID = "drgQtyDispensed" + drugId + "^" + genericId;
                 theQtyDispensed.Width = 60;
                 theQtyDispensed.Text = "";
-             
+
                 thePnl.Controls.Add(theQtyDispensed);
 
                 ////////////Space////////////////////////
@@ -2866,9 +2866,9 @@ namespace IQCare.Web.Pharmacy
                 theOtherARTProPhChk.Text = "";
                 theOtherARTProPhChk.Enabled = true;
                 theOtherARTProPhChk.Visible = false;
-               
+
                 thePnl.Controls.Add(theOtherARTProPhChk);
-              
+
                 Label theSpace10 = new Label();
                 theSpace10.ID = "theSpace8" + drugId;
                 theSpace10.Width = 80;
@@ -2890,14 +2890,14 @@ namespace IQCare.Web.Pharmacy
                 thePnl.Controls.Add(theSpace9);
 
                 thePnl.Controls.Add(CreateRemoveLinkButton(drugId, thePanel.ID));
-                
+
                 /////Patient Instructions/////////
                 thePnl.Controls.Add(new LiteralControl("<br />"));
                 if (Request.Browser.Browser == "IE")
                 {
                     thePnl.Controls.Add(new LiteralControl("<br />"));
                 }
-               
+
                 Label ptnInstructions = new Label();
                 ptnInstructions.ID = "lblPtnInstructions" + drugId;
                 //ptnInstructions.Width = 215;
@@ -4780,6 +4780,7 @@ namespace IQCare.Web.Pharmacy
         private bool FieldValidation()
         {
             theCurrentDate = SystemSetting.SystemDate;
+            CurrentSession currentSession = CurrentSession.Current;
             IQCareUtils theUtils = new IQCareUtils();
 
             if (ddlTreatment.SelectedIndex == 0)
@@ -4805,7 +4806,8 @@ namespace IQCare.Web.Pharmacy
                 IQCareMsgBox.Show("BlankDropDown", theMsg, this);
                 return false;
             }
-            if ((Session["Paperless"].ToString() == "0") && (Session["SCMModule"] == null) && (ddlDispensedBy.SelectedIndex == 0))
+            if (currentSession.Facility.PaperLess == false && currentSession.HasPMSCM == false && (ddlDispensedBy.SelectedIndex == 0))
+            //if ((Session["Paperless"].ToString() == "0") && (Session["SCMModule"] == null) && (ddlDispensedBy.SelectedIndex == 0))
             {
                 MsgBuilder theMsg = new MsgBuilder();
                 theMsg.DataElements["Control"] = "Dispensed By";
@@ -5594,7 +5596,7 @@ namespace IQCare.Web.Pharmacy
                                 }
                             }
                             if (x.ID.StartsWith("chkPrintPrescription"))
-                            {                                
+                            {
                                 y = Convert.ToInt32(x.ID.Substring(20, x.ID.Length - 20));
 
                                 if (y == drugId)
@@ -5631,7 +5633,7 @@ namespace IQCare.Web.Pharmacy
             }
         }
 
-       
+
         /// <summary>
         /// Fills the old fixed data.
         /// </summary>
@@ -6135,6 +6137,16 @@ namespace IQCare.Web.Pharmacy
 
                 DataSet _lastDataSet = PediatricManager.GetExistPaediatricDetails(_lastPharmacyID);
                 if (_lastDataSet.Tables.Count == 0) return;
+
+                for (int i = 0; i < _lastDataSet.Tables[0].Rows.Count; i++)
+                {
+                    _lastDataSet.Tables[0].Rows[i]["DispensedQuantity"] = DBNull.Value;
+                    _lastDataSet.Tables[0].Rows[i]["DispensedBy"] = DBNull.Value;
+                    _lastDataSet.Tables[0].Rows[i]["DispensedByDate"] = DBNull.Value;
+                    _lastDataSet.Tables[0].Rows[i].AcceptChanges();
+                }
+                _lastDataSet.AcceptChanges();
+
                 base.Session["ExistPharmacyData"] = _lastDataSet.Tables[0];
 
                 foreach (DataRow theDR in _lastDataSet.Tables[0].Rows)
@@ -7788,7 +7800,7 @@ namespace IQCare.Web.Pharmacy
                 }
                 #endregion "Additional Drugs"
             }
-            else if(theContainer.ID == "panelVaccine")
+            else if (theContainer.ID == "panelVaccine")
             {
                 if (Session["VaccineDrugs"] != null)
                 {
@@ -7847,10 +7859,10 @@ namespace IQCare.Web.Pharmacy
                                             if (x.ID.EndsWith(drugID.ToString() + "^" + theDR["Generic"].ToString()) && x.ID.StartsWith("drgVacSchedule"))
                                             {
                                                 strVaccineSchedule = Convert.ToString(((DropDownList)x).SelectedValue);
-                                                if (strVaccineSchedule.Trim().Length> 0 && strVaccineSchedule != "0" )
+                                                if (strVaccineSchedule.Trim().Length > 0 && strVaccineSchedule != "0")
                                                     TotelColFilled++;
                                             }
-                                           
+
                                         }
                                         if (x.GetType() == typeof(TextBox))
                                         {
@@ -7908,7 +7920,7 @@ namespace IQCare.Web.Pharmacy
                                                 }
                                             }
                                         }
-                                        
+
                                         if (x.GetType() == typeof(CheckBox))
                                         {
                                             if (x.ID.StartsWith("chkProphylaxis"))
@@ -7951,7 +7963,7 @@ namespace IQCare.Web.Pharmacy
                         {
                             //if (UnitId != 0 || theFrequencyId != 0 || Dose != 0 || theDuration != 0 || theQtyPrescribed != 0 || theQtyDispensed != 0 || theTreatmentPhase != "0" || theMonth != 0 || theFinanced != 99)
                             //if (theFrequencyId != 0 && Dose != 0 && theDuration != 0 && theQtyPrescribed1 != 0 && theTreatmentPhase != "0" && theMonth != 0 && printPrescriptionStatus != 999 && patientInstructions != "999" || theProphylaxis != 999)
-                            if (theFrequencyId != 0 && Dose != 0 && theDuration != 0 && theQtyPrescribed1 != 0 && strVaccineSchedule != "0"  && printPrescriptionStatus != 999 && patientInstructions != "999")
+                            if (theFrequencyId != 0 && Dose != 0 && theDuration != 0 && theQtyPrescribed1 != 0 && strVaccineSchedule != "0" && printPrescriptionStatus != 999 && patientInstructions != "999")
                             {
                                 theRow = theDT.NewRow();
                                 if (Convert.ToInt32(theDR["Generic"]) == 0)
@@ -7975,7 +7987,7 @@ namespace IQCare.Web.Pharmacy
                                 theRow["QtyDispensed"] = theQtyDispensed1;
                                 theRow["Financed"] = theFinanced;
                                 //theRow["TreatmentPhase"] = theTreatmentPhase;
-                              //  theRow["TrMonth"] = theMonth;
+                                //  theRow["TrMonth"] = theMonth;
                                 theRow["Prophylaxis"] = theProphylaxis;
                                 theRow["PrintPrescriptionStatus"] = printPrescriptionStatus;
                                 theRow["PatientInstructions"] = patientInstructions;
@@ -8006,7 +8018,7 @@ namespace IQCare.Web.Pharmacy
                         else
                         {
                             //if (theFrequencyId != 0 && Dose != 0 && theDuration != 0 && theQtyPrescribed1 != 0 && theQtyDispensed1 != 0 && theTreatmentPhase != "0" && theMonth != 0 && theProphylaxis != 999 && printPrescriptionStatus != 999 && patientInstructions != "999")
-                            if (theFrequencyId != 0 && Dose != 0 && theDuration != 0 && theQtyPrescribed1 != 0 && theQtyDispensed1 != 0 && strVaccineSchedule != "0"  && printPrescriptionStatus != 999 && patientInstructions != "999")
+                            if (theFrequencyId != 0 && Dose != 0 && theDuration != 0 && theQtyPrescribed1 != 0 && theQtyDispensed1 != 0 && strVaccineSchedule != "0" && printPrescriptionStatus != 999 && patientInstructions != "999")
                             {
                                 theRow = theDT.NewRow();
                                 if (Convert.ToInt32(theDR["Generic"]) == 0)
@@ -8031,7 +8043,7 @@ namespace IQCare.Web.Pharmacy
                                 theRow["QtyDispensed"] = theQtyDispensed1;
                                 theRow["Financed"] = theFinanced;
                                 //theRow["TreatmentPhase"] = theTreatmentPhase;
-                               // theRow["TrMonth"] = theMonth;
+                                // theRow["TrMonth"] = theMonth;
                                 theRow["Prophylaxis"] = theProphylaxis;
                                 theRow["PrintPrescriptionStatus"] = printPrescriptionStatus;
                                 theRow["PatientInstructions"] = patientInstructions;
@@ -8094,7 +8106,7 @@ namespace IQCare.Web.Pharmacy
         /// <returns></returns>
         private DataTable MakeDrugTableRegimen(Control theContainer)
         {
-           // IDrug DrugManager = (IDrug)ObjectFactory.CreateInstance("BusinessProcess.Pharmacy.BDrug, BusinessProcess.Pharmacy");
+            // IDrug DrugManager = (IDrug)ObjectFactory.CreateInstance("BusinessProcess.Pharmacy.BDrug, BusinessProcess.Pharmacy");
 
             DataTable theDT = new DataTable();
 

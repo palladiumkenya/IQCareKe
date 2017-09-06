@@ -814,13 +814,13 @@
                                                             <input id="txtarvTherapyStopCodeOtherName" maxlength="20" name="arvTherapyStopCodeOtherName"
                                                                 runat="server" class="form-control" /></div>
                                                     </div>
-                                                    
+                                                    <%--<div style="display: none">--%>
                                                         <div id="autopopulate" style="display: none" class="col-md-2">
                                                             <br />
                                                             <label style="padding-top: 10px" class="control-label pull-left">
                                                                 Auto Populate Prescription?&nbsp;&nbsp;<asp:CheckBox ID="ckb_AutoPopPresc" runat="server" /></label>
                                                         </div>
-                                                    
+                                                    <%--</div>--%>
                                                 </td>
                                             </tr>
                                         </table>

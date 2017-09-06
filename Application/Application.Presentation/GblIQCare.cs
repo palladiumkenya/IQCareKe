@@ -7,6 +7,17 @@ using Application.Common;
 
 namespace Application.Presentation
     {
+   public  enum MenuChoice
+    {
+        Dispense = 1,
+        Register,
+        CounterRequistion,
+        IssueVoucher,
+        CRWithIV,
+        PurchaseOrder,
+        GoodReceived,
+        POWithGRN
+    }
     public class CustomFormUIManager
     {
         public static string InputCssClass = "form-control";
@@ -31,7 +42,7 @@ namespace Application.Presentation
             DbVersion = "Ver 1.0.0.3 Kenya HMIS";
         }
         public static int iFormMode;
-
+        public static MenuChoice CurrentMenu;
         public int iUserId;
         public static string strAppVersion;
         public static DateTime dtmAppVersion;

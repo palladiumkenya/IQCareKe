@@ -75,7 +75,7 @@ namespace IQCare.SCM
         {
             XMLDS.ReadXml(GblIQCare.GetXMLPath() + "\\AllMasters.con");
             BindFunctions theBindManager = new BindFunctions();
-
+            DataView mainDV = new DataView(XMLDS.Tables["Mst_Decode"]);
             DataView theDV = new DataView(XMLDS.Tables["Mst_Decode"]);
             theDV.RowFilter = "CodeId = 4 and (DeleteFlag =0 or DeleteFlag is null)";
             DataTable theGender = theDV.ToTable();
@@ -83,11 +83,24 @@ namespace IQCare.SCM
 
             theDV = new DataView(XMLDS.Tables["Mst_Code"]);
             theDV.RowFilter = "Name = 'ServiceRegisteredForAtPharmacy' and (DeleteFlag =0 or DeleteFlag is null)";
-            string codeID = theDV[0]["CodeId"].ToString();
+            string codeID = "-999";
+            try
+            { 
+                 codeID = theDV[0]["CodeId"].ToString();
 
-            theDV = new DataView(XMLDS.Tables["Mst_Decode"]);
-            theDV.RowFilter = "CodeId = " + codeID + " and (DeleteFlag =0 or DeleteFlag is null)";
-            DataTable theService = theDV.ToTable();
+                //theDV = new DataView(XMLDS.Tables["Mst_Decode"]);
+                //mainDV.RowFilter = "CodeId = " + codeID + " and (DeleteFlag =0 or DeleteFlag is null)";
+            }
+            catch {  }
+            mainDV.RowFilter = "CodeId = " + codeID + " and (DeleteFlag =0 or DeleteFlag is null)";
+
+            DataTable theService = mainDV.ToTable();
+            DataRow theDR = theService.NewRow();
+            theDR["Name"] = "Select";
+            theDR["Id"] = "0";
+            theDR["DeleteFlag"] = "0";
+            theDR["CodeId"] = "4";
+            theService.Rows.InsertAt(theDR, 0);
             theBindManager.Win_BindCombo(cmbService, theService, "Name", "Id");
         }
 
