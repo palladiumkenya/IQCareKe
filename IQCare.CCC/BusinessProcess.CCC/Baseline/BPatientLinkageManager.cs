@@ -23,6 +23,16 @@ namespace BusinessProcess.CCC.Baseline
             }
         }
 
+        public bool CccNumberExists(string cccNumber)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var exists = unitOfWork.PatientLinkageRepository.FindBy(x => x.CCCNumber == cccNumber).Any();
+                unitOfWork.Dispose();
+                return exists;
+            }
+        }
+
         public List<PatientLinkage> GetPatientLinkage(int personId)
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))

@@ -276,9 +276,10 @@
           $('#tblFindPatient').on('click', 'tbody tr', function () {
               // window.location.href = $(this).attr('href');
               var patientId = $(this).find('td').first().text();
-              PageMethods.SetSelectedPatient(patientId);
-              console.log(patientId);
-              window.location.href = "../patient/patientHome.aspx?patient="+patientId;
+              //PageMethods.SetSelectedPatient(patientId);
+              setSession(patientId);
+              //console.log(patientId);
+              //window.location.href = "../patient/patientHome.aspx?patient="+patientId;
              // alert(rowIndex);
           });
 
@@ -311,5 +312,27 @@
 
 
         });
+
+        function setSession(patientId) {
+            console.log(patientId);
+
+            $.ajax({
+                type: "POST",
+                url: "PatientFinder.aspx/SetSelectedPatient", //Pagename/Functionname
+                contentType: "application/json;charset=utf-8",
+                data: "{'patientId':'" + patientId + "'}",//data
+                dataType: "json",
+                success: function (data) {
+                    if (data.d == "success") {
+                        setTimeout(function () { window.location.href = "../patient/patientHome.aspx" }, 500);
+                    }
+                },
+                error: function (result) {
+
+                    alert("error");
+
+                }
+            });
+        }
     </script>
 </asp:Content>

@@ -554,6 +554,13 @@ namespace IQCare.SCM
                 colBatchId.Visible = false;
                 colBatchId.ReadOnly = true;
 
+                DataGridViewTextBoxColumn colBatchQty = new DataGridViewTextBoxColumn();
+                colBatchQty.HeaderText = "BatchQty";
+                colBatchQty.Name = colBatchQty.DataPropertyName = "BatchQty";
+                colBatchQty.Width = 25;
+                colBatchQty.Visible = false;
+                colBatchQty.ReadOnly = true;
+
                 DataGridViewTextBoxColumn colBatch = new DataGridViewTextBoxColumn();
                 //DataGridViewComboBoxColumn colBatch = new DataGridViewComboBoxColumn();
                 colBatch.HeaderText = "Batch No";
@@ -697,6 +704,7 @@ namespace IQCare.SCM
                 grdDrugDispense.Columns.Add(colDispenseUnitId);
                 grdDrugDispense.Columns.Add(colDispenseUnit);
                 grdDrugDispense.Columns.Add(colBatchId);
+               
                 grdDrugDispense.Columns.Add(colBatch);
                 grdDrugDispense.Columns.Add(colExpiryDate);
                 // Dose
@@ -724,6 +732,7 @@ namespace IQCare.SCM
                 grdDrugDispense.Columns.Add(colWhyPartial);
                 grdDrugDispense.Columns.Add(colValid);
                 grdDrugDispense.Columns.Add(colFreqMultiplier);
+                grdDrugDispense.Columns.Add(colBatchQty);
                 grdDrugDispense.DataSource = theDT;
             }
             catch (Exception err)
@@ -3562,10 +3571,12 @@ namespace IQCare.SCM
         {
             string s = cmbGrdDrugDispense.Text;
             string[] values = s.Split('~');
-
+            string quantity = values[0].ToString().Split('(', ')')[1];
+            
             this.grdDrugDispense.CurrentCell.Value = values[0].ToString();
             grdDrugDispense.Rows[grdDrugDispense.SelectedCells[0].RowIndex].Cells["ExpiryDate"].Value = values[1].ToString();
             grdDrugDispense.Rows[grdDrugDispense.SelectedCells[0].RowIndex].Cells["BatchId"].Value = cmbGrdDrugDispense.SelectedValue;
+            grdDrugDispense.Rows[grdDrugDispense.SelectedCells[0].RowIndex].Cells["BatchQty"].Value = quantity;
             this.cmbGrdDrugDispense.Hide();
 
             
@@ -3631,7 +3642,18 @@ namespace IQCare.SCM
                         dgwDataGrid.Rows[e.RowIndex].Cells["OrderedQuantity"].Value = (Convert.ToDecimal(dgwDataGrid.Rows[e.RowIndex].Cells["Dose"].Value) * Convert.ToDecimal(dgwDataGrid.Rows[e.RowIndex].Cells["FreqMultiplier"].Value) * Convert.ToDecimal(dgwDataGrid.Rows[e.RowIndex].Cells["Duration"].Value));
                     }
                 }
-                
+
+                if (dgwDataGrid.Rows[e.RowIndex].Cells["BatchQty"].Value != DBNull.Value
+                    && dgwDataGrid.Rows[e.RowIndex].Cells["QtyDisp"].Value != DBNull.Value
+                    && dgwDataGrid.Rows[e.RowIndex].Cells["BatchQty"].Value != null
+                     && dgwDataGrid.Rows[e.RowIndex].Cells["QtyDisp"].Value != null)
+                {
+                    if (Convert.ToInt32(dgwDataGrid.Rows[e.RowIndex].Cells["BatchQty"].Value) < Convert.ToInt32(dgwDataGrid.Rows[e.RowIndex].Cells["QtyDisp"].Value))
+                    {
+                        MessageBox.Show("Quantity Dispensed is greater than Quantity in selected batch. Kindly dispense the balance from another batch.");
+                        dgwDataGrid.Rows[e.RowIndex].Cells["QtyDisp"].Value = dgwDataGrid.Rows[e.RowIndex].Cells["BatchQty"].Value;
+                    }
+                }
 
 
             }

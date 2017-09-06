@@ -84,13 +84,14 @@ namespace BusinessProcess.CCC
             
         }
 
-        public DataTable getPharmacyDrugList(string PMSCM)
+        public DataTable getPharmacyDrugList(string PMSCM,string treatmentplan)
         {
             lock (this)
             {
                 ClsObject PatientEncounter = new ClsObject();
                 ClsUtility.Init_Hashtable();
                 ClsUtility.AddParameters("@pmscm", SqlDbType.VarChar, PMSCM);
+                ClsUtility.AddParameters("@tp", SqlDbType.VarChar, treatmentplan);
 
                 return (DataTable)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_getPharmacyDrugList", ClsUtility.ObjectEnum.DataTable);
             }

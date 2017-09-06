@@ -91,7 +91,7 @@
                                 <label class="control-label pull-left">Registered at this clinic:</label>
                             </div>
                             <div class="col-md-6">
-                                <asp:DropDownList ID="RegisteredInClinic" runat="server" ClientIDMode="Static" CssClass="form-control input-sm"></asp:DropDownList>
+                                <asp:DropDownList ID="RegisteredInClinic" runat="server" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-required="true"></asp:DropDownList>
                             </div>
                         </div>
                     </div>
@@ -613,6 +613,8 @@
 
     <script type="text/javascript">
         var tablefamily = null;
+        var cccArrayList = new Array();
+
         $(document).ready(function () {
             window.patientAge= <%=PatientAge%>;
             var date = moment("<%=PatientDateOfBirth%>").format('DD-MMM-YYYY');
@@ -773,6 +775,7 @@
                 });
 
                 if ($('#FamilyTestingForm').parsley().validate()) {
+                    
                     var firstName = escape($("#<%=FirstName.ClientID%>").val());
                     var middleName = escape($("#<%=MiddleName.ClientID%>").val());
                     var lastName = escape($("#<%=LastName.ClientID%>").val());
@@ -784,7 +787,7 @@
                     var relationship = $("#Relationship :selected").text();
                     var baselineHivStatusId = $("#<%=BaselineHIVStatus.ClientID%>").val();
                     var baselineHivStatus = $("#BaselineHIVStatus :selected").text();
-                    var baselineHivStatusDate = moment($("#<%=BaselineHIVStatusDate.ClientID%>").val(), 'DD-MMM-YYYY');
+                    var baselineHivStatusDate = $("#<%=BaselineHIVStatusDate.ClientID%>").val();
                     var hivTestingresultId = $("#<%=hivtestingresult.ClientID%>").val();
                     var hivTestingresult = $("#hivtestingresult :selected").text();
                     hivTestingresult = hivTestingresult == "select" ? "" : hivTestingresult;
@@ -798,9 +801,21 @@
                     var today = new Date();
                     var birthDate = new Date(dob);
                     var age = today.getFullYear() - birthDate.getFullYear();
+                    var cccNumberFound = null;
 
-                    //console.log(baselineHivStatusDate);
+                    if (typeof cccReferalNumber !== "undefined" && cccReferalNumber != null && cccReferalNumber != "") {
+                        cccNumberFound = $.inArray("" + cccReferalNumber + "", cccArrayList);
 
+
+                        if (cccNumberFound > -1){
+                            toastr.error("Error", cccReferalNumber + " CCC Number already exists in the List");
+                            return false;
+                        }
+                        cccArrayList.push("" + cccReferalNumber + "");
+                    }
+                    //setTimeout(function() { CccNumberExists(cccReferalNumber); }, 200);
+                    ////console.log(baselineHivStatusDate);
+                    //console.log(isCccNumberExists);
                     //validations
                     if (moment('' + dob + '').isAfter()) {
                         toastr.error("Date of birth cannot be a future date.");
@@ -818,7 +833,9 @@
                         toastr.error("HIV testing result date cannot be a future date.");
                         return false;
                     }
-                    if (((baselineHivStatusDate !== "") && !baselineHivStatusDate.isValid())) {
+                    console.log(baselineHivStatusDate);
+
+                    if (((baselineHivStatusDate !== "") && !moment(baselineHivStatusDate, 'DD-MMM-YYYY').isValid())) {
                         toastr.error("Baseline HIV status date invalid.");
                         return false;
                     }
@@ -858,7 +875,10 @@
                     if (cccreferal == "") {
                         cccreferal = false;
                     }
-                    baselineHivStatusDate = moment(baselineHivStatusDate).format("DD-MMM-YYYY");
+                    if (baselineHivStatusDate != "") {
+                        baselineHivStatusDate = moment(baselineHivStatusDate).format("DD-MMM-YYYY");
+                    }
+                    
                     if (fam.length > 0) {
                         toastr.error("Family member already added!");
                         return false;
@@ -1001,7 +1021,7 @@
                                 var action = "";
                                 var enrollment = "";
 
-                                if ((item.BaseLineHivStatus != "Tested Positive" && item.HivStatusResult != "Tested Positive") || (item.BaseLineHivStatus != "Tested Positive")) {
+                                if ((item.BaseLineHivStatus != "Tested Positive" && item.HivStatusResult != "Tested Positive")) {
                                     action = "<button type='button' id= 'btnEditTesting' class='btn btn-link btn-sm pull-right' data-toggle='modal' data-target='#testFollowupModal' onClick='editFamilyTesting(this)'>Follow-up Test</button>";
                                 } else if ((item.CccReferal == "True" && item.BaseLineHivStatus == "Tested Positive") || (item.CccReferal == "True" && item.HivStatusResult == "Tested Positive")) {
                                     referred = "Referred";
@@ -1642,6 +1662,22 @@
                 },
                 error: function (response) {
                     toastr.error(response.d, "Family Error");
+                }
+            });
+        }
+
+        function CccNumberExists(cccNumber) {
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientService.asmx/CccNumberExists",
+                data: "{'cccNumber':'" + cccNumber + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function(response) {
+                    //isCccNumberExists = response.d;
+                },
+                error: function(response) {
+                    toastr.error("Family Testing", response.d);
                 }
             });
         }

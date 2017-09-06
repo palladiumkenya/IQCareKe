@@ -118,5 +118,10 @@ namespace IQCare.Web.CCC.UC
                 //ScriptManager.RegisterStartupScript(this, this.GetType(), "regimen", "selectRegimens(" + regimenLine.SelectedValue + ");", true);
             }
         }
+
+        protected void ddlTreatmentProgram_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

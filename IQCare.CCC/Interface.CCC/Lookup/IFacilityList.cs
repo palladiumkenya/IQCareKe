@@ -8,6 +8,8 @@ namespace Interface.CCC.Lookup
 {
     public interface IFacilityList
     {
+        List<FacilityList> GetFacilitiesList(string name);
         List<FacilityList> GetFacilitiesList();
+        FacilityList GetSelectedFacility(string mflCode);
     }
 }
