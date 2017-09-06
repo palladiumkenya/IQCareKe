@@ -98,6 +98,10 @@ GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_getPharmacyDrugList]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[sp_getPharmacyDrugList]
 GO
+/****** Object:  StoredProcedure [dbo].[CCC_GetPatientCount]    Script Date: 5/9/2017 3:16:05 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[CCC_GetPatientCount]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[CCC_GetPatientCount]
+GO
 /****** Object:  StoredProcedure [dbo].[sp_getPharmacyDrugFrequency]    Script Date: 5/9/2017 3:16:05 PM ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_getPharmacyDrugFrequency]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[sp_getPharmacyDrugFrequency]
@@ -1739,13 +1743,39 @@ Set Nocount On;
 -- Insert statements for procedure here
 	update patientallergy set DeleteFlag = 1 where PatientId = @PatientID
 End
+GO
 
+/****** Object:  StoredProcedure [dbo].[CCC_GetPatientCount]    Script Date: 05/09/2017 17:08:22 ******/
+SET ANSI_NULLS ON
+GO
 
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[CCC_GetPatientCount]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[CCC_GetPatientCount] AS' 
+END
+GO
 
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+ALTER PROCEDURE [dbo].[CCC_GetPatientCount]
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
 
-
-
-
+	SELECT        COUNT(PT.Id) AS PatientCount
+	FROM            dbo.Patient AS PT INNER JOIN
+							 dbo.PatientEnrollment AS PE ON PT.Id = PE.PatientId INNER JOIN
+							 dbo.PatientIdentifier AS PI ON PE.Id = PI.PatientEnrollmentId AND PT.Id = PI.PatientId INNER JOIN
+							 dbo.Identifiers AS IDE ON PI.IdentifierTypeId = IDE.Id
+	WHERE        (PT.DeleteFlag = 0) AND (IDE.Name = 'CCC Registration Number')
+END
 
 GO
 /****** Object:  StoredProcedure [dbo].[sp_deletePatientEncounterChronicIllness]    Script Date: 5/9/2017 3:16:05 PM ******/

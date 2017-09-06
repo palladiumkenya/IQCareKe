@@ -844,8 +844,10 @@
                 dataType: "json",
                 success: function (response) {
                     var results = JSON.parse(response.d);
-                    var name = results.Name;
-                    $("#" + prefix).append($('<option>', { value: mflcode, text: name }));
+                    if (results != null) {
+                        var name = results.Name;
+                        $("#" + prefix).append($('<option>', { value: mflcode, text: name }));
+                    }
                 },
                 error: function (response) {
                     toastr.error(response.d, "Person Profile Error");
