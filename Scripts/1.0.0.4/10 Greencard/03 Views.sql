@@ -301,7 +301,8 @@ WHERE        (PT.PatientType =
                                WHERE        (MasterName = 'PatientType') AND (ItemName = 'Transit'))) AND (PT.DeleteFlag = 0) AND (IDE.Name = 'CCC Registration Number')) AS TotalTransit,
                              (SELECT        ISNULL(COUNT(DISTINCT Ptn_Pk), 0) AS Expr1
                                FROM            dbo.dtl_PatientCareEnded AS p
-                               WHERE        (PatientExitReason = 91)) AS LostToFollowUp
+                               WHERE        (PatientExitReason = 91)) AS LostToFollowUp,
+							    (SELECT COUNT(DISTINCT PatientId) FROM PatientIdentifier I WHERE I.IdentifierTypeId IN(SELECT id FROM Identifiers WHERE Code='CCCNumber') AND I.PatientId IN(SELECT TOP 1 PatientId from ord_PatientPharmacyOrder O WHERE DATEDIFF(day,O.DispensedByDate,GETDATE())>90 ORDER BY DispensedByDate DESC) AND I.PatientId NOT IN(SELECT PatientId FROM PatientCareending)) TotalUndocumentedLTFU
 GO
 
 
