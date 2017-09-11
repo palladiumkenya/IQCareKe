@@ -76,6 +76,15 @@ namespace IQCare.Web.CCC.UC {
         protected global::System.Web.UI.WebControls.TextBox txtBMI;
         
         /// <summary>
+        /// txtBMIZ control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtBMIZ;
+        
+        /// <summary>
         /// nutritionscreeningstatus control.
         /// </summary>
         /// <remarks>
@@ -290,6 +299,24 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList tbscreeningstatus;
+        
+        /// <summary>
+        /// rdAnyAdverseEventsYes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdAnyAdverseEventsYes;
+        
+        /// <summary>
+        /// rdAnyAdverseEventsNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdAnyAdverseEventsNo;
         
         /// <summary>
         /// adverseEvent control.

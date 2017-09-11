@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Configuration;
 using Application.Logger;
+using Interface.Clinical;
 
 namespace IQCare.Web.UILogic
 {
@@ -193,11 +194,20 @@ namespace IQCare.Web.UILogic
         {
             get
             {
-                if ((HttpContext.Current != null) && (HttpContext.Current.Session != null))
+                if ((HttpContext.Current != null) && (HttpContext.Current.Session != null) && (HttpContext.Current.Session["SystemSettings"] != null))
                 {
                     return (SystemSetting)HttpContext.Current.Session["SystemSettings"];
                 }
-                return null;
+                else
+                {
+                    SystemSetting cSS = new SystemSetting();
+                    if (cSS.isValid)
+                    {
+                        HttpContext.Current.Session["SystemSettings"] = cSS;
+                    }
+                    return cSS;
+                }
+               // return null;
             }
         }
         /// <summary>
@@ -229,6 +239,10 @@ namespace IQCare.Web.UILogic
                 return theDTime;
             }
         }
-
+        public static DataTable GetPatientIdentifiers(int serviceAreaId = 0)
+        {
+            IPatientRegistration ipr = (IPatientRegistration)ObjectFactory.CreateInstance("BusinessProcess.Clinical.BPatientRegistration, BusinessProcess.Clinical");
+            return ipr.GetIdentifiersByServiceAreaId(serviceAreaId);
+        }
     }
 }

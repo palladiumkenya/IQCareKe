@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using DataAccess.CCC.Repository;
 using Entities.CCC.Lookup;
@@ -7,6 +8,8 @@ using Interface.CCC.Lookup;
 using Application.Common;
 using DataAccess.Base;
 using DataAccess.CCC.Context;
+using DataAccess.Common;
+using DataAccess.Entity;
 
 namespace BusinessProcess.CCC
 {
@@ -99,16 +102,55 @@ namespace BusinessProcess.CCC
             }
         }
 
+        public List<PatientLookup> GetPatientListByParams(int patientId, string firstName, string middleName, string lastName,
+            int sex)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                List<PatientLookup> patientLookups;
+                if (!System.String.IsNullOrEmpty(middleName))
+                {
+                    patientLookups = unitOfWork.PatientLookupRepository
+                        .FindBy(x => x.FirstName.ToLower().Contains(firstName.ToLower()) &&
+                                     x.MiddleName.ToLower().Contains(middleName.ToLower()) &&
+                                     x.LastName.ToLower().Contains(lastName.ToLower()) && x.Id != patientId).ToList();
+                }
+                else
+                {
+                    patientLookups = unitOfWork.PatientLookupRepository
+                        .FindBy(x => x.FirstName.ToLower().Contains(firstName.ToLower()) &&
+                                     x.LastName.ToLower().Contains(lastName.ToLower()) && x.Id != patientId).ToList();
+                }
+
+                if (sex > 0)
+                {
+                    patientLookups = patientLookups.Where(y => y.Sex == sex).ToList();
+                }
+
+                return patientLookups;
+            }
+        }
+
+
+
         public int GetTotalpatientCount()
         {
             int totalCount = 0;
-            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
+            ClsObject obj = new ClsObject();
+            ClsUtility.Init_Hashtable();
+
+            DataTable dt = (DataTable)obj.ReturnObject(ClsUtility.theParams, "CCC_GetPatientCount", ClsUtility.ObjectEnum.DataTable);
+            if (dt != null && dt.Rows.Count > 0)
             {
-                totalCount = unitOfWork.PatientLookupRepository.Count();//.GetAll().Count();
-
-                unitOfWork.Dispose();
-
+                totalCount = Convert.ToInt32(dt.Rows[0]["PatientCount"]);
             }
+            //using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
+            //{
+            //    totalCount = unitOfWork.PatientLookupRepository.Count();//.GetAll().Count();
+
+            //    unitOfWork.Dispose();
+
+            //}
             return totalCount;
 
         }

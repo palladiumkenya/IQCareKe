@@ -31,11 +31,11 @@ namespace IQCare.Web.CCC.WebService
         {
             int result = 0;
             string msg = "";
-            PatientPsychosocialCriteriaManager _PatientPsychosocialCriteriaManager = new PatientPsychosocialCriteriaManager();
+            PatientPsychosocialCriteriaManager patientPsychosocialCriteriaManager = new PatientPsychosocialCriteriaManager();
 
             try {
 
-                result = _PatientPsychosocialCriteriaManager.CheckIfARTPreparationExists(patientId);
+                result = patientPsychosocialCriteriaManager.CheckIfARTPreparationExists(patientId);
             }
             catch (Exception e)
             {
@@ -52,12 +52,12 @@ namespace IQCare.Web.CCC.WebService
         {
             string msg = "";
             int result = 0;
-            PatientPsychosocialCriteriaManager _PatientPsychosocialCriteriaManager = new PatientPsychosocialCriteriaManager();
+            PatientPsychosocialCriteriaManager patientPsychosocialCriteriaManager = new PatientPsychosocialCriteriaManager();
 
 
             try
             {
-                PatientPsychoscialCriteria _patientPsychosocialCriteria = new PatientPsychoscialCriteria()
+                PatientPsychoscialCriteria patientPsychosocialCriteria = new PatientPsychoscialCriteria()
                 {
                     PatientId = patientId,
                     PatientMasterVisitId = patientmastervisitId,
@@ -73,7 +73,7 @@ namespace IQCare.Web.CCC.WebService
                     startART=caregiver
                 };
 
-                result = _PatientPsychosocialCriteriaManager.AddPreparation(_patientPsychosocialCriteria);
+                result = patientPsychosocialCriteriaManager.AddPreparation(patientPsychosocialCriteria);
                 if (result > 0)
                 {
                     msg = "Patient Psychosocial criteria assessment completed!";
@@ -93,12 +93,12 @@ namespace IQCare.Web.CCC.WebService
         {
             string msg = "";
             int result = 0;
-            PatientPsychosocialCriteriaManager _PatientPsychosocialCriteriaManager = new PatientPsychosocialCriteriaManager();
+            PatientPsychosocialCriteriaManager patientPsychosocialCriteriaManager = new PatientPsychosocialCriteriaManager();
 
 
             try
             {
-                PatientPsychoscialCriteria _patientPsychosocialCriteria = new PatientPsychoscialCriteria()
+                PatientPsychoscialCriteria patientPsychosocialCriteria = new PatientPsychoscialCriteria()
                 {
                     PatientId = patientId,
                     PatientMasterVisitId = patientmastervisitId,
@@ -111,7 +111,7 @@ namespace IQCare.Web.CCC.WebService
                     AccurateLocator = locator
                 };
 
-                result = _PatientPsychosocialCriteriaManager.EditPreparation(_patientPsychosocialCriteria);
+                result = patientPsychosocialCriteriaManager.EditPreparation(patientPsychosocialCriteria);
                 if (result > 0)
                 {
                     msg = "Patient Psychosocial criteria assessment update completed!";
@@ -130,10 +130,10 @@ namespace IQCare.Web.CCC.WebService
         [WebMethod(EnableSession = true)]
         public List<PatientPsychoscialCriteria> GetPatientPsychosocialCriteria(int patientId)
         {
-            PatientPsychosocialCriteriaManager _PatientPsychosocialCriteriaManager = new PatientPsychosocialCriteriaManager();
+            PatientPsychosocialCriteriaManager patientPsychosocialCriteriaManager = new PatientPsychosocialCriteriaManager();
             try
             {
-                return _PatientPsychosocialCriteriaManager.GetPatientPsychosocialCriteriaDetails(patientId);
+                return patientPsychosocialCriteriaManager.GetPatientPsychosocialCriteriaDetails(patientId);
             }
             catch (Exception e)
             {
@@ -147,11 +147,11 @@ namespace IQCare.Web.CCC.WebService
             int result = 0;
             string msg = "";
 
-            PatientPsychosocialCriteriaManager _PatientPsychosocialCriteriaManager = new PatientPsychosocialCriteriaManager();
+            PatientPsychosocialCriteriaManager patientPsychosocialCriteriaManager = new PatientPsychosocialCriteriaManager();
 
             try
             {
-                result = _PatientPsychosocialCriteriaManager.DeletePreparation(id);
+                result = patientPsychosocialCriteriaManager.DeletePreparation(id);
                 if (result > 0)
                 {
                     msg = "Psychosocial criteria deleted successfuly";
@@ -177,12 +177,12 @@ namespace IQCare.Web.CCC.WebService
             int result = 0;
             string msg = "";
 
-            PatientSupportSystemCriteriaManager _PatientSupportSystemCriteriaManager = new PatientSupportSystemCriteriaManager();
+            PatientSupportSystemCriteriaManager patientSupportSystemCriteriaManager = new PatientSupportSystemCriteriaManager();
 
             try
             {
 
-                result = _PatientSupportSystemCriteriaManager.checkIfARTPreparationExists(patientId);
+                result = patientSupportSystemCriteriaManager.checkIfARTPreparationExists(patientId);
             }
             catch (Exception e)
             {
@@ -195,26 +195,27 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string AddPatientSupportSystemCriteria(int patientId, int patientmastervisitId, bool takingART, bool TSIdentified, bool smsreminder, bool othersupport)
+        public string AddPatientSupportSystemCriteria(int patientId, int patientmastervisitId, bool takingART,bool supportGroup, bool TSIdentified, bool smsreminder, bool othersupport)
         {
             string msg = "";
             int result = 0;
-            PatientSupportSystemCriteriaManager _PatientSupportSystemCriteriaManager = new PatientSupportSystemCriteriaManager();
+            PatientSupportSystemCriteriaManager patientSupportSystemCriteriaManager = new PatientSupportSystemCriteriaManager();
 
 
             try
             {
-                PatientSupportSystemCriteria _patientSupportSystemCriteria = new PatientSupportSystemCriteria()
+                PatientSupportSystemCriteria patientSupportSystemCriteria = new PatientSupportSystemCriteria()
                 {
                     PatientId = patientId,
                     PatientMasterVisitId = patientmastervisitId,
                     TakingART = takingART,
+                    supportGroup=supportGroup,
                     TSIdentified = TSIdentified,
                     EnrollSMSReminder = smsreminder,
                     OtherSupportSystems = othersupport
                 };
 
-                result = _PatientSupportSystemCriteriaManager.AddPreparation(_patientSupportSystemCriteria);
+                result = patientSupportSystemCriteriaManager.AddPreparation(patientSupportSystemCriteria);
                 if (result > 0)
                 {
                     msg = "Patient Psychosocial criteria assessment completed!";
@@ -230,27 +231,28 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string EditPatientSupportSystemCriteria(int patientId, int patientmastervisitId, bool takingART, bool TSIdentified, bool smsreminder, bool othersupport)
+        public string EditPatientSupportSystemCriteria(int patientId, int patientmastervisitId, bool takingART,bool supportGroup, bool TSIdentified, bool smsreminder, bool othersupport)
         {
             string msg = "";
             int result = 0;
 
-            PatientSupportSystemCriteriaManager _PatientSupportSystemCriteriaManager = new PatientSupportSystemCriteriaManager();
+            PatientSupportSystemCriteriaManager patientSupportSystemCriteriaManager = new PatientSupportSystemCriteriaManager();
 
 
             try
             {
-                PatientSupportSystemCriteria _PatientSupportSystemCriteria = new PatientSupportSystemCriteria()
+                PatientSupportSystemCriteria patientSupportSystemCriteria = new PatientSupportSystemCriteria()
                 {
                     PatientId = patientId,
                     PatientMasterVisitId = patientmastervisitId,
                     TakingART = takingART,
+                    supportGroup=supportGroup,
                     TSIdentified = TSIdentified,
                     EnrollSMSReminder = smsreminder,
                     OtherSupportSystems = othersupport
                 };
 
-                result = _PatientSupportSystemCriteriaManager.EditPreparation(_PatientSupportSystemCriteria);
+                result = patientSupportSystemCriteriaManager.EditPreparation(patientSupportSystemCriteria);
                 if (result > 0)
                 {
                     msg = "Patient Support System criteria assessment update completed!";
@@ -269,10 +271,10 @@ namespace IQCare.Web.CCC.WebService
         [WebMethod(EnableSession = true)]
         public List<PatientSupportSystemCriteria> GetPatientSupportSystemCriteria(int patientId)
         {
-            PatientSupportSystemCriteriaManager _PatientSupportSystemCriteriaManager = new PatientSupportSystemCriteriaManager();
+            PatientSupportSystemCriteriaManager patientSupportSystemCriteriaManager = new PatientSupportSystemCriteriaManager();
             try
             {
-                return _PatientSupportSystemCriteriaManager.GetPatientSupportSystemCriteriaDetails(patientId);
+                return patientSupportSystemCriteriaManager.GetPatientSupportSystemCriteriaDetails(patientId);
             }
             catch (Exception e)
             {
@@ -286,11 +288,11 @@ namespace IQCare.Web.CCC.WebService
             int result = 0;
             string msg = "";
 
-            PatientSupportSystemCriteriaManager _PatientSupportSystemCriteriaManager = new PatientSupportSystemCriteriaManager();
+            PatientSupportSystemCriteriaManager patientSupportSystemCriteriaManager = new PatientSupportSystemCriteriaManager();
 
             try
             {
-                result = _PatientSupportSystemCriteriaManager.DeletePreparation(id);
+                result = patientSupportSystemCriteriaManager.DeletePreparation(id);
                 if (result > 0)
                 {
                     msg = "Psychosocial criteria deleted successfuly";

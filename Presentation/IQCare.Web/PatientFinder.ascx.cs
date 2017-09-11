@@ -391,7 +391,7 @@ namespace IQCare.Web
             {
 
                 this.PopulateFacilityList();
-
+                this.PopulatePatientIdentifiersList();
                 if (this.FilterByServiceLines)
                 {
                     this.PopulateServiceDropdown();
@@ -519,6 +519,16 @@ namespace IQCare.Web
                 if (!string.IsNullOrEmpty(txtDOB.Text.Trim())) dateOfBirth = Convert.ToDateTime(txtDOB.Text.Trim());
 
                 string phoneNumber = textPhoneNumber.Text.Trim();
+                string identifierName = "";
+                if (Convert.ToInt32(ddlIdentifier.SelectedValue) > -1)
+                {
+                    identifierName = ddlIdentifier.SelectedItem.Text.Trim();
+                }
+                if (Convert.ToInt32(ddlIdentifier.SelectedValue) == 0)
+                {
+                    identifierName = "PatientFacilityID";
+                }
+
                 //PatientService pservice = new PatientService();
                 DataTable dt = PatientService.FindPatient(Convert.ToInt32(ddFacility.SelectedValue),
                         lName,
@@ -530,7 +540,7 @@ namespace IQCare.Web
                         dateOfBirth,
                         dateRegistration,
                         FilterByServiceLines ? Convert.ToInt32(ddlServices.SelectedValue) : (this.SelectedServiceLine > 0) ? this.SelectedServiceLine : 999,
-                        this.NumberOfRecords,phoneNumber);
+                        this.NumberOfRecords,phoneNumber,identifierName);
               
                 this.grdSearchResult.DataSource = dt;
                 this.grdSearchResult.DataBind();
@@ -595,7 +605,22 @@ namespace IQCare.Web
             ddlServices.DataBind();
             ddlServices.Items.Insert(0, new ListItem("Select", "0"));
         }
-
+        void PopulatePatientIdentifiersList()
+        {
+            try
+            {
+                DataTable dt = SystemSetting.GetPatientIdentifiers(SelectedServiceLine);
+                ddlIdentifier.DataSource = dt;
+                ddlIdentifier.DataTextField = "IdentifierName";
+                ddlIdentifier.DataValueField = "IdentifierId";
+                ddlIdentifier.DataBind();
+                ddlIdentifier.Items.Insert(0, new ListItem("Select Identifier:", "-1"));
+            }
+            catch (Exception ex)
+            {
+                this.showErrorMessage(ref ex);
+            }
+        }
         /// <summary>
         /// Populates the facility list.
         /// </summary>
@@ -603,9 +628,9 @@ namespace IQCare.Web
         {
             try
             {
-                SystemSetting.CurrentSystem.Facilities.Where(f => f.DeleteFlag == false);
+                //SystemSetting.CurrentSystem.Facilities.Where(f => f.DeleteFlag == false);
 
-                ddFacility.DataSource = SystemSetting.CurrentSystem.Facilities.OrderBy(f=> f.Id);
+                ddFacility.DataSource = SystemSetting.CurrentSystem.Facilities.Where(f=> f.DeleteFlag== false).OrderBy(f=> f.Id);
                 ddFacility.DataTextField = "Name";
                 ddFacility.DataValueField = "Id";
                 ddFacility.DataBind();

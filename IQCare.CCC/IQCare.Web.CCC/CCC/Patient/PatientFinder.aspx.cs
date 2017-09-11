@@ -37,10 +37,10 @@ namespace IQCare.Web.CCC.Patient
         }
 
         [System.Web.Services.WebMethod(EnableSession =true)]
-        public static void SetSelectedPatient(int patientId)
+        public static string SetSelectedPatient(int patientId)
         {
                       HttpContext.Current.Session["PatientPK"] = patientId;
-
+            return "success";
         }
 
             
@@ -49,9 +49,9 @@ namespace IQCare.Web.CCC.Patient
         {
             try
             {
-                SystemSetting.CurrentSystem.Facilities.Where(f => !f.DeleteFlag);
+                //SystemSetting.CurrentSystem.Facilities.Where(f => !f.DeleteFlag);
 
-                Facility.DataSource = SystemSetting.CurrentSystem.Facilities.OrderBy(f => f.Id);
+                Facility.DataSource = SystemSetting.CurrentSystem.Facilities.Where(g=> g.DeleteFlag==false).OrderBy(f => f.Id);
                 Facility.DataTextField = "Name";
                 Facility.DataValueField = "Id";
                 Facility.DataBind();

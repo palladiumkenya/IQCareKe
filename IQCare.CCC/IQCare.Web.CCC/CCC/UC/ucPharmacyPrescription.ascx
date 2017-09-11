@@ -13,7 +13,7 @@
                                     <div class="col-md-3 form-group">  
                                         <div class="col-md-12"><label class="control-label pull-left">Treatment Program</label></div>
                                         <div class="col-md-12 pull-right">
-                                            <asp:DropDownList runat="server" CssClass="form-control input-sm " id="ddlTreatmentProgram" onChange="treatmentProgram();" ClientIDMode="Static" data-parsley-min="1" data-parsley-min-message="Value Required" />
+                                            <asp:DropDownList runat="server" CssClass="form-control input-sm " id="ddlTreatmentProgram" onChange="treatmentProgram();" ClientIDMode="Static" data-parsley-min="1" data-parsley-min-message="Value Required" OnSelectedIndexChanged="ddlTreatmentProgram_SelectedIndexChanged" />
                                         </div>                    
                                     </div>   
                                     <div class="col-md-3 form-group">
@@ -347,6 +347,7 @@
 
 <script type="text/javascript">
     var pmscm = "<%=PMSCM%>";
+    var tp = "";
     var pmscmSamePointDispense = "<%=PMSCMSAmePointDispense%>";
     var pmscmFlag = "0";
     var prescriptionDate = "<%= this.prescriptionDate %>";
@@ -359,38 +360,50 @@
     var tomorrow = new Date();
     tomorrow.setDate(today.getDate() + 1);
 
-    if (prescriptionDate == '' || prescriptionDate == '01-Jan-1900')
+    if (prescriptionDate === '' || prescriptionDate === '01-Jan-1900')
         prescriptionDate = 0;
 
-    if (dispenseDate == '' || dispenseDate == '01-Jan-1900')
+    if (dispenseDate === '' || dispenseDate === '01-Jan-1900')
         dispenseDate = 0;
     
     $(document).ready(function () {
         
         //alert(pmscmSamePointDispense);
-        if (pmscmSamePointDispense === "PM/SCM With Same point dispense") {
-            pmscmFlag = "1";
-            drugList(1);
-            $("#ddlBatch").prop('disabled', false);
-            $("#txtQuantityDisp").prop('disabled', false);
-            $("#txtDateDispensed").prop('disabled', false);
-            $("#btnDateDisp").prop('disabled', false);
-            
-        }
-        else if (pmscm === "PM/SCM") {
-            drugList(1);
-            $("#ddlBatch").prop('disabled', true);
-            $("#txtQuantityDisp").prop('disabled', true);
-            $("#txtDateDispensed").prop('disabled', true);
-            $("#btnDateDisp").prop('disabled', true);
-        }
-        else {
-            drugList(0);
-            $("#ddlBatch").prop('disabled', true);
-            $("#txtQuantityDisp").prop('disabled', false);
-            $("#txtDateDispensed").prop('disabled', false);
-            $("#btnDateDisp").prop('disabled', false);
-        }
+        $("#<%=ddlTreatmentProgram.ClientID%>").on('change',
+            function () {
+                if (pmscmSamePointDispense === "PM/SCM With Same point dispense") {
+                    tp = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
+                   
+                    pmscmFlag = "1";
+                    drugList(1, tp);
+                    $("#ddlBatch").prop('disabled', false);
+                    $("#txtQuantityDisp").prop('disabled', false);
+                    $("#txtDateDispensed").prop('disabled', false);
+                    $("#btnDateDisp").prop('disabled', false);
+
+                }
+                else if (pmscm === "PM/SCM") {
+                    tp = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
+                    
+                    drugList(1, tp);
+                    $("#ddlBatch").prop('disabled', true);
+                    $("#txtQuantityDisp").prop('disabled', true);
+                    $("#txtDateDispensed").prop('disabled', true);
+                    $("#btnDateDisp").prop('disabled', true);
+                }
+                else {
+                    tp = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
+                    
+                    drugList(0, tp);
+                    $("#ddlBatch").prop('disabled', true);
+                    $("#txtQuantityDisp").prop('disabled', false);
+                    $("#txtDateDispensed").prop('disabled', false);
+                    $("#btnDateDisp").prop('disabled', false);
+                }
+
+         });
+
+
 
         $('#PrescriptionDate').datepicker({
             allowPastDates: true,
@@ -408,10 +421,10 @@
 
         $("#<%=ddlTreatmentProgram.ClientID%>").change(function () {
             var treatmentProgram = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
+            tp = treatmentProgram;
+            if (gender === "Female" && age >= 9 && treatmentProgram === "PMTCT") {
 
-            if (gender == "Female" && age >= 9 && treatmentProgram == "PMTCT") {
-
-            } else if (treatmentProgram == "PMTCT" && (gender != "Female" || age < 9)) {
+            } else if (treatmentProgram === "PMTCT" && (gender != "Female" || age < 9)) {
                  toastr.error("PMTCT is for female patients only who are older than 9 years", "Error");
                  $("#<%=ddlTreatmentProgram.ClientID%>").val("");
              }
@@ -556,7 +569,7 @@
                 });
        
               
-           function drugList(pmscm) {
+           function drugList(pmscm,tps) {
                
                var drugInput = document.getElementById('<%= txtDrugs.ClientID %>');
                var awesomplete = new Awesomplete(drugInput, {
@@ -575,7 +588,7 @@
                    url: '../WebService/PatientEncounterService.asmx/GetDrugList',
                    type: 'POST',
                    dataType: 'json',
-                   data: "{'PMSCM':'" + pmscm + "'}",
+                   data: "{'PMSCM':'" + pmscm + "','treatmentPlan':'" + tps +"'}",
                    contentType: "application/json; charset=utf-8",
                    
                    success: function (data) {
@@ -654,9 +667,9 @@
            <%-- $("#<%=regimenLine.ClientID%>").val("");--%>
             $("#<%=ddlRegimen.ClientID%>").prop('disabled', false);
             <%--$("#<%=ddlRegimen.ClientID%>").val("");--%>
-        } else if (startTreatment == "false" && valSelected == "ART") {
+        } else if (startTreatment === "false" && valSelected === "ART") {
             $("#<%=ddlTreatmentPlan.ClientID%> option").each(function () {
-                if ($(this).text() == "Start Treatment") {
+                if ($(this).text() === "Start Treatment") {
                     $("#<%=ddlPeriodTaken.ClientID%>").prop('disabled', true);
                     $("#<%=ddlPeriodTaken.ClientID%>").val("");
                     $("#<%=ddlTreatmentPlan.ClientID%>").val($(this).val());
@@ -668,9 +681,9 @@
                   <%--  $("#<%=ddlRegimen.ClientID%>").val("");--%>
                 }
             });
-        } else if (startTreatment == "true" && valSelected == "ART") {
+        } else if (startTreatment === "true" && valSelected === "ART") {
             $("#<%=ddlTreatmentPlan.ClientID%> option").each(function () {
-                if ($(this).text() == "Continue current treatment") {
+                if ($(this).text() === "Continue current treatment") {
                     $("#<%=ddlPeriodTaken.ClientID%>").prop('disabled', true);
                     $("#<%=ddlPeriodTaken.ClientID%>").val("");
                     $("#<%=ddlTreatmentPlan.ClientID%>").val($(this).val());
@@ -781,6 +794,7 @@
             var treatmentProgram = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").val();
             var periodTaken = $("#<%=ddlPeriodTaken.ClientID%>").find(":selected").val();
             var treatmentPlan = $("#<%=ddlTreatmentPlan.ClientID%>").find(":selected").val();
+            var treatmentPlanName = $("#<%=ddlTreatmentPlan.ClientID%>").find(":selected").text();
             var treatmentPlanReason = $("#<%=ddlSwitchInterruptionReason.ClientID%>").find(":selected").val();
             var regimenLine = $("#<%=regimenLine.ClientID%>").find(":selected").val();
             var regimen = $("#<%=ddlRegimen.ClientID%>").find(":selected").val();

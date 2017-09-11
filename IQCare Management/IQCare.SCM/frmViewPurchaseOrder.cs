@@ -25,10 +25,29 @@ namespace IQCare.SCM
             }
             else if (GblIQCare.theArea == "CR")
             {
-                this.Text = "View Inter Store Transfer/Counter Requisition";
+                this.Text = "View Counter Requisitions";
                 frmname = "IQCare.SCM.frmInterStoreTransfer, IQCare.SCM";
             }
-          
+            if (GblIQCare.CurrentMenu == MenuChoice.PurchaseOrder)
+            {
+                this.Text = "View Purchase Order";
+                frmname = "IQCare.SCM.frmPurchaseOrder, IQCare.SCM";
+            }
+            else if (GblIQCare.CurrentMenu == MenuChoice.CounterRequistion)
+            {
+                this.Text = "View Counter Requisitions";
+                frmname = "IQCare.SCM.frmInterStoreTransfer, IQCare.SCM";
+            }
+            else if (GblIQCare.CurrentMenu == MenuChoice.POWithGRN)
+            {
+                this.Text = "View Purchase Order";
+                frmname = "IQCare.SCM.frmPurchaseReceiveOrder, IQCare.SCM";
+            }
+            else if (GblIQCare.CurrentMenu == MenuChoice.CRWithIV)
+            {
+                this.Text = "View Inter Store Transfer/Counter Requisition";
+                frmname = "IQCare.SCM.frmInterRequisitionIssue, IQCare.SCM";
+            }
             clsCssStyle theStyle = new clsCssStyle();
             theStyle.setStyle(this);
             CreateGrid();
@@ -145,6 +164,16 @@ namespace IQCare.SCM
             {
                 
                 frmname = "IQCare.SCM.frmInterStoreTransfer, IQCare.SCM";
+            }
+            else if (GblIQCare.CurrentMenu == MenuChoice.CRWithIV)
+            {
+          
+                   frmname = "IQCare.SCM.frmInterRequisitionIssue, IQCare.SCM";
+            }
+            else if (GblIQCare.CurrentMenu == MenuChoice.POWithGRN)
+            {
+
+                frmname = "IQCare.SCM.frmPurchaseReceiveOrder, IQCare.SCM";
             }
             Form theForm = (Form)Activator.CreateInstance(Type.GetType(frmname.ToString()));
             

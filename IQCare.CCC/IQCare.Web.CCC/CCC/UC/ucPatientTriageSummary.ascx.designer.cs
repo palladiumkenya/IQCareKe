@@ -58,6 +58,24 @@ namespace IQCare.Web.CCC.UC {
         protected global::System.Web.UI.WebControls.Label lblbloodpressure;
         
         /// <summary>
+        /// bgSystolicT control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label bgSystolicT;
+        
+        /// <summary>
+        /// pgDiastolicT control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label pgDiastolicT;
+        
+        /// <summary>
         /// lblPulseRate control.
         /// </summary>
         /// <remarks>

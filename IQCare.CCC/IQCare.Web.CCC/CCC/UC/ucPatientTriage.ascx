@@ -72,7 +72,7 @@
 
                 <div class="col-md-4 col-xs-12 col-sm-12">
                         <div class="input-group">
-                            <span class="input-group-addon"><small class="text-danger">*</small> Wieght for Height</span>
+                            <span class="input-group-addon"><small class="text-danger">*</small> Weight for Height</span>
                             <asp:TextBox runat="server" ID="txtWHz" Enabled="False" ClientIDMode="Static" CssClass="form-control input-sm"></asp:TextBox>
                         </div>
                  </div>

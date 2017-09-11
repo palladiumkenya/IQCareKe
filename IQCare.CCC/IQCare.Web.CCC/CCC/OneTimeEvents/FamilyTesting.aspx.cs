@@ -78,6 +78,16 @@ namespace IQCare.Web.CCC.OneTimeEvents
                         testingStatusMod.Items.Add(new ListItem(k.ItemDisplayName, k.ItemId.ToString()));
                     }
                 }
+
+                List<LookupItemView> YesNo = mgr.GetLookItemByGroup("YesNo");
+                if (YesNo != null && YesNo.Count > 0)
+                {
+                    RegisteredInClinic.Items.Add(new ListItem("select", ""));
+                    foreach (var item in YesNo)
+                    {
+                        RegisteredInClinic.Items.Add(new ListItem(item.ItemName, item.ItemId.ToString()));
+                    }
+                }
             }
         }
 

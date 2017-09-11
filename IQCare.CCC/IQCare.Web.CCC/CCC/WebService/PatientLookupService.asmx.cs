@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Services;
 using Application.Common;
+using Entities.CCC.Lookup;
 using IQCare.CCC.UILogic;
 using Newtonsoft.Json;
 
@@ -264,6 +265,76 @@ namespace IQCare.Web.CCC.WebService
                 Console.WriteLine(e);
                 throw;
             }
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string GetPatientFamilyMembers(string firstName, string middleName, string lastName, string sex)
+        {
+            List<PatientLookup> patientLookups = new List<PatientLookup>();
+            IEnumerable<object> newresults = Enumerable.Empty<object>();
+            try
+            {
+                LookupLogic logic = new LookupLogic();
+                int intSex = 0;
+                if (!System.String.IsNullOrEmpty(sex))
+                {
+                    var items = logic.GetItemIdByGroupAndItemName("Gender", sex);
+                    if (items.Count > 0)
+                    {
+                        intSex = items[0].ItemId;
+                    }
+                }
+
+                int patientId = int.Parse(Session["PatientPK"].ToString());
+
+                PatientLookupManager patientLookup = new PatientLookupManager();
+                PersonRelationshipManager relationManager = new PersonRelationshipManager();
+                patientLookups = patientLookup.GetPatientListByParams(patientId, firstName, middleName, lastName, intSex);
+
+                newresults = patientLookups.Select(x => new Dictionary<string, string>()
+                {
+                    {
+                        "Id",x.Id.ToString()
+                    },
+                    {
+                        "EnrollmentNumber",x.EnrollmentNumber.ToString()
+                    },
+                    {
+                        "FirstName",x.FirstName
+                    },
+                    {
+                        "MiddleName",x.MiddleName
+                    },
+                    {
+                        "LastName",x.LastName
+                    },
+                    {
+                        "DateOfBirth",x.DateOfBirth.ToString()
+                    },
+                    {
+                        "Sex",LookupLogic.GetLookupNameById(x.Sex)
+                    },
+                    {
+                        "EnrollmentDate",x.EnrollmentDate.ToString()
+                    },
+                    {
+                        "PatientStatus",x.PatientStatus
+                    },
+                    {
+                        "PersonId",x.PersonId.ToString()
+                    },
+                    {
+                        "LinkedToPatient",relationManager.PersonLinkedToPatient(x.PersonId, patientId).ToString()
+                    }
+                });
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+            return JsonConvert.SerializeObject(newresults);
         }
     }
     public class Data

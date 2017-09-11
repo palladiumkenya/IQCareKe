@@ -214,6 +214,7 @@
                                             </div>
                                             <div class="col-md-12">
                                                 <asp:TextBox ID="txtBMI" CssClass="form-control input-sm" ClientIDMode="Static" Enabled="false" runat="server"></asp:TextBox>
+                                                <asp:TextBox ID="txtBMIZ" runat="server" CssClass="form-control input-sm" ClientIDMode="Static"></asp:TextBox>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
@@ -246,7 +247,7 @@
                         <hr />
                     </div>
                     <%--to here--%>
-
+                    <div class="col-md-12">
                     <div id="step1Div">
 
                         <div class="col-md-12 form-group" <%-- style="height:100%"--%>>
@@ -655,10 +656,23 @@
 
                                     <div class="panel-body">
                                         <div class="col-md-12 form-group">
-                                            <label class="control-label pull-left">Adverse Event(s)</label>
+                                            <div>
+                                                <label class="control-label pull-left text-primary">*Any Adverse Event(s)</label>
+                                            </div>
+
+                                            <div>
+                                                <label class="pull-left" style="padding-right: 10px">
+                                                    <input id="rdAnyAdverseEventsYes" type="radio" name="adverseEvents" value="1" clientidmode="Static" runat="server" onclick="showHideAdverseEventsDivs();" />Yes
+                                                </label>
+                                                <label class="pull-left" style="padding-right: 10px">
+                                                    <input id="rdAnyAdverseEventsNo" type="radio" name="adverseEvents" value="0" clientidmode="Static" runat="server" data-parsley-required="true" onclick="showHideAdverseEventsDivs();" />No
+                                                </label>
+
+                                            </div>
+
                                         </div>
 
-                                        <div class="col-md-12 form-group">
+                                        <div id="adverseEventCtrls" class="col-md-12 form-group">
                                             <div class="col-md-3">
                                                 <div class="col-md-12">
                                                     <label class="control-label pull-left">Adverse event</label>
@@ -704,7 +718,7 @@
                                         </div>
                                     </div>
                                     <%--.panel-body--%>
-                                    <div class="panel panel-primary">
+                                    <div id="adverseEventsTable" class="panel panel-primary">
                                         <div class="panel-heading">Adverse Events</div>
                                         <div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden;">
                                             <table id="dtlAdverseEvents" class="table table-bordered table-striped" style="width: 100%">
@@ -731,6 +745,7 @@
                             <%--col-md-11--%>
                         </div>
                     </div>
+                        </div>
                 </div>
                 <%-- .data-step-1--%>
 
@@ -1172,7 +1187,7 @@
                             <div class="panel panel-primary">
                                 <div class="panel-heading">General Examination</div>
                                 <div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden; text-align: left; padding-left: 10px">
-                                    <asp:CheckBoxList ID="cblGeneralExamination" runat="server" RepeatDirection="Horizontal" RepeatColumns="3" Width="100%" ClientIDMode="Static"></asp:CheckBoxList>
+                                    <asp:CheckBoxList ID="cblGeneralExamination" runat="server" RepeatDirection="Horizontal" RepeatColumns="3" Width="100%" ClientIDMode="Static" onChange="cblGeneralExaminationChange(); return false;"></asp:CheckBoxList>
                                 </div>
                             </div>
 
@@ -1316,7 +1331,7 @@
                                     <label class="control-label pull-left">CTX/Dapsone Adherence</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ctxAdherance" ClientIDMode="Static" Enabled="False" />
+                                    <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ctxAdherance" ClientIDMode="Static" />
                                 </div>
                             </div>
                         </div>
@@ -1853,97 +1868,13 @@
                                                 <div class="col-md-12">
                                                     <label class="control-label pull-left">Date</label>
                                                 </div>
-                                                <div class="col-md-12">
-                                                    <div class="datepicker fuelux form-group" id="PersonAppointmentDate">
-                                                        <div class="input-group">
-                                                            <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="AppointmentDate" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')" required ="True" data-parsley-min-message="Input the appointment date"></asp:TextBox>
-                                                            <div class="input-group-btn">
-                                                                <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
-                                                                    <span class="glyphicon glyphicon-calendar"></span>
-                                                                    <span class="sr-only">Toggle Calendar</span>
-                                                                </button>
-                                                                <div class="dropdown-menu dropdown-menu-right datepicker-calendar-wrapper" role="menu">
-                                                                    <div class="datepicker-calendar">
-                                                                        <div class="datepicker-calendar-header">
-                                                                            <button type="button" class="prev"><span class="glyphicon glyphicon-chevron-left input-sm"></span><span class="sr-only">Previous Month</span></button>
-                                                                            <button type="button" class="next"><span class="glyphicon glyphicon-chevron-right input-sm"></span><span class="sr-only">Next Month</span></button>
-                                                                            <button type="button" class="title" data-month="11" data-year="2014">
-                                                                                <span class="month">
-                                                                                    <span data-month="0">January</span>
-                                                                                    <span data-month="1">February</span>
-                                                                                    <span data-month="2">March</span>
-                                                                                    <span data-month="3">April</span>
-                                                                                    <span data-month="4">May</span>
-                                                                                    <span data-month="5">June</span>
-                                                                                    <span data-month="6">July</span>
-                                                                                    <span data-month="7">August</span>
-                                                                                    <span data-month="8">September</span>
-                                                                                    <span data-month="9">October</span>
-                                                                                    <span data-month="10">November</span>
-                                                                                    <span data-month="11" class="current">December</span>
-                                                                                </span><span class="year">2017</span>
-                                                                            </button>
-                                                                        </div>
-                                                                        <table class="datepicker-calendar-days">
-                                                                            <thead>
-                                                                                <tr>
-                                                                                    <th>Su</th>
-                                                                                    <th>Mo</th>
-                                                                                    <th>Tu</th>
-                                                                                    <th>We</th>
-                                                                                    <th>Th</th>
-                                                                                    <th>Fr</th>
-                                                                                    <th>Sa</th>
-                                                                                </tr>
-                                                                            </thead>
-                                                                            <tbody></tbody>
-                                                                        </table>
-                                                                        <div class="datepicker-calendar-footer">
-                                                                            <button type="button" class="datepicker-today">Today</button>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="datepicker-wheels" aria-hidden="true">
-                                                                        <div class="datepicker-wheels-month">
-                                                                            <h2 class="header">Month</h2>
-                                                                            <ul>
-                                                                                <li data-month="0">
-                                                                                    <button type="button">Jan</button></li>
-                                                                                <li data-month="1">
-                                                                                    <button type="button">Feb</button></li>
-                                                                                <li data-month="2">
-                                                                                    <button type="button">Mar</button></li>
-                                                                                <li data-month="3">
-                                                                                    <button type="button">Apr</button></li>
-                                                                                <li data-month="4">
-                                                                                    <button type="button">May</button></li>
-                                                                                <li data-month="5">
-                                                                                    <button type="button">Jun</button></li>
-                                                                                <li data-month="6">
-                                                                                    <button type="button">Jul</button></li>
-                                                                                <li data-month="7">
-                                                                                    <button type="button">Aug</button></li>
-                                                                                <li data-month="8">
-                                                                                    <button type="button">Sep</button></li>
-                                                                                <li data-month="9">
-                                                                                    <button type="button">Oct</button></li>
-                                                                                <li data-month="10">
-                                                                                    <button type="button">Nov</button></li>
-                                                                                <li data-month="11">
-                                                                                    <button type="button">Dec</button></li>
-                                                                            </ul>
-                                                                        </div>
-                                                                        <div class="datepicker-wheels-year">
-                                                                            <h2 class="header">Year</h2>
-                                                                            <ul></ul>
-                                                                        </div>
-                                                                        <div class="datepicker-wheels-footer clearfix">
-                                                                            <button type="button" class="btn datepicker-wheels-back"><span class="glyphicon glyphicon-arrow-left"></span><span class="sr-only">Return to Calendar</span></button>
-                                                                            <button type="button" class="btn datepicker-wheels-select">Select <span class="sr-only">Month and Year</span></button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+
+                                                <div class="col-md-12 form-group">
+                                                    <div class='input-group date' id='PersonAppointmentDateD'>
+                                                        <span class="input-group-addon">
+                                                            <span class="glyphicon glyphicon-calendar"></span>
+                                                        </span>
+                                                        <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="AppointmentDate" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')" required ="True" data-parsley-min-message="Input the appointment date"></asp:TextBox>
                                                     </div>
                                                 </div>
                                             </div>
@@ -2026,11 +1957,13 @@
     var genderId = <%=genderID%>;
     var gender = "<%=gender%>";
     var Age = "<%=age%>";
+    var isNoneChecked = false;
 
     document.getElementById('txtPresentingComplaintsID').style.display = 'none';
     document.getElementById('txtAllergyId').style.display = 'none';
     document.getElementById('txtReactionTypeID').style.display = 'none';
     document.getElementById('txtDiagnosisID').style.display = 'none';
+    document.getElementById("<%=txtBMIZ.ClientID%>").style.display = 'none';
 
 
     $(document).ready(function () {
@@ -2067,21 +2000,42 @@
         loadAllergyReactions();
         loadDiagnosis();
         showHidePresentingComplaintsDivs();
+        showHideAdverseEventsDivs();
         showHideSystemsOkayDivs();
         showHideVisitByTS();
 
 
         //set nutrition status
 
-        var txtBmi = $("#<%=txtBMI.ClientID%>").val();
-        if (txtBmi > 0 && txtBmi < 16) {
-            $("#nutritionscreeningstatus option").filter(function () { return $(this).text() === 'Severe Acute Malnutrition'; }).prop('selected', true);
-        } else if (txtBmi >= 16 && txtBmi < 18.5) {
-            $("#nutritionscreeningstatus option").filter(function () { return $(this).text() === 'Moderate Acute Malnutrition'; }).prop('selected', true);
-        } else if (txtBmi >= 18.5 && txtBmi < 25) {
-            $("#nutritionscreeningstatus option").filter(function () { return $(this).text() === 'Normal'; }).prop('selected', true);
-        } else if (txtBmi >= 25) {
-            $("#nutritionscreeningstatus option").filter(function () { return $(this).text() === 'Overweight/Obese'; }).prop('selected', true);
+        if (Age > 15) {
+            var txtBmi = $("#<%=txtBMI.ClientID%>").val();
+            if (txtBmi > 0 && txtBmi < 16) {
+                $("#nutritionscreeningstatus option").filter(function() {
+                    return $(this).text() === 'Severe Acute Malnutrition';
+                }).prop('selected', true);
+            } else if (txtBmi >= 16 && txtBmi < 18.5) {
+                $("#nutritionscreeningstatus option").filter(function() {
+                    return $(this).text() === 'Moderate Acute Malnutrition';
+                }).prop('selected', true);
+            } else if (txtBmi >= 18.5 && txtBmi < 25) {
+                $("#nutritionscreeningstatus option").filter(function() { return $(this).text() === 'Normal'; })
+                    .prop('selected', true);
+            } else if (txtBmi >= 25) {
+                $("#nutritionscreeningstatus option")
+                    .filter(function() { return $(this).text() === 'Overweight/Obese'; }).prop('selected', true);
+            }
+        } else {
+            var txtBMIZ = $("#<%=txtBMIZ.ClientID%>").val();
+            console.log(txtBMIZ);
+            if ((txtBMIZ == "4 (Overweight)") || (txtBMIZ == "3 (Overweight)") || (txtBMIZ == "2 (Overweight)") || (txtBMIZ == "1 (Overweight)")) {
+                $("#nutritionscreeningstatus option").filter(function() { return $(this).text() === 'Overweight/Obese'; }).prop('selected', true);
+            }else if ((txtBMIZ == "0 (Normal)")) {
+                $("#nutritionscreeningstatus option").filter(function() { return $(this).text() === 'Normal'; }).prop('selected', true);
+            }else if ((txtBMIZ == "-1 (Mild)") || (txtBMIZ == "-2 (Moderate)")) {
+                $("#nutritionscreeningstatus option").filter(function() { return $(this).text() === 'Moderate Acute Malnutrition'; }).prop('selected', true); 
+            }else if ((txtBMIZ == "-3 (Severe)") || (txtBMIZ == "-4 (Severe)")) {
+                $("#nutritionscreeningstatus option").filter(function() { return $(this).text() === 'Severe Acute Malnutrition'; }).prop('selected', true);
+            }
         }
 
         //set IPT weight
@@ -2116,6 +2070,8 @@
         var today = new Date();
         var tomorrow = new Date();
         tomorrow.setDate(today.getDate() + 1);
+
+        var minDate = moment(today).add(-1, 'hours');
 
         $('#DateOfVisit').datepicker({
             allowPastDates: true,
@@ -2197,9 +2153,16 @@
             //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
         });
 
-        $('#PersonAppointmentDate').datepicker({
-            allowPastDates: false,
-            momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+        //$('#PersonAppointmentDate').datepicker({
+        //    allowPastDates: false,
+        //    momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+        //});
+
+        $("#PersonAppointmentDateD").datetimepicker({
+            format: 'DD-MMM-YYYY',
+            allowInputToggle: true,
+            useCurrent: false,
+            minDate: minDate
         });
 
         $("#AppointmentDate").change(function () {
@@ -2213,7 +2176,18 @@
             appointmentCount();
         });
 
-        $('#PersonAppointmentDate').on('changed.fu.datepicker dateClicked.fu.datepicker', function (event, date) {
+        <%--$('#PersonAppointmentDate').on('changed.fu.datepicker dateClicked.fu.datepicker', function (event, date) {
+            var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
+            var appDate = $("#<%=AppointmentDate.ClientID%>").val();
+            if (moment('' + appDate + '').isAfter(futureDate)) {
+                toastr.error("Appointment date cannot be set to over 7 months");
+                $("#<%=AppointmentDate.ClientID%>").val("");
+                return false;
+            }
+            appointmentCount();
+        });--%>
+
+        $('#PersonAppointmentDateD').datetimepicker().on('dp.change',function(e) {
             var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
             var appDate = $("#<%=AppointmentDate.ClientID%>").val();
             if (moment('' + appDate + '').isAfter(futureDate)) {
@@ -2223,6 +2197,7 @@
             }
             appointmentCount();
         });
+
 
         $('#PCDateOfOnset').on('changed.fu.datepicker dateClicked.fu.datepicker', function (event, date) {
             presentingComplaintsDateChange();
@@ -2704,6 +2679,7 @@
 
             var visitBy = $("#<%=ddlVisitBy.ClientID%>").find(":selected").val();
             var anyComplaints = $("input[name$=anyComplaints]:checked").val();
+            var adverseEvents = $("input[name$=adverseEvents]:checked").val();
             var complaints = $("#<%=complaints.ClientID%>").val();
             var tbscreening = $("#<%=tbscreeningstatus.ClientID%>").find(":selected").val();
             var nutritionscreening = $("#<%=nutritionscreeningstatus.ClientID%>").find(":selected").val();
@@ -2712,6 +2688,13 @@
             if (anyComplaints == 1) {
                 if (!presentingComplaintsTable.data().any()) {
                     toastr.error("Presenting Complaints", "Presenting complaints missing.");
+                    evt.preventDefault();
+                }
+            }
+
+            if (adverseEvents == 1) {
+                if (!advEventsTable.data().any()) {
+                    toastr.error("Adverse Event(s)", "Adverse Event(s) missing.");
                     evt.preventDefault();
                 }
             }
@@ -3755,6 +3738,19 @@
         }
     }
 
+    function showHideAdverseEventsDivs() {
+        var adverseEvents = $("input[name$=adverseEvents]:checked").val();
+
+        if (adverseEvents == 1) {
+            document.getElementById('adverseEventCtrls').style.display = 'block';
+            document.getElementById('adverseEventsTable').style.display = 'block';
+        }
+        else {
+            document.getElementById('adverseEventCtrls').style.display = 'none';
+            document.getElementById('adverseEventsTable').style.display = 'none';
+        }
+    }
+
     function showHideSystemsOkayDivs() {
         var systems = $("input[name$=systemsOkay]:checked").val();
         if (systems == 1 || systems == undefined) {
@@ -3816,6 +3812,62 @@
                        toastr.error(response.d, "Error occured while saving Presenting Complaints");
                    }
                });
+    }
+
+    function cblGeneralExaminationChange() {
+        var cblGeneralExamination = document.getElementById("cblGeneralExamination");
+        var checkOptions =   cblGeneralExamination.getElementsByTagName('input');
+        var checkedValues = null;
+
+        for(var i = 0; i < checkOptions.length; i++)
+        {
+            var checkBoxRef = checkOptions[i];
+            if (checkBoxRef.checked == true) {
+                var labelArray = checkBoxRef.parentNode.getElementsByTagName('label');
+                checkedValues = labelArray[0].innerHTML;
+                if (checkedValues == "None" && isNoneChecked == false) {
+                    isNoneChecked = true;
+                    CheckAll();
+                }
+            } else {
+                var labelArrayUnchecked = checkBoxRef.parentNode.getElementsByTagName('label');
+                checkedValues = labelArrayUnchecked[0].innerHTML;
+                if (checkedValues == "None" && isNoneChecked == true) {
+                    isNoneChecked = false;
+                    UnCheckAll();
+                }
+            }
+        }
+    }
+
+    function CheckAll() {
+        var listBox = document.getElementById("cblGeneralExamination");
+        var inputItems = listBox.getElementsByTagName("input");
+
+        for(var i = 0; i < inputItems.length; i++) {
+            var opt = inputItems[i];
+            var labelArray = opt.parentNode.getElementsByTagName('label');
+            if (labelArray.length > 0) {
+                if (labelArray[0].innerHTML != "None") {
+                    opt.disabled = true;
+                    opt.checked=false;
+                }
+            }
+        }
+    }
+
+    function UnCheckAll() {
+        var chkControlId = document.getElementById("cblGeneralExamination");
+        var options = chkControlId.getElementsByTagName('input');
+
+        for(var i = 0; i < options.length; i++)
+        {
+            var opt = options[i];
+            var labelArray = opt.parentNode.getElementsByTagName('label');
+            if (labelArray.length > 0) {
+                opt.disabled = false;
+            }
+        }
     }
 
 </script>

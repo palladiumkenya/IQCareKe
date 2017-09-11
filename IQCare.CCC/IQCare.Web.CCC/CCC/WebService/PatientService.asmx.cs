@@ -20,6 +20,8 @@ using Newtonsoft.Json;
 using System.Web;
 using System.Web.Script.Serialization;
 using Entities.CCC.Encounter;
+using Entities.CCC.Enrollment;
+using IQCare.CCC.UILogic.Enrollment;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -226,6 +228,51 @@ namespace IQCare.Web.CCC.WebService
 
 
             return Msg;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string AddPatientAsFamilyMember(int linkedPatientPersonId, int relationshipTypeId, string baselineDate, string cccNumber)
+        {
+            try
+            {
+                int patientId = int.Parse(HttpContext.Current.Session["PatientPK"].ToString());
+                int userId = Convert.ToInt32(Session["AppUserId"]);
+                int patientMasterVisitId = Convert.ToInt32(Session["PatientMasterVisitId"].ToString());
+                int baselineResult = 0; 
+
+                LookupLogic logic = new LookupLogic();
+                HivReConfirmatoryTestManager reConfirmatoryTestManager = new HivReConfirmatoryTestManager();
+
+                
+                var items = logic.GetItemIdByGroupAndItemName("BaseLineHivStatus", "Tested Positive");
+                var positiveHivReconfirmation = logic.GetItemIdByGroupAndItemName("ReConfirmatoryTest", "Positive");
+                if (items.Count > 0)
+                {
+                    baselineResult = items[0].ItemId;
+                }
+
+                if (positiveHivReconfirmation.Count > 0)
+                {
+                    int positiveHivReconfirmationId = positiveHivReconfirmation[0].ItemId;
+
+                    HivReConfirmatoryTest hivReConfirmatoryTest = reConfirmatoryTestManager.GetPersonLastestReConfirmatoryTest(linkedPatientPersonId, positiveHivReconfirmationId);
+                    if (hivReConfirmatoryTest != null)
+                    {
+                        baselineDate = hivReConfirmatoryTest.TestResultDate.ToString();
+                    }
+                }
+
+                var testing = new PatientFamilyTestingManager();
+
+                testing.AddLinkedPatientFamilyTesting(linkedPatientPersonId, patientId, patientMasterVisitId, baselineResult, DateTime.Parse(baselineDate), relationshipTypeId, userId, cccNumber);
+
+                return "Successfully Linked";
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
         [WebMethod]
@@ -488,6 +535,12 @@ namespace IQCare.Web.CCC.WebService
             return new JavaScriptSerializer().Serialize(arr1);
         }
 
+        [WebMethod]
+        public bool CccNumberExists(string cccNumber)
+        {
+            PatientLinkageManager linkageManager = new PatientLinkageManager();
+            return linkageManager.CccNumberExists(cccNumber);
+        }
         private PatientFamilyDisplay MapMembers(PatientFamilyTesting member)
         {
             ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");

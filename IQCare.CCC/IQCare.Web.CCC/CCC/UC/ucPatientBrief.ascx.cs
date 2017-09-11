@@ -70,7 +70,8 @@ namespace IQCare.Web.CCC.UC
                 //todo patientManagershould have the lookups resolved
                 //if (x.Sex == 62)
                 //{
-                Session["Gender"] = lblGender.Text = LookupLogic.GetLookupNameById(thisPatient.Sex);
+                Session["Gender"] = Session["PatientSex"] = lblGender.Text = LookupLogic.GetLookupNameById(thisPatient.Sex);
+                 
                 //_lookupManager.GetLookupNameFromId(thisPatient.Sex);
                 //    Session["Gender"] = _lookupManager.GetLookupNameFromId(x.Sex).ToLower();
                 //}
@@ -142,21 +143,22 @@ namespace IQCare.Web.CCC.UC
                 else
                 {
                     NutritionStatus = LookupLogic.GetLookupNameById(thisPatient.NutritionStatus).ToString().ToUpper();
-                    switch(NutritionStatus)
-                    {
-                        case "O":
-                            lblnutritionstatus.Text= "<span class='label label-warning'> Obese </span>";
-                            break;
-                        case "MAM":
-                              lblnutritionstatus.Text = "<span class='label label-warning'>" + NutritionStatus + "</span>";
-                            break;
-                        case "SAM":
-                            lblnutritionstatus.Text = "<span class='label label-danger'>" + NutritionStatus + "</span>";
-                            break;
-                        default:
-                            lblnutritionstatus.Text = "<span class='label label-success'>" + NutritionStatus + "</span>";
-                            break;
-                    }
+                    lblnutritionstatus.Text = "<span class='label label-success'>" + NutritionStatus + "</span>";
+                    //switch(NutritionStatus)
+                    //{
+                    //    case "O":
+                    //        lblnutritionstatus.Text= "<span class='label label-warning'> Obese </span>";
+                    //        break;
+                    //    case "MAM":
+                    //          lblnutritionstatus.Text = "<span class='label label-warning'>" + NutritionStatus + "</span>";
+                    //        break;
+                    //    case "SAM":
+                    //        lblnutritionstatus.Text = "<span class='label label-danger'>" + NutritionStatus + "</span>";
+                    //        break;
+                    //    default:
+                    //        lblnutritionstatus.Text = "<span class='label label-success'>" + NutritionStatus + "</span>";
+                    //        break;
+                    //}
                 }
 
                 // SET categorization:

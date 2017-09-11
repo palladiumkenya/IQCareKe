@@ -50,7 +50,7 @@ namespace IQCare.Management
             theStyle.setStyle(this);
             this.Text = PMTCTConstants.strIQCareTitle + " [" + GblIQCare.AppUserName + "] - " + GblIQCare.AppLocation;
             lblStatus.Text = GblIQCare.AppVersion + "     Release Date: " + GblIQCare.ReleaseDate;
-            lblCopyRight.Text = "©2012 Futures Group International";
+            lblCopyRight.Text = string.Format("©{0} Palladium",DateTime.Now.Year);
 
             ThreadPool.QueueUserWorkItem(new WaitCallback(GenerateCache));
             #region "Module Validation"
@@ -751,47 +751,6 @@ namespace IQCare.Management
             theForm.Top = 2;
             theForm.Show();
         }
-
-
-
-        /// <summary>
-        /// Handles the Click event of the purchaseOrderToolStripMenuItem control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void purchaseOrderToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            theForm = (Form)Activator.CreateInstance(Type.GetType("IQCare.SCM.frmSetUserStore, IQCare.SCM"));
-            theForm.MdiParent = this;
-            GblIQCare.theArea = "PO";
-            theForm.StartPosition = FormStartPosition.CenterScreen;
-            theForm.Show();
-        }
-
-        //private void configureLabTestToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
-        //    theForm = (Form)Activator.CreateInstance(Type.GetType("IQCare.SCM.frmConfigureLabTest, IQCare.SCM"));
-        //    theForm.MdiParent = this;
-        //    theForm.Left = 0;
-        //    theForm.Top = 2;
-        //    theForm.Show();
-        //}
-
-        /// <summary>
-        /// Handles the Click event of the goodsRecievedNoteToolStripMenuItem control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void goodsRecievedNoteToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            theForm = (Form)Activator.CreateInstance(Type.GetType("IQCare.SCM.frmSetUserStore, IQCare.SCM"));
-            theForm.MdiParent = this;
-            GblIQCare.theArea = "GRN";
-            theForm.StartPosition = FormStartPosition.CenterScreen;
-            theForm.Show();
-
-        }
-
         /// <summary>
         /// Handles the Click event of the programItemListToolStripMenuItem control.
         /// </summary>
@@ -979,42 +938,7 @@ namespace IQCare.Management
             theForm.Show();
         }
 
-        /// <summary>
-        /// Handles the Click event of the counterRequisitionToolStripMenuItem control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void counterRequisitionToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            theForm = (Form)Activator.CreateInstance(Type.GetType("IQCare.SCM.frmSetUserStore, IQCare.SCM"));
-            theForm.MdiParent = this;
-            GblIQCare.theArea = "CR";
-            theForm.StartPosition = FormStartPosition.CenterScreen;
-            theForm.Show();
-
-        }
-
-        /// <summary>
-        /// Handles the Click event of the issueVoucherToolStripMenuItem control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void issueVoucherToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            theForm = (Form)Activator.CreateInstance(Type.GetType("IQCare.SCM.frmSetUserStore, IQCare.SCM"));
-            theForm.MdiParent = this;
-            GblIQCare.theArea = "IV";
-            //
-            GblIQCare.ModePurchaseOrder = 2;
-            //theForm = (Form)Activator.CreateInstance(Type.GetType("IQCare.SCM.frmViewGoodReceiveNote, IQCare.SCM"));
-            //theForm.Top = 2;
-            //theForm.Left = 2;
-            //theForm.MdiParent = this.MdiParent;
-            //theForm.Show();
-            theForm.StartPosition = FormStartPosition.CenterScreen;
-            theForm.Show();
-
-        }
+      
 
         /// <summary>
         /// Handles the Click event of the mnuPriceList control.
@@ -1023,11 +947,11 @@ namespace IQCare.Management
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void mnuPriceList_Click(object sender, EventArgs e)
         {
-            theForm = (Form)Activator.CreateInstance(Type.GetType("IQCare.SCM.frmItemCostConfiguration, IQCare.SCM"));
-            theForm.MdiParent = this;
-            theForm.Left = 0;
-            theForm.Top = 2;
-            theForm.Show();
+            //theForm = (Form)Activator.CreateInstance(Type.GetType("IQCare.SCM.frmItemCostConfiguration, IQCare.SCM"));
+            //theForm.MdiParent = this;
+            //theForm.Left = 0;
+            //theForm.Top = 2;
+            //theForm.Show();
         }
 
         /// <summary>
@@ -1037,11 +961,11 @@ namespace IQCare.Management
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void billingDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            theForm = (Form)Activator.CreateInstance(Type.GetType("IQCare.SCM.frmBillingDetails, IQCare.SCM"));
-            theForm.MdiParent = this;
-            theForm.Left = 0;
-            theForm.Top = 2;
-            theForm.Show();
+            //theForm = (Form)Activator.CreateInstance(Type.GetType("IQCare.SCM.frmBillingDetails, IQCare.SCM"));
+            //theForm.MdiParent = this;
+            //theForm.Left = 0;
+            //theForm.Top = 2;
+            //theForm.Show();
         }
 
         /// <summary>
@@ -1051,15 +975,15 @@ namespace IQCare.Management
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void billablesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            GblIQCare.ItemLabel = "Billables";
-            GblIQCare.ItemCategoryId = "213";
-            GblIQCare.ItemTableName = "Decode";
-            GblIQCare.ItemFeatureId = 173;
-            theForm = (Form)Activator.CreateInstance(Type.GetType("IQCare.SCM.frmCommonItemMaster,IQCare.SCM"));
-            theForm.MdiParent = this;
-            theForm.Left = 0;
-            theForm.Top = 2;
-            theForm.Show();
+            //GblIQCare.ItemLabel = "Billables";
+            //GblIQCare.ItemCategoryId = "213";
+            //GblIQCare.ItemTableName = "Decode";
+            //GblIQCare.ItemFeatureId = 173;
+            //theForm = (Form)Activator.CreateInstance(Type.GetType("IQCare.SCM.frmCommonItemMaster,IQCare.SCM"));
+            //theForm.MdiParent = this;
+            //theForm.Left = 0;
+            //theForm.Top = 2;
+            //theForm.Show();
 
             //<ItemName TableName="Decode" CategoryId="213" FormName="frmCommonItemMaster" ListName="Billables" FeatureID="173" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
 
@@ -1070,7 +994,74 @@ namespace IQCare.Management
             theForm = (Form)Activator.CreateInstance(Type.GetType("IQCare.SCM.frmRegisterNewPatient, IQCare.SCM"));
             theForm.MdiParent = this;
             GblIQCare.theArea = "Register";
+            GblIQCare.CurrentMenu = MenuChoice.Register;
             theForm.Show();
         }
+     
+        private void CRMenuItem_Click(object sender, EventArgs e)
+        {
+            theForm = (Form)Activator.CreateInstance(Type.GetType("IQCare.SCM.frmSetUserStore, IQCare.SCM"));
+            theForm.MdiParent = this;
+            GblIQCare.theArea = "CR";
+            GblIQCare.CurrentMenu = MenuChoice.CounterRequistion;
+            theForm.StartPosition = FormStartPosition.CenterScreen;
+            theForm.Show();
+        }
+
+        private void IVMenuItem_Click(object sender, EventArgs e)
+        {
+            theForm = (Form)Activator.CreateInstance(Type.GetType("IQCare.SCM.frmSetUserStore, IQCare.SCM"));
+            theForm.MdiParent = this;
+
+            GblIQCare.theArea = "IV";
+            GblIQCare.CurrentMenu = MenuChoice.IssueVoucher;
+            GblIQCare.ModePurchaseOrder = 2;
+
+            theForm.StartPosition = FormStartPosition.CenterScreen;
+            theForm.Show();
+        }
+        private void CRIVMenuItem_Click(object sender, EventArgs e)
+        {
+            theForm = (Form)Activator.CreateInstance(Type.GetType("IQCare.SCM.frmSetUserStore, IQCare.SCM"));
+            theForm.MdiParent = this;
+            GblIQCare.theArea = "CR_IV";
+            GblIQCare.CurrentMenu = MenuChoice.CRWithIV;
+            theForm.StartPosition = FormStartPosition.CenterScreen;
+            theForm.Show();
+
+        }
+
+        private void POMenuItem_Click(object sender, EventArgs e)
+        {
+            theForm = (Form)Activator.CreateInstance(Type.GetType("IQCare.SCM.frmSetUserStore, IQCare.SCM"));
+            theForm.MdiParent = this;
+            GblIQCare.theArea = "PO";
+            GblIQCare.CurrentMenu = MenuChoice.PurchaseOrder;
+            theForm.StartPosition = FormStartPosition.CenterScreen;
+            theForm.Show();
+        }
+
+        private void GRNMenuItem_Click(object sender, EventArgs e)
+        {
+            theForm = (Form)Activator.CreateInstance(Type.GetType("IQCare.SCM.frmSetUserStore, IQCare.SCM"));
+            theForm.MdiParent = this;
+            GblIQCare.theArea = "GRN";
+            GblIQCare.CurrentMenu = MenuChoice.GoodReceived;
+            theForm.StartPosition = FormStartPosition.CenterScreen;
+            theForm.Show();
+        }
+
+        private void POGRNMenuItem_Click(object sender, EventArgs e)
+        {
+
+            theForm = (Form)Activator.CreateInstance(Type.GetType("IQCare.SCM.frmSetUserStore, IQCare.SCM"));
+            theForm.MdiParent = this;
+            GblIQCare.theArea = "PO_GRN";
+            GblIQCare.CurrentMenu = MenuChoice.POWithGRN;
+            theForm.StartPosition = FormStartPosition.CenterScreen;
+            theForm.Show();
+        }
+
+      
     }
 }

@@ -27,10 +27,8 @@
                         <tr>
                             <td>Blood Pressure:</td>
                             <td><asp:Label runat="server" ID="lblbloodpressure" CssClass="text-info pull-left"> 0 mm[Hg]</asp:Label></td>
-                            <td><div class="progress"><div class="progress-bar progress-bar-info" id="bgSystolic" style="width: 0;"aria-valuemax="200"><asp:Label runat="server"> (Systolic)</asp:Label></div></div></td>
-                            <td><div class="progress"><div class="progress-bar progress-bar-info" id="pgDiastolic" style="width: 0;"aria-valuemax="110"><asp:Label runat="server"> (Diastolic)</asp:Label></div></div></td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
+                            <td colspan="2"><div class="progress"><div class="progress-bar progress-bar-info" id="bgSystolic" style="width: 0;"aria-valuemax="0"><asp:Label runat="server" id="bgSystolicT" style="text-align:center"> (Systolic)</asp:Label></div></div></td>
+                            <td colspan="2"><div class="progress"><div class="progress-bar progress-bar-info" id="pgDiastolic" style="width: 0;"aria-valuemax="0"><asp:Label runat="server" id="pgDiastolicT" style="text-align:center"> (Diastolic)</asp:Label></div></div></td>
                         </tr>
                         <tr>
                             <td>Pulse Rate:</td>
@@ -83,9 +81,12 @@
 
         var patientGender = "<%=PatientGender%>";
 
+        var total = parseInt(systolic) + parseInt(diastolic);
+        var diaPercentage = ((diastolic / total) * 100);
+        var systoPercentage = (systolic / total) * 100;
 
-        $("#pgDiastolic").css('width', diastolic + '%').attr('aria-valuenow', diastolic);
-        $("#bgSystolic").css('width', systolic + '%').attr('aria-valuenow', systolic);
+        $("#pgDiastolic").css('width', diaPercentage + '%').attr('aria-valuenow', diastolic);
+        $("#bgSystolic").css('width', systoPercentage + '%').attr('aria-valuenow', systolic);
 
   
         //if (patientGender === 'Male') { $("#btnFemalVitals").prop("disabled",false); }

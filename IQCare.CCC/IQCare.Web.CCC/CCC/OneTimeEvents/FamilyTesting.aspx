@@ -20,7 +20,7 @@
                                 <label class="required control-label pull-left">First Name</label>
                             </div>
                             <div class="col-md-6">
-                                <input id="FirstName" class="form-control input-sm" type="text" runat="server" placeholder="First Name" />
+                                <input id="FirstName" class="form-control input-sm" type="text" runat="server" placeholder="First Name" data-parsley-required="true" />
                             </div>
                         </div>
                         <div class="col-md-12 form-group">
@@ -36,7 +36,7 @@
                                 <label class="required control-label pull-left">Last Name</label>
                             </div>
                             <div class="col-md-6">
-                                <input id="LastName" class="form-control input-sm" type="text" runat="server" placeholder="Last Name" />
+                                <input id="LastName" class="form-control input-sm" type="text" runat="server" placeholder="Last Name" data-parsley-required="true" />
                             </div>
                         </div>
                     </div>
@@ -83,12 +83,58 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12">
 
-                    <div class="col-md-12">
-                        <h3>HIV Testing information</h3><hr />
+                <div class="col-md-12" id="isRegisteredInClinic">
+                    <div class="col-md-6">
+                        <div class="col-md-12 form-group">
+                            <div class="col-md-6">
+                                <label class="control-label pull-left">Registered at this clinic:</label>
+                            </div>
+                            <div class="col-md-6">
+                                <asp:DropDownList ID="RegisteredInClinic" runat="server" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-required="true"></asp:DropDownList>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-4">
+                    
+                    <div class="col-md-6" id="searchButton">
+                        <div class="col-md-12 form-group">
+                            <div class="col-md-6">
+                                <asp:LinkButton ID="btnSearch" runat="server" ClientIDMode="Static" CssClass="btn btn-info btn-lg fa fa-search-minus" OnClientClick="return false;"> Find Patient</asp:LinkButton>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-12" id="familyMembersTable">
+                        <table class="table" id="familyMembersSearched">
+                            <thead class="thead-default">
+                            <tr>
+                                <th>CCC Number</th>
+                                <th>First Name</th>
+                                <th>Middle Name</th>
+                                <th>Last Name</th>
+                                <th>Date Of Birth</th>
+                                <th>Sex</th>
+                                <th>Enrollment Date</th>
+                                <th>Patient Status</th>
+                                <th>Action</th>
+                            </tr>
+
+                            </thead>
+
+                        </table>
+                    </div>
+                </div>
+                
+                
+                
+                <div id="hivTestingInfo">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <h3>HIV Testing information</h3><hr />
+
+                        </div>
+
+                        <div class="col-md-4">
                         <div class="col-md-12 form-group">
                             <div class="col-md-12">
                                 <label class="required control-label pull-left">Baseline HIV Status</label>
@@ -96,7 +142,9 @@
                             <div class="col-md-12">
                                 <select runat="server" id="BaselineHIVStatus" class="form-control input-sm" clientidmode="Static" onchange="BaselineEnabled();"></select>
                             </div>
+
                         </div>
+
                         <div class="col-md-12 form-group">
                             <div class="col-md-12">
                                 <label class="control-label pull-left">Baseline HIV Status Date</label>
@@ -113,7 +161,7 @@
 
                     </div>
 
-                    <div class="col-md-4">
+                        <div class="col-md-4">
                         <div class="col-md-12 form-group">
                             <div class="col-md-12">
                                 <label class="control-label pull-left">HIV Testing Results</label>
@@ -137,7 +185,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-4">
+                        <div class="col-md-4">
                         <div class="col-md-12 form-group">
                             <div class="col-md-12">
                                 <label class="control-label pull-left">Referred to CCC</label>
@@ -175,46 +223,50 @@
                         </div>
                     </div>
 
-                </div>
-                <div class="col-md-12">
-                    <hr />
-                </div>
-                <div class="col-md-12">
-                    <asp:LinkButton runat="server" ID="btnAdd" ClientIDMode="Static" OnClientClick="return false" CssClass=" btn btn-info btn-lg fa fa-plus-circle"> Add Member</asp:LinkButton>
-                </div>
-
-                <div class="col-md-12">
-                    <hr />
-                </div>
-
-                <div class="col-md-12">
-                    <div class="col-md-12 form-group">
-                        <div class="col-md-12 bg-primary"><span class="pull-left"></span>Family Members </div>
-                        <table class="table table-hover" id="tblFamilyTesting" clientidmode="Static" runat="server">
-                            <thead>
-                                <tr>
-                                    <th class="text-primary">#</th>
-                                    <th><span class="text-primary" aria-hidden="true">Name</span> </th>
-                                    <th><span class="text-primary" aria-hidden="true">Date Of Birth</span></th>
-                                    <th><span class="text-primary" aria-hidden="true">Relationship</span> </th>
-                                    <th><span class="text-primary" aria-hidden="true">Baseline HIV Status</span> </th>
-                                    <th><span class="text-primary" aria-hidden="true">Baseline HIV Status Date</span> </th>
-                                    <th><span class="text-primary" aria-hidden="true">HIV Testing Results</span> </th>
-                                    <th><span class="text-primary" aria-hidden="true">HIV Testing Results Date</span> </th>
-                                    <th><span class="text-primary" aria-hidden="true">CCC Referal</span></th>
-                                    <th><span class="text-primary pull-right">Action</span></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-
                     </div>
-                    <div class="col-md-10"></div>
+
+                    <div class="col-md-12">
+                        <hr />
+                    </div>
+
+                    <div class="col-md-12">
+                        <asp:LinkButton runat="server" ID="btnAdd" ClientIDMode="Static" OnClientClick="return false" CssClass="btn btn-info btn-lg fa fa-plus-circle"> Add Member</asp:LinkButton>
+                    </div>
+                
+
+                    <div class="col-md-12">
+                        <hr />
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="col-md-12 form-group">
+                            <div class="col-md-12 bg-primary"><span class="pull-left"></span>Family Members </div>
+                            <table class="table table-hover" id="tblFamilyTesting" clientidmode="Static" runat="server">
+                                <thead>
+                                    <tr>
+                                        <th class="text-primary">#</th>
+                                        <th><span class="text-primary" aria-hidden="true">Name</span> </th>
+                                        <th><span class="text-primary" aria-hidden="true">Date Of Birth</span></th>
+                                        <th><span class="text-primary" aria-hidden="true">Relationship</span> </th>
+                                        <th><span class="text-primary" aria-hidden="true">Baseline HIV Status</span> </th>
+                                        <th><span class="text-primary" aria-hidden="true">Baseline HIV Status Date</span> </th>
+                                        <th><span class="text-primary" aria-hidden="true">HIV Testing Results</span> </th>
+                                        <th><span class="text-primary" aria-hidden="true">HIV Testing Results Date</span> </th>
+                                        <th><span class="text-primary" aria-hidden="true">CCC Referal</span></th>
+                                        <th><span class="text-primary pull-right">Action</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <div class="col-md-10"></div>
+                    </div>
                 </div>
             </div>
 
-            <div class="col-md-12">
+            <div class="col-md-12" id="buttonSaving">
                 <hr />
                 <div class="col-md-4"></div>
 
@@ -560,6 +612,9 @@
     </div>
 
     <script type="text/javascript">
+        var tablefamily = null;
+        var cccArrayList = new Array();
+
         $(document).ready(function () {
             window.patientAge= <%=PatientAge%>;
             var date = moment("<%=PatientDateOfBirth%>").format('DD-MMM-YYYY');
@@ -567,6 +622,10 @@
             var familyMembers = [];
             $("#<%=CccReferal.ClientID%>").val("False");
             var gender = '<%=Gender%>';
+
+            var todayDate = new Date();
+            var todayDatePicker = moment(todayDate).add(2, 'hours');
+            
             //console.log(gender);
 
             //$('#BaselineHIVStatusD').datepicker({
@@ -578,7 +637,8 @@
             $("#BaselineHIVStatusdatepicker").datetimepicker({
                 format: 'DD-MMM-YYYY',
                 allowInputToggle: true,
-                useCurrent: false
+                useCurrent: false,
+                maxDate: todayDatePicker
             });
 
 
@@ -591,31 +651,34 @@
             $('#TestingDate').datetimepicker({
                 format: 'DD-MMM-YYYY',
                 allowInputToggle: true,
-                useCurrent: false
+                useCurrent: false,
+                maxDate: todayDatePicker
             });
 
             //$('#DateOfBirth').datepicker({
             //    allowPastDates: true,
             //    momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
             //});
-            var todayDate = new Date();
 
             $('#PersonDOBdatepicker').datetimepicker({
                 format: 'DD-MMM-YYYY',
                 allowInputToggle: true,
-                useCurrent: false
+                useCurrent: false,
+                maxDate: todayDatePicker
             });
 
             $('#CCCReferalDdatepicker').datetimepicker({
                 format: 'DD-MMM-YYYY',
                 allowInputToggle: true,
-                useCurrent: false
+                useCurrent: false,
+                maxDate: todayDatePicker
             });     
 
             $('#CCCReferaldatepicker').datetimepicker({
                 format: 'DD-MMM-YYYY',
                 allowInputToggle: true,
-                useCurrent: false
+                useCurrent: false,
+                maxDate: todayDatePicker
             });
 
             //$('#BaselineHIVStatusDMod').datepicker({
@@ -656,16 +719,63 @@
             });
 
             $("#FamilyTestingDetails").hide();
+            $("#familyMembersTable").hide();
+            //$("#hivTestingInfo").hide();
+            //$("#isRegisteredInClinic").hide();
+
+            $("#searchButton").hide();
+
             loadFamilyTesting();
+
+            $("#RegisteredInClinic").change(function() {
+                var registeredInClinic = $("#RegisteredInClinic").find(":selected").text();
+
+                if (registeredInClinic == "Yes") {
+                    $("#hivTestingInfo").hide();
+                    $("#searchButton").show();
+                    $("#familyMembersTable").show();
+                    $("#buttonSaving").hide();
+                } else if (registeredInClinic == "No") {
+                    $("#hivTestingInfo").show();
+                    $("#searchButton").hide();
+                    $("#familyMembersTable").hide();
+                    $("#buttonSaving").show();
+                }
+            });
+
+            $("#btnSearch").click(function () {
+                $('#FamilyTestingForm').parsley().destroy();
+                $('#FamilyTestingForm').parsley({
+                    excluded:
+                        "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
+                });
+
+                var firstName = null;
+                var middleName = null;
+                var lastName = null;
+                var sex = null;
+
+                if ($('#FamilyTestingForm').parsley().validate()) {
+                    firstName = $("#<%=FirstName.ClientID%>").val();
+                    middleName = $("#<%=MiddleName.ClientID%>").val();
+                    lastName = $("#<%=LastName.ClientID%>").val();
+                    sex = $("#<%=Sex.ClientID%>").find(":selected").text();
+
+                    searchFamilyMembersRegistedInClinic(firstName, middleName, lastName, sex);
+                } else {
+                    return false;
+                }
+            });
 
             $("#btnAdd").click(function (e) {
                 $('#FamilyTestingForm').parsley().destroy();
                 $('#FamilyTestingForm').parsley({
                     excluded:
-                    "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
+                        "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
                 });
 
                 if ($('#FamilyTestingForm').parsley().validate()) {
+                    
                     var firstName = escape($("#<%=FirstName.ClientID%>").val());
                     var middleName = escape($("#<%=MiddleName.ClientID%>").val());
                     var lastName = escape($("#<%=LastName.ClientID%>").val());
@@ -691,7 +801,21 @@
                     var today = new Date();
                     var birthDate = new Date(dob);
                     var age = today.getFullYear() - birthDate.getFullYear();
+                    var cccNumberFound = null;
 
+                    if (typeof cccReferalNumber !== "undefined" && cccReferalNumber != null && cccReferalNumber != "") {
+                        cccNumberFound = $.inArray("" + cccReferalNumber + "", cccArrayList);
+
+
+                        if (cccNumberFound > -1){
+                            toastr.error("Error", cccReferalNumber + " CCC Number already exists in the List");
+                            return false;
+                        }
+                        cccArrayList.push("" + cccReferalNumber + "");
+                    }
+                    //setTimeout(function() { CccNumberExists(cccReferalNumber); }, 200);
+                    ////console.log(baselineHivStatusDate);
+                    //console.log(isCccNumberExists);
                     //validations
                     if (moment('' + dob + '').isAfter()) {
                         toastr.error("Date of birth cannot be a future date.");
@@ -709,11 +833,14 @@
                         toastr.error("HIV testing result date cannot be a future date.");
                         return false;
                     }
-                    if ((!moment('' + baselineHivStatusDate + '').isValid())&&(baselineHivStatusDate !=="")) {
+                    console.log(baselineHivStatusDate);
+
+                    if (((baselineHivStatusDate !== "") && !moment(baselineHivStatusDate, 'DD-MMM-YYYY').isValid())) {
                         toastr.error("Baseline HIV status date invalid.");
                         return false;
                     }
-                    if ((!moment('' + hivTestingresultDate + '').isValid())&&(hivTestingresultDate !=="")) {
+
+                    if (((hivTestingresultDate !== "") && !moment('' + hivTestingresultDate + '').isValid())) {
                         toastr.error("HIV testing result date invalid.");
                         return false;
                     }
@@ -748,7 +875,10 @@
                     if (cccreferal == "") {
                         cccreferal = false;
                     }
-
+                    if (baselineHivStatusDate != "") {
+                        baselineHivStatusDate = moment(baselineHivStatusDate).format("DD-MMM-YYYY");
+                    }
+                    
                     if (fam.length > 0) {
                         toastr.error("Family member already added!");
                         return false;
@@ -831,84 +961,97 @@
             });
 
             //update family testing
-            $("#btnSaveFamilyTesting").click(function() {
+            $("#btnSaveFamilyTesting").click(function () {
+                $("#familyMembersTable").show();
                 followUpTestFamilyTesting();
+            });
+
+            $('#familyMembersSearched').on('click', 'button', function () {
+                var data = tablefamily.row($(this).parents('tr')).data();
+                //alert(data[0] + "'s salary is: " + data[8]);
+                var isPatientLinked = data[10];
+                if (isPatientLinked == "False" || isPatientLinked == "false") {
+                    addRegisteredPatientFamily(data[8], data[9], data[6], data[0]);
+                } else {
+                    toastr.success("Patient is already linked to this patient", "Family Testing");
+                    return false;
+                }
             });
 
             function loadFamilyTesting() {
                 var patientId ="<%=PatientId%>";
                 jQuery.support.cors = true;
                 $.ajax(
-                {
-                    type: "POST",
-                    url: "../WebService/PatientService.asmx/GetFamilyTestings",
-                    data: "{'patientId':'" + patientId + "'}",
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    cache: false,
-                    success: function (response) {
-                        window.itemList = response.d;
-                        //console.log(response.d);
+                    {
+                        type: "POST",
+                        url: "../WebService/PatientService.asmx/GetFamilyTestings",
+                        data: "{'patientId':'" + patientId + "'}",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        cache: false,
+                        success: function (response) {
+                            window.itemList = response.d;
+                            console.log(response.d);
 
-                        var table = '';
-                        itemList.forEach(function (item, i) {
-                            var n = i + 1;
-                            var name = item.FirstName + " " + item.MiddleName + " " + item.LastName;
-                            var baselineDate = item.BaseLineHivStatusDate;
-                            if (baselineDate != null) {
-                                baselineDate = moment(item.BaseLineHivStatusDate).format('DD-MMM-YYYY');
-                            } else {
-                                baselineDate = "";
-                            }
-                            //console.log(moment(item.DateOfBirth).format('DD-MMM-YYYY'));
-                            var testingDate = item.HivStatusResultDate;
-                            if (testingDate != null) {
-                                testingDate = moment(item.HivStatusResultDate).format('DD-MMM-YYYY');
-                            } else {
-                                testingDate = "";
-                            }
+                            var table = '';
+                            itemList.forEach(function (item, i) {
+                                var n = i + 1;
+                                var name = item.FirstName + " " + item.MiddleName + " " + item.LastName;
+                                var baselineDate = item.BaseLineHivStatusDate;
+                                if (baselineDate != null) {
+                                    baselineDate = moment(item.BaseLineHivStatusDate).format('DD-MMM-YYYY');
+                                } else {
+                                    baselineDate = "";
+                                }
+                                //console.log(moment(item.DateOfBirth).format('DD-MMM-YYYY'));
+                                var testingDate = item.HivStatusResultDate;
+                                if (testingDate != null) {
+                                    testingDate = moment(item.HivStatusResultDate).format('DD-MMM-YYYY');
+                                } else {
+                                    testingDate = "";
+                                }
 
-                            var linkageDate = "";
-                            if (item.LinkageDate != null)
-                            {
-                                linkageDate = moment(item.LinkageDate).format('DD-MMM-YYYY');
-                            }
+                                var linkageDate = "";
+                                if (item.LinkageDate != null)
+                                {
+                                    linkageDate = moment(item.LinkageDate).format('DD-MMM-YYYY');
+                                }
 
-                            var referred = "";
-                            var action = "";
-                            var enrollment = "";
+                                var referred = "";
+                                var action = "";
+                                var enrollment = "";
 
-                            if (item.BaseLineHivStatus != "Tested Positive" && item.HivStatusResult !="Tested Positive") {
-                                action = "<button type='button' id= 'btnEditTesting' class='btn btn-link btn-sm pull-right' data-toggle='modal' data-target='#testFollowupModal' onClick='editFamilyTesting(this)'>Follow-up Test</button>";
-                            } else if ((item.CccReferal == "True" && item.BaseLineHivStatus == "Tested Positive") || (item.CccReferal == "True" && item.HivStatusResult == "Tested Positive")) {
-                                referred = "Referred";
-                            } else if ((item.BaseLineHivStatus == "Tested Positive" && item.CccReferal == "False") || (item.HivStatusResult == "Tested Positive" && item.CccReferal == "False")) {
-                                referred = "Not Referred";
-                                action = "<button type='button' id= 'btnEditTesting' class='btn btn-link btn-sm pull-right' data-toggle='modal' data-target='#testFollowupModal' onClick='editFamilyTesting(this, true)'>Refer to another CCC</button>";
-                                enrollment = "<button type='button' id= 'btnEditTesting' class='btn btn-link btn-sm pull-right' onClick='enrollFamilyTesting(this)'>Enroll to this Facility</button>";
-                            }
+                                if ((item.BaseLineHivStatus != "Tested Positive" && item.HivStatusResult != "Tested Positive")) {
+                                    action = "<button type='button' id= 'btnEditTesting' class='btn btn-link btn-sm pull-right' data-toggle='modal' data-target='#testFollowupModal' onClick='editFamilyTesting(this)'>Follow-up Test</button>";
+                                } else if ((item.CccReferal == "True" && item.BaseLineHivStatus == "Tested Positive") || (item.CccReferal == "True" && item.HivStatusResult == "Tested Positive")) {
+                                    referred = "Referred";
+                                } else if ((item.BaseLineHivStatus == "Tested Positive" && item.CccReferal == "False") || (item.HivStatusResult == "Tested Positive" && item.CccReferal == "False")) {
+                                    referred = "Not Referred";
+                                    action = "<button type='button' id= 'btnEditTesting' class='btn btn-link btn-sm pull-right' data-toggle='modal' data-target='#testFollowupModal' onClick='editFamilyTesting(this, true)'>Refer to another CCC</button>";
+                                    enrollment = "<button type='button' id= 'btnEditTesting' class='btn btn-link btn-sm pull-right' onClick='enrollFamilyTesting(this)'>Enroll to this Facility</button>";
+                                }
 
-                            table += '<tr><td style="text-align: left">' + n + '</td><td style="text-align: left">' + name + '</td>' +
-                                '<td style="text-align: left">' + item.Relationship + '</td>' +
-                                '<td style="text-align:left;">' + moment(item.DateOfBirth).format('DD-MMM-YYYY') + '</td>' +
-                                '<td style="text-align: left">' + item.BaseLineHivStatus + '</td>' +
-                                '<td style="text-align: left">' + baselineDate + '</td>' +
-                                '<td style="text-align: left">' + item.HivStatusResult + '</td>' +
-                                '<td style="text-align: left">' + testingDate + '</td>' +
-                                '<td style="text-align: left">' + referred + "</td>" +
-                                '<td style="text-align: left">' + linkageDate + "</td>" +
-                                '<td style="text-align: left">' + action + '</td>' +
-                                '<td align="right">' + enrollment + '</td></tr>';
-                        });
+                                table += '<tr><td style="text-align: left">' + n + '</td><td style="text-align: left">' + name + '</td>' +
+                                    '<td style="text-align: left">' + item.Relationship + '</td>' +
+                                    '<td style="text-align:left;">' + moment(item.DateOfBirth).format('DD-MMM-YYYY') + '</td>' +
+                                    '<td style="text-align: left">' + item.BaseLineHivStatus + '</td>' +
+                                    '<td style="text-align: left">' + baselineDate + '</td>' +
+                                    '<td style="text-align: left">' + item.HivStatusResult + '</td>' +
+                                    '<td style="text-align: left">' + testingDate + '</td>' +
+                                    '<td style="text-align: left">' + referred + "</td>" +
+                                    '<td style="text-align: left">' + linkageDate + "</td>" +
+                                    '<td style="text-align: left">' + action + '</td>' +
+                                    '<td align="right">' + enrollment + '</td></tr>';
+                            });
                    
-                        $('#tableFamilymembers').append(table);
+                            $('#tableFamilymembers').append(table);
 
-                    },
+                        },
 
-                    error: function (msg) {
-                        alert(msg.responseText);
-                    }
-                });
+                        error: function (msg) {
+                            alert(msg.responseText);
+                        }
+                    });
             }
 
             $('#Dob').change(function() {
@@ -1038,7 +1181,7 @@
             $('#testFollowupModal').parsley().destroy();
             $('#testFollowupModal').parsley({
                 excluded:
-                "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
+                    "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
             });
 
             if ($('#testFollowupModal').parsley().validate()) {
@@ -1293,37 +1436,37 @@
                 $("#<%=cccReferalMod.ClientID%>").prop('disabled', false);
                 $("#CccReferalModDDate").prop('disabled', false);
             }
-    }
+        }
       
-    function BaselineEnabledMod() {
-        var baselinehivstatus = $("#bHivStatusMod :selected").text();
-        if (baselinehivstatus === "Never Tested") {
-            $("#<%=cccNumberMod.ClientID%>").prop('disabled',true);
-            $("#<%=cccReferalMod.ClientID%>").prop('disabled',true);
-            $("#<%=bHivStatusDateMod.ClientID%>").prop('disabled',true);
-            $("#BaselineHIVStatusDMod").addClass('noneevents');
+        function BaselineEnabledMod() {
+            var baselinehivstatus = $("#bHivStatusMod :selected").text();
+            if (baselinehivstatus === "Never Tested") {
+                $("#<%=cccNumberMod.ClientID%>").prop('disabled',true);
+                $("#<%=cccReferalMod.ClientID%>").prop('disabled',true);
+                $("#<%=bHivStatusDateMod.ClientID%>").prop('disabled',true);
+                $("#BaselineHIVStatusDMod").addClass('noneevents');
 
-            //$("#testingStatusMod").val("");
-            $("#testingStatusMod").prop('disabled', false);
-            //$("#testingStatusDateMod").val("");
-            $("#testingStatusDateMod").prop('disabled', false);
-            $("#TestingDateMod").removeClass('noneevents');
+                //$("#testingStatusMod").val("");
+                $("#testingStatusMod").prop('disabled', false);
+                //$("#testingStatusDateMod").val("");
+                $("#testingStatusDateMod").prop('disabled', false);
+                $("#TestingDateMod").removeClass('noneevents');
 
-        } else if (baselinehivstatus == "Tested Positive"){
-            //$("#testingStatusMod").val("");
-            $("#testingStatusMod").prop('disabled', true);
-            //$("#testingStatusDateMod").val("");
-            $("#testingStatusDateMod").prop('disabled', true);
-            $("#TestingDateMod").addClass('noneevents');
+            } else if (baselinehivstatus == "Tested Positive"){
+                //$("#testingStatusMod").val("");
+                $("#testingStatusMod").prop('disabled', true);
+                //$("#testingStatusDateMod").val("");
+                $("#testingStatusDateMod").prop('disabled', true);
+                $("#TestingDateMod").addClass('noneevents');
 
-            <%--$("#<%=bHivStatusDateMod.ClientID%>").val("");--%>
-            $("#<%=bHivStatusDateMod.ClientID%>").prop('disabled', false);
-            $("#BaselineHIVStatusDMod").removeClass('noneevents');
+                <%--$("#<%=bHivStatusDateMod.ClientID%>").val("");--%>
+                $("#<%=bHivStatusDateMod.ClientID%>").prop('disabled', false);
+                $("#BaselineHIVStatusDMod").removeClass('noneevents');
 
 
-            $("#<%=cccNumberMod.ClientID%>").prop('disabled', false);
-            $("#<%=cccReferalMod.ClientID%>").prop('disabled', false);
-        } else {
+                $("#<%=cccNumberMod.ClientID%>").prop('disabled', false);
+                $("#<%=cccReferalMod.ClientID%>").prop('disabled', false);
+            } else {
                 $("#<%=cccNumberMod.ClientID%>").prop('disabled',false);
                 $("#<%=cccReferalMod.ClientID%>").prop('disabled',false);
                 $("#BaselineHIVStatusDMod").removeClass('noneevents');
@@ -1450,6 +1593,93 @@
                 return false;
             }
 
+        }
+
+        function searchFamilyMembersRegistedInClinic(firstName, middleName, lastName, sex) {
+            var arrayReturn = [];
+
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientLookupService.asmx/GetPatientFamilyMembers",
+                data: "{'firstName': '" + firstName + "','middleName':'" + middleName + "','lastName':'" + lastName + "','sex':'" + sex + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    //console.log(response.d);
+                    var data = JSON.parse(response.d);
+                    //window.familyMembers = data;
+                    console.log(data);
+                    for (var i = 0, len = data.length; i < len; i++) {
+                        arrayReturn.push(
+                            [data[i].EnrollmentNumber, data[i].FirstName, data[i].MiddleName, data[i].LastName,
+                                moment(data[i].DateOfBirth).format('DD-MMM-YYYY'), data[i].Sex, moment(data[i].EnrollmentDate).format('DD-MMM-YYYY'),
+                                data[i].PatientStatus, data[i].Id, data[i].PersonId, data[i].LinkedToPatient]);
+                    }
+                    
+                    inittable(arrayReturn);
+                },
+                error: function (response) {
+
+                }
+            });
+        }
+
+        function inittable(data) {
+            //console.log(data);
+            $("#familyMembersSearched").dataTable().fnDestroy();
+            tablefamily = $('#familyMembersSearched').DataTable({
+                "aaData": data,
+                paging: true,
+                searching: true,
+                "columnDefs": [{
+                    "data": null,
+                    "targets": -1,
+                    "defaultContent": "<button id='btnAddPatientFamilyMember' Class='btn btn-info btn-lg fa fa-plus-circle'> Add Member</button>"
+                }]
+            });
+        }
+
+        function addRegisteredPatientFamily(id, personId, enrollmentDate, cccNumber) {
+            var relationshipType = $("#Relationship").val();
+            //console.log(id);
+            //console.log(personId);
+            //console.log(relationshipType);
+            //console.log(enrollmentDate);
+
+            //return false;
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientService.asmx/AddPatientAsFamilyMember",
+                data: "{'linkedPatientPersonId': '" + personId + "','relationshipTypeId':'" + relationshipType + "','baselineDate':'" + enrollmentDate + "','cccNumber':'" + cccNumber + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    console.log(response.d);
+
+                    toastr.success(response.d, "Family testing saved successfully");
+                    setTimeout(function() { window.location.href = '<%=ResolveClientUrl("~/CCC/OneTimeEvents/FamilyTesting.aspx") %>'; }, 500);
+                    return false;
+                },
+                error: function (response) {
+                    toastr.error(response.d, "Family Error");
+                }
+            });
+        }
+
+        function CccNumberExists(cccNumber) {
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientService.asmx/CccNumberExists",
+                data: "{'cccNumber':'" + cccNumber + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function(response) {
+                    //isCccNumberExists = response.d;
+                },
+                error: function(response) {
+                    toastr.error("Family Testing", response.d);
+                }
+            });
         }
 
     </script>

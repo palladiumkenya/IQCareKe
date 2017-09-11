@@ -2,8 +2,7 @@
     Inherits="IQCare.Web.PatientFinder" %>
 <%@ Register Assembly="AjaxControlToolkit" TagPrefix="ajaxToolkit" Namespace="AjaxControlToolkit" %>
 <style type="text/css">
-    .ajax__calendar_container
-    {
+    .ajax__calendar_container {
         z-index: 1000;
     }
 </style>
@@ -17,8 +16,7 @@
     <div class="row">
         <div class="well well-sm">
             <span class="fa-stack fa-lg pull-left"><i class="fa fa-circle fa-stack-2x"></i><i
-                class="fa fa-male fa-lg fa-stack-1x fa-inverse"></i></span><span class="tex-primary pull-left">
-                    Find/Add Patient</span><hr />
+                class="fa fa-male fa-lg fa-stack-1x fa-inverse"></i></span><span class="tex-primary pull-left">Find/Add Patient</span><hr />
             <asp:UpdatePanel ID="panelSearch" runat="server">
                 <ContentTemplate>
                     <asp:Panel ID="pnlSearch" runat="server" DefaultButton="btnView">
@@ -33,6 +31,19 @@
                                         TargetControlID="txtidentificationno" ValidChars="-@*/\ ">
                                     </ajaxToolkit:FilteredTextBoxExtender>
                                 </div>
+                                <div class="form-group col-md-10">
+                                    <label for="FTEPhnoe" class="control-label pull-left">
+                                        Phone Number:</label>
+                                    <asp:TextBox ID="textPhoneNumber" class="form-control input-sm" runat="server" MaxLength="20"></asp:TextBox>
+                                    <ajaxToolkit:FilteredTextBoxExtender ID="FTEPhnoe" runat="server" FilterType="Numbers"
+                                        TargetControlID="textPhoneNumber" />
+                                </div>
+                                <div class="form-group col-md-10">
+                                    <label for="ddFacility" class="control-label pull-left">
+                                        Facility/Satellite:</label>
+                                    <asp:DropDownList ID="ddFacility" CssClass="form-control input-sm" runat="server">
+                                    </asp:DropDownList>
+                                </div>
                                 <!-- .col-md-10 -->
                             </div>
                             <!-- .col-md-4 -->
@@ -44,37 +55,6 @@
                                     <ajaxToolkit:FilteredTextBoxExtender ID="FTELName" runat="server" FilterType="UppercaseLetters, LowercaseLetters,Custom"
                                         TargetControlID="txtlastname" ValidChars="-,.@*' " />
                                 </div>
-                                <!-- .form-group-->
-                            </div>
-                            <!-- .col-md-4 -->
-                            <div class="col-md-4">
-                                <label class="control-label pull-left" for="txtDOB" style="padding-left: 15px">
-                                    Date of Birth:</label>
-                                <div class="form-group col-md-10" style="white-space: nowrap; position: relative">
-                                    <asp:TextBox CssClass="form-control input-sm col-md-6" ID="txtDOB" runat="server"></asp:TextBox>
-                                    <asp:ImageButton runat="Server" ID="Image1" Height="22" Style="width: 22; height: 22;
-                                        z-index: auto; padding-left: 5px" ImageUrl="./images/cal_icon.gif" ImageAlign=" Bottom"
-                                        AlternateText="Click to show calendar" />
-                                    <ajaxToolkit:CalendarExtender ID="calendarButtonExtender" runat="server" TargetControlID="txtDOB"
-                                        PopupButtonID="Image1" EnabledOnClient="True" Format="dd-MMM-yyyy" />
-                                </div>
-                                <!--.form-group -->
-                            </div>
-                            <!-- .col-md-4 -->
-                        </div>
-                        <!-- .row -->
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group col-md-10">
-                                    <label for="ddFacility" class="control-label pull-left">
-                                        Facility/Satellite:</label>
-                                    <asp:DropDownList ID="ddFacility" CssClass="form-control input-sm" runat="server">
-                                    </asp:DropDownList>
-                                </div>
-                                <!-- .from-group-->
-                            </div>
-                            <!-- .col-md-4 -->
-                            <div class="col-md-4">
                                 <div class="form-group col-md-10">
                                     <label class="control-label pull-left" runat="server" id="lblmiddlename" for="FTEMName">
                                         Middle Name:</label>
@@ -82,38 +62,6 @@
                                     <ajaxToolkit:FilteredTextBoxExtender ID="FTEMName" runat="server" FilterType="UppercaseLetters, LowercaseLetters,Custom"
                                         TargetControlID="txtmiddlename" ValidChars="-,.@*' " />
                                 </div>
-                                <!-- .form-group-->
-                            </div>
-                            <!-- .col-md-4 -->
-                            <div class="col-md-4">
-                                <label for="textRegistrationDate" class="control-label pull-left" style="padding-left: 15px">
-                                    Registration Date:</label>
-                                <div class="form-group col-md-10" style="white-space: nowrap; position: relative">
-                                    <asp:TextBox CssClass="form-control col-md-6 input-sm" ID="textRegistrationDate"
-                                        runat="server" AutoComplete="false"></asp:TextBox>
-                                    <asp:ImageButton runat="Server" CssClass="" ID="ImageButton1" Height="22" Style="width: 22;
-                                        height: 22; z-index: auto; padding-left: 5px" ImageUrl="./images/cal_icon.gif"
-                                        ImageAlign=" Bottom" AlternateText="Click to show calendar" />
-                                    <ajaxToolkit:CalendarExtender ID="CalendarExtender1" runat="server" TargetControlID="textRegistrationDate"
-                                        PopupButtonID="ImageButton1" Format="dd-MMM-yyyy" />
-                                </div>
-                                <!-- .form-group-->
-                            </div>
-                            <!-- .col-md-4 -->
-                        </div>
-                        <!-- .row -->
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group col-md-10" style="display: <% = showService %>">
-                                    <label class="control-label pull-left" for="ddlServices">
-                                        Service:</label>
-                                    <asp:DropDownList ID="ddlServices" runat="server" CssClass="form-control input-sm">
-                                    </asp:DropDownList>
-                                </div>
-                                <!-- .col-md-10 -->
-                            </div>
-                            <!-- .col-md-4 -->
-                            <div class="col-md-4">
                                 <div class="form-group col-md-10">
                                     <label for="FTEFName" class="control-label pull-left">
                                         First Name:</label>
@@ -121,11 +69,49 @@
                                     <ajaxToolkit:FilteredTextBoxExtender ID="FTEFName" runat="server" FilterType="UppercaseLetters, LowercaseLetters,Custom"
                                         TargetControlID="txtfirstname" ValidChars="-,.@*' " />
                                 </div>
-                                <!--.form-group  -->
+                                <!-- .form-group-->
                             </div>
                             <!-- .col-md-4 -->
                             <div class="col-md-4">
-                                <%--<div class="col-md-5">--%>
+                                <div class="form-group col-md-10">
+                                    <div class="col-md-12">
+                                        <label class="control-label pull-left" for="txtDOB">
+                                            Date of Birth:</label>
+                                    </div>
+                                    <div class="col-md-8" style="white-space: nowrap;">
+                                        <asp:TextBox CssClass="form-control input-sm col-md-6" ID="txtDOB" runat="server"
+                                            MaxLength="11" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"
+                                            onfocus="javascript:vDateType='3'"></asp:TextBox>
+                                        <img onclick="w_displayDatePicker('<%= txtDOB.ClientID %>');" height="22" alt="Date Helper"
+                                            hspace="3" src="../Images/cal_icon.gif" width="20" border="0" style="z-index: auto" />
+                                        <%--  <asp:ImageButton runat="Server" ID="Image1" Height="22" Style="width: 22; height: 22;
+                                        z-index: auto; padding-left: 5px" ImageUrl="./images/cal_icon.gif" ImageAlign=" Bottom"
+                                        AlternateText="Click to show calendar" />
+                                    <ajaxToolkit:CalendarExtender ID="calendarButtonExtender" runat="server" TargetControlID="txtDOB"
+                                        PopupButtonID="Image1" EnabledOnClient="True" Format="dd-MMM-yyyy" />--%>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-10">
+                                    <div class="col-md-12">
+                                        <label for="textRegistrationDate" class="control-label pull-left">
+                                            Registration Date:</label>
+                                    </div>
+                                    <div class="col-md-8" style="white-space: nowrap; position: relative">
+                                        <asp:TextBox CssClass="form-control col-md-6 input-sm" ID="textRegistrationDate"
+                                            runat="server" AutoComplete="false" MaxLength="11" onblur="DateFormat(this,this.value,event,false,'3')"
+                                            onkeyup="DateFormat(this,this.value,event,false,'3')" onfocus="javascript:vDateType='3'"></asp:TextBox>
+                                        <img onclick="w_displayDatePicker('<%= textRegistrationDate.ClientID %>');" height="22"
+                                            alt="Date Helper" hspace="3" src="../Images/cal_icon.gif" width="20" border="0"
+                                            style="z-index: auto" />
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-10" style="display: <% = showService %>">
+                                    <label class="control-label pull-left" for="ddlServices">
+                                        Service:</label>
+                                    <asp:DropDownList ID="ddlServices" runat="server" CssClass="form-control input-sm">
+                                    </asp:DropDownList>
+                                </div>
+                                <div class="form-group col-md-10">
                                 <div class="form-group col-md-5">
                                     <label for="ddSex" class="control-label pull-left">
                                         Sex/ Gender :</label>
@@ -136,8 +122,6 @@
                                     </asp:DropDownList>
                                 </div>
                                 <!-- .form-group -->
-                                <%-- </div><!-- .col-md-6 -->--%>
-                                <%--<div class="col-md-5">--%>
                                 <div class="form-group col-md-5" style="display: <% = showStatus %>">
                                     <div>
                                         <label class="control-label pull-left" for="ddCareEndedStatus">
@@ -148,16 +132,12 @@
                                             <asp:ListItem Value="1">Care Ended</asp:ListItem>
                                         </asp:DropDownList>
                                     </div>
-                                </div>
-                                <!-- .form-group-->
-                                <%--</div><!-- .col-md-6 -->--%>
-                                <div class="col-md-2">
-                                </div>
+                                </div></div>
+                                <!--.form-group -->
                             </div>
                             <!-- .col-md-4 -->
-                            <hr />
                         </div>
-                        <!-- .row -->
+
                         <div class="row">
                             <asp:Panel ID="divError" runat="server" Style="padding: 5px" CssClass="bg-danger: #FFFFC0; border: solid 1px #C00000"
                                 HorizontalAlign="Left" Visible="false">
@@ -181,9 +161,10 @@
                                     </div>
                                     <div class="col-md-8" style="margin-bottom: 1%">
                                         <div class="col-md-3">
-                                            <asp:Button CssClass="btn btn-info fa fa-user col-md-12" ID="btnView" runat="server" OnClick="btnView_Click"
-                                                Text=" Find" Style="margin-right: 5px" /></div>
-                                        <div class="col-md-3" style="display:<% =  showAdd %>">
+                                            <asp:Button CssClass="btn btn-info col-md-12" ID="btnView" runat="server"
+                                                OnClick="btnView_Click" Text=" Find" Style="margin-right: 5px" />
+                                        </div>
+                                        <div class="col-md-3" style="display: <% =  showAdd %>">
                                             <asp:Button CssClass="btn btn-primary col-md-12" ID="btnAdd" runat="server" OnClick="btnAdd_Click"
                                                 Text="Add Patient" Style="margin-right: 5px" />
                                         </div>
@@ -233,7 +214,8 @@
                                                         <ItemTemplate>
                                                             <span style="display: <%# showIdentifiers %>; width: 20px">
                                                                 <asp:ImageButton ID="ExpandGridButton" runat="server" CommandName="Expand" ImageUrl="~/Images/plus.png"
-                                                                    CommandArgument="<%# Container.DataItemIndex %>" /></span></ItemTemplate>
+                                                                    CommandArgument="<%# Container.DataItemIndex %>" /></span>
+                                                        </ItemTemplate>
                                                     </asp:TemplateField>
                                                     <asp:BoundField DataField="PatientFacilityId" HeaderText="Facility ID" />
                                                     <asp:BoundField DataField="firstname" HeaderText="First Name" />
@@ -242,14 +224,14 @@
                                                     <asp:BoundField DataField="dob" HeaderText="DOB" DataFormatString="{0:dd-MMM-yyyy}" />
                                                     <asp:BoundField DataField="sex" HeaderText="Sex" />
                                                     <asp:BoundField DataField="RegistrationDate" DataFormatString="{0:dd-MMM-yyyy}" HeaderText="Reg Date" />
+                                                     <asp:BoundField DataField="Phone" HeaderText="Phone" />
                                                     <asp:BoundField DataField="FacilityName" HeaderText="Facility" />
                                                     <asp:BoundField DataField="Status" HeaderText="Status" />
                                                     <asp:TemplateField>
                                                         <ItemTemplate>
                                                             </td></tr><tr>
                                                                 <td colspan="100%">
-                                                                    <asp:Panel ID="ContainerDiv" runat="server" Style="display: none; position: relative;
-                                                                        left: 5px;">
+                                                                    <asp:Panel ID="ContainerDiv" runat="server" Style="display: none; position: relative; left: 5px;">
                                                                         <asp:GridView ID="gridPatientServiceList" runat="server" AllowSorting="False" AutoGenerateColumns="False"
                                                                             BorderColor="White" BorderWidth="1px" CellPadding="0" CssClass="datatable table-striped table-responsive"
                                                                             DataKeyNames="moduleid,patientid,locationid" Enabled="true" EnableModelValidation="True"
@@ -268,8 +250,8 @@
                                                                                             <ItemTemplate>
                                                                                                 <tr>
                                                                                                     <td style="width: 80%;">
-                                                                                                        <asp:Label ID="labelIdentifier" Style="color: blue; font-size: 9pt; font-weight: bold;
-                                                                                                            display: inline-block;" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "[IdentifierName]")%>' />
+                                                                                                        <asp:Label ID="labelIdentifier" Style="color: blue; font-size: 9pt; font-weight: bold; display: inline-block;"
+                                                                                                            runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "[IdentifierName]")%>' />
                                                                                                     </td>
                                                                                                     <td>
                                                                                                         <asp:Label ID="identifierName" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "[IdentifierValue]")%>'
@@ -280,8 +262,8 @@
                                                                                             <AlternatingItemTemplate>
                                                                                                 <tr style="background-color: #EFEFEF">
                                                                                                     <td style="width: 80%;">
-                                                                                                        <asp:Label ID="labelIdentifier" Style="color: blue; font-size: 9pt; font-weight: bold;
-                                                                                                            display: inline-block;" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "[IdentifierName]")%>' />
+                                                                                                        <asp:Label ID="labelIdentifier" Style="color: blue; font-size: 9pt; font-weight: bold; display: inline-block;"
+                                                                                                            runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "[IdentifierName]")%>' />
                                                                                                     </td>
                                                                                                     <td>
                                                                                                         <asp:Label ID="identifierName" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "[IdentifierValue]")%>'
@@ -321,21 +303,17 @@
                                 BehaviorID="bhxPaxId43" CancelControlID="buttonCancelPaxId" BackgroundCssClass="modalBackground"
                                 PopupDragHandleControlID="divTitle">
                             </ajaxToolkit:ModalPopupExtender>
-                            <asp:Panel ID="panelPaxId" runat="server" Style="display: none; border: solid 1px #808080;
-                                width: 500px;">
-                                <asp:Panel ID="divTitle" runat="server" Style="border: solid 1px #808080; margin: 0px 0px 0px 0px;
-                                    cursor: move; height: 18px; width: 500px;">
+                            <asp:Panel ID="panelPaxId" runat="server" Style="display: none; border: solid 1px #808080; width: 500px;">
+                                <asp:Panel ID="divTitle" runat="server" Style="border: solid 1px #808080; margin: 0px 0px 0px 0px; cursor: move; height: 18px; width: 500px;">
                                     <table border="0" cellpadding="0" cellspacing="0" style="width: 500px; height: 18px">
                                         <tr>
-                                            <td style="width: 5px; height: 19px;">
-                                            </td>
+                                            <td style="width: 5px; height: 19px;"></td>
                                             <td style="width: 100%; height: 19px;">
                                                 <span style="font-weight: bold;">
                                                     <asp:Label ID="labelParamTitle" runat="server">Request For Reversal </asp:Label><asp:Label
                                                         ID="labelReceipt" runat="server" /></span>
                                             </td>
-                                            <td style="width: 5px; height: 19px;">
-                                            </td>
+                                            <td style="width: 5px; height: 19px;"></td>
                                         </tr>
                                     </table>
                                 </asp:Panel>
@@ -343,17 +321,13 @@
                                     <HeaderTemplate>
                                         <table class="table table-striped table-bordered">
                                             <tr>
-                                                <td>
-                                                    Service Area
+                                                <td>Service Area
                                                 </td>
-                                                <td>
-                                                    Enrollment Date
+                                                <td>Enrollment Date
                                                 </td>
-                                                <td>
-                                                    Status
+                                                <td>Status
                                                 </td>
-                                                <td style="display: table-cell;" data-hide="phone">
-                                                    Identifiers
+                                                <td style="display: table-cell;" data-hide="phone">Identifiers
                                                 </td>
                                             </tr>
                                     </HeaderTemplate>
@@ -397,7 +371,8 @@
                                     </FooterTemplate>
                                 </asp:Repeater>
                                 <div style="padding: 6px;" align="center">
-                                    <asp:Button ID="buttonCancelPaxId" runat="server" Text="Close" ForeColor="DarkBlue" /></div>
+                                    <asp:Button ID="buttonCancelPaxId" runat="server" Text="Close" ForeColor="DarkBlue" />
+                                </div>
                             </asp:Panel>
                         </div>
                     </div>

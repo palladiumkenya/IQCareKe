@@ -321,11 +321,11 @@ namespace IQCare.Web.CCC.WebService
 
         [WebMethod(EnableSession = true)]
         [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
-        public ArrayList GetDrugList(string PMSCM)
+        public ArrayList GetDrugList(string PMSCM,string treatmentPlan)
         {
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
 
-            DataTable theDT = patientEncounter.getPharmacyDrugList(PMSCM);
+            DataTable theDT = patientEncounter.getPharmacyDrugList(PMSCM,treatmentPlan);
             ArrayList rows = new ArrayList();
 
             foreach (DataRow row in theDT.Rows)
