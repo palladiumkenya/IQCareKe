@@ -63,12 +63,12 @@ FROM            dbo.Patient
 
 GO
 
-/****** Object:  View [dbo].[vw_RegimenMap]    Script Date: 5/9/2017 10:27:05 AM ******/
-IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[vw_RegimenMap]'))
-DROP VIEW [dbo].[vw_RegimenMap]
+/****** Object:  View [dbo].[RegimenMapView]    Script Date: 5/9/2017 10:27:05 AM ******/
+IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[RegimenMapView]'))
+DROP VIEW [dbo].[RegimenMapView]
 GO
 
-/****** Object:  View [dbo].[vw_RegimenMap]    Script Date: 8/17/2017 11:29:36 AM ******/
+/****** Object:  View [dbo].[RegimenMapView]    Script Date: 8/17/2017 11:29:36 AM ******/
 SET ANSI_NULLS ON
 GO
 
