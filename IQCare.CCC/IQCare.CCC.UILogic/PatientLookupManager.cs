@@ -30,6 +30,13 @@ namespace IQCare.CCC.UILogic
             }
         }
 
+        public List<PatientLookup> GetPatientSearchListPayload(int patientId, string firstName = null, string middleName = null, string lastName =null)
+        {
+            var patientDetails = _patientLookupmanager.GetPatientSearchPayload(patientId, firstName, middleName, lastName);
+
+            return patientDetails;
+        }
+
         public List<PatientLookup> GetPatientSearchListPayload()
         {
             var patientDetails = _patientLookupmanager.GetPatientSearchPayload();

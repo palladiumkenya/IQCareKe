@@ -235,7 +235,8 @@ namespace IQCare.Web.Laboratory
                             MinNormalRange = Convert.ToDecimal(min_normal),
                             MaxNormalRange = Convert.ToDecimal(max_normal)
                         };
-
+                        //_result.ResultUnitId = _result.ResultUnit.Id;
+                        //_result.ResultOptionId = _result.ResultUnit.Id;
                     }
                     catch { }
 
@@ -811,7 +812,7 @@ namespace IQCare.Web.Laboratory
                     RadComboBoxItem item = (new RadComboBoxItem(row.UnitName, row.UnitId.ToString()));
                     if (Convert.ToBoolean(row.IsDefault))
                     {
-                        strDefaultId = row.UnitId.ToString();
+                        strDefaultId = row.ResultUnit.Id.ToString();
                     }
                     item.Attributes.Add("is_default", row.IsDefault.ToString().ToLower());
                     item.Attributes.Add("min", row.MinBoundary.ToString());

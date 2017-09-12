@@ -33,23 +33,44 @@ namespace IQCare.Web.CCC.WebService
             String output=null;
             int filteredRecords = 0;
             int totalCount = 0;
-            Utility utility=new Utility();
+            
+
+
+            var jsonData = new List<PatientLookup>();
+
             try
             {
-                PatientLookupManager patientLookup = new PatientLookupManager();
-                var jsonData = patientLookup.GetPatientSearchListPayload();
+                int patientId = 0;
+                string firstName = null;
+                string middleName = null;
+                string lastName = null;
 
+                PatientLookupManager patientLookup = new PatientLookupManager();
+
+
+                Int32.TryParse(dataPayLoad.FirstOrDefault(x => x.name == "patientId").value, out patientId);
+                firstName = Convert.ToString(dataPayLoad.FirstOrDefault(x => x.name == "firstName").value);
+                middleName = Convert.ToString(dataPayLoad.FirstOrDefault(x => x.name == "middleName").value);
+                lastName = Convert.ToString(dataPayLoad.FirstOrDefault(x => x.name == "lastName").value);
+
+                //patientId = patientId != "" ? patientId : 0;
+
+                if (patientId > 0 || !string.IsNullOrWhiteSpace(firstName) || !string.IsNullOrWhiteSpace(middleName) || !string.IsNullOrWhiteSpace(lastName))
+                {
+                    jsonData = patientLookup.GetPatientSearchListPayload(patientId, firstName, middleName, lastName);
+                }
+                else
+                {
+                    jsonData = patientLookup.GetPatientSearchListPayload();
+                }
 
                 if (jsonData.Count > 0)
                 {
                     var sEcho = Convert.ToInt32(dataPayLoad.FirstOrDefault(x => x.name == "sEcho").value);
-                    var displayLength =
-                        Convert.ToInt32(dataPayLoad.FirstOrDefault(x => x.name == "iDisplayLength").value);
+                    var displayLength = Convert.ToInt32(dataPayLoad.FirstOrDefault(x => x.name == "iDisplayLength").value);
                     var displayStart = Convert.ToInt32(dataPayLoad.FirstOrDefault(x => x.name == "iDisplayStart").value);
-                    var patientId = Convert.ToString(dataPayLoad.FirstOrDefault(x => x.name == "patientId").value);
-                    var firstName = Convert.ToString(dataPayLoad.FirstOrDefault(x => x.name == "firstName").value);
-                    var middleName = Convert.ToString(dataPayLoad.FirstOrDefault(x => x.name == "middleName").value);
-                    var lastName = Convert.ToString(dataPayLoad.FirstOrDefault(x => x.name == "lastName").value);
+                    
+                    
                     // var dateOfBirth = Convert.ToDateTime(dataPayLoad.FirstOrDefault(x => x.name == "DateOfBirth").value);
                     // var gender = Convert.ToInt32(dataPayLoad.FirstOrDefault(x => x.name == "gender").value);
                     var facility = Convert.ToInt32(dataPayLoad.FirstOrDefault(x => x.name == "facility").value);
@@ -59,30 +80,30 @@ namespace IQCare.Web.CCC.WebService
                     string searchString = dataPayLoad.FirstOrDefault(x => x.name == "sSearch").value;
 
 
-                    if (!string.IsNullOrWhiteSpace(patientId))
-                    {
-                        //jsonData = jsonData.Where(x => x.EnrollmentNumber == patientId).ToList();
-                        jsonData = jsonData.Where(x => x.EnrollmentNumber.Contains(patientId)).ToList();
-                    }
+                    //if (!string.IsNullOrWhiteSpace(patientId))
+                    //{
+                    //    //jsonData = jsonData.Where(x => x.EnrollmentNumber == patientId).ToList();
+                    //    jsonData = jsonData.Where(x => x.EnrollmentNumber.Contains(patientId)).ToList();
+                    //}
 
-                    if (!string.IsNullOrWhiteSpace(firstName))
-                    {
-                        jsonData =
-                            jsonData.Where(x => x.FirstName.ToLower().Contains(firstName.ToLower()))
-                                .ToList();
-                    }
-                    if (!string.IsNullOrWhiteSpace(lastName))
-                    {
-                        jsonData =
-                            jsonData.Where(x => x.LastName.ToLower().Contains(lastName.ToLower()))
-                                .ToList();
-                    }
-                    if (!string.IsNullOrWhiteSpace(middleName))
-                    {
-                        jsonData =
-                            jsonData.Where(x => x.MiddleName.ToLower().Contains(middleName.ToLower()))
-                                .ToList();
-                    }
+                    //if (!string.IsNullOrWhiteSpace(firstName))
+                    //{
+                    //    jsonData =
+                    //        jsonData.Where(x => x.FirstName.ToLower().Contains(firstName.ToLower()))
+                    //            .ToList();
+                    //}
+                    //if (!string.IsNullOrWhiteSpace(lastName))
+                    //{
+                    //    jsonData =
+                    //        jsonData.Where(x => x.LastName.ToLower().Contains(lastName.ToLower()))
+                    //            .ToList();
+                    //}
+                    //if (!string.IsNullOrWhiteSpace(middleName))
+                    //{
+                    //    jsonData =
+                    //        jsonData.Where(x => x.MiddleName.ToLower().Contains(middleName.ToLower()))
+                    //            .ToList();
+                    //}
 
                     /*-- order columns based on payload received -- */
                     switch (sortCol)

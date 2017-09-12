@@ -10,7 +10,6 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Application.Common</RootNamespace>
     <AssemblyName>Application.Common</AssemblyName>
-  
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
@@ -68,6 +67,7 @@
     <Compile Include="LoggedInUser.cs" />
     <Compile Include="MsgBuilder.cs" />
     <Compile Include="MsgRepository.cs" />
+    <Compile Include="PredicateBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utility.cs" />
   </ItemGroup>

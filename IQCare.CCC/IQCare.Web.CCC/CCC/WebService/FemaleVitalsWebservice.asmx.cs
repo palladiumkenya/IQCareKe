@@ -24,7 +24,6 @@ namespace IQCare.Web.CCC.WebService
         private string jsonMessage;
         private int result=0;
         private int patientId;
-        private int userId;
         private int patientMasterVisitId;
 
         [WebMethod]
