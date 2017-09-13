@@ -145,7 +145,7 @@ namespace IQCare.Web.CCC.WebService
         [WebMethod(EnableSession = true)]
         public string AddPatientFamilyTesting(string familyMembers)
         {
-            int patientId; int patientMasterVisitId; string firstName; string middleName; string lastName; int sex; string dob; int relationshipId; int baselineHivStatusId; string baselineHivStatusDate; string hivTestingresultId; string hivTestingresultDate; bool cccreferal; string cccReferalNumber;  int userId;
+            int patientId; int patientMasterVisitId; string firstName; string middleName; string lastName; int sex; string dob; int relationshipId; int baselineHivStatusId; string baselineHivStatusDate; /*string hivTestingresultId;*/ string hivTestingresultDate; bool cccreferal; string cccReferalNumber;  int userId;
             DateTime? linkageDate;
             bool dobPrecision;
 

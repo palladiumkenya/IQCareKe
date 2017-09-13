@@ -159,6 +159,7 @@ namespace BusinessProcess.Laboratory
                               DetectionLimit = row["DetectionLimit"] == DBNull.Value ? nullDecimal : Convert.ToDecimal(row["DetectionLimit"]),
                               IsDefault = Convert.ToBoolean(row["DefaultUnit"]),
                               ResultUnit = new ResultUnit() { Id = Convert.ToInt32(row["UnitId"]), Text = row["UnitName"].ToString() },
+                              UnitId = row["UnitId"] == DBNull.Value? 0 : Convert.ToInt32(row["UnitId"]),
                               DeleteFlag = false
                           }
                             );

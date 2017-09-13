@@ -1694,11 +1694,11 @@
 				$("#lblPMTCT").checkbox('enable');
 			}
 
-			if (age <= 2) {
+			<%--if (age <= 2) {
 				$("#<%=BaselineMUAC.ClientID%>").prop('disabled', false);
 			} else {
 				$("#<%=BaselineMUAC.ClientID%>").prop('disabled', true);
-			}
+			}--%>
 
 			if (pgStatus > 0 && age >= 10) {
 				$("#<%=BaselineMUAC.ClientID%>").prop('disabled', false);

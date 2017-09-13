@@ -622,536 +622,4102 @@
   </Mst_District>
   <Mst_District>
     <Id>2</Id>
-    <Name>ATHI RIVER</Name>
+    <Name>
+MACHAKOS</Name>
     <SRNO>2.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>3</Id>
-    <Name>CASINO NBI</Name>
+    <Name>\</Name>
     <SRNO>3.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>4</Id>
-    <Name>COAST GEN</Name>
+    <Name>0718760829</Name>
     <SRNO>4.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>5</Id>
-    <Name>EMBU</Name>
+    <Name>0722394220</Name>
     <SRNO>5.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>6</Id>
-    <Name>EMBUI</Name>
+    <Name>0727911102</Name>
     <SRNO>6.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>7</Id>
-    <Name>HOMA BAY DH</Name>
+    <Name>AHERO</Name>
     <SRNO>7.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>8</Id>
-    <Name>ITUMBULE</Name>
+    <Name>AKONGO</Name>
     <SRNO>8.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>9</Id>
-    <Name>KAJIANDO</Name>
+    <Name>ALEGO</Name>
     <SRNO>9.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>10</Id>
-    <Name>KANGUNDO</Name>
+    <Name>ALEGO-USONGA</Name>
     <SRNO>10.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>11</Id>
-    <Name>KANZII</Name>
+    <Name>ALENGO</Name>
     <SRNO>11.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>12</Id>
-    <Name>KATANGI</Name>
+    <Name>ALKARAU</Name>
     <SRNO>12.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>13</Id>
-    <Name>KATANGI H/C</Name>
+    <Name>AMAGERO</Name>
     <SRNO>13.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>14</Id>
-    <Name>KATHIANI</Name>
+    <Name>AMAGORO</Name>
     <SRNO>14.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>15</Id>
-    <Name>KATHONZWENI</Name>
+    <Name>AMBIRA</Name>
     <SRNO>15.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>16</Id>
-    <Name>KATHUNI</Name>
+    <Name>AMETHO</Name>
     <SRNO>16.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>17</Id>
-    <Name>KATULANI DISP</Name>
+    <Name>ANGENGA</Name>
     <SRNO>17.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>18</Id>
-    <Name>KERICHO</Name>
+    <Name>AR</Name>
     <SRNO>18.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>19</Id>
-    <Name>KIAMBU</Name>
+    <Name>ARENGO</Name>
     <SRNO>19.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>20</Id>
-    <Name>KIBWEZI</Name>
+    <Name>ATH RIVER</Name>
     <SRNO>20.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>21</Id>
-    <Name>KIJABE</Name>
+    <Name>ATHI RIVER</Name>
     <SRNO>21.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>22</Id>
-    <Name>KILALA</Name>
+    <Name>ATHI RIVER MEDICAL</Name>
     <SRNO>22.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>23</Id>
-    <Name>KILINDINI</Name>
+    <Name>ATHIRIVER</Name>
     <SRNO>23.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>24</Id>
-    <Name>KILUNGU</Name>
+    <Name>AWENDO</Name>
     <SRNO>24.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>25</Id>
-    <Name>KINANGOP</Name>
+    <Name>BAHATI</Name>
     <SRNO>25.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>26</Id>
-    <Name>KISAU</Name>
+    <Name>BALE</Name>
     <SRNO>26.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>27</Id>
-    <Name>KITANGA</Name>
+    <Name>BARINGO</Name>
     <SRNO>27.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>28</Id>
-    <Name>KITILE</Name>
+    <Name>BASAA</Name>
     <SRNO>28.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>29</Id>
-    <Name>KITUI</Name>
+    <Name>BASS CENTRAL</Name>
     <SRNO>29.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>30</Id>
-    <Name>KITUI D/H</Name>
+    <Name>BHIHI</Name>
     <SRNO>30.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>31</Id>
-    <Name>KNH</Name>
+    <Name>BISHOP KIOKO</Name>
     <SRNO>31.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>32</Id>
-    <Name>KWALE</Name>
+    <Name>BOMET</Name>
     <SRNO>32.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>33</Id>
-    <Name>KYANGONGO</Name>
+    <Name>BONDO</Name>
     <SRNO>33.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>34</Id>
-    <Name>KYAWANGO</Name>
+    <Name>BONGO</Name>
     <SRNO>34.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>35</Id>
-    <Name>LANGATA</Name>
+    <Name>BORABO</Name>
     <SRNO>35.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>36</Id>
-    <Name>LOITOK TOK</Name>
+    <Name>BORABU</Name>
     <SRNO>36.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>37</Id>
-    <Name>M.G.H</Name>
+    <Name>BORO</Name>
     <SRNO>37.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>38</Id>
-    <Name>MACHAKOS</Name>
+    <Name>BOTSWANA</Name>
     <SRNO>38.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>39</Id>
-    <Name>MACHAKOS G.H</Name>
+    <Name>BUBALA</Name>
     <SRNO>39.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>40</Id>
-    <Name>MACKAKOS</Name>
+    <Name>BUDALANGI</Name>
     <SRNO>40.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>41</Id>
-    <Name>MAKINDU</Name>
+    <Name>BUDARANGI</Name>
     <SRNO>41.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>42</Id>
-    <Name>MAKUENI</Name>
+    <Name>BUGOMA</Name>
     <SRNO>42.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>43</Id>
-    <Name>MALINDI</Name>
+    <Name>BUHAYO</Name>
     <SRNO>43.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>44</Id>
-    <Name>MASII</Name>
+    <Name>BUKOKO</Name>
     <SRNO>44.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>45</Id>
-    <Name>MASINGA</Name>
+    <Name>BUMULA</Name>
     <SRNO>45.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>46</Id>
-    <Name>MATER</Name>
+    <Name>BUNGOMA</Name>
     <SRNO>46.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>47</Id>
-    <Name>MATTA</Name>
+    <Name>BUNGUMA EAST</Name>
     <SRNO>47.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>48</Id>
-    <Name>MATUU</Name>
+    <Name>BUNYORE</Name>
     <SRNO>48.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>49</Id>
-    <Name>MAWALA</Name>
+    <Name>BURA</Name>
     <SRNO>49.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>50</Id>
-    <Name>MBAGATHI</Name>
+    <Name>BURABU</Name>
     <SRNO>50.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>51</Id>
-    <Name>MBEERE</Name>
+    <Name>BUSIA</Name>
     <SRNO>51.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>52</Id>
-    <Name>MBIRIKANI CLINIC</Name>
+    <Name>BUTALANGI</Name>
     <SRNO>52.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>53</Id>
-    <Name>MBOONI</Name>
+    <Name>BUTELE</Name>
     <SRNO>53.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>54</Id>
-    <Name>MBOONI EAST</Name>
+    <Name>BUTERE</Name>
     <SRNO>54.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>55</Id>
-    <Name>MBOONI WEST</Name>
+    <Name>BUTERE MUMIAS</Name>
     <SRNO>55.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>56</Id>
-    <Name>MBS</Name>
+    <Name>BUTERE-MUMIAS (KHWISERO)</Name>
     <SRNO>56.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>57</Id>
-    <Name>MKS</Name>
+    <Name>BUTERE/MUMIAS</Name>
     <SRNO>57.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>58</Id>
-    <Name>MKS DISP</Name>
+    <Name>BUTULA</Name>
     <SRNO>58.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>59</Id>
-    <Name>MKS G/H</Name>
+    <Name>BYERI</Name>
     <SRNO>59.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>60</Id>
-    <Name>MKS L.5</Name>
+    <Name>CENTRAL</Name>
     <SRNO>60.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>61</Id>
-    <Name>MOMBASA</Name>
+    <Name>CENTRAL IMENTI</Name>
     <SRNO>61.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>62</Id>
-    <Name>MOTOMO</Name>
+    <Name>CHANGAMWE</Name>
     <SRNO>62.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>63</Id>
-    <Name>MUMBUNI</Name>
+    <Name>CHEHE</Name>
     <SRNO>63.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>64</Id>
-    <Name>MUTHETHENI</Name>
+    <Name>CHEPATUI</Name>
     <SRNO>64.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>65</Id>
-    <Name>MUTITUNI</Name>
+    <Name>CHEPKORIO</Name>
     <SRNO>65.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>66</Id>
-    <Name>MUUSINI</Name>
+    <Name>CHEPKORIO KERIO</Name>
     <SRNO>66.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>67</Id>
-    <Name>MWALA</Name>
+    <Name>CHERENGANI</Name>
     <SRNO>67.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>68</Id>
-    <Name>MWALA DISTRICT</Name>
+    <Name>CHERENGANYI</Name>
     <SRNO>68.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>69</Id>
-    <Name>MWINGI</Name>
+    <Name>CHINYARU</Name>
     <SRNO>69.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>70</Id>
-    <Name>MYANZA PGH</Name>
+    <Name>CHITAAGO</Name>
     <SRNO>70.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>71</Id>
-    <Name>NAIROBI</Name>
+    <Name>CHOGORIA</Name>
     <SRNO>71.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>72</Id>
-    <Name>NAKURU</Name>
+    <Name>CHONGEYU</Name>
     <SRNO>72.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>73</Id>
-    <Name>NBI</Name>
+    <Name>CHUKA</Name>
     <SRNO>73.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>74</Id>
-    <Name>NYERI</Name>
+    <Name>CONGO</Name>
     <SRNO>74.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>75</Id>
-    <Name>SHIMO LA TEWA</Name>
+    <Name>COUNTRY UGANDA</Name>
     <SRNO>75.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>76</Id>
-    <Name>SIAYA</Name>
+    <Name>DAGORETTI</Name>
     <SRNO>76.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>77</Id>
-    <Name>SOTIK</Name>
+    <Name>DANDORA</Name>
     <SRNO>77.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>78</Id>
-    <Name>SULTAN HAMD</Name>
+    <Name>DAR ES SALAAM</Name>
     <SRNO>78.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>79</Id>
-    <Name>T.I</Name>
+    <Name>EDALPH</Name>
     <SRNO>79.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>80</Id>
-    <Name>TATTA</Name>
+    <Name>EDEBES</Name>
     <SRNO>80.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>81</Id>
-    <Name>TAWA</Name>
+    <Name>EKALAKALA</Name>
     <SRNO>81.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>82</Id>
-    <Name>TAWA SDH</Name>
+    <Name>EKERENYO</Name>
     <SRNO>82.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>83</Id>
-    <Name>THIKA</Name>
+    <Name>EKERONYO</Name>
     <SRNO>83.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>84</Id>
-    <Name>UKUNDA</Name>
+    <Name>ELDORET</Name>
     <SRNO>84.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>85</Id>
-    <Name>VOI</Name>
+    <Name>ELGEYO</Name>
     <SRNO>85.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>86</Id>
-    <Name>VYULYA</Name>
+    <Name>ELGEYO MARAKWET</Name>
     <SRNO>86.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>87</Id>
-    <Name>VYULYA H/C</Name>
+    <Name>EMALI</Name>
     <SRNO>87.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>88</Id>
-    <Name>WAMUNYU</Name>
+    <Name>EMBAKASI</Name>
     <SRNO>88.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>89</Id>
-    <Name>WAMUNYU H/C</Name>
+    <Name>EMBAKASI NRB</Name>
     <SRNO>89.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_District>
     <Id>90</Id>
-    <Name>YATTA</Name>
+    <Name>EMBU</Name>
     <SRNO>90.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>91</Id>
+    <Name>EMMESA</Name>
+    <SRNO>91.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>92</Id>
+    <Name>EMMUKOLA</Name>
+    <SRNO>92.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>93</Id>
+    <Name>EMUAHAYA</Name>
+    <SRNO>93.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>94</Id>
+    <Name>EMUHAYA</Name>
+    <SRNO>94.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>95</Id>
+    <Name>ESLIRA</Name>
+    <SRNO>95.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>96</Id>
+    <Name>FUNYOLA</Name>
+    <SRNO>96.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>97</Id>
+    <Name>FUNYULA</Name>
+    <SRNO>97.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>98</Id>
+    <Name>FUNYULE</Name>
+    <SRNO>98.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>99</Id>
+    <Name>GAAMBA</Name>
+    <SRNO>99.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>100</Id>
+    <Name>GARISA</Name>
+    <SRNO>100.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>101</Id>
+    <Name>GARUHA</Name>
+    <SRNO>101.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>102</Id>
+    <Name>GATANGA</Name>
+    <SRNO>102.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>103</Id>
+    <Name>GATHARA</Name>
+    <SRNO>103.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>104</Id>
+    <Name>GATUNDU NORTH</Name>
+    <SRNO>104.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>105</Id>
+    <Name>GATUNDU SOUTH</Name>
+    <SRNO>105.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>106</Id>
+    <Name>GATUNGA</Name>
+    <SRNO>106.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>107</Id>
+    <Name>GEM</Name>
+    <SRNO>107.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>108</Id>
+    <Name>GEM WEST</Name>
+    <SRNO>108.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>109</Id>
+    <Name>GESHA</Name>
+    <SRNO>109.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>110</Id>
+    <Name>GICHUGU</Name>
+    <SRNO>110.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>111</Id>
+    <Name>GICHUNGU</Name>
+    <SRNO>111.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>112</Id>
+    <Name>GITWABA</Name>
+    <SRNO>112.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>113</Id>
+    <Name>GUCHA</Name>
+    <SRNO>113.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>114</Id>
+    <Name>GUNJA</Name>
+    <SRNO>114.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>115</Id>
+    <Name>GURBA TULA</Name>
+    <SRNO>115.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>116</Id>
+    <Name>GUSA</Name>
+    <SRNO>116.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>117</Id>
+    <Name>GWASI</Name>
+    <SRNO>117.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>118</Id>
+    <Name>HAMASI</Name>
+    <SRNO>118.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>119</Id>
+    <Name>HAMISI</Name>
+    <SRNO>119.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>120</Id>
+    <Name>HIRO</Name>
+    <SRNO>120.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>121</Id>
+    <Name>HOMA BAY</Name>
+    <SRNO>121.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>122</Id>
+    <Name>HOMABAY</Name>
+    <SRNO>122.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>123</Id>
+    <Name>HOMABAY'</Name>
+    <SRNO>123.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>124</Id>
+    <Name>HURUMA</Name>
+    <SRNO>124.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>125</Id>
+    <Name>IKOLOMANI</Name>
+    <SRNO>125.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>126</Id>
+    <Name>IKOMBE</Name>
+    <SRNO>126.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>127</Id>
+    <Name>IKURU</Name>
+    <SRNO>127.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>128</Id>
+    <Name>IKUTHA</Name>
+    <SRNO>128.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>129</Id>
+    <Name>IKUTUNI</Name>
+    <SRNO>129.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>130</Id>
+    <Name>ILIMA</Name>
+    <SRNO>130.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>131</Id>
+    <Name>ILOME</Name>
+    <SRNO>131.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>132</Id>
+    <Name>IMBINGA</Name>
+    <SRNO>132.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>133</Id>
+    <Name>ISBANIA</Name>
+    <SRNO>133.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>134</Id>
+    <Name>ISHIARA HC</Name>
+    <SRNO>134.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>135</Id>
+    <Name>ISINYA</Name>
+    <SRNO>135.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>136</Id>
+    <Name>ISIOLO</Name>
+    <SRNO>136.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>137</Id>
+    <Name>ISIOLO NORTH</Name>
+    <SRNO>137.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>138</Id>
+    <Name>ITANGO</Name>
+    <SRNO>138.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>139</Id>
+    <Name>ITEN</Name>
+    <SRNO>139.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>140</Id>
+    <Name>IVETI</Name>
+    <SRNO>140.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>141</Id>
+    <Name>IVINGA NZIA</Name>
+    <SRNO>141.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>142</Id>
+    <Name>JAMCITY</Name>
+    <SRNO>142.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>143</Id>
+    <Name>K ITUI</Name>
+    <SRNO>143.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>144</Id>
+    <Name>KABARNET</Name>
+    <SRNO>144.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>145</Id>
+    <Name>KABASI</Name>
+    <SRNO>145.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>146</Id>
+    <Name>KABATI</Name>
+    <SRNO>146.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>147</Id>
+    <Name>KABETE</Name>
+    <SRNO>147.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>148</Id>
+    <Name>KABIET</Name>
+    <SRNO>148.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>149</Id>
+    <Name>KABUTI HC</Name>
+    <SRNO>149.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>150</Id>
+    <Name>KADIBO</Name>
+    <SRNO>150.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>151</Id>
+    <Name>KADIMBO</Name>
+    <SRNO>151.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>152</Id>
+    <Name>KAGEMA</Name>
+    <SRNO>152.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>153</Id>
+    <Name>KAGILO</Name>
+    <SRNO>153.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>154</Id>
+    <Name>KAITI</Name>
+    <SRNO>154.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>155</Id>
+    <Name>KAJIADO
+KAJ</Name>
+    <SRNO>155.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>156</Id>
+    <Name>KAJIADO</Name>
+    <SRNO>156.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>157</Id>
+    <Name>KAJIADO EAST</Name>
+    <SRNO>157.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>158</Id>
+    <Name>KAKAMEGA</Name>
+    <SRNO>158.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>159</Id>
+    <Name>KALAMA</Name>
+    <SRNO>159.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>160</Id>
+    <Name>KALAWA</Name>
+    <SRNO>160.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>161</Id>
+    <Name>KALAWANI</Name>
+    <SRNO>161.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>162</Id>
+    <Name>KALILI</Name>
+    <SRNO>162.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>163</Id>
+    <Name>KALOLENI</Name>
+    <SRNO>163.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>164</Id>
+    <Name>KALUNGA</Name>
+    <SRNO>164.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>165</Id>
+    <Name>KALYAMBU</Name>
+    <SRNO>165.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>166</Id>
+    <Name>KAMBAA</Name>
+    <SRNO>166.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>167</Id>
+    <Name>KAMBULA</Name>
+    <SRNO>167.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>168</Id>
+    <Name>KAMINJI</Name>
+    <SRNO>168.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>169</Id>
+    <Name>KAMRESI</Name>
+    <SRNO>169.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>170</Id>
+    <Name>KANANGI</Name>
+    <SRNO>170.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>171</Id>
+    <Name>KANDAO</Name>
+    <SRNO>171.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>172</Id>
+    <Name>KANGEMA</Name>
+    <SRNO>172.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>173</Id>
+    <Name>KANGUNDO</Name>
+    <SRNO>173.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>174</Id>
+    <Name>KANGUNDO DH</Name>
+    <SRNO>174.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>175</Id>
+    <Name>KANIALA</Name>
+    <SRNO>175.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>176</Id>
+    <Name>KANYANGI</Name>
+    <SRNO>176.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>177</Id>
+    <Name>KANYONYO</Name>
+    <SRNO>177.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>178</Id>
+    <Name>KAPLAMA</Name>
+    <SRNO>178.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>179</Id>
+    <Name>KAPSABET</Name>
+    <SRNO>179.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>180</Id>
+    <Name>KAPSOTIK</Name>
+    <SRNO>180.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>181</Id>
+    <Name>KAPTAMA</Name>
+    <SRNO>181.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>182</Id>
+    <Name>KARACHUONYO</Name>
+    <SRNO>182.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>183</Id>
+    <Name>KARANGU</Name>
+    <SRNO>183.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>184</Id>
+    <Name>KARATE</Name>
+    <SRNO>184.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>185</Id>
+    <Name>KARATINA</Name>
+    <SRNO>185.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>186</Id>
+    <Name>KAREMO</Name>
+    <SRNO>186.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>187</Id>
+    <Name>KARIOBANGI</Name>
+    <SRNO>187.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>188</Id>
+    <Name>KARUNGA</Name>
+    <SRNO>188.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>189</Id>
+    <Name>KARURI</Name>
+    <SRNO>189.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>190</Id>
+    <Name>KASIKEU</Name>
+    <SRNO>190.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>191</Id>
+    <Name>KASINGA</Name>
+    <SRNO>191.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>192</Id>
+    <Name>KASIPUL</Name>
+    <SRNO>192.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>193</Id>
+    <Name>KATAKWI</Name>
+    <SRNO>193.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>194</Id>
+    <Name>KATANGI</Name>
+    <SRNO>194.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>195</Id>
+    <Name>KATELEMBU</Name>
+    <SRNO>195.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>196</Id>
+    <Name>KATHEKAI</Name>
+    <SRNO>196.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>197</Id>
+    <Name>KATHEKAKAI</Name>
+    <SRNO>197.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>198</Id>
+    <Name>KATHIAKA</Name>
+    <SRNO>198.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>199</Id>
+    <Name>KATHIANI</Name>
+    <SRNO>199.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>200</Id>
+    <Name>KATHONZWENI</Name>
+    <SRNO>200.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>201</Id>
+    <Name>KATHOS</Name>
+    <SRNO>201.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>202</Id>
+    <Name>KATIENO WASI</Name>
+    <SRNO>202.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>203</Id>
+    <Name>KATUALA</Name>
+    <SRNO>203.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>204</Id>
+    <Name>KATULANI</Name>
+    <SRNO>204.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>205</Id>
+    <Name>KATUMANI</Name>
+    <SRNO>205.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>206</Id>
+    <Name>KAVIANI</Name>
+    <SRNO>206.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>207</Id>
+    <Name>KAWETHE\</Name>
+    <SRNO>207.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>208</Id>
+    <Name>KAWIRI</Name>
+    <SRNO>208.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>209</Id>
+    <Name>KAYOLE</Name>
+    <SRNO>209.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>210</Id>
+    <Name>KEE</Name>
+    <SRNO>210.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>211</Id>
+    <Name>KENDU BAY</Name>
+    <SRNO>211.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>212</Id>
+    <Name>KENYANYA</Name>
+    <SRNO>212.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>213</Id>
+    <Name>KERICHO</Name>
+    <SRNO>213.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>214</Id>
+    <Name>KEROKA</Name>
+    <SRNO>214.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>215</Id>
+    <Name>KERUGUYA</Name>
+    <SRNO>215.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>216</Id>
+    <Name>KEUMBO</Name>
+    <SRNO>216.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>217</Id>
+    <Name>KHAYO</Name>
+    <SRNO>217.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>218</Id>
+    <Name>KIAMBU</Name>
+    <SRNO>218.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>219</Id>
+    <Name>KIARA</Name>
+    <SRNO>219.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>220</Id>
+    <Name>KIBIRICHIA</Name>
+    <SRNO>220.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>221</Id>
+    <Name>KIBIRONGO</Name>
+    <SRNO>221.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>222</Id>
+    <Name>KIBOMET</Name>
+    <SRNO>222.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>223</Id>
+    <Name>KIBURI</Name>
+    <SRNO>223.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>224</Id>
+    <Name>KIBWEZI</Name>
+    <SRNO>224.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>225</Id>
+    <Name>KIBWEZI EAST</Name>
+    <SRNO>225.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>226</Id>
+    <Name>KIBWEZI WEST</Name>
+    <SRNO>226.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>227</Id>
+    <Name>KIENI</Name>
+    <SRNO>227.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>228</Id>
+    <Name>KIGUMO</Name>
+    <SRNO>228.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>229</Id>
+    <Name>KIHARU</Name>
+    <SRNO>229.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>230</Id>
+    <Name>KIIMA KIMWE</Name>
+    <SRNO>230.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>231</Id>
+    <Name>KIIMA KIU</Name>
+    <SRNO>231.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>232</Id>
+    <Name>KIJIADO</Name>
+    <SRNO>232.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>233</Id>
+    <Name>KIKUYENZA</Name>
+    <SRNO>233.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>234</Id>
+    <Name>KIKUYU</Name>
+    <SRNO>234.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>235</Id>
+    <Name>KIKUYU'</Name>
+    <SRNO>235.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>236</Id>
+    <Name>KILIBONI</Name>
+    <SRNO>236.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>237</Id>
+    <Name>KILIFI</Name>
+    <SRNO>237.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>238</Id>
+    <Name>KILILI</Name>
+    <SRNO>238.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>239</Id>
+    <Name>KILINDINI</Name>
+    <SRNO>239.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>240</Id>
+    <Name>KILOME</Name>
+    <SRNO>240.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>241</Id>
+    <Name>KILUNGU</Name>
+    <SRNO>241.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>242</Id>
+    <Name>KIMAKIMWE</Name>
+    <SRNO>242.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>243</Id>
+    <Name>KIMANA</Name>
+    <SRNO>243.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>244</Id>
+    <Name>KIMENDE</Name>
+    <SRNO>244.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>245</Id>
+    <Name>KIMILILI</Name>
+    <SRNO>245.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>246</Id>
+    <Name>KIMILILIL</Name>
+    <SRNO>246.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>247</Id>
+    <Name>KIMININI</Name>
+    <SRNO>247.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>248</Id>
+    <Name>KIMONGO</Name>
+    <SRNO>248.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>249</Id>
+    <Name>KIMUTWA</Name>
+    <SRNO>249.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>250</Id>
+    <Name>KINAGOP</Name>
+    <SRNO>250.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>251</Id>
+    <Name>KINANE</Name>
+    <SRNO>251.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>252</Id>
+    <Name>KINANGOP SOUTH</Name>
+    <SRNO>252.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>253</Id>
+    <Name>KINANIE</Name>
+    <SRNO>253.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>254</Id>
+    <Name>KINANIE HC</Name>
+    <SRNO>254.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>255</Id>
+    <Name>KINBWEZI</Name>
+    <SRNO>255.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>256</Id>
+    <Name>KINDUBAY</Name>
+    <SRNO>256.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>257</Id>
+    <Name>KINYAATA</Name>
+    <SRNO>257.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>258</Id>
+    <Name>KINYAMBU</Name>
+    <SRNO>258.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>259</Id>
+    <Name>KIPIPIRI</Name>
+    <SRNO>259.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>260</Id>
+    <Name>KIRENGA</Name>
+    <SRNO>260.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>261</Id>
+    <Name>KIRINYAGA</Name>
+    <SRNO>261.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>262</Id>
+    <Name>KIRITIRI</Name>
+    <SRNO>262.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>263</Id>
+    <Name>KISASI</Name>
+    <SRNO>263.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>264</Id>
+    <Name>KISAU</Name>
+    <SRNO>264.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>265</Id>
+    <Name>KISAUNI</Name>
+    <SRNO>265.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>266</Id>
+    <Name>KISII</Name>
+    <SRNO>266.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>267</Id>
+    <Name>KISII CENTRAL</Name>
+    <SRNO>267.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>268</Id>
+    <Name>KISII NORTH</Name>
+    <SRNO>268.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>269</Id>
+    <Name>KISIRIRI</Name>
+    <SRNO>269.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>270</Id>
+    <Name>KISUMU</Name>
+    <SRNO>270.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>271</Id>
+    <Name>KISUMU EAST</Name>
+    <SRNO>271.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>272</Id>
+    <Name>KISUMU NORTH</Name>
+    <SRNO>272.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>273</Id>
+    <Name>KISUMU RURAL</Name>
+    <SRNO>273.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>274</Id>
+    <Name>KISUMU TOWN</Name>
+    <SRNO>274.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>275</Id>
+    <Name>KISUMU TOWN WEST</Name>
+    <SRNO>275.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>276</Id>
+    <Name>KISUMU WEST</Name>
+    <SRNO>276.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>277</Id>
+    <Name>KISUNGUNI</Name>
+    <SRNO>277.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>278</Id>
+    <Name>KITALE</Name>
+    <SRNO>278.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>279</Id>
+    <Name>KITENGEI</Name>
+    <SRNO>279.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>280</Id>
+    <Name>KITENGELA</Name>
+    <SRNO>280.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>281</Id>
+    <Name>KITENGELA SCH</Name>
+    <SRNO>281.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>282</Id>
+    <Name>KITENGELA'</Name>
+    <SRNO>282.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>283</Id>
+    <Name>KITETA</Name>
+    <SRNO>283.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>284</Id>
+    <Name>KITHIANI</Name>
+    <SRNO>284.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>285</Id>
+    <Name>KITHIMANI</Name>
+    <SRNO>285.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>286</Id>
+    <Name>KITHINI</Name>
+    <SRNO>286.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>287</Id>
+    <Name>KITRINYAGA</Name>
+    <SRNO>287.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>288</Id>
+    <Name>KITUI</Name>
+    <SRNO>288.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>289</Id>
+    <Name>KITUI CENTRAL</Name>
+    <SRNO>289.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>290</Id>
+    <Name>KITUI DC</Name>
+    <SRNO>290.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>291</Id>
+    <Name>KITULA</Name>
+    <SRNO>291.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>292</Id>
+    <Name>KITULANI</Name>
+    <SRNO>292.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>293</Id>
+    <Name>KITUNDU</Name>
+    <SRNO>293.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>294</Id>
+    <Name>KITUTU MASABA</Name>
+    <SRNO>294.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>295</Id>
+    <Name>KIU</Name>
+    <SRNO>295.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>296</Id>
+    <Name>KIUNDINI</Name>
+    <SRNO>296.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>297</Id>
+    <Name>KIUSYANE</Name>
+    <SRNO>297.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>298</Id>
+    <Name>KIUSYANI</Name>
+    <SRNO>298.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>299</Id>
+    <Name>KIVAA</Name>
+    <SRNO>299.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>300</Id>
+    <Name>KIVAUNI</Name>
+    <SRNO>300.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>301</Id>
+    <Name>KIWEZI</Name>
+    <SRNO>301.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>302</Id>
+    <Name>KOBUAE</Name>
+    <SRNO>302.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>303</Id>
+    <Name>KOIBATEK</Name>
+    <SRNO>303.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>304</Id>
+    <Name>KOKIRI</Name>
+    <SRNO>304.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>305</Id>
+    <Name>KOKWANYO</Name>
+    <SRNO>305.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>306</Id>
+    <Name>KOLA</Name>
+    <SRNO>306.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>307</Id>
+    <Name>KOMAROCK HC</Name>
+    <SRNO>307.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>308</Id>
+    <Name>KONGOWEA</Name>
+    <SRNO>308.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>309</Id>
+    <Name>KONYA</Name>
+    <SRNO>309.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>310</Id>
+    <Name>KONZA</Name>
+    <SRNO>310.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>311</Id>
+    <Name>KORANDO</Name>
+    <SRNO>311.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>312</Id>
+    <Name>KOSIREI</Name>
+    <SRNO>312.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>313</Id>
+    <Name>KURIA WEST MIGORI</Name>
+    <SRNO>313.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>314</Id>
+    <Name>KWA MBOO</Name>
+    <SRNO>314.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>315</Id>
+    <Name>KWA VONZA</Name>
+    <SRNO>315.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>316</Id>
+    <Name>KWALE</Name>
+    <SRNO>316.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>317</Id>
+    <Name>KWANZA</Name>
+    <SRNO>317.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>318</Id>
+    <Name>KYAKATONI</Name>
+    <SRNO>318.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>319</Id>
+    <Name>KYANGWITHYA</Name>
+    <SRNO>319.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>320</Id>
+    <Name>KYANYIKA</Name>
+    <SRNO>320.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>321</Id>
+    <Name>KYETHIVO</Name>
+    <SRNO>321.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>322</Id>
+    <Name>LAIKIPIA</Name>
+    <SRNO>322.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>323</Id>
+    <Name>LALI</Name>
+    <SRNO>323.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>324</Id>
+    <Name>LALIENDA</Name>
+    <SRNO>324.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>325</Id>
+    <Name>LAMU</Name>
+    <SRNO>325.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>326</Id>
+    <Name>LANGALANGA</Name>
+    <SRNO>326.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>327</Id>
+    <Name>LANGATA</Name>
+    <SRNO>327.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>328</Id>
+    <Name>LIKUYANI</Name>
+    <SRNO>328.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>329</Id>
+    <Name>LIMURU</Name>
+    <SRNO>329.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>330</Id>
+    <Name>LKILUMYWA</Name>
+    <SRNO>330.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>331</Id>
+    <Name>LOITOKTOK</Name>
+    <SRNO>331.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>332</Id>
+    <Name>LOMURUTI</Name>
+    <SRNO>332.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>333</Id>
+    <Name>LORAMBI</Name>
+    <SRNO>333.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>334</Id>
+    <Name>LOWER YATTA</Name>
+    <SRNO>334.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>335</Id>
+    <Name>LUGARI</Name>
+    <SRNO>335.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>336</Id>
+    <Name>LUNGA LUNGA</Name>
+    <SRNO>336.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>337</Id>
+    <Name>LUNGALUNGA</Name>
+    <SRNO>337.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>338</Id>
+    <Name>LUSIOLA</Name>
+    <SRNO>338.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>339</Id>
+    <Name>LWADA</Name>
+    <SRNO>339.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>340</Id>
+    <Name>MACAKOS</Name>
+    <SRNO>340.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>341</Id>
+    <Name>MACHAKIS</Name>
+    <SRNO>341.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>342</Id>
+    <Name>MACHAKOS</Name>
+    <SRNO>342.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>343</Id>
+    <Name>MACHAKOS CENTRAL</Name>
+    <SRNO>343.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>344</Id>
+    <Name>MACHAKOS HOSPITAL</Name>
+    <SRNO>344.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>345</Id>
+    <Name>MACHAKOS LV5</Name>
+    <SRNO>345.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>346</Id>
+    <Name>MACXHAKOS</Name>
+    <SRNO>346.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>347</Id>
+    <Name>MADERA</Name>
+    <SRNO>347.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>348</Id>
+    <Name>MADIANY</Name>
+    <SRNO>348.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>349</Id>
+    <Name>MAENI</Name>
+    <SRNO>349.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>350</Id>
+    <Name>MAHAKOS</Name>
+    <SRNO>350.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>351</Id>
+    <Name>MAKAGWA</Name>
+    <SRNO>351.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>352</Id>
+    <Name>MAKINDU</Name>
+    <SRNO>352.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>353</Id>
+    <Name>MAKINDU DH</Name>
+    <SRNO>353.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>354</Id>
+    <Name>MAKONGENI</Name>
+    <SRNO>354.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>355</Id>
+    <Name>MAKUENI</Name>
+    <SRNO>355.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>356</Id>
+    <Name>MAKUENI SCH</Name>
+    <SRNO>356.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>357</Id>
+    <Name>MAKUUENI</Name>
+    <SRNO>357.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>358</Id>
+    <Name>MAKUYU</Name>
+    <SRNO>358.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>359</Id>
+    <Name>MALA</Name>
+    <SRNO>359.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>360</Id>
+    <Name>MALANGA</Name>
+    <SRNO>360.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>361</Id>
+    <Name>MALANGWA</Name>
+    <SRNO>361.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>362</Id>
+    <Name>MALIKONI</Name>
+    <SRNO>362.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>363</Id>
+    <Name>MALIKU</Name>
+    <SRNO>363.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>364</Id>
+    <Name>MALILI</Name>
+    <SRNO>364.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>365</Id>
+    <Name>MALINDI</Name>
+    <SRNO>365.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>366</Id>
+    <Name>MALINYA</Name>
+    <SRNO>366.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>367</Id>
+    <Name>MALOTHONI</Name>
+    <SRNO>367.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>368</Id>
+    <Name>MANGA</Name>
+    <SRNO>368.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>369</Id>
+    <Name>MANYALA</Name>
+    <SRNO>369.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>370</Id>
+    <Name>MARA</Name>
+    <SRNO>370.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>371</Id>
+    <Name>MARAGWA</Name>
+    <SRNO>371.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>372</Id>
+    <Name>MARALAL</Name>
+    <SRNO>372.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>373</Id>
+    <Name>MARAN</Name>
+    <SRNO>373.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>374</Id>
+    <Name>MARANDA</Name>
+    <SRNO>374.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>375</Id>
+    <Name>MARANGA</Name>
+    <SRNO>375.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>376</Id>
+    <Name>MARANI</Name>
+    <SRNO>376.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>377</Id>
+    <Name>MARIAKANI</Name>
+    <SRNO>377.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>378</Id>
+    <Name>MARSABET</Name>
+    <SRNO>378.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>379</Id>
+    <Name>MARSABIT</Name>
+    <SRNO>379.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>380</Id>
+    <Name>MASABA</Name>
+    <SRNO>380.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>381</Id>
+    <Name>MASAKA</Name>
+    <SRNO>381.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>382</Id>
+    <Name>MASAKU</Name>
+    <SRNO>382.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>383</Id>
+    <Name>MASALA</Name>
+    <SRNO>383.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>384</Id>
+    <Name>MASENO</Name>
+    <SRNO>384.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>385</Id>
+    <Name>MASII</Name>
+    <SRNO>385.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>386</Id>
+    <Name>MASINGA</Name>
+    <SRNO>386.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>387</Id>
+    <Name>MASINGA'</Name>
+    <SRNO>387.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>388</Id>
+    <Name>MASONGALENI</Name>
+    <SRNO>388.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>389</Id>
+    <Name>MASUNGU</Name>
+    <SRNO>389.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>390</Id>
+    <Name>MATAYOS</Name>
+    <SRNO>390.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>391</Id>
+    <Name>MATHATANI</Name>
+    <SRNO>391.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>392</Id>
+    <Name>MATHINGAU</Name>
+    <SRNO>392.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>393</Id>
+    <Name>MATHIRA</Name>
+    <SRNO>393.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>394</Id>
+    <Name>MATHIRA WEST</Name>
+    <SRNO>394.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>395</Id>
+    <Name>MATILIKU</Name>
+    <SRNO>395.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>396</Id>
+    <Name>MATINYANI</Name>
+    <SRNO>396.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>397</Id>
+    <Name>MATUNGU</Name>
+    <SRNO>397.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>398</Id>
+    <Name>MATUNGULU</Name>
+    <SRNO>398.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>399</Id>
+    <Name>MATUU</Name>
+    <SRNO>399.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>400</Id>
+    <Name>MAUA</Name>
+    <SRNO>400.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>401</Id>
+    <Name>MAVINDU</Name>
+    <SRNO>401.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>402</Id>
+    <Name>MAVIVIE</Name>
+    <SRNO>402.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>403</Id>
+    <Name>MAVOKO</Name>
+    <SRNO>403.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>404</Id>
+    <Name>MAVULYA</Name>
+    <SRNO>404.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>405</Id>
+    <Name>MBAGATHI</Name>
+    <SRNO>405.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>406</Id>
+    <Name>MBALANYIKO</Name>
+    <SRNO>406.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>407</Id>
+    <Name>MBALE</Name>
+    <SRNO>407.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>408</Id>
+    <Name>MBARARA</Name>
+    <SRNO>408.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>409</Id>
+    <Name>MBEELE</Name>
+    <SRNO>409.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>410</Id>
+    <Name>MBEERE</Name>
+    <SRNO>410.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>411</Id>
+    <Name>MBEERE SOUTH</Name>
+    <SRNO>411.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>412</Id>
+    <Name>MBITA</Name>
+    <SRNO>412.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>413</Id>
+    <Name>MBITINI</Name>
+    <SRNO>413.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>414</Id>
+    <Name>MBOMACHOKE</Name>
+    <SRNO>414.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>415</Id>
+    <Name>MBONDO</Name>
+    <SRNO>415.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>416</Id>
+    <Name>MBONI WEST</Name>
+    <SRNO>416.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>417</Id>
+    <Name>MBOONI</Name>
+    <SRNO>417.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>418</Id>
+    <Name>MBOONI EAST</Name>
+    <SRNO>418.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>419</Id>
+    <Name>MBOONI WEST</Name>
+    <SRNO>419.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>420</Id>
+    <Name>MBORO</Name>
+    <SRNO>420.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>421</Id>
+    <Name>MBUI NZAU</Name>
+    <SRNO>421.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>422</Id>
+    <Name>MBULUTINI</Name>
+    <SRNO>422.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>423</Id>
+    <Name>MBUMBUNI</Name>
+    <SRNO>423.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>424</Id>
+    <Name>MBUTULA</Name>
+    <SRNO>424.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>425</Id>
+    <Name>MBUVO</Name>
+    <SRNO>425.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>426</Id>
+    <Name>MCHAKOS</Name>
+    <SRNO>426.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>427</Id>
+    <Name>MERU</Name>
+    <SRNO>427.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>428</Id>
+    <Name>MERU CENTRAL</Name>
+    <SRNO>428.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>429</Id>
+    <Name>MERU NORTH</Name>
+    <SRNO>429.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>430</Id>
+    <Name>MERU SOUTH</Name>
+    <SRNO>430.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>431</Id>
+    <Name>MERU-CENTRAL</Name>
+    <SRNO>431.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>432</Id>
+    <Name>MIGORI</Name>
+    <SRNO>432.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>433</Id>
+    <Name>MIGORI RONGO</Name>
+    <SRNO>433.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>434</Id>
+    <Name>MIGWANI</Name>
+    <SRNO>434.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>435</Id>
+    <Name>MIKIDORI</Name>
+    <SRNO>435.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>436</Id>
+    <Name>MIKUYUNI</Name>
+    <SRNO>436.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>437</Id>
+    <Name>MITABONI</Name>
+    <SRNO>437.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>438</Id>
+    <Name>MITAMBONI</Name>
+    <SRNO>438.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>439</Id>
+    <Name>MITONGUNI</Name>
+    <SRNO>439.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>440</Id>
+    <Name>MITUMBIRI</Name>
+    <SRNO>440.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>441</Id>
+    <Name>MITUNDU</Name>
+    <SRNO>441.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>442</Id>
+    <Name>MITUVU</Name>
+    <SRNO>442.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>443</Id>
+    <Name>MIWANI</Name>
+    <SRNO>443.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>444</Id>
+    <Name>MKS</Name>
+    <SRNO>444.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>445</Id>
+    <Name>MLOLONGO</Name>
+    <SRNO>445.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>446</Id>
+    <Name>MLOLONGO HC</Name>
+    <SRNO>446.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>447</Id>
+    <Name>MNAKURU</Name>
+    <SRNO>447.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>448</Id>
+    <Name>MNYENGA</Name>
+    <SRNO>448.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>449</Id>
+    <Name>MOLO</Name>
+    <SRNO>449.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>450</Id>
+    <Name>MOMBASA</Name>
+    <SRNO>450.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>451</Id>
+    <Name>MOSHI</Name>
+    <SRNO>451.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>452</Id>
+    <Name>MOSOCHO</Name>
+    <SRNO>452.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>453</Id>
+    <Name>MOYALE</Name>
+    <SRNO>453.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>454</Id>
+    <Name>MRENDE</Name>
+    <SRNO>454.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>455</Id>
+    <Name>MSA</Name>
+    <SRNO>455.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>456</Id>
+    <Name>MSENGO</Name>
+    <SRNO>456.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>457</Id>
+    <Name>MSHIANGUBU</Name>
+    <SRNO>457.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>458</Id>
+    <Name>MT ELGON</Name>
+    <SRNO>458.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>459</Id>
+    <Name>MT ELGON DISTRICT</Name>
+    <SRNO>459.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>460</Id>
+    <Name>MT-ELGON</Name>
+    <SRNO>460.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>461</Id>
+    <Name>MT.ELGON</Name>
+    <SRNO>461.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>462</Id>
+    <Name>MTITO ANDEI</Name>
+    <SRNO>462.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>463</Id>
+    <Name>MUA</Name>
+    <SRNO>463.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>464</Id>
+    <Name>MUGECHE</Name>
+    <SRNO>464.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>465</Id>
+    <Name>MUGIRANGO</Name>
+    <SRNO>465.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>466</Id>
+    <Name>MUHORONI</Name>
+    <SRNO>466.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>467</Id>
+    <Name>MUKAA</Name>
+    <SRNO>467.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>468</Id>
+    <Name>MUKTUTA</Name>
+    <SRNO>468.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>469</Id>
+    <Name>MUKUYUNI</Name>
+    <SRNO>469.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>470</Id>
+    <Name>MULALA</Name>
+    <SRNO>470.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>471</Id>
+    <Name>MULANGO</Name>
+    <SRNO>471.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>472</Id>
+    <Name>MUMBUNI</Name>
+    <SRNO>472.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>473</Id>
+    <Name>MUMIAS</Name>
+    <SRNO>473.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>474</Id>
+    <Name>MUMIAS EAST</Name>
+    <SRNO>474.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>475</Id>
+    <Name>MURAGA</Name>
+    <SRNO>475.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>476</Id>
+    <Name>MURANDA</Name>
+    <SRNO>476.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>477</Id>
+    <Name>MURANG'A</Name>
+    <SRNO>477.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>478</Id>
+    <Name>MURANGA</Name>
+    <SRNO>478.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>479</Id>
+    <Name>MUTHARA</Name>
+    <SRNO>479.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>480</Id>
+    <Name>MUTHETHENI</Name>
+    <SRNO>480.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>481</Id>
+    <Name>MUTHWAYI</Name>
+    <SRNO>481.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>482</Id>
+    <Name>MUTITU</Name>
+    <SRNO>482.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>483</Id>
+    <Name>MUTITUNI</Name>
+    <SRNO>483.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>484</Id>
+    <Name>MUTOMO</Name>
+    <SRNO>484.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>485</Id>
+    <Name>MUTONGUNI</Name>
+    <SRNO>485.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>486</Id>
+    <Name>MUVUTA</Name>
+    <SRNO>486.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>487</Id>
+    <Name>MUVUTI</Name>
+    <SRNO>487.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>488</Id>
+    <Name>MWALA</Name>
+    <SRNO>488.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>489</Id>
+    <Name>MWANGI</Name>
+    <SRNO>489.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>490</Id>
+    <Name>MWATATE</Name>
+    <SRNO>490.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>491</Id>
+    <Name>MWEA</Name>
+    <SRNO>491.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>492</Id>
+    <Name>MWIKI</Name>
+    <SRNO>492.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>493</Id>
+    <Name>MWINGI</Name>
+    <SRNO>493.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>494</Id>
+    <Name>MWINGI WEST</Name>
+    <SRNO>494.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>495</Id>
+    <Name>MWLA</Name>
+    <SRNO>495.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>496</Id>
+    <Name>NAIROBI</Name>
+    <SRNO>496.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>497</Id>
+    <Name>NAIVASHA</Name>
+    <SRNO>497.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>498</Id>
+    <Name>NAKURU</Name>
+    <SRNO>498.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>499</Id>
+    <Name>NAKURU DH</Name>
+    <SRNO>499.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>500</Id>
+    <Name>NAMABARE</Name>
+    <SRNO>500.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>501</Id>
+    <Name>NANDI</Name>
+    <SRNO>501.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>502</Id>
+    <Name>NANYUKI</Name>
+    <SRNO>502.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>503</Id>
+    <Name>NAROK</Name>
+    <SRNO>503.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>504</Id>
+    <Name>NAVAKHOLO</Name>
+    <SRNO>504.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>505</Id>
+    <Name>NAZARETH</Name>
+    <SRNO>505.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>506</Id>
+    <Name>NDALANI</Name>
+    <SRNO>506.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>507</Id>
+    <Name>NDHIWA</Name>
+    <SRNO>507.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>508</Id>
+    <Name>NDOLO</Name>
+    <SRNO>508.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>509</Id>
+    <Name>NELKIAGARE</Name>
+    <SRNO>509.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>510</Id>
+    <Name>NGASI</Name>
+    <SRNO>510.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>511</Id>
+    <Name>NGELANI</Name>
+    <SRNO>511.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>512</Id>
+    <Name>NGONG</Name>
+    <SRNO>512.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>513</Id>
+    <Name>NGUCHA</Name>
+    <SRNO>513.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>514</Id>
+    <Name>NGULUNI</Name>
+    <SRNO>514.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>515</Id>
+    <Name>NGUNI</Name>
+    <SRNO>515.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>516</Id>
+    <Name>NGUNJA</Name>
+    <SRNO>516.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>517</Id>
+    <Name>NGWATA</Name>
+    <SRNO>517.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>518</Id>
+    <Name>NJIRU</Name>
+    <SRNO>518.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>519</Id>
+    <Name>NJORO</Name>
+    <SRNO>519.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>520</Id>
+    <Name>NKOILE</Name>
+    <SRNO>520.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>521</Id>
+    <Name>NORTH IMENTI</Name>
+    <SRNO>521.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>522</Id>
+    <Name>NORTH KAMARI</Name>
+    <SRNO>522.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>523</Id>
+    <Name>NORTH KINANGOP</Name>
+    <SRNO>523.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>524</Id>
+    <Name>NTHIWA</Name>
+    <SRNO>524.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>525</Id>
+    <Name>NTULELE</Name>
+    <SRNO>525.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>526</Id>
+    <Name>NUNGUNI</Name>
+    <SRNO>526.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>527</Id>
+    <Name>NYAANI</Name>
+    <SRNO>527.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>528</Id>
+    <Name>NYABERA</Name>
+    <SRNO>528.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>529</Id>
+    <Name>NYAERA</Name>
+    <SRNO>529.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>530</Id>
+    <Name>NYAGADE</Name>
+    <SRNO>530.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>531</Id>
+    <Name>NYAGANDE HC</Name>
+    <SRNO>531.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>532</Id>
+    <Name>NYAHERA</Name>
+    <SRNO>532.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>533</Id>
+    <Name>NYAHURURU</Name>
+    <SRNO>533.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>534</Id>
+    <Name>NYAKACH</Name>
+    <SRNO>534.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>535</Id>
+    <Name>NYAKACH UPPER</Name>
+    <SRNO>535.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>536</Id>
+    <Name>NYALEGWA</Name>
+    <SRNO>536.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>537</Id>
+    <Name>NYAMACHE</Name>
+    <SRNO>537.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>538</Id>
+    <Name>NYAMANYA</Name>
+    <SRNO>538.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>539</Id>
+    <Name>NYAMARE</Name>
+    <SRNO>539.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>540</Id>
+    <Name>NYAMASALA</Name>
+    <SRNO>540.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>541</Id>
+    <Name>NYAMASARA</Name>
+    <SRNO>541.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>542</Id>
+    <Name>NYAMBACHA</Name>
+    <SRNO>542.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>543</Id>
+    <Name>NYAMBENE</Name>
+    <SRNO>543.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>544</Id>
+    <Name>NYAMBERE</Name>
+    <SRNO>544.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>545</Id>
+    <Name>NYAMIRA</Name>
+    <SRNO>545.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>546</Id>
+    <Name>NYANDARUA</Name>
+    <SRNO>546.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>547</Id>
+    <Name>NYANDO</Name>
+    <SRNO>547.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>548</Id>
+    <Name>NYANSORE</Name>
+    <SRNO>548.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>549</Id>
+    <Name>NYANZA</Name>
+    <SRNO>549.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>550</Id>
+    <Name>NYASIONGO</Name>
+    <SRNO>550.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>551</Id>
+    <Name>NYATIKA</Name>
+    <SRNO>551.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>552</Id>
+    <Name>NYATIKE</Name>
+    <SRNO>552.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>553</Id>
+    <Name>NYEMBERE</Name>
+    <SRNO>553.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>554</Id>
+    <Name>NYERI</Name>
+    <SRNO>554.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>555</Id>
+    <Name>NYERI SOUTH</Name>
+    <SRNO>555.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>556</Id>
+    <Name>NZAIKONI</Name>
+    <SRNO>556.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>557</Id>
+    <Name>NZAMBANI</Name>
+    <SRNO>557.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>558</Id>
+    <Name>NZAUI</Name>
+    <SRNO>558.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>559</Id>
+    <Name>NZIU</Name>
+    <SRNO>559.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>560</Id>
+    <Name>NZOIANI</Name>
+    <SRNO>560.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>561</Id>
+    <Name>OGEMBO</Name>
+    <SRNO>561.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>562</Id>
+    <Name>OGONGO</Name>
+    <SRNO>562.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>563</Id>
+    <Name>OLKALOU</Name>
+    <SRNO>563.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>564</Id>
+    <Name>OTHAYA</Name>
+    <SRNO>564.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>565</Id>
+    <Name>OYANI</Name>
+    <SRNO>565.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>566</Id>
+    <Name>OYUGIS</Name>
+    <SRNO>566.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>567</Id>
+    <Name>OYUGU</Name>
+    <SRNO>567.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>568</Id>
+    <Name>POTIEBAE</Name>
+    <SRNO>568.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>569</Id>
+    <Name>RABAI</Name>
+    <SRNO>569.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>570</Id>
+    <Name>RABWORI</Name>
+    <SRNO>570.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>571</Id>
+    <Name>RACHIONYO</Name>
+    <SRNO>571.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>572</Id>
+    <Name>RACHUONYO</Name>
+    <SRNO>572.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>573</Id>
+    <Name>RACHUONYO NORTH</Name>
+    <SRNO>573.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>574</Id>
+    <Name>RAGWE</Name>
+    <SRNO>574.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>575</Id>
+    <Name>RALIENDA</Name>
+    <SRNO>575.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>576</Id>
+    <Name>RANGWE</Name>
+    <SRNO>576.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>577</Id>
+    <Name>RAQCHUONYO</Name>
+    <SRNO>577.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>578</Id>
+    <Name>RARIANDA</Name>
+    <SRNO>578.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>579</Id>
+    <Name>RARIEDA</Name>
+    <SRNO>579.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>580</Id>
+    <Name>RIOKINDO</Name>
+    <SRNO>580.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>581</Id>
+    <Name>RODIAN</Name>
+    <SRNO>581.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>582</Id>
+    <Name>RONGAI</Name>
+    <SRNO>582.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>583</Id>
+    <Name>RONGO</Name>
+    <SRNO>583.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>584</Id>
+    <Name>RUANDA</Name>
+    <SRNO>584.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>585</Id>
+    <Name>RUANYANGE</Name>
+    <SRNO>585.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>586</Id>
+    <Name>RUARAKA</Name>
+    <SRNO>586.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>587</Id>
+    <Name>RUIRU</Name>
+    <SRNO>587.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>588</Id>
+    <Name>RULAMBI</Name>
+    <SRNO>588.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>589</Id>
+    <Name>RUMURUTI</Name>
+    <SRNO>589.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>590</Id>
+    <Name>RUNYENJES</Name>
+    <SRNO>590.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>591</Id>
+    <Name>RWANDA</Name>
+    <SRNO>591.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>592</Id>
+    <Name>SABATIA</Name>
+    <SRNO>592.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>593</Id>
+    <Name>SABOTI</Name>
+    <SRNO>593.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>594</Id>
+    <Name>SAMBURU</Name>
+    <SRNO>594.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>595</Id>
+    <Name>SAMETA</Name>
+    <SRNO>595.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>596</Id>
+    <Name>SAMIA</Name>
+    <SRNO>596.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>597</Id>
+    <Name>SANGARU</Name>
+    <SRNO>597.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>598</Id>
+    <Name>SANGO</Name>
+    <SRNO>598.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>599</Id>
+    <Name>SEME</Name>
+    <SRNO>599.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>600</Id>
+    <Name>SHAMATA</Name>
+    <SRNO>600.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>601</Id>
+    <Name>SHANDA</Name>
+    <SRNO>601.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>602</Id>
+    <Name>SHAURI MOYO</Name>
+    <SRNO>602.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>603</Id>
+    <Name>SHIRURU</Name>
+    <SRNO>603.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>604</Id>
+    <Name>SHIVERE</Name>
+    <SRNO>604.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>605</Id>
+    <Name>SIAYA</Name>
+    <SRNO>605.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>606</Id>
+    <Name>SICHILAI</Name>
+    <SRNO>606.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>607</Id>
+    <Name>SIGOMERE</Name>
+    <SRNO>607.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>608</Id>
+    <Name>SIOTA</Name>
+    <SRNO>608.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>609</Id>
+    <Name>SLOTA</Name>
+    <SRNO>609.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>610</Id>
+    <Name>SOFIA</Name>
+    <SRNO>610.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>611</Id>
+    <Name>SOI</Name>
+    <SRNO>611.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>612</Id>
+    <Name>SOTIK</Name>
+    <SRNO>612.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>613</Id>
+    <Name>SOUTH GUCHA</Name>
+    <SRNO>613.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>614</Id>
+    <Name>SOUTH MUIRANGO</Name>
+    <SRNO>614.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>615</Id>
+    <Name>SOUTH NYAKACH</Name>
+    <SRNO>615.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>616</Id>
+    <Name>SOYO</Name>
+    <SRNO>616.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>617</Id>
+    <Name>ST MARYS</Name>
+    <SRNO>617.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>618</Id>
+    <Name>SUBA</Name>
+    <SRNO>618.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>619</Id>
+    <Name>SUBUKIA</Name>
+    <SRNO>619.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>620</Id>
+    <Name>SUDAN</Name>
+    <SRNO>620.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>621</Id>
+    <Name>SULTAN</Name>
+    <SRNO>621.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>622</Id>
+    <Name>SULTAN HAMUD</Name>
+    <SRNO>622.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>623</Id>
+    <Name>SUNA</Name>
+    <SRNO>623.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>624</Id>
+    <Name>SUNA EAST</Name>
+    <SRNO>624.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>625</Id>
+    <Name>SUNA MIGORI</Name>
+    <SRNO>625.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>626</Id>
+    <Name>SUNEKA</Name>
+    <SRNO>626.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>627</Id>
+    <Name>TAITA</Name>
+    <SRNO>627.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>628</Id>
+    <Name>TAITA TAVETA</Name>
+    <SRNO>628.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>629</Id>
+    <Name>TAITA-TAVETA</Name>
+    <SRNO>629.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>630</Id>
+    <Name>TALA</Name>
+    <SRNO>630.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>631</Id>
+    <Name>TANA RIVER</Name>
+    <SRNO>631.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>632</Id>
+    <Name>TANGA</Name>
+    <SRNO>632.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>633</Id>
+    <Name>TARAKWA</Name>
+    <SRNO>633.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>634</Id>
+    <Name>TAVETA</Name>
+    <SRNO>634.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>635</Id>
+    <Name>TAWA</Name>
+    <SRNO>635.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>636</Id>
+    <Name>TENDWET</Name>
+    <SRNO>636.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>637</Id>
+    <Name>TESO</Name>
+    <SRNO>637.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>638</Id>
+    <Name>TETU</Name>
+    <SRNO>638.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>639</Id>
+    <Name>THARAKA NITHI</Name>
+    <SRNO>639.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>640</Id>
+    <Name>THIKA</Name>
+    <SRNO>640.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>641</Id>
+    <Name>THIWA</Name>
+    <SRNO>641.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>642</Id>
+    <Name>THUNGONI</Name>
+    <SRNO>642.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>643</Id>
+    <Name>TIGANIA</Name>
+    <SRNO>643.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>644</Id>
+    <Name>TIGANIA MERU</Name>
+    <SRNO>644.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>645</Id>
+    <Name>TIRIKI WEST</Name>
+    <SRNO>645.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>646</Id>
+    <Name>TIVA</Name>
+    <SRNO>646.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>647</Id>
+    <Name>TONGAREN</Name>
+    <SRNO>647.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>648</Id>
+    <Name>TRANSNZOIA</Name>
+    <SRNO>648.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>649</Id>
+    <Name>TULIMANI</Name>
+    <SRNO>649.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>650</Id>
+    <Name>TURKANA</Name>
+    <SRNO>650.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>651</Id>
+    <Name>UASIN GISHU</Name>
+    <SRNO>651.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>652</Id>
+    <Name>UASINGISHU</Name>
+    <SRNO>652.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>653</Id>
+    <Name>UASINGISU</Name>
+    <SRNO>653.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>654</Id>
+    <Name>UGENYA</Name>
+    <SRNO>654.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>655</Id>
+    <Name>UGENYA'</Name>
+    <SRNO>655.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>656</Id>
+    <Name>UGUJA</Name>
+    <SRNO>656.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>657</Id>
+    <Name>UGUNJA</Name>
+    <SRNO>657.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>658</Id>
+    <Name>UKWALA</Name>
+    <SRNO>658.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>659</Id>
+    <Name>UNTRY UGANDA</Name>
+    <SRNO>659.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>660</Id>
+    <Name>URADI</Name>
+    <SRNO>660.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>661</Id>
+    <Name>URENGA</Name>
+    <SRNO>661.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>662</Id>
+    <Name>URIRI</Name>
+    <SRNO>662.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>663</Id>
+    <Name>USENGE</Name>
+    <SRNO>663.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>664</Id>
+    <Name>USIGU</Name>
+    <SRNO>664.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>665</Id>
+    <Name>VI HIGA</Name>
+    <SRNO>665.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>666</Id>
+    <Name>VIHIGA</Name>
+    <SRNO>666.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>667</Id>
+    <Name>VIHINGA</Name>
+    <SRNO>667.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>668</Id>
+    <Name>VOI</Name>
+    <SRNO>668.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>669</Id>
+    <Name>VOTA</Name>
+    <SRNO>669.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>670</Id>
+    <Name>VUNYURA</Name>
+    <SRNO>670.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>671</Id>
+    <Name>WAGAI</Name>
+    <SRNO>671.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>672</Id>
+    <Name>WAJIR</Name>
+    <SRNO>672.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>673</Id>
+    <Name>WALDAI</Name>
+    <SRNO>673.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>674</Id>
+    <Name>WANGAI</Name>
+    <SRNO>674.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>675</Id>
+    <Name>WANJOHI</Name>
+    <SRNO>675.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>676</Id>
+    <Name>WEBUYE</Name>
+    <SRNO>676.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>677</Id>
+    <Name>WERO</Name>
+    <SRNO>677.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>678</Id>
+    <Name>WEST MBOONI</Name>
+    <SRNO>678.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>679</Id>
+    <Name>WEST MUGIRANGO</Name>
+    <SRNO>679.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>680</Id>
+    <Name>WIKILILYE'</Name>
+    <SRNO>680.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>681</Id>
+    <Name>WOTE</Name>
+    <SRNO>681.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>682</Id>
+    <Name>YALA</Name>
+    <SRNO>682.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>683</Id>
+    <Name>YATHUI</Name>
+    <SRNO>683.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>684</Id>
+    <Name>YATTA</Name>
+    <SRNO>684.00</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_District>
   <Mst_Reason>
@@ -2244,6 +5810,11 @@
   <Mst_Code>
     <CodeId>1011</CodeId>
     <Name>Billing Price Plans</Name>
+    <Deleteflag>0</Deleteflag>
+  </Mst_Code>
+  <Mst_Code>
+    <CodeId>1012</CodeId>
+    <Name>ServiceRegisteredForAtPharmacy</Name>
     <Deleteflag>0</Deleteflag>
   </Mst_Code>
   <Mst_HIVAIDSCareTypes>
@@ -4981,17 +8552,6 @@
     <ListName>Feature Type</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>333</ID>
-    <Name>Enrollment</Name>
-    <CodeID>1008</CodeID>
-    <SRNo>1.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <SystemId>0</SystemId>
-    <Code>ENROLLMENT</Code>
-    <DisplayName>ENROLLMENT = Enrollment</DisplayName>
-    <ListName>Form Category</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
     <ID>352</ID>
     <Name>Under 5</Name>
     <CodeID>1010</CodeID>
@@ -5019,7 +8579,7 @@
     <ListName>Payment Exemption</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>391</ID>
+    <ID>393</ID>
     <Name>Under 5</Name>
     <CodeID>1010</CodeID>
     <SRNo>1.00</SRNo>
@@ -5028,7 +8588,7 @@
     <ListName>Payment Exemption</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>392</ID>
+    <ID>394</ID>
     <Name>Maternity</Name>
     <CodeID>1010</CodeID>
     <SRNo>1.00</SRNo>
@@ -5037,7 +8597,7 @@
     <ListName>Payment Exemption</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>393</ID>
+    <ID>395</ID>
     <Name>Prisoner</Name>
     <CodeID>1010</CodeID>
     <SRNo>1.00</SRNo>
@@ -5055,6 +8615,27 @@
     <Code>STD</Code>
     <DisplayName>STD = Standard</DisplayName>
     <ListName>Billing Price Plans</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
+    <ID>387</ID>
+    <Name>Hepatitis B</Name>
+    <CodeID>1012</CodeID>
+    <SRNo>1.00</SRNo>
+    <UpdateFlag>0</UpdateFlag>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>0</SystemId>
+    <ListName>ServiceRegisteredForAtPharmacy</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
+    <ID>333</ID>
+    <Name>Enrollment</Name>
+    <CodeID>1008</CodeID>
+    <SRNo>1.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>0</SystemId>
+    <Code>ENROLLMENT</Code>
+    <DisplayName>ENROLLMENT = Enrollment</DisplayName>
+    <ListName>Form Category</ListName>
   </Mst_Decode>
   <Mst_Decode>
     <ID>155</ID>
@@ -5301,6 +8882,16 @@
     <ListName>Form Category</ListName>
   </Mst_Decode>
   <Mst_Decode>
+    <ID>388</ID>
+    <Name>PEP</Name>
+    <CodeID>1012</CodeID>
+    <SRNo>2.00</SRNo>
+    <UpdateFlag>0</UpdateFlag>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>0</SystemId>
+    <ListName>ServiceRegisteredForAtPharmacy</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
     <ID>338</ID>
     <Name>Facility Report</Name>
     <CodeID>1009</CodeID>
@@ -5518,6 +9109,16 @@
     <ListName>Feature Type</ListName>
   </Mst_Decode>
   <Mst_Decode>
+    <ID>389</ID>
+    <Name>Goldstar</Name>
+    <CodeID>1012</CodeID>
+    <SRNo>3.00</SRNo>
+    <UpdateFlag>0</UpdateFlag>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>0</SystemId>
+    <ListName>ServiceRegisteredForAtPharmacy</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
     <ID>335</ID>
     <Name>Care Termination</Name>
     <CodeID>1008</CodeID>
@@ -5645,6 +9246,14 @@
     <ListName>Item Type</ListName>
   </Mst_Decode>
   <Mst_Decode>
+    <ID>358</ID>
+    <Name>Lab Tests</Name>
+    <CodeID>202</CodeID>
+    <SRNo>4.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <ListName>Item Type</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
     <ID>298</ID>
     <Name>Laboratory</Name>
     <CodeID>201</CodeID>
@@ -5721,14 +9330,6 @@
     <Code>LIST</Code>
     <DisplayName>LIST = List</DisplayName>
     <ListName>Feature Type</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
-    <ID>358</ID>
-    <Name>Lab Tests</Name>
-    <CodeID>202</CodeID>
-    <SRNo>4.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <ListName>Item Type</ListName>
   </Mst_Decode>
   <Mst_Decode>
     <ID>368</ID>
@@ -5970,15 +9571,6 @@
     <ListName>Item Type</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>380</ID>
-    <Name>HBV</Name>
-    <CodeID>33</CodeID>
-    <SRNo>6.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <SystemId>1</SystemId>
-    <ListName>Treatment Program</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
     <ID>356</ID>
     <Name>Billables</Name>
     <CodeID>202</CodeID>
@@ -5997,6 +9589,15 @@
     <ListName>Laboratory Test Location</ListName>
   </Mst_Decode>
   <Mst_Decode>
+    <ID>380</ID>
+    <Name>HBV</Name>
+    <CodeID>33</CodeID>
+    <SRNo>6.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>1</SystemId>
+    <ListName>Treatment Program</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
     <ID>149</ID>
     <Name>Drug interaction</Name>
     <CodeID>34</CodeID>
@@ -6005,15 +9606,6 @@
     <DeleteFlag>0</DeleteFlag>
     <SystemId>0</SystemId>
     <ListName>ART Ended Reason</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
-    <ID>387</ID>
-    <Name>Hepatitis B</Name>
-    <CodeID>33</CodeID>
-    <SRNo>6.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <SystemId>0</SystemId>
-    <ListName>Treatment Program</ListName>
   </Mst_Decode>
   <Mst_Decode>
     <ID>217</ID>
@@ -6230,6 +9822,14 @@
     <ListName>Item Type</ListName>
   </Mst_Decode>
   <Mst_Decode>
+    <ID>359</ID>
+    <Name>Ward Admission</Name>
+    <CodeID>202</CodeID>
+    <SRNo>8.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <ListName>Item Type</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
     <ID>151</ID>
     <Name>Patient Preference</Name>
     <CodeID>34</CodeID>
@@ -6267,14 +9867,6 @@
     <Code>MODULE_REPORT</Code>
     <DisplayName>MODULE_REPORT = Module Report</DisplayName>
     <ListName>Feature Type</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
-    <ID>359</ID>
-    <Name>Ward Admission</Name>
-    <CodeID>202</CodeID>
-    <SRNo>8.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <ListName>Item Type</ListName>
   </Mst_Decode>
   <Mst_Decode>
     <ID>372</ID>
@@ -15081,9 +18673,9 @@
     <FacilityTemplate>0</FacilityTemplate>
   </Mst_Facility>
   <Mst_Facility>
-    <FacilityName>MASII HEALTH CENTRE</FacilityName>
+    <FacilityName>ATHI RIVER HEALTH CENTRE</FacilityName>
     <FacilityID>755</FacilityID>
-    <PosID>12475</PosID>
+    <PosID>11936</PosID>
     <DeleteFlag>0</DeleteFlag>
     <SatelliteID>0</SatelliteID>
     <SystemID>1</SystemID>

@@ -88,7 +88,7 @@
                     <div class="col-md-6">
                         <div class="col-md-12 form-group">
                             <div class="col-md-6">
-                                <label class="control-label pull-left">Registered at this clinic:</label>
+                                <label class="required control-label pull-left">Registered at this clinic:</label>
                             </div>
                             <div class="col-md-6">
                                 <asp:DropDownList ID="RegisteredInClinic" runat="server" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-required="true"></asp:DropDownList>
@@ -1331,6 +1331,7 @@
                 $("#<%=CccReferal.ClientID%>").val();
                 $("#<%=CccReferal.ClientID%>").prop('disabled', true);
                 $("#CCCReferalDate").prop('disabled', true);
+                $("#HIVTestingDate").prop('disabled', false);
             } else if (testingResult == "Never Tested") {
                 $("#<%=cccNumber.ClientID%>").prop('disabled', true);
                 $("#<%=CccReferal.ClientID%>").val();
@@ -1345,6 +1346,7 @@
                 $("#<%=cccNumber.ClientID%>").prop('disabled',false);
                 $("#<%=CccReferal.ClientID%>").prop('disabled', false);
                 $("#CCCReferalDate").prop('disabled', false);
+                $("#HIVTestingDate").prop('disabled', false);
             }
         }
       

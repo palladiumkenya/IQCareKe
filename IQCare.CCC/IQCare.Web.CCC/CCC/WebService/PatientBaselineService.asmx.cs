@@ -204,7 +204,7 @@ namespace IQCare.Web.CCC.WebService
             }
             catch (Exception e)
             {
-                throw;
+                throw new Exception(e.Message);
             }
         }
 
