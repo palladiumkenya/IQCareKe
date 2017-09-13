@@ -18,6 +18,7 @@ namespace IQCare.Web.CCC.UC
         public string prescriptionDate = "";
         public string dispenseDate = "";
         public bool StartTreatment { get; set; }
+        public string patType { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -39,6 +40,13 @@ namespace IQCare.Web.CCC.UC
 
                 StartTreatment = treatmentTrackerManager.HasPatientTreatmentStarted(Convert.ToInt32(Session["PatientPK"].ToString()));
 
+                int patientType = Convert.ToInt32(Session["PatientType"].ToString());
+                patType = LookupLogic.GetLookupNameById(patientType).ToLower();
+
+                if (patType == "transit")
+                {
+                    StartTreatment = true;
+                }
                 //lookUp.populateDDL(ddlTreatmentProgram, "TreatmentProgram");
                 lookUp.populateDDL(ddlPeriodTaken, "PeriodDrugsTaken");
                 lookUp.populateDDL(ddlTreatmentPlan, "TreatmentPlan");
