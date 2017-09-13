@@ -376,7 +376,7 @@
         </div>
     </div>
     <div class="modal" id="PharmacyModal" tabindex="-True" role="dialog" aria-labelledby="PharmacyLabel" aria-hidden="true" clientidmode="Static">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-lg" role="document" style="width: 90%">
             <div class="modal-content" style="width: 100%">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>

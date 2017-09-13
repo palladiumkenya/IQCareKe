@@ -353,6 +353,7 @@
     var prescriptionDate = "<%= this.prescriptionDate %>";
     var dispenseDate = "<%= this.dispenseDate %>";
     var startTreatment = "<%=StartTreatment.ToString().ToLower() %>";
+    var patType = "<%=patType.ToString().ToLower() %>";
     var gender = "<%=Session["Gender"]%>";
     var age = "<%=Session["Age"]%>";
     //Date processing

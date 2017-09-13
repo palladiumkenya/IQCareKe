@@ -19,3 +19,19 @@ IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'ServiceRegisteredForAtPha
     BEGIN
         ALTER TABLE mst_patient ADD ServiceRegisteredForAtPharmacy int;
     END;
+	
+If Not Exists (Select * From sys.columns Where Name = N'SpO2' And Object_ID = Object_id(N'PatientVitals'))    
+Begin
+  Alter table dbo.PatientVitals Add SpO2  decimal(7,2) Null
+End
+Go
+If Not Exists (Select * From sys.columns Where Name = N'DifferentiatedCareId' And Object_ID = Object_id(N'PatientAppointment'))    
+Begin
+  Alter table dbo.PatientAppointment Add DifferentiatedCareId  int Null
+End
+Go
+If Not Exists (Select * From sys.columns Where Name = N'DifferentiatedCareId' And Object_ID = Object_id(N'PatientAppointment'))    
+Begin
+  Alter table dbo.PatientAppointment Add DifferentiatedCareId  int Null
+End
+Go
