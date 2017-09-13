@@ -56,12 +56,12 @@ namespace BusinessProcess.CCC
             {
                 List<PatientLookup> patientLookups = new List<PatientLookup>();
 
-                Expression<Func<PatientLookup, bool>> expresionFinal = c=>c.Id != null;
+                Expression<Func<PatientLookup, bool>> expresionFinal = c=>c.Id > 0;
 
                 if (patientId > 0)
                 {
                     Expression<Func<PatientLookup, bool>> expressionPatientId =
-                        c => c.Id.ToString().Contains(patientId.ToString());
+                        c => c.EnrollmentNumber.ToString().Contains(patientId.ToString());
 
                     expresionFinal = PredicateBuilder.And(expresionFinal, expressionPatientId);
                 }
