@@ -1,4 +1,12 @@
-﻿If Not Exists(Select 1 From LookupItem where Name='N') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('NORMAL','Normal',0); End
+﻿-- version changes
+UPDATE AppAdmin
+SET
+	AppVer='Ver 1.0.0.4 Kenya HMIS',
+	DBVer='Ver 1.0.0.4 Kenya HMIS',
+	RelDate='01-Sep-2017',
+	VersionName='Kenya HMIS Ver 1.0.0.4'
+
+If Not Exists(Select 1 From LookupItem where Name='N') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('NORMAL','Normal',0); End
 If Not Exists(Select 1 From LookupItem where Name='O') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('OBESE','Overweight/Obese',0); End
 
 if not exists(select 1 from mst_code where name = 'ServiceRegisteredForAtPharmacy')
