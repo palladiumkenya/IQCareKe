@@ -55,7 +55,7 @@
                                 <label class="required control-label pull-left">Sex</label>
                             </div>
                             <div class="col-md-6">
-                                <select runat="server" id="Sex" class="form-control input-sm" ClientIDMode="Static" onchange="relationShipChanged();"></select>
+                                <select runat="server" id="Sex" class="form-control input-sm" ClientIDMode="Static" required="true" onchange="relationShipChanged();"></select>
                             </div>
                         </div>
                         <div class="col-md-12 form-group">
@@ -84,6 +84,7 @@
                     </div>
                 </div>
 
+<%--
                 <div class="col-md-12" id="isRegisteredInClinic">
                     <div class="col-md-6">
                         <div class="col-md-12 form-group">
@@ -124,8 +125,7 @@
                         </table>
                     </div>
                 </div>
-                
-                
+                --%>
                 
                 <div id="hivTestingInfo">
                     <div class="col-md-12">
