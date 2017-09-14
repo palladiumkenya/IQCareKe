@@ -64,14 +64,14 @@ namespace IQCare.Web.CCC.UC
                                               "°C | Possible Hyperpyrexia‎";
 
                     }
-                    else if (Convert.ToDouble(patientTriage.Temperature) >= 36.0 &
+                    else if (Convert.ToDouble(patientTriage.Temperature) >= 36.0 &&
                              Convert.ToDouble(patientTriage.Temperature) < 37.5)
                     {
                         lblTemperature.Text = "<span class='label label-success'>" +
                                               Convert.ToString(patientTriage.Temperature) + "°C | Normal‎";
 
                     }
-                    else if (Convert.ToDouble(patientTriage.Temperature) > 37.5 &
+                    else if (Convert.ToDouble(patientTriage.Temperature) > 37.5 &&
                              Convert.ToDouble(patientTriage.Temperature) < 40.0)
                     {
                         lblTemperature.Text = "<span class='label label-danger'>" +
@@ -84,7 +84,7 @@ namespace IQCare.Web.CCC.UC
                                               Convert.ToString(patientTriage.Temperature) + "°C | Medical Emergency‎";
 
                     }
-                    else if (patientTriage.Temperature > 32 & patientTriage.Temperature < 36)
+                    else if (patientTriage.Temperature > 32 && patientTriage.Temperature < 36)
                     {
                         lblTemperature.Text = "<span class='label label-danger'>" +
                                               Convert.ToString(patientTriage.Temperature) + "°C | Hypothermia ‎";
