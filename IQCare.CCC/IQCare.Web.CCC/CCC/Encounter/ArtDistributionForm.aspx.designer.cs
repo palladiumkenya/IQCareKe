@@ -28,7 +28,7 @@ namespace IQCare.Web.CCC.Encounter {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox ArtRefill;
+        protected global::System.Web.UI.WebControls.DropDownList ArtRefill;
         
         /// <summary>
         /// mYes control.

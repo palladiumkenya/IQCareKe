@@ -228,6 +228,13 @@ namespace IQCare.Web.CCC.WebService
             }
             return count;
         }
+
+        [WebMethod(EnableSession = true)]
+        public string FindLabOrder()
+        {
+            Session["urlOrigin"] = "greencard";
+            return "success";
+        }
     }
 
 }
