@@ -661,7 +661,22 @@
 
             // Load lab results        
             $("#addResults").click(function (e) {
-                window.location.href = '<%=ResolveClientUrl("~/laboratory/request/findlaborder.aspx")%>'; 
+                $.ajax({
+                    type: "POST",
+                    url: "../WebService/LabService.asmx/FindLabOrder",
+                    contentType: "application/json;charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.d == "success") {
+                            setTimeout(function () { window.location.href = '<%=ResolveClientUrl("~/laboratory/request/findlaborder.aspx")%>'; }, 500);
+                        }
+                    },
+                    error: function (result) {
+
+                        alert("error");
+
+                    }
+                });
               
             });
 

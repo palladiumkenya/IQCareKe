@@ -19,7 +19,7 @@
                                     <label for="ArtRefill" class="control-label pull-left">ART Refill Model</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <asp:TextBox runat="server" ID="ArtRefill" CssClass="form-control input-sm" ClientIDMode="Static" required="true" />
+                                    <asp:DropDownList ID="ArtRefill" runat="server" CssClass="form-control input-sm" ClientIDMode="Static" data-parsley-required="true"></asp:DropDownList>
                                 </div>
                             </div>
                         </div>

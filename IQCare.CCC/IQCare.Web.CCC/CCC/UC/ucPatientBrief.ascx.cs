@@ -164,7 +164,7 @@ namespace IQCare.Web.CCC.UC
                 // SET categorization:
                 if (thisPatient.categorization < 1)
                 {
-                    lblcategorization.Text = "<span class='fa fa-info-circle text-danger'>" + categorization+"</span>";
+                    lblcategorization.Text = "<span class='label label-danger'>Unstable</span>";
                 }
                 else
                 {

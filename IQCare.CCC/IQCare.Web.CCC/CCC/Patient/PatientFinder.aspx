@@ -282,7 +282,7 @@
         });
 
         function setSession(patientId) {
-            console.log(patientId);
+            //console.log(patientId);
 
             $.ajax({
                 type: "POST",

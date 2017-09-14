@@ -5,6 +5,7 @@ using Interface.CCC.Lookup;
 using IQCare.CCC.UILogic;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Web;
 using System.Web.UI.WebControls;
 
@@ -145,6 +146,11 @@ namespace IQCare.Web.CCC.UC
             Entities.CCC.Encounter.PatientEncounter.PresentingComplaintsEntity pce = new Entities.CCC.Encounter.PatientEncounter.PresentingComplaintsEntity();
             pce = PEL.loadPatientEncounter(Session["PatientMasterVisitId"].ToString(), Session["PatientPK"].ToString());
 
+            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+
+            DataTable theDT = patientEncounter.loadPatientEncounterPhysicalExam(Session["PatientMasterVisitID"].ToString(), Session["PatientPK"].ToString());
+            DataTable theDTAdverse = patientEncounter.loadPatientEncounterAdverseEvents(Session["PatientMasterVisitID"].ToString(), Session["PatientPK"].ToString());
+
             /////PRESENTING COMPLAINTS
             visitdateval = pce.visitDate;
             LMPval = pce.lmp;
@@ -199,6 +205,24 @@ namespace IQCare.Web.CCC.UC
             arvAdherance.SelectedValue = pce.ARVAdherence;
             ctxAdherance.SelectedValue = pce.CTXAdherence;
             WHOStage.SelectedValue = pce.WhoStage;
+
+            if (theDT.Rows.Count > 0)
+            {
+                systemsOkNo.Checked = true;
+            }
+            else
+            {
+                systemsOkYes.Checked = true;
+            }
+
+            if (theDTAdverse.Rows.Count > 0)
+            {
+                rdAnyAdverseEventsYes.Checked = true;
+            }
+            else
+            {
+                rdAnyAdverseEventsNo.Checked = true;
+            }
 
         }
     }
