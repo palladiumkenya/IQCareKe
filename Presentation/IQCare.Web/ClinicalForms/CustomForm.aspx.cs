@@ -2,6 +2,7 @@
 using Application.Common;
 using Application.Presentation;
 using Entities.Lab;
+using Entities.Lookup;
 using Interface.Clinical;
 using Interface.Laboratory;
 using Interface.Lookup;
@@ -2596,7 +2597,7 @@ namespace IQCare.Web.Clinical
                 {
                     iqTextBox.SelectedValue = Convert.ToString(valuesDataset.Tables[tableCount].Rows[0][columnCount]);
                     ILookupService lkMgr = (ILookupService)ObjectFactory.CreateInstance("BusinessProcess.Lookup.BLookup, BusinessProcess.Lookup");
-                    Entities.Lookup.Item item = lkMgr.GetLookUpItem(Convert.ToInt32(iqTextBox.SelectedValue), iqTextBox.LookupName, iqTextBox.LookupCategory);
+                    LookupItem item = lkMgr.GetLookUpItem(Convert.ToInt32(iqTextBox.SelectedValue), iqTextBox.LookupName, iqTextBox.LookupCategory);
                     iqTextBox.ValueText = item.Name;
 
 
@@ -6253,13 +6254,13 @@ namespace IQCare.Web.Clinical
                 }
                 else { theYesNoRadio1.Attributes.Add("onclick", "down(this);"); }
             }
-
             else
                 theYesNoRadio1.Attributes.Add("onclick", "down(this);");
             theYesNoRadio1.Attributes.Add("onfocus", "up(this)");
-            DIVCustomItem.Controls.Add(new LiteralControl(@"<label class=""radio-inline"">"));
+            DIVCustomItem.Controls.Add(new LiteralControl("<label align='labelright' id='lblYes-" + fieldId + "'>Yes</label>"));
+            // DIVCustomItem.Controls.Add(new LiteralControl(@"<label class=""radio-inline"">"));
             DIVCustomItem.Controls.Add(theYesNoRadio1);
-            DIVCustomItem.Controls.Add(new LiteralControl("</label>"));
+           // DIVCustomItem.Controls.Add(new LiteralControl("</label>"));
             if (theEnable == false)
             {
                 string str = "ctl00_IQCareContentPlaceHolder_" + tabContainer.ID + "_" + tbChildPanel.ID + "_" + theYesNoRadio1.ClientID + "";
@@ -6272,7 +6273,7 @@ namespace IQCare.Web.Clinical
             //theYesNoRadio1.Visible = theEnable;
             ApplyBusinessRules(theYesNoRadio1, controlId.ToString(), theEnable);
             //theYesNoRadio1.Visible = theEnable;
-            DIVCustomItem.Controls.Add(new LiteralControl("<label align='labelright' id='lblYes-" + fieldId + "'>Yes</label>"));
+          
             HtmlInputRadioButton thehiddenRd = new HtmlInputRadioButton();
             thehiddenRd.ID = "" + tabContainer.ID + "_" + tbChildPanel.ID + "_" + theYesNoRadio1.ClientID + "";
             divhidden.Controls.Add(thehiddenRd);
@@ -6302,23 +6303,24 @@ namespace IQCare.Web.Clinical
             else
                 theYesNoRadio2.Attributes.Add("onclick", "down(this);");
             theYesNoRadio2.Attributes.Add("onfocus", "up(this)");
-            DIVCustomItem.Controls.Add(new LiteralControl(@"<label class=""radio-inline"">"));
+            DIVCustomItem.Controls.Add(new LiteralControl("<label align='labelright' id='lblNo-" + fieldId + "'>No</label>"));
+            //DIVCustomItem.Controls.Add(new LiteralControl(@"<label class=""radio-inline"">"));
             DIVCustomItem.Controls.Add(theYesNoRadio2);
-            DIVCustomItem.Controls.Add(new LiteralControl("</label>"));
+           // DIVCustomItem.Controls.Add(new LiteralControl("</label>"));
             HtmlInputRadioButton thehiddenRd1 = new HtmlInputRadioButton();
             thehiddenRd1.ID = "" + tabContainer.ID + "_" + tbChildPanel.ID + "_" + theYesNoRadio2.ClientID + "";
             divhidden.Controls.Add(thehiddenRd1);
             if (theEnable == false)
             {
                 string str = "ctl00_IQCareContentPlaceHolder_" + tabContainer.ID + "_" + tbChildPanel.ID + "_" + theYesNoRadio2.ClientID + "";
-                System.Web.UI.ScriptManager.RegisterStartupScript(Page, typeof(Page), "" + Guid.NewGuid() + "_No" + "", "EnableControlFalse('ctl00_IQCareContentPlaceHolder_" + tabContainer.ID + "_" + tbChildPanel.ID + "_" + theYesNoRadio2.ClientID + "');", true);
+                ScriptManager.RegisterStartupScript(Page, typeof(Page), "" + Guid.NewGuid() + "_No" + "", "EnableControlFalse('ctl00_IQCareContentPlaceHolder_" + tabContainer.ID + "_" + tbChildPanel.ID + "_" + theYesNoRadio2.ClientID + "');", true);
                 if (!IsPostBack)
                 {
                     AddContolStausInHastTable(str);
                 }
             }
             ApplyBusinessRules(theYesNoRadio2, controlId.ToString(), theEnable);
-            DIVCustomItem.Controls.Add(new LiteralControl("<label align='labelright' id='lblNo-" + fieldId + "'>No</label>"));
+        
             DIVCustomItem.Controls.Add(new LiteralControl("</td>"));
             DIVCustomItem.Controls.Add(new LiteralControl("</tr>"));
             DIVCustomItem.Controls.Add(new LiteralControl("</table>"));

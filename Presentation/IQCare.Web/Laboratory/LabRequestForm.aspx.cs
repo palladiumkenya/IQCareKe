@@ -201,7 +201,7 @@ namespace IQCare.Web.Laboratory
 
                     return new LabOrder()
                     {
-                        PatientId = this.PatientId,
+                        PatientPk = this.PatientPk,
                         LocationId = this.LocationId,
                         UserId = this.UserId,
                         ModuleId = this.ModuleId
@@ -224,7 +224,7 @@ namespace IQCare.Web.Laboratory
         /// <value>
         /// The patient identifier.
         /// </value>
-        private int PatientId
+        private int PatientPk
         {
             get
             {
@@ -327,6 +327,7 @@ namespace IQCare.Web.Laboratory
 
             };
             thisTest.Id = -1;
+            thisTest.TestId = this.LabTestId;
             thisTest.TestNotes = txtTestNotes.Text;
             _order.OrderedTest.Add(thisTest);
             this.OrderedLabs = _order;
@@ -368,7 +369,7 @@ namespace IQCare.Web.Laboratory
 
                 LabOrder order = this.OrderedLabs;
 
-                order.PatientId = this.PatientId;
+                order.PatientPk = this.PatientPk;
                 order.LocationId = this.LocationId;
                 order.ModuleId = this.ModuleId;
                 order.DeleteFlag = false;
@@ -423,9 +424,9 @@ namespace IQCare.Web.Laboratory
             string _testDepartment = "";
             string _group = "";
             int _paramCount;
-            if (!(hdCustID.Value != null && String.IsNullOrEmpty(hdCustID.Value)))
+            if (!(hdCustID.Value != null && string.IsNullOrEmpty(hdCustID.Value)))
             {
-                String[] itemCodes = hdCustID.Value.Split(';');
+                string[] itemCodes = hdCustID.Value.Split(';');
                 if (itemCodes.Length == 7)
                 {
                     _testId = Convert.ToInt32(itemCodes[0]);

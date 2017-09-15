@@ -1,17 +1,25 @@
-﻿using System;
+﻿using Entities.CCC.Enrollment;
+using Entities.CCC.Visit;
+using Entities.Common;
+using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.CCC.Triage 
 {
     [Serializable]
     [Table("PatientVitals")]
-    public class PatientVital 
+    public class PatientVital  : BaseEntity
     {
         [Column]
-        public virtual int PatientId { get; set; }
-        [ForeignKey("PatientId")] 
-        public virtual int PatientMasterVisitId { get; set; }
-        [ForeignKey("PatientmasterVisitId")]
+        [Key]
+        public int Id { get; set; }
+        public int PatientId { get; set; }
+        [ForeignKey("PatientId")]
+        public virtual PatientEntity Patient { get; set; }
+        public int PatientMasterVisitId { get; set; }
+        [ForeignKey("PatientMasterVisitId")]
+        public virtual PatientMasterVisit PatientMasterVisit { get; set; }
         public decimal Temperature { get; set; }
         public decimal RespiratoryRate { get; set; }
         public decimal HeartRate { get; set; }
@@ -21,5 +29,12 @@ namespace Entities.CCC.Triage
         public decimal Weight { get; set; }
         public decimal  Muac { get; set; }
         public decimal SpO2 { get; set; }
+        public decimal BMI { get; set; }
+        public decimal HeadCircumference { get; set; }
+        public string BMIZ { get; set; }
+        public string WeightForHeight { get; set; }
+        public string WeightForAge { get; set; }
+        public DateTime? VisitDate { get; set; }
      }
+
 }

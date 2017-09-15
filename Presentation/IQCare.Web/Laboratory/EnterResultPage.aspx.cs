@@ -221,7 +221,7 @@ namespace IQCare.Web.Laboratory
             {
                 if (Session[SessionKey.SelectedLabTestOrder] == null)
                 {
-                    string theUrl = string.Format("{0}", "~/Laboratory/Admin/LabTestMaster.aspx");
+                    string theUrl = string.Format("{0}", "~/Laboratory/LabRequestForm.aspx");
                     //Response.Redirect(theUrl);
                     System.Web.HttpContext.Current.ApplicationInstance.CompleteRequest();
                     Response.Redirect(theUrl, true);
@@ -229,9 +229,10 @@ namespace IQCare.Web.Laboratory
                 else
                 {
                     LabOrderTest selectedLab = (LabOrderTest)Session[SessionKey.SelectedLabTestOrder];
-                    this.LabTestId = selectedLab.TestId;
+                 
+                    this.LabTestId = selectedLab.Test.Id;
                     this.LabOrderTestId = selectedLab.Id;
-                    this.LabOrderTestId = selectedLab.LabOrderId;
+                   // this.LabOrderTestId = selectedLab.LabOrderId;
                     this.PopulateLabDetails(selectedLab);
                     this.BindDropdownResultBy() ;
                      txtlabReportedbyDate.Text =  DateTime.Now.ToString("dd-MMM-yyyy");
@@ -264,9 +265,9 @@ namespace IQCare.Web.Laboratory
                 labelTestOrderStatus.Text = thisTestOrder.TestOrderStatus;
                 labelTestNotes.Text = thisTestOrder.TestNotes;
                 showNotes = !string.IsNullOrEmpty(thisTestOrder.TestNotes.Trim())? "" : "none";
-                this.LabTestId = thisTestOrder.TestId;
+                this.LabTestId = thisTestOrder.Test.Id;
                 this.LabOrderTestId = thisTestOrder.Id;
-                this.LabOrderTestId = thisTestOrder.LabOrderId;
+                //this.LabOrderTestId = thisTestOrder.LabOrderId;
                 this.BindTests();               
             }
             catch (Exception ex)
@@ -395,11 +396,15 @@ namespace IQCare.Web.Laboratory
 
                     thisParam.ResultValue = string.IsNullOrEmpty(txtResultValue.Text) ? nullDecimal : Convert.ToDecimal(txtResultValue.Text.Trim());
                     thisParam.Undetectable = cBox.Checked;
+                 
                     thisParam.DetectionLimit = string.IsNullOrEmpty(txtLimit.Text) ? nullDecimal : Convert.ToDecimal(txtLimit.Text.Trim());
                     try
                     {
-                        thisParam.ResultUnit = new ResultUnit() { Id = Convert.ToInt32(ddlResultUnit.SelectedValue), Text = ddlResultUnit.SelectedItem.Text };
-
+                        thisParam.ResultUnit = null;
+                        if (ddlResultUnit.SelectedIndex > -1 && ddlResultUnit.SelectedValue != "")
+                        {
+                            thisParam.ResultUnit = new ResultUnit() { Id = Convert.ToInt32(ddlResultUnit.SelectedValue), Text = ddlResultUnit.SelectedItem.Text };
+                        }
                         ListItem item = ddlResultUnit.SelectedItem;
                         string min_value = item.Attributes["min"].ToString();
                         string max_value = item.Attributes["max"].ToString();
@@ -513,7 +518,7 @@ namespace IQCare.Web.Laboratory
                     if (null != item)
                     {
                         item.Selected = true;
-                        textLimit.Text = item.Attributes["detection_limit"];
+                        textLimit.Text = item.Attributes["detection_limit"];   //here
                     }
                 }
             }

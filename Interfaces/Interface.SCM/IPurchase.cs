@@ -9,19 +9,24 @@ namespace Interface.SCM
 {
     public interface IPurchase
     {
+
         int SavePurchaseOrder(DataTable DtMasterPO, DataTable dtPOItems, bool isUpdate);
-        DataSet GetPurcaseOrderItem(int isPO, int UserID, int StoreID);
-        DataSet GetPurchaseOrderDetailsByPoid(Int32 POId);
-        DataTable GetPurchaseOrderDetails(Int32 UserID, Int32 DestinStoreID, Int32 locationID);
-        DataTable GetPurchaseOrderDetailsForGRN(Int32 UserID, Int32 StoreID, Int32 locationID, bool IsSourceStore=false);
-        DataSet GetPurchaseOrderDetailsByPoidGRN(Int32 POId);
+        int SaveGoodReceivedNote(DataTable DtMasterGRN, DataTable dtGRNItems, int IsPOorIST);
+
+        int SavePOWithGRN(DataTable dtMasterPO, DataTable dtPOItems, bool isUpdate);
+        DataSet GetPurchaseOrderItem(int isPO, int userId, int storeId);
+        DataSet GetPurchaseOrderDetailsByPoid(int purchaseOrderId);
+        DataTable GetPurchaseOrderDetails(int userId, int DestinStoreID, int locationID);
+        DataTable GetPurchaseOrderDetailsForGRN(int userId, int storeId, int locationID, bool IsSourceStore=false);
+        DataSet GetPurchaseOrderDetailsByPoidGRN(int purchaseOrderId);
         DataSet GetOpenStock();
-        int SaveUpdateOpeningStock(DataTable theDTOPStock, Int32 UserID, DateTime TransactionDate);
-        int SaveUpdateStockAdjustment(DataTable theDTAdjustStock, int LocationId, int StoreId, string AdjustmentDate, int AdjustmentPreparedBy, int AdjustmentAuthorisedBy, int Updatestock, int UserID);
-        int SaveGoodreceivedNotes(DataTable DtMasterGRN, DataTable dtGRNItems, int IsPOorIST);
-        DataSet GetDisposeStock(int StoreId, DateTime AsofDate);
-        int SaveDisposeItems(int StoreId, int LocationId, DateTime AsofDate, int UserId, DataTable theDT);
-        DataSet GetStockforAdjustment(int StoreId, string AdjustmentDate);
+        int SaveUpdateOpeningStock(DataTable theDTOPStock, int userId, DateTime TransactionDate);
+        int SaveUpdateStockAdjustment(DataTable theDTAdjustStock, int LocationId, int storeId, string AdjustmentDate, int AdjustmentPreparedBy, int AdjustmentAuthorisedBy, int Updatestock, int userId);
+      
+        DataSet GetDisposeStock(int storeId, DateTime AsofDate);
+        int SaveDisposeItems(int storeId, int locationId, DateTime AsofDate, int userId, DataTable theDT);
+        DataSet GetStockforAdjustment(int storeId, string AdjustmentDate);
+        DataSet GetPurchaseOrderItems(int purchaseOrderId);
 
 
      

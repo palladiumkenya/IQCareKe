@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace IQCare.Web.CCC {
+namespace IQCare.Web.CCC.OneTimeEvents {
     
     
     public partial class OneTimeEventsTracker {
@@ -19,7 +19,115 @@ namespace IQCare.Web.CCC {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::IQCare.Web.CCC.UC.ucTriage PatientSummary;
+        protected global::IQCare.Web.CCC.UC.ucPatientBrief PatientSummary;
+        
+        /// <summary>
+        /// Age control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField Age;
+        
+        /// <summary>
+        /// dob control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField dob;
+        
+        /// <summary>
+        /// enrollmentDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField enrollmentDate;
+        
+        /// <summary>
+        /// Stage1Date control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText Stage1Date;
+        
+        /// <summary>
+        /// Stage2Date control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText Stage2Date;
+        
+        /// <summary>
+        /// Stage3Date control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText Stage3Date;
+        
+        /// <summary>
+        /// SexPartnerDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText SexPartnerDate;
+        
+        /// <summary>
+        /// INHStartDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox INHStartDate;
+        
+        /// <summary>
+        /// CompletionYes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton CompletionYes;
+        
+        /// <summary>
+        /// CompletionNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton CompletionNo;
+        
+        /// <summary>
+        /// INHCompletionDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox INHCompletionDate;
+        
+        /// <summary>
+        /// INHStopDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox INHStopDate;
         
         /// <summary>
         /// vaccinationotheradult control.
@@ -31,6 +139,42 @@ namespace IQCare.Web.CCC {
         protected global::System.Web.UI.WebControls.TextBox vaccinationotheradult;
         
         /// <summary>
+        /// VaccineType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList VaccineType;
+        
+        /// <summary>
+        /// VaccineStage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList VaccineStage;
+        
+        /// <summary>
+        /// btnAdd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnAdd;
+        
+        /// <summary>
+        /// tblVaccines control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTable tblVaccines;
+        
+        /// <summary>
         /// btnOneTimeEventsTracker control.
         /// </summary>
         /// <remarks>
@@ -40,13 +184,13 @@ namespace IQCare.Web.CCC {
         protected global::System.Web.UI.WebControls.LinkButton btnOneTimeEventsTracker;
         
         /// <summary>
-        /// LinkButton1 control.
+        /// btnResetOneTimeEvent control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
+        protected global::System.Web.UI.WebControls.LinkButton btnResetOneTimeEvent;
         
         /// <summary>
         /// btnClose control.

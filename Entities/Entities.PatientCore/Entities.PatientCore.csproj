@@ -14,10 +14,7 @@
     <FileAlignment>512</FileAlignment>
     <TrunkDir>..\..\</TrunkDir>
     <RedDir Condition=" '$(RedDir)' == '' ">$(TrunkDir)package\service\</RedDir>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
+  
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -38,7 +35,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Entities.Administration, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
-    <Reference Include="Entities.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="Entities.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Entities.Common\obj\Debug\Entities.Common.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Library\EntityFramework.dll</HintPath>
@@ -55,12 +54,10 @@
   <ItemGroup>
     <Compile Include="HomePageConfig.cs" />
     <Compile Include="PatientAllergy.cs" />
-    <Compile Include="PatientLocation.cs" />
     <Compile Include="PatientMaritalStatus.cs" />
     <Compile Include="PatientOVCStatus.cs" />
     <Compile Include="Patient.cs" />
     <Compile Include="PatientAlert.cs" />
-    <Compile Include="PatientContact.cs" />
     <Compile Include="PatientEnrollment.cs" />
     <Compile Include="HomePageSection.cs" />
     <Compile Include="PatientIdentifier.cs" />

@@ -1,31 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 	<CUSTOMIZELIST>
-	<!--IQCare PM Module Forms --> 
-	  <ItemName TableName="Program" CategoryId="0" FormName="frmProgramMaster" ListName="Program" FeatureID="131" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
-    <ItemName TableName="Donor" CategoryId="0" FormName="frmDonorMaster" ListName="Donor Name" FeatureID="132" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
-    <ItemName TableName="DonorProgram" CategoryId="0" FormName="frmDonorProgramLinking" ListName="Donor Program Linking" FeatureID="141" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
+	<!--IQCare PM Module Forms -->
+    
+    <ItemName TableName="Supplier" CategoryId="0" FormName="frmSupplierMaster" ListName="Supplier" FeatureID="133" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
+    <ItemName TableName="SupplierItem" CategoryId="0" FormName="frmSupplierItem" ListName="Supplier Item Linking" FeatureID="144" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
+    <ItemName TableName="Manufacturer" CategoryId="0" FormName="frmCommonItemMaster" ListName="Manufacturer Detail" FeatureID="137" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
+    <ItemName TableName="Store" CategoryId="0" FormName="frmStoreMaster" ListName="Store Detail" FeatureID="143" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
+    <ItemName TableName="StoreSourceDestination" CategoryId="0" FormName="frmStoreSourcDestLinking" ListName="Store Source Destination Linking" FeatureID="147" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
+    <ItemName TableName="StoreItem" CategoryId="0" FormName="frmSupplierItem" ListName="Store Item Linking" FeatureID="149" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
+    <ItemName TableName="StoreUser" CategoryId="0" FormName="frmStoreUserLinking" ListName="Store User Linking" FeatureID="148" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
+    <ItemName TableName="Drug" CategoryId="0" FormName="frmSCMitemList" ListName="Item Configuration" FeatureID="22" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
+    <ItemName TableName="Decode" CategoryId="205" FormName="frmCommonItemMaster" ListName="Adjustment Reason" FeatureID="140" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
+    <ItemName TableName="Decode" CategoryId="204" FormName="frmCommonItemMaster" ListName="Return Reason" FeatureID="139" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
+    <ItemName TableName="" CategoryId="" FormName="frmStockSummaryLine" ListName="Stock List" FeatureID="139" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
+    
     <ItemName TableName="Decode" CategoryId="201" FormName="frmCommonItemMaster" ListName="Cost Allocation Category" FeatureID="134" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
     <ItemName TableName="Decode" CategoryId="202" FormName="frmCommonItemMaster" ListName="Item Type" FeatureID="135" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
     <ItemName TableName="Drugtype" CategoryId="0" FormName="frmCommonItemMaster" ListName="Item Sub-Type" FeatureID="142" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
     <ItemName TableName="ItemTypeSubType" CategoryId="0" FormName="frmItemTypeSubTypeLinking" ListName="Item Type Sub-Type Linking" FeatureID="146" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
     <ItemName TableName="DispensingUnit" CategoryId="0" FormName="frmCommonItemMaster" ListName="Purchasing/Dispensing Unit" FeatureID="138" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
-    <ItemName TableName="Manufacturer" CategoryId="0" FormName="frmCommonItemMaster" ListName="Manufacturer Detail" FeatureID="137" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
-    <ItemName TableName="Drug" CategoryId="0" FormName="frmSCMitemList" ListName="Item Configuration" FeatureID="22" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
+
     <ItemName TableName="Decode" CategoryId="203" FormName="frmCommonItemMaster" ListName="Lab Test Location" FeatureID="136" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
     <ItemName TableName="lnk_TestParameter" CategoryId="0" FormName="frmLabItemDetails" ListName="Lab Test" FeatureID="52" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
+    
+    <ItemName TableName="Program" CategoryId="0" FormName="frmProgramMaster" ListName="Program" FeatureID="131" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
     <ItemName TableName="ProgramItem" CategoryId="0" FormName="frmProgramItemLinking" ListName="Program Item Linking" FeatureID="145" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
-    <ItemName TableName="Store" CategoryId="0" FormName="frmStoreMaster" ListName="Store Detail" FeatureID="143" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
-    <ItemName TableName="StoreSourceDestination" CategoryId="0" FormName="frmStoreSourcDestLinking" ListName="Store Source Destination Linking" FeatureID="147" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
-    <ItemName TableName="StoreItem" CategoryId="0" FormName="frmSupplierItem" ListName="Store Item Linking" FeatureID="149" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
-    <ItemName TableName="StoreUser" CategoryId="0" FormName="frmStoreUserLinking" ListName="Store User Linking" FeatureID="148" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
-    <ItemName TableName="Supplier" CategoryId="0" FormName="frmSupplierMaster" ListName="Supplier" FeatureID="133" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
-    <ItemName TableName="SupplierItem" CategoryId="0" FormName="frmSupplierItem" ListName="Supplier Item Linking" FeatureID="144" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
+    <ItemName TableName="Donor" CategoryId="0" FormName="frmDonorMaster" ListName="Donor Name" FeatureID="132" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
+    <ItemName TableName="DonorProgram" CategoryId="0" FormName="frmDonorProgramLinking" ListName="Donor Program Linking" FeatureID="141" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
+    
+    
     <!--<ItemName TableName="Batch" CategoryId="0" FormName="frmCommonItemMaster" ListName="Batch Number" FeatureID="150" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>-->
-    <ItemName TableName="Decode" CategoryId="205" FormName="frmCommonItemMaster" ListName="Adjustment Reason" FeatureID="140" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
-    <ItemName TableName="Decode" CategoryId="204" FormName="frmCommonItemMaster" ListName="Return Reason" FeatureID="139" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
-    <ItemName TableName="Decode" CategoryId="213" FormName="frmCommonItemMaster" ListName="Billables" FeatureID="173" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
+    
+	
+    <!--<ItemName TableName="Decode" CategoryId="213" FormName="frmCommonItemMaster" ListName="Billables" FeatureID="173" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
     <ItemName TableName="BillingType" CategoryId="0" FormName="frmBillingDetails" ListName="Billing Detail" FeatureID="173" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
-    <ItemName TableName="lnk_itemCostConfiguration" CategoryId="0" FormName="frmItemCostConfiguration" ListName="Price List" FeatureID="174" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
+    <ItemName TableName="lnk_itemCostConfiguration" CategoryId="0" FormName="frmItemCostConfiguration" ListName="Price List" FeatureID="174" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>-->
 
 
   </CUSTOMIZELIST>

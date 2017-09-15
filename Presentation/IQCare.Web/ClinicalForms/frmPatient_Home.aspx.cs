@@ -445,94 +445,97 @@ namespace IQCare.Web.Clinical
                 lblarvregimen.Text = "";
 
             }
+            
+                /*CD4 and Viral Load Graph */
 
-            /*CD4 and Viral Load Graph */
+                // double[] CD4 = new Double[theDS.Tables[6].Rows.Count];
 
-           // double[] CD4 = new Double[theDS.Tables[6].Rows.Count];
+                double[] CD4 = (from row in theDS.Tables[6].AsEnumerable()
+                                where row["TestResult"] != System.DBNull.Value
+                                select Convert.ToDouble(row["TestResult"])
+              ).ToArray<double>();
 
-            double[] CD4 = (from row in theDS.Tables[6].AsEnumerable()
-                            where row["TestResult"] != System.DBNull.Value
-                            select Convert.ToDouble(row["TestResult"])
-          ).ToArray<double>();
+                //for (Int32 a = 0, l = CD4.Length; a < l; a++)
+                //{
+                //    if (theDS.Tables[6].Rows[a]["TestResult"] != System.DBNull.Value)
+                //    {
+                //        CD4.SetValue(Convert.ToDouble(theDS.Tables[6].Rows[a]["TestResult"]), a);
+                //    }
+                //}
 
-            //for (Int32 a = 0, l = CD4.Length; a < l; a++)
-            //{
-            //    if (theDS.Tables[6].Rows[a]["TestResult"] != System.DBNull.Value)
-            //    {
-            //        CD4.SetValue(Convert.ToDouble(theDS.Tables[6].Rows[a]["TestResult"]), a);
-            //    }
-            //}
+                double[] ViralLoad = (from row in theDS.Tables[7].AsEnumerable()
+                                      where row["TestResult"] != System.DBNull.Value
+                                      select Convert.ToDouble(row["TestResult"])
+           ).ToArray<double>();
 
-            double[] ViralLoad = (from row in theDS.Tables[7].AsEnumerable()
-                            where row["TestResult"] != System.DBNull.Value
-                            select Convert.ToDouble(row["TestResult"])
-       ).ToArray<double>();
+                //double[] ViralLoad = new Double[theDS.Tables[7].Rows.Count];
+                //for (Int32 a = 0, l = ViralLoad.Length; a < l; a++)
+                //{
+                //    if (theDS.Tables[7].Rows[a]["TestResult"] != System.DBNull.Value)
+                //    {
+                //        ViralLoad.SetValue(Convert.ToDouble(theDS.Tables[7].Rows[a]["TestResult"]), a);
+                //    }
+                //}
 
-            //double[] ViralLoad = new Double[theDS.Tables[7].Rows.Count];
-            //for (Int32 a = 0, l = ViralLoad.Length; a < l; a++)
-            //{
-            //    if (theDS.Tables[7].Rows[a]["TestResult"] != System.DBNull.Value)
-            //    {
-            //        ViralLoad.SetValue(Convert.ToDouble(theDS.Tables[7].Rows[a]["TestResult"]), a);
-            //    }
-            //}
-
-            DateTime[] YearCD4 = (from row in theDS.Tables[6].AsEnumerable()
-                                  where row["ResultDate"] != System.DBNull.Value
-                                  select Convert.ToDateTime(row["ResultDate"])
-            ).ToArray<DateTime>();
+                DateTime[] YearCD4 = (from row in theDS.Tables[6].AsEnumerable()
+                                      where row["ResultDate"] != System.DBNull.Value
+                                      select Convert.ToDateTime(row["ResultDate"])
+                ).ToArray<DateTime>();
 
 
-            //DateTime[] YearCD4 = new DateTime[theDS.Tables[6].Rows.Count];
-            //for (Int32 a = 0, l = YearCD4.Length; a < l; a++)
-            //{
-                
-            //    YearCD4.SetValue((DateTime)theDS.Tables[6].Rows[a]["ResultDate"], a);
-            //}
+                //DateTime[] YearCD4 = new DateTime[theDS.Tables[6].Rows.Count];
+                //for (Int32 a = 0, l = YearCD4.Length; a < l; a++)
+                //{
 
-            //DateTime[] YearVL = new DateTime[theDS.Tables[7].Rows.Count];
-            //for (Int32 a = 0, l = YearVL.Length; a < l; a++)
-            //{
-            //    YearVL.SetValue(theDS.Tables[7].Rows[a]["ResultDate"], a);
-            //}
+                //    YearCD4.SetValue((DateTime)theDS.Tables[6].Rows[a]["ResultDate"], a);
+                //}
 
-            DateTime[] YearVL = (from row in theDS.Tables[7].AsEnumerable()
-                                  where row["ResultDate"] != System.DBNull.Value
-                                  select Convert.ToDateTime(row["ResultDate"])
-           ).ToArray<DateTime>();
+                //DateTime[] YearVL = new DateTime[theDS.Tables[7].Rows.Count];
+                //for (Int32 a = 0, l = YearVL.Length; a < l; a++)
+                //{
+                //    YearVL.SetValue(theDS.Tables[7].Rows[a]["ResultDate"], a);
+                //}
 
-            int yearGraphLength = theDS.Tables[6].Rows.Count + theDS.Tables[7].Rows.Count;
+                DateTime[] YearVL = (from row in theDS.Tables[7].AsEnumerable()
+                                     where row["ResultDate"] != System.DBNull.Value
+                                     select Convert.ToDateTime(row["ResultDate"])
+               ).ToArray<DateTime>();
 
-            /* DateTime[] Year = new DateTime[theDS.Tables[8].Rows.Count];          
-             for (Int32 a = 0, l = Year.Length; a < l; a++)
-             {
-                 Year.SetValue(theDS.Tables[8].Rows[a]["DATE"], a);
-             }*/
-            DateTime[] Year = new DateTime[yearGraphLength];
-
-            DataTable cd4Dates = new DataView(theDS.Tables[6]).ToTable(true, "ResultDate");
-            DataTable viralDates = new DataView(theDS.Tables[7]).ToTable(true, "ResultDate");
-            cd4Dates.Merge(viralDates, true, MissingSchemaAction.Ignore);
-            cd4Dates.DefaultView.Sort = "ResultDate Asc";
-
-            for (Int32 a = 0, l = Year.Length; a < l; a++)
+            try
             {
-                if (cd4Dates.Rows[a]["ResultDate"] != System.DBNull.Value)
+                int yearGraphLength = theDS.Tables[6].Rows.Count + theDS.Tables[7].Rows.Count;
+
+                /* DateTime[] Year = new DateTime[theDS.Tables[8].Rows.Count];          
+                 for (Int32 a = 0, l = Year.Length; a < l; a++)
+                 {
+                     Year.SetValue(theDS.Tables[8].Rows[a]["DATE"], a);
+                 }*/
+                DateTime[] Year = new DateTime[yearGraphLength];
+
+                DataTable cd4Dates = new DataView(theDS.Tables[6]).ToTable(true, "ResultDate");
+                DataTable viralDates = new DataView(theDS.Tables[7]).ToTable(true, "ResultDate");
+                cd4Dates.Merge(viralDates, true, MissingSchemaAction.Ignore);
+                cd4Dates.DefaultView.Sort = "ResultDate Asc";
+
+                for (Int32 a = 0, l = Year.Length; a < l; a++)
                 {
-                    Year.SetValue(Convert.ToDateTime(cd4Dates.Rows[a]["ResultDate"]), a);
+                    if (cd4Dates.Rows[a]["ResultDate"] != System.DBNull.Value)
+                    {
+                        Year.SetValue(Convert.ToDateTime(cd4Dates.Rows[a]["ResultDate"]), a);
+                    }
                 }
+
+                //18thAug2009 createChartCD4(CD4, ViralLoad, YearCD4, YearVL, Year);
+                Chart.setLicenseCode("DEVP-2AC2-336W-54FM-EAB2-F8E2");
+                createChartCD4(WebChartViewerCD4VL, CD4, ViralLoad, YearCD4, YearVL, Year);
+                Session["CD4_Graph"] = CD4;
+                Session["ViralLoad_Graph"] = ViralLoad;
+                Session["YearCD4_Graph"] = YearCD4;
+                Session["YearVL_Graph"] = YearVL;
+                Session["Year_Graph"] = Year;
+
             }
-
-            //18thAug2009 createChartCD4(CD4, ViralLoad, YearCD4, YearVL, Year);
-            Chart.setLicenseCode("DEVP-2AC2-336W-54FM-EAB2-F8E2");
-            createChartCD4(WebChartViewerCD4VL, CD4, ViralLoad, YearCD4, YearVL, Year);
-            Session["CD4_Graph"] = CD4;
-            Session["ViralLoad_Graph"] = ViralLoad;
-            Session["YearCD4_Graph"] = YearCD4;
-            Session["YearVL_Graph"] = YearVL;
-            Session["Year_Graph"] = Year;
-
-
+            catch { }
 
             double[] Height = new Double[theDS.Tables[5].Rows.Count];
             double _height = 0.0;
@@ -1131,15 +1134,15 @@ namespace IQCare.Web.Clinical
             if (theDS.Tables[44].Rows.Count > 0)
             {
 
-                string bVL = theDS.Tables[44].Rows[0]["baselineVL"].ToString();
+                //string bVL = theDS.Tables[44].Rows[0]["baselineVL"].ToString();
                 string VL=theDS.Tables[44].Rows[0]["ResultValue"].ToString();
 
                 //lblviralload.Text = 
-                    bVL += " copies/ml";
+                    //bVL += " copies/ml";
                     VL += " copies/ml";
                     lblviralload.Text = VL.ToString();
                     latestVL.Text = VL.ToString();
-                    baselineVL.Text = bVL.ToString();
+                    //baselineVL.Text = bVL.ToString();
                     
 
                 lblVLDueDate.Text = Convert.ToDateTime(theDS.Tables[44].Rows[0]["ViralLoadDueDate"]).ToString("dd-MMM-yyyy");
@@ -1781,11 +1784,11 @@ namespace IQCare.Web.Clinical
         {
             try
             {
-                EnrollmentService service = new EnrollmentService(this.PatientId);
-                service.ReActivatePatient(CurrentSession.Current, this.ModuleId);
-                Session["HIVPatientStatus"] = 0;
+                //EnrollmentService service = new EnrollmentService(this.PatientId);
+               // service.ReActivatePatient(CurrentSession.Current, this.ModuleId);
+               // Session["HIVPatientStatus"] = 0;
 
-                string Url = string.Format("{0}?PatientId={1}", "../ClinicalForms/frmPatient_Home.aspx", Session["PatientId"].ToString());
+                string Url = string.Format("{0}?mod={1}?PatientId={2}", "../Patient/AddTechnicalArea.aspx", CurrentSession.Current.CurrentServiceArea.Id, Session["PatientId"].ToString());
                 Response.Redirect(Url);
 
             }

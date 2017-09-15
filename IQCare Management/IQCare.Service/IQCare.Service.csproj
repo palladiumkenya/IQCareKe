@@ -19,11 +19,7 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>3.5</OldToolsVersion>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
-    <TargetFrameworkProfile />
+     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -56,9 +52,9 @@
     <Reference Include="Interface.Service">
       <HintPath>..\..\References\Interface.Service.dll</HintPath>
     </Reference>
-    <Reference Include="Sand.Security.Cryptography, Version=1.0.1958.25137, Culture=neutral">
+    <Reference Include="Sand.Security.Cryptography, Version=1.0.1958.25137, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\External Dlls\Sand.Security.Cryptography.dll</HintPath>
+      <HintPath>..\..\Library\Sand.Security.Cryptography.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />

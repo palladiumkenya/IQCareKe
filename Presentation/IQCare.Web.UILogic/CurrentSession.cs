@@ -260,16 +260,25 @@ namespace IQCare.Web.UILogic
                     });
                 }
             }
+            //Manually add greencard menu
+            //result.Add(new HomePageLandScape()
+            //{
+            //    MenuName = "Green Card (2016)",
+            //    MenuId = -1,
+            //    ClickAction = RedirectAction.ModuleAction,
+            //    ServiceAreaName = "CCC"
+            //});
             Facility.Modules.Where(m => m.PublishFlag == true).OrderBy(o => o.Clinical).ThenBy(n => n.Name).ToList().ForEach(
             s =>
             {
                 if (this.HasModuleRight(s.Id, s.Clinical))
                 {
+
                     result.Add(new HomePageLandScape()
                     {
                         MenuName = s.DisplayName,
                         MenuId = s.Id,
-                        ClickAction = s.Clinical ? RedirectAction.FindAddPatient : RedirectAction.ModuleAction,
+                        ClickAction = !s.ModuleFlag ? RedirectAction.FindAddPatient : RedirectAction.ModuleAction,
                         ServiceAreaName = s.Name
                     });
                 }
@@ -339,6 +348,7 @@ namespace IQCare.Web.UILogic
                                             Name = Convert.ToString(row["ModuleName"]),
                                             DisplayName = Convert.ToString(row["DisplayName"]),
                                             EnrolFlag = Convert.ToBoolean(row["CanEnroll"]),
+                                            ModuleFlag = Convert.ToBoolean(row["ModuleFlag"]),
                                             Clinical = Convert.ToBoolean(row["CanEnroll"]),
                                             PublishFlag = (Convert.ToString(row["ModuleName"]) == "PM/SCM") ? false : true,
                                             DeleteFlag = false,
@@ -384,12 +394,16 @@ namespace IQCare.Web.UILogic
                     this.UserDetail = ds;
                     this.UserRights = ds.Tables[1];
                     CurrentLandScape = this.GetLandScape();
+                    SessionManager.UserId = user.Id;
+                    SessionManager.FacilityId = facility.Id;
+                    SessionManager.SystemId = facility.SystemId;
 
                 }
             }
             else
             {
                 _responseCode = LoginResponseCode.InvalidLogin;
+                SessionManager.Dispose();
             }
         }
         public static DateTime SystemDate()
@@ -461,7 +475,8 @@ namespace IQCare.Web.UILogic
         {
             int moduleId = CurrentServiceArea.Id;
             CurrentSession session = this;
-           
+            SessionManager.ModuleId = moduleId;
+            SessionManager.CurrentUser = session;
             return SetCurrentPatient(patientId, moduleId);
         }
         /// <summary>
@@ -479,7 +494,9 @@ namespace IQCare.Web.UILogic
             session.CurrentServiceArea = service.CurrentServiceArea;
             session.CurrentFormSet = service.Formset;
             session.hasPatient = true;
-
+            SessionManager.PatientId = patientId;
+            SessionManager.ModuleId = moduleId;
+            SessionManager.CurrentUser = session;
             HttpContext.Current.Session["CurrentUser"] = session;
             return session;
         }
@@ -505,13 +522,14 @@ namespace IQCare.Web.UILogic
         /// </summary>
         public static void Logout()
         {
+            SessionManager.Dispose();
             if (Current != null)
             {
                 // pre loggout 
                 HttpContext.Current.Session.Clear();
                 HttpContext.Current.Session.Abandon();
             }
-
+           
         }
         /// <summary>
         /// Logins the specified sender.

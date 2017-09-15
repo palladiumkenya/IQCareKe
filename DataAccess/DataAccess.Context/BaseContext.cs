@@ -1,22 +1,27 @@
-﻿using DataAccess.Base;
-using System.Data.Common;
+﻿using System.Data.Common;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace DataAccess.Context
 {
-    public abstract class BaseContext : DbContext
+    public  class BaseContext : DbContext
     {
-        public BaseContext() :  base((DbConnection)DataMgr.GetConnection(), true)
+        public BaseContext(DbConnection connection,bool flag) :  base(connection, flag)
         {
         }
         public BaseContext(string connection) : base(connection)
         {
         }
 
+        public BaseContext()
+        {
+           
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
+
     }
 }

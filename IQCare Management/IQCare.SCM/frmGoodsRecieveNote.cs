@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using Application.Common;
+using Application.Presentation;
+using CrystalDecisions.CrystalReports.Engine;
+using Interface.SCM;
+using System;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using Application.Common;
-using Application.Presentation;
-using Interface.SCM;
-using System.Collections;
-using CrystalDecisions.CrystalReports.Engine;
-using CrystalDecisions.Shared;
 
 
 namespace IQCare.SCM
@@ -86,7 +80,7 @@ namespace IQCare.SCM
             dtGRNmaster.Columns.Add("DestinStoreID", typeof(int));
             dtGRNmaster.Columns.Add("UserID", typeof(int));
             dtGRNmaster.Columns.Add("RecievedDate", typeof(DateTime));
-            dtGRNmaster.Columns.Add("OrderNo", typeof(String));
+            dtGRNmaster.Columns.Add("OrderNo", typeof(string));
             dtGRNmaster.Columns.Add("Freight", typeof(decimal));
             dtGRNmaster.Columns.Add("Tax", typeof(decimal));
             return dtGRNmaster;
@@ -96,16 +90,16 @@ namespace IQCare.SCM
             DataTable dtPOItem = new DataTable();
             dtPOItem.Columns.Add("GRNId", typeof(int));
             dtPOItem.Columns.Add("ItemID", typeof(int));
-            dtPOItem.Columns.Add("ItemName", typeof(String));
-            dtPOItem.Columns.Add("ItemCode", typeof(String));
+            dtPOItem.Columns.Add("ItemName", typeof(string));
+            dtPOItem.Columns.Add("ItemCode", typeof(string));
             dtPOItem.Columns.Add("OrderQuantity", typeof(int));
-            dtPOItem.Columns.Add("TotPrice", typeof(Decimal));
-            dtPOItem.Columns.Add("Price", typeof(Decimal));
-            dtPOItem.Columns.Add("Units", typeof(String));
+            dtPOItem.Columns.Add("TotPrice", typeof(decimal));
+            dtPOItem.Columns.Add("Price", typeof(decimal));
+            dtPOItem.Columns.Add("Units", typeof(string));
             dtPOItem.Columns.Add("TotalAmount", typeof(decimal));
             if (GblIQCare.ModePurchaseOrder == 2)
             {
-                dtPOItem.Columns.Add("ISTItemID", typeof(String));
+                dtPOItem.Columns.Add("ISTItemID", typeof(string));
             }
             return dtPOItem;
         }
@@ -116,7 +110,7 @@ namespace IQCare.SCM
             dtGRNItem.Columns.Add("GRNId", typeof(int));
             dtGRNItem.Columns.Add("ItemID", typeof(int));
             dtGRNItem.Columns.Add("BatchID", typeof(int));
-            dtGRNItem.Columns.Add("BatchName", typeof(String));
+            dtGRNItem.Columns.Add("BatchName", typeof(string));
             dtGRNItem.Columns.Add("RecievedQuantity", typeof(int));
             dtGRNItem.Columns.Add("QtyPerPurchaseUnit", typeof(int));
             dtGRNItem.Columns.Add("FreeRecievedQuantity", typeof(int));
@@ -134,7 +128,7 @@ namespace IQCare.SCM
             //dtGRNItem.Columns.Add("InKindFlag", typeof(int));
             if (GblIQCare.ModePurchaseOrder == 2)
             {
-                dtGRNItem.Columns.Add("ISTItemID", typeof(String));
+                dtGRNItem.Columns.Add("ISTItemID", typeof(string));
             }
             return dtGRNItem;
         }
@@ -211,72 +205,7 @@ namespace IQCare.SCM
 
         }
 
-        //private void OnChangedRdoPurchaseMode(object sender, EventArgs e)
-        //{
-        //    ////if (rdoInterStoreTransfer.Checked)
-        //    ////{
-        //    ////    ddlDestinationStore.Enabled = true;
-        //    ////    if (ddlSupplier.DataSource != null)
-        //    ////    {
-        //    ////        ddlSupplier.DataSource = null;
-        //    ////    }
-        //    ////    ddlSupplier.Enabled = false;
-        //    ////   // IsPurchaseOrder = 0;
-        //    ////    lblDestinationstore.Tag = "lblLabelRequired";
-        //    ////    lblSupplier.Tag = "lblLabel";
-        //    ////}
-        //    ////else if (rdoPurchaseOrder.Checked)
-        //    ////{
-        //    ////    lblDestinationstore.Tag = "lblLabel";
-        //    ////    lblSupplier.Tag = "lblLabelRequired";
-        //    ////    if (ddlDestinationStore.DataSource != null)
-        //    ////    {
-        //    ////        ddlDestinationStore.DataSource = null;
-        //    ////    }
-        //    ////    ddlDestinationStore.Enabled = false;
-        //    ////    ddlSupplier.Enabled = true;
-        //    ////    BindSupplierDropdown();
-        //    ////   // IsPurchaseOrder = 1;
-        //    ////}
-        //    ////clsCssStyle theStyle = new clsCssStyle();
-        //    ////theStyle.setStyle(lblDestinationstore);
-        //    ////theStyle.setStyle(lblSupplier);
-        //    if (rdoInterStoreTransfer.Checked)
-        //    {
-        //        ddlSourceStore.Enabled = true;
-        //        ddlDestinationStore.Enabled = false;
-        //        if (ddlSupplier.DataSource != null)
-        //        {
-        //            ddlSupplier.DataSource = null;
-        //        }
-        //        ddlSupplier.Enabled = false;
-        //        //  IsPurchaseOrder = 0;
-        //        lblSourceStore.Tag = "lblLabelRequired";
-        //        lblSupplier.Tag = "lblLabel";
-        //    }
-        //    else if (rdoPurchaseOrder.Checked)
-        //    {
-        //        ddlSourceStore.Enabled = false;
-        //        lblSourceStore.Tag = "lblLabel";
-        //        lblSupplier.Tag = "lblLabelRequired";
-        //        if (ddlDestinationStore.DataSource != null)
-        //        {
-        //            ddlDestinationStore.DataSource = null;
-        //        }
-        //        ddlDestinationStore.Enabled = false;
-        //        ddlSupplier.Enabled = true;
-        //        BindSupplierDropdown();
-        //        //  IsPurchaseOrder = 1;
-        //    }
-        //    //clsCssStyle theStyle = new clsCssStyle();
-        //    //theStyle.setStyle(this);
-        //    clsCssStyle theStyle = new clsCssStyle();
-        //    theStyle.setStyle(lblSourceStore);
-        //    theStyle.setStyle(lblSupplier);
-
-        //    BindGrid(GblIQCare.ModePurchaseOrder);
-        //    BindStoreName();
-        //}
+        
         private void BindGrid(int PurchaseMode)
         {
             //IMasterList objPOItem = (IMasterList)ObjectFactory.CreateInstance("BusinessProcess.SCM.BMasterList,BusinessProcess.SCM");
@@ -284,7 +213,7 @@ namespace IQCare.SCM
             // dsPOItems = objPOItem.GetPurcaseOrderItem(PurchaseMode, GblIQCare.AppUserId, GblIQCare.intStoreId);
             if (PurchaseMode == 1)
             {
-                dsPOItems = objPOItem.GetPurcaseOrderItem(PurchaseMode, GblIQCare.AppUserId, 0);
+                dsPOItems = objPOItem.GetPurchaseOrderItem(PurchaseMode, GblIQCare.AppUserId, 0);
             }
             else if (PurchaseMode == 2)
             {
@@ -307,7 +236,7 @@ namespace IQCare.SCM
                 dsPOItemsDetail = objPOItem.GetPurchaseOrderDetailsByPoidGRN(GblIQCare.PurchaseOrderID);
                 if (dsPOItemsDetail.Tables.Count > 0)
                 {
-                    if (!String.IsNullOrEmpty(Convert.ToString(dsPOItemsDetail.Tables[0].Rows[0]["GRNId"])))
+                    if (!string.IsNullOrEmpty(Convert.ToString(dsPOItemsDetail.Tables[0].Rows[0]["GRNId"])))
                     {
                         GrnId = Convert.ToInt32(dsPOItemsDetail.Tables[0].Rows[0]["GRNId"]);
                     }
@@ -326,21 +255,9 @@ namespace IQCare.SCM
 
                     if (dsPOItemsDetail.Tables[0].Rows.Count > 0)
                     {
-                        //if (Convert.ToInt32(dsPOItemsDetail.Tables[0].Rows[0]["SupplierID"]) > 0 && Convert.ToInt32(dsPOItemsDetail.Tables[0].Rows[0]["SourceStoreID"]) == 0)
-                        //{
-                        //    // set IsPurchaseOrder = 1;
-                        //    rdoPurchaseOrder.Checked = true;
-                        //    rdoInterStoreTransfer.Enabled = false;
-
-                        //}
-                        //else if (Convert.ToInt32(dsPOItemsDetail.Tables[0].Rows[0]["SupplierID"]) == 0 && Convert.ToInt32(dsPOItemsDetail.Tables[0].Rows[0]["SourceStoreID"]) > 0)
-                        //{
-                        //    //set  IsPurchaseOrder = 0;
-                        //    rdoInterStoreTransfer.Checked = true;
-                        //    rdoPurchaseOrder.Enabled = false;
-
-                        //}
-                        dtpOrderDate.Text = dsPOItemsDetail.Tables[0].Rows[0]["OrderDate"].ToString();
+                     
+                       // dtpOrderDat
+                        dtpOrderDate.Value = Convert.ToDateTime(dsPOItemsDetail.Tables[0].Rows[0]["OrderDate"].ToString());
                         dtpOrderDate.CustomFormat = "dd-MMM-yyyy";
                         dtpOrderDate.Enabled = false;
                         txtOrderNumber.Text = dsPOItemsDetail.Tables[0].Rows[0]["OrderNo"].ToString();
@@ -349,18 +266,6 @@ namespace IQCare.SCM
                         //ddlSourceStore.Enabled = false;
                         if (GblIQCare.ModePurchaseOrder == 1)
                         {
-                            ////ddlSupplier.DataSource = null;
-                            ////BindFunctions theBind = new BindFunctions();
-                            ////ddlSupplier.DataSource = null;
-                            ////DataSet XMLDS = new DataSet();
-                            ////XMLDS.ReadXml(GblIQCare.GetXMLPath() + "\\AllMasters.con");
-
-                            ////DataView theDVsupp = new DataView(XMLDS.Tables["Mst_Supplier"]);
-                            ////theDVsupp.RowFilter = "(DeleteFlag = 0 or  DeleteFlag is null) or  (Id = " + Convert.ToInt32(dsPOItemsDetail.Tables[0].Rows[0]["SupplierID"].ToString()) + ")";
-                            ////DataTable theStoreDT = theDVsupp.ToTable();
-                            ////theBind.Win_BindCombo(ddlSupplier, theStoreDT, "SupplierName", "Id");
-                            ////ddlSupplier.SelectedValue = Convert.ToInt32(dsPOItemsDetail.Tables[0].Rows[0]["SupplierID"].ToString());
-                            ////ddlSupplier.Enabled = false;
                             ddlSupplier.DataSource = null;
                             BindFunctions theBind = new BindFunctions();
                             ddlSupplier.DataSource = null;
@@ -376,16 +281,7 @@ namespace IQCare.SCM
                         }
                         else if (GblIQCare.ModePurchaseOrder == 2)
                         {
-                            ////ddlDestinationStore.DataSource = null;
-                            ////DataSet XMLDS = new DataSet();
-                            ////XMLDS.ReadXml(GblIQCare.GetXMLPath() + "\\AllMasters.con");
-                            ////BindFunctions theBindManagerStr = new BindFunctions();
-                            ////DataView theDVstr = new DataView(XMLDS.Tables["Mst_Store"]);
-                            ////theDVstr.RowFilter = "(DeleteFlag =0 or DeleteFlag is null and  Id <>" + StoreID + " or Id =" + Convert.ToInt32(dsPOItemsDetail.Tables[0].Rows[0]["DestinStoreID"].ToString()) + ")";
-                            ////DataTable theStoreDT = theDVstr.ToTable();
-                            ////theBindManagerStr.Win_BindCombo(ddlDestinationStore, theStoreDT, "Name", "Id");
-                            ////ddlDestinationStore.SelectedValue = Convert.ToInt32(dsPOItemsDetail.Tables[0].Rows[0]["DestinStoreID"].ToString());
-                            ddlDestinationStore.DataSource = null;
+                         ddlDestinationStore.DataSource = null;
                             DataSet XMLDS = new DataSet();
                             XMLDS.ReadXml(GblIQCare.GetXMLPath() + "\\AllMasters.con");
                             BindFunctions theBindManager = new BindFunctions();
@@ -394,9 +290,7 @@ namespace IQCare.SCM
                             theDV.RowFilter = "(DeleteFlag =0 or DeleteFlag is null )and  (Id =" + Convert.ToInt32(dsPOItemsDetail.Tables[0].Rows[0]["DestinStoreID"].ToString()) + ") ";
                             DataTable theStoreDT = theDV.ToTable();
                             theBindManager.Win_BindCombo(ddlDestinationStore, theStoreDT, "Name", "Id");
-                            // ddlDestinationStore.SelectedValue = Convert.ToInt32(dsPOItemsDetail.Tables[0].Rows[0]["DestinStoreID"].ToString());
-                            //ddlSourceStore.SelectedValue = Convert.ToInt32(dsPOItemsDetail.Tables[0].Rows[0]["SourceStoreID"].ToString());
-                            //ddlSourceStore.Enabled = false;
+                          
                         }
                         ddlDestinationStore.SelectedValue = Convert.ToInt32(dsPOItemsDetail.Tables[0].Rows[0]["DestinStoreID"].ToString());
                         ddlDestinationStore.Enabled = false;
@@ -415,8 +309,6 @@ namespace IQCare.SCM
                         }
                         else
                         {
-                            // ddlAuthorisedBy.SelectedValue = Convert.ToInt32(dsPOItemsDetail.Tables[0].Rows[0]["AuthorizedBy"].ToString());
-                            // btnSave.Enabled = false;
 
                         }
                         //lblTotalAmount.Text = dsPOItemsDetail.Tables[1].Rows[0]["TotalAmount"].ToString();
@@ -711,13 +603,6 @@ namespace IQCare.SCM
                 theColumnSellingPriceDispense.Width = 100;
                 theColumnSellingPriceDispense.ReadOnly = true;
 
-
-                //DataGridViewTextBoxColumn theColumnExpiryDate = new DataGridViewTextBoxColumn();
-                //theColumnExpiryDate.HeaderText = "ExpiryDate";
-                //theColumnExpiryDate.DataPropertyName = "ExpiryDate";
-                //theColumnItemPurchasePrice.Name = "ExpiryDate";
-                //theColumnItemPurchasePrice.Width = 100;
-                //theColumnItemPurchasePrice.ReadOnly = false;
                 CalendarColumn col = new CalendarColumn();
                 col.HeaderText = "Expiry Date";
                 col.DataPropertyName = "ExpiryDate";
@@ -726,13 +611,7 @@ namespace IQCare.SCM
                 col.MaxDate = DateTime.MaxValue;
                 col.MinDate = DateTime.MinValue;
 
-                //DataGridViewCheckBoxColumn theColInKind = new DataGridViewCheckBoxColumn();
-                //theColInKind.HeaderText = "InKind";
-                //theColInKind.DataPropertyName = "InkindFlag";
-                //theColInKind.Name = "InkindFlag";
-                //theColInKind.Width = 25;
-
-
+              
                 dgwGRNItems.DataSource = CreateGRNItemTable();
 
                 dgwGRNItems.Columns.Add(theColumnGRNId);
@@ -771,14 +650,7 @@ namespace IQCare.SCM
 
                 if (GblIQCare.ModePurchaseOrder == 2)
                 {
-
-                    //DataGridViewTextBoxColumn theColumnExpiryDate = new DataGridViewTextBoxColumn();
-                    //theColumnExpiryDate.HeaderText = "Expiry Date";
-                    //theColumnExpiryDate.Name = "ExpiryDate";
-                    //theColumnExpiryDate.DataPropertyName = "ExpiryDate";
-                    //theColumnExpiryDate.Width = 100;
-                    //theColumnExpiryDate.ReadOnly = true;
-
+                    
                     DataGridViewTextBoxColumn theColumnISTitem = new DataGridViewTextBoxColumn();
                     theColumnISTitem.HeaderText = "ISTItemID";
                     theColumnISTitem.Name = "ISTItemID";
@@ -828,11 +700,11 @@ namespace IQCare.SCM
                 DataTable theDTItems = (DataTable)dgwDataGridForEvent.DataSource;
                 for (int i = 0; i < theDTItems.Rows.Count; i++)
                 {
-                    if (!String.IsNullOrEmpty(Convert.ToString(theDTItems.Rows[i]["RecievedQuantity"])))
+                    if (!string.IsNullOrEmpty(Convert.ToString(theDTItems.Rows[i]["RecievedQuantity"])))
                     {
                         tempreceiveQuantity = tempreceiveQuantity + Convert.ToInt32(theDTItems.Rows[i]["RecievedQuantity"].ToString());
                     }
-                    if (tempreceiveQuantity > OrderQuantity)
+                    if (tempreceiveQuantity > _orderQuantity)
                     {
                         IQCareWindowMsgBox.ShowWindow("GRNrecQtnGreaterOrderQtn", this);
                         theDTItems.Rows[i]["RecievedQuantity"] = 0;
@@ -842,14 +714,6 @@ namespace IQCare.SCM
                     }
                 }
                 
-                ////dtpExpiryDate = e.Control as DateTimePicker;
-                ////dtpExpiryDate.CustomFormat = "dd-MMM-yyyy";
-                ////if (dtpExpiryDate != null)
-                ////{
-                ////     dtpExpiryDate.CustomFormat = "dd-MMM-yyyy";
-                ////    // txtBatchName.KeyUp += new KeyEventHandler(txtBatchName_KeyUp);
-
-                ////}
             }
             if (dgwDataGridForEvent.CurrentCell.ColumnIndex == 5)
             {
@@ -907,65 +771,11 @@ namespace IQCare.SCM
 
         private void txtBatchName_KeyUp(object sender, KeyEventArgs e)
         {
-            ////try
-            ////{
-            ////        if (txtBatchName.Text != "")
-            ////        {
-            ////            lstSearchBatch.Visible = true;
-            ////            lstSearchBatch.Width = dgwGRNItems.CurrentCell.Size.Width;//txtBatchName.Width;
-            ////            lstSearchBatch.Left = dgwGRNItems.CurrentCell.DataGridView.Margin.Left;
-            ////            lstSearchBatch.Top = dgwGRNItems.CurrentCell.DataGridView.Margin.Top +dgwGRNItems.CurrentCell.Size.Height;
-            ////            //lstSearchBatch.Width = txtBatchName.Width;
-            ////            //lstSearchBatch.Left = txtBatchName.Left;
-            ////            //lstSearchBatch.Top = txtBatchName.Top + txtBatchName.Height;
-
-            ////            lstSearchBatch.Height = 300;
-            ////            lstSearchBatch.BringToFront();
-            ////            DataView theDV = new DataView(theDTBatch);
-            ////            theDV.RowFilter = "Name like '" + txtBatchName.Text + "*'";
-            ////            if (theDV.Count > 0)
-            ////            {
-            ////                DataTable theDTdata = theDV.ToTable();
-            ////                BindFunctions theBindManager = new BindFunctions();
-            ////                theBindManager.Win_BindListBox(lstSearchBatch, theDTdata, "Name", "Id");
-            ////            }
-            ////            else
-            ////            {
-            ////                lstSearchBatch.DataSource = null;
-            ////                lstSearchBatch.Visible = false;
-            ////            }
-
-            ////        }
-
-            ////        else
-            ////        {
-            ////            lstSearchBatch.Visible = false;
-            ////        }
-            ////        if (e.KeyCode == Keys.Down)
-            ////            lstSearchBatch.Select();
-
-            ////}
-            ////catch (Exception err)
-            ////{
-            ////    MsgBuilder theBuilder = new MsgBuilder();
-            ////    theBuilder.DataElements["MessageText"] = err.Message.ToString();
-            ////    IQCareWindowMsgBox.ShowWindowConfirm("#C1", theBuilder, this);
-            ////}
+            
         }
 
         private void lstSearchBatch_DoubleClick(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    txtBatchName.Text = lstSearchBatch.Text;
-            //    lstSearchBatch.Visible = false;
-            //}
-            //catch (Exception err)
-            //{
-            //    MsgBuilder theBuilder = new MsgBuilder();
-            //    theBuilder.DataElements["MessageText"] = err.Message.ToString();
-            //    IQCareWindowMsgBox.ShowWindowConfirm("#C1", theBuilder, this);
-            //}
         }
 
         private void lstSearchBatch_KeyUp(object sender, KeyEventArgs e)
@@ -976,17 +786,12 @@ namespace IQCare.SCM
             //}
 
         }
-        int ItemID = 0;
-        int OrderQuantity = 0;
-        String ISTItemID = "";
+        int _itemId = 0;
+        int _orderQuantity = 0;
+        string ISTItemID = "";
         private void dgwPOItems_Click(object sender, EventArgs e)
         {
 
-            //if (dtGRNItem.Rows.Count <= 0)
-            //{
-            //    IQCareWindowMsgBox.ShowWindow("GoodRecNoteItem", this);
-            //    return;
-            //}
             bool ret = FillGridItemToSave();
             if (ret)
             {
@@ -1008,8 +813,8 @@ namespace IQCare.SCM
             }
             else if (GblIQCare.ModePurchaseOrder == 1)
             {
-                theDVGridItem.RowFilter = "(ItemID ='" + ItemID + "')";
-                theDVGrnItem.RowFilter = "(ItemID ='" + ItemID + "')";
+                theDVGridItem.RowFilter = "(ItemID ='" + _itemId + "')";
+                theDVGrnItem.RowFilter = "(ItemID ='" + _itemId + "')";
             }
             if (theDVGrnItem.Count > 0)
             {
@@ -1055,14 +860,6 @@ namespace IQCare.SCM
                             return isretValidate;
                         }
 
-                        //if (Convert.ToString(dgwGRNItems.Rows[i].Cells["ItemPurchasePrice"].Value) == "0")
-                        //{
-                        //    MsgBuilder theBuilder = new MsgBuilder();
-                        //    theBuilder.DataElements["Control"] = "Item Purchase Price";
-                        //    IQCareWindowMsgBox.ShowWindow("GoodRecNoteZero", theBuilder, this);
-                        //    return isretValidate;
-                        //}
-
                         if (Convert.ToString(dgwGRNItems.Rows[i].Cells["BatchName"].Value) == "")
                         {
                             MsgBuilder theBuilder = new MsgBuilder();
@@ -1089,18 +886,9 @@ namespace IQCare.SCM
                         // if (Convert.ToString(dgwGRNItems.Rows[i].Cells["GrnID"].Value) == "")
                         {
 
-                            //DataView theDVGridItem = new DataView((DataTable)dgwGRNItems.DataSource);
-                            //theDVGridItem.RowFilter = "(ItemID ='" + ItemID + "')";
-
-                            //DataView theDVGrnItem = new DataView(dtGRNItem);
-                            //theDVGrnItem.RowFilter = "(ItemID ='" + ItemID + "')";
-                            //if ((theDVGridItem.ToTable().Rows.Count) == theDVGrnItem.ToTable().Rows.Count)
-                            //{
-                            //}
-                            //else
-                            //{
+                          
                             DataRow theDRowItem = dtGRNItem.NewRow();
-                            if (!String.IsNullOrEmpty(Convert.ToString(dgwGRNItems.Rows[i].Cells["GrnID"].Value)))
+                            if (!string.IsNullOrEmpty(Convert.ToString(dgwGRNItems.Rows[i].Cells["GrnID"].Value)))
                             {
                                 if (Convert.ToInt32(dgwGRNItems.Rows[i].Cells["GrnID"].Value) > 0)
                                 {
@@ -1122,7 +910,7 @@ namespace IQCare.SCM
                             theDRowItem["BatchName"] = Convert.ToString(dgwGRNItems.Rows[i].Cells["BatchName"].Value);
                             theDRowItem["RecievedQuantity"] = Convert.ToInt32(dgwGRNItems.Rows[i].Cells["RecievedQuantity"].Value);
                             theDRowItem["QtyPerPurchaseUnit"] = Convert.ToInt32(dgwGRNItems.Rows[i].Cells["QtyPerPurchaseUnit"].Value);
-                            if (!String.IsNullOrEmpty(Convert.ToString(dgwGRNItems.Rows[i].Cells["FreeRecievedQuantity"].Value)))
+                            if (!string.IsNullOrEmpty(Convert.ToString(dgwGRNItems.Rows[i].Cells["FreeRecievedQuantity"].Value)))
                             {
                                 theDRowItem["FreeRecievedQuantity"] = Convert.ToInt32(dgwGRNItems.Rows[i].Cells["FreeRecievedQuantity"].Value);
                             }
@@ -1141,26 +929,12 @@ namespace IQCare.SCM
 
                             theDRowItem["MasterPurchaseprice"] = Convert.ToDecimal(dgwGRNItems.Rows[i].Cells["MasterPurchaseprice"].Value);
 
-                            theDRowItem["ExpiryDate"] = String.Format("{0:M/d/yyyy}", Convert.ToDateTime(dgwGRNItems.Rows[i].Cells["ExpiryDate"].Value));
+                            theDRowItem["ExpiryDate"] = string.Format("{0:M/d/yyyy}", Convert.ToDateTime(dgwGRNItems.Rows[i].Cells["ExpiryDate"].Value));
                             theDRowItem["UserID"] = GblIQCare.AppUserId;
                             theDRowItem["POId"] = GblIQCare.PurchaseOrderID;
                             theDRowItem["DestinStoreID"] = Convert.ToInt32(ddlDestinationStore.SelectedValue);
                             theDRowItem["SourceStoreID"] = 0;
-                            //theDRowItem["InKindFlag"] = Convert.ToInt32(dgwGRNItems.Rows[i].Cells["InKindFlag"].Value);
-
-                            //if (rdoPurchaseOrder.Checked)
-                            //{
-                            //    theDRowItem["DestinStoreID"] = Convert.ToInt32(ddlDestinationStore.SelectedValue);
-                            //    theDRowItem["SourceStoreID"] = 0;
-                            //}
-                            //else if (rdoInterStoreTransfer.Checked)
-                            //{
-                            //    theDRowItem["BatchID"] = Convert.ToInt32(dgwGRNItems.Rows[i].Cells["BatchID"].Value);
-
-                            //    theDRowItem["DestinStoreID"] = Convert.ToInt32(ddlDestinationStore.SelectedValue);
-                            //    theDRowItem["SourceStoreID"] = Convert.ToInt32(ddlSourceStore.SelectedValue);
-                            //    theDRowItem["ISTItemID"] = Convert.ToString(dgwGRNItems.Rows[i].Cells["ISTItemID"].Value);
-                            //}
+                            
                             dtGRNItem.Rows.Add(theDRowItem);
                         }
 
@@ -1172,7 +946,7 @@ namespace IQCare.SCM
                 {
                     for (int i = 0; i < dtGRNItem.Rows.Count; i++)
                     {
-                        //if (String.IsNullOrEmpty(Convert.ToString(dtGRNItem.Rows[i]["GrnID"])))
+                        //if (string.IsNullOrEmpty(Convert.ToString(dtGRNItem.Rows[i]["GrnID"])))
                         //{
                        // var rows = dtGRNItem.Select("(AutoId =1000  and ISTItemID='" + ISTItemID + "' and RecievedQuantity <1)");
                         var rows = dtGRNItem.Select("( ISTItemID='" + ISTItemID + "' and RecievedQuantity <1)");
@@ -1195,20 +969,20 @@ namespace IQCare.SCM
             BindGrnItemsGrid();
             if (dgwPOItems.CurrentRow != null)
             {
-                if (!String.IsNullOrEmpty(Convert.ToString(dgwPOItems.CurrentRow.Cells["ItemID"].Value)))
+                if (!string.IsNullOrEmpty(Convert.ToString(dgwPOItems.CurrentRow.Cells["ItemID"].Value)))
                 {
                     dgwPOItems.CurrentRow.Selected = true;
                     if (GblIQCare.ModePurchaseOrder == 2)
                     {
                         ISTItemID = Convert.ToString(dgwPOItems.CurrentRow.Cells["ISTItemID"].Value);
-                        String[] strarr = dgwPOItems.CurrentRow.Cells["ISTItemID"].Value.ToString().Split('-');
-                        ItemID = Convert.ToInt32(strarr[0]);
+                        string[] strarr = dgwPOItems.CurrentRow.Cells["ISTItemID"].Value.ToString().Split('-');
+                        _itemId = Convert.ToInt32(strarr[0]);
                     }
                     else
                     {
-                        ItemID = Convert.ToInt32(dgwPOItems.CurrentRow.Cells["ItemID"].Value);
+                        _itemId = Convert.ToInt32(dgwPOItems.CurrentRow.Cells["ItemID"].Value);
                     }
-                    OrderQuantity = Convert.ToInt32(dgwPOItems.CurrentRow.Cells["OrderQuantity"].Value);
+                    _orderQuantity = Convert.ToInt32(dgwPOItems.CurrentRow.Cells["OrderQuantity"].Value);
                     DataTable theDT = new DataTable();
                     DataView theDV = new DataView(dsPOItemsDetail.Tables[2]);
                     DataView theDVGridItem = new DataView(dtGRNItem);
@@ -1219,11 +993,11 @@ namespace IQCare.SCM
                     }
                     else if (GblIQCare.ModePurchaseOrder == 1)
                     {
-                        theDV.RowFilter = "(ItemID ='" + ItemID + "')";
-                        theDVGridItem.RowFilter = "(ItemID ='" + ItemID + "')";
+                        theDV.RowFilter = "(ItemID ='" + _itemId + "')";
+                        theDVGridItem.RowFilter = "(ItemID ='" + _itemId + "')";
 
                         DataView dvBatch = dsPOItemsDetail.Tables[3].DefaultView;
-                        dvBatch.RowFilter = "(ItemID ='" + ItemID + "')";
+                        dvBatch.RowFilter = "(ItemID ='" + _itemId + "')";
 
                         for (int i = 0; i < dvBatch.Count; i++)
                         {
@@ -1298,7 +1072,7 @@ namespace IQCare.SCM
             DataGridViewRow row = dgwGRNItems.Rows[e.RowIndex];
             if (row != null)
             {
-                if (String.IsNullOrEmpty(Convert.ToString(row.Cells["ItemID"].Value)))
+                if (string.IsNullOrEmpty(Convert.ToString(row.Cells["ItemID"].Value)))
                 {
                     // row.Cells["ExpiryDate"].Value = "";
                 }
@@ -1306,7 +1080,7 @@ namespace IQCare.SCM
                 {
                     //   row.Cells["ExpiryDate"].Value=
                 }
-                //else if (!String.IsNullOrEmpty(Convert.ToString(row.Cells["ExpiryDate"].Value)))
+                //else if (!string.IsNullOrEmpty(Convert.ToString(row.Cells["ExpiryDate"].Value)))
                 //{
 
                 //}
@@ -1326,17 +1100,7 @@ namespace IQCare.SCM
                 {
                     if (Convert.ToString(dgwDataGrid.Rows[e.RowIndex].Cells["ItemPurchasePrice"].Value) != "" && Convert.ToString(dgwDataGrid.Rows[e.RowIndex].Cells["RecievedQuantity"].Value) != "")
                     {
-                        ////dgwDataGrid.Rows[e.RowIndex].Cells["SellingPrice"].Value = Math.Round((Convert.ToDecimal(dgwDataGrid.Rows[e.RowIndex].Cells["ItemPurchasePrice"].Value)) + (Convert.ToDecimal(dgwGRNItems.Rows[e.RowIndex].Cells["MasterPurchaseprice"].Value.ToString()) * (Convert.ToDecimal(dgwGRNItems.Rows[e.RowIndex].Cells["Margin"].Value.ToString()) / 100)), 2);
-                        ////Margin = Convert.ToDecimal(dgwGRNItems.Rows[e.RowIndex].Cells["Margin"].Value);
-                        ////if (Convert.ToString(dgwDataGrid.Rows[e.RowIndex].Cells["QtyPerPurchaseUnit"].Value) != "")
-                        ////{
-                        ////    QtyPerPurchaseUnit = Convert.ToDecimal(dgwDataGrid.Rows[e.RowIndex].Cells["QtyPerPurchaseUnit"].Value);
-                        ////    decimal perpurchasePrice = Convert.ToDecimal(Convert.ToDecimal(dgwDataGrid.Rows[e.RowIndex].Cells["ItemPurchasePrice"].Value) / Convert.ToDecimal(dgwDataGrid.Rows[e.RowIndex].Cells["QtyPerPurchaseUnit"].Value));
-                        ////    decimal MasterperpurchasePrice = Convert.ToDecimal(Convert.ToDecimal(dgwDataGrid.Rows[e.RowIndex].Cells["MasterPurchaseprice"].Value) / Convert.ToDecimal(dgwDataGrid.Rows[e.RowIndex].Cells["QtyPerPurchaseUnit"].Value));
-                        ////    dgwDataGrid.Rows[e.RowIndex].Cells["SellingPricePerDispense"].Value = Math.Round(perpurchasePrice + Convert.ToDecimal(MasterperpurchasePrice * Convert.ToDecimal(Convert.ToDecimal(dgwGRNItems.Rows[e.RowIndex].Cells["Margin"].Value.ToString()) / 100)), 2);
-
-                        ////}
-                        // RecievedQuantity
+                        
                         dgwDataGrid.Rows[e.RowIndex].Cells["TotPurchasePrice"].Value = Convert.ToDecimal(dgwDataGrid.Rows[e.RowIndex].Cells["RecievedQuantity"].Value) * Convert.ToDecimal(dgwDataGrid.Rows[e.RowIndex].Cells["ItemPurchasePrice"].Value);
                     }
                 }
@@ -1357,16 +1121,16 @@ namespace IQCare.SCM
                   dgwGRNItems.AllowUserToAddRows = true;
                     DataTable theDTItems = (DataTable)dgwGRNItems.DataSource;
                     DataView theDV = new DataView(theDTItems);
-                    if (ItemID == 0)
+                    if (_itemId == 0)
                     {
-                        ItemID = Convert.ToInt32(dgwDataGrid.Rows[e.RowIndex - 1].Cells["ItemID"].Value);
+                        _itemId = Convert.ToInt32(dgwDataGrid.Rows[e.RowIndex - 1].Cells["ItemID"].Value);
                     }
-                    theDV.RowFilter = "ItemId=" + ItemID;
+                    theDV.RowFilter = "ItemId=" + _itemId;
                     if (theDV.Count > 0)
                     {
-                    if (!String.IsNullOrEmpty(Convert.ToString(theDV[0]["GRNId"])))
+                    if (!string.IsNullOrEmpty(Convert.ToString(theDV[0]["GRNId"])))
                     {
-                        if (!String.IsNullOrEmpty(Convert.ToString(dgwDataGrid.Rows[e.RowIndex].Cells["GRNId"].Value)))
+                        if (!string.IsNullOrEmpty(Convert.ToString(dgwDataGrid.Rows[e.RowIndex].Cells["GRNId"].Value)))
                         {
                             if (Convert.ToInt32(dgwDataGrid.Rows[e.RowIndex].Cells["GRNId"].Value) == 0)
                             {
@@ -1375,7 +1139,7 @@ namespace IQCare.SCM
                                 {
                                     // DataRow theDR = new DataRow(theDV);
                                     //dtGRNItem.Rows.Remove((DataRow)dgwDataGrid.Rows[e.RowIndex]);
-                                    var rows = dtGRNItem.Select("AutoId = " + AutoId + "and ItemId=" + ItemID );
+                                    var rows = dtGRNItem.Select("AutoId = " + AutoId + "and ItemId=" + _itemId );
                                     foreach (var row in rows)
                                     {
                                         row.Delete();
@@ -1393,23 +1157,17 @@ namespace IQCare.SCM
                     dgwGRNItems.AllowUserToAddRows = true;
                     DataTable theDTItems = (DataTable)dgwGRNItems.DataSource;
                     DataView theDV = new DataView(theDTItems);
-                    if (ItemID == 0)
+                    if (_itemId == 0)
                     {
-                        ItemID = Convert.ToInt32(dgwDataGrid.Rows[e.RowIndex - 1].Cells["ItemID"].Value);
+                        _itemId = Convert.ToInt32(dgwDataGrid.Rows[e.RowIndex - 1].Cells["ItemID"].Value);
                     }
-                    theDV.RowFilter = "ItemId=" + ItemID;
+                    theDV.RowFilter = "ItemId=" + _itemId;
                     if (theDV.Count > 0)
                     {
-                        //DataRow theDRow = theDTItems.NewRow();
-                        //DataRow theDRow = theDTItems.c
-                        //theDRow["ItemId"] = ItemID;
-                        //theDRow["Margin"] = theDV[0]["Margin"];
-                        //theDRow["QtyPerPurchaseUnit"] = theDV[0]["QtyPerPurchaseUnit"];
-                        //theDTItems.Rows.Add(theDRow);
-                        //theDTItems.AcceptChanges();
-                        if (!String.IsNullOrEmpty(Convert.ToString(theDV[0]["GRNId"])))
+                       
+                        if (!string.IsNullOrEmpty(Convert.ToString(theDV[0]["GRNId"])))
                         {
-                            if (!String.IsNullOrEmpty(Convert.ToString(dgwDataGrid.Rows[e.RowIndex].Cells["GRNId"].Value)))
+                            if (!string.IsNullOrEmpty(Convert.ToString(dgwDataGrid.Rows[e.RowIndex].Cells["GRNId"].Value)))
                             {
                                 if (Convert.ToInt32(dgwDataGrid.Rows[e.RowIndex].Cells["GRNId"].Value) == 0)
                                 {
@@ -1436,7 +1194,7 @@ namespace IQCare.SCM
                             DataView theDVItemsbatch = new DataView(theDTItemsbatch);
                             string bchname = Convert.ToString(dgwDataGrid.Rows[e.RowIndex].Cells["BatchName"].Value);
                             // string[] splitarry = bchname.Split('~');
-                            theDVItemsbatch.RowFilter = "ItemId=" + ItemID + " and  Name='" + bchname + "'";
+                            theDVItemsbatch.RowFilter = "ItemId=" + _itemId + " and  Name='" + bchname + "'";
                             if (theDVItemsbatch.Count > 0)
                             {
                                 dgwDataGrid.Rows[e.RowIndex].Cells["ExpiryDate"].Value = theDVItemsbatch[0]["ExpiryDate"];
@@ -1451,7 +1209,7 @@ namespace IQCare.SCM
                             DataView theDVItemsbatch = new DataView(theDTItemsbatch);
                             string bchname = Convert.ToString(dgwDataGrid.Rows[e.RowIndex].Cells["BatchName"].Value);
                             // string[] splitarry = bchname.Split('~');
-                            theDVItemsbatch.RowFilter = "ItemId=" + ItemID + " and  Name='" + bchname + "'";
+                            theDVItemsbatch.RowFilter = "ItemId=" + _itemId + " and  Name='" + bchname + "'";
                             if (theDVItemsbatch.Count > 0)
                             {
                                 dgwDataGrid.Rows[e.RowIndex].Cells["ExpiryDate"].Value = theDVItemsbatch[0]["ExpiryDate"];
@@ -1464,7 +1222,7 @@ namespace IQCare.SCM
                             dgwDataGrid.Rows[e.RowIndex].Cells["Batchid"].Value = theDV[0]["Batchid"];
                         }
 
-                        dgwDataGrid.Rows[e.RowIndex].Cells["ItemId"].Value = ItemID;
+                        dgwDataGrid.Rows[e.RowIndex].Cells["ItemId"].Value = _itemId;
                         dgwDataGrid.Rows[e.RowIndex].Cells["Margin"].Value = theDV[0]["Margin"];
                         dgwDataGrid.Rows[e.RowIndex].Cells["QtyPerPurchaseUnit"].Value = theDV[0]["QtyPerPurchaseUnit"]; ;
                         dgwDataGrid.Rows[e.RowIndex].Cells["MasterPurchaseprice"].Value = theDV[0]["MasterPurchaseprice"];
@@ -1500,7 +1258,7 @@ namespace IQCare.SCM
             {
                 //IMasterList objMasterlist = (IMasterList)ObjectFactory.CreateInstance("BusinessProcess.SCM.BMasterList,BusinessProcess.SCM");
                 IPurchase objMasterlist = (IPurchase)ObjectFactory.CreateInstance("BusinessProcess.SCM.BPurchase,BusinessProcess.SCM");
-                int ret = objMasterlist.SaveGoodreceivedNotes(dtGRNmaster, dtGRNItem, GblIQCare.ModePurchaseOrder);
+                int ret = objMasterlist.SaveGoodReceivedNote(dtGRNmaster, dtGRNItem, GblIQCare.ModePurchaseOrder);
                 if (ret > -1)
                 {
                     IQCareWindowMsgBox.ShowWindow("ProgramSave", this);
@@ -1522,18 +1280,7 @@ namespace IQCare.SCM
             theDRow["OrderDate"] = dtpOrderDate.Text;
             theDRow["DestinStoreID"] = Convert.ToInt32(ddlDestinationStore.SelectedValue);
             theDRow["SupplierID"] = ddlSupplier.SelectedValue;
-            //if (rdoPurchaseOrder.Checked)
-            //{
-            //    theDRow["DestinStoreID"] = Convert.ToInt32(ddlDestinationStore.SelectedValue);
-            //    theDRow["SupplierID"] = ddlSupplier.SelectedValue;
-
-            //}
-            //else if (rdoInterStoreTransfer.Checked)
-            //{
-            //    theDRow["DestinStoreID"] = Convert.ToInt32(ddlDestinationStore.SelectedValue);
-            //    theDRow["SupplierID"] = 0;
-
-            //}
+            
 
             theDRow["UserID"] = GblIQCare.AppUserId;
             theDRow["OrderNo"] = txtOrderNumber.Text;
@@ -1554,11 +1301,11 @@ namespace IQCare.SCM
                    // DataTable theDTItems = (DataTable)dgwDataGrid.DataSource;
                     for (int i = 0; i < dgwDataGrid.Rows.Count; i++)
                     {
-                        if (!String.IsNullOrEmpty(Convert.ToString(dgwDataGrid.Rows[i].Cells["RecievedQuantity"].Value)))
+                        if (!string.IsNullOrEmpty(Convert.ToString(dgwDataGrid.Rows[i].Cells["RecievedQuantity"].Value)))
                         {
                             tempreceiveQuantity = tempreceiveQuantity + Convert.ToInt32(dgwDataGrid.Rows[i].Cells["RecievedQuantity"].Value.ToString());
                         }
-                        if (tempreceiveQuantity > OrderQuantity)
+                        if (tempreceiveQuantity > _orderQuantity)
                         {
                             IQCareWindowMsgBox.ShowWindow("GRNrecQtnGreaterOrderQtn", this);
                             dgwDataGrid.Rows[i].Cells["RecievedQuantity"].Value = 0;
@@ -1584,7 +1331,7 @@ namespace IQCare.SCM
                                     string bchname = Convert.ToString(dgwDataGrid.Rows[e.RowIndex].Cells["BatchName"].Value);
                                     string expDate = Convert.ToString(dgwDataGrid.Rows[e.RowIndex].Cells["ExpiryDate"].Value);
                                     // string[] splitarry = bchname.Split('~');
-                                    theDVItemsbatch.RowFilter = "ItemId=" + ItemID + " and batchName = '" + bchname + "' and  ExpiryDate <>'" + expDate + "'";
+                                    theDVItemsbatch.RowFilter = "ItemId=" + _itemId + " and batchName = '" + bchname + "' and  ExpiryDate <>'" + expDate + "'";
                                     if (theDVItemsbatch.Count > 0)
                                     {
                                         dgwDataGrid.Rows[e.RowIndex].Cells["ExpiryDate"].Value = DBNull.Value;
@@ -1599,36 +1346,7 @@ namespace IQCare.SCM
             }
       
 
-            //    if (e.ColumnIndex == 5)
-            //    {
-            //        if (dgwDataGrid.Columns[e.ColumnIndex].Name == "ExpiryDate" && dgwDataGrid.Rows[e.RowIndex].Cells["ExpiryDate"].Value != null)
-            //        {
-            //            if (Convert.ToString(dgwDataGrid.Rows[e.RowIndex].Cells["ExpiryDate"].Value) != "")
-            //            {
-
-
-            //                if (GblIQCare.ModePurchaseOrder == 1)
-            //                {
-            //                    DataTable theDTItemsbatch = (DataTable)dsPOItemsDetail.Tables[3];
-            //                    DataView theDVItemsbatch = new DataView(theDTItemsbatch);
-            //                    string bchname = Convert.ToString(dgwDataGrid.Rows[e.RowIndex].Cells["BatchName"].Value);
-            //                    string expDate = Convert.ToString(dgwDataGrid.Rows[e.RowIndex].Cells["ExpiryDate"].Value);
-            //                    // string[] splitarry = bchname.Split('~');
-            //                    theDVItemsbatch.RowFilter = "ItemId=" + ItemID + " and Name = '"+bchname+"' and  ExpiryDate <>'" + expDate + "'";
-            //                    if (theDVItemsbatch.Count > 0)
-            //                    {
-            //                        dgwDataGrid.Rows[e.RowIndex].Cells["ExpiryDate"].Value = DBNull.Value;
-            //                        IQCareWindowMsgBox.ShowWindow("ExpiryExistAss", this);
-            //                        return;
-            //                    }
-            //                }
-            //            }
-            //        }
-            //    }
-
-            //}
-
-       // }
+            
 
         private void dgwPOItems_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
@@ -1636,7 +1354,7 @@ namespace IQCare.SCM
             DataGridViewRow row = dgwPOItems.Rows[e.RowIndex];
             if (row != null)
             {
-                if (!String.IsNullOrEmpty(Convert.ToString(row.Cells["GrnID"].Value)))
+                if (!string.IsNullOrEmpty(Convert.ToString(row.Cells["GrnID"].Value)))
                 {
                     if (Convert.ToInt32(row.Cells["GrnID"].Value) > 0)
                     {
@@ -1651,7 +1369,7 @@ namespace IQCare.SCM
             DataGridViewRow row = dgwGRNItems.Rows[e.RowIndex];
             if (row != null)
             {
-                if (!String.IsNullOrEmpty(Convert.ToString(row.Cells["GrnID"].Value)))
+                if (!string.IsNullOrEmpty(Convert.ToString(row.Cells["GrnID"].Value)))
                 {
                     if (Convert.ToInt32(row.Cells["GrnID"].Value) > 0)
                     {
@@ -1664,16 +1382,7 @@ namespace IQCare.SCM
                 }
             }
         }
-
-
-        //private void ddlSourceStore_SelectedValueChanged(object sender, EventArgs e)
-        //{
-        //    if (ddlSourceStore.SelectedIndex > 0)
-        //    {
-        //        BindGrid(GblIQCare.ModePurchaseOrder);
-
-        //    }
-        //}
+        
         private void ISTpatriaReceived()
         {
             if (dtGRNItem.Rows.Count > 0)
@@ -1719,11 +1428,11 @@ namespace IQCare.SCM
             DataTable theDTItems = (DataTable)dgwGRNItems.DataSource;
                 for (int i = 0; i < theDTItems.Rows.Count; i++)
                 {
-                    if (!String.IsNullOrEmpty(Convert.ToString(theDTItems.Rows[i]["RecievedQuantity"])))
+                    if (!string.IsNullOrEmpty(Convert.ToString(theDTItems.Rows[i]["RecievedQuantity"])))
                     {
                         tempreceiveQuantity = tempreceiveQuantity + Convert.ToInt32(theDTItems.Rows[i]["RecievedQuantity"].ToString());
                     }
-                    if (tempreceiveQuantity > OrderQuantity || (tempreceiveQuantity == OrderQuantity))
+                    if (tempreceiveQuantity > _orderQuantity || (tempreceiveQuantity == _orderQuantity))
                     {
 
                        ret = false;
@@ -1739,11 +1448,6 @@ namespace IQCare.SCM
             thetempDVItem.RowFilter = "(ISTItemID ='" + ISTItemID + "')";
             if (thetempDVItem.Count > 0)
             {
-                //if (!String.IsNullOrEmpty(Convert.ToString(theDVItem[dtGRNItemrowcount - 1]["Grnid"])))
-                //{
-                //    if (Convert.ToInt32(theDVItem[dtGRNItemrowcount - 1]["Grnid"]) > 0)
-                //    {
-                // int i = gridRowCount - 2;
                 DataRow theDRowItem = dtGRNItem.NewRow();
                 theDRowItem["GrnID"] = DBNull.Value;
              //   theDRowItem["AutoID"] = 1000;
@@ -1752,7 +1456,7 @@ namespace IQCare.SCM
                 theDRowItem["BatchName"] = Convert.ToString(thetempDVItem[0]["BatchName"]);
                 theDRowItem["RecievedQuantity"] = 0;
                 theDRowItem["QtyPerPurchaseUnit"] = Convert.ToInt32(thetempDVItem[0]["QtyPerPurchaseUnit"]);
-                if (!String.IsNullOrEmpty(Convert.ToString(thetempDVItem[0]["FreeRecievedQuantity"])))
+                if (!string.IsNullOrEmpty(Convert.ToString(thetempDVItem[0]["FreeRecievedQuantity"])))
                 {
                     theDRowItem["FreeRecievedQuantity"] = Convert.ToInt32(thetempDVItem[0]["FreeRecievedQuantity"]);
                 }
@@ -1771,25 +1475,14 @@ namespace IQCare.SCM
 
                 theDRowItem["MasterPurchaseprice"] = Convert.ToDecimal(thetempDVItem[0]["MasterPurchaseprice"]);
 
-                theDRowItem["ExpiryDate"] = String.Format("{0:M/d/yyyy}", Convert.ToDateTime(thetempDVItem[0]["ExpiryDate"]));
+                theDRowItem["ExpiryDate"] = string.Format("{0:M/d/yyyy}", Convert.ToDateTime(thetempDVItem[0]["ExpiryDate"]));
                 theDRowItem["UserID"] = GblIQCare.AppUserId;
                 theDRowItem["POId"] = GblIQCare.PurchaseOrderID;
 
                 theDRowItem["DestinStoreID"] = Convert.ToInt32(ddlDestinationStore.SelectedValue);
                 theDRowItem["SourceStoreID"] = 0;
                 theDRowItem["InKindFlag"] = Convert.ToInt32(thetempDVItem[0]["InkindFlag"]);
-                //if (rdoPurchaseOrder.Checked)
-                //{
-                //    theDRowItem["DestinStoreID"] = Convert.ToInt32(ddlDestinationStore.SelectedValue);
-                //    theDRowItem["SourceStoreID"] = 0;
-                //}
-                //else if (rdoInterStoreTransfer.Checked)
-                //{
-                //    theDRowItem["BatchID"] = Convert.ToInt32(thetempDVItem[0]["BatchID"]);
-                //    theDRowItem["DestinStoreID"] = Convert.ToInt32(ddlDestinationStore.SelectedValue);
-                //    theDRowItem["SourceStoreID"] = Convert.ToInt32(ddlSourceStore.SelectedValue);
-                //    theDRowItem["ISTItemID"] = Convert.ToString(thetempDVItem[0]["ISTItemID"]);
-                //}
+                
                 dtGRNItem.Rows.Add(theDRowItem);
 
                 DataTable theDT = new DataTable();
@@ -1802,13 +1495,16 @@ namespace IQCare.SCM
         private void btnprint_Click(object sender, EventArgs e)
         {
             ReportDocument objRptDoc = new ReportDocument();
-            DataSet dsPrintPOItemsDetail = new DataSet();
-            //IMasterList objStockLedger = (IMasterList)ObjectFactory.CreateInstance("BusinessProcess.SCM.BMasterList,BusinessProcess.SCM");
+          //  DataSet dsPrintPOItemsDetail = new DataSet();
+
             IPurchase objPOItem = (IPurchase)ObjectFactory.CreateInstance("BusinessProcess.SCM.BPurchase,BusinessProcess.SCM");
-            dsPrintPOItemsDetail = objPOItem.GetPurchaseOrderDetailsByPoidGRN(GblIQCare.PurchaseOrderID);
-            dsPrintPOItemsDetail.WriteXmlSchema(GblIQCare.GetXMLPath() + "\\GooodsReceivedNote.xml");
-            rptGRN rep = new rptGRN();
-            rep.SetDataSource(dsPrintPOItemsDetail);
+           // dsPrintPOItemsDetail = objPOItem.GetPurchaseOrderDetailsByPoidGRN(GblIQCare.PurchaseOrderID);
+           // dsPrintPOItemsDetail.WriteXmlSchema(GblIQCare.GetXMLPath() + "\\GooodsReceivedNote.xml");
+
+         DataSet ds =   objPOItem.GetPurchaseOrderItems(GblIQCare.PurchaseOrderID);
+            ds.WriteXmlSchema(GblIQCare.GetXMLPath() + "\\GooodsReceivedNote.xml");
+            rptGRNv2 rep = new rptGRNv2();
+            rep.SetDataSource(ds);
             //  rep.ParameterFields["FormDate","1"];
             rep.SetParameterValue("ModePurchaseOrder", GblIQCare.ModePurchaseOrder);
             rep.SetParameterValue("facilityname", GblIQCare.AppLocation);

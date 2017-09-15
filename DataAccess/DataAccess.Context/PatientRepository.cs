@@ -53,8 +53,9 @@ namespace DataAccess.Context
         {
             return context.Set<Patient>().Find(id);
         }
+
         //public override IQueryable<PatientVisit> Filter(System.Linq.Expressions.Expression<Func<PatientVisit, bool>> filter)
-        //{
+       
         //    return context.PatientVisit.Where(filter);
         //}
         public virtual List<PatientVisit> GetAllPatientVisits(int patientId)

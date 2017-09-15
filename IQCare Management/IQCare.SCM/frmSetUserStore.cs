@@ -30,7 +30,11 @@ namespace IQCare.SCM
             theStyle.setStyle(this);
             lblUserName.Text = GblIQCare.AppUserName;
             BindStoreNameDropdown(GblIQCare.AppUserId);
-            if (GblIQCare.theArea == "IV") lblStore.Text = "Select Source Store";
+            if (GblIQCare.theArea == "IV" || GblIQCare.theArea=="CR_IV") lblStore.Text = "Select Source Store";
+            if(GblIQCare.theArea == "Dispense") lblStore.Text = "Select Dispensing Store";
+            if(GblIQCare.CurrentMenu == MenuChoice.IssueVoucher ) lblStore.Text = "Select Source Store";
+          if( GblIQCare.CurrentMenu == MenuChoice.CRWithIV)  lblStore.Text = "Destination Store Name:";
+            if (GblIQCare.CurrentMenu == MenuChoice.Dispense) lblStore.Text = "Select Dispensing Store";
         }
         private void BindStoreNameDropdown(int UserID)
         {
@@ -40,7 +44,22 @@ namespace IQCare.SCM
             DataTable theDT = objProgramlist.GetStoreByUser(UserID);
             DataView theDV = new DataView(theDT);
             BindFunctions theBind = new BindFunctions();
-            switch(GblIQCare.theArea)
+            switch (GblIQCare.CurrentMenu)
+            {
+                case MenuChoice.PurchaseOrder:  //purchase order or good received note
+                case MenuChoice.GoodReceived:
+                case MenuChoice.POWithGRN:
+                    theDV.RowFilter = "StoreCategory = 'Purchasing' ";
+                    break;
+                case MenuChoice.Dispense:
+                    theDV.RowFilter = "StoreCategory = 'Dispensing' ";
+                    break;
+                case MenuChoice.CounterRequistion: //counter requisition
+                case MenuChoice.CRWithIV:
+                    theDV.RowFilter = "StoreCategory <> 'Purchasing' ";
+                    break;
+            }
+            /*switch (GblIQCare.theArea)
             {
                 case  "PO":  //purchase order or good received note
                 case "GRN":
@@ -52,20 +71,8 @@ namespace IQCare.SCM
                 case "CR": //counter requisition
                     theDV.RowFilter = "StoreCategory <> 'Purchasing' ";
                     break;
-            }
-            /*
-             if ((GblIQCare.theArea == "PO")||(GblIQCare.theArea == "GRN") )
-            {
-
-              theDV.RowFilter = "CentralStore=1";
-               
-            }
-            
-            else if ((GblIQCare.theArea == "Dispense")  || (GblIQCare.theArea == "CR"))
-            //else if ((GblIQCare.theArea == "Dispense")  || (GblIQCare.theArea == "CR")  || (GblIQCare.theArea == "IV"))
-            {
-                theDV.RowFilter = "CentralStore=0";
             }*/
+        
             DataTable theStoreDT = theDV.ToTable();
             theBind.Win_BindCombo(ddlStoreName, theStoreDT, "StoreName", "StoreId","StoreName");
             if (theDT.Rows.Count == 2)
@@ -86,7 +93,9 @@ namespace IQCare.SCM
             }
                 
             GblIQCare.intStoreId = Convert.ToInt32(ddlStoreName.SelectedValue);
-            if ((GblIQCare.theArea == "PO")||(GblIQCare.theArea == "CR"))
+
+            
+            if ((GblIQCare.theArea == "PO")|| (GblIQCare.theArea == "PO_GRN") || (GblIQCare.theArea == "CR") || (GblIQCare.theArea == "CR_IV"))
             {
                 DataTable theDT = (DataTable)ddlStoreName.DataSource;
                 DataView theDV = new DataView(theDT);
@@ -128,33 +137,25 @@ namespace IQCare.SCM
                 theForm.Show();
                 this.Close();
             }
-            if ((GblIQCare.theArea == "GRN")||(GblIQCare.theArea == "IV"))
+          else  if ((GblIQCare.theArea == "GRN")||(GblIQCare.theArea == "IV") )
             {
                 DataTable theDT = (DataTable)ddlStoreName.DataSource;
                 DataView theDV = new DataView(theDT);
-                #region changeset2
+               
                 string rowFilter = "StoreId=" + ddlStoreName.SelectedValue.ToString();
                 if ((GblIQCare.theArea == "GRN"))
                 {
                     rowFilter += " and StoreCategory='Purchasing'";
                    // rowFilter += " and CentralStore=1";
                 }
+                if ((GblIQCare.theArea == "PO_GRN"))
+                {
+                    rowFilter += " and StoreCategory='Purchasing'";
+                    // rowFilter += " and CentralStore=1";
+                }
                 theDV.RowFilter = rowFilter;
-                GblIQCare.ModePurchaseOrder = (GblIQCare.theArea == "IV") ? 2 : 1;
-                #endregion
-                  //theDV.RowFilter ="StoreId=" + ddlStoreName.SelectedValue.ToString() + " and CentralStore=1";
-                //if (theDV.Count < 1)
-                //{
-                //    IQCareWindowMsgBox.ShowWindow("StoreNotAuthorize", this);
-                //    return;
-                //    GblIQCare.ModePurchaseOrder = 2;
-
-                //}
-                //else
-                //{
-                //    GblIQCare.ModePurchaseOrder = 1;
-
-                //}
+                GblIQCare.ModePurchaseOrder = (GblIQCare.theArea == "IV" || (GblIQCare.theArea == "CR_IV")) ? 2 : 1;
+                
                 Form theForm = (Form)Activator.CreateInstance(Type.GetType("IQCare.SCM.frmViewGoodReceiveNote, IQCare.SCM"));
                 theForm.Top = 2;
                 theForm.Left = 2;

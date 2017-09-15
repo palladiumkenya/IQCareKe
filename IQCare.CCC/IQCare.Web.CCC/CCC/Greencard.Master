@@ -1,0 +1,610 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Greencard.master.cs" Inherits="IQCare.Web.CCC.Greencard" %>
+
+<%@ Register Src="~/MasterPage/levelOneNavigationUserControl.ascx" TagName="levelOneNavigationUserControl"
+	TagPrefix="uc1" %>
+
+<%@ Register Assembly="AjaxControlToolkit" TagPrefix="cc1" Namespace="AjaxControlToolkit" %>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head  runat="server" id="pageHead">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	 <meta http-equiv="X-UA-Compatible" content="IE=11,chrome=1" />
+	<title id="lblTitle" runat="server">International Quality Care Patient Management and Monitoring System</title>
+	
+	<link href="<%# ResolveUrl("~/Content/css/bootstrap.css") %>" rel="stylesheet" type="text/css" />
+   <%--  <link href="<%# ResolveUrl("~/CCC/Scripts/css/bootstrap.css") %>" rel="stylesheet" type="text/css" />--%>
+	<link href="<%# ResolveUrl("~/Content/css/bootstrap-theme.css") %>" rel="stylesheet"  type="text/css" />
+	<link href="<%# ResolveUrl("~/Content/css/bootstrap-callout.css")%>" rel="stylesheet" />
+    <link href="<%# ResolveUrl("Scripts/css/bootstrap-datetimepicker.min.css") %>" rel="stylesheet" />
+	<link href="<%# ResolveUrl("~/Content/css/font-awesome.css") %>" rel="stylesheet"type="text/css" />
+	<link href="<%# ResolveUrl("~/Content/css/parsley.css") %>" rel="stylesheet" type="text/css" />
+	<link href="<%# ResolveUrl("~/Style/styles.css") %>" rel="stylesheet" type="text/css" />
+	<link href="<%# ResolveUrl("~/Style/calendar.css") %>" rel="stylesheet" type="text/css" />
+	<link href="<%# ResolveUrl("~/Style/_assets/css/grid.css") %>" rel="stylesheet" type="text/css" />
+	<link href="<%# ResolveUrl("~/Style/_assets/css/round.css") %>" rel="stylesheet" type="text/css" />
+	<link href="<%# ResolveUrl("~/Content/css/iqcare.ke-font.css") %>" rel="stylesheet"type="text/css" />
+	<link href="<%# ResolveUrl("~/Style/StyleSheet.css") %>" rel="stylesheet" type="text/css" />
+	<link href="<%# ResolveUrl("~/Content/fuelux/css/fuelux.css")  %>" rel="stylesheet" type="text/css" />
+	<link href="<%# ResolveUrl("~/Content/pace/css/pace.css")  %>" rel="stylesheet" type="text/css" />
+	<link href="<%# ResolveUrl("~/Content/datatables/css/datatables.css")  %>" rel="stylesheet" type="text/css" />
+	<link href="<%# ResolveUrl("~/Content/datatables/css/jquery.datatables.css")  %>" rel="stylesheet" type="text/css" />
+	<link href="<%# ResolveUrl("~/Content/toast/css/toastr.css")  %>" rel="stylesheet" type="text/css" />
+	<link href="<%# ResolveUrl("~/Content/css/awesomplete.css")  %>" rel="stylesheet" type="text/css"/>
+	<link href="<%# ResolveUrl("~/CCC/Scripts/css/mbExtruder.css")  %>" rel="stylesheet" type="text/css" />
+	<link href="<%# ResolveUrl("~/CCC/Scripts/css/customCss.css") %>" rel="stylesheet" type="text/css" />
+	<link href="<%# ResolveUrl("~/CCC/Scripts/css/style-267.css") %>" rel="stylesheet" type="text/css" />
+	<link href="<%# ResolveUrl("~/CCC/Scripts/css/style-291.css") %>" rel="stylesheet" type="text/css" />
+<%--    <link href="<%# ResolveUrl("~/CCC/Scripts/css/mdb.css") %>" rel="stylesheet" type="text/css" />
+    <link href="<%# ResolveUrl("~/CCC/Scripts/css/style.css") %>" rel="stylesheet" type="text/css" />--%>
+    <link href="<%# ResolveUrl("~/CCC/Scripts/css/sweetalert2.css") %>" rel="stylesheet" type="text/css" />
+    <link href="<%# ResolveUrl("~/CCC/Scripts/css/lobipanel.css") %>" rel="stylesheet" type="text/css" />
+    <link href="<%# ResolveUrl("~/CCC/Scripts/css/jquery.onoff.css") %>" rel="stylesheet" type="text/css" />  
+    <link href="<%# ResolveUrl("~/CCC/Scripts/css/select2.css") %>" rel="stylesheet" type="text/css" />
+    <link href="<%# ResolveUrl("~/CCC/Scripts/css/chosen.css") %>" rel="stylesheet" type="text/css" />  
+    <link href="<%# ResolveUrl("~/CCC/Scripts/css/patientSummary.css") %>" rel="stylesheet" type="text/css" />
+    
+
+	<script src="<%# ResolveUrl("~/Incl/jquery-1.9.1.js")%>" type="text/javascript" ></script>
+  <script src="<%# ResolveUrl("~/CCC/Scripts/js/jquery-ui-1.9.1.js") %>" type="text/javascript"></script>
+	<script src="<%# ResolveUrl("~/Content/js/bootstrap.js") %>" type="text/javascript"></script>
+	<script src="<%# ResolveUrl("~/Incl/menu.js") %>" type="text/javascript"></script> 
+	<script src="<%# ResolveUrl("~/Incl/IQCareScript.js") %>" type="text/javascript"></script>
+	<script src="<%# ResolveUrl("~/Incl/highlightLabels.js") %>" type="text/javascript"></script>
+	<script src="<%# ResolveUrl("~/Content/js/moment.js") %>" type="text/javascript"></script>
+    
+
+    <script src="<%# ResolveUrl("~/Incl/jsDate.js") %>" type="text/javascript"></script>
+	<script src="<%# ResolveUrl("~/Incl/quicksearch.js") %>" type="text/javascript">  </script>
+    <script type="text/javascript">"use strict";</script>
+	<script src="<%# ResolveUrl("~/Content/js/parsley.js")%>" type="text/javascript"></script>
+	<script src="<%# ResolveUrl("~/Content/fuelux/js/fuelux.js")%>" type="text/javascript"></script>
+	<script src="<%# ResolveUrl("~/Content/pace/js/pace.js")%>" type="text/javascript"></script>
+	<script src="<%# ResolveUrl("~/Content/datatables/js/jquery.dataTables.js")%>" type="text/javascript"></script>
+	<script src="<%# ResolveUrl("~/Content/toast/js/toastr.js")%>" type="text/javascript"></script>
+	<script src="<%# ResolveUrl("~/Content/js/awesomplete.js")  %>" type="text/javascript"></script>
+	<script src="<%# ResolveUrl("~/Content/js/highcharts.js")  %>" type="text/javascript"></script>
+	<script src="<%# ResolveUrl("~/Content/js/vl_linegraph.js")  %>" type="text/javascript"></script>
+	<script src="<%# ResolveUrl("~/Content/js/parsley-fields-comparison-validators.js")%>" type="text/javascript"></script>
+	<script src="<%# ResolveUrl("~/CCC/Scripts/js/mbExtruder.js")%>" type="text/javascript"></script>
+	<script src="<%# ResolveUrl("~/CCC/Scripts/js/jquery.mb.flipText.js")%>" type="text/javascript"></script>
+	<script src="<%# ResolveUrl("~/CCC/Scripts/js/bootbox.js")%>" type="text/javascript"></script>
+    <script src="<%# ResolveUrl("~/CCC/Scripts/js/PatientEncounter.js")%>" type="text/javascript"></script>
+  
+	<script src="<%# ResolveUrl("~/CCC/Scripts/js/placeholder.js")%>" type="text/javascript"></script>
+	<script src="<%# ResolveUrl("~/CCC/Scripts/js/respond.min.js")%>" type="text/javascript"></script>
+	<script src="<%# ResolveUrl("~/CCC/Scripts/js/html5shiv.js")%>" type="text/javascript"></script>
+<%--    <script src="<%# ResolveUrl("~/CCC/Scripts/js/tether.js")%>" type="text/javascript"></script>
+    <script src="<%# ResolveUrl("~/CCC/Scripts/js/mdb.js")%>" type="text/javascript"></script>--%>
+    <script src="<%# ResolveUrl("~/CCC/Scripts/js/select2.min.js") %>" type="text/javascript"></script>
+
+    <script src="<%# ResolveUrl("~/CCC/Scripts/js/chosen.jquery.js") %>" type="text/javascript"></script>
+    <script src="<%# ResolveUrl("~/CCC/Scripts/js/init.js") %>" type="text/javascript"></script>
+    <script src="<%# ResolveUrl("~/CCC/Scripts/js/prism.js") %>" type="text/javascript"></script>
+    <script src="<%# ResolveUrl("~/Incl/dateformat.js") %>" type="text/javascript"></script>
+    <script src="<%# ResolveUrl("Scripts/js/bootstrap-datetimepicker.min.js") %>" type="text/javascript"></script>
+    <script src="<%# ResolveUrl("Scripts/js/sweetalert2.js") %>" type="text/javascript"></script>
+    <script src="<%# ResolveUrl("Scripts/js/lobipanel.js") %>" type="text/javascript"></script>
+    <script src="<%# ResolveUrl("Scripts/js/jquery.onoff.js") %>" type="text/javascript"></script>
+
+</head>
+
+<body style="padding-bottom: 60px" class="fuelux">
+	<input type="hidden" id="isNewEncounter" runat="server" value="" />
+	<script type="text/javascript">
+	</script>
+	
+	 <div class="container-fluid">
+		  <form id="form1" class="form" runat="server" clientidmode="Static" enctype="multipart/form-data">
+		
+				<asp:ScriptManager ID="masterScriptManager" runat="server" EnablePageMethods="true" EnablePartialRendering="true" ScriptMode="Auto"> </asp:ScriptManager>
+				
+				<div class="row"  style="margin-bottom:1.5%">
+					  <div class="col-md-12 navbar navbar-fixed-top navbar-static-top bg-primary">
+						   <!-- Brand and toggle get grouped for better mobile display -->
+				
+						   <div class="navbar-header">
+							 <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+								<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span><span
+									class="icon-bar"></span><span class="icon-bar"></span>
+							 </button>
+						   </div>
+
+						   <div class="navbar-brand">
+								<div id="facilityName" align="right" runat="server">
+									<asp:Label ID="lblLocation" ForeColor="ActiveCaption" CssClass="fa fa-h-square text-uppercase " runat="server" Text=" Nsambya Hospital and Medical Center"></asp:Label>
+									<span class="text-muted">|</span>
+									<asp:Label ID="lblUserName" ForeColor="ActiveCaption" CssClass="text-muted " runat="server" Text=" Lanette Burrows"></asp:Label>
+									<span class="text-muted">|</span>
+									<asp:Label ID="lblDate" CssClass="text-muted" ForeColor="ActiveCaption" runat="server" Text="30 September 2006"></asp:Label>
+								</div>
+						   </div>
+
+						   <!-- Collection of nav links and other content for toggling -->
+						   <div id="navbarCollapse" class="collapse navbar-collapse">
+								<ul class="nav navbar-nav">
+									<%--<li class="active"><a href="#">Home</a></li><li><a href="#">Profile</a></li><li><a href="#">Messages</a></li>--%>
+								</ul>
+								<ul class="nav navbar-nav navbar-right" style="padding-right: 5px">
+									<li><a href="../IQCareHelp/index.html" target="_blank"><span class="fa fa-exclamation-circle text-muted"
+										style="color: ActiveCaption">Help</span> </a></li>
+									<li>
+										<asp:LinkButton ID="lnkPassword" runat="server" Font-Bold="True" OnClick="lnkPassword_Click"><span class="fa fa-unlock-alt text-muted" style=" color:ActiveCaption"> Password</span> </asp:LinkButton>
+									</li>
+									<li>
+										<asp:LinkButton ID="lnkReportDefect" runat="server" OnClientClick="window.open('http://122.160.201.164:82/iqcareissue-report/default.aspx');"
+											Font-Bold="True"><span class="fa fa-bug text-muted" style=" color:ActiveCaption"> Report Defect</span></asp:LinkButton></li>
+									<li class="active">
+										<asp:LinkButton ID="lnkLogOut" runat="server" Font-Bold="True" OnClick="lnkLogOut_Click"><span class="fa fa-sign-out text-muted" style=" color:ActiveCaption"> Logout</span> </asp:LinkButton>
+									</li>
+								</ul>
+						   </div><!-- .navbarCollapse -->
+					  </div><!-- .navbar -->
+				 </div><%-- .row--%>
+
+				 <div class="row" style="padding-bottom: 0%;margin-bottom: 0%">
+					  <div id="level1Navigation" style="padding-top: 1%">                         
+						  <uc1:levelOneNavigationUserControl ID="navUserControl" runat="server" />
+					  </div>
+				 </div>
+
+
+				<div class="row" style="padding-top: 0%">
+						  <div class="col-md-10 col-xs-10 col-sm-10">
+							   <asp:ContentPlaceHolder ID="IQCareContentPlaceHolder" runat="server"></asp:ContentPlaceHolder>
+							   <IQ:ProgressControl ID="ProgressControl1" runat="server" />
+						  </div>
+										 
+					 <div class="col-md-2 col-xs-12 col-sm-12" style="padding-top:0%">
+						 <div class="list-group">
+							   
+						 <%--      <i a href="#" class='list-group-item'>
+									<asp:HyperLink ID="Link1" runat="server"  CssClass="ui-icon-link  text-muted"  NavigateUrl="~/CCC/Patient/PatientFinder.aspx" Text="Add Vendor" />
+								</i>--%>
+							  <a href="#" class="list-group-item active" id="FindAddPatienta">
+									<span class=""></span> Find /Add Patients<span class="badge"></span>
+								</a>
+
+								<a href='<%=ResolveClientUrl("~/CCC/Patient/PatientFinder.aspx") %>' class="list-group-item">
+									<span class="fa fa-search fa-2x pull-left text-warning"></span> <strong>Find Patients</strong> <span class="badge">
+										<asp:Label ID="lblPatientCount" runat="server">0</asp:Label></span>
+							   
+								</a>
+								
+								<a  href='<%=ResolveClientUrl("~/CCC/Patient/PatientRegistration.aspx") %>' class="list-group-item">
+									<span class="fa fa-user-plus fa-2x pull-left text-warning"></span><strong class="text-info">
+                                        <asp:Label ID="lblRegistration" runat="server" Text="Label"></asp:Label></strong> 
+								</a>
+
+								<a href="#" class="list-group-item active" id="titlePatientBaseline">
+									<span class=""></span> Patient Baseline<span class="badge"></span>
+								</a>
+
+							  <a href='<%=ResolveClientUrl("~/CCC/OneTimeEvents/Baseline.aspx") %>' class="list-group-item" id="menuBaseline">
+									<span class="fa fa-bar-chart fa-2x pull-left text-warning"></span> <strong class="text-warning">Treatment Baseline</strong>
+								</a>
+							  <a href='<%=ResolveClientUrl("~/CCC/OneTimeEvents/FamilyTesting.aspx") %>' class="list-group-item" id="menuFamilyTesting">
+									<span class="fa fa-users fa-2x pull-left text-warning"></span><strong class="text-warning"> Family Testing </strong><span class="badge"><asp:Label ID="lblFamilyTesting" runat="server">0</asp:Label></span>
+								</a>
+							  <a href='<%=ResolveClientUrl("~/CCC/OneTimeEvents/OneTimeEventsTracker.aspx") %>' class="list-group-item" id="MenuOneTimeEventsTracker">
+									<span class="fa fa-cubes fa-2x pull-left text-warning"></span> <strong class="text-warning">One Time Events Tracker </strong>
+							  </a>
+
+							  <a href="#" class="list-group-item active" id="titlePatientEncounter">
+								   <span class=""></span> Clinical Encounters<span class="badge"></span>
+							  </a> 
+							  
+							  <a  href='<%=ResolveClientUrl("~/CCC/Patient/PatientHome.aspx") %>' class="list-group-item" id="menuPatientHome" >
+									<span class="fa fa-home fa-2x pull-left text-info"></span> <strong class="text-info">Patient Home</strong>
+								</a>
+							  
+							 
+
+<%--                              <asp:LinkButton ID="LinkButton1" runat="server" OnClick="New_Encounter_Click" CssClass="list-group-item">
+								  <span class="fa fa-arrow-circle-o-right fa-2x pull-left text-info"></span>Start Encounter</asp:LinkButton>--%>
+							  
+								<a href="#" id="menuStartEncounter" class="list-group-item" onclick="return false">
+									<span class="fa fa-sign-in fa-2x pull-left text-warning"></span> <strong class="text-success">Patient Checkin </strong>
+								</a>
+
+						     <a  href='<%=ResolveClientUrl("~/CCC/Encounter/VitalSigns.aspx") %>' class="list-group-item" id="menuPatientVitals" >
+						         <span class="fa fa-heartbeat fa-2x pull-left text-info"></span><strong class="text-info">Patient Vital Signs</strong>
+						     </a>	
+                             
+						     <a  href='<%=ResolveClientUrl("~/CCC/Encounter/ArtDistributionForm.aspx") %>' class="list-group-item" id="menuArtDistribution" >
+						         <span class="fa fa-user-md fa-2x pull-left text-info"></span><strong class="text-info">ART Fast Track</strong>
+						     </a>
+
+							   <asp:LinkButton ID="menuNewEncounter" ClientIDMode="Static" runat="server" OnClick="New_Encounter_Click" CssClass="list-group-item">
+								  <span class="fa fa-user-md fa-2x pull-left text-info"></span><strong class="text-info">New Clinical Encounter</strong></asp:LinkButton>
+                             
+                               <asp:LinkButton ID="menuPharmacyPrescription" ClientIDMode="Static" runat="server" CssClass="list-group-item" OnClick="menuPharmacyPrescription_Click">
+								  <span class="fa fa-tint fa-2x pull-left text-info"></span><strong class="text-info">Pharmacy</strong></asp:LinkButton>
+
+                             <asp:LinkButton ID="menuLabOrder" ClientIDMode="Static" runat="server" CssClass="list-group-item" OnClick="menuLabOrder_Click" >
+								  <span class="fa fa-flask fa-2x pull-left text-info"></span><strong class="text-info">Lab Order</strong></asp:LinkButton>
+                             
+	 
+							
+
+                          
+							  <asp:LinkButton ID="LinkButton2" ClientIDMode="Static"  runat="server" OnClick="EncounterHistory_Click" CssClass="list-group-item">
+								  <span class="fa fa-file-text-o fa-2x pull-left text-info"></span><strong class="text-info">Encounter History</strong>
+
+							  </asp:LinkButton>
+
+                             <asp:LinkButton ID="menuMoH257" runat="server" ClientIDMode="Static" OnClick="menuMoH257_Click" CssClass="list-group-item">
+                                 <span class="iq iq-awareness-ribbon fa-2x  text-info pull-left"></span><strong class="text-info">Bluecard Encounters </strong>
+                             </asp:LinkButton>
+
+								<!--<a  href="/CCC/Enrollment/ServiceEnrollment.aspx" class="list-group-item">
+									<span class="fa fa-arrow-circle-o-right fa-1x pull-left text-danger"></span> Enrollment  <span class="badge">8</span>
+								</a>-->
+								<a href='<%=ResolveClientUrl("~/CCC/Appointment/PatientAppointments.aspx") %>' class="list-group-item" id="menuPatientAppointments">
+									<span class="fa fa-calendar fa-2x text-info pull-left"></span><strong class="text-info">Appointments </strong><span class="badge"><asp:Label ID="lblAppointments" runat="server">0</asp:Label></span>
+								</a>
+							  
+								<a href="<%=ResolveClientUrl("~/CCC/Patient/PatientCareEnded.aspx") %>" class="list-group-item" id="menuPatientCareEnded">
+									<span class="fa fa-user-times fa-2x pull-left text-danger"></span><strong class="text-info">Patient Care Ending</strong>
+								</a>
+                             
+                                <a href='<%=ResolveClientUrl("~/CCC/Patient/PatientFinder.aspx?reset=1") %>' id="menuStopEncounter" onclick="return false" class="list-group-item" >
+									<span class="fa fa-sign-out fa-2x pull-left text-danger"></span><strong class="text-danger"> Patient Checkout </strong>
+								</a>
+
+						  </div>
+					</div>
+				</div>
+			  
+		      <!-- Modal -->
+		      <div id="reenrollmentModal" class="modal fade" role="dialog" data-parsley-validate="true" data-show-errors="true" data-keyboard="false" data-backdrop="static">
+		          <div class="modal-dialog">
+		              <div class="modal-content">
+		                  <div class="modal-header bg-info">
+		                      <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+		                      <h4 class="modal-title">Re-Enroll Patient</h4>
+
+		                  </div>
+		                  <div class="modal-body">
+		                      <div class="row">
+		                          <div class="col-md-12 form-group">
+		                              <div class="col-md-4">
+		                                  <label class="control-label pull-left">Re-Enrollment Date:</label>
+		                              </div>
+		                              <div class="col-md-8">
+		                                  <div class="col-md-12 form-group">
+		                                      <div class='input-group date' id='Re-enrollmentdatepicker'>
+		                                          <span class="input-group-addon">
+		                                              <span class="glyphicon glyphicon-calendar"></span>
+		                                          </span>
+		                                          <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="renrollmentDate" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>        
+		                                      </div>
+		                                  </div>
+		                              </div>                
+		                          </div>
+		                     </div>
+		                  </div>
+		                  <div class="modal-footer">
+		                        <button type="button" id="btnSaveReenrollment" class="btn btn-default" onclientclick="return false;">Save</button>
+		                        <button type="button" id="btnCancelReenrollment" class="btn btn-default" data-dismiss="modal">Close</button>
+		                  </div>
+		              </div>
+		          </div>
+		      </div>
+			  
+
+
+		  </form>
+
+	 </div><!-- .container-fluid -->
+
+
+	<nav role="navigation" class="navbar navbar-default navbar-fixed-bottom">
+		 <div class="container-fluid">              
+			  <div class="row" style="padding-top:3px">
+					  
+                    <div class="col-md-1 pull-left">
+                        <img src="<%= Page.ResolveClientUrl("~/Images/kenya_small.png") %>" />
+					</div>
+					 <div class="col-md-1">
+						   <img src="<%= Page.ResolveClientUrl("~/Images/FGI.jpg") %>" class="img-responsive img-rounded"  alt="Palladium Group"/>
+					  </div> 
+
+					  <div class="col-md-4">
+							<img id="img1" class="img-responsive" alt="International Quality Care"
+							src="<%= Page.ResolveClientUrl("~/Images/iq_logo_small.gif") %>" border="0" />
+					  </div>
+					 
+					  <div class="col-md-2 text-left text-primary ">
+					   <br /> <h4>
+							 <%-- <asp:Button ID="Button1" runat="server" Text="Button" />--%>
+						  </h4>
+					  </div>
+					 
+					
+					  
+					  <div class="col-md-4">
+						  <asp:Label ID="Label2" runat="server" Font-Bold="True" Text="Release Date : "></asp:Label>  
+						  <asp:Label ID="lblrelDate" runat="server" CssClass="blue11 nomargin" Font-Bold="True"></asp:Label> |
+						  <asp:Label ID="Label1" runat="server" Font-Bold="True" Text="Version : "></asp:Label>
+						  <asp:Label ID="lblversion" runat="server" CssClass="blue11 nomargin" Font-Bold="True"></asp:Label>
+					  </div><!-- .col-md-4 -->
+			  </div> <!-- .row -->                                              
+		 </div> <!-- .conatiner-fluid-->
+	</nav>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			
+			var startEncounter=0; /* starts encounter flags starts at false */
+			var stopEncounter=0; /* starts encounter flags starts at false */
+
+			var patientId = <%=PatientId%>;
+            var patientMasterVisitId = <%=PatientMasterVisitId%>;
+
+		    var newdate = new Date();
+		    var today = moment(newdate).add(2, 'hours');
+
+		    var encounterStatusId = <%=EncounterStatusId%>;
+		    var linkText = "Register Patient";
+
+            $('#<%=lblRegistration.ClientID%>').text("Register Patient");
+
+            $('#Re-enrollmentdatepicker').datetimepicker({
+		        format: 'DD-MMM-YYYY',
+		        allowInputToggle: true,
+                useCurrent: false,
+		        maxDate: today
+		    });
+
+			if (patientId < 1) {
+				encounterStatusId = 0;
+				$("#menuPatientHome").hide();
+				$("#LinkButton2").hide();
+				$("#menuStartEncounter").hide();
+				$("#menuMoH257").hide();
+				$("#titlePatientEncounter").hide();
+			    $('#menuStartEncounter').hide();
+
+			} else {
+				$("#menuPatientHome").show();
+				$("#LinkButton2").show();
+				$("#menuStartEncounter").show();
+				$("#menuMoH257").show();
+                $("#titlePatientEncounter").show();
+			}
+
+			if(encounterStatusId>0 & patientId>0){   encounterStarted();} else { encounterStopped(); }
+
+			$("#menuStartEncounter").click(function() {
+
+				if (patientId < 1) {
+					toastr.error("No patient selected for Service checkin!");
+					return false;
+				}
+
+				$.ajax({
+					type: "POST",
+					url: "../WebService/PatientMasterVisitService.asmx/PatientCareEndingStatus",
+					data: "{}",
+					contentType: "application/json; charset=utf-8",
+					dataType: "json",
+					success: function(response) {
+
+						var exitDate;
+						var deathDate;
+						var exitReason;
+						var notes;
+                        var data = response.d;
+					    console.log(response.d);
+						//$.each(data,function(idx, obj) {
+						//        exitDate = obj.ExitDate;
+						//        deathDate = obj.DateOfDeath;
+						//        exitReason = obj.ExitReason;
+						//        notes = obj.CareEndingNotes;
+
+						//    });
+						if (response.d === 0 || response.d==='[]') /*patient not careended-checkin*/
+						{
+							$.ajax({
+								type: "POST",
+								url: "../WebService/PatientMasterVisitService.asmx/PatientCheckin",
+								data: "{}",
+								contentType: "application/json; charset=utf-8",
+								dataType: "json",
+								success: function(response) {
+							 
+									if (encounterStatusId > 0) {
+										toastr.error("Please stop an existing encounter first");
+										return false;
+									} else {
+										encounterStarted();
+										$("#menuStartEncounter").hide();
+										startEncounter = 1; /* denotes an active encounter */
+										stopEncounter = 0;
+                                        $('#<%=lblRegistration.ClientID%>').text("Edit Registration");
+										toastr.info("Patient Service Checkedin successfully!");
+									}
+								},
+								error:function(xhr, errorType, exception) {
+									var jsonError = jQuery.parseJSON(xhr.responseText);
+									toastr.error("" + xhr.status + "" + jsonError.Message);
+									return false;
+								}
+							});  /*end of checking*/ 
+						} else { /*patient is careended stop checkin and show details*/
+						    bootbox.confirm({
+                                title: '<h3 class="text-danger">This patient has been careended!</h3>',
+                                message: "Please Re-Enroll the Patient before checkin. Do you want to Re-Enroll the Patient?",
+						        buttons: {
+						            cancel: {
+						                label: '<i class="fa fa-times"></i> Cancel'
+						            },
+						            confirm: {
+						                label: '<i class="fa fa-check"></i> Confirm'
+						            }
+						        },
+						        callback: function (result) {
+                                    //console.log('This was logged in the callback: ' + result);
+                                    if (result) {
+                                        //generateAlert();
+                                        $('#reenrollmentModal').modal('show');
+                                    }					            
+						        }
+						    });
+						}
+
+
+					},/*end of success */
+					error:function(xhr, errorType, exception) {
+						var jsonError = jQuery.parseJSON(xhr.responseText);
+						toastr.error("" + xhr.status + "" + jsonError.Message);
+						return false;
+					}
+				});              
+			});
+
+			$("#menuStopEncounter").click(function() {
+
+				if (patientId < 1) {
+					toastr.error("No patient selected for Service Checkout!");
+					return false;
+				}
+				if (startEncounter < 0) {
+					toastr.error("No Active Encounter to Stop");
+					return false;
+				}
+
+				var today = moment(new Date()).format('DD-MMM-YYYY');
+				$.ajax({
+					type: "POST",
+					url: "../WebService/PatientMasterVisitService.asmx/PatientCheckout",
+					data: "{'id':'"+patientMasterVisitId+"','visitSchedule':'"+ 0 +"','visitBy':'"+ 0 +"','visitType':'"+ 0 +"','visitDate':'"+ today+"'}",
+					contentType: "application/json; charset=utf-8",
+					dataType: "json",
+					success: function(response) {
+					    
+					    // encounterStatusId = 0;
+					    //encounterStopped();
+					    //$("#menuStartEncounter").show();
+					   // checkOut();
+						window.location.href = "<%=ResolveClientUrl("~/CCC/Home.aspx")%>";
+					    $('#<%=lblRegistration.ClientID%>').text("Register Patient");
+					    toastr.info("Patient Service Checkedout successfully!");
+					},
+					error:function(xhr, errorType, exception) {
+						var jsonError = jQuery.parseJSON(xhr.responseText);
+						toastr.error("" + xhr.status + "" + jsonError.Message);
+						return false;
+					}
+				});    
+
+					
+			});
+
+			function encounterStopped() {
+
+				$("#titlePatientBaseline").hide();
+				$("#menuBaseline").hide();
+				$("#menuFamilyTesting").hide();
+				$("#MenuOneTimeEventsTracker").hide();
+				$("#menuStopEncounter").hide();
+
+			   // $("#menuPatientHome").hide();
+				$("#menuPatientAppointments").hide();
+				$("#menuPatientCareEnded").hide();
+				$("#menuScheduleAppointments").hide();
+				$("#menuCaptureVitals").hide();
+				$("#menuNewEncounter").hide();
+				$("#menuPharmacyPrescription").hide();
+				$("#menuLabOrder").hide();
+                $("#menuPatientVitals").hide();
+                $("#menuArtDistribution").hide();
+			  // $("#LinkButton2").show();
+				//$("#menuStartEncounter").show();
+                $('#<%=lblRegistration.ClientID%>').text("Register Patient");
+			    <%-- // window.open("<%=ResolveUrl("patient/patientfinder.aspx")%>");--%>
+
+			}
+
+		    function encounterStarted() {
+                $('#<%=lblRegistration.ClientID%>').text("Edit Registration");
+				$("#titlePatientBaseline").show();
+				$("#menuBaseline").show();
+				$("#menuFamilyTesting").show();
+				$("#MenuOneTimeEventsTracker").show();
+				$("#menuStopEncounter").show();
+				//$("#menuNewEncounter").hide();
+				$("#menuPatientHome").show();
+				$("#menuPatientAppointments").show();
+				$("#menuPatientCareEnded").show();
+				$("#menuScheduleAppointments").show();
+				$("#menuCaptureVitals").show();
+				$("#menuNewEncounter").show();
+				$("#menuPharmacyPrescription").show();
+				$("#menuLabOrder").show();
+				
+				$("#menuStartEncounter").hide();
+				startEncounter = 1;
+				stopEncounter = 0;
+				$("#menuStopEncounter").show();
+                $("#menuPatientVitals").show();
+		        var cat = $("#lblcategorization").text();
+                if (cat == 'Stable') {
+                    $("#menuArtDistribution").show();
+                } else {
+                    $("#menuArtDistribution").hide();
+                }
+                
+				$("#LinkButton2").show();
+
+		    }
+
+		    function checkOut() {
+		        
+                $("#titlePatientBaseline").hide();
+				$("#menuBaseline").hide();
+				$("#menuFamilyTesting").hide();
+				$("#MenuOneTimeEventsTracker").hide();
+				$("#menuStopEncounter").hide();
+		        $("#titlePatientEncounter").hide();
+			    $("#menuPatientHome").hide();
+				$("#menuPatientAppointments").hide();
+				$("#menuPatientCareEnded").hide();
+				$("#menuScheduleAppointments").hide();
+				$("#menuCaptureVitals").hide();
+				$("#menuNewEncounter").hide();
+				$("#menuPharmacyPrescription").hide();
+				$("#menuLabOrder").hide();
+                $("#menuPatientVitals").hide();
+                $("#menuArtDistribution").hide();
+			    $("#LinkButton2").hide();
+				$("#menuStartEncounter").hide();
+                $('#<%=lblRegistration.ClientID%>').text("Register Patient");
+            }
+
+		    $("#btnSaveReenrollment").click(function() {
+                if (!$('#reenrollmentModal').parsley().validate()) {
+		            return false;
+                }
+
+                var reenrollmentDate = $("#renrollmentDate").val();
+		        var today = new Date();
+
+                var isEnrollmentDateAfterToday = moment(moment(moment(reenrollmentDate, 'DD-MMM-YYYYY').toDate()).format('DD-MMM-YYYY')).isAfter(moment(moment(today, 'DD-MMM-YYYYY').toDate()).format('DD-MMM-YYYY'));
+
+                if (isEnrollmentDateAfterToday) {
+		            toastr.error("Enrollment Date should not be in the future", "Patient Enrollment");
+		            return false;
+                }
+
+                reEnrollPatient(reenrollmentDate);
+
+		    });
+
+		});
+	</script>
+</body>
+</html>

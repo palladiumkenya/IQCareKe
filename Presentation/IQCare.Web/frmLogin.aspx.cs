@@ -56,6 +56,16 @@ namespace IQCare.Web
             Session.Add("AppUserEmployeeId", "");
             Session.Add("CustomfrmDrug", "");
             Session.Add("CustomfrmLab", "");
+            //Session.Add("PatientMasterVisitID", "0");
+
+            Session.Add("PersonId", "0");
+            Session.Add("EncounterId","0");
+            Session.Add("PatientMasterVisitId","0");
+            Session.Add("PatientId","0");
+            Session.Add("EncounterStatusId",0);
+            Session.Add("Gender", "");
+            Session.Add("Age", 0);
+            Session.Add("DateofBirth",0);
             ////////////////////////////////////////
 
             lblDate.Text = "";
@@ -88,7 +98,7 @@ namespace IQCare.Web
             List<Entities.Administration.Facility> facilities = SystemSetting.CurrentSystem.Facilities;
             if (chkPref.Checked == true)
             {
-                facilities = facilities.Where(f => f.Preffered == false).ToList();
+                facilities = facilities.Where(f => f.Preffered == true).ToList();
 
                 //DataView theDV = new DataView(theDT);
                 // theDV.RowFilter = "Preferred = 1";
@@ -321,6 +331,13 @@ namespace IQCare.Web
                     theSCMDV.RowFilter = "ModuleId=201";
                     if (theSCMDV.Count > 0)
                         Session["SCMModule"] = theSCMDV[0]["ModuleName"];
+
+                    DataView theSamePointDispenseDV = new DataView(theDS.Tables[3]);
+                    theSamePointDispenseDV.RowFilter = "ModuleId=30";
+                    if (theSamePointDispenseDV.Count > 0)
+                        Session["SCMSamePointDispense"] = theSamePointDispenseDV[0]["ModuleName"];
+
+
                     Session["BillingON"] = theDS.Tables[3].Select("ModuleName = 'Billing'").Length > 0;
                     Session["AdmissionWardsON"] = theDS.Tables[3].Select("ModuleName = 'Ward Admission'").Length > 0;
                     #endregion

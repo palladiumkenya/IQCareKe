@@ -19,16 +19,7 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::IQCare.Web.CCC.UC.ucTriage PatientSummary;
-        
-        /// <summary>
-        /// lblTINA control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTINA;
+        protected global::IQCare.Web.CCC.UC.ucPatientBrief PatientSummary;
         
         /// <summary>
         /// lblTIDate control.
@@ -49,6 +40,24 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         protected global::System.Web.UI.WebControls.Label lblARTStartDate;
         
         /// <summary>
+        /// Label1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label1;
+        
+        /// <summary>
+        /// regimenCategory control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList regimenCategory;
+        
+        /// <summary>
         /// lblRegimen control.
         /// </summary>
         /// <remarks>
@@ -58,13 +67,13 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         protected global::System.Web.UI.WebControls.Label lblRegimen;
         
         /// <summary>
-        /// TransferRegimen control.
+        /// RegimenId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TransferRegimen;
+        protected global::System.Web.UI.WebControls.DropDownList RegimenId;
         
         /// <summary>
         /// lblfacility control.
@@ -82,7 +91,7 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TransferFromFacility;
+        protected global::System.Web.UI.WebControls.DropDownList TransferFromFacility;
         
         /// <summary>
         /// lblmflcode control.
@@ -119,6 +128,15 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList TransferFromCounty;
+        
+        /// <summary>
+        /// transferInNotes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox transferInNotes;
         
         /// <summary>
         /// lblDateOfHIVDiagnosis control.
@@ -175,22 +193,13 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         protected global::System.Web.UI.WebControls.Label lblARTUse;
         
         /// <summary>
-        /// PMTCT control.
+        /// ARTUseHistory control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox PMTCT;
-        
-        /// <summary>
-        /// NONE control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox NONE;
+        protected global::System.Web.UI.WebControls.DropDownList ARTUseHistory;
         
         /// <summary>
         /// RegimenPurpose control.
@@ -218,6 +227,24 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton AddPriorHistory;
+        
+        /// <summary>
+        /// bwhoStage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList bwhoStage;
+        
+        /// <summary>
+        /// bCd4Count control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox bCd4Count;
         
         /// <summary>
         /// lblMUAC control.
@@ -308,5 +335,23 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox BaselineViralload;
+        
+        /// <summary>
+        /// InitiationRegimen control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList InitiationRegimen;
+        
+        /// <summary>
+        /// RegimenInitiationId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList RegimenInitiationId;
     }
 }

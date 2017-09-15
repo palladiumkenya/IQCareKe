@@ -42,9 +42,9 @@ namespace IQCare.Web.Statistics
         /// </summary>
         private void Fill_Dropdown()
         {
-            IUser theLocationManager;
-            theLocationManager = (IUser)ObjectFactory.CreateInstance("BusinessProcess.Security.BUser, BusinessProcess.Security");
-            DataTable theDT = theLocationManager.GetFacilityList();
+            IUser uMgr = (IUser)ObjectFactory.CreateInstance("BusinessProcess.Security.BUser, BusinessProcess.Security");
+            DataTable theDT = uMgr.GetFacilityList();
+            uMgr = null;
             ViewState["Facility"] = theDT;
             IQCareUtils theUtils = new IQCareUtils();
             DataView theDV = new DataView(theDT);
@@ -88,15 +88,13 @@ namespace IQCare.Web.Statistics
         private void Init_Form()
         {
 
-            IFacility FacilityManager;
-            // Double thePercent, theResultPercent, theTotalPateint, theTotalPMTCTPatient;
-            FacilityManager = (IFacility)ObjectFactory.CreateInstance("BusinessProcess.Security.BFacility, BusinessProcess.Security");
-            theDS = FacilityManager.GetFacilityStats(Convert.ToInt32(ddFacility.SelectedValue));
+            IFacility mgr = (IFacility)ObjectFactory.CreateInstance("BusinessProcess.Security.BFacility, BusinessProcess.Security");
+            theDS = mgr.GetFacilityStats(Convert.ToInt32(ddFacility.SelectedValue));
             panelPMTCT.Visible = false;//tblPMTCTCare.Visible = 
             panelHEI.Visible = false;//tblExpInfant.Visible =
             panelHIV.Visible = false;//tblHIVCare.Visible =
             ViewState["theDS"] = theDS;
-            FacilityManager = null;
+            mgr = null;
             DataTable dttecareas = new DataTable();
             dttecareas = theDS.Tables[10];
 
@@ -184,11 +182,11 @@ namespace IQCare.Web.Statistics
                     Init_Form();
                     FacilityStats1.DataBind();
                     string theUrl;
-                    theUrl = string.Format("{0}&AppointmentStatus={1}", "./Scheduler/frmScheduler_AppointmentMain.aspx?name=Add", "All");
+                    theUrl = string.Format("{0}&AppointmentStatus={1}", "~/Scheduler/frmScheduler_AppointmentMain.aspx?name=Add", "All");
                     DirectScheduler.HRef = theUrl;
 
 
-                    theUrl = string.Format("{0}&AppointmentStatus={1}", "./Scheduler/frmScheduler_AppointmentMain.aspx?name=Add", "Missed");
+                    theUrl = string.Format("{0}&AppointmentStatus={1}", "~/Scheduler/frmScheduler_AppointmentMain.aspx?name=Add", "Missed");
                     MissedScheduler.HRef = theUrl;
                 }
 
@@ -313,7 +311,7 @@ namespace IQCare.Web.Statistics
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         protected void hlTotalActivePatients_Click(object sender, EventArgs e)
         {
-            ShowReport(((System.Data.DataSet)ViewState["theDS"]).Tables[0], "ActivePatients");
+            ShowReport(((DataSet)ViewState["theDS"]).Tables[0], "ActivePatients");
         }
 
         /// <summary>
@@ -323,7 +321,7 @@ namespace IQCare.Web.Statistics
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         protected void hlActiveNonARTPatients_Click(object sender, EventArgs e)
         {
-            ShowReport(((System.Data.DataSet)ViewState["theDS"]).Tables[1], "ActiveNonARTPatients");
+            ShowReport(((DataSet)ViewState["theDS"]).Tables[1], "ActiveNonARTPatients");
         }
 
         /// <summary>

@@ -4,8 +4,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCare Management", "..\..\IQCare Management\IQCare Management.csproj", "{0F4F7B80-C05C-4129-A644-911E14BBB67A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCare.Service", "..\..\IQCare Management\IQCare.Service\IQCare.Service.csproj", "{82EBF600-0829-4FEA-9D90-A396A302DDDC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FC595C57-2718-4639-AD31-25CF08BF1A2A} = {FC595C57-2718-4639-AD31-25CF08BF1A2A}
+		{D6D52F8E-125C-477E-8F21-BA3C513CDAA7} = {D6D52F8E-125C-477E-8F21-BA3C513CDAA7}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCare.FormBuilder", "..\..\IQCare Management\IQCare.FormBuilder\IQCare.FormBuilder.csproj", "{FC595C57-2718-4639-AD31-25CF08BF1A2A}"
 EndProject
@@ -13,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCare.SCM", "..\..\IQCare 
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "IQMGT", "..\..\IQCare Management\IQMGT\IQMGT.vdproj", "{7C294D08-4F4B-41DB-BE78-F8498C24DBF8}"
 EndProject
-Global	
+Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -23,9 +25,6 @@ Global
 		{0F4F7B80-C05C-4129-A644-911E14BBB67A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F4F7B80-C05C-4129-A644-911E14BBB67A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F4F7B80-C05C-4129-A644-911E14BBB67A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{82EBF600-0829-4FEA-9D90-A396A302DDDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{82EBF600-0829-4FEA-9D90-A396A302DDDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{82EBF600-0829-4FEA-9D90-A396A302DDDC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FC595C57-2718-4639-AD31-25CF08BF1A2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FC595C57-2718-4639-AD31-25CF08BF1A2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC595C57-2718-4639-AD31-25CF08BF1A2A}.Release|Any CPU.ActiveCfg = Release|Any CPU

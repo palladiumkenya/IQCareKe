@@ -1,4 +1,7 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
 
 namespace Entities.Common
 {
@@ -6,7 +9,9 @@ namespace Entities.Common
     /// 
     /// </summary>
     [Serializable]
-    public abstract class Person
+   
+
+    public  class Person:BaseEntity
     {
         /// <summary>
         /// Gets or sets the identifier.
@@ -14,7 +19,8 @@ namespace Entities.Common
         /// <value>
         /// The identifier.
         /// </value>
-        public virtual int Id { get; set; }
+        [Key]
+        public  int Id { get; set; }
         /// <summary>
         /// Gets or sets the last name.
         /// </summary>
@@ -46,7 +52,20 @@ namespace Entities.Common
         {
             get { return FirstName + ", "+ MidName +" " + LastName; }
         }
-        public int IdentificationType { get; set; }
-        public string IdentificationNo { get; set; }
+        //  public int IdentificationType { get; set; }
+        public int Sex { get; set; }
+        public DateTime? DateOfBirth { get; set; }
+        public bool? DobPrecision { get; set; }
+        //public string NationalId { get; set; }
+
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<Person>().MapToStoredProcedures
+        //    (
+        //        s=>s.Insert(i=>i.HasName("[dbo].[Person_Insert]"));
+        //    );
+        //    base.OnModelCreating(modelBuilder);
+        //}
+
     }
 }

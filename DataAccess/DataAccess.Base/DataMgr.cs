@@ -1,8 +1,11 @@
 using System;
 using System.Configuration;
 using System.Data;
+using System.Data.Common;
 using System.Data.SqlClient;
 using Application.Common;
+using System.Data.Entity.ModelConfiguration.Conventions;
+
 namespace DataAccess.Base
 {
     /// <summary>
@@ -20,16 +23,22 @@ namespace DataAccess.Base
        
 
         protected string emrdatabase;
+        public static object _connec;
+        /// <summary>
+        /// Gets the connection.
+        /// </summary>
+        /// <returns></returns>
         protected string reportsdatabase;
         /// <summary>
         /// Initializes a new instance of the <see cref="DataMgr"/> class.
         /// </summary>
-        public DataMgr()
+        protected DataMgr()
         {
         }
+       
         ~DataMgr()
         {
-
+            
         }
         #endregion
 
@@ -40,18 +49,27 @@ namespace DataAccess.Base
         /// <returns></returns>
         public static object GetConnection()
         {
+
             Utility objUtil = new Utility();
-          //  string constr = objUtil.Decrypt(((NameValueCollection)ConfigurationSettings.GetConfig("appSettings"))["ConnectionString"]);
             string constr = objUtil.Decrypt(ConfigurationManager.AppSettings.Get("ConnectionString"));
             constr += ";connect timeout=" + CommandTimeOut().ToString();
-           // constr += ";connect timeout=" + ((NameValueCollection)ConfigurationSettings.GetConfig("appSettings"))["SessionTimeOut"].ToString();
             constr += ";packet size=4128;Min Pool Size=3;Max Pool Size=200;";
             SqlConnection connection = new SqlConnection(constr);
             connection.Open();
             OpenDecryptedSession(connection);
             return connection;
+
         }
-       
+
+        public static object GetConnection(string connectionName)
+        {
+            Utility objUtil = new Utility();
+            string constr = objUtil.Decrypt(ConfigurationManager.AppSettings.Get(connectionName));
+            SqlConnection connection = new SqlConnection(constr);
+            connection.Open();
+            OpenDecryptedSession(connection);
+            return connection;
+        }
         /// <summary>
         /// Gets the connection.
         /// </summary>
@@ -85,11 +103,18 @@ namespace DataAccess.Base
         /// Gets the connection for ORM use.
         /// </summary>
         /// <returns></returns>
-        public static string GetOrmConnectionString()
+        public static DbConnection GetOrmConnectionString()
         {
             Utility objUtil = new Utility();
+            //  string constr = objUtil.Decrypt(((NameValueCollection)ConfigurationSettings.GetConfig("appSettings"))["ConnectionString"]);
             string constr = objUtil.Decrypt(ConfigurationManager.AppSettings.Get("ConnectionString"));
-            return constr;
+            constr += ";connect timeout=" + CommandTimeOut().ToString();
+            // constr += ";connect timeout=" + ((NameValueCollection)ConfigurationSettings.GetConfig("appSettings"))["SessionTimeOut"].ToString();
+            constr += ";MultipleActiveResultSets = True; Pooling = True;";
+            SqlConnection connection = new SqlConnection(constr);
+           connection.Open();
+            OpenDecryptedSession(connection);
+            return connection;
         }
 
         /// <summary>
@@ -114,7 +139,7 @@ namespace DataAccess.Base
         /// <param name="connectionString">The connection string.</param>
         /// <param name="enncrypted">if set to <c>true</c> [enncrypted].</param>
         /// <returns></returns>
-         bool TestConnection(string connectionString,bool enncrypted=true)
+        public static bool TestConnection(string connectionString,bool enncrypted=true)
         {
             bool success = false;
             Utility objUtil = new Utility();
@@ -165,6 +190,7 @@ namespace DataAccess.Base
            // theCmd.Parameters.Add("@Password", SqlDbType.VarChar).Value = ApplicationAccess.DBSecurity;
             theCmd.CommandType = CommandType.StoredProcedure;
             theCmd.Connection = (SqlConnection)connection;
+
             
             theCmd.ExecuteNonQuery();
         }
@@ -196,16 +222,21 @@ namespace DataAccess.Base
         /// <param name="connection">The connection.</param>
         public static void ReleaseConnection(object connection)
         {
-            SqlConnection cnn = (SqlConnection)connection;
-            if (cnn != null)
-            {
-                if (cnn.State != ConnectionState.Closed)
+            //if (connection != null)
+            //{
+                SqlConnection cnn = (SqlConnection)connection;
+                if (cnn != null)
                 {
-                    CloseDecryptedSession(connection);
-                    cnn.Close();
+                    if (cnn.State != ConnectionState.Closed)
+                    {
+                        CloseDecryptedSession(connection);
+                        cnn.Close();
+                    }
+                    cnn.Dispose();
+                    //connection = null;
+                   // cnn = null;
                 }
-                cnn.Dispose();
-            }
+            //}
         }
 
         /// <summary>
@@ -221,10 +252,11 @@ namespace DataAccess.Base
         /// <summary>
         /// Commits the transaction.
         /// </summary>
-        /// <param name="Transation">The transation.</param>
-        public static void CommitTransaction(object Transation)
+        /// <param name="transation">The transation.</param>
+        public static void CommitTransaction(object transation)
         {
-            ((SqlTransaction)Transation).Commit();
+            ((SqlTransaction)transation).Commit();
+            ReleaseConnection(((SqlTransaction)transation).Connection);
         }
 
         /// <summary>

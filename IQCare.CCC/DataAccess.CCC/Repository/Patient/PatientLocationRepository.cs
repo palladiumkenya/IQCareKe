@@ -1,9 +1,10 @@
-﻿using DataAccess.Context;
-using Entities.PatientCore;
+﻿using DataAccess.CCC.Context;
+using DataAccess.Context;
+using Entities.Common;
 
 namespace DataAccess.CCC.Repository.Patient
 {
-    public class PatientLocationRepository :BaseRepository<PatientLocation>,IPatientLocationRepository
+    public class PatientLocationRepository :BaseRepository<PersonLocation>,IPatientLocationRepository
     {
         private readonly GreencardContext _context;
 

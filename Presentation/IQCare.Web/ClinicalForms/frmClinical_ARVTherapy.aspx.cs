@@ -345,17 +345,19 @@ namespace IQCare.Web.Clinical
                 {
                     if (theDS.Tables[0].Rows[0]["ARTStartDate"] != System.DBNull.Value)
                     {
-                        this.txtcohortmnth.Value = String.Format("{0:MMM}", theDS.Tables[0].Rows[0]["ARTStartDate"]).ToUpper();
-                    }
-                    if (theDS.Tables[0].Rows[0]["ARTStartDate"] != System.DBNull.Value)
-                    {
-                        this.txtcohortyear.Value = String.Format("{0:yyyy}", theDS.Tables[0].Rows[0]["ARTStartDate"]).ToUpper();
-                    }
+                        DateTime dtArtStartDate = Convert.ToDateTime(theDS.Tables[0].Rows[0]["ARTStartDate"]);
+                        this.txtcohortmnth.Value = string.Format("{0:MMM}", dtArtStartDate).ToUpper();
+                        this.txtcohortyear.Value = string.Format("{0:yyyy}", dtArtStartDate).ToUpper();
+                    //}
+                    ////if (theDS.Tables[0].Rows[0]["ARTStartDate"] != System.DBNull.Value)
+                    ////{
+                        
+                    ////}
 
-                    // ART Start at This Facility Section
-                    if (theDS.Tables[0].Rows[0]["ARTStartDate"] != System.DBNull.Value)
-                    {
-                        this.txtthisRegimendate.Value = String.Format("{0:dd-MMM-yyyy}", theDS.Tables[0].Rows[0]["ARTStartDate"]);
+                    //// ART Start at This Facility Section
+                    //if (theDS.Tables[0].Rows[0]["ARTStartDate"] != System.DBNull.Value)
+                    //{
+                        this.txtthisRegimendate.Value = string.Format("{0:dd-MMM-yyyy}", dtArtStartDate);
 
                         if (theDS.Tables[8].Rows.Count > 0 && theDS.Tables[8].Rows[0]["FirstLineRegimen"] != System.DBNull.Value)
                         {
@@ -765,7 +767,7 @@ namespace IQCare.Web.Clinical
         /// Fills the old data.
         /// </summary>
         /// <param name="PatID">The pat identifier.</param>
-        private void FillOldData(Int32 PatID)
+        private void FillOldData(int PatID)
         {
             DataSet dsvalues = null;
             ICustomFields CustomFields;
@@ -1227,7 +1229,7 @@ namespace IQCare.Web.Clinical
         /// </summary>
         private void SaveCancel()
         {
-            int PatientID = Convert.ToInt32(Session["PatientId"]);
+            int patientId = Convert.ToInt32(Session["PatientId"]);
 
             //string strPatientID = ViewState["PtnID"].ToString();
             string script = "<script language = 'javascript' defer ='defer' id = 'confirm'>\n";
@@ -1237,11 +1239,11 @@ namespace IQCare.Web.Clinical
             script += "{\n";
             if (Session["Redirect"].ToString() == "0")
             {
-                script += "window.location.href='frmPatient_Home.aspx?PatientId=" + PatientID + "';\n";
+                script += "window.location.href='frmPatient_Home.aspx?PatientId=" + patientId + "';\n";
             }
             else
             {
-                script += "window.location.href='frmPatient_History.aspx?PatientId=" + PatientID + "';\n";
+                script += "window.location.href='frmPatient_History.aspx?PatientId=" + patientId + "';\n";
             }
             script += "}\n";
             script += "else \n";
@@ -1263,7 +1265,7 @@ namespace IQCare.Web.Clinical
             PatID = Convert.ToInt32(Request.QueryString["patientid"]);
             string sqlselect;
             string strdelete;
-            Int32 visitID = 0;
+            int visitID = 0;
             DateTime visitdate = System.DateTime.Now;
             ICustomFields CustomFields;
             //  if (txtvisitDate.Text.ToString() != "")
@@ -1361,11 +1363,16 @@ namespace IQCare.Web.Clinical
             }
         }
 
+        protected void btnthisRegimen_Click(object sender, EventArgs e)
+        {
+
+        }
+
         /// <summary>
         /// Validate_s the data_ quality.
         /// </summary>
         /// <returns></returns>
-        private Boolean Validate_Data_Quality()
+        private bool Validate_Data_Quality()
         {
             if (txtanotherwght.Value != "")
             {

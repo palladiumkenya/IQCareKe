@@ -187,7 +187,7 @@ namespace IQCare.Web.Scheduler
 
             if (formName == "AppointmentMain")
             {
-                Response.Redirect("~/Schedule/frmScheduler_AppointmentMain.aspx");
+                Response.Redirect("~/Scheduler/frmScheduler_AppointmentMain.aspx");
             }
             else
             {

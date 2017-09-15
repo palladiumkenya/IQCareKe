@@ -1,17 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using Application.Common;
 using Application.Presentation;
 using Interface.SCM;
-using System.Collections;
 using CrystalDecisions.CrystalReports.Engine;
-using CrystalDecisions.Shared;
 
 
 namespace IQCare.SCM
@@ -23,8 +17,10 @@ namespace IQCare.SCM
         DataSet dsPOItemsDetail = new DataSet();
         public bool deletedGridByKey = false;
 
+        public Form PreviousForm;
+
         public ComboBox theGrdCombo;
-     //   bool IsHandleAdded;
+        //   bool IsHandleAdded;
         DataTable dtOrdermaster;
         DataTable dtOrderItem;
         /* No used 
@@ -45,7 +41,7 @@ namespace IQCare.SCM
         {
             InitializeComponent();
         }
-        
+
         private void frmPurchaseOrder_Load(object sender, EventArgs e)
         {
             SetRights();
@@ -62,11 +58,15 @@ namespace IQCare.SCM
             ddlSupplier.Enabled = true;
             BindSupplierDropdown();
             theStyle.setStyle(lblSupplier);
+          
             if (GblIQCare.PurchaseOrderID != 0)
             {
                 formInit();
             }
-           
+            else
+            {
+                BindGrid(GblIQCare.ModePurchaseOrder);
+            }
         }
 
         public void SetRights()
@@ -81,15 +81,16 @@ namespace IQCare.SCM
 
         private void dgwItemSubitemDetails_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-           
-           
+
+
         }
         private DataTable CreateOrderMasterTable()
         {
-            
+
             DataTable dtOrdermaster = new DataTable();
             dtOrdermaster.Columns.Add("IsPO", typeof(int));
             dtOrdermaster.Columns.Add("POID", typeof(int));
+            dtOrdermaster.Columns.Add("PONumber", typeof(string));
             dtOrdermaster.Columns.Add("OrderDate", typeof(DateTime));
             dtOrdermaster.Columns.Add("SupplierID", typeof(int));
             dtOrdermaster.Columns.Add("SrcStore", typeof(int));
@@ -104,25 +105,27 @@ namespace IQCare.SCM
         private DataTable CreateOrderItemTable()
         {
             DataTable dtOrderItem = new DataTable();
-            dtOrderItem.Columns.Add("ItemID", typeof(int));
-            dtOrderItem.Columns.Add("ItemName", typeof(String));
+            dtOrderItem.Columns.Add("ItemId", typeof(int));
+            dtOrderItem.Columns.Add("ItemTypeId", typeof(int));
+            dtOrderItem.Columns.Add("SupplierId", typeof(int));
+            dtOrderItem.Columns.Add("ItemName", typeof(string));
             dtOrderItem.Columns.Add("PurchaseUnit", typeof(int));
             dtOrderItem.Columns.Add("Quantity", typeof(int));
             dtOrderItem.Columns.Add("priceperunit", typeof(decimal));
             dtOrderItem.Columns.Add("totPrice", typeof(int));
-            dtOrderItem.Columns.Add("BatchID", typeof(int));
+            dtOrderItem.Columns.Add("BatchId", typeof(int));
             dtOrderItem.Columns.Add("AvaliableQty", typeof(int));
             dtOrderItem.Columns.Add("ExpiryDate", typeof(DateTime));
             dtOrderItem.Columns.Add("UnitQuantity", typeof(int));
             //dtOrderItem.Columns.Add("Delete", typeof(String));
-           // dtOrderItem.Columns.Add("IsFunded", typeof(int));
+            // dtOrderItem.Columns.Add("IsFunded", typeof(int));
             return dtOrderItem;
         }
 
         private void BindSupplierDropdown()
         {
             IQCareUtils theUtils = new IQCareUtils();
-           
+
             try
             {
                 BindFunctions theBind = new BindFunctions();
@@ -135,7 +138,7 @@ namespace IQCare.SCM
                 DataTable theStoreDT = theDV.ToTable();
                 theBind.Win_BindCombo(ddlSupplier, theStoreDT, "SupplierName", "Id");
 
-              
+
             }
             catch (Exception err)
             {
@@ -175,6 +178,7 @@ namespace IQCare.SCM
             DataRow theDRow = dtOrdermaster.NewRow();
 
             theDRow["OrderDate"] = dtpOrderDate.Text;
+            if (txtOrderNumber.Text != "") { theDRow["PONumber"] = txtOrderNumber.Text.Trim(); }
 
             theDRow["DestStore"] = Convert.ToInt32(ddlDestinationStore.SelectedValue);
             theDRow["SupplierID"] = Convert.ToInt32(ddlSupplier.SelectedValue);
@@ -196,7 +200,7 @@ namespace IQCare.SCM
             for (int i = 0; i < dgwItemSubitemDetails.Rows.Count; i++)
             {
                 // if (Convert.ToInt32(dgwItemSubitemDetails.Rows[i].Cells[0].Value) > 0)
-                if (!String.IsNullOrEmpty(Convert.ToString(dgwItemSubitemDetails.Rows[i].Cells[0].Value)))
+                if (!string.IsNullOrEmpty(Convert.ToString(dgwItemSubitemDetails.Rows[i].Cells[0].Value)))
                 {
                     if (Convert.ToString(dgwItemSubitemDetails.Rows[i].Cells["Units"].Value) == "")
                     {
@@ -209,22 +213,23 @@ namespace IQCare.SCM
                         IQCareWindowMsgBox.ShowWindow("PurchaseOrderQuantityZero", this);
                         return;
                     }
-                    if (String.IsNullOrEmpty(Convert.ToString(dgwItemSubitemDetails.Rows[i].Cells["OrderQuantity"].Value)))
+                    if (string.IsNullOrEmpty(Convert.ToString(dgwItemSubitemDetails.Rows[i].Cells["OrderQuantity"].Value)))
                     {
                         dgwItemSubitemDetails.Rows[i].Cells["OrderQuantity"].Value = 0;
                         IQCareWindowMsgBox.ShowWindow("PurchaseOrderQuantityZero", this);
                         return;
                     }
-                   
+
                     DataRow theDRowItem = dtOrderItem.NewRow();
                     if (GblIQCare.ModePurchaseOrder == 1)
                     {
                         theDRowItem["ItemID"] = Convert.ToInt32(dgwItemSubitemDetails.Rows[i].Cells[0].Value);
+                        theDRowItem["SupplierId"] = Convert.ToInt32(ddlSupplier.SelectedValue);
                         theDRowItem["BatchID"] = 0;
                         theDRowItem["ExpiryDate"] = DBNull.Value;
                         theDRowItem["AvaliableQty"] = 0;
                     }
-
+                    theDRowItem["ItemTypeId"] = Convert.ToInt32(dgwItemSubitemDetails.Rows[i].Cells["ItemTypeId"].Value);
                     theDRowItem["ItemName"] = dgwItemSubitemDetails.Rows[i].Cells[0].FormattedValue.ToString();
                     theDRowItem["Quantity"] = Convert.ToInt32(dgwItemSubitemDetails.Rows[i].Cells["OrderQuantity"].Value);
                     theDRowItem["priceperunit"] = Convert.ToDecimal(dgwItemSubitemDetails.Rows[i].Cells["Price"].Value);
@@ -236,52 +241,66 @@ namespace IQCare.SCM
                 }
             }
 
-                if (dtOrderItem.Rows.Count <= 0)
+            if (dtOrderItem.Rows.Count <= 0)
+            {
+                IQCareWindowMsgBox.ShowWindow("PurchaseOrderItem", this);
+                return;
+            }
+            //bool isDuplicate = false;
+            for (int iDupitem = 0; iDupitem < dtOrderItem.Rows.Count; iDupitem++)
+            {
+                for (int x = iDupitem + 1; x < dtOrderItem.Rows.Count; x++)
                 {
-                    IQCareWindowMsgBox.ShowWindow("PurchaseOrderItem", this);
-                    return;
-                }
-                //bool isDuplicate = false;
-                for (int iDupitem = 0; iDupitem < dtOrderItem.Rows.Count; iDupitem++)
-                {
-                    for (int x = iDupitem + 1; x < dtOrderItem.Rows.Count; x++)
+                    if (dtOrderItem.Rows[iDupitem]["ItemName"].ToString() == dtOrderItem.Rows[x]["ItemName"].ToString())
                     {
-                        if (dtOrderItem.Rows[iDupitem]["ItemName"].ToString() == dtOrderItem.Rows[x]["ItemName"].ToString())
-                        {
-                            //pass message builder message
-                            MsgBuilder theBuilder = new MsgBuilder();
-                            theBuilder.DataElements["Control"] = dtOrderItem.Rows[iDupitem]["ItemName"].ToString();
-                            IQCareWindowMsgBox.ShowWindow("DuplicatePOItems", theBuilder, this);
-                            
-                            //isDuplicate = true;
-                            //break;
-                            return;
-                        }
+                        //pass message builder message
+                        MsgBuilder theBuilder = new MsgBuilder();
+                        theBuilder.DataElements["Control"] = dtOrderItem.Rows[iDupitem]["ItemName"].ToString();
+                        IQCareWindowMsgBox.ShowWindow("DuplicatePOItems", theBuilder, this);
+
+                        //isDuplicate = true;
+                        //break;
+                        return;
                     }
                 }
+            }
 
-               
 
-                IPurchase objMasterlist = (IPurchase)ObjectFactory.CreateInstance("BusinessProcess.SCM.BPurchase,BusinessProcess.SCM");
-                int ret = objMasterlist.SavePurchaseOrder(dtOrdermaster, dtOrderItem, IsPOUpdated);
 
-                if (ret > 0)
+            IPurchase objMasterlist = (IPurchase)ObjectFactory.CreateInstance("BusinessProcess.SCM.BPurchase,BusinessProcess.SCM");
+            int ret = objMasterlist.SavePurchaseOrder(dtOrdermaster, dtOrderItem, IsPOUpdated);
+
+            if (ret > 0)
+            {
+                IQCareWindowMsgBox.ShowWindow("ProgramSave", this);
+                if (GblIQCare.PurchaseOrderID == 0)
                 {
-                    IQCareWindowMsgBox.ShowWindow("ProgramSave", this);
-                    if (GblIQCare.PurchaseOrderID == 0)
-                    {
-                        GblIQCare.PurchaseOrderID = ret;
-                    }
-                    formInit();
-                    return;
+                    GblIQCare.PurchaseOrderID = ret;
                 }
-            
+                formInit();
+                return;
+            }
+
         }
 
-       
-       
+
+
         private void btnclose_Click(object sender, EventArgs e)
         {
+           
+            string frmname;
+            if (GblIQCare.theArea == "PO")
+            {
+
+                frmname = "IQCare.SCM.frmViewPurchaseOrder, IQCare.SCM";
+                Form theForm = (Form)Activator.CreateInstance(Type.GetType(frmname.ToString()));
+                theForm.MdiParent = this.MdiParent;
+                theForm.Top = 2;
+                theForm.Left = 2;
+                theForm.Show();
+            }
+           
+
             this.Close();
         }
         private void BindStoreName()
@@ -297,7 +316,7 @@ namespace IQCare.SCM
             IMasterList objItemCommonlist = (IMasterList)ObjectFactory.CreateInstance("BusinessProcess.SCM.BMasterList,BusinessProcess.SCM");
             IQCareUtils theUtils = new IQCareUtils();
             DataSet theDS = objItemCommonlist.GetStoreDetail();
-           
+
             theDV = new DataView(XMLDS.Tables["Mst_Store"]);
             theDV.RowFilter = "(DeleteFlag =0 or DeleteFlag is null) and  ( Id =" + StoreID + ")";
             theStoreDT = theDV.ToTable();
@@ -306,30 +325,6 @@ namespace IQCare.SCM
             ddlDestinationStore.DisplayMember = "Name";
             ddlDestinationStore.ValueMember = "Id";
 
-        }
-       
-        private void BindGrid(int PurchaseMode)
-        {
-            //IMasterList objPOItem = (IMasterList)ObjectFactory.CreateInstance("BusinessProcess.SCM.BMasterList,BusinessProcess.SCM");
-            IPurchase objPOItem = (IPurchase)ObjectFactory.CreateInstance("BusinessProcess.SCM.BPurchase,BusinessProcess.SCM");
-           if(PurchaseMode==1)
-           {
-               dsPOItems = objPOItem.GetPurcaseOrderItem(PurchaseMode, GblIQCare.AppUserId, 0);
-           }
-           
-
-           
-
-            BindGrid(dsPOItems);
-            BindAuthorPreparedBy();
-        }
-        private void BindAuthorPreparedBy()
-        {
-            BindFunctions theBind = new BindFunctions();
-            theBind.Win_BindCombo(ddlAuthorisedBy, dsPOItems.Tables[3], "EmpName", "EmployeeID");
-            DataTable theDT = dsPOItems.Tables[3].Copy();
-
-            theBind.Win_BindCombo(ddlPreparedBy, theDT, "EmpName", "EmployeeID");
         }
         private void BindGrid(DataSet theDS)
         {
@@ -343,11 +338,13 @@ namespace IQCare.SCM
                 theColumnItemName.HeaderText = "Item Name";
                 theColumnItemName.Name = "ItemName";
                 theColumnItemName.DataPropertyName = "ItemId";
-                if(GblIQCare.ModePurchaseOrder==1)
+                if (GblIQCare.ModePurchaseOrder == 1)
                 {
                     DataView theItemDV;
                     theItemDV = new DataView(theDS.Tables[0]);
-                    theItemDV.RowFilter = "SupplierId =" + ddlSupplier.SelectedValue.ToString() ;
+                   
+                        theItemDV.RowFilter = "SupplierId =" + ddlSupplier.SelectedValue.ToString();
+                  
                     DataTable theComDT = theItemDV.ToTable();
 
                     DataRow drItemSelect;
@@ -359,11 +356,12 @@ namespace IQCare.SCM
 
                     theColumnItemName.DataSource = theComDT;
                 }
-                else if(GblIQCare.ModePurchaseOrder==2)
+                else if (GblIQCare.ModePurchaseOrder == 2)
                 {
                     DataRow drItemSelect;
                     drItemSelect = theDS.Tables[0].NewRow();
                     drItemSelect["ItemId"] = 0;
+                    drItemSelect["ItemTypeId"] = 0;
                     drItemSelect["ItemName"] = "Select";
                     theDS.Tables[0].Rows.InsertAt(drItemSelect, 0);
 
@@ -382,6 +380,13 @@ namespace IQCare.SCM
                 theColumnItemCode.Name = "ItemCode";
                 theColumnItemCode.DataPropertyName = "ItemCode";
                 theColumnItemCode.ReadOnly = true;
+
+                DataGridViewTextBoxColumn theColumnItemTypeId = new DataGridViewTextBoxColumn();
+                theColumnItemTypeId.HeaderText = "Item Type";
+                theColumnItemTypeId.Name = "ItemTypeId";
+                theColumnItemTypeId.DataPropertyName = "ItemTypeId";
+                theColumnItemTypeId.ReadOnly = true;
+                theColumnItemTypeId.Visible = false;
 
                 DataGridViewTextBoxColumn theColumnUnit = new DataGridViewTextBoxColumn();
                 theColumnUnit.HeaderText = "Purchase Units";
@@ -405,7 +410,7 @@ namespace IQCare.SCM
                 theColumnPrice.HeaderText = "Price /Unit";
                 theColumnPrice.DataPropertyName = "Price";
                 theColumnPrice.Name = "Price";
-                theColumnPrice.ReadOnly = true;
+                theColumnPrice.ReadOnly = false;
 
                 DataGridViewTextBoxColumn theColumnTotPrice = new DataGridViewTextBoxColumn();
                 theColumnTotPrice.HeaderText = "Total Price";
@@ -428,10 +433,11 @@ namespace IQCare.SCM
                     theColumnPrice.Width = 90;
                     theColumnTotPrice.Width = 85;
                 }
-                
+
                 dgwItemSubitemDetails.Columns.Add(theColumnTotPrice);
+                dgwItemSubitemDetails.Columns.Add(theColumnItemTypeId);
             }
-            catch(Exception err)
+            catch (Exception err)
             {
                 MsgBuilder theBuilder = new MsgBuilder();
                 theBuilder.DataElements["MessageText"] = err.Message.ToString();
@@ -439,25 +445,45 @@ namespace IQCare.SCM
                 return;
             }
         }
-       
 
-       
+        private void BindGrid(int PurchaseMode)
+        {
+            //IMasterList objPOItem = (IMasterList)ObjectFactory.CreateInstance("BusinessProcess.SCM.BMasterList,BusinessProcess.SCM");
+            IPurchase objPOItem = (IPurchase)ObjectFactory.CreateInstance("BusinessProcess.SCM.BPurchase,BusinessProcess.SCM");
+            if (PurchaseMode == 1)
+            {
+                dsPOItems = objPOItem.GetPurchaseOrderItem(PurchaseMode, GblIQCare.AppUserId, 0);
+            }
 
-       // TextBox txtItem;
+
+
+
+            BindGrid(dsPOItems);
+            BindAuthorPreparedBy();
+        }
+        private void BindAuthorPreparedBy()
+        {
+            BindFunctions theBind = new BindFunctions();
+            theBind.Win_BindCombo(ddlAuthorisedBy, dsPOItems.Tables[3], "EmpName", "EmployeeID");
+            DataTable theDT = dsPOItems.Tables[3].Copy();
+
+            theBind.Win_BindCombo(ddlPreparedBy, theDT, "EmpName", "EmployeeID");
+        }
+        // TextBox txtItem;
         private void dgwItemSubitemDetails_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
             if (e.Control.GetType().ToString() == "System.Windows.Forms.DataGridViewComboBoxEditingControl")
             {
-                
+
                 theGrdCombo = (ComboBox)e.Control;
                 theGrdCombo.SelectedValueChanged += null;
                 deletedGridByKey = false;
                 theGrdCombo.SelectedValueChanged += new EventHandler(theCombo_SelectedValueChanged);
-               
+
             }
             DataGridView dgwDataGridForEvent = sender as DataGridView;
             //!IsHandleAdded &&
-            if ( dgwDataGridForEvent.CurrentCell.ColumnIndex==3)
+            if (dgwDataGridForEvent.CurrentCell.ColumnIndex == 3)
             {
                 TextBox txtQuantity = e.Control as TextBox;
                 if (txtQuantity != null)
@@ -468,18 +494,18 @@ namespace IQCare.SCM
             }
             if (e.Control.GetType().ToString() == "System.Windows.Forms.DataGridViewButtonColumn")
             {
-               
-              
+
+
             }
-            
-            
+
+
         }
 
-       
-         void txtQuantity_KeyPress(object sender, KeyPressEventArgs e)
+
+        void txtQuantity_KeyPress(object sender, KeyPressEventArgs e)
         {
-             BindFunctions theBind = new BindFunctions();
-             theBind.Win_decimal(e);
+            BindFunctions theBind = new BindFunctions();
+            theBind.Win_decimal(e);
         }
 
         void theCombo_SelectedValueChanged(object sender, EventArgs e)
@@ -492,30 +518,28 @@ namespace IQCare.SCM
 
                     if (theGrdCombo.DataSource != null && theGrdCombo.SelectedValue.GetType().ToString() != "System.Data.DataRowView")
                     {
-                        
 
-                            string strdrug = theGrdCombo.SelectedValue.ToString();
-                            ////DataSet dsSetItemdetail = dsPOItems.Copy();
-                            ////DataView dvFilteredRow = new DataView();
-                            ////dvFilteredRow = dsSetItemdetail.Tables[1].DefaultView;
-                            string[] strArry = strdrug.Split('-');
-                            DataTable theDT = new DataTable();
-                            theDT = dsPOItems.Tables[1].Copy();
-                            DataView dvFilteredRow = theDT.DefaultView;
-                            DataTable dtRow = new DataTable();
-                            dvFilteredRow.RowFilter = "Drug_Pk=" + strArry[0];
 
-                            dtRow = dvFilteredRow.ToTable();
-                            if (dtRow.Rows.Count > 0)
+                        string strdrug = theGrdCombo.SelectedValue.ToString();
+                        string[] strArry = strdrug.Split('-');
+                        DataTable theDT = new DataTable();
+                        theDT = dsPOItems.Tables[1].Copy();
+                        DataView dvFilteredRow = theDT.DefaultView;
+                        DataTable dtRow = new DataTable();
+                        dvFilteredRow.RowFilter = "Drug_Pk=" + strArry[0];
+
+                        dtRow = dvFilteredRow.ToTable();
+                        if (dtRow.Rows.Count > 0)
+                        {
+                            if (!deletedGridByKey)
                             {
-                                if (!deletedGridByKey)
-                                {
                                 dgwItemSubitemDetails.CurrentRow.Cells["ItemCode"].Value = dtRow.Rows[0]["DrugId"].ToString();
+                                dgwItemSubitemDetails.CurrentRow.Cells["ItemTypeId"].Value = dtRow.Rows[0]["ItemTypeId"].ToString();
                                 dgwItemSubitemDetails.CurrentRow.Cells["ItemCode"].ReadOnly = true;
                                 dgwItemSubitemDetails.CurrentRow.Cells["Units"].Value = dtRow.Rows[0]["PurchaseUnitName"].ToString();
                                 dgwItemSubitemDetails.CurrentRow.Cells["Units"].ReadOnly = true;
                                 dgwItemSubitemDetails.CurrentRow.Cells["Price"].Value = Convert.ToDecimal(dtRow.Rows[0]["PurchaseUnitPrice"].ToString());
-                                dgwItemSubitemDetails.CurrentRow.Cells["Price"].ReadOnly = true;
+                                dgwItemSubitemDetails.CurrentRow.Cells["Price"].ReadOnly = false;
                                 if (Convert.ToString(dtRow.Rows[0]["QtyPerPurchaseunit"]) != "")
                                 {
                                     dgwItemSubitemDetails.CurrentRow.Cells["UnitQuantity"].Value = Convert.ToDecimal(dtRow.Rows[0]["QtyPerPurchaseunit"].ToString());
@@ -525,96 +549,31 @@ namespace IQCare.SCM
                                 dgwItemSubitemDetails.CurrentRow.Cells["OrderQuantity"].Value = 0;
                                 dgwItemSubitemDetails.CurrentRow.Cells["TotPrice"].ReadOnly = true;
 
-                                ////For Inter store Transfer 
-                                //if (GblIQCare.ModePurchaseOrder == 2)
-                                //{
-
-                                //    DataRowView theGrdCombodrow = (DataRowView)theGrdCombo.SelectedItem;
-                                //    string strdrugName = theGrdCombodrow.Row.ItemArray[1].ToString();
-
-                                //    DataTable theISTDT = dsPOItems.Tables[0].Copy();
-                                //    DataView dvISTFilteredRow = theISTDT.DefaultView;
-                                //    DataTable dtISTRow = new DataTable();
-                                //    dvISTFilteredRow.RowFilter = "ItemName ='" + strdrugName + "'";
-
-
-                                //    dtISTRow = dvISTFilteredRow.ToTable();
-                                //    dgwItemSubitemDetails.CurrentRow.Cells["AvailableQTY"].Value = dtISTRow.Rows[0]["AvailableQTY"].ToString();
-                                //    dgwItemSubitemDetails.CurrentRow.Cells["AvailableQTY"].ReadOnly = true;
-                                //    dgwItemSubitemDetails.CurrentRow.Cells["ExpiryDate"].Value = dtISTRow.Rows[0]["ExpiryDate"].ToString();
-                                //    dgwItemSubitemDetails.CurrentRow.Cells["ExpiryDate"].ReadOnly = true;
-                                //    dgwItemSubitemDetails.CurrentRow.Cells["BatchID"].Value = dtISTRow.Rows[0]["BatchId"].ToString();
-                                //    dgwItemSubitemDetails.CurrentRow.Cells["BatchID"].ReadOnly = true;
-                                //    dgwItemSubitemDetails.CurrentRow.Cells["BatchName"].Value = dtISTRow.Rows[0]["Batch"].ToString();
-                                //    dgwItemSubitemDetails.CurrentRow.Cells["BatchName"].ReadOnly = true;
-
-                                //    //dgwItemSubitemDetails.CurrentRow.Cells["OrderQuantity"].Value = 0;
-                                //    //dgwItemSubitemDetails.CurrentRow.Cells["TotPrice"].ReadOnly = true;
-                                //}
-
-
-                                //dgwItemSubitemDetails.CurrentRow.Cells["Delete"].Value = "Delete";
-                                //if (dtRow.Rows[0]["delete"].ToString() == "1")
-                                //{
-
-                                //    dgwItemSubitemDetails.CurrentRow.Cells["Delete"].ReadOnly = false;
-                                //}
-                                //else
-                                //{
-                                //    dgwItemSubitemDetails.CurrentRow.Cells["Delete"].ReadOnly = true;
-                                //}
-
                                 dgwItemSubitemDetails.AllowUserToAddRows = true;
-
-                                ////DataView dvFundedRow = new DataView();
-                                ////DataTable dtFundedRow = new DataTable();
-                                ////dvFundedRow = dsSetItemdetail.Tables[4].DefaultView;
-                                ////dvFundedRow.RowFilter = "Drug_Pk=" + theGrdCombo.SelectedValue.ToString();
-                                ////dtFundedRow = dvFundedRow.ToTable();
-                                ////if (dtFundedRow.Rows.Count > 0)
-                                ////{
-                                ////    dgwItemSubitemDetails.CurrentRow.Cells["IsFunded"].Value = dtFundedRow.Rows[0]["Isfunded"].ToString();
-                                ////}
-                                ////else
-                                ////{
-                                ////  dgwItemSubitemDetails.CurrentRow.Cells["IsFunded"].Value = 0;
-                                ////}
-
-                                ////if (dsSetItemdetail != null)
-                                ////{
-                                ////    dsSetItemdetail.Dispose();
-                                ////    dsSetItemdetail = null;
-                                ////}
                                 dvFilteredRow = null;
                                 dtRow = null;
                                 theDT = null;
-                                ////dvFundedRow = null;
-                                ////dtFundedRow = null;
-                                }
                             }
-                            else
-                            {
+                        }
+                        else
+                        {
 
-                                if (dgwItemSubitemDetails.SelectedRows.Count > 0)
+                            if (dgwItemSubitemDetails.SelectedRows.Count > 0)
+                            {
+                                foreach (DataGridViewRow row in dgwItemSubitemDetails.SelectedRows)
                                 {
-                                    foreach (DataGridViewRow row in dgwItemSubitemDetails.SelectedRows)
-                                    {
-                                        dgwItemSubitemDetails.Rows.Remove(row);
-                                        //theGrdCombo.SelectedValueChanged += null;
-                                        deletedGridByKey = true;
-                                        
-                                    }
+                                    dgwItemSubitemDetails.Rows.Remove(row);
+                                    //theGrdCombo.SelectedValueChanged += null;
+                                    deletedGridByKey = true;
+
                                 }
                             }
-                        
+                        }
+
                     }
                 }
 
-            }
-            //catch //(System.StackOverflowException er)
-            //{
-            //    throw;
-            //}
+            }           
             catch (Exception err)
             {
                 MsgBuilder theBuilder = new MsgBuilder();
@@ -625,7 +584,7 @@ namespace IQCare.SCM
 
             finally
             {
-                
+
 
             }
         }
@@ -634,7 +593,7 @@ namespace IQCare.SCM
         {
             if ((theGrdCombo != null))
             {
-               // theGrdCombo.SelectedIndex = theGrdCombo.FindStringExact(theGrdCombo.Text);
+                // theGrdCombo.SelectedIndex = theGrdCombo.FindStringExact(theGrdCombo.Text);
             }
         }
 
@@ -645,7 +604,7 @@ namespace IQCare.SCM
                 if (e.ColumnIndex > -1 && e.RowIndex > -1)
                 {
                     DataGridView dgwDataGrid = sender as DataGridView;
-                    
+
                     if (dgwDataGrid.Columns[e.ColumnIndex].Name == "OrderQuantity" && dgwDataGrid.Rows[e.RowIndex].Cells["OrderQuantity"].Value != null && dgwDataGrid.Rows[e.RowIndex].Cells["Price"].Value != null)
                     {
                         if (Convert.ToString(dgwDataGrid.Rows[e.RowIndex].Cells["OrderQuantity"].Value) != "" && Convert.ToString(dgwDataGrid.Rows[e.RowIndex].Cells["Price"].Value) != "")
@@ -653,17 +612,24 @@ namespace IQCare.SCM
                             dgwDataGrid.Rows[e.RowIndex].Cells["TotPrice"].Value = Convert.ToDecimal(Convert.ToDecimal(dgwDataGrid.Rows[e.RowIndex].Cells["OrderQuantity"].Value.ToString()) * Convert.ToDecimal(dgwDataGrid.Rows[e.RowIndex].Cells["Price"].Value.ToString()));
                         }
                     }
+                    if (dgwDataGrid.Columns[e.ColumnIndex].Name == "Price" && dgwDataGrid.Rows[e.RowIndex].Cells["Price"].Value != null && dgwDataGrid.Rows[e.RowIndex].Cells["OrderQuantity"].Value != null)
+                    {
+                        if (Convert.ToString(dgwDataGrid.Rows[e.RowIndex].Cells["OrderQuantity"].Value) != "" && Convert.ToString(dgwDataGrid.Rows[e.RowIndex].Cells["Price"].Value) != "")
+                        {
+                            dgwDataGrid.Rows[e.RowIndex].Cells["TotPrice"].Value = Convert.ToDecimal(Convert.ToDecimal(dgwDataGrid.Rows[e.RowIndex].Cells["OrderQuantity"].Value.ToString()) * Convert.ToDecimal(dgwDataGrid.Rows[e.RowIndex].Cells["Price"].Value.ToString()));
+                        }
+                    }
                     if (dgwDataGrid.Columns[e.ColumnIndex].Name == "TotPrice" && dgwDataGrid.Rows[e.RowIndex].Cells["TotPrice"].Value != null)
-                    {                      
-                        decimal SumPrice = 0;
+                    {
+                        decimal sumPrice = 0;
                         foreach (DataGridViewRow theDR in dgwDataGrid.Rows)
                         {
-                            if (!String.IsNullOrEmpty(Convert.ToString(theDR.Cells["TotPrice"].Value)))
+                            if (!string.IsNullOrEmpty(Convert.ToString(theDR.Cells["TotPrice"].Value)))
                             {
-                                SumPrice = SumPrice + Convert.ToDecimal(theDR.Cells["TotPrice"].Value);
+                                sumPrice = sumPrice + Convert.ToDecimal(theDR.Cells["TotPrice"].Value);
                             }
                         }
-                        lblTotalAmount.Text = Convert.ToString(SumPrice);
+                        lblTotalAmount.Text = Convert.ToString(sumPrice);
                     }
                 }
             }
@@ -680,7 +646,7 @@ namespace IQCare.SCM
         {
             if (e.Exception.Message.Contains("constrained to be unique") == true)
             {
-               // IQCareWindowMsgBox.ShowWindow("CheckDuplicateValue", this);
+                // IQCareWindowMsgBox.ShowWindow("CheckDuplicateValue", this);
                 return;
             }
             else
@@ -697,7 +663,7 @@ namespace IQCare.SCM
             if (ddlSupplier.SelectedIndex > 0)
             {
                 BindGrid(GblIQCare.ModePurchaseOrder);
-                
+
             }
         }
         public void formInit()
@@ -711,15 +677,15 @@ namespace IQCare.SCM
                 {
                     if (dsPOItemsDetail.Tables[0].Rows.Count > 0)
                     {
-                        
+
                         dtpOrderDate.Text = dsPOItemsDetail.Tables[0].Rows[0]["OrderDate"].ToString();
                         dtpOrderDate.CustomFormat = "dd-MMM-yyyy";
                         dtpOrderDate.Enabled = false;
-                        txtOrderNumber.Text = dsPOItemsDetail.Tables[0].Rows[0]["OrderNo"].ToString();
-                        txtOrderNumber.Enabled = false;
-                       // ddlSourceStore.SelectedValue = Convert.ToInt32(dsPOItemsDetail.Tables[0].Rows[0]["SourceStoreID"].ToString());
+                        txtOrderNumber.Text = dsPOItemsDetail.Tables[0].Rows[0]["PONumber"].ToString();
+                        txtOrderNumber.Enabled = true;
+                        // ddlSourceStore.SelectedValue = Convert.ToInt32(dsPOItemsDetail.Tables[0].Rows[0]["SourceStoreID"].ToString());
 
-                     
+
                         if (GblIQCare.ModePurchaseOrder == 1)
                         {
                             ddlSupplier.DataSource = null;
@@ -736,7 +702,7 @@ namespace IQCare.SCM
                             ddlSupplier.SelectedValue = Convert.ToInt32(dsPOItemsDetail.Tables[0].Rows[0]["SupplierID"].ToString());
                             ddlSupplier.Enabled = false;
                         }
-                        
+
                         ddlDestinationStore.SelectedValue = Convert.ToInt32(dsPOItemsDetail.Tables[0].Rows[0]["DestinStoreID"].ToString());
                         ddlDestinationStore.Enabled = false;
                         ddlPreparedBy.SelectedValue = Convert.ToInt32(dsPOItemsDetail.Tables[0].Rows[0]["PreparedBy"].ToString());
@@ -787,90 +753,32 @@ namespace IQCare.SCM
 
         private void dgwItemSubitemDetails_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-           //DataGridViewRow row = dgwItemSubitemDetails.Rows[e.RowIndex];
-           // if (row != null)
-           // {
-              ////  if (!String.IsNullOrEmpty(Convert.ToString(row.Cells["IsFunded"].Value)))
-            ////    {
-            ////        int Status = Convert.ToInt32(row.Cells["IsFunded"].Value);
-            ////        switch (Status)
-            ////        {
-            ////            case (1):
-            ////                e.CellStyle.BackColor = Color.Cyan;
-            ////                break;
-
-            ////            default:
-            ////                break;
-            ////        }
-            ////    }
-               
-
-           //}  
         }
 
         private void dgwItemSubitemDetails_KeyDown(object sender, KeyEventArgs e)
         {
 
-           // Btndelete.PerformClick();
-            //if (dgwItemSubitemDetails.SelectedRows.Count > 0 && e.KeyData == Keys.Delete)
-            //{
-            //    foreach (DataGridViewRow row in dgwItemSubitemDetails.SelectedRows)
-            //    {
-            //        dgwItemSubitemDetails.Rows.Remove(row);
-            //    }
-            //} 
-
         }
 
-       
+
 
         private void Btndelete_Click(object sender, EventArgs e)
         {
-             foreach (DataGridViewRow row in dgwItemSubitemDetails.SelectedRows)
+            foreach (DataGridViewRow row in dgwItemSubitemDetails.SelectedRows)
+            {
+
+                if (Convert.ToString(row.Cells[0].Value) != "")
                 {
-                
-                 if (Convert.ToString(row.Cells[0].Value) != "")
-                    {
-                        dgwItemSubitemDetails.Rows.Remove(row);
-                    }
+                    dgwItemSubitemDetails.Rows.Remove(row);
                 }
+            }
         }
 
         private void dgwItemSubitemDetails_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
-                //if (GblIQCare.ModePurchaseOrder == 2)
-                //{
-                //    DataTable theDTItems = (DataTable)dgwItemSubitemDetails.DataSource;
-                //    if ((theDTItems.Rows.Count) > e.RowIndex)
-                //    {
-                //        if (e.ColumnIndex > -1 && e.RowIndex > -1)
-                //        {
-                            
-                //            if (dgwItemSubitemDetails.Columns[e.ColumnIndex].Name == "OrderQuantity")
-                //            {
 
-                //                if (Convert.ToString(dgwItemSubitemDetails.Rows[e.RowIndex].Cells["OrderQuantity"].Value) == "0")
-                //                {
-                //                    IQCareWindowMsgBox.ShowWindow("PurchaseOrderQuantityZero", this);
-                //                    return;
-                //                }
-                //                if (!String.IsNullOrEmpty(Convert.ToString(theDTItems.Rows[e.RowIndex][3])))
-                //                {
-                //                    int OrderQuantity = Convert.ToInt32(theDTItems.Rows[e.RowIndex]["OrderQuantity"]);
-                //                    int AvaQTY = Convert.ToInt32(theDTItems.Rows[e.RowIndex]["AvailableQTY"]);
-                //                    if (AvaQTY < OrderQuantity)
-                //                    {
-                //                        IQCareWindowMsgBox.ShowWindow("ISTAvaQTYGreaterOrderQtn", this);
-                //                        theDTItems.Rows[e.RowIndex]["OrderQuantity"] = 0;
-                //                        return;
-                //                    }
-                //                }
-                //            }
-                //        }
-                //    }
-                //}
             }
             catch //(System.Data.DeletedRowInaccessibleException er)
             {
@@ -884,16 +792,7 @@ namespace IQCare.SCM
             }
         }
 
-       
 
-        //private void ddlSourceStore_SelectedValueChanged(object sender, EventArgs e)
-        //{
-        //    if (ddlSourceStore.SelectedIndex > 0)
-        //    {
-        //        BindGrid(GblIQCare.ModePurchaseOrder);
-
-        //    }
-        //}
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
@@ -921,34 +820,11 @@ namespace IQCare.SCM
 
         }
 
-      
-
-     
-
        
-
-        //private void dgwItemSubitemDetails_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        //{
-        //    //if (dgwItemSubitemDetails.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex !=-1)
-        //    //{
-        //    //    if (dgwItemSubitemDetails.Rows.Count > 0)
-        //    //        dgwItemSubitemDetails.Rows.RemoveAt(e.RowIndex);
-
-        //    //        if (dgwItemSubitemDetails.Rows.Count == 0)
-        //    //        {
-        //    //            dgwItemSubitemDetails.AllowUserToAddRows = true;
-        //    //        }
-               
-        //    //}
- 
-        //  }
+    }
 
 
 
-        }
 
-       
 
-      
-    
 }

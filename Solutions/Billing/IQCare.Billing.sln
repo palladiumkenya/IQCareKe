@@ -59,26 +59,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 6
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://kenyahmis.visualstudio.com/
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = ..\\..\\IQCare.Billing\\Entities.Billing\\Entities.Billing.csproj
-		SccProjectName1 = ../../IQCare.Billing/Entities.Billing
-		SccLocalPath1 = ..\\..\\IQCare.Billing\\Entities.Billing
-		SccProjectUniqueName2 = ..\\..\\IQCare.Billing\\BusinessProcess.Billing\\BusinessProcess.Billing.csproj
-		SccProjectName2 = ../../IQCare.Billing/BusinessProcess.Billing
-		SccLocalPath2 = ..\\..\\IQCare.Billing\\BusinessProcess.Billing
-		SccProjectUniqueName3 = ..\\..\\IQCare.Billing\\Interface.Billing\\Interface.Billing.csproj
-		SccProjectName3 = ../../IQCare.Billing/Interface.Billing
-		SccLocalPath3 = ..\\..\\IQCare.Billing\\Interface.Billing
-		SccProjectUniqueName4 = ..\\..\\IQCare.Billing\\IQCare.Web.Billing\\IQCare.Web.Billing.csproj
-		SccProjectName4 = ../../IQCare.Billing/IQCare.Web.Billing
-		SccLocalPath4 = ..\\..\\IQCare.Billing\\IQCare.Web.Billing
-		SccProjectUniqueName5 = ..\\..\\IQCare.Billing\\Billing.Logic\\Billing.Logic.csproj
-		SccProjectName5 = ../../IQCare.Billing/Billing.Logic
-		SccLocalPath5 = ..\\..\\IQCare.Billing\\Billing.Logic
-	EndGlobalSection
+	EndGlobalSection	
 EndGlobal

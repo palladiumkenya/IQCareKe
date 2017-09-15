@@ -13,49 +13,121 @@ namespace IQCare.Web.CCC.Enrollment {
     public partial class ServiceEnrollment {
         
         /// <summary>
-        /// PatientSummary control.
+        /// PatientType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::IQCare.Web.CCC.UC.ucTriage PatientSummary;
+        protected global::System.Web.UI.WebControls.HiddenField PatientType;
         
         /// <summary>
-        /// ServiceAreaId control.
+        /// PersonDOB control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ServiceAreaId;
+        protected global::System.Web.UI.WebControls.TextBox PersonDOB;
         
         /// <summary>
-        /// EnrollmentStatusId control.
+        /// dobPrecision control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList EnrollmentStatusId;
+        protected global::System.Web.UI.WebControls.HiddenField dobPrecision;
         
         /// <summary>
-        /// IdentifierTypeId control.
+        /// IsCCCEnrolled control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList IdentifierTypeId;
+        protected global::System.Web.UI.WebControls.HiddenField IsCCCEnrolled;
         
         /// <summary>
-        /// IdentifierValue control.
+        /// NationalId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox IdentifierValue;
+        protected global::System.Web.UI.WebControls.TextBox NationalId;
+        
+        /// <summary>
+        /// ReconfirmatoryTest control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ReconfirmatoryTest;
+        
+        /// <summary>
+        /// TypeOfReConfirmatoryTest control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList TypeOfReConfirmatoryTest;
+        
+        /// <summary>
+        /// ResultReConfirmatoryTest control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ResultReConfirmatoryTest;
+        
+        /// <summary>
+        /// ReConfirmatoryTestDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox ReConfirmatoryTestDate;
+        
+        /// <summary>
+        /// DateOfEnrollment control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox DateOfEnrollment;
+        
+        /// <summary>
+        /// entryPoint control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList entryPoint;
+        
+        /// <summary>
+        /// SpecificEntryPoint control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox SpecificEntryPoint;
+        
+        /// <summary>
+        /// placeholder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel placeholder;
         
         /// <summary>
         /// btnEnroll control.
@@ -76,12 +148,12 @@ namespace IQCare.Web.CCC.Enrollment {
         protected global::System.Web.UI.WebControls.LinkButton btnRese;
         
         /// <summary>
-        /// LinkButton2 control.
+        /// btnClose control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton2;
+        protected global::System.Web.UI.WebControls.LinkButton btnClose;
     }
 }

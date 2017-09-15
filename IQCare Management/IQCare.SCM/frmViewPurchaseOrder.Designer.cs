@@ -39,7 +39,8 @@
             // 
             // panel2
             // 
-            this.panel2.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(208)))), ((int)(((byte)(255)))));
             this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -83,6 +84,8 @@
             this.dgwPurchaseOrder.AllowUserToDeleteRows = false;
             this.dgwPurchaseOrder.AllowUserToResizeColumns = false;
             this.dgwPurchaseOrder.AllowUserToResizeRows = false;
+            this.dgwPurchaseOrder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgwPurchaseOrder.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgwPurchaseOrder.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgwPurchaseOrder.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
@@ -91,8 +94,8 @@
             this.dgwPurchaseOrder.Size = new System.Drawing.Size(852, 452);
             this.dgwPurchaseOrder.TabIndex = 61;
             this.dgwPurchaseOrder.Tag = "dgwDataGridView";
-            this.dgwPurchaseOrder.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgwPurchaseOrder_CellFormatting);
             this.dgwPurchaseOrder.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwPurchaseOrder_CellClick);
+            this.dgwPurchaseOrder.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgwPurchaseOrder_CellFormatting);
             // 
             // frmViewPurchaseOrder
             // 
@@ -111,7 +114,6 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Tag = "frmForm";
-            
             this.Load += new System.EventHandler(this.frmViewPurchaseOrder_Load);
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgwPurchaseOrder)).EndInit();

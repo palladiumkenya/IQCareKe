@@ -34,6 +34,7 @@
             this.ddlPreparedBy = new System.Windows.Forms.ComboBox();
             this.lblPreparedBy = new System.Windows.Forms.Label();
             this.dgwItemSubitemDetails = new System.Windows.Forms.DataGridView();
+            this.ItemName = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.lblTotal = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.Btndelete = new System.Windows.Forms.Button();
@@ -63,7 +64,6 @@
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ItemName = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.ItemCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Units = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UnitQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -149,10 +149,20 @@
             this.dgwItemSubitemDetails.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwItemSubitemDetails_CellEndEdit);
             this.dgwItemSubitemDetails.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgwItemSubitemDetails_CellFormatting);
             this.dgwItemSubitemDetails.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwItemSubitemDetails_CellLeave);
+            this.dgwItemSubitemDetails.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgwItemSubitemDetails_CellPainting);
             this.dgwItemSubitemDetails.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwItemSubitemDetails_CellValueChanged);
             this.dgwItemSubitemDetails.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgwItemSubitemDetails_DataError);
             this.dgwItemSubitemDetails.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgwItemSubitemDetails_EditingControlShowing);
             this.dgwItemSubitemDetails.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgwItemSubitemDetails_KeyDown);
+            // 
+            // ItemName
+            // 
+            this.ItemName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ItemName.DataPropertyName = "ItemId";
+            this.ItemName.FillWeight = 4F;
+            this.ItemName.HeaderText = "Item Name";
+            this.ItemName.Name = "ItemName";
+            this.ItemName.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // lblTotal
             // 
@@ -401,6 +411,7 @@
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             this.dataGridViewTextBoxColumn1.ReadOnly = true;
             this.dataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn1.Width = 6223;
             // 
             // dataGridViewTextBoxColumn2
             // 
@@ -486,15 +497,6 @@
             this.dataGridViewTextBoxColumn10.HeaderText = "Available Qty";
             this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
             this.dataGridViewTextBoxColumn10.ReadOnly = true;
-            // 
-            // ItemName
-            // 
-            this.ItemName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ItemName.DataPropertyName = "ItemId";
-            this.ItemName.FillWeight = 4F;
-            this.ItemName.HeaderText = "Item Name";
-            this.ItemName.Name = "ItemName";
-            this.ItemName.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // ItemCode
             // 
@@ -602,7 +604,7 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Tag = "frmForm";
-            this.Text = "Inter Store Transfer";
+            this.Text = "Counter Requisitions";
             this.Load += new System.EventHandler(this.frmInterStoretransfer_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgwItemSubitemDetails)).EndInit();
             this.panel1.ResumeLayout(false);

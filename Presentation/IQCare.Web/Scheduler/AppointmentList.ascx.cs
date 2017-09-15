@@ -518,12 +518,12 @@ namespace IQCare.Web.Scheduler
         }
         private void PopulateDropDown()
         {
-            IAppointment FormManager;
+           // IAppointment FormManager;
             DataSet theDtSet;
 
             //*******Get the patient details on the basis of Patient Enrollment Id and show the details.*******//
-            FormManager = (IAppointment)ObjectFactory.CreateInstance("BusinessProcess.Scheduler.BAppointment, BusinessProcess.Scheduler");
-            theDtSet = FormManager.GetAppointmentStatus();
+            IAppointment mGr = (IAppointment)ObjectFactory.CreateInstance("BusinessProcess.Scheduler.BAppointment, BusinessProcess.Scheduler");
+            theDtSet = mGr.GetAppointmentStatus();
 
             BindFunctions appBind = new BindFunctions();
             IQCareUtils theUtils = new IQCareUtils();
@@ -539,7 +539,7 @@ namespace IQCare.Web.Scheduler
                 ddAppointmentStatus.ClearSelection();
             }
 
-            DataSet theDtSetPurpose = FormManager.GetAppointmentReasons(0);
+            DataSet theDtSetPurpose = mGr.GetAppointmentReasons(0);
 
             DataView TheDV = new DataView(theDtSetPurpose.Tables[0]);
             TheDV.RowFilter = "DeleteFlag=0";
@@ -554,6 +554,7 @@ namespace IQCare.Web.Scheduler
             appBind.BindCombo(ddlServiceAreas, dt, "ModuleName", "ModuleId", "ModuleName");
 
             ddlServiceAreas.ClearSelection();
+            mGr = null;
         }
 
         private void PopulateAppointment()
@@ -602,7 +603,7 @@ namespace IQCare.Web.Scheduler
                 //if (grdSearchResult.Rows.Count == 0)
                 //{
 
-               
+
                 //    //var list = new List<KeyValuePair<string, string>>();
                 //    //list.Add(new KeyValuePair<string, string>("Message", IQCareMsgBox.GetMessage("NoAppointmentRecordExists", this)));
                 //    //list.Add(new KeyValuePair<string, string>("Title", "Notification"));
@@ -610,6 +611,7 @@ namespace IQCare.Web.Scheduler
                 //    //list.Add(new KeyValuePair<string, string>("okscript", "javascript:return false;"));
                 //    //this.OnNotifyCommand(this, new CommandEventArgs("Notice", list));
                 //}
+                objMgr = null;
             }
             catch (Exception ex)
             {

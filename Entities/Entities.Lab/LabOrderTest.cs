@@ -27,7 +27,7 @@ namespace Entities.Lab
         /// </value>       
         [ForeignKey("Order")]
         public int LabOrderId { get; set; }
-
+        
         public virtual LabOrder Order { get; set; }
         /// <summary>
         /// Gets or sets the lab test identifier.
@@ -36,12 +36,18 @@ namespace Entities.Lab
         /// The lab test identifier.
         /// </value>
         public virtual LabTest Test { get; set; }
-        [Column("LabTestId")]
-        [ForeignKey("Test")]
+
+        //[Column("LabTestId")]
+        //[ForeignKey("Test")]
         public int TestId
         {
-            get;set;
+            get
+            {
+                return Test.Id;
+            }
+            set {  }
         }
+               
         [NotMapped]
         public string TestName
         {

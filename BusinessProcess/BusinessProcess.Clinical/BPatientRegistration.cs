@@ -290,7 +290,9 @@ namespace BusinessProcess.Clinical
             DateTime? registrationDate,
             int ModuleId = 999,
             int MaxRecords = 100,
-            string ruleFilter="")
+            string ruleFilter="",
+             string phoneNumber ="",
+             string identifierName = "")
         {
             lock (this)
             {
@@ -318,7 +320,13 @@ namespace BusinessProcess.Clinical
                     ClsUtility.AddParameters("@status", SqlDbType.Int, status.ToString());
                 if (ModuleId > 0)
                     ClsUtility.AddParameters("@ModuleId", SqlDbType.Int, ModuleId.ToString());
-                ClsUtility.AddParameters("@password", SqlDbType.VarChar, ApplicationAccess.DBSecurity);
+                if (!string.IsNullOrEmpty(phoneNumber))
+                    ClsUtility.AddParameters("@PhoneNumber", SqlDbType.VarChar, phoneNumber.Trim());
+                if (!string.IsNullOrEmpty(identifierName))
+                {
+                    ClsUtility.AddParameters("@IdentifierName", SqlDbType.VarChar, identifierName.Trim());
+                }
+               // ClsUtility.AddParameters("@password", SqlDbType.VarChar, ApplicationAccess.DBSecurity);
                 ClsUtility.AddExtendedParameters("@top", SqlDbType.Int, MaxRecords);
                 ClsUtility.AddExtendedParameters("@RuleFilter", SqlDbType.VarChar, ruleFilter);
                 ClsObject UserManager = new ClsObject();
@@ -1878,6 +1886,23 @@ namespace BusinessProcess.Clinical
                      ).FirstOrDefault();
             return s;
 
+        }
+
+        public void BlueCardToGreenCardSyncronise(int ptn_Pk)
+        {
+            ClsUtility.Init_Hashtable();
+            ClsUtility.AddExtendedParameters("@ptn_pk", SqlDbType.Int, ptn_Pk);         
+            ClsObject obClsObject = new ClsObject();
+            obClsObject.ReturnObject(ClsUtility.theParams, "SP_Bluecard_ToGreenCard", ClsUtility.ObjectEnum.ExecuteNonQuery);
+        }
+
+        public DataTable GetIdentifiersByServiceAreaId(int serviceAreaId = 0)
+        {
+            ClsUtility.Init_Hashtable();
+            if (serviceAreaId > 0)
+                ClsUtility.AddExtendedParameters("@ServiceAreaId", SqlDbType.Int, serviceAreaId);
+            ClsObject ob = new ClsObject();
+          return  (DataTable) ob.ReturnObject(ClsUtility.theParams, "Registration_GetIdentifierByServiceArea", ClsUtility.ObjectEnum.DataTable);
         }
     }
 }

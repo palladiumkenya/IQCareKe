@@ -7,6 +7,7 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "IQCare.Release", "..\..\IQC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCare.Web.Billing", "..\..\IQCare.Billing\IQCare.Web.Billing\IQCare.Web.Billing.csproj", "{FC234801-3F23-4C49-8250-72573B1953E4}"
 	ProjectSection(ProjectDependencies) = postProject
+		{DFC70960-E4F4-41E4-B219-B80BA8635B5B} = {DFC70960-E4F4-41E4-B219-B80BA8635B5B}
 		{D8CB5960-1D8C-49F6-93C3-8067F6A9BAA8} = {D8CB5960-1D8C-49F6-93C3-8067F6A9BAA8}
 	EndProjectSection
 EndProject
@@ -16,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCare.Web", "..\..\Present
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCare.Web.WebService", "..\..\IQCare.Lookup\IQCare.Web.WebService\IQCare.Web.WebService.csproj", "{DFC70960-E4F4-41E4-B219-B80BA8635B5B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCare.Web.CCC", "..\..\IQCare.CCC\IQCare.Web.CCC\IQCare.Web.CCC.csproj", "{1FD9CC7D-0CA8-4746-8565-AE446765410A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,26 +42,12 @@ Global
 		{DFC70960-E4F4-41E4-B219-B80BA8635B5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DFC70960-E4F4-41E4-B219-B80BA8635B5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DFC70960-E4F4-41E4-B219-B80BA8635B5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FD9CC7D-0CA8-4746-8565-AE446765410A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FD9CC7D-0CA8-4746-8565-AE446765410A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FD9CC7D-0CA8-4746-8565-AE446765410A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FD9CC7D-0CA8-4746-8565-AE446765410A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 5
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://kenyahmis.visualstudio.com/
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = ..\\..\\Presentation\\IQCare.Web\\IQCare.Web.csproj
-		SccProjectName1 = ../../Presentation/IQCare.Web
-		SccLocalPath1 = ..\\..\\Presentation\\IQCare.Web
-		SccProjectUniqueName2 = ..\\..\\IQCare.Billing\\IQCare.Web.Billing\\IQCare.Web.Billing.csproj
-		SccProjectName2 = ../../IQCare.Billing/IQCare.Web.Billing
-		SccLocalPath2 = ..\\..\\IQCare.Billing\\IQCare.Web.Billing
-		SccProjectUniqueName3 = ..\\..\\IQCare.Release\\IQCare.Release.vdproj
-		SccProjectName3 = ../../IQCare.Release
-		SccLocalPath3 = ..\\..\\IQCare.Release
-		SccProjectUniqueName4 = ..\\..\\IQCare.Lookup\\IQCare.Web.WebService\\IQCare.Web.WebService.csproj
-		SccProjectName4 = ../../IQCare.Lookup/IQCare.Web.WebService
-		SccLocalPath4 = ..\\..\\IQCare.Lookup\\IQCare.Web.WebService
 	EndGlobalSection
 EndGlobal

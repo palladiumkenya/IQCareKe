@@ -20,7 +20,7 @@ namespace BusinessProcess.Lookup
         /// <param name="lookupName">Name of the lookup.</param>
         /// <param name="lookupcategory">The lookupcategory.</param>
         /// <returns></returns>
-        public List<Item> GetLookupItems(string prefix, string lookupName, string lookupcategory)
+        public List<LookupItem> GetLookupItems(string prefix, string lookupName, string lookupcategory)
         {
             LookupRepository repo = new LookupRepository();
             if (!string.IsNullOrEmpty(prefix))
@@ -40,7 +40,7 @@ namespace BusinessProcess.Lookup
         /// <param name="lookupName">Name of the lookup.</param>
         /// <param name="lookupcategory">The lookupcategory.</param>
         /// <returns></returns>
-        public Item GetLookUpItem(int id, string lookupName, string lookupcategory)
+        public LookupItem GetLookUpItem(int id, string lookupName, string lookupcategory)
         {
             LookupRepository repo = new LookupRepository();
             return repo.Find(id, lookupName, lookupcategory);

@@ -65,7 +65,7 @@
               <xs:sequence>
                 <xs:element name="Id" type="xs:int" minOccurs="0" />
                 <xs:element name="Name" type="xs:string" minOccurs="0" />
-                <xs:element name="SRNo" type="xs:int" minOccurs="0" />
+                <xs:element name="SRNo" type="xs:decimal" minOccurs="0" />
                 <xs:element name="UpdateFlag" type="xs:int" minOccurs="0" />
                 <xs:element name="DeleteFlag" type="xs:int" minOccurs="0" />
                 <xs:element name="SystemID" type="xs:int" minOccurs="0" />
@@ -562,7 +562,7 @@
     <LabDepartmentId>2</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
     <Sequence>61</Sequence>
-    <DeleteFlag>false</DeleteFlag>
+    <DeleteFlag>true</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
     <LabTestId>8</LabTestId>
@@ -574,14 +574,14 @@
   </Mst_LabTest>
   <Lnk_TestParameter>
     <SubTestId>1</SubTestId>
-    <SubTestName>CD4</SubTestName>
+    <SubTestName>CD4 Count</SubTestName>
     <TestId>1</TestId>
     <DeleteFlag>false</DeleteFlag>
   </Lnk_TestParameter>
   <Lnk_TestParameter>
     <SubTestId>2</SubTestId>
     <SubTestName>CD4 Percent</SubTestName>
-    <TestId>1</TestId>
+    <TestId>2</TestId>
     <DeleteFlag>false</DeleteFlag>
   </Lnk_TestParameter>
   <Lnk_TestParameter>
@@ -1074,7 +1074,7 @@
     <SubTestId>107</SubTestId>
     <SubTestName>ViralLoad Undetectable</SubTestName>
     <TestId>3</TestId>
-    <DeleteFlag>false</DeleteFlag>
+    <DeleteFlag>true</DeleteFlag>
   </Lnk_TestParameter>
   <Lnk_TestParameter>
     <SubTestId>108</SubTestId>
@@ -1137,7 +1137,7 @@
   <Lnk_LabValue>
     <SubTestId>3</SubTestId>
     <MinBoundaryValue>50.00</MinBoundaryValue>
-    <MaxBoundaryValue>2000000.00</MaxBoundaryValue>
+    <MaxBoundaryValue>3000000.00</MaxBoundaryValue>
     <MinNormalRange>50.00</MinNormalRange>
     <MaxNormalRange>2000000.00</MaxNormalRange>
     <TextNormalRange />
@@ -1805,14 +1805,14 @@
   </Lnk_ParameterResult>
   <LabTestOrder>
     <SubTestId>1</SubTestId>
-    <SubTestName>CD4</SubTestName>
+    <SubTestName>CD4 Count</SubTestName>
     <TestId>1</TestId>
     <DeleteFlag>false</DeleteFlag>
   </LabTestOrder>
   <LabTestOrder>
     <SubTestId>2</SubTestId>
     <SubTestName>CD4 Percent</SubTestName>
-    <TestId>1</TestId>
+    <TestId>2</TestId>
     <DeleteFlag>false</DeleteFlag>
   </LabTestOrder>
   <LabTestOrder>
@@ -1957,12 +1957,6 @@
     <SubTestId>28</SubTestId>
     <SubTestName>Cell Count RBCs</SubTestName>
     <TestId>56</TestId>
-    <DeleteFlag>false</DeleteFlag>
-  </LabTestOrder>
-  <LabTestOrder>
-    <SubTestId>29</SubTestId>
-    <SubTestName>Cell Count WBCs</SubTestName>
-    <TestId>57</TestId>
     <DeleteFlag>false</DeleteFlag>
   </LabTestOrder>
   <LabTestOrder>

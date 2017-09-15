@@ -281,9 +281,9 @@
                                                     <td style="width: 35%" align="center">
                                                         <div class="col-md-6 pull-left">
                                                             <label class="patientInfo pull-left">
-                                                                Weight (Kg):</label><label class="smalllabel text-info" id="dtwt" runat="server">
+                                                                Weight (Kg):</label><label class="smalllabel text-info" id="dtwt" runat="server"></label>
                                                                     <asp:TextBox ID="txtWeight" CssClass="form-control" MaxLength="4" runat="server"></asp:TextBox>
-                                                                </label>
+                                                                
                                                             <div>
                                                     </td>
                                                     <td style="width: 35%" align="center">
@@ -441,6 +441,11 @@
                                             <br />
                                             <div class="border pad5 whitebg" id="pnlARV" runat="server" visible="false" style="padding-bottom: 2%">
                                                 <asp:Panel ID="pnlPedia" runat="server" Height="100%" Width="100%" Wrap="true">
+                                                </asp:Panel>
+                                            </div>
+                                            <br />
+                                             <div class="border pad5 whitebg" id="divVaccine" runat="server" visible="false" style="padding-bottom: 2%">
+                                                <asp:Panel ID="panelVaccine" runat="server" Height="100%" Width="100%" Wrap="true" CssClass="panel panel-default">
                                                 </asp:Panel>
                                             </div>
                                             <br />

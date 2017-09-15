@@ -11,10 +11,6 @@
     <AssemblyName>Interface.CCC</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -35,6 +31,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Entities.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Entities.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Entities.PatientCore, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Entities.PatientCore.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,15 +48,87 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="assessment\IPatientPsychosocialCriteriamanager.cs" />
+    <Compile Include="assessment\IPatientSupportSystemsCriteriaManager.cs" />
+    <Compile Include="Baseline\IINHProphylaxisManager.cs" />
+    <Compile Include="Baseline\IPatientBaselineAssessmentManager.cs" />
+    <Compile Include="Baseline\IPatientArvHistoryManager.cs" />
+    <Compile Include="Baseline\IPatientDisclosureManager.cs" />
+    <Compile Include="Baseline\IPatientHivDiagnosisManager.cs" />
+    <Compile Include="Baseline\IPatientLinkageManager.cs" />
+    <Compile Include="Baseline\IPatientTreatmentInitiationManager.cs" />
+    <Compile Include="Baseline\IPatientVaccinationManager.cs" />
+    <Compile Include="Baseline\IPatientHivEnrolmetBaselineManager.cs" />
+    <Compile Include="Baseline\IPatientTranfersInManager.cs" />
+    <Compile Include="Encounter\IPatientAdherenceAssessessment.cs" />
+    <Compile Include="Encounter\IPatientCareEnding.cs" />
+    <Compile Include="Encounter\IPatientLabDetails.cs" />
+    <Compile Include="Encounter\IPatientLabOrder.cs" />
+    <Compile Include="Encounter\IPatientWhoStageManager.cs" />
+    <Compile Include="Enrollment\IHivReConfirmatoryTestManager.cs" />
+    <Compile Include="Enrollment\IIdentifiersManager.cs" />
+    <Compile Include="Enrollment\IPatientArvDistributionManager.cs" />
+    <Compile Include="Enrollment\IPatientEnrollmentManager.cs" />
+    <Compile Include="Enrollment\IPatientEntryPointManager.cs" />
+    <Compile Include="Enrollment\IPatientIdentifierManager.cs" />
+    <Compile Include="Enrollment\IPatientReEnrollmentManager.cs" />
+    <Compile Include="Enrollment\IServiceAreaIdentifiers.cs" />
+    <Compile Include="IMst_PatientInsert.cs" />
+    <Compile Include="IPatientAppointment.cs" />
+    <Compile Include="Baseline\IPatientHivTestingManager.cs" />
+    <Compile Include="IPatientCategorizationmanager.cs" />
+    <Compile Include="IPatientConsent.cs" />
+    <Compile Include="IPatientMaritalStatusManager.cs" />
+    <Compile Include="IPatientOVCStatusmanager.cs" />
+    <Compile Include="IPatientPharmacy.cs" />
+    <Compile Include="IPatientPopuationManager.cs" />
+    <Compile Include="IPatientTreatmeantSupporterManager.cs" />
+    <Compile Include="IPatientVitals.cs" />
+    <Compile Include="IPatientEncounter.cs" />
+    <Compile Include="IPersonContactManager.cs" />
+    <Compile Include="IPersonLocationManager.cs" />
+    <Compile Include="IPersonManager.cs" />
+    <Compile Include="IPersonRelationshipManager.cs" />
+    <Compile Include="Lookup\IFacilityList.cs" />
+    <Compile Include="Lookup\ILookupManager.cs" />
+    <Compile Include="Lookup\IPatientBaselineLookupManager.cs" />
+    <Compile Include="Lookup\IPatientLookupmanager.cs" />
+    <Compile Include="Lookup\IPatientServiceEnrollmentLookupManager.cs" />
+    <Compile Include="Lookup\IPatientStabilitySummaryManager.cs" />
+    <Compile Include="Lookup\IPatientTreatmentSupporterLookupManager.cs" />
+    <Compile Include="Lookup\IPatientTreatmentTrackerManager.cs" />
+    <Compile Include="Lookup\IPersonContactLookUpManager.cs" />
+    <Compile Include="Lookup\IPersonGreenCardLookupManager.cs" />
+    <Compile Include="Lookup\IPersonLookUpManager.cs" />
+    <Compile Include="Lookup\ITestingSummaryStatisticsManager.cs" />
+    <Compile Include="OneTimeEvent\IOneTimeEventsTrackerManager.cs" />
+    <Compile Include="Patient\IPatientManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Screening\IPatientScreeningManager.cs" />
+    <Compile Include="Triage\IpatientFamilyPlanningManager.cs" />
+    <Compile Include="Triage\IpatientPregnancyIndicatorManager.cs" />
+    <Compile Include="Triage\IPatientFamilyPlanningMethodManager.cs" />
+    <Compile Include="Triage\IPatientPregnancyManager.cs" />
+    <Compile Include="Tb\IPateintIptOutcome.cs" />
+    <Compile Include="Tb\IPatientIcf.cs" />
+    <Compile Include="Tb\IPatientIpt.cs" />
+    <Compile Include="Tb\IPatientIptWorkup.cs" />
+    <Compile Include="Tb\IPatientIcfAction.cs" />
+    <Compile Include="Visit\IPatientEncounterManager.cs" />
+    <Compile Include="Visit\IPatientIdentifierManager.cs" />
+    <Compile Include="Visit\IPatientLabOrderManager.cs" />
+    <Compile Include="Visit\IPatientMasterVisitManager.cs" />
+    <Compile Include="Visit\IPatientVisitManager.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Entities.CCC\Entities.CCC.csproj">
+      <Project>{BBCC4817-4E69-4722-A560-8988A795CE50}</Project>
+      <Name>Entities.CCC</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Baseline\" />
-    <Folder Include="Encounter\" />
-    <Folder Include="Enrollment\" />
-    <Folder Include="Lookup\" />
-    <Folder Include="OneTimeEvent\" />
-    <Folder Include="Visit\" />
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

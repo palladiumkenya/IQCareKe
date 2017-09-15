@@ -22,14 +22,25 @@ namespace IQCare.Web.Laboratory
     /// <seealso cref="System.Web.UI.Page" />
     public partial class LabResultPage : System.Web.UI.Page
     {
+        private int Patient
+        {
+            get
+            {
+                return Convert.ToInt32(Session["patient"].ToString());
+            }
+        }
+
         /// <summary>
         /// The request MGR
         /// </summary>
         private ILabRequest requestMgr = (ILabRequest)ObjectFactory.CreateInstance("BusinessProcess.Laboratory.BLabRequest, BusinessProcess.Laboratory");
-       /// <summary>
+        /// <summary>
         /// The redirect URL
         /// </summary>
+
         private string RedirectUrl = "../ClinicalForms/frmPatient_Home.aspx";
+        //private string RedirectUrl = "../CCC/patient/patientHome.aspx?patient=Patient";
+      
 
         /// The is error
         /// </summary>
@@ -99,7 +110,7 @@ namespace IQCare.Web.Laboratory
         {
             get
             {
-                return (Authentication.HasFeatureRight("LABORATORY_RESULT", (DataTable)Session["UserRight"]) == true);
+                return (Authentication.HasFeatureRight("LABORATORY", (DataTable)Session["UserRight"]) == true);
             }
         }
         protected string hPerm
@@ -120,6 +131,18 @@ namespace IQCare.Web.Laboratory
             (Master.FindControl("levelOneNavigationUserControl1").FindControl("lblheader") as Label).Text = "Result Page";
             (Master.FindControl("levelTwoNavigationUserControl1").FindControl("lblformname") as Label).Text = "Lab Result Page";
             Master.ExecutePatientLevel = true;
+
+            string origin = String.Empty;
+            if (Session["urlOrigin"] != null)
+            {
+                origin = Session["urlOrigin"].ToString();
+            }
+
+            if (origin == "greencard")
+            {
+                RedirectUrl = "../CCC/patient/patientHome.aspx?patient=Patient";
+            }
+
             if (Application["AppCurrentDate"] != null)
             {
                 hdappcurrentdate.Value = Application["AppCurrentDate"].ToString();
@@ -133,7 +156,7 @@ namespace IQCare.Web.Laboratory
                 }
                 else
                 {
-                HttpContext.Current.ApplicationInstance.CompleteRequest();
+                    HttpContext.Current.ApplicationInstance.CompleteRequest();
                     Response.Redirect(RedirectUrl, true);
                 }
             }
@@ -204,6 +227,8 @@ namespace IQCare.Web.Laboratory
 
                 Session["PatientInformation"] = theDS.Tables[0];
             }
+        
+            int patientId = Convert.ToInt32(HttpContext.Current.Session["patientId"]);
             this.thisLabOrder = requestMgr.GetLabOrder(this.LocationId, labOrderId);
             if (this.thisLabOrder.ModuleId <= 0)
             {
@@ -229,6 +254,7 @@ namespace IQCare.Web.Laboratory
             labelClinicalNotes.Text = this.thisLabOrder.ClinicalNotes; //dt.Rows[0]["ClinicalNotes"].ToString();
             //  labellaborderedbydate.Text = this.thisLabOrder.OrderDate.ToString("dd-MMM-yyyy");
             labelLabtobeDone.Text = this.thisLabOrder.PreClinicDate.HasValue ? this.thisLabOrder.PreClinicDate.Value.ToString("dd-MMM-yyyy") : "";
+
             labelOrderNumber.Text = string.Format("Order Number : {0}  | Status : {1} | Ordered by {2} on {3}",
                 thisLabOrder.OrderNumber,
                 thisLabOrder.OrderStatus,
@@ -260,105 +286,7 @@ namespace IQCare.Web.Laboratory
 
             };
 
-            /*
-            XmlDocument reportXML = new XmlDocument();
-            XmlDeclaration newChild = reportXML.CreateXmlDeclaration("1.0", "UTF-8", null);
-            reportXML.AppendChild(newChild);
-            XmlElement element = reportXML.CreateElement("Root");
-            reportXML.AppendChild(element);
-            XmlElement rootElement = reportXML.DocumentElement;
-           
-            //XmlNode reportNode = reportXML.CreateNode(XmlNodeType.Element, "Order", string.Empty);  
-            //reportNode.InnerXml =
-            //   new XElement("orderid", this.thisLabOrder.Id).ToString() +
-            //    new XElement("ordernumber", this.thisLabOrder.OrderNumber).ToString() +
-            //    new XElement("orderdate", thisLabOrder.OrderDate.ToString("o")).ToString() +
-            //    new XElement("orderby", this.GetUserFullName(thisLabOrder.OrderedBy)).ToString() +
-            //    new XElement("servicearea", this.GetModuleName(thisLabOrder.ModuleId)).ToString() +
-            //    new XElement("patientname", string.Format("{0} {1}", thisLabOrder.Client.FirstName, thisLabOrder.Client.LastName)).ToString() +
-            //    new XElement("patientgender", thisLabOrder.Client.Sex).ToString() +
-            //    new XElement("patientdob", thisLabOrder.Client.DateOfBirth.ToString("o")) +
-            //    new XElement("patientnumber", thisLabOrder.Client.UniqueFacilityId).ToString();                  
-            //rootElement.AppendChild(reportNode);             
-            DateTime? nulldate = null;
-            bool? nullBit = null;
-            Double? nullDouble = null;
-            XElement orderE = new XElement("Order",
-                new XElement("orderid",          this.thisLabOrder.Id),
-                new XElement("ordernumber",      this.thisLabOrder.OrderNumber),
-                new XElement("orderstatus",      this.thisLabOrder.OrderStatus),
-                new XElement("orderdate",        thisLabOrder.OrderDate.ToString("o")), 
-                new XElement("ordernotes",       thisLabOrder.ClinicalNotes),
-                new XElement("orderby",          this.GetUserFullName(thisLabOrder.OrderedBy)),
-                new XElement("servicearea",      this.GetModuleName(thisLabOrder.ModuleId)),
-                new XElement("patientname",      string.Format("{0} {1}", thisLabOrder.Client.FirstName, thisLabOrder.Client.LastName)),
-                new XElement("patientgender",    thisLabOrder.Client.Sex),
-                new XElement("patientdob",       thisLabOrder.Client.DateOfBirth.ToString("o")) ,
-                new XElement("patientnumber",    thisLabOrder.Client.UniqueFacilityId).ToString());
-                   XmlDocumentFragment orderNode = reportXML.CreateDocumentFragment();
-                    orderNode.InnerXml = orderE.ToString();
-                    rootElement.AppendChild(orderNode);
-
-          
-            foreach (LabOrderTest orderedTest in thisLabOrder.OrderedTest.Where(o => o.ParentLabTestId == null))
-            {
-                //XElement c = new XElement("Test",
-                //    new XElement("ordertestid", orderedTest.Id),
-                //    new XElement("testid", orderedTest.Test.Id),
-                //    new XElement("testname", orderedTest.Test.Name),
-                //      new XElement("department", orderedTest.Test.DepartmentName),
-                //    new XElement("testnote", orderedTest.TestNotes),
-                //    new XElement("resultnote", orderedTest.ResultNotes),
-                //     new XElement("orderstatus", orderedTest.TestOrderStatus),
-                //    new XElement("resultdate", orderedTest.ResultDate.HasValue ? orderedTest.ResultDate.Value.ToString("o") : ""),
-                //new XElement("resultby", orderedTest.ResultBy.HasValue ? this.GetUserFullName(orderedTest.ResultBy.Value) : ""));
-                foreach (LabTestParameterResult result in orderedTest.ParameterResults)
-                {
-                    XElement r = new XElement("Result",
-                         new XElement("id",  result.LabOrderTestId),                           
-                        new XElement("orderedtestid", orderedTest.Id),
-                        new XElement("orderid",  result.LabOrderId),
-                        new XElement("testid", orderedTest.Id),
-                        new XElement("testname", orderedTest.TestName),
-                        new XElement("department", orderedTest.Test.DepartmentName),
-                        new XElement("testnote", orderedTest.TestNotes),                           
-                        new XElement("resultnote", orderedTest.ResultNotes),
-                        new XElement("teststatus", orderedTest.TestOrderStatus),                           
-                        new XElement("parameterid", result.ParameterId),
-                        new XElement("parametername", result.ParameterName),
-                        new XElement("datatype", result.ResultDataType),
-                        new XElement("hasresult", result.HasResult),
-                        new XElement("resultdate", orderedTest.ResultDate.HasValue ? orderedTest.ResultDate.Value : nulldate),
-                        new XElement("resultby", orderedTest.ResultBy.HasValue ? this.GetUserFullName(orderedTest.ResultBy.Value) : ""),                         
-                        new XElement("unit",  result.ResultUnitName),
-                        new XElement("undetectable", result.Undetectable.HasValue ? result.Undetectable.Value : nullBit),
-                        new XElement("detectionlimit", result.DetectionLimit.HasValue ? result.DetectionLimit.Value : nullDouble),
-                        new XElement("resultvalue", result.ResultDataType == "NUMERIC" ? (result.ResultValue.HasValue? result.ResultValue.Value.ToString(): "") : (result.ResultDataType == "SELECTLIST" ? result.ResultOption : result.ResultText))  ,
-                        new XElement("maxboundary", (result.Config != null && result.Config.MaxBoundary.HasValue) ? result.Config.MaxBoundary.Value.ToString() : ""),
-                        new XElement("minboundary", (result.Config != null && result.Config.MinBoundary.HasValue) ? result.Config.MinBoundary.Value.ToString() : ""),
-                        new XElement("maxnormalboundary", (result.Config != null && result.Config.MaxNormalRange.HasValue) ? result.Config.MaxNormalRange.Value.ToString() : ""),
-                        new XElement("minnormalboundary", (result.Config != null && result.Config.MinNormalRange.HasValue) ? result.Config.MinNormalRange.Value.ToString() : "")
-
-                        );
-                    XmlDocumentFragment resultNode = reportXML.CreateDocumentFragment();
-                    resultNode.InnerXml = r.ToString();
-                    rootElement.AppendChild(resultNode);
-                }
-
-                //XmlDocumentFragment testNode = reportXML.CreateDocumentFragment();
-                //testNode.InnerXml = c.ToString();
-                //rootElement.AppendChild(testNode);
-            }
-
-            reportXML.Save(@"C:\apps\labresult.xml");
-
-            DataSet ds = new DataSet("Report");
-            using (System.IO.TextReader txR = new System.IO.StringReader(reportXML.InnerXml))
-            {
-                ds.ReadXml(txR);
-                txR.Close();
-            }
-            ds.WriteXml(@"C:\apps\labresultschema.xml", XmlWriteMode.WriteSchema);*/
+            
             repeaterLabTest.DataSource = _test.Where(o => o.DeleteFlag == false && o.Test.IsGroup==false);
             repeaterLabTest.DataBind();
         }
@@ -669,8 +597,9 @@ namespace IQCare.Web.Laboratory
                 if (e.CommandName == "EnterResult")
                 {
                     int labtesOrderId = Convert.ToInt32(e.CommandArgument);
-                    //this.LabOrderId
+                  
                     LabOrderTest thisTest = thisLabOrder.OrderedTest.DefaultIfEmpty(null).FirstOrDefault(t => t.Id == labtesOrderId);
+                   
                     if (thisTest != null)
                     {
                         Guid g = Guid.NewGuid();

@@ -20,10 +20,6 @@
     <RefDir Condition=" '$(RefDir)' == '' ">$(TrunkDir)References\</RefDir>
     <RelDir Condition=" '$(RelDir)' == '' ">$(TrunkDir)IQCare.Release\</RelDir>
     <TargetFrameworkProfile />
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>
@@ -46,7 +42,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
@@ -248,6 +244,7 @@
     <Content Include="AdminForms\frmAdmin_VillageChairperson.aspx" />
     <Content Include="AdminForms\frmConfig_Customfields.aspx" />
     <Content Include="ClinicalForms\FindPatient.aspx" />
+    <Content Include="Content\css\awesomplete.css" />
     <Content Include="Content\css\bootstrap-callout.css" />
     <Content Include="Content\css\datepicker.css" />
     <Content Include="Content\css\iqcare.ke-font.css" />
@@ -270,13 +267,27 @@
     <Content Include="Content\fuelux\js\fuelux.js" />
     <Content Include="Content\fuelux\js\fuelux.min.js" />
     <Content Include="Content\fuelux\js\npm.js" />
+    <Content Include="Content\css\jquery.validate.css" />
+    <Content Include="Content\js\awesomplete.js" />
+    <Content Include="Content\js\highcharts.js" />
+    <Content Include="Content\js\jquery.validate.js" />
     <Content Include="Content\js\bootstrap-datepicker.js" />
+    <Content Include="Content\js\vl_linegraph.js" />
+    <Content Include="Content\js\vl_linegraph.js" />
+    <Content Include="Content\js\parsley-fields-comparison-validators.js" />
+    <Content Include="Content\noty\css\animate.css" />
+    <Content Include="Content\noty\css\buttons.css" />
+    <Content Include="Content\noty\js\jquery.noty.packaged.js" />
     <Content Include="Content\pace\css\pace.css" />
     <Content Include="Content\pace\js\pace.js" />
+    <Content Include="Content\toast\css\toastr.css" />
+    <Content Include="Content\toast\js\toastr.js" />
     <Content Include="favicon.ico" />
     <Content Include="frmFacilityHome.aspx" />
     <Content Include="Home\Default.aspx" />
     <Content Include="Images\iq_logo_small.gif" />
+    <Content Include="Images\kenya1.png" />
+    <Content Include="Images\kenya_small.png" />
     <Content Include="Images\logo.png" />
     <Content Include="Images\mb_hand.gif" />
     <Content Include="MasterPage\levelTwoNavigationUserControl.ascx" />
@@ -289,9 +300,6 @@
     <Content Include="Statistics\PMTCT.aspx" />
     <Content Include="WardAdmission\Home.aspx" />
     <Content Include="WardAdmission\NewAdmission.aspx" />
-    <Content Include="Billing.Report.config">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="clientaccesspolicy.xml" />
     <Content Include="ClinicalForms\CustomForm.aspx" />
     <Content Include="ClinicalForms\frmCalculateAgeCTC.aspx" />
@@ -1399,7 +1407,6 @@
     <Content Include="Pharmacy\frmDrugSelector.aspx" />
     <Content Include="Pharmacy\frmPharmacyForm.aspx" />
     <Content Include="Pharmacy\frmpharmacyselector.aspx" />
-    <Content Include="Pharmacy\PharmacyControl.ascx" />
     <Content Include="Pharmacy\Requests\FindPharmacyPrescription.aspx" />
     <Content Include="ProgressControl.ascx" />
     <Content Include="Queue\Home.aspx" />
@@ -2263,9 +2270,6 @@
     <Compile Include="Pharmacy\frmpharmacyselector.aspx.designer.cs">
       <DependentUpon>frmpharmacyselector.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pharmacy\PharmacyControl.ascx.designer.cs">
-      <DependentUpon>PharmacyControl.ascx</DependentUpon>
-    </Compile>
     <Compile Include="Pharmacy\Requests\FindPharmacyPrescription.aspx.designer.cs">
       <DependentUpon>FindPharmacyPrescription.aspx</DependentUpon>
     </Compile>
@@ -2757,10 +2761,6 @@
       <DependentUpon>frmpharmacyselector.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pharmacy\PharmacyControl.ascx.cs">
-      <DependentUpon>PharmacyControl.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Pharmacy\Requests\FindPharmacyPrescription.aspx.cs">
       <DependentUpon>FindPharmacyPrescription.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2913,9 +2913,6 @@
     <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Billing.Payment.config">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="Content\css\bootstrap.css.map" />
     <Content Include="Content\css\datepicker.less" />
     <Content Include="Content\fonts\fontawesome-webfont.eot" />
@@ -3038,6 +3035,12 @@
     <None Include="Reports\test.rpt" />
     <Content Include="Scripts\jquery-1.9.1.min.map" />
     <None Include="vwd.webinfo" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
     <None Include="XMLFiles\AllPatientARVPickup" />
   </ItemGroup>
   <ItemGroup>

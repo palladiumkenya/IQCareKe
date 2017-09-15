@@ -3,23 +3,14 @@ using System.Data.Common;
 using System.Data.Entity;
 using DataAccess.Base;
 using Entities.Lookup;
-
+using DataAccess.Context;
 
 namespace DataAccess.Lookup
 {
-    public class LookupContext : DbContext
+    public class LookupContext : BaseContext
     {
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="LabContext"/> class.
-        /// </summary>
-        public LookupContext()
-            : base((DbConnection)DataMgr.GetConnection(), true)
-        {
-
-            Configuration.ProxyCreationEnabled = false;
-            Database.SetInitializer<LookupContext>(null);
-        }
+        
         /// <summary>
         /// Called when [model creating].
         /// </summary>
@@ -27,7 +18,7 @@ namespace DataAccess.Lookup
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-           
+            
 
         }
 
@@ -37,6 +28,6 @@ namespace DataAccess.Lookup
         /// <value>
         /// The lab test.
         /// </value>
-        public DbSet<Item> Item { get; set; }
+        public DbSet<LookupItem> Item { get; set; }
     }
 }

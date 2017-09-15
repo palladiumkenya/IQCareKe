@@ -13,20 +13,19 @@
     <link href="./Content/css/parsley.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <img src="./Content/img/iqSolutions.png" width="477" height="82" class="pull-left"
+                 <img src="Images/kenya1.png"  class="pull-left" alt="Keany Court of Arms"/>  
+            </div>
+            <div class="col-md-6">
+               
+                <img src="./Content/img/iqSolutions.png" width="477" height="82" class="pull-right"
                     alt="IQCare logo" />
             </div>
+            
             <!-- .col-md-6 -->
-            <div class="col-md-6">
-                <a class="utility pull-right" href="frmLogin.aspx" onclick="window.open('./IQCareHelp/index.html'); return false;">
-                    <span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-question-circle-o fa-stack-1x fa-inverse">
-                    </i></span><strong>Help</strong>
-                    <br />
-                </a>
-            </div>
+
             <!-- .col-md-6 -->
         </div>
         <!-- .row -->
@@ -127,18 +126,23 @@
             <!-- .row -->
             <hr />
             <div class="row">
-                <div class="col-md-1 pull-left">
+
+                <div class="col-md-1 ">
                     <a href="http://thepalladiumgroup.com/ " onclick="window.open('http://thepalladiumgroup.com/ '); return false;">
                         <img src="./Images/FGI.jpg" width="99" style="margin-left: 10.5%" alt="" /></a>
                 </div>
-                <div class="col-md-1">
-                </div>
-                <div class="col-md-1">
+               
+                <div class="col-md-2 ">
                     <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" onclick="window.open('http://creativecommons.org/licenses/by-nc-sa/3.0/'); return false;">
                         <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/CreativeCommon.jpg" /></a>
                 </div>
-                <div class="col-md-4">
-                </div>
+              <div class="col-md-1">
+                <a class="utility pull-right" href="frmLogin.aspx" onclick="window.open('./IQCareHelp/index.html'); return false;">
+                    <span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-question-circle-o fa-stack-1x fa-inverse">
+                    </i></span><strong>Help</strong>
+                    <br />
+                </a>
+            </div>
                 <div class="col-md-5 pull-right">
                     <label>
                         Version :<asp:Label CssClass="blue11 nomargin pull-right" ID="lblversion" Text="Kenya HMIS"
@@ -155,8 +159,8 @@
     <!-- .col-md-12-->
      <!-- .container-->
     <script type="text/javascript" src="./Incl/jquery-1.9.1.js">  </script>
-    <script src="Content/js/bootstrap.js" type="text/javascript"></script>
-    <script src="Content/js/parsley.js" type="text/javascript"></script>
+    <script src="./Content/js/bootstrap.js" type="text/javascript"></script>
+    <script src="./Content/js/parsley.js" type="text/javascript"></script>
     <script language="javascript" type="text/javascript">
 
         function pageLoad() {

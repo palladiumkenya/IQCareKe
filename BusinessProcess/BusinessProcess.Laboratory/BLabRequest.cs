@@ -27,20 +27,20 @@ namespace BusinessProcess.Laboratory
             }
         }
 
-        public List<LabOrder> GetLabOrders(int locationId, int? patientId)
+        public List<LabOrder> GetLabOrders(int locationId, int? patientPk)
         {
             ClsObject obj = new ClsObject();
             ClsUtility.Init_Hashtable();
-            if (patientId.HasValue)
+            if (patientPk.HasValue)
             {
-                ClsUtility.AddExtendedParameters("@PatientId", SqlDbType.Int, patientId.Value);
+                ClsUtility.AddExtendedParameters("@PatientPk", SqlDbType.Int, patientPk.Value);
             }
             ClsUtility.AddExtendedParameters("@LocationId", SqlDbType.Int, locationId);
             DateTime? nullDate = null;
             DataTable dt = (DataTable)obj.ReturnObject(ClsUtility.theParams, "Laboratory_GetLabOrder", ClsUtility.ObjectEnum.DataTable);
             ClsUtility.Init_Hashtable();
             obj = null;
-            IPatientService service = new BusinessProcess.PatientCore.PatientCoreServices();
+            IPatientService service = new PatientCore.PatientCoreServices();
             // (IPatientService)ObjectFactory.CreateInstance("BusinessProcess.SCM.BBilling, BusinessProcess.SCM");
             var result = (from rowView in dt.AsEnumerable()
                           select new LabOrder()
@@ -56,8 +56,8 @@ namespace BusinessProcess.Laboratory
                               OrderedBy = Convert.ToInt32(rowView["OrderedBy"]),
                               OrderNumber = rowView["OrderNumber"].ToString(),
                               PreClinicDate = rowView["PreClinicLabDate"] == DBNull.Value ? nullDate : Convert.ToDateTime(rowView["PreClinicLabDate"]),
-                              Client = service.GetPatient(Convert.ToInt32(rowView["PatientId"])),
-                              PatientId = Convert.ToInt32(rowView["PatientId"]),
+                              Client = service.GetPatient(Convert.ToInt32(rowView["PatientPk"])),
+                              PatientPk = Convert.ToInt32(rowView["PatientPk"]),
                               UserId = Convert.ToInt32(rowView["UserId"]),
                               VisitId = Convert.ToInt32(rowView["VisitId"]),
                               OrderStatus = rowView["OrderStatus"].ToString(),
@@ -102,8 +102,8 @@ namespace BusinessProcess.Laboratory
                               OrderedBy = Convert.ToInt32(rowView["OrderedBy"]),
                               OrderNumber = rowView["OrderNumber"].ToString(),
                               PreClinicDate = rowView["PreClinicLabDate"] == DBNull.Value ? nullDate : Convert.ToDateTime(rowView["PreClinicLabDate"]),
-                              PatientId = Convert.ToInt32(rowView["PatientId"]),
-                              Client = service.GetPatient(Convert.ToInt32(rowView["PatientId"])),
+                              PatientPk = Convert.ToInt32(rowView["PatientPk"]),
+                              Client = service.GetPatient(Convert.ToInt32(rowView["PatientPk"])),
                               UserId = Convert.ToInt32(rowView["UserId"]),
                               VisitId = Convert.ToInt32(rowView["VisitId"]),
                               OrderStatus = rowView["OrderStatus"].ToString(),
@@ -177,7 +177,8 @@ namespace BusinessProcess.Laboratory
 
                 order = new LabOrder()
                 {
-                    Id = Convert.ToInt32(rowView["LabOrderId"]),
+
+                 Id = Convert.ToInt32(rowView["LabOrderId"]),
                     ClinicalNotes = rowView["ClinicalNotes"].ToString(),
                     CreateDate = Convert.ToDateTime(rowView["CreateDate"]),
                     DeleteFlag = Convert.ToBoolean(rowView["DeleteFlag"]),
@@ -187,9 +188,8 @@ namespace BusinessProcess.Laboratory
                     OrderedBy = Convert.ToInt32(rowView["OrderedBy"]),
                     OrderNumber = rowView["OrderNumber"].ToString(),
                     PreClinicDate = rowView["PreClinicLabDate"] == DBNull.Value ? nullDate : Convert.ToDateTime(rowView["PreClinicLabDate"]),
-
-                    PatientId = Convert.ToInt32(rowView["PatientId"]),
-                    Client = pt.GetPatient(Convert.ToInt32(rowView["PatientId"])),
+                    PatientPk = Convert.ToInt32(rowView["PatientPk"]),
+                    Client = pt.GetPatient(Convert.ToInt32(rowView["PatientPk"])),
                     UserId = Convert.ToInt32(rowView["UserId"]),
                     VisitId = Convert.ToInt32(rowView["VisitId"]),
                     OrderStatus = rowView["OrderStatus"].ToString(),
@@ -200,6 +200,7 @@ namespace BusinessProcess.Laboratory
             return order;
         }
         decimal? nullDecimal = null;
+
         public List<LabTestParameterResult> GetLabTestParameterResult(int LabTestOrderId)
         {
             ClsObject obj = new ClsObject();
@@ -230,6 +231,7 @@ namespace BusinessProcess.Laboratory
                                       ResultOption = null
 
                                   },
+                                  ParameterId = row.Field<int>("ParameterId"),
                                   LabOrderTestId = row.Field<int>("LabOrderTestId"),
                                   LabOrderId = row.Field<int>("LabOrderId"),
                                   UserId = row.Field<int>("UserId"),
@@ -262,7 +264,7 @@ namespace BusinessProcess.Laboratory
 
         public LabOrder SaveLabOrder(LabOrder labOrder, int UserId, int LocationId)
         {
-            // this.Connection = DataMgr.GetConnection();
+            // this.Connection = DataMgr.GetConnection(); 
             // this.Transaction = DataMgr.BeginTransaction(this.Connection);
 
             ClsObject obj = new ClsObject();
@@ -272,9 +274,9 @@ namespace BusinessProcess.Laboratory
             ClsUtility.Init_Hashtable();
             //  Decimal? nullDecimal = null;
             if (labOrder.Id > -1)
-                ClsUtility.AddExtendedParameters("@LabOrderId", SqlDbType.Int, labOrder.Id);
+            ClsUtility.AddExtendedParameters("@LabOrderId", SqlDbType.Int, labOrder.Id);
             ClsUtility.AddExtendedParameters("@UserId", SqlDbType.Int, UserId);
-            ClsUtility.AddExtendedParameters("@PatientId", SqlDbType.Int, labOrder.PatientId);
+            ClsUtility.AddExtendedParameters("@PatientPk", SqlDbType.Int, labOrder.PatientPk);
             ClsUtility.AddExtendedParameters("@LocationId", SqlDbType.Int, LocationId);
             ClsUtility.AddExtendedParameters("@OrderedBy", SqlDbType.Int, labOrder.OrderedBy);
             ClsUtility.AddExtendedParameters("@OrderDate", SqlDbType.DateTime, labOrder.OrderDate);
@@ -371,7 +373,7 @@ namespace BusinessProcess.Laboratory
                                            new XElement("resultdate", ResultDate),
                                            new XElement("resultby", ResultBy),
                                            new XElement("resultunit", result.ResultUnit == null ? null : result.ResultUnitName),
-                                           new XElement("resultunitid", result.ResultUnit == null ? null : result.ResultUnitId.Value.ToString()),
+                                           new XElement("resultunitid", result.ResultUnit == null ? null : result.ResultUnit.Id.ToString()),
                                            new XElement("undetectable", result.Undetectable),
                                            new XElement("detectionlimit", result.DetectionLimit == null ? nullDecimal : result.DetectionLimit),
                                            new XElement("configid", result.ConfigId)
@@ -395,6 +397,12 @@ namespace BusinessProcess.Laboratory
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="labOrderId"></param>
+        /// <param name="userId"></param>
+        /// <param name="deleteReason"></param>
         public void DeleteLabOrder(int labOrderId, int userId, string deleteReason)
         {
             LabOrderRepository repo = new LabOrderRepository();

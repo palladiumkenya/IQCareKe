@@ -16,7 +16,7 @@ namespace IQCare.SCM
         DataSet dsPOItems = new DataSet();
         DataSet dsPOItemsDetail = new DataSet();
         public bool deletedGridByKey = false;
-
+        public Form PreviousForm;
         public ComboBox theGrdCombo;
      //   bool IsHandleAdded;
         DataTable dtOrdermaster;
@@ -95,6 +95,7 @@ namespace IQCare.SCM
             DataTable dtOrdermaster = new DataTable();
             dtOrdermaster.Columns.Add("IsPO", typeof(int));
             dtOrdermaster.Columns.Add("POID", typeof(int));
+            dtOrdermaster.Columns.Add("PONumber", typeof(string));
             dtOrdermaster.Columns.Add("OrderDate", typeof(DateTime));
             dtOrdermaster.Columns.Add("SupplierID", typeof(int));
             dtOrdermaster.Columns.Add("SrcStore", typeof(int));
@@ -218,8 +219,10 @@ namespace IQCare.SCM
                             string[] strarry = strItemId.Split('-');
                             theDRowItem["ItemID"] = Convert.ToInt32(strarry[0]);
                             theDRowItem["BatchID"] = Convert.ToInt32(strarry[1]);
-                            // theDRowItem["ExpiryDate"] = Convert.ToDateTime(String.Format(MM-strarry[1]);//String.Format("{0:dd-MMM-yyyy}",
-                           theDRowItem["ExpiryDate"]= Convert.ToDateTime(strarry[2]);
+                        // theDRowItem["ExpiryDate"] = Convert.ToDateTime(String.Format(MM-strarry[1]);//String.Format("{0:dd-MMM-yyyy}",
+                        string dateString = strarry[2];
+                       // DateTime expDate = new DateTime(Convert.ToInt32(dateString[2]), Convert.ToInt32(dateString[0]), Convert.ToInt32(dateString[1]));
+                        theDRowItem["ExpiryDate"] = Utility.GetDateFromMMDDYYYY(dateString,'/');// expDate;
                            theDRowItem["AvaliableQty"] = Convert.ToInt32(dgwItemSubitemDetails.Rows[i].Cells["AvailableQTY"].Value); ;
                         }
 
@@ -279,6 +282,11 @@ namespace IQCare.SCM
        
         private void btnclose_Click(object sender, EventArgs e)
         {
+            Form theForm = (Form)Activator.CreateInstance(Type.GetType("IQCare.SCM.frmViewPurchaseOrder, IQCare.SCM"));
+            theForm.Top = 2;
+            theForm.Left = 2;
+            theForm.MdiParent = this.MdiParent;
+            theForm.Show();
             this.Close();
         }
         private void BindStoreName()
@@ -336,13 +344,13 @@ namespace IQCare.SCM
             IPurchase objPOItem = (IPurchase)ObjectFactory.CreateInstance("BusinessProcess.SCM.BPurchase,BusinessProcess.SCM");
            if(PurchaseMode==1)
            {
-               dsPOItems = objPOItem.GetPurcaseOrderItem(PurchaseMode, GblIQCare.AppUserId, 0);
+               dsPOItems = objPOItem.GetPurchaseOrderItem(PurchaseMode, GblIQCare.AppUserId, 0);
            }
             else if(PurchaseMode ==2)
            {
                 //if(ddlSourceStore.SelectedValue !="0")
                 //{
-                    dsPOItems = objPOItem.GetPurcaseOrderItem(PurchaseMode, GblIQCare.AppUserId, Convert.ToInt32(ddlSourceStore.SelectedValue));
+                    dsPOItems = objPOItem.GetPurchaseOrderItem(PurchaseMode, GblIQCare.AppUserId, Convert.ToInt32(ddlSourceStore.SelectedValue));
                 //}
            }
 
@@ -368,26 +376,33 @@ namespace IQCare.SCM
                 dgwItemSubitemDetails.AllowUserToAddRows = false;
                // dgwItemSubitemDetails.Columns["ItemName"]
                 DataGridViewComboBoxColumn theColumnItemName = dgwItemSubitemDetails.Columns["ItemName"] as DataGridViewComboBoxColumn;//new DataGridViewComboBoxColumn();
-                // ComboBox theColumnItemName = new ComboBox();
-                theColumnItemName.HeaderText = "Item Name";
-                theColumnItemName.Name = "ItemName";
-                theColumnItemName.DataPropertyName = "ItemId";
-                
-                DataRow drItemSelect;
-                drItemSelect = theDS.Tables[0].NewRow();
-                drItemSelect["ItemId"] = 0;
-                drItemSelect["ItemName"] = "Select";
-                theDS.Tables[0].Rows.InsertAt(drItemSelect, 0);
+                                                                                                                                       // ComboBox theColumnItemName = new ComboBox();
+                try
+                {
+                    theColumnItemName.HeaderText = "Item Name";
+                    theColumnItemName.Name = "ItemName";
+                    theColumnItemName.DataPropertyName = "ItemId";
 
-                theColumnItemName.DataSource = theDS.Tables[0];
-                
-                theColumnItemName.DisplayMember = "ItemName";
-                theColumnItemName.ValueMember = "ItemId";
-               // theColumnItemName.Width = 350;
-                theColumnItemName.ReadOnly = false;
-                //theColumnItemName.AutoComplete = true;
-                theColumnItemName.DefaultCellStyle.NullValue = "Select";
-                
+                    DataRow drItemSelect;
+                    drItemSelect = theDS.Tables[0].NewRow();
+                    drItemSelect["ItemId"] = 0;
+                    drItemSelect["ItemName"] = "Select";
+                    theDS.Tables[0].Rows.InsertAt(drItemSelect, 0);
+
+                    DataView theDV = new DataView(theDS.Tables[0]);
+                    theDV.RowFilter = "AvailableQTY > 0";
+                    DataTable theDT = theDV.ToTable();
+
+                    theColumnItemName.DataSource = theDT;//theDS.Tables[0];
+
+                    theColumnItemName.DisplayMember = "ItemName";
+                    theColumnItemName.ValueMember = "ItemId";
+                    // theColumnItemName.Width = 350;
+                    theColumnItemName.ReadOnly = false;
+                    //theColumnItemName.AutoComplete = true;
+                    theColumnItemName.DefaultCellStyle.NullValue = "Select";
+                }
+                catch { }
 
                 DataGridViewTextBoxColumn theColumnItemCode = new DataGridViewTextBoxColumn();
                 theColumnItemCode.HeaderText = "Item Code";
@@ -808,18 +823,7 @@ namespace IQCare.SCM
                 {
                     if (dsPOItemsDetail.Tables[0].Rows.Count > 0)
                     {
-                        //if (Convert.ToInt32(dsPOItemsDetail.Tables[0].Rows[0]["SupplierID"]) > 0 && Convert.ToInt32(dsPOItemsDetail.Tables[0].Rows[0]["SourceStoreID"]) == 0)
-                        //{
-                        //    // set IsPurchaseOrder = 1;
-                        //    rdoPurchaseOrder.Checked = true;
-                        //    rdoInterStoreTransfer.Enabled = false;
-                        //}
-                        //else if (Convert.ToInt32(dsPOItemsDetail.Tables[0].Rows[0]["SupplierID"]) == 0 && Convert.ToInt32(dsPOItemsDetail.Tables[0].Rows[0]["SourceStoreID"]) > 0)
-                        //{
-                        //    //set  IsPurchaseOrder = 0;
-                        //    rdoInterStoreTransfer.Checked = true;
-                        //    rdoPurchaseOrder.Enabled = false;
-                        //}
+                        
                         dtpOrderDate.Text = dsPOItemsDetail.Tables[0].Rows[0]["OrderDate"].ToString();
                         dtpOrderDate.CustomFormat = "dd-MMM-yyyy";
                         dtpOrderDate.Enabled = false;
@@ -1023,11 +1027,19 @@ namespace IQCare.SCM
 
         }
 
-      
+        private void dgwItemSubitemDetails_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if (e.RowIndex > 0)
+            {
 
-     
+               // string n = dgwItemSubitemDetails.Columns[e.ColumnIndex].Name;
+            }
 
-       
+
+        }
+
+
+
 
         //private void dgwItemSubitemDetails_CellContentClick(object sender, DataGridViewCellEventArgs e)
         //{
@@ -1040,14 +1052,14 @@ namespace IQCare.SCM
         //    //        {
         //    //            dgwItemSubitemDetails.AllowUserToAddRows = true;
         //    //        }
-               
+
         //    //}
- 
+
         //  }
 
 
 
-        }
+    }
 
        
 

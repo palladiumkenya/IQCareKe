@@ -102,6 +102,13 @@ namespace BusinessProcess.SCM
             return (DataTable)theManager.ReturnObject(ClsUtility.theParams, "pr_SCM_GetExistingPharmacyDispense_Futures", ClsUtility.ObjectEnum.DataTable);
         }
 
+        public DataTable GetPharmacyRegimenClassification()
+        {
+            ClsUtility.Init_Hashtable();
+            ClsObject theManager = new ClsObject();
+            return (DataTable)theManager.ReturnObject(ClsUtility.theParams, "sp_getRegimenClassification", ClsUtility.ObjectEnum.DataTable);
+        }
+
         /// <summary>
         /// Gets the pharmacy existing record details.
         /// </summary>
@@ -131,6 +138,23 @@ namespace BusinessProcess.SCM
             ClsUtility.AddParameters("@IQCareFlag", SqlDbType.Int, IQCareFlag.ToString());
           //  ClsUtility.AddParameters("@password", SqlDbType.VarChar, ApplicationAccess.DBSecurity);
             return (DataSet)PharmacyManager.ReturnObject(ClsUtility.theParams, "pr_SCM_GetPharmacyPrescription_Futures", ClsUtility.ObjectEnum.DataSet);
+        }
+
+        /// <summary>
+        /// Gets the prescription list.
+        /// </summary>
+        /// <param name="locationId">The location identifier.</param>
+        /// <param name="prescriptionDate">The prescription date.</param>
+        /// <param name="orderStatus">The order status.</param>
+        /// <returns></returns>
+        public DataTable GetPrescriptionList(int locationId, DateTime prescriptionDate, int orderStatus)
+        {
+            ClsObject obj = new ClsObject();
+            ClsUtility.Init_Hashtable();
+            ClsUtility.AddExtendedParameters("@LocationId", SqlDbType.Int, locationId);
+            ClsUtility.AddExtendedParameters("@PrescriptionStatus", SqlDbType.Int, orderStatus);
+            ClsUtility.AddExtendedParameters("@PrescriptionDate", SqlDbType.DateTime, prescriptionDate);
+            return (DataTable)obj.ReturnObject(ClsUtility.theParams, "Pharmacy_GetPrescription", ClsUtility.ObjectEnum.DataTable);
         }
 
         /// <summary>
@@ -178,7 +202,7 @@ namespace BusinessProcess.SCM
             return (DataSet)theManager.ReturnObject(ClsUtility.theParams, "pr_SCM_SaveUpdateHivTreatementPharmacyField_Futures", ClsUtility.ObjectEnum.DataSet);
         }
         public DataTable SavePharmacyDispense(
-            int patientId,
+            int patientPk,
             int theLocationId,
             int storeId,
             int theUserId,
@@ -193,7 +217,8 @@ namespace BusinessProcess.SCM
             int? RegimeLine = null,
             int? ProviderId = null,
             double? Height = null,
-            double? Weight = null)
+            double? Weight = null,
+            string pharmacyNotes="")
         {
             DataTable dataTable = new DataTable();
             try
@@ -202,15 +227,15 @@ namespace BusinessProcess.SCM
                 this.Transaction = DataMgr.BeginTransaction(this.Connection);
                 ClsObject clsObject = new ClsObject();
                 ClsUtility.Init_Hashtable();
-                ClsUtility.AddParameters("@Ptn_Pk", SqlDbType.Int, patientId.ToString());
-                ClsUtility.AddParameters("@LocationId", SqlDbType.Int, theLocationId.ToString());
-                ClsUtility.AddParameters("@DispensedBy", SqlDbType.Int, theUserId.ToString());
+                ClsUtility.AddExtendedParameters("@Ptn_Pk", SqlDbType.Int, patientPk);
+                ClsUtility.AddExtendedParameters("@LocationId", SqlDbType.Int, theLocationId);
+                ClsUtility.AddExtendedParameters("@DispensedBy", SqlDbType.Int, theUserId);
                 ClsUtility.AddExtendedParameters("@DispensedByDate", SqlDbType.DateTime, theDispDate);
                 ClsUtility.AddParameters("@OrderType", SqlDbType.Int, theOrderType.ToString());
                 ClsUtility.AddParameters("@ProgramId", SqlDbType.Int, theProgramId.ToString()); 
                 ClsUtility.AddParameters("@StoreId", SqlDbType.Int, storeId.ToString());
                 ClsUtility.AddParameters("@Regimen", SqlDbType.VarChar, theRegimen);
-                ClsUtility.AddParameters("@UserId", SqlDbType.Int, theUserId.ToString());
+                ClsUtility.AddExtendedParameters("@UserId", SqlDbType.Int, theUserId);
                 ClsUtility.AddParameters("@OrderId", SqlDbType.Int, orderId.ToString());
                 if (PeriodTaken.HasValue)
                 {
@@ -232,14 +257,17 @@ namespace BusinessProcess.SCM
                 {
                     ClsUtility.AddExtendedParameters("@Weight", SqlDbType.Decimal, Weight.Value);
                 }
-               
+                if (!string.IsNullOrEmpty(pharmacyNotes))
+                {
+                    ClsUtility.AddExtendedParameters("@PharmacyNotes", SqlDbType.VarChar, pharmacyNotes);
+                }
                 //if (PharmacyRefillDate.HasValue)
                 //    ClsUtility.AddExtendedParameters("@PharmacyRefillAppDate", SqlDbType.DateTime, PharmacyRefillDate.Value);
                 dataTable = (DataTable)clsObject.ReturnObject(ClsUtility.theParams, "pr_SCM_SavePharmacyDispenseOrder_Futures", ClsUtility.ObjectEnum.DataTable);
                 if (PharmacyRefillDate.HasValue)
                 {
                     ClsUtility.Init_Hashtable();
-                    ClsUtility.AddExtendedParameters("@PtnPk", SqlDbType.Int, patientId);
+                    ClsUtility.AddExtendedParameters("@PtnPk", SqlDbType.Int, patientPk);
                     ClsUtility.AddExtendedParameters("@LocationId", SqlDbType.Int, theLocationId);
                     ClsUtility.AddExtendedParameters("@VisitPk", SqlDbType.Int, Convert.ToInt32(dataTable.Rows[0]["VisitId"]));
                     ClsUtility.AddExtendedParameters("@AppDate", SqlDbType.DateTime, PharmacyRefillDate.Value);
@@ -250,13 +278,14 @@ namespace BusinessProcess.SCM
                 foreach (DataRow row in (InternalDataCollectionBase)theDT.Rows)
                 {
                     ClsUtility.Init_Hashtable();
-                    ClsUtility.AddExtendedParameters("@Ptn_Pk", SqlDbType.Int, Convert.ToInt32(patientId));
+                    ClsUtility.AddExtendedParameters("@Ptn_Pk", SqlDbType.Int, Convert.ToInt32(patientPk));
                     ClsUtility.AddExtendedParameters("@StoreId", SqlDbType.Int, Convert.ToInt32(storeId));
                     ClsUtility.AddExtendedParameters("@VisitId", SqlDbType.Int, Convert.ToInt32(dataTable.Rows[0]["VisitId"]));
                     ClsUtility.AddExtendedParameters("@Ptn_Pharmacy_Pk", SqlDbType.Int, Convert.ToInt32(dataTable.Rows[0]["Ptn_Pharmacy_Pk"]));
                     ClsUtility.AddExtendedParameters("@Drug_Pk", SqlDbType.Int, Convert.ToInt32(row["ItemId"]));
                     ClsUtility.AddExtendedParameters("@StrengthId", SqlDbType.Int, row["StrengthId"].ToString());
                     ClsUtility.AddExtendedParameters("@FrequencyId", SqlDbType.Int, row["FrequencyId"].ToString());
+                    ClsUtility.AddExtendedParameters("@pillCount", SqlDbType.Int, row["PillCount"].ToString() != "" ? row["PillCount"].ToString() : "0");
                     ClsUtility.AddExtendedParameters("@DispensedQuantity", SqlDbType.Int, Convert.ToInt32(row["QtyDisp"]));
                     ClsUtility.AddExtendedParameters("@Prophylaxis", SqlDbType.Int, row["Prophylaxis"].ToString());
                     ClsUtility.AddExtendedParameters("@BatchId", SqlDbType.Int, row["BatchId"].ToString());
@@ -362,7 +391,32 @@ namespace BusinessProcess.SCM
             }
         }
 
+        public int saveUpdatePatientRegistration(string fname, string mname, string lname, string enrollment, string dob,string gender,
+            string locationid,string regDate, string userid, string serviceid)
+        {
+            ClsObject PharmacyManager = new ClsObject();
+            ClsUtility.Init_Hashtable();
+            ClsUtility.AddParameters("@firstName", SqlDbType.VarChar, fname);
+            ClsUtility.AddParameters("@middleName", SqlDbType.VarChar, mname);
+            ClsUtility.AddParameters("@lastName", SqlDbType.VarChar, lname);
+            ClsUtility.AddParameters("@patientEnrollmentID", SqlDbType.VarChar, enrollment);
+            ClsUtility.AddParameters("@DOB", SqlDbType.VarChar, dob);
+            ClsUtility.AddParameters("@gender", SqlDbType.VarChar, gender);
+            ClsUtility.AddParameters("@locationID", SqlDbType.VarChar, locationid);
+            ClsUtility.AddParameters("@regDate", SqlDbType.VarChar, regDate);
+            ClsUtility.AddParameters("@userID", SqlDbType.VarChar, userid);
+            ClsUtility.AddParameters("@serviceId", SqlDbType.VarChar, serviceid);
 
+            return (int)PharmacyManager.ReturnObject(ClsUtility.theParams, "Pharmacy_SaveUpdateRegistration", ClsUtility.ObjectEnum.ExecuteNonQuery);
+        }
+
+        public DataTable getPatientsRegistered()
+        {
+            ClsObject PharmacyManager = new ClsObject();
+            ClsUtility.Init_Hashtable();
+
+            return (DataTable)PharmacyManager.ReturnObject(ClsUtility.theParams, "Pharmacy_GetAllRegisteredPatients", ClsUtility.ObjectEnum.DataTable);
+        }
 
     }
 }

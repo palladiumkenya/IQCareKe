@@ -8,6 +8,8 @@
 <body>
     <form id="form1" runat="server">
     <div>
+        <IQ:IQLookupTextBox runat="server" ID="dis" LabelText="My Diagnosis" LookupCategory="MST_MODDECODE" LookupName="Diagnosis1" ShowLabel="true"
+          ServicePath="~/WebService/IQLookupWS.asmx" />
     </div>
     </form>
 </body>

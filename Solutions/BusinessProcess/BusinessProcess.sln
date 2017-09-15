@@ -88,46 +88,4 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 13
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://kenyahmis.visualstudio.com/
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = ..\\..\\BusinessProcess\\BusinessProcess.Service\\BusinessProcess.Service.csproj
-		SccProjectName1 = ../../BusinessProcess/BusinessProcess.Service
-		SccLocalPath1 = ..\\..\\BusinessProcess\\BusinessProcess.Service
-		SccProjectUniqueName2 = ..\\..\\BusinessProcess\\BusinessProcess.Security\\BusinessProcess.Security.csproj
-		SccProjectName2 = ../../BusinessProcess/BusinessProcess.Security
-		SccLocalPath2 = ..\\..\\BusinessProcess\\BusinessProcess.Security
-		SccProjectUniqueName3 = ..\\..\\BusinessProcess\\BusinessProcess.SCM\\BusinessProcess.SCM.csproj
-		SccProjectName3 = ../../BusinessProcess/BusinessProcess.SCM
-		SccLocalPath3 = ..\\..\\BusinessProcess\\BusinessProcess.SCM
-		SccProjectUniqueName4 = ..\\..\\BusinessProcess\\BusinessProcess.Scheduler\\BusinessProcess.Scheduler.csproj
-		SccProjectName4 = ../../BusinessProcess/BusinessProcess.Scheduler
-		SccLocalPath4 = ..\\..\\BusinessProcess\\BusinessProcess.Scheduler
-		SccProjectUniqueName5 = ..\\..\\BusinessProcess\\BusinessProcess.Reports\\BusinessProcess.Reports.csproj
-		SccProjectName5 = ../../BusinessProcess/BusinessProcess.Reports
-		SccLocalPath5 = ..\\..\\BusinessProcess\\BusinessProcess.Reports
-		SccProjectUniqueName6 = ..\\..\\BusinessProcess\\BusinessProcess.Pharmacy\\BusinessProcess.Pharmacy.csproj
-		SccProjectName6 = ../../BusinessProcess/BusinessProcess.Pharmacy
-		SccLocalPath6 = ..\\..\\BusinessProcess\\BusinessProcess.Pharmacy
-		SccProjectUniqueName7 = ..\\..\\BusinessProcess\\BusinessProcess.IQReports\\BusinessProcess.IQReports.csproj
-		SccProjectName7 = ../../BusinessProcess/BusinessProcess.IQReports
-		SccLocalPath7 = ..\\..\\BusinessProcess\\BusinessProcess.IQReports
-		SccProjectUniqueName8 = ..\\..\\BusinessProcess\\BusinessProcess.Laboratory\\BusinessProcess.Laboratory.csproj
-		SccProjectName8 = ../../BusinessProcess/BusinessProcess.Laboratory
-		SccLocalPath8 = ..\\..\\BusinessProcess\\BusinessProcess.Laboratory
-		SccProjectUniqueName9 = ..\\..\\BusinessProcess\\BusinessProcess.FormBuilder\\BusinessProcess.FormBuilder.csproj
-		SccProjectName9 = ../../BusinessProcess/BusinessProcess.FormBuilder
-		SccLocalPath9 = ..\\..\\BusinessProcess\\BusinessProcess.FormBuilder
-		SccProjectUniqueName10 = ..\\..\\BusinessProcess\\BusinessProcess.Clinical\\BusinessProcess.Clinical.csproj
-		SccProjectName10 = ../../BusinessProcess/BusinessProcess.Clinical
-		SccLocalPath10 = ..\\..\\BusinessProcess\\BusinessProcess.Clinical
-		SccProjectUniqueName11 = ..\\..\\BusinessProcess\\BusinessProcess.Administration\\BusinessProcess.Administration.csproj
-		SccProjectName11 = ../../BusinessProcess/BusinessProcess.Administration
-		SccLocalPath11 = ..\\..\\BusinessProcess\\BusinessProcess.Administration
-		SccProjectUniqueName12 = ..\\..\\BusinessProcess\\BusinessProcess.PatientCore\\BusinessProcess.PatientCore.csproj
-		SccProjectName12 = ../../BusinessProcess/BusinessProcess.PatientCore
-		SccLocalPath12 = ..\\..\\BusinessProcess\\BusinessProcess.PatientCore
-	EndGlobalSection
 EndGlobal

@@ -6,6 +6,7 @@ using Application.Presentation;
 using Entities.Billing;
 using Interface.Billing;
 using IQCare.Web.UILogic;
+using System.Linq.Expressions;
 
 namespace IQCare.Billing.Logic
 {
@@ -35,6 +36,17 @@ namespace IQCare.Billing.Logic
     /// </summary>
     public class KnockOffServices
     {
+        public static string PropertyName<T>(Expression<Func<T, object>> expression)
+        {
+            var body = expression.Body as MemberExpression;
+
+            if (body == null)
+            {
+                body = ((UnaryExpression)expression.Body).Operand as MemberExpression;
+            }
+
+            return body.Member.Name;
+        }
         /// <summary>
         /// 
         /// </summary>

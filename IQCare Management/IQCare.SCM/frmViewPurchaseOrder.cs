@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using Application.Common;
 using Application.Presentation;
 using Interface.SCM;
-using System.Collections;
 
 namespace IQCare.SCM
 {
@@ -31,10 +25,29 @@ namespace IQCare.SCM
             }
             else if (GblIQCare.theArea == "CR")
             {
-                this.Text = "View Inter Store Transfer/Counter Requisition";
+                this.Text = "View Counter Requisitions";
                 frmname = "IQCare.SCM.frmInterStoreTransfer, IQCare.SCM";
             }
-          
+            if (GblIQCare.CurrentMenu == MenuChoice.PurchaseOrder)
+            {
+                this.Text = "View Purchase Order";
+                frmname = "IQCare.SCM.frmPurchaseOrder, IQCare.SCM";
+            }
+            else if (GblIQCare.CurrentMenu == MenuChoice.CounterRequistion)
+            {
+                this.Text = "View Counter Requisitions";
+                frmname = "IQCare.SCM.frmInterStoreTransfer, IQCare.SCM";
+            }
+            else if (GblIQCare.CurrentMenu == MenuChoice.POWithGRN)
+            {
+                this.Text = "View Purchase Order";
+                frmname = "IQCare.SCM.frmPurchaseReceiveOrder, IQCare.SCM";
+            }
+            else if (GblIQCare.CurrentMenu == MenuChoice.CRWithIV)
+            {
+                this.Text = "View Inter Store Transfer/Counter Requisition";
+                frmname = "IQCare.SCM.frmInterRequisitionIssue, IQCare.SCM";
+            }
             clsCssStyle theStyle = new clsCssStyle();
             theStyle.setStyle(this);
             CreateGrid();
@@ -68,8 +81,8 @@ namespace IQCare.SCM
 
                 DataGridViewTextBoxColumn theColumnOrderNumber = new DataGridViewTextBoxColumn();
                 theColumnOrderNumber.HeaderText = "Order Number";
-                theColumnOrderNumber.Name = "OrderNo";
-                theColumnOrderNumber.DataPropertyName = "OrderNo";
+                theColumnOrderNumber.Name = "PONumber";
+                theColumnOrderNumber.DataPropertyName = "PONumber";
                 theColumnOrderNumber.Width = 130;
                 theColumnOrderNumber.ReadOnly = true;
 
@@ -145,13 +158,25 @@ namespace IQCare.SCM
             {
                 
                 frmname = "IQCare.SCM.frmPurchaseOrder, IQCare.SCM";
+  
             }
             else if (GblIQCare.theArea == "CR")
             {
                 
                 frmname = "IQCare.SCM.frmInterStoreTransfer, IQCare.SCM";
             }
+            else if (GblIQCare.CurrentMenu == MenuChoice.CRWithIV)
+            {
+          
+                   frmname = "IQCare.SCM.frmInterRequisitionIssue, IQCare.SCM";
+            }
+            else if (GblIQCare.CurrentMenu == MenuChoice.POWithGRN)
+            {
+
+                frmname = "IQCare.SCM.frmPurchaseReceiveOrder, IQCare.SCM";
+            }
             Form theForm = (Form)Activator.CreateInstance(Type.GetType(frmname.ToString()));
+            
             theForm.Top = 2;
             theForm.Left = 2;
             theForm.MdiParent = this.MdiParent;
@@ -182,36 +207,6 @@ namespace IQCare.SCM
 
         private void dgwPurchaseOrder_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            //DataGridViewRow row = dgwPurchaseOrder.Rows[e.RowIndex];
-            //if (row != null)
-            //{
-            //    if (!String.IsNullOrEmpty(Convert.ToString(row.Cells["Status"].Value)))
-            //    {
-            //        int Status = Convert.ToInt32(row.Cells["Status"].Value);
-            //        switch (Status)
-            //        {
-            //            case (1):
-            //                e.CellStyle.BackColor = Color.Pink;
-            //                break;
-            //            case (2):
-            //                e.CellStyle.BackColor = Color.Purple;
-            //                break;
-            //            case (3):
-            //                e.CellStyle.BackColor = Color.Green;
-            //                break;
-            //            case (4):
-            //                e.CellStyle.BackColor = Color.Orange;
-            //                break;
-            //            case (5):
-            //                e.CellStyle.BackColor = Color.Red;
-            //                break;
-            //            default:
-            //                e.CellStyle.BackColor = Color.White;
-            //                break;
-            //        }
-            //    }
-            //}  
-
         }
 
         

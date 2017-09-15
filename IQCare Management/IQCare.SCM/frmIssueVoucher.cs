@@ -262,13 +262,13 @@ namespace IQCare.SCM
             // dsPOItems = objPOItem.GetPurcaseOrderItem(PurchaseMode, GblIQCare.AppUserId, GblIQCare.intStoreId);
             if (PurchaseMode == 1)
             {
-                dsPOItems = objPOItem.GetPurcaseOrderItem(PurchaseMode, GblIQCare.AppUserId, 0);
+                dsPOItems = objPOItem.GetPurchaseOrderItem(PurchaseMode, GblIQCare.AppUserId, 0);
             }
             else if (PurchaseMode == 2)
             {
                 //if(ddlSourceStore.SelectedValue !="0")
                 //{
-                dsPOItems = objPOItem.GetPurcaseOrderItem(PurchaseMode, GblIQCare.AppUserId, Convert.ToInt32(ddlSourceStore.SelectedValue));
+                dsPOItems = objPOItem.GetPurchaseOrderItem(PurchaseMode, GblIQCare.AppUserId, Convert.ToInt32(ddlSourceStore.SelectedValue));
                 //}
             }
 
@@ -433,6 +433,11 @@ namespace IQCare.SCM
 
         private void brnClose_Click(object sender, EventArgs e)
         {
+            Form theForm = (Form)Activator.CreateInstance(Type.GetType("IQCare.SCM.frmViewGoodReceiveNote, IQCare.SCM"));
+            theForm.Top = 2;
+            theForm.Left = 2;
+            theForm.MdiParent = this.MdiParent;
+            theForm.Show();
             this.Close();
         }
         private void BindGrid()
@@ -708,7 +713,8 @@ namespace IQCare.SCM
                 col.Width = 150;
                 col.MaxDate = DateTime.MaxValue;
                 col.MinDate = DateTime.MinValue;
-
+                col.DefaultCellStyle.Format = "dd-MMM-yyyy";
+                    
 
 
                 dgwGRNItems.DataSource = CreateGRNItemTable();
@@ -876,65 +882,11 @@ namespace IQCare.SCM
 
         private void txtBatchName_KeyUp(object sender, KeyEventArgs e)
         {
-            ////try
-            ////{
-            ////        if (txtBatchName.Text != "")
-            ////        {
-            ////            lstSearchBatch.Visible = true;
-            ////            lstSearchBatch.Width = dgwGRNItems.CurrentCell.Size.Width;//txtBatchName.Width;
-            ////            lstSearchBatch.Left = dgwGRNItems.CurrentCell.DataGridView.Margin.Left;
-            ////            lstSearchBatch.Top = dgwGRNItems.CurrentCell.DataGridView.Margin.Top +dgwGRNItems.CurrentCell.Size.Height;
-            ////            //lstSearchBatch.Width = txtBatchName.Width;
-            ////            //lstSearchBatch.Left = txtBatchName.Left;
-            ////            //lstSearchBatch.Top = txtBatchName.Top + txtBatchName.Height;
-
-            ////            lstSearchBatch.Height = 300;
-            ////            lstSearchBatch.BringToFront();
-            ////            DataView theDV = new DataView(theDTBatch);
-            ////            theDV.RowFilter = "Name like '" + txtBatchName.Text + "*'";
-            ////            if (theDV.Count > 0)
-            ////            {
-            ////                DataTable theDTdata = theDV.ToTable();
-            ////                BindFunctions theBindManager = new BindFunctions();
-            ////                theBindManager.Win_BindListBox(lstSearchBatch, theDTdata, "Name", "Id");
-            ////            }
-            ////            else
-            ////            {
-            ////                lstSearchBatch.DataSource = null;
-            ////                lstSearchBatch.Visible = false;
-            ////            }
-
-            ////        }
-
-            ////        else
-            ////        {
-            ////            lstSearchBatch.Visible = false;
-            ////        }
-            ////        if (e.KeyCode == Keys.Down)
-            ////            lstSearchBatch.Select();
-
-            ////}
-            ////catch (Exception err)
-            ////{
-            ////    MsgBuilder theBuilder = new MsgBuilder();
-            ////    theBuilder.DataElements["MessageText"] = err.Message.ToString();
-            ////    IQCareWindowMsgBox.ShowWindowConfirm("#C1", theBuilder, this);
-            ////}
+            
         }
 
         private void lstSearchBatch_DoubleClick(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    txtBatchName.Text = lstSearchBatch.Text;
-            //    lstSearchBatch.Visible = false;
-            //}
-            //catch (Exception err)
-            //{
-            //    MsgBuilder theBuilder = new MsgBuilder();
-            //    theBuilder.DataElements["MessageText"] = err.Message.ToString();
-            //    IQCareWindowMsgBox.ShowWindowConfirm("#C1", theBuilder, this);
-            //}
         }
 
         private void lstSearchBatch_KeyUp(object sender, KeyEventArgs e)
@@ -951,11 +903,7 @@ namespace IQCare.SCM
         private void dgwPOItems_Click(object sender, EventArgs e)
         {
 
-            //if (dtGRNItem.Rows.Count <= 0)
-            //{
-            //    IQCareWindowMsgBox.ShowWindow("GoodRecNoteItem", this);
-            //    return;
-            //}
+           
             bool ret = FillGridItemToSave();
             if (ret)
             {
@@ -1458,7 +1406,7 @@ namespace IQCare.SCM
             {
                 //IMasterList objMasterlist = (IMasterList)ObjectFactory.CreateInstance("BusinessProcess.SCM.BMasterList,BusinessProcess.SCM");
                 IPurchase objMasterlist = (IPurchase)ObjectFactory.CreateInstance("BusinessProcess.SCM.BPurchase,BusinessProcess.SCM");
-                int ret = objMasterlist.SaveGoodreceivedNotes(dtGRNmaster, dtGRNItem, GblIQCare.ModePurchaseOrder);
+                int ret = objMasterlist.SaveGoodReceivedNote(dtGRNmaster, dtGRNItem, GblIQCare.ModePurchaseOrder);
                 if (ret > -1)
                 {
                     IQCareWindowMsgBox.ShowWindow("ProgramSave", this);
@@ -1727,7 +1675,7 @@ namespace IQCare.SCM
 
                 theDRowItem["MasterPurchaseprice"] = Convert.ToDecimal(thetempDVItem[0]["MasterPurchaseprice"]);
 
-                theDRowItem["ExpiryDate"] = String.Format("{0:M/d/yyyy}", Convert.ToDateTime(thetempDVItem[0]["ExpiryDate"]));
+                theDRowItem["ExpiryDate"] = Convert.ToDateTime(thetempDVItem[0]["ExpiryDate"]);// String.Format("{0:M/d/yyyy}", Convert.ToDateTime(thetempDVItem[0]["ExpiryDate"]));
                 theDRowItem["UserID"] = GblIQCare.AppUserId;
                 theDRowItem["POId"] = GblIQCare.PurchaseOrderID;
 

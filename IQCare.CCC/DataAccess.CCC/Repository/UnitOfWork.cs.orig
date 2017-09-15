@@ -1,0 +1,177 @@
+﻿using System;
+using DataAccess.CCC.Context;
+using DataAccess.Context;
+using DataAccess.Context.ModuleMaster;
+using DataAccess.CCC.Interface;
+using DataAccess.CCC.Interface.enrollment;
+using DataAccess.CCC.Interface.Lookup;
+using DataAccess.CCC.Interface.person;
+using DataAccess.CCC.Interface.Patient;
+using DataAccess.CCC.Interface.visit;
+using DataAccess.CCC.Repository.Lookup;
+using DataAccess.CCC.Repository.person;
+using DataAccess.CCC.Repository.Patient;
+using DataAccess.CCC.Repository.visit;
+using DataAccess.CCC.Repository.Enrollment;
+using DataAccess.CCC.Interface.Baseline;
+using DataAccess.CCC.Repository.Baseline;
+
+namespace DataAccess.CCC.Repository
+{
+    public class UnitOfWork : IUnitOfWork
+    {  
+        private readonly BaseContext _context;
+
+        /* Person Interface */
+        private IPersonRepository _personRepository;
+        private IPersonLocationRepository _personLocationRepository;
+        private IPersonContactRepository _personContactRepository;
+        private IPersonRelationshipRepository _personRelationshipRepository;
+        private IPatientMaritalStatusRepository _patientMaritalStatusRepository;
+        private IPatientOvcStatusRepository _patientOvcStatusRepository;
+        private IPatientPopulationRepository _patientPopulationRepository;
+
+        /* Patient Interface */
+        private IPatientVitalsRepository _patientVitalsRepository;
+
+        /* Modules */
+        private IModuleRepository _moduleRepository;
+
+        /* lookupContext */
+        private ILookupRepository _lookupRepository;
+        private ILookupMasterRepository _lookupMasterRepository;
+
+        /* visit */
+        private IPatientMasterVisitRepository _patientMasterVisitRepository;
+        private IPatientEncounterRepository _patientEncounterRepository;
+
+        /* Enrollment */
+        private IPatientEnrollmentRepository _patientEnrollmentRepository;
+        private IPatientEntryPointRepository _patientEntryPointRepository;
+        private IPatientIdentifierRepository _patientIdentifierRepository;
+        /*Baseline*/
+        private IPatientDisclosureRepository _patientDisclosureRepository;
+
+        public UnitOfWork(BaseContext context)
+        {
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
+            _context = context;   
+        }
+
+        public IModuleRepository ModuleRepository
+        {
+            get
+            {
+                return _moduleRepository ?? (_moduleRepository = new ModuleRepository((ModuleContext)_context));
+            }
+        }
+
+        public ILookupRepository LookupRepository
+        {
+            get { return _lookupRepository ?? (_lookupRepository = new LookupRepository((LookupContext) _context)); }
+        }
+
+        public ILookupMasterRepository LookupMasterRepository
+        {
+            get
+            {
+                return _lookupMasterRepository ?? (_lookupMasterRepository = new LookupMasterRepository((LookupContext)_context));
+            }
+        }
+
+        public IPersonRepository PersonRepository
+        {
+            get { return _personRepository ?? (_personRepository = new PersonRepository((PersonContext) _context)); }
+        }
+
+        public IPersonContactRepository PersonContactRepository
+        {
+            get
+            {
+                return _personContactRepository ??
+                       (_personContactRepository = new PersonContactRepository((PersonContext) _context));
+            }
+        }
+
+        public IPersonLocationRepository PersonLocationRepository
+        {
+            get
+            {
+                return _personLocationRepository ??
+                       (_personLocationRepository = new PersonLocationRepository((PersonContext) _context));
+            }
+        }
+
+        public IPersonRelationshipRepository PersonRelationshipRepository
+        {
+            get { return _personRelationshipRepository??(_personRelationshipRepository=new PersonRelationshipRepository((PersonContext)_context));}
+        }
+
+        public IPatientOvcStatusRepository PatientOvcStatusRepository
+        {
+            get {  return _patientOvcStatusRepository??(_patientOvcStatusRepository=new PatientOVCStatusRepository((PersonContext)_context));  }
+        }
+
+        public IPatientMaritalStatusRepository PatientMaritalStatusRepository
+        {
+            get { return _patientMaritalStatusRepository??(_patientMaritalStatusRepository=new PatientMaritalStatusRepository((PersonContext)_context));}
+        }
+
+        public IPatientPopulationRepository PatientPopulationRepository
+        {
+            get { return _patientPopulationRepository??(_patientPopulationRepository=new PatientPopulationRepository((PersonContext)_context));}
+        }
+
+        public IPatientMasterVisitRepository PatientMasterVisitRepository
+        {
+            get
+            {
+                return _patientMasterVisitRepository ?? (_patientMasterVisitRepository = new PatientMasterVisitRepository((GreencardContext) _context));
+            }
+        }
+
+        public IPatientEncounterRepository PatientEncounterRepository
+        {
+            get { return _patientEncounterRepository??(_patientEncounterRepository=new PatientEncounterRepository((GreencardContext)_context));}
+        }
+
+        public IPatientEnrollmentRepository PatientEnrollmentRepository
+        {
+            get { return _patientEnrollmentRepository??(_patientEnrollmentRepository=new PatientEnrollmentRepository((GreencardContext)_context));}
+        }
+
+        public IPatientIdentifierRepository PatientIdentifierRepository
+        {
+            get { return _patientIdentifierRepository ?? (_patientIdentifierRepository = new PatientIdentifierRepository((GreencardContext)_context)); }
+        }
+
+        public IPatientEntryPointRepository PatientEntryPointRepository
+        {
+            get { return _patientEntryPointRepository ?? (_patientEntryPointRepository = new PatientEntrypointRepository((GreencardContext)_context)); }
+        }
+
+<<<<<<< HEAD
+        public IPatientVitalsRepository PatientVitalsRepository
+        {
+            get {return _patientVitalsRepository ?? (_patientVitalsRepository = new PatientVitalsRepository((GreencardContext)_context)); }
+=======
+        public IPatientDisclosureRepository PatientDisclosureRepository
+        {
+            get { return _patientDisclosureRepository ?? (_patientDisclosureRepository = new PatientDisclosureRepository((GreencardContext)_context)); }
+>>>>>>> 81720730d2a1fc95c0502bc53595355d92561421
+        }
+
+        public int Complete()
+        {
+            return _context.SaveChanges();
+        }
+
+        public  void  Dispose()
+        {
+            _context.Dispose();
+        }
+    }
+}

@@ -89,7 +89,9 @@ namespace Interface.Clinical
             DateTime? registrationDate, 
             int ModuleId = 999, 
             int MaxRecords=100,
-            string ruleFilter= "");
+            string ruleFilter= "",
+            string phoneNumber="",
+            string identifierName = "");
 
         /// <summary>
         /// Gets the patient service lines.
@@ -101,5 +103,9 @@ namespace Interface.Clinical
         DataTable GetPatientsOnWaitingList(int listId, int moduleId);
         void ChangeWaitingListStatus(int waitingListId, int rowStatus, int userId);
         ServiceArea GetServiceAreaById(int id, int locationId);
-      }
+
+        void BlueCardToGreenCardSyncronise(int ptn_Pk);
+
+        DataTable GetIdentifiersByServiceAreaId(int serviceAreaId = 0);
+    }
 }

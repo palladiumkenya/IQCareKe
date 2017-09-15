@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Configuration;
 using Application.Logger;
+using Interface.Clinical;
 
 namespace IQCare.Web.UILogic
 {
@@ -92,6 +93,7 @@ namespace IQCare.Web.UILogic
                                   Currency = row["Currency"].ToString(),
                                   MasterIndex = row["PosID"].ToString(),
                                   PaperLess = Convert.ToBoolean(row["Paperless"]),
+                                  Preffered = Convert.ToBoolean(row["Preferred"]),
                                   Id = Convert.ToInt32(row["FacilityID"]),
                                   Name = Convert.ToString(row["FacilityName"]),
                                   GracePeriod = Convert.ToInt32(row["AppGracePeriod"]),
@@ -123,20 +125,23 @@ namespace IQCare.Web.UILogic
         /// </summary>
         /// <param name="StateInfo">The state information.</param>
         public static void GenerateCache(object StateInfo)
-        {
-            string xmlPath = GblIQCare.GetXMLPath();
-            IIQCareSystem DateManager = (IIQCareSystem)ObjectFactory.CreateInstance("BusinessProcess.Security.BIQCareSystem, BusinessProcess.Security");
-            DateTime theDTime = DateManager.SystemDate();
-            System.IO.FileInfo theFileInfo1 = new System.IO.FileInfo(xmlPath + "\\AllMasters.con");
-            System.IO.FileInfo theFileInfo2 = new System.IO.FileInfo(xmlPath + "\\DrugMasters.con");
-            System.IO.FileInfo theFileInfo3 = new System.IO.FileInfo(xmlPath + "\\LabMasters.con");
-            if (theFileInfo1.LastWriteTime.Date != theDTime.Date || theFileInfo2.LastWriteTime.Date != theDTime.Date || theFileInfo3.LastWriteTime.Date != theDTime.Date)
+        {try
             {
-                IIQCareSystem theCacheManager = (IIQCareSystem)ObjectFactory.CreateInstance("BusinessProcess.Security.BIQCareSystem,BusinessProcess.Security");
-                DataSet theMainDS = theCacheManager.GetSystemCache();
-                IQCareUtils.WriteCache(ref theMainDS, theDTime);
+                string xmlPath = GblIQCare.GetXMLPath();
+                IIQCareSystem DateManager = (IIQCareSystem)ObjectFactory.CreateInstance("BusinessProcess.Security.BIQCareSystem, BusinessProcess.Security");
+                DateTime theDTime = DateManager.SystemDate();
+                System.IO.FileInfo theFileInfo1 = new System.IO.FileInfo(xmlPath + "\\AllMasters.con");
+                System.IO.FileInfo theFileInfo2 = new System.IO.FileInfo(xmlPath + "\\DrugMasters.con");
+                System.IO.FileInfo theFileInfo3 = new System.IO.FileInfo(xmlPath + "\\LabMasters.con");
+                if (theFileInfo1.LastWriteTime.Date != theDTime.Date || theFileInfo2.LastWriteTime.Date != theDTime.Date || theFileInfo3.LastWriteTime.Date != theDTime.Date)
+                {
+                    IIQCareSystem theCacheManager = (IIQCareSystem)ObjectFactory.CreateInstance("BusinessProcess.Security.BIQCareSystem,BusinessProcess.Security");
+                    DataSet theMainDS = theCacheManager.GetSystemCache();
+                    IQCareUtils.WriteCache(ref theMainDS, theDTime);
 
+                }
             }
+            catch { }
         }
         public static void LogError(Exception lastError)
         {
@@ -189,11 +194,20 @@ namespace IQCare.Web.UILogic
         {
             get
             {
-                if ((HttpContext.Current != null) && (HttpContext.Current.Session != null))
+                if ((HttpContext.Current != null) && (HttpContext.Current.Session != null) && (HttpContext.Current.Session["SystemSettings"] != null))
                 {
                     return (SystemSetting)HttpContext.Current.Session["SystemSettings"];
                 }
-                return null;
+                else
+                {
+                    SystemSetting cSS = new SystemSetting();
+                    if (cSS.isValid)
+                    {
+                        HttpContext.Current.Session["SystemSettings"] = cSS;
+                    }
+                    return cSS;
+                }
+               // return null;
             }
         }
         /// <summary>
@@ -225,6 +239,10 @@ namespace IQCare.Web.UILogic
                 return theDTime;
             }
         }
-
+        public static DataTable GetPatientIdentifiers(int serviceAreaId = 0)
+        {
+            IPatientRegistration ipr = (IPatientRegistration)ObjectFactory.CreateInstance("BusinessProcess.Clinical.BPatientRegistration, BusinessProcess.Clinical");
+            return ipr.GetIdentifiersByServiceAreaId(serviceAreaId);
+        }
     }
 }

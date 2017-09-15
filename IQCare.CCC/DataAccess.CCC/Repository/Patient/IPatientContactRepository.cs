@@ -1,10 +1,10 @@
 ﻿
 using DataAccess.Context;
-using Entities.PatientCore;
+using Entities.Common;
 
 namespace DataAccess.CCC.Repository.Patient
 {
-    public interface IPatientContactRepository :IRepository<PatientContact>
+    public interface IPatientContactRepository :IRepository<PersonContact>
     {
 
     }

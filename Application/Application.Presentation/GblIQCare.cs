@@ -7,6 +7,17 @@ using Application.Common;
 
 namespace Application.Presentation
     {
+   public  enum MenuChoice
+    {
+        Dispense = 1,
+        Register,
+        CounterRequistion,
+        IssueVoucher,
+        CRWithIV,
+        PurchaseOrder,
+        GoodReceived,
+        POWithGRN
+    }
     public class CustomFormUIManager
     {
         public static string InputCssClass = "form-control";
@@ -25,22 +36,22 @@ namespace Application.Presentation
 
         public GblIQCare()
         {
-            AppVersion = "Ver 3.5.3.1 Kenya HMIS";
-            ReleaseDate = "01-Nov-2016";
-            VersionName = "Kenya HMIS";
-            DbVersion = "Ver 3.5.3.1 Kenya HMIS";
+            AppVersion = "Ver 1.0.0.4 Kenya HMIS";
+            ReleaseDate = "01-Sep-2017";
+            VersionName = "Kenya HMIS Ver 1.0.0.4";
+            DbVersion = "Ver 1.0.0.4 Kenya HMIS";
         }
         public static int iFormMode;
-
+        public static MenuChoice CurrentMenu;
         public int iUserId;
         public static string strAppVersion;
         public static DateTime dtmAppVersion;
 
         #region "Application Parameters"
-        public static string AppVersion = "Ver 3.5.3.1 Kenya HMIS";
-        public static string DbVersion = "Ver 3.5.3.1 Kenya HMIS";
-        public static string ReleaseDate = "01-Nov-2016";
-        public static string VersionName = "Kenya HMIS";
+        public static string AppVersion = "Ver 1.0.0.4 Kenya HMIS";
+        public static string DbVersion = "Ver 1.0.0.4 Kenya HMIS";
+        public static string ReleaseDate = "01-Sep-2017";
+        public static string VersionName = "Kenya HMIS Ver 1.0.0.4";
         #endregion
 
         #region "Public Variables"

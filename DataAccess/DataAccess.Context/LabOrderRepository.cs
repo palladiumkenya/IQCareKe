@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using Entities.Lab;
+using System.Linq.Expressions;
+
 namespace DataAccess.Context
 {
     public class LabOrderRepository : Repository<LabOrder>, IDisposable
@@ -15,7 +17,7 @@ namespace DataAccess.Context
         {
             return GetAll().FirstOrDefault(x => x.Id == (int)id);
         }
-        public override IQueryable<LabOrder> Filter(System.Linq.Expressions.Expression<Func<LabOrder, bool>> filter)
+        public override IQueryable<LabOrder> Filter(Expression<Func<LabOrder, bool>> filter)
         {
             return labContext.LabOrder.Include(p=> p.Client).Where(filter);
         }

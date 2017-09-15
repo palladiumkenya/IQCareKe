@@ -14,10 +14,7 @@
     <FileAlignment>512</FileAlignment>
     <TrunkDir>..\..\</TrunkDir>
     <RedDir Condition=" '$(RedDir)' == '' ">$(TrunkDir)package\service\</RedDir>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
+  
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,6 +41,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseEntity.cs" />
     <Compile Include="Consent.cs" />
     <Compile Include="FieldControlType.cs" />
     <Compile Include="Filter.cs" />
@@ -58,6 +57,8 @@
     <Compile Include="IAuditEntity.cs" />
     <Compile Include="Pager.cs" />
     <Compile Include="Person.cs" />
+    <Compile Include="PersonContact.cs" />
+    <Compile Include="PersonLocation.cs" />
     <Compile Include="PersonRelationship.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryCategory.cs" />

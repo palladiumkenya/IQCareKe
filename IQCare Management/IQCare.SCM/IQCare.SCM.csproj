@@ -36,10 +36,6 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -123,14 +119,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CalendarColumn.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="CalendarColumn.cs" />
     <Compile Include="frmBillingDetails.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmBillingDetails.designer.cs">
       <DependentUpon>frmBillingDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmInterRequisitionIssue.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmInterRequisitionIssue.designer.cs">
+      <DependentUpon>frmInterRequisitionIssue.cs</DependentUpon>
     </Compile>
     <Compile Include="frmItemCostConfiguration.cs">
       <SubType>Form</SubType>
@@ -141,6 +141,24 @@
     <Compile Include="frmPrintLabel.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmPurchaseReceiveOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPurchaseReceiveOrder.designer.cs">
+      <DependentUpon>frmPurchaseReceiveOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmRegisterNewPatient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRegisterNewPatient.Designer.cs">
+      <DependentUpon>frmRegisterNewPatient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmStockSummaryLine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmStockSummaryLine.Designer.cs">
+      <DependentUpon>frmStockSummaryLine.cs</DependentUpon>
+    </Compile>
     <Compile Include="PatientDrugDispenseForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -150,10 +168,23 @@
       <DependentUpon>rptBinCard.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="rptGRN.cs">
+      <DependentUpon>rptGRN.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="rptGRNv2.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptGRNv2.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="rptIntStorePOReport1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>rptIntStorePOReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="rptKNHPrescription.cs">
       <AutoGen>True</AutoGen>
@@ -414,11 +445,25 @@
     <EmbeddedResource Include="frmBillingDetails.resx">
       <DependentUpon>frmBillingDetails.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmInterRequisitionIssue.resx">
+      <DependentUpon>frmInterRequisitionIssue.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmItemCostConfiguration.resx">
       <DependentUpon>frmItemCostConfiguration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPrintLabel.resx">
       <DependentUpon>frmPrintLabel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPurchaseReceiveOrder.resx">
+      <DependentUpon>frmPurchaseReceiveOrder.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRegisterNewPatient.resx">
+      <DependentUpon>frmRegisterNewPatient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmStockSummaryLine.resx">
+      <DependentUpon>frmStockSummaryLine.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PatientDrugDispenseForm.resx">
       <DependentUpon>PatientDrugDispenseForm.cs</DependentUpon>
@@ -426,6 +471,14 @@
     <EmbeddedResource Include="rptBinCard.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptBinCard.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptGRN.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptGRN.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptGRNv2.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptGRNv2.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="rptKNHPrescription.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -592,10 +645,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="rptGRN.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>rptGRN.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="rptIntStorePOReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptIntStorePOReport1.cs</LastGenOutput>
@@ -645,12 +694,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="rptGRN.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>rptGRN.rpt</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="rptOIs.cs">
       <AutoGen>True</AutoGen>

@@ -12,10 +12,6 @@
     <AssemblyName>Entities.Lookup</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
     <TrunkDir>..\..\</TrunkDir>
     <RedDir Condition=" '$(RedDir)' == '' ">$(TrunkDir)package\service\</RedDir>
   </PropertyGroup>
@@ -50,7 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Item.cs" />
+    <Compile Include="LookupItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

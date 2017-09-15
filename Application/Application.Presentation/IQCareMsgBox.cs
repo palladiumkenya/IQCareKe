@@ -53,6 +53,7 @@ namespace Application.Presentation
 
             theSB = new StringBuilder();
             theSB.Append(Msg);
+
             frmName.Controls.AddAt(frmName.Controls.Count, new LiteralControl(theSB.ToString()));
         }
 

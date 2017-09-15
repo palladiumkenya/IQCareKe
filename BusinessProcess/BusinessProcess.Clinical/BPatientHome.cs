@@ -505,10 +505,10 @@ namespace BusinessProcess.Clinical
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
-        public Patient GetPatientById(int id)
+        public Patient GetPatientById(int Id)
         {
             PatientRepository repo = new PatientRepository();
-           Patient p = repo.Get(id);
+            Patient p = repo.Get(Id);
            return p;
         }
     }

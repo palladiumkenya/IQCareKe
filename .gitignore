@@ -8,6 +8,7 @@
 *.sln.docstates
 *.exe
 *.con
+*.DotSettings
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -25,6 +26,11 @@ build/
 bld/
 [Bb]in/
 [Oo]bj/
+aspnet_client/
+DataAccess/RemServer/app.config
+
+#logs
+[Ll]ogs/
 
 # Visual Studio 2015 cache/options directory
 .vs/
@@ -70,7 +76,7 @@ artifacts/
 *.pidb
 *.svclog
 *.scc
-
+*.ps1
 # Chutzpah Test files
 _Chutzpah*
 
@@ -192,6 +198,7 @@ UpgradeLog*.htm
 # SQL Server files
 *.mdf
 *.ldf
+build.bat
 
 # Business Intelligence projects
 *.rdl.data
@@ -214,4 +221,7 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
-
+*/RemServer/app.config
+/*.con
+/Presentation/aspnet_client
+*.zip

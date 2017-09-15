@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DataAccess.Context;
 using Entities.PatientCore;
 using Interface.PatientCore;
 using DataAccess.Base;
-using System;
 using DataAccess.Entity;
 using System.Data;
+using Application.Common;
 using DataAccess.Common;
 using Entities.Common;
 
@@ -63,7 +64,7 @@ namespace BusinessProcess.PatientCore
 
 
             //} 
-            //return patient;
+           // return patient;
         }
 
         public List<PatientAlert> GetPatientAlerts(int moduleId, int patientId)

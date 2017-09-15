@@ -15,6 +15,8 @@
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
+    <TrunkDir>..\..\</TrunkDir>
+    <RedDir Condition=" '$(RedDir)' == '' ">$(TrunkDir)package\service\</RedDir>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -35,9 +37,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+    <Reference Include="Entities.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\References\EntityFramework.dll</HintPath>
+      <HintPath>..\..\References\Entities.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Entities.PatientCore, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Entities.PatientCore.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\Library\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -46,6 +55,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,28 +63,108 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enrollment\PatientEnrollment.cs" />
-    <Compile Include="Enrollment\PatientIdentifier.cs" />
+    <Compile Include="Appointment\BlueCardAppointment.cs" />
+    <Compile Include="Appointment\PatientAppointment.cs" />
+    <Compile Include="Assessment\PatientPsychoscialCriteria.cs" />
+    <Compile Include="Assessment\PatientSupportSystemCriteria.cs" />
+    <Compile Include="Baseline\INHProphylaxis.cs" />
+    <Compile Include="Baseline\PatientBaselineAssessment.cs" />
+    <Compile Include="Baseline\PatientArvHistory.cs" />
+    <Compile Include="Baseline\PatientHivDiagnosis.cs" />
+    <Compile Include="Baseline\PatientDisclosure.cs" />
+    <Compile Include="Baseline\PatientHivEnrollmentBaseline.cs" />
+    <Compile Include="Baseline\PatientLinkage.cs" />
+    <Compile Include="Baseline\PatientTransferIn.cs" />
+    <Compile Include="Baseline\PatientTreatmentInitiation.cs" />
+    <Compile Include="Consent\PatientConsent.cs" />
+    <Compile Include="Encounter\ComplaintsHistory.cs" />
+    <Compile Include="Encounter\LabDetailsEntity.cs" />
+    <Compile Include="Encounter\LabResultsEntity.cs" />
+    <Compile Include="Encounter\PatientAdherenceAssessment.cs" />
+    <Compile Include="Encounter\PatientAdherenceOutcome.cs" />
+    <Compile Include="Encounter\PatientCareEnding.cs" />
+    <Compile Include="Encounter\PatientCategorization.cs" />
+    <Compile Include="Encounter\PatientClinicalDiagnosis.cs" />
+    <Compile Include="Encounter\PatientClinicalNotes.cs" />
+    <Compile Include="Encounter\PatientDiagnosis.cs" />
+    <Compile Include="Encounter\PatientEncounter.cs" />
+    <Compile Include="Encounter\PatientFamilyPlanning.cs" />
+    <Compile Include="Encounter\PatientFamilyPlanningMethod.cs" />
+    <Compile Include="Baseline\PatientHivTesting.cs" />
+    <Compile Include="Baseline\PatientFamilyTesting.cs" />
+    <Compile Include="Encounter\PatientProphylaxis.cs" />
+    <Compile Include="Encounter\PatientReferral.cs" />
+    <Compile Include="Encounter\PatientTbTreatmentTracker.cs" />
+    <Compile Include="Encounter\PatientTreatmentEventTracker.cs" />
+    <Compile Include="Encounter\PatientVaccination.cs" />
+    <Compile Include="Encounter\PatientWhoStage.cs" />
+    <Compile Include="Encounter\PhysicalExamination.cs" />
+    <Compile Include="Encounter\Pregnancy.cs" />
+    <Compile Include="Encounter\PregnancyIndicator.cs" />
+    <Compile Include="Enrollment\PatientArtDistribution.cs" />
+    <Compile Include="Enrollment\HivReConfirmatoryTest.cs" />
+    <Compile Include="Enrollment\Identifier.cs" />
+    <Compile Include="Enrollment\PatientEntityEnrollment.cs" />
+    <Compile Include="Enrollment\PatientEntryPoint.cs" />
+    <Compile Include="Encounter\LabOrderEntity.cs" />
+    <Compile Include="Enrollment\PatientReEnrollment.cs" />
+    <Compile Include="Enrollment\ServiceArea.cs" />
+    <Compile Include="Enrollment\ServiceAreaIdentifiers.cs" />
+    <Compile Include="Lookup\FacilityList.cs" />
+    <Compile Include="Lookup\LookupFacility.cs" />
+    <Compile Include="Lookup\LookupFacilityStatistics.cs" />
+    <Compile Include="Lookup\LookupFacilityViralLoad.cs" />
+    <Compile Include="Lookup\LookupPatientAdherence.cs" />
+    <Compile Include="Lookup\LookupPreviousLabs.cs" />
+    <Compile Include="Lookup\LookupLabs.cs" />
+    <Compile Include="Enrollment\PatientEntityIdentifier.cs" />
+    <Compile Include="Lookup\LookupCounty.cs" />
+    <Compile Include="Lookup\LookupItemView.cs" />
+    <Compile Include="Lookup\LookupItem.cs" />
+    <Compile Include="Lookup\LookupMaster.cs" />
+    <Compile Include="Lookup\LookupMasterItem.cs" />
+    <Compile Include="Enrollment\PatientEntity.cs" />
+    <Compile Include="Lookup\LookupTestParameter.cs" />
+    <Compile Include="Lookup\PatientRegistrationLookup.cs" />
+    <Compile Include="Lookup\PatientStabilitySummary.cs" />
+    <Compile Include="Lookup\PatientTreatmentTrackerLookup.cs" />
+    <Compile Include="Lookup\PatientBaselineLookup.cs" />
+    <Compile Include="Lookup\PatientLookup.cs" />
+    <Compile Include="Lookup\PatientRegimenLookup.cs" />
+    <Compile Include="Lookup\PatientServiceEnrollmentLookup.cs" />
+    <Compile Include="Lookup\PatientTreatmentSupporterLookup.cs" />
+    <Compile Include="Lookup\PersonContactLookUp.cs" />
+    <Compile Include="Lookup\PersonGreenCardLookup.cs" />
+    <Compile Include="Lookup\PersonLookUp.cs" />
+    <Compile Include="Lookup\TestingSummaryStatistics.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Screening\PatientScreening.cs" />
+    <Compile Include="Tb\PatientIcf.cs" />
+    <Compile Include="Tb\PatientIcfAction.cs" />
+    <Compile Include="Tb\PatientIpt.cs" />
+    <Compile Include="Tb\PatientIptOutcome.cs" />
+    <Compile Include="Tb\PatientIptWorkup.cs" />
     <Compile Include="Triage\PatientAdverseEvent.cs" />
     <Compile Include="Triage\PatientAllergy.cs" />
     <Compile Include="Triage\PatientChronicIllness.cs" />
-    <Compile Include="Screening\PatientPhdp.cs" />
+    <Compile Include="Encounter\PatientPhdp.cs" />
+    <Compile Include="Triage\PatientFamilyPlanning.cs" />
+    <Compile Include="Triage\PatientFamilyPlanningMethod.cs" />
+    <Compile Include="Triage\PatientPreganancy.cs" />
+    <Compile Include="Triage\PatientPregnancyIndicator.cs" />
     <Compile Include="Triage\PatientVital.cs" />
+    <Compile Include="Visit\PatientLabTracker.cs" />
     <Compile Include="Visit\PatientEncounter.cs" />
     <Compile Include="Visit\PatientMasterVisit.cs" />
+    <Compile Include="Visit\PatientVisit.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Baseline\" />
-    <Folder Include="Encounter\" />
-    <Folder Include="Lookup\" />
-    <Folder Include="obj\Debug\TempPE\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="AfterBuild">
+    <Copy SourceFiles="@(IntermediateAssembly)" DestinationFolder="$(RedDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(DocFileItem)" DestinationFiles="@(FinalDocFile->'$(RedDir)%(FileName)%(Extension)')" SkipUnchangedFiles="true" Condition="'$(_DocumentationFileProduced)'=='true'" />
+    <Copy SourceFiles="@(IntermediateSatelliteAssembliesWithTargetPath)" DestinationFiles="@(IntermediateSatelliteAssembliesWithTargetPath->'$(RedDir)%(Culture)\$(TargetName).resources.dll')" SkipUnchangedFiles="true" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

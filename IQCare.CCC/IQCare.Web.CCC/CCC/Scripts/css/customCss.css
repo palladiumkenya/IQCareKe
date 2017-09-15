@@ -1,0 +1,12 @@
+﻿.required .control-label:after {
+  content:"*"!important;
+  color:red!important;
+}
+
+.noneevents {
+    pointer-events: none;
+}
+
+.modal-header, .modal-body, .modal-footer {
+    background-color: #FFFFFF !important;
+}
