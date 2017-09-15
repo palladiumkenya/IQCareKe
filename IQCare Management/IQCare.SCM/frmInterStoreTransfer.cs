@@ -282,6 +282,11 @@ namespace IQCare.SCM
        
         private void btnclose_Click(object sender, EventArgs e)
         {
+            Form theForm = (Form)Activator.CreateInstance(Type.GetType("IQCare.SCM.frmViewPurchaseOrder, IQCare.SCM"));
+            theForm.Top = 2;
+            theForm.Left = 2;
+            theForm.MdiParent = this.MdiParent;
+            theForm.Show();
             this.Close();
         }
         private void BindStoreName()
@@ -339,13 +344,13 @@ namespace IQCare.SCM
             IPurchase objPOItem = (IPurchase)ObjectFactory.CreateInstance("BusinessProcess.SCM.BPurchase,BusinessProcess.SCM");
            if(PurchaseMode==1)
            {
-               dsPOItems = objPOItem.GetPurcaseOrderItem(PurchaseMode, GblIQCare.AppUserId, 0);
+               dsPOItems = objPOItem.GetPurchaseOrderItem(PurchaseMode, GblIQCare.AppUserId, 0);
            }
             else if(PurchaseMode ==2)
            {
                 //if(ddlSourceStore.SelectedValue !="0")
                 //{
-                    dsPOItems = objPOItem.GetPurcaseOrderItem(PurchaseMode, GblIQCare.AppUserId, Convert.ToInt32(ddlSourceStore.SelectedValue));
+                    dsPOItems = objPOItem.GetPurchaseOrderItem(PurchaseMode, GblIQCare.AppUserId, Convert.ToInt32(ddlSourceStore.SelectedValue));
                 //}
            }
 
@@ -384,7 +389,11 @@ namespace IQCare.SCM
                     drItemSelect["ItemName"] = "Select";
                     theDS.Tables[0].Rows.InsertAt(drItemSelect, 0);
 
-                    theColumnItemName.DataSource = theDS.Tables[0];
+                    DataView theDV = new DataView(theDS.Tables[0]);
+                    theDV.RowFilter = "AvailableQTY > 0";
+                    DataTable theDT = theDV.ToTable();
+
+                    theColumnItemName.DataSource = theDT;//theDS.Tables[0];
 
                     theColumnItemName.DisplayMember = "ItemName";
                     theColumnItemName.ValueMember = "ItemId";

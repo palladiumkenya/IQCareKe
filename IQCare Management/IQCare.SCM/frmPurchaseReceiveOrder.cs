@@ -278,7 +278,7 @@ namespace IQCare.SCM
 
 
             IPurchase objMasterlist = (IPurchase)ObjectFactory.CreateInstance("BusinessProcess.SCM.BPurchase,BusinessProcess.SCM");
-            int ret = objMasterlist.SavePurchaseOrder(dtOrdermaster, dtOrderItem, IsPOUpdated);
+            int ret = objMasterlist.SavePOWithGRN(dtOrdermaster, dtOrderItem, IsPOUpdated);
 
             if (ret > 0)
             {
@@ -299,7 +299,7 @@ namespace IQCare.SCM
         {
            
             string frmname;
-            if (GblIQCare.theArea == "PO")
+            if (GblIQCare.theArea == "PO" || GblIQCare.CurrentMenu == MenuChoice.POWithGRN)
             {
 
                 frmname = "IQCare.SCM.frmViewPurchaseOrder, IQCare.SCM";
@@ -491,7 +491,7 @@ namespace IQCare.SCM
             IPurchase objPOItem = (IPurchase)ObjectFactory.CreateInstance("BusinessProcess.SCM.BPurchase,BusinessProcess.SCM");
             if (PurchaseMode == 1)
             {
-                dsPOItems = objPOItem.GetPurcaseOrderItem(PurchaseMode, GblIQCare.AppUserId, 0);
+                dsPOItems = objPOItem.GetPurchaseOrderItem(PurchaseMode, GblIQCare.AppUserId, 0);
             }
 
 
@@ -945,7 +945,11 @@ namespace IQCare.SCM
 
         private void FormLoad(object sender, EventArgs e)
         {
-
+            BindStoreName();
+            BindSupplierDropdown();
+           
+            formInit();
+           // BindAuthorPreparedBy();
         }
     }
 
