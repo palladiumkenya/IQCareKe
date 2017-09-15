@@ -150,12 +150,18 @@ namespace IQCare.Web.CCC.UC
 
             DataTable theDT = patientEncounter.loadPatientEncounterPhysicalExam(Session["PatientMasterVisitID"].ToString(), Session["PatientPK"].ToString());
             DataTable theDTAdverse = patientEncounter.loadPatientEncounterAdverseEvents(Session["PatientMasterVisitID"].ToString(), Session["PatientPK"].ToString());
+            bool isOnEdit = false;
 
             /////PRESENTING COMPLAINTS
             visitdateval = pce.visitDate;
             LMPval = pce.lmp;
             EDDval = pce.edd;
             nxtAppDateval = pce.nextAppointmentDate;
+            if (!String.IsNullOrWhiteSpace(pce.visitScheduled))
+            {
+                isOnEdit = true;
+            }
+
             if (pce.visitScheduled == "1")
                 vsYes.Checked = true;
             else if (pce.visitScheduled == "0")
@@ -206,20 +212,20 @@ namespace IQCare.Web.CCC.UC
             ctxAdherance.SelectedValue = pce.CTXAdherence;
             WHOStage.SelectedValue = pce.WhoStage;
 
-            if (theDT.Rows.Count > 0)
+            if (theDT.Rows.Count > 0 && isOnEdit)
             {
                 systemsOkNo.Checked = true;
             }
-            else
+            else if(theDT.Rows.Count == 0 && isOnEdit)
             {
                 systemsOkYes.Checked = true;
             }
 
-            if (theDTAdverse.Rows.Count > 0)
+            if (theDTAdverse.Rows.Count > 0 && isOnEdit)
             {
                 rdAnyAdverseEventsYes.Checked = true;
             }
-            else
+            else if(theDTAdverse.Rows.Count == 0 && isOnEdit)
             {
                 rdAnyAdverseEventsNo.Checked = true;
             }
