@@ -326,7 +326,7 @@ counselling session?</label>
                     $.ajax({
                         type: "POST",
                         url: "../WebService/PatientTreatmentpreparation.asmx/AddPatientPsychosocialCriteria",
-                        data: "{'patientId':'" + patientId + "','patientmastervisitId':'" + patientMasterVisitId + "','benefitART':'" + benefitsART + "','alcohol':'" + screenAlcohol + "','depression':'" + depression + "','disclosure':'" + disclosure + "','administerART':'" + administerART + "','adherence':'" + adherenceBarriers + "','locator':'" + locator + "','caregiver':'" + caregiver + "'}",
+                        data: "{'patientId':'" + patientId + "','patientmastervisitId':'" + patientMasterVisitId + "','benefitART':'" + benefitsART + "','alcohol':'" + screenAlcohol + "','depression':'" + depression + "','disclosure':'" + disclosure + "','administerART':'" + administerART + "','effectsART':'" + effectsART + "','dependents':'" + dependents + "','adherence':'" + adherenceBarriers + "','locator':'" + locator + "','caregiver':'" + caregiver + "'}",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
@@ -363,7 +363,7 @@ counselling session?</label>
                             if (itemList.TSIdentified == true) { $("#TSIdentified").prop("checked", true); }
                             if (itemList.supportGroup == true) { $("#supportGroup").prop("checked", true); }
                             if (itemList.EnrollSMSReminder == true) { $("#EnrollSMSReminder").prop("checked", true); }
-                            if (itemList.OtherSupportSystem == true) { $("#OtherSupportSystem").prop("checked", true); }
+                            if (itemList.OtherSupportSystems == true) { $("#OtherSupportSystem").prop("checked", true); }
                         });
                         //$("#btnSupportSystemCriteria").prop('disabled', true);
 
@@ -388,7 +388,7 @@ counselling session?</label>
                 $.ajax({
                     type: "POST",
                     url: "../WebService/PatientTreatmentpreparation.asmx/AddPatientSupportSystemCriteria",
-                    data: "{'patientId':'" + patientId + "','patientmastervisitId':'" + patientMasterVisitId + "','takingART':'" + convinient + "','TSIdentified':'" + TSIdentified + "','smsreminder':'" + EnrollSMSReminder + "','othersupport':'" + OtherSupportSystem + "'}",
+                    data: "{'patientId':'" + patientId + "','patientmastervisitId':'" + patientMasterVisitId + "','takingART':'" + convinient + "','supportGroup':'" + supportGroup + "','TSIdentified':'" + TSIdentified + "','smsreminder':'" + EnrollSMSReminder + "','othersupport':'" + OtherSupportSystem + "'}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
