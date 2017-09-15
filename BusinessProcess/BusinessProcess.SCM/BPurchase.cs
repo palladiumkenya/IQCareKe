@@ -22,7 +22,135 @@ namespace BusinessProcess.SCM
         }
 
         #endregion
+        public int SavePOWithGRN(DataTable dtMasterPO, DataTable dtPOItems, bool isUpdate)
+        {
+            try
+            {
+                this.Connection = DataMgr.GetConnection();
+                this.Transaction = DataMgr.BeginTransaction(this.Connection);
+                ClsObject PODetail = new ClsObject();
+                PODetail.Connection = this.Connection;
+                PODetail.Transaction = this.Transaction;
+                int theRowAffected = 0;
+                int orderId = 0;
+                DataRow theDR;
 
+                ClsUtility.Init_Hashtable();
+
+                ClsUtility.AddParameters("@LocationID", SqlDbType.VarChar, dtMasterPO.Rows[0]["LocationID"].ToString());
+                ClsUtility.AddParameters("@SupplierID", SqlDbType.Int, dtMasterPO.Rows[0]["SupplierID"].ToString());
+                ClsUtility.AddParameters("@OrderDate", SqlDbType.DateTime, dtMasterPO.Rows[0]["OrderDate"].ToString());
+                ClsUtility.AddParameters("@PreparedBy", SqlDbType.VarChar, dtMasterPO.Rows[0]["PreparedBy"].ToString());
+                ClsUtility.AddParameters("@SourceStoreID", SqlDbType.Int, dtMasterPO.Rows[0]["SrcStore"].ToString());
+                ClsUtility.AddParameters("@DestinStoreID", SqlDbType.Int, dtMasterPO.Rows[0]["DestStore"].ToString());
+                ClsUtility.AddParameters("@UserID", SqlDbType.Int, dtMasterPO.Rows[0]["UserID"].ToString());
+                ClsUtility.AddParameters("@AuthorizedBy", SqlDbType.Int, dtMasterPO.Rows[0]["AthorizedBy"].ToString());
+                if (dtMasterPO.Columns.Contains("PONumber"))
+                    ClsUtility.AddParameters("@PONumber", SqlDbType.VarChar, dtMasterPO.Rows[0]["PONumber"].ToString());
+                
+                if (isUpdate)
+                {
+                    ClsUtility.AddParameters("@Poid", SqlDbType.Int, dtMasterPO.Rows[0]["POID"].ToString());
+                    ClsUtility.AddParameters("@IsUpdate", SqlDbType.Bit, isUpdate.ToString());
+
+                    if (Convert.ToString(dtMasterPO.Rows[0]["IsRejectedStatus"]) == "1")
+                    {
+                        ClsUtility.AddParameters("@Status", SqlDbType.Int, "5");
+                    }
+                    else
+                    {
+                        if (Convert.ToString(dtMasterPO.Rows[0]["AthorizedBy"]) == "0")
+                        {
+                            ClsUtility.AddParameters("@Status", SqlDbType.Int, "1");
+                        }
+                        else
+                        {
+                            ClsUtility.AddParameters("@Status", SqlDbType.Int, "2");
+                        }
+
+                    }
+                }
+                else
+                {
+                    if (Convert.ToString(dtMasterPO.Rows[0]["AthorizedBy"]) == "0")
+                    {
+                        ClsUtility.AddParameters("@Status", SqlDbType.Int, "1");
+                    }
+                    else
+                    {
+                        ClsUtility.AddParameters("@Status", SqlDbType.Int, "2");
+                    }
+                }
+
+                theDR = (DataRow)PODetail.ReturnObject(ClsUtility.theParams, "pr_SCM_SavePurchaseOrderMaster_Futures", ClsUtility.ObjectEnum.DataRow);
+                orderId = System.Convert.ToInt32(theDR[0].ToString());
+
+                int grnId=0;
+                if (!isUpdate && orderId>0) // save grn_master
+                {
+                  //to do save grn order
+                }
+
+                if (isUpdate)
+                {
+                    ClsUtility.Init_Hashtable();
+                    ClsUtility.AddExtendedParameters("@POId", SqlDbType.Int, orderId);
+                    theRowAffected = (int)PODetail.ReturnObject(ClsUtility.theParams, "pr_SCM_DeletePurchaseOrderItem_Futures", ClsUtility.ObjectEnum.ExecuteNonQuery);
+                }
+
+                for (int i = 0; i < dtPOItems.Rows.Count; i++)
+                {
+                    ClsUtility.Init_Hashtable();
+                    ClsUtility.AddParameters("@POId", SqlDbType.Int, orderId.ToString());
+                    ClsUtility.AddParameters("@ItemId", SqlDbType.Int, dtPOItems.Rows[i]["ItemId"].ToString());
+                    if (dtPOItems.Columns.Contains("ItemTypeId"))
+                        ClsUtility.AddParameters("@ItemTypeId", SqlDbType.Int, dtPOItems.Rows[i]["ItemTypeId"].ToString());
+                    ClsUtility.AddParameters("@OrderedQuantity", SqlDbType.Int, dtPOItems.Rows[i]["Quantity"].ToString());
+                    ClsUtility.AddParameters("@IssuedQuantity", SqlDbType.Int, dtPOItems.Rows[i]["IssuedQuantity"].ToString());
+                    ClsUtility.AddParameters("@IssuedQuantityDU", SqlDbType.Int, dtPOItems.Rows[i]["IssuedQuantityDU"].ToString());
+                    ClsUtility.AddParameters("@PurchasePrice", SqlDbType.Decimal, dtPOItems.Rows[i]["priceperunit"].ToString());
+                    //  ClsUtility.AddParameters("@Unit", SqlDbType.Int,dtPOItems.Rows[i]["Units"].ToString());
+                    ClsUtility.AddParameters("@UserID", SqlDbType.Int, dtMasterPO.Rows[0]["UserID"].ToString());
+                    try
+                    {
+                        ClsUtility.AddParameters("@BatchID", SqlDbType.Int, dtPOItems.Rows[i]["BatchID"].ToString());
+                    }
+                    catch { }
+                    try
+                    {
+                        ClsUtility.AddParameters("@BatchName", SqlDbType.Int, dtPOItems.Rows[i]["BatchName"].ToString());
+                    }
+                    catch { }
+
+                    ClsUtility.AddParameters("@AvaliableQty", SqlDbType.Int, dtPOItems.Rows[i]["AvaliableQty"].ToString());
+                    ClsUtility.AddParameters("@ExpiryDate", SqlDbType.DateTime, dtPOItems.Rows[i]["ExpiryDate"].ToString());
+                    ClsUtility.AddParameters("@UnitQuantity", SqlDbType.Int, dtPOItems.Rows[i]["UnitQuantity"].ToString());
+                    ClsUtility.AddParameters("@SourceStoreID", SqlDbType.Int, dtMasterPO.Rows[0]["SrcStore"].ToString());
+                    ClsUtility.AddParameters("@DestinationStoreID", SqlDbType.Int, dtMasterPO.Rows[0]["DestStore"].ToString());
+                    ClsUtility.AddParameters("@IsPOorIST", SqlDbType.Int, dtPOItems.Rows[i]["IsPOorIST"].ToString());
+                    if (dtPOItems.Columns.Contains("SupplierId"))
+                    {
+                        ClsUtility.AddParameters("@SupplierId", SqlDbType.Int, dtPOItems.Rows[i]["SupplierId"].ToString());
+                    }
+                    theRowAffected = (int)PODetail.ReturnObject(ClsUtility.theParams, "SCM_PurchasedReceivedItem_Save", ClsUtility.ObjectEnum.ExecuteNonQuery);
+                }
+
+                DataMgr.CommitTransaction(this.Transaction);
+                DataMgr.ReleaseConnection(this.Connection);
+                return orderId;
+            }
+            catch
+            {
+                DataMgr.RollBackTransation(this.Transaction);
+                throw;
+            }
+            finally
+            {
+                if (this.Connection != null)
+                    DataMgr.ReleaseConnection(this.Connection);
+
+            }
+        }
         /// <summary>
         /// Saves the purchase order.
         /// </summary>
@@ -77,7 +205,7 @@ namespace BusinessProcess.SCM
                         {
                             ClsUtility.AddParameters("@Status", SqlDbType.Int, "2");
                         }
-                       
+
                     }
                 }
                 else
@@ -107,35 +235,24 @@ namespace BusinessProcess.SCM
                     ClsUtility.Init_Hashtable();
                     ClsUtility.AddParameters("@POId", SqlDbType.Int, orderId.ToString());
                     ClsUtility.AddParameters("@ItemId", SqlDbType.Int, dtPOItems.Rows[i]["ItemId"].ToString());
-                    if(dtPOItems.Columns.Contains("ItemTypeId"))
-                            ClsUtility.AddParameters("@ItemTypeId", SqlDbType.Int, dtPOItems.Rows[i]["ItemTypeId"].ToString());
-                    ClsUtility.AddParameters("@OrderedQuantity", SqlDbType.Int, dtPOItems.Rows[i]["Quantity"].ToString());
-                    ClsUtility.AddParameters("@IssuedQuantity", SqlDbType.Int, dtPOItems.Rows[i]["IssuedQuantity"].ToString());
-                    ClsUtility.AddParameters("@IssuedQuantityDU", SqlDbType.Int, dtPOItems.Rows[i]["IssuedQuantityDU"].ToString());
+                    if (dtPOItems.Columns.Contains("ItemTypeId"))
+                        ClsUtility.AddParameters("@ItemTypeId", SqlDbType.Int, dtPOItems.Rows[i]["ItemTypeId"].ToString());
+                    ClsUtility.AddParameters("@Quantity", SqlDbType.Int, dtPOItems.Rows[i]["Quantity"].ToString());                   
                     ClsUtility.AddParameters("@PurchasePrice", SqlDbType.Decimal, dtPOItems.Rows[i]["priceperunit"].ToString());
                     //  ClsUtility.AddParameters("@Unit", SqlDbType.Int,dtPOItems.Rows[i]["Units"].ToString());
                     ClsUtility.AddParameters("@UserID", SqlDbType.Int, DtMasterPO.Rows[0]["UserID"].ToString());
-                    try
-                    {
+                    if (dtPOItems.Columns.Contains("BatchID"))
                         ClsUtility.AddParameters("@BatchID", SqlDbType.Int, dtPOItems.Rows[i]["BatchID"].ToString());
-                    }
-                    catch { }
-                    try
-                    {
-                        ClsUtility.AddParameters("@BatchName", SqlDbType.Int, dtPOItems.Rows[i]["BatchName"].ToString());
-                    }
-                    catch { }
-
+                  
+                   
                     ClsUtility.AddParameters("@AvaliableQty", SqlDbType.Int, dtPOItems.Rows[i]["AvaliableQty"].ToString());
                     ClsUtility.AddParameters("@ExpiryDate", SqlDbType.DateTime, dtPOItems.Rows[i]["ExpiryDate"].ToString());
                     ClsUtility.AddParameters("@UnitQuantity", SqlDbType.Int, dtPOItems.Rows[i]["UnitQuantity"].ToString());
-                    ClsUtility.AddParameters("@SourceStoreID", SqlDbType.Int, DtMasterPO.Rows[0]["SrcStore"].ToString());
-                    ClsUtility.AddParameters("@DestinationStoreID", SqlDbType.Int, DtMasterPO.Rows[0]["DestStore"].ToString());
-                    ClsUtility.AddParameters("@IsPOorIST", SqlDbType.Int, dtPOItems.Rows[i]["IsPOorIST"].ToString());
-                    //if(dtPOItems.Columns.Contains("SupplierId"))
-                    //{
-                    //    ClsUtility.AddParameters("@SupplierId", SqlDbType.Int, dtPOItems.Rows[i]["SupplierId"].ToString());
-                    //}
+
+                    if(dtPOItems.Columns.Contains("SupplierId")){
+                        ClsUtility.AddParameters("@SupplierId", SqlDbType.Int, dtPOItems.Rows[i]["SupplierId"].ToString());
+                    }
+
                     theRowAffected = (int)PODetail.ReturnObject(ClsUtility.theParams, "pr_SCM_SavePurchaseOrderItem_Futures", ClsUtility.ObjectEnum.ExecuteNonQuery);
                 }
 
@@ -162,7 +279,7 @@ namespace BusinessProcess.SCM
         /// <param name="UserID">The user identifier.</param>
         /// <param name="StoreID">The store identifier.</param>
         /// <returns></returns>
-        public DataSet GetPurcaseOrderItem(int isPO, int UserID, int StoreID)
+        public DataSet GetPurchaseOrderItem(int isPO, int UserID, int StoreID)
         {
             lock (this)
             {
@@ -456,7 +573,7 @@ namespace BusinessProcess.SCM
         /// <param name="dtGRNItems">The dt GRN items.</param>
         /// <param name="IsPOorIST">The is p oor ist.</param>
         /// <returns></returns>
-        public int SaveGoodreceivedNotes(DataTable DtMasterGRN, DataTable dtGRNItems, int IsPOorIST)
+        public int SaveGoodReceivedNote(DataTable DtMasterGRN, DataTable dtGRNItems, int IsPOorIST)
         {
 
             try
@@ -709,6 +826,8 @@ namespace BusinessProcess.SCM
                 objPOdetails.ReturnObject(ClsUtility.theParams, "SCM_GetPurchaseOrderItems",
                                           ClsUtility.ObjectEnum.DataSet);
         }
+
+       
     }
 
 }

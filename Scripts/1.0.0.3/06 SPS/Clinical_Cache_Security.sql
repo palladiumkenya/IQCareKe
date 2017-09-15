@@ -1816,7 +1816,7 @@ Begin
 				For xml Path (''))
 			, 2, 1000);
 		Select @Identifiers = ' AND(' + Replace(@SS, ',', ' like ''%' + Convert(varchar,@enrollmentid) + ''' or ') + ' = ''' 
-		+ Convert(varchar,@enrollmentid) + ''' or P.IQNumber=''' + Convert(varchar,@enrollmentid) 
+		+ Convert(varchar,@enrollmentid) + ''' or P.IQNumber=''' + Convert(varchar,@enrollmentid) +''')'
 		
 	End
 	Else Begin

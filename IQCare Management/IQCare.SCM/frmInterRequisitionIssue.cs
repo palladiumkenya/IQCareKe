@@ -263,7 +263,7 @@ namespace IQCare.SCM
                 //int ret = objMasterlist.SavePurchaseOrder(dtOrdermaster, dtOrderItem, IsPOUpdated);
 
                 IPurchase objMasterlist = (IPurchase)ObjectFactory.CreateInstance("BusinessProcess.SCM.BPurchase,BusinessProcess.SCM");
-                int ret = objMasterlist.SavePurchaseOrder(dtOrdermaster, dtOrderItem, IsPOUpdated);
+                int ret = objMasterlist.SavePOWithGRN(dtOrdermaster, dtOrderItem, IsPOUpdated);
 
                 if (ret > 0)
                 {
@@ -282,6 +282,17 @@ namespace IQCare.SCM
        
         private void btnclose_Click(object sender, EventArgs e)
         {
+            string frmname;
+            
+
+                frmname = "IQCare.SCM.frmViewPurchaseOrder, IQCare.SCM";
+                Form theForm = (Form)Activator.CreateInstance(Type.GetType(frmname.ToString()));
+                theForm.MdiParent = this.MdiParent;
+                theForm.Top = 2;
+                theForm.Left = 2;
+                theForm.Show();
+         
+
             this.Close();
         }
         private void BindStoreName()
@@ -339,13 +350,13 @@ namespace IQCare.SCM
             IPurchase objPOItem = (IPurchase)ObjectFactory.CreateInstance("BusinessProcess.SCM.BPurchase,BusinessProcess.SCM");
            if(PurchaseMode==1)
            {
-               dsPOItems = objPOItem.GetPurcaseOrderItem(PurchaseMode, GblIQCare.AppUserId, 0);
+               dsPOItems = objPOItem.GetPurchaseOrderItem(PurchaseMode, GblIQCare.AppUserId, 0);
            }
             else if(PurchaseMode ==2)
            {
                 //if(ddlSourceStore.SelectedValue !="0")
                 //{
-                    dsPOItems = objPOItem.GetPurcaseOrderItem(PurchaseMode, GblIQCare.AppUserId, Convert.ToInt32(ddlSourceStore.SelectedValue));
+                    dsPOItems = objPOItem.GetPurchaseOrderItem(PurchaseMode, GblIQCare.AppUserId, Convert.ToInt32(ddlSourceStore.SelectedValue));
                 //}
            }
 
@@ -809,7 +820,7 @@ namespace IQCare.SCM
                                     DataTable theISTDT = dsPOItems.Tables[0].Copy();
                                     DataView dvISTFilteredRow = theISTDT.DefaultView;
                                     DataTable dtISTRow = new DataTable();
-                                    dvISTFilteredRow.RowFilter = "ItemName ='" + strdrugName + "'";
+                                    dvISTFilteredRow.RowFilter = "ItemName ='" + strdrugName.Replace("'", "''")  + "'";
 
 
                                     dtISTRow = dvISTFilteredRow.ToTable();

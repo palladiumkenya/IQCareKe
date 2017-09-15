@@ -452,7 +452,7 @@ namespace IQCare.SCM
             IPurchase objPOItem = (IPurchase)ObjectFactory.CreateInstance("BusinessProcess.SCM.BPurchase,BusinessProcess.SCM");
             if (PurchaseMode == 1)
             {
-                dsPOItems = objPOItem.GetPurcaseOrderItem(PurchaseMode, GblIQCare.AppUserId, 0);
+                dsPOItems = objPOItem.GetPurchaseOrderItem(PurchaseMode, GblIQCare.AppUserId, 0);
             }
 
 
