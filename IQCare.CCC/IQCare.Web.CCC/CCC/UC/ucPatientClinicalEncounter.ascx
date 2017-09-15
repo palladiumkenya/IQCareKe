@@ -2478,9 +2478,8 @@
                     .row($(this).parents('tr'))
                     .remove()
                     .draw();
-
                 var index = diagnosisList.indexOf($(this).parents('tr').find('td:eq(0)').text());
-                if (index > -1) {
+                if (index >= -1) {
                     diagnosisList.splice(index, 1);
                 }
 

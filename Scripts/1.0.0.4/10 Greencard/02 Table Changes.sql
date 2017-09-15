@@ -8,6 +8,16 @@ BEGIN
 	ALTER TABLE [dbo].[PersonRelationship] ALTER COLUMN FamilyInfoId int NULL;
 END
 
+IF EXISTS (SELECT * FROM sys.columns WHERE Name = N'PhysicalAddress' AND Object_ID = OBJECT_ID(N'PersonContact'))
+BEGIN
+	ALTER TABLE [dbo].[PersonContact] ALTER COLUMN PhysicalAddress varbinary(max) NULL;
+END
+
+IF EXISTS (SELECT * FROM sys.columns WHERE Name = N'MobileNumber' AND Object_ID = OBJECT_ID(N'PersonContact'))
+BEGIN
+	ALTER TABLE [dbo].[PersonContact] ALTER COLUMN MobileNumber varbinary(max) NULL;
+END
+
 
 
 IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'RegisteredAtPharmacy'AND Object_ID = OBJECT_ID(N'mst_patient'))

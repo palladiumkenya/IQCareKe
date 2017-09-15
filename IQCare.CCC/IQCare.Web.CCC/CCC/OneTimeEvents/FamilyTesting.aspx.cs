@@ -79,7 +79,7 @@ namespace IQCare.Web.CCC.OneTimeEvents
                     }
                 }
 
-                List<LookupItemView> YesNo = mgr.GetLookItemByGroup("YesNo");
+                /*List<LookupItemView> YesNo = mgr.GetLookItemByGroup("YesNo");
                 if (YesNo != null && YesNo.Count > 0)
                 {
                     RegisteredInClinic.Items.Add(new ListItem("select", ""));
@@ -87,7 +87,7 @@ namespace IQCare.Web.CCC.OneTimeEvents
                     {
                         RegisteredInClinic.Items.Add(new ListItem(item.ItemName, item.ItemId.ToString()));
                     }
-                }
+                }*/
             }
         }
 
