@@ -213,7 +213,7 @@ namespace IQCare.SCM
             // dsPOItems = objPOItem.GetPurcaseOrderItem(PurchaseMode, GblIQCare.AppUserId, GblIQCare.intStoreId);
             if (PurchaseMode == 1)
             {
-                dsPOItems = objPOItem.GetPurcaseOrderItem(PurchaseMode, GblIQCare.AppUserId, 0);
+                dsPOItems = objPOItem.GetPurchaseOrderItem(PurchaseMode, GblIQCare.AppUserId, 0);
             }
             else if (PurchaseMode == 2)
             {
@@ -1258,7 +1258,7 @@ namespace IQCare.SCM
             {
                 //IMasterList objMasterlist = (IMasterList)ObjectFactory.CreateInstance("BusinessProcess.SCM.BMasterList,BusinessProcess.SCM");
                 IPurchase objMasterlist = (IPurchase)ObjectFactory.CreateInstance("BusinessProcess.SCM.BPurchase,BusinessProcess.SCM");
-                int ret = objMasterlist.SaveGoodreceivedNotes(dtGRNmaster, dtGRNItem, GblIQCare.ModePurchaseOrder);
+                int ret = objMasterlist.SaveGoodReceivedNote(dtGRNmaster, dtGRNItem, GblIQCare.ModePurchaseOrder);
                 if (ret > -1)
                 {
                     IQCareWindowMsgBox.ShowWindow("ProgramSave", this);

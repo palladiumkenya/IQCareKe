@@ -178,7 +178,7 @@ namespace IQCare.Web.Laboratory
                 TextBox txtLimit = dataItem.FindControl("textDetectionLimit") as TextBox;
                 TextBox txtResultValue = dataItem.FindControl("textResultValue") as TextBox;
 
-                hasResult = txtResultValue.Text.Trim() != "" || (ddlResultList.SelectedValue != "" && Convert.ToInt32(ddlResultList.SelectedValue) > 0) || txtResultText.Text.Trim() != "";
+                hasResult = (cBox.Checked)||txtResultValue.Text.Trim() != "" || (ddlResultList.SelectedValue != "" && Convert.ToInt32(ddlResultList.SelectedValue) > 0) || txtResultText.Text.Trim() != "";
                 if (!hasResult)
                 {
                     this.isDataEntry = true;
