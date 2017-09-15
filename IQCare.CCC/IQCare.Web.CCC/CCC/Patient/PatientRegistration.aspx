@@ -317,7 +317,7 @@
 
                             <div class="col-md-12 form-group">   
                                 <div class="col-md-3">
-                                        <div class="col-md-12"><label class="control-label pull-left">First Name</label></div>
+                                        <div class="col-md-12"><label class="required control-label pull-left">First Name</label></div>
                                         <div class="col-md-12">
                                             <asp:TextBox runat="server" type="text" id="GurdianFNames" class="form-control input-sm" placeholder="gurdian first name.." ClientIDMode="Static" data-parsley-required="true" />
                                         </div>
@@ -331,13 +331,13 @@
                                 </div>
                                                
                                 <div class="col-md-3">
-                                    <div class="col-md-12"><label class="control-label pull-left">Last Name</label></div>
+                                    <div class="col-md-12"><label class="required control-label pull-left">Last Name</label></div>
                                     <div class="col-md-12">
                                         <asp:TextBox runat="server" ID="GurdianLName" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="guardian last name" data-parsley-required="true"></asp:TextBox>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
-                                    <div class="col-md-12"><label class="control-label pull-left">Guardian Gender</label></div>
+                                    <div class="col-md-12"><label class="required control-label pull-left">Guardian Gender</label></div>
                                     <div class="col-md-12">
                                         <asp:DropDownList runat="server" ID="GuardianGender" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-min="1" data-parsley-min-message="Please select Guardian Gender" />
                                     </div>
