@@ -15,6 +15,7 @@ namespace IQCare.Web.CCC
         protected void Page_Load(object sender, EventArgs e)
         {
             AppLocationId = Convert.ToInt32(HttpContext.Current.Session["AppLocationId"]);
+            Session["PatientPK"] = 0;
             var facilityStatistics= _lookupManager.GetLookupFacilityStatistics();
             foreach (var item in facilityStatistics)
             {
