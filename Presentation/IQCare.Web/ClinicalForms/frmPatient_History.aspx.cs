@@ -298,7 +298,12 @@ namespace IQCare.Web.Clinical
         protected void btnExit_Click(object sender, EventArgs e)
         {
             string theUrl;
-            string origin = Session["urlOrigin"].ToString();
+            string origin = String.Empty;
+            if (Session["urlOrigin"] != null)
+            {
+                origin = Session["urlOrigin"].ToString();
+            }
+            
             ////theUrl = string.Format("{0}?PatientId={1}", "frmPatient_Home.aspx", Request.QueryString["PatientId"].ToString());
             if(origin == "greencard")
             {

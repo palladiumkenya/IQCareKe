@@ -61,7 +61,7 @@ namespace IQCare.Web.CCC.WebService
                     msg = "Patient has been re-enrolled";
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 msg = "Patient re-enrollment failed";
             }

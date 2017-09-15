@@ -221,9 +221,16 @@ namespace IQCare.Web.Laboratory.Request
                 int patient = (int)param.Find(l => l.Key == "Patient").Value;
                 int patientPk = (int)param.Find(l => l.Key == "PatientID").Value;
                 int location = (int)param.Find(l => l.Key == "LocationID").Value;
-                lblname.Text = string.Format("{0} {1} {2}", (string)(param.Find(l => l.Key == "FirstName").Value.ToString())
-                    , (string)(param.Find(l => l.Key == "MiddleName").Value.ToString())
-                    , (string)(param.Find(l => l.Key == "LastName").Value.ToString()));
+
+                string firstName = (string) param.Find(l => l.Key == "FirstName").Value;
+                string middleName = (string) param.Find(l => l.Key == "MiddleName").Value;
+                string lastName = (string) param.Find(l => l.Key == "LastName").Value;
+
+                lblname.Text = string.Format("{0} {1}, {2}", firstName, middleName, lastName);
+
+                //lblname.Text = string.Format("{0} {1} {2}", (string)(param.Find(l => l.Key == "FirstName").Value.ToString())
+                //    , (string)(param.Find(l => l.Key == "MiddleName").Value.ToString())
+                //    , (string)(param.Find(l => l.Key == "LastName").Value.ToString()));
                 //set session Greencard patient_Id
                 Session["patient"] = patient;
 

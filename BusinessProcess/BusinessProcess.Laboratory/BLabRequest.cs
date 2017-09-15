@@ -373,7 +373,7 @@ namespace BusinessProcess.Laboratory
                                            new XElement("resultdate", ResultDate),
                                            new XElement("resultby", ResultBy),
                                            new XElement("resultunit", result.ResultUnit == null ? null : result.ResultUnitName),
-                                           new XElement("resultunitid", result.ResultUnit == null ? null : result.ResultUnitId.Value.ToString()),
+                                           new XElement("resultunitid", result.ResultUnit == null ? null : result.ResultUnit.Id.ToString()),
                                            new XElement("undetectable", result.Undetectable),
                                            new XElement("detectionlimit", result.DetectionLimit == null ? nullDecimal : result.DetectionLimit),
                                            new XElement("configid", result.ConfigId)

@@ -77,7 +77,7 @@ GO
 
 CREATE VIEW [dbo].[RegimenMapView]
 AS
-SELECT ROW_NUMBER() OVER(PARTITION BY R.Ptn_Pk ORDER BY V.VisitDate ASC) as RowNumber,p.Id as patientId,p.ptn_pk,R.Visit_Pk,R.RegimenMap_Pk,ISNULL(R.RegimenType,'NA') as RegimenType,R.UserID,V.VisitDate,R.DeleteFlag
+SELECT ROW_NUMBER() OVER(PARTITION BY R.Ptn_Pk ORDER BY V.VisitDate ASC) as RowNumber,p.Id as patientId,p.ptn_pk,R.Visit_Pk,R.RegimenMap_Pk,ISNULL(R.RegimenType,'NA') as RegimenType,R.UserID,V.VisitDate,(SELECT DATEDIFF(YEAR,p.DOB,GETDATE()) FROM mst_Patient p WHERE p.Ptn_Pk=R.Ptn_Pk) age,R.DeleteFlag
 
 FROM  dtl_RegimenMap R INNER JOIN 
 patient p
@@ -126,32 +126,34 @@ UNION ALL
 
 SELECT 
 	
+	
+	
 	R.RegimenMap_Pk,R.patientId,R.ptn_pk,0 as ServiceAreaId,0 as PatientmasterVisitId,
 	(SELECT TOP 1  p.DispensedByDate FROM ord_PatientPharmacyOrder p WHERE p.VisitID=R.Visit_Pk) as RegimenStartDate,
-	ISNULL((SELECT top 1 id FROM LookupItem WHERE displayName IN(CASE R.RegimenType
-			WHEN '3TC/NVP/TDF'	THEN 'TDF + 3TC + NVP'
-			WHEN '3TC/AZT/NVP'	THEN 'AZT + 3TC + NVP'
-			WHEN '3TC/AZT/EFV'	THEN 'AZT + 3TC + EFV '
-			WHEN '3TC/AZT/LOPr' THEN 'AZT + 3TC + LPV/r'
-			WHEN '3TC/LOPr/TDF' THEN 'TDF + 3TC + LPV/r'
-			WHEN '3TC/ABC/EFV'	THEN 'TDF + 3TC + EFV'
-			WHEN '3TC/ABC/LOPr' THEN 'ABC + 3TC + LPV/r'
-			WHEN '3TC/ABC/NVP'	THEN 'ABC + 3TC + NVP'
-			WHEN '3TC/EFV/TDF'	THEN 'TDF + 3TC + EFV'
-			WHEN '3TC/NVP/AZT' THEN  'AZT + 3TC + NVP'
+	ISNULL((SELECT top 1 id FROM LookupItem WHERE Name IN(CASE R.RegimenType
+			WHEN '3TC/NVP/TDF'	THEN CASE  WHEN R.age>14 THEN 'AF2A' ELSE 'CF2A' END
+			WHEN '3TC/AZT/NVP'	THEN CASE  WHEN R.age>14 THEN 'AF2A' ELSE 'CF2A' END --'AZT + 3TC + NVP'
+			WHEN '3TC/AZT/EFV'	THEN CASE  WHEN R.age>14 THEN 'AF1B' ELSE 'CF1B' END--'AZT + 3TC + EFV '
+			WHEN '3TC/AZT/LOPr' THEN CASE  WHEN R.age>14 THEN 'AS1A' ELSE 'CS1A' END--'AZT + 3TC + LPV/r'
+			WHEN '3TC/LOPr/TDF' THEN CASE  WHEN R.age>14 THEN 'AF2F' ELSE 'CF4C' END--'TDF + 3TC + LPV/r'
+			WHEN '3TC/ABC/EFV'	THEN CASE  WHEN R.age>14 THEN 'AF2B' ELSE 'CF4B' END --'TDF + 3TC + EFV'
+			WHEN '3TC/ABC/LOPr' THEN CASE  WHEN R.age>14 THEN 'AS5A' ELSE 'CS2A' END --'ABC + 3TC + LPV/r'
+			WHEN '3TC/ABC/NVP'	THEN CASE  WHEN R.age>14 THEN 'AF4A' ELSE 'CF2A' END --'ABC + 3TC + NVP'
+			WHEN '3TC/EFV/TDF'	THEN CASE  WHEN R.age>14 THEN 'AF2A' ELSE 'CF2A' END --'TDF + 3TC + NVP'
+			WHEN '3TC/NVP/AZT'  THEN CASE WHEN R.age>14 THEN 'AF1A' ELSE 'CF1A' END --'AZT + 3TC + NVP'
 		END)),0) as RegimenId,
 	ISNULL((
 		CASE R.RegimenType
-			WHEN '3TC/NVP/TDF'	THEN (SELECT top 1 Name FROM lookupitem WHERE DisplayName='TDF + 3TC + NVP')+'(TDF + 3TC + NVP)'
-			WHEN '3TC/AZT/NVP'	THEN (SELECT top 1 Name FROM lookupitem WHERE DisplayName='AZT + 3TC + NVP')+'(AZT + 3TC + NVP)'
-			WHEN '3TC/AZT/EFV'	THEN (SELECT top 1 Name FROM lookupitem WHERE DisplayName='AZT + 3TC + EFV')+'(AZT + 3TC + EFV)'
-			WHEN '3TC/AZT/LOPr' THEN (SELECT top 1 Name FROM lookupitem WHERE DisplayName='AZT + 3TC + LPV/r')+'(AZT + 3TC + LPV/r)'
-			WHEN '3TC/LOPr/TDF' THEN (SELECT top 1 Name FROM lookupitem WHERE DisplayName='TDF + 3TC + LPV/r')+'(TDF + 3TC + LPV/r)'
-			WHEN '3TC/ABC/EFV'	THEN (SELECT top 1 Name FROM lookupitem WHERE DisplayName='TDF + 3TC + EFV')+'(TDF + 3TC + EFV)'
-			WHEN '3TC/ABC/LOPr' THEN (SELECT top 1 Name FROM lookupitem WHERE DisplayName='ABC + 3TC + LPV/r')+'(ABC + 3TC + LPV/r)'
-			WHEN '3TC/ABC/NVP'	THEN (SELECT top 1 Name FROM lookupitem WHERE DisplayName='ABC + 3TC + NVP')+'(ABC + 3TC + NVP)'
-			WHEN '3TC/EFV/TDF'	THEN (SELECT top 1 Name FROM lookupitem WHERE DisplayName='TDF + 3TC + EFV')+'(TDF + 3TC + EFV)'
-			WHEN '3TC/NVP/AZT'  THEN (SELECT top 1 Name FROM lookupitem WHERE DisplayName='AZT + 3TC + NVP')+ '(AZT + 3TC + NVP)'
+			WHEN '3TC/NVP/TDF'	THEN CASE WHEN R.age> 14 THEN (SELECT top 1 Name FROM lookupitem WHERE Name='AF2A')ELSE (SELECT top 1 Name FROM lookupitem WHERE Name='AF2A') END +'(TDF + 3TC + NVP)'
+			WHEN '3TC/AZT/NVP'	THEN CASE WHEN R.age> 14 THEN (SELECT top 1 Name FROM lookupitem WHERE Name='AF1A')ELSE (SELECT top 1 Name FROM lookupitem WHERE Name='CF2A')  END+'(AZT + 3TC + NVP)' 
+			WHEN '3TC/AZT/EFV'	THEN CASE WHEN R.age> 14 THEN (SELECT top 1 Name FROM lookupitem WHERE Name='AF1B')ELSE (SELECT top 1 Name FROM lookupitem WHERE Name='CF1B')  END+'(AZT + 3TC + EFV)'
+			WHEN '3TC/AZT/LOPr' THEN CASE WHEN R.age> 14 THEN (SELECT top 1 Name FROM lookupitem WHERE Name='AS1A')ELSE (SELECT top 1 Name FROM lookupitem WHERE Name='CS1A')  END+'(AZT + 3TC + LPV/r)'
+			WHEN '3TC/LOPr/TDF' THEN CASE WHEN R.age> 14 THEN (SELECT top 1 Name FROM lookupitem WHERE Name='AF2F')ELSE (SELECT top 1 Name FROM lookupitem WHERE Name='CF4C')  END+'(TDF + 3TC + LPV/r)'
+			WHEN '3TC/ABC/EFV'	THEN CASE WHEN R.age> 14 THEN (SELECT top 1 Name FROM lookupitem WHERE Name='AF2B')ELSE (SELECT top 1 Name FROM lookupitem WHERE Name='CF4B')  END+'(TDF + 3TC + EFV)'
+			WHEN '3TC/ABC/LOPr' THEN CASE WHEN R.age> 14 THEN (SELECT top 1 Name FROM lookupitem WHERE Name='AS5A')ELSE (SELECT top 1 Name FROM lookupitem WHERE Name='CS2A')  END+'(ABC + 3TC + LPV/r)'
+			WHEN '3TC/ABC/NVP'	THEN CASE WHEN R.age> 14 THEN (SELECT top 1 Name FROM lookupitem WHERE Name='AF4A')ELSE (SELECT top 1 Name FROM lookupitem WHERE Name='CF2A')  END+'(ABC + 3TC + NVP)'
+			WHEN '3TC/EFV/TDF'	THEN CASE WHEN R.age> 14 THEN (SELECT top 1 Name FROM lookupitem WHERE Name='AF2A')ELSE (SELECT top 1 Name FROM lookupitem WHERE Name='AF2A')  END+'(TDF + 3TC + NVP)'
+			WHEN '3TC/NVP/AZT'  THEN CASE WHEN R.age> 14 THEN (SELECT top 1 Name FROM lookupitem WHERE Name='AF1A')ELSE (SELECT top 1 Name FROM lookupitem WHERE Name='CF2A')  END+ '(AZT + 3TC + NVP)'
 		END
 	), (select TOP 1 Name from lookupitem where Name='Unknown')) as Regimen,
 	ISNULL((SELECT top 1 id FROM LookupItem WHERE Name IN(SELECT 
@@ -164,17 +166,27 @@ SELECT
 	WHEN 'PaedsThirdlineRegimen' THEN 'PaedsARTThirdLine' 
 	END 
 	
-	FROM LookupItemView WHERE ItemDisplayName IN(CASE R.RegimenType
-			WHEN '3TC/NVP/TDF'	THEN 'TDF + 3TC + NVP'
-			WHEN '3TC/AZT/NVP'	THEN 'AZT + 3TC + NVP'
-			WHEN '3TC/AZT/EFV'	THEN 'AZT + 3TC + EFV '
-			WHEN '3TC/AZT/LOPr' THEN 'AZT + 3TC + LPV/r'
-			WHEN '3TC/LOPr/TDF' THEN 'TDF + 3TC + LPV/r'
-			WHEN '3TC/ABC/EFV'	THEN 'TDF + 3TC + EFV'
-			WHEN '3TC/ABC/LOPr' THEN 'ABC + 3TC + LPV/r'
-			WHEN '3TC/ABC/NVP'	THEN 'ABC + 3TC + NVP'
-			WHEN '3TC/EFV/TDF'	THEN 'TDF + 3TC + EFV'
-			WHEN '3TC/NVP/AZT' THEN  'AZT + 3TC + NVP'
+	FROM LookupItemView WHERE ItemName IN(CASE R.RegimenType
+			WHEN '3TC/NVP/TDF'	THEN CASE  WHEN R.age>14 THEN 'AF2A' ELSE 'CF2A' END
+			WHEN '3TC/AZT/NVP'	THEN CASE  WHEN R.age>14 THEN 'AF2A' ELSE 'CF2A' END --'AZT + 3TC + NVP'
+			WHEN '3TC/AZT/EFV'	THEN CASE  WHEN R.age>14 THEN 'AF1B' ELSE 'CF1B' END--'AZT + 3TC + EFV '
+			WHEN '3TC/AZT/LOPr' THEN CASE  WHEN R.age>14 THEN 'AS1A' ELSE 'CS1A' END--'AZT + 3TC + LPV/r'
+			WHEN '3TC/LOPr/TDF' THEN CASE  WHEN R.age>14 THEN 'AF2F' ELSE 'CF4C' END--'TDF + 3TC + LPV/r'
+			WHEN '3TC/ABC/EFV'	THEN CASE  WHEN R.age>14 THEN 'AF2B' ELSE 'CF4B' END --'TDF + 3TC + EFV'
+			WHEN '3TC/ABC/LOPr' THEN CASE  WHEN R.age>14 THEN 'AS5A' ELSE 'CS2A' END --'ABC + 3TC + LPV/r'
+			WHEN '3TC/ABC/NVP'	THEN CASE  WHEN R.age>14 THEN 'AF4A' ELSE 'CF2A' END --'ABC + 3TC + NVP'
+			WHEN '3TC/EFV/TDF'	THEN CASE  WHEN R.age>14 THEN 'AF2A' ELSE 'CF2A' END --'TDF + 3TC + NVP'
+			WHEN '3TC/NVP/AZT'  THEN CASE WHEN R.age>14 THEN 'AF1A' ELSE 'CF1A' END --'AZT + 3TC + NVP'
+			--WHEN '3TC/NVP/TDF'	THEN 'TDF + 3TC + NVP'
+			--WHEN '3TC/AZT/NVP'	THEN 'AZT + 3TC + NVP'
+			--WHEN '3TC/AZT/EFV'	THEN 'AZT + 3TC + EFV '
+			--WHEN '3TC/AZT/LOPr' THEN 'AZT + 3TC + LPV/r'
+			--WHEN '3TC/LOPr/TDF' THEN 'TDF + 3TC + LPV/r'
+			--WHEN '3TC/ABC/EFV'	THEN 'TDF + 3TC + EFV'
+			--WHEN '3TC/ABC/LOPr' THEN 'ABC + 3TC + LPV/r'
+			--WHEN '3TC/ABC/NVP'	THEN 'ABC + 3TC + NVP'
+			--WHEN '3TC/EFV/TDF'	THEN 'TDF + 3TC + NVP'
+			--WHEN '3TC/NVP/AZT' THEN  'AZT + 3TC + NVP'
 		END))),(select TOP 1 Id from lookupitem where Name='Unknown')) as RegimenLineId,
 	ISNULL((SELECT top 1 Name FROM LookupItem WHERE Name IN(SELECT 
 	CASE MasterName 
@@ -186,17 +198,27 @@ SELECT
 	WHEN 'PaedsThirdlineRegimen' THEN 'PaedsARTThirdLine' 
 	END  
 
-	FROM LookupItemView WHERE ItemDisplayName IN(CASE R.RegimenType
-			WHEN '3TC/NVP/TDF'	THEN 'TDF + 3TC + NVP'
-			WHEN '3TC/AZT/NVP'	THEN 'AZT + 3TC + NVP'
-			WHEN '3TC/AZT/EFV'	THEN 'AZT + 3TC + EFV '
-			WHEN '3TC/AZT/LOPr' THEN 'AZT + 3TC + LPV/r'
-			WHEN '3TC/LOPr/TDF' THEN 'TDF + 3TC + LPV/r'
-			WHEN '3TC/ABC/EFV'	THEN 'TDF + 3TC + EFV'
-			WHEN '3TC/ABC/LOPr' THEN 'ABC + 3TC + LPV/r'
-			WHEN '3TC/ABC/NVP'	THEN 'ABC + 3TC + NVP'
-			WHEN '3TC/EFV/TDF'	THEN 'TDF + 3TC + EFV'
-			WHEN '3TC/NVP/AZT' THEN  'AZT + 3TC + NVP'
+	FROM LookupItemView WHERE ItemName IN(CASE R.RegimenType
+			WHEN '3TC/NVP/TDF'	THEN CASE  WHEN R.age>14 THEN 'AF2A' ELSE 'CF2A' END
+			WHEN '3TC/AZT/NVP'	THEN CASE  WHEN R.age>14 THEN 'AF2A' ELSE 'CF2A' END --'AZT + 3TC + NVP'
+			WHEN '3TC/AZT/EFV'	THEN CASE  WHEN R.age>14 THEN 'AF1B' ELSE 'CF1B' END--'AZT + 3TC + EFV '
+			WHEN '3TC/AZT/LOPr' THEN CASE  WHEN R.age>14 THEN 'AS1A' ELSE 'CS1A' END--'AZT + 3TC + LPV/r'
+			WHEN '3TC/LOPr/TDF' THEN CASE  WHEN R.age>14 THEN 'AF2F' ELSE 'CF4C' END--'TDF + 3TC + LPV/r'
+			WHEN '3TC/ABC/EFV'	THEN CASE  WHEN R.age>14 THEN 'AF2B' ELSE 'CF4B' END --'TDF + 3TC + EFV'
+			WHEN '3TC/ABC/LOPr' THEN CASE  WHEN R.age>14 THEN 'AS5A' ELSE 'CS2A' END --'ABC + 3TC + LPV/r'
+			WHEN '3TC/ABC/NVP'	THEN CASE  WHEN R.age>14 THEN 'AF4A' ELSE 'CF2A' END --'ABC + 3TC + NVP'
+			WHEN '3TC/EFV/TDF'	THEN CASE  WHEN R.age>14 THEN 'AF2A' ELSE 'CF2A' END --'TDF + 3TC + NVP'
+			WHEN '3TC/NVP/AZT'  THEN CASE WHEN R.age>14 THEN 'AF1A' ELSE 'CF1A' END --'AZT + 3TC + NVP'
+			--WHEN '3TC/NVP/TDF'	THEN 'TDF + 3TC + NVP'
+			--WHEN '3TC/AZT/NVP'	THEN 'AZT + 3TC + NVP'
+			--WHEN '3TC/AZT/EFV'	THEN 'AZT + 3TC + EFV '
+			--WHEN '3TC/AZT/LOPr' THEN 'AZT + 3TC + LPV/r'
+			--WHEN '3TC/LOPr/TDF' THEN 'TDF + 3TC + LPV/r'
+			--WHEN '3TC/ABC/EFV'	THEN 'TDF + 3TC + EFV'
+			--WHEN '3TC/ABC/LOPr' THEN 'ABC + 3TC + LPV/r'
+			--WHEN '3TC/ABC/NVP'	THEN 'ABC + 3TC + NVP'
+			--WHEN '3TC/EFV/TDF'	THEN 'TDF + 3TC + NVP'
+			--WHEN '3TC/NVP/AZT' THEN  'AZT + 3TC + NVP'
 		END))),(select TOP 1 Name from lookupitem where Name='Unknown')) as RegimenLine,
 	NULL as DrugId,
 	NULL as RegimenStatusDate,
@@ -223,6 +245,7 @@ SELECT
 	ON
 	o.VisitID=R.Visit_Pk
 	 WHERE R.RegimenType<>'' AND R.RegimenType IS NOT NULL AND o.DispensedByDate IS NOT NULL
+
 GO
 
 

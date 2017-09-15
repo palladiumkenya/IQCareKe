@@ -37,9 +37,9 @@ namespace IQCare.Web.Laboratory
         /// <summary>
         /// The redirect URL
         /// </summary>
-      
-       // private string RedirectUrl = "../ClinicalForms/frmPatient_Home.aspx";
-        private string RedirectUrl = "../CCC/patient/patientHome.aspx?patient=Patient";
+
+        private string RedirectUrl = "../ClinicalForms/frmPatient_Home.aspx";
+        //private string RedirectUrl = "../CCC/patient/patientHome.aspx?patient=Patient";
       
 
         /// The is error
@@ -131,6 +131,18 @@ namespace IQCare.Web.Laboratory
             (Master.FindControl("levelOneNavigationUserControl1").FindControl("lblheader") as Label).Text = "Result Page";
             (Master.FindControl("levelTwoNavigationUserControl1").FindControl("lblformname") as Label).Text = "Lab Result Page";
             Master.ExecutePatientLevel = true;
+
+            string origin = String.Empty;
+            if (Session["urlOrigin"] != null)
+            {
+                origin = Session["urlOrigin"].ToString();
+            }
+
+            if (origin == "greencard")
+            {
+                RedirectUrl = "../CCC/patient/patientHome.aspx?patient=Patient";
+            }
+
             if (Application["AppCurrentDate"] != null)
             {
                 hdappcurrentdate.Value = Application["AppCurrentDate"].ToString();
@@ -144,7 +156,7 @@ namespace IQCare.Web.Laboratory
                 }
                 else
                 {
-                HttpContext.Current.ApplicationInstance.CompleteRequest();
+                    HttpContext.Current.ApplicationInstance.CompleteRequest();
                     Response.Redirect(RedirectUrl, true);
                 }
             }

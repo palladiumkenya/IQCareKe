@@ -55,7 +55,7 @@
                                 <label class="required control-label pull-left">Sex</label>
                             </div>
                             <div class="col-md-6">
-                                <select runat="server" id="Sex" class="form-control input-sm" ClientIDMode="Static" onchange="relationShipChanged();"></select>
+                                <select runat="server" id="Sex" class="form-control input-sm" ClientIDMode="Static" required="true" onchange="relationShipChanged();"></select>
                             </div>
                         </div>
                         <div class="col-md-12 form-group">
@@ -84,11 +84,12 @@
                     </div>
                 </div>
 
+<%--
                 <div class="col-md-12" id="isRegisteredInClinic">
                     <div class="col-md-6">
                         <div class="col-md-12 form-group">
                             <div class="col-md-6">
-                                <label class="control-label pull-left">Registered at this clinic:</label>
+                                <label class="required control-label pull-left">Registered at this clinic:</label>
                             </div>
                             <div class="col-md-6">
                                 <asp:DropDownList ID="RegisteredInClinic" runat="server" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-required="true"></asp:DropDownList>
@@ -124,8 +125,7 @@
                         </table>
                     </div>
                 </div>
-                
-                
+                --%>
                 
                 <div id="hivTestingInfo">
                     <div class="col-md-12">
@@ -1331,6 +1331,7 @@
                 $("#<%=CccReferal.ClientID%>").val();
                 $("#<%=CccReferal.ClientID%>").prop('disabled', true);
                 $("#CCCReferalDate").prop('disabled', true);
+                $("#HIVTestingDate").prop('disabled', false);
             } else if (testingResult == "Never Tested") {
                 $("#<%=cccNumber.ClientID%>").prop('disabled', true);
                 $("#<%=CccReferal.ClientID%>").val();
@@ -1345,6 +1346,7 @@
                 $("#<%=cccNumber.ClientID%>").prop('disabled',false);
                 $("#<%=CccReferal.ClientID%>").prop('disabled', false);
                 $("#CCCReferalDate").prop('disabled', false);
+                $("#HIVTestingDate").prop('disabled', false);
             }
         }
       

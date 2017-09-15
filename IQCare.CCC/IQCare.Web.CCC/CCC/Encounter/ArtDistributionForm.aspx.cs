@@ -19,12 +19,23 @@ namespace IQCare.Web.CCC.Encounter
             GetSessionDetails();
             pregnancySection.Visible = Gender != "Male";
             List<LookupItemView> areas = mgr.GetLookItemByGroup("PregnancyStatus");
+            List<LookupItemView> artRefillModels = mgr.GetLookItemByGroup("ARTRefillModel");
+
             if (areas != null && areas.Count > 0)
             {
                 pregnancyStatus.Items.Add(new ListItem("select", "0"));
                 foreach (var k in areas)
                 {
                     pregnancyStatus.Items.Add(new ListItem(k.ItemDisplayName, k.ItemId.ToString()));
+                }
+            }
+
+            if (artRefillModels != null && artRefillModels.Count > 0)
+            {
+                ArtRefill.Items.Add(new ListItem("select", ""));
+                foreach (var item in artRefillModels)
+                {
+                    ArtRefill.Items.Add(new ListItem(item.ItemDisplayName, item.ItemId.ToString()));
                 }
             }
         }

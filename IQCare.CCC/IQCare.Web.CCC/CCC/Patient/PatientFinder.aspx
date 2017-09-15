@@ -5,64 +5,63 @@
               <div class="col-md-12"><small class="pull-left"><strong><i class="fa fa-search fa-2x" aria-hidden="true"> Find Patient </i></strong></small></div>                                                  
               <div class="col-md-12"><hr/></div>
               <div class="col-md-12">
-                  
-
-                             <div class="col-md-3">
-                                    <div class="col-md-12"><label class="control-label pull-left">Identification Number</label></div>
-                                    <div class="col-md-12">
-                                         <asp:TextBox runat="server" ID="PatientNumber" CssClass="form-control input-sm" placeholder="ccc number..." ClientIDMode="Static"></asp:TextBox>  
-                                               
-                                    </div>
-                                </div>
-                              
-                             <div class="col-md-3">
-                                     <div class="col-md-12"><label class="control-label pull-left">First Name</label></div>
-                                     <div class="col-md-12">
-                                          <asp:TextBox runat="server" ID="FirstName" CssClass="form-control input-sm" placeholder="first name.." ClientIDMode="Static"></asp:TextBox>
-                                     </div>
-                                 </div>
-                               
-                             <div class="col-md-3">
-                                      <div class="col-md-12"><label class="control-label pull-left">Middle Name</label></div>
-                                      <div class="col-md-12">
-                                           <asp:TextBox runat="server" ID="MiddleName" CssClass="form-control input-sm" placeholder="middle name.." ClientIDMode="Static"></asp:TextBox>
-                                      </div>
-                                 </div>
-                                 
-                              <div class="col-md-3">
-                                      <div class="col-md-12"><label class="control-label pull-left">Last Name</label></div>
-                                      <div class="col-md-12">
-                                           <asp:TextBox runat="server" ID="LastName" CssClass="form-control mdb-select input-sm" placeholder="Last name.." ClientIDMode="Static"></asp:TextBox>
-                                      </div>
-                                 </div>
-                        </div><%-- .col-md-12--%>
-              <div class="col-md-12">
                   <div class="col-md-3">
-                                   <div class="col-md-12"><label class="control-label pull-left">Facility</label></div>
-                                   <div class="col-md-12 md-form">
-                                        <asp:DropDownList runat="server" ID="Facility" ClientIDMode="Static" CssClass="form-control"/>  
-                                               
-                                   </div>
-                             </div>          
-                 
-                   <div class="col-md-3">
+                      <div class="col-md-12"><label class="control-label pull-left">Identification Number</label></div>
+                      <div class="col-md-12">
+                          <asp:TextBox runat="server" ID="PatientNumber" CssClass="form-control input-sm" placeholder="ccc number..." ClientIDMode="Static"></asp:TextBox>
+                      </div>
 
-                        
-
-            
                   </div>
-                                         
-                   <div class="col-md-3">
+                  
+                  <div class="col-md-3">
+                      <div class="col-md-12"><label class="control-label pull-left">First Name</label></div>
+                      <div class="col-md-12">
+                          <asp:TextBox runat="server" ID="FirstName" CssClass="form-control input-sm" placeholder="first name.." ClientIDMode="Static"></asp:TextBox>
 
-                             </div>
-                             
-                              
-                              
-                    <div class="col-md-3">
+                      </div>
 
-                              </div>
+                  </div>
+                  
+                  <div class="col-md-3">
+                      <div class="col-md-12"><label class="control-label pull-left">Middle Name</label></div>
+                      <div class="col-md-12">
+                          <asp:TextBox runat="server" ID="MiddleName" CssClass="form-control input-sm" placeholder="middle name.." ClientIDMode="Static"></asp:TextBox>
 
-              </div><%-- .col-md-12--%>
+                      </div>
+
+                  </div>
+                  
+                  <div class="col-md-3">
+                      <div class="col-md-12"><label class="control-label pull-left">Last Name</label></div>
+                      <div class="col-md-12">
+                          <asp:TextBox runat="server" ID="LastName" CssClass="form-control mdb-select input-sm" placeholder="Last name.." ClientIDMode="Static"></asp:TextBox>
+
+                      </div>
+
+                  </div>
+
+              </div>
+             
+             <div class="col-md-12">
+                 <div class="col-md-3">
+                     <div class="col-md-12"><label class="control-label pull-left">Facility</label></div>
+                     <div class="col-md-12 md-form">
+                         <asp:DropDownList runat="server" ID="Facility" ClientIDMode="Static" CssClass="form-control"/>
+                     </div>
+                 </div>  
+                 
+                 <div class="col-md-3">
+                     
+                 </div>
+                 
+                 <div class="col-md-3">
+                     
+                 </div>
+                 <div class="col-md-3">
+                     
+                 </div>
+
+              </div>
               <div class="col-md-12"><hr/></div>
               <div class="col-md-12 col-xs-12 col-sm-12">
                               <div class="col-md-4 col-xs-4 col-sm-4">
@@ -212,7 +211,7 @@
                     "bDeferRender": true,
                     "responsive":true,
                     "sPaginate": true,
-                    "lengthMenu": [[10, 20, 50, -1], [10, 20, 50]],
+                    "lengthMenu": [[10, 20, 50], [10, 20, 50]],
                     "aoColumns":
                                 [
                                     null,
@@ -233,6 +232,8 @@
                         aoData.push({ "name": "facility", "value": ""+$("#<%=Facility.ClientID%>").find(":selected").val()+"" });
 
                         $("#divActionString").text("Data features and table preparation complete");
+                        var arrayReturn = [];
+                        
 
                         $.ajax({
                             "dataType": 'json',
@@ -242,20 +243,19 @@
                             "data": JSON.stringify({dataPayLoad: aoData }),
                             "success": function (msg) {
                                 $("#divActionString").text("Rendering patients data...");
-
                                 var json = jQuery.parseJSON(msg.d);
-                                if (json === "null") {
-                                    toastr.error("No records Found", "Patient Records Search");
+                                if (json === null) {
+                                    var data = [];
+                                    arrayReturn["data"] = data;
+                                    arrayReturn["draw"] = 1;
+                                    arrayReturn["recordsTotal"] = 0;
+                                    arrayReturn["recordsFiltered"] = 0;
+
+                                    fnCallback(arrayReturn);
+                                    $("#PatientSearch").slideDown("fast",function () {$("#divAction").hide("fast");$("#infoGrid").slideDown("fast", function () { $("#searchGrid").slideUp("fast") });$("#infoGridMessage").slideDown("fast");});
                                 } else {
                                     fnCallback(json);
-                                    $("#PatientSearch")
-                                        .slideDown("fast",
-                                            function() {
-                                                $("#divAction").hide("fast");
-                                                $("#infoGrid")
-                                                    .slideDown("fast", function () { $("#searchGrid").slideUp("fast") });
-                                                $("#infoGridMessage").slideDown("fast");
-                                            });
+                                    $("#PatientSearch").slideDown("fast",function() {$("#divAction").hide("fast");$("#infoGrid").slideDown("fast", function () { $("#searchGrid").slideUp("fast") });$("#infoGridMessage").slideDown("fast");});
                                 }
                             },
                             "error":function(xhr, errorType, exception) {
@@ -276,45 +276,13 @@
           $('#tblFindPatient').on('click', 'tbody tr', function () {
               // window.location.href = $(this).attr('href');
               var patientId = $(this).find('td').first().text();
-              //PageMethods.SetSelectedPatient(patientId);
               setSession(patientId);
-              //console.log(patientId);
-              //window.location.href = "../patient/patientHome.aspx?patient="+patientId;
-             // alert(rowIndex);
           });
-
-
-            // Apply the search
-          //table.columns().every(function () {
-          //    var that = this;
-
-          //    $('input', this.footer()).on('keyup change', function () {
-          //        if (that.search() !== this.value) {
-          //            that
-          //                .search(this.value)
-          //                .draw();
-          //        }
-          //    });
-          //});
-
-          //$("#tblFindPatient tbody tr").on('click', function (event) {
-          //    $("#tblFindPatient tbody tr").removeClass('row_selected');
-          //    $(this).addClass('row_selected');
-          //});
-
-      //      $('#tblFindPatient tbody')
-      //.on('mouseenter', 'td', function () {
-      //    var colIdx = table.cell(this).index().column;
-
-      //    $(table.cells().nodes()).removeClass('highlight');
-      //    $(table.column(colIdx).nodes()).addClass('highlight');
-      //});
-
 
         });
 
         function setSession(patientId) {
-            console.log(patientId);
+            //console.log(patientId);
 
             $.ajax({
                 type: "POST",

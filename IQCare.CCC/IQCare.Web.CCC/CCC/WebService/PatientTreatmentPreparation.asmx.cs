@@ -30,7 +30,7 @@ namespace IQCare.Web.CCC.WebService
         public int CheckIfPsychosocialCriteriaExists(int patientId)
         {
             int result = 0;
-            string msg = "";
+            //string msg = "";
             PatientPsychosocialCriteriaManager patientPsychosocialCriteriaManager = new PatientPsychosocialCriteriaManager();
 
             try {
@@ -175,7 +175,7 @@ namespace IQCare.Web.CCC.WebService
         public int CheckIfSupportSystemCriteriaExists(int patientId)
         {
             int result = 0;
-            string msg = "";
+            //string msg = "";
 
             PatientSupportSystemCriteriaManager patientSupportSystemCriteriaManager = new PatientSupportSystemCriteriaManager();
 

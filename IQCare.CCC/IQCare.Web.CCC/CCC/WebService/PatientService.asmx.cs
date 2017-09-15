@@ -145,7 +145,7 @@ namespace IQCare.Web.CCC.WebService
         [WebMethod(EnableSession = true)]
         public string AddPatientFamilyTesting(string familyMembers)
         {
-            int patientId; int patientMasterVisitId; string firstName; string middleName; string lastName; int sex; string dob; int relationshipId; int baselineHivStatusId; string baselineHivStatusDate; string hivTestingresultId; string hivTestingresultDate; bool cccreferal; string cccReferalNumber;  int userId;
+            int patientId; int patientMasterVisitId; string firstName; string middleName; string lastName; int sex; string dob; int relationshipId; int baselineHivStatusId; string baselineHivStatusDate; /*string hivTestingresultId;*/ string hivTestingresultDate; bool cccreferal; string cccReferalNumber;  int userId;
             DateTime? linkageDate;
             bool dobPrecision;
 
@@ -662,12 +662,31 @@ namespace IQCare.Web.CCC.WebService
         private PatientAppointmentDisplay MapBluecardappointments(BlueCardAppointment bluecardAppointment)
         {
             ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+            string appointmentDescription = String.Empty;
+            string serviceArea = String.Empty;
+            string appointmentReason = String.Empty;
+
+            if (bluecardAppointment.Description != null)
+            {
+                appointmentDescription = bluecardAppointment.Description;
+            }
+
+            if (bluecardAppointment.ServiceArea != null)
+            {
+                serviceArea = bluecardAppointment.ServiceArea;
+            }
+
+            if (bluecardAppointment.Reason != null)
+            {
+                appointmentReason = bluecardAppointment.Reason;
+            }
+
             PatientAppointmentDisplay appointment = new PatientAppointmentDisplay()
             {
-                ServiceArea = bluecardAppointment.ServiceArea,
-                Reason = bluecardAppointment.Reason,
+                ServiceArea = serviceArea,
+                Reason = appointmentReason,
                 AppointmentDate = bluecardAppointment.AppointmentDate,
-                Description = bluecardAppointment.Description,
+                Description = appointmentDescription,
                 Status = bluecardAppointment.AppointmentStatus,
                 DifferentiatedCare = " "
             };

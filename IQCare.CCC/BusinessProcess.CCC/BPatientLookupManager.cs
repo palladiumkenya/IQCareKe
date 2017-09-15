@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Linq.Expressions;
 using DataAccess.CCC.Repository;
 using Entities.CCC.Lookup;
 using Interface.CCC.Lookup;
@@ -42,24 +43,57 @@ namespace BusinessProcess.CCC
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                var patientSearchDetails = unitOfWork.PatientLookupRepository
-                    .GetAll()
-                //    .Select(x=> new PatientLookup 
-                //{
-                //    EnrollmentNumber = x.EnrollmentNumber,
-                //    PatientIndex = x.PatientIndex,
-                //    FirstName = x.FirstName,
-                //    MiddleName = x.MiddleName,
-                //    DateOfBirth = x.DateOfBirth,
-                //    Sex = x.Sex,
-                //    RegistrationDate = x.RegistrationDate,
-                //    PatientStatus = x.PatientStatus
-                //})
-                    .ToList();
+                var patientSearchDetails = unitOfWork.PatientLookupRepository.GetAll().ToList();
 
                 return patientSearchDetails;
             }
 
+        }
+
+        public List<PatientLookup> GetPatientSearchPayload(int patientId, string firstName, string middleName, string lastName)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                List<PatientLookup> patientLookups = new List<PatientLookup>();
+
+                Expression<Func<PatientLookup, bool>> expresionFinal = c=>c.Id > 0;
+
+                if (patientId > 0)
+                {
+                    Expression<Func<PatientLookup, bool>> expressionPatientId =
+                        c => c.EnrollmentNumber.ToString().Contains(patientId.ToString());
+
+                    expresionFinal = PredicateBuilder.And(expresionFinal, expressionPatientId);
+                }
+
+                if (!string.IsNullOrWhiteSpace(firstName))
+                {
+                    Expression<Func<PatientLookup, bool>> expressionFirstName =
+                        c => c.FirstName.ToLower().Contains(firstName.ToLower());
+
+                    expresionFinal = PredicateBuilder.And(expresionFinal, expressionFirstName);
+                }
+
+                if (!string.IsNullOrWhiteSpace(middleName))
+                {
+                    Expression<Func<PatientLookup, bool>> expressionMiddleName =
+                        c => c.MiddleName.ToLower().Contains(middleName.ToLower());
+
+                    expresionFinal = PredicateBuilder.And(expresionFinal, expressionMiddleName);
+                }
+
+                if (!string.IsNullOrWhiteSpace(lastName))
+                {
+                    Expression<Func<PatientLookup, bool>> expressionLastName =
+                        c => c.LastName.ToLower().Contains(lastName.ToLower());
+
+                    expresionFinal = PredicateBuilder.And(expresionFinal, expressionLastName);
+                }
+
+                patientLookups = unitOfWork.PatientLookupRepository.Filter(expresionFinal).ToList();
+
+                return patientLookups;
+            }
         }
 
         public List<PatientLookup> GetPatientSearchPayloadWithParameter(string patientId, string fname, string mname, string lname, DateTime doB, int sex, int facility,  int start, int length)
@@ -67,36 +101,6 @@ namespace BusinessProcess.CCC
             using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
                 var result = unitOfWork.PatientLookupRepository.GetAll();
-
-                //if (!string.IsNullOrWhiteSpace(patientId))
-                //{
-                //    result = result.Where(x => x.EnrollmentNumber == patientId.ToString());
-                //}
-                //if (sex > 0)
-                //{
-                //    result = result.Where(x => x.Sex == sex);
-                //}
-
-                //if (!string.IsNullOrWhiteSpace(fname))
-                //{
-                //    result = result.Where(x =>utility.Decrypt(x.FirstName).ToLower().Contains(fname.ToLower()));
-                //}
-                //if (!string.IsNullOrWhiteSpace(lname))
-                //{
-                //    result = result.Where(x => utility.Decrypt(x.LastName).ToLower().Contains(lname.ToLower()));
-                //}
-                //if (!string.IsNullOrWhiteSpace(mname))
-                //{
-                //    result = result.Where(x => utility.Decrypt(x.MiddleName).ToLower().Contains(mname.ToLower()));
-                //}
-                //if (!string.IsNullOrWhiteSpace(doB.ToShortDateString()))
-                //{
-                //    result = result.Where(x => x.DateOfBirth.ToShortDateString() == doB.ToShortDateString());
-                //}
-                //if (facility > 0)
-                //{
-                //    result = result.Where(x => x.FacilityId == facility);
-                //}
                 unitOfWork.Dispose();
                 return result.ToList();
             }

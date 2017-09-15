@@ -47,11 +47,11 @@ namespace IQCare.Web.CCC.WebService
         private readonly ILookupManager _lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
         private readonly IPatientLabOrderManager _lookupData = (IPatientLabOrderManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientLabOrdermanager, BusinessProcess.CCC");
       
-        private int _labTestId;
-        List<string>_vlResults;
+        //private int _labTestId;
+        //List<string>_vlResults;
         private string Msg { get; set; }
         private int Result { get; set; }
-        private int _ptnPk;
+        //private int _ptnPk;
         int moduleId = 203;
 
         int patientPk = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
@@ -227,6 +227,13 @@ namespace IQCare.Web.CCC.WebService
                 Msg = e.Message;
             }
             return count;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string FindLabOrder()
+        {
+            Session["urlOrigin"] = "greencard";
+            return "success";
         }
     }
 

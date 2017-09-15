@@ -10,7 +10,7 @@ namespace BusinessProcess.CCC.Enrollment
 {
     public class BPatientArtDistribution : ProcessBase, IPatientArtDistributionManager
     {
-        internal int Result;
+        //internal int Result;
         public int AddPatientArtDistribution(PatientArtDistribution p)
         {
             using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))

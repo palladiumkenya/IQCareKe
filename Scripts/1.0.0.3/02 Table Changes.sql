@@ -290,16 +290,7 @@ Begin
   Alter table dbo.lnk_PatientModuleIdentifier Add DisplayFlag  bit Default 0
 End
 Go
-If Not Exists (Select * From sys.columns Where Name = N'SpO2' And Object_ID = Object_id(N'PatientVitals'))    
-Begin
-  Alter table dbo.PatientVitals Add SpO2  decimal(7,2) Null
-End
-Go
-If Not Exists (Select * From sys.columns Where Name = N'DifferentiatedCareId' And Object_ID = Object_id(N'PatientAppointment'))    
-Begin
-  Alter table dbo.PatientAppointment Add DifferentiatedCareId  int Null
-End
-Go
+
 If Not Exists (Select * From sys.columns Where Name = N'Active' And Object_ID = Object_id(N'Mst_ClinicalService'))    
 Begin
   Alter table dbo.Mst_ClinicalService Add Active bit Default 1
@@ -488,6 +479,11 @@ Go
 If Not Exists (Select * From sys.columns Where Name = N'ItemCode' And Object_ID = Object_id(N'Mst_ItemMaster'))    
 Begin
   Alter table dbo.Mst_ItemMaster Add ItemCode  varchar(50) Null
+End
+Go
+If Not Exists (Select * From sys.columns Where Name = N'Abbreviation' And Object_ID = Object_id(N'Mst_ItemMaster'))    
+Begin
+  Alter table dbo.Mst_ItemMaster Add Abbreviation  varchar(50) Null
 End
 Go
 If Not Exists (Select * From sys.columns Where Name = N'CanLink' And Object_ID = Object_id(N'Mst_Feature'))    
@@ -701,7 +697,7 @@ End
 Go
 If  Exists (Select * From sys.columns Where Name = N'CreateDate' And Object_ID = Object_id(N'dtl_PatientAppointment'))    
 Begin
-  Alter table dbo.dtl_PatientAppointment Alter Column CreateDate  datetime Not  Null
+  Alter table dbo.dtl_PatientAppointment Alter Column CreateDate  datetime  Null
 End
 Go
 If  Exists (Select * From sys.columns Where Name = N'DeleteFlag' And Object_ID = Object_id(N'dtl_PatientAppointment'))    

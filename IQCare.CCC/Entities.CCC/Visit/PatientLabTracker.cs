@@ -32,9 +32,6 @@ namespace Entities.CCC.Visit
         public string ResultUnits { get; set; }
         public string ResultOptions { get; set; }
         public DateTime? ResultDate { get; set; }
-
-
-
     }
 }
 
