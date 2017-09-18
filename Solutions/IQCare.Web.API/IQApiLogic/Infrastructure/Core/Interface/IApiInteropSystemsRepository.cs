@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DataAccess.Context;
-using IQCare.Web.API.Model;
+using IQ.ApiLogic.Model;
 
-namespace IQCare.Web.API.Infrastructure.Core.Interface
+namespace IQ.ApiLogic.Infrastructure.Core.Interface
 {
     public interface IApiInteropSystemsRepository:IRepository<ApiInteropSystem>
     {

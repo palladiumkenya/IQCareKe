@@ -2,9 +2,10 @@
 using DataAccess.Base;
 using DataAccess.Context;
 using System.Data.Entity;
-using IQCare.Web.API.Model;
+using IQ.ApiLogic.Model;
+using IQ.ApiLogic.Model;
 
-namespace IQCare.Web.API.Infrastructure.Context
+namespace IQ.ApiLogic.Infrastructure.Context
 {
     public class ApiContext :BaseContext
     {

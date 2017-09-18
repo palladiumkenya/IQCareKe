@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace IQCare.Web.API.Model
+namespace IQ.ApiLogic.Model
 {
     [Serializable]
     //[Table("APIOutbox")]
@@ -16,5 +16,7 @@ namespace IQCare.Web.API.Model
         public string Message { get; set; }
         public int AttemptCount { get; set; }
         public string LogMessage { get; set; }
+
+        public bool Retry => AttemptCount <= 5;
     }
 }

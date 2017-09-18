@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace IQCare.Web.API.Model
+namespace IQ.ApiLogic.Model
 {
     [Serializable]
     //[Table("API_InteropSystems")]
@@ -13,6 +13,7 @@ namespace IQCare.Web.API.Model
         public string Name { get; set; }
         public  string EndPoint { get; set; }
         public string ApiKey { get; set; }
+        public string AppId { get; set; }
         public int Active { get; set; }
         public int DeleteFlag { get; set; }
     }

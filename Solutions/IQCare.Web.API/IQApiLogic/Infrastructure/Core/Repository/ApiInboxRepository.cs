@@ -1,9 +1,9 @@
 ﻿using DataAccess.Context;
-using IQCare.Web.API.Infrastructure.Context;
-using IQCare.Web.API.Infrastructure.Core.Interface;
-using IQCare.Web.API.Model;
+using IQ.ApiLogic.Model;
+using IQ.ApiLogic.Infrastructure.Core.Interface;
+using IQ.ApiLogic.Infrastructure.Context;
 
-namespace IQCare.Web.API.Infrastructure.Core.Repository
+namespace IQ.ApiLogic.Infrastructure.Core.Repository
 {
     public class ApiInboxRepository :BaseRepository<ApiInbox>,IApiInboxRepository
     {
