@@ -1,7 +1,6 @@
-﻿using System;
+﻿using Entities.CCC.Lookup;
+using System;
 using System.Collections.Generic;
-using Entities.CCC.Lookup;
-using Entities.CCC.Visit;
 
 namespace Interface.CCC.Lookup
 {
