@@ -58,6 +58,10 @@
     <Reference Include="Application.Interface">
       <HintPath>..\..\References\Application.Interface.dll</HintPath>
     </Reference>
+    <Reference Include="Application.Logger, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Application.Logger.dll</HintPath>
+    </Reference>
     <Reference Include="Application.Presentation">
       <HintPath>..\..\References\Application.Presentation.dll</HintPath>
     </Reference>

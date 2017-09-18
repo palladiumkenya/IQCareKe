@@ -1,12 +1,4 @@
-﻿-- version changes
-UPDATE AppAdmin
-SET
-	AppVer='Ver 1.0.0.4 Kenya HMIS',
-	DBVer='Ver 1.0.0.4 Kenya HMIS',
-	RelDate='01-Sep-2017',
-	VersionName='Kenya HMIS Ver 1.0.0.4';
-
---Lookup master
+﻿--Lookup master
 If Not Exists(Select 1 From LookupMaster where Name='ARTRefillModel') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('ARTRefillModel','ART Refill Model',0); End
 
 --Lookup items
