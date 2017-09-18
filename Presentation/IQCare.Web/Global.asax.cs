@@ -3,6 +3,7 @@ using System;
 using System.IO;
 using System.IO.Compression;
 using System.Web;
+using System.Web.Http;
 using System.Web.SessionState;
 using System.Web.UI;
 
@@ -13,7 +14,7 @@ namespace IQCare.Web
 
         protected void Application_Start(object sender, EventArgs e)
         {
-
+            GlobalConfiguration.Configure(WebApiConfig.Register);
         }
 
         protected void Session_Start(object sender, EventArgs e)
