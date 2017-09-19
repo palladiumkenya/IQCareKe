@@ -10,6 +10,8 @@ namespace IQCare.DTO
     {
         public List<DTOIdentifier> InternalPatientIdentifiers { get; set; }
         public DTOPerson Patient { get; set; }
+        public DateTime? DateOfEnrollment { get; set; }
+        public string EntryPoint { get; set; }
         public string MotherMaidenName { get; set; }
         public string Village { get; set; }
         public string Ward { get; set; }

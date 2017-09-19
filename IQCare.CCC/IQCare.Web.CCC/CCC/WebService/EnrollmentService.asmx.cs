@@ -203,11 +203,9 @@ namespace IQCare.Web.CCC.WebService
                         patientMasterVisitId =
                             patientMasterVisitManager.AddPatientMasterVisit(patientId, userId, visitType);
                         //Enroll Patient to service
-                        patientEnrollmentId =
-                            patientEnrollmentManager.addPatientEnrollment(patientId, enrollmentDate, userId);
+                        patientEnrollmentId = patientEnrollmentManager.addPatientEnrollment(patientId, enrollmentDate, userId);
                         //Add enrollment entry point
-                        patientEntryPointId =
-                            patientEntryPointManager.addPatientEntryPoint(patientId, entryPointId, userId);
+                        patientEntryPointId = patientEntryPointManager.addPatientEntryPoint(patientId, entryPointId, userId);
 
                         //Get User Details to be used in BLUE CARD
                         var patient_person_details = personLookUp.GetPersonById(PersonId);

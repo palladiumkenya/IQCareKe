@@ -22,5 +22,6 @@ namespace IQCare.DTO
         public string Sex { get; set; }
         public string MobileNumber { get; set; }
         public string PhysicalAddress { get; set; }
+        public string NationalId { get; set; }
     }
 }

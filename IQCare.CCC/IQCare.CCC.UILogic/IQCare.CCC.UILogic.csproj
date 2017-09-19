@@ -64,6 +64,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="Interface.Security, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Interface.Security.dll</HintPath>
+    </Reference>
     <Reference Include="IQCare.DTO, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\IQCare.DTO.dll</HintPath>
