@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.15
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCare.Web.CCC", "..\..\IQCare.CCC\IQCare.Web.CCC\IQCare.Web.CCC.csproj", "{1FD9CC7D-0CA8-4746-8565-AE446765410A}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -42,6 +42,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest.CCC", "..\..\IQCar
 		{8CC162FB-01FB-42AE-B63F-47E007E469E6} = {8CC162FB-01FB-42AE-B63F-47E007E469E6}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCare.DTO", "..\..\IQCare.CCC\IQCare.DTO\IQCare.DTO.csproj", "{663E6443-D847-478F-B7A5-400448793A6E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -76,8 +78,15 @@ Global
 		{4C406BAD-48AE-4164-A6CD-E569E937123C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C406BAD-48AE-4164-A6CD-E569E937123C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C406BAD-48AE-4164-A6CD-E569E937123C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{663E6443-D847-478F-B7A5-400448793A6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{663E6443-D847-478F-B7A5-400448793A6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{663E6443-D847-478F-B7A5-400448793A6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{663E6443-D847-478F-B7A5-400448793A6E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C972212F-D921-423A-8278-2B516C33C35D}
 	EndGlobalSection
 EndGlobal
