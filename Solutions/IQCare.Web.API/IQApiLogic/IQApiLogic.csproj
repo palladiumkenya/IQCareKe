@@ -7,6 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Reference Include="Application.Presentation">
+      <HintPath>..\..\..\References\Application.Presentation.dll</HintPath>
+    </Reference>
     <Reference Include="DataAccess.Base">
       <HintPath>..\..\..\References\DataAccess.Base.dll</HintPath>
     </Reference>
@@ -18,6 +21,9 @@
     </Reference>
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\..\..\References\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions">
+      <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.extensions.dependencyinjection.abstractions\2.0.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
     </Reference>
   </ItemGroup>
 
