@@ -24,7 +24,8 @@ namespace IQCare.Web.API.DependancyResolution {
             For<IOutgoingMessageService>()
                 .Use<OutgoingMessageService>();
 
-
+            //For<IIncomingMessageService>()
+            //    .Use<IncomingMessageService>();
 
         }
 
