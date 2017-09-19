@@ -3,7 +3,6 @@ using DataAccess.Base;
 using DataAccess.Context;
 using System.Data.Entity;
 using IQ.ApiLogic.Model;
-using IQ.ApiLogic.Model;
 
 namespace IQ.ApiLogic.Infrastructure.Context
 {
