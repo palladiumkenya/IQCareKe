@@ -1,6 +1,6 @@
 ﻿namespace IQCare.DTO
 {
-    public class IlMessage
+    public class IlMessageEvent
     {
         public int PatientId { get; set; }
         public int EntityId { get; set; }
@@ -12,9 +12,9 @@
     {
         NewclientRegistration,
         PatientTransferIn,
-        Updatedclientinformation,
+        UpdatedClientInformation,
         PatientTransferOut,
-        Regimenchange,
+        RegimenChange,
         StopDrugs,
         DrugPrescriptionRaised,
         DrugOrderCancel,

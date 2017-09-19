@@ -3,6 +3,6 @@ namespace IQCare.Web.MessageProcessing.Services
 {
     public interface IMessageService
     {
-        void Handle(IlMessage message);
+        void Handle(IlMessageEvent message);
     }
 }
