@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQCare.Web.API", "IQCare.We
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQApiLogic", "IQApiLogic\IQApiLogic.csproj", "{50EF345C-CD68-4C23-9060-A044FBBC6BE2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCare.Web.MessageProcessing", "IQCare.Web.MessageProcessing\IQCare.Web.MessageProcessing.csproj", "{DA829A6F-50EF-4269-B7FE-357FD2EDC9E2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{50EF345C-CD68-4C23-9060-A044FBBC6BE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50EF345C-CD68-4C23-9060-A044FBBC6BE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50EF345C-CD68-4C23-9060-A044FBBC6BE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA829A6F-50EF-4269-B7FE-357FD2EDC9E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA829A6F-50EF-4269-B7FE-357FD2EDC9E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA829A6F-50EF-4269-B7FE-357FD2EDC9E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA829A6F-50EF-4269-B7FE-357FD2EDC9E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

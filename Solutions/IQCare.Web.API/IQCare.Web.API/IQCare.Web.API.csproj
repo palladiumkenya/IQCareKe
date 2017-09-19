@@ -42,4 +42,8 @@
     <Folder Include="App_Start\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\IQCare.Web.MessageProcessing\IQCare.Web.MessageProcessing.csproj" />
+  </ItemGroup>
+
 </Project>
