@@ -43,8 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Services\IMessageService.cs" />
-    <Compile Include="Services\MessageService.cs" />
+    <Compile Include="Services\IOutgoingMessageService.cs" />
+    <Compile Include="Services\OutgoingMessageService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

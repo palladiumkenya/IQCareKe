@@ -1,7 +1,7 @@
-﻿using IQCare.DTO.DTO;
+﻿using IQCare.DTO;
 namespace IQCare.Web.MessageProcessing.Services
 {
-    public class MessageService : IMessageService
+    public class OutgoingMessageService : IOutgoingMessageService
     {
         public void Handle(IlMessageEvent messageEvent)
         {

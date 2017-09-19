@@ -21,8 +21,8 @@ namespace IQCare.Web.API.DependancyResolution {
 
             // section for registring services
 
-            For<IMessageService>()
-                .Use<MessageService>();
+            For<IOutgoingMessageService>()
+                .Use<OutgoingMessageService>();
 
 
 
