@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using IQ.ApiLogic.Infrastructure.Interface;
 using IQ.ApiLogic.Model;
 
@@ -8,14 +6,16 @@ namespace IQ.ApiLogic.Infrastructure.UILogic
 {
     public class ApiInteropManager : IApiInteropSystemsManager
     {
+            private IApiInteropSystemsManager _apiInteropSystemsManager  = (IApiInteropSystemsManager)Application.Presentation.ObjectFactory.CreateInstance("IQ.ApiLogic.Infrastructure.BusinessProcess.BPApiInteropSystems, IQApiLogic");
+
         public int AddApiInteroperabilitySystems(ApiInteropSystem apiInteropSystem)
         {
-            throw new NotImplementedException();
+            return _apiInteropSystemsManager.AddApiInteroperabilitySystems(apiInteropSystem);
         }
 
         public int EditApiInteroperabilitySystems(ApiInteropSystem apiInteropSystem)
         {
-            throw new NotImplementedException();
+            return _apiInteropSystemsManager.EditApiInteroperabilitySystems(apiInteropSystem);
         }
     }
 }

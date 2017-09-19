@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using IQ.ApiLogic.Infrastructure.Interface;
 using IQ.ApiLogic.Model;
 
@@ -32,5 +33,9 @@ namespace IQ.ApiLogic.Infrastructure.UILogic
             return _apiInboxmanager.EditApiInbox(inbox);
         }
 
+        public List<ApiInbox> GetAllUnprocessesMessage()
+        {
+            return _apiInboxmanager.GetAllUnprocessesMessage();
+        }
     }
 }

@@ -9,7 +9,7 @@ namespace IQ.ApiLogic.Infrastructure.Interface
     {
         int AddApiInbox(ApiInbox apiInbox);
         int EditApiInbox(ApiInbox apiInbox);
+        List<ApiInbox> GetAllUnprocessesMessage();
 
- 
     }
 }

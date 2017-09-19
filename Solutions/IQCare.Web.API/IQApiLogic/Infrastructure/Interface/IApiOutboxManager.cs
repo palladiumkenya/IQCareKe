@@ -1,4 +1,5 @@
-﻿using IQ.ApiLogic.Model;
+﻿using System.Collections.Generic;
+using IQ.ApiLogic.Model;
 
 namespace IQ.ApiLogic.Infrastructure.Interface
 {
@@ -6,5 +7,6 @@ namespace IQ.ApiLogic.Infrastructure.Interface
     {
         int AddApiOutbox(ApiOutbox apiOutbox);
         int AddApiProcessed(ApiOutbox apiOutbox);
+        List<ApiOutbox> GetAllUnsentMessages();
     }
 }
