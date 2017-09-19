@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>IQCare.DTO</RootNamespace>
     <AssemblyName>IQCare.DTO</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,15 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Entities.CCC">
-      <HintPath>..\IQCare.Web.CCC\Bin\Entities.CCC.dll</HintPath>
-    </Reference>
-    <Reference Include="Entities.Common">
-      <HintPath>..\..\References\Entities.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="IQCare.CCC.UILogic">
-      <HintPath>..\..\References\IQCare.CCC.UILogic.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -50,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DTOIdentifier.cs" />
+    <Compile Include="IInteropDTO.cs" />
     <Compile Include="IlMessage.cs" />
     <Compile Include="Registration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
