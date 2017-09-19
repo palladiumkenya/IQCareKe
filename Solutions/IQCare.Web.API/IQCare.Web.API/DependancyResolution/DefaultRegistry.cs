@@ -1,3 +1,5 @@
+using IQCare.Web.ApiLogic.Infrastructure.Context;
+using IQCare.Web.ApiLogic.MessageHandler;
 using IQCare.Web.MessageProcessing.Services;
 using StructureMap;
 //using IQ.ApiLogic.Infrastructure.Context;
@@ -16,16 +18,16 @@ namespace IQCare.Web.API.DependancyResolution {
                     scan.With(new ControllerConvention());
                 });
 
-            //For<ApiContext>().Use<ApiContext>()
-            //    .SelectConstructor(() => new ApiContext());
+            For<ApiContext>().Use<ApiContext>()
+                .SelectConstructor(() => new ApiContext());
 
             // section for registring services
 
             For<IOutgoingMessageService>()
                 .Use<OutgoingMessageService>();
 
-            //For<IIncomingMessageService>()
-            //    .Use<IncomingMessageService>();
+            For<IIncomingMessageService>()
+                .Use<IncomingMessageService>();
 
         }
 

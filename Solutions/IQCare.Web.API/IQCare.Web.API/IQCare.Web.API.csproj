@@ -34,16 +34,18 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\..\..\References\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="IQCare.Web.ApiLogic">
+      <HintPath>..\..\..\References\IQCare.Web.ApiLogic.dll</HintPath>
+    </Reference>
+    <Reference Include="IQCare.Web.MessageProcessing">
+      <HintPath>..\..\..\References\IQCare.Web.MessageProcessing.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="DependancyResolution\" />
     <Folder Include="App_Start\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\IQCare.Web.MessageProcessing\IQCare.Web.MessageProcessing.csproj" />
   </ItemGroup>
 
 </Project>
