@@ -1,4 +1,6 @@
-﻿using DataAccess.Base;
+﻿using System.Collections.Generic;
+using System.Linq;
+using DataAccess.Base;
 using IQ.ApiLogic.Infrastructure.Context;
 using IQ.ApiLogic.Infrastructure.Core.Repository;
 using IQ.ApiLogic.Infrastructure.Interface;
@@ -31,6 +33,15 @@ namespace IQ.ApiLogic.Infrastructure.BusinessProcess
                 return Result;
             }
         }
-        
+
+        public List<ApiInbox> GetAllUnprocessesMessage()
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new ApiContext()))
+            {
+                var inbox = unitOfWork.ApiInboxRepository.FindBy(x => x.DateProcessed == null);
+                unitOfWork.Dispose();
+                return inbox.ToList();
+            }
+        }
     }
 }

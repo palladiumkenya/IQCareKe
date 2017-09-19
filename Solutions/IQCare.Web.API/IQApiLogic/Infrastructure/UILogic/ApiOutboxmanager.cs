@@ -35,6 +35,11 @@ namespace IQ.ApiLogic.Infrastructure.UILogic
 
             return _apiOutboxmanager.AddApiProcessed(outbox);
         }
+
+        public List<ApiOutbox> GetAllUnsentMessages()
+        {
+            return _apiOutboxmanager.GetAllUnsentMessages();
+        }
     }
 }
 

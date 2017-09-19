@@ -1,4 +1,6 @@
-﻿using DataAccess.Base;
+﻿using System.Collections.Generic;
+using System.Linq;
+using DataAccess.Base;
 using IQ.ApiLogic.Infrastructure.Context;
 using IQ.ApiLogic.Infrastructure.Core.Repository;
 using IQ.ApiLogic.Infrastructure.Interface;
@@ -30,6 +32,15 @@ namespace IQ.ApiLogic.Infrastructure.BusinessProcess
                 Result = unitOfWork.Complete();
                 unitOfWork.Dispose();
                 return Result;
+            }
+        }
+
+        public List<ApiOutbox> GetAllUnsentMessages()
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new ApiContext()))
+            {
+              var outbound=   unitOfWork.ApiOutboxRepository.FindBy(x => x.DateSent == null);
+                return outbound.ToList();
             }
         }
     }
