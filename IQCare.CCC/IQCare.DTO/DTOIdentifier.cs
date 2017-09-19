@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IQCare.DTO.DTO
+namespace IQCare.DTO
 {
     public class DTOIdentifier
     {

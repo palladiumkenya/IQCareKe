@@ -101,6 +101,7 @@
     <Compile Include="Enrollment\PatientReEnrollmentManager.cs" />
     <Compile Include="Enrollment\ServiceAreaIdentifiersManager.cs" />
     <Compile Include="FacilityListManager.cs" />
+    <Compile Include="Interoperability\ProcessRegistration.cs" />
     <Compile Include="LookupLogic.cs" />
     <Compile Include="MstPatientLogic.cs" />
     <Compile Include="PatientAdherenceAssessmentManager.cs" />

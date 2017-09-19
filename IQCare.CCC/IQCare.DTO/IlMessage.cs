@@ -1,4 +1,4 @@
-﻿namespace IQCare.DTO.DTO
+﻿namespace IQCare.DTO
 {
     public class IlMessage
     {
