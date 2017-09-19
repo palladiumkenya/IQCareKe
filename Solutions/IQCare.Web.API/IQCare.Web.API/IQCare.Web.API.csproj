@@ -8,9 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CommonServiceLocator" Version="1.3.0" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.3" />
     <PackageReference Include="Microsoft.AspNetCore" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="2.0.0" />
+    <PackageReference Include="StructureMap" Version="4.5.2" />
+    <PackageReference Include="structuremap.web" Version="4.0.0.315" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,6 +34,12 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\..\..\References\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DependancyResolution\" />
+    <Folder Include="App_Start\" />
   </ItemGroup>
 
 </Project>
