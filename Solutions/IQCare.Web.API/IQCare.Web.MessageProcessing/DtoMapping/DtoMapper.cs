@@ -1,5 +1,6 @@
 ﻿using IQCare.DTO;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using IQCare.Web.MessageProcessing.JsonMappingEntities;
 
@@ -38,6 +39,17 @@ namespace IQCare.Web.MessageProcessing.DtoMapping
                 //NationalId = ,
                 DobPrecision = false
             };
+            var identifiers = new List<DTOIdentifier>();
+            foreach (var id in entity.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID)
+            {
+               var identifier = new DTOIdentifier()
+               {
+                   AssigningAuthority = id.ASSIGNING_AUTHORITY,
+                   IdentifierType = id.IDENTIFIER_TYPE,
+                   IdentifierValue = id.ID
+               };
+                identifiers.Add(identifier);
+            }
             var registration = new Registration()
             {
                 Patient = patient,
@@ -51,6 +63,9 @@ namespace IQCare.Web.MessageProcessing.DtoMapping
                 DeathIndicator = entity.PATIENT_IDENTIFICATION.DEATH_INDICATOR,
                 TreatmentSupporter = treatmentSupporter,
                 TSRelationshipType =  ts.RELATIONSHIP,
+                InternalPatientIdentifiers = identifiers,
+                DateOfEnrollment = DateTime.Now,
+                
             };
             return registration;
         }

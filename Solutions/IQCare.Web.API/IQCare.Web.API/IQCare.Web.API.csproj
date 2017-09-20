@@ -34,6 +34,12 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\..\..\References\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Interface.Interop">
+      <HintPath>..\..\..\References\Interface.Interop.dll</HintPath>
+    </Reference>
+    <Reference Include="IQCare.DTO">
+      <HintPath>..\..\..\References\IQCare.DTO.dll</HintPath>
+    </Reference>
     <Reference Include="IQCare.Web.ApiLogic">
       <HintPath>..\..\..\References\IQCare.Web.ApiLogic.dll</HintPath>
     </Reference>

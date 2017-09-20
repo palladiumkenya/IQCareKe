@@ -1,7 +1,7 @@
 ﻿using Application.Presentation;
 using Entities.CCC.Enrollment;
 using Interface.CCC.Enrollment;
-using IQCare.DTO;
+using IQCare.Events;
 using System;
 using System.Collections.Generic;
 
@@ -10,18 +10,57 @@ namespace IQCare.CCC.UILogic.Enrollment
     public class PatientIdentifierManager
     {
         IPatientIdentifierManager _mgr = (IPatientIdentifierManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Enrollment.BPatientIdentifier, BusinessProcess.CCC");
-        protected virtual void OnPatientEnrolled(IlMessageEventArgs e)
-        {
-            InteropEventHandler handler = this.PatientEnrolledHandler;
-            if (handler!= null)
-            {
-                PatientEnrolledHandler( e);
-            }
+        //protected virtual void OnPatientEnrolled(IlMessageEventArgs e)
+        //{
+        //    InteropEventHandler handler = this.ILHandler;
+        //    if (handler!= null)
+        //    {
+        //        ILHandler( e);
+        //    }
 
-            
-        }
 
-        public event InteropEventHandler PatientEnrolledHandler;
+        //}
+      //  public delegate void m_eventHandler(object sender,MessageEventArgs args);
+      //  public event m_eventHandler m_event;
+      //protected virtual void OnEnrollment(MessageEventArgs e)
+      //  {
+      //      if(m_event != null)
+      //      {
+      //          m_event(this, e);
+      //      }
+      //  }
+
+        //private void PatientIdentifierManager_ILHandler(IlMessageEventArgs e)
+        //{
+        //    InteropEventHandler handler = this.ILHandler;
+        //    if (handler != null)
+        //    {
+        //        ILHandler(e);
+        //    }
+        //}
+
+       // public event InteropEventHandler IlEvent;
+        //event InteropEventHandler IDataExchange.OnDataExchage
+        //{
+        //    add
+        //    {
+        //        lock (objectLock)
+        //        {
+        //            IlEvent += value;
+        //        }
+        //    }
+        //    remove
+        //    {
+        //        lock (objectLock)
+        //        {
+        //            IlEvent -= value;
+        //        }
+        //    }
+        //}
+        //object objectLock = new object();
+
+     
+       
         public int addPatientIdentifier(int patientId, int patientEnrollmentId, int identifierId, string enrollmentNo)
         {
             try
@@ -35,8 +74,10 @@ namespace IQCare.CCC.UILogic.Enrollment
                 };
 
                 int returnValue = _mgr.AddPatientIdentifier(patientidentifier);
-
-                this.OnPatientEnrolled(new IlMessageEventArgs() { PatientId = patientId, EntityId = patientEnrollmentId, MessageType = IlMessageType.NewClientRegistration, EventOccurred = "Patient Enrolled Identifier = " + enrollmentNo });
+                
+                //this.ILHandler += PatientIdentifierManager_ILHandler;
+                // this.PatientIdentifierManager_ILHandler()
+                //this.PatientIdentifierManager_ILHandler(new IlMessageEventArgs() { PatientId = patientId, EntityId = patientEnrollmentId, MessageType = IlMessageType.NewClientRegistration, EventOccurred = "Patient Enrolled Identifier = " + enrollmentNo });
                 return returnValue;
             }
             catch (Exception e)
@@ -49,6 +90,24 @@ namespace IQCare.CCC.UILogic.Enrollment
         {
             try
             {
+                MessageEventArgs args =    new MessageEventArgs()
+                {
+                    PatientId = patientIdentifier.PatientId,
+                    EntityId = patientIdentifier.PatientEnrollmentId,
+                    MessageType = MessageType.NewClientRegistration,
+                    EventOccurred = "Patient Enrolled Identifier = "
+                };
+                //IlEvent?.Invoke(new MessageEventArgs()
+                //{
+                //    PatientId = patientIdentifier.PatientId,
+                //    EntityId = patientIdentifier.PatientEnrollmentId,
+                //    MessageType = MessageType.NewClientRegistration,
+                //    EventOccurred = "Patient Enrolled Identifier = "
+                //});
+
+                Publisher p = new Publisher();
+                p.RaiseEvent(this, args);
+              
                 return _mgr.UpdatePatientIdentifier(patientIdentifier);
             }
             catch (Exception e)

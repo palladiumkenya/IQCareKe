@@ -3,6 +3,13 @@ using System.Collections.Generic;
 
 namespace IQCare.Web.MessageProcessing.JsonMappingEntities
 {
+    public class NOKNAME
+    {
+        public string FIRST_NAME { get; set; }
+        public string MIDDLE_NAME { get; set; }
+        public string LAST_NAME { get; set; }
+    }
+
     public class NEXTOFKIN
     {
         public NOKNAME NOK_NAME { get; set; }
@@ -10,7 +17,7 @@ namespace IQCare.Web.MessageProcessing.JsonMappingEntities
         public string ADDRESS { get; set; }
         public string PHONE_NUMBER { get; set; }
         public string SEX { get; set; }
-        public DateTime DATE_OF_BIRTH { get; set; }
+        public DateTime ? DATE_OF_BIRTH { get; set; }
         public string CONTACT_ROLE { get; set; }
     }
 

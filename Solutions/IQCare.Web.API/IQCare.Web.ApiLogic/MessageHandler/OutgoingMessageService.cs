@@ -1,159 +1,185 @@
-﻿using System;
+﻿using Application.Presentation;
+using DataAccess.Base;
+using Interface.Interop;
 using IQCare.CCC.UILogic.Interoperability;
-using IQCare.DTO;
-using IQCare.Web.ApiLogic.Infrastructure.Interface;
-using IQCare.Web.ApiLogic.Model;
+
+using IQCare.Events;
 using IQCare.Web.MessageProcessing.JsonEntityMapper;
 using Newtonsoft.Json;
 
 namespace IQCare.Web.ApiLogic.MessageHandler
 {
-    public class OutgoingMessageService : IOutgoingMessageService
+    public class OutgoingMessageService : ProcessBase, IOutgoingMessageService, ISendData
     {
         private readonly IJsonEntityMapper _jsonEntityMapper;
-        private readonly IApiOutboxManager _apiOutboxManager;
 
-        event InteropEventHandler handler;
-        protected virtual void OnInterop(IlMessageEventArgs e)
-        {
-            Handle(e);
-            
-        }
+        //public event InteropEventHandler OnDataExchage;
 
-       
 
-        public OutgoingMessageService(IJsonEntityMapper jsonEntityMapper, IApiOutboxManager apiOutboxManager)
+        ////public event InteropEventHandler ILHandler;
+
+        ////protected virtual void OnInterop(IlMessageEventArgs e)
+        ////{
+        ////    Handle(e);
+
+
+        ////}
+        //IDataExchange d;//= dataExchange;
+        ////public OutgoingMessageService(IDataExchange dataExchange)
+        ////{
+        ////    IDataExchange d = dataExchange;
+        ////    d.OnDataExchage += D_OnDataExchage; 
+        ////}
+
+        //private void D_OnDataExchage(MessageEventArgs e)
+        //{
+        //    Handle(e);
+        //}
+        //public void Subscribe(Publisher p)
+        //{
+        //    p.DataExchangeEvent += OnDataExchangeEvent;
+        //}
+
+        //private void OnDataExchangeEvent(object sender, MessageEventArgs args)
+        //{
+        //    Handle(args);
+        //}
+
+
+        //public void OnNotification(IDataExchange dataExchange)
+        //{
+        //    d = dataExchange;
+        //    d.OnDataExchage += D_OnDataExchage;
+        //}
+
+        //public void NotifyListeners()
+        //{
+        //    throw new System.NotImplementedException();
+        //}
+        public OutgoingMessageService() { }
+        public OutgoingMessageService(IJsonEntityMapper jsonEntityMapper)
         {
             _jsonEntityMapper = jsonEntityMapper;
-            _apiOutboxManager = apiOutboxManager;
         }
 
-        public void Handle(IlMessageEventArgs messageEvent)
+        public  void Handle(MessageEventArgs messageEvent)
         {
             switch (messageEvent.MessageType)
             {
-                case IlMessageType.NewClientRegistration:
+                case MessageType.NewClientRegistration:
                     HandleNewClientRegistration(messageEvent);
                     break;
 
-                case IlMessageType.PatientTransferIn:
+                case MessageType.PatientTransferIn:
                     HandlePatientTransferIn(messageEvent);
                     break;
 
-                case IlMessageType.UpdatedClientInformation:
+                case MessageType.UpdatedClientInformation:
                     HandleUpdatedClientInformation(messageEvent);
                     break;
 
-                case IlMessageType.PatientTransferOut:
+                case MessageType.PatientTransferOut:
                     HandlePatientTransferOut(messageEvent);
                     break;
 
-                case IlMessageType.RegimenChange:
+                case MessageType.RegimenChange:
                     HandleRegimenChange(messageEvent);
                     break;
 
-                case IlMessageType.StopDrugs:
+                case MessageType.StopDrugs:
                     HandleStopDrugs(messageEvent);
                     break;
 
-                case IlMessageType.DrugPrescriptionRaised:
+                case MessageType.DrugPrescriptionRaised:
                     HandleDrugPrescriptionRaised(messageEvent);
                     break;
 
-                case IlMessageType.DrugOrderCancel:
+                case MessageType.DrugOrderCancel:
                     HandleDrugOrdercancel(messageEvent);
                     break;
 
-                case IlMessageType.DrugOrderFulfilment:
+                case MessageType.DrugOrderFulfilment:
                     HandleDrugOrderFulfilment(messageEvent);
                     break;
 
-                case IlMessageType.AppointmentScheduling:
+                case MessageType.AppointmentScheduling:
                     HandleAppointmentScheduling(messageEvent);
                     break;
 
-                case IlMessageType.AppointmentUpdated:
+                case MessageType.AppointmentUpdated:
                     HandleAppointmentUpdated(messageEvent);
                     break;
 
-                case IlMessageType.AppointmentRescheduling:
+                case MessageType.AppointmentRescheduling:
                     HandleAppointmentRescheduling(messageEvent);
                     break;
 
-                case IlMessageType.AppointmentCanceled:
+                case MessageType.AppointmentCanceled:
                     HandleAppointmentCancelled(messageEvent);
                     break;
 
-                case IlMessageType.AppointmentHonored:
+                case MessageType.AppointmentHonored:
                     HandleAppointmentHonored(messageEvent);
                     break;
 
-                case IlMessageType.UniquePatientIdentification:
+                case MessageType.UniquePatientIdentification:
                     HandleUniquePatientIdentification(messageEvent);
                     break;
 
-                case IlMessageType.ViralLoadLabOrder:
+                case MessageType.ViralLoadLabOrder:
                     HandleViralLoadLabOrder(messageEvent);
                     break;
 
-                case IlMessageType.ViralLoadResults:
+                case MessageType.ViralLoadResults:
                     HandleNewViralLoadResults(messageEvent);
                     break;
             }
         }
 
-        private void HandleNewClientRegistration(IlMessageEventArgs messageEvent)
+        private void HandleNewClientRegistration(MessageEventArgs messageEvent)
         {
-            try
-            {
-                var processRegistration = new ProcessRegistration();
-                var registrationDto = processRegistration.Get(messageEvent.PatientId);
-                var registrationEntity = _jsonEntityMapper.PatientRegistration(registrationDto);
-                string registrationJson = JsonConvert.SerializeObject(registrationEntity);
-                var apiOutbox = new ApiOutbox()
-                {
-                    DateRead = DateTime.Now,
-                    Message = registrationJson,
+            var processRegistration = new ProcessRegistration();
+            var registrationDto = processRegistration.Get(messageEvent.PatientId);
+            var registrationEntity = _jsonEntityMapper.PatientRegistration(registrationDto);
+            string registrationJson = JsonConvert.SerializeObject(registrationEntity);
+            //save/send
 
-                };
-                _apiOutboxManager.AddApiOutbox(apiOutbox);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            
-            //send
+
+            //Send
+            SendData(registrationJson,"");
 
         }
-
-        private void HandlePatientTransferIn(IlMessageEventArgs messageEvent)
+        public void SendData(string jsonString, string endPoint)
+        {
+            ISendData mgr = (ISendData)ObjectFactory.CreateInstance("BusinessProcess.Interop.TcpDataExchange, BusinessProcess.Interop");
+            mgr.SendData(jsonString, "");
+        }
+        private void HandlePatientTransferIn(MessageEventArgs messageEvent)
         {
 
         }
 
-        private void HandleUpdatedClientInformation(IlMessageEventArgs messageEvent)
+        private void HandleUpdatedClientInformation(MessageEventArgs messageEvent)
         {
 
         }
 
-        private void HandlePatientTransferOut(IlMessageEventArgs messageEvent)
+        private void HandlePatientTransferOut(MessageEventArgs messageEvent)
         {
 
         }
 
-        private void HandleRegimenChange(IlMessageEventArgs messageEvent)
+        private void HandleRegimenChange(MessageEventArgs messageEvent)
         {
 
         }
 
-        private void HandleStopDrugs(IlMessageEventArgs messageEvent)
+        private void HandleStopDrugs(MessageEventArgs messageEvent)
         {
 
         }
 
-        private void HandleDrugPrescriptionRaised(IlMessageEventArgs messageEvent)
+        private void HandleDrugPrescriptionRaised(MessageEventArgs messageEvent)
         {
             try
             {
@@ -177,55 +203,56 @@ namespace IQCare.Web.ApiLogic.MessageHandler
             }
         }
 
-        private void HandleDrugOrdercancel(IlMessageEventArgs messageEvent)
+        private void HandleDrugOrdercancel(MessageEventArgs messageEvent)
         {
 
         }
 
-        private void HandleDrugOrderFulfilment(IlMessageEventArgs messageEvent)
+        private void HandleDrugOrderFulfilment(MessageEventArgs messageEvent)
         {
 
         }
 
-        private void HandleAppointmentScheduling(IlMessageEventArgs messageEvent)
+        private void HandleAppointmentScheduling(MessageEventArgs messageEvent)
         {
 
         }
 
-        private void HandleAppointmentUpdated(IlMessageEventArgs messageEvent)
+        private void HandleAppointmentUpdated(MessageEventArgs messageEvent)
         {
 
         }
 
-        private void HandleAppointmentRescheduling(IlMessageEventArgs messageEvent)
+        private void HandleAppointmentRescheduling(MessageEventArgs messageEvent)
         {
 
         }
 
-        private void HandleAppointmentHonored(IlMessageEventArgs messageEvent)
+        private void HandleAppointmentHonored(MessageEventArgs messageEvent)
         {
 
         }
 
-        private void HandleAppointmentCancelled(IlMessageEventArgs messageEvent)
+        private void HandleAppointmentCancelled(MessageEventArgs messageEvent)
         {
 
         }
 
-        private void HandleUniquePatientIdentification(IlMessageEventArgs messageEvent)
+        private void HandleUniquePatientIdentification(MessageEventArgs messageEvent)
         {
 
         }
 
-        private void HandleViralLoadLabOrder(IlMessageEventArgs messageEvent)
+        private void HandleViralLoadLabOrder(MessageEventArgs messageEvent)
         {
 
         }
 
-        private void HandleNewViralLoadResults(IlMessageEventArgs messageEvent)
+        private void HandleNewViralLoadResults(MessageEventArgs messageEvent)
         {
 
         }
 
+        
     }
 }

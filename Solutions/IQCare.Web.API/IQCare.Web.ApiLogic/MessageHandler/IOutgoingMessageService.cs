@@ -1,9 +1,10 @@
-﻿using IQCare.DTO;
+﻿
+using IQCare.Events;
 
 namespace IQCare.Web.ApiLogic.MessageHandler
 {
     public interface IOutgoingMessageService
     {
-        void Handle(IlMessageEventArgs message);
+        void Handle(MessageEventArgs message);
     }
 }
