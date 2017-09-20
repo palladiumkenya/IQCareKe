@@ -4,10 +4,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.26730.15
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQCare.Web.API", "IQCare.Web.API\IQCare.Web.API.csproj", "{3530AE08-582A-456A-A782-C78DBF6B9030}"
+	ProjectSection(ProjectDependencies) = postProject
+		{62A2C82B-D183-4989-930A-E0451600A100} = {62A2C82B-D183-4989-930A-E0451600A100}
+		{DA829A6F-50EF-4269-B7FE-357FD2EDC9E2} = {DA829A6F-50EF-4269-B7FE-357FD2EDC9E2}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCare.Web.MessageProcessing", "IQCare.Web.MessageProcessing\IQCare.Web.MessageProcessing.csproj", "{DA829A6F-50EF-4269-B7FE-357FD2EDC9E2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCare.Web.ApiLogic", "IQCare.Web.ApiLogic\IQCare.Web.ApiLogic.csproj", "{62A2C82B-D183-4989-930A-E0451600A100}"
+	ProjectSection(ProjectDependencies) = postProject
+		{DA829A6F-50EF-4269-B7FE-357FD2EDC9E2} = {DA829A6F-50EF-4269-B7FE-357FD2EDC9E2}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
