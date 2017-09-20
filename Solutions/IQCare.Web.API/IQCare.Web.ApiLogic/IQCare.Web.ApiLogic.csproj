@@ -39,6 +39,7 @@
     <Reference Include="DataAccess.Context">
       <HintPath>..\..\..\References\DataAccess.Context.dll</HintPath>
     </Reference>
+    <Reference Include="Entities.CCC, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="EntityFramework">
       <HintPath>..\..\..\References\EntityFramework.dll</HintPath>
     </Reference>

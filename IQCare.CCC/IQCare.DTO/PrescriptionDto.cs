@@ -20,16 +20,16 @@ namespace IQCare.DTO
        public string Notes { get; set; }
     }
 
-    public abstract class OrderingPhysician
+    public class OrderingPhysician
     {
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
     }
 
-    public abstract class PlacerOrderNumber
+    public class PlacerOrderNumber
     {
-        public string Number { get; set; }
+        public int Number { get; set; }
         public string Entity { get; set; }
     }
 
