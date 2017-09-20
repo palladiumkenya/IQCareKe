@@ -144,6 +144,9 @@ namespace DataAccess.CCC.Repository
 
         /*Interoperability*/
         private IPatientMessageRepository _patientMessageRepository;
+
+        private IDrugPrescriptionMessageRepository _drugPrescriptionMessageRepository;
+
         public UnitOfWork(BaseContext context)
         {
             if (context == null)
@@ -177,6 +180,17 @@ namespace DataAccess.CCC.Repository
                        (_patientMessageRepository = new PatientMessageRepository((LookupContext) _context));
             }
         }
+
+        public IDrugPrescriptionMessageRepository DrugPrescriptionMessageRepository
+        {
+            get
+            {
+                return _drugPrescriptionMessageRepository ?? (_drugPrescriptionMessageRepository =
+                           new DrugPrescriptionMessageRepository((LookupContext) _context));
+            }
+        }
+
+
 
         public IPatientServiceEnrollmentLookupRepository PatientServiceEnrollmentLookupRepository
         {

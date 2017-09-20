@@ -38,7 +38,10 @@ namespace IQCare.Web.MessageProcessing.JsonEntityMapper
 
         public void DrugPrescriptionRaised()
         {
-            throw new System.NotImplementedException();
+           var identifiersDto=new DTOIdentifier()
+           {
+               IdentifierType = 
+           };
         }
 
         public void DrugOrderCancel()
