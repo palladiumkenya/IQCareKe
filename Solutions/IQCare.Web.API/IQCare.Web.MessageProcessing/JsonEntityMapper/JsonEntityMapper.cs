@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using IQCare.DTO;
 using IQCare.Web.MessageProcessing.JsonMappingEntities;
+using Newtonsoft.Json;
 
 namespace IQCare.Web.MessageProcessing.JsonEntityMapper
 {
@@ -105,12 +106,6 @@ namespace IQCare.Web.MessageProcessing.JsonEntityMapper
 
         public DrugPrescriptionEntity DrugPrescriptionRaised(PrescriptionDto entity)
         {
-            var piList = new List<INTERNALPATIENTID>();
-            var drgulist=new INTERNALPATIENTID()
-            {
-                
-            };
-            
             var prescribeMessage=new DrugPrescriptionEntity()
             {
                 MESSAGE_HEADER =
@@ -126,11 +121,7 @@ namespace IQCare.Web.MessageProcessing.JsonEntityMapper
                 },
                 PATIENT_IDENTIFICATION =
                 {
-                    INTERNAL_PATIENT_ID = 
-                    {
-                       
-
-                    }
+                    INTERNAL_PATIENT_ID =new List<INTERNALPATIENTID>()     
                 },
                 COMMON_ORDER_DETAILS =
                 {
@@ -145,11 +136,13 @@ namespace IQCare.Web.MessageProcessing.JsonEntityMapper
                     },
                     TRANSACTION_DATETIME = entity.CommonOrderDetails.TransactionDatetime.ToShortDateString()
                 },
-                PHARMACY_ENCODED_ORDER =
-                {
-                    
-                }
+                PHARMACY_ENCODED_ORDER =new List<PHARMACYENCODEDORDER>()
+                
             };
+
+           // string prescriptionJSON = JsonConvert.SerializeObject(prescribeMessage);
+
+            return prescribeMessage;
 
         }
 
