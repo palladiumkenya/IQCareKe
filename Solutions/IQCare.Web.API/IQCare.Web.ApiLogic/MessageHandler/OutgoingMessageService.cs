@@ -9,12 +9,22 @@ namespace IQCare.Web.ApiLogic.MessageHandler
     {
         private readonly IJsonEntityMapper _jsonEntityMapper;
 
+        event InteropEventHandler handler;
+        protected virtual void OnInterop(IlMessageEventArgs e)
+        {
+            Handle(e);
+
+
+        }
+
+       
+
         public OutgoingMessageService(IJsonEntityMapper jsonEntityMapper)
         {
             _jsonEntityMapper = jsonEntityMapper;
         }
 
-        public void Handle(IlMessageEvent messageEvent)
+        public void Handle(IlMessageEventArgs messageEvent)
         {
             switch (messageEvent.MessageType)
             {
@@ -88,90 +98,92 @@ namespace IQCare.Web.ApiLogic.MessageHandler
             }
         }
 
-        private void HandleNewClientRegistration(IlMessageEvent messageEvent)
+        private void HandleNewClientRegistration(IlMessageEventArgs messageEvent)
         {
             var processRegistration = new ProcessRegistration();
             var registrationDto = processRegistration.Get(messageEvent.PatientId);
             var registrationEntity = _jsonEntityMapper.PatientRegistration(registrationDto);
             string registrationJson = JsonConvert.SerializeObject(registrationEntity);
+            //save/send
+           
         }
 
-        private void HandlePatientTransferIn(IlMessageEvent messageEvent)
+        private void HandlePatientTransferIn(IlMessageEventArgs messageEvent)
         {
 
         }
 
-        private void HandleUpdatedClientInformation(IlMessageEvent messageEvent)
+        private void HandleUpdatedClientInformation(IlMessageEventArgs messageEvent)
         {
 
         }
 
-        private void HandlePatientTransferOut(IlMessageEvent messageEvent)
+        private void HandlePatientTransferOut(IlMessageEventArgs messageEvent)
         {
 
         }
 
-        private void HandleRegimenChange(IlMessageEvent messageEvent)
+        private void HandleRegimenChange(IlMessageEventArgs messageEvent)
         {
 
         }
 
-        private void HandleStopDrugs(IlMessageEvent messageEvent)
+        private void HandleStopDrugs(IlMessageEventArgs messageEvent)
         {
 
         }
 
-        private void HandleDrugPrescriptionRaised(IlMessageEvent messageEvent)
+        private void HandleDrugPrescriptionRaised(IlMessageEventArgs messageEvent)
         {
 
         }
 
-        private void HandleDrugOrdercancel(IlMessageEvent messageEvent)
+        private void HandleDrugOrdercancel(IlMessageEventArgs messageEvent)
         {
 
         }
 
-        private void HandleDrugOrderFulfilment(IlMessageEvent messageEvent)
+        private void HandleDrugOrderFulfilment(IlMessageEventArgs messageEvent)
         {
 
         }
 
-        private void HandleAppointmentScheduling(IlMessageEvent messageEvent)
+        private void HandleAppointmentScheduling(IlMessageEventArgs messageEvent)
         {
 
         }
 
-        private void HandleAppointmentUpdated(IlMessageEvent messageEvent)
+        private void HandleAppointmentUpdated(IlMessageEventArgs messageEvent)
         {
 
         }
 
-        private void HandleAppointmentRescheduling(IlMessageEvent messageEvent)
+        private void HandleAppointmentRescheduling(IlMessageEventArgs messageEvent)
         {
 
         }
 
-        private void HandleAppointmentHonored(IlMessageEvent messageEvent)
+        private void HandleAppointmentHonored(IlMessageEventArgs messageEvent)
         {
 
         }
 
-        private void HandleAppointmentCancelled(IlMessageEvent messageEvent)
+        private void HandleAppointmentCancelled(IlMessageEventArgs messageEvent)
         {
 
         }
 
-        private void HandleUniquePatientIdentification(IlMessageEvent messageEvent)
+        private void HandleUniquePatientIdentification(IlMessageEventArgs messageEvent)
         {
 
         }
 
-        private void HandleViralLoadLabOrder(IlMessageEvent messageEvent)
+        private void HandleViralLoadLabOrder(IlMessageEventArgs messageEvent)
         {
 
         }
 
-        private void HandleNewViralLoadResults(IlMessageEvent messageEvent)
+        private void HandleNewViralLoadResults(IlMessageEventArgs messageEvent)
         {
 
         }
