@@ -104,6 +104,7 @@ namespace IQCare.CCC.UILogic.Enrollment
                 //    MessageType = MessageType.NewClientRegistration,
                 //    EventOccurred = "Patient Enrolled Identifier = "
                 //});
+
                 Publisher p = new Publisher();
                 p.RaiseEvent(this, args);
               
