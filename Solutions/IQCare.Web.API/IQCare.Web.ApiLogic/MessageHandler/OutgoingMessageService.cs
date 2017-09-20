@@ -18,7 +18,7 @@ namespace IQCare.Web.ApiLogic.MessageHandler
         {
             switch (messageEvent.MessageType)
             {
-                case IlMessageType.NewclientRegistration:
+                case IlMessageType.NewClientRegistration:
                     HandleNewClientRegistration(messageEvent);
                     break;
 
