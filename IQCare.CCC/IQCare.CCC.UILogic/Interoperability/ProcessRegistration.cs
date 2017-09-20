@@ -30,7 +30,7 @@ namespace IQCare.CCC.UILogic.Interoperability
         public string msg { get; set; }
         public Registration Get(int entityId)
         {
-            throw new NotImplementedException();
+            return ProcessPatient.Get(entityId);
         }
 
         public string Save(Registration registration)

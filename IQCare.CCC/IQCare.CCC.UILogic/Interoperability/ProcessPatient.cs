@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Entities.CCC.Enrollment;
+using Entities.CCC.Interoperability;
 using IQCare.CCC.UILogic.Enrollment;
 using IQCare.DTO;
 
@@ -83,6 +84,55 @@ namespace IQCare.CCC.UILogic.Interoperability
             {
                 throw new Exception(e.Message);
             }
+        }
+
+        public static Registration Get(int patientId)
+        {
+            PatientMessageManager patientMessageManager = new PatientMessageManager();
+            PatientMessage patientMessage = patientMessageManager.GetPatientMessageByEntityId(patientId);
+            Registration registration = new Registration();
+
+            if (patientMessage != null)
+            {            
+                DTOIdentifier identifier = new DTOIdentifier();
+
+                identifier.IdentifierValue = patientMessage.IdentifierValue;
+                identifier.IdentifierType = "CCC_NUMBER";
+                identifier.AssigningAuthority = "CCC";
+
+                registration.InternalPatientIdentifiers.Add(identifier);
+                registration.Patient.FirstName = patientMessage.FIRST_NAME;
+                registration.Patient.MiddleName = patientMessage.MIDDLE_NAME;
+                registration.Patient.LastName = patientMessage.LAST_NAME;
+                registration.Patient.DateOfBirth = patientMessage.DATE_OF_BIRTH;
+                //registration.Patient.DobPrecision = patientMessage.
+                registration.Patient.Sex = patientMessage.SEX;
+                registration.Patient.MobileNumber = patientMessage.MobileNumber;
+                registration.Patient.PhysicalAddress = patientMessage.PhysicalAddress;
+                registration.Patient.NationalId = patientMessage.NATIONAL_ID;
+
+                //registration.DateOfEnrollment = patientMessage.
+                //registration.EntryPoint = patientMessage.
+                registration.MotherMaidenName = null;
+                registration.Village = patientMessage.Village;
+                registration.Ward = patientMessage.WardName;
+                registration.SubCounty = patientMessage.Subcountyname;
+                registration.County = patientMessage.CountyName;
+
+                registration.MaritalStatus = patientMessage.MARITAL_STATUS;
+                //registration.DateOfDeath = patientMessage.d
+                registration.DeathIndicator = null;
+                registration.TreatmentSupporter.FirstName = patientMessage.TFIRST_NAME;
+                registration.TreatmentSupporter.MiddleName = patientMessage.TMIDDLE_NAME;
+                registration.TreatmentSupporter.LastName = patientMessage.TLAST_NAME;
+                registration.TreatmentSupporter.DateOfBirth = null;
+                //registration.TreatmentSupporter.DobPrecision = null;
+                registration.TreatmentSupporter.MobileNumber = patientMessage.TPHONE_NUMBER;
+                registration.TreatmentSupporter.PhysicalAddress = patientMessage.TADDRESS;
+                //registration.TreatmentSupporter.NationalId = patientMessage.t
+            }
+
+            return registration;
         }
     }
 }
