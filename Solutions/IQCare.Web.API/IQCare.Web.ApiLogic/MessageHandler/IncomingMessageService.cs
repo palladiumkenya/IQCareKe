@@ -62,6 +62,7 @@
 
         private void HandleNewViralLoadResults(string message)
         {
+
         }
     }
 }
