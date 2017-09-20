@@ -1,6 +1,7 @@
 ﻿using Application.Presentation;
 using Entities.CCC.Enrollment;
 using Interface.CCC.Enrollment;
+using IQCare.DTO;
 using System;
 using System.Collections.Generic;
 
@@ -9,7 +10,18 @@ namespace IQCare.CCC.UILogic.Enrollment
     public class PatientIdentifierManager
     {
         IPatientIdentifierManager _mgr = (IPatientIdentifierManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Enrollment.BPatientIdentifier, BusinessProcess.CCC");
+        protected virtual void OnPatientEnrolled(IlMessageEventArgs e)
+        {
+            InteropEventHandler handler = this.PatientEnrolledHandler;
+            if (handler!= null)
+            {
+                PatientEnrolledHandler( e);
+            }
 
+            
+        }
+
+        public event InteropEventHandler PatientEnrolledHandler;
         public int addPatientIdentifier(int patientId, int patientEnrollmentId, int identifierId, string enrollmentNo)
         {
             try
@@ -23,6 +35,8 @@ namespace IQCare.CCC.UILogic.Enrollment
                 };
 
                 int returnValue = _mgr.AddPatientIdentifier(patientidentifier);
+
+                this.OnPatientEnrolled(new IlMessageEventArgs() { PatientId = patientId, EntityId = patientEnrollmentId, MessageType = IlMessageType.NewClientRegistration, EventOccurred = "Patient Enrolled Identifier = " + enrollmentNo });
                 return returnValue;
             }
             catch (Exception e)
