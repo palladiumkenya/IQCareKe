@@ -48,7 +48,9 @@
   <ItemGroup>
     <Compile Include="DtoMapping\DtoMapper.cs" />
     <Compile Include="DtoMapping\IDtoMapper.cs" />
+    <Compile Include="JsonMappingEntities\CommonJsonEntity.cs" />
     <Compile Include="JsonMappingEntities\PatientRegistrationEntity.cs" />
+    <Compile Include="JsonMappingEntities\ViralLoadResultEntity.cs" />
     <Compile Include="Services\IOutgoingMessageService.cs" />
     <Compile Include="Services\OutgoingMessageService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
