@@ -562,7 +562,7 @@
     <LabDepartmentId>2</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
     <Sequence>61</Sequence>
-    <DeleteFlag>true</DeleteFlag>
+    <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
     <LabTestId>8</LabTestId>
@@ -574,15 +574,15 @@
   </Mst_LabTest>
   <Lnk_TestParameter>
     <SubTestId>1</SubTestId>
-    <SubTestName>CD4 Count</SubTestName>
+    <SubTestName>CD4</SubTestName>
     <TestId>1</TestId>
     <DeleteFlag>false</DeleteFlag>
   </Lnk_TestParameter>
   <Lnk_TestParameter>
     <SubTestId>2</SubTestId>
     <SubTestName>CD4 Percent</SubTestName>
-    <TestId>2</TestId>
-    <DeleteFlag>false</DeleteFlag>
+    <TestId>1</TestId>
+    <DeleteFlag>true</DeleteFlag>
   </Lnk_TestParameter>
   <Lnk_TestParameter>
     <SubTestId>3</SubTestId>
@@ -1112,6 +1112,12 @@
     <TestId>94</TestId>
     <DeleteFlag>false</DeleteFlag>
   </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>115</SubTestId>
+    <SubTestName>CD4PERCENT</SubTestName>
+    <TestId>2</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
   <Lnk_LabValue>
     <SubTestId>1</SubTestId>
     <MinBoundaryValue>0.00</MinBoundaryValue>
@@ -1137,7 +1143,7 @@
   <Lnk_LabValue>
     <SubTestId>3</SubTestId>
     <MinBoundaryValue>50.00</MinBoundaryValue>
-    <MaxBoundaryValue>3000000.00</MaxBoundaryValue>
+    <MaxBoundaryValue>2000000.00</MaxBoundaryValue>
     <MinNormalRange>50.00</MinNormalRange>
     <MaxNormalRange>2000000.00</MaxNormalRange>
     <TextNormalRange />
@@ -1805,14 +1811,14 @@
   </Lnk_ParameterResult>
   <LabTestOrder>
     <SubTestId>1</SubTestId>
-    <SubTestName>CD4 Count</SubTestName>
+    <SubTestName>CD4</SubTestName>
     <TestId>1</TestId>
     <DeleteFlag>false</DeleteFlag>
   </LabTestOrder>
   <LabTestOrder>
     <SubTestId>2</SubTestId>
     <SubTestName>CD4 Percent</SubTestName>
-    <TestId>2</TestId>
+    <TestId>1</TestId>
     <DeleteFlag>false</DeleteFlag>
   </LabTestOrder>
   <LabTestOrder>
@@ -1957,6 +1963,12 @@
     <SubTestId>28</SubTestId>
     <SubTestName>Cell Count RBCs</SubTestName>
     <TestId>56</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>29</SubTestId>
+    <SubTestName>Cell Count WBCs</SubTestName>
+    <TestId>57</TestId>
     <DeleteFlag>false</DeleteFlag>
   </LabTestOrder>
   <LabTestOrder>
@@ -2317,6 +2329,12 @@
     <SubTestId>114</SubTestId>
     <SubTestName>PCR</SubTestName>
     <TestId>94</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>115</SubTestId>
+    <SubTestName>CD4PERCENT</SubTestName>
+    <TestId>2</TestId>
     <DeleteFlag>false</DeleteFlag>
   </LabTestOrder>
   <Mst_PatientLabPeriod>

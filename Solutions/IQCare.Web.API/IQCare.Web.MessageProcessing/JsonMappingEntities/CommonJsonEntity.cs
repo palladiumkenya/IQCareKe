@@ -56,12 +56,12 @@ namespace IQCare.Web.MessageProcessing.JsonMappingEntities
         public List<INTERNALPATIENTID> INTERNAL_PATIENT_ID { get; set; }
         public PATIENTNAME PATIENT_NAME { get; set; }
         public string MOTHER_MAIDEN_NAME { get; set; }
-        public DateTime DATE_OF_BIRTH { get; set; }
+        public DateTime ? DATE_OF_BIRTH { get; set; }
         public string SEX { get; set; }
         public PATIENTADDRESS PATIENT_ADDRESS { get; set; }
         public string PHONE_NUMBER { get; set; }
         public string MARITAL_STATUS { get; set; }
-        public DateTime DEATH_DATE { get; set; }
+        public DateTime ? DEATH_DATE { get; set; }
         public string DEATH_INDICATOR { get; set; }
     }
 }

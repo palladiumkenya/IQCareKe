@@ -17,7 +17,7 @@ namespace IQCare.Web.MessageProcessing.JsonMappingEntities
         public string ADDRESS { get; set; }
         public string PHONE_NUMBER { get; set; }
         public string SEX { get; set; }
-        public DateTime DATE_OF_BIRTH { get; set; }
+        public DateTime ? DATE_OF_BIRTH { get; set; }
         public string CONTACT_ROLE { get; set; }
     }
 

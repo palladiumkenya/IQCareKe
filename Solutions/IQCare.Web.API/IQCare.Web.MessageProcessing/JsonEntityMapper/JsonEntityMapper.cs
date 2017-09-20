@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using IQCare.DTO;
 using IQCare.Web.MessageProcessing.JsonMappingEntities;
 
@@ -9,15 +10,71 @@ namespace IQCare.Web.MessageProcessing.JsonEntityMapper
     {
         public PatientRegistrationEntity PatientRegistration(Registration entity)
         {
-            
-            var patientReegistrationEntiy = new PatientRegistrationEntity()
+            var identifiers = new List<INTERNALPATIENTID>();
+            foreach (var id in entity.InternalPatientIdentifiers)
+            {
+                var identifier = new INTERNALPATIENTID()
+                {
+                    ID = id.IdentifierValue,
+                    IDENTIFIER_TYPE = id.IdentifierType,
+                    ASSIGNING_AUTHORITY = id.AssigningAuthority
+                };
+                identifiers.Add(identifier);
+            }
+
+            var nextOfKin = new List<NEXTOFKIN>();
+            var treatmentSupporter = new NEXTOFKIN()
+            {
+                NOK_NAME = new NOKNAME()
+                {
+                    FIRST_NAME = entity.TreatmentSupporter.FirstName,
+                    MIDDLE_NAME = entity.TreatmentSupporter.MiddleName,
+                    LAST_NAME = entity.TreatmentSupporter.LastName
+                },
+                CONTACT_ROLE = "T",
+                RELATIONSHIP = entity.TSRelationshipType,
+                PHONE_NUMBER = entity.TreatmentSupporter.MobileNumber,
+                SEX = entity.TreatmentSupporter.Sex,
+                DATE_OF_BIRTH = entity.TreatmentSupporter.DateOfBirth,
+                ADDRESS = entity.TreatmentSupporter.PhysicalAddress
+            };
+            nextOfKin.Add(treatmentSupporter);
+            var patientRegistrationEntity = new PatientRegistrationEntity()
             {
                 MESSAGE_HEADER = GetMessageHeader("ADT^A04"),
-                //PATIENT_IDENTIFICATION = ,
-                //NEXT_OF_KIN = ,
-                //OBSERVATION_RESULT = 
+                PATIENT_IDENTIFICATION = new PATIENTIDENTIFICATION()
+                {
+                    PATIENT_NAME = new PATIENTNAME()
+                    {
+                        FIRST_NAME = entity.Patient.FirstName,
+                        MIDDLE_NAME = entity.Patient.MiddleName,
+                        LAST_NAME = entity.Patient.LastName,
+                    },
+                    EXTERNAL_PATIENT_ID = new EXTERNALPATIENTID(),
+                    DATE_OF_BIRTH = entity.Patient.DateOfBirth,
+                    SEX = entity.Patient.Sex,
+                    PHONE_NUMBER = entity.Patient.MobileNumber,
+                    PATIENT_ADDRESS = new PATIENTADDRESS()
+                    {
+                        POSTAL_ADDRESS = entity.Patient.PhysicalAddress,
+                        PHYSICAL_ADDRESS = new PHYSICALADDRESS()
+                        {
+                            COUNTY = entity.County,
+                            SUB_COUNTY = entity.SubCounty,
+                            VILLAGE = entity.Village,
+                            WARD = entity.Ward
+                        },
+                    },
+                    MARITAL_STATUS = entity.MaritalStatus,
+                    DEATH_INDICATOR = entity.DeathIndicator,
+                    DEATH_DATE = entity.DateOfDeath,
+                    MOTHER_MAIDEN_NAME = entity.MotherMaidenName,
+                    INTERNAL_PATIENT_ID = identifiers
+                },
+                NEXT_OF_KIN = nextOfKin,
+                OBSERVATION_RESULT = new List<OBSERVATIONRESULT>()
             };
-            return patientReegistrationEntiy;
+            return patientRegistrationEntity;
         }
 
         public void PatientTransferIn()
@@ -110,7 +167,7 @@ namespace IQCare.Web.MessageProcessing.JsonEntityMapper
                 MESSAGE_TYPE = messageType,
                 MESSAGE_DATETIME = DateTime.Now,
                 PROCESSING_ID = "",
-                RECEIVING_APPLICATION = "",
+                RECEIVING_APPLICATION = "IL",
                 RECEIVING_FACILITY = "",
                 SECURITY = "",
                 SENDING_APPLICATION = "IQCARE",
