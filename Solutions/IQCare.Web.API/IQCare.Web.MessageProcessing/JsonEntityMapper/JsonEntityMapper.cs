@@ -13,9 +13,9 @@ namespace IQCare.Web.MessageProcessing.JsonEntityMapper
             var patientReegistrationEntiy = new PatientRegistrationEntity()
             {
                 MESSAGE_HEADER = GetMessageHeader("ADT^A04"),
-                PATIENT_IDENTIFICATION = ,
-                NEXT_OF_KIN = ,
-                OBSERVATION_RESULT = 
+                //PATIENT_IDENTIFICATION = ,
+                //NEXT_OF_KIN = ,
+                //OBSERVATION_RESULT = 
             };
             return patientReegistrationEntiy;
         }
@@ -49,7 +49,7 @@ namespace IQCare.Web.MessageProcessing.JsonEntityMapper
         {
            var identifiersDto=new DTOIdentifier()
            {
-               IdentifierType = 
+               //IdentifierType = 
            };
         }
 
