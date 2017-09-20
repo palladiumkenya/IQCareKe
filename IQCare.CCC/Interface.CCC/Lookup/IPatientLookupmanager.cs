@@ -16,6 +16,7 @@ namespace Interface.CCC.Lookup
         int GetPatientTypeId(int PatientId);
         int GetPatientSexId(int patientId);
         List<PatientLookup> GetPatientListByParams(int patientId, string firstName, string middleName, string lastName, int sex);
+        PatientLookup GetPatientByCccNumber(string cccNumber);
     }
 }
  

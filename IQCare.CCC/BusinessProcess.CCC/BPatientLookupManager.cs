@@ -193,5 +193,15 @@ namespace BusinessProcess.CCC
                 return sexId;
             }
         }
+
+        public PatientLookup GetPatientByCccNumber(string cccNumber)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                PatientLookup patientLookup = unitOfWork.PatientLookupRepository.FindBy(x => x.EnrollmentNumber == cccNumber).FirstOrDefault();
+                unitOfWork.Dispose();
+                return patientLookup;
+            }
+        }
     }
 }
