@@ -25,7 +25,9 @@ using DataAccess.CCC.Interface.Triage;
 using DataAccess.CCC.Repository.Triage;
 using DataAccess.CCC.Repository.Screening;
 using DataAccess.CCC.Interface.assessment;
+using DataAccess.CCC.Interface.Interoperability;
 using DataAccess.CCC.Repository.assessment;
+using DataAccess.CCC.Repository.Interoperability;
 
 namespace DataAccess.CCC.Repository
 {
@@ -140,6 +142,8 @@ namespace DataAccess.CCC.Repository
         private IPatientPsychosocialCriteriaRepository _patientPsychosocialCriteriaRepository;
         private IPatientSupportSystemCriteriaRepository _patientSupportSystemCriteriaRepository;
 
+        /*Interoperability*/
+        private IPatientMessageRepository _patientMessageRepository;
         public UnitOfWork(BaseContext context)
         {
             if (context == null)
@@ -163,6 +167,15 @@ namespace DataAccess.CCC.Repository
         public ILookupRepository LookupRepository
         {
             get { return _lookupRepository ?? (_lookupRepository = new LookupRepository((LookupContext)_context)); }
+        }
+
+        public IPatientMessageRepository PatientMessageRepository
+        {
+            get
+            {
+                return _patientMessageRepository ??
+                       (_patientMessageRepository = new PatientMessageRepository((LookupContext) _context));
+            }
         }
 
         public IPatientServiceEnrollmentLookupRepository PatientServiceEnrollmentLookupRepository

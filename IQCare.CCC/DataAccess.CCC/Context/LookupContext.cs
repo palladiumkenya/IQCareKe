@@ -4,7 +4,7 @@ using Entities.CCC.Lookup;
 using System.Data.Common;
 using DataAccess.Base;
 using Entities.CCC.Appointment;
-using Entities.CCC.Encounter;
+using Entities.CCC.Interoperability;
 
 namespace DataAccess.CCC.Context
 {
@@ -48,6 +48,7 @@ namespace DataAccess.CCC.Context
         public DbSet<TestingSummaryStatistics> TestingSummaryStatistics { get; set; }
         public DbSet<PatientStabilitySummary> PatientStabilitySummaries { get; set; }
 
-       
+        //Interoperability
+        public DbSet<PatientMessage> PatientMessages { get; set; }
     }
 }
