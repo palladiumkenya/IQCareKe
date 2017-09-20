@@ -110,5 +110,17 @@ namespace IQCare.CCC.UILogic
                 throw;
             }
         }
+
+        public PatientLookup GetPatientByCccNumber(string cccNumber)
+        {
+            try
+            {
+                return _patientLookupmanager.GetPatientByCccNumber(cccNumber);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

@@ -59,7 +59,10 @@
     <Compile Include="DtoMapping\IDtoMapper.cs" />
     <Compile Include="JsonEntityMapper\IJsonEntityMapper.cs" />
     <Compile Include="JsonEntityMapper\JsonEntityMapper.cs" />
+    <Compile Include="JsonMappingEntities\CommonJsonEntity.cs" />
+    <Compile Include="JsonMappingEntities\DrugPrescriptionEntity.cs" />
     <Compile Include="JsonMappingEntities\PatientRegistrationEntity.cs" />
+    <Compile Include="JsonMappingEntities\ViralLoadResultEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -26,6 +26,6 @@ namespace IQCare.Web.MessageProcessing.DtoMapping
         void AppointmentHonored();
         void UniquePatientIdentification();
         void ViralLoadLabOrder();
-        void ViralLoadResults();
+        ViralLoadDto ViralLoadResults(ViralLoadResultEntity entity);
     }
 }

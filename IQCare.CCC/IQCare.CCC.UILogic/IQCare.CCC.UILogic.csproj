@@ -70,16 +70,21 @@
     </Reference>
     <Reference Include="IQCare.DTO, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\References\IQCare.DTO.dll</HintPath>
+      <HintPath>..\IQCare.DTO\obj\Debug\IQCare.DTO.dll</HintPath>
     </Reference>
     <Reference Include="IQCare.Web.UILogic, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\IQCare.Web.UILogic.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Library\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -109,6 +114,10 @@
     <Compile Include="Enrollment\PatientReEnrollmentManager.cs" />
     <Compile Include="Enrollment\ServiceAreaIdentifiersManager.cs" />
     <Compile Include="FacilityListManager.cs" />
+    <Compile Include="Interoperability\DrugPrescriptionMessage.cs" />
+    <Compile Include="Interoperability\PatientMessageManager.cs" />
+    <Compile Include="Interoperability\PatientRegistrationValidation.cs" />
+    <Compile Include="Interoperability\ProcessPatient.cs" />
     <Compile Include="Interoperability\ProcessRegistration.cs" />
     <Compile Include="LookupLogic.cs" />
     <Compile Include="MstPatientLogic.cs" />

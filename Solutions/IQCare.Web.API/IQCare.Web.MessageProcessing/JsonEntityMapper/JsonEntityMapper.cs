@@ -1,4 +1,5 @@
-﻿using IQCare.DTO;
+﻿using System;
+using IQCare.DTO;
 using IQCare.Web.MessageProcessing.JsonMappingEntities;
 
 namespace IQCare.Web.MessageProcessing.JsonEntityMapper
@@ -8,7 +9,15 @@ namespace IQCare.Web.MessageProcessing.JsonEntityMapper
     {
         public PatientRegistrationEntity PatientRegistration(Registration entity)
         {
-            throw new System.NotImplementedException();
+            
+            var patientReegistrationEntiy = new PatientRegistrationEntity()
+            {
+                MESSAGE_HEADER = GetMessageHeader("ADT^A04"),
+                PATIENT_IDENTIFICATION = ,
+                NEXT_OF_KIN = ,
+                OBSERVATION_RESULT = 
+            };
+            return patientReegistrationEntiy;
         }
 
         public void PatientTransferIn()
@@ -38,7 +47,10 @@ namespace IQCare.Web.MessageProcessing.JsonEntityMapper
 
         public void DrugPrescriptionRaised()
         {
-            throw new System.NotImplementedException();
+           var identifiersDto=new DTOIdentifier()
+           {
+               IdentifierType = 
+           };
         }
 
         public void DrugOrderCancel()
@@ -89,6 +101,21 @@ namespace IQCare.Web.MessageProcessing.JsonEntityMapper
         public void ViralLoadResults()
         {
             throw new System.NotImplementedException();
+        }
+
+        private MESSAGEHEADER GetMessageHeader(string messageType)
+        {
+            return new MESSAGEHEADER()
+            {
+                MESSAGE_TYPE = messageType,
+                MESSAGE_DATETIME = DateTime.Now,
+                PROCESSING_ID = "",
+                RECEIVING_APPLICATION = "",
+                RECEIVING_FACILITY = "",
+                SECURITY = "",
+                SENDING_APPLICATION = "IQCARE",
+                SENDING_FACILITY = ""
+            };
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using IQCare.DTO;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using IQCare.Web.MessageProcessing.JsonMappingEntities;
 
@@ -38,6 +39,17 @@ namespace IQCare.Web.MessageProcessing.DtoMapping
                 //NationalId = ,
                 DobPrecision = false
             };
+            var identifiers = new List<DTOIdentifier>();
+            foreach (var id in entity.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID)
+            {
+               var identifier = new DTOIdentifier()
+               {
+                   AssigningAuthority = id.ASSIGNING_AUTHORITY,
+                   IdentifierType = id.IDENTIFIER_TYPE,
+                   IdentifierValue = id.ID
+               };
+                identifiers.Add(identifier);
+            }
             var registration = new Registration()
             {
                 Patient = patient,
@@ -51,6 +63,9 @@ namespace IQCare.Web.MessageProcessing.DtoMapping
                 DeathIndicator = entity.PATIENT_IDENTIFICATION.DEATH_INDICATOR,
                 TreatmentSupporter = treatmentSupporter,
                 TSRelationshipType =  ts.RELATIONSHIP,
+                InternalPatientIdentifiers = identifiers,
+                DateOfEnrollment = DateTime.Now,
+                
             };
             return registration;
         }
@@ -130,9 +145,22 @@ namespace IQCare.Web.MessageProcessing.DtoMapping
             throw new NotImplementedException();
         }
 
-        public void ViralLoadResults()
+        public ViralLoadDto ViralLoadResults(ViralLoadResultEntity entity)
         {
-            throw new NotImplementedException();
+            var resultsDto =new ViralLoadDto()
+            {
+                Id = entity.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID.Where(d=>d.IDENTIFIER_TYPE=="CCC_NUMBER").Select(x=>x.ID).ToString(),
+                IdentifierType = "CCC_NUMBER",
+                AssigningAuthourity = "CCC",
+                DateSampleCollected = entity.VIRAL_LOAD_RESULT[0].DATE_SAMPLE_COLLECTED,
+                DateSampleTested = entity.VIRAL_LOAD_RESULT[0].DATE_SAMPLE_TESTED,
+                Regimen = entity.VIRAL_LOAD_RESULT[0].REGIMEN,
+                VlResult = entity.VIRAL_LOAD_RESULT[0].VL_RESULT,
+                LabTestedIn = entity.VIRAL_LOAD_RESULT[0].LAB_TESTED_IN,
+                Justification = entity.VIRAL_LOAD_RESULT[0].JUSTIFICATION
+            };
+
+            return resultsDto;
         }
     }
 }
