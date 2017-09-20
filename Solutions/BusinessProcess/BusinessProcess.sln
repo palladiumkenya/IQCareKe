@@ -30,6 +30,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessProcess.Administrat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessProcess.PatientCore", "..\..\BusinessProcess\BusinessProcess.PatientCore\BusinessProcess.PatientCore.csproj", "{6D1D2CE5-DBE2-44EC-92B0-5B2BFA703ACC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessProcess.Interop", "..\..\BusinessProcess\BusinessProcess.Interop\BusinessProcess.Interop.csproj", "{8ECD34A2-238D-41B7-B90D-99CCBC8C3A75}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -84,6 +86,10 @@ Global
 		{6D1D2CE5-DBE2-44EC-92B0-5B2BFA703ACC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D1D2CE5-DBE2-44EC-92B0-5B2BFA703ACC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D1D2CE5-DBE2-44EC-92B0-5B2BFA703ACC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8ECD34A2-238D-41B7-B90D-99CCBC8C3A75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8ECD34A2-238D-41B7-B90D-99CCBC8C3A75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8ECD34A2-238D-41B7-B90D-99CCBC8C3A75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8ECD34A2-238D-41B7-B90D-99CCBC8C3A75}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
