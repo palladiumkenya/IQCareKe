@@ -10,7 +10,7 @@ namespace IQCare.Web.ApiLogic.Infrastructure.UiLogic
 
         public int AddApiInbox(ApiInbox apiInbox)
         {
-           ApiInbox inbox=new ApiInbox()
+           ApiInbox inbox = new ApiInbox()
            {
                DateReceived = apiInbox.DateReceived,
                Message = apiInbox.Message

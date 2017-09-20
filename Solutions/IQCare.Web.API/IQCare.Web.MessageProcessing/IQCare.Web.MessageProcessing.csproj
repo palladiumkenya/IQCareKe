@@ -30,8 +30,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="IQCare.CCC.UILogic, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\IQCare.CCC.UILogic.dll</HintPath>
+    </Reference>
     <Reference Include="IQCare.DTO">
       <HintPath>..\..\..\References\IQCare.DTO.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -43,9 +50,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Services\IOutgoingMessageService.cs" />
-    <Compile Include="Services\OutgoingMessageService.cs" />
+    <Compile Include="DtoMapping\DtoMapper.cs" />
+    <Compile Include="DtoMapping\IDtoMapper.cs" />
+    <Compile Include="JsonEntityMapper\IJsonEntityMapper.cs" />
+    <Compile Include="JsonEntityMapper\JsonEntityMapper.cs" />
+    <Compile Include="JsonMappingEntities\PatientRegistrationEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

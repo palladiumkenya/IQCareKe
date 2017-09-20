@@ -12,8 +12,8 @@ namespace IQCare.Web.ApiLogic.Model
         public DateTime DateReceived { get; set; }
         public int SenderId { get; set; }
         public string Message { get; set; }
-        public int Processed { get; set; }
-        public DateTime DateProcessed { get; set; }
+        public bool Processed { get; set; }
+        public DateTime ? DateProcessed { get; set; }
         public string LogMessage { get; set; }
 
     }
