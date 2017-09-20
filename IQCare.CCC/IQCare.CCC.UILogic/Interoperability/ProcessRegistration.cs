@@ -21,7 +21,7 @@ namespace IQCare.CCC.UILogic.Interoperability
         IUser LoginManager = (IUser)ObjectFactory.CreateInstance("BusinessProcess.Security.BUser, BusinessProcess.Security");
 
         public string msg { get; set; }
-        public Registration Retrive(int entityId)
+        public Registration Get(int entityId)
         {
             throw new NotImplementedException();
         }

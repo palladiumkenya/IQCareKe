@@ -91,6 +91,8 @@
     <Compile Include="Infrastructure\UiLogic\ApiOutboxmanager.cs" />
     <Compile Include="MessageHandler\IIncomingMessageService.cs" />
     <Compile Include="MessageHandler\IncomingMessageService.cs" />
+    <Compile Include="MessageHandler\IOutgoingMessageService.cs" />
+    <Compile Include="MessageHandler\OutgoingMessageService.cs" />
     <Compile Include="Model\ApiInbox.cs" />
     <Compile Include="Model\APIInteropSystem.cs" />
     <Compile Include="Model\ApiOutbox.cs" />

@@ -7,6 +7,7 @@ namespace IQCare.Web.MessageProcessing.DtoMapping
 {
     public class DtoMapper : IDtoMapper
     {
+        //todo handle possible null reference exceptions when fetching data from lists
         public Registration PatientRegistrationMapping(PatientRegistrationEntity entity)
         {
             var patient = new DTOPerson()

@@ -3,7 +3,7 @@
     public interface IInteropDTO <T> where T : class
     {
         string Save(T t);
-        T Retrive(int entityId);
+        T Get(int entityId);
 
         string Update(T t);
     }

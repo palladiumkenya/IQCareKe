@@ -1,6 +1,5 @@
 using IQCare.Web.ApiLogic.Infrastructure.Context;
 using IQCare.Web.ApiLogic.MessageHandler;
-using IQCare.Web.MessageProcessing.Services;
 using StructureMap;
 //using IQ.ApiLogic.Infrastructure.Context;
 

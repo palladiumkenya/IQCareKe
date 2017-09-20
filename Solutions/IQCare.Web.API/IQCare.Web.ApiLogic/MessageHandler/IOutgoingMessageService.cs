@@ -1,5 +1,6 @@
 ﻿using IQCare.DTO;
-namespace IQCare.Web.MessageProcessing.Services
+
+namespace IQCare.Web.ApiLogic.MessageHandler
 {
     public interface IOutgoingMessageService
     {
