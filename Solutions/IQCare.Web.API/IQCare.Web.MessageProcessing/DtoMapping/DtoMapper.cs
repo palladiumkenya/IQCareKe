@@ -130,9 +130,22 @@ namespace IQCare.Web.MessageProcessing.DtoMapping
             throw new NotImplementedException();
         }
 
-        public void ViralLoadResults()
+        public ViralLoadDto ViralLoadResults(ViralLoadResultEntity entity)
         {
-            throw new NotImplementedException();
+            var resultsDto =new ViralLoadDto()
+            {
+                Id = entity.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID.Where(d=>d.IDENTIFIER_TYPE=="CCC_NUMBER").Select(x=>x.ID).ToString(),
+                IdentifierType = "CCC_NUMBER",
+                AssigningAuthourity = "CCC",
+                DateSampleCollected = entity.VIRAL_LOAD_RESULT[0].DATE_SAMPLE_COLLECTED,
+                DateSampleTested = entity.VIRAL_LOAD_RESULT[0].DATE_SAMPLE_TESTED,
+                Regimen = entity.VIRAL_LOAD_RESULT[0].REGIMEN,
+                VlResult = entity.VIRAL_LOAD_RESULT[0].VL_RESULT,
+                LabTestedIn = entity.VIRAL_LOAD_RESULT[0].LAB_TESTED_IN,
+                Justification = entity.VIRAL_LOAD_RESULT[0].JUSTIFICATION
+            };
+
+            return resultsDto;
         }
     }
 }

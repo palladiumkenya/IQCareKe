@@ -113,6 +113,8 @@ namespace IQCare.Web.ApiLogic.MessageHandler
         private void HandleNewViralLoadResults(ApiInbox incomingMessage)
         {
             _apiInboxmanager.AddApiInbox(incomingMessage);
+
+
         }
     }
 }

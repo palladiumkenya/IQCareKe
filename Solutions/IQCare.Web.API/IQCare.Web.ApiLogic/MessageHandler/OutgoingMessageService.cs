@@ -1,5 +1,8 @@
-﻿using IQCare.CCC.UILogic.Interoperability;
+﻿using System;
+using IQCare.CCC.UILogic.Interoperability;
 using IQCare.DTO;
+using IQCare.Web.ApiLogic.Infrastructure.Interface;
+using IQCare.Web.ApiLogic.Model;
 using IQCare.Web.MessageProcessing.JsonEntityMapper;
 using Newtonsoft.Json;
 
@@ -8,20 +11,21 @@ namespace IQCare.Web.ApiLogic.MessageHandler
     public class OutgoingMessageService : IOutgoingMessageService
     {
         private readonly IJsonEntityMapper _jsonEntityMapper;
+        private readonly IApiOutboxManager _apiOutboxManager;
 
         event InteropEventHandler handler;
         protected virtual void OnInterop(IlMessageEventArgs e)
         {
             Handle(e);
-
-
+            
         }
 
        
 
-        public OutgoingMessageService(IJsonEntityMapper jsonEntityMapper)
+        public OutgoingMessageService(IJsonEntityMapper jsonEntityMapper, IApiOutboxManager apiOutboxManager)
         {
             _jsonEntityMapper = jsonEntityMapper;
+            _apiOutboxManager = apiOutboxManager;
         }
 
         public void Handle(IlMessageEventArgs messageEvent)
@@ -100,12 +104,28 @@ namespace IQCare.Web.ApiLogic.MessageHandler
 
         private void HandleNewClientRegistration(IlMessageEventArgs messageEvent)
         {
-            var processRegistration = new ProcessRegistration();
-            var registrationDto = processRegistration.Get(messageEvent.PatientId);
-            var registrationEntity = _jsonEntityMapper.PatientRegistration(registrationDto);
-            string registrationJson = JsonConvert.SerializeObject(registrationEntity);
-            //save/send
-           
+            try
+            {
+                var processRegistration = new ProcessRegistration();
+                var registrationDto = processRegistration.Get(messageEvent.PatientId);
+                var registrationEntity = _jsonEntityMapper.PatientRegistration(registrationDto);
+                string registrationJson = JsonConvert.SerializeObject(registrationEntity);
+                var apiOutbox = new ApiOutbox()
+                {
+                    DateRead = DateTime.Now,
+                    Message = registrationJson,
+
+                };
+                _apiOutboxManager.AddApiOutbox(apiOutbox);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            
+            //send
+
         }
 
         private void HandlePatientTransferIn(IlMessageEventArgs messageEvent)
