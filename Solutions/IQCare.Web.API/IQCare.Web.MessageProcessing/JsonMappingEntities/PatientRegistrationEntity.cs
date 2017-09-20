@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IQCare.Web.MessageProcessing.JsonMappingEntities
 {
+    public class NOKNAME
+    {
+        public string FIRST_NAME { get; set; }
+        public string MIDDLE_NAME { get; set; }
+        public string LAST_NAME { get; set; }
+    }
+
     public class NEXTOFKIN
     {
         public NOKNAME NOK_NAME { get; set; }
