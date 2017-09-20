@@ -3,6 +3,10 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using Newtonsoft.Json;
 
 namespace DataAccess.Interop
 {  
@@ -17,6 +21,22 @@ namespace DataAccess.Interop
         {
         }
 
+        static void ApiSendReceivedData(string content)
+        {
+            // New code:
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("http://localhost:23039/api/interop/v1/");
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            var jsoncontent = new StringContent(content, Encoding.ASCII, "application/json");
+
+            var result = client.PostAsync("api/interop/v1/interop/post", jsoncontent).Result;
+
+            // HttpResponseMessage response = await client.PostAsync("api/products/save", jsonContent);
+
+
+            Console.ReadLine();
+        }
         public static void StartListening()
         {
             // Data buffer for incoming data.
@@ -104,8 +124,9 @@ namespace DataAccess.Interop
                     // client. Display it on the console.
                     Console.WriteLine("Read {0} bytes from socket. \n Data : {1}",
                         content.Length, content);
+                     ApiSendReceivedData(content);
                     // Echo the data back to the client.
-                    Send(handler, content);
+                    //Send(handler, content);
                 }
                 else
                 {
