@@ -118,6 +118,8 @@
     <Compile Include="Enrollment\BPatientEnrollment.cs" />
     <Compile Include="Enrollment\BPatientReEnrollment.cs" />
     <Compile Include="Enrollment\BServiceAreaIdentifiers.cs" />
+    <Compile Include="Interoperability\BDrugPrescriptionManager.cs" />
+    <Compile Include="Interoperability\BPatientMessage.cs" />
     <Compile Include="Lookup\BFacilityListManager.cs" />
     <Compile Include="Lookup\BPatientBaselineLookupManager.cs" />
     <Compile Include="Lookup\BPatientServiceEnrollmentLookupManager.cs" />

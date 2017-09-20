@@ -114,6 +114,8 @@
     <Compile Include="Enrollment\PatientReEnrollmentManager.cs" />
     <Compile Include="Enrollment\ServiceAreaIdentifiersManager.cs" />
     <Compile Include="FacilityListManager.cs" />
+    <Compile Include="Interoperability\DrugPrescriptionMessage.cs" />
+    <Compile Include="Interoperability\PatientMessageManager.cs" />
     <Compile Include="Interoperability\PatientRegistrationValidation.cs" />
     <Compile Include="Interoperability\ProcessPatient.cs" />
     <Compile Include="Interoperability\ProcessRegistration.cs" />

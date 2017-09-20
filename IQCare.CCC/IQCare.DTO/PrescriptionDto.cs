@@ -4,19 +4,16 @@ namespace IQCare.DTO
 {
     public class PrescriptionDto
     {
-        public string Id { get; set; }
-        public string IdentifierType { get; set; }
-        public string AssigningAuthority { get; set; }
-        public string FirstName { get; set; }
-        public string MiddleName { get; set; }
-        public string LastName { get; set; }
+        public DTOIdentifier InternalPatientIdentifier { get; set; }
+        public PatientNameDto Patientname { get; set; }
+        public CommonOrderDetails CommonOrderDetails { get; set; }
+        public PharmacyEncodedOrder PharmacyEncodedOrder  { get; set; }
     }
 
    public class CommonOrderDetails
     {
        public string OrderControl { get; set; }
        public PlacerOrderNumber PlacerOrderNumber { get; set; }
-       public FillerOrderNumber FillerOrderNumber { get; set; }
        public string OrderStatus { get; set; }
        public OrderingPhysician OrderingPhysician { get; set; }
        public DateTime TransactionDatetime { get; set; }
@@ -31,12 +28,6 @@ namespace IQCare.DTO
     }
 
     public abstract class PlacerOrderNumber
-    {
-        public string Number { get; set; }
-        public string Entity { get; set; }
-    }
-
-    public abstract class FillerOrderNumber
     {
         public string Number { get; set; }
         public string Entity { get; set; }

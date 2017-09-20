@@ -110,6 +110,8 @@
     <Compile Include="Enrollment\PatientReEnrollment.cs" />
     <Compile Include="Enrollment\ServiceArea.cs" />
     <Compile Include="Enrollment\ServiceAreaIdentifiers.cs" />
+    <Compile Include="Interoperability\DrugPrescriptionMessage.cs" />
+    <Compile Include="Interoperability\PatientMessage.cs" />
     <Compile Include="Lookup\FacilityList.cs" />
     <Compile Include="Lookup\LookupFacility.cs" />
     <Compile Include="Lookup\LookupFacilityStatistics.cs" />
