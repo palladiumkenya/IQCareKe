@@ -11,7 +11,7 @@ namespace BusinessProcess.CCC.Interoperability
     {
         public PatientMessage GetPatientMessageByEntityId(int entityId)
         {
-            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
                 var patientMessages = unitOfWork.PatientMessageRepository.FindBy(x => x.PatientId == entityId).FirstOrDefault();
                 unitOfWork.Dispose();

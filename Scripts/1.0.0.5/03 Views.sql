@@ -162,7 +162,7 @@ SELECT        PDG.Id, PDG.PatientId, PDG.IdentifierValue, PDG.FIRST_NAME, PDG.MI
                          PTS.MIDDLE_NAME AS TMIDDLE_NAME, PTS.LAST_NAME AS TLAST_NAME, PTS.RELATIONSHIP AS TRELATIONSHIP, 
                          PTS.ADDRESS AS TADDRESS, PTS.PHONE_NUMBER AS TPHONE_NUMBER, PTS.SEX AS TSEX, 
                          PTS.DATE_OF_BIRTH AS TDATE_OF_BIRTH, PTS.CONTACT_ROLE AS TCONTACT_ROLE
-FROM           [dbo].[Api_PatientDemographicsView] PDG  INNER JOIN
+FROM           [dbo].[Api_PatientDemographicsView] PDG  LEFT Outer JOIN
                          [dbo].[Api_MaritalStatusView] MS ON PDG.Id = MS.PersonId LEFT OUTER JOIN
                          [dbo].[Api_TreatmentSupporterView] PTS ON PDG.Id = PTS.PersonId LEFT OUTER JOIN
                          [dbo].[Api_PatientContactsView] PCV ON PDG.Id = PCV.PersonId LEFT OUTER JOIN
