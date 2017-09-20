@@ -4,6 +4,7 @@ using Entities.CCC.Lookup;
 using System.Data.Common;
 using DataAccess.Base;
 using Entities.CCC.Appointment;
+using Entities.CCC.Encounter;
 
 namespace DataAccess.CCC.Context
 {
@@ -46,5 +47,7 @@ namespace DataAccess.CCC.Context
         public DbSet<PatientRegistrationLookup> PatientRegistrationLookups { get; set; }
         public DbSet<TestingSummaryStatistics> TestingSummaryStatistics { get; set; }
         public DbSet<PatientStabilitySummary> PatientStabilitySummaries { get; set; }
+
+       
     }
 }

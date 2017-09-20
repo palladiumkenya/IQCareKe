@@ -137,7 +137,7 @@ namespace IQCare.Web.MessageProcessing.DtoMapping
                 Id = entity.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID.Where(d=>d.IDENTIFIER_TYPE=="CCC_NUMBER").Select(x=>x.ID).ToString(),
                 IdentifierType = "CCC_NUMBER",
                 AssigningAuthourity = "CCC",
-                DatetDateSampleCollected = entity.VIRAL_LOAD_RESULT[0].DATE_SAMPLE_COLLECTED,
+                DateSampleCollected = entity.VIRAL_LOAD_RESULT[0].DATE_SAMPLE_COLLECTED,
                 DateSampleTested = entity.VIRAL_LOAD_RESULT[0].DATE_SAMPLE_TESTED,
                 Regimen = entity.VIRAL_LOAD_RESULT[0].REGIMEN,
                 VlResult = entity.VIRAL_LOAD_RESULT[0].VL_RESULT,
