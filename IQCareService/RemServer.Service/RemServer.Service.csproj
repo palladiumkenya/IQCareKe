@@ -66,6 +66,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\DataAccess.Entity.dll</HintPath>
     </Reference>
+    <Reference Include="DataAccess.Interop, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\DataAccess.Interop.dll</HintPath>
+    </Reference>
     <Reference Include="Interface.Administration, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\Interface.Administration.dll</HintPath>

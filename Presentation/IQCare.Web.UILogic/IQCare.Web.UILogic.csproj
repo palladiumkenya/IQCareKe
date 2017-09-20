@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>IQCare.Web.UILogic</RootNamespace>
     <AssemblyName>IQCare.Web.UILogic</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <TrunkDir>..\..\</TrunkDir>
     <RedDir Condition=" '$(RedDir)' == '' ">$(TrunkDir)package\service\</RedDir>
     <WebDir Condition=" '$(WebDir)' == '' ">$(TrunkDir)package\web\</WebDir>
@@ -55,6 +55,10 @@
     </Reference>
     <Reference Include="Interface.FormBuilder">
       <HintPath>..\..\References\Interface.FormBuilder.dll</HintPath>
+    </Reference>
+    <Reference Include="Interface.Interop, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Interface.Interop.dll</HintPath>
     </Reference>
     <Reference Include="Interface.PatientCore, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Interface.Security, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />

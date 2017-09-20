@@ -25,7 +25,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interface.Administration", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interface.PatientCore", "..\..\Interfaces\Interface.PatientCore\Interface.PatientCore.csproj", "{A56DF612-ACBC-4399-B136-7783BF59E02C}"
 EndProject
-Global	
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interface.Interop", "..\..\Interfaces\Interface.Interop\Interface.Interop.csproj", "{15E52260-88EC-4F15-A26B-E0A9508C57A5}"
+EndProject
+Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -75,6 +77,10 @@ Global
 		{A56DF612-ACBC-4399-B136-7783BF59E02C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A56DF612-ACBC-4399-B136-7783BF59E02C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A56DF612-ACBC-4399-B136-7783BF59E02C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15E52260-88EC-4F15-A26B-E0A9508C57A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15E52260-88EC-4F15-A26B-E0A9508C57A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15E52260-88EC-4F15-A26B-E0A9508C57A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15E52260-88EC-4F15-A26B-E0A9508C57A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>IQCare.CCC.UILogic</RootNamespace>
     <AssemblyName>IQCare.CCC.UILogic</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -167,6 +167,10 @@
     <ProjectReference Include="..\Interface.CCC\Interface.CCC.csproj">
       <Project>{174b280e-08d7-4fe7-b080-3a017f0944cd}</Project>
       <Name>Interface.CCC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IQCare.Events\IQCare.Events.csproj">
+      <Project>{43E1A1CC-ADC8-4843-ACB0-16E9C90BB980}</Project>
+      <Name>IQCare.Events</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
