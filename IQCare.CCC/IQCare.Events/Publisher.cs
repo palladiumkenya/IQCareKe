@@ -26,7 +26,8 @@ namespace IQCare.Events
                 string absolutePath = HttpContext.Current.Request.Url.AbsolutePath;
                 string uri = absoluteUrl.Replace(absolutePath, "/");
 
-                httpClient.BaseAddress = new Uri(uri);
+                // httpClient.BaseAddress = new Uri(uri);
+                httpClient.BaseAddress = new Uri("http://localhost:18315/");
                 httpClient.DefaultRequestHeaders.Accept.Clear();
                 httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
