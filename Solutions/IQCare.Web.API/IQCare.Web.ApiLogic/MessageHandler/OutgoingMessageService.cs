@@ -1,19 +1,21 @@
-﻿using Application.Presentation;
+﻿using System;
+using Application.Presentation;
 using DataAccess.Base;
 using Interface.Interop;
 using IQCare.CCC.UILogic.Interoperability;
-
 using IQCare.Events;
+using IQCare.Web.ApiLogic.Infrastructure.Interface;
+using IQCare.Web.ApiLogic.Infrastructure.UiLogic;
 using IQCare.Web.ApiLogic.Model;
 using IQCare.Web.MessageProcessing.JsonEntityMapper;
 using Newtonsoft.Json;
-using System;
 
 namespace IQCare.Web.ApiLogic.MessageHandler
 {
     public class OutgoingMessageService : ProcessBase, IOutgoingMessageService, ISendData
     {
         private readonly IJsonEntityMapper _jsonEntityMapper;
+        private readonly IApiOutboxManager _apiOutboxManager;
 
         //public event InteropEventHandler OnDataExchage;
 
@@ -60,13 +62,15 @@ namespace IQCare.Web.ApiLogic.MessageHandler
         //}
         public OutgoingMessageService()
         {
+            _apiOutboxManager = new ApiOutboxmanager();
             _jsonEntityMapper = new JsonEntityMapper();
         }
 
 
-        public OutgoingMessageService(IJsonEntityMapper jsonEntityMapper)
+        public OutgoingMessageService(IJsonEntityMapper jsonEntityMapper, IApiOutboxManager apiOutboxManager)
         {
             _jsonEntityMapper = jsonEntityMapper;
+            _apiOutboxManager = apiOutboxManager;
         }
 
         public  void Handle(MessageEventArgs messageEvent)
@@ -188,26 +192,26 @@ namespace IQCare.Web.ApiLogic.MessageHandler
 
         private void HandleDrugPrescriptionRaised(MessageEventArgs messageEvent)
         {
-            //try
-            //{
-            //    var processDrugPrescription = new DrugPrescriptionMessage();
+            try
+            {
+                var processDrugPrescription = new DrugPrescriptionMessage();
 
-            //    var prescriptionDto =processDrugPrescription.GetPrescriptionMessage(messageEvent.EntityId, messageEvent.PatientId);
-            //    var prescriptionEntity = _jsonEntityMapper.DrugPrescriptionRaised(prescriptionDto);
-            //    string prescriptionJson = JsonConvert.SerializeObject(prescriptionEntity);
-            //    var apiOutbox = new ApiOutbox()
-            //    {
-            //        DateRead = DateTime.Now,
-            //        Message = prescriptionJson,
+                var prescriptionDto =processDrugPrescription.GetPrescriptionMessage(messageEvent.EntityId, messageEvent.PatientId);
+                //var prescriptionEntity = _jsonEntityMapper.DrugPrescriptionRaised(prescriptionDto);
+                //string prescriptionJson = JsonConvert.SerializeObject(prescriptionEntity);
+                var apiOutbox = new ApiOutbox()
+                {
+                    DateRead = DateTime.Now,
+                    //Message = prescriptionJson,
 
-            //    };
-            //    _apiOutboxManager.AddApiOutbox(apiOutbox);
-            //}
-            //catch (Exception e)
-            //{
-            //    Console.WriteLine(e);
-            //    throw;
-            //}
+                };
+                _apiOutboxManager.AddApiOutbox(apiOutbox);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
         private void HandleDrugOrdercancel(MessageEventArgs messageEvent)

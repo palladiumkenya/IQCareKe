@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Entities.CCC.Interoperability
 {
     public class DrugPrescriptionMessage
     {
+        [Key]
         public int ptnpk { get; set; }
         public string Id { get; set; }
         public string SENDING_FACILITY { get; set; }
@@ -24,18 +26,18 @@ namespace Entities.CCC.Interoperability
        public string ORDER_STATUS { get; set; }
        public string ORDERING_PHYSICIAN { get; set; }
        public string NOTES { get; set; }
-       public List<PrescribedDrug>  PrescribedDrugs { get; set; }
+       //public List<PrescribedDrug>  PrescribedDrugs { get; set; }
 
-        public class PrescribedDrug
-        {
-            public string DRUG_NAME { get; set; }
-            public string CODING_SYSTEM { get; set; }
-            public string STRENGTH { get; set; }
-            public string DOSAGE { get; set; }
-            public string FREQUENCY { get; set; }
-            public int DURATION { get; set; }
-            public string QUANTITY_PRESCRIBED { get; set; }
-            public string PRESCRIPTION_NOTES { get; set; }
-        }
+       // public class PrescribedDrug
+       // {
+       //     public string DRUG_NAME { get; set; }
+       //     public string CODING_SYSTEM { get; set; }
+       //     public string STRENGTH { get; set; }
+       //     public string DOSAGE { get; set; }
+       //     public string FREQUENCY { get; set; }
+       //     public int DURATION { get; set; }
+       //     public string QUANTITY_PRESCRIBED { get; set; }
+       //     public string PRESCRIPTION_NOTES { get; set; }
+       // }
     }
 }
