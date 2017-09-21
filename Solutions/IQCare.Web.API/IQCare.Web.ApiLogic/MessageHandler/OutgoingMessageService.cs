@@ -56,7 +56,12 @@ namespace IQCare.Web.ApiLogic.MessageHandler
         //{
         //    throw new System.NotImplementedException();
         //}
-        public OutgoingMessageService() { }
+        public OutgoingMessageService()
+        {
+            _jsonEntityMapper = new JsonEntityMapper();
+        }
+
+
         public OutgoingMessageService(IJsonEntityMapper jsonEntityMapper)
         {
             _jsonEntityMapper = jsonEntityMapper;

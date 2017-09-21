@@ -2,6 +2,7 @@
 using IQCare.CCC.UILogic.Interoperability;
 using IQCare.DTO;
 using IQCare.Web.ApiLogic.Infrastructure.Interface;
+using IQCare.Web.ApiLogic.Infrastructure.UiLogic;
 using IQCare.Web.ApiLogic.Model;
 using IQCare.Web.MessageProcessing.DtoMapping;
 using IQCare.Web.MessageProcessing.JsonMappingEntities;
@@ -13,6 +14,12 @@ namespace IQCare.Web.ApiLogic.MessageHandler
     {
         private readonly IApiInboxmanager _apiInboxmanager;
         private readonly IDtoMapper _dtoMapper;
+
+        public IncomingMessageService()
+        {
+            _apiInboxmanager = new ApiInboxManager();
+            _dtoMapper = new DtoMapper();
+        }
 
         public IncomingMessageService(IApiInboxmanager apiInboxmanager, IDtoMapper dtoMapper)
         {
