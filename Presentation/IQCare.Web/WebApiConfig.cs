@@ -10,10 +10,19 @@ namespace IQCare.Web
 
             // Web API routes
             config.MapHttpAttributeRoutes();
-
+           // config.Routes.MapHttpRoute(
+           //    name: "DefaultApi",
+           //    routeTemplate: "api/{controller}/{id}",
+           //    defaults: new { id = RouteParameter.Optional }
+           //);
+            // config.Routes.MapHttpRoute(
+            //     name: "HTSAPI",
+            //     routeTemplate: "myhts/api/{controller}/{id}",
+            //     defaults: new { id = RouteParameter.Optional }
+            // );
             config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
+                name: "InteroptApi",
+                routeTemplate: "api/interop/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
             config.Routes.MapHttpRoute(

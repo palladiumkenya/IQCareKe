@@ -1,6 +1,7 @@
 ﻿using IQCare.DTO;
 using IQCare.Web.MessageProcessing.JsonMappingEntities;
 
+
 namespace IQCare.Web.MessageProcessing.JsonEntityMapper
 {
     public interface IJsonEntityMapper
@@ -17,7 +18,7 @@ namespace IQCare.Web.MessageProcessing.JsonEntityMapper
 
         void StopDrugs();
 
-        void DrugPrescriptionRaised();
+        DrugPrescriptionEntity DrugPrescriptionRaised(PrescriptionDto prescription);
 
         void DrugOrderCancel();
 
