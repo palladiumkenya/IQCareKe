@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Web.Script.Serialization;
+using System;
 using System.Collections.Generic;
 using Application.Presentation;
 using DataAccess.Base;
@@ -7,15 +9,19 @@ using IQCare.CCC.UILogic.Interoperability;
 using IQCare.DTO;
 using IQCare.Events;
 using IQCare.Web.ApiLogic.Infrastructure.Interface;
+using IQCare.Web.ApiLogic.Infrastructure.UiLogic;
+using IQCare.Web.ApiLogic.Model;
+using IQCare.Web.ApiLogic.Infrastructure.Interface;
 using IQCare.Web.ApiLogic.Model;
 using IQCare.Web.MessageProcessing.JsonEntityMapper;
-using Newtonsoft.Json;
+
 
 namespace IQCare.Web.ApiLogic.MessageHandler
 {
     public class OutgoingMessageService : ProcessBase, IOutgoingMessageService, ISendData
     {
         private readonly IJsonEntityMapper _jsonEntityMapper;
+        private readonly IApiOutboxManager _apiOutboxManager;
         IApiOutboxManager _apiOutboxManager = (IApiOutboxManager)ObjectFactory.CreateInstance("IQCare.Web.API.BusinessProcess.BPApiOutbox, IQCare.Web.API");
 
 
@@ -64,13 +70,15 @@ namespace IQCare.Web.ApiLogic.MessageHandler
         //}
         public OutgoingMessageService()
         {
+            _apiOutboxManager = new ApiOutboxmanager();
             _jsonEntityMapper = new JsonEntityMapper();
         }
 
 
-        public OutgoingMessageService(IJsonEntityMapper jsonEntityMapper)
+        public OutgoingMessageService(IJsonEntityMapper jsonEntityMapper, IApiOutboxManager apiOutboxManager)
         {
             _jsonEntityMapper = jsonEntityMapper;
+            _apiOutboxManager = apiOutboxManager;
         }
 
         public  void Handle(MessageEventArgs messageEvent)
@@ -152,7 +160,7 @@ namespace IQCare.Web.ApiLogic.MessageHandler
             var processRegistration = new ProcessRegistration();
             var registrationDto = processRegistration.Get(messageEvent.PatientId);
             var registrationEntity = _jsonEntityMapper.PatientRegistration(registrationDto);
-            string registrationJson = JsonConvert.SerializeObject(registrationEntity);
+            string registrationJson = new JavaScriptSerializer().Serialize(registrationEntity);
             //save/send
             var apiOutbox = new ApiOutbox()
             {

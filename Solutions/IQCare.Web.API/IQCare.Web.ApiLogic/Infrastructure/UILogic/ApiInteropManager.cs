@@ -5,7 +5,7 @@ namespace IQCare.Web.ApiLogic.Infrastructure.UiLogic
 {
     public class ApiInteropManager : IApiInteropSystemsManager
     {
-            private IApiInteropSystemsManager _apiInteropSystemsManager  = (IApiInteropSystemsManager)Application.Presentation.ObjectFactory.CreateInstance("IQ.ApiLogic.Infrastructure.BusinessProcess.BPApiInteropSystems, IQApiLogic");
+            private IApiInteropSystemsManager _apiInteropSystemsManager  = (IApiInteropSystemsManager)Application.Presentation.ObjectFactory.CreateInstance("IQCare.Web.ApiLogic.Infrastructure.BusinessProcess.BPApiInteropSystems, IQCare.Web.ApiLogic");
 
         public int AddApiInteroperabilitySystems(ApiInteropSystem apiInteropSystem)
         {

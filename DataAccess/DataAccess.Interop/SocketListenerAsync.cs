@@ -3,10 +3,8 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using Newtonsoft.Json;
 
 namespace DataAccess.Interop
 {  
@@ -24,14 +22,15 @@ namespace DataAccess.Interop
         static void ApiSendReceivedData(string content)
         {
             // New code:
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:23039/api/interop/v1/");
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            var jsoncontent = new StringContent(content, Encoding.ASCII, "application/json");
+           using( HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:1155/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                var jsoncontent = new StringContent(content, Encoding.ASCII, "application/json");
 
-            var result = client.PostAsync("api/interop/v1/interop/receive", jsoncontent).Result;
-
+                var result = client.PostAsync("api/interop/receive", jsoncontent).Result;
+            }
             // HttpResponseMessage response = await client.PostAsync("api/products/save", jsonContent);
 
 
@@ -45,7 +44,7 @@ namespace DataAccess.Interop
             // Establish the local endpoint for the socket.
             // The DNS name of the computer
             // running the listener is "host.contoso.com".
-            IPAddress ipAddress = IPAddress.Parse("127.0.0.1");
+            IPAddress ipAddress = IPAddress.Parse("192.168.43.189");
             IPEndPoint localEndPoint = new IPEndPoint(ipAddress, 9998);
 
             // Create a TCP/IP socket.
@@ -118,7 +117,7 @@ namespace DataAccess.Interop
                 // more data.
                 content = state.sb.ToString();
                
-                if (content.IndexOf("~") > -1)
+                if (content.IndexOf("~~|") > -1)
                 {
                     // All the data has been read from the 
                     // client. Display it on the console.

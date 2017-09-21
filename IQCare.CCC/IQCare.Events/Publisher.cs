@@ -26,13 +26,14 @@ namespace IQCare.Events
                 string absolutePath = HttpContext.Current.Request.Url.AbsolutePath;
                 string uri = absoluteUrl.Replace(absolutePath, "/");
 
-                httpClient.BaseAddress = new Uri(uri);
+                // httpClient.BaseAddress = new Uri(uri);
+                httpClient.BaseAddress = new Uri("http://localhost:1155/");
                 httpClient.DefaultRequestHeaders.Accept.Clear();
                 httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 string content = JsonConvert.SerializeObject(e);
 
-                var jsoncontent = new StringContent(content, Encoding.ASCII, "application/json");
+                var jsoncontent = new StringContent(content, Encoding.UTF8, "application/json");
                 // HTTP POST
                 HttpResponseMessage response = await httpClient.PostAsync("api/interop/dispatch/", jsoncontent);
                 if (response.IsSuccessStatusCode)

@@ -40,6 +40,9 @@
     <Reference Include="IQCare.DTO">
       <HintPath>..\..\..\References\IQCare.DTO.dll</HintPath>
     </Reference>
+    <Reference Include="IQCare.Events">
+      <HintPath>..\..\..\References\IQCare.Events.dll</HintPath>
+    </Reference>
     <Reference Include="IQCare.Web.ApiLogic">
       <HintPath>..\..\..\References\IQCare.Web.ApiLogic.dll</HintPath>
     </Reference>
@@ -47,6 +50,9 @@
       <HintPath>..\..\..\References\IQCare.Web.MessageProcessing.dll</HintPath>
     </Reference>
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.Web.Extensions.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>

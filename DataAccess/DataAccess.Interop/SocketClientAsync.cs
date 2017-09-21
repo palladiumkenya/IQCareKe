@@ -49,7 +49,7 @@ namespace DataAccess.Interop
 
                 // Send test data to the remote device.
 
-                Send(remoteClient, data);
+                Send(remoteClient, "|~~"+data+"~~|");
                 sendDone.WaitOne();
 
                 // Receive the response from the remote device.

@@ -12,6 +12,11 @@ namespace IQCare.Web.MessageProcessing.JsonMappingEntities
 
     public class NEXTOFKIN
     {
+        public NEXTOFKIN()
+        {
+            NOK_NAME = new NOKNAME();
+        }
+
         public NOKNAME NOK_NAME { get; set; }
         public string RELATIONSHIP { get; set; }
         public string ADDRESS { get; set; }
@@ -36,6 +41,14 @@ namespace IQCare.Web.MessageProcessing.JsonMappingEntities
 
     public class PatientRegistrationEntity
     {
+        public PatientRegistrationEntity()
+        {
+            MESSAGE_HEADER = new MESSAGEHEADER();
+            PATIENT_IDENTIFICATION = new PATIENTIDENTIFICATION();
+            NEXT_OF_KIN = new List<NEXTOFKIN>();
+            OBSERVATION_RESULT = new List<OBSERVATIONRESULT>();
+        }
+
         public MESSAGEHEADER MESSAGE_HEADER { get; set; }
         public PATIENTIDENTIFICATION PATIENT_IDENTIFICATION { get; set; }
         public List<NEXTOFKIN> NEXT_OF_KIN { get; set; }
