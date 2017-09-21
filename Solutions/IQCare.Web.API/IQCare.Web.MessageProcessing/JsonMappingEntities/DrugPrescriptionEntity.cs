@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IQCare.Web.MessageProcessing.JsonMappingEntities
 {
@@ -43,7 +40,7 @@ namespace IQCare.Web.MessageProcessing.JsonMappingEntities
         public string PRESCRIPTION_NOTES { get; set; }
     }
 
-    public class RootObject
+    public class DrugPrescriptionEntity
     {
         public MESSAGEHEADER MESSAGE_HEADER { get; set; }
         public PATIENTIDENTIFICATION PATIENT_IDENTIFICATION { get; set; }
