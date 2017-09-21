@@ -97,19 +97,9 @@ namespace IQCare.CCC.UILogic.Enrollment
                     MessageType = MessageType.NewClientRegistration,
                     EventOccurred = "Patient Enrolled Identifier = "
                 };
-                //IlEvent?.Invoke(new MessageEventArgs()
-                //{
-                //    PatientId = patientIdentifier.PatientId,
-                //    EntityId = patientIdentifier.PatientEnrollmentId,
-                //    MessageType = MessageType.NewClientRegistration,
-                //    EventOccurred = "Patient Enrolled Identifier = "
-                //});
 
-            
-               
-            int x=  _mgr.UpdatePatientIdentifier(patientIdentifier);
-                Publisher p = new Publisher();
-                p.RaiseEvent(this, args);
+                int x=  _mgr.UpdatePatientIdentifier(patientIdentifier);
+                Publisher.RaiseEventAsync(this, args).Wait();
                 return x;
             }
             catch (Exception e)
