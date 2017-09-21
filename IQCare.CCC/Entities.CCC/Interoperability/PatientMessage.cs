@@ -16,7 +16,7 @@ namespace Entities.CCC.Interoperability
         public string MIDDLE_NAME { get; set; }
         public string LAST_NAME { get; set; }
         public string NATIONAL_ID { get; set; }
-        public DateTime DATE_OF_BIRTH { get; set; }
+        public string DATE_OF_BIRTH { get; set; }
         public string SEX { get; set; }
         public string PhysicalAddress { get; set; }
         public string MobileNumber { get; set; }
@@ -24,7 +24,7 @@ namespace Entities.CCC.Interoperability
         public string Subcountyname { get; set; }
         public string WardName { get; set; }
         public string Village { get; set; }
-        public string ServiceAreaId { get; set; }
+        public int ServiceAreaId { get; set; }
         public string MARITAL_STATUS { get; set; }
         public string TFIRST_NAME { get; set; }
         public string TMIDDLE_NAME { get; set; }

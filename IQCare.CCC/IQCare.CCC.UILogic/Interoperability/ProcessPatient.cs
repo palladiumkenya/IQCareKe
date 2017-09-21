@@ -99,36 +99,43 @@ namespace IQCare.CCC.UILogic.Interoperability
                 identifier.IdentifierValue = patientMessage.IdentifierValue;
                 identifier.IdentifierType = "CCC_NUMBER";
                 identifier.AssigningAuthority = "CCC";
-
+                if (registration.InternalPatientIdentifiers == null)
+                {
+                    registration.InternalPatientIdentifiers = new List<DTOIdentifier>();
+                }
                 registration.InternalPatientIdentifiers.Add(identifier);
-                registration.Patient.FirstName = patientMessage.FIRST_NAME;
-                registration.Patient.MiddleName = patientMessage.MIDDLE_NAME;
-                registration.Patient.LastName = patientMessage.LAST_NAME;
-                registration.Patient.DateOfBirth = patientMessage.DATE_OF_BIRTH;
+                if (registration.Patient == null)
+                {
+                    registration.Patient = new DTOPerson();
+                }
+
+                registration.Patient.FirstName = !string.IsNullOrWhiteSpace(patientMessage.FIRST_NAME) ? patientMessage.FIRST_NAME: null;
+                registration.Patient.MiddleName = !string.IsNullOrWhiteSpace(patientMessage.MIDDLE_NAME) ? patientMessage.MIDDLE_NAME : null;
+                registration.Patient.LastName = !string.IsNullOrWhiteSpace(patientMessage.LAST_NAME) ? patientMessage.LAST_NAME : null;
+                //registration.Patient.DateOfBirth = patientMessage.DATE_OF_BIRTH;
                 //registration.Patient.DobPrecision = patientMessage.
-                registration.Patient.Sex = patientMessage.SEX;
-                registration.Patient.MobileNumber = patientMessage.MobileNumber;
-                registration.Patient.PhysicalAddress = patientMessage.PhysicalAddress;
-                registration.Patient.NationalId = patientMessage.NATIONAL_ID;
+                registration.Patient.Sex = !string.IsNullOrWhiteSpace(patientMessage.SEX) ? patientMessage.SEX : null;
+                registration.Patient.MobileNumber = !string.IsNullOrWhiteSpace(patientMessage.MobileNumber) ? patientMessage.MobileNumber : null;
+                registration.Patient.PhysicalAddress = !string.IsNullOrWhiteSpace(patientMessage.PhysicalAddress) ? patientMessage.PhysicalAddress : null;
+                registration.Patient.NationalId = !string.IsNullOrWhiteSpace(patientMessage.NATIONAL_ID) ? patientMessage.NATIONAL_ID : null;
 
                 //registration.DateOfEnrollment = patientMessage.
                 //registration.EntryPoint = patientMessage.
                 registration.MotherMaidenName = null;
-                registration.Village = patientMessage.Village;
-                registration.Ward = patientMessage.WardName;
-                registration.SubCounty = patientMessage.Subcountyname;
-                registration.County = patientMessage.CountyName;
-
-                registration.MaritalStatus = patientMessage.MARITAL_STATUS;
+                registration.Village = !string.IsNullOrWhiteSpace(patientMessage.Village) ? patientMessage.Village : null;
+                registration.Ward = !string.IsNullOrWhiteSpace(patientMessage.WardName) ? patientMessage.WardName : null;
+                registration.SubCounty = !string.IsNullOrWhiteSpace(patientMessage.Subcountyname) ? patientMessage.Subcountyname : null;
+                registration.County = !string.IsNullOrWhiteSpace(patientMessage.CountyName) ? patientMessage.CountyName : null;
+                registration.MaritalStatus = !string.IsNullOrWhiteSpace(patientMessage.MARITAL_STATUS) ? patientMessage.MARITAL_STATUS : null;
                 //registration.DateOfDeath = patientMessage.d
-                registration.DeathIndicator = null;
-                registration.TreatmentSupporter.FirstName = patientMessage.TFIRST_NAME;
-                registration.TreatmentSupporter.MiddleName = patientMessage.TMIDDLE_NAME;
-                registration.TreatmentSupporter.LastName = patientMessage.TLAST_NAME;
-                registration.TreatmentSupporter.DateOfBirth = null;
-                //registration.TreatmentSupporter.DobPrecision = null;
-                registration.TreatmentSupporter.MobileNumber = patientMessage.TPHONE_NUMBER;
-                registration.TreatmentSupporter.PhysicalAddress = patientMessage.TADDRESS;
+                //registration.DeathIndicator = null;
+                //registration.TreatmentSupporter.FirstName = patientMessage.TFIRST_NAME;
+                //registration.TreatmentSupporter.MiddleName = patientMessage.TMIDDLE_NAME;
+                //registration.TreatmentSupporter.LastName = patientMessage.TLAST_NAME;
+                //registration.TreatmentSupporter.DateOfBirth = null;
+                ////registration.TreatmentSupporter.DobPrecision = null;
+                //registration.TreatmentSupporter.MobileNumber = patientMessage.TPHONE_NUMBER;
+                //registration.TreatmentSupporter.PhysicalAddress = patientMessage.TADDRESS;
                 //registration.TreatmentSupporter.NationalId = patientMessage.t
             }
 
