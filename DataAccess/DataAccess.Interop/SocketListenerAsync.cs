@@ -43,7 +43,7 @@ namespace DataAccess.Interop
             // Establish the local endpoint for the socket.
             // The DNS name of the computer
             // running the listener is "host.contoso.com".
-            IPAddress ipAddress = IPAddress.Parse("127.0.0.1");
+            IPAddress ipAddress = IPAddress.Parse("192.168.43.175");
             IPEndPoint localEndPoint = new IPEndPoint(ipAddress, 9998);
 
             // Create a TCP/IP socket.

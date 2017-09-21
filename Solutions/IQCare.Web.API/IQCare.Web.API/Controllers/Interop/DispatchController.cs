@@ -35,7 +35,7 @@ namespace IQCare.Web.API.Controllers.Interop
 
         // POST api/values
         [HttpPost]
-        public void Post(string message)
+        public void Post([FromBody]string message)
         {
             //call outgoing api logic
             //var dispatchedMessage = JsonConvert.DeserializeObject<MessageEventArgs>(message);
