@@ -99,7 +99,7 @@ namespace IQCare.CCC.UILogic.Enrollment
                 };
 
                 int x=  _mgr.UpdatePatientIdentifier(patientIdentifier);
-                Publisher.RaiseEventAsync(this, args).Wait();
+                Publisher.RaiseEventAsync(this, args);
                 return x;
             }
             catch (Exception e)
