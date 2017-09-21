@@ -1,21 +1,23 @@
 ﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
+using System.Web.Http;
 
-namespace IQCare.Web.API.Controllers
+
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
+namespace IQCare.Web.API.Controllers.Interop
 {
-    [ApiVersion("1.0")] // deprecate version [ApiVersion( "1.0", Deprecated = true )] [ApiVersion( "2.0" )]
-    [Route("api/default/v{version:apiVersion}/[controller]")]
-    public class ValuesController : Controller
+    [RoutePrefix("api/interop/{controller}")]
+    public class DispatchController : ApiController
     {
-        // GET api/values
+        // GET: api/values
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return new string[] { "value1", "value2_def" };
+            return new string[] { "value1", "value2" };
         }
 
         // GET api/values/5
-        [HttpGet("{id}")]
+        [HttpGet]
         public string Get(int id)
         {
             return "value";
@@ -25,16 +27,17 @@ namespace IQCare.Web.API.Controllers
         [HttpPost]
         public void Post([FromBody]string value)
         {
+            //call outgoing api logic
         }
 
         // PUT api/values/5
-        [HttpPut("{id}")]
+        [HttpGet]
         public void Put(int id, [FromBody]string value)
         {
         }
 
         // DELETE api/values/5
-        [HttpDelete("{id}")]
+        [HttpGet]
         public void Delete(int id)
         {
         }

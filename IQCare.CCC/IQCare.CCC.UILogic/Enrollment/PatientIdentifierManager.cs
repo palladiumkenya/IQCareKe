@@ -105,10 +105,12 @@ namespace IQCare.CCC.UILogic.Enrollment
                 //    EventOccurred = "Patient Enrolled Identifier = "
                 //});
 
+            
+               
+            int x=  _mgr.UpdatePatientIdentifier(patientIdentifier);
                 Publisher p = new Publisher();
                 p.RaiseEvent(this, args);
-              
-                return _mgr.UpdatePatientIdentifier(patientIdentifier);
+                return x;
             }
             catch (Exception e)
             {

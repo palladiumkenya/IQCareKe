@@ -1,7 +1,9 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System;
 using System.Collections.Generic;
 using IQCare.DTO;
 using IQCare.Web.MessageProcessing.JsonMappingEntities;
+using Newtonsoft.Json;
 
 namespace IQCare.Web.MessageProcessing.JsonEntityMapper
 {
@@ -102,12 +104,46 @@ namespace IQCare.Web.MessageProcessing.JsonEntityMapper
             throw new System.NotImplementedException();
         }
 
-        public void DrugPrescriptionRaised()
+        public DrugPrescriptionEntity DrugPrescriptionRaised(PrescriptionDto entity)
         {
-           var identifiersDto=new DTOIdentifier()
-           {
-               //IdentifierType = 
-           };
+            var prescribeMessage=new DrugPrescriptionEntity()
+            {
+                MESSAGE_HEADER =
+                {
+                    SENDING_APPLICATION = "IQCARE",
+                    SENDING_FACILITY = "13050",
+                    RECEIVING_APPLICATION = "IL",
+                    RECEIVING_FACILITY = "",
+                    MESSAGE_DATETIME = entity.CommonOrderDetails.TransactionDatetime,
+                    SECURITY = "",
+                    MESSAGE_TYPE = "RDE^001",
+                    PROCESSING_ID = "P"
+                },
+                PATIENT_IDENTIFICATION =
+                {
+                    INTERNAL_PATIENT_ID =new List<INTERNALPATIENTID>()     
+                },
+                COMMON_ORDER_DETAILS =
+                {
+                    ORDER_CONTROL = entity.CommonOrderDetails.OrderControl,
+                    PLACER_ORDER_NUMBER = { NUMBER = entity.CommonOrderDetails.PlacerOrderNumber.Number.ToString(),ENTITY = "IQCARE"},
+                    ORDER_STATUS = entity.CommonOrderDetails.OrderStatus,
+                    ORDERING_PHYSICIAN =
+                    {
+                        FIRST_NAME = entity.CommonOrderDetails.OrderingPhysician.FirstName,
+                        MIDDLE_NAME = entity.CommonOrderDetails.OrderingPhysician.MiddleName,
+                        LAST_NAME = entity.CommonOrderDetails.OrderingPhysician.LastName
+                    },
+                    TRANSACTION_DATETIME = entity.CommonOrderDetails.TransactionDatetime.ToShortDateString()
+                },
+                PHARMACY_ENCODED_ORDER =new List<PHARMACYENCODEDORDER>()
+                
+            };
+
+           // string prescriptionJSON = JsonConvert.SerializeObject(prescribeMessage);
+
+            return prescribeMessage;
+
         }
 
         public void DrugOrderCancel()
