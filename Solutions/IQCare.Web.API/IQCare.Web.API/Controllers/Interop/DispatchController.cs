@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Web.Http;
 using IQCare.Events;
 using IQCare.Web.ApiLogic.MessageHandler;
@@ -35,12 +36,13 @@ namespace IQCare.Web.API.Controllers.Interop
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]string message)
+        public int Post([FromBody] MessageEventArgs message)
         {
             //call outgoing api logic
             //var dispatchedMessage = JsonConvert.DeserializeObject<MessageEventArgs>(message);
-            var dispatchedMessage = new JavaScriptSerializer().Deserialize<MessageEventArgs>(message);
-            _outgoingMessageService.Handle(dispatchedMessage);
+            //var dispatchedMessage = new JavaScriptSerializer().Deserialize<MessageEventArgs>(message);
+            int result = _outgoingMessageService.Handle(message);
+            return result;
         }
 
         // PUT api/values/5

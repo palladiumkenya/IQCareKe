@@ -74,7 +74,7 @@ namespace IQCare.Web.ApiLogic.MessageHandler
             _apiOutboxManager = apiOutboxManager;
         }
 
-        public  void Handle(MessageEventArgs messageEvent)
+        public  int Handle(MessageEventArgs messageEvent)
         {
             switch (messageEvent.MessageType)
             {
@@ -146,6 +146,8 @@ namespace IQCare.Web.ApiLogic.MessageHandler
                     HandleNewViralLoadResults(messageEvent);
                     break;
             }
+
+            return 1;
         }
 
         private void HandleNewClientRegistration(MessageEventArgs messageEvent)
@@ -155,7 +157,14 @@ namespace IQCare.Web.ApiLogic.MessageHandler
             var registrationEntity = _jsonEntityMapper.PatientRegistration(registrationDto);
             string registrationJson = new JavaScriptSerializer().Serialize(registrationEntity);
             //save/send
+            var apiOutbox = new ApiOutbox()
+            {
+                DateRead = DateTime.Now,
+                Message = registrationJson
 
+            };
+
+            _apiOutboxManager.AddApiOutbox(apiOutbox);
 
             //Send
             SendData(registrationJson,"");
