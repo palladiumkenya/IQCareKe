@@ -1,8 +1,11 @@
 ﻿
-using IQCare.Web.ApiLogic.MessageHandler;
+using Newtonsoft.Json;
+///using IQCare.Web.ApiLogic.MessageHandler;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,9 +19,18 @@ namespace IQCare.Events
         }
         public void RaiseEvent(object sender, MessageEventArgs e)
         {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("http://localhost:18315/");
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            string content = JsonConvert.SerializeObject(e);
 
-            OutgoingMessageService ms = new OutgoingMessageService();
-            ms.Handle(e);
+            var jsoncontent = new StringContent(content, Encoding.ASCII, "application/json");
+            var result = Task.Run(() => client.PostAsync("api/interop/dispatch/", jsoncontent).Result);
+
+
+            //  return Convert.ToInt32(result.StatusCode);
+
 
         }
         public delegate void m_eventHandler(object sender, MessageEventArgs args);

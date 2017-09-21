@@ -1,23 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using IQCare.Web.ApiLogic.MessageHandler;
+﻿using System.Collections.Generic;
+using System.Web.Http;
+
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace IQCare.Web.API.Controllers.Interop
 {
-    [ApiVersion("1.0")] // deprecate version [ApiVersion( "1.0", Deprecated = true )] [ApiVersion( "2.0" )]
-    [Route("api/interop/v{version:apiVersion}/[controller]")]
-    public class IQILController : Controller
+    [RoutePrefix("api/interop/{controller}")]
+    public class DispatchController : ApiController
     {
-        readonly IIncomingMessageService _incomingMessageService;
-        public IQILController(IIncomingMessageService incomingMessageService)
-        {
-            _incomingMessageService = incomingMessageService;
-        }
         // GET: api/values
         [HttpGet]
         public IEnumerable<string> Get()
@@ -26,7 +17,7 @@ namespace IQCare.Web.API.Controllers.Interop
         }
 
         // GET api/values/5
-        [HttpGet("{id}")]
+        [HttpGet]
         public string Get(int id)
         {
             return "value";
@@ -36,17 +27,17 @@ namespace IQCare.Web.API.Controllers.Interop
         [HttpPost]
         public void Post([FromBody]string value)
         {
-            IncomingMessageService sc = 
+            //call outgoing api logic
         }
 
         // PUT api/values/5
-        [HttpPut("{id}")]
+        [HttpGet]
         public void Put(int id, [FromBody]string value)
         {
         }
 
         // DELETE api/values/5
-        [HttpDelete("{id}")]
+        [HttpGet]
         public void Delete(int id)
         {
         }

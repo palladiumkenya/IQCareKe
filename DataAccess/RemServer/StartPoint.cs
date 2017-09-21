@@ -15,19 +15,21 @@ namespace RemServer
     {
 
         static void ApiSendReceivedData(string content)
-        {
-            // New code:
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:23039/api/interop/v1/");
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            var jsoncontent = new StringContent(content, Encoding.ASCII, "application/json");
+        {try
+            {
+                // New code:
+                HttpClient client = new HttpClient();
+                client.BaseAddress = new Uri("http://localhost:23039/api/interop/v1/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                var jsoncontent = new StringContent(content, Encoding.ASCII, "application/json");
 
-            var result = client.PostAsync("api/interop/v1/interop/post", jsoncontent).Result;
+                var result = client.PostAsync("api/interop/v1/interop/post", jsoncontent).Result;
 
-            // HttpResponseMessage response = await client.PostAsync("api/products/save", jsonContent);
+                // HttpResponseMessage response = await client.PostAsync("api/products/save", jsonContent);
 
-
+            }
+            catch { }
             Console.ReadLine();
         }
         [STAThread]

@@ -30,7 +30,7 @@ namespace DataAccess.Interop
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             var jsoncontent = new StringContent(content, Encoding.ASCII, "application/json");
 
-            var result = client.PostAsync("api/interop/v1/interop/post", jsoncontent).Result;
+            var result = client.PostAsync("api/interop/v1/interop/receive", jsoncontent).Result;
 
             // HttpResponseMessage response = await client.PostAsync("api/products/save", jsonContent);
 
