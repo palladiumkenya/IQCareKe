@@ -34,7 +34,7 @@ namespace IQCare.Events
 
                 var jsoncontent = new StringContent(content, Encoding.ASCII, "application/json");
                 // HTTP POST
-                HttpResponseMessage response = await httpClient.PostAsync("api/interop/dispatch/", jsoncontent);
+                HttpResponseMessage response = await httpClient.PostAsJsonAsync("api/interop/dispatch/", jsoncontent);
                 if (response.IsSuccessStatusCode)
                 {
                     //todo
