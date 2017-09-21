@@ -4,8 +4,10 @@ using Interface.Interop;
 using IQCare.CCC.UILogic.Interoperability;
 
 using IQCare.Events;
+using IQCare.Web.ApiLogic.Model;
 using IQCare.Web.MessageProcessing.JsonEntityMapper;
 using Newtonsoft.Json;
+using System;
 
 namespace IQCare.Web.ApiLogic.MessageHandler
 {
@@ -186,26 +188,26 @@ namespace IQCare.Web.ApiLogic.MessageHandler
 
         private void HandleDrugPrescriptionRaised(MessageEventArgs messageEvent)
         {
-            try
-            {
-                var processDrugPrescription = new DrugPrescriptionMessage();
+            //try
+            //{
+            //    var processDrugPrescription = new DrugPrescriptionMessage();
 
-                var prescriptionDto =processDrugPrescription.GetPrescriptionMessage(messageEvent.EntityId, messageEvent.PatientId);
-                var prescriptionEntity = _jsonEntityMapper.DrugPrescriptionRaised(prescriptionDto);
-                string prescriptionJson = JsonConvert.SerializeObject(prescriptionEntity);
-                var apiOutbox = new ApiOutbox()
-                {
-                    DateRead = DateTime.Now,
-                    Message = prescriptionJson,
+            //    var prescriptionDto =processDrugPrescription.GetPrescriptionMessage(messageEvent.EntityId, messageEvent.PatientId);
+            //    var prescriptionEntity = _jsonEntityMapper.DrugPrescriptionRaised(prescriptionDto);
+            //    string prescriptionJson = JsonConvert.SerializeObject(prescriptionEntity);
+            //    var apiOutbox = new ApiOutbox()
+            //    {
+            //        DateRead = DateTime.Now,
+            //        Message = prescriptionJson,
 
-                };
-                _apiOutboxManager.AddApiOutbox(apiOutbox);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
+            //    };
+            //    _apiOutboxManager.AddApiOutbox(apiOutbox);
+            //}
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine(e);
+            //    throw;
+            //}
         }
 
         private void HandleDrugOrdercancel(MessageEventArgs messageEvent)
