@@ -5,7 +5,7 @@ using Entities.CCC.Interoperability;
 
 namespace DataAccess.CCC.Repository.Interoperability
 {
-    class DrugPrescriptionMessageRepository: BaseRepository<DrugPrescriptionMessage>, IDrugPrescriptionMessageRepository
+    class DrugPrescriptionMessageRepository: BaseRepository<DrugPrescriptionEntity>, IDrugPrescriptionMessageRepository
     {
 
         private readonly LookupContext _context;

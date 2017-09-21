@@ -1,9 +1,13 @@
-﻿using Application.Presentation;
+﻿using System;
+using System.Collections.Generic;
+using Application.Presentation;
 using DataAccess.Base;
 using Interface.Interop;
 using IQCare.CCC.UILogic.Interoperability;
-
+using IQCare.DTO;
 using IQCare.Events;
+using IQCare.Web.ApiLogic.Infrastructure.Interface;
+using IQCare.Web.ApiLogic.Model;
 using IQCare.Web.MessageProcessing.JsonEntityMapper;
 using Newtonsoft.Json;
 
@@ -12,6 +16,8 @@ namespace IQCare.Web.ApiLogic.MessageHandler
     public class OutgoingMessageService : ProcessBase, IOutgoingMessageService, ISendData
     {
         private readonly IJsonEntityMapper _jsonEntityMapper;
+        IApiOutboxManager _apiOutboxManager = (IApiOutboxManager)ObjectFactory.CreateInstance("IQCare.Web.API.BusinessProcess.BPApiOutbox, IQCare.Web.API");
+
 
         //public event InteropEventHandler OnDataExchage;
 
@@ -148,8 +154,14 @@ namespace IQCare.Web.ApiLogic.MessageHandler
             var registrationEntity = _jsonEntityMapper.PatientRegistration(registrationDto);
             string registrationJson = JsonConvert.SerializeObject(registrationEntity);
             //save/send
+            var apiOutbox = new ApiOutbox()
+            {
+                DateRead = DateTime.Now,
+                Message = registrationJson
 
+            };
 
+            _apiOutboxManager.AddApiOutbox(apiOutbox);
             //Send
             SendData(registrationJson,"");
 
@@ -188,23 +200,78 @@ namespace IQCare.Web.ApiLogic.MessageHandler
         {
             try
             {
-                var processDrugPrescription = new DrugPrescriptionMessage();
+                var prescriptionManager = new DrugPrescriptionMessage();
 
-                var prescriptionDto =processDrugPrescription.GetPrescriptionMessage(messageEvent.EntityId, messageEvent.PatientId);
-                var prescriptionEntity = _jsonEntityMapper.DrugPrescriptionRaised(prescriptionDto);
-                string prescriptionJson = JsonConvert.SerializeObject(prescriptionEntity);
-                var apiOutbox = new ApiOutbox()
+                var messageDto = prescriptionManager.GetPrescriptionMessage(messageEvent.EntityId, messageEvent.PatientId);
+                List<PharmacyEncodedOrder> encorderOrder=new List<PharmacyEncodedOrder>();
+
+                foreach (var message in messageDto)
                 {
-                    DateRead = DateTime.Now,
-                    Message = prescriptionJson,
+                    var messageOrder=new PharmacyEncodedOrder()
+                    {
+                        DrugName = message.DRUG_NAME,
+                        CodingSystem = message.CODING_SYSTEM,
+                        Strength = message.STRENGTH,
+                        Dosage = message.DOSAGE,
+                        Frequency = message.FREQUENCY,
+                        Duration = message.DURATION,
+                        QuantityPrescribed = Convert.ToInt32(message.QUANTITY_PRESCRIBED),
+                        PrescriptionNotes = message.NOTES
+                    };
+                    encorderOrder.Add(messageOrder);
+                }
 
+                
+                var drugOrderDto = new PrescriptionDto()
+                {
+                    InternalPatientIdentifier =
+                    {
+                        IdentifierType = messageDto[0].IDENTIFIER_TYPE,
+                        IdentifierValue = messageDto[0].Id,
+                        AssigningAuthority = "CCC"
+                        
+                    },
+                    Patientname =
+                    {
+                        FirstName = messageDto[0].FIRST_NAME,
+                        MiddleName = messageDto[0].MIDDLE_NAME,
+                        LastName = messageDto[0].LAST_NAME
+                    },
+                    CommonOrderDetails =
+                    {
+                        OrderControl = messageDto[0].ORDER_CONTROL,
+                        PlacerOrderNumber =
+                        {
+                            Number = messageDto[0].NUMBER,
+                            Entity = "IQCare"
+                        },
+                        OrderStatus = messageDto[0].ORDER_STATUS,
+                        OrderingPhysician =
+                        {
+                            FirstName = "",MiddleName = "",LastName = ""
+                        },
+                        TransactionDatetime = messageDto[0].TRANSACTION_DATETIME,
+                        Notes = messageDto[0].NOTES
+                    },
+                    PharmacyEncodedOrder =encorderOrder   
                 };
+
+                var prescriptionEntity = _jsonEntityMapper.DrugPrescriptionRaised(drugOrderDto);
+
+                string prescriptionJson = JsonConvert.SerializeObject(prescriptionEntity);
+                   var apiOutbox = new ApiOutbox()
+                   {
+                       DateRead = DateTime.Now,
+                       Message = prescriptionJson,
+
+                   };
+
                 _apiOutboxManager.AddApiOutbox(apiOutbox);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                throw;
+               throw;
             }
         }
 

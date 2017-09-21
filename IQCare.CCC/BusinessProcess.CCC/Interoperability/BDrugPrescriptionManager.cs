@@ -10,13 +10,15 @@ namespace BusinessProcess.CCC.Interoperability
 {
     public class BDrugPrescriptionManager :ProcessBase, IDrugPrescriptionManager
     {
-        public List<DrugPrescriptionMessage> GetPatientPrescriptionMessage(int orderId, int ptnpk)
+        public List<DrugPrescriptionEntity> GetPatientPrescriptionMessage(int orderId, int ptnpk)
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                var drugPrescription = unitOfWork.DrugPrescriptionMessageRepository.FindBy(x => x.NUMBER == orderId && x.ptnpk == ptnpk).ToList();
+ 
+               var entityPrescription=unitOfWork.DrugPrescriptionMessageRepository.FindBy(x => x.NUMBER == orderId && x.ptnpk == ptnpk);
                 unitOfWork.Dispose();
-                return drugPrescription;
+                return entityPrescription.ToList();
+                // return ;
             }
         }
     }
