@@ -2,14 +2,15 @@
 using System.Web.Http;
 using IQCare.Events;
 using IQCare.Web.ApiLogic.MessageHandler;
-using Newtonsoft.Json;
+using System.Web.Script.Serialization;
+
 
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace IQCare.Web.API.Controllers.Interop
 {
-    [RoutePrefix("api/interop/{controller}")]
+    [RoutePrefix("api/interop/{controller}/{Id}")]
     public class DispatchController : ApiController
     {
         private readonly IOutgoingMessageService _outgoingMessageService;
@@ -37,18 +38,19 @@ namespace IQCare.Web.API.Controllers.Interop
         public void Post(string message)
         {
             //call outgoing api logic
-            var dispatchedMessage = JsonConvert.DeserializeObject<MessageEventArgs>(message);
+            //var dispatchedMessage = JsonConvert.DeserializeObject<MessageEventArgs>(message);
+            var dispatchedMessage = new JavaScriptSerializer().Deserialize<MessageEventArgs>(message);
             _outgoingMessageService.Handle(dispatchedMessage);
         }
 
         // PUT api/values/5
-        [HttpGet]
+        [HttpPut]
         public void Put(int id, [FromBody]string value)
         {
         }
 
         // DELETE api/values/5
-        [HttpGet]
+        [HttpDelete]
         public void Delete(int id)
         {
         }

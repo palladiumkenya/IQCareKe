@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web.Script.Serialization;
 using Application.Presentation;
 using DataAccess.Base;
 using Interface.Interop;
@@ -8,7 +9,7 @@ using IQCare.Web.ApiLogic.Infrastructure.Interface;
 using IQCare.Web.ApiLogic.Infrastructure.UiLogic;
 using IQCare.Web.ApiLogic.Model;
 using IQCare.Web.MessageProcessing.JsonEntityMapper;
-using Newtonsoft.Json;
+
 
 namespace IQCare.Web.ApiLogic.MessageHandler
 {
@@ -152,7 +153,7 @@ namespace IQCare.Web.ApiLogic.MessageHandler
             var processRegistration = new ProcessRegistration();
             var registrationDto = processRegistration.Get(messageEvent.PatientId);
             var registrationEntity = _jsonEntityMapper.PatientRegistration(registrationDto);
-            string registrationJson = JsonConvert.SerializeObject(registrationEntity);
+            string registrationJson = new JavaScriptSerializer().Serialize(registrationEntity);
             //save/send
 
 

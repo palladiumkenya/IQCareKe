@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 using System;
-using System.Collections.Generic;
 using IQCare.DTO;
 using IQCare.Web.MessageProcessing.JsonMappingEntities;
-using Newtonsoft.Json;
 
 namespace IQCare.Web.MessageProcessing.JsonEntityMapper
 {

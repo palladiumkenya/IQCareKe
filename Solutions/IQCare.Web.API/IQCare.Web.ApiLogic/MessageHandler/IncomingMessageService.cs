@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web.Script.Serialization;
 using IQCare.CCC.UILogic.Interoperability;
 using IQCare.DTO;
 using IQCare.Web.ApiLogic.Infrastructure.Interface;
@@ -6,7 +7,6 @@ using IQCare.Web.ApiLogic.Infrastructure.UiLogic;
 using IQCare.Web.ApiLogic.Model;
 using IQCare.Web.MessageProcessing.DtoMapping;
 using IQCare.Web.MessageProcessing.JsonMappingEntities;
-using Newtonsoft.Json;
 
 namespace IQCare.Web.ApiLogic.MessageHandler
 {
@@ -74,7 +74,8 @@ namespace IQCare.Web.ApiLogic.MessageHandler
         {
             try
             {
-                PatientRegistrationEntity entity = JsonConvert.DeserializeObject<PatientRegistrationEntity>(incomingMessage.Message);
+                //var dispatchedMessage = new JavaScriptSerializer().Deserialize<MessageEventArgs>(message);
+                PatientRegistrationEntity entity =new  JavaScriptSerializer().Deserialize<PatientRegistrationEntity>(incomingMessage.Message);
                 Registration register = _dtoMapper.PatientRegistrationMapping(entity);
                 var processRegistration = new ProcessRegistration();
                 processRegistration.Save(register);
