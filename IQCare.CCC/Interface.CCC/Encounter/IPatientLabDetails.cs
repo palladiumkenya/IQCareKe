@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Entities.CCC.Encounter;
+using Entities.CCC.Triage;
 
 namespace Interface.CCC.Encounter
 {

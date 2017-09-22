@@ -7,7 +7,7 @@ using System.Web.Script.Serialization;
 using System.Web.Script.Services;
 using System.Web.Services;
 using Application.Presentation;
-using Entities.CCC.Encounter;
+using Entities.CCC.Triage;
 using Entities.CCC.Enrollment;
 using Interface.CCC.Visit;
 using IQCare.CCC.UILogic.Enrollment;
@@ -344,7 +344,7 @@ namespace IQCare.Web.CCC.WebService
             var result = LookupLogic.GetLookUpItemViewByMasterName("PresentingComplaints");
 
             JavaScriptSerializer parser = new JavaScriptSerializer();
-            var presentingComplaints = parser.Deserialize<List<Entities.CCC.Encounter.PatientEncounter.KeyValue>>(result);
+            var presentingComplaints = parser.Deserialize<List<Entities.CCC.Triage.PatientEncounter.KeyValue>>(result);
 
             ArrayList rows = new ArrayList();
 
@@ -363,7 +363,7 @@ namespace IQCare.Web.CCC.WebService
             var result = LookupLogic.GetLookUpItemViewByMasterName("Allergies");
 
             JavaScriptSerializer parser = new JavaScriptSerializer();
-            var allergies = parser.Deserialize<List<Entities.CCC.Encounter.PatientEncounter.KeyValue>>(result);
+            var allergies = parser.Deserialize<List<Entities.CCC.Triage.PatientEncounter.KeyValue>>(result);
 
             ArrayList rows = new ArrayList();
 
@@ -382,7 +382,7 @@ namespace IQCare.Web.CCC.WebService
             var result = LookupLogic.GetLookUpItemViewByMasterName("AllergyReactions");
 
             JavaScriptSerializer parser = new JavaScriptSerializer();
-            var allergyReactions = parser.Deserialize<List<Entities.CCC.Encounter.PatientEncounter.KeyValue>>(result);
+            var allergyReactions = parser.Deserialize<List<Entities.CCC.Triage.PatientEncounter.KeyValue>>(result);
 
             ArrayList rows = new ArrayList();
 
@@ -401,7 +401,7 @@ namespace IQCare.Web.CCC.WebService
             var result = LookupLogic.GetLookUpItemViewByMasterName("ICD10");
 
             JavaScriptSerializer parser = new JavaScriptSerializer();
-            var diagnosis = parser.Deserialize<List<Entities.CCC.Encounter.PatientEncounter.KeyValue>>(result);
+            var diagnosis = parser.Deserialize<List<Entities.CCC.Triage.PatientEncounter.KeyValue>>(result);
 
             ArrayList rows = new ArrayList();
 
@@ -419,7 +419,7 @@ namespace IQCare.Web.CCC.WebService
         {
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
 
-            List<Entities.CCC.Encounter.PatientEncounter.PharmacyFields> lst = new List<Entities.CCC.Encounter.PatientEncounter.PharmacyFields>();
+            List<Entities.CCC.Triage.PatientEncounter.PharmacyFields> lst = new List<Entities.CCC.Triage.PatientEncounter.PharmacyFields>();
             lst = patientEncounter.getPharmacyCurrentRegimen(Session["PatientPK"].ToString());
 
             ArrayList rows = new ArrayList();
@@ -438,7 +438,7 @@ namespace IQCare.Web.CCC.WebService
         {
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
 
-            List<Entities.CCC.Encounter.PatientEncounter.DrugBatch> lst = patientEncounter.getPharmacyDrugBatch(DrugPk);
+            List<Entities.CCC.Triage.PatientEncounter.DrugBatch> lst = patientEncounter.getPharmacyDrugBatch(DrugPk);
             
             ArrayList rows = new ArrayList();
 
@@ -470,7 +470,7 @@ namespace IQCare.Web.CCC.WebService
             var result = LookupLogic.GetLookUpItemViewByMasterName(TreatmentPlan);
 
             JavaScriptSerializer parser = new JavaScriptSerializer();
-            var regimen = parser.Deserialize<List<Entities.CCC.Encounter.PatientEncounter.KeyValue>>(result);
+            var regimen = parser.Deserialize<List<Entities.CCC.Triage.PatientEncounter.KeyValue>>(result);
 
             ArrayList rows = new ArrayList();
 
@@ -545,7 +545,7 @@ namespace IQCare.Web.CCC.WebService
             if (height != "" && weight != "")
             {
                 PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
-                Entities.CCC.Encounter.PatientEncounter.ZScores zsValues = new Entities.CCC.Encounter.PatientEncounter.ZScores();
+                Entities.CCC.Triage.PatientEncounter.ZScores zsValues = new Entities.CCC.Triage.PatientEncounter.ZScores();
                 zsValues = patientEncounter.getZScores(Session["PatientPK"].ToString(), Convert.ToDouble(Session["Age"].ToString()), Session["Gender"].ToString(), Convert.ToDouble(height), Convert.ToDouble(weight));
 
                 if (zsValues != null)

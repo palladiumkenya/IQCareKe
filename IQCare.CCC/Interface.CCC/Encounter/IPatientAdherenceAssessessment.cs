@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Entities.CCC.Encounter;
+using Entities.CCC.Triage;
 
 namespace Interface.CCC.Encounter
 {

@@ -3,7 +3,7 @@ using Entities.CCC.Visit;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Entities.CCC.Encounter
+namespace Entities.CCC.Triage
 {
     [Serializable]
     [Table("PatientDiagnosis")]

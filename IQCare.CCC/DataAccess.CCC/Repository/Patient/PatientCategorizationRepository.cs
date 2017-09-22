@@ -3,7 +3,7 @@ using System.Linq;
 using DataAccess.CCC.Context;
 using DataAccess.CCC.Interface.Patient;
 using DataAccess.Context;
-using Entities.CCC.Encounter;
+using Entities.CCC.Triage;
 
 namespace DataAccess.CCC.Repository.Patient
 {

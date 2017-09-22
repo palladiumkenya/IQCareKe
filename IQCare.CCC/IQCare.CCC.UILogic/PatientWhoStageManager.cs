@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Application.Presentation;
-using Entities.CCC.Encounter;
+using Entities.CCC.Triage;
 using Interface.CCC.Encounter;
 
 namespace IQCare.CCC.UILogic

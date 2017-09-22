@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Entities.Common;
 using Entities.CCC.Visit;
 
-namespace Entities.CCC.Encounter
+namespace Entities.CCC.Triage
 {
     [Serializable]
     [Table("AdherenceOutcome")]

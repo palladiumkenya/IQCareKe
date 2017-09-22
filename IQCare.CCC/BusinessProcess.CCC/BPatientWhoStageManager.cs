@@ -3,7 +3,7 @@ using System.Linq;
 using DataAccess.Base;
 using DataAccess.CCC.Context;
 using DataAccess.CCC.Repository;
-using Entities.CCC.Encounter;
+using Entities.CCC.Triage;
 using Interface.CCC.Encounter;
 
 namespace BusinessProcess.CCC

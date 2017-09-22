@@ -1,6 +1,6 @@
 ﻿using Application.Presentation;
 using Entities.CCC.Visit;
-using Entities.CCC.Encounter;
+using Entities.CCC.Triage;
 using Interface.CCC.Visit;
 using System;
 using System.Collections.Generic;

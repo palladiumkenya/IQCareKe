@@ -1,4 +1,4 @@
-﻿using Entities.CCC.Encounter;
+﻿using Entities.CCC.Triage;
 using System;
 using System.Collections.Generic;
 using System.Linq;

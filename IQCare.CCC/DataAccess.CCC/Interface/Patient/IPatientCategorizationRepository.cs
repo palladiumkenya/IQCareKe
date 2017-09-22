@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using DataAccess.Context;
-using Entities.CCC.Encounter;
+using Entities.CCC.Triage;
 
 namespace DataAccess.CCC.Interface.Patient
 {

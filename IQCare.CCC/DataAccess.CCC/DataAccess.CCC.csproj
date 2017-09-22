@@ -82,6 +82,7 @@
     <Compile Include="Interface\Baseline\IPatientTreatmentInitiationRepository.cs" />
     <Compile Include="Interface\Baseline\IPatientVaccinationRepository.cs" />
     <Compile Include="Interface\Encounter\IPatientAdherenceAssessmentRepository.cs" />
+    <Compile Include="Interface\Triage\IPatientAdverseEventOutcomeRepository.cs" />
     <Compile Include="Interface\Encounter\IPatientCareEndingRepository.cs" />
     <Compile Include="Interface\Encounter\IPatientLabDetailsRepository.cs" />
     <Compile Include="Interface\Encounter\IPatientLabOrderRepository .cs" />
@@ -221,6 +222,7 @@
     <Compile Include="Context\GreencardContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\Screening\PatientScreeningRepository.cs" />
+    <Compile Include="Repository\Triage\PatientAdverseEventOutcomeRepository.cs" />
     <Compile Include="Repository\Triage\PatientFamilyPlanningMethodRepsotory.cs" />
     <Compile Include="Repository\Triage\PatientFamilyPlanningRepository.cs" />
     <Compile Include="Repository\Triage\PatientPregnancyRepository.cs" />

@@ -61,6 +61,7 @@ namespace DataAccess.CCC.Interface
         IPatientFamilyPlanningRepository PatientFamilyPlanningRepository { get; }
         IPatientPregnancyIndicatorRepository PatientPregnanacyIndicatorRepository { get; }
         IPatientPregnancyRepository PatientPregnancyRepository { get;}
+        IPatientAdverseEventOutcomeRepository PatientAdverseEventOutcomeRepository { get; }
 
 
         /* patient screening */

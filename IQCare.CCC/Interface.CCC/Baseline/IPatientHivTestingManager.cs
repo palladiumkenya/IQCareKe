@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Entities.CCC.Baseline;
-using Entities.CCC.Encounter;
+using Entities.CCC.Triage;
 
 namespace Interface.CCC.Baseline
 {

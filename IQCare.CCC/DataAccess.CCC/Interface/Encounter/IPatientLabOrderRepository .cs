@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text;
 using DataAccess.Context;
-using Entities.CCC.Encounter;
+using Entities.CCC.Triage;
 
 namespace DataAccess.CCC.Interface.Encounter
 {

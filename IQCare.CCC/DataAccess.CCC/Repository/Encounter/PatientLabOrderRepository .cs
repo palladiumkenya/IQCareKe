@@ -1,7 +1,7 @@
 ﻿using DataAccess.CCC.Context;
 using DataAccess.CCC.Interface.Encounter;
 using DataAccess.Context;
-using Entities.CCC.Encounter;
+using Entities.CCC.Triage;
 using System.Collections.Generic;
 using System.Linq;
 

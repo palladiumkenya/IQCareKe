@@ -19,7 +19,7 @@ using Convert = System.Convert;
 using Newtonsoft.Json;
 using System.Web;
 using System.Web.Script.Serialization;
-using Entities.CCC.Encounter;
+using Entities.CCC.Triage;
 using Entities.CCC.Enrollment;
 using IQCare.CCC.UILogic.Enrollment;
 

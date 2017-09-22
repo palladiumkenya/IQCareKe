@@ -101,6 +101,7 @@ namespace DataAccess.CCC.Repository
         private IPatientPregnancyIndicatorRepository _PatientPregnancyIndicatorRepository;
         private IPatientPregnancyRepository _PatientPregnancyRepository;
         private IPatientScreeningRepository _PatientScreeningRepository;
+        private IPatientAdverseEventOutcomeRepository _adverseEventOutcomeRepository;
 
         /*Baseline*/
         // private IPatientDisclosureRepository _patientDisclosureRepository;
@@ -564,6 +565,15 @@ namespace DataAccess.CCC.Repository
             {
                 return _PatientPregnancyRepository ?? (_PatientPregnancyRepository = new PatientPregnancyRepository((GreencardContext)_context));
             }
+        }
+
+        public IPatientAdverseEventOutcomeRepository PatientAdverseEventOutcomeRepository
+        {
+            get
+            {
+                return _adverseEventOutcomeRepository ?? (_adverseEventOutcomeRepository =
+                           new PatientAdverseEventOutcomeRepository((GreencardContext) _context));
+            } 
         }
 
         public IPatientScreeningRepository PatientScreeningRepository

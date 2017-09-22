@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Entities.CCC.Visit;
-using Entities.CCC.Encounter;
+using Entities.CCC.Triage;
 using Entities.CCC.Lookup;
 
 namespace Interface.CCC.Visit

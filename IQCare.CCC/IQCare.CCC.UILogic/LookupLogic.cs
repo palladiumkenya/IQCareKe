@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Web.Script.Serialization;
 using System.Web.UI.WebControls;
 using Application.Presentation;
-using static Entities.CCC.Encounter.PatientEncounter;
+using static Entities.CCC.Triage.PatientEncounter;
 
 namespace IQCare.CCC.UILogic
 {

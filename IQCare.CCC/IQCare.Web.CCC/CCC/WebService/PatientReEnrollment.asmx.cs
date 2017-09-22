@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
-using Entities.CCC.Encounter;
+using Entities.CCC.Triage;
 using Entities.CCC.Enrollment;
 using IQCare.CCC.UILogic;
 using IQCare.CCC.UILogic.Enrollment;
