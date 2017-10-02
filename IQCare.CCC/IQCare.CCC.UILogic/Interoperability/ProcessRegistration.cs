@@ -72,8 +72,8 @@ namespace IQCare.CCC.UILogic.Interoperability
                 int sex = lookupLogic.GetItemIdByGroupAndItemName("Gender", gender)[0].ItemId;
                 int patientType = lookupLogic.GetItemIdByGroupAndItemName("PatientType", "New")[0].ItemId;
                 int visitType = lookupLogic.GetItemIdByGroupAndItemName("VisitType", "Enrollment")[0].ItemId;
-                DateTime DOB = registration.Patient.DateOfBirth.HasValue ? registration.Patient.DateOfBirth.Value : DateTime.MinValue;
-                DateTime DateOfEnrollment = registration.DateOfEnrollment.HasValue ? registration.DateOfEnrollment.Value : DateTime.MinValue;
+                DateTime DOB = !string.IsNullOrWhiteSpace(registration.Patient.DateOfBirth) ? DateTime.Parse(registration.Patient.DateOfBirth) : DateTime.MinValue;
+                DateTime DateOfEnrollment = !string.IsNullOrWhiteSpace(registration.DateOfEnrollment) ? DateTime.Parse(registration.DateOfEnrollment) : DateTime.MinValue;
 
                 int personId = personManager.AddPersonUiLogic(registration.Patient.FirstName,
                     registration.Patient.MiddleName,
@@ -258,8 +258,8 @@ namespace IQCare.CCC.UILogic.Interoperability
                     entryPointId = lookupEntryPoints[0].ItemId;
                 }
                 
-                DateTime DOB = registration.Patient.DateOfBirth.HasValue ? registration.Patient.DateOfBirth.Value : DateTime.MinValue;
-                DateTime enrollmentDate = registration.DateOfEnrollment.HasValue ? registration.DateOfEnrollment.Value : DateTime.MinValue;
+                DateTime DOB = !string.IsNullOrWhiteSpace(registration.Patient.DateOfBirth) ? DateTime.Parse(registration.Patient.DateOfBirth) : DateTime.MinValue;
+                DateTime enrollmentDate = !string.IsNullOrWhiteSpace(registration.DateOfEnrollment) ? DateTime.Parse(registration.DateOfEnrollment) : DateTime.MinValue;
                 DataSet ds = LoginManager.GetFacilitySettings();
                 int facilityId = Convert.ToInt32(ds.Tables[0].Rows[0]["PosID"]);
 

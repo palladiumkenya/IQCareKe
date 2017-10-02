@@ -9,7 +9,7 @@ namespace IQCare.Web.MessageProcessing.JsonMappingEntities
         public string SENDING_FACILITY { get; set; }
         public string RECEIVING_APPLICATION { get; set; }
         public string RECEIVING_FACILITY { get; set; }
-        public DateTime MESSAGE_DATETIME { get; set; }
+        public string MESSAGE_DATETIME { get; set; }
         public string SECURITY { get; set; }
         public string MESSAGE_TYPE { get; set; }
         public string PROCESSING_ID { get; set; }
@@ -56,12 +56,12 @@ namespace IQCare.Web.MessageProcessing.JsonMappingEntities
         public List<INTERNALPATIENTID> INTERNAL_PATIENT_ID { get; set; }
         public PATIENTNAME PATIENT_NAME { get; set; }
         public string MOTHER_MAIDEN_NAME { get; set; }
-        public DateTime ? DATE_OF_BIRTH { get; set; }
+        public string DATE_OF_BIRTH { get; set; }
         public string SEX { get; set; }
         public PATIENTADDRESS PATIENT_ADDRESS { get; set; }
         public string PHONE_NUMBER { get; set; }
         public string MARITAL_STATUS { get; set; }
-        public DateTime ? DEATH_DATE { get; set; }
+        public string DEATH_DATE { get; set; }
         public string DEATH_INDICATOR { get; set; }
     }
 }

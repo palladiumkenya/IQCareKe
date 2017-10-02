@@ -109,10 +109,10 @@ namespace IQCare.CCC.UILogic.Interoperability
                     registration.Patient = new DTOPerson();
                 }
 
-                registration.Patient.FirstName = !string.IsNullOrWhiteSpace(patientMessage.FIRST_NAME) ? patientMessage.FIRST_NAME: null;
+                registration.Patient.FirstName = !string.IsNullOrWhiteSpace(patientMessage.FIRST_NAME) ? patientMessage.FIRST_NAME: "";
                 registration.Patient.MiddleName = !string.IsNullOrWhiteSpace(patientMessage.MIDDLE_NAME) ? patientMessage.MIDDLE_NAME : null;
                 registration.Patient.LastName = !string.IsNullOrWhiteSpace(patientMessage.LAST_NAME) ? patientMessage.LAST_NAME : null;
-                //registration.Patient.DateOfBirth = patientMessage.DATE_OF_BIRTH;
+                registration.Patient.DateOfBirth = !string.IsNullOrWhiteSpace(patientMessage.DATE_OF_BIRTH) ? patientMessage.DATE_OF_BIRTH : null;
                 //registration.Patient.DobPrecision = patientMessage.
                 registration.Patient.Sex = !string.IsNullOrWhiteSpace(patientMessage.SEX) ? patientMessage.SEX : null;
                 registration.Patient.MobileNumber = !string.IsNullOrWhiteSpace(patientMessage.MobileNumber) ? patientMessage.MobileNumber : null;
@@ -129,14 +129,14 @@ namespace IQCare.CCC.UILogic.Interoperability
                 registration.MaritalStatus = !string.IsNullOrWhiteSpace(patientMessage.MARITAL_STATUS) ? patientMessage.MARITAL_STATUS : null;
                 //registration.DateOfDeath = patientMessage.d
                 //registration.DeathIndicator = null;
-                //registration.TreatmentSupporter.FirstName = patientMessage.TFIRST_NAME;
-                //registration.TreatmentSupporter.MiddleName = patientMessage.TMIDDLE_NAME;
-                //registration.TreatmentSupporter.LastName = patientMessage.TLAST_NAME;
-                //registration.TreatmentSupporter.DateOfBirth = null;
+                registration.TreatmentSupporter.FirstName = !string.IsNullOrWhiteSpace(patientMessage.TFIRST_NAME) ? patientMessage.TFIRST_NAME : null;
+                registration.TreatmentSupporter.MiddleName = !string.IsNullOrWhiteSpace(patientMessage.TMIDDLE_NAME) ? patientMessage.TMIDDLE_NAME : null;
+                registration.TreatmentSupporter.LastName = !string.IsNullOrWhiteSpace(patientMessage.TLAST_NAME) ? patientMessage.TLAST_NAME : null;
+                registration.TreatmentSupporter.DateOfBirth = !string.IsNullOrWhiteSpace(patientMessage.TDATE_OF_BIRTH) ? patientMessage.TDATE_OF_BIRTH : null;
                 ////registration.TreatmentSupporter.DobPrecision = null;
-                //registration.TreatmentSupporter.MobileNumber = patientMessage.TPHONE_NUMBER;
-                //registration.TreatmentSupporter.PhysicalAddress = patientMessage.TADDRESS;
-                //registration.TreatmentSupporter.NationalId = patientMessage.t
+                registration.TreatmentSupporter.MobileNumber = !string.IsNullOrWhiteSpace(patientMessage.TPHONE_NUMBER) ? patientMessage.TPHONE_NUMBER : null;
+                registration.TreatmentSupporter.PhysicalAddress = !string.IsNullOrWhiteSpace(patientMessage.TADDRESS) ? patientMessage.TADDRESS : null;
+                //registration.TreatmentSupporter.NationalId = !string.IsNullOrWhiteSpace(patientMessage.
             }
 
             return registration;

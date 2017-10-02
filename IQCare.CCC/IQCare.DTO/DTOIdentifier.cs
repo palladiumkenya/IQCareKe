@@ -17,7 +17,7 @@ namespace IQCare.DTO
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string MiddleName { get; set; }
-        public DateTime? DateOfBirth { get; set; }
+        public string DateOfBirth { get; set; }
         public bool DobPrecision { get; set; }
         public string Sex { get; set; }
         public string MobileNumber { get; set; }

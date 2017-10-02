@@ -59,12 +59,12 @@ namespace IQCare.Web.MessageProcessing.DtoMapping
                 SubCounty = entity.PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.SUB_COUNTY,
                 Ward = entity.PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.WARD,
                 Village = entity.PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.VILLAGE,
-                DateOfDeath = entity.PATIENT_IDENTIFICATION.DEATH_DATE,
+                DateOfDeath = null,
                 DeathIndicator = entity.PATIENT_IDENTIFICATION.DEATH_INDICATOR,
                 TreatmentSupporter = treatmentSupporter,
                 TSRelationshipType =  ts.RELATIONSHIP,
-                InternalPatientIdentifiers = identifiers,
-                DateOfEnrollment = DateTime.Now,
+                InternalPatientIdentifiers = identifiers
+                //DateOfEnrollment = entity,
                 
             };
             return registration;
