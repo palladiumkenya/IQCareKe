@@ -113,6 +113,11 @@ namespace IQCare.Web.MessageProcessing.JsonEntityMapper
             throw new System.NotImplementedException();
         }
 
+        public DrugPrescriptionEntity DrugPrescriptionRaised(List<PrescriptionDto> prescription)
+        {
+            throw new NotImplementedException();
+        }
+
         public DrugPrescriptionEntity DrugPrescriptionRaised(PrescriptionDto entity)
         {
             var prescribeMessage=new DrugPrescriptionEntity()
@@ -149,9 +154,9 @@ namespace IQCare.Web.MessageProcessing.JsonEntityMapper
                 
             };
 
-           // string prescriptionJSON = JsonConvert.SerializeObject(prescribeMessage);
+            // return prescribeMessage;
 
-            return prescribeMessage;
+            throw new NotImplementedException();
 
         }
 
@@ -203,6 +208,11 @@ namespace IQCare.Web.MessageProcessing.JsonEntityMapper
         public void ViralLoadResults()
         {
             throw new System.NotImplementedException();
+        }
+
+        object IJsonEntityMapper.DrugPrescriptionRaised(PrescriptionDto drugOrderDto)
+        {
+            return DrugPrescriptionRaised(drugOrderDto);
         }
 
         private MESSAGEHEADER GetMessageHeader(string messageType)

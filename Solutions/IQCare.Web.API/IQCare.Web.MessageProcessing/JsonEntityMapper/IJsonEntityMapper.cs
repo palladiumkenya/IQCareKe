@@ -1,4 +1,5 @@
-﻿using IQCare.DTO;
+﻿using System.Collections.Generic;
+using IQCare.DTO;
 using IQCare.Web.MessageProcessing.JsonMappingEntities;
 
 
@@ -18,7 +19,7 @@ namespace IQCare.Web.MessageProcessing.JsonEntityMapper
 
         void StopDrugs();
 
-        DrugPrescriptionEntity DrugPrescriptionRaised(PrescriptionDto prescription);
+        DrugPrescriptionEntity DrugPrescriptionRaised(List<PrescriptionDto> prescription);
 
         void DrugOrderCancel();
 
@@ -39,5 +40,6 @@ namespace IQCare.Web.MessageProcessing.JsonEntityMapper
         void ViralLoadLabOrder();
 
         void ViralLoadResults();
+        object DrugPrescriptionRaised(PrescriptionDto drugOrderDto);
     }
 }

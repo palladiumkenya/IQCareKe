@@ -1,7 +1,8 @@
-﻿using IQCare.DTO;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using IQCare.DTO;
 using IQCare.Web.MessageProcessing.JsonMappingEntities;
 
 namespace IQCare.Web.MessageProcessing.DtoMapping
@@ -145,22 +146,56 @@ namespace IQCare.Web.MessageProcessing.DtoMapping
             throw new NotImplementedException();
         }
 
-        public ViralLoadDto ViralLoadResults(ViralLoadResultEntity entity)
+        public ViralLoadResultEntity ViralLoadResults(ViralLoadResultEntity entity)
         {
-            var resultsDto =new ViralLoadDto()
-            {
-                Id = entity.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID.Where(d=>d.IDENTIFIER_TYPE=="CCC_NUMBER").Select(x=>x.ID).ToString(),
-                IdentifierType = "CCC_NUMBER",
-                AssigningAuthourity = "CCC",
-                DateSampleCollected = entity.VIRAL_LOAD_RESULT[0].DATE_SAMPLE_COLLECTED,
-                DateSampleTested = entity.VIRAL_LOAD_RESULT[0].DATE_SAMPLE_TESTED,
-                Regimen = entity.VIRAL_LOAD_RESULT[0].REGIMEN,
-                VlResult = entity.VIRAL_LOAD_RESULT[0].VL_RESULT,
-                LabTestedIn = entity.VIRAL_LOAD_RESULT[0].LAB_TESTED_IN,
-                Justification = entity.VIRAL_LOAD_RESULT[0].JUSTIFICATION
-            };
+            var internalIdentifiers=new List<INTERNALPATIENTID>() ;
 
-            return resultsDto;
+            foreach (var identifier in internalIdentifiers)
+            {
+                var internalIdentity=new INTERNALPATIENTID()
+                {
+                    ID = identifier.ID,
+                    IDENTIFIER_TYPE = identifier.IDENTIFIER_TYPE,
+                    ASSIGNING_AUTHORITY = identifier.ASSIGNING_AUTHORITY
+                };
+                internalIdentifiers.Add(internalIdentity);
+            }
+
+            var vlResultsDto=new ViralLoadResultEntity()
+            {
+                MESSAGE_HEADER =
+                {
+                    SENDING_APPLICATION = entity.MESSAGE_HEADER.SENDING_APPLICATION,
+                    SENDING_FACILITY = entity.MESSAGE_HEADER.SENDING_FACILITY,
+                    RECEIVING_APPLICATION = entity.MESSAGE_HEADER.RECEIVING_APPLICATION,
+                    RECEIVING_FACILITY = entity.MESSAGE_HEADER.RECEIVING_FACILITY,
+                    MESSAGE_DATETIME =entity.MESSAGE_HEADER.MESSAGE_DATETIME, //DateTime.Now.ToString("yyyyMMddHHmmss"); 
+                    SECURITY = entity.MESSAGE_HEADER.SECURITY,
+                    MESSAGE_TYPE = entity.MESSAGE_HEADER.MESSAGE_TYPE,
+                    PROCESSING_ID = entity.MESSAGE_HEADER.PROCESSING_ID
+
+                },
+                PATIENT_IDENTIFICATION =
+                {
+                    PATIENT_NAME =
+                    {
+                        FIRST_NAME = entity.PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME,
+                        MIDDLE_NAME = entity.PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME,
+                        LAST_NAME = entity.PATIENT_IDENTIFICATION.PATIENT_NAME.LAST_NAME
+                    },
+                    INTERNAL_PATIENT_ID = internalIdentifiers
+                },
+                VIRAL_LOAD_RESULT =
+                {
+                    DATE_SAMPLE_COLLECTED = entity.VIRAL_LOAD_RESULT.DATE_SAMPLE_COLLECTED,
+                    DATE_SAMPLE_TESTED = entity.VIRAL_LOAD_RESULT.DATE_SAMPLE_TESTED,
+                    JUSTIFICATION = entity.VIRAL_LOAD_RESULT.JUSTIFICATION,
+                    LAB_TESTED_IN =     entity.VIRAL_LOAD_RESULT.LAB_TESTED_IN,
+                    REGIMEN = entity.VIRAL_LOAD_RESULT.REGIMEN,
+                    SAMPLE_TYPE = entity.VIRAL_LOAD_RESULT.SAMPLE_TYPE
+                }
+            }; 
+            return vlResultsDto;
         }
     }
 }

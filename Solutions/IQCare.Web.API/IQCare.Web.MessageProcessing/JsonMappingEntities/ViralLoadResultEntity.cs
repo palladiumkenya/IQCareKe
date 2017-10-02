@@ -18,6 +18,6 @@ namespace IQCare.Web.MessageProcessing.JsonMappingEntities
     {
         public MESSAGEHEADER MESSAGE_HEADER { get; set; }
         public PATIENTIDENTIFICATION PATIENT_IDENTIFICATION { get; set; }
-        public List<VIRALLOADRESULT> VIRAL_LOAD_RESULT { get; set; }
+        public VIRALLOADRESULT VIRAL_LOAD_RESULT { get; set; }
     }
 }

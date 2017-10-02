@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace IQCare.DTO
 {
@@ -7,7 +8,7 @@ namespace IQCare.DTO
         public DTOIdentifier InternalPatientIdentifier { get; set; }
         public PatientNameDto Patientname { get; set; }
         public CommonOrderDetails CommonOrderDetails { get; set; }
-        public PharmacyEncodedOrder PharmacyEncodedOrder  { get; set; }
+        public List<PharmacyEncodedOrder> PharmacyEncodedOrder  { get; set; }
     }
 
    public class CommonOrderDetails
