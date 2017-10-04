@@ -15,13 +15,13 @@ namespace IQCare.CCC.UILogic.Interoperability
                 PatientLookup patient = new PatientLookup();
                 PatientLookupManager patientLookup = new PatientLookupManager();
 
-                if (!registration.Patient.DateOfBirth.HasValue)
+                if (!string.IsNullOrWhiteSpace(registration.Patient.DateOfBirth))
                 {
                     Exception exception = new Exception("Patient Date of Birth not found. Please include date of birth");
                     throw exception;
                 }
 
-                if (!registration.DateOfEnrollment.HasValue)
+                if (!string.IsNullOrWhiteSpace(registration.DateOfEnrollment))
                 {
                     Exception exception = new Exception("Patient Date of Enrollment not found. Please include date of enrollment");
                     throw exception;

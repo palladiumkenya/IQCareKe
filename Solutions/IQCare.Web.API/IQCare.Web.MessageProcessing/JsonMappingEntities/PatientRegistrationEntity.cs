@@ -22,7 +22,7 @@ namespace IQCare.Web.MessageProcessing.JsonMappingEntities
         public string ADDRESS { get; set; }
         public string PHONE_NUMBER { get; set; }
         public string SEX { get; set; }
-        public DateTime ? DATE_OF_BIRTH { get; set; }
+        public string DATE_OF_BIRTH { get; set; }
         public string CONTACT_ROLE { get; set; }
     }
 
@@ -35,7 +35,7 @@ namespace IQCare.Web.MessageProcessing.JsonMappingEntities
         public string OBSERVATION_VALUE { get; set; }
         public string UNITS { get; set; }
         public string OBSERVATION_RESULT_STATUS { get; set; }
-        public DateTime OBSERVATION_DATETIME { get; set; }
+        public string OBSERVATION_DATETIME { get; set; }
         public string ABNORMAL_FLAGS { get; set; }
     }
 

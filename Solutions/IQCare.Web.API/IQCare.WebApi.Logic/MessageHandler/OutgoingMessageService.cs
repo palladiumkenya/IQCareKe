@@ -160,14 +160,15 @@ namespace IQCare.WebApi.Logic.MessageHandler
             var registrationEntity = _jsonEntityMapper.PatientRegistration(registrationDto);
             string registrationJson = new JavaScriptSerializer().Serialize(registrationEntity);
             //save/send
-            var apiOutbox = new ApiOutbox()
-            {
-                DateRead = DateTime.Now,
-                Message = registrationJson
+            //var apiOutbox = new ApiOutbox()
+            //{
+            //    DateRead = DateTime.Now,
+            //    Message = registrationJson
 
-            };
+            //};
 
-            _apiOutboxManager.AddApiOutbox(apiOutbox);
+            //_apiOutboxManager.AddApiOutbox(apiOutbox);
+
             //Send
             SendData(registrationJson,"");
 
