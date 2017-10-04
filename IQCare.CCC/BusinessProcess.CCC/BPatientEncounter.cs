@@ -5,7 +5,7 @@ using Interface.CCC;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using static Entities.CCC.Triage.PatientEncounter;
+using static Entities.CCC.Encounter.PatientEncounter;
 
 namespace BusinessProcess.CCC
 {

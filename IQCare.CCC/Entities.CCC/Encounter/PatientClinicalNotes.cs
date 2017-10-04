@@ -4,7 +4,7 @@ using Entities.Common;
 using Entities.CCC.Enrollment;
 using Entities.CCC.Visit;
 
-namespace Entities.CCC.Triage
+namespace Entities.CCC.Encounter
 {
     [Serializable]
     [Table("PatientClinicalNotes")]

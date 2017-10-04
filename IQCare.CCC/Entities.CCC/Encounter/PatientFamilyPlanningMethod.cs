@@ -3,7 +3,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Entities.CCC.Triage
+namespace Entities.CCC.Encounter
 {
     [Serializable]
     [Table("PatientFamilyPlanningMethod")]

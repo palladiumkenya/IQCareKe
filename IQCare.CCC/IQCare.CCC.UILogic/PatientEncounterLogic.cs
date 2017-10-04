@@ -10,7 +10,7 @@ using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using static Entities.CCC.Triage.PatientEncounter;
+using static Entities.CCC.Encounter.PatientEncounter;
 
 namespace IQCare.CCC.UILogic
 {

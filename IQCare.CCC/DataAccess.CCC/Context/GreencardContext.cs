@@ -3,7 +3,7 @@ using Entities.Common;
 using System.Data.Common;
 using System.Data.Entity;
 using Entities.CCC.Baseline;
-using Entities.CCC.Triage;
+using Entities.CCC.Encounter;
 using Entities.CCC.Enrollment;
 using Entities.CCC.Screening;
 using Entities.CCC.Triage;
@@ -126,9 +126,6 @@ namespace DataAccess.CCC.Context
         // Patient Assessment| ART Treatment Preparation
         public DbSet<PatientPsychoscialCriteria> PatientPsychosocialCriteria { get; set; }
         public DbSet<PatientSupportSystemCriteria> PatientSupportSystemCriteria { get; set; }
-
-        //Adverse Event
-        public DbSet<PatientAdverseEventsOutcome> PatientAdverseEventsOutcomes { get; set; }
 
     }
 }

@@ -8,7 +8,7 @@ using Entities.CCC.Enrollment;
 using Entities.CCC.Visit;
 using Entities.Common;
 
-namespace Entities.CCC.Triage
+namespace Entities.CCC.Encounter
 {
     [Serializable]
     [Table("AdherenceAssessment")]

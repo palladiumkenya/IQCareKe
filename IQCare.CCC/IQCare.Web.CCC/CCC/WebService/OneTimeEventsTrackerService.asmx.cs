@@ -1,5 +1,5 @@
 ﻿using Entities.CCC.Baseline;
-using Entities.CCC.Triage;
+using Entities.CCC.Encounter;
 using IQCare.CCC.UILogic;
 using IQCare.CCC.UILogic.Baseline;
 using System;

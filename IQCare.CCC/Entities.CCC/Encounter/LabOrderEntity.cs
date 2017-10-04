@@ -11,7 +11,7 @@ using Entities.CCC.Enrollment;
 
 
 
-namespace Entities.CCC.Triage
+namespace Entities.CCC.Encounter
 {
     [Serializable]
     [Table("ord_LabOrder")]

@@ -1,5 +1,5 @@
 ﻿using DataAccess.Context;
-using Entities.CCC.Triage;
+using Entities.CCC.Encounter;
 using System;
 using System.Collections.Generic;
 using System.Linq;

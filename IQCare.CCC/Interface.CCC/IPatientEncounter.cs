@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
-using static Entities.CCC.Triage.PatientEncounter;
+using static Entities.CCC.Encounter.PatientEncounter;
 
 namespace Interface.CCC
 {

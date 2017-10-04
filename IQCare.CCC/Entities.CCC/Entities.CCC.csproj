@@ -77,7 +77,6 @@
     <Compile Include="Baseline\PatientTransferIn.cs" />
     <Compile Include="Baseline\PatientTreatmentInitiation.cs" />
     <Compile Include="Consent\PatientConsent.cs" />
-    <Compile Include="Triage\PatientAdverseEventsOutcome.cs" />
     <Compile Include="Encounter\ComplaintsHistory.cs" />
     <Compile Include="Encounter\LabDetailsEntity.cs" />
     <Compile Include="Encounter\LabResultsEntity.cs" />

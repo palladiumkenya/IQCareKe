@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Entities.CCC.Triage
+namespace Entities.CCC.Encounter
 {
     [Serializable]
     public class PatientEncounter

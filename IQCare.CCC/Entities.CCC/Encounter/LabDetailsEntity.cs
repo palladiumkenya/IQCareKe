@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using Entities.Common;
 
-namespace Entities.CCC.Triage
+namespace Entities.CCC.Encounter
 {
     [Serializable]
     [Table("dtl_LabOrderTest")]

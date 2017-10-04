@@ -1,7 +1,7 @@
 ﻿using DataAccess.Base;
 using Interface.CCC.Baseline;
 using System;
-using Entities.CCC.Triage;
+using Entities.CCC.Encounter;
 using DataAccess.CCC.Repository;
 using DataAccess.CCC.Context;
 using System.Collections.Generic;

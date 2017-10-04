@@ -143,7 +143,7 @@ namespace IQCare.Web.CCC.UC
 
         private void loadPatientEncounter()
         {
-            Entities.CCC.Triage.PatientEncounter.PresentingComplaintsEntity pce = new Entities.CCC.Triage.PatientEncounter.PresentingComplaintsEntity();
+            Entities.CCC.Encounter.PatientEncounter.PresentingComplaintsEntity pce = new Entities.CCC.Encounter.PatientEncounter.PresentingComplaintsEntity();
             pce = PEL.loadPatientEncounter(Session["PatientMasterVisitId"].ToString(), Session["PatientPK"].ToString());
 
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();

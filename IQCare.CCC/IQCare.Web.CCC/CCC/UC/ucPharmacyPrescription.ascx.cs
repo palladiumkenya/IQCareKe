@@ -73,7 +73,7 @@ namespace IQCare.Web.CCC.UC
             LookupLogic lookUp = new LookupLogic();
             PatientEncounterLogic encounterLogic = new PatientEncounterLogic();
 
-            List<Entities.CCC.Triage.PatientEncounter.PharmacyFields> lst = encounterLogic.getPharmacyFields(Session["PatientMasterVisitId"].ToString());
+            List<Entities.CCC.Encounter.PatientEncounter.PharmacyFields> lst = encounterLogic.getPharmacyFields(Session["PatientMasterVisitId"].ToString());
             if (lst.Count > 0)
             {
                 ddlTreatmentProgram.SelectedValue = lst[0].TreatmentProgram;

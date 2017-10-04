@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Application.Presentation;
-using Entities.CCC.Triage;
+using Entities.CCC.Encounter;
 using Interface.CCC.Encounter;
 
 namespace IQCare.CCC.UILogic

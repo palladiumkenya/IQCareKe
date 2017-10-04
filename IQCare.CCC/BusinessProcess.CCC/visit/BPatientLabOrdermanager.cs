@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using Entities.CCC.Visit;
-using Entities.CCC.Triage;
+using Entities.CCC.Encounter;
 using Interface.CCC.Visit;
 using DataAccess.CCC.Context;
 using DataAccess.CCC.Repository;

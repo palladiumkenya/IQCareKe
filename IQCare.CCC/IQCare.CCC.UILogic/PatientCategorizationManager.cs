@@ -1,5 +1,5 @@
 ﻿using Application.Presentation;
-using Entities.CCC.Triage;
+using Entities.CCC.Encounter;
 using Interface.CCC;
 using System.Collections.Generic;
 
