@@ -5,6 +5,8 @@
     <ApplicationIcon />
     <OutputType>Library</OutputType>
     <StartupObject />
+    <AssemblyName>IQCare.Web.Api</AssemblyName>
+    <RootNamespace>IQCare.Web.Api</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -28,6 +30,9 @@
     <Reference Include="DataAccess.Context">
       <HintPath>..\..\..\References\DataAccess.Context.dll</HintPath>
     </Reference>
+    <Reference Include="DataAccess.WebApi">
+      <HintPath>..\..\..\References\DataAccess.WebApi.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\..\..\References\EntityFramework.dll</HintPath>
     </Reference>
@@ -43,12 +48,6 @@
     <Reference Include="IQCare.Events">
       <HintPath>..\..\..\References\IQCare.Events.dll</HintPath>
     </Reference>
-    <Reference Include="IQCare.Web.ApiLogic">
-      <HintPath>..\..\..\References\IQCare.Web.ApiLogic.dll</HintPath>
-    </Reference>
-    <Reference Include="IQCare.Web.MessageProcessing">
-      <HintPath>..\..\..\References\IQCare.Web.MessageProcessing.dll</HintPath>
-    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions">
       <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.Web.Extensions.dll</HintPath>
@@ -58,6 +57,10 @@
   <ItemGroup>
     <Folder Include="DependancyResolution\" />
     <Folder Include="App_Start\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IQCare.WebApi.Logic\IQCare.WebApi.Logic.csproj" />
   </ItemGroup>
 
 </Project>

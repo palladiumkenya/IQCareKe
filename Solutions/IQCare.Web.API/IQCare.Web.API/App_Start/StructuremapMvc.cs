@@ -1,7 +1,8 @@
-using IQCare.Web.API.DependancyResolution;
+using IQCare.Web.Api.DependancyResolution;
 using StructureMap;
 
-namespace IQCare.Web.API {
+namespace IQCare.Web.Api
+{
     public static class StructuremapMvc {
         #region Public Properties
 

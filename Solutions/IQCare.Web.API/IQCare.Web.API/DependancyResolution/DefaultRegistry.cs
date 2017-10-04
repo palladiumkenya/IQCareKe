@@ -1,9 +1,8 @@
-using IQCare.Web.ApiLogic.Infrastructure.Context;
-using IQCare.Web.ApiLogic.MessageHandler;
+using DataAccess.WebApi;
+using IQCare.WebApi.Logic.MessageHandler;
 using StructureMap;
-//using IQ.ApiLogic.Infrastructure.Context;
 
-namespace IQCare.Web.API.DependancyResolution {
+namespace IQCare.Web.Api.DependancyResolution {
     public class DefaultRegistry : Registry {
         #region Constructors and Destructors
 
@@ -12,7 +11,7 @@ namespace IQCare.Web.API.DependancyResolution {
                 scan =>
                 {
                     scan.TheCallingAssembly();
-                    scan.Assembly("IQ.ApiLogic");
+                    scan.Assembly("IQCare.Web.Api");
                     scan.WithDefaultConventions();
                     scan.With(new ControllerConvention());
                 });

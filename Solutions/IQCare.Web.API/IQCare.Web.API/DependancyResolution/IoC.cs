@@ -1,6 +1,6 @@
 using StructureMap;
 
-namespace IQCare.Web.API.DependancyResolution {
+namespace IQCare.Web.Api.DependancyResolution {
     public static class IoC {
 
 

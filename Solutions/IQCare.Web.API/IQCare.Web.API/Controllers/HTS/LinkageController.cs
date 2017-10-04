@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace IQCare.Web.API.Controllers.HTS
+namespace IQCare.Web.Api.Controllers.HTS
 {
     [ApiVersion("1.0")] // deprecate version [ApiVersion( "1.0", Deprecated = true )] [ApiVersion( "2.0" )]
     [Route("api/hts/v{version:apiVersion}/[controller]")]

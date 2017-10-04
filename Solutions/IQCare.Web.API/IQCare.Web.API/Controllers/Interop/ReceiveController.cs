@@ -4,7 +4,7 @@ using System.Web.Http;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace IQCare.Web.API.Controllers.Interop
+namespace IQCare.Web.Api.Controllers.Interop
 {
     [RoutePrefix("api/interop/{controller}")]
     public class ReceiveController : ApiController

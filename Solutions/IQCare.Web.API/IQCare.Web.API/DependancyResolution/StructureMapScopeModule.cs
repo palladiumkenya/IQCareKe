@@ -1,7 +1,7 @@
 using System.Web;
 using StructureMap.Web.Pipeline;
 
-namespace IQCare.Web.API.DependancyResolution {
+namespace IQCare.Web.Api.DependancyResolution {
     public class StructureMapScopeModule : IHttpModule {
         #region Public Methods and Operators
 

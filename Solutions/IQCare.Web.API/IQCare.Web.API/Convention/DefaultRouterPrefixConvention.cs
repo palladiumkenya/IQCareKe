@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
-namespace IQCare.Web.API.Convention
+namespace IQCare.Web.Api.Convention
 {
     public class DefaultRouterPrefixConvention
     {

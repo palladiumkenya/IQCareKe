@@ -6,7 +6,7 @@ using StructureMap.Graph.Scanning;
 using StructureMap.Pipeline;
 using StructureMap.TypeRules;
 
-namespace IQCare.Web.API.DependancyResolution {
+namespace IQCare.Web.Api.DependancyResolution {
     // updated to support StructureMap 4.X
 
     public class ControllerConvention : IRegistrationConvention {

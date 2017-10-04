@@ -6,7 +6,7 @@ using System.Web.Http.Dependencies;
 using Microsoft.Practices.ServiceLocation;
 using StructureMap;
 
-namespace IQCare.Web.API.DependancyResolution {
+namespace IQCare.Web.Api.DependancyResolution {
     /// <summary>
     /// The structure map dependency scope.
     /// </summary>
