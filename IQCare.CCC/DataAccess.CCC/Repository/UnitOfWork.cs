@@ -644,7 +644,7 @@ namespace DataAccess.CCC.Repository
             get { return _patientArtDistributionRepository ?? (_patientArtDistributionRepository= new PatientArtDistributionRepository((GreencardContext)_context)); }
         }
 
-        public IPatientAdverseEventOutcomeRepository patientAdverseEventOutcomeRepository
+        public IPatientAdverseEventOutcomeRepository PatientAdverseEventOutcomeRepository
         {
             get
             {
@@ -652,6 +652,7 @@ namespace DataAccess.CCC.Repository
             }
         }
 
+       // public IPatientAdverseEventOutcomeRepository PatientAdverseEventOutcomeRepository => throw new NotImplementedException();
 
         public int Complete()
         {
