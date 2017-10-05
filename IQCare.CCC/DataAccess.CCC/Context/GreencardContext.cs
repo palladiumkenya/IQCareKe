@@ -57,6 +57,7 @@ namespace DataAccess.CCC.Context
         public DbSet<Entities.CCC.Triage.PatientFamilyPlanning> PatientFamilyPlanning { get; set; }
         public DbSet<PatientPreganancy> PatientPregnancy { get; set; }
         public DbSet<PatientPregnancyIndicator> PatientPregnancyIndicator { get; set; }
+        public DbSet<PatientAdverseEventOutcome> PatientAdverseEventOutcome { get; set; }
 
         //Visit
         public DbSet<PatientMasterVisit> PatientMasterVisit { get; set; }
