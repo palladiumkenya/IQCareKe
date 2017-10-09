@@ -1332,7 +1332,7 @@ BEGIN
 END
 
 
-
+/****** Object:  StoredProcedure [dbo].[PatientDemographics_To_Greencard]    Script Date: 5/9/2017 3:16:05 PM ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientDemographics_To_Greencard]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[PatientDemographics_To_Greencard]
 GO
@@ -1398,7 +1398,7 @@ BEGIN
 END
 
 
-
+/****** Object:  StoredProcedure [dbo].[PatientEnrollment_To_Greencard]    Script Date: 5/9/2017 3:16:05 PM ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientEnrollment_To_Greencard]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[PatientEnrollment_To_Greencard]
 GO
@@ -1511,7 +1511,7 @@ BEGIN
 END
 
 
-
+/****** Object:  StoredProcedure [dbo].[PatientIdentifiers_To_Greencard]    Script Date: 5/9/2017 3:16:05 PM ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientIdentifiers_To_Greencard]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[PatientIdentifiers_To_Greencard]
 GO
@@ -1609,6 +1609,7 @@ END
 
 
 
+/****** Object:  StoredProcedure [dbo].[PatientTreatmentSupporter_To_Greencard]    Script Date: 5/9/2017 3:16:05 PM ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientTreatmentSupporter_To_Greencard]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[PatientTreatmentSupporter_To_Greencard]
 GO
@@ -1699,6 +1700,7 @@ BEGIN
 END
 
 
+/****** Object:  StoredProcedure [dbo].[PatientContact_To_Greencard]    Script Date: 5/9/2017 3:16:05 PM ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientContact_To_Greencard]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[PatientContact_To_Greencard]
 GO
@@ -1751,6 +1753,185 @@ BEGIN
 END
 
 
+
+/****** Object:  StoredProcedure [dbo].[PatientBaselineVariables_To_Greencard]    Script Date: 5/9/2017 3:16:05 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientBaselineVariables_To_Greencard]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[PatientBaselineVariables_To_Greencard]
+GO
+
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientBaselineVariables_To_Greencard]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[PatientBaselineVariables_To_Greencard] AS' 
+END
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+ALTER PROCEDURE [dbo].[PatientBaselineVariables_To_Greencard]
+@ptn_pk int,
+@transferIn int,
+@ARTStartDate datetime,
+@Sex int,
+@LocationId int,
+@StartDate datetime,
+@EnrollmentDate datetime OUTPUT,
+@VisitDate datetime OUTPUT
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+		DECLARE @HBVInfected bit, @Pregnant bit, @TBinfected bit, @WHOStage int, @WHOStageString varchar(50), @BreastFeeding bit, 
+			@CD4Count decimal , @MUAC decimal, @Weight decimal, @Height decimal, @artstart datetime,
+			@ClosestARVDate datetime, @PatientMasterVisitId int, @HIVDiagnosisDate datetime, 
+			@EnrollmentWHOStage int, @EnrollmentWHOStageString varchar(50),  @Cohort varchar(50), @visit_id int;
+
+			IF @transferIn = 1
+				BEGIN
+					SET @artstart = @ARTStartDate
+				END
+			ELSE
+				BEGIN
+					Select TOP 1 @artstart = ARTStartDate	From mst_Patient	Where Ptn_Pk = @ptn_pk	And LocationID = @LocationId;
+				END
+
+			select TOP 1 @visit_id = visit_id from dtl_PatientARVEligibility where ptn_pk = @ptn_pk And LocationID = @LocationId;
+		
+			print 'set @artstart and @visit_id';
+
+			SET @Pregnant = 0;
+
+			IF @Sex = (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName like '%gender%' and ItemName like 'Female%')
+				BEGIN
+					--SET @Pregnant = 0;
+					IF EXISTS(select TOP 1 Name from mst_Decode where id=(select TOP 1 eligibleThrough from dtl_PatientARVEligibility where ptn_pk = @ptn_pk And LocationID = @LocationId) and name like 'Pregnancy')
+						BEGIN
+							SET @Pregnant = 1;
+						END
+				END
+			
+			print 'set @Sex';
+
+			If EXISTS(SELECT * FROM dtl_PatientVitals dtl WHERE dtl.Visit_pk = @visit_id ) Begin
+				SET @Weight = (Select Top (1) dtl.[Weight]
+				From ord_Visit As ord
+				Inner Join
+					dtl_PatientVitals As dtl On dtl.Visit_pk = ord.Visit_Id
+				Where (ord.Ptn_Pk = @ptn_pk)
+				And (dtl.[Weight] Is Not Null)
+				And (ord.Visit_Id = @visit_id));
+			End 
+			Else Begin
+				SET @Weight = NULL;
+			End
+		
+			print 'set @Weight';
+
+			If exists (SELECT * FROM dtl_PatientVitals dtl WHERE dtl.Visit_pk = @visit_id) Begin
+				SET @Height = (Select Top 1 dtl.Height
+				From Ord_visit ord
+				Inner Join
+					dtl_PatientVitals dtl On dtl.visit_pk = ord.Visit_Id
+				Where ord.ptn_pk = @ptn_pk
+				And dtl.Height Is Not Null
+				And (ord.Visit_Id = @visit_id));
+			End 
+			Else Begin
+				SET @Height = NULL;
+			End
+		
+			print 'set @Height';
+
+			If EXISTS(SELECT * FROM dtl_PatientVitals dtl WHERE dtl.Visit_pk = @visit_id) Begin
+				SET @MUAC = (Select Top (1) dtl.Muac
+				From ord_Visit As ord
+				Inner Join
+					dtl_PatientVitals As dtl On dtl.Visit_pk = ord.Visit_Id
+				Where (ord.Ptn_Pk = @ptn_pk)
+				And (dtl.Muac Is Not Null)
+				And (ord.Visit_Id = @visit_id));
+			End
+		
+			print 'set @MUAC';
+
+			SET @TBinfected = 0;
+			IF EXISTS(select TOP 1 Name from mst_Decode where id=(select TOP 1 eligibleThrough from dtl_PatientARVEligibility where ptn_pk = @ptn_pk And LocationID = @LocationId) and name like 'TB/HIV')
+				BEGIN
+					SET @TBinfected = 1;
+				END
+			
+			print 'set @TBinfected';
+
+			SET @BreastFeeding = 0;
+			IF EXISTS(select TOP 1 Name from mst_Decode where id=(select TOP 1 eligibleThrough from dtl_PatientARVEligibility where ptn_pk = @ptn_pk And LocationID = @LocationId) and name like 'BreastFeeding')
+				BEGIN
+					SET @TBinfected = 1;
+				END
+			
+			print 'set @BreastFeeding';
+
+			--okay remove 1900
+			SET @HIVDiagnosisDate = (SELECT TOP 1 dbo.dtl_PatientHivPrevCareEnrollment.ConfirmHIVPosDate
+			FROM dbo.dtl_PatientHivPrevCareEnrollment INNER JOIN
+				dbo.ord_Visit ON dbo.dtl_PatientHivPrevCareEnrollment.ptn_pk = dbo.ord_Visit.Ptn_Pk 
+				AND dbo.dtl_PatientHivPrevCareEnrollment.Visit_pk = dbo.ord_Visit.Visit_Id INNER JOIN
+				dbo.mst_VisitType ON dbo.ord_Visit.VisitType = dbo.mst_VisitType.VisitTypeID
+				WHERE (dbo.mst_VisitType.VisitName = 'ART History') AND dbo.dtl_PatientHivPrevCareEnrollment.ptn_pk = @ptn_pk);
+
+			print 'set @HIVDiagnosisDate';
+			SET @EnrollmentDate = (select TOP 1 DateEnrolledInCare from dtl_PatientHivPrevCareEnrollment where ptn_pk=@ptn_pk);
+			print 'set @EnrollmentDate';
+			SET @EnrollmentWHOStageString = (SELECT TOP 1 Name FROM mst_Decode WHERE ID = (SELECT TOP 1 WHOStage FROM dtl_PatientARVEligibility where WHOStage > 0 AND ptn_pk=@ptn_pk) and codeid=22 AND Name <> 'N/A');
+			print 'set @EnrollmentWHOStage';
+			SET @Cohort = (select  TOP 1 convert(char(3),[FirstLineRegStDate] , 0) + ' ' + CONVERT(varchar(10), year([FirstLineRegStDate])) from [dbo].[dtl_PatientARTCare] WHERE ptn_pk = @ptn_pk);
+			print 'set @Cohort';
+			SET @CD4Count = (SELECT top 1 CD4 FROM dtl_PatientARVEligibility WHERE ptn_pk = @ptn_pk)
+			print 'set @CD4Count';
+			SET @WHOStageString = (SELECT TOP 1 WHOStage FROM dtl_PatientARVEligibility where ptn_pk = @ptn_pk);
+
+			print 'set @HIVDiagnosisDate, @EnrollmentDate, @EnrollmentWHOStage, @Cohort, @CD4Count, @WHOStage';
+		
+			SET @EnrollmentWHOStage = CASE @EnrollmentWHOStageString  
+					WHEN '1' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '1') 
+					WHEN '2' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '2')   
+					WHEN '3' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '3')   
+					WHEN '4' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '4')
+					WHEN 'T1' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '1') 
+					WHEN 'T2' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '2')   
+					WHEN 'T3' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '3')   
+					WHEN 'T4' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '4')
+					ELSE (select TOP 1 ItemId from LookupItemView where MasterName = 'Unknown' and ItemName = 'Unknown')
+				END
+		  
+			SET @WHOStage = CASE @WHOStageString  
+					WHEN '1' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '1') 
+					WHEN '2' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '2')   
+					WHEN '3' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '3')   
+					WHEN '4' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '4')
+					WHEN 'T1' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '1') 
+					WHEN 'T2' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '2')   
+					WHEN 'T3' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '3')   
+					WHEN 'T4' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '4')
+					ELSE (select TOP 1 ItemId from LookupItemView where MasterName = 'Unknown' and ItemName = 'Unknown')
+				END
+		  
+			SET @VisitDate = (SELECT TOP 1 [VisitDate] FROM [dbo].[ord_Visit] where [Ptn_Pk] = @ptn_pk AND [VisitType] in(18, 19));
+			IF @EnrollmentDate IS NULL BEGIN SET @EnrollmentDate =@StartDate; END;
+
+		SELECT @EnrollmentDate;
+END
+
+
+/****** Object:  StoredProcedure [dbo].[PatientBaseline_To_Greencard]    Script Date: 5/9/2017 3:16:05 PM ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientBaseline_To_Greencard]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[PatientBaseline_To_Greencard]
 GO
