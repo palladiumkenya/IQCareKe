@@ -71,6 +71,8 @@
     <Content Include="CCC\Scripts\css\patientSummary.css" />
     <Content Include="CCC\Scripts\css\prism.css" />
     <Content Include="CCC\Scripts\css\select2.css" />
+    <Content Include="CCC\Scripts\css\style-267.css" />
+    <Content Include="CCC\Scripts\css\style-291.css" />
     <Content Include="CCC\Scripts\css\style.css" />
     <Content Include="CCC\Scripts\css\stylechosen.css" />
     <Content Include="CCC\Scripts\css\sweetalert2.css" />
@@ -81,6 +83,7 @@
     <Content Include="CCC\Scripts\js\bootstrap-datetimepicker.min.js" />
     <Content Include="CCC\Scripts\js\chosen.jquery.js" />
     <Content Include="CCC\Scripts\js\collapse.js" />
+    <Content Include="CCC\Scripts\js\html5shiv.js" />
     <Content Include="CCC\Scripts\js\init.js" />
     <Content Include="CCC\Scripts\js\jquery-ui.min.css" />
     <Content Include="CCC\Scripts\js\jquery-ui.min.js" />
@@ -107,7 +110,9 @@
     <Content Include="CCC\Scripts\css\jquery-ui.css" />
     <Content Include="CCC\Scripts\css\exporting.css" />
     <Content Include="CCC\Scripts\js\highcharts.js" />
+    <Content Include="CCC\Scripts\js\placeholder.js" />
     <Content Include="CCC\Scripts\js\prism.js" />
+    <Content Include="CCC\Scripts\js\respond.min.js" />
     <Content Include="CCC\Scripts\js\select2.min.js" />
     <Content Include="CCC\Scripts\js\sweetalert2.js" />
     <Content Include="CCC\Scripts\js\tether.js" />
