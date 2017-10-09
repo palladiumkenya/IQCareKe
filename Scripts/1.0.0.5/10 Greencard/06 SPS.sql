@@ -28,7 +28,7 @@ BEGIN
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
 
-    -- Insert statements for procedure here
+	-- Insert statements for procedure here
 	DECLARE @j INT = 1;
 	DECLARE @countj INT;
 	--Create Temporary Tables for storing data 
@@ -37,7 +37,7 @@ BEGIN
 	INSERT INTO #Tmst_Patient(ptn_pk, personId)
 	SELECT ptn_pk, PersonId FROM Patient
 
-	DECLARE @ptn_pk int, @personId int, @message varchar(max);
+	DECLARE @ptn_pk int, @personId int, @patientId int, @message varchar(max);
 
 	SELECT @countj = COUNT(Id) FROM #Tmst_Patient 
 
@@ -48,13 +48,14 @@ BEGIN
 
 				BEGIN TRY
 					BEGIN TRANSACTION
+						UPDATE mst_Patient set MovedToPatientTable = 1 where Ptn_Pk = @ptn_pk;	
+
 						IF NOT EXISTS(SELECT * FROM GreenCardBlueCard_Transactional WHERE Ptn_Pk = @ptn_pk)
 							BEGIN
 								PRINT ' ';
 								SELECT @message = '----- Set Patient as moved ptn_pk: ' + CAST(@ptn_pk as varchar(50));
 								PRINT @message;
 								
-								UPDATE mst_Patient set MovedToPatientTable = 1 where Ptn_Pk = @ptn_pk;							
 								INSERT INTO [dbo].[GreenCardBlueCard_Transactional] ([PersonId],[Ptn_Pk]) VALUES (@personId , @ptn_pk);
 							END
 					COMMIT
@@ -67,6 +68,49 @@ BEGIN
 
 			END
 		END
+	DROP TABLE #Tmst_Patient
+
+
+	DECLARE @d int = 1;
+	DECLARE @countd int;
+
+	CREATE TABLE #TPatient(Id INT IDENTITY(1,1), ptn_pk int, personId int, patientId int)
+
+	INSERT INTO #TPatient(ptn_pk, personId, patientId)
+	SELECT ptn_pk, PersonId, Id from (SELECT        Id, ptn_pk, PersonId, PatientIndex, PatientType, FacilityId, Active, DateOfBirth, DobPrecision, NationalId, DeleteFlag, CreatedBy, CreateDate, AuditData, RegistrationDate, row_number() Over (Partition By ptn_pk Order By Id Desc) RowNum
+	FROM            dbo.Patient
+	WHERE        (ptn_pk IN
+								 (SELECT        ptn_pk
+								   FROM            (SELECT        Patient_1.ptn_pk, COUNT(Patient_1.Id) AS Expr1
+															 FROM            dbo.Patient AS Patient_1 INNER JOIN
+																					   dbo.mst_Patient ON Patient_1.ptn_pk = dbo.mst_Patient.Ptn_Pk
+															 GROUP BY Patient_1.ptn_pk
+															 HAVING         (COUNT(Patient_1.Id) > 1)) AS T))) B 
+
+	WHERE B.RowNum=1
+
+	SELECT @countd = COUNT(Id) FROM #TPatient
+	
+	BEGIN
+		WHILE (@d <= @countd)
+		BEGIN
+			SELECT @ptn_pk = ptn_pk, @personId = personId, @patientId = patientId from #TPatient WHERE Id = @d;
+
+			BEGIN TRY
+				BEGIN TRANSACTION
+					UPDATE Patient SET DeleteFlag = 1, ptn_pk = - FLOOR(RAND(CHECKSUM(NEWID()))*(9999-1000)+1000) WHERE Id = @patientId
+					UPDATE Person SET DeleteFlag = 1 WHERE Id = @personId
+				COMMIT
+			END TRY
+			BEGIN CATCH
+				ROLLBACK
+			END CATCH
+
+			SELECT @d = @d + 1
+		END
+	END
+
+	DROP TABLE #TPatient
 END
 GO
 
@@ -151,10 +195,10 @@ Where (dbo.Lnk_PatientProgramStart.ModuleId = 203)
 --INTO @FirstName, @MiddleName, @LastName, @Sex, @Status, @DeleteFlag, @CreateDate, @UserID, @PatientFacilityId, @FacilityId, @DateOfBirth, @DobPrecision, @NationalId,@CCCNumber, @ReferredFrom, @RegistrationDate, @MaritalStatus , @DistrictName, @Address, @Phone
   
 IF @@rowcount = 1 BEGIN  
-    PRINT ' '  
-    SELECT @message = '----- patients From mst_patient: ' + CAST(@ptn_pk as varchar(50))
+	PRINT ' '  
+	SELECT @message = '----- patients From mst_patient: ' + CAST(@ptn_pk as varchar(50))
   
-    PRINT @message  
+	PRINT @message  
 
 	exec pr_OpenDecryptedSession;
 
@@ -259,7 +303,7 @@ IF @@rowcount = 1 BEGIN
 
 			----INSERT INTO PersonLocation(PersonId, County, SubCounty, Ward, Village, Location, SubLocation, LandMark, NearestHealthCentre, Active, DeleteFlag, CreatedBy, CreateDate)
 			----VALUES(@Id, @CountyID, @SubCountyID, @WardID, @Village, @Location, @SubLocation, @LandMark, @NearestHealthCentre, 1, @DeleteFlag, @UserID, @CreateDate);
-    
+	
 			--Insert into Treatment Supporter
 			--DECLARE Treatment_Supporter_cursor CURSOR FOR
 			Select Top 1 @FirstNameT = substring(TreatmentSupporterName, 0, charindex(' ', TreatmentSupporterName))--									  As firstname
@@ -484,7 +528,7 @@ IF @@rowcount = 1 BEGIN
 
 		END
 
-    -- Get the next mst_patient.
+	-- Get the next mst_patient.
   --  FETCH NEXT FROM mstPatient_cursor   
    -- INTO @FirstName, @MiddleName, @LastName, @Sex, @Status, @DeleteFlag, @CreateDate, @UserID, @PatientFacilityId, @FacilityId, @DateOfBirth, @DobPrecision, @NationalId, @CCCNumber, @ReferredFrom, @RegistrationDate, @MaritalStatus , @DistrictName, @Address, @Phone
 END   
@@ -1289,6 +1333,621 @@ END
 
 
 
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientDemographics_To_Greencard]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[PatientDemographics_To_Greencard]
+GO
+
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientDemographics_To_Greencard]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[PatientDemographics_To_Greencard] AS' 
+END
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+ALTER PROCEDURE [dbo].[PatientDemographics_To_Greencard]
+	@ptn_pk int,
+	@FirstName varbinary(max),
+	@MiddleName varbinary(max),
+	@LastName varbinary(max),
+	@Sex int,
+	@Status_Greencard bit,
+	@DeleteFlag bit,
+	@CreateDate datetime, 
+	@UserID int,
+	@PatientFacilityId varchar(50), 
+	@PatientType int,
+	@FacilityId varchar(10),
+	@DateOfBirth datetime, 
+	@DobPrecision int, 
+	@NationalId varbinary(max),
+	@RegistrationDate datetime,
+	@PersonId int OUTPUT,
+	@PatientId int OUTPUT
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	DECLARE @message varchar(max);
+
+	Insert into Person(FirstName, MidName, LastName, Sex, Active, DeleteFlag, CreateDate, CreatedBy)
+	Values(@FirstName, @MiddleName, @LastName, @Sex, @Status_Greencard, @DeleteFlag, @CreateDate, @UserID);
+
+	SET @PersonId = SCOPE_IDENTITY();
+	SET @message = 'Created Person Id: ' + CAST(@PersonId as varchar(50));
+	PRINT @message;
+
+	Insert into Patient(ptn_pk, PersonId, PatientIndex, PatientType, FacilityId, Active, DateOfBirth, DobPrecision, NationalId, DeleteFlag, CreatedBy, CreateDate, RegistrationDate)
+	Values(@ptn_pk, @PersonId, @PatientFacilityId, @PatientType, @FacilityId, @Status_Greencard, @DateOfBirth, @DobPrecision, @NationalId, @DeleteFlag, @UserID, @CreateDate, @RegistrationDate);
+
+	SET @PatientId = SCOPE_IDENTITY();
+	SET @message = 'Created Patient Id: ' + CAST(@PatientId as varchar);
+	PRINT @message;
+
+	SELECT @PersonId, @PatientId;
+END
+
+
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientEnrollment_To_Greencard]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[PatientEnrollment_To_Greencard]
+GO
+
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientEnrollment_To_Greencard]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[PatientEnrollment_To_Greencard] AS' 
+END
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+ALTER PROCEDURE [dbo].[PatientEnrollment_To_Greencard]
+	-- Add the parameters for the stored procedure here
+	@ptn_pk int,
+	@transferIn int,
+	@PatientId int,
+	@Status bit,
+	@EnrollmentId int OUTPUT,
+	@ModuleId int OUTPUT,
+	@StartDate datetime OUTPUT
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	--Insert into Enrollment Table
+	DECLARE @message varchar(max);
+	DECLARE @j INT = 1;
+	DECLARE @countj INT;
+	--Create Temporary Tables for storing data 
+	CREATE TABLE #TLnk_PatientProgramStart (Id INT IDENTITY(1,1), ModuleId int, [StartDate] datetime, [UserID] int, [CreateDate] datetime);
+
+	INSERT INTO #TLnk_PatientProgramStart(ModuleId, [StartDate], [UserID], [CreateDate])
+	SELECT ModuleId, [StartDate], [UserID], [CreateDate] FROM Lnk_PatientProgramStart WHERE Ptn_pk=@ptn_pk;
+
+	DECLARE @UserID_Enrollment int, @CreateDate_Enrollment datetime;
+
+	SELECT @countj = COUNT(Id) FROM #TLnk_PatientProgramStart 
+
+	BEGIN
+		WHILE (@j <= @countj)
+			BEGIN
+				SELECT @ModuleId = ModuleId, @StartDate = [StartDate], @UserID_Enrollment = [UserID], @CreateDate_Enrollment = [CreateDate] FROM #TLnk_PatientProgramStart WHERE Id = @j AND ModuleId = 203;
+
+				BEGIN TRY
+					BEGIN TRANSACTION
+
+							PRINT ' ';
+							SET @message = '----- Enrollment Start Date: ' + CAST(@StartDate as varchar(50));
+							PRINT @message;
+
+								IF @ModuleId = 203
+								BEGIN
+									PRINT ' ';
+									SET @message = '----- Transfer In is (1), New (0) : ' + CAST(@transferIn as varchar(50));
+									PRINT @message;
+
+									DECLARE @DateEnrolledInCare DATETIME;
+									IF @transferIn = 1
+										BEGIN
+											SET @DateEnrolledInCare = (SELECT TOP 1 dbo.dtl_PatientHivPrevCareEnrollment.DateEnrolledInCare
+																		FROM dbo.dtl_PatientHivPrevCareEnrollment INNER JOIN
+																			dbo.ord_Visit ON dbo.dtl_PatientHivPrevCareEnrollment.ptn_pk = dbo.ord_Visit.Ptn_Pk 
+																			AND dbo.dtl_PatientHivPrevCareEnrollment.Visit_pk = dbo.ord_Visit.Visit_Id INNER JOIN
+																			dbo.mst_VisitType ON dbo.ord_Visit.VisitType = dbo.mst_VisitType.VisitTypeID
+																			WHERE (dbo.mst_VisitType.VisitName = 'ART History') AND dbo.dtl_PatientHivPrevCareEnrollment.ptn_pk = @ptn_pk);
+
+											IF @DateEnrolledInCare IS NOT NULL
+												BEGIN
+													SET @StartDate = @DateEnrolledInCare 
+												END;
+										END;
+
+									PRINT ' ';
+									SET @message = '----- Start Date Patient enrollment: ' + CAST(@StartDate as varchar(50));
+									PRINT @message;
+
+
+									INSERT INTO [dbo].[PatientEnrollment] ([PatientId] ,[ServiceAreaId] ,[EnrollmentDate] ,[EnrollmentStatusId] ,[TransferIn] ,[CareEnded] ,[DeleteFlag] ,[CreatedBy] ,[CreateDate] ,[AuditData])
+									VALUES (@PatientId,1, @StartDate,0, @transferIn, @Status ,0 ,@UserID_Enrollment ,@CreateDate_Enrollment ,NULL);
+
+									SET @EnrollmentId = SCOPE_IDENTITY();
+									SET @message = 'Created PatientEnrollment Id: ' + CAST(@EnrollmentId as varchar);
+									PRINT @message;
+								END
+					COMMIT
+				END TRY
+				BEGIN CATCH
+					ROLLBACK
+				END CATCH
+
+				SELECT @j = @j + 1;
+
+			END
+		END
+	--Now Drop Temporary Tables
+	DROP TABLE #TLnk_PatientProgramStart
+
+	SELECT @EnrollmentId, @ModuleId, @StartDate;
+END
+
+
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientIdentifiers_To_Greencard]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[PatientIdentifiers_To_Greencard]
+GO
+
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientIdentifiers_To_Greencard]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[PatientIdentifiers_To_Greencard] AS' 
+END
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+ALTER PROCEDURE [dbo].[PatientIdentifiers_To_Greencard]
+	-- Add the parameters for the stored procedure here
+	@CCCNumber varchar(20),
+	@PersonId int,
+	@ModuleId int,
+	@StartDate datetime,
+	@PatientId int,
+	@EnrollmentId int,
+	@UserID int,
+	@CreateDate datetime,
+	@ReferredFrom int,
+	@entryPoint int,	
+	@MaritalStatus int,
+	@MaritalStatusId int,
+	@ServiceEntryPointId int OUTPUT,
+	@PatientIdentifierId int OUTPUT,
+	@PatientMaritalStatusID int OUTPUT
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	DECLARE @message varchar(max);
+
+	IF @CCCNumber IS NOT NULL AND @ModuleId = 203
+		BEGIN
+			-- Patient Identifier
+			INSERT INTO [dbo].[PatientIdentifier] ([PatientId], [PatientEnrollmentId], [IdentifierTypeId], [IdentifierValue] ,[DeleteFlag] ,[CreatedBy] ,[CreateDate] ,[Active] ,[AuditData])
+			VALUES (@PatientId , @EnrollmentId ,(select top 1 Id from Identifiers where Code='CCCNumber') ,@CCCNumber ,0 ,@UserID ,@CreateDate ,0 ,NULL);
+
+			SET @PatientIdentifierId = SCOPE_IDENTITY();
+			SET @message = 'Created PatientIdentifier Id: ' + CAST(@PatientIdentifierId as varchar);
+			PRINT @message;
+		END
+
+	--Insert into ServiceEntryPoint
+	IF @ReferredFrom > 0 bEGIN
+		SET @entryPoint = (select TOP 1 ItemId from [dbo].[LookupItemView] where ItemName like '%' + (SELECT top 1 Name FROM mst_Decode WHERE ID=@ReferredFrom AND CodeID=17) + '%');
+		IF @entryPoint IS NULL
+			BEGIN
+				SET @entryPoint = (select top 1 ItemId from LookupItemView where MasterName = 'Unknown' and ItemName = 'Unknown');
+			END
+	END
+	ELSE
+		SET @entryPoint = (select top 1 ItemId from LookupItemView where MasterName = 'Unknown' and ItemName = 'Unknown');
+
+	INSERT INTO ServiceEntryPoint([PatientId], [ServiceAreaId], [EntryPointId], [DeleteFlag], [CreatedBy], [CreateDate], [Active])
+	VALUES(@PatientId, 1, @entryPoint, 0 , @UserID, @CreateDate, 0);
+
+	SET @ServiceEntryPointId = SCOPE_IDENTITY();
+	SET @message = 'Created ServiceEntryPoint Id: ' + CAST(@ServiceEntryPointId as varchar);
+	PRINT @message;
+	
+	--Insert into MaritalStatus
+	IF @MaritalStatus > 0
+		BEGIN
+			IF EXISTS (select TOP 1 ItemId from [dbo].[LookupItemView] where ItemName like '%' + (select Name from mst_Decode where ID = @MaritalStatus and CodeID = 12) + '%')
+				SET @MaritalStatusId = (select TOP 1 ItemId from [dbo].[LookupItemView] where ItemName like '%' + (select TOP 1 Name from mst_Decode where ID = @MaritalStatus and CodeID = 12) + '%');
+			ELSE
+				SET @MaritalStatusId = (select TOP 1 ItemId from LookupItemView where MasterName = 'Unknown' and ItemName = 'Unknown');
+		END
+	ELSE
+		SET @MaritalStatusId = (select TOP 1 ItemId from LookupItemView where MasterName = 'Unknown' and ItemName = 'Unknown');
+
+	INSERT INTO PatientMaritalStatus(PersonId, MaritalStatusId, Active, DeleteFlag, CreatedBy, CreateDate)
+	VALUES(@PersonId, @MaritalStatusId, 1, 0, @UserID, @CreateDate);
+
+	SET @PatientMaritalStatusID = SCOPE_IDENTITY();
+	SET @message = 'Created PatientMaritalStatus Id: ' + CAST(@PatientMaritalStatusID as varchar);
+	PRINT @message;
+
+	SELECT @PatientIdentifierId, @ServiceEntryPointId, @PatientMaritalStatusID
+END
+
+
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientTreatmentSupporter_To_Greencard]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[PatientTreatmentSupporter_To_Greencard]
+GO
+
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientTreatmentSupporter_To_Greencard]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[PatientTreatmentSupporter_To_Greencard] AS' 
+END
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+ALTER PROCEDURE [dbo].[PatientTreatmentSupporter_To_Greencard]
+	-- Add the parameters for the stored procedure here
+	@ptn_pk int,
+	@PersonId int,
+	@PatientTreatmentSupporterID int OUTPUT
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	--Insert into Treatment Supporter
+	DECLARE @k INT = 1;
+	DECLARE @countk INT, @message varchar(max);
+
+	DECLARE @FirstNameT varchar(50), @LastNameT varchar(50), @TreatmentSupportTelNumber varchar(50), 
+	@CreateDateT datetime, @UserIDT int, @IDT int;
+
+	--Create Temporary Tables for storing data 
+	CREATE TABLE #Tdtl_PatientContacts(Id INT IDENTITY(1,1), FirstNameT varchar(50), LastNameT varchar(50), TreatmentSupportTelNumber varchar(50), CreateDateT datetime, UserIDT int);
+		--Insert data to temporary table #Tdtl_PatientContacts 
+	INSERT INTO #Tdtl_PatientContacts(FirstNameT, LastNameT, TreatmentSupportTelNumber, CreateDateT, UserIDT)
+	SELECT SUBSTRING(TreatmentSupporterName,0,charindex(' ',TreatmentSupporterName))as firstname, SUBSTRING(TreatmentSupporterName,charindex(' ',TreatmentSupporterName) + 1,len(TreatmentSupporterName)+1)as lastname,	TreatmentSupportTelNumber, CreateDate, UserID 
+	from dtl_PatientContacts WHERE ptn_pk = @ptn_pk;
+
+	SELECT @countk = COUNT(Id) FROM #Tdtl_PatientContacts 
+	BEGIN
+	WHILE (@k <= @countk)
+		BEGIN
+			SELECT @FirstNameT = FirstNameT, @LastNameT = LastNameT, @TreatmentSupportTelNumber = TreatmentSupportTelNumber, @CreateDateT = CreateDateT, @UserIDT = UserIDT FROM #Tdtl_PatientContacts WHERE Id = @k;
+
+			BEGIN TRY
+				BEGIN TRANSACTION
+					PRINT ' '  
+					SELECT @message = '----- Treatment Supporter: ' + CAST(@ptn_pk as varchar(50));
+					PRINT @message;
+
+					IF @FirstNameT IS NOT NULL AND @LastNameT IS NOT NULL 
+						BEGIN
+							Insert into Person(FirstName, MidName, LastName, Sex, Active, DeleteFlag, CreateDate, CreatedBy)
+							Values(ENCRYPTBYKEY(KEY_GUID('Key_CTC'),@FirstNameT), NULL, ENCRYPTBYKEY(KEY_GUID('Key_CTC'),@LastNameT), (select TOP 1 ItemId from LookupItemView where MasterName = 'Unknown' and ItemName = 'Unknown'), 1, 0, getdate(), @UserIDT);
+
+							SELECT @IDT = SCOPE_IDENTITY();
+							SELECT @message = 'Created Person Treatment Supporter Id: ' + CAST(@IDT as varchar(50));
+							PRINT @message;
+
+							INSERT INTO PatientTreatmentSupporter(PersonId, [SupporterId], [MobileContact], [DeleteFlag], [CreatedBy], [CreateDate])
+							VALUES(@PersonId, @IDT, ENCRYPTBYKEY(KEY_GUID('Key_CTC'),@TreatmentSupportTelNumber), 0, @UserIDT, getdate());
+
+							SET @PatientTreatmentSupporterID = SCOPE_IDENTITY();
+							SET @message = 'Created PatientTreatmentSupporterID Id: ' + CAST(@PatientTreatmentSupporterID as varchar);
+							PRINT @message;
+						END
+				COMMIT
+				END TRY
+				BEGIN CATCH
+					ROLLBACK
+				END CATCH
+
+				SELECT @k = @k + 1;
+
+				END
+			END
+		--Now Drop Temporary Tables
+		DROP TABLE #Tdtl_PatientContacts
+
+	SELECT @PatientTreatmentSupporterID;
+END
+
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientContact_To_Greencard]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[PatientContact_To_Greencard]
+GO
+
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientContact_To_Greencard]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[PatientContact_To_Greencard] AS' 
+END
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+ALTER PROCEDURE [dbo].[PatientContact_To_Greencard]
+	-- Add the parameters for the stored procedure here
+	@Address varbinary(max),
+	@Phone varbinary(max),
+	@PersonId int,
+	@Status bit,
+	@UserID int,
+	@CreateDate datetime,
+	@PersonContactID int OUTPUT
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	DECLARE @message varchar(max);
+
+	--Insert into Person Contact
+	IF @Address IS NOT NULL AND @Phone IS NOT NULL
+		BEGIN
+			INSERT INTO PersonContact(PersonId, [PhysicalAddress], [MobileNumber], [AlternativeNumber], [EmailAddress], [Active], [DeleteFlag], [CreatedBy], [CreateDate])
+			VALUES(@PersonId, @Address, @Phone, null, null, @Status, 0, @UserID, @CreateDate);
+
+			SET @PersonContactID = SCOPE_IDENTITY();
+			SET @message = 'Created PersonContact Id: ' + CAST(@PersonContactID as varchar);
+			PRINT @message;
+		END
+
+		SELECT @PersonContactID;
+END
+
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientBaseline_To_Greencard]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[PatientBaseline_To_Greencard]
+GO
+
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientBaseline_To_Greencard]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[PatientBaseline_To_Greencard] AS' 
+END
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+ALTER PROCEDURE [dbo].[PatientBaseline_To_Greencard]
+	-- Add the parameters for the stored procedure here
+	@ptn_pk int,
+	@PatientId int,
+	@EnrollmentDate datetime,
+	@VisitDate datetime,
+	@UserID int,
+	@PatientMasterVisitId int,
+	@Status int,
+	@ExitDate datetime,
+	@CreateDate datetime,
+	@UserID_CareEnded int,
+	@CreateDate_CareEnded datetime,
+	@EnrollmentId int,
+	@ExitReason int,
+	@DateOfDeath datetime,
+	@Weight decimal,
+	@Height decimal,
+	@Pregnant bit,
+	@TBinfected bit,
+	@WHOStage int,
+	@BreastFeeding bit,
+	@CD4Count decimal,
+	@MUAC decimal,
+	@transferIn int,
+	@EnrollmentWHOStage int,
+	@HIVDiagnosisDate datetime,
+	@artstart datetime,
+	@Cohort varchar(50)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	DECLARE @message varchar(max);
+
+	INSERT INTO PatientMasterVisit(PatientId, ServiceId, Start, [End], Active, VisitDate, VisitScheduled, VisitBy, VisitType, [Status], CreateDate, DeleteFlag, CreatedBy)
+	VALUES(@PatientId, 1, @EnrollmentDate, NULL, 0, @VisitDate, NULL, NULL, (SELECT top 1 ItemId FROM LookupItemView WHERE	MasterName like '%VisitType%' and ItemName like '%Enrollment%'), NULL, GETDATE(), 0 , @UserID);
+
+	SET @PatientMasterVisitId = SCOPE_IDENTITY();
+		
+	SELECT @message = 'Created PatientMasterVisit Id: ' + CAST(@PatientMasterVisitId as varchar);
+	PRINT @message;
+			
+	IF @Status = 1
+		BEGIN
+			IF @ExitDate IS NULL
+			BEGIN
+				SET @ExitDate = @CreateDate;
+			END;
+				
+			IF @UserID_CareEnded IS NULL
+			BEGIN
+				SET @UserID_CareEnded = @UserID;
+			END;
+				
+			IF @CreateDate_CareEnded IS NULL
+			BEGIN
+				SET @CreateDate_CareEnded = @CreateDate;
+			END;
+				
+			INSERT INTO [dbo].[PatientCareending] ([PatientId] ,[PatientMasterVisitId] ,[PatientEnrollmentId] ,[ExitReason] ,[ExitDate] ,[TransferOutfacility] ,[DateOfDeath] ,[CareEndingNotes] ,[Active] ,[DeleteFlag] ,[CreatedBy] ,[CreateDate] ,[AuditData])
+			VALUES(@PatientId ,@PatientMasterVisitId ,@EnrollmentId ,@ExitReason , @ExitDate ,NULL ,@DateOfDeath ,NULL ,0 ,0,@UserID_CareEnded ,@CreateDate_CareEnded ,NULL);
+		END
+			
+	SELECT @message = 'Created PatientCareending Id: ' + CAST(SCOPE_IDENTITY() as varchar);
+	PRINT @message;
+
+	IF (@Weight IS NOT NULL AND @Height IS NOT NULL AND @Weight > 0 AND @Height > 0)
+	BEGIN
+		INSERT INTO [dbo].[PatientBaselineAssessment]([PatientId], [PatientMasterVisitId], [HBVInfected], [Pregnant], [TBinfected], [WHOStage], [BreastFeeding], [CD4Count], [MUAC], [Weight], [Height], [DeleteFlag], [CreatedBy], [CreateDate] )
+		VALUES(@PatientId, @PatientMasterVisitId, 0, @Pregnant, @TBinfected, @WHOStage, @BreastFeeding, @CD4Count, @MUAC, @Weight, @Height, 0 , @UserID, GETDATE());
+
+		SELECT @message = 'Created PatientBaselineAssessment Id: ' + CAST(SCOPE_IDENTITY() as varchar);
+		PRINT @message;
+	END
+
+	IF EXISTS(SELECT * FROM dtl_PatientHivPrevCareIE WHERE Ptn_pk = @ptn_pk)
+		BEGIN
+			DECLARE @TransferInDate datetime, @TreatmentStartDate datetime, @CurrentART varchar(50), @FacilityFrom varchar(150), @CreateDateTransfer datetime, @MFLCODE int;
+
+			SET @TransferInDate = (SELECT TOP 1 ARTTransferInDate FROM dtl_PatientHivPrevCareIE WHERE Ptn_pk = @ptn_pk);
+			SET @TreatmentStartDate = (SELECT TOP 1 FirstLineRegStDate FROM dtl_PatientARTCare WHERE ptn_pk = @ptn_pk);
+			SET @CurrentART = (SELECT TOP 1 CurrentART FROM dtl_PatientHivPrevCareIE WHERE Ptn_pk = @ptn_pk);
+			SET @FacilityFrom = (SELECT TOP 1 ARTTransferInFrom FROM dtl_PatientHivPrevCareIE WHERE Ptn_pk = @ptn_pk);
+			SET @CreateDateTransfer = (SELECT TOP 1 CreateDate FROM dtl_PatientHivPrevCareIE WHERE Ptn_pk = @ptn_pk);
+
+			SET @MFLCODE = (select TOP 1 PosId from mst_Patient WHERE Ptn_pk = @ptn_pk);
+			--SET @TreatmentStartDate = ISNULL(@TreatmentStartDate, @artstart);
+			--SET @TreatmentStartDate = ISNULL(@TreatmentStartDate, @DEFAULTDATE);
+
+			SET @MFLCODE = (select TOP 1 PosId from mst_Patient WHERE Ptn_pk = @ptn_pk);
+			SET @FacilityFrom = ISNULL(@FacilityFrom, 'Unknown');
+			SET @CurrentART = ISNULL(@CurrentART, (select top 1 ItemId from LookupItemView where MasterName = 'Unknown' and ItemName = 'Unknown'));
+
+			SELECT @message = '@TransferInDate: ' + CAST(@TransferInDate as varchar);
+			PRINT @message;
+
+			SELECT @message = '@TreatmentStartDate: ' + CAST(@TreatmentStartDate as varchar);
+			PRINT @message;
+
+			SELECT @message = '@CurrentART: ' + CAST(@CurrentART as varchar);
+			PRINT @message;
+
+			SELECT @message = '@FacilityFrom: ' + CAST(@FacilityFrom as varchar);
+			PRINT @message;
+
+			SELECT @message = '@MFLCODE: ' + CAST(@MFLCODE as varchar);
+			PRINT @message;
+
+			IF @TransferInDate = CONVERT(datetime, '1900-01-01', 104)
+			BEGIN
+				SET @TransferInDate = NULL;
+			END
+
+
+			IF @transferIn = 1 AND @TransferInDate IS NOT NULL AND @TreatmentStartDate IS NOT NULL AND @CurrentART IS NOT NULL AND @FacilityFrom IS NOT NULL AND @MFLCODE IS NOT NULL
+				BEGIN
+					INSERT INTO [dbo].[PatientTransferIn]([PatientId], [PatientMasterVisitId], [ServiceAreaId], [TransferInDate], [TreatmentStartDate], [CurrentTreatment],  [FacilityFrom] , [MFLCode] ,[CountyFrom] , [TransferInNotes], [DeleteFlag] ,[CreatedBy] , [CreateDate])
+					VALUES(@PatientId, @PatientMasterVisitId, 1, @TransferInDate, @TreatmentStartDate, @CurrentART, @FacilityFrom, @MFLCODE, (select ItemId from LookupItemView where MasterName = 'Unknown' and ItemName = 'Unknown'), ' ', 0 , @UserID, @CreateDateTransfer);
+
+					SELECT @message = 'Created PatientTransferIn Id: ' + CAST(SCOPE_IDENTITY() as varchar);
+					PRINT @message;
+				END
+	END
+
+	IF EXISTS (Select ptn_pk, locationID, Visit_pk [VisitId], a.PurposeId, b.Name [Purpose], a.Regimen [Regimen],	a.DateLastUsed [RegLastUsed] From dtl_PatientBlueCardPriorART a Inner Join Mst_Decode b On a.PurposeID = b.ID WHERE ptn_pk = @ptn_pk)
+		BEGIN
+			DECLARE @TreatmentType varchar(50), @Purpose varchar(50), @Regimen varchar(50), @DateLastUsed datetime;
+			
+			SET @TreatmentType = (select TOP 1 [Name] from mst_Decode where codeID=33 AND ID = (Select top 1 a.PurposeId From dtl_PatientBlueCardPriorART a Inner Join Mst_Decode b On a.PurposeID = b.ID WHERE ptn_pk = @ptn_pk));
+			SET @Purpose = (select TOP 1 b.Name [Purpose] From dtl_PatientBlueCardPriorART a Inner Join Mst_Decode b On a.PurposeID = b.ID WHERE ptn_pk = @ptn_pk);
+			SET @Regimen = (select TOP 1 a.Regimen [Regimen] From dtl_PatientBlueCardPriorART a Inner Join Mst_Decode b On a.PurposeID = b.ID WHERE ptn_pk = @ptn_pk);
+			SET @DateLastUsed = (select TOP 1 a.DateLastUsed [RegLastUsed] From dtl_PatientBlueCardPriorART a Inner Join Mst_Decode b On a.PurposeID = b.ID WHERE ptn_pk = @ptn_pk);
+
+			IF @TreatmentType IS NOT NULL AND @Purpose IS NOT NULL AND @Regimen IS NOT NULL
+				BEGIN
+				INSERT INTO [dbo].[PatientARVHistory]([PatientId], [PatientMasterVisitId], [TreatmentType], [Purpose] , [Regimen], [DateLastUsed], [DeleteFlag] , [CreatedBy] , [CreateDate])
+				VALUES(@PatientId, @PatientMasterVisitId, @TreatmentType, @Purpose, @Regimen, @DateLastUsed, 0, @UserID, @CreateDate);
+				END
+
+				SELECT @message = 'Created PatientARVHistory Id: ' + CAST(SCOPE_IDENTITY() as varchar);
+				PRINT @message;
+		END
+
+	--Tranfer-ins//
+	IF EXISTS(select TOP 1 FirstLineRegStDate from [dbo].[dtl_PatientARTCare] WHERE ptn_pk = @ptn_pk) AND @transferIn = 1
+		BEGIN
+			DECLARE @DateStartedOnFirstLine datetime;
+			SET @DateStartedOnFirstLine = (select TOP 1 FirstLineRegStDate from [dbo].[dtl_PatientARTCare] WHERE ptn_pk = @ptn_pk);
+
+			IF @DateStartedOnFirstLine IS NOT NULL AND @Cohort IS NOT NULL
+			BEGIN
+				INSERT INTO [dbo].[PatientTreatmentInitiation]([PatientMasterVisitId], [PatientId], [DateStartedOnFirstLine], [Cohort], Regimen, [RegimenCode] , [BaselineViralload] , [BaselineViralloadDate] , [DeleteFlag] , [CreatedBy] , [CreateDate] )
+				VALUES(@PatientMasterVisitId, @PatientId, @DateStartedOnFirstLine, @Cohort, Null,(SELECT TOP 1 FirstLineReg FROM dtl_PatientARTCare where ptn_pk = @ptn_pk) , NULL, NULL, 0, @UserID, @CreateDate);
+
+				SELECT @message = 'Created PatientTreatmentInitiation Id: ' + CAST(SCOPE_IDENTITY() as varchar);
+				PRINT @message;
+			END
+		END
+
+	--SET @HIVDiagnosisDate = ISNULL(@HIVDiagnosisDate, @DEFAULTDATE);
+	--SET @EnrollmentDate = ISNULL(@EnrollmentDate, @DEFAULTDATE);
+	--SET @artstart = ISNULL(@artstart, @DEFAULTDATE);
+
+	IF @EnrollmentWHOStage IS NOT NULL
+		BEGIN
+			INSERT INTO [dbo].[PatientHivDiagnosis]([PatientMasterVisitId] , [PatientId] , [HIVDiagnosisDate] , [EnrollmentDate] , [EnrollmentWHOStage] , [ARTInitiationDate] , [DeleteFlag] , [CreatedBy] , [CreateDate])
+			VALUES(@PatientMasterVisitId, @PatientId, @HIVDiagnosisDate, @EnrollmentDate, @EnrollmentWHOStage, @artstart, 0 , @UserID, @CreateDate);
+
+				SELECT @message = 'Created PatientHivDiagnosis Id: ' + CAST(SCOPE_IDENTITY() as varchar);
+				PRINT @message;
+		END
+END
+
+
 /****** Object:  StoredProcedure [dbo].[SP_mst_PatientToGreencardRegistration]    Script Date: 5/9/2017 3:16:05 PM ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SP_mst_PatientToGreencardRegistration]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[SP_mst_PatientToGreencardRegistration]
@@ -1415,491 +2074,29 @@ BEGIN
 								SET @UserID_CareEnded = (SELECT top 1 UserID FROM dtl_PatientCareEnded WHERE Ptn_Pk=@ptn_pk);
 								SET @CreateDate_CareEnded = (SELECT top 1 CreateDate FROM dtl_PatientCareEnded WHERE Ptn_Pk=@ptn_pk);
 							END
-			
 
-						Insert into Person(FirstName, MidName, LastName, Sex, Active, DeleteFlag, CreateDate, CreatedBy)
-						Values(@FirstName, @MiddleName, @LastName, @Sex, @Status_Greencard, @DeleteFlag, @CreateDate, @UserID);
+						DECLARE @ModuleId int, @StartDate datetime;
 
-
-
-						SELECT @PersonId = SCOPE_IDENTITY();
-						SELECT @message = 'Created Person Id: ' + CAST(@PersonId as varchar(50));
-						PRINT @message;
-
-						Insert into Patient(ptn_pk, PersonId, PatientIndex, PatientType, FacilityId, Active, DateOfBirth, DobPrecision, NationalId, DeleteFlag, CreatedBy, CreateDate, RegistrationDate)
-						Values(@ptn_pk, @PersonId, @PatientFacilityId, @PatientType, @FacilityId, @Status_Greencard, @DateOfBirth, @DobPrecision, @NationalId, @DeleteFlag, @UserID, @CreateDate, @RegistrationDate);
-
-						SELECT @PatientId = SCOPE_IDENTITY();
-						SELECT @message = 'Created Patient Id: ' + CAST(@PatientId as varchar);
-						PRINT @message;
+						exec [dbo].[PatientDemographics_To_Greencard] @ptn_pk,	@FirstName,	@MiddleName, @LastName,	@Sex, @Status_Greencard, @DeleteFlag, @CreateDate, @UserID, @PatientFacilityId, @PatientType, @FacilityId, @DateOfBirth, @DobPrecision, @NationalId, @RegistrationDate,	@PersonId OUTPUT, @PatientId OUTPUT
 
 						--Insert into Enrollment Table
-						DECLARE @j INT = 1;
-						DECLARE @countj INT;
-						--Create Temporary Tables for storing data 
-						CREATE TABLE #TLnk_PatientProgramStart (Id INT IDENTITY(1,1), ModuleId int, [StartDate] datetime, [UserID] int, [CreateDate] datetime);
+						exec [dbo].[PatientEnrollment_To_Greencard] @ptn_pk, @transferIn, @PatientId, @Status, @EnrollmentId OUTPUT, @ModuleId OUTPUT, @StartDate OUTPUT
 
-						INSERT INTO #TLnk_PatientProgramStart(ModuleId, [StartDate], [UserID], [CreateDate])
-						SELECT ModuleId, [StartDate], [UserID], [CreateDate] FROM Lnk_PatientProgramStart WHERE Ptn_pk=@ptn_pk;
+						--insert into PatientIdentifier, ServiceEntryPoint, MaritalStatus
+						exec [dbo].[PatientIdentifiers_To_Greencard] @CCCNumber, @PersonId, @ModuleId, @StartDate, @PatientId, @EnrollmentId, @UserID, @CreateDate,	@ReferredFrom, @entryPoint,	@MaritalStatus,	@MaritalStatusId, @ServiceEntryPointId OUTPUT, @PatientIdentifierId OUTPUT,	@PatientMaritalStatusID OUTPUT
 
-						DECLARE @ModuleId int, @StartDate datetime, @UserID_Enrollment int, @CreateDate_Enrollment datetime;
-
-						SELECT @countj = COUNT(Id) FROM #TLnk_PatientProgramStart 
-
-						BEGIN
-							WHILE (@j <= @countj)
-								BEGIN
-									SELECT @ModuleId = ModuleId, @StartDate = [StartDate], @UserID_Enrollment = [UserID], @CreateDate_Enrollment = [CreateDate] FROM #TLnk_PatientProgramStart WHERE Id = @j AND ModuleId = 203;
-
-									BEGIN TRY
-										BEGIN TRANSACTION
-
-												PRINT ' ';
-												SELECT @message = '----- Enrollment Start Date: ' + CAST(@StartDate as varchar(50));
-												PRINT @message;
-
-												 IF @ModuleId = 203
-													BEGIN
-														PRINT ' ';
-														SELECT @message = '----- Transfer In is (1), New (0) : ' + CAST(@transferIn as varchar(50));
-														PRINT @message;
-
-														DECLARE @DateEnrolledInCare DATETIME;
-														IF @transferIn = 1
-															BEGIN
-																SET @DateEnrolledInCare = (SELECT TOP 1 dbo.dtl_PatientHivPrevCareEnrollment.DateEnrolledInCare
-																							FROM dbo.dtl_PatientHivPrevCareEnrollment INNER JOIN
-																							 dbo.ord_Visit ON dbo.dtl_PatientHivPrevCareEnrollment.ptn_pk = dbo.ord_Visit.Ptn_Pk 
-																							 AND dbo.dtl_PatientHivPrevCareEnrollment.Visit_pk = dbo.ord_Visit.Visit_Id INNER JOIN
-																							 dbo.mst_VisitType ON dbo.ord_Visit.VisitType = dbo.mst_VisitType.VisitTypeID
-																							 WHERE (dbo.mst_VisitType.VisitName = 'ART History') AND dbo.dtl_PatientHivPrevCareEnrollment.ptn_pk = @ptn_pk);
-
-																IF @DateEnrolledInCare IS NOT NULL
-																	BEGIN
-																		SET @StartDate = @DateEnrolledInCare 
-																	END;
-															END;
-
-														PRINT ' ';
-														SELECT @message = '----- Start Date Patient enrollment: ' + CAST(@StartDate as varchar(50));
-														PRINT @message;
-
-
-														INSERT INTO [dbo].[PatientEnrollment] ([PatientId] ,[ServiceAreaId] ,[EnrollmentDate] ,[EnrollmentStatusId] ,[TransferIn] ,[CareEnded] ,[DeleteFlag] ,[CreatedBy] ,[CreateDate] ,[AuditData])
-														VALUES (@PatientId,1, @StartDate,0, @transferIn, @Status ,0 ,@UserID_Enrollment ,@CreateDate_Enrollment ,NULL);
-
-														SELECT @EnrollmentId = SCOPE_IDENTITY();
-														SELECT @message = 'Created PatientEnrollment Id: ' + CAST(@EnrollmentId as varchar);
-														PRINT @message;
-													END
-										COMMIT
-									END TRY
-									BEGIN CATCH
-										ROLLBACK
-									END CATCH
-
-									SELECT @j = @j + 1;
-
-								END
-							END
-						--Now Drop Temporary Tables
-						DROP TABLE #TLnk_PatientProgramStart
-
-						IF @CCCNumber IS NOT NULL AND @ModuleId = 203
-							BEGIN
-								-- Patient Identifier
-								INSERT INTO [dbo].[PatientIdentifier] ([PatientId], [PatientEnrollmentId], [IdentifierTypeId], [IdentifierValue] ,[DeleteFlag] ,[CreatedBy] ,[CreateDate] ,[Active] ,[AuditData])
-								VALUES (@PatientId , @EnrollmentId ,(select top 1 Id from Identifiers where Code='CCCNumber') ,@CCCNumber ,0 ,@UserID ,@CreateDate ,0 ,NULL);
-
-								SELECT @PatientIdentifierId = SCOPE_IDENTITY();
-								SELECT @message = 'Created PatientIdentifier Id: ' + CAST(@PatientIdentifierId as varchar);
-								PRINT @message;
-							END
-
-						--Insert into ServiceEntryPoint
-						IF @ReferredFrom > 0 bEGIN
-							SET @entryPoint = (select TOP 1 ItemId from [dbo].[LookupItemView] where ItemName like '%' + (SELECT top 1 Name FROM mst_Decode WHERE ID=@ReferredFrom AND CodeID=17) + '%');
-							IF @entryPoint IS NULL
-								BEGIN
-									SET @entryPoint = (select top 1 ItemId from LookupItemView where MasterName = 'Unknown' and ItemName = 'Unknown');
-								END
-						END
-						ELSE
-							SET @entryPoint = (select top 1 ItemId from LookupItemView where MasterName = 'Unknown' and ItemName = 'Unknown');
-
-						INSERT INTO ServiceEntryPoint([PatientId], [ServiceAreaId], [EntryPointId], [DeleteFlag], [CreatedBy], [CreateDate], [Active])
-						VALUES(@PatientId, 1, @entryPoint, 0 , @UserID, @CreateDate, 0);
-
-						SELECT @ServiceEntryPointId = SCOPE_IDENTITY();
-						SELECT @message = 'Created ServiceEntryPoint Id: ' + CAST(@ServiceEntryPointId as varchar);
-						PRINT @message;
-	
-						--Insert into MaritalStatus
-						IF @MaritalStatus > 0
-							BEGIN
-								IF EXISTS (select TOP 1 ItemId from [dbo].[LookupItemView] where ItemName like '%' + (select Name from mst_Decode where ID = @MaritalStatus and CodeID = 12) + '%')
-									SET @MaritalStatusId = (select TOP 1 ItemId from [dbo].[LookupItemView] where ItemName like '%' + (select TOP 1 Name from mst_Decode where ID = @MaritalStatus and CodeID = 12) + '%');
-								ELSE
-									SET @MaritalStatusId = (select TOP 1 ItemId from LookupItemView where MasterName = 'Unknown' and ItemName = 'Unknown');
-							END
-						ELSE
-							SET @MaritalStatusId = (select TOP 1 ItemId from LookupItemView where MasterName = 'Unknown' and ItemName = 'Unknown');
-
-						INSERT INTO PatientMaritalStatus(PersonId, MaritalStatusId, Active, DeleteFlag, CreatedBy, CreateDate)
-						VALUES(@PersonId, @MaritalStatusId, 1, 0, @UserID, @CreateDate);
-
-						SELECT @PatientMaritalStatusID = SCOPE_IDENTITY();
-						SELECT @message = 'Created PatientMaritalStatus Id: ' + CAST(@PatientMaritalStatusID as varchar);
-						PRINT @message;
-    
 						--Insert into Treatment Supporter
-						DECLARE @k INT = 1;
-						DECLARE @countk INT;
-
-						DECLARE @FirstNameT varchar(50), @LastNameT varchar(50), @TreatmentSupportTelNumber varchar(50), 
-						@CreateDateT datetime, @UserIDT int, @IDT int;
-
-						--Create Temporary Tables for storing data 
-						CREATE TABLE #Tdtl_PatientContacts(Id INT IDENTITY(1,1), FirstNameT varchar(50), LastNameT varchar(50), TreatmentSupportTelNumber varchar(50), CreateDateT datetime, UserIDT int);
-						 --Insert data to temporary table #Tdtl_PatientContacts 
-						INSERT INTO #Tdtl_PatientContacts(FirstNameT, LastNameT, TreatmentSupportTelNumber, CreateDateT, UserIDT)
-						SELECT SUBSTRING(TreatmentSupporterName,0,charindex(' ',TreatmentSupporterName))as firstname, SUBSTRING(TreatmentSupporterName,charindex(' ',TreatmentSupporterName) + 1,len(TreatmentSupporterName)+1)as lastname,	TreatmentSupportTelNumber, CreateDate, UserID 
-						from dtl_PatientContacts WHERE ptn_pk = @ptn_pk;
-
-						SELECT @countk = COUNT(Id) FROM #Tdtl_PatientContacts 
-						BEGIN
-						WHILE (@k <= @countk)
-							BEGIN
-								SELECT @FirstNameT = FirstNameT, @LastNameT = LastNameT, @TreatmentSupportTelNumber = TreatmentSupportTelNumber, @CreateDateT = CreateDateT, @UserIDT = UserIDT FROM #Tdtl_PatientContacts WHERE Id = @k;
-
-								BEGIN TRY
-									BEGIN TRANSACTION
-										PRINT ' '  
-										SELECT @message = '----- Treatment Supporter: ' + CAST(@ptn_pk as varchar(50));
-										PRINT @message;
-
-										IF @FirstNameT IS NOT NULL AND @LastNameT IS NOT NULL 
-											BEGIN
-												Insert into Person(FirstName, MidName, LastName, Sex, Active, DeleteFlag, CreateDate, CreatedBy)
-												Values(ENCRYPTBYKEY(KEY_GUID('Key_CTC'),@FirstNameT), NULL, ENCRYPTBYKEY(KEY_GUID('Key_CTC'),@LastNameT), (select TOP 1 ItemId from LookupItemView where MasterName = 'Unknown' and ItemName = 'Unknown'), 1, 0, getdate(), @UserIDT);
-
-												SELECT @IDT = SCOPE_IDENTITY();
-												SELECT @message = 'Created Person Treatment Supporter Id: ' + CAST(@IDT as varchar(50));
-												PRINT @message;
-
-												INSERT INTO PatientTreatmentSupporter(PersonId, [SupporterId], [MobileContact], [DeleteFlag], [CreatedBy], [CreateDate])
-												VALUES(@PersonId, @IDT, ENCRYPTBYKEY(KEY_GUID('Key_CTC'),@TreatmentSupportTelNumber), 0, @UserIDT, getdate());
-
-												SELECT @PatientTreatmentSupporterID = SCOPE_IDENTITY();
-												SELECT @message = 'Created PatientTreatmentSupporterID Id: ' + CAST(@PatientTreatmentSupporterID as varchar);
-												PRINT @message;
-											END
-									COMMIT
-									END TRY
-									BEGIN CATCH
-										ROLLBACK
-									END CATCH
-
-									SELECT @k = @k + 1;
-
-									END
-								END
-							--Now Drop Temporary Tables
-							DROP TABLE #Tdtl_PatientContacts
+						exec [dbo].[PatientTreatmentSupporter_To_Greencard] @ptn_pk, @PersonId, @PatientTreatmentSupporterID OUTPUT
 
 						--Insert into Person Contact
-						IF @Address IS NOT NULL AND @Phone IS NOT NULL
-							BEGIN
-								INSERT INTO PersonContact(PersonId, [PhysicalAddress], [MobileNumber], [AlternativeNumber], [EmailAddress], [Active], [DeleteFlag], [CreatedBy], [CreateDate])
-								VALUES(@PersonId, @Address, @Phone, null, null, @Status, 0, @UserID, @CreateDate);
-
-								SELECT @PersonContactID = SCOPE_IDENTITY();
-								SELECT @message = 'Created PersonContact Id: ' + CAST(@PersonContactID as varchar);
-								PRINT @message;
-							END
+						exec [dbo].[PatientContact_To_Greencard] @Address, @Phone, @PersonId, @Status, @UserID, @CreateDate, @PersonContactID OUTPUT
 
 						--Starting baseline
-						print 'starting baseline';
+						DECLARE @HBVInfected bit, @Pregnant bit, @TBinfected bit, @WHOStage int, @WHOStageString varchar(50), @BreastFeeding bit, @CD4Count decimal , @MUAC decimal, @Weight decimal, @Height decimal, @artstart datetime, @ClosestARVDate datetime, @PatientMasterVisitId int, @HIVDiagnosisDate datetime, @EnrollmentDate datetime, @EnrollmentWHOStage int, @EnrollmentWHOStageString varchar(50), @VisitDate datetime, @Cohort varchar(50), @visit_id int;
 
-						--DECLARE @DEFAULTDATE DATETIME;
-						--SET @DEFAULTDATE = ISNULL(@DEFAULTDATE, CONVERT(datetime, '1900-15-06', 104));
-						--PRINT @DEFAULTDATE;
-
-						DECLARE @HBVInfected bit, @Pregnant bit, @TBinfected bit, @WHOStage int, @WHOStageString varchar(50), @BreastFeeding bit, 
-								@CD4Count decimal , @MUAC decimal, @Weight decimal, @Height decimal, @artstart datetime,
-								@ClosestARVDate datetime, @PatientMasterVisitId int, @HIVDiagnosisDate datetime, @EnrollmentDate datetime,
-								@EnrollmentWHOStage int, @EnrollmentWHOStageString varchar(50), @VisitDate datetime, @Cohort varchar(50), @visit_id int;
-
-						IF @transferIn = 1
-							BEGIN
-								SET @artstart = @ARTStartDate
-							END
-						ELSE
-							BEGIN
-								Select TOP 1 @artstart = ARTStartDate	From mst_Patient	Where Ptn_Pk = @ptn_pk	And LocationID = @LocationId;
-							END
-
-						select TOP 1 @visit_id = visit_id from dtl_PatientARVEligibility where ptn_pk = @ptn_pk And LocationID = @LocationId;
-		
-						print 'set @artstart and @visit_id';
-
-						SET @Pregnant = 0;
-
-						IF @Sex = (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName like '%gender%' and ItemName like 'Female%')
-							BEGIN
-								--SET @Pregnant = 0;
-								IF EXISTS(select TOP 1 Name from mst_Decode where id=(select TOP 1 eligibleThrough from dtl_PatientARVEligibility where ptn_pk = @ptn_pk And LocationID = @LocationId) and name like 'Pregnancy')
-									BEGIN
-										SET @Pregnant = 1;
-									END
-							END
-			
-						print 'set @Sex';
-
-						If EXISTS(SELECT * FROM dtl_PatientVitals dtl WHERE dtl.Visit_pk = @visit_id ) Begin
-							SET @Weight = (Select Top (1) dtl.[Weight]
-							From ord_Visit As ord
-							Inner Join
-								dtl_PatientVitals As dtl On dtl.Visit_pk = ord.Visit_Id
-							Where (ord.Ptn_Pk = @ptn_pk)
-							And (dtl.[Weight] Is Not Null)
-							And (ord.Visit_Id = @visit_id));
-						End 
-						Else Begin
-							SET @Weight = NULL;
-						End
-		
-						print 'set @Weight';
-
-						If exists (SELECT * FROM dtl_PatientVitals dtl WHERE dtl.Visit_pk = @visit_id) Begin
-							SET @Height = (Select Top 1 dtl.Height
-							From Ord_visit ord
-							Inner Join
-								dtl_PatientVitals dtl On dtl.visit_pk = ord.Visit_Id
-							Where ord.ptn_pk = @ptn_pk
-							And dtl.Height Is Not Null
-							And (ord.Visit_Id = @visit_id));
-						End 
-						Else Begin
-							SET @Height = NULL;
-						End
-		
-						print 'set @Height';
-
-						If EXISTS(SELECT * FROM dtl_PatientVitals dtl WHERE dtl.Visit_pk = @visit_id) Begin
-							SET @MUAC = (Select Top (1) dtl.Muac
-							From ord_Visit As ord
-							Inner Join
-								dtl_PatientVitals As dtl On dtl.Visit_pk = ord.Visit_Id
-							Where (ord.Ptn_Pk = @ptn_pk)
-							And (dtl.Muac Is Not Null)
-							And (ord.Visit_Id = @visit_id));
-						End
-		
-						print 'set @MUAC';
-
-						SET @TBinfected = 0;
-						IF EXISTS(select TOP 1 Name from mst_Decode where id=(select TOP 1 eligibleThrough from dtl_PatientARVEligibility where ptn_pk = @ptn_pk And LocationID = @LocationId) and name like 'TB/HIV')
-							BEGIN
-								SET @TBinfected = 1;
-							END
-			
-						print 'set @TBinfected';
-
-						SET @BreastFeeding = 0;
-						IF EXISTS(select TOP 1 Name from mst_Decode where id=(select TOP 1 eligibleThrough from dtl_PatientARVEligibility where ptn_pk = @ptn_pk And LocationID = @LocationId) and name like 'BreastFeeding')
-							BEGIN
-								SET @TBinfected = 1;
-							END
-			
-						print 'set @BreastFeeding';
-
-						--okay remove 1900
-						SET @HIVDiagnosisDate = (SELECT TOP 1 dbo.dtl_PatientHivPrevCareEnrollment.ConfirmHIVPosDate
-						FROM dbo.dtl_PatientHivPrevCareEnrollment INNER JOIN
-						 dbo.ord_Visit ON dbo.dtl_PatientHivPrevCareEnrollment.ptn_pk = dbo.ord_Visit.Ptn_Pk 
-						 AND dbo.dtl_PatientHivPrevCareEnrollment.Visit_pk = dbo.ord_Visit.Visit_Id INNER JOIN
-                         dbo.mst_VisitType ON dbo.ord_Visit.VisitType = dbo.mst_VisitType.VisitTypeID
-						 WHERE (dbo.mst_VisitType.VisitName = 'ART History') AND dbo.dtl_PatientHivPrevCareEnrollment.ptn_pk = @ptn_pk);
-
-						print 'set @HIVDiagnosisDate';
-						SET @EnrollmentDate = (select TOP 1 DateEnrolledInCare from dtl_PatientHivPrevCareEnrollment where ptn_pk=@ptn_pk);
-						print 'set @EnrollmentDate';
-						SET @EnrollmentWHOStageString = (SELECT TOP 1 Name FROM mst_Decode WHERE ID = (SELECT TOP 1 WHOStage FROM dtl_PatientARVEligibility where WHOStage > 0 AND ptn_pk=@ptn_pk) and codeid=22 AND Name <> 'N/A');
-						print 'set @EnrollmentWHOStage';
-						SET @Cohort = (select  TOP 1 convert(char(3),[FirstLineRegStDate] , 0) + ' ' + CONVERT(varchar(10), year([FirstLineRegStDate])) from [dbo].[dtl_PatientARTCare] WHERE ptn_pk = @ptn_pk);
-						print 'set @Cohort';
-						SET @CD4Count = (SELECT top 1 CD4 FROM dtl_PatientARVEligibility WHERE ptn_pk = @ptn_pk)
-						print 'set @CD4Count';
-						SET @WHOStageString = (SELECT TOP 1 WHOStage FROM dtl_PatientARVEligibility where ptn_pk = @ptn_pk);
-
-						print 'set @HIVDiagnosisDate, @EnrollmentDate, @EnrollmentWHOStage, @Cohort, @CD4Count, @WHOStage';
-		
-						SET @EnrollmentWHOStage = CASE @EnrollmentWHOStageString  
-							 WHEN '1' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '1') 
-							 WHEN '2' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '2')   
-							 WHEN '3' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '3')   
-							 WHEN '4' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '4')
-							 WHEN 'T1' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '1') 
-							 WHEN 'T2' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '2')   
-							 WHEN 'T3' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '3')   
-							 WHEN 'T4' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '4')
-							 ELSE (select TOP 1 ItemId from LookupItemView where MasterName = 'Unknown' and ItemName = 'Unknown')
-						  END
-		  
-						SET @WHOStage = CASE @WHOStageString  
-							 WHEN '1' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '1') 
-							 WHEN '2' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '2')   
-							 WHEN '3' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '3')   
-							 WHEN '4' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '4')
-							 WHEN 'T1' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '1') 
-							 WHEN 'T2' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '2')   
-							 WHEN 'T3' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '3')   
-							 WHEN 'T4' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '4')
-							 ELSE (select TOP 1 ItemId from LookupItemView where MasterName = 'Unknown' and ItemName = 'Unknown')
-						  END
-		  
-						SET @VisitDate = (SELECT TOP 1 [VisitDate] FROM [dbo].[ord_Visit] where [Ptn_Pk] = @ptn_pk AND [VisitType] in(18, 19));
-						IF @EnrollmentDate IS NULL BEGIN SET @EnrollmentDate =@StartDate; END;
-
-						INSERT INTO PatientMasterVisit(PatientId, ServiceId, Start, [End], Active, VisitDate, VisitScheduled, VisitBy, VisitType, [Status], CreateDate, DeleteFlag, CreatedBy)
-						VALUES(@PatientId, 1, @EnrollmentDate, NULL, 0, @VisitDate, NULL, NULL, (SELECT top 1 ItemId FROM LookupItemView WHERE	MasterName like '%VisitType%' and ItemName like '%Enrollment%'), NULL, GETDATE(), 0 , @UserID);
-
-						SET @PatientMasterVisitId = SCOPE_IDENTITY();
-		
-						SELECT @message = 'Created PatientMasterVisit Id: ' + CAST(@PatientMasterVisitId as varchar);
-						PRINT @message;
-			
-						IF @Status = 1
-							BEGIN
-								IF @ExitDate IS NULL
-								BEGIN
-									SET @ExitDate = @CreateDate;
-								END;
-				
-								IF @UserID_CareEnded IS NULL
-								BEGIN
-									SET @UserID_CareEnded = @UserID;
-								END;
-				
-								IF @CreateDate_CareEnded IS NULL
-								BEGIN
-									SET @CreateDate_CareEnded = @CreateDate;
-								END;
-				
-								INSERT INTO [dbo].[PatientCareending] ([PatientId] ,[PatientMasterVisitId] ,[PatientEnrollmentId] ,[ExitReason] ,[ExitDate] ,[TransferOutfacility] ,[DateOfDeath] ,[CareEndingNotes] ,[Active] ,[DeleteFlag] ,[CreatedBy] ,[CreateDate] ,[AuditData])
-								VALUES(@PatientId ,@PatientMasterVisitId ,@EnrollmentId ,@ExitReason , @ExitDate ,NULL ,@DateOfDeath ,NULL ,0 ,0,@UserID_CareEnded ,@CreateDate_CareEnded ,NULL);
-							END
-			
-						SELECT @message = 'Created PatientCareending Id: ' + CAST(SCOPE_IDENTITY() as varchar);
-						PRINT @message;
-
-						IF (@Weight IS NOT NULL AND @Height IS NOT NULL AND @Weight > 0 AND @Height > 0)
-						BEGIN
-							INSERT INTO [dbo].[PatientBaselineAssessment]([PatientId], [PatientMasterVisitId], [HBVInfected], [Pregnant], [TBinfected], [WHOStage], [BreastFeeding], [CD4Count], [MUAC], [Weight], [Height], [DeleteFlag], [CreatedBy], [CreateDate] )
-							VALUES(@PatientId, @PatientMasterVisitId, 0, @Pregnant, @TBinfected, @WHOStage, @BreastFeeding, @CD4Count, @MUAC, @Weight, @Height, 0 , @UserID, GETDATE());
-
-							SELECT @message = 'Created PatientBaselineAssessment Id: ' + CAST(SCOPE_IDENTITY() as varchar);
-							PRINT @message;
-						END
-
-						IF EXISTS(SELECT * FROM dtl_PatientHivPrevCareIE WHERE Ptn_pk = @ptn_pk)
-							BEGIN
-								DECLARE @TransferInDate datetime, @TreatmentStartDate datetime, @CurrentART varchar(50), @FacilityFrom varchar(150), @CreateDateTransfer datetime, @MFLCODE int;
-
-								SET @TransferInDate = (SELECT TOP 1 ARTTransferInDate FROM dtl_PatientHivPrevCareIE WHERE Ptn_pk = @ptn_pk);
-								SET @TreatmentStartDate = (SELECT TOP 1 FirstLineRegStDate FROM dtl_PatientARTCare WHERE ptn_pk = @ptn_pk);
-								SET @CurrentART = (SELECT TOP 1 CurrentART FROM dtl_PatientHivPrevCareIE WHERE Ptn_pk = @ptn_pk);
-								SET @FacilityFrom = (SELECT TOP 1 ARTTransferInFrom FROM dtl_PatientHivPrevCareIE WHERE Ptn_pk = @ptn_pk);
-								SET @CreateDateTransfer = (SELECT TOP 1 CreateDate FROM dtl_PatientHivPrevCareIE WHERE Ptn_pk = @ptn_pk);
-
-								SET @MFLCODE = (select TOP 1 PosId from mst_Patient WHERE Ptn_pk = @ptn_pk);
-								--SET @TreatmentStartDate = ISNULL(@TreatmentStartDate, @artstart);
-								--SET @TreatmentStartDate = ISNULL(@TreatmentStartDate, @DEFAULTDATE);
-
-								SET @MFLCODE = (select TOP 1 PosId from mst_Patient WHERE Ptn_pk = @ptn_pk);
-								SET @FacilityFrom = ISNULL(@FacilityFrom, 'Unknown');
-								SET @CurrentART = ISNULL(@CurrentART, (select top 1 ItemId from LookupItemView where MasterName = 'Unknown' and ItemName = 'Unknown'));
-
-								SELECT @message = '@TransferInDate: ' + CAST(@TransferInDate as varchar);
-								PRINT @message;
-
-								SELECT @message = '@TreatmentStartDate: ' + CAST(@TreatmentStartDate as varchar);
-								PRINT @message;
-
-								SELECT @message = '@CurrentART: ' + CAST(@CurrentART as varchar);
-								PRINT @message;
-
-								SELECT @message = '@FacilityFrom: ' + CAST(@FacilityFrom as varchar);
-								PRINT @message;
-
-								SELECT @message = '@MFLCODE: ' + CAST(@MFLCODE as varchar);
-								PRINT @message;
-
-								IF @TransferInDate = CONVERT(datetime, '1900-01-01', 104)
-								BEGIN
-									SET @TransferInDate = NULL;
-								END
-
-
-								IF @transferIn = 1 AND @TransferInDate IS NOT NULL AND @TreatmentStartDate IS NOT NULL AND @CurrentART IS NOT NULL AND @FacilityFrom IS NOT NULL AND @MFLCODE IS NOT NULL
-									BEGIN
-										INSERT INTO [dbo].[PatientTransferIn]([PatientId], [PatientMasterVisitId], [ServiceAreaId], [TransferInDate], [TreatmentStartDate], [CurrentTreatment],  [FacilityFrom] , [MFLCode] ,[CountyFrom] , [TransferInNotes], [DeleteFlag] ,[CreatedBy] , [CreateDate])
-										VALUES(@PatientId, @PatientMasterVisitId, 1, @TransferInDate, @TreatmentStartDate, @CurrentART, @FacilityFrom, @MFLCODE, (select ItemId from LookupItemView where MasterName = 'Unknown' and ItemName = 'Unknown'), ' ', 0 , @UserID, @CreateDateTransfer);
-
-										SELECT @message = 'Created PatientTransferIn Id: ' + CAST(SCOPE_IDENTITY() as varchar);
-										PRINT @message;
-									END
-						END
-
-						IF EXISTS (Select ptn_pk, locationID, Visit_pk [VisitId], a.PurposeId, b.Name [Purpose], a.Regimen [Regimen],	a.DateLastUsed [RegLastUsed] From dtl_PatientBlueCardPriorART a Inner Join Mst_Decode b On a.PurposeID = b.ID WHERE ptn_pk = @ptn_pk)
-							BEGIN
-								DECLARE @TreatmentType varchar(50), @Purpose varchar(50), @Regimen varchar(50), @DateLastUsed datetime;
-			
-								SET @TreatmentType = (select TOP 1 [Name] from mst_Decode where codeID=33 AND ID = (Select top 1 a.PurposeId From dtl_PatientBlueCardPriorART a Inner Join Mst_Decode b On a.PurposeID = b.ID WHERE ptn_pk = @ptn_pk));
-								SET @Purpose = (select TOP 1 b.Name [Purpose] From dtl_PatientBlueCardPriorART a Inner Join Mst_Decode b On a.PurposeID = b.ID WHERE ptn_pk = @ptn_pk);
-								SET @Regimen = (select TOP 1 a.Regimen [Regimen] From dtl_PatientBlueCardPriorART a Inner Join Mst_Decode b On a.PurposeID = b.ID WHERE ptn_pk = @ptn_pk);
-								SET @DateLastUsed = (select TOP 1 a.DateLastUsed [RegLastUsed] From dtl_PatientBlueCardPriorART a Inner Join Mst_Decode b On a.PurposeID = b.ID WHERE ptn_pk = @ptn_pk);
-
-								IF @TreatmentType IS NOT NULL AND @Purpose IS NOT NULL AND @Regimen IS NOT NULL
-									BEGIN
-									INSERT INTO [dbo].[PatientARVHistory]([PatientId], [PatientMasterVisitId], [TreatmentType], [Purpose] , [Regimen], [DateLastUsed], [DeleteFlag] , [CreatedBy] , [CreateDate])
-									VALUES(@PatientId, @PatientMasterVisitId, @TreatmentType, @Purpose, @Regimen, @DateLastUsed, 0, @UserID, @CreateDate);
-									END
-
-									SELECT @message = 'Created PatientARVHistory Id: ' + CAST(SCOPE_IDENTITY() as varchar);
-									PRINT @message;
-							END
-
-						--Tranfer-ins//
-						IF EXISTS(select TOP 1 FirstLineRegStDate from [dbo].[dtl_PatientARTCare] WHERE ptn_pk = @ptn_pk) AND @transferIn = 1
-							BEGIN
-								DECLARE @DateStartedOnFirstLine datetime;
-								SET @DateStartedOnFirstLine = (select TOP 1 FirstLineRegStDate from [dbo].[dtl_PatientARTCare] WHERE ptn_pk = @ptn_pk);
-
-								IF @DateStartedOnFirstLine IS NOT NULL AND @Cohort IS NOT NULL
-								BEGIN
-									INSERT INTO [dbo].[PatientTreatmentInitiation]([PatientMasterVisitId], [PatientId], [DateStartedOnFirstLine], [Cohort], Regimen, [RegimenCode] , [BaselineViralload] , [BaselineViralloadDate] , [DeleteFlag] , [CreatedBy] , [CreateDate] )
-									VALUES(@PatientMasterVisitId, @PatientId, @DateStartedOnFirstLine, @Cohort, Null,(SELECT TOP 1 FirstLineReg FROM dtl_PatientARTCare where ptn_pk = @ptn_pk) , NULL, NULL, 0, @UserID, @CreateDate);
-
-									SELECT @message = 'Created PatientTreatmentInitiation Id: ' + CAST(SCOPE_IDENTITY() as varchar);
-									PRINT @message;
-								END
-							END
-
-						--SET @HIVDiagnosisDate = ISNULL(@HIVDiagnosisDate, @DEFAULTDATE);
-						--SET @EnrollmentDate = ISNULL(@EnrollmentDate, @DEFAULTDATE);
-						--SET @artstart = ISNULL(@artstart, @DEFAULTDATE);
-
-						IF @EnrollmentWHOStage IS NOT NULL
-							BEGIN
-								INSERT INTO [dbo].[PatientHivDiagnosis]([PatientMasterVisitId] , [PatientId] , [HIVDiagnosisDate] , [EnrollmentDate] , [EnrollmentWHOStage] , [ARTInitiationDate] , [DeleteFlag] , [CreatedBy] , [CreateDate])
-								VALUES(@PatientMasterVisitId, @PatientId, @HIVDiagnosisDate, @EnrollmentDate, @EnrollmentWHOStage, @artstart, 0 , @UserID, @CreateDate);
-
-									SELECT @message = 'Created PatientHivDiagnosis Id: ' + CAST(SCOPE_IDENTITY() as varchar);
-									PRINT @message;
-							END
-
+						exec PatientBaselineVariables_To_Greencard @ptn_pk, @transferIn, @ARTStartDate, @Sex, @LocationId, @StartDate, @EnrollmentDate OUTPUT, @VisitDate OUTPUT, @artstart OUTPUT, @visit_id OUTPUT, @Pregnant OUTPUT, @HBVInfected OUTPUT, @TBinfected OUTPUT, @WHOStage OUTPUT, @WHOStageString OUTPUT, @BreastFeeding OUTPUT, @CD4Count OUTPUT, @MUAC OUTPUT, @Weight OUTPUT, @Height OUTPUT, @ClosestARVDate OUTPUT, @PatientMasterVisitId OUTPUT, @HIVDiagnosisDate OUTPUT, @EnrollmentWHOStage OUTPUT, @EnrollmentWHOStageString OUTPUT, @Cohort OUTPUT
+						exec [dbo].[PatientBaseline_To_Greencard] @ptn_pk, @PatientId, @EnrollmentDate, @VisitDate, @UserID, @PatientMasterVisitId, @Status, @ExitDate, @CreateDate, @UserID_CareEnded, @CreateDate_CareEnded, @EnrollmentId, @ExitReason, @DateOfDeath, @Weight, @Height, @Pregnant, @TBinfected, @WHOStage, @BreastFeeding,	@CD4Count, @MUAC, @transferIn, @EnrollmentWHOStage,	@HIVDiagnosisDate, @artstart, @Cohort
+						
 						--ending baseline
 						Update mst_Patient Set MovedToPatientTable =1 Where Ptn_Pk=@ptn_pk;
 						INSERT INTO [dbo].[GreenCardBlueCard_Transactional] ([PersonId] ,[Ptn_Pk]) VALUES (@PersonId , @ptn_pk);
