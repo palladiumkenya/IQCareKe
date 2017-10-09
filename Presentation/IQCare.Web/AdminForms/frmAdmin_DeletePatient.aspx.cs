@@ -107,7 +107,7 @@ namespace IQCare.Web.Admin
             }
             else
             {
-                string strResponse = labelDeleteText.Text + " has been deleted successfully";
+                string strResponse = labelDeleteText.Text.Replace("Delete all records for ","") + " has been deleted successfully";
                 this.NotifyAction(strResponse, "Patient Delete", false, string.Format("javascript:window.location='{0}'; return false;", "../frmFacilityHome.aspx"));
             }
         }
@@ -202,7 +202,7 @@ namespace IQCare.Web.Admin
             DateTime dateOfBirth = Convert.ToDateTime(param.Find(l => l.Key == "DOB").Value);
             string strGender = param.Find(l => l.Key == "Gender").Value.ToString();
             DateTime dateOfReg = Convert.ToDateTime(param.Find(l => l.Key == "RegistrationDate").Value);
-            labelDeleteText.Text = string.Format("{0} {1} {2}", strFirstName, strMidName, strLastName);
+            labelDeleteText.Text = string.Format("Delete all records for {0} {1} {2}?", strFirstName, strMidName, strLastName);
             if (this.LocationId == Convert.ToInt32(base.Session["AppLocationId"]))
             {
                 this.buttonProxy_Click(sender, new EventArgs());
