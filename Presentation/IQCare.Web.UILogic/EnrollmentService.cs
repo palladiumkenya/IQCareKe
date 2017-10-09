@@ -98,8 +98,9 @@ namespace IQCare.Web.UILogic
                                             },
                                             Value = id["IdentifierValue"].ToString()
                                         }).ToList()
-                     }).OrderBy(s => s.ServiceArea.DisplayName).ToList();
-            return x;
+                     });
+
+            return x.ToList();
         }
     }
 }

@@ -4,6 +4,7 @@ using Entities.PatientCore;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Entities.CCC.Enrollment;
 
 namespace Entities.CCC.Triage
 {
@@ -15,19 +16,19 @@ namespace Entities.CCC.Triage
         [Key]
         public int Id { get; set; }
 
-        [Required]
-        [ForeignKey("PatientId")]
+        [Required] 
         public int PatientId { get; set; }
-        public Patient patient { get; set; }
+        [ForeignKey("PatientId")]
+        public virtual PatientEntity Patient { get; set; }
 
         [Required]
         public int PatientMasterVisitid { get; set; }
-        public PatientMasterVisit PatientMasterVisit { get; set; }
+        public virtual PatientMasterVisit PatientMasterVisit { get; set; }
 
         [Required]
-        [ForeignKey("PatientAdverseEventId")]
         public int PatientAdverseEventId { get; set; }
-        public PatientAdverseEvent patientAdverseEvent { get; set; }
+        [ForeignKey("PatientAdverseEventId")]
+        public virtual PatientAdverseEvent PatientAdverseEvent { get; set; }
 
         [Required]
         public int OutcomeId { get; set; }

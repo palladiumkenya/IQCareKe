@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Entities.CCC.Enrollment;
 using Entities.Common;
 using Entities.CCC.Visit;
 using Entities.CCC.Lookup;
@@ -24,6 +25,8 @@ namespace Entities.CCC.Appointment
         public DateTime? StatusDate { get; set; }
         [ForeignKey("PatientMasterVisitId")]
         public virtual PatientMasterVisit PatientMasterVisit { get; set; }
+        [ForeignKey("PatientId")]
+        public virtual PatientEntity Patient { get; set; }
     }
 
     [Serializable]
