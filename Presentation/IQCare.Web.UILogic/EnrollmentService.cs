@@ -77,28 +77,29 @@ namespace IQCare.Web.UILogic
                                 }).Distinct().ToList();
 
             var x = (from row in dv.AsEnumerable()
-                     select new PatientEnrollment()
-                     {
-                         PatientId = Convert.ToInt32(row["PatientId"]),
-                         ServiceAreaId = Convert.ToInt32(row["ModuleId"]),
-                         EnrollmentDate = Convert.ToDateTime(row["EnrollmentDate"]),
-                         CareStatus = row["CareStatus"].ToString(),
-                         ExitReason = row["ExitReason"].ToString(),
-                         ServiceArea = session.Facility.Modules.Where(m => m.Id == Convert.ToInt32(row["ModuleId"])).DefaultIfEmpty(null).FirstOrDefault(),
-                         Identifiers = (from id in dt.AsEnumerable()
-                                        where id["ModuleId"].ToString() == row["ModuleId"].ToString()
-                                        select new PatientIdentifier()
-                                        {
-                                            PatientId = Convert.ToInt32(id["PatientId"]),
-                                            Identifier = new Identifier()
-                                            {
-                                                Name = id["FieldName"].ToString(),
-                                                Description = id["IdentifierName"].ToString()
+                select new PatientEnrollment()
+                {
+                    PatientId = Convert.ToInt32(row["PatientId"]),
+                    ServiceAreaId = Convert.ToInt32(row["ModuleId"]),
+                    EnrollmentDate = Convert.ToDateTime(row["EnrollmentDate"]),
+                    CareStatus = row["CareStatus"].ToString(),
+                    ExitReason = row["ExitReason"].ToString(),
+                    ServiceArea = session.Facility.Modules.Where(m => m.Id == Convert.ToInt32(row["ModuleId"]))
+                        .DefaultIfEmpty(null).FirstOrDefault(),
+                    Identifiers = (from id in dt.AsEnumerable()
+                        where id["ModuleId"].ToString() == row["ModuleId"].ToString()
+                        select new PatientIdentifier()
+                        {
+                            PatientId = Convert.ToInt32(id["PatientId"]),
+                            Identifier = new Identifier()
+                            {
+                                Name = id["FieldName"].ToString(),
+                                Description = id["IdentifierName"].ToString()
 
-                                            },
-                                            Value = id["IdentifierValue"].ToString()
-                                        }).ToList()
-                     });
+                            },
+                            Value = id["IdentifierValue"].ToString()
+                        }).ToList()
+                }).OrderBy(y => y.ServiceArea != null && y.ServiceArea.DisplayName != null ? y.ServiceArea.DisplayName : String.Empty).ToList();
 
             return x.ToList();
         }
