@@ -2295,6 +2295,8 @@ BEGIN
 				SELECT @i = @i + 1
 			END
 		END
+
+
 		--Now Drop Temporary Tables
 		 DROP TABLE #Tmst_Patient
 		 

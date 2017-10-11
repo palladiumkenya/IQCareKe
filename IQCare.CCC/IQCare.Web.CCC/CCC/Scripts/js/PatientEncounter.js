@@ -12,11 +12,14 @@ var reactionActionList = new Array();
 
 function AddAdverseReaction() {
 
+    var adverseEventId = $("#adverseEventId").val();
     var adverseEvent = $("#adverseEvent").val();
     var medicineCausingAE = $("#AdverseEventCause").val();
     var adverseEventSeverity = $('#ddlAdverseEventSeverity').find(":selected").text();
     var adverseEventSeverityID = $('#ddlAdverseEventSeverity').find(":selected").val();
     var adverseEventAction = $("#AdverseEventAction").find(":selected").text();
+    var adverseEventCommand = "<button type='button' class='btnAddOutcome btn btn-danger fa fa- minus - circle btn-fill' > Add Outcome </button>"; // add the adverseEventCommand
+
     //Validate duplication
    
     var reactionEventFound = 0;
@@ -24,23 +27,23 @@ function AddAdverseReaction() {
     var reactionSeverityFound = 0;
     var reactionActionFound = 0;
 
-    if (adverseEvent == "") {
+    if (adverseEvent === "") {
         toastr.error("Error", "Please enter adverse event");
         return false;
     }
 
-    if (medicineCausingAE == "") {
+    if (medicineCausingAE === "") {
         toastr.error("Error", "Please enter medicine causing adverse event");
         return false;
     }
 
-    if (adverseEventSeverityID == "0") {
+    if (adverseEventSeverityID === "0") {
         toastr.error("Error", "Please enter Adverse Event Severity");
         return false;
     }
 
-    if (adverseEventAction == "") {
-        toastr.error("Error", "Please enter  Action");
+    if (adverseEventAction === "") {
+        toastr.error("Error", "Please enter Action");
         return false;
     }
 
@@ -53,10 +56,8 @@ function AddAdverseReaction() {
     
         toastr.error("Error", adverseEvent + " Adverse Event already exists in the List");
         return false; // message box herer
-
-   
-
     }
+
     reactionEventList.push("" + adverseEvent + "");
     reactionCauseList.push("" + medicineCausingAE + "");
     reactionSeverityList.push("" + adverseEventSeverityID + "");
@@ -64,7 +65,7 @@ function AddAdverseReaction() {
     arrAdverseEventUI = [];
   
     arrAdverseEventUI.push([
-        adverseEventSeverityID, adverseEvent, medicineCausingAE, adverseEventSeverity, adverseEventAction,
+        adverseEventSeverityID,adverseEvent, medicineCausingAE, adverseEventSeverity, adverseEventAction,
         "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"
     ]);
    
@@ -74,6 +75,29 @@ function AddAdverseReaction() {
     $("#AdverseEventCause").val("");
     $('#ddlAdverseEventSeverity').val("0");
     $("#AdverseEventAction").val("");
+}
+
+
+function AdverseEventOutcome() {
+
+   // var adverseEvent = $("#dtlAdverseEvents tr").find('td').eq(0).html();
+    //var adverseEvent = $("dtlAdverseEvents").closest("tr").find("td:eq(0)").text();
+    var adverseEvent = $("dtlAdverseEvents>td").eq($(0).index()).text();
+
+    $("#dtlAdverseEvents td").click(function () {
+
+        //var column_num = parseInt($(this).index()) + 1;
+        //var row_num = parseInt($(this).parent().index()) + 1;
+        var a = $(this).closest("tr").find("td:eq(0)").text();
+        //alert(a);
+        //alert(row_num); alert(column_num);
+        $("#adverseEventLable").text();
+        $("#adverseEventLable").text(a);
+    });
+
+   
+   // alert(adverseEvent);
+    $("#AdverseEventOutcomeModal").modal('show');
 }
 
 var chronicIllnessList = new Array();
@@ -86,7 +110,7 @@ function AddChronicIllness() {
     //Validate duplication
     var chronicIllnessFound = 0;
 
-    if (chronicIllness == "" || chronicIllness == "Select") {
+    if (chronicIllness === "" || chronicIllness === "Select") {
         toastr.error("Error", "Please enter chronic illness");
         return false;
     }
@@ -132,7 +156,7 @@ function AddAllergy() {
     //Validate duplication
     var allergyFound = 0;
 
-    if (allergy == "") {
+    if (allergy === "") {
         toastr.error("Error", "Please enter allergy");
         return false;
     }
@@ -184,7 +208,7 @@ function AddVaccine() {
     //    toastr.error("Error", "Please enter vaccine stage");
     //    return false;
     //}
-    if (vaccinationDate == "") {
+    if (vaccinationDate === "") {
         toastr.error("Error","Please enter vaccine date");
         return false;
     }
@@ -224,7 +248,7 @@ function AddPhysicalExam() {
     //Validate duplication
     var examFound = 0;
 
-    if (examTypeID == "0") {
+    if (examTypeID === "0") {
         toastr.error("Error","Please enter Examination Type");
         return false;
     }
@@ -272,7 +296,7 @@ function AddDiagnosis() {
     var diagnosisFound = 0;
     var treatmentFound = 0;
 
-    if (diagnosis == "") {
+    if (diagnosis === "") {
         toastr.error("Error", "Please enter Diagnosis");
         return false;
     }
@@ -316,7 +340,7 @@ function AddPresentingComplaints() {
     //Validate duplication
     var presentingComplaintFound = 0;
 
-    if (presentingComplaints == "") {
+    if (presentingComplaints === "") {
         toastr.error("Error", "Please enter Presenting Complaint");
         return false;
     }
@@ -348,7 +372,7 @@ function AddPresentingComplaints() {
 
 function showHideFPControls() {
     var val = $('#onFP').find(":selected").text();
-    if (val == "No Family Planning") {
+    if (val === "No Family Planning") {
         document.getElementById('divNoFP').style.display = 'block';
         document.getElementById('divOnFP').style.display = 'none';
         $('#fpMethod').val("0");
@@ -457,27 +481,27 @@ function AddDrugPrescription() {
     var drugFound = 0;
     var batchFound = 0;
 
-    if (drugName == "") {
+    if (drugName === "") {
         toastr.error("Error", "Please select drug");
         return false;
     }
 
-    if (dose == "" || dose == "0") {
+    if (dose === "" || dose === "0") {
         toastr.error("Error", "Please enter the dose");
         return false;
     }
 
-    if (freqId == "0") {
+    if (freqId === "0") {
         toastr.error("Error", "Please enter the frequency");
         return false;
     }
 
-    if (duration == "0" || duration == "") {
+    if (duration == "0" || duration === "") {
         toastr.error("Error", "Please enter the duration");
         return false;
     }
 
-    if (quantityPres == "0" || quantityPres == "") {
+    if (quantityPres === "0" || quantityPres === "") {
         toastr.error("Error", "Please enter the quantity prescribed");
         return false;
     }

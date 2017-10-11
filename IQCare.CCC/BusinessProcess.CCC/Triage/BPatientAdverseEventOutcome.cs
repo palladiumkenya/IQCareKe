@@ -1,21 +1,23 @@
-﻿using DataAccess.Base;
+﻿using System;
+using DataAccess.Base;
 using DataAccess.CCC.Context;
 using DataAccess.CCC.Repository;
 using Entities.CCC.Triage;
 using Interface.CCC.Triage;
 using System.Linq;
+using System.Collections.Generic;
 
-namespace BusinessProcess.CCC.Tb
+namespace BusinessProcess.CCC.Triage
 {
     public class BPatientAdverseEventOutcome : ProcessBase, IPatientAdverseEventOutcomeManager
     {
         int result;
 
-        public int CheckIfPatientAdverseEventOutcomeExists(int patientId, int adverseEventId)
+        public int CheckIfPatientAdverseEventOutcomeExists(int patientId, int adverseEventId, int patientMasterVisitId)
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-               result= unitOfWork.PatientAdverseEventOutcomeRepository.FindBy(x => x.PatientId == patientId && x.PatientAdverseEventId==adverseEventId).Count();
+               result= unitOfWork.PatientAdverseEventOutcomeRepository.FindBy(x => x.PatientId == patientId && x.AdverseEventId==adverseEventId && x.PatientMasterVisitid==patientMasterVisitId).Count();
                 unitOfWork.Dispose();
                 return result;
             }
@@ -33,15 +35,27 @@ namespace BusinessProcess.CCC.Tb
             }
         }
 
+        public List<PatientAdverseEventOutcome> GetAdverseEventOutcome(int adverseId,int patientMasterVisitId, int patientId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var outcome =
+                    unitOfWork.PatientAdverseEventOutcomeRepository.FindBy(x => x.AdverseEventId == adverseId && x.PatientMasterVisitid==patientMasterVisitId && x.PatientId==patientId).ToList();
+                unitOfWork.Dispose();
+                return outcome;
+            }
+        }
+
         public int SavePatientAdverseEventOutcome(PatientAdverseEventOutcome patientAdverseEventOutcome)
         {
             var outcome = new PatientAdverseEventOutcome()
             {
                 PatientId = patientAdverseEventOutcome.PatientId,
                 PatientMasterVisitid = patientAdverseEventOutcome.PatientMasterVisitid,
-                PatientAdverseEventId = patientAdverseEventOutcome.PatientAdverseEventId,
+                AdverseEventId = patientAdverseEventOutcome.AdverseEventId,
                 OutcomeId = patientAdverseEventOutcome.OutcomeId,
-                ActionTakenId = patientAdverseEventOutcome.ActionTakenId
+                OutcomeDate = patientAdverseEventOutcome.OutcomeDate,
+                UserId = patientAdverseEventOutcome.UserId
             };
             using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
@@ -59,7 +73,6 @@ namespace BusinessProcess.CCC.Tb
             {
                 //Id=patientAdverseEventOutcome.Id,
                 OutcomeId=patientAdverseEventOutcome.OutcomeId,
-                ActionTakenId=patientAdverseEventOutcome.ActionTakenId
             };
             using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
@@ -70,5 +83,6 @@ namespace BusinessProcess.CCC.Tb
 
             }
         }
+
     }
 }

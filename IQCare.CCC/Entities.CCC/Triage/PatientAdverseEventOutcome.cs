@@ -9,7 +9,7 @@ using Entities.CCC.Enrollment;
 namespace Entities.CCC.Triage
 {
     [Serializable]
-    [Table("AdverseEventOutcome")]
+    [Table("PatientAdverseEventOutcome")]
   public  class PatientAdverseEventOutcome :BaseEntity
     {
         [Column]
@@ -26,15 +26,19 @@ namespace Entities.CCC.Triage
         public virtual PatientMasterVisit PatientMasterVisit { get; set; }
 
         [Required]
-        public int PatientAdverseEventId { get; set; }
-        [ForeignKey("PatientAdverseEventId")]
-        public virtual PatientAdverseEvent PatientAdverseEvent { get; set; }
+        public int AdverseEventId { get; set; }
+      //  [ForeignKey("PatientAdverseEventId")]
+        //public virtual PatientAdverseEvent PatientAdverseEvent { get; set; }
 
         [Required]
         public int OutcomeId { get; set; }
 
         [Required]
-        public int ActionTakenId { get; set; }
+        public DateTime OutcomeDate { get; set; }
+
+        [Required]
+        public int UserId { get; set; }
+
 
     }
 
