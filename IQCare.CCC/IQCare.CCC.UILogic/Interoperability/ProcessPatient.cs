@@ -129,14 +129,29 @@ namespace IQCare.CCC.UILogic.Interoperability
                 registration.MaritalStatus = !string.IsNullOrWhiteSpace(patientMessage.MARITAL_STATUS) ? patientMessage.MARITAL_STATUS : null;
                 //registration.DateOfDeath = patientMessage.d
                 //registration.DeathIndicator = null;
-                registration.TreatmentSupporter.FirstName = !string.IsNullOrWhiteSpace(patientMessage.TFIRST_NAME) ? patientMessage.TFIRST_NAME : null;
-                registration.TreatmentSupporter.MiddleName = !string.IsNullOrWhiteSpace(patientMessage.TMIDDLE_NAME) ? patientMessage.TMIDDLE_NAME : null;
-                registration.TreatmentSupporter.LastName = !string.IsNullOrWhiteSpace(patientMessage.TLAST_NAME) ? patientMessage.TLAST_NAME : null;
-                registration.TreatmentSupporter.DateOfBirth = !string.IsNullOrWhiteSpace(patientMessage.TDATE_OF_BIRTH) ? patientMessage.TDATE_OF_BIRTH : null;
-                ////registration.TreatmentSupporter.DobPrecision = null;
-                registration.TreatmentSupporter.MobileNumber = !string.IsNullOrWhiteSpace(patientMessage.TPHONE_NUMBER) ? patientMessage.TPHONE_NUMBER : null;
-                registration.TreatmentSupporter.PhysicalAddress = !string.IsNullOrWhiteSpace(patientMessage.TADDRESS) ? patientMessage.TADDRESS : null;
-                //registration.TreatmentSupporter.NationalId = !string.IsNullOrWhiteSpace(patientMessage.
+
+                if (registration.NextOfKin == null)
+                {
+                    registration.NextOfKin = new List<DTONextOfKin>();
+                }
+
+                if (!string.IsNullOrWhiteSpace(patientMessage.TFIRST_NAME) &&
+                    !string.IsNullOrWhiteSpace(patientMessage.TLAST_NAME))
+                {
+                    DTONextOfKin treatmentSupporter = new DTONextOfKin();
+                    treatmentSupporter.FirstName = !string.IsNullOrWhiteSpace(patientMessage.TFIRST_NAME) ? patientMessage.TFIRST_NAME : null;
+                    treatmentSupporter.MiddleName = !string.IsNullOrWhiteSpace(patientMessage.TMIDDLE_NAME) ? patientMessage.TMIDDLE_NAME : null;
+                    treatmentSupporter.LastName = !string.IsNullOrWhiteSpace(patientMessage.TLAST_NAME) ? patientMessage.TLAST_NAME : null;
+                    treatmentSupporter.DateOfBirth = !string.IsNullOrWhiteSpace(patientMessage.TDATE_OF_BIRTH) ? patientMessage.TDATE_OF_BIRTH : null;
+                    ////registration.TreatmentSupporter.DobPrecision = null;
+                    treatmentSupporter.MobileNumber = !string.IsNullOrWhiteSpace(patientMessage.TPHONE_NUMBER) ? patientMessage.TPHONE_NUMBER : null;
+                    treatmentSupporter.PhysicalAddress = !string.IsNullOrWhiteSpace(patientMessage.TADDRESS) ? patientMessage.TADDRESS : null;
+                    treatmentSupporter.PatientType = "T";
+                    treatmentSupporter.RelationshipType = String.Empty;
+                    //registration.TreatmentSupporter.NationalId = !string.IsNullOrWhiteSpace(patientMessage.
+
+                    registration.NextOfKin.Add(treatmentSupporter);
+                }
             }
 
             return registration;

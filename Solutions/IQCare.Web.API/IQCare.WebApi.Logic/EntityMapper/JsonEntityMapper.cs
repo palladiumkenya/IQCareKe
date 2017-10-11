@@ -10,77 +10,13 @@ namespace IQCare.WebApi.Logic.EntityMapper
     {
         public PatientRegistrationEntity PatientRegistration(Registration entity)
         {
-            var identifiers = new List<INTERNALPATIENTID>();
-            foreach (var id in entity.InternalPatientIdentifiers)
-            {
-                var identifier = new INTERNALPATIENTID()
-                {
-                    ID = id.IdentifierValue,
-                    IDENTIFIER_TYPE = id.IdentifierType,
-                    ASSIGNING_AUTHORITY = id.AssigningAuthority
-                };
-                identifiers.Add(identifier);
-            }
+            PatientRegistrationEntity patientRegistration = new PatientRegistrationEntity();
 
-            var nextOfKin = new List<NEXTOFKIN>();
-            if (entity.TreatmentSupporter != null)
-            {
-                var treatmentSupporter = new NEXTOFKIN()
-                {
+            patientRegistration.MESSAGE_HEADER = GetMessageHeader("ADT^A04", "13122", "P");
+            patientRegistration.PATIENT_IDENTIFICATION = PATIENTIDENTIFICATION.GetPatientidentification(entity);
+            patientRegistration.NEXT_OF_KIN = NEXTOFKIN.GetNextOfKins(entity);
 
-                    NOK_NAME = new NOKNAME()
-                    {
-                        FIRST_NAME = !string.IsNullOrWhiteSpace(entity.TreatmentSupporter.FirstName) ? entity.TreatmentSupporter.FirstName : null,
-                        MIDDLE_NAME = !string.IsNullOrWhiteSpace(entity.TreatmentSupporter.MiddleName) ? entity.TreatmentSupporter.MiddleName : null,
-                        LAST_NAME = !string.IsNullOrWhiteSpace(entity.TreatmentSupporter.LastName) ? entity.TreatmentSupporter.LastName : null
-                    },
-                    CONTACT_ROLE = "T",
-                    RELATIONSHIP = !string.IsNullOrWhiteSpace(entity.TSRelationshipType) ? entity.TSRelationshipType : null,
-                    PHONE_NUMBER = !string.IsNullOrWhiteSpace(entity.TreatmentSupporter.MobileNumber) ? entity.TreatmentSupporter.MobileNumber : null,
-                    SEX = !string.IsNullOrWhiteSpace(entity.TreatmentSupporter.Sex) ? entity.TreatmentSupporter.Sex : null,
-                    DATE_OF_BIRTH = entity.TreatmentSupporter.DateOfBirth.HasValue ? entity.TreatmentSupporter.DateOfBirth : null,
-                    ADDRESS = !string.IsNullOrWhiteSpace(entity.TreatmentSupporter.PhysicalAddress) ? entity.TreatmentSupporter.PhysicalAddress : null
-                };
-                nextOfKin.Add(treatmentSupporter);
-            }
-            
-            
-            var patientRegistrationEntity = new PatientRegistrationEntity()
-            {
-                MESSAGE_HEADER = GetMessageHeader("ADT^A04"),
-                PATIENT_IDENTIFICATION = new PATIENTIDENTIFICATION()
-                {
-                    PATIENT_NAME = new PATIENTNAME()
-                    {
-                        FIRST_NAME = !string.IsNullOrWhiteSpace(entity.Patient.FirstName)? entity.Patient.FirstName:null,
-                        MIDDLE_NAME = !string.IsNullOrWhiteSpace(entity.Patient.MiddleName)? entity.Patient.MiddleName:null,
-                        LAST_NAME = !string.IsNullOrWhiteSpace(entity.Patient.LastName)? entity.Patient.LastName:null,
-                    },
-                    EXTERNAL_PATIENT_ID = new EXTERNALPATIENTID(),
-                    DATE_OF_BIRTH = entity.Patient.DateOfBirth.HasValue? entity.Patient.DateOfBirth:null,
-                    SEX = !string.IsNullOrWhiteSpace(entity.Patient.Sex)? entity.Patient.Sex:null,
-                    PHONE_NUMBER = !string.IsNullOrWhiteSpace(entity.Patient.MobileNumber)? entity.Patient.MobileNumber:null,
-                    PATIENT_ADDRESS = new PATIENTADDRESS()
-                    {
-                        POSTAL_ADDRESS = !string.IsNullOrWhiteSpace(entity.Patient.PhysicalAddress)? entity.Patient.PhysicalAddress:null,
-                        PHYSICAL_ADDRESS = new PHYSICALADDRESS()
-                        {
-                            COUNTY = !string.IsNullOrWhiteSpace(entity.County)? entity.County:null,
-                            SUB_COUNTY = !string.IsNullOrWhiteSpace(entity.SubCounty)? entity.SubCounty:null,
-                            VILLAGE = !string.IsNullOrWhiteSpace(entity.Village)? entity.Village:null,
-                            WARD = !string.IsNullOrWhiteSpace(entity.Ward)? entity.Ward:null
-                        },
-                    },
-                    MARITAL_STATUS = !string.IsNullOrWhiteSpace(entity.MaritalStatus)? entity.MaritalStatus:null,
-                    DEATH_INDICATOR = !string.IsNullOrWhiteSpace(entity.DeathIndicator)? entity.DeathIndicator:null,
-                    DEATH_DATE = entity.DateOfDeath.HasValue? entity.DateOfDeath:null,
-                    MOTHER_MAIDEN_NAME = entity.MotherMaidenName,
-                    INTERNAL_PATIENT_ID = identifiers
-                },
-                NEXT_OF_KIN = nextOfKin,
-                OBSERVATION_RESULT = new List<OBSERVATIONRESULT>()
-            };
-            return patientRegistrationEntity;
+            return patientRegistration;
         }
 
         public void PatientTransferIn()
@@ -212,18 +148,18 @@ namespace IQCare.WebApi.Logic.EntityMapper
             return DrugPrescriptionRaised(drugOrderDto);
         }
 
-        private MESSAGEHEADER GetMessageHeader(string messageType)
+        private MESSAGEHEADER GetMessageHeader(string messageType, string sendingFacility, string processingId)
         {
             return new MESSAGEHEADER()
             {
                 MESSAGE_TYPE = messageType,
-                MESSAGE_DATETIME = DateTime.Now,
-                PROCESSING_ID = "",
+                MESSAGE_DATETIME = DateTime.Now.ToString("yyyyMMddHmmss"),
+                PROCESSING_ID = processingId,
                 RECEIVING_APPLICATION = "IL",
                 RECEIVING_FACILITY = "",
                 SECURITY = "",
                 SENDING_APPLICATION = "IQCARE",
-                SENDING_FACILITY = ""
+                SENDING_FACILITY = sendingFacility
             };
         }
 

@@ -17,7 +17,7 @@ namespace IQCare.WebApi.Logic.DtoMapping
                 FirstName = entity.PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME,
                 MiddleName = entity.PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME,
                 LastName = entity.PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME,
-                DateOfBirth = entity.PATIENT_IDENTIFICATION.DATE_OF_BIRTH,
+                //DateOfBirth = entity.PATIENT_IDENTIFICATION.DATE_OF_BIRTH,
                 MobileNumber = entity.PATIENT_IDENTIFICATION.PHONE_NUMBER,
                 NationalId = entity.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID.FirstOrDefault(n=>n.IDENTIFIER_TYPE == "NATIONAL_ID").ID,
                 Sex = entity.PATIENT_IDENTIFICATION.SEX,
@@ -26,20 +26,20 @@ namespace IQCare.WebApi.Logic.DtoMapping
                 DobPrecision = false
             };
 
-            var ts = entity.NEXT_OF_KIN.FirstOrDefault(n => n.CONTACT_ROLE == "T");
-            var treatmentSupporter = new DTOPerson()
-            {
-                FirstName = ts.NOK_NAME.FIRST_NAME,
-                MiddleName = ts.NOK_NAME.MIDDLE_NAME,
-                LastName = ts.NOK_NAME.LAST_NAME,
-                PhysicalAddress = ts.ADDRESS,
-                Sex = ts.SEX,
-                DateOfBirth = ts.DATE_OF_BIRTH,
-                MobileNumber = ts.PHONE_NUMBER,
-                //todo update precision once updated in IL
-                //NationalId = ,
-                DobPrecision = false
-            };
+            //var ts = entity.NEXT_OF_KIN.FirstOrDefault(n => n.CONTACT_ROLE == "T");
+            //var treatmentSupporter = new DTOPerson()
+            //{
+            //    FirstName = ts.NOK_NAME.FIRST_NAME,
+            //    MiddleName = ts.NOK_NAME.MIDDLE_NAME,
+            //    LastName = ts.NOK_NAME.LAST_NAME,
+            //    PhysicalAddress = ts.ADDRESS,
+            //    Sex = ts.SEX,
+            //    DateOfBirth = ts.DATE_OF_BIRTH,
+            //    MobileNumber = ts.PHONE_NUMBER,
+            //    //todo update precision once updated in IL
+            //    //NationalId = ,
+            //    DobPrecision = false
+            //};
             var identifiers = new List<DTOIdentifier>();
             foreach (var id in entity.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID)
             {
@@ -60,12 +60,12 @@ namespace IQCare.WebApi.Logic.DtoMapping
                 SubCounty = entity.PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.SUB_COUNTY,
                 Ward = entity.PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.WARD,
                 Village = entity.PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.VILLAGE,
-                DateOfDeath = entity.PATIENT_IDENTIFICATION.DEATH_DATE,
+                //DateOfDeath = entity.PATIENT_IDENTIFICATION.DEATH_DATE,
                 DeathIndicator = entity.PATIENT_IDENTIFICATION.DEATH_INDICATOR,
-                TreatmentSupporter = treatmentSupporter,
-                TSRelationshipType =  ts.RELATIONSHIP,
+                //TreatmentSupporter = treatmentSupporter,
+                //TSRelationshipType =  ts.RELATIONSHIP,
                 InternalPatientIdentifiers = identifiers,
-                DateOfEnrollment = DateTime.Now,
+                //DateOfEnrollment = DateTime.Now,
                 
             };
             return registration;

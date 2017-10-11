@@ -74,10 +74,20 @@ namespace IQCare.CCC.UILogic.Enrollment
                 };
 
                 int returnValue = _mgr.AddPatientIdentifier(patientidentifier);
+
+                if (returnValue > 1)
+                {
+                    MessageEventArgs args = new MessageEventArgs()
+                    {
+                        PatientId = patientId,
+                        EntityId = patientidentifier.PatientEnrollmentId,
+                        MessageType = MessageType.NewClientRegistration,
+                        EventOccurred = "Patient Enrolled Identifier = "
+                    };
+
+                    Publisher.RaiseEventAsync(this, args).ConfigureAwait(false);
+                }
                 
-                //this.ILHandler += PatientIdentifierManager_ILHandler;
-                // this.PatientIdentifierManager_ILHandler()
-                //this.PatientIdentifierManager_ILHandler(new IlMessageEventArgs() { PatientId = patientId, EntityId = patientEnrollmentId, MessageType = IlMessageType.NewClientRegistration, EventOccurred = "Patient Enrolled Identifier = " + enrollmentNo });
                 return returnValue;
             }
             catch (Exception e)
@@ -99,7 +109,7 @@ namespace IQCare.CCC.UILogic.Enrollment
                 };
 
                 int x=  _mgr.UpdatePatientIdentifier(patientIdentifier);
-                Publisher.RaiseEventAsync(this, args);
+                Publisher.RaiseEventAsync(this, args).ConfigureAwait(false);
                 return x;
             }
             catch (Exception e)

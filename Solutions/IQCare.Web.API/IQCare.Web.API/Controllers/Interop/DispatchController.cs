@@ -2,9 +2,8 @@
 using System.Net.Http;
 using System.Web.Http;
 using IQCare.Events;
-using IQCare.Web.ApiLogic.MessageHandler;
 using System.Web.Script.Serialization;
-
+using IQCare.WebApi.Logic.MessageHandler;
 
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860

@@ -9,7 +9,7 @@ namespace IQCare.DTO
         {
             InternalPatientIdentifiers = new List<DTOIdentifier>();
             Patient = new DTOPerson();
-            TreatmentSupporter = new DTOPerson();
+            NextOfKin = new List<DTONextOfKin>();
         }
         public List<DTOIdentifier> InternalPatientIdentifiers { get; set; }
         public DTOPerson Patient { get; set; }
@@ -23,7 +23,6 @@ namespace IQCare.DTO
         public string MaritalStatus { get; set; }
         public string DateOfDeath { get; set; }
         public string DeathIndicator { get; set; }
-        public DTOPerson TreatmentSupporter { get; set; }
-        public string TSRelationshipType { get; set; }
+        public List<DTONextOfKin> NextOfKin { get; set; }
     }
 }

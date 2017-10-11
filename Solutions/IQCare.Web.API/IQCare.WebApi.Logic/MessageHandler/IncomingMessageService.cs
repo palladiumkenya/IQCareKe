@@ -6,6 +6,7 @@ using IQCare.WebApi.Logic.MappingEntities;
 using Interface.WebApi;
 using IQCare.WebApi.Logic.DtoMapping;
 using Entity.WebApi;
+using IQCare.CCC.UILogic.Interoperability;
 
 namespace IQCare.WebApi.Logic.MessageHandler
 {

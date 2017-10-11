@@ -6,7 +6,7 @@ namespace IQCare.WebApi.Logic
 {
     public class ApiOutboxmanager : IApiOutboxManager
     {
-        private IApiOutboxManager _apiOutboxmanager = (IApiOutboxManager)Application.Presentation.ObjectFactory.CreateInstance("IQCare.Web.ApiLogic.Infrastructure.BusinessProcess.BPApiOutbox, IQCare.Web.ApiLogic");
+        private IApiOutboxManager _apiOutboxmanager = (IApiOutboxManager)Application.Presentation.ObjectFactory.CreateInstance("BusinessProcess.WebApi.BApiOutBox, BusinessProcess.WebApi");
 
 
         public int AddApiOutbox(ApiOutbox apiOutbox)

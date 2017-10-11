@@ -23,5 +23,12 @@ namespace IQCare.DTO
         public string MobileNumber { get; set; }
         public string PhysicalAddress { get; set; }
         public string NationalId { get; set; }
+        public string GODS_NUMBER { get; set; }
+    }
+
+    public class DTONextOfKin : DTOPerson
+    {
+        public string PatientType { get; set; }
+        public string RelationshipType { get; set; }
     }
 }

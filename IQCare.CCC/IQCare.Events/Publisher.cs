@@ -20,27 +20,34 @@ namespace IQCare.Events
 
         public static async Task RaiseEventAsync(object sender, MessageEventArgs e)
         {
-            using (HttpClient httpClient = new HttpClient())
+            try
             {
-                string absoluteUrl = HttpContext.Current.Request.Url.AbsoluteUri;
-                string absolutePath = HttpContext.Current.Request.Url.AbsolutePath;
-                string uri = absoluteUrl.Replace(absolutePath, "/");
-
-                // httpClient.BaseAddress = new Uri(uri);
-                httpClient.BaseAddress = new Uri("http://localhost:1155/");
-                httpClient.DefaultRequestHeaders.Accept.Clear();
-                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                string content = JsonConvert.SerializeObject(e);
-
-                var jsoncontent = new StringContent(content, Encoding.UTF8, "application/json");
-                // HTTP POST
-                HttpResponseMessage response = await httpClient.PostAsync("api/interop/dispatch/", jsoncontent);
-                if (response.IsSuccessStatusCode)
+                using (HttpClient httpClient = new HttpClient())
                 {
-                    //todo
-                    //update the outbox that message was sent successfully
+                    string absoluteUrl = HttpContext.Current.Request.Url.AbsoluteUri;
+                    string absolutePath = HttpContext.Current.Request.Url.AbsolutePath;
+                    string uri = absoluteUrl.Replace(absolutePath, "/");
+
+                    // httpClient.BaseAddress = new Uri(uri);
+                    httpClient.BaseAddress = new Uri("http://localhost:1155/");
+                    httpClient.DefaultRequestHeaders.Accept.Clear();
+                    httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    string content = JsonConvert.SerializeObject(e);
+
+                    var jsoncontent = new StringContent(content, Encoding.UTF8, "application/json");
+                    // HTTP POST
+                    HttpResponseMessage response = await httpClient.PostAsync("api/interop/dispatch/", jsoncontent).ConfigureAwait(false);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        //todo
+                        //update the outbox that message was sent successfully
+                    }
                 }
+            }
+            catch (Exception exception)
+            {
+                throw new Exception(exception.Message);
             }
         }
         public void RaiseEvent(object sender, MessageEventArgs e)

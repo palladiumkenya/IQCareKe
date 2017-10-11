@@ -1,5 +1,5 @@
 ﻿/****** Object:  View [dbo].[Api_MaritalStatusView]    Script Date: 19/09/2017 13:06:30 ******/
-IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[PatientRegistrationView]'))
+IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[Api_MaritalStatusView]'))
 DROP VIEW [dbo].[Api_MaritalStatusView]
 GO
 

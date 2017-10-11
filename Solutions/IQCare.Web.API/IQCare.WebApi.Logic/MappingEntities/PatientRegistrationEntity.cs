@@ -3,29 +3,6 @@ using System.Collections.Generic;
 
 namespace IQCare.WebApi.Logic.MappingEntities
 {
-    public class NOKNAME
-    {
-        public string FIRST_NAME { get; set; }
-        public string MIDDLE_NAME { get; set; }
-        public string LAST_NAME { get; set; }
-    }
-
-    public class NEXTOFKIN
-    {
-        public NEXTOFKIN()
-        {
-            NOK_NAME = new NOKNAME();
-        }
-
-        public NOKNAME NOK_NAME { get; set; }
-        public string RELATIONSHIP { get; set; }
-        public string ADDRESS { get; set; }
-        public string PHONE_NUMBER { get; set; }
-        public string SEX { get; set; }
-        public DateTime ? DATE_OF_BIRTH { get; set; }
-        public string CONTACT_ROLE { get; set; }
-    }
-
     public class OBSERVATIONRESULT
     {
         public string SET_ID { get; set; }
@@ -46,12 +23,12 @@ namespace IQCare.WebApi.Logic.MappingEntities
             MESSAGE_HEADER = new MESSAGEHEADER();
             PATIENT_IDENTIFICATION = new PATIENTIDENTIFICATION();
             NEXT_OF_KIN = new List<NEXTOFKIN>();
-            OBSERVATION_RESULT = new List<OBSERVATIONRESULT>();
+            //OBSERVATION_RESULT = new List<OBSERVATIONRESULT>();
         }
 
         public MESSAGEHEADER MESSAGE_HEADER { get; set; }
         public PATIENTIDENTIFICATION PATIENT_IDENTIFICATION { get; set; }
         public List<NEXTOFKIN> NEXT_OF_KIN { get; set; }
-        public List<OBSERVATIONRESULT> OBSERVATION_RESULT { get; set; }
+        //public List<OBSERVATIONRESULT> OBSERVATION_RESULT { get; set; }
     }
 }

@@ -7,7 +7,6 @@ using IQCare.CCC.UILogic.Interoperability;
 using IQCare.DTO;
 using IQCare.Events;
 using IQCare.WebApi.Logic.EntityMapper;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Web.Script.Serialization;
@@ -18,7 +17,7 @@ namespace IQCare.WebApi.Logic.MessageHandler
     public class OutgoingMessageService : ProcessBase, IOutgoingMessageService, ISendData
     {
         private readonly IJsonEntityMapper _jsonEntityMapper;
-        private readonly IApiOutboxManager _apiOutboxManager = (IApiOutboxManager)ObjectFactory.CreateInstance("BusinessProcess.WebApi.BPApiOutbox, BusinessProcess.WebApi");
+        private readonly IApiOutboxManager _apiOutboxManager = (IApiOutboxManager)ObjectFactory.CreateInstance("BusinessProcess.WebApi.BApiOutBox, BusinessProcess.WebApi");
 
 
         //public event InteropEventHandler OnDataExchage;
@@ -170,7 +169,7 @@ namespace IQCare.WebApi.Logic.MessageHandler
             //_apiOutboxManager.AddApiOutbox(apiOutbox);
 
             //Send
-            SendData(registrationJson,"");
+            //SendData(registrationJson,"");
 
         }
         public void SendData(string jsonString, string endPoint)
@@ -216,14 +215,14 @@ namespace IQCare.WebApi.Logic.MessageHandler
                 {
                     var messageOrder=new PharmacyEncodedOrder()
                     {
-                        DrugName = message.DRUG_NAME,
-                        CodingSystem = message.CODING_SYSTEM,
-                        Strength = message.STRENGTH,
-                        Dosage = message.DOSAGE,
-                        Frequency = message.FREQUENCY,
-                        Duration = message.DURATION,
-                        QuantityPrescribed = Convert.ToInt32(message.QUANTITY_PRESCRIBED),
-                        PrescriptionNotes = message.NOTES
+                        //DrugName = message.DRUG_NAME,
+                        //CodingSystem = message.CODING_SYSTEM,
+                        //Strength = message.STRENGTH,
+                        //Dosage = message.DOSAGE,
+                        //Frequency = message.FREQUENCY,
+                        //Duration = message.DURATION,
+                        //QuantityPrescribed = Convert.ToInt32(message.QUANTITY_PRESCRIBED),
+                        //PrescriptionNotes = message.NOTES
                     };
                     encorderOrder.Add(messageOrder);
                 }
@@ -260,12 +259,12 @@ namespace IQCare.WebApi.Logic.MessageHandler
                         TransactionDatetime = messageDto[0].TRANSACTION_DATETIME,
                         Notes = messageDto[0].NOTES
                     },
-                    PharmacyEncodedOrder =encorderOrder   
+                    //PharmacyEncodedOrder =encorderOrder   
                 };
 
                 var prescriptionEntity = _jsonEntityMapper.DrugPrescriptionRaised(drugOrderDto);
 
-                string prescriptionJson = JsonConvert.SerializeObject(prescriptionEntity);
+                string prescriptionJson = new JavaScriptSerializer().Serialize(prescriptionEntity);
                    var apiOutbox = new ApiOutbox()
                    {
                        DateRead = DateTime.Now,
