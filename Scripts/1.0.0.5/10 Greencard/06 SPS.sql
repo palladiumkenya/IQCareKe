@@ -2300,3 +2300,247 @@ BEGIN
 		 
 		 exec [dbo].[pr_CloseDecryptedSession];
 END
+
+
+
+
+/****** Object:  StoredProcedure [dbo].[sp_getPharmacyDrugList]    Script Date: 5/9/2017 3:16:05 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_getPharmacyDrugList]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_getPharmacyDrugList]
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[sp_getPharmacyDrugList]    Script Date: 05/09/2017 17:08:22 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_getPharmacyDrugList]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[sp_getPharmacyDrugList] AS' 
+END
+GO
+-- =============================================
+-- Author:		John Macharia
+-- Create date: 14th Feb 2017
+-- Description:	get pharmacy drug list
+-- =============================================
+ALTER PROCEDURE [dbo].[sp_getPharmacyDrugList]
+	-- Add the parameters for the stored procedure here
+	@pmscm int = null,@tp varchar(10)=null
+	
+
+AS
+BEGIN
+-- SET NOCOUNT ON added to prevent extra result sets from
+-- interfering with SELECT statements.
+Set Nocount On;
+	DECLARE @drugTypeId int =0;
+
+	--select Drug_pk, DrugName,CONCAT(Drug_pk, '~',abbreviation, '~', DrugName)val 
+	--from mst_drug
+	-- ////////////////////////////////////////////////////////////////////////////////////////
+	IF(@tp IN('ART','PMTCT','PEP','PREP','HBV','Hepatitis B'))
+		BEGIN
+		  SET @drugTypeId=37
+		END
+
+
+	-- ///////////////////////////////////////////////////////////////////////////////////////
+
+	
+	IF(@pmscm = 1)
+	BEGIN
+
+		IF(@drugTypeId=37)
+		  BEGIN
+				SELECT
+					D.Drug_pk
+				   ,D.DrugName
+				   , (D.Drug_pk + '~' + isnull(D.abbreviation,D.DrugName) + '~' + D.DrugName) val
+				FROM Dtl_StockTransaction AS ST
+				INNER JOIN Mst_Store AS S
+					ON S.Id = ST.StoreId
+						AND S.DispensingStore = 1
+				RIGHT OUTER JOIN Mst_Drug AS D
+					ON D.Drug_pk = ST.ItemId
+				INNER JOIN lnk_DrugGeneric l
+					ON D.Drug_pk = l.Drug_pk
+				INNER JOIN lnk_DrugTypeGeneric g
+					ON l.GenericID = g.GenericId
+				WHERE D.DeleteFlag = 0
+				AND g.DrugTypeId =37
+				GROUP BY D.Drug_pk
+						,D.DrugName
+						,D.abbreviation
+				HAVING SUM(ST.Quantity) > 0
+
+				--select D.*, G.DrugTypeId From Mst_Drug D Inner join lnk_DrugGeneric DG on DG.Drug_pk=D.drug_pk
+				-- inner join lnk_DrugTypeGeneric G on G.GenericId= DG.GenericID and g.DrugTypeId=37
+
+			END
+		ELSE
+		 BEGIN 
+			SELECT
+					D.Drug_pk
+				   ,D.DrugName
+				   ,(D.Drug_pk + '~' + isnull(D.abbreviation,D.DrugName) +  '~' + D.DrugName) val
+				FROM Dtl_StockTransaction AS ST
+				INNER JOIN Mst_Store AS S
+					ON S.Id = ST.StoreId
+						AND S.DispensingStore = 1
+				RIGHT OUTER JOIN Mst_Drug AS D
+					ON D.Drug_pk = ST.ItemId
+				INNER JOIN lnk_DrugGeneric l
+					ON D.Drug_pk = l.Drug_pk
+				INNER JOIN lnk_DrugTypeGeneric g
+					ON l.GenericID = g.GenericId
+				WHERE D.DeleteFlag = 0
+				AND g.DrugTypeId <>37
+				GROUP BY D.Drug_pk
+						,D.DrugName
+						,D.abbreviation
+				HAVING SUM(ST.Quantity) > 0   
+		 END
+
+	END
+	ELSE
+		BEGIN
+
+			IF(@drugTypeId=37)
+			BEGIN
+				Select	D.Drug_pk, D.DrugName,
+				(D.Drug_pk +  '~' + isnull(D.abbreviation,D.DrugName) +  '~' + D.DrugName) val 
+				From Dtl_StockTransaction As ST	Inner Join Mst_Store As S On S.Id = ST.StoreId And S.DispensingStore = 1
+				Right Outer Join Mst_Drug As D On D.Drug_pk = ST.ItemId 
+								INNER JOIN lnk_DrugGeneric l
+						ON D.Drug_pk = l.Drug_pk
+					INNER JOIN lnk_DrugTypeGeneric g
+						ON l.GenericID = g.GenericId
+					WHERE D.DeleteFlag = 0
+					AND g.DrugTypeId = @drugTypeId
+				Group By D.Drug_pk,	D.DrugName, D.abbreviation
+			END
+			ELSE
+			BEGIN
+			   			Select	D.Drug_pk, D.DrugName,
+				(D.Drug_pk + '~' + isnull(D.abbreviation,D.DrugName) + '~' + D.DrugName) val 
+				From Dtl_StockTransaction As ST	Inner Join Mst_Store As S On S.Id = ST.StoreId And S.DispensingStore = 1
+				Right Outer Join Mst_Drug As D On D.Drug_pk = ST.ItemId 
+								INNER JOIN lnk_DrugGeneric l
+						ON D.Drug_pk = l.Drug_pk
+					INNER JOIN lnk_DrugTypeGeneric g
+						ON l.GenericID = g.GenericId
+					WHERE D.DeleteFlag = 0
+					AND g.DrugTypeId <> 37
+				Group By D.Drug_pk,	D.DrugName, D.abbreviation
+			END
+		END
+
+End
+
+
+/****** Object:  StoredProcedure [dbo].[sp_getPatientEncounter]    Script Date: 5/9/2017 3:16:05 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_getPatientEncounter]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_getPatientEncounter]
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[sp_getPatientEncounter]    Script Date: 05/09/2017 17:08:22 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_getPatientEncounter]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[sp_getPatientEncounter] AS' 
+END
+GO
+-- =============================================
+-- Author:		John Macharia
+-- Create date: 10th Feb 2017
+-- Description:	get patient encounter
+-- =============================================
+ALTER PROCEDURE [dbo].[sp_getPatientEncounter]
+	-- Add the parameters for the stored procedure here
+	@PatientMasterVisitID int = null,
+	@PatientID int = null
+
+AS
+BEGIN
+-- SET NOCOUNT ON added to prevent extra result sets from
+-- interfering with SELECT statements.
+Set Nocount On;
+	declare @TBScreeningTypeID int = (Select Id from LookupMaster where name = 'TBStatus')
+	declare @NutritionScreeningTypeID int = (Select Id from LookupMaster where name = 'NutritionStatus')
+	declare @GeneralExamMasterId int = (Select top 1 Id from LookupMaster where name = 'GeneralExamination')
+	declare @ARVAdherenceType int = (Select Id from LookupMaster where name = 'ARVAdherence')
+	declare @CTXAdherenceType int = (Select Id from LookupMaster where name = 'CTXAdherence')
+
+	--0
+	select * from PatientMasterVisit where id = @PatientMasterVisitID and patientId = @PatientID
+	and (DeleteFlag is null OR DeleteFlag = 0)
+	
+	--1
+	select * from ComplaintsHistory where PatientMasterVisitId = @PatientMasterVisitID and patientId = @PatientID
+	and (DeleteFlag is null OR DeleteFlag = 0)
+	
+	--2
+	select * from PhysicalExamination where PatientMasterVisitId = @PatientMasterVisitID and patientId = @PatientID
+	and ExaminationTypeId = @GeneralExamMasterId and (DeleteFlag is null OR DeleteFlag = 0)
+	
+	--TB Screening 3
+	select ScreeningValueId from PatientScreening 
+	where PatientMasterVisitId = @PatientMasterVisitID and patientId = @PatientID and ScreeningTypeId = @TBScreeningTypeID
+	and (DeleteFlag is null OR DeleteFlag = 0)
+	
+	--Nutrition Screening 4
+	select ScreeningValueId from PatientScreening 
+	where PatientMasterVisitId = @PatientMasterVisitID and patientId = @PatientID and ScreeningTypeId = @NutritionScreeningTypeID
+	and (DeleteFlag is null OR DeleteFlag = 0)
+	
+	--5
+	select * from PatientPHDP where PatientMasterVisitId = @PatientMasterVisitID and patientId = @PatientID 
+	and (DeleteFlag is null OR DeleteFlag = 0)
+
+	--6 ARV Adherence
+	select Score from AdherenceOutcome 
+	where PatientMasterVisitId = @PatientMasterVisitID and patientId = @PatientID and AdherenceType = @ARVAdherenceType
+	and (DeleteFlag is null OR DeleteFlag = 0)
+
+	--7 CTX Adherence
+	select Score from AdherenceOutcome 
+	where PatientMasterVisitId = @PatientMasterVisitID and patientId = @PatientID and AdherenceType = @CTXAdherenceType
+	and (DeleteFlag is null OR DeleteFlag = 0)
+
+	--8 workplan
+	select * from PatientClinicalNotes
+	where PatientMasterVisitId = @PatientMasterVisitID and patientId = @PatientID and deleteflag <> 1
+
+	--9 ICF
+	select * from [dbo].[PatientIcf]
+	where PatientMasterVisitId = @PatientMasterVisitID and patientId = @PatientID and deleteflag <> 1
+
+	--10 ICF Action
+	select * from [dbo].[PatientIcfAction]
+	where PatientMasterVisitId = @PatientMasterVisitID and patientId = @PatientID and deleteflag <> 1
+
+	--11 IPT
+	select * from [dbo].[PatientIpt]
+	where PatientMasterVisitId = @PatientMasterVisitID and patientId = @PatientID and deleteflag <> 1
+
+	--12 IPT Outcome
+	select * from [dbo].[PatientIptOutcome]
+	where PatientMasterVisitId = @PatientMasterVisitID and patientId = @PatientID and deleteflag <> 1
+
+	--13 IPT Workup
+	select * from [dbo].[PatientIptWorkup]
+	where PatientMasterVisitId = @PatientMasterVisitID and patientId = @PatientID and deleteflag <> 1
+	
+	--14 WHO Stage
+	select * from [dbo].[PatientWHOStage]
+	where PatientMasterVisitId = @PatientMasterVisitID and patientId = @PatientID
+
+End

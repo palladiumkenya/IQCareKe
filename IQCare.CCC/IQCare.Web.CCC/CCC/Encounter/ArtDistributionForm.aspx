@@ -403,6 +403,11 @@
             $("#<%=fpmethod.ClientID%>").prop('disabled', true);
             $("#<%=AppointmentDate.ClientID%>").prop('disabled', true);
             $("#PersonAppointmentDate").addClass('noneevents');
+            var IsPatientArtDistributionDone = <%=IsPatientArtDistributionDone%>;
+
+            if (IsPatientArtDistributionDone == 1) {
+                getPatientArtDistribution();
+            }
 
             $("#btnSave").click(function () {
                 if ($('#AppointmentForm').parsley().validate()) {
@@ -428,6 +433,74 @@
             });
         });
 
+        function getPatientArtDistribution() {
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientEncounterService.asmx/GetArtDistributionForVisit",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var artDetails = JSON.parse(response.d);
+                    console.log(artDetails);
+                    if (artDetails != null) {
+                        $("#<%=ArtRefill.ClientID%>").val(artDetails.ArtRefillModel);
+                        if (artDetails.MissedArvDosesCount > 0) {
+                            $("#<%=missedDosesCount.ClientID%>").val(artDetails.MissedArvDosesCount);
+                        }
+
+                        if (artDetails.MissedArvDoses) {
+                            $("#mYes").prop("checked", true);
+                        } else {
+                            $("#mNo").prop("checked", true);
+                        }
+
+                        var genitalSore = artDetails.GenitalSore ? "True" : "False";
+                        var fatigue = artDetails.Fatigue ? "True" : "False";
+                        var fever = artDetails.Fever ? "True" : "False";
+                        var nausea = artDetails.Nausea ? "True" : "False";
+                        var diarrhea = artDetails.Diarrhea ? "True" : "False";
+                        var cough = artDetails.Cough ? "True" : "False";
+                        var rash = artDetails.Rash ? "True" : "False";
+
+                        $("#<%=fatigue.ClientID%>").val(fatigue);
+                        $("#<%=fever.ClientID%>").val(fever);
+                        $("#<%=nausea.ClientID%>").val(nausea);
+                        $("#<%=diarrhea.ClientID%>").val(diarrhea);
+                        $("#<%=cough.ClientID%>").val(cough);
+                        $("#<%=rash.ClientID%>").val(rash);
+                        $("#<%=genitalSore.ClientID%>").val(genitalSore);
+                        $("#<%=otherSymptom.ClientID%>").val(artDetails.OtherSymptom);
+
+                        if (artDetails.NewMedication) {
+                            $("#medYes").prop("checked", true);
+                        } else {
+                            $("#medNo").prop("checked", true);
+                        }
+
+                        if (artDetails.FamilyPlanning) {
+                            $("#fpYes").prop("checked", true);
+                        } else {
+                            $("#fpNo").prop("checked", true);
+                        }
+
+                        if (artDetails.ReferedToClinic) {
+                            $("#refYes").prop("checked", true);
+                        } else {
+                            $("#refNo").prop("checked", true);
+                        }
+
+                        $("#<%=newMedicineText.ClientID%>").val(artDetails.NewMedicationText);
+                        $("#<%=fpmethod.ClientID%>").val(artDetails.FamilyPlanningMethod);
+                        $("#<%=pregnancyStatus.ClientID%>").val(artDetails.PregnancyStatus);
+                        $('#PersonAppointmentDate').datepicker('setDate', artDetails.DateReferedToClinic);
+                    }
+                },
+                error: function (response) {
+                    toastr.error(response.d, "fast track not saved");
+                }
+            });
+        }
+
         function addArtDistribution() {
             var artRefillModel = $("#<%=ArtRefill.ClientID%>").val();
             var missedArvDoses = $("input[name$=missedArvDoses]:checked").val();
@@ -451,13 +524,15 @@
             if (pregnancyStatus === undefined) { pregnancyStatus = 0 }
             var patientId = <%=PatientId%>;
             var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            var IsPatientArtDistributionDone = <%=IsPatientArtDistributionDone%>;
+
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientEncounterService.asmx/AddArtDistribution",
                 data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','artRefillModel': '" + artRefillModel + "','missedArvDoses': '" + missedArvDoses +
                 "','missedDosesCount': '" + missedDosesCount + "','fatigue': '" + fatigue + "','fever': '" + fever + "','nausea': '" + nausea + "','diarrhea': '" + diarrhea + "','cough': '" + cough + "','rash': '" + rash +
                 "','genitalSore': '" + genitalSore + "','otherSymptom': '" + otherSymptom + "','newMedication': '" + newMedication + "','newMedicineText': '" + newMedicineText + "','familyPlanning': '" + familyPlanning +
-                "','fpmethod': '" + fpmethod + "','referredToClinic': '" + referredToClinic + "','appointmentDate': '" + appointmentDate + "','pregnancyStatus': '" + pregnancyStatus + "'}",
+                "','fpmethod': '" + fpmethod + "','referredToClinic': '" + referredToClinic + "','appointmentDate': '" + appointmentDate + "','pregnancyStatus': '" + pregnancyStatus + "','IsPatientArtDistributionDone':'" + IsPatientArtDistributionDone + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
