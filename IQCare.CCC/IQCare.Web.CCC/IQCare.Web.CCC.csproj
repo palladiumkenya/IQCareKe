@@ -492,7 +492,6 @@
     </Compile>
     <Compile Include="CCC\WebService\PatientEncounterService.asmx.cs">
       <DependentUpon>PatientEncounterService.asmx</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="CCC\WebService\PatientLookupService.asmx.cs">
       <DependentUpon>PatientLookupService.asmx</DependentUpon>
@@ -544,6 +543,9 @@
     <Reference Include="Application.Presentation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\Application.Presentation.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper">
+      <HintPath>..\..\References\AutoMapper.dll</HintPath>
     </Reference>
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
       <HintPath>..\..\Solutions\IQCare.CCC\packages\CrystalDecisions.CrystalReports.Engine.1.0.0\lib\CrystalDecisions.CrystalReports.Engine.dll</HintPath>

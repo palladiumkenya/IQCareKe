@@ -1,4 +1,5 @@
-﻿using Application.Presentation;
+﻿using System;
+using Application.Presentation;
 using Entities.CCC.Enrollment;
 using Interface.CCC.Enrollment;
 using System.Collections.Generic;
@@ -50,36 +51,34 @@ namespace IQCare.CCC.UILogic.Enrollment
 
         public int UpdatePatientArtDistribution(PatientArtDistribution p)
         {
-            var patientArvDistribution = new PatientArtDistribution()
+            try
             {
-                PatientId = p.PatientId,
-                PatientMasterVisitId = p.PatientMasterVisitId,
-                ArtRefillModel = p.ArtRefillModel,
-                Cough = p.Cough,
-                Diarrhea = p.Diarrhea,
-                FamilyPlanning = p.FamilyPlanning,
-                FamilyPlanningMethod = p.FamilyPlanningMethod,
-                Fatigue = p.Fatigue,
-                Fever = p.Fever,
-                MissedArvDoses = p.MissedArvDoses,
-                GenitalSore = p.GenitalSore,
-                MissedArvDosesCount = p.MissedArvDosesCount,
-                Nausea = p.Nausea,
-                NewMedication = p.NewMedication,
-                NewMedicationText = p.NewMedicationText,
-                OtherSymptom = p.OtherSymptom,
-                PregnancyStatus = p.PregnancyStatus,
-                Rash = p.Rash,
-                ReferedToClinic = p.ReferedToClinic,
-                ReferedToClinicDate = p.ReferedToClinicDate,
-            };
-            return _artDistributionManager.UpdatePatientArtDistribution(patientArvDistribution);
+                return _artDistributionManager.UpdatePatientArtDistribution(p);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }   
         }
 
         public List<PatientArtDistribution> GetByPatientId(int patientId)
         {
             var distribution = _artDistributionManager.GetByPatientId(patientId);
             return distribution;
+        }
+
+        public PatientArtDistribution GetPatientArtDistributionByPatientIdAndVisitId(int patientId,
+            int patientMasterVisitId)
+        {
+            try
+            {
+                return _artDistributionManager.GetPatientArtDistributionByPatientIdAndVisitId(patientId,
+                    patientMasterVisitId);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
     }
 }

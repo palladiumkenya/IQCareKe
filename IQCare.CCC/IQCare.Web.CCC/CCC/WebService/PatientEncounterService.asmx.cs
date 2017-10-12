@@ -3,6 +3,7 @@ using IQCare.CCC.UILogic;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Web;
 using System.Diagnostics;
 using System.Web.Script.Serialization;
 using System.Web.Script.Services;
@@ -13,11 +14,16 @@ using Entities.CCC.Enrollment;
 using Interface.CCC.Visit;
 using IQCare.CCC.UILogic.Enrollment;
 using IQCare.CCC.UILogic.Triage;
+using AutoMapper;
 
 //using static Entities.CCC.Encounter.PatientEncounter;
 
 namespace IQCare.Web.CCC.WebService
 {
+    public class ArtDistributionDeTails : PatientArtDistribution
+    {
+        public string DateReferedToClinic { get; set; }
+    }
     /// <summary>
     /// Summary description for PatientEncounterService
     /// </summary>
@@ -876,35 +882,66 @@ namespace IQCare.Web.CCC.WebService
         public string AddArtDistribution(int patientId, int patientMasterVisitId, string artRefillModel, bool missedArvDoses,
             int missedDosesCount, bool fatigue, bool fever, bool nausea, bool diarrhea, bool cough, bool rash,
             bool genitalSore, string otherSymptom, bool newMedication, string newMedicineText, bool familyPlanning, 
-            string fpmethod, bool referredToClinic,  DateTime ? appointmentDate, int pregnancyStatus)
+            string fpmethod, bool referredToClinic,  DateTime ? appointmentDate, int pregnancyStatus, int IsPatientArtDistributionDone)
         {
             try
             {
-                var patientArvDistribution = new PatientArtDistribution()
-                {
-                    PatientId = patientId,
-                    PatientMasterVisitId = patientMasterVisitId,
-                    ArtRefillModel = artRefillModel,
-                    Cough = cough,
-                    Diarrhea = diarrhea,
-                    FamilyPlanning = familyPlanning,
-                    FamilyPlanningMethod = fpmethod,
-                    Fatigue = fatigue,
-                    Fever = fever,
-                    MissedArvDoses = missedArvDoses,
-                    GenitalSore = genitalSore,
-                    MissedArvDosesCount = missedDosesCount,
-                    Nausea = nausea,
-                    NewMedication = newMedication,
-                    NewMedicationText = newMedicineText,
-                    OtherSymptom = otherSymptom,
-                    PregnancyStatus = pregnancyStatus,
-                    Rash = rash,
-                    ReferedToClinic = referredToClinic,
-                    ReferedToClinicDate = appointmentDate,
-                };
                 var artDistribution = new PatientArtDistributionManager();
-                Result = artDistribution.AddPatientArtDistribution(patientArvDistribution);
+
+                if (IsPatientArtDistributionDone == 1)
+                {
+                    PatientArtDistribution patientArtDistribution = artDistribution.GetPatientArtDistributionByPatientIdAndVisitId(patientId, patientMasterVisitId);
+                    patientArtDistribution.ArtRefillModel = artRefillModel;
+                    patientArtDistribution.Cough = cough;
+                    patientArtDistribution.Diarrhea = diarrhea;
+                    patientArtDistribution.FamilyPlanning = familyPlanning;
+                    patientArtDistribution.FamilyPlanningMethod = fpmethod;
+                    patientArtDistribution.Fatigue = fatigue;
+                    patientArtDistribution.Fever = fever;
+                    patientArtDistribution.MissedArvDoses = missedArvDoses;
+                    patientArtDistribution.GenitalSore = genitalSore;
+                    patientArtDistribution.MissedArvDosesCount = missedDosesCount;
+                    patientArtDistribution.Nausea = nausea;
+                    patientArtDistribution.NewMedication = newMedication;
+                    patientArtDistribution.NewMedicationText = newMedicineText;
+                    patientArtDistribution.OtherSymptom = otherSymptom;
+                    patientArtDistribution.PregnancyStatus = pregnancyStatus;
+                    patientArtDistribution.Rash = rash;
+                    patientArtDistribution.ReferedToClinic = referredToClinic;
+                    patientArtDistribution.ReferedToClinicDate = appointmentDate;
+
+                    Result = artDistribution.UpdatePatientArtDistribution(patientArtDistribution);
+                }
+                else
+                {
+
+                    var patientArvDistribution = new PatientArtDistribution()
+                    {
+                        PatientId = patientId,
+                        PatientMasterVisitId = patientMasterVisitId,
+                        ArtRefillModel = artRefillModel,
+                        Cough = cough,
+                        Diarrhea = diarrhea,
+                        FamilyPlanning = familyPlanning,
+                        FamilyPlanningMethod = fpmethod,
+                        Fatigue = fatigue,
+                        Fever = fever,
+                        MissedArvDoses = missedArvDoses,
+                        GenitalSore = genitalSore,
+                        MissedArvDosesCount = missedDosesCount,
+                        Nausea = nausea,
+                        NewMedication = newMedication,
+                        NewMedicationText = newMedicineText,
+                        OtherSymptom = otherSymptom,
+                        PregnancyStatus = pregnancyStatus,
+                        Rash = rash,
+                        ReferedToClinic = referredToClinic,
+                        ReferedToClinicDate = appointmentDate,
+                    };
+
+                    Result = artDistribution.AddPatientArtDistribution(patientArvDistribution);
+                }
+
                 if (Result > 0)
                 {
                     Msg = "Patient ART Distribution Added Successfully!";
@@ -915,6 +952,29 @@ namespace IQCare.Web.CCC.WebService
                 Msg = e.Message;
             }
             return Msg;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string GetArtDistributionForVisit()
+        {
+            AutoMapper.Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<PatientArtDistribution, ArtDistributionDeTails>();
+            });
+
+            int patientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
+            int patientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientMasterVisitId"]);
+
+            PatientArtDistributionManager artDistributionManager = new PatientArtDistributionManager();
+
+            PatientArtDistribution artDistribution = artDistributionManager.GetPatientArtDistributionByPatientIdAndVisitId(patientId, patientMasterVisitId);
+            var results = Mapper.Map<ArtDistributionDeTails>(artDistribution);
+            if (results != null)
+            {
+                results.DateReferedToClinic = String.Format("{0:dd-MMM-yyyy}", results.ReferedToClinicDate);
+
+            }
+            return new JavaScriptSerializer().Serialize(results);
         }
 
     }

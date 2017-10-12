@@ -3,6 +3,7 @@ using Entities.CCC.Enrollment;
 using Interface.CCC.Enrollment;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using DataAccess.CCC.Context;
 using DataAccess.CCC.Repository;
 
@@ -35,12 +36,30 @@ namespace BusinessProcess.CCC.Enrollment
 
         public int UpdatePatientArtDistribution(PatientArtDistribution p)
         {
-            throw new NotImplementedException();
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                unitOfWork.PatientArtDistributionRepository.Update(p);
+                unitOfWork.Complete();
+                unitOfWork.Dispose();
+                return p.Id;
+            }
         }
 
         public List<PatientArtDistribution> GetByPatientId(int patientId)
         {
             throw new NotImplementedException();
+        }
+
+        public PatientArtDistribution GetPatientArtDistributionByPatientIdAndVisitId(int patientId, int patientMasterVisitId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var patientArtDistributions = unitOfWork.PatientArtDistributionRepository.FindBy(x =>
+                    x.PatientId == patientId && x.PatientMasterVisitId == patientMasterVisitId);
+                unitOfWork.Complete();
+                unitOfWork.Dispose();
+                return patientArtDistributions.FirstOrDefault();
+            }
         }
     }
 }
