@@ -12,6 +12,8 @@ namespace Interface.CCC.Enrollment
 
         PatientArtDistribution GetPatientArtDistribution(int id);
 
+        PatientArtDistribution GetPatientArtDistributionByPatientIdAndVisitId(int patientId, int patientMasterVisitId);
+
         void DeletePatientArtDistribution(int id);
 
         int UpdatePatientArtDistribution(PatientArtDistribution p);
