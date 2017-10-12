@@ -77,17 +77,17 @@ BEGIN
 	CREATE TABLE #TPatient(Id INT IDENTITY(1,1), ptn_pk int, personId int, patientId int)
 
 	INSERT INTO #TPatient(ptn_pk, personId, patientId)
-	SELECT ptn_pk, PersonId, Id from (SELECT        Id, ptn_pk, PersonId, PatientIndex, PatientType, FacilityId, Active, DateOfBirth, DobPrecision, NationalId, DeleteFlag, CreatedBy, CreateDate, AuditData, RegistrationDate, row_number() Over (Partition By ptn_pk Order By Id Desc) RowNum
+	 SELECT ptn_pk, PersonId, Id from (SELECT        Id, ptn_pk, PersonId, PatientIndex, PatientType, FacilityId, Active, DateOfBirth, DobPrecision, NationalId, DeleteFlag, CreatedBy, CreateDate, AuditData, RegistrationDate, row_number() Over (Partition By ptn_pk Order By Id Asc) RowNum
 	FROM            dbo.Patient
 	WHERE        (ptn_pk IN
-								 (SELECT        ptn_pk
-								   FROM            (SELECT        Patient_1.ptn_pk, COUNT(Patient_1.Id) AS Expr1
-															 FROM            dbo.Patient AS Patient_1 INNER JOIN
-																					   dbo.mst_Patient ON Patient_1.ptn_pk = dbo.mst_Patient.Ptn_Pk
-															 GROUP BY Patient_1.ptn_pk
-															 HAVING         (COUNT(Patient_1.Id) > 1)) AS T))) B 
+         (SELECT        ptn_pk
+           FROM            (SELECT        Patient_1.ptn_pk, COUNT(Patient_1.Id) AS Expr1
+                FROM            dbo.Patient AS Patient_1 INNER JOIN
+                        dbo.mst_Patient ON Patient_1.ptn_pk = dbo.mst_Patient.Ptn_Pk
+                GROUP BY Patient_1.ptn_pk
+                HAVING         (COUNT(Patient_1.Id) > 1)) AS T))) B 
 
-	WHERE B.RowNum=1
+	WHERE B.RowNum>1
 
 	SELECT @countd = COUNT(Id) FROM #TPatient
 	
