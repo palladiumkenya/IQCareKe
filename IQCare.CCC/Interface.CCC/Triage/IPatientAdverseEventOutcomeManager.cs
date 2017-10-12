@@ -9,7 +9,7 @@ namespace Interface.CCC.Triage
         int SavePatientAdverseEventOutcome(PatientAdverseEventOutcome patientAdverseEventOutcome);
         int UpdatePatientAdverseEventOutcome(PatientAdverseEventOutcome patientAdverseEventOutcome);
         int DeletePatientAdverseEventOutcome(int id);
-        List<PatientAdverseEventOutcome> GetAdverseEventOutcome(int adverseId,int patientMasterVisitId,int patientId);
+        List<PatientAdverseEventOutcome> GetAdverseEventOutcome(int adverseId,int patientId);
         //string GetCurrentAdverseEventOutcome(int adverseId, int patientMasterVisitId, int patientId);
         //string GetCurrentAdverseEventOutcomeDate(int adverseId, int patientMasterVisitId, int patientId);
 

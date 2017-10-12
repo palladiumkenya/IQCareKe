@@ -2302,3 +2302,34 @@ BEGIN
 		 
 		 exec [dbo].[pr_CloseDecryptedSession];
 END
+
+
+
+/****** Object:  StoredProcedure [dbo].[sp_getPatientEncounterAdverseEvents]    Script Date: 10/12/2017 3:17:19 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		John Macharia
+-- Create date: 14th Feb 2017
+-- Description:	get patient encounter Adverse Events
+-- =============================================
+ALTER PROCEDURE [dbo].[sp_getPatientEncounterAdverseEvents]
+	-- Add the parameters for the stored procedure here
+	@PatientMasterVisitID int = null,
+	@PatientID int = null
+
+AS
+BEGIN
+-- SET NOCOUNT ON added to prevent extra result sets from
+-- interfering with SELECT statements.
+Set Nocount On;
+
+	select Severity SeverityID,EventName,EventCause,b.DisplayName Severity,[Action] 
+	from AdverseEvent a left join LookupItem b on a.Severity = b.Id
+	where patientId = @PatientID and (a.DeleteFlag is null or a.DeleteFlag = 0)
+
+	-- PatientMasterVisitId = @PatientMasterVisitID and  //commented to show all adverseEvents patient has had.
+	
+End

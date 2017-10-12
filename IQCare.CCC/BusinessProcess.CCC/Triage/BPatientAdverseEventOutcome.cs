@@ -35,12 +35,12 @@ namespace BusinessProcess.CCC.Triage
             }
         }
 
-        public List<PatientAdverseEventOutcome> GetAdverseEventOutcome(int adverseId,int patientMasterVisitId, int patientId)
+        public List<PatientAdverseEventOutcome> GetAdverseEventOutcome(int adverseId,int patientId)
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 var outcome =
-                    unitOfWork.PatientAdverseEventOutcomeRepository.FindBy(x => x.AdverseEventId == adverseId && x.PatientMasterVisitid==patientMasterVisitId && x.PatientId==patientId).ToList();
+                    unitOfWork.PatientAdverseEventOutcomeRepository.FindBy(x => x.AdverseEventId == adverseId && x.PatientId==patientId).ToList();
                 unitOfWork.Dispose();
                 return outcome;
             }

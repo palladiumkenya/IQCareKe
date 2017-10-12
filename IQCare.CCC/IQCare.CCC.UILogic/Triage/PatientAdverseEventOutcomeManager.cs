@@ -81,7 +81,7 @@ namespace IQCare.CCC.UILogic.Triage
         {
             try
             {
-                return _patientAdverseEventOutcomeManager.GetAdverseEventOutcome(adverseId,patientMasterVisitId,patientId);
+                return _patientAdverseEventOutcomeManager.GetAdverseEventOutcome(adverseId,patientId);
             }
             catch (Exception  e)
             {

@@ -1,4 +1,9 @@
 
+
+--  UPDATE LookupItems
+	UPDATE LookupItem SET Name='Obese' WHERE Name='O' AND DisplayName='Overweight/Obese'
+	UPDATE LookupItem SET Name='Normal' WHERE Name='N' AND DisplayName='Normal'
+
 -- new master item
 	IF NOT EXISTS(SELECT * FROM LookupMaster WHERE Name='AdverseEventOutcome')
 	BEGIN
@@ -7,14 +12,14 @@
 
 
 -- Died item already exists
-	IF NOT EXISTS(SELECT * FROM LookupItem WHERE Name='GotWell')
+	IF NOT EXISTS(SELECT * FROM LookupItem WHERE Name='Got Well')
 	BEGIN
-		INSERT INTO LookupItem(name,DisplayName) VALUES('GotWell','Got Well');
+		INSERT INTO LookupItem(name,DisplayName) VALUES('Got Well','Got Well');
 	END
 
-	IF NOT EXISTS(SELECT * FROM LookupItem WHERE Name='GotWell')
+	IF NOT EXISTS(SELECT * FROM LookupItem WHERE Name='Got Well')
 	BEGIN
-		INSERT INTO LookupItem(name,DisplayName) VALUES('NoChange','No Change');
+		INSERT INTO LookupItem(name,DisplayName) VALUES('No Change','No Change');
 	END
 
 	-- lookupmaster item

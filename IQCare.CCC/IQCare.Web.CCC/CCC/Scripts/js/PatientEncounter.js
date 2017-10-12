@@ -199,8 +199,8 @@ function AddVaccine() {
     var vaccineFound = 0;
     var vaccineStageFound = 0;
 
-    if (vaccineID == "0") {
-       toastr.error("Error","Please enter vaccine")
+    if (vaccineID === "0") {
+        toastr.error("Error", "Please enter vaccine");
         return false;
     }
 
