@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BusinessProcess.CCC.Triage;
 
 namespace UnitTest.CCC
 {
@@ -22,7 +23,7 @@ namespace UnitTest.CCC
         [Test]
         public void CheckIfPatientAdverseEventOutcomeExists()
         {
-         var x=   bp.CheckIfPatientAdverseEventOutcomeExists(2, 1);
+         var x=   bp.CheckIfPatientAdverseEventOutcomeExists(2, 1,3);
 
             Assert.True(x > 1);
 

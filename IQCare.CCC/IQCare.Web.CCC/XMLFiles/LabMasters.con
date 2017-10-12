@@ -1071,12 +1071,6 @@
     <DeleteFlag>true</DeleteFlag>
   </Lnk_TestParameter>
   <Lnk_TestParameter>
-    <SubTestId>107</SubTestId>
-    <SubTestName>ViralLoad Undetectable</SubTestName>
-    <TestId>3</TestId>
-    <DeleteFlag>true</DeleteFlag>
-  </Lnk_TestParameter>
-  <Lnk_TestParameter>
     <SubTestId>108</SubTestId>
     <SubTestName>Hepatitis C antibody</SubTestName>
     <TestId>84</TestId>
@@ -1136,7 +1130,7 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>3</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
+    <MinBoundaryValue>50.00</MinBoundaryValue>
     <MaxBoundaryValue>2000000.00</MaxBoundaryValue>
     <MinNormalRange>50.00</MinNormalRange>
     <MaxNormalRange>2000000.00</MaxNormalRange>
@@ -1550,17 +1544,6 @@
     <TextNormalRange />
     <DefaultUnit>false</DefaultUnit>
     <UnitId>131</UnitId>
-    <DeleteFlag>false</DeleteFlag>
-  </Lnk_LabValue>
-  <Lnk_LabValue>
-    <SubTestId>107</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>500.00</MaxBoundaryValue>
-    <MinNormalRange>0.00</MinNormalRange>
-    <MaxNormalRange>500.00</MaxNormalRange>
-    <TextNormalRange />
-    <DefaultUnit>true</DefaultUnit>
-    <UnitId>129</UnitId>
     <DeleteFlag>false</DeleteFlag>
   </Lnk_LabValue>
   <Lnk_LabValue>
@@ -2281,12 +2264,6 @@
     <SubTestId>106</SubTestId>
     <SubTestName>Creatininemm</SubTestName>
     <TestId>12</TestId>
-    <DeleteFlag>false</DeleteFlag>
-  </LabTestOrder>
-  <LabTestOrder>
-    <SubTestId>107</SubTestId>
-    <SubTestName>ViralLoad Undetectable</SubTestName>
-    <TestId>3</TestId>
     <DeleteFlag>false</DeleteFlag>
   </LabTestOrder>
   <LabTestOrder>

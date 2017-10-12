@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Web;
+using System.Diagnostics;
 using System.Web.Script.Serialization;
 using System.Web.Script.Services;
 using System.Web.Services;
@@ -12,6 +13,7 @@ using Entities.CCC.Encounter;
 using Entities.CCC.Enrollment;
 using Interface.CCC.Visit;
 using IQCare.CCC.UILogic.Enrollment;
+using IQCare.CCC.UILogic.Triage;
 using AutoMapper;
 
 //using static Entities.CCC.Encounter.PatientEncounter;
@@ -103,15 +105,93 @@ namespace IQCare.Web.CCC.WebService
         [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
         public ArrayList GetAdverseEvents()
         {
+            int adverseEventId=0;
+            int patientId = Convert.ToInt32(Session["PatientPK"].ToString());
+            int patientMasterVisitId = Convert.ToInt32(Session["PatientMasterVisitID"].ToString());
+            var outcomeString = "";
+
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+            PatientAdverseEventOutcomeManager patientAdverseEventOutcome = new PatientAdverseEventOutcomeManager();
+
+            LookupLogic lookupLogic=new LookupLogic();
+
 
             DataTable theDT = patientEncounter.loadPatientEncounterAdverseEvents(Session["PatientMasterVisitID"].ToString(), Session["PatientPK"].ToString());
             ArrayList rows = new ArrayList();
 
             foreach (DataRow row in theDT.Rows)
             {
-                string[] i = new string[6] { row["SeverityID"].ToString(), row["EventName"].ToString(), row["EventCause"].ToString(), row["Severity"].ToString(), row["Action"].ToString(), "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>" };
-                rows.Add(i);
+                string eventoutcome = "";
+                DateTime outcomeDate=DateTime.Today ;
+
+                //get the adverse Event form the db
+                var items = lookupLogic.GetItemIdByGroupAndItemName("AdverseEvents", row["EventName"].ToString());
+                foreach (var item in items)
+                {
+                    adverseEventId = item.ItemId;
+                }
+
+                // get the outcome for the adverse event
+               // var outcome =patientAdverseEventOutcome.GetAdverseEventOutcome(adverseEventId, patientMasterVisitId, patientId);
+
+               var adverseEventOutcomes= patientAdverseEventOutcome.GetAdverseEventOutcome(adverseEventId,patientMasterVisitId,patientId);
+
+
+
+                if (adverseEventOutcomes.Count > 0)
+                {
+                    foreach (var adverseEventOutcome in adverseEventOutcomes)
+                    {
+                        eventoutcome = lookupLogic.GetLookupItemNameById(adverseEventOutcome.OutcomeId);
+                        outcomeDate = Convert.ToDateTime(adverseEventOutcome.OutcomeDate);
+                    }
+                    if (string.IsNullOrEmpty(eventoutcome))
+                    {
+                        string[] i = new string[6]
+                        {
+                            row["SeverityID"].ToString(), row["EventName"].ToString(), row["EventCause"].ToString(),
+                            row["Severity"].ToString(), row["Action"].ToString(),
+                            "<button type='button' class='btnAddAdverseEventOutcome btn btn-info fa fa-plus-circle btn-fill' onclick='AdverseEventOutcome();'> Specify Outcome</button> <button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"
+                        };
+                        rows.Add(i);
+                    }
+                    else
+                    {
+                        if (eventoutcome == "Died")
+                        {
+                            outcomeString = "<span class='text-danger'><strong>" + eventoutcome +
+                                            "</strong></span> | <span class='text-info'><strong>" + outcomeDate.ToString("dd-MMM-yyy") + "</strong></span>";
+                        }
+                        else{
+                            outcomeString = "<span class='text-primary'><strong>" + eventoutcome +
+                                            "</strong></span> | <span class='text-info'><strong>" + outcomeDate.ToString("dd-MMM-yyy") + "</strong></span>";
+                        }
+                        string[] i = new string[6]
+                        {
+                            row["SeverityID"].ToString(),
+                            row["EventName"].ToString(),
+                            row["EventCause"].ToString(),
+                            row["Severity"].ToString(),
+                            row["Action"].ToString(),
+                            outcomeString
+                            //"<span class='text-info'>outcome:</span>"+eventoutcome+ "<span class='text-info'>outcome Date:</span>"+ outcomeDate
+                        };
+                        rows.Add(i);
+                    }
+                }
+                else
+                {
+
+                    string[] i = new string[6]
+                    {
+                        row["SeverityID"].ToString(), row["EventName"].ToString(), row["EventCause"].ToString(),
+                        row["Severity"].ToString(), row["Action"].ToString(),
+                        "<button type='button' class='btnAddAdverseEventOutcome btn btn-info fa fa-plus-circle btn-fill' onclick='AdverseEventOutcome();'> Specify Outcome</button> <button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"
+                    };
+                    rows.Add(i);
+                }
+
+
             }
             return rows;
         }

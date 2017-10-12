@@ -2,6 +2,8 @@
 using Entities.CCC.Triage;
 using Interface.CCC.Triage;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace IQCare.CCC.UILogic.Triage
 {
@@ -11,11 +13,11 @@ namespace IQCare.CCC.UILogic.Triage
         private int result;
         private string jsonMessage;
 
-        public int CheckIfPatientAdverseEventOutcomeExists(int patientId, int adverseEventId)
+        public int CheckIfPatientAdverseEventOutcomeExists(int patientId, int adverseEventId,int patientmasterVisitId)
         {
             try
             {
-                result = _patientAdverseEventOutcomeManager.CheckIfPatientAdverseEventOutcomeExists(patientId, adverseEventId);
+                result = _patientAdverseEventOutcomeManager.CheckIfPatientAdverseEventOutcomeExists(patientId, adverseEventId, patientmasterVisitId);
                 return result;
             }catch(Exception e)
             {
@@ -74,5 +76,17 @@ namespace IQCare.CCC.UILogic.Triage
             return jsonMessage;
         }
 
+
+        public List<PatientAdverseEventOutcome> GetAdverseEventOutcome(int adverseId,int patientMasterVisitId,int patientId)
+        {
+            try
+            {
+                return _patientAdverseEventOutcomeManager.GetAdverseEventOutcome(adverseId,patientId);
+            }
+            catch (Exception  e)
+            {
+                throw new Exception("Error getting adverse Event Outcome"+e.InnerException);
+            }
+        }
     }
 }
