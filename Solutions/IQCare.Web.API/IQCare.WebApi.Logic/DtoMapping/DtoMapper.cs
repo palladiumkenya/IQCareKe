@@ -146,7 +146,7 @@ namespace IQCare.WebApi.Logic.DtoMapping
             throw new NotImplementedException();
         }
 
-        public ViralLoadResultEntity ViralLoadResults(ViralLoadResultEntity entity)
+        public ViralLoadResultsDto ViralLoadResults(ViralLoadResultEntity entity)
         {
             var internalIdentifiers=new List<INTERNALPATIENTID>() ;
 
@@ -161,38 +161,38 @@ namespace IQCare.WebApi.Logic.DtoMapping
                 internalIdentifiers.Add(internalIdentity);
             }
 
-            var vlResultsDto=new ViralLoadResultEntity()
+            var vlResultsDto=new ViralLoadResultsDto()
             {
-                MESSAGE_HEADER =
+                MesssageHeader = 
                 {
-                    SENDING_APPLICATION = entity.MESSAGE_HEADER.SENDING_APPLICATION,
-                    SENDING_FACILITY = entity.MESSAGE_HEADER.SENDING_FACILITY,
-                    RECEIVING_APPLICATION = entity.MESSAGE_HEADER.RECEIVING_APPLICATION,
-                    RECEIVING_FACILITY = entity.MESSAGE_HEADER.RECEIVING_FACILITY,
-                    MESSAGE_DATETIME =entity.MESSAGE_HEADER.MESSAGE_DATETIME, //DateTime.Now.ToString("yyyyMMddHHmmss"); 
-                    SECURITY = entity.MESSAGE_HEADER.SECURITY,
-                    MESSAGE_TYPE = entity.MESSAGE_HEADER.MESSAGE_TYPE,
-                    PROCESSING_ID = entity.MESSAGE_HEADER.PROCESSING_ID
+                    SendingApplication = entity.MESSAGE_HEADER.SENDING_APPLICATION,
+                    SendingFacility = entity.MESSAGE_HEADER.SENDING_FACILITY,
+                    ReceivingApplication = entity.MESSAGE_HEADER.RECEIVING_APPLICATION,
+                    ReceivingFacility = entity.MESSAGE_HEADER.RECEIVING_FACILITY,
+                    MessageDatetime =Convert.ToDateTime(entity.MESSAGE_HEADER.MESSAGE_DATETIME), //DateTime.Now.ToString("yyyyMMddHHmmss"); 
+                    Security = entity.MESSAGE_HEADER.SECURITY,
+                    MessageType = entity.MESSAGE_HEADER.MESSAGE_TYPE,
+                    ProcessingId = entity.MESSAGE_HEADER.PROCESSING_ID
 
                 },
-                PATIENT_IDENTIFICATION =
+                InternalPatientIdentifier = 
                 {
-                    PATIENT_NAME =
-                    {
-                        FIRST_NAME = entity.PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME,
-                        MIDDLE_NAME = entity.PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME,
-                        LAST_NAME = entity.PATIENT_IDENTIFICATION.PATIENT_NAME.LAST_NAME
-                    },
-                    INTERNAL_PATIENT_ID = internalIdentifiers
+                    //PATIENT_NAME =
+                    //{
+                    //    FIRST_NAME = entity.PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME,
+                    //    MIDDLE_NAME = entity.PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME,
+                    //    LAST_NAME = entity.PATIENT_IDENTIFICATION.PATIENT_NAME.LAST_NAME
+                    //},
+                    //INTERNAL_PATIENT_ID = internalIdentifiers
                 },
-                VIRAL_LOAD_RESULT =
+                ViralLoadResult = 
                 {
-                    DATE_SAMPLE_COLLECTED = entity.VIRAL_LOAD_RESULT.DATE_SAMPLE_COLLECTED,
-                    DATE_SAMPLE_TESTED = entity.VIRAL_LOAD_RESULT.DATE_SAMPLE_TESTED,
-                    JUSTIFICATION = entity.VIRAL_LOAD_RESULT.JUSTIFICATION,
-                    LAB_TESTED_IN =     entity.VIRAL_LOAD_RESULT.LAB_TESTED_IN,
-                    REGIMEN = entity.VIRAL_LOAD_RESULT.REGIMEN,
-                    SAMPLE_TYPE = entity.VIRAL_LOAD_RESULT.SAMPLE_TYPE
+                    DateSampleCollected = entity.VIRAL_LOAD_RESULT.DATE_SAMPLE_COLLECTED,
+                    DateSampleTested = entity.VIRAL_LOAD_RESULT.DATE_SAMPLE_TESTED,
+                    Justification = entity.VIRAL_LOAD_RESULT.JUSTIFICATION,
+                    LabTestedIn =     entity.VIRAL_LOAD_RESULT.LAB_TESTED_IN,
+                    Regimen = entity.VIRAL_LOAD_RESULT.REGIMEN,
+                    SampleType = entity.VIRAL_LOAD_RESULT.SAMPLE_TYPE
                 }
             }; 
             return vlResultsDto;

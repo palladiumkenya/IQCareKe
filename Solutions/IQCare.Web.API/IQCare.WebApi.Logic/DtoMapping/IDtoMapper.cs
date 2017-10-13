@@ -21,6 +21,6 @@ namespace IQCare.WebApi.Logic.DtoMapping
         void AppointmentHonored();
         void UniquePatientIdentification();
         void ViralLoadLabOrder();
-        ViralLoadResultEntity ViralLoadResults(ViralLoadResultEntity entity);
+        ViralLoadResultsDto ViralLoadResults(ViralLoadResultEntity entity);
     }
 }

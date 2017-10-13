@@ -7,6 +7,7 @@ namespace IQCare.WebApi.Logic.MappingEntities
     {
         public DateTime DATE_SAMPLE_COLLECTED { get; set; }
         public DateTime DATE_SAMPLE_TESTED { get; set; }
+        public DateTime SAMPLE_RESULT_DATE { get; set; }
         public string VL_RESULT { get; set; }
         public string SAMPLE_TYPE { get; set; }
         public string JUSTIFICATION { get; set; }

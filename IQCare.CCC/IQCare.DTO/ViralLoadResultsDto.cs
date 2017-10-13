@@ -4,7 +4,14 @@ namespace IQCare.DTO
 {
     public class ViralLoadResultsDto
     {
-          public MessageHeader MesssageHeader { get; set; }
+        public ViralLoadResultsDto()
+        {
+            MesssageHeader = new MessageHeader();
+            InternalPatientIdentifier = new DTOIdentifier();
+            ViralLoadResult = new VLoadlResult();
+        }
+
+        public MessageHeader MesssageHeader { get; set; }
           public DTOIdentifier InternalPatientIdentifier { get; set; }
           public VLoadlResult ViralLoadResult { get; set; }
     }
@@ -25,7 +32,7 @@ namespace IQCare.DTO
         public string SendingApplication { get; set; }
         public string SendingFacility { get; set; }
         public string ReceivingApplication { get; set; }
-        public int ReceivingFacility { get; set; }
+        public string ReceivingFacility { get; set; }
         public DateTime MessageDatetime { get; set; }
         public string Security { get; set; }
         public string MessageType { get; set; }
