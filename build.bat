@@ -19,11 +19,14 @@ Set config=debug
 set log=builder.log
 set msbuildpath=C:\Windows\Microsoft.NET\Framework\v4.0.30319
 @Echo Cleaning references folder
-del %BATDIR%\References\* /F /Q
+rmdir %BATDIR%\References /S /Q
+mkdir References
 @Echo Cleaning package folder
-del %BATDIR%\Package\* /F /Q
+rmdir %BATDIR%\Package /S /Q
+mkdir package
 @Echo Cleaning Release folder
-del %BATDIR%\Release\* /F /Q
+rmdir %BATDIR%\Release /S /Q
+mkdir Release
 
 @echo "Starting building in %config% mode"
 @echo "Starting building in %config% mode devenv" > %log%

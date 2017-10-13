@@ -157,7 +157,7 @@
                                         Close Setup</button>
                                     <%--<button type="button"  class="btn btn-primary">
                                         Save changes</button>--%>
-                                        <asp:Button ID="cmdSave" CssClass="btn btn-info" OnClick="cmdSave_Click" runat="server" Text="Save Setup" data-dismiss="modal"  />
+                                        <asp:Button ID="cmdSave" CssClass="btn btn-info" OnClick="cmdSave_Click" runat="server" Text="Save Setup"   />
                                     
                                 </div>
                             </div>

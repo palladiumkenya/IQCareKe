@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using Application.Common;
-using Application.Presentation;
+﻿using Application.Presentation;
 using Entities.CCC.Lookup;
 using Interface.CCC.Lookup;
+using System;
+using System.Collections.Generic;
 
 namespace IQCare.CCC.UILogic
 {
@@ -30,7 +29,7 @@ namespace IQCare.CCC.UILogic
             }
         }
 
-        public List<PatientLookup> GetPatientSearchListPayload(int patientId, string firstName = null, string middleName = null, string lastName =null)
+        public List<PatientLookup> GetPatientSearchListPayload(string patientId, string firstName = null, string middleName = null, string lastName =null)
         {
             var patientDetails = _patientLookupmanager.GetPatientSearchPayload(patientId, firstName, middleName, lastName);
 

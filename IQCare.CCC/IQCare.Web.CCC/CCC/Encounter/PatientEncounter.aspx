@@ -400,51 +400,51 @@
                         var items = response.d;
                         items.forEach(function (item, i) {
 
-                            if (item.Month == 1) {
+                            if (item.Month === 1) {
 
                                 jan_vl = item.ResultValue;
                                    
-                            } else if (item.Month == 2) {
+                            } else if (item.Month === 2) {
 
                                 feb_vl = item.ResultValue;                                   
                            
-                           } else if (item.Month == 3) {
+                           } else if (item.Month === 3) {
 
                                  mar_vl = item.ResultValue;                                   
                             }
-                           else if (item.Month == 4) {
+                           else if (item.Month === 4) {
 
                                apr_vl = item.ResultValue;                                   
                            }
-                           else if (item.Month == 5) {
+                           else if (item.Month === 5) {
 
                                may_vl = item.ResultValue;                                   
                            }
-                           else if (item.Month == 6) {
+                           else if (item.Month === 6) {
 
                                jun_vl = item.ResultValue;                                   
                            }
-                           else if (item.Month == 7) {
+                           else if (item.Month === 7) {
 
                                jul_vl = item.ResultValue;                                   
                            }
-                           else if (item.Month == 8) {
+                           else if (item.Month === 8) {
 
                                aug_vl = item.ResultValue;                                   
                            }
-                           else if (item.Month == 9) {
+                           else if (item.Month === 9) {
 
                                sep_vl = item.ResultValue;                                   
                            }
-                           else if (item.Month == 10) {
+                           else if (item.Month === 10) {
 
                                oct_vl = item.ResultValue;                                   
                            }
-                           else if (item.Month == 11) {
+                           else if (item.Month === 11) {
 
                                nov_vl = item.ResultValue;                                   
                            }
-                           else if (item.Month == 12) {
+                           else if (item.Month === 12) {
 
                                dec_vl = item.ResultValue;                                   
                            }

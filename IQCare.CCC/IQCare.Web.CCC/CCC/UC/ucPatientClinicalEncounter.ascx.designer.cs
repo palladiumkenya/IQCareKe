@@ -319,6 +319,15 @@ namespace IQCare.Web.CCC.UC {
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdAnyAdverseEventsNo;
         
         /// <summary>
+        /// adverseEventId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox adverseEventId;
+        
+        /// <summary>
         /// adverseEvent control.
         /// </summary>
         /// <remarks>
@@ -1001,5 +1010,14 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList status;
+        
+        /// <summary>
+        /// AdverseOutomeDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText AdverseOutomeDate;
     }
 }

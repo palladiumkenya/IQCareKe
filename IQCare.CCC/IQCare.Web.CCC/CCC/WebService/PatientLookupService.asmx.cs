@@ -40,7 +40,7 @@ namespace IQCare.Web.CCC.WebService
 
             try
             {
-                int patientId = 0;
+                string patientId ="";
                 string firstName = null;
                 string middleName = null;
                 string lastName = null;
@@ -48,14 +48,14 @@ namespace IQCare.Web.CCC.WebService
                 PatientLookupManager patientLookup = new PatientLookupManager();
 
 
-                Int32.TryParse(dataPayLoad.FirstOrDefault(x => x.name == "patientId").value, out patientId);
+                patientId = dataPayLoad.FirstOrDefault(x => x.name == "patientId").value;
                 firstName = Convert.ToString(dataPayLoad.FirstOrDefault(x => x.name == "firstName").value);
                 middleName = Convert.ToString(dataPayLoad.FirstOrDefault(x => x.name == "middleName").value);
                 lastName = Convert.ToString(dataPayLoad.FirstOrDefault(x => x.name == "lastName").value);
 
                 //patientId = patientId != "" ? patientId : 0;
 
-                if (patientId > 0 || !string.IsNullOrWhiteSpace(firstName) || !string.IsNullOrWhiteSpace(middleName) || !string.IsNullOrWhiteSpace(lastName))
+                if (patientId !="" || !string.IsNullOrWhiteSpace(firstName) || !string.IsNullOrWhiteSpace(middleName) || !string.IsNullOrWhiteSpace(lastName))
                 {
                     jsonData = patientLookup.GetPatientSearchListPayload(patientId, firstName, middleName, lastName);
                 }

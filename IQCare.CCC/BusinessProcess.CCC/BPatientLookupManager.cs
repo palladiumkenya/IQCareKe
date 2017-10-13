@@ -50,7 +50,7 @@ namespace BusinessProcess.CCC
 
         }
 
-        public List<PatientLookup> GetPatientSearchPayload(int patientId, string firstName, string middleName, string lastName)
+        public List<PatientLookup> GetPatientSearchPayload(string patientId, string firstName, string middleName, string lastName)
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
@@ -58,10 +58,10 @@ namespace BusinessProcess.CCC
 
                 Expression<Func<PatientLookup, bool>> expresionFinal = c=>c.Id > 0;
 
-                if (patientId > 0)
+                if (!string.IsNullOrEmpty(patientId.Trim()))
                 {
                     Expression<Func<PatientLookup, bool>> expressionPatientId =
-                        c => c.EnrollmentNumber.ToString().Contains(patientId.ToString());
+                        c => c.EnrollmentNumber.ToString().Contains(patientId.Trim().ToString());
 
                     expresionFinal = PredicateBuilder.And(expresionFinal, expressionPatientId);
                 }

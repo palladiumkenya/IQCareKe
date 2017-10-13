@@ -24,20 +24,20 @@
                             <div class="col-md-4">
                                 <div class="form-group  col-md-10">
 
-                                      <label id="lblidentificationno" class="control-label pull-left" runat="server">
+                                    <label id="lblidentificationno" class="control-label pull-left" runat="server">
                                         Identification Number:</label>
-                               
-                                       <asp:DropDownList ID="ddlIdentifier" runat="server" class="form-control" Style="height: inherit;display:none">
-                                                <asp:ListItem Text=" Identifier:"></asp:ListItem>
-                                            </asp:DropDownList>
-                                        <asp:TextBox ID="txtidentificationno" CssClass="form-control input-sm" runat="server"
-                                            MaxLength="20" placeholder="Identifier"></asp:TextBox>
-                                       
 
-                                        <ajaxToolkit:FilteredTextBoxExtender ID="FTEID" runat="server" FilterType="Numbers, UppercaseLetters, LowercaseLetters,Custom"
-                                            TargetControlID="txtidentificationno" ValidChars="-@*/\_()| ">
-                                        </ajaxToolkit:FilteredTextBoxExtender>
-                                  
+                                    <asp:DropDownList ID="ddlIdentifier" runat="server" class="form-control" Style="height: inherit; display: none">
+                                        <asp:ListItem Text=" Identifier:"></asp:ListItem>
+                                    </asp:DropDownList>
+                                    <asp:TextBox ID="txtidentificationno" CssClass="form-control input-sm" runat="server"
+                                        MaxLength="20" placeholder="Identifier"></asp:TextBox>
+
+
+                                    <ajaxToolkit:FilteredTextBoxExtender ID="FTEID" runat="server" FilterType="Numbers, UppercaseLetters, LowercaseLetters,Custom"
+                                        TargetControlID="txtidentificationno" ValidChars="-@*/\_()| ">
+                                    </ajaxToolkit:FilteredTextBoxExtender>
+
 
                                 </div>
                                 <div class="form-group col-md-10">
@@ -226,18 +226,72 @@
                                                                 <asp:ImageButton ID="ExpandGridButton" runat="server" CommandName="Expand" ImageUrl="~/Images/plus.png"
                                                                     CommandArgument="<%# Container.DataItemIndex %>" /></span>
                                                         </ItemTemplate>
+                                                        <ItemStyle Width="32px" />
                                                     </asp:TemplateField>
-                                                    <asp:BoundField DataField="PatientFacilityId" HeaderText="Facility ID" />
-                                                     <asp:BoundField DataField="PatientEnrollmentID" HeaderText="CCC Number" />
-                                                    <asp:BoundField DataField="firstname" HeaderText="First Name" />
-                                                    <asp:BoundField DataField="middlename" HeaderText="Middle Name" />
-                                                    <asp:BoundField DataField="lastname" HeaderText="Last Name" />
-                                                    <asp:BoundField DataField="dob" HeaderText="DOB" DataFormatString="{0:dd-MMM-yyyy}" />
-                                                    <asp:BoundField DataField="sex" HeaderText="Sex" />
-                                                    <asp:BoundField DataField="RegistrationDate" DataFormatString="{0:dd-MMM-yyyy}" HeaderText="Reg Date" />
-                                                    <asp:BoundField DataField="Phone" HeaderText="Phone" />
-                                                    <asp:BoundField DataField="FacilityName" HeaderText="Facility" Visible="false" />
-                                                    <asp:BoundField DataField="Status" HeaderText="Status" />
+                                                    <asp:TemplateField HeaderText="Facility ID">
+
+                                                        <ItemTemplate>
+                                                            <asp:Label ID="labelPatientFacilityId" runat="server" Text='<%# Bind("PatientFacilityId") %>'></asp:Label>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="CCC Number">
+
+                                                        <ItemTemplate>
+                                                            <asp:Label ID="labelPatientEnrollmentId" runat="server" Text='<%# Bind("PatientEnrollmentID") %>'></asp:Label>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="First Name">
+
+                                                        <ItemTemplate>
+                                                            <asp:Label ID="labelFirstName" runat="server" Text='<%# Bind("firstname") %>'></asp:Label>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Middle Name">
+
+                                                        <ItemTemplate>
+                                                            <asp:Label ID="labelMiddleName" runat="server" Text='<%# Bind("middlename") %>'></asp:Label>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Last Name">
+
+                                                        <ItemTemplate>
+                                                            <asp:Label ID="labelLastName" runat="server" Text='<%# Bind("lastname") %>'></asp:Label>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="DOB">
+
+                                                        <ItemTemplate>
+                                                            <asp:Label ID="labelDOB" runat="server" Text='<%# Bind("dob", "{0:dd-MMM-yyyy}") %>'></asp:Label>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Sex">
+
+                                                        <ItemTemplate>
+                                                            <asp:Label ID="labelSex" runat="server" Text='<%# Bind("sex") %>'></asp:Label>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Reg Date">
+
+                                                        <ItemTemplate>
+                                                            <asp:Label ID="labelRegDate" runat="server" Text='<%# Bind("RegistrationDate", "{0:dd-MMM-yyyy}") %>'></asp:Label>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Phone">
+
+                                                        <ItemTemplate>
+                                                            <asp:Label ID="labelPhone" runat="server" Text='<%# Bind("Phone") %>'></asp:Label>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Facility" Visible="False">
+                                                        <ItemTemplate>
+                                                            <asp:Label ID="labelFacilityName" runat="server" Text='<%# Bind("FacilityName") %>'></asp:Label>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Status">
+                                                        <ItemTemplate>
+                                                            <asp:Label ID="labelStatus" runat="server" Text='<%# Bind("Status") %>'></asp:Label>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
                                                     <asp:TemplateField>
                                                         <ItemTemplate>
                                                             </td></tr><tr>

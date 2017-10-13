@@ -1456,8 +1456,7 @@
                     <!-- .bs-component-->
 
                     <div class="col-md-6 col-xs-12 col-sm-12">
-                        <%--  <div id="vitals_container" margin: 0 auto"></div>  --%>
-                     l   <div id="vitals_container" style="min-width: 450px; height: 300px; margin: 0"></div>
+                        <div id="vitals_container" style="min-width: 450px; height: 300px; margin: 0"></div>
                     </div>
                     <!-- .bs-component-->
 

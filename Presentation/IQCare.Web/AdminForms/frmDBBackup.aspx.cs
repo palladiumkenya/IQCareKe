@@ -161,7 +161,7 @@ namespace IQCare.Web.Admin
                     int noRows = BackupManger.SaveBackupSetup(ddBackupDrive.SelectedItem.ToString(), theTime);
                     BackupManger = null;
                     //IQCareMsgBox.Show("BackupSetupSave", this);
-                    IQCareMsgBox.NotifyAction("Backup Setup Updated Successfully", "Database Backup Setup", false, this, "");
+                    IQCareMsgBox.NotifyAction("Backup Setup Updated Successfully", "Database Backup Setup", false, this, "window.location.href='../AdminForms/frmDBBackup.aspx'");
                 }
                 else
                 {
