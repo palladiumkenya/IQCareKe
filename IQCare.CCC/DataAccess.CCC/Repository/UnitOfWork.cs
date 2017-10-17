@@ -103,6 +103,7 @@ namespace DataAccess.CCC.Repository
         private IPatientPregnancyIndicatorRepository _PatientPregnancyIndicatorRepository;
         private IPatientPregnancyRepository _PatientPregnancyRepository;
         private IPatientScreeningRepository _PatientScreeningRepository;
+        private IPatientAdverseEventOutcomeRepository _patientAdverseEventOutcomeRepository;
 
         /*Baseline*/
         // private IPatientDisclosureRepository _patientDisclosureRepository;
@@ -670,6 +671,15 @@ namespace DataAccess.CCC.Repository
             get { return _patientArtDistributionRepository ?? (_patientArtDistributionRepository= new PatientArtDistributionRepository((GreencardContext)_context)); }
         }
 
+        public IPatientAdverseEventOutcomeRepository PatientAdverseEventOutcomeRepository
+        {
+            get
+            {
+                return _patientAdverseEventOutcomeRepository ?? (_patientAdverseEventOutcomeRepository = new PatientAdverseEventOutcomeRepository((GreencardContext)_context));
+            }
+        }
+
+       // public IPatientAdverseEventOutcomeRepository PatientAdverseEventOutcomeRepository => throw new NotImplementedException();
 
         public int Complete()
         {

@@ -17,6 +17,7 @@ namespace Entities.CCC.Triage
 
         [Required]
         public int PatientId { get; set; }
+        [ForeignKey("PatientId")]
         public virtual PatientEntity Patient { get; set; }
 
         [Required]

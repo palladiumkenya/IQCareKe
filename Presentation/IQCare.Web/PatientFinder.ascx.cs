@@ -751,25 +751,34 @@ namespace IQCare.Web
                 locationId = int.Parse(grdSearchResult.SelectedDataKey.Values["locationid"].ToString());
                 var list = new List<KeyValuePair<string, object>>();
 
-                string FacilityID,FirstName, MiddleName, LastName, Gender, DOB, RegistrationDate;
-                FacilityID = grdSearchResult.SelectedRow.Cells[1].Text;
-                FirstName = grdSearchResult.SelectedRow.Cells[2].Text;
-                MiddleName = grdSearchResult.SelectedRow.Cells[3].Text;
-                LastName = grdSearchResult.SelectedRow.Cells[4].Text;
-                DOB = grdSearchResult.SelectedRow.Cells[5].Text;
-                Gender = grdSearchResult.SelectedRow.Cells[6].Text;
+                string facilityId,firstName, middleName, lastName, gender, dob, regDate;
 
-                RegistrationDate = grdSearchResult.SelectedRow.Cells[7].Text;
+                facilityId = (grdSearchResult.SelectedRow.FindControl("labelPatientFacilityId") as Label).Text;
+                firstName = (grdSearchResult.SelectedRow.FindControl("labelFirstName") as Label).Text;
+                middleName= (grdSearchResult.SelectedRow.FindControl("labelMiddleName") as Label).Text;
+                lastName = (grdSearchResult.SelectedRow.FindControl("labelLastName") as Label).Text;
+                gender = (grdSearchResult.SelectedRow.FindControl("labelSex") as Label).Text;
+                dob= (grdSearchResult.SelectedRow.FindControl("labelDOB") as Label).Text;
+                regDate = (grdSearchResult.SelectedRow.FindControl("labelRegDate") as Label).Text;
 
-                list.Add(new KeyValuePair<string, object>("FacilityID", FacilityID));
+                //facilityId = grdSearchResult.SelectedRow.Cells[1].Text;
+                //firstName = grdSearchResult.SelectedRow.Cells[2].Text;
+                //middleName = grdSearchResult.SelectedRow.Cells[3].Text;
+                //lastName = grdSearchResult.SelectedRow.Cells[4].Text;
+                //dob = grdSearchResult.SelectedRow.Cells[5].Text;
+                //gender = grdSearchResult.SelectedRow.Cells[6].Text;
+
+                //regDate = grdSearchResult.SelectedRow.Cells[7].Text;
+
+                list.Add(new KeyValuePair<string, object>("FacilityID", facilityId));
                 list.Add(new KeyValuePair<string, object>("PatientID", patientId));
                 list.Add(new KeyValuePair<string, object>("LocationID", locationId));
-                list.Add(new KeyValuePair<string, object>("FirstName", FirstName));
-                list.Add(new KeyValuePair<string, object>("MiddleName", MiddleName));
-                list.Add(new KeyValuePair<string, object>("LastName", LastName));
-                list.Add(new KeyValuePair<string, object>("DOB", DOB));
-                list.Add(new KeyValuePair<string, object>("Gender", Gender));
-                list.Add(new KeyValuePair<string, object>("RegistrationDate", RegistrationDate));
+                list.Add(new KeyValuePair<string, object>("FirstName", firstName));
+                list.Add(new KeyValuePair<string, object>("MiddleName", middleName));
+                list.Add(new KeyValuePair<string, object>("LastName", lastName));
+                list.Add(new KeyValuePair<string, object>("DOB", dob));
+                list.Add(new KeyValuePair<string, object>("Gender", gender));
+                list.Add(new KeyValuePair<string, object>("RegistrationDate", regDate));
 
                 this.OnPatientSelected(this, new CommandEventArgs("SelectedPatient", list));
                 //this.PopulatePatientList();

@@ -152,6 +152,7 @@
     <Compile Include="PatientLabOrderManager.cs" />
     <Compile Include="Screening\PatientScreeningManager.cs" />
     <Compile Include="TestingSummaryStatisticsManager.cs" />
+    <Compile Include="Triage\PatientAdverseEventOutcomeManager.cs" />
     <Compile Include="Triage\PatientFamilyPlanningManager.cs" />
     <Compile Include="Triage\PatientFamilyPlanningMethodManager.cs" />
     <Compile Include="Triage\PatientPregnancyIndicatorManager.cs" />

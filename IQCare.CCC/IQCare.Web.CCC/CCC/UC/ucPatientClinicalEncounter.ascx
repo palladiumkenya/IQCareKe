@@ -12,7 +12,7 @@
     <div class="col-md-12">
         <div class="wizard" data-initialize="wizard" id="myWizard">
             <div class="steps-container">
-                <ul class="steps">
+                <ul class="steps">presenting
 
                     <li data-step="1" data-name="template" class="active">
                         <span class="badge">1</span>Presenting Complaints
@@ -48,13 +48,11 @@
 
                 <div class="step-pane active sample-pane" id="datastep1" data-parsley-validate="true" data-show-errors="true" data-step="1">
 
-                    <div class="col-md-12">
+                    <div class="col-md-12 form-group">
                         <div class="col-md-4">
-                            <div class="col-md-12 form-group">
-                                <div class="col-md-12">
-                                    <label class="control-label  pull-left text-primary">*Visit Date</label>
-                                </div>
-                                <div class="col-md-12">
+                            
+                              <div class="col-md-12"><label class="control-label  pull-left text-primary">*Visit Date</label></div>  
+                              <div class="col-md-12">
                                     <div class="datepicker" id="DateOfVisit">
                                         <div class="input-group">
                                             <asp:TextBox ID="VisitDate" runat="server" class="form-control input-sm" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
@@ -147,8 +145,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
+                              </div>
                         </div>
 
                         <div class="col-md-4">
@@ -255,6 +252,7 @@
                                 <div class="panel panel-info" <%-- style="height:100%"--%>>
 
                                     <div class="panel-body">
+                                        
                                         <div class="col-md-12 form-group">
                                             <div>
                                                 <label class="control-label  pull-left text-primary">*Any Presenting Complaints</label>
@@ -298,36 +296,37 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <%--.panel-body--%>
-                                    <div class="col-md-12">
-                                        <div id="presentingComplaintsTable" class="panel panel-primary">
-                                            <div class="panel-heading">Presenting Complaints</div>
-                                            <div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden;">
-                                                <table id="dtlPresentingComplaints" class="table table-bordered table-striped" style="width: 100%">
-                                                    <thead>
-                                                        <tr>
-                                                            <th><span class="text-primary">Presenting ComplaintsID</span></th>
-                                                            <th><span class="text-primary">Presenting Complaints</span></th>
-                                                            <th><span class="text-primary">Date of Onset</span></th>
-                                                            <th><span class="text-primary"></span></th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody></tbody>
-                                                </table>
 
-
+                                        <div class="col-md-12 form-group">
+                                            <div id="presentingComplaintsTable" class="panel panel-primary">
+                                                <div class="panel-heading">Presenting Complaints</div>
+                                                <div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden;">
+                                                    <table id="dtlPresentingComplaints" class="table table-bordered table-striped" style="width: 100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th><span class="text-primary">Presenting ComplaintsID</span></th>
+                                                                <th><span class="text-primary">Presenting Complaints</span></th>
+                                                                <th><span class="text-primary">Date of Onset</span></th>
+                                                                <th><span class="text-primary"></span></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody></tbody>
+                                                    </table>
+                                                </div>
                                             </div>
-
+                                         </div>
+                                        <div class="col-md-12">
+                                            <div id="presentingComplaintsNotes">
+                                                <label class="control-label pull-left text-primary" for="complaints">Presenting Complaints Notes :</label>
+                                                <textarea runat="server" clientidmode="Static" id="complaints" class="form-control input-sm" placeholder="complaints...." rows="3"></textarea>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div id="presentingComplaintsNotes">
-                                        <label class="control-label pull-left text-primary" for="complaints">Presenting Complaints Notes :</label>
-                                        <textarea runat="server" clientidmode="Static" id="complaints" class="form-control input-sm" placeholder="complaints...." rows="3"></textarea>
-                                    </div>
+                                    
+                                    
+                                    </div><%--.panel-body--%>
 
-                                </div>
-                                <%--.panel--%>
+                                </div><%--.panel--%>
+                                
                             </div>
                         </div>
 
@@ -678,6 +677,7 @@
                                                     <label class="control-label pull-left">Adverse event</label>
                                                 </div>
                                                 <div class="col-md-12">
+                                                    <asp:TextBox ID="adverseEventId" runat="server" ClientIDMode="Static"></asp:TextBox>
                                                     <asp:TextBox runat="server" CssClass="form-control input-sm" ID="adverseEvent" ClientIDMode="Static" placeholder="adverse event.."></asp:TextBox>
                                                 </div>
                                             </div>
@@ -716,33 +716,35 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <%--.panel-body--%>
-                                    <div id="adverseEventsTable" class="panel panel-primary">
-                                        <div class="panel-heading">Adverse Events</div>
-                                        <div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden;">
-                                            <table id="dtlAdverseEvents" class="table table-bordered table-striped" style="width: 100%">
-                                                <thead>
-                                                    <tr>
-                                                        <th><span class="text-primary">SeverityID</span></th>
-                                                        <th><span class="text-primary">Adverse Event</span></th>
-                                                        <th><span class="text-primary">Medicine Causing A/E</span></th>
-                                                        <th><span class="text-primary">Severity</span></th>
-                                                        <th><span class="text-primary">Action</span></th>
-                                                        <th><span class="text-primary"></span></th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody></tbody>
-                                            </table>
+                                    
+                                        <div class="col-md-12">
+                                            <div id="adverseEventsTable" class="panel panel-primary">
+                                                <div class="panel-heading">Adverse Events</div>
+                                                <div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden;">
+                                                    <table id="dtlAdverseEvents" class="table table-bordered table-striped" style="width: 100%">
+                                                        <thead>
+                                                        <tr>
+                                                            <th><span class="text-primary">SeverityID</span></th>
+                                                            <th><span class="text-primary">Adverse Events</span></th>
+                                                            <th><span class="text-primary">Medicine Causing A/E</span></th>
+                                                            <th><span class="text-primary">Severity</span></th>
+                                                            <th><span class="text-primary">Action</span></th>
+                                                            <th><span class="text-primary">Adverse Event Outcome</span></th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody id="dtlAdverseEventsBdy"></tbody>
+                                                    </table>
 
-                                        </div>
-                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                   
+                                     </div><%--.panel-body--%>
+                                </div> <%--.panel--%>
+                               
+                            </div><%--col-md-12--%>
 
-                                </div>
-                                <%--.panel--%>
-                            </div>
-
-                            <%--col-md-11--%>
+                            
                         </div>
                     </div>
                         </div>
@@ -1953,17 +1955,167 @@
 
 </div>
 
+
+
+<div id="AdverseEventOutcomeModal" class="modal fade" data-backdrop="false">
+
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Patient Adverse Event Outcome </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12"><h4 id="adverseEventLable" class="text-info"></h4></div>
+                    <div class="col-md-12"><hr/></div>
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <div class="col-md-12"><label class="control-label  pull-left">Outcome</label></div>
+                            <div class="col-md-12">
+                                <select id="EventOutcome" name="EventOutcome" class="form-control" data-parsley-reqired data-parsley-min="1" clientidmode="Static">
+                                    <option value="0">select</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="col-md-12"><label class="control-label  pull-left">Outcome</label></div>
+                            <div class="col-md-12">
+                                 <div class="datepicker fuelux" id="outcomeDate">
+                                                    <div class="input-group">
+                                                        <input class="form-control input-sm" id="AdverseOutomeDate" type="text" runat="server" clientidmode="Static" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')" />
+                                                        <div class="input-group-btn">
+                                                            <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
+                                                                <span class="glyphicon glyphicon-calendar"></span>
+                                                                <span class="sr-only">Toggle Calendar</span>
+                                                            </button>
+                                                            <div class="dropdown-menu dropdown-menu-right datepicker-calendar-wrapper" role="menu">
+                                                                <div class="datepicker-calendar">
+                                                                    <div class="datepicker-calendar-header">
+                                                                        <button type="button" class="prev"><span class="glyphicon glyphicon-chevron-left input-sm"></span><span class="sr-only">Previous Month</span></button>
+                                                                        <button type="button" class="next"><span class="glyphicon glyphicon-chevron-right input-sm"></span><span class="sr-only">Next Month</span></button>
+                                                                        <button type="button" class="title" data-month="11" data-year="2014">
+                                                                            <span class="month">
+                                                                                <span data-month="0">January</span>
+                                                                                <span data-month="1">February</span>
+                                                                                <span data-month="2">March</span>
+                                                                                <span data-month="3">April</span>
+                                                                                <span data-month="4">May</span>
+                                                                                <span data-month="5">June</span>
+                                                                                <span data-month="6">July</span>
+                                                                                <span data-month="7">August</span>
+                                                                                <span data-month="8">September</span>
+                                                                                <span data-month="9">October</span>
+                                                                                <span data-month="10">November</span>
+                                                                                <span data-month="11" class="current">December</span>
+                                                                            </span><span class="year">2014</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <table class="datepicker-calendar-days">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Su</th>
+                                                                                <th>Mo</th>
+                                                                                <th>Tu</th>
+                                                                                <th>We</th>
+                                                                                <th>Th</th>
+                                                                                <th>Fr</th>
+                                                                                <th>Sa</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody></tbody>
+                                                                    </table>
+                                                                    <div class="datepicker-calendar-footer">
+                                                                        <button type="button" class="datepicker-today">Today</button>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="datepicker-wheels" aria-hidden="true">
+                                                                    <div class="datepicker-wheels-month">
+                                                                        <h2 class="header">Month</h2>
+                                                                        <ul>
+                                                                            <li data-month="0">
+                                                                                <button type="button">Jan</button></li>
+                                                                            <li data-month="1">
+                                                                                <button type="button">Feb</button></li>
+                                                                            <li data-month="2">
+                                                                                <button type="button">Mar</button></li>
+                                                                            <li data-month="3">
+                                                                                <button type="button">Apr</button></li>
+                                                                            <li data-month="4">
+                                                                                <button type="button">May</button></li>
+                                                                            <li data-month="5">
+                                                                                <button type="button">Jun</button></li>
+                                                                            <li data-month="6">
+                                                                                <button type="button">Jul</button></li>
+                                                                            <li data-month="7">
+                                                                                <button type="button">Aug</button></li>
+                                                                            <li data-month="8">
+                                                                                <button type="button">Sep</button></li>
+                                                                            <li data-month="9">
+                                                                                <button type="button">Oct</button></li>
+                                                                            <li data-month="10">
+                                                                                <button type="button">Nov</button></li>
+                                                                            <li data-month="11">
+                                                                                <button type="button">Dec</button></li>
+                                                                        </ul>
+                                                                    </div>
+                                                                    <div class="datepicker-wheels-year">
+                                                                        <h2 class="header">Year</h2>
+                                                                        <ul></ul>
+                                                                    </div>
+                                                                    <div class="datepicker-wheels-footer clearfix">
+                                                                        <button type="button" class="btn datepicker-wheels-back"><span class="glyphicon glyphicon-arrow-left"></span><span class="sr-only">Return to Calendar</span></button>
+                                                                        <button type="button" class="btn datepicker-wheels-select">Select <span class="sr-only">Month and Year</span></button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                            </div>
+                        </div>
+
+<%--                        <div class="col-md-4">
+                            <div class="col-md-12"><label class="control-label pull-left">Action</label></div>
+                            <div class="col-md-12">
+                                <select id="OutcomeAction" class="form-control" data-parsley-required" data-parsley-min="1">
+                                    <option value="0">select</option>
+                                </select>
+                            </div>
+                        </div>--%>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger fa fa-times" data-dismiss="modal"> Quit Outcome</button>
+                <button type="button" class="btn btn-primary fa fa-plus-circle" id="btnSaveChangesOutcome"> Save changes</button>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
 <script type="text/javascript">
     var genderId = <%=genderID%>;
     var gender = "<%=gender%>";
     var Age = "<%=age%>";
     var isNoneChecked = false;
 
+    var PatientId = "<%=PtnId%>";
+    var PatientMasterVisitId = "<%=PmVisitId%>";
+
     document.getElementById('txtPresentingComplaintsID').style.display = 'none';
     document.getElementById('txtAllergyId').style.display = 'none';
     document.getElementById('txtReactionTypeID').style.display = 'none';
     document.getElementById('txtDiagnosisID').style.display = 'none';
     document.getElementById("<%=txtBMIZ.ClientID%>").style.display = 'none';
+
+    document.getElementById('adverseEventId').style.display = 'none';
 
 
     $(document).ready(function () {
@@ -1996,6 +2148,7 @@
         //  $("#EverBeenOnIpt").prop("disabled", true);
         //showHideFPControls();
         loadPresentingComplaints();
+        loadAdverseEvents();
         loadAllergies();
         loadAllergyReactions();
         loadDiagnosis();
@@ -2004,6 +2157,52 @@
         showHideSystemsOkayDivs();
         showHideVisitByTS();
 
+        //Show the AdverseEventModal Windows
+        function loadAdverseEventOutcome() {
+            $("#AdverseEventOutcomeModel").modal('show');
+        }
+
+        //outcome date
+        $('#outcomeDate').datepicker({
+            allowPastDates: true,
+            restricted: [{ from: tomorrow, to: Infinity }],
+            momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+            //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+        });
+
+        //populate options for ADverEvents;
+        var mastrName = 'AdverseEventOutcome';
+
+        $.ajax({
+            type: "POST",
+            url: "../WebService/LookupService.asmx/GetLookUpItemViewByMasterName",
+            data: "{'masterName':'" + mastrName + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                var itemList = JSON.parse(response.d);
+
+                $("#EventOutcome").find('option').remove().end();
+                $("#EventOutcome")
+                    .append('<option value="0">Select</option>');
+                $.each(itemList,
+                    function (index, itemList) {
+                        $("#EventOutcome")
+                            .append('<option value="' +
+                                itemList.ItemId +
+                                '">' +
+                                itemList.ItemName +
+                                "(" +
+                                itemList.ItemDisplayName +
+                                ")" +
+                                '</option>');
+                    });
+            },
+            error: function (response) {
+                toastr
+                    .error("Error in Fetching Adverse Event Outcome List " + response.d);
+            }
+        });
 
         //set nutrition status
 
@@ -2027,13 +2226,13 @@
         } else {
             var txtBMIZ = $("#<%=txtBMIZ.ClientID%>").val();
             console.log(txtBMIZ);
-            if ((txtBMIZ == "4 (Overweight)") || (txtBMIZ == "3 (Overweight)") || (txtBMIZ == "2 (Overweight)") || (txtBMIZ == "1 (Overweight)")) {
+            if ((txtBMIZ == "4 (Overweight)") || (txtBMIZ === "3 (Overweight)") || (txtBMIZ === "2 (Overweight)") || (txtBMIZ === "1 (Overweight)")) {
                 $("#nutritionscreeningstatus option").filter(function() { return $(this).text() === 'Overweight/Obese'; }).prop('selected', true);
-            }else if ((txtBMIZ == "0 (Normal)")) {
+            }else if ((txtBMIZ === "0 (Normal)")) {
                 $("#nutritionscreeningstatus option").filter(function() { return $(this).text() === 'Normal'; }).prop('selected', true);
-            }else if ((txtBMIZ == "-1 (Mild)") || (txtBMIZ == "-2 (Moderate)")) {
+            }else if ((txtBMIZ === "-1 (Mild)") || (txtBMIZ == "-2 (Moderate)")) {
                 $("#nutritionscreeningstatus option").filter(function() { return $(this).text() === 'Moderate Acute Malnutrition'; }).prop('selected', true); 
-            }else if ((txtBMIZ == "-3 (Severe)") || (txtBMIZ == "-4 (Severe)")) {
+            }else if ((txtBMIZ === "-3 (Severe)") || (txtBMIZ === "-4 (Severe)")) {
                 $("#nutritionscreeningstatus option").filter(function() { return $(this).text() === 'Severe Acute Malnutrition'; }).prop('selected', true);
             }
         }
@@ -2055,16 +2254,16 @@
         var getEDDPVal = "<%= this.EDDval %>";
         var getNxtAppDateVal = "<%= this.nxtAppDateval %>";
 
-        if (getVisitDateVal == '' || getVisitDateVal == '01-Jan-1900')
+        if (getVisitDateVal === '' || getVisitDateVal === '01-Jan-1900')
             getVisitDateVal = 0;
 
-        if (getFemaleLMPVal == '' || getFemaleLMPVal == '01-Jan-1900')
+        if (getFemaleLMPVal === '' || getFemaleLMPVal === '01-Jan-1900')
             getFemaleLMPVal = 0;
 
-        if (getEDDPVal == '' || getEDDPVal == '01-Jan-1900')
+        if (getEDDPVal === '' || getEDDPVal === '01-Jan-1900')
             getEDDPVal = 0;
 
-        if (getNxtAppDateVal == '' || getVisitDateVal == '01-Jan-1900')
+        if (getNxtAppDateVal === '' || getVisitDateVal === '01-Jan-1900')
             getNxtAppDateVal = 0;
         //Date processing
         var today = new Date();
@@ -2227,6 +2426,59 @@
                 }
             ]
         });
+
+        $("#btnSaveChangesOutcome").on('click',
+            function() {
+                var adverseEvent = '';
+                var adverseEventId = 0;
+                var outcomeId = $("#EventOutcome").val();
+                var outcomeDate = moment($("#outcomeDate").datepicker('getDate')).format('DD-MMM-YYYY');
+
+
+                //$("#dtlAdverseEventsBdy tr").each(function () {
+                //    alert($(this).find("td").eq(2).html());
+                //});
+
+                //var ae = $("#adverseEventLable").text();
+                //alert(ae);
+                //adverseEvent = $("#dtlAdverseEvents tr").find('td').eq(0).html();
+                adverseEvent = $("#adverseEventLable").text();
+
+                $.ajax({
+                    type: "POST",
+                    url: "../WebService/LookupService.asmx/GetLookupItemId",
+                    data: "{'lookupItemName':'" + adverseEvent + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+
+                        $.ajax({
+                            type: "POST",
+                            url: "../WebService/PatientadverseEventOutcome.asmx/AddAdverseEventOutcome",
+                            data: "{'patientId':'" + PatientId + "','patientMasterVisitId':'" + PatientMasterVisitId + "','adverseEventId':'" + response.d + "','outcomeId':'" + outcomeId + "','outcomeDate':'" + outcomeDate + "'}",
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (response) {
+                                toastr.success(response.d);
+                                $('.modal').on('hidden.bs.modal', function (e) {
+                                    $(this).removeData();
+                                });
+                                //$("#adverseEventsTable").refresh();
+                                //window.location.reload();
+                            },
+                            error: function (response) {
+                                toastr
+                                    .error("Error saving adverseEvent Outcome(s) " + response.d);
+                                $("#AdverseEventOutcomeModal .close").click();
+                            }
+                        });
+                    },
+                    error: function (response) {
+                        toastr
+                            .error("Error in fetching itemId " + response.d);
+                    }
+                }); 
+            });
 
 
         var chronicTable = $('#dtlChronicIllness').DataTable({
@@ -2684,14 +2936,14 @@
             var nutritionscreening = $("#<%=nutritionscreeningstatus.ClientID%>").find(":selected").val();
 
             /////////////////////////////////////////////////////
-            if (anyComplaints == 1) {
+            if (anyComplaints === 1) {
                 if (!presentingComplaintsTable.data().any()) {
                     toastr.error("Presenting Complaints", "Presenting complaints missing.");
                     evt.preventDefault();
                 }
             }
 
-            if (adverseEvents == 1) {
+            if (adverseEvents === 1) {
                 if (!advEventsTable.data().any()) {
                     toastr.error("Adverse Event(s)", "Adverse Event(s) missing.");
                     evt.preventDefault();
@@ -3297,7 +3549,7 @@
                 var score = question1 + question2 + question3 + question4;
                 var adherenceRating = "";
 
-                if (score == 0) {
+                if (score === 0) {
                     adherenceRating = "Good";
                     $("#MMAS8").hide();
                 } else if (score >= 1 && score <= 2) {
@@ -3604,6 +3856,39 @@
 
     }
 
+    //adverse Event TypeAhead
+    function loadAdverseEvents() {
+        var pcInput = document.getElementById('<%= adverseEvent.ClientID %>');
+        var awesomplete = new Awesomplete(pcInput, {
+            minChars: 1
+        });
+
+        document.getElementById('<%= adverseEvent.ClientID %>').addEventListener('awesomplete-selectcomplete', function () {
+            var result = this.value.split("~");
+            $("#<%=adverseEventId.ClientID%>").val(result[0]);
+            $("#<%=adverseEvent.ClientID%>").val(result[1]);
+        });
+
+        $.ajax({
+            type: "POST",
+            url: "../WebService/PatientAdverseEventOutcome.asmx/GetAdverseEvent",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+                var serverData = data.d;
+                var PCList = [];
+
+                for (var i = 0; i < serverData.length; i++) {
+                    //drugList.push(serverData[i][1]);
+                    PCList.push({ label: serverData[i][1], value: serverData[i][0] });
+                }
+                awesomplete.list = PCList;
+            }
+        });
+
+    }
+
     function loadAllergies() {
         var pcInput = document.getElementById('<%= txtAllergy.ClientID %>');
         var awesomplete = new Awesomplete(pcInput, {
@@ -3725,7 +4010,7 @@
 
     function showHidePresentingComplaintsDivs() {
         var anyComplaints = $("input[name$=anyComplaints]:checked").val();
-        if (anyComplaints == 1) {
+        if (anyComplaints ==1) {
             document.getElementById('presentingComplaintsCtrls').style.display = 'block';
             document.getElementById('presentingComplaintsTable').style.display = 'block';
             document.getElementById('presentingComplaintsNotes').style.display = 'block';
@@ -3765,7 +4050,7 @@
     function showHideVisitByTS() {
         var visitByTS = $('#ddlVisitBy').find(":selected").text();
 
-        if (visitByTS == "Treatment Supporter") {
+        if (visitByTS === "Treatment Supporter") {
             document.getElementById('divTreatmentSupporter').style.display = 'block';
             document.getElementById('step1Div').style.display = 'none';
             document.getElementById('prevNextButton').style.display = 'none';
@@ -3821,17 +4106,17 @@
         for(var i = 0; i < checkOptions.length; i++)
         {
             var checkBoxRef = checkOptions[i];
-            if (checkBoxRef.checked == true) {
+            if (checkBoxRef.checked === true) {
                 var labelArray = checkBoxRef.parentNode.getElementsByTagName('label');
                 checkedValues = labelArray[0].innerHTML;
-                if (checkedValues == "None" && isNoneChecked == false) {
+                if (checkedValues === "None" && isNoneChecked == false) {
                     isNoneChecked = true;
                     CheckAll();
                 }
             } else {
                 var labelArrayUnchecked = checkBoxRef.parentNode.getElementsByTagName('label');
                 checkedValues = labelArrayUnchecked[0].innerHTML;
-                if (checkedValues == "None" && isNoneChecked == true) {
+                if (checkedValues === "None" && isNoneChecked === true) {
                     isNoneChecked = false;
                     UnCheckAll();
                 }
@@ -3847,7 +4132,7 @@
             var opt = inputItems[i];
             var labelArray = opt.parentNode.getElementsByTagName('label');
             if (labelArray.length > 0) {
-                if (labelArray[0].innerHTML != "None") {
+                if (labelArray[0].innerHTML !== "None") {
                     opt.disabled = true;
                     opt.checked=false;
                 }
@@ -3870,3 +4155,4 @@
     }
 
 </script>
+

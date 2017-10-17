@@ -147,6 +147,7 @@
     <Compile Include="Tb\PatientIptOutcome.cs" />
     <Compile Include="Tb\PatientIptWorkup.cs" />
     <Compile Include="Triage\PatientAdverseEvent.cs" />
+    <Compile Include="Triage\PatientAdverseEventOutcome.cs" />
     <Compile Include="Triage\PatientAllergy.cs" />
     <Compile Include="Triage\PatientChronicIllness.cs" />
     <Compile Include="Encounter\PatientPhdp.cs" />
