@@ -5,11 +5,21 @@ namespace IQCare.DTO
 {
     public class PrescriptionDto
     {
-        public DTOIdentifier InternalPatientIdentifier { get; set; }
+        public PrescriptionDto()
+        {
+            MesssageHeader=new MessageHeader();
+            PatientIdentification = new DtoPatientIdentification();
+            CommonOrderDetails=new CommonOrderDetails();
+            PharmacyEncodedOrder=new List<PharmacyEncodedOrder>();
+        }
+
+        public MessageHeader MesssageHeader { get; set; }
+        //public DTOIdentifier InternalPatientIdentifier { get; set; }
+        public DtoPatientIdentification PatientIdentification { get; set; }
         public PatientNameDto Patientname { get; set; }
         public CommonOrderDetails CommonOrderDetails { get; set; }
-        public List<PharmacyEncodedOrder> PharmacyEncodedOrder  { get; set; }
-    }
+        public List<PharmacyEncodedOrder> PharmacyEncodedOrder { get; set; }
+}
 
    public class CommonOrderDetails
     {
@@ -45,4 +55,5 @@ namespace IQCare.DTO
         public int QuantityPrescribed { get; set; }
         public string PrescriptionNotes { get; set; }
     }
+
 }

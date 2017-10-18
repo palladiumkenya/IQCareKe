@@ -2,6 +2,7 @@
 using Entities.Common;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.CCC.Triage
 {
@@ -17,6 +18,7 @@ namespace Entities.CCC.Triage
 
         [Required]
         public int PatientId { get; set; }
+        [ForeignKey("PatientId")]
         public virtual PatientEntity Patient { get; set; }
 
         [Required]

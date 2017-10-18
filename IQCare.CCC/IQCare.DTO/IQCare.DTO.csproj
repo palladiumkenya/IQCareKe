@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="DispenseDto.cs" />
     <Compile Include="DTOIdentifier.cs" />
+    <Compile Include="DtoPatientIdentification.cs" />
     <Compile Include="IInteropDTO.cs" />
     <Compile Include="IlMessage.cs" />
     <Compile Include="PatientNameDto.cs" />

@@ -71,6 +71,8 @@
     <Content Include="CCC\Scripts\css\patientSummary.css" />
     <Content Include="CCC\Scripts\css\prism.css" />
     <Content Include="CCC\Scripts\css\select2.css" />
+    <Content Include="CCC\Scripts\css\style-267.css" />
+    <Content Include="CCC\Scripts\css\style-291.css" />
     <Content Include="CCC\Scripts\css\style.css" />
     <Content Include="CCC\Scripts\css\stylechosen.css" />
     <Content Include="CCC\Scripts\css\sweetalert2.css" />
@@ -81,6 +83,7 @@
     <Content Include="CCC\Scripts\js\bootstrap-datetimepicker.min.js" />
     <Content Include="CCC\Scripts\js\chosen.jquery.js" />
     <Content Include="CCC\Scripts\js\collapse.js" />
+    <Content Include="CCC\Scripts\js\html5shiv.js" />
     <Content Include="CCC\Scripts\js\init.js" />
     <Content Include="CCC\Scripts\js\jquery-ui.min.css" />
     <Content Include="CCC\Scripts\js\jquery-ui.min.js" />
@@ -107,7 +110,9 @@
     <Content Include="CCC\Scripts\css\jquery-ui.css" />
     <Content Include="CCC\Scripts\css\exporting.css" />
     <Content Include="CCC\Scripts\js\highcharts.js" />
+    <Content Include="CCC\Scripts\js\placeholder.js" />
     <Content Include="CCC\Scripts\js\prism.js" />
+    <Content Include="CCC\Scripts\js\respond.min.js" />
     <Content Include="CCC\Scripts\js\select2.min.js" />
     <Content Include="CCC\Scripts\js\sweetalert2.js" />
     <Content Include="CCC\Scripts\js\tether.js" />
@@ -139,6 +144,7 @@
     <Content Include="CCC\WebService\FacilityService.asmx" />
     <Content Include="CCC\WebService\LabService.asmx" />
     <Content Include="CCC\WebService\OneTimeEventsTrackerService.asmx" />
+    <Content Include="CCC\WebService\PatientAdverseEventOutcome.asmx" />
     <Content Include="CCC\WebService\PatientBaselineService.asmx" />
     <Content Include="CCC\WebService\PatientEncounterService.asmx" />
     <Content Include="CCC\WebService\PatientLookupService.asmx" />
@@ -476,13 +482,16 @@
     <Compile Include="CCC\WebService\OneTimeEventsTrackerService.asmx.cs">
       <DependentUpon>OneTimeEventsTrackerService.asmx</DependentUpon>
     </Compile>
+    <Compile Include="CCC\WebService\PatientAdverseEventOutcome.asmx.cs">
+      <DependentUpon>PatientAdverseEventOutcome.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CCC\WebService\PatientBaselineService.asmx.cs">
       <DependentUpon>PatientBaselineService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CCC\WebService\PatientEncounterService.asmx.cs">
       <DependentUpon>PatientEncounterService.asmx</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="CCC\WebService\PatientLookupService.asmx.cs">
       <DependentUpon>PatientLookupService.asmx</DependentUpon>
@@ -535,8 +544,11 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\Application.Presentation.dll</HintPath>
     </Reference>
-    <Reference Include="CrystalDecisions.CrystalReports.Engine">
-      <HintPath>..\..\Library\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
+    <Reference Include="AutoMapper, Version=6.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\Solutions\IQCare.CCC\packages\AutoMapper.6.1.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <HintPath>..\..\Solutions\IQCare.CCC\packages\CrystalDecisions.CrystalReports.Engine.1.0.0\lib\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
     </Reference>
     <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="DataAccess.CCC, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -630,7 +642,7 @@
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL"/>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.Http">
       <HintPath>..\..\Solutions\IQCare.CCC\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
       <HintPath>..\..\Library\System.Web.Http.dll</HintPath>

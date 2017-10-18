@@ -30,9 +30,8 @@ namespace Entities.CCC.Interoperability
        public string ORDERING_PHYSICIAN { get; set; }
        public string NOTES { get; set; }
        //public List<PrescribedDrug>  PrescribedDrugs { get; set; }
-
-   
     }
+
     public class PrescribedDrug
     {
         public string DRUG_NAME { get; set; }

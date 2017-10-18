@@ -30,8 +30,6 @@ namespace Entities.CCC.Baseline
         public bool ldl { get; set; }
         public decimal? BaselineViralload { get; set; }
         public DateTime? BaselineViralloadDate { get; set; }
-        [ForeignKey("PatientId")]
-        public virtual PatientEntity Patient { get; set; }
         [ForeignKey("PatientMasterVisitId")]
         public virtual PatientMasterVisit PatientMasterVisit { get; set; }
 

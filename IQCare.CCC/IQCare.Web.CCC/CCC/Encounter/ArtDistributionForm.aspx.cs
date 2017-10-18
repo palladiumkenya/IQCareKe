@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Web;
 using System.Web.UI.WebControls;
+using Entities.CCC.Enrollment;
+using IQCare.CCC.UILogic.Enrollment;
 
 namespace IQCare.Web.CCC.Encounter
 {
@@ -13,6 +15,8 @@ namespace IQCare.Web.CCC.Encounter
         public int PatientId;
         public int PatientMasterVisitId;
         public string Gender;
+        public int IsPatientArtDistributionDone { get; set; }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
@@ -37,6 +41,14 @@ namespace IQCare.Web.CCC.Encounter
                 {
                     ArtRefill.Items.Add(new ListItem(item.ItemDisplayName, item.ItemId.ToString()));
                 }
+            }
+
+
+            PatientArtDistributionManager artDistributionManager = new PatientArtDistributionManager();
+            PatientArtDistribution artDistribution = artDistributionManager.GetPatientArtDistributionByPatientIdAndVisitId(PatientId, PatientMasterVisitId);
+            if (artDistribution != null)
+            {
+                IsPatientArtDistributionDone = 1;
             }
         }
         private void GetSessionDetails()

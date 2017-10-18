@@ -96,9 +96,95 @@ namespace IQCare.WebApi.Logic.DtoMapping
             throw new NotImplementedException();
         }
 
-        public void DrugPrescriptionRaised()
+        public PrescriptionDto DrugPrescriptionRaised(DrugPrescriptionEntity entity)
         {
-            throw new NotImplementedException();
+
+            var internalIdentifiers = new List<DTOIdentifier>();
+
+            foreach (var identifier in entity.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID)
+            {
+                var internalIdentity = new DTOIdentifier()
+                {
+                    IdentifierType = identifier.IDENTIFIER_TYPE,
+                    IdentifierValue = identifier.ID,
+                    AssigningAuthority = identifier.ASSIGNING_AUTHORITY
+
+                };
+                internalIdentifiers.Add(internalIdentity);
+            }
+
+            var orderEncorder = new List<PharmacyEncodedOrder>();
+
+            foreach (var order in entity.PHARMACY_ENCODED_ORDER)
+            {
+                var prescriptionOrder=new PharmacyEncodedOrder()
+                {
+                    DrugName = order.DRUG_NAME,
+                    CodingSystem = order.CODING_SYSTEM,
+                    Strength = order.STRENGTH,
+                    Dosage = order.DOSAGE,
+                    Frequency = order.FREQUENCY,
+                    Duration =Convert.ToInt32(order.DURATION),
+                    QuantityPrescribed =Convert.ToInt32(order.QUANTITY_PRESCRIBED),
+                    PrescriptionNotes = order.PRESCRIPTION_NOTES
+                };
+                orderEncorder.Add(prescriptionOrder);
+            }
+
+            var patientName = new PATIENTNAME()
+            {
+                FIRST_NAME = entity.PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME,
+                LAST_NAME = entity.PATIENT_IDENTIFICATION.PATIENT_NAME.LAST_NAME,
+                MIDDLE_NAME = entity.PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME
+            };
+
+
+            var drugOrder = new PrescriptionDto()
+            {
+                MesssageHeader =
+                {
+                    SendingApplication = "IQCARE",
+                    SendingFacility = entity.MESSAGE_HEADER.SENDING_FACILITY,
+                    ReceivingApplication = entity.MESSAGE_HEADER.RECEIVING_APPLICATION,
+                    ReceivingFacility = entity.MESSAGE_HEADER.RECEIVING_FACILITY,
+                    MessageDatetime =Convert.ToDateTime(entity.MESSAGE_HEADER.MESSAGE_DATETIME), //DateTime.Now.ToString("yyyyMMddHHmmss"); 
+                    Security = entity.MESSAGE_HEADER.SECURITY,
+                    MessageType = entity.MESSAGE_HEADER.MESSAGE_TYPE,
+                    ProcessingId = entity.MESSAGE_HEADER.PROCESSING_ID
+
+                },
+                PatientIdentification =
+                {
+                    ExternalPatientId = {},
+                    InternalPatientId = internalIdentifiers,
+                    PatientName =
+                    {
+                        FirstName = entity.PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME,
+                        MiddleName = entity.PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME,
+                        LastName = entity.PATIENT_IDENTIFICATION.PATIENT_NAME.LAST_NAME
+                    }
+                },
+                CommonOrderDetails =
+                {
+                    OrderControl = entity.COMMON_ORDER_DETAILS.ORDER_CONTROL,
+                    PlacerOrderNumber=
+                    {
+                        Number = Convert.ToInt32(entity.COMMON_ORDER_DETAILS.PLACER_ORDER_NUMBER.NUMBER),
+                        Entity = entity.COMMON_ORDER_DETAILS.PLACER_ORDER_NUMBER.ENTITY
+                    },
+                    OrderStatus = entity.COMMON_ORDER_DETAILS.ORDER_STATUS,
+                    OrderingPhysician =
+                    {
+                        FirstName = entity.COMMON_ORDER_DETAILS.ORDERING_PHYSICIAN.FIRST_NAME,
+                        MiddleName = entity.COMMON_ORDER_DETAILS.ORDERING_PHYSICIAN.MIDDLE_NAME,
+                        LastName = entity.COMMON_ORDER_DETAILS.ORDERING_PHYSICIAN.LAST_NAME
+                    },
+                    TransactionDatetime = Convert.ToDateTime(entity.COMMON_ORDER_DETAILS.TRANSACTION_DATETIME),
+                    Notes = entity.COMMON_ORDER_DETAILS.NOTES.ToString()
+                },
+                PharmacyEncodedOrder =orderEncorder 
+            };            
+            return drugOrder;
         }
 
         public void DrugOrderCancel()
@@ -108,7 +194,7 @@ namespace IQCare.WebApi.Logic.DtoMapping
 
         public void DrugOrderFulfilment()
         {
-            throw new NotImplementedException();
+
         }
 
         public void AppointmentScheduling()

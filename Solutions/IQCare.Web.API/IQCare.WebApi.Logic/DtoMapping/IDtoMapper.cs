@@ -11,7 +11,7 @@ namespace IQCare.WebApi.Logic.DtoMapping
         void PatientTransferOut();
         void RegimenChange();
         void StopDrugs();
-        void DrugPrescriptionRaised();
+        PrescriptionDto DrugPrescriptionRaised(DrugPrescriptionEntity entity);
         void DrugOrderCancel();
         void DrugOrderFulfilment();
         void AppointmentScheduling();
