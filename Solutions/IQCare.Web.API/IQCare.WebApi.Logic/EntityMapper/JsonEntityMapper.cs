@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
 using System;
+using System.Web.Configuration;
+using System.Web.Script.Serialization;
 using IQCare.DTO;
 using IQCare.WebApi.Logic.MappingEntities;
+using Newtonsoft.Json;
 
 namespace IQCare.WebApi.Logic.EntityMapper
 {
@@ -10,11 +13,12 @@ namespace IQCare.WebApi.Logic.EntityMapper
     {
         public PatientRegistrationEntity PatientRegistration(Registration entity)
         {
-            PatientRegistrationEntity patientRegistration = new PatientRegistrationEntity();
-
-            patientRegistration.MESSAGE_HEADER = GetMessageHeader("ADT^A04", "13122", "P");
-            patientRegistration.PATIENT_IDENTIFICATION = PATIENTIDENTIFICATION.GetPatientidentification(entity);
-            patientRegistration.NEXT_OF_KIN = NEXTOFKIN.GetNextOfKins(entity);
+            PatientRegistrationEntity patientRegistration = new PatientRegistrationEntity
+            {
+                MESSAGE_HEADER = GetMessageHeader("ADT^A04", "13122", "P"),
+                PATIENT_IDENTIFICATION = PATIENTIDENTIFICATION.GetPatientidentification(entity),
+                NEXT_OF_KIN = NEXTOFKIN.GetNextOfKins(entity)
+            };
 
             return patientRegistration;
         }
@@ -46,51 +50,93 @@ namespace IQCare.WebApi.Logic.EntityMapper
 
         public DrugPrescriptionEntity DrugPrescriptionRaised(List<PrescriptionDto> prescription)
         {
-            throw new NotImplementedException();
+            throw new System.NotImplementedException();
+
+
         }
 
-        public DrugPrescriptionEntity DrugPrescriptionRaised(PrescriptionDto entity)
+        public string DrugPrescriptionRaised(PrescriptionDto entity)
         {
-            // var prescribeMessage=new DrugPrescriptionEntity()
-            // {
-            //     MESSAGE_HEADER =
-            //     {
-            //         SENDING_APPLICATION = "IQCARE",
-            //         SENDING_FACILITY = "13050",
-            //         RECEIVING_APPLICATION = "IL",
-            //         RECEIVING_FACILITY = "",
-            //         MESSAGE_DATETIME = entity.CommonOrderDetails.TransactionDatetime,
-            //         SECURITY = "",
-            //         MESSAGE_TYPE = "RDE^001",
-            //         PROCESSING_ID = "P"
-            //     },
-            //     PATIENT_IDENTIFICATION =
-            //     {
-            //         INTERNAL_PATIENT_ID =new List<INTERNALPATIENTID>()     
-            //     },
-            //     COMMON_ORDER_DETAILS =
-            //     {
-            //         ORDER_CONTROL = entity.CommonOrderDetails.OrderControl,
-            //         PLACER_ORDER_NUMBER = { NUMBER = entity.CommonOrderDetails.PlacerOrderNumber.Number.ToString(),ENTITY = "IQCARE"},
-            //         ORDER_STATUS = entity.CommonOrderDetails.OrderStatus,
-            //         ORDERING_PHYSICIAN =
-            //         {
-            //             FIRST_NAME = entity.CommonOrderDetails.OrderingPhysician.FirstName,
-            //             MIDDLE_NAME = entity.CommonOrderDetails.OrderingPhysician.MiddleName,
-            //             LAST_NAME = entity.CommonOrderDetails.OrderingPhysician.LastName
-            //         },
-            //         TRANSACTION_DATETIME = entity.CommonOrderDetails.TransactionDatetime.ToShortDateString()
-            //     },
-            //     PHARMACY_ENCODED_ORDER =new List<PHARMACYENCODEDORDER>()
 
-            // };
+            var internalIdentifiers = new List<DTOIdentifier>();
 
-            //// string prescriptionJSON = JsonConvert.SerializeObject(prescribeMessage);
+            foreach (var identifier in entity.PatientIdentification.InternalPatientId)
+            {
+                var internalIdentity = new DTOIdentifier()
+                {
+                    IdentifierType = identifier.IdentifierType,
+                    IdentifierValue = identifier.IdentifierValue,
+                    AssigningAuthority = identifier.AssigningAuthority
 
-            // return prescribeMessage;
+                };
+                internalIdentifiers.Add(internalIdentity);
+            }
 
-            throw new NotImplementedException();
+            var orderEncorder = new List<PharmacyEncodedOrder>();
 
+            foreach (var order in entity.PharmacyEncodedOrder)
+            {
+                var prescriptionOrder = new PharmacyEncodedOrder()
+                {
+                    DrugName = order.DrugName,
+                    CodingSystem = order.CodingSystem,
+                    Strength = order.Strength,
+                    Dosage = order.Dosage,
+                    Frequency = order.Frequency,
+                    Duration = Convert.ToInt32(order.Duration),
+                    QuantityPrescribed = Convert.ToInt32(order.QuantityPrescribed),
+                    PrescriptionNotes = order.PrescriptionNotes
+                };
+                orderEncorder.Add(prescriptionOrder);
+            }
+            var drugOrder = new PrescriptionDto()
+            {
+                MesssageHeader =
+                {
+                    SendingApplication = "IQCARE",
+                    SendingFacility = entity.MesssageHeader.SendingFacility,
+                    ReceivingApplication = "IL",
+                    ReceivingFacility = entity.MesssageHeader.SendingFacility,
+                    MessageDatetime =Convert.ToDateTime(entity.MesssageHeader.MessageDatetime), //DateTime.Now.ToString("yyyyMMddHHmmss"); 
+                    Security = entity.MesssageHeader.Security,
+                    MessageType = "RDE^001",
+                    ProcessingId = "P"
+
+                },
+                PatientIdentification =
+                {
+                    ExternalPatientId = {},
+                    InternalPatientId = internalIdentifiers,
+                    PatientName =
+                    {
+                        FirstName = entity.PatientIdentification.PatientName.FirstName,
+                        LastName = entity.PatientIdentification.PatientName.LastName,
+                        MiddleName = entity.PatientIdentification.PatientName.MiddleName
+                    }
+                },
+                CommonOrderDetails =
+                {
+                    OrderControl = entity.CommonOrderDetails.OrderControl,
+                    PlacerOrderNumber=
+                    {
+                        Number = Convert.ToInt32(entity.CommonOrderDetails.PlacerOrderNumber.Number),
+                        Entity = entity.CommonOrderDetails.PlacerOrderNumber.Entity
+                    },
+                    OrderStatus = entity.CommonOrderDetails.OrderStatus,
+                    OrderingPhysician =
+                    {
+                        FirstName = entity.CommonOrderDetails.OrderingPhysician.FirstName,
+                        MiddleName = entity.CommonOrderDetails.OrderingPhysician.MiddleName,
+                        LastName = entity.CommonOrderDetails.OrderingPhysician.LastName
+                    },
+                    TransactionDatetime = Convert.ToDateTime(entity.CommonOrderDetails.TransactionDatetime),
+                    Notes = entity.CommonOrderDetails.Notes.ToString()
+                },
+                PharmacyEncodedOrder = orderEncorder
+            };
+
+            //Serialise the Object to JSON
+            return JsonConvert.SerializeObject(drugOrder);
         }
 
         public void DrugOrderCancel()

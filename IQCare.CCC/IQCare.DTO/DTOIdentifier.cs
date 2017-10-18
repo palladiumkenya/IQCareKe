@@ -31,4 +31,8 @@ namespace IQCare.DTO
         public string PatientType { get; set; }
         public string RelationshipType { get; set; }
     }
+
+    
+
+
 }
