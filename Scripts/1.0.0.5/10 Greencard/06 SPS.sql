@@ -2360,7 +2360,7 @@ Set Nocount On;
 				SELECT
 					D.Drug_pk
 				   ,D.DrugName
-				   , (D.Drug_pk + '~' + isnull(D.abbreviation,D.DrugName) + '~' + D.DrugName) val
+				   , (Convert(varchar(8),D.Drug_pk)+ '~' + isnull(D.abbreviation,D.DrugName) + '~' + D.DrugName) val
 				FROM Dtl_StockTransaction AS ST
 				INNER JOIN Mst_Store AS S
 					ON S.Id = ST.StoreId
@@ -2369,10 +2369,10 @@ Set Nocount On;
 					ON D.Drug_pk = ST.ItemId
 				INNER JOIN lnk_DrugGeneric l
 					ON D.Drug_pk = l.Drug_pk
-				INNER JOIN lnk_DrugTypeGeneric g
-					ON l.GenericID = g.GenericId
+				--INNER JOIN lnk_DrugTypeGeneric g
+				--	ON l.GenericID = g.GenericId
 				WHERE D.DeleteFlag = 0
-				AND g.DrugTypeId =37
+				-- AND g.DrugTypeId =37
 				GROUP BY D.Drug_pk
 						,D.DrugName
 						,D.abbreviation
@@ -2387,7 +2387,7 @@ Set Nocount On;
 			SELECT
 					D.Drug_pk
 				   ,D.DrugName
-				   ,(D.Drug_pk + '~' + isnull(D.abbreviation,D.DrugName) +  '~' + D.DrugName) val
+				   ,(Convert(varchar(8),D.Drug_pk) + '~' + isnull(D.abbreviation,D.DrugName) +  '~' + D.DrugName) val
 				FROM Dtl_StockTransaction AS ST
 				INNER JOIN Mst_Store AS S
 					ON S.Id = ST.StoreId
@@ -2396,10 +2396,11 @@ Set Nocount On;
 					ON D.Drug_pk = ST.ItemId
 				INNER JOIN lnk_DrugGeneric l
 					ON D.Drug_pk = l.Drug_pk
-				INNER JOIN lnk_DrugTypeGeneric g
-					ON l.GenericID = g.GenericId
-				WHERE D.DeleteFlag = 0
-				AND g.DrugTypeId <>37
+
+				--INNER JOIN lnk_DrugTypeGeneric g
+				--	ON l.GenericID = g.GenericId
+				WHERE D.DeleteFlag = 0 AND D.Drug_pk IN(SELECT x.Drug_pk FROM lnk_DrugGeneric x WHERE x.GenericID IN(SELECT k.GenericId FROM lnk_DrugTypeGeneric k WHERE k.DrugTypeId<>37))
+				-- AND g.DrugTypeId <>37
 				GROUP BY D.Drug_pk
 						,D.DrugName
 						,D.abbreviation
@@ -2413,29 +2414,29 @@ Set Nocount On;
 			IF(@drugTypeId=37)
 			BEGIN
 				Select	D.Drug_pk, D.DrugName,
-				(D.Drug_pk +  '~' + isnull(D.abbreviation,D.DrugName) +  '~' + D.DrugName) val 
+				(Convert(varchar(8),D.Drug_pk) +  '~' + isnull(D.abbreviation,D.DrugName) +  '~' + D.DrugName) val 
 				From Dtl_StockTransaction As ST	Inner Join Mst_Store As S On S.Id = ST.StoreId And S.DispensingStore = 1
 				Right Outer Join Mst_Drug As D On D.Drug_pk = ST.ItemId 
 								INNER JOIN lnk_DrugGeneric l
 						ON D.Drug_pk = l.Drug_pk
-					INNER JOIN lnk_DrugTypeGeneric g
-						ON l.GenericID = g.GenericId
+					--INNER JOIN lnk_DrugTypeGeneric g
+					--	ON l.GenericID = g.GenericId
 					WHERE D.DeleteFlag = 0
-					AND g.DrugTypeId = @drugTypeId
+					--AND g.DrugTypeId = @drugTypeId
 				Group By D.Drug_pk,	D.DrugName, D.abbreviation
 			END
 			ELSE
 			BEGIN
 						Select	D.Drug_pk, D.DrugName,
-				(D.Drug_pk + '~' + isnull(D.abbreviation,D.DrugName) + '~' + D.DrugName) val 
+				(Convert(varchar(8),D.Drug_pk) + '~' + isnull(D.abbreviation,D.DrugName) + '~' + D.DrugName) val 
 				From Dtl_StockTransaction As ST	Inner Join Mst_Store As S On S.Id = ST.StoreId And S.DispensingStore = 1
 				Right Outer Join Mst_Drug As D On D.Drug_pk = ST.ItemId 
 								INNER JOIN lnk_DrugGeneric l
 						ON D.Drug_pk = l.Drug_pk
 					INNER JOIN lnk_DrugTypeGeneric g
 						ON l.GenericID = g.GenericId
-					WHERE D.DeleteFlag = 0
-					AND g.DrugTypeId <> 37
+					WHERE D.DeleteFlag = 0 --AND D.Drug_pk IN(SELECT x.Drug_pk FROM lnk_DrugGeneric x WHERE x.GenericID IN(SELECT k.GenericId FROM lnk_DrugTypeGeneric k WHERE k.DrugTypeId<>37))
+					 AND g.DrugTypeId <> 37 
 				Group By D.Drug_pk,	D.DrugName, D.abbreviation
 			END
 		END
