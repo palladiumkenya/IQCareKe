@@ -16,6 +16,19 @@ namespace IQCare.WebApi.Logic.MappingEntities
         public string PROCESSING_ID { get; set; }
     }
 
+    public class VISIT
+    {
+        public string VISIT_DATE { get; set; }
+
+        public static VISIT GetVisit(Registration entity)
+        {
+            VISIT visit = new VISIT();
+            visit.VISIT_DATE = entity.DateOfEnrollment;
+
+            return visit;
+        }
+    }
+
     public class EXTERNALPATIENTID
     {
         public string ID { get; set; }

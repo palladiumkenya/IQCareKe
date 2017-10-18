@@ -1,7 +1,9 @@
-﻿namespace Interface.Interop
+﻿using System.Threading.Tasks;
+
+namespace Interface.Interop
 {
     public interface ISendData
     {
-        void SendData(string jsonString, string endPoint);
+        Task SendData(string jsonString, string endPoint);
     }
 }

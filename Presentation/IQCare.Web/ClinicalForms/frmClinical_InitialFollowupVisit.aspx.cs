@@ -1886,7 +1886,10 @@ namespace IQCare.Web.Clinical
             }
 
             #endregion Check Visit Date
-            DateTime _visitDate = Convert.ToDateTime(txtVisitDate.Text);
+
+            DateTime? _visitDate = null;
+            if (txtVisitDate.Text.Trim() != "")
+                _visitDate = Convert.ToDateTime(txtVisitDate.Text);
             #region Date of next appointment
 
             if (txtdatenextappointment.Value.Trim() != "")
@@ -1927,7 +1930,7 @@ namespace IQCare.Web.Clinical
                     txtEDD.Focus();
                     validationCheck = false;
                 }
-                else if (_visitDate > Convert.ToDateTime(iQCareUtils.MakeDate(txtEDD.Value)))
+                else if (_visitDate.HasValue && _visitDate.Value > Convert.ToDateTime(iQCareUtils.MakeDate(txtEDD.Value)))
                 {
                     validateMessage += "-" + IQCareMsgBox.GetMessage("EDDDate", this) + "\\n";
                     txtEDD.Focus();

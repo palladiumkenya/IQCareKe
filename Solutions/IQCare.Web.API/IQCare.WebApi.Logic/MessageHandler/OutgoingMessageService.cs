@@ -9,6 +9,10 @@ using IQCare.Events;
 using IQCare.WebApi.Logic.EntityMapper;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 
 
@@ -169,13 +173,45 @@ namespace IQCare.WebApi.Logic.MessageHandler
             //_apiOutboxManager.AddApiOutbox(apiOutbox);
 
             //Send
-            //SendData(registrationJson,"");
+            SendData(registrationJson, "").ConfigureAwait(false);
 
         }
-        public void SendData(string jsonString, string endPoint)
+        public async Task SendData(string jsonString, string endPoint)
         {
-            ISendData mgr = (ISendData)ObjectFactory.CreateInstance("BusinessProcess.Interop.TcpDataExchange, BusinessProcess.Interop");
-            mgr.SendData(jsonString, "");
+            try
+            {
+                using (HttpClient httpClient = new HttpClient())
+                {
+                    httpClient.BaseAddress = new Uri("http://52.178.24.227:9721");
+                    httpClient.DefaultRequestHeaders.Accept.Clear();
+                    httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    //string content = new JavaScriptSerializer().Serialize(jsonString);
+
+                    var jsoncontent = new StringContent(jsonString, Encoding.UTF8, "application/json");
+                    // HTTP POST
+                    using (HttpResponseMessage response = await httpClient.PostAsync("/api", jsoncontent).ConfigureAwait(false))
+                    {
+                        using (HttpContent content = response.Content)
+                        {
+                            // ... Read the string.
+                            string result = await content.ReadAsStringAsync();
+
+                            // ... Display the result.
+                            if (result != null &&
+                                result.Length >= 50)
+                            {
+                                Console.WriteLine(result.Substring(0, 50) + "...");
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
         private void HandlePatientTransferIn(MessageEventArgs messageEvent)
         {

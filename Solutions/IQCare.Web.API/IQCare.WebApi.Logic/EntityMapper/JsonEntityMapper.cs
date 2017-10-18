@@ -15,6 +15,7 @@ namespace IQCare.WebApi.Logic.EntityMapper
             patientRegistration.MESSAGE_HEADER = GetMessageHeader("ADT^A04", "13122", "P");
             patientRegistration.PATIENT_IDENTIFICATION = PATIENTIDENTIFICATION.GetPatientidentification(entity);
             patientRegistration.NEXT_OF_KIN = NEXTOFKIN.GetNextOfKins(entity);
+            patientRegistration.VISIT = VISIT.GetVisit(entity);
 
             return patientRegistration;
         }
