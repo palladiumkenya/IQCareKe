@@ -19,7 +19,7 @@ namespace IQCare.Web.CCC.WebService
      [System.Web.Script.Services.ScriptService]
     public class PatientAdverseEventOutcome : System.Web.Services.WebService
     {
-        private string msg;
+        //private string msg;
 
         [WebMethod]
         public string HelloWorld()

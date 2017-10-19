@@ -243,7 +243,8 @@ namespace IQCare.Web.Patient
                 txtenrollmentDate.Focus();
                 return false;
             }
-            if (ViewState["CareEndedDate"] != null)
+
+            if (!String.IsNullOrWhiteSpace(ViewState["CareEndedDate"].ToString()))
             {
                 if (theReEnrolDate > theCurrentDate)
                 {

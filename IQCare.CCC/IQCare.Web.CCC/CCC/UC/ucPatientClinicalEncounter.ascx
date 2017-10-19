@@ -2784,6 +2784,8 @@
             $('#IptOutcomeModal').modal('hide');
         });
 
+
+
         //$('#myWizard').wizard();
         $("#myWizard")
             .on("actionclicked.fu.wizard", function (evt, data) {
@@ -3746,12 +3748,13 @@
         if ($("#onIpt").val() === 'False') {
             $("#btnAddIptWorkUp").prop("disabled", false);
             $("#btnAddIptOutcome").prop("disabled", true);
-            // $("#EverBeenOnIpt").prop("disabled", false);
+            $("#EverBeenOnIpt").prop("disabled", false);
+            $("#EverBeenOnIpt").val("false");
         } else {
             $("#btnAddIptWorkUp").prop("disabled", true);
             $("#btnAddIptOutcome").prop("disabled", false);
-            // $("#EverBeenOnIpt").prop("disabled", true);
-            // $("#EverBeenOnIpt").val("False");
+             $("#EverBeenOnIpt").prop("disabled", true);
+             $("#EverBeenOnIpt").val("True");
         }
 
     }

@@ -372,6 +372,13 @@
         //alert(pmscmSamePointDispense);
         $("#<%=ddlTreatmentProgram.ClientID%>").on('change',
             function () {
+
+                if (DrugPrescriptionTable.data().any()) {
+                    toastr.error("Drug Prescription Error", "Remove added drug(s) before changing treatment program.");
+                    //evt.preventDefault();
+                    return false;
+                }
+
                 if (pmscmSamePointDispense === "PM/SCM With Same point dispense") {
                     tp = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
                    
@@ -439,7 +446,7 @@
             //console.log(treatmentPlan);
             //console.log(startTreatment);
 
-            if (startTreatment == "true" && treatmentProgram == "ART" && treatmentPlan == "Start Treatment") {
+            if (startTreatment === "true" && treatmentProgram === "ART" && treatmentPlan === "Start Treatment") {
                 $("#<%=ddlTreatmentPlan.ClientID%>").val("");
                 toastr.error("The Patient has already started treatment", "Error");
             }
@@ -550,8 +557,7 @@
                     ]
             });
 
-           $("#dtlDrugPrescription").on('click',
-                '.btnDelete',
+           $("#dtlDrugPrescription").on('click','.btnDelete',
                 function () {
                     DrugPrescriptionTable
                         .row($(this).parents('tr'))
@@ -568,18 +574,19 @@
                         batchNoArr.splice(index1, 1);
                     }
                 });
-       
+
+      
               
            function drugList(pmscm,tps) {
                
                var drugInput = document.getElementById('<%= txtDrugs.ClientID %>');
                var awesomplete = new Awesomplete(drugInput, {
-                   minChars: 1
+                   minChars: 2
                });
                
                document.getElementById('<%= txtDrugs.ClientID %>').addEventListener('awesomplete-selectcomplete',function(){
                    var result = this.value.split("~");
-                   getBatches(result[0]);
+                   if(pmscm ==="1"){ getBatches(result[0]);}
                    this.value = result[2];
                    $("#<%=drugID.ClientID%>").val(result[0]);
                    $("#<%=drugAbbr.ClientID%>").val(result[1]);

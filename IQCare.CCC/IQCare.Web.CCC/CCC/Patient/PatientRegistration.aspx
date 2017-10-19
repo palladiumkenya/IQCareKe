@@ -874,7 +874,7 @@
 
 				function getSubcountyList()
 				{
-					var countyId = $("#<%=countyId.ClientID%>").find(":selected").text();
+					var countyId = escape($("#<%=countyId.ClientID%>").find(":selected").text());
 					//alert(countyId);
 					$.ajax({
 						type: "POST",
@@ -899,7 +899,7 @@
 
 				function getWardList()
 				{
-					var subcountyName = $("#<%=SubcountyId.ClientID%>").find(":selected").text();
+					var subcountyName = escape($("#<%=SubcountyId.ClientID%>").find(":selected").text());
 					//alert(subcountyName);
 					$.ajax({
 						type: "POST",
