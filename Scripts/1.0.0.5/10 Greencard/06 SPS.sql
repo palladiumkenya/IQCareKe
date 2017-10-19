@@ -3,6 +3,76 @@ IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Patie
 DROP PROCEDURE [dbo].[PatientsNotSynced]
 GO
 
+/****** Object:  StoredProcedure [dbo].[SP_Bluecard_ToGreenCard]    Script Date: 5/9/2017 3:16:05 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SP_Bluecard_ToGreenCard]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[SP_Bluecard_ToGreenCard]
+GO
+
+/****** Object:  StoredProcedure [dbo].[BlueCardGreencard_sync]    Script Date: 5/9/2017 3:16:05 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[BlueCardGreencard_sync]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[BlueCardGreencard_sync]
+GO
+
+/****** Object:  StoredProcedure [dbo].[PatientDemographics_To_Greencard]    Script Date: 5/9/2017 3:16:05 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientDemographics_To_Greencard]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[PatientDemographics_To_Greencard]
+GO
+
+/****** Object:  StoredProcedure [dbo].[PatientEnrollment_To_Greencard]    Script Date: 5/9/2017 3:16:05 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientEnrollment_To_Greencard]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[PatientEnrollment_To_Greencard]
+GO
+
+/****** Object:  StoredProcedure [dbo].[PatientIdentifiers_To_Greencard]    Script Date: 5/9/2017 3:16:05 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientIdentifiers_To_Greencard]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[PatientIdentifiers_To_Greencard]
+GO
+
+/****** Object:  StoredProcedure [dbo].[PatientTreatmentSupporter_To_Greencard]    Script Date: 5/9/2017 3:16:05 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientTreatmentSupporter_To_Greencard]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[PatientTreatmentSupporter_To_Greencard]
+GO
+
+/****** Object:  StoredProcedure [dbo].[PatientContact_To_Greencard]    Script Date: 5/9/2017 3:16:05 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientContact_To_Greencard]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[PatientContact_To_Greencard]
+GO
+
+/****** Object:  StoredProcedure [dbo].[PatientBaselineVariables_To_Greencard]    Script Date: 5/9/2017 3:16:05 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientBaselineVariables_To_Greencard]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[PatientBaselineVariables_To_Greencard]
+GO
+
+/****** Object:  StoredProcedure [dbo].[PatientBaseline_To_Greencard]    Script Date: 5/9/2017 3:16:05 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientBaseline_To_Greencard]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[PatientBaseline_To_Greencard]
+GO
+
+/****** Object:  StoredProcedure [dbo].[SP_mst_PatientToGreencardRegistration]    Script Date: 5/9/2017 3:16:05 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SP_mst_PatientToGreencardRegistration]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[SP_mst_PatientToGreencardRegistration]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_getPharmacyDrugList]    Script Date: 5/9/2017 3:16:05 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_getPharmacyDrugList]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_getPharmacyDrugList]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_getPatientEncounter]    Script Date: 5/9/2017 3:16:05 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_getPatientEncounter]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_getPatientEncounter]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_getPatientEncounterAdverseEvents]    Script Date: 5/9/2017 3:16:05 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_getPatientEncounterAdverseEvents]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_getPatientEncounterAdverseEvents]
+GO
+
+/****** Object:  StoredProcedure [dbo].[FamilyTesting_To_Greencard]    Script Date: 5/9/2017 3:16:05 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[FamilyTesting_To_Greencard]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[FamilyTesting_To_Greencard]
+GO
+
 
 /****** Object:  StoredProcedure [dbo].[PatientsNotSynced]    Script Date: 05/09/2017 17:08:22 ******/
 SET ANSI_NULLS ON
@@ -112,11 +182,6 @@ BEGIN
 
 	DROP TABLE #TPatient
 END
-GO
-
-/****** Object:  StoredProcedure [dbo].[SP_Bluecard_ToGreenCard]    Script Date: 5/9/2017 3:16:05 PM ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SP_Bluecard_ToGreenCard]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [dbo].[SP_Bluecard_ToGreenCard]
 GO
 
 
@@ -535,13 +600,8 @@ END
 --CLOSE mstPatient_cursor;  
 --DEALLOCATE mstPatient_cursor;  
 END
-
-
-
-/****** Object:  StoredProcedure [dbo].[BlueCardGreencard_sync]    Script Date: 5/9/2017 3:16:05 PM ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[BlueCardGreencard_sync]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [dbo].[BlueCardGreencard_sync]
 GO
+
 
 
 /****** Object:  StoredProcedure [dbo].[BlueCardGreencard_sync]    Script Date: 05/09/2017 17:08:22 ******/
@@ -1330,11 +1390,6 @@ BEGIN
 		 SELECT @message = 'Finished Running';
 		 PRINT @message;
 END
-
-
-/****** Object:  StoredProcedure [dbo].[PatientDemographics_To_Greencard]    Script Date: 5/9/2017 3:16:05 PM ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientDemographics_To_Greencard]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [dbo].[PatientDemographics_To_Greencard]
 GO
 
 
@@ -1396,11 +1451,6 @@ BEGIN
 
 	SELECT @PersonId, @PatientId;
 END
-
-
-/****** Object:  StoredProcedure [dbo].[PatientEnrollment_To_Greencard]    Script Date: 5/9/2017 3:16:05 PM ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientEnrollment_To_Greencard]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [dbo].[PatientEnrollment_To_Greencard]
 GO
 
 
@@ -1509,11 +1559,6 @@ BEGIN
 
 	SELECT @EnrollmentId, @ModuleId, @StartDate;
 END
-
-
-/****** Object:  StoredProcedure [dbo].[PatientIdentifiers_To_Greencard]    Script Date: 5/9/2017 3:16:05 PM ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientIdentifiers_To_Greencard]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [dbo].[PatientIdentifiers_To_Greencard]
 GO
 
 
@@ -1606,12 +1651,6 @@ BEGIN
 
 	SELECT @PatientIdentifierId, @ServiceEntryPointId, @PatientMaritalStatusID
 END
-
-
-
-/****** Object:  StoredProcedure [dbo].[PatientTreatmentSupporter_To_Greencard]    Script Date: 5/9/2017 3:16:05 PM ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientTreatmentSupporter_To_Greencard]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [dbo].[PatientTreatmentSupporter_To_Greencard]
 GO
 
 
@@ -1698,11 +1737,6 @@ BEGIN
 
 	SELECT @PatientTreatmentSupporterID;
 END
-
-
-/****** Object:  StoredProcedure [dbo].[PatientContact_To_Greencard]    Script Date: 5/9/2017 3:16:05 PM ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientContact_To_Greencard]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [dbo].[PatientContact_To_Greencard]
 GO
 
 
@@ -1751,13 +1785,8 @@ BEGIN
 
 		SELECT @PersonContactID;
 END
-
-
-
-/****** Object:  StoredProcedure [dbo].[PatientBaselineVariables_To_Greencard]    Script Date: 5/9/2017 3:16:05 PM ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientBaselineVariables_To_Greencard]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [dbo].[PatientBaselineVariables_To_Greencard]
 GO
+
 
 
 SET ANSI_NULLS ON
@@ -1776,24 +1805,37 @@ GO
 -- Description:	<Description,,>
 -- =============================================
 ALTER PROCEDURE [dbo].[PatientBaselineVariables_To_Greencard]
-@ptn_pk int,
-@transferIn int,
-@ARTStartDate datetime,
-@Sex int,
-@LocationId int,
-@StartDate datetime,
-@EnrollmentDate datetime OUTPUT,
-@VisitDate datetime OUTPUT
+@ptn_pk int, 
+@transferIn int, 
+@ARTStartDate datetime, 
+@Sex int, 
+@LocationId int, 
+@StartDate datetime, 
+@EnrollmentDate datetime OUTPUT, 
+@VisitDate datetime OUTPUT, 
+@artstart datetime OUTPUT, 
+@visit_id int OUTPUT, 
+@Pregnant bit OUTPUT, 
+@HBVInfected bit OUTPUT, 
+@TBinfected bit OUTPUT, 
+@WHOStage int OUTPUT, 
+@WHOStageString varchar(50) OUTPUT, 
+@BreastFeeding bit OUTPUT, 
+@CD4Count decimal OUTPUT, 
+@MUAC decimal OUTPUT, 
+@Weight decimal OUTPUT, 
+@Height decimal OUTPUT, 
+@ClosestARVDate datetime OUTPUT, 
+@PatientMasterVisitId int OUTPUT, 
+@HIVDiagnosisDate datetime OUTPUT, 
+@EnrollmentWHOStage int OUTPUT, 
+@EnrollmentWHOStageString varchar(50) OUTPUT, 
+@Cohort varchar(50) OUTPUT
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
-
-		DECLARE @HBVInfected bit, @Pregnant bit, @TBinfected bit, @WHOStage int, @WHOStageString varchar(50), @BreastFeeding bit, 
-			@CD4Count decimal , @MUAC decimal, @Weight decimal, @Height decimal, @artstart datetime,
-			@ClosestARVDate datetime, @PatientMasterVisitId int, @HIVDiagnosisDate datetime, 
-			@EnrollmentWHOStage int, @EnrollmentWHOStageString varchar(50),  @Cohort varchar(50), @visit_id int;
 
 			IF @transferIn = 1
 				BEGIN
@@ -1927,13 +1969,8 @@ BEGIN
 			SET @VisitDate = (SELECT TOP 1 [VisitDate] FROM [dbo].[ord_Visit] where [Ptn_Pk] = @ptn_pk AND [VisitType] in(18, 19));
 			IF @EnrollmentDate IS NULL BEGIN SET @EnrollmentDate =@StartDate; END;
 
-		SELECT @EnrollmentDate;
+		SELECT @EnrollmentDate, @VisitDate, @artstart, @visit_id, @Pregnant, @HBVInfected, @TBinfected, @WHOStage, @WHOStageString, @BreastFeeding, @CD4Count, @MUAC, @Weight, @Height, @ClosestARVDate, @PatientMasterVisitId, @HIVDiagnosisDate, @EnrollmentWHOStage, @EnrollmentWHOStageString, @Cohort;
 END
-
-
-/****** Object:  StoredProcedure [dbo].[PatientBaseline_To_Greencard]    Script Date: 5/9/2017 3:16:05 PM ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientBaseline_To_Greencard]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [dbo].[PatientBaseline_To_Greencard]
 GO
 
 
@@ -2127,11 +2164,6 @@ BEGIN
 				PRINT @message;
 		END
 END
-
-
-/****** Object:  StoredProcedure [dbo].[SP_mst_PatientToGreencardRegistration]    Script Date: 5/9/2017 3:16:05 PM ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SP_mst_PatientToGreencardRegistration]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [dbo].[SP_mst_PatientToGreencardRegistration]
 GO
 
 
@@ -2302,13 +2334,6 @@ BEGIN
 		 
 		 exec [dbo].[pr_CloseDecryptedSession];
 END
-
-
-
-
-/****** Object:  StoredProcedure [dbo].[sp_getPharmacyDrugList]    Script Date: 5/9/2017 3:16:05 PM ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_getPharmacyDrugList]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [dbo].[sp_getPharmacyDrugList]
 GO
 
 
@@ -2442,11 +2467,6 @@ Set Nocount On;
 		END
 
 End
-
-
-/****** Object:  StoredProcedure [dbo].[sp_getPatientEncounter]    Script Date: 5/9/2017 3:16:05 PM ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_getPatientEncounter]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [dbo].[sp_getPatientEncounter]
 GO
 
 
@@ -2547,13 +2567,6 @@ Set Nocount On;
 	where PatientMasterVisitId = @PatientMasterVisitID and patientId = @PatientID
 
 End
-END
-
-
-
-/****** Object:  StoredProcedure [dbo].[sp_getPatientEncounterAdverseEvents]    Script Date: 5/9/2017 3:16:05 PM ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_getPatientEncounterAdverseEvents]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [dbo].[sp_getPatientEncounterAdverseEvents]
 GO
 
 
@@ -2591,13 +2604,6 @@ Set Nocount On;
 	-- PatientMasterVisitId = @PatientMasterVisitID and  //commented to show all adverseEvents patient has had.
 	
 End
-
-
-
-
-/****** Object:  StoredProcedure [dbo].[FamilyTesting_To_Greencard]    Script Date: 5/9/2017 3:16:05 PM ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[FamilyTesting_To_Greencard]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [dbo].[FamilyTesting_To_Greencard]
 GO
 
 
@@ -2835,3 +2841,4 @@ BEGIN
 	 DROP TABLE #Tdtl_FamilyInfo
 	 UPDATE PersonRelationship SET FamilyInfoId = 0 WHERE FamilyInfoId IS NULL;
 END
+GO
