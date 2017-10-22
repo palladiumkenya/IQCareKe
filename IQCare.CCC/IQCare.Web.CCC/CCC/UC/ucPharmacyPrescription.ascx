@@ -569,21 +569,21 @@
                     }
                 });
        
-              
-           function drugList(pmscm,tps) {
-               
-               var drugInput = document.getElementById('<%= txtDrugs.ClientID %>');
-               var awesomplete = new Awesomplete(drugInput, {
-                   minChars: 1
-               });
-               
-               document.getElementById('<%= txtDrugs.ClientID %>').addEventListener('awesomplete-selectcomplete',function(){
+            function selectDrug() {
                    var result = this.value.split("~");
                    getBatches(result[0]);
                    this.value = result[2];
                    $("#<%=drugID.ClientID%>").val(result[0]);
                    $("#<%=drugAbbr.ClientID%>").val(result[1]);
+            }
+
+           function drugList(pmscm,tps) {
+               var drugInput = document.getElementById('<%= txtDrugs.ClientID %>');
+               var awesomplete = new Awesomplete(drugInput, {
+                   minChars: 1
                });
+               
+               document.getElementById('<%= txtDrugs.ClientID %>').addEventListener('awesomplete-selectcomplete', selectDrug);
                
                $.ajax({
                    url: '../WebService/PatientEncounterService.asmx/GetDrugList',
@@ -627,6 +627,7 @@
         DrugPrescriptionTable
                     .clear()
                     .draw();
+        drugNameArr = [];
     }
 
        function getBatches(drugPk)
@@ -717,6 +718,13 @@
             $("#<%=ddlRegimen.ClientID%>").prop('disabled', false);
             <%--$("#<%=ddlRegimen.ClientID%>").val("");--%>
         }
+
+        DrugPrescriptionTable
+                    .clear()
+                    .draw();
+
+        //alert(drugNameArr.length);
+        drugNameArr = [];
     }
 
        function drugSwitchInterruptionReason()
