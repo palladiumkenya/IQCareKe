@@ -56,6 +56,7 @@
             this.txtFName.Name = "txtFName";
             this.txtFName.Size = new System.Drawing.Size(165, 20);
             this.txtFName.TabIndex = 0;
+            this.txtFName.TextChanged += new System.EventHandler(this.txtFName_TextChanged);
             // 
             // txtMName
             // 
@@ -63,6 +64,7 @@
             this.txtMName.Name = "txtMName";
             this.txtMName.Size = new System.Drawing.Size(165, 20);
             this.txtMName.TabIndex = 1;
+            this.txtMName.TextChanged += new System.EventHandler(this.txtMName_TextChanged);
             // 
             // txtLName
             // 
@@ -70,6 +72,7 @@
             this.txtLName.Name = "txtLName";
             this.txtLName.Size = new System.Drawing.Size(165, 20);
             this.txtLName.TabIndex = 2;
+            this.txtLName.TextChanged += new System.EventHandler(this.txtLName_TextChanged);
             // 
             // dtRegDate
             // 
@@ -223,6 +226,7 @@
             this.txtPatientNumber.Name = "txtPatientNumber";
             this.txtPatientNumber.Size = new System.Drawing.Size(165, 20);
             this.txtPatientNumber.TabIndex = 3;
+            this.txtPatientNumber.TextChanged += new System.EventHandler(this.txtPatientNumber_TextChanged);
             // 
             // frmRegisterNewPatient
             // 

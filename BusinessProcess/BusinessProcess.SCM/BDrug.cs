@@ -418,5 +418,17 @@ namespace BusinessProcess.SCM
             return (DataTable)PharmacyManager.ReturnObject(ClsUtility.theParams, "Pharmacy_GetAllRegisteredPatients", ClsUtility.ObjectEnum.DataTable);
         }
 
+        public DataTable searchPatientsRegistered(string fname, string mname, string lname, string patientId)
+        {
+            ClsObject PharmacyManager = new ClsObject();
+            ClsUtility.Init_Hashtable();
+            ClsUtility.AddParameters("@fname", SqlDbType.VarChar, fname);
+            ClsUtility.AddParameters("@mname", SqlDbType.VarChar, mname);
+            ClsUtility.AddParameters("@lname", SqlDbType.VarChar, lname);
+            ClsUtility.AddParameters("@patientid", SqlDbType.VarChar, patientId);
+
+            return (DataTable)PharmacyManager.ReturnObject(ClsUtility.theParams, "Pharmacy_SearchAllRegisteredPatients", ClsUtility.ObjectEnum.DataTable);
+        }
+
     }
 }

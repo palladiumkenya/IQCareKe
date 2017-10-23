@@ -191,5 +191,31 @@ namespace IQCare.SCM
                 IQCareWindowMsgBox.ShowWindowConfirm("#C1", theBuilder, this);
             }
         }
+
+        private void searchPatients()
+        {
+            IDrug drug = (IDrug)ObjectFactory.CreateInstance("BusinessProcess.SCM.BDrug, BusinessProcess.SCM");
+            DataTable theDT = drug.searchPatientsRegistered(txtFName.Text,txtMName.Text,txtLName.Text,txtPatientNumber.Text);
+            BindPharmacyDispenseGrid(theDT);
+        }
+        private void txtFName_TextChanged(object sender, EventArgs e)
+        {
+            searchPatients();
+        }
+
+        private void txtMName_TextChanged(object sender, EventArgs e)
+        {
+            searchPatients();
+        }
+
+        private void txtLName_TextChanged(object sender, EventArgs e)
+        {
+            searchPatients();
+        }
+
+        private void txtPatientNumber_TextChanged(object sender, EventArgs e)
+        {
+            searchPatients();
+        }
     }
 }

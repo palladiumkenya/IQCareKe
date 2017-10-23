@@ -634,6 +634,7 @@
         DrugPrescriptionTable
                     .clear()
                     .draw();
+        drugNameArr = [];
     }
 
        function getBatches(drugPk)
@@ -724,6 +725,12 @@
             $("#<%=ddlRegimen.ClientID%>").prop('disabled', false);
             <%--$("#<%=ddlRegimen.ClientID%>").val("");--%>
         }
+
+        DrugPrescriptionTable
+                    .clear()
+                    .draw();
+
+        drugNameArr = [];
     }
 
        function drugSwitchInterruptionReason()
