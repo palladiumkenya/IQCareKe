@@ -160,6 +160,12 @@ function AddAllergy() {
         toastr.error("Error", "Please enter allergy");
         return false;
     }
+    if(allergy!=="")
+    {
+        if (allergyReaction === "") { toastr.error("Error", "Type of reaction is required!"); }
+        if (severity === "") { toastr.error("Error", "Severity is required!"); }
+        if (allergyDate === "") { toastr.error("Error", "Allergy date is required!");}
+    }
 
     allergyFound = $.inArray("" + allergy + "", AllergyList);
 

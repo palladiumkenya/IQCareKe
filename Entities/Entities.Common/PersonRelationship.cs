@@ -14,7 +14,7 @@ namespace Entities.Common
         public virtual Person Person { get; set; }
         public int PatientId { get; set; }
         public int RelationshipTypeId { get; set; }
-        public int BaselineResult { get; set; }
+        public int? BaselineResult { get; set; }
         public DateTime? BaselineDate { get; set; }
     }
 }

@@ -280,9 +280,19 @@ counselling session?</label>
                 isDonePyschosocialCriteria = response.d;
                 if (isDonePyschosocialCriteria < 1) {
 
-                $("#divMessage").show('fast', function () { $("#danger").append("ART Treatment Preparation Assessment is PENDING! --for this Client"); });                   
+                $("#divMessage").show('fast', function() {
+                    $("#danger").append("ART Treatment Preparation Assessment is PENDING! --for this Client");
+                    //enable buttons
+                    $("#btnPsychosocialCriterial").prop('disabled', false);
+                    $("#btnSupportSystemCriteria").prop('disabled', false);
+                });                   
                 } else {
-                    $("#divsuccess").show('fast', function () { $("#success").append("ART Treatment Preparation Completed! | View Answers for the ART prep Questions"); });   
+                    $("#divsuccess").show('fast', function() {
+                        $("#success").append("ART Treatment Preparation Completed! | View Answers for the ART prep Questions");
+                       // disbale buttons
+                        $("#btnPsychosocialCriterial").prop('disabled', true);
+                        $("#btnSupportSystemCriteria").prop('disabled', true);
+                    });   
                 }
 
                 $.ajax({
@@ -307,7 +317,8 @@ counselling session?</label>
                             if (itemList.AccurateLocator) { $("#locator").prop("checked", true); }
                             if (itemList.startART) { $("#caregiver").prop("checked", true); }
                         });
-                        $("#btnPsychosocialCriterial").prop('disabled', true);
+                        //if (response.d !=='') { $("#btnPsychosocialCriterial").prop('disabled', true);}
+                        
                     },
                     error: function (xhr, errorType, exception) {
                         var jsonError = jQuery.parseJSON(xhr.responseText);
@@ -326,7 +337,7 @@ counselling session?</label>
         
             $("#btnPsychosocialCriterial").click(function () {
 
-                if (isDonePyschosocialCriteria == 0) {
+                if (isDonePyschosocialCriteria === 0) {
                     $.ajax({
                         type: "POST",
                         url: "../WebService/PatientTreatmentpreparation.asmx/AddPatientPsychosocialCriteria",
@@ -361,6 +372,9 @@ counselling session?</label>
                     dataType: "json",
                     success: function (response) {
                         var itemList = response.d;
+                        //if (response.d !== '') {
+                        //    $("#btnSupportSystemCriteria").prop('disabled', true);
+                        //}
                         $.each(itemList, function (index, itemList) {
 
                             if (itemList.TakingART === true) { $("#convinient").prop("checked", true); }
@@ -369,8 +383,6 @@ counselling session?</label>
                             if (itemList.EnrollSMSReminder === true) { $("#EnrollSMSReminder").prop("checked", true); }
                             if (itemList.OtherSupportSystems === true) { $("#OtherSupportSystem").prop("checked", true); }
                         });
-                        $("#btnSupportSystemCriteria").prop('disabled', true);
-
                     },
                     error: function (xhr, errorType, exception) {
                         var jsonError = jQuery.parseJSON(xhr.responseText);
