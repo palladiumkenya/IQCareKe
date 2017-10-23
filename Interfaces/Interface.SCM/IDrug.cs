@@ -59,5 +59,6 @@ namespace Interface.SCM
         int saveUpdatePatientRegistration(string fname, string mname, string lname, string enrollment, string dob, string gender,
             string locationid, string regDate, string userid, string serviceid);
         DataTable getPatientsRegistered();
+        DataTable searchPatientsRegistered(string fname, string mname, string lname, string enrollmentId);
     }
 }
