@@ -90,6 +90,7 @@
     <Compile Include="ApiInboxManager.cs" />
     <Compile Include="ApiInteropManager.cs" />
     <Compile Include="ApiOutboxmanager.cs" />
+    <Compile Include="MappingEntities\DrugDispenseEntity.cs" />
     <Compile Include="MessageHandler\IIncomingMessageService.cs" />
     <Compile Include="MessageHandler\IncomingMessageService.cs" />
     <Compile Include="MessageHandler\IOutgoingMessageService.cs" />

@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using System;
-using System.Web.Configuration;
-using System.Web.Script.Serialization;
 using IQCare.DTO;
 using IQCare.WebApi.Logic.MappingEntities;
 using Newtonsoft.Json;
@@ -144,7 +142,7 @@ namespace IQCare.WebApi.Logic.EntityMapper
             throw new System.NotImplementedException();
         }
 
-        public void DrugOrderFulfilment()
+        public void DrugOrderFulfilment(List<DispenseDto> dispenseDtos)
         {
             throw new System.NotImplementedException();
         }
