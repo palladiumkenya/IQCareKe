@@ -1,6 +1,7 @@
 ﻿using DataAccess.Base;
 using Interface.Interop;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace BusinessProcess.Interop
 {
@@ -10,7 +11,7 @@ namespace BusinessProcess.Interop
         //private static ManualResetEvent sendDone = new ManualResetEvent(false);
         //private static ManualResetEvent receiveDone = new ManualResetEvent(false);
         //static string response = string.Empty;
-        public void SendData(string jsonString, string endPoint)
+        public async Task SendData(string jsonString, string endPoint)
         {
           
             DataAccess.Interop.SocketClientAsync.SendToClient(jsonString);
