@@ -154,7 +154,7 @@ namespace IQCare.WebApi.Logic.EntityMapper
             throw new System.NotImplementedException();
         }
 
-        public void DrugOrderFulfilment(List<DispenseDto> dispenseDtos)
+        public string DrugOrderFulfilment(List<DispenseDto> dispenseDtos)
         {
             throw new System.NotImplementedException();
         }
