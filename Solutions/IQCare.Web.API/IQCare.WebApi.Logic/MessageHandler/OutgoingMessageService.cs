@@ -266,13 +266,13 @@ namespace IQCare.WebApi.Logic.MessageHandler
                 
                 var drugOrderDto = new PrescriptionDto()
                 {
-                    InternalPatientIdentifier =
-                    {
-                        IdentifierType = messageDto[0].IDENTIFIER_TYPE,
-                        IdentifierValue = messageDto[0].Id,
-                        AssigningAuthority = "CCC"
+                    //InternalPatientIdentifier =
+                    //{
+                    //    IdentifierType = messageDto[0].IDENTIFIER_TYPE,
+                    //    IdentifierValue = messageDto[0].Id,
+                    //    AssigningAuthority = "CCC"
                         
-                    },
+                    //},
                     Patientname =
                     {
                         FirstName = messageDto[0].FIRST_NAME,
