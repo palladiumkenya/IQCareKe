@@ -393,7 +393,7 @@ namespace IQCare.Web.CCC.WebService
                                     var entityIdentifierAuditData = AuditDataUtility.Serializer(identifiersByPatientId);
                                     entityIdentifier.IdentifierValue = item.Value;
                                     entityIdentifier.AuditData = entityIdentifierAuditData;
-                                    patientIdentifierManager.UpdatePatientIdentifier(entityIdentifier);
+                                    patientIdentifierManager.UpdatePatientIdentifier(entityIdentifier, facilityId);
                                 }
                             }
                             else
@@ -522,7 +522,7 @@ namespace IQCare.Web.CCC.WebService
                             identifiers[0].AuditData = identifiersAuditData;
 
 
-                            patientIdentifier.UpdatePatientIdentifier(identifiers[0]);
+                            patientIdentifier.UpdatePatientIdentifier(identifiers[0], patient.FacilityId);
                         }
 
                         var enrollmentAuditData = AuditDataUtility.Serializer(entityEnrollments);

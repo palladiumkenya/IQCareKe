@@ -66,7 +66,7 @@ namespace IQCare.CCC.UILogic.Interoperability
                                 var entityIdentifierAuditData = AuditDataUtility.AuditDataUtility.Serializer(identifiersByPatientId);
                                 entityIdentifier.IdentifierValue = item.IdentifierValue;
                                 entityIdentifier.AuditData = entityIdentifierAuditData;
-                                patientIdentifierManager.UpdatePatientIdentifier(entityIdentifier);
+                                //patientIdentifierManager.UpdatePatientIdentifier(entityIdentifier);
                             }
                         }
                         else

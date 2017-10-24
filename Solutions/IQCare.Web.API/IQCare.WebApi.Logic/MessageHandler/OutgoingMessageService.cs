@@ -160,7 +160,7 @@ namespace IQCare.WebApi.Logic.MessageHandler
         {
             var processRegistration = new ProcessRegistration();
             var registrationDto = processRegistration.Get(messageEvent.PatientId);
-            var registrationEntity = _jsonEntityMapper.PatientRegistration(registrationDto);
+            var registrationEntity = _jsonEntityMapper.PatientRegistration(registrationDto, messageEvent);
             string registrationJson = new JavaScriptSerializer().Serialize(registrationEntity);
             //save/send
             //var apiOutbox = new ApiOutbox()
@@ -186,11 +186,9 @@ namespace IQCare.WebApi.Logic.MessageHandler
                     httpClient.DefaultRequestHeaders.Accept.Clear();
                     httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                    //string content = new JavaScriptSerializer().Serialize(jsonString);
-
                     var jsoncontent = new StringContent(jsonString, Encoding.UTF8, "application/json");
                     // HTTP POST
-                    using (HttpResponseMessage response = await httpClient.PostAsync("/api", jsoncontent).ConfigureAwait(false))
+                    using (HttpResponseMessage response = await httpClient.PostAsync("/api/", jsoncontent).ConfigureAwait(false))
                     {
                         using (HttpContent content = response.Content)
                         {
@@ -220,7 +218,23 @@ namespace IQCare.WebApi.Logic.MessageHandler
 
         private void HandleUpdatedClientInformation(MessageEventArgs messageEvent)
         {
+            var processRegistration = new ProcessRegistration();
+            var registrationDto = processRegistration.Get(messageEvent.PatientId);
+            var registrationEntity = _jsonEntityMapper.PatientRegistration(registrationDto, messageEvent);
+            string registrationJson = new JavaScriptSerializer().Serialize(registrationEntity);
 
+            //save/send
+            //var apiOutbox = new ApiOutbox()
+            //{
+            //    DateRead = DateTime.Now,
+            //    Message = registrationJson
+
+            //};
+
+            //_apiOutboxManager.AddApiOutbox(apiOutbox);
+
+            //Send
+            SendData(registrationJson, "").ConfigureAwait(false);
         }
 
         private void HandlePatientTransferOut(MessageEventArgs messageEvent)
@@ -266,13 +280,13 @@ namespace IQCare.WebApi.Logic.MessageHandler
                 
                 var drugOrderDto = new PrescriptionDto()
                 {
-                    InternalPatientIdentifier =
-                    {
-                        IdentifierType = messageDto[0].IDENTIFIER_TYPE,
-                        IdentifierValue = messageDto[0].Id,
-                        AssigningAuthority = "CCC"
+                    //InternalPatientIdentifier =
+                    //{
+                    //    IdentifierType = messageDto[0].IDENTIFIER_TYPE,
+                    //    IdentifierValue = messageDto[0].Id,
+                    //    AssigningAuthority = "CCC"
                         
-                    },
+                    //},
                     Patientname =
                     {
                         FirstName = messageDto[0].FIRST_NAME,
