@@ -192,9 +192,122 @@ namespace IQCare.WebApi.Logic.DtoMapping
             throw new NotImplementedException();
         }
 
-        public void DrugOrderFulfilment()
+        public DtoDrugDispensed DrugOrderFulfilment(DrugDispenseEntity entity)
         {
+            var internalIdentifiers = new List<DTOIdentifier>();
+            var drugsOrderdList=new List<PharmacyEncodedOrder>();
+            var drugsDispensed=new List<PharmacyDispensedDrugs>();
 
+            var identify=new DTOIdentifier()
+            {
+                
+                //ExternalPatientId =
+                //{
+                //    IdentifierValue = entity.Patientidentification.EXTERNAL_PATIENT_ID.ID,
+                //    IdentifierType = entity.Patientidentification.EXTERNAL_PATIENT_ID.IDENTIFIER_TYPE,
+                //    AssigningAuthority = entity.Patientidentification.EXTERNAL_PATIENT_ID.ASSIGNING_AUTHORITY
+                //},
+                //PatientName =
+                //{
+                //    FirstName = entity.Patientidentification.PATIENT_NAME.FIRST_NAME,
+                //    LastName = entity.Patientidentification.PATIENT_NAME.LAST_NAME,
+                //    MiddleName = entity.Patientidentification.PATIENT_NAME.MIDDLE_NAME
+                //}
+                
+            };
+         
+            foreach (var identifier in internalIdentifiers)
+            {
+                var internalIdentity = new DTOIdentifier()
+                {
+                    IdentifierValue = identifier.IdentifierValue,
+                    IdentifierType = identifier.IdentifierType,
+                    AssigningAuthority = identifier.AssigningAuthority
+                };
+                internalIdentifiers.Add(internalIdentity);
+            }
+
+            foreach (var encoded in drugsOrderdList)
+            {
+                var encorder=new PharmacyEncodedOrder()
+                {
+                    DrugName = encoded.DrugName,
+                    Dosage = encoded.Dosage,
+                    CodingSystem = encoded.CodingSystem,
+                    Duration = encoded.Duration,
+                    Frequency = encoded.Frequency,
+                    PrescriptionNotes = encoded.PrescriptionNotes,
+                    QuantityPrescribed = encoded.QuantityPrescribed
+                };
+                drugsOrderdList.Add(encorder);
+            }
+
+            foreach (var drugDispense in entity.PharmacyDispense)
+            {
+                var dispense=new PharmacyDispensedDrugs()
+                {
+                    ActualDrugs = drugDispense.ActualDrugs,
+                    CodingSystem = drugDispense.CodingSystem,
+                    DispensingNotes = drugDispense.DispensingNotes,
+                    Dosage = drugDispense.Dosage,
+                    DrugName = drugDispense.DrugName,
+                    Duration = drugDispense.Duration,
+                    Frequency = drugDispense.Frequency,
+                    QuantityDispensed = drugDispense.QuantityDispensed
+                };
+                drugsDispensed.Add(dispense);
+            }
+
+            var dispenseOrder=new DtoDrugDispensed()
+            {
+                MessageHeader =
+                {
+                    SendingFacility = entity.Messageheader.SENDING_FACILITY,
+                    SendingApplication = entity.Messageheader.SENDING_APPLICATION,
+                    ReceivingApplication = entity.Messageheader.RECEIVING_APPLICATION,
+                    ReceivingFacility = entity.Messageheader.RECEIVING_FACILITY,
+                    Security = entity.Messageheader.SECURITY,
+                    MessageType = entity.Messageheader.MESSAGE_TYPE,
+                    ProcessingId = entity.Messageheader.PROCESSING_ID
+                },
+                PatientIdentification =
+                {
+                    ExternalPatientId =
+                    {
+                        AssigningAuthority = entity.Patientidentification.EXTERNAL_PATIENT_ID.ASSIGNING_AUTHORITY,
+                        IdentifierValue = entity.Patientidentification.EXTERNAL_PATIENT_ID.ID,
+                        IdentifierType = entity.Patientidentification.EXTERNAL_PATIENT_ID.IDENTIFIER_TYPE
+                    },
+                    InternalPatientId = internalIdentifiers,
+                    PatientName =
+                    {
+                        FirstName = entity.Patientidentification.PATIENT_NAME.FIRST_NAME,
+                        MiddleName = entity.Patientidentification.PATIENT_NAME.MIDDLE_NAME,
+                        LastName = entity.Patientidentification.PATIENT_NAME.LAST_NAME
+                    }
+                },
+                CommonOrderDetails =
+                {
+                    OrderControl = entity.Commonorderdetails.ORDER_CONTROL,
+                    Notes = entity.Commonorderdetails.NOTES,
+                    OrderingPhysician =
+                    {
+                        FirstName = entity.Commonorderdetails.ORDERING_PHYSICIAN.FIRST_NAME,
+                        MiddleName = entity.Commonorderdetails.ORDERING_PHYSICIAN.MIDDLE_NAME,
+                        LastName = entity.Commonorderdetails.ORDERING_PHYSICIAN.LAST_NAME
+                    },
+                    OrderStatus = entity.Commonorderdetails.ORDER_STATUS,
+                    PlacerOrderNumber =
+                    {
+                        Number =Convert.ToInt32(entity.Commonorderdetails.PLACER_ORDER_NUMBER.NUMBER),
+                        Entity = entity.Commonorderdetails.PLACER_ORDER_NUMBER.ENTITY
+                    },
+                    TransactionDatetime =Convert.ToDateTime(entity.Commonorderdetails.TRANSACTION_DATETIME),
+                },
+                PharmacyEncodedOrder = drugsOrderdList,
+                PharmacyDispense = drugsDispensed
+            };
+            return dispenseOrder;
         }
 
         public void AppointmentScheduling()

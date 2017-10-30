@@ -3,24 +3,25 @@
 namespace IQCare.DTO
 {
 
-    public class DispenseDto
+    public class DtoDrugDispensed
     {
-        public DispenseDto()
+        public DtoDrugDispensed()
         {
             MessageHeader=new MessageHeader();
+            PatientIdentification=new DtoPatientIdentification();
             CommonOrderDetails=new CommonOrderDetails();
-            PharmacyEncodedOrder=new PharmacyEncodedOrder();
-            PharmacyDispense= new List<PharmacyDispense>();
+            PharmacyEncodedOrder=new List<PharmacyEncodedOrder>();
+            PharmacyDispense= new List<PharmacyDispensedDrugs>();
         }
 
-    public DtoPatientIdentification PatientIdentification { get; set; }
+        public DtoPatientIdentification PatientIdentification { get; set; }
         public MessageHeader MessageHeader { get; set; }
         public CommonOrderDetails CommonOrderDetails { get; set; }
-        public PharmacyEncodedOrder PharmacyEncodedOrder { get; set; }
-        public List<PharmacyDispense> PharmacyDispense { get; set; }
+        public List<PharmacyEncodedOrder>  PharmacyEncodedOrder { get; set; }
+        public List<PharmacyDispensedDrugs> PharmacyDispense { get; set; }
     }
 
-    public class PharmacyDispense
+    public class PharmacyDispensedDrugs
     {
         public string  DrugName { get; set; }
         public string CodingSystem { get; set; }

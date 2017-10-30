@@ -41,7 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DispenseDto.cs" />
+    <Compile Include="DtoDrugDispensed.cs" />
     <Compile Include="DTOIdentifier.cs" />
     <Compile Include="DtoPatientIdentification.cs" />
     <Compile Include="IInteropDTO.cs" />

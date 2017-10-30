@@ -33,12 +33,14 @@ namespace IQCare.Web.Api.Controllers.Interop
         [HttpGet]
         public void Put(int id, [FromBody]string value)
         {
+
         }
 
         // DELETE api/values/5
         [HttpGet]
         public void Delete(int id)
         {
+
         }
     }
 }

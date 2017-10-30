@@ -7,7 +7,7 @@ namespace IQCare.WebApi.Logic.MappingEntities
         public MESSAGEHEADER Messageheader { get; set; }
         public PATIENTIDENTIFICATION Patientidentification { get; set; }
         public COMMONORDERDETAILS Commonorderdetails { get; set; }
-        public PHARMACYENCODEDORDER Pharmacyencodedorder { get; set; }
+        public List<PHARMACYENCODEDORDER> Pharmacyencodedorder { get; set; }
         public List<PharmacyDispense> PharmacyDispense { get; set; }
     }
 
