@@ -1,19 +1,31 @@
 ﻿using System.Collections.Generic;
 using System;
 using IQCare.DTO;
+using IQCare.Events;
 using IQCare.WebApi.Logic.MappingEntities;
 using Newtonsoft.Json;
 
 namespace IQCare.WebApi.Logic.EntityMapper
 {
     public class JsonEntityMapper : IJsonEntityMapper
-
     {
-        public PatientRegistrationEntity PatientRegistration(Registration entity)
+        public PatientRegistrationEntity PatientRegistration(Registration entity, MessageEventArgs messageEvent)
         {
             PatientRegistrationEntity patientRegistration = new PatientRegistrationEntity();
 
-            patientRegistration.MESSAGE_HEADER = GetMessageHeader("ADT^A04", "13122", "P");
+            string messageType = null;
+            if (messageEvent.MessageType == MessageType.NewClientRegistration)
+            {
+                messageType = "ADT^A04";
+            }
+            else if (messageEvent.MessageType == MessageType.UpdatedClientInformation)
+            {
+                messageType = "ADT^A08";
+            }
+
+            int facilityId = messageEvent.FacilityId;
+
+            patientRegistration.MESSAGE_HEADER = GetMessageHeader(messageType, facilityId.ToString(), "P");
             patientRegistration.PATIENT_IDENTIFICATION = PATIENTIDENTIFICATION.GetPatientidentification(entity);
             patientRegistration.NEXT_OF_KIN = NEXTOFKIN.GetNextOfKins(entity);
             patientRegistration.VISIT = VISIT.GetVisit(entity);
@@ -142,9 +154,8 @@ namespace IQCare.WebApi.Logic.EntityMapper
             throw new System.NotImplementedException();
         }
 
-        public string DrugOrderFulfilment(DtoDrugDispensed entity)
+        public string DrugOrderFulfilment(List<DispenseDto> dispenseDtos)
         {
-            
             throw new System.NotImplementedException();
         }
 
@@ -208,7 +219,7 @@ namespace IQCare.WebApi.Logic.EntityMapper
             };
         }
 
-        public string DrugOrderFulfilment(List<DtoDrugDispensed> dispenseDtos)
+        string IJsonEntityMapper.DrugOrderFulfilment(List<DispenseDto> dispenseDtos)
         {
             throw new NotImplementedException();
         }

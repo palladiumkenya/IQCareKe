@@ -14,6 +14,7 @@ using System.Web.Services.Protocols;
 using Application.Common;
 using Entities.CCC.Lookup;
 using IQCare.CCC.UILogic.Enrollment;
+using IQCare.Events;
 using Microsoft.JScript;
 using Newtonsoft.Json;
 using Convert = System.Convert;
@@ -389,10 +390,11 @@ namespace IQCare.Web.CCC.WebService
                 if (PersonId > 0 || PatientId > 0)
                 {
                     var personLocation = new PersonLocationManager();
+                    var patientLogic = new PatientLookupManager();
+                    var patient = patientLogic.GetPatientDetailSummary(PatientId);
+
                     if (PersonId == 0)
                     {
-                        var patientLogic = new PatientLookupManager();
-                        var patient = patientLogic.GetPatientDetailSummary(PatientId);
                         PersonId = patient.PersonId;
                     }
                     
@@ -420,6 +422,17 @@ namespace IQCare.Web.CCC.WebService
                             Msg += "<p>Current Person Location Addedd successfully during !</p>";
                         }
                     }
+
+                    MessageEventArgs args = new MessageEventArgs()
+                    {
+                        PatientId = PatientId,
+                        EntityId = PatientId,
+                        MessageType = MessageType.UpdatedClientInformation,
+                        EventOccurred = "Patient Enrolled Identifier = ",
+                        FacilityId = patient.FacilityId
+                    };
+
+                    Publisher.RaiseEventAsync(this, args).ConfigureAwait(false);
                 }
                 else
                     Msg += "The current person was not updated";
@@ -451,11 +464,11 @@ namespace IQCare.Web.CCC.WebService
                     PersonId = Convert.ToInt32(Session["PersonId"]);
                     var personContact = new PersonContactManager();
                     var personContactLookUp = new PersonContactLookUpManager();
+                    var patientLogic = new PatientLookupManager();
+                    var patient = patientLogic.GetPatientDetailSummary(int.Parse(patientid));
 
                     if (PersonId == 0)
                     {
-                        var patientLogic = new PatientLookupManager();
-                        var patient = patientLogic.GetPatientDetailSummary(int.Parse(patientid));
                         PersonId = patient.PersonId;
                     }
 
@@ -494,6 +507,17 @@ namespace IQCare.Web.CCC.WebService
                         }
 
                     }
+
+                    MessageEventArgs args = new MessageEventArgs()
+                    {
+                        PatientId = int.Parse(patientid),
+                        EntityId = int.Parse(patientid),
+                        MessageType = MessageType.UpdatedClientInformation,
+                        EventOccurred = "Patient Enrolled Identifier = ",
+                        FacilityId = patient.FacilityId
+                    };
+
+                    Publisher.RaiseEventAsync(this, args).ConfigureAwait(false);
                 }
                 else
                 {
