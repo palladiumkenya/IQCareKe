@@ -545,7 +545,7 @@
       <HintPath>..\..\References\Application.Presentation.dll</HintPath>
     </Reference>
     <Reference Include="AutoMapper, Version=6.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\..\Solutions\IQCare.CCC\packages\AutoMapper.6.1.1\lib\net45\AutoMapper.dll</HintPath>
+      <HintPath>..\..\References\AutoMapper.dll</HintPath>
     </Reference>
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
       <HintPath>..\..\Solutions\IQCare.CCC\packages\CrystalDecisions.CrystalReports.Engine.1.0.0\lib\CrystalDecisions.CrystalReports.Engine.dll</HintPath>

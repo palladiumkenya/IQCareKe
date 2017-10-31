@@ -7,6 +7,7 @@ using IQCare.WebApi.Logic.DtoMapping;
 using IQCare.WebApi.Logic.MappingEntities;
 using System;
 using System.Web.Script.Serialization;
+using IQCare.DTO;
 using IQCare.DTO.CommonEntities;
 
 namespace IQCare.WebApi.Logic.MessageHandler
