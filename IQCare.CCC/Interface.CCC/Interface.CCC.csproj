@@ -76,6 +76,7 @@
     <Compile Include="IMst_PatientInsert.cs" />
     <Compile Include="Interoperability\IDrugPrescriptionManager.cs" />
     <Compile Include="Interoperability\IPatientMessageManager.cs" />
+    <Compile Include="Interoperability\IViralLoadMessageManager.cs" />
     <Compile Include="IPatientAppointment.cs" />
     <Compile Include="Baseline\IPatientHivTestingManager.cs" />
     <Compile Include="IPatientCategorizationmanager.cs" />

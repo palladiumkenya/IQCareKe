@@ -120,6 +120,7 @@
     <Compile Include="Enrollment\BServiceAreaIdentifiers.cs" />
     <Compile Include="Interoperability\BDrugPrescriptionManager.cs" />
     <Compile Include="Interoperability\BPatientMessage.cs" />
+    <Compile Include="Interoperability\BViralLoadMessage.cs" />
     <Compile Include="Lookup\BFacilityListManager.cs" />
     <Compile Include="Lookup\BPatientBaselineLookupManager.cs" />
     <Compile Include="Lookup\BPatientServiceEnrollmentLookupManager.cs" />

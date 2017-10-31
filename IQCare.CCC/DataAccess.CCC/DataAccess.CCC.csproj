@@ -97,6 +97,7 @@
     <Compile Include="Interface\enrollment\IServiceAreaIdentifiersRepository.cs" />
     <Compile Include="Interface\Interoperability\IDrugPrescriptionMessageRepository.cs" />
     <Compile Include="Interface\Interoperability\IPatientMessageRepository.cs" />
+    <Compile Include="Interface\Interoperability\IViralLoadMessageRepository.cs" />
     <Compile Include="Interface\Lookup\IFacilityListRepository.cs" />
     <Compile Include="Interface\Lookup\ILookupFacilityStatisticsRepository.cs" />
     <Compile Include="Interface\Lookup\ILookupFacilityViralLoad.cs" />
@@ -178,6 +179,7 @@
     <Compile Include="Repository\Enrollment\ServiceAreaIdentifiersRepository.cs" />
     <Compile Include="Repository\Interoperability\DrugPrescriptionMessageRepository.cs" />
     <Compile Include="Repository\Interoperability\PatientMessageRepository.cs" />
+    <Compile Include="Repository\Interoperability\ViralLoadMessageRepository.cs" />
     <Compile Include="Repository\Lookup\FacilityListRepository.cs" />
     <Compile Include="Repository\Lookup\LookupFacilityRepository.cs" />
     <Compile Include="Repository\Lookup\LookupFacilityStatisticsRepository.cs" />

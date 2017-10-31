@@ -208,11 +208,6 @@ namespace IQCare.WebApi.Logic.EntityMapper
             throw new System.NotImplementedException();
         }
 
-        public void ViralLoadResults()
-        {
-            throw new System.NotImplementedException();
-        }
-
         object IJsonEntityMapper.DrugPrescriptionRaised(PrescriptionDto drugOrderDto)
         {
             return DrugPrescriptionRaised(drugOrderDto);

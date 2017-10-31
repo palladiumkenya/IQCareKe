@@ -61,10 +61,6 @@ namespace IQCare.WebApi.Logic.MessageHandler
                     HandleAppointments(apiInbox);
                     break;
 
-                case "ORM^O01":
-                    HandleViralLoadLabOrder(apiInbox);
-                    break;
-
                 case "ORU^R01":
                     HandleNewViralLoadResults(apiInbox);
                     break;
@@ -126,11 +122,6 @@ namespace IQCare.WebApi.Logic.MessageHandler
         }
 
         private void HandleAppointments(ApiInbox incomingMessage)
-        {
-            _apiInboxmanager.AddApiInbox(incomingMessage);
-        }
-
-        private void HandleViralLoadLabOrder(ApiInbox incomingMessage)
         {
             _apiInboxmanager.AddApiInbox(incomingMessage);
         }

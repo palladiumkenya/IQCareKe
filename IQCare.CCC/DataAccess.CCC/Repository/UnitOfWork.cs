@@ -147,6 +147,7 @@ namespace DataAccess.CCC.Repository
         private IPatientMessageRepository _patientMessageRepository;
 
         private IDrugPrescriptionMessageRepository _drugPrescriptionMessageRepository;
+        private IViralLoadMessageRepository _viralLoadMessageRepository;
 
         public UnitOfWork(BaseContext context)
         {
@@ -191,7 +192,14 @@ namespace DataAccess.CCC.Repository
             }
         }
 
-
+        public IViralLoadMessageRepository ViralLoadMessageRepository
+        {
+            get
+            {
+                return _viralLoadMessageRepository ??
+                       (_viralLoadMessageRepository = new ViralLoadMessageRepository((LookupContext)_context));
+            }
+        }
 
         public IPatientServiceEnrollmentLookupRepository PatientServiceEnrollmentLookupRepository
         {
