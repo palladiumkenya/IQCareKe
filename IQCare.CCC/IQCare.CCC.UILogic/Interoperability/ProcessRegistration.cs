@@ -11,6 +11,7 @@ using Interface.CCC.Baseline;
 using IQCare.CCC.UILogic.Enrollment;
 using IQCare.CCC.UILogic.Visit;
 using Interface.Security;
+using IQCare.DTO.PatientRegistration;
 using Newtonsoft.Json;
 
 namespace IQCare.CCC.UILogic.Interoperability
@@ -21,19 +22,20 @@ namespace IQCare.CCC.UILogic.Interoperability
         public int Code { get; set; }
     }
 
-    public class ProcessRegistration : IInteropDTO<DTO.Registration>
+    public class ProcessRegistration : IInteropDTO<PatientRegistrationDTO>
     {
         private readonly IPatientLinkageManager linkageManager = (IPatientLinkageManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Baseline.BPatientLinkageManager, BusinessProcess.CCC");
         private readonly IPatientHivTestingManager _hivTestingManager = (IPatientHivTestingManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Baseline.BPatientHivTestingManager, BusinessProcess.CCC");
         IUser LoginManager = (IUser)ObjectFactory.CreateInstance("BusinessProcess.Security.BUser, BusinessProcess.Security");
 
         public string msg { get; set; }
-        public Registration Get(int entityId)
+
+        public PatientRegistrationDTO Get(int entityId)
         {
             return ProcessPatient.Get(entityId);
         }
 
-        public string Save(Registration registration)
+        public string Save(PatientRegistrationDTO registration)
         {
             try
             {
@@ -50,40 +52,46 @@ namespace IQCare.CCC.UILogic.Interoperability
 
 
                 var personContacts = new List<PersonContactLookUp>();
-
-                DataSet ds = LoginManager.GetFacilitySettings();
-                int facilityId = Convert.ToInt32(ds.Tables[0].Rows[0]["PosID"]);
-                string gender;
-                switch (registration.Patient.Sex)
-                {
-                    case "F":
-                        gender = "Female";
-                        break;
-                    case "M":
-                        gender = "Male";
-                        break;
-                    default:
-                        gender = "";
-                        break;
-                }
-
+                //Get FacilityId
+                int facilityId = Convert.ToInt32(registration.MESSAGE_HEADER.SENDING_FACILITY);
+                //Get Gender
+                string gender = registration.PATIENT_IDENTIFICATION.SEX == "F" ? "Female" : "Male";
                 String sDate = DateTime.Now.ToString();
                 DateTime datevalue = Convert.ToDateTime(sDate);
+                //IQCare Sex
                 int sex = lookupLogic.GetItemIdByGroupAndItemName("Gender", gender)[0].ItemId;
+                //Assume this is a new patient
                 int patientType = lookupLogic.GetItemIdByGroupAndItemName("PatientType", "New")[0].ItemId;
+                //Get Enrollment Id Type
                 int visitType = lookupLogic.GetItemIdByGroupAndItemName("VisitType", "Enrollment")[0].ItemId;
-                DateTime DOB = !string.IsNullOrWhiteSpace(registration.Patient.DateOfBirth) ? DateTime.Parse(registration.Patient.DateOfBirth) : DateTime.MinValue;
-                DateTime DateOfEnrollment = !string.IsNullOrWhiteSpace(registration.DateOfEnrollment) ? DateTime.Parse(registration.DateOfEnrollment) : DateTime.MinValue;
+                //Get DOB
+                DateTime DOB;
+                DateTime.TryParse(registration.PATIENT_IDENTIFICATION.DATE_OF_BIRTH, out DOB);
+                bool DOB_Precision = true;
+                //Get Enrollment Date
+                DateTime dateOfEnrollment = DateTime.MinValue;
+                //Get Patient Names
+                string firstName = registration.PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME;
+                string middleName = registration.PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME;
+                string lastName = registration.PATIENT_IDENTIFICATION.PATIENT_NAME.LAST_NAME;
+                string nationalId = String.Empty;
 
-                int personId = personManager.AddPersonUiLogic(registration.Patient.FirstName,
-                    registration.Patient.MiddleName,
-                    registration.Patient.LastName, sex, 1, DOB,
-                    registration.Patient.DobPrecision);
-                var patientIndex = datevalue.Year.ToString() + '-' + personId;
-                string nationalId = registration.Patient.NationalId;
-                bool dobPrecision = registration.Patient.DobPrecision;
-                int entryPointId = Convert.ToInt32(registration.EntryPoint);
+                
+                foreach (var internalpatientid in registration.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID)
+                {
+                    if (internalpatientid.IDENTIFIER_TYPE == "NATIONAL_ID")
+                    {
+                        nationalId = internalpatientid.ID;
+                    }                  
+                }
+
+                //bool dobPrecision = registration.Patient.DobPrecision;
+                int entryPointId = 0;
                 int ptn_Pk = 0;
+
+                //Start Saving
+                int personId = personManager.AddPersonUiLogic(firstName, middleName, lastName, sex, 1, DOB, DOB_Precision);
+                var patientIndex = datevalue.Year.ToString() + '-' + personId;
 
                 PatientEntity patientEntity = new PatientEntity();
                 patientEntity.PersonId = personId;
@@ -97,14 +105,14 @@ namespace IQCare.CCC.UILogic.Interoperability
                 patientEntity.CreatedBy = 1;
                 patientEntity.CreateDate = DateTime.Now;
                 patientEntity.DeleteFlag = false;
-                patientEntity.DobPrecision = dobPrecision;
+                patientEntity.DobPrecision = DOB_Precision;
 
                 int patientId = patientManager.AddPatient(patientEntity);
 
                 //Add enrollment visit
                 int patientMasterVisitId = patientMasterVisitManager.AddPatientMasterVisit(patientId, 1, visitType);
                 //Enroll Patient to service
-                int patientEnrollmentId = patientEnrollmentManager.addPatientEnrollment(patientId, DateOfEnrollment.ToString(), 1);
+                int patientEnrollmentId = patientEnrollmentManager.addPatientEnrollment(patientId, dateOfEnrollment.ToString(), 1);
                 //Add enrollment entry point
                 int patientEntryPointId = patientEntryPointManager.addPatientEntryPoint(patientId, entryPointId, 1);
 
@@ -145,27 +153,18 @@ namespace IQCare.CCC.UILogic.Interoperability
                         sexBluecard = 17;
                     }
 
-                    foreach (var item in registration.InternalPatientIdentifiers)
+                    foreach (var item in registration.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID)
                     {
-                        if (item.IdentifierType == "CCC_NUMBER")
+                        if (item.IDENTIFIER_TYPE == "CCC_NUMBER")
                         {
-                            enrollmentBlueCardId = item.IdentifierValue;
+                            enrollmentBlueCardId = item.ID;
                         }
                     }
 
 
                     if (greencardptnpk.Count == 0)
                     {
-                        ptn_Pk = mstPatientLogic.InsertMstPatient(
-                            (patient_person_details.FirstName),
-                            (patient_person_details.LastName),
-                            (patient_person_details.MiddleName),
-                            facility.FacilityID, enrollmentBlueCardId, entryPointId,
-                            DateOfEnrollment, sexBluecard,
-                            DOB,
-                            1, MaritalStatusId,
-                            address, phone, 1, facilityId.ToString(),
-                            203, DateOfEnrollment, DateTime.Now);
+                        ptn_Pk = mstPatientLogic.InsertMstPatient((patient_person_details.FirstName), (patient_person_details.LastName), (patient_person_details.MiddleName), facility.FacilityID, enrollmentBlueCardId, entryPointId, dateOfEnrollment, sexBluecard, DOB, 1, MaritalStatusId, address, phone, 1, facilityId.ToString(), 203, dateOfEnrollment, DateTime.Now);
 
                         patientEntity.ptn_pk = ptn_Pk;
                         patientManager.UpdatePatient(patientEntity, patientId);
@@ -181,45 +180,17 @@ namespace IQCare.CCC.UILogic.Interoperability
                 if (patientMasterVisitId > 0)
                 {
 
-                    foreach (var item in registration.InternalPatientIdentifiers)
+                    foreach (var item in registration.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID)
                     {
-                        if (item.IdentifierType == "CCC_NUMBER" && item.AssigningAuthority == "CCC")
+                        if (item.IDENTIFIER_TYPE == "CCC_NUMBER" && item.ASSIGNING_AUTHORITY == "CCC")
                         {
-                            int patientIdentifierId = patientIdentifierManager.addPatientIdentifier(patientId,
-                                patientEnrollmentId, 1, item.IdentifierValue);
-
-                            var identifierManager = new IdentifierManager();
-                            var identifierList = identifierManager.GetIdentifiersById(1);
-                            var hivtesting = _hivTestingManager.GetAll().OrderByDescending(y => y.Id)
-                                .FirstOrDefault(n => n.PersonId == personId);
-                            if (identifierList.Count > 0)
-                            {
-                                if (identifierList[0].Code == "CCCNumber")
-                                {
-                                    if (hivtesting != null)
-                                    {
-                                        hivtesting.ReferredToCare = true;
-                                        _hivTestingManager.UpdatePatientHivTesting(hivtesting);
-
-                                        PatientLinkage patLinkage = new PatientLinkage();
-                                        patLinkage.LinkageDate = DateOfEnrollment;
-                                        patLinkage.CCCNumber = item.IdentifierValue;
-                                        patLinkage.PersonId = personId;
-                                        patLinkage.CreatedBy = 1;
-                                        patLinkage.Enrolled = true;
-                                        patLinkage.PatientId = patientId;
-
-                                        linkageManager.AddPatientLinkage(patLinkage);
-                                    }
-                                }
-                            }
+                            int patientIdentifierId = patientIdentifierManager.addPatientIdentifier(patientId, patientEnrollmentId, 1, item.ID, facilityId);
                         }
                     }
 
                     if (greencardptnpk.Count == 0)
                     {
-                        mstPatientLogic.AddOrdVisit(ptn_Pk, facilityId, DateTime.Now, 110,
-                            1, DateTime.Now, 203);
+                        mstPatientLogic.AddOrdVisit(ptn_Pk, facilityId, DateTime.Now, 110, 1, DateTime.Now, 203);
                     }
                 }
 
@@ -233,69 +204,69 @@ namespace IQCare.CCC.UILogic.Interoperability
             return msg;
         }
 
-        public string Update(Registration registration)
+        public string Update(PatientRegistrationDTO registration)
         {
             ExMessage message = new ExMessage();
-            try
-            {
-                PatientRegistrationValidation validation = new PatientRegistrationValidation();
-                ProcessPatient processPatient = new ProcessPatient();
-                PatientLookupManager patientLookup = new PatientLookupManager();
-                var patientEntryPointManager = new PatientEntryPointManager();
+            //try
+            //{
+            //    PatientRegistrationValidation validation = new PatientRegistrationValidation();
+            //    ProcessPatient processPatient = new ProcessPatient();
+            //    PatientLookupManager patientLookup = new PatientLookupManager();
+            //    var patientEntryPointManager = new PatientEntryPointManager();
 
-                LookupLogic lookupLogic = new LookupLogic();
+            //    LookupLogic lookupLogic = new LookupLogic();
 
-                string cccNumber = null;
-                PatientLookup patient = new PatientLookup();
-                int entryPointId = 0;
-                string entryPointAuditData = null;
+            //    string cccNumber = null;
+            //    PatientLookup patient = new PatientLookup();
+            //    int entryPointId = 0;
+            //    string entryPointAuditData = null;
 
-                msg = validation.ValidateInterOperabilityRegistration(registration);
+            //    msg = validation.ValidateInterOperabilityRegistration(registration);
 
-                var lookupEntryPoints = lookupLogic.GetItemIdByGroupAndDisplayName("Entrypoint", registration.EntryPoint);
-                if (lookupEntryPoints.Count > 0)
-                {
-                    entryPointId = lookupEntryPoints[0].ItemId;
-                }
+            //    var lookupEntryPoints = lookupLogic.GetItemIdByGroupAndDisplayName("Entrypoint", registration.EntryPoint);
+            //    if (lookupEntryPoints.Count > 0)
+            //    {
+            //        entryPointId = lookupEntryPoints[0].ItemId;
+            //    }
                 
-                DateTime DOB = !string.IsNullOrWhiteSpace(registration.Patient.DateOfBirth) ? DateTime.Parse(registration.Patient.DateOfBirth) : DateTime.MinValue;
-                DateTime enrollmentDate = !string.IsNullOrWhiteSpace(registration.DateOfEnrollment) ? DateTime.Parse(registration.DateOfEnrollment) : DateTime.MinValue;
-                DataSet ds = LoginManager.GetFacilitySettings();
-                int facilityId = Convert.ToInt32(ds.Tables[0].Rows[0]["PosID"]);
+            //    DateTime DOB = !string.IsNullOrWhiteSpace(registration.Patient.DateOfBirth) ? DateTime.Parse(registration.Patient.DateOfBirth) : DateTime.MinValue;
+            //    DateTime enrollmentDate = !string.IsNullOrWhiteSpace(registration.DateOfEnrollment) ? DateTime.Parse(registration.DateOfEnrollment) : DateTime.MinValue;
+            //    DataSet ds = LoginManager.GetFacilitySettings();
+            //    int facilityId = Convert.ToInt32(ds.Tables[0].Rows[0]["PosID"]);
 
-                foreach (var item in registration.InternalPatientIdentifiers)
-                {
-                    if (item.IdentifierType == "CCC_NUMBER" && item.AssigningAuthority== "CCC")
-                    {
-                        cccNumber = item.IdentifierValue;
-                    }
-                }
+            //    foreach (var item in registration.InternalPatientIdentifiers)
+            //    {
+            //        if (item.IdentifierType == "CCC_NUMBER" && item.AssigningAuthority== "CCC")
+            //        {
+            //            cccNumber = item.IdentifierValue;
+            //        }
+            //    }
 
-                List<PatientLookup> patientLookups = new List<PatientLookup>();
-                patientLookups.Add(patient);
-                var entity = patientLookups.ConvertAll(x => new PatientEntity { Id = x.Id, Active = x.Active, DateOfBirth = x.DateOfBirth, ptn_pk = x.ptn_pk, PatientType = x.PatientType, PatientIndex = x.PatientIndex, NationalId = x.NationalId, FacilityId = x.FacilityId });
-                var patientAuditData = AuditDataUtility.AuditDataUtility.Serializer(entity);
-                patient = patientLookup.GetPatientByCccNumber(cccNumber);
-                List<PatientEntryPoint> entryPoints = patientEntryPointManager.GetPatientEntryPoints(patient.Id, 1);
-                if (entryPoints.Count > 0)
-                {
-                    entryPointAuditData = AuditDataUtility.AuditDataUtility.Serializer(entryPoints);
-                }
-                else
-                {
-                    entryPoints.Add(new PatientEntryPoint());
-                }
+            //    List<PatientLookup> patientLookups = new List<PatientLookup>();
+            //    patientLookups.Add(patient);
+            //    var entity = patientLookups.ConvertAll(x => new PatientEntity { Id = x.Id, Active = x.Active, DateOfBirth = x.DateOfBirth, ptn_pk = x.ptn_pk, PatientType = x.PatientType, PatientIndex = x.PatientIndex, NationalId = x.NationalId, FacilityId = x.FacilityId });
+            //    var patientAuditData = AuditDataUtility.AuditDataUtility.Serializer(entity);
+            //    patient = patientLookup.GetPatientByCccNumber(cccNumber);
+            //    List<PatientEntryPoint> entryPoints = patientEntryPointManager.GetPatientEntryPoints(patient.Id, 1);
+            //    if (entryPoints.Count > 0)
+            //    {
+            //        entryPointAuditData = AuditDataUtility.AuditDataUtility.Serializer(entryPoints);
+            //    }
+            //    else
+            //    {
+            //        entryPoints.Add(new PatientEntryPoint());
+            //    }
 
-                msg = processPatient.Update(patient.Id, patient.ptn_pk, DOB, registration.Patient.NationalId, facilityId, patientAuditData, entryPoints[0], entryPointId, entryPointAuditData, enrollmentDate, registration.InternalPatientIdentifiers);
+            //    msg = processPatient.Update(patient.Id, patient.ptn_pk, DOB, registration.Patient.NationalId, facilityId, patientAuditData, entryPoints[0], entryPointId, entryPointAuditData, enrollmentDate, registration.InternalPatientIdentifiers);
 
-                message.Msg = msg;
-                message.Code = 0;
-            }
-            catch (Exception e)
-            {
-                message.Msg = e.Message;
-                message.Code = 1;
-            }
+            //    message.Msg = msg;
+            //    message.Code = 0;
+            //}
+            //catch (Exception e)
+            //{
+            //    message.Msg = e.Message;
+            //    message.Code = 1;
+            //}
 
             return JsonConvert.SerializeObject(message);
         }

@@ -33,18 +33,4 @@
     <ReportName>Receipt Analysis</ReportName>
     <ReportDescription>Receipt Analysis</ReportDescription>
   </QueryBuilderReports>
-  <QueryBuilderReports>
-    <CategoryId>2</CategoryId>
-    <CategoryName>Laboratory</CategoryName>
-    <ReportId>3</ReportId>
-    <ReportName>Laboratory Urine Toxology report</ReportName>
-    <ReportDescription>Laboratory Urine Toxology report</ReportDescription>
-  </QueryBuilderReports>
-  <QueryBuilderReports>
-    <CategoryId>3</CategoryId>
-    <CategoryName>Care Ending</CategoryName>
-    <ReportId>4</ReportId>
-    <ReportName>Care Ending and Tracing report</ReportName>
-    <ReportDescription>Care Ending and Tracing report</ReportDescription>
-  </QueryBuilderReports>
 </QBReportList>

@@ -4,12 +4,14 @@ using IQCare.DTO;
 using IQCare.Events;
 using IQCare.WebApi.Logic.MappingEntities;
 using Newtonsoft.Json;
+using IQCare.DTO.PatientRegistration;
+using AutoMapper;
 
 namespace IQCare.WebApi.Logic.EntityMapper
 {
     public class JsonEntityMapper : IJsonEntityMapper
     {
-        public PatientRegistrationEntity PatientRegistration(Registration entity, MessageEventArgs messageEvent)
+        public PatientRegistrationEntity PatientRegistration(PatientRegistrationDTO entity, MessageEventArgs messageEvent)
         {
             PatientRegistrationEntity patientRegistration = new PatientRegistrationEntity();
 
@@ -25,11 +27,23 @@ namespace IQCare.WebApi.Logic.EntityMapper
 
             int facilityId = messageEvent.FacilityId;
 
-            patientRegistration.MESSAGE_HEADER = GetMessageHeader(messageType, facilityId.ToString(), "P");
-            patientRegistration.PATIENT_IDENTIFICATION = PATIENTIDENTIFICATION.GetPatientidentification(entity);
-            patientRegistration.NEXT_OF_KIN = NEXTOFKIN.GetNextOfKins(entity);
-            patientRegistration.VISIT = VISIT.GetVisit(entity);
+            Mapper.Initialize(cfg => {
+                cfg.CreateMap<PatientRegistrationDTO, PatientRegistrationEntity>().ReverseMap();
+                cfg.CreateMap<DTO.CommonEntities.MESSAGEHEADER, MappingEntities.MESSAGEHEADER>().ReverseMap();
+                cfg.CreateMap<DTO.CommonEntities.PATIENTIDENTIFICATION, MappingEntities.PATIENTIDENTIFICATION>().ReverseMap();
+                cfg.CreateMap<DTO.CommonEntities.NEXTOFKIN, MappingEntities.NEXTOFKIN>().ReverseMap();
+                cfg.CreateMap<DTO.CommonEntities.VISIT, MappingEntities.VISIT>().ReverseMap();
+                cfg.CreateMap<DTO.CommonEntities.EXTERNALPATIENTID, MappingEntities.EXTERNALPATIENTID>().ReverseMap();
+                cfg.CreateMap<DTO.CommonEntities.INTERNALPATIENTID, MappingEntities.INTERNALPATIENTID>().ReverseMap();
+                cfg.CreateMap<DTO.CommonEntities.PATIENTNAME, MappingEntities.PATIENTNAME>().ReverseMap();
+                cfg.CreateMap<DTO.CommonEntities.PATIENTADDRESS, MappingEntities.PATIENTADDRESS>().ReverseMap();
+                cfg.CreateMap<DTO.CommonEntities.PHYSICAL_ADDRESS, MappingEntities.PHYSICALADDRESS>().ReverseMap();
+                cfg.CreateMap<DTO.CommonEntities.NOKNAME, MappingEntities.NOKNAME>().ReverseMap();
+            });
 
+            patientRegistration = Mapper.Map<PatientRegistrationEntity>(entity);
+
+            patientRegistration.MESSAGE_HEADER = GetMessageHeader(messageType, facilityId.ToString(), "P");
             return patientRegistration;
         }
 

@@ -423,16 +423,19 @@ namespace IQCare.Web.CCC.WebService
                         }
                     }
 
-                    MessageEventArgs args = new MessageEventArgs()
+                    if (PatientId > 0)
                     {
-                        PatientId = PatientId,
-                        EntityId = PatientId,
-                        MessageType = MessageType.UpdatedClientInformation,
-                        EventOccurred = "Patient Enrolled Identifier = ",
-                        FacilityId = patient.FacilityId
-                    };
+                        MessageEventArgs args = new MessageEventArgs()
+                        {
+                            PatientId = PatientId,
+                            EntityId = PatientId,
+                            MessageType = MessageType.UpdatedClientInformation,
+                            EventOccurred = "Patient Enrolled Identifier = ",
+                            FacilityId = patient.FacilityId
+                        };
 
-                    Publisher.RaiseEventAsync(this, args).ConfigureAwait(false);
+                        Publisher.RaiseEventAsync(this, args).ConfigureAwait(false);
+                    }
                 }
                 else
                     Msg += "The current person was not updated";

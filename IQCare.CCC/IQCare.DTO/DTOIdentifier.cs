@@ -24,6 +24,24 @@ namespace IQCare.DTO
         public string PhysicalAddress { get; set; }
         public string NationalId { get; set; }
         public string GODS_NUMBER { get; set; }
+
+        public static DTOPerson SetDTOPerson(string firstName, string lastName, string middleName, string dob, bool dobPrecision, string sex, string mobileNumber, string physicalAddress, string nationalId, string godsNumber)
+        {
+            DTOPerson person = new DTOPerson();
+            person.FirstName = firstName;
+            person.LastName = lastName;
+            person.MiddleName = middleName;
+            person.DateOfBirth = dob;
+            person.DobPrecision = dobPrecision;
+            person.Sex = sex;
+            person.MobileNumber = mobileNumber;
+            person.PhysicalAddress = physicalAddress;
+            person.NationalId = nationalId;
+            person.GODS_NUMBER = godsNumber;
+
+
+            return person;
+        }
     }
 
     public class DTONextOfKin : DTOPerson
