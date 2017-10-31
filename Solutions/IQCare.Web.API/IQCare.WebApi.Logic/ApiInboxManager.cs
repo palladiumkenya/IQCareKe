@@ -6,7 +6,7 @@ namespace IQCare.WebApi.Logic
 {
     public class ApiInboxManager : IApiInboxManager
     {
-        private IApiInboxManager _apiInboxmanager = (IApiInboxManager)Application.Presentation.ObjectFactory.CreateInstance("BusinessProcess.WebApi.BPApiInbox, BPApiInbox");
+        private IApiInboxManager _apiInboxmanager = (IApiInboxManager)Application.Presentation.ObjectFactory.CreateInstance("BusinessProcess.WebApi.BApiInBox, BusinessProcess.WebApi");
 
         public int AddApiInbox(ApiInbox apiInbox)
         {
