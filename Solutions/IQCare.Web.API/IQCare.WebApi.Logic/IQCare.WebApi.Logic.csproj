@@ -34,6 +34,10 @@
     <Reference Include="Application.Presentation">
       <HintPath>..\..\..\References\Application.Presentation.dll</HintPath>
     </Reference>
+    <Reference Include="AutoMapper, Version=6.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="DataAccess.Base">
       <HintPath>..\..\..\References\DataAccess.Base.dll</HintPath>
     </Reference>

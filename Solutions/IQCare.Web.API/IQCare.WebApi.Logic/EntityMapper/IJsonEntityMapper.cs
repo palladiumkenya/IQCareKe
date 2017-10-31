@@ -2,12 +2,13 @@
 using IQCare.DTO;
 using IQCare.Events;
 using IQCare.WebApi.Logic.MappingEntities;
+using IQCare.DTO.PatientRegistration;
 
 namespace IQCare.WebApi.Logic.EntityMapper
 {
     public interface IJsonEntityMapper
     {
-        PatientRegistrationEntity PatientRegistration(Registration entity, MessageEventArgs messageEvent);
+        PatientRegistrationEntity PatientRegistration(PatientRegistrationDTO entity, MessageEventArgs messageEvent);
 
         void PatientTransferIn();
 

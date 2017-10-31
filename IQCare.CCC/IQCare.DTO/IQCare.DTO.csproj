@@ -41,12 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommonEntities\CommonEntities.cs" />
     <Compile Include="DispenseDto.cs" />
     <Compile Include="DTOIdentifier.cs" />
     <Compile Include="DtoPatientIdentification.cs" />
     <Compile Include="IInteropDTO.cs" />
     <Compile Include="IlMessage.cs" />
     <Compile Include="PatientNameDto.cs" />
+    <Compile Include="PatientRegistration\PatientRegistrationDTO.cs" />
     <Compile Include="PrescriptionDto.cs" />
     <Compile Include="Registration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

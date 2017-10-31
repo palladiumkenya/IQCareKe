@@ -12,6 +12,17 @@ namespace IQCare.WebApi.Logic.DtoMapping
         //todo handle possible null reference exceptions when fetching data from lists
         public Registration PatientRegistrationMapping(PatientRegistrationEntity entity)
         {
+            //var patient = DTOPerson.SetDTOPerson(
+            //    entity.PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME,
+            //    entity.PATIENT_IDENTIFICATION.PATIENT_NAME.LAST_NAME,
+            //    entity.PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME,
+            //    entity.PATIENT_IDENTIFICATION.DATE_OF_BIRTH,
+            //    false,
+            //    entity.PATIENT_IDENTIFICATION.SEX,
+            //    entity.PATIENT_IDENTIFICATION.PHONE_NUMBER,
+            //    entity.PATIENT_IDENTIFICATION.PATIENT_ADDRESS.POSTAL_ADDRESS
+            //    );
+
             var patient = new DTOPerson()
             {
                 FirstName = entity.PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME,
@@ -19,7 +30,7 @@ namespace IQCare.WebApi.Logic.DtoMapping
                 LastName = entity.PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME,
                 //DateOfBirth = entity.PATIENT_IDENTIFICATION.DATE_OF_BIRTH,
                 MobileNumber = entity.PATIENT_IDENTIFICATION.PHONE_NUMBER,
-                NationalId = entity.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID.FirstOrDefault(n=>n.IDENTIFIER_TYPE == "NATIONAL_ID").ID,
+                NationalId = entity.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID.FirstOrDefault(n => n.IDENTIFIER_TYPE == "NATIONAL_ID").ID,
                 Sex = entity.PATIENT_IDENTIFICATION.SEX,
                 PhysicalAddress = entity.PATIENT_IDENTIFICATION.PATIENT_ADDRESS.POSTAL_ADDRESS,
                 //todo update precision once updated in IL
@@ -51,10 +62,11 @@ namespace IQCare.WebApi.Logic.DtoMapping
                };
                 identifiers.Add(identifier);
             }
+
             var registration = new Registration()
             {
                 Patient = patient,
-                MotherMaidenName = entity.PATIENT_IDENTIFICATION.MOTHER_MAIDEN_NAME,
+                //MotherMaidenName = entity.PATIENT_IDENTIFICATION.MOTHER_MAIDEN_NAME,
                 MaritalStatus = entity.PATIENT_IDENTIFICATION.MARITAL_STATUS,
                 County = entity.PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.COUNTY,
                 SubCounty = entity.PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.SUB_COUNTY,

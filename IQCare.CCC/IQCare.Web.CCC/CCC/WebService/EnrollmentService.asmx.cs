@@ -285,7 +285,7 @@ namespace IQCare.Web.CCC.WebService
                             foreach (var item in identifiersObjects)
                             {
                                 patientIdentifierId = patientIdentifierManager.addPatientIdentifier(patientId,
-                                patientEnrollmentId, item.Key, item.Value);
+                                patientEnrollmentId, item.Key, item.Value, facilityId);
                                 
                                 var identifierManager = new IdentifierManager();
                                 var identifierList = identifierManager.GetIdentifiersById(item.Key);
@@ -401,7 +401,7 @@ namespace IQCare.Web.CCC.WebService
                                 patientEnrollmentId = patientEnrollmentManager.addPatientEnrollment(patient[0].Id, enrollmentDate, userId);
                                 patientEntryPointId = patientEntryPointManager.addPatientEntryPoint(patient[0].Id, entryPointId, userId);
                                 patientIdentifierId = patientIdentifierManager.addPatientIdentifier(patient[0].Id,
-                                    patientEnrollmentId, item.Key, item.Value);
+                                    patientEnrollmentId, item.Key, item.Value, facilityId);
                             }
                         }
                     }

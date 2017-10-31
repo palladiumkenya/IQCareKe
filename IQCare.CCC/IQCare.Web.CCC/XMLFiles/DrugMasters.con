@@ -3085,7 +3085,7 @@
   </Mst_Drug>
   <Mst_Drug>
     <Drug_PK>40</Drug_PK>
-    <DrugId>ph64</DrugId>
+    <DrugId>0</DrugId>
     <DrugName>Amitriptyline hydrochloride-Laroxyl 25mg</DrugName>
     <DeleteFlag>false</DeleteFlag>
   </Mst_Drug>
@@ -9863,12 +9863,7 @@
   </Mst_Drug>
   <Mst_Drug>
     <Drug_PK>1224</Drug_PK>
-    <DrugName>Atazanavir/Ritonavir-300mg/100mg-Anzavir-R 300mg/100mg</DrugName>
-    <DeleteFlag>true</DeleteFlag>
-  </Mst_Drug>
-  <Mst_Drug>
-    <Drug_PK>1225</Drug_PK>
-    <DrugName>Atazanavir/Ritonavir-300/100-Anzavir-R 300mg/100mg</DrugName>
+    <DrugName>Atazanavir/Rotonavir-Anzavir-R 300mg/100mg</DrugName>
     <DeleteFlag>false</DeleteFlag>
   </Mst_Drug>
   <Mst_Generic>
@@ -12199,18 +12194,17 @@
   </Mst_Generic>
   <Mst_Generic>
     <GenericId>592</GenericId>
-    <GenericName>Atazanavir/Ritonavir-300mg/100mg</GenericName>
-    <GenericAbbrevation>ATV/RTV</GenericAbbrevation>
-  </Mst_Generic>
-  <Mst_Generic>
-    <GenericId>593</GenericId>
-    <GenericName>Atazanavir/Ritonavir-300/100</GenericName>
+    <GenericName>Atazanavir/Rotonavir-[ATV/R]</GenericName>
     <GenericAbbrevation>ATVr</GenericAbbrevation>
   </Mst_Generic>
   <Mst_Generic>
-    <GenericId>594</GenericId>
+    <GenericId>593</GenericId>
     <GenericName>Atazanavir/Ritonavir</GenericName>
     <GenericAbbrevation>ATV/r</GenericAbbrevation>
+  </Mst_Generic>
+  <Mst_Generic>
+    <GenericId>594</GenericId>
+    <GenericName>Special Antibiotic</GenericName>
   </Mst_Generic>
   <Mst_DrugType>
     <DrugTypeId>1</DrugTypeId>
