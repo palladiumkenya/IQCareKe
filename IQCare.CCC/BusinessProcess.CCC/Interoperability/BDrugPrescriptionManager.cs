@@ -15,7 +15,7 @@ namespace BusinessProcess.CCC.Interoperability
             using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
  
-               var entityPrescription=unitOfWork.DrugPrescriptionMessageRepository.FindBy(x => x.NUMBER == orderId && x.ptnpk == ptnpk);
+               var entityPrescription=unitOfWork.DrugPrescriptionMessageRepository.FindBy(x => x.ptn_pharmacy_pk == orderId && x.PatientId == ptnpk);
                 unitOfWork.Dispose();
                 return entityPrescription.ToList();
                 // return ;

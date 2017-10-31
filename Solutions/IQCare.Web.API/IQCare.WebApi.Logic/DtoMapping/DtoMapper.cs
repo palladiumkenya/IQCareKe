@@ -156,7 +156,12 @@ namespace IQCare.WebApi.Logic.DtoMapping
                 PatientIdentification =
                 {
                     ExternalPatientId = {},
-                    InternalPatientId = internalIdentifiers,
+                    InternalPatientId =
+                    {
+                        AssigningAuthority = entity.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[0].ASSIGNING_AUTHORITY,
+                        IdentifierValue = entity.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[0].ID,
+                        IdentifierType = entity.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[0].IDENTIFIER_TYPE   
+                    },
                     PatientName =
                     {
                         FirstName = entity.PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME,
@@ -278,7 +283,7 @@ namespace IQCare.WebApi.Logic.DtoMapping
                         IdentifierValue = entity.Patientidentification.EXTERNAL_PATIENT_ID.ID,
                         IdentifierType = entity.Patientidentification.EXTERNAL_PATIENT_ID.IDENTIFIER_TYPE
                     },
-                    InternalPatientId = internalIdentifiers,
+                    //InternalPatientId = internalIdentifiers,
                     PatientName =
                     {
                         FirstName = entity.Patientidentification.PATIENT_NAME.FIRST_NAME,

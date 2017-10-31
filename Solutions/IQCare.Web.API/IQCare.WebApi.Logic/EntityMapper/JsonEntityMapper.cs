@@ -68,19 +68,19 @@ namespace IQCare.WebApi.Logic.EntityMapper
         public string DrugPrescriptionRaised(PrescriptionDto entity)
         {
 
-            var internalIdentifiers = new List<DTOIdentifier>();
+            //var internalIdentifiers = new List<DTOIdentifier>();
 
-            foreach (var identifier in entity.PatientIdentification.InternalPatientId)
-            {
-                var internalIdentity = new DTOIdentifier()
-                {
-                    IdentifierType = identifier.IdentifierType,
-                    IdentifierValue = identifier.IdentifierValue,
-                    AssigningAuthority = identifier.AssigningAuthority
+            //foreach (var identifier in entity.PatientIdentification.InternalPatientId)
+            //{
+            //    var internalIdentity = new DTOIdentifier()
+            //    {
+            //        IdentifierType = identifier.IdentifierType,
+            //        IdentifierValue = identifier.IdentifierValue,
+            //        AssigningAuthority = identifier.AssigningAuthority
 
-                };
-                internalIdentifiers.Add(internalIdentity);
-            }
+            //    };
+            //    internalIdentifiers.Add(internalIdentity);
+            //}
 
             var orderEncorder = new List<PharmacyEncodedOrder>();
 
@@ -116,7 +116,12 @@ namespace IQCare.WebApi.Logic.EntityMapper
                 PatientIdentification =
                 {
                     ExternalPatientId = {},
-                    InternalPatientId = internalIdentifiers,
+                    InternalPatientId =
+                    {
+                        AssigningAuthority = entity.PatientIdentification.InternalPatientId.AssigningAuthority,
+                        IdentifierValue = entity.PatientIdentification.InternalPatientId.IdentifierValue,
+                        IdentifierType = entity.PatientIdentification.InternalPatientId.IdentifierType
+                    },
                     PatientName =
                     {
                         FirstName = entity.PatientIdentification.PatientName.FirstName,
@@ -154,7 +159,7 @@ namespace IQCare.WebApi.Logic.EntityMapper
             throw new System.NotImplementedException();
         }
 
-        public string DrugOrderFulfilment(List<DispenseDto> dispenseDtos)
+        public string DrugOrderFulfilment()
         {
             throw new System.NotImplementedException();
         }
@@ -219,7 +224,7 @@ namespace IQCare.WebApi.Logic.EntityMapper
             };
         }
 
-        string IJsonEntityMapper.DrugOrderFulfilment(List<DispenseDto> dispenseDtos)
+        string IJsonEntityMapper.DrugOrderFulfilment()
         {
             throw new NotImplementedException();
         }

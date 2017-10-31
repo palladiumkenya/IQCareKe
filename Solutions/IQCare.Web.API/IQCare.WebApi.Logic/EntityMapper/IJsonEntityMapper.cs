@@ -23,7 +23,7 @@ namespace IQCare.WebApi.Logic.EntityMapper
 
         void DrugOrderCancel();
 
-        string DrugOrderFulfilment(List<DtoDrugDispensed> dispenseDtos);
+        string DrugOrderFulfilment();
 
         void AppointmentScheduling();
 
