@@ -148,9 +148,6 @@ namespace IQCare.WebApi.Logic.MessageHandler
                     HandleViralLoadLabOrder(messageEvent);
                     break;
 
-                case MessageType.ViralLoadResults:
-                    HandleNewViralLoadResults(messageEvent);
-                    break;
             }
 
             return 1;
@@ -362,11 +359,5 @@ namespace IQCare.WebApi.Logic.MessageHandler
 
         }
 
-        private void HandleNewViralLoadResults(MessageEventArgs messageEvent)
-        {
-
-        }
-
-        
     }
 }

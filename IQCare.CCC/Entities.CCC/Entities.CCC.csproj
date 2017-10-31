@@ -112,6 +112,7 @@
     <Compile Include="Enrollment\ServiceAreaIdentifiers.cs" />
     <Compile Include="Interoperability\DrugPrescriptionEntity.cs" />
     <Compile Include="Interoperability\PatientMessage.cs" />
+    <Compile Include="Interoperability\ViralLoadMessage.cs" />
     <Compile Include="Lookup\FacilityList.cs" />
     <Compile Include="Lookup\LookupFacility.cs" />
     <Compile Include="Lookup\LookupFacilityStatistics.cs" />

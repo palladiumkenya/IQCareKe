@@ -234,17 +234,31 @@ namespace IQCare.WebApi.Logic.DtoMapping
 
         public ViralLoadResultsDto ViralLoadResults(ViralLoadResultEntity entity)
         {
-            var internalIdentifiers=new List<INTERNALPATIENTID>() ;
-
-            foreach (var identifier in internalIdentifiers)
+            var internalIdentifiers = new List<DTOIdentifier>() ;
+            var viralLoadResults = new List<VLoadlResult>();
+            foreach (var identifier in entity.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID)
             {
-                var internalIdentity=new INTERNALPATIENTID()
+                var internalIdentity = new DTOIdentifier()
                 {
-                    ID = identifier.ID,
-                    IDENTIFIER_TYPE = identifier.IDENTIFIER_TYPE,
-                    ASSIGNING_AUTHORITY = identifier.ASSIGNING_AUTHORITY
+                    IdentifierValue = identifier.ID,
+                    IdentifierType = identifier.IDENTIFIER_TYPE,
+                    AssigningAuthority = identifier.ASSIGNING_AUTHORITY
                 };
                 internalIdentifiers.Add(internalIdentity);
+            }
+
+            foreach (var result in entity.VIRAL_LOAD_RESULT)
+            {
+                var vlLoadResult = new VLoadlResult()
+                {
+                    DateSampleCollected = result.DATE_SAMPLE_COLLECTED,
+                    DateSampleTested = result.DATE_SAMPLE_TESTED,
+                    Justification = result.JUSTIFICATION,
+                    LabTestedIn = result.LAB_TESTED_IN,
+                    Regimen = result.REGIMEN,
+                    SampleType = result.SAMPLE_TYPE
+                };
+                viralLoadResults.Add(vlLoadResult);
             }
 
             var vlResultsDto=new ViralLoadResultsDto()
@@ -261,25 +275,23 @@ namespace IQCare.WebApi.Logic.DtoMapping
                     ProcessingId = entity.MESSAGE_HEADER.PROCESSING_ID
 
                 },
-                InternalPatientIdentifier = 
+                PatientIdentification =
                 {
-                    //PATIENT_NAME =
-                    //{
-                    //    FIRST_NAME = entity.PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME,
-                    //    MIDDLE_NAME = entity.PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME,
-                    //    LAST_NAME = entity.PATIENT_IDENTIFICATION.PATIENT_NAME.LAST_NAME
-                    //},
-                    //INTERNAL_PATIENT_ID = internalIdentifiers
+                    InternalPatientId = internalIdentifiers,
+                    ExternalPatientId =
+                    {
+                        IdentifierValue = entity.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ID,
+                        AssigningAuthority = entity.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ASSIGNING_AUTHORITY,
+                        IdentifierType = entity.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.IDENTIFIER_TYPE
+                    },
+                    PatientName =
+                    {
+                        LastName = entity.PATIENT_IDENTIFICATION.PATIENT_NAME.LAST_NAME,
+                        MiddleName = entity.PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME,
+                        FirstName = entity.PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME
+                    }
                 },
-                ViralLoadResult = 
-                {
-                    DateSampleCollected = entity.VIRAL_LOAD_RESULT.DATE_SAMPLE_COLLECTED,
-                    DateSampleTested = entity.VIRAL_LOAD_RESULT.DATE_SAMPLE_TESTED,
-                    Justification = entity.VIRAL_LOAD_RESULT.JUSTIFICATION,
-                    LabTestedIn =     entity.VIRAL_LOAD_RESULT.LAB_TESTED_IN,
-                    Regimen = entity.VIRAL_LOAD_RESULT.REGIMEN,
-                    SampleType = entity.VIRAL_LOAD_RESULT.SAMPLE_TYPE
-                }
+                ViralLoadResult = viralLoadResults
             }; 
             return vlResultsDto;
         }

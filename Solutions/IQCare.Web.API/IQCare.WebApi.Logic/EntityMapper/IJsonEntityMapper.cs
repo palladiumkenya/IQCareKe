@@ -38,7 +38,6 @@ namespace IQCare.WebApi.Logic.EntityMapper
 
         void ViralLoadLabOrder();
 
-        void ViralLoadResults();
         object DrugPrescriptionRaised(PrescriptionDto drugOrderDto);
     }
 }

@@ -100,7 +100,9 @@ namespace DataAccess.CCC.Interface
         IPatientSupportSystemCriteriaRepository PatientSupportSystemCriteriaRepository { get;}
 
         // interoperability
+        IPatientMessageRepository PatientMessageRepository { get; }
         IDrugPrescriptionMessageRepository DrugPrescriptionMessageRepository { get; }
+        IViralLoadMessageRepository ViralLoadMessageRepository { get; }
 
     }
 }
