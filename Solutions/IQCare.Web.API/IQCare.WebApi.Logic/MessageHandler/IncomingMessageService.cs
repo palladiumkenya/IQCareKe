@@ -111,9 +111,24 @@ namespace IQCare.WebApi.Logic.MessageHandler
 
         private void HandleNewViralLoadResults(ApiInbox incomingMessage)
         {
+            try
+            {
+                ViralLoadResultEntity entity = new JavaScriptSerializer().Deserialize<ViralLoadResultEntity>(incomingMessage.Message);
+                ViralLoadResultsDto vlResultsDto = _dtoMapper.ViralLoadResults(entity);
+                var processViralLoadResults = new ProcessViralLoadResults();
+                processViralLoadResults.Save(vlResultsDto);
+            }
+            catch (Exception e)
+            {
+                incomingMessage.LogMessage = e.Message;
+                incomingMessage.Processed = false;
+                _apiInboxmanager.AddApiInbox(incomingMessage);
+                Console.WriteLine(e);
+                throw;
+            }
+            incomingMessage.DateProcessed = DateTime.Now;
+            incomingMessage.Processed = true;
             _apiInboxmanager.AddApiInbox(incomingMessage);
-
-
         }
     }
 }
