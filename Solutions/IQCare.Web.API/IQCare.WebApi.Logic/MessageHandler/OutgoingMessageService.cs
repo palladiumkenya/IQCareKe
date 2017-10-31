@@ -148,9 +148,6 @@ namespace IQCare.WebApi.Logic.MessageHandler
                     HandleViralLoadLabOrder(messageEvent);
                     break;
 
-                case MessageType.ViralLoadResults:
-                    HandleNewViralLoadResults(messageEvent);
-                    break;
             }
 
             return 1;
@@ -183,7 +180,7 @@ namespace IQCare.WebApi.Logic.MessageHandler
             {
                 using (HttpClient httpClient = new HttpClient())
                 {
-                    httpClient.BaseAddress = new Uri("http://52.178.24.227:9721");
+                    httpClient.BaseAddress = new Uri(endPoint);
                     httpClient.DefaultRequestHeaders.Accept.Clear();
                     httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -224,15 +221,15 @@ namespace IQCare.WebApi.Logic.MessageHandler
             var registrationEntity = _jsonEntityMapper.PatientRegistration(registrationDto, messageEvent);
             string registrationJson = new JavaScriptSerializer().Serialize(registrationEntity);
 
-            //save/send
-            //var apiOutbox = new ApiOutbox()
-            //{
-            //    DateRead = DateTime.Now,
-            //    Message = registrationJson
+            ////save/send
+            ////var apiOutbox = new ApiOutbox()
+            ////{
+            ////    DateRead = DateTime.Now,
+            ////    Message = registrationJson
 
-            //};
+            ////};
 
-            //_apiOutboxManager.AddApiOutbox(apiOutbox);
+            ////_apiOutboxManager.AddApiOutbox(apiOutbox);
 
             //Send
             SendData(registrationJson, "").ConfigureAwait(false);
@@ -403,11 +400,5 @@ namespace IQCare.WebApi.Logic.MessageHandler
 
         }
 
-        private void HandleNewViralLoadResults(MessageEventArgs messageEvent)
-        {
-
-        }
-
-        
     }
 }

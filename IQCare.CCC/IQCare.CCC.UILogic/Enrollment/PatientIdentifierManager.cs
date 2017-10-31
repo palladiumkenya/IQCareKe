@@ -11,7 +11,7 @@ namespace IQCare.CCC.UILogic.Enrollment
     {
         IPatientIdentifierManager _mgr = (IPatientIdentifierManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Enrollment.BPatientIdentifier, BusinessProcess.CCC");
         
-        public int addPatientIdentifier(int patientId, int patientEnrollmentId, int identifierId, string enrollmentNo)
+        public int addPatientIdentifier(int patientId, int patientEnrollmentId, int identifierId, string enrollmentNo, int facilityId)
         {
             try
             {
@@ -32,7 +32,8 @@ namespace IQCare.CCC.UILogic.Enrollment
                         PatientId = patientId,
                         EntityId = patientidentifier.PatientEnrollmentId,
                         MessageType = MessageType.NewClientRegistration,
-                        EventOccurred = "Patient Enrolled Identifier = "
+                        EventOccurred = "Patient Enrolled Identifier = ",
+                        FacilityId = facilityId
                     };
 
                     Publisher.RaiseEventAsync(this, args).ConfigureAwait(false);

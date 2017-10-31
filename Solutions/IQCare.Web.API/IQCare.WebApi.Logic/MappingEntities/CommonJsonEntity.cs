@@ -19,6 +19,9 @@ namespace IQCare.WebApi.Logic.MappingEntities
     public class VISIT
     {
         public string VISIT_DATE { get; set; }
+        public string PATIENT_TYPE { get; set; }
+        public string PATIENT_SOURCE { get; set; }
+        public string HIV_CARE_INITIATION_DATE { get; set; }
 
         public static VISIT GetVisit(Registration entity)
         {
@@ -93,6 +96,8 @@ namespace IQCare.WebApi.Logic.MappingEntities
         public string WARD { get; set; }
         public string SUB_COUNTY { get; set; }
         public string COUNTY { get; set; }
+        public string NEAREST_LANDMARK { get; set; }
+        public string GPS_LOCATION { get; set; }
 
         public static PHYSICALADDRESS GetPhysicalAddress(Registration entity)
         {
@@ -125,8 +130,9 @@ namespace IQCare.WebApi.Logic.MappingEntities
         public EXTERNALPATIENTID EXTERNAL_PATIENT_ID { get; set; }
         public List<INTERNALPATIENTID> INTERNAL_PATIENT_ID { get; set; }
         public PATIENTNAME PATIENT_NAME { get; set; }
-        public string MOTHER_MAIDEN_NAME { get; set; }
+        public PATIENTNAME MOTHER_NAME { get; set; }
         public string DATE_OF_BIRTH { get; set; }
+        public string DATE_OF_BIRTH_PRECISION { get; set; }
         public string SEX { get; set; }
         public PATIENTADDRESS PATIENT_ADDRESS { get; set; }
         public string PHONE_NUMBER { get; set; }
@@ -140,7 +146,7 @@ namespace IQCare.WebApi.Logic.MappingEntities
             patientidentification.EXTERNAL_PATIENT_ID = EXTERNALPATIENTID.GetExternalpatientid(entity);
             patientidentification.INTERNAL_PATIENT_ID = INTERNALPATIENTID.GetInternalPatientIds(entity);
             patientidentification.PATIENT_NAME = PATIENTNAME.GetPatientName(entity);
-            patientidentification.MOTHER_MAIDEN_NAME = !string.IsNullOrWhiteSpace(entity.MotherMaidenName) ? entity.MotherMaidenName : "";
+            //patientidentification.MOTHER_MAIDEN_NAME = !string.IsNullOrWhiteSpace(entity.MotherMaidenName) ? entity.MotherMaidenName : "";
             patientidentification.DATE_OF_BIRTH = !string.IsNullOrWhiteSpace(entity.Patient.DateOfBirth) ? entity.Patient.DateOfBirth : "";
             patientidentification.SEX = !string.IsNullOrWhiteSpace(entity.Patient.Sex) ? entity.Patient.Sex : "";
             patientidentification.PATIENT_ADDRESS = PATIENTADDRESS.PatientAddress(entity);

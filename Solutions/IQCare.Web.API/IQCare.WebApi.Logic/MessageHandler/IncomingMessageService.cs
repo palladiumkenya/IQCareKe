@@ -1,12 +1,14 @@
-﻿using System;
+﻿using AutoMapper;
+using Entity.WebApi;
+using Interface.WebApi;
+using IQCare.CCC.UILogic.Interoperability;
+using IQCare.DTO.PatientRegistration;
+using IQCare.WebApi.Logic.DtoMapping;
+using IQCare.WebApi.Logic.MappingEntities;
+using System;
 using System.Web.Script.Serialization;
 using IQCare.DTO;
-
-using IQCare.WebApi.Logic.MappingEntities;
-using Interface.WebApi;
-using IQCare.WebApi.Logic.DtoMapping;
-using Entity.WebApi;
-using IQCare.CCC.UILogic.Interoperability;
+using IQCare.DTO.CommonEntities;
 
 namespace IQCare.WebApi.Logic.MessageHandler
 {
@@ -60,10 +62,6 @@ namespace IQCare.WebApi.Logic.MessageHandler
                     HandleAppointments(apiInbox);
                     break;
 
-                case "ORM^O01":
-                    HandleViralLoadLabOrder(apiInbox);
-                    break;
-
                 case "ORU^R01":
                     HandleNewViralLoadResults(apiInbox);
                     break;
@@ -76,7 +74,23 @@ namespace IQCare.WebApi.Logic.MessageHandler
             {
                 //var dispatchedMessage = new JavaScriptSerializer().Deserialize<MessageEventArgs>(message);
                 PatientRegistrationEntity entity =new  JavaScriptSerializer().Deserialize<PatientRegistrationEntity>(incomingMessage.Message);
-                Registration register = _dtoMapper.PatientRegistrationMapping(entity);
+                //Registration register = _dtoMapper.PatientRegistrationMapping(entity);
+                Mapper.Initialize(cfg => {
+                    cfg.CreateMap<PatientRegistrationDTO, PatientRegistrationEntity>().ReverseMap();
+                    cfg.CreateMap<DTO.CommonEntities.MESSAGEHEADER, MappingEntities.MESSAGEHEADER>().ReverseMap();
+                    cfg.CreateMap<DTO.CommonEntities.PATIENTIDENTIFICATION, MappingEntities.PATIENTIDENTIFICATION>().ReverseMap();
+                    cfg.CreateMap<DTO.CommonEntities.NEXTOFKIN, MappingEntities.NEXTOFKIN>().ReverseMap();
+                    cfg.CreateMap<DTO.CommonEntities.VISIT, MappingEntities.VISIT>().ReverseMap();
+                    cfg.CreateMap<DTO.CommonEntities.EXTERNALPATIENTID, MappingEntities.EXTERNALPATIENTID>().ReverseMap();
+                    cfg.CreateMap<DTO.CommonEntities.INTERNALPATIENTID, MappingEntities.INTERNALPATIENTID>().ReverseMap();
+                    cfg.CreateMap<DTO.CommonEntities.PATIENTNAME, MappingEntities.PATIENTNAME>().ReverseMap();
+                    cfg.CreateMap<DTO.CommonEntities.PATIENTADDRESS, MappingEntities.PATIENTADDRESS>().ReverseMap();
+                    cfg.CreateMap<DTO.CommonEntities.PHYSICAL_ADDRESS, MappingEntities.PHYSICALADDRESS>().ReverseMap();
+                    cfg.CreateMap<DTO.CommonEntities.NOKNAME, MappingEntities.NOKNAME>().ReverseMap();
+                });
+
+                var register = Mapper.Map<PatientRegistrationDTO>(entity);
+
                 var processRegistration = new ProcessRegistration();
                 processRegistration.Save(register);
             }
@@ -113,16 +127,26 @@ namespace IQCare.WebApi.Logic.MessageHandler
             _apiInboxmanager.AddApiInbox(incomingMessage);
         }
 
-        private void HandleViralLoadLabOrder(ApiInbox incomingMessage)
-        {
-            _apiInboxmanager.AddApiInbox(incomingMessage);
-        }
-
         private void HandleNewViralLoadResults(ApiInbox incomingMessage)
         {
+            try
+            {
+                ViralLoadResultEntity entity = new JavaScriptSerializer().Deserialize<ViralLoadResultEntity>(incomingMessage.Message);
+                ViralLoadResultsDto vlResultsDto = _dtoMapper.ViralLoadResults(entity);
+                var processViralLoadResults = new ProcessViralLoadResults();
+                processViralLoadResults.Save(vlResultsDto);
+            }
+            catch (Exception e)
+            {
+                incomingMessage.LogMessage = e.Message;
+                incomingMessage.Processed = false;
+                _apiInboxmanager.AddApiInbox(incomingMessage);
+                Console.WriteLine(e);
+                throw;
+            }
+            incomingMessage.DateProcessed = DateTime.Now;
+            incomingMessage.Processed = true;
             _apiInboxmanager.AddApiInbox(incomingMessage);
-
-
         }
     }
 }

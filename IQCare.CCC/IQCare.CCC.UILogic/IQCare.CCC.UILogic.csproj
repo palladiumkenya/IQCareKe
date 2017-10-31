@@ -119,6 +119,8 @@
     <Compile Include="Interoperability\PatientRegistrationValidation.cs" />
     <Compile Include="Interoperability\ProcessPatient.cs" />
     <Compile Include="Interoperability\ProcessRegistration.cs" />
+    <Compile Include="Interoperability\ProcessViralLoadResults.cs" />
+    <Compile Include="Interoperability\ViralLoadMessageManager.cs" />
     <Compile Include="LookupLogic.cs" />
     <Compile Include="MstPatientLogic.cs" />
     <Compile Include="PatientAdherenceAssessmentManager.cs" />

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace IQCare.DTO
 {
@@ -7,24 +8,24 @@ namespace IQCare.DTO
         public ViralLoadResultsDto()
         {
             MesssageHeader = new MessageHeader();
-            InternalPatientIdentifier = new DTOIdentifier();
-            ViralLoadResult = new VLoadlResult();
+            PatientIdentification = new DtoPatientIdentification();
+            ViralLoadResult = new List<VLoadlResult>();
         }
 
         public MessageHeader MesssageHeader { get; set; }
-          public DTOIdentifier InternalPatientIdentifier { get; set; }
-          public VLoadlResult ViralLoadResult { get; set; }
+        public DtoPatientIdentification PatientIdentification { get; set; }
+        public List<VLoadlResult> ViralLoadResult { get; set; }
     }
 
     public class VLoadlResult
     {
-       public DateTime DateSampleCollected { get; set; }
-       public DateTime DateSampleTested { get; set; }
-       public string VlResult { get; set; }
-       public string SampleType { get; set; }
-       public string Justification { get; set; }
-       public string Regimen { get; set; }
-       public string LabTestedIn { get; set; }
+        public DateTime DateSampleCollected { get; set; }
+        public DateTime DateSampleTested { get; set; }
+        public string VlResult { get; set; }
+        public string SampleType { get; set; }
+        public string Justification { get; set; }
+        public string Regimen { get; set; }
+        public string LabTestedIn { get; set; }
     }
 
     public class MessageHeader
