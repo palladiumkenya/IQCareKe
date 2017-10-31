@@ -13,6 +13,7 @@ using IQCare.CCC.UILogic.Visit;
 using Interface.Security;
 using IQCare.DTO.PatientRegistration;
 using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 
 namespace IQCare.CCC.UILogic.Interoperability
 {
@@ -207,66 +208,74 @@ namespace IQCare.CCC.UILogic.Interoperability
         public string Update(PatientRegistrationDTO registration)
         {
             ExMessage message = new ExMessage();
-            //try
-            //{
-            //    PatientRegistrationValidation validation = new PatientRegistrationValidation();
-            //    ProcessPatient processPatient = new ProcessPatient();
-            //    PatientLookupManager patientLookup = new PatientLookupManager();
-            //    var patientEntryPointManager = new PatientEntryPointManager();
+            try
+            {
+                PatientRegistrationValidation validation = new PatientRegistrationValidation();
+                ProcessPatient processPatient = new ProcessPatient();
+                PatientLookupManager patientLookup = new PatientLookupManager();
+                PatientEntryPointManager patientEntryPointManager = new PatientEntryPointManager();
 
-            //    LookupLogic lookupLogic = new LookupLogic();
+                LookupLogic lookupLogic = new LookupLogic();
 
-            //    string cccNumber = null;
-            //    PatientLookup patient = new PatientLookup();
-            //    int entryPointId = 0;
-            //    string entryPointAuditData = null;
+                string cccNumber = null;
+                PatientLookup patient = new PatientLookup();
+                int entryPointId = 0;
+                string entryPointAuditData = null;
 
-            //    msg = validation.ValidateInterOperabilityRegistration(registration);
+                var results = new List<ValidationResult>();
+                var vc = new ValidationContext(registration, null, null);
+                var isValid = Validator.TryValidateObject(registration, vc, results);
 
-            //    var lookupEntryPoints = lookupLogic.GetItemIdByGroupAndDisplayName("Entrypoint", registration.EntryPoint);
-            //    if (lookupEntryPoints.Count > 0)
-            //    {
-            //        entryPointId = lookupEntryPoints[0].ItemId;
-            //    }
-                
-            //    DateTime DOB = !string.IsNullOrWhiteSpace(registration.Patient.DateOfBirth) ? DateTime.Parse(registration.Patient.DateOfBirth) : DateTime.MinValue;
-            //    DateTime enrollmentDate = !string.IsNullOrWhiteSpace(registration.DateOfEnrollment) ? DateTime.Parse(registration.DateOfEnrollment) : DateTime.MinValue;
-            //    DataSet ds = LoginManager.GetFacilitySettings();
-            //    int facilityId = Convert.ToInt32(ds.Tables[0].Rows[0]["PosID"]);
+                // get all the errors
+                var errors = Array.ConvertAll(results.ToArray(), o => o.ErrorMessage);
 
-            //    foreach (var item in registration.InternalPatientIdentifiers)
-            //    {
-            //        if (item.IdentifierType == "CCC_NUMBER" && item.AssigningAuthority== "CCC")
-            //        {
-            //            cccNumber = item.IdentifierValue;
-            //        }
-            //    }
 
-            //    List<PatientLookup> patientLookups = new List<PatientLookup>();
-            //    patientLookups.Add(patient);
-            //    var entity = patientLookups.ConvertAll(x => new PatientEntity { Id = x.Id, Active = x.Active, DateOfBirth = x.DateOfBirth, ptn_pk = x.ptn_pk, PatientType = x.PatientType, PatientIndex = x.PatientIndex, NationalId = x.NationalId, FacilityId = x.FacilityId });
-            //    var patientAuditData = AuditDataUtility.AuditDataUtility.Serializer(entity);
-            //    patient = patientLookup.GetPatientByCccNumber(cccNumber);
-            //    List<PatientEntryPoint> entryPoints = patientEntryPointManager.GetPatientEntryPoints(patient.Id, 1);
-            //    if (entryPoints.Count > 0)
-            //    {
-            //        entryPointAuditData = AuditDataUtility.AuditDataUtility.Serializer(entryPoints);
-            //    }
-            //    else
-            //    {
-            //        entryPoints.Add(new PatientEntryPoint());
-            //    }
+                //msg = validation.ValidateInterOperabilityRegistration(registration);
 
-            //    msg = processPatient.Update(patient.Id, patient.ptn_pk, DOB, registration.Patient.NationalId, facilityId, patientAuditData, entryPoints[0], entryPointId, entryPointAuditData, enrollmentDate, registration.InternalPatientIdentifiers);
+                //var lookupEntryPoints = lookupLogic.GetItemIdByGroupAndDisplayName("Entrypoint", registration.EntryPoint);
+                //if (lookupEntryPoints.Count > 0)
+                //{
+                //    entryPointId = lookupEntryPoints[0].ItemId;
+                //}
 
-            //    message.Msg = msg;
-            //    message.Code = 0;
-            //}
-            //catch (Exception e)
-            //{
-            //    message.Msg = e.Message;
-            //    message.Code = 1;
-            //}
+                //DateTime DOB = !string.IsNullOrWhiteSpace(registration.Patient.DateOfBirth) ? DateTime.Parse(registration.Patient.DateOfBirth) : DateTime.MinValue;
+                //DateTime enrollmentDate = !string.IsNullOrWhiteSpace(registration.DateOfEnrollment) ? DateTime.Parse(registration.DateOfEnrollment) : DateTime.MinValue;
+                //DataSet ds = LoginManager.GetFacilitySettings();
+                //int facilityId = Convert.ToInt32(ds.Tables[0].Rows[0]["PosID"]);
+
+                //foreach (var item in registration.InternalPatientIdentifiers)
+                //{
+                //    if (item.IdentifierType == "CCC_NUMBER" && item.AssigningAuthority == "CCC")
+                //    {
+                //        cccNumber = item.IdentifierValue;
+                //    }
+                //}
+
+                //List<PatientLookup> patientLookups = new List<PatientLookup>();
+                //patientLookups.Add(patient);
+                //var entity = patientLookups.ConvertAll(x => new PatientEntity { Id = x.Id, Active = x.Active, DateOfBirth = x.DateOfBirth, ptn_pk = x.ptn_pk, PatientType = x.PatientType, PatientIndex = x.PatientIndex, NationalId = x.NationalId, FacilityId = x.FacilityId });
+                //var patientAuditData = AuditDataUtility.AuditDataUtility.Serializer(entity);
+                //patient = patientLookup.GetPatientByCccNumber(cccNumber);
+                //List<PatientEntryPoint> entryPoints = patientEntryPointManager.GetPatientEntryPoints(patient.Id, 1);
+                //if (entryPoints.Count > 0)
+                //{
+                //    entryPointAuditData = AuditDataUtility.AuditDataUtility.Serializer(entryPoints);
+                //}
+                //else
+                //{
+                //    entryPoints.Add(new PatientEntryPoint());
+                //}
+
+                //msg = processPatient.Update(patient.Id, patient.ptn_pk, DOB, registration.Patient.NationalId, facilityId, patientAuditData, entryPoints[0], entryPointId, entryPointAuditData, enrollmentDate, registration.InternalPatientIdentifiers);
+
+                //message.Msg = msg;
+                //message.Code = 0;
+            }
+            catch (Exception e)
+            {
+                message.Msg = e.Message;
+                message.Code = 1;
+            }
 
             return JsonConvert.SerializeObject(message);
         }
