@@ -64,7 +64,7 @@ namespace IQCare.Web.CCC.UC
                 PatientEncounterLogic pel = new PatientEncounterLogic();
                 pel.getPharmacyTreatmentProgram(ddlTreatmentProgram);
 
-                LoadExistingData();
+               // LoadExistingData();
             }
         }
 
