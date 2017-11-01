@@ -28,9 +28,27 @@ namespace IQCare.Web.CCC.UC
             var patientVitals = new PatientVitalsManager();
             var pregnancyStatus=new PatientPregnancyManager();
 
-            PatientVital patientTriage = patientVitals.GetByPatientId(PatientId);
+            double bmi = 0.0;
+            string bmiZ;
+            decimal diastolic = 0;
+            decimal systolic = 0;
+            string bmiAnalysis = "";
+            string bpAnalysis = "";
+            int bpDiastolic = 0;
+            int bpSystloic = 0;
+
+        PatientVital patientTriage = patientVitals.GetByPatientId(PatientId);
             if (patientTriage != null)
             {
+                ////////////////////////////////////////////////
+                bmi = Convert.ToDouble(patientTriage.BMI);
+                bmiZ = Convert.ToString(patientTriage.BMIZ);
+                diastolic = Convert.ToDecimal(patientTriage.Bpdiastolic);
+                systolic = Convert.ToDecimal(patientTriage.BpSystolic);
+                bpDiastolic = Convert.ToInt32(diastolic);
+                bpSystloic = Convert.ToInt32(systolic);
+                int age = Convert.ToInt32(HttpContext.Current.Session["Age"]);
+                /////////////////////////////////////////////////////
 
                 lblVitalsDate.Text = "<span class='label label-primary'>Date Taken :" + Convert.ToDateTime(patientTriage.VisitDate).ToString("dd-MMM-yyyy")+"</span>";
                 vitalHeight.Text = Convert.ToString(patientTriage.Height);
@@ -42,6 +60,134 @@ namespace IQCare.Web.CCC.UC
                 vitalTemperature.Text = patientTriage.Temperature.ToString();
                 vitalRespiratoryRate.Text = patientTriage.RespiratoryRate.ToString();
                 lblOxygenSaturation.Text = patientTriage.SpO2.ToString();
+
+                ///////////////////
+
+                if (patientTriage.Temperature > 0)
+                {
+
+                    if (patientTriage.Temperature > 40)
+                    {
+                        vitalTemperature.Text = "<span class='label label-danger'>" +
+                                              Convert.ToString(patientTriage.Temperature) +
+                                              "°C | Possible Hyperpyrexia‎";
+
+                    }
+                    else if (Convert.ToDouble(patientTriage.Temperature) >= 36.0 &&
+                             Convert.ToDouble(patientTriage.Temperature) <= 38)
+                    {
+                        vitalTemperature.Text = "<span class='label label-success'>" +
+                                              Convert.ToString(patientTriage.Temperature) + "°C | Normal‎";
+
+                    }
+                    else if (Convert.ToDouble(patientTriage.Temperature) > 38 &&
+                             Convert.ToDouble(patientTriage.Temperature) <= 40.0)
+                    {
+                        vitalTemperature.Text = "<span class='label label-danger'>" +
+                                              Convert.ToString(patientTriage.Temperature) +
+                                              "°C | Possible Hyperpyrexia‎";
+                    }
+                    else if (patientTriage.Temperature < 32)
+                    {
+                        vitalTemperature.Text = "<span class='label label-danger'>" +
+                                              Convert.ToString(patientTriage.Temperature) + "°C | Medical Emergency‎";
+
+                    }
+                    else if (patientTriage.Temperature >= 32 && patientTriage.Temperature < 36)
+                    {
+                        vitalTemperature.Text = "<span class='label label-danger'>" +
+                                              Convert.ToString(patientTriage.Temperature) + "°C | Hypothermia ‎";
+
+                    }
+                }
+                else
+                {
+                    vitalTemperature.Text = "<span class='label label-danger'>" +
+                                          Convert.ToString(patientTriage.Temperature) + "NO Temperature Readings ‎";
+                }
+
+
+                if (diastolic < 1 & systolic < 1)
+                {
+                    vitalBloodPressure.Text = "<span class='label label-danger'> NOT TAKEN </span>";
+
+                }
+                else
+                {
+
+
+                    if (diastolic <= 80 & systolic <= 120)
+                    {
+                        bpAnalysis = "<span class='label label-success'>" + Convert.ToString(systolic) + "/" + Convert.ToString(diastolic) + "mm[Hg] |Normal </span>";
+                    }
+                    else if (diastolic > 85 & systolic > 140)
+                    {
+                        bpAnalysis = "<span class='label label-success'>" + Convert.ToString(systolic) + "/" + Convert.ToString(diastolic) + "mm[Hg]  | Normal </span>";
+                    }
+                    else if (diastolic > 90 & systolic > 140)
+                    {
+                        bpAnalysis = "<span class='label label-warning'> " + Convert.ToString(systolic) + "/" + Convert.ToString(diastolic) + "mm[Hg]  | Border Line</span>";
+                    }
+                    else if (diastolic > 90 & systolic > 160)
+                    {
+                        bpAnalysis = "<span class='label label-danger'> " + Convert.ToString(systolic) + "/" + Convert.ToString(diastolic) + " |mm[Hg]  Suspect Hypertension</span>";
+                    }
+                    else
+                    {
+                        bpAnalysis = "<span class='label label-warning'> " + Convert.ToString(systolic) + "/" + Convert.ToString(diastolic) + " |mm[Hg]  </span>";
+                    }
+
+                    vitalBloodPressure.Text = bpAnalysis;
+                }
+
+
+                if (age > 15)
+                {
+                    if (bmi < 18.5)
+                    {
+                        bmiAnalysis = "<span class='label label-danger'>" + Convert.ToString(patientTriage.BMI) +
+                                      "Kg/M2" +
+                                      " | Under weight</span>";
+                    }
+                    else if (bmi >= 18.5 & bmi < 25.0)
+                    {
+                        bmiAnalysis = "<span class='label label-success'> " + Convert.ToString(patientTriage.BMI) +
+                                      "Kg/M2" +
+                                      " | Normal weight</span>";
+                    }
+                    else if (bmi >= 25 & bmi < 30.0)
+                    {
+                        bmiAnalysis = "<span class='label label-warning'> " + Convert.ToString(patientTriage.BMI) +
+                                      "Kg/M2" +
+                                      " | Over weight<span>";
+                    }
+                    else
+                    {
+                        bmiAnalysis = "<span class='label label-danger'> " + Convert.ToString(patientTriage.BMI) +
+                                      "Kg/M2" +
+                                      " | Obese<span>";
+                    }
+                }
+                else
+                {
+                    bmiAnalysis = bmiZ;
+                }
+
+                vitalsBMI.Text = bmiAnalysis;
+
+                //if ((int)patientTriage.HeartRate == 0)
+                //    lblPulseRate.Text = notTaken;
+                //else
+                //    lblPulseRate.Text = "<span class='label label-info'>" + patientTriage.HeartRate + " beats/min</span>";
+                if ((int)patientTriage.SpO2 == 0)
+                    lblOxygenSaturation.Text = "<span class='label label-danger'>Not Taken!</span>";
+                else
+                    lblOxygenSaturation.Text = "<span class='label label-info'>" + patientTriage.SpO2 + " %</span>";
+                if ((int)patientTriage.RespiratoryRate == 0)
+                    vitalRespiratoryRate.Text = "<span class='label label-danger'>Not Taken!</span>";
+                else
+                    vitalRespiratoryRate.Text = "<span class='label label-info'>" + patientTriage.RespiratoryRate + " breaths/min</span>";
+                ///////////////////
             }
             else
             {
