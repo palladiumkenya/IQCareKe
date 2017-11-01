@@ -579,7 +579,14 @@
                 });
 
       
-              
+           function SelectDrug(){
+                   var result = this.value.split("~");
+                   if(pmscm ==="1"){ getBatches(result[0]);}
+                   this.value = result[2];
+                   $("#<%=drugID.ClientID%>").val(result[0]);
+                   $("#<%=drugAbbr.ClientID%>").val(result[1]);
+           }
+    
            function drugList(pmscm,tps) {
                
                var drugInput = document.getElementById('<%= txtDrugs.ClientID %>');
@@ -587,13 +594,7 @@
                    minChars: 2
                });
                
-               document.getElementById('<%= txtDrugs.ClientID %>').addEventListener('awesomplete-selectcomplete',function(){
-                   var result = this.value.split("~");
-                   if(pmscm ==="1"){ getBatches(result[0]);}
-                   this.value = result[2];
-                   $("#<%=drugID.ClientID%>").val(result[0]);
-                   $("#<%=drugAbbr.ClientID%>").val(result[1]);
-               });
+               document.getElementById('<%= txtDrugs.ClientID %>').addEventListener('awesomplete-selectcomplete', SelectDrug);
                
                $.ajax({
                    url: '../WebService/PatientEncounterService.asmx/GetDrugList',
