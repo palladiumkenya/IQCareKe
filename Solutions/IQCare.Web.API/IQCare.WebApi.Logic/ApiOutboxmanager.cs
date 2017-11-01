@@ -13,13 +13,13 @@ namespace IQCare.WebApi.Logic
         {
             ApiOutbox outbox=new ApiOutbox()
             {
-                DateRead = apiOutbox.DateRead,
                 DateSent = apiOutbox.DateSent,
                 RecepientId = apiOutbox.RecepientId,
                 AttemptCount = 0,
                 Message = apiOutbox.Message
             };
-         return  _apiOutboxmanager.AddApiOutbox(outbox);
+
+            return  _apiOutboxmanager.AddApiOutbox(outbox);
         }
 
         public int AddApiProcessed(ApiOutbox apiOutbox)

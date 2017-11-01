@@ -11,7 +11,7 @@ namespace IQCare.CCC.UILogic.Enrollment
     {
         IPatientIdentifierManager _mgr = (IPatientIdentifierManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Enrollment.BPatientIdentifier, BusinessProcess.CCC");
         
-        public int addPatientIdentifier(int patientId, int patientEnrollmentId, int identifierId, string enrollmentNo, int facilityId)
+        public int addPatientIdentifier(int patientId, int patientEnrollmentId, int identifierId, string enrollmentNo, int facilityId, bool sendEvent = true)
         {
             try
             {
@@ -25,7 +25,7 @@ namespace IQCare.CCC.UILogic.Enrollment
 
                 int returnValue = _mgr.AddPatientIdentifier(patientidentifier);
 
-                if (returnValue > 1)
+                if (returnValue > 1 && sendEvent)
                 {
                     MessageEventArgs args = new MessageEventArgs()
                     {
@@ -47,14 +47,14 @@ namespace IQCare.CCC.UILogic.Enrollment
             }
         }
 
-        public int UpdatePatientIdentifier(PatientEntityIdentifier patientIdentifier, int facilityId)
+        public int UpdatePatientIdentifier(PatientEntityIdentifier patientIdentifier, int facilityId, bool sendEvent = true)
         {
             try
             {
                 
 
                 int x=  _mgr.UpdatePatientIdentifier(patientIdentifier);
-                if (x > 0)
+                if (x > 0 && sendEvent)
                 {
                     MessageEventArgs args = new MessageEventArgs()
                     {

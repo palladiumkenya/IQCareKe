@@ -23,50 +23,6 @@ namespace IQCare.WebApi.Logic.MessageHandler
         private readonly IJsonEntityMapper _jsonEntityMapper;
         private readonly IApiOutboxManager _apiOutboxManager = (IApiOutboxManager)ObjectFactory.CreateInstance("BusinessProcess.WebApi.BApiOutBox, BusinessProcess.WebApi");
 
-
-        //public event InteropEventHandler OnDataExchage;
-
-
-        ////public event InteropEventHandler ILHandler;
-
-        ////protected virtual void OnInterop(IlMessageEventArgs e)
-        ////{
-        ////    Handle(e);
-
-
-        ////}
-        //IDataExchange d;//= dataExchange;
-        ////public OutgoingMessageService(IDataExchange dataExchange)
-        ////{
-        ////    IDataExchange d = dataExchange;
-        ////    d.OnDataExchage += D_OnDataExchage; 
-        ////}
-
-        //private void D_OnDataExchage(MessageEventArgs e)
-        //{
-        //    Handle(e);
-        //}
-        //public void Subscribe(Publisher p)
-        //{
-        //    p.DataExchangeEvent += OnDataExchangeEvent;
-        //}
-
-        //private void OnDataExchangeEvent(object sender, MessageEventArgs args)
-        //{
-        //    Handle(args);
-        //}
-
-
-        //public void OnNotification(IDataExchange dataExchange)
-        //{
-        //    d = dataExchange;
-        //    d.OnDataExchage += D_OnDataExchage;
-        //}
-
-        //public void NotifyListeners()
-        //{
-        //    throw new System.NotImplementedException();
-        //}
         public OutgoingMessageService()
         {
             _apiOutboxManager = new ApiOutboxmanager();
@@ -159,20 +115,19 @@ namespace IQCare.WebApi.Logic.MessageHandler
             var registrationDto = processRegistration.Get(messageEvent.PatientId);
             var registrationEntity = _jsonEntityMapper.PatientRegistration(registrationDto, messageEvent);
             string registrationJson = new JavaScriptSerializer().Serialize(registrationEntity);
-            
-            //save/send
-            //var apiOutbox = new ApiOutbox()
-            //{
-            //    DateRead = DateTime.Now,
-            //    Message = registrationJson
 
-            //};
+            //save
+            var apiOutbox = new ApiOutbox()
+            {
+                DateSent = DateTime.Now,
+                Message = registrationJson,
+                RecepientId = 1
+            };
 
-            //_apiOutboxManager.AddApiOutbox(apiOutbox);
+            _apiOutboxManager.AddApiOutbox(apiOutbox);
 
             //Send
             SendData(registrationJson, "").ConfigureAwait(false);
-
         }
         public async Task SendData(string jsonString, string endPoint)
         {
@@ -180,7 +135,7 @@ namespace IQCare.WebApi.Logic.MessageHandler
             {
                 using (HttpClient httpClient = new HttpClient())
                 {
-                    httpClient.BaseAddress = new Uri(endPoint);
+                    httpClient.BaseAddress = new Uri("http://52.178.24.227:9721");
                     httpClient.DefaultRequestHeaders.Accept.Clear();
                     httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -221,16 +176,14 @@ namespace IQCare.WebApi.Logic.MessageHandler
             var registrationEntity = _jsonEntityMapper.PatientRegistration(registrationDto, messageEvent);
             string registrationJson = new JavaScriptSerializer().Serialize(registrationEntity);
 
-            ////save/send
-            ////var apiOutbox = new ApiOutbox()
-            ////{
-            ////    DateRead = DateTime.Now,
-            ////    Message = registrationJson
+            //save
+            var apiOutbox = new ApiOutbox()
+            {
+                DateSent = DateTime.Now,
+                Message = registrationJson
+            };
 
-            ////};
-
-            ////_apiOutboxManager.AddApiOutbox(apiOutbox);
-
+            _apiOutboxManager.AddApiOutbox(apiOutbox);
             //Send
             SendData(registrationJson, "").ConfigureAwait(false);
         }
@@ -341,8 +294,9 @@ namespace IQCare.WebApi.Logic.MessageHandler
                 string prescriptionJson = new JavaScriptSerializer().Serialize(prescriptionEntityPayLoad);
                    var apiOutbox = new ApiOutbox()
                    {
-                       DateRead = DateTime.Now,
+                       DateSent = DateTime.Now,
                        Message = prescriptionJson,
+                       RecepientId = 1
                    };
 
                 _apiOutboxManager.AddApiOutbox(apiOutbox);
