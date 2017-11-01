@@ -407,7 +407,7 @@ namespace IQCare.WebApi.Logic.DtoMapping
                 },
                 PatientIdentification =
                 {
-                    InternalPatientId = internalIdentifiers,
+                   // InternalPatientId = internalIdentifiers,
                     ExternalPatientId =
                     {
                         IdentifierValue = entity.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ID,

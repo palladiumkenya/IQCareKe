@@ -1,10 +1,11 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entity.WebApi
 {
     [Serializable]
-    //[Table("APIOutbox")]
+    [Table("API_Outbox")]
     public class ApiOutbox
     {
         [Key]
