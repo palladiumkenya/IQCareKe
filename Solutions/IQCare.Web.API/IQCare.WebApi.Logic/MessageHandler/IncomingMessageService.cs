@@ -162,7 +162,8 @@ namespace IQCare.WebApi.Logic.MessageHandler
                 ViralLoadResultEntity entity = new JavaScriptSerializer().Deserialize<ViralLoadResultEntity>(incomingMessage.Message);
                 ViralLoadResultsDto vlResultsDto = _dtoMapper.ViralLoadResults(entity);
                 var processViralLoadResults = new ProcessViralLoadResults();
-                processViralLoadResults.Save(vlResultsDto);
+                var msg = processViralLoadResults.Save(vlResultsDto);
+                incomingMessage.LogMessage = msg;
             }
             catch (Exception e)
             {

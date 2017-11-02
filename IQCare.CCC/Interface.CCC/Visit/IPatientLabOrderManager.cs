@@ -20,7 +20,9 @@ namespace Interface.CCC.Visit
         List<PatientLabTracker> GetPatientVL(int patientId);
         List<PatientLabTracker> GetPatientVlById(int Id);
         PatientLabTracker GetPatientCurrentviralLoadInfo(int patientId);
-      
+        List<LabOrderEntity> GetPatientLabOrdersByDate(int patientId, DateTime visitDate);
+        List<LabDetailsEntity> GetPatientLabDetailsByDate(int labOrderId, DateTime visitDate);
+
 
     }
 }

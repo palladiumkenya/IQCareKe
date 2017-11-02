@@ -82,19 +82,17 @@ namespace IQCare.WebApi.Logic.EntityMapper
         public string DrugPrescriptionRaised(PrescriptionDto entity)
         {
 
-            //var internalIdentifiers = new List<DTOIdentifier>();
+            var internalIdentifiers = new List<DTOIdentifier>();
 
-            //foreach (var identifier in entity.PatientIdentification.InternalPatientId)
-            //{
-            //    var internalIdentity = new DTOIdentifier()
-            //    {
-            //        IdentifierType = identifier.IdentifierType,
-            //        IdentifierValue = identifier.IdentifierValue,
-            //        AssigningAuthority = identifier.AssigningAuthority
+                var internalIdentity = new DTOIdentifier()
+                {
+                    IdentifierType = entity.PatientIdentification.InternalPatientId.IdentifierType,
+                    IdentifierValue = entity.PatientIdentification.InternalPatientId.IdentifierValue,
+                    AssigningAuthority = entity.PatientIdentification.InternalPatientId.AssigningAuthority
 
-            //    };
-            //    internalIdentifiers.Add(internalIdentity);
-            //}
+                };
+                internalIdentifiers.Add(internalIdentity);
+
 
             var orderEncorder = new List<PharmacyEncodedOrder>();
 
