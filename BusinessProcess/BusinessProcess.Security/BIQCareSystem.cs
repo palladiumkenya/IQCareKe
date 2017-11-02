@@ -132,7 +132,7 @@ namespace BusinessProcess.Security
                 ClsUtility.AddParameters("@FileName", SqlDbType.VarChar, Path);
                 ClsUtility.AddParameters("@LocationId", SqlDbType.Int, Location.ToString());
                 ClsUtility.AddParameters("@Deidentified", SqlDbType.Int, Deidentified.ToString());
-                ClsUtility.AddParameters("@dbKey", SqlDbType.VarChar, ApplicationAccess.DBSecurity.ToString());
+               // ClsUtility.AddParameters("@dbKey", SqlDbType.VarChar, ApplicationAccess.DBSecurity.ToString());
                 return (Int32)DataManager.ReturnObject(ClsUtility.theParams, "pr_SystemAdmin_Backup_Constella", ClsUtility.ObjectEnum.ExecuteNonQuery);
             }
         }
