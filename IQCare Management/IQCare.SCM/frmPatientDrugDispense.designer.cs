@@ -734,7 +734,7 @@
             // valuePrescriptionDate
             // 
             this.valuePrescriptionDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.valuePrescriptionDate.Location = new System.Drawing.Point(958, 17);
+            this.valuePrescriptionDate.Location = new System.Drawing.Point(1031, 17);
             this.valuePrescriptionDate.Name = "valuePrescriptionDate";
             this.valuePrescriptionDate.Size = new System.Drawing.Size(147, 13);
             this.valuePrescriptionDate.TabIndex = 72;
@@ -745,7 +745,7 @@
             // labelPrescriptionDate
             // 
             this.labelPrescriptionDate.AutoSize = true;
-            this.labelPrescriptionDate.Location = new System.Drawing.Point(845, 17);
+            this.labelPrescriptionDate.Location = new System.Drawing.Point(918, 17);
             this.labelPrescriptionDate.Name = "labelPrescriptionDate";
             this.labelPrescriptionDate.Size = new System.Drawing.Size(91, 13);
             this.labelPrescriptionDate.TabIndex = 71;
@@ -757,7 +757,7 @@
             // lblIQNumber
             // 
             this.lblIQNumber.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lblIQNumber.Location = new System.Drawing.Point(450, 12);
+            this.lblIQNumber.Location = new System.Drawing.Point(523, 12);
             this.lblIQNumber.Name = "lblIQNumber";
             this.lblIQNumber.ReadOnly = true;
             this.lblIQNumber.Size = new System.Drawing.Size(123, 13);
@@ -769,7 +769,7 @@
             // 
             this.label46.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label46.AutoSize = true;
-            this.label46.Location = new System.Drawing.Point(582, 12);
+            this.label46.Location = new System.Drawing.Point(655, 12);
             this.label46.Name = "label46";
             this.label46.Size = new System.Drawing.Size(86, 13);
             this.label46.TabIndex = 68;
@@ -782,7 +782,7 @@
             this.dtDispensedDate.CustomFormat = "dd-MMM-yyyy";
             this.dtDispensedDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtDispensedDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtDispensedDate.Location = new System.Drawing.Point(677, 9);
+            this.dtDispensedDate.Location = new System.Drawing.Point(750, 9);
             this.dtDispensedDate.Name = "dtDispensedDate";
             this.dtDispensedDate.Size = new System.Drawing.Size(151, 24);
             this.dtDispensedDate.TabIndex = 1;
@@ -793,7 +793,7 @@
             // 
             this.label31.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(360, 12);
+            this.label31.Location = new System.Drawing.Point(433, 12);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(83, 13);
             this.label31.TabIndex = 59;
@@ -1576,6 +1576,7 @@
             this.grdDrugDispense.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdDrugDispense_CellContentClick);
             this.grdDrugDispense.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdDrugDispense_CellDoubleClick);
             this.grdDrugDispense.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdDrugDispense_CellValueChanged);
+            this.grdDrugDispense.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.grdDrugDispense_DataBindingComplete);
             // 
             // FindPatientTab
             // 
