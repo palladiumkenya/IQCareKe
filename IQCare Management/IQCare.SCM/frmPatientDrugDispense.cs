@@ -1676,6 +1676,7 @@ namespace IQCare.SCM
                                 theRegimen = theRegimen + "/" + theDR["GenericAbb"].ToString();
                         }
                     }
+                    //bug 1299
                     if (cmbRegimenLine.SelectedValue.ToString() == "0" && hasART)
                     {
                         MessageBox.Show("Please select the Regimen Line");
