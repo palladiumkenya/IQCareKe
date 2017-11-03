@@ -23,6 +23,7 @@ namespace IQCare.DTO
         public DateTime DateSampleTested { get; set; }
         public string VlResult { get; set; }
         public string SampleType { get; set; }
+        public string SampleRejection { get; set; }
         public string Justification { get; set; }
         public string Regimen { get; set; }
         public string LabTestedIn { get; set; }

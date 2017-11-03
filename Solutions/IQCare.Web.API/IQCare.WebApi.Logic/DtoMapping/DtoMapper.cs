@@ -368,7 +368,7 @@ namespace IQCare.WebApi.Logic.DtoMapping
             var viralLoadResults = new List<VLoadlResult>();
             foreach (var identifier in entity.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID)
             {
-                if (identifier.ID == "CCC_NUMBER")
+                if (identifier.IDENTIFIER_TYPE == "CCC_NUMBER")
                     internalIdentifier = new DTOIdentifier()
                     {
                         IdentifierValue = identifier.ID,
@@ -383,6 +383,8 @@ namespace IQCare.WebApi.Logic.DtoMapping
                 {
                     DateSampleCollected = result.DATE_SAMPLE_COLLECTED,
                     DateSampleTested = result.DATE_SAMPLE_TESTED,
+                    VlResult = result.VL_RESULT,
+                    SampleRejection = result.SAMPLE_REJECTION,
                     Justification = result.JUSTIFICATION,
                     LabTestedIn = result.LAB_TESTED_IN,
                     Regimen = result.REGIMEN,
@@ -408,18 +410,6 @@ namespace IQCare.WebApi.Logic.DtoMapping
                 PatientIdentification =
                 {
                     InternalPatientId = internalIdentifier,
-                    ExternalPatientId =
-                    {
-                        IdentifierValue = entity.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ID,
-                        AssigningAuthority = entity.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ASSIGNING_AUTHORITY,
-                        IdentifierType = entity.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.IDENTIFIER_TYPE
-                    },
-                    PatientName =
-                    {
-                        LastName = entity.PATIENT_IDENTIFICATION.PATIENT_NAME.LAST_NAME,
-                        MiddleName = entity.PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME,
-                        FirstName = entity.PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME
-                    }
                 },
                 ViralLoadResult = viralLoadResults
             };

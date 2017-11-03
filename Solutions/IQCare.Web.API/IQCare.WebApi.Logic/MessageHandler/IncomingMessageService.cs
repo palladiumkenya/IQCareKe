@@ -62,7 +62,7 @@ namespace IQCare.WebApi.Logic.MessageHandler
                     HandleAppointments(apiInbox);
                     break;
 
-                case "ORU^R01":
+                case "ORU^VL":
                     HandleNewViralLoadResults(apiInbox);
                     break;
             }
