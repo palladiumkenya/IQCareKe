@@ -1,15 +1,14 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entity.WebApi
 {
     [Serializable]
-    //[Table("APIOutbox")]
     public class ApiOutbox
     {
         [Key]
         public int Id { get; set; }
-        public DateTime DateRead { get; set; }
         public DateTime DateSent { get; set; }
         public int RecepientId { get; set; }
         public string Message { get; set; }

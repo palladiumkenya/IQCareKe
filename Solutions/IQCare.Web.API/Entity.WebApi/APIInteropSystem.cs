@@ -1,10 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entity.WebApi
 {
     [Serializable]
-    //[Table("API_InteropSystems")]
     public class ApiInteropSystem
     {
         [Key]

@@ -23,14 +23,12 @@ namespace IQCare.WebApi.Logic.MappingEntities
             MESSAGE_HEADER = new MESSAGEHEADER();
             PATIENT_IDENTIFICATION = new PATIENTIDENTIFICATION();
             NEXT_OF_KIN = new List<NEXTOFKIN>();
-            VISIT = new VISIT();
-            //OBSERVATION_RESULT = new List<OBSERVATIONRESULT>();
+            PATIENT_VISIT = new VISIT();
         }
 
         public MESSAGEHEADER MESSAGE_HEADER { get; set; }
         public PATIENTIDENTIFICATION PATIENT_IDENTIFICATION { get; set; }
         public List<NEXTOFKIN> NEXT_OF_KIN { get; set; }
-        public VISIT VISIT { get; set; }
-        //public List<OBSERVATIONRESULT> OBSERVATION_RESULT { get; set; }
+        public VISIT PATIENT_VISIT { get; set; }
     }
 }

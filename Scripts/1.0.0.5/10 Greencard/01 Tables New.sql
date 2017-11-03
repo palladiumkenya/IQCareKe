@@ -7,10 +7,10 @@ GO
 
 IF NOT EXISTS
 (
-    SELECT *
-    FROM sys.objects
-    WHERE object_id = OBJECT_ID(N'[dbo].[IdentifierTypes]')
-          AND type IN(N'U')
+	SELECT *
+	FROM sys.objects
+	WHERE object_id = OBJECT_ID(N'[dbo].[IdentifierTypes]')
+		  AND type IN(N'U')
 )
 BEGIN
 	CREATE TABLE [dbo].[IdentifierTypes](
@@ -23,67 +23,64 @@ BEGIN
 	) ON [PRIMARY];
 END;
 
-IF NOT EXISTS(SELECT *  FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[API_Inbox]') AND type IN(N'U'))
+IF NOT EXISTS(SELECT *  FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[ApiInbox]') AND type IN(N'U'))
 BEGIN
-	CREATE TABLE [dbo].[API_Inbox](
+	CREATE TABLE [dbo].[ApiInbox](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[uid] [char](50) NOT NULL,
-	[DateReceived] [datetime] NOT NULL,
-	[SenderId] [int] NOT NULL,
-	[Message] [varchar](max) NOT NULL,
+	[uid] [char](50) NULL,
+	[DateReceived] [datetime] NULL,
+	[SenderId] [int] NULL,
+	[Message] [varchar](max) NULL,
 	[Processed] [bit] NULL,
-	[DateProcessed] [datetime] NOT NULL,
-	[LogMessage] [nvarchar](max) NOT NULL,
- CONSTRAINT [PK_API_Inbox] PRIMARY KEY CLUSTERED 
+	[DateProcessed] [datetime] NULL,
+	[LogMessage] [nvarchar](max) NULL,
+ CONSTRAINT [PK_ApiInbox] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 
-ALTER TABLE [dbo].[API_Inbox] ADD  CONSTRAINT [DF_API_Inbox_Processed]  DEFAULT ((0)) FOR [Processed]
+ALTER TABLE [dbo].[ApiInbox] ADD  CONSTRAINT [DF_ApiInbox_Processed]  DEFAULT ((0)) FOR [Processed]
 END
 
-IF NOT EXISTS(SELECT *  FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[API_InteropSystem]') AND type IN(N'U'))
+IF NOT EXISTS(SELECT *  FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[ApiInteropSystem]') AND type IN(N'U'))
 BEGIN
-		CREATE TABLE [dbo].[API_InteropSystem](
-		[Id] [int] NOT NULL,
-		[Name] [nvarchar](225) NOT NULL,
-		[EndPoint] [varchar](50) NOT NULL,
-		[APIKey] [varchar](225) NOT NULL,
-		[Active] [bit] NOT NULL,
-		[DeleteFlag] [bit] NOT NULL,
-	 CONSTRAINT [PK_API_InteropSystem] PRIMARY KEY CLUSTERED 
-	(
-		[Id] ASC
-	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-	) ON [PRIMARY]
+CREATE TABLE [dbo].[ApiInteropSystem](
+	[Id] [int] NOT NULL,
+	[Name] [nvarchar](225) NULL,
+	[EndPoint] [varchar](50) NULL,
+	[APIKey] [varchar](225) NULL,
+	[Active] [bit] NULL,
+	[DeleteFlag] [bit] NULL,
+ CONSTRAINT [PK_ApiInteropSystem] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
 
-	ALTER TABLE [dbo].[API_InteropSystem] ADD  CONSTRAINT [DF_API_InteropSystem_Active]  DEFAULT ((0)) FOR [Active]
+	ALTER TABLE [dbo].[ApiInteropSystem] ADD  CONSTRAINT [DF_ApiInteropSystem_Active]  DEFAULT ((0)) FOR [Active]
 
-	ALTER TABLE [dbo].[API_InteropSystem] ADD  CONSTRAINT [DF_API_InteropSystem_DeleteFlag]  DEFAULT ((0)) FOR [DeleteFlag]
+	ALTER TABLE [dbo].[ApiInteropSystem] ADD  CONSTRAINT [DF_ApiInteropSystem_DeleteFlag]  DEFAULT ((0)) FOR [DeleteFlag]
 END
 
-IF NOT EXISTS(SELECT *  FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[API_Outbox]') AND type IN(N'U'))
+IF NOT EXISTS(SELECT *  FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[ApiOutbox]') AND type IN(N'U'))
 BEGIN
-	
-	CREATE TABLE [dbo].[API_Outbox](
-		[Id] [int] IDENTITY(1,1) NOT NULL,
-		[Uid] [char](36) NOT NULL,
-		[DateRead] [datetime] NULL,
-		[DateSent] [datetime] NULL,
-		[RecepientId] [int] NOT NULL,
-		[Message] [varchar](max) NOT NULL,
-		[AttemptCount] [int] NOT NULL,
-		[LogMessage] [varchar](225) NOT NULL,
-	 CONSTRAINT [PK_API_Outbox] PRIMARY KEY CLUSTERED 
-	(
-		[Id] ASC
-	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-	) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+CREATE TABLE [dbo].[ApiOutbox](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Uid] [char](36) NULL,
+	[DateSent] [datetime] NULL CONSTRAINT [DF_ApiOutbox_DateSent]  DEFAULT (getdate()),
+	[RecepientId] [int] NULL CONSTRAINT [DF_ApiOutbox_RecepientId]  DEFAULT ((1)),
+	[Message] [varchar](max) NULL,
+	[AttemptCount] [int] NULL CONSTRAINT [DF_ApiOutbox_AttemptCount]  DEFAULT ((0)),
+	[LogMessage] [varchar](225) NULL,
+ CONSTRAINT [PK_ApiOutbox] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 
-	SET ANSI_PADDING OFF
 
-	ALTER TABLE [dbo].[API_Outbox] ADD  CONSTRAINT [DF_API_Outbox_AttemptCount]  DEFAULT ((0)) FOR [AttemptCount]
+	ALTER TABLE [dbo].[ApiOutbox] ADD  CONSTRAINT [DF_ApiOutbox_AttemptCount]  DEFAULT ((0)) FOR [AttemptCount]
 
 END
 

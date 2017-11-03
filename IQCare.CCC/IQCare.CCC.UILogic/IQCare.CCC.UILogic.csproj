@@ -115,10 +115,13 @@
     <Compile Include="Enrollment\PatientReEnrollmentManager.cs" />
     <Compile Include="Enrollment\ServiceAreaIdentifiersManager.cs" />
     <Compile Include="FacilityListManager.cs" />
+    <Compile Include="Interoperability\AppointmentMessage.cs" />
     <Compile Include="Interoperability\DrugPrescriptionMessage.cs" />
+    <Compile Include="Interoperability\PatientAppointmentMessageManager.cs" />
     <Compile Include="Interoperability\PatientMessageManager.cs" />
     <Compile Include="Interoperability\PatientRegistrationValidation.cs" />
     <Compile Include="Interoperability\ProcessPatient.cs" />
+    <Compile Include="Interoperability\ProcessPatientAppointmentMessage.cs" />
     <Compile Include="Interoperability\ProcessRegistration.cs" />
     <Compile Include="Interoperability\ProcessViralLoadResults.cs" />
     <Compile Include="Interoperability\ViralLoadMessageManager.cs" />

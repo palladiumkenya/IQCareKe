@@ -39,6 +39,8 @@ namespace IQCare.WebApi.Logic.MessageHandler
                 SenderId = 1
             };
 
+            //save to inbox
+            _apiInboxmanager.AddApiInbox(apiInbox);
 
             switch (messageType)
             {
@@ -93,10 +95,12 @@ namespace IQCare.WebApi.Logic.MessageHandler
 
                 incomingMessage.DateProcessed = DateTime.Now;
                 incomingMessage.Processed = true;
-                _apiInboxmanager.AddApiInbox(incomingMessage);
+                
+                //update message set processed=1, erromsq=null
             }
             catch (Exception e)
             {
+                //update message set processed=1, erromsq
                 incomingMessage.LogMessage = e.Message;
                 incomingMessage.Processed = false;
                 _apiInboxmanager.AddApiInbox(incomingMessage);

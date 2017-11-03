@@ -3,6 +3,7 @@ using Entities.CCC.Appointment;
 using Interface.CCC;
 using System;
 using System.Collections.Generic;
+using IQCare.Events;
 
 namespace IQCare.CCC.UILogic
 {
@@ -24,7 +25,24 @@ namespace IQCare.CCC.UILogic
                 StatusId = p.StatusId,
                 StatusDate = DateTime.Now,
             };
-            return _appointment.AddPatientAppointments(appointment);
+
+            int returnVal = _appointment.AddPatientAppointments(appointment);
+            if (returnVal > 0)
+            {
+                PatientLookupManager patientLookup = new PatientLookupManager();
+                var patient = patientLookup.GetPatientDetailSummary(p.PatientId);
+                MessageEventArgs args = new MessageEventArgs()
+                {
+                    FacilityId = patient.FacilityId,
+                    EntityId = appointment.Id,
+                    PatientId = appointment.PatientId,
+                    MessageType = MessageType.AppointmentScheduling,
+                    EventOccurred = "Patient Appointment Scheduled"
+                };
+
+                Publisher.RaiseEventAsync(this, args).ConfigureAwait(false);
+            }
+            return returnVal;
         }
 
         public PatientAppointment GetPatientAppointment(int id)
