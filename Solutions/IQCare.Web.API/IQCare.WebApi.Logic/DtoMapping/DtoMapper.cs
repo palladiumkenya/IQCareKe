@@ -54,12 +54,12 @@ namespace IQCare.WebApi.Logic.DtoMapping
             var identifiers = new List<DTOIdentifier>();
             foreach (var id in entity.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID)
             {
-               var identifier = new DTOIdentifier()
-               {
-                   AssigningAuthority = id.ASSIGNING_AUTHORITY,
-                   IdentifierType = id.IDENTIFIER_TYPE,
-                   IdentifierValue = id.ID
-               };
+                var identifier = new DTOIdentifier()
+                {
+                    AssigningAuthority = id.ASSIGNING_AUTHORITY,
+                    IdentifierType = id.IDENTIFIER_TYPE,
+                    IdentifierValue = id.ID
+                };
                 identifiers.Add(identifier);
             }
 
@@ -78,7 +78,7 @@ namespace IQCare.WebApi.Logic.DtoMapping
                 //TSRelationshipType =  ts.RELATIONSHIP,
                 InternalPatientIdentifiers = identifiers,
                 //DateOfEnrollment = DateTime.Now,
-                
+
             };
             return registration;
         }
@@ -129,15 +129,15 @@ namespace IQCare.WebApi.Logic.DtoMapping
 
             foreach (var order in entity.PHARMACY_ENCODED_ORDER)
             {
-                var prescriptionOrder=new PharmacyEncodedOrder()
+                var prescriptionOrder = new PharmacyEncodedOrder()
                 {
                     DrugName = order.DRUG_NAME,
                     CodingSystem = order.CODING_SYSTEM,
                     Strength = order.STRENGTH,
                     Dosage = order.DOSAGE,
                     Frequency = order.FREQUENCY,
-                    Duration =Convert.ToInt32(order.DURATION),
-                    QuantityPrescribed =Convert.ToInt32(order.QUANTITY_PRESCRIBED),
+                    Duration = Convert.ToInt32(order.DURATION),
+                    QuantityPrescribed = Convert.ToInt32(order.QUANTITY_PRESCRIBED),
                     PrescriptionNotes = order.PRESCRIPTION_NOTES
                 };
                 orderEncorder.Add(prescriptionOrder);
@@ -172,7 +172,7 @@ namespace IQCare.WebApi.Logic.DtoMapping
                     {
                         AssigningAuthority = entity.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[0].ASSIGNING_AUTHORITY,
                         IdentifierValue = entity.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[0].ID,
-                        IdentifierType = entity.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[0].IDENTIFIER_TYPE   
+                        IdentifierType = entity.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[0].IDENTIFIER_TYPE
                     },
                     PatientName =
                     {
@@ -199,8 +199,8 @@ namespace IQCare.WebApi.Logic.DtoMapping
                     TransactionDatetime = Convert.ToDateTime(entity.COMMON_ORDER_DETAILS.TRANSACTION_DATETIME),
                     Notes = entity.COMMON_ORDER_DETAILS.NOTES.ToString()
                 },
-                PharmacyEncodedOrder =orderEncorder 
-            };            
+                PharmacyEncodedOrder = orderEncorder
+            };
             return drugOrder;
         }
 
@@ -212,12 +212,12 @@ namespace IQCare.WebApi.Logic.DtoMapping
         public DtoDrugDispensed DrugOrderFulfilment(DrugDispenseEntity entity)
         {
             var internalIdentifiers = new List<DTOIdentifier>();
-            var drugsOrderdList=new List<PharmacyEncodedOrder>();
-            var drugsDispensed=new List<PharmacyDispensedDrugs>();
+            var drugsOrderdList = new List<PharmacyEncodedOrder>();
+            var drugsDispensed = new List<PharmacyDispensedDrugs>();
 
-            var identify=new DTOIdentifier()
+            var identify = new DTOIdentifier()
             {
-                
+
                 //ExternalPatientId =
                 //{
                 //    IdentifierValue = entity.Patientidentification.EXTERNAL_PATIENT_ID.ID,
@@ -230,9 +230,9 @@ namespace IQCare.WebApi.Logic.DtoMapping
                 //    LastName = entity.Patientidentification.PATIENT_NAME.LAST_NAME,
                 //    MiddleName = entity.Patientidentification.PATIENT_NAME.MIDDLE_NAME
                 //}
-                
+
             };
-         
+
             foreach (var identifier in internalIdentifiers)
             {
                 var internalIdentity = new DTOIdentifier()
@@ -246,7 +246,7 @@ namespace IQCare.WebApi.Logic.DtoMapping
 
             foreach (var encoded in drugsOrderdList)
             {
-                var encorder=new PharmacyEncodedOrder()
+                var encorder = new PharmacyEncodedOrder()
                 {
                     DrugName = encoded.DrugName,
                     Dosage = encoded.Dosage,
@@ -261,7 +261,7 @@ namespace IQCare.WebApi.Logic.DtoMapping
 
             foreach (var drugDispense in entity.PharmacyDispense)
             {
-                var dispense=new PharmacyDispensedDrugs()
+                var dispense = new PharmacyDispensedDrugs()
                 {
                     ActualDrugs = drugDispense.ActualDrugs,
                     CodingSystem = drugDispense.CodingSystem,
@@ -275,7 +275,7 @@ namespace IQCare.WebApi.Logic.DtoMapping
                 drugsDispensed.Add(dispense);
             }
 
-            var dispenseOrder=new DtoDrugDispensed()
+            var dispenseOrder = new DtoDrugDispensed()
             {
                 MessageHeader =
                 {
@@ -364,17 +364,17 @@ namespace IQCare.WebApi.Logic.DtoMapping
 
         public ViralLoadResultsDto ViralLoadResults(ViralLoadResultEntity entity)
         {
-            var internalIdentifiers = new List<DTOIdentifier>() ;
+            var internalIdentifier = new DTOIdentifier();
             var viralLoadResults = new List<VLoadlResult>();
             foreach (var identifier in entity.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID)
             {
-                var internalIdentity = new DTOIdentifier()
-                {
-                    IdentifierValue = identifier.ID,
-                    IdentifierType = identifier.IDENTIFIER_TYPE,
-                    AssigningAuthority = identifier.ASSIGNING_AUTHORITY
-                };
-                internalIdentifiers.Add(internalIdentity);
+                if (identifier.ID == "CCC_NUMBER")
+                    internalIdentifier = new DTOIdentifier()
+                    {
+                        IdentifierValue = identifier.ID,
+                        IdentifierType = identifier.IDENTIFIER_TYPE,
+                        AssigningAuthority = identifier.ASSIGNING_AUTHORITY
+                    };
             }
 
             foreach (var result in entity.VIRAL_LOAD_RESULT)
@@ -391,9 +391,9 @@ namespace IQCare.WebApi.Logic.DtoMapping
                 viralLoadResults.Add(vlLoadResult);
             }
 
-            var vlResultsDto=new ViralLoadResultsDto()
+            var vlResultsDto = new ViralLoadResultsDto()
             {
-                MesssageHeader = 
+                MesssageHeader =
                 {
                     SendingApplication = entity.MESSAGE_HEADER.SENDING_APPLICATION,
                     SendingFacility = entity.MESSAGE_HEADER.SENDING_FACILITY,
@@ -407,7 +407,7 @@ namespace IQCare.WebApi.Logic.DtoMapping
                 },
                 PatientIdentification =
                 {
-                    //InternalPatientId = internalIdentifiers,
+                    InternalPatientId = internalIdentifier,
                     ExternalPatientId =
                     {
                         IdentifierValue = entity.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ID,
@@ -422,7 +422,7 @@ namespace IQCare.WebApi.Logic.DtoMapping
                     }
                 },
                 ViralLoadResult = viralLoadResults
-            }; 
+            };
             return vlResultsDto;
         }
     }
