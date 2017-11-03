@@ -6,6 +6,7 @@ using IQCare.WebApi.Logic.MappingEntities;
 using Newtonsoft.Json;
 using IQCare.DTO.PatientRegistration;
 using AutoMapper;
+using IQCare.DTO.PatientAppointment;
 
 namespace IQCare.WebApi.Logic.EntityMapper
 {
@@ -178,9 +179,24 @@ namespace IQCare.WebApi.Logic.EntityMapper
             throw new System.NotImplementedException();
         }
 
-        public void AppointmentScheduling()
+        public PatientAppointmentEntity AppointmentScheduling(PatientAppointSchedulingDTO appointment, MessageEventArgs messageEvent)
         {
-            throw new System.NotImplementedException();
+            PatientAppointmentEntity entity = new PatientAppointmentEntity();
+
+            Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<PatientAppointSchedulingDTO, PatientAppointmentEntity>().ReverseMap();
+                cfg.CreateMap<DTO.CommonEntities.MESSAGEHEADER, MappingEntities.MESSAGEHEADER>().ReverseMap();
+                cfg.CreateMap<DTO.CommonEntities.PATIENTIDENTIFICATION, MappingEntities.PATIENTIDENTIFICATION>().ReverseMap();
+                cfg.CreateMap<DTO.CommonEntities.EXTERNALPATIENTID, MappingEntities.EXTERNALPATIENTID>().ReverseMap();
+                cfg.CreateMap<DTO.CommonEntities.INTERNALPATIENTID, MappingEntities.INTERNALPATIENTID>().ReverseMap();
+                cfg.CreateMap<DTO.CommonEntities.PATIENTNAME, MappingEntities.PATIENTNAME>().ReverseMap();
+                cfg.CreateMap<DTO.CommonEntities.APPOINTMENT_INFORMATION, MappingEntities.APPOINTMENT_INFORMATION>().ReverseMap();
+                cfg.CreateMap<DTO.CommonEntities.PLACER_APPOINTMENT_NUMBER, MappingEntities.PLACER_APPOINTMENT_NUMBER>().ReverseMap();
+            });
+
+            entity.MESSAGE_HEADER = GetMessageHeader("SIU^S12", messageEvent.FacilityId.ToString(), "P");
+            return entity;
         }
 
         public void AppointmentUpdated()

@@ -40,10 +40,10 @@ GO
 
 CREATE VIEW [dbo].[Api_PatientCareEndingView]
 AS
-SELECT        dbo.PatientCareending.DateOfDeath, dbo.PatientCareending.PatientId
+SELECT        dbo.PatientCareending.DateOfDeath, dbo.PatientCareending.PatientId, dbo.PatientCareending.CareEndingNotes as DeathIndicator
 FROM            dbo.PatientCareending INNER JOIN
                          dbo.LookupItemView ON dbo.PatientCareending.ExitReason = dbo.LookupItemView.ItemId
-WHERE        (dbo.PatientCareending.DeleteFlag = 0) AND (dbo.LookupItemView.MasterName = 'CareEnded')
+WHERE        (dbo.PatientCareending.DeleteFlag = 0) AND (dbo.LookupItemView.MasterName = 'CareEnded') AND (dbo.LookupItemView.ItemName = 'Death')
 
 
 GO
@@ -86,12 +86,23 @@ GO
 
 CREATE VIEW [dbo].[Api_PatientDemographicsView]
 AS
-SELECT PR.Id, PT.Id as PatientId, PIE.IdentifierValue, CAST(DECRYPTBYKEY(PR.FirstName) AS VARCHAR(50)) AS FIRST_NAME, CAST(DECRYPTBYKEY(PR.MidName) AS VARCHAR(50)) AS MIDDLE_NAME, CAST(DECRYPTBYKEY(PR.LastName) AS VARCHAR(50)) 
-                         AS LAST_NAME, CAST(DECRYPTBYKEY(PT.NationalId) AS VARCHAR(50)) AS NATIONAL_ID, NULL AS MOTHER_MAIDEN_NAME, format(cast(PT.DateOfBirth as date),'yyyyMMdd') AS DATE_OF_BIRTH,
-SEX = CASE(SELECT ItemName FROM LookupItemView WHERE ItemId = PR.Sex AND MasterName = 'Gender') WHEN 'Male' THEN 'M' WHEN 'Female' THEN 'F' ELSE '' END, PE.ServiceAreaId
+SELECT PR.Id, PT.Id as PatientId, PIE.IdentifierValue, 
+CAST(DECRYPTBYKEY(PR.FirstName) AS VARCHAR(50)) AS FIRST_NAME, 
+CAST(DECRYPTBYKEY(PR.MidName) AS VARCHAR(50)) AS MIDDLE_NAME, 
+CAST(DECRYPTBYKEY(PR.LastName) AS VARCHAR(50)) AS LAST_NAME, 
+CAST(DECRYPTBYKEY(PT.NationalId) AS VARCHAR(50)) AS NATIONAL_ID, 
+NULL AS MOTHER_MAIDEN_NAME, 
+format(cast(PT.DateOfBirth as date),'yyyyMMdd') AS DATE_OF_BIRTH,
+format(cast(PE.EnrollmentDate as date),'yyyyMMdd') AS DateOfEnrollment,
+format(cast(PT.RegistrationDate as date),'yyyyMMdd') AS DateOfRegistration,
+DATE_OF_BIRTH_PRECISION = CASE(SELECT PT.DobPrecision) WHEN 1 THEN 'EXACT' WHEN 0 THEN 'ESTIMATED' END,
+SEX = CASE(SELECT ItemName FROM LookupItemView WHERE ItemId = PR.Sex AND MasterName = 'Gender') WHEN 'Male' THEN 'M' WHEN 'Female' THEN 'F' ELSE '' END, PE.ServiceAreaId, 
+PatientType = CASE(SELECT ItemName FROM LookupItemView WHERE ItemId = PT.PatientType AND MasterName = 'PatientType') WHEN 'New' THEN 'NEW' WHEN 'Transfer-In' THEN 'TRANSFER-IN' WHEN 'Transit' THEN 'TRANSIT' ELSE '' END,
+EntryPoint = isnull((SELECT TOP 1 ItemName FROM LookupItemView WHERE ItemId = SE.EntryPointId AND MasterName = 'Entrypoint'), 'OTHER')
 FROM            dbo.Patient AS PT INNER JOIN
                          dbo.Person AS PR ON PT.PersonId = PR.Id INNER JOIN
                          dbo.PatientEnrollment AS PE ON PT.Id = PE.PatientId INNER JOIN
+                         dbo.ServiceEntryPoint AS SE ON PT.Id = SE.PatientId INNER JOIN
                          dbo.PatientIdentifier AS PIE ON PE.Id = PIE.PatientEnrollmentId AND PT.Id = PIE.PatientId
 
 
@@ -111,7 +122,7 @@ GO
 
 CREATE VIEW [dbo].[Api_PatientLocationView]
 AS
-SELECT        dbo.PersonLocation.PersonId, dbo.County.CountyName, dbo.County.Subcountyname, dbo.County.WardName, dbo.PersonLocation.Village
+SELECT        dbo.PersonLocation.PersonId, dbo.County.CountyName, dbo.County.Subcountyname, dbo.County.WardName, dbo.PersonLocation.Village, dbo.PersonLocation.LandMark AS Landmark
 FROM            dbo.PersonLocation INNER JOIN
                          dbo.County ON dbo.PersonLocation.Ward = dbo.County.WardId
 WHERE        (dbo.PersonLocation.DeleteFlag = 0)
@@ -133,11 +144,11 @@ GO
 
 CREATE VIEW [dbo].[Api_TreatmentSupporterView]
 AS
-SELECT        dbo.Person.Id AS PersonId, CAST(DECRYPTBYKEY(dbo.Person.FirstName) AS VARCHAR(50)) AS FIRST_NAME, CAST(DECRYPTBYKEY(dbo.Person.MidName) AS VARCHAR(50)) AS MIDDLE_NAME, 
+SELECT        dbo.PatientTreatmentSupporter.PersonId AS PersonId, CAST(DECRYPTBYKEY(dbo.Person.FirstName) AS VARCHAR(50)) AS FIRST_NAME, CAST(DECRYPTBYKEY(dbo.Person.MidName) AS VARCHAR(50)) AS MIDDLE_NAME, 
                          CAST(DECRYPTBYKEY(dbo.Person.LastName) AS VARCHAR(50)) AS LAST_NAME, NULL AS RELATIONSHIP, NULL AS ADDRESS, CAST(DECRYPTBYKEY(dbo.PatientTreatmentSupporter.MobileContact) AS VARCHAR(50)) 
                          AS PHONE_NUMBER, SEX = CASE(SELECT ItemName FROM LookupItemView WHERE ItemId = Person.Sex AND MasterName = 'Gender') WHEN 'Male' THEN 'M' WHEN 'Female' THEN 'F' ELSE '' END,NULL AS DATE_OF_BIRTH, 'T' AS CONTACT_ROLE
 FROM            dbo.Person INNER JOIN
-                         dbo.PatientTreatmentSupporter ON dbo.Person.Id = dbo.PatientTreatmentSupporter.PersonId
+                         dbo.PatientTreatmentSupporter ON dbo.Person.Id = dbo.PatientTreatmentSupporter.SupporterId
 
 GO
 
@@ -155,18 +166,48 @@ GO
 
 CREATE VIEW [dbo].[Api_PatientMessage]
 AS
-SELECT        PDG.Id, PDG.PatientId, PDG.IdentifierValue, PDG.FIRST_NAME, PDG.MIDDLE_NAME, 
-                         PDG.LAST_NAME, PDG.NATIONAL_ID, PDG.MOTHER_MAIDEN_NAME, PDG.DATE_OF_BIRTH, 
-                         PDG.SEX, PCV.PhysicalAddress, PCV.MobileNumber, PLV.CountyName, PLV.Subcountyname, 
-                         PLV.WardName, PLV.Village, PDG.ServiceAreaId, MS.ApiValue AS MARITAL_STATUS, PTS.FIRST_NAME AS TFIRST_NAME, 
-                         PTS.MIDDLE_NAME AS TMIDDLE_NAME, PTS.LAST_NAME AS TLAST_NAME, PTS.RELATIONSHIP AS TRELATIONSHIP, 
-                         PTS.ADDRESS AS TADDRESS, PTS.PHONE_NUMBER AS TPHONE_NUMBER, PTS.SEX AS TSEX, 
-                         PTS.DATE_OF_BIRTH AS TDATE_OF_BIRTH, PTS.CONTACT_ROLE AS TCONTACT_ROLE
+SELECT
+PDG.Id, 
+PDG.PatientId, 
+PDG.IdentifierValue, 
+PDG.FIRST_NAME, 
+PDG.MIDDLE_NAME,
+PDG.LAST_NAME, 
+PDG.NATIONAL_ID, 
+PDG.MOTHER_MAIDEN_NAME, 
+PDG.DATE_OF_BIRTH,
+PDG.DateOfEnrollment,
+PDG.DateOfRegistration,
+PDG.DATE_OF_BIRTH_PRECISION,
+PDG.SEX, 
+PDG.PatientType, 
+PDG.EntryPoint, 
+PCV.PhysicalAddress, 
+PCV.MobileNumber, 
+PLV.CountyName, 
+PLV.Subcountyname,
+PLV.WardName, 
+PLV.Village,
+PLV.Landmark,
+PDG.ServiceAreaId, 
+MS.ApiValue AS MARITAL_STATUS, 
+PTS.FIRST_NAME AS TFIRST_NAME, 
+PTS.MIDDLE_NAME AS TMIDDLE_NAME, 
+PTS.LAST_NAME AS TLAST_NAME, 
+PTS.RELATIONSHIP AS TRELATIONSHIP,                          
+PTS.ADDRESS AS TADDRESS, 
+PTS.PHONE_NUMBER AS TPHONE_NUMBER, 
+PTS.SEX AS TSEX, 
+PTS.DATE_OF_BIRTH AS TDATE_OF_BIRTH, 
+PTS.CONTACT_ROLE AS TCONTACT_ROLE,
+PCEV.DateOfDeath,
+PCEV.DeathIndicator
 FROM           [dbo].[Api_PatientDemographicsView] PDG  LEFT Outer JOIN
                          [dbo].[Api_MaritalStatusView] MS ON PDG.Id = MS.PersonId LEFT OUTER JOIN
                          [dbo].[Api_TreatmentSupporterView] PTS ON PDG.Id = PTS.PersonId LEFT OUTER JOIN
                          [dbo].[Api_PatientContactsView] PCV ON PDG.Id = PCV.PersonId LEFT OUTER JOIN
-                         [dbo].[Api_PatientLocationView] PLV ON PDG.Id = PLV.PersonId
+                         [dbo].[Api_PatientLocationView] PLV ON PDG.Id = PLV.PersonId LEFT OUTER JOIN
+                         [dbo].[Api_PatientCareEndingView] PCEV ON PDG.PatientId = PCEV.PatientId
 
 
 GO

@@ -145,9 +145,9 @@ namespace DataAccess.CCC.Repository
 
         /*Interoperability*/
         private IPatientMessageRepository _patientMessageRepository;
-
         private IDrugPrescriptionMessageRepository _drugPrescriptionMessageRepository;
         private IViralLoadMessageRepository _viralLoadMessageRepository;
+        private IPatientAppointmentMessageRepository _patientAppointmentMessageRepository;
 
         public UnitOfWork(BaseContext context)
         {
@@ -180,6 +180,15 @@ namespace DataAccess.CCC.Repository
             {
                 return _patientMessageRepository ??
                        (_patientMessageRepository = new PatientMessageRepository((LookupContext) _context));
+            }
+        }
+
+        public IPatientAppointmentMessageRepository PatientAppointmentMessageRepository
+        {
+            get
+            {
+                return _patientAppointmentMessageRepository ?? (_patientAppointmentMessageRepository =
+                           new PatientAppointmentMessageRepository((LookupContext) _context));
             }
         }
 

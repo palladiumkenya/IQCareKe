@@ -321,7 +321,21 @@ namespace IQCare.WebApi.Logic.MessageHandler
 
         private void HandleAppointmentScheduling(MessageEventArgs messageEvent)
         {
+            ProcessPatientAppointmentMessage appointmentMessage = new ProcessPatientAppointmentMessage();
+            var appointmentScheduling = appointmentMessage.Get(messageEvent.PatientId);
+            var appointmentSchedulingEntity = _jsonEntityMapper.AppointmentScheduling(appointmentScheduling, messageEvent);
+            string appointmentSchedulingJson = new JavaScriptSerializer().Serialize(appointmentSchedulingEntity);
 
+            //save
+            var apiOutbox = new ApiOutbox()
+            {
+                DateSent = DateTime.Now,
+                Message = appointmentSchedulingJson
+            };
+            _apiOutboxManager.AddApiOutbox(apiOutbox);
+
+            //send
+            SendData(appointmentSchedulingJson, "").ConfigureAwait(false);
         }
 
         private void HandleAppointmentUpdated(MessageEventArgs messageEvent)

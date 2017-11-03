@@ -54,8 +54,7 @@ namespace IQCare.CCC.UILogic.Interoperability
                 //Get Enrollment Id Type
                 int visitType = lookupLogic.GetItemIdByGroupAndItemName("VisitType", "Enrollment")[0].ItemId;
                 //Get DOB
-                DateTime DOB;
-                DateTime.TryParse(registration.PATIENT_IDENTIFICATION.DATE_OF_BIRTH, out DOB);
+                DateTime DOB = DateTime.ParseExact(registration.PATIENT_IDENTIFICATION.DATE_OF_BIRTH, "yyyyMMdd", null);
                 bool DOB_Precision = true;
                 switch (registration.PATIENT_IDENTIFICATION.DATE_OF_BIRTH_PRECISION)
                 {
@@ -67,8 +66,7 @@ namespace IQCare.CCC.UILogic.Interoperability
                         break;
                 }
                 //Get Enrollment Date
-                DateTime dateOfEnrollment;
-                DateTime.TryParse(registration.PATIENT_VISIT.HIV_CARE_INITIATION_DATE, out dateOfEnrollment);
+                DateTime dateOfEnrollment = DateTime.ParseExact(registration.PATIENT_VISIT.HIV_CARE_INITIATION_DATE, "yyyyMMdd", null);
                 //Get Patient Names
                 string firstName = registration.PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME;
                 string middleName = registration.PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME;
@@ -76,7 +74,7 @@ namespace IQCare.CCC.UILogic.Interoperability
                 string nationalId = String.Empty;
                 string cccNumber = String.Empty;
                 int entryPointId = 0;
-                var lookupEntryPoints = lookupLogic.GetItemIdByGroupAndDisplayName("Entrypoint", registration.PATIENT_VISIT.PATIENT_SOURCE);
+                var lookupEntryPoints = lookupLogic.GetItemIdByGroupAndItemName("Entrypoint", registration.PATIENT_VISIT.PATIENT_SOURCE);
                 if (lookupEntryPoints.Count > 0)
                 {
                     entryPointId = lookupEntryPoints[0].ItemId;
@@ -192,9 +190,6 @@ namespace IQCare.CCC.UILogic.Interoperability
                             DOB_Precision = true;
                             break;
                     }
-
-                    //Get Enrollment Date
-                    DateTime dateOfEnrollment = DateTime.MinValue;
                     //Get Patient Names
                     string firstName = registration.PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME;
                     string middleName = registration.PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME;
@@ -210,8 +205,8 @@ namespace IQCare.CCC.UILogic.Interoperability
                         entryPointId = lookupLogic.GetItemIdByGroupAndDisplayName("Entrypoint", "Other")[0].ItemId;
                     }
 
-                    DateTime.TryParse(registration.PATIENT_IDENTIFICATION.DATE_OF_BIRTH, out DOB);
-                    DateTime enrollmentDate = DateTime.Parse(registration.PATIENT_VISIT.HIV_CARE_INITIATION_DATE);
+                    DOB = DateTime.ParseExact(registration.PATIENT_IDENTIFICATION.DATE_OF_BIRTH, "yyyyMMdd", null);
+                    DateTime enrollmentDate = DateTime.ParseExact(registration.PATIENT_VISIT.HIV_CARE_INITIATION_DATE, "yyyyMMdd", null);
                     int facilityId = Convert.ToInt32(registration.MESSAGE_HEADER.SENDING_FACILITY);
 
                     if (patient != null)
@@ -220,7 +215,7 @@ namespace IQCare.CCC.UILogic.Interoperability
                     }
                     else
                     {
-                        msg = ProcessPatient.Add(firstName, middleName,lastName, sex, 1, DOB, DOB_Precision, patientType, facilityId, nationalId, visitType, dateOfEnrollment, cccNumber, entryPointId);
+                        msg = ProcessPatient.Add(firstName, middleName,lastName, sex, 1, DOB, DOB_Precision, patientType, facilityId, nationalId, visitType, enrollmentDate, cccNumber, entryPointId);
                     }
                 }
 

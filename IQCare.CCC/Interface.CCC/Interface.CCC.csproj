@@ -75,6 +75,7 @@
     <Compile Include="Enrollment\IServiceAreaIdentifiers.cs" />
     <Compile Include="IMst_PatientInsert.cs" />
     <Compile Include="Interoperability\IDrugPrescriptionManager.cs" />
+    <Compile Include="Interoperability\IPatientAppointmentMessageManager.cs" />
     <Compile Include="Interoperability\IPatientMessageManager.cs" />
     <Compile Include="Interoperability\IViralLoadMessageManager.cs" />
     <Compile Include="IPatientAppointment.cs" />

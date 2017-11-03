@@ -106,4 +106,31 @@ namespace IQCare.DTO.CommonEntities
         public string MESSAGE_TYPE { get; set; }
         public string PROCESSING_ID { get; set; }
     }
+
+    public class APPOINTMENT_INFORMATION
+    {
+        public PLACER_APPOINTMENT_NUMBER PLACER_APPOINTMENT_NUMBER { get; set; }
+
+        public string APPOINTMENT_REASON { get; set; }
+
+        public string APPOINTMENT_TYPE { get; set; }
+
+        public string APPOINTMENT_DATE { get; set; }
+
+        public string APPOINTMENT_PLACING_ENTITY { get; set; }
+
+        public string APPOINTMENT_LOCATION { get; set; }
+
+        public string ACTION_CODE { get; set; }
+
+        public string APPOINTMENT_NOTE { get; set; }
+
+        public string APPOINTMENT_HONORED { get; set; }
+    }
+
+    public class PLACER_APPOINTMENT_NUMBER
+    {
+        public string NUMBER { get; set; }
+        public string ENTITY { get; set; }
+    }
 }

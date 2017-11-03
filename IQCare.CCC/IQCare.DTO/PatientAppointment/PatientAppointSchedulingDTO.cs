@@ -4,23 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IQCare.DTO.CommonEntities;
-using System.ComponentModel.DataAnnotations;
 
-namespace IQCare.DTO.PatientRegistration
+namespace IQCare.DTO.PatientAppointment
 {
-    public class PatientRegistrationDTO
+    public class PatientAppointSchedulingDTO
     {
-        public PatientRegistrationDTO()
+        public PatientAppointSchedulingDTO()
         {
             MESSAGE_HEADER = new MESSAGEHEADER();
             PATIENT_IDENTIFICATION = new PATIENTIDENTIFICATION();
-            NEXT_OF_KIN = new List<NEXTOFKIN>();
-            PATIENT_VISIT = new VISIT();
+            APPOINTMENT_INFORMATION = new List<APPOINTMENT_INFORMATION>();
         }
 
         public MESSAGEHEADER MESSAGE_HEADER { get; set; }
         public PATIENTIDENTIFICATION PATIENT_IDENTIFICATION { get; set; }
-        public List<NEXTOFKIN> NEXT_OF_KIN { get; set; }
-        public VISIT PATIENT_VISIT { get; set; }
+        public List<APPOINTMENT_INFORMATION> APPOINTMENT_INFORMATION { get; set; }
     }
 }
