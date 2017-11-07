@@ -12,8 +12,8 @@ namespace IQCare.CCC.UILogic.Interoperability
     public class ProcessViralLoadResults
     {
         private string Msg { get; set; }
-        int _userId = Convert.ToInt32(HttpContext.Current.Session["AppUserId"]);
-        int _facilityId = Convert.ToInt32(HttpContext.Current.Session["AppLocationId"]);
+        //int _userId = Convert.ToInt32(HttpContext.Current.Session["AppUserId"]);
+        //int _facilityId = Convert.ToInt32(HttpContext.Current.Session["AppLocationId"]);
         public string Save(ViralLoadResultsDto viralLoadResults)
         {
             var results = viralLoadResults.ViralLoadResult;
@@ -54,7 +54,8 @@ namespace IQCare.CCC.UILogic.Interoperability
                             listLabOrder.Add(order);
                             var jss = new JavaScriptSerializer();
                             string patientLabOrder = jss.Serialize(listLabOrder);
-                            labOrderManager.savePatientLabOrder(patient.Id, (int)patient.ptn_pk, _userId, _facilityId, 203, patientMasterVisitId, DateTime.Today.ToString(), "IL lab order", patientLabOrder);
+                            //include userid and facility ID
+                            labOrderManager.savePatientLabOrder(patient.Id, (int)patient.ptn_pk, 1, 209, 203, patientMasterVisitId, DateTime.Today.ToString(), "IL lab order", patientLabOrder);
                         }
                         var labDetails =
                             labOrderManager.GetPatientLabDetailsByDate(labOrder.FirstOrDefault().Id, results.FirstOrDefault().DateSampleCollected);
