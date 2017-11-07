@@ -12,12 +12,12 @@ namespace IQCare.DTO.PatientAppointment
         public PatientAppointSchedulingDTO()
         {
             MESSAGE_HEADER = new MESSAGEHEADER();
-            PATIENT_IDENTIFICATION = new PATIENTIDENTIFICATION();
+            PATIENT_IDENTIFICATION = new APPOINTMENTPATIENTIDENTIFICATION();
             APPOINTMENT_INFORMATION = new List<APPOINTMENT_INFORMATION>();
         }
 
         public MESSAGEHEADER MESSAGE_HEADER { get; set; }
-        public PATIENTIDENTIFICATION PATIENT_IDENTIFICATION { get; set; }
+        public APPOINTMENTPATIENTIDENTIFICATION PATIENT_IDENTIFICATION { get; set; }
         public List<APPOINTMENT_INFORMATION> APPOINTMENT_INFORMATION { get; set; }
     }
 }

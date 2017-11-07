@@ -262,14 +262,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                 registration.NEXT_OF_KIN = registration.NEXT_OF_KIN == null ? new List<NEXTOFKIN>() : registration.NEXT_OF_KIN;
 
                 //External Patient Id
-                if (personIdentifiers.Count > 0)
-                {
-                    registration.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ID = personIdentifiers[0].IdentifierValue;
-                }
-                else
-                {
-                    registration.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ID = String.Empty;
-                }    
+                registration.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ID = personIdentifiers.Count > 0 ? personIdentifiers[0].IdentifierValue : String.Empty;
                 registration.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ASSIGNING_AUTHORITY = "MPI";
                 registration.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.IDENTIFIER_TYPE = "GODS_NUMBER";
                 //Start setting values

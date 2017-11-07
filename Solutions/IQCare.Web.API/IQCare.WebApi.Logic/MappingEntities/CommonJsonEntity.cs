@@ -125,11 +125,8 @@ namespace IQCare.WebApi.Logic.MappingEntities
         }
     }
 
-    public class PATIENTIDENTIFICATION
+    public abstract class PatientBaseProperties
     {
-        public EXTERNALPATIENTID EXTERNAL_PATIENT_ID { get; set; }
-        public List<INTERNALPATIENTID> INTERNAL_PATIENT_ID { get; set; }
-        public PATIENTNAME PATIENT_NAME { get; set; }
         public PATIENTNAME MOTHER_NAME { get; set; }
         public string DATE_OF_BIRTH { get; set; }
         public string DATE_OF_BIRTH_PRECISION { get; set; }
@@ -139,24 +136,20 @@ namespace IQCare.WebApi.Logic.MappingEntities
         public string MARITAL_STATUS { get; set; }
         public string DEATH_DATE { get; set; }
         public string DEATH_INDICATOR { get; set; }
+    }
 
-        public static PATIENTIDENTIFICATION GetPatientidentification(Registration entity)
-        {
-            PATIENTIDENTIFICATION patientidentification = new PATIENTIDENTIFICATION();
-            patientidentification.EXTERNAL_PATIENT_ID = EXTERNALPATIENTID.GetExternalpatientid(entity);
-            patientidentification.INTERNAL_PATIENT_ID = INTERNALPATIENTID.GetInternalPatientIds(entity);
-            patientidentification.PATIENT_NAME = PATIENTNAME.GetPatientName(entity);
-            //patientidentification.MOTHER_MAIDEN_NAME = !string.IsNullOrWhiteSpace(entity.MotherMaidenName) ? entity.MotherMaidenName : "";
-            patientidentification.DATE_OF_BIRTH = !string.IsNullOrWhiteSpace(entity.Patient.DateOfBirth) ? entity.Patient.DateOfBirth : "";
-            patientidentification.SEX = !string.IsNullOrWhiteSpace(entity.Patient.Sex) ? entity.Patient.Sex : "";
-            patientidentification.PATIENT_ADDRESS = PATIENTADDRESS.PatientAddress(entity);
-            patientidentification.PHONE_NUMBER = !string.IsNullOrWhiteSpace(entity.Patient.DateOfBirth) ? entity.Patient.MobileNumber : "";
-            patientidentification.MARITAL_STATUS = !string.IsNullOrWhiteSpace(entity.MaritalStatus) ? entity.MaritalStatus : "";
-            patientidentification.DEATH_DATE = !string.IsNullOrWhiteSpace(entity.DateOfDeath) ? entity.DateOfDeath : "";
-            patientidentification.DEATH_INDICATOR = !string.IsNullOrWhiteSpace(entity.DeathIndicator) ? entity.DeathIndicator : "";
+    public class PATIENTIDENTIFICATION : PatientBaseProperties
+    {
+        public EXTERNALPATIENTID EXTERNAL_PATIENT_ID { get; set; }
+        public List<INTERNALPATIENTID> INTERNAL_PATIENT_ID { get; set; }
+        public PATIENTNAME PATIENT_NAME { get; set; } 
+    }
 
-            return patientidentification;
-        }
+    public class APPOINTMENTPATIENTIDENTIFICATION
+    {
+        public EXTERNALPATIENTID EXTERNAL_PATIENT_ID { get; set; }
+        public List<INTERNALPATIENTID> INTERNAL_PATIENT_ID { get; set; }
+        public PATIENTNAME PATIENT_NAME { get; set; }
     }
 
     public class NOKNAME
