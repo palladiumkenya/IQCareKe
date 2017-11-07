@@ -2,7 +2,7 @@
 using Entities.CCC.Lookup;
 using IQCare.DTO;
 
-namespace IQCare.CCC.UILogic.Interoperability
+namespace IQCare.CCC.UILogic.Interoperability.Enrollment
 {
     public class PatientRegistrationValidation
     {

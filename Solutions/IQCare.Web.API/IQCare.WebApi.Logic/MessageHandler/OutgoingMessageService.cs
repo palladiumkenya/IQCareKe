@@ -14,6 +14,8 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
+using IQCare.CCC.UILogic.Interoperability.Appointment;
+using IQCare.CCC.UILogic.Interoperability.Enrollment;
 
 
 namespace IQCare.WebApi.Logic.MessageHandler
@@ -36,7 +38,7 @@ namespace IQCare.WebApi.Logic.MessageHandler
             _apiOutboxManager = apiOutboxManager;
         }
 
-        public  int Handle(MessageEventArgs messageEvent)
+        public void Handle(MessageEventArgs messageEvent)
         {
             switch (messageEvent.MessageType)
             {
@@ -105,8 +107,6 @@ namespace IQCare.WebApi.Logic.MessageHandler
                     break;
 
             }
-
-            return 1;
         }
 
         private void HandleNewClientRegistration(MessageEventArgs messageEvent)
@@ -135,7 +135,7 @@ namespace IQCare.WebApi.Logic.MessageHandler
             {
                 using (HttpClient httpClient = new HttpClient())
                 {
-                    httpClient.BaseAddress = new Uri("http://52.178.24.227:9721");
+                    httpClient.BaseAddress = new Uri("http://192.168.43.183:9721");
                     httpClient.DefaultRequestHeaders.Accept.Clear();
                     httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -149,8 +149,7 @@ namespace IQCare.WebApi.Logic.MessageHandler
                             string result = await content.ReadAsStringAsync();
 
                             // ... Display the result.
-                            if (result != null &&
-                                result.Length >= 50)
+                            if (result != null && result.Length >= 50)
                             {
                                 Console.WriteLine(result.Substring(0, 50) + "...");
                             }
@@ -322,7 +321,7 @@ namespace IQCare.WebApi.Logic.MessageHandler
         private void HandleAppointmentScheduling(MessageEventArgs messageEvent)
         {
             ProcessPatientAppointmentMessage appointmentMessage = new ProcessPatientAppointmentMessage();
-            var appointmentScheduling = appointmentMessage.Get(messageEvent.PatientId);
+            var appointmentScheduling = appointmentMessage.Get(messageEvent.EntityId);
             var appointmentSchedulingEntity = _jsonEntityMapper.AppointmentScheduling(appointmentScheduling, messageEvent);
             string appointmentSchedulingJson = new JavaScriptSerializer().Serialize(appointmentSchedulingEntity);
 

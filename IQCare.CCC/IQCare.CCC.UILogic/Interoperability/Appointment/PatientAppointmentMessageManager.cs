@@ -3,7 +3,7 @@ using Application.Presentation;
 using Entities.CCC.Interoperability;
 using Interface.CCC.Interoperability;
 
-namespace IQCare.CCC.UILogic.Interoperability
+namespace IQCare.CCC.UILogic.Interoperability.Appointment
 {
     public class PatientAppointmentMessageManager
     {

@@ -94,6 +94,7 @@
     <Compile Include="Interface\enrollment\IPatientEntryPointRepository.cs" />
     <Compile Include="Interface\enrollment\IPatientIdentifierRepository.cs" />
     <Compile Include="Interface\enrollment\IPatientReEnrollmentRepository.cs" />
+    <Compile Include="Interface\enrollment\IPersonIdentifierRepository.cs" />
     <Compile Include="Interface\enrollment\IServiceAreaIdentifiersRepository.cs" />
     <Compile Include="Interface\Interoperability\IDrugPrescriptionMessageRepository.cs" />
     <Compile Include="Interface\Interoperability\IPatientAppointmentMessageRepository.cs" />
@@ -177,6 +178,7 @@
     <Compile Include="Repository\Enrollment\PatientEnrollmentRepository.cs" />
     <Compile Include="Repository\Enrollment\PatientEntrypointRepository.cs" />
     <Compile Include="Repository\Enrollment\PatientReEnrollmentRepository.cs" />
+    <Compile Include="Repository\Enrollment\PersonIdentifierRepository.cs" />
     <Compile Include="Repository\Enrollment\ServiceAreaIdentifiersRepository.cs" />
     <Compile Include="Repository\Interoperability\DrugPrescriptionMessageRepository.cs" />
     <Compile Include="Repository\Interoperability\PatientAppointmentMessageRepository.cs" />

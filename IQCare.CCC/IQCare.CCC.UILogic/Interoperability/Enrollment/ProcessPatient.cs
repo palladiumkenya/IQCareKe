@@ -9,11 +9,11 @@ using System.Collections.Generic;
 using Entities.CCC.Lookup;
 using IQCare.CCC.UILogic.Visit;
 
-namespace IQCare.CCC.UILogic.Interoperability
+namespace IQCare.CCC.UILogic.Interoperability.Enrollment
 {
     public class ProcessPatient
     {
-        public static string Update(int patientId, int? ptn_pk, DateTime dateOfBirth, string nationalId, int facilityId, int entryPointId, DateTime enrollmentDate, string cccNumber, PatientLookup patient)
+        public static string Update(int personId, int patientId, int? ptn_pk, DateTime dateOfBirth, string nationalId, int facilityId, int entryPointId, DateTime enrollmentDate, string cccNumber, PatientLookup patient, string godsNumber)
         {
             try
             {
@@ -21,6 +21,18 @@ namespace IQCare.CCC.UILogic.Interoperability
                 var patientEntryPointManager = new PatientEntryPointManager();
                 var patientIdentifierManager = new PatientIdentifierManager();
                 var patientEnrollmentManager = new PatientEnrollmentManager();
+                var personIdentifierManager = new PersonIdentifierManager();
+
+                if (!string.IsNullOrWhiteSpace(godsNumber))
+                {
+                    IdentifierManager identifierManager = new IdentifierManager();
+                    Identifier identifier = identifierManager.GetIdentifierByCode("GODS_NUMBER");
+                    var personIdentifiers = personIdentifierManager.GetPersonIdentifiers(personId, identifier.Id);
+                    if (personIdentifiers.Count == 0)
+                    {
+                        personIdentifierManager.AddPersonIdentifier(personId, identifier.Id, godsNumber, 1);
+                    }
+                }
 
                 List<PatientLookup> patientLookups = new List<PatientLookup>();
                 patientLookups.Add(patient);
@@ -36,10 +48,11 @@ namespace IQCare.CCC.UILogic.Interoperability
 
                 patientManager.UpdatePatient(updatePatient, patientId);
 
-                string entryPointAuditData = null;
+                
                 List<PatientEntryPoint> entryPoints = patientEntryPointManager.GetPatientEntryPoints(patient.Id, 1);
                 if (entryPoints.Count > 0)
                 {
+                    string entryPointAuditData = null;
                     entryPointAuditData = AuditDataUtility.AuditDataUtility.Serializer(entryPoints);
 
                     entryPoints[0].EntryPointId = entryPointId;
@@ -90,7 +103,7 @@ namespace IQCare.CCC.UILogic.Interoperability
             }
         }
 
-        public static string Add(string firstName, string middleName, string lastName, int sex, int userId, DateTime dob, bool dobPrecision, int facilityId, int patientType, string nationalId, int visitType, DateTime dateOfEnrollment, string cccNumber, int entryPointId)
+        public static string Add(string firstName, string middleName, string lastName, int sex, int userId, DateTime dob, bool dobPrecision, int facilityId, int patientType, string nationalId, int visitType, DateTime dateOfEnrollment, string cccNumber, int entryPointId, string godsNumber)
         {
             try
             {
@@ -103,6 +116,7 @@ namespace IQCare.CCC.UILogic.Interoperability
                 PersonContactLookUpManager personContactLookUpManager = new PersonContactLookUpManager();
                 MstPatientLogic mstPatientLogic = new MstPatientLogic();
                 PatientIdentifierManager patientIdentifierManager = new PatientIdentifierManager();
+                var personIdentifierManager = new PersonIdentifierManager();
 
                 var personContacts = new List<PersonContactLookUp>();
                 int ptn_Pk = 0;
@@ -112,6 +126,17 @@ namespace IQCare.CCC.UILogic.Interoperability
                 String sDate = DateTime.Now.ToString();
                 DateTime datevalue = Convert.ToDateTime(sDate);
                 var patientIndex = datevalue.Year.ToString() + '-' + personId;
+
+                if (!string.IsNullOrWhiteSpace(godsNumber))
+                {
+                    IdentifierManager identifierManager = new IdentifierManager();
+                    Identifier identifier = identifierManager.GetIdentifierByCode("GODS_NUMBER");
+                    var personIdentifiers = personIdentifierManager.GetPersonIdentifiers(personId, identifier.Id);
+                    if (personIdentifiers.Count == 0)
+                    {
+                        personIdentifierManager.AddPersonIdentifier(personId, identifier.Id, godsNumber, 1);
+                    }
+                }
 
                 PatientEntity patientEntity = new PatientEntity();
                 patientEntity.PersonId = personId;
@@ -212,9 +237,14 @@ namespace IQCare.CCC.UILogic.Interoperability
             PatientMessageManager patientMessageManager = new PatientMessageManager();
             PatientMessage patientMessage = patientMessageManager.GetPatientMessageByEntityId(patientId);
             PatientRegistrationDTO registration = new PatientRegistrationDTO();
+            var personIdentifierManager = new PersonIdentifierManager();
 
             if (patientMessage != null)
             {
+                IdentifierManager identifierManager = new IdentifierManager();
+                Identifier identifier = identifierManager.GetIdentifierByCode("GODS_NUMBER");
+                var personIdentifiers = personIdentifierManager.GetPersonIdentifiers(patientMessage.Id, identifier.Id);
+
                 INTERNALPATIENTID internalPatientId = new INTERNALPATIENTID();
                 internalPatientId.ID = patientMessage.IdentifierValue;
                 internalPatientId.IDENTIFIER_TYPE = "CCC_NUMBER";
@@ -232,7 +262,14 @@ namespace IQCare.CCC.UILogic.Interoperability
                 registration.NEXT_OF_KIN = registration.NEXT_OF_KIN == null ? new List<NEXTOFKIN>() : registration.NEXT_OF_KIN;
 
                 //External Patient Id
-                registration.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ID = String.Empty;
+                if (personIdentifiers.Count > 0)
+                {
+                    registration.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ID = personIdentifiers[0].IdentifierValue;
+                }
+                else
+                {
+                    registration.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ID = String.Empty;
+                }    
                 registration.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ASSIGNING_AUTHORITY = "MPI";
                 registration.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.IDENTIFIER_TYPE = "GODS_NUMBER";
                 //Start setting values
@@ -267,7 +304,7 @@ namespace IQCare.CCC.UILogic.Interoperability
                 registration.PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.COUNTY = !string.IsNullOrWhiteSpace(patientMessage.CountyName) ? patientMessage.CountyName : "";
                 registration.PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.NEAREST_LANDMARK = !string.IsNullOrWhiteSpace(patientMessage.Landmark) ? patientMessage.Landmark : "";
                 //set visit variables
-                registration.PATIENT_VISIT.HIV_CARE_INITIATION_DATE = !string.IsNullOrWhiteSpace(patientMessage.DateOfEnrollment) ? patientMessage.DateOfEnrollment : "";
+                registration.PATIENT_VISIT.HIV_CARE_ENROLLMENT_DATE = !string.IsNullOrWhiteSpace(patientMessage.DateOfEnrollment) ? patientMessage.DateOfEnrollment : "";
                 registration.PATIENT_VISIT.PATIENT_SOURCE = !string.IsNullOrWhiteSpace(patientMessage.EntryPoint) ? patientMessage.EntryPoint : "";
                 registration.PATIENT_VISIT.PATIENT_TYPE = !string.IsNullOrWhiteSpace(patientMessage.PatientType) ? patientMessage.PatientType : "";
                 registration.PATIENT_VISIT.VISIT_DATE = !string.IsNullOrWhiteSpace(patientMessage.DateOfRegistration) ? patientMessage.DateOfRegistration : "";

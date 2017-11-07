@@ -16,7 +16,7 @@ namespace IQCare.DTO.CommonEntities
         public string VISIT_DATE { get; set; }
         public string PATIENT_TYPE { get; set; }
         public string PATIENT_SOURCE { get; set; }
-        public string HIV_CARE_INITIATION_DATE { get; set; }
+        public string HIV_CARE_ENROLLMENT_DATE { get; set; }
     }
 
     public class NEXTOFKIN

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using IQCare.DTO;
 using IQCare.DTO.PatientAppointment;
 
-namespace IQCare.CCC.UILogic.Interoperability
+namespace IQCare.CCC.UILogic.Interoperability.Appointment
 {
     public class ProcessPatientAppointmentMessage : IInteropDTO<PatientAppointSchedulingDTO>
     {
@@ -15,14 +15,14 @@ namespace IQCare.CCC.UILogic.Interoperability
             return AppointmentMessage.Get(entityId);
         }
 
-        public string Save(PatientAppointSchedulingDTO t)
+        public string Save(PatientAppointSchedulingDTO appointment)
         {
-            throw new NotImplementedException();
+            return AppointmentMessage.Save(appointment);
         }
 
-        public string Update(PatientAppointSchedulingDTO t)
+        public string Update(PatientAppointSchedulingDTO appointment)
         {
-            throw new NotImplementedException();
+            return AppointmentMessage.Update(appointment);
         }
     }
 }

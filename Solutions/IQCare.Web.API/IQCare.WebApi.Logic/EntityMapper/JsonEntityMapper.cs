@@ -193,6 +193,7 @@ namespace IQCare.WebApi.Logic.EntityMapper
                 cfg.CreateMap<DTO.CommonEntities.PLACER_APPOINTMENT_NUMBER, MappingEntities.PLACER_APPOINTMENT_NUMBER>().ReverseMap();
             });
 
+            entity = Mapper.Map<PatientAppointmentEntity>(appointment);
             entity.MESSAGE_HEADER = GetMessageHeader("SIU^S12", messageEvent.FacilityId.ToString(), "P");
             return entity;
         }

@@ -93,7 +93,7 @@ namespace DataAccess.CCC.Repository
         private IPatientReEnrollmentRepository _patientReEnrollmentRepository;
         private IHivReConfirmatoryTestRepository _hivReConfirmatoryTestRepository;
         private IPatientArtDistributionRepository _patientArtDistributionRepository;
-
+        private IPersonIdentifierRepository _personIdentifierRepository;
         /* Patient */
         private IPatientRepository _patientRepository;
 
@@ -686,6 +686,15 @@ namespace DataAccess.CCC.Repository
         public IPatientArtDistributionRepository PatientArtDistributionRepository
         {
             get { return _patientArtDistributionRepository ?? (_patientArtDistributionRepository= new PatientArtDistributionRepository((GreencardContext)_context)); }
+        }
+
+        public IPersonIdentifierRepository PersonIdentifierRepository
+        {
+            get
+            {
+                return _personIdentifierRepository ?? (_personIdentifierRepository =
+                           new PersonIdentifierRepository((GreencardContext) _context));
+            }
         }
 
         public IPatientAdverseEventOutcomeRepository PatientAdverseEventOutcomeRepository

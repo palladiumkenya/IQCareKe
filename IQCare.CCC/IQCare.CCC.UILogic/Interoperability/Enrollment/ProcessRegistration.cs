@@ -15,7 +15,7 @@ using IQCare.DTO.PatientRegistration;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 
-namespace IQCare.CCC.UILogic.Interoperability
+namespace IQCare.CCC.UILogic.Interoperability.Enrollment
 {
     public class ExMessage
     {
@@ -66,11 +66,13 @@ namespace IQCare.CCC.UILogic.Interoperability
                         break;
                 }
                 //Get Enrollment Date
-                DateTime dateOfEnrollment = DateTime.ParseExact(registration.PATIENT_VISIT.HIV_CARE_INITIATION_DATE, "yyyyMMdd", null);
+                DateTime dateOfEnrollment = DateTime.ParseExact(registration.PATIENT_VISIT.HIV_CARE_ENROLLMENT_DATE, "yyyyMMdd", null);
                 //Get Patient Names
                 string firstName = registration.PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME;
                 string middleName = registration.PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME;
                 string lastName = registration.PATIENT_IDENTIFICATION.PATIENT_NAME.LAST_NAME;
+                string godsNumber = registration.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ID;
+
                 string nationalId = String.Empty;
                 string cccNumber = String.Empty;
                 int entryPointId = 0;
@@ -103,11 +105,11 @@ namespace IQCare.CCC.UILogic.Interoperability
                     patient = patientLookup.GetPatientByCccNumber(cccNumber);
                     if (patient == null)
                     {
-                        msg = ProcessPatient.Add(firstName, middleName, lastName, sex, 1, DOB, DOB_Precision, facilityId, patientType, nationalId, visitType, dateOfEnrollment, cccNumber, entryPointId);
+                        msg = ProcessPatient.Add(firstName, middleName, lastName, sex, 1, DOB, DOB_Precision, facilityId, patientType, nationalId, visitType, dateOfEnrollment, cccNumber, entryPointId, godsNumber);
                     }
                     else
                     {
-                        msg = ProcessPatient.Update(patient.Id, patient.ptn_pk, DOB, nationalId, facilityId, entryPointId, dateOfEnrollment, cccNumber, patient);
+                        msg = ProcessPatient.Update(patient.PersonId, patient.Id, patient.ptn_pk, DOB, nationalId, facilityId, entryPointId, dateOfEnrollment, cccNumber, patient, godsNumber);
                     }
 
                 }
@@ -194,8 +196,11 @@ namespace IQCare.CCC.UILogic.Interoperability
                     string firstName = registration.PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME;
                     string middleName = registration.PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME;
                     string lastName = registration.PATIENT_IDENTIFICATION.PATIENT_NAME.LAST_NAME;
+                    string godsNumber = registration.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ID;
 
-                    var lookupEntryPoints = lookupLogic.GetItemIdByGroupAndDisplayName("Entrypoint", registration.PATIENT_VISIT.PATIENT_SOURCE);
+                    var lookupEntryPoints =
+                        lookupLogic.GetItemIdByGroupAndDisplayName("Entrypoint",
+                            registration.PATIENT_VISIT.PATIENT_SOURCE);
                     if (lookupEntryPoints.Count > 0)
                     {
                         entryPointId = lookupEntryPoints[0].ItemId;
@@ -206,17 +211,24 @@ namespace IQCare.CCC.UILogic.Interoperability
                     }
 
                     DOB = DateTime.ParseExact(registration.PATIENT_IDENTIFICATION.DATE_OF_BIRTH, "yyyyMMdd", null);
-                    DateTime enrollmentDate = DateTime.ParseExact(registration.PATIENT_VISIT.HIV_CARE_INITIATION_DATE, "yyyyMMdd", null);
+                    DateTime enrollmentDate = DateTime.ParseExact(registration.PATIENT_VISIT.HIV_CARE_ENROLLMENT_DATE,
+                        "yyyyMMdd", null);
                     int facilityId = Convert.ToInt32(registration.MESSAGE_HEADER.SENDING_FACILITY);
 
                     if (patient != null)
                     {
-                        msg = ProcessPatient.Update(patient.Id, patient.ptn_pk, DOB, nationalId, facilityId, entryPointId, enrollmentDate, cccNumber, patient);
+                        msg = ProcessPatient.Update(patient.PersonId, patient.Id, patient.ptn_pk, DOB, nationalId, facilityId,
+                            entryPointId, enrollmentDate, cccNumber, patient, godsNumber);
                     }
                     else
                     {
-                        msg = ProcessPatient.Add(firstName, middleName,lastName, sex, 1, DOB, DOB_Precision, patientType, facilityId, nationalId, visitType, enrollmentDate, cccNumber, entryPointId);
+                        msg = ProcessPatient.Add(firstName, middleName, lastName, sex, 1, DOB, DOB_Precision,
+                            patientType, facilityId, nationalId, visitType, enrollmentDate, cccNumber, entryPointId, godsNumber);
                     }
+                }
+                else
+                {
+                    throw new Exception("Message without ccc number");
                 }
 
                 message.Msg = msg;

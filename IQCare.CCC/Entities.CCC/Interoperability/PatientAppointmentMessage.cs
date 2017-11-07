@@ -12,7 +12,7 @@ namespace Entities.CCC.Interoperability
     public class PatientAppointmentMessage
     {
         [Key]
-        public int Id { get; set; }
+        public Int64 Id { get; set; }
         public int PatientId { get; set; }
         public int AppointmentId { get; set; }
         public string AppointmentReason { get; set; }

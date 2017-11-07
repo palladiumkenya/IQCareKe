@@ -1,4 +1,4 @@
-/****** Object:  Table [dbo].[IdentifierTypes]    Script Date: 19/09/2017 21:19:22 ******/
+/****** Object:  Table [dbo].[IdentifierType]    Script Date: 19/09/2017 21:19:22 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -9,14 +9,14 @@ IF NOT EXISTS
 (
 	SELECT *
 	FROM sys.objects
-	WHERE object_id = OBJECT_ID(N'[dbo].[IdentifierTypes]')
+	WHERE object_id = OBJECT_ID(N'[dbo].[IdentifierType]')
 		  AND type IN(N'U')
 )
 BEGIN
-	CREATE TABLE [dbo].[IdentifierTypes](
+	CREATE TABLE [dbo].[IdentifierType](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [varchar](50) NOT NULL,
-	 CONSTRAINT [PK_IdentifierTypes] PRIMARY KEY CLUSTERED 
+	 CONSTRAINT [PK_IdentifierType] PRIMARY KEY CLUSTERED 
 	(
 		[Id] ASC
 	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
@@ -83,5 +83,39 @@ CREATE TABLE [dbo].[ApiOutbox](
 	ALTER TABLE [dbo].[ApiOutbox] ADD  CONSTRAINT [DF_ApiOutbox_AttemptCount]  DEFAULT ((0)) FOR [AttemptCount]
 
 END
+
+
+/****** Object:  Table [dbo].[PersonIdentifier]    Script Date: 19/09/2017 21:19:22 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+IF NOT EXISTS
+(
+	SELECT *
+	FROM sys.objects
+	WHERE object_id = OBJECT_ID(N'[dbo].[PersonIdentifier]')
+		  AND type IN(N'U')
+)
+BEGIN
+	CREATE TABLE [dbo].[PersonIdentifier](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[PersonId] [int] NOT NULL,
+	[IdentifierId] [int] NOT NULL,
+	[IdentifierValue] [varchar](50) NOT NULL,
+	[DeleteFlag] [bit] NOT NULL,
+	[CreatedBy] [int] NOT NULL,
+	[CreateDate] [datetime] NOT NULL,
+	[AuditData] [xml] NULL,
+ CONSTRAINT [PK_PersonIdentifier] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+ALTER TABLE [dbo].[PersonIdentifier] ADD  CONSTRAINT [DF_PersonIdentifier_CreateDate]  DEFAULT (getdate()) FOR [CreateDate]
+END;
 
 

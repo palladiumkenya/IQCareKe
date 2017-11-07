@@ -11,7 +11,7 @@ namespace IQCare.CCC.UILogic
     {
         private IPatientAppointment _appointment = (IPatientAppointment)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientAppointment, BusinessProcess.CCC");
 
-        public int AddPatientAppointments(PatientAppointment p)
+        public int AddPatientAppointments(PatientAppointment p, bool sendEvent = true)
         {
             PatientAppointment appointment = new PatientAppointment()
             {
@@ -34,7 +34,7 @@ namespace IQCare.CCC.UILogic
                 MessageEventArgs args = new MessageEventArgs()
                 {
                     FacilityId = patient.FacilityId,
-                    EntityId = appointment.Id,
+                    EntityId = returnVal,
                     PatientId = appointment.PatientId,
                     MessageType = MessageType.AppointmentScheduling,
                     EventOccurred = "Patient Appointment Scheduled"
