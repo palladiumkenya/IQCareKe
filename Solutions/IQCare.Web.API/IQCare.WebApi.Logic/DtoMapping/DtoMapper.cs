@@ -366,17 +366,21 @@ namespace IQCare.WebApi.Logic.DtoMapping
 
         public ViralLoadResultsDto ViralLoadResults(ViralLoadResultEntity entity)
         {
-            var internalIdentifier = new DTOIdentifier();
+            var internalIdentifiers = new List<DTOIdentifier>();
             var viralLoadResults = new List<VLoadlResult>();
             foreach (var identifier in entity.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID)
             {
                 if (identifier.IDENTIFIER_TYPE == "CCC_NUMBER")
-                    internalIdentifier = new DTOIdentifier()
+                {
+                    var internalIdentifier = new DTOIdentifier()
                     {
                         IdentifierValue = identifier.ID,
                         IdentifierType = identifier.IDENTIFIER_TYPE,
                         AssigningAuthority = identifier.ASSIGNING_AUTHORITY
                     };
+                    internalIdentifiers.Add(internalIdentifier);
+                }
+                    
             }
 
             foreach (var result in entity.VIRAL_LOAD_RESULT)
@@ -411,19 +415,7 @@ namespace IQCare.WebApi.Logic.DtoMapping
                 },
                 PatientIdentification =
                 {
-                   // InternalPatientId = internalIdentifiers,
-                    ExternalPatientId =
-                    {
-                        IdentifierValue = entity.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ID,
-                        AssigningAuthority = entity.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ASSIGNING_AUTHORITY,
-                        IdentifierType = entity.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.IDENTIFIER_TYPE
-                    },
-                    PatientName =
-                    {
-                        LastName = entity.PATIENT_IDENTIFICATION.PATIENT_NAME.LAST_NAME,
-                        MiddleName = entity.PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME,
-                        FirstName = entity.PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME
-                    }
+                   InternalPatientId = internalIdentifiers
                 },
                 ViralLoadResult = viralLoadResults
             };

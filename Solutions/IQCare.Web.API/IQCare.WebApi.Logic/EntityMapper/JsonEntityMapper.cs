@@ -11,6 +11,7 @@ using IQCare.WebApi.Logic.MappingEntities.drugs;
 using MESSAGEHEADER = IQCare.WebApi.Logic.MappingEntities.MESSAGEHEADER;
 using PATIENTIDENTIFICATION = IQCare.WebApi.Logic.MappingEntities.PATIENTIDENTIFICATION;
 using IQCare.DTO.PatientAppointment;
+using INTERNALPATIENTID = IQCare.WebApi.Logic.MappingEntities.INTERNALPATIENTID;
 
 namespace IQCare.WebApi.Logic.EntityMapper
 {
@@ -39,7 +40,7 @@ namespace IQCare.WebApi.Logic.EntityMapper
                 cfg.CreateMap<DTO.CommonEntities.NEXTOFKIN, MappingEntities.NEXTOFKIN>().ReverseMap();
                 cfg.CreateMap<DTO.CommonEntities.VISIT, MappingEntities.VISIT>().ReverseMap();
                 cfg.CreateMap<DTO.CommonEntities.EXTERNALPATIENTID, MappingEntities.EXTERNALPATIENTID>().ReverseMap();
-                cfg.CreateMap<DTO.CommonEntities.INTERNALPATIENTID, MappingEntities.INTERNALPATIENTIDENTIFICATION>().ReverseMap();
+                cfg.CreateMap<DTO.CommonEntities.INTERNALPATIENTID, MappingEntities.INTERNALPATIENTID>().ReverseMap();
                 cfg.CreateMap<DTO.CommonEntities.PATIENTNAME, MappingEntities.PATIENTNAME>().ReverseMap();
                 cfg.CreateMap<DTO.CommonEntities.PATIENTADDRESS, MappingEntities.PATIENTADDRESS>().ReverseMap();
                 cfg.CreateMap<DTO.CommonEntities.PHYSICAL_ADDRESS, MappingEntities.PHYSICALADDRESS>().ReverseMap();
@@ -79,11 +80,11 @@ namespace IQCare.WebApi.Logic.EntityMapper
 
         public DrugPrescriptionEntity DrugPrescriptionRaised(PrescriptionDto entityDto)
         {
-            var internalIdentifiers = new List<INTERNALPATIENTIDENTIFICATION>();
+            var internalIdentifiers = new List<INTERNALPATIENTID>();
 
             foreach (var identifier in entityDto.PatientIdentification.InternalPatientId)
             {
-                var internalIdentity = new INTERNALPATIENTIDENTIFICATION()
+                var internalIdentity = new INTERNALPATIENTID()
                 {
                     IDENTIFIER_TYPE =identifier.IdentifierType,
                     ASSIGNING_AUTHORITY = identifier.AssigningAuthority,
