@@ -217,7 +217,11 @@ namespace IQCare.WebApi.Logic.MessageHandler
                 var prescriptionPayLoad =
                     drugPrescriptionMessage.GetPrescriptionMessage(messageEvent.PatientId, messageEvent.EntityId);
 
+<<<<<<< HEAD
+                List<DtoPatientIdentification> patientIdentification = new List<DtoPatientIdentification>();
+=======
                 List<DtoPatientIdentification> patientIdentification=new List<DtoPatientIdentification>();
+>>>>>>> 7b61b80aea65bc44932acfae670937a49b95d79f
                 List<PharmacyEncodedOrder> drugsPayLoad = new List<PharmacyEncodedOrder>();
 
                 foreach (var message in prescriptionPayLoad)
@@ -238,7 +242,11 @@ namespace IQCare.WebApi.Logic.MessageHandler
 
 
 
+<<<<<<< HEAD
+                PrescriptionDto prescriptionDtoPayLoad = new PrescriptionDto()
+=======
                 PrescriptionDto prescriptionDtoPayLoad=new PrescriptionDto()
+>>>>>>> 7b61b80aea65bc44932acfae670937a49b95d79f
                 {
                     MesssageHeader =
                     {
@@ -261,9 +269,15 @@ namespace IQCare.WebApi.Logic.MessageHandler
                         },
                         InternalPatientId =
                         {
+<<<<<<< HEAD
+                            AssigningAuthority = prescriptionPayLoad[0].ASSIGNING_AUTHORITY,
+                            IdentifierValue = prescriptionPayLoad[0].Id,
+                            IdentifierType = prescriptionPayLoad[0].IDENTIFIER_TYPE
+=======
                            AssigningAuthority = prescriptionPayLoad[0].ASSIGNING_AUTHORITY,
                            IdentifierValue = prescriptionPayLoad[0].Id,
                            IdentifierType = prescriptionPayLoad[0].IDENTIFIER_TYPE
+>>>>>>> 7b61b80aea65bc44932acfae670937a49b95d79f
                         },
                         PatientName =
                         {
@@ -285,23 +299,40 @@ namespace IQCare.WebApi.Logic.MessageHandler
                         {
                             FirstName = "",
                             MiddleName = "",
+<<<<<<< HEAD
+                            LastName = ""
+=======
                             LastName = "" 
+>>>>>>> 7b61b80aea65bc44932acfae670937a49b95d79f
                         },
                         TransactionDatetime = prescriptionPayLoad[0].TRANSACTION_DATETIME,
                         Notes = prescriptionPayLoad[0].NOTES
                     },
+<<<<<<< HEAD
+                    PharmacyEncodedOrder = drugsPayLoad
+=======
                     PharmacyEncodedOrder = drugsPayLoad                   
+>>>>>>> 7b61b80aea65bc44932acfae670937a49b95d79f
                 };
 
                 var prescriptionEntityPayLoad = _jsonEntityMapper.DrugPrescriptionRaised(prescriptionDtoPayLoad);
 
                 string prescriptionJson = new JavaScriptSerializer().Serialize(prescriptionEntityPayLoad);
+<<<<<<< HEAD
+                var apiOutbox = new ApiOutbox()
+                {
+                    DateSent = DateTime.Now,
+                    Message = prescriptionJson,
+                    RecepientId = 1
+                };
+=======
                    var apiOutbox = new ApiOutbox()
                    {
                        DateSent = DateTime.Now,
                        Message = prescriptionJson,
                        RecepientId = 1
                    };
+>>>>>>> 7b61b80aea65bc44932acfae670937a49b95d79f
 
                 _apiOutboxManager.AddApiOutbox(apiOutbox);
                 SendData(prescriptionJson, "").ConfigureAwait(false);
@@ -309,7 +340,11 @@ namespace IQCare.WebApi.Logic.MessageHandler
             catch (Exception e)
             {
                 Console.WriteLine(e);
+<<<<<<< HEAD
+                throw;
+=======
                throw;
+>>>>>>> 7b61b80aea65bc44932acfae670937a49b95d79f
             }
         }
 

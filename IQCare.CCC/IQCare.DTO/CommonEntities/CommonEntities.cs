@@ -144,4 +144,24 @@ namespace IQCare.DTO.CommonEntities
         public string NUMBER { get; set; }
         public string ENTITY { get; set; }
     }
+
+    public class OBSERVATIONPATIENTIDENTIFICATION
+    {
+        public EXTERNALPATIENTID EXTERNAL_PATIENT_ID { get; set; }
+        public List<INTERNALPATIENTID> INTERNAL_PATIENT_ID { get; set; }
+        public PATIENTNAME PATIENT_NAME { get; set; }
+    }
+
+    public class OBSERVATION_RESULT
+    {
+        public string OBSERVATION_IDENTIFIER { get; set; }
+        public string OBSERVATION_SUB_ID { get; set; }
+        public string CODING_SYSTEM { get; set; }
+        public string VALUE_TYPE { get; set; }
+        public string OBSERVATION_VALUE { get; set; }
+        public string UNITS { get; set; }
+        public string OBSERVATION_RESULT_STATUS { get; set; }
+        public string OBSERVATION_DATETIME { get; set; }
+        public string ABNORMAL_FLAGS { get; set; }
+    }
 }

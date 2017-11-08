@@ -49,6 +49,7 @@
     <Compile Include="DtoPatientIdentification.cs" />
     <Compile Include="IInteropDTO.cs" />
     <Compile Include="IlMessage.cs" />
+    <Compile Include="ObservationResult\ObservationResultDTO.cs" />
     <Compile Include="OrderingPysicianDto.cs" />
     <Compile Include="PatientAppointment\PatientAppointSchedulingDTO.cs" />
     <Compile Include="PatientNameDto.cs" />

@@ -124,6 +124,7 @@
     <Compile Include="Interoperability\Enrollment\ProcessPatient.cs" />
     <Compile Include="Interoperability\Appointment\ProcessPatientAppointmentMessage.cs" />
     <Compile Include="Interoperability\Enrollment\ProcessRegistration.cs" />
+    <Compile Include="Interoperability\Observation\ProcessObservationResultMessage.cs" />
     <Compile Include="Interoperability\ProcessViralLoadResults.cs" />
     <Compile Include="Interoperability\ViralLoadMessageManager.cs" />
     <Compile Include="LookupLogic.cs" />
