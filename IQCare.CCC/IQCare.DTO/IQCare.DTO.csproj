@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -49,6 +50,7 @@
     <Compile Include="IInteropDTO.cs" />
     <Compile Include="IlMessage.cs" />
     <Compile Include="OrderingPysicianDto.cs" />
+    <Compile Include="PatientAppointment\PatientAppointSchedulingDTO.cs" />
     <Compile Include="PatientNameDto.cs" />
     <Compile Include="PatientRegistration\PatientRegistrationDTO.cs" />
     <Compile Include="PharmacyEncorderOrderDto.cs" />

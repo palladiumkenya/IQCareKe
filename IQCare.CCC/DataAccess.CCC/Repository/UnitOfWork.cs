@@ -93,7 +93,7 @@ namespace DataAccess.CCC.Repository
         private IPatientReEnrollmentRepository _patientReEnrollmentRepository;
         private IHivReConfirmatoryTestRepository _hivReConfirmatoryTestRepository;
         private IPatientArtDistributionRepository _patientArtDistributionRepository;
-
+        private IPersonIdentifierRepository _personIdentifierRepository;
         /* Patient */
         private IPatientRepository _patientRepository;
 
@@ -145,9 +145,9 @@ namespace DataAccess.CCC.Repository
 
         /*Interoperability*/
         private IPatientMessageRepository _patientMessageRepository;
-
         private IDrugPrescriptionMessageRepository _drugPrescriptionMessageRepository;
         private IViralLoadMessageRepository _viralLoadMessageRepository;
+        private IPatientAppointmentMessageRepository _patientAppointmentMessageRepository;
 
         public UnitOfWork(BaseContext context)
         {
@@ -180,6 +180,15 @@ namespace DataAccess.CCC.Repository
             {
                 return _patientMessageRepository ??
                        (_patientMessageRepository = new PatientMessageRepository((LookupContext) _context));
+            }
+        }
+
+        public IPatientAppointmentMessageRepository PatientAppointmentMessageRepository
+        {
+            get
+            {
+                return _patientAppointmentMessageRepository ?? (_patientAppointmentMessageRepository =
+                           new PatientAppointmentMessageRepository((LookupContext) _context));
             }
         }
 
@@ -677,6 +686,15 @@ namespace DataAccess.CCC.Repository
         public IPatientArtDistributionRepository PatientArtDistributionRepository
         {
             get { return _patientArtDistributionRepository ?? (_patientArtDistributionRepository= new PatientArtDistributionRepository((GreencardContext)_context)); }
+        }
+
+        public IPersonIdentifierRepository PersonIdentifierRepository
+        {
+            get
+            {
+                return _personIdentifierRepository ?? (_personIdentifierRepository =
+                           new PersonIdentifierRepository((GreencardContext) _context));
+            }
         }
 
         public IPatientAdverseEventOutcomeRepository PatientAdverseEventOutcomeRepository

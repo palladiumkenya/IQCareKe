@@ -1,3 +1,13 @@
+IF NOT EXISTS(SELECT TOP 1 Id FROM IdentifierType WHERE Name = N'Patient')
+BEGIN
+	INSERT INTO [dbo].[IdentifierType] ([Name]) VALUES (N'Patient');
+END;
+
+IF NOT EXISTS(SELECT TOP 1 Id FROM IdentifierType WHERE Name = N'Person')
+BEGIN
+	INSERT INTO [dbo].[IdentifierType] ([Name]) VALUES (N'Person');
+END;
+
 IF EXISTS(SELECT TOP 1 Id FROM Identifiers WHERE Name = N'CCC Registration Number')
 BEGIN	
 	UPDATE [dbo].[Identifiers] SET IdentifierType = 1

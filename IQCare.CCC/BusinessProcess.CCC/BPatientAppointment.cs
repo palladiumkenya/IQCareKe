@@ -20,7 +20,7 @@ namespace BusinessProcess.CCC
                 _unitOfWork.PatientAppointmentRepository.Add(p);
                 _result = _unitOfWork.Complete();
                 _unitOfWork.Dispose();
-                return _result;
+                return p.Id;
             }
    
         }

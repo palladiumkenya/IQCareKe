@@ -5,6 +5,6 @@ namespace IQCare.WebApi.Logic.MessageHandler
 {
     public interface IOutgoingMessageService
     {
-        int Handle(MessageEventArgs message);
+        void Handle(MessageEventArgs message);
     }
 }

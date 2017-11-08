@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using IQCare.DTO;
+using IQCare.DTO.PatientAppointment;
 using IQCare.Events;
 using IQCare.WebApi.Logic.MappingEntities;
 using IQCare.DTO.PatientRegistration;
@@ -26,7 +27,7 @@ namespace IQCare.WebApi.Logic.EntityMapper
 
         string DrugOrderFulfilment();
 
-        void AppointmentScheduling();
+        PatientAppointmentEntity AppointmentScheduling(PatientAppointSchedulingDTO appointment, MessageEventArgs messageEvent);
 
         void AppointmentUpdated();
 

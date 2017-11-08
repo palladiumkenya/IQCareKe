@@ -117,8 +117,10 @@
     <Compile Include="Enrollment\BPatientIdentifier.cs" />
     <Compile Include="Enrollment\BPatientEnrollment.cs" />
     <Compile Include="Enrollment\BPatientReEnrollment.cs" />
+    <Compile Include="Enrollment\BPersonIdentifier.cs" />
     <Compile Include="Enrollment\BServiceAreaIdentifiers.cs" />
     <Compile Include="Interoperability\BDrugPrescriptionManager.cs" />
+    <Compile Include="Interoperability\BPatientAppointmentMessage.cs" />
     <Compile Include="Interoperability\BPatientMessage.cs" />
     <Compile Include="Interoperability\BViralLoadMessage.cs" />
     <Compile Include="Lookup\BFacilityListManager.cs" />

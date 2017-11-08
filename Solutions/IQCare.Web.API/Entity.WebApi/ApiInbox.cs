@@ -5,7 +5,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Entity.WebApi
 {
     [Serializable]
-    [Table("API_Inbox")]
     public class ApiInbox
     {
         [Key]

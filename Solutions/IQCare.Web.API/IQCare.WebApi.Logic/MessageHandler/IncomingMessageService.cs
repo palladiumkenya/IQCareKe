@@ -7,8 +7,11 @@ using IQCare.WebApi.Logic.DtoMapping;
 using IQCare.WebApi.Logic.MappingEntities;
 using System;
 using System.Web.Script.Serialization;
+using IQCare.CCC.UILogic.Interoperability.Appointment;
+using IQCare.CCC.UILogic.Interoperability.Enrollment;
 using IQCare.DTO;
 using IQCare.DTO.CommonEntities;
+using IQCare.DTO.PatientAppointment;
 
 namespace IQCare.WebApi.Logic.MessageHandler
 {
@@ -35,10 +38,11 @@ namespace IQCare.WebApi.Logic.MessageHandler
             {
                 DateReceived = DateTime.Now,
                 Message = message,
-                //Todo get sender Id from interop table
                 SenderId = 1
             };
 
+            //save to inbox
+            _apiInboxmanager.AddApiInbox(apiInbox);
 
             switch (messageType)
             {
@@ -62,7 +66,7 @@ namespace IQCare.WebApi.Logic.MessageHandler
                     HandleAppointments(apiInbox);
                     break;
 
-                case "ORU^R01":
+                case "ORU^VL":
                     HandleNewViralLoadResults(apiInbox);
                     break;
             }
@@ -93,10 +97,12 @@ namespace IQCare.WebApi.Logic.MessageHandler
 
                 incomingMessage.DateProcessed = DateTime.Now;
                 incomingMessage.Processed = true;
-                _apiInboxmanager.AddApiInbox(incomingMessage);
+                
+                //update message set processed=1, erromsq=null
             }
             catch (Exception e)
             {
+                //update message set processed=1, erromsq
                 incomingMessage.LogMessage = e.Message;
                 incomingMessage.Processed = false;
                 _apiInboxmanager.AddApiInbox(incomingMessage);
@@ -152,6 +158,40 @@ namespace IQCare.WebApi.Logic.MessageHandler
 
         private void HandleAppointments(ApiInbox incomingMessage)
         {
+            try
+            {
+                PatientAppointmentEntity appointmentEntity =
+                    new JavaScriptSerializer().Deserialize<PatientAppointmentEntity>(incomingMessage.Message);
+
+                Mapper.Initialize(cfg =>
+                {
+                    cfg.CreateMap<PatientAppointSchedulingDTO, PatientAppointmentEntity>().ReverseMap();
+                    cfg.CreateMap<DTO.CommonEntities.MESSAGEHEADER, MappingEntities.MESSAGEHEADER>().ReverseMap();
+                    cfg.CreateMap<DTO.CommonEntities.APPOINTMENTPATIENTIDENTIFICATION, MappingEntities.APPOINTMENTPATIENTIDENTIFICATION>().ReverseMap();
+                    cfg.CreateMap<DTO.CommonEntities.EXTERNALPATIENTID, MappingEntities.EXTERNALPATIENTID>().ReverseMap();
+                    cfg.CreateMap<DTO.CommonEntities.INTERNALPATIENTID, MappingEntities.INTERNALPATIENTID>().ReverseMap();
+                    cfg.CreateMap<DTO.CommonEntities.PATIENTNAME, MappingEntities.PATIENTNAME>().ReverseMap();
+                    cfg.CreateMap<DTO.CommonEntities.APPOINTMENT_INFORMATION, MappingEntities.APPOINTMENT_INFORMATION>().ReverseMap();
+                    cfg.CreateMap<DTO.CommonEntities.PLACER_APPOINTMENT_NUMBER, MappingEntities.PLACER_APPOINTMENT_NUMBER>().ReverseMap();
+                });
+                var appointment = Mapper.Map<PatientAppointSchedulingDTO>(appointmentEntity);
+                var processAppoinment = new ProcessPatientAppointmentMessage();
+                foreach (var itemAppointment in appointment.APPOINTMENT_INFORMATION){
+                    if (itemAppointment.ACTION_CODE == "A")
+                    {
+                        processAppoinment.Save(appointment);
+                    }
+                    else if (itemAppointment.ACTION_CODE=="U" || itemAppointment.ACTION_CODE == "D")
+                    {
+                        processAppoinment.Update(appointment);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
             _apiInboxmanager.AddApiInbox(incomingMessage);
         }
 
@@ -162,7 +202,8 @@ namespace IQCare.WebApi.Logic.MessageHandler
                 ViralLoadResultEntity entity = new JavaScriptSerializer().Deserialize<ViralLoadResultEntity>(incomingMessage.Message);
                 ViralLoadResultsDto vlResultsDto = _dtoMapper.ViralLoadResults(entity);
                 var processViralLoadResults = new ProcessViralLoadResults();
-                processViralLoadResults.Save(vlResultsDto);
+                var msg = processViralLoadResults.Save(vlResultsDto);
+                incomingMessage.LogMessage = msg;
             }
             catch (Exception e)
             {

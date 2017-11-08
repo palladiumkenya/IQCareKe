@@ -108,9 +108,11 @@
     <Compile Include="Enrollment\PatientEntryPoint.cs" />
     <Compile Include="Encounter\LabOrderEntity.cs" />
     <Compile Include="Enrollment\PatientReEnrollment.cs" />
+    <Compile Include="Enrollment\PersonIdentifier.cs" />
     <Compile Include="Enrollment\ServiceArea.cs" />
     <Compile Include="Enrollment\ServiceAreaIdentifiers.cs" />
     <Compile Include="Interoperability\DrugPrescriptionEntity.cs" />
+    <Compile Include="Interoperability\PatientAppointmentMessage.cs" />
     <Compile Include="Interoperability\PatientMessage.cs" />
     <Compile Include="Interoperability\ViralLoadMessage.cs" />
     <Compile Include="Lookup\FacilityList.cs" />

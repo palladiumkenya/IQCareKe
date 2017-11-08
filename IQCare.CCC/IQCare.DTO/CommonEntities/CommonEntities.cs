@@ -16,7 +16,7 @@ namespace IQCare.DTO.CommonEntities
         public string VISIT_DATE { get; set; }
         public string PATIENT_TYPE { get; set; }
         public string PATIENT_SOURCE { get; set; }
-        public string HIV_CARE_INITIATION_DATE { get; set; }
+        public string HIV_CARE_ENROLLMENT_DATE { get; set; }
     }
 
     public class NEXTOFKIN
@@ -42,11 +42,8 @@ namespace IQCare.DTO.CommonEntities
         public string LAST_NAME { get; set; }
     }
 
-    public class PATIENTIDENTIFICATION
+    public abstract class PatientBaseProperties
     {
-        public EXTERNALPATIENTID EXTERNAL_PATIENT_ID { get; set; }
-        public List<INTERNALPATIENTID> INTERNAL_PATIENT_ID { get; set; }
-        public PATIENTNAME PATIENT_NAME { get; set; }
         public PATIENTNAME MOTHER_NAME { get; set; }
         public string DATE_OF_BIRTH { get; set; }
         public string DATE_OF_BIRTH_PRECISION { get; set; }
@@ -56,6 +53,20 @@ namespace IQCare.DTO.CommonEntities
         public string MARITAL_STATUS { get; set; }
         public string DEATH_DATE { get; set; }
         public string DEATH_INDICATOR { get; set; }
+    }
+
+    public class PATIENTIDENTIFICATION : PatientBaseProperties
+    {
+        public EXTERNALPATIENTID EXTERNAL_PATIENT_ID { get; set; }
+        public List<INTERNALPATIENTID> INTERNAL_PATIENT_ID { get; set; }
+        public PATIENTNAME PATIENT_NAME { get; set; }
+    }
+
+    public class APPOINTMENTPATIENTIDENTIFICATION
+    {
+        public EXTERNALPATIENTID EXTERNAL_PATIENT_ID { get; set; }
+        public List<INTERNALPATIENTID> INTERNAL_PATIENT_ID { get; set; }
+        public PATIENTNAME PATIENT_NAME { get; set; }
     }
 
     public class PATIENTADDRESS
@@ -105,5 +116,32 @@ namespace IQCare.DTO.CommonEntities
         public string SECURITY { get; set; }
         public string MESSAGE_TYPE { get; set; }
         public string PROCESSING_ID { get; set; }
+    }
+
+    public class APPOINTMENT_INFORMATION
+    {
+        public PLACER_APPOINTMENT_NUMBER PLACER_APPOINTMENT_NUMBER { get; set; }
+
+        public string APPOINTMENT_REASON { get; set; }
+
+        public string APPOINTMENT_TYPE { get; set; }
+
+        public string APPOINTMENT_DATE { get; set; }
+
+        public string APPOINTMENT_PLACING_ENTITY { get; set; }
+
+        public string APPOINTMENT_LOCATION { get; set; }
+
+        public string ACTION_CODE { get; set; }
+
+        public string APPOINTMENT_NOTE { get; set; }
+
+        public string APPOINTMENT_HONORED { get; set; }
+    }
+
+    public class PLACER_APPOINTMENT_NUMBER
+    {
+        public string NUMBER { get; set; }
+        public string ENTITY { get; set; }
     }
 }

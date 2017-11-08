@@ -219,5 +219,16 @@ namespace BusinessProcess.CCC.visit
                 return patientMasterVisits;
             }
         }
+
+        public PatientMasterVisit GetLastPatientVisit(int patientId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                PatientMasterVisit visit = unitOfWork.PatientMasterVisitRepository.FindBy(x => x.PatientId == patientId)
+                    .OrderByDescending(y => y.Id).FirstOrDefault();
+                unitOfWork.Dispose();
+                return visit;
+            }
+        }
     }
 }

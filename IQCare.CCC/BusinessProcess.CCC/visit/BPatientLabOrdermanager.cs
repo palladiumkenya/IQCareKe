@@ -177,7 +177,37 @@ namespace BusinessProcess.CCC.visit
             }
         }
 
-      
+        public List<LabOrderEntity> GetPatientLabOrdersByDate(int patientId, DateTime visitDate)
+        {
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                List<LabOrderEntity> patientLabOrders =
+                    _unitOfWork.PatientLabOrderRepository.FindBy(
+                            x =>
+                                x.Ptn_pk == patientId &
+                                DbFunctions.TruncateTime(x.CreateDate) == DbFunctions.TruncateTime(visitDate) &
+                                !x.DeleteFlag)
+                        .OrderByDescending(x => x.Id).Take(1).ToList();
+                _unitOfWork.Dispose();
+                return patientLabOrders;
+            }
+        }
+
+        public List<LabDetailsEntity> GetPatientLabDetailsByDate(int labOrderId, DateTime visitDate)
+        {
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                List<LabDetailsEntity> patientLabOrders =
+                    _unitOfWork.PatientLabDetailsRepository.FindBy(
+                            x =>
+                                x.LabOrderId == labOrderId &
+                                DbFunctions.TruncateTime(x.CreateDate) == DbFunctions.TruncateTime(visitDate) &
+                                !x.DeleteFlag)
+                        .OrderByDescending(x => x.Id).Take(1).ToList();
+                _unitOfWork.Dispose();
+                return patientLabOrders;
+            }
+        }
     }
 }
 
