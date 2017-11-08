@@ -11,7 +11,7 @@ namespace IQCare.DTO
     {
         
         public DTOIdentifier ExternalPatientId { get; set; }
-        public DTOIdentifier InternalPatientId { get; set; }
+        public List<DTOIdentifier> InternalPatientId { get; set; }
         public PatientNameDto PatientName { get; set; }
     }
 }

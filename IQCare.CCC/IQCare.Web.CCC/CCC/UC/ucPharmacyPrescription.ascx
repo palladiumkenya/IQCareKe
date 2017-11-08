@@ -370,6 +370,7 @@
     $(document).ready(function () {
         
         //alert(pmscmSamePointDispense);
+        //drugList(1, $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text());
         $("#<%=ddlTreatmentProgram.ClientID%>").on('change',
             function () {
                 if (pmscmSamePointDispense === "PM/SCM With Same point dispense") {

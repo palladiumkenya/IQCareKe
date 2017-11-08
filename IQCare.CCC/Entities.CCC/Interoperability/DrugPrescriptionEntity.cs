@@ -13,11 +13,13 @@ namespace Entities.CCC.Interoperability
         [Key]
         public int ptnpk { get; set; }
         public int PatientId { get; set; }
+        public int PatientMasterVisitId { get; set; }
         public string Id { get; set; }
+        public string Id2 { get; set; }
         public string SENDING_FACILITY { get; set; }
        public string IDENTIFIER_TYPE { get; set; }
        public string ASSIGNING_AUTHORITY { get; set; }
-       public string ID2 { get; set; }
+       // public string ID2 { get; set; }
        public string IDENTIFIER_TYPE2 { get; set; }
        public string ASSIGNING_AUTHORITY2 { get; set; }
        public int ptn_pharmacy_pk { get; set; }
@@ -29,14 +31,15 @@ namespace Entities.CCC.Interoperability
        public int NUMBER { get; set; }
        public string ENTITY { get; set; }
        public string ORDER_STATUS { get; set; }
-       public string ORDERING_PHYSICIAN { get; set; }
+       public string ORDERING_PHYSICIAN_FIRST_NAME { get; set; }
+        public string ORDERING_PHYSICIAN_LAST_NAME { get; set; }
         public string DRUG_NAME { get; set; }
         public string CODING_SYSTEM { get; set; }
         public string STRENGTH { get; set; }
-        public string DOSAGE { get; set; }
+        public Decimal DOSAGE { get; set; }
         public string FREQUENCY { get; set; }
-        public int DURATION { get; set; }
-        public string QUANTITY_PRESCRIBED { get; set; }
+        public Decimal DURATION { get; set; }
+        public Decimal QUANTITY_PRESCRIBED { get; set; }
         public string PRESCRIPTION_NOTES { get; set; }
 
         //public List<PrescribedDrug> PrescribedDrugs { get; set; }

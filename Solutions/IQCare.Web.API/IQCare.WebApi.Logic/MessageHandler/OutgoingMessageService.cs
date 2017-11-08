@@ -14,6 +14,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
+using IQCare.DTO.CommonEntities;
 
 
 namespace IQCare.WebApi.Logic.MessageHandler
@@ -254,98 +255,24 @@ namespace IQCare.WebApi.Logic.MessageHandler
         {
             try
             {
-                //var prescriptionManager = new DrugPrescriptionMessage();
-                DrugPrescriptionMessage drugPrescriptionMessage = new DrugPrescriptionMessage();
+                var drugPrescriptionMessage = new DrugPrescriptionMessage();
+                //DrugPrescriptionMessage drugPrescriptionMessage = new DrugPrescriptionMessage();
 
-                var prescriptionPayLoad =
-                    drugPrescriptionMessage.GetPrescriptionMessage(messageEvent.PatientId, messageEvent.EntityId);
+                //GEt our DTO Object
+                var prescriptionDtoPayLoad =
+                    drugPrescriptionMessage.GetPrescriptionMessage(messageEvent.PatientId, messageEvent.EntityId,
+                        messageEvent.PatientMasterVisitId);
+                
+                var drugPrescriptionEntity = _jsonEntityMapper.DrugPrescriptionRaised(prescriptionDtoPayLoad);
 
-                List<DtoPatientIdentification> patientIdentification=new List<DtoPatientIdentification>();
-                List<PharmacyEncodedOrder> drugsPayLoad = new List<PharmacyEncodedOrder>();
-
-                foreach (var message in prescriptionPayLoad)
-                {
-                    var messageOrder = new PharmacyEncodedOrder()
-                    {
-                        DrugName = message.DRUG_NAME,
-                        CodingSystem = message.CODING_SYSTEM,
-                        Strength = message.STRENGTH,
-                        Dosage = message.DOSAGE,
-                        Frequency = message.FREQUENCY,
-                        Duration = message.DURATION,
-                        QuantityPrescribed = Convert.ToInt32(message.QUANTITY_PRESCRIBED),
-                        PrescriptionNotes = message.NOTES
-                    };
-                    drugsPayLoad.Add(messageOrder);
-                }
-
-
-
-                PrescriptionDto prescriptionDtoPayLoad=new PrescriptionDto()
-                {
-                    MesssageHeader =
-                    {
-                        ProcessingId = "P",
-                        SendingApplication = "IQCare",
-                        SendingFacility = messageEvent.FacilityId.ToString(),
-                        ReceivingApplication = "IL",
-                        ReceivingFacility = messageEvent.FacilityId.ToString(),
-                        MessageDatetime = prescriptionPayLoad[0].TRANSACTION_DATETIME,
-                        Security = "",
-                        MessageType = "RDE^001"
-                    },
-                    PatientIdentification =
-                    {
-                        ExternalPatientId =
-                        {
-                            AssigningAuthority = "",
-                            IdentifierType = "",
-                            IdentifierValue = ""
-                        },
-                        InternalPatientId =
-                        {
-                           AssigningAuthority = prescriptionPayLoad[0].ASSIGNING_AUTHORITY,
-                           IdentifierValue = prescriptionPayLoad[0].Id,
-                           IdentifierType = prescriptionPayLoad[0].IDENTIFIER_TYPE
-                        },
-                        PatientName =
-                        {
-                            FirstName = prescriptionPayLoad[0].FIRST_NAME,
-                            MiddleName = prescriptionPayLoad[0].MIDDLE_NAME,
-                            LastName = prescriptionPayLoad[0].LAST_NAME
-                        }
-                    },
-                    CommonOrderDetails =
-                    {
-                        OrderControl = "NW",
-                        PlacerOrderNumber =
-                        {
-                            Number = prescriptionPayLoad[0].ptn_pharmacy_pk,
-                            Entity = prescriptionPayLoad[0].ENTITY
-                        },
-                        OrderStatus = prescriptionPayLoad[0].ORDER_STATUS,
-                        OrderingPhysician =
-                        {
-                            FirstName = "",
-                            MiddleName = "",
-                            LastName = "" 
-                        },
-                        TransactionDatetime = prescriptionPayLoad[0].TRANSACTION_DATETIME,
-                        Notes = prescriptionPayLoad[0].NOTES
-                    },
-                    PharmacyEncodedOrder = drugsPayLoad                   
-                };
-
-                var prescriptionEntityPayLoad = _jsonEntityMapper.DrugPrescriptionRaised(prescriptionDtoPayLoad);
-
-                string prescriptionJson = new JavaScriptSerializer().Serialize(prescriptionEntityPayLoad);
-                   var apiOutbox = new ApiOutbox()
+                string prescriptionJson = new JavaScriptSerializer().Serialize(drugPrescriptionEntity);
+                /*   var apiOutbox = new ApiOutbox()
                    {
                        DateRead = DateTime.Now,
                        Message = prescriptionJson,
                    };
 
-                _apiOutboxManager.AddApiOutbox(apiOutbox);
+                //_apiOutboxManager.AddApiOutbox(apiOutbox);*/
                 SendData(prescriptionJson, "").ConfigureAwait(false);
             }
             catch (Exception e)

@@ -245,7 +245,8 @@ namespace IQCare.CCC.UILogic
                     EntityId = result, // the orderId
                     EventOccurred = "Prescription Raised",
                     MessageType = MessageType.DrugPrescriptionRaised,
-                    FacilityId =0
+                    FacilityId =0,
+                    PatientMasterVisitId = Convert.ToInt32(PatientMasterVisitID) 
                 };
                 Publisher.RaiseEventAsync(this, arg).ConfigureAwait(false); // --
             }

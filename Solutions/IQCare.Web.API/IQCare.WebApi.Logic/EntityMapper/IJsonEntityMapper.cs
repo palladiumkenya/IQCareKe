@@ -20,7 +20,7 @@ namespace IQCare.WebApi.Logic.EntityMapper
 
         void StopDrugs();
 
-        DrugPrescriptionEntity DrugPrescriptionRaised(List<PrescriptionDto> prescription);
+        DrugPrescriptionEntity DrugPrescriptionRaised(PrescriptionDto prescription);
 
         void DrugOrderCancel();
 
@@ -40,6 +40,6 @@ namespace IQCare.WebApi.Logic.EntityMapper
 
         void ViralLoadLabOrder();
 
-        object DrugPrescriptionRaised(PrescriptionDto drugOrderDto);
+        //object DrugPrescriptionRaised(PrescriptionDto drugOrderDto);
     }
 }

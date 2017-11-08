@@ -49,18 +49,18 @@ namespace IQCare.WebApi.Logic.MappingEntities
         }
     }
 
-    public class INTERNALPATIENTID
+    public class INTERNALPATIENTIDENTIFICATION
     {
         public string ID { get; set; }
         public string IDENTIFIER_TYPE { get; set; }
         public string ASSIGNING_AUTHORITY { get; set; }
 
-        public static List<INTERNALPATIENTID> GetInternalPatientIds(Registration entity)
+        public static List<INTERNALPATIENTIDENTIFICATION> GetInternalPatientIds(Registration entity)
         {
-            List<INTERNALPATIENTID> internalpatientids = new List<INTERNALPATIENTID>();
+            List<INTERNALPATIENTIDENTIFICATION> internalpatientids = new List<INTERNALPATIENTIDENTIFICATION>();
             foreach (var id in entity.InternalPatientIdentifiers)
             {
-                var identifier = new INTERNALPATIENTID()
+                var identifier = new INTERNALPATIENTIDENTIFICATION()
                 {
                     ID = id.IdentifierValue,
                     IDENTIFIER_TYPE = id.IdentifierType,
@@ -128,7 +128,7 @@ namespace IQCare.WebApi.Logic.MappingEntities
     public class PATIENTIDENTIFICATION
     {
         public EXTERNALPATIENTID EXTERNAL_PATIENT_ID { get; set; }
-        public List<INTERNALPATIENTID> INTERNAL_PATIENT_ID { get; set; }
+        public List<INTERNALPATIENTIDENTIFICATION> INTERNAL_PATIENT_ID { get; set; }
         public PATIENTNAME PATIENT_NAME { get; set; }
         public PATIENTNAME MOTHER_NAME { get; set; }
         public string DATE_OF_BIRTH { get; set; }
@@ -144,7 +144,7 @@ namespace IQCare.WebApi.Logic.MappingEntities
         {
             PATIENTIDENTIFICATION patientidentification = new PATIENTIDENTIFICATION();
             patientidentification.EXTERNAL_PATIENT_ID = EXTERNALPATIENTID.GetExternalpatientid(entity);
-            patientidentification.INTERNAL_PATIENT_ID = INTERNALPATIENTID.GetInternalPatientIds(entity);
+            patientidentification.INTERNAL_PATIENT_ID = INTERNALPATIENTIDENTIFICATION.GetInternalPatientIds(entity);
             patientidentification.PATIENT_NAME = PATIENTNAME.GetPatientName(entity);
             //patientidentification.MOTHER_MAIDEN_NAME = !string.IsNullOrWhiteSpace(entity.MotherMaidenName) ? entity.MotherMaidenName : "";
             patientidentification.DATE_OF_BIRTH = !string.IsNullOrWhiteSpace(entity.Patient.DateOfBirth) ? entity.Patient.DateOfBirth : "";

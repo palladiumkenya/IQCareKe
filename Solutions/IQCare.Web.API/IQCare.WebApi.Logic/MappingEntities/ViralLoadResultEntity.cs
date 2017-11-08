@@ -6,7 +6,7 @@ namespace IQCare.WebApi.Logic.MappingEntities
     public class VLPATIENTIDENTIFICATION
     {
         public EXTERNALPATIENTID EXTERNAL_PATIENT_ID { get; set; }
-        public List<INTERNALPATIENTID> INTERNAL_PATIENT_ID { get; set; }
+        public List<INTERNALPATIENTIDENTIFICATION> INTERNAL_PATIENT_ID { get; set; }
         public PATIENTNAME PATIENT_NAME { get; set; }
     }
     public class VIRALLOADRESULT
