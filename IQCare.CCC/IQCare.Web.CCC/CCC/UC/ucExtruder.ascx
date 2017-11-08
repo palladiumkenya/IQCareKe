@@ -11,7 +11,7 @@
 
             $("#extruderLeft").buildMbExtruder({
                 position:"left",
-                width:350,
+                width:400,
                 extruderOpacity:.8,
                 hidePanelsOnClose:true,
                 accordionPanels:true,
