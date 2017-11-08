@@ -11,32 +11,11 @@ using IQCare.WebApi.Logic.MappingEntities.drugs;
 using MESSAGEHEADER = IQCare.WebApi.Logic.MappingEntities.MESSAGEHEADER;
 using PATIENTIDENTIFICATION = IQCare.WebApi.Logic.MappingEntities.PATIENTIDENTIFICATION;
 using IQCare.DTO.PatientAppointment;
-using IQCare.DTO.ObservationResult;
+<<<<<<< HEAD
 using INTERNALPATIENTID = IQCare.WebApi.Logic.MappingEntities.INTERNALPATIENTID;
-
-namespace IQCare.WebApi.Logic.EntityMapper
-{
-    public class JsonEntityMapper : IJsonEntityMapper
-    {
-        public PatientRegistrationEntity PatientRegistration(PatientRegistrationDTO entity, MessageEventArgs messageEvent)
-        {
-            PatientRegistrationEntity patientRegistration = new PatientRegistrationEntity();
-
-            string messageType = null;
-            if (messageEvent.MessageType == MessageType.NewClientRegistration)
-            {
-                messageType = "ADT^A04";
-            }
-            else if (messageEvent.MessageType == MessageType.UpdatedClientInformation)
-            {
-                messageType = "ADT^A08";
-            }
-
-            int facilityId = messageEvent.FacilityId;
-
-            Mapper.Initialize(cfg => {
-                cfg.CreateMap<PatientRegistrationDTO, PatientRegistrationEntity>().ReverseMap();
-                cfg.CreateMap<DTO.CommonEntities.MESSAGEHEADER, MappingEntities.MESSAGEHEADER>().ReverseMap();
+=======
+using IQCare.DTO.ObservationResult;
+>>>>>>> 7b61b80aea65bc44932acfae670937a49b95d79f
 
 namespace IQCare.WebApi.Logic.EntityMapper
 {
