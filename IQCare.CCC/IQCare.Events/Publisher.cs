@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -24,12 +25,11 @@ namespace IQCare.Events
             {
                 using (HttpClient httpClient = new HttpClient())
                 {
-                    string absoluteUrl = HttpContext.Current.Request.Url.AbsoluteUri;
-                    string absolutePath = HttpContext.Current.Request.Url.AbsolutePath;
-                    string uri = absoluteUrl.Replace(absolutePath, "/");
+                    string host = HttpContext.Current.Request.Url.Host;
+                    string interopApiPort = ConfigurationManager.AppSettings.Get("InteropApiPort");
+                    string uri = "http://" + host + ":" + interopApiPort;
 
-                    // httpClient.BaseAddress = new Uri(uri);
-                    httpClient.BaseAddress = new Uri("http://localhost:1155/");
+                    httpClient.BaseAddress = new Uri(uri);
                     httpClient.DefaultRequestHeaders.Accept.Clear();
                     httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 

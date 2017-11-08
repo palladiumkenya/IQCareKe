@@ -144,11 +144,19 @@ GO
 
 CREATE VIEW [dbo].[Api_TreatmentSupporterView]
 AS
-SELECT        dbo.PatientTreatmentSupporter.PersonId AS PersonId, CAST(DECRYPTBYKEY(dbo.Person.FirstName) AS VARCHAR(50)) AS FIRST_NAME, CAST(DECRYPTBYKEY(dbo.Person.MidName) AS VARCHAR(50)) AS MIDDLE_NAME, 
-                         CAST(DECRYPTBYKEY(dbo.Person.LastName) AS VARCHAR(50)) AS LAST_NAME, NULL AS RELATIONSHIP, NULL AS ADDRESS, CAST(DECRYPTBYKEY(dbo.PatientTreatmentSupporter.MobileContact) AS VARCHAR(50)) 
-                         AS PHONE_NUMBER, SEX = CASE(SELECT ItemName FROM LookupItemView WHERE ItemId = Person.Sex AND MasterName = 'Gender') WHEN 'Male' THEN 'M' WHEN 'Female' THEN 'F' ELSE '' END,NULL AS DATE_OF_BIRTH, 'T' AS CONTACT_ROLE
-FROM            dbo.Person INNER JOIN
-                         dbo.PatientTreatmentSupporter ON dbo.Person.Id = dbo.PatientTreatmentSupporter.SupporterId
+SELECT        dbo.PatientTreatmentSupporter.PersonId AS PersonId, 
+CAST(DECRYPTBYKEY(dbo.Person.FirstName) AS VARCHAR(50)) AS FIRST_NAME, 
+CAST(DECRYPTBYKEY(dbo.Person.MidName) AS VARCHAR(50)) AS MIDDLE_NAME,
+CAST(DECRYPTBYKEY(dbo.Person.LastName) AS VARCHAR(50)) AS LAST_NAME,
+NULL AS RELATIONSHIP,
+NULL AS ADDRESS,
+CAST(DECRYPTBYKEY(dbo.PatientTreatmentSupporter.MobileContact) AS VARCHAR(50)) AS PHONE_NUMBER,
+SEX = CASE(SELECT ItemName FROM LookupItemView WHERE ItemId = Person.Sex AND MasterName = 'Gender') WHEN 'Male' THEN 'M' WHEN 'Female' THEN 'F' ELSE '' END,
+NULL AS DATE_OF_BIRTH,
+'T' AS CONTACT_ROLE
+FROM dbo.Person 
+INNER JOIN dbo.PatientTreatmentSupporter ON dbo.Person.Id = dbo.PatientTreatmentSupporter.SupporterId
+WHERE dbo.PatientTreatmentSupporter.DeleteFlag=0
 
 GO
 

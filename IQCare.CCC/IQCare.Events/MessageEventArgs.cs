@@ -29,6 +29,7 @@ namespace IQCare.Events
         AppointmentHonored,
         UniquePatientIdentification,
         ViralLoadLabOrder,
-        ViralLoadResults
+        ViralLoadResults,
+        ObservationResult
     }
 }

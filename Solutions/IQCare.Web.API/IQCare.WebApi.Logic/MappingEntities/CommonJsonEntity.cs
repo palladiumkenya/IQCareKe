@@ -22,14 +22,6 @@ namespace IQCare.WebApi.Logic.MappingEntities
         public string PATIENT_TYPE { get; set; }
         public string PATIENT_SOURCE { get; set; }
         public string HIV_CARE_ENROLLMENT_DATE { get; set; }
-
-        public static VISIT GetVisit(Registration entity)
-        {
-            VISIT visit = new VISIT();
-            visit.VISIT_DATE = entity.DateOfEnrollment;
-
-            return visit;
-        }
     }
 
     public class EXTERNALPATIENTID
@@ -37,16 +29,6 @@ namespace IQCare.WebApi.Logic.MappingEntities
         public string ID { get; set; }
         public string IDENTIFIER_TYPE { get; set; }
         public string ASSIGNING_AUTHORITY { get; set; }
-
-        public static EXTERNALPATIENTID GetExternalpatientid(Registration entity)
-        {
-            EXTERNALPATIENTID externalpatientid = new EXTERNALPATIENTID();
-            externalpatientid.IDENTIFIER_TYPE = "GODS_NUMBER";
-            externalpatientid.ASSIGNING_AUTHORITY = "MPI";
-            externalpatientid.ID = entity.Patient.GODS_NUMBER;
-
-            return externalpatientid;
-        }
     }
 
     public class INTERNALPATIENTID
@@ -54,23 +36,6 @@ namespace IQCare.WebApi.Logic.MappingEntities
         public string ID { get; set; }
         public string IDENTIFIER_TYPE { get; set; }
         public string ASSIGNING_AUTHORITY { get; set; }
-
-        public static List<INTERNALPATIENTID> GetInternalPatientIds(Registration entity)
-        {
-            List<INTERNALPATIENTID> internalpatientids = new List<INTERNALPATIENTID>();
-            foreach (var id in entity.InternalPatientIdentifiers)
-            {
-                var identifier = new INTERNALPATIENTID()
-                {
-                    ID = id.IdentifierValue,
-                    IDENTIFIER_TYPE = id.IdentifierType,
-                    ASSIGNING_AUTHORITY = id.AssigningAuthority
-                };
-                internalpatientids.Add(identifier);
-            }
-
-            return internalpatientids;
-        }
     }
 
     public class PATIENTNAME
@@ -78,16 +43,6 @@ namespace IQCare.WebApi.Logic.MappingEntities
         public string FIRST_NAME { get; set; }
         public string MIDDLE_NAME { get; set; }
         public string LAST_NAME { get; set; }
-
-        public static PATIENTNAME GetPatientName(Registration entity)
-        {
-            PATIENTNAME patientName = new PATIENTNAME();
-            patientName.FIRST_NAME = !string.IsNullOrWhiteSpace(entity.Patient.FirstName) ? entity.Patient.FirstName : "";
-            patientName.MIDDLE_NAME = !string.IsNullOrWhiteSpace(entity.Patient.MiddleName) ? entity.Patient.MiddleName : "";
-            patientName.LAST_NAME = !string.IsNullOrWhiteSpace(entity.Patient.LastName) ? entity.Patient.LastName : "";
-
-            return patientName;
-        }
     }
 
     public class PHYSICALADDRESS
@@ -98,31 +53,12 @@ namespace IQCare.WebApi.Logic.MappingEntities
         public string COUNTY { get; set; }
         public string NEAREST_LANDMARK { get; set; }
         public string GPS_LOCATION { get; set; }
-
-        public static PHYSICALADDRESS GetPhysicalAddress(Registration entity)
-        {
-            PHYSICALADDRESS physicaladdress = new PHYSICALADDRESS();
-            physicaladdress.COUNTY = !string.IsNullOrWhiteSpace(entity.County) ? entity.County : "";
-            physicaladdress.SUB_COUNTY = !string.IsNullOrWhiteSpace(entity.SubCounty) ? entity.SubCounty : "";
-            physicaladdress.WARD = !string.IsNullOrWhiteSpace(entity.Ward) ? entity.Ward : "";
-            physicaladdress.VILLAGE = !string.IsNullOrWhiteSpace(entity.Village) ? entity.Village : "";
-
-            return physicaladdress;
-        }
     }
 
     public class PATIENTADDRESS
     {
         public PHYSICALADDRESS PHYSICAL_ADDRESS { get; set; }
         public string POSTAL_ADDRESS { get; set; }
-
-        public static PATIENTADDRESS PatientAddress(Registration entity)
-        {
-            PATIENTADDRESS patientaddress = new PATIENTADDRESS();
-            patientaddress.POSTAL_ADDRESS = !string.IsNullOrWhiteSpace(entity.Patient.PhysicalAddress) ? entity.Patient.PhysicalAddress : "";
-            patientaddress.PHYSICAL_ADDRESS = PHYSICALADDRESS.GetPhysicalAddress(entity);
-            return patientaddress;
-        }
     }
 
     public abstract class PatientBaseProperties
@@ -152,21 +88,18 @@ namespace IQCare.WebApi.Logic.MappingEntities
         public PATIENTNAME PATIENT_NAME { get; set; }
     }
 
+    public class OBSERVATIONPATIENTIDENTIFICATION
+    {
+        public EXTERNALPATIENTID EXTERNAL_PATIENT_ID { get; set; }
+        public List<INTERNALPATIENTID> INTERNAL_PATIENT_ID { get; set; }
+        public PATIENTNAME PATIENT_NAME { get; set; }
+    }
+
     public class NOKNAME
     {
         public string FIRST_NAME { get; set; }
         public string MIDDLE_NAME { get; set; }
         public string LAST_NAME { get; set; }
-
-        public static NOKNAME GetNokName(DTONextOfKin kin)
-        {
-            NOKNAME nokname = new NOKNAME();
-            nokname.FIRST_NAME = !string.IsNullOrWhiteSpace(kin.FirstName) ? kin.FirstName : "";
-            nokname.MIDDLE_NAME = !string.IsNullOrWhiteSpace(kin.MiddleName) ? kin.MiddleName : "";
-            nokname.LAST_NAME = !string.IsNullOrWhiteSpace(kin.LastName) ? kin.LastName : "";
-
-            return nokname;
-        }
     }
 
     public class NEXTOFKIN
@@ -183,29 +116,6 @@ namespace IQCare.WebApi.Logic.MappingEntities
         public string SEX { get; set; }
         public string DATE_OF_BIRTH { get; set; }
         public string CONTACT_ROLE { get; set; }
-
-
-        public static List<NEXTOFKIN> GetNextOfKins(Registration entity)
-        {
-            List<NEXTOFKIN> nextofkins = new List<NEXTOFKIN>();
-            if (entity.NextOfKin.Count > 0)
-            {
-                foreach (var kin in entity.NextOfKin)
-                {
-                    NEXTOFKIN nextofkin = new NEXTOFKIN();
-                    nextofkin.NOK_NAME = NOKNAME.GetNokName(kin);
-                    nextofkin.CONTACT_ROLE = kin.PatientType;
-                    nextofkin.RELATIONSHIP = !string.IsNullOrWhiteSpace(kin.RelationshipType) ? kin.RelationshipType : "";
-                    nextofkin.PHONE_NUMBER = !string.IsNullOrWhiteSpace(kin.MobileNumber) ? kin.MobileNumber : "";
-                    nextofkin.SEX = !string.IsNullOrWhiteSpace(kin.Sex) ? kin.Sex : "";
-                    nextofkin.DATE_OF_BIRTH = !String.IsNullOrWhiteSpace(kin.DateOfBirth) ? kin.DateOfBirth : "";
-                    nextofkin.ADDRESS = !string.IsNullOrWhiteSpace(kin.PhysicalAddress) ? kin.PhysicalAddress : "";
-
-                    nextofkins.Add(nextofkin);
-                }
-            }
-            return nextofkins;
-        }
     }
 
     public class APPOINTMENT_INFORMATION
@@ -233,5 +143,18 @@ namespace IQCare.WebApi.Logic.MappingEntities
     {
         public string NUMBER { get; set; }
         public string ENTITY { get; set; }
+    }
+
+    public class OBSERVATION_RESULT
+    {
+        public string OBSERVATION_IDENTIFIER { get; set; }
+        public string OBSERVATION_SUB_ID { get; set; }
+        public string CODING_SYSTEM { get; set; }
+        public string VALUE_TYPE { get; set; }
+        public string OBSERVATION_VALUE { get; set; }
+        public string UNITS { get; set; }
+        public string OBSERVATION_RESULT_STATUS { get; set; }
+        public string OBSERVATION_DATETIME { get; set; }
+        public string ABNORMAL_FLAGS { get; set; }
     }
 }

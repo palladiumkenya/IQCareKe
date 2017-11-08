@@ -80,6 +80,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
@@ -93,7 +94,9 @@
     <Compile Include="ApiInboxManager.cs" />
     <Compile Include="ApiInteropManager.cs" />
     <Compile Include="ApiOutboxmanager.cs" />
+    <Compile Include="Helpers\AppSettings.cs" />
     <Compile Include="MappingEntities\DrugDispenseEntity.cs" />
+    <Compile Include="MappingEntities\ObservationResultEntity.cs" />
     <Compile Include="MappingEntities\PatientAppointmentEntity.cs" />
     <Compile Include="MessageHandler\IIncomingMessageService.cs" />
     <Compile Include="MessageHandler\IncomingMessageService.cs" />

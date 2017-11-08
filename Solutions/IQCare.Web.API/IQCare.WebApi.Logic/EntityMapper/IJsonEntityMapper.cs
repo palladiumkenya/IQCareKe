@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using IQCare.DTO;
+using IQCare.DTO.ObservationResult;
 using IQCare.DTO.PatientAppointment;
 using IQCare.Events;
 using IQCare.WebApi.Logic.MappingEntities;
@@ -42,5 +43,6 @@ namespace IQCare.WebApi.Logic.EntityMapper
         void ViralLoadLabOrder();
 
         object DrugPrescriptionRaised(PrescriptionDto drugOrderDto);
+        ObservationResultEntity ObservationResult(ObservationResultDTO observation, MessageEventArgs messageEvent);
     }
 }

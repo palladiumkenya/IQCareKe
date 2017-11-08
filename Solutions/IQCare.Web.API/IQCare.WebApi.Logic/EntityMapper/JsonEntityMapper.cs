@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using IQCare.DTO.PatientRegistration;
 using AutoMapper;
 using IQCare.DTO.PatientAppointment;
+using IQCare.DTO.ObservationResult;
 
 namespace IQCare.WebApi.Logic.EntityMapper
 {
@@ -31,7 +32,7 @@ namespace IQCare.WebApi.Logic.EntityMapper
             Mapper.Initialize(cfg => {
                 cfg.CreateMap<PatientRegistrationDTO, PatientRegistrationEntity>().ReverseMap();
                 cfg.CreateMap<DTO.CommonEntities.MESSAGEHEADER, MappingEntities.MESSAGEHEADER>().ReverseMap();
-                cfg.CreateMap<DTO.CommonEntities.PATIENTIDENTIFICATION, MappingEntities.PATIENTIDENTIFICATION>().ReverseMap();
+                cfg.CreateMap<DTO.CommonEntities.APPOINTMENTPATIENTIDENTIFICATION, MappingEntities.APPOINTMENTPATIENTIDENTIFICATION>().ReverseMap();
                 cfg.CreateMap<DTO.CommonEntities.NEXTOFKIN, MappingEntities.NEXTOFKIN>().ReverseMap();
                 cfg.CreateMap<DTO.CommonEntities.VISIT, MappingEntities.VISIT>().ReverseMap();
                 cfg.CreateMap<DTO.CommonEntities.EXTERNALPATIENTID, MappingEntities.EXTERNALPATIENTID>().ReverseMap();
@@ -185,7 +186,7 @@ namespace IQCare.WebApi.Logic.EntityMapper
             {
                 cfg.CreateMap<PatientAppointSchedulingDTO, PatientAppointmentEntity>().ReverseMap();
                 cfg.CreateMap<DTO.CommonEntities.MESSAGEHEADER, MappingEntities.MESSAGEHEADER>().ReverseMap();
-                cfg.CreateMap<DTO.CommonEntities.PATIENTIDENTIFICATION, MappingEntities.PATIENTIDENTIFICATION>().ReverseMap();
+                cfg.CreateMap<DTO.CommonEntities.APPOINTMENTPATIENTIDENTIFICATION, MappingEntities.APPOINTMENTPATIENTIDENTIFICATION>().ReverseMap();
                 cfg.CreateMap<DTO.CommonEntities.EXTERNALPATIENTID, MappingEntities.EXTERNALPATIENTID>().ReverseMap();
                 cfg.CreateMap<DTO.CommonEntities.INTERNALPATIENTID, MappingEntities.INTERNALPATIENTID>().ReverseMap();
                 cfg.CreateMap<DTO.CommonEntities.PATIENTNAME, MappingEntities.PATIENTNAME>().ReverseMap();
@@ -249,6 +250,11 @@ namespace IQCare.WebApi.Logic.EntityMapper
         }
 
         string IJsonEntityMapper.DrugOrderFulfilment()
+        {
+            throw new NotImplementedException();
+        }
+
+        public ObservationResultEntity ObservationResult(ObservationResultDTO observation, MessageEventArgs messageEvent)
         {
             throw new NotImplementedException();
         }

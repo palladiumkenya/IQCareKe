@@ -16,6 +16,8 @@ using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using IQCare.CCC.UILogic.Interoperability.Appointment;
 using IQCare.CCC.UILogic.Interoperability.Enrollment;
+using IQCare.CCC.UILogic.Interoperability.Observation;
+using IQCare.WebApi.Logic.Helpers;
 
 
 namespace IQCare.WebApi.Logic.MessageHandler
@@ -105,6 +107,9 @@ namespace IQCare.WebApi.Logic.MessageHandler
                 case MessageType.ViralLoadLabOrder:
                     HandleViralLoadLabOrder(messageEvent);
                     break;
+                case MessageType.ObservationResult:
+                    HandleObservationResult(messageEvent);
+                    break;
 
             }
         }
@@ -135,7 +140,7 @@ namespace IQCare.WebApi.Logic.MessageHandler
             {
                 using (HttpClient httpClient = new HttpClient())
                 {
-                    httpClient.BaseAddress = new Uri("http://192.168.43.183:9721");
+                    httpClient.BaseAddress = new Uri(AppSettings.IlServer());
                     httpClient.DefaultRequestHeaders.Accept.Clear();
                     httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -367,5 +372,31 @@ namespace IQCare.WebApi.Logic.MessageHandler
 
         }
 
+        private void HandleObservationResult(MessageEventArgs messageEvent)
+        {
+            try
+            {
+                ProcessObservationResultMessage observationResult = new ProcessObservationResultMessage();
+                var observationDto = observationResult.Get(messageEvent.EntityId);
+                var observationEntityDto = _jsonEntityMapper.ObservationResult(observationDto, messageEvent);
+                string observationEntityJson = new JavaScriptSerializer().Serialize(observationEntityDto);
+
+                //save
+                var apiOutbox = new ApiOutbox()
+                {
+                    DateSent = DateTime.Now,
+                    Message = observationEntityJson
+                };
+                _apiOutboxManager.AddApiOutbox(apiOutbox);
+
+                //send
+                SendData(observationEntityJson, "").ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }
