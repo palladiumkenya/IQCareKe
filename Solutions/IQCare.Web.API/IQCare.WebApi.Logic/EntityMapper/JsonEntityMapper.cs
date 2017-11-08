@@ -14,29 +14,6 @@ using IQCare.DTO.PatientAppointment;
 using IQCare.DTO.ObservationResult;
 using INTERNALPATIENTID = IQCare.WebApi.Logic.MappingEntities.INTERNALPATIENTID;
 
-namespace IQCare.WebApi.Logic.EntityMapper
-{
-    public class JsonEntityMapper : IJsonEntityMapper
-    {
-        public PatientRegistrationEntity PatientRegistration(PatientRegistrationDTO entity, MessageEventArgs messageEvent)
-        {
-            PatientRegistrationEntity patientRegistration = new PatientRegistrationEntity();
-
-            string messageType = null;
-            if (messageEvent.MessageType == MessageType.NewClientRegistration)
-            {
-                messageType = "ADT^A04";
-            }
-            else if (messageEvent.MessageType == MessageType.UpdatedClientInformation)
-            {
-                messageType = "ADT^A08";
-            }
-
-            int facilityId = messageEvent.FacilityId;
-
-            Mapper.Initialize(cfg => {
-                cfg.CreateMap<PatientRegistrationDTO, PatientRegistrationEntity>().ReverseMap();
-                cfg.CreateMap<DTO.CommonEntities.MESSAGEHEADER, MappingEntities.MESSAGEHEADER>().ReverseMap();
 
 namespace IQCare.WebApi.Logic.EntityMapper
 {

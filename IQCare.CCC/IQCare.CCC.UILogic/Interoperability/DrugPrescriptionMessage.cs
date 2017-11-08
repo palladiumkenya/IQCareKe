@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Application.Presentation;
-using Entities.CCC.Interoperability;
 using Interface.CCC.Interoperability;
 using IQCare.DTO;
 
@@ -46,7 +45,7 @@ namespace IQCare.CCC.UILogic.Interoperability
                     drugsPayLoad.Add(messageOrder);
                 }
 
-                var prescrptionDtoPayLoad = new PrescriptionDto()
+                var prescriptionDtoPayLoad = new PrescriptionDto()
                 {
                     MesssageHeader = 
                      {
@@ -96,7 +95,7 @@ namespace IQCare.CCC.UILogic.Interoperability
                      },
                      PharmacyEncodedOrderDto = drugsPayLoad
                 };
-                return prescrptionDtoPayLoad;
+                return prescriptionDtoPayLoad;
             }
             catch (Exception e)
             {

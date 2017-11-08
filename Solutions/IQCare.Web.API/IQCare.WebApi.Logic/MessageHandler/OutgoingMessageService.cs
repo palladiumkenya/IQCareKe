@@ -17,7 +17,9 @@ using System.Web.Script.Serialization;
 using IQCare.CCC.UILogic.Interoperability.Appointment;
 using IQCare.CCC.UILogic.Interoperability.Enrollment;
 using IQCare.CCC.UILogic.Interoperability.Observation;
+using IQCare.DTO.CommonEntities;
 using IQCare.WebApi.Logic.Helpers;
+using IQCare.WebApi.Logic.MappingEntities.drugs;
 
 
 namespace IQCare.WebApi.Logic.MessageHandler
@@ -211,100 +213,32 @@ namespace IQCare.WebApi.Logic.MessageHandler
         {
             try
             {
-                //var prescriptionManager = new DrugPrescriptionMessage();
-                DrugPrescriptionMessage drugPrescriptionMessage = new DrugPrescriptionMessage();
+                var drugPrescriptionMessage = new DrugPrescriptionMessage();
+                //DrugPrescriptionMessage drugPrescriptionMessage = new DrugPrescriptionMessage();
 
-                var prescriptionPayLoad =
-                    drugPrescriptionMessage.GetPrescriptionMessage(messageEvent.PatientId, messageEvent.EntityId);
+                PrescriptionDto prescriptionDtoPayLoad = drugPrescriptionMessage.GetPrescriptionMessage(messageEvent.PatientId,messageEvent.EntityId,messageEvent.PatientMasterVisitId);
 
-                List<DtoPatientIdentification> patientIdentification=new List<DtoPatientIdentification>();
-                List<PharmacyEncodedOrder> drugsPayLoad = new List<PharmacyEncodedOrder>();
-
-                foreach (var message in prescriptionPayLoad)
+                if (prescriptionDtoPayLoad != null)
                 {
-                    var messageOrder = new PharmacyEncodedOrder()
+
+                    var prescriptionEntityPayLoad = _jsonEntityMapper.DrugPrescriptionRaised(prescriptionDtoPayLoad);
+
+                    string prescriptionJson = new JavaScriptSerializer().Serialize(prescriptionEntityPayLoad);
+                    var apiOutbox = new ApiOutbox()
                     {
-                        DrugName = message.DRUG_NAME,
-                        CodingSystem = message.CODING_SYSTEM,
-                        Strength = message.STRENGTH,
-                        Dosage = message.DOSAGE,
-                        Frequency = message.FREQUENCY,
-                        Duration = message.DURATION,
-                        QuantityPrescribed = Convert.ToInt32(message.QUANTITY_PRESCRIBED),
-                        PrescriptionNotes = message.NOTES
+                        DateSent = DateTime.Now,
+                        Message = prescriptionJson,
+                        RecepientId = 1
                     };
-                    drugsPayLoad.Add(messageOrder);
+
+                    _apiOutboxManager.AddApiOutbox(apiOutbox);
+                    SendData(prescriptionJson, "").ConfigureAwait(false);
+                }
+                else
+                {
+                    //todo send abort
                 }
 
-
-
-                PrescriptionDto prescriptionDtoPayLoad=new PrescriptionDto()
-                {
-                    MesssageHeader =
-                    {
-                        ProcessingId = "P",
-                        SendingApplication = "IQCare",
-                        SendingFacility = messageEvent.FacilityId.ToString(),
-                        ReceivingApplication = "IL",
-                        ReceivingFacility = messageEvent.FacilityId.ToString(),
-                        MessageDatetime = prescriptionPayLoad[0].TRANSACTION_DATETIME,
-                        Security = "",
-                        MessageType = "RDE^001"
-                    },
-                    PatientIdentification =
-                    {
-                        ExternalPatientId =
-                        {
-                            AssigningAuthority = "",
-                            IdentifierType = "",
-                            IdentifierValue = ""
-                        },
-                        InternalPatientId =
-                        {
-                           AssigningAuthority = prescriptionPayLoad[0].ASSIGNING_AUTHORITY,
-                           IdentifierValue = prescriptionPayLoad[0].Id,
-                           IdentifierType = prescriptionPayLoad[0].IDENTIFIER_TYPE
-                        },
-                        PatientName =
-                        {
-                            FirstName = prescriptionPayLoad[0].FIRST_NAME,
-                            MiddleName = prescriptionPayLoad[0].MIDDLE_NAME,
-                            LastName = prescriptionPayLoad[0].LAST_NAME
-                        }
-                    },
-                    CommonOrderDetails =
-                    {
-                        OrderControl = "NW",
-                        PlacerOrderNumber =
-                        {
-                            Number = prescriptionPayLoad[0].ptn_pharmacy_pk,
-                            Entity = prescriptionPayLoad[0].ENTITY
-                        },
-                        OrderStatus = prescriptionPayLoad[0].ORDER_STATUS,
-                        OrderingPhysician =
-                        {
-                            FirstName = "",
-                            MiddleName = "",
-                            LastName = "" 
-                        },
-                        TransactionDatetime = prescriptionPayLoad[0].TRANSACTION_DATETIME,
-                        Notes = prescriptionPayLoad[0].NOTES
-                    },
-                    PharmacyEncodedOrder = drugsPayLoad                   
-                };
-
-                var prescriptionEntityPayLoad = _jsonEntityMapper.DrugPrescriptionRaised(prescriptionDtoPayLoad);
-
-                string prescriptionJson = new JavaScriptSerializer().Serialize(prescriptionEntityPayLoad);
-                   var apiOutbox = new ApiOutbox()
-                   {
-                       DateSent = DateTime.Now,
-                       Message = prescriptionJson,
-                       RecepientId = 1
-                   };
-
-                _apiOutboxManager.AddApiOutbox(apiOutbox);
-                SendData(prescriptionJson, "").ConfigureAwait(false);
             }
             catch (Exception e)
             {

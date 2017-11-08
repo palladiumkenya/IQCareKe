@@ -43,7 +43,7 @@ namespace IQCare.WebApi.Logic.EntityMapper
         void ViralLoadLabOrder();
 
         //object DrugPrescriptionRaised(PrescriptionDto drugOrderDto);
-        object DrugPrescriptionRaised(PrescriptionDto drugOrderDto);
+        //object DrugPrescriptionRaised(PrescriptionDto drugOrderDto);
         ObservationResultEntity ObservationResult(ObservationResultDTO observation, MessageEventArgs messageEvent);
     }
 }
