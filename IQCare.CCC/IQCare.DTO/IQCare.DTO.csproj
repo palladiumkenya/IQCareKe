@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommonOrderDetailsDto.cs" />
     <Compile Include="DtoDrugDispensed.cs" />
     <Compile Include="CommonEntities\CommonEntities.cs" />
     <Compile Include="DTOIdentifier.cs" />
@@ -49,9 +50,12 @@
     <Compile Include="IInteropDTO.cs" />
     <Compile Include="IlMessage.cs" />
     <Compile Include="ObservationResult\ObservationResultDTO.cs" />
+    <Compile Include="OrderingPysicianDto.cs" />
     <Compile Include="PatientAppointment\PatientAppointSchedulingDTO.cs" />
     <Compile Include="PatientNameDto.cs" />
     <Compile Include="PatientRegistration\PatientRegistrationDTO.cs" />
+    <Compile Include="PharmacyEncorderOrderDto.cs" />
+    <Compile Include="PlacerOrderNumberDto.cs" />
     <Compile Include="PrescriptionDto.cs" />
     <Compile Include="Registration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

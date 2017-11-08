@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using IQCare.DTO;
 using IQCare.WebApi.Logic.MappingEntities;
+using IQCare.WebApi.Logic.MappingEntities.drugs;
 
 namespace IQCare.WebApi.Logic.DtoMapping
 {
@@ -113,7 +114,7 @@ namespace IQCare.WebApi.Logic.DtoMapping
 
             var internalIdentifiers = new List<DTOIdentifier>();
 
-            foreach (var identifier in entity.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID)
+            foreach (var identifier in entity.Patientidentification.INTERNAL_PATIENT_ID)
             {
                 var internalIdentity = new DTOIdentifier()
                 {
@@ -125,29 +126,29 @@ namespace IQCare.WebApi.Logic.DtoMapping
                 internalIdentifiers.Add(internalIdentity);
             }
 
-            var orderEncorder = new List<PharmacyEncodedOrder>();
+            var orderEncorder = new List<PharmacyEncorderOrderDto>();
 
-            foreach (var order in entity.PHARMACY_ENCODED_ORDER)
+            foreach (var order in entity.PharmacyEncorderEntity)
             {
-                var prescriptionOrder = new PharmacyEncodedOrder()
+                var prescriptionOrder=new PharmacyEncorderOrderDto()
                 {
-                    DrugName = order.DRUG_NAME,
-                    CodingSystem = order.CODING_SYSTEM,
-                    Strength = order.STRENGTH,
-                    Dosage = order.DOSAGE,
-                    Frequency = order.FREQUENCY,
-                    Duration = Convert.ToInt32(order.DURATION),
-                    QuantityPrescribed = Convert.ToInt32(order.QUANTITY_PRESCRIBED),
-                    PrescriptionNotes = order.PRESCRIPTION_NOTES
+                    DrugName = order.DrugName,
+                    CodingSystem = order.CodingSystem,
+                    Strength = order.Strength,
+                    Dosage = Convert.ToDecimal(order.Dosage),
+                    Frequency = order.Frequency,
+                    Duration =Convert.ToInt32(order.Duration),
+                    QuantityPrescribed =Convert.ToInt32(order.QuantityPrescribed),
+                    PrescriptionNotes = order.PrescriptionNotes
                 };
                 orderEncorder.Add(prescriptionOrder);
             }
 
             var patientName = new PATIENTNAME()
             {
-                FIRST_NAME = entity.PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME,
-                LAST_NAME = entity.PATIENT_IDENTIFICATION.PATIENT_NAME.LAST_NAME,
-                MIDDLE_NAME = entity.PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME
+                FIRST_NAME = entity.Patientidentification.PATIENT_NAME.FIRST_NAME,
+                LAST_NAME = entity.Patientidentification.PATIENT_NAME.LAST_NAME,
+                MIDDLE_NAME = entity.Patientidentification.PATIENT_NAME.MIDDLE_NAME
             };
 
 
@@ -156,51 +157,52 @@ namespace IQCare.WebApi.Logic.DtoMapping
                 MesssageHeader =
                 {
                     SendingApplication = "IQCARE",
-                    SendingFacility = entity.MESSAGE_HEADER.SENDING_FACILITY,
-                    ReceivingApplication = entity.MESSAGE_HEADER.RECEIVING_APPLICATION,
-                    ReceivingFacility = entity.MESSAGE_HEADER.RECEIVING_FACILITY,
-                    MessageDatetime =Convert.ToDateTime(entity.MESSAGE_HEADER.MESSAGE_DATETIME), //DateTime.Now.ToString("yyyyMMddHHmmss"); 
-                    Security = entity.MESSAGE_HEADER.SECURITY,
-                    MessageType = entity.MESSAGE_HEADER.MESSAGE_TYPE,
-                    ProcessingId = entity.MESSAGE_HEADER.PROCESSING_ID
+                    SendingFacility = entity.MessageHeaderEntity.SendingFacility,
+                    ReceivingApplication = entity.MessageHeaderEntity.ReceivingApplication,
+                    ReceivingFacility = entity.MessageHeaderEntity.ReceivingFacility,
+                    MessageDatetime =Convert.ToDateTime(entity.MessageHeaderEntity.MessageDatetime), //DateTime.Now.ToString("yyyyMMddHHmmss"); 
+                    Security = entity.MessageHeaderEntity.Security,
+                    MessageType = entity.MessageHeaderEntity.MessageType,
+                    ProcessingId = entity.MessageHeaderEntity.ProcessingId
 
                 },
                 PatientIdentification =
                 {
-                    ExternalPatientId = {},
-                    InternalPatientId =
+                    ExternalPatientId =
                     {
-                        AssigningAuthority = entity.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[0].ASSIGNING_AUTHORITY,
-                        IdentifierValue = entity.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[0].ID,
-                        IdentifierType = entity.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[0].IDENTIFIER_TYPE
+                        AssigningAuthority = entity.Patientidentification.EXTERNAL_PATIENT_ID.ASSIGNING_AUTHORITY,
+                        IdentifierValue = entity.Patientidentification.EXTERNAL_PATIENT_ID.ID,
+                        IdentifierType = entity.Patientidentification.EXTERNAL_PATIENT_ID.IDENTIFIER_TYPE
+
                     },
+                    InternalPatientId =internalIdentifiers,
                     PatientName =
                     {
-                        FirstName = entity.PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME,
-                        MiddleName = entity.PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME,
-                        LastName = entity.PATIENT_IDENTIFICATION.PATIENT_NAME.LAST_NAME
+                        FirstName = entity.Patientidentification.PATIENT_NAME.FIRST_NAME,
+                        MiddleName = entity.Patientidentification.PATIENT_NAME.MIDDLE_NAME,
+                        LastName = entity.Patientidentification.PATIENT_NAME.LAST_NAME
                     }
                 },
-                CommonOrderDetails =
+                CommonOrderDetails = 
                 {
-                    OrderControl = entity.COMMON_ORDER_DETAILS.ORDER_CONTROL,
-                    PlacerOrderNumber=
+                    OrderControl = entity.CommonOrderDetailsEntity.OrderControl,
+                    PlacerOrderNumberDto= 
                     {
-                        Number = Convert.ToInt32(entity.COMMON_ORDER_DETAILS.PLACER_ORDER_NUMBER.NUMBER),
-                        Entity = entity.COMMON_ORDER_DETAILS.PLACER_ORDER_NUMBER.ENTITY
+                        Number = Convert.ToInt32(entity.CommonOrderDetailsEntity.PlacerOrderNumberEntity.Number),
+                        Entity = entity.CommonOrderDetailsEntity.PlacerOrderNumberEntity.Entity
                     },
-                    OrderStatus = entity.COMMON_ORDER_DETAILS.ORDER_STATUS,
-                    OrderingPhysician =
+                    OrderStatus = entity.CommonOrderDetailsEntity.OrderStatus,
+                    OrderingPhysicianDto = 
                     {
-                        FirstName = entity.COMMON_ORDER_DETAILS.ORDERING_PHYSICIAN.FIRST_NAME,
-                        MiddleName = entity.COMMON_ORDER_DETAILS.ORDERING_PHYSICIAN.MIDDLE_NAME,
-                        LastName = entity.COMMON_ORDER_DETAILS.ORDERING_PHYSICIAN.LAST_NAME
+                        FirstName = entity.CommonOrderDetailsEntity.OrderingPhysicianEntity.FirstName,
+                        MiddleName = entity.CommonOrderDetailsEntity.OrderingPhysicianEntity.MiddleName,
+                        LastName = entity.CommonOrderDetailsEntity.OrderingPhysicianEntity.LastName
                     },
-                    TransactionDatetime = Convert.ToDateTime(entity.COMMON_ORDER_DETAILS.TRANSACTION_DATETIME),
-                    Notes = entity.COMMON_ORDER_DETAILS.NOTES.ToString()
+                    TransactionDatetime = Convert.ToDateTime(entity.CommonOrderDetailsEntity.TransactionDatetime),
+                    Notes = entity.CommonOrderDetailsEntity.Notes.ToString()
                 },
-                PharmacyEncodedOrder = orderEncorder
-            };
+                PharmacyEncodedOrderDto = orderEncorder 
+            };            
             return drugOrder;
         }
 
@@ -212,8 +214,8 @@ namespace IQCare.WebApi.Logic.DtoMapping
         public DtoDrugDispensed DrugOrderFulfilment(DrugDispenseEntity entity)
         {
             var internalIdentifiers = new List<DTOIdentifier>();
-            var drugsOrderdList = new List<PharmacyEncodedOrder>();
-            var drugsDispensed = new List<PharmacyDispensedDrugs>();
+            var drugsOrderdList=new List<PharmacyEncorderOrderDto>();
+            var drugsDispensed=new List<PharmacyDispensedDrugs>();
 
             var identify = new DTOIdentifier()
             {
@@ -246,7 +248,7 @@ namespace IQCare.WebApi.Logic.DtoMapping
 
             foreach (var encoded in drugsOrderdList)
             {
-                var encorder = new PharmacyEncodedOrder()
+                var encorder=new PharmacyEncorderOrderDto()
                 {
                     DrugName = encoded.DrugName,
                     Dosage = encoded.Dosage,
@@ -305,21 +307,21 @@ namespace IQCare.WebApi.Logic.DtoMapping
                 },
                 CommonOrderDetails =
                 {
-                    OrderControl = entity.Commonorderdetails.ORDER_CONTROL,
-                    Notes = entity.Commonorderdetails.NOTES,
-                    OrderingPhysician =
+                    OrderControl = entity.Commonorderdetails.OrderControl,
+                    Notes = entity.Commonorderdetails.Notes,
+                    OrderingPhysicianDto = 
                     {
-                        FirstName = entity.Commonorderdetails.ORDERING_PHYSICIAN.FIRST_NAME,
-                        MiddleName = entity.Commonorderdetails.ORDERING_PHYSICIAN.MIDDLE_NAME,
-                        LastName = entity.Commonorderdetails.ORDERING_PHYSICIAN.LAST_NAME
+                        FirstName = entity.Commonorderdetails.OrderingPhysicianEntity.FirstName,
+                        MiddleName = entity.Commonorderdetails.OrderingPhysicianEntity.MiddleName,
+                        LastName = entity.Commonorderdetails.OrderingPhysicianEntity.LastName
                     },
-                    OrderStatus = entity.Commonorderdetails.ORDER_STATUS,
-                    PlacerOrderNumber =
+                    OrderStatus = entity.Commonorderdetails.OrderStatus,
+                    PlacerOrderNumberDto = 
                     {
-                        Number =Convert.ToInt32(entity.Commonorderdetails.PLACER_ORDER_NUMBER.NUMBER),
-                        Entity = entity.Commonorderdetails.PLACER_ORDER_NUMBER.ENTITY
+                        Number =Convert.ToInt32(entity.Commonorderdetails.PlacerOrderNumberEntity.Number),
+                        Entity = entity.Commonorderdetails.PlacerOrderNumberEntity.Entity
                     },
-                    TransactionDatetime =Convert.ToDateTime(entity.Commonorderdetails.TRANSACTION_DATETIME),
+                    TransactionDatetime =Convert.ToDateTime(entity.Commonorderdetails.TransactionDatetime),
                 },
                 PharmacyEncodedOrder = drugsOrderdList,
                 PharmacyDispense = drugsDispensed
@@ -409,7 +411,19 @@ namespace IQCare.WebApi.Logic.DtoMapping
                 },
                 PatientIdentification =
                 {
-                    InternalPatientId = internalIdentifier,
+                   // InternalPatientId = internalIdentifiers,
+                    ExternalPatientId =
+                    {
+                        IdentifierValue = entity.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ID,
+                        AssigningAuthority = entity.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ASSIGNING_AUTHORITY,
+                        IdentifierType = entity.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.IDENTIFIER_TYPE
+                    },
+                    PatientName =
+                    {
+                        LastName = entity.PATIENT_IDENTIFICATION.PATIENT_NAME.LAST_NAME,
+                        MiddleName = entity.PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME,
+                        FirstName = entity.PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME
+                    }
                 },
                 ViralLoadResult = viralLoadResults
             };

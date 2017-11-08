@@ -9,15 +9,15 @@ namespace IQCare.DTO
         {
             MessageHeader=new MessageHeader();
             PatientIdentification=new DtoPatientIdentification();
-            CommonOrderDetails=new CommonOrderDetails();
-            PharmacyEncodedOrder=new List<PharmacyEncodedOrder>();
+            CommonOrderDetails=new CommonOrderDetailsDto();
+           // PharmacyEncorderOrders=new List<PharmacyEncorderOrderDto>();
             PharmacyDispense= new List<PharmacyDispensedDrugs>();
         }
 
         public DtoPatientIdentification PatientIdentification { get; set; }
         public MessageHeader MessageHeader { get; set; }
-        public CommonOrderDetails CommonOrderDetails { get; set; }
-        public List<PharmacyEncodedOrder>  PharmacyEncodedOrder { get; set; }
+        public CommonOrderDetailsDto CommonOrderDetails { get; set; }
+        public List<PharmacyEncorderOrderDto>  PharmacyEncodedOrder { get; set; }
         public List<PharmacyDispensedDrugs> PharmacyDispense { get; set; }
     }
 

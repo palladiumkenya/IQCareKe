@@ -10,6 +10,7 @@ namespace IQCare.Events
         public MessageType MessageType { get; set; }
         public string EventOccurred { get; set; }
         public int FacilityId { get; set; }
+        public int PatientMasterVisitId { get; set; }
     }
     public enum MessageType
     {

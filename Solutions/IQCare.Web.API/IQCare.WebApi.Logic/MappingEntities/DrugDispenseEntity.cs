@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using IQCare.WebApi.Logic.MappingEntities.drugs;
 
 namespace IQCare.WebApi.Logic.MappingEntities
 {
@@ -6,8 +7,8 @@ namespace IQCare.WebApi.Logic.MappingEntities
     {
         public MESSAGEHEADER Messageheader { get; set; }
         public PATIENTIDENTIFICATION Patientidentification { get; set; }
-        public COMMONORDERDETAILS Commonorderdetails { get; set; }
-        public List<PHARMACYENCODEDORDER> Pharmacyencodedorder { get; set; }
+        public CommonOrderDetailsEntity Commonorderdetails { get; set; }
+        public List<PharmacyEncorderOrderEntity> Pharmacyencodedorder { get; set; }
         public List<PharmacyDispense> PharmacyDispense { get; set; }
     }
 
