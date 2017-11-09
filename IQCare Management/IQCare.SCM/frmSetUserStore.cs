@@ -79,7 +79,7 @@ namespace IQCare.SCM
             if (theDT.Rows.Count == 1)
             {
                 ddlStoreName.SelectedIndex = 0;
-                ddlStoreName.Enabled = false;
+                //ddlStoreName.Enabled = false;
             }
         }
         private void btnOK_Click(object sender, EventArgs e)
