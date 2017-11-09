@@ -24,7 +24,7 @@ namespace IQCare.CCC.UILogic.Interoperability
                     var patientLookup = new PatientLookupManager();
                     var labOrderManager = new PatientLabOrderManager();
                     var patient = patientLookup.GetPatientByCccNumber(viralLoadResults.PatientIdentification
-                        .InternalPatientId.FirstOrDefault(n=>n.IdentifierType == "CCC_Number").IdentifierValue);
+                        .INTERNAL_PATIENT_ID.FirstOrDefault(n=>n.IdentifierType == "CCC_Number").IdentifierValue);
                     if (patient != null)
                     {
                         

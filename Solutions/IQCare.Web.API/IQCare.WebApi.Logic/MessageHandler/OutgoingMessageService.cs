@@ -216,7 +216,7 @@ namespace IQCare.WebApi.Logic.MessageHandler
                 var drugPrescriptionMessage = new DrugPrescriptionMessage();
                 //DrugPrescriptionMessage drugPrescriptionMessage = new DrugPrescriptionMessage();
 
-                PrescriptionDto prescriptionDtoPayLoad = drugPrescriptionMessage.GetPrescriptionMessage(messageEvent.PatientId,messageEvent.EntityId,messageEvent.PatientMasterVisitId);
+                var prescriptionDtoPayLoad = drugPrescriptionMessage.GetPrescriptionMessage(messageEvent.PatientId,messageEvent.EntityId,messageEvent.PatientMasterVisitId);
 
                 if (prescriptionDtoPayLoad != null)
                 {

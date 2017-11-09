@@ -102,8 +102,10 @@
     <Compile Include="Helpers\AppSettings.cs" />
     <Compile Include="MappingEntities\DrugDispenseEntity.cs" />
     <Compile Include="MappingEntities\drugs\CommonOrderDetailsEntity.cs" />
+    <Compile Include="MappingEntities\drugs\IdentificationEntity.cs" />
     <Compile Include="MappingEntities\drugs\MessageHeaderEntity.cs" />
     <Compile Include="MappingEntities\drugs\OrderingPhysicianEntity.cs" />
+    <Compile Include="MappingEntities\drugs\PatientIdentificationEntity.cs" />
     <Compile Include="MappingEntities\drugs\PharmacyEncorderOrderEntity.cs" />
     <Compile Include="MappingEntities\drugs\PlacerOrderNumberEntity.cs" />
     <Compile Include="MappingEntities\ObservationResultEntity.cs" />

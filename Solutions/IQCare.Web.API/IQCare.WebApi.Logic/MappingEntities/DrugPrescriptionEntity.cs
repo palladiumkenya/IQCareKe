@@ -9,15 +9,15 @@ namespace IQCare.WebApi.Logic.MappingEntities
     {
         public DrugPrescriptionEntity()
         {
-           MessageHeaderEntity=new MessageHeaderEntity(); 
-            Patientidentification=new PATIENTIDENTIFICATION();
-            CommonOrderDetailsEntity =new CommonOrderDetailsEntity();
-            PharmacyEncorderEntity =new List<PharmacyEncorderOrderEntity>();
+            MESSAGE_HEADER = new MessageHeaderEntity(); 
+            PATIENT_IDENTIFICATION=new PrescriptionIdentification();;
+            COMMON_ORDER_DETAILS = new CommonOrderDetailsEntity();
+            PHARMACY_ENCODED_ORDER = new List<PharmacyEncorderOrderEntity>();
         }
 
-        public MessageHeaderEntity MessageHeaderEntity { get; set; }
-        public PATIENTIDENTIFICATION Patientidentification { get; set; }
-        public CommonOrderDetailsEntity CommonOrderDetailsEntity { get; set; }
-        public List<PharmacyEncorderOrderEntity> PharmacyEncorderEntity { get; set; }
+        public MessageHeaderEntity MESSAGE_HEADER { get; set; }
+        public PrescriptionIdentification PATIENT_IDENTIFICATION { get; set; }
+        public CommonOrderDetailsEntity COMMON_ORDER_DETAILS { get; set; }
+        public List<PharmacyEncorderOrderEntity> PHARMACY_ENCODED_ORDER { get; set; }
     }
 }

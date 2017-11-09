@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Web.Services.Description;
+using System.Web.UI;
 using Application.Presentation;
 using Interface.CCC.Interoperability;
 using IQCare.DTO;
+using IQCare.DTO.CommonEntities;
 
 namespace IQCare.CCC.UILogic.Interoperability
 {
@@ -16,85 +20,74 @@ namespace IQCare.CCC.UILogic.Interoperability
             {
                 var prescriptionDtoMessage =_drugPrescriptionManager.GetPatientPrescriptionMessage(ptntpk, orderId, patientMasterVisitId);
 
-                var internalIdentifiers = new List<DTOIdentifier>();
+                prescriptionDtoMessage = prescriptionDtoMessage.ToList();
 
-                foreach (var identifier in prescriptionDtoMessage)
-                {
-                    var internalIdentity = new DTOIdentifier()
+                //instantiate new PrescriptionDto 
+                PrescriptionDto prescriptionDtoPayLoad = new PrescriptionDto(); 
+
+                //todo -- MesasgeHeader-Automap
+                prescriptionDtoPayLoad.MESSAGE_HEADER.MESSAGE_TYPE = "RDE^001";
+                prescriptionDtoPayLoad.MESSAGE_HEADER.MESSAGE_DATETIME =Convert.ToDateTime(prescriptionDtoMessage[0].TRANSACTION_DATETIME);
+                prescriptionDtoPayLoad.MESSAGE_HEADER.PROCESSING_ID = "P";
+                prescriptionDtoPayLoad.MESSAGE_HEADER.RECEIVING_APPLICATION = "IL";
+                prescriptionDtoPayLoad.MESSAGE_HEADER.RECEIVING_FACILITY = prescriptionDtoMessage[0].SENDING_FACILITY;
+                prescriptionDtoPayLoad.MESSAGE_HEADER.SECURITY = "";
+                prescriptionDtoPayLoad.MESSAGE_HEADER.SENDING_APPLICATION = "IQCare";
+                prescriptionDtoPayLoad.MESSAGE_HEADER.SENDING_FACILITY = prescriptionDtoMessage[0].SENDING_FACILITY;
+                
+                
+                //todo - automap
+                prescriptionDtoPayLoad.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.IDENTIFIER_TYPE = prescriptionDtoMessage[0].IDENTIFIER_TYPE2;
+                prescriptionDtoPayLoad.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ID =prescriptionDtoMessage[0].Id2;
+                prescriptionDtoPayLoad.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ASSIGNING_AUTHORITY = prescriptionDtoMessage[0].ASSIGNING_AUTHORITY2;
+
+               // var internalIdentifiers = new List<INTERNALPATIENTID>();
+                foreach (var internalPatientId in prescriptionDtoMessage)
+                {   
+                    var internalIdentity=new INTERNAL_PATIENT_ID()
                     {
-                        IdentifierValue = identifier.Id,
-                        AssigningAuthority = identifier.ASSIGNING_AUTHORITY,
-                        IdentifierType = identifier.IDENTIFIER_TYPE
+                        ASSIGNING_AUTHORITY = internalPatientId.ASSIGNING_AUTHORITY,
+                        IDENTIFIER_TYPE = internalPatientId.IDENTIFIER_TYPE,
+                        ID = internalPatientId.Id
                     };
-                    internalIdentifiers.Add(internalIdentity);
-                }
-                List<PharmacyEncorderOrderDto> drugsPayLoad = new List<PharmacyEncorderOrderDto>();
-                foreach (var message in prescriptionDtoMessage)
-                {
-                    var messageOrder = new PharmacyEncorderOrderDto()
-                    {
-                        DrugName = message.DRUG_NAME,
-                        CodingSystem = message.CODING_SYSTEM,
-                        Strength = message.STRENGTH,
-                        Dosage = message.DOSAGE,
-                        Frequency = message.FREQUENCY,
-                        Duration = message.DURATION,
-                        QuantityPrescribed = message.QUANTITY_PRESCRIBED,
-                        PrescriptionNotes = message.NOTES
-                    };
-                    drugsPayLoad.Add(messageOrder);
+                    prescriptionDtoPayLoad.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID.Add(internalIdentity);
                 }
 
-                var prescriptionDtoPayLoad = new PrescriptionDto()
+                prescriptionDtoPayLoad.PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME = prescriptionDtoMessage[0].FIRST_NAME;
+                prescriptionDtoPayLoad.PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME = prescriptionDtoMessage[0].MIDDLE_NAME;
+                prescriptionDtoPayLoad.PATIENT_IDENTIFICATION.PATIENT_NAME.LAST_NAME = prescriptionDtoMessage[0].LAST_NAME;
+
+                if (prescriptionDtoPayLoad.COMMON_ORDER_DETAILS!=null)
                 {
-                    MesssageHeader = 
-                     {
-                         MessageDatetime = prescriptionDtoMessage[0].TRANSACTION_DATETIME,
-                         MessageType = "RDE^001",
-                         ProcessingId = "P",
-                         ReceivingApplication = "IL",
-                         ReceivingFacility = "IQCare",
-                         Security = "",
-                         SendingApplication = "IQCare",
-                         SendingFacility = "IQCare"
-                     },
-                    PatientIdentification =
+                    prescriptionDtoPayLoad.COMMON_ORDER_DETAILS.NOTES = prescriptionDtoMessage[0].NOTES;
+                    prescriptionDtoPayLoad.COMMON_ORDER_DETAILS.ORDER_STATUS = prescriptionDtoMessage[0].ORDER_STATUS;
+                    
+                    prescriptionDtoPayLoad.COMMON_ORDER_DETAILS.ORDERING_PHYSICIAN.FIRST_NAME =prescriptionDtoMessage[0].ORDERING_PHYSICIAN_FIRST_NAME;
+                    prescriptionDtoPayLoad.COMMON_ORDER_DETAILS.ORDERING_PHYSICIAN.MIDDLE_NAME = "";
+                    prescriptionDtoPayLoad.COMMON_ORDER_DETAILS.ORDERING_PHYSICIAN.LAST_NAME =prescriptionDtoMessage[0].ORDERING_PHYSICIAN_LAST_NAME;
+                    prescriptionDtoPayLoad.COMMON_ORDER_DETAILS.TRANSACTION_DATETIME =prescriptionDtoMessage[0].TRANSACTION_DATETIME;
+                    prescriptionDtoPayLoad.COMMON_ORDER_DETAILS.ORDER_CONTROL = prescriptionDtoMessage[0].ORDER_CONTROL;
+                    prescriptionDtoPayLoad.COMMON_ORDER_DETAILS.PLACER_ORDER_NUMBER.ENTITY =prescriptionDtoMessage[0].ENTITY;
+                    prescriptionDtoPayLoad.COMMON_ORDER_DETAILS.PLACER_ORDER_NUMBER.NUMBER = prescriptionDtoMessage[0].NUMBER.ToString();
+                }
+
+                foreach (var entity in prescriptionDtoMessage)
+                {
+                    PHARMACY_ENCODED_ORDER drugLoadOrder=new PHARMACY_ENCODED_ORDER()
                     {
-                        ExternalPatientId =
-                        {
-                            AssigningAuthority = prescriptionDtoMessage[0].ASSIGNING_AUTHORITY2,
-                            IdentifierType = prescriptionDtoMessage[0].IDENTIFIER_TYPE2,
-                            IdentifierValue = prescriptionDtoMessage[0].Id2
-                        },
-                        InternalPatientId =internalIdentifiers,
-                        PatientName =
-                        {
-                            FirstName = prescriptionDtoMessage[0].FIRST_NAME,
-                            MiddleName = prescriptionDtoMessage[0].MIDDLE_NAME,
-                            LastName = prescriptionDtoMessage[0].LAST_NAME
-                        }
-                    }, 
-                    CommonOrderDetails = 
-                    {
-                         Notes = prescriptionDtoMessage[0].NOTES,
-                         OrderControl = prescriptionDtoMessage[0].ORDER_CONTROL,
-                         OrderStatus = prescriptionDtoMessage[0].ORDER_STATUS,
-                         OrderingPhysicianDto = 
-                         {
-                             LastName = prescriptionDtoMessage[0].ORDERING_PHYSICIAN_FIRST_NAME,
-                             FirstName = prescriptionDtoMessage[0].ORDERING_PHYSICIAN_LAST_NAME
-                         },
-                         ptnpk = prescriptionDtoMessage[0].ptnpk,
-                         PatientId = prescriptionDtoMessage[0].PatientId,
-                         PlacerOrderNumberDto = 
-                         {
-                             Entity = prescriptionDtoMessage[0].ENTITY,
-                             Number = prescriptionDtoMessage[0].NUMBER
-                         },
-                         TransactionDatetime = prescriptionDtoMessage[0].TRANSACTION_DATETIME
-                     },
-                     PharmacyEncodedOrderDto = drugsPayLoad
-                };
+                        DRUG_NAME = entity.DRUG_NAME,
+                        DOSAGE =entity.DOSAGE.ToString(),
+                        CODING_SYSTEM = entity.CODING_SYSTEM,
+                        DURATION =Convert.ToInt32(entity.DURATION),
+                        FREQUENCY = entity.FREQUENCY,
+                        INDICATION = entity.INDICATION,
+                        PHARMACY_ORDER_DATE = entity.PHARMACY_ORDER_DATE,
+                        QUANTITY_PRESCRIBED = entity.QUANTITY_PRESCRIBED.ToString() ,
+                        STRENGTH = entity.STRENGTH,
+                        TREATMENT_INSTRUCTION = entity.TREATMENT_INSTRUCTION    
+                    };
+                    prescriptionDtoPayLoad.PHARMACY_ENCODED_ORDER.Add(drugLoadOrder);                 
+                }
                 return prescriptionDtoPayLoad;
             }
             catch (Exception e)

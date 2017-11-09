@@ -2,9 +2,9 @@
 {
     public class OrderingPhysicianEntity
     {
-        public string FirstName { get; set; }
-        public string MiddleName { get; set; }
-        public string LastName { get; set; }
-        public string Prefix { get; set; }
+        public string FIRST_NAME { get; set; }
+        public string MIDDLE_NAME { get; set; }
+        public string LAST_NAME { get; set; }
+        public string PREFIX { get; set; }
     }
 }
