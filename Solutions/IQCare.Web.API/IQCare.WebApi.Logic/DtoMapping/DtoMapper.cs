@@ -385,10 +385,12 @@ namespace IQCare.WebApi.Logic.DtoMapping
 
             foreach (var result in entity.VIRAL_LOAD_RESULT)
             {
+                DateTime dateSampleCollected = DateTime.ParseExact(result.DATE_SAMPLE_COLLECTED, "yyyyMMdd",null);
+                DateTime dateSampleTested = DateTime.ParseExact(result.DATE_SAMPLE_TESTED, "yyyyMMdd", null);
                 var vlLoadResult = new VLoadlResult()
                 {
-                    DateSampleCollected = result.DATE_SAMPLE_COLLECTED,
-                    DateSampleTested = result.DATE_SAMPLE_TESTED,
+                    DateSampleCollected = dateSampleCollected,
+                    DateSampleTested = dateSampleTested,
                     VlResult = result.VL_RESULT,
                     SampleRejection = result.SAMPLE_REJECTION,
                     Justification = result.JUSTIFICATION,
@@ -407,7 +409,7 @@ namespace IQCare.WebApi.Logic.DtoMapping
                     SendingFacility = entity.MESSAGE_HEADER.SENDING_FACILITY,
                     ReceivingApplication = entity.MESSAGE_HEADER.RECEIVING_APPLICATION,
                     ReceivingFacility = entity.MESSAGE_HEADER.RECEIVING_FACILITY,
-                    MessageDatetime =Convert.ToDateTime(entity.MESSAGE_HEADER.MESSAGE_DATETIME), //DateTime.Now.ToString("yyyyMMddHHmmss"); 
+                    MessageDatetime = DateTime.ParseExact(entity.MESSAGE_HEADER.MESSAGE_DATETIME, "yyyyMMdd", null),
                     Security = entity.MESSAGE_HEADER.SECURITY,
                     MessageType = entity.MESSAGE_HEADER.MESSAGE_TYPE,
                     ProcessingId = entity.MESSAGE_HEADER.PROCESSING_ID
