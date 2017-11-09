@@ -67,6 +67,83 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
                         appointmentScheduling.PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME = !string.IsNullOrWhiteSpace(patientMessage.MIDDLE_NAME) ? patientMessage.MIDDLE_NAME : "";
                         appointmentScheduling.PATIENT_IDENTIFICATION.PATIENT_NAME.LAST_NAME = !string.IsNullOrWhiteSpace(patientMessage.LAST_NAME) ? patientMessage.LAST_NAME : "";
 
+                        string appointmentReason = String.Empty;
+                        string appointmentType = String.Empty;
+                        string appointmentLocation = String.Empty;
+                        string appointmentStatus = String.Empty;
+                        switch (appointmentMessage.AppointmentReason)
+                        {
+                            case "Pharmacy Refill":
+                                appointmentReason = "PHARMACY_REFILL";
+                                break;
+                            case "Treatment Preparation":
+                                appointmentReason = "TREATMENT_PREP";
+                                break;
+                            case "Lab Tests":
+                                appointmentReason = "LAB_TEST";
+                                break;
+                            case "Follow Up":
+                                appointmentReason = "FOLLOWUP";
+                                break;
+                            default:
+                                appointmentReason = "FOLLOWUP";
+                                break;
+                        }
+
+                        switch (appointmentMessage.AppointmentType)
+                        {
+                            case "Standard Care":
+                                appointmentType = "CLINICAL";
+                                break;
+                            case "Express Care":
+                                appointmentType = "PHARMACY";
+                                break;
+                            case "Community Based Dispensing":
+                                appointmentType = "PHARMACY";
+                                break;
+                            default:
+                                appointmentType = "CLINICAL";
+                                break;
+                        }
+
+                        switch (appointmentMessage.AppointmentReason)
+                        {
+                            case "Pharmacy Refill":
+                                appointmentLocation = "PHARMACY";
+                                break;
+                            case "Treatment Preparation":
+                                appointmentLocation = "CLINIC";
+                                break;
+                            case "Lab Tests":
+                                appointmentLocation = "LAB";
+                                break;
+                            case "Follow Up":
+                                appointmentLocation = "CLINIC";
+                                break;
+                            default:
+                                appointmentLocation = "CLINIC";
+                                break;
+                        }
+
+                        switch (appointmentMessage.AppointmentStatus)
+                        {
+                            case "PreviouslyMissed":
+                                appointmentStatus = "MISSED";
+                                break;
+                            case "CareEnded":
+                                appointmentStatus = "CANCELLED";
+                                break;
+                            case "Met":
+                                appointmentStatus = "HONORED";
+                                break;
+                            case "Missed":
+                                appointmentStatus = "MISSED";
+                                break;
+                            case "Pending":
+                                appointmentStatus = "PENDING";
+                                break;
+                        }
+
                         //set appointment information
                         APPOINTMENT_INFORMATION appointmentInformation = new APPOINTMENT_INFORMATION()
                         {
@@ -75,14 +152,14 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
                                 NUMBER = appointmentMessage.AppointmentId.ToString(),
                                 ENTITY = "IQCARE"
                             },
-                            APPOINTMENT_REASON = appointmentMessage.AppointmentReason,
-                            APPOINTMENT_TYPE = "",
+                            APPOINTMENT_REASON = appointmentReason,
+                            APPOINTMENT_TYPE = appointmentType,
                             APPOINTMENT_DATE = appointmentMessage.AppointmentDate,
                             APPOINTMENT_PLACING_ENTITY = "IQCARE",
-                            APPOINTMENT_LOCATION = "",
+                            APPOINTMENT_LOCATION = appointmentLocation,
                             ACTION_CODE = "A",
                             APPOINTMENT_NOTE = appointmentMessage.Description,
-                            APPOINTMENT_HONORED = appointmentMessage.AppointmentStatus
+                            APPOINTMENT_HONORED = appointmentStatus
                         };
 
                         appointmentScheduling.APPOINTMENT_INFORMATION.Add(appointmentInformation);
@@ -106,10 +183,13 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
                 PatientLookupManager patientLookup = new PatientLookupManager();
                 LookupLogic lookupLogic = new LookupLogic();
                 PatientMasterVisitManager masterVisitManager = new PatientMasterVisitManager();
+                var personIdentifierManager = new PersonIdentifierManager();
+                var interopPlacerValuesManager = new InteropPlacerValuesManager();
                 PatientLookup patient = new PatientLookup();
                 string cccNumber = String.Empty;
                 string appointmentReason = String.Empty;
                 string appointmentStatus = String.Empty;
+                string appointmentType = String.Empty;
 
                 foreach (var item in appointmentScheduling.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID)
                 {
@@ -118,14 +198,25 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
                         cccNumber = item.ID;
                     }
                 }
+                string godsNumber = appointmentScheduling.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ID;
 
                 if (!String.IsNullOrWhiteSpace(cccNumber))
                 {
                     patient = patientLookup.GetPatientByCccNumber(cccNumber);
                     if (patient != null)
                     {
+                        if (!string.IsNullOrWhiteSpace(godsNumber))
+                        {
+                            IdentifierManager identifierManager = new IdentifierManager();
+                            Identifier identifier = identifierManager.GetIdentifierByCode("GODS_NUMBER");
+                            var personIdentifiers = personIdentifierManager.GetPersonIdentifiers(patient.PersonId, identifier.Id);
+                            if (personIdentifiers.Count == 0)
+                            {
+                                personIdentifierManager.AddPersonIdentifier(patient.PersonId, identifier.Id, godsNumber, 1);
+                            }
+                        }
+
                         int patientMasterVisitId = masterVisitManager.GetLastPatientVisit(patient.Id).Id;
-                        int differentiatedCareId = lookupLogic.GetItemIdByGroupAndItemName("DifferentiatedCare", "Standard Care")[0].ItemId;
                         int serviceAreaId = lookupLogic.GetItemIdByGroupAndItemName("ServiceArea", "MoH 257 GREENCARD")[0].ItemId;
                         
 
@@ -133,8 +224,17 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
                         {
                             switch (appointment.APPOINTMENT_REASON)
                             {
-                                case "REGIMEN_REFILL":
+                                case "PHARMACY_REFILL":
                                     appointmentReason = "Pharmacy Refill";
+                                    break;
+                                case "TREATMENT_PREP":
+                                    appointmentReason = "Treatment Preparation";
+                                    break;
+                                case "LAB_TEST":
+                                    appointmentReason = "Lab Tests";
+                                    break;
+                                case "FOLLOWUP":
+                                    appointmentReason = "Follow Up";
                                     break;
                                 default:
                                     appointmentReason = "Follow Up";
@@ -143,16 +243,42 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
 
                             switch (appointment.APPOINTMENT_HONORED)
                             {
-                                case "N":
+                                case "HONORED":
+                                    appointmentStatus = "Met";
+                                    break;
+                                case "MISSED":
                                     appointmentStatus = "Missed";
                                     break;
-                                case "Y":
-                                    appointmentStatus = "Met";
+                                case "PENDING":
+                                    appointmentStatus = "Pending";
+                                    break;
+                                case "CANCELLED":
+                                    appointmentStatus = "CareEnded";
+                                    break;
+                                default:
+                                    appointmentStatus = "Pending";
+                                    break;
+                            }
+
+                            switch (appointment.APPOINTMENT_TYPE)
+                            {
+                                case "CLINICAL":
+                                    appointmentType = "Standard Care";
+                                    break;
+                                case "PHARMACY":
+                                    appointmentType = "Express Care";
+                                    break;
+                                case "INVESTIGATION":
+                                    appointmentType = "Express Care";
+                                    break;
+                                default:
+                                    appointmentType = "Standard Care";
                                     break;
                             }
 
                             int reasonId = lookupLogic.GetItemIdByGroupAndItemName("AppointmentReason", appointmentReason)[0].ItemId;
                             int statusId = lookupLogic.GetItemIdByGroupAndItemName("AppointmentStatus", appointmentStatus)[0].ItemId;
+                            int differentiatedCareId = lookupLogic.GetItemIdByGroupAndItemName("DifferentiatedCare", appointmentType)[0].ItemId;
 
                             if (appointment.ACTION_CODE == "A")
                             {
@@ -169,7 +295,9 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
                                     StatusId = statusId,
                                 };
 
-                                manager.AddPatientAppointments(patientAppointment);
+                                int appointmentId = manager.AddPatientAppointments(patientAppointment);
+
+                                //interopPlacerValuesManager.AddInteropPlacerValue()
                             }
                         }
                     }
@@ -177,14 +305,23 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                throw new Exception(e.Message);
             }
+
             return String.Empty;
         }
 
         public static string Update(PatientAppointSchedulingDTO appointScheduling)
         {
+            try
+            {
+
+            }
+            catch (Exception str)
+            {
+                Console.WriteLine(str);
+                throw;
+            }
             return String.Empty;
         }
     }

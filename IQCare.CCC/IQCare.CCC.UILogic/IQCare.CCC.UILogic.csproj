@@ -76,10 +76,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\IQCare.Web.UILogic.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Library\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -120,12 +116,14 @@
     <Compile Include="Interoperability\DrugPrescriptionMessage.cs" />
     <Compile Include="Interoperability\Appointment\PatientAppointmentMessageManager.cs" />
     <Compile Include="Interoperability\Enrollment\PatientMessageManager.cs" />
-    <Compile Include="Interoperability\Enrollment\PatientRegistrationValidation.cs" />
     <Compile Include="Interoperability\Enrollment\ProcessPatient.cs" />
     <Compile Include="Interoperability\Appointment\ProcessPatientAppointmentMessage.cs" />
     <Compile Include="Interoperability\Enrollment\ProcessRegistration.cs" />
+    <Compile Include="Interoperability\InteropPlacerTypeManager.cs" />
+    <Compile Include="Interoperability\InteropPlacerValuesManager.cs" />
     <Compile Include="Interoperability\Observation\ProcessObservationResultMessage.cs" />
     <Compile Include="Interoperability\ProcessViralLoadResults.cs" />
+    <Compile Include="Interoperability\DTOValidator\ValidateDTO.cs" />
     <Compile Include="Interoperability\ViralLoadMessageManager.cs" />
     <Compile Include="LookupLogic.cs" />
     <Compile Include="MstPatientLogic.cs" />

@@ -120,6 +120,8 @@
     <Compile Include="Enrollment\BPersonIdentifier.cs" />
     <Compile Include="Enrollment\BServiceAreaIdentifiers.cs" />
     <Compile Include="Interoperability\BDrugPrescriptionManager.cs" />
+    <Compile Include="Interoperability\BInteropPlacerType.cs" />
+    <Compile Include="Interoperability\BInteropPlacerValues.cs" />
     <Compile Include="Interoperability\BPatientAppointmentMessage.cs" />
     <Compile Include="Interoperability\BPatientMessage.cs" />
     <Compile Include="Interoperability\BViralLoadMessage.cs" />

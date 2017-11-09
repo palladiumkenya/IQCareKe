@@ -148,6 +148,8 @@ namespace DataAccess.CCC.Repository
         private IDrugPrescriptionMessageRepository _drugPrescriptionMessageRepository;
         private IViralLoadMessageRepository _viralLoadMessageRepository;
         private IPatientAppointmentMessageRepository _patientAppointmentMessageRepository;
+        private IInteropPlacerTypesRepository _interopPlacerTypesRepository;
+        private IInteropPlacerValuesRepository _interopPlacerValuesRepository;
 
         public UnitOfWork(BaseContext context)
         {
@@ -189,6 +191,24 @@ namespace DataAccess.CCC.Repository
             {
                 return _patientAppointmentMessageRepository ?? (_patientAppointmentMessageRepository =
                            new PatientAppointmentMessageRepository((LookupContext) _context));
+            }
+        }
+
+        public IInteropPlacerTypesRepository InteropPlacerTypesRepository
+        {
+            get
+            {
+                return _interopPlacerTypesRepository ?? (_interopPlacerTypesRepository =
+                           new InteropPlacerTypeRepository((GreencardContext) _context));
+            }
+        }
+
+        public IInteropPlacerValuesRepository InteropPlacerValuesRepository
+        {
+            get
+            {
+                return _interopPlacerValuesRepository ?? (_interopPlacerValuesRepository =
+                           new InteropPlacerValuesRepository((GreencardContext) _context));
             }
         }
 

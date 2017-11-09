@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,9 +14,13 @@ namespace IQCare.DTO.CommonEntities
 
     public class VISIT
     {
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Visit Date Is Required")]
         public string VISIT_DATE { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Patient Type Is Required")]
         public string PATIENT_TYPE { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Patient Source Is Required")]
         public string PATIENT_SOURCE { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Enrollment Date Is Required")]
         public string HIV_CARE_ENROLLMENT_DATE { get; set; }
     }
 
@@ -37,19 +42,25 @@ namespace IQCare.DTO.CommonEntities
 
     public class NOKNAME
     {
+        [Required(AllowEmptyStrings = false)]
         public string FIRST_NAME { get; set; }
         public string MIDDLE_NAME { get; set; }
+        [Required(AllowEmptyStrings = false)]
         public string LAST_NAME { get; set; }
     }
 
     public abstract class PatientBaseProperties
     {
         public PATIENTNAME MOTHER_NAME { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Date Of Birth Is Required")]
         public string DATE_OF_BIRTH { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Date of Birth Precision Is Required")]
         public string DATE_OF_BIRTH_PRECISION { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Sex Is Required")]
         public string SEX { get; set; }
         public PATIENTADDRESS PATIENT_ADDRESS { get; set; }
         public string PHONE_NUMBER { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Marital Status Is Required")]
         public string MARITAL_STATUS { get; set; }
         public string DEATH_DATE { get; set; }
         public string DEATH_INDICATOR { get; set; }
@@ -87,8 +98,10 @@ namespace IQCare.DTO.CommonEntities
 
     public class PATIENTNAME
     {
+        [Required(AllowEmptyStrings = false, ErrorMessage = "FirstName Is Required")]
         public string FIRST_NAME { get; set; }
         public string MIDDLE_NAME { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "LastName Is Required")]
         public string LAST_NAME { get; set; }
     }
 
@@ -101,19 +114,24 @@ namespace IQCare.DTO.CommonEntities
 
     public class INTERNALPATIENTID
     {
+        [Required(AllowEmptyStrings = false, ErrorMessage = "ID Is Required")]
         public string ID { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Identifier Type Is Required")]
         public string IDENTIFIER_TYPE { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Assigning Authority is Required")]
         public string ASSIGNING_AUTHORITY { get; set; }
     }
 
     public class MESSAGEHEADER
     {
         public string SENDING_APPLICATION { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Sending Facility Is Required")]
         public string SENDING_FACILITY { get; set; }
         public string RECEIVING_APPLICATION { get; set; }
         public string RECEIVING_FACILITY { get; set; }
         public string MESSAGE_DATETIME { get; set; }
         public string SECURITY { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Message Type Is Required")]
         public string MESSAGE_TYPE { get; set; }
         public string PROCESSING_ID { get; set; }
     }

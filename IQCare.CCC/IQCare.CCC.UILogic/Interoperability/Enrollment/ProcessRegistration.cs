@@ -12,8 +12,9 @@ using IQCare.CCC.UILogic.Enrollment;
 using IQCare.CCC.UILogic.Visit;
 using Interface.Security;
 using IQCare.DTO.PatientRegistration;
-using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Script.Serialization;
+using IQCare.CCC.UILogic.Interoperability.DTOValidator;
 
 namespace IQCare.CCC.UILogic.Interoperability.Enrollment
 {
@@ -116,9 +117,9 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
 
                 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                msg = "error";
+                throw new Exception(ex.Message);
             }
 
             return msg;
@@ -129,7 +130,6 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
             ExMessage message = new ExMessage();
             try
             {
-                PatientRegistrationValidation validation = new PatientRegistrationValidation();
                 PatientLookupManager patientLookup = new PatientLookupManager();
                 PatientEntryPointManager patientEntryPointManager = new PatientEntryPointManager();
 
@@ -139,17 +139,11 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                 string nationalId = String.Empty;
                 PatientLookup patient = new PatientLookup();
 
-                //var results = new List<ValidationResult>();
-                //var vc = new ValidationContext(registration, null, null);
-                //var isValid = Validator.TryValidateObject(registration, vc, results);
-
-                //// get all the errors
-                //var errors = Array.ConvertAll(results.ToArray(), o => o.ErrorMessage);
-
-
-                //msg = validation.ValidateInterOperabilityRegistration(registration);
-
-                
+                List<ValidationResult> results = ValidateDTO.validateDTO(registration);
+                if (results.Count > 0)
+                {
+                    throw new Exception(results.ToString());
+                }
 
                 foreach (var item in registration.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID)
                 {
@@ -236,11 +230,10 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
             }
             catch (Exception e)
             {
-                message.Msg = e.Message;
-                message.Code = 1;
+                throw new Exception(e.Message);
             }
 
-            return JsonConvert.SerializeObject(message);
+            return new JavaScriptSerializer().Serialize(message);
         }
     }
 }

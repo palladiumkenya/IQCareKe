@@ -9,8 +9,8 @@ namespace IQCare.WebApi.Logic.MappingEntities
     }
     public class VIRALLOADRESULT
     {
-        public DateTime DATE_SAMPLE_COLLECTED { get; set; }
-        public DateTime DATE_SAMPLE_TESTED { get; set; }
+        public string DATE_SAMPLE_COLLECTED { get; set; }
+        public string DATE_SAMPLE_TESTED { get; set; }
         public string VL_RESULT { get; set; }
         public string SAMPLE_TYPE { get; set; }
         public string SAMPLE_REJECTION { get; set; }

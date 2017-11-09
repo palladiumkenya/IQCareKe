@@ -1,6 +1,7 @@
 ﻿using System;
 using IQCare.WebApi.Logic.MessageHandler;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Script.Serialization;
 
@@ -58,7 +59,7 @@ namespace IQCare.Web.Api.Controllers.Interop
                 }
             }
 
-            _incomingMessageService.Handle(messageType, request.ToString());
+            Task.Run(() => _incomingMessageService.Handle(messageType, request.ToString()));
 
             return Ok();
         }

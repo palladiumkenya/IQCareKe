@@ -18,6 +18,7 @@ namespace IQCare.DTO.PatientRegistration
             PATIENT_VISIT = new VISIT();
         }
 
+        [Required]
         public MESSAGEHEADER MESSAGE_HEADER { get; set; }
         public PATIENTIDENTIFICATION PATIENT_IDENTIFICATION { get; set; }
         public List<NEXTOFKIN> NEXT_OF_KIN { get; set; }
