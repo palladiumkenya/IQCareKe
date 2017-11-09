@@ -19,6 +19,7 @@
                         <div class="col-md-12">
                             <div class="col-md-5">
                                 <div class="col-md-12"><label class="required control-label pull-left">Date Of Birth</label></div>
+                                <asp:HiddenField ID="dobPrecision" runat="server" ClientIDMode="Static" />
 
                                 <div class="col-md-12 form-group">
                                     <div class='input-group date' id='PersonDOBdatepicker'>
@@ -26,7 +27,7 @@
                                             <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
                                         <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="PersonDOB" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>        
-                                        <asp:HiddenField ID="dobPrecision" runat="server" ClientIDMode="Static" />
+                                        
                                     </div>
                                 </div>
                             </div>

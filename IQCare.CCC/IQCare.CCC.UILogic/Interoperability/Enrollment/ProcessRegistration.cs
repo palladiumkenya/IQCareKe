@@ -12,8 +12,8 @@ using IQCare.CCC.UILogic.Enrollment;
 using IQCare.CCC.UILogic.Visit;
 using Interface.Security;
 using IQCare.DTO.PatientRegistration;
-using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Script.Serialization;
 using IQCare.CCC.UILogic.Interoperability.DTOValidator;
 
 namespace IQCare.CCC.UILogic.Interoperability.Enrollment
@@ -117,9 +117,9 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
 
                 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                msg = "error";
+                throw new Exception(ex.Message);
             }
 
             return msg;
@@ -230,11 +230,10 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
             }
             catch (Exception e)
             {
-                message.Msg = e.Message;
-                message.Code = 1;
+                throw new Exception(e.Message);
             }
 
-            return JsonConvert.SerializeObject(message);
+            return new JavaScriptSerializer().Serialize(message);
         }
     }
 }

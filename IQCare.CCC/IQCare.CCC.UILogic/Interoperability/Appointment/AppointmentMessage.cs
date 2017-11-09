@@ -184,6 +184,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
                 LookupLogic lookupLogic = new LookupLogic();
                 PatientMasterVisitManager masterVisitManager = new PatientMasterVisitManager();
                 var personIdentifierManager = new PersonIdentifierManager();
+                var interopPlacerValuesManager = new InteropPlacerValuesManager();
                 PatientLookup patient = new PatientLookup();
                 string cccNumber = String.Empty;
                 string appointmentReason = String.Empty;
@@ -294,7 +295,9 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
                                     StatusId = statusId,
                                 };
 
-                                manager.AddPatientAppointments(patientAppointment);
+                                int appointmentId = manager.AddPatientAppointments(patientAppointment);
+
+                                //interopPlacerValuesManager.AddInteropPlacerValue()
                             }
                         }
                     }

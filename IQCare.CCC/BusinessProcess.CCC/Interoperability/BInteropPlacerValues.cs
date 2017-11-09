@@ -9,6 +9,17 @@ namespace BusinessProcess.CCC.Interoperability
 {
     public class BInteropPlacerValues : ProcessBase, IInteropPlacerValuesManager
     {
+        public int AddInteropPlacerValue(InteropPlacerValues interopPlacerValues)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                unitOfWork.InteropPlacerValuesRepository.Add(interopPlacerValues);
+                unitOfWork.Complete();
+                unitOfWork.Dispose();
+                return interopPlacerValues.Id;
+            }
+        }
+
         public InteropPlacerValues GetInteropPlacerValues(int interopPlacerTypeId, int identifierType, int entityId)
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))

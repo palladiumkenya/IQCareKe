@@ -127,6 +127,7 @@ namespace IQCare.Web.CCC.WebService
                 String sDate = DateTime.Now.ToString();
                 DateTime datevalue = Convert.ToDateTime(sDate);
                 List<PatientLookup> isPersonEnrolled = patientLookUpManager.GetPatientByPersonId(PersonId);
+                dobPrecision = String.IsNullOrWhiteSpace(dobPrecision) ? "false" : "true";
 
                 foreach (var item in identifiersObjects)
                 {

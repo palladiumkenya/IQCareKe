@@ -106,8 +106,6 @@ namespace IQCare.WebApi.Logic.MessageHandler
                 incomingMessage.LogMessage = e.Message;
                 incomingMessage.Processed = false;
                 _apiInboxmanager.AddApiInbox(incomingMessage);
-                Console.WriteLine(e);
-                throw;
             }
         }
 
