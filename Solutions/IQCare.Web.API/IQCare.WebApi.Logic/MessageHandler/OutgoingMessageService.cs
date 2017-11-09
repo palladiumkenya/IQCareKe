@@ -214,84 +214,8 @@ namespace IQCare.WebApi.Logic.MessageHandler
                 //var prescriptionManager = new DrugPrescriptionMessage();
                 DrugPrescriptionMessage drugPrescriptionMessage = new DrugPrescriptionMessage();
 
-                var prescriptionPayLoad =
-                    drugPrescriptionMessage.GetPrescriptionMessage(messageEvent.PatientId, messageEvent.EntityId);
-
-                List<DtoPatientIdentification> patientIdentification=new List<DtoPatientIdentification>();
-                List<PharmacyEncodedOrder> drugsPayLoad = new List<PharmacyEncodedOrder>();
-
-                foreach (var message in prescriptionPayLoad)
-                {
-                    var messageOrder = new PharmacyEncodedOrder()
-                    {
-                        DrugName = message.DRUG_NAME,
-                        CodingSystem = message.CODING_SYSTEM,
-                        Strength = message.STRENGTH,
-                        Dosage = message.DOSAGE,
-                        Frequency = message.FREQUENCY,
-                        Duration = message.DURATION,
-                        QuantityPrescribed = Convert.ToInt32(message.QUANTITY_PRESCRIBED),
-                        PrescriptionNotes = message.NOTES
-                    };
-                    drugsPayLoad.Add(messageOrder);
-                }
-
-
-
-                PrescriptionDto prescriptionDtoPayLoad=new PrescriptionDto()
-                {
-                    MesssageHeader =
-                    {
-                        ProcessingId = "P",
-                        SendingApplication = "IQCare",
-                        SendingFacility = messageEvent.FacilityId.ToString(),
-                        ReceivingApplication = "IL",
-                        ReceivingFacility = messageEvent.FacilityId.ToString(),
-                        MessageDatetime = prescriptionPayLoad[0].TRANSACTION_DATETIME,
-                        Security = "",
-                        MessageType = "RDE^001"
-                    },
-                    PatientIdentification =
-                    {
-                        ExternalPatientId =
-                        {
-                            AssigningAuthority = "",
-                            IdentifierType = "",
-                            IdentifierValue = ""
-                        },
-                        InternalPatientId =
-                        {
-                           AssigningAuthority = prescriptionPayLoad[0].ASSIGNING_AUTHORITY,
-                           IdentifierValue = prescriptionPayLoad[0].Id,
-                           IdentifierType = prescriptionPayLoad[0].IDENTIFIER_TYPE
-                        },
-                        PatientName =
-                        {
-                            FirstName = prescriptionPayLoad[0].FIRST_NAME,
-                            MiddleName = prescriptionPayLoad[0].MIDDLE_NAME,
-                            LastName = prescriptionPayLoad[0].LAST_NAME
-                        }
-                    },
-                    CommonOrderDetails =
-                    {
-                        OrderControl = "NW",
-                        PlacerOrderNumber =
-                        {
-                            Number = prescriptionPayLoad[0].ptn_pharmacy_pk,
-                            Entity = prescriptionPayLoad[0].ENTITY
-                        },
-                        OrderStatus = prescriptionPayLoad[0].ORDER_STATUS,
-                        OrderingPhysician =
-                        {
-                            FirstName = "",
-                            MiddleName = "",
-                            LastName = "" 
-                        },
-                        TransactionDatetime = prescriptionPayLoad[0].TRANSACTION_DATETIME,
-                        Notes = prescriptionPayLoad[0].NOTES
-                    },
-                    PharmacyEncodedOrder = drugsPayLoad                   
-                };
+                var prescriptionDtoPayLoad =
+                    drugPrescriptionMessage.GetPrescriptionMessage(messageEvent.PatientId, messageEvent.EntityId, messageEvent.PatientMasterVisitId);
 
                 var prescriptionEntityPayLoad = _jsonEntityMapper.DrugPrescriptionRaised(prescriptionDtoPayLoad);
 

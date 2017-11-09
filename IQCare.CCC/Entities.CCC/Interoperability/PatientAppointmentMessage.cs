@@ -18,6 +18,7 @@ namespace Entities.CCC.Interoperability
         public string AppointmentReason { get; set; }
         public string AppointmentDate { get; set; }
         public string AppointmentStatus { get; set; }
+        public string AppointmentType { get; set; }
         public string Description { get; set; }
     }
 }

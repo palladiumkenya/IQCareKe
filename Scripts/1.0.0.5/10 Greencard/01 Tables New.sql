@@ -119,3 +119,31 @@ ALTER TABLE [dbo].[PersonIdentifier] ADD  CONSTRAINT [DF_PersonIdentifier_Create
 END;
 
 
+IF NOT EXISTS(SELECT *  FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Interop_PlacerType]') AND type IN(N'U'))
+BEGIN
+CREATE TABLE [dbo].[Interop_PlacerType](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_Interop_PlacerType] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+END;
+
+IF NOT EXISTS(SELECT *  FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Interop_PlacerValues]') AND type IN(N'U'))
+BEGIN
+CREATE TABLE [dbo].[Interop_PlacerValues](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[InteropPlacerTypeId] [int] NOT NULL,
+	[IdentifierType] [int] NOT NULL,
+	[EntityId] [int] NOT NULL,
+	[PlacerValue] [int] NOT NULL,
+ CONSTRAINT [PK_Interop_PlacerValues] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+END;

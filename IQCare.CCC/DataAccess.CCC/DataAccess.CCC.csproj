@@ -97,6 +97,8 @@
     <Compile Include="Interface\enrollment\IPersonIdentifierRepository.cs" />
     <Compile Include="Interface\enrollment\IServiceAreaIdentifiersRepository.cs" />
     <Compile Include="Interface\Interoperability\IDrugPrescriptionMessageRepository.cs" />
+    <Compile Include="Interface\Interoperability\IInteropPlacerTypesRepository.cs" />
+    <Compile Include="Interface\Interoperability\IInteropPlacerValuesRepository.cs" />
     <Compile Include="Interface\Interoperability\IPatientAppointmentMessageRepository.cs" />
     <Compile Include="Interface\Interoperability\IPatientMessageRepository.cs" />
     <Compile Include="Interface\Interoperability\IViralLoadMessageRepository.cs" />
@@ -181,6 +183,8 @@
     <Compile Include="Repository\Enrollment\PersonIdentifierRepository.cs" />
     <Compile Include="Repository\Enrollment\ServiceAreaIdentifiersRepository.cs" />
     <Compile Include="Repository\Interoperability\DrugPrescriptionMessageRepository.cs" />
+    <Compile Include="Repository\Interoperability\InteropPlacerTypeRepository.cs" />
+    <Compile Include="Repository\Interoperability\InteropPlacerValuesRepository.cs" />
     <Compile Include="Repository\Interoperability\PatientAppointmentMessageRepository.cs" />
     <Compile Include="Repository\Interoperability\PatientMessageRepository.cs" />
     <Compile Include="Repository\Interoperability\ViralLoadMessageRepository.cs" />
