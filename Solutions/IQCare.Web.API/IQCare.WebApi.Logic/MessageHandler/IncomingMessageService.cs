@@ -187,8 +187,9 @@ namespace IQCare.WebApi.Logic.MessageHandler
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                incomingMessage.LogMessage = e.Message;
+                incomingMessage.Processed = false;
+                _apiInboxmanager.AddApiInbox(incomingMessage);
             }
             _apiInboxmanager.AddApiInbox(incomingMessage);
         }
@@ -208,8 +209,6 @@ namespace IQCare.WebApi.Logic.MessageHandler
                 incomingMessage.LogMessage = e.Message;
                 incomingMessage.Processed = false;
                 _apiInboxmanager.AddApiInbox(incomingMessage);
-                Console.WriteLine(e);
-                throw;
             }
             incomingMessage.DateProcessed = DateTime.Now;
             incomingMessage.Processed = true;
