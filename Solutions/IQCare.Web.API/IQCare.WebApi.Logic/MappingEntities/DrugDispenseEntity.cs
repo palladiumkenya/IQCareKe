@@ -5,24 +5,24 @@ namespace IQCare.WebApi.Logic.MappingEntities
 {
     public class DrugDispenseEntity
     {
-        public MESSAGEHEADER Messageheader { get; set; }
-        public PATIENTIDENTIFICATION Patientidentification { get; set; }
-        public CommonOrderDetailsEntity Commonorderdetails { get; set; }
-        public List<PharmacyEncorderOrderEntity> Pharmacyencodedorder { get; set; }
-        public List<PharmacyDispense> PharmacyDispense { get; set; }
+        public MESSAGEHEADER MESSAGE_HEADER { get; set; }
+        public PATIENTIDENTIFICATION PATIENT_IDENTIFICATION { get; set; }
+        public COMMONORDERDETAILS COMMON_ORDER_DETAILS { get; set; }
+        public List<PHARMACYENCODEDORDER> PHARMACY_ENCODED_ORDER { get; set; }
+        public List<PHARMACYDISPENSE> PHARMACY_DISPENSE { get; set; }
     }
 
-    public class PharmacyDispense
+    public class PHARMACYDISPENSE
     {
-       public string DrugName { get; set; }
-       public string CodingSystem { get; set; }
-      public string  ActualDrugs { get; set; }
-       public string Strength { get; set; }
-       public string Dosage { get; set; }
-       public string Frequency { get; set; } 
-       public int  Duration { get; set; }
-       public int QuantityDispensed { get; set; }
-       public string DispensingNotes { get; set; }
+       public string DRUG_NAME { get; set; }
+       public string CODING_SYSTEM { get; set; }
+      public string  ACTUAL_DRUGS { get; set; }
+       public string STRENGTH { get; set; }
+       public string DOSAGE { get; set; }
+       public string FREQUENCY { get; set; } 
+       public int  DURATION { get; set; }
+       public int QUANTITY_DISPENSED { get; set; }
+       public string DISPENSING_NOTES { get; set; }
 		
     }
 }
