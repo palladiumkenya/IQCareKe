@@ -78,7 +78,7 @@ namespace IQCare.SCM
             theBind.Win_BindCombo(ddlStoreName, theStoreDT, "StoreName", "StoreId","StoreName");
             if (theDT.Rows.Count == 1)
             {
-                ddlStoreName.SelectedIndex = 1;
+                ddlStoreName.SelectedIndex = 0;
                 ddlStoreName.Enabled = false;
             }
         }
