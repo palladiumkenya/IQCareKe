@@ -12,8 +12,8 @@ using IQCare.CCC.UILogic.Enrollment;
 using IQCare.CCC.UILogic.Visit;
 using Interface.Security;
 using IQCare.DTO.PatientRegistration;
-using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Script.Serialization;
 using IQCare.CCC.UILogic.Interoperability.DTOValidator;
 
 namespace IQCare.CCC.UILogic.Interoperability.Enrollment
@@ -51,7 +51,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                 //IQCare Sex
                 int sex = lookupLogic.GetItemIdByGroupAndItemName("Gender", gender)[0].ItemId;
                 //Assume this is a new patient
-                int patientType = lookupLogic.GetItemIdByGroupAndItemName("PatientType", "New")[0].ItemId;
+                int patientType = lookupLogic.GetItemIdByGroupAndItemName("PatientType", registration.PATIENT_VISIT.PATIENT_TYPE)[0].ItemId;
                 //Get Enrollment Id Type
                 int visitType = lookupLogic.GetItemIdByGroupAndItemName("VisitType", "Enrollment")[0].ItemId;
                 //Get DOB
@@ -65,6 +65,9 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                     case "EXACT":
                         DOB_Precision = true;
                         break;
+                    default:
+                        DOB_Precision = true;
+                        break;
                 }
                 //Get Enrollment Date
                 DateTime dateOfEnrollment = DateTime.ParseExact(registration.PATIENT_VISIT.HIV_CARE_ENROLLMENT_DATE, "yyyyMMdd", null);
@@ -73,7 +76,19 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                 string middleName = registration.PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME;
                 string lastName = registration.PATIENT_IDENTIFICATION.PATIENT_NAME.LAST_NAME;
                 string godsNumber = registration.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ID;
+                string maritalStatusString = String.Empty;
+                int maritalStatusId = 0;
+                switch (registration.PATIENT_IDENTIFICATION.MARITAL_STATUS)
+                {
+                    case "S":
+                        maritalStatusString = "Single";
+                        break;
+                    default:
+                        maritalStatusString = "Unknown";
+                        break;
+                }
 
+                maritalStatusId = lookupLogic.GetItemIdByGroupAndItemName("MaritalStatus", maritalStatusString)[0].ItemId;
                 string nationalId = String.Empty;
                 string cccNumber = String.Empty;
                 int entryPointId = 0;
@@ -106,20 +121,20 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                     patient = patientLookup.GetPatientByCccNumber(cccNumber);
                     if (patient == null)
                     {
-                        msg = ProcessPatient.Add(firstName, middleName, lastName, sex, 1, DOB, DOB_Precision, facilityId, patientType, nationalId, visitType, dateOfEnrollment, cccNumber, entryPointId, godsNumber);
+                        msg = ProcessPatient.Add(firstName, middleName, lastName, sex, 1, DOB, DOB_Precision, facilityId, patientType, nationalId, visitType, dateOfEnrollment, cccNumber, entryPointId, godsNumber, maritalStatusId);
                     }
                     else
                     {
-                        msg = ProcessPatient.Update(patient.PersonId, patient.Id, patient.ptn_pk, DOB, nationalId, facilityId, entryPointId, dateOfEnrollment, cccNumber, patient, godsNumber);
+                        msg = ProcessPatient.Update(patient.PersonId, patient.Id, patient.ptn_pk, DOB, nationalId, facilityId, entryPointId, dateOfEnrollment, cccNumber, patient, godsNumber, maritalStatusId);
                     }
 
                 }
 
                 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                msg = "error";
+                throw new Exception(ex.Message);
             }
 
             return msg;
@@ -139,7 +154,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                 string nationalId = String.Empty;
                 PatientLookup patient = new PatientLookup();
 
-                List<ValidationResult> results = ValidateDTO.validateDTO(registration);
+                List<ValidationResult> results = ValidateDTO.validateDTO<PatientRegistrationDTO>(registration);
                 if (results.Count > 0)
                 {
                     throw new Exception(results.ToString());
@@ -191,7 +206,20 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                     string middleName = registration.PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME;
                     string lastName = registration.PATIENT_IDENTIFICATION.PATIENT_NAME.LAST_NAME;
                     string godsNumber = registration.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ID;
+                    //Marital Status
+                    string maritalStatusString = String.Empty;
+                    int maritalStatusId = 0;
+                    switch (registration.PATIENT_IDENTIFICATION.MARITAL_STATUS)
+                    {
+                        case "S":
+                            maritalStatusString = "Single";
+                            break;
+                        default:
+                            maritalStatusString = "Unknown";
+                            break;
+                    }
 
+                    maritalStatusId = lookupLogic.GetItemIdByGroupAndItemName("MaritalStatus", maritalStatusString)[0].ItemId;
                     var lookupEntryPoints =
                         lookupLogic.GetItemIdByGroupAndDisplayName("Entrypoint",
                             registration.PATIENT_VISIT.PATIENT_SOURCE);
@@ -212,12 +240,12 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                     if (patient != null)
                     {
                         msg = ProcessPatient.Update(patient.PersonId, patient.Id, patient.ptn_pk, DOB, nationalId, facilityId,
-                            entryPointId, enrollmentDate, cccNumber, patient, godsNumber);
+                            entryPointId, enrollmentDate, cccNumber, patient, godsNumber, maritalStatusId);
                     }
                     else
                     {
                         msg = ProcessPatient.Add(firstName, middleName, lastName, sex, 1, DOB, DOB_Precision,
-                            patientType, facilityId, nationalId, visitType, enrollmentDate, cccNumber, entryPointId, godsNumber);
+                            patientType, facilityId, nationalId, visitType, enrollmentDate, cccNumber, entryPointId, godsNumber, maritalStatusId);
                     }
                 }
                 else
@@ -230,11 +258,10 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
             }
             catch (Exception e)
             {
-                message.Msg = e.Message;
-                message.Code = 1;
+                throw new Exception(e.Message);
             }
 
-            return JsonConvert.SerializeObject(message);
+            return new JavaScriptSerializer().Serialize(message);
         }
     }
 }

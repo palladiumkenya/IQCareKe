@@ -13,7 +13,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
 {
     public class ProcessPatient
     {
-        public static string Update(int personId, int patientId, int? ptn_pk, DateTime dateOfBirth, string nationalId, int facilityId, int entryPointId, DateTime enrollmentDate, string cccNumber, PatientLookup patient, string godsNumber)
+        public static string Update(int personId, int patientId, int? ptn_pk, DateTime dateOfBirth, string nationalId, int facilityId, int entryPointId, DateTime enrollmentDate, string cccNumber, PatientLookup patient, string godsNumber, int matStatusId)
         {
             try
             {
@@ -22,6 +22,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                 var patientIdentifierManager = new PatientIdentifierManager();
                 var patientEnrollmentManager = new PatientEnrollmentManager();
                 var personIdentifierManager = new PersonIdentifierManager();
+                PersonMaritalStatusManager personMaritalStatusManager = new PersonMaritalStatusManager();
 
                 if (!string.IsNullOrWhiteSpace(godsNumber))
                 {
@@ -33,6 +34,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                         personIdentifierManager.AddPersonIdentifier(personId, identifier.Id, godsNumber, 1);
                     }
                 }
+                personMaritalStatusManager.AddPatientMaritalStatus(personId, matStatusId, 1);
 
                 List<PatientLookup> patientLookups = new List<PatientLookup>();
                 patientLookups.Add(patient);
@@ -103,7 +105,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
             }
         }
 
-        public static string Add(string firstName, string middleName, string lastName, int sex, int userId, DateTime dob, bool dobPrecision, int facilityId, int patientType, string nationalId, int visitType, DateTime dateOfEnrollment, string cccNumber, int entryPointId, string godsNumber)
+        public static string Add(string firstName, string middleName, string lastName, int sex, int userId, DateTime dob, bool dobPrecision, int facilityId, int patientType, string nationalId, int visitType, DateTime dateOfEnrollment, string cccNumber, int entryPointId, string godsNumber, int matStatusId)
         {
             try
             {
@@ -116,6 +118,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                 PersonContactLookUpManager personContactLookUpManager = new PersonContactLookUpManager();
                 MstPatientLogic mstPatientLogic = new MstPatientLogic();
                 PatientIdentifierManager patientIdentifierManager = new PatientIdentifierManager();
+                PersonMaritalStatusManager personMaritalStatusManager = new PersonMaritalStatusManager();
                 var personIdentifierManager = new PersonIdentifierManager();
 
                 var personContacts = new List<PersonContactLookUp>();
@@ -123,6 +126,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
 
                 //Start Saving
                 int personId = personManager.AddPersonUiLogic(firstName, middleName, lastName, sex, userId, dob, dobPrecision);
+                personMaritalStatusManager.AddPatientMaritalStatus(personId, matStatusId, 1);
                 String sDate = DateTime.Now.ToString();
                 DateTime datevalue = Convert.ToDateTime(sDate);
                 var patientIndex = datevalue.Year.ToString() + '-' + personId;

@@ -59,7 +59,11 @@ namespace IQCare.Web.Api.Controllers.Interop
                 }
             }
 
-            Task.Run(() => _incomingMessageService.Handle(messageType, request.ToString()));
+            Task.Run(() =>
+            {
+                _incomingMessageService.Handle(messageType, request.ToString());
+                return String.Empty;
+            });
 
             return Ok();
         }
