@@ -74,11 +74,12 @@ namespace IQCare.SCM
             }*/
         
             DataTable theStoreDT = theDV.ToTable();
+            
             theBind.Win_BindCombo(ddlStoreName, theStoreDT, "StoreName", "StoreId","StoreName");
-            if (theDT.Rows.Count == 2)
+            if (theDT.Rows.Count == 1)
             {
-                ddlStoreName.SelectedIndex = 1;
-                ddlStoreName.Enabled = false;
+                ddlStoreName.SelectedIndex = 0;
+                //ddlStoreName.Enabled = false;
             }
         }
         private void btnOK_Click(object sender, EventArgs e)
