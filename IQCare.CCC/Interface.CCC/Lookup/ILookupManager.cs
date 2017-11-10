@@ -48,7 +48,7 @@ namespace Interface.CCC.Lookup
         List<LookupItemView> GetRegimenCategoryListByRegimenName(string regimenName);
         string GetLookUpMasterNameFromId(int masterId);
         string GetLookupItemId(string lookupItemName);
-
+        LookupCounty GetCountyDetailsByWardName(string wardName);
 
     }
 
