@@ -180,6 +180,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
         {
             try
             {
+                PatientAppointmentManager manager = new PatientAppointmentManager();
                 PatientLookupManager patientLookup = new PatientLookupManager();
                 LookupLogic lookupLogic = new LookupLogic();
                 PatientMasterVisitManager masterVisitManager = new PatientMasterVisitManager();
@@ -280,9 +281,23 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
                             int statusId = lookupLogic.GetItemIdByGroupAndItemName("AppointmentStatus", appointmentStatus)[0].ItemId;
                             int differentiatedCareId = lookupLogic.GetItemIdByGroupAndItemName("DifferentiatedCare", appointmentType)[0].ItemId;
 
-                            if (appointment.ACTION_CODE == "A")
+                            InteropPlacerTypeManager interopPlacerTypeManager = new InteropPlacerTypeManager();
+                            int interopPlacerTypeId = interopPlacerTypeManager.GetInteropPlacerTypeByName(appointment.PLACER_APPOINTMENT_NUMBER.ENTITY).Id;
+
+                            var interopPlacerValues = interopPlacerValuesManager.GetInteropPlacerValues(interopPlacerTypeId, 3, Convert.ToInt32(appointment.PLACER_APPOINTMENT_NUMBER.NUMBER));
+                            if (interopPlacerValues != null)
                             {
-                                PatientAppointmentManager manager = new PatientAppointmentManager();
+                                PatientAppointment patientAppointment = manager.GetPatientAppointment(interopPlacerValues.EntityId);
+                                patientAppointment.AppointmentDate = DateTime.ParseExact(appointment.APPOINTMENT_DATE, "yyyyMMdd", null);
+                                patientAppointment.Description = appointment.APPOINTMENT_NOTE;
+                                patientAppointment.DifferentiatedCareId = differentiatedCareId;
+                                patientAppointment.ReasonId = reasonId;
+                                patientAppointment.ServiceAreaId = serviceAreaId;
+                                patientAppointment.StatusId = statusId;
+                                manager.UpdatePatientAppointments(patientAppointment);
+                            }
+                            else
+                            {
                                 PatientAppointment patientAppointment = new PatientAppointment()
                                 {
                                     PatientId = patient.Id,
@@ -292,12 +307,18 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
                                     DifferentiatedCareId = differentiatedCareId,
                                     ReasonId = reasonId,
                                     ServiceAreaId = serviceAreaId,
-                                    StatusId = statusId,
+                                    StatusId = statusId
                                 };
 
                                 int appointmentId = manager.AddPatientAppointments(patientAppointment);
-
-                                //interopPlacerValuesManager.AddInteropPlacerValue()
+                                InteropPlacerValues placerValues = new InteropPlacerValues()
+                                {
+                                    IdentifierType = 3,
+                                    EntityId = appointmentId,
+                                    InteropPlacerTypeId = interopPlacerTypeId,
+                                    PlacerValue = Convert.ToInt32(appointment.PLACER_APPOINTMENT_NUMBER.NUMBER)
+                                };
+                                interopPlacerValuesManager.AddInteropPlacerValue(placerValues);
                             }
                         }
                     }
@@ -311,17 +332,159 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
             return String.Empty;
         }
 
-        public static string Update(PatientAppointSchedulingDTO appointScheduling)
+        public static string Update(PatientAppointSchedulingDTO appointmentScheduling)
         {
             try
             {
+                PatientAppointmentManager manager = new PatientAppointmentManager();
+                PatientLookupManager patientLookup = new PatientLookupManager();
+                LookupLogic lookupLogic = new LookupLogic();
+                PatientMasterVisitManager masterVisitManager = new PatientMasterVisitManager();
+                var personIdentifierManager = new PersonIdentifierManager();
+                var interopPlacerValuesManager = new InteropPlacerValuesManager();
+                PatientLookup patient = new PatientLookup();
+                string cccNumber = String.Empty;
+                string appointmentReason = String.Empty;
+                string appointmentStatus = String.Empty;
+                string appointmentType = String.Empty;
 
+                foreach (var item in appointmentScheduling.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID)
+                {
+                    if (item.IDENTIFIER_TYPE == "CCC_NUMBER" && item.ASSIGNING_AUTHORITY == "CCC")
+                    {
+                        cccNumber = item.ID;
+                    }
+                }
+                string godsNumber = appointmentScheduling.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ID;
+
+                if (!String.IsNullOrWhiteSpace(cccNumber))
+                {
+                    patient = patientLookup.GetPatientByCccNumber(cccNumber);
+                    if (patient != null)
+                    {
+                        if (!string.IsNullOrWhiteSpace(godsNumber))
+                        {
+                            IdentifierManager identifierManager = new IdentifierManager();
+                            Identifier identifier = identifierManager.GetIdentifierByCode("GODS_NUMBER");
+                            var personIdentifiers = personIdentifierManager.GetPersonIdentifiers(patient.PersonId, identifier.Id);
+                            if (personIdentifiers.Count == 0)
+                            {
+                                personIdentifierManager.AddPersonIdentifier(patient.PersonId, identifier.Id, godsNumber, 1);
+                            }
+                        }
+
+                        int patientMasterVisitId = masterVisitManager.GetLastPatientVisit(patient.Id).Id;
+                        int serviceAreaId = lookupLogic.GetItemIdByGroupAndItemName("ServiceArea", "MoH 257 GREENCARD")[0].ItemId;
+
+
+                        foreach (var appointment in appointmentScheduling.APPOINTMENT_INFORMATION)
+                        {
+                            switch (appointment.APPOINTMENT_REASON)
+                            {
+                                case "PHARMACY_REFILL":
+                                    appointmentReason = "Pharmacy Refill";
+                                    break;
+                                case "TREATMENT_PREP":
+                                    appointmentReason = "Treatment Preparation";
+                                    break;
+                                case "LAB_TEST":
+                                    appointmentReason = "Lab Tests";
+                                    break;
+                                case "FOLLOWUP":
+                                    appointmentReason = "Follow Up";
+                                    break;
+                                default:
+                                    appointmentReason = "Follow Up";
+                                    break;
+                            }
+
+                            switch (appointment.APPOINTMENT_HONORED)
+                            {
+                                case "HONORED":
+                                    appointmentStatus = "Met";
+                                    break;
+                                case "MISSED":
+                                    appointmentStatus = "Missed";
+                                    break;
+                                case "PENDING":
+                                    appointmentStatus = "Pending";
+                                    break;
+                                case "CANCELLED":
+                                    appointmentStatus = "CareEnded";
+                                    break;
+                                default:
+                                    appointmentStatus = "Pending";
+                                    break;
+                            }
+
+                            switch (appointment.APPOINTMENT_TYPE)
+                            {
+                                case "CLINICAL":
+                                    appointmentType = "Standard Care";
+                                    break;
+                                case "PHARMACY":
+                                    appointmentType = "Express Care";
+                                    break;
+                                case "INVESTIGATION":
+                                    appointmentType = "Express Care";
+                                    break;
+                                default:
+                                    appointmentType = "Standard Care";
+                                    break;
+                            }
+
+                            int reasonId = lookupLogic.GetItemIdByGroupAndItemName("AppointmentReason", appointmentReason)[0].ItemId;
+                            int statusId = lookupLogic.GetItemIdByGroupAndItemName("AppointmentStatus", appointmentStatus)[0].ItemId;
+                            int differentiatedCareId = lookupLogic.GetItemIdByGroupAndItemName("DifferentiatedCare", appointmentType)[0].ItemId;
+
+                            InteropPlacerTypeManager interopPlacerTypeManager = new InteropPlacerTypeManager();
+                            int interopPlacerTypeId = interopPlacerTypeManager.GetInteropPlacerTypeByName(appointment.PLACER_APPOINTMENT_NUMBER.ENTITY).Id;
+
+                            var interopPlacerValues = interopPlacerValuesManager.GetInteropPlacerValues(interopPlacerTypeId, 3, Convert.ToInt32(appointment.PLACER_APPOINTMENT_NUMBER.NUMBER));
+                            if (interopPlacerValues != null)
+                            {
+                                PatientAppointment patientAppointment = manager.GetPatientAppointment(interopPlacerValues.EntityId);
+                                patientAppointment.AppointmentDate = DateTime.ParseExact(appointment.APPOINTMENT_DATE, "yyyyMMdd", null);
+                                patientAppointment.Description = appointment.APPOINTMENT_NOTE;
+                                patientAppointment.DifferentiatedCareId = differentiatedCareId;
+                                patientAppointment.ReasonId = reasonId;
+                                patientAppointment.ServiceAreaId = serviceAreaId;
+                                patientAppointment.StatusId = statusId;
+                                manager.UpdatePatientAppointments(patientAppointment);
+                            }
+                            else
+                            {
+                                PatientAppointment patientAppointment = new PatientAppointment()
+                                {
+                                    PatientId = patient.Id,
+                                    PatientMasterVisitId = patientMasterVisitId,
+                                    AppointmentDate = DateTime.ParseExact(appointment.APPOINTMENT_DATE, "yyyyMMdd", null),
+                                    Description = appointment.APPOINTMENT_NOTE,
+                                    DifferentiatedCareId = differentiatedCareId,
+                                    ReasonId = reasonId,
+                                    ServiceAreaId = serviceAreaId,
+                                    StatusId = statusId
+                                };
+
+                                int appointmentId = manager.AddPatientAppointments(patientAppointment);
+                                InteropPlacerValues placerValues = new InteropPlacerValues()
+                                {
+                                    IdentifierType = 3,
+                                    EntityId = appointmentId,
+                                    InteropPlacerTypeId = interopPlacerTypeId,
+                                    PlacerValue = Convert.ToInt32(appointment.PLACER_APPOINTMENT_NUMBER.NUMBER)
+                                };
+                                interopPlacerValuesManager.AddInteropPlacerValue(placerValues);
+                            }
+                        }
+                    }
+                }
             }
-            catch (Exception str)
+            catch (Exception e)
             {
-                Console.WriteLine(str);
-                throw;
+                throw new Exception(e.Message);
             }
+
             return String.Empty;
         }
     }

@@ -20,13 +20,11 @@ namespace BusinessProcess.CCC.Interoperability
             }
         }
 
-        public InteropPlacerValues GetInteropPlacerValues(int interopPlacerTypeId, int identifierType, int entityId)
+        public InteropPlacerValues GetInteropPlacerValues(int interopPlacerTypeId, int identifierType, int placerValue)
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                var interopPlacerValues = unitOfWork.InteropPlacerValuesRepository.FindBy(x =>
-                    x.EntityId == entityId && x.InteropPlacerTypeId == interopPlacerTypeId &&
-                    x.IdentifierType == identifierType).FirstOrDefault();
+                var interopPlacerValues = unitOfWork.InteropPlacerValuesRepository.FindBy(x => x.PlacerValue == placerValue && x.InteropPlacerTypeId == interopPlacerTypeId && x.IdentifierType == identifierType).FirstOrDefault();
                 unitOfWork.Dispose();
                 return interopPlacerValues;
             }

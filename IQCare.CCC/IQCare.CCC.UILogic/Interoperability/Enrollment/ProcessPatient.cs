@@ -199,6 +199,10 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                             int itemId = lookupLogic.GetItemIdByGroupAndItemName("CareEnded", "Death")[0].ItemId;
                             int patientMasterVisitId = masterVisitManager.GetLastPatientVisit(patientId).Id;
                             careEndingManager.AddPatientCareEndingDeath(patientId, patientMasterVisitId, enrollmentId, itemId, deathDate.Value, deathDate.Value, "");
+
+                            PatientEntityEnrollment entityEnrollmentCareEnded = patientEnrollmentManager.GetPatientEntityEnrollment(enrollmentId);
+                            entityEnrollmentCareEnded.CareEnded = true;
+                            patientEnrollmentManager.updatePatientEnrollment(entityEnrollmentCareEnded);
                         }
                     }
                 }
@@ -216,6 +220,10 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                         int itemId = lookupLogic.GetItemIdByGroupAndItemName("CareEnded", "Death")[0].ItemId;
                         int patientMasterVisitId = masterVisitManager.GetLastPatientVisit(patientId).Id;
                         careEndingManager.AddPatientCareEndingDeath(patientId, patientMasterVisitId, patientEnrollmentId, itemId, deathDate.Value, deathDate.Value, "");
+
+                        PatientEntityEnrollment entityEnrollmentCareEnded = patientEnrollmentManager.GetPatientEntityEnrollment(patientEnrollmentId);
+                        entityEnrollmentCareEnded.CareEnded = true;
+                        patientEnrollmentManager.updatePatientEnrollment(entityEnrollmentCareEnded);
                     }
                 }
 
@@ -328,6 +336,10 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                     LookupLogic lookupLogic = new LookupLogic();
                     int itemId = lookupLogic.GetItemIdByGroupAndItemName("CareEnded", "Death")[0].ItemId;
                     careEndingManager.AddPatientCareEndingDeath(patientId, patientMasterVisitId, patientEnrollmentId, itemId, deathDate.Value, deathDate.Value, "");
+
+                    PatientEntityEnrollment entityEnrollment = patientEnrollmentManager.GetPatientEntityEnrollment(patientEnrollmentId);
+                    entityEnrollment.CareEnded = true;
+                    patientEnrollmentManager.updatePatientEnrollment(entityEnrollment);
                 }
                 //Get User Details to be used in BLUE CARD
                 var patient_person_details = personLookUp.GetPersonById(personId);
@@ -435,7 +447,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                 registration.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.IDENTIFIER_TYPE = "GODS_NUMBER";
                 //Start setting values
                 registration.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID.Add(internalPatientId);
-                if (patientMessage.NATIONAL_ID != null && patientMessage.NATIONAL_ID != "99999999")
+                if (!String.IsNullOrWhiteSpace(patientMessage.NATIONAL_ID) && patientMessage.NATIONAL_ID != "99999999")
                 {
                     INTERNALPATIENTID internalNationalId = new INTERNALPATIENTID();
                     internalNationalId.ID = patientMessage.NATIONAL_ID;
