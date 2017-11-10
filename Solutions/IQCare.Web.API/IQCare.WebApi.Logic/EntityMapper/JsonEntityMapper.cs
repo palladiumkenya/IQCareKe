@@ -120,14 +120,14 @@ namespace IQCare.WebApi.Logic.EntityMapper
             raisedPrescriptionEntity.PATIENT_IDENTIFICATION.PATIENT_NAME.LAST_NAME =entityDto.PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME;
             raisedPrescriptionEntity.PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME = entityDto.PATIENT_IDENTIFICATION.PATIENT_NAME.LAST_NAME;
 
-            raisedPrescriptionEntity.COMMON_ORDER_DETAILS.OrderingPhysicianEntity.FIRST_NAME =entityDto.COMMON_ORDER_DETAILS.ORDERING_PHYSICIAN.FIRST_NAME;
-            raisedPrescriptionEntity.COMMON_ORDER_DETAILS.OrderingPhysicianEntity.MIDDLE_NAME = entityDto.COMMON_ORDER_DETAILS.ORDERING_PHYSICIAN.MIDDLE_NAME;
-            raisedPrescriptionEntity.COMMON_ORDER_DETAILS.OrderingPhysicianEntity.LAST_NAME = entityDto.COMMON_ORDER_DETAILS.ORDERING_PHYSICIAN.LAST_NAME;
+            raisedPrescriptionEntity.COMMON_ORDER_DETAILS.ORDERING_PHYSICIAN.FIRST_NAME =entityDto.COMMON_ORDER_DETAILS.ORDERING_PHYSICIAN.FIRST_NAME;
+            raisedPrescriptionEntity.COMMON_ORDER_DETAILS.ORDERING_PHYSICIAN.MIDDLE_NAME = entityDto.COMMON_ORDER_DETAILS.ORDERING_PHYSICIAN.MIDDLE_NAME;
+            raisedPrescriptionEntity.COMMON_ORDER_DETAILS.ORDERING_PHYSICIAN.LAST_NAME = entityDto.COMMON_ORDER_DETAILS.ORDERING_PHYSICIAN.LAST_NAME;
 
             raisedPrescriptionEntity.COMMON_ORDER_DETAILS.NOTES = entityDto.COMMON_ORDER_DETAILS.NOTES;
             raisedPrescriptionEntity.COMMON_ORDER_DETAILS.ORDER_CONTROL = entityDto.COMMON_ORDER_DETAILS.ORDER_CONTROL;
             raisedPrescriptionEntity.COMMON_ORDER_DETAILS.ORDER_STATUS = entityDto.COMMON_ORDER_DETAILS.ORDER_STATUS;
-            raisedPrescriptionEntity.COMMON_ORDER_DETAILS.PlacerOrderNumberEntity.NUMBER = Convert.ToString(entityDto.COMMON_ORDER_DETAILS.PLACER_ORDER_NUMBER.NUMBER);
+            raisedPrescriptionEntity.COMMON_ORDER_DETAILS.PLACER_ORDER_NUMBER.NUMBER = Convert.ToString(entityDto.COMMON_ORDER_DETAILS.PLACER_ORDER_NUMBER.NUMBER);
             raisedPrescriptionEntity.COMMON_ORDER_DETAILS.TRANSACTION_DATETIME = entityDto.COMMON_ORDER_DETAILS.TRANSACTION_DATETIME.ToString("yyyyMMddHmmss");
 
             foreach (var order in entityDto.PHARMACY_ENCODED_ORDER)
@@ -141,7 +141,10 @@ namespace IQCare.WebApi.Logic.EntityMapper
                     FREQUENCY = order.FREQUENCY,
                     DURATION = order.DURATION,
                     QUANTITY_PRESCRIBED =Convert.ToDecimal(order.QUANTITY_PRESCRIBED),
-                    TREATMENT_INSTRUCTION = order.TREATMENT_INSTRUCTION
+                    TREATMENT_INSTRUCTION = order.TREATMENT_INSTRUCTION,
+                    PHARMACY_ORDER_DATE=Convert.ToDateTime(order.PHARMACY_ORDER_DATE.ToString("yyyyMMddHmmss")),
+                    INDICATION=order.INDICATION,
+                    PRESCRIPTION_NOTES=order.PRESCRIPTION_NOTES
                     
                 };
                 raisedPrescriptionEntity.PHARMACY_ENCODED_ORDER.Add(prescriptionOrder);

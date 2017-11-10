@@ -18,7 +18,7 @@ namespace IQCare.WebApi.Logic.MappingEntities.drugs
         public string TREATMENT_INSTRUCTION { get; set; }
         public string INDICATION { get; set; }
        public DateTime PHARMACY_ORDER_DATE { get; set; }
-        public string PrescriptionNotes { get; set; }
+        public string PRESCRIPTION_NOTES { get; set; }
 
     }
 }

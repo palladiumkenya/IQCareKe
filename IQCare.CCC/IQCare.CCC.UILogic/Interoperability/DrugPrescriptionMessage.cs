@@ -84,7 +84,8 @@ namespace IQCare.CCC.UILogic.Interoperability
                         PHARMACY_ORDER_DATE = entity.PHARMACY_ORDER_DATE,
                         QUANTITY_PRESCRIBED = entity.QUANTITY_PRESCRIBED.ToString() ,
                         STRENGTH = entity.STRENGTH,
-                        TREATMENT_INSTRUCTION = entity.TREATMENT_INSTRUCTION    
+                        TREATMENT_INSTRUCTION = entity.TREATMENT_INSTRUCTION   ,
+                        PRESCRIPTION_NOTES=entity.PRESCRIPTION_NOTES
                     };
                     prescriptionDtoPayLoad.PHARMACY_ENCODED_ORDER.Add(drugLoadOrder);                 
                 }

@@ -95,6 +95,7 @@ namespace IQCare.DTO
         public string TREATMENT_INSTRUCTION { get; set; }
         public string INDICATION { get; set; }
         public DateTime PHARMACY_ORDER_DATE { get; set; }
+        public string PRESCRIPTION_NOTES { get; set; }
     }
 
     public class MESSAGE_HEADER
