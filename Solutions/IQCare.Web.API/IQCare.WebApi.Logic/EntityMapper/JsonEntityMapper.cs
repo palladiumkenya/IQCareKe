@@ -132,7 +132,7 @@ namespace IQCare.WebApi.Logic.EntityMapper
 
             foreach (var order in entityDto.PHARMACY_ENCODED_ORDER)
             {
-                var prescriptionOrder = new PHARMACYENCODEDORDER()
+                var prescriptionOrder = new PharmacyEncorderOrderEntity()
                 {
                     DRUG_NAME = order.DRUG_NAME,
                     CODING_SYSTEM = order.CODING_SYSTEM,
