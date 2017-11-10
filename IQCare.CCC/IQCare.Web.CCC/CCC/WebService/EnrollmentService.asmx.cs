@@ -18,6 +18,7 @@ using System.Web.Services.Protocols;
 using Application.Presentation;
 using Entities.CCC.Baseline;
 using Interface.CCC.Baseline;
+using IQCare.Events;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Convert = System.Convert;
@@ -554,12 +555,15 @@ namespace IQCare.Web.CCC.WebService
             {
                 PatientCareEndingManager careEndingManager = new PatientCareEndingManager();
                 PatientEnrollmentManager enrollmentManager = new PatientEnrollmentManager();
+                PatientLookupManager patientLookupManager = new PatientLookupManager();
 
                 patientId = int.Parse(Session["PatientPK"].ToString());
                 patientMasterVisitId = int.Parse(Session["PatientMasterVisitId"].ToString());
                 var enrollments = enrollmentManager.GetPatientEnrollmentByPatientId(patientId);
                 if (enrollments.Count > 0)
                     patientEnrollmentId = enrollments[0].Id;
+
+                var patient = patientLookupManager.GetPatientDetailSummary(patientId);
 
                 if (patientEnrollmentId > 0)
                 {
@@ -579,6 +583,8 @@ namespace IQCare.Web.CCC.WebService
                         careEndingManager.AddPatientCareEndingDeath(patientId, patientMasterVisitId, patientEnrollmentId,
                         exitReason, DateTime.Parse(exitDate), DateTime.Parse(dateOfDeath),  GlobalObject.unescape(careEndingNotes));
 
+
+
                     PatientEntityEnrollment entityEnrollment =
                         enrollmentManager.GetPatientEntityEnrollment(patientEnrollmentId);
                     entityEnrollment.CareEnded = true;
@@ -587,6 +593,15 @@ namespace IQCare.Web.CCC.WebService
                     Session["PatientEditId"] = 0;
                     Session["PatientPK"] = 0;
                     Msg = "Patient has been successfully care ended";
+                    MessageEventArgs args = new MessageEventArgs()
+                    {
+                        PatientId = patientId,
+                        EntityId = patientEnrollmentId,
+                        MessageType = MessageType.UpdatedClientInformation,
+                        EventOccurred = "Patient CareEnded Identifier = ",
+                        FacilityId = patient.FacilityId
+                    };
+                    Publisher.RaiseEventAsync(this, args).ConfigureAwait(false);
                 }
                 else
                 {

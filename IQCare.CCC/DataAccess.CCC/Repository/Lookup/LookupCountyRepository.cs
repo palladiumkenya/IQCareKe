@@ -43,6 +43,12 @@ namespace DataAccess.CCC.Repository.Lookup
             return countyName;
         }
 
+        public LookupCounty GetCountyDetailsByWardName(string wardName)
+        {
+            ILookupCounty countyRepository  = new LookupCountyRepository();
+            return countyRepository.FindBy(c => c.WardName.ToLower() == wardName.ToLower()).FirstOrDefault();
+        }
+
         public List<LookupCounty> GetSubCounties(string county)
         {
            ILookupCounty lookupCountyRepository = new LookupCountyRepository();
@@ -63,6 +69,8 @@ namespace DataAccess.CCC.Repository.Lookup
             ILookupCounty lookupCountyRepository = new LookupCountyRepository();
             return lookupCountyRepository.FindBy(c => c.WardId == wardId).Take(1).FirstOrDefault().WardName;
         }
+
+
 
         public List<LookupCounty> GetWardsList(string subcounty)
         {

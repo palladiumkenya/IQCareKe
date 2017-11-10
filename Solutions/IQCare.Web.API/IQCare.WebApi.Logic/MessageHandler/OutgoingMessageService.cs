@@ -17,7 +17,9 @@ using System.Web.Script.Serialization;
 using IQCare.CCC.UILogic.Interoperability.Appointment;
 using IQCare.CCC.UILogic.Interoperability.Enrollment;
 using IQCare.CCC.UILogic.Interoperability.Observation;
+using IQCare.DTO.CommonEntities;
 using IQCare.WebApi.Logic.Helpers;
+using IQCare.WebApi.Logic.MappingEntities.drugs;
 
 
 namespace IQCare.WebApi.Logic.MessageHandler
@@ -211,24 +213,32 @@ namespace IQCare.WebApi.Logic.MessageHandler
         {
             try
             {
-                //var prescriptionManager = new DrugPrescriptionMessage();
-                DrugPrescriptionMessage drugPrescriptionMessage = new DrugPrescriptionMessage();
+                var drugPrescriptionMessage = new DrugPrescriptionMessage();
+                //DrugPrescriptionMessage drugPrescriptionMessage = new DrugPrescriptionMessage();
 
-                var prescriptionDtoPayLoad =
-                    drugPrescriptionMessage.GetPrescriptionMessage(messageEvent.PatientId, messageEvent.EntityId, messageEvent.PatientMasterVisitId);
+                var prescriptionDtoPayLoad = drugPrescriptionMessage.GetPrescriptionMessage(messageEvent.PatientId,messageEvent.EntityId,messageEvent.PatientMasterVisitId);
 
-                var prescriptionEntityPayLoad = _jsonEntityMapper.DrugPrescriptionRaised(prescriptionDtoPayLoad);
+                if (prescriptionDtoPayLoad != null)
+                {
 
-                string prescriptionJson = new JavaScriptSerializer().Serialize(prescriptionEntityPayLoad);
-                   var apiOutbox = new ApiOutbox()
-                   {
-                       DateSent = DateTime.Now,
-                       Message = prescriptionJson,
-                       RecepientId = 1
-                   };
+                    var prescriptionEntityPayLoad = _jsonEntityMapper.DrugPrescriptionRaised(prescriptionDtoPayLoad);
 
-                _apiOutboxManager.AddApiOutbox(apiOutbox);
-                SendData(prescriptionJson, "").ConfigureAwait(false);
+                    string prescriptionJson = new JavaScriptSerializer().Serialize(prescriptionEntityPayLoad);
+                    var apiOutbox = new ApiOutbox()
+                    {
+                        DateSent = DateTime.Now,
+                        Message = prescriptionJson,
+                        RecepientId = 1
+                    };
+
+                    _apiOutboxManager.AddApiOutbox(apiOutbox);
+                    SendData(prescriptionJson, "").ConfigureAwait(false);
+                }
+                else
+                {
+                    //todo send abort
+                }
+
             }
             catch (Exception e)
             {

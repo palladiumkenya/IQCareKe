@@ -115,6 +115,7 @@
     <Compile Include="Interoperability\Appointment\AppointmentMessage.cs" />
     <Compile Include="Interoperability\DrugPrescriptionMessage.cs" />
     <Compile Include="Interoperability\Appointment\PatientAppointmentMessageManager.cs" />
+    <Compile Include="Interoperability\DTOValidator\IValidateDTO.cs" />
     <Compile Include="Interoperability\Enrollment\PatientMessageManager.cs" />
     <Compile Include="Interoperability\Enrollment\ProcessPatient.cs" />
     <Compile Include="Interoperability\Appointment\ProcessPatientAppointmentMessage.cs" />
@@ -123,7 +124,7 @@
     <Compile Include="Interoperability\InteropPlacerValuesManager.cs" />
     <Compile Include="Interoperability\Observation\ProcessObservationResultMessage.cs" />
     <Compile Include="Interoperability\ProcessViralLoadResults.cs" />
-    <Compile Include="Interoperability\DTOValidator\ValidateDTO.cs" />
+    <Compile Include="Interoperability\DTOValidator\PatientRegistrationValidation.cs" />
     <Compile Include="Interoperability\ViralLoadMessageManager.cs" />
     <Compile Include="LookupLogic.cs" />
     <Compile Include="MstPatientLogic.cs" />

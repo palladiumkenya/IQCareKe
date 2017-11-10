@@ -12,5 +12,6 @@ namespace IQCare.DTO
         public Decimal Duration { get; set; }
         public Decimal QuantityPrescribed { get; set; }
         public string PrescriptionNotes { get; set; }
+       public string TREATMENT_INSTRUCTION { get; set; }
     }
 }

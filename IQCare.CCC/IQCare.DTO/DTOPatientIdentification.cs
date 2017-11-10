@@ -1,17 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace IQCare.DTO
 {
     public class DtoPatientIdentification
     {
+        public DtoPatientIdentification()
+        {
+            EXTERNAL_PATIENT_ID=new DTOIdentifier();
+            INTERNAL_PATIENT_ID=new List<DTOIdentifier>();
+            PATIENT_NAME=new PatientNameDto();
+        }
         
-        public DTOIdentifier ExternalPatientId { get; set; }
-        public List<DTOIdentifier> InternalPatientId { get; set; }
-        public PatientNameDto PatientName { get; set; }
+        public DTOIdentifier EXTERNAL_PATIENT_ID { get; set; }
+        public List<DTOIdentifier> INTERNAL_PATIENT_ID { get; set; }
+        public PatientNameDto PATIENT_NAME { get; set; }
     }
 }

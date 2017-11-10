@@ -355,6 +355,12 @@ namespace BusinessProcess.CCC
             return lookupCountyRepository.GetWardNameByWardId(wardId);
         }
 
+        public LookupCounty GetCountyDetailsByWardName(string wardName)
+        {
+            LookupCountyRepository lookupCountyRepository = new LookupCountyRepository();
+            return lookupCountyRepository.GetCountyDetailsByWardName(wardName);
+        }
+
         public List<PatientLabTracker> GetVlPendingCount(int facilityId)
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
