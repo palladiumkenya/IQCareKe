@@ -23,8 +23,8 @@ namespace IQCare.CCC.UILogic.Interoperability
                 {
                     var patientLookup = new PatientLookupManager();
                     var labOrderManager = new PatientLabOrderManager();
-                    var patient = patientLookup.GetPatientByCccNumber(viralLoadResults.PatientIdentification
-                        .InternalPatientId.FirstOrDefault(n=>n.IdentifierType == "CCC_Number").IdentifierValue);
+                    var patientCcc = viralLoadResults.PatientIdentification.InternalPatientId.FirstOrDefault(n => n.IdentifierType == "CCC_NUMBER").IdentifierValue;
+                    var patient = patientLookup.GetPatientByCccNumber(patientCcc);
                     if (patient != null)
                     {
                         
@@ -32,7 +32,7 @@ namespace IQCare.CCC.UILogic.Interoperability
                         var labOrder = labOrderManager.GetPatientLabOrdersByDate((int) patient.ptn_pk,
                             results.FirstOrDefault().DateSampleCollected);
                         
-                        if (labOrder == null)
+                        if (labOrder.Count == 0)
                         {
                             var patientMasterVisitManager = new PatientMasterVisitManager();
                             var lookupLogic = new LookupLogic();
@@ -78,15 +78,15 @@ namespace IQCare.CCC.UILogic.Interoperability
                                 labOrderManager.AddPatientLabResults(labResults);
                             }
                         }
+                        Msg = "Sucess";
                         //todo update laborder and lab details entities
-                        
+
                     }
                     else
                     {
                         Msg = "Patient does not exist";
                         return Msg;
                     }
-                    Msg = "Sucess";
                 }
                 catch (Exception e)
                 {
