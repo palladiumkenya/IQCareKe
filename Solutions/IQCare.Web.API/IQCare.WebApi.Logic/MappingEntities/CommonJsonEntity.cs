@@ -88,6 +88,21 @@ namespace IQCare.WebApi.Logic.MappingEntities
         public PATIENTNAME PATIENT_NAME { get; set; }
     }
 
+    public class PrescriptionIdentification
+    {
+        public PrescriptionIdentification()
+        {
+            EXTERNAL_PATIENT_ID=new EXTERNALPATIENTID();
+            INTERNAL_PATIENT_ID=new List<INTERNALPATIENTID>();
+            PATIENT_NAME=new PATIENTNAME();
+        }
+
+        public EXTERNALPATIENTID EXTERNAL_PATIENT_ID { get; set; }
+        public List<INTERNALPATIENTID> INTERNAL_PATIENT_ID { get; set; }
+        public PATIENTNAME PATIENT_NAME { get; set; }
+    }
+
+
     public class OBSERVATIONPATIENTIDENTIFICATION
     {
         public EXTERNALPATIENTID EXTERNAL_PATIENT_ID { get; set; }
