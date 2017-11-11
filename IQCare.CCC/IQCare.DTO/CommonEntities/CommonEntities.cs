@@ -30,7 +30,7 @@ namespace IQCare.DTO.CommonEntities
         {
             NOK_NAME = new NOKNAME();
         }
-
+        [Required, ValidateObject]
         public NOKNAME NOK_NAME { get; set; }
         public string RELATIONSHIP { get; set; }
         public string ADDRESS { get; set; }
@@ -60,7 +60,6 @@ namespace IQCare.DTO.CommonEntities
         public string SEX { get; set; }
         public PATIENTADDRESS PATIENT_ADDRESS { get; set; }
         public string PHONE_NUMBER { get; set; }
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Marital Status Is Required")]
         public string MARITAL_STATUS { get; set; }
         public string DEATH_DATE { get; set; }
         public string DEATH_INDICATOR { get; set; }
@@ -69,13 +68,16 @@ namespace IQCare.DTO.CommonEntities
     public class PATIENTIDENTIFICATION : PatientBaseProperties
     {
         public EXTERNALPATIENTID EXTERNAL_PATIENT_ID { get; set; }
+        [Required, ValidateObject]
         public List<INTERNALPATIENTID> INTERNAL_PATIENT_ID { get; set; }
+        [Required, ValidateObject]
         public PATIENTNAME PATIENT_NAME { get; set; }
     }
 
     public class APPOINTMENTPATIENTIDENTIFICATION
     {
         public EXTERNALPATIENTID EXTERNAL_PATIENT_ID { get; set; }
+        [Required, ValidateObject]
         public List<INTERNALPATIENTID> INTERNAL_PATIENT_ID { get; set; }
         public PATIENTNAME PATIENT_NAME { get; set; }
     }
@@ -108,7 +110,9 @@ namespace IQCare.DTO.CommonEntities
     public class EXTERNALPATIENTID
     {
         public string ID { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Identifier Type Is Required")]
         public string IDENTIFIER_TYPE { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Assigning Authority Is Required")]
         public string ASSIGNING_AUTHORITY { get; set; }
     }
 
@@ -181,5 +185,49 @@ namespace IQCare.DTO.CommonEntities
         public string OBSERVATION_RESULT_STATUS { get; set; }
         public string OBSERVATION_DATETIME { get; set; }
         public string ABNORMAL_FLAGS { get; set; }
+    }
+
+
+    public class ValidateObjectAttribute : ValidationAttribute
+    {
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        {
+            var results = new List<ValidationResult>();
+            var context = new ValidationContext(value, null, null);
+
+            Validator.TryValidateObject(value, context, results, true);
+
+            if (results.Count != 0)
+            {
+                var compositeResults = new CompositeValidationResult(String.Format("Validation for {0} failed!", validationContext.DisplayName));
+                results.ForEach(compositeResults.AddResult);
+
+                return compositeResults;
+            }
+
+            return ValidationResult.Success;
+        }
+    }
+
+    public class CompositeValidationResult : ValidationResult
+    {
+        private readonly List<ValidationResult> _results = new List<ValidationResult>();
+
+        public IEnumerable<ValidationResult> Results
+        {
+            get
+            {
+                return _results;
+            }
+        }
+
+        public CompositeValidationResult(string errorMessage) : base(errorMessage) { }
+        public CompositeValidationResult(string errorMessage, IEnumerable<string> memberNames) : base(errorMessage, memberNames) { }
+        protected CompositeValidationResult(ValidationResult validationResult) : base(validationResult) { }
+
+        public void AddResult(ValidationResult validationResult)
+        {
+            _results.Add(validationResult);
+        }
     }
 }

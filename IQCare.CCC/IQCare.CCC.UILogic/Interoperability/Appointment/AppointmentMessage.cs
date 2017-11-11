@@ -47,7 +47,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
                         internalPatientId.ASSIGNING_AUTHORITY = "CCC";
 
                         appointmentScheduling.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID.Add(internalPatientId);
-                        if (patientMessage.NATIONAL_ID != null && patientMessage.NATIONAL_ID != "99999999")
+                        if (!String.IsNullOrWhiteSpace(patientMessage.NATIONAL_ID) && patientMessage.NATIONAL_ID != "99999999")
                         {
                             INTERNALPATIENTID internalNationalId = new INTERNALPATIENTID();
                             internalNationalId.ID = patientMessage.NATIONAL_ID;

@@ -44,6 +44,13 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                 LookupLogic lookupLogic = new LookupLogic();
                 PatientLookupManager patientLookup = new PatientLookupManager();
                 PatientLookup patient = new PatientLookup();
+                PatientRegistrationValidation registrationValidation = new PatientRegistrationValidation();
+                //Validate DTO
+                string results = registrationValidation.ValidateDTO(registration);
+                if (!String.IsNullOrWhiteSpace(results))
+                {
+                    throw new Exception(results);
+                }
                 //Get FacilityId
                 int facilityId = Convert.ToInt32(registration.MESSAGE_HEADER.SENDING_FACILITY);
                 //Get Gender
@@ -143,7 +150,9 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                 //Get Phone Number
                 phoneNumber = registration.PATIENT_IDENTIFICATION.PHONE_NUMBER;
                 deathDate = registration.PATIENT_IDENTIFICATION.DEATH_DATE;
-                DateTime? DateOfDeath = DateTime.ParseExact(deathDate, "yyyyMMdd", null);
+                DateTime? DateOfDeath = null;
+                if (!string.IsNullOrWhiteSpace(deathDate))
+                    DateOfDeath = DateTime.ParseExact(deathDate, "yyyyMMdd", null);
                 //GET NEXT OF KIN
                 var nextOfKin = registration.NEXT_OF_KIN;
                 //Get CCCNumber and NationalId
@@ -186,7 +195,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                     }
                     else
                     {
-                        msg = ProcessPatient.Update(patient.PersonId, patient.Id, patient.ptn_pk, DOB, nationalId, facilityId, 
+                        msg = ProcessPatient.Update(firstName, middleName, lastName, sex, patient.PersonId, patient.Id, patient.ptn_pk, DOB, DOB_Precision, nationalId, facilityId, 
                             entryPointId, dateOfEnrollment, cccNumber, patient, godsNumber, maritalStatusId, village, 
                             wardId, subCountyId, countyId, nearestLandMark, postalAdress, phoneNumber, DateOfDeath,
                             nextOfKin);
@@ -218,10 +227,10 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                 string nationalId = String.Empty;
                 PatientLookup patient = new PatientLookup();
 
-                List<ValidationResult> results = registrationValidation.ValidateDTO(registration);
-                if (results.Count > 0)
+                string results = registrationValidation.ValidateDTO(registration);
+                if (!String.IsNullOrWhiteSpace(results))
                 {
-                    throw new Exception(results.ToString());
+                    throw new Exception(results);
                 }
 
                 foreach (var item in registration.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID)
@@ -336,7 +345,9 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                     //Get Phone Number
                     phoneNumber = registration.PATIENT_IDENTIFICATION.PHONE_NUMBER;
                     deathDate = registration.PATIENT_IDENTIFICATION.DEATH_DATE;
-                    DateTime? DateOfDeath = DateTime.ParseExact(deathDate, "yyyyMMdd", null);
+                    DateTime? DateOfDeath = null;
+                    if (!string.IsNullOrWhiteSpace(deathDate))
+                        DateOfDeath = DateTime.ParseExact(deathDate, "yyyyMMdd", null);
                     //GET NEXT OF KIN
                     var nextOfKin = registration.NEXT_OF_KIN;
                     var lookupEntryPoints =
@@ -358,7 +369,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
 
                     if (patient != null)
                     {
-                        msg = ProcessPatient.Update(patient.PersonId, patient.Id, patient.ptn_pk, DOB, nationalId, facilityId,
+                        msg = ProcessPatient.Update(firstName, middleName, lastName, sex, patient.PersonId, patient.Id, patient.ptn_pk, DOB, DOB_Precision, nationalId, facilityId,
                             entryPointId, enrollmentDate, cccNumber, patient, godsNumber, maritalStatusId, 
                             village, wardId, subCountyId, countyId, nearestLandMark, postalAdress, phoneNumber,
                             DateOfDeath, nextOfKin);

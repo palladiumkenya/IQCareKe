@@ -41,9 +41,6 @@ namespace IQCare.WebApi.Logic.MessageHandler
                 SenderId = 1
             };
 
-            //save to inbox
-            _apiInboxmanager.AddApiInbox(apiInbox);
-
             switch (messageType)
             {
                 case "ADT^A04":
@@ -74,6 +71,10 @@ namespace IQCare.WebApi.Logic.MessageHandler
 
         private void HandleNewClientRegistration(ApiInbox incomingMessage)
         {
+            //save to inbox
+            int Id = _apiInboxmanager.AddApiInbox(incomingMessage);
+            incomingMessage.Id = Id;
+
             try
             {
                 PatientRegistrationEntity entity =new  JavaScriptSerializer().Deserialize<PatientRegistrationEntity>(incomingMessage.Message);
@@ -95,22 +96,26 @@ namespace IQCare.WebApi.Logic.MessageHandler
                 var processRegistration = new ProcessRegistration();
                 processRegistration.Save(register);
 
+                //update message set processed=1, erromsq=null
                 incomingMessage.DateProcessed = DateTime.Now;
                 incomingMessage.Processed = true;
-                
-                //update message set processed=1, erromsq=null
+                _apiInboxmanager.EditApiInbox(incomingMessage);        
             }
             catch (Exception e)
             {
                 //update message set processed=1, erromsq
                 incomingMessage.LogMessage = e.Message;
                 incomingMessage.Processed = false;
-                _apiInboxmanager.AddApiInbox(incomingMessage);
+                _apiInboxmanager.EditApiInbox(incomingMessage);
             }
         }
 
         private void HandleUpdatedClientInformation(ApiInbox incomingMessage)
         {
+            //save to inbox
+            int Id = _apiInboxmanager.AddApiInbox(incomingMessage);
+            incomingMessage.Id = Id;
+
             try
             {
                 PatientRegistrationEntity entity = new JavaScriptSerializer().Deserialize<PatientRegistrationEntity>(incomingMessage.Message);
@@ -134,13 +139,13 @@ namespace IQCare.WebApi.Logic.MessageHandler
                 //update message that it has been processed
                 incomingMessage.DateProcessed = DateTime.Now;
                 incomingMessage.Processed = true;
-                _apiInboxmanager.AddApiInbox(incomingMessage);
+                _apiInboxmanager.EditApiInbox(incomingMessage);
             }
             catch (Exception e)
             {
                 incomingMessage.LogMessage = e.Message;
                 incomingMessage.Processed = false;
-                _apiInboxmanager.AddApiInbox(incomingMessage);
+                _apiInboxmanager.EditApiInbox(incomingMessage);
             }
         }
 
@@ -156,10 +161,13 @@ namespace IQCare.WebApi.Logic.MessageHandler
 
         private void HandleAppointments(ApiInbox incomingMessage)
         {
+            //save to inbox
+            int Id = _apiInboxmanager.AddApiInbox(incomingMessage);
+            incomingMessage.Id = Id;
+
             try
             {
-                PatientAppointmentEntity appointmentEntity =
-                    new JavaScriptSerializer().Deserialize<PatientAppointmentEntity>(incomingMessage.Message);
+                PatientAppointmentEntity appointmentEntity = new JavaScriptSerializer().Deserialize<PatientAppointmentEntity>(incomingMessage.Message);
 
                 Mapper.Initialize(cfg =>
                 {
@@ -184,35 +192,48 @@ namespace IQCare.WebApi.Logic.MessageHandler
                         processAppoinment.Update(appointment);
                     }
                 }
+
+                //update message that it has been processed
+                incomingMessage.DateProcessed = DateTime.Now;
+                incomingMessage.Processed = true;
+                _apiInboxmanager.EditApiInbox(incomingMessage);
             }
             catch (Exception e)
             {
                 incomingMessage.LogMessage = e.Message;
                 incomingMessage.Processed = false;
-                _apiInboxmanager.AddApiInbox(incomingMessage);
+                _apiInboxmanager.EditApiInbox(incomingMessage);
             }
-            _apiInboxmanager.AddApiInbox(incomingMessage);
         }
 
         private void HandleNewViralLoadResults(ApiInbox incomingMessage)
         {
+            //save to inbox
+            int Id = _apiInboxmanager.AddApiInbox(incomingMessage);
+            incomingMessage.Id = Id;
+
             try
             {
                 ViralLoadResultEntity entity = new JavaScriptSerializer().Deserialize<ViralLoadResultEntity>(incomingMessage.Message);
                 ViralLoadResultsDto vlResultsDto = _dtoMapper.ViralLoadResults(entity);
                 var processViralLoadResults = new ProcessViralLoadResults();
                 var msg = processViralLoadResults.Save(vlResultsDto);
+
                 incomingMessage.LogMessage = msg;
+                //update message that it has been processed
+                incomingMessage.DateProcessed = DateTime.Now;
+                incomingMessage.Processed = true;
+                _apiInboxmanager.EditApiInbox(incomingMessage);
             }
             catch (Exception e)
             {
                 incomingMessage.LogMessage = e.Message;
                 incomingMessage.Processed = false;
-                _apiInboxmanager.AddApiInbox(incomingMessage);
+                _apiInboxmanager.EditApiInbox(incomingMessage);
             }
-            incomingMessage.DateProcessed = DateTime.Now;
-            incomingMessage.Processed = true;
-            _apiInboxmanager.AddApiInbox(incomingMessage);
+            //incomingMessage.DateProcessed = DateTime.Now;
+            //incomingMessage.Processed = true;
+            //_apiInboxmanager.AddApiInbox(incomingMessage);
         }
     }
 }

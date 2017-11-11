@@ -15,7 +15,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
 {
     public class ProcessPatient
     {
-        public static string Update(int personId, int patientId, int? ptn_pk, DateTime dateOfBirth, string nationalId, int facilityId, 
+        public static string Update(string firstName,string middleName,string lastName,int personSex, int personId, int patientId, int? ptn_pk, DateTime dateOfBirth, bool DOB_Precision, string nationalId, int facilityId, 
             int entryPointId, DateTime enrollmentDate, string cccNumber, PatientLookup patient, string godsNumber, int matStatusId,
             string village, int wardId, int subCountyId, int countyId, string nearestLandMark, string postalAdress, string phoneNumber, DateTime? deathDate,
             List<NEXTOFKIN> nextofkin)
@@ -34,6 +34,8 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                 var personContactLookUp = new PersonContactLookUpManager();
                 var patientTreatmentlookupManager = new PatientTreatmentSupporterLookupManager();
                 var treatmentSupporterManager = new PatientTreatmentSupporterManager();
+
+                personManager.UpdatePerson(firstName, middleName, lastName, personSex, 1, patient.PersonId, dateOfBirth, DOB_Precision);
 
                 if (!string.IsNullOrWhiteSpace(godsNumber))
                 {
@@ -147,6 +149,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                 PatientEntity updatePatient = new PatientEntity();
                 updatePatient.ptn_pk = ptn_pk;
                 updatePatient.DateOfBirth = dateOfBirth;
+                updatePatient.DobPrecision = DOB_Precision;
                 updatePatient.NationalId = nationalId;
                 updatePatient.FacilityId = facilityId;
                 updatePatient.AuditData = patientAuditData;

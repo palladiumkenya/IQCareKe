@@ -20,8 +20,10 @@ namespace IQCare.DTO.PatientRegistration
 
         [Required]
         public MESSAGEHEADER MESSAGE_HEADER { get; set; }
+        [Required, ValidateObject]
         public PATIENTIDENTIFICATION PATIENT_IDENTIFICATION { get; set; }
         public List<NEXTOFKIN> NEXT_OF_KIN { get; set; }
+        [Required, ValidateObject]
         public VISIT PATIENT_VISIT { get; set; }
     }
 }

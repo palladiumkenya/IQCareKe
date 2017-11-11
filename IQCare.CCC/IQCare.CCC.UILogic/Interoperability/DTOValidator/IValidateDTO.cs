@@ -9,6 +9,6 @@ namespace IQCare.CCC.UILogic.Interoperability.DTOValidator
 {
     public interface IValidateDTO <T> where T : class
     {
-        List<ValidationResult> ValidateDTO(T t);
+        string ValidateDTO(T t);
     }
 }
