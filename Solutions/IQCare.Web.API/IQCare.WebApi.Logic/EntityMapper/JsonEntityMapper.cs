@@ -83,10 +83,6 @@ namespace IQCare.WebApi.Logic.EntityMapper
 
         public DrugPrescriptionEntity DrugPrescriptionRaised(PrescriptionDto entityDto)
         {
-            
-
-            //var orderEncorder = new List<PharmacyEncorderOrderEntity>();
-
 
             DrugPrescriptionEntity raisedPrescriptionEntity = new DrugPrescriptionEntity();
 
@@ -130,27 +126,39 @@ namespace IQCare.WebApi.Logic.EntityMapper
             raisedPrescriptionEntity.COMMON_ORDER_DETAILS.PLACER_ORDER_NUMBER.NUMBER = Convert.ToString(entityDto.COMMON_ORDER_DETAILS.PLACER_ORDER_NUMBER.NUMBER);
             raisedPrescriptionEntity.COMMON_ORDER_DETAILS.TRANSACTION_DATETIME = entityDto.COMMON_ORDER_DETAILS.TRANSACTION_DATETIME.ToString("yyyyMMddHmmss");
 
+            var prescriptionOrderx = new PharmacyEncorderOrderEntity();
             foreach (var order in entityDto.PHARMACY_ENCODED_ORDER)
             {
-                var prescriptionOrder = new PharmacyEncorderOrderEntity()
-                {
-                    DRUG_NAME = order.DRUG_NAME,
-                    CODING_SYSTEM = order.CODING_SYSTEM,
-                    STRENGTH = order.STRENGTH,
-                    DOSAGE = Convert.ToDecimal(order.DOSAGE),
-                    FREQUENCY = order.FREQUENCY,
-                    DURATION = order.DURATION,
-                    QUANTITY_PRESCRIBED =Convert.ToDecimal(order.QUANTITY_PRESCRIBED),
-                    TREATMENT_INSTRUCTION = order.TREATMENT_INSTRUCTION,
-                    PHARMACY_ORDER_DATE=Convert.ToDateTime(order.PHARMACY_ORDER_DATE.ToString("yyyyMMddHmmss")),
-                    INDICATION=order.INDICATION,
-                    PRESCRIPTION_NOTES=order.PRESCRIPTION_NOTES
-                    
-                };
-                raisedPrescriptionEntity.PHARMACY_ENCODED_ORDER.Add(prescriptionOrder);
+                
+                prescriptionOrderx.DRUG_NAME = order.DRUG_NAME;
+                prescriptionOrderx.CODING_SYSTEM = order.CODING_SYSTEM;
+                prescriptionOrderx.STRENGTH = order.STRENGTH;
+                prescriptionOrderx.DOSAGE =Convert.ToDecimal(order.DOSAGE);
+                prescriptionOrderx.FREQUENCY = order.FREQUENCY;
+                prescriptionOrderx.DURATION = order.DURATION;
+                prescriptionOrderx.QUANTITY_PRESCRIBED = Convert.ToDecimal(order.QUANTITY_PRESCRIBED);
+                prescriptionOrderx.TREATMENT_INSTRUCTION = order.TREATMENT_INSTRUCTION;
+                prescriptionOrderx.PHARMACY_ORDER_DATE = order.PHARMACY_ORDER_DATE.ToString("yyyyMMddHmmss");
+                prescriptionOrderx.INDICATION = order.INDICATION;
+                prescriptionOrderx.PRESCRIPTION_NOTES = order.PRESCRIPTION_NOTES;
+                //var prescriptionOrder = new PharmacyEncorderOrderEntity()
+                //{
+                //    DRUG_NAME = order.DRUG_NAME,
+                //    CODING_SYSTEM = order.CODING_SYSTEM,
+                //    STRENGTH = order.STRENGTH,
+                //    DOSAGE = Convert.ToDecimal(order.DOSAGE),
+                //    FREQUENCY = order.FREQUENCY,
+                //    DURATION = order.DURATION,
+                //    QUANTITY_PRESCRIBED =Convert.ToDecimal(order.QUANTITY_PRESCRIBED),
+                //    TREATMENT_INSTRUCTION = order.TREATMENT_INSTRUCTION,
+                //    PHARMACY_ORDER_DATE=Convert.ToDateTime(order.PHARMACY_ORDER_DATE.ToString("yyyyMMddHmmss")),
+                //    INDICATION=order.INDICATION,
+                //    PRESCRIPTION_NOTES=order.PRESCRIPTION_NOTES                
+                //};
+                
+                raisedPrescriptionEntity.PHARMACY_ENCODED_ORDER.Add(prescriptionOrderx);
             }
             return raisedPrescriptionEntity;
-
         }
 
         public void DrugOrderCancel()

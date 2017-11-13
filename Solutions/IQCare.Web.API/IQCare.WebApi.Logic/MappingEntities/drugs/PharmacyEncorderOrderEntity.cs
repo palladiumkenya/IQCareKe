@@ -8,6 +8,7 @@ namespace IQCare.WebApi.Logic.MappingEntities.drugs
 {
    public class PharmacyEncorderOrderEntity
     {
+
         public string DRUG_NAME { get; set; }
         public string CODING_SYSTEM { get; set; }
         public string STRENGTH { get; set; }
@@ -17,7 +18,7 @@ namespace IQCare.WebApi.Logic.MappingEntities.drugs
         public Decimal QUANTITY_PRESCRIBED { get; set; }
         public string TREATMENT_INSTRUCTION { get; set; }
         public string INDICATION { get; set; }
-       public DateTime PHARMACY_ORDER_DATE { get; set; }
+        public string PHARMACY_ORDER_DATE { get; set; }
         public string PRESCRIPTION_NOTES { get; set; }
 
     }

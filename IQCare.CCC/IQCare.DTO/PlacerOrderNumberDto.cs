@@ -8,7 +8,7 @@ namespace IQCare.DTO
 {
    public class PlacerOrderNumberDto
     {
-        public int Number { get; set; }
-        public string Entity { get; set; }
+        public int NUMBER { get; set; }
+        public string ENTITY { get; set; }
     }
 }

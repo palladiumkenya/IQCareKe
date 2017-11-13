@@ -140,7 +140,7 @@ namespace IQCare.WebApi.Logic.DtoMapping
                     DURATION = Convert.ToInt32(order.DURATION),
                     QUANTITY_PRESCRIBED = order.QUANTITY_PRESCRIBED.ToString(),
                     INDICATION = order.INDICATION,
-                    PHARMACY_ORDER_DATE = order.PHARMACY_ORDER_DATE,
+                    PHARMACY_ORDER_DATE =Convert.ToDateTime(order.PHARMACY_ORDER_DATE),
                     TREATMENT_INSTRUCTION = order.PRESCRIPTION_NOTES
                 };
                 orderEncorder.Add(prescriptionOrder);
@@ -252,14 +252,14 @@ namespace IQCare.WebApi.Logic.DtoMapping
             {
                 var encorder=new PharmacyEncodededOrderDispenseDto()
                 {
-                    DrugName = pharmacyEncorder.DrugName,
-                    CodingSystem = pharmacyEncorder.CodingSystem,
-                    Strength=pharmacyEncorder.Strength,
-                    Dosage = pharmacyEncorder.Dosage,
-                    Frequency = pharmacyEncorder.Frequency,
-                    Duration = pharmacyEncorder.Duration,
-                    QuantityPrescribed = pharmacyEncorder.QuantityPrescribed,
-                    PrescriptionNotes = pharmacyEncorder.PrescriptionNotes,
+                    DRUG_NAME = pharmacyEncorder.DRUG_NAME,
+                    CODING_SYSTEM = pharmacyEncorder.CODING_SYSTEM,
+                    STRENGTH=pharmacyEncorder.STRENGTH,
+                    DOSAGE = pharmacyEncorder.DOSAGE,
+                    FREQUENCY = pharmacyEncorder.FREQUENCY,
+                    DURATION = pharmacyEncorder.DURATION,
+                    QUANTITY_PRESCRIBED = pharmacyEncorder.QUANTITY_PRESCRIBED,
+                    PRESCRIPTION_NOTES = pharmacyEncorder.PRESCRIPTION_NOTES,
                 };
                 pharmacyEncodedOrder.Add(encorder);
             }
@@ -268,14 +268,14 @@ namespace IQCare.WebApi.Logic.DtoMapping
             {
                 var dispense = new PharmacyDispensedDrugs()
                 {
-                    ActualDrugs = drugDispense.ACTUAL_DRUGS,
-                    CodingSystem = drugDispense.CODING_SYSTEM,
-                    DispensingNotes = drugDispense.DISPENSING_NOTES,
-                    Dosage = drugDispense.DOSAGE,
-                    DrugName = drugDispense.DRUG_NAME,
-                    Duration = drugDispense.DURATION,
-                    Frequency = drugDispense.FREQUENCY,
-                    QuantityDispensed = drugDispense.QUANTITY_DISPENSED
+                    ACTUAL_DRUGS = drugDispense.ACTUAL_DRUGS,
+                    CODING_SYSTEM = drugDispense.CODING_SYSTEM,
+                    DISPENSING_NOTES = drugDispense.DISPENSING_NOTES,
+                    DOSAGE = drugDispense.DOSAGE,
+                    DRUG_NAME = drugDispense.DRUG_NAME,
+                    DURATION = drugDispense.DURATION,
+                    FREQUENCY = drugDispense.FREQUENCY,
+                    QUANTITY_DISPENSED = drugDispense.QUANTITY_DISPENSED
                 };
                 pharmacyDispense.Add(dispense);
             }
@@ -284,13 +284,13 @@ namespace IQCare.WebApi.Logic.DtoMapping
             {
                 MESSAGE_HEADER =
                 {
-                    SendingFacility = entity.MESSAGE_HEADER.SENDING_FACILITY,
-                    SendingApplication = entity.MESSAGE_HEADER.SENDING_APPLICATION,
-                    ReceivingApplication = entity.MESSAGE_HEADER.RECEIVING_APPLICATION,
-                    ReceivingFacility = entity.MESSAGE_HEADER.RECEIVING_FACILITY,
-                    Security = entity.MESSAGE_HEADER.SECURITY,
-                    MessageType = entity.MESSAGE_HEADER.MESSAGE_TYPE,
-                    ProcessingId = entity.MESSAGE_HEADER.PROCESSING_ID
+                    SENDING_FACILITY = entity.MESSAGE_HEADER.SENDING_FACILITY,
+                    SENDING_APPLICATION = entity.MESSAGE_HEADER.SENDING_APPLICATION,
+                    RECEIVING_APPLICATION = entity.MESSAGE_HEADER.RECEIVING_APPLICATION,
+                    RECEIVING_FACILITY = entity.MESSAGE_HEADER.RECEIVING_FACILITY,
+                    SECURITY = entity.MESSAGE_HEADER.SECURITY,
+                    MESSAGE_TYPE = entity.MESSAGE_HEADER.MESSAGE_TYPE,
+                    PROCESSING_ID = entity.MESSAGE_HEADER.PROCESSING_ID
                 },
                 PATIENT_IDENTIFICATION =
                 {
@@ -311,25 +311,25 @@ namespace IQCare.WebApi.Logic.DtoMapping
                 COMMON_ORDER_DETAILS =
                 {
                     OrderControl = entity.COMMON_ORDER_DETAILS.ORDER_CONTROL,
-                    PrescriptionNotes = entity.COMMON_ORDER_DETAILS.NOTES,
+                    NOTES = entity.COMMON_ORDER_DETAILS.NOTES,
                     ORDERING_PHYSICIAN = 
                     {
-                        FirstName = entity.COMMON_ORDER_DETAILS.ORDERING_PHYSICIAN.FIRST_NAME,
-                        MiddleName = entity.COMMON_ORDER_DETAILS.ORDERING_PHYSICIAN.MIDDLE_NAME,
-                        LastName = entity.COMMON_ORDER_DETAILS.ORDERING_PHYSICIAN.LAST_NAME
+                        FIRST_NAME = entity.COMMON_ORDER_DETAILS.ORDERING_PHYSICIAN.FIRST_NAME,
+                        MIDDLE_NAME = entity.COMMON_ORDER_DETAILS.ORDERING_PHYSICIAN.MIDDLE_NAME,
+                        LAST_NAME = entity.COMMON_ORDER_DETAILS.ORDERING_PHYSICIAN.LAST_NAME
                     },
-                    OrderStatus = entity.COMMON_ORDER_DETAILS.ORDER_STATUS,
+                    ORDER_STATUS = entity.COMMON_ORDER_DETAILS.ORDER_STATUS,
                     PLACER_ORDER_NUMBER = 
                     {
-                        Number =Convert.ToInt32(entity.COMMON_ORDER_DETAILS.PLACER_ORDER_NUMBER.NUMBER),
-                        Entity = entity.COMMON_ORDER_DETAILS.PLACER_ORDER_NUMBER.ENTITY
+                        NUMBER =Convert.ToInt32(entity.COMMON_ORDER_DETAILS.PLACER_ORDER_NUMBER.NUMBER),
+                        ENTITY = entity.COMMON_ORDER_DETAILS.PLACER_ORDER_NUMBER.ENTITY
                     },
                     FILLER_ORDER_NUMBER =
                     {
-                        Number=Convert.ToInt32(entity.COMMON_ORDER_DETAILS.PLACER_ORDER_NUMBER.NUMBER),
-                        Entity=entity.COMMON_ORDER_DETAILS.PLACER_ORDER_NUMBER.ENTITY
+                        NUMBER=Convert.ToInt32(entity.COMMON_ORDER_DETAILS.PLACER_ORDER_NUMBER.NUMBER),
+                        ENTITY=entity.COMMON_ORDER_DETAILS.PLACER_ORDER_NUMBER.ENTITY
                     },
-                    TransactionDatetime =Convert.ToDateTime(entity.COMMON_ORDER_DETAILS.TRANSACTION_DATETIME),
+                    TRANSACTION_DATETIME =Convert.ToDateTime(entity.COMMON_ORDER_DETAILS.TRANSACTION_DATETIME),
                 },
                 PHARMACY_ENCODED_ORDER=pharmacyEncodedOrder,
                 PHARMACY_DISPENSE = pharmacyDispense,

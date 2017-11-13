@@ -7,12 +7,12 @@ namespace IQCare.DTO
     {
         public ViralLoadResultsDto()
         {
-            MesssageHeader = new MessageHeader();
+            MesssageHeader = new MessageHeaderDispenseDto();
             PatientIdentification = new DtoPatientIdentification();
             ViralLoadResult = new List<VLoadlResult>();
         }
 
-        public MessageHeader MesssageHeader { get; set; }
+        public MessageHeaderDispenseDto MesssageHeader { get; set; }
         public DtoPatientIdentification PatientIdentification { get; set; }
         public List<VLoadlResult> ViralLoadResult { get; set; }
     }
@@ -29,7 +29,7 @@ namespace IQCare.DTO
         public string LabTestedIn { get; set; }
     }
 
-    public class MessageHeader
+    public class MessageHeaderDispenseDto
     {
         public string SendingApplication { get; set; }
         public string SendingFacility { get; set; }

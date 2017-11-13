@@ -151,6 +151,27 @@ namespace IQCare.WebApi.Logic.MessageHandler
 
         private void HandleDrugOrderFulfilment(ApiInbox incomingMessage)
         {
+            try
+            {
+                DrugDispenseEntity drugDispenseEntity = new JavaScriptSerializer().Deserialize<DrugDispenseEntity>(incomingMessage.Message);
+                Mapper.Initialize(cfg =>
+                {
+                    cfg.CreateMap<DtoDrugDispensed, DrugDispenseEntity>().ReverseMap();
+                    cfg.CreateMap<DTO.MESSAGE_HEADER, MappingEntities.MESSAGEHEADER>().ReverseMap();
+                    cfg.CreateMap<DTO.PATIENT_IDENTIFICATION, MappingEntities.PATIENTIDENTIFICATION>().ReverseMap();
+                    cfg.CreateMap<DTO.COMMON_ORDER_DETAILS, MappingEntities.CommonOrderDetailsDispenseEntity>().ReverseMap();
+                    cfg.CreateMap<DTO.PharmacyDispensedDrugs, MappingEntities.PHARMACY_ENCODED_ORDER_DISPENSE>().ReverseMap();
+                });
+                var dispensedPayload = Mapper.Map<PharmacyDispensedDrugs>(drugDispenseEntity);
+                // todo process the new dispense.
+
+            }
+            catch(Exception e)
+            {
+                incomingMessage.LogMessage = e.Message;
+                incomingMessage.Processed = false;
+                _apiInboxmanager.AddApiInbox(incomingMessage);
+            }
             _apiInboxmanager.AddApiInbox(incomingMessage);
         }
 
