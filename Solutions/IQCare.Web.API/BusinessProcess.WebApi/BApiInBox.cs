@@ -22,7 +22,7 @@ namespace BusinessProcess.WebApi
                 unitOfWork.ApiInboxRepository.Add(apiInbox);
                 Result = unitOfWork.Complete();
                 unitOfWork.Dispose();
-                return Result;
+                return apiInbox.Id;
             }
         }
 

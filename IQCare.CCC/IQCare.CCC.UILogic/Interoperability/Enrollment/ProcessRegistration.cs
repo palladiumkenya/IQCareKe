@@ -44,6 +44,13 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                 LookupLogic lookupLogic = new LookupLogic();
                 PatientLookupManager patientLookup = new PatientLookupManager();
                 PatientLookup patient = new PatientLookup();
+                PatientRegistrationValidation registrationValidation = new PatientRegistrationValidation();
+                //Validate DTO
+                string results = registrationValidation.ValidateDTO(registration);
+                if (!String.IsNullOrWhiteSpace(results))
+                {
+                    throw new Exception(results);
+                }
                 //Get FacilityId
                 int facilityId = Convert.ToInt32(registration.MESSAGE_HEADER.SENDING_FACILITY);
                 //Get Gender
@@ -75,7 +82,9 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                 string firstName = registration.PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME;
                 string middleName = registration.PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME;
                 string lastName = registration.PATIENT_IDENTIFICATION.PATIENT_NAME.LAST_NAME;
+                //Get gods number
                 string godsNumber = registration.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ID;
+                //get marital status
                 string maritalStatusString = String.Empty;
                 int maritalStatusId = 0;
                 switch (registration.PATIENT_IDENTIFICATION.MARITAL_STATUS)
@@ -83,12 +92,70 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                     case "S":
                         maritalStatusString = "Single";
                         break;
+                    case "W":
+                        maritalStatusString = "Widowed";
+                        break;
+                    case "D":
+                        maritalStatusString = "Divorced";
+                        break;
+                    case "MP":
+                        maritalStatusString = "Married Polygamous";
+                        break;
+                    case "C":
+                        maritalStatusString = "Cohabiting";
+                        break;
+                    case "MM":
+                        maritalStatusString = "Married Monogamous";
+                        break;
                     default:
                         maritalStatusString = "Unknown";
                         break;
                 }
 
                 maritalStatusId = lookupLogic.GetItemIdByGroupAndItemName("MaritalStatus", maritalStatusString)[0].ItemId;
+                //Get patient Address
+                string village = String.Empty;
+                string ward = String.Empty;
+                string sub_county = String.Empty;
+                string county = String.Empty;
+                string nearestLandMark =String.Empty;
+                string postalAdress = String.Empty;
+                string phoneNumber = String.Empty;
+                string deathDate = String.Empty;
+                var patient_address = registration.PATIENT_IDENTIFICATION.PATIENT_ADDRESS;
+                if(patient_address != null)
+                {
+                    var physicalAddress = registration.PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS;
+                    if (physicalAddress != null)
+                    {
+                        village = registration.PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.VILLAGE;
+                        ward = registration.PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.WARD;
+                        sub_county = registration.PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.SUB_COUNTY;
+                        county = registration.PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.COUNTY;
+                        nearestLandMark = registration.PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.NEAREST_LANDMARK;
+                    }
+                    postalAdress = registration.PATIENT_IDENTIFICATION.PATIENT_ADDRESS.POSTAL_ADDRESS;
+                }
+                //Lookup Ward, sub_county_county
+                int wardId = 0;
+                int subCountyId = 0;
+                int countyId = 0;
+                var countyDetails = lookupLogic.GetCountyDetailsByWardName(ward);
+                if (countyDetails != null)
+                {
+                    wardId = countyDetails.WardId;
+                    subCountyId = countyDetails.SubcountyId;
+                    countyId = countyDetails.CountyId;
+                }
+                //Get Phone Number
+                phoneNumber = registration.PATIENT_IDENTIFICATION.PHONE_NUMBER;
+                deathDate = registration.PATIENT_IDENTIFICATION.DEATH_DATE;
+                DateTime? DateOfDeath = null;
+                if (!string.IsNullOrWhiteSpace(deathDate))
+                    DateOfDeath = DateTime.ParseExact(deathDate, "yyyyMMdd", null);
+                //GET NEXT OF KIN
+                var nextOfKin = registration.NEXT_OF_KIN;
+                //Get CCCNumber and NationalId
                 string nationalId = String.Empty;
                 string cccNumber = String.Empty;
                 int entryPointId = 0;
@@ -121,11 +188,17 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                     patient = patientLookup.GetPatientByCccNumber(cccNumber);
                     if (patient == null)
                     {
-                        msg = ProcessPatient.Add(firstName, middleName, lastName, sex, 1, DOB, DOB_Precision, facilityId, patientType, nationalId, visitType, dateOfEnrollment, cccNumber, entryPointId, godsNumber, maritalStatusId);
+                        msg = ProcessPatient.Add(firstName, middleName, lastName, sex, 1, DOB, DOB_Precision, facilityId, 
+                            patientType, nationalId, visitType, dateOfEnrollment, cccNumber, entryPointId, godsNumber, 
+                            maritalStatusId, village, wardId, subCountyId, countyId, nearestLandMark, postalAdress, phoneNumber,
+                            DateOfDeath, nextOfKin);
                     }
                     else
                     {
-                        msg = ProcessPatient.Update(patient.PersonId, patient.Id, patient.ptn_pk, DOB, nationalId, facilityId, entryPointId, dateOfEnrollment, cccNumber, patient, godsNumber, maritalStatusId);
+                        msg = ProcessPatient.Update(firstName, middleName, lastName, sex, patient.PersonId, patient.Id, patient.ptn_pk, DOB, DOB_Precision, nationalId, facilityId, 
+                            entryPointId, dateOfEnrollment, cccNumber, patient, godsNumber, maritalStatusId, village, 
+                            wardId, subCountyId, countyId, nearestLandMark, postalAdress, phoneNumber, DateOfDeath,
+                            nextOfKin);
                     }
 
                 }
@@ -147,17 +220,17 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
             {
                 PatientLookupManager patientLookup = new PatientLookupManager();
                 PatientEntryPointManager patientEntryPointManager = new PatientEntryPointManager();
-
+                PatientRegistrationValidation registrationValidation = new PatientRegistrationValidation();
                 LookupLogic lookupLogic = new LookupLogic();
 
                 string cccNumber = String.Empty;
                 string nationalId = String.Empty;
                 PatientLookup patient = new PatientLookup();
 
-                List<ValidationResult> results = ValidateDTO.validateDTO<PatientRegistrationDTO>(registration);
-                if (results.Count > 0)
+                string results = registrationValidation.ValidateDTO(registration);
+                if (!String.IsNullOrWhiteSpace(results))
                 {
-                    throw new Exception(results.ToString());
+                    throw new Exception(results);
                 }
 
                 foreach (var item in registration.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID)
@@ -214,12 +287,69 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                         case "S":
                             maritalStatusString = "Single";
                             break;
+                        case "W":
+                            maritalStatusString = "Widowed";
+                            break;
+                        case "D":
+                            maritalStatusString = "Divorced";
+                            break;
+                        case "MP":
+                            maritalStatusString = "Married Polygamous";
+                            break;
+                        case "C":
+                            maritalStatusString = "Cohabiting";
+                            break;
+                        case "MM":
+                            maritalStatusString = "Married Monogamous";
+                            break;
                         default:
                             maritalStatusString = "Unknown";
                             break;
                     }
 
                     maritalStatusId = lookupLogic.GetItemIdByGroupAndItemName("MaritalStatus", maritalStatusString)[0].ItemId;
+                    //Get patient Address
+                    string village = String.Empty;
+                    string ward = String.Empty;
+                    string sub_county = String.Empty;
+                    string county = String.Empty;
+                    string nearestLandMark = String.Empty;
+                    string postalAdress = String.Empty;
+                    string phoneNumber = String.Empty;
+                    string deathDate = String.Empty;
+                    var patient_address = registration.PATIENT_IDENTIFICATION.PATIENT_ADDRESS;
+                    if (patient_address != null)
+                    {
+                        var physicalAddress = registration.PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS;
+                        if (physicalAddress != null)
+                        {
+                            village = registration.PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.VILLAGE;
+                            ward = registration.PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.WARD;
+                            sub_county = registration.PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.SUB_COUNTY;
+                            county = registration.PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.COUNTY;
+                            nearestLandMark = registration.PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.NEAREST_LANDMARK;
+                        }
+                        postalAdress = registration.PATIENT_IDENTIFICATION.PATIENT_ADDRESS.POSTAL_ADDRESS;
+                    }
+                    //Lookup Ward, sub_county_county
+                    int wardId = 0;
+                    int subCountyId = 0;
+                    int countyId = 0;
+                    var countyDetails = lookupLogic.GetCountyDetailsByWardName(ward);
+                    if (countyDetails != null)
+                    {
+                        wardId = countyDetails.WardId;
+                        subCountyId = countyDetails.SubcountyId;
+                        countyId = countyDetails.CountyId;
+                    }
+                    //Get Phone Number
+                    phoneNumber = registration.PATIENT_IDENTIFICATION.PHONE_NUMBER;
+                    deathDate = registration.PATIENT_IDENTIFICATION.DEATH_DATE;
+                    DateTime? DateOfDeath = null;
+                    if (!string.IsNullOrWhiteSpace(deathDate))
+                        DateOfDeath = DateTime.ParseExact(deathDate, "yyyyMMdd", null);
+                    //GET NEXT OF KIN
+                    var nextOfKin = registration.NEXT_OF_KIN;
                     var lookupEntryPoints =
                         lookupLogic.GetItemIdByGroupAndDisplayName("Entrypoint",
                             registration.PATIENT_VISIT.PATIENT_SOURCE);
@@ -239,13 +369,17 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
 
                     if (patient != null)
                     {
-                        msg = ProcessPatient.Update(patient.PersonId, patient.Id, patient.ptn_pk, DOB, nationalId, facilityId,
-                            entryPointId, enrollmentDate, cccNumber, patient, godsNumber, maritalStatusId);
+                        msg = ProcessPatient.Update(firstName, middleName, lastName, sex, patient.PersonId, patient.Id, patient.ptn_pk, DOB, DOB_Precision, nationalId, facilityId,
+                            entryPointId, enrollmentDate, cccNumber, patient, godsNumber, maritalStatusId, 
+                            village, wardId, subCountyId, countyId, nearestLandMark, postalAdress, phoneNumber,
+                            DateOfDeath, nextOfKin);
                     }
                     else
                     {
                         msg = ProcessPatient.Add(firstName, middleName, lastName, sex, 1, DOB, DOB_Precision,
-                            patientType, facilityId, nationalId, visitType, enrollmentDate, cccNumber, entryPointId, godsNumber, maritalStatusId);
+                            patientType, facilityId, nationalId, visitType, enrollmentDate, cccNumber, entryPointId, 
+                            godsNumber, maritalStatusId, village, wardId, subCountyId, countyId, nearestLandMark, postalAdress, phoneNumber,
+                            DateOfDeath, nextOfKin);
                     }
                 }
                 else
