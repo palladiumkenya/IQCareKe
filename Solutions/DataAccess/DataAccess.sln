@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemServer", "..\..\DataAccess\RemServer\RemServer.csproj", "{59A182CA-7E3E-4130-AA78-6D2E86E0EB4E}"
 EndProject
@@ -21,8 +21,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess.Pharmacy", "..\.
 	ProjectSection(ProjectDependencies) = postProject
 		{254BD540-00D8-46A2-9D35-39E8920B5750} = {254BD540-00D8-46A2-9D35-39E8920B5750}
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess.Interop", "..\..\DataAccess\DataAccess.Interop\DataAccess.Interop.csproj", "{98C8510C-D29B-49B0-9A13-DE2286C613C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -62,12 +60,11 @@ Global
 		{96D8916C-6F85-4B27-BE55-C42C201F75DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96D8916C-6F85-4B27-BE55-C42C201F75DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96D8916C-6F85-4B27-BE55-C42C201F75DF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{98C8510C-D29B-49B0-9A13-DE2286C613C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{98C8510C-D29B-49B0-9A13-DE2286C613C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{98C8510C-D29B-49B0-9A13-DE2286C613C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{98C8510C-D29B-49B0-9A13-DE2286C613C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {39C6534B-EEF0-4FCD-B9D7-50414305CF4C}
 	EndGlobalSection
 EndGlobal

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessProcess.Service", "..\..\BusinessProcess\BusinessProcess.Service\BusinessProcess.Service.csproj", "{D4E4D2B3-1287-45B9-8C39-241387CA54C8}"
 EndProject
@@ -29,8 +29,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessProcess.Administration", "..\..\BusinessProcess\BusinessProcess.Administration\BusinessProcess.Administration.csproj", "{43C54C10-7642-4D56-8B1C-038E329346B3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessProcess.PatientCore", "..\..\BusinessProcess\BusinessProcess.PatientCore\BusinessProcess.PatientCore.csproj", "{6D1D2CE5-DBE2-44EC-92B0-5B2BFA703ACC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessProcess.Interop", "..\..\BusinessProcess\BusinessProcess.Interop\BusinessProcess.Interop.csproj", "{8ECD34A2-238D-41B7-B90D-99CCBC8C3A75}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -86,12 +84,11 @@ Global
 		{6D1D2CE5-DBE2-44EC-92B0-5B2BFA703ACC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D1D2CE5-DBE2-44EC-92B0-5B2BFA703ACC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D1D2CE5-DBE2-44EC-92B0-5B2BFA703ACC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8ECD34A2-238D-41B7-B90D-99CCBC8C3A75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8ECD34A2-238D-41B7-B90D-99CCBC8C3A75}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8ECD34A2-238D-41B7-B90D-99CCBC8C3A75}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8ECD34A2-238D-41B7-B90D-99CCBC8C3A75}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {83930515-C7A4-4B64-8B32-E0E229945930}
 	EndGlobalSection
 EndGlobal

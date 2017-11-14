@@ -1,19 +1,14 @@
-﻿using System.Collections.Generic;
-using System;
-using System.Diagnostics.Contracts;
+﻿using AutoMapper;
 using IQCare.DTO;
+using IQCare.DTO.ObservationResult;
+using IQCare.DTO.PatientAppointment;
+using IQCare.DTO.PatientRegistration;
 using IQCare.Events;
 using IQCare.WebApi.Logic.MappingEntities;
-using Newtonsoft.Json;
-using IQCare.DTO.PatientRegistration;
-using AutoMapper;
-using IQCare.DTO.CommonEntities;
 using IQCare.WebApi.Logic.MappingEntities.drugs;
-using MESSAGEHEADER = IQCare.WebApi.Logic.MappingEntities.MESSAGEHEADER;
-using PATIENTIDENTIFICATION = IQCare.WebApi.Logic.MappingEntities.PATIENTIDENTIFICATION;
-using IQCare.DTO.PatientAppointment;
-using IQCare.DTO.ObservationResult;
+using System;
 using INTERNALPATIENTID = IQCare.WebApi.Logic.MappingEntities.INTERNALPATIENTID;
+using MESSAGEHEADER = IQCare.WebApi.Logic.MappingEntities.MESSAGEHEADER;
 
 
 namespace IQCare.WebApi.Logic.EntityMapper

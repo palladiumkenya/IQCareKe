@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interface.Service", "..\..\Interfaces\Interface.Service\Interface.Service.csproj", "{931D6A00-5F40-4BA6-80B4-3FA8D4D92FA9}"
 EndProject
@@ -24,8 +24,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interface.Administration", "..\..\Interfaces\Interface.Administration\Interface.Administration.csproj", "{88425A40-338F-405B-BF91-D3A0E74863DE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interface.PatientCore", "..\..\Interfaces\Interface.PatientCore\Interface.PatientCore.csproj", "{A56DF612-ACBC-4399-B136-7783BF59E02C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interface.Interop", "..\..\Interfaces\Interface.Interop\Interface.Interop.csproj", "{15E52260-88EC-4F15-A26B-E0A9508C57A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,12 +75,11 @@ Global
 		{A56DF612-ACBC-4399-B136-7783BF59E02C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A56DF612-ACBC-4399-B136-7783BF59E02C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A56DF612-ACBC-4399-B136-7783BF59E02C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{15E52260-88EC-4F15-A26B-E0A9508C57A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{15E52260-88EC-4F15-A26B-E0A9508C57A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{15E52260-88EC-4F15-A26B-E0A9508C57A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{15E52260-88EC-4F15-A26B-E0A9508C57A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6E5FA692-3BCB-4051-8E19-73915A4BC6B6}
 	EndGlobalSection
 EndGlobal

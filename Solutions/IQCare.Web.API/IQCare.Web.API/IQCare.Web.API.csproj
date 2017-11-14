@@ -58,6 +58,9 @@
     <Reference Include="IQCare.Events">
       <HintPath>..\..\..\References\IQCare.Events.dll</HintPath>
     </Reference>
+    <Reference Include="IQCare.WebApi.Logic">
+      <HintPath>..\..\..\References\IQCare.WebApi.Logic.dll</HintPath>
+    </Reference>
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions">
@@ -68,10 +71,6 @@
   <ItemGroup>
     <Folder Include="DependancyResolution\" />
     <Folder Include="App_Start\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\IQCare.WebApi.Logic\IQCare.WebApi.Logic.csproj" />
   </ItemGroup>
 
 </Project>

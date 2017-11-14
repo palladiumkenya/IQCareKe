@@ -2953,7 +2953,6 @@
     <Folder Include="App_Browsers\" />
     <Folder Include="ClientBin\" />
     <Folder Include="PatientImages\" />
-    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\bootstrap.css.map" />
@@ -3044,6 +3043,9 @@
     <Content Include="Incl\jquery-1.9.1.min.map" />
     <Content Include="MasterPage\Module.Master" />
     <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="regiis.cmd" />
     <None Include="Reports\CDCReport.rpt" />
     <None Include="Reports\dsCDCReports.xsd" />
