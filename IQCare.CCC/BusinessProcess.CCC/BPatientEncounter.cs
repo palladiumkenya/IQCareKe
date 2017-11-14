@@ -51,6 +51,7 @@ namespace BusinessProcess.CCC
                             ClsUtility.Init_Hashtable();
                             ClsUtility.AddParameters("@masterVisitID", SqlDbType.Int, masterVisitID.ToString());
                             ClsUtility.AddParameters("@PatientID", SqlDbType.Int, PatientID);
+                            ClsUtility.AddParameters("@adverseEventId",SqlDbType.Int,advEvnts.adverseEventId.ToString());
                             ClsUtility.AddParameters("@adverseEvent", SqlDbType.VarChar, advEvnts.adverseEvent);
                             ClsUtility.AddParameters("@medicineCausingAE", SqlDbType.VarChar, advEvnts.medicineCausingAE);
                             ClsUtility.AddParameters("@adverseSeverity", SqlDbType.VarChar, advEvnts.adverseSeverityID);

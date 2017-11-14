@@ -147,9 +147,9 @@ namespace IQCare.Web.CCC.WebService
                     }
                     if (string.IsNullOrEmpty(eventoutcome))
                     {
-                        string[] i = new string[6]
+                        string[] i = new string[7]
                         {
-                            row["SeverityID"].ToString(), row["EventName"].ToString(), row["EventCause"].ToString(),
+                            row["SeverityID"].ToString(),row["AdverseEventId"].ToString(), row["EventName"].ToString(), row["EventCause"].ToString(),
                             row["Severity"].ToString(), row["Action"].ToString(),
                             "<button type='button' class='btnAddAdverseEventOutcome btn btn-info fa fa-plus-circle btn-fill' onclick='AdverseEventOutcome();'> Specify Outcome</button> <button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"
                         };
@@ -182,9 +182,9 @@ namespace IQCare.Web.CCC.WebService
                 else
                 {
 
-                    string[] i = new string[6]
+                    string[] i = new string[7]
                     {
-                        row["SeverityID"].ToString(), row["EventName"].ToString(), row["EventCause"].ToString(),
+                        row["SeverityID"].ToString(),row["AdverseEventId"].ToString(), row["EventName"].ToString(), row["EventCause"].ToString(),
                         row["Severity"].ToString(), row["Action"].ToString(),
                         "<button type='button' class='btnAddAdverseEventOutcome btn btn-info fa fa-plus-circle btn-fill' onclick='AdverseEventOutcome();'> Specify Outcome</button> <button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"
                     };

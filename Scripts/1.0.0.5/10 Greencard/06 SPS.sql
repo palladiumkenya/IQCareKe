@@ -1,4 +1,4 @@
-﻿/****** Object:  StoredProcedure [dbo].[PatientsNotSynced]    Script Date: 5/9/2017 3:16:05 PM ******/
+/****** Object:  StoredProcedure [dbo].[PatientsNotSynced]    Script Date: 5/9/2017 3:16:05 PM ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientsNotSynced]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[PatientsNotSynced]
 GO
@@ -2402,7 +2402,8 @@ Set Nocount On;
 				SELECT
 					D.Drug_pk
 				   ,D.DrugName
-				   , (Convert(varchar(8),D.Drug_pk)+ '~' + isnull(D.abbreviation,D.DrugName) + '~' + D.DrugName) val
+				  -- , (Convert(varchar(8),D.Drug_pk)+ '~' + isnull(D.abbreviation,D.DrugName) + '~' + D.DrugName) val
+				  ,CONCAT(D.Drug_pk, '~',D.abbreviation, '~', D.DrugName)val 
 				FROM Dtl_StockTransaction AS ST
 				INNER JOIN Mst_Store AS S
 					ON S.Id = ST.StoreId
@@ -2429,7 +2430,8 @@ Set Nocount On;
 			SELECT
 					D.Drug_pk
 				   ,D.DrugName
-				   ,(Convert(varchar(8),D.Drug_pk) + '~' + isnull(D.abbreviation,D.DrugName) +  '~' + D.DrugName) val
+				   -- ,(Convert(varchar(8),D.Drug_pk) + '~' + isnull(D.abbreviation,D.DrugName) +  '~' + D.DrugName) val
+				   ,CONCAT(D.Drug_pk, '~',D.abbreviation, '~', D.DrugName)val 
 				FROM Dtl_StockTransaction AS ST
 				INNER JOIN Mst_Store AS S
 					ON S.Id = ST.StoreId
@@ -2455,8 +2457,8 @@ Set Nocount On;
 
 			IF(@drugTypeId=37)
 			BEGIN
-				Select	D.Drug_pk, D.DrugName,
-				(Convert(varchar(8),D.Drug_pk) +  '~' + isnull(D.abbreviation,D.DrugName) +  '~' + D.DrugName) val 
+				Select	D.Drug_pk, D.DrugName,CONCAT(D.Drug_pk, '~',D.abbreviation, '~', D.DrugName)val 
+				-- (Convert(varchar(8),D.Drug_pk) +  '~' + isnull(D.abbreviation,D.DrugName) +  '~' + D.DrugName) val 
 				From Dtl_StockTransaction As ST	Inner Join Mst_Store As S On S.Id = ST.StoreId And S.DispensingStore = 1
 				Right Outer Join Mst_Drug As D On D.Drug_pk = ST.ItemId 
 								INNER JOIN lnk_DrugGeneric l
@@ -2469,8 +2471,8 @@ Set Nocount On;
 			END
 			ELSE
 			BEGIN
-						Select	D.Drug_pk, D.DrugName,
-				(Convert(varchar(8),D.Drug_pk) + '~' + isnull(D.abbreviation,D.DrugName) + '~' + D.DrugName) val 
+						Select	D.Drug_pk, D.DrugName,CONCAT(D.Drug_pk, '~',D.abbreviation, '~', D.DrugName)val 
+				-- (Convert(varchar(8),D.Drug_pk) + '~' + isnull(D.abbreviation,D.DrugName) + '~' + D.DrugName) val 
 				From Dtl_StockTransaction As ST	Inner Join Mst_Store As S On S.Id = ST.StoreId And S.DispensingStore = 1
 				Right Outer Join Mst_Drug As D On D.Drug_pk = ST.ItemId 
 								INNER JOIN lnk_DrugGeneric l
@@ -2593,6 +2595,54 @@ GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_savePatientEncounterAdverseEvents]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[sp_savePatientEncounterAdverseEvents] AS' 
+END
+GO
+-- =============================================
+-- Author:		John Macharia | sosewe- added adverseEventId parameter
+-- Create date: 14th Feb 2017
+-- Description:	get patient encounter Adverse Events
+-- =============================================
+ALTER PROCEDURE [dbo].[sp_savePatientEncounterAdverseEvents]
+	-- Add the parameters for the stored procedure here
+	@masterVisitID int = null,
+	@PatientID int = null,
+	@adverseEventId int =null,
+	@adverseEvent varchar(250) = null,
+	@medicineCausingAE varchar(250) = null,
+	@adverseSeverity varchar(250) = null,
+	@adverseAction varchar(250) = null,
+	@userID int = null
+
+AS
+BEGIN
+-- SET NOCOUNT ON added to prevent extra result sets from
+-- interfering with SELECT statements.
+Set Nocount On;
+-- Insert statements for procedure here
+if exists(select 1 from AdverseEvent where PatientMasterVisitId = @masterVisitID and PatientId = @PatientID and EventName = @adverseEvent)
+	BEGIN
+		update AdverseEvent set EventCause = @medicineCausingAE, Severity = @adverseSeverity,[Action] = @adverseAction, DeleteFlag = 0
+		where PatientMasterVisitId = @masterVisitID and PatientId = @PatientID and EventName = @adverseEvent
+	END
+	ELSE
+	BEGIN
+		insert into AdverseEvent(PatientId,PatientMasterVisitId,AdverseEventId,EventName,EventCause,Severity,[Action],DeleteFlag,CreateBy,CreateDate) 
+		values(@PatientID,@MasterVisitID,@adverseEventId,@adverseEvent,@medicineCausingAE,@adverseSeverity,@adverseAction,0,@userID,GETDATE())
+	END
+	
+End
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[sp_getPatientEncounterAdverseEvents]    Script Date: 05/09/2017 17:08:22 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_getPatientEncounterAdverseEvents]') AND type in (N'P', N'PC'))
 BEGIN
 EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[sp_getPatientEncounterAdverseEvents] AS' 
@@ -2614,7 +2664,7 @@ BEGIN
 -- interfering with SELECT statements.
 Set Nocount On;
 
-	select Severity SeverityID,EventName,EventCause,b.DisplayName Severity,[Action] 
+	select Severity SeverityID,AdverseEventId,EventName,EventCause,b.DisplayName Severity,[Action] 
 	from AdverseEvent a left join LookupItem b on a.Severity = b.Id
 	where patientId = @PatientID and (a.DeleteFlag is null or a.DeleteFlag = 0)
 

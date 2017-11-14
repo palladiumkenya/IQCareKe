@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucPharmacyPrescription.ascx.cs" Inherits="IQCare.Web.CCC.UC.ucPharmacyPrescription" %>
+<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucPharmacyPrescription.ascx.cs" Inherits="IQCare.Web.CCC.UC.ucPharmacyPrescription" %>
 
 <asp:HiddenField ID="drugID" runat="server" ClientIDMode="Static" />
 <asp:HiddenField ID="drugAbbr" runat="server" ClientIDMode="Static" />
@@ -381,9 +381,22 @@
                         //evt.preventDefault();
                         return false;
                     }
+					
+					tp=$("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
+						// check if patient can have PMTC Regimens
+						//var treatmentProgram = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
+					
+		            //tp = treatmentProgram;
+		            if (gender === "Female" && age >= 9 && tp === "PMTCT") {
 
+		            } else if (tp === "PMTCT" && (gender != "Female" || age < 9)) {
+		                 toastr.error("PMTCT is for female patients only who are older than 9 years", "Error");
+		                 $("#<%=ddlTreatmentProgram.ClientID%>").val("");
+		             }
+					
+					
                     if (pmscmSamePointDispense === "PM/SCM With Same point dispense") {
-                        tp = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
+                       // tp = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
 
                         pmscmFlag = "1";
                         drugList(1, tp);
@@ -394,7 +407,7 @@
 
                     }
                     else if (pmscm === "PM/SCM") {
-                        tp = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
+                       // tp = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
 
                         drugList(1, tp);
                         $("#ddlBatch").prop('disabled', true);
@@ -403,7 +416,7 @@
                         $("#btnDateDisp").prop('disabled', true);
                     }
                     else {
-                        tp = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
+                       // tp = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
 
                         drugList(0, tp);
                         $("#ddlBatch").prop('disabled', true);
@@ -430,16 +443,9 @@
             restricted: [{ from: tomorrow, to: Infinity }]
         });
 
-        $("#<%=ddlTreatmentProgram.ClientID%>").change(function () {
-            var treatmentProgram = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
-            tp = treatmentProgram;
-            if (gender === "Female" && age >= 9 && treatmentProgram === "PMTCT") {
-
-            } else if (treatmentProgram === "PMTCT" && (gender != "Female" || age < 9)) {
-                 toastr.error("PMTCT is for female patients only who are older than 9 years", "Error");
-                 $("#<%=ddlTreatmentProgram.ClientID%>").val("");
-             }
-        });
+     /*   $("#<%=ddlTreatmentProgram.ClientID%>").change(function () {
+            
+        });*/
 
         $("#<%=ddlTreatmentPlan.ClientID%>").change(function () {
             var treatmentProgram = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
