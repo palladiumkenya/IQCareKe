@@ -715,7 +715,17 @@
                                                     <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddMilestones" onclick="AddAdverseReaction();">Add</button>
                                                 </div>
                                             </div>
-                                        </div>
+                                        
+                                            <div class="col-md-12 form-group" id="divAdverseEventOther"  clientidmode="Static" style="margin-top: 1%">
+                                                <div class="col-md-12"><label class="control-label pull-left text-primary"> Other Adverse Event(s)</label></div>
+                                                <div class="col-md-12">
+                                                    
+                                                    <asp:TextBox runat="server" ID="txtAdverseEventOther" CssClass="form-control" ClientIDMode="Static" placeholder="Provide Other Adverse Event(s) " ></asp:TextBox>
+                                                </div>
+                                            </div>
+                                      </div>
+                                        
+                                        
                                     
                                         <div class="col-md-12">
                                             <div id="adverseEventsTable" class="panel panel-primary">
@@ -725,6 +735,7 @@
                                                         <thead>
                                                         <tr>
                                                             <th><span class="text-primary">SeverityID</span></th>
+                                                            <th><span class="text-primary">AdverseEventId</span></th>
                                                             <th><span class="text-primary">Adverse Events</span></th>
                                                             <th><span class="text-primary">Medicine Causing A/E</span></th>
                                                             <th><span class="text-primary">Severity</span></th>
@@ -2108,6 +2119,8 @@
 
     var PatientId = "<%=PtnId%>";
     var PatientMasterVisitId = "<%=PmVisitId%>";
+    var adverseEventName = "";
+    var adverseEventId = 0;
 
     document.getElementById('txtPresentingComplaintsID').style.display = 'none';
     document.getElementById('txtAllergyId').style.display = 'none';
@@ -2156,6 +2169,16 @@
         showHideAdverseEventsDivs();
         showHideSystemsOkayDivs();
         showHideVisitByTS();
+
+        // Manage adverse Events
+        $("#divAdverseEventOther").hide("fast");
+        $("#adverseEvent").focusout(function () {
+                if (adverseEventName === 'Other Specify') {
+                    $("#divAdverseEventOther").show("fast");
+                } else {
+                    $("#divAdverseEventOther").hide("fast"); 
+                }
+            });
 
         //Show the AdverseEventModal Windows
         function loadAdverseEventOutcome() {
@@ -2420,9 +2443,11 @@
             ordering: false,
             columnDefs: [
                 {
-                    "targets": [0],
-                    "visible": false,
-                    "searchable": false
+                    "targets": [0], "visible": false, "searchable": false
+                    
+                },
+                {
+                    "targets": [1], "visible": false, "searchable": false
                 }
             ]
         });
@@ -2433,6 +2458,7 @@
                 var adverseEventId = 0;
                 var outcomeId = $("#EventOutcome").val();
                 var outcomeDate = moment($("#outcomeDate").datepicker('getDate')).format('DD-MMM-YYYY');
+
 
 
                 //$("#dtlAdverseEventsBdy tr").each(function () {
@@ -2936,6 +2962,7 @@
             var complaints = $("#<%=complaints.ClientID%>").val();
             var tbscreening = $("#<%=tbscreeningstatus.ClientID%>").find(":selected").val();
             var nutritionscreening = $("#<%=nutritionscreeningstatus.ClientID%>").find(":selected").val();
+            
 
             /////////////////////////////////////////////////////
             if (anyComplaints === 1) {
@@ -2952,17 +2979,26 @@
                 }
             }
 
+            
             ///////////////////////////////////////////////////////
             var rowCount = $('#dtlAdverseEvents tbody tr').length;
             var adverseEventsArray = new Array();
             try {
                 for (var i = 0; i < rowCount; i++) {
                     adverseEventsArray[i] = {
+                        //"adverseSeverityID": advEventsTable.row(i).data()[0],
+                        //"adverseEvetId":adverseEvent,
+                        //"adverseEvent": advEventsTable.row(i).data()[1],
+                        //"medicineCausingAE": advEventsTable.row(i).data()[2],
+                        //"adverseSeverity": advEventsTable.row(i).data()[3],
+                        //"adverseAction": advEventsTable.row(i).data()[4]
+
                         "adverseSeverityID": advEventsTable.row(i).data()[0],
-                        "adverseEvent": advEventsTable.row(i).data()[1],
-                        "medicineCausingAE": advEventsTable.row(i).data()[2],
-                        "adverseSeverity": advEventsTable.row(i).data()[3],
-                        "adverseAction": advEventsTable.row(i).data()[4]
+                        "adverseEventId": advEventsTable.row(i).data()[1],
+                        "adverseEvent": advEventsTable.row(i).data()[2],
+                        "medicineCausingAE": advEventsTable.row(i).data()[3],
+                        "adverseSeverity": advEventsTable.row(i).data()[4],
+                        "adverseAction": advEventsTable.row(i).data()[5]
                     }
                 }
             }
@@ -3870,6 +3906,9 @@
             var result = this.value.split("~");
             $("#<%=adverseEventId.ClientID%>").val(result[0]);
             $("#<%=adverseEvent.ClientID%>").val(result[1]);
+            adverseEventName = result[1];
+            adverseEventId = result[0];
+
         });
 
         $.ajax({

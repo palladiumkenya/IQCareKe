@@ -14,6 +14,7 @@ namespace Entities.CCC.Encounter
         public class AdverseEvents
         {
             public string adverseSeverityID { get; set; }
+            public int adverseEventId { get; set; }
             public string adverseEvent { get; set; }
             public string medicineCausingAE { get; set; }
             public string adverseSeverity { get; set; }

@@ -14,6 +14,7 @@ function AddAdverseReaction() {
 
     var adverseEventId = $("#adverseEventId").val();
     var adverseEvent = $("#adverseEvent").val();
+    adverseEvent = (adverseEvent === "Other Specify") ? $("#txtAdverseEventOther").val() : adverseEvent;
     var medicineCausingAE = $("#AdverseEventCause").val();
     var adverseEventSeverity = $('#ddlAdverseEventSeverity').find(":selected").text();
     var adverseEventSeverityID = $('#ddlAdverseEventSeverity').find(":selected").val();
@@ -46,7 +47,7 @@ function AddAdverseReaction() {
         toastr.error("Error", "Please enter Action");
         return false;
     }
-
+   // reactionEventFound = $.inArray("" + adverseEventId + "", reactionEventList);
     reactionEventFound = $.inArray("" + adverseEvent + "", reactionEventList);
     reactionCauseFound = $.inArray("" + medicineCausingAE + "", reactionCauseList);
     reactionSeverityFound = $.inArray("" + adverseEventSeverityID + "", reactionSeverityList);
@@ -57,7 +58,7 @@ function AddAdverseReaction() {
         toastr.error("Error", adverseEvent + " Adverse Event already exists in the List");
         return false; // message box herer
     }
-
+   // reactionEventList.push("" + adverseEventId + "");
     reactionEventList.push("" + adverseEvent + "");
     reactionCauseList.push("" + medicineCausingAE + "");
     reactionSeverityList.push("" + adverseEventSeverityID + "");
@@ -65,12 +66,13 @@ function AddAdverseReaction() {
     arrAdverseEventUI = [];
   
     arrAdverseEventUI.push([
-        adverseEventSeverityID,adverseEvent, medicineCausingAE, adverseEventSeverity, adverseEventAction,
+        adverseEventSeverityID,adverseEventId,adverseEvent, medicineCausingAE, adverseEventSeverity, adverseEventAction,
         "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"
     ]);
    
     DrawDataTable("dtlAdverseEvents", arrAdverseEventUI);
 
+    //$("#adverseEventId").val("");
     $("#adverseEvent").val("");
     $("#AdverseEventCause").val("");
     $('#ddlAdverseEventSeverity').val("0");
