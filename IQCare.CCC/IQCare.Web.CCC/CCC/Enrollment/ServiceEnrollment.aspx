@@ -281,7 +281,13 @@
             });
 
             $("#btnClose").click(function () {
-                window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientHome.aspx")%>';
+                var isDisabled = $('#CCCNumber').prop('disabled');
+                if (isDisabled) {
+                    window.location.href = '<%=ResolveClientUrl("~/CCC/Home.aspx")%>';
+                } else {
+                    window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientHome.aspx")%>';
+                }
+                
             });
 
             $("#btnRese").click(function (e) {
