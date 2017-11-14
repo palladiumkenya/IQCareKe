@@ -513,7 +513,7 @@
                             getPatientEnrollmentDetails();
                         });
                     }
-                },500);
+                },1000);
             });
 
             function getDynamicFields() {
@@ -571,7 +571,7 @@
                                 if (messageResponse[i].Required == true) {
                                     table += "<td>";
                                     if (messageResponse[i].Prefix == "mfl_code") {
-                                        table += "<select id=" + messageResponse[i].Prefix + " class='form-control' data-parsley-required='true'></select>";
+                                        table += "<select id=" + messageResponse[i].Prefix + " class='form-control' data-parsley-required='true' data-parsley-min='1'></select>";
                                     } else {
                                         table += "<input type='text' id=" + messageResponse[i].Prefix + " class='form-control' data-parsley-required='true' data-parsley-type='digits' />";
                                     }                                 
@@ -579,7 +579,7 @@
                                 } else {
                                     table += "<td>";
                                     if (messageResponse[i].Prefix == "mfl_code") {
-                                        table += "<select id=" + messageResponse[i].Prefix + " class='form-control'></select>";
+                                        table += "<select id=" + messageResponse[i].Prefix + " class='form-control' data-parsley-min='1'></select>";
                                     } else {
                                         table += "<input type='text' id=" + messageResponse[i].Prefix + " class='form-control' data-parsley-type='digits' />  ";
                                     }                                   
@@ -723,6 +723,7 @@
                                         if (val.PrefixType != null) {
                                             //$("#" + value.Prefix).append($('<option>', { value: val.PrefixType, text: "dsdd" }));
                                             //$("#" + value.Prefix).val(val.PrefixType).trigger("change");
+                                            //console.log(val.PrefixType);
                                             GetSelectedFacility(val.PrefixType, value.Prefix);
                                         }                                       
                                     }
@@ -755,7 +756,7 @@
             var patientType = '<%=patType%>';
             var patientExists = '<%=PatientExists%>';
 
-            console.log(patientExists);
+            //console.log(patientExists);
             if (patientType != "New" || patientExists > 0) {
                 $("#ReconfirmatoryTest").prop("disabled", true);
                 $("#ReConfirmatory").hide();

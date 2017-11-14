@@ -55,11 +55,12 @@ namespace Entities.CCC.Encounter
         [Serializable]
         public class PhysicalExamination
         {
-            public string examTypeID { get; set; }
-            public string examID { get; set; }
-            public string examType { get; set; }
-            public string exam { get; set; }
-            public string findings { get; set; }
+            public string reviewOfSystemsID { get; set; }
+            public string systemTypeID { get; set; }
+            public string findingID { get; set; }
+            public string systemTypeText { get; set; }
+            public string findingIDText { get; set; }
+            public string findingsNotes { get; set; }
         }
 
         [Serializable]

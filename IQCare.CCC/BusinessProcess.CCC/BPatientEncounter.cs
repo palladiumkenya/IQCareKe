@@ -227,9 +227,10 @@ namespace BusinessProcess.CCC
                         ClsUtility.Init_Hashtable();
                         ClsUtility.AddParameters("@MasterVisitID", SqlDbType.Int, masterVisitID.ToString());
                         ClsUtility.AddParameters("@PatientID", SqlDbType.Int, patientID);
-                        ClsUtility.AddParameters("@examType", SqlDbType.VarChar, pe.examTypeID);
-                        ClsUtility.AddParameters("@exam", SqlDbType.VarChar, pe.examID);
-                        ClsUtility.AddParameters("@findings", SqlDbType.VarChar, pe.findings);
+                        ClsUtility.AddParameters("@reviewOfSystemsID", SqlDbType.VarChar, pe.reviewOfSystemsID);
+                        ClsUtility.AddParameters("@systemTypeId", SqlDbType.VarChar, pe.systemTypeID);
+                        ClsUtility.AddParameters("@findingId", SqlDbType.Int, pe.findingID);
+                        ClsUtility.AddParameters("@findingsNotes", SqlDbType.VarChar, pe.findingsNotes);
                         ClsUtility.AddParameters("@userID", SqlDbType.VarChar, userID);
 
                         int i = (int)PEObj.ReturnObject(ClsUtility.theParams, "sp_savePatientEncounterPhysicalExam", ClsUtility.ObjectEnum.ExecuteNonQuery);

@@ -245,26 +245,28 @@ function AddVaccine() {
 var physicalExamList = new Array();
 
 function AddPhysicalExam() {
-    var examType = $('#ddlExaminationType').find(":selected").text();
-    var examTypeID = $('#ddlExaminationType').find(":selected").val();
-    var exam = $('#ddlExamination').find(":selected").text();
-    var examID = $('#ddlExamination').find(":selected").val();
+    var systemTypeText = $('#ddlExaminationType').find(":selected").text();
+    var systemTypeID = $('#ddlExaminationType').find(":selected").val();
+    var reviewOfSystemsMasterId = $("#hfExaminationReviewSystems").val();
+    //console.log(reviewOfSystemsMasterId);
+    var findingIDText = $('#ddlExamination').find(":selected").text();
+    var findingID = $('#ddlExamination').find(":selected").val();
     var findings = $('#txtExamFindings').val();
 
     //Validate duplication
     var examFound = 0;
 
-    if (examTypeID === "0") {
-        toastr.error("Error","Please enter Examination Type");
+    if (systemTypeID === "0") {
+        toastr.error("Error","Please Select System Type");
         return false;
     }
 
-    if (examID == "0") {
-        toastr.error("Error", "Please enter Examination");
+    if (findingID == "0") {
+        toastr.error("Error", "Please select a Finding");
         return false;
     }
 
-    examFound = $.inArray("" + exam + "", physicalExamList);
+    examFound = $.inArray("" + findingID + "", physicalExamList);
 
 
     if (examFound > -1) {
@@ -273,12 +275,12 @@ function AddPhysicalExam() {
     } else {
 
 
-        physicalExamList.push("" + exam + "");
+        physicalExamList.push("" + findingID + "");
        
 
         arrPhysicalExamUI = [];
         arrPhysicalExamUI.push([
-            examTypeID, examID, examType, exam, findings,
+            reviewOfSystemsMasterId, systemTypeID, findingID, systemTypeText, findingIDText, findings,
             "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"
         ]);
         
@@ -566,4 +568,20 @@ function ValidatePrescriptionDate() {
         $("#txtPrescriptionDate").val("");
         $("#txtPrescriptionDate").val("");
     }
+}
+
+function GetPatientExaminationTypeID() {
+    $.ajax({
+        type: "POST",
+        url: "../WebService/LookupService.asmx/GetMasterIdByMasterName",
+        data: "{'groupName': 'ReviewOfSystems' }",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+
+        success: function (data) {
+            var serverData = data.d;
+            var obj = $.parseJSON(serverData);
+            $("#hfExaminationReviewSystems").val(obj);
+        }
+    });
 }

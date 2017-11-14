@@ -234,7 +234,7 @@ namespace IQCare.Web.CCC.UC
             {
                 systemsOkNo.Checked = true;
             }
-            else if(theDT.Rows.Count == 0 && isOnEdit)
+            else if (theDT.Rows.Count == 0 && isOnEdit)
             {
                 systemsOkYes.Checked = true;
             }
