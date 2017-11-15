@@ -203,5 +203,18 @@ namespace IQCare.Web.CCC.WebService
                 throw;
             }       
         }
+
+        [WebMethod]
+        public string GetMasterIdByMasterName(string groupName)
+        {
+            try
+            {
+                return LookupLogic.GetLookUpMasterId(groupName).ToString();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }
