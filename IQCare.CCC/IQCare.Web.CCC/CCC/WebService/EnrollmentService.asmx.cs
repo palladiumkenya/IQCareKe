@@ -428,9 +428,21 @@ namespace IQCare.Web.CCC.WebService
             {
                 PersonId = int.Parse(Session["PersonId"].ToString());
                 int userId = Convert.ToInt32(Session["AppUserId"]);
+                int result = 0;
 
                 HivReConfirmatoryTestManager hivReConfirmatoryTestManager = new HivReConfirmatoryTestManager();
-                int result = hivReConfirmatoryTestManager.AddHivReConfirmatoryTest(PersonId, reconfirmatoryTest, resultReConfirmatoryTest, reConfirmatoryTestDate, userId);
+
+                var hivReConfirmatoryTest = hivReConfirmatoryTestManager.GetPersonLastReConfirmatoryTest(PersonId);
+                if (hivReConfirmatoryTest != null)
+                {
+                    hivReConfirmatoryTest.DeleteFlag = true;
+                    hivReConfirmatoryTestManager.UpdateHivReConfirmatoryTest(hivReConfirmatoryTest);
+                    result = hivReConfirmatoryTestManager.AddHivReConfirmatoryTest(PersonId, reconfirmatoryTest, resultReConfirmatoryTest, reConfirmatoryTestDate, userId);
+                }
+                else
+                {
+                    result = hivReConfirmatoryTestManager.AddHivReConfirmatoryTest(PersonId, reconfirmatoryTest, resultReConfirmatoryTest, reConfirmatoryTestDate, userId);
+                }
 
                 if (result > 0)
                 {
