@@ -244,7 +244,7 @@ namespace IQCare.Web.Patient
                 return false;
             }
 
-            if (!String.IsNullOrWhiteSpace(ViewState["CareEndedDate"].ToString()))
+            if (ViewState["CareEndedDate"] !=null && !String.IsNullOrWhiteSpace(ViewState["CareEndedDate"].ToString()))
             {
                 if (theReEnrolDate > theCurrentDate)
                 {

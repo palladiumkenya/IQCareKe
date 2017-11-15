@@ -517,6 +517,15 @@ namespace IQCare.Web.CCC.UC {
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton systemsOkNo;
         
         /// <summary>
+        /// hfExaminationReviewSystems control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfExaminationReviewSystems;
+        
+        /// <summary>
         /// ddlExaminationType control.
         /// </summary>
         /// <remarks>

@@ -73,6 +73,23 @@ IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Famil
 DROP PROCEDURE [dbo].[FamilyTesting_To_Greencard]
 GO
 
+/****** Object:  StoredProcedure [dbo].[sp_deletePatientEncounterPhysicalExam]    Script Date: 5/9/2017 3:16:05 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_deletePatientEncounterPhysicalExam]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_deletePatientEncounterPhysicalExam]
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[sp_savePatientEncounterPhysicalExam]    Script Date: 5/9/2017 3:16:05 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_savePatientEncounterPhysicalExam]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_savePatientEncounterPhysicalExam]
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[sp_getPatientEncounterExam]    Script Date: 5/9/2017 3:16:05 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_getPatientEncounterExam]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_getPatientEncounterExam]
+GO
+
 
 /****** Object:  StoredProcedure [dbo].[PatientsNotSynced]    Script Date: 05/09/2017 17:08:22 ******/
 SET ANSI_NULLS ON
@@ -274,18 +291,18 @@ IF @@rowcount = 1 BEGIN
 	
 	SET @Sex = (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName = 'Gender' and ItemName = (select top 1 Name from mst_Decode where id = @Sex));
 	IF @Sex IS  NULL
-		SET @Sex = (select ItemId from LookupItemView where MasterName = 'Unknown' and ItemName = 'Unknown');
+		SET @Sex = (select top 1 ItemId from LookupItemView where MasterName = 'Unknown' and ItemName = 'Unknown');
 
 		
 
 	--Default all persons to new
-	SET @ARTStartDate=( SELECT ARTTransferInDate FROM dtl_PatientHivPrevCareIE WHERE Ptn_pk=@ptn_pk);
+	SET @ARTStartDate=( SELECT top 1 ARTTransferInDate FROM dtl_PatientHivPrevCareIE WHERE Ptn_pk=@ptn_pk);
 	if(@ARTStartDate Is NULL) BEGIN 
 		SET @PatientType=(SELECT top 1 Id FROM LookupItem WHERE Name='New');
 		SET @transferIn=0; 
 	END 
 	ELSE BEGIN 
-		SET @PatientType=(SELECT Top 1 Id FROM LookupItem WHERE Name='TransferIn');
+		SET @PatientType=(SELECT Top 1 Id FROM LookupItem WHERE Name='Transfer-In');
 		SET @transferIn=1; 
 	End
 	-- SELECT @PatientType = 1285
@@ -436,7 +453,7 @@ IF @@rowcount = 1 BEGIN
 			SELECT @message = 'Update Person Id: ' + CAST(@Id as varchar(50));
 			PRINT @message;
 
-			PRINT @Status;
+			--PRINT @Status;
 
 			UPDATE Patient
 			SET PatientIndex = @PatientFacilityId, PatientType = @PatientType, FacilityId = @FacilityId, Active = @Status, DateOfBirth = @DateOfBirth, DobPrecision = @DobPrecision, NationalId = @IDNational, DeleteFlag = @DeleteFlag, CreatedBy = @UserID, CreateDate = @CreateDate, RegistrationDate = @RegistrationDate
@@ -461,7 +478,7 @@ IF @@rowcount = 1 BEGIN
 			PRINT @message;
 
 			IF @CCCNumber IS NOT NULL		BEGIN
-				IF NOT EXISTS ( SELECT PatientId FROM PatientIdentifier WHERE PatientId = @PatientId AND PatientEnrollmentId = @EnrollmentId AND IdentifierTypeId = (SELECT Id FROM LookupItem WHERE Name='CCCNumber'))
+				IF NOT EXISTS ( SELECT PatientId FROM PatientIdentifier WHERE PatientId = @PatientId AND PatientEnrollmentId = @EnrollmentId AND IdentifierTypeId = (select top 1 Id from Identifiers where Code='CCCNumber'))
 					BEGIN
 						-- Patient Identifier
 						INSERT INTO [dbo].[PatientIdentifier] ([PatientId], [PatientEnrollmentId], [IdentifierTypeId], [IdentifierValue] ,[DeleteFlag] ,[CreatedBy] ,[CreateDate] ,[Active] ,[AuditData])
@@ -2891,4 +2908,131 @@ BEGIN
 	 DROP TABLE #Tdtl_FamilyInfo
 	 UPDATE PersonRelationship SET FamilyInfoId = 0 WHERE FamilyInfoId IS NULL;
 END
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[sp_deletePatientEncounterPhysicalExam]    Script Date: 05/09/2017 17:08:22 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_deletePatientEncounterPhysicalExam]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[sp_deletePatientEncounterPhysicalExam] AS' 
+END
+GO
+-- =============================================
+-- Author:		John Macharia
+-- Create date: 14th Feb 2017
+-- Description:	get patient encounter Adverse Events
+-- =============================================
+ALTER PROCEDURE [dbo].[sp_deletePatientEncounterPhysicalExam]
+	-- Add the parameters for the stored procedure here
+	@PatientMasterVisitID int = null,
+	@PatientID int = null
+
+AS
+BEGIN
+-- SET NOCOUNT ON added to prevent extra result sets from
+-- interfering with SELECT statements.
+Set Nocount On;
+-- Insert statements for procedure here
+	declare @generalExamID int = (select top 1 Id from lookupmaster where Name = 'ReviewOfSystems')
+
+	update PhysicalExamination set DeleteFlag = 1 
+	where PatientMasterVisitId = @PatientMasterVisitID and PatientId = @PatientID and ExaminationTypeId = @generalExamID
+End
+GO
+
+
+
+
+/****** Object:  StoredProcedure [dbo].[sp_savePatientEncounterPhysicalExam]    Script Date: 05/09/2017 17:08:22 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_savePatientEncounterPhysicalExam]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[sp_savePatientEncounterPhysicalExam] AS' 
+END
+GO
+-- =============================================
+-- Author:		John Macharia
+-- Create date: 7th Feb 2017
+-- Description:	save patient encounter - Physical Examination
+-- =============================================
+ALTER PROCEDURE [dbo].[sp_savePatientEncounterPhysicalExam]
+	-- Add the parameters for the stored procedure here
+	@MasterVisitID int = null,
+	@PatientID int = null,
+	@reviewOfSystemsID int = null,
+	@systemTypeId int = null,
+	@findingId int = null,
+	@findingsNotes varchar(50) = null,
+	@userID int = null
+
+AS
+BEGIN
+-- SET NOCOUNT ON added to prevent extra result sets from
+-- interfering with SELECT statements.
+Set Nocount On;
+-- Insert statements for procedure here
+	if exists(select 1 from PhysicalExamination where PatientMasterVisitId = @MasterVisitID
+	and PatientId = @PatientID and ExaminationTypeId = @reviewOfSystemsID and ExamId = @systemTypeId and FindingId = @findingId and DeleteFlag = 0)
+	BEGIN
+		update PhysicalExamination set FindingsNotes= @findingsNotes, DeleteFlag = 0, FindingId = @findingId
+		where PatientMasterVisitId = @MasterVisitID and PatientId = @PatientID and ExaminationTypeId = @reviewOfSystemsID and ExamId = @systemTypeId
+	END
+	ELSE
+	BEGIN
+		insert into PhysicalExamination(PatientId,PatientMasterVisitId,ExaminationTypeId,ExamId,FindingsNotes,DeleteFlag,CreateBy,CreateDate, FindingId) 
+		values(@PatientID, @MasterVisitID, @reviewOfSystemsID, @systemTypeId, @findingsNotes, 0 , @userID, GETDATE(), @findingId)
+	END
+	
+End
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[sp_getPatientEncounterExam]    Script Date: 05/09/2017 17:08:22 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_getPatientEncounterExam]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[sp_getPatientEncounterExam] AS' 
+END
+GO
+-- =============================================
+-- Author:		John Macharia
+-- Create date: 14th Feb 2017
+-- Description:	get patient encounter Physical Exam
+-- =============================================
+ALTER PROCEDURE [dbo].[sp_getPatientEncounterExam]
+	-- Add the parameters for the stored procedure here
+	@PatientMasterVisitID int = null,
+	@PatientID int = null
+
+AS
+BEGIN
+-- SET NOCOUNT ON added to prevent extra result sets from
+-- interfering with SELECT statements.
+Set Nocount On;
+
+SELECT 
+	PYE.ExaminationTypeId AS examTypeID, 
+	PYE.ExamId AS examID,
+	PYE.FindingId AS findingID,
+	LV.DisplayName AS examType, 
+	(SELECT TOP 1 ItemName FROM LookupItemView where ItemId = PYE.FindingId) AS exam, 
+	PYE.FindingsNotes AS findings
+	FROM dbo.PhysicalExamination AS PYE LEFT OUTER JOIN
+	dbo.LookupItemView AS LV ON PYE.ExaminationTypeId = LV.MasterId AND PYE.ExamId = LV.ItemId
+	WHERE (LV.MasterName = 'ReviewOfSystems') and PYE.PatientMasterVisitId = @PatientMasterVisitID and PYE.PatientId = @PatientID and (PYE.DeleteFlag is null or PYE.DeleteFlag = 0)
+	
+End
 GO
