@@ -282,8 +282,9 @@ namespace IQCare.Web.Patient
         /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         protected void btnSaveContinue_Click(object sender, EventArgs e)
         {
+            var validation = FieldValidation();
 
-            if (FieldValidation() == false)
+            if (validation == false)
             {
                 return;
             }
