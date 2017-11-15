@@ -11,32 +11,92 @@
 	END
 
 
--- Died item already exists
-	IF NOT EXISTS(SELECT * FROM LookupItem WHERE Name='Got Well')
-	BEGIN
-		INSERT INTO LookupItem(name,DisplayName) VALUES('Got Well','Got Well');
-	END
+-- Adverse Events outcome option
 
 	IF NOT EXISTS(SELECT * FROM LookupItem WHERE Name='Got Well')
 	BEGIN
-		INSERT INTO LookupItem(name,DisplayName) VALUES('No Change','No Change');
+		INSERT INTO LookupItem(name,DisplayName) VALUES('Recovering/Resolving','Recovering/Resolving');
 	END
+	ELSE
+	 BEGIN
+	   UPDATE LookupItem SET name='Recovering/Resolving',DisplayName='Recovering/Resolving' WHERE name IN('Got Well','Recovering/Resolving')
+	 END
+
+	IF NOT EXISTS(SELECT * FROM LookupItem WHERE Name='No Change')
+	BEGIN
+		INSERT INTO LookupItem(name,DisplayName) VALUES('Recoverd/Resolved','Recoverd/Resolved');
+	END
+	ELSE
+	BEGIN 
+	  UPDATE LookupItem SET name='Recoverd/Resolved',DisplayName='Recoverd/Resolved' WHERE name IN('No Change','Recoverd/Resolved')
+	END
+
+	IF NOT EXISTS(SELECT * FROM LookupItem WHERE Name='Requires or Prolongs hospitalization')
+	BEGIN 
+	  INSERT INTO LookupItem(Name,DisplayName) VALUES('Requires or Prolongs hospitalization','Requires or Prolongs hospitalization')
+	END
+
+		IF NOT EXISTS(SELECT * FROM LookupItem WHERE Name='Caused a congenital anomaly')
+	BEGIN 
+	  INSERT INTO LookupItem(Name,DisplayName) VALUES('Caused a congenital anomaly','Caused a congenital anomaly')
+	END
+
+	IF NOT EXISTS(SELECT * FROM LookupItem WHERE Name='Requires intervention to prevent permanent damage')
+	BEGIN 
+		INSERT INTO LookupItem(Name,DisplayName) VALUES('Requires intervention to prevent permanent damage','Requires intervention to prevent permanent damage')
+	END
+
+	IF NOT EXISTS(SELECT * FROM LookupItem WHERE Name='Died due to ADR')
+	BEGIN 
+		INSERT INTO LookupItem(Name,DisplayName) VALUES('Died due to ADR','Died due to ADR')
+	END
+
+	IF NOT EXISTS(SELECT * FROM LookupItem WHERE Name='Died not due to ADR')
+	BEGIN 
+		INSERT INTO LookupItem(Name,DisplayName) VALUES('Died not due to ADR','Died not due to ADR')
+	END
+
+
+	--IF NOT EXISTS(SELECT * FROM LookupItem WHERE Name='')
+	--BEGIN 
+	--	INSERT INTO LookupItem(Name,DisplayName) VALUES('','')
+	--END
 
 	-- lookupmaster item
-	IF NOT EXISTS(SELECT * FROM LookupMasterItem WHERE LookupMasterId IN(SELECT top 1 Id FROM LookupMaster WHERE NAME='AdverseEventOutcome') AND LookupItemId IN(SELECT top 1 Id FROM LookupItem WHERE Name='Died'))
+	IF NOT EXISTS(SELECT * FROM LookupMasterItem WHERE LookupMasterId IN(SELECT top 1 Id FROM LookupMaster WHERE NAME='AdverseEventOutcome') AND LookupItemId IN(SELECT top 1 Id FROM LookupItem WHERE Name='Recovering/Resolving'))
 	BEGIN
-		INSERT INTO LookupMasterItem(LookupMasterId,LookupItemId,DisplayName,OrdRank)VALUES((SELECT top 1 Id FROM LookupMaster WHERE NAME='AdverseEventOutcome'),(SELECT top 1 Id FROM LookupItem WHERE Name='Died'),'Died',1)
+		INSERT INTO LookupMasterItem(LookupMasterId,LookupItemId,DisplayName,OrdRank)VALUES((SELECT top 1 Id FROM LookupMaster WHERE NAME='AdverseEventOutcome'),(SELECT top 1 Id FROM LookupItem WHERE Name='Recovering/Resolving'),'Recovering/Resolving',1)
 	END	
-	
-	IF NOT EXISTS(SELECT * FROM LookupMasterItem WHERE LookupMasterId IN(SELECT top 1 Id FROM LookupMaster WHERE NAME='AdverseEventOutcome') AND LookupItemId IN(SELECT top 1 Id FROM LookupItem WHERE Name='GotWell'))
-	BEGIN
-		INSERT INTO LookupMasterItem(LookupMasterId,LookupItemId,DisplayName,OrdRank)VALUES((SELECT top 1 Id FROM LookupMaster WHERE NAME='AdverseEventOutcome'),(SELECT top 1 Id FROM LookupItem WHERE Name='GotWell'),'Got Well',2)
-	END
 
-	IF NOT EXISTS(SELECT * FROM LookupMasterItem WHERE LookupMasterId IN(SELECT top 1 Id FROM LookupMaster WHERE NAME='AdverseEventOutcome') AND LookupItemId IN(SELECT top 1 Id FROM LookupItem WHERE Name='NoChange'))
+	IF NOT EXISTS(SELECT * FROM LookupMasterItem WHERE LookupMasterId IN(SELECT top 1 Id FROM LookupMaster WHERE NAME='AdverseEventOutcome') AND LookupItemId IN(SELECT top 1 Id FROM LookupItem WHERE Name='Recoverd/Resolved'))
 	BEGIN
-		INSERT INTO LookupMasterItem(LookupMasterId,LookupItemId,DisplayName,OrdRank)VALUES((SELECT top 1 Id FROM LookupMaster WHERE NAME='AdverseEventOutcome'),(SELECT top 1 Id FROM LookupItem WHERE Name='NoChange'),'No Change',3)
-	END
+		INSERT INTO LookupMasterItem(LookupMasterId,LookupItemId,DisplayName,OrdRank)VALUES((SELECT top 1 Id FROM LookupMaster WHERE NAME='AdverseEventOutcome'),(SELECT top 1 Id FROM LookupItem WHERE Name='Recoverd/Resolved'),'Recoverd/Resolved',2)
+	END	
+
+	IF NOT EXISTS(SELECT * FROM LookupMasterItem WHERE LookupMasterId IN(SELECT top 1 Id FROM LookupMaster WHERE NAME='AdverseEventOutcome') AND LookupItemId IN(SELECT top 1 Id FROM LookupItem WHERE Name='Requires or Prolongs hospitalization'))
+	BEGIN
+		INSERT INTO LookupMasterItem(LookupMasterId,LookupItemId,DisplayName,OrdRank)VALUES((SELECT top 1 Id FROM LookupMaster WHERE NAME='AdverseEventOutcome'),(SELECT top 1 Id FROM LookupItem WHERE Name='Requires or Prolongs hospitalization'),'Requires or Prolongs hospitalization',3)
+	END	
+
+	IF NOT EXISTS(SELECT * FROM LookupMasterItem WHERE LookupMasterId IN(SELECT top 1 Id FROM LookupMaster WHERE NAME='AdverseEventOutcome') AND LookupItemId IN(SELECT top 1 Id FROM LookupItem WHERE Name='Caused a congenital anomaly '))
+	BEGIN
+		INSERT INTO LookupMasterItem(LookupMasterId,LookupItemId,DisplayName,OrdRank)VALUES((SELECT top 1 Id FROM LookupMaster WHERE NAME='AdverseEventOutcome'),(SELECT top 1 Id FROM LookupItem WHERE Name='Caused a congenital anomaly '),'Caused a congenital anomaly ',4)
+	END	
+
+	IF NOT EXISTS(SELECT * FROM LookupMasterItem WHERE LookupMasterId IN(SELECT top 1 Id FROM LookupMaster WHERE NAME='AdverseEventOutcome') AND LookupItemId IN(SELECT top 1 Id FROM LookupItem WHERE Name='Requires intervention to prevent permanent damage'))
+	BEGIN
+		INSERT INTO LookupMasterItem(LookupMasterId,LookupItemId,DisplayName,OrdRank)VALUES((SELECT top 1 Id FROM LookupMaster WHERE NAME='AdverseEventOutcome'),(SELECT top 1 Id FROM LookupItem WHERE Name='Requires intervention to prevent permanent damage'),'Requires intervention to prevent permanent damage',5)
+	END	
+
+	IF NOT EXISTS(SELECT * FROM LookupMasterItem WHERE LookupMasterId IN(SELECT top 1 Id FROM LookupMaster WHERE NAME='AdverseEventOutcome') AND LookupItemId IN(SELECT top 1 Id FROM LookupItem WHERE Name='Died due to ADR'))
+	BEGIN
+		INSERT INTO LookupMasterItem(LookupMasterId,LookupItemId,DisplayName,OrdRank)VALUES((SELECT top 1 Id FROM LookupMaster WHERE NAME='AdverseEventOutcome'),(SELECT top 1 Id FROM LookupItem WHERE Name='Died due to ADR'),'',6)
+	END	
+
+	IF NOT EXISTS(SELECT * FROM LookupMasterItem WHERE LookupMasterId IN(SELECT top 1 Id FROM LookupMaster WHERE NAME='AdverseEventOutcome') AND LookupItemId IN(SELECT top 1 Id FROM LookupItem WHERE Name='Died not due to ADR'))
+	BEGIN
+		INSERT INTO LookupMasterItem(LookupMasterId,LookupItemId,DisplayName,OrdRank)VALUES((SELECT top 1 Id FROM LookupMaster WHERE NAME='AdverseEventOutcome'),(SELECT top 1 Id FROM LookupItem WHERE Name='Died not due to ADR'),'Died not due to ADR',7)
+	END	
 
 
 	-- lookupmaster

@@ -57,3 +57,9 @@ GO
 
 
 	GO
+
+	-- add AdverseEventId column
+	If Exists(Select * from sys.columns where Name = N'AdverseEventId' AND Object_ID = Object_ID(N'AdverseEvent'))
+	BEGIN
+	  ALTER TABLE adverseEvent Add AdverseEventId int null
+	END
