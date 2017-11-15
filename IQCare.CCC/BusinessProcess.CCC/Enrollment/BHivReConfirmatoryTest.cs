@@ -31,5 +31,27 @@ namespace BusinessProcess.CCC.Enrollment
                 return hivReConfirmatoryTest;
             }
         }
+
+        public HivReConfirmatoryTest GetPersonLastReConfirmatoryTest(int personId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                HivReConfirmatoryTest reConfirmatoryTest = unitOfWork.HivReConfirmatoryTestRepository
+                    .FindBy(x => x.PersonId == personId && !x.DeleteFlag).FirstOrDefault();
+                unitOfWork.Dispose();
+                return reConfirmatoryTest;
+            }
+        }
+
+        public int UpdateHivReConfirmatoryTest(HivReConfirmatoryTest hivReConfirmatoryTest)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                unitOfWork.HivReConfirmatoryTestRepository.Update(hivReConfirmatoryTest);
+                unitOfWork.Complete();
+                unitOfWork.Dispose();
+                return hivReConfirmatoryTest.Id;
+            }
+        }
     }
 }
