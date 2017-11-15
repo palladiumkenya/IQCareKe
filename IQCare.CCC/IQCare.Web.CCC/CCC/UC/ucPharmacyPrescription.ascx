@@ -903,9 +903,12 @@
                     }
                 }
 
-                if (sumAllAbbr !== sumSelectedRegimen) {
-                    toastr.error("Error", "Selected Regimen is not equal to Prescribed Regimen!");
-                    return;
+                if (sumAllAbbr !== sumSelectedRegimen & treatmentPlanName === 'ART') {
+               
+                        toastr.error("Error", "Selected Regimen is not equal to Prescribed Regimen!");
+                        return;
+                    
+                   
                 }
                 else {
                     $.ajax({
