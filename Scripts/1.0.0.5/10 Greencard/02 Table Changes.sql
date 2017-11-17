@@ -77,3 +77,8 @@ GO
 	BEGIN
 	  ALTER TABLE adverseEvent Add AdverseEventId int null
 	END
+
+	If NOT Exists(Select * from sys.columns where Name = N'AuditData' AND Object_ID = Object_ID(N'ord_Visit'))
+	BEGIN
+		ALTER TABLE dbo.ord_Visit DROP COLUMN AuditData;
+	END
