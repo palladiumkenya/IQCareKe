@@ -70,3 +70,10 @@ BEGIN
 	ALTER TABLE [dbo].[PhysicalExamination] ADD FindingsNotes varchar(max) NULL;
 END
 GO
+	GO
+
+	-- add AdverseEventId column
+	If NOT Exists(Select * from sys.columns where Name = N'AdverseEventId' AND Object_ID = Object_ID(N'AdverseEvent'))
+	BEGIN
+	  ALTER TABLE adverseEvent Add AdverseEventId int null
+	END

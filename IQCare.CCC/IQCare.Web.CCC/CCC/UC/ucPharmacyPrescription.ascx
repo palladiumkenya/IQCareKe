@@ -909,7 +909,7 @@
                     }
                 }
 
-                if (sumAllAbbr !== sumSelectedRegimen) {
+                if (sumAllAbbr !== sumSelectedRegimen && treatmentPlanName === 'ART') {
                     toastr.error("Error", "Selected Regimen is not equal to Prescribed Regimen!");
                     return;
                 }
