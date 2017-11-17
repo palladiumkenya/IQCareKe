@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Script.Serialization;
 using System.Web.Services;
 using Entities.PatientCore;
 using IQCare.CCC.UILogic;
 using IQCare.Events;
 using Microsoft.JScript;
-using Newtonsoft.Json;
 using Convert = System.Convert;
 
 namespace IQCare.Web.CCC.WebService
@@ -47,7 +47,8 @@ namespace IQCare.Web.CCC.WebService
                 personId = patient.PersonId;
                 gender = patient.Sex;
 
-                var popCatgs = JsonConvert.DeserializeObject<IEnumerable<object>>(keyPop);
+                //var popCatgs = JsonConvert.DeserializeObject<IEnumerable<object>>(keyPop);
+                var popCatgs = new JavaScriptSerializer().Deserialize<IEnumerable<object>>(keyPop);
 
                 personManager.UpdatePerson(bioFirstName, bioMiddleName, bioLastName, gender, userId, personId);
                 msg = "<p>Patient Bio Updated Successfully</p>";

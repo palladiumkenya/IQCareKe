@@ -8,7 +8,6 @@ using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.Services;
 using System.Web.Services.Protocols;
-using Newtonsoft.Json;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -315,7 +314,8 @@ namespace IQCare.Web.CCC.WebService
                     oneTimeEventsDetails.PatientId = patientId;
                 }
 
-                Msg = JsonConvert.SerializeObject(oneTimeEventsDetails);
+                //Msg = JsonConvert.SerializeObject(oneTimeEventsDetails);
+                Msg = new JavaScriptSerializer().Serialize(oneTimeEventsDetails);
             }
             catch (Exception e)
             {

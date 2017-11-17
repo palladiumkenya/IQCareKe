@@ -19,8 +19,6 @@ using Application.Presentation;
 using Entities.CCC.Baseline;
 using Interface.CCC.Baseline;
 using IQCare.Events;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Convert = System.Convert;
 
 namespace IQCare.Web.CCC.WebService
@@ -124,7 +122,8 @@ namespace IQCare.Web.CCC.WebService
                 var personLookUp = new PersonLookUpManager();
                 var lookupLogic = new LookupLogic();
 
-                var identifiersObjects = JsonConvert.DeserializeObject<Dictionary<int, string>>(identifiersList);
+                //var identifiersObjects = JsonConvert.DeserializeObject<Dictionary<int, string>>(identifiersList);
+                var identifiersObjects = new JavaScriptSerializer().Deserialize<Dictionary<int, string>>(identifiersList);
                 String sDate = DateTime.Now.ToString();
                 DateTime datevalue = Convert.ToDateTime(sDate);
                 List<PatientLookup> isPersonEnrolled = patientLookUpManager.GetPatientByPersonId(PersonId);

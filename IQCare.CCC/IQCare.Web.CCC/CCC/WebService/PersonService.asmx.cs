@@ -16,7 +16,6 @@ using Entities.CCC.Lookup;
 using IQCare.CCC.UILogic.Enrollment;
 using IQCare.Events;
 using Microsoft.JScript;
-using Newtonsoft.Json;
 using Convert = System.Convert;
 
 namespace IQCare.Web.CCC.WebService
@@ -719,7 +718,9 @@ namespace IQCare.Web.CCC.WebService
                     PersonId = patient.PersonId;
                 }
 
-                var popCatgs = JsonConvert.DeserializeObject<IEnumerable<object>>(populationCategory);
+                
+                //var popCatgs = JsonConvert.DeserializeObject<IEnumerable<object>>(populationCategory);
+                var popCatgs = new JavaScriptSerializer().Deserialize<IEnumerable<object>>(populationCategory);
 
                 var personPoulation = new PatientPopulationManager();
                 var population = personPoulation.GetCurrentPatientPopulations(PersonId);

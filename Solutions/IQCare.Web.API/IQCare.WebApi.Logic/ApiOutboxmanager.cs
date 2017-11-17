@@ -16,7 +16,8 @@ namespace IQCare.WebApi.Logic
                 DateSent = apiOutbox.DateSent,
                 RecepientId = apiOutbox.RecepientId,
                 AttemptCount = 0,
-                Message = apiOutbox.Message
+                Message = apiOutbox.Message,
+                LogMessage = apiOutbox.LogMessage
             };
 
             return  _apiOutboxmanager.AddApiOutbox(outbox);
