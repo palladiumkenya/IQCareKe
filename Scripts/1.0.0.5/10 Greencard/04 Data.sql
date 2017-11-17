@@ -1,5 +1,13 @@
 
 
+UPDATE AppAdmin
+SET
+	AppVer='Ver 1.0.0.5 Kenya HMIS',
+	DBVer='Ver 1.0.0.5 Kenya HMIS',
+	RelDate='15-Nov-2017',
+	VersionName='Kenya HMIS Ver 1.0.0.5'
+
+
 --  UPDATE LookupItems
 	UPDATE LookupItem SET Name='Obese' WHERE Name='O' AND DisplayName='Overweight/Obese'
 	UPDATE LookupItem SET Name='Normal' WHERE Name='N' AND DisplayName='Normal'
