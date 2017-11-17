@@ -22,6 +22,8 @@ namespace Entities.CCC.Encounter
         public virtual PatientMasterVisit PatientMasterVisit { get; set; }
         public int ExaminationTypeId { get; set; }
         public int ExamId { get; set; }
-        public string Finding { get; set; }
+        public int FindingId { get; set; }
+        public string FindingsNotes { get; set; }
+
     }
 }

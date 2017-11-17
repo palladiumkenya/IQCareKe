@@ -1,6 +1,3 @@
-
-Go
-
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SCM_SavePurchaseOrderItem_Combined]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[SCM_SavePurchaseOrderItem_Combined]
 GO

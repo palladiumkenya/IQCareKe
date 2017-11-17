@@ -17,6 +17,7 @@ namespace IQCare.CCC.UILogic.assessment
         }
         public int AddPreparation(PatientPsychoscialCriteria _patientPsychosocialCriteria)
         {
+
             result = _PatientPsychosicialCriteriaManager.AddPreparation(_patientPsychosocialCriteria);
             return result;
         }

@@ -815,7 +815,7 @@
                     }
                     //setTimeout(function() { CccNumberExists(cccReferalNumber); }, 200);
                     ////console.log(baselineHivStatusDate);
-                    //console.log(isCccNumberExists);
+                    //console.log(hivTestingresultDate);
                     //validations
                     if (moment('' + dob + '').isAfter()) {
                         toastr.error("Date of birth cannot be a future date.");
@@ -840,7 +840,7 @@
                         return false;
                     }
 
-                    if (((hivTestingresultDate !== "") && !moment('' + hivTestingresultDate + '').isValid())) {
+                    if (((hivTestingresultDate !== "") && !moment(hivTestingresultDate, 'DD-MMM-YYYY').isValid())) {
                         toastr.error("HIV testing result date invalid.");
                         return false;
                     }
@@ -876,7 +876,7 @@
                         cccreferal = false;
                     }
                     if (baselineHivStatusDate != "") {
-                        baselineHivStatusDate = moment(baselineHivStatusDate).format("DD-MMM-YYYY");
+                        baselineHivStatusDate = moment(baselineHivStatusDate, 'DD-MMM-YYYY').format("DD-MMM-YYYY");
                     }
                     
                     if (fam.length > 0) {

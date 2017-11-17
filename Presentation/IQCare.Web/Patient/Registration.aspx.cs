@@ -24,7 +24,7 @@ namespace IQCare.Web.Patient
         DataSet theDSXML = new DataSet();
         string ObjFactoryParameter = "BusinessProcess.Clinical.BPatientRegistration, BusinessProcess.Clinical";
         string ObjFactoryParameterBCustom = "BusinessProcess.Clinical.BCustomForm, BusinessProcess.Clinical";
-        int FeatureId = 126, PatientId = 0, VisitID = 0, LocationId = 0;
+        int FeatureId = 126, patientId = 0, VisitID = 0, LocationId = 0;
         bool theConditional;
         Hashtable htParameters;
          struct RegistrationParameter
@@ -53,7 +53,7 @@ namespace IQCare.Web.Patient
         bool rdoTrueFalseStatus = true;
         protected void Page_PreRender(object sender, EventArgs e)
         {
-            if (PatientId > 0)
+            if (patientId > 0)
             {
                 btncontinue.Enabled = CurrentSession.Current.HasFunctionRight("PATIENT_REGISTRATION", FunctionAccess.Add);
             }
@@ -107,18 +107,18 @@ namespace IQCare.Web.Patient
                 Binddropdown();
                 txtRegDate.Text = DateTime.Now.ToString("dd-MMM-yyyy");
             }
-            PatientId = Convert.ToInt32(Session["PatientId"]);
+            patientId = Convert.ToInt32(Session["PatientId"]);
             LocationId = Convert.ToInt32(Session["AppLocationId"]);
             VisitID = Convert.ToInt32(ViewState["VisitPk"]);
             LoadPredefinedLabel_Field(FeatureId);
 
-            if (PatientId > 0)
+            if (patientId > 0)
             {
                 if (!IsPostBack)
                 {
-                    LoadPatientStaticData(PatientId);
+                    LoadPatientStaticData(patientId);
                     VisitID = Convert.ToInt32(ViewState["VisitPk"]);
-                    BindValue(PatientId, VisitID, LocationId, PnlDynamicElements);
+                    BindValue(patientId, VisitID, LocationId, PnlDynamicElements);
                 }
 
             }
@@ -3107,7 +3107,7 @@ namespace IQCare.Web.Patient
             }
 
            
-            if (PatientId == 0)
+            if (patientId == 0)
             {
                 HashTableParameter();
                 Session["htPtnRegParameter"] = htParameters;
@@ -3115,15 +3115,30 @@ namespace IQCare.Web.Patient
                 Session["CustomRegistration"] = Add;
                 SaveCancel();
             }
-            else if (PatientId > 0)
+            else if (patientId > 0)
             {
-                if (PatientService.ValidatePatientDate(Convert.ToDateTime(TxtDOB.Text), Convert.ToDateTime(txtRegDate.Text), PatientId))
+                if (PatientService.ValidatePatientDate(Convert.ToDateTime(TxtDOB.Text), Convert.ToDateTime(txtRegDate.Text), patientId))
                 {
-                    StringBuilder Edit = UpdateCustomRegistrationData(PatientId, VisitID, LocationId);
+                    StringBuilder Edit = UpdateCustomRegistrationData(patientId, VisitID, LocationId);
                     IPatientRegistration IPatientFormMgr = (IPatientRegistration)ObjectFactory.CreateInstance(ObjFactoryParameter);
                     DataSet Update = IPatientFormMgr.Common_GetSaveUpdateforCustomRegistrion(Edit.ToString());
                     if (Update.Tables[0].Rows.Count > 0)
                     {
+                        try
+                        {
+                         
+                            IPatientRegistration pReg;
+                            pReg = (IPatientRegistration)ObjectFactory.CreateInstance("BusinessProcess.Clinical.BPatientRegistration, BusinessProcess.Clinical");
+                            pReg.BlueCardToGreenCardSyncronise(patientId);
+                            pReg = null;
+                        }
+                        catch (Exception ex)
+                        {
+                            Exception lastError = ex;
+                            lastError.Data.Add("Domain", "Syncing to greencard");
+                            Application.Logger.EventLogger logger = new Application.Logger.EventLogger();
+                            logger.LogError(ex);
+                        }
                         UpdateCancel();
                     }
                 }

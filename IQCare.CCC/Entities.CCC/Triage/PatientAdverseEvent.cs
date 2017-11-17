@@ -17,6 +17,7 @@ namespace Entities.CCC.Triage
         public int PatientMasterVisitId { get; set; }
         [ForeignKey("PatientMasterVisitId")]
         public virtual PatientMasterVisit PatientMasterVisit { get; set; }
+        public int AdverseEventId { get; set; }
         public string EventName { get; set; }
         public string EventCause { get; set; }
         public string Severity { get; set; }

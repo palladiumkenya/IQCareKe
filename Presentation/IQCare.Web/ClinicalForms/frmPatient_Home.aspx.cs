@@ -1730,7 +1730,7 @@ namespace IQCare.Web.Clinical
                         // getCurrency();   
                         EnrollmentService pservice = new EnrollmentService(this.PatientId);
                         List<PatientEnrollment> enrollment = pservice.GetPatientEnrollment(session);
-                        this.IsCCC = enrollment.Exists(r => r.ServiceArea.Name.Contains("CCC")) ? "" : "none";
+                        this.IsCCC = enrollment.Exists( r => r.ServiceArea != null && r.ServiceArea.Name.Contains("CCC")) ? "" : "none";
                         enrollment.RemoveAll(r => r.ServiceAreaId == this.ModuleId);
                         rptServiceAreas.DataSource = enrollment;
                         rptServiceAreas.DataBind();

@@ -26,6 +26,23 @@ namespace IQCare.Web.CCC.UC
         public int PatientMasterVisitId;
         public int age;
         public string Weight = "0";
+
+        protected int UserId
+        {
+            get { return Convert.ToInt32(Session["AppUserId"]); }
+        }
+
+        protected int PtnId
+        {
+            get { return Convert.ToInt32(Session["PatientPK"]); }
+        }
+
+        protected int PmVisitId
+        {
+            get { return Convert.ToInt32(Session["patientMasterVisitId"]); }
+        }
+
+
         //private readonly ILookupManager _lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
         private readonly IPatientLookupmanager _patientLookupmanager = (IPatientLookupmanager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientLookupManager, BusinessProcess.CCC");
         private readonly ILookupManager _lookupItemManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
@@ -61,6 +78,7 @@ namespace IQCare.Web.CCC.UC
                 status.SelectedIndex = 1;
                 status.Enabled = false;
             }
+
 
             List<LookupItemView> whoStage = mgr.GetLookItemByGroup("WHOStage");
             if (whoStage != null && whoStage.Count > 0)
@@ -216,7 +234,7 @@ namespace IQCare.Web.CCC.UC
             {
                 systemsOkNo.Checked = true;
             }
-            else if(theDT.Rows.Count == 0 && isOnEdit)
+            else if (theDT.Rows.Count == 0 && isOnEdit)
             {
                 systemsOkYes.Checked = true;
             }

@@ -1,9 +1,8 @@
 ﻿using Application.Common;
-using Application.Presentation;
+using  Application.Presentation;
 using Entities.Administration;
 using Interface.Administration;
 using Interface.Clinical;
-using Interface.Security;
 using IQCare.Web.UILogic;
 using System;
 using System.Collections;
@@ -14,7 +13,6 @@ using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Entities.PatientCore;
 
 namespace IQCare.Web.Patient
 {
@@ -245,7 +243,8 @@ namespace IQCare.Web.Patient
                 txtenrollmentDate.Focus();
                 return false;
             }
-            if (ViewState["CareEndedDate"] != null)
+
+            if (ViewState["CareEndedDate"] !=null && !String.IsNullOrWhiteSpace(ViewState["CareEndedDate"].ToString()))
             {
                 if (theReEnrolDate > theCurrentDate)
                 {
@@ -283,20 +282,29 @@ namespace IQCare.Web.Patient
         /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         protected void btnSaveContinue_Click(object sender, EventArgs e)
         {
+            var validation = FieldValidation();
 
-            if (FieldValidation() == false)
+            if (validation == false)
             {
                 return;
             }
             SavePatientRegistration();
             if (InsertUpdateIdentifiers() == true)
             {
-                int patientID = Convert.ToInt32(Session["PatientId"]);
-                IPatientRegistration pReg;
-                pReg = (IPatientRegistration)ObjectFactory.CreateInstance("BusinessProcess.Clinical.BPatientRegistration, BusinessProcess.Clinical");
-                pReg.BlueCardToGreenCardSyncronise(patientID);
-                pReg = null;
-
+                try
+                {
+                    int patientID = Convert.ToInt32(Session["PatientId"]);
+                    IPatientRegistration pReg;
+                    pReg = (IPatientRegistration)ObjectFactory.CreateInstance("BusinessProcess.Clinical.BPatientRegistration, BusinessProcess.Clinical");
+                    pReg.BlueCardToGreenCardSyncronise(patientID);
+                    pReg = null;
+                }
+                catch(Exception ex) {
+                    Exception lastError = ex;                                     
+                    lastError.Data.Add("Domain", "Syncing to greencard");
+                    Application.Logger.EventLogger logger = new Application.Logger.EventLogger();
+                    logger.LogError(ex);
+                }
                 Session["status"] = "Add";
                 IQCareMsgBox.NotifyAction("Service Registration Form saved successfully.", "Patient Registration", false, this, string.Format("javascript:window.location.href='{0}'", this.RedirectUrl));
             }

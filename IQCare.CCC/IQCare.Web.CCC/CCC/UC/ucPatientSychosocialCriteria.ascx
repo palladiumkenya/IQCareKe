@@ -149,7 +149,7 @@ daily administration of ART, and meets the criteria above?</label>
 </div>
 
 <div class="col-md-12">
-    <div class="panel panel-default" data-state="collapsed">
+    <div class="panel panel-default" id="PsychosocialSupport" data-state="collapsed">
         <div class="panel-heading">
             <div class="panel-title">
                 <h5>B. Support Systems Criteria (applies to patients and caregivers)</h5>
@@ -231,7 +231,11 @@ counselling session?</label>
 
         $("#divMessage").hide('fast', function () { $("#divsuccess").hide();});
 
-        $('.panel').lobiPanel({ options: {} });
+        $('#psychoCriteria').lobiPanel({ options: {} });
+
+        $('#PsychosocialSupport').lobiPanel({ options: {} });
+
+        
 
 	    $("#benefitsART").onoff();$("#screenAlcohol").onoff();$("#depression").onoff();$("#disclosure").onoff();$("#administerART").onoff();$("#effectsART").onoff();
 		$("#dependents").onoff();$("#adherenceBarriers").onoff();$("#locator").onoff();$("#caregiver").onoff();
@@ -276,9 +280,19 @@ counselling session?</label>
                 isDonePyschosocialCriteria = response.d;
                 if (isDonePyschosocialCriteria < 1) {
 
-                $("#divMessage").show('fast', function () { $("#danger").append("ART Treatment Preparation Assessment is PENDING! --for this Client"); });                   
+                $("#divMessage").show('fast', function() {
+                    $("#danger").append("ART Treatment Preparation Assessment is PENDING! --for this Client");
+                    //enable buttons
+                    $("#btnPsychosocialCriterial").prop('disabled', false);
+                    $("#btnSupportSystemCriteria").prop('disabled', false);
+                });                   
                 } else {
-                    $("#divsuccess").show('fast', function () { $("#success").append("ART Treatment Preparation Completed! | View Answers for the ART prep Questions"); });   
+                    $("#divsuccess").show('fast', function() {
+                        $("#success").append("ART Treatment Preparation Completed! | View Answers for the ART prep Questions");
+                       // disbale buttons
+                        $("#btnPsychosocialCriterial").prop('disabled', true);
+                        $("#btnSupportSystemCriteria").prop('disabled', true);
+                    });   
                 }
 
                 $.ajax({
@@ -303,7 +317,8 @@ counselling session?</label>
                             if (itemList.AccurateLocator) { $("#locator").prop("checked", true); }
                             if (itemList.startART) { $("#caregiver").prop("checked", true); }
                         });
-                        //$("#btnPsychosocialCriterial").prop('disabled', true);
+                        //if (response.d !=='') { $("#btnPsychosocialCriterial").prop('disabled', true);}
+                        
                     },
                     error: function (xhr, errorType, exception) {
                         var jsonError = jQuery.parseJSON(xhr.responseText);
@@ -322,7 +337,7 @@ counselling session?</label>
         
             $("#btnPsychosocialCriterial").click(function () {
 
-                if (isDonePyschosocialCriteria == 0) {
+                if (isDonePyschosocialCriteria === 0) {
                     $.ajax({
                         type: "POST",
                         url: "../WebService/PatientTreatmentpreparation.asmx/AddPatientPsychosocialCriteria",
@@ -357,16 +372,17 @@ counselling session?</label>
                     dataType: "json",
                     success: function (response) {
                         var itemList = response.d;
+                        //if (response.d !== '') {
+                        //    $("#btnSupportSystemCriteria").prop('disabled', true);
+                        //}
                         $.each(itemList, function (index, itemList) {
 
-                            if (itemList.TakingART == true) { $("#convinient").prop("checked", true); }
-                            if (itemList.TSIdentified == true) { $("#TSIdentified").prop("checked", true); }
-                            if (itemList.supportGroup == true) { $("#supportGroup").prop("checked", true); }
-                            if (itemList.EnrollSMSReminder == true) { $("#EnrollSMSReminder").prop("checked", true); }
-                            if (itemList.OtherSupportSystems == true) { $("#OtherSupportSystem").prop("checked", true); }
+                            if (itemList.TakingART === true) { $("#convinient").prop("checked", true); }
+                            if (itemList.TSIdentified === true) { $("#TSIdentified").prop("checked", true); }
+                            if (itemList.supportGroup === true) { $("#supportGroup").prop("checked", true); }
+                            if (itemList.EnrollSMSReminder === true) { $("#EnrollSMSReminder").prop("checked", true); }
+                            if (itemList.OtherSupportSystems === true) { $("#OtherSupportSystem").prop("checked", true); }
                         });
-                        //$("#btnSupportSystemCriteria").prop('disabled', true);
-
                     },
                     error: function (xhr, errorType, exception) {
                         var jsonError = jQuery.parseJSON(xhr.responseText);
@@ -384,7 +400,7 @@ counselling session?</label>
 
        $("#btnSupportSystemCriteria").click(function () {
            debugger;
-            if (isDoneSupportSystemCriteria == 0) {
+            if (isDoneSupportSystemCriteria === 0) {
                 $.ajax({
                     type: "POST",
                     url: "../WebService/PatientTreatmentpreparation.asmx/AddPatientSupportSystemCriteria",
