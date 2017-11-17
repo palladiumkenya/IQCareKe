@@ -416,9 +416,9 @@ namespace RemServer.Service
                 RemotingConfiguration.RegisterWellKnownServiceType(typeof(BusinessServerFactory), "BusinessProcess.rem", WellKnownObjectMode.Singleton);
                 theLog.WriteEntry(string.Format("{0} Started", theSRV_Name));
 
-                Thread ilThread = new Thread(new ThreadStart(DataAccess.Interop.SocketListenerAsync.StartListening));
+                //Thread ilThread = new Thread(new ThreadStart(DataAccess.Interop.SocketListenerAsync.StartListening));
 
-                ilThread.Start();
+                //ilThread.Start();
             }
             catch (Exception err)
             {

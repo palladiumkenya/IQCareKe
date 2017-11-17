@@ -3,22 +3,18 @@ using DataAccess.Base;
 using Entity.WebApi;
 using Interface.WebApi;
 using IQCare.CCC.UILogic.Interoperability;
-using IQCare.DTO;
+using IQCare.CCC.UILogic.Interoperability.Appointment;
+using IQCare.CCC.UILogic.Interoperability.Enrollment;
+using IQCare.CCC.UILogic.Interoperability.Observation;
 using IQCare.Events;
 using IQCare.WebApi.Logic.EntityMapper;
+using IQCare.WebApi.Logic.Helpers;
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
-using IQCare.CCC.UILogic.Interoperability.Appointment;
-using IQCare.CCC.UILogic.Interoperability.Enrollment;
-using IQCare.CCC.UILogic.Interoperability.Observation;
-using IQCare.DTO.CommonEntities;
-using IQCare.WebApi.Logic.Helpers;
-using IQCare.WebApi.Logic.MappingEntities.drugs;
 
 
 namespace IQCare.WebApi.Logic.MessageHandler
