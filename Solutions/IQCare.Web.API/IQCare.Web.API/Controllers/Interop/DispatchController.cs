@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
+using System.Web.Script.Serialization;
 using IQCare.Events;
 using IQCare.WebApi.Logic.MessageHandler;
 

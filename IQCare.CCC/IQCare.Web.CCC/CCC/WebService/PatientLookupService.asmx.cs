@@ -5,8 +5,7 @@ using System.Web.Services;
 using Application.Common;
 using Entities.CCC.Lookup;
 using IQCare.CCC.UILogic;
-using Newtonsoft.Json;
-
+using System.Web.Script.Serialization;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -210,7 +209,9 @@ namespace IQCare.Web.CCC.WebService
                             //,utility.Decrypt(x.MobileNumber)
                         })
                     };
-                    output = JsonConvert.SerializeObject(json);
+
+                    //output = JsonConvert.SerializeObject(json);
+                    output = new JavaScriptSerializer().Serialize(json);
                 }
             }
             catch (Exception e)
@@ -279,7 +280,9 @@ namespace IQCare.Web.CCC.WebService
                     };
                     patientList= json;
                 }
-                return JsonConvert.SerializeObject(patientList);
+
+                //return JsonConvert.SerializeObject(patientList);
+                return new JavaScriptSerializer().Serialize(patientList);
             }
             catch (Exception e)
             {
@@ -355,7 +358,8 @@ namespace IQCare.Web.CCC.WebService
                 throw;
             }
 
-            return JsonConvert.SerializeObject(newresults);
+            //return JsonConvert.SerializeObject(newresults);
+            return new JavaScriptSerializer().Serialize(newresults);
         }
     }
     public class Data

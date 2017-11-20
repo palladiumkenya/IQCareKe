@@ -16,7 +16,6 @@ using IQCare.CCC.UILogic.Baseline;
 using IQCare.CCC.UILogic.Screening;
 using Microsoft.JScript;
 using Convert = System.Convert;
-using Newtonsoft.Json;
 using System.Web;
 using System.Web.Script.Serialization;
 using Entities.CCC.Encounter;
@@ -149,7 +148,9 @@ namespace IQCare.Web.CCC.WebService
             DateTime? linkageDate;
             bool dobPrecision;
 
-            FamilyMembers[] familyMembrs = JsonConvert.DeserializeObject<FamilyMembers[]>(familyMembers);
+            //FamilyMembers[] familyMembrs = JsonConvert.DeserializeObject<FamilyMembers[]>(familyMembers);
+            FamilyMembers[] familyMembrs = new JavaScriptSerializer().Deserialize<FamilyMembers[]>(familyMembers);
+
             int count = familyMembrs.Length;
             for(int i=0; i < count; i++)
             {

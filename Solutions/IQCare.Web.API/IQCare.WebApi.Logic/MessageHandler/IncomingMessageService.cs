@@ -1,17 +1,16 @@
 ﻿using AutoMapper;
 using Entity.WebApi;
 using Interface.WebApi;
-using IQCare.CCC.UILogic.Interoperability;
-using IQCare.DTO.PatientRegistration;
 using IQCare.WebApi.Logic.DtoMapping;
 using IQCare.WebApi.Logic.MappingEntities;
 using System;
 using System.Web.Script.Serialization;
+using IQCare.CCC.UILogic.Interoperability;
 using IQCare.CCC.UILogic.Interoperability.Appointment;
 using IQCare.CCC.UILogic.Interoperability.Enrollment;
 using IQCare.DTO;
-using IQCare.DTO.CommonEntities;
 using IQCare.DTO.PatientAppointment;
+using IQCare.DTO.PatientRegistration;
 
 namespace IQCare.WebApi.Logic.MessageHandler
 {

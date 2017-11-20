@@ -27,9 +27,12 @@ namespace IQCare.Events
                 {
                     string host = HttpContext.Current.Request.Url.Host;
                     string interopApiPort = ConfigurationManager.AppSettings.Get("InteropApiPort");
-                    string uri = "http://" + host + ":" + interopApiPort;
+                    string apiSite = ConfigurationManager.AppSettings.Get("ApiSiteName");
+                    string interopUri = ConfigurationManager.AppSettings.Get("InteropApiIQCareUri");
 
-                    httpClient.BaseAddress = new Uri(uri);
+                    string uri = "http://" + host + ":" + interopApiPort + apiSite;
+
+                    httpClient.BaseAddress = new Uri(interopUri);
                     httpClient.DefaultRequestHeaders.Accept.Clear();
                     httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
