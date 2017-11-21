@@ -805,7 +805,7 @@
 
 									$.when(addPersonPopulation()).then(function () {
 										setTimeout(function() {
-													window.location
+													window.locationex
 														.href =
 														'<%=ResolveClientUrl( "~/CCC/Enrollment/ServiceEnrollment.aspx")%>';
 												},
