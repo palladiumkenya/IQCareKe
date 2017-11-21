@@ -123,7 +123,7 @@ namespace IQCare.Web.CCC.WebService
                 var lookupLogic = new LookupLogic();
 
                 //var identifiersObjects = JsonConvert.DeserializeObject<Dictionary<int, string>>(identifiersList);
-                var identifiersObjects = new JavaScriptSerializer().Deserialize<Dictionary<int, string>>(identifiersList);
+                var identifiersObjects = new JavaScriptSerializer().Deserialize<Dictionary<string, string>>(identifiersList);
                 String sDate = DateTime.Now.ToString();
                 DateTime datevalue = Convert.ToDateTime(sDate);
                 List<PatientLookup> isPersonEnrolled = patientLookUpManager.GetPatientByPersonId(PersonId);
@@ -131,7 +131,7 @@ namespace IQCare.Web.CCC.WebService
 
                 foreach (var item in identifiersObjects)
                 {
-                    var identifiers = patientIdentifierManager.CheckIfIdentifierNumberIsUsed(item.Value, item.Key);
+                    var identifiers = patientIdentifierManager.CheckIfIdentifierNumberIsUsed(item.Value, Convert.ToInt32(item.Key));
                     if (identifiers.Count > 0)
                     {
                         foreach (var items in identifiers)
@@ -248,7 +248,7 @@ namespace IQCare.Web.CCC.WebService
 
                             foreach (var item in identifiersObjects)
                             {
-                                if (item.Key == 1)
+                                if (Convert.ToInt32(item.Key) == 1)
                                 {
                                     enrollmentBlueCardId = item.Value;
                                 }
@@ -286,10 +286,10 @@ namespace IQCare.Web.CCC.WebService
                             foreach (var item in identifiersObjects)
                             {
                                 patientIdentifierId = patientIdentifierManager.addPatientIdentifier(patientId,
-                                patientEnrollmentId, item.Key, item.Value, facilityId);
+                                patientEnrollmentId, Convert.ToInt32(item.Key), item.Value, facilityId);
                                 
                                 var identifierManager = new IdentifierManager();
-                                var identifierList = identifierManager.GetIdentifiersById(item.Key);
+                                var identifierList = identifierManager.GetIdentifiersById(Convert.ToInt32(item.Key));
                                 var hivtesting = _hivTestingManager.GetAll().OrderByDescending(y => y.Id).FirstOrDefault(n => n.PersonId == PersonId);
                                 if (identifierList.Count > 0)
                                 {
@@ -372,7 +372,7 @@ namespace IQCare.Web.CCC.WebService
                         foreach (var item in identifiersObjects)
                         {
                             var identifiersByPatientId = patientIdentifierManager
-                                .GetPatientEntityIdentifiersByPatientId(patient[0].Id, item.Key);
+                                .GetPatientEntityIdentifiersByPatientId(patient[0].Id, Convert.ToInt32(item.Key));
 
                             if (identifiersByPatientId.Count > 0)
                             {
@@ -402,7 +402,7 @@ namespace IQCare.Web.CCC.WebService
                                 patientEnrollmentId = patientEnrollmentManager.addPatientEnrollment(patient[0].Id, enrollmentDate, userId);
                                 patientEntryPointId = patientEntryPointManager.addPatientEntryPoint(patient[0].Id, entryPointId, userId);
                                 patientIdentifierId = patientIdentifierManager.addPatientIdentifier(patient[0].Id,
-                                    patientEnrollmentId, item.Key, item.Value, facilityId);
+                                    patientEnrollmentId, Convert.ToInt32(item.Key), item.Value, facilityId);
                             }
                         }
                     }

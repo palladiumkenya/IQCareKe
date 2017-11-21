@@ -61,9 +61,6 @@
     <Reference Include="BusinessProcess.FormBuilder">
       <HintPath>..\..\References\BusinessProcess.FormBuilder.dll</HintPath>
     </Reference>
-    <Reference Include="BusinessProcess.Interop">
-      <HintPath>..\..\References\BusinessProcess.Interop.dll</HintPath>
-    </Reference>
     <Reference Include="BusinessProcess.IQReports">
       <HintPath>..\..\References\BusinessProcess.IQReports.dll</HintPath>
     </Reference>
@@ -112,9 +109,6 @@
     <Reference Include="DataAccess.Entity">
       <HintPath>..\..\References\DataAccess.Entity.dll</HintPath>
     </Reference>
-    <Reference Include="DataAccess.Interop">
-      <HintPath>..\..\References\DataAccess.Interop.dll</HintPath>
-    </Reference>
     <Reference Include="DataAccess.Lookup">
       <HintPath>..\..\References\DataAccess.Lookup.dll</HintPath>
     </Reference>
@@ -153,9 +147,6 @@
     </Reference>
     <Reference Include="Interface.FormBuilder">
       <HintPath>..\..\References\Interface.FormBuilder.dll</HintPath>
-    </Reference>
-    <Reference Include="Interface.Interop">
-      <HintPath>..\..\References\net461\Interface.Interop.dll</HintPath>
     </Reference>
     <Reference Include="Interface.IQToolsReport">
       <HintPath>..\..\References\Interface.IQToolsReport.dll</HintPath>
