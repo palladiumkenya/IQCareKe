@@ -157,7 +157,7 @@ namespace IQCare.Web.Billing
             this.ReverseTransaction.ErrorOccurred += new CommandEventHandler(ReverseTransaction_ErrorOccurred);
             this.ReverseTransaction.IsApprovalMode = false;
             this.ReverseTransaction.NotifyCommand += new CommandEventHandler(ReverseTransaction_NotifyCommand);
-            session.SetCurrentPatient(Convert.ToInt16(base.Session["PatientId"].ToString()));
+            session.SetCurrentPatient(Convert.ToInt32(base.Session["PatientId"].ToString()));
             this.ReverseTransaction.PatientId = session.CurrentPatient.Id;
             this.ReverseTransaction.LocationId = session.Facility.Id;
 
