@@ -705,46 +705,46 @@
 												<div class="col-md-12">
 													<asp:DropDownList runat="server" ID="AdverseEventAction" CssClass="form-control input-sm" ClientIDMode="Static" />
 
-                                                </div>
-                                            </div>
-                                            <div class="col-md-1">
-                                                <div class="col-md-12">
-                                                    <label class="control-label pull-left"></label>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddMilestones" onclick="AddAdverseReaction();">Add</button>
-                                                </div>
-                                            </div>
-                                        
-                                            <div class="col-md-12 form-group" id="divAdverseEventOther"  clientidmode="Static" style="margin-top: 1%">
-                                                <div class="col-md-12"><label class="control-label pull-left text-primary"> Other Adverse Event(s)</label></div>
-                                                <div class="col-md-12">
-                                                    
-                                                    <asp:TextBox runat="server" ID="txtAdverseEventOther" CssClass="form-control" ClientIDMode="Static" placeholder="Provide Other Adverse Event(s) " ></asp:TextBox>
-                                                </div>
-                                            </div>
-                                      </div>
-                                        
-                                        
-                                    
-                                        <div class="col-md-12">
-                                            <div id="adverseEventsTable" class="panel panel-primary">
-                                                <div class="panel-heading">Adverse Events</div>
-                                                <div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden;">
-                                                    <table id="dtlAdverseEvents" class="table table-bordered table-striped" style="width: 100%">
-                                                        <thead>
-                                                        <tr>
-                                                            <th><span class="text-primary">SeverityID</span></th>
-                                                            <th><span class="text-primary">AdverseEventId</span></th>
-                                                            <th><span class="text-primary">Adverse Events</span></th>
-                                                            <th><span class="text-primary">Medicine Causing A/E</span></th>
-                                                            <th><span class="text-primary">Severity</span></th>
-                                                            <th><span class="text-primary">Action</span></th>
-                                                            <th><span class="text-primary">Adverse Event Outcome</span></th>
-                                                        </tr>
-                                                        </thead>
-                                                        <tbody id="dtlAdverseEventsBdy"></tbody>
-                                                    </table>
+												</div>
+											</div>
+											<div class="col-md-1">
+												<div class="col-md-12">
+													<label class="control-label pull-left"></label>
+												</div>
+												<div class="col-md-12">
+													<button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddMilestones" onclick="AddAdverseReaction();">Add</button>
+												</div>
+											</div>
+										
+											<div class="col-md-12 form-group" id="divAdverseEventOther"  clientidmode="Static" style="margin-top: 1%">
+												<div class="col-md-12"><label class="control-label pull-left text-primary"> Other Adverse Event(s)</label></div>
+												<div class="col-md-12">
+													
+													<asp:TextBox runat="server" ID="txtAdverseEventOther" CssClass="form-control" ClientIDMode="Static" placeholder="Provide Other Adverse Event(s) " ></asp:TextBox>
+												</div>
+											</div>
+									  </div>
+										
+										
+									
+										<div class="col-md-12">
+											<div id="adverseEventsTable" class="panel panel-primary">
+												<div class="panel-heading">Adverse Events</div>
+												<div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden;">
+													<table id="dtlAdverseEvents" class="table table-bordered table-striped" style="width: 100%">
+														<thead>
+														<tr>
+															<th><span class="text-primary">SeverityID</span></th>
+															<th><span class="text-primary">AdverseEventId</span></th>
+															<th><span class="text-primary">Adverse Events</span></th>
+															<th><span class="text-primary">Medicine Causing A/E</span></th>
+															<th><span class="text-primary">Severity</span></th>
+															<th><span class="text-primary">Action</span></th>
+															<th><span class="text-primary">Adverse Event Outcome</span></th>
+														</tr>
+														</thead>
+														<tbody id="dtlAdverseEventsBdy"></tbody>
+													</table>
 
 												</div>
 											</div>
@@ -2119,10 +2119,10 @@
 	var Age = "<%=age%>";
 	var isNoneChecked = false;
 
-    var PatientId = "<%=PtnId%>";
-    var PatientMasterVisitId = "<%=PmVisitId%>";
-    var adverseEventName = "";
-    var adverseEventId = 0;
+	var PatientId = "<%=PtnId%>";
+	var PatientMasterVisitId = "<%=PmVisitId%>";
+	var adverseEventName = "";
+	var adverseEventId = 0;
 
 	document.getElementById('txtPresentingComplaintsID').style.display = 'none';
 	document.getElementById('txtAllergyId').style.display = 'none';
@@ -2173,20 +2173,20 @@
 		showHideVisitByTS();
 		GetPatientExaminationTypeID();
 
-        // Manage adverse Events
-        $("#divAdverseEventOther").hide("fast");
-        $("#adverseEvent").focusout(function () {
-                if (adverseEventName === 'Other Specify') {
-                    $("#divAdverseEventOther").show("fast");
-                } else {
-                    $("#divAdverseEventOther").hide("fast"); 
-                }
-            });
+		// Manage adverse Events
+		$("#divAdverseEventOther").hide("fast");
+		$("#adverseEvent").focusout(function () {
+				if (adverseEventName === 'Other Specify') {
+					$("#divAdverseEventOther").show("fast");
+				} else {
+					$("#divAdverseEventOther").hide("fast"); 
+				}
+			});
 
-        //Show the AdverseEventModal Windows
-        function loadAdverseEventOutcome() {
-            $("#AdverseEventOutcomeModel").modal('show');
-        }
+		//Show the AdverseEventModal Windows
+		function loadAdverseEventOutcome() {
+			$("#AdverseEventOutcomeModel").modal('show');
+		}
 
 		//outcome date
 		$('#outcomeDate').datepicker({
@@ -2432,28 +2432,28 @@
 		//Gender validations
 		var male = "Male";
 
-        var advEventsTable = $('#dtlAdverseEvents').DataTable({
-            ajax: {
-                type: "POST",
-                url: "../WebService/PatientEncounterService.asmx/GetAdverseEvents",
-                dataSrc: 'd',
-                contentType: "application/json; charset=utf-8",
-                dataType: "json"
-            },
-            paging: false,
-            searching: false,
-            info: false,
-            ordering: false,
-            columnDefs: [
-                {
-                    "targets": [0], "visible": false, "searchable": false
-                    
-                },
-                {
-                    "targets": [1], "visible": false, "searchable": false
-                }
-            ]
-        });
+		var advEventsTable = $('#dtlAdverseEvents').DataTable({
+			ajax: {
+				type: "POST",
+				url: "../WebService/PatientEncounterService.asmx/GetAdverseEvents",
+				dataSrc: 'd',
+				contentType: "application/json; charset=utf-8",
+				dataType: "json"
+			},
+			paging: false,
+			searching: false,
+			info: false,
+			ordering: false,
+			columnDefs: [
+				{
+					"targets": [0], "visible": false, "searchable": false
+					
+				},
+				{
+					"targets": [1], "visible": false, "searchable": false
+				}
+			]
+		});
 
 		$("#btnSaveChangesOutcome").on('click',
 			function() {
@@ -2464,9 +2464,9 @@
 
 
 
-                //$("#dtlAdverseEventsBdy tr").each(function () {
-                //    alert($(this).find("td").eq(2).html());
-                //});
+				//$("#dtlAdverseEventsBdy tr").each(function () {
+				//    alert($(this).find("td").eq(2).html());
+				//});
 
 				//var ae = $("#adverseEventLable").text();
 				//alert(ae);
@@ -2883,8 +2883,8 @@
 					if (data.direction === 'previous') {
 						return;
 					} else {
-                        $('#datastep3').parsley().destroy();
-                        $("#<%=ddlExaminationType.ClientID%>").attr('disabled', 'disabled');
+						$('#datastep3').parsley().destroy();
+						$("#<%=ddlExaminationType.ClientID%>").attr('disabled', 'disabled');
 						$('#datastep3').parsley({
 							excluded:
 								"input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
@@ -2897,8 +2897,8 @@
 							return false;
 						}
 
-                        if ($('#datastep3').parsley().validate()) {
-                            $("#<%=ddlExaminationType.ClientID%>").prop('disabled', false);
+						if ($('#datastep3').parsley().validate()) {
+							$("#<%=ddlExaminationType.ClientID%>").prop('disabled', false);
 							$.when(savePatientPhysicalExams(evt)).then(function () {
 								setTimeout(function () { saveWhoStage(); },2000);
 							});
@@ -2966,21 +2966,21 @@
 			var visitDate = $("#<%=VisitDate.ClientID%>").val();
 			var visitScheduled = $("input[name$=Scheduled]:checked").val();
 
-            var visitBy = $("#<%=ddlVisitBy.ClientID%>").find(":selected").val();
-            var anyComplaints = $("input[name$=anyComplaints]:checked").val();
-            var adverseEvents = $("input[name$=adverseEvents]:checked").val();
-            var complaints = $("#<%=complaints.ClientID%>").val();
-            var tbscreening = $("#<%=tbscreeningstatus.ClientID%>").find(":selected").val();
-            var nutritionscreening = $("#<%=nutritionscreeningstatus.ClientID%>").find(":selected").val();
-            
+			var visitBy = $("#<%=ddlVisitBy.ClientID%>").find(":selected").val();
+			var anyComplaints = $("input[name$=anyComplaints]:checked").val();
+			var adverseEvents = $("input[name$=adverseEvents]:checked").val();
+			var complaints = $("#<%=complaints.ClientID%>").val();
+			var tbscreening = $("#<%=tbscreeningstatus.ClientID%>").find(":selected").val();
+			var nutritionscreening = $("#<%=nutritionscreeningstatus.ClientID%>").find(":selected").val();
+			
 
-            /////////////////////////////////////////////////////
-            if (anyComplaints === 1) {
-                if (!presentingComplaintsTable.data().any()) {
-                    toastr.error("Presenting Complaints", "Presenting complaints missing.");
-                    evt.preventDefault();
-                }
-            }
+			/////////////////////////////////////////////////////
+			if (anyComplaints === 1) {
+				if (!presentingComplaintsTable.data().any()) {
+					toastr.error("Presenting Complaints", "Presenting complaints missing.");
+					evt.preventDefault();
+				}
+			}
 
 			if (adverseEvents === 1) {
 				if (!advEventsTable.data().any()) {
@@ -2989,30 +2989,30 @@
 				}
 			}
 
-            
-            ///////////////////////////////////////////////////////
-            var rowCount = $('#dtlAdverseEvents tbody tr').length;
-            var adverseEventsArray = new Array();
-            try {
-                for (var i = 0; i < rowCount; i++) {
-                    adverseEventsArray[i] = {
-                        //"adverseSeverityID": advEventsTable.row(i).data()[0],
-                        //"adverseEvetId":adverseEvent,
-                        //"adverseEvent": advEventsTable.row(i).data()[1],
-                        //"medicineCausingAE": advEventsTable.row(i).data()[2],
-                        //"adverseSeverity": advEventsTable.row(i).data()[3],
-                        //"adverseAction": advEventsTable.row(i).data()[4]
+			
+			///////////////////////////////////////////////////////
+			var rowCount = $('#dtlAdverseEvents tbody tr').length;
+			var adverseEventsArray = new Array();
+			try {
+				for (var i = 0; i < rowCount; i++) {
+					adverseEventsArray[i] = {
+						//"adverseSeverityID": advEventsTable.row(i).data()[0],
+						//"adverseEvetId":adverseEvent,
+						//"adverseEvent": advEventsTable.row(i).data()[1],
+						//"medicineCausingAE": advEventsTable.row(i).data()[2],
+						//"adverseSeverity": advEventsTable.row(i).data()[3],
+						//"adverseAction": advEventsTable.row(i).data()[4]
 
-                        "adverseSeverityID": advEventsTable.row(i).data()[0],
-                        "adverseEventId": advEventsTable.row(i).data()[1],
-                        "adverseEvent": advEventsTable.row(i).data()[2],
-                        "medicineCausingAE": advEventsTable.row(i).data()[3],
-                        "adverseSeverity": advEventsTable.row(i).data()[4],
-                        "adverseAction": advEventsTable.row(i).data()[5]
-                    }
-                }
-            }
-            catch (ex) { }
+						"adverseSeverityID": advEventsTable.row(i).data()[0],
+						"adverseEventId": advEventsTable.row(i).data()[1],
+						"adverseEvent": advEventsTable.row(i).data()[2],
+						"medicineCausingAE": advEventsTable.row(i).data()[3],
+						"adverseSeverity": advEventsTable.row(i).data()[4],
+						"adverseAction": advEventsTable.row(i).data()[5]
+					}
+				}
+			}
+			catch (ex) { }
 
 
 
@@ -3914,14 +3914,14 @@
 			minChars: 1
 		});
 
-        document.getElementById('<%= adverseEvent.ClientID %>').addEventListener('awesomplete-selectcomplete', function () {
-            var result = this.value.split("~");
-            $("#<%=adverseEventId.ClientID%>").val(result[0]);
-            $("#<%=adverseEvent.ClientID%>").val(result[1]);
-            adverseEventName = result[1];
-            adverseEventId = result[0];
+		document.getElementById('<%= adverseEvent.ClientID %>').addEventListener('awesomplete-selectcomplete', function () {
+			var result = this.value.split("~");
+			$("#<%=adverseEventId.ClientID%>").val(result[0]);
+			$("#<%=adverseEvent.ClientID%>").val(result[1]);
+			adverseEventName = result[1];
+			adverseEventId = result[0];
 
-        });
+		});
 
 		$.ajax({
 			type: "POST",
@@ -4206,6 +4206,23 @@
 				opt.disabled = false;
 			}
 		}
+	}
+
+
+	function GetPatientExaminationTypeID() {
+		$.ajax({
+			type: "POST",
+			url: "../WebService/LookupService.asmx/GetMasterIdByMasterName",
+			data: "{'groupName': 'ReviewOfSystems' }",
+			dataType: "json",
+			contentType: "application/json; charset=utf-8",
+
+			success: function (data) {
+				var serverData = data.d;
+				var obj = $.parseJSON(serverData);
+				$("#hfExaminationReviewSystems").val(obj);
+			}
+		});
 	}
 
 </script>
