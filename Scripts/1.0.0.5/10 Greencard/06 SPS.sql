@@ -3038,7 +3038,7 @@ End
 GO
 
 -- saveupdate pharmacy prescription
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_SaveUpdatePharmacy_GreenCard]') AND type in (N'P', N'PC'))
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_SaveUpdatePharmacy_GreenCard]') AND type in (N'P', N'PC'))
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3068,7 +3068,7 @@ ALTER PROCEDURE [dbo].[sp_SaveUpdatePharmacy_GreenCard]
                                                 
 As       
 Begin               
-	Declare @ptn_pharmacy int,@RegimenMap_Pk int,@ARTStartDate datetime,@Ptn_Pharmacy_Pk int=null, @ptn_pk int, @visitPK int
+	Declare @ptn_pharmacy int,@RegimenMap_Pk int,@ARTStartDate datetime,@Ptn_Pharmacy_Pk int=null , @ptn_pk int, @visitPK int
 
 	Select @RegimenType = Nullif(Ltrim(Rtrim(@RegimenType)), '')
 
@@ -3169,7 +3169,7 @@ Begin
 End
 
 -- get prescription
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_getPatientPharmacyPrescription]') AND type in (N'P', N'PC'))
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_getPatientPharmacyPrescription]') AND type in (N'P', N'PC'))
 /****** Object:  StoredProcedure [dbo].[sp_getPatientPharmacyPrescription]    Script Date: 11/21/2017 8:38:04 AM ******/
 SET ANSI_NULLS ON
 GO
