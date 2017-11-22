@@ -330,7 +330,7 @@
                                             
                     <div class="col-md-8">
                     <%--<div class="col-md-2"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-info btn-sm fa fa-plus-circle" OnClick="saveUpdatePharmacy();"> Save Prescription</asp:LinkButton></div>--%>
-                        <div class="col-md-3"><button type="button" Class="btn btn-info btn-sm fa fa-plus-circle" onclick="saveUpdatePharmacy();">Save Prescription</button></div>
+                        <div class="col-md-3"><button type="button" id="btnSavePrescription" name="btnSavePrescription" clientidmode="Static" Class="btn btn-info btn-sm fa fa-plus-circle" onclick="saveUpdatePharmacy();">Save Prescription</button></div>
                         <div class="col-md-3"><button type="button" Class="btn btn-warning btn-sm fa fa-refresh" onclick="resetPharmacyForm();">Reset Prescription</button></div>
                         <div class="col-md-3">
                             <button type="button" Class="btn btn-danger btn-sm  fa fa-times" id="btnClosePrecriptionModal" data-dismiss="modal">Close Prescription</button>
@@ -925,6 +925,7 @@
                             JSON.stringify(drugPrescriptionArray) + "', 'regimenText':'" + regimenText + "'}",
                         contentType: "application/json; charset=utf-8",
                         success: function (data) {
+                            $("#btnSavePrescription").prop("disabled", true);
                             toastr.success(data.d, "Saved successfully");
                             //$('#pharmacyModal').modal('hide');
 
@@ -947,6 +948,7 @@
                             JSON.stringify(drugPrescriptionArray) + "', 'regimenText':'" + regimenText + "'}",
                     contentType: "application/json; charset=utf-8",
                     success: function (data) {
+                        $("#btnSavePrescription").prop("disabled", true);
                         toastr.success(data.d, "Saved successfully");
                     },
                     error: function (data) {
