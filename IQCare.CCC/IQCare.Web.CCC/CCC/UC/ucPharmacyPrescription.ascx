@@ -931,6 +931,7 @@
 
                         },
                         error: function (data) {
+                            $("#btnSavePrescription").prop("disabled", false);
                             toastr.error(data.d, "Error");
                         }
                     });
@@ -952,6 +953,7 @@
                         toastr.success(data.d, "Saved successfully");
                     },
                     error: function (data) {
+                        $("#btnSavePrescription").prop("disabled", false);
                         toastr.error(data.d, "Error");
                     }
                 });
