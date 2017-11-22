@@ -219,3 +219,37 @@ FROM           [dbo].[Api_PatientDemographicsView] PDG  LEFT Outer JOIN
 
 
 GO
+
+
+IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[Api_PatientAppointmentsView]'))
+DROP VIEW [dbo].[Api_PatientAppointmentsView]
+GO
+
+/****** Object:  View [dbo].[Api_PatientAppointmentsView]    Script Date: 11/22/2017 4:19:44 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+
+CREATE VIEW [dbo].[Api_PatientAppointmentsView]
+AS
+SELECT
+ISNULL(ROW_NUMBER() OVER(ORDER BY PT.Id ASC), -1) AS Id,
+PT.Id AS PatientId,
+PA.Id AS AppointmentId,
+AppointmentReason = (SELECT ItemName FROM LookupItemView LV WHERE MasterName = 'AppointmentReason' AND LV.ItemId = PA.ReasonId),
+AppointmentDate = format(cast(PA.AppointmentDate as date),'yyyyMMdd'),
+AppointmentStatus = (SELECT ItemName FROM LookupItemView LV WHERE MasterName = 'AppointmentStatus' AND LV.ItemId = PA.StatusId),
+AppointmentType = (SELECT ItemName FROM LookupItemView LV WHERE MasterName = 'DifferentiatedCare' AND LV.ItemId = PA.DifferentiatedCareId),
+Description = PA.Description
+FROM            dbo.PatientAppointment AS PA
+INNER JOIN Patient PT ON PT.Id = PA.PatientId
+
+
+
+
+GO
