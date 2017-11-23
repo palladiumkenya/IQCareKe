@@ -1,6 +1,93 @@
-﻿/****** Object:  StoredProcedure [dbo].[PatientsNotSynced]    Script Date: 5/9/2017 3:16:05 PM ******/
+/****** Object:  StoredProcedure [dbo].[PatientsNotSynced]    Script Date: 5/9/2017 3:16:05 PM ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientsNotSynced]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[PatientsNotSynced]
+GO
+
+/****** Object:  StoredProcedure [dbo].[SP_Bluecard_ToGreenCard]    Script Date: 5/9/2017 3:16:05 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SP_Bluecard_ToGreenCard]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[SP_Bluecard_ToGreenCard]
+GO
+
+/****** Object:  StoredProcedure [dbo].[BlueCardGreencard_sync]    Script Date: 5/9/2017 3:16:05 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[BlueCardGreencard_sync]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[BlueCardGreencard_sync]
+GO
+
+/****** Object:  StoredProcedure [dbo].[PatientDemographics_To_Greencard]    Script Date: 5/9/2017 3:16:05 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientDemographics_To_Greencard]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[PatientDemographics_To_Greencard]
+GO
+
+/****** Object:  StoredProcedure [dbo].[PatientEnrollment_To_Greencard]    Script Date: 5/9/2017 3:16:05 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientEnrollment_To_Greencard]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[PatientEnrollment_To_Greencard]
+GO
+
+/****** Object:  StoredProcedure [dbo].[PatientIdentifiers_To_Greencard]    Script Date: 5/9/2017 3:16:05 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientIdentifiers_To_Greencard]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[PatientIdentifiers_To_Greencard]
+GO
+
+/****** Object:  StoredProcedure [dbo].[PatientTreatmentSupporter_To_Greencard]    Script Date: 5/9/2017 3:16:05 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientTreatmentSupporter_To_Greencard]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[PatientTreatmentSupporter_To_Greencard]
+GO
+
+/****** Object:  StoredProcedure [dbo].[PatientContact_To_Greencard]    Script Date: 5/9/2017 3:16:05 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientContact_To_Greencard]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[PatientContact_To_Greencard]
+GO
+
+/****** Object:  StoredProcedure [dbo].[PatientBaselineVariables_To_Greencard]    Script Date: 5/9/2017 3:16:05 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientBaselineVariables_To_Greencard]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[PatientBaselineVariables_To_Greencard]
+GO
+
+/****** Object:  StoredProcedure [dbo].[PatientBaseline_To_Greencard]    Script Date: 5/9/2017 3:16:05 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientBaseline_To_Greencard]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[PatientBaseline_To_Greencard]
+GO
+
+/****** Object:  StoredProcedure [dbo].[SP_mst_PatientToGreencardRegistration]    Script Date: 5/9/2017 3:16:05 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SP_mst_PatientToGreencardRegistration]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[SP_mst_PatientToGreencardRegistration]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_getPharmacyDrugList]    Script Date: 5/9/2017 3:16:05 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_getPharmacyDrugList]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_getPharmacyDrugList]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_getPatientEncounter]    Script Date: 5/9/2017 3:16:05 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_getPatientEncounter]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_getPatientEncounter]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_getPatientEncounterAdverseEvents]    Script Date: 5/9/2017 3:16:05 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_getPatientEncounterAdverseEvents]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_getPatientEncounterAdverseEvents]
+GO
+
+/****** Object:  StoredProcedure [dbo].[FamilyTesting_To_Greencard]    Script Date: 5/9/2017 3:16:05 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[FamilyTesting_To_Greencard]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[FamilyTesting_To_Greencard]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_deletePatientEncounterPhysicalExam]    Script Date: 5/9/2017 3:16:05 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_deletePatientEncounterPhysicalExam]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_deletePatientEncounterPhysicalExam]
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[sp_savePatientEncounterPhysicalExam]    Script Date: 5/9/2017 3:16:05 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_savePatientEncounterPhysicalExam]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_savePatientEncounterPhysicalExam]
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[sp_getPatientEncounterExam]    Script Date: 5/9/2017 3:16:05 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_getPatientEncounterExam]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_getPatientEncounterExam]
 GO
 
 
@@ -114,11 +201,6 @@ BEGIN
 END
 GO
 
-/****** Object:  StoredProcedure [dbo].[SP_Bluecard_ToGreenCard]    Script Date: 5/9/2017 3:16:05 PM ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SP_Bluecard_ToGreenCard]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [dbo].[SP_Bluecard_ToGreenCard]
-GO
-
 
 /****** Object:  StoredProcedure [dbo].[SP_Bluecard_ToGreenCard]    Script Date: 05/09/2017 17:08:22 ******/
 SET ANSI_NULLS ON
@@ -209,18 +291,18 @@ IF @@rowcount = 1 BEGIN
 	
 	SET @Sex = (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName = 'Gender' and ItemName = (select top 1 Name from mst_Decode where id = @Sex));
 	IF @Sex IS  NULL
-		SET @Sex = (select ItemId from LookupItemView where MasterName = 'Unknown' and ItemName = 'Unknown');
+		SET @Sex = (select top 1 ItemId from LookupItemView where MasterName = 'Unknown' and ItemName = 'Unknown');
 
 		
 
 	--Default all persons to new
-	SET @ARTStartDate=( SELECT ARTTransferInDate FROM dtl_PatientHivPrevCareIE WHERE Ptn_pk=@ptn_pk);
+	SET @ARTStartDate=( SELECT top 1 ARTTransferInDate FROM dtl_PatientHivPrevCareIE WHERE Ptn_pk=@ptn_pk);
 	if(@ARTStartDate Is NULL) BEGIN 
 		SET @PatientType=(SELECT top 1 Id FROM LookupItem WHERE Name='New');
 		SET @transferIn=0; 
 	END 
 	ELSE BEGIN 
-		SET @PatientType=(SELECT Top 1 Id FROM LookupItem WHERE Name='TransferIn');
+		SET @PatientType=(SELECT Top 1 Id FROM LookupItem WHERE Name='Transfer-In');
 		SET @transferIn=1; 
 	End
 	-- SELECT @PatientType = 1285
@@ -371,7 +453,7 @@ IF @@rowcount = 1 BEGIN
 			SELECT @message = 'Update Person Id: ' + CAST(@Id as varchar(50));
 			PRINT @message;
 
-			PRINT @Status;
+			--PRINT @Status;
 
 			UPDATE Patient
 			SET PatientIndex = @PatientFacilityId, PatientType = @PatientType, FacilityId = @FacilityId, Active = @Status, DateOfBirth = @DateOfBirth, DobPrecision = @DobPrecision, NationalId = @IDNational, DeleteFlag = @DeleteFlag, CreatedBy = @UserID, CreateDate = @CreateDate, RegistrationDate = @RegistrationDate
@@ -396,7 +478,7 @@ IF @@rowcount = 1 BEGIN
 			PRINT @message;
 
 			IF @CCCNumber IS NOT NULL		BEGIN
-				IF NOT EXISTS ( SELECT PatientId FROM PatientIdentifier WHERE PatientId = @PatientId AND PatientEnrollmentId = @EnrollmentId AND IdentifierTypeId = (SELECT Id FROM LookupItem WHERE Name='CCCNumber'))
+				IF NOT EXISTS ( SELECT PatientId FROM PatientIdentifier WHERE PatientId = @PatientId AND PatientEnrollmentId = @EnrollmentId AND IdentifierTypeId = (select top 1 Id from Identifiers where Code='CCCNumber'))
 					BEGIN
 						-- Patient Identifier
 						INSERT INTO [dbo].[PatientIdentifier] ([PatientId], [PatientEnrollmentId], [IdentifierTypeId], [IdentifierValue] ,[DeleteFlag] ,[CreatedBy] ,[CreateDate] ,[Active] ,[AuditData])
@@ -535,13 +617,8 @@ END
 --CLOSE mstPatient_cursor;  
 --DEALLOCATE mstPatient_cursor;  
 END
-
-
-
-/****** Object:  StoredProcedure [dbo].[BlueCardGreencard_sync]    Script Date: 5/9/2017 3:16:05 PM ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[BlueCardGreencard_sync]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [dbo].[BlueCardGreencard_sync]
 GO
+
 
 
 /****** Object:  StoredProcedure [dbo].[BlueCardGreencard_sync]    Script Date: 05/09/2017 17:08:22 ******/
@@ -1330,11 +1407,6 @@ BEGIN
 		 SELECT @message = 'Finished Running';
 		 PRINT @message;
 END
-
-
-/****** Object:  StoredProcedure [dbo].[PatientDemographics_To_Greencard]    Script Date: 5/9/2017 3:16:05 PM ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientDemographics_To_Greencard]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [dbo].[PatientDemographics_To_Greencard]
 GO
 
 
@@ -1396,11 +1468,6 @@ BEGIN
 
 	SELECT @PersonId, @PatientId;
 END
-
-
-/****** Object:  StoredProcedure [dbo].[PatientEnrollment_To_Greencard]    Script Date: 5/9/2017 3:16:05 PM ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientEnrollment_To_Greencard]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [dbo].[PatientEnrollment_To_Greencard]
 GO
 
 
@@ -1509,11 +1576,6 @@ BEGIN
 
 	SELECT @EnrollmentId, @ModuleId, @StartDate;
 END
-
-
-/****** Object:  StoredProcedure [dbo].[PatientIdentifiers_To_Greencard]    Script Date: 5/9/2017 3:16:05 PM ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientIdentifiers_To_Greencard]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [dbo].[PatientIdentifiers_To_Greencard]
 GO
 
 
@@ -1606,12 +1668,6 @@ BEGIN
 
 	SELECT @PatientIdentifierId, @ServiceEntryPointId, @PatientMaritalStatusID
 END
-
-
-
-/****** Object:  StoredProcedure [dbo].[PatientTreatmentSupporter_To_Greencard]    Script Date: 5/9/2017 3:16:05 PM ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientTreatmentSupporter_To_Greencard]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [dbo].[PatientTreatmentSupporter_To_Greencard]
 GO
 
 
@@ -1698,11 +1754,6 @@ BEGIN
 
 	SELECT @PatientTreatmentSupporterID;
 END
-
-
-/****** Object:  StoredProcedure [dbo].[PatientContact_To_Greencard]    Script Date: 5/9/2017 3:16:05 PM ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientContact_To_Greencard]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [dbo].[PatientContact_To_Greencard]
 GO
 
 
@@ -1751,13 +1802,8 @@ BEGIN
 
 		SELECT @PersonContactID;
 END
-
-
-
-/****** Object:  StoredProcedure [dbo].[PatientBaselineVariables_To_Greencard]    Script Date: 5/9/2017 3:16:05 PM ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientBaselineVariables_To_Greencard]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [dbo].[PatientBaselineVariables_To_Greencard]
 GO
+
 
 
 SET ANSI_NULLS ON
@@ -1776,24 +1822,37 @@ GO
 -- Description:	<Description,,>
 -- =============================================
 ALTER PROCEDURE [dbo].[PatientBaselineVariables_To_Greencard]
-@ptn_pk int,
-@transferIn int,
-@ARTStartDate datetime,
-@Sex int,
-@LocationId int,
-@StartDate datetime,
-@EnrollmentDate datetime OUTPUT,
-@VisitDate datetime OUTPUT
+@ptn_pk int, 
+@transferIn int, 
+@ARTStartDate datetime, 
+@Sex int, 
+@LocationId int, 
+@StartDate datetime, 
+@EnrollmentDate datetime OUTPUT, 
+@VisitDate datetime OUTPUT, 
+@artstart datetime OUTPUT, 
+@visit_id int OUTPUT, 
+@Pregnant bit OUTPUT, 
+@HBVInfected bit OUTPUT, 
+@TBinfected bit OUTPUT, 
+@WHOStage int OUTPUT, 
+@WHOStageString varchar(50) OUTPUT, 
+@BreastFeeding bit OUTPUT, 
+@CD4Count decimal OUTPUT, 
+@MUAC decimal OUTPUT, 
+@Weight decimal OUTPUT, 
+@Height decimal OUTPUT, 
+@ClosestARVDate datetime OUTPUT, 
+@PatientMasterVisitId int OUTPUT, 
+@HIVDiagnosisDate datetime OUTPUT, 
+@EnrollmentWHOStage int OUTPUT, 
+@EnrollmentWHOStageString varchar(50) OUTPUT, 
+@Cohort varchar(50) OUTPUT
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
-
-		DECLARE @HBVInfected bit, @Pregnant bit, @TBinfected bit, @WHOStage int, @WHOStageString varchar(50), @BreastFeeding bit, 
-			@CD4Count decimal , @MUAC decimal, @Weight decimal, @Height decimal, @artstart datetime,
-			@ClosestARVDate datetime, @PatientMasterVisitId int, @HIVDiagnosisDate datetime, 
-			@EnrollmentWHOStage int, @EnrollmentWHOStageString varchar(50),  @Cohort varchar(50), @visit_id int;
 
 			IF @transferIn = 1
 				BEGIN
@@ -1927,13 +1986,8 @@ BEGIN
 			SET @VisitDate = (SELECT TOP 1 [VisitDate] FROM [dbo].[ord_Visit] where [Ptn_Pk] = @ptn_pk AND [VisitType] in(18, 19));
 			IF @EnrollmentDate IS NULL BEGIN SET @EnrollmentDate =@StartDate; END;
 
-		SELECT @EnrollmentDate;
+		SELECT @EnrollmentDate, @VisitDate, @artstart, @visit_id, @Pregnant, @HBVInfected, @TBinfected, @WHOStage, @WHOStageString, @BreastFeeding, @CD4Count, @MUAC, @Weight, @Height, @ClosestARVDate, @PatientMasterVisitId, @HIVDiagnosisDate, @EnrollmentWHOStage, @EnrollmentWHOStageString, @Cohort;
 END
-
-
-/****** Object:  StoredProcedure [dbo].[PatientBaseline_To_Greencard]    Script Date: 5/9/2017 3:16:05 PM ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientBaseline_To_Greencard]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [dbo].[PatientBaseline_To_Greencard]
 GO
 
 
@@ -2127,11 +2181,6 @@ BEGIN
 				PRINT @message;
 		END
 END
-
-
-/****** Object:  StoredProcedure [dbo].[SP_mst_PatientToGreencardRegistration]    Script Date: 5/9/2017 3:16:05 PM ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SP_mst_PatientToGreencardRegistration]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [dbo].[SP_mst_PatientToGreencardRegistration]
 GO
 
 
@@ -2302,13 +2351,6 @@ BEGIN
 		 
 		 exec [dbo].[pr_CloseDecryptedSession];
 END
-
-
-
-
-/****** Object:  StoredProcedure [dbo].[sp_getPharmacyDrugList]    Script Date: 5/9/2017 3:16:05 PM ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_getPharmacyDrugList]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [dbo].[sp_getPharmacyDrugList]
 GO
 
 
@@ -2360,7 +2402,8 @@ Set Nocount On;
 				SELECT
 					D.Drug_pk
 				   ,D.DrugName
-				   , (D.Drug_pk + '~' + isnull(D.abbreviation,D.DrugName) + '~' + D.DrugName) val
+				  -- , (Convert(varchar(8),D.Drug_pk)+ '~' + isnull(D.abbreviation,D.DrugName) + '~' + D.DrugName) val
+				  ,CONCAT(D.Drug_pk, '~',D.abbreviation, '~', D.DrugName)val 
 				FROM Dtl_StockTransaction AS ST
 				INNER JOIN Mst_Store AS S
 					ON S.Id = ST.StoreId
@@ -2369,10 +2412,10 @@ Set Nocount On;
 					ON D.Drug_pk = ST.ItemId
 				INNER JOIN lnk_DrugGeneric l
 					ON D.Drug_pk = l.Drug_pk
-				INNER JOIN lnk_DrugTypeGeneric g
-					ON l.GenericID = g.GenericId
+				--INNER JOIN lnk_DrugTypeGeneric g
+				--	ON l.GenericID = g.GenericId
 				WHERE D.DeleteFlag = 0
-				AND g.DrugTypeId =37
+				-- AND g.DrugTypeId =37
 				GROUP BY D.Drug_pk
 						,D.DrugName
 						,D.abbreviation
@@ -2387,7 +2430,8 @@ Set Nocount On;
 			SELECT
 					D.Drug_pk
 				   ,D.DrugName
-				   ,(D.Drug_pk + '~' + isnull(D.abbreviation,D.DrugName) +  '~' + D.DrugName) val
+				   -- ,(Convert(varchar(8),D.Drug_pk) + '~' + isnull(D.abbreviation,D.DrugName) +  '~' + D.DrugName) val
+				   ,CONCAT(D.Drug_pk, '~',D.abbreviation, '~', D.DrugName)val 
 				FROM Dtl_StockTransaction AS ST
 				INNER JOIN Mst_Store AS S
 					ON S.Id = ST.StoreId
@@ -2396,10 +2440,11 @@ Set Nocount On;
 					ON D.Drug_pk = ST.ItemId
 				INNER JOIN lnk_DrugGeneric l
 					ON D.Drug_pk = l.Drug_pk
-				INNER JOIN lnk_DrugTypeGeneric g
-					ON l.GenericID = g.GenericId
-				WHERE D.DeleteFlag = 0
-				AND g.DrugTypeId <>37
+
+				--INNER JOIN lnk_DrugTypeGeneric g
+				--	ON l.GenericID = g.GenericId
+				WHERE D.DeleteFlag = 0 AND D.Drug_pk IN(SELECT x.Drug_pk FROM lnk_DrugGeneric x WHERE x.GenericID IN(SELECT k.GenericId FROM lnk_DrugTypeGeneric k WHERE k.DrugTypeId<>37))
+				-- AND g.DrugTypeId <>37
 				GROUP BY D.Drug_pk
 						,D.DrugName
 						,D.abbreviation
@@ -2412,40 +2457,35 @@ Set Nocount On;
 
 			IF(@drugTypeId=37)
 			BEGIN
-				Select	D.Drug_pk, D.DrugName,
-				(D.Drug_pk +  '~' + isnull(D.abbreviation,D.DrugName) +  '~' + D.DrugName) val 
+				Select	D.Drug_pk, D.DrugName,CONCAT(D.Drug_pk, '~',D.abbreviation, '~', D.DrugName)val 
+				-- (Convert(varchar(8),D.Drug_pk) +  '~' + isnull(D.abbreviation,D.DrugName) +  '~' + D.DrugName) val 
 				From Dtl_StockTransaction As ST	Inner Join Mst_Store As S On S.Id = ST.StoreId And S.DispensingStore = 1
 				Right Outer Join Mst_Drug As D On D.Drug_pk = ST.ItemId 
 								INNER JOIN lnk_DrugGeneric l
 						ON D.Drug_pk = l.Drug_pk
-					INNER JOIN lnk_DrugTypeGeneric g
-						ON l.GenericID = g.GenericId
+					--INNER JOIN lnk_DrugTypeGeneric g
+					--	ON l.GenericID = g.GenericId
 					WHERE D.DeleteFlag = 0
-					AND g.DrugTypeId = @drugTypeId
+					--AND g.DrugTypeId = @drugTypeId
 				Group By D.Drug_pk,	D.DrugName, D.abbreviation
 			END
 			ELSE
 			BEGIN
-						Select	D.Drug_pk, D.DrugName,
-				(D.Drug_pk + '~' + isnull(D.abbreviation,D.DrugName) + '~' + D.DrugName) val 
+						Select	D.Drug_pk, D.DrugName,CONCAT(D.Drug_pk, '~',D.abbreviation, '~', D.DrugName)val 
+				-- (Convert(varchar(8),D.Drug_pk) + '~' + isnull(D.abbreviation,D.DrugName) + '~' + D.DrugName) val 
 				From Dtl_StockTransaction As ST	Inner Join Mst_Store As S On S.Id = ST.StoreId And S.DispensingStore = 1
 				Right Outer Join Mst_Drug As D On D.Drug_pk = ST.ItemId 
 								INNER JOIN lnk_DrugGeneric l
 						ON D.Drug_pk = l.Drug_pk
 					INNER JOIN lnk_DrugTypeGeneric g
 						ON l.GenericID = g.GenericId
-					WHERE D.DeleteFlag = 0
-					AND g.DrugTypeId <> 37
+					WHERE D.DeleteFlag = 0 --AND D.Drug_pk IN(SELECT x.Drug_pk FROM lnk_DrugGeneric x WHERE x.GenericID IN(SELECT k.GenericId FROM lnk_DrugTypeGeneric k WHERE k.DrugTypeId<>37))
+					 AND g.DrugTypeId <> 37 
 				Group By D.Drug_pk,	D.DrugName, D.abbreviation
 			END
 		END
 
 End
-
-
-/****** Object:  StoredProcedure [dbo].[sp_getPatientEncounter]    Script Date: 5/9/2017 3:16:05 PM ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_getPatientEncounter]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [dbo].[sp_getPatientEncounter]
 GO
 
 
@@ -2546,13 +2586,54 @@ Set Nocount On;
 	where PatientMasterVisitId = @PatientMasterVisitID and patientId = @PatientID
 
 End
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[sp_getPatientEncounterAdverseEvents]    Script Date: 05/09/2017 17:08:22 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_savePatientEncounterAdverseEvents]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[sp_savePatientEncounterAdverseEvents] AS' 
 END
+GO
+-- =============================================
+-- Author:		John Macharia | sosewe- added adverseEventId parameter
+-- Create date: 14th Feb 2017
+-- Description:	get patient encounter Adverse Events
+-- =============================================
+ALTER PROCEDURE [dbo].[sp_savePatientEncounterAdverseEvents]
+	-- Add the parameters for the stored procedure here
+	@masterVisitID int = null,
+	@PatientID int = null,
+	@adverseEventId int =null,
+	@adverseEvent varchar(250) = null,
+	@medicineCausingAE varchar(250) = null,
+	@adverseSeverity varchar(250) = null,
+	@adverseAction varchar(250) = null,
+	@userID int = null
 
-
-
-/****** Object:  StoredProcedure [dbo].[sp_getPatientEncounterAdverseEvents]    Script Date: 5/9/2017 3:16:05 PM ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_getPatientEncounterAdverseEvents]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [dbo].[sp_getPatientEncounterAdverseEvents]
+AS
+BEGIN
+-- SET NOCOUNT ON added to prevent extra result sets from
+-- interfering with SELECT statements.
+Set Nocount On;
+-- Insert statements for procedure here
+if exists(select 1 from AdverseEvent where PatientMasterVisitId = @masterVisitID and PatientId = @PatientID and EventName = @adverseEvent)
+	BEGIN
+		update AdverseEvent set EventCause = @medicineCausingAE, Severity = @adverseSeverity,[Action] = @adverseAction, DeleteFlag = 0
+		where PatientMasterVisitId = @masterVisitID and PatientId = @PatientID and EventName = @adverseEvent
+	END
+	ELSE
+	BEGIN
+		insert into AdverseEvent(PatientId,PatientMasterVisitId,AdverseEventId,EventName,EventCause,Severity,[Action],DeleteFlag,CreateBy,CreateDate) 
+		values(@PatientID,@MasterVisitID,@adverseEventId,@adverseEvent,@medicineCausingAE,@adverseSeverity,@adverseAction,0,@userID,GETDATE())
+	END
+	
+End
 GO
 
 
@@ -2583,20 +2664,13 @@ BEGIN
 -- interfering with SELECT statements.
 Set Nocount On;
 
-	select Severity SeverityID,EventName,EventCause,b.DisplayName Severity,[Action] 
+	select Severity SeverityID,AdverseEventId,EventName,EventCause,b.DisplayName Severity,[Action] 
 	from AdverseEvent a left join LookupItem b on a.Severity = b.Id
 	where patientId = @PatientID and (a.DeleteFlag is null or a.DeleteFlag = 0)
 
 	-- PatientMasterVisitId = @PatientMasterVisitID and  //commented to show all adverseEvents patient has had.
 	
 End
-
-
-
-
-/****** Object:  StoredProcedure [dbo].[FamilyTesting_To_Greencard]    Script Date: 5/9/2017 3:16:05 PM ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[FamilyTesting_To_Greencard]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [dbo].[FamilyTesting_To_Greencard]
 GO
 
 
@@ -2834,3 +2908,302 @@ BEGIN
 	 DROP TABLE #Tdtl_FamilyInfo
 	 UPDATE PersonRelationship SET FamilyInfoId = 0 WHERE FamilyInfoId IS NULL;
 END
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[sp_deletePatientEncounterPhysicalExam]    Script Date: 05/09/2017 17:08:22 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_deletePatientEncounterPhysicalExam]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[sp_deletePatientEncounterPhysicalExam] AS' 
+END
+GO
+-- =============================================
+-- Author:		John Macharia
+-- Create date: 14th Feb 2017
+-- Description:	get patient encounter Adverse Events
+-- =============================================
+ALTER PROCEDURE [dbo].[sp_deletePatientEncounterPhysicalExam]
+	-- Add the parameters for the stored procedure here
+	@PatientMasterVisitID int = null,
+	@PatientID int = null
+
+AS
+BEGIN
+-- SET NOCOUNT ON added to prevent extra result sets from
+-- interfering with SELECT statements.
+Set Nocount On;
+-- Insert statements for procedure here
+	declare @generalExamID int = (select top 1 Id from lookupmaster where Name = 'ReviewOfSystems')
+
+	update PhysicalExamination set DeleteFlag = 1 
+	where PatientMasterVisitId = @PatientMasterVisitID and PatientId = @PatientID and ExaminationTypeId = @generalExamID
+End
+GO
+
+
+
+
+/****** Object:  StoredProcedure [dbo].[sp_savePatientEncounterPhysicalExam]    Script Date: 05/09/2017 17:08:22 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_savePatientEncounterPhysicalExam]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[sp_savePatientEncounterPhysicalExam] AS' 
+END
+GO
+-- =============================================
+-- Author:		John Macharia
+-- Create date: 7th Feb 2017
+-- Description:	save patient encounter - Physical Examination
+-- =============================================
+ALTER PROCEDURE [dbo].[sp_savePatientEncounterPhysicalExam]
+	-- Add the parameters for the stored procedure here
+	@MasterVisitID int = null,
+	@PatientID int = null,
+	@reviewOfSystemsID int = null,
+	@systemTypeId int = null,
+	@findingId int = null,
+	@findingsNotes varchar(50) = null,
+	@userID int = null
+
+AS
+BEGIN
+-- SET NOCOUNT ON added to prevent extra result sets from
+-- interfering with SELECT statements.
+Set Nocount On;
+-- Insert statements for procedure here
+	if exists(select 1 from PhysicalExamination where PatientMasterVisitId = @MasterVisitID
+	and PatientId = @PatientID and ExaminationTypeId = @reviewOfSystemsID and ExamId = @systemTypeId and FindingId = @findingId and DeleteFlag = 0)
+	BEGIN
+		update PhysicalExamination set FindingsNotes= @findingsNotes, DeleteFlag = 0, FindingId = @findingId
+		where PatientMasterVisitId = @MasterVisitID and PatientId = @PatientID and ExaminationTypeId = @reviewOfSystemsID and ExamId = @systemTypeId
+	END
+	ELSE
+	BEGIN
+		insert into PhysicalExamination(PatientId,PatientMasterVisitId,ExaminationTypeId,ExamId,FindingsNotes,DeleteFlag,CreateBy,CreateDate, FindingId) 
+		values(@PatientID, @MasterVisitID, @reviewOfSystemsID, @systemTypeId, @findingsNotes, 0 , @userID, GETDATE(), @findingId)
+	END
+	
+End
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[sp_getPatientEncounterExam]    Script Date: 05/09/2017 17:08:22 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_getPatientEncounterExam]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[sp_getPatientEncounterExam] AS' 
+END
+GO
+-- =============================================
+-- Author:		John Macharia
+-- Create date: 14th Feb 2017
+-- Description:	get patient encounter Physical Exam
+-- =============================================
+ALTER PROCEDURE [dbo].[sp_getPatientEncounterExam]
+	-- Add the parameters for the stored procedure here
+	@PatientMasterVisitID int = null,
+	@PatientID int = null
+
+AS
+BEGIN
+-- SET NOCOUNT ON added to prevent extra result sets from
+-- interfering with SELECT statements.
+Set Nocount On;
+
+SELECT 
+	PYE.ExaminationTypeId AS examTypeID, 
+	PYE.ExamId AS examID,
+	PYE.FindingId AS findingID,
+	LV.DisplayName AS examType, 
+	(SELECT TOP 1 ItemName FROM LookupItemView where ItemId = PYE.FindingId) AS exam, 
+	PYE.FindingsNotes AS findings
+	FROM dbo.PhysicalExamination AS PYE LEFT OUTER JOIN
+	dbo.LookupItemView AS LV ON PYE.ExaminationTypeId = LV.MasterId AND PYE.ExamId = LV.ItemId
+	WHERE (LV.MasterName = 'ReviewOfSystems') and PYE.PatientMasterVisitId = @PatientMasterVisitID and PYE.PatientId = @PatientID and (PYE.DeleteFlag is null or PYE.DeleteFlag = 0)
+	
+End
+GO
+
+-- saveupdate pharmacy prescription
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_SaveUpdatePharmacy_GreenCard]') AND type in (N'P', N'PC'))
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[sp_SaveUpdatePharmacy_GreenCard]                                                
+( 
+ @PatientMasterVisitID int = 0,                                               
+ @PatientId int = null,                                                
+ @LocationID int = null,                                                
+ @OrderedBy int = null,                                                                                                                                          
+ @UserID int = null,                                                 
+ @RegimenType varchar(50) = null,                                                
+ @DispensedBy int=null,                                                    
+ @RegimenLine int = null,                
+ @PharmacyNotes varchar(200) = null,
+ @ModuleID int = null,
+
+ @TreatmentProgram int = null,
+ @PeriodTaken int = null,
+
+ @TreatmentPlan int = null, 
+ @TreatmentPlanReason int = null,
+ @Regimen int = null,
+ @PrescribedDate varchar(50) = null,
+ @DispensedDate varchar(50) = null                 
+)                                                
+                                                
+As       
+Begin               
+	Declare @ptn_pharmacy int,@RegimenMap_Pk int,@ARTStartDate datetime,@Ptn_Pharmacy_Pk int=null , @ptn_pk int, @visitPK int
+
+	Select @RegimenType = Nullif(Ltrim(Rtrim(@RegimenType)), '')
+
+	set @ptn_pk = (select ptn_pk from patient where id = @PatientId)
+
+	if(@DispensedDate = '')
+	begin
+		set @DispensedDate = null
+		set @DispensedBy = null
+	end
+
+	-- IF EXISTS(select 1 from ord_PatientPharmacyOrder where PatientMasterVisitId = @PatientMasterVisitID) 
+	IF EXISTS(select 1 from ord_PatientPharmacyOrder where ptn_pharmacy_pk = @Ptn_Pharmacy_Pk) 
+	BEGIN
+		set @Ptn_Pharmacy_Pk = (select ptn_pharmacy_pk from ord_PatientPharmacyOrder where patientmasterVisitID = @PatientMasterVisitID);
+		IF @TreatmentPlan = 0 BEGIN (select TOP 1 @Regimenline = RegimenLine, @TreatmentProgram = [ProgID] from ord_PatientPharmacyOrder where patientmasterVisitID = @PatientMasterVisitID); END;
+		Update [ord_PatientPharmacyOrder] Set
+			[OrderedBy] = @OrderedBy, [DispensedBy] = @DispensedBy,
+			[ProgID] = @TreatmentProgram, [UpdateDate] = Getdate(),
+			[ProviderID] = 1, OrderedByDate = @PrescribedDate, [DispensedByDate] = @DispensedDate,
+			UserID = @UserID,	Regimenline = @Regimenline,
+			PharmacyNotes = @PharmacyNotes, pharmacyperiodtaken = @PeriodTaken
+		Where patientmasterVisitID = @PatientMasterVisitID;
+
+		IF @TreatmentPlan = 0 BEGIN (SELECT TOP 1 @Regimen = RegimenId, @RegimenLine = RegimenLineId, @TreatmentPlan = TreatmentStatusId, @TreatmentPlanReason = TreatmentStatusReasonId FROM ARVTreatmentTracker WHERE PatientMasterVisitId = @PatientMasterVisitID); END;
+		Update ARVTreatmentTracker set regimenid = @Regimen, regimenLineId = @RegimenLine, TreatmentStatusId = @TreatmentPlan,
+		TreatmentStatusReasonId = @TreatmentPlanReason
+
+		If(@RegimenType Is Not Null) 
+		Begin
+		
+			Select @RegimenMap_Pk = RegimenMap_Pk
+			From dtl_regimenmap a, ord_patientpharmacyorder b
+			Where a.ptn_pk = b.ptn_pk
+			And b.ptn_pharmacy_pk = a.orderID
+			And b.Ptn_Pharmacy_Pk = @Ptn_Pharmacy_Pk;
+
+			Update [dtl_RegimenMap] Set
+				[RegimenType] = @RegimenType,
+				[UpdateDate] = Getdate()
+			Where ([RegimenMap_Pk] = @RegimenMap_Pk)
+		End
+		
+		Select @ARTStartDate = dbo.fn_GetPatientARTStartDate_constella(@ptn_pk)
+		
+		Update mst_Patient Set
+			ARTStartDate = @ARTStartDate
+		Where ptn_pk = @ptn_pk;
+
+		Select @ptn_pharmacy_pk;
+	END
+	ELSE
+	BEGIN
+		insert into ord_Visit (ptn_pk,locationid,VisitDate,VisitType,DataQuality,DeleteFlag,UserID,CreateDate,CreatedBy)
+		values(@ptn_pk, @locationID,GETDATE(),4,1,0,@UserID,GETDATE(),@UserID)
+
+		set @visitPK = SCOPE_IDENTITY();
+
+		Insert Into dbo.ord_PatientPharmacyOrder (
+			Ptn_pk, PatientID, patientmasterVisitID, LocationID, OrderedBy, OrderedByDate, DispensedBy, DispensedByDate, ProgID,
+			UserID, CreateDate, ProviderID, Regimenline, PharmacyNotes, VisitID, pharmacyPeriodTaken)
+		Values (
+			@ptn_pk,@PatientId, @PatientMasterVisitID, @LocationID, @OrderedBy, @PrescribedDate, @DispensedBy, @DispensedDate, @TreatmentProgram, 
+			@UserID, Getdate(), 1, @RegimenLine, @PharmacyNotes, @visitPK, @PeriodTaken);
+
+		Set @ptn_pharmacy =SCOPE_IDENTITY();
+
+		Insert into ARVTreatmentTracker (PatientId,ServiceAreaId,PatientMasterVisitId,RegimenId,RegimenLineId,
+		TreatmentStatusId,TreatmentStatusReasonId, DeleteFlag, CreateBy, createdate)
+		values(@patientid,@moduleid,@PatientMasterVisitID,@Regimen,@RegimenLine,@TreatmentPlan,@TreatmentPlanReason,
+		0,@UserID,GETDATE())
+
+		Update ord_PatientPharmacyOrder Set
+			ReportingID = (Select Right('000000' + Convert(varchar, @ptn_pharmacy), 6))
+		Where ptn_pharmacy_pk = @ptn_pharmacy;
+
+		--If (@DispensedByDate Is Not Null And @DispensedBy > 0) Begin
+		--	Update ord_PatientPharmacyOrder Set
+		--		OrderStatus = 2
+		--	Where ptn_pharmacy_pk = @ptn_pharmacy;
+		--End
+
+		
+		If(@RegimenType Is Not Null) 
+		Begin	
+			Insert Into dtl_RegimenMap (Ptn_Pk,	LocationID,	Visit_Pk, RegimenType, OrderId,	UserID,	CreateDate)
+			Values (@ptn_pk, @LocationID, @visitPK, @RegimenType, @ptn_pharmacy, @UserID, Getdate());
+		End
+
+		Select @ARTStartDate = dbo.fn_GetPatientARTStartDate_constella(@ptn_pk)
+		Update mst_Patient Set
+			ARTStartDate = @ARTStartDate
+		Where ptn_pk = @ptn_pk;
+
+		Select @ptn_pharmacy;
+
+	END
+End
+
+-- get prescription
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_getPatientPharmacyPrescription]') AND type in (N'P', N'PC'))
+/****** Object:  StoredProcedure [dbo].[sp_getPatientPharmacyPrescription]    Script Date: 11/21/2017 8:38:04 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		John Macharia
+-- Create date: 13th Mar 2017
+-- Description:	get patient pharmacy prescription
+-- =============================================
+ALTER PROCEDURE [dbo].[sp_getPatientPharmacyPrescription]
+	-- Add the parameters for the stored procedure here
+	@PatientMasterVisitID int = null
+
+AS
+BEGIN
+-- SET NOCOUNT ON added to prevent extra result sets from
+-- interfering with SELECT statements.
+Set Nocount On;
+	declare @pharmacy_pk int
+	set @pharmacy_pk = (select top 1 ptn_pharmacy_pk from ord_PatientPharmacyOrder 
+						where PatientMasterVisitId = @PatientMasterVisitID and DeleteFlag <> 1)
+
+	select a.Drug_Pk,
+	--(select batchId from dtl_patientPharmacyDispensed where ptn_pharmacy_pk = a.ptn_pharmacy_pk and drug_pk = a.Drug_Pk) batchId,
+	a.BatchNo batchId,
+	a.FrequencyID,b.abbreviation abbr,b.DrugName,c.Name batchName,a.SingleDose dose, 
+	d.Name freq,a.duration,a.OrderedQuantity,a.DispensedQuantity,
+	--(select dispensedQuantity from dtl_patientPharmacyDispensed where ptn_pharmacy_pk = a.ptn_pharmacy_pk and drug_pk = a.Drug_Pk)DispensedQuantity,
+	a.Prophylaxis
+	from dtl_PatientPharmacyOrder a inner join mst_drug b on a.Drug_Pk = b.Drug_pk
+	left join Mst_Batch c on a.BatchNo = c.ID
+	left join mst_Frequency d on a.FrequencyID = d.ID
+	--left join dtl_patientPharmacyDispensed e on a.ptn_pharmacy_pk = e.ptn_pharmacy_pk
+	where a.ptn_pharmacy_pk IN(SELECT ptn_pharmacy_pk from ord_PatientPharmacyOrder WHERE PatientMasterVisitId=@PatientMasterVisitID) -- a.ptn_pharmacy_pk = @pharmacy_pk (old implementation)
+	
+End

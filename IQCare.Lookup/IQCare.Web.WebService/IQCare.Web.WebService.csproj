@@ -58,7 +58,7 @@
       <HintPath>..\..\References\Entities.Lookup.dll</HintPath>
     </Reference>
     <Reference Include="Interface.Lookup">
-      <HintPath>..\..\Presentation\IQCare.Web\bin\Interface.Lookup.dll</HintPath>
+      <HintPath>..\..\References\Interface.Lookup.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />

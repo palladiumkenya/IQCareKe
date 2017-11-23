@@ -10,5 +10,7 @@ namespace Interface.CCC.Enrollment
     {
         int AddHivReConfirmatoryTest(HivReConfirmatoryTest hivReConfirmatoryTest);
         HivReConfirmatoryTest GetPersonLastestReConfirmatoryTest(int personId, int positiveResult);
+        HivReConfirmatoryTest GetPersonLastReConfirmatoryTest(int personId);
+        int UpdateHivReConfirmatoryTest(HivReConfirmatoryTest hivReConfirmatoryTest);
     }
 }

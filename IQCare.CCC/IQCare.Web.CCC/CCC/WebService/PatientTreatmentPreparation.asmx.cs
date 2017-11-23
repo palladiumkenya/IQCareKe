@@ -52,6 +52,7 @@ namespace IQCare.Web.CCC.WebService
         {
             string msg = "";
             int result = 0;
+            
             PatientPsychosocialCriteriaManager patientPsychosocialCriteriaManager = new PatientPsychosocialCriteriaManager();
 
 
@@ -73,12 +74,23 @@ namespace IQCare.Web.CCC.WebService
                     startART=caregiver
                 };
 
-                result = patientPsychosocialCriteriaManager.AddPreparation(patientPsychosocialCriteria);
-                if (result > 0)
+                int isInserted = 0;
+                isInserted = patientPsychosocialCriteriaManager.CheckIfARTPreparationExists(patientId);
+                if (isInserted <1)
                 {
-                    msg = "Patient Psychosocial criteria assessment completed!";
+                    result = patientPsychosocialCriteriaManager.AddPreparation(patientPsychosocialCriteria);
+                    if (result > 0)
+                    {
+                        msg = "Patient Psychosocial criteria assessment completed!";
+                        msg = new JavaScriptSerializer().Serialize(msg);
+                    }
+                }
+                else
+                {
+                    msg = "Patient Psychosocial criteria assessment has already been completed!";
                     msg = new JavaScriptSerializer().Serialize(msg);
                 }
+                
             }
             catch (Exception e)
             {
@@ -215,12 +227,23 @@ namespace IQCare.Web.CCC.WebService
                     OtherSupportSystems = othersupport
                 };
 
-                result = patientSupportSystemCriteriaManager.AddPreparation(patientSupportSystemCriteria);
-                if (result > 0)
+                int isInserted = 0;
+                isInserted = patientSupportSystemCriteriaManager.checkIfARTPreparationExists(patientId);
+                if (isInserted < 1)
                 {
-                    msg = "Patient Psychosocial criteria assessment completed!";
+                    result = patientSupportSystemCriteriaManager.AddPreparation(patientSupportSystemCriteria);
+                    if (result > 0)
+                    {
+                        msg = "Patient Psychosocial criteria assessment completed!";
+                        msg = new JavaScriptSerializer().Serialize(msg);
+                    }
+                }
+                else
+                {
+                    msg = "Patient Psychosocial criteria assessment already completed!";
                     msg = new JavaScriptSerializer().Serialize(msg);
                 }
+                
             }
             catch (Exception e)
             {

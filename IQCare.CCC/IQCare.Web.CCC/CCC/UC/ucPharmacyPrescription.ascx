@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucPharmacyPrescription.ascx.cs" Inherits="IQCare.Web.CCC.UC.ucPharmacyPrescription" %>
+<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucPharmacyPrescription.ascx.cs" Inherits="IQCare.Web.CCC.UC.ucPharmacyPrescription" %>
 
 <asp:HiddenField ID="drugID" runat="server" ClientIDMode="Static" />
 <asp:HiddenField ID="drugAbbr" runat="server" ClientIDMode="Static" />
@@ -330,7 +330,7 @@
                                             
                     <div class="col-md-8">
                     <%--<div class="col-md-2"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-info btn-sm fa fa-plus-circle" OnClick="saveUpdatePharmacy();"> Save Prescription</asp:LinkButton></div>--%>
-                        <div class="col-md-3"><button type="button" Class="btn btn-info btn-sm fa fa-plus-circle" onclick="saveUpdatePharmacy();">Save Prescription</button></div>
+                        <div class="col-md-3"><button type="button" id="btnSavePrescription" name="btnSavePrescription" clientidmode="Static" Class="btn btn-info btn-sm fa fa-plus-circle" onclick="saveUpdatePharmacy();">Save Prescription</button></div>
                         <div class="col-md-3"><button type="button" Class="btn btn-warning btn-sm fa fa-refresh" onclick="resetPharmacyForm();">Reset Prescription</button></div>
                         <div class="col-md-3">
                             <button type="button" Class="btn btn-danger btn-sm  fa fa-times" id="btnClosePrecriptionModal" data-dismiss="modal">Close Prescription</button>
@@ -370,41 +370,63 @@
     $(document).ready(function () {
         
         //alert(pmscmSamePointDispense);
-        //drugList(1, $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text());
-        $("#<%=ddlTreatmentProgram.ClientID%>").on('change',
-            function () {
-                if (pmscmSamePointDispense === "PM/SCM With Same point dispense") {
-                    tp = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
-                   
-                    pmscmFlag = "1";
-                    drugList(1, tp);
-                    $("#ddlBatch").prop('disabled', false);
-                    $("#txtQuantityDisp").prop('disabled', false);
-                    $("#txtDateDispensed").prop('disabled', false);
-                    $("#btnDateDisp").prop('disabled', false);
 
-                }
-                else if (pmscm === "PM/SCM") {
-                    tp = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
-                    
-                    drugList(1, tp);
-                    $("#ddlBatch").prop('disabled', true);
-                    $("#txtQuantityDisp").prop('disabled', true);
-                    $("#txtDateDispensed").prop('disabled', true);
-                    $("#btnDateDisp").prop('disabled', true);
-                }
-                else {
-                    tp = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
-                    
-                    drugList(0, tp);
-                    $("#ddlBatch").prop('disabled', true);
-                    $("#txtQuantityDisp").prop('disabled', false);
-                    $("#txtDateDispensed").prop('disabled', false);
-                    $("#btnDateDisp").prop('disabled', false);
-                }
+            // drugList(0, $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text());
 
-         });
+            $("#<%=ddlTreatmentProgram.ClientID%>").on('change',
+                function () {
 
+                    if (DrugPrescriptionTable.data().any()) {
+                        toastr.error("Drug Prescription Error", "Remove added drug(s) before changing treatment program.");
+                        //evt.preventDefault();
+                        return false;
+                    }
+					
+					tp=$("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
+						// check if patient can have PMTC Regimens
+						//var treatmentProgram = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
+					
+		            //tp = treatmentProgram;
+		            if (gender === "Female" && age >= 9 && tp === "PMTCT") {
+
+		            } else if (tp === "PMTCT" && (gender != "Female" || age < 9)) {
+		                 toastr.error("PMTCT is for female patients only who are older than 9 years", "Error");
+		                 $("#<%=ddlTreatmentProgram.ClientID%>").val("");
+		             }
+					
+					
+                    if (pmscmSamePointDispense === "PM/SCM With Same point dispense") {
+                       // tp = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
+
+                        pmscmFlag = "1";
+                        drugList(1, tp);
+                        $("#ddlBatch").prop('disabled', false);
+                        $("#txtQuantityDisp").prop('disabled', false);
+                        $("#txtDateDispensed").prop('disabled', false);
+                        $("#btnDateDisp").prop('disabled', false);
+
+                    }
+                    else if (pmscm === "PM/SCM") {
+                       // tp = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
+
+                        drugList(1, tp);
+                        $("#ddlBatch").prop('disabled', true);
+                        $("#txtQuantityDisp").prop('disabled', true);
+                        $("#txtDateDispensed").prop('disabled', true);
+                        $("#btnDateDisp").prop('disabled', true);
+                    }
+                    else {
+                       // tp = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
+
+                        drugList(0, tp);
+                        $("#ddlBatch").prop('disabled', true);
+                        $("#txtQuantityDisp").prop('disabled', false);
+                        $("#txtDateDispensed").prop('disabled', false);
+                        $("#btnDateDisp").prop('disabled', false);
+                    }
+                  
+                });
+ 
 
 
         $('#PrescriptionDate').datepicker({
@@ -421,16 +443,9 @@
             restricted: [{ from: tomorrow, to: Infinity }]
         });
 
-        $("#<%=ddlTreatmentProgram.ClientID%>").change(function () {
-            var treatmentProgram = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
-            tp = treatmentProgram;
-            if (gender === "Female" && age >= 9 && treatmentProgram === "PMTCT") {
-
-            } else if (treatmentProgram === "PMTCT" && (gender != "Female" || age < 9)) {
-                 toastr.error("PMTCT is for female patients only who are older than 9 years", "Error");
-                 $("#<%=ddlTreatmentProgram.ClientID%>").val("");
-             }
-        });
+     /*   $("#<%=ddlTreatmentProgram.ClientID%>").change(function () {
+            
+        });*/
 
         $("#<%=ddlTreatmentPlan.ClientID%>").change(function () {
             var treatmentProgram = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
@@ -440,7 +455,7 @@
             //console.log(treatmentPlan);
             //console.log(startTreatment);
 
-            if (startTreatment == "true" && treatmentProgram == "ART" && treatmentPlan == "Start Treatment") {
+            if (startTreatment === "true" && treatmentProgram === "ART" && treatmentPlan === "Start Treatment") {
                 $("#<%=ddlTreatmentPlan.ClientID%>").val("");
                 toastr.error("The Patient has already started treatment", "Error");
             }
@@ -551,8 +566,7 @@
                     ]
             });
 
-           $("#dtlDrugPrescription").on('click',
-                '.btnDelete',
+           $("#dtlDrugPrescription").on('click','.btnDelete',
                 function () {
                     DrugPrescriptionTable
                         .row($(this).parents('tr'))
@@ -569,31 +583,34 @@
                         batchNoArr.splice(index1, 1);
                     }
                 });
-       
-              
+
+      
+           function SelectDrug(){
+                   var result = this.value.split("~");
+                   if(pmscm ==="1"){ getBatches(result[0]);}
+                   this.value = result[2];
+                   $("#<%=drugID.ClientID%>").val(result[0]);
+                   $("#<%=drugAbbr.ClientID%>").val(result[1]);
+           }
+    
            function drugList(pmscm,tps) {
                
                var drugInput = document.getElementById('<%= txtDrugs.ClientID %>');
                var awesomplete = new Awesomplete(drugInput, {
-                   minChars: 1
+                   minChars: 2
                });
                
-               document.getElementById('<%= txtDrugs.ClientID %>').addEventListener('awesomplete-selectcomplete',function(){
-                   var result = this.value.split("~");
-                   getBatches(result[0]);
-                   this.value = result[2];
-                   $("#<%=drugID.ClientID%>").val(result[0]);
-                   $("#<%=drugAbbr.ClientID%>").val(result[1]);
-               });
+               document.getElementById('<%= txtDrugs.ClientID %>').addEventListener('awesomplete-selectcomplete', SelectDrug);
                
                $.ajax({
                    url: '../WebService/PatientEncounterService.asmx/GetDrugList',
                    type: 'POST',
                    dataType: 'json',
-                   data: "{'PMSCM':'" + pmscm + "','treatmentPlan':'" + tps +"'}",
+                   data: "{'PMSCM':'" + pmscm + "','treatmentPlan':'" + $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text() +"'}",
                    contentType: "application/json; charset=utf-8",
                    
                    success: function (data) {
+                       
                        var serverData = data.d;
                        var drugList = [];
                        
@@ -628,6 +645,7 @@
         DrugPrescriptionTable
                     .clear()
                     .draw();
+        drugNameArr = [];
     }
 
        function getBatches(drugPk)
@@ -718,6 +736,12 @@
             $("#<%=ddlRegimen.ClientID%>").prop('disabled', false);
             <%--$("#<%=ddlRegimen.ClientID%>").val("");--%>
         }
+
+        DrugPrescriptionTable
+                    .clear()
+                    .draw();
+
+        drugNameArr = [];
     }
 
        function drugSwitchInterruptionReason()
@@ -794,6 +818,7 @@
         if ($('#PharmacySection').parsley().validate()) {
 
             var treatmentProgram = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").val();
+            var treatmentProgramName = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
             var periodTaken = $("#<%=ddlPeriodTaken.ClientID%>").find(":selected").val();
             var treatmentPlan = $("#<%=ddlTreatmentPlan.ClientID%>").find(":selected").val();
             var treatmentPlanName = $("#<%=ddlTreatmentPlan.ClientID%>").find(":selected").text();
@@ -877,13 +902,14 @@
             catch (err) { }
 
             if (sumAllAbbr > 0) {
-                if (regimenLine == "0") {
-                    toastr.error("Error", "Please select the Regimen Line");
-                    return;
+                if (treatmentPlanName === 'ART') {
+                    if (regimenLine === "0") {
+                        toastr.error("Error", "Please select the Regimen Line");
+                        return;
+                    }
                 }
 
-
-                if (sumAllAbbr != sumSelectedRegimen) {
+                if (sumAllAbbr !== sumSelectedRegimen && treatmentPlanName === 'ART') {
                     toastr.error("Error", "Selected Regimen is not equal to Prescribed Regimen!");
                     return;
                 }
@@ -899,11 +925,13 @@
                             JSON.stringify(drugPrescriptionArray) + "', 'regimenText':'" + regimenText + "'}",
                         contentType: "application/json; charset=utf-8",
                         success: function (data) {
+                            $("#btnSavePrescription").prop("disabled", true);
                             toastr.success(data.d, "Saved successfully");
                             //$('#pharmacyModal').modal('hide');
 
                         },
                         error: function (data) {
+                            $("#btnSavePrescription").prop("disabled", false);
                             toastr.error(data.d, "Error");
                         }
                     });
@@ -921,9 +949,11 @@
                             JSON.stringify(drugPrescriptionArray) + "', 'regimenText':'" + regimenText + "'}",
                     contentType: "application/json; charset=utf-8",
                     success: function (data) {
+                        $("#btnSavePrescription").prop("disabled", true);
                         toastr.success(data.d, "Saved successfully");
                     },
                     error: function (data) {
+                        $("#btnSavePrescription").prop("disabled", false);
                         toastr.error(data.d, "Error");
                     }
                 });

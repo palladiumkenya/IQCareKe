@@ -283,8 +283,7 @@ namespace IQCare.CCC.UILogic
         public static int GetLookUpMasterId(string masterName)
         {
             int masterId;
-            ILookupManager lookupManager =
-                (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager,BusinessProcess.CCC");
+            ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager,BusinessProcess.CCC");
             masterId = lookupManager.GetLookUpMasterId(masterName);
 
             return masterId;

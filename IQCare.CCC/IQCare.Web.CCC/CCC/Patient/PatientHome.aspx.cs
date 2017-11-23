@@ -194,7 +194,7 @@ namespace IQCare.Web.CCC.Patient
                 {
                     if (curentRegimen.RegimenId > 0)
                     {
-                        lblCurrentRegimen.Text = "<span class='label label-success'>" + curentRegimen.Regimen.ToString() + "</span>";
+                        lblCurrentRegimen.Text = "<span class='label label-success'>" + curentRegimen.Regimen.ToString() + " started on : " + Convert.ToDateTime(curentRegimen.DispensedByDate).ToString("dd-MMM-yyyy") +"</span>";
                     }
                     else
                     {
@@ -216,6 +216,7 @@ namespace IQCare.Web.CCC.Patient
                     string adheranceString = LookupLogic.GetLookupNameById(adheranceStatus.Score);
                     switch (adheranceString)
                     {
+                        
                         case "Poor":
                             lblAdheranceStatus.Text = "<span class='label label-danger'> Poor [Offer Adherence Interventions]</span>";
                             break;

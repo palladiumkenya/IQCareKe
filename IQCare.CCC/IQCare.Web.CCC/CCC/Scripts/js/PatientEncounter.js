@@ -14,6 +14,7 @@ function AddAdverseReaction() {
 
     var adverseEventId = $("#adverseEventId").val();
     var adverseEvent = $("#adverseEvent").val();
+    adverseEvent = (adverseEvent === "Other Specify") ? $("#txtAdverseEventOther").val() : adverseEvent;
     var medicineCausingAE = $("#AdverseEventCause").val();
     var adverseEventSeverity = $('#ddlAdverseEventSeverity').find(":selected").text();
     var adverseEventSeverityID = $('#ddlAdverseEventSeverity').find(":selected").val();
@@ -46,7 +47,7 @@ function AddAdverseReaction() {
         toastr.error("Error", "Please enter Action");
         return false;
     }
-
+   // reactionEventFound = $.inArray("" + adverseEventId + "", reactionEventList);
     reactionEventFound = $.inArray("" + adverseEvent + "", reactionEventList);
     reactionCauseFound = $.inArray("" + medicineCausingAE + "", reactionCauseList);
     reactionSeverityFound = $.inArray("" + adverseEventSeverityID + "", reactionSeverityList);
@@ -57,7 +58,7 @@ function AddAdverseReaction() {
         toastr.error("Error", adverseEvent + " Adverse Event already exists in the List");
         return false; // message box herer
     }
-
+   // reactionEventList.push("" + adverseEventId + "");
     reactionEventList.push("" + adverseEvent + "");
     reactionCauseList.push("" + medicineCausingAE + "");
     reactionSeverityList.push("" + adverseEventSeverityID + "");
@@ -65,12 +66,13 @@ function AddAdverseReaction() {
     arrAdverseEventUI = [];
   
     arrAdverseEventUI.push([
-        adverseEventSeverityID,adverseEvent, medicineCausingAE, adverseEventSeverity, adverseEventAction,
+        adverseEventSeverityID,adverseEventId,adverseEvent, medicineCausingAE, adverseEventSeverity, adverseEventAction,
         "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"
     ]);
    
     DrawDataTable("dtlAdverseEvents", arrAdverseEventUI);
 
+    //$("#adverseEventId").val("");
     $("#adverseEvent").val("");
     $("#AdverseEventCause").val("");
     $('#ddlAdverseEventSeverity').val("0");
@@ -160,6 +162,21 @@ function AddAllergy() {
         toastr.error("Error", "Please enter allergy");
         return false;
     }
+    if(allergy!=="")
+    {
+        if (allergyReaction === "") {
+            toastr.error("Error", "Type of reaction is required!");
+            return false;
+        }
+        if (severity === "") {
+            toastr.error("Error", "Severity is required!");
+            return false;
+        }
+        if (allergyDate === "") {
+            toastr.error("Error", "Allergy date is required!");
+            return false;
+        }
+    }
 
     allergyFound = $.inArray("" + allergy + "", AllergyList);
 
@@ -239,26 +256,36 @@ function AddVaccine() {
 var physicalExamList = new Array();
 
 function AddPhysicalExam() {
-    var examType = $('#ddlExaminationType').find(":selected").text();
-    var examTypeID = $('#ddlExaminationType').find(":selected").val();
-    var exam = $('#ddlExamination').find(":selected").text();
-    var examID = $('#ddlExamination').find(":selected").val();
+    var systemTypeText = $('#ddlExaminationType').find(":selected").text();
+    var systemTypeID = $('#ddlExaminationType').find(":selected").val();
+    var reviewOfSystemsMasterId = $("#hfExaminationReviewSystems").val();
+    //console.log(reviewOfSystemsMasterId);
+    var findingIDText = $('#ddlExamination').find(":selected").text();
+    var findingID = $('#ddlExamination').find(":selected").val();
     var findings = $('#txtExamFindings').val();
 
     //Validate duplication
     var examFound = 0;
 
-    if (examTypeID === "0") {
-        toastr.error("Error","Please enter Examination Type");
+    if (systemTypeID === "0") {
+        toastr.error("Error","Please Select System Type");
         return false;
     }
 
-    if (examID == "0") {
-        toastr.error("Error", "Please enter Examination");
+    if (findingID == "0") {
+        toastr.error("Error", "Please select a Finding");
         return false;
     }
 
-    examFound = $.inArray("" + exam + "", physicalExamList);
+    examFound = $.inArray("" + findingID + "", physicalExamList);
+
+    //console.log("reviewOfSystemsMasterId " + reviewOfSystemsMasterId);
+    //console.log("systemTypeID " + systemTypeID);
+    //console.log("findingID " + findingID);
+    //console.log("systemTypeText " + systemTypeText);
+    //console.log("findingIDText " + findingIDText);
+    //console.log("findings " + findings);
+    //return false;
 
 
     if (examFound > -1) {
@@ -267,12 +294,12 @@ function AddPhysicalExam() {
     } else {
 
 
-        physicalExamList.push("" + exam + "");
+        physicalExamList.push("" + findingID + "");
        
 
         arrPhysicalExamUI = [];
         arrPhysicalExamUI.push([
-            examTypeID, examID, examType, exam, findings,
+            reviewOfSystemsMasterId, systemTypeID, findingID, systemTypeText, findingIDText, findings,
             "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"
         ]);
         

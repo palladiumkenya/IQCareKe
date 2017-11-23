@@ -7,9 +7,7 @@ namespace IQCare.CCC.UILogic.Enrollment
 {
     public class HivReConfirmatoryTestManager
     {
-        private IHivReConfirmatoryTestManager mgr =
-            (IHivReConfirmatoryTestManager) ObjectFactory.CreateInstance(
-                "BusinessProcess.CCC.Enrollment.BHivReConfirmatoryTest, BusinessProcess.CCC");
+        private IHivReConfirmatoryTestManager mgr = (IHivReConfirmatoryTestManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Enrollment.BHivReConfirmatoryTest, BusinessProcess.CCC");
 
         public int AddHivReConfirmatoryTest(int personId, int typeOfTest, int testResult, string testResultDate, int userId)
         {
@@ -44,6 +42,32 @@ namespace IQCare.CCC.UILogic.Enrollment
             }
             catch (Exception e)
             {
+                throw new Exception(e.Message);
+            }
+        }
+
+        public HivReConfirmatoryTest GetPersonLastReConfirmatoryTest(int personId)
+        {
+            try
+            {
+                return mgr.GetPersonLastReConfirmatoryTest(personId);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw new Exception(e.Message);
+            }
+        }
+
+        public int UpdateHivReConfirmatoryTest(HivReConfirmatoryTest hivReConfirmatoryTest)
+        {
+            try
+            {
+                return mgr.UpdateHivReConfirmatoryTest(hivReConfirmatoryTest);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
                 throw new Exception(e.Message);
             }
         }
