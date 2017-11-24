@@ -1847,8 +1847,10 @@
 										.datepicker('setDate', moment(obj.TreatmentStartDate).format('DD-MMM-YYYY'));
 
 									/* HIV DIAGNOSIS */
-									$("#DHID")
-										.datepicker('setDate', moment(obj.HivDiagnosisDate).format('DD-MMM-YYYY'));
+                                    if (obj.HivDiagnosisDate) {
+                                        $("#DHID")
+                                        .datepicker('setDate', moment(obj.HivDiagnosisDate).format('DD-MMM-YYYY'));
+                                    }
 									$("#DOE").datepicker('setDate', moment(obj.EnrollmentDate).format('DD-MMM-YYYY'));
 
                                     if (obj.ARTInitiationDate) {

@@ -1,3 +1,5 @@
+Set Nocount On;
+Go
 If Not Exists (Select * From sys.columns Where Name = N'DataType' And Object_ID = Object_id(N'Mst_LabTest_Old'))  Begin
 		Alter table dbo.Mst_LabTest_Old Add DataType  varchar(20) Null
 	End
