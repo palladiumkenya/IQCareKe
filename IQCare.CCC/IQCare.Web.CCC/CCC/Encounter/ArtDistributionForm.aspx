@@ -396,6 +396,7 @@
             Date: 0,
             momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
         });
+
         $(document).ready(function () {
 
             $("#<%=missedDosesCount.ClientID%>").prop('disabled', true);

@@ -4,6 +4,8 @@
 --<asp:ListItem Text="Pharmacy" Value="4"></asp:ListItem>
 --<asp:ListItem Text="Triage" Value="5"></asp:ListItem>
 --<asp:ListItem Text="Cashier" Value="6"></asp:ListItem>
+Set Nocount On;
+Go
 Declare @OldWaitingList Table (ID int Not null , Name varchar(50) Not null, primary key(ID), unique (Name))
 Insert Into @OldWaitingList (ID, Name)Values(1, 'Consultation');
 Insert Into @OldWaitingList (ID, Name)Values(2,'Laboratory');

@@ -164,9 +164,18 @@ function AddAllergy() {
     }
     if(allergy!=="")
     {
-        if (allergyReaction === "") { toastr.error("Error", "Type of reaction is required!"); }
-        if (severity === "") { toastr.error("Error", "Severity is required!"); }
-        if (allergyDate === "") { toastr.error("Error", "Allergy date is required!");}
+        if (allergyReaction === "") {
+            toastr.error("Error", "Type of reaction is required!");
+            return false;
+        }
+        if (severity === "") {
+            toastr.error("Error", "Severity is required!");
+            return false;
+        }
+        if (allergyDate === "") {
+            toastr.error("Error", "Allergy date is required!");
+            return false;
+        }
     }
 
     allergyFound = $.inArray("" + allergy + "", AllergyList);
@@ -269,6 +278,14 @@ function AddPhysicalExam() {
     }
 
     examFound = $.inArray("" + findingID + "", physicalExamList);
+
+    //console.log("reviewOfSystemsMasterId " + reviewOfSystemsMasterId);
+    //console.log("systemTypeID " + systemTypeID);
+    //console.log("findingID " + findingID);
+    //console.log("systemTypeText " + systemTypeText);
+    //console.log("findingIDText " + findingIDText);
+    //console.log("findings " + findings);
+    //return false;
 
 
     if (examFound > -1) {
@@ -570,20 +587,4 @@ function ValidatePrescriptionDate() {
         $("#txtPrescriptionDate").val("");
         $("#txtPrescriptionDate").val("");
     }
-}
-
-function GetPatientExaminationTypeID() {
-    $.ajax({
-        type: "POST",
-        url: "../WebService/LookupService.asmx/GetMasterIdByMasterName",
-        data: "{'groupName': 'ReviewOfSystems' }",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-
-        success: function (data) {
-            var serverData = data.d;
-            var obj = $.parseJSON(serverData);
-            $("#hfExaminationReviewSystems").val(obj);
-        }
-    });
 }
