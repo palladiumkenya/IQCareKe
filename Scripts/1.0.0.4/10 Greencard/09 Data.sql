@@ -1,19 +1,18 @@
-﻿--Lookup master
-If Not Exists(Select 1 From LookupMaster where Name='ARTRefillModel') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('ARTRefillModel','ART Refill Model',0); End
-
---Lookup items
-If Not Exists(Select 1 From LookupItem where Name='FT') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('FT','FT = Fast Track',0); End
-If Not Exists(Select 1 From LookupItem where Name='CADH') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('CADH','CADH = Community ART Distribution - HCW Led',0); End
-If Not Exists(Select 1 From LookupItem where Name='CADP') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('CADP','CADP = Community ART Distribution - Peer Led',0); End
-If Not Exists(Select 1 From LookupItem where Name='FADG') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('FADG','FADG = Facility ART Distribution Group',0); End
-
+﻿EXECUTE sp_msforeachtable 'ALTER TABLE ? disable trigger ALL'
+Go
 If Not Exists(Select 1 From LookupItem where Name='N') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('NORMAL','Normal',0); End
 If Not Exists(Select 1 From LookupItem where Name='O') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('OBESE','Overweight/Obese',0); End
 
-Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'FT = Fast Track',1 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='FT'  ) ItemId  FROM LookupMaster  WHERE Name='ARTRefillModel') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
-Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'CADH = Community ART Distribution - HCW Led',2 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='CADH'  ) ItemId  FROM LookupMaster  WHERE Name='ARTRefillModel') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
-Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'CADP = Community ART Distribution - Peer Led',3 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='CADP'  ) ItemId  FROM LookupMaster  WHERE Name='ARTRefillModel') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
-Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'FADG = Facility ART Distribution Group',4 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='FADG'  ) ItemId  FROM LookupMaster  WHERE Name='ARTRefillModel') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+
+Exec LookupMasterItem_Insert @ItemName=N'FT' ,@MasterName=N'ARTRefillModel' ,@OrdRank=1.00, @DisplayName=N'FT = Fast Track'
+Go
+Exec LookupMasterItem_Insert @ItemName=N'CADH' ,@MasterName=N'ARTRefillModel' ,@OrdRank=1.01, @DisplayName=N'CADH = Community ART Distribution - HCW Led'
+Go
+Exec LookupMasterItem_Insert @ItemName=N'CADP' ,@MasterName=N'ARTRefillModel' ,@OrdRank=1.02, @DisplayName=N'CADP = Community ART Distribution - Peer Led'
+Go
+Exec LookupMasterItem_Insert @ItemName=N'FADG' ,@MasterName=N'ARTRefillModel' ,@OrdRank=1.02, @DisplayName=N'FADG = Facility ART Distribution Group'
+Go
+
 
 
 if not exists(select 1 from mst_code where name = 'ServiceRegisteredForAtPharmacy')

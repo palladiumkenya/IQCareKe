@@ -19,7 +19,7 @@ namespace Entities.CCC.Baseline
         public int Id { get; set; }
         public int PatientId { get; set; }
         public int PatientMasterVisitId { get; set; }
-        public DateTime HivDiagnosisDate { get; set; }
+        public DateTime? HivDiagnosisDate { get; set; }
         public DateTime EnrollmentDate { get; set; }
         public int EnrollmentWhoStage { get; set; }
         

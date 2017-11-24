@@ -4033,7 +4033,7 @@ BEGIN
 	DECLARE @i INT = 1;
 	DECLARE @count INT;
   
-	PRINT '-------- Patients Report --------';  
+	--PRINT '-------- Patients Report --------';  
 	exec pr_OpenDecryptedSession;
 	
 	--Create Temporary Tables for storing data 
@@ -4060,9 +4060,9 @@ BEGIN
 
 				BEGIN TRY
 					BEGIN TRANSACTION
-						PRINT ' '  
-						SELECT @message = '----- Syncing patient : ' + CAST(@ptn_pk as varchar(50));
-						PRINT @message;
+						--PRINT ' '  
+						--SELECT @message = '----- Syncing patient : ' + CAST(@ptn_pk as varchar(50));
+						--PRINT @message;
 
 						--set null dates
 						IF @CreateDate is null
@@ -4134,8 +4134,8 @@ BEGIN
 								Active = @Status_Greencard
 								WHERE Id = @PersonId;
 
-								SELECT @message = 'Updated Person Id: ' + CAST(@PersonId as varchar(50));
-								PRINT @message;
+								--SELECT @message = 'Updated Person Id: ' + CAST(@PersonId as varchar(50));
+								--PRINT @message;
 
 								UPDATE Patient SET
 								PatientIndex = @PatientFacilityId,
@@ -4148,8 +4148,8 @@ BEGIN
 								RegistrationDate = @RegistrationDate
 								WHERE ptn_pk = @ptn_pk;
 
-								SELECT @message = 'Updated Patient ptn: ' + CAST(@ptn_pk as varchar(50));
-								PRINT @message;
+								--SELECT @message = 'Updated Patient ptn: ' + CAST(@ptn_pk as varchar(50));
+								--PRINT @message;
 
 								--Insert into Enrollment Table
 								DECLARE @j INT = 1;
@@ -4171,9 +4171,9 @@ BEGIN
 
 											BEGIN TRY
 												BEGIN TRANSACTION
-														PRINT ' ';
-														SELECT @message = '----- Enrollment for: ' + CAST(@ptn_pk as varchar(50));
-														PRINT @message;
+														--PRINT ' ';
+														--SELECT @message = '----- Enrollment for: ' + CAST(@ptn_pk as varchar(50));
+														--PRINT @message;
 
 														 IF @ModuleId = 203
 															BEGIN
@@ -4190,8 +4190,8 @@ BEGIN
 																		VALUES (@PatientId,1, @StartDate,0, @transferIn, @Status ,0 ,@UserID_Enrollment ,@CreateDate_Enrollment ,NULL);
 
 																		SELECT @EnrollmentId = SCOPE_IDENTITY();
-																		SELECT @message = 'Created PatientEnrollment Id: ' + CAST(@EnrollmentId as varchar);
-																		PRINT @message;
+																		--SELECT @message = 'Created PatientEnrollment Id: ' + CAST(@EnrollmentId as varchar);
+																		--PRINT @message;
 																	END
 															END
 												COMMIT
@@ -4303,9 +4303,9 @@ BEGIN
 
 										BEGIN TRY
 											BEGIN TRANSACTION
-												PRINT ' '  
-												SELECT @message = '----- Treatment Supporter: ' + CAST(@ptn_pk as varchar(50));
-												PRINT @message;
+												--PRINT ' '  
+												--SELECT @message = '----- Treatment Supporter: ' + CAST(@ptn_pk as varchar(50));
+												--PRINT @message;
 
 												IF @FirstNameT IS NOT NULL AND @LastNameT IS NOT NULL 
 													BEGIN
@@ -4362,8 +4362,8 @@ BEGIN
 												VALUES(@PersonId, @Address, @Phone, null, null, @Status, 0, @UserID, @CreateDate);
 
 												SELECT @PersonContactID = SCOPE_IDENTITY();
-												SELECT @message = 'Created PersonContact Id: ' + CAST(@PersonContactID as varchar);
-												PRINT @message;
+												--SELECT @message = 'Created PersonContact Id: ' + CAST(@PersonContactID as varchar);
+												--PRINT @message;
 											END;
 									END
 
@@ -5729,4 +5729,39 @@ End
 
 
 
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[LookupMasterItem_Insert]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[LookupMasterItem_Insert]
+GO
+CREATE PROCEDURE LookupMasterItem_Insert 
+	-- Add the parameters for the stored procedure here
+	@ItemName varchar(200), 
+	@MasterName varchar(200),
+	@OrdRank decimal(5,2)=1.00,
+	@DisplayName varchar(250) = Null
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	Declare @LookupItemId int, @MasterItemId int;
+
+	Select @LookupItemId = Id From LookupItem Where Name = @ItemName;
+	If(@LookupItemId Is Null) Begin
+		Insert into LookupItem(Name,DisplayName,DeleteFlag) Values (@ItemName, @ItemName,0);
+		Select @LookupItemId = scope_identity();
+	End
+
+	Select @MasterItemId = Id From LookupMaster Where Name = @MasterName;
+	If(@MasterItemId Is Null) Begin
+		Insert into LookupMaster(Name,DisplayName,DeleteFlag) Values (@MasterName, @MasterName,0);
+		Select @MasterItemId = scope_identity();
+	End
+
+	Delete From LookupMasterItem where LookupMasterId=@MasterItemId And LookupItemId=@LookupItemId;
+
+	Insert Into LookupMasterItem(LookupMasterId,LookupItemId,DisplayName,OrdRank) Values (@MasterItemId,@LookupItemId,Isnull(@DisplayName,@ItemName),@OrdRank)
+END
 GO
