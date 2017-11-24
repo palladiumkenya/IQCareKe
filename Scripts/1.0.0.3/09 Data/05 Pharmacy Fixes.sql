@@ -1,4 +1,5 @@
-
+Set Nocount On;
+Go
 --------------------------------------------------------------------------------------------------
 If Not Exists(Select 1 From lnk_DrugGeneric  Where Drug_pk=1147 And GenericID = 1) Begin
 	Insert Into lnk_DrugGeneric (Drug_pk,GenericID,CreateDate,DeleteFlag,UserID)
