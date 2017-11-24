@@ -88,12 +88,25 @@ namespace IQCare.Web.CCC.Patient
                 {
                     if (item.HivDiagnosisDate.HasValue)
                     {
-                        lblDateOfHivDiagnosis.Text = item.HivDiagnosisDate.Value.ToString("dd-MMM-yyyy");
+                        DateTime HivDiagnosisDate = item.HivDiagnosisDate.Value;
+                        lblDateOfHivDiagnosis.Text = HivDiagnosisDate.ToString("dd-MMM-yyyy");
                     }
-                    else { lblDateOfHivDiagnosis.Text = "Not Taken"; }
-                    lblDateOfEnrollment.Text = item.EnrollmentDate.ToString("dd-MMM-yyyy");
+                    else
+                    {
+                        lblDateOfHivDiagnosis.Text = "Not Taken";
+                    }
+
+                    if (item.EnrollmentDate.HasValue)
+                    {
+                        lblDateOfEnrollment.Text = item.EnrollmentDate.Value.ToString("dd-MMM-yyyy");
+                    }
+                    else
+                    {
+                        lblDateOfEnrollment.Text = "Not Taken";
+                    }
+                    
                     // lblWhoStage.Text = LookupLogic.GetLookupNameById(item.EnrollmentWhoStage).ToString();
-                   // lblDateOfHivDiagnosis.Text = item.HivDiagnosisDate.ToString("dd-MMM-yyyy");
+                    //lblDateOfHivDiagnosis.Text = item.HivDiagnosisDate.ToString("dd-MMM-yyyy");
                     lblARTInitiationDate.Text = Convert.ToString(item.ArtInitiationDate);
                 }
 
@@ -198,7 +211,7 @@ namespace IQCare.Web.CCC.Patient
                 {
                     if (curentRegimen.RegimenId > 0)
                     {
-                        lblCurrentRegimen.Text = "<span class='label label-success'>" + curentRegimen.Regimen.ToString() + " started on : " + Convert.ToDateTime(curentRegimen.DispensedByDate).ToString("dd-MMM-yyyy") +"</span>";
+                        lblCurrentRegimen.Text = "<span class='label label-success'>" + curentRegimen.Regimen.ToString() + "</span>";
                     }
                     else
                     {
@@ -220,7 +233,6 @@ namespace IQCare.Web.CCC.Patient
                     string adheranceString = LookupLogic.GetLookupNameById(adheranceStatus.Score);
                     switch (adheranceString)
                     {
-                        
                         case "Poor":
                             lblAdheranceStatus.Text = "<span class='label label-danger'> Poor [Offer Adherence Interventions]</span>";
                             break;
