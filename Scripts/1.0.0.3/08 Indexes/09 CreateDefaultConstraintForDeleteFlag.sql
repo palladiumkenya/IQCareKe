@@ -1,6 +1,8 @@
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Create_DefaultConstraints]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[Create_DefaultConstraints]
 GO
+Set Nocount on
+Go
 Create PROCEDURE [dbo].[Create_DefaultConstraints]
 AS
 BEGIN

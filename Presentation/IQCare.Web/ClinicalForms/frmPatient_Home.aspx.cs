@@ -510,29 +510,30 @@ namespace IQCare.Web.Clinical
                  {
                      Year.SetValue(theDS.Tables[8].Rows[a]["DATE"], a);
                  }*/
-                DateTime[] Year = new DateTime[yearGraphLength];
+                // DateTime[] Year = new DateTime[yearGraphLength];
+                List<DateTime> Year = new List<DateTime>();
 
                 DataTable cd4Dates = new DataView(theDS.Tables[6]).ToTable(true, "ResultDate");
                 DataTable viralDates = new DataView(theDS.Tables[7]).ToTable(true, "ResultDate");
                 cd4Dates.Merge(viralDates, true, MissingSchemaAction.Ignore);
                 cd4Dates.DefaultView.Sort = "ResultDate Asc";
 
-                for (Int32 a = 0, l = Year.Length; a < l; a++)
+                foreach(DataRow row in cd4Dates.Rows)
                 {
-                    if (cd4Dates.Rows[a]["ResultDate"] != System.DBNull.Value)
+                    if(row["ResultDate"] != DBNull.Value)
                     {
-                        Year.SetValue(Convert.ToDateTime(cd4Dates.Rows[a]["ResultDate"]), a);
+                        Year.Add(Convert.ToDateTime(row["ResultDate"]));
                     }
-                }
+                }    
 
                 //18thAug2009 createChartCD4(CD4, ViralLoad, YearCD4, YearVL, Year);
                 Chart.setLicenseCode("DEVP-2AC2-336W-54FM-EAB2-F8E2");
-                createChartCD4(WebChartViewerCD4VL, CD4, ViralLoad, YearCD4, YearVL, Year);
+                createChartCD4(WebChartViewerCD4VL, CD4, ViralLoad, YearCD4, YearVL, Year.ToArray());
                 Session["CD4_Graph"] = CD4;
                 Session["ViralLoad_Graph"] = ViralLoad;
                 Session["YearCD4_Graph"] = YearCD4;
                 Session["YearVL_Graph"] = YearVL;
-                Session["Year_Graph"] = Year;
+                Session["Year_Graph"] = Year.ToArray();
 
             }
             catch { }

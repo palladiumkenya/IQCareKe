@@ -4,7 +4,8 @@ Go
 Update AppAdmin Set AppVer='Ver 1.0.0.3 Kenya HMIS', DBVer='Ver 1.0.0.3 Kenya HMIS', RelDate='20170801 00:00:00.000', VersionName = 'Kenya HMIS Ver 1.0.0.3'
 
 Go
-
+EXECUTE sp_msforeachtable 'ALTER TABLE ? disable trigger ALL'
+Go
 --update patientfacilityId
 
 ;With Patients as ( 
