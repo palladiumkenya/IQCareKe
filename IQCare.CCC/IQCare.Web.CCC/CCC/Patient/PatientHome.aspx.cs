@@ -265,17 +265,16 @@ namespace IQCare.Web.CCC.Patient
                             lblFirstline.Text = DispensedByDate.ToString("dd-MMM-yyyy");
                             lblcohort.Text = DispensedByDate.ToString("MMM") + "-" + DispensedByDate.Year;
                         }
-                        
-                        
+                                                
                         lblRegimenName.Text = ptnTreatmentInitiation.Regimen.ToString();
-                        lblCurrentRegimen.Text = "<span class='label label-success'>" + ptnTreatmentBaseline.Regimen.ToString() + "</span>";
+                        //lblCurrentRegimen.Text = "<span class='label label-success'>" + ptnTreatmentBaseline.Regimen.ToString() + "</span>";
                         lblARTInitiationDate.Text = ptnTreatmentBaseline.CreateDate.ToString("dd-MMM-yyyy");
                     }
                     else
                     {
                         lblDateOfARTInitiation.Text = "<span class='label'> Not dispensed</span>";
                         lblcohort.Text = "<span class='label label-danger'>N/A</span>";
-                        lblCurrentRegimen.Text = "<span class='label label-danger'>PATIENT NOT ON ARVs</span>";
+                       // lblCurrentRegimen.Text = "<span class='label label-danger'>PATIENT NOT ON ARVs</span>";
 
                     }
                 }
