@@ -124,7 +124,7 @@ BEGIN
 	INSERT INTO #Tmst_Patient(ptn_pk, personId)
 	SELECT ptn_pk, PersonId FROM Patient
 
-	DECLARE @ptn_pk int, @personId int, @patientId int, @message varchar(max);
+	DECLARE @ptn_pk int, @personId int, @patientId int, @message varchar(max), @patientmastervisitId int, @rPatientId int;
 
 	SELECT @countj = COUNT(Id) FROM #Tmst_Patient 
 
@@ -158,10 +158,11 @@ BEGIN
 	DROP TABLE #Tmst_Patient
 
 
-	DECLARE @d int = 1;
-	DECLARE @countd int;
+	DECLARE @d int = 1, @v int = 1;
+	DECLARE @countd int, @countv int;
 
-	CREATE TABLE #TPatient(Id INT IDENTITY(1,1), ptn_pk int, personId int, patientId int)
+	CREATE TABLE #TPatient(Id INT IDENTITY(1,1), ptn_pk int, personId int, patientId int);
+	CREATE TABLE #TPatientMasterVisit(Id INT IDENTITY(1,1), PatientId int, PatientMasterVisitId int);
 
 	INSERT INTO #TPatient(ptn_pk, personId, patientId)
 	 SELECT ptn_pk, PersonId, Id from (SELECT        Id, ptn_pk, PersonId, PatientIndex, PatientType, FacilityId, Active, DateOfBirth, DobPrecision, NationalId, DeleteFlag, CreatedBy, CreateDate, AuditData, RegistrationDate, row_number() Over (Partition By ptn_pk Order By Id Asc) RowNum
@@ -182,9 +183,74 @@ BEGIN
 		WHILE (@d <= @countd)
 		BEGIN
 			SELECT @ptn_pk = ptn_pk, @personId = personId, @patientId = patientId from #TPatient WHERE Id = @d;
-
+			select top 1 @rPatientId = id from Patient where ptn_pk = @ptn_pk and Id <> @patientId
 			BEGIN TRY
 				BEGIN TRANSACTION
+					INSERT INTO #TPatientMasterVisit(PatientId, PatientMasterVisitId)
+					SELECT PatientId, Id FROM PatientMasterVisit WHERE PatientId = @patientId
+
+					SELECT @countv = COUNT(Id) FROM #TPatientMasterVisit
+					BEGIN
+						WHILE(@v <=@countv)
+						BEGIN
+							SELECT @patientmastervisitId = PatientMasterVisitId FROM #TPatientMasterVisit WHERE Id = @v;
+							UPDATE [dbo].[PatientMasterVisit] SET PatientId = @rPatientId WHERE Id = @patientmastervisitId AND PatientId = @patientId;
+							UPDATE [dbo].[AdherenceAssessment] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[AdherenceOutcome] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[AdultChildVaccination] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[AdverseEvent] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[ARVTreatmentTracker] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[ComplaintsHistory] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[Disclosure] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[HIVEnrollmentBaseline] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[INHProphylaxis] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientAdverseEventOutcome] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientAllergies] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientAllergy] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientAppointment] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientArtDistribution] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientARVHistory] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientBaselineAssessment] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientCareending] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientCategorization] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientChronicIllness] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientClinicalDiagnosis] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientClinicalNotes] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientConsent] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientDiagnosis] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientEncounter] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientFamilyPlanning] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientFamilyPlanningMethod] SET PatientId = @rPatientId WHERE PatientId = @patientId;
+							UPDATE [dbo].[PatientHivDiagnosis] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientIcf] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientIcfAction] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientIpt] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientIptOutcome] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientIptWorkup] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientLabTracker] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientPHDP] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientPhysicalExamination] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientProphylaxis] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientPsychosocialCriteria] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientReenrollment] SET PatientId = @rPatientId WHERE PatientId = @patientId;
+							UPDATE [dbo].[PatientReferral] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientScreening] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientSupportSystemCriteria] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientTransferIn] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientTreatmentInitiation] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientVitals] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientWHOStage] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PhysicalExamination] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[Pregnancy] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PregnancyIndicator] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PregnancyLog] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PresentingComplaints] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[Referrals] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[TreatmentEventTracker] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[Vaccination] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+						END
+					END
+
 					UPDATE Patient SET DeleteFlag = 1, ptn_pk = - FLOOR(RAND(CHECKSUM(NEWID()))*(9999-1000)+1000) WHERE Id = @patientId
 					UPDATE Person SET DeleteFlag = 1 WHERE Id = @personId
 				COMMIT
@@ -198,6 +264,7 @@ BEGIN
 	END
 
 	DROP TABLE #TPatient
+	DROP TABLE #TPatientMasterVisit
 END
 GO
 
@@ -694,7 +761,17 @@ BEGIN
 							SET @Status_Greencard = 1
 
 						IF @IDNumber IS NULL
-							SET @IDNumber = 99999999;
+							BEGIN
+								SET @IDNumber = 99999999;
+							END
+
+						DECLARE @IsIDNumeric int;
+						SET @IsIDNumeric = ISNUMERIC(@IDNumber);
+
+						IF @IsIDNumeric <> 1
+							BEGIN
+								SET @IDNumber = 99999999;
+							END
 
 						IF @Sex IS NOT NULL
 							BEGIN

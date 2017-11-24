@@ -86,10 +86,19 @@ namespace IQCare.Web.CCC.Patient
             {
                 foreach (var item in objDiagnosis)
                 {
-                    lblDateOfHivDiagnosis.Text = item.HivDiagnosisDate.ToString("dd-MMM-yyyy");
-                    lblDateOfEnrollment.Text = item.EnrollmentDate.ToString("dd-MMM-yyyy");
+                    if (item.HivDiagnosisDate.HasValue)
+                    {
+                        DateTime HivDiagnosisDate = item.HivDiagnosisDate.Value;
+                        lblDateOfHivDiagnosis.Text = HivDiagnosisDate.ToString("dd-MMM-yyyy");
+                    }
+
+                    if (item.EnrollmentDate.HasValue)
+                    {
+                        lblDateOfEnrollment.Text = item.EnrollmentDate.Value.ToString("dd-MMM-yyyy");
+                    }
+                    
                     // lblWhoStage.Text = LookupLogic.GetLookupNameById(item.EnrollmentWhoStage).ToString();
-                    lblDateOfHivDiagnosis.Text = item.HivDiagnosisDate.ToString("dd-MMM-yyyy");
+                    //lblDateOfHivDiagnosis.Text = item.HivDiagnosisDate.ToString("dd-MMM-yyyy");
                     lblARTInitiationDate.Text = Convert.ToString(item.ArtInitiationDate);
                 }
 
