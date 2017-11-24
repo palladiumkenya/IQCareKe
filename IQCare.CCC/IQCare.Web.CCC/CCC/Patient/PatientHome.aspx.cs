@@ -91,10 +91,18 @@ namespace IQCare.Web.CCC.Patient
                         DateTime HivDiagnosisDate = item.HivDiagnosisDate.Value;
                         lblDateOfHivDiagnosis.Text = HivDiagnosisDate.ToString("dd-MMM-yyyy");
                     }
+                    else
+                    {
+                        lblDateOfHivDiagnosis.Text = "Not Taken";
+                    }
 
                     if (item.EnrollmentDate.HasValue)
                     {
                         lblDateOfEnrollment.Text = item.EnrollmentDate.Value.ToString("dd-MMM-yyyy");
+                    }
+                    else
+                    {
+                        lblDateOfEnrollment.Text = "Not Taken";
                     }
                     
                     // lblWhoStage.Text = LookupLogic.GetLookupNameById(item.EnrollmentWhoStage).ToString();
