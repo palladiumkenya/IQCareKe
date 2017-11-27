@@ -427,10 +427,10 @@
                 var transferOutFacility = $("#<%=Facility.ClientID%>").val();
                 var dateOfDeath = $('#DateOfDeath').datepicker('getDate');
 
-                if (Object.prototype.toString.call(dateOfDeath) === '[object Date]') {
-                    dateOfDeath = '';
+                if (Object.prototype.toString.call(dateOfDeath) === '[object Date]') {    
+                    dateOfDeath = moment(moment(dateOfDeath, 'DD-MMM-YYYY')).format('DD-MMM-YYYY');
                 } else {
-                    dateOfDeath = moment(dateOfDeath).format('DD-MMM-YYYY');
+                    dateOfDeath = '';
                 }
 
                 $.ajax({

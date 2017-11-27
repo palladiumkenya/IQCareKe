@@ -78,7 +78,7 @@ namespace BusinessProcess.CCC
                     }
                 }
 
-                return 0;
+                return Convert.ToInt32(ptn_pharmacy_pk) ;
             }
 
             

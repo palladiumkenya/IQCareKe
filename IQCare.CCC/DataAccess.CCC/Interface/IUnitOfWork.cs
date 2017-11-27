@@ -12,6 +12,8 @@ using DataAccess.CCC.Interface.Encounter;
 using DataAccess.CCC.Repository.person;
 using Interface.CCC.Lookup;
 using DataAccess.CCC.Interface.assessment;
+using DataAccess.CCC.Interface.Interoperability;
+using Interface.CCC.Interoperability;
 
 namespace DataAccess.CCC.Interface
 {
@@ -96,6 +98,11 @@ namespace DataAccess.CCC.Interface
         /* Patient ART Preparation */
         IPatientPsychosocialCriteriaRepository PatientPsychosocialCriteriaRepository { get; }
         IPatientSupportSystemCriteriaRepository PatientSupportSystemCriteriaRepository { get;}
+
+        // interoperability
+        IPatientMessageRepository PatientMessageRepository { get; }
+        IDrugPrescriptionMessageRepository DrugPrescriptionMessageRepository { get; }
+        IViralLoadMessageRepository ViralLoadMessageRepository { get; }
 
     }
 }

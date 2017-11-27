@@ -158,5 +158,23 @@ namespace IQCare.CCC.UILogic
             var facilityVLunsuppressed = _lookupTest.GetFacilityVLUnSuppressed(facilityId);
             return facilityVLunsuppressed;
         }
+
+        public List<LabOrderEntity> GetPatientLabOrdersByDate(int patientId, DateTime visitDate)
+        {
+            var labOrders = _mgr.GetPatientLabOrdersByDate(patientId, visitDate);
+            return labOrders;
+        }
+
+        public List<LabDetailsEntity> GetPatientLabDetailsByDate(int labOrderId, DateTime visitDate)
+        {
+            var labDetails = _mgr.GetPatientLabDetailsByDate(labOrderId, visitDate);
+            return labDetails;
+        }
+
+        public int AddPatientLabResults(LabResultsEntity labResultsEntity)
+        {
+            var labResults = _mgr.AddPatientLabResults(labResultsEntity);
+            return labResults;
+        }
     }
    }

@@ -52,5 +52,15 @@ namespace BusinessProcess.CCC.Enrollment
                 return entryPointList;
             }       
         }
+
+        public List<PatientEntryPoint> GetPatientEntryPoints(int patientId, int serviceAreaId)
+        {
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var entryPointList = _unitOfWork.PatientEntryPointRepository.FindBy(x => x.PatientId == patientId && !x.DeleteFlag && x.ServiceAreaId == serviceAreaId).ToList();
+                _unitOfWork.Dispose();
+                return entryPointList;
+            }
+        }
     }
 }

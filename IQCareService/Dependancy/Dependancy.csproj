@@ -11,7 +11,7 @@
     <RootNamespace>Dependancy</RootNamespace>
     <AssemblyName>Dependancy</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>    
+    <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -91,6 +91,9 @@
     <Reference Include="BusinessProcess.Service">
       <HintPath>..\..\References\BusinessProcess.Service.dll</HintPath>
     </Reference>
+    <Reference Include="BusinessProcess.WebApi">
+      <HintPath>..\..\References\BusinessProcess.WebApi.dll</HintPath>
+    </Reference>
     <Reference Include="DataAccess.Base">
       <HintPath>..\..\References\DataAccess.Base.dll</HintPath>
     </Reference>
@@ -115,8 +118,14 @@
     <Reference Include="DataAccess.Report">
       <HintPath>..\..\References\DataAccess.Report.dll</HintPath>
     </Reference>
+    <Reference Include="DataAccess.WebApi">
+      <HintPath>..\..\References\net461\DataAccess.WebApi.dll</HintPath>
+    </Reference>
     <Reference Include="Entities.CCC">
       <HintPath>..\..\References\Entities.CCC.dll</HintPath>
+    </Reference>
+    <Reference Include="Entity.WebApi">
+      <HintPath>..\..\References\net461\Entity.WebApi.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\..\References\EntityFramework.dll</HintPath>
@@ -169,11 +178,26 @@
     <Reference Include="Interface.Service">
       <HintPath>..\..\References\Interface.Service.dll</HintPath>
     </Reference>
+    <Reference Include="Interface.WebApi">
+      <HintPath>..\..\References\net461\Interface.WebApi.dll</HintPath>
+    </Reference>
+    <Reference Include="IQCare.DTO">
+      <HintPath>..\..\References\net461\IQCare.DTO.dll</HintPath>
+    </Reference>
+    <Reference Include="IQCare.Events">
+      <HintPath>..\..\References\IQCare.Events.dll</HintPath>
+    </Reference>
+    <Reference Include="IQCare.Web.Api">
+      <HintPath>..\..\References\net461\IQCare.Web.Api.dll</HintPath>
+    </Reference>
     <Reference Include="IQCare.Web.CCC">
       <HintPath>..\..\References\IQCare.Web.CCC.dll</HintPath>
     </Reference>
     <Reference Include="IQCare.Web.WebService">
       <HintPath>..\..\References\IQCare.Web.WebService.dll</HintPath>
+    </Reference>
+    <Reference Include="IQCare.WebApi.Logic">
+      <HintPath>..\..\References\net461\IQCare.WebApi.Logic.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

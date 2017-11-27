@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="IRepository\" />
+    <Folder Include="Repository\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Entities.HTS\Entities.HTS.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="DataAccess.Base">
+      <HintPath>..\..\..\References\DataAccess.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="DataAccess.Context">
+      <HintPath>..\..\..\References\DataAccess.Context.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\..\References\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\..\..\References\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

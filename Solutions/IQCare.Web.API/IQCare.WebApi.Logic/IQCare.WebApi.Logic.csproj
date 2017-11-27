@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{62A2C82B-D183-4989-930A-E0451600A100}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>IQCare.WebApi.Logic</RootNamespace>
+    <AssemblyName>IQCare.WebApi.Logic</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\References\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ADODB, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\..\..\References\ADODB.dll</HintPath>
+    </Reference>
+    <Reference Include="Application.Presentation">
+      <HintPath>..\..\..\References\Application.Presentation.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper">
+      <HintPath>..\..\..\Library\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="DataAccess.Base">
+      <HintPath>..\..\..\References\DataAccess.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="DataAccess.Context">
+      <HintPath>..\..\..\References\DataAccess.Context.dll</HintPath>
+    </Reference>
+    <Reference Include="Entities.CCC, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <Reference Include="Entity.WebApi, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\Entity.WebApi.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\..\References\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\..\..\References\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Interface.WebApi, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\Interface.WebApi.dll</HintPath>
+    </Reference>
+    <Reference Include="IQCare.CCC.UILogic, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\IQCare.CCC.UILogic.dll</HintPath>
+    </Reference>
+    <Reference Include="IQCare.DTO, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\IQCare.DTO.dll</HintPath>
+    </Reference>
+    <Reference Include="IQCare.Events, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\IQCare.Events.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApiInboxManager.cs" />
+    <Compile Include="ApiInteropManager.cs" />
+    <Compile Include="ApiOutboxmanager.cs" />
+    <Compile Include="Helpers\AppSettings.cs" />
+    <Compile Include="MappingEntities\DrugDispenseEntity.cs" />
+    <Compile Include="MappingEntities\drugs\CommonOrderDetailsEntity.cs" />
+    <Compile Include="MappingEntities\drugs\IdentificationEntity.cs" />
+    <Compile Include="MappingEntities\drugs\MessageHeaderEntity.cs" />
+    <Compile Include="MappingEntities\drugs\OrderingPhysicianEntity.cs" />
+    <Compile Include="MappingEntities\drugs\PatientIdentificationEntity.cs" />
+    <Compile Include="MappingEntities\drugs\PharmacyEncorderOrderEntity.cs" />
+    <Compile Include="MappingEntities\drugs\PlacerOrderNumberEntity.cs" />
+    <Compile Include="MappingEntities\ObservationResultEntity.cs" />
+    <Compile Include="MappingEntities\PatientAppointmentEntity.cs" />
+    <Compile Include="MessageHandler\IIncomingMessageService.cs" />
+    <Compile Include="MessageHandler\IncomingMessageService.cs" />
+    <Compile Include="MessageHandler\IOutgoingMessageService.cs" />
+    <Compile Include="MessageHandler\OutgoingMessageService.cs" />
+    <Compile Include="DtoMapping\DtoMapper.cs" />
+    <Compile Include="DtoMapping\IDtoMapper.cs" />
+    <Compile Include="EntityMapper\IJsonEntityMapper.cs" />
+    <Compile Include="EntityMapper\JsonEntityMapper.cs" />
+    <Compile Include="MappingEntities\CommonJsonEntity.cs" />
+    <Compile Include="MappingEntities\DrugPrescriptionEntity.cs" />
+    <Compile Include="MappingEntities\PatientRegistrationEntity.cs" />
+    <Compile Include="MappingEntities\ViralLoadResultEntity.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -10,12 +10,19 @@ using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Entities.Administration;
+using Entities.CCC.Lookup;
+using IQCare.Events;
 using static Entities.CCC.Encounter.PatientEncounter;
 
 namespace IQCare.CCC.UILogic
 {
+
+
     public class PatientEncounterLogic
     {
+         private int result = 0;
+
         public int savePatientEncounterPresentingComplaints(string patientMasterVisitID, string patientID, string serviceID, string VisitDate, string VisitScheduled, string VisitBy, string anyComplaints, string Complaints, int TBScreening, int NutritionalStatus, int userId, string adverseEvent, string presentingComplaints)
         {
             IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
@@ -223,11 +230,27 @@ namespace IQCare.CCC.UILogic
               
             }
 
-            return patientEncounter.saveUpdatePharmacy(PatientMasterVisitID, PatientId, LocationID, OrderedBy,
+            result= patientEncounter.saveUpdatePharmacy(PatientMasterVisitID, PatientId, LocationID, OrderedBy,
                 UserID, RegimenType.TrimEnd('/'), DispensedBy, RegimenLine, ModuleID, drugPrescription, pmscmFlag,
                 TreatmentProgram, PeriodTaken, TreatmentPlan, TreatmentPlanReason, Regimen, prescriptionDate,
                 dispensedDate);
 
+            //--  Raise event if result is>0 for sharing with IL
+
+            if (result > 0)
+            {
+                MessageEventArgs arg=new MessageEventArgs()
+                {
+                    PatientId = Convert.ToInt32(PatientId),
+                    EntityId = result, // the orderId
+                    EventOccurred = "Prescription Raised",
+                    MessageType = MessageType.DrugPrescriptionRaised,
+                    FacilityId =0,
+                    PatientMasterVisitId = Convert.ToInt32(PatientMasterVisitID) 
+                };
+                Publisher.RaiseEventAsync(this, arg).ConfigureAwait(false); // --
+            }
+            return result;
         }
 
         public void EncounterHistory(TreeView TreeViewEncounterHistory, string patientID)

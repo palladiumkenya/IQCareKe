@@ -4,6 +4,7 @@ using Entities.CCC.Lookup;
 using System.Data.Common;
 using DataAccess.Base;
 using Entities.CCC.Appointment;
+using Entities.CCC.Interoperability;
 
 namespace DataAccess.CCC.Context
 {
@@ -46,5 +47,11 @@ namespace DataAccess.CCC.Context
         public DbSet<PatientRegistrationLookup> PatientRegistrationLookups { get; set; }
         public DbSet<TestingSummaryStatistics> TestingSummaryStatistics { get; set; }
         public DbSet<PatientStabilitySummary> PatientStabilitySummaries { get; set; }
+
+        //Interoperability
+        public DbSet<PatientMessage> PatientMessages { get; set; }
+        public DbSet<DrugPrescriptionEntity> DrugPrescriptionMessages { get; set; }
+        public DbSet<ViralLoadMessage> ViralLoadEntitys { get; set; }
+        public DbSet<PatientAppointmentMessage> PatientAppointmentMessages { get; set; }
     }
 }

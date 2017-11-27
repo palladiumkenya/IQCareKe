@@ -223,7 +223,7 @@ namespace BusinessProcess.CCC
             using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
                 var item =
-                    unitOfWork.LookupRepository.FindBy(x => x.MasterName == groupName && x.ItemName == itemName)
+                    unitOfWork.LookupRepository.FindBy(x => x.MasterName.ToLower() == groupName.ToLower() && x.ItemName.ToLower() == itemName.ToLower())
                         .ToList();
                 unitOfWork.Dispose();
                 return item;
@@ -353,6 +353,12 @@ namespace BusinessProcess.CCC
         {
             LookupCountyRepository lookupCountyRepository = new LookupCountyRepository();
             return lookupCountyRepository.GetWardNameByWardId(wardId);
+        }
+
+        public LookupCounty GetCountyDetailsByWardName(string wardName)
+        {
+            LookupCountyRepository lookupCountyRepository = new LookupCountyRepository();
+            return lookupCountyRepository.GetCountyDetailsByWardName(wardName);
         }
 
         public List<PatientLabTracker> GetVlPendingCount(int facilityId)

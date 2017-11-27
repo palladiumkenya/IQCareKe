@@ -25,7 +25,9 @@ using DataAccess.CCC.Interface.Triage;
 using DataAccess.CCC.Repository.Triage;
 using DataAccess.CCC.Repository.Screening;
 using DataAccess.CCC.Interface.assessment;
+using DataAccess.CCC.Interface.Interoperability;
 using DataAccess.CCC.Repository.assessment;
+using DataAccess.CCC.Repository.Interoperability;
 
 namespace DataAccess.CCC.Repository
 {
@@ -91,7 +93,7 @@ namespace DataAccess.CCC.Repository
         private IPatientReEnrollmentRepository _patientReEnrollmentRepository;
         private IHivReConfirmatoryTestRepository _hivReConfirmatoryTestRepository;
         private IPatientArtDistributionRepository _patientArtDistributionRepository;
-
+        private IPersonIdentifierRepository _personIdentifierRepository;
         /* Patient */
         private IPatientRepository _patientRepository;
 
@@ -141,6 +143,14 @@ namespace DataAccess.CCC.Repository
         private IPatientPsychosocialCriteriaRepository _patientPsychosocialCriteriaRepository;
         private IPatientSupportSystemCriteriaRepository _patientSupportSystemCriteriaRepository;
 
+        /*Interoperability*/
+        private IPatientMessageRepository _patientMessageRepository;
+        private IDrugPrescriptionMessageRepository _drugPrescriptionMessageRepository;
+        private IViralLoadMessageRepository _viralLoadMessageRepository;
+        private IPatientAppointmentMessageRepository _patientAppointmentMessageRepository;
+        private IInteropPlacerTypesRepository _interopPlacerTypesRepository;
+        private IInteropPlacerValuesRepository _interopPlacerValuesRepository;
+
         public UnitOfWork(BaseContext context)
         {
             if (context == null)
@@ -164,6 +174,60 @@ namespace DataAccess.CCC.Repository
         public ILookupRepository LookupRepository
         {
             get { return _lookupRepository ?? (_lookupRepository = new LookupRepository((LookupContext)_context)); }
+        }
+
+        public IPatientMessageRepository PatientMessageRepository
+        {
+            get
+            {
+                return _patientMessageRepository ??
+                       (_patientMessageRepository = new PatientMessageRepository((LookupContext) _context));
+            }
+        }
+
+        public IPatientAppointmentMessageRepository PatientAppointmentMessageRepository
+        {
+            get
+            {
+                return _patientAppointmentMessageRepository ?? (_patientAppointmentMessageRepository =
+                           new PatientAppointmentMessageRepository((LookupContext) _context));
+            }
+        }
+
+        public IInteropPlacerTypesRepository InteropPlacerTypesRepository
+        {
+            get
+            {
+                return _interopPlacerTypesRepository ?? (_interopPlacerTypesRepository =
+                           new InteropPlacerTypeRepository((GreencardContext) _context));
+            }
+        }
+
+        public IInteropPlacerValuesRepository InteropPlacerValuesRepository
+        {
+            get
+            {
+                return _interopPlacerValuesRepository ?? (_interopPlacerValuesRepository =
+                           new InteropPlacerValuesRepository((GreencardContext) _context));
+            }
+        }
+
+        public IDrugPrescriptionMessageRepository DrugPrescriptionMessageRepository
+        {
+            get
+            {
+                return _drugPrescriptionMessageRepository ?? (_drugPrescriptionMessageRepository =
+                           new DrugPrescriptionMessageRepository((LookupContext) _context));
+            }
+        }
+
+        public IViralLoadMessageRepository ViralLoadMessageRepository
+        {
+            get
+            {
+                return _viralLoadMessageRepository ??
+                       (_viralLoadMessageRepository = new ViralLoadMessageRepository((LookupContext)_context));
+            }
         }
 
         public IPatientServiceEnrollmentLookupRepository PatientServiceEnrollmentLookupRepository
@@ -642,6 +706,15 @@ namespace DataAccess.CCC.Repository
         public IPatientArtDistributionRepository PatientArtDistributionRepository
         {
             get { return _patientArtDistributionRepository ?? (_patientArtDistributionRepository= new PatientArtDistributionRepository((GreencardContext)_context)); }
+        }
+
+        public IPersonIdentifierRepository PersonIdentifierRepository
+        {
+            get
+            {
+                return _personIdentifierRepository ?? (_personIdentifierRepository =
+                           new PersonIdentifierRepository((GreencardContext) _context));
+            }
         }
 
         public IPatientAdverseEventOutcomeRepository PatientAdverseEventOutcomeRepository

@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>IQCare.CCC.UILogic</RootNamespace>
     <AssemblyName>IQCare.CCC.UILogic</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -64,14 +64,24 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="Interface.Security, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Interface.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="IQCare.DTO, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\IQCare.DTO\obj\Debug\IQCare.DTO.dll</HintPath>
+    </Reference>
     <Reference Include="IQCare.Web.UILogic, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\IQCare.Web.UILogic.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -99,8 +109,23 @@
     <Compile Include="Enrollment\PatientEntryPointManager.cs" />
     <Compile Include="Enrollment\PatientIdentifierManager.cs" />
     <Compile Include="Enrollment\PatientReEnrollmentManager.cs" />
+    <Compile Include="Enrollment\PersonIdentifierManager.cs" />
     <Compile Include="Enrollment\ServiceAreaIdentifiersManager.cs" />
     <Compile Include="FacilityListManager.cs" />
+    <Compile Include="Interoperability\Appointment\AppointmentMessage.cs" />
+    <Compile Include="Interoperability\DrugPrescriptionMessage.cs" />
+    <Compile Include="Interoperability\Appointment\PatientAppointmentMessageManager.cs" />
+    <Compile Include="Interoperability\DTOValidator\IValidateDTO.cs" />
+    <Compile Include="Interoperability\Enrollment\PatientMessageManager.cs" />
+    <Compile Include="Interoperability\Enrollment\ProcessPatient.cs" />
+    <Compile Include="Interoperability\Appointment\ProcessPatientAppointmentMessage.cs" />
+    <Compile Include="Interoperability\Enrollment\ProcessRegistration.cs" />
+    <Compile Include="Interoperability\InteropPlacerTypeManager.cs" />
+    <Compile Include="Interoperability\InteropPlacerValuesManager.cs" />
+    <Compile Include="Interoperability\Observation\ProcessObservationResultMessage.cs" />
+    <Compile Include="Interoperability\ProcessViralLoadResults.cs" />
+    <Compile Include="Interoperability\DTOValidator\PatientRegistrationValidation.cs" />
+    <Compile Include="Interoperability\ViralLoadMessageManager.cs" />
     <Compile Include="LookupLogic.cs" />
     <Compile Include="MstPatientLogic.cs" />
     <Compile Include="PatientAdherenceAssessmentManager.cs" />
@@ -159,6 +184,10 @@
     <ProjectReference Include="..\Interface.CCC\Interface.CCC.csproj">
       <Project>{174b280e-08d7-4fe7-b080-3a017f0944cd}</Project>
       <Name>Interface.CCC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IQCare.Events\IQCare.Events.csproj">
+      <Project>{43E1A1CC-ADC8-4843-ACB0-16E9C90BB980}</Project>
+      <Name>IQCare.Events</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

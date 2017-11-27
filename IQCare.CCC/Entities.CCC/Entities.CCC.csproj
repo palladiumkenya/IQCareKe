@@ -92,6 +92,7 @@
     <Compile Include="Encounter\PatientFamilyPlanningMethod.cs" />
     <Compile Include="Baseline\PatientHivTesting.cs" />
     <Compile Include="Baseline\PatientFamilyTesting.cs" />
+    <Compile Include="pharmacy\PatientPharmacyDispense.cs" />
     <Compile Include="Encounter\PatientProphylaxis.cs" />
     <Compile Include="Encounter\PatientReferral.cs" />
     <Compile Include="Encounter\PatientTbTreatmentTracker.cs" />
@@ -108,8 +109,15 @@
     <Compile Include="Enrollment\PatientEntryPoint.cs" />
     <Compile Include="Encounter\LabOrderEntity.cs" />
     <Compile Include="Enrollment\PatientReEnrollment.cs" />
+    <Compile Include="Enrollment\PersonIdentifier.cs" />
     <Compile Include="Enrollment\ServiceArea.cs" />
     <Compile Include="Enrollment\ServiceAreaIdentifiers.cs" />
+    <Compile Include="Interoperability\DrugPrescriptionEntity.cs" />
+    <Compile Include="Interoperability\InteropPlacerType.cs" />
+    <Compile Include="Interoperability\InteropPlacerValues.cs" />
+    <Compile Include="Interoperability\PatientAppointmentMessage.cs" />
+    <Compile Include="Interoperability\PatientMessage.cs" />
+    <Compile Include="Interoperability\ViralLoadMessage.cs" />
     <Compile Include="Lookup\FacilityList.cs" />
     <Compile Include="Lookup\LookupFacility.cs" />
     <Compile Include="Lookup\LookupFacilityStatistics.cs" />

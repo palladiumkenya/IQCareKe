@@ -456,6 +456,19 @@ namespace IQCare.CCC.UILogic
             }
         }
 
+        public LookupCounty GetCountyDetailsByWardName(string wardName)
+        {
+            try
+            {
+                ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager,BusinessProcess.CCC");
+                return lookupManager.GetCountyDetailsByWardName(wardName);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
         public PatientLookup GetPatientById(int patientId)
 
         {

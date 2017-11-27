@@ -1,6 +1,7 @@
 ﻿using Application.Presentation;
 using Entities.CCC.Enrollment;
 using Interface.CCC.Enrollment;
+using IQCare.Events;
 using System;
 using System.Collections.Generic;
 
@@ -9,8 +10,8 @@ namespace IQCare.CCC.UILogic.Enrollment
     public class PatientIdentifierManager
     {
         IPatientIdentifierManager _mgr = (IPatientIdentifierManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Enrollment.BPatientIdentifier, BusinessProcess.CCC");
-
-        public int addPatientIdentifier(int patientId, int patientEnrollmentId, int identifierId, string enrollmentNo)
+        
+        public int addPatientIdentifier(int patientId, int patientEnrollmentId, int identifierId, string enrollmentNo, int facilityId, bool sendEvent = true)
         {
             try
             {
@@ -23,6 +24,21 @@ namespace IQCare.CCC.UILogic.Enrollment
                 };
 
                 int returnValue = _mgr.AddPatientIdentifier(patientidentifier);
+
+                if (returnValue > 1 && sendEvent)
+                {
+                    MessageEventArgs args = new MessageEventArgs()
+                    {
+                        PatientId = patientId,
+                        EntityId = patientidentifier.PatientEnrollmentId,
+                        MessageType = MessageType.NewClientRegistration,
+                        EventOccurred = "Patient Enrolled Identifier = ",
+                        FacilityId = facilityId
+                    };
+
+                    Publisher.RaiseEventAsync(this, args).ConfigureAwait(false);
+                }
+                
                 return returnValue;
             }
             catch (Exception e)
@@ -31,11 +47,28 @@ namespace IQCare.CCC.UILogic.Enrollment
             }
         }
 
-        public int UpdatePatientIdentifier(PatientEntityIdentifier patientIdentifier)
+        public int UpdatePatientIdentifier(PatientEntityIdentifier patientIdentifier, int facilityId, bool sendEvent = true)
         {
             try
             {
-                return _mgr.UpdatePatientIdentifier(patientIdentifier);
+                
+
+                int x=  _mgr.UpdatePatientIdentifier(patientIdentifier);
+                if (x > 0 && sendEvent)
+                {
+                    MessageEventArgs args = new MessageEventArgs()
+                    {
+                        PatientId = patientIdentifier.PatientId,
+                        EntityId = patientIdentifier.PatientEnrollmentId,
+                        MessageType = MessageType.UpdatedClientInformation,
+                        EventOccurred = "Patient Enrolled Identifier = ",
+                        FacilityId = facilityId
+                    };
+
+                    Publisher.RaiseEventAsync(this, args).ConfigureAwait(false);
+                }
+
+                return x;
             }
             catch (Exception e)
             {
