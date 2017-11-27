@@ -167,7 +167,7 @@
                                 <label class="control-label pull-left">HIV Testing Results</label>
                             </div>
                             <div class="col-md-12">
-                                <asp:DropDownList runat="server" ID="hivtestingresult" ClientIDMode="Static" CssClass="form-control input-sm" required="true" onChange="CccEnabled();" />
+                                <asp:DropDownList runat="server" ID="hivtestingresult" ClientIDMode="Static" CssClass="form-control input-sm" required="true" disabled="true" onChange="CccEnabled();" />
                             </div>
                         </div>
                         <div class="col-md-12 form-group">
@@ -179,7 +179,7 @@
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
-                                    <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="HIVTestingDate" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>        
+                                    <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="HIVTestingDate"  disabled="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>        
                                 </div>
                             </div>
                         </div>
@@ -461,7 +461,7 @@
                                         <div class="col-md-12">
                                             <div class="datepicker fuelux form-group" id="TestingDateMod">
                                                 <div class="input-group">
-                                                    <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="testingStatusDateMod" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
+                                                    <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="testingStatusDateMod" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
                                                     <div class="input-group-btn">
                                                         <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown" clientidmode="Static" id="btnHIVTestingDate">
                                                             <span class="glyphicon glyphicon-calendar"></span>
@@ -775,7 +775,9 @@
                 });
 
                 if ($('#FamilyTestingForm').parsley().validate()) {
-                    
+
+                    $('#FamilyTestingForm').parsley().destroy();
+
                     var firstName = escape($("#<%=FirstName.ClientID%>").val());
                     var middleName = escape($("#<%=MiddleName.ClientID%>").val());
                     var lastName = escape($("#<%=LastName.ClientID%>").val());
@@ -802,6 +804,7 @@
                     var birthDate = new Date(dob);
                     var age = today.getFullYear() - birthDate.getFullYear();
                     var cccNumberFound = null;
+                    var count = 0;
 
                     if (typeof cccReferalNumber !== "undefined" && cccReferalNumber != null && cccReferalNumber != "") {
                         cccNumberFound = $.inArray("" + cccReferalNumber + "", cccArrayList);
@@ -817,6 +820,11 @@
                     ////console.log(baselineHivStatusDate);
                     //console.log(hivTestingresultDate);
                     //validations
+                    if (baselineHivStatus != "Never Tested" && hivTestingresult == "Never Tested") {
+                        toastr.error("Never Tested should not follow baseline(Tested Negative/Tested Positive).");
+                        return false;
+                    }
+
                     if (moment('' + dob + '').isAfter()) {
                         toastr.error("Date of birth cannot be a future date.");
                         return false;
@@ -884,6 +892,10 @@
                         return false;
                     }
                     else {
+                        if (familyMembers.length > 0) {
+                            count = geth(familyMembers) + 1;
+                        }
+
                         var table = "<tr><td align='left'></td><td align='left'>" +
                             name +
                             "</td><td align='left'>" +
@@ -900,6 +912,8 @@
                             hivTestingresultDate +
                             "</td><td align='left'>" +
                             cccreferal +
+                            "</td><td align='left' style='display:none;'>" +
+                            count +
                             "</td><td align='right'><button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button></td></tr>";
                         $("#tblFamilyTesting>tbody:first").append('' + table + '');
                        
@@ -917,7 +931,8 @@
                             hivTestingresultDate: hivTestingresultDate,
                             cccreferal: cccreferal,
                             cccReferalNumber: cccReferalNumber,
-                            cccReferalDate: cccReferalDate
+                            cccReferalDate: cccReferalDate,
+                            indexCount: count
                         };
                         familyMembers.push(testing);
                         resetElements();
@@ -947,7 +962,16 @@
             });
 
             $("#tblFamilyTesting").on('click', '.btnDelete', function () {
+                var indexcount = $(this).closest('tr').find("td").eq(9).html();
+                for (var member in familyMembers) {
+                    if (familyMembers[member]["indexCount"] == indexcount) {
+                        familyMembers.splice(member, 1);
+                    }
+                }
+
+                console.log(familyMembers);
                 $(this).closest('tr').remove();
+                //console.log($(this).closest('tr').find("td").eq(9).html());
             });
 
             $("#btnReset").click(function () {
@@ -1201,6 +1225,7 @@
                 var baselineHivStatusId = $("#<%=bHivStatusMod.ClientID%>").val();
                 var baselineHivStatusDate = $("#<%=bHivStatusDateMod.ClientID%>").val();
                 var hivTestingresultId = $("#<%=testingStatusMod.ClientID%>").val();
+                var hivTestingresultText = $("#<%=testingStatusMod.ClientID%>").find(":selected").text();
                 var hivTestingresultDate = $("#<%=testingStatusDateMod.ClientID%>").val();
                 var cccreferal = $("#<%=cccReferalMod.ClientID%>").val();
                 var cccReferalNumber = $("#<%=cccNumberMod.ClientID%>").val();
@@ -1210,6 +1235,11 @@
                 //console.log(CccReferalModDate);
                 ////validations
                 //return false;
+
+                if (hivTestingresultText == "Never Tested") {
+                    toastr.error("Never Tested should not be a follow up test result");
+                    return false;
+                }
 
                 if (moment('' + dob + '').isAfter()) {
                     toastr.error("Date of birth cannot be a future date.");
@@ -1346,7 +1376,7 @@
                 $("#<%=cccNumber.ClientID%>").prop('disabled',false);
                 $("#<%=CccReferal.ClientID%>").prop('disabled', false);
                 $("#CCCReferalDate").prop('disabled', false);
-                $("#HIVTestingDate").prop('disabled', false);
+                //$("#HIVTestingDate").prop('disabled', false);
             }
         }
       
@@ -1682,6 +1712,16 @@
                     toastr.error("Family Testing", response.d);
                 }
             });
+        }
+
+
+        function geth(o) {
+            var vals = [];
+            for (var i in o) {
+                vals.push(o[i]["indexCount"]);
+            }
+            console.log(vals);
+            return Math.max.apply(null, vals);
         }
 
     </script>

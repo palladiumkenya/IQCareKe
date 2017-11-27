@@ -88,7 +88,7 @@ BEGIN
 	INSERT INTO #Tmst_Patient(ptn_pk, personId)
 	SELECT ptn_pk, PersonId FROM Patient
 
-	DECLARE @ptn_pk int, @personId int, @patientId int, @message varchar(max);
+	DECLARE @ptn_pk int, @personId int, @patientId int, @message varchar(max), @patientmastervisitId int, @rPatientId int;
 
 	SELECT @countj = COUNT(Id) FROM #Tmst_Patient 
 
@@ -122,10 +122,11 @@ BEGIN
 	DROP TABLE #Tmst_Patient
 
 
-	DECLARE @d int = 1;
-	DECLARE @countd int;
+	DECLARE @d int = 1, @v int = 1;
+	DECLARE @countd int, @countv int;
 
-	CREATE TABLE #TPatient(Id INT IDENTITY(1,1), ptn_pk int, personId int, patientId int)
+	CREATE TABLE #TPatient(Id INT IDENTITY(1,1), ptn_pk int, personId int, patientId int);
+	CREATE TABLE #TPatientMasterVisit(Id INT IDENTITY(1,1), PatientId int, PatientMasterVisitId int);
 
 	INSERT INTO #TPatient(ptn_pk, personId, patientId)
 	 SELECT ptn_pk, PersonId, Id from (SELECT        Id, ptn_pk, PersonId, PatientIndex, PatientType, FacilityId, Active, DateOfBirth, DobPrecision, NationalId, DeleteFlag, CreatedBy, CreateDate, AuditData, RegistrationDate, row_number() Over (Partition By ptn_pk Order By Id Asc) RowNum
@@ -146,9 +147,74 @@ BEGIN
 		WHILE (@d <= @countd)
 		BEGIN
 			SELECT @ptn_pk = ptn_pk, @personId = personId, @patientId = patientId from #TPatient WHERE Id = @d;
-
+			select top 1 @rPatientId = id from Patient where ptn_pk = @ptn_pk and Id <> @patientId
 			BEGIN TRY
 				BEGIN TRANSACTION
+					INSERT INTO #TPatientMasterVisit(PatientId, PatientMasterVisitId)
+					SELECT PatientId, Id FROM PatientMasterVisit WHERE PatientId = @patientId
+
+					SELECT @countv = COUNT(Id) FROM #TPatientMasterVisit
+					BEGIN
+						WHILE(@v <=@countv)
+						BEGIN
+							SELECT @patientmastervisitId = PatientMasterVisitId FROM #TPatientMasterVisit WHERE Id = @v;
+							UPDATE [dbo].[PatientMasterVisit] SET PatientId = @rPatientId WHERE Id = @patientmastervisitId AND PatientId = @patientId;
+							UPDATE [dbo].[AdherenceAssessment] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[AdherenceOutcome] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[AdultChildVaccination] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[AdverseEvent] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[ARVTreatmentTracker] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[ComplaintsHistory] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[Disclosure] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[HIVEnrollmentBaseline] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[INHProphylaxis] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientAdverseEventOutcome] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientAllergies] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientAllergy] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientAppointment] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientArtDistribution] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientARVHistory] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientBaselineAssessment] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientCareending] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientCategorization] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientChronicIllness] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientClinicalDiagnosis] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientClinicalNotes] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientConsent] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientDiagnosis] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientEncounter] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientFamilyPlanning] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientFamilyPlanningMethod] SET PatientId = @rPatientId WHERE PatientId = @patientId;
+							UPDATE [dbo].[PatientHivDiagnosis] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientIcf] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientIcfAction] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientIpt] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientIptOutcome] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientIptWorkup] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientLabTracker] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientPHDP] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientPhysicalExamination] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientProphylaxis] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientPsychosocialCriteria] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientReenrollment] SET PatientId = @rPatientId WHERE PatientId = @patientId;
+							UPDATE [dbo].[PatientReferral] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientScreening] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientSupportSystemCriteria] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientTransferIn] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientTreatmentInitiation] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientVitals] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PatientWHOStage] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PhysicalExamination] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[Pregnancy] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PregnancyIndicator] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PregnancyLog] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[PresentingComplaints] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[Referrals] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[TreatmentEventTracker] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+							UPDATE [dbo].[Vaccination] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+						END
+					END
+
 					UPDATE Patient SET DeleteFlag = 1, ptn_pk = - FLOOR(RAND(CHECKSUM(NEWID()))*(9999-1000)+1000) WHERE Id = @patientId
 					UPDATE Person SET DeleteFlag = 1 WHERE Id = @personId
 				COMMIT
@@ -162,6 +228,7 @@ BEGIN
 	END
 
 	DROP TABLE #TPatient
+	DROP TABLE #TPatientMasterVisit
 END
 GO
 
@@ -658,7 +725,17 @@ BEGIN
 							SET @Status_Greencard = 1
 
 						IF @IDNumber IS NULL
-							SET @IDNumber = 99999999;
+							BEGIN
+								SET @IDNumber = 99999999;
+							END
+
+						DECLARE @IsIDNumeric int;
+						SET @IsIDNumeric = ISNUMERIC(@IDNumber);
+
+						IF @IsIDNumeric <> 1
+							BEGIN
+								SET @IDNumber = 99999999;
+							END
 
 						IF @Sex IS NOT NULL
 							BEGIN
@@ -3054,3 +3131,174 @@ SELECT
 	
 End
 GO
+
+-- saveupdate pharmacy prescription
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_SaveUpdatePharmacy_GreenCard]') AND type in (N'P', N'PC'))
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[sp_SaveUpdatePharmacy_GreenCard]                                                
+( 
+ @PatientMasterVisitID int = 0,                                               
+ @PatientId int = null,                                                
+ @LocationID int = null,                                                
+ @OrderedBy int = null,                                                                                                                                          
+ @UserID int = null,                                                 
+ @RegimenType varchar(50) = null,                                                
+ @DispensedBy int=null,                                                    
+ @RegimenLine int = null,                
+ @PharmacyNotes varchar(200) = null,
+ @ModuleID int = null,
+
+ @TreatmentProgram int = null,
+ @PeriodTaken int = null,
+
+ @TreatmentPlan int = null, 
+ @TreatmentPlanReason int = null,
+ @Regimen int = null,
+ @PrescribedDate varchar(50) = null,
+ @DispensedDate varchar(50) = null                 
+)                                                
+                                                
+As       
+Begin               
+	Declare @ptn_pharmacy int,@RegimenMap_Pk int,@ARTStartDate datetime,@Ptn_Pharmacy_Pk int=null , @ptn_pk int, @visitPK int
+
+	Select @RegimenType = Nullif(Ltrim(Rtrim(@RegimenType)), '')
+
+	set @ptn_pk = (select ptn_pk from patient where id = @PatientId)
+
+	if(@DispensedDate = '')
+	begin
+		set @DispensedDate = null
+		set @DispensedBy = null
+	end
+
+	-- IF EXISTS(select 1 from ord_PatientPharmacyOrder where PatientMasterVisitId = @PatientMasterVisitID) 
+	IF EXISTS(select 1 from ord_PatientPharmacyOrder where ptn_pharmacy_pk = @Ptn_Pharmacy_Pk) 
+	BEGIN
+		set @Ptn_Pharmacy_Pk = (select ptn_pharmacy_pk from ord_PatientPharmacyOrder where patientmasterVisitID = @PatientMasterVisitID);
+		IF @TreatmentPlan = 0 BEGIN (select TOP 1 @Regimenline = RegimenLine, @TreatmentProgram = [ProgID] from ord_PatientPharmacyOrder where patientmasterVisitID = @PatientMasterVisitID); END;
+		Update [ord_PatientPharmacyOrder] Set
+			[OrderedBy] = @OrderedBy, [DispensedBy] = @DispensedBy,
+			[ProgID] = @TreatmentProgram, [UpdateDate] = Getdate(),
+			[ProviderID] = 1, OrderedByDate = @PrescribedDate, [DispensedByDate] = @DispensedDate,
+			UserID = @UserID,	Regimenline = @Regimenline,
+			PharmacyNotes = @PharmacyNotes, pharmacyperiodtaken = @PeriodTaken
+		Where patientmasterVisitID = @PatientMasterVisitID;
+
+		IF @TreatmentPlan = 0 BEGIN (SELECT TOP 1 @Regimen = RegimenId, @RegimenLine = RegimenLineId, @TreatmentPlan = TreatmentStatusId, @TreatmentPlanReason = TreatmentStatusReasonId FROM ARVTreatmentTracker WHERE PatientMasterVisitId = @PatientMasterVisitID); END;
+		Update ARVTreatmentTracker set regimenid = @Regimen, regimenLineId = @RegimenLine, TreatmentStatusId = @TreatmentPlan,
+		TreatmentStatusReasonId = @TreatmentPlanReason
+
+		If(@RegimenType Is Not Null) 
+		Begin
+		
+			Select @RegimenMap_Pk = RegimenMap_Pk
+			From dtl_regimenmap a, ord_patientpharmacyorder b
+			Where a.ptn_pk = b.ptn_pk
+			And b.ptn_pharmacy_pk = a.orderID
+			And b.Ptn_Pharmacy_Pk = @Ptn_Pharmacy_Pk;
+
+			Update [dtl_RegimenMap] Set
+				[RegimenType] = @RegimenType,
+				[UpdateDate] = Getdate()
+			Where ([RegimenMap_Pk] = @RegimenMap_Pk)
+		End
+		
+		Select @ARTStartDate = dbo.fn_GetPatientARTStartDate_constella(@ptn_pk)
+		
+		Update mst_Patient Set
+			ARTStartDate = @ARTStartDate
+		Where ptn_pk = @ptn_pk;
+
+		Select @ptn_pharmacy_pk;
+	END
+	ELSE
+	BEGIN
+		insert into ord_Visit (ptn_pk,locationid,VisitDate,VisitType,DataQuality,DeleteFlag,UserID,CreateDate,CreatedBy)
+		values(@ptn_pk, @locationID,GETDATE(),4,1,0,@UserID,GETDATE(),@UserID)
+
+		set @visitPK = SCOPE_IDENTITY();
+
+		Insert Into dbo.ord_PatientPharmacyOrder (
+			Ptn_pk, PatientID, patientmasterVisitID, LocationID, OrderedBy, OrderedByDate, DispensedBy, DispensedByDate, ProgID,
+			UserID, CreateDate, ProviderID, Regimenline, PharmacyNotes, VisitID, pharmacyPeriodTaken)
+		Values (
+			@ptn_pk,@PatientId, @PatientMasterVisitID, @LocationID, @OrderedBy, @PrescribedDate, @DispensedBy, @DispensedDate, @TreatmentProgram, 
+			@UserID, Getdate(), 1, @RegimenLine, @PharmacyNotes, @visitPK, @PeriodTaken);
+
+		Set @ptn_pharmacy =SCOPE_IDENTITY();
+
+		Insert into ARVTreatmentTracker (PatientId,ServiceAreaId,PatientMasterVisitId,RegimenId,RegimenLineId,
+		TreatmentStatusId,TreatmentStatusReasonId, DeleteFlag, CreateBy, createdate)
+		values(@patientid,@moduleid,@PatientMasterVisitID,@Regimen,@RegimenLine,@TreatmentPlan,@TreatmentPlanReason,
+		0,@UserID,GETDATE())
+
+		Update ord_PatientPharmacyOrder Set
+			ReportingID = (Select Right('000000' + Convert(varchar, @ptn_pharmacy), 6))
+		Where ptn_pharmacy_pk = @ptn_pharmacy;
+
+		--If (@DispensedByDate Is Not Null And @DispensedBy > 0) Begin
+		--	Update ord_PatientPharmacyOrder Set
+		--		OrderStatus = 2
+		--	Where ptn_pharmacy_pk = @ptn_pharmacy;
+		--End
+
+		
+		If(@RegimenType Is Not Null) 
+		Begin	
+			Insert Into dtl_RegimenMap (Ptn_Pk,	LocationID,	Visit_Pk, RegimenType, OrderId,	UserID,	CreateDate)
+			Values (@ptn_pk, @LocationID, @visitPK, @RegimenType, @ptn_pharmacy, @UserID, Getdate());
+		End
+
+		Select @ARTStartDate = dbo.fn_GetPatientARTStartDate_constella(@ptn_pk)
+		Update mst_Patient Set
+			ARTStartDate = @ARTStartDate
+		Where ptn_pk = @ptn_pk;
+
+		Select @ptn_pharmacy;
+
+	END
+End
+
+-- get prescription
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_getPatientPharmacyPrescription]') AND type in (N'P', N'PC'))
+/****** Object:  StoredProcedure [dbo].[sp_getPatientPharmacyPrescription]    Script Date: 11/21/2017 8:38:04 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		John Macharia
+-- Create date: 13th Mar 2017
+-- Description:	get patient pharmacy prescription
+-- =============================================
+ALTER PROCEDURE [dbo].[sp_getPatientPharmacyPrescription]
+	-- Add the parameters for the stored procedure here
+	@PatientMasterVisitID int = null
+
+AS
+BEGIN
+-- SET NOCOUNT ON added to prevent extra result sets from
+-- interfering with SELECT statements.
+Set Nocount On;
+	declare @pharmacy_pk int
+	set @pharmacy_pk = (select top 1 ptn_pharmacy_pk from ord_PatientPharmacyOrder 
+						where PatientMasterVisitId = @PatientMasterVisitID and DeleteFlag <> 1)
+
+	select a.Drug_Pk,
+	--(select batchId from dtl_patientPharmacyDispensed where ptn_pharmacy_pk = a.ptn_pharmacy_pk and drug_pk = a.Drug_Pk) batchId,
+	a.BatchNo batchId,
+	a.FrequencyID,b.abbreviation abbr,b.DrugName,c.Name batchName,a.SingleDose dose, 
+	d.Name freq,a.duration,a.OrderedQuantity,a.DispensedQuantity,
+	--(select dispensedQuantity from dtl_patientPharmacyDispensed where ptn_pharmacy_pk = a.ptn_pharmacy_pk and drug_pk = a.Drug_Pk)DispensedQuantity,
+	a.Prophylaxis
+	from dtl_PatientPharmacyOrder a inner join mst_drug b on a.Drug_Pk = b.Drug_pk
+	left join Mst_Batch c on a.BatchNo = c.ID
+	left join mst_Frequency d on a.FrequencyID = d.ID
+	--left join dtl_patientPharmacyDispensed e on a.ptn_pharmacy_pk = e.ptn_pharmacy_pk
+	where a.ptn_pharmacy_pk IN(SELECT ptn_pharmacy_pk from ord_PatientPharmacyOrder WHERE PatientMasterVisitId=@PatientMasterVisitID) -- a.ptn_pharmacy_pk = @pharmacy_pk (old implementation)
+	
+End

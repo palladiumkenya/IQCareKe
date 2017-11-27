@@ -7,7 +7,7 @@ SET
 	AppVer='Ver 1.0.0.5 Kenya HMIS',
 	DBVer='Ver 1.0.0.5 Kenya HMIS',
 	RelDate='15-Nov-2017',
-	VersionName='Kenya HMIS Ver 1.0.0.5'
+	VersionName='Ver 1.0.0.5 Kenya HMIS'
 
 
 --  UPDATE LookupItems
