@@ -1,0 +1,44 @@
+Declare @MoH731 varbinary(max),@MoH711 varbinary(max)
+
+Truncate table dbo.IQToolsExcelReports;
+
+Set @MoH731 = (Select *
+	From Openrowset(Bulk N'$(var731)', Single_blob) As import);
+
+Set @MoH711 = (Select *
+	From Openrowset(Bulk N'$(var711)', Single_blob) As import);
+	
+
+Insert Into dbo.IQToolsExcelReports (
+	IQToolsCatID,
+	ReportName,
+	ReportStylesheet,
+	FileName,
+	FileExt,
+	ContentType,
+	Filelength)
+Values (
+	15,
+	'MOH711',
+	@MoH711,
+	'MoH711_v0',
+	'XSL',
+	'text/xml',
+	Datalength(@MoH711))
+	
+Insert Into dbo.IQToolsExcelReports (
+	IQToolsCatID,
+	ReportName,
+	ReportStylesheet,
+	FileName,
+	FileExt,
+	ContentType,
+	Filelength)
+Values (
+	22,
+	'MoH731',
+	@MoH731,
+	'MoH731_v0',
+	'XSL',
+	'text/xml',
+	Datalength(@MoH731))

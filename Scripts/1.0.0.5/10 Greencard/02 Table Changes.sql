@@ -4,6 +4,21 @@ BEGIN
 END
 GO
 
+If Exists(Select * from sys.columns where Name = N'Name' AND Object_ID = Object_ID(N'LookupMaster'))
+BEGIN
+	ALTER TABLE LookupMaster ALTER COLUMN Name varchar(250) NULL
+END
+GO
+If Exists(Select * from sys.columns where Name = N'DisplayName' AND Object_ID = Object_ID(N'LookupMaster'))
+BEGIN
+	ALTER TABLE LookupMaster ALTER COLUMN DisplayName varchar(250) NULL
+END
+GO
+If Exists(Select * from sys.columns where Name = N'DisplayName' AND Object_ID = Object_ID(N'LookupMasterItem'))
+BEGIN
+	ALTER TABLE LookupMasterItem ALTER COLUMN DisplayName varchar(250) NULL
+END
+GO
 If NOT Exists(Select * from sys.columns where Name = N'IdentifierType' AND Object_ID = Object_ID(N'Identifiers'))
 BEGIN
 	ALTER TABLE Identifiers ADD IdentifierType INT NULL
@@ -43,13 +58,9 @@ BEGIN
 END
 GO
 
-If Exists(Select * from sys.columns where Name = N'ptn_pk' AND Object_ID = Object_ID(N'Patient'))
-BEGIN
-	IF OBJECT_ID('unique_ptn_pk', 'C') IS NULL 
-	BEGIN
-		ALTER TABLE Patient	ADD CONSTRAINT unique_ptn_pk UNIQUE (ptn_pk);
-	END
-END
+IF Not Exists (SELECT * FROM sys.key_constraints WHERE type = 'UQ' AND parent_object_id = OBJECT_ID('dbo.Patient') AND Name = 'unique_ptn_pk')Begin
+	ALTER TABLE Patient	ADD CONSTRAINT unique_ptn_pk UNIQUE (ptn_pk);
+End
 GO
 
 --- Alter Columns for lookup Items-take in more texts.

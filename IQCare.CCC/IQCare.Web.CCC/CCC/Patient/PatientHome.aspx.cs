@@ -86,10 +86,27 @@ namespace IQCare.Web.CCC.Patient
             {
                 foreach (var item in objDiagnosis)
                 {
-                    lblDateOfHivDiagnosis.Text = item.HivDiagnosisDate.ToString("dd-MMM-yyyy");
-                    lblDateOfEnrollment.Text = item.EnrollmentDate.ToString("dd-MMM-yyyy");
+                    if (item.HivDiagnosisDate.HasValue)
+                    {
+                        DateTime HivDiagnosisDate = item.HivDiagnosisDate.Value;
+                        lblDateOfHivDiagnosis.Text = HivDiagnosisDate.ToString("dd-MMM-yyyy");
+                    }
+                    else
+                    {
+                        lblDateOfHivDiagnosis.Text = "Not Taken";
+                    }
+
+                    if (item.EnrollmentDate.HasValue)
+                    {
+                        lblDateOfEnrollment.Text = item.EnrollmentDate.Value.ToString("dd-MMM-yyyy");
+                    }
+                    else
+                    {
+                        lblDateOfEnrollment.Text = "Not Taken";
+                    }
+                    
                     // lblWhoStage.Text = LookupLogic.GetLookupNameById(item.EnrollmentWhoStage).ToString();
-                    lblDateOfHivDiagnosis.Text = item.HivDiagnosisDate.ToString("dd-MMM-yyyy");
+                    //lblDateOfHivDiagnosis.Text = item.HivDiagnosisDate.ToString("dd-MMM-yyyy");
                     lblARTInitiationDate.Text = Convert.ToString(item.ArtInitiationDate);
                 }
 
@@ -194,7 +211,7 @@ namespace IQCare.Web.CCC.Patient
                 {
                     if (curentRegimen.RegimenId > 0)
                     {
-                        lblCurrentRegimen.Text = "<span class='label label-success'>" + curentRegimen.Regimen.ToString() + " started on : " + Convert.ToDateTime(curentRegimen.DispensedByDate).ToString("dd-MMM-yyyy") +"</span>";
+                        lblCurrentRegimen.Text = "<span class='label label-success'>" + curentRegimen.Regimen.ToString() + " started on : " + Convert.ToDateTime(curentRegimen.DispensedByDate).ToString("dd-MMM-yyyy") + "</span>";
                     }
                     else
                     {
@@ -216,7 +233,6 @@ namespace IQCare.Web.CCC.Patient
                     string adheranceString = LookupLogic.GetLookupNameById(adheranceStatus.Score);
                     switch (adheranceString)
                     {
-                        
                         case "Poor":
                             lblAdheranceStatus.Text = "<span class='label label-danger'> Poor [Offer Adherence Interventions]</span>";
                             break;
@@ -249,17 +265,16 @@ namespace IQCare.Web.CCC.Patient
                             lblFirstline.Text = DispensedByDate.ToString("dd-MMM-yyyy");
                             lblcohort.Text = DispensedByDate.ToString("MMM") + "-" + DispensedByDate.Year;
                         }
-                        
-                        
+                                                
                         lblRegimenName.Text = ptnTreatmentInitiation.Regimen.ToString();
-                        lblCurrentRegimen.Text = "<span class='label label-success'>" + ptnTreatmentBaseline.Regimen.ToString() + "</span>";
+                        //lblCurrentRegimen.Text = "<span class='label label-success'>" + ptnTreatmentBaseline.Regimen.ToString() + "</span>";
                         lblARTInitiationDate.Text = ptnTreatmentBaseline.CreateDate.ToString("dd-MMM-yyyy");
                     }
                     else
                     {
                         lblDateOfARTInitiation.Text = "<span class='label'> Not dispensed</span>";
                         lblcohort.Text = "<span class='label label-danger'>N/A</span>";
-                        lblCurrentRegimen.Text = "<span class='label label-danger'>PATIENT NOT ON ARVs</span>";
+                       // lblCurrentRegimen.Text = "<span class='label label-danger'>PATIENT NOT ON ARVs</span>";
 
                     }
                 }
