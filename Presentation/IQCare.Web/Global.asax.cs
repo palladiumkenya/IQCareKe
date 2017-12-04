@@ -62,7 +62,10 @@ namespace IQCare.Web
             base.Response.Clear();
             //handle endless loop ERR_TOO_MANY_REDIRECTS
             if (!HttpContext.Current.Request.Path.EndsWith("Error.aspx", StringComparison.InvariantCultureIgnoreCase))
-                base.Response.Redirect("~/Error.aspx");
+            {
+                base.Response.Redirect("~/Error.aspx",false);
+                Context.ApplicationInstance.CompleteRequest();
+            }
 
 
         }
@@ -102,7 +105,8 @@ namespace IQCare.Web
                         if (!Context.Request.Url.AbsoluteUri.ToLower().Contains("frmlogin.aspx"))
                         {
                             // redirect to your login page
-                            Context.Response.Redirect("~/frmLogin.aspx");
+                            Context.Response.Redirect("~/frmLogin.aspx",false);
+                            Context.ApplicationInstance.CompleteRequest();
                         }
                     }
                 }
