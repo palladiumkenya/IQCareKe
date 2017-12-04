@@ -107,7 +107,7 @@
                                 <tr>
                                     <td colspan="2" style=" padding-bottom:20px" align="left">--%>
                                 <div class="col-md-12">
-                                    <div class="col-md-2"><label class="reuired control-label pull-left" style="margin-left: 10px">Select Lab:</label></div>
+                                    <div class="col-md-2"><label class="reuired control-label pull-left" style="margin-left: 10px">Select Lab Test:</label></div>
                                     <div class="col-md-10"><asp:TextBox ID="textSelectLab" CssClass="form-control" runat="server" AutoPostBack="true" Width="50%"
                                         AutoComplete="off" Font-Names="Courier New" OnTextChanged="LabNameChanged" Font-Size="Medium"></asp:TextBox></div>
                                     <div id="divwidth" style="width: 100%">
