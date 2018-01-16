@@ -212,6 +212,8 @@ BEGIN
 							UPDATE [dbo].[Referrals] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
 							UPDATE [dbo].[TreatmentEventTracker] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
 							UPDATE [dbo].[Vaccination] SET PatientId = @rPatientId WHERE PatientId = @patientId AND [PatientMasterVisitId] = @patientmastervisitId;
+
+							SELECT @v = @v + 1;
 						END
 					END
 

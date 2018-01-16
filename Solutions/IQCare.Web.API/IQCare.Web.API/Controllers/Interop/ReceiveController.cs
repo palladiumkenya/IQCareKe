@@ -1,9 +1,9 @@
 ﻿using System;
-using IQCare.WebApi.Logic.MessageHandler;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Script.Serialization;
+using IQCare.WebApi.Logic.MessageHandler;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -25,7 +25,7 @@ namespace IQCare.Web.Api.Controllers.Interop
             return new string[] { "value1", "value2" };
         }
 
-        [System.Web.Http.HttpGet]
+        [HttpGet]
         public string Get(int id)
         {
             return "value";
@@ -54,7 +54,7 @@ namespace IQCare.Web.Api.Controllers.Interop
                         if (val.Key == "MESSAGE_TYPE")
                         {
                             messageType = val.Value;
-                        }                      
+                        }
                     }
                 }
             }
@@ -69,14 +69,14 @@ namespace IQCare.Web.Api.Controllers.Interop
         }
 
         // PUT api/values/5
-        [System.Web.Http.HttpGet]
+        [HttpGet]
         public void Put(int id, [System.Web.Http.FromBody]string value)
         {
 
         }
 
         // DELETE api/values/5
-        [System.Web.Http.HttpGet]
+        [HttpGet]
         public void Delete(int id)
         {
 
