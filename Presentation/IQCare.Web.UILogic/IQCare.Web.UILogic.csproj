@@ -56,10 +56,6 @@
     <Reference Include="Interface.FormBuilder">
       <HintPath>..\..\References\Interface.FormBuilder.dll</HintPath>
     </Reference>
-    <Reference Include="Interface.Interop, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\References\Interface.Interop.dll</HintPath>
-    </Reference>
     <Reference Include="Interface.PatientCore, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Interface.Security, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="System" />
