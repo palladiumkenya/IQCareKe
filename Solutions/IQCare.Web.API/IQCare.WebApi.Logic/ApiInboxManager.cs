@@ -10,11 +10,11 @@ namespace IQCare.WebApi.Logic
 
         public int AddApiInbox(ApiInbox apiInbox)
         {
-           ApiInbox inbox = new ApiInbox()
-           {
-               DateReceived = apiInbox.DateReceived,
-               Message = apiInbox.Message
-           };
+           //ApiInbox inbox = new ApiInbox()
+           //{
+           //    DateReceived = apiInbox.DateReceived,
+           //    Message = apiInbox.Message
+           //};
 
             return _apiInboxmanager.AddApiInbox(apiInbox);
 
@@ -22,14 +22,14 @@ namespace IQCare.WebApi.Logic
 
         public int EditApiInbox(ApiInbox apiInbox)
         {
-           ApiInbox inbox=new ApiInbox()
-           {
-               Id = apiInbox.Id,
-               Processed = apiInbox.Processed,
-               LogMessage = apiInbox.LogMessage
-           };
+           //ApiInbox inbox=new ApiInbox()
+           //{
+           //    Id = apiInbox.Id,
+           //    Processed = apiInbox.Processed,
+           //    LogMessage = apiInbox.LogMessage
+           //};
 
-            return _apiInboxmanager.EditApiInbox(inbox);
+            return _apiInboxmanager.EditApiInbox(apiInbox);
         }
 
         public List<ApiInbox> GetUnProcessedMessage()

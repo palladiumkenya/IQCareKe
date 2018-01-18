@@ -322,6 +322,14 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
                             }
                         }
                     }
+                    else
+                    {
+                        throw new Exception("patient with ccc_number: " + cccNumber + " not found");
+                    }
+                }
+                else
+                {
+                    throw new Exception("null or empty ccc_number");
                 }
             }
             catch (Exception e)
@@ -329,7 +337,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
                 throw new Exception(e.Message);
             }
 
-            return String.Empty;
+            return "success";
         }
 
         public static string Update(PatientAppointSchedulingDTO appointmentScheduling)
