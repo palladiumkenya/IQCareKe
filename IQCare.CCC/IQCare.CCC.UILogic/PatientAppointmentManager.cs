@@ -74,7 +74,8 @@ namespace IQCare.CCC.UILogic
                 ReasonId = p.ReasonId,
                 ServiceAreaId = p.ServiceAreaId,
                 StatusId = p.StatusId,
-                StatusDate = DateTime.Now,
+                //StatusDate = DateTime.Now,
+                Id = p.Id
             };
             return _appointment.UpdatePatientAppointments(appointment);
         }
