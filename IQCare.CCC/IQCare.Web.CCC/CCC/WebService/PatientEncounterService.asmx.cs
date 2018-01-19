@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Web.Script.Serialization;
 using System.Web.Script.Services;
 using System.Web.Services;
+using System.Web.UI.WebControls;
 using Application.Presentation;
 using Entities.CCC.Encounter;
 using Entities.CCC.Enrollment;
@@ -15,6 +16,7 @@ using Interface.CCC.Visit;
 using IQCare.CCC.UILogic.Enrollment;
 using IQCare.CCC.UILogic.Triage;
 using AutoMapper;
+using Entities.CCC.Lookup;
 
 //using static Entities.CCC.Encounter.PatientEncounter;
 
@@ -606,14 +608,24 @@ namespace IQCare.Web.CCC.WebService
             string TreatmentPlanReason, string RegimenLine, string Regimen, string pmscm, string PrescriptionDate,
             string DispensedDate, string drugPrescription, string regimenText)
         {
-            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
 
-            int val = patientEncounter.saveUpdatePharmacy(Session["PatientMasterVisitID"].ToString(), Session["PatientPK"].ToString(),
-                Session["AppLocationId"].ToString(), Session["AppUserId"].ToString(), Session["AppUserId"].ToString(), 
-                Session["AppUserId"].ToString(), RegimenLine, Session["ModuleId"].ToString(), pmscm, drugPrescription,
-                TreatmentProgram,PeriodTaken,TreatmentPlan,TreatmentPlanReason,Regimen, regimenText, PrescriptionDate,
-                DispensedDate);
-            return val;
+            try
+            {
+                PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+
+                int val = patientEncounter.saveUpdatePharmacy(Session["PatientMasterVisitID"].ToString(), Session["PatientPK"].ToString(),
+                    Session["AppLocationId"].ToString(), Session["AppUserId"].ToString(), Session["AppUserId"].ToString(),
+                    Session["AppUserId"].ToString(), RegimenLine, Session["ModuleId"].ToString(), pmscm, drugPrescription,
+                    TreatmentProgram, PeriodTaken, TreatmentPlan, TreatmentPlanReason, Regimen, regimenText, PrescriptionDate,
+                    DispensedDate);
+                return val;
+            }
+            catch (Exception e)
+            {
+                
+                throw new Exception(e.Message);
+            }
+
         }
 
         [WebMethod(EnableSession = true)]
@@ -976,6 +988,6 @@ namespace IQCare.Web.CCC.WebService
             }
             return new JavaScriptSerializer().Serialize(results);
         }
-
+        
     }
 }

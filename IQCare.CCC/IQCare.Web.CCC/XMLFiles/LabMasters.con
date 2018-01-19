@@ -77,11 +77,19 @@
     </xs:element>
   </xs:schema>
   <Mst_LabTest>
+    <LabTestId>96</LabTestId>
+    <LabName> HIV rapid test</LabName>
+    <LabDepartmentId>4</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>1</Sequence>
+    <DeleteFlag>true</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
     <LabTestId>58</LabTestId>
     <LabName>Albumin (mg/dL)</LabName>
     <LabDepartmentId>2</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>1</Sequence>
+    <Sequence>2</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -89,7 +97,7 @@
     <LabName>ALT/SGPT</LabName>
     <LabDepartmentId>2</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>2</Sequence>
+    <Sequence>3</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -97,7 +105,7 @@
     <LabName>Amylase</LabName>
     <LabDepartmentId>2</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>3</Sequence>
+    <Sequence>4</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -105,7 +113,15 @@
     <LabName>AST/SGOT</LabName>
     <LabDepartmentId>2</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>4</Sequence>
+    <Sequence>5</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>97</LabTestId>
+    <LabName>Blood Group</LabName>
+    <LabDepartmentId>7</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>6</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -113,7 +129,7 @@
     <LabName>CD4</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>5</Sequence>
+    <Sequence>7</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -121,7 +137,7 @@
     <LabName>CD4 Percent</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>6</Sequence>
+    <Sequence>8</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -129,7 +145,7 @@
     <LabName>Cell Count Lymphocytes</LabName>
     <LabDepartmentId>7</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>7</Sequence>
+    <Sequence>9</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -137,7 +153,7 @@
     <LabName>Cell Count Neutrophils</LabName>
     <LabDepartmentId>7</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>8</Sequence>
+    <Sequence>10</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -145,7 +161,7 @@
     <LabName>Chlamydia</LabName>
     <LabDepartmentId>6</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>9</Sequence>
+    <Sequence>11</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -153,7 +169,7 @@
     <LabName>Colposcopy (Cervical CA – female only)</LabName>
     <LabDepartmentId>1</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>10</Sequence>
+    <Sequence>12</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -161,7 +177,7 @@
     <LabName>Creatinine</LabName>
     <LabDepartmentId>2</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>11</Sequence>
+    <Sequence>13</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -169,7 +185,7 @@
     <LabName>CSF Biochemistry</LabName>
     <LabDepartmentId>2</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>12</Sequence>
+    <Sequence>14</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -177,7 +193,7 @@
     <LabName>CSF cryptococcal Ag</LabName>
     <LabDepartmentId>6</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>13</Sequence>
+    <Sequence>15</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -185,7 +201,7 @@
     <LabName>CSF Culture</LabName>
     <LabDepartmentId>6</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>14</Sequence>
+    <Sequence>16</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -193,7 +209,7 @@
     <LabName>CSF Gram Stain</LabName>
     <LabDepartmentId>6</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>15</Sequence>
+    <Sequence>17</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -201,7 +217,7 @@
     <LabName>CSF India Ink</LabName>
     <LabDepartmentId>6</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>16</Sequence>
+    <Sequence>18</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -209,7 +225,7 @@
     <LabName>Cytomegalovirus (CMV)</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>17</Sequence>
+    <Sequence>19</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -217,7 +233,7 @@
     <LabName>Epstein Barr Virus (EBV)</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>18</Sequence>
+    <Sequence>20</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -225,7 +241,7 @@
     <LabName>ESR</LabName>
     <LabDepartmentId>7</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>19</Sequence>
+    <Sequence>21</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -233,7 +249,7 @@
     <LabName>Glucose</LabName>
     <LabDepartmentId>2</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>20</Sequence>
+    <Sequence>22</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -241,7 +257,7 @@
     <LabName>Gonorrhea</LabName>
     <LabDepartmentId>6</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>21</Sequence>
+    <Sequence>23</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -249,7 +265,7 @@
     <LabName>HCT/Hb</LabName>
     <LabDepartmentId>7</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>22</Sequence>
+    <Sequence>24</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -257,7 +273,7 @@
     <LabName>HCT/Hb percent</LabName>
     <LabDepartmentId>7</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>23</Sequence>
+    <Sequence>25</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -265,7 +281,7 @@
     <LabName>HDL (mg/dL)</LabName>
     <LabDepartmentId>2</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>24</Sequence>
+    <Sequence>26</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -273,7 +289,7 @@
     <LabName>Hepatitis A Ab-IgM</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>25</Sequence>
+    <Sequence>27</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -281,7 +297,7 @@
     <LabName>Hepatitis A Ab-Total</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>26</Sequence>
+    <Sequence>28</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -289,7 +305,7 @@
     <LabName>Hepatitis B core - antibody IgM (HBsAb)</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>27</Sequence>
+    <Sequence>29</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -297,7 +313,7 @@
     <LabName>Hepatitis B core – antibody, total</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>28</Sequence>
+    <Sequence>30</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -305,7 +321,7 @@
     <LabName>Hepatitis B surface – antibody (HBsAb)</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>29</Sequence>
+    <Sequence>31</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -313,7 +329,7 @@
     <LabName>Hepatitis B surface – antigen (HBsAg)</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>30</Sequence>
+    <Sequence>32</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -321,7 +337,7 @@
     <LabName>Hepatitis C antibody</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>31</Sequence>
+    <Sequence>33</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -329,7 +345,7 @@
     <LabName>HIV Confirm</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>32</Sequence>
+    <Sequence>34</Sequence>
     <DeleteFlag>true</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -337,7 +353,7 @@
     <LabName>HIV Rapid Test</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>33</Sequence>
+    <Sequence>35</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -345,7 +361,7 @@
     <LabName>LDL (Mg/dL)</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>34</Sequence>
+    <Sequence>36</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -353,7 +369,15 @@
     <LabName>Malaria parasite</LabName>
     <LabDepartmentId>6</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>35</Sequence>
+    <Sequence>37</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>95</LabTestId>
+    <LabName>mps</LabName>
+    <LabDepartmentId>7</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>38</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -361,7 +385,7 @@
     <LabName>Pap Smear (Cervical CA – female only)</LabName>
     <LabDepartmentId>3</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>36</Sequence>
+    <Sequence>39</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -369,7 +393,7 @@
     <LabName>PCR</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>37</Sequence>
+    <Sequence>40</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -377,7 +401,7 @@
     <LabName>Platelets</LabName>
     <LabDepartmentId>7</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>38</Sequence>
+    <Sequence>41</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -385,7 +409,7 @@
     <LabName>Pregnancy</LabName>
     <LabDepartmentId>3</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>39</Sequence>
+    <Sequence>42</Sequence>
     <DeleteFlag>true</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -393,7 +417,7 @@
     <LabName>Protein</LabName>
     <LabDepartmentId>2</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>40</Sequence>
+    <Sequence>43</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -401,7 +425,7 @@
     <LabName>RBC</LabName>
     <LabDepartmentId>7</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>41</Sequence>
+    <Sequence>44</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -409,7 +433,7 @@
     <LabName>Rectal Pap Smear</LabName>
     <LabDepartmentId>3</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>42</Sequence>
+    <Sequence>45</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -417,7 +441,7 @@
     <LabName>Serum Crypto Ag</LabName>
     <LabDepartmentId>6</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>43</Sequence>
+    <Sequence>46</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -425,7 +449,7 @@
     <LabName>Sputum AFB 1</LabName>
     <LabDepartmentId>6</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>44</Sequence>
+    <Sequence>47</Sequence>
     <DeleteFlag>true</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -433,7 +457,7 @@
     <LabName>Sputum AFB 2</LabName>
     <LabDepartmentId>6</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>45</Sequence>
+    <Sequence>48</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -441,7 +465,7 @@
     <LabName>Sputum AFB 3</LabName>
     <LabDepartmentId>6</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>46</Sequence>
+    <Sequence>49</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -449,7 +473,7 @@
     <LabName>Sputum Gram Stain</LabName>
     <LabDepartmentId>6</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>47</Sequence>
+    <Sequence>50</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -457,7 +481,7 @@
     <LabName>Stool O/P</LabName>
     <LabDepartmentId>6</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>48</Sequence>
+    <Sequence>51</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -465,7 +489,7 @@
     <LabName>Store Plasma</LabName>
     <LabDepartmentId>2</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>49</Sequence>
+    <Sequence>52</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -473,7 +497,7 @@
     <LabName>Syphilis (FTA)</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>50</Sequence>
+    <Sequence>53</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -481,7 +505,7 @@
     <LabName>Syphilis (RPR)</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>51</Sequence>
+    <Sequence>54</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -489,7 +513,7 @@
     <LabName>Total Cholesterol (mg/dL)</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>52</Sequence>
+    <Sequence>55</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -497,7 +521,7 @@
     <LabName>Toxoplasma IgG Antibody</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>53</Sequence>
+    <Sequence>56</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -505,7 +529,7 @@
     <LabName>Triglycerides (mg/dL)</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>54</Sequence>
+    <Sequence>57</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -513,7 +537,7 @@
     <LabName>Urinalysis</LabName>
     <LabDepartmentId>2</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>55</Sequence>
+    <Sequence>58</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -521,7 +545,7 @@
     <LabName>Urine Culture/Sensitivity</LabName>
     <LabDepartmentId>1</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>56</Sequence>
+    <Sequence>59</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -529,7 +553,7 @@
     <LabName>Vaginal Inspection with Acetic Acid (VIA)</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>57</Sequence>
+    <Sequence>60</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -537,7 +561,7 @@
     <LabName>Varicella (Chicken Pox)</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>58</Sequence>
+    <Sequence>61</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -545,7 +569,7 @@
     <LabName>Viral Load</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>59</Sequence>
+    <Sequence>62</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -553,7 +577,7 @@
     <LabName>WBC</LabName>
     <LabDepartmentId>7</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>60</Sequence>
+    <Sequence>63</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -561,15 +585,15 @@
     <LabName>WBC</LabName>
     <LabDepartmentId>2</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>61</Sequence>
-    <DeleteFlag>false</DeleteFlag>
+    <Sequence>64</Sequence>
+    <DeleteFlag>true</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
     <LabTestId>8</LabTestId>
     <LabName>WBC Diff</LabName>
     <LabDepartmentId>7</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>62</Sequence>
+    <Sequence>65</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Lnk_TestParameter>
@@ -1106,6 +1130,24 @@
     <TestId>94</TestId>
     <DeleteFlag>false</DeleteFlag>
   </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>115</SubTestId>
+    <SubTestName>mps</SubTestName>
+    <TestId>95</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>116</SubTestId>
+    <SubTestName> HIV rapid test</SubTestName>
+    <TestId>96</TestId>
+    <DeleteFlag>true</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>117</SubTestId>
+    <SubTestName>Blood Group</SubTestName>
+    <TestId>97</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
   <Lnk_LabValue>
     <SubTestId>1</SubTestId>
     <MinBoundaryValue>0.00</MinBoundaryValue>
@@ -1131,7 +1173,7 @@
   <Lnk_LabValue>
     <SubTestId>3</SubTestId>
     <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>2000000.00</MaxBoundaryValue>
+    <MaxBoundaryValue>10000000.00</MaxBoundaryValue>
     <MinNormalRange>50.00</MinNormalRange>
     <MaxNormalRange>2000000.00</MaxNormalRange>
     <TextNormalRange />
@@ -1786,6 +1828,46 @@
     <ParameterId>100</ParameterId>
     <Result>WBC</Result>
   </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>24</ResultId>
+    <ParameterId>117</ParameterId>
+    <Result>A+</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>28</ResultId>
+    <ParameterId>117</ParameterId>
+    <Result>A-</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>26</ResultId>
+    <ParameterId>117</ParameterId>
+    <Result>AB+</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>30</ResultId>
+    <ParameterId>117</ParameterId>
+    <Result>AB-</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>25</ResultId>
+    <ParameterId>117</ParameterId>
+    <Result>B+</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>29</ResultId>
+    <ParameterId>117</ParameterId>
+    <Result>B-</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>27</ResultId>
+    <ParameterId>117</ParameterId>
+    <Result>O+</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>31</ResultId>
+    <ParameterId>117</ParameterId>
+    <Result>O-</Result>
+  </Lnk_ParameterResult>
   <LabTestOrder>
     <SubTestId>1</SubTestId>
     <SubTestName>CD4 Count</SubTestName>
@@ -1940,12 +2022,6 @@
     <SubTestId>28</SubTestId>
     <SubTestName>Cell Count RBCs</SubTestName>
     <TestId>56</TestId>
-    <DeleteFlag>false</DeleteFlag>
-  </LabTestOrder>
-  <LabTestOrder>
-    <SubTestId>29</SubTestId>
-    <SubTestName>Cell Count WBCs</SubTestName>
-    <TestId>57</TestId>
     <DeleteFlag>false</DeleteFlag>
   </LabTestOrder>
   <LabTestOrder>
@@ -2300,6 +2376,18 @@
     <SubTestId>114</SubTestId>
     <SubTestName>PCR</SubTestName>
     <TestId>94</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>115</SubTestId>
+    <SubTestName>mps</SubTestName>
+    <TestId>95</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>117</SubTestId>
+    <SubTestName>Blood Group</SubTestName>
+    <TestId>97</TestId>
     <DeleteFlag>false</DeleteFlag>
   </LabTestOrder>
   <Mst_PatientLabPeriod>

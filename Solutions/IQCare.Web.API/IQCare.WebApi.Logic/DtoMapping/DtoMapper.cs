@@ -112,18 +112,24 @@ namespace IQCare.WebApi.Logic.DtoMapping
         public PrescriptionDto DrugPrescriptionRaised(DrugPrescriptionEntity entity)
         {
 
-            var internalIdentifiers = new List<INTERNAL_PATIENT_ID>();
+            List<INTERNAL_PATIENT_ID> internalIdentifiers = new List<INTERNAL_PATIENT_ID>();
 
             foreach (var identifier in entity.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID)
             {
-                var internalIdentity = new INTERNAL_PATIENT_ID()
-                {
-                    IDENTIFIER_TYPE = identifier.IDENTIFIER_TYPE,
-                    ID = identifier.ID,
-                    ASSIGNING_AUTHORITY = identifier.ASSIGNING_AUTHORITY
+                
+                internalIdentifiers.Add(new INTERNAL_PATIENT_ID{ ID =identifier.ID,ASSIGNING_AUTHORITY  = identifier.ASSIGNING_AUTHORITY,IDENTIFIER_TYPE =identifier.IDENTIFIER_TYPE});
 
-                };
-                internalIdentifiers.Add(internalIdentity);
+                //internalIdentifiers.Add(new INTERNAL_PATIENT_ID { ID = identifier, ASSIGNING_AUTHORITY = identifier.ASSIGNING_AUTHORITY, IDENTIFIER_TYPE = identifier.IDENTIFIER_TYPE });
+
+                //var internalIdentity = new INTERNAL_PATIENT_ID()
+                //{
+                //    IDENTIFIER_TYPE = identifier.IDENTIFIER_TYPE,
+                //    ID = identifier.ID,
+                //    ASSIGNING_AUTHORITY = identifier.ASSIGNING_AUTHORITY
+
+                //};
+
+                //internalIdentifiers.Add(internalIdentity);
             }
 
             var orderEncorder = new List<PHARMACY_ENCODED_ORDER>();
@@ -245,6 +251,7 @@ namespace IQCare.WebApi.Logic.DtoMapping
                     IdentifierType = identifier.IdentifierType,
                     AssigningAuthority = identifier.AssigningAuthority
                 };
+                
                 internalIdentifiers.Add(internalIdentity);
             }
 

@@ -98,12 +98,13 @@ namespace IQCare.WebApi.Logic.EntityMapper
 
             foreach (var identifier in entityDto.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID)
             {
-                var internalIdentity = new INTERNALPATIENTID()
-                {
-                    IDENTIFIER_TYPE = identifier.IDENTIFIER_TYPE,
-                    ASSIGNING_AUTHORITY = identifier.ASSIGNING_AUTHORITY,
-                    ID = identifier.ID
-                };
+                var internalIdentity = new INTERNALPATIENTID(){ID = identifier.ID,ASSIGNING_AUTHORITY = identifier.ASSIGNING_AUTHORITY,IDENTIFIER_TYPE = identifier.IDENTIFIER_TYPE};//{ID = identifier.ID,ASSIGNING_AUTHORITY = identifier.ASSIGNING_AUTHORITY,IDENTIFIER_TYPE = identifier.IDENTIFIER_TYPE}
+               // internalIdentity
+                //{
+                //    IDENTIFIER_TYPE = identifier.IDENTIFIER_TYPE,
+                //    ASSIGNING_AUTHORITY = identifier.ASSIGNING_AUTHORITY,
+                //    ID = identifier.ID
+                //};
                 raisedPrescriptionEntity.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID.Add(internalIdentity);
                 //internalIdentifiers.Add(internalIdentity);
             }
@@ -119,6 +120,7 @@ namespace IQCare.WebApi.Logic.EntityMapper
             raisedPrescriptionEntity.COMMON_ORDER_DETAILS.ORDER_CONTROL = entityDto.COMMON_ORDER_DETAILS.ORDER_CONTROL;
             raisedPrescriptionEntity.COMMON_ORDER_DETAILS.ORDER_STATUS = entityDto.COMMON_ORDER_DETAILS.ORDER_STATUS;
             raisedPrescriptionEntity.COMMON_ORDER_DETAILS.PLACER_ORDER_NUMBER.NUMBER = Convert.ToString(entityDto.COMMON_ORDER_DETAILS.PLACER_ORDER_NUMBER.NUMBER);
+            raisedPrescriptionEntity.COMMON_ORDER_DETAILS.PLACER_ORDER_NUMBER.ENTITY =entityDto.COMMON_ORDER_DETAILS.PLACER_ORDER_NUMBER.ENTITY;
             raisedPrescriptionEntity.COMMON_ORDER_DETAILS.TRANSACTION_DATETIME = entityDto.COMMON_ORDER_DETAILS.TRANSACTION_DATETIME.ToString("yyyyMMddHmmss");
 
             var prescriptionOrderx = new PharmacyEncorderOrderEntity();

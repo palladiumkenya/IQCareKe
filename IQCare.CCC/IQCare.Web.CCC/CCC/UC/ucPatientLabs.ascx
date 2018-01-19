@@ -71,7 +71,7 @@
                                               <div class="panel-body">
                                                
                                                   <div class="col-md-12 form-group">
-                                                       <div class="col-md-4"><label class="control-label pull-left">Select Lab</label></div>
+                                                       <div class="col-md-4"><label class="control-label pull-left">Select Lab Test</label></div>
                                                       <div class="col-md-8">
                                                          
                                                           <asp:TextBox runat="server" Width="100%" ID="labTestTypes" data-provide="typeahead" CssClass="form-control input-sm pull-right" ClientIDMode="Static" placeholder="type to select...."></asp:TextBox>
@@ -79,7 +79,7 @@
                                                       </div>
                                                   </div>
                                                   <div class="col-md-12 form-group">
-                                                                      <div class="col-md-4"><label class="control-label  pull-left">Reason</label></div>
+                                                                      <div class="col-md-4"><label class="control-label  pull-left">Lab Test Reason</label></div>
                                                                      <div class="col-md-8">
                                                                          <asp:DropDownList runat="server" ID="orderReason" CssClass="form-control input-sm" ClientIDMode="Static"/>
                                                                      </div>
@@ -87,7 +87,7 @@
                                                   
                                                  <div class="col-md-12 form-group">
                                                        <div class="col-md-4"><label class="control-label pull-left">Lab Test Notes</label></div>
-                                                      <div class="col-md-8">
+                                                      <div class="col-md-8 pull-right">
                                                          
                                                           <asp:TextBox runat="server" ID="labNotes" Rows="4" CssClass="form-control input-sm pull-right" ClientIDMode="Static" placeholder="laboratory test notes...."></asp:TextBox>
                                                       </div>
@@ -95,10 +95,10 @@
 
 
 
-                                    <div class="col-md-12">
-                                        <div class="col-md-10"></div>
-                                        <div class="col-md-3 pull-right ">
-                                            <asp:LinkButton runat="server" ID="btnAddLab" ClientIDMode="Static" OnClientClick="return false" CssClass="btn btn-info fa fa-plus-circle "> Add Lab</asp:LinkButton>
+                                    <div class="col-md-12 form-group">
+                                        
+                                        <div class="col-md-6 pull-right ">
+                                            <asp:LinkButton runat="server" ID="btnAddLab" ClientIDMode="Static" OnClientClick="return false" CssClass="btn btn-info fa fa-plus-circle pull-right "> Add Lab Test</asp:LinkButton>
 
                                         </div>
                                         <div></div>

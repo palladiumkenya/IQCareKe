@@ -26,6 +26,9 @@ namespace Entities.CCC.Interoperability
         public string Id { get; set; }
         public string Id2 { get; set; }
         public string SENDING_FACILITY { get; set; }
+        public string EXT_ID { get; set; }
+        public string EXT_IDENTIFIER_TYPE { get; set; }
+        public string EXT_ASSIGNING_AUTHOURITY { get; set; }
         public string IDENTIFIER_TYPE { get; set; }
         public string ASSIGNING_AUTHORITY { get; set; }
         // public string ID2 { get; set; }

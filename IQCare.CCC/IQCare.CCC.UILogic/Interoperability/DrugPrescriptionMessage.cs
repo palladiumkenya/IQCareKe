@@ -20,7 +20,7 @@ namespace IQCare.CCC.UILogic.Interoperability
             {
                 var prescriptionDtoMessage =_drugPrescriptionManager.GetPatientPrescriptionMessage(ptntpk, orderId, patientMasterVisitId);
 
-                prescriptionDtoMessage = prescriptionDtoMessage.ToList();
+               // prescriptionDtoMessage = prescriptionDtoMessage.All();
 
                 //instantiate new PrescriptionDto 
                 PrescriptionDto prescriptionDtoPayLoad = new PrescriptionDto(); 
@@ -32,14 +32,14 @@ namespace IQCare.CCC.UILogic.Interoperability
                 prescriptionDtoPayLoad.MESSAGE_HEADER.RECEIVING_APPLICATION = "IL";
                 prescriptionDtoPayLoad.MESSAGE_HEADER.RECEIVING_FACILITY = prescriptionDtoMessage[0].SENDING_FACILITY;
                 prescriptionDtoPayLoad.MESSAGE_HEADER.SECURITY = "";
-                prescriptionDtoPayLoad.MESSAGE_HEADER.SENDING_APPLICATION = "IQCare";
+                prescriptionDtoPayLoad.MESSAGE_HEADER.SENDING_APPLICATION = "IQCARE";
                 prescriptionDtoPayLoad.MESSAGE_HEADER.SENDING_FACILITY = prescriptionDtoMessage[0].SENDING_FACILITY;
                 
                 
                 //todo - automap
-                prescriptionDtoPayLoad.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.IDENTIFIER_TYPE = prescriptionDtoMessage[0].IDENTIFIER_TYPE2;
-                prescriptionDtoPayLoad.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ID =prescriptionDtoMessage[0].Id2;
-                prescriptionDtoPayLoad.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ASSIGNING_AUTHORITY = prescriptionDtoMessage[0].ASSIGNING_AUTHORITY2;
+                prescriptionDtoPayLoad.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.IDENTIFIER_TYPE = prescriptionDtoMessage[0].EXT_IDENTIFIER_TYPE;
+                prescriptionDtoPayLoad.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ID =prescriptionDtoMessage[0].EXT_ID;
+                prescriptionDtoPayLoad.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ASSIGNING_AUTHORITY = prescriptionDtoMessage[0].EXT_ASSIGNING_AUTHOURITY;
 
                // var internalIdentifiers = new List<INTERNALPATIENTID>();
                 foreach (var internalPatientId in prescriptionDtoMessage)
@@ -50,14 +50,21 @@ namespace IQCare.CCC.UILogic.Interoperability
                         IDENTIFIER_TYPE = internalPatientId.IDENTIFIER_TYPE,
                         ID = internalPatientId.Id
                     };
+                    var internalIdentityId=new INTERNAL_PATIENT_ID()
+                    {
+                        ASSIGNING_AUTHORITY = internalPatientId.ASSIGNING_AUTHORITY2,
+                        ID = internalPatientId.Id2,
+                        IDENTIFIER_TYPE = internalPatientId.IDENTIFIER_TYPE2
+                    };
                     prescriptionDtoPayLoad.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID.Add(internalIdentity);
+                    prescriptionDtoPayLoad.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID.Add(internalIdentityId);
                 }
 
                 prescriptionDtoPayLoad.PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME = prescriptionDtoMessage[0].FIRST_NAME;
                 prescriptionDtoPayLoad.PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME = prescriptionDtoMessage[0].MIDDLE_NAME;
                 prescriptionDtoPayLoad.PATIENT_IDENTIFICATION.PATIENT_NAME.LAST_NAME = prescriptionDtoMessage[0].LAST_NAME;
 
-                if (prescriptionDtoPayLoad.COMMON_ORDER_DETAILS!=null)
+                if (null!= prescriptionDtoPayLoad.COMMON_ORDER_DETAILS)
                 {
                     prescriptionDtoPayLoad.COMMON_ORDER_DETAILS.NOTES = prescriptionDtoMessage[0].NOTES;
                     prescriptionDtoPayLoad.COMMON_ORDER_DETAILS.ORDER_STATUS = prescriptionDtoMessage[0].ORDER_STATUS;

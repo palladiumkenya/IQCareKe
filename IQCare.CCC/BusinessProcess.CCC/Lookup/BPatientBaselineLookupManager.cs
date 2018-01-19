@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Core.Common.CommandTrees;
 using DataAccess.Base;
 using Entities.CCC.Lookup;
 using Interface.CCC.Lookup;
@@ -10,14 +13,15 @@ namespace BusinessProcess.CCC.Lookup
 {
     public class BPatientBaselineLookupManager : ProcessBase, IPatientBaselineLookupManager
     {
-       // private readonly UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext());
+        // private readonly UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext());
 
         public List<PatientBaselineLookup> GetAllPatientBaseline(int patientId)
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                var patientBaselineList = unitOfWork.PatientBaselineLookupRepository.FindBy(x => x.patientId == patientId & x.Id > 0)
-                            .ToList();
+                var patientBaselineList = unitOfWork.PatientBaselineLookupRepository
+                    .FindBy(x => x.patientId == patientId & x.Id > 0)
+                    .ToList();
                 unitOfWork.Dispose();
                 return patientBaselineList;
             }
@@ -27,18 +31,19 @@ namespace BusinessProcess.CCC.Lookup
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                var patientBaselineList = unitOfWork.PatientBaselineLookupRepository.FindBy(x => x.patientId == patientId)
-                        .Select(x => new PatientBaselineLookup()
-                        {
-                            patientId = x.patientId,
-                            TransferInDate = x.TransferInDate,
-                            TreatmentStartDate = x.TreatmentStartDate,
-                            CurrentTreatment = x.CurrentTreatment,
-                            FacilityFrom = x.FacilityFrom,
-                            mflcode = x.mflcode,
-                            CountyFrom = x.CountyFrom,
-                            TransferInNotes = x.TransferInNotes
-                        }).ToList();
+                var patientBaselineList = unitOfWork.PatientBaselineLookupRepository
+                    .FindBy(x => x.patientId == patientId)
+                    .Select(x => new PatientBaselineLookup()
+                    {
+                        patientId = x.patientId,
+                        TransferInDate = x.TransferInDate,
+                        TreatmentStartDate = x.TreatmentStartDate,
+                        CurrentTreatment = x.CurrentTreatment,
+                        FacilityFrom = x.FacilityFrom,
+                        mflcode = x.mflcode,
+                        CountyFrom = x.CountyFrom,
+                        TransferInNotes = x.TransferInNotes
+                    }).ToList();
                 unitOfWork.Dispose();
                 return patientBaselineList;
             }
@@ -50,15 +55,16 @@ namespace BusinessProcess.CCC.Lookup
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                var patientBaselineList = unitOfWork.PatientBaselineLookupRepository.FindBy(x => x.patientId == patientId)
-                            .Select(x => new PatientBaselineLookup()
-                            {
-                                patientId = x.patientId,
-                                HivDiagnosisDate = x.HivDiagnosisDate,
-                                EnrollmentDate = x.EnrollmentDate,
-                                EnrollmentWHOStage = x.EnrollmentWHOStage,
-                                ARTInitiationDate = x.ARTInitiationDate
-                            }).ToList();
+                var patientBaselineList = unitOfWork.PatientBaselineLookupRepository
+                    .FindBy(x => x.patientId == patientId)
+                    .Select(x => new PatientBaselineLookup()
+                    {
+                        patientId = x.patientId,
+                        HivDiagnosisDate = x.HivDiagnosisDate,
+                        EnrollmentDate = x.EnrollmentDate,
+                        EnrollmentWHOStage = x.EnrollmentWHOStage,
+                        ARTInitiationDate = x.ARTInitiationDate
+                    }).ToList();
                 unitOfWork.Dispose();
                 return patientBaselineList;
             }
@@ -69,21 +75,22 @@ namespace BusinessProcess.CCC.Lookup
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                var patientBaselineList = unitOfWork.PatientBaselineLookupRepository.FindBy(x => x.patientId == patientId)
-                            .Select(x => new PatientBaselineLookup()
-                            {
-                                patientId = x.patientId,
-                                HBVInfected = x.HBVInfected,
-                                Pregnant = x.Pregnant,
-                                TBinfected = x.TBinfected,
-                                WHOStage = x.WHOStage,
-                                BreastFeeding = x.BreastFeeding,
-                                CD4Count = x.CD4Count,
-                                MUAC = x.MUAC,
-                                Weight = x.Weight,
-                                Height = x.Height,
-                                BMI = x.BMI
-                            }).ToList();
+                var patientBaselineList = unitOfWork.PatientBaselineLookupRepository
+                    .FindBy(x => x.patientId == patientId)
+                    .Select(x => new PatientBaselineLookup()
+                    {
+                        patientId = x.patientId,
+                        HBVInfected = x.HBVInfected,
+                        Pregnant = x.Pregnant,
+                        TBinfected = x.TBinfected,
+                        WHOStage = x.WHOStage,
+                        BreastFeeding = x.BreastFeeding,
+                        CD4Count = x.CD4Count,
+                        MUAC = x.MUAC,
+                        Weight = x.Weight,
+                        Height = x.Height,
+                        BMI = x.BMI
+                    }).ToList();
                 unitOfWork.Dispose();
                 return patientBaselineList;
             }
@@ -93,20 +100,22 @@ namespace BusinessProcess.CCC.Lookup
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                var patientBaselineList = unitOfWork.PatientBaselineLookupRepository.FindBy(x => x.patientId == patientId)
-                            .Select(x => new PatientBaselineLookup()
-                            {
-                                patientId = x.patientId,
-                                DateStartedOnFirstline = x.DateStartedOnFirstline,
-                                Cohort = x.Cohort,
-                                Regimen = x.Regimen,
-                                BaselineViralLoad = x.BaselineViralLoad,
-                                BaselineViralLoadDate = x.BaselineViralLoadDate
+                var patientBaselineList = unitOfWork.PatientBaselineLookupRepository
+                    .FindBy(x => x.patientId == patientId)
+                    .Select(x => new PatientBaselineLookup()
+                    {
+                        patientId = x.patientId,
+                        DateStartedOnFirstline = x.DateStartedOnFirstline,
+                        Cohort = x.Cohort,
+                        Regimen = x.Regimen,
+                        BaselineViralLoad = x.BaselineViralLoad,
+                        BaselineViralLoadDate = x.BaselineViralLoadDate
 
-                            }).ToList();
+                    }).ToList();
                 unitOfWork.Dispose();
                 return patientBaselineList;
             }
         }
     }
+
 }

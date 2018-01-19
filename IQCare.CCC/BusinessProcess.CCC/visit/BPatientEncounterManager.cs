@@ -17,67 +17,112 @@ namespace BusinessProcess.CCC.visit
 
         public int AddpatientEncounter(PatientEncounter patientEncounter)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                _unitOfWork.PatientEncounterRepository.Add(patientEncounter);
-                Result = _unitOfWork.Complete();
-                _unitOfWork.Dispose();
+                unitOfWork.PatientEncounterRepository.Add(patientEncounter);
+                Result = unitOfWork.Complete();
+                unitOfWork.Dispose();
                 return Result;
             }
         }
 
         public int UpdatePatientEncounter(PatientEncounter patientEncounter)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                _unitOfWork.PatientEncounterRepository.Update(patientEncounter);
-                Result = _unitOfWork.Complete();
-                _unitOfWork.Dispose();
+                var encounter = unitOfWork.PatientEncounterRepository.GetById(patientEncounter.Id);
+                if (null != encounter)
+                {
+                    encounter.PatientId = patientEncounter.PatientId;
+                    encounter.PatientMasterVisitId = patientEncounter.PatientMasterVisitId;
+                    encounter.EncounterStartTime = patientEncounter.EncounterStartTime;
+                    encounter.EncounterEndTime = patientEncounter.EncounterEndTime;
+                    encounter.ServiceAreaId = patientEncounter.ServiceAreaId;
+
+                }
+                unitOfWork.PatientEncounterRepository.Update(patientEncounter);
+                Result = unitOfWork.Complete();
+                unitOfWork.Dispose();
                 return Result;
             }
         }
 
         public int DeletePatientEncounter(int id)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                var personEncounter = _unitOfWork.PatientEncounterRepository.GetById(id);
-                _unitOfWork.PatientEncounterRepository.Remove(personEncounter);
-                Result = _unitOfWork.Complete();
-                _unitOfWork.Dispose();
+                var patientEncounter = unitOfWork.PatientEncounterRepository.GetById(id);
+                unitOfWork.PatientEncounterRepository.Remove(patientEncounter);
+                Result = unitOfWork.Complete();
+                unitOfWork.Dispose();
                 return Result;
             }
         }
 
         public List<PatientEncounter> GetPatientCurrentEncounters(int patientId, DateTime visitDate)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 List<PatientEncounter> patientEncounters =
-                   _unitOfWork.PatientEncounterRepository.FindBy(
+                   unitOfWork.PatientEncounterRepository.FindBy(
                            x =>
                                x.PatientId == patientId &
                                DbFunctions.TruncateTime(x.CreateDate) == DbFunctions.TruncateTime(visitDate) &
                                !x.DeleteFlag)
                        .OrderByDescending(x => x.Id).Take(1).ToList();
-                _unitOfWork.Dispose();
+                unitOfWork.Dispose();
                 return patientEncounters;
             }
         }
 
         public List<PatientEncounter> GetPatientEncounterAll(int patientId)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 List<PatientEncounter> patientEncounters =
-                   _unitOfWork.PatientEncounterRepository.FindBy(
+                   unitOfWork.PatientEncounterRepository.FindBy(
                            x =>
                                x.PatientId == patientId &
                                !x.DeleteFlag)
                        .OrderByDescending(x => x.Id).Take(1).ToList();
-                _unitOfWork.Dispose();
+                unitOfWork.Dispose();
                 return patientEncounters;
             }
+        }
+
+        public List<PatientEncounter> GetPatientEncounterByEncounterType(int patientId, string encounterName)
+        {
+            BLookupManager lookup=new BLookupManager();
+            List<PatientEncounter> patientEncounterList;
+
+            int encounterTypeId = Convert.ToInt32(lookup.GetLookupItemId(encounterName));
+
+                using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+                {
+                     patientEncounterList = unitOfWork.PatientEncounterRepository
+                        .FindBy(x => x.PatientId == patientId && x.EncounterTypeId == encounterTypeId).ToList();
+                    unitOfWork.Dispose();
+                }
+
+            return patientEncounterList;
+
+        }
+
+        public int PatientEncounterCheckout(int patientEncounterId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var encounter = unitOfWork.PatientEncounterRepository.GetById(patientEncounterId);
+                if (null != encounter)
+                {
+                    encounter.EncounterEndTime = DateTime.Now;
+                    encounter.Status = 1;
+                }
+                unitOfWork.PatientEncounterRepository.Update(encounter);
+                Result = unitOfWork.Complete();
+                unitOfWork.Dispose();
+            }
+            return Result;
         }
     }
 }
