@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2006
+VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCare.Web.CCC", "..\..\IQCare.CCC\IQCare.Web.CCC\IQCare.Web.CCC.csproj", "{1FD9CC7D-0CA8-4746-8565-AE446765410A}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -38,6 +38,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess.CCC", "..\..\IQC
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCare.DTO", "..\..\IQCare.CCC\IQCare.DTO\IQCare.DTO.csproj", "{663E6443-D847-478F-B7A5-400448793A6E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{43E1A1CC-ADC8-4843-ACB0-16E9C90BB980} = {43E1A1CC-ADC8-4843-ACB0-16E9C90BB980}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCare.Events", "..\..\IQCare.CCC\IQCare.Events\IQCare.Events.csproj", "{43E1A1CC-ADC8-4843-ACB0-16E9C90BB980}"
 EndProject

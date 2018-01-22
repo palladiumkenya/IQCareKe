@@ -1,6 +1,4 @@
-﻿
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -9,6 +7,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Script.Serialization;
 
 namespace IQCare.Events
 {
@@ -25,18 +24,18 @@ namespace IQCare.Events
             {
                 using (HttpClient httpClient = new HttpClient())
                 {
-                    string host = HttpContext.Current.Request.Url.Host;
-                    string interopApiPort = ConfigurationManager.AppSettings.Get("InteropApiPort");
-                    string apiSite = ConfigurationManager.AppSettings.Get("ApiSiteName");
+                    //string host = HttpContext.Current.Request.Url.Host;
+                    //string interopApiPort = ConfigurationManager.AppSettings.Get("InteropApiPort");
+                    //string apiSite = ConfigurationManager.AppSettings.Get("ApiSiteName");
                     string interopUri = ConfigurationManager.AppSettings.Get("InteropApiIQCareUri");
 
-                    string uri = "http://" + host + ":" + interopApiPort + apiSite;
+                    //string uri = "http://" + host + ":" + interopApiPort + apiSite;
 
                     httpClient.BaseAddress = new Uri(interopUri);
                     httpClient.DefaultRequestHeaders.Accept.Clear();
                     httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                    string content = JsonConvert.SerializeObject(e);
+                    string content = new JavaScriptSerializer().Serialize(e); //JsonConvert.SerializeObject(e);
 
                     var jsoncontent = new StringContent(content, Encoding.UTF8, "application/json");
                     // HTTP POST
@@ -59,7 +58,7 @@ namespace IQCare.Events
             client.BaseAddress = new Uri("http://localhost:18315/");
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            string content = JsonConvert.SerializeObject(e);
+            string content = new JavaScriptSerializer().Serialize(e); //JsonConvert.SerializeObject(e);
 
             var jsoncontent = new StringContent(content, Encoding.ASCII, "application/json");
             var result = Task.Run(() => client.PostAsync("api/interop/dispatch/", jsoncontent).Result);

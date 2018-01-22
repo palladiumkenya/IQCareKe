@@ -16,6 +16,7 @@ namespace Interface.CCC.Lookup
         List<LookupItemView> GetLookUpItemViewByMasterId(int id);
         int GetLookUpMasterId(string masterName);
         string GetLookupMasterNameByMasterIdDisplayName(int itemId, string displayName);
+        string GetLookupItemNameByMasterNameItemId(int itemId, string masterName);
         List<LookupLabs> GetLookupLabs();
         List<LookupPreviousLabs> GetLookupPreviousLabs(int patientId);
         List<LookupPreviousLabs> GetExtruderCompleteLabs(int patientId);

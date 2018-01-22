@@ -11,10 +11,11 @@ namespace IQCare.Web
 {
     public class Global : HttpApplication
     {
-
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         protected void Application_Start(object sender, EventArgs e)
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
+            log.Debug("iq started");
         }
 
         protected void Session_Start(object sender, EventArgs e)

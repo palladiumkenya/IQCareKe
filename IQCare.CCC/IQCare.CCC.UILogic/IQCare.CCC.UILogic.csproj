@@ -124,6 +124,7 @@
     <Compile Include="Interoperability\Enrollment\ProcessRegistration.cs" />
     <Compile Include="Interoperability\InteropPlacerTypeManager.cs" />
     <Compile Include="Interoperability\InteropPlacerValuesManager.cs" />
+    <Compile Include="Interoperability\Observation\ProcessObservation.cs" />
     <Compile Include="Interoperability\Observation\ProcessObservationResultMessage.cs" />
     <Compile Include="Interoperability\ProcessViralLoadResults.cs" />
     <Compile Include="Interoperability\DTOValidator\PatientRegistrationValidation.cs" />
