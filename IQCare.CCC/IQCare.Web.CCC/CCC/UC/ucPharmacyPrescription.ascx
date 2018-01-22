@@ -443,9 +443,7 @@
             restricted: [{ from: tomorrow, to: Infinity }]
         });
 
-     /*   $("#<%=ddlTreatmentProgram.ClientID%>").change(function () {
-            
-        });*/
+        
 
         $("#<%=ddlTreatmentPlan.ClientID%>").change(function () {
             var treatmentProgram = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
@@ -902,14 +900,14 @@
             catch (err) { }
 
             if (sumAllAbbr > 0) {
-                if (treatmentPlanName === 'ART') {
+                if (treatmentProgramName === 'ART') {
                     if (regimenLine === "0") {
                         toastr.error("Error", "Please select the Regimen Line");
                         return;
                     }
                 }
 
-                if (sumAllAbbr !== sumSelectedRegimen && treatmentPlanName === 'ART') {
+                if (sumAllAbbr !== sumSelectedRegimen && treatmentProgramName === 'ART') {
                     toastr.error("Error", "Selected Regimen is not equal to Prescribed Regimen!");
                     return;
                 }
