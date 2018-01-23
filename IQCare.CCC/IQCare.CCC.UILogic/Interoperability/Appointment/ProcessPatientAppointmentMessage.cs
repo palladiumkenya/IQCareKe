@@ -27,7 +27,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
 
         public PatientAppointSchedulingDTO GetObservation(int entityId, int observationType)
         {
-            throw new System.NotImplementedException();
+            return new PatientAppointSchedulingDTO();
         }
     }
 }
