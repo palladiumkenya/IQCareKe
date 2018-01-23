@@ -10,6 +10,9 @@ using DataAccess.CCC.Repository;
 using DataAccess.Base;
 using DataAccess.CCC.Interface;
 using Entities.CCC.Lookup;
+using DataAccess.Entity;
+using DataAccess.Common;
+using System.Data;
 
 namespace BusinessProcess.CCC.visit
 {
@@ -131,6 +134,31 @@ namespace BusinessProcess.CCC.visit
 
                 _unitOfWork.Dispose();
                 return patientVL;
+            }
+        }
+
+        public List<PatientLabTracker> GetAllPatientVLs(int patientId)
+        {
+            lock (this)
+            {
+                ClsObject PatientEncounter = new ClsObject();
+                ClsUtility.Init_Hashtable();
+                ClsUtility.AddParameters("@PatientId", SqlDbType.Int, patientId.ToString());
+
+                DataTable theDT = (DataTable)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_getAllViralLoads", ClsUtility.ObjectEnum.DataTable);
+
+                List<PatientLabTracker> list = new List<PatientLabTracker>();
+
+                for (int i = 0; i < theDT.Rows.Count; i++)
+                {
+                    PatientLabTracker vl = new PatientLabTracker();
+                    vl.ResultValues = Convert.ToDecimal(theDT.Rows[i]["resultvalue"]);
+                    vl.CreateDate = Convert.ToDateTime(theDT.Rows[i]["resultdate"]);
+
+                    list.Add(vl);
+                }
+
+                return list;
             }
         }
         public List<PatientLabTracker> GetPatientVlById(int Id)
