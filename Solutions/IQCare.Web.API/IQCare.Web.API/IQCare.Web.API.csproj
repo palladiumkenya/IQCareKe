@@ -37,7 +37,7 @@
 
 	<ItemGroup>
 		<Reference Include="AutoMapper">
-			<HintPath>..\..\..\References\AutoMapper.dll</HintPath>
+		  <HintPath>..\..\..\Library\AutoMapper.dll</HintPath>
 		</Reference>
 		<Reference Include="DataAccess.Base">
 			<HintPath>..\..\..\References\DataAccess.Base.dll</HintPath>

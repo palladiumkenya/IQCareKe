@@ -31,7 +31,7 @@ xcopy /d %BATDIR%\Library\CrystalDecisions.Web.dll %BATDIR%\package\web\bin
 xcopy /d %BATDIR%\Library\itextsharp.dll %BATDIR%\package\web\bin
 xcopy /d %BATDIR%\References\log4net.dll %BATDIR%\package\web\bin
 xcopy /d %BATDIR%\References\Microsoft.Office.Interop.Owc11.dll %BATDIR%\package\web\bin
-REM xcopy /d %BATDIR%\Library\Microsoft.Web.Infrastructure.dll %BATDIR%\package\web\bin
+xcopy /d %BATDIR%\Library\Microsoft.Web.Infrastructure.dll %BATDIR%\package\web\bin
 xcopy /d %BATDIR%\References\MSDATASRC.dll %BATDIR%\package\web\bin
 xcopy /d %BATDIR%\References\netchartdir.dll %BATDIR%\package\web\bin
 xcopy /d %BATDIR%\References\Newtonsoft.Json.dll %BATDIR%\package\web\bin
@@ -39,14 +39,16 @@ xcopy /d %BATDIR%\References\Sand.Security.Cryptography.dll %BATDIR%\package\web
 xcopy /d %BATDIR%\References\stdole.dll %BATDIR%package\web\bin
 xcopy /d %BATDIR%\Library\System.Net.Http.dll %BATDIR%\package\web\bin
 xcopy /d %BATDIR%\Library\System.Net.Http.Formatting.dll %BATDIR%\package\web\bin
-REM xcopy /d %BATDIR%\Library\System.Web.Helpers.dll %BATDIR%\package\web\bin
+xcopy /d %BATDIR%\Library\System.Web.Helpers.dll %BATDIR%\package\web\bin
 xcopy /d %BATDIR%\Library\System.Web.Http.dll %BATDIR%\package\web\bin
 xcopy /d %BATDIR%\Library\System.Web.Http.WebHost.dll %BATDIR%\package\web\bin
-REM xcopy /d %BATDIR%\Library\System.Web.Mvc.dll %BATDIR%\package\web\bin
-REM xcopy /d %BATDIR%\Library\System.Web.Razor.dll %BATDIR%\package\web\bin
-REM xcopy /d %BATDIR%\Library\System.Web.WebPages.Deployment.dll %BATDIR%\package\web\bin
-REM xcopy /d %BATDIR%\Library\System.Web.WebPages.dll %BATDIR%\package\web\bin
-REM xcopy /d %BATDIR%\Library\System.Web.WebPages.Razor.dll %BATDIR%\package\web\bin
-xcopy /d %BATDIR%\References\Telerik.Web.UI.dll %BATDIR%\package\web\bin
+xcopy /d %BATDIR%\Library\System.Web.Mvc.dll %BATDIR%\package\web\bin
+xcopy /d %BATDIR%\Library\System.Web.Razor.dll %BATDIR%\package\web\bin
+xcopy /d %BATDIR%\Library\System.Web.WebPages.Deployment.dll %BATDIR%\package\web\bin
+xcopy /d %BATDIR%\Library\System.Web.WebPages.dll %BATDIR%\package\web\bin
+xcopy /d %BATDIR%\Library\System.Web.WebPages.Razor.dll %BATDIR%\package\web\bin
+xcopy /d %BATDIR%\Library\Telerik.Web.UI.dll %BATDIR%\package\web\bin
+xcopy /d %BATDIR%\Library\EntityFramework.dll %BATDIR%\package\web\bin
+xcopy /d %BATDIR%\Library\EntityFramework.SqlServer.dll %BATDIR%\package\web\bin
 
 pause
