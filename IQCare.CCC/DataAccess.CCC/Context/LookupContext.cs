@@ -53,5 +53,6 @@ namespace DataAccess.CCC.Context
         public DbSet<DrugPrescriptionEntity> DrugPrescriptionMessages { get; set; }
         public DbSet<ViralLoadMessage> ViralLoadEntitys { get; set; }
         public DbSet<PatientAppointmentMessage> PatientAppointmentMessages { get; set; }
+        public DbSet<PatientVitalsMessage> PatientVitalsMessages { get; set; }
     }
 }

@@ -359,19 +359,7 @@ namespace IQCare.WebApi.Logic.MessageHandler
             {
                 ProcessObservationResultMessage observationResult = new ProcessObservationResultMessage();
 
-                int observationType;
-
-                switch (messageEvent.ObservationType)
-                {
-                    case ObservationType.WhoStage:
-                        observationType = 0;
-                        break;
-                    default:
-                        observationType = 0;
-                        break;
-                }
-
-                var observationDto = observationResult.GetObservation(messageEvent.EntityId, observationType);
+                var observationDto = observationResult.GetObservation(messageEvent);
                 var observationEntityDto = _jsonEntityMapper.ObservationResult(observationDto, messageEvent);
                 string observationEntityJson = new JavaScriptSerializer().Serialize(observationEntityDto);
 

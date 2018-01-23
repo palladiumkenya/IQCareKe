@@ -61,6 +61,8 @@ namespace IQCare.Web.CCC.WebService
         {
             try
             {
+                int facilityId = Convert.ToInt32(Session["AppPosID"]);
+
                 PatientVital patientVital = new PatientVital()
                 {
                     PatientId = patientId,
@@ -82,7 +84,7 @@ namespace IQCare.Web.CCC.WebService
                     WeightForHeight = weightForHeight,
                 };
                 var vital = new PatientVitalsManager();
-                Result = vital.AddPatientVitals(patientVital);
+                Result = vital.AddPatientVitals(patientVital, facilityId);
                 if (Result > 0)
                 {
                     Msg = "Patient Vitals Added Successfully!";

@@ -150,6 +150,7 @@ namespace DataAccess.CCC.Repository
         private IPatientAppointmentMessageRepository _patientAppointmentMessageRepository;
         private IInteropPlacerTypesRepository _interopPlacerTypesRepository;
         private IInteropPlacerValuesRepository _interopPlacerValuesRepository;
+        private IPatientVitalsMessageRepository _patientVitalsMessageRepository;
 
         public UnitOfWork(BaseContext context)
         {
@@ -684,6 +685,15 @@ namespace DataAccess.CCC.Repository
                 return _personGreenCardLookupRepository ??
                        (_personGreenCardLookupRepository =
                            new PersonGreenCardLookupRepository((GreencardContext) _context));
+            }
+        }
+
+        public IPatientVitalsMessageRepository PatientVitalsMessageRepository
+        {
+            get
+            {
+                return _patientVitalsMessageRepository ?? (_patientVitalsMessageRepository =
+                           new PatientVitalsMessageRepository((LookupContext) _context));
             }
         }
 

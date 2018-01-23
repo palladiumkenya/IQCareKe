@@ -397,10 +397,5 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
 
             return new JavaScriptSerializer().Serialize(message);
         }
-
-        public PatientRegistrationDTO GetObservation(int entityId, int observationType)
-        {
-            return new PatientRegistrationDTO();
-        }
     }
 }

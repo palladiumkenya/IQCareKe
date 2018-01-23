@@ -117,5 +117,18 @@ namespace IQCare.CCC.UILogic.Interoperability.Observation
                 throw e;
             }
         }
+
+        public static ObservationResultDTO GetVitals(int patientId, int patientMasterVisitId)
+        {
+            try
+            {
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }
