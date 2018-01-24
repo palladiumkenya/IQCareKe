@@ -52,7 +52,8 @@ namespace IQCare.Web.CCC.WebService
             _patientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
 
             List<PatientDetailsVitals> patientDetailsVitalses = new List<PatientDetailsVitals>();
-            List<PatientVital> listVitals = _vitals.GetCurrentPatientVital(_patientId);
+            //List<PatientVital> listVitals = _vitals.GetCurrentPatientVital(_patientId);
+            List<PatientVital> listVitals = _vitals.GetAllPatientVitals(_patientId);
 
             if (listVitals != null )
             {

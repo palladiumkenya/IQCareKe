@@ -138,7 +138,8 @@ namespace IQCare.Web.CCC.WebService
         {
                      
             List<PatientViralLoad> patientViralDetails = new List<PatientViralLoad>();
-            List<PatientLabTracker> list_vl = _lookupData.GetPatientVL(patientId);
+            //List<PatientLabTracker> list_vl = _lookupData.GetPatientVL(patientId);
+            List<PatientLabTracker> list_vl = _lookupData.GetAllPatientVLs(patientId);
 
             if (list_vl != null)
             {
