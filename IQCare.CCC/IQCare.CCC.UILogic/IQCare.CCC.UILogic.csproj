@@ -115,6 +115,7 @@
     <Compile Include="Enrollment\ServiceAreaIdentifiersManager.cs" />
     <Compile Include="FacilityListManager.cs" />
     <Compile Include="Interoperability\Appointment\AppointmentMessage.cs" />
+    <Compile Include="Interoperability\CommonMessageSegments\PatientIdentificationSegment.cs" />
     <Compile Include="Interoperability\DrugPrescriptionMessage.cs" />
     <Compile Include="Interoperability\Appointment\PatientAppointmentMessageManager.cs" />
     <Compile Include="Interoperability\DTOValidator\IValidateDTO.cs" />

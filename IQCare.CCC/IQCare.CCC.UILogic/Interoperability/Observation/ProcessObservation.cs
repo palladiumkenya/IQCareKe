@@ -10,6 +10,7 @@ using IQCare.DTO.ObservationResult;
 using Entities.CCC.Enrollment;
 using Entities.CCC.Interoperability;
 using Entities.CCC.Visit;
+using IQCare.CCC.UILogic.Interoperability.CommonMessageSegments;
 using IQCare.CCC.UILogic.Interoperability.Enrollment;
 using IQCare.CCC.UILogic.Visit;
 
@@ -36,7 +37,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Observation
                     PatientMessage patientMessage = patientMessageManager.GetPatientMessageByEntityId(whoStage.PatientId);
                     PatientMasterVisit visit = visitManager.GetVisitById(whoStage.PatientMasterVisitId);
 
-                    var personIdentifiers = personIdentifierManager.GetPersonIdentifiers(patientMessage.Id, identifier.Id);
+                    List<PersonIdentifier> personIdentifiers = personIdentifierManager.GetPersonIdentifiers(patientMessage.Id, identifier.Id);
                     string whoStageString  = lookupLogic.GetLookupItemNameByMasterNameItemId(whoStage.WHOStage, "WHOStage");
 
                     //Initialize default values
@@ -47,33 +48,23 @@ namespace IQCare.CCC.UILogic.Interoperability.Observation
                     observationResult.OBSERVATION_RESULT = observationResult.OBSERVATION_RESULT == null ? new List<OBSERVATION_RESULT>() : observationResult.OBSERVATION_RESULT;
 
                     //External Patient Id
-                    observationResult.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ID = personIdentifiers.Count > 0 ? personIdentifiers[0].IdentifierValue : String.Empty;
-                    observationResult.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ASSIGNING_AUTHORITY = "MPI";
-                    observationResult.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.IDENTIFIER_TYPE = "GODS_NUMBER";
+                    observationResult.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID = PatientIdentificationSegment.GetExternalPatientId(personIdentifiers);
 
                     //CCC Number
-                    INTERNALPATIENTID internalPatientId = new INTERNALPATIENTID();
-                    internalPatientId.ID = patientMessage.IdentifierValue;
-                    internalPatientId.IDENTIFIER_TYPE = "CCC_NUMBER";
-                    internalPatientId.ASSIGNING_AUTHORITY = "CCC";
+                    INTERNALPATIENTID internalPatientId = PatientIdentificationSegment.getInternalPatientIdCCC(patientMessage);
+                    observationResult.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID.Add(internalPatientId);
 
                     //National ID
-                    observationResult.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID.Add(internalPatientId);
-                    if (!String.IsNullOrWhiteSpace(patientMessage.NATIONAL_ID) && patientMessage.NATIONAL_ID != "99999999")
+                    INTERNALPATIENTID internalNationalId = PatientIdentificationSegment.getInternalPatientIdNationalId(patientMessage);
+                    if (internalNationalId != null)
                     {
-                        INTERNALPATIENTID internalNationalId = new INTERNALPATIENTID();
-                        internalNationalId.ID = patientMessage.NATIONAL_ID;
-                        internalNationalId.IDENTIFIER_TYPE = "NATIONAL_ID";
-                        internalNationalId.ASSIGNING_AUTHORITY = "GOK";
-
                         observationResult.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID.Add(internalNationalId);
                     }
+                    
                     //Patient Names
-                    observationResult.PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME = !string.IsNullOrWhiteSpace(patientMessage.FIRST_NAME) ? patientMessage.FIRST_NAME : "";
-                    observationResult.PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME = !string.IsNullOrWhiteSpace(patientMessage.MIDDLE_NAME) ? patientMessage.MIDDLE_NAME : "";
-                    observationResult.PATIENT_IDENTIFICATION.PATIENT_NAME.LAST_NAME = !string.IsNullOrWhiteSpace(patientMessage.LAST_NAME) ? patientMessage.LAST_NAME : "";
+                    observationResult.PATIENT_IDENTIFICATION.PATIENT_NAME = PatientIdentificationSegment.GetPatientName(patientMessage);
 
-                    //string observationDate  = DateTime.ParseExact(visit.VisitDate.ToString(), "dd/MM/yyyy", CultureInfo.InvariantCulture).ToString("yyyyMMddHmmss");
+                    //set visitdate value
                     DateTime visitDate = visit.VisitDate.HasValue ? visit.VisitDate.Value : DateTime.Now;
                     string observationDate = visitDate.ToString("yyyyMMddHmmss", CultureInfo.InvariantCulture);
 
@@ -120,9 +111,53 @@ namespace IQCare.CCC.UILogic.Interoperability.Observation
 
         public static ObservationResultDTO GetVitals(int patientId, int patientMasterVisitId)
         {
+            ObservationResultDTO observationResult = new ObservationResultDTO();
+
             try
             {
+                PatientMessageManager patientMessageManager = new PatientMessageManager();
+                PatientMessage patientMessage = patientMessageManager.GetPatientMessageByEntityId(patientId);
+                if (patientMessage != null)
+                {
+                    PersonIdentifierManager personIdentifierManager = new PersonIdentifierManager();
+                    IdentifierManager identifierManager = new IdentifierManager();
+                    Identifier identifier = identifierManager.GetIdentifierByCode("GODS_NUMBER");
 
+                    //Initialize default values
+                    observationResult.PATIENT_IDENTIFICATION = observationResult.PATIENT_IDENTIFICATION == null ? new OBSERVATIONPATIENTIDENTIFICATION() : observationResult.PATIENT_IDENTIFICATION;
+                    observationResult.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID = observationResult.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID == null ? new List<INTERNALPATIENTID>() : observationResult.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID;
+                    observationResult.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID = observationResult.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID == null ? new EXTERNALPATIENTID() : observationResult.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID;
+                    observationResult.PATIENT_IDENTIFICATION.PATIENT_NAME = observationResult.PATIENT_IDENTIFICATION.PATIENT_NAME == null ? new PATIENTNAME() : observationResult.PATIENT_IDENTIFICATION.PATIENT_NAME;
+                    observationResult.OBSERVATION_RESULT = observationResult.OBSERVATION_RESULT == null ? new List<OBSERVATION_RESULT>() : observationResult.OBSERVATION_RESULT;
+
+                    //External Patient Id
+                    List<PersonIdentifier> personIdentifiers = personIdentifierManager.GetPersonIdentifiers(patientMessage.Id, identifier.Id);
+                    observationResult.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID = PatientIdentificationSegment.GetExternalPatientId(personIdentifiers);
+
+                    //CCC Number
+                    INTERNALPATIENTID internalPatientId = PatientIdentificationSegment.getInternalPatientIdCCC(patientMessage);
+                    observationResult.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID.Add(internalPatientId);
+
+                    //National ID
+                    INTERNALPATIENTID internalNationalId = PatientIdentificationSegment.getInternalPatientIdNationalId(patientMessage);
+                    if (internalNationalId != null)
+                    {
+                        observationResult.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID.Add(internalNationalId);
+                    }
+
+                    //Patient Names
+                    observationResult.PATIENT_IDENTIFICATION.PATIENT_NAME = PatientIdentificationSegment.GetPatientName(patientMessage);
+
+                    //get vitals observation
+                    PatientVitalsMessageManager patientVitalsMessage = new PatientVitalsMessageManager();
+                    PatientVitalsMessage patientVitals = patientVitalsMessage.GetPatientVitalsMessageByPatientIdPatientMasterVisitId(patientId, patientMasterVisitId);
+                    if (patientVitals != null)
+                    {
+                        
+                    }
+                }
+
+                return observationResult;
             }
             catch (Exception e)
             {

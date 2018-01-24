@@ -20,7 +20,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Observation
                 case ObservationType.Vitals:
                     return ProcessObservation.GetVitals(messageEvent.PatientId, messageEvent.PatientMasterVisitId);
                     default:
-                        return ProcessObservation.GetWHOStage(entityId);
+                        return ProcessObservation.GetWHOStage(messageEvent.EntityId);
             }
         }
 
