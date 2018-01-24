@@ -37,6 +37,10 @@
     <Reference Include="DataAccess.Context">
       <HintPath>..\..\..\References\DataAccess.Context.dll</HintPath>
     </Reference>
+    <Reference Include="Entity.WebApi, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\Entity.WebApi.dll</HintPath>
+    </Reference>
     <Reference Include="Interface.WebApi">
       <HintPath>..\..\..\References\Interface.WebApi.dll</HintPath>
     </Reference>
@@ -61,10 +65,6 @@
     <ProjectReference Include="..\DataAccess.WebApi\DataAccess.WebApi.csproj">
       <Project>{88FAAEFB-FF2F-46CF-98ED-62AB2704A12F}</Project>
       <Name>DataAccess.WebApi</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Entity.WebApi\Entity.WebApi.csproj">
-      <Project>{062E43AE-C832-49DE-8ACC-4FFC9ABB4073}</Project>
-      <Name>Entity.WebApi</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

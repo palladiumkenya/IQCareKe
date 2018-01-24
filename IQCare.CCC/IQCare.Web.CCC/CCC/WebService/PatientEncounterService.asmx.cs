@@ -16,6 +16,7 @@ using Interface.CCC.Visit;
 using IQCare.CCC.UILogic.Enrollment;
 using IQCare.CCC.UILogic.Triage;
 using AutoMapper;
+using IQCare.Events;
 using Entities.CCC.Lookup;
 
 //using static Entities.CCC.Encounter.PatientEncounter;
@@ -91,7 +92,23 @@ namespace IQCare.Web.CCC.WebService
             }
             else
             {
-                whoStageManager.addPatientWhoStage(patientId, patientMasterVisitId, whoStage);
+                int whoResult  = whoStageManager.addPatientWhoStage(patientId, patientMasterVisitId, whoStage);
+                if (whoResult > 0)
+                {
+                    int facilityId = Convert.ToInt32(Session["AppPosID"]);
+
+                    MessageEventArgs args = new MessageEventArgs()
+                    {
+                        PatientId = patientId,
+                        EntityId = whoResult,
+                        MessageType = MessageType.ObservationResult,
+                        EventOccurred = "Patient Observation Result",
+                        FacilityId = facilityId,
+                        ObservationType = ObservationType.WhoStage
+                    };
+
+                    Publisher.RaiseEventAsync(this, args).ConfigureAwait(false);
+                }
             }
         }
 

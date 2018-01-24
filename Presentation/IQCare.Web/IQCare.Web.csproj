@@ -163,6 +163,10 @@
     <Reference Include="itextsharp">
       <HintPath>..\..\Library\itextsharp.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Office.Interop.Owc11, Version=11.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
       <EmbedInteropTypes>False</EmbedInteropTypes>
@@ -225,6 +229,7 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Telerik.Web.UI, Version=2014.1.225.40, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Library\Telerik.Web.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
@@ -340,6 +345,9 @@
     <Content Include="Statistics\HEI.aspx" />
     <Content Include="Statistics\HivCare.aspx" />
     <Content Include="Statistics\PMTCT.aspx" />
+    <None Include="log4net.log">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Content Include="WardAdmission\Home.aspx" />
     <Content Include="WardAdmission\NewAdmission.aspx" />
     <Content Include="clientaccesspolicy.xml" />

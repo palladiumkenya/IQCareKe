@@ -6,5 +6,7 @@
         T Get(int entityId);
 
         string Update(T t);
+
+        T GetObservation(int entity, int observationType);
     }
 }

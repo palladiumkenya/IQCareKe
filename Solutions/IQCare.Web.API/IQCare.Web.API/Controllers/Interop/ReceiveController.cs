@@ -13,6 +13,7 @@ namespace IQCare.Web.Api.Controllers.Interop
     public class ReceiveController : ApiController
     {
         private readonly IIncomingMessageService _incomingMessageService;
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public ReceiveController()
         {
@@ -40,6 +41,8 @@ namespace IQCare.Web.Api.Controllers.Interop
                 return BadRequest();
             }
 
+            log.Debug($"Recieved {request}");
+
             //call incoming handlers
             var serializer = new JavaScriptSerializer();
             var jsonObject = serializer.DeserializeObject(request.ToString());
@@ -61,10 +64,14 @@ namespace IQCare.Web.Api.Controllers.Interop
 
             Task.Run(() =>
             {
+                log.Debug("beginning async...");
                 _incomingMessageService.Handle(messageType, request.ToString());
+                log.Debug("end...");
                 return String.Empty;
             });
 
+            log.Debug($"End Received {request}");
+            log.Debug("Sent OK response");
             return Ok();
         }
 

@@ -7,5 +7,6 @@ namespace Interface.CCC.Encounter
         int addPatientWhoStage(PatientWhoStage patientWhoStage);
         PatientWhoStage GetPatientWhoStage(int patientId, int patientMasterVisitId);
         int UpdatePatientWhoStage(PatientWhoStage patientWhoStage);
+        PatientWhoStage GetWhoStageById(int entityId);
     }
 }

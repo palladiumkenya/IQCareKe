@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<DOCUMENT Type="Advanced Installer" CreateVersion="14.5.2" version="14.5.2" Modules="simple" RootPath="." Language="en" Id="{1800045D-F422-4A86-B3A6-A71F6AD68C61}">
+  <COMPONENT cid="caphyon.advinst.msicomp.ProjectOptionsComponent">
+    <ROW Name="HiddenItems" Value="AppXProductDetailsComponent;AppXDependenciesComponent;AppXAppDetailsComponent;AppXVisualAssetsComponent;AppXCapabilitiesComponent;AppXAppDeclarationsComponent;AppXUriRulesComponent"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiPropsComponent">
+    <ROW Property="AI_BITMAP_DISPLAY_MODE" Value="0"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Ajax.dll" Value="..\..\..\..\Library"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_AjaxControlToolkit.dll" Value="..\..\..\..\Library"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Application.Common.dll" Value="..\..\..\..\References"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Application.Interface.dll" Value="..\..\..\..\References"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Application.Logger.dll" Value="..\..\..\..\References"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Application.Presentation.dll" Value="..\..\..\..\References"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_BillingReciept.xml" Value="..\..\..\..\Presentation\IQCare.Web\bin\XMLFiles"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_BillingReversalReciept.xml" Value="..\..\..\..\Presentation\IQCare.Web\bin\XMLFiles"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_CrystalDecisions.CrystalReports.Engine.dll" Value="..\..\..\..\Library"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_CrystalDecisions.ReportSource.dll" Value="..\..\..\..\Library"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_CrystalDecisions.Shared.dll" Value="..\..\..\..\Library"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_CrystalDecisions.Web.dll" Value="..\..\..\..\Library"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Currency.xml" Value="..\..\..\..\Presentation\IQCare.Web\bin\XMLFiles"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_DailyCollectionSummary.xml" Value="..\..\..\..\Presentation\IQCare.Web\bin\XMLFiles"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Entities.Administration.dll" Value="..\..\..\..\References"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Entities.Clinical.dll" Value="..\..\..\..\References"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Entities.Common.dll" Value="..\..\..\..\References"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Entities.FormBuilder.dll" Value="..\..\..\..\References"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Entities.Lab.dll" Value="..\..\..\..\References"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Entities.Lookup.dll" Value="..\..\..\..\References"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Entities.PatientCore.dll" Value="..\..\..\..\References"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Entities.Pharmacy.dll" Value="..\..\..\..\References"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Entities.Queue.dll" Value="..\..\..\..\References"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_IQCare.CustomConfig.dll" Value="..\..\..\..\References"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_IQCare.IQControl.dll" Value="..\..\..\..\References"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_IQCare.Web.Billing.dll" Value="..\..\..\..\IQCare.Billing\IQCare.Web.Billing\bin"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_IQCare.Web.CCC.dll" Value="..\..\..\..\IQCare.CCC\IQCare.Web.CCC\bin"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_IQCare.Web.UILogic.dll" Value="..\..\..\..\References"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_IQCare.Web.WebService.dll" Value="..\..\..\..\IQCare.Lookup\IQCare.Web.WebService\bin"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_IQCare.Web.WebService.dll_1" Value="..\..\..\..\References"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_IQCare.Web.dll" Value="..\..\..\..\Presentation\IQCare.Web\bin"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_IQCare.Web.pdb" Value="..\..\..\..\Presentation\IQCare.Web\bin"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Interface.Administration.dll" Value="..\..\..\..\References"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Interface.Clinical.dll" Value="..\..\..\..\References"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Interface.FormBuilder.dll" Value="..\..\..\..\References"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Interface.IQToolsReport.dll" Value="..\..\..\..\References"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Interface.Laboratory.dll" Value="..\..\..\..\References"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Interface.Lookup.dll" Value="..\..\..\..\References"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Interface.PatientCore.dll" Value="..\..\..\..\References"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Interface.Pharmacy.dll" Value="..\..\..\..\References"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Interface.Reports.dll" Value="..\..\..\..\References"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Interface.SCM.dll" Value="..\..\..\..\References"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Interface.Scheduler.dll" Value="..\..\..\..\References"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Interface.Security.dll" Value="..\..\..\..\References"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Office.Interop.Owc11.dll" Value="..\..\..\..\Library"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Web.Infrastructure.dll" Value="..\..\..\Presentation\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_MultiSelectCustomForm.xml" Value="..\..\..\..\Presentation\IQCare.Web\bin\XMLFiles"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_PatientClinicalSummary.xml" Value="..\..\..\..\Presentation\IQCare.Web\bin\XMLFiles"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_PatientPharmacyPrescription.xml" Value="..\..\..\..\Presentation\IQCare.Web\bin\XMLFiles"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_PatientProfile.xml" Value="..\..\..\..\Presentation\IQCare.Web\bin\XMLFiles"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Sand.Security.Cryptography.dll" Value="..\..\..\..\Library"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_System.Net.Http.Formatting.dll" Value="..\..\..\..\Library"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_System.Web.Helpers.dll" Value="..\..\..\Presentation\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_System.Web.Http.WebHost.dll" Value="..\..\..\..\Library"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_System.Web.Http.dll" Value="..\..\..\..\Library"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_System.Web.Mvc.dll" Value="..\..\..\Presentation\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_System.Web.Razor.dll" Value="..\..\..\Presentation\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_System.Web.WebPages.Deployment.dll" Value="..\..\..\Presentation\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_System.Web.WebPages.Razor.dll" Value="..\..\..\Presentation\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_System.Web.WebPages.dll" Value="..\..\..\Presentation\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Telerik.Web.UI.dll" Value="..\..\..\..\Library"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_itextsharp.dll" Value="..\..\..\..\Library"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_netchartdir.dll" Value="..\..\..\..\Library"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Ajax.dll" Value="Ajax.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_AjaxControlToolkit.dll" Value="AjaxControlToolkit.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Application.Common.dll" Value="Application.Common.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Application.Interface.dll" Value="Application.Interface.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Application.Logger.dll" Value="Application.Logger.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Application.Presentation.dll" Value="Application.Presentation.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_BillingReciept.xml" Value="BillingReciept.xml"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_BillingReversalReciept.xml" Value="BillingReversalReciept.xml"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_CrystalDecisions.CrystalReports.Engine.dll" Value="CrystalDecisions.CrystalReports.Engine.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_CrystalDecisions.ReportSource.dll" Value="CrystalDecisions.ReportSource.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_CrystalDecisions.Shared.dll" Value="CrystalDecisions.Shared.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_CrystalDecisions.Web.dll" Value="CrystalDecisions.Web.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Currency.xml" Value="Currency.xml"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_DailyCollectionSummary.xml" Value="DailyCollectionSummary.xml"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Entities.Administration.dll" Value="Entities.Administration.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Entities.Clinical.dll" Value="Entities.Clinical.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Entities.Common.dll" Value="Entities.Common.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Entities.FormBuilder.dll" Value="Entities.FormBuilder.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Entities.Lab.dll" Value="Entities.Lab.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Entities.Lookup.dll" Value="Entities.Lookup.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Entities.PatientCore.dll" Value="Entities.PatientCore.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Entities.Pharmacy.dll" Value="Entities.Pharmacy.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Entities.Queue.dll" Value="Entities.Queue.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_IQCare.CustomConfig.dll" Value="IQCare.CustomConfig.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_IQCare.IQControl.dll" Value="IQCare.IQControl.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_IQCare.Web.Billing.dll" Value="IQCare.Web.Billing.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_IQCare.Web.CCC.dll" Value="IQCare.Web.CCC.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_IQCare.Web.UILogic.dll" Value="IQCare.Web.UILogic.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_IQCare.Web.WebService.dll" Value="IQCare.Web.WebService.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_IQCare.Web.WebService.dll_1" Value="IQCare.Web.WebService.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_IQCare.Web.dll" Value="IQCare.Web.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_IQCare.Web.pdb" Value="IQCare.Web.pdb"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Interface.Administration.dll" Value="Interface.Administration.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Interface.Clinical.dll" Value="Interface.Clinical.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Interface.FormBuilder.dll" Value="Interface.FormBuilder.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Interface.IQToolsReport.dll" Value="Interface.IQToolsReport.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Interface.Laboratory.dll" Value="Interface.Laboratory.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Interface.Lookup.dll" Value="Interface.Lookup.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Interface.PatientCore.dll" Value="Interface.PatientCore.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Interface.Pharmacy.dll" Value="Interface.Pharmacy.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Interface.Reports.dll" Value="Interface.Reports.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Interface.SCM.dll" Value="Interface.SCM.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Interface.Scheduler.dll" Value="Interface.Scheduler.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Interface.Security.dll" Value="Interface.Security.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Office.Interop.Owc11.dll" Value="Microsoft.Office.Interop.Owc11.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Web.Infrastructure.dll" Value="Microsoft.Web.Infrastructure.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_MultiSelectCustomForm.xml" Value="MultiSelectCustomForm.xml"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_PatientClinicalSummary.xml" Value="PatientClinicalSummary.xml"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_PatientPharmacyPrescription.xml" Value="PatientPharmacyPrescription.xml"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_PatientProfile.xml" Value="PatientProfile.xml"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Sand.Security.Cryptography.dll" Value="Sand.Security.Cryptography.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_System.Net.Http.Formatting.dll" Value="System.Net.Http.Formatting.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_System.Web.Helpers.dll" Value="System.Web.Helpers.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_System.Web.Http.WebHost.dll" Value="System.Web.Http.WebHost.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_System.Web.Http.dll" Value="System.Web.Http.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_System.Web.Mvc.dll" Value="System.Web.Mvc.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_System.Web.Razor.dll" Value="System.Web.Razor.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_System.Web.WebPages.Deployment.dll" Value="System.Web.WebPages.Deployment.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_System.Web.WebPages.Razor.dll" Value="System.Web.WebPages.Razor.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_System.Web.WebPages.dll" Value="System.Web.WebPages.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Telerik.Web.UI.dll" Value="Telerik.Web.UI.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_itextsharp.dll" Value="itextsharp.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_netchartdir.dll" Value="netchartdir.dll"/>
+    <ROW Property="ALLUSERS" Value="1"/>
+    <ROW Property="ARPCOMMENTS" Value="This installer database contains the logic and data required to install [|ProductName]." ValueLocId="*"/>
+    <ROW Property="Manufacturer" Value="Palladium Group"/>
+    <ROW Property="ProductCode" Value="1033:{36C85F3B-1394-4157-83A2-093B532C9A4B} " Type="16"/>
+    <ROW Property="ProductLanguage" Value="1033"/>
+    <ROW Property="ProductName" Value="IQCare"/>
+    <ROW Property="ProductVersion" Value="1.0.5" Type="32"/>
+    <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
+    <ROW Property="UpgradeCode" Value="{714877AF-EC60-4623-8357-9EB270A9F4B4}"/>
+    <ROW Property="WindowsType9X" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
+    <ROW Property="WindowsType9XDisplay" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT40" MultiBuildValue="DefaultBuild:Windows NT 4.0" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT40Display" MultiBuildValue="DefaultBuild:Windows NT 4.0" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT50" MultiBuildValue="DefaultBuild:Windows 2000" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT50Display" MultiBuildValue="DefaultBuild:Windows 2000" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT5X" MultiBuildValue="DefaultBuild:Windows XP/2003 RTM, Windows XP/2003 SP1, Windows XP SP2 x86" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT5XDisplay" MultiBuildValue="DefaultBuild:Windows XP/2003 RTM, Windows XP/2003 SP1, Windows XP SP2 x86" ValueLocId="-"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiDirsComponent">
+    <ROW Directory="APPDIR" Directory_Parent="TARGETDIR" DefaultDir="APPDIR:." IsPseudoRoot="1"/>
+    <ROW Directory="IQCare.Web.Billing_Dir" Directory_Parent="APPDIR" DefaultDir="IQCARE~1.BIL|IQCare.Web.Billing"/>
+    <ROW Directory="IQCare.Web.CCC_Dir" Directory_Parent="APPDIR" DefaultDir="IQCARE~1.CCC|IQCare.Web.CCC"/>
+    <ROW Directory="IQCare.Web.WebService_Dir" Directory_Parent="APPDIR" DefaultDir="IQCARE~1.WEB|IQCare.Web.WebService"/>
+    <ROW Directory="IQCare.Web_Dir" Directory_Parent="APPDIR" DefaultDir="IQCare.Web"/>
+    <ROW Directory="TARGETDIR" DefaultDir="SourceDir"/>
+    <ROW Directory="XMLFiles_Dir" Directory_Parent="IQCare.Web_Dir" DefaultDir="XMLFiles"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiCompsComponent">
+    <ROW Component="IQCare.Web.Billing_PrimaryOutput" ComponentId="{86623D40-32DC-4C34-A0C3-7E66D18F3640}" Directory_="IQCare.Web.Billing_Dir" Attributes="0" KeyPath="IQCare.Web.Billing.dll"/>
+    <ROW Component="IQCare.Web.CCC_PrimaryOutput" ComponentId="{32DE5B04-4559-49E7-8393-E29DECD628AF}" Directory_="IQCare.Web.CCC_Dir" Attributes="0" KeyPath="IQCare.Web.CCC.dll"/>
+    <ROW Component="IQCare.Web.WebService_PrimaryOutput" ComponentId="{052F5A92-19C2-4368-A93F-C656764734F0}" Directory_="IQCare.Web.WebService_Dir" Attributes="0" KeyPath="IQCare.Web.WebService.dll"/>
+    <ROW Component="IQCare.Web_ContentOutput_XMLFiles" ComponentId="{4F6147B4-B74C-40D1-AD35-BFCB52A0C3D0}" Directory_="XMLFiles_Dir" Attributes="0" KeyPath="BillingReciept.xml" Type="0"/>
+    <ROW Component="IQCare.Web_PrimaryOutput" ComponentId="{B37596FD-FF72-4283-85A2-5F343670D4B5}" Directory_="IQCare.Web_Dir" Attributes="0" KeyPath="IQCare.Web.dll"/>
+    <ROW Component="IQCare.Web_References" ComponentId="{8F1816D3-F4AA-4C50-B51C-D8E6D6D73AB1}" Directory_="IQCare.Web_Dir" Attributes="0" KeyPath="Telerik.Web.UI.dll"/>
+    <ROW Component="IQCare.Web_SymbolsOutput" ComponentId="{91A30B8F-40FA-4195-AC67-6EF56616F7D6}" Directory_="IQCare.Web_Dir" Attributes="0" KeyPath="IQCare.Web.pdb"/>
+    <ROW Component="ProductInformation" ComponentId="{9B993FEF-E8A3-4DC9-987A-4E7C1A8D46EB}" Directory_="APPDIR" Attributes="4" KeyPath="Version"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiFeatsComponent">
+    <ROW Feature="MainFeature" Title="MainFeature" Description="Description" Display="1" Level="1" Directory_="APPDIR" Attributes="0" Components="IQCare.Web.Billing_PrimaryOutput IQCare.Web.CCC_PrimaryOutput IQCare.Web.WebService_PrimaryOutput IQCare.Web_ContentOutput_XMLFiles IQCare.Web_PrimaryOutput IQCare.Web_References IQCare.Web_SymbolsOutput ProductInformation"/>
+    <ATTRIBUTE name="CurrentFeature" value="MainFeature"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiFilesComponent">
+    <ROW File="Ajax.dll" Component_="IQCare.Web_References" FileName="[|AI_PROPPATH_FILENAME_PERBUILD_Ajax.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Ajax.dll&gt;" SelfReg="false" NextFile="AjaxControlToolkit.dll"/>
+    <ROW File="AjaxControlToolkit.dll" Component_="IQCare.Web_References" FileName="AJAXCO~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_AjaxControlToolkit.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_AjaxControlToolkit.dll&gt;" SelfReg="false" NextFile="Application.Common.dll"/>
+    <ROW File="Application.Common.dll" Component_="IQCare.Web_References" FileName="APPLIC~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Application.Common.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Application.Common.dll&gt;" SelfReg="false" NextFile="Application.Interface.dll"/>
+    <ROW File="Application.Interface.dll" Component_="IQCare.Web_References" FileName="APPLIC~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Application.Interface.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Application.Interface.dll&gt;" SelfReg="false" NextFile="Application.Logger.dll"/>
+    <ROW File="Application.Logger.dll" Component_="IQCare.Web_References" FileName="APPLIC~4.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Application.Logger.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Application.Logger.dll&gt;" SelfReg="false" NextFile="Application.Presentation.dll"/>
+    <ROW File="Application.Presentation.dll" Component_="IQCare.Web_References" FileName="APPLIC~5.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Application.Presentation.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Application.Presentation.dll&gt;" SelfReg="false" NextFile="CrystalDecisions.CrystalReports.Engine.dll"/>
+    <ROW File="BillingReciept.xml" Component_="IQCare.Web_ContentOutput_XMLFiles" FileName="BILLIN~2.XML|[|AI_PROPPATH_FILENAME_PERBUILD_BillingReciept.xml]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_BillingReciept.xml&gt;" SelfReg="false" NextFile="BillingReversalReciept.xml"/>
+    <ROW File="BillingReversalReciept.xml" Component_="IQCare.Web_ContentOutput_XMLFiles" FileName="BILLIN~3.XML|[|AI_PROPPATH_FILENAME_PERBUILD_BillingReversalReciept.xml]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_BillingReversalReciept.xml&gt;" SelfReg="false" NextFile="Currency.xml"/>
+    <ROW File="CrystalDecisions.CrystalReports.Engine.dll" Component_="IQCare.Web_References" FileName="CRYSTA~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_CrystalDecisions.CrystalReports.Engine.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_CrystalDecisions.CrystalReports.Engine.dll&gt;" SelfReg="false" NextFile="CrystalDecisions.ReportSource.dll"/>
+    <ROW File="CrystalDecisions.ReportSource.dll" Component_="IQCare.Web_References" FileName="CRYSTA~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_CrystalDecisions.ReportSource.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_CrystalDecisions.ReportSource.dll&gt;" SelfReg="false" NextFile="CrystalDecisions.Shared.dll"/>
+    <ROW File="CrystalDecisions.Shared.dll" Component_="IQCare.Web_References" FileName="CRYSTA~4.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_CrystalDecisions.Shared.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_CrystalDecisions.Shared.dll&gt;" SelfReg="false" NextFile="CrystalDecisions.Web.dll"/>
+    <ROW File="CrystalDecisions.Web.dll" Component_="IQCare.Web_References" FileName="CRYSTA~5.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_CrystalDecisions.Web.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_CrystalDecisions.Web.dll&gt;" SelfReg="false" NextFile="Entities.Administration.dll"/>
+    <ROW File="Currency.xml" Component_="IQCare.Web_ContentOutput_XMLFiles" FileName="[|AI_PROPPATH_FILENAME_PERBUILD_Currency.xml]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Currency.xml&gt;" SelfReg="false" NextFile="DailyCollectionSummary.xml"/>
+    <ROW File="DailyCollectionSummary.xml" Component_="IQCare.Web_ContentOutput_XMLFiles" FileName="DAILYC~2.XML|[|AI_PROPPATH_FILENAME_PERBUILD_DailyCollectionSummary.xml]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DailyCollectionSummary.xml&gt;" SelfReg="false" NextFile="MultiSelectCustomForm.xml"/>
+    <ROW File="Entities.Administration.dll" Component_="IQCare.Web_References" FileName="ENTITI~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Entities.Administration.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Entities.Administration.dll&gt;" SelfReg="false" NextFile="Entities.Clinical.dll"/>
+    <ROW File="Entities.Clinical.dll" Component_="IQCare.Web_References" FileName="ENTITI~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Entities.Clinical.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Entities.Clinical.dll&gt;" SelfReg="false" NextFile="Entities.Common.dll"/>
+    <ROW File="Entities.Common.dll" Component_="IQCare.Web_References" FileName="ENTITI~4.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Entities.Common.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Entities.Common.dll&gt;" SelfReg="false" NextFile="Entities.FormBuilder.dll"/>
+    <ROW File="Entities.FormBuilder.dll" Component_="IQCare.Web_References" FileName="ENTITI~5.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Entities.FormBuilder.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Entities.FormBuilder.dll&gt;" SelfReg="false" NextFile="Entities.Lab.dll"/>
+    <ROW File="Entities.Lab.dll" Component_="IQCare.Web_References" FileName="ENTITI~6.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Entities.Lab.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Entities.Lab.dll&gt;" SelfReg="false" NextFile="Entities.Lookup.dll"/>
+    <ROW File="Entities.Lookup.dll" Component_="IQCare.Web_References" FileName="ENTITI~7.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Entities.Lookup.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Entities.Lookup.dll&gt;" SelfReg="false" NextFile="Entities.PatientCore.dll"/>
+    <ROW File="Entities.PatientCore.dll" Component_="IQCare.Web_References" FileName="ENTITI~8.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Entities.PatientCore.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Entities.PatientCore.dll&gt;" SelfReg="false" NextFile="Entities.Pharmacy.dll"/>
+    <ROW File="Entities.Pharmacy.dll" Component_="IQCare.Web_References" FileName="ENTITI~9.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Entities.Pharmacy.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Entities.Pharmacy.dll&gt;" SelfReg="false" NextFile="Entities.Queue.dll"/>
+    <ROW File="Entities.Queue.dll" Component_="IQCare.Web_References" FileName="ENTIT~10.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Entities.Queue.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Entities.Queue.dll&gt;" SelfReg="false" NextFile="Interface.Administration.dll"/>
+    <ROW File="IQCare.CustomConfig.dll" Component_="IQCare.Web_References" FileName="IQCARE~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_IQCare.CustomConfig.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_IQCare.CustomConfig.dll&gt;" SelfReg="false" NextFile="IQCare.IQControl.dll"/>
+    <ROW File="IQCare.IQControl.dll" Component_="IQCare.Web_References" FileName="IQCARE~4.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_IQCare.IQControl.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_IQCare.IQControl.dll&gt;" SelfReg="false" NextFile="IQCare.Web.UILogic.dll"/>
+    <ROW File="IQCare.Web.Billing.dll" Component_="IQCare.Web.Billing_PrimaryOutput" FileName="IQCARE~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_IQCare.Web.Billing.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_IQCare.Web.Billing.dll&gt;" SelfReg="false" NextFile="IQCare.Web.CCC.dll"/>
+    <ROW File="IQCare.Web.CCC.dll" Component_="IQCare.Web.CCC_PrimaryOutput" FileName="IQCARE~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_IQCare.Web.CCC.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_IQCare.Web.CCC.dll&gt;" SelfReg="false" NextFile="IQCare.Web.dll"/>
+    <ROW File="IQCare.Web.UILogic.dll" Component_="IQCare.Web_References" FileName="IQCARE~5.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_IQCare.Web.UILogic.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_IQCare.Web.UILogic.dll&gt;" SelfReg="false" NextFile="IQCare.Web.WebService.dll_1"/>
+    <ROW File="IQCare.Web.WebService.dll" Component_="IQCare.Web.WebService_PrimaryOutput" FileName="IQCARE~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_IQCare.Web.WebService.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_IQCare.Web.WebService.dll&gt;" SelfReg="false" NextFile="Ajax.dll"/>
+    <ROW File="IQCare.Web.WebService.dll_1" Component_="IQCare.Web_References" FileName="IQCARE~6.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_IQCare.Web.WebService.dll_1]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_IQCare.Web.WebService.dll_1&gt;" SelfReg="false" NextFile="itextsharp.dll"/>
+    <ROW File="IQCare.Web.dll" Component_="IQCare.Web_PrimaryOutput" FileName="IQCARE~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_IQCare.Web.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_IQCare.Web.dll&gt;" SelfReg="false" NextFile="BillingReciept.xml"/>
+    <ROW File="IQCare.Web.pdb" Component_="IQCare.Web_SymbolsOutput" FileName="IQCARE~2.PDB|[|AI_PROPPATH_FILENAME_PERBUILD_IQCare.Web.pdb]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_IQCare.Web.pdb&gt;" SelfReg="false"/>
+    <ROW File="Interface.Administration.dll" Component_="IQCare.Web_References" FileName="INTERF~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Interface.Administration.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Interface.Administration.dll&gt;" SelfReg="false" NextFile="Interface.Clinical.dll"/>
+    <ROW File="Interface.Clinical.dll" Component_="IQCare.Web_References" FileName="INTERF~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Interface.Clinical.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Interface.Clinical.dll&gt;" SelfReg="false" NextFile="Interface.FormBuilder.dll"/>
+    <ROW File="Interface.FormBuilder.dll" Component_="IQCare.Web_References" FileName="INTERF~4.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Interface.FormBuilder.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Interface.FormBuilder.dll&gt;" SelfReg="false" NextFile="Interface.IQToolsReport.dll"/>
+    <ROW File="Interface.IQToolsReport.dll" Component_="IQCare.Web_References" FileName="INTERF~5.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Interface.IQToolsReport.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Interface.IQToolsReport.dll&gt;" SelfReg="false" NextFile="Interface.Laboratory.dll"/>
+    <ROW File="Interface.Laboratory.dll" Component_="IQCare.Web_References" FileName="INTERF~6.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Interface.Laboratory.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Interface.Laboratory.dll&gt;" SelfReg="false" NextFile="Interface.Lookup.dll"/>
+    <ROW File="Interface.Lookup.dll" Component_="IQCare.Web_References" FileName="INTERF~7.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Interface.Lookup.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Interface.Lookup.dll&gt;" SelfReg="false" NextFile="Interface.PatientCore.dll"/>
+    <ROW File="Interface.PatientCore.dll" Component_="IQCare.Web_References" FileName="INTERF~8.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Interface.PatientCore.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Interface.PatientCore.dll&gt;" SelfReg="false" NextFile="Interface.Pharmacy.dll"/>
+    <ROW File="Interface.Pharmacy.dll" Component_="IQCare.Web_References" FileName="INTERF~9.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Interface.Pharmacy.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Interface.Pharmacy.dll&gt;" SelfReg="false" NextFile="Interface.Reports.dll"/>
+    <ROW File="Interface.Reports.dll" Component_="IQCare.Web_References" FileName="INTER~10.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Interface.Reports.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Interface.Reports.dll&gt;" SelfReg="false" NextFile="Interface.Scheduler.dll"/>
+    <ROW File="Interface.SCM.dll" Component_="IQCare.Web_References" FileName="INTER~12.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Interface.SCM.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Interface.SCM.dll&gt;" SelfReg="false" NextFile="Interface.Security.dll"/>
+    <ROW File="Interface.Scheduler.dll" Component_="IQCare.Web_References" FileName="INTER~11.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Interface.Scheduler.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Interface.Scheduler.dll&gt;" SelfReg="false" NextFile="Interface.SCM.dll"/>
+    <ROW File="Interface.Security.dll" Component_="IQCare.Web_References" FileName="INTER~13.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Interface.Security.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Interface.Security.dll&gt;" SelfReg="false" NextFile="IQCare.CustomConfig.dll"/>
+    <ROW File="Microsoft.Office.Interop.Owc11.dll" Component_="IQCare.Web_References" FileName="MICROS~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Office.Interop.Owc11.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Office.Interop.Owc11.dll&gt;" SelfReg="false" NextFile="Microsoft.Web.Infrastructure.dll"/>
+    <ROW File="Microsoft.Web.Infrastructure.dll" Component_="IQCare.Web_References" FileName="MICROS~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Web.Infrastructure.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Web.Infrastructure.dll&gt;" SelfReg="false" NextFile="netchartdir.dll"/>
+    <ROW File="MultiSelectCustomForm.xml" Component_="IQCare.Web_ContentOutput_XMLFiles" FileName="MULTIS~2.XML|[|AI_PROPPATH_FILENAME_PERBUILD_MultiSelectCustomForm.xml]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_MultiSelectCustomForm.xml&gt;" SelfReg="false" NextFile="PatientClinicalSummary.xml"/>
+    <ROW File="PatientClinicalSummary.xml" Component_="IQCare.Web_ContentOutput_XMLFiles" FileName="PATIEN~2.XML|[|AI_PROPPATH_FILENAME_PERBUILD_PatientClinicalSummary.xml]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_PatientClinicalSummary.xml&gt;" SelfReg="false" NextFile="PatientPharmacyPrescription.xml"/>
+    <ROW File="PatientPharmacyPrescription.xml" Component_="IQCare.Web_ContentOutput_XMLFiles" FileName="PATIEN~3.XML|[|AI_PROPPATH_FILENAME_PERBUILD_PatientPharmacyPrescription.xml]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_PatientPharmacyPrescription.xml&gt;" SelfReg="false" NextFile="PatientProfile.xml"/>
+    <ROW File="PatientProfile.xml" Component_="IQCare.Web_ContentOutput_XMLFiles" FileName="PATIEN~4.XML|[|AI_PROPPATH_FILENAME_PERBUILD_PatientProfile.xml]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_PatientProfile.xml&gt;" SelfReg="false" NextFile="IQCare.Web.WebService.dll"/>
+    <ROW File="Sand.Security.Cryptography.dll" Component_="IQCare.Web_References" FileName="SANDSE~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Sand.Security.Cryptography.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Sand.Security.Cryptography.dll&gt;" SelfReg="false" NextFile="System.Net.Http.Formatting.dll"/>
+    <ROW File="System.Net.Http.Formatting.dll" Component_="IQCare.Web_References" FileName="SYSTEM~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.Net.Http.Formatting.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.Net.Http.Formatting.dll&gt;" SelfReg="false" NextFile="System.Web.Helpers.dll"/>
+    <ROW File="System.Web.Helpers.dll" Component_="IQCare.Web_References" FileName="SYSTEM~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.Web.Helpers.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.Web.Helpers.dll&gt;" SelfReg="false" NextFile="System.Web.Http.dll"/>
+    <ROW File="System.Web.Http.WebHost.dll" Component_="IQCare.Web_References" FileName="SYSTEM~5.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.Web.Http.WebHost.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.Web.Http.WebHost.dll&gt;" SelfReg="false" NextFile="System.Web.Mvc.dll"/>
+    <ROW File="System.Web.Http.dll" Component_="IQCare.Web_References" FileName="SYSTEM~4.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.Web.Http.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.Web.Http.dll&gt;" SelfReg="false" NextFile="System.Web.Http.WebHost.dll"/>
+    <ROW File="System.Web.Mvc.dll" Component_="IQCare.Web_References" FileName="SYSTEM~6.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.Web.Mvc.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.Web.Mvc.dll&gt;" SelfReg="false" NextFile="System.Web.Razor.dll"/>
+    <ROW File="System.Web.Razor.dll" Component_="IQCare.Web_References" FileName="SYSTEM~7.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.Web.Razor.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.Web.Razor.dll&gt;" SelfReg="false" NextFile="System.Web.WebPages.Deployment.dll"/>
+    <ROW File="System.Web.WebPages.Deployment.dll" Component_="IQCare.Web_References" FileName="SYSTEM~8.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.Web.WebPages.Deployment.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.Web.WebPages.Deployment.dll&gt;" SelfReg="false" NextFile="System.Web.WebPages.dll"/>
+    <ROW File="System.Web.WebPages.Razor.dll" Component_="IQCare.Web_References" FileName="SYSTE~10.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.Web.WebPages.Razor.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.Web.WebPages.Razor.dll&gt;" SelfReg="false" NextFile="Telerik.Web.UI.dll"/>
+    <ROW File="System.Web.WebPages.dll" Component_="IQCare.Web_References" FileName="SYSTEM~9.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.Web.WebPages.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.Web.WebPages.dll&gt;" SelfReg="false" NextFile="System.Web.WebPages.Razor.dll"/>
+    <ROW File="Telerik.Web.UI.dll" Component_="IQCare.Web_References" FileName="TELERI~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Telerik.Web.UI.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Telerik.Web.UI.dll&gt;" SelfReg="false" NextFile="IQCare.Web.pdb"/>
+    <ROW File="itextsharp.dll" Component_="IQCare.Web_References" FileName="ITEXTS~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_itextsharp.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_itextsharp.dll&gt;" SelfReg="false" NextFile="Microsoft.Office.Interop.Owc11.dll"/>
+    <ROW File="netchartdir.dll" Component_="IQCare.Web_References" FileName="NETCHA~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_netchartdir.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_netchartdir.dll&gt;" SelfReg="false" NextFile="Sand.Security.Cryptography.dll"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.AppPathsComponent">
+    <ROW Name="AI_APPPATH_PERBUILD_Ajax.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Ajax.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Ajax.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_AjaxControlToolkit.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_AjaxControlToolkit.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_AjaxControlToolkit.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Application.Common.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Application.Common.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Application.Common.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Application.Interface.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Application.Interface.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Application.Interface.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Application.Logger.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Application.Logger.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Application.Logger.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Application.Presentation.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Application.Presentation.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Application.Presentation.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_BillingReciept.xml" Path="[|AI_PROPPATH_DIR_PERBUILD_BillingReciept.xml]\[|AI_PROPPATH_FILENAME_PERBUILD_BillingReciept.xml]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_BillingReversalReciept.xml" Path="[|AI_PROPPATH_DIR_PERBUILD_BillingReversalReciept.xml]\[|AI_PROPPATH_FILENAME_PERBUILD_BillingReversalReciept.xml]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_CrystalDecisions.CrystalReports.Engine.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_CrystalDecisions.CrystalReports.Engine.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_CrystalDecisions.CrystalReports.Engine.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_CrystalDecisions.ReportSource.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_CrystalDecisions.ReportSource.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_CrystalDecisions.ReportSource.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_CrystalDecisions.Shared.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_CrystalDecisions.Shared.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_CrystalDecisions.Shared.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_CrystalDecisions.Web.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_CrystalDecisions.Web.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_CrystalDecisions.Web.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Currency.xml" Path="[|AI_PROPPATH_DIR_PERBUILD_Currency.xml]\[|AI_PROPPATH_FILENAME_PERBUILD_Currency.xml]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_DailyCollectionSummary.xml" Path="[|AI_PROPPATH_DIR_PERBUILD_DailyCollectionSummary.xml]\[|AI_PROPPATH_FILENAME_PERBUILD_DailyCollectionSummary.xml]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Entities.Administration.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Entities.Administration.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Entities.Administration.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Entities.Clinical.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Entities.Clinical.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Entities.Clinical.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Entities.Common.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Entities.Common.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Entities.Common.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Entities.FormBuilder.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Entities.FormBuilder.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Entities.FormBuilder.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Entities.Lab.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Entities.Lab.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Entities.Lab.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Entities.Lookup.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Entities.Lookup.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Entities.Lookup.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Entities.PatientCore.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Entities.PatientCore.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Entities.PatientCore.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Entities.Pharmacy.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Entities.Pharmacy.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Entities.Pharmacy.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Entities.Queue.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Entities.Queue.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Entities.Queue.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_IQCare.CustomConfig.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_IQCare.CustomConfig.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_IQCare.CustomConfig.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_IQCare.IQControl.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_IQCare.IQControl.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_IQCare.IQControl.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_IQCare.Web.Billing.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_IQCare.Web.Billing.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_IQCare.Web.Billing.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_IQCare.Web.CCC.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_IQCare.Web.CCC.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_IQCare.Web.CCC.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_IQCare.Web.UILogic.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_IQCare.Web.UILogic.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_IQCare.Web.UILogic.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_IQCare.Web.WebService.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_IQCare.Web.WebService.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_IQCare.Web.WebService.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_IQCare.Web.WebService.dll_1" Path="[|AI_PROPPATH_DIR_PERBUILD_IQCare.Web.WebService.dll_1]\[|AI_PROPPATH_FILENAME_PERBUILD_IQCare.Web.WebService.dll_1]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_IQCare.Web.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_IQCare.Web.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_IQCare.Web.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_IQCare.Web.pdb" Path="[|AI_PROPPATH_DIR_PERBUILD_IQCare.Web.pdb]\[|AI_PROPPATH_FILENAME_PERBUILD_IQCare.Web.pdb]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Interface.Administration.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Interface.Administration.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Interface.Administration.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Interface.Clinical.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Interface.Clinical.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Interface.Clinical.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Interface.FormBuilder.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Interface.FormBuilder.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Interface.FormBuilder.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Interface.IQToolsReport.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Interface.IQToolsReport.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Interface.IQToolsReport.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Interface.Laboratory.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Interface.Laboratory.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Interface.Laboratory.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Interface.Lookup.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Interface.Lookup.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Interface.Lookup.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Interface.PatientCore.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Interface.PatientCore.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Interface.PatientCore.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Interface.Pharmacy.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Interface.Pharmacy.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Interface.Pharmacy.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Interface.Reports.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Interface.Reports.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Interface.Reports.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Interface.SCM.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Interface.SCM.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Interface.SCM.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Interface.Scheduler.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Interface.Scheduler.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Interface.Scheduler.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Interface.Security.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Interface.Security.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Interface.Security.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Office.Interop.Owc11.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Office.Interop.Owc11.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Office.Interop.Owc11.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Web.Infrastructure.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Web.Infrastructure.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Web.Infrastructure.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_MultiSelectCustomForm.xml" Path="[|AI_PROPPATH_DIR_PERBUILD_MultiSelectCustomForm.xml]\[|AI_PROPPATH_FILENAME_PERBUILD_MultiSelectCustomForm.xml]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_PatientClinicalSummary.xml" Path="[|AI_PROPPATH_DIR_PERBUILD_PatientClinicalSummary.xml]\[|AI_PROPPATH_FILENAME_PERBUILD_PatientClinicalSummary.xml]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_PatientPharmacyPrescription.xml" Path="[|AI_PROPPATH_DIR_PERBUILD_PatientPharmacyPrescription.xml]\[|AI_PROPPATH_FILENAME_PERBUILD_PatientPharmacyPrescription.xml]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_PatientProfile.xml" Path="[|AI_PROPPATH_DIR_PERBUILD_PatientProfile.xml]\[|AI_PROPPATH_FILENAME_PERBUILD_PatientProfile.xml]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Sand.Security.Cryptography.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Sand.Security.Cryptography.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Sand.Security.Cryptography.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_System.Net.Http.Formatting.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_System.Net.Http.Formatting.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_System.Net.Http.Formatting.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_System.Web.Helpers.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_System.Web.Helpers.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_System.Web.Helpers.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_System.Web.Http.WebHost.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_System.Web.Http.WebHost.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_System.Web.Http.WebHost.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_System.Web.Http.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_System.Web.Http.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_System.Web.Http.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_System.Web.Mvc.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_System.Web.Mvc.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_System.Web.Mvc.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_System.Web.Razor.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_System.Web.Razor.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_System.Web.Razor.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_System.Web.WebPages.Deployment.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_System.Web.WebPages.Deployment.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_System.Web.WebPages.Deployment.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_System.Web.WebPages.Razor.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_System.Web.WebPages.Razor.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_System.Web.WebPages.Razor.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_System.Web.WebPages.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_System.Web.WebPages.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_System.Web.WebPages.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Telerik.Web.UI.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Telerik.Web.UI.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Telerik.Web.UI.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_itextsharp.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_itextsharp.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_itextsharp.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_netchartdir.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_netchartdir.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_netchartdir.dll]" Type="2" Content="0"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.BootstrOptComponent">
+    <ROW BootstrOptKey="GlobalOptions" DownloadFolder="[AppDataFolder][|Manufacturer]\[|ProductName]\prerequisites" Options="2"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.BuildComponent">
+    <ROW BuildKey="DefaultBuild" BuildName="DefaultBuild" BuildOrder="1" BuildType="0" Languages="en" InstallationType="4" UseLargeSchema="true"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.DictionaryComponent">
+    <ROW Path="&lt;AI_DICTS&gt;ui.ail"/>
+    <ROW Path="&lt;AI_DICTS&gt;ui_en.ail"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.FragmentComponent">
+    <ROW Fragment="CommonUI.aip" Path="&lt;AI_FRAGS&gt;CommonUI.aip"/>
+    <ROW Fragment="FolderDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\FolderDlg.aip"/>
+    <ROW Fragment="MaintenanceTypeDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\MaintenanceTypeDlg.aip"/>
+    <ROW Fragment="MaintenanceWelcomeDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\MaintenanceWelcomeDlg.aip"/>
+    <ROW Fragment="SequenceDialogs.aip" Path="&lt;AI_THEMES&gt;classic\fragments\SequenceDialogs.aip"/>
+    <ROW Fragment="Sequences.aip" Path="&lt;AI_FRAGS&gt;Sequences.aip"/>
+    <ROW Fragment="StaticUIStrings.aip" Path="&lt;AI_FRAGS&gt;StaticUIStrings.aip"/>
+    <ROW Fragment="UI.aip" Path="&lt;AI_THEMES&gt;classic\fragments\UI.aip"/>
+    <ROW Fragment="Validation.aip" Path="&lt;AI_FRAGS&gt;Validation.aip"/>
+    <ROW Fragment="VerifyRemoveDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\VerifyRemoveDlg.aip"/>
+    <ROW Fragment="VerifyRepairDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\VerifyRepairDlg.aip"/>
+    <ROW Fragment="WelcomeDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\WelcomeDlg.aip"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiBinaryComponent">
+    <ROW Name="aicustact.dll" SourcePath="&lt;AI_CUSTACTS&gt;aicustact.dll"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiControlEventComponent">
+    <ROW Dialog_="WelcomeDlg" Control_="Next" Event="NewDialog" Argument="FolderDlg" Condition="AI_INSTALL" Ordering="1"/>
+    <ROW Dialog_="FolderDlg" Control_="Next" Event="NewDialog" Argument="VerifyReadyDlg" Condition="AI_INSTALL" Ordering="201"/>
+    <ROW Dialog_="FolderDlg" Control_="Back" Event="NewDialog" Argument="WelcomeDlg" Condition="AI_INSTALL" Ordering="1"/>
+    <ROW Dialog_="MaintenanceWelcomeDlg" Control_="Next" Event="NewDialog" Argument="MaintenanceTypeDlg" Condition="AI_MAINT" Ordering="99"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Install" Event="EndDialog" Argument="Return" Condition="AI_MAINT" Ordering="198"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Back" Event="NewDialog" Argument="CustomizeDlg" Condition="AI_MAINT" Ordering="202"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Install" Event="EndDialog" Argument="Return" Condition="AI_INSTALL" Ordering="197"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Back" Event="NewDialog" Argument="FolderDlg" Condition="AI_INSTALL" Ordering="201"/>
+    <ROW Dialog_="CustomizeDlg" Control_="Next" Event="NewDialog" Argument="VerifyReadyDlg" Condition="AI_MAINT" Ordering="101"/>
+    <ROW Dialog_="CustomizeDlg" Control_="Back" Event="NewDialog" Argument="MaintenanceTypeDlg" Condition="AI_MAINT" Ordering="1"/>
+    <ROW Dialog_="MaintenanceTypeDlg" Control_="ChangeButton" Event="NewDialog" Argument="CustomizeDlg" Condition="AI_MAINT" Ordering="501"/>
+    <ROW Dialog_="MaintenanceTypeDlg" Control_="Back" Event="NewDialog" Argument="MaintenanceWelcomeDlg" Condition="AI_MAINT" Ordering="1"/>
+    <ROW Dialog_="MaintenanceTypeDlg" Control_="RemoveButton" Event="NewDialog" Argument="VerifyRemoveDlg" Condition="AI_MAINT AND InstallMode=&quot;Remove&quot;" Ordering="601"/>
+    <ROW Dialog_="VerifyRemoveDlg" Control_="Back" Event="NewDialog" Argument="MaintenanceTypeDlg" Condition="AI_MAINT AND InstallMode=&quot;Remove&quot;" Ordering="1"/>
+    <ROW Dialog_="MaintenanceTypeDlg" Control_="RepairButton" Event="NewDialog" Argument="VerifyRepairDlg" Condition="AI_MAINT AND InstallMode=&quot;Repair&quot;" Ordering="601"/>
+    <ROW Dialog_="VerifyRepairDlg" Control_="Back" Event="NewDialog" Argument="MaintenanceTypeDlg" Condition="AI_MAINT AND InstallMode=&quot;Repair&quot;" Ordering="1"/>
+    <ROW Dialog_="VerifyRepairDlg" Control_="Repair" Event="EndDialog" Argument="Return" Condition="AI_MAINT AND InstallMode=&quot;Repair&quot;" Ordering="399" Options="1"/>
+    <ROW Dialog_="VerifyRemoveDlg" Control_="Remove" Event="EndDialog" Argument="Return" Condition="AI_MAINT AND InstallMode=&quot;Remove&quot;" Ordering="299" Options="1"/>
+    <ROW Dialog_="PatchWelcomeDlg" Control_="Next" Event="NewDialog" Argument="VerifyReadyDlg" Condition="AI_PATCH" Ordering="201"/>
+    <ROW Dialog_="ResumeDlg" Control_="Install" Event="EndDialog" Argument="Return" Condition="AI_RESUME" Ordering="299"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Install" Event="EndDialog" Argument="Return" Condition="AI_PATCH" Ordering="199"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Back" Event="NewDialog" Argument="PatchWelcomeDlg" Condition="AI_PATCH" Ordering="203"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiCustActComponent">
+    <ROW Action="AI_DOWNGRADE" Type="19" Target="4010"/>
+    <ROW Action="AI_DpiContentScale" Type="1" Source="aicustact.dll" Target="DpiContentScale"/>
+    <ROW Action="AI_EnableDebugLog" Type="321" Source="aicustact.dll" Target="EnableDebugLog"/>
+    <ROW Action="AI_InstallModeCheck" Type="1" Source="aicustact.dll" Target="UpdateInstallMode" WithoutSeq="true"/>
+    <ROW Action="AI_PREPARE_UPGRADE" Type="65" Source="aicustact.dll" Target="PrepareUpgrade"/>
+    <ROW Action="AI_RESTORE_LOCATION" Type="65" Source="aicustact.dll" Target="RestoreLocation"/>
+    <ROW Action="AI_ResolveKnownFolders" Type="1" Source="aicustact.dll" Target="AI_ResolveKnownFolders"/>
+    <ROW Action="AI_SHOW_LOG" Type="65" Source="aicustact.dll" Target="LaunchLogFile" WithoutSeq="true"/>
+    <ROW Action="AI_STORE_LOCATION" Type="51" Source="ARPINSTALLLOCATION" Target="[APPDIR]"/>
+    <ROW Action="SET_APPDIR" Type="307" Source="APPDIR" Target="[ProgramFilesFolder][Manufacturer]\[ProductName]"/>
+    <ROW Action="SET_SHORTCUTDIR" Type="307" Source="SHORTCUTDIR" Target="[ProgramMenuFolder][ProductName]"/>
+    <ROW Action="SET_TARGETDIR_TO_APPDIR" Type="51" Source="TARGETDIR" Target="[APPDIR]"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiInstExSeqComponent">
+    <ROW Action="AI_DOWNGRADE" Condition="AI_NEWERPRODUCTFOUND AND (UILevel &lt;&gt; 5)" Sequence="210"/>
+    <ROW Action="AI_RESTORE_LOCATION" Condition="APPDIR=&quot;&quot;" Sequence="749"/>
+    <ROW Action="AI_STORE_LOCATION" Condition="(Not Installed) OR REINSTALL" Sequence="1501"/>
+    <ROW Action="AI_PREPARE_UPGRADE" Condition="AI_UPGRADE=&quot;No&quot; AND (Not Installed)" Sequence="1399"/>
+    <ROW Action="AI_ResolveKnownFolders" Sequence="52"/>
+    <ROW Action="AI_EnableDebugLog" Sequence="51"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiInstallUISequenceComponent">
+    <ROW Action="AI_RESTORE_LOCATION" Condition="APPDIR=&quot;&quot;" Sequence="749"/>
+    <ROW Action="AI_ResolveKnownFolders" Sequence="53"/>
+    <ROW Action="AI_DpiContentScale" Sequence="52"/>
+    <ROW Action="AI_EnableDebugLog" Sequence="51"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiLaunchConditionsComponent">
+    <ROW Condition="(VersionNT &lt;&gt; 400)" Description="[ProductName] cannot be installed on [WindowsTypeNT40Display]." DescriptionLocId="AI.LaunchCondition.NoNT40" IsPredefined="true" Builds="DefaultBuild"/>
+    <ROW Condition="(VersionNT &lt;&gt; 500)" Description="[ProductName] cannot be installed on [WindowsTypeNT50Display]." DescriptionLocId="AI.LaunchCondition.NoNT50" IsPredefined="true" Builds="DefaultBuild"/>
+    <ROW Condition="(VersionNT64 OR ((VersionNT &lt;&gt; 501) OR (ServicePackLevel = 3))) AND ((VersionNT &lt;&gt; 502) OR (ServicePackLevel = 2))" Description="[ProductName] cannot be installed on [WindowsTypeNT5XDisplay]." DescriptionLocId="AI.LaunchCondition.NoNT5X" IsPredefined="true" Builds="DefaultBuild"/>
+    <ROW Condition="VersionNT" Description="[ProductName] cannot be installed on [WindowsType9XDisplay]." DescriptionLocId="AI.LaunchCondition.No9X" IsPredefined="true" Builds="DefaultBuild"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiRegsComponent">
+    <ROW Registry="Path" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="Path" Value="[APPDIR]" Component_="ProductInformation"/>
+    <ROW Registry="Version" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="Version" Value="[ProductVersion]" Component_="ProductInformation"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiThemeComponent">
+    <ATTRIBUTE name="UsedTheme" value="classic"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiUpgradeComponent">
+    <ROW UpgradeCode="[|UpgradeCode]" VersionMin="0.0.1" VersionMax="[|ProductVersion]" Attributes="257" ActionProperty="OLDPRODUCTS"/>
+    <ROW UpgradeCode="[|UpgradeCode]" VersionMin="[|ProductVersion]" Attributes="2" ActionProperty="AI_NEWERPRODUCTFOUND"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.VsProjectComponent">
+    <ROW ProjectId="{fc234801-3f23-4c49-8250-72573b1953e4}" ProjectName="IQCare.Web.Billing" OutputGroup="PrimaryOutput" OutputFile="IQCare.Web.Billing.dll"/>
+    <ROW ProjectId="{1fd9cc7d-0ca8-4746-8565-ae446765410a}" ProjectName="IQCare.Web.CCC" OutputGroup="PrimaryOutput" OutputFile="IQCare.Web.CCC.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="PrimaryOutput" OutputFile="IQCare.Web.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="ContentOutput" OutputFile="BillingReciept.xml"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="ContentOutput" OutputFile="BillingReversalReciept.xml"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="ContentOutput" OutputFile="Currency.xml"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="ContentOutput" OutputFile="DailyCollectionSummary.xml"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="ContentOutput" OutputFile="MultiSelectCustomForm.xml"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="ContentOutput" OutputFile="PatientClinicalSummary.xml"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="ContentOutput" OutputFile="PatientPharmacyPrescription.xml"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="ContentOutput" OutputFile="PatientProfile.xml"/>
+    <ROW ProjectId="{dfc70960-e4f4-41e4-b219-b80ba8635b5b}" ProjectName="IQCare.Web.WebService" OutputGroup="PrimaryOutput" OutputFile="IQCare.Web.WebService.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="Ajax.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="AjaxControlToolkit.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="Application.Common.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="Application.Interface.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="Application.Logger.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="Application.Presentation.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="CrystalDecisions.CrystalReports.Engine.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="CrystalDecisions.ReportSource.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="CrystalDecisions.Shared.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="CrystalDecisions.Web.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="Entities.Administration.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="Entities.Clinical.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="Entities.Common.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="Entities.FormBuilder.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="Entities.Lab.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="Entities.Lookup.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="Entities.PatientCore.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="Entities.Pharmacy.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="Entities.Queue.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="Interface.Administration.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="Interface.Clinical.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="Interface.FormBuilder.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="Interface.IQToolsReport.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="Interface.Laboratory.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="Interface.Lookup.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="Interface.PatientCore.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="Interface.Pharmacy.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="Interface.Reports.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="Interface.Scheduler.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="Interface.SCM.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="Interface.Security.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="IQCare.CustomConfig.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="IQCare.IQControl.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="IQCare.Web.UILogic.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="IQCare.Web.WebService.dll_1"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="itextsharp.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="Microsoft.Office.Interop.Owc11.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="Microsoft.Web.Infrastructure.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="netchartdir.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="Sand.Security.Cryptography.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="System.Net.Http.Formatting.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="System.Web.Helpers.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="System.Web.Http.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="System.Web.Http.WebHost.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="System.Web.Mvc.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="System.Web.Razor.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="System.Web.WebPages.Deployment.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="System.Web.WebPages.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="System.Web.WebPages.Razor.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="References" OutputFile="Telerik.Web.UI.dll"/>
+    <ROW ProjectId="{d8cb5960-1d8c-49f6-93c3-8067f6a9baa8}" ProjectName="IQCare.Web" OutputGroup="SymbolsOutput" OutputFile="IQCare.Web.pdb"/>
+  </COMPONENT>
+</DOCUMENT>
