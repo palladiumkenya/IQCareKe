@@ -101,5 +101,17 @@ namespace IQCare.CCC.UILogic.Visit
                 throw new Exception(e.Message);
             }
         }
+
+        public PatientMasterVisit GetVisitById(int id)
+        {
+            try
+            {
+                return _patientMasterVisitManager.GetVisitById(id);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

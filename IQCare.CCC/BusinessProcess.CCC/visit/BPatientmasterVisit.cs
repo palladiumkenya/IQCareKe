@@ -230,5 +230,15 @@ namespace BusinessProcess.CCC.visit
                 return visit;
             }
         }
+
+        public PatientMasterVisit GetVisitById(int id)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                PatientMasterVisit visit = unitOfWork.PatientMasterVisitRepository.GetById(id);
+                unitOfWork.Dispose();
+                return visit;
+            }
+        }
     }
 }

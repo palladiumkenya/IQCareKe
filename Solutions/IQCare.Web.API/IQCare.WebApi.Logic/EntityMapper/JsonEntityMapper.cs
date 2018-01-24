@@ -282,7 +282,21 @@ namespace IQCare.WebApi.Logic.EntityMapper
 
         public ObservationResultEntity ObservationResult(ObservationResultDTO observation, MessageEventArgs messageEvent)
         {
-            throw new NotImplementedException();
+            ObservationResultEntity observationResultEntity = new ObservationResultEntity();
+            Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<ObservationResultDTO, ObservationResultEntity>().ReverseMap();
+                cfg.CreateMap<DTO.CommonEntities.MESSAGEHEADER, MappingEntities.MESSAGEHEADER>().ReverseMap();
+                cfg.CreateMap<DTO.CommonEntities.OBSERVATIONPATIENTIDENTIFICATION, MappingEntities.OBSERVATIONPATIENTIDENTIFICATION>().ReverseMap();
+                cfg.CreateMap<DTO.CommonEntities.OBSERVATION_RESULT, MappingEntities.OBSERVATION_RESULT>().ReverseMap();
+                cfg.CreateMap<DTO.CommonEntities.EXTERNALPATIENTID, MappingEntities.EXTERNALPATIENTID>().ReverseMap();
+                cfg.CreateMap<DTO.CommonEntities.INTERNALPATIENTID, MappingEntities.INTERNALPATIENTID>().ReverseMap();
+                cfg.CreateMap<DTO.CommonEntities.PATIENTNAME, MappingEntities.PATIENTNAME>().ReverseMap();
+            });
+
+            observationResultEntity = Mapper.Map<ObservationResultEntity>(observation);
+            observationResultEntity.MESSAGE_HEADER = GetMessageHeader("ORU^R01", messageEvent.FacilityId.ToString(), "P");
+            return observationResultEntity;
         }
 
        /* public DrugPrescriptionEntity DrugPrescriptionRaised(List<PrescriptionDto> prescription)

@@ -484,14 +484,14 @@ namespace BusinessProcess.CCC
             }
         }
 
-
-        //    public LookupPatientAdherence GetPatientAdherence(int patientId)
-        //    {
-        //        PatientLookupAdherenceRepository patientAdherence = new PatientLookupAdherenceRepository();
-
-
-
-        //    }
-        //}
+        public string GetLookupItemNameByMasterNameItemId(int itemId, string masterName)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                var p = unitOfWork.LookupRepository.FindBy(x => x.ItemId == itemId && x.MasterName == masterName).FirstOrDefault();
+                unitOfWork.Dispose();
+                return p.ItemName;
+            }
+        }
     }
 }

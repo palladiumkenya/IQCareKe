@@ -23,6 +23,7 @@
     <RedDir Condition=" '$(RedDir)' == '' ">$(TrunkDir)package\service\</RedDir>
     <RedDir1 Condition=" '$(RedDir1)' == '' ">$(TrunkDir)package\management\</RedDir1>
     <RedDir2 Condition=" '$(RedDir2)' == '' ">$(TrunkDir)package\web\</RedDir2>
+	<WebDir Condition=" '$(WebDir)' == '' ">$(TrunkDir)package\web\bin\</WebDir>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -137,6 +138,7 @@
   </Target>
   -->
   <Target Name="AfterBuild">
+	<Copy SourceFiles="@(IntermediateAssembly)" DestinationFolder="$(WebDir)" SkipUnchangedFiles="false" />
     <Copy SourceFiles="@(IntermediateAssembly)" DestinationFolder="$(RedDir)" SkipUnchangedFiles="true" />
     <Copy SourceFiles="@(DocFileItem)" DestinationFiles="@(FinalDocFile->'$(RedDir)%(FileName)%(Extension)')" SkipUnchangedFiles="true" Condition="'$(_DocumentationFileProduced)'=='true'" />
     <Copy SourceFiles="@(IntermediateSatelliteAssembliesWithTargetPath)" DestinationFiles="@(IntermediateSatelliteAssembliesWithTargetPath->'$(RedDir)%(Culture)\$(TargetName).resources.dll')" SkipUnchangedFiles="true" />

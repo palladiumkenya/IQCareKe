@@ -24,5 +24,10 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
         {
             return AppointmentMessage.Update(appointment);
         }
+
+        public PatientAppointSchedulingDTO GetObservation(int entityId, int observationType)
+        {
+            return new PatientAppointSchedulingDTO();
+        }
     }
 }

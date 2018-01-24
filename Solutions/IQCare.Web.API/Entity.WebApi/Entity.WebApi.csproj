@@ -11,6 +11,8 @@
     <AssemblyName>Entity.WebApi</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TrunkDir>..\..\..\</TrunkDir>
+    <WebDir Condition=" '$(WebDir)' == '' ">$(TrunkDir)package\web\bin\</WebDir>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -48,4 +50,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="AfterBuild">
+    <Copy SourceFiles="@(IntermediateAssembly)" DestinationFolder="$(WebDir)" SkipUnchangedFiles="false" />
+    <Copy SourceFiles="@(DocFileItem)" DestinationFiles="@(FinalDocFile->'$(RedDir)%(FileName)%(Extension)')" SkipUnchangedFiles="true" Condition="'$(_DocumentationFileProduced)'=='true'" />
+    <Copy SourceFiles="@(IntermediateSatelliteAssembliesWithTargetPath)" DestinationFiles="@(IntermediateSatelliteAssembliesWithTargetPath->'$(RedDir)%(Culture)\$(TargetName).resources.dll')" SkipUnchangedFiles="true" />
+  </Target>
 </Project>
