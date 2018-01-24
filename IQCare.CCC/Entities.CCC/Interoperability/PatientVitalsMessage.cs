@@ -11,6 +11,8 @@ namespace Entities.CCC.Interoperability
     [Table("API_PatientVitalsView")]
     public class PatientVitalsMessage
     {
+        [Key]
+        public int Id { get; set; }
         public int PatientId { get; set; }
         public int PatientMasterVisitId { get; set; }
         public decimal Weight { get; set; }
