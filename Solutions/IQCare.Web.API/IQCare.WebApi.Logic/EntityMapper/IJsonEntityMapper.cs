@@ -22,7 +22,7 @@ namespace IQCare.WebApi.Logic.EntityMapper
 
         void StopDrugs();
 
-        DrugPrescriptionEntity DrugPrescriptionRaised(PrescriptionSourceDto prescriptionSourceDto);
+        DrugPrescriptionEntity DrugPrescriptionRaised(PrescriptionSourceDto prescription);
 
         void DrugOrderCancel();
 
