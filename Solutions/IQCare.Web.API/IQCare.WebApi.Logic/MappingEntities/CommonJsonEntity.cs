@@ -33,8 +33,6 @@ namespace IQCare.WebApi.Logic.MappingEntities
 
     public class INTERNALPATIENTID
     {
-       
-
         public string ID { get; set; }
         public string IDENTIFIER_TYPE { get; set; }
         public string ASSIGNING_AUTHORITY { get; set; }
@@ -90,26 +88,18 @@ namespace IQCare.WebApi.Logic.MappingEntities
         public PATIENTNAME PATIENT_NAME { get; set; }
     }
 
-    public class PATIENT_IDENTIFICATION
+    public class PrescriptionIdentification
     {
-        public PATIENT_IDENTIFICATION()
+        public PrescriptionIdentification()
         {
-            EXTERNAL_PATIENT_ID=new INTERNALPATIENTID();
+            EXTERNAL_PATIENT_ID=new EXTERNALPATIENTID();
             INTERNAL_PATIENT_ID=new List<INTERNALPATIENTID>();
             PATIENT_NAME=new PATIENTNAME();
         }
 
-        public INTERNALPATIENTID EXTERNAL_PATIENT_ID { get; set; }
+        public EXTERNALPATIENTID EXTERNAL_PATIENT_ID { get; set; }
         public List<INTERNALPATIENTID> INTERNAL_PATIENT_ID { get; set; }
         public PATIENTNAME PATIENT_NAME { get; set; }
-    }
-
-    public class ORDERINGPHYSICIAN
-    {
-        public string FIRST_NAME { get; set; }
-        public string MIDDLE_NAME { get; set; }
-        public string LAST_NAME { get; set; }
-        public string PREFIX { get; set; }
     }
 
 
@@ -142,7 +132,6 @@ namespace IQCare.WebApi.Logic.MappingEntities
         public string DATE_OF_BIRTH { get; set; }
         public string CONTACT_ROLE { get; set; }
     }
-
 
     public class APPOINTMENT_INFORMATION
     {

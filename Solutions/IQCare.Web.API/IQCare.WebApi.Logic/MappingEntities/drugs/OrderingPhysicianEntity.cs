@@ -1,6 +1,6 @@
 ﻿namespace IQCare.WebApi.Logic.MappingEntities.drugs
 {
-    public class OrderingPhysicianEntity 
+    public class ORDERING_PHYSICIAN 
     {
         public string FIRST_NAME { get; set; }
         public string MIDDLE_NAME { get; set; }
