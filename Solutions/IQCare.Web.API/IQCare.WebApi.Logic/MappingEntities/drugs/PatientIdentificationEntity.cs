@@ -11,13 +11,13 @@ namespace IQCare.WebApi.Logic.MappingEntities.drugs
     {
         public PatientIdentificationEntity()
         {
-            EXTERNAL_PATIENT_ID= new IdentificationEntity();
-            INTERNAL_PATIENT_ID= new List<IdentificationEntity>();
+            EXTERNAL_PATIENT_ID= new EXTERNAL_PATIENT_ID();
+            INTERNAL_PATIENT_ID= new List<EXTERNAL_PATIENT_ID>();
             PATIENT_NAME= new PATIENTNAME();
         }
 
-        public IdentificationEntity EXTERNAL_PATIENT_ID { get; set; }
-        public List<IdentificationEntity> INTERNAL_PATIENT_ID { get; set; }
+        public EXTERNAL_PATIENT_ID EXTERNAL_PATIENT_ID { get; set; }
+        public List<EXTERNAL_PATIENT_ID> INTERNAL_PATIENT_ID { get; set; }
         public PATIENTNAME PATIENT_NAME { get; set; }
     }
 }

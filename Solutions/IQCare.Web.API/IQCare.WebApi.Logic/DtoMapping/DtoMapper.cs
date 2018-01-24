@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using IQCare.DTO;
 using IQCare.WebApi.Logic.MappingEntities;
-using IQCare.WebApi.Logic.MappingEntities.drugs;
+//using IQCare.WebApi.Logic.MappingEntities.drugs;
 
 namespace IQCare.WebApi.Logic.DtoMapping
 {
@@ -109,27 +109,22 @@ namespace IQCare.WebApi.Logic.DtoMapping
             throw new NotImplementedException();
         }
 
-        public PrescriptionDto DrugPrescriptionRaised(DrugPrescriptionEntity entity)
+        public PrescriptionSourceDto DrugPrescriptionRaised(DrugPrescriptionEntity entity)
         {
 
-            List<INTERNAL_PATIENT_ID> internalIdentifiers = new List<INTERNAL_PATIENT_ID>();
+            // Patient Identification
+            var internalIdentifiers = new List<INTERNAL_PATIENT_ID>();
 
             foreach (var identifier in entity.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID)
             {
-                
-                internalIdentifiers.Add(new INTERNAL_PATIENT_ID{ ID =identifier.ID,ASSIGNING_AUTHORITY  = identifier.ASSIGNING_AUTHORITY,IDENTIFIER_TYPE =identifier.IDENTIFIER_TYPE});
+                var internalIdentity = new INTERNAL_PATIENT_ID()
+                {
+                    IDENTIFIER_TYPE = identifier.IDENTIFIER_TYPE,
+                    ID = identifier.ID,
+                    ASSIGNING_AUTHORITY = identifier.ASSIGNING_AUTHORITY
+                };
 
-                //internalIdentifiers.Add(new INTERNAL_PATIENT_ID { ID = identifier, ASSIGNING_AUTHORITY = identifier.ASSIGNING_AUTHORITY, IDENTIFIER_TYPE = identifier.IDENTIFIER_TYPE });
-
-                //var internalIdentity = new INTERNAL_PATIENT_ID()
-                //{
-                //    IDENTIFIER_TYPE = identifier.IDENTIFIER_TYPE,
-                //    ID = identifier.ID,
-                //    ASSIGNING_AUTHORITY = identifier.ASSIGNING_AUTHORITY
-
-                //};
-
-                //internalIdentifiers.Add(internalIdentity);
+                internalIdentifiers.Add(internalIdentity); 
             }
 
             var orderEncorder = new List<PHARMACY_ENCODED_ORDER>();
@@ -160,7 +155,7 @@ namespace IQCare.WebApi.Logic.DtoMapping
             };
 
 
-            var drugOrder = new PrescriptionDto()
+            var prescriptionSourceDto = new PrescriptionSourceDto()
             {
                 MESSAGE_HEADER = 
                 {
@@ -211,7 +206,7 @@ namespace IQCare.WebApi.Logic.DtoMapping
                 },
                 PHARMACY_ENCODED_ORDER = orderEncorder 
             };            
-            return drugOrder;
+            return prescriptionSourceDto;
         }
 
         public void DrugOrderCancel()
@@ -317,15 +312,15 @@ namespace IQCare.WebApi.Logic.DtoMapping
                 },
                 COMMON_ORDER_DETAILS =
                 {
-                    OrderControl = entity.COMMON_ORDER_DETAILS.ORDER_CONTROL,
-                    NOTES = entity.COMMON_ORDER_DETAILS.NOTES,
+                    OrderControl = entity.COMMON_ORDER_DETAILS.OrderControl,
+                    NOTES = entity.COMMON_ORDER_DETAILS.Notes,
                     ORDERING_PHYSICIAN = 
                     {
                         FIRST_NAME = entity.COMMON_ORDER_DETAILS.ORDERING_PHYSICIAN.FIRST_NAME,
                         MIDDLE_NAME = entity.COMMON_ORDER_DETAILS.ORDERING_PHYSICIAN.MIDDLE_NAME,
                         LAST_NAME = entity.COMMON_ORDER_DETAILS.ORDERING_PHYSICIAN.LAST_NAME
                     },
-                    ORDER_STATUS = entity.COMMON_ORDER_DETAILS.ORDER_STATUS,
+                    ORDER_STATUS = entity.COMMON_ORDER_DETAILS.OrderStatus,
                     PLACER_ORDER_NUMBER = 
                     {
                         NUMBER =Convert.ToInt32(entity.COMMON_ORDER_DETAILS.PLACER_ORDER_NUMBER.NUMBER),
@@ -336,7 +331,7 @@ namespace IQCare.WebApi.Logic.DtoMapping
                         NUMBER=Convert.ToInt32(entity.COMMON_ORDER_DETAILS.PLACER_ORDER_NUMBER.NUMBER),
                         ENTITY=entity.COMMON_ORDER_DETAILS.PLACER_ORDER_NUMBER.ENTITY
                     },
-                    TRANSACTION_DATETIME =Convert.ToDateTime(entity.COMMON_ORDER_DETAILS.TRANSACTION_DATETIME),
+                    TRANSACTION_DATETIME =Convert.ToDateTime(entity.COMMON_ORDER_DETAILS.TransactionDatetime),
                 },
                 PHARMACY_ENCODED_ORDER=pharmacyEncodedOrder,
                 PHARMACY_DISPENSE = pharmacyDispense,
@@ -443,5 +438,7 @@ namespace IQCare.WebApi.Logic.DtoMapping
             };
             return vlResultsDto;
         }
+
+
     }
 }

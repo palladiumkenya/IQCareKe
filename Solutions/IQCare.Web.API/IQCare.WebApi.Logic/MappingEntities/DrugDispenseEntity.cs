@@ -48,20 +48,20 @@ namespace IQCare.WebApi.Logic.MappingEntities
         public string PRESCRIPTION_NOTES { get; set; }
     }
 
-    public class CommonOrderDetailsDispenseEntity
+    public class CommonOrderDetailsEntity
     {
-        public CommonOrderDetailsDispenseEntity()
+        public CommonOrderDetailsEntity()
         {
             PLACER_ORDER_NUMBER = new PlacerOrderNumberEntity();
             FILLER_ORDER_NUMBER = new PlacerOrderNumberEntity();
-            ORDERING_PHYSICIAN = new OrderingPhysicianEntity();
+            ORDERING_PHYSICIAN = new ORDERINGPHYSICIAN();
         }
 
         public string OrderControl { get; set; }
         public PlacerOrderNumberEntity PLACER_ORDER_NUMBER { get; set; }
         public PlacerOrderNumberEntity FILLER_ORDER_NUMBER { get; set; }
         public string OrderStatus { get; set; }
-        public OrderingPhysicianEntity ORDERING_PHYSICIAN { get; set; }
+        public ORDERINGPHYSICIAN ORDERING_PHYSICIAN { get; set; }
         public DateTime TransactionDatetime { get; set; }
         public string Notes { get; set; }
     }

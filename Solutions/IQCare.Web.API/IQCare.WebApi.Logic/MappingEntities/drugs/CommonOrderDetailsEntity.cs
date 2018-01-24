@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace IQCare.WebApi.Logic.MappingEntities.drugs
 {
-   public class CommonOrderDetailsEntity
+   public class COMMON_ORDER_DETAILS
     {
-        public CommonOrderDetailsEntity()
+        public COMMON_ORDER_DETAILS()
         {
             PLACER_ORDER_NUMBER=new PlacerOrderNumberEntity();
             ORDERING_PHYSICIAN=new OrderingPhysicianEntity();

@@ -238,26 +238,24 @@ namespace IQCare.WebApi.Logic.MessageHandler
         {
             try
             {
-                var drugPrescriptionMessage = new DrugPrescriptionMessage();
-                //DrugPrescriptionMessage drugPrescriptionMessage = new DrugPrescriptionMessage();
 
-                var prescriptionDtoPayLoad = drugPrescriptionMessage.GetPrescriptionMessage(messageEvent.PatientId,messageEvent.EntityId,messageEvent.PatientMasterVisitId);
+                var drugPrescription = new DrugPrescriptionMessage();
 
-                if (prescriptionDtoPayLoad != null)
+                var prescriptionDto = drugPrescription.PreparePrescriptionSourceDto(messageEvent.PatientId,messageEvent.EntityId,messageEvent.PatientMasterVisitId);
+
+                if (prescriptionDto != null)
                 {
 
-                    var prescriptionEntityPayLoad = _jsonEntityMapper.DrugPrescriptionRaised(prescriptionDtoPayLoad);
+                    var prescriptionEntity = _jsonEntityMapper.DrugPrescriptionRaised(prescriptionDto);
 
-                    string prescriptionJson = new JavaScriptSerializer().Serialize(prescriptionEntityPayLoad);
+                    string prescriptionJson = new JavaScriptSerializer().Serialize(prescriptionEntity);
                     var apiOutbox = new ApiOutbox()
                     {
-                        DateSent = DateTime.Now,
                         Message = prescriptionJson,
                         RecepientId = 1
                     };
-
-                   // _apiOutboxManager.AddApiOutbox(apiOutbox);
                     SendData(prescriptionJson, "").ConfigureAwait(false);
+                    _apiOutboxManager.AddApiOutbox(apiOutbox);
                 }
                 else
                 {

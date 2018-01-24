@@ -112,7 +112,7 @@
     <Compile Include="Enrollment\PersonIdentifier.cs" />
     <Compile Include="Enrollment\ServiceArea.cs" />
     <Compile Include="Enrollment\ServiceAreaIdentifiers.cs" />
-    <Compile Include="Interoperability\DrugPrescriptionEntity.cs" />
+    <Compile Include="Interoperability\DrugPrescriptionSourceEntity.cs" />
     <Compile Include="Interoperability\InteropPlacerType.cs" />
     <Compile Include="Interoperability\InteropPlacerValues.cs" />
     <Compile Include="Interoperability\PatientAppointmentMessage.cs" />

@@ -1,6 +1,6 @@
 ﻿namespace IQCare.WebApi.Logic.MappingEntities.drugs
 {
-    public  class IdentificationEntity
+    public  class EXTERNAL_PATIENT_ID
     {
         public  string ID {get;set;}
         public string IDENTIFIER_TYPE { get; set; }

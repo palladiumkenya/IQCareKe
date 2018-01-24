@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace IQCare.DTO
 {
-    public class PrescriptionDto
+    public class PrescriptionSourceDto
     {
-        public PrescriptionDto()
+        public PrescriptionSourceDto()
         {
             MESSAGE_HEADER = new MESSAGE_HEADER();
             PATIENT_IDENTIFICATION = new PATIENT_IDENTIFICATION();

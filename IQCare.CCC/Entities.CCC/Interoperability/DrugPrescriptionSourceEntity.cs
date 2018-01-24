@@ -8,7 +8,7 @@ namespace Entities.CCC.Interoperability
     [Serializable]
     [System.ComponentModel.DataAnnotations.Schema.Table("API_DrugPrescription")]
 
-    public class DrugPrescriptionEntity
+    public class DrugPrescriptionSourceEntity
     {
         //public DrugPrescriptionEntity()
         //{

@@ -5,8 +5,9 @@ using IQCare.DTO.PatientAppointment;
 using IQCare.DTO.PatientRegistration;
 using IQCare.Events;
 using IQCare.WebApi.Logic.MappingEntities;
-using IQCare.WebApi.Logic.MappingEntities.drugs;
 using System;
+using System.Collections.Generic;
+using IQCare.WebApi.Logic.MappingEntities.drugs;
 using INTERNALPATIENTID = IQCare.WebApi.Logic.MappingEntities.INTERNALPATIENTID;
 using MESSAGEHEADER = IQCare.WebApi.Logic.MappingEntities.MESSAGEHEADER;
 
@@ -76,13 +77,15 @@ namespace IQCare.WebApi.Logic.EntityMapper
             throw new System.NotImplementedException();
         }
 
-        public DrugPrescriptionEntity DrugPrescriptionRaised(PrescriptionDto entityDto)
+        public DrugPrescriptionEntity DrugPrescriptionRaised(PrescriptionSourceDto entityDto)
         {
 
             DrugPrescriptionEntity raisedPrescriptionEntity = new DrugPrescriptionEntity();
 
+            var patientInternalId = new List<INTERNALPATIENTID>();
+
             raisedPrescriptionEntity.MESSAGE_HEADER.SENDING_FACILITY = entityDto.MESSAGE_HEADER.SENDING_FACILITY;
-            raisedPrescriptionEntity.MESSAGE_HEADER.MESSAGE_DATETIME =entityDto.MESSAGE_HEADER.MESSAGE_DATETIME.ToString("yyyyMMddHmmss");
+            raisedPrescriptionEntity.MESSAGE_HEADER.MESSAGE_DATETIME = entityDto.MESSAGE_HEADER.MESSAGE_DATETIME.ToString("yyyyMMddHmmss");
             raisedPrescriptionEntity.MESSAGE_HEADER.MESSAGE_TYPE = entityDto.MESSAGE_HEADER.MESSAGE_TYPE;
             raisedPrescriptionEntity.MESSAGE_HEADER.PROCESSING_ID = entityDto.MESSAGE_HEADER.PROCESSING_ID;
             raisedPrescriptionEntity.MESSAGE_HEADER.RECEIVING_APPLICATION = entityDto.MESSAGE_HEADER.RECEIVING_APPLICATION;
@@ -90,29 +93,30 @@ namespace IQCare.WebApi.Logic.EntityMapper
             raisedPrescriptionEntity.MESSAGE_HEADER.SECURITY = entityDto.MESSAGE_HEADER.SECURITY;
             raisedPrescriptionEntity.MESSAGE_HEADER.SENDING_APPLICATION = entityDto.MESSAGE_HEADER.SENDING_APPLICATION;
 
-            raisedPrescriptionEntity.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ID =entityDto.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ID;
-            raisedPrescriptionEntity.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.IDENTIFIER_TYPE =entityDto.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.IDENTIFIER_TYPE;
-            raisedPrescriptionEntity.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ASSIGNING_AUTHORITY = entityDto.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ASSIGNING_AUTHORITY;
+            var patientExternalId=new INTERNALPATIENTID()
+            {
+                ASSIGNING_AUTHORITY = entityDto.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ASSIGNING_AUTHORITY  ,
+                ID = entityDto.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ID,
+                IDENTIFIER_TYPE = entityDto.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.IDENTIFIER_TYPE
+            };
+            //raisedPrescriptionEntity.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ID = entityDto.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ID;
+            //raisedPrescriptionEntity.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.IDENTIFIER_TYPE = entityDto.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.IDENTIFIER_TYPE;
+            //raisedPrescriptionEntity.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ASSIGNING_AUTHORITY = entityDto.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ASSIGNING_AUTHORITY;
 
             //var internalIdentifiers = new List<INTERNALPATIENTID>();
+            raisedPrescriptionEntity.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID = patientExternalId;
 
             foreach (var identifier in entityDto.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID)
             {
-                var internalIdentity = new INTERNALPATIENTID(){ID = identifier.ID,ASSIGNING_AUTHORITY = identifier.ASSIGNING_AUTHORITY,IDENTIFIER_TYPE = identifier.IDENTIFIER_TYPE};//{ID = identifier.ID,ASSIGNING_AUTHORITY = identifier.ASSIGNING_AUTHORITY,IDENTIFIER_TYPE = identifier.IDENTIFIER_TYPE}
-               // internalIdentity
-                //{
-                //    IDENTIFIER_TYPE = identifier.IDENTIFIER_TYPE,
-                //    ASSIGNING_AUTHORITY = identifier.ASSIGNING_AUTHORITY,
-                //    ID = identifier.ID
-                //};
-                raisedPrescriptionEntity.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID.Add(internalIdentity);
-                //internalIdentifiers.Add(internalIdentity);
+                var internalIdentity = new INTERNALPATIENTID() { ID = identifier.ID, ASSIGNING_AUTHORITY = identifier.ASSIGNING_AUTHORITY, IDENTIFIER_TYPE = identifier.IDENTIFIER_TYPE };
+                patientInternalId.Add(internalIdentity);
             }
-            raisedPrescriptionEntity.PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME =entityDto.PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME;
-            raisedPrescriptionEntity.PATIENT_IDENTIFICATION.PATIENT_NAME.LAST_NAME =entityDto.PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME;
+            raisedPrescriptionEntity.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID = patientInternalId;
+            raisedPrescriptionEntity.PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME = entityDto.PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME;
+            raisedPrescriptionEntity.PATIENT_IDENTIFICATION.PATIENT_NAME.LAST_NAME = entityDto.PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME;
             raisedPrescriptionEntity.PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME = entityDto.PATIENT_IDENTIFICATION.PATIENT_NAME.LAST_NAME;
 
-            raisedPrescriptionEntity.COMMON_ORDER_DETAILS.ORDERING_PHYSICIAN.FIRST_NAME =entityDto.COMMON_ORDER_DETAILS.ORDERING_PHYSICIAN.FIRST_NAME;
+            raisedPrescriptionEntity.COMMON_ORDER_DETAILS.ORDERING_PHYSICIAN.FIRST_NAME = entityDto.COMMON_ORDER_DETAILS.ORDERING_PHYSICIAN.FIRST_NAME;
             raisedPrescriptionEntity.COMMON_ORDER_DETAILS.ORDERING_PHYSICIAN.MIDDLE_NAME = entityDto.COMMON_ORDER_DETAILS.ORDERING_PHYSICIAN.MIDDLE_NAME;
             raisedPrescriptionEntity.COMMON_ORDER_DETAILS.ORDERING_PHYSICIAN.LAST_NAME = entityDto.COMMON_ORDER_DETAILS.ORDERING_PHYSICIAN.LAST_NAME;
 
@@ -120,24 +124,38 @@ namespace IQCare.WebApi.Logic.EntityMapper
             raisedPrescriptionEntity.COMMON_ORDER_DETAILS.ORDER_CONTROL = entityDto.COMMON_ORDER_DETAILS.ORDER_CONTROL;
             raisedPrescriptionEntity.COMMON_ORDER_DETAILS.ORDER_STATUS = entityDto.COMMON_ORDER_DETAILS.ORDER_STATUS;
             raisedPrescriptionEntity.COMMON_ORDER_DETAILS.PLACER_ORDER_NUMBER.NUMBER = Convert.ToString(entityDto.COMMON_ORDER_DETAILS.PLACER_ORDER_NUMBER.NUMBER);
-            raisedPrescriptionEntity.COMMON_ORDER_DETAILS.PLACER_ORDER_NUMBER.ENTITY =entityDto.COMMON_ORDER_DETAILS.PLACER_ORDER_NUMBER.ENTITY;
+            raisedPrescriptionEntity.COMMON_ORDER_DETAILS.PLACER_ORDER_NUMBER.ENTITY = entityDto.COMMON_ORDER_DETAILS.PLACER_ORDER_NUMBER.ENTITY;
             raisedPrescriptionEntity.COMMON_ORDER_DETAILS.TRANSACTION_DATETIME = entityDto.COMMON_ORDER_DETAILS.TRANSACTION_DATETIME.ToString("yyyyMMddHmmss");
 
-            var prescriptionOrderx = new PharmacyEncorderOrderEntity();
+            var pharmacyEncodedOrder=new List<MappingEntities.drugs.PHARMACY_ENCODED_ORDER>();
+           // var prescriptionOrderx = new MappingEntities.drugs.PHARMACY_ENCODED_ORDER();
             foreach (var order in entityDto.PHARMACY_ENCODED_ORDER)
             {
-                
-                prescriptionOrderx.DRUG_NAME = order.DRUG_NAME;
-                prescriptionOrderx.CODING_SYSTEM = order.CODING_SYSTEM;
-                prescriptionOrderx.STRENGTH = order.STRENGTH;
-                prescriptionOrderx.DOSAGE =Convert.ToDecimal(order.DOSAGE);
-                prescriptionOrderx.FREQUENCY = order.FREQUENCY;
-                prescriptionOrderx.DURATION = order.DURATION;
-                prescriptionOrderx.QUANTITY_PRESCRIBED = Convert.ToDecimal(order.QUANTITY_PRESCRIBED);
-                prescriptionOrderx.TREATMENT_INSTRUCTION = order.TREATMENT_INSTRUCTION;
-                prescriptionOrderx.PHARMACY_ORDER_DATE = order.PHARMACY_ORDER_DATE.ToString("yyyyMMddHmmss");
-                prescriptionOrderx.INDICATION = order.INDICATION;
-                prescriptionOrderx.PRESCRIPTION_NOTES = order.PRESCRIPTION_NOTES;
+                MappingEntities.drugs.PHARMACY_ENCODED_ORDER drugPharmacyEncodedOrder = new MappingEntities.drugs.PHARMACY_ENCODED_ORDER()
+                    {
+                        DRUG_NAME = order.DRUG_NAME,
+                        CODING_SYSTEM = order.CODING_SYSTEM,
+                        STRENGTH = order.STRENGTH,
+                        DOSAGE = Convert.ToDecimal(order.DOSAGE),
+                        FREQUENCY = order.FREQUENCY,
+                        DURATION = order.DURATION,
+                        QUANTITY_PRESCRIBED = Convert.ToDecimal(order.QUANTITY_PRESCRIBED),
+                        TREATMENT_INSTRUCTION = order.TREATMENT_INSTRUCTION,
+                        PHARMACY_ORDER_DATE = order.PHARMACY_ORDER_DATE.ToString("yyyyMMddHmmss"),
+                        INDICATION = order.INDICATION,
+                        PRESCRIPTION_NOTES = order.PRESCRIPTION_NOTES
+                    };
+                //prescriptionOrderx.DRUG_NAME = order.DRUG_NAME;
+                //prescriptionOrderx.CODING_SYSTEM = order.CODING_SYSTEM;
+                //prescriptionOrderx.STRENGTH = order.STRENGTH;
+                //prescriptionOrderx.DOSAGE = Convert.ToDecimal(order.DOSAGE);
+                //prescriptionOrderx.FREQUENCY = order.FREQUENCY;
+                //prescriptionOrderx.DURATION = order.DURATION;
+                //prescriptionOrderx.QUANTITY_PRESCRIBED = Convert.ToDecimal(order.QUANTITY_PRESCRIBED);
+                //prescriptionOrderx.TREATMENT_INSTRUCTION = order.TREATMENT_INSTRUCTION;
+                //prescriptionOrderx.PHARMACY_ORDER_DATE = order.PHARMACY_ORDER_DATE.ToString("yyyyMMddHmmss");
+                //prescriptionOrderx.INDICATION = order.INDICATION;
+                //prescriptionOrderx.PRESCRIPTION_NOTES = order.PRESCRIPTION_NOTES;
                 //var prescriptionOrder = new PharmacyEncorderOrderEntity()
                 //{
                 //    DRUG_NAME = order.DRUG_NAME,
@@ -152,11 +170,29 @@ namespace IQCare.WebApi.Logic.EntityMapper
                 //    INDICATION=order.INDICATION,
                 //    PRESCRIPTION_NOTES=order.PRESCRIPTION_NOTES                
                 //};
-                
-                raisedPrescriptionEntity.PHARMACY_ENCODED_ORDER.Add(prescriptionOrderx);
+
+                pharmacyEncodedOrder.Add(drugPharmacyEncodedOrder);
+               // raisedPrescriptionEntity.PHARMACY_ENCODED_ORDER.Add(prescriptionOrderx);
             }
+            raisedPrescriptionEntity.PHARMACY_ENCODED_ORDER = pharmacyEncodedOrder;
+
             return raisedPrescriptionEntity;
         }
+
+        //public DrugPrescriptionEntity DrugPrescriptionRaised(PrescriptionSourceDto prescriptionSourceDto)
+        //{
+        //    DrugPrescriptionEntity drugPrescriptionEntity = new DrugPrescriptionEntity();
+        //    Mapper.Initialize(cfg =>
+        //    {
+        //        cfg.CreateMap<PrescriptionSourceDto, DrugPrescriptionEntity>().ReverseMap();
+        //        cfg.CreateMap<DTO.MESSAGE_HEADER, MappingEntities.drugs.MESSAGE_HEADER>().ReverseMap();
+        //        cfg.CreateMap<DTO.PATIENT_IDENTIFICATION, MappingEntities.PATIENT_IDENTIFICATION>().ReverseMap();
+        //        cfg.CreateMap<DTO.COMMON_ORDER_DETAILS, MappingEntities.drugs.COMMON_ORDER_DETAILS>().ReverseMap();
+        //        cfg.CreateMap<DTO.PHARMACY_ENCODED_ORDER, MappingEntities.drugs.PHARMACY_ENCODED_ORDER>().ReverseMap();
+        //    });
+        //    drugPrescriptionEntity = Mapper.Map<DrugPrescriptionEntity>(prescriptionSourceDto);
+        //    return drugPrescriptionEntity;
+        //}
 
         public void DrugOrderCancel()
         {

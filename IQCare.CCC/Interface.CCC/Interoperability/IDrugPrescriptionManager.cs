@@ -6,7 +6,7 @@ namespace Interface.CCC.Interoperability
 {
     public interface IDrugPrescriptionManager
    {
-       List<DrugPrescriptionEntity>  GetPatientPrescriptionMessage(int ptnpk,int orderId,int patientMasterVisitId);
+       List<DrugPrescriptionSourceEntity>  GetPatientPrescriptionMessage(int ptnpk,int orderId,int patientMasterVisitId);
          
    }
 }

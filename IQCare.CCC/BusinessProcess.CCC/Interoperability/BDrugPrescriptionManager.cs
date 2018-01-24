@@ -10,7 +10,7 @@ namespace BusinessProcess.CCC.Interoperability
 {
     public class BDrugPrescriptionManager :ProcessBase, IDrugPrescriptionManager
     {
-        public List<DrugPrescriptionEntity>  GetPatientPrescriptionMessage(int ptnpk,int orderId,int patientMasterVisitId)
+        public List<DrugPrescriptionSourceEntity>  GetPatientPrescriptionMessage(int ptnpk,int orderId,int patientMasterVisitId)
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {

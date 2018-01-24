@@ -1,6 +1,6 @@
 ﻿namespace IQCare.WebApi.Logic.MappingEntities.drugs
 {
-    public  class MessageHeaderEntity
+    public  class MESSAGE_HEADER
     {
         public string SENDING_APPLICATION { get; set; }
         public string SENDING_FACILITY { get; set; }

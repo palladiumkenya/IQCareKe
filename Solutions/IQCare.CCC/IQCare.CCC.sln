@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2006
+VisualStudioVersion = 15.0.27130.2020
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCare.Web.CCC", "..\..\IQCare.CCC\IQCare.Web.CCC\IQCare.Web.CCC.csproj", "{1FD9CC7D-0CA8-4746-8565-AE446765410A}"
 	ProjectSection(ProjectDependencies) = postProject
