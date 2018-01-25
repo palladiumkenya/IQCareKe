@@ -105,7 +105,6 @@
             $("#pgDiastolic").css('background', bpColorCode);
             $("#bgSystolic").css('width', systoPercentage + '%').attr('aria-valuenow', systolic);
             $("#bgSystolic").css('background', '' + bpColorCode + '');
-
          
         }
 

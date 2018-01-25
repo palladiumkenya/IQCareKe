@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using DataAccess.Base;
 using Entities.CCC.Visit;
 using Interface.CCC.Visit;
 using DataAccess.CCC.Context;
@@ -10,7 +11,7 @@ using DataAccess.CCC.Repository;
 namespace BusinessProcess.CCC.visit
 {
 
-    public class BPatientEncounterManager :IPatientEncounterManager
+    public class BPatientEncounterManager :ProcessBase, IPatientEncounterManager
     {
        // private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
         internal int Result;
