@@ -139,9 +139,9 @@ namespace IQCare.CCC.UILogic.Interoperability.Observation
                     observationResult.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID.Add(internalPatientId);
 
                     //National ID
-                    INTERNALPATIENTID internalNationalId = PatientIdentificationSegment.getInternalPatientIdNationalId(patientMessage);
-                    if (internalNationalId != null)
+                    if (!String.IsNullOrWhiteSpace(patientMessage.NATIONAL_ID) && patientMessage.NATIONAL_ID != "99999999")
                     {
+                        INTERNALPATIENTID internalNationalId = PatientIdentificationSegment.getInternalPatientIdNationalId(patientMessage);
                         observationResult.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID.Add(internalNationalId);
                     }
 
@@ -153,7 +153,34 @@ namespace IQCare.CCC.UILogic.Interoperability.Observation
                     PatientVitalsMessage patientVitals = patientVitalsMessage.GetPatientVitalsMessageByPatientIdPatientMasterVisitId(patientId, patientMasterVisitId);
                     if (patientVitals != null)
                     {
-                        
+                        OBSERVATION_RESULT observationHeight = new OBSERVATION_RESULT()
+                        {
+                            OBSERVATION_IDENTIFIER = "START_HEIGHT",
+                            OBSERVATION_SUB_ID = "",
+                            CODING_SYSTEM = "",
+                            VALUE_TYPE = "NM",
+                            OBSERVATION_VALUE = patientVitals.Height.ToString(),
+                            UNITS = patientVitals.HeightUnits,
+                            OBSERVATION_RESULT_STATUS = "F",
+                            OBSERVATION_DATETIME = patientVitals.VisitDate,
+                            ABNORMAL_FLAGS = "N"
+                        };
+
+                        OBSERVATION_RESULT observationWeight = new OBSERVATION_RESULT()
+                        {
+                            OBSERVATION_IDENTIFIER = "START_WEIGHT",
+                            OBSERVATION_SUB_ID = "",
+                            CODING_SYSTEM = "",
+                            VALUE_TYPE = "NM",
+                            OBSERVATION_VALUE = patientVitals.Weight.ToString(),
+                            UNITS = patientVitals.WeightUnits,
+                            OBSERVATION_RESULT_STATUS = "F",
+                            OBSERVATION_DATETIME = patientVitals.VisitDate,
+                            ABNORMAL_FLAGS = "N"
+                        };
+
+                        observationResult.OBSERVATION_RESULT.Add(observationHeight);
+                        observationResult.OBSERVATION_RESULT.Add(observationWeight);
                     }
                 }
 

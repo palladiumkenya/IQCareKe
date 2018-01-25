@@ -140,10 +140,10 @@ namespace BusinessProcess.CCC.visit
                     patientVisit.Status = 2;
                     patientVisit.End = DateTime.Now;
                     patientVisit.Active = true;
-                    patientVisit.VisitDate = visitDate;
-                    patientVisit.VisitScheduled = visitSchedule;
-                    patientVisit.VisitBy = visitBy;
-                    patientVisit.VisitType = visitType;
+                    //patientVisit.VisitDate = visitDate;
+                    //patientVisit.VisitScheduled = visitSchedule;
+                    //patientVisit.VisitBy = visitBy;
+                    //patientVisit.VisitType = visitType;
 
                     unitOfWork.PatientMasterVisitRepository.Update(patientVisit);
                     Result = unitOfWork.Complete();

@@ -1640,7 +1640,7 @@
                     //console.log(response.d);
                     var data = JSON.parse(response.d);
                     //window.familyMembers = data;
-                    console.log(data);
+                    //console.log(data);
                     for (var i = 0, len = data.length; i < len; i++) {
                         arrayReturn.push(
                             [data[i].EnrollmentNumber, data[i].FirstName, data[i].MiddleName, data[i].LastName,

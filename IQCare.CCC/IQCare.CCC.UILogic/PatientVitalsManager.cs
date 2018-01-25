@@ -42,7 +42,8 @@ namespace IQCare.CCC.UILogic
                     EntityId = vitalsId,
                     MessageType = MessageType.ObservationResult,
                     EventOccurred = "Observation Result Unsolicited = ",
-                    FacilityId = facilityId
+                    FacilityId = facilityId,
+                    ObservationType = ObservationType.Vitals
                 };
 
                 Publisher.RaiseEventAsync(this, args).ConfigureAwait(false);

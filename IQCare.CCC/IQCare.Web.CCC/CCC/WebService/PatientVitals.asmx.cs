@@ -6,6 +6,7 @@ using Application.Presentation;
 using Entities.CCC.Triage;
 using Interface.CCC;
 using IQCare.CCC.UILogic;
+using IQCare.CCC.UILogic.Triage;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -85,6 +86,14 @@ namespace IQCare.Web.CCC.WebService
             var patientVitalsManager = new PatientVitalsManager();
             int patient = Convert.ToInt32(Session["PatientPK"].ToString());
             return patientVitalsManager.GetByPatientId(patient);
+        }
+
+        [WebMethod(EnableSession = true)]
+        public PregnancyOutcomeLookup GetPatientPregnancyOutcomeLookup()
+        {
+            int patient = Convert.ToInt32(Session["PatientPK"].ToString());
+            PregnancyOutcomeLookupManager pregnancyOutcome = new PregnancyOutcomeLookupManager();
+            return pregnancyOutcome.GetLastPregnancyOutcomeLookup(patient);
         }
     }
 }

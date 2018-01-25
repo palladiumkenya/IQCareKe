@@ -15,21 +15,22 @@
                 <label class="control-label pull-left text-info">Patient Appointment Summary </label>
 
             </div>
-            <table class="table table-hover" id="tblAppointment" clientidmode="Static" runat="server">
-                <thead>
-                    <tr class="active">
-                        <th><span class="text-primary" aria-hidden="true">#</span></th>
-                        <th><span class="text-primary" aria-hidden="true">Appointment Date</span> </th>
-                        <th><span class="text-primary" aria-hidden="true">Service Area</span> </th>
-                        <th><span class="text-primary" aria-hidden="true">Reason</span> </th>
-                        <th><span class="text-primary" aria-hidden="true">Description</span> </th>
-                        <th><span class="text-primary" aria-hidden="true">Differetiated Care</span> </th>
-                        <th><span class="text-primary" aria-hidden="true">Status</span> </th>
-                    </tr>
+            
+            <table class="table table-hover" id="tblAppointment">
+                <thead class="thead-default">
+                <tr>
+                    <th><span class="text-primary" aria-hidden="true">#</span></th>
+                    <th><span class="text-primary" aria-hidden="true">Appointment Date</span> </th>
+                    <th><span class="text-primary" aria-hidden="true">Service Area</span> </th>
+                    <th><span class="text-primary" aria-hidden="true">Reason</span> </th>
+                    <th><span class="text-primary" aria-hidden="true">Differetiated Care</span> </th>
+                    <th><span class="text-primary" aria-hidden="true">Status</span> </th>
+                </tr>
+
                 </thead>
-                <tbody>
-                </tbody>
+
             </table>
+
         </div>
         <div class="col-md-12">
                 <asp:LinkButton runat="server" ID="AddAppointment" ClientIDMode="Static" OnClientClick="return false" CssClass=" btn btn-info btn-lg fa fa-plus-circle"> Add Appointment</asp:LinkButton>
@@ -41,6 +42,8 @@
         $(document).ready(function () {
             var patientId = "<%=PatientId%>";
             jQuery.support.cors = true;
+            var arrayAppointments = [];
+
             $.ajax(
             {
                 type: "POST",
@@ -51,20 +54,38 @@
                 cache: false,
                 success: function (response) {
                     var itemList = response.d;
-                    var table = '';
-                    itemList.forEach(function (item, i) {
-                        n = i + 1;
-                        table += '<tr><td style="text-align: left">' + n + '</td><td style="text-align: left">' + moment(item.AppointmentDate).format('DD-MMM-YYYY') + '</td><td style="text-align: left">' + item.ServiceArea + '</td><td style="text-align: left">' + item.Reason + '</td><td style="text-align: left">' + item.Description + '</td><td style="text-align: left">' + item.DifferentiatedCare + '</td><td style="text-align: left">' + item.Status + '</td></tr>';
-                    });
-
-                    $('#tblAppointment').append(table);
-
+                    //console.log(itemList);
+                    for (var i = 0, len = itemList.length; i < len; i++) {
+                        //console.log(itemList[i]);
+                        arrayAppointments.push(
+                            [
+                                i,
+                                moment(itemList[i].AppointmentDate).format('DD-MMM-YYYY'),
+                                itemList[i].ServiceArea,
+                                itemList[i].Reason,
+                                itemList[i].DifferentiatedCare,
+                                itemList[i].Status
+                            ]
+                        );
+                    }
+                    initialiseDataTable(arrayAppointments);
                 },
 
                 error: function (msg) {
                     //alert(msg.responseText);
                 }
             });
+
+            function initialiseDataTable(data) {
+                $("#tblAppointment").dataTable().fnDestroy();
+                tableAppointments = $('#tblAppointment').DataTable({
+                    "aaData": data,
+                    paging: true,
+                    searching: true
+                });
+            }
+
+
             $("#btnClose").click(function () {
                 window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>';
             });

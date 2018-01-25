@@ -73,6 +73,7 @@ namespace DataAccess.CCC.Repository
         private IPatientRegistrationLookupRepository _patientRegistrationLookupRepository;
         private ITestingSummaryStatisticsRepository _testingSummaryStatisticsRepository;
         private IPatientStabilitySummaryRepository _patientStabilitySummaryRepository;
+        private IPregnancyOutcomeLookupRepository _pregnancyOutcomeLookupRepository;
 
         /* visit */
         private IPatientMasterVisitRepository _patientMasterVisitRepository;
@@ -192,6 +193,15 @@ namespace DataAccess.CCC.Repository
             {
                 return _patientAppointmentMessageRepository ?? (_patientAppointmentMessageRepository =
                            new PatientAppointmentMessageRepository((LookupContext) _context));
+            }
+        }
+
+        public IPregnancyOutcomeLookupRepository PregnancyOutcomeLookupRepository
+        {
+            get
+            {
+                return _pregnancyOutcomeLookupRepository ?? (_pregnancyOutcomeLookupRepository =
+                           new PregnancyOutcomeLookupRepository((LookupContext) _context));
             }
         }
 

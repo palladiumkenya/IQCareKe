@@ -125,6 +125,7 @@
     <Compile Include="Tb\IPatientIpt.cs" />
     <Compile Include="Tb\IPatientIptWorkup.cs" />
     <Compile Include="Tb\IPatientIcfAction.cs" />
+    <Compile Include="Triage\IPregnancyOutcomeLookupManager.cs" />
     <Compile Include="Visit\IPatientEncounterManager.cs" />
     <Compile Include="Visit\IPatientIdentifierManager.cs" />
     <Compile Include="Visit\IPatientLabOrderManager.cs" />

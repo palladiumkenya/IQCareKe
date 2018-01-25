@@ -4,6 +4,7 @@ using Entities.CCC.Lookup;
 using Entities.CCC.Triage;
 using Interface.CCC.Lookup;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Services;
@@ -54,7 +55,7 @@ namespace IQCare.Web.CCC.WebService
         private string Msg { get; set; }
         private int Result { get; set; }
 
-        [WebMethod]
+        [WebMethod(EnableSession = true)]
         public string AddpatientVitals(int patientId, int bpSystolic, int bpDiastolic, decimal heartRate, decimal height,
             decimal muac, int patientMasterVisitId, decimal respiratoryRate, decimal spo2, decimal tempreture,
             decimal weight, decimal bmi, decimal headCircumference,string bmiz,string weightForAge,string weightForHeight,DateTime visitDate)
@@ -368,9 +369,10 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod]
-        public List<PatientAppointmentDisplay> GetPatientAppointments(string patientId)
+        public IEnumerable<PatientAppointmentDisplay> GetPatientAppointments(string patientId)
         {
             List<PatientAppointmentDisplay> appointmentsDisplay = new List<PatientAppointmentDisplay>();
+            IEnumerable<PatientAppointmentDisplay> listAppointments = new List<PatientAppointmentDisplay>();
             var appointments = new List<PatientAppointment>();
             var bluecardAppointments = new List<BlueCardAppointment>();
             try
@@ -390,14 +392,15 @@ namespace IQCare.Web.CCC.WebService
                     PatientAppointmentDisplay appointmentDisplay = MapBluecardappointments(appointment);
                     appointmentsDisplay.Add(appointmentDisplay);
                 }
-                appointmentsDisplay.OrderByDescending(n => n.AppointmentDate);
+
+                listAppointments = appointmentsDisplay.OrderByDescending(n => n.AppointmentDate);
 
             }
             catch (Exception e)
             {
                 Msg = e.Message;
             }
-            return appointmentsDisplay;
+            return listAppointments;
         }
 
         [WebMethod]
