@@ -1,76 +1,97 @@
-
-
-ALTER VIEW [dbo].[API_DrugPrescription]
+/****** Object:  StoredProcedure [dbo].[sp_getAllViralLoads] ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_getAllViralLoads]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_getAllViralLoads]
+GO
+-- ================================================
+-- Template generated from Template Explorer using:
+-- Create Procedure (New Menu).SQL
+--
+-- Use the Specify Values for Template Parameters 
+-- command (Ctrl-Shift-M) to fill in the parameter 
+-- values below.
+--
+-- This block of comments will not be included in
+-- the definition of the procedure.
+-- ================================================
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		John Macharia
+-- Create date: 23rd Jan 2018
+-- Description:	Get a patients viral loads
+-- =============================================
+create PROCEDURE sp_getAllViralLoads 
+	-- Add the parameters for the stored procedure here
+	@PatientId int = null
 AS
-SELECT        
-  o.Ptn_pk as ptnpk,
-  (SELECT top 1 Id FROM Patient WHERE ptn_pk=o.ptn_pk) as PatientId,
-  o.PatientMasterVisitId,
-	CASE (SELECT top 1 ItemName FROM LookupItemView WHERE MasterName='PatientType' AND ItemId=p.PatientType)
-		WHEN 'New' THEN CONCAT((SELECT top 1 f.NationalId FROM mst_Facility f WHERE f.DeleteFlag=0), '-'+i.IdentifierValue)
-		ELSE i.IdentifierValue
-	END  [ID],
-	(SELECT top 1 f.NationalId FROM mst_Facility f WHERE f.DeleteFlag=0) [SENDING_FACILITY],
-	ISNULL((SELECT gn.IdentifierValue FROM vw_PersonGodsNumber gn WHERE gn.PatientId=i.patientId),'') EXT_ID,
-	'GODS_NUMBER' [EXT_IDENTIFIER_TYPE],
-	 'MPI' [EXT_ASSIGNING_AUTHOURITY],
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
 
-  'CCC_NUMBER' [IDENTIFIER_TYPE],
-  'CCC' [ASSIGNING_AUTHORITY],
-  (SELECT Name FROM mst_Decode WHERE ID=o.ProgID) INDICATION,
-  '' TREATMENT_INSTRUCTION,
-   CAST(DECRYPTBYKEY(p.NationalId) AS VARCHAR(50))  [ID2],
-  'NATIONAL_ID' [IDENTIFIER_TYPE2],
-  'GOK' [ASSIGNING_AUTHORITY2],
-  o.ptn_pharmacy_pk,
-  CAST(DECRYPTBYKEY(g.FirstName) AS VARCHAR(50))  [FIRST_NAME],
-   CAST(DECRYPTBYKEY(g.MidName) AS VARCHAR(50))  [MIDDLE_NAME],
-   CAST(DECRYPTBYKEY(g.LastName) AS VARCHAR(50))  [LAST_NAME],
-  o.OrderedByDate [TRANSACTION_DATETIME],
-  'CA' [ORDER_CONTROL],
-  o.ptn_pharmacy_pk [NUMBER],
-  'IQCARE' [ENTITY],
-  o.OrderedByDate [PHARMACY_ORDER_DATE],
-  'CA' [ORDER_STATUS],
-  (SELECT CAST(DECRYPTBYKEY(FirstName) AS VARCHAR(50)) FROM mst_user u WHERE u.UserID=o.OrderedBy) [ORDERING_PHYSICIAN_FIRST_NAME],
-  (SELECT CAST(DECRYPTBYKEY(LastName) AS VARCHAR(50)) FROM mst_user u WHERE u.UserID=o.OrderedBy) [ORDERING_PHYSICIAN_LAST_NAME],
-  d.PatientInstructions[NOTES],
-  case 
-     when d.Drug_Pk IN(SELECT Drug_Pk FROM lnk_DrugGeneric g WHERE g.GenericID IN(SELECT GenericID FROM lnk_DrugTypeGeneric t WHERE t.DrugTypeId=37)) THEN (SELECT ItemName FROM LookupItemView WHERE ItemId=a.RegimenId) --(SELECT g.GenericID FROM lnk_DrugGeneric g where g.Drug_pk= d.Drug_Pk AND g.GenericID IN(SELECT t.Drug_pk FROM lnk_DrugTypeGeneric t WHERE DrugTypeId=37)) THEN '' -- d.Drug_PK IN IN(SELECT top 1 mst_Drug m WHERE m.Drug_Pk IN()WHERE -- k.GenericId FROM lnk_DrugTypeGeneric k WHERE k.DrugTypeId=37) then (SELECT top 1 l.ItemName  FROM LookupItemView l WHERE ItemId=a.RegimenId)
-	 ELSE	
-	 (SELECT GenericName FROM mst_Generic m WHERE m.GenericID IN(SELECT g.GenericID FROM lnk_DrugGeneric g where g.Drug_pk= d.Drug_pk))
-  END [DRUG_NAME],
- 'NASCOP_CODES' [CODING_SYSTEM] ,
- (SELECT StrengthName FROM mst_Strength WHERE StrengthId IN(SELECT top 1 StrengthId FROM lnk_DrugStrength WHERE DrugId=d.Drug_Pk))[STRENGTH],
- d.SingleDose [DOSAGE],
- (SELECT top 1 f.Name FROM mst_Frequency f WHERE f.ID=d.FrequencyID)[FREQUENCY],
- d.Duration [DURATION],
- d.OrderedQuantity [QUANTITY_PRESCRIBED],
- o.PharmacyNotes [PRESCRIPTION_NOTES]
-  FROM dtl_PatientPharmacyOrder d
-	 INNER JOIN 
-  ord_PatientPharmacyOrder o
-  ON
-  o.ptn_pharmacy_pk=d.ptn_pharmacy_pk
-  INNER JOIN Patient p
-  ON
-  p.ptn_pk=o.Ptn_pk
-  INNER JOIN Person g
-  ON
-  g.Id=p.PersonId
-  LEFT JOIN 
-  ARVTreatmentTracker a
-  ON
-  a.PatientMasterVisitId=o.PatientMasterVisitId AND a.PatientId=o.PatientId
-  INNER JOIN 
-  PatientIdentifier i
-  ON
-  i.PatientId=p.Id WHERE i.IdentifierTypeId=1 AND o.PatientMasterVisitId IS NOT NULL
-  
+    declare @ptnpk int = (select top 1 ptn_pk from patient where id = @PatientId)
 
+	select distinct * from (
+	select a.ptn_pk,a.orderdate,orderstatus,parameterid,
+	coalesce(
+	case when resultvalue is not null then resultvalue else null end,
+	case when undetectable = 1 then 50 else null end
+	) resultvalue,
+	b.deleteflag,c.resultdate 
+	from ord_laborder a inner join dtl_LabOrderTestResult b on a.id = b.laborderid
+	inner join dtl_LabOrderTest c on a.id = c.laborderid
+	where b.parameterid in (3,107) and a.ptn_pk=@ptnpk ) VLs
+	where VLs.resultvalue is not null
+END
+GO
 
+/****** Object:  StoredProcedure [dbo].[sp_getAllPatientVitals] ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_getAllPatientVitals]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_getAllPatientVitals]
+GO
+-- ================================================
+-- Template generated from Template Explorer using:
+-- Create Procedure (New Menu).SQL
+--
+-- Use the Specify Values for Template Parameters 
+-- command (Ctrl-Shift-M) to fill in the parameter 
+-- values below.
+--
+-- This block of comments will not be included in
+-- the definition of the procedure.
+-- ================================================
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		John Macharia
+-- Create date: 23rd Jan 2018
+-- Description:	Get all vitals from all modules
+-- =============================================
+create PROCEDURE sp_getAllPatientVitals
+	-- Add the parameters for the stored procedure here
+	@PatientId int = null
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
 
-
+    -- Insert statements for procedure here
+	select top 12 * from (
+	select patientid, height,[weight],bmi, createdate from patientvitals where patientid = @PatientId and deleteflag=0
+	union
+	select b.id patientid, a.height,a.[weight], cast(isnull(a.[weight]/((a.height/100)*(a.height/100)),0) as decimal(36,2)) bmi, c.visitdate from dtl_patientvitals a inner join patient b on a.ptn_pk = b.ptn_pk 
+	inner join ord_visit c on a.visit_pk = c.visit_id
+	where b.id = @PatientId) vitals
+	where vitals.height > 0 
+	and vitals.[weight] > 0 and vitals.createdate > dateadd(year, -1, getdate())
+	order by vitals.createdate desc
+	
+END
 GO
 
 
