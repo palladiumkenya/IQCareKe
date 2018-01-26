@@ -4,9 +4,11 @@ using Entities.CCC.Encounter;
 using Interface.CCC.Visit;
 using System;
 using System.Collections.Generic;
+using System.Web;
 using System.Web.Script.Serialization;
 using Entities.CCC.Lookup;
 using Interface.CCC.Lookup;
+using IQCare.CCC.UILogic.Visit;
 
 
 namespace IQCare.CCC.UILogic
@@ -29,9 +31,12 @@ namespace IQCare.CCC.UILogic
     public class PatientLabOrderManager
     {
         private string Msg { get; set; }
+        private int Result { get; set; }
+        private int Id { get; set; }
         IPatientLabOrderManager _mgr = (IPatientLabOrderManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientLabOrdermanager, BusinessProcess.CCC");
         ILookupManager _lookupTest = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
         private readonly IPatientVisitManager _visitManager = (IPatientVisitManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientVisit, BusinessProcess.CCC");
+        PatientEncounterManager _patientEncounterManager=new PatientEncounterManager();
 
         public void savePatientLabOrder(int patientID, int patient_Pk, int userId, int facilityID, int moduleId, int patientMasterVisitId, string labOrderDate, string orderNotes, string patientLabOrder)
         {
@@ -106,7 +111,11 @@ namespace IQCare.CCC.UILogic
                         ResultDate= orderDate
                     };
 
-                    _mgr.AddPatientLabTracker(labTracker);
+                    Result=  _mgr.AddPatientLabTracker(labTracker);
+                    if (Result > 0)
+                    {
+                      Id=  _patientEncounterManager.AddpatientEncounter(patientID, patientMasterVisitId, _patientEncounterManager.GetPatientEncounterId("EncounterType", "lab-encounter".ToLower()),205,userId);
+                    }
                     //add to dtlresults
 
                     List<LookupTestParameter> _parameters = _lookupTest.GetTestParameter(t.LabNameId);

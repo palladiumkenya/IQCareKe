@@ -12,6 +12,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Entities.Administration;
 using Entities.CCC.Lookup;
+using IQCare.CCC.UILogic.Visit;
 using IQCare.Events;
 using static Entities.CCC.Encounter.PatientEncounter;
 
@@ -26,11 +27,21 @@ namespace IQCare.CCC.UILogic
         public int savePatientEncounterPresentingComplaints(string patientMasterVisitID, string patientID, string serviceID, string VisitDate, string VisitScheduled, string VisitBy, string anyComplaints, string Complaints, int TBScreening, int NutritionalStatus, int userId, string adverseEvent, string presentingComplaints)
         {
             IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
+            PatientEncounterManager patientEncounterManager=new PatientEncounterManager();
+
             JavaScriptSerializer parser = new JavaScriptSerializer();
+
             var advEvent = parser.Deserialize<List<AdverseEvents>>(adverseEvent);
             var pComplaints = parser.Deserialize<List<PresentingComplaints>>(presentingComplaints);
             int val = patientEncounter.savePresentingComplaints(patientMasterVisitID, patientID, serviceID,VisitDate,VisitScheduled,VisitBy, anyComplaints, Complaints, TBScreening, NutritionalStatus, userId, advEvent, pComplaints);
-            return val;
+
+            //Set the Visit Encounter Here
+
+            if (val > 0)
+            {
+              result=  patientEncounterManager.AddpatientEncounter(Convert.ToInt32(patientID), Convert.ToInt32(patientMasterVisitID), patientEncounterManager.GetPatientEncounterId("EncounterType", "ccc-encounter".ToLower()), 203, userId);
+            }
+            return (result > 0) ? val : 0;
         }
 
         public int savePatientEncounterTS(string patientMasterVisitID, string patientID, string serviceID, string VisitDate, string VisitScheduled, string VisitBy, int userId)
@@ -216,7 +227,9 @@ namespace IQCare.CCC.UILogic
             string regimenText, string prescriptionDate, string dispensedDate)
         {
             IPatientPharmacy patientEncounter = (IPatientPharmacy)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientPharmacy, BusinessProcess.CCC");
+            PatientEncounterManager patientEncounterManager=new PatientEncounterManager();
             JavaScriptSerializer parser = new JavaScriptSerializer();
+            int val=0;
             var drugPrescription = parser.Deserialize<List<DrugPrescription>>(prescription);
 
             string RegimenType = "";
@@ -250,7 +263,12 @@ namespace IQCare.CCC.UILogic
                 };
                 Publisher.RaiseEventAsync(this, arg).ConfigureAwait(false); // --
             }
-            return result;
+            if (result > 0)
+            {
+               val= patientEncounterManager.AddpatientEncounter(Convert.ToInt32(PatientId),Convert.ToInt32(PatientMasterVisitID), patientEncounterManager.GetPatientEncounterId("EncounterType", "Pharmacy-encounter".ToLower()),204, Convert.ToInt32(UserID));
+            }
+            return (val > 0) ? result : 0;
+           // return result;
         }
 
         public void EncounterHistory(TreeView TreeViewEncounterHistory, string patientID)
