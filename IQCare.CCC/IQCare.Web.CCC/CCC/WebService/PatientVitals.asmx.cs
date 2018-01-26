@@ -89,6 +89,16 @@ namespace IQCare.Web.CCC.WebService
             return patientVitalsManager.GetByPatientId(patient);
         }
 
+
+        [WebMethod(EnableSession = true)]
+        public string GetCurrentPatientVitalsByPatientId()
+        {
+            var patientVitalsManager = new PatientVitalsManager();
+            int patient = Convert.ToInt32(Session["PatientPK"].ToString());
+           var vitals=  patientVitalsManager.GetByPatientId(patient);
+            return new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(vitals);
+        }
+
         [WebMethod(EnableSession = true)]
         public PregnancyOutcomeLookup GetPatientPregnancyOutcomeLookup()
         {

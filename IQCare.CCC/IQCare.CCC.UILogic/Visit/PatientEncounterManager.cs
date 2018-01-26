@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Web;
 using Application.Presentation;
 using Entities.CCC.Visit;
 using Interface.CCC.Visit;
@@ -10,17 +11,21 @@ namespace IQCare.CCC.UILogic.Visit
     {
         private readonly IPatientEncounterManager _patientEncounterManager = (IPatientEncounterManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientEncounterManager, BusinessProcess.CCC");
 
-        public int AddpatientEncounter(PatientEncounter patientEncounter)
+        public int AddpatientEncounter(int patientId,int patientMasterVisitId,int encounterTypeId,int serviceId,int userId)
         {
             try
             {
                 PatientEncounter patientVisitEncounter = new PatientEncounter()
                 {
-                    PatientId = patientEncounter.PatientId,
-                    EncounterTypeId = patientEncounter.EncounterTypeId,
-                    PatientMasterVisitId = patientEncounter.PatientMasterVisitId
+                    PatientId = patientId,
+                    EncounterStartTime = DateTime.Now,
+                    EncounterEndTime = DateTime.Now,
+                    ServiceAreaId = serviceId,
+                    EncounterTypeId = encounterTypeId,
+                    PatientMasterVisitId = patientMasterVisitId,
+                    CreatedBy = userId
 
-                };
+            };
                 return _patientEncounterManager.AddpatientEncounter(patientVisitEncounter);
             }
             catch (Exception e)
@@ -93,6 +98,18 @@ namespace IQCare.CCC.UILogic.Visit
                 Console.WriteLine(e);
                 throw new Exception(e.Message);
             }
+        }
+
+        public int GetPatientEncounterId(string masterName,string itemName)
+        {
+            int encounterId = 0;
+            LookupLogic lookupLogic=new LookupLogic();
+            var encounters = lookupLogic.GetItemIdByGroupAndItemName(masterName, itemName);
+            foreach (var encounter in encounters)
+            {
+                encounterId = encounter.ItemId;
+            }
+            return encounterId;
         }
     }
 }

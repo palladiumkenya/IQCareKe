@@ -2,6 +2,7 @@
 using Entities.CCC.Appointment;
 using Entities.CCC.Lookup;
 using Entities.CCC.Triage;
+using Entities.CCC.Visit;
 using Interface.CCC.Lookup;
 using System;
 using System.Collections;
@@ -22,6 +23,7 @@ using System.Web.Script.Serialization;
 using Entities.CCC.Encounter;
 using Entities.CCC.Enrollment;
 using IQCare.CCC.UILogic.Enrollment;
+using IQCare.CCC.UILogic.Visit;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -62,8 +64,8 @@ namespace IQCare.Web.CCC.WebService
         {
             try
             {
-                int facilityId = Convert.ToInt32(Session["AppPosID"]);
-
+                PatientEncounterManager patientEncounterManager=new PatientEncounterManager();
+               
                 PatientVital patientVital = new PatientVital()
                 {
                     PatientId = patientId,
@@ -85,10 +87,15 @@ namespace IQCare.Web.CCC.WebService
                     WeightForHeight = weightForHeight,
                 };
                 var vital = new PatientVitalsManager();
-                Result = vital.AddPatientVitals(patientVital, facilityId);
+                Result = vital.AddPatientVitals(patientVital);
+                int userId = Convert.ToInt32(Session["AppUserId"]);
+
                 if (Result > 0)
                 {
-                    Msg = "Patient Vitals Added Successfully!";
+                    Result = patientEncounterManager.AddpatientEncounter(patientId,patientMasterVisitId,patientEncounterManager.GetPatientEncounterId("EncounterType", "Triage-encounter".ToLower()),204, userId);
+                    
+                    if (Result > 0) { Msg = "Patient Vitals Added Successfully!"; }
+
                 }
             }
             catch (Exception e)
