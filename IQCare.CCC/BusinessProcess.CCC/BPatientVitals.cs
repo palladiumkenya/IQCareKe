@@ -5,6 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using DataAccess.CCC.Context;
 using DataAccess.CCC.Repository;
+using DataAccess.Entity;
+using DataAccess.Common;
+using System.Data;
+using System;
 
 namespace BusinessProcess.CCC
 {
@@ -105,6 +109,34 @@ namespace BusinessProcess.CCC
                                 .ToList();
                 unitOfWork.Dispose();
                 return vitals;
+            }
+        }
+
+        public List<PatientVital> GetAllPatientVitals(int patientId)
+        {
+            lock (this)
+            {
+                ClsObject PatientEncounter = new ClsObject();
+                ClsUtility.Init_Hashtable();
+                ClsUtility.AddParameters("@PatientId", SqlDbType.Int, patientId.ToString());
+
+                DataTable theDT = (DataTable)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_getAllPatientVitals", ClsUtility.ObjectEnum.DataTable);
+
+                List<PatientVital> list = new List<PatientVital>();
+
+                for (int i = 0; i < theDT.Rows.Count; i++)
+                {
+                    PatientVital pv = new PatientVital();
+                    pv.PatientId = Convert.ToInt32(theDT.Rows[i]["patientid"]);
+                    pv.Height = Convert.ToDecimal(theDT.Rows[i]["height"]);
+                    pv.Weight = Convert.ToDecimal(theDT.Rows[i]["weight"]);
+                    pv.BMI = Convert.ToDecimal(theDT.Rows[i]["bmi"]);
+                    pv.CreateDate = Convert.ToDateTime(theDT.Rows[i]["createdate"]);
+                    
+                    list.Add(pv);
+                }
+
+                return list;
             }
         }
 

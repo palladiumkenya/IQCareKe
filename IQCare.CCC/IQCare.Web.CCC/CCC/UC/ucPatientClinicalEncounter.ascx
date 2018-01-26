@@ -1355,7 +1355,7 @@
 
 					<div class="col-md-12">
 						<div class="col-md-2">
-							<button type="button" class="btn btn-info btn-sm pull-left" data-toggle="modal" data-target="#differentiatedModal">Stability Assessment</button>
+							<button type="button" id="btnStabilityAsessment" name="btnStabilityAsessment" class="btn btn-info btn-sm pull-left" data-toggle="modal" data-target="#differentiatedModal">Stability Assessment</button>
 						</div>
 
 						<div class="col-md-5">
@@ -1917,7 +1917,7 @@
 										<div class="col-md-4">
 											<div class="form-group">
 												<div class="col-md-12">
-													<label for="reason" class="control-label pull-left">Differentiated Care</label>
+													<label for="reason" class="control-label pull-left">Appointment Type</label>
 												</div>
 												<div class="col-md-12">
 													<asp:DropDownList runat="server" ID="DifferentiatedCare" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1" data-parsley-min-message="Select differentiated care" />
@@ -2195,6 +2195,27 @@
 			momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
 			//restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
 		});
+
+        /** stability assessment 
+         * /
+         
+
+        //btnStabilityAsessment
+	    $.ajax({
+	        type: "POST",
+            url: "../WebService/PatientEncounterService.asmx/PatientTreatmentDurationInMonths",
+	        data: "",
+	        contentType: "application/json; charset=utf-8",
+	        dataType: "json",
+	        success: function (response) {
+	            
+	        },
+	        error: function (response) {
+	            toastr
+	                .error("Error in Fetching Treatment start date " + response.d);
+	        }
+	    });*/
+
 
 		//populate options for ADverEvents;
 		var mastrName = 'AdverseEventOutcome';

@@ -58,7 +58,7 @@
     <Compile Include="PatientRegistration\PatientRegistrationDTO.cs" />
     <Compile Include="PharmacyEncorderOrderDto.cs" />
     <Compile Include="PlacerOrderNumberDto.cs" />
-    <Compile Include="PrescriptionDto.cs" />
+    <Compile Include="PrescriptionSourceDto.cs" />
     <Compile Include="Registration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViralLoadResultsDto.cs" />

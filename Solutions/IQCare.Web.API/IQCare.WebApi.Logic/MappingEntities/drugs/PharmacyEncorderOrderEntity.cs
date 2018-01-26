@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IQCare.WebApi.Logic.MappingEntities.drugs
 {
-   public class PharmacyEncorderOrderEntity
+   public class PHARMACY_ENCODED_ORDER
     {
 
         public string DRUG_NAME { get; set; }

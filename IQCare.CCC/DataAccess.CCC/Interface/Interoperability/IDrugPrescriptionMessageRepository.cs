@@ -3,7 +3,7 @@ using Entities.CCC.Interoperability;
 
 namespace DataAccess.CCC.Interface.Interoperability
 {
-    public interface IDrugPrescriptionMessageRepository :IRepository<DrugPrescriptionEntity>
+    public interface IDrugPrescriptionMessageRepository :IRepository<DrugPrescriptionSourceEntity>
     {
 
     }

@@ -99,6 +99,8 @@ namespace IQCare.Web.CCC.UC
 
                 }
 
+
+
                 if (diastolic < 1 & systolic < 1)
                 {
                     lblbloodpressure.Text = "<span class='label label-danger'> NOT TAKEN </span>";
@@ -108,25 +110,25 @@ namespace IQCare.Web.CCC.UC
                 {
 
 
-                    if (diastolic <= 80 & systolic <= 120)
+                    if (systolic<120  & diastolic<80)
                     {
-                        bpAnalysis = "<span class='label label-success'>" + Convert.ToString(systolic) + "/" + Convert.ToString(diastolic) + "mm[Hg] |Normal </span>";
+                        bpAnalysis = "<span class='label label-success'>" + Convert.ToString(systolic) + "/" + Convert.ToString(diastolic) + "mm[Hg] | Normal </span>";
                     }
-                    else if (diastolic > 85 & systolic > 140)
+                    else if (systolic >=120 | systolic<129 & diastolic <80)
                     {
-                        bpAnalysis = "<span class='label label-success'>" + Convert.ToString(systolic) + "/" + Convert.ToString(diastolic) + "mm[Hg]  | Normal </span>";
+                        bpAnalysis = "<span class='label label-success'>" + Convert.ToString(systolic) + "/" + Convert.ToString(diastolic) + "mm[Hg]  | Elavated </span>";
                     }
-                    else if (diastolic > 90 & systolic > 140)
+                    else if (systolic>130 ||systolic<139 && diastolic>80 || diastolic <89)
                     {
-                        bpAnalysis = "<span class='label label-warning'> " + Convert.ToString(systolic) + "/" + Convert.ToString(diastolic) + "mm[Hg]  | Border Line</span>";
+                        bpAnalysis = "<span class='label label-warning'> " + Convert.ToString(systolic) + "/" + Convert.ToString(diastolic) + "mm[Hg]  | HYPERTENSION STAGE 1</span>";
                     }
-                    else if (diastolic > 90 & systolic > 160)
+                    else if (systolic>140 && diastolic>90)
                     {
-                        bpAnalysis = "<span class='label label-danger'> " + Convert.ToString(systolic) + "/" + Convert.ToString(diastolic) + " |mm[Hg]  Suspect Hypertension</span>";
+                        bpAnalysis = "<span class='label label-danger'> " + Convert.ToString(systolic) + "/" + Convert.ToString(diastolic) + " |mm[Hg] | HYPERTENSION STAGE 2</span>";
                     }
-                    else
+                    else if(systolic>180 && diastolic>120)
                     {
-                        bpAnalysis = "<span class='label label-warning'> " + Convert.ToString(systolic) + "/" + Convert.ToString(diastolic) + " |mm[Hg]  </span>";
+                        bpAnalysis = "<span class='label label-warning'> " + Convert.ToString(systolic) + "/" + Convert.ToString(diastolic) + " |mm[Hg] | HYPERTENSIVE CRISIS </span>";
                     }
 
                     lblbloodpressure.Text = bpAnalysis;

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using IQCare.DTO;
 using IQCare.WebApi.Logic.MappingEntities;
-using IQCare.WebApi.Logic.MappingEntities.drugs;
+//using IQCare.WebApi.Logic.MappingEntities.drugs;
 
 namespace IQCare.WebApi.Logic.DtoMapping
 {
@@ -109,9 +109,10 @@ namespace IQCare.WebApi.Logic.DtoMapping
             throw new NotImplementedException();
         }
 
-        public PrescriptionDto DrugPrescriptionRaised(DrugPrescriptionEntity entity)
+        public PrescriptionSourceDto DrugPrescriptionRaised(DrugPrescriptionEntity entity)
         {
 
+            // Patient Identification
             var internalIdentifiers = new List<INTERNAL_PATIENT_ID>();
 
             foreach (var identifier in entity.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID)
@@ -121,12 +122,12 @@ namespace IQCare.WebApi.Logic.DtoMapping
                     IDENTIFIER_TYPE = identifier.IDENTIFIER_TYPE,
                     ID = identifier.ID,
                     ASSIGNING_AUTHORITY = identifier.ASSIGNING_AUTHORITY
-
                 };
-                internalIdentifiers.Add(internalIdentity);
+
+                internalIdentifiers.Add(internalIdentity); 
             }
 
-            var orderEncorder = new List<PHARMACY_ENCODED_ORDER>();
+            var pharmacyEncodedOrders = new List<PHARMACY_ENCODED_ORDER>();
 
             foreach (var order in entity.PHARMACY_ENCODED_ORDER)
             {
@@ -143,7 +144,7 @@ namespace IQCare.WebApi.Logic.DtoMapping
                     PHARMACY_ORDER_DATE =Convert.ToDateTime(order.PHARMACY_ORDER_DATE),
                     TREATMENT_INSTRUCTION = order.PRESCRIPTION_NOTES
                 };
-                orderEncorder.Add(prescriptionOrder);
+                pharmacyEncodedOrders.Add(prescriptionOrder);
             }
 
             var patientName = new PATIENT_NAME()
@@ -154,7 +155,7 @@ namespace IQCare.WebApi.Logic.DtoMapping
             };
 
 
-            var drugOrder = new PrescriptionDto()
+            var prescriptionSourceDto = new PrescriptionSourceDto()
             {
                 MESSAGE_HEADER = 
                 {
@@ -203,9 +204,9 @@ namespace IQCare.WebApi.Logic.DtoMapping
                     TRANSACTION_DATETIME = Convert.ToDateTime(entity.COMMON_ORDER_DETAILS.TRANSACTION_DATETIME),
                     NOTES = entity.COMMON_ORDER_DETAILS.NOTES.ToString()
                 },
-                PHARMACY_ENCODED_ORDER = orderEncorder 
+                PHARMACY_ENCODED_ORDER = pharmacyEncodedOrders 
             };            
-            return drugOrder;
+            return prescriptionSourceDto;
         }
 
         public void DrugOrderCancel()
@@ -245,6 +246,7 @@ namespace IQCare.WebApi.Logic.DtoMapping
                     IdentifierType = identifier.IdentifierType,
                     AssigningAuthority = identifier.AssigningAuthority
                 };
+                
                 internalIdentifiers.Add(internalIdentity);
             }
 
@@ -436,5 +438,7 @@ namespace IQCare.WebApi.Logic.DtoMapping
             };
             return vlResultsDto;
         }
+
+
     }
 }

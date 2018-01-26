@@ -241,12 +241,12 @@ namespace IQCare.WebApi.Logic.MessageHandler
                 var drugPrescriptionMessage = new DrugPrescriptionMessage();
                 //DrugPrescriptionMessage drugPrescriptionMessage = new DrugPrescriptionMessage();
 
-                var prescriptionDtoPayLoad = drugPrescriptionMessage.GetPrescriptionMessage(messageEvent.PatientId,messageEvent.EntityId,messageEvent.PatientMasterVisitId);
+                var prescriptiondPrescriptionSourceEntitiesToDto = drugPrescriptionMessage.PreparePrescriptionSourceDto(messageEvent.PatientId,messageEvent.EntityId,messageEvent.PatientMasterVisitId);
 
-                if (prescriptionDtoPayLoad != null)
+                if (prescriptiondPrescriptionSourceEntitiesToDto != null)
                 {
 
-                    var prescriptionEntityPayLoad = _jsonEntityMapper.DrugPrescriptionRaised(prescriptionDtoPayLoad);
+                    var prescriptionEntityPayLoad = _jsonEntityMapper.DrugPrescriptionRaised(prescriptiondPrescriptionSourceEntitiesToDto);
 
                     string prescriptionJson = new JavaScriptSerializer().Serialize(prescriptionEntityPayLoad);
                     var apiOutbox = new ApiOutbox()

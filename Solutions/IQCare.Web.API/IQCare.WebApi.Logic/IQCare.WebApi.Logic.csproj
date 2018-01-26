@@ -77,6 +77,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\References\IQCare.Events.dll</HintPath>
     </Reference>
+    <Reference Include="IQCare.Web.Api">
+      <HintPath>..\..\..\References\net461\IQCare.Web.Api.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />

@@ -288,7 +288,7 @@ counselling session?</label>
                 });                   
                 } else {
                     $("#divsuccess").show('fast', function() {
-                        $("#success").append("ART Treatment Preparation Completed! | View Answers for the ART prep Questions");
+                        $("#success").append("ART Treatment Preparation Completed! | View Answers for the ART Treatment preparation Questions");
                        // disbale buttons
                         $("#btnPsychosocialCriterial").prop('disabled', true);
                         $("#btnSupportSystemCriteria").prop('disabled', true);
