@@ -24,7 +24,7 @@ namespace BusinessProcess.CCC
                 unitOfWork.PatientVitalsRepository.Add(p);
                 _result = unitOfWork.Complete();
                 unitOfWork.Dispose();
-                return _result;
+                return p.Id;
             }
      
         }

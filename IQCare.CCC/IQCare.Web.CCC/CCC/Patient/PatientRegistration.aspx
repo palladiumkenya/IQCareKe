@@ -21,22 +21,22 @@
 			<div class="wizard" data-initialize="wizard" id="myWizard">
 				 <div class="steps-container">
 					  <ul class="steps">
-						  <li data-step="1" data-name="profile" class="active">
+						  <li data-step="1" data-target="#step1" data-name="profile" class="active">
 							  <span class="badge">1</span>Patient Profile
 							  <span class="chevron"></span>
 						  </li>
 
-						  <li data-step="2" data-name="location">
+						  <li data-step="2" data-target="#step2" data-name="location">
 							  <span class="badge">2</span>Patient Location
 							  <span class="chevron"></span>
 						  </li>
 
-						  <li data-step="3" data-name="contacts">
+						  <li data-step="3" data-target="#step3" data-name="contacts">
 							  <span class="badge">3</span>Patient Contacts
 							  <span class="chevron"></span>
 						  </li>
 
-						  <li data-step="4" data-name="socialstatus">
+						  <li data-step="4" data-target="#step4" data-name="socialstatus">
 							  <span class="badge">4</span>Patient Population
 							  <span class="chevron"></span>
 						  </li>
@@ -650,11 +650,25 @@
 				});
 
 				$('#btnWizardPrev').on('click', function () {
-					$('#myWizard').wizard('previous');
+					//$('#myWizard').wizard('previous');
 				});
 				$('#btnWizardNext').on('click', function () {
 					$('#myWizard').wizard('next');
-				});
+                });
+
+                var wizardSteps = $('#myWizard>.steps>li').length;
+
+		        $('#myWizard').on('changed.fu.wizard', function (evt, item) {
+		            //var firstStep = (item.step === 1);
+		            //var lastStep = (item.step === wizardSteps);
+              //      console.log(item.step);
+		            //// update next button text if last step
+		            //var nextText = (lastStep) ? 'Save & Continue' : 'Next';
+              //      $('#btnWizardNext').text(nextText);
+
+		            //// disable back button if first step
+              //      $('#btnWizardPrev').attr('disabled', firstStep);
+		        });
 
 				//$('#keyPopulationCategories').multiselect();
 
@@ -1306,7 +1320,7 @@
 							$("#ctl00_IQCareContentPlaceHolder_TSContacts").val(patientDetails.ISContacts);
 							/*Key Population*/
 							//$('input[name="Population"]').value = patientDetails.population;
-							console.log(patientDetails.population);
+							//console.log(patientDetails.population);
 
 							/*if (patientDetails.population == "General Population") {
 								var d = document.getElementById("GenPopulation");

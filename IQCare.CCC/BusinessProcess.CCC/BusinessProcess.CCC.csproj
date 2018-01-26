@@ -124,6 +124,7 @@
     <Compile Include="Interoperability\BInteropPlacerValues.cs" />
     <Compile Include="Interoperability\BPatientAppointmentMessage.cs" />
     <Compile Include="Interoperability\BPatientMessage.cs" />
+    <Compile Include="Interoperability\BPatientVitalsMessage.cs" />
     <Compile Include="Interoperability\BViralLoadMessage.cs" />
     <Compile Include="Lookup\BFacilityListManager.cs" />
     <Compile Include="Lookup\BPatientBaselineLookupManager.cs" />
@@ -144,6 +145,7 @@
     <Compile Include="Triage\BPatientFamilyPlanningManager.cs" />
     <Compile Include="Triage\BPatientFamilyPlanningMethod.cs" />
     <Compile Include="Triage\BPatientPregnancyManager.cs" />
+    <Compile Include="Triage\BPregnancyOutcomeLookup.cs" />
     <Compile Include="Triage\PatientPregnancyIndicatorManager.cs" />
     <Compile Include="Tb\BPatientIcf.cs" />
     <Compile Include="Tb\BPatientIcfAction.cs" />

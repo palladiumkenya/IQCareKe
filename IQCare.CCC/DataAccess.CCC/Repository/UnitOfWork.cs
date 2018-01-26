@@ -73,6 +73,7 @@ namespace DataAccess.CCC.Repository
         private IPatientRegistrationLookupRepository _patientRegistrationLookupRepository;
         private ITestingSummaryStatisticsRepository _testingSummaryStatisticsRepository;
         private IPatientStabilitySummaryRepository _patientStabilitySummaryRepository;
+        private IPregnancyOutcomeLookupRepository _pregnancyOutcomeLookupRepository;
 
         /* visit */
         private IPatientMasterVisitRepository _patientMasterVisitRepository;
@@ -150,6 +151,7 @@ namespace DataAccess.CCC.Repository
         private IPatientAppointmentMessageRepository _patientAppointmentMessageRepository;
         private IInteropPlacerTypesRepository _interopPlacerTypesRepository;
         private IInteropPlacerValuesRepository _interopPlacerValuesRepository;
+        private IPatientVitalsMessageRepository _patientVitalsMessageRepository;
 
         public UnitOfWork(BaseContext context)
         {
@@ -191,6 +193,15 @@ namespace DataAccess.CCC.Repository
             {
                 return _patientAppointmentMessageRepository ?? (_patientAppointmentMessageRepository =
                            new PatientAppointmentMessageRepository((LookupContext) _context));
+            }
+        }
+
+        public IPregnancyOutcomeLookupRepository PregnancyOutcomeLookupRepository
+        {
+            get
+            {
+                return _pregnancyOutcomeLookupRepository ?? (_pregnancyOutcomeLookupRepository =
+                           new PregnancyOutcomeLookupRepository((LookupContext) _context));
             }
         }
 
@@ -684,6 +695,15 @@ namespace DataAccess.CCC.Repository
                 return _personGreenCardLookupRepository ??
                        (_personGreenCardLookupRepository =
                            new PersonGreenCardLookupRepository((GreencardContext) _context));
+            }
+        }
+
+        public IPatientVitalsMessageRepository PatientVitalsMessageRepository
+        {
+            get
+            {
+                return _patientVitalsMessageRepository ?? (_patientVitalsMessageRepository =
+                           new PatientVitalsMessageRepository((LookupContext) _context));
             }
         }
 

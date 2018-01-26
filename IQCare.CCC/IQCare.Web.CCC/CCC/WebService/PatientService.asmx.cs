@@ -5,6 +5,7 @@ using Entities.CCC.Triage;
 using Entities.CCC.Visit;
 using Interface.CCC.Lookup;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Services;
@@ -375,9 +376,10 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod]
-        public List<PatientAppointmentDisplay> GetPatientAppointments(string patientId)
+        public IEnumerable<PatientAppointmentDisplay> GetPatientAppointments(string patientId)
         {
             List<PatientAppointmentDisplay> appointmentsDisplay = new List<PatientAppointmentDisplay>();
+            IEnumerable<PatientAppointmentDisplay> listAppointments = new List<PatientAppointmentDisplay>();
             var appointments = new List<PatientAppointment>();
             var bluecardAppointments = new List<BlueCardAppointment>();
             try
@@ -397,14 +399,15 @@ namespace IQCare.Web.CCC.WebService
                     PatientAppointmentDisplay appointmentDisplay = MapBluecardappointments(appointment);
                     appointmentsDisplay.Add(appointmentDisplay);
                 }
-                appointmentsDisplay.OrderByDescending(n => n.AppointmentDate);
+
+                listAppointments = appointmentsDisplay.OrderByDescending(n => n.AppointmentDate);
 
             }
             catch (Exception e)
             {
                 Msg = e.Message;
             }
-            return appointmentsDisplay;
+            return listAppointments;
         }
 
         [WebMethod]

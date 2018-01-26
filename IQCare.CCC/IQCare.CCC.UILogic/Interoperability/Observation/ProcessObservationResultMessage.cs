@@ -1,5 +1,6 @@
 ﻿using IQCare.DTO;
 using IQCare.DTO.ObservationResult;
+using IQCare.Events;
 
 namespace IQCare.CCC.UILogic.Interoperability.Observation
 {
@@ -10,14 +11,16 @@ namespace IQCare.CCC.UILogic.Interoperability.Observation
             throw new System.NotImplementedException();
         }
 
-        public ObservationResultDTO GetObservation(int entityId, int observationType)
+        public ObservationResultDTO GetObservation(MessageEventArgs messageEvent)
         {
-            switch (observationType)
+            switch (messageEvent.ObservationType)
             {
-                case 0:
-                    return ProcessObservation.GetWHOStage(entityId);
+                case ObservationType.WhoStage:
+                    return ProcessObservation.GetWHOStage(messageEvent.EntityId);
+                case ObservationType.Vitals:
+                    return ProcessObservation.GetVitals(messageEvent.PatientId, messageEvent.PatientMasterVisitId);
                     default:
-                        return ProcessObservation.GetWHOStage(entityId);
+                        return ProcessObservation.GetWHOStage(messageEvent.EntityId);
             }
         }
 

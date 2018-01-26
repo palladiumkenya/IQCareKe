@@ -142,7 +142,12 @@ namespace IQCare.Web.CCC.UC
                 }
                 else
                 {
-                    NutritionStatus = LookupLogic.GetLookupNameById(thisPatient.NutritionStatus).ToString().ToUpper();
+                    string nutrition = LookupLogic.GetLookupNameById(thisPatient.NutritionStatus);
+                    if (!string.IsNullOrWhiteSpace(nutrition))
+                    {
+                        NutritionStatus = nutrition.ToUpper();
+                    }
+                    
                     lblnutritionstatus.Text = "<span class='label label-success'>" + NutritionStatus + "</span>";
                     //switch(NutritionStatus)
                     //{

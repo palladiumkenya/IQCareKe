@@ -82,6 +82,7 @@
     <Compile Include="Interoperability\IInteropPlacerValuesManager.cs" />
     <Compile Include="Interoperability\IPatientAppointmentMessageManager.cs" />
     <Compile Include="Interoperability\IPatientMessageManager.cs" />
+    <Compile Include="Interoperability\IPatientVitalsMessageManager.cs" />
     <Compile Include="Interoperability\IViralLoadMessageManager.cs" />
     <Compile Include="IPatientAppointment.cs" />
     <Compile Include="Baseline\IPatientHivTestingManager.cs" />
@@ -124,6 +125,7 @@
     <Compile Include="Tb\IPatientIpt.cs" />
     <Compile Include="Tb\IPatientIptWorkup.cs" />
     <Compile Include="Tb\IPatientIcfAction.cs" />
+    <Compile Include="Triage\IPregnancyOutcomeLookupManager.cs" />
     <Compile Include="Visit\IPatientEncounterManager.cs" />
     <Compile Include="Visit\IPatientIdentifierManager.cs" />
     <Compile Include="Visit\IPatientLabOrderManager.cs" />

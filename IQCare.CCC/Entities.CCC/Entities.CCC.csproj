@@ -93,6 +93,7 @@
     <Compile Include="Encounter\PatientFamilyPlanningMethod.cs" />
     <Compile Include="Baseline\PatientHivTesting.cs" />
     <Compile Include="Baseline\PatientFamilyTesting.cs" />
+    <Compile Include="Interoperability\PatientVitalsMessage.cs" />
     <Compile Include="pharmacy\PatientPharmacyDispense.cs" />
     <Compile Include="Encounter\PatientProphylaxis.cs" />
     <Compile Include="Encounter\PatientReferral.cs" />
@@ -163,6 +164,7 @@
     <Compile Include="Triage\PatientPreganancy.cs" />
     <Compile Include="Triage\PatientPregnancyIndicator.cs" />
     <Compile Include="Triage\PatientVital.cs" />
+    <Compile Include="Triage\PregnancyOutcomeLookup.cs" />
     <Compile Include="Visit\PatientLabTracker.cs" />
     <Compile Include="Visit\PatientEncounter.cs" />
     <Compile Include="Visit\PatientMasterVisit.cs" />

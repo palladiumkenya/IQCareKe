@@ -101,6 +101,7 @@
     <Compile Include="Interface\Interoperability\IInteropPlacerValuesRepository.cs" />
     <Compile Include="Interface\Interoperability\IPatientAppointmentMessageRepository.cs" />
     <Compile Include="Interface\Interoperability\IPatientMessageRepository.cs" />
+    <Compile Include="Interface\Interoperability\IPatientVitalsMessageRepository.cs" />
     <Compile Include="Interface\Interoperability\IViralLoadMessageRepository.cs" />
     <Compile Include="Interface\Lookup\IFacilityListRepository.cs" />
     <Compile Include="Interface\Lookup\ILookupFacilityStatisticsRepository.cs" />
@@ -145,6 +146,7 @@
     <Compile Include="Interface\Tb\IPatientIptOutcomeRepository.cs" />
     <Compile Include="Interface\Tb\IPatientIptRepository.cs" />
     <Compile Include="Interface\Tb\IPatientIptWorkupRepository.cs" />
+    <Compile Include="Interface\Triage\IPregnancyOutcomeLookupRepository.cs" />
     <Compile Include="Interface\visit\IPatientEncounterRepository.cs" />
     <Compile Include="Interface\person\IPatientMaritalStatusRepository.cs" />
     <Compile Include="Interface\person\IPatientOVCStatusRepository.cs" />
@@ -187,6 +189,7 @@
     <Compile Include="Repository\Interoperability\InteropPlacerValuesRepository.cs" />
     <Compile Include="Repository\Interoperability\PatientAppointmentMessageRepository.cs" />
     <Compile Include="Repository\Interoperability\PatientMessageRepository.cs" />
+    <Compile Include="Repository\Interoperability\PatientVitalsMessageRepository.cs" />
     <Compile Include="Repository\Interoperability\ViralLoadMessageRepository.cs" />
     <Compile Include="Repository\Lookup\FacilityListRepository.cs" />
     <Compile Include="Repository\Lookup\LookupFacilityRepository.cs" />
@@ -246,6 +249,7 @@
     <Compile Include="Repository\Tb\PatientIptOutcomeRepository.cs" />
     <Compile Include="Repository\Tb\PatientIptRepository.cs" />
     <Compile Include="Repository\Tb\PatientIptWorkupRepository.cs" />
+    <Compile Include="Repository\Triage\PregnancyOutcomeLookupRepository.cs" />
     <Compile Include="Repository\UnitOfWork.cs" />
     <Compile Include="Repository\visit\PatientEncounterRepository.cs" />
     <Compile Include="Repository\Enrollment\PatientIdentifierRepository.cs" />

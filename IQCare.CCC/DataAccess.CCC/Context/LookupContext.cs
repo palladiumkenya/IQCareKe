@@ -5,6 +5,7 @@ using System.Data.Common;
 using DataAccess.Base;
 using Entities.CCC.Appointment;
 using Entities.CCC.Interoperability;
+using Entities.CCC.Triage;
 
 namespace DataAccess.CCC.Context
 {
@@ -53,5 +54,7 @@ namespace DataAccess.CCC.Context
         public DbSet<DrugPrescriptionSourceEntity> DrugPrescriptionMessages { get; set; }
         public DbSet<ViralLoadMessage> ViralLoadEntitys { get; set; }
         public DbSet<PatientAppointmentMessage> PatientAppointmentMessages { get; set; }
+        public DbSet<PatientVitalsMessage> PatientVitalsMessages { get; set; }
+        public DbSet<PregnancyOutcomeLookup> PregnancyOutcomeLookups { get; set; }
     }
 }

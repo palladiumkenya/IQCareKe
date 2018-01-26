@@ -1569,7 +1569,8 @@
                                         $("#<%=lblmuac.ClientID%>").text(itemList.MUAC);
                                         $("#<%=lblweight.ClientID%>").text(itemList.Weight);
                                         $("#<%=lblheight.ClientID%>").text(itemList.Height);
-                                        $("#<%=lblbmi.ClientID%>").text(itemList.BMI.toFixed(2));
+                                        if (itemList.BMI != null)
+                                            $("#<%=lblbmi.ClientID%>").text(itemList.BMI.toFixed(2));
                                     }
                                 }else if (patientType == 'New') {
                                     //console.log("new");
@@ -1588,7 +1589,8 @@
                                                 $("#<%=lblmuac.ClientID%>").text(itemList.MUAC);
                                                 $("#<%=lblweight.ClientID%>").text(itemList.Weight + ' kgs');
                                                 $("#<%=lblheight.ClientID%>").text(itemList.Height + ' cms');
-                                                $("#<%=lblbmi.ClientID%>").text(itemList.BMI.toFixed(2) + ' kg/M2');
+                                                if (itemList.BMI != null)
+                                                    $("#<%=lblbmi.ClientID%>").text(itemList.BMI.toFixed(2) + ' kg/M2');
                                             }
                                         },
                                         error: function(xhr, errorType, exception) {
@@ -2543,12 +2545,12 @@
                         }
 
                     },
-                error: function (xhr, errorType, exception) {
-                    var jsonError = jQuery.parseJSON(xhr.responseText);
-                    toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);
-                    return false;
-                }
-            });
+                    error: function (xhr, errorType, exception) {
+                        var jsonError = jQuery.parseJSON(xhr.responseText);
+                        toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);
+                        return false;
+                    }
+                });
             }
 
         function reEnrollPatient(reEnrollmentDate) {
