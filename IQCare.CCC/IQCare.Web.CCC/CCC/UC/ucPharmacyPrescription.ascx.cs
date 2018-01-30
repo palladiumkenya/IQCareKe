@@ -1,4 +1,5 @@
 ﻿using IQCare.CCC.UILogic;
+using IQCare.CCC.UILogic.Enrollment;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -17,6 +18,7 @@ namespace IQCare.Web.CCC.UC
         public string PMSCMSAmePointDispense = "0";
         public string prescriptionDate = "";
         public string dispenseDate = "";
+        public string enrolmentDate = "";
         public bool StartTreatment { get; set; }
         public string patType { get; set; }
 
@@ -64,7 +66,10 @@ namespace IQCare.Web.CCC.UC
                 PatientEncounterLogic pel = new PatientEncounterLogic();
                 pel.getPharmacyTreatmentProgram(ddlTreatmentProgram);
 
-               // LoadExistingData();
+                // LoadExistingData();
+                var patientEnrollment = new PatientEnrollmentManager();
+                var enrolDate = patientEnrollment.GetPatientEnrollmentDate(Convert.ToInt32(Session["PatientPK"]));
+                enrolmentDate = enrolDate.Date.ToString();
             }
         }
 

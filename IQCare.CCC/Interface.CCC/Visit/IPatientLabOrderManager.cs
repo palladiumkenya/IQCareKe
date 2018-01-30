@@ -23,6 +23,7 @@ namespace Interface.CCC.Visit
         List<LabOrderEntity> GetPatientLabOrdersByDate(int patientId, DateTime visitDate);
         List<LabDetailsEntity> GetPatientLabDetailsByDate(int labOrderId, DateTime visitDate);
         List<PatientLabTracker> GetAllPatientVLs(int patientId);
+        PatientLabTracker GetPatientLastVL(int patientId);
 
 
     }

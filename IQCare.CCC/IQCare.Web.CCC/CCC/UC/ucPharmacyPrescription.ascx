@@ -130,7 +130,7 @@
                             <div class="col-md-6">
                                 <div class="datepicker fuelux form-group pull-left" id="PrescriptionDate">
                                     <div class="input-group pull-left">
-                                        <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm pull-left" ID="txtPrescriptionDate" onBlur="ValidatePrescriptionDate();DateFormat(this,this.value,event,false,'3');" data-parsley-required="true" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
+                                        <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm pull-left" ID="txtPrescriptionDate" onBlur="checkEnrolmentPrescriptionDates();ValidatePrescriptionDate();DateFormat(this,this.value,event,false,'3');" data-parsley-required="true" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
                                         <div class="input-group-btn">
                                             <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -352,6 +352,7 @@
     var pmscmFlag = "0";
     var prescriptionDate = "<%= this.prescriptionDate %>";
     var dispenseDate = "<%= this.dispenseDate %>";
+    var enrolmentDate = "<%= this.enrolmentDate %>";
     var startTreatment = "<%=StartTreatment.ToString().ToLower() %>";
     var patType = "<%=patType.ToString().ToLower() %>";
     var gender = "<%=Session["Gender"]%>";
@@ -366,6 +367,9 @@
 
     if (dispenseDate === '' || dispenseDate === '01-Jan-1900')
         dispenseDate = 0;
+
+    if (enrolmentDate === '' || enrolmentDate === '01-Jan-1900')
+        enrolmentDate = 0;
     
     $(document).ready(function () {
         
@@ -1078,7 +1082,20 @@
         
     }
 
-    
+    function checkEnrolmentPrescriptionDates()
+    {
+        var prescriptionDt = $("#txtPrescriptionDate").val();
+        if (enrolmentDate != "" && prescriptionDt != "")
+        {
+            var presDt = Date.parse(prescriptionDt);
+            var enrolDt = Date.parse(enrolmentDate);
+            if (presDt < enrolDt)
+            {
+                toastr.error("Prescription date cannot be less than Enrollment date.");
+                $("#txtPrescriptionDate").val("");
+            }
+        }
+    }
     
 
 </script>
