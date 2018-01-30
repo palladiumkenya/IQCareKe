@@ -161,6 +161,33 @@ namespace BusinessProcess.CCC.visit
                 return list;
             }
         }
+
+        public PatientLabTracker GetPatientLastVL(int patientId)
+        {
+            lock (this)
+            {
+                ClsObject PatientEncounter = new ClsObject();
+                ClsUtility.Init_Hashtable();
+                ClsUtility.AddParameters("@PatientId", SqlDbType.Int, patientId.ToString());
+
+                DataTable theDT = (DataTable)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_getAllViralLoads", ClsUtility.ObjectEnum.DataTable);
+
+                PatientLabTracker lastVL = new PatientLabTracker();
+
+                if(theDT.Rows.Count > 0)
+                {
+                    lastVL.ResultValues = Convert.ToDecimal(theDT.Rows[0]["resultvalue"]);
+                    lastVL.CreateDate = Convert.ToDateTime(theDT.Rows[0]["resultdate"]);
+                    lastVL.Results = theDT.Rows[0]["orderstatus"].ToString();
+                    lastVL.SampleDate = Convert.ToDateTime(theDT.Rows[0]["orderdate"]);
+                    lastVL.LabTestId = Convert.ToInt32(theDT.Rows[0]["parameterid"]);
+                }
+                
+
+                return lastVL;
+            }
+
+        }
         public List<PatientLabTracker> GetPatientVlById(int Id)
         {
             using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
@@ -190,6 +217,8 @@ namespace BusinessProcess.CCC.visit
             }
 
         }
+
+        
 
         public PatientLabTracker GetPatientCurrentviralLoadInfo(int patientId)
         {
