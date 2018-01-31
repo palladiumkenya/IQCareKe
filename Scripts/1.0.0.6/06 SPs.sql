@@ -95,6 +95,60 @@ BEGIN
 END
 GO
 
+
+/****** Object:  StoredProcedure [dbo].[sp_patientCategorizationAtEnrollment] ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_patientCategorizationAtEnrollment]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_patientCategorizationAtEnrollment]
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		John Macharia
+-- Create date: 31st Jan 2018
+-- Description:	Patient categorization at enrollment
+-- =============================================
+Create PROCEDURE sp_patientCategorizationAtEnrollment 
+	-- Add the parameters for the stored procedure here
+	@PatientId int
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+	declare @enrollmentDate datetime = (Select top 1 enrollmentDate from PatientEnrollment where patientid = @PatientId order by enrollmentDate asc)
+	declare @baselineWHOStage varchar(20) = (Select top 1 b.Name from PatientBaselineAssessment a inner join lookupitem b on a.whostage = b.id where a.patientid = @PatientId)
+    declare @baselineCD4Count int = (Select top 1 a.cd4count from PatientBaselineAssessment a inner join lookupitem b on a.whostage = b.id where a.patientid = @PatientId)
+
+	if(@enrollmentDate > Dateadd(year, -1, getdate()))
+	begin
+		if((@baselineWHOStage = 'Stage1' OR @baselineWHOStage = 'Stage2') AND @baselineCD4Count > 200)
+		begin
+			select 'Well' Categorization, 'label-success'
+		end
+		else if((@baselineWHOStage = 'Stage3' OR @baselineWHOStage = 'Stage4') OR @baselineCD4Count <= 200)
+		begin
+			select 'Advanced' Categorization, 'label-danger'
+		end
+		else
+		begin
+			select 'Unknown' Categorization, 'label-danger'
+		end
+	end
+	else
+	begin
+		select 'N/A' Categorization, 'label-danger'
+	end
+	print @enrollmentDate
+END
+GO
+
+
+
+
+
 /****** Object:  StoredProcedure [dbo].[sp_getPatientEncounterHistory]    Script Date: 1/25/2018 11:16:40 AM ******/
 SET ANSI_NULLS ON
 GO
