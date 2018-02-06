@@ -411,9 +411,14 @@ namespace IQCare.CCC.UILogic
                         //    }
                         //}
 
-                        if (theDR["VisitName"].ToString() == "Encounter")
+                        if (theDR["VisitName"].ToString() == "CCC")
                         {
                             theFrmRoot.NavigateUrl = "PatientEncounter.aspx?visitId=" + theDR["visitID"].ToString();
+                            theFrmRoot.ImageUrl = "~/images/15px-Yes_check.svg.png";
+                        }
+                        if (theDR["VisitName"].ToString() == "Triage")
+                        {
+                            theFrmRoot.NavigateUrl = "VitalSigns.aspx?visitId=" + theDR["visitID"].ToString();
                             theFrmRoot.ImageUrl = "~/images/15px-Yes_check.svg.png";
                         }
                         else if(theDR["VisitName"].ToString() == "Pharmacy")
@@ -429,7 +434,7 @@ namespace IQCare.CCC.UILogic
                                 theFrmRoot.ImageUrl = "~/images/caution.png";
                             }
                         }
-                        else if (theDR["VisitName"].ToString() == "Lab Order")
+                        else if (theDR["VisitName"].ToString() == "Lab")
                         {
                             theFrmRoot.NavigateUrl = "LabOrder.aspx?visitId=" + theDR["visitID"].ToString();
                             if (theDR["status"].ToString() == "Complete")
