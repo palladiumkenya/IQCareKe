@@ -264,6 +264,9 @@
         var facilityId = '<%=AppLocationId%>';
         var moduleId = '<%=ModuleId%>';
         var enrollmentDate = '<%=EnrollmentDate%>';
+        var todayLab = new Date();
+        var tomorrowLab = new Date();
+        tomorrowLab.setDate(todayLab.getDate() + 1);
       
       
         $(document).ready(function () {           
@@ -272,6 +275,7 @@
             $("#LabDatePicker").datepicker({
                 //date: null,
                 allowPastDates: true,
+                restricted: [{ from: tomorrowLab, to: Infinity }],
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
             });
             var LabOrderList = new Array();
