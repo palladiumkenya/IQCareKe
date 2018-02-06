@@ -1504,7 +1504,7 @@
 
 		    $("#ARTUseHistory").change(function() {
                 var ARTHistory = $("#ARTUseHistory").val();
-                if (ARTHistory == "True") {
+                if (ARTHistory == "1") {
                     noneUnchecked();
                 } else {
                     noneChecked();
@@ -1859,7 +1859,9 @@
                                         $("#DARTI").datepicker('setDate', moment(obj.ARTInitiationDateNew).format('DD-MMM-YYYY'));
                                     }
                                     
-									$("#WHOStageAtEnrollment").val(obj.EnrollmentWHOStage);
+                                    $("#WHOStageAtEnrollment").val(obj.EnrollmentWHOStage);
+
+                                    $("#ARTUseHistory").val(obj.HistoryARTUse);
 
                                     $("#<%=TransferFromCounty.ClientID%>").val(obj.CountyFrom);
                                     var value = $("#<%=TransferFromFacility.ClientID%> option:contains('" + obj.FacilityFrom + "')").val();
@@ -2234,7 +2236,8 @@
 
 				var serviceAreaId = 0;
 				var transferInDate = moment($('#TIDate').datepicker('getDate')).format('DD-MMM-YYYY');
-				var treatmentStartDate = moment($('#<%=lblARTStartDate.ClientID%>').datepicker('getDate')).format('DD-MMM-YYYY');
+				var treatmentStartDate = moment($('#TIARTStartDate').datepicker('getDate')).format('DD-MMM-YYYY');
+				<%--var treatmentStartDate = moment($('#<%=lblARTStartDate.ClientID%>').datepicker('getDate')).format('DD-MMM-YYYY'); --%>
                 var currentTreatment = $('#<%=RegimenId.ClientID%>').find(":selected").val();
                 var TransferFromFacility = $('#<%=TransferFromFacility.ClientID%>').select2('data');
 		<%--		var facilityFrom = $('#<%=TransferFromFacility.ClientID%>').val();--%>
@@ -2271,6 +2274,7 @@
 				var enrollmentDate = moment($('#DOE').datepicker('getDate')).format('DD-MMM-YYYY');
 				var artInitiationDate = moment($('#DARTI').datepicker('getDate')).format('DD-MMM-YYYY');
 				var enrollmentWhoStage = $('#<%=WHOStageAtEnrollment.ClientID%>').find(":selected").val();
+                var historyARTUse = $('#<%=ARTUseHistory.ClientID%>').find(":selected").val();
 				var ptnId = patientId;
 				var ptnmasterVisitId = patientMasterVisitId;
 				if (artInitiationDate === 'Invalid date') {
@@ -2278,7 +2282,7 @@
 				$.ajax({
 					type: "POST",
 					url: "../WebService/PatientBaselineService.asmx/ManagePatientHivDiagnosis",
-					data: "{'id':'" +id +"','patientId':'" +ptnId +"','patientMasterVisitId':'" + ptnmasterVisitId +"','hivDiagnosisDate':'" +hivDiagnosisDate +"','enrollmentDate':'" + enrollmentDate +"','enrollmentWhoStage':'" + enrollmentWhoStage +"','artInitiationStr':'" +artInitiationDate + "','userId':'" + userId +"'}",
+					data: "{'id':'" +id +"','patientId':'" +ptnId +"','patientMasterVisitId':'" + ptnmasterVisitId +"','hivDiagnosisDate':'" +hivDiagnosisDate +"','enrollmentDate':'" + enrollmentDate +"','enrollmentWhoStage':'" + enrollmentWhoStage +"','artInitiationStr':'" +artInitiationDate + "','userId':'" + userId +"','historyARTUse':'" + historyARTUse +"'}",
 					contentType: "application/json; charset=utf-8",
 					dataType: "json",
 					success: function(response) {

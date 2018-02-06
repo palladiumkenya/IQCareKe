@@ -22,6 +22,7 @@ namespace Entities.CCC.Baseline
         public DateTime? HivDiagnosisDate { get; set; }
         public DateTime? EnrollmentDate { get; set; }
         public int EnrollmentWhoStage { get; set; }
+        public int? HistoryARTUse { get; set; }
         
         public DateTime? ArtInitiationDate { get; set; }
         [ForeignKey("PatientId")]
