@@ -24,7 +24,7 @@
         <div class="col-md-12 col-xs-12 col-sm-12 form-group" id="anthropometricMeasurement" data-parsley-validate="true" data-show-errors="true">
             
             <div class="col-md-12 form-group">
-                <label class="control-label text-primary pull-left text-muted">Anthropometric Measurement</label> <label id="lblweightAlert">kk</label>
+                <label class="control-label text-primary pull-left text-muted">Anthropometric Measurement</label> <label id="lblweightAlert"></label>
             </div>
 
             <div class="col-md-12 col-xs-12 col-sm-12 form-group">
@@ -82,7 +82,7 @@
                 <div class="col-md-4 col-xs-12 col-sm-12">
                         <div class="input-group">
                             <span class="input-group-addon"><small class="text-danger"></small>MUAC (cm)</span> 
-                             <asp:TextBox runat="server" ID="muacs" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="cms.." Type="Number" Min="1" Max="30" data-parsley-range="[1, 30]" data-parsley-range-message="MUAC is out of reasonable range"></asp:TextBox>
+                             <asp:TextBox runat="server" ID="muacs" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="cms.." Type="Number" Min="1" Max="40" data-parsley-range="[1, 40]" data-parsley-range-message="MUAC is out of reasonable range"></asp:TextBox>
                         </div>
                     </div>
 
@@ -255,6 +255,9 @@
         }
         else if (age < 15 && pregnancyStatus<1) {
              $("#muacs").prop("disabled", false);
+        }
+        else if (gender === 'Female'){
+            $("#muacs").prop("disabled", false);
         }
         else if (age > 15 || gender==='Male') {
             $("#muacs").prop("disabled", true);

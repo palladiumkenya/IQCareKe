@@ -680,7 +680,7 @@
 
         if (valSelected === "PMTCT") {
             $("#<%=ddlPeriodTaken.ClientID%>").prop('disabled', false);
-            $("#<%=ddlPeriodTaken.ClientID%>").val("");
+            <%--$("#<%=ddlPeriodTaken.ClientID%>").val("");--%>
             $("#<%=ddlTreatmentPlan.ClientID%>").prop('disabled', false);
             $("#<%=ddlTreatmentPlan.ClientID%>").val("");
             $("#<%=ddlSwitchInterruptionReason.ClientID%>").prop('disabled', false);
