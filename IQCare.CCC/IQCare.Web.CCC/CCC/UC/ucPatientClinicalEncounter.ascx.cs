@@ -6,6 +6,7 @@ using IQCare.CCC.UILogic;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Web;
 using System.Web.UI.WebControls;
 
@@ -171,7 +172,10 @@ namespace IQCare.Web.CCC.UC
             bool isOnEdit = false;
 
             /////PRESENTING COMPLAINTS
-            visitdateval = pce.visitDate;
+            if (pce.visitDate != "")
+                visitdateval = DateTime.Parse(pce.visitDate.Trim()).ToString("dd-MMM-yyyy", CultureInfo.InvariantCulture);
+            else
+                visitdateval = "";
             LMPval = pce.lmp;
             EDDval = pce.edd;
             nxtAppDateval = pce.nextAppointmentDate;
@@ -247,6 +251,14 @@ namespace IQCare.Web.CCC.UC
             {
                 rdAnyAdverseEventsNo.Checked = true;
             }
+
+            //AppointmentDate.Text = pce.nextAppointmentDate;
+            AppointmentDate.Text = DateTime.Parse(pce.nextAppointmentDate.Trim()).ToString("dd-MMM-yyyy", CultureInfo.InvariantCulture);
+            ServiceArea.SelectedValue = pce.appointmentServiceArea;
+            Reason.SelectedValue = pce.appointmentReason;
+            DifferentiatedCare.SelectedValue = pce.nextAppointmentType;
+            description.Text = pce.appointmentDesc;
+            status.SelectedValue = pce.appontmentStatus;
 
         }
     }

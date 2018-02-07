@@ -3695,7 +3695,7 @@
 			return selectedValues;
 		}
 
-		$("#AppointmentDate").val("");
+		//$("#AppointmentDate").val("");
 
 		if (encounterExists > 0) {
 			//var $wizard = $('#myWizard').wizard();

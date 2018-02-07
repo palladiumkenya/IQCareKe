@@ -351,7 +351,8 @@ namespace BusinessProcess.CCC
 
                 if (theDS.Tables[0].Rows.Count > 0)
                 {
-                    pce.visitDate = ((DateTime)theDS.Tables[0].Rows[0]["visitDate"]).ToString("dd-MMM-yyyy");
+                    //pce.visitDate = ((DateTime)theDS.Tables[0].Rows[0]["visitDate"]).ToString("dd-MMM-yyyy");
+                    pce.visitDate = theDS.Tables[0].Rows[0]["visitDate"].ToString();
                     pce.visitScheduled = theDS.Tables[0].Rows[0]["visitScheduled"].ToString();
                     pce.visitBy = theDS.Tables[0].Rows[0]["visitBy"].ToString();
                 }
@@ -424,6 +425,16 @@ namespace BusinessProcess.CCC
                 if (theDS.Tables[14].Rows.Count > 0)
                 {
                     pce.WhoStage = theDS.Tables[14].Rows[0]["WHOStage"].ToString();
+                }
+
+                if (theDS.Tables[15].Rows.Count > 0)
+                {
+                    pce.nextAppointmentDate = theDS.Tables[15].Rows[0]["AppointmentDate"].ToString();
+                    pce.appointmentServiceArea = theDS.Tables[15].Rows[0]["ServiceAreaId"].ToString();
+                    pce.appointmentReason = theDS.Tables[15].Rows[0]["ReasonId"].ToString();
+                    pce.nextAppointmentType = theDS.Tables[15].Rows[0]["DifferentiatedCareId"].ToString();
+                    pce.appointmentDesc = theDS.Tables[15].Rows[0]["Description"].ToString();
+                    pce.appontmentStatus = theDS.Tables[15].Rows[0]["StatusId"].ToString();
                 }
 
 
