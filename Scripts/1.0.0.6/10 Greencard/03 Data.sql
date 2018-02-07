@@ -19,6 +19,10 @@ INSERT INTO LookupMasterItem(LookupMasterId,LookupItemId,DisplayName,OrdRank) VA
 INSERT INTO LookupMasterItem(LookupMasterId,LookupItemId,DisplayName,OrdRank) VALUES((SELECT top 1 id FROM LookupMaster l WHERE l.Name='EncounterType'),(SELECT TOP 1 Id FROM LookupItem i WHERE i.Name='lab-encounter'),'lab-encounter',6);
 INSERT INTO LookupMasterItem(LookupMasterId,LookupItemId,DisplayName,OrdRank) VALUES((SELECT top 1 id FROM LookupMaster l WHERE l.Name='EncounterType'),(SELECT TOP 1 Id FROM LookupItem i WHERE i.Name='Pharmacy-encounter'),'Pharmacy-encounter',7);
 
+---duplicate PMTCT Regimens
+update LookupMasterItem set LookupItemId=(select id from lookupitem where name = 'PMTCTRegimens') 
+where LookupItemId=(select id from lookupitem where name = 'PMTCT Regimens')
+
 ------------------Add MFL Facilities------------------------------------
 insert into [FacilityList] values(10056,'Bennedict XVI Dispensary')
 insert into [FacilityList] values(10189,'GK Prison Dispensary')

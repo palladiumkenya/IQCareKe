@@ -4,3 +4,7 @@
 --	ALTER TABLE ord_Visit DROP COLUMN AuditData
 --END
 --GO
+
+ALTER TABLE PatientHivDiagnosis
+ADD HistoryARTUse int
+Go
