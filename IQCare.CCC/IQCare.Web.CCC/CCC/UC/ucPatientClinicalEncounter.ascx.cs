@@ -172,10 +172,12 @@ namespace IQCare.Web.CCC.UC
             bool isOnEdit = false;
 
             /////PRESENTING COMPLAINTS
-            if (pce.visitDate != "")
-                visitdateval = DateTime.Parse(pce.visitDate.Trim()).ToString("dd-MMM-yyyy", CultureInfo.InvariantCulture);
-            else
-                visitdateval = "";
+            visitdateval = pce.visitDate;
+            //if (pce.visitDate != "")
+            //    visitdateval = pce.visitDate;
+            //else
+            //    visitdateval = "";
+
             LMPval = pce.lmp;
             EDDval = pce.edd;
             nxtAppDateval = pce.nextAppointmentDate;
@@ -252,13 +254,17 @@ namespace IQCare.Web.CCC.UC
                 rdAnyAdverseEventsNo.Checked = true;
             }
 
-            //AppointmentDate.Text = pce.nextAppointmentDate;
-            AppointmentDate.Text = DateTime.Parse(pce.nextAppointmentDate.Trim()).ToString("dd-MMM-yyyy", CultureInfo.InvariantCulture);
+            AppointmentDate.Text = pce.nextAppointmentDate;
+            //if (pce.nextAppointmentDate != "")
+            //{
+            //    if (pce.nextAppointmentDate != null)
+            //        AppointmentDate.Text = DateTime.Parse(pce.nextAppointmentDate.Trim()).ToString("dd-MMM-yyyy", CultureInfo.InvariantCulture);
+            //}
             ServiceArea.SelectedValue = pce.appointmentServiceArea;
             Reason.SelectedValue = pce.appointmentReason;
             DifferentiatedCare.SelectedValue = pce.nextAppointmentType;
             description.Text = pce.appointmentDesc;
-            status.SelectedValue = pce.appontmentStatus;
+            //status.SelectedValue = pce.appontmentStatus;
 
         }
     }

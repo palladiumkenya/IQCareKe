@@ -23,6 +23,20 @@ INSERT INTO LookupMasterItem(LookupMasterId,LookupItemId,DisplayName,OrdRank) VA
 update LookupMasterItem set LookupItemId=(select id from lookupitem where name = 'PMTCTRegimens') 
 where LookupItemId=(select id from lookupitem where name = 'PMTCT Regimens')
 
+-----------------Update LPV/r and ATV/r--------------------------------
+update dtl_RegimenMap set RegimenType = 'TDF/3TC/ATV/r' where RegimenType='3TC/ATV/RTV/TDF'
+update dtl_RegimenMap set RegimenType = 'TDF/3TC/ATV/r' where RegimenType='3TC/ATR/RTV/TDF'
+update dtl_RegimenMap set RegimenType = 'ABC/3TC/ATV/r' where RegimenType='3TC/ABC/ATV/RTV'
+update dtl_RegimenMap set RegimenType = 'AZT/3TC/ATV/r' where RegimenType='3TC/ATV/AZT/RTV'
+update dtl_RegimenMap set RegimenType = 'AZT/3TC/ATV/r' where RegimenType='3TC/AZT/ATV/RTV'
+update dtl_RegimenMap set RegimenType = 'TDF/3TC/ATV/r' where RegimenType='3TC/TDF/ATV/RTV'
+
+update dtl_RegimenMap set RegimenType = 'AZT/3TC/LPV/r' where RegimenType='3TC/AZT/LOPr'
+update dtl_RegimenMap set RegimenType = 'ABC/3TC/LPV/r' where RegimenType='3TC/ABC/LOPr/RTV'
+update dtl_RegimenMap set RegimenType = 'ABC/3TC/LPV/r' where RegimenType='3TC/ABC/LOPr'
+update dtl_RegimenMap set RegimenType = 'TDF/3TC/LPV/r' where RegimenType='3TC/LOPr/TDF'
+update dtl_RegimenMap set RegimenType = '3TC/EFV/LPV/r' where RegimenType='3TC/EFV/LOPr'
+
 ------------------Add MFL Facilities------------------------------------
 insert into [FacilityList] values(10056,'Bennedict XVI Dispensary')
 insert into [FacilityList] values(10189,'GK Prison Dispensary')
