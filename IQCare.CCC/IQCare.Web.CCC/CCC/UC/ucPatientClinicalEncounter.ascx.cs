@@ -43,6 +43,11 @@ namespace IQCare.Web.CCC.UC
             get { return Convert.ToInt32(Session["patientMasterVisitId"]); }
         }
 
+        protected string DateOfEnrollment
+        {
+            get { return Session["DateOfEnrollment"].ToString(); }
+        }
+
 
         //private readonly ILookupManager _lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
         private readonly IPatientLookupmanager _patientLookupmanager = (IPatientLookupmanager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientLookupManager, BusinessProcess.CCC");
