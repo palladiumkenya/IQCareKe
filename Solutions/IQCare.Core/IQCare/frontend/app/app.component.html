@@ -1,0 +1,23 @@
+<div id="wrapper">
+    <div id="page-wrapper" class="gray-bg">
+        <app-header></app-header>
+        
+
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="container-fluid">
+                <app-nav-header></app-nav-header>
+                <div class="row">
+                    <div class="col-md-10 col-xs-10 col-sm-10">
+                        <app-clientbrief></app-clientbrief>
+                        <router-outlet></router-outlet>
+                    </div>
+                    <div class="col-md-2 col-xs-2 col-sm-2">
+                        <app-nav-left></app-nav-left>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <app-footer></app-footer>
+    </div>
+</div>

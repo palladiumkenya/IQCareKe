@@ -1,0 +1,134 @@
+<div class="ibox">
+  <div class="ibox-content">
+        <div class="wizard" data-initialize="wizard" id="linkageWizard">
+            <div class="steps-container">
+                <ul class="steps">
+                    <li data-step="1" data-name="referral" class="active">
+                        <span class="badge">1</span>REFERRAL
+                        <span class="chevron"></span>
+                    </li>
+                    <li data-step="2" data-name="tracingLinkage">
+                        <span class="badge">2</span>TRACING & LINKAGE
+                        <span class="chevron"></span>
+                    </li>
+                </ul>
+            </div>
+            <div class="actions">
+                <button type="button" class="btn btn-default btn-prev">
+                    <span class="glyphicon glyphicon-arrow-left"></span>Prev</button>
+                <button type="button" class="btn btn-primary btn-next" data-last="Complete">Next
+                    <span class="glyphicon glyphicon-arrow-right"></span>
+                </button>
+            </div>
+            <form id="form" action="#" class="wizard-big">
+                <div class="step-content">
+                    <div class="step-pane active sample-pane alert" data-step="1">
+                        <fieldset>
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Referred To *</label>
+                                        <input id="referredTo" name="referredTo" type="text" class="form-control required">
+                                    </div> 
+                                    
+                                    <div class="form-group">
+                                        <label>Date To Be Enrolled *</label>
+                                        <input id="dateToBeEnrolled" name="dateToBeEnrolled" type="text" class="form-control required">
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="step-pane sample-pane alert" data-step="2">
+                        <fieldset>
+                            <div class="row">
+                                <div class="tabs-container">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a data-toggle="tab" href="#tracingTab">TRACING</a></li>
+                                        <li class=""><a data-toggle="tab" href="#linkageTab">LINKAGE</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div id="tracingTab" class="tab-pane active">
+                                            <div class="panel-body">
+                                                <button type="button" class="btn" data-toggle="modal" data-target="#tracingModal">
+                                                    ADD TRACE
+                                                </button>
+                                                <div class="modal inmodal" id="tracingModal" tabindex="-1" role="dialog" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content animated flipInY">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                                <h4 class="modal-title">Tracing Detail</h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="form-group">
+                                                                    <label>Tracing Date *</label>
+                                                                    <input id="tracingDate" name="tracingDate" type="text" class="form-control required">
+                                                                </div>
+                                            
+                                                                <div class="form-group">
+                                                                    <label>Mode *</label>
+                                                                    <input id="lotNumber" name="lotNumber" type="text" class="form-control required">
+                                                                </div>
+                                            
+                                                                <div class="form-group">
+                                                                    <label>Outcome *</label>
+                                                                    <input id="expiry" name="expiry" type="text" class="form-control required">
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>                                                
+                                            </div>
+                                        </div>
+                                        <div id="linkageTab" class="tab-pane">
+                                            <div class="panel-body">
+                                                <div class="col-lg-3"> 
+                                                    <div class="form-group">
+                                                        <label>Facility *</label>
+                                                        <input id="finalResultHiv1" name="finalResultHiv1" type="text" class="form-control required">
+                                                    </div>
+                                
+                                                    <div class="form-group">
+                                                        <label>Health Worker *</label>
+                                                        <input id="finalResultHiv2" name="finalResultHiv2" type="text" class="form-control required">
+                                                    </div>
+                
+                                                    <div class="form-group">
+                                                        <label>Carde *</label>
+                                                        <input id="finalResult" name="finalResult" type="text" class="form-control required">
+                                                    </div>
+                                                </div>
+                
+                                                <div class="col-lg-3"> 
+                                                    <div class="form-group">
+                                                        <label>Date Enrolled *</label>
+                                                        <input id="finalResultGiven" name="finalResultGiven" type="text" class="form-control required">
+                                                    </div>
+                                
+                                                    <div class="form-group">
+                                                        <label>CCC Number *</label>
+                                                        <input id="coupleDiscordant" name="coupleDiscordant" type="text" class="form-control required">
+                                                    </div>
+                
+                                                    <div class="form-group">
+                                                        <label>Remarks *</label>
+                                                        <textarea class="form-control m-b" id="remarks" rows="3"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </form>
+        </div>
+  </div>
+</div>

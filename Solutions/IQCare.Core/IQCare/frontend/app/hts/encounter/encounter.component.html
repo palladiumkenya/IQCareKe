@@ -1,0 +1,288 @@
+<div class="ibox">
+    <div class="ibox-content">
+        <div class="wizard" data-initialize="wizard" id="myWizard">
+            <div class="steps-container">
+                <ul class="steps">
+                    <li data-step="1" data-name="campaign" class="active">
+                        <span class="badge">1</span>HTS LAB FORM
+                        <span class="chevron"></span>
+                    </li>
+                    <li data-step="2">
+                        <span class="badge">2</span>TESTING
+                        <span class="chevron"></span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="actions">
+                <button type="button" class="btn btn-default btn-prev">
+                    <span class="glyphicon glyphicon-arrow-left"></span>Prev</button>
+                <button type="button" class="btn btn-primary btn-next" data-last="Complete">Next
+                    <span class="glyphicon glyphicon-arrow-right"></span>
+                </button>
+            </div>
+            <form id="form" action="#" class="wizard-big">
+                <div class="step-content">
+                    <div class="step-pane active sample-pane alert" id="datastep1" data-step="1" data-parsley-validate="true" data-show-errors="true" ngForm #labForm="ngForm">
+                        <fieldset>
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Service Delivery Point</label>
+                                        <select class="form-control m-b" name="serviceDeliveryPoint" id="serviceEntryPoint" [(ngModel)]="encounter.serviceEntryPoint" #serviceEntryPoint="ngModel" data-parsley-required="true">
+                                            <option></option>
+                                            <option>Maternity</option>
+                                            <option>MCH</option>
+                                            <option>PITC</option>
+                                            <option>Outreach</option>
+                                            <option>VCT</option>
+                                            <option>ANC</option>
+                                            <option>IPD</option>
+                                            <option>CCC</option>
+                                            <option>OPD</option>
+                                            <option>HBTC</option>
+                                            <option>PeD</option>
+                                            <option>Mobile Outreach</option>
+                                            <option>PMTCT</option>
+                                            <option>VMMC</option>
+                                            <option>TB</option>
+                                            <option>NP</option>
+                                            <option>VI</option>
+                                            <option>HB</option>
+                                            <option>HTS</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Ever Tested?</label>
+                                        <select class="form-control m-b" name="everTested" id="everTested" required [(ngModel)]="encounter.everTested" #everTested="ngModel" data-parsley-required="true">
+                                            <option></option>
+                                            <option>Yes</option>
+                                            <option>No</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Re-Testing (No. Months since last test)</label>
+                                        <input id="noofmonthsretest" name="noofmonthsretest" type="text" class="form-control" [(ngModel)]="encounter.noofmonthsretest">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>HIV self-test in the past 12 months</label>
+                                        <select class="form-control m-b" id="SelfTestLastTwelveMonths" name="SelfTestLastTwelveMonths" [ngModel]="encounter.SelfTestLastTwelveMonths" #SelfTestLastTwelveMonths="ngModel" data-parsley-required="true">
+                                            <option></option>
+                                            <option>Yes</option>
+                                            <option>No</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Has Any Disability</label>
+                                        <select class="form-control m-b" id="hasDisability" name="hasDisability" [(ngModel)]="encounter.hasDisability" #hasDisability="ngModel" data-parsley-required="true">
+                                            <option></option>
+                                            <option>Yes</option>
+                                            <option>No</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Disability</label>
+                                        <select class="form-control m-b" name="disability" id="disability" [(ngModel)]="encounter.disability" #disability="ngModel">
+                                            <option></option>
+                                            <option>Yes</option>
+                                            <option>No</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Consent</label>
+                                        <select class="form-control m-b" name="consent" id="consent" [(ngModel)]="encounter.consent" #consent="ngModel" data-parsley-required="true">
+                                            <option></option>
+                                            <option>Yes</option>
+                                            <option>No</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Client tested as</label>
+                                        <select class="form-control m-b" name="clientTestedAs" id="clientTestedAs" [(ngModel)]="encounter.clientTestedAs" #clientTestedAs="ngModel" data-parsley-required="true">
+                                            <option></option>
+                                            <option>Individual</option>
+                                            <option>Couple(includes polygamous)</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Strategy</label>
+                                        <select class="form-control m-b" name="strategy" id="strategy" [(ngModel)]="encounter.strategy" #strategy="ngModel" data-parsley-required="true">
+                                            <option></option>
+                                            <option>Individual</option>
+                                            <option>Couple(includes polygamous)</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>TB Screeening</label>
+                                        <select class="form-control m-b" name="tbScreening" id="tbScreening" [(ngModel)]="encounter.tbScreening" #tbScreening="ngModel" data-parsley-required="true">
+                                            <option></option>
+                                            <option>Yes</option>
+                                            <option>No</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Remarks *</label>
+                                        <textarea class="form-control m-b" id="remarks" name="remarks" rows="3" [(ngModel)]="encounter.remarks" #remarks="ngModel"></textarea>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    <div class="step-pane sample-pane alert" data-step="2" id="datastep2" data-parsley-validate="true" data-show-errors="true">
+                        <fieldset>
+                            <div class="row">
+                                <div class="tabs-container">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a data-toggle="tab" href="#tab-1">First Test</a></li>
+                                        <li class=""><a data-toggle="tab" href="#tab-2">HIV Test 2</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div id="tab-1" class="tab-pane active">
+                                            <div class="panel-body">
+                                                <button type="button" class="btn" data-toggle="modal" data-target="#myModal1">
+                                                    ADD TEST 1
+                                                </button>
+                                                <div class="modal inmodal" id="myModal1" tabindex="-1" role="dialog" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content animated flipInY">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                                <h4 class="modal-title">HIV TEST 1</h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="form-group">
+                                                                    <label>Kit Name *</label>
+                                                                    <select class="form-control m-b" name="serviceDeliveryPoint">
+                                                                        <option></option>
+                                                                        <option>MCH</option>
+                                                                    </select>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label>Lot Number *</label>
+                                                                    <input id="lotNumber" name="lotNumber" type="text" class="form-control required">
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label>Expiry *</label>
+                                                                    <input id="expiry" name="expiry" type="text" class="form-control required">
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label>HIV Result *</label>
+                                                                    <input id="hivResult" name="hivResult" type="text" class="form-control required">
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="tab-2" class="tab-pane">
+                                            <div class="panel-body">
+                                                <button type="button" class="btn" data-toggle="modal" data-target="#myModal2">
+                                                    ADD TEST 2
+                                                </button>
+                                                <div class="modal inmodal" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content animated flipInY">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                                <h4 class="modal-title">HIV TEST 2</h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="form-group">
+                                                                    <label>Kit Name *</label>
+                                                                    <select class="form-control m-b" name="serviceDeliveryPoint">
+                                                                        <option></option>
+                                                                        <option>MCH</option>
+                                                                    </select>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label>Lot Number *</label>
+                                                                    <input id="lotNumber" name="lotNumber" type="text" class="form-control required">
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label>Expiry *</label>
+                                                                    <input id="expiry" name="expiry" type="text" class="form-control required">
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label>HIV Result *</label>
+                                                                    <input id="hivResult" name="hivResult" type="text" class="form-control required">
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Final Result HIV-Test 1 *</label>
+                                        <input id="finalResultHiv1" name="finalResultHiv1" type="text" class="form-control required">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Final Result HIV-Test 2 *</label>
+                                        <input id="finalResultHiv2" name="finalResultHiv2" type="text" class="form-control required">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Final Result *</label>
+                                        <input id="finalResult" name="finalResult" type="text" class="form-control required">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Final Result Given? *</label>
+                                        <input id="finalResultGiven" name="finalResultGiven" type="text" class="form-control required">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Couple Discordant *</label>
+                                        <input id="coupleDiscordant" name="coupleDiscordant" type="text" class="form-control required">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Remarks *</label>
+                                        <textarea class="form-control m-b" rows="3"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
