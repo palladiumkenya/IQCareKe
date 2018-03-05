@@ -31,25 +31,7 @@
                                         <label>Service Delivery Point</label>
                                         <select class="form-control m-b" name="serviceDeliveryPoint" id="serviceEntryPoint" [(ngModel)]="encounter.serviceEntryPoint" #serviceEntryPoint="ngModel" data-parsley-required="true">
                                             <option></option>
-                                            <option>Maternity</option>
-                                            <option>MCH</option>
-                                            <option>PITC</option>
-                                            <option>Outreach</option>
-                                            <option>VCT</option>
-                                            <option>ANC</option>
-                                            <option>IPD</option>
-                                            <option>CCC</option>
-                                            <option>OPD</option>
-                                            <option>HBTC</option>
-                                            <option>PeD</option>
-                                            <option>Mobile Outreach</option>
-                                            <option>PMTCT</option>
-                                            <option>VMMC</option>
-                                            <option>TB</option>
-                                            <option>NP</option>
-                                            <option>VI</option>
-                                            <option>HB</option>
-                                            <option>HTS</option>
+                                            <option *ngFor="let entryPoint of entryPoints" [ngValue]="entryPoint.itemId">{{entryPoint.itemName}}</option>
                                         </select>
                                     </div>
 
@@ -57,24 +39,22 @@
                                         <label>Ever Tested?</label>
                                         <select class="form-control m-b" name="everTested" id="everTested" required [(ngModel)]="encounter.everTested" #everTested="ngModel" data-parsley-required="true">
                                             <option></option>
-                                            <option>Yes</option>
-                                            <option>No</option>
+                                            <option *ngFor="let option of yesNoOptions" [ngValue]="option.itemId">{{option.itemName}}</option>
                                         </select>
                                     </div>
 
                                     <div class="form-group">
                                         <label>Re-Testing (No. Months since last test)</label>
-                                        <input id="noofmonthsretest" name="noofmonthsretest" type="text" class="form-control" [(ngModel)]="encounter.noofmonthsretest">
+                                        <input id="noofmonthsretest" name="noofmonthsretest" type="text" class="form-control" [(ngModel)]="encounter.noofmonthsretest" #noofmonthsretest="ngModel">
                                     </div>
                                 </div>
 
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>HIV self-test in the past 12 months</label>
-                                        <select class="form-control m-b" id="SelfTestLastTwelveMonths" name="SelfTestLastTwelveMonths" [ngModel]="encounter.SelfTestLastTwelveMonths" #SelfTestLastTwelveMonths="ngModel" data-parsley-required="true">
+                                        <select class="form-control m-b" id="selfTest" name="selfTest" [(ngModel)]="encounter.selfTest" #selfTest="ngModel" data-parsley-required="true">
                                             <option></option>
-                                            <option>Yes</option>
-                                            <option>No</option>
+                                            <option *ngFor="let option of yesNoOptions" [ngValue]="option.itemId">{{option.itemName}}</option>
                                         </select>
                                     </div>
 
@@ -82,16 +62,13 @@
                                         <label>Has Any Disability</label>
                                         <select class="form-control m-b" id="hasDisability" name="hasDisability" [(ngModel)]="encounter.hasDisability" #hasDisability="ngModel" data-parsley-required="true">
                                             <option></option>
-                                            <option>Yes</option>
-                                            <option>No</option>
+                                            <option *ngFor="let option of yesNoOptions" [ngValue]="option.itemId">{{option.itemName}}</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label>Disability</label>
-                                        <select class="form-control m-b" name="disability" id="disability" [(ngModel)]="encounter.disability" #disability="ngModel">
-                                            <option></option>
-                                            <option>Yes</option>
-                                            <option>No</option>
+                                        <select class="form-control m-b" name="disability" id="disability" [(ngModel)]="encounter.disability" #disability="ngModel" multiple="multiple">
+                                            <option *ngFor="let option of disabilities" [ngValue]="option.itemId">{{option.itemName}}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -101,24 +78,23 @@
                                         <label>Consent</label>
                                         <select class="form-control m-b" name="consent" id="consent" [(ngModel)]="encounter.consent" #consent="ngModel" data-parsley-required="true">
                                             <option></option>
-                                            <option>Yes</option>
-                                            <option>No</option>
+                                            <option *ngFor="let option of yesNoOptions" [ngValue]="option.itemId">{{option.itemName}}</option>
                                         </select>
                                     </div>
+
                                     <div class="form-group">
                                         <label>Client tested as</label>
                                         <select class="form-control m-b" name="clientTestedAs" id="clientTestedAs" [(ngModel)]="encounter.clientTestedAs" #clientTestedAs="ngModel" data-parsley-required="true">
                                             <option></option>
-                                            <option>Individual</option>
-                                            <option>Couple(includes polygamous)</option>
+                                            <option *ngFor="let option of testedAs" [ngValue]="option.itemId">{{option.itemName}}</option>
                                         </select>
                                     </div>
+
                                     <div class="form-group">
                                         <label>Strategy</label>
                                         <select class="form-control m-b" name="strategy" id="strategy" [(ngModel)]="encounter.strategy" #strategy="ngModel" data-parsley-required="true">
                                             <option></option>
-                                            <option>Individual</option>
-                                            <option>Couple(includes polygamous)</option>
+                                            <option *ngFor="let option of strategyOptions" [ngValue]="option.itemId">{{option.itemName}}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -128,10 +104,10 @@
                                         <label>TB Screeening</label>
                                         <select class="form-control m-b" name="tbScreening" id="tbScreening" [(ngModel)]="encounter.tbScreening" #tbScreening="ngModel" data-parsley-required="true">
                                             <option></option>
-                                            <option>Yes</option>
-                                            <option>No</option>
+                                            <option *ngFor="let option of tbStatus" [ngValue]="option.itemId">{{option.itemName}}</option>
                                         </select>
                                     </div>
+
                                     <div class="form-group">
                                         <label>Remarks *</label>
                                         <textarea class="form-control m-b" id="remarks" name="remarks" rows="3" [(ngModel)]="encounter.remarks" #remarks="ngModel"></textarea>
@@ -153,7 +129,7 @@
                                     <div class="tab-content">
                                         <div id="tab-1" class="tab-pane active">
                                             <div class="panel-body">
-                                                <button type="button" class="btn" data-toggle="modal" data-target="#myModal1">
+                                                <button type="button" class="btn" data-toggle="modal" data-target="#myModal1" *ngIf="testButton1">
                                                     ADD TEST 1
                                                 </button>
                                                 <div class="modal inmodal" id="myModal1" tabindex="-1" role="dialog" aria-hidden="true">
@@ -166,39 +142,66 @@
                                                             <div class="modal-body">
                                                                 <div class="form-group">
                                                                     <label>Kit Name *</label>
-                                                                    <select class="form-control m-b" name="serviceDeliveryPoint">
+                                                                    <select class="form-control m-b" name="kitTest1" id="kitTest1" [(ngModel)]="testing.kitName" #kitName="ngModel">
                                                                         <option></option>
-                                                                        <option>MCH</option>
+                                                                        <option>Determine</option>
+                                                                        <option>First Response</option>
+                                                                        <option>Other Kit</option>
                                                                     </select>
                                                                 </div>
 
                                                                 <div class="form-group">
                                                                     <label>Lot Number *</label>
-                                                                    <input id="lotNumber" name="lotNumber" type="text" class="form-control required">
+                                                                    <input id="lotNumberTest1" name="lotNumberTest1" type="text" class="form-control required" [(ngModel)]="testing.lotNumberTest" #lotNumberTest="ngModel">
                                                                 </div>
 
                                                                 <div class="form-group">
                                                                     <label>Expiry *</label>
-                                                                    <input id="expiry" name="expiry" type="text" class="form-control required">
+                                                                    <input id="expiryTest1" name="expiry" type="date" required class="form-control required" [(ngModel)]="testing.expiryTest" #expiryTest="ngModel">
                                                                 </div>
 
                                                                 <div class="form-group">
                                                                     <label>HIV Result *</label>
-                                                                    <input id="hivResult" name="hivResult" type="text" class="form-control required">
+                                                                    <select id="hivResultTest1" name="hivResultTest1" class="form-control m-b required" [(ngModel)]="testing.hivResultTest" #hivResultTest="ngModel">
+                                                                        <option></option>
+                                                                        <option>Positive</option>
+                                                                        <option>Negative</option>
+                                                                        <option>Invalid</option>
+                                                                    </select>
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
-                                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                                                <button type="button" class="btn btn-primary" (click)="onAddingTestResult1()">Save changes</button>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                    <tr>
+                                                        <th scope="col">#</th>
+                                                        <th scope="col">HIV Result</th>
+                                                        <th scope="col">Kit Name</th>
+                                                        <th scope="col">Lot Number</th>
+                                                        <th scope="col">Expiry Date</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let hivResult of hivResults1; let index = index">
+                                                            <td>{{ index }}</td>
+                                                            <td>{{ hivResult.hivResultTest }}</td>
+                                                            <td>{{ hivResult.kitName }}</td>
+                                                            <td>{{ hivResult.lotNumberTest }}</td>
+                                                            <td>{{ hivResult.expiryTest }}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>
                                         <div id="tab-2" class="tab-pane">
                                             <div class="panel-body">
-                                                <button type="button" class="btn" data-toggle="modal" data-target="#myModal2">
+                                                <button type="button" class="btn" data-toggle="modal" data-target="#myModal2" *ngIf="testButton2">
                                                     ADD TEST 2
                                                 </button>
                                                 <div class="modal inmodal" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true">
@@ -211,34 +214,62 @@
                                                             <div class="modal-body">
                                                                 <div class="form-group">
                                                                     <label>Kit Name *</label>
-                                                                    <select class="form-control m-b" name="serviceDeliveryPoint">
+                                                                    <select class="form-control m-b" name="kitTest2" id="kitTest2" [(ngModel)]="testing.kitName" #kitName="ngModel">
                                                                         <option></option>
-                                                                        <option>MCH</option>
+                                                                        <option>Determine</option>
+                                                                        <option>First Response</option>
+                                                                        <option>Other Kit</option>
                                                                     </select>
                                                                 </div>
 
                                                                 <div class="form-group">
                                                                     <label>Lot Number *</label>
-                                                                    <input id="lotNumber" name="lotNumber" type="text" class="form-control required">
+                                                                    <input id="lotNumberTest2" name="lotNumber" type="text" class="form-control required" [(ngModel)]="testing.lotNumberTest" #lotNumberTest="ngModel">
                                                                 </div>
 
                                                                 <div class="form-group">
                                                                     <label>Expiry *</label>
-                                                                    <input id="expiry" name="expiry" type="text" class="form-control required">
+                                                                    <input id="expiryTest2" name="expiry" type="date" class="form-control required" [(ngModel)]="testing.expiryTest" #expiryTest="ngModel">
                                                                 </div>
 
                                                                 <div class="form-group">
                                                                     <label>HIV Result *</label>
-                                                                    <input id="hivResult" name="hivResult" type="text" class="form-control required">
+                                                                    <select id="hivResultTest2" name="hivResultTest2" class="form-control m-b required" [(ngModel)]="testing.hivResultTest" #hivResultTest="ngModel">
+                                                                        <option></option>
+                                                                        <option>Positive</option>
+                                                                        <option>Negative</option>
+                                                                        <option>Invalid</option>
+                                                                    </select>
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
-                                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                                                <button type="button" class="btn btn-primary" (click)="onAddingTestResult2()">Save changes</button>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">#</th>
+                                                            <th scope="col">HIV Result</th>
+                                                            <th scope="col">Kit Name</th>
+                                                            <th scope="col">Lot Number</th>
+                                                            <th scope="col">Expiry Date</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let hivResult of hivResults2; let index = index">
+                                                            <td>{{ index }}</td>
+                                                            <td>{{ hivResult.hivResultTest }}</td>
+                                                            <td>{{ hivResult.kitName }}</td>
+                                                            <td>{{ hivResult.lotNumberTest }}</td>
+                                                            <td>{{ hivResult.expiryTest }}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>
                                     </div>
@@ -248,34 +279,57 @@
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>Final Result HIV-Test 1 *</label>
-                                        <input id="finalResultHiv1" name="finalResultHiv1" type="text" class="form-control required">
+                                        <select id="finalResultHiv1" name="finalResultHiv1" class="form-control m-b required" [(ngModel)]="finalTestingResults.finalResultHiv1" #finalResultHiv1="ngModel"  disabled="true">
+                                            <option></option>
+                                            <option>Positive</option>
+                                            <option>Negative</option>
+                                            <option>Invalid</option>
+                                        </select>
                                     </div>
 
                                     <div class="form-group">
                                         <label>Final Result HIV-Test 2 *</label>
-                                        <input id="finalResultHiv2" name="finalResultHiv2" type="text" class="form-control required">
+                                        <select id="finalResultHiv2" name="finalResultHiv2" class="form-control m-b required" [(ngModel)]="finalTestingResults.finalResultHiv2" #finalResultHiv2="ngModel" disabled="true">
+                                            <option></option>
+                                            <option>Positive</option>
+                                            <option>Negative</option>
+                                            <option>Invalid</option>
+                                        </select>
                                     </div>
 
                                     <div class="form-group">
                                         <label>Final Result *</label>
-                                        <input id="finalResult" name="finalResult" type="text" class="form-control required">
+                                        <select id="finalResult" name="finalResult" class="form-control m-b required" [(ngModel)]="finalTestingResults.finalResult" #finalResult="ngModel"  disabled="true">
+                                            <option></option>
+                                            <option>Positive</option>
+                                            <option>Negative</option>
+                                            <option>Inconclusive</option>
+                                        </select>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>Final Result Given? *</label>
-                                        <input id="finalResultGiven" name="finalResultGiven" type="text" class="form-control required">
+                                        <select id="finalResultGiven" name="finalResultGiven" class="form-control m-b required" [(ngModel)]="finalTestingResults.finalResultGiven" #finalResultGiven="ngModel" >
+                                            <option></option>
+                                            <option>Yes</option>
+                                            <option>No</option>
+                                        </select>
                                     </div>
 
                                     <div class="form-group">
                                         <label>Couple Discordant *</label>
-                                        <input id="coupleDiscordant" name="coupleDiscordant" type="text" class="form-control required">
+                                        <select id="coupleDiscordant" name="coupleDiscordant" class="form-control m-b required" [(ngModel)]="finalTestingResults.coupleDiscordant" #coupleDiscordant="ngModel" >
+                                            <option></option>
+                                            <option>Yes</option>
+                                            <option>No</option>
+                                        </select>
                                     </div>
 
                                     <div class="form-group">
                                         <label>Remarks *</label>
-                                        <textarea class="form-control m-b" rows="3"></textarea>
+                                        <textarea class="form-control m-b" rows="3" id="finalResultsRemarks" name="finalResultsRemarks" [(ngModel)]="finalTestingResults.finalResultsRemarks" #finalResultsRemarks="ngModel"></textarea>
                                     </div>
                                 </div>
                             </div>

@@ -17,6 +17,11 @@ using IQCare.HTS.Core.Interfaces;
 using IQCare.HTS.Core.Interfaces.Repositories;
 using IQCare.HTS.Infrastructure;
 using IQCare.HTS.Infrastructure.Repository;
+using IQCare.Common.BusinessProcess.Interfaces;
+using IQCare.Common.BusinessProcess.Services;
+using IQCare.Common.Core.Interfaces.Repositories;
+using IQCare.Common.Infrastructure;
+using IQCare.Common.Infrastructure.Repository;
 
 namespace IQCare
 {
@@ -46,14 +51,21 @@ namespace IQCare
 
             services.AddCors();
 
-            var connectionString = Startup.Configuration["connectionStrings:DwapiConnection"];
-            services.AddDbContext<HtsDbContext>(o => o.UseSqlServer(connectionString,
-                x => x.MigrationsAssembly(typeof(HtsDbContext).GetTypeInfo().Assembly.GetName().Name)));
+            var connectionString = Startup.Configuration["connectionStrings:IQCareConnection"];
 
+            //Context
+            services.AddDbContext<HtsDbContext>(o => o.UseSqlServer(connectionString,x => x.MigrationsAssembly(typeof(HtsDbContext).GetTypeInfo().Assembly.GetName().Name)));
+            services.AddDbContext<CommonDbContext>(o => o.UseSqlServer(connectionString,x => x.MigrationsAssembly(typeof(CommonDbContext).GetTypeInfo().Assembly.GetName().Name)));
+
+            //Repositories
             services.AddScoped<IFormRepository, FormRepository>();
             services.AddScoped<IModuleRepository, ModuleRepository>();
             services.AddScoped<IHtsEncounterRepository, HtsEncounterRepository>();
+            services.AddScoped<ILookupItemViewRepository, LookupItemViewRepository>();
+
+            //Services
             services.AddScoped<IHTSEncounterService, EncounterService>();
+            services.AddScoped<ILookupItemViewService, LookupItemViewService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

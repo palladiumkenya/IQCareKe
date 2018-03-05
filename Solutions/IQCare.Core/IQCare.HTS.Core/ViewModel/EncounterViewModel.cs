@@ -9,22 +9,22 @@ namespace IQCare.HTS.Core.ViewModel
         [JsonProperty(PropertyName = "noofmonthsretest")]
         public int NoOfMonthsReTest { get; set; }
         [JsonProperty(PropertyName = "serviceEntryPoint")]
-        public string ServiceEntryPoint { get; set; }
+        public int ServiceEntryPoint { get; set; }
         [JsonProperty(PropertyName = "hasDisability")]
-        public string HasDisability { get; set; }
-        [JsonProperty(PropertyName = "SelfTestLastTwelveMonths")]
-        public string SelfTestLastTwelveMonths { get; set; }
+        public int HasDisability { get; set; }
+        [JsonProperty(PropertyName = "selfTest")]
+        public int SelfTestLastTwelveMonths { get; set; }
         [JsonProperty(PropertyName = "disability")]
-        public string Disabilities { get; set; }
+        public int[] Disabilities { get; set; }
         [JsonProperty(PropertyName = "consent")]
-        public string Consent { get; set; }
+        public int Consent { get; set; }
         [JsonProperty(PropertyName = "clientTestedAs")]
-        public string ClientTested { get; set; }
+        public int ClientTested { get; set; }
         [JsonProperty(PropertyName = "strategy")]
-        public string Strategy { get; set; }
+        public int Strategy { get; set; }
         [JsonProperty(PropertyName = "remarks")]
         public string Remarks { get; set; }
         [JsonProperty(PropertyName = "tbScreening")]
-        public string TbScreening { get; set; }
+        public int TbScreening { get; set; }
     }
 }

@@ -7,6 +7,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment';
 import {Encounter} from '../_models/encounter';
+import {Testing} from '../_models/testing';
 
 
 const httpOptions = {
@@ -16,15 +17,23 @@ const httpOptions = {
 @Injectable()
 export class EncounterService {
     private API_URL = environment.API_URL;
-    private _url: string = '/api/HtsEncounter';
+    private _url = '/api/HtsEncounter';
+    private _lookupurl = '/api/lookup';
 
     constructor(private http: HttpClient) { }
 
-    public addEncounter(encounter: Encounter):Observable<Encounter>{
-        let body = JSON.stringify(encounter);
+    public getHtsEncounterOptions(): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + this._lookupurl + '/htsOptions').pipe(
+            tap(htsoptions => this.log('fetched all hts options')),
+            catchError(this.handleError<any[]>('getHtsOptions'))
+        );
+    }
+
+    public addEncounter(encounter: Encounter, testing: Testing): Observable<Encounter>{
+        const body = JSON.stringify(encounter);
         console.log(encounter);
         return this.http.post(this.API_URL + this._url, body, httpOptions).pipe(
-            tap((encounter: Encounter) => this.log(`added encounter w/ id`)),
+            tap((addedEncounter: Encounter) => this.log(`added encounter w/ id`)),
             catchError(this.handleError<Encounter>('addEncounter'))
         );
     }
@@ -45,7 +54,6 @@ export class EncounterService {
 
     /** Log a HeroService message with the MessageService */
     private log(message: string) {
-        //this.messageService.add('HeroService: ' + message);
         console.log(message);
     }
 

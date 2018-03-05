@@ -2,16 +2,36 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { EncounterComponent } from './encounter/encounter.component';
 import { LinkageReferralComponent } from './linkage-referral/linkage-referral.component';
+import {PnsformComponent} from './pnsform/pnsform.component';
+import {PnsTracingComponent} from './pnstracing/pnstracing.component';
+import {FamilyTracingComponent} from './family-tracing/family-tracing.component';
+import {FamilyScreeningComponent} from './family-screening/family-screening.component';
 
 const routes: Routes = [
-  { 
-    path: '', 
-    component: EncounterComponent 
-  },
-  {
-    path: 'linkage',
-    component: LinkageReferralComponent
-  }
+    {
+        path: '',
+        component: EncounterComponent
+    },
+    {
+        path: 'linkage',
+        component: LinkageReferralComponent
+    },
+    {
+        path: 'pns',
+        component: PnsformComponent
+    },
+    {
+        path: 'pnstracing',
+        component: PnsTracingComponent
+    },
+    {
+        path: 'familytracing',
+        component: FamilyTracingComponent
+    },
+    {
+        path: 'familyscreening',
+        component: FamilyScreeningComponent
+    }
 ];
 
 @NgModule({
