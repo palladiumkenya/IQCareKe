@@ -1,9 +1,8 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-
-import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import {MatDatepickerModule, MatFormFieldModule, MatInputModule, MatNativeDateModule} from '@angular/material';
 
 import { HtsRoutingModule } from './hts-routing.module';
 import { EncounterComponent } from './encounter/encounter.component';
@@ -13,6 +12,9 @@ import { PnsformComponent } from './pnsform/pnsform.component';
 import { PnsTracingComponent } from './pnstracing/pnstracing.component';
 import { FamilyTracingComponent } from './family-tracing/family-tracing.component';
 import { FamilyScreeningComponent } from './family-screening/family-screening.component';
+import { NoneEventsDirective } from './_directives/none-events.directive';
+import { LinkageComponent } from './linkage/linkage.component';
+
 
 @NgModule({
   imports: [
@@ -20,8 +22,10 @@ import { FamilyScreeningComponent } from './family-screening/family-screening.co
       HttpClientModule,
       HtsRoutingModule,
       FormsModule,
-      OwlDateTimeModule,
-      OwlNativeDateTimeModule,
+      MatDatepickerModule,
+      MatFormFieldModule,
+      MatNativeDateModule,
+      MatInputModule
   ],
   declarations: [
     EncounterComponent,
@@ -29,7 +33,9 @@ import { FamilyScreeningComponent } from './family-screening/family-screening.co
     PnsformComponent,
     PnsTracingComponent,
     FamilyTracingComponent,
-    FamilyScreeningComponent
+    FamilyScreeningComponent,
+    NoneEventsDirective,
+    LinkageComponent
   ],
   exports: [
   ],

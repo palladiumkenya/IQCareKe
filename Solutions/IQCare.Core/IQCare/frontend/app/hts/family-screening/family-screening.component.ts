@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {FamilyScreening} from '../_models/familyScreening';
 
 @Component({
   selector: 'app-family-screening',
@@ -6,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./family-screening.component.css']
 })
 export class FamilyScreeningComponent implements OnInit {
+    familyScreening: FamilyScreening;
 
-  constructor() { }
+    constructor() { }
+    ngOnInit() {
+        this.familyScreening = new FamilyScreening();
+    }
 
-  ngOnInit() {
-  }
-
+    onSubmit() {
+        console.log(this.familyScreening);
+    }
 }

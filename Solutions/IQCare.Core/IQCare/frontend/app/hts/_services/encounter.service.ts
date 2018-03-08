@@ -7,7 +7,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment';
 import {Encounter} from '../_models/encounter';
-import {Testing} from '../_models/testing';
+import {FinalTestingResults} from '../_models/testing';
 
 
 const httpOptions = {
@@ -29,10 +29,17 @@ export class EncounterService {
         );
     }
 
-    public addEncounter(encounter: Encounter, testing: Testing): Observable<Encounter>{
-        const body = JSON.stringify(encounter);
-        console.log(encounter);
-        return this.http.post(this.API_URL + this._url, body, httpOptions).pipe(
+    public addEncounter(encounter: Encounter, finalTestingResults: FinalTestingResults,
+                        hivResults1: any[], hivResults2: any[]): Observable<Encounter> {
+        const encounterBody = JSON.stringify(encounter);
+        const finalResultsBody = JSON.stringify(finalTestingResults);
+        const hivResults1Body = JSON.stringify(hivResults1);
+        const hivResults2Body = JSON.stringify(hivResults2);
+
+        const Indata = {'encounter': encounterBody, 'hivResults1': hivResults1Body,
+            'hivResults2': hivResults2Body, 'finalResultsBody': finalResultsBody };
+
+        return this.http.post(this.API_URL + this._url, Indata, httpOptions).pipe(
             tap((addedEncounter: Encounter) => this.log(`added encounter w/ id`)),
             catchError(this.handleError<Encounter>('addEncounter'))
         );

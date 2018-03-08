@@ -19,6 +19,7 @@ var pnsform_component_1 = require("./pnsform/pnsform.component");
 var pnstracing_component_1 = require("./pnstracing/pnstracing.component");
 var family_tracing_component_1 = require("./family-tracing/family-tracing.component");
 var family_screening_component_1 = require("./family-screening/family-screening.component");
+var none_events_directive_1 = require("./_directives/none-events.directive");
 var HtsModule = /** @class */ (function () {
     function HtsModule() {
     }
@@ -38,7 +39,8 @@ var HtsModule = /** @class */ (function () {
                 pnsform_component_1.PnsformComponent,
                 pnstracing_component_1.PnsTracingComponent,
                 family_tracing_component_1.FamilyTracingComponent,
-                family_screening_component_1.FamilyScreeningComponent
+                family_screening_component_1.FamilyScreeningComponent,
+                none_events_directive_1.NoneEventsDirective
             ],
             exports: [],
             providers: [

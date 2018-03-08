@@ -29,7 +29,7 @@ namespace IQCare.Controllers.Common
         [HttpGet("htsOptions")]
         public IActionResult Get()
         {
-            string[] options = new string[] {"HTSEntryPoints", "YesNo", "Disabilities", "TestedAs", "Strategy", "TBStatus"};
+            string[] options = new string[] {"HTSEntryPoints", "YesNo", "Disabilities", "TestedAs", "Strategy", "TBStatus", "ReasonsPartner", "HIVResults", "HIVTestKits", "HIVFinalResults" };
 
             var results = _lookupItemViewService.GetHtsOptions(options);
             return Ok(results);

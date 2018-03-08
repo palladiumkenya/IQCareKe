@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Referral} from '../_models/referral';
 
 @Component({
   selector: 'app-linkage-referral',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./linkage-referral.component.css']
 })
 export class LinkageReferralComponent implements OnInit {
+    referral: Referral;
 
-  constructor() { }
+    constructor() { }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+        this.referral = new Referral();
+    }
 
 }
