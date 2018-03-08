@@ -9,7 +9,6 @@ namespace IQCare.HTS.Core.Model
         public DateTime DateTracingDone { get; set; }
         public int Mode { get; set; }
         public int Outcome { get; set; }
-        public DateTime BookingDate { get; set; }
         public string Remarks { get; set; }
     }
 }

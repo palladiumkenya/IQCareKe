@@ -13,15 +13,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using IQCare.HTS.BusinessProcess.Interfaces;
-using IQCare.HTS.Core.Interfaces;
-using IQCare.HTS.Core.Interfaces.Repositories;
 using IQCare.HTS.Infrastructure;
-using IQCare.HTS.Infrastructure.Repository;
 using IQCare.Common.BusinessProcess.Interfaces;
 using IQCare.Common.BusinessProcess.Services;
 using IQCare.Common.Core.Interfaces.Repositories;
 using IQCare.Common.Infrastructure;
 using IQCare.Common.Infrastructure.Repository;
+using MediatR;
 
 namespace IQCare
 {
@@ -51,16 +49,14 @@ namespace IQCare
 
             services.AddCors();
 
-            var connectionString = Startup.Configuration["connectionStrings:IQCareConnection"];
-
             //Context
-            services.AddDbContext<HtsDbContext>(o => o.UseSqlServer(connectionString,x => x.MigrationsAssembly(typeof(HtsDbContext).GetTypeInfo().Assembly.GetName().Name)));
-            services.AddDbContext<CommonDbContext>(o => o.UseSqlServer(connectionString,x => x.MigrationsAssembly(typeof(CommonDbContext).GetTypeInfo().Assembly.GetName().Name)));
+            services.AddDatabase(Configuration);
+            services.AddMediatR();
+
+            //services.AddDbContext<HtsDbContext>(o => o.UseSqlServer(connectionString,x => x.MigrationsAssembly(typeof(HtsDbContext).GetTypeInfo().Assembly.GetName().Name)));
+            //services.AddDbContext<CommonDbContext>(o => o.UseSqlServer(connectionString,x => x.MigrationsAssembly(typeof(CommonDbContext).GetTypeInfo().Assembly.GetName().Name)));
 
             //Repositories
-            services.AddScoped<IFormRepository, FormRepository>();
-            services.AddScoped<IModuleRepository, ModuleRepository>();
-            services.AddScoped<IHtsEncounterRepository, HtsEncounterRepository>();
             services.AddScoped<ILookupItemViewRepository, LookupItemViewRepository>();
 
             //Services

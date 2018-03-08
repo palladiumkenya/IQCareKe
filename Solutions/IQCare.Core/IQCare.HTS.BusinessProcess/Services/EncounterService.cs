@@ -1,51 +1,33 @@
 ﻿using System;
+using System.Threading.Tasks;
 using IQCare.HTS.BusinessProcess.Interfaces;
-using IQCare.HTS.Core.Interfaces.Repositories;
 using IQCare.HTS.Core.Model;
-using IQCare.HTS.Core.ViewModel;
+using IQCare.HTS.Infrastructure;
 
 namespace IQCare.HTS.BusinessProcess.Services
 {
     public class EncounterService : IHTSEncounterService
     {
-        private readonly IHtsEncounterRepository _htsEncounterRepository;
+        private readonly IHTSUnitOfWork _htsUnitOfWork;
 
-        public EncounterService(IHtsEncounterRepository htsEncounterRepository)
+        public EncounterService(IHTSUnitOfWork htsUnitOfWork)
         {
-            _htsEncounterRepository = htsEncounterRepository;
+            _htsUnitOfWork = htsUnitOfWork ?? throw new ArgumentNullException(nameof(htsUnitOfWork));
         }
 
-        public void addHtsEncounter(EncounterViewModel encounterViewModel)
+        public async Task AddHtsEncounter(HtsEncounter htsEncounter)
         {
             try
             {
-                HtsEncounter htsEncounter = new HtsEncounter()
-                {
-                    PatientEncounterID = 1,
-                    EverTested = encounterViewModel.EverTested,
-                    NoOfMonthsSinceReTest = encounterViewModel.NoOfMonthsReTest,
-                    SelfTestPastTwelveMonths = encounterViewModel.SelfTestLastTwelveMonths,
-                    TestedAs = encounterViewModel.ClientTested,
-                    TestingStrategy = encounterViewModel.Strategy,
-                    EncounterRemarks = encounterViewModel.Remarks,
-                    FinalResultGiven = 1,
-                    CoupleDiscordant = 1,
-                    AcceptedPartnerListing = 1,
-                    CreatedBy = 1,
-                    CreateDate = DateTime.Now,
-                    DeleteFlag = false
-                };
-
-                _htsEncounterRepository.Add(htsEncounter);
-                _htsEncounterRepository.SaveChanges();
+                var repository = _htsUnitOfWork.Repository<HtsEncounter>();
+                await repository.AddAsync(htsEncounter);
+                await _htsUnitOfWork.SaveAsync();
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
                 throw;
             }
-            
-
         }
     }
 }

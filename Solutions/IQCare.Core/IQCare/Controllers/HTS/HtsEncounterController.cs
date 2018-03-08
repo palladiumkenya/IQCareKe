@@ -4,10 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using IQCare.HTS.BusinessProcess;
 using IQCare.HTS.BusinessProcess.Interfaces;
-using IQCare.HTS.Core.Interfaces.Repositories;
-using IQCare.HTS.Core.ViewModel;
-using Microsoft.AspNetCore.Http;
+using IQCare.HTS.Core.Model;
 using Microsoft.AspNetCore.Mvc;
+using IQCare.HTS.BusinessProcess.Commands;
+using MediatR;
 
 namespace IQCare.Controllers.HTS
 {
@@ -15,18 +15,20 @@ namespace IQCare.Controllers.HTS
     [Route("api/HtsEncounter")]
     public class HtsEncounterController : Controller
     {
-        private readonly IHTSEncounterService _htsEncounterService;
+        private readonly IMediator _mediator;
 
-        public HtsEncounterController(IHTSEncounterService htsEncounterService)
+        public HtsEncounterController(IMediator mediator)
         {
-            _htsEncounterService = htsEncounterService;
+            _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] EncounterViewModel encounterViewModel)
+        public async Task<IActionResult> Post([FromBody] AddEncounterCommand addEncounterCommand)
         {
-            _htsEncounterService.addHtsEncounter(encounterViewModel);
-            return Ok();
+            var response = await _mediator.Send(addEncounterCommand, Request.HttpContext.RequestAborted);
+            if(response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
         }
     }
 }

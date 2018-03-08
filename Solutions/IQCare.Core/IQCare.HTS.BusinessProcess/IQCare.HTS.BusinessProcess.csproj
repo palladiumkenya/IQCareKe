@@ -5,7 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\IQCare.Common.Infrastructure\IQCare.Common.Infrastructure.csproj" />
     <ProjectReference Include="..\IQCare.HTS.Core\IQCare.HTS.Core.csproj" />
+    <ProjectReference Include="..\IQCare.HTS.Infrastructure\IQCare.HTS.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="4.0.1" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="4.0.0" />
   </ItemGroup>
 
 </Project>

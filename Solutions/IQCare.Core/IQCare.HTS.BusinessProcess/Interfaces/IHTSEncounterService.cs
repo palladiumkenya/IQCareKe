@@ -1,9 +1,9 @@
-﻿using IQCare.HTS.Core.ViewModel;
+﻿using System.Threading.Tasks;
 
 namespace IQCare.HTS.BusinessProcess.Interfaces
 {
     public interface IHTSEncounterService
     {
-        void addHtsEncounter(EncounterViewModel encounterViewModel);
+        Task AddHtsEncounter(HTS.Core.Model.HtsEncounter htsEncounter);
     }
 }
