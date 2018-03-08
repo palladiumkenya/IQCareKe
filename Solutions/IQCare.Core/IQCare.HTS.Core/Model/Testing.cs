@@ -1,16 +1,18 @@
 ﻿using System;
-using IQCare.SharedKernel.Model;
+using System.Collections.Generic;
+using System.Text;
 
 namespace IQCare.HTS.Core.Model
 {
-    public class Testing : Entity<Int32>
+    public class Testing
     {
-        public int HtsEncounterID { get; set; }
+        public int Id { get; set; }
+        public int HtsEncounterId { get; set; }
+        public int ProviderId { get; set; }
+        public int KitId { get; set; }
+        public string KitLotNumber { get; set; }
+        public DateTime ExpiryDate { get; set; }
+        public int Outcome { get; set; }
         public int TestRound { get; set; }
-        public int Kit { get; set; }
-        public string LotNumber { get; set; }
-        public DateTime DateOfExpiry { get; set; }
-        public int TestResult { get; set; }
-        public string OtherKit { get; set; }
     }
 }
