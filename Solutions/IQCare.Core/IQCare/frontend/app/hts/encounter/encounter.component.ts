@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {Encounter} from '../_models/encounter';
 import {FormGroup} from '@angular/forms';
 import {EncounterService} from '../_services/encounter.service';
@@ -20,7 +20,15 @@ export class EncounterComponent implements OnInit {
     finalTestingResults: FinalTestingResults;
 
     testButton1: boolean = true;
-    testButton2: boolean = true;
+    testButton2: boolean = false;
+    isDisabled: boolean = false;
+    isNoOfMonths: boolean = true;
+    isDisabilitiesEnabled: boolean = true;
+    isFinalResultDisabled: boolean = false;
+    isFinalResultGivenDisabled: boolean = false;
+    isCoupleDiscordantDisabled: boolean = false;
+    isAcceptedPartnerListingDisabled: boolean = false;
+    isReasonsDeclinedListingDisabled: boolean = false;
 
     entryPoints: any[];
     yesNoOptions: any[];
@@ -28,6 +36,10 @@ export class EncounterComponent implements OnInit {
     testedAs: any[];
     strategyOptions: any[];
     tbStatus: any[];
+    reasonsDeclined: any[];
+    hivResultsOptions: any[];
+    hivFinalResultsOptions: any[];
+    hivTestKits: any[];
 
 
     constructor(private _encounterService: EncounterService) {
@@ -48,7 +60,7 @@ export class EncounterComponent implements OnInit {
         const self = this;
 
         setTimeout(() => {
-            $("#myWizard").on("actionclicked.fu.wizard", function(evt, data) {
+            $('#myWizard').on('actionclicked.fu.wizard', function(evt, data) {
                 var currentStep = data.step;
                 var nextStep = 0;
                 var previousStep = 0;
@@ -63,9 +75,13 @@ export class EncounterComponent implements OnInit {
                     if (data.direction === 'previous') {
                         return;
                     } else {
+                        $('#datastep1').parsley().destroy();
+                        $('#datastep1').parsley({
+                            excluded: 'input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden'
+                        });
+
                         if ($('#datastep1').parsley().validate()) {
                             // validated
-                            self.onSubmitForm();
                         } else {
                             evt.preventDefault();
                             return;
@@ -75,10 +91,16 @@ export class EncounterComponent implements OnInit {
                     if (data.direction === 'previous') {
                         return;
                     } else {
+                        $('#datastep2').parsley().destroy();
+                        $('#datastep2').parsley({
+                            excluded: 'input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden'
+                        });
+
                         if ($('#datastep2').parsley().validate()) {
                             /* submit all forms */
                             self.onSubmitForm();
                         } else {
+                            console.log('Parseley Validated Error');
                             evt.preventDefault();
                             return;
                         }
@@ -107,33 +129,44 @@ export class EncounterComponent implements OnInit {
                     this.strategyOptions = options[i].value;
                 } else if (options[i].key == 'TBStatus') {
                     this.tbStatus = options[i].value;
+                } else if (options[i].key == 'ReasonsPartner') {
+                    this.reasonsDeclined = options[i].value;
+                } else if (options[i].key == 'HIVResults') {
+                    this.hivResultsOptions = options[i].value;
+                } else if (options[i].key == 'HIVTestKits') {
+                    this.hivTestKits = options[i].value;
+                } else if (options[i].key == 'HIVFinalResults') {
+                    this.hivFinalResultsOptions = options[i].value;
                 }
             }
         });
     }
 
     onSubmitForm() {
-        console.log('Try submit');
-        this._encounterService.addEncounter(this.encounter, this.testing).subscribe(data => {
-                console.log(data);
-            }, err => {
-                console.log(err);
-            });
+        // console.log('Try submit');
+        this._encounterService.addEncounter(this.encounter, this.finalTestingResults,
+            this.hivResults1, this.hivResults2).subscribe(data => {
+            console.log(data);
+        }, err => {
+            console.log(err);
+        });
     }
 
     onAddingTestResult1() {
-        /*console.log(this.testing);*/
+        // console.log(this.testing);
         /* Push results to hiv results array */
         this.hivResults1.push(this.testing);
 
-        if (this.testing.hivResultTest === 'Negative') {
+        if (this.testing.hivResultTest.itemName === 'Negative') {
             this.testButton1 = false;
             this.testButton2 = false;
-            this.finalTestingResults.finalResultHiv1 = 'Negative';
-            this.finalTestingResults.finalResult = 'Negative';
-        } else if (this.testing.hivResultTest === 'Positive') {
+            this.finalTestingResults.finalResultHiv1 = this.testing.hivResultTest.itemId;
+            this.isDisabled = true;
+            this.finalTestingResults.finalResult = this.testing.hivResultTest.itemId;
+        } else if (this.testing.hivResultTest.itemName === 'Positive') {
             this.testButton1 = false;
-            this.finalTestingResults.finalResultHiv1 = 'Positive';
+            this.testButton2 = true;
+            this.finalTestingResults.finalResultHiv1 = this.testing.hivResultTest.itemId;
         }
         /* re-set the model */
         this.testing = new Testing();
@@ -143,23 +176,87 @@ export class EncounterComponent implements OnInit {
 
     onAddingTestResult2() {
         const firstTest = this.hivResults1.slice(-1)[0];
-        console.log(firstTest);
+        // console.log(firstTest);
 
         /* Push results to hiv results array */
         this.hivResults2.push(this.testing);
+        /* Get inconclusive value from array */
+        const inconculusive = this.hivFinalResultsOptions.filter(function( obj ) {
+            return obj.itemName == 'Inconclusive';
+        });
+
         /* Logic for testing */
-        if (firstTest.hivResultTest === 'Positive' && this.testing.hivResultTest === 'Negative') {
-            this.finalTestingResults.finalResultHiv2 = 'Negative';
-            this.finalTestingResults.finalResult = 'Inconclusive';
+        if (firstTest.hivResultTest.itemName === 'Positive' && this.testing.hivResultTest.itemName === 'Negative') {
+            this.finalTestingResults.finalResultHiv2 = this.testing.hivResultTest.itemId;
+            this.finalTestingResults.finalResult = inconculusive[0].itemId;
             this.testButton2 = false;
-        } else if (firstTest.hivResultTest === 'Positive' && this.testing.hivResultTest === 'Positive') {
-            this.finalTestingResults.finalResultHiv2 = 'Positive';
-            this.finalTestingResults.finalResult = 'Positive';
+        } else if (firstTest.hivResultTest.itemName === 'Positive' && this.testing.hivResultTest.itemName === 'Positive') {
+            this.finalTestingResults.finalResultHiv2 = this.testing.hivResultTest.itemId;
+            this.finalTestingResults.finalResult = this.testing.hivResultTest.itemId;
             this.testButton2 = false;
         }
         /* re-set the model */
         this.testing = new Testing();
         /*Hide the modal after saving*/
         $('#myModal2').modal('hide');
+    }
+
+    everTestedChanged(everTested: number) {
+        const optionSelected = this.yesNoOptions.filter(function( obj ) {
+            return obj.itemId == everTested;
+        });
+
+        if (optionSelected[0].itemName == 'Yes'){
+            this.isNoOfMonths = false;
+        } else {
+            this.isNoOfMonths = true;
+            this.encounter.noofmonthsretest = null;
+        }
+    }
+
+    hasDisabilityChanged(hasDisability: number) {
+        const optionSelected = this.yesNoOptions.filter(function( obj ) {
+            return obj.itemId == hasDisability;
+        });
+
+        if (optionSelected[0].itemName == 'Yes') {
+            this.isDisabilitiesEnabled = false;
+        } else {
+            this.isDisabilitiesEnabled = true;
+            this.encounter.disability = [];
+        }
+    }
+
+    onAcceptedPartnerListingChange(acceptedPartnerListing: number) {
+        const optionSelected = this.yesNoOptions.filter(function( obj ) {
+            return obj.itemId == acceptedPartnerListing;
+        });
+
+        if (optionSelected[0].itemName == 'Yes') {
+            this.isReasonsDeclinedListingDisabled = true;
+        } else {
+            this.isReasonsDeclinedListingDisabled = false;
+            this.finalTestingResults.reasonsDeclinePartnerListing = null;
+        }
+    }
+
+    onSecondProviderSelected(selectedOption: number) {
+        if (selectedOption == 1) {
+            this.isFinalResultDisabled = true;
+            this.isFinalResultGivenDisabled = true;
+            this.isCoupleDiscordantDisabled = true;
+            this.isAcceptedPartnerListingDisabled = true;
+            this.isReasonsDeclinedListingDisabled = true;
+            this.isDisabled = true;
+            this.testButton2 = false;
+        } else {
+            this.isFinalResultDisabled = false;
+            this.isFinalResultGivenDisabled = false;
+            this.isCoupleDiscordantDisabled = false;
+            this.isAcceptedPartnerListingDisabled = false;
+            this.isReasonsDeclinedListingDisabled = false;
+            this.isDisabled = false;
+            this.testButton2 = true;
+        }
     }
 }

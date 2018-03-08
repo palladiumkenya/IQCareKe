@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,300,500,700");
-@import "~ng-pick-datetime/assets/style/picker.min.css";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 /*
  *
  *   INSPINIA - Responsive Admin Theme
@@ -8575,6 +8575,9 @@ body.md-skin {
     margin: 0;
   }
 }
-.owl-dt-calendar-control .owl-dt-calendar-control-content{
-    z-index: 1200!important;
+.checkbox, .radio {
+  margin-top: 0px !important;
+}
+::ng-deep .cdk-overlay-container{
+  z-index: 1200 !important;
 }

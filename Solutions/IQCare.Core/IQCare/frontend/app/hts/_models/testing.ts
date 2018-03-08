@@ -1,15 +1,19 @@
 export class Testing {
-    kitName: string;
-    lotNumberTest: string;
-    expiryTest: string;
-    hivResultTest: string;
+    KitId: number;
+    KitLotNumber: string;
+    ExpiryDate: string;
+    Outcome: number;
+    TestRound: number;
+    HtsEncounterId: number;
 }
 
 export class FinalTestingResults {
-    finalResultHiv1: string;
-    finalResultHiv2: string;
-    finalResult: string;
-    finalResultGiven: string;
-    coupleDiscordant: string;
+    finalResultHiv1: number;
+    finalResultHiv2: number;
+    finalResult: number;
+    finalResultGiven: number;
+    coupleDiscordant: number;
     finalResultsRemarks: string;
-}
+    acceptedPartnerListing: number;
+    reasonsDeclinePartnerListing: number;
+ }

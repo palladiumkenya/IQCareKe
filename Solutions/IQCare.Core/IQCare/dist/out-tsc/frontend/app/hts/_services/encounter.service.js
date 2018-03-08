@@ -28,10 +28,12 @@ var EncounterService = /** @class */ (function () {
         var _this = this;
         return this.http.get(this.API_URL + this._lookupurl + '/htsOptions').pipe(operators_1.tap(function (htsoptions) { return _this.log('fetched all hts options'); }), operators_1.catchError(this.handleError('getHtsOptions')));
     };
-    EncounterService.prototype.addEncounter = function (encounter, testing) {
+    EncounterService.prototype.addEncounter = function (encounter, finalTestingResults) {
         var _this = this;
         var body = JSON.stringify(encounter);
+        var body2 = JSON.stringify(finalTestingResults);
         console.log(encounter);
+        console.log(finalTestingResults);
         return this.http.post(this.API_URL + this._url, body, httpOptions).pipe(operators_1.tap(function (addedEncounter) { return _this.log("added encounter w/ id"); }), operators_1.catchError(this.handleError('addEncounter')));
     };
     EncounterService.prototype.handleError = function (operation, result) {
