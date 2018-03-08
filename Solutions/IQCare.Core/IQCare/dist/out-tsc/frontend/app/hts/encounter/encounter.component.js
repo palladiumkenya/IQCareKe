@@ -43,14 +43,12 @@ var EncounterComponent = /** @class */ (function () {
                         return;
                     }
                     else {
-                        if ($('#datastep1').parsley().validate()) {
+                        /*if ($('#datastep1').parsley().validate()) {
                             // validated
-                            self.onSubmitForm();
-                        }
-                        else {
+                        } else {
                             evt.preventDefault();
                             return;
-                        }
+                        }*/
                     }
                 }
                 else if (data.step === 2) {
@@ -58,11 +56,16 @@ var EncounterComponent = /** @class */ (function () {
                         return;
                     }
                     else {
+                        $('#datastep2').parsley().destroy();
+                        $('#datastep2').parsley({
+                            excluded: 'input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden'
+                        });
                         if ($('#datastep2').parsley().validate()) {
                             /* submit all forms */
                             self.onSubmitForm();
                         }
                         else {
+                            console.log('Parseley Validated Error');
                             evt.preventDefault();
                             return;
                         }
@@ -97,30 +100,40 @@ var EncounterComponent = /** @class */ (function () {
                 else if (options[i].key == 'TBStatus') {
                     _this.tbStatus = options[i].value;
                 }
+                else if (options[i].key == 'ReasonsPartner') {
+                    _this.reasonsDeclined = options[i].value;
+                }
+                else if (options[i].key == 'HIVResults') {
+                    _this.hivResultsOptions = options[i].value;
+                }
+                else if (options[i].key == 'HIVTestKits') {
+                    _this.hivTestKits = options[i].value;
+                }
             }
         });
     };
     EncounterComponent.prototype.onSubmitForm = function () {
         console.log('Try submit');
-        this._encounterService.addEncounter(this.encounter, this.testing).subscribe(function (data) {
+        this._encounterService.addEncounter(this.encounter, this.finalTestingResults).subscribe(function (data) {
             console.log(data);
         }, function (err) {
             console.log(err);
         });
     };
     EncounterComponent.prototype.onAddingTestResult1 = function () {
-        /*console.log(this.testing);*/
+        console.log(this.testing);
         /* Push results to hiv results array */
         this.hivResults1.push(this.testing);
-        if (this.testing.hivResultTest === 'Negative') {
+        if (this.testing.hivResultTest.itemName === 'Negative') {
             this.testButton1 = false;
             this.testButton2 = false;
-            this.finalTestingResults.finalResultHiv1 = 'Negative';
-            this.finalTestingResults.finalResult = 'Negative';
+            this.finalTestingResults.finalResultHiv1 = this.testing.hivResultTest.itemId;
+            // this.finalTestingResults.finalResultHiv2 = this.testing.hivResultTest.itemId;
+            this.finalTestingResults.finalResult = this.testing.hivResultTest.itemId;
         }
-        else if (this.testing.hivResultTest === 'Positive') {
+        else if (this.testing.hivResultTest.itemName === 'Positive') {
             this.testButton1 = false;
-            this.finalTestingResults.finalResultHiv1 = 'Positive';
+            // this.finalTestingResults.finalResultHiv1 = 'Positive';
         }
         /* re-set the model */
         this.testing = new testing_1.Testing();
@@ -134,13 +147,13 @@ var EncounterComponent = /** @class */ (function () {
         this.hivResults2.push(this.testing);
         /* Logic for testing */
         if (firstTest.hivResultTest === 'Positive' && this.testing.hivResultTest === 'Negative') {
-            this.finalTestingResults.finalResultHiv2 = 'Negative';
-            this.finalTestingResults.finalResult = 'Inconclusive';
+            // this.finalTestingResults.finalResultHiv2 = 'Negative';
+            // this.finalTestingResults.finalResult = 'Inconclusive';
             this.testButton2 = false;
         }
         else if (firstTest.hivResultTest === 'Positive' && this.testing.hivResultTest === 'Positive') {
-            this.finalTestingResults.finalResultHiv2 = 'Positive';
-            this.finalTestingResults.finalResult = 'Positive';
+            // this.finalTestingResults.finalResultHiv2 = 'Positive';
+            // this.finalTestingResults.finalResult = 'Positive';
             this.testButton2 = false;
         }
         /* re-set the model */
