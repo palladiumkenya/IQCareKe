@@ -58,12 +58,9 @@ namespace IQCare.CCC.UILogic.Interoperability
                             var jss = new JavaScriptSerializer();
                             string patientLabOrder = jss.Serialize(listLabOrder);
                             //include userid and facility ID
-                            labOrderManager.savePatientLabOrder(patient.Id, (int) patient.ptn_pk, 1, 209, 203,
-                                patientMasterVisitId, DateTime.Today.ToString(), "IL lab order", patientLabOrder);
-                            labOrder = labOrderManager.GetPatientLabOrdersByDate((int) patient.ptn_pk, DateTime.Today);
-                            labDetails =
-                                labOrderManager.GetPatientLabDetailsByDate(labOrder.FirstOrDefault().Id,
-                                    DateTime.Today);
+                            labOrderManager.savePatientLabOrder(patient.Id, (int)patient.ptn_pk, 1, 209, 203, patientMasterVisitId, DateTime.Today.ToString(), "IL lab order", patientLabOrder,"completed");
+                            labOrder = labOrderManager.GetPatientLabOrdersByDate((int)patient.ptn_pk, DateTime.Today);
+                            labDetails = labOrderManager.GetPatientLabDetailsByDate(labOrder.FirstOrDefault().Id, DateTime.Today);
                         }
                         else
                         {

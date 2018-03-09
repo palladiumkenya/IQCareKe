@@ -70,7 +70,7 @@ namespace IQCare.Web.CCC.WebService
             var labOrder = new PatientLabOrderManager();
             if (patientPk > 0)
             {
-                labOrder.savePatientLabOrder(patientId, patientPk, userId, facilityId, moduleId, patientMasterVisitId, labOrderDate, orderNotes, patientLabOrder);
+                labOrder.savePatientLabOrder(patientId, patientPk, userId, facilityId, moduleId, patientMasterVisitId, labOrderDate, orderNotes, patientLabOrder, "pending");
 
                 Msg = "Patient Lab Order Recorded Successfully .";
 
