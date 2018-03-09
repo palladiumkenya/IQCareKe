@@ -1,5 +1,7 @@
 export class Testing {
     KitId: number;
+    kitName: any;
+    hivResultTest: any;
     KitLotNumber: string;
     ExpiryDate: string;
     Outcome: number;
