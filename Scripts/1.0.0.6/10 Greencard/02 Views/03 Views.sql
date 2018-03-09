@@ -83,6 +83,32 @@ dbo.PatientMasterVisit AS c ON b.PatientMasterVisitId = c.Id LEFT OUTER JOIN
 
 GO
 
+
+
+
+/****** Object:  View [dbo].[vw_PersonGodsNumber] ******/
+IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[vw_PersonGodsNumber]'))
+DROP VIEW [dbo].[vw_PersonGodsNumber]
+GO
+
+/***** Object:  View [dbo].[vw_PersonGodsNumber]    Script Date: 3/8/2018 3:28:31 PM *****/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE VIEW [dbo].[vw_PersonGodsNumber]
+AS
+SELECT        i.Id, i.Name, i.Code,i.DisplayName, i.DataType, i.PrefixType, i.SuffixType, p.PersonId,(SELECT Id FROM Patient WHERE PersonId=p.PersonId) PatientId, 
+                         p.IdentifierId, p.IdentifierValue, p.DeleteFlag
+FROM            dbo.Identifiers i INNER JOIN
+                         dbo.PersonIdentifier p ON i.Id = p.IdentifierId
+WHERE        (i.Name = 'GODS_NUMBER')
+
+GO
+
 /****** Object:  View [dbo].[API_DrugPrescription]    Script Date: 01/25/2018 14:25:27 ******/
 IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[API_DrugPrescription]'))
 DROP VIEW [dbo].[API_DrugPrescription]
@@ -100,11 +126,7 @@ AS
 SELECT        
   o.Ptn_pk as ptnpk,
   (SELECT top 1 Id FROM Patient WHERE ptn_pk=o.ptn_pk) as PatientId,
-  o.PatientMasterVisitId,
-	CASE (SELECT top 1 ItemName FROM LookupItemView WHERE MasterName='PatientType' AND ItemId=p.PatientType)
-		WHEN 'New' THEN CONCAT((SELECT top 1 f.NationalId FROM mst_Facility f WHERE f.DeleteFlag=0), '-'+i.IdentifierValue)
-		ELSE i.IdentifierValue
-	END  [ID],
+  o.PatientMasterVisitId, i.IdentifierValue [ID],
 	(SELECT top 1 f.NationalId FROM mst_Facility f WHERE f.DeleteFlag=0) [SENDING_FACILITY],
 	ISNULL((SELECT gn.IdentifierValue FROM vw_PersonGodsNumber gn WHERE gn.PatientId=i.patientId),'') EXT_ID,
 	'GODS_NUMBER' [EXT_IDENTIFIER_TYPE],
