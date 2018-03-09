@@ -1,5 +1,6 @@
 ﻿using IQCare.Common.Core.Models;
 using IQCare.HTS.BusinessProcess.Commands;
+using IQCare.HTS.Core.Model;
 using IQCare.HTS.Infrastructure;
 using MediatR;
 using System;
@@ -19,6 +20,13 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
         }
         public async Task<Result<ReferPatientResponse>> Handle(ReferPatientCommand request, CancellationToken cancellationToken)
         {
+            var referral = new Referral
+            {
+
+            };
+
+            await _hTSUnitOfWork.Repository<Referral>().AddAsync(referral);
+            await _hTSUnitOfWork.SaveAsync();
             throw new NotImplementedException();
         }
     }
