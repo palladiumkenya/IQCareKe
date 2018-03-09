@@ -38,7 +38,7 @@ namespace IQCare.CCC.UILogic
         private readonly IPatientVisitManager _visitManager = (IPatientVisitManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientVisit, BusinessProcess.CCC");
         PatientEncounterManager _patientEncounterManager=new PatientEncounterManager();
 
-        public void savePatientLabOrder(int patientID, int patient_Pk, int userId, int facilityID, int moduleId, int patientMasterVisitId, string labOrderDate, string orderNotes, string patientLabOrder)
+        public void savePatientLabOrder(int patientID, int patient_Pk, int userId, int facilityID, int moduleId, int patientMasterVisitId, string labOrderDate, string orderNotes, string patientLabOrder, string orderStatus)
         {
             int visitId = 0;
             int orderId = 0;
@@ -47,7 +47,6 @@ namespace IQCare.CCC.UILogic
             DateTime orderDate = Convert.ToDateTime(labOrderDate);
             // DateTime orderDate = DateTime.Now;
             //DateTime orderDate = DateTime.Parse(labOrderDate);
-            var pending = "Pending";
             var jss = new JavaScriptSerializer();
             IList<ListLabOrder> data = jss.Deserialize<IList<ListLabOrder>>(patientLabOrder);
 
@@ -75,7 +74,7 @@ namespace IQCare.CCC.UILogic
                     OrderedBy = userId,
                     ClinicalOrderNotes = orderNotes,
                     PatientMasterVisitId = patientMasterVisitId,
-                    OrderStatus = pending,
+                    OrderStatus = orderStatus,
                     OrderDate = orderDate,
                     UserId = userId
                 };
@@ -103,7 +102,7 @@ namespace IQCare.CCC.UILogic
                         SampleDate = orderDate,
                         Reasons = t.OrderReason,
                         CreatedBy = userId,
-                        Results = pending,
+                        Results = orderStatus,
                         LabOrderId = orderId,
                         LabTestId = t.LabNameId,  //parameter
                         LabOrderTestId = testId,  //uniquely identifies a particular test
