@@ -16,6 +16,8 @@ namespace IQCare.CCC.UILogic.Interoperability
         //int _facilityId = Convert.ToInt32(HttpContext.Current.Session["AppLocationId"]);
         public string Save(ViralLoadResultsDto viralLoadResults)
         {
+            List<LabOrderEntity> labOrder = null;
+            List<LabDetailsEntity> labDetails = null;
             var results = viralLoadResults.ViralLoadResult;
             if (results != null)
             {
@@ -29,7 +31,8 @@ namespace IQCare.CCC.UILogic.Interoperability
                     {
                         
                         //todo brian check
-                        var labOrder = labOrderManager.GetPatientLabOrdersByDate((int) patient.ptn_pk,results.FirstOrDefault().DateSampleCollected);
+                        labOrder = labOrderManager.GetPatientLabOrdersByDate((int) patient.ptn_pk,results.FirstOrDefault().DateSampleCollected);
+                        labDetails = labOrderManager.GetPatientLabDetailsByDate(labOrder.FirstOrDefault().Id, results.FirstOrDefault().DateSampleCollected);
                         
                         if (labOrder.Count == 0)
                         {
@@ -55,32 +58,35 @@ namespace IQCare.CCC.UILogic.Interoperability
                             string patientLabOrder = jss.Serialize(listLabOrder);
                             //include userid and facility ID
                             labOrderManager.savePatientLabOrder(patient.Id, (int)patient.ptn_pk, 1, 209, 203, patientMasterVisitId, DateTime.Today.ToString(), "IL lab order", patientLabOrder);
+                            labOrder = labOrderManager.GetPatientLabOrdersByDate((int)patient.ptn_pk, DateTime.Today);
+                            labDetails = labOrderManager.GetPatientLabDetailsByDate(labOrder.FirstOrDefault().Id, DateTime.Today);
                         }
 
-                        var savedLabOrder = labOrderManager.GetPatientLabOrdersByDate((int)patient.ptn_pk, DateTime.Today).FirstOrDefault();
-                        var labDetails = labOrderManager.GetPatientLabDetailsByDate(savedLabOrder.Id, results.FirstOrDefault().DateSampleCollected);
-                        foreach (var result in results)
+                        if (labOrder.FirstOrDefault() != null)
                         {
-                            var labOrd = savedLabOrder;
-                            if (labOrd != null)
+                            foreach (var result in results)
                             {
-                                var labResults = new LabResultsEntity()
+                                var labOrd = labOrder.FirstOrDefault();
+                                if (labOrd != null)
                                 {
-                                    //todo remove hard coding
-                                    LabOrderId = labOrd.Id,
-                                    LabOrderTestId = labDetails.FirstOrDefault().Id,
-                                    ParameterId = 3,
-                                    LabTestId = 0,
-                                    ResultValue = Convert.ToDecimal(result.VlResult),
-                                    ResultUnit = "copies/ml",
-                                    ResultUnitId = 129,
-                                };
-                                labOrderManager.AddPatientLabResults(labResults);
+                                    var labResults = new LabResultsEntity()
+                                    {
+                                        //todo remove hard coding
+                                        LabOrderId = labOrd.Id,
+                                        LabOrderTestId = labDetails.FirstOrDefault().Id,
+                                        ParameterId = 3,
+                                        LabTestId = 0,
+                                        ResultValue = Convert.ToDecimal(result.VlResult),
+                                        ResultUnit = "copies/ml",
+                                        ResultUnitId = 129,
+                                    };
+                                    labOrderManager.AddPatientLabResults(labResults);
+                                }
                             }
-                        }
                         Msg = "Sucess";
+                        }
                         //todo update laborder and lab details entities
-
+                        Msg = "Lab order not found";
                     }
                     else
                     {
