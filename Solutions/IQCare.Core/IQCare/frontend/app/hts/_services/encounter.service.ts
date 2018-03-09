@@ -36,8 +36,11 @@ export class EncounterService {
         const hivResults1Body = JSON.stringify(hivResults1);
         const hivResults2Body = JSON.stringify(hivResults2);
 
-        const Indata = {'encounter': encounterBody, 'hivResults1': hivResults1Body,
-            'hivResults2': hivResults2Body, 'finalResultsBody': finalResultsBody };
+        const Indata = {
+            'Encounter': encounterBody,
+            'Testing': [hivResults1Body, hivResults2Body],
+            'FinalTestingResult': finalResultsBody
+        };
 
         return this.http.post(this.API_URL + this._url, Indata, httpOptions).pipe(
             tap((addedEncounter: Encounter) => this.log(`added encounter w/ id`)),

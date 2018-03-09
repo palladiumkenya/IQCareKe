@@ -155,6 +155,9 @@ export class EncounterComponent implements OnInit {
     onAddingTestResult1() {
         // console.log(this.testing);
         /* Push results to hiv results array */
+        this.testing.KitId = this.testing.kitName.itemId;
+        this.testing.Outcome = this.testing.hivResultTest.itemId;
+        this.testing.TestRound = 1;
         this.hivResults1.push(this.testing);
 
         if (this.testing.hivResultTest.itemName === 'Negative') {
@@ -179,6 +182,9 @@ export class EncounterComponent implements OnInit {
         // console.log(firstTest);
 
         /* Push results to hiv results array */
+        this.testing.KitId = this.testing.kitName.itemId;
+        this.testing.Outcome = this.testing.hivResultTest.itemId;
+        this.testing.TestRound = 2;
         this.hivResults2.push(this.testing);
         /* Get inconclusive value from array */
         const inconculusive = this.hivFinalResultsOptions.filter(function( obj ) {
@@ -206,11 +212,11 @@ export class EncounterComponent implements OnInit {
             return obj.itemId == everTested;
         });
 
-        if (optionSelected[0].itemName == 'Yes'){
+        if (optionSelected[0].itemName == 'Yes') {
             this.isNoOfMonths = false;
         } else {
             this.isNoOfMonths = true;
-            this.encounter.noofmonthsretest = null;
+            this.encounter.MonthsSinceLastTest = null;
         }
     }
 
@@ -223,7 +229,7 @@ export class EncounterComponent implements OnInit {
             this.isDisabilitiesEnabled = false;
         } else {
             this.isDisabilitiesEnabled = true;
-            this.encounter.disability = [];
+            this.encounter.Disabilities = [];
         }
     }
 

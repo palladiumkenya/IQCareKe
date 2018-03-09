@@ -29,13 +29,13 @@ namespace IQCare.HTS.BusinessProcess.Commands
         public int TestedAs { get; set; }
         public int TestingStrategy { get; set; }
         public string EncounterRemarks { get; set; }
-        public int FinalResultGiven { get; set; }
-        public string TestEntryPoint { get; set; }
+        public int TestEntryPoint { get; set; }
         public int Consent { get; set; }
         public int EverSelfTested { get; set; }
         public string GeoLocation { get; set; }
         public int HasDisability { get; set; }
         public List<int> Disabilities { get; set; }
+        public int TbScreening { get; set; }
     }
 
 
