@@ -29,8 +29,7 @@ namespace IQCare.CCC.UILogic.Interoperability
                     {
                         
                         //todo brian check
-                        var labOrder = labOrderManager.GetPatientLabOrdersByDate((int) patient.ptn_pk,
-                            results.FirstOrDefault().DateSampleCollected);
+                        var labOrder = labOrderManager.GetPatientLabOrdersByDate((int) patient.ptn_pk,results.FirstOrDefault().DateSampleCollected);
                         
                         if (labOrder.Count == 0)
                         {
@@ -43,7 +42,7 @@ namespace IQCare.CCC.UILogic.Interoperability
                             {
                                 FacilityId = Convert.ToInt32(viralLoadResults.MesssageHeader.ReceivingFacility),
                                 LabName = results.FirstOrDefault().LabTestedIn,
-                                LabNameId = 0,
+                                LabNameId = 3,
                                 LabNotes = results.FirstOrDefault().Regimen + " " + results.FirstOrDefault().SampleType,
                                 LabOrderDate = results.FirstOrDefault().DateSampleCollected,
                                 LabOrderId = 0,
@@ -57,11 +56,12 @@ namespace IQCare.CCC.UILogic.Interoperability
                             //include userid and facility ID
                             labOrderManager.savePatientLabOrder(patient.Id, (int)patient.ptn_pk, 1, 209, 203, patientMasterVisitId, DateTime.Today.ToString(), "IL lab order", patientLabOrder);
                         }
-                        var labDetails =
-                            labOrderManager.GetPatientLabDetailsByDate(labOrder.FirstOrDefault().Id, results.FirstOrDefault().DateSampleCollected);
+
+                        var savedLabOrder = labOrderManager.GetPatientLabOrdersByDate((int)patient.ptn_pk, DateTime.Today).FirstOrDefault();
+                        var labDetails = labOrderManager.GetPatientLabDetailsByDate(savedLabOrder.Id, results.FirstOrDefault().DateSampleCollected);
                         foreach (var result in results)
                         {
-                            var labOrd = labOrder.FirstOrDefault();
+                            var labOrd = savedLabOrder;
                             if (labOrd != null)
                             {
                                 var labResults = new LabResultsEntity()
