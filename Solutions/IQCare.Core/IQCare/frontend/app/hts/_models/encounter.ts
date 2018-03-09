@@ -1,17 +1,19 @@
 export class Encounter {
     id?: number;
-    personId?: number;
-    providerId?: number;
-    patientEncounterId?: number;
-    everTested?: number;
-    noofmonthsretest?: number;
-    serviceEntryPoint?: number;
-    hasDisability?: number;
-    selfTest?: number;
-    disability?: any[];
-    consent?: number;
-    clientTestedAs?: number;
-    strategy?: number;
-    remarks?: string;
-    tbScreening?: number;
+    PersonId?: number;
+    ProviderId?: number;
+    PatientEncounterID?: number;
+    EverTested?: number;
+    MonthsSinceLastTest?: number;
+    MonthSinceSelfTest?: number;
+    TestEntryPoint?: number;
+    HasDisability?: number;
+    EverSelfTested?: number;
+    Disabilities?: any[];
+    Consent?: number;
+    TestedAs?: number;
+    TestingStrategy?: number;
+    EncounterRemarks?: string;
+    TbScreening?: number;
+    GeoLocation?: string;
 }
