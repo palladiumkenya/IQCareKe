@@ -35,7 +35,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         EncounterRemarks = request.Encounter.EncounterRemarks,
                         EverSelfTested = request.Encounter.EverSelfTested,
                         EverTested = request.Encounter.EverTested,
-                        FinalResultGiven = request.Encounter.FinalResultGiven,
+                        FinalResultGiven = request.FinalTestingResult.FinalResultGiven,
                         GeoLocation = request.Encounter.GeoLocation,
                         MonthSinceSelfTest = request.Encounter.MonthSinceSelfTest,
                         MonthsSinceLastTest = request.Encounter.MonthsSinceLastTest,

@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using IQCare.HTS.BusinessProcess.Commands;
+using IQCare.Registration.BusinessProcess.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,6 +22,14 @@ namespace IQCare.Controllers.HTS
             var response = await _mediator.Send(command, Request.HttpContext.RequestAborted);
             if (response.IsValid)
                 return Ok();
+            return BadRequest();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> LinkPatient(AddLinkageCommand command)
+        {
+            var response = await _mediator.Send(command, Request.HttpContext.RequestAborted);
+            if (response.IsValid) return Ok();
             return BadRequest();
         }
     }
