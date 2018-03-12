@@ -237,7 +237,8 @@ namespace IQCare.WebApi.Logic.MessageHandler
                 ViralLoadResultEntity entity = new JavaScriptSerializer().Deserialize<ViralLoadResultEntity>(incomingMessage.Message);
                 ViralLoadResultsDto vlResultsDto = _dtoMapper.ViralLoadResults(entity);
                 var processViralLoadResults = new ProcessViralLoadResults();
-                var msg = processViralLoadResults.Save(vlResultsDto);
+                //var msg = processViralLoadResults.Save(vlResultsDto);
+                var msg = "could not be processed";
 
                 incomingMessage.LogMessage = msg;
                 //update message that it has been processed
