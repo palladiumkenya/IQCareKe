@@ -31,18 +31,20 @@ export class EncounterService {
 
     public addEncounter(encounter: Encounter, finalTestingResults: FinalTestingResults,
                         hivResults1: any[], hivResults2: any[]): Observable<Encounter> {
-        const encounterBody = JSON.stringify(encounter);
-        const finalResultsBody = JSON.stringify(finalTestingResults);
-        const hivResults1Body = JSON.stringify(hivResults1);
-        const hivResults2Body = JSON.stringify(hivResults2);
+        const encounterBody = encounter;
+        const finalResultsBody = finalTestingResults;
+        const hivResultsBody = hivResults1;
+        if ( hivResults2.length > 0 ) {
+            hivResultsBody.push(hivResults2);
+        }
 
         const Indata = {
             'Encounter': encounterBody,
-            'Testing': [hivResults1Body, hivResults2Body],
+            'Testing': hivResultsBody,
             'FinalTestingResult': finalResultsBody
         };
 
-        return this.http.post(this.API_URL + this._url, Indata, httpOptions).pipe(
+        return this.http.post(this.API_URL + this._url, JSON.stringify(Indata), httpOptions).pipe(
             tap((addedEncounter: Encounter) => this.log(`added encounter w/ id`)),
             catchError(this.handleError<Encounter>('addEncounter'))
         );

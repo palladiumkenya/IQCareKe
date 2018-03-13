@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IQCare.Common.BusinessProcess.Commands.Lookup;
 using IQCare.Common.BusinessProcess.Interfaces;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,27 +14,39 @@ namespace IQCare.Controllers.Common
     [Route("api/Lookup")]
     public class LookupController : Controller
     {
-        private readonly ILookupItemViewService _lookupItemViewService;
+        private readonly IMediator _mediator;
 
-        public LookupController(ILookupItemViewService lookupItemViewService)
+        public LookupController(IMediator mediator)
         {
-            _lookupItemViewService = lookupItemViewService;
+            _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
-        [HttpGet("byGroupName")]
-        public IActionResult Get(string groupName)
-        {
-            var items = _lookupItemViewService.GetLookupItemsByGroup(groupName);
-            return Ok(items);
-        }
+        //[HttpGet("byGroupName")]
+        //public IActionResult Get(string groupName)
+        //{
+        //    //var items = _lookupItemViewService.GetLookupItemsByGroup(groupName);
+        //    return Ok(items);
+        //}
 
-        [HttpGet("htsOptions")]
-        public IActionResult Get()
-        {
-            string[] options = new string[] {"HTSEntryPoints", "YesNo", "Disabilities", "TestedAs", "Strategy", "TBStatus", "ReasonsPartner", "HIVResults", "HIVTestKits", "HIVFinalResults" };
+        //[HttpGet("htsOptions")]
+        //public IActionResult Get()
+        //{
+        //    string[] options = new string[] {"HTSEntryPoints", "YesNo", "Disabilities", "TestedAs", "Strategy", "TBStatus", "ReasonsPartner", "HIVResults", "HIVTestKits", "HIVFinalResults" };
 
-            var results = _lookupItemViewService.GetHtsOptions(options);
-            return Ok(results);
+        //    var results = _lookupItemViewService.GetHtsOptions(options);
+        //    return Ok(results);
+        //}
+
+        [HttpGet("registrationOptions")]
+        public async Task<IActionResult> GetOptions()
+        {
+            string[] options = new string[] { "MaritalStatus", "KeyPopulation", "Gender" };
+            var results = await _mediator.Send(new GetRegistrationOptionsCommand {RegistrationOptions = options},
+                HttpContext.RequestAborted);
+
+            if (results.IsValid)
+                return Ok(results.Value);
+            return BadRequest(results);
         }
     }
 }

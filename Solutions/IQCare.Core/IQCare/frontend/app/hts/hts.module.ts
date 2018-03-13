@@ -8,6 +8,7 @@ import { HtsRoutingModule } from './hts-routing.module';
 import { EncounterComponent } from './encounter/encounter.component';
 import { LinkageReferralComponent } from './linkage-referral/linkage-referral.component';
 import { EncounterService } from './_services/encounter.service';
+import { LinkageReferralService } from './_services/linkage-referral.service';
 import { PnsformComponent } from './pnsform/pnsform.component';
 import { PnsTracingComponent } from './pnstracing/pnstracing.component';
 import { FamilyTracingComponent } from './family-tracing/family-tracing.component';
@@ -40,7 +41,8 @@ import { LinkageComponent } from './linkage/linkage.component';
   exports: [
   ],
   providers: [
-      EncounterService
+      EncounterService,
+      LinkageReferralService
   ]
 })
 export class HtsModule { }

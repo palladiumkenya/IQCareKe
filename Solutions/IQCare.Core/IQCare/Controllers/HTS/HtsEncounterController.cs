@@ -1,13 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using IQCare.HTS.BusinessProcess;
-using IQCare.HTS.BusinessProcess.Interfaces;
-using IQCare.HTS.Core.Model;
-using Microsoft.AspNetCore.Mvc;
 using IQCare.HTS.BusinessProcess.Commands;
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
 
 namespace IQCare.Controllers.HTS
 {

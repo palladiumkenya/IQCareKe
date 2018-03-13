@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Encounter} from '../_models/encounter';
-import {FormGroup} from '@angular/forms';
 import {EncounterService} from '../_services/encounter.service';
 import {FinalTestingResults, Testing} from '../_models/testing';
-import {tokenReference} from '@angular/compiler';
 
 declare var $: any;
 
@@ -17,6 +15,10 @@ export class EncounterComponent implements OnInit {
     testing: Testing;
     hivResults1: Testing[];
     hivResults2: Testing[];
+
+    hiv1: Testing[];
+    hiv2: Testing[];
+
     finalTestingResults: FinalTestingResults;
 
     testButton1: boolean = true;
@@ -47,11 +49,22 @@ export class EncounterComponent implements OnInit {
 
     ngOnInit() {
         this.encounter = new Encounter();
+        // set default values
+        this.encounter.PersonId = 1;
+        this.encounter.ProviderId = 1;
+        this.encounter.PatientEncounterID = 1;
+        this.encounter.MonthSinceSelfTest = null;
+        this.encounter.GeoLocation = null;
+
+        //
         this.testing = new Testing();
         this.finalTestingResults = new FinalTestingResults();
 
         this.hivResults1 = [];
         this.hivResults2 = [];
+
+        this.hiv1 = [];
+        this.hiv2 = [];
 
 
 
@@ -145,7 +158,7 @@ export class EncounterComponent implements OnInit {
     onSubmitForm() {
         // console.log('Try submit');
         this._encounterService.addEncounter(this.encounter, this.finalTestingResults,
-            this.hivResults1, this.hivResults2).subscribe(data => {
+            this.hiv1, this.hiv2).subscribe(data => {
             console.log(data);
         }, err => {
             console.log(err);
@@ -158,7 +171,17 @@ export class EncounterComponent implements OnInit {
         this.testing.KitId = this.testing.kitName.itemId;
         this.testing.Outcome = this.testing.hivResultTest.itemId;
         this.testing.TestRound = 1;
+
+        // Set object variables
+        const test = new Testing();
+        test.KitLotNumber = this.testing.KitLotNumber;
+        test.ExpiryDate = this.testing.ExpiryDate;
+        test.KitId = this.testing.KitId;
+        test.Outcome = this.testing.Outcome;
+        test.TestRound = this.testing.TestRound;
+
         this.hivResults1.push(this.testing);
+        this.hiv1.push(test);
 
         if (this.testing.hivResultTest.itemName === 'Negative') {
             this.testButton1 = false;
@@ -185,7 +208,18 @@ export class EncounterComponent implements OnInit {
         this.testing.KitId = this.testing.kitName.itemId;
         this.testing.Outcome = this.testing.hivResultTest.itemId;
         this.testing.TestRound = 2;
-        this.hivResults2.push(this.testing);
+
+        // Set object variables
+        const test = new Testing();
+        test.KitLotNumber = this.testing.KitLotNumber;
+        test.ExpiryDate = this.testing.ExpiryDate;
+        test.KitId = this.testing.KitId;
+        test.Outcome = this.testing.Outcome;
+        test.TestRound = this.testing.TestRound;
+
+        this.hivResults2.push(test);
+        this.hiv2.push(test);
+
         /* Get inconclusive value from array */
         const inconculusive = this.hivFinalResultsOptions.filter(function( obj ) {
             return obj.itemName == 'Inconclusive';
