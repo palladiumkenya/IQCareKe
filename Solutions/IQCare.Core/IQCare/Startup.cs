@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using IQCare.HTS.BusinessProcess.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -12,7 +11,6 @@ using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using IQCare.HTS.BusinessProcess.Interfaces;
 using IQCare.HTS.Infrastructure;
 using IQCare.Common.BusinessProcess.Interfaces;
 using IQCare.Common.BusinessProcess.Services;
@@ -60,7 +58,6 @@ namespace IQCare
             services.AddScoped<ILookupItemViewRepository, LookupItemViewRepository>();
 
             //Services
-            services.AddScoped<IHTSEncounterService, EncounterService>();
             services.AddScoped<ILookupItemViewService, LookupItemViewService>();
         }
 
