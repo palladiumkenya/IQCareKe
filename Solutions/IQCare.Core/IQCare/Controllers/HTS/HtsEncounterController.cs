@@ -3,6 +3,9 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using IQCare.HTS.BusinessProcess.Commands;
+using MediatR;
 
 namespace IQCare.Controllers.HTS
 {

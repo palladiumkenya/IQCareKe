@@ -1,3 +1,5 @@
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES 
+           WHERE TABLE_NAME = N'HtsEncounter')
 CREATE TABLE dbo.HtsEncounter
 (
 	[Id] INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
@@ -28,12 +30,15 @@ CREATE TABLE dbo.HtsEncounter
 
 	[CoupleDiscordant] INT NULL,
 
-	[TestEntryPoint] VARCHAR(200) NOT NULL,
+	[TestEntryPoint] INT NOT NULL,
 
 	[Consent] INT NOT NULL,
 
 	[EverSelfTested] INT NOT NULL,
 
 	[GeoLocation] VARCHAR(200) NOT NULL
-		
 )
+
+ELSE
+	ALTER TABLE dbo.HtsEncounter 
+		ALTER COLUMN [TestEntryPoint] INT NOT NULL
