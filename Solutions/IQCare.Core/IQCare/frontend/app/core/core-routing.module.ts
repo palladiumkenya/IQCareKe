@@ -3,20 +3,23 @@ import { Routes, RouterModule } from '@angular/router';
 import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'hts',
-    pathMatch: 'full'
-  },
-  {
-    path: 'hts',
-    loadChildren: '../hts/hts.module#HtsModule'
-  },
-  {
-    path: '**',
-    component: NotFoundComponent
-  }
-  
+    {
+        path: '',
+        redirectTo: 'hts',
+        pathMatch: 'full'
+    },
+    {
+        path: 'hts',
+        loadChildren: '../hts/hts.module#HtsModule'
+    },
+    {
+        path: 'registration',
+        loadChildren: '../registration/registration.module#RegistrationModule'
+    },
+    {
+        path: '**',
+        component: NotFoundComponent
+    }
 ];
 
 @NgModule({

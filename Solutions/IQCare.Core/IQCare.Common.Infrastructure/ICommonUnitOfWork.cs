@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using IQCare.Common.Infrastructure;
+﻿using System.Threading.Tasks;
 using IQCare.SharedKernel.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace IQCare.HTS.Infrastructure
+namespace IQCare.Common.Infrastructure
 {
-    public interface IHTSUnitOfWork
+    public interface ICommonUnitOfWork
     {
         void Save();
         Task SaveAsync();

@@ -35,7 +35,7 @@
                                         <label>Date To Be Enrolled *</label>
                                         <div>
                                             <mat-form-field>
-                                                <input matInput [matDatepicker]="myDatepicker" (click)="myDatepicker.open()" [(ngModel)]="referral.dateToBeEnrolled">
+                                                <input matInput [matDatepicker]="myDatepicker" (click)="myDatepicker.open()" name="dateToBeEnrolled" [(ngModel)]="referral.dateToBeEnrolled">
                                                 <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
                                                 <mat-datepicker #myDatepicker></mat-datepicker>
                                             </mat-form-field>

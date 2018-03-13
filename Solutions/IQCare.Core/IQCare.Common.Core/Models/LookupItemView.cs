@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IQCare.Common.Core.Models
 {
-    [Table("LookupItemView")]
     public class LookupItemView
     {
         [Key]

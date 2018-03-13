@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
-using IQCare.HTS.Core;
+using IQCare.Common.Core.Interfaces.Repositories;
+using IQCare.Common.Core.Models;
+using IQCare.SharedKernel.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 
-namespace IQCare.HTS.Infrastructure
+namespace IQCare.Common.Infrastructure
 {
-    public class HTSRepository<TEntity> : IHTSRepository<TEntity> where TEntity : class
+    public class CommonRepository<TEntity> : ICommonRepository<TEntity> where TEntity : class
     {
+        private readonly CommonDbContext _context;
 
-        private readonly HtsDbContext _context;
-
-        public HTSRepository(HtsDbContext dbContext)
+        public CommonRepository(CommonDbContext dbContext)
         {
             _context = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
@@ -57,7 +57,7 @@ namespace IQCare.HTS.Infrastructure
 
         public async Task<int> ExecWithStoreProcedureAsync(string query, params object[] parameters)
         {
-            throw new NotImplementedException();
+            return await _context.Database.ExecuteSqlCommandAsync(query, parameters);
         }
 
         public async Task<IEnumerable<TEntity>> GetAllAsync()

@@ -1,20 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using System.Collections;
-using IQCare.Common.Infrastructure;
+using System.Threading.Tasks;
 using IQCare.SharedKernel.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
-namespace IQCare.HTS.Infrastructure
+namespace IQCare.Common.Infrastructure
 {
-    public class HTSUnitOfWork : IHTSUnitOfWork
+    public class CommonUnitOfWork : ICommonUnitOfWork
     {
-        private readonly HtsDbContext _context;
+        private readonly CommonDbContext _context;
         private Hashtable repositories;
 
-        public HTSUnitOfWork(HtsDbContext context)
+        public CommonUnitOfWork(CommonDbContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
@@ -35,7 +32,7 @@ namespace IQCare.HTS.Infrastructure
 
             if (!repositories.ContainsKey(type))
             {
-                var repositoryType = typeof(HTSRepository<>);
+                var repositoryType = typeof(CommonRepository<>);
                 var repositoryInstance = Activator.CreateInstance(repositoryType.MakeGenericType(typeof(T)), _context);
                 repositories.Add(type, repositoryInstance);
             }
@@ -48,7 +45,5 @@ namespace IQCare.HTS.Infrastructure
 
         public async Task SaveAsync()
             => await _context.SaveChangesAsync();
-
     }
 }
-

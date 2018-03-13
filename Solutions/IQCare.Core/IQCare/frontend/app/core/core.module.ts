@@ -35,6 +35,6 @@ import { NavLeftComponent } from './nav-left/nav-left.component';
     ClientbriefComponent,
     NavLeftComponent
   ],
-  providers:[]
+  providers:[ ]
 })
 export class CoreModule { }

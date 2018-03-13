@@ -12,8 +12,8 @@ namespace IQCare.HTS.Core.Model
         public int ProviderId { get; set; }
         public int PatientEncounterID { get; set; }
         public int EverTested { get; set; }
-        public int MonthsSinceLastTest { get; set; }
-        public int MonthSinceSelfTest { get; set; }
+        public int? MonthsSinceLastTest { get; set; }
+        public int? MonthSinceSelfTest { get; set; }
         public int TestedAs { get; set; }
         public int TestingStrategy { get; set; }
         public string EncounterRemarks { get; set; }

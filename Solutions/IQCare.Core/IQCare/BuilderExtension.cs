@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IQCare.Common.Core.Interfaces.Repositories;
 using IQCare.Common.Infrastructure;
 
 namespace IQCare
@@ -20,9 +21,17 @@ namespace IQCare
             services.AddScoped(typeof(IHTSRepository<>), typeof(HTSRepository<>));
             services.AddScoped<IHTSUnitOfWork>(c => new HTSUnitOfWork(c.GetRequiredService<HtsDbContext>()));
 
+            return services;
+        }
 
-            //Common
-            services.AddDbContext<CommonDbContext>(x => x.UseSqlServer(dbConnectionString));
+        public static IServiceCollection AddCommonDatabase(this IServiceCollection services,
+            IConfiguration configuration)
+        {
+            var dbConnectionString = configuration.GetConnectionString("IQCareConnection");
+            services.AddDbContext<CommonDbContext>(b => b.UseSqlServer(dbConnectionString));
+            services.AddScoped(typeof(ICommonRepository<>), typeof(CommonRepository<>));
+            services.AddScoped<ICommonUnitOfWork>(c => new CommonUnitOfWork(c.GetRequiredService<CommonDbContext>()));
+
             return services;
         }
     }
