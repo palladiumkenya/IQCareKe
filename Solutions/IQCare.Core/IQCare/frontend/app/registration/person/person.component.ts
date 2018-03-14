@@ -97,8 +97,9 @@ export class PersonComponent implements OnInit {
     }
 
     getRegistrationOptions() {
-        this.registrationService.getRegistrationOptions().subscribe(options => {
-            // console.log(options);
+        this.registrationService.getRegistrationOptions().subscribe(res => {
+            const options = res.lookupItems;
+
             for (let i = 0; i < options.length; i++) {
                 if (options[i].key == 'MaritalStatus') {
                     this.maritalStatuses = options[i].value;

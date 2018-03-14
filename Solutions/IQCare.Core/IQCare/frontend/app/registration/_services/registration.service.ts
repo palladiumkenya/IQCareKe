@@ -4,8 +4,6 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {of} from 'rxjs/observable/of';
 import {catchError, tap} from 'rxjs/operators';
-import {FinalTestingResults} from '../../hts/_models/testing';
-import {Encounter} from '../../hts/_models/encounter';
 import {Person} from '../_models/person';
 import {Contact} from '../_models/contacts';
 import {PersonPopulation} from '../_models/personPopulation';

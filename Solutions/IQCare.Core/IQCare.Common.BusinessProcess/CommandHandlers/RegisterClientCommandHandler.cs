@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using IQCare.Common.BusinessProcess.Commands;
 using IQCare.Common.Core.Models;
 using IQCare.Common.Infrastructure;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace IQCare.Common.BusinessProcess.CommandHandlers
 {
@@ -23,41 +25,34 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers
         {
             try
             {
-                SqlParameter[] parameters =
-                {
-                    new SqlParameter("FirstName", SqlDbType.VarChar) { Value = request.Person.FirstName },
-                    new SqlParameter("MidName", SqlDbType.VarChar) { Value = request.Person.MiddleName },
-                    new SqlParameter("LastName", SqlDbType.VarChar) { Value = request.Person.LastName },
-                    new SqlParameter("DateOfBirth", SqlDbType.DateTime) { Value = request.Person.DateOfBirth },
-                    new SqlParameter("DobPrecision", SqlDbType.Bit) { Value = true },
-                    new SqlParameter("UserId", SqlDbType.Int) { Value = 1 },
-                    new SqlParameter("Sex", SqlDbType.Int) { Value = request.Person.Sex },
-                };
 
-                int personId = await _unitOfWork.Repository<Person>().ExecWithStoreProcedureAsync(
-                    "[dbo].[Person_Insert] @FirstName, @MidName, @LastName, " +
-                    "@Sex, @DateOfBirth, @DobPrecision, @UserId", parameters);
+                var sql =
+                    "exec pr_OpenDecryptedSession;" +
+                    "Insert Into Person(FirstName, MidName,LastName,Sex,DateOfBirth,DobPrecision,Active,DeleteFlag,CreateDate,CreatedBy)" +
+                    $"Values(ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{request.Person.FirstName}'), ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{request.Person.MiddleName}')," +
+                    $"ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{request.Person.LastName}'), {request.Person.Sex}, '{request.Person.DateOfBirth}', 1," +
+                    "1,0,GETDATE(),1);" +
+                    "SELECT [Id] , CAST(DECRYPTBYKEY(FirstName) AS VARCHAR(50)) [FirstName] ,CAST(DECRYPTBYKEY(MidName) AS VARCHAR(50)) MidName" +
+                    ",CAST(DECRYPTBYKEY(LastName) AS VARCHAR(50)) [LastName] ,[Sex] ,[Active] ,[DeleteFlag] ,[CreateDate] " +
+                    ",[CreatedBy] ,[AuditData] ,[DateOfBirth] ,[DobPrecision] FROM[dbo].[Person] WHERE Id = SCOPE_IDENTITY();" +
+                    "exec [dbo].[pr_CloseDecryptedSession];";
 
-                SqlParameter[] patientParams =
-                {
-                    new SqlParameter("PersonId", SqlDbType.VarChar) { Value = personId },
-                    new SqlParameter("ptn_pk", SqlDbType.VarChar) { Value = null },
-                    new SqlParameter("PatientIndex", SqlDbType.VarChar) { Value = DateTime.Now.Year + '-' + personId },
-                    new SqlParameter("DateOfBirth", SqlDbType.DateTime) { Value = request.Person.DateOfBirth },
-                    new SqlParameter("NationalId", SqlDbType.VarChar) { Value = "99999999" },
-                    new SqlParameter("FacilityId", SqlDbType.Int) { Value = 1 },
-                    new SqlParameter("UserId", SqlDbType.Int) { Value = 1 },
-                    new SqlParameter("Active", SqlDbType.Int) { Value = true },
-                    new SqlParameter("PatientType", SqlDbType.Int) { Value = 1 },
-                    new SqlParameter("DobPrecision", SqlDbType.Bit) { Value = false },
-                };
+                var personInsert = _unitOfWork.Repository<Person>().FromSql(sql).ToList();
 
-                await _unitOfWork.Repository<Person>().ExecWithStoreProcedureAsync(
-                    "[dbo].[Patient_Insert] @PersonId, @ptn_pk, @PatientIndex, @DateOfBirth, " +
-                    "@NationalId, @FacilityId, @UserId, @Active, @PatientType, @DobPrecision", patientParams);
+                var sqlPatient = "exec pr_OpenDecryptedSession;" +
+                                 "Insert Into  Patient(ptn_pk,PersonId,PatientIndex,PatientType,FacilityId,Active,DateOfBirth,NationalId,DeleteFlag,CreatedBy,CreateDate,AuditData,DobPrecision)" +
+                                 $"Values(0, {personInsert[0].Id}, {DateTime.Now.Year + '-' + personInsert[0].Id}, 258, 13028, 1," +
+                                 $"'{personInsert[0].DateOfBirth}', ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '99999999'), 0, 1, GETDATE()," +
+                                 $"NULL, 1);" +
+                                 $"SELECT [Id],[ptn_pk],[PersonId],[PatientIndex],[PatientType],[FacilityId],[Active],[DateOfBirth]," +
+                                 $"[DobPrecision],CAST(DECRYPTBYKEY(NationalId) AS VARCHAR(50)) [NationalId],[DeleteFlag],[CreatedBy]," +
+                                 $"[CreateDate],[AuditData],[RegistrationDate] FROM [dbo].[Patient] WHERE Id = SCOPE_IDENTITY();" +
+                                 $"exec [dbo].[pr_CloseDecryptedSession];";
+
+                var patientInsert = await _unitOfWork.Repository<Patient>().FromSql(sqlPatient).ToListAsync();
 
 
-                return Result<RegisterClientResponse>.Valid(new RegisterClientResponse {PersonId = personId});
+                return Result<RegisterClientResponse>.Valid(new RegisterClientResponse {PersonId = personInsert[0].Id, PatientId = patientInsert[0].Id});
 
             }
             catch (Exception e)
