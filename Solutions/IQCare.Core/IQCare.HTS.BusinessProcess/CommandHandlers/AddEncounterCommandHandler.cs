@@ -100,8 +100,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                 {
                     trans.Rollback();
                     // TODO:  log error
-                    return Result<AddEncounterResponse>
-                        .Invalid(ex.Message);
+                    return Result<AddEncounterResponse>.Invalid(ex.Message);
                 }
             }
 

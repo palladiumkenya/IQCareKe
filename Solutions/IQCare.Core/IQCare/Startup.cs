@@ -1,4 +1,5 @@
-﻿using IQCare.Common.BusinessProcess.Interfaces;
+﻿using System.Diagnostics;
+using IQCare.Common.BusinessProcess.Interfaces;
 using IQCare.Common.BusinessProcess.Services;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.IO;
+using System.Reflection;
 
 namespace IQCare
 {
@@ -29,17 +31,15 @@ namespace IQCare
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc()
-                .AddMvcOptions(o => o.OutputFormatters.Add(new XmlDataContractSerializerOutputFormatter()))
-                .AddJsonOptions(o =>
-                    o.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-
-            services.AddCors();
+            
 
             //Context
             services.AddDatabase(Configuration);
             services.AddCommonDatabase(Configuration);
+            services.AddRegistrationDatabase(Configuration);
             services.AddMediatR();
+
+            services.AddMediatR(Assembly.);
 
             //services.AddDbContext<HtsDbContext>(o => o.UseSqlServer(connectionString,x => x.MigrationsAssembly(typeof(HtsDbContext).GetTypeInfo().Assembly.GetName().Name)));
             //services.AddDbContext<CommonDbContext>(o => o.UseSqlServer(connectionString,x => x.MigrationsAssembly(typeof(CommonDbContext).GetTypeInfo().Assembly.GetName().Name)));
@@ -49,6 +49,18 @@ namespace IQCare
 
             //Services
             services.AddScoped<ILookupItemViewService, LookupItemViewService>();
+            services.AddMvc()
+                .AddMvcOptions(o => o.OutputFormatters.Add(new XmlDataContractSerializerOutputFormatter()))
+                .AddJsonOptions(o =>
+                    o.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
+            services.AddCors();
+
+            foreach (var VARIABLE in services)
+            {
+                Debug.WriteLine(VARIABLE.ServiceType);
+            }
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

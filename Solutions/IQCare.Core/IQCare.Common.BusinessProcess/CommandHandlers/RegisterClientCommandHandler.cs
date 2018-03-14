@@ -51,6 +51,20 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers
 
                 var patientInsert = await _unitOfWork.Repository<Patient>().FromSql(sqlPatient).ToListAsync();
 
+                var patientPopulation = new PatientPopulation()
+                {
+                    PersonId = personInsert[0].Id,
+                    PopulationType = "Key Population",
+                    PopulationCategory = request.PersonPopulation.KeyPopulation,
+                    Active = true,
+                    DeleteFlag = false,
+                    CreatedBy = 1,
+                    CreateDate = DateTime.Now
+                };
+
+                await _unitOfWork.Repository<PatientPopulation>().AddAsync(patientPopulation);
+                await _unitOfWork.SaveAsync();
+
 
                 return Result<RegisterClientResponse>.Valid(new RegisterClientResponse {PersonId = personInsert[0].Id, PatientId = patientInsert[0].Id});
 

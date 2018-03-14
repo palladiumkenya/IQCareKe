@@ -1,8 +1,9 @@
-﻿using System;
-using System.Threading.Tasks;
-using IQCare.Common.BusinessProcess.Commands;
+﻿using IQCare.Common.BusinessProcess.Commands;
+using IQCare.Registration.BusinessProcess.Commands.Enrollment;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
 
 namespace IQCare.Controllers.Registration
 {
@@ -25,6 +26,15 @@ namespace IQCare.Controllers.Registration
             {
                 return Ok(response.Value);
             }
+            return BadRequest(response);
+        }
+
+        [HttpPost("enrollment")]
+        public async Task<IActionResult> Post([FromBody] EnrollClientCommand enrollClientCommand)
+        {
+            var response = await _mediator.Send(enrollClientCommand, Request.HttpContext.RequestAborted);
+            if(response.IsValid)
+                return Ok(response.Value);
             return BadRequest(response);
         }
     }

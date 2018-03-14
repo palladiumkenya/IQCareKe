@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone  } from '@angular/core';
+
 import {Person} from '../_models/person';
 import {Contact} from '../_models/contacts';
 import {PersonPopulation} from '../_models/personPopulation';
 import {RegistrationService} from '../_services/registration.service';
+import {Router, ActivatedRoute} from '@angular/router';
 
 declare var $: any;
 
@@ -23,7 +25,10 @@ export class PersonComponent implements OnInit {
     male: number;
     female: number;
 
-    constructor( private registrationService: RegistrationService) { }
+    constructor( private registrationService: RegistrationService,
+                 private router: Router,
+                 private route: ActivatedRoute,
+                 public zone: NgZone) { }
 
     ngOnInit() {
         this.getRegistrationOptions();
@@ -98,8 +103,8 @@ export class PersonComponent implements OnInit {
 
     getRegistrationOptions() {
         this.registrationService.getRegistrationOptions().subscribe(res => {
-            const options = res.lookupItems;
-
+            const options = res['lookupItems'];
+            // console.log(options);
             for (let i = 0; i < options.length; i++) {
                 if (options[i].key == 'MaritalStatus') {
                     this.maritalStatuses = options[i].value;
@@ -120,13 +125,14 @@ export class PersonComponent implements OnInit {
     }
 
     onSubmitForm() {
-        /* console.log(this.person);
-        console.log(this.contact);
-        console.log(this.personPopulation); */
-
         this.registrationService.registerClient(this.person, this.contact,
             this.personPopulation).subscribe(data => {
-            console.log(data);
+            // console.log(data);
+
+            localStorage.setItem('personId', data['personId']);
+            localStorage.setItem('patientId', data['patientId']);
+
+            this.zone.run(() => { this.router.navigate(['/registration/enrollment'], { relativeTo: this.route }); });
         }, err => {
             console.log(err);
         });

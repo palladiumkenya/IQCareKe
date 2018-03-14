@@ -127,7 +127,8 @@ export class EncounterComponent implements OnInit {
     }
 
     getHtsOptions() {
-        this._encounterService.getHtsEncounterOptions().subscribe(options => {
+        this._encounterService.getHtsEncounterOptions().subscribe(res => {
+            const options = res['lookupItems'];
             for (let i = 0; i < options.length; i++) {
                 // console.log(options[i]);
                 if (options[i].key == 'HTSEntryPoints') {

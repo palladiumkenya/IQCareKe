@@ -17,6 +17,6 @@ namespace IQCare.Registration.Core.Model
         public bool DeleteFlag { get; set; }
         public int CreatedBy { get; set; }
         public DateTime CreateDate { get; set; }
-        public SqlXml AuditData { get; set; } 
+        public string AuditData { get; set; } 
     }
 }
