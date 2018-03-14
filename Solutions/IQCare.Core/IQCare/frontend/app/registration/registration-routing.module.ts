@@ -1,11 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {PersonComponent} from './person/person.component';
+import {EnrollmentComponent} from './enrollment/enrollment.component';
 
 const routes: Routes = [
     {
         path: '',
-        component: PersonComponent
+        component: PersonComponent,
+        pathMatch: 'full',
+    },
+    {
+        path: 'enrollment',
+        component: EnrollmentComponent,
+        pathMatch: 'full'
     }
 ];
 

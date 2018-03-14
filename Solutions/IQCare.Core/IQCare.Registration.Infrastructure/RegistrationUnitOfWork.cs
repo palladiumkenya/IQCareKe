@@ -9,7 +9,7 @@ using IQCare.SharedKernel.Interfaces;
 
 namespace IQCare.Registration.Infrastructure
 {
-    public class RegistrationUnitOfWork
+    public class RegistrationUnitOfWork : IRegistrationUnitOfWork
     {
         private readonly RegistrationContext _context;
         private Hashtable repositories;

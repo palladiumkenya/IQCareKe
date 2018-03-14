@@ -57,12 +57,12 @@ namespace IQCare.HTS.Infrastructure
 
         public async Task<int> ExecWithStoreProcedureAsync(string query, params object[] parameters)
         {
-            throw new NotImplementedException();
+            return await _context.Database.ExecuteSqlCommandAsync(query, parameters);
         }
 
         public IQueryable<TEntity> FromSql(string query, params object[] parameters)
         {
-            throw new NotImplementedException();
+            return _context.Set<TEntity>().FromSql(query, parameters);
         }
 
         public async Task<IEnumerable<TEntity>> GetAllAsync()

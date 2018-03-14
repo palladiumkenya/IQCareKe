@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace IQCare.Controllers.HTS
 {
+    [Produces("application/json")]
+    [Route("api/Referral")]
     public class ReferralController : Controller
     {
         private readonly IMediator _mediator;
@@ -25,7 +27,7 @@ namespace IQCare.Controllers.HTS
             return BadRequest();
         }
 
-        [HttpPost]
+        [HttpPost("linkpatient")]
         public async Task<IActionResult> LinkPatient(AddLinkageCommand command)
         {
             var response = await _mediator.Send(command, Request.HttpContext.RequestAborted);

@@ -7,6 +7,8 @@ import {MatDatepickerModule, MatFormFieldModule, MatInputModule, MatNativeDateMo
 import { RegistrationRoutingModule } from './registration-routing.module';
 import { PersonComponent } from './person/person.component';
 import {RegistrationService} from './_services/registration.service';
+import { EnrollmentComponent } from './enrollment/enrollment.component';
+import {EnrollmentService} from './_services/enrollment.service';
 
 
 
@@ -22,10 +24,12 @@ import {RegistrationService} from './_services/registration.service';
         MatInputModule
     ],
     declarations: [
-        PersonComponent
+        PersonComponent,
+        EnrollmentComponent
     ],
     providers: [
-        RegistrationService
+        RegistrationService,
+        EnrollmentService
     ]
 
 })

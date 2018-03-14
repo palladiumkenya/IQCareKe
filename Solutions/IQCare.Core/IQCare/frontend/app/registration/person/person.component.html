@@ -37,14 +37,14 @@
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>First Name</label>
-                                        <input id="firstName" name="firstName" type="text" class="form-control required" [(ngModel)]="person.FirstName" #FirstName="ngModel" data-parsley-required="true">
+                                        <input id="firstName" name="firstName" tabindex="1" autofocus type="text" class="form-control required" [(ngModel)]="person.FirstName" #FirstName="ngModel" data-parsley-required="true">
                                     </div>
 
                                     <div class="form-group">
                                         <label>Date of Birth</label>
                                         <div>
                                             <mat-form-field>
-                                                <input matInput [matDatepicker]="myDatepicker" (click)="myDatepicker.open()" id="DateOfBirth" name="DateOfBirth" [(ngModel)]="person.DateOfBirth" #DateOfBirth="ngModel" data-parsley-required="true">
+                                                <input tabindex="5" matInput [matDatepicker]="myDatepicker" (click)="myDatepicker.open()" id="DateOfBirth" name="DateOfBirth" [(ngModel)]="person.DateOfBirth" #DateOfBirth="ngModel" data-parsley-required="true">
                                                 <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
                                                 <mat-datepicker #myDatepicker></mat-datepicker>
                                             </mat-form-field>
@@ -55,12 +55,12 @@
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>Middle Name</label>
-                                        <input id="middleName" name="middleName" type="text" class="form-control required" [(ngModel)]="person.MiddleName" #MiddleName="ngModel">
+                                        <input id="middleName" name="middleName" type="text" tabindex="2" class="form-control required" [(ngModel)]="person.MiddleName" #MiddleName="ngModel">
                                     </div>
 
                                     <div class="form-group">
                                         <label>Marital Status</label>
-                                        <select class="form-control m-b" name="maritalStatus" id="maritalStatus" [(ngModel)]="person.MaritalStatus" #MaritalStatus="ngModel" data-parsley-required="true">
+                                        <select tabindex="6" class="form-control m-b" name="maritalStatus" id="maritalStatus" [(ngModel)]="person.MaritalStatus" #MaritalStatus="ngModel" data-parsley-required="true">
                                             <option></option>
                                             <option *ngFor="let maritalStatus of maritalStatuses" [ngValue]="maritalStatus.itemId">{{maritalStatus.itemName}}</option>
                                         </select>
@@ -70,7 +70,7 @@
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>Last Name</label>
-                                        <input id="lastName" name="lastName" type="text" class="form-control required" [(ngModel)]="person.LastName" #LastName="ngModel" data-parsley-required="true">
+                                        <input id="lastName" name="lastName" type="text" tabindex="3" class="form-control required" [(ngModel)]="person.LastName" #LastName="ngModel" data-parsley-required="true">
                                     </div>
                                 </div>
 
@@ -78,12 +78,12 @@
                                     <label>Gender</label>
                                     <div class="form-group">
                                         <div class="radio radio-info radio-inline">
-                                            <input type="radio" id="inlineRadio1" [value]="male" name="radioInline" class="form-control" [(ngModel)]="person.Sex" data-parsley-required="true">
+                                            <input type="radio" id="inlineRadio1" tabindex="4" [value]="male" name="radioInline" class="form-control" [(ngModel)]="person.Sex" data-parsley-required="true">
                                             <label for="inlineRadio1">Male</label>
                                         </div>
 
                                         <div class="radio radio-inline">
-                                            <input type="radio" id="inlineRadio2" [value]="female" name="radioInline" class="form-control" [(ngModel)]="person.Sex" data-parsley-required="true">
+                                            <input type="radio" id="inlineRadio2" tabindex="4" [value]="female" name="radioInline" class="form-control" [(ngModel)]="person.Sex" data-parsley-required="true">
                                             <label for="inlineRadio2">Female</label>
                                         </div>
                                     </div>
