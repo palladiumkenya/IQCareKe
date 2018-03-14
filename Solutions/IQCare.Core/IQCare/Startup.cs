@@ -39,8 +39,6 @@ namespace IQCare
             services.AddRegistrationDatabase(Configuration);
             services.AddMediatR();
 
-            services.AddMediatR(Assembly.);
-
             //services.AddDbContext<HtsDbContext>(o => o.UseSqlServer(connectionString,x => x.MigrationsAssembly(typeof(HtsDbContext).GetTypeInfo().Assembly.GetName().Name)));
             //services.AddDbContext<CommonDbContext>(o => o.UseSqlServer(connectionString,x => x.MigrationsAssembly(typeof(CommonDbContext).GetTypeInfo().Assembly.GetName().Name)));
 
