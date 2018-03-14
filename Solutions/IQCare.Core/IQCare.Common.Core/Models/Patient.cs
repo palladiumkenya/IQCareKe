@@ -16,11 +16,11 @@ namespace IQCare.Common.Core.Models
         public bool Active { get; set; }
         public DateTime DateOfBirth { get; set; }
         public bool DobPrecision { get; set; }
-        public byte[] NationalId { get; set; }
+        public string NationalId { get; set; }
         public bool DeleteFlag { get; set; }
         public int CreatedBy { get; set; }
         public DateTime CreateDate { get; set; }
-        public SqlXml AuditData { get; set; }
+        public string AuditData { get; set; }
         public DateTime RegistrationDate { get; set; }
     }
 }

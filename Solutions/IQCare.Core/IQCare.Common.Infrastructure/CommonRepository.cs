@@ -60,6 +60,11 @@ namespace IQCare.Common.Infrastructure
             return await _context.Database.ExecuteSqlCommandAsync(query, parameters);
         }
 
+        public IQueryable<TEntity> FromSql(string query, params object[] parameters)
+        {
+            return _context.Set<TEntity>().FromSql(query, parameters);
+        }
+
         public async Task<IEnumerable<TEntity>> GetAllAsync()
             => await _context.Set<TEntity>().ToListAsync();
     }

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using IQCare.SharedKernel.Interfaces;
 
 namespace IQCare.Registration.Infrastructure
 {

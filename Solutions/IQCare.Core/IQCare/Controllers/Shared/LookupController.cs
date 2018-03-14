@@ -21,21 +21,32 @@ namespace IQCare.Controllers.Common
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
-        //[HttpGet("byGroupName")]
-        //public IActionResult Get(string groupName)
-        //{
-        //    //var items = _lookupItemViewService.GetLookupItemsByGroup(groupName);
-        //    return Ok(items);
-        //}
+        [HttpGet("byGroupName")]
+        public async Task<IActionResult> Get(string groupName)
+        {
+            var results = await _mediator.Send(new GetOptionsByGroupNameCommand {GroupName = groupName},
+                HttpContext.RequestAborted);
 
-        //[HttpGet("htsOptions")]
-        //public IActionResult Get()
-        //{
-        //    string[] options = new string[] {"HTSEntryPoints", "YesNo", "Disabilities", "TestedAs", "Strategy", "TBStatus", "ReasonsPartner", "HIVResults", "HIVTestKits", "HIVFinalResults" };
+            if (results.IsValid)
+                return Ok(results.Value);
 
-        //    var results = _lookupItemViewService.GetHtsOptions(options);
-        //    return Ok(results);
-        //}
+            return BadRequest(results);
+        }
+
+        [HttpGet("htsOptions")]
+        public async Task<IActionResult> Get()
+        {
+            string[] options = new string[] { "HTSEntryPoints", "YesNo", "Disabilities", "TestedAs", "Strategy", "TBStatus", "ReasonsPartner", "HIVResults", "HIVTestKits", "HIVFinalResults" };
+
+            var results = await _mediator.Send(new GetRegistrationOptionsCommand {RegistrationOptions = options},
+                HttpContext.RequestAborted);
+
+
+            if (results.IsValid)
+                return Ok(results.Value);
+
+            return BadRequest(results);
+        }
 
         [HttpGet("registrationOptions")]
         public async Task<IActionResult> GetOptions()

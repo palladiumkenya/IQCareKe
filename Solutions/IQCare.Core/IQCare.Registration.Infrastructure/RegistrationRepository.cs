@@ -53,6 +53,16 @@ namespace IQCare.Registration.Infrastructure
             return query;
         }
 
+        public async Task<int> ExecWithStoreProcedureAsync(string query, params object[] parameters)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IQueryable<TEntity> FromSql(string query, params object[] parameters)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<IEnumerable<TEntity>> GetAllAsync()
             => await _context.Set<TEntity>().ToListAsync();
     }
