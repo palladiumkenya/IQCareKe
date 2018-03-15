@@ -3951,6 +3951,7 @@ code {
   border-image: none;
   border-style: solid solid none;
   border-width: 1px 0;
+  min-height: 500px;
 }
 .ibox-content-header {
   background-color: #ffffff;

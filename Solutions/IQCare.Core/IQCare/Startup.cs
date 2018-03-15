@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using IQCare.Common.BusinessProcess.Interfaces;
 using IQCare.Common.BusinessProcess.Services;
 using MediatR;
@@ -38,6 +39,13 @@ namespace IQCare
             services.AddCommonDatabase(Configuration);
             services.AddRegistrationDatabase(Configuration);
             services.AddMediatR();
+            var assemblyNames =  Assembly.GetEntryAssembly().GetReferencedAssemblies();
+            List<Assembly> assemblies = new List<Assembly>();
+            foreach (var assemblyName in assemblyNames)
+            {
+                assemblies.Add(Assembly.Load(assemblyName));
+            }
+            services.AddMediatR(assemblies);
 
             //services.AddDbContext<HtsDbContext>(o => o.UseSqlServer(connectionString,x => x.MigrationsAssembly(typeof(HtsDbContext).GetTypeInfo().Assembly.GetName().Name)));
             //services.AddDbContext<CommonDbContext>(o => o.UseSqlServer(connectionString,x => x.MigrationsAssembly(typeof(CommonDbContext).GetTypeInfo().Assembly.GetName().Name)));

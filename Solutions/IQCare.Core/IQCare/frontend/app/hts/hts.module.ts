@@ -15,6 +15,7 @@ import { FamilyTracingComponent } from './family-tracing/family-tracing.componen
 import { FamilyScreeningComponent } from './family-screening/family-screening.component';
 import { NoneEventsDirective } from './_directives/none-events.directive';
 import { LinkageComponent } from './linkage/linkage.component';
+import {SharedModule} from '../shared/shared.module';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { LinkageComponent } from './linkage/linkage.component';
       MatDatepickerModule,
       MatFormFieldModule,
       MatNativeDateModule,
-      MatInputModule
+      MatInputModule,
+      SharedModule
   ],
   declarations: [
     EncounterComponent,

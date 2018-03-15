@@ -9,6 +9,8 @@ import { PersonComponent } from './person/person.component';
 import {RegistrationService} from './_services/registration.service';
 import { EnrollmentComponent } from './enrollment/enrollment.component';
 import {EnrollmentService} from './_services/enrollment.service';
+import { HomeComponent } from './home/home.component';
+import {SharedModule} from '../shared/shared.module';
 
 
 
@@ -21,11 +23,13 @@ import {EnrollmentService} from './_services/enrollment.service';
         MatDatepickerModule,
         MatFormFieldModule,
         MatNativeDateModule,
-        MatInputModule
+        MatInputModule,
+        SharedModule
     ],
     declarations: [
         PersonComponent,
-        EnrollmentComponent
+        EnrollmentComponent,
+        HomeComponent
     ],
     providers: [
         RegistrationService,

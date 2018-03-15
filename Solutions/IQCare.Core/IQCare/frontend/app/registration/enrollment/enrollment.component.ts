@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import {Enrollment} from '../_models/enrollment';
 import {EnrollmentService} from '../_services/enrollment.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-enrollment',
@@ -13,7 +14,10 @@ export class EnrollmentComponent implements OnInit {
     personId: number;
     createdBy: number;
 
-    constructor(private enrollmentService: EnrollmentService) { }
+    constructor(private enrollmentService: EnrollmentService,
+                private router: Router,
+                private route: ActivatedRoute,
+                public zone: NgZone) { }
     ngOnInit() {
         localStorage.setItem('createdBy', JSON.stringify(1));
         this.patientId = JSON.parse(localStorage.getItem('patientId'));
@@ -33,6 +37,8 @@ export class EnrollmentComponent implements OnInit {
 
         this.enrollmentService.enrollClient(this.enrollment).subscribe(data => {
             console.log(data);
+
+            this.zone.run(() => { this.router.navigate(['/registration/home'], { relativeTo: this.route }); });
         }, err => {
             console.log(err);
         });
