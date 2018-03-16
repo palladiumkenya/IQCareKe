@@ -30,10 +30,9 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Lookup
                     LookupItems = results
                 });
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Console.WriteLine(e);
-                throw;
+                return Result<GetOptionsByGroupNameResponse>.Invalid(ex.Message);
             }
         }
     }

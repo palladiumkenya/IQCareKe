@@ -29,6 +29,7 @@ import { NavHeaderComponent } from './nav-header/nav-header.component';
     RouterModule,
     NavHeaderComponent
   ],
-  providers: [ ]
+    providers: [
+    ]
 })
 export class CoreModule { }

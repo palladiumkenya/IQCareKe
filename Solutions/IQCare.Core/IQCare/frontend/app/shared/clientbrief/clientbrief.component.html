@@ -1,14 +1,14 @@
 <div class="row">
   <div class="col-lg-3">
-    <i class="fa fa-user fa-3x pull-left"></i> <strong><h3>Felix Kithinji Gitonga</h3></strong>
+    <i class="fa fa-user fa-3x pull-left"></i> <strong><h3>{{this.clientBrief.fullName}}</h3></strong>
   </div>
 
   <div class="col-lg-3">
-    Enrollment Date: 12-Dec-2017
+    Enrollment Date: {{this.clientBrief.enrollmentDate | date: 'dd-MMM-yyyy'}}
   </div>
 
   <div class="col-lg-3">
-    Age: 35
+    Age: {{this.clientBrief.age}}
   </div>
 
 </div>
@@ -18,10 +18,10 @@
   </div>
 
   <div class="col-lg-3">
-    Enrollment No: 12374-78833
+    Enrollment No: {{this.clientBrief.identifierValue}}
   </div>
 
   <div class="col-lg-3">
-    Sex: Female
+    Sex: {{this.clientBrief.gender}}
   </div>
 </div>

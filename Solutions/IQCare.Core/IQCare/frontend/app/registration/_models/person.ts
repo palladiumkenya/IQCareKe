@@ -6,3 +6,7 @@ export class Person {
     MaritalStatus: number;
     Sex: number = 0;
 }
+
+export class RegistrationVariables {
+    personAge: number;
+}

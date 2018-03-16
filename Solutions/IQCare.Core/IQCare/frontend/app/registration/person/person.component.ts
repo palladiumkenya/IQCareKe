@@ -1,10 +1,11 @@
 import { Component, OnInit, NgZone  } from '@angular/core';
 
-import {Person} from '../_models/person';
+import {Person, RegistrationVariables} from '../_models/person';
 import {Contact} from '../_models/contacts';
 import {PersonPopulation} from '../_models/personPopulation';
 import {RegistrationService} from '../_services/registration.service';
 import {Router, ActivatedRoute} from '@angular/router';
+import moment = require('moment');
 
 declare var $: any;
 
@@ -17,6 +18,7 @@ export class PersonComponent implements OnInit {
     person: Person;
     contact: Contact;
     personPopulation: PersonPopulation;
+    registrationVariables: RegistrationVariables;
 
     maritalStatuses: any[];
     keyPops: any[];
@@ -36,6 +38,7 @@ export class PersonComponent implements OnInit {
         this.person = new Person();
         this.contact = new Contact();
         this.personPopulation = new PersonPopulation();
+        this.registrationVariables = new RegistrationVariables();
 
         const self = this;
 
@@ -136,5 +139,17 @@ export class PersonComponent implements OnInit {
         }, err => {
             console.log(err);
         });
+    }
+
+    estimateDob(personAge) {
+        // console.log(personAge);
+        const currentDate = new Date();
+        currentDate.setDate(15);
+        currentDate.setMonth(5);
+        // console.log(currentDate);
+        const estDob = moment(currentDate.toISOString());
+        const dob = estDob.add((personAge * -1), 'years');
+
+        this.person.DateOfBirth = moment(dob).format('DD-MM-YYYY');
     }
 }

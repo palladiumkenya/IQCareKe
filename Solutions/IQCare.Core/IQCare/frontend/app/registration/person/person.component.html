@@ -59,12 +59,11 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label>Marital Status</label>
-                                        <select tabindex="6" class="form-control m-b" name="maritalStatus" id="maritalStatus" [(ngModel)]="person.MaritalStatus" #MaritalStatus="ngModel" data-parsley-required="true">
-                                            <option></option>
-                                            <option *ngFor="let maritalStatus of maritalStatuses" [ngValue]="maritalStatus.itemId">{{maritalStatus.itemName}}</option>
-                                        </select>
+                                        <label>Age(Years)</label>
+                                        <input type="number" id="personAge" name="personAge" (keyup)="estimateDob(registrationVariables.personAge)" class="form-control" [(ngModel)]="registrationVariables.personAge" #personAge="ngModel">
                                     </div>
+
+
                                 </div>
 
                                 <div class="col-lg-3">
@@ -72,6 +71,15 @@
                                         <label>Last Name</label>
                                         <input id="lastName" name="lastName" type="text" tabindex="3" class="form-control required" [(ngModel)]="person.LastName" #LastName="ngModel" data-parsley-required="true">
                                     </div>
+
+                                    <div class="form-group">
+                                        <label>Marital Status</label>
+                                        <select tabindex="6" class="form-control m-b" name="maritalStatus" id="maritalStatus" [(ngModel)]="person.MaritalStatus" #MaritalStatus="ngModel" data-parsley-required="true">
+                                            <option></option>
+                                            <option *ngFor="let maritalStatus of maritalStatuses" [ngValue]="maritalStatus.itemId">{{maritalStatus.itemName}}</option>
+                                        </select>
+                                    </div>
+
                                 </div>
 
                                 <div class="col-lg-3">
