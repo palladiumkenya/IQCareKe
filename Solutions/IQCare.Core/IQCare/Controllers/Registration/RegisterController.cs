@@ -4,6 +4,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
+using IQCare.Common.BusinessProcess.Commands.ClientLookup;
 
 namespace IQCare.Controllers.Registration
 {
@@ -34,6 +35,15 @@ namespace IQCare.Controllers.Registration
         {
             var response = await _mediator.Send(enrollClientCommand, Request.HttpContext.RequestAborted);
             if(response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Get(int patientId, int serviceAreaId)
+        {
+            var response = await _mediator.Send(new GetClientDetailsCommand{ PatientId = patientId, ServiceAreaId = serviceAreaId }, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
                 return Ok(response.Value);
             return BadRequest(response);
         }

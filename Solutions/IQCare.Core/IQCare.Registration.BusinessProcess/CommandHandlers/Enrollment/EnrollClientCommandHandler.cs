@@ -1,13 +1,13 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using IQCare.Common.Core.Models;
+﻿using IQCare.Common.Core.Models;
 using IQCare.Registration.BusinessProcess.Commands.Enrollment;
 using IQCare.Registration.Core.Model;
 using IQCare.Registration.Infrastructure;
 using MediatR;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
-namespace IQCare.Registration.BusinessProcess.Handlers.Enrollment
+namespace IQCare.Registration.BusinessProcess.CommandHandlers.Enrollment
 {
     public class EnrollClientCommandHandler : IRequestHandler<EnrollClientCommand, Result<EnrollClientResponse>>
     {
@@ -22,6 +22,26 @@ namespace IQCare.Registration.BusinessProcess.Handlers.Enrollment
             {
                 try
                 {
+                    var patientMasterVisit = new PatientMasterVisit()
+                    {
+                        PatientId = request.ClientEnrollment.PatientId,
+                        ServiceId = request.ClientEnrollment.ServiceAreaId,
+                        Start = DateTime.Now,
+                        End = null,
+                        Active = false,
+                        VisitDate = DateTime.Now,
+                        VisitScheduled = 0,
+                        VisitBy = 108,
+                        VisitType = 1,
+                        Status = 1,
+                        CreateDate = DateTime.Now,
+                        DeleteFlag = false,
+                        CreatedBy = request.ClientEnrollment.CreatedBy
+                    };
+
+                    await _unitOfWork.Repository<PatientMasterVisit>().AddAsync(patientMasterVisit);
+                    await _unitOfWork.SaveAsync();
+
                     var patientEnrollment = new PatientEnrollment()
                     {
                         PatientId = request.ClientEnrollment.PatientId,

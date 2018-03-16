@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import {Encounter} from '../_models/encounter';
 import {EncounterService} from '../_services/encounter.service';
 import {FinalTestingResults, Testing} from '../_models/testing';
+import {ActivatedRoute, Router} from '@angular/router';
 
 declare var $: any;
 
@@ -44,13 +45,16 @@ export class EncounterComponent implements OnInit {
     hivTestKits: any[];
 
 
-    constructor(private _encounterService: EncounterService) {
+    constructor(private _encounterService: EncounterService,
+                private router: Router,
+                private route: ActivatedRoute,
+                public zone: NgZone) {
     }
 
     ngOnInit() {
         this.encounter = new Encounter();
         // set default values
-        this.encounter.PersonId = 1;
+        this.encounter.PersonId = JSON.parse(localStorage.getItem('personId'));
         this.encounter.ProviderId = 1;
         this.encounter.PatientEncounterID = 1;
         this.encounter.MonthSinceSelfTest = null;
@@ -161,6 +165,8 @@ export class EncounterComponent implements OnInit {
         this._encounterService.addEncounter(this.encounter, this.finalTestingResults,
             this.hiv1, this.hiv2).subscribe(data => {
             console.log(data);
+
+            this.zone.run(() => { this.router.navigate(['/registration/home'], { relativeTo: this.route }); });
         }, err => {
             console.log(err);
         });
