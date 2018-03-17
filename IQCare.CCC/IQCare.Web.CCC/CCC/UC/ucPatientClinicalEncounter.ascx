@@ -2153,12 +2153,12 @@
 			$("#IcfActionForm").hide();
 		}
 		/*$("#IcfActionForm").hide();*/
-		$("#IptForm").hide();
-		$("#IcfForm").hide();
-		$("#IptClientWorkupForm").hide();
-		$("#IptDetailsForm").hide();
-		$("#IptOutcomeDetailsForm").hide();
-		$("#onIpt").prop("disabled", true);
+		//$("#IptForm").hide();
+		//$("#IcfForm").hide();
+		//$("#IptClientWorkupForm").hide();
+		//$("#IptDetailsForm").hide();
+		//$("#IptOutcomeDetailsForm").hide();
+		//$("#onIpt").prop("disabled", true);
 		$("#MMAS8").hide();
 		//  $("#EverBeenOnIpt").prop("disabled", true);
 		//showHideFPControls();
@@ -3314,7 +3314,7 @@
 			var rashAction = $("#rashAction").val();
 			var adheranceMeasurementAction = $("#adheranceAction").val();
 			var patientId = <%=PatientId%>;
-			var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            var patientMasterVisitId = <%=PatientMasterVisitId%>;
 			$.ajax({
 				type: "POST",
 				url: "../WebService/PatientTbService.asmx/AddIpt",
@@ -3336,10 +3336,11 @@
 			var yellowColouredUrine = $("#urineColour").val();
 			var numbness = $("#numbness").val();
 			var liverFunctionTests = $("#liverTest").val();
-			var startIpt = $("#startIpt").val();;
-			var iptStartDate = moment($("#iptStartDate").val()).format('DD-MMM-YYYY');
+			var startIpt = $("#startIpt").val();
+            var iptStartDate = $("#IPTStartDate").val();
 			var patientId = <%=PatientId%>;
-			var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            
 			$.ajax({
 				type: "POST",
 				url: "../WebService/PatientTbService.asmx/AddPatientIptWorkup",
@@ -3793,23 +3794,31 @@
 			});
 	}
 
-	function tbInfectedChange() {
-		if ($("#tbInfected").val() === 'False') {
+    function tbInfectedChange() {
+        if ($("#tbInfected").val() === 'False') {
 			$("#IptForm").show();
 			$("#IcfForm").show();
 			$("#tbscreeningstatus option").filter(function () { return $(this).text() === 'NoTB'; }).prop('selected', true);
 			$("#onIpt").prop("disabled", false);
-			$("#onIpt").val("");
-		} else {
+        } else if ($("#tbInfected").val() === 'True'){
 			$("#IptForm").hide();
 			$("#IcfForm").hide();
 			$("#IcfActionForm").hide();
-			$("#tbscreeningstatus option").filter(function () { return $(this).text() === 'TBRx'; }).prop('selected', true);
+            $("#tbscreeningstatus option").filter(function () { return $(this).text() === 'TBRx'; }).prop('selected', true);
 			$("#onIpt").prop("disabled", true);
-			$("#onIpt").val("False");
+			$("#onIpt").val("");
 			//$("#EverBeenOnIpt").prop("disabled", true);
 			// $("#EverBeenOnIpt").val("");
-		}
+        } else {
+            $("#IptForm").hide();
+            $("#IcfForm").hide();
+            $("#IcfActionForm").hide();
+            //$("#tbscreeningstatus option").filter(function () { return $(this).text() === 'TBRx'; }).prop('selected', true);
+            $("#onIpt").prop("disabled", true);
+            $("#onIpt").val("");
+            //$("#EverBeenOnIpt").prop("disabled", true);
+            // $("#EverBeenOnIpt").val("");
+        }
 
 	}
 

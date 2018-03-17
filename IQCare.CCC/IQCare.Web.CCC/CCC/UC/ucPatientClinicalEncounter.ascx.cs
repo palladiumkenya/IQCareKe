@@ -204,6 +204,27 @@ namespace IQCare.Web.CCC.UC
             onIpt.SelectedValue = pce.OnIPT;
             EverBeenOnIpt.SelectedValue = pce.EverBeenOnIPT;
 
+            cough.SelectedValue = pce.Cough;
+            fever.SelectedValue = pce.Fever;
+            weightLoss.SelectedValue = pce.NoticeableWeightLoss;
+            nightSweats.SelectedValue = pce.NightSweats;
+
+            sputum.SelectedValue = pce.SputumSmear;
+            geneXpert.SelectedValue = pce.geneXpert;
+            chest.SelectedValue = pce.ChestXray;
+            antiTb.SelectedValue = pce.startAntiTB;
+            contactsInvitation.SelectedValue = pce.InvitationOfContacts;
+            iptEvaluation.SelectedValue = pce.EvaluatedForIPT;
+
+            IptCw.IPTurineColour.SelectedValue = pce.YellowColouredUrine;
+            IptCw.IPTNumbness.SelectedValue = pce.Numbness;
+            IptCw.IPTYellowEyes.SelectedValue = pce.YellownessOfEyes;
+            IptCw.IPTAbdominalTenderness.SelectedValue = pce.AdominalTenderness;
+            IptCw.IPTLiverTest.Text = pce.LiverFunctionTests;
+            IptCw.IPTStartIPT.SelectedValue = pce.startIPT;
+            IptCw.StartDateIPT.Text = pce.IPTStartDate;
+
+
             tbscreeningstatus.SelectedValue = pce.tbScreening;
             nutritionscreeningstatus.SelectedValue = pce.nutritionStatus;
             txtWorkPlan.Text = pce.WorkPlan;
@@ -266,6 +287,11 @@ namespace IQCare.Web.CCC.UC
             description.Text = pce.appointmentDesc;
             //status.SelectedValue = pce.appontmentStatus;
 
+            //ipt pop ups
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "tbInfectedYesNo", "tbInfectedChange();", true);
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "IcfChange", "IcfChange();", true);
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "IcfActionChange", "IcfActionChange();", true);
+            
         }
     }
 }
