@@ -1,9 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
-using IQCare.HTS.BusinessProcess.Commands;
-using IQCare.Registration.BusinessProcess.Commands;
+﻿using IQCare.HTS.BusinessProcess.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
 
 namespace IQCare.Controllers.HTS
 {
@@ -27,12 +26,12 @@ namespace IQCare.Controllers.HTS
             return BadRequest();
         }
 
-        [HttpPost("linkpatient")]
-        public async Task<IActionResult> LinkPatient(AddLinkageCommand command)
-        {
-            var response = await _mediator.Send(command, Request.HttpContext.RequestAborted);
-            if (response.IsValid) return Ok();
-            return BadRequest();
-        }
+        //[HttpPost("linkpatient")]
+        //public async Task<IActionResult> LinkPatient(AddLinkageCommand command)
+        //{
+        //    var response = await _mediator.Send(command, Request.HttpContext.RequestAborted);
+        //    if (response.IsValid) return Ok();
+        //    return BadRequest();
+        //}
     }
 }

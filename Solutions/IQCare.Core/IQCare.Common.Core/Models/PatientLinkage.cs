@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace IQCare.Registration.Core.Model
+namespace IQCare.Common.Core.Models
 {
     public class PatientLinkage
     {

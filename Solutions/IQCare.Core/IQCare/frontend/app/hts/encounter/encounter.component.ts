@@ -55,6 +55,9 @@ export class EncounterComponent implements OnInit {
         this.encounter = new Encounter();
         // set default values
         this.encounter.PersonId = JSON.parse(localStorage.getItem('personId'));
+        this.encounter.PatientId = JSON.parse(localStorage.getItem('patientId'));
+        this.encounter.ServiceAreaId = 2;
+
         this.encounter.ProviderId = 1;
         this.encounter.PatientEncounterID = 1;
         this.encounter.MonthSinceSelfTest = null;
@@ -73,6 +76,7 @@ export class EncounterComponent implements OnInit {
 
 
         this.getHtsOptions();
+        this.getEncounterType();
 
         const self = this;
 
@@ -160,12 +164,19 @@ export class EncounterComponent implements OnInit {
         });
     }
 
+    getEncounterType() {
+        this._encounterService.getEncounterType().subscribe(res => {
+            this.encounter.EncounterTypeId = res['itemId'];
+        });
+    }
+
     onSubmitForm() {
         // console.log('Try submit');
         this._encounterService.addEncounter(this.encounter, this.finalTestingResults,
             this.hiv1, this.hiv2).subscribe(data => {
-            console.log(data);
+            console.log(data['htsEncounterId']);
 
+            localStorage.setItem('htsEncounterId', data['htsEncounterId']);
             this.zone.run(() => { this.router.navigate(['/registration/home'], { relativeTo: this.route }); });
         }, err => {
             console.log(err);

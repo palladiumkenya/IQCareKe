@@ -25,6 +25,9 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Lookup
                 var results = await _unitOfWork.Repository<LookupItemView>().Get(x => x.MasterName == request.GroupName)
                     .ToListAsync();
 
+
+                _unitOfWork.Dispose();
+
                 return Result<GetOptionsByGroupNameResponse>.Valid(new GetOptionsByGroupNameResponse
                 {
                     LookupItems = results

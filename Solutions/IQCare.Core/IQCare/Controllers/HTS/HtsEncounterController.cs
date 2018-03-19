@@ -1,11 +1,9 @@
+using IQCare.Common.BusinessProcess.Commands.Encounter;
 using IQCare.HTS.BusinessProcess.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using IQCare.HTS.BusinessProcess.Commands;
-using MediatR;
 
 namespace IQCare.Controllers.HTS
 {
@@ -23,6 +21,24 @@ namespace IQCare.Controllers.HTS
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] AddEncounterCommand addEncounterCommand)
         {
+            var encounter = await _mediator.Send(new AddEncounterVisitCommand
+            {
+                PatientId = addEncounterCommand.Encounter.PatientId,
+                ServiceAreaId = addEncounterCommand.Encounter.ServiceAreaId,
+                EncounterType = addEncounterCommand.Encounter.EncounterTypeId,
+                UserId = addEncounterCommand.Encounter.ProviderId
+            }, Request.HttpContext.RequestAborted);
+
+            if (encounter.IsValid)
+            {
+                addEncounterCommand.Encounter.EncounterTypeId = encounter.Value.PatientEncounterId;
+            }
+            else
+            {
+                return BadRequest(encounter);
+            }
+            
+
             var response = await _mediator.Send(addEncounterCommand, Request.HttpContext.RequestAborted);
             if(response.IsValid)
                 return Ok(response.Value);

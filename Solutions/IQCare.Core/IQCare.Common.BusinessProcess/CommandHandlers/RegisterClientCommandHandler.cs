@@ -65,6 +65,7 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers
                 await _unitOfWork.Repository<PatientPopulation>().AddAsync(patientPopulation);
                 await _unitOfWork.SaveAsync();
 
+                _unitOfWork.Dispose();
 
                 return Result<RegisterClientResponse>.Valid(new RegisterClientResponse {PersonId = personInsert[0].Id, PatientId = patientInsert[0].Id});
 

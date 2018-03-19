@@ -1,10 +1,10 @@
 ﻿using IQCare.Common.BusinessProcess.Commands;
-using IQCare.Registration.BusinessProcess.Commands.Enrollment;
+using IQCare.Common.BusinessProcess.Commands.ClientLookup;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
-using IQCare.Common.BusinessProcess.Commands.ClientLookup;
+using IQCare.Common.BusinessProcess.Commands.Enrollment;
 
 namespace IQCare.Controllers.Registration
 {
@@ -35,6 +35,22 @@ namespace IQCare.Controllers.Registration
         {
             var response = await _mediator.Send(enrollClientCommand, Request.HttpContext.RequestAborted);
             if(response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+        [HttpGet("search")]
+        public async Task<IActionResult> Get(string identificationNumber, string firstName, string middleName, string lastName)
+        {
+            var response = await _mediator.Send(new SearchEnrolledClientsCommand
+            {
+                identificationNumber = identificationNumber,
+                firstName = firstName,
+                middleName = middleName,
+                lastName = lastName
+            });
+
+            if (response.IsValid)
                 return Ok(response.Value);
             return BadRequest(response);
         }

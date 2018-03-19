@@ -13,4 +13,8 @@
     <ProjectReference Include="..\IQCare.Registration.Core\IQCare.Registration.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Mapping\" />
+  </ItemGroup>
+
 </Project>

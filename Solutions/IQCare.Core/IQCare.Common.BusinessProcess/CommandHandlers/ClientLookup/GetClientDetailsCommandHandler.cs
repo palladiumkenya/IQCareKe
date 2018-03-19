@@ -32,6 +32,8 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.ClientLookup
 
                 result.ForEach(item=>item.CalculateYourAge());
 
+                _unitOfWork.Dispose();
+
                 return Result<GetClientDetailsResponse>.Valid(new GetClientDetailsResponse
                 {
                     PatientLookup = result

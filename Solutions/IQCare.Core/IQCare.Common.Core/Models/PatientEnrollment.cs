@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlTypes;
-using System.Text;
+using System.Xml.Serialization;
 
-namespace IQCare.Registration.Core.Model
+namespace IQCare.Common.Core.Models
 {
     public class PatientEnrollment
     {
@@ -17,6 +15,7 @@ namespace IQCare.Registration.Core.Model
         public bool DeleteFlag { get; set; }
         public int CreatedBy { get; set; }
         public DateTime CreateDate { get; set; }
-        public string AuditData { get; set; } 
+        [XmlIgnore]
+        public string AuditData { get; set; }
     }
 }

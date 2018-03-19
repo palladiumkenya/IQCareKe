@@ -1,10 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using IQCare.SharedKernel.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace IQCare.Common.Infrastructure
 {
-    public interface ICommonUnitOfWork
+    public interface ICommonUnitOfWork : IDisposable
     {
         void Save();
         Task SaveAsync();

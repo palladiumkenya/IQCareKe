@@ -6,10 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+    displayedColumns = ['IdentifierValue', 'firstName', 'midName', 'lastName'];
+    dataSource = null;
 
-  constructor() { }
-
-  ngOnInit() {
-  }
+    constructor() { }
+    ngOnInit() {}
 
 }

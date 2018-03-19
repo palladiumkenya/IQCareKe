@@ -2,7 +2,18 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
-import {MatDatepickerModule, MatFormFieldModule, MatInputModule, MatNativeDateModule} from '@angular/material';
+import {
+    MatAutocompleteModule, MatButtonModule, MatButtonToggleModule, MatCardModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule,
+    MatDialogModule, MatDividerModule, MatExpansionModule,
+    MatFormFieldModule, MatGridListModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule,
+    MatNativeDateModule, MatPaginatorModule, MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatRippleModule,
+    MatSelectModule, MatSidenavModule,
+    MatSliderModule,
+    MatSlideToggleModule,
+    MatSnackBarModule, MatSortModule,
+    MatStepperModule,
+    MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule
+} from '@angular/material';
 
 import { RegistrationRoutingModule } from './registration-routing.module';
 import { PersonComponent } from './person/person.component';
@@ -11,6 +22,8 @@ import { EnrollmentComponent } from './enrollment/enrollment.component';
 import {EnrollmentService} from './_services/enrollment.service';
 import { HomeComponent } from './home/home.component';
 import {SharedModule} from '../shared/shared.module';
+import { SearchComponent } from './search/search.component';
+import {SearchService} from './_services/search.service';
 
 
 
@@ -24,16 +37,51 @@ import {SharedModule} from '../shared/shared.module';
         MatFormFieldModule,
         MatNativeDateModule,
         MatInputModule,
-        SharedModule
+        SharedModule,
+        MatTableModule,
+        MatAutocompleteModule,
+        MatButtonModule,
+        MatButtonToggleModule,
+        MatCardModule,
+        MatCheckboxModule,
+        MatChipsModule,
+        MatDatepickerModule,
+        MatDialogModule,
+        MatDividerModule,
+        MatExpansionModule,
+        MatGridListModule,
+        MatIconModule,
+        MatInputModule,
+        MatListModule,
+        MatMenuModule,
+        MatNativeDateModule,
+        MatPaginatorModule,
+        MatProgressBarModule,
+        MatProgressSpinnerModule,
+        MatRadioModule,
+        MatRippleModule,
+        MatSelectModule,
+        MatSidenavModule,
+        MatSliderModule,
+        MatSlideToggleModule,
+        MatSnackBarModule,
+        MatSortModule,
+        MatStepperModule,
+        MatTableModule,
+        MatTabsModule,
+        MatToolbarModule,
+        MatTooltipModule,
     ],
     declarations: [
         PersonComponent,
         EnrollmentComponent,
-        HomeComponent
+        HomeComponent,
+        SearchComponent
     ],
     providers: [
         RegistrationService,
-        EnrollmentService
+        EnrollmentService,
+        SearchService
     ]
 
 })

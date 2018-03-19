@@ -64,7 +64,7 @@ nav.sidebar, .main{
     }
 
     nav.sidebar{
-        width: auto;
+        width: 200px;
         height: 100%;
         margin-left: -160px;
         float: left;
