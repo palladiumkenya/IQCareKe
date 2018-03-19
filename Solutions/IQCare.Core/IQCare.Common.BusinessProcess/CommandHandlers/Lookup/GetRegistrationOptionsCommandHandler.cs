@@ -32,6 +32,8 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Lookup
                     lookups.Add(new KeyValuePair<string, List<LookupItemView>>(request.RegistrationOptions[i], items));
                 }
 
+                _unitOfWork.Dispose();
+
                 return Result<GetRegistrationOptionsResponse>.Valid(new GetRegistrationOptionsResponse
                 {
                     LookupItems = lookups

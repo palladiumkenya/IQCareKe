@@ -47,6 +47,7 @@ If Not Exists(Select 1 From LookupItem where Name='MSW') Begin INSERT INTO Looku
 If Not Exists(Select 1 From LookupItem where Name='Other') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Other','Other',0); End
 If Not Exists(Select 1 From LookupItem where Name='Prisoner') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Prisoner','Prisoner',0); End
 If Not Exists(Select 1 From LookupItem where Name='Truck Driver') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Truck Driver','Truck Driver',0); End
+If Not Exists(Select 1 From LookupItem where Name='Hts-encounter') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Hts-encounter','hts-encounter',0); End
 
 --Set Lookup items for hts entry points
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Maternity',1 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Maternity'  ) ItemId FROM LookupMaster  WHERE Name='HTSEntryPoints') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
@@ -105,3 +106,5 @@ Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) 
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Other',6 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Other'  ) ItemId FROM LookupMaster  WHERE Name='KeyPopulation') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Prisoner',7 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Prisoner'  ) ItemId FROM LookupMaster  WHERE Name='KeyPopulation') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Truck Driver',8 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Truck Driver'  ) ItemId FROM LookupMaster  WHERE Name='KeyPopulation') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Hts-encounter',8 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Hts-encounter'  ) ItemId FROM LookupMaster  WHERE Name='EncounterType') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;

@@ -17,6 +17,7 @@ namespace IQCare.Common.Infrastructure
         public CommonRepository(CommonDbContext dbContext)
         {
             _context = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+            _context.Database.ExecuteSqlCommandAsync("exec pr_OpenDecryptedSession;");
         }
 
         public async Task AddAsync(TEntity entity)

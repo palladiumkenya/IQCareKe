@@ -29,6 +29,14 @@ export class EncounterService {
         );
     }
 
+    public getEncounterType(): Observable<any> {
+        return this.http.get<any>(this.API_URL + this._lookupurl +
+            '/optionsByGroupandItemName?groupName=EncounterType&itemName=Hts-encounter', httpOptions).pipe(
+            tap((getEncounterType: any) => this.log(`get encounter type`)),
+            catchError(this.handleError<any>('getEncounterType'))
+        );
+    }
+
     public addEncounter(encounter: Encounter, finalTestingResults: FinalTestingResults,
                         hivResults1: any[], hivResults2: any[]): Observable<Encounter> {
         const encounterBody = encounter;

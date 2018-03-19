@@ -3,8 +3,63 @@
         <app-clientbrief></app-clientbrief>
     </div>
     <div class="ibox-content">
-        <app-leftnav></app-leftnav>
-        <div>
+        <div class="col-md-2">
+            <app-leftnav></app-leftnav>
+        </div>
+        <div class="col-md-10">
+            <div class="panel panel-default">
+                <div class="panel-heading">HOME</div>
+                <div class="panel-body">
+                    <div class="example-container mat-elevation-z8">
+                        <mat-table #table [dataSource]="dataSource">
+
+                            <!--- Note that these columns can be defined in any order.
+                            The actual rendered columns are set as a property on the row definition" -->
+
+                            <!-- FirstName Column -->
+                            <ng-container matColumnDef="IdentifierValue">
+                                <mat-header-cell *matHeaderCellDef> Encounter Date </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{element.identifierValue}} </mat-cell>
+                            </ng-container>
+
+                            <!-- FirstName Column -->
+                            <ng-container matColumnDef="firstName">
+                                <mat-header-cell *matHeaderCellDef> Final Result </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{element.firstName}} </mat-cell>
+                            </ng-container>
+
+                            <!-- Middle Name Column -->
+                            <ng-container matColumnDef="midName">
+                                <mat-header-cell *matHeaderCellDef> Consent </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{element.midName}} </mat-cell>
+                            </ng-container>
+
+                            <!-- Last Name Column -->
+                            <ng-container matColumnDef="lastName">
+                                <mat-header-cell *matHeaderCellDef> No of Tests </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{element.lastName}} </mat-cell>
+                            </ng-container>
+
+                            <!-- Date Of Birth Column -->
+                            <ng-container matColumnDef="dateOfBirth">
+                                <mat-header-cell *matHeaderCellDef> Date Of Birth </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{element.dateOfBirth | date: 'dd-MMM-yyyy' }} </mat-cell>
+                            </ng-container>
+
+                            <!-- Enrollment Date Column -->
+                            <ng-container matColumnDef="enrollmentDate">
+                                <mat-header-cell *matHeaderCellDef> Enrollment Date </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{element.enrollmentDate | date: 'dd-MMM-yyyy' }} </mat-cell>
+                            </ng-container>
+
+
+
+                            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                            <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="getSelectedRow(row)"></mat-row>
+                        </mat-table>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>

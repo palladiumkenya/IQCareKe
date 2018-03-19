@@ -3,6 +3,9 @@ export class Encounter {
     PersonId?: number;
     ProviderId?: number;
     PatientEncounterID?: number;
+    PatientId?: number;
+    ServiceAreaId?: number;
+    EncounterTypeId?: number;
     EverTested?: number;
     MonthsSinceLastTest?: number;
     MonthSinceSelfTest?: number;

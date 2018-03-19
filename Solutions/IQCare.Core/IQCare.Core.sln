@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2010
+VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQCare", "IQCare\IQCare.csproj", "{EACDD6C6-0BD9-42CB-9B34-0CC9877F695D}"
 EndProject
@@ -16,8 +16,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PMTCT", "PMTCT", "{BD3B61B0-9E31-4B48-B7C5-6A44366950D5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RDE", "RDE", "{BC65A25B-35B2-4296-A35A-8CDD17E90919}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Registration", "Registration", "{61C93B4B-688F-4734-A20E-192B7287E10F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SharedKernel", "SharedKernel", "{B6F605B1-712A-49E9-8468-C010AA4690CA}"
 EndProject
@@ -36,12 +34,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQCare.Common.Infrastructure", "IQCare.Common.Infrastructure\IQCare.Common.Infrastructure.csproj", "{BC197B1A-999C-49B0-8CB4-4ACA6E512809}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQCare.Common.Core", "IQCare.Common.Core\IQCare.Common.Core.csproj", "{D3F6CD28-BA14-4DA8-B09D-3967DB8D4B0B}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQCare.Registration.Core", "IQCare.Registration.Core\IQCare.Registration.Core.csproj", "{5620752D-992C-43F3-9F95-23E5CD3273CB}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCare.Registration.BusinessProcess", "IQCare.Registration.BusinessProcess\IQCare.Registration.BusinessProcess.csproj", "{848C70C7-3456-4DF1-B814-BAE1E9FBCEAF}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCare.Registration.Infrastructure", "IQCare.Registration.Infrastructure\IQCare.Registration.Infrastructure.csproj", "{96C91325-A2D8-4022-910F-CE5CFDA6E50D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -89,18 +81,6 @@ Global
 		{D3F6CD28-BA14-4DA8-B09D-3967DB8D4B0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3F6CD28-BA14-4DA8-B09D-3967DB8D4B0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D3F6CD28-BA14-4DA8-B09D-3967DB8D4B0B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5620752D-992C-43F3-9F95-23E5CD3273CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5620752D-992C-43F3-9F95-23E5CD3273CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5620752D-992C-43F3-9F95-23E5CD3273CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5620752D-992C-43F3-9F95-23E5CD3273CB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{848C70C7-3456-4DF1-B814-BAE1E9FBCEAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{848C70C7-3456-4DF1-B814-BAE1E9FBCEAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{848C70C7-3456-4DF1-B814-BAE1E9FBCEAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{848C70C7-3456-4DF1-B814-BAE1E9FBCEAF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{96C91325-A2D8-4022-910F-CE5CFDA6E50D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{96C91325-A2D8-4022-910F-CE5CFDA6E50D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{96C91325-A2D8-4022-910F-CE5CFDA6E50D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{96C91325-A2D8-4022-910F-CE5CFDA6E50D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -116,9 +96,6 @@ Global
 		{B2773205-5DE6-4FAC-9D22-6F9C65E87BB7} = {A81EE81E-A949-4968-B7EB-BFD442FE773F}
 		{BC197B1A-999C-49B0-8CB4-4ACA6E512809} = {A81EE81E-A949-4968-B7EB-BFD442FE773F}
 		{D3F6CD28-BA14-4DA8-B09D-3967DB8D4B0B} = {A81EE81E-A949-4968-B7EB-BFD442FE773F}
-		{5620752D-992C-43F3-9F95-23E5CD3273CB} = {61C93B4B-688F-4734-A20E-192B7287E10F}
-		{848C70C7-3456-4DF1-B814-BAE1E9FBCEAF} = {61C93B4B-688F-4734-A20E-192B7287E10F}
-		{96C91325-A2D8-4022-910F-CE5CFDA6E50D} = {61C93B4B-688F-4734-A20E-192B7287E10F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6748284C-28D2-4D64-B4DE-832CF3A54CC2}

@@ -3,11 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 import {PersonComponent} from './person/person.component';
 import {EnrollmentComponent} from './enrollment/enrollment.component';
 import {HomeComponent} from './home/home.component';
+import {SearchComponent} from './search/search.component';
 
 const routes: Routes = [
     {
         path: '',
-        component: PersonComponent,
+        component: SearchComponent,
         pathMatch: 'full',
     },
     {
@@ -16,8 +17,18 @@ const routes: Routes = [
         pathMatch: 'full'
     },
     {
+        path: 'register',
+        component: PersonComponent,
+        pathMatch: 'full'
+    },
+    {
         path: 'enrollment',
         component: EnrollmentComponent,
+        pathMatch: 'full'
+    },
+    {
+        path: 'search',
+        component: SearchComponent,
         pathMatch: 'full'
     }
 ];

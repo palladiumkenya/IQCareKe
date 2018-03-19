@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IQCare.Common.Infrastructure
 {
-    public class CommonUnitOfWork : ICommonUnitOfWork
+    public class CommonUnitOfWork : ICommonUnitOfWork, IDisposable
     {
         private readonly CommonDbContext _context;
         private Hashtable repositories;

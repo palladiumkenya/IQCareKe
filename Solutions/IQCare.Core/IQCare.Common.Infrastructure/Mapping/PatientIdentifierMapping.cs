@@ -1,11 +1,8 @@
-﻿using IQCare.Registration.Core.Model;
+﻿using IQCare.Common.Core.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace IQCare.Registration.Infrastructure.Mapping
+namespace IQCare.Common.Infrastructure.Mapping
 {
     public class PatientIdentifierMapping : IEntityTypeConfiguration<PatientIdentifier>
     {

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Data.Common;
+using Microsoft.EntityFrameworkCore;
 
 namespace IQCare.SharedKernel.Infrastructure
 {
