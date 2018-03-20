@@ -87,5 +87,15 @@ namespace IQCare.Controllers.Common
 
             return BadRequest(results);
         }
-    }
+
+        [HttpPost("getCustomOptions")]
+        public async Task<IActionResult> GetCustomOptions([FromBody] string[] options)
+        {
+            var results = await _mediator.Send(new GetRegistrationOptionsCommand {RegistrationOptions = options},
+                HttpContext.RequestAborted);
+            if (results.IsValid)
+                return Ok(results.Value);
+            return BadRequest(results);
+        }
+    } 
 }

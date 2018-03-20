@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import {Linkage} from '../_models/linkage';
+import {LinkageReferralService} from '../_services/linkage-referral.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-linkage',
@@ -9,12 +11,24 @@ import {Linkage} from '../_models/linkage';
 export class LinkageComponent implements OnInit {
     linkage: Linkage;
 
-    constructor() { }
+    constructor(private linkageService: LinkageReferralService,
+                private router: Router,
+                private route: ActivatedRoute,
+                public zone: NgZone) { }
     ngOnInit() {
         this.linkage = new Linkage();
     }
 
     onSubmit() {
+        this.linkage.personId = JSON.parse(localStorage.getItem('personId'));
+        this.linkage.userId = 1;
+
         console.log(this.linkage);
+        this.linkageService.addLinkage(this.linkage).subscribe(data => {
+            console.log(data);
+            this.zone.run(() => { this.router.navigate(['/registration/home'], { relativeTo: this.route }); });
+        }, err => {
+           console.log(`error`);
+        });
     }
 }

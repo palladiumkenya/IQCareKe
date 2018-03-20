@@ -44,5 +44,14 @@ namespace IQCare.Controllers.HTS
                 return Ok(response.Value);
             return BadRequest(response);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] AddPnsScreeningCommand addPnsScreeningCommand)
+        {
+            var response = await _mediator.Send(addPnsScreeningCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
     }
 }

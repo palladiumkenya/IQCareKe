@@ -5,4 +5,6 @@ export class Linkage {
     dateEnrolled: string;
     cccNumber: string;
     remarks: string;
+    personId: number;
+    userId: number;
 }

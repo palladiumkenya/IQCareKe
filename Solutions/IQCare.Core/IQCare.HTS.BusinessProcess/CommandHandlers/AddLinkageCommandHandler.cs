@@ -20,27 +20,34 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
 
         public async Task<Result<AddLinkageResponse>> Handle(AddLinkageCommand request, CancellationToken cancellationToken)
         {
-            PatientLinkage patientLinkage = new PatientLinkage()
+            try
             {
-                PersonId = request.PersonId,
-                LinkageDate = request.DateEnrolled,
-                CCCNumber = request.CCCNumber,
-                Facility = request.FacilityId,
-                Enrolled = true,
-                DeleteFlag = false,
-                CreatedBy = request.UserId,
-                CreateDate = DateTime.Now
-            };
+                PatientLinkage patientLinkage = new PatientLinkage()
+                {
+                    PersonId = request.PersonId,
+                    LinkageDate = request.DateEnrolled,
+                    CCCNumber = request.CCCNumber,
+                    Facility = request.Facility,
+                    Enrolled = true,
+                    DeleteFlag = false,
+                    CreatedBy = request.UserId,
+                    CreateDate = DateTime.Now
+                };
 
-            await _unitOfWork.Repository<PatientLinkage>().AddAsync(patientLinkage);
-            await _unitOfWork.SaveAsync();
+                await _unitOfWork.Repository<PatientLinkage>().AddAsync(patientLinkage);
+                await _unitOfWork.SaveAsync();
 
-            _unitOfWork.Dispose();
+                _unitOfWork.Dispose();
 
-            return Result<AddLinkageResponse>.Valid(new AddLinkageResponse
+                return Result<AddLinkageResponse>.Valid(new AddLinkageResponse
+                {
+                    LinkageId = patientLinkage.Id
+                });
+            }
+            catch (Exception e)
             {
-                LinkageId = patientLinkage.Id
-            });
+                return Result<AddLinkageResponse>.Invalid(e.Message);
+            }
         }
     }
 }

@@ -7,7 +7,7 @@ namespace IQCare.HTS.BusinessProcess.Commands
     public class AddLinkageCommand : IRequest<Result<AddLinkageResponse>>
     {
         public int PersonId { get; set; }
-        public string FacilityId { get; set; }
+        public string Facility { get; set; }
         public string HealthWorker { get; set; }
         public string Carde { get; set; }
         public DateTime DateEnrolled { get; set; }

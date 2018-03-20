@@ -28,8 +28,8 @@ export class LinkageReferralService {
         );
     }
 
-    public addLinkage(linkage) {
-        return this.http.post(this.API_URL + this.url, JSON.stringify(), httpOptions).pipe(
+    public addLinkage(linkage: Linkage) {
+        return this.http.post(this.API_URL + this.url, JSON.stringify(linkage), httpOptions).pipe(
             tap((addedLinkage: Linkage) => this.log(`added linkage w/ id`)),
             catchError(this.handleError<Linkage>('addLinkage'))
         );

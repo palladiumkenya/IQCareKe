@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 using IQCare.Common.BusinessProcess.Commands.Enrollment;
+using IQCare.Common.BusinessProcess.Commands.Partners;
 
 namespace IQCare.Controllers.Registration
 {
@@ -59,6 +60,15 @@ namespace IQCare.Controllers.Registration
         public async Task<IActionResult> Get(int patientId, int serviceAreaId)
         {
             var response = await _mediator.Send(new GetClientDetailsCommand{ PatientId = patientId, ServiceAreaId = serviceAreaId }, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+        [HttpPost("getPartners")]
+        public async Task<IActionResult> GetPartners([FromBody]string[] relationshipTypes, int patientId)
+        {
+            var response = await _mediator.Send(new GetPartnersCommand { PatientId = patientId, RelationshipTypes = relationshipTypes}, Request.HttpContext.RequestAborted);
             if (response.IsValid)
                 return Ok(response.Value);
             return BadRequest(response);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using IQCare.Common.BusinessProcess.Commands.Lookup;
@@ -27,7 +28,7 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Lookup
                 for (int i = 0; i < request.RegistrationOptions.Length; i++)
                 {
                     var items = await _unitOfWork.Repository<LookupItemView>()
-                        .Get(c => c.MasterName == request.RegistrationOptions[i]).ToListAsync();
+                        .Get(c => c.MasterName == request.RegistrationOptions[i]).OrderByDescending(y=>y.RowID).ToListAsync();
 
                     lookups.Add(new KeyValuePair<string, List<LookupItemView>>(request.RegistrationOptions[i], items));
                 }

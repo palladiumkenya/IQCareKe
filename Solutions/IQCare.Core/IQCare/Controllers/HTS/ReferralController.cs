@@ -27,7 +27,7 @@ namespace IQCare.Controllers.HTS
         }
 
         [HttpPost("linkpatient")]
-        public async Task<IActionResult> LinkPatient(AddLinkageCommand command)
+        public async Task<IActionResult> LinkPatient([FromBody]AddLinkageCommand command)
         {
             var response = await _mediator.Send(command, Request.HttpContext.RequestAborted);
             if (response.IsValid)

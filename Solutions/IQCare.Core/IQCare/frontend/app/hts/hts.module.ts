@@ -2,7 +2,21 @@ import { NgModule, Component} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import {MatDatepickerModule, MatFormFieldModule, MatInputModule, MatNativeDateModule} from '@angular/material';
+import {
+    MatAutocompleteModule,
+    MatButtonModule, MatButtonToggleModule, MatCardModule, MatCheckboxModule, MatChipsModule,
+    MatDatepickerModule, MatDialogModule, MatDividerModule, MatExpansionModule, MatFormFieldModule, MatGridListModule, MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatNativeDateModule, MatPaginatorModule, MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatRippleModule,
+    MatSelectModule,
+    MatSidenavModule, MatSliderModule,
+    MatSlideToggleModule,
+    MatSnackBarModule,
+    MatSortModule, MatStepperModule,
+    MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule
+} from '@angular/material';
 
 import { HtsRoutingModule } from './hts-routing.module';
 import { EncounterComponent } from './encounter/encounter.component';
@@ -16,6 +30,8 @@ import { FamilyScreeningComponent } from './family-screening/family-screening.co
 import { NoneEventsDirective } from './_directives/none-events.directive';
 import { LinkageComponent } from './linkage/linkage.component';
 import {SharedModule} from '../shared/shared.module';
+import { PnsPartnersComponent } from './pns-partners/pns-partners.component';
+import {PnsService} from './_services/pns.service';
 
 
 @NgModule({
@@ -28,7 +44,45 @@ import {SharedModule} from '../shared/shared.module';
       MatFormFieldModule,
       MatNativeDateModule,
       MatInputModule,
-      SharedModule
+      SharedModule,
+      MatDatepickerModule,
+      MatFormFieldModule,
+      MatNativeDateModule,
+      MatInputModule,
+      SharedModule,
+      MatTableModule,
+      MatAutocompleteModule,
+      MatButtonModule,
+      MatButtonToggleModule,
+      MatCardModule,
+      MatCheckboxModule,
+      MatChipsModule,
+      MatDatepickerModule,
+      MatDialogModule,
+      MatDividerModule,
+      MatExpansionModule,
+      MatGridListModule,
+      MatIconModule,
+      MatInputModule,
+      MatListModule,
+      MatMenuModule,
+      MatNativeDateModule,
+      MatPaginatorModule,
+      MatProgressBarModule,
+      MatProgressSpinnerModule,
+      MatRadioModule,
+      MatRippleModule,
+      MatSelectModule,
+      MatSidenavModule,
+      MatSliderModule,
+      MatSlideToggleModule,
+      MatSnackBarModule,
+      MatSortModule,
+      MatStepperModule,
+      MatTableModule,
+      MatTabsModule,
+      MatToolbarModule,
+      MatTooltipModule,
   ],
   declarations: [
     EncounterComponent,
@@ -38,13 +92,15 @@ import {SharedModule} from '../shared/shared.module';
     FamilyTracingComponent,
     FamilyScreeningComponent,
     NoneEventsDirective,
-    LinkageComponent
+    LinkageComponent,
+    PnsPartnersComponent
   ],
   exports: [
   ],
   providers: [
       EncounterService,
-      LinkageReferralService
+      LinkageReferralService,
+      PnsService
   ]
 })
 export class HtsModule { }
