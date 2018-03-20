@@ -10,14 +10,34 @@ namespace IQCare.Common.Infrastructure
     {
         private readonly CommonDbContext _context;
         private Hashtable repositories;
+        // Flag: Has Dispose already been called?
+        private bool disposed = false;
 
         public CommonUnitOfWork(CommonDbContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
+
+        // public implementation of dispose pattern callable by consumers
         public void Dispose()
         {
-            _context.Dispose();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        //Protected implementation of Dispose pattern.
+        protected virtual void Dispose(bool disposing)
+        {
+            if (this.disposed)
+                return;
+            if (disposing)
+            {
+                // Free any other managed objects here
+                _context.Dispose();
+            }
+
+            // Free any unmanaged objects here
+            this.disposed = true;
         }
 
 

@@ -92,6 +92,9 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                     }
 
                     trans.Commit();
+
+                    _unitOfWork.Dispose();
+
                     return Result<AddEncounterResponse>
                         .Valid(new AddEncounterResponse { HtsEncounterId = htsEncounter.Id });
                 }

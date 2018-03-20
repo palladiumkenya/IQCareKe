@@ -74,5 +74,18 @@ namespace IQCare.Controllers.Common
                 return Ok(results.Value);
             return BadRequest(results);
         }
+
+        [HttpGet("htsTracingOptions")]
+        public async Task<IActionResult> GetTracingOptions()
+        {
+            string[] options = new string[] { "TracingMode", "TracingOutcome" };
+            var results = await _mediator.Send(new GetRegistrationOptionsCommand {RegistrationOptions = options},
+                HttpContext.RequestAborted);
+
+            if (results.IsValid)
+                return Ok(results.Value);
+
+            return BadRequest(results);
+        }
     }
 }

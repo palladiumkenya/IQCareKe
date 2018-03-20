@@ -18,7 +18,7 @@ namespace IQCare.Controllers.HTS
         }
 
         [HttpPost]
-        public async Task<IActionResult> ReferPatient(ReferPatientCommand command)
+        public async Task<IActionResult> ReferPatient([FromBody]ReferPatientCommand command)
         {
             var response = await _mediator.Send(command, Request.HttpContext.RequestAborted);
             if (response.IsValid)
@@ -26,12 +26,13 @@ namespace IQCare.Controllers.HTS
             return BadRequest();
         }
 
-        //[HttpPost("linkpatient")]
-        //public async Task<IActionResult> LinkPatient(AddLinkageCommand command)
-        //{
-        //    var response = await _mediator.Send(command, Request.HttpContext.RequestAborted);
-        //    if (response.IsValid) return Ok();
-        //    return BadRequest();
-        //}
+        [HttpPost("linkpatient")]
+        public async Task<IActionResult> LinkPatient(AddLinkageCommand command)
+        {
+            var response = await _mediator.Send(command, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
     }
 }

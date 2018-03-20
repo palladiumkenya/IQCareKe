@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace IQCare.Common.Core.Models
+namespace IQCare.HTS.Core.Model
 {
     public class PatientLinkage
     {
