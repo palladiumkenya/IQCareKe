@@ -34,20 +34,24 @@
                             </div>
                             <form id="form" action="#" class="wizard-big">
                                 <div class="step-content">
-                                    <div class="step-pane active sample-pane alert" data-step="1">
+                                    <div class="step-pane active sample-pane alert" data-step="1" id="datastep1" data-parsley-validate="true" data-show-errors="true">
                                         <fieldset>
                                             <div class="row">
                                                 <div class="col-lg-3">
                                                     <div class="form-group">
                                                         <label>Referred To *</label>
-                                                        <input id="referredTo" name="referredTo" type="text" class="form-control required" [(ngModel)]="referral.referredTo" #referredTo="ngModel">
+                                                        <div>
+                                                            <mat-form-field>
+                                                                <input id="referredTo" name="referredTo" matInput placeholder="Referred To" [(ngModel)]="referral.referredTo" #referredTo="ngModel" data-parsley-required="true" required>
+                                                            </mat-form-field>
+                                                        </div>
                                                     </div>
 
                                                     <div class="form-group">
                                                         <label>Date To Be Enrolled *</label>
                                                         <div>
                                                             <mat-form-field>
-                                                                <input matInput [matDatepicker]="myDatepicker" (click)="myDatepicker.open()" name="dateToBeEnrolled" [(ngModel)]="referral.dateToBeEnrolled">
+                                                                <input matInput [matDatepicker]="myDatepicker" (click)="myDatepicker.open()" name="dateToBeEnrolled" [(ngModel)]="referral.dateToBeEnrolled" data-parsley-required="true" required>
                                                                 <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
                                                                 <mat-datepicker #myDatepicker></mat-datepicker>
                                                             </mat-form-field>
@@ -57,7 +61,7 @@
                                             </div>
                                         </fieldset>
                                     </div>
-                                    <div class="step-pane sample-pane alert" data-step="2">
+                                    <div class="step-pane sample-pane alert" data-step="2" id="datastep2" data-parsley-validate="true" data-show-errors="true">
                                         <fieldset>
                                             <div class="row">
                                                 <div class="tabs-container">
@@ -72,7 +76,7 @@
                                                                 </button>
                                                                 <div class="modal inmodal" id="tracingModal" tabindex="-1" role="dialog" aria-hidden="true">
                                                                     <div class="modal-dialog">
-                                                                        <div class="modal-content">
+                                                                        <div class="modal-content animated fadeInLeft">
                                                                             <div class="modal-header">
                                                                                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                                                                                 <h4 class="modal-title">Tracing Detail</h4>
@@ -80,27 +84,53 @@
                                                                             <div class="modal-body">
                                                                                 <div class="form-group">
                                                                                     <label>Tracing Date *</label>
-                                                                                    <input id="tracingDate" name="tracingDate" type="date" class="form-control required">
+                                                                                    <input id="tracingDate" name="tracingDate" type="date" class="form-control required" [(ngModel)]="tracing.tracingDate" #tracingDate="ngModel">
 
                                                                                 </div>
 
                                                                                 <div class="form-group">
                                                                                     <label>Mode *</label>
-                                                                                    <input id="lotNumber" name="lotNumber" type="text" class="form-control required">
+                                                                                    <select id="mode" name="mode" class="form-control required" [(ngModel)]="tracing.mode" #mode="ngModel">
+                                                                                        <option></option>
+                                                                                        <option *ngFor="let mode of tracingModeOptions" [ngValue]="mode">{{mode.itemName}}</option>
+                                                                                    </select>
                                                                                 </div>
 
                                                                                 <div class="form-group">
                                                                                     <label>Outcome *</label>
-                                                                                    <input id="expiry" name="expiry" type="text" class="form-control required">
+                                                                                    <select id="outcome" name="outcome" class="form-control" [(ngModel)]="tracing.outcome" #outcome="ngModel">
+                                                                                        <option></option>
+                                                                                        <option *ngFor="let outcome of tracingOutcomeOptions" [ngValue]="outcome">{{outcome.itemName}}</option>
+                                                                                    </select>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="modal-footer">
                                                                                 <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
-                                                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                                                                <button type="button" class="btn btn-primary" (click)="onAddingTracing()">Save changes</button>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
+
+                                                                <table class="table table-striped">
+                                                                    <thead>
+                                                                    <tr>
+                                                                        <th scope="col">#</th>
+                                                                        <th scope="col">Tracing Date</th>
+                                                                        <th scope="col">Mode</th>
+                                                                        <th scope="col">Outcome</th>
+                                                                    </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                    <tr *ngFor="let trace of tracingArray; let index = index;">
+                                                                        <td>{{ index }}</td>
+                                                                        <td>{{ trace.tracingDate }}</td>
+                                                                        <td>{{ trace.mode.displayName }}</td>
+                                                                        <td>{{ trace.outcome.displayName }}</td>
+                                                                    </tr>
+                                                                    </tbody>
+                                                                </table>
+
                                                             </div>
                                                         </div>
                                                     </div>

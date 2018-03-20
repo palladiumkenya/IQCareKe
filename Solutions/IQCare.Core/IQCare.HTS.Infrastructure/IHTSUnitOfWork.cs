@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IQCare.HTS.Infrastructure
 {
-    public interface IHTSUnitOfWork
+    public interface IHTSUnitOfWork : IDisposable
     {
         void Save();
         Task SaveAsync();

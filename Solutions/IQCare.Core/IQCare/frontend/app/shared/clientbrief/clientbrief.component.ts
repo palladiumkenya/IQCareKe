@@ -29,7 +29,7 @@ export class ClientbriefComponent implements OnInit {
             // console.log(res);
             this.clientBrief = res['patientLookup'][0];
             this.clientBrief.fullName = this.clientBrief.firstName + ' ' + this.clientBrief.midName + ' ' + this.clientBrief.lastName;
-            console.log(this.clientBrief);
+            // console.log(this.clientBrief);
         });
     }
 }

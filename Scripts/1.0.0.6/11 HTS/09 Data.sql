@@ -7,6 +7,8 @@ If Not Exists(Select 1 From LookupMaster where Name='ReasonsPartner') Begin INSE
 If Not Exists(Select 1 From LookupMaster where Name='HIVResults') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('HIVResults','HIV Results',0); End
 If Not Exists(Select 1 From LookupMaster where Name='HIVTestKits') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('HIVTestKits','HIV Test Kits',0); End
 If Not Exists(Select 1 From LookupMaster where Name='HIVFinalResults') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('HIVFinalResults','HIV Final Results',0); End
+If Not Exists(Select 1 From LookupMaster where Name='TracingOutcome') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('TracingOutcome','Tracing Outcome',0); End
+If Not Exists(Select 1 From LookupMaster where Name='TracingMode') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('TracingMode','Tracing Mode',0); End
 
 --Set look up items
 If Not Exists(Select 1 From LookupItem where Name='Maternity') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Maternity','Maternity',0); End
@@ -48,6 +50,11 @@ If Not Exists(Select 1 From LookupItem where Name='Other') Begin INSERT INTO Loo
 If Not Exists(Select 1 From LookupItem where Name='Prisoner') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Prisoner','Prisoner',0); End
 If Not Exists(Select 1 From LookupItem where Name='Truck Driver') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Truck Driver','Truck Driver',0); End
 If Not Exists(Select 1 From LookupItem where Name='Hts-encounter') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Hts-encounter','hts-encounter',0); End
+If Not Exists(Select 1 From LookupItem where Name='Contacted') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Contacted','Contacted',0); End
+If Not Exists(Select 1 From LookupItem where Name='Contacted and Linked') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Contacted and Linked','Contacted and Linked',0); End
+If Not Exists(Select 1 From LookupItem where Name='Not Contacted') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Not Contacted','Not Contacted',0); End
+If Not Exists(Select 1 From LookupItem where Name='Phone') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Phone','Phone',0); End
+If Not Exists(Select 1 From LookupItem where Name='Physical') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Physical','Physical',0); End
 
 --Set Lookup items for hts entry points
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Maternity',1 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Maternity'  ) ItemId FROM LookupMaster  WHERE Name='HTSEntryPoints') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
@@ -108,3 +115,8 @@ Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) 
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Truck Driver',8 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Truck Driver'  ) ItemId FROM LookupMaster  WHERE Name='KeyPopulation') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
 
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Hts-encounter',8 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Hts-encounter'  ) ItemId FROM LookupMaster  WHERE Name='EncounterType') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Contacted',1 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Contacted') ItemId FROM LookupMaster  WHERE Name='TracingOutcome') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Contacted and Linked',2 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Contacted and Linked') ItemId FROM LookupMaster  WHERE Name='TracingOutcome') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Not Contacted',3 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Not Contacted') ItemId FROM LookupMaster  WHERE Name='TracingOutcome') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Phone',1 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Phone') ItemId FROM LookupMaster  WHERE Name='TracingMode') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Physical',2 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Physical') ItemId FROM LookupMaster  WHERE Name='TracingMode') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
