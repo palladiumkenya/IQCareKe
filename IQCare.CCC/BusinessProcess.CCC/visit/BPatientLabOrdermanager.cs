@@ -249,7 +249,18 @@ namespace BusinessProcess.CCC.visit
                 return patientLabOrders;
             }
         }
-
+        public LabOrderEntity GetLabOrderById(int labOrderId)
+        {
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+               LabOrderEntity patientLabOrders =               _unitOfWork.PatientLabOrderRepository.GetById(labOrderId);
+                //.FindBy(
+                //            x =>                                x.Id == labOrderId)
+                //        .OrderByDescending(x => x.Id).Take(1).ToList();
+                _unitOfWork.Dispose();
+                return patientLabOrders;
+            }
+        }
         public List<LabDetailsEntity> GetPatientLabDetailsByDate(int labOrderId, DateTime visitDate)
         {
             using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))

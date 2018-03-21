@@ -23,6 +23,7 @@ namespace IQCare.CCC.UILogic
         public string OrderReason { get; set; }
         public string Results { get; set; }
         public DateTime LabOrderDate { get; set; }
+        public DateTime? ResultDate { get; set; }
         public int LabOrderId { get; set; }
         //public int labTestId { get; set; }
         public string LabNotes { get; set; }
@@ -37,8 +38,21 @@ namespace IQCare.CCC.UILogic
         ILookupManager _lookupTest = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
         private readonly IPatientVisitManager _visitManager = (IPatientVisitManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientVisit, BusinessProcess.CCC");
         PatientEncounterManager _patientEncounterManager=new PatientEncounterManager();
-
-        public void savePatientLabOrder(int patientID, int patient_Pk, int userId, int facilityID, int moduleId, int patientMasterVisitId, string labOrderDate, string orderNotes, string patientLabOrder, string orderStatus)
+        /// <summary>
+        /// Saves the patient lab order.
+        /// </summary>
+        /// <param name="patientID">The patient identifier.</param>
+        /// <param name="patient_Pk">The patient pk.</param>
+        /// <param name="userId">The user identifier.</param>
+        /// <param name="facilityID">The facility identifier.</param>
+        /// <param name="moduleId">The module identifier.</param>
+        /// <param name="patientMasterVisitId">The patient master visit identifier.</param>
+        /// <param name="labOrderDate">The lab order date.</param>
+        /// <param name="orderNotes">The order notes.</param>
+        /// <param name="patientLabOrder">The patient lab order.</param>
+        /// <param name="orderStatus">The order status.</param>
+        /// <returns>order Id</returns>
+        public int savePatientLabOrder(int patientID, int patient_Pk, int userId, int facilityID, int moduleId, int patientMasterVisitId, string labOrderDate, string orderNotes, string patientLabOrder, string orderStatus)
         {
             int visitId = 0;
             int orderId = 0;
@@ -57,8 +71,8 @@ namespace IQCare.CCC.UILogic
                     Ptn_Pk = patient_Pk,
                     LocationID = facilityID,
                     UserID = userId,
-                    TypeofVisit = 6,
-                    VisitDate = DateTime.Now,
+                    TypeofVisit = 70, //Self (70) 71 (Treatmentsupporter)
+                    VisitDate = orderDate,
                     ModuleId = moduleId,
                     VisitType = 6
                 };
@@ -79,7 +93,7 @@ namespace IQCare.CCC.UILogic
                     UserId = userId
                 };
                 orderId = _mgr.AddPatientLabOrder(labOrder);
-
+               // DateTime? nullDate = null;
                 foreach (ListLabOrder t in data)
                 {
                     LabDetailsEntity labDetails = new LabDetailsEntity()
@@ -89,7 +103,8 @@ namespace IQCare.CCC.UILogic
                         TestNotes = t.LabNotes,
                         UserId = userId,
                         CreatedBy = userId,
-                        StatusDate = DateTime.Now
+                        StatusDate = DateTime.Now,
+                        ResultDate = t.ResultDate
 
                     };
                     testId = _mgr.AddLabOrderDetails(labDetails);
@@ -101,13 +116,14 @@ namespace IQCare.CCC.UILogic
                         LabName = t.LabName,
                         SampleDate = orderDate,
                         Reasons = t.OrderReason,
+
                         CreatedBy = userId,
                         Results = orderStatus,
                         LabOrderId = orderId,
                         LabTestId = t.LabNameId,  //parameter
                         LabOrderTestId = testId,  //uniquely identifies a particular test
                         FacilityId = facilityID,
-                        ResultDate= orderDate
+                         ResultDate = t.ResultDate
                     };
 
                     Result=  _mgr.AddPatientLabTracker(labTracker);
@@ -141,6 +157,7 @@ namespace IQCare.CCC.UILogic
 
                 }
             }
+            return orderId;
         }
          
         public List<PatientLabTracker> GetVlPendingCount(int facilityId)
@@ -172,7 +189,11 @@ namespace IQCare.CCC.UILogic
             var labOrders = _mgr.GetPatientLabOrdersByDate(patientId, visitDate);
             return labOrders;
         }
-
+        public LabOrderEntity GetLabOrdersById(int labOrderId)
+        {
+            var labOrders = _mgr.GetLabOrderById(labOrderId);
+            return labOrders;
+        }
         public List<LabDetailsEntity> GetPatientLabDetailsByDate(int labOrderId, DateTime visitDate)
         {
             var labDetails = _mgr.GetPatientLabDetailsByDate(labOrderId, visitDate);

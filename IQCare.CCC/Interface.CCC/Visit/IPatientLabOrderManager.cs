@@ -25,6 +25,6 @@ namespace Interface.CCC.Visit
         List<PatientLabTracker> GetAllPatientVLs(int patientId);
         PatientLabTracker GetPatientLastVL(int patientId);
 
-
+        LabOrderEntity GetLabOrderById(int labOrderId);
     }
 }

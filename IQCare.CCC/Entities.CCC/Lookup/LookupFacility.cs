@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
 using System.ComponentModel.DataAnnotations;
-using Entities.Common;
-using Entities.CCC.Enrollment;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.CCC.Lookup
 {
@@ -19,6 +14,8 @@ namespace Entities.CCC.Lookup
         public string SatelliteID { get; set; }        
         public int DeleteFlag { get; set; }
         public int UserID { get; set; }
+        [Column("NationalId")]
+        public string MFLCode { get; set; }
         //public int AppGracePeriod { get; set; }
 
     }

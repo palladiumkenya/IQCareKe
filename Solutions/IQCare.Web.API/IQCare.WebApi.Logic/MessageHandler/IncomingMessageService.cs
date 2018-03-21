@@ -237,8 +237,8 @@ namespace IQCare.WebApi.Logic.MessageHandler
                 ViralLoadResultEntity entity = new JavaScriptSerializer().Deserialize<ViralLoadResultEntity>(incomingMessage.Message);
                 ViralLoadResultsDto vlResultsDto = _dtoMapper.ViralLoadResults(entity);
                 var processViralLoadResults = new ProcessViralLoadResults();
-                //var msg = processViralLoadResults.Save(vlResultsDto);
-                var msg = "could not be processed";
+                var msg = processViralLoadResults.Save(vlResultsDto);
+               // var msg = "could not be processed";
 
                 incomingMessage.LogMessage = msg;
                 //update message that it has been processed
@@ -254,7 +254,7 @@ namespace IQCare.WebApi.Logic.MessageHandler
             }
             //incomingMessage.DateProcessed = DateTime.Now;
             //incomingMessage.Processed = true;
-            //_apiInboxmanager.AddApiInbox(incomingMessage);
+            //_apiInboxmanager.Edit(incomingMessage);
         }
     }
 }

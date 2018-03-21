@@ -241,6 +241,15 @@ namespace BusinessProcess.CCC
             }
         }
 
+        public LookupFacility GetFacility(string mflCode)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                var item = unitOfWork.LookupFacilityRepository.FindBy(f => f.MFLCode == mflCode && f.DeleteFlag == 0).FirstOrDefault(); ;
+                unitOfWork.Dispose();
+                return item;
+            }
+        }
         public LookupItemView GetPatientGender(int genderId)
 
         {
@@ -493,5 +502,6 @@ namespace BusinessProcess.CCC
                 return p.ItemName;
             }
         }
+
     }
 }
