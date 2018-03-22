@@ -104,7 +104,7 @@ namespace IQCare.Web.CCC.Patient
                     {
                         lblDateOfEnrollment.Text = "Not Taken";
                     }
-                    
+
                     // lblWhoStage.Text = LookupLogic.GetLookupNameById(item.EnrollmentWhoStage).ToString();
                     //lblDateOfHivDiagnosis.Text = item.HivDiagnosisDate.ToString("dd-MMM-yyyy");
                     lblARTInitiationDate.Text = Convert.ToString(item.ArtInitiationDate);
@@ -199,7 +199,7 @@ namespace IQCare.Web.CCC.Patient
                         else
                         {
                             bioPatientKeyPopulation.Items.Add(new ListItem(item.ItemDisplayName, item.ItemId.ToString()));
-                        }       
+                        }
                     }
                 }
 
@@ -266,7 +266,7 @@ namespace IQCare.Web.CCC.Patient
                             lblFirstline.Text = DispensedByDate.ToString("dd-MMM-yyyy");
                             lblcohort.Text = DispensedByDate.ToString("MMM") + "-" + DispensedByDate.Year;
                         }
-                                                
+
                         lblRegimenName.Text = ptnTreatmentInitiation.Regimen.ToString();
                         //lblCurrentRegimen.Text = "<span class='label label-success'>" + ptnTreatmentBaseline.Regimen.ToString() + "</span>";
                         lblARTInitiationDate.Text = ptnTreatmentBaseline.CreateDate.ToString("dd-MMM-yyyy");
@@ -275,13 +275,13 @@ namespace IQCare.Web.CCC.Patient
                     {
                         lblDateOfARTInitiation.Text = "<span class='label'> Not dispensed</span>";
                         lblcohort.Text = "<span class='label label-danger'>N/A</span>";
-                       // lblCurrentRegimen.Text = "<span class='label label-danger'>PATIENT NOT ON ARVs</span>";
+                        // lblCurrentRegimen.Text = "<span class='label label-danger'>PATIENT NOT ON ARVs</span>";
 
                     }
                 }
 
                 // viral Load Alerts
-               
+
                 //PatientLabTracker vltestId = _lookupData.GetPatientLabTestId(PatientId);  //check patient has vl lab
                 PatientLabTracker lastVL = _lookupData.GetPatientLastVL(PatientId);
 
@@ -289,96 +289,97 @@ namespace IQCare.Web.CCC.Patient
                 //{
                 //    labTestId = lastVL.LabTestId;
                 //}
-                if (lastVL != null)  
+                if (lastVL != null)
                 {
                     //var labOrder = _lookupData.GetPatientCurrentviralLoadInfo(PatientId);  //get vl lab details for patient
 
                     //if (lastVL != null)
                     //{
-                        //foreach (var item in _lookupData.GetPatientVlById(labOrder.Id))
-                        //{
-                        //    vlValue = item.ResultValues;
-                        //}                              
+                    //foreach (var item in _lookupData.GetPatientVlById(labOrder.Id))
+                    //{
+                    //    vlValue = item.ResultValues;
+                    //}                              
 
-                        // vlValue = Convert.ToDecimal(_lookupData.GetPatientVL(LabOrder.Id));
-                        if (PatientType == "New")
-                        {
-                            //lblbaselineVL.Text = Convert.ToString(vlValue);
-                            DateTime x = Convert.ToDateTime(lastVL.SampleDate);
-                            lblBlDate.Text = x.ToString("dd-MMM-yyyy");
-                        }
-                        else
-                        {
-                            lblbaselineVL.Text = "<span class='label label-danger'>Not Taken</span>";
-                            lblBlDate.Text = "<span class='label label-danger'>N/A</span>";
-                        }
+                    // vlValue = Convert.ToDecimal(_lookupData.GetPatientVL(LabOrder.Id));
+                    if (PatientType == "New")
+                    {
+                        //lblbaselineVL.Text = Convert.ToString(vlValue);
+                        DateTime x = Convert.ToDateTime(lastVL.SampleDate);
+                        lblBlDate.Text = x.ToString("dd-MMM-yyyy");
+                    }
+                    else
+                    {
+                        lblbaselineVL.Text = "<span class='label label-danger'>Not Taken</span>";
+                        lblBlDate.Text = "<span class='label label-danger'>N/A</span>";
+                    }
 
-                        switch (lastVL.Results)
-                        {
+                    switch (lastVL.Results.ToLower().Trim())
+                    {
 
-                            case "Pending":
-                                var pendingDueDate = Convert.ToDateTime(lastVL.SampleDate);
-                                DateTime sampleDate = Convert.ToDateTime(lastVL.SampleDate.ToString());
+                        case "pending":
+                            var pendingDueDate = Convert.ToDateTime(lastVL.SampleDate);
+                            DateTime sampleDate = Convert.ToDateTime(lastVL.SampleDate.ToString());
 
-                                if ((DateTime.Today.Subtract(sampleDate).Days > 30))
-                                {
-                                    lblVL.Text = "<span class='label label-danger' > Overdue | Ordered On: " + ((DateTime)lastVL.SampleDate).ToString("dd-MMM-yyyy") + "</span>";
-                                    lblvlDueDate.Text = "<span class='label label-success'> " + pendingDueDate.AddMonths(6).ToString("dd-MMM-yyy") + " </span>";
-                                }
-                                else if ((lastVL.Results == "Pending") && (DateTime.Today.Subtract(sampleDate).Days < 30))
-                                {
-                                    lblVL.Text = "<span class='label label-warning'> Pending | Ordered On: " + ((DateTime)lastVL.SampleDate).ToString("dd-MMM-yyyy") + "</span>";
-                                    lblvlDueDate.Text = "<span class='label label-success'> " + pendingDueDate.AddMonths(6).ToString("dd-MMM-yyy") + " </span>";
-                                }
-                                else
-                                {
+                            if ((DateTime.Today.Subtract(sampleDate).Days > 30))
+                            {
+                                lblVL.Text = "<span class='label label-danger' > Overdue | Ordered On: " + ((DateTime)lastVL.SampleDate).ToString("dd-MMM-yyyy") + "</span>";
+                                lblvlDueDate.Text = "<span class='label label-success'> " + pendingDueDate.AddMonths(6).ToString("dd-MMM-yyy") + " </span>";
+                            }
+                            else if ((lastVL.Results == "Pending") && (DateTime.Today.Subtract(sampleDate).Days < 30))
+                            {
+                                lblVL.Text = "<span class='label label-warning'> Pending | Ordered On: " + ((DateTime)lastVL.SampleDate).ToString("dd-MMM-yyyy") + "</span>";
+                                lblvlDueDate.Text = "<span class='label label-success'> " + pendingDueDate.AddMonths(6).ToString("dd-MMM-yyy") + " </span>";
+                            }
+                            else
+                            {
 
-                                    lblVL.Text = "<span class='label label-warning'>" + lastVL.Results + "| Date: " + ((DateTime)lastVL.SampleDate).ToString("dd-MMM-yyyy") + "</span>";
-                                    lblbaselineVL.Text = "<span class='label label-warning'>" + lastVL.Results + "| Date: " + ((DateTime)lastVL.SampleDate).ToString("dd-MMM-yyyy") + "</span>";
-                                }
-                                break;
+                                lblVL.Text = "<span class='label label-warning'>" + lastVL.Results + "| Date: " + ((DateTime)lastVL.SampleDate).ToString("dd-MMM-yyyy") + "</span>";
+                                lblbaselineVL.Text = "<span class='label label-warning'>" + lastVL.Results + "| Date: " + ((DateTime)lastVL.SampleDate).ToString("dd-MMM-yyyy") + "</span>";
+                            }
+                            break;
 
-                            case "Complete":
-                                if (lastVL.ResultValues >= 1000)
-                                {
-                                    lblVL.Text = "<span class='label label-danger'>" + lastVL.ResultValues + " copies/ml</span>";
-                                    lblvlDueDate.Text = "<span class='label label-success' > " + ((DateTime)lastVL.SampleDate).AddMonths(3).ToString("dd-MMM-yyyy") + "</span>";
-                                }
-                               else if (lastVL.ResultValues <= 50)
-                                {
+                        case "complete":
+                        case "completed":
+                            if (lastVL.ResultValues >= 1000)
+                            {
+                                lblVL.Text = "<span class='label label-danger'>" + lastVL.ResultValues + " copies/ml ("+ Convert.ToDateTime(lastVL.SampleDate).ToString("dd-MMM-yyyy") + ")</span>";
+                                lblvlDueDate.Text = "<span class='label label-success' > " + ((DateTime)lastVL.SampleDate).AddMonths(3).ToString("dd-MMM-yyyy") + "</span>";
+                            }
+                            else if (lastVL.ResultValues <= 50)
+                            {
 
-                                    lblVL.Text = "<span class='label label-success'> Undetectable VL</span>";
-                                    lblvlDueDate.Text = "<span class='label label-success' > " + ((DateTime)lastVL.SampleDate).AddMonths(12).ToString("dd-MMM-yyyy") + "</span>";
+                                lblVL.Text = "<span class='label label-success'> Undetectable VL (" + Convert.ToDateTime(lastVL.SampleDate).ToString("dd-MMM-yyyy") + ")</span>";
+                                lblvlDueDate.Text = "<span class='label label-success' > " + ((DateTime)lastVL.SampleDate).AddMonths(12).ToString("dd-MMM-yyyy") + "</span>";
 
-                                }
-                                else
-                                {
-                                    lblVL.Text = "<span class='label label-success' > Complete | Results : " + lastVL.ResultValues + " copies/ml</span>";
-                                    lblvlDueDate.Text = "<span class='label label-success' > " + ((DateTime)lastVL.SampleDate).AddMonths(12).ToString("dd-MMM-yyyy") + "</span>";
-                                   
-                                }
-                                break;
-                                default:
-                                    var patientEnrollment = new PatientEnrollmentManager();
-                                    var enrolDate = patientEnrollment.GetPatientEnrollmentDate(PatientId);
-                                    DateTime today = DateTime.Today;
-                                    TimeSpan difference = today.Date - enrolDate.Date;
-                                    int days = (int)difference.TotalDays;
+                            }
+                            else
+                            {
+                                lblVL.Text = "<span class='label label-success' > Complete | Results : " + lastVL.ResultValues + " copies/ml</span>";
+                                lblvlDueDate.Text = "<span class='label label-success' > " + ((DateTime)lastVL.SampleDate).AddMonths(12).ToString("dd-MMM-yyyy") + "</span>";
 
-                                    if (days < 180)
-                                    {
-                                        lblvlDueDate.Text = "<span class='label label-success'>" + enrolDate.AddMonths(6).ToString("dd-MMM-yyyy") + "</span>";
-                                        lblVL.Text = "<span class='label label-success fa fa-exclamation'><strong>  VL Not Requested  </strong></span>";
+                            }
+                            break;
+                        default:
+                            var patientEnrollment = new PatientEnrollmentManager();
+                            var enrolDate = patientEnrollment.GetPatientEnrollmentDate(PatientId);
+                            DateTime today = DateTime.Today;
+                            TimeSpan difference = today.Date - enrolDate.Date;
+                            int days = (int)difference.TotalDays;
 
-                                    }
-                                    else
-                                    {
-                                        lblVL.Text = "<span class='label label-danger'> Not Available </span>";
-                                        lblvlDueDate.Text = "<span class='label label-danger'><strong> Overdue </strong></span>";
-                                    }
-                                break;
-                        }
-                  
+                            if (days < 180)
+                            {
+                                lblvlDueDate.Text = "<span class='label label-success'>" + enrolDate.AddMonths(6).ToString("dd-MMM-yyyy") + "</span>";
+                                lblVL.Text = "<span class='label label-success fa fa-exclamation'><strong>  VL Not Requested  </strong></span>";
+
+                            }
+                            else
+                            {
+                                lblVL.Text = "<span class='label label-danger'> Not Available </span>";
+                                lblvlDueDate.Text = "<span class='label label-danger'><strong> Overdue </strong></span>";
+                            }
+                            break;
+                    }
+
                     //}
                 }
                 else
@@ -403,8 +404,8 @@ namespace IQCare.Web.CCC.Patient
                     }
                 }
             }
-        }                        
-      }
-   }
-       
+        }
+    }
+}
+
 
