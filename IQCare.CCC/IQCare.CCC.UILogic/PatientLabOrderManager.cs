@@ -199,7 +199,11 @@ namespace IQCare.CCC.UILogic
             var labDetails = _mgr.GetPatientLabDetailsByDate(labOrderId, visitDate);
             return labDetails;
         }
-
+        public List<LabDetailsEntity> GetLabTestsOrderedById(int labOrderId)
+        {
+            var labDetails = _mgr.GetPatientLabDetailsByLabOrderId(labOrderId);
+            return labDetails;
+        }
         public int AddPatientLabResults(LabResultsEntity labResultsEntity)
         {
             var labResults = _mgr.AddPatientLabResults(labResultsEntity);

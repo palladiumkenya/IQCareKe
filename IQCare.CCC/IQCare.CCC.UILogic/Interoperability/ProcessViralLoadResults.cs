@@ -79,19 +79,19 @@ namespace IQCare.CCC.UILogic.Interoperability
                            int orderId= labOrderManager.savePatientLabOrder(patient.Id, (int)patient.ptn_pk, 1, thisFacility.FacilityID, 203, patientMasterVisitId, sampleCollectionDate.ToString(), "IL lab order", patientLabOrder,"completed");
                             
                             labOrder = labOrderManager.GetLabOrdersById( orderId);
-                            labDetails = labOrderManager.GetPatientLabDetailsByDate(labOrder.Id, sampleCollectionDate);
+                            labDetails = labOrderManager.GetLabTestsOrderedById(labOrder.Id);
                         }
                         else
                         {
-                        labDetails = labOrderManager.GetPatientLabDetailsByDate(labOrder.Id, results.FirstOrDefault().DateSampleCollected);
+                        labDetails = labOrderManager.GetLabTestsOrderedById(labOrder.Id);
                         }
 
                         if (labOrder != null)
                         {
                             bool isUndetectable = false;
-                            string resultText = null;
-                            decimal resultvalue = Decimal.Zero;
-
+                            string resultText = "";
+                            decimal decimalValue = Decimal.Zero;
+                            decimal? resultValue = null;
                             foreach (var result in results)
                             {
                                 if (result.VlResult.Contains("LDL"))
@@ -102,8 +102,11 @@ namespace IQCare.CCC.UILogic.Interoperability
                                 else
                                 {
                                     var resultString = result.VlResult.Replace("copies/ml", "");
-                                    bool isSuccess = decimal.TryParse(resultString, out resultvalue);
+                                    bool isSuccess = decimal.TryParse(resultString, out decimalValue);
+                                    if (isSuccess) resultValue = decimalValue;
                                 }
+                                
+                                
                                 //var labOrd = labOrder.FirstOrDefault();
                                 if (labOrder != null)
                                 {
@@ -116,7 +119,7 @@ namespace IQCare.CCC.UILogic.Interoperability
                                         ParameterId = 3,
                                         LabTestId = 3,
                                         ResultText = resultText,
-                                        ResultValue = resultvalue,
+                                        ResultValue = resultValue,
                                         ResultUnit = "copies/ml",
                                         ResultUnitId = 129,
                                         Undetectable = isUndetectable,

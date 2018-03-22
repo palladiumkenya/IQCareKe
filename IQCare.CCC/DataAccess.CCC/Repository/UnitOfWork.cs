@@ -52,6 +52,7 @@ namespace DataAccess.CCC.Repository
         private IModuleRepository _moduleRepository;
 
         /* lookupContext */
+        private ILookupItemRepository _lookupItemRepository;
         private ILookupRepository _lookupRepository;
         private ILookupMasterRepository _lookupMasterRepository;
         private IPatientLookupRepository _patientLookupRepository;
@@ -745,7 +746,9 @@ namespace DataAccess.CCC.Repository
             }
         }
 
-       // public IPatientAdverseEventOutcomeRepository PatientAdverseEventOutcomeRepository => throw new NotImplementedException();
+        public ILookupItemRepository LookupItemRepository => _lookupItemRepository ?? (_lookupItemRepository = new LookupItemRepository((LookupContext)_context));
+
+        // public IPatientAdverseEventOutcomeRepository PatientAdverseEventOutcomeRepository => throw new NotImplementedException();
 
         public int Complete()
         {
