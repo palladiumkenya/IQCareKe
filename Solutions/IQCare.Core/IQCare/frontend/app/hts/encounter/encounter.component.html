@@ -38,95 +38,106 @@
                                 <div class="step-content">
                                     <div class="step-pane active sample-pane alert" id="datastep1" data-step="1" data-parsley-validate="true" data-show-errors="true" ngForm #labForm="ngForm">
                                         <fieldset>
-                                            <div class="row">
-                                                <div class="col-lg-3">
-                                                    <div class="form-group">
-                                                        <label>Service Delivery Point</label>
-                                                        <select class="form-control m-b" name="serviceDeliveryPoint" id="serviceEntryPoint" [(ngModel)]="encounter.TestEntryPoint" #TestEntryPoint="ngModel" data-parsley-required="true">
-                                                            <option></option>
-                                                            <option *ngFor="let entryPoint of entryPoints" [ngValue]="entryPoint.itemId">{{entryPoint.itemName}}</option>
-                                                        </select>
+                                            <div class="example-container">
+                                                <div class="row">
+                                                    <div class="col-lg-3">
+                                                        <div class="form-group">
+                                                            <mat-form-field>
+                                                                <input tabindex="1" matInput placeholder="Encounter Date" [matDatepicker]="encounterDatepicker" (click)="encounterDatepicker.open()" id="encounterDate" name="encounterDate" [(ngModel)]="encounter.EncounterDate" #EncounterDate="ngModel" data-parsley-required="true">
+                                                                <mat-datepicker-toggle matSuffix [for]="encounterDatepicker"></mat-datepicker-toggle>
+                                                                <mat-datepicker #encounterDatepicker></mat-datepicker>
+                                                            </mat-form-field>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label>Ever Tested?</label>
+                                                            <select class="form-control m-b" name="everTested" id="everTested" required [(ngModel)]="encounter.EverTested" #EverTested="ngModel" data-parsley-required="true" (change)="everTestedChanged(encounter.EverTested)">
+                                                                <option></option>
+                                                                <option *ngFor="let option of yesNoOptions" [ngValue]="option.itemId">{{option.itemName}}</option>
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label>Re-Testing (No. Months since last test)</label>
+                                                            <input id="noofmonthsretest" name="noofmonthsretest" type="text" class="form-control" [(ngModel)]="encounter.MonthsSinceLastTest" #MonthsSinceLastTest="ngModel" data-parsley-required="true" [disabled]="isNoOfMonths">
+                                                        </div>
                                                     </div>
 
-                                                    <div class="form-group">
-                                                        <label>Ever Tested?</label>
-                                                        <select class="form-control m-b" name="everTested" id="everTested" required [(ngModel)]="encounter.EverTested" #EverTested="ngModel" data-parsley-required="true" (change)="everTestedChanged(encounter.EverTested)">
-                                                            <option></option>
-                                                            <option *ngFor="let option of yesNoOptions" [ngValue]="option.itemId">{{option.itemName}}</option>
-                                                        </select>
+                                                    <div class="col-lg-3">
+                                                        <div class="form-group">
+                                                            <mat-form-field>
+                                                                <mat-select placeholder="Service Delivery Point" name="serviceDeliveryPoint" id="serviceEntryPoint" [(ngModel)]="encounter.TestEntryPoint" #TestEntryPoint="ngModel" data-parsley-required="true">
+                                                                    <mat-option value=""></mat-option>
+                                                                    <mat-option *ngFor="let entryPoint of entryPoints" [value]="entryPoint.itemId">{{entryPoint.itemName}}</mat-option>
+                                                                </mat-select>
+                                                            </mat-form-field>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label>HIV self-test in the past 12 months</label>
+                                                            <select class="form-control m-b" id="selfTest" name="selfTest" [(ngModel)]="encounter.EverSelfTested" #EverSelfTested="ngModel" data-parsley-required="true">
+                                                                <option></option>
+                                                                <option *ngFor="let option of yesNoOptions" [ngValue]="option.itemId">{{option.itemName}}</option>
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label>Has Any Disability</label>
+                                                            <select class="form-control m-b" id="hasDisability" name="hasDisability" [(ngModel)]="encounter.HasDisability" #HasDisability="ngModel" data-parsley-required="true" (change)="hasDisabilityChanged(encounter.HasDisability)">
+                                                                <option></option>
+                                                                <option *ngFor="let option of yesNoOptions" [ngValue]="option.itemId">{{option.itemName}}</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Disability</label>
+                                                            <select class="form-control m-b" name="disability" id="disability" [(ngModel)]="encounter.Disabilities" #Disabilities="ngModel" data-parsley-required="true" multiple="multiple" [disabled]="isDisabilitiesEnabled">
+                                                                <option *ngFor="let option of disabilities" [ngValue]="option.itemId">{{option.itemName}}</option>
+                                                            </select>
+                                                        </div>
                                                     </div>
 
-                                                    <div class="form-group">
-                                                        <label>Re-Testing (No. Months since last test)</label>
-                                                        <input id="noofmonthsretest" name="noofmonthsretest" type="text" class="form-control" [(ngModel)]="encounter.MonthsSinceLastTest" #MonthsSinceLastTest="ngModel" data-parsley-required="true" [disabled]="isNoOfMonths">
+                                                    <div class="col-lg-3">
+                                                        <div class="form-group">
+                                                            <label>Consent</label>
+                                                            <select class="form-control m-b" name="consent" id="consent" [(ngModel)]="encounter.Consent" #Consent="ngModel" data-parsley-required="true">
+                                                                <option></option>
+                                                                <option *ngFor="let option of yesNoOptions" [ngValue]="option.itemId">{{option.itemName}}</option>
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label>Client tested as</label>
+                                                            <select class="form-control m-b" name="clientTestedAs" id="clientTestedAs" [(ngModel)]="encounter.TestedAs" #TestedAs="ngModel" data-parsley-required="true">
+                                                                <option></option>
+                                                                <option *ngFor="let option of testedAs" [ngValue]="option.itemId">{{option.itemName}}</option>
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label>Strategy</label>
+                                                            <select class="form-control m-b" name="strategy" id="strategy" [(ngModel)]="encounter.TestingStrategy" #TestingStrategy="ngModel" data-parsley-required="true">
+                                                                <option></option>
+                                                                <option *ngFor="let option of strategyOptions" [ngValue]="option.itemId">{{option.itemName}}</option>
+                                                            </select>
+                                                        </div>
                                                     </div>
+
+                                                    <div class="col-lg-3">
+                                                        <div class="form-group">
+                                                            <label>TB Screeening</label>
+                                                            <select class="form-control m-b" name="tbScreening" id="tbScreening" [(ngModel)]="encounter.TbScreening" #TbScreening="ngModel" data-parsley-required="true">
+                                                                <option></option>
+                                                                <option *ngFor="let option of tbStatus" [ngValue]="option.itemId">{{option.itemName}}</option>
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label>Remarks *</label>
+                                                            <textarea class="form-control m-b" id="remarks" name="remarks" rows="3" [(ngModel)]="encounter.EncounterRemarks" #EncounterRemarks="ngModel"></textarea>
+                                                        </div>
+                                                    </div>
+
                                                 </div>
-
-                                                <div class="col-lg-3">
-                                                    <div class="form-group">
-                                                        <label>HIV self-test in the past 12 months</label>
-                                                        <select class="form-control m-b" id="selfTest" name="selfTest" [(ngModel)]="encounter.EverSelfTested" #EverSelfTested="ngModel" data-parsley-required="true">
-                                                            <option></option>
-                                                            <option *ngFor="let option of yesNoOptions" [ngValue]="option.itemId">{{option.itemName}}</option>
-                                                        </select>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label>Has Any Disability</label>
-                                                        <select class="form-control m-b" id="hasDisability" name="hasDisability" [(ngModel)]="encounter.HasDisability" #HasDisability="ngModel" data-parsley-required="true" (change)="hasDisabilityChanged(encounter.HasDisability)">
-                                                            <option></option>
-                                                            <option *ngFor="let option of yesNoOptions" [ngValue]="option.itemId">{{option.itemName}}</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Disability</label>
-                                                        <select class="form-control m-b" name="disability" id="disability" [(ngModel)]="encounter.Disabilities" #Disabilities="ngModel" data-parsley-required="true" multiple="multiple" [disabled]="isDisabilitiesEnabled">
-                                                            <option *ngFor="let option of disabilities" [ngValue]="option.itemId">{{option.itemName}}</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-lg-3">
-                                                    <div class="form-group">
-                                                        <label>Consent</label>
-                                                        <select class="form-control m-b" name="consent" id="consent" [(ngModel)]="encounter.Consent" #Consent="ngModel" data-parsley-required="true">
-                                                            <option></option>
-                                                            <option *ngFor="let option of yesNoOptions" [ngValue]="option.itemId">{{option.itemName}}</option>
-                                                        </select>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label>Client tested as</label>
-                                                        <select class="form-control m-b" name="clientTestedAs" id="clientTestedAs" [(ngModel)]="encounter.TestedAs" #TestedAs="ngModel" data-parsley-required="true">
-                                                            <option></option>
-                                                            <option *ngFor="let option of testedAs" [ngValue]="option.itemId">{{option.itemName}}</option>
-                                                        </select>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label>Strategy</label>
-                                                        <select class="form-control m-b" name="strategy" id="strategy" [(ngModel)]="encounter.TestingStrategy" #TestingStrategy="ngModel" data-parsley-required="true">
-                                                            <option></option>
-                                                            <option *ngFor="let option of strategyOptions" [ngValue]="option.itemId">{{option.itemName}}</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-lg-3">
-                                                    <div class="form-group">
-                                                        <label>TB Screeening</label>
-                                                        <select class="form-control m-b" name="tbScreening" id="tbScreening" [(ngModel)]="encounter.TbScreening" #TbScreening="ngModel" data-parsley-required="true">
-                                                            <option></option>
-                                                            <option *ngFor="let option of tbStatus" [ngValue]="option.itemId">{{option.itemName}}</option>
-                                                        </select>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label>Remarks *</label>
-                                                        <textarea class="form-control m-b" id="remarks" name="remarks" rows="3" [(ngModel)]="encounter.EncounterRemarks" #EncounterRemarks="ngModel"></textarea>
-                                                    </div>
-                                                </div>
-
                                             </div>
                                         </fieldset>
                                     </div>

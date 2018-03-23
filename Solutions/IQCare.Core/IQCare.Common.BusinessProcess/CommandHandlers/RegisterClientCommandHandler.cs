@@ -37,7 +37,7 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers
                     ",[CreatedBy] ,[AuditData] ,[DateOfBirth] ,[DobPrecision] FROM[dbo].[Person] WHERE Id = SCOPE_IDENTITY();" +
                     "exec [dbo].[pr_CloseDecryptedSession];";
 
-                var personInsert = _unitOfWork.Repository<Person>().FromSql(sql).ToList();
+                var personInsert = await _unitOfWork.Repository<Person>().FromSql(sql);
 
                 var sqlPatient = "exec pr_OpenDecryptedSession;" +
                                  "Insert Into  Patient(ptn_pk,PersonId,PatientIndex,PatientType,FacilityId,Active,DateOfBirth,NationalId,DeleteFlag,CreatedBy,CreateDate,AuditData,DobPrecision)" +
@@ -49,7 +49,7 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers
                                  $"[CreateDate],[AuditData],[RegistrationDate] FROM [dbo].[Patient] WHERE Id = SCOPE_IDENTITY();" +
                                  $"exec [dbo].[pr_CloseDecryptedSession];";
 
-                var patientInsert = await _unitOfWork.Repository<Patient>().FromSql(sqlPatient).ToListAsync();
+                var patientInsert = await _unitOfWork.Repository<Patient>().FromSql(sqlPatient);
 
                 var patientPopulation = new PatientPopulation()
                 {
@@ -72,8 +72,7 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                return Result<RegisterClientResponse>.Invalid(e.Message);
             }
         }
     }

@@ -30,7 +30,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                     // create HtsEncounter instance
                     var htsEncounter = new HtsEncounter
                     {
-                        Consent = request.Encounter.Consent,
+                        //Consent = request.Encounter.Consent,
                         CoupleDiscordant = request.FinalTestingResult.CoupleDiscordant,
                         EncounterRemarks = request.Encounter.EncounterRemarks,
                         EverSelfTested = request.Encounter.EverSelfTested,

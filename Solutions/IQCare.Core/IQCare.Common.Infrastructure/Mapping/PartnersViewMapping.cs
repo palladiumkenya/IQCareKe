@@ -8,7 +8,7 @@ namespace IQCare.Common.Infrastructure.Mapping
     {
         public void Configure(EntityTypeBuilder<PartnersView> builder)
         {
-            builder.ToTable("Api_PartnersView")
+            builder.ToTable("HTS_PartnersView")
                 .HasKey(c => c.RowID);
         }
     }

@@ -26,11 +26,11 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Encounter
                     {
                         PatientId = request.PatientId,
                         ServiceId = request.ServiceAreaId,
-                        Start = DateTime.Now,
+                        Start = request.EncounterDate,
                         Active = true,
                         CreateDate = DateTime.Now,
                         DeleteFlag = false,
-                        VisitDate = DateTime.Now,
+                        VisitDate = request.EncounterDate,
                         CreatedBy = request.UserId,
                         VisitType = 0
                     };
@@ -44,8 +44,8 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Encounter
                         EncounterTypeId = request.EncounterType,
                         Status = 0,
                         PatientMasterVisitId = patientMasterVisit.Id,
-                        EncounterStartTime = DateTime.Now,
-                        EncounterEndTime = DateTime.Now,
+                        EncounterStartTime = request.EncounterDate,
+                        EncounterEndTime = request.EncounterDate,
                         ServiceAreaId = request.ServiceAreaId,
                         CreatedBy = request.UserId,
                         CreateDate = DateTime.Now
@@ -56,7 +56,7 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Encounter
 
                     trans.Commit();
 
-                    _unitOfWork.Dispose();
+                    //_unitOfWork.Dispose();
 
                     return Result<AddEncounterVisitResponse>.Valid(new AddEncounterVisitResponse
                     {

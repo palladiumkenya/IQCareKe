@@ -24,6 +24,8 @@ import { HomeComponent } from './home/home.component';
 import {SharedModule} from '../shared/shared.module';
 import { SearchComponent } from './search/search.component';
 import {SearchService} from './_services/search.service';
+import {AlertService} from '../shared/_services/alert.service';
+import {EncounterService} from '../hts/_services/encounter.service';
 
 
 
@@ -81,7 +83,9 @@ import {SearchService} from './_services/search.service';
     providers: [
         RegistrationService,
         EnrollmentService,
-        SearchService
+        SearchService,
+        AlertService,
+        EncounterService
     ]
 
 })

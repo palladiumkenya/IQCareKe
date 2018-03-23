@@ -20,7 +20,7 @@ namespace IQCare.HTS.Core.Model
         public int FinalResultGiven { get; set; }
         public int CoupleDiscordant { get; set; }
         public int TestEntryPoint { get; set; }
-        public int Consent { get; set; }
+        //public int Consent { get; set; }
         public int EverSelfTested { get; set; }
         public string GeoLocation { get; set; }
     }

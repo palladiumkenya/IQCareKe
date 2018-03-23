@@ -27,10 +27,10 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Partners
 
                 StringBuilder sql = new StringBuilder();
                 sql.Append("exec pr_OpenDecryptedSession; ");
-                sql.Append($"SELECT [RowID],[PersonId],[PatientId],[FirstName],[MidName],[LastName],[DateOfBirth],[Sex],[Gender],[RelationshipTypeId],[RelationshipType] FROM Api_PartnersView WHERE [PatientId] = {request.PatientId} AND RelationshipType IN ({ str });");
+                sql.Append($"SELECT [RowID],[PersonId],[PatientId],[FirstName],[MidName],[LastName],[DateOfBirth],[Sex],[Gender],[RelationshipTypeId],[RelationshipType] FROM HTS_PartnersView WHERE [PatientId] = {request.PatientId} AND RelationshipType IN ({ str });");
                 sql.Append("exec [dbo].[pr_CloseDecryptedSession];");
 
-                var results = await _unitOfWork.Repository<PartnersView>().FromSql(sql.ToString()).ToListAsync();
+                var results = await _unitOfWork.Repository<PartnersView>().FromSql(sql.ToString());
 
                 _unitOfWork.Dispose();
 

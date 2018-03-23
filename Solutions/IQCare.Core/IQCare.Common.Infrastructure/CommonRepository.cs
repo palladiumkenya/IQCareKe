@@ -17,7 +17,6 @@ namespace IQCare.Common.Infrastructure
         public CommonRepository(CommonDbContext dbContext)
         {
             _context = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
-            _context.Database.ExecuteSqlCommandAsync("exec pr_OpenDecryptedSession;");
         }
 
         public async Task AddAsync(TEntity entity)
@@ -61,9 +60,9 @@ namespace IQCare.Common.Infrastructure
             return await _context.Database.ExecuteSqlCommandAsync(query, parameters);
         }
 
-        public IQueryable<TEntity> FromSql(string query, params object[] parameters)
+        public async Task<List<TEntity>> FromSql(string query, params object[] parameters)
         {
-            return _context.Set<TEntity>().FromSql(query, parameters);
+            return await _context.Set<TEntity>().FromSql(query, parameters).ToListAsync();
         }
 
         public async Task<IEnumerable<TEntity>> GetAllAsync()

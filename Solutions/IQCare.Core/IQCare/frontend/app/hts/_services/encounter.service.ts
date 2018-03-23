@@ -3,7 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import {Observable} from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
+import 'rxjs/add/observable/throw';
 
 import { environment } from '../../../environments/environment';
 import {Encounter} from '../_models/encounter';
@@ -22,10 +23,17 @@ export class EncounterService {
 
     constructor(private http: HttpClient) { }
 
+    public getEncounters(patientId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + this._url + '/' + patientId ).pipe(
+            tap(getEncounters => this.log('fetched all client encounters')),
+            catchError(this.handleError<any[]>('getEncounters', []), )
+        );
+    }
+
     public getHtsEncounterOptions(): Observable<any[]> {
         return this.http.get<any[]>(this.API_URL + this._lookupurl + '/htsOptions').pipe(
             tap(htsoptions => this.log('fetched all hts options')),
-            catchError(this.handleError<any[]>('getHtsOptions'))
+            catchError(this.handleError<any[]>('getHtsOptions', []), )
         );
     }
 
@@ -43,7 +51,7 @@ export class EncounterService {
         const finalResultsBody = finalTestingResults;
         const hivResultsBody = hivResults1;
         if ( hivResults2.length > 0 ) {
-            hivResultsBody.push(hivResults2);
+            hivResultsBody.push.apply(hivResults2);
         }
 
         const Indata = {
@@ -67,8 +75,7 @@ export class EncounterService {
             // TODO: better job of transforming error for user consumption
             this.log(`${operation} failed: ${error.message}`);
 
-            // Let the app keep running by returning an empty result.
-            return of(result as T);
+            return Observable.throw(error.message);
         };
     }
 

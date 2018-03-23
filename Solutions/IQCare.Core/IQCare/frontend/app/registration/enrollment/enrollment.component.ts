@@ -2,6 +2,7 @@ import {Component, NgZone, OnInit} from '@angular/core';
 import {Enrollment} from '../_models/enrollment';
 import {EnrollmentService} from '../_services/enrollment.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {AlertService} from '../../shared/_services/alert.service';
 
 @Component({
   selector: 'app-enrollment',
@@ -37,6 +38,8 @@ export class EnrollmentComponent implements OnInit {
 
         this.enrollmentService.enrollClient(this.enrollment).subscribe(data => {
             console.log(data);
+
+            // this.alertService.success('successfully enrolled patient', true);
 
             this.zone.run(() => { this.router.navigate(['/registration/home'], { relativeTo: this.route }); });
         }, err => {
