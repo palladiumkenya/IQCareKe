@@ -60,9 +60,9 @@ namespace IQCare.HTS.Infrastructure
             return await _context.Database.ExecuteSqlCommandAsync(query, parameters);
         }
 
-        public IQueryable<TEntity> FromSql(string query, params object[] parameters)
+        public Task<List<TEntity>> FromSql(string query, params object[] parameters)
         {
-            return _context.Set<TEntity>().FromSql(query, parameters);
+            return _context.Set<TEntity>().FromSql(query, parameters).ToListAsync();
         }
 
         public async Task<IEnumerable<TEntity>> GetAllAsync()

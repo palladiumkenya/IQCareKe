@@ -14,16 +14,18 @@
                 <li class="active">
                     <a routerLink="/registration/home" routerLinkActive="active">Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a>
                 </li>
-                <li>
+                <!--<li>
                     <a routerLink="/hts" routerLinkActive="active">HTS FORM<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-th-list"></span></a>
-                </li>
-                <li>
+                </li>-->
+                <li *ngIf="isPositive">
                     <a routerLink="/hts/referral" routerLinkActive="active">REFERRAL<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-tags"></span></a>
                 </li>
-                <li>
+
+                <li *ngIf="isReferred">
                     <a routerLink="/hts/linkage" routerLinkActive="active">LINKAGE<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-tags"></span></a>
                 </li>
-                <li>
+
+                <li *ngIf="isPositive && hasConsentedPartnerListing">
                     <a routerLink="/hts/pns" routerLinkActive="active">PNS<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-tags"></span></a>
                 </li>
             </ul>

@@ -32,6 +32,7 @@ import { LinkageComponent } from './linkage/linkage.component';
 import {SharedModule} from '../shared/shared.module';
 import { PnsPartnersComponent } from './pns-partners/pns-partners.component';
 import {PnsService} from './_services/pns.service';
+import {DataService} from '../shared/_services/data.service';
 
 
 @NgModule({
@@ -100,7 +101,8 @@ import {PnsService} from './_services/pns.service';
   providers: [
       EncounterService,
       LinkageReferralService,
-      PnsService
+      PnsService,
+      DataService
   ]
 })
 export class HtsModule { }

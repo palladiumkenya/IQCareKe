@@ -1,4 +1,5 @@
-﻿using IQCare.Common.Core.Models;
+﻿using System;
+using IQCare.Common.Core.Models;
 using MediatR;
 
 namespace IQCare.Common.BusinessProcess.Commands.Encounter
@@ -9,6 +10,7 @@ namespace IQCare.Common.BusinessProcess.Commands.Encounter
         public int EncounterType { get; set; }
         public int ServiceAreaId { get; set; }
         public int UserId { get; set; }
+        public DateTime EncounterDate { get; set; }
     }
 
     public class AddEncounterVisitResponse

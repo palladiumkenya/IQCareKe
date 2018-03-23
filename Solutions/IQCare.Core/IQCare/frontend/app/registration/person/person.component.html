@@ -3,6 +3,7 @@
         <h5>REGISTRATION</h5>
     </div>
     <div class="ibox-content">
+        <app-alert></app-alert>
         <div class="wizard" data-initialize="wizard" id="myWizard">
             <div class="steps-container">
                 <ul class="steps">
@@ -46,7 +47,7 @@
                                             <mat-form-field>
                                                 <input tabindex="5" matInput [matDatepicker]="myDatepicker" (click)="myDatepicker.open()" id="DateOfBirth" name="DateOfBirth" [(ngModel)]="person.DateOfBirth" #DateOfBirth="ngModel" data-parsley-required="true">
                                                 <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
-                                                <mat-datepicker #myDatepicker></mat-datepicker>
+                                                <mat-datepicker #myDatepicker name="DateOfBirth" [(ngModel)]="person.DateOfBirth" ngDefaultControl (selectedChanged)="onDate($event)"></mat-datepicker>
                                             </mat-form-field>
                                         </div>
                                     </div>
@@ -60,7 +61,7 @@
 
                                     <div class="form-group">
                                         <label>Age(Years)</label>
-                                        <input type="number" id="personAge" name="personAge" (keyup)="estimateDob(registrationVariables.personAge)" class="form-control" [(ngModel)]="registrationVariables.personAge" #personAge="ngModel">
+                                        <input type="number" id="personAge" name="personAge" (keyup)="estimateDob(registrationVariables.personAge)" class="form-control" [(ngModel)]="registrationVariables.personAge" #personAge="ngModel" data-parsley-required="true">
                                     </div>
 
 

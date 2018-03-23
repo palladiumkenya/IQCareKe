@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone  } from '@angular/core';
+import {Component, OnInit, NgZone} from '@angular/core';
 
 import {Person, RegistrationVariables} from '../_models/person';
 import {Contact} from '../_models/contacts';
@@ -6,6 +6,7 @@ import {PersonPopulation} from '../_models/personPopulation';
 import {RegistrationService} from '../_services/registration.service';
 import {Router, ActivatedRoute} from '@angular/router';
 import moment = require('moment');
+import {AlertService} from '../../shared/_services/alert.service';
 
 declare var $: any;
 
@@ -30,7 +31,9 @@ export class PersonComponent implements OnInit {
     constructor( private registrationService: RegistrationService,
                  private router: Router,
                  private route: ActivatedRoute,
-                 public zone: NgZone) { }
+                 public zone: NgZone,
+                 private alertService: AlertService) {
+    }
 
     ngOnInit() {
         this.getRegistrationOptions();
@@ -135,9 +138,11 @@ export class PersonComponent implements OnInit {
             localStorage.setItem('personId', data['personId']);
             localStorage.setItem('patientId', data['patientId']);
 
+            // this.alertService.success('success', true);
             this.zone.run(() => { this.router.navigate(['/registration/enrollment'], { relativeTo: this.route }); });
         }, err => {
             console.log(err);
+            this.alertService.error('error', true);
         });
     }
 
@@ -151,5 +156,22 @@ export class PersonComponent implements OnInit {
         const dob = estDob.add((personAge * -1), 'years');
 
         this.person.DateOfBirth = moment(dob).format('DD-MM-YYYY');
+    }
+
+    onDate(event): void {
+        // console.log(event);
+        this.getAge(event);
+    }
+
+    getAge(dateString) {
+        const today = new Date();
+        const birthDate = new Date(dateString);
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+
+        this.registrationVariables.personAge = age;
     }
 }

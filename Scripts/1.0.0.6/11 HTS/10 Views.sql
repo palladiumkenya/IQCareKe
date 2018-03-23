@@ -1,8 +1,8 @@
-﻿IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[Api_PartnersView]'))
-DROP VIEW [dbo].[Api_PartnersView]
+﻿IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[HTS_PartnersView]'))
+DROP VIEW [dbo].[HTS_PartnersView]
 GO
 
-/****** Object:  View [dbo].[Api_PartnersView]    Script Date: 21-Mar-18 9:32:08 AM ******/
+/****** Object:  View [dbo].[HTS_PartnersView]    Script Date: 21-Mar-18 9:32:08 AM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -11,7 +11,7 @@ GO
 
 
 
-CREATE VIEW [dbo].[Api_PartnersView]
+CREATE VIEW [dbo].[HTS_PartnersView]
 AS
 SELECT
 	ISNULL(ROW_NUMBER() OVER(ORDER BY PR.Id ASC), -1) AS RowID,
@@ -74,6 +74,41 @@ INNER JOIN dbo.PatientEnrollment AS PE ON PT.Id = PE.PatientId
 INNER JOIN dbo.PatientIdentifier AS pni ON pni.PatientId = PT.Id 
 INNER JOIN dbo.Identifiers ON pni.IdentifierTypeId = dbo.Identifiers.Id
 INNER JOIN dbo.ServiceArea SE ON SE.Id = PE.ServiceAreaId
+
+
+GO
+
+
+IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[HTS_EncountersView]'))
+DROP VIEW [dbo].[HTS_EncountersView]
+GO
+/****** Object:  View [dbo].[HTS_EncountersView]    Script Date: 22-Mar-18 3:36:09 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+
+ALTER VIEW [dbo].[HTS_EncountersView]
+AS
+SELECT DISTINCT
+ISNULL(ROW_NUMBER() OVER(ORDER BY PE.Id ASC), -1) AS RowID, 
+PE.Id,
+PE.PatientId,
+PE.EncounterStartTime EncounterDate,
+Provider = (SELECT TOP 1 (UserFirstName + ' ' + UserLastName) FROM [dbo].[mst_User] WHERE UserID = HE.ProviderId),
+ResultOne = (SELECT TOP 1 ItemName FROM [dbo].[LookupItemView] WHERE ItemId = (SELECT RoundOneTestResult FROM [dbo].[HtsEncounterResult] WHERE HtsEncounterId = HE.Id)),
+ResultTwo = (SELECT TOP 1 ItemName FROM [dbo].[LookupItemView] WHERE ItemId = (SELECT RoundTwoTestResult FROM [dbo].[HtsEncounterResult] WHERE HtsEncounterId = HE.Id)),
+FinalResult = (SELECT TOP 1 ItemName FROM [dbo].[LookupItemView] WHERE ItemId = (SELECT FinalResult FROM [dbo].[HtsEncounterResult] WHERE HtsEncounterId = HE.Id)),
+Consent = (SELECT TOP 1 ItemName FROM [dbo].[LookupItemView] WHERE ItemId = (SELECT ConsentValue FROM PatientConsent PC WHERE PC.PatientMasterVisitId = PM.Id AND PC.ConsentType = (SELECT TOP 1 ItemId FROM LookupItemView WHERE ItemName = 'ConsentToBeTested'))),
+PartnerListingConsent = (SELECT TOP 1 ItemName FROM [dbo].[LookupItemView] WHERE ItemId = (SELECT ConsentValue FROM PatientConsent PC WHERE PC.PatientMasterVisitId = PM.Id AND PC.ConsentType = (SELECT TOP 1 ItemId FROM LookupItemView WHERE ItemName = 'ConsentToListPartners')))
+
+FROM [dbo].[PatientEncounter] PE
+INNER JOIN [dbo].[PatientMasterVisit] PM ON PM.Id = PE.PatientMasterVisitId
+INNER JOIN [dbo].[HtsEncounter] HE ON PE.Id = HE.PatientEncounterID
 
 
 GO

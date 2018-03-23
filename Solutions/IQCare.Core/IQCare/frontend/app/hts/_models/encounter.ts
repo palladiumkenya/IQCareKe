@@ -5,6 +5,7 @@ export class Encounter {
     PatientEncounterID?: number;
     PatientId?: number;
     ServiceAreaId?: number;
+    EncounterDate: string;
     EncounterTypeId?: number;
     EverTested?: number;
     MonthsSinceLastTest?: number;

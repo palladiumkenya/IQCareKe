@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {of} from 'rxjs/observable/of';
+import 'rxjs/add/observable/throw';
 import {Observable} from 'rxjs/Observable';
 import {catchError, tap} from 'rxjs/operators';
 
@@ -32,8 +33,7 @@ export class ClientService {
             // TODO: better job of transforming error for user consumption
             this.log(`${operation} failed: ${error.message}`);
 
-            // Let the app keep running by returning an empty result.
-            return of(result as T);
+            return Observable.throw(error.message);
         };
     }
 

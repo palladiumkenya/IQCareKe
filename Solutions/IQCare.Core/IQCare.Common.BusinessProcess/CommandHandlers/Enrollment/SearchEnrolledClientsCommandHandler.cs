@@ -37,7 +37,7 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Enrollment
                 sql.Append("exec [dbo].[pr_CloseDecryptedSession];");
 
 
-                var result = await _unitOfWork.Repository<PatientLookupView>().FromSql(sql.ToString()).ToListAsync();
+                var result = await _unitOfWork.Repository<PatientLookupView>().FromSql(sql.ToString());
                 result.ForEach(item => item.CalculateYourAge());
 
                 _unitOfWork.Dispose();

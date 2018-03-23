@@ -235,7 +235,7 @@ export class EncounterComponent implements OnInit {
         test.Outcome = this.testing.Outcome;
         test.TestRound = this.testing.TestRound;
 
-        this.hivResults2.push(test);
+        this.hivResults2.push(this.testing);
         this.hiv2.push(test);
 
         /* Get inconclusive value from array */

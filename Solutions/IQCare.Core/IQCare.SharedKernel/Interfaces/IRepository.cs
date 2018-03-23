@@ -23,7 +23,7 @@ namespace IQCare.SharedKernel.Interfaces
 
         Task<int> ExecWithStoreProcedureAsync(string query, params object[] parameters);
 
-        IQueryable<TEntity> FromSql(string query, params object[] parameters);
+        Task<List<TEntity>> FromSql(string query, params object[] parameters);
 
     }
 }

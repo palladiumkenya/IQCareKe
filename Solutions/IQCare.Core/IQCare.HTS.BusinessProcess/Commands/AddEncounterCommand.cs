@@ -39,6 +39,7 @@ namespace IQCare.HTS.BusinessProcess.Commands
         public int TbScreening { get; set; }
         public int ServiceAreaId { get; set; }
         public int EncounterTypeId { get; set; }
+        public DateTime EncounterDate { get; set; }
     }
 
 
@@ -54,14 +55,13 @@ namespace IQCare.HTS.BusinessProcess.Commands
     public class FinalTestingResult
     {
         public int FinalResultHiv1 { get; set; }
-        public int FinalResultHiv2 { get; set; }
+        public int? FinalResultHiv2 { get; set; }
         public int FinalResult { get; set; }
         public int FinalResultGiven { get; set; }
         public int CoupleDiscordant { get; set; }
         public string FinalResultsRemarks { get; set; }
         public int AcceptedPartnerListing { get; set; }
-
-
+        public int? ReasonsDeclinePartnerListing { get; set; }
     }
 
     public class AddEncounterResponse

@@ -6,12 +6,12 @@ using System.Reflection;
 using IQCare.Common.Core.Models;
 using IQCare.SharedKernel.Infrastructure;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace IQCare.Common.Infrastructure
 {
     public class CommonDbContext : BaseContext
     {
-        //public DbSet<LookupItemView> LookupItemViews { get; set; }
         public CommonDbContext(DbContextOptions<CommonDbContext> options) : base(options)
         {
         }

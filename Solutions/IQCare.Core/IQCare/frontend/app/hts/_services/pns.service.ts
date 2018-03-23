@@ -4,6 +4,7 @@ import {environment} from '../../../environments/environment';
 import {catchError, tap} from 'rxjs/operators';
 import {Observable} from 'rxjs/Observable';
 import {of} from 'rxjs/observable/of';
+import 'rxjs/add/observable/throw';
 import {Pnsform} from '../_models/pnsform';
 
 const httpOptions = {
@@ -55,8 +56,7 @@ export class PnsService {
             // TODO: better job of transforming error for user consumption
             this.log(`${operation} failed: ${error.message}`);
 
-            // Let the app keep running by returning an empty result.
-            return of(result as T);
+            return Observable.throw(error.message);
         };
     }
 
