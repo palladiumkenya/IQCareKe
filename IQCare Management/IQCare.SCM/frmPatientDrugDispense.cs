@@ -1097,7 +1097,7 @@ namespace IQCare.SCM
                             BindPharmacyDispenseGrid(theNewDT);
                             dispenseReady = true;
                         }
-                        theDT.AcceptChanges();
+                        //theDT.AcceptChanges();
                         BindPharmacyDispenseGrid(theDT);
                         theDispCurrentRow = -1;
                     }
@@ -1323,6 +1323,7 @@ namespace IQCare.SCM
             this.lblPayAmount.Text = "0.0";
             this.clearPopup();
             //btnART_Click(sender, e);
+            btnDeleteOrder.Visible = false;
         }
 
         /// <summary>
@@ -1508,7 +1509,7 @@ namespace IQCare.SCM
                     {
                         DefaultValue = (object)""
                     });
-                    tableForPrint.AcceptChanges();
+                    //tableForPrint.AcceptChanges();
 
                     dataSet.Tables.Add(tableForPrint);
                     //////    ///////////////////////////////////////////
@@ -1727,7 +1728,7 @@ namespace IQCare.SCM
 
                     DataTable toDispense = theDT.DefaultView.ToTable();
                     theDT.DefaultView.RowFilter = "";
-                    theDT.AcceptChanges();
+                    //theDT.AcceptChanges();
 
                     if (toDispense.Rows.Count == 0)
                     {
@@ -2296,6 +2297,11 @@ namespace IQCare.SCM
             //   this.theOrderStatus = grdExitingPharDisp.Rows[grdExitingPharDisp.CurrentRow.Index].Cells[1].Value.ToString();
             this.theOrderStatus = currentRow.Cells["Status"].Value.ToString();
             GetSelectedPrescription();
+
+            if (theOrderId > 0)
+                btnDeleteOrder.Visible = true;
+
+
             /*
             IDrug drugMgr = (IDrug)ObjectFactory.CreateInstance("BusinessProcess.SCM.BDrug, BusinessProcess.SCM");
             DataSet existingRecordDetails = drugMgr.GetPharmacyExistingRecordDetails(this.theOrderId);
@@ -2582,12 +2588,13 @@ namespace IQCare.SCM
             {
                 if (this.thePharmacyMaster.Tables[0].Rows[0].IsNull("NextRefillDate"))
                 {
-                    this.NextRefillValue.Text = "";
-
+                    //this.NextRefillValue.Text = "";
+                    NxtAppDate.Text = "";
                 }
                 else
                 {
-                    this.NextRefillValue.Text = ((DateTime)this.thePharmacyMaster.Tables[0].Rows[0]["NextRefillDate"]).ToString(GblIQCare.AppDateFormat.ToString());
+                    //this.NextRefillValue.Text = ((DateTime)this.thePharmacyMaster.Tables[0].Rows[0]["NextRefillDate"]).ToString(GblIQCare.AppDateFormat.ToString());
+                    this.NxtAppDate.Text = ((DateTime)this.thePharmacyMaster.Tables[0].Rows[0]["NextRefillDate"]).ToString(GblIQCare.AppDateFormat.ToString());
                 }
                 if (this.thePharmacyMaster.Tables[0].Rows[0].IsNull("LastDispense"))
                 {
@@ -3661,11 +3668,15 @@ namespace IQCare.SCM
 
         private void cmbGrdDrugDispenseFreq_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-            this.grdDrugDispense.CurrentCell.Value = cmbGrdDrugDispenseFreq.Text;
-            grdDrugDispense.Rows[grdDrugDispense.SelectedCells[0].RowIndex].Cells["FrequencyId"].Value = cmbGrdDrugDispenseFreq.SelectedValue;
-            grdDrugDispense.Rows[grdDrugDispense.SelectedCells[0].RowIndex].Cells["FreqMultiplier"].Value = FrequencyMultiplier(Convert.ToInt32(cmbGrdDrugDispenseFreq.SelectedValue));
-            this.cmbGrdDrugDispenseFreq.Hide();
+            try
+            {
+                this.grdDrugDispense.CurrentCell.Value = cmbGrdDrugDispenseFreq.Text;
+                grdDrugDispense.Rows[grdDrugDispense.SelectedCells[0].RowIndex].Cells["FrequencyId"].Value = cmbGrdDrugDispenseFreq.SelectedValue;
+                grdDrugDispense.Rows[grdDrugDispense.SelectedCells[0].RowIndex].Cells["FreqMultiplier"].Value = FrequencyMultiplier(Convert.ToInt32(cmbGrdDrugDispenseFreq.SelectedValue));
+                this.cmbGrdDrugDispenseFreq.Hide();
+            }
+            catch(Exception ex)
+            { }
         }
 
         private void grdDrugDispense_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -3798,6 +3809,9 @@ namespace IQCare.SCM
             this.lblReturnIQNumber.Text = currentRow.Cells["P_PatientFacilityId"].Value.ToString();
             GetSelectedPatient();
             GetSelectedPrescription();
+
+            if (theOrderId > 0)
+                btnDeleteOrder.Visible = true;
         }
 
         private DataTable ToDataTable(DataGridView dataGridView)
@@ -3828,6 +3842,19 @@ namespace IQCare.SCM
             //"BillAmount"
             //"ItemId
             
+        }
+
+        private void btnDeleteOrder_Click(object sender, EventArgs e)
+        {
+            if(theOrderId > 0)
+            {
+                IDrug drug = (IDrug)ObjectFactory.CreateInstance("BusinessProcess.SCM.BDrug, BusinessProcess.SCM");
+                drug.detelePatientPharmacyOrder(theOrderId);
+            }
+            else
+            {
+                MessageBox.Show("Kindly select a pharmacy order to delete.");
+            }
         }
     }
 }

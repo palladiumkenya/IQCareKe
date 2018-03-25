@@ -290,6 +290,7 @@
             this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnDeleteOrder = new System.Windows.Forms.Button();
             this.DispenseTab.SuspendLayout();
             this.panel1.SuspendLayout();
             this.grpBoxLastDispense.SuspendLayout();
@@ -2715,6 +2716,7 @@
             this.panelSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(208)))), ((int)(((byte)(255)))));
             this.panelSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.panelSave.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelSave.Controls.Add(this.btnDeleteOrder);
             this.panelSave.Controls.Add(this.btnSaveComplete);
             this.panelSave.Controls.Add(this.btnPrintLabel);
             this.panelSave.Controls.Add(this.cmdPrintPrescription);
@@ -2733,7 +2735,7 @@
             this.btnSaveComplete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSaveComplete.BackColor = System.Drawing.SystemColors.Window;
             this.btnSaveComplete.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSaveComplete.Location = new System.Drawing.Point(751, 13);
+            this.btnSaveComplete.Location = new System.Drawing.Point(645, 13);
             this.btnSaveComplete.Margin = new System.Windows.Forms.Padding(0);
             this.btnSaveComplete.Name = "btnSaveComplete";
             this.btnSaveComplete.Size = new System.Drawing.Size(135, 25);
@@ -3031,6 +3033,22 @@
             this.dataGridViewTextBoxColumn23.Visible = false;
             this.dataGridViewTextBoxColumn23.Width = 10;
             // 
+            // btnDeleteOrder
+            // 
+            this.btnDeleteOrder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDeleteOrder.BackColor = System.Drawing.SystemColors.Window;
+            this.btnDeleteOrder.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDeleteOrder.Location = new System.Drawing.Point(785, 13);
+            this.btnDeleteOrder.Margin = new System.Windows.Forms.Padding(0);
+            this.btnDeleteOrder.Name = "btnDeleteOrder";
+            this.btnDeleteOrder.Size = new System.Drawing.Size(100, 25);
+            this.btnDeleteOrder.TabIndex = 50;
+            this.btnDeleteOrder.Tag = "btnSingleText";
+            this.btnDeleteOrder.Text = "Delete Order";
+            this.btnDeleteOrder.UseVisualStyleBackColor = false;
+            this.btnDeleteOrder.Visible = false;
+            this.btnDeleteOrder.Click += new System.EventHandler(this.btnDeleteOrder_Click);
+            // 
             // frmPatientDrugDispense
             // 
             this.AcceptButton = this.btnFind;
@@ -3308,5 +3326,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn OrderId;
         private System.Windows.Forms.DataGridViewTextBoxColumn patDOB;
         private System.Windows.Forms.DataGridViewTextBoxColumn pStatus;
+        private System.Windows.Forms.Button btnDeleteOrder;
     }
 }

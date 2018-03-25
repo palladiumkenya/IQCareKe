@@ -457,7 +457,6 @@
         var dateOfVisit = $("#PersonDoB").val();
         //var dateOfVisit = $('#VisitDatedatepicker').datepicker('getDate');
         //dateOfVisit = moment(dateOfVisit).format('DD-MMM-YYYY');
-        alert(dateOfVisit);
         var bmi = calcBMI();
       
         if (bmi === '') { bmi = 0 }
