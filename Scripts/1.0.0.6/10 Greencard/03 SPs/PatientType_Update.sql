@@ -1,5 +1,6 @@
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientType_Update]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[PatientType_Update]
-Go
+GO
 
 /****** Object:  StoredProcedure [dbo].[PatientType_Update]    Script Date: 2/27/2018 11:09:34 AM ******/
 SET ANSI_NULLS ON

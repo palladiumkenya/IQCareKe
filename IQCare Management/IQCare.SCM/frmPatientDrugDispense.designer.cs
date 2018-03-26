@@ -264,6 +264,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.panelSave = new System.Windows.Forms.Panel();
+            this.btnDeleteOrder = new System.Windows.Forms.Button();
             this.btnSaveComplete = new System.Windows.Forms.Button();
             this.btnPrintLabel = new System.Windows.Forms.Button();
             this.cmdPrintPrescription = new System.Windows.Forms.Button();
@@ -290,7 +291,10 @@
             this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnDeleteOrder = new System.Windows.Forms.Button();
+            this.btnPendingOrders = new System.Windows.Forms.Button();
+            this.dgvPharmacyPendingOrders = new System.Windows.Forms.DataGridView();
+            this.pnlPendingOrders = new System.Windows.Forms.Panel();
+            this.btnClosePendingOrderPanel = new System.Windows.Forms.Button();
             this.DispenseTab.SuspendLayout();
             this.panel1.SuspendLayout();
             this.grpBoxLastDispense.SuspendLayout();
@@ -320,6 +324,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.grdReturnDetail)).BeginInit();
             this.IQCareWeb.SuspendLayout();
             this.panelSave.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPharmacyPendingOrders)).BeginInit();
+            this.pnlPendingOrders.SuspendLayout();
             this.SuspendLayout();
             // 
             // DispenseTab
@@ -2028,6 +2034,7 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.pnlPendingOrders);
             this.groupBox5.Controls.Add(this.gridPendingOrder);
             this.groupBox5.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox5.Location = new System.Drawing.Point(3, 58);
@@ -2249,6 +2256,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.btnPendingOrders);
             this.groupBox3.Controls.Add(this.lblActual);
             this.groupBox3.Controls.Add(this.label23);
             this.groupBox3.Controls.Add(this.lblExpected);
@@ -2730,6 +2738,22 @@
             this.panelSave.TabIndex = 59;
             this.panelSave.Tag = "pnlSubPanel";
             // 
+            // btnDeleteOrder
+            // 
+            this.btnDeleteOrder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDeleteOrder.BackColor = System.Drawing.SystemColors.Window;
+            this.btnDeleteOrder.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDeleteOrder.Location = new System.Drawing.Point(785, 13);
+            this.btnDeleteOrder.Margin = new System.Windows.Forms.Padding(0);
+            this.btnDeleteOrder.Name = "btnDeleteOrder";
+            this.btnDeleteOrder.Size = new System.Drawing.Size(100, 25);
+            this.btnDeleteOrder.TabIndex = 50;
+            this.btnDeleteOrder.Tag = "btnSingleText";
+            this.btnDeleteOrder.Text = "Delete Order";
+            this.btnDeleteOrder.UseVisualStyleBackColor = false;
+            this.btnDeleteOrder.Visible = false;
+            this.btnDeleteOrder.Click += new System.EventHandler(this.btnDeleteOrder_Click);
+            // 
             // btnSaveComplete
             // 
             this.btnSaveComplete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -3033,21 +3057,50 @@
             this.dataGridViewTextBoxColumn23.Visible = false;
             this.dataGridViewTextBoxColumn23.Width = 10;
             // 
-            // btnDeleteOrder
+            // btnPendingOrders
             // 
-            this.btnDeleteOrder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDeleteOrder.BackColor = System.Drawing.SystemColors.Window;
-            this.btnDeleteOrder.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDeleteOrder.Location = new System.Drawing.Point(785, 13);
-            this.btnDeleteOrder.Margin = new System.Windows.Forms.Padding(0);
-            this.btnDeleteOrder.Name = "btnDeleteOrder";
-            this.btnDeleteOrder.Size = new System.Drawing.Size(100, 25);
-            this.btnDeleteOrder.TabIndex = 50;
-            this.btnDeleteOrder.Tag = "btnSingleText";
-            this.btnDeleteOrder.Text = "Delete Order";
-            this.btnDeleteOrder.UseVisualStyleBackColor = false;
-            this.btnDeleteOrder.Visible = false;
-            this.btnDeleteOrder.Click += new System.EventHandler(this.btnDeleteOrder_Click);
+            this.btnPendingOrders.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnPendingOrders.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPendingOrders.Location = new System.Drawing.Point(815, 14);
+            this.btnPendingOrders.Name = "btnPendingOrders";
+            this.btnPendingOrders.Size = new System.Drawing.Size(178, 23);
+            this.btnPendingOrders.TabIndex = 52;
+            this.btnPendingOrders.Tag = "";
+            this.btnPendingOrders.Text = "Pending Orders";
+            this.btnPendingOrders.UseVisualStyleBackColor = false;
+            this.btnPendingOrders.Visible = false;
+            this.btnPendingOrders.Click += new System.EventHandler(this.btnPendingOrders_Click);
+            // 
+            // dgvPharmacyPendingOrders
+            // 
+            this.dgvPharmacyPendingOrders.AllowUserToAddRows = false;
+            this.dgvPharmacyPendingOrders.AllowUserToDeleteRows = false;
+            this.dgvPharmacyPendingOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPharmacyPendingOrders.Location = new System.Drawing.Point(3, 3);
+            this.dgvPharmacyPendingOrders.Name = "dgvPharmacyPendingOrders";
+            this.dgvPharmacyPendingOrders.ReadOnly = true;
+            this.dgvPharmacyPendingOrders.Size = new System.Drawing.Size(273, 206);
+            this.dgvPharmacyPendingOrders.TabIndex = 53;
+            // 
+            // pnlPendingOrders
+            // 
+            this.pnlPendingOrders.Controls.Add(this.btnClosePendingOrderPanel);
+            this.pnlPendingOrders.Controls.Add(this.dgvPharmacyPendingOrders);
+            this.pnlPendingOrders.Location = new System.Drawing.Point(761, 6);
+            this.pnlPendingOrders.Name = "pnlPendingOrders";
+            this.pnlPendingOrders.Size = new System.Drawing.Size(278, 242);
+            this.pnlPendingOrders.TabIndex = 54;
+            this.pnlPendingOrders.Visible = false;
+            // 
+            // btnClosePendingOrderPanel
+            // 
+            this.btnClosePendingOrderPanel.Location = new System.Drawing.Point(109, 215);
+            this.btnClosePendingOrderPanel.Name = "btnClosePendingOrderPanel";
+            this.btnClosePendingOrderPanel.Size = new System.Drawing.Size(75, 23);
+            this.btnClosePendingOrderPanel.TabIndex = 54;
+            this.btnClosePendingOrderPanel.Text = "Close";
+            this.btnClosePendingOrderPanel.UseVisualStyleBackColor = true;
+            this.btnClosePendingOrderPanel.Click += new System.EventHandler(this.btnClosePendingOrderPanel_Click);
             // 
             // frmPatientDrugDispense
             // 
@@ -3108,6 +3161,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.grdReturnDetail)).EndInit();
             this.IQCareWeb.ResumeLayout(false);
             this.panelSave.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPharmacyPendingOrders)).EndInit();
+            this.pnlPendingOrders.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -3327,5 +3382,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn patDOB;
         private System.Windows.Forms.DataGridViewTextBoxColumn pStatus;
         private System.Windows.Forms.Button btnDeleteOrder;
+        private System.Windows.Forms.Button btnPendingOrders;
+        private System.Windows.Forms.DataGridView dgvPharmacyPendingOrders;
+        private System.Windows.Forms.Panel pnlPendingOrders;
+        private System.Windows.Forms.Button btnClosePendingOrderPanel;
     }
 }
