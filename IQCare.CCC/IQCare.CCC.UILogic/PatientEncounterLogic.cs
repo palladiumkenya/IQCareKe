@@ -190,12 +190,19 @@ namespace IQCare.CCC.UILogic
 
         public string getPharmacyDrugMultiplier(string frequencyID)
         {
-            IPatientPharmacy patientEncounter = (IPatientPharmacy)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientPharmacy, BusinessProcess.CCC");
-            List<DrugFrequency> drg = patientEncounter.getPharmacyDrugFrequency();
+            try
+            {
+                IPatientPharmacy patientEncounter = (IPatientPharmacy)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientPharmacy, BusinessProcess.CCC");
+                List<DrugFrequency> drg = patientEncounter.getPharmacyDrugFrequency();
 
-            List<DrugFrequency>  filteredList = drg.Where(x => x.id == frequencyID).ToList();
+                List<DrugFrequency> filteredList = drg.Where(x => x.id == frequencyID).ToList();
 
-            return filteredList[0].multiplier;
+                return filteredList[0].multiplier;
+            }
+            catch(Exception ex)
+            {
+                return "0";
+            }
         }
 
         public List<PharmacyFields> getPharmacyFields(string PatientMasterVisitID)
