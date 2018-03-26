@@ -70,7 +70,7 @@ namespace BusinessProcess.CCC.Lookup
             using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
                 bool treatmentHasStarted = unitOfWork.PatientTreatmentTrackerLookupRepository
-                    .FindBy(x => x.PatientId == patientId).Any();
+                    .FindBy(x => x.PatientId == patientId && x.Regimen != null).Any();
                 unitOfWork.Dispose();
                 return treatmentHasStarted;
             }

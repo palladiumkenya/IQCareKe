@@ -17,6 +17,8 @@ using IQCare.CCC.UILogic.Enrollment;
 using IQCare.Events;
 using Microsoft.JScript;
 using Convert = System.Convert;
+using Interface.CCC.Patient;
+using Application.Presentation;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -139,6 +141,13 @@ namespace IQCare.Web.CCC.WebService
                     Session["PersonId"] = personId;
 
                     Msg = "<p>Person Updated successfully</p>";
+
+                    //update patientType
+                    if((patientid != null && int.Parse(patientid) > 0))
+                    {
+                        IPatientManager _mgr = (IPatientManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Patient.BPatient, BusinessProcess.CCC");
+                        _mgr.UpdatePatientType(Convert.ToInt32(patientid), Convert.ToInt32(patientType));
+                    }
 
                     //PersonId = Convert.ToInt32(Session["PersonId"]);
 

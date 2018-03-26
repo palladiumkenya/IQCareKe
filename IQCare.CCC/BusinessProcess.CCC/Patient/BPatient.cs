@@ -106,6 +106,17 @@ namespace BusinessProcess.CCC.Patient
             }
         }
 
+        public void UpdatePatientType(int PatientId, int PatientType)
+        {
+            ClsObject obj = new ClsObject();
+            ClsUtility.Init_Hashtable();
+
+            ClsUtility.AddExtendedParameters("@PatientId", SqlDbType.Int, PatientId);
+            ClsUtility.AddExtendedParameters("@PatientType", SqlDbType.Int, PatientType);
+
+            int i = (int)obj.ReturnObject(ClsUtility.theParams, "PatientType_Update", ClsUtility.ObjectEnum.ExecuteNonQuery);
+        }
+
         public List<PatientRegistrationLookup> GetPatientIdByPersonId(int personId)
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))

@@ -91,6 +91,12 @@ namespace IQCare.CCC.UILogic
             return patientVitals;
         }
 
+        public PatientVital GetByPatientVisitId(int patientVisitId)
+        {
+            var patientVitals = _vitals.GetByPatientVisitId(patientVisitId);
+            return patientVitals;
+        }
+
         public PatientVital GetPatientVitalsByMasterVisitId(int patientId, int patientMasterVisitId)
         {
             try

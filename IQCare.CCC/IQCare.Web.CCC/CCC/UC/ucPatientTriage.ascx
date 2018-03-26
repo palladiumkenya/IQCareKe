@@ -453,9 +453,10 @@
         //       });
         var bmiz = $("#<%=txtBMIz.ClientID%>").val();
         var weightForAge = $("#<%=txtWAz.ClientID%>").val();
-         var weightForHeight = $("#<%=txtWHz.ClientID%>").val();
-        var dateOfVisit = $('#myVisitDate').datepicker('getDate');
-        dateOfVisit = moment(dateOfVisit).format('DD-MMM-YYYY');
+        var weightForHeight = $("#<%=txtWHz.ClientID%>").val();
+        var dateOfVisit = $("#PersonDoB").val();
+        //var dateOfVisit = $('#VisitDatedatepicker').datepicker('getDate');
+        //dateOfVisit = moment(dateOfVisit).format('DD-MMM-YYYY');
         var bmi = calcBMI();
       
         if (bmi === '') { bmi = 0 }

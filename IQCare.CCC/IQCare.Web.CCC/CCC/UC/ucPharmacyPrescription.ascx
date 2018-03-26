@@ -374,8 +374,37 @@
     $(document).ready(function () {
         
         //alert(pmscmSamePointDispense);
+        ///////////////////////////////////////////////////////////////////////////////////////
+        tp = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
 
-            // drugList(0, $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text());
+        if (pmscmSamePointDispense === "PM/SCM With Same point dispense") {
+                       // tp = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
+
+            pmscmFlag = "1";
+            drugList(1, tp);
+            $("#ddlBatch").prop('disabled', false);
+            $("#txtQuantityDisp").prop('disabled', false);
+            $("#txtDateDispensed").prop('disabled', false);
+            $("#btnDateDisp").prop('disabled', false);
+
+        }
+        else if (pmscm === "PM/SCM") {
+
+            drugList(1, tp);
+            $("#ddlBatch").prop('disabled', true);
+            $("#txtQuantityDisp").prop('disabled', true);
+            $("#txtDateDispensed").prop('disabled', true);
+            $("#btnDateDisp").prop('disabled', true);
+        }
+        else {
+
+            drugList(0, tp);
+            $("#ddlBatch").prop('disabled', true);
+            $("#txtQuantityDisp").prop('disabled', false);
+            $("#txtDateDispensed").prop('disabled', false);
+            $("#btnDateDisp").prop('disabled', false);
+        }
+        ////////////////////////////////////////////////////////////////////////////////////////////////
 
             $("#<%=ddlTreatmentProgram.ClientID%>").on('change',
                 function () {
@@ -411,7 +440,6 @@
 
                     }
                     else if (pmscm === "PM/SCM") {
-                       // tp = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
 
                         drugList(1, tp);
                         $("#ddlBatch").prop('disabled', true);
@@ -420,7 +448,6 @@
                         $("#btnDateDisp").prop('disabled', true);
                     }
                     else {
-                       // tp = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
 
                         drugList(0, tp);
                         $("#ddlBatch").prop('disabled', true);
@@ -478,6 +505,7 @@
         });
 
         treatmentProgram();
+
     });
 
     $(function () {
