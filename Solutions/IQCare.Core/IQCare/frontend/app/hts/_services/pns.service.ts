@@ -6,6 +6,7 @@ import {Observable} from 'rxjs/Observable';
 import {of} from 'rxjs/observable/of';
 import 'rxjs/add/observable/throw';
 import {Pnsform} from '../_models/pnsform';
+import {THIS_EXPR} from '@angular/compiler/src/output/output_ast';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -40,8 +41,23 @@ export class PnsService {
         );
     }
 
+    public getScreeningCategories(): Observable<any[]> {
+        const options = JSON.stringify(['PnsScreening']);
+
+        return this.http.post<any[]>(this.API_URL + this.lookup, options, httpOptions).pipe(
+            tap(getScreeningCategories => this.log('fetched all screening categories')),
+            catchError(this.handleError<any[]>('getScreeningCategories'))
+        );
+    }
+
     public addPnsScreening(pnsScreening: Pnsform): Observable<any> {
-        return this.http.post<any>(this.API_URL + this. url, JSON.stringify(pnsScreening), httpOptions).pipe(
+        const screening: any[] = [];
+
+        const Indata = {
+            'Screening': screening,
+        };
+
+        return this.http.post<any>(this.API_URL + this.url, JSON.stringify(Indata), httpOptions).pipe(
             tap(addedPnsScreening => this.log('add pns screening')),
             catchError(this.handleError<any[]>('addPnsScreening'))
         );
