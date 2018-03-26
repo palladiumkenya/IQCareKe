@@ -1097,7 +1097,7 @@ namespace IQCare.SCM
                             BindPharmacyDispenseGrid(theNewDT);
                             dispenseReady = true;
                         }
-                        //theDT.AcceptChanges();
+                        theDT.AcceptChanges();
                         BindPharmacyDispenseGrid(theDT);
                         theDispCurrentRow = -1;
                     }
@@ -1509,7 +1509,7 @@ namespace IQCare.SCM
                     {
                         DefaultValue = (object)""
                     });
-                    //tableForPrint.AcceptChanges();
+                    tableForPrint.AcceptChanges();
 
                     dataSet.Tables.Add(tableForPrint);
                     //////    ///////////////////////////////////////////
@@ -1728,7 +1728,7 @@ namespace IQCare.SCM
 
                     DataTable toDispense = theDT.DefaultView.ToTable();
                     theDT.DefaultView.RowFilter = "";
-                    //theDT.AcceptChanges();
+                    theDT.AcceptChanges();
 
                     if (toDispense.Rows.Count == 0)
                     {
