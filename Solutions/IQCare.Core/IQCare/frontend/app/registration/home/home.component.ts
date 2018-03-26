@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
     patientId: number;
     countPositive: number;
     isPositive: boolean = false;
+
     displayedColumns = ['encounterDate', 'provider', 'resultOne', 'resultTwo', 'finalResult', 'consent' , 'partnerListingConsent'];
     dataSource = new EncountersDataSource(this.encounterService, this.patientId);
 
@@ -33,6 +34,10 @@ export class HomeComponent implements OnInit {
                     this.countPositive += 1;
                     this.isPositive = true;
                     this.dataService.updateIsPositive(true);
+                }
+
+                if (data[i]['partnerListingConsent'] == 'Yes') {
+                    this.dataService.updateHasConsentedPartnerListing(true);
                 }
             }
         }, err => {

@@ -16,5 +16,7 @@ export class LeftnavComponent implements OnInit {
     ngOnInit() {
         this.dataService.currentHasConsented.subscribe(hasConsented => this.hasConsented = hasConsented);
         this.dataService.currentIsPositive.subscribe(isPositive => this.isPositive = isPositive);
+        this.dataService.currentHasConsentedPartnerListing.subscribe(hasConsentedPartnerListing =>
+            this.hasConsentedPartnerListing = hasConsentedPartnerListing);
     }
 }
