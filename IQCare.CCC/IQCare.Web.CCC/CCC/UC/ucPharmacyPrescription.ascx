@@ -615,9 +615,9 @@
                 });
 
       
-           function SelectDrug(){
+           function SelectDrug() {
                    var result = this.value.split("~");
-                   if(pmscm ==="1"){ getBatches(result[0]);}
+                   if (pmscmSamePointDispense ==="PM/SCM With Same point dispense"){ getBatches(result[0]);}
                    this.value = result[2];
                    $("#<%=drugID.ClientID%>").val(result[0]);
                    $("#<%=drugAbbr.ClientID%>").val(result[1]);
