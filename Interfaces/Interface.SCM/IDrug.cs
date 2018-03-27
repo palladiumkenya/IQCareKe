@@ -61,5 +61,6 @@ namespace Interface.SCM
         DataTable getPatientsRegistered();
         DataTable searchPatientsRegistered(string fname, string mname, string lname, string enrollmentId);
         int detelePatientPharmacyOrder(int ptn_pharmacy_pk);
+        DataSet pendingPharmacyOrders();
     }
 }
