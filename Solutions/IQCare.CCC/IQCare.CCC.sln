@@ -44,6 +44,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCare.DTO", "..\..\IQCare.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCare.Events", "..\..\IQCare.CCC\IQCare.Events\IQCare.Events.csproj", "{43E1A1CC-ADC8-4843-ACB0-16E9C90BB980}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interface.Interop", "..\..\IQCare.Interop\Interface.Interop\Interface.Interop.csproj", "{DFBC227C-3E62-4EE9-ACA1-839F15545864}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessProcess.Interop", "..\..\IQCare.Interop\BusinessProcess.Interop\BusinessProcess.Interop.csproj", "{5DFCEEA2-EDD2-46CE-8EDD-368DBE86789F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -82,6 +86,14 @@ Global
 		{43E1A1CC-ADC8-4843-ACB0-16E9C90BB980}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43E1A1CC-ADC8-4843-ACB0-16E9C90BB980}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{43E1A1CC-ADC8-4843-ACB0-16E9C90BB980}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFBC227C-3E62-4EE9-ACA1-839F15545864}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFBC227C-3E62-4EE9-ACA1-839F15545864}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFBC227C-3E62-4EE9-ACA1-839F15545864}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFBC227C-3E62-4EE9-ACA1-839F15545864}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DFCEEA2-EDD2-46CE-8EDD-368DBE86789F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DFCEEA2-EDD2-46CE-8EDD-368DBE86789F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DFCEEA2-EDD2-46CE-8EDD-368DBE86789F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DFCEEA2-EDD2-46CE-8EDD-368DBE86789F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

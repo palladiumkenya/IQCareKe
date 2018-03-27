@@ -155,6 +155,9 @@ namespace IQCare.WebApi.Logic.MessageHandler
 
         private void HandleDrugOrderFulfilment(ApiInbox incomingMessage)
         {
+            //save to inbox
+            int id = _apiInboxmanager.AddApiInbox(incomingMessage);
+            incomingMessage.Id = id;
             try
             {
                 DrugDispenseEntity drugDispenseEntity = new JavaScriptSerializer().Deserialize<DrugDispenseEntity>(incomingMessage.Message);
@@ -164,11 +167,14 @@ namespace IQCare.WebApi.Logic.MessageHandler
                     cfg.CreateMap<DTO.MESSAGE_HEADER, MappingEntities.MESSAGEHEADER>().ReverseMap();
                     cfg.CreateMap<DTO.PATIENT_IDENTIFICATION, MappingEntities.PATIENTIDENTIFICATION>().ReverseMap();
                     cfg.CreateMap<DTO.COMMON_ORDER_DETAILS, MappingEntities.CommonOrderDetailsDispenseEntity>().ReverseMap();
-                    cfg.CreateMap<DTO.PharmacyDispensedDrugs, MappingEntities.PHARMACY_ENCODED_ORDER_DISPENSE>().ReverseMap();
+                    cfg.CreateMap<DTO.PHARMACY_DISPENSE, MappingEntities.PHARMACY_ENCODED_ORDER_DISPENSE>().ReverseMap();
                 });
-                var dispensedPayload = Mapper.Map<PharmacyDispensedDrugs>(drugDispenseEntity);
+                var dispensedPayload = Mapper.Map<IQCare.DTO.DtoDrugDispensed>(drugDispenseEntity);
                 // todo process the new dispense.
 
+                incomingMessage.DateProcessed = DateTime.Now;
+                incomingMessage.Processed = true;
+                _apiInboxmanager.EditApiInbox(incomingMessage);
             }
             catch(Exception e)
             {
@@ -176,7 +182,7 @@ namespace IQCare.WebApi.Logic.MessageHandler
                 incomingMessage.Processed = false;
                 _apiInboxmanager.AddApiInbox(incomingMessage);
             }
-            _apiInboxmanager.AddApiInbox(incomingMessage);
+            
         }
 
         private void HandleAppointments(ApiInbox incomingMessage)

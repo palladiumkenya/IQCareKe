@@ -10,7 +10,6 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BusinessProcess.Pharmacy</RootNamespace>
     <AssemblyName>BusinessProcess.Pharmacy</AssemblyName>
-  
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
@@ -74,6 +73,7 @@
   <ItemGroup>
     <Compile Include="BDrug.cs" />
     <Compile Include="BPediatric.cs" />
+    <Compile Include="BPharmacyDispense.cs" />
     <Compile Include="BPharmacyRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -217,8 +217,8 @@ namespace IQCare.WebApi.Logic.DtoMapping
         public DtoDrugDispensed DrugOrderFulfilment(DrugDispenseEntity entity)
         {
             var internalIdentifiers = new List<DTOIdentifier>();
-            var pharmacyEncodedOrder=new List<PharmacyEncodededOrderDispenseDto>();
-            var pharmacyDispense=new List<PharmacyDispensedDrugs>();
+            var pharmacyEncodedOrder=new List<PHARMACY_ENCODED_ORDER>();
+            var pharmacyDispense=new List<PHARMACY_DISPENSE>();
 
             var identify = new DTOIdentifier()
             {
@@ -252,7 +252,7 @@ namespace IQCare.WebApi.Logic.DtoMapping
 
             foreach (var pharmacyEncorder in pharmacyEncodedOrder)
             {
-                var encorder=new PharmacyEncodededOrderDispenseDto()
+                var encorder=new PHARMACY_ENCODED_ORDER()
                 {
                     DRUG_NAME = pharmacyEncorder.DRUG_NAME,
                     CODING_SYSTEM = pharmacyEncorder.CODING_SYSTEM,
@@ -268,7 +268,7 @@ namespace IQCare.WebApi.Logic.DtoMapping
 
             foreach (var drugDispense in entity.PHARMACY_DISPENSE)
             {
-                var dispense = new PharmacyDispensedDrugs()
+                var dispense = new PHARMACY_DISPENSE()
                 {
                     ACTUAL_DRUGS = drugDispense.ACTUAL_DRUGS,
                     CODING_SYSTEM = drugDispense.CODING_SYSTEM,
