@@ -28,7 +28,12 @@ namespace BusinessProcess.CCC.Pharmacy
             {
                 PatientPharmacyDispense pharmacyDispense = new PatientPharmacyDispense()
                 {
-                    //todo add
+                    Drug_Pk = p.Drug_Pk,
+                    FrequencyID = p.FrequencyID,
+                    StrengthID = p.StrengthID,
+                    Duration = p.Duration,
+                    DispensedQuantity = p.DispensedQuantity,
+                    SingleDose = p.SingleDose,
                 };
                 unitOfWork.PatientPharmacyDispenseRepository.Update(pharmacyDispense);
                 _result = unitOfWork.Complete();

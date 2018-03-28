@@ -28,7 +28,10 @@ namespace BusinessProcess.CCC.Pharmacy
             {
                 PharmacyOrder pharmacyOrder = new PharmacyOrder()
                 {
-                    //todo add
+                    PharmacyNotes = p.PharmacyNotes,
+                    OrderStatus = p.OrderStatus,
+                    OrderedByName = p.OrderedByName,
+                    OrderedByDate = p.OrderedByDate
                 };
                 unitOfWork.PharmacyOrderRepository.Update(pharmacyOrder);
                 _result = unitOfWork.Complete();

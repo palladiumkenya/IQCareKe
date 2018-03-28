@@ -16,6 +16,7 @@ namespace Entities.CCC.pharmacy
         public int LocationId { get; set; }
         public int ? OrderedBy { get; set; }
         public DateTime ? OrderedByDate { get; set; }
+        public string OrderedByName { get; set; }
         public int DispensedBy { get; set; }
         public DateTime DispensedByDate { get; set; }
         public decimal Height { get; set; }
