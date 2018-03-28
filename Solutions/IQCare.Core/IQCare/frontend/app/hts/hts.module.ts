@@ -1,7 +1,7 @@
 import { NgModule, Component} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {
     MatAutocompleteModule,
     MatButtonModule, MatButtonToggleModule, MatCardModule, MatCheckboxModule, MatChipsModule,
@@ -33,6 +33,8 @@ import {SharedModule} from '../shared/shared.module';
 import { PnsPartnersComponent } from './pns-partners/pns-partners.component';
 import {PnsService} from './_services/pns.service';
 import {DataService} from '../shared/_services/data.service';
+import { TestingComponent } from './testing/testing.component';
+import {TestDialogComponent} from './testdialog/testdialog.component';
 
 
 @NgModule({
@@ -83,7 +85,8 @@ import {DataService} from '../shared/_services/data.service';
       MatTableModule,
       MatTabsModule,
       MatToolbarModule,
-      MatTooltipModule
+      MatTooltipModule,
+      ReactiveFormsModule
   ],
   declarations: [
     EncounterComponent,
@@ -94,7 +97,9 @@ import {DataService} from '../shared/_services/data.service';
     FamilyScreeningComponent,
     NoneEventsDirective,
     LinkageComponent,
-    PnsPartnersComponent
+    PnsPartnersComponent,
+    TestingComponent,
+      TestDialogComponent
   ],
   exports: [
   ],
@@ -103,6 +108,9 @@ import {DataService} from '../shared/_services/data.service';
       LinkageReferralService,
       PnsService,
       DataService
+  ],
+  entryComponents: [
+      TestDialogComponent
   ]
 })
 export class HtsModule { }

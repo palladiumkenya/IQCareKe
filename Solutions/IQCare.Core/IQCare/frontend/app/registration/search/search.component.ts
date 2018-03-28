@@ -28,6 +28,9 @@ export class SearchComponent implements OnInit {
         localStorage.removeItem('personId');
         localStorage.removeItem('patientId');
         localStorage.removeItem('partnerId');
+        localStorage.removeItem('htsEncounterId');
+        localStorage.removeItem('patientMasterVisitId');
+        localStorage.setItem('serviceAreaId', '2');
     }
 
     onSubmit() {

@@ -8,6 +8,7 @@ import {FamilyTracingComponent} from './family-tracing/family-tracing.component'
 import {FamilyScreeningComponent} from './family-screening/family-screening.component';
 import {LinkageComponent} from './linkage/linkage.component';
 import {PnsPartnersComponent} from './pns-partners/pns-partners.component';
+import {TestingComponent} from './testing/testing.component';
 
 const routes: Routes = [
     {
@@ -41,6 +42,10 @@ const routes: Routes = [
     {
         path: 'pnsform',
         component: PnsformComponent
+    },
+    {
+        path: 'testing',
+        component: TestingComponent
     }
 ];
 

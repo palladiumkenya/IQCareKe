@@ -31,11 +31,11 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                     var htsEncounter = new HtsEncounter
                     {
                         //Consent = request.Encounter.Consent,
-                        CoupleDiscordant = request.FinalTestingResult.CoupleDiscordant,
+                        //CoupleDiscordant = request.FinalTestingResult.CoupleDiscordant,
                         EncounterRemarks = request.Encounter.EncounterRemarks,
                         EverSelfTested = request.Encounter.EverSelfTested,
                         EverTested = request.Encounter.EverTested,
-                        FinalResultGiven = request.FinalTestingResult.FinalResultGiven,
+                        //FinalResultGiven = request.FinalTestingResult.FinalResultGiven,
                         GeoLocation = request.Encounter.GeoLocation,
                         MonthSinceSelfTest = request.Encounter.MonthSinceSelfTest,
                         MonthsSinceLastTest = request.Encounter.MonthsSinceLastTest,
@@ -51,32 +51,36 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                     await _unitOfWork.SaveAsync();
 
                     // Create Testing instances
-                    List<Core.Model.Testing> testings = new List<Core.Model.Testing>();
-                    request.Testing.ForEach(t => testings.Add(new Core.Model.Testing
-                    {
-                        ExpiryDate = t.ExpiryDate,
-                        HtsEncounterId = htsEncounter.Id,
-                        KitId = t.KitId,
-                        KitLotNumber = t.KitLotNumber,
-                        Outcome = t.Outcome,
-                        ProviderId = htsEncounter.ProviderId,
-                        TestRound = t.TestRound
-                    }));
+                    //List<Core.Model.Testing> testings = new List<Core.Model.Testing>();
+                    //request.Testing.ForEach(t => testings.Add(new Core.Model.Testing
+                    //{
+                    //    ExpiryDate = t.ExpiryDate,
+                    //    HtsEncounterId = htsEncounter.Id,
+                    //    KitId = t.KitId,
+                    //    KitLotNumber = t.KitLotNumber,
+                    //    Outcome = t.Outcome,
+                    //    ProviderId = htsEncounter.ProviderId,
+                    //    TestRound = t.TestRound
+                    //}));
 
-                    await _unitOfWork.Repository<Core.Model.Testing>().AddRangeAsync(testings);
-                    await _unitOfWork.SaveAsync();
+                    //if (testings.Count > 0)
+                    //{
+                    //    await _unitOfWork.Repository<Core.Model.Testing>().AddRangeAsync(testings);
+                    //    await _unitOfWork.SaveAsync();
+                    //}
+                    
 
-                    // Create HtsEncounterResult instance
-                    HtsEncounterResult hTSEncounterResult = new HtsEncounterResult
-                    {
-                        FinalResult = request.FinalTestingResult.FinalResult,
-                        HtsEncounterId = htsEncounter.Id,
-                        RoundOneTestResult = request.FinalTestingResult.FinalResultHiv1,
-                        RoundTwoTestResult = request.FinalTestingResult.FinalResultHiv2
-                    };
+                    //// Create HtsEncounterResult instance
+                    //HtsEncounterResult hTSEncounterResult = new HtsEncounterResult
+                    //{
+                    //    FinalResult = request.FinalTestingResult.FinalResult,
+                    //    HtsEncounterId = htsEncounter.Id,
+                    //    RoundOneTestResult = request.FinalTestingResult.FinalResultHiv1,
+                    //    RoundTwoTestResult = request.FinalTestingResult.FinalResultHiv2
+                    //};
 
-                    await _unitOfWork.Repository<HtsEncounterResult>().AddAsync(hTSEncounterResult);
-                    await _unitOfWork.SaveAsync();
+                    //await _unitOfWork.Repository<HtsEncounterResult>().AddAsync(hTSEncounterResult);
+                    //await _unitOfWork.SaveAsync();
 
                     if (request.Encounter.Disabilities.Any())
                     {

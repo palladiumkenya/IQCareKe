@@ -1,0 +1,171 @@
+<div class="ibox">
+    <div class="ibox-title">
+        <app-clientbrief></app-clientbrief>
+    </div>
+    <div class="ibox-content">
+        <div class="row">
+            <div class="col-lg-2">
+                <app-leftnav></app-leftnav>
+            </div>
+
+            <div class="col-md-10 animated fadeInRight">
+                <div class="panel panel-default">
+                    <div class="panel-heading">HTS TESTING</div>
+                    <div class="panel-body">
+                        <form id="form" action="#" class="wizard-big" parsley-validate (ngSubmit)="onSubmit()" #testingForm="ngForm">
+                            <fieldset>
+                                <h2>TESTING</h2>
+                                <div class="row">
+                                    <div class="tabs-container">
+                                        <ul class="nav nav-tabs">
+                                            <li class="active"><a data-toggle="tab" href="#tab-1">Screening Test</a></li>
+                                            <li class=""><a data-toggle="tab" href="#tab-2">Confirmatory Test</a></li>
+                                        </ul>
+                                        <div class="tab-content">
+                                            <div id="tab-1" class="tab-pane active">
+                                                <div class="panel-body">
+                                                    <button type="button" class="btn" data-toggle="modal" data-target="#myModal1" *ngIf="testButton1" (click)="openDialog('Screening Test')">
+                                                        ADD SCREENING
+                                                    </button>
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                        <tr>
+                                                            <th scope="col">#</th>
+                                                            <th scope="col">HIV Result</th>
+                                                            <th scope="col">Kit Name</th>
+                                                            <th scope="col">Lot Number</th>
+                                                            <th scope="col">Expiry Date</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr *ngFor="let hivResult of hivResults1; let index = index">
+                                                                <td>{{ index }}</td>
+                                                                <td>{{ hivResult['hivResult']['itemName'] }}</td>
+                                                                <td>{{ hivResult.kitName.itemName }}</td>
+                                                                <td>{{ hivResult['lotNumber'] }}</td>
+                                                                <td>{{ hivResult['expiryDate'] | date: 'dd-MMM-yyyy' }}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div id="tab-2" class="tab-pane">
+                                                <div class="panel-body">
+                                                    <button type="button" class="btn" data-toggle="modal" data-target="#myModal2" *ngIf="testButton2" (click)="openDialog('Confirmatory Test')">
+                                                        ADD CONFIRMATORY
+                                                    </button>
+
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                        <tr>
+                                                            <th scope="col">#</th>
+                                                            <th scope="col">HIV Result</th>
+                                                            <th scope="col">Kit Name</th>
+                                                            <th scope="col">Lot Number</th>
+                                                            <th scope="col">Expiry Date</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr *ngFor="let hivResult of hivResults2; let index = index;">
+                                                                <td>{{ index }}</td>
+                                                                <td>{{ hivResult['hivResult']['itemName'] }}</td>
+                                                                <td>{{ hivResult.kitName.itemName }}</td>
+                                                                <td>{{ hivResult['lotNumber'] }}</td>
+                                                                <td>{{ hivResult['expiryDate'] | date: 'dd-MMM-yyyy' }}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <p></p>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label>Final Result HIV-Test 1 *</label>
+                                            <select id="finalResultHiv1" name="finalResultHiv1" class="form-control m-b required" [(ngModel)]="finalTestingResults.finalResultHiv1" #finalResultHiv1="ngModel" data-parsley-required="true" appNoneEvents>
+                                                <option></option>
+                                                <option *ngFor="let option of hivResultsOptions" [ngValue]="option.itemId">{{option.itemName}}</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Final Result HIV-Test 2 *</label>
+                                            <select id="finalResultHiv2" name="finalResultHiv2" class="form-control m-b required" [(ngModel)]="finalTestingResults.finalResultHiv2" #finalResultHiv2="ngModel" [disabled]="isDisabled" data-parsley-required="true" appNoneEvents>
+                                                <option></option>
+                                                <option *ngFor="let option of hivResultsOptions" [ngValue]="option.itemId">{{option.itemName}}</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Final Result *</label>
+                                            <select id="finalResult" name="finalResult" class="form-control m-b required" [(ngModel)]="finalTestingResults.finalResult" #finalResult="ngModel" [disabled]="isFinalResultDisabled" data-parsley-required="true" appNoneEvents>
+                                                <option></option>
+                                                <option *ngFor="let option of hivFinalResultsOptions" [ngValue]="option.itemId">{{option.itemName}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label>Final Result Given? *</label>
+                                            <select id="finalResultGiven" name="finalResultGiven" class="form-control m-b required" [(ngModel)]="finalTestingResults.finalResultGiven" #finalResultGiven="ngModel" data-parsley-required="true" [disabled]="isFinalResultGivenDisabled">
+                                                <option></option>
+                                                <option *ngFor="let option of yesNoOptions" [ngValue]="option.itemId">{{option.itemName}}</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Couple Discordant *</label>
+                                            <select id="coupleDiscordant" name="coupleDiscordant" class="form-control m-b required" [(ngModel)]="finalTestingResults.coupleDiscordant" #coupleDiscordant="ngModel" data-parsley-required="true" [disabled]="isCoupleDiscordantDisabled">
+                                                <option></option>
+                                                <option *ngFor="let option of yesNoOptions" [ngValue]="option.itemId">{{option.itemName}}</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Remarks *</label>
+                                            <textarea class="form-control m-b" rows="3" id="finalResultsRemarks" name="finalResultsRemarks" [(ngModel)]="finalTestingResults.finalResultsRemarks" #finalResultsRemarks="ngModel"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label>Accepted to partner listing</label>
+                                            <select class="form-control m-b" id="acceptedPartnerListing" name="acceptedPartnerListing" [(ngModel)]="finalTestingResults.acceptedPartnerListing" #acceptedPartnerListing="ngModel" data-parsley-required="true" (change)="onAcceptedPartnerListingChange(finalTestingResults.acceptedPartnerListing)" [disabled]="isAcceptedPartnerListingDisabled">
+                                                <option></option>
+                                                <option *ngFor="let option of yesNoOptions" [ngValue]="option.itemId">{{option.itemName}}</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Reasons for decline to partner listing</label>
+                                            <select class="form-control m-b" id="reasonsDeclinePartnerListing" name="reasonsDeclinePartnerListing" [(ngModel)]="finalTestingResults.reasonsDeclinePartnerListing" #reasonsDeclinePartnerListing="ngModel" data-parsley-required="true" [disabled]="isReasonsDeclinedListingDisabled">
+                                                <option></option>
+                                                <option *ngFor="let option of reasonsDeclined" [ngValue]="option.itemId">{{option.itemName}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="pull-right example-container row">
+                                    <button mat-raised-button color="primary">
+                                        <strong>Save Changes</strong>
+                                    </button>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
