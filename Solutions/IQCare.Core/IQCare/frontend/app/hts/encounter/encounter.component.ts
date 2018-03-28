@@ -3,6 +3,8 @@ import {Encounter} from '../_models/encounter';
 import {EncounterService} from '../_services/encounter.service';
 import {FinalTestingResults, Testing} from '../_models/testing';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Store} from '@ngrx/store';
+import * as Consent from '../../shared/reducers/app.states';
 
 declare var $: any;
 
@@ -13,25 +15,12 @@ declare var $: any;
 })
 export class EncounterComponent implements OnInit {
     encounter: Encounter;
-    testing: Testing;
-    hivResults1: Testing[];
-    hivResults2: Testing[];
 
-    hiv1: Testing[];
-    hiv2: Testing[];
 
-    finalTestingResults: FinalTestingResults;
-
-    testButton1: boolean = true;
-    testButton2: boolean = false;
-    isDisabled: boolean = false;
     isNoOfMonths: boolean = true;
     isDisabilitiesEnabled: boolean = true;
-    isFinalResultDisabled: boolean = false;
-    isFinalResultGivenDisabled: boolean = false;
-    isCoupleDiscordantDisabled: boolean = false;
-    isAcceptedPartnerListingDisabled: boolean = false;
-    isReasonsDeclinedListingDisabled: boolean = false;
+    isClientTestedDisabled: boolean = false;
+    isStrategyDisabled: boolean = false;
 
     entryPoints: any[];
     yesNoOptions: any[];
@@ -39,7 +28,6 @@ export class EncounterComponent implements OnInit {
     testedAs: any[];
     strategyOptions: any[];
     tbStatus: any[];
-    reasonsDeclined: any[];
     hivResultsOptions: any[];
     hivFinalResultsOptions: any[];
     hivTestKits: any[];
@@ -48,7 +36,8 @@ export class EncounterComponent implements OnInit {
     constructor(private _encounterService: EncounterService,
                 private router: Router,
                 private route: ActivatedRoute,
-                public zone: NgZone) {
+                public zone: NgZone,
+                private store: Store<AppState>) {
     }
 
     ngOnInit() {
@@ -63,75 +52,23 @@ export class EncounterComponent implements OnInit {
         this.encounter.MonthSinceSelfTest = null;
         this.encounter.GeoLocation = null;
 
-        //
-        this.testing = new Testing();
-        this.finalTestingResults = new FinalTestingResults();
-
-        this.hivResults1 = [];
-        this.hivResults2 = [];
-
-        this.hiv1 = [];
-        this.hiv2 = [];
-
-
-
         this.getHtsOptions();
         this.getEncounterType();
-
         const self = this;
 
         setTimeout(() => {
-            $('#myWizard').on('actionclicked.fu.wizard', function(evt, data) {
-                var currentStep = data.step;
-                var nextStep = 0;
-                var previousStep = 0;
+            $('#form').parsley().destroy();
+            $('#form').parsley({
+                excluded: 'input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden'
+            });
 
-                if (data.direction === 'next') {
-                    nextStep = currentStep += 1;
-                } else {
-                    previousStep = nextStep -= 1;
-                }
-
-                if (data.step === 1) {
-                    if (data.direction === 'previous') {
-                        return;
-                    } else {
-                        $('#datastep1').parsley().destroy();
-                        $('#datastep1').parsley({
-                            excluded: 'input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden'
-                        });
-
-                        if ($('#datastep1').parsley().validate()) {
-                            // validated
-                        } else {
-                            evt.preventDefault();
-                            return;
-                        }
-                    }
-                } else if (data.step === 2) {
-                    if (data.direction === 'previous') {
-                        return;
-                    } else {
-                        $('#datastep2').parsley().destroy();
-                        $('#datastep2').parsley({
-                            excluded: 'input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden'
-                        });
-
-                        if ($('#datastep2').parsley().validate()) {
-                            /* submit all forms */
-                            self.onSubmitForm();
-                        } else {
-                            console.log('Parseley Validated Error');
-                            evt.preventDefault();
-                            return;
-                        }
-                    }
-                }
-            })
-                .on('changed.fu.wizard', function() {})
-                .on('stepclicked.fu.wizard', function() {})
-                .on('finished.fu.wizard', function(e) {});
-        }, 0 );
+            $('#form').parsley().on('field:validated', function() {
+                const ok = $('.parsley-error').length === 0;
+            }).on('form:submit', function() {
+                self.onSubmitForm();
+                return false;
+            });
+        }, 0);
     }
 
     getHtsOptions() {
@@ -151,14 +88,6 @@ export class EncounterComponent implements OnInit {
                     this.strategyOptions = options[i].value;
                 } else if (options[i].key == 'TBStatus') {
                     this.tbStatus = options[i].value;
-                } else if (options[i].key == 'ReasonsPartner') {
-                    this.reasonsDeclined = options[i].value;
-                } else if (options[i].key == 'HIVResults') {
-                    this.hivResultsOptions = options[i].value;
-                } else if (options[i].key == 'HIVTestKits') {
-                    this.hivTestKits = options[i].value;
-                } else if (options[i].key == 'HIVFinalResults') {
-                    this.hivFinalResultsOptions = options[i].value;
                 }
             }
         });
@@ -171,92 +100,37 @@ export class EncounterComponent implements OnInit {
     }
 
     onSubmitForm() {
-        // console.log('Try submit');
-        this._encounterService.addEncounter(this.encounter, this.finalTestingResults,
-            this.hiv1, this.hiv2).subscribe(data => {
-            console.log(data['htsEncounterId']);
+        // console.log(this.encounter);
+        const isConsented = this.encounter.Consent;
+        const testedAs = this.encounter.TestedAs;
 
+        this._encounterService.addEncounter(this.encounter).subscribe(data => {
+            console.log(data);
             localStorage.setItem('htsEncounterId', data['htsEncounterId']);
-            this.zone.run(() => { this.router.navigate(['/registration/home'], { relativeTo: this.route }); });
+            localStorage.setItem('patientMasterVisitId', data['patientMasterVisitId']);
+
+            const optionSelected = this.yesNoOptions.filter(function( obj ) {
+                return obj.itemId == isConsented;
+            });
+
+            const optionTestedAs = this.testedAs.filter(function (obj) {
+                return obj.itemId == testedAs;
+            });
+
+            if (optionTestedAs[0]['itemName'] == 'I: Individual') {
+                this.store.dispatch(new Consent.TestedAs(true));
+            }
+
+            if (optionSelected[0]['itemName'] == 'Yes') {
+                this.store.dispatch(new Consent.ConsentTesting(true));
+                this.zone.run(() => { this.router.navigate(['/hts/testing'], {relativeTo: this.route }); });
+            } else {
+                this.zone.run(() => { this.router.navigate(['/registration/home'], { relativeTo: this.route }); });
+            }
+
         }, err => {
             console.log(err);
         });
-    }
-
-    onAddingTestResult1() {
-        // console.log(this.testing);
-        /* Push results to hiv results array */
-        this.testing.KitId = this.testing.kitName.itemId;
-        this.testing.Outcome = this.testing.hivResultTest.itemId;
-        this.testing.TestRound = 1;
-
-        // Set object variables
-        const test = new Testing();
-        test.KitLotNumber = this.testing.KitLotNumber;
-        test.ExpiryDate = this.testing.ExpiryDate;
-        test.KitId = this.testing.KitId;
-        test.Outcome = this.testing.Outcome;
-        test.TestRound = this.testing.TestRound;
-
-        this.hivResults1.push(this.testing);
-        this.hiv1.push(test);
-
-        if (this.testing.hivResultTest.itemName === 'Negative') {
-            this.testButton1 = false;
-            this.testButton2 = false;
-            this.finalTestingResults.finalResultHiv1 = this.testing.hivResultTest.itemId;
-            this.isDisabled = true;
-            this.finalTestingResults.finalResult = this.testing.hivResultTest.itemId;
-        } else if (this.testing.hivResultTest.itemName === 'Positive') {
-            this.testButton1 = false;
-            this.testButton2 = true;
-            this.finalTestingResults.finalResultHiv1 = this.testing.hivResultTest.itemId;
-        }
-        /* re-set the model */
-        this.testing = new Testing();
-        /*Hide the modal after saving*/
-        $('#myModal1').modal('hide');
-    }
-
-    onAddingTestResult2() {
-        const firstTest = this.hivResults1.slice(-1)[0];
-        // console.log(firstTest);
-
-        /* Push results to hiv results array */
-        this.testing.KitId = this.testing.kitName.itemId;
-        this.testing.Outcome = this.testing.hivResultTest.itemId;
-        this.testing.TestRound = 2;
-
-        // Set object variables
-        const test = new Testing();
-        test.KitLotNumber = this.testing.KitLotNumber;
-        test.ExpiryDate = this.testing.ExpiryDate;
-        test.KitId = this.testing.KitId;
-        test.Outcome = this.testing.Outcome;
-        test.TestRound = this.testing.TestRound;
-
-        this.hivResults2.push(this.testing);
-        this.hiv2.push(test);
-
-        /* Get inconclusive value from array */
-        const inconculusive = this.hivFinalResultsOptions.filter(function( obj ) {
-            return obj.itemName == 'Inconclusive';
-        });
-
-        /* Logic for testing */
-        if (firstTest.hivResultTest.itemName === 'Positive' && this.testing.hivResultTest.itemName === 'Negative') {
-            this.finalTestingResults.finalResultHiv2 = this.testing.hivResultTest.itemId;
-            this.finalTestingResults.finalResult = inconculusive[0].itemId;
-            this.testButton2 = false;
-        } else if (firstTest.hivResultTest.itemName === 'Positive' && this.testing.hivResultTest.itemName === 'Positive') {
-            this.finalTestingResults.finalResultHiv2 = this.testing.hivResultTest.itemId;
-            this.finalTestingResults.finalResult = this.testing.hivResultTest.itemId;
-            this.testButton2 = false;
-        }
-        /* re-set the model */
-        this.testing = new Testing();
-        /*Hide the modal after saving*/
-        $('#myModal2').modal('hide');
     }
 
     everTestedChanged(everTested: number) {
@@ -285,36 +159,21 @@ export class EncounterComponent implements OnInit {
         }
     }
 
-    onAcceptedPartnerListingChange(acceptedPartnerListing: number) {
+    onConsentChanged(consent: number) {
+
         const optionSelected = this.yesNoOptions.filter(function( obj ) {
-            return obj.itemId == acceptedPartnerListing;
+            return obj.itemId == consent;
         });
 
-        if (optionSelected[0].itemName == 'Yes') {
-            this.isReasonsDeclinedListingDisabled = true;
-        } else {
-            this.isReasonsDeclinedListingDisabled = false;
-            this.finalTestingResults.reasonsDeclinePartnerListing = null;
-        }
-    }
+        if (optionSelected[0].itemName == 'No') {
+            this.encounter.TestedAs = null;
+            this.encounter.TestingStrategy = null;
 
-    onSecondProviderSelected(selectedOption: number) {
-        if (selectedOption == 1) {
-            this.isFinalResultDisabled = true;
-            this.isFinalResultGivenDisabled = true;
-            this.isCoupleDiscordantDisabled = true;
-            this.isAcceptedPartnerListingDisabled = true;
-            this.isReasonsDeclinedListingDisabled = true;
-            this.isDisabled = true;
-            this.testButton2 = false;
+            this.isClientTestedDisabled = true;
+            this.isStrategyDisabled = true;
         } else {
-            this.isFinalResultDisabled = false;
-            this.isFinalResultGivenDisabled = false;
-            this.isCoupleDiscordantDisabled = false;
-            this.isAcceptedPartnerListingDisabled = false;
-            this.isReasonsDeclinedListingDisabled = false;
-            this.isDisabled = false;
-            this.testButton2 = true;
+            this.isClientTestedDisabled = false;
+            this.isStrategyDisabled = false;
         }
     }
 }

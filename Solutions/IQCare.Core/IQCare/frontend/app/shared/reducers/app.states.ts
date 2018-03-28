@@ -5,7 +5,8 @@ export enum ClientActionTypes {
     TESTED = '[ClientState] Tested',
     CONSENT_PARTNER_LISTING = '[ClientState] ConsentPartnerListing',
     IS_POSITIVE = '[ClientState] IsPositive',
-    IS_REFERRED = '[ClientState] isReferred'
+    IS_REFERRED = '[ClientState] isReferred',
+    TESTED_AS = '[] testedAs'
 }
 
 export class ConsentTesting implements Action {
@@ -38,9 +39,16 @@ export class IsReferred implements Action {
     constructor(public payload: boolean) {}
 }
 
+export class TestedAs implements Action {
+    readonly type = ClientActionTypes.TESTED_AS;
+
+    constructor(public payload: boolean) {}
+}
+
 export type ClientActions
     = ConsentTesting
     | Tested
     | ConsentPartnerListing
     | IsPositive
-    | IsReferred;
+    | IsReferred
+    | TestedAs;

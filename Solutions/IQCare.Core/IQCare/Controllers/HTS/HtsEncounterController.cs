@@ -20,6 +20,39 @@ namespace IQCare.Controllers.HTS
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
+        [HttpPost("addTestResults")]
+        public async Task<IActionResult> Post([FromBody]AddTestingCommand addTestingCommand)
+        {
+            var consentList = new List<KeyValuePair<string, int>>();
+            //consentList.Add(new KeyValuePair<string, int>("ConsentToBeTested", addEncounterCommand.Encounter.Consent));
+            consentList.Add(new KeyValuePair<string, int>("ConsentToListPartners", addTestingCommand.FinalTestingResult.AcceptedPartnerListing));
+
+            var consent = await _mediator.Send(new AddConsentCommand()
+            {
+                PatientID = addTestingCommand.PatientId,
+                PatientMasterVisitId = addTestingCommand.PatientMasterVisitId,
+                ConsentDate = DateTime.Now,
+                ConsentType = consentList,
+                ServiceAreaId = addTestingCommand.ServiceAreaId,
+                DeclineReason = addTestingCommand.FinalTestingResult.ReasonsDeclinePartnerListing.ToString(),
+                UserId = addTestingCommand.ProviderId
+            }, Request.HttpContext.RequestAborted);
+
+            if (consent.IsValid)
+            {
+
+            }
+            else
+            {
+                return BadRequest(consent);
+            }
+
+            var response = await _mediator.Send(addTestingCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] AddEncounterCommand addEncounterCommand)
         {
@@ -43,7 +76,7 @@ namespace IQCare.Controllers.HTS
 
             var consentList = new List<KeyValuePair<string, int>>();
             consentList.Add(new KeyValuePair<string, int>("ConsentToBeTested", addEncounterCommand.Encounter.Consent));
-            consentList.Add(new KeyValuePair<string, int>("ConsentToListPartners", addEncounterCommand.FinalTestingResult.AcceptedPartnerListing));
+            //consentList.Add(new KeyValuePair<string, int>("ConsentToListPartners", addEncounterCommand.FinalTestingResult.AcceptedPartnerListing));
 
             var consent = await _mediator.Send(new AddConsentCommand()
             {
@@ -52,7 +85,7 @@ namespace IQCare.Controllers.HTS
                 ConsentDate = addEncounterCommand.Encounter.EncounterDate,
                 ConsentType = consentList,
                 ServiceAreaId = addEncounterCommand.Encounter.ServiceAreaId,
-                DeclineReason = addEncounterCommand.FinalTestingResult.ReasonsDeclinePartnerListing.ToString(),
+                //DeclineReason = addEncounterCommand.FinalTestingResult.ReasonsDeclinePartnerListing.ToString(),
                 UserId = addEncounterCommand.Encounter.ProviderId
             }, Request.HttpContext.RequestAborted);
 
@@ -66,8 +99,12 @@ namespace IQCare.Controllers.HTS
             }
 
             var response = await _mediator.Send(addEncounterCommand, Request.HttpContext.RequestAborted);
-            if(response.IsValid)
+            if (response.IsValid)
+            {
+                response.Value.PatientMasterVisitId = encounter.Value.PatientMasterVisitId;
                 return Ok(response.Value);
+            }
+                
             return BadRequest(response);
         }
 

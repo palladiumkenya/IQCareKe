@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import {PartnerView, Pnsform} from '../_models/pnsform';
 import {PnsService} from '../_services/pns.service';
 import {ClientService} from '../../shared/_services/client.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-pnsform',
@@ -21,7 +22,10 @@ export class PnsformComponent implements OnInit {
 
     serviceAreaId: number = 2;
 
-    constructor(private pnsService: PnsService) { }
+    constructor(private pnsService: PnsService,
+                private router: Router,
+                private route: ActivatedRoute,
+                public zone: NgZone) { }
 
     ngOnInit() {
         this.pnsForm = new Pnsform();
@@ -107,7 +111,7 @@ export class PnsformComponent implements OnInit {
         }
 
         this.pnsService.addPnsScreening(this.pnsForm, arr).subscribe(data => {
-
+            this.zone.run(() => { this.router.navigate(['/hts/pns'], {relativeTo: this.route }); });
         });
     }
 }

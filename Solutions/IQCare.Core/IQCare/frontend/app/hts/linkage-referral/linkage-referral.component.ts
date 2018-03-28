@@ -3,6 +3,8 @@ import {Referral} from '../_models/referral';
 import {LinkageReferralService} from '../_services/linkage-referral.service';
 import {Tracing} from '../_models/tracing';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Store} from '@ngrx/store';
+import * as Consent from '../../shared/reducers/app.states';
 declare var $: any;
 
 @Component({
@@ -20,7 +22,8 @@ export class LinkageReferralComponent implements OnInit {
     constructor(private _linkageReferralService: LinkageReferralService,
                 private router: Router,
                 private route: ActivatedRoute,
-                public zone: NgZone) {
+                public zone: NgZone,
+                private store: Store<AppState>) {
 
     }
 
@@ -113,6 +116,7 @@ export class LinkageReferralComponent implements OnInit {
         this.referral.toFacility = 13050;
 
         this._linkageReferralService.addReferralTracing(this.referral, this.tracingArray).subscribe(data => {
+            this.store.dispatch(new Consent.IsReferred(true));
             this.zone.run(() => { this.router.navigate(['/registration/home'], { relativeTo: this.route }); });
         }, err => {
             console.log(err);

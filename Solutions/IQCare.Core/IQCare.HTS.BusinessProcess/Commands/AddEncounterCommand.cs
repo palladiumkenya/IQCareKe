@@ -10,12 +10,6 @@ namespace IQCare.HTS.BusinessProcess.Commands
     {
         // Encounter
         public Encounter Encounter { get; set; }
-
-        // Testing
-        public List<Testing> Testing { get; set; }
-
-        // HtsEncounter Result
-        public FinalTestingResult FinalTestingResult { get; set; }
     }
 
     public class Encounter
@@ -27,8 +21,8 @@ namespace IQCare.HTS.BusinessProcess.Commands
         public int EverTested { get; set; }
         public int? MonthsSinceLastTest { get; set; }
         public int? MonthSinceSelfTest { get; set; }
-        public int TestedAs { get; set; }
-        public int TestingStrategy { get; set; }
+        public int? TestedAs { get; set; }
+        public int? TestingStrategy { get; set; }
         public string EncounterRemarks { get; set; }
         public int TestEntryPoint { get; set; }
         public int Consent { get; set; }
@@ -42,31 +36,10 @@ namespace IQCare.HTS.BusinessProcess.Commands
         public DateTime EncounterDate { get; set; }
     }
 
-
-    public class Testing
-    {
-        public int KitId { get; set; }
-        public string KitLotNumber { get; set; }
-        public DateTime ExpiryDate { get; set; }
-        public int Outcome { get; set; }
-        public int TestRound { get; set; }
-    }
-
-    public class FinalTestingResult
-    {
-        public int FinalResultHiv1 { get; set; }
-        public int? FinalResultHiv2 { get; set; }
-        public int FinalResult { get; set; }
-        public int FinalResultGiven { get; set; }
-        public int CoupleDiscordant { get; set; }
-        public string FinalResultsRemarks { get; set; }
-        public int AcceptedPartnerListing { get; set; }
-        public int? ReasonsDeclinePartnerListing { get; set; }
-    }
-
     public class AddEncounterResponse
     {
         public int HtsEncounterId { get; set; }
+        public int PatientMasterVisitId { get; set; }
     }
 }
 

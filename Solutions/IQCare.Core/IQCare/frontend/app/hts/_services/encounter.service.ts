@@ -20,6 +20,7 @@ export class EncounterService {
     private API_URL = environment.API_URL;
     private _url = '/api/HtsEncounter';
     private _lookupurl = '/api/lookup';
+    private lookup = '/api/Lookup/getCustomOptions';
 
     constructor(private http: HttpClient) { }
 
@@ -27,6 +28,40 @@ export class EncounterService {
         return this.http.get<any[]>(this.API_URL + this._url + '/' + patientId ).pipe(
             tap(getEncounters => this.log('fetched all client encounters')),
             catchError(this.handleError<any[]>('getEncounters', []), )
+        );
+    }
+
+    public getCustomOptions(): Observable<any[]> {
+        const options = JSON.stringify(['HIVTestKits', 'HIVResults', 'HIVFinalResults', 'YesNo', 'ReasonsPartner']);
+
+        return this.http.post<any[]>(this.API_URL + this.lookup, options, httpOptions).pipe(
+            tap(getCustomOptions => this.log('fetched all custom options')),
+            catchError(this.handleError<any[]>('getCustomOptions'))
+        );
+    }
+
+    public addTesting(finalTestingResults: FinalTestingResults, hivResults1: any[], hivResults2: any[],
+                      htsEncounterId: number, providerId: number, patientId: number,
+                      patientMasterVisitId: number, serviceAreaId: number): Observable<any> {
+        const finalResultsBody = finalTestingResults;
+        const hivResultsBody = hivResults1;
+        if ( hivResults2.length > 0 ) {
+            hivResultsBody.push.apply(hivResults2);
+        }
+
+        const Indata = {
+            'Testing': hivResultsBody,
+            'FinalTestingResult': finalResultsBody,
+            'HtsEncounterId': htsEncounterId,
+            'ProviderId': providerId,
+            'PatientId': patientId,
+            'PatientMasterVisitId': patientMasterVisitId,
+            'ServiceAreaId': serviceAreaId
+        };
+
+        return this.http.post<any>(this.API_URL + this._url + '/addTestResults', JSON.stringify(Indata), httpOptions).pipe(
+            tap((addTesting: any) => this.log(`added Testing`)),
+            catchError(this.handleError<any>('addTesting'))
         );
     }
 
@@ -45,19 +80,18 @@ export class EncounterService {
         );
     }
 
-    public addEncounter(encounter: Encounter, finalTestingResults: FinalTestingResults,
-                        hivResults1: any[], hivResults2: any[]): Observable<Encounter> {
+    public addEncounter(encounter: Encounter): Observable<Encounter> {
         const encounterBody = encounter;
-        const finalResultsBody = finalTestingResults;
+        /* const finalResultsBody = finalTestingResults;
         const hivResultsBody = hivResults1;
         if ( hivResults2.length > 0 ) {
             hivResultsBody.push.apply(hivResults2);
-        }
+        } */
 
         const Indata = {
             'Encounter': encounterBody,
-            'Testing': hivResultsBody,
-            'FinalTestingResult': finalResultsBody
+            // 'Testing': hivResultsBody,
+            // 'FinalTestingResult': finalResultsBody
         };
 
         return this.http.post(this.API_URL + this._url, JSON.stringify(Indata), httpOptions).pipe(

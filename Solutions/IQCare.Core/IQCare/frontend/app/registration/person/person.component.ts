@@ -5,7 +5,7 @@ import {Contact} from '../_models/contacts';
 import {PersonPopulation} from '../_models/personPopulation';
 import {RegistrationService} from '../_services/registration.service';
 import {Router, ActivatedRoute} from '@angular/router';
-import moment = require('moment');
+import * as moment from 'moment';
 import {AlertService} from '../../shared/_services/alert.service';
 import 'rxjs/add/operator/mergeMap';
 import {Promise} from 'q';
@@ -137,7 +137,7 @@ export class PersonComponent implements OnInit {
     }
 
     onSubmitForm() {
-        if (this.isPartner !=null && this.isPartner == 'true') {
+        if (this.isPartner != null && this.isPartner == 'true') {
             this.person.isPartner = true;
             this.person.patientId = JSON.parse(localStorage.getItem('patientId'));
         } else {

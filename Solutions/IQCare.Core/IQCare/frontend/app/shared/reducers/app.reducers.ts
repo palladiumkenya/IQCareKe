@@ -13,6 +13,8 @@ export function consentReducer(state: {} = {}, action: ClientActions) {
             return {...state, consentPartnerListing: action.payload}
         case ClientActionTypes.IS_REFERRED:
             return {...state, isReferred: action.payload}
+        case ClientActionTypes.TESTED_AS:
+            return {...state, testedAs: action.payload}
         default:
             return state;
     }

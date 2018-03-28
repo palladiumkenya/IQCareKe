@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import {PnstracingService} from '../_services/pnstracing.service';
 import {PnsTracing} from '../_models/pnstracing';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-pnstracing',
@@ -13,7 +14,10 @@ export class PnsTracingComponent implements OnInit {
     tracingModeOptions: any[];
     pnsTracingOutcome: any[];
 
-    constructor(private pnsTracingService: PnstracingService) { }
+    constructor(private pnsTracingService: PnstracingService,
+                private router: Router,
+                private route: ActivatedRoute,
+                public zone: NgZone) { }
 
     ngOnInit() {
         this.pnsTracing = new PnsTracing();
@@ -48,6 +52,7 @@ export class PnsTracingComponent implements OnInit {
 
         this.pnsTracingService.addPnsTracing(this.pnsTracing).subscribe(data => {
             console.log(data);
+            this.zone.run(() => { this.router.navigate(['/hts/pns'], {relativeTo: this.route }); });
         }, err => {
             console.log(err);
         });

@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
 
     getClientEncounters(patientId: number) {
         this.encounterService.getEncounters(patientId).subscribe(data => {
-            console.log(data);
+            // console.log(data);
             for (let i = 0; i < data.length; i++) {
                 if (data[i]['finalResult'] == 'Positive') {
                     this.countPositive += 1;

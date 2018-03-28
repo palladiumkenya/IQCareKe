@@ -10,14 +10,12 @@ import { AlertComponent } from './alert/alert.component';
 import {PnstracingService} from '../hts/_services/pnstracing.service';
 import { PersonbriefComponent } from './personbrief/personbrief.component';
 import {MatCardModule} from '@angular/material';
-import {consentReducer} from './reducers/app.reducers';
 
 @NgModule({
     imports: [
         CommonModule,
         SharedRoutingModule,
-        MatCardModule,
-        StoreModule.forRoot({ app: consentReducer })
+        MatCardModule
     ],
     declarations: [
         LeftnavComponent,
