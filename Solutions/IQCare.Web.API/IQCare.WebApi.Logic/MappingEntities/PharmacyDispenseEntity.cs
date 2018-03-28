@@ -4,9 +4,9 @@ using System;
 
 namespace IQCare.WebApi.Logic.MappingEntities
 {
-    public class DrugDispenseEntity
+    public class PharmacyDispenseEntity
     {
-        public DrugDispenseEntity()
+        public PharmacyDispenseEntity()
         {
             MESSAGE_HEADER = new MESSAGEHEADER();
             PATIENT_IDENTIFICATION = new PATIENTIDENTIFICATION();

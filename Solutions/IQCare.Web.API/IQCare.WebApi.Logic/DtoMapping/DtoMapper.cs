@@ -214,7 +214,7 @@ namespace IQCare.WebApi.Logic.DtoMapping
             throw new NotImplementedException();
         }
 
-        public DtoDrugDispensed DrugOrderFulfilment(DrugDispenseEntity entity)
+        public DtoDrugDispensed DrugOrderFulfilment(PharmacyDispenseEntity entity)
         {
             var internalIdentifiers = new List<DTOIdentifier>();
             var pharmacyEncodedOrder=new List<PharmacyEncodededOrderDispenseDto>();
