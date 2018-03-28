@@ -7,6 +7,9 @@ import {RegistrationService} from '../_services/registration.service';
 import {Router, ActivatedRoute} from '@angular/router';
 import moment = require('moment');
 import {AlertService} from '../../shared/_services/alert.service';
+import 'rxjs/add/operator/mergeMap';
+import {Promise} from 'q';
+import {forkJoin} from 'rxjs/observable/forkJoin';
 
 declare var $: any;
 
@@ -20,6 +23,8 @@ export class PersonComponent implements OnInit {
     contact: Contact;
     personPopulation: PersonPopulation;
     registrationVariables: RegistrationVariables;
+    isPartner: string;
+    userId: number = 1;
 
     maritalStatuses: any[];
     keyPops: any[];
@@ -43,6 +48,7 @@ export class PersonComponent implements OnInit {
         this.personPopulation = new PersonPopulation();
         this.registrationVariables = new RegistrationVariables();
 
+        this.isPartner = localStorage.getItem('isPartner');
         const self = this;
 
         setTimeout(() => {
@@ -131,15 +137,48 @@ export class PersonComponent implements OnInit {
     }
 
     onSubmitForm() {
-        this.registrationService.registerClient(this.person, this.contact,
-            this.personPopulation).subscribe(data => {
-            // console.log(data);
+        if (this.isPartner !=null && this.isPartner == 'true') {
+            this.person.isPartner = true;
+            this.person.patientId = JSON.parse(localStorage.getItem('patientId'));
+        } else {
+            this.person.isPartner = false;
+        }
 
-            localStorage.setItem('personId', data['personId']);
-            localStorage.setItem('patientId', data['patientId']);
+        this.registrationService.registerClient(this.person).subscribe(data => {
+            const personRelation = new Object();
+            personRelation['PersonId'] = data['personId'];
+            personRelation['PatientId'] = JSON.parse(localStorage.getItem('patientId'));
+            personRelation['RelationshipTypeId'] = this.person.partnerRelationship;
+            personRelation['UserId'] = 1; // JSON.parse(localStorage.getItem('userId'));
 
-            // this.alertService.success('success', true);
-            this.zone.run(() => { this.router.navigate(['/registration/enrollment'], { relativeTo: this.route }); });
+            const patientAdd = !this.person.isPartner ? this.registrationService.addPatient(data['personId'],
+                this.person.DateOfBirth) :  this.registrationService.addPersonRelationship(personRelation);
+
+            const personCont =  this.registrationService.addPersonContact(data['personId'],
+                null, this.contact.PhoneNumber,
+                null, null, this.userId);
+
+
+            const matStatus = this.registrationService.addPersonMaritalStatus(data['personId'],
+                this.person.MaritalStatus, this.userId);
+
+            forkJoin([patientAdd, personCont, matStatus]).subscribe(results => {
+                if (this.person.isPartner == false) {
+                    localStorage.setItem('patientId', results[0]['patientId']);
+                    localStorage.setItem('personId', data['personId']);
+                } else {
+                    localStorage.setItem('partnerId', data['personId']);
+                }
+            }, () => {
+                console.log('error');
+            }, () => {
+                if (this.person.isPartner == true) {
+                    this.zone.run(() => { this.router.navigate(['/hts/pns'], { relativeTo: this.route}); });
+                } else {
+                    this.zone.run(() => { this.router.navigate(['/registration/enrollment'], { relativeTo: this.route }); });
+                }
+            });
+
         }, err => {
             console.log(err);
             this.alertService.error('error', true);

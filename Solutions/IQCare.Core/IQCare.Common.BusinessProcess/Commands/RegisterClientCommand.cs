@@ -12,10 +12,10 @@ namespace IQCare.Common.BusinessProcess.Commands
         public Client Person { get; set; }
 
         //Contact
-        public Contact Contact { get; set; }
+        //public Contact Contact { get; set; }
 
-        //PersonPopulation
-        public PersonPopulation PersonPopulation { get; set; }
+        ////PersonPopulation
+        //public PersonPopulation PersonPopulation { get; set; }
     }
 
     public class Client
@@ -26,6 +26,8 @@ namespace IQCare.Common.BusinessProcess.Commands
         public DateTime DateOfBirth { get; set; }
         public int MaritalStatus { get; set; }
         public int Sex { get; set; }
+        public bool IsPartner { get; set; }
+        public int? PatientId { get; set; }
     }
 
     public class Contact

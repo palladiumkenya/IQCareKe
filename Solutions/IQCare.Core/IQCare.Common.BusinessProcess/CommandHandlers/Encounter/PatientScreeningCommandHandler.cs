@@ -23,26 +23,39 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Encounter
             {
                 using (_unitOfWork)
                 {
+                    HtsScreeningOptions htsScreeningOptions = new HtsScreeningOptions()
+                    {
+                        PersonId = request.PersonId,
+                        Occupation = request.Occupation,
+                        ScreeningDate = request.ScreeningDate,
+                        BookingDate = request.BookingDate
+                    };
+
+                    await _unitOfWork.Repository<HtsScreeningOptions>().AddAsync(htsScreeningOptions);
+                    await _unitOfWork.SaveAsync();
+
                     List<PatientScreening> screenings = new List<PatientScreening>();
                     request.Screening.ForEach(t => screenings.Add(new PatientScreening
                     {
-                        PatientId = t.PatientId,
-                        PatientMasterVisitId = t.PatientMasterVisitId,
+                        PatientId = request.PatientId,
+                        PatientMasterVisitId = request.PatientMasterVisitId,
                         ScreeningTypeId = t.ScreeningTypeId,
                         ScreeningDone = true,
-                        ScreeningDate = t.ScreeningDate,
+                        ScreeningDate = request.ScreeningDate,
                         ScreeningCategoryId = t.ScreeningCategoryId,
                         ScreeningValueId = t.ScreeningValueId,
                         Comment = null,
                         Active = true,
                         DeleteFlag = false,
-                        CreatedBy = t.UserId,
+                        CreatedBy = request.UserId,
                         CreateDate = DateTime.Now,
-                        VisitDate = t.ScreeningDate
+                        VisitDate = request.ScreeningDate
                     }));
 
                     await _unitOfWork.Repository<PatientScreening>().AddRangeAsync(screenings);
                     await _unitOfWork.SaveAsync();
+
+                    _unitOfWork.Dispose();
 
                     return Result<PatientScreeningResponse>.Valid(new PatientScreeningResponse()
                     {

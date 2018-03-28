@@ -24,7 +24,11 @@ export class SearchComponent implements OnInit {
         this.search = new Search();
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+        localStorage.removeItem('personId');
+        localStorage.removeItem('patientId');
+        localStorage.removeItem('partnerId');
+    }
 
     onSubmit() {
         this.dataSource = new SearchDataSource(this.searchService, this.search);

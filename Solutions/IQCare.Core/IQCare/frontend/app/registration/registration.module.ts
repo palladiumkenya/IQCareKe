@@ -72,7 +72,7 @@ import {EncounterService} from '../hts/_services/encounter.service';
         MatTableModule,
         MatTabsModule,
         MatToolbarModule,
-        MatTooltipModule,
+        MatTooltipModule
     ],
     declarations: [
         PersonComponent,

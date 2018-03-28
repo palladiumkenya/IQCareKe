@@ -16,6 +16,7 @@ const httpOptions = {
 export class PnsService {
     private API_URL = environment.API_URL;
     private url = '/api/Register';
+    private pns = '/api/HtsEncounter/pnsScreening';
     private lookup = '/api/Lookup/getCustomOptions';
 
     constructor(private http: HttpClient) { }
@@ -23,8 +24,6 @@ export class PnsService {
     public getClientPartners(patientId: number): Observable<any[]> {
         const relationshipTypes = JSON.stringify(['Co-Wife', 'Partner', 'Spouse']);
 
-        console.log(this.API_URL + this.url + '/getPartners/?patientId='
-            + patientId);
         return this.http.post<any[]>(this.API_URL + this.url + '/getPartners/?patientId='
             + patientId, relationshipTypes, httpOptions).pipe(
             tap(getClientPartners => this.log('fetched all partners')),
@@ -50,14 +49,19 @@ export class PnsService {
         );
     }
 
-    public addPnsScreening(pnsScreening: Pnsform): Observable<any> {
-        const screening: any[] = [];
-
+    public addPnsScreening(pnsForm: Pnsform, pnsScreening: any[]): Observable<any> {
         const Indata = {
-            'Screening': screening,
+            'Screening': pnsScreening,
+            'ScreeningDate': pnsForm.screeningDate,
+            'Occupation': pnsForm.occupation,
+            'BookingDate': pnsForm.bookingDate,
+            'PatientId': pnsForm.patientId,
+            'PersonId': pnsForm.personId,
+            'PatientMasterVisitId': pnsForm.patientMasterVisitId,
+            'UserId': pnsForm.userId
         };
 
-        return this.http.post<any>(this.API_URL + this.url, JSON.stringify(Indata), httpOptions).pipe(
+        return this.http.post<any>(this.API_URL + this.pns, JSON.stringify(Indata), httpOptions).pipe(
             tap(addedPnsScreening => this.log('add pns screening')),
             catchError(this.handleError<any[]>('addPnsScreening'))
         );

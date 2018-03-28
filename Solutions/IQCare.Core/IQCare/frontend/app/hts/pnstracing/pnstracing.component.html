@@ -1,62 +1,99 @@
 <div class="ibox">
+    <div class="ibox-title">
+        <app-clientbrief></app-clientbrief>
+    </div>
     <div class="ibox-content">
-        <form id="form" action="#" class="wizard-big">
-            <fieldset>
-                <h2>Contact Tracing and Outcomes</h2>
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label>Tracing Date</label>
-                            <input type="date" id="pnsTracingDate" class="form-control">
-                        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <app-leftnav></app-leftnav>
+            </div>
+            <div class="col-md-10 animated fadeInRight">
+                <div class="panel panel-default">
+                    <div class="panel-heading">PNS TRACING</div>
+                    <div class="panel-body">
+                        <app-personbrief></app-personbrief>
+                        <br>
+                        <form id="form" action="#" class="wizard-big" (ngSubmit)="onSubmit()" #pnsTracingForm="ngForm">
+                            <fieldset>
+                                <h2>Contact Tracing and Outcomes</h2>
+                                <div class="example-container">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <div>
+                                                    <mat-form-field>
+                                                        <input matInput [matDatepicker]="myDatepicker" placeholder="Tracing Date" tabindex="1" (click)="myDatepicker.open()" id="pnsTracingDate" name="pnsTracingDate" [(ngModel)]="pnsTracing.TracingDate" #tracingDate="ngModel">
+                                                        <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+                                                        <mat-datepicker #myDatepicker></mat-datepicker>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
 
-                        <div class="form-group">
-                            <label>Tracing Outcome</label>
-                            <select class="form-control m-b" id="tracingOutcome" name="tracingOutcome">
-                                <option></option>
-                                <option>Contacted</option>
-                                <option>Not Contacted</option>
-                            </select>
-                        </div>
+                                            <div class="form-group">
+                                                <div>
+                                                    <mat-form-field>
+                                                        <mat-select name="tracingOutcome" id="tracingOutcome" placeholder="Tracing Outcome" [(ngModel)]="pnsTracing.TracingOutcome" #tracingOutcome="ngModel">
+                                                            <mat-option></mat-option>
+                                                            <mat-option *ngFor="let option of pnsTracingOutcome" [value]="option.itemId">{{option.itemName}}</mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
 
-                        <div class="form-group">
-                            <label>Date Booked for Testing</label>
-                            <input type="date" id="pnsBookingDate" class="form-control">
-                        </div>
-                    </div>
+                                            <div class="form-group">
+                                                <div>
+                                                    <mat-form-field>
+                                                        <input matInput [matDatepicker]="pnsBookingDatepicker" placeholder="Date Booked for Testing" (click)="pnsBookingDatepicker.open()" id="pnsBookingDate" name="pnsBookingDate" [(ngModel)]="pnsTracing.DateBookedTesting" #dateBookedTesting="ngModel">
+                                                        <mat-datepicker-toggle matSuffix [for]="pnsBookingDatepicker"></mat-datepicker-toggle>
+                                                        <mat-datepicker #pnsBookingDatepicker></mat-datepicker>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
 
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label>Tracing Mode</label>
-                            <select id="tracingMode" name="tracingMode" class="form-control m-b">
-                                <option></option>
-                                <option>Physical</option>
-                                <option>Phone</option>
-                            </select>
-                        </div>
+                                        </div>
 
-                        <div class="form-group">
-                            <label>Consent for Testing</label>
-                            <select id="consent" name="consent" class="form-control m-b">
-                                <option></option>
-                                <option>Yes</option>
-                                <option>No</option>
-                            </select>
-                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <div>
+                                                    <mat-form-field>
+                                                        <mat-select name="tracingMode" id="tracingMode" placeholder="Tracing Mode" [(ngModel)]="pnsTracing.TracingMode" #tracingMode="ngModel">
+                                                            <mat-option></mat-option>
+                                                            <mat-option *ngFor="let option of tracingModeOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div>
+                                                    <mat-form-field>
+                                                        <mat-select name="consent" id="consent" tabindex="2" placeholder="Consent for Testing" [(ngModel)]="pnsTracing.Consent" #consentTesting="ngModel">
+                                                            <mat-option></mat-option>
+                                                            <mat-option *ngFor="let option of yesNoOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group pull-right">
+                                            <button mat-raised-button color="primary">
+                                                <strong>Save Changes</strong>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </fieldset>
+                        </form>
                     </div>
                 </div>
-
-                <div class="row">
-                    <div class="col-lg-3">
-                        <div class="form-group">
-                            <button class="btn btn-primary m-t-n-xs" value="submit">
-                                <strong>Save Changes</strong>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-            </fieldset>
-        </form>
+            </div>
+        </div>
     </div>
 </div>

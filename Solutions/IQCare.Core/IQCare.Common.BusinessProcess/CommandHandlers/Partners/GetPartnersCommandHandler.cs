@@ -23,18 +23,19 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Partners
         {
             try
             {
-                string str = string.Join(",",request.RelationshipTypes.Select(i => "'" + i + "'"));
+                using (_unitOfWork)
+                {
+                    string str = string.Join(",", request.RelationshipTypes.Select(i => "'" + i + "'"));
 
-                StringBuilder sql = new StringBuilder();
-                sql.Append("exec pr_OpenDecryptedSession; ");
-                sql.Append($"SELECT [RowID],[PersonId],[PatientId],[FirstName],[MidName],[LastName],[DateOfBirth],[Sex],[Gender],[RelationshipTypeId],[RelationshipType] FROM HTS_PartnersView WHERE [PatientId] = {request.PatientId} AND RelationshipType IN ({ str });");
-                sql.Append("exec [dbo].[pr_CloseDecryptedSession];");
+                    StringBuilder sql = new StringBuilder();
+                    sql.Append("exec pr_OpenDecryptedSession; ");
+                    sql.Append($"SELECT [RowID],[PersonId],[PatientId],[FirstName],[MidName],[LastName],[DateOfBirth],[Sex],[Gender],[RelationshipTypeId],[RelationshipType] FROM HTS_PartnersView WHERE [PatientId] = {request.PatientId} AND RelationshipType IN ({ str });");
+                    sql.Append("exec [dbo].[pr_CloseDecryptedSession];");
 
-                var results = await _unitOfWork.Repository<PartnersView>().FromSql(sql.ToString());
+                    var results = await _unitOfWork.Repository<PartnersView>().FromSql(sql.ToString());
 
-                _unitOfWork.Dispose();
-
-                return Result<List<PartnersView>>.Valid(results);
+                    return Result<List<PartnersView>>.Valid(results);
+                }
             }
             catch (Exception e)
             {

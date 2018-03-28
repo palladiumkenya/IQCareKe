@@ -5,6 +5,9 @@ export class Person {
     DateOfBirth: string;
     MaritalStatus: number;
     Sex: number = 0;
+    isPartner: boolean;
+    partnerRelationship: number;
+    patientId: any;
 }
 
 export class RegistrationVariables {

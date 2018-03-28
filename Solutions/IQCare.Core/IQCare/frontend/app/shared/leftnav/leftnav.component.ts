@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {DataService} from '../_services/data.service';
+import { Store, select } from '@ngrx/store';
+import {Observable} from 'rxjs/Observable';
+import * as Consent from '../reducers/app.states';
 
 @Component({
   selector: 'app-leftnav',
@@ -7,16 +9,33 @@ import {DataService} from '../_services/data.service';
   styleUrls: ['./leftnav.component.css']
 })
 export class LeftnavComponent implements OnInit {
-    hasConsented: boolean;
+    consent: boolean;
     isPositive: boolean;
     isReferred: boolean;
     hasConsentedPartnerListing: boolean;
 
-    constructor(private dataService: DataService) { }
+    constructor(private store: Store<AppState>) {
+        // this.store.dispatch(new Consent.ConsentTesting(true));
+        store.pipe(select('app')).subscribe(res => {
+            this.consent = res['consent'];
+        });
+
+        store.pipe(select('app' )).subscribe(res => {
+            this.isPositive = res['isPositive'];
+        });
+
+        store.pipe(select('app')).subscribe(res => {
+            this.hasConsentedPartnerListing = res['consentPartnerListing'];
+        });
+
+        store.pipe(select('app')).subscribe(res => {
+            this.isReferred = res['isReferred'];
+        });
+
+        store.pipe(select('app')).subscribe(res => {
+            console.log( 'isPositive', res);
+        });
+    }
     ngOnInit() {
-        this.dataService.currentHasConsented.subscribe(hasConsented => this.hasConsented = hasConsented);
-        this.dataService.currentIsPositive.subscribe(isPositive => this.isPositive = isPositive);
-        this.dataService.currentHasConsentedPartnerListing.subscribe(hasConsentedPartnerListing =>
-            this.hasConsentedPartnerListing = hasConsentedPartnerListing);
     }
 }

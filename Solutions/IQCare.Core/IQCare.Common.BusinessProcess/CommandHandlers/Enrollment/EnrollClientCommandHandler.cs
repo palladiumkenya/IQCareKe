@@ -33,8 +33,6 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Enrollment
                         End = null,
                         Active = false,
                         VisitDate = DateTime.Now,
-                        //VisitScheduled = 0,
-                        //VisitBy = 108,
                         VisitType = visitType,
                         Status = 1,
                         CreateDate = DateTime.Now,

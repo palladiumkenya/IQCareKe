@@ -83,7 +83,7 @@ import {DataService} from '../shared/_services/data.service';
       MatTableModule,
       MatTabsModule,
       MatToolbarModule,
-      MatTooltipModule,
+      MatTooltipModule
   ],
   declarations: [
     EncounterComponent,

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Pnsform} from '../_models/pnsform';
+import {PartnerView, Pnsform} from '../_models/pnsform';
 import {PnsService} from '../_services/pns.service';
+import {ClientService} from '../../shared/_services/client.service';
 
 @Component({
   selector: 'app-pnsform',
@@ -18,10 +19,13 @@ export class PnsformComponent implements OnInit {
     pnsApproachOptions: any[];
     pnsScreeningCategories: any[];
 
+    serviceAreaId: number = 2;
+
     constructor(private pnsService: PnsService) { }
 
     ngOnInit() {
         this.pnsForm = new Pnsform();
+        this.serviceAreaId = 2; // JSON.parse(localStorage.getItem('serviceAreaId'));
 
         this.getPnsOptions();
         this.getScreeningCategories();
@@ -69,17 +73,13 @@ export class PnsformComponent implements OnInit {
     public onSubmit() {
         this.pnsForm.personId = JSON.parse(localStorage.getItem('partnerId'));
         this.pnsForm.patientId = JSON.parse(localStorage.getItem('patientId'));
-        this.pnsForm.patientMasterVisitId = JSON.parse(localStorage.getItem('patientId'));
+        this.pnsForm.patientMasterVisitId = JSON.parse(localStorage.getItem('patientMasterVisitId'));
 
         const arr = new Array();
 
         for (let i = 0; i < this.pnsScreeningCategories.length; i++) {
             const pnsScreening = new Object();
-            pnsScreening['patientId'] = this.pnsForm.patientId;
-            pnsScreening['personId'] = this.pnsForm.personId;
-            pnsScreening['patientMasterVisitId'] = this.pnsForm.patientMasterVisitId;
             pnsScreening['screeningTypeId'] = this.pnsScreeningCategories[i]['masterId'];
-            pnsScreening['screeningDate'] = this.pnsForm.screeningDate;
             pnsScreening['screeningCategoryId'] = this.pnsScreeningCategories[i]['itemId'];
 
             if (this.pnsScreeningCategories[i]['itemName'] == 'PnsPhysicallyHurt') {
@@ -98,10 +98,16 @@ export class PnsformComponent implements OnInit {
                 pnsScreening['screeningValueId'] = this.pnsForm.hivStatus;
             } else if (this.pnsScreeningCategories[i]['itemName'] == 'PNSApproach') {
                 pnsScreening['screeningValueId'] = this.pnsForm.pnsApproach;
+            } else if (this.pnsScreeningCategories[i]['itemName'] == 'EligibleTesting') {
+                pnsScreening['screeningValueId'] = this.pnsForm.eligibleTesting;
             }
 
             pnsScreening['userId'] = this.pnsForm.userId;
             arr.push(pnsScreening);
         }
+
+        this.pnsService.addPnsScreening(this.pnsForm, arr).subscribe(data => {
+
+        });
     }
 }
