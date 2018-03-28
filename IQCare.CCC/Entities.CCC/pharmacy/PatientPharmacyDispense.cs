@@ -1,12 +1,14 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Entities.CCC.Encounter
+namespace Entities.CCC.pharmacy
 {
     [Serializable]
-        [Table("dtl_PatientPharmacyOrder")]
+    [Table("dtl_PatientPharmacyOrder")]
     public  class PatientPharmacyDispense
     {
+        [Key]
         public int Id { get; set; }
         public int ptn_pharmacy_pk { get; set; }
         public int Drug_Pk { get; set; }

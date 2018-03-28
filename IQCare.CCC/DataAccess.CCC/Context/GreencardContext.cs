@@ -16,6 +16,7 @@ using Interface.CCC.Encounter;
 using Entities.CCC.Lookup;
 using Entities.CCC.Assessment;
 using Entities.CCC.Interoperability;
+using Entities.CCC.pharmacy;
 
 namespace DataAccess.CCC.Context
 {
@@ -132,5 +133,9 @@ namespace DataAccess.CCC.Context
         //Interop
         public DbSet<InteropPlacerType> InteropPlacerTypes { get; set; }
         public DbSet<InteropPlacerValues> InteropPlacerValues { get; set; }
+
+        //Pharmacy
+        public DbSet<PatientPharmacyDispense> PatientPharmacyDispenses { get; set; }
+        public DbSet<PharmacyOrder> PharmacyOrders { get; set; }
     }
 }

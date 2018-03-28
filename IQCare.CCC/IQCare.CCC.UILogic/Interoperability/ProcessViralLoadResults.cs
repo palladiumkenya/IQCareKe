@@ -30,7 +30,6 @@ namespace IQCare.CCC.UILogic.Interoperability
                     if (patient != null)
                     {
                         
-                        //todo brian check
                         labOrder = labOrderManager.GetPatientLabOrdersByDate((int) patient.ptn_pk,results.FirstOrDefault().DateSampleCollected);
 
                         if (labOrder.Count == 0)
