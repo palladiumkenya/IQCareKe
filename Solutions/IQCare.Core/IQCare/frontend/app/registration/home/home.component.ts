@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {EncounterService} from '../../hts/_services/encounter.service';
 import {Observable} from 'rxjs/Observable';
 import {DataSource} from '@angular/cdk/collections';
-import {DataService} from '../../shared/_services/data.service';
+import * as Consent from '../../shared/reducers/app.states';
+import {Store} from '@ngrx/store';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +19,7 @@ export class HomeComponent implements OnInit {
     dataSource = new EncountersDataSource(this.encounterService, this.patientId);
 
     constructor(private encounterService: EncounterService,
-                private dataService: DataService) { }
+                private store: Store<AppState>) { }
     ngOnInit() {
         this.patientId = JSON.parse(localStorage.getItem('patientId'));
         this.dataSource = new EncountersDataSource(this.encounterService, this.patientId);
@@ -33,11 +34,11 @@ export class HomeComponent implements OnInit {
                 if (data[i]['finalResult'] == 'Positive') {
                     this.countPositive += 1;
                     this.isPositive = true;
-                    this.dataService.updateIsPositive(true);
+                    this.store.dispatch(new Consent.IsPositive(true));
                 }
 
                 if (data[i]['partnerListingConsent'] == 'Yes') {
-                    this.dataService.updateHasConsentedPartnerListing(true);
+                    this.store.dispatch(new Consent.ConsentPartnerListing(true));
                 }
             }
         }, err => {

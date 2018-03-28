@@ -45,12 +45,20 @@ export class PnsPartnersComponent implements OnInit {
     }
 
     screenClient(row) {
-        console.log(row);
-
         localStorage.setItem('partnerId', row['personId']);
         this.zone.run(() => { this.router.navigate(['/hts/pnsform'], { relativeTo: this.route }); });
     }
 
+    traceClient(row) {
+        localStorage.setItem('partnerId', row['personId']);
+        this.zone.run(() => { this.router.navigate(['/hts/pnstracing'], { relativeTo: this.route }); });
+    }
+
+    newPartner() {
+
+        localStorage.setItem('isPartner', 'true');
+        this.zone.run(() => { this.router.navigate(['/registration/register'], {relativeTo: this.route}); });
+    }
 }
 
 export class PnsDataSource extends DataSource<any> {

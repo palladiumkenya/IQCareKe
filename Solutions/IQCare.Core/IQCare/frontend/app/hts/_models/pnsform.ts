@@ -19,3 +19,9 @@ export class Pnsform {
     eligibleTesting: number;
     bookingDate: string;
 }
+
+export class PartnerView {
+    fullName: string;
+    DateOfBirth: string;
+    Gender: string
+}

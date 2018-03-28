@@ -3,9 +3,11 @@ using IQCare.Common.BusinessProcess.Commands.ClientLookup;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 using IQCare.Common.BusinessProcess.Commands.Enrollment;
 using IQCare.Common.BusinessProcess.Commands.Partners;
+using IQCare.Common.BusinessProcess.Commands.PersonCommand;
 
 namespace IQCare.Controllers.Registration
 {
@@ -28,6 +30,33 @@ namespace IQCare.Controllers.Registration
             {
                 return Ok(response.Value);
             }
+            return BadRequest(response);
+        }
+
+        [HttpPost("addPatient")]
+        public async Task<IActionResult> Post([FromBody] AddPatientCommand addPatientCommand)
+        {
+            var response = await _mediator.Send(addPatientCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+        [HttpPost("addPersonContact")]
+        public async Task<IActionResult> Post([FromBody] AddPersonContactCommand addPersonContactCommand)
+        {
+            var response = await _mediator.Send(addPersonContactCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+        [HttpPost("addPersonMaritalStatus")]
+        public async Task<IActionResult> Post([FromBody] AddPersonMaritalStatusCommand addPersonMaritalStatusCommand)
+        {
+            var response = await _mediator.Send(addPersonMaritalStatusCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
             return BadRequest(response);
         }
 
@@ -65,10 +94,29 @@ namespace IQCare.Controllers.Registration
             return BadRequest(response);
         }
 
+        [HttpGet("getPerson/{personId}")]
+        public async Task<IActionResult> Get(int personId)
+        {
+            var response = await _mediator.Send(new GetPartnerCommand() {PersonId = personId});
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
         [HttpPost("getPartners")]
         public async Task<IActionResult> GetPartners([FromBody]string[] relationshipTypes, int patientId)
         {
             var response = await _mediator.Send(new GetPartnersCommand { PatientId = patientId, RelationshipTypes = relationshipTypes}, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+        [HttpPost("addPersonRelationship")]
+        public async Task<IActionResult> AddPersonRelationship(
+            [FromBody] AddPersonRelationshipCommand addPersonRelationshipCommand)
+        {
+            var response = await _mediator.Send(addPersonRelationshipCommand, Request.HttpContext.RequestAborted);
             if (response.IsValid)
                 return Ok(response.Value);
             return BadRequest(response);

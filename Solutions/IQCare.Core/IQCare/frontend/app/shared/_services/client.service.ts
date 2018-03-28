@@ -17,6 +17,13 @@ export class ClientService {
 
     constructor(private http: HttpClient) { }
 
+    public getPersonDetails(personId: number): Observable<any> {
+        return this.http.get<any>(this.API_URL + this._url + '/getPerson/' + personId).pipe(
+            tap(personDetails => this.log('fetched person details')),
+            catchError(this.handleError<any[]>('getPersonDetails'))
+        );
+    }
+
     public getClientDetails(patientId: number, serviceAreaId): Observable<any[]> {
         return this.http.get<any[]>(this.API_URL + this._url + '/?patientId=' + patientId + '&serviceAreaId=' + serviceAreaId).pipe(
             tap(clientDetails => this.log('fetched all client details')),

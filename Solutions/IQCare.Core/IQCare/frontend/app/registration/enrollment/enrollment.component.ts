@@ -21,6 +21,8 @@ export class EnrollmentComponent implements OnInit {
                 public zone: NgZone) { }
     ngOnInit() {
         localStorage.setItem('createdBy', JSON.stringify(1));
+        console.log(localStorage.getItem('patientId'));
+        console.log(localStorage.getItem('personId'));
         this.patientId = JSON.parse(localStorage.getItem('patientId'));
         this.personId = JSON.parse(localStorage.getItem('personId'));
         this.createdBy = JSON.parse(localStorage.getItem('createdBy'));

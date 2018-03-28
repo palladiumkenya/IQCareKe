@@ -134,6 +134,18 @@
                                         </select>
                                     </div>
                                 </div>
+
+                                <div class="col-lg-3">
+                                    <div class="form-group" *ngIf="isPartner == 'true'">
+                                        <label>Relation to Index [xxx xxxx]</label>
+                                        <select class="form-control m-b" name="relationToIndex" id="relationToIndex" [(ngModel)]="person.partnerRelationship" #partnerRelationship="ngModel">
+                                            <option value="251">Partner</option>
+                                            <option value="1442">Cowife</option>
+                                            <option value="247">Spouse</option>
+                                        </select>
+                                    </div>
+                                </div>
+
                             </div>
                         </fieldset>
                     </div>

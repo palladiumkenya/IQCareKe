@@ -11,21 +11,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">PNS FORM</div>
                     <div class="panel-body">
-                        <mat-card>
-                            <div class="row">
-                                <div class="col-lg-3">
-                                    Name: Mark Otiende
-                                </div>
-
-                                <div class="col-lg-3">
-                                    Date Of Birth: 12-Jan-1990
-                                </div>
-
-                                <div class="col-lg-3">
-                                    Gender: Male
-                                </div>
-                            </div>
-                        </mat-card>
+                        <app-personbrief></app-personbrief>
                         <br>
                         <form id="form" action="#" class="wizard-big" (ngSubmit)="onSubmit()" #pnsScreeingForm="ngForm">
                             <fieldset>

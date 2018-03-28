@@ -14,7 +14,10 @@ If Not Exists(Select 1 From LookupMaster where Name='IpvOutcome') Begin INSERT I
 If Not Exists(Select 1 From LookupMaster where Name='YesNoDeclined') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('YesNoDeclined','YesNoDeclined',0); End
 If Not Exists(Select 1 From LookupMaster where Name='PNSRelationship') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PNSRelationship','PNSRelationship',0); End
 If Not Exists(Select 1 From LookupMaster where Name='HivStatus') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('HivStatus','HivStatus',0); End
+
 If Not Exists(Select 1 From LookupMaster where Name='PnsApproach') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PnsApproach','PnsApproach',0); End
+If Not Exists(Select 1 From LookupMaster where Name='PnsScreening') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PnsScreening','PnsScreening',0); End
+If Not Exists(Select 1 From LookupMaster where Name='PnsTracingOutcome') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PnsTracingOutcome','PnsTracingOutcome',0); End
 
 --Set look up items
 If Not Exists(Select 1 From LookupItem where Name='Maternity') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Maternity','Maternity',0); End
@@ -77,6 +80,19 @@ If Not Exists(Select 1 From LookupItem where Name='Pr: Provider Referral') Begin
 
 If Not Exists(Select 1 From LookupItem where Name='ConsentToBeTested') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('ConsentToBeTested','ConsentToBeTested',0); End
 If Not Exists(Select 1 From LookupItem where Name='ConsentToListPartners') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('ConsentToListPartners','ConsentToListPartners',0); End
+
+
+If Not Exists(Select 1 From LookupItem where Name='PnsPhysicallyHurt') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('PnsPhysicallyHurt','PnsPhysicallyHurt',0); End
+If Not Exists(Select 1 From LookupItem where Name='PnsThreatenedHurt') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('PnsThreatenedHurt','PnsThreatenedHurt',0); End
+If Not Exists(Select 1 From LookupItem where Name='PnsForcedSexual') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('PnsForcedSexual','PnsForcedSexual',0); End
+If Not Exists(Select 1 From LookupItem where Name='IPVOutcome') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('IPVOutcome','IPVOutcome',0); End
+If Not Exists(Select 1 From LookupItem where Name='PnsRelationship') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('PnsRelationship','PnsRelationship',0); End
+If Not Exists(Select 1 From LookupItem where Name='LivingWithClient') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('LivingWithClient','LivingWithClient',0); End
+If Not Exists(Select 1 From LookupItem where Name='HIVStatus') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('HIVStatus','HIVStatus',0); End
+If Not Exists(Select 1 From LookupItem where Name='PNSApproach') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('PNSApproach','PNSApproach',0); End
+If Not Exists(Select 1 From LookupItem where Name='EligibleTesting') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('EligibleTesting','EligibleTesting',0); End
+
+
 
 --Set Lookup items for hts entry points
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Maternity',1 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Maternity'  ) ItemId FROM LookupMaster  WHERE Name='HTSEntryPoints') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
@@ -178,3 +194,18 @@ Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) 
 
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'ConsentToBeTested',3 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='ConsentToBeTested') ItemId FROM LookupMaster  WHERE Name='ConsentType') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'ConsentToListPartners',4 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='ConsentToListPartners') ItemId FROM LookupMaster  WHERE Name='ConsentType') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+
+
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'PnsPhysicallyHurt',1 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='PnsPhysicallyHurt') ItemId FROM LookupMaster  WHERE Name='PnsScreening') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'PnsThreatenedHurt',2 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='PnsThreatenedHurt') ItemId FROM LookupMaster  WHERE Name='PnsScreening') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'PnsForcedSexual',3 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='PnsForcedSexual') ItemId FROM LookupMaster  WHERE Name='PnsScreening') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'IPVOutcome',4 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='IPVOutcome') ItemId FROM LookupMaster  WHERE Name='PnsScreening') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'PnsRelationship',5 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='PnsRelationship') ItemId FROM LookupMaster  WHERE Name='PnsScreening') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'LivingWithClient',6 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='LivingWithClient') ItemId FROM LookupMaster  WHERE Name='PnsScreening') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'HIVStatus',7 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='HIVStatus') ItemId FROM LookupMaster  WHERE Name='PnsScreening') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'PNSApproach',8 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='PNSApproach') ItemId FROM LookupMaster  WHERE Name='PnsScreening') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'EligibleTesting',9 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='EligibleTesting') ItemId FROM LookupMaster  WHERE Name='PnsScreening') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+
+
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Contacted',1 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Contacted') ItemId FROM LookupMaster  WHERE Name='PnsTracingOutcome') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Not Contacted',2 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Not Contacted') ItemId FROM LookupMaster  WHERE Name='PnsTracingOutcome') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;

@@ -72,9 +72,18 @@ namespace IQCare.Controllers.HTS
         }
 
         [HttpPost("pnsScreening")]
-        public async Task<IActionResult> Post([FromBody] AddPnsScreeningCommand addPnsScreeningCommand)
+        public async Task<IActionResult> Post([FromBody] PatientScreeningCommand addPnsScreeningCommand)
         {
             var response = await _mediator.Send(addPnsScreeningCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+        [HttpPost("pnsTracing")]
+        public async Task<IActionResult> Post([FromBody]AddPnsTracingCommand addPnsTracingCommand)
+        {
+            var response = await _mediator.Send(addPnsTracingCommand, Request.HttpContext.RequestAborted);
             if (response.IsValid)
                 return Ok(response.Value);
             return BadRequest(response);

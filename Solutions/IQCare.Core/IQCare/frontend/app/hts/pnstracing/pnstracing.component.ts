@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {PnstracingService} from '../_services/pnstracing.service';
+import {PnsTracing} from '../_models/pnstracing';
 
 @Component({
   selector: 'app-pnstracing',
@@ -6,10 +8,48 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pnstracing.component.css']
 })
 export class PnsTracingComponent implements OnInit {
+    pnsTracing: PnsTracing;
+    yesNoOptions: any[];
+    tracingModeOptions: any[];
+    pnsTracingOutcome: any[];
 
-  constructor() { }
+    constructor(private pnsTracingService: PnstracingService) { }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+        this.pnsTracing = new PnsTracing();
+        this.yesNoOptions = [];
+        this.tracingModeOptions = [];
+        this.pnsTracingOutcome = [];
 
+        this.getTracingOptions();
+    }
+
+    public getTracingOptions() {
+        this.pnsTracingService.getTracingOptions().subscribe(data => {
+            console.log(data);
+            const options = data['lookupItems'];
+            for (let i = 0; i < options.length; i++) {
+                if (options[i].key == 'YesNo') {
+                    this.yesNoOptions = options[i].value;
+                } else if (options[i].key == 'TracingMode') {
+                    this.tracingModeOptions = options[i].value;
+                } else if (options[i].key == 'PnsTracingOutcome') {
+                    this.pnsTracingOutcome = options[i].value;
+                }
+            }
+        });
+    }
+
+    onSubmit() {
+        this.pnsTracing.PersonId = JSON.parse(localStorage.getItem('partnerId'));
+        this.pnsTracing.UserId = 1; // JSON.parse(localStorage.getItem('partnerId'));
+
+        console.log(this.pnsTracing);
+
+        this.pnsTracingService.addPnsTracing(this.pnsTracing).subscribe(data => {
+            console.log(data);
+        }, err => {
+            console.log(err);
+        });
+    }
 }

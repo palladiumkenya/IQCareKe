@@ -57,7 +57,7 @@
                                 </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <button mat-raised-button [style.background]="'#4db6ac'" (click)="screenClient(row)">Screen</button>
-                                    <button mat-raised-button [style.background]="'#616161'">Trace</button>
+                                    <button mat-raised-button [style.background]="'#616161'" (click)="traceClient(row)">Trace</button>
                                 </mat-cell>
                             </ng-container>
 
@@ -75,7 +75,7 @@
                     </div>
 
                     <div class="button-row pull-right">
-                        <button mat-fab><i class="fa fa-plus"></i></button>
+                        <button mat-fab (click)="newPartner()"><i class="fa fa-plus"></i></button>
                     </div>
                 </div>
             </div>
