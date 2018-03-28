@@ -119,6 +119,8 @@
     <Compile Include="Interface\Lookup\ITestingSummaryStatisticsRepository.cs" />
     <Compile Include="Interface\Patient\IBluecardAppointmentRepository.cs" />
     <Compile Include="Interface\Patient\IPatientCategorizationRepository.cs" />
+    <Compile Include="Interface\Pharmacy\IPatientPharmacyDispenseRepository.cs" />
+    <Compile Include="Interface\Pharmacy\IPharmacyOrderRepository.cs" />
     <Compile Include="Interface\Screening\IPatientScreeningRepository.cs" />
     <Compile Include="Interface\Lookup\ILookupCounty.cs" />
     <Compile Include="Interface\Lookup\ILookupFacility.cs" />
@@ -238,6 +240,8 @@
     <Compile Include="Interface\IUnitOfWork.cs" />
     <Compile Include="Context\GreencardContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\Pharmacy\PatientPharmacyDispenseRepository.cs" />
+    <Compile Include="Repository\Pharmacy\PharmacyOrderRepository.cs" />
     <Compile Include="Repository\Screening\PatientScreeningRepository.cs" />
     <Compile Include="Repository\Triage\PatientAdverseEventOutcomeRepository.cs" />
     <Compile Include="Repository\Triage\PatientFamilyPlanningMethodRepsotory.cs" />

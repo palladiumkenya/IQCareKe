@@ -1,4 +1,6 @@
-﻿using DataAccess.CCC.Context;
+﻿using System.Collections.Generic;
+using System.Linq;
+using DataAccess.CCC.Context;
 using DataAccess.CCC.Interface.Pharmacy;
 using DataAccess.Context;
 using Entities.CCC.pharmacy;
@@ -16,6 +18,13 @@ namespace DataAccess.CCC.Repository.Pharmacy
         public PatientPharmacyDispenseRepository(GreencardContext context) : base(context)
         {
             _context = context;
+        }
+
+        public List<PatientPharmacyDispense> GetByPharmacyOrder(int pharmacyOrderId)
+        {
+            IPatientPharmacyDispenseRepository patientPharmacyDispenseRepository = new PatientPharmacyDispenseRepository();
+            List<PatientPharmacyDispense> pharmacyDispenses = patientPharmacyDispenseRepository.FindBy(p => p.ptn_pharmacy_pk == pharmacyOrderId).ToList();
+            return pharmacyDispenses;
         }
     }
 }

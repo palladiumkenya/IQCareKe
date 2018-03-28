@@ -138,6 +138,8 @@
     <Compile Include="PatientMaritalStatusManager.cs" />
     <Compile Include="PatientOvcStatusManager.cs" />
     <Compile Include="Patient\BPatient.cs" />
+    <Compile Include="Pharmacy\BPatientPharmacyDispense.cs" />
+    <Compile Include="Pharmacy\BPharmacyOrder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Screening\BPatientScreeningManager.cs" />
     <Compile Include="Triage\BPatientAdverseEventOutcome.cs" />
