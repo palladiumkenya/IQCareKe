@@ -96,7 +96,18 @@ namespace BusinessProcess.CCC
                 unitOfWork.Dispose();
                 return vital;
             }
-      
+        }
+
+        public PatientVital GetByPatientVisitId(int patientVisitId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                PatientVital vital = unitOfWork.PatientVitalsRepository.FindBy(x => x.PatientMasterVisitId == patientVisitId & !x.DeleteFlag)
+                                            .OrderByDescending(x => x.Id)
+                                            .FirstOrDefault();
+                unitOfWork.Dispose();
+                return vital;
+            }
         }
 
         public List<PatientVital> GetCurrentPatientVital(int patientId)

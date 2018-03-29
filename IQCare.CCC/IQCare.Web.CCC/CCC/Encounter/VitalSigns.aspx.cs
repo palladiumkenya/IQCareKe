@@ -16,7 +16,7 @@ namespace IQCare.Web.CCC.Encounter
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            //ptnFemaleVitals.
         }
     }
 }

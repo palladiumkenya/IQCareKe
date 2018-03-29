@@ -16,5 +16,6 @@ namespace Interface.CCC.Patient
         List<PatientEntity> CheckPersonEnrolled(int persionId);
         int GetPatientType(int patientId);
         List<PatientRegistrationLookup> GetPatientIdByPersonId(int personId);
+        void UpdatePatientType(int PatientId, int PatientType);
     }
 }

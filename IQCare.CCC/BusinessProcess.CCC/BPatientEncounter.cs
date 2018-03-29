@@ -416,10 +416,22 @@ namespace BusinessProcess.CCC
                 if (theDS.Tables[10].Rows.Count > 0)
                 {
                     pce.SputumSmear = theDS.Tables[10].Rows[0]["SputumSmear"].ToString();
+                    pce.geneXpert = theDS.Tables[10].Rows[0]["GeneXpert"].ToString();
                     pce.ChestXray = theDS.Tables[10].Rows[0]["ChestXRay"].ToString();
                     pce.startAntiTB = theDS.Tables[10].Rows[0]["StartAntiTb"].ToString();
                     pce.InvitationOfContacts = theDS.Tables[10].Rows[0]["InvitationOfContacts"].ToString();
                     pce.EvaluatedForIPT = theDS.Tables[10].Rows[0]["EvaluatedForIPT"].ToString();
+                }
+
+                if (theDS.Tables[13].Rows.Count > 0)
+                {
+                    pce.YellowColouredUrine = theDS.Tables[13].Rows[0]["YellowColouredUrine"].ToString();
+                    pce.Numbness = theDS.Tables[13].Rows[0]["Numbness"].ToString();
+                    pce.YellownessOfEyes = theDS.Tables[13].Rows[0]["YellownessOfEyes"].ToString();
+                    pce.AdominalTenderness = theDS.Tables[13].Rows[0]["AbdominalTenderness"].ToString();
+                    pce.LiverFunctionTests = theDS.Tables[13].Rows[0]["LiverFunctionTests"].ToString();
+                    pce.startIPT = theDS.Tables[13].Rows[0]["startIPT"].ToString();
+                    pce.IPTStartDate = theDS.Tables[13].Rows[0]["StartIPTDate"].ToString();
                 }
 
                 if (theDS.Tables[14].Rows.Count > 0)

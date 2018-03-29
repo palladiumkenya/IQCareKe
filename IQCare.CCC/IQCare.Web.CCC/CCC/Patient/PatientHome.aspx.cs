@@ -259,12 +259,19 @@ namespace IQCare.Web.CCC.Patient
                     var ptnTreatmentBaseline = patientTreatmentManager.GetPatientbaselineRegimenLookup(PatientId);
                     if (ptnTreatmentInitiation != null)
                     {
-                        if (ptnTreatmentBaseline.DispensedByDate.HasValue)
+                        if (ptnTreatmentBaseline != null)
                         {
-                            DateTime DispensedByDate = (DateTime)ptnTreatmentBaseline.DispensedByDate;
+                            if (ptnTreatmentBaseline.DispensedByDate.HasValue)
+                            {
+                                DateTime DispensedByDate = (DateTime)ptnTreatmentBaseline.DispensedByDate;
 
-                            lblFirstline.Text = DispensedByDate.ToString("dd-MMM-yyyy");
-                            lblcohort.Text = DispensedByDate.ToString("MMM") + "-" + DispensedByDate.Year;
+                                lblFirstline.Text = DispensedByDate.ToString("dd-MMM-yyyy");
+                                lblcohort.Text = DispensedByDate.ToString("MMM") + "-" + DispensedByDate.Year;
+                            }
+
+                            lblRegimenName.Text = ptnTreatmentInitiation.Regimen.ToString();
+                            //lblCurrentRegimen.Text = "<span class='label label-success'>" + ptnTreatmentBaseline.Regimen.ToString() + "</span>";
+                            lblARTInitiationDate.Text = ptnTreatmentBaseline.CreateDate.ToString("dd-MMM-yyyy");
                         }
 
                         lblRegimenName.Text = ptnTreatmentInitiation.Regimen.ToString();

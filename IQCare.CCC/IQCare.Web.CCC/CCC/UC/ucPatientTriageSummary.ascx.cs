@@ -30,10 +30,22 @@ namespace IQCare.Web.CCC.UC
             decimal systolic = 0;
             string bmiAnalysis = "";
             string bpAnalysis = "";
-
             var patientVitals = new PatientVitalsManager();
+            PatientVital patientTriage;
+
+            if (Request.QueryString["visitId"] != null)
+            {
+                Session["ExistingRecordPatientMasterVisitID"] = Request.QueryString["visitId"].ToString();
+                patientTriage = patientVitals.GetByPatientVisitId(Convert.ToInt32(Session["ExistingRecordPatientMasterVisitID"]));
+            }
+            else
+            {
+                Session["ExistingRecordPatientMasterVisitID"] = "0";
+                patientTriage = patientVitals.GetByPatientId(PatientId);
+            }
+
             PatientLookupManager pMgr = new PatientLookupManager();
-            PatientVital patientTriage = patientVitals.GetByPatientId(PatientId);
+            //PatientVital patientTriage = patientVitals.GetByPatientId(PatientId);
             PatientLookup thisPatient = pMgr.GetPatientDetailSummary(PatientId);
             int age = Convert.ToInt32(HttpContext.Current.Session["Age"]);
             DateTime DoB = Convert.ToDateTime(thisPatient.DateOfBirth);

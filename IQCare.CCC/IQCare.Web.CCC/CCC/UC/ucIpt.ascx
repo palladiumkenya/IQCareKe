@@ -9,7 +9,7 @@
                 <div class="col-md-12">
                     <div class="datepicker fuelux form-group" id="DueDate">
                         <div class="input-group">
-                            <asp:TextBox ID="iptDuedate" runat="server" class="form-control input-sm" data-parsley-required="true"></asp:TextBox>
+                            <asp:TextBox ID="iptDuedate" runat="server" class="form-control input-sm" data-parsley-required="true" ClientIDMode="Static"></asp:TextBox>
                             <%--<input class="form-control input-sm" id="VisitDate" type="text" runat="server" data-parsley-required="true" />--%>
                             <div class="input-group-btn">
                                 <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
