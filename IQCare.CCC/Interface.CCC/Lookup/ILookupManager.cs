@@ -26,6 +26,7 @@ namespace Interface.CCC.Lookup
         List<LookupPreviousLabs> GetLookupPendingLabs(int patientId);
         List<LookupTestParameter> GetTestParameter(int labTestId);
         LookupFacility GetFacility();
+        LookupFacility GetFacility(string mflCode);
         PatientLookup GetPatientById(int patientId);
         LookupItemView GetPatientGender(int genderId);
         string GetLookupNameFromId(int id);

@@ -166,7 +166,7 @@ namespace IQCare.WebApi.Logic.MessageHandler
                     cfg.CreateMap<DTO.MESSAGE_HEADER, MappingEntities.MESSAGEHEADER>().ReverseMap();
                     cfg.CreateMap<DTO.PATIENT_IDENTIFICATION, MappingEntities.PATIENTIDENTIFICATION>().ReverseMap();
                     cfg.CreateMap<DTO.COMMON_ORDER_DETAILS, MappingEntities.CommonOrderDetailsDispenseEntity>().ReverseMap();
-                    cfg.CreateMap<DTO.PharmacyDispensedDrugs, MappingEntities.PHARMACY_ENCODED_ORDER_DISPENSE>().ReverseMap();
+                    cfg.CreateMap<DTO.PHARMACY_DISPENSE, MappingEntities.PHARMACY_ENCODED_ORDER_DISPENSE>().ReverseMap();
                 });
                 var drugDispensed = Mapper.Map<DtoDrugDispensed>(pharmacyDispenseEntity);
                 var processPharmacyDispense = new ProcessPharmacyDispense();
@@ -177,6 +177,9 @@ namespace IQCare.WebApi.Logic.MessageHandler
                 incomingMessage.Processed = true;
                 _apiInboxmanager.EditApiInbox(incomingMessage);
 
+                incomingMessage.DateProcessed = DateTime.Now;
+                incomingMessage.Processed = true;
+                _apiInboxmanager.EditApiInbox(incomingMessage);
             }
             catch(Exception e)
             {
@@ -245,6 +248,7 @@ namespace IQCare.WebApi.Logic.MessageHandler
                 ViralLoadResultsDto vlResultsDto = _dtoMapper.ViralLoadResults(entity);
                 var processViralLoadResults = new ProcessViralLoadResults();
                 var msg = processViralLoadResults.Save(vlResultsDto);
+               // var msg = "could not be processed";
 
                 incomingMessage.LogMessage = msg;
                 //update message that it has been processed

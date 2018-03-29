@@ -8,6 +8,19 @@ using Entities.CCC.Lookup;
 
 namespace DataAccess.CCC.Repository.Lookup
 {
+    public class LookupItemRepository:BaseRepository<LookupItem>, ILookupItemRepository
+    {
+        private readonly LookupContext _context;
+
+        public LookupItemRepository() : this(new LookupContext())
+        {
+        }
+
+        public LookupItemRepository(LookupContext context) : base(context)
+        {
+            _context = context;
+        }
+    }
     public class LookupRepository :BaseRepository<LookupItemView>,ILookupRepository
     {
         private readonly LookupContext _context;

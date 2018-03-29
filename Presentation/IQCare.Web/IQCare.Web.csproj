@@ -3047,7 +3047,6 @@
     <Content Include="MasterPage\IQCare.master" />
     <Content Include="Incl\jquery-1.9.1.min.map" />
     <Content Include="MasterPage\Module.Master" />
-    <Content Include="log4net.log" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />

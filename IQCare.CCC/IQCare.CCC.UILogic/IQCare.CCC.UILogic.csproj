@@ -119,6 +119,7 @@
     <Compile Include="Interoperability\DrugPrescriptionMessage.cs" />
     <Compile Include="Interoperability\Appointment\PatientAppointmentMessageManager.cs" />
     <Compile Include="Interoperability\DTOValidator\IValidateDTO.cs" />
+    <Compile Include="Interoperability\DTOValidator\ValidateRDS013.cs" />
     <Compile Include="Interoperability\Enrollment\PatientMessageManager.cs" />
     <Compile Include="Interoperability\Enrollment\ProcessPatient.cs" />
     <Compile Include="Interoperability\Appointment\ProcessPatientAppointmentMessage.cs" />

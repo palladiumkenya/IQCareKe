@@ -17,5 +17,5 @@ BEGIN
 END
 GO
 
-EXEC sp_RENAME 'patientencounter.createby' , 'createdby', 'COLUMN'
+EXEC sp_RENAME 'dbo.patientencounter.createby' , 'createdby', 'COLUMN'
 Go
