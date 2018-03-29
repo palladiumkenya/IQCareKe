@@ -312,74 +312,75 @@ namespace IQCare.Web.CCC.Patient
                         lblbaselineVL.Text = "<span class='label label-danger'>Not Taken</span>";
                         lblBlDate.Text = "<span class='label label-danger'>N/A</span>";
                     }
-
-                    switch (lastVL.Results.ToLower().Trim())
+                    if (lastVL.Results != null)
                     {
+                        switch (lastVL.Results.ToLower().Trim())
+                        {
 
-                        case "pending":
-                            var pendingDueDate = Convert.ToDateTime(lastVL.SampleDate);
-                            DateTime sampleDate = Convert.ToDateTime(lastVL.SampleDate.ToString());
+                            case "pending":
+                                var pendingDueDate = Convert.ToDateTime(lastVL.SampleDate);
+                                DateTime sampleDate = Convert.ToDateTime(lastVL.SampleDate.ToString());
 
-                            if ((DateTime.Today.Subtract(sampleDate).Days > 30))
-                            {
-                                lblVL.Text = "<span class='label label-danger' > Overdue | Ordered On: " + ((DateTime)lastVL.SampleDate).ToString("dd-MMM-yyyy") + "</span>";
-                                lblvlDueDate.Text = "<span class='label label-success'> " + pendingDueDate.AddMonths(6).ToString("dd-MMM-yyy") + " </span>";
-                            }
-                            else if ((lastVL.Results == "Pending") && (DateTime.Today.Subtract(sampleDate).Days < 30))
-                            {
-                                lblVL.Text = "<span class='label label-warning'> Pending | Ordered On: " + ((DateTime)lastVL.SampleDate).ToString("dd-MMM-yyyy") + "</span>";
-                                lblvlDueDate.Text = "<span class='label label-success'> " + pendingDueDate.AddMonths(6).ToString("dd-MMM-yyy") + " </span>";
-                            }
-                            else
-                            {
+                                if ((DateTime.Today.Subtract(sampleDate).Days > 30))
+                                {
+                                    lblVL.Text = "<span class='label label-danger' > Overdue | Ordered On: " + ((DateTime)lastVL.SampleDate).ToString("dd-MMM-yyyy") + "</span>";
+                                    lblvlDueDate.Text = "<span class='label label-success'> " + pendingDueDate.AddMonths(6).ToString("dd-MMM-yyy") + " </span>";
+                                }
+                                else if ((lastVL.Results == "Pending") && (DateTime.Today.Subtract(sampleDate).Days < 30))
+                                {
+                                    lblVL.Text = "<span class='label label-warning'> Pending | Ordered On: " + ((DateTime)lastVL.SampleDate).ToString("dd-MMM-yyyy") + "</span>";
+                                    lblvlDueDate.Text = "<span class='label label-success'> " + pendingDueDate.AddMonths(6).ToString("dd-MMM-yyy") + " </span>";
+                                }
+                                else
+                                {
 
-                                lblVL.Text = "<span class='label label-warning'>" + lastVL.Results + "| Date: " + ((DateTime)lastVL.SampleDate).ToString("dd-MMM-yyyy") + "</span>";
-                                lblbaselineVL.Text = "<span class='label label-warning'>" + lastVL.Results + "| Date: " + ((DateTime)lastVL.SampleDate).ToString("dd-MMM-yyyy") + "</span>";
-                            }
-                            break;
+                                    lblVL.Text = "<span class='label label-warning'>" + lastVL.Results + "| Date: " + ((DateTime)lastVL.SampleDate).ToString("dd-MMM-yyyy") + "</span>";
+                                    lblbaselineVL.Text = "<span class='label label-warning'>" + lastVL.Results + "| Date: " + ((DateTime)lastVL.SampleDate).ToString("dd-MMM-yyyy") + "</span>";
+                                }
+                                break;
 
-                        case "complete":
-                        case "completed":
-                            if (lastVL.ResultValues >= 1000)
-                            {
-                                lblVL.Text = "<span class='label label-danger'>" + lastVL.ResultValues + " copies/ml ("+ Convert.ToDateTime(lastVL.SampleDate).ToString("dd-MMM-yyyy") + ")</span>";
-                                lblvlDueDate.Text = "<span class='label label-success' > " + ((DateTime)lastVL.SampleDate).AddMonths(3).ToString("dd-MMM-yyyy") + "</span>";
-                            }
-                            else if (lastVL.ResultValues <= 50)
-                            {
+                            case "complete":
+                            case "completed":
+                                if (lastVL.ResultValues >= 1000)
+                                {
+                                    lblVL.Text = "<span class='label label-danger'>" + lastVL.ResultValues + " copies/ml (" + Convert.ToDateTime(lastVL.SampleDate).ToString("dd-MMM-yyyy") + ")</span>";
+                                    lblvlDueDate.Text = "<span class='label label-success' > " + ((DateTime)lastVL.SampleDate).AddMonths(3).ToString("dd-MMM-yyyy") + "</span>";
+                                }
+                                else if (lastVL.ResultValues <= 50)
+                                {
 
-                                lblVL.Text = "<span class='label label-success'> Undetectable VL (" + Convert.ToDateTime(lastVL.SampleDate).ToString("dd-MMM-yyyy") + ")</span>";
-                                lblvlDueDate.Text = "<span class='label label-success' > " + ((DateTime)lastVL.SampleDate).AddMonths(12).ToString("dd-MMM-yyyy") + "</span>";
+                                    lblVL.Text = "<span class='label label-success'> Undetectable VL (" + Convert.ToDateTime(lastVL.SampleDate).ToString("dd-MMM-yyyy") + ")</span>";
+                                    lblvlDueDate.Text = "<span class='label label-success' > " + ((DateTime)lastVL.SampleDate).AddMonths(12).ToString("dd-MMM-yyyy") + "</span>";
 
-                            }
-                            else
-                            {
-                                lblVL.Text = "<span class='label label-success' > Complete | Results : " + lastVL.ResultValues + " copies/ml</span>";
-                                lblvlDueDate.Text = "<span class='label label-success' > " + ((DateTime)lastVL.SampleDate).AddMonths(12).ToString("dd-MMM-yyyy") + "</span>";
+                                }
+                                else
+                                {
+                                    lblVL.Text = "<span class='label label-success' > Complete | Results : " + lastVL.ResultValues + " copies/ml</span>";
+                                    lblvlDueDate.Text = "<span class='label label-success' > " + ((DateTime)lastVL.SampleDate).AddMonths(12).ToString("dd-MMM-yyyy") + "</span>";
 
-                            }
-                            break;
-                        default:
-                            var patientEnrollment = new PatientEnrollmentManager();
-                            var enrolDate = patientEnrollment.GetPatientEnrollmentDate(PatientId);
-                            DateTime today = DateTime.Today;
-                            TimeSpan difference = today.Date - enrolDate.Date;
-                            int days = (int)difference.TotalDays;
+                                }
+                                break;
+                            default:
+                                var patientEnrollment = new PatientEnrollmentManager();
+                                var enrolDate = patientEnrollment.GetPatientEnrollmentDate(PatientId);
+                                DateTime today = DateTime.Today;
+                                TimeSpan difference = today.Date - enrolDate.Date;
+                                int days = (int)difference.TotalDays;
 
-                            if (days < 180)
-                            {
-                                lblvlDueDate.Text = "<span class='label label-success'>" + enrolDate.AddMonths(6).ToString("dd-MMM-yyyy") + "</span>";
-                                lblVL.Text = "<span class='label label-success fa fa-exclamation'><strong>  VL Not Requested  </strong></span>";
+                                if (days < 180)
+                                {
+                                    lblvlDueDate.Text = "<span class='label label-success'>" + enrolDate.AddMonths(6).ToString("dd-MMM-yyyy") + "</span>";
+                                    lblVL.Text = "<span class='label label-success fa fa-exclamation'><strong>  VL Not Requested  </strong></span>";
 
-                            }
-                            else
-                            {
-                                lblVL.Text = "<span class='label label-danger'> Not Available </span>";
-                                lblvlDueDate.Text = "<span class='label label-danger'><strong> Overdue </strong></span>";
-                            }
-                            break;
+                                }
+                                else
+                                {
+                                    lblVL.Text = "<span class='label label-danger'> Not Available </span>";
+                                    lblvlDueDate.Text = "<span class='label label-danger'><strong> Overdue </strong></span>";
+                                }
+                                break;
+                        }
                     }
-
                     //}
                 }
                 else
