@@ -76,6 +76,9 @@
     <Reference Include="BusinessProcess.Pharmacy">
       <HintPath>..\..\References\BusinessProcess.Pharmacy.dll</HintPath>
     </Reference>
+    <Reference Include="BusinessProcess.PSmart">
+      <HintPath>..\..\References\BusinessProcess.PSmart.dll</HintPath>
+    </Reference>
     <Reference Include="BusinessProcess.Reports">
       <HintPath>..\..\References\BusinessProcess.Reports.dll</HintPath>
     </Reference>
@@ -124,6 +127,9 @@
     <Reference Include="Entities.CCC">
       <HintPath>..\..\References\Entities.CCC.dll</HintPath>
     </Reference>
+    <Reference Include="Entities.PSmart">
+      <HintPath>..\..\References\Entities.PSmart.dll</HintPath>
+    </Reference>
     <Reference Include="Entity.WebApi">
       <HintPath>..\..\References\net461\Entity.WebApi.dll</HintPath>
     </Reference>
@@ -162,6 +168,9 @@
     </Reference>
     <Reference Include="Interface.Pharmacy">
       <HintPath>..\..\References\Interface.Pharmacy.dll</HintPath>
+    </Reference>
+    <Reference Include="Interface.PSmart">
+      <HintPath>..\..\References\Interface.PSmart.dll</HintPath>
     </Reference>
     <Reference Include="Interface.Reports">
       <HintPath>..\..\References\Interface.Reports.dll</HintPath>

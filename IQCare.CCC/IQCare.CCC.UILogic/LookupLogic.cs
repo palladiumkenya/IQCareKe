@@ -413,7 +413,19 @@ namespace IQCare.CCC.UILogic
                 throw;
             }
         }
-
+        public LookupFacility GetFacility(string mflCode)
+        {
+            try
+            {
+                ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager,BusinessProcess.CCC");
+                return lookupManager.GetFacility(mflCode);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
         public static string GetCountyByCountyId(int countyId)
         {
             try
