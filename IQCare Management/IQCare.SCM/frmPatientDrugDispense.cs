@@ -1973,13 +1973,13 @@ namespace IQCare.SCM
             string thestringCurrency = theCurrDV[0]["Name"].ToString();
             return thestringCurrency.Substring(thestringCurrency.LastIndexOf("(") + 1, 3);
         }
- IBilling bMgr = (IBilling)ObjectFactory.CreateInstance("BusinessProcess.Billing.BBilling,BusinessProcess.Billing");
+ 
         private decimal GetPrice(int theItemId, int itemTypeId, DateTime? priceDate=null)
         {
             Price itemPrice = null;
             try
             {
-               
+               IBilling bMgr = (IBilling)ObjectFactory.CreateInstance("BusinessProcess.Billing.BBilling,BusinessProcess.Billing");
                 itemPrice = bMgr.GetItemPrice(theItemId, itemTypeId, priceDate);
                 theSellingPrice = Convert.ToDecimal(itemPrice.Amount);
                 this.priceBundled = itemPrice.IsBundled;
@@ -3661,7 +3661,7 @@ namespace IQCare.SCM
                 grdDrugDispense.Rows[grdDrugDispense.SelectedCells[0].RowIndex].Cells["BatchQty"].Value = quantity;
                 this.cmbGrdDrugDispense.Hide();
             }
-            catch(Exception ex) { }
+            catch { }
             
 
 
@@ -3700,7 +3700,7 @@ namespace IQCare.SCM
                 grdDrugDispense.Rows[grdDrugDispense.SelectedCells[0].RowIndex].Cells["FreqMultiplier"].Value = FrequencyMultiplier(Convert.ToInt32(cmbGrdDrugDispenseFreq.SelectedValue));
                 this.cmbGrdDrugDispenseFreq.Hide();
             }
-            catch(Exception ex)
+            catch
             { }
         }
 
