@@ -7,6 +7,6 @@ namespace Interface.Pharmacy
 {
     public interface IPharmacyDispense
     {
-        string DispensePrescription(int prescription, Dispense)
+       // string DispensePrescription(int prescription, Dispense)
     }
 }
