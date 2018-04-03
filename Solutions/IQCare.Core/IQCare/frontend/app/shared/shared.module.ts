@@ -1,6 +1,5 @@
-import { NgModule } from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StoreModule } from '@ngrx/store';
 
 import { SharedRoutingModule } from './shared-routing.module';
 import { LeftnavComponent } from './leftnav/leftnav.component';
@@ -9,7 +8,10 @@ import {ClientService} from './_services/client.service';
 import { AlertComponent } from './alert/alert.component';
 import {PnstracingService} from '../hts/_services/pnstracing.service';
 import { PersonbriefComponent } from './personbrief/personbrief.component';
-import {MatCardModule} from '@angular/material';
+import {DateAdapter, MAT_DATE_FORMATS, MatCardModule} from '@angular/material';
+import {APP_DATE_FORMATS, AppDateAdapter} from './dateadapter/momentDateAdapter';
+import {NotificationService} from './_services/notification.service';
+import {AppLoadService} from './_services/appload.service';
 
 @NgModule({
     imports: [
@@ -27,11 +29,19 @@ import {MatCardModule} from '@angular/material';
         LeftnavComponent,
         ClientbriefComponent,
         AlertComponent,
-        PersonbriefComponent,
+        PersonbriefComponent
     ],
     providers: [
         ClientService,
+        NotificationService,
         PnstracingService,
+        AppLoadService,
+        {
+            provide: DateAdapter, useClass: AppDateAdapter
+        },
+        {
+            provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS
+        }
     ]
 })
 export class SharedModule { }

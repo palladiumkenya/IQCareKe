@@ -5,6 +5,8 @@ import {DataSource} from '@angular/cdk/collections';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/from';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Store} from '@ngrx/store';
+import * as Consent from '../../shared/reducers/app.states';
 
 @Component({
   selector: 'app-search',
@@ -20,8 +22,11 @@ export class SearchComponent implements OnInit {
     constructor(private searchService: SearchService,
                 private router: Router,
                 private route: ActivatedRoute,
-                public zone: NgZone) {
+                public zone: NgZone,
+                private store: Store<AppState>) {
         this.search = new Search();
+
+        this.store.dispatch(new Consent.ClearState());
     }
 
     ngOnInit() {
@@ -30,6 +35,7 @@ export class SearchComponent implements OnInit {
         localStorage.removeItem('partnerId');
         localStorage.removeItem('htsEncounterId');
         localStorage.removeItem('patientMasterVisitId');
+        localStorage.removeItem('isPartner');
         localStorage.setItem('serviceAreaId', '2');
     }
 

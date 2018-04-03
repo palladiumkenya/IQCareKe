@@ -53,7 +53,7 @@ namespace IQCare
             //services.AddScoped<ILookupItemViewRepository, LookupItemViewRepository>();
 
             //Services
-            services.AddScoped<ILookupItemViewService, LookupItemViewService>();
+            //services.AddScoped<ILookupItemViewService, LookupItemViewService>();
             services.AddMvc()
                 .AddMvcOptions(o => o.OutputFormatters.Add(new XmlDataContractSerializerOutputFormatter()))
                 .AddJsonOptions(o =>

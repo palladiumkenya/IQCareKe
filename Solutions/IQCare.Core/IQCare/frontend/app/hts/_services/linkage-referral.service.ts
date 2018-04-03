@@ -4,9 +4,7 @@ import {environment} from '../../../environments/environment';
 import {Observable} from 'rxjs/Observable';
 import {catchError, tap} from 'rxjs/operators';
 import 'rxjs/add/observable/throw';
-import {of} from 'rxjs/observable/of';
 import {Referral} from '../_models/referral';
-import {Encounter} from '../_models/encounter';
 import {Tracing} from '../_models/tracing';
 import {Linkage} from '../_models/linkage';
 
@@ -22,6 +20,22 @@ export class LinkageReferralService {
 
     constructor(private http: HttpClient) { }
 
+    public getReferralReasons() {
+        const options = JSON.stringify(['ReferralReason']);
+
+        return this.http.post<any[]>(this.API_URL + '/api/Lookup/getCustomOptions', options, httpOptions).pipe(
+            tap(getReferralReasons => this.log('get referral reasons')),
+            catchError(this.handleError<any[]>('getReferralReasons'))
+        );
+    }
+
+    public filterFacilities(filterString: string) {
+        return this.http.get<any[]>(this.API_URL + '/api/Lookup/searchFacilityList?searchString=' + filterString).pipe(
+            tap(filterFacilities => this.log('fetched filtered facilities')),
+            catchError(this.handleError<any[]>('filterFacilities'))
+        );
+    }
+
     public getTracingOptions(): Observable<any[]> {
         return this.http.get<any[]>(this.API_URL + this._lookupurl).pipe(
             tap(tracingoptions => this.log('fetched all tracing options')),
@@ -30,7 +44,7 @@ export class LinkageReferralService {
     }
 
     public addLinkage(linkage: Linkage) {
-        return this.http.post(this.API_URL + this.url, JSON.stringify(linkage), httpOptions).pipe(
+        return this.http.post(this.API_URL + this.url + '/linkpatient', JSON.stringify(linkage), httpOptions).pipe(
             tap((addedLinkage: Linkage) => this.log(`added linkage w/ id`)),
             catchError(this.handleError<Linkage>('addLinkage'))
         );
@@ -49,7 +63,7 @@ export class LinkageReferralService {
         }
 
         const Indata = {
-            ReferredTo : referral.toFacility,
+            ReferredTo : referral.referredTo,
             DateToBeEnrolled: referral.dateToBeEnrolled,
             ReferralReason: referral.referralReason,
             UserId: referral.userId,

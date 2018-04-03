@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Serilog;
 
 namespace IQCare.HTS.BusinessProcess.CommandHandlers
 {
@@ -106,6 +107,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                 catch(Exception ex)
                 {
                     trans.Rollback();
+                    Log.Error(ex.Message);
                     // TODO:  log error
                     return Result<AddEncounterResponse>.Invalid(ex.Message);
                 }

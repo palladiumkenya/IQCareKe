@@ -82,13 +82,18 @@
                                 </div>
 
                                 <div>
-                                    <p></p>
+                                    <p>
+                                        &nbsp;
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                    </p>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-lg-3">
                                         <div class="form-group">
-                                            <label>Final Result HIV-Test 1 *</label>
+                                            <label>Final Screening Test Result</label>
                                             <select id="finalResultHiv1" name="finalResultHiv1" class="form-control m-b required" [(ngModel)]="finalTestingResults.finalResultHiv1" #finalResultHiv1="ngModel" data-parsley-required="true" appNoneEvents>
                                                 <option></option>
                                                 <option *ngFor="let option of hivResultsOptions" [ngValue]="option.itemId">{{option.itemName}}</option>
@@ -96,7 +101,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label>Final Result HIV-Test 2 *</label>
+                                            <label>Final Confirmatory Test Result</label>
                                             <select id="finalResultHiv2" name="finalResultHiv2" class="form-control m-b required" [(ngModel)]="finalTestingResults.finalResultHiv2" #finalResultHiv2="ngModel" [disabled]="isDisabled" data-parsley-required="true" appNoneEvents>
                                                 <option></option>
                                                 <option *ngFor="let option of hivResultsOptions" [ngValue]="option.itemId">{{option.itemName}}</option>
@@ -104,7 +109,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label>Final Result *</label>
+                                            <label>Final Result</label>
                                             <select id="finalResult" name="finalResult" class="form-control m-b required" [(ngModel)]="finalTestingResults.finalResult" #finalResult="ngModel" [disabled]="isFinalResultDisabled" data-parsley-required="true" appNoneEvents>
                                                 <option></option>
                                                 <option *ngFor="let option of hivFinalResultsOptions" [ngValue]="option.itemId">{{option.itemName}}</option>
@@ -114,7 +119,7 @@
 
                                     <div class="col-lg-3">
                                         <div class="form-group">
-                                            <label>Final Result Given? *</label>
+                                            <label>Final Result Given?</label>
                                             <select id="finalResultGiven" name="finalResultGiven" class="form-control m-b required" [(ngModel)]="finalTestingResults.finalResultGiven" #finalResultGiven="ngModel" data-parsley-required="true" [disabled]="isFinalResultGivenDisabled">
                                                 <option></option>
                                                 <option *ngFor="let option of yesNoOptions" [ngValue]="option.itemId">{{option.itemName}}</option>
@@ -122,7 +127,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label>Couple Discordant *</label>
+                                            <label>Couple Discordant</label>
                                             <select id="coupleDiscordant" name="coupleDiscordant" class="form-control m-b required" [(ngModel)]="finalTestingResults.coupleDiscordant" #coupleDiscordant="ngModel" data-parsley-required="true" [disabled]="isCoupleDiscordantDisabled">
                                                 <option></option>
                                                 <option *ngFor="let option of yesNoOptions" [ngValue]="option.itemId">{{option.itemName}}</option>
@@ -130,7 +135,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label>Remarks *</label>
+                                            <label>Remarks</label>
                                             <textarea class="form-control m-b" rows="3" id="finalResultsRemarks" name="finalResultsRemarks" [(ngModel)]="finalTestingResults.finalResultsRemarks" #finalResultsRemarks="ngModel"></textarea>
                                         </div>
                                     </div>

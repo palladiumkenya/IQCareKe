@@ -1,4 +1,5 @@
-import {Component, OnInit, NgZone} from '@angular/core';
+import {Component, OnInit, NgZone, AfterViewInit} from '@angular/core';
+import {SnotifyService, SnotifyPosition, SnotifyToastConfig} from 'ng-snotify';
 
 import {Person, RegistrationVariables} from '../_models/person';
 import {Contact} from '../_models/contacts';
@@ -6,10 +7,11 @@ import {PersonPopulation} from '../_models/personPopulation';
 import {RegistrationService} from '../_services/registration.service';
 import {Router, ActivatedRoute} from '@angular/router';
 import * as moment from 'moment';
-import {AlertService} from '../../shared/_services/alert.service';
-import 'rxjs/add/operator/mergeMap';
-import {Promise} from 'q';
 import {forkJoin} from 'rxjs/observable/forkJoin';
+import {ClientService} from '../../shared/_services/client.service';
+import {Store} from '@ngrx/store';
+import * as Consent from '../../shared/reducers/app.states';
+import {NotificationService} from '../../shared/_services/notification.service';
 
 declare var $: any;
 
@@ -32,12 +34,20 @@ export class PersonComponent implements OnInit {
 
     male: number;
     female: number;
+    patientName: string;
+
+    maxDate: any;
 
     constructor( private registrationService: RegistrationService,
                  private router: Router,
                  private route: ActivatedRoute,
                  public zone: NgZone,
-                 private alertService: AlertService) {
+                 private clientService: ClientService,
+                 private store: Store<AppState>,
+                 private snotifyService: SnotifyService,
+                 private notificationService: NotificationService) {
+
+        this.maxDate = new Date();
     }
 
     ngOnInit() {
@@ -49,6 +59,19 @@ export class PersonComponent implements OnInit {
         this.registrationVariables = new RegistrationVariables();
 
         this.isPartner = localStorage.getItem('isPartner');
+        if (this.isPartner != null && this.isPartner == 'true') {
+            this.getClientDetails();
+        } else {
+            localStorage.removeItem('personId');
+            localStorage.removeItem('patientId');
+            localStorage.removeItem('partnerId');
+            localStorage.removeItem('htsEncounterId');
+            localStorage.removeItem('patientMasterVisitId');
+            localStorage.removeItem('isPartner');
+            localStorage.setItem('serviceAreaId', '2');
+
+            this.store.dispatch(new Consent.ClearState());
+        }
         const self = this;
 
         setTimeout(() => {
@@ -60,8 +83,14 @@ export class PersonComponent implements OnInit {
                     } else {
                         $('#datastep1').parsley().destroy();
                         $('#datastep1').parsley({
-                            excluded: 'input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden'
+                            excluded: 'input[type=button], input[type=submit], ' +
+                            'input[type=reset], input[type=hidden], [max], [disabled], :hidden'
                         });
+
+                        $('#DateOfBirth').parsley().removeError('error');
+                        if (self.person.DateOfBirth == null || moment(self.person.DateOfBirth).toDate() > new Date()) {
+                            $('#DateOfBirth').parsley().addError('error', {message: 'Date of Birth should not be blank or in the future'});
+                        }
 
                         if ($('#datastep1').parsley().validate()) {
                             // validated
@@ -173,15 +202,17 @@ export class PersonComponent implements OnInit {
                 console.log('error');
             }, () => {
                 if (this.person.isPartner == true) {
+                    this.snotifyService.success('Successfully registered partner', 'Registration', this.notificationService.getConfig());
                     this.zone.run(() => { this.router.navigate(['/hts/pns'], { relativeTo: this.route}); });
                 } else {
+                    this.snotifyService.success('Successfully registered client', 'Registration', this.notificationService.getConfig());
                     this.zone.run(() => { this.router.navigate(['/registration/enrollment'], { relativeTo: this.route }); });
                 }
             });
 
         }, err => {
             console.log(err);
-            this.alertService.error('error', true);
+            this.snotifyService.error('Error registering client ' + err, 'Registration', this.notificationService.getConfig());
         });
     }
 
@@ -212,5 +243,13 @@ export class PersonComponent implements OnInit {
         }
 
         this.registrationVariables.personAge = age;
+    }
+
+    getClientDetails() {
+        this.clientService.getClientDetails(JSON.parse(localStorage.getItem('patientId')),
+            JSON.parse(localStorage.getItem('serviceAreaId'))).subscribe(res => {
+            const result = res['patientLookup'][0];
+            this.patientName = result.firstName + ' ' + result.midName + ' ' + result.lastName;
+        });
     }
 }

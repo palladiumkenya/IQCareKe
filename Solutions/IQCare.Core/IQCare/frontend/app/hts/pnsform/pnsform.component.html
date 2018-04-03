@@ -32,7 +32,7 @@
                                             <div class="form-group">
                                                 <div>
                                                     <mat-form-field>
-                                                        <mat-select name="partnerPhysicallyHurt" id="partnerPhysicallyHurt" tabindex="4" placeholder="Has partner ever physically hurt you?" [(ngModel)]="pnsForm.partnerPhysicallyHurt" #partnerPhysicallyHurt="ngModel">
+                                                        <mat-select name="partnerPhysicallyHurt" id="partnerPhysicallyHurt" tabindex="4" placeholder="Has partner ever physically hurt you?" [(ngModel)]="pnsForm.partnerPhysicallyHurt" #partnerPhysicallyHurt="ngModel" [disabled]="isNotIPVDone">
                                                             <mat-option></mat-option>
                                                             <mat-option *ngFor="let option of yesNoNAOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
                                                         </mat-select>
@@ -66,7 +66,7 @@
                                             <div class="form-group">
                                                 <div>
                                                     <mat-form-field>
-                                                        <mat-select name="eligibleTesting" id="eligibleTesting" tabindex="13" placeholder="Eligible for Testing" [(ngModel)]="pnsForm.eligibleTesting" #eligibleTesting="ngModel">
+                                                        <mat-select name="eligibleTesting" id="eligibleTesting" tabindex="13" placeholder="Eligible for Testing" [(ngModel)]="pnsForm.eligibleTesting" #eligibleTesting="ngModel" [disabled]="ishivStatusPositive">
                                                             <mat-option></mat-option>
                                                             <mat-option *ngFor="let option of yesNoNAOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
                                                         </mat-select>
@@ -92,7 +92,7 @@
                                             <div class="form-group">
                                                 <div>
                                                     <mat-form-field>
-                                                        <mat-select name="partnerThreatenedHurt" id="partnerThreatenedHurt" tabindex="5" placeholder="Has partner ever threatened to hurt you?" [(ngModel)]="pnsForm.partnerThreatenedHurt" #partnerThreatenedHurt="ngModel">
+                                                        <mat-select name="partnerThreatenedHurt" id="partnerThreatenedHurt" tabindex="5" placeholder="Has partner ever threatened to hurt you?" [(ngModel)]="pnsForm.partnerThreatenedHurt" #partnerThreatenedHurt="ngModel" [disabled]="isNotIPVDone">
                                                             <mat-option></mat-option>
                                                             <mat-option *ngFor="let option of yesNoNAOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
                                                         </mat-select>
@@ -111,7 +111,7 @@
                                             <div class="form-group">
                                                 <div>
                                                     <mat-form-field>
-                                                        <mat-select name="hivStatus" id="hivStatus" tabindex="11" placeholder="HIV Status" [(ngModel)]="pnsForm.hivStatus" #hivStatus="ngModel">
+                                                        <mat-select name="hivStatus" id="hivStatus" tabindex="11" placeholder="HIV Status" [(ngModel)]="pnsForm.hivStatus" #hivStatus="ngModel" (change)="onHivStatus(pnsForm.hivStatus)">
                                                             <mat-option></mat-option>
                                                             <mat-option *ngFor="let option of hivStatusOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
                                                         </mat-select>
@@ -122,7 +122,7 @@
                                             <div class="form-group">
                                                 <div>
                                                     <mat-form-field>
-                                                        <input matInput [matDatepicker]="bookingDatepicker" placeholder="Booking Date" (click)="bookingDatepicker.open()" id="bookingDate" tabindex="14" name="bookingDate" [(ngModel)]="pnsForm.bookingDate" #bookingDate="ngModel">
+                                                        <input matInput [matDatepicker]="bookingDatepicker" placeholder="Booking Date" (click)="bookingDatepicker.open()" id="bookingDate" tabindex="14" name="bookingDate" [(ngModel)]="pnsForm.bookingDate" #bookingDate="ngModel" [disabled]="ishivStatusPositive">
                                                         <mat-datepicker-toggle matSuffix [for]="bookingDatepicker"></mat-datepicker-toggle>
                                                         <mat-datepicker #bookingDatepicker></mat-datepicker>
                                                     </mat-form-field>
@@ -135,7 +135,7 @@
                                             <div class="form-group">
                                                 <div>
                                                     <mat-form-field>
-                                                        <mat-select name="ipvScreeningDone" id="ipvScreeningDone" tabindex="3" placeholder="IPV Screening Done" [(ngModel)]="pnsForm.ipvScreeningDone" #ipvScreeningDone="ngModel">
+                                                        <mat-select name="ipvScreeningDone" id="ipvScreeningDone" tabindex="3" placeholder="IPV Screening Done" [(ngModel)]="pnsForm.ipvScreeningDone" #ipvScreeningDone="ngModel" (change)="onIpvScreeningChange(pnsForm.ipvScreeningDone)">
                                                             <mat-option></mat-option>
                                                             <mat-option *ngFor="let option of yesNoNAOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
                                                         </mat-select>
@@ -147,7 +147,7 @@
                                             <div class="form-group">
                                                 <div>
                                                     <mat-form-field>
-                                                        <mat-select name="forcedYouTodoSexuallyUncomfortable" id="forcedYouTodoSexuallyUncomfortable" tabindex="6" placeholder="Has partner forced you something sexual that made you feel uncomfortable?" [(ngModel)]="pnsForm.forcedSexualUncomfortable" #forcedSexualUncomfortable="ngModel">
+                                                        <mat-select name="forcedYouTodoSexuallyUncomfortable" id="forcedYouTodoSexuallyUncomfortable" tabindex="6" placeholder="Has partner forced you something sexual that made you feel uncomfortable?" [(ngModel)]="pnsForm.forcedSexualUncomfortable" #forcedSexualUncomfortable="ngModel" [disabled]="isNotIPVDone">
                                                             <mat-option></mat-option>
                                                             <mat-option *ngFor="let option of yesNoNAOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
                                                         </mat-select>
@@ -170,7 +170,7 @@
                                             <div class="form-group">
                                                 <div>
                                                     <mat-form-field>
-                                                        <mat-select name="pnsApproach" id="pnsApproach" tabindex="12" placeholder="PNS Approach" [(ngModel)]="pnsForm.pnsApproach" #pnsApproach="ngModel">
+                                                        <mat-select name="pnsApproach" id="pnsApproach" tabindex="12" placeholder="PNS Approach" [(ngModel)]="pnsForm.pnsApproach" #pnsApproach="ngModel" [disabled]="ishivStatusPositive">
                                                             <mat-option></mat-option>
                                                             <mat-option *ngFor="let option of pnsApproachOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
                                                         </mat-select>

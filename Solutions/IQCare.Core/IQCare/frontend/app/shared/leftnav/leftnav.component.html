@@ -11,12 +11,19 @@
 
         <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
             <ul class="nav navbar-nav">
+
                 <li class="active">
-                    <a routerLink="/registration/home" routerLinkActive="active">Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a>
+                    <a routerLink="/" routerLinkActive="active">Home<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a>
                 </li>
-                <!--<li>
-                    <a routerLink="/hts" routerLinkActive="active">HTS FORM<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-th-list"></span></a>
-                </li>-->
+
+                <li>
+                    <a routerLink="/registration/register" routerLinkActive="active">New Client<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-tags"></span></a>
+                </li>
+
+                <li *ngIf="isEnrolled">
+                    <a routerLink="/registration/home" routerLinkActive="active">Client Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-tags"></span></a>
+                </li>
+
                 <li *ngIf="isPositive">
                     <a routerLink="/hts/referral" routerLinkActive="active">REFERRAL<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-tags"></span></a>
                 </li>

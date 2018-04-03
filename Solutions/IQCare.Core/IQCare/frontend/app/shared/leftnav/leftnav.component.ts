@@ -13,6 +13,7 @@ export class LeftnavComponent implements OnInit {
     isPositive: boolean;
     isReferred: boolean;
     hasConsentedPartnerListing: boolean;
+    isEnrolled: boolean;
 
     constructor(private store: Store<AppState>) {
         // this.store.dispatch(new Consent.ConsentTesting(true));
@@ -33,8 +34,12 @@ export class LeftnavComponent implements OnInit {
         });
 
         store.pipe(select('app')).subscribe(res => {
-            console.log( 'isPositive', res);
+            this.isEnrolled = res['isEnrolled'];
         });
+
+        /*store.pipe(select('app')).subscribe(res => {
+            console.log( 'isPositive', res);
+        });*/
     }
     ngOnInit() {
     }

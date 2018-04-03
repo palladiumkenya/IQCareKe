@@ -1,10 +1,10 @@
 export class Referral {
-    referredTo: string;
+    referredTo: number;
+    referredToFacility: any;
     dateToBeEnrolled: string;
     personId: number;
     serviceAreaId: number;
     facilityId: number;
     userId: number;
     referralReason: number;
-    toFacility: number;
 }

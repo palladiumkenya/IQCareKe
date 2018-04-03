@@ -15,6 +15,15 @@ export function consentReducer(state: {} = {}, action: ClientActions) {
             return {...state, isReferred: action.payload}
         case ClientActionTypes.TESTED_AS:
             return {...state, testedAs: action.payload}
+        case ClientActionTypes.ENROLLED:
+            return {...state, isEnrolled: action.payload}
+        case ClientActionTypes.PNS_SCREENED:
+            return {...state, isPnsScreened: action.payload}
+        case ClientActionTypes.PNS_TRACING:
+            return {...state, isPnsTracingDone: action.payload}
+        case ClientActionTypes.CLEAR_STATE:
+            state = {};
+            return state;
         default:
             return state;
     }

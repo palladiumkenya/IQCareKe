@@ -6,7 +6,11 @@ export enum ClientActionTypes {
     CONSENT_PARTNER_LISTING = '[ClientState] ConsentPartnerListing',
     IS_POSITIVE = '[ClientState] IsPositive',
     IS_REFERRED = '[ClientState] isReferred',
-    TESTED_AS = '[] testedAs'
+    TESTED_AS = '[ClientState] testedAs',
+    ENROLLED = '[ClientState] isEnrolled',
+    PNS_SCREENED = '[ClientState] isPnsScreened',
+    PNS_TRACING = '[ClientState] isPnsTracingDone',
+    CLEAR_STATE = '[ClientState] clearState'
 }
 
 export class ConsentTesting implements Action {
@@ -45,10 +49,36 @@ export class TestedAs implements Action {
     constructor(public payload: boolean) {}
 }
 
+export class IsEnrolled implements Action {
+    readonly type = ClientActionTypes.ENROLLED;
+
+    constructor(public payload: boolean) {}
+}
+
+export class IsPnsScreened implements Action {
+    readonly type = ClientActionTypes.PNS_SCREENED;
+
+    constructor(public payload: boolean) {}
+}
+
+export class IsPnsTracingDone implements Action {
+    readonly type = ClientActionTypes.PNS_TRACING;
+
+    constructor(public payload: boolean) {}
+}
+
+export class ClearState implements Action {
+    readonly type = ClientActionTypes.CLEAR_STATE;
+}
+
 export type ClientActions
     = ConsentTesting
     | Tested
     | ConsentPartnerListing
     | IsPositive
     | IsReferred
-    | TestedAs;
+    | TestedAs
+    | IsEnrolled
+    | IsPnsScreened
+    | IsPnsTracingDone
+    | ClearState;
