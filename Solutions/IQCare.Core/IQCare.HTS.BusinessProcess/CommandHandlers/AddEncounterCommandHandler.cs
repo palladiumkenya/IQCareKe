@@ -31,12 +31,9 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                     // create HtsEncounter instance
                     var htsEncounter = new HtsEncounter
                     {
-                        //Consent = request.Encounter.Consent,
-                        //CoupleDiscordant = request.FinalTestingResult.CoupleDiscordant,
                         EncounterRemarks = request.Encounter.EncounterRemarks,
                         EverSelfTested = request.Encounter.EverSelfTested,
                         EverTested = request.Encounter.EverTested,
-                        //FinalResultGiven = request.FinalTestingResult.FinalResultGiven,
                         GeoLocation = request.Encounter.GeoLocation,
                         MonthSinceSelfTest = request.Encounter.MonthSinceSelfTest,
                         MonthsSinceLastTest = request.Encounter.MonthsSinceLastTest,
@@ -45,7 +42,8 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         ProviderId = request.Encounter.ProviderId,
                         TestedAs = request.Encounter.TestedAs,
                         TestEntryPoint = request.Encounter.TestEntryPoint,
-                        TestingStrategy = request.Encounter.TestingStrategy
+                        TestingStrategy = request.Encounter.TestingStrategy,
+                        EncounterType = request.Encounter.EncounterType
                     };
 
                     await _unitOfWork.Repository<HtsEncounter>().AddAsync(htsEncounter);

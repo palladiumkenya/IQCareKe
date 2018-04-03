@@ -23,5 +23,6 @@ namespace IQCare.HTS.Core.Model
         //public int Consent { get; set; }
         public int EverSelfTested { get; set; }
         public string GeoLocation { get; set; }
+        public int EncounterType { get; set; }
     }
 }

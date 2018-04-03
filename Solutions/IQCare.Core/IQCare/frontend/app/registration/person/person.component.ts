@@ -191,15 +191,19 @@ export class PersonComponent implements OnInit {
             const matStatus = this.registrationService.addPersonMaritalStatus(data['personId'],
                 this.person.MaritalStatus, this.userId);
 
-            forkJoin([patientAdd, personCont, matStatus]).subscribe(results => {
+            const personLoc = this.registrationService.addPersonLocation(data['personId'], 0,
+                0, 0, this.userId, this.contact.Landmark);
+
+            forkJoin([patientAdd, personCont, matStatus, personLoc]).subscribe(results => {
                 if (this.person.isPartner == false) {
                     localStorage.setItem('patientId', results[0]['patientId']);
                     localStorage.setItem('personId', data['personId']);
                 } else {
                     localStorage.setItem('partnerId', data['personId']);
                 }
-            }, () => {
+            }, (err) => {
                 console.log('error');
+                this.snotifyService.error('Error registering client ' + err, 'Registration', this.notificationService.getConfig())
             }, () => {
                 if (this.person.isPartner == true) {
                     this.snotifyService.success('Successfully registered partner', 'Registration', this.notificationService.getConfig());
@@ -225,11 +229,15 @@ export class PersonComponent implements OnInit {
         const estDob = moment(currentDate.toISOString());
         const dob = estDob.add((personAge * -1), 'years');
 
-        this.person.DateOfBirth = moment(dob).format('DD-MM-YYYY');
+        this.person.DateOfBirth = moment(dob).format('DD-MMM-YYYY');
+        // console.log(this.person.DateOfBirth);
     }
 
     onDate(event): void {
         // console.log(event);
+
+        const newDate = new Date(event);
+        this.person.DateOfBirth = moment(newDate).format('DD-MMM-YYYY');
         this.getAge(event);
     }
 

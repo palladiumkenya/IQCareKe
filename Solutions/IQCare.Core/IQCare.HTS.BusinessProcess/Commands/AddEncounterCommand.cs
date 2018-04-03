@@ -34,6 +34,7 @@ namespace IQCare.HTS.BusinessProcess.Commands
         public int ServiceAreaId { get; set; }
         public int EncounterTypeId { get; set; }
         public DateTime EncounterDate { get; set; }
+        public int EncounterType { get; set; }
     }
 
     public class AddEncounterResponse

@@ -16,43 +16,48 @@
                             <!--- Note that these columns can be defined in any order.
                             The actual rendered columns are set as a property on the row definition" -->
 
-                            <!-- FirstName Column -->
+                            <!-- Encounter Date Column -->
                             <ng-container matColumnDef="encounterDate">
                                 <mat-header-cell *matHeaderCellDef> Encounter Date </mat-header-cell>
                                 <mat-cell *matCellDef="let element"> {{element.encounterDate | date: 'dd-MMM-yyyy' }} </mat-cell>
                             </ng-container>
 
-                            <!-- FirstName Column -->
+                            <ng-container matColumnDef="testType">
+                                <mat-header-cell *matHeaderCellDef> Test Type </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{element.testType }} </mat-cell>
+                            </ng-container>
+
+                            <!-- Provider Column -->
                             <ng-container matColumnDef="provider">
                                 <mat-header-cell *matHeaderCellDef> Provider </mat-header-cell>
                                 <mat-cell *matCellDef="let element"> {{element.provider}} </mat-cell>
                             </ng-container>
 
-                            <!-- Middle Name Column -->
+                            <!-- Screening Test Column -->
                             <ng-container matColumnDef="resultOne">
                                 <mat-header-cell *matHeaderCellDef> Screening Test </mat-header-cell>
                                 <mat-cell *matCellDef="let element"> {{element.resultOne}} </mat-cell>
                             </ng-container>
 
-                            <!-- Last Name Column -->
+                            <!-- Confirmatory Test Column -->
                             <ng-container matColumnDef="resultTwo">
                                 <mat-header-cell *matHeaderCellDef> Confirmatory Test </mat-header-cell>
                                 <mat-cell *matCellDef="let element"> {{element.resultTwo}} </mat-cell>
                             </ng-container>
 
-                            <!-- Date Of Birth Column -->
+                            <!-- Final Result Column -->
                             <ng-container matColumnDef="finalResult">
                                 <mat-header-cell *matHeaderCellDef> Final Result </mat-header-cell>
                                 <mat-cell *matCellDef="let element"> {{element.finalResult }} </mat-cell>
                             </ng-container>
 
-                            <!-- Enrollment Date Column -->
+                            <!-- Consent To Testing Column -->
                             <ng-container matColumnDef="consent">
                                 <mat-header-cell *matHeaderCellDef> Consent To Testing </mat-header-cell>
                                 <mat-cell *matCellDef="let element"> {{element.consent }} </mat-cell>
                             </ng-container>
 
-                            <!-- Enrollment Date Column -->
+                            <!-- Partner Listing Consent Column -->
                             <ng-container matColumnDef="partnerListingConsent">
                                 <mat-header-cell *matHeaderCellDef> Partner Listing Consent </mat-header-cell>
                                 <mat-cell *matCellDef="let element"> {{element.partnerListingConsent }} </mat-cell>
@@ -73,7 +78,7 @@
                         <a mat-raised-button color="accent" routerLink="/hts">
                             <i class="fa fa-plus"></i>
                             <span *ngIf="!isPositive">New HTS Encounter</span>
-                            <span *ngIf="isPositive">Confirmatory Test</span>
+                            <span *ngIf="isPositive">Repeat Test</span>
                         </a>
                     </div>
 

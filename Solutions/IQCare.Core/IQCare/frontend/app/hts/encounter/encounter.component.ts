@@ -56,20 +56,24 @@ export class EncounterComponent implements OnInit {
 
         this.getHtsOptions();
         this.getEncounterType();
-        const self = this;
+    }
 
+    validate() {
+        const self = this;
         setTimeout(() => {
             $('#form').parsley().destroy();
             $('#form').parsley({
-                excluded: 'input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden'
+                excluded: 'input[type=button], input[type=submit], input[type=reset], input[type=hidden],[max], [disabled], :hidden'
             });
 
-            $('#form').parsley().on('field:validated', function() {
-                const ok = $('.parsley-error').length === 0;
-            }).on('form:submit', function() {
+            $('#form').parsley().validate();
+            if ($('#form').parsley().isValid()) {
+                console.log('valid');
                 self.onSubmitForm();
+            } else {
+                console.log('not valid');
                 return false;
-            });
+            }
         }, 0);
     }
 
