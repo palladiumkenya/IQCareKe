@@ -26,16 +26,7 @@ namespace BusinessProcess.CCC.Pharmacy
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                PatientPharmacyDispense pharmacyDispense = new PatientPharmacyDispense()
-                {
-                    Drug_Pk = p.Drug_Pk,
-                    FrequencyID = p.FrequencyID,
-                    StrengthID = p.StrengthID,
-                    Duration = p.Duration,
-                    DispensedQuantity = p.DispensedQuantity,
-                    SingleDose = p.SingleDose,
-                };
-                unitOfWork.PatientPharmacyDispenseRepository.Update(pharmacyDispense);
+                unitOfWork.PatientPharmacyDispenseRepository.Update(p);
                 _result = unitOfWork.Complete();
                 unitOfWork.Dispose();
                 return _result;
