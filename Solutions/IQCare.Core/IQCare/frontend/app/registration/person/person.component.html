@@ -52,7 +52,8 @@
                                                         <label>Date of Birth</label>
                                                         <div>
                                                             <mat-form-field>
-                                                                <input tabindex="5" matInput [max]="maxDate" [matDatepicker]="myDatepicker" (click)="myDatepicker.open()" id="DateOfBirth" name="DateOfBirth" [(ngModel)]="person.DateOfBirth" #DateOfBirth="ngModel" data-parsley-required="true">
+                                                                <input type="hidden" [matDatepicker]="myDatepicker">
+                                                                <input tabindex="5" matInput [max]="maxDate" id="DateOfBirth" name="DateOfBirth" [(ngModel)]="person.DateOfBirth" #DateOfBirth="ngModel" data-parsley-required="true">
                                                                 <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
                                                                 <mat-datepicker #myDatepicker name="DateOfBirth" [(ngModel)]="person.DateOfBirth" ngDefaultControl (selectedChanged)="onDate($event)"></mat-datepicker>
                                                             </mat-form-field>

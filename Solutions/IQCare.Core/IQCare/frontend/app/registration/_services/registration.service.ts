@@ -82,6 +82,23 @@ export class RegistrationService {
         );
     }
 
+    public addPersonLocation(personId: number, countyId: number, subCountyId: number, wardId: number, userId: number, landMark: string): Observable<any> {
+        const Indata = {
+            PersonId: personId,
+            CountyId: countyId,
+            SubCountyId: subCountyId,
+            WardId: wardId,
+            Village: ' ',
+            LandMark: landMark,
+            UserId: userId
+        };
+
+        return this.http.post<any>(this.API_URL + this._url + '/AddPersonLocation', JSON.stringify(Indata), httpOptions).pipe(
+            tap((addPersonLocation: any) => this.log(`added person location w/ id`)),
+            catchError(this.handleError<any>('addPersonLocation'))
+        );
+    }
+
     public addPersonRelationship(personRelationship: any): Observable<any> {
         return this.http.post<any>(this.API_URL + this._url + '/addPersonRelationship',
             JSON.stringify(personRelationship), httpOptions).pipe(

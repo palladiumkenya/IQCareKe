@@ -20,4 +20,5 @@ export class Encounter {
     EncounterRemarks?: string;
     TbScreening?: number;
     GeoLocation?: string;
+    EncounterType: number;
 }

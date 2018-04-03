@@ -121,5 +121,14 @@ namespace IQCare.Controllers.Registration
                 return Ok(response.Value);
             return BadRequest(response);
         }
+
+        [HttpPost("AddPersonLocation")]
+        public async Task<IActionResult> AddPersonLocation([FromBody]AddPersonLocationCommand addPersonLocationCommand)
+        {
+            var response = await _mediator.Send(addPersonLocationCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
     }
 }
