@@ -26,6 +26,8 @@ import { SearchComponent } from './search/search.component';
 import {SearchService} from './_services/search.service';
 import {AlertService} from '../shared/_services/alert.service';
 import {EncounterService} from '../hts/_services/encounter.service';
+import {NotificationService} from '../shared/_services/notification.service';
+import {AppLoadService} from '../shared/_services/appload.service';
 
 
 
@@ -47,7 +49,6 @@ import {EncounterService} from '../hts/_services/encounter.service';
         MatCardModule,
         MatCheckboxModule,
         MatChipsModule,
-        MatDatepickerModule,
         MatDialogModule,
         MatDividerModule,
         MatExpansionModule,
@@ -85,7 +86,9 @@ import {EncounterService} from '../hts/_services/encounter.service';
         EnrollmentService,
         SearchService,
         AlertService,
-        EncounterService
+        EncounterService,
+        NotificationService,
+        AppLoadService
     ]
 
 })

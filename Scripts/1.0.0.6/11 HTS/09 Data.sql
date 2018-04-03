@@ -18,7 +18,7 @@ If Not Exists(Select 1 From LookupMaster where Name='HivStatus') Begin INSERT IN
 If Not Exists(Select 1 From LookupMaster where Name='PnsApproach') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PnsApproach','PnsApproach',0); End
 If Not Exists(Select 1 From LookupMaster where Name='PnsScreening') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PnsScreening','PnsScreening',0); End
 If Not Exists(Select 1 From LookupMaster where Name='PnsTracingOutcome') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PnsTracingOutcome','PnsTracingOutcome',0); End
-
+If Not Exists(Select 1 From LookupMaster where Name='ReferralReason') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('ReferralReason','ReferralReason',0); End
 --Set look up items
 If Not Exists(Select 1 From LookupItem where Name='Maternity') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Maternity','Maternity',0); End
 If Not Exists(Select 1 From LookupItem where Name='PITC') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('PITC','PITC',0); End
@@ -92,7 +92,10 @@ If Not Exists(Select 1 From LookupItem where Name='HIVStatus') Begin INSERT INTO
 If Not Exists(Select 1 From LookupItem where Name='PNSApproach') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('PNSApproach','PNSApproach',0); End
 If Not Exists(Select 1 From LookupItem where Name='EligibleTesting') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('EligibleTesting','EligibleTesting',0); End
 
-
+If Not Exists(Select 1 From LookupItem where Name='CCCEnrollment') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('CCCEnrollment','CCCEnrollment',0); End
+If Not Exists(Select 1 From LookupItem where Name='HIVTesting') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('HIVTesting','HIVTesting',0); End
+If Not Exists(Select 1 From LookupItem where Name='Nutritional') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Nutritional','Nutritional',0); End
+If Not Exists(Select 1 From LookupItem where Name='Counselling') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Counselling','Counselling',0); End
 
 --Set Lookup items for hts entry points
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Maternity',1 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Maternity'  ) ItemId FROM LookupMaster  WHERE Name='HTSEntryPoints') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
@@ -209,3 +212,8 @@ Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) 
 
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Contacted',1 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Contacted') ItemId FROM LookupMaster  WHERE Name='PnsTracingOutcome') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Not Contacted',2 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Not Contacted') ItemId FROM LookupMaster  WHERE Name='PnsTracingOutcome') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'CCCEnrollment',1 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='CCCEnrollment') ItemId FROM LookupMaster  WHERE Name='ReferralReason') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'HIVTesting',2 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='HIVTesting') ItemId FROM LookupMaster  WHERE Name='ReferralReason') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Nutritional',3 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Nutritional') ItemId FROM LookupMaster  WHERE Name='ReferralReason') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Counselling',4 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Counselling') ItemId FROM LookupMaster  WHERE Name='ReferralReason') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;

@@ -31,7 +31,9 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                     Enrolled = true,
                     DeleteFlag = false,
                     CreatedBy = request.UserId,
-                    CreateDate = DateTime.Now
+                    CreateDate = DateTime.Now,
+                    HealthWorker = request.HealthWorker,
+                    Cadre = request.Carde
                 };
 
                 await _unitOfWork.Repository<PatientLinkage>().AddAsync(patientLinkage);

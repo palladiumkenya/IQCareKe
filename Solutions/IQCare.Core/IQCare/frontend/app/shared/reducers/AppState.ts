@@ -3,4 +3,8 @@ interface AppState {
     isPositive: boolean;
     consentPartnerListing: boolean;
     isReferred: boolean;
+    isEnrolled: boolean;
+    isPnsScreened: boolean;
+    isPnsTracingDone: boolean;
+    clearState: any;
 }

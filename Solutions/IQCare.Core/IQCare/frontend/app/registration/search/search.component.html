@@ -5,131 +5,113 @@
     <div class="ibox-content">
         <div class="row">
             <div class="col-md-2">
-                <nav class="navbar navbar-default sidebar" role="navigation" style="background-color: #dddddd;">
-                    <div class="container-fluid">
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                        </div>
+                <app-leftnav></app-leftnav>
+            </div>
+            <div class="col-md-10 animated fadeInRight">
+                <div class="panel panel-default">
+                    <div class="panel-heading">CLIENTS</div>
+                    <div class="panel-body">
+                        <form id="form" action="#" class="wizard-big" (ngSubmit)="onSubmit()" #searchForm="ngForm">
+                            <fieldset>
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label>Identification Number</label>
+                                            <input type="text" id="identificationNumber" name="identificationNumber" class="form-control" tabindex="1" [(ngModel)]="search.identifierValue" #identifierValue="ngModel">
+                                        </div>
+                                    </div>
 
-                        <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
-                            <ul class="nav navbar-nav">
-                                <li class="active">
-                                    <a routerLink="/registration" routerLinkActive="active">SEARCH<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a>
-                                </li>
-                                <li>
-                                    <a routerLink="/registration/register" routerLinkActive="active">REGISTER CLIENT<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-th-list"></span></a>
-                                </li>
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label>First Name</label>
+                                            <input type="text" id="firstName" name="firstName" class="form-control" tabindex="2" [(ngModel)]="search.firstName" #firstName="ngModel">
+                                        </div>
+                                    </div>
 
-                            </ul>
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label>Middle Name</label>
+                                            <input type="text" id="middleName" name="middleName" class="form-control" tabindex="3" [(ngModel)]="search.midName" #midName="ngModel">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label>Last Name</label>
+                                            <input type="text" id="lastName" name="lastName" class="form-control" tabindex="4" [(ngModel)]="search.lastName" #lastName="ngModel">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <button class="btn btn-primary m-t-n-xs" value="submit" type="submit">
+                                                <strong>Search Client</strong>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </fieldset>
+                        </form>
+
+                        <div class="example-container mat-elevation-z8">
+                            <mat-table #table [dataSource]="dataSource">
+
+                                <!--- Note that these columns can be defined in any order.
+                                The actual rendered columns are set as a property on the row definition" -->
+
+                                <!-- FirstName Column -->
+                                <ng-container matColumnDef="IdentifierValue">
+                                    <mat-header-cell *matHeaderCellDef> Enrollment Number </mat-header-cell>
+                                    <mat-cell *matCellDef="let element"> {{element.identifierValue}} </mat-cell>
+                                </ng-container>
+
+                                <!-- FirstName Column -->
+                                <ng-container matColumnDef="firstName">
+                                    <mat-header-cell *matHeaderCellDef> First Name </mat-header-cell>
+                                    <mat-cell *matCellDef="let element"> {{element.firstName}} </mat-cell>
+                                </ng-container>
+
+                                <!-- Middle Name Column -->
+                                <ng-container matColumnDef="midName">
+                                    <mat-header-cell *matHeaderCellDef> Middle Name </mat-header-cell>
+                                    <mat-cell *matCellDef="let element"> {{element.midName}} </mat-cell>
+                                </ng-container>
+
+                                <!-- Last Name Column -->
+                                <ng-container matColumnDef="lastName">
+                                    <mat-header-cell *matHeaderCellDef> Last Name </mat-header-cell>
+                                    <mat-cell *matCellDef="let element"> {{element.lastName}} </mat-cell>
+                                </ng-container>
+
+                                <!-- Date Of Birth Column -->
+                                <ng-container matColumnDef="dateOfBirth">
+                                    <mat-header-cell *matHeaderCellDef> Date Of Birth </mat-header-cell>
+                                    <mat-cell *matCellDef="let element"> {{element.dateOfBirth | date: 'dd-MMM-yyyy' }} </mat-cell>
+                                </ng-container>
+
+                                <!-- Enrollment Date Column -->
+                                <ng-container matColumnDef="enrollmentDate">
+                                    <mat-header-cell *matHeaderCellDef> Enrollment Date </mat-header-cell>
+                                    <mat-cell *matCellDef="let element"> {{element.enrollmentDate | date: 'dd-MMM-yyyy' }} </mat-cell>
+                                </ng-container>
+
+
+
+                                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="getSelectedRow(row)"></mat-row>
+                            </mat-table>
+
+                            <mat-paginator #paginator
+                                           [pageSize]="10"
+                                           [pageSizeOptions]="[5, 10, 20]"
+                                           [showFirstLastButtons]="true">
+                            </mat-paginator>
                         </div>
                     </div>
-                </nav>
-            </div>
-            <div class="col-md-10">
-                <form id="form" action="#" class="wizard-big" (ngSubmit)="onSubmit()" #searchForm="ngForm">
-                    <fieldset>
-                        <div class="row">
-                            <div class="col-lg-3">
-                                <div class="form-group">
-                                    <label>Identification Number</label>
-                                    <input type="text" id="identificationNumber" name="identificationNumber" class="form-control" tabindex="1" [(ngModel)]="search.identifierValue" #identifierValue="ngModel">
-                                </div>
-                            </div>
-
-                            <div class="col-lg-3">
-                                <div class="form-group">
-                                    <label>First Name</label>
-                                    <input type="text" id="firstName" name="firstName" class="form-control" tabindex="2" [(ngModel)]="search.firstName" #firstName="ngModel">
-                                </div>
-                            </div>
-
-                            <div class="col-lg-3">
-                                <div class="form-group">
-                                    <label>Middle Name</label>
-                                    <input type="text" id="middleName" name="middleName" class="form-control" tabindex="3" [(ngModel)]="search.midName" #midName="ngModel">
-                                </div>
-                            </div>
-
-
-                            <div class="col-lg-3">
-                                <div class="form-group">
-                                    <label>Last Name</label>
-                                    <input type="text" id="lastName" name="lastName" class="form-control" tabindex="4" [(ngModel)]="search.lastName" #lastName="ngModel">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-lg-3">
-                                <div class="form-group">
-                                    <button class="btn btn-primary m-t-n-xs" value="submit" type="submit">
-                                        <strong>Search Client</strong>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                    </fieldset>
-                </form>
-
-                <div class="example-container mat-elevation-z8">
-                    <mat-table #table [dataSource]="dataSource">
-
-                        <!--- Note that these columns can be defined in any order.
-                        The actual rendered columns are set as a property on the row definition" -->
-
-                        <!-- FirstName Column -->
-                        <ng-container matColumnDef="IdentifierValue">
-                            <mat-header-cell *matHeaderCellDef> Enrollment Number </mat-header-cell>
-                            <mat-cell *matCellDef="let element"> {{element.identifierValue}} </mat-cell>
-                        </ng-container>
-
-                        <!-- FirstName Column -->
-                        <ng-container matColumnDef="firstName">
-                            <mat-header-cell *matHeaderCellDef> First Name </mat-header-cell>
-                            <mat-cell *matCellDef="let element"> {{element.firstName}} </mat-cell>
-                        </ng-container>
-
-                        <!-- Middle Name Column -->
-                        <ng-container matColumnDef="midName">
-                            <mat-header-cell *matHeaderCellDef> Middle Name </mat-header-cell>
-                            <mat-cell *matCellDef="let element"> {{element.midName}} </mat-cell>
-                        </ng-container>
-
-                        <!-- Last Name Column -->
-                        <ng-container matColumnDef="lastName">
-                            <mat-header-cell *matHeaderCellDef> Last Name </mat-header-cell>
-                            <mat-cell *matCellDef="let element"> {{element.lastName}} </mat-cell>
-                        </ng-container>
-
-                        <!-- Date Of Birth Column -->
-                        <ng-container matColumnDef="dateOfBirth">
-                            <mat-header-cell *matHeaderCellDef> Date Of Birth </mat-header-cell>
-                            <mat-cell *matCellDef="let element"> {{element.dateOfBirth | date: 'dd-MMM-yyyy' }} </mat-cell>
-                        </ng-container>
-
-                        <!-- Enrollment Date Column -->
-                        <ng-container matColumnDef="enrollmentDate">
-                            <mat-header-cell *matHeaderCellDef> Enrollment Date </mat-header-cell>
-                            <mat-cell *matCellDef="let element"> {{element.enrollmentDate | date: 'dd-MMM-yyyy' }} </mat-cell>
-                        </ng-container>
-
-
-
-                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                        <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="getSelectedRow(row)"></mat-row>
-                    </mat-table>
-
-                    <mat-paginator #paginator
-                                   [pageSize]="10"
-                                   [pageSizeOptions]="[5, 10, 20]"
-                                   [showFirstLastButtons]="true">
-                    </mat-paginator>
                 </div>
 
             </div>

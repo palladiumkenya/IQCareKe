@@ -1,6 +1,7 @@
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
-@import url("https://fonts.googleapis.com/css?family=Roboto:400,300,500,700");
+@import "assets/css.css";
+@import "assets/css_2.css";
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~ng-snotify/styles/material.css";
 /*
  *
  *   INSPINIA - Responsive Admin Theme

@@ -97,5 +97,32 @@ namespace IQCare.Controllers.Common
                 return Ok(results.Value);
             return BadRequest(results);
         }
+
+        [HttpPost("getCounty")]
+        public async Task<IActionResult> GetCounty([FromBody] GetCountyCommand getCountyCommand)
+        {
+            var results = await _mediator.Send(getCountyCommand, HttpContext.RequestAborted);
+            if (results.IsValid)
+                return Ok(results.Value);
+            return BadRequest(results);
+        }
+
+        [HttpGet("getFacilityList")]
+        public async Task<IActionResult> GetFacilityList()
+        {
+            var results = await _mediator.Send(new GetFacilityListCommand(), HttpContext.RequestAborted);
+            if (results.IsValid)
+                return Ok(results.Value);
+            return BadRequest(results);
+        }
+
+        [HttpGet("searchFacilityList")]
+        public async Task<IActionResult> SearchFacilityList(string searchString)
+        {
+            var results = await _mediator.Send(new GetFilteredFacilityListCommand(){ searchString = searchString }, HttpContext.RequestAborted);
+            if (results.IsValid)
+                return Ok(results.Value);
+            return BadRequest(results);
+        }
     } 
 }

@@ -21,7 +21,7 @@
                                         <div class="col-lg-3">
                                             <div class="form-group">
                                                 <mat-form-field>
-                                                    <input tabindex="1" matInput placeholder="Encounter Date" required [matDatepicker]="encounterDatepicker" (click)="encounterDatepicker.open()" id="encounterDate" name="encounterDate" [(ngModel)]="encounter.EncounterDate" #EncounterDate="ngModel" data-parsley-required="true">
+                                                    <input tabindex="1" matInput [max]="maxDate" placeholder="Encounter Date" required [matDatepicker]="encounterDatepicker" (click)="encounterDatepicker.open()" id="encounterDate" name="encounterDate" [(ngModel)]="encounter.EncounterDate" #EncounterDate="ngModel" data-parsley-required="true">
                                                     <mat-datepicker-toggle matSuffix [for]="encounterDatepicker"></mat-datepicker-toggle>
                                                     <mat-datepicker #encounterDatepicker></mat-datepicker>
                                                 </mat-form-field>

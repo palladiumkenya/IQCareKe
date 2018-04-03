@@ -1,4 +1,4 @@
-import { NgModule, Component} from '@angular/core';
+import { NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -35,6 +35,8 @@ import {PnsService} from './_services/pns.service';
 import {DataService} from '../shared/_services/data.service';
 import { TestingComponent } from './testing/testing.component';
 import {TestDialogComponent} from './testdialog/testdialog.component';
+import {NotificationService} from '../shared/_services/notification.service';
+import {AppLoadService} from '../shared/_services/appload.service';
 
 
 @NgModule({
@@ -107,7 +109,9 @@ import {TestDialogComponent} from './testdialog/testdialog.component';
       EncounterService,
       LinkageReferralService,
       PnsService,
-      DataService
+      DataService,
+      NotificationService,
+      AppLoadService
   ],
   entryComponents: [
       TestDialogComponent

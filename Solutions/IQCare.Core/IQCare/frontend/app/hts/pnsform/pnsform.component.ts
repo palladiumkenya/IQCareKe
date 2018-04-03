@@ -3,6 +3,8 @@ import {PartnerView, Pnsform} from '../_models/pnsform';
 import {PnsService} from '../_services/pns.service';
 import {ClientService} from '../../shared/_services/client.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import * as Consent from '../../shared/reducers/app.states';
+import {select, Store} from '@ngrx/store';
 
 @Component({
   selector: 'app-pnsform',
@@ -19,13 +21,16 @@ export class PnsformComponent implements OnInit {
     hivStatusOptions: any[];
     pnsApproachOptions: any[];
     pnsScreeningCategories: any[];
+    isNotIPVDone: boolean = false;
+    ishivStatusPositive: boolean = false;
 
     serviceAreaId: number = 2;
 
     constructor(private pnsService: PnsService,
                 private router: Router,
                 private route: ActivatedRoute,
-                public zone: NgZone) { }
+                public zone: NgZone,
+                private store: Store<AppState>) { }
 
     ngOnInit() {
         this.pnsForm = new Pnsform();
@@ -111,7 +116,47 @@ export class PnsformComponent implements OnInit {
         }
 
         this.pnsService.addPnsScreening(this.pnsForm, arr).subscribe(data => {
+            this.store.dispatch(new Consent.IsPnsScreened(true));
+
+            this.store.pipe(select('app')).subscribe(res => {
+                localStorage.setItem('store', JSON.stringify(res));
+            });
+
             this.zone.run(() => { this.router.navigate(['/hts/pns'], {relativeTo: this.route }); });
         });
+    }
+
+    public onIpvScreeningChange(val: number) {
+        const optionSelected = this.yesNoNAOptions.filter(function( obj ) {
+            return obj.itemId == val;
+        });
+        if (optionSelected[0]['itemName'] !== 'Yes') {
+            this.pnsForm.forcedSexualUncomfortable = null;
+            this.pnsForm.partnerPhysicallyHurt = null;
+            this.pnsForm.partnerThreatenedHurt = null;
+
+            this.isNotIPVDone = true;
+        } else {
+            this.isNotIPVDone = false;
+        }
+        // console.log(optionSelected);
+    }
+
+    public onHivStatus(val: number) {
+        console.log(val);
+
+        const optionSelected = this.hivStatusOptions.filter(function (obj) {
+            return obj.itemId == val;
+        });
+
+        if (optionSelected[0]['itemName'] == 'Positive') {
+            this.pnsForm.pnsApproach = null;
+            this.pnsForm.eligibleTesting = null;
+            this.pnsForm.bookingDate = null;
+
+            this.ishivStatusPositive = true;
+        } else {
+            this.ishivStatusPositive = false;
+        }
     }
 }

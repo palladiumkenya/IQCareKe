@@ -3,6 +3,7 @@ import {PnsService} from '../_services/pns.service';
 import {DataSource} from '@angular/cdk/collections';
 import {Observable} from 'rxjs/Observable';
 import {ActivatedRoute, Router} from '@angular/router';
+import {select, Store} from '@ngrx/store';
 
 @Component({
   selector: 'app-pns-partners',
@@ -14,13 +15,31 @@ export class PnsPartnersComponent implements OnInit {
     patientId: number;
     highlightedRow: any[] = [];
 
+    isPnsScreeningDone: boolean = true;
+    isPnsTracingDone: boolean = false;
+
     displayedColumns = ['firstName', 'midName', 'lastName', 'dateOfBirth', 'gender', 'relationshipType', 'actionsColumn'];
     dataSource = new PnsDataSource(this.pnsService, this.patientId);
 
     constructor(private pnsService: PnsService,
                 private router: Router,
                 private route: ActivatedRoute,
-                public zone: NgZone) { }
+                public zone: NgZone,
+                private store: Store<AppState>) {
+        store.pipe(select('app')).subscribe(res => {
+            this.isPnsScreeningDone = res['isPnsScreened'];
+            console.log(res['isPnsScreened']);
+        });
+
+        store.pipe(select('app')).subscribe(res => {
+            this.isPnsTracingDone = res['isPnsTracingDone'];
+            console.log(res['isPnsTracingDone']);
+        });
+
+        this.store.pipe(select('app')).subscribe(res => {
+            localStorage.setItem('store', JSON.stringify(res));
+        });
+    }
 
     ngOnInit() {
         this.personId = JSON.parse(localStorage.getItem('personId'));

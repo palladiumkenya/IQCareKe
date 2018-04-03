@@ -16,7 +16,6 @@ declare var $: any;
 export class EncounterComponent implements OnInit {
     encounter: Encounter;
 
-
     isNoOfMonths: boolean = true;
     isDisabilitiesEnabled: boolean = true;
     isClientTestedDisabled: boolean = false;
@@ -32,12 +31,15 @@ export class EncounterComponent implements OnInit {
     hivFinalResultsOptions: any[];
     hivTestKits: any[];
 
+    maxDate: any;
+
 
     constructor(private _encounterService: EncounterService,
                 private router: Router,
                 private route: ActivatedRoute,
                 public zone: NgZone,
                 private store: Store<AppState>) {
+        this.maxDate = new Date();
     }
 
     ngOnInit() {

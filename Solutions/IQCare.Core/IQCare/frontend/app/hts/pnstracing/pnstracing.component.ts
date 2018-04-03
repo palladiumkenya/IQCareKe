@@ -2,6 +2,8 @@ import {Component, NgZone, OnInit} from '@angular/core';
 import {PnstracingService} from '../_services/pnstracing.service';
 import {PnsTracing} from '../_models/pnstracing';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Store} from '@ngrx/store';
+import * as Consent from '../../shared/reducers/app.states';
 
 @Component({
   selector: 'app-pnstracing',
@@ -17,7 +19,8 @@ export class PnsTracingComponent implements OnInit {
     constructor(private pnsTracingService: PnstracingService,
                 private router: Router,
                 private route: ActivatedRoute,
-                public zone: NgZone) { }
+                public zone: NgZone,
+                private store: Store<AppState>) { }
 
     ngOnInit() {
         this.pnsTracing = new PnsTracing();
@@ -52,6 +55,7 @@ export class PnsTracingComponent implements OnInit {
 
         this.pnsTracingService.addPnsTracing(this.pnsTracing).subscribe(data => {
             console.log(data);
+            this.store.dispatch(new Consent.IsPnsTracingDone(true));
             this.zone.run(() => { this.router.navigate(['/hts/pns'], {relativeTo: this.route }); });
         }, err => {
             console.log(err);

@@ -1,10 +1,14 @@
 import {Component, NgZone, OnInit} from '@angular/core';
+import {FormControl} from '@angular/forms';
+
 import {Referral} from '../_models/referral';
 import {LinkageReferralService} from '../_services/linkage-referral.service';
 import {Tracing} from '../_models/tracing';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Store} from '@ngrx/store';
+import {select, Store} from '@ngrx/store';
 import * as Consent from '../../shared/reducers/app.states';
+import {Observable} from 'rxjs/Observable';
+import {debounceTime} from 'rxjs/operators';
 declare var $: any;
 
 @Component({
@@ -18,6 +22,10 @@ export class LinkageReferralComponent implements OnInit {
     tracingArray: Tracing[];
     tracingModeOptions: any[];
     tracingOutcomeOptions: any[];
+    facilities: any[];
+    filteredOptions: Observable<any[]>;
+    myControl: FormControl = new FormControl();
+    referralReasons: any[];
 
     constructor(private _linkageReferralService: LinkageReferralService,
                 private router: Router,
@@ -25,6 +33,14 @@ export class LinkageReferralComponent implements OnInit {
                 public zone: NgZone,
                 private store: Store<AppState>) {
 
+        this.myControl.valueChanges.pipe(
+            debounceTime(400)
+        ).subscribe(data => {
+            this._linkageReferralService.filterFacilities(data).subscribe(res => {
+                // console.log(res);
+                this.filteredOptions = res['facilityList'];
+            });
+        });
     }
 
     ngOnInit() {
@@ -33,6 +49,7 @@ export class LinkageReferralComponent implements OnInit {
         this.tracingArray = [];
 
         this.getTracingOptions();
+        this.getReferralReasons();
 
         const self = this;
 
@@ -80,6 +97,19 @@ export class LinkageReferralComponent implements OnInit {
         }, 0 );
     }
 
+    getReferralReasons() {
+        this._linkageReferralService.getReferralReasons().subscribe(res => {
+            console.log(res);
+            this.referralReasons = res['lookupItems'][0]['value'];
+        }, err => {
+
+        });
+    }
+
+    displayFn(facility?: any): string | undefined {
+        return facility ? facility.name : undefined;
+    }
+
     onAddingTracing() {
         this.tracingArray.push(this.tracing);
         // console.log(this.tracingArray);
@@ -112,11 +142,21 @@ export class LinkageReferralComponent implements OnInit {
         this.referral.facilityId = 13050;
         this.referral.userId = 1;
         this.referral.serviceAreaId = 2;
-        this.referral.referralReason = 1;
-        this.referral.toFacility = 13050;
+        this.referral.referredTo = this.referral.referredToFacility.mflCode;
+
+        const optionSelected = this.referralReasons.filter(function( obj ) {
+            return obj.itemName == 'CCCEnrollment';
+        });
+
+        this.referral.referralReason = optionSelected[0]['itemId'];
 
         this._linkageReferralService.addReferralTracing(this.referral, this.tracingArray).subscribe(data => {
             this.store.dispatch(new Consent.IsReferred(true));
+
+            this.store.pipe(select('app')).subscribe(res => {
+                localStorage.setItem('store', JSON.stringify(res));
+            });
+
             this.zone.run(() => { this.router.navigate(['/registration/home'], { relativeTo: this.route }); });
         }, err => {
             console.log(err);
