@@ -26,3 +26,9 @@ Alter table ApiOutBox Alter Column LogMessage varchar(max)
 GO
 Alter table ApiInBox Alter Column LogMessage varchar(max)
 GO
+
+If Not Exists(Select * from sys.columns where Name = N'OrderedByName' AND Object_ID = Object_ID(N'ord_PatientPharmacyOrder'))
+BEGIN
+	ALTER TABLE ord_PatientPharmacyOrder ADD OrderedByName varchar(100)
+END
+GO
