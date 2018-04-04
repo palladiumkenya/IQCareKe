@@ -214,7 +214,7 @@ namespace IQCare.WebApi.Logic.DtoMapping
             throw new NotImplementedException();
         }
 
-        public DtoDrugDispensed DrugOrderFulfilment(DrugDispenseEntity entity)
+        public DtoDrugDispensed DrugOrderFulfilment(PharmacyDispenseEntity entity)
         {
             var internalIdentifiers = new List<DTOIdentifier>();
             var pharmacyEncodedOrder=new List<PHARMACY_ENCODED_ORDER>();
@@ -298,21 +298,21 @@ namespace IQCare.WebApi.Logic.DtoMapping
                 {
                     EXTERNAL_PATIENT_ID = 
                     {
-                        AssigningAuthority = entity.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ASSIGNING_AUTHORITY,
-                        IdentifierValue = entity.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ID,
-                        IdentifierType = entity.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.IDENTIFIER_TYPE
+                        ASSIGNING_AUTHORITY = entity.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ASSIGNING_AUTHORITY,
+                        ID = entity.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ID,
+                        IDENTIFIER_TYPE = entity.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.IDENTIFIER_TYPE
                     },
                     //InternalPatientId = internalIdentifiers,
                     PATIENT_NAME = 
                     {
-                        FirstName = entity.PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME,
-                        MiddleName = entity.PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME,
-                        LastName = entity.PATIENT_IDENTIFICATION.PATIENT_NAME.LAST_NAME
+                        FIRST_NAME = entity.PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME,
+                        MIDDLE_NAME = entity.PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME,
+                        LAST_NAME = entity.PATIENT_IDENTIFICATION.PATIENT_NAME.LAST_NAME
                     }
                 },
                 COMMON_ORDER_DETAILS =
                 {
-                    OrderControl = entity.COMMON_ORDER_DETAILS.ORDER_CONTROL,
+                    ORDER_CONTROL = entity.COMMON_ORDER_DETAILS.ORDER_CONTROL,
                     NOTES = entity.COMMON_ORDER_DETAILS.NOTES,
                     ORDERING_PHYSICIAN = 
                     {
@@ -323,12 +323,12 @@ namespace IQCare.WebApi.Logic.DtoMapping
                     ORDER_STATUS = entity.COMMON_ORDER_DETAILS.ORDER_STATUS,
                     PLACER_ORDER_NUMBER = 
                     {
-                        NUMBER =Convert.ToInt32(entity.COMMON_ORDER_DETAILS.PLACER_ORDER_NUMBER.NUMBER),
+                        NUMBER =entity.COMMON_ORDER_DETAILS.PLACER_ORDER_NUMBER.NUMBER,
                         ENTITY = entity.COMMON_ORDER_DETAILS.PLACER_ORDER_NUMBER.ENTITY
                     },
                     FILLER_ORDER_NUMBER =
                     {
-                        NUMBER=Convert.ToInt32(entity.COMMON_ORDER_DETAILS.PLACER_ORDER_NUMBER.NUMBER),
+                        NUMBER=entity.COMMON_ORDER_DETAILS.PLACER_ORDER_NUMBER.NUMBER,
                         ENTITY=entity.COMMON_ORDER_DETAILS.PLACER_ORDER_NUMBER.ENTITY
                     },
                     TRANSACTION_DATETIME =Convert.ToDateTime(entity.COMMON_ORDER_DETAILS.TRANSACTION_DATETIME),

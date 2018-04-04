@@ -94,6 +94,7 @@
     <Compile Include="Baseline\PatientHivTesting.cs" />
     <Compile Include="Baseline\PatientFamilyTesting.cs" />
     <Compile Include="Interoperability\PatientVitalsMessage.cs" />
+    <Compile Include="pharmacy\Drug.cs" />
     <Compile Include="pharmacy\PatientPharmacyDispense.cs" />
     <Compile Include="Encounter\PatientProphylaxis.cs" />
     <Compile Include="Encounter\PatientReferral.cs" />
@@ -147,6 +148,7 @@
     <Compile Include="Lookup\PersonGreenCardLookup.cs" />
     <Compile Include="Lookup\PersonLookUp.cs" />
     <Compile Include="Lookup\TestingSummaryStatistics.cs" />
+    <Compile Include="pharmacy\PharmacyOrder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Screening\PatientScreening.cs" />
     <Compile Include="Tb\PatientIcf.cs" />
