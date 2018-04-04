@@ -22,10 +22,6 @@ namespace IQCare.Management
 
 
         /// <summary>
-        /// The child form number
-        /// </summary>
-        // private int childFormNumber = 0;
-        /// <summary>
         /// The form
         /// </summary>
         Form theForm;

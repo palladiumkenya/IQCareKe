@@ -257,7 +257,7 @@ namespace IQCare.WebApi.Logic.MessageHandler
                         LogMessage = "New prescription raised"
                     };
 
-                   _apiOutboxManager.AddApiOutbox(apiOutbox);
+                    _apiOutboxManager.AddApiOutbox(apiOutbox);
                     SendData(prescriptionJson, "").ConfigureAwait(false);
                 }
                 else
