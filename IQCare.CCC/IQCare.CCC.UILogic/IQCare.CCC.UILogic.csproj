@@ -129,7 +129,7 @@
     <Compile Include="Interoperability\Observation\PatientVitalsMessageManager.cs" />
     <Compile Include="Interoperability\Observation\ProcessObservation.cs" />
     <Compile Include="Interoperability\Observation\ProcessObservationResultMessage.cs" />
-    <Compile Include="Interoperability\ProcessDrugDispense.cs" />
+    <Compile Include="Interoperability\ProcessPharmacyDispense.cs" />
     <Compile Include="Interoperability\ProcessViralLoadResults.cs" />
     <Compile Include="Interoperability\DTOValidator\PatientRegistrationValidation.cs" />
     <Compile Include="Interoperability\ViralLoadMessageManager.cs" />

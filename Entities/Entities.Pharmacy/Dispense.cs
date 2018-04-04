@@ -10,7 +10,7 @@ namespace Entities.Pharmacy
     {
         public int PrescriptionItemId { get; set; }
         public virtual Prescription  Prescription {get;set;}
-        public DateTime? DispenseDate { get { return Prescription.DispensedDate; } }
+        public DateTime ? DispenseDate { get { return Prescription.DispensedDate; } }
 
         public PharmacyItem ItemDispensed { get; set; }
 

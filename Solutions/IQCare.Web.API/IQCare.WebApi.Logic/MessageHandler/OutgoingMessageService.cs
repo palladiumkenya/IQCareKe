@@ -253,7 +253,8 @@ namespace IQCare.WebApi.Logic.MessageHandler
                     {
                         DateSent = DateTime.Now,
                         Message = prescriptionJson,
-                        RecepientId = 1
+                        RecepientId = 1,
+                        LogMessage = "New prescription raised"
                     };
 
                     _apiOutboxManager.AddApiOutbox(apiOutbox);

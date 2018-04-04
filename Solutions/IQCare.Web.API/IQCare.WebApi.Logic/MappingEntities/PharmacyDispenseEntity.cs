@@ -4,21 +4,21 @@ using System;
 
 namespace IQCare.WebApi.Logic.MappingEntities
 {
-    public class DrugDispenseEntity
+    public class PharmacyDispenseEntity
     {
-        public DrugDispenseEntity()
+        public PharmacyDispenseEntity()
         {
             MESSAGE_HEADER = new MESSAGEHEADER();
-            PATIENT_IDENTIFICATION = new PATIENTIDENTIFICATION();
-            COMMON_ORDER_DETAILS = new COMMON_ORDER_DETAILS();
-            PHARMACY_ENCODED_ORDER = new List<PHARMACY_ENCODED_ORDER_DISPENSE>();
+            PATIENT_IDENTIFICATION = new APPOINTMENTPATIENTIDENTIFICATION();
+            COMMON_ORDER_DETAILS = new COMMONORDERDETAILS();
+            PHARMACY_ENCODED_ORDER = new List<PHARMACYENCODEDORDER>();
             PHARMACY_DISPENSE = new List<PHARMACYDISPENSE>();
         }
 
         public MESSAGEHEADER MESSAGE_HEADER { get; set; }
-        public PATIENTIDENTIFICATION PATIENT_IDENTIFICATION { get; set; }
-        public COMMON_ORDER_DETAILS COMMON_ORDER_DETAILS { get; set; }
-        public List<PHARMACY_ENCODED_ORDER_DISPENSE> PHARMACY_ENCODED_ORDER { get; set; }
+        public APPOINTMENTPATIENTIDENTIFICATION PATIENT_IDENTIFICATION { get; set; }
+        public COMMONORDERDETAILS COMMON_ORDER_DETAILS { get; set; }
+        public List<PHARMACYENCODEDORDER> PHARMACY_ENCODED_ORDER { get; set; }
         public List<PHARMACYDISPENSE> PHARMACY_DISPENSE { get; set; }
     }
 
@@ -52,17 +52,17 @@ namespace IQCare.WebApi.Logic.MappingEntities
     {
         public CommonOrderDetailsDispenseEntity()
         {
-            PLACER_ORDER_NUMBER = new PLACER_ORDER_NUMBER();
-            FILLER_ORDER_NUMBER = new PLACER_ORDER_NUMBER();
-            ORDERING_PHYSICIAN = new ORDERING_PHYSICIAN();
+            PLACER_ORDER_NUMBER = new PLACERORDERNUMBER();
+            FILLER_ORDER_NUMBER = new FILLERORDERNUMBER();
+            ORDERING_PHYSICIAN = new ORDERINGPHYSICIAN();
         }
 
-        public string OrderControl { get; set; }
-        public PLACER_ORDER_NUMBER PLACER_ORDER_NUMBER { get; set; }
-        public PLACER_ORDER_NUMBER FILLER_ORDER_NUMBER { get; set; }
-        public string OrderStatus { get; set; }
-        public ORDERING_PHYSICIAN ORDERING_PHYSICIAN { get; set; }
-        public DateTime TransactionDatetime { get; set; }
-        public string Notes { get; set; }
+        public string ORDER_CONTROL { get; set; }
+        public PLACERORDERNUMBER PLACER_ORDER_NUMBER { get; set; }
+        public FILLERORDERNUMBER FILLER_ORDER_NUMBER { get; set; }
+        public string ORDER_STATUS { get; set; }
+        public ORDERINGPHYSICIAN ORDERING_PHYSICIAN { get; set; }
+        public string TRANSACTION_DATETIME { get; set; }
+        public string NOTES { get; set; }
     }
 }

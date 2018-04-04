@@ -13,6 +13,7 @@ using DataAccess.CCC.Repository.person;
 using Interface.CCC.Lookup;
 using DataAccess.CCC.Interface.assessment;
 using DataAccess.CCC.Interface.Interoperability;
+using DataAccess.CCC.Interface.Pharmacy;
 using Interface.CCC.Interoperability;
 
 namespace DataAccess.CCC.Interface
@@ -104,6 +105,11 @@ namespace DataAccess.CCC.Interface
         IPatientMessageRepository PatientMessageRepository { get; }
         IDrugPrescriptionMessageRepository DrugPrescriptionMessageRepository { get; }
         IViralLoadMessageRepository ViralLoadMessageRepository { get; }
+
+        //pharmacy
+        IPatientPharmacyDispenseRepository PatientPharmacyDispenseRepository { get; }
+        IPharmacyOrderRepository PharmacyOrderRepository { get; }
+        IDrugRepository DrugRepository { get; }
 
     }
 }
