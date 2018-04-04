@@ -50,7 +50,7 @@ namespace IQCare.Events
             }
             catch (Exception exception)
             {
-                throw new Exception(exception.Message);
+               // throw new Exception(exception.Message);
             }
         }
         public void RaiseEvent(object sender, MessageEventArgs e)
