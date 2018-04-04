@@ -137,5 +137,6 @@ namespace DataAccess.CCC.Context
         //Pharmacy
         public DbSet<PatientPharmacyDispense> PatientPharmacyDispenses { get; set; }
         public DbSet<PharmacyOrder> PharmacyOrders { get; set; }
+        public DbSet<Drug> DrugLists { get; set; }
     }
 }

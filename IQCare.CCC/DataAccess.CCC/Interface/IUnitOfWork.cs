@@ -109,6 +109,7 @@ namespace DataAccess.CCC.Interface
         //pharmacy
         IPatientPharmacyDispenseRepository PatientPharmacyDispenseRepository { get; }
         IPharmacyOrderRepository PharmacyOrderRepository { get; }
+        IDrugRepository DrugRepository { get; }
 
     }
 }

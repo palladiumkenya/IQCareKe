@@ -14,24 +14,37 @@ namespace IQCare.CCC.UILogic.Interoperability
         private string Msg { get; set; }
         private readonly IPharmacyOrderManager _pharmacyOrderManager = (IPharmacyOrderManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Pharmacy.BPharmacyOrder, BusinessProcess.CCC");
         private readonly IPatientPharmacyDispenseManager _pharmacyDispenseManager = (IPatientPharmacyDispenseManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Pharmacy.BPatientPharmacyDispense, BusinessProcess.CCC");
+        private readonly IDrugManager _drugManager = (IDrugManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Pharmacy.BDrug, BusinessProcess.CCC");
 
         public string Process(DtoDrugDispensed drugDispensed)
         {
             try
             {
                 LookupLogic facilityLookup = new LookupLogic();
-                string receivingFacilityMflCode = drugDispensed.MESSAGE_HEADER.SENDING_FACILITY;
+                string receivingFacilityMflCode = drugDispensed.MESSAGE_HEADER.RECEIVING_FACILITY;
+                string sendingFacilityMflCode = drugDispensed.MESSAGE_HEADER.SENDING_FACILITY;
                 //check if facility exists
-                LookupFacility facility = facilityLookup.GetFacility(receivingFacilityMflCode);
-                if (facility == null)
+                LookupFacility recieverfacility = facilityLookup.GetFacility(receivingFacilityMflCode);
+                LookupFacility senderfacility = facilityLookup.GetFacility(sendingFacilityMflCode);
+                if (recieverfacility == null)
                 {
                     return Msg = $"The facility {receivingFacilityMflCode} does not exist";
                 }
-                //check if it is the right facility
-                LookupFacility correctFacility = facilityLookup.GetFacility();
-                if (correctFacility.FacilityID != facility.FacilityID)
+                if (senderfacility == null)
                 {
-                    return Msg = "The sending facility code is invalid!";
+                    return Msg = $"The facility {sendingFacilityMflCode} does not exist";
+                }
+                
+                if (recieverfacility.FacilityID != senderfacility.FacilityID)
+                {
+                    return Msg = "The sending facility is not the same as the receiving facility!";
+                }
+
+                //check if it is the right facility
+                LookupFacility thisFacility = facilityLookup.GetFacility();
+                if (recieverfacility.FacilityID != thisFacility.FacilityID)
+                {
+                    return Msg = $"This message belongs to {receivingFacilityMflCode}, not this facility {thisFacility.MFLCode}!";
                 }
                 var patientLookup = new PatientLookupManager();
                 //check patient
@@ -52,15 +65,17 @@ namespace IQCare.CCC.UILogic.Interoperability
                 {
                     return Msg = "Pharmacy Order could not be found!";
                 }
-                var dispensedDrugs = _pharmacyDispenseManager.GetByPharmacyOrderId(pharmacyOrder.ptn_pharmacy_pk);
-                if (dispensedDrugs != null)
+                var orderedDrugs = _pharmacyDispenseManager.GetByPharmacyOrderId(pharmacyOrder.ptn_pharmacy_pk);
+                if (orderedDrugs != null)
                 {
-                    var newDispensedDrugs = dispensedDrugs;
+                    var newDispensedDrugs = orderedDrugs;
                     foreach (var drug in newDispensedDrugs)
                     {
-                        //todo get drugnames for drugId
-                        string drugname = "";
-                        var messageDispensed = drugDispensed.PHARMACY_DISPENSE.FirstOrDefault(x=>x.DRUG_NAME ==drugname);
+                        //todo refactor to use drug codes and possibly drug ids to be included in the message
+                        var drugFind = _drugManager.GetDrug(drug.Drug_Pk);
+                        string drugname = drugFind.DrugName;
+                        PHARMACY_DISPENSE messageDispensed = null;
+                        messageDispensed = drugDispensed.PHARMACY_DISPENSE.FirstOrDefault(x=> drugname.Contains(x.ACTUAL_DRUGS));
                         if (messageDispensed != null)
                         {
                             drug.DispensedQuantity = messageDispensed.QUANTITY_DISPENSED;
@@ -72,7 +87,7 @@ namespace IQCare.CCC.UILogic.Interoperability
                             drug.Duration = messageDispensed.DURATION;
                             drug.UpdateDate = DateTime.Now;
                             drug.UserID = 1;
-                            drug.SingleDose = Convert.ToDecimal(Regex.Replace(messageDispensed.DOSAGE, @"^[A-Za-z]+", ""));
+                            //drug.SingleDose = Convert.ToDecimal(Regex.Replace(messageDispensed.DOSAGE, @"^[A-Za-z]+", ""));
 
                         }
                         try
@@ -91,13 +106,14 @@ namespace IQCare.CCC.UILogic.Interoperability
                     PatientPharmacyDispense newlyDispensedDrugs = new PatientPharmacyDispense();
                     foreach (var drug in drugDispensed.PHARMACY_DISPENSE)
                     {
-                        //todo get drug ids from drug names
-                        //newlyDispensedDrugs.Drug_Pk = ;
+                        string drugNameQuery = "%" + drug.ACTUAL_DRUGS + "%";
+                        var drugFind = _drugManager.GetDrugsByName(drugNameQuery).FirstOrDefault();
+                        newlyDispensedDrugs.Drug_Pk = drugFind.Drug_pk;
                         newlyDispensedDrugs.DispensedQuantity = drug.QUANTITY_DISPENSED;
                         newlyDispensedDrugs.Duration = drug.DURATION;
                         //todo get frequencyId 
                         //newlyDispensedDrugs.FrequencyID = drug.FREQUENCY;
-                        newlyDispensedDrugs.SingleDose = Convert.ToDecimal(Regex.Replace(drug.DOSAGE, @"^[A-Za-z]+", ""));
+                        //newlyDispensedDrugs.SingleDose = Convert.ToDecimal(Regex.Replace(drug.DOSAGE, @"^[A-Za-z]+", ""));
                         //todo get strength ids
                         //newlyDispensedDrugs.StrengthID = drug.STRENGTH;
                         newlyDispensedDrugs.PatientInstructions = drug.DISPENSING_NOTES;
@@ -119,6 +135,19 @@ namespace IQCare.CCC.UILogic.Interoperability
                     }
                 }
                 var updatedPharmacyOrder = pharmacyOrder;
+                var orderingPhysician = drugDispensed.COMMON_ORDER_DETAILS.ORDERING_PHYSICIAN;
+                updatedPharmacyOrder.OrderedByName = orderingPhysician.PREFIX + " " + orderingPhysician.FIRST_NAME +
+                                                     " " + orderingPhysician.LAST_NAME;
+                //todo harmonise users
+                updatedPharmacyOrder.DispensedBy = 1;
+                updatedPharmacyOrder.DispensedByDate = drugDispensed.MESSAGE_HEADER.MESSAGE_DATETIME;
+                updatedPharmacyOrder.OrderStatus = 2;
+                string str = updatedPharmacyOrder.PharmacyNotes;
+                if (str != null)
+                {
+                    str += " Dispensed from IL";
+                }
+                updatedPharmacyOrder.PharmacyNotes = str;
                 try
                 {
                     _pharmacyOrderManager.UpdatePharmacyOrder(updatedPharmacyOrder);

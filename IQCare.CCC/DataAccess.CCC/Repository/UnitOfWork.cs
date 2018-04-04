@@ -159,6 +159,7 @@ namespace DataAccess.CCC.Repository
         //pharmacy
         private IPatientPharmacyDispenseRepository _patientPharmacyDispenseRepository;
         private IPharmacyOrderRepository _pharmacyOrderRepository;
+        private IDrugRepository _drugRepository;
 
         public UnitOfWork(BaseContext context)
         {
@@ -263,6 +264,15 @@ namespace DataAccess.CCC.Repository
             {
                 return _pharmacyOrderRepository ??
                        (_pharmacyOrderRepository = new PharmacyOrderRepository((GreencardContext)_context));
+            }
+        }
+
+        public IDrugRepository DrugRepository
+        {
+            get
+            {
+                return _drugRepository ??
+                       (_drugRepository = new DrugRepository((GreencardContext)_context));
             }
         }
 
