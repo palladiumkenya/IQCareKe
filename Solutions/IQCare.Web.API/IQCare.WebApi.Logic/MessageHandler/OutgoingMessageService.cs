@@ -256,7 +256,7 @@ namespace IQCare.WebApi.Logic.MessageHandler
                         RecepientId = 1
                     };
 
-                   // _apiOutboxManager.AddApiOutbox(apiOutbox);
+                    _apiOutboxManager.AddApiOutbox(apiOutbox);
                     SendData(prescriptionJson, "").ConfigureAwait(false);
                 }
                 else
