@@ -272,11 +272,13 @@ namespace IQCare.Web.CCC.Patient
                             lblRegimenName.Text = ptnTreatmentInitiation.Regimen.ToString();
                             //lblCurrentRegimen.Text = "<span class='label label-success'>" + ptnTreatmentBaseline.Regimen.ToString() + "</span>";
                             lblARTInitiationDate.Text = ptnTreatmentBaseline.CreateDate.ToString("dd-MMM-yyyy");
+
+                           // lblRegimenName.Text = ptnTreatmentInitiation.Regimen.ToString();
+                            //lblCurrentRegimen.Text = "<span class='label label-success'>" + ptnTreatmentBaseline.Regimen.ToString() + "</span>";
+                            //lblARTInitiationDate.Text = ptnTreatmentBaseline.CreateDate.ToString("dd-MMM-yyyy");
                         }
 
-                        lblRegimenName.Text = ptnTreatmentInitiation.Regimen.ToString();
-                        //lblCurrentRegimen.Text = "<span class='label label-success'>" + ptnTreatmentBaseline.Regimen.ToString() + "</span>";
-                        lblARTInitiationDate.Text = ptnTreatmentBaseline.CreateDate.ToString("dd-MMM-yyyy");
+                        
                     }
                     else
                     {
