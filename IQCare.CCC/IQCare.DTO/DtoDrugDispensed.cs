@@ -11,14 +11,14 @@ namespace IQCare.DTO
         public DtoDrugDispensed()
         {
             MESSAGE_HEADER = new MESSAGE_HEADER();
-            PATIENT_IDENTIFICATION = new DtoPatientIdentification();
+            PATIENT_IDENTIFICATION = new APPOINTMENTPATIENTIDENTIFICATION();
             COMMON_ORDER_DETAILS = new CommonOrderDetailsDispenseDto();
             PHARMACY_DISPENSE = new List<PHARMACY_DISPENSE>();
         }
 
         [Required, ValidateObject]
         public MESSAGE_HEADER MESSAGE_HEADER { get; set; }
-        public DtoPatientIdentification PATIENT_IDENTIFICATION { get; set; }
+        public APPOINTMENTPATIENTIDENTIFICATION PATIENT_IDENTIFICATION { get; set; }
         public CommonOrderDetailsDispenseDto COMMON_ORDER_DETAILS { get; set; }
         [Required, ValidateObject]
         public List<PHARMACY_ENCODED_ORDER> PHARMACY_ENCODED_ORDER { get; set; }
@@ -61,7 +61,7 @@ namespace IQCare.DTO
             ORDERING_PHYSICIAN=new OrderingPysicianDto();
         }
 
-        public string OrderControl { get; set; }
+        public string ORDER_CONTROL { get; set; }
         public PlacerOrderNumberDto PLACER_ORDER_NUMBER { get; set; }
         public PlacerOrderNumberDto FILLER_ORDER_NUMBER { get; set; }
         public string ORDER_STATUS { get; set; }

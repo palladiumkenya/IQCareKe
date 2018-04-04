@@ -28,25 +28,25 @@ namespace IQCare.CCC.UILogic.Interoperability
                     return Msg = $"The facility {receivingFacilityMflCode} does not exist";
                 }
                 //check if it is the right facility
-                LookupFacility correctFacility = facilityLookup.GetFacility(receivingFacilityMflCode);
+                LookupFacility correctFacility = facilityLookup.GetFacility();
                 if (correctFacility.FacilityID != facility.FacilityID)
                 {
                     return Msg = "The sending facility code is invalid!";
                 }
                 var patientLookup = new PatientLookupManager();
                 //check patient
-                var identifier = drugDispensed.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID.FirstOrDefault(n => n.IdentifierType == "CCC_NUMBER");
+                var identifier = drugDispensed.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID.FirstOrDefault(n => n.IDENTIFIER_TYPE == "CCC_NUMBER");
                 if (identifier == null)
                 {
                     return Msg = "Message does not contain a CCC number!";
                 }
-                var patient = patientLookup.GetPatientByCccNumber(identifier.IdentifierValue);
+                var patient = patientLookup.GetPatientByCccNumber(identifier.ID);
                 if (patient == null)
                 {
                     return Msg = "Patient could not be found!";
                 }
                 //check pharmacy order exists
-                int orderId = drugDispensed.COMMON_ORDER_DETAILS.PLACER_ORDER_NUMBER.NUMBER;
+                int orderId = Convert.ToInt32(drugDispensed.COMMON_ORDER_DETAILS.PLACER_ORDER_NUMBER.NUMBER);
                 var pharmacyOrder = _pharmacyOrderManager.GetPharmacyOrder(orderId);
                 if (pharmacyOrder == null)
                 {
