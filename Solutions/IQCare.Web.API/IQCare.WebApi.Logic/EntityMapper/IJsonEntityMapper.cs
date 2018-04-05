@@ -44,5 +44,7 @@ namespace IQCare.WebApi.Logic.EntityMapper
 
         //object DrugPrescriptionRaised(PrescriptionDto drugOrderDto);
         ObservationResultEntity ObservationResult(ObservationResultDTO observation, MessageEventArgs messageEvent);
+
+        SHR ShrMessageEntity(DtoShr shrDto);
     }
 }

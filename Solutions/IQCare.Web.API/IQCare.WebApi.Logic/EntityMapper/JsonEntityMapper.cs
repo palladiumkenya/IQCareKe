@@ -10,7 +10,9 @@ using System;
 using System.Collections.Generic;
 using INTERNALPATIENTID = IQCare.WebApi.Logic.MappingEntities.INTERNALPATIENTID;
 using MESSAGEHEADER = IQCare.WebApi.Logic.MappingEntities.MESSAGEHEADER;
-
+using IQCare.DTO.PSmart;
+using MESSAGEHEADER = IQCare.WebApi.Logic.MappingEntities.MESSAGEHEADER;
+using Entities.CCC.PSmart;
 
 namespace IQCare.WebApi.Logic.EntityMapper
 {
@@ -21,6 +23,7 @@ namespace IQCare.WebApi.Logic.EntityMapper
             PatientRegistrationEntity patientRegistration = new PatientRegistrationEntity();
 
             string messageType = null;
+
             if (messageEvent.MessageType == MessageType.NewClientRegistration)
             {
                 messageType = "ADT^A04";
@@ -32,7 +35,8 @@ namespace IQCare.WebApi.Logic.EntityMapper
 
             int facilityId = messageEvent.FacilityId;
 
-            Mapper.Initialize(cfg => {
+            Mapper.Initialize(cfg =>
+            {
                 cfg.CreateMap<PatientRegistrationDTO, PatientRegistrationEntity>().ReverseMap();
                 cfg.CreateMap<DTO.CommonEntities.MESSAGEHEADER, MappingEntities.MESSAGEHEADER>().ReverseMap();
                 cfg.CreateMap<DTO.CommonEntities.PATIENTIDENTIFICATION, MappingEntities.PATIENTIDENTIFICATION>().ReverseMap();
@@ -79,11 +83,10 @@ namespace IQCare.WebApi.Logic.EntityMapper
 
         public DrugPrescriptionEntity DrugPrescriptionRaised(PrescriptionSourceDto entityDto)
         {
-
             DrugPrescriptionEntity drugPrescriptionEntity = new DrugPrescriptionEntity();
 
             drugPrescriptionEntity.MESSAGE_HEADER.SENDING_FACILITY = entityDto.MESSAGE_HEADER.SENDING_FACILITY;
-            drugPrescriptionEntity.MESSAGE_HEADER.MESSAGE_DATETIME =entityDto.MESSAGE_HEADER.MESSAGE_DATETIME.ToString("yyyyMMddHmmss");
+            drugPrescriptionEntity.MESSAGE_HEADER.MESSAGE_DATETIME = entityDto.MESSAGE_HEADER.MESSAGE_DATETIME.ToString("yyyyMMddHmmss");
             drugPrescriptionEntity.MESSAGE_HEADER.MESSAGE_TYPE = entityDto.MESSAGE_HEADER.MESSAGE_TYPE;
             drugPrescriptionEntity.MESSAGE_HEADER.PROCESSING_ID = entityDto.MESSAGE_HEADER.PROCESSING_ID;
             drugPrescriptionEntity.MESSAGE_HEADER.RECEIVING_APPLICATION = entityDto.MESSAGE_HEADER.RECEIVING_APPLICATION;
@@ -91,8 +94,8 @@ namespace IQCare.WebApi.Logic.EntityMapper
             drugPrescriptionEntity.MESSAGE_HEADER.SECURITY = entityDto.MESSAGE_HEADER.SECURITY;
             drugPrescriptionEntity.MESSAGE_HEADER.SENDING_APPLICATION = entityDto.MESSAGE_HEADER.SENDING_APPLICATION;
 
-            drugPrescriptionEntity.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ID =entityDto.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ID;
-            drugPrescriptionEntity.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.IDENTIFIER_TYPE =entityDto.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.IDENTIFIER_TYPE;
+            drugPrescriptionEntity.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ID = entityDto.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ID;
+            drugPrescriptionEntity.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.IDENTIFIER_TYPE = entityDto.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.IDENTIFIER_TYPE;
             drugPrescriptionEntity.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ASSIGNING_AUTHORITY = entityDto.PATIENT_IDENTIFICATION.EXTERNAL_PATIENT_ID.ASSIGNING_AUTHORITY;
 
             var internalPatientId = new List<MappingEntities.drugs.INTERNAL_PATIENT_ID>();
@@ -110,11 +113,11 @@ namespace IQCare.WebApi.Logic.EntityMapper
             }
 
             drugPrescriptionEntity.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID = internalPatientId;
-            drugPrescriptionEntity.PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME =entityDto.PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME;
-            drugPrescriptionEntity.PATIENT_IDENTIFICATION.PATIENT_NAME.LAST_NAME =entityDto.PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME;
+            drugPrescriptionEntity.PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME = entityDto.PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME;
+            drugPrescriptionEntity.PATIENT_IDENTIFICATION.PATIENT_NAME.LAST_NAME = entityDto.PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME;
             drugPrescriptionEntity.PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME = entityDto.PATIENT_IDENTIFICATION.PATIENT_NAME.LAST_NAME;
 
-            drugPrescriptionEntity.COMMON_ORDER_DETAILS.ORDERING_PHYSICIAN.FIRST_NAME =entityDto.COMMON_ORDER_DETAILS.ORDERING_PHYSICIAN.FIRST_NAME;
+            drugPrescriptionEntity.COMMON_ORDER_DETAILS.ORDERING_PHYSICIAN.FIRST_NAME = entityDto.COMMON_ORDER_DETAILS.ORDERING_PHYSICIAN.FIRST_NAME;
             drugPrescriptionEntity.COMMON_ORDER_DETAILS.ORDERING_PHYSICIAN.MIDDLE_NAME = entityDto.COMMON_ORDER_DETAILS.ORDERING_PHYSICIAN.MIDDLE_NAME;
             drugPrescriptionEntity.COMMON_ORDER_DETAILS.ORDERING_PHYSICIAN.LAST_NAME = entityDto.COMMON_ORDER_DETAILS.ORDERING_PHYSICIAN.LAST_NAME;
 
@@ -122,13 +125,13 @@ namespace IQCare.WebApi.Logic.EntityMapper
             drugPrescriptionEntity.COMMON_ORDER_DETAILS.ORDER_CONTROL = entityDto.COMMON_ORDER_DETAILS.ORDER_CONTROL;
             drugPrescriptionEntity.COMMON_ORDER_DETAILS.ORDER_STATUS = entityDto.COMMON_ORDER_DETAILS.ORDER_STATUS;
             drugPrescriptionEntity.COMMON_ORDER_DETAILS.PLACER_ORDER_NUMBER.NUMBER = Convert.ToInt32(entityDto.COMMON_ORDER_DETAILS.PLACER_ORDER_NUMBER.NUMBER);
-            drugPrescriptionEntity.COMMON_ORDER_DETAILS.PLACER_ORDER_NUMBER.ENTITY =entityDto.COMMON_ORDER_DETAILS.PLACER_ORDER_NUMBER.ENTITY;
+            drugPrescriptionEntity.COMMON_ORDER_DETAILS.PLACER_ORDER_NUMBER.ENTITY = entityDto.COMMON_ORDER_DETAILS.PLACER_ORDER_NUMBER.ENTITY;
             drugPrescriptionEntity.COMMON_ORDER_DETAILS.TRANSACTION_DATETIME = entityDto.COMMON_ORDER_DETAILS.TRANSACTION_DATETIME.ToString("yyyyMMddHmmss");
 
-            var pharmacyEncodedOrder = new List<MappingEntities.drugs.PHARMACY_ENCODED_ORDER>(); 
+            var pharmacyEncodedOrder = new List<MappingEntities.drugs.PHARMACY_ENCODED_ORDER>();
+
             foreach (var order in entityDto.PHARMACY_ENCODED_ORDER)
             {
-
                 var pharmacyEncorderOrderEntity = new MappingEntities.drugs.PHARMACY_ENCODED_ORDER()
                 {
                     DRUG_NAME = order.DRUG_NAME,
@@ -256,14 +259,30 @@ namespace IQCare.WebApi.Logic.EntityMapper
             return observationResultEntity;
         }
 
-       /* public DrugPrescriptionEntity DrugPrescriptionRaised(List<PrescriptionDto> prescription)
+        public SHR ShrMessageEntity(DtoShr shrDto)
         {
-            throw new NotImplementedException();
-        }*/
+            SHR clientShrEntity = new SHR();
+            Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<DtoShr, SHR>().ReverseMap();
+                cfg.CreateMap<DTO.PSmart.PATIENTIDENTIFICATION, MappingEntities.PSmart.PATIENTIDENTIFICATION>().ReverseMap();
+                cfg.CreateMap<DTO.PSmart.NEXTOFKIN, MappingEntities.PSmart.NEXTOFKIN>().ReverseMap();
+                cfg.CreateMap<DTO.PSmart.HIVTEST, MappingEntities.PSmart.HIVTEST>().ReverseMap();
+                cfg.CreateMap<DTO.PSmart.IMMUNIZATION, MappingEntities.PSmart.IMMUNIZATION>().ReverseMap();
+                cfg.CreateMap<DTO.PSmart.CARDDETAILS, MappingEntities.PSmart.CARDDETAILS>().ReverseMap();
+            });
 
-     /*   object IJsonEntityMapper.DrugPrescriptionRaised(PrescriptionDto drugOrderDto)
-        {
-            throw new NotImplementedException();
-        }*/
+            clientShrEntity = Mapper.Map<SHR>(shrDto);
+            return clientShrEntity;
+        }
+        /* public DrugPrescriptionEntity DrugPrescriptionRaised(List<PrescriptionDto> prescription)
+         {
+             throw new NotImplementedException();
+         }*/
+
+        /*   object IJsonEntityMapper.DrugPrescriptionRaised(PrescriptionDto drugOrderDto)
+           {
+               throw new NotImplementedException();
+           }*/
     }
 }
