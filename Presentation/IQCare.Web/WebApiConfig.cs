@@ -26,6 +26,11 @@ namespace IQCare.Web
                 defaults: new { id = RouteParameter.Optional }
             );
             config.Routes.MapHttpRoute(
+                name: "PsmartApi",
+                routeTemplate: "api/psmart/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional }
+            );
+            config.Routes.MapHttpRoute(
                 name: "HTSAPI",
                 routeTemplate: "myhts/api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }

@@ -54,9 +54,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\References\Entity.WebApi.dll</HintPath>
     </Reference>
-    <Reference Include="Interface.WebApi">
-      <HintPath>..\..\..\References\Interface.WebApi.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -91,6 +88,13 @@
       <Project>{88FAAEFB-FF2F-46CF-98ED-62AB2704A12F}</Project>
       <Name>DataAccess.WebApi</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Interface.WebApi\Interface.WebApi.csproj">
+      <Project>{13CA40EB-1DB9-43C8-A1FA-CB6580D27DC3}</Project>
+      <Name>Interface.WebApi</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

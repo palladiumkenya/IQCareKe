@@ -6,7 +6,6 @@ using DataAccess.WebApi;
 using DataAccess.WebApi.Interface;
 using DataAccess.WebApi.Repository;
 using Entities.CCC.PSmart;
-using Entities.CCC.PSmart;
 using Interface.WebApi;
 
 namespace BusinessProcess.WebApi
