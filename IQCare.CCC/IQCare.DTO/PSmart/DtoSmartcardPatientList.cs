@@ -1,4 +1,4 @@
-﻿namespace IQCare.DTO.psmart
+﻿namespace IQCare.DTO.PSmart
 {
     public class DtoSmartcardPatientList
     {

@@ -77,9 +77,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\References\IQCare.Events.dll</HintPath>
     </Reference>
-    <Reference Include="IQCare.Web.Api">
-      <HintPath>..\..\..\References\net461\IQCare.Web.Api.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -111,6 +108,7 @@
     <Compile Include="MappingEntities\ObservationResultEntity.cs" />
     <Compile Include="MappingEntities\PatientAppointmentEntity.cs" />
     <Compile Include="MappingEntities\PharmacyDispenseEntity.cs" />
+    <Compile Include="MappingEntities\PSmart\ClientShr.cs" />
     <Compile Include="MessageHandler\IIncomingMessageService.cs" />
     <Compile Include="MessageHandler\IncomingMessageService.cs" />
     <Compile Include="MessageHandler\IOutgoingMessageService.cs" />
@@ -123,7 +121,22 @@
     <Compile Include="MappingEntities\DrugPrescriptionEntity.cs" />
     <Compile Include="MappingEntities\PatientRegistrationEntity.cs" />
     <Compile Include="MappingEntities\ViralLoadResultEntity.cs" />
+    <Compile Include="MessageHandler\PSmartMesssageService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PSmart\FamilyInfoManager.cs" />
+    <Compile Include="PSmart\HivTestTrackerManager.cs" />
+    <Compile Include="PSmart\ImmunizationTrackerManager.cs" />
+    <Compile Include="PSmart\IPSmartAuthRequest.cs" />
+    <Compile Include="PSmart\IRequest.cs" />
+    <Compile Include="PSmart\MstPatientManager.cs" />
+    <Compile Include="PSmart\PSmartAuthManager.cs" />
+    <Compile Include="PSmart\PsmartMotherDetailsViewManager.cs" />
+    <Compile Include="PSmart\PSmartPatientProgramStartManager.cs" />
+    <Compile Include="PSmart\PsmartShrCardSerialManager.cs" />
+    <Compile Include="PSmart\PsmartShrManager.cs" />
+    <Compile Include="PSmart\PsmartStoreManager.cs" />
+    <Compile Include="PSmart\ShrApiManager.cs" />
+    <Compile Include="PSmart\SmartcardPatientListManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

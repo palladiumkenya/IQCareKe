@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Entities.CCC.psmart
+namespace Entities.CCC.PSmart
 {
     [Serializable]
     [System.ComponentModel.DataAnnotations.Schema.Table("vw_SmartcardPatientList")]

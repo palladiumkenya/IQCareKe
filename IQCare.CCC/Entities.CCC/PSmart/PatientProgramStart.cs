@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Entities.CCC.psmart
+namespace Entities.CCC.PSmart
 {
     [Serializable][Table("Lnk_PatientProgramStart")]
     public class PatientProgramStart

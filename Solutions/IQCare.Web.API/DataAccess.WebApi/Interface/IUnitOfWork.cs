@@ -1,5 +1,5 @@
 ﻿using System;
-using Entities.CCC.psmart;
+using Entities.CCC.PSmart;
 namespace DataAccess.WebApi.Interface
 {
     public interface IUnitOfWork : IDisposable

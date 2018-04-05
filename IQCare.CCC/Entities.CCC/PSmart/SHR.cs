@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Linq;
 
 
-namespace Entities.CCC.psmart
+namespace Entities.CCC.PSmart
 {
     [Serializable]
     public class SHR
