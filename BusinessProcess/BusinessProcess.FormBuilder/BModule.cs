@@ -9,6 +9,8 @@ using DataAccess.Entity;
 using Entities.Common;
 using Entities.Administration;
 using Interface.FormBuilder;
+using DataAccess.Context.ModuleMaster;
+
 namespace BusinessProcess.FormBuilder
 {
     /// <summary>
@@ -254,8 +256,30 @@ namespace BusinessProcess.FormBuilder
                           ).ToList<ServiceRule>();
             return result;
         }
+        public Module GetMstModueByName(String name)
+        {
+            ClsObject businessRule = new ClsObject();
+            ClsUtility.Init_Hashtable();
+
+            string query = $"Select top 1 ModuleId, ModuleName, DisplayName From MSt_Module where ModuleName='{name}'";
+            DataRow dt = (DataRow)businessRule.ReturnObject(ClsUtility.theParams, query, ClsUtility.ObjectEnum.DataRow);
+            Module md = null;
+            if (dt != null)
+            {
+                md = new Module();
+                md.Active = true;
+                md.Id = Convert.ToInt32(dt["ModuleId"]);
+                md.Name = dt["ModuleName"].ToString();
+            }
+
+            return md;
+        }
+        public Module GetModuleByName(string name)
+        {
+            ModuleRepository repo = new ModuleRepository();
+            return repo.GetByName(name);
+        }
 
 
-       
     }
 }

@@ -1,4 +1,4 @@
-﻿using Entities.CCC.psmart;
+﻿
 using Entities.CCC.PSmart;
 
 namespace Interface.WebApi

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using Entities.CCC.psmart;
-using Entity.WebApi.PSmart;
+﻿using Entities.CCC.PSmart;
+using System;
 
 namespace Interface.WebApi
 {

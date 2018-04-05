@@ -1,10 +1,7 @@
 ﻿using DataAccess.Base;
-using Entities.CCC.psmart;
+using Entities.CCC.PSmart;
 using Interface.PSmart;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace BusinessProcess.PSmart
 {

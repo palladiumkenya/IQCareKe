@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Xml.XPath;
 using Application.Presentation;
-using Entities.CCC.psmart;
+using Entities.CCC.PSmart;
 using Entity.WebApi.PSmart;
 using Interface.WebApi;
 using IQCare.DTO.PSmart;

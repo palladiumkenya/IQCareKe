@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using INTERNALPATIENTID = IQCare.WebApi.Logic.MappingEntities.INTERNALPATIENTID;
 using MESSAGEHEADER = IQCare.WebApi.Logic.MappingEntities.MESSAGEHEADER;
 using IQCare.DTO.PSmart;
-using MESSAGEHEADER = IQCare.WebApi.Logic.MappingEntities.MESSAGEHEADER;
 using Entities.CCC.PSmart;
 
 namespace IQCare.WebApi.Logic.EntityMapper

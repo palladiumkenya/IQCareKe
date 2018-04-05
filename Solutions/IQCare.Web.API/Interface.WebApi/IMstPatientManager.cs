@@ -1,7 +1,6 @@
-﻿using System;
-using Entities.CCC.psmart;
+﻿using Entities.CCC.PSmart;
 using Entity.WebApi.PSmart;
-using IQCare.DTO.PSmart;
+using System;
 
 namespace Interface.WebApi
 {

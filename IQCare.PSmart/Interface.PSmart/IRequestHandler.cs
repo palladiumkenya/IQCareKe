@@ -1,8 +1,4 @@
-﻿using Entities.CCC.psmart;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Entities.CCC.PSmart;
 
 namespace Interface.PSmart
 {

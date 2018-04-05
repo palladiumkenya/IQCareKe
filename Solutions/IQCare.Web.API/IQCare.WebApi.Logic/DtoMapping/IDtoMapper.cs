@@ -1,4 +1,6 @@
-﻿using IQCare.DTO;
+﻿using Entities.CCC.PSmart;
+using IQCare.DTO;
+using IQCare.DTO.PSmart;
 using IQCare.WebApi.Logic.MappingEntities;
 
 namespace IQCare.WebApi.Logic.DtoMapping

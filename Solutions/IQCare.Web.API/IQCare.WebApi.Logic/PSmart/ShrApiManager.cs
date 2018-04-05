@@ -5,17 +5,16 @@ using System.Linq;
 using System.Web.Script.Serialization;
 using Application.Common;
 using Entities.Administration;
-using Entities.CCC.psmart;
+
 using Entities.CCC.PSmart;
-using Entities.CCC.Visit;
 using Entities.PSmart;
 using Entities.Queue;
 using Interface.Clinical;
 using Interface.FormBuilder;
 using Interface.PatientCore;
 using Interface.WebApi;
-using IQCare.CCC.UILogic.PSmart;
-using IQCare.CCC.UILogic.Visit;
+
+
 using IQCare.DTO.PSmart;
 
 namespace IQCare.WebApi.Logic.PSmart

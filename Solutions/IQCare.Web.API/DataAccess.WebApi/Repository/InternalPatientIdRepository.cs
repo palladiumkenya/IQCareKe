@@ -1,6 +1,6 @@
 ﻿using DataAccess.Context;
 using DataAccess.WebApi.Interface;
-using Entities.CCC.psmart;
+using Entities.CCC.PSmart;
 
 namespace DataAccess.WebApi.Repository
 {

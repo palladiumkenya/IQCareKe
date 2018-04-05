@@ -1,5 +1,5 @@
 ﻿using DataAccess.Context;
-using Entities.CCC.psmart;
+using Entities.CCC.PSmart;
 
 namespace DataAccess.WebApi.Interface
 {

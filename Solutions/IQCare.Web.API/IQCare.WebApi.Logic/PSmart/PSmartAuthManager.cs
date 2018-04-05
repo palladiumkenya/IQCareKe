@@ -1,5 +1,4 @@
-﻿using System.Security.Policy;
-using Application.Common;
+﻿using Application.Common;
 using Entity.WebApi.PSmart;
 using Interface.WebApi;
 using IQCare.DTO.PSmart;

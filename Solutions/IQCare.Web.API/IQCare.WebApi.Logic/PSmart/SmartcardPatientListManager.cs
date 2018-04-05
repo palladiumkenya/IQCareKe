@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Text;
-using System.Web.Script.Serialization;
-using Entity.WebApi.PSmart;
+﻿using Entity.WebApi.PSmart;
 using Interface.WebApi;
-using IQCare.DTO.psmart;
+using IQCare.DTO.PSmart;
+using System.Collections.Generic;
 
 namespace IQCare.WebApi.Logic.PSmart
 {

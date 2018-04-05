@@ -1,4 +1,8 @@
-﻿namespace IQCare.WebApi.Logic.MessageHandler
+﻿using Entity.WebApi.PSmart;
+using IQCare.DTO.PSmart;
+using System.Collections.Generic;
+
+namespace IQCare.WebApi.Logic.MessageHandler
 {
     public interface IIncomingMessageService
     {

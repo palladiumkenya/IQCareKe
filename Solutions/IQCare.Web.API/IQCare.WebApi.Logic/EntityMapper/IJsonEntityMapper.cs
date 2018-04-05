@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using Entities.CCC.PSmart;
 using IQCare.DTO;
 using IQCare.DTO.ObservationResult;
 using IQCare.DTO.PatientAppointment;
+using IQCare.DTO.PatientRegistration;
+using IQCare.DTO.PSmart;
 using IQCare.Events;
 using IQCare.WebApi.Logic.MappingEntities;
-using IQCare.DTO.PatientRegistration;
 
 namespace IQCare.WebApi.Logic.EntityMapper
 {

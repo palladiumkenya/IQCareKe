@@ -603,56 +603,56 @@ namespace IQCare.WebApi.Logic.DtoMapping
                 Mapper.Initialize(cfg =>
                 {
                     cfg.CreateMap<SHR, DtoShr>().ReverseMap();
-                    cfg.CreateMap<Entities.CCC.psmart.PATIENTIDENTIFICATION, DTO.PSmart.PATIENTIDENTIFICATION>()
+                    cfg.CreateMap<Entities.CCC.PSmart.PATIENTIDENTIFICATION, DTO.PSmart.PATIENTIDENTIFICATION>()
                         .ReverseMap()
                         .ForMember(x => x.PatientId, opt => opt.Ignore())
                         .ForMember(x => x.PersonId, opt => opt.Ignore())
                         .ForMember(x => x.CardSerialNumber, opt => opt.Ignore());
-                    cfg.CreateMap<Entities.CCC.psmart.EXTERNALPATIENTID, DTO.PSmart.EXTERNALPATIENTID>().ReverseMap()
+                    cfg.CreateMap<Entities.CCC.PSmart.EXTERNALPATIENTID, DTO.PSmart.EXTERNALPATIENTID>().ReverseMap()
                         .ForMember(x => x.PersonId, opt => opt.Ignore())
                         .ForMember(x => x.CardSerialNumber, opt => opt.Ignore());
-                    cfg.CreateMap<Entities.CCC.psmart.INTERNALPATIENTID, DTO.PSmart.INTERNALPATIENTID>().ReverseMap()
+                    cfg.CreateMap<Entities.CCC.PSmart.INTERNALPATIENTID, DTO.PSmart.INTERNALPATIENTID>().ReverseMap()
                     .ForMember(x => x.PatientId, opt => opt.Ignore())
                     .ForMember(x => x.personId, opt => opt.Ignore());
-                    cfg.CreateMap<Entities.CCC.psmart.PATIENTNAME, DTO.PSmart.PATIENTNAME>().ReverseMap()
+                    cfg.CreateMap<Entities.CCC.PSmart.PATIENTNAME, DTO.PSmart.PATIENTNAME>().ReverseMap()
                         .ForMember(x => x.PatientId, opt => opt.Ignore())
                         .ForMember(x => x.CardSerialNumber, opt => opt.Ignore());
 
-                    cfg.CreateMap<Entities.CCC.psmart.PHYSICALADDRESS, DTO.PSmart.PHYSICALADDRESS>().ReverseMap()
+                    cfg.CreateMap<Entities.CCC.PSmart.PHYSICALADDRESS, DTO.PSmart.PHYSICALADDRESS>().ReverseMap()
                         .ForMember(x => x.PersonId, opt => opt.Ignore())
                         .ForMember(x => x.PatientId, opt => opt.Ignore())
                         .ForMember(x => x.CardSerialNumber, opt => opt.Ignore());
 
-                    cfg.CreateMap<Entities.CCC.psmart.PATIENTADDRESS, DTO.PSmart.PATIENTADDRESS>().ReverseMap()
+                    cfg.CreateMap<Entities.CCC.PSmart.PATIENTADDRESS, DTO.PSmart.PATIENTADDRESS>().ReverseMap()
                         .ForMember(x => x.PersonId, opt => opt.Ignore())
                         .ForMember(x => x.CardSerialNumber, opt => opt.Ignore());
-                    cfg.CreateMap<Entities.CCC.psmart.MOTHERDETAILS, DTO.PSmart.MOTHERDETAILS>().ReverseMap()
+                    cfg.CreateMap<Entities.CCC.PSmart.MOTHERDETAILS, DTO.PSmart.MOTHERDETAILS>().ReverseMap()
                         .ForMember(x => x.PersonId, opt => opt.Ignore())
                         .ForMember(x => x.CardSerialNumber, opt => opt.Ignore());
-                    cfg.CreateMap<Entities.CCC.psmart.MOTHERNAME, DTO.PSmart.MOTHERNAME>().ReverseMap()
+                    cfg.CreateMap<Entities.CCC.PSmart.MOTHERNAME, DTO.PSmart.MOTHERNAME>().ReverseMap()
                         .ForMember(x => x.PersonId, opt => opt.Ignore())
                         .ForMember(x => x.CardSerialNumber, opt => opt.Ignore());
-                    cfg.CreateMap<Entities.CCC.psmart.MOTHERIDENTIFIER, DTO.PSmart.MOTHERIDENTIFIER>().ReverseMap()
+                    cfg.CreateMap<Entities.CCC.PSmart.MOTHERIDENTIFIER, DTO.PSmart.MOTHERIDENTIFIER>().ReverseMap()
                         .ForMember(x => x.PersonId, opt => opt.Ignore())
                         .ForMember(x => x.CardSerialNumber, opt => opt.Ignore());
-                    cfg.CreateMap<Entities.CCC.psmart.NEXTOFKIN, DTO.PSmart.NEXTOFKIN>().ReverseMap()
+                    cfg.CreateMap<Entities.CCC.PSmart.NEXTOFKIN, DTO.PSmart.NEXTOFKIN>().ReverseMap()
                         .ForMember(x => x.PersonId, opt => opt.Ignore())
                         .ForMember(x => x.CardSerialNumber, opt => opt.Ignore());
-                    cfg.CreateMap<Entities.CCC.psmart.NOKNAME, DTO.PSmart.NOKNAME>().ReverseMap()
+                    cfg.CreateMap<Entities.CCC.PSmart.NOKNAME, DTO.PSmart.NOKNAME>().ReverseMap()
                         .ForMember(x => x.PersonId, opt => opt.Ignore())
                         .ForMember(x => x.CardSerialNumber, opt => opt.Ignore());
-                    cfg.CreateMap<Entities.CCC.psmart.HIVTEST, DTO.PSmart.HIVTEST>().ReverseMap()
+                    cfg.CreateMap<Entities.CCC.PSmart.HIVTEST, DTO.PSmart.HIVTEST>().ReverseMap()
                         .ForMember(x => x.PatientId, opt => opt.Ignore())
                         .ForMember(x => x.CardSerialNumber, opt => opt.Ignore());
-                    cfg.CreateMap<Entities.CCC.psmart.PROVIDERDETAILS, DTO.PSmart.PROVIDERDETAILS>().ReverseMap()
-                        .ForMember(x => x.PatientId, opt => opt.Ignore())
-                        .ForMember(x => x.PersonId, opt => opt.Ignore())
-                        .ForMember(x => x.CardSerialNumber, opt => opt.Ignore());
-                    cfg.CreateMap<Entities.CCC.psmart.IMMUNIZATION, DTO.PSmart.IMMUNIZATION>().ReverseMap()
+                    cfg.CreateMap<Entities.CCC.PSmart.PROVIDERDETAILS, DTO.PSmart.PROVIDERDETAILS>().ReverseMap()
                         .ForMember(x => x.PatientId, opt => opt.Ignore())
                         .ForMember(x => x.PersonId, opt => opt.Ignore())
                         .ForMember(x => x.CardSerialNumber, opt => opt.Ignore());
-                    cfg.CreateMap<Entities.CCC.psmart.CARDDETAILS, DTO.PSmart.CARDDETAILS>().ReverseMap()
+                    cfg.CreateMap<Entities.CCC.PSmart.IMMUNIZATION, DTO.PSmart.IMMUNIZATION>().ReverseMap()
+                        .ForMember(x => x.PatientId, opt => opt.Ignore())
+                        .ForMember(x => x.PersonId, opt => opt.Ignore())
+                        .ForMember(x => x.CardSerialNumber, opt => opt.Ignore());
+                    cfg.CreateMap<Entities.CCC.PSmart.CARDDETAILS, DTO.PSmart.CARDDETAILS>().ReverseMap()
                         .ForMember(x => x.PatientId, opt => opt.Ignore())
                         .ForMember(x => x.PersonId, opt => opt.Ignore())
                         .ForMember(x => x.CardSerialNumber, opt => opt.Ignore());

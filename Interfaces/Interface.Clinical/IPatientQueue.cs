@@ -12,5 +12,7 @@ namespace Interface.Clinical
        DataTable GetPatientPendingQueue(int patientId);
 
        DataTable GetQueuedPatient(int queueId, int moduleId);
+        WaitingQueue GetQueueByName(string name);
+        WaitingQueue GetQueueById(int id);
     }
 }

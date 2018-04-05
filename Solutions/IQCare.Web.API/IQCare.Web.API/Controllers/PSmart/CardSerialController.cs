@@ -61,7 +61,7 @@ namespace IQCare.Web.Api.Controllers.PSmart
                     PATIENTID =Convert.ToInt32(item.Value);
                 }
             }
-            psmartCard psmartCard=new psmartCard()
+            psmartCard _card=new psmartCard()
             {
                 CARD_SERIAL_NO = CARD_SERIAL_NO,
                 PATIENTID = PATIENTID
@@ -69,7 +69,7 @@ namespace IQCare.Web.Api.Controllers.PSmart
             //psmartCard.PATIENTID = 30730;
             // psmartCard.CARD_SERIAL_NO = "12345-abcedw-098765";
 
-            if (string.IsNullOrEmpty(psmartCard.CARD_SERIAL_NO))
+            if (string.IsNullOrEmpty(_card.CARD_SERIAL_NO))
             {
                 return BadRequest();
             }
@@ -77,7 +77,7 @@ namespace IQCare.Web.Api.Controllers.PSmart
             {
                 //TODO saving to Greencard Tables
                 //string processCardStatus= _incomingMessageService.ProcessCardSerialNumberIdentifier(psmartCard);
-                var result = _incomingMessageService.ProcessCardSerialNumberIdentifierBluecard(psmartCard);
+                var result = _incomingMessageService.ProcessCardSerialNumberIdentifierBluecard(_card);
 
                 return Ok(result);
                 //TODO return SHR after saving the serial.

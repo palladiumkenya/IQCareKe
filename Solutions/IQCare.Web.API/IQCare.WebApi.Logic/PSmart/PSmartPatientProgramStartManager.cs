@@ -1,5 +1,5 @@
 ﻿using Application.Presentation;
-using Entities.CCC.psmart;
+using Entities.CCC.PSmart;
 using Interface.WebApi;
 
 namespace IQCare.WebApi.Logic.PSmart

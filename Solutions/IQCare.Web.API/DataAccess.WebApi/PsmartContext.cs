@@ -2,9 +2,7 @@
 using System.Data.Entity;
 using DataAccess.Base;
 using DataAccess.Context;
-using Entities.CCC.psmart;
 using Entities.CCC.PSmart;
-using Entity.WebApi;
 using Entity.WebApi.PSmart;
 using PatientVisit = Entities.CCC.Visit.PatientVisit;
 
@@ -37,7 +35,7 @@ namespace DataAccess.WebApi
         public DbSet<PATIENTIDENTIFICATION> Patientidentifications { get; set; }
         public DbSet<NOKNAME> Noknames { get; set; }
         public DbSet<NEXTOFKIN> Nextofkins { get; set; }
-        public DbSet<Entities.CCC.psmart.PROVIDERDETAILS> Providerdetailss { get; set; }
+        public DbSet<Entities.CCC.PSmart.PROVIDERDETAILS> Providerdetailss { get; set; }
         public DbSet<HIVTEST> Hivtests { get; set; }
         public DbSet<IMMUNIZATION> Immunizations { get; set; }
         public DbSet<CARDDETAILS> Carddetailss { get; set; }

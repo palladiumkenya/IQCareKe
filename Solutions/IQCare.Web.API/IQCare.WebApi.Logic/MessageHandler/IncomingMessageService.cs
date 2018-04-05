@@ -20,7 +20,6 @@ using Entities.CCC.Enrollment;
 using Entities.CCC.PSmart;
 using IQCare.CCC.UILogic.Enrollment;
 using IQCare.DTO.PSmart;
-using IQCare.DTO.PSmart;
 
 namespace IQCare.WebApi.Logic.MessageHandler
 {
@@ -36,10 +35,12 @@ namespace IQCare.WebApi.Logic.MessageHandler
             _dtoMapper = new DtoMapper();
         }
 
-        public IncomingMessageService(IApiInboxManager apiInboxmanager, IDtoMapper dtoMapper)
+        public IncomingMessageService(IApiInboxManager apiInboxmanager, IDtoMapper dtoMapper, IPsmartStoreManager psmartStoreManager, IPSmartAuthManager pSmartAuthManager)
         {
             _apiInboxmanager = apiInboxmanager;
             _dtoMapper = dtoMapper;
+            // _smartcardPatientListManager = smartcardPatientListManager;
+            // _shrApiManager = new ShrApiManager();
             _psmartStoreManager = psmartStoreManager;
             _pSmartAuthManager = pSmartAuthManager;
         }

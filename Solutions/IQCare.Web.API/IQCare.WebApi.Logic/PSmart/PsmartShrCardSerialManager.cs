@@ -1,24 +1,24 @@
 ﻿using System.Collections.Generic;
 using Application.Presentation;
-using Entities.CCC.psmart;
+using Entities.CCC.PSmart;
 using Interface.WebApi;
 using IQCare.DTO.PSmart;
 using IQCare.WebApi.Logic.DtoMapping;
-using CARDDETAILS = Entities.CCC.psmart.CARDDETAILS;
-using EXTERNALPATIENTID = Entities.CCC.psmart.EXTERNALPATIENTID;
-using HIVTEST = Entities.CCC.psmart.HIVTEST;
-using IMMUNIZATION = Entities.CCC.psmart.IMMUNIZATION;
-using INTERNALPATIENTID = Entities.CCC.psmart.INTERNALPATIENTID;
-using MOTHERDETAILS = Entities.CCC.psmart.MOTHERDETAILS;
-using MOTHERIDENTIFIER = Entities.CCC.psmart.MOTHERIDENTIFIER;
-using MOTHERNAME = Entities.CCC.psmart.MOTHERNAME;
-using NEXTOFKIN = Entities.CCC.psmart.NEXTOFKIN;
-using NOKNAME = Entities.CCC.psmart.NOKNAME;
-using PATIENTADDRESS = Entities.CCC.psmart.PATIENTADDRESS;
-using PATIENTIDENTIFICATION = Entities.CCC.psmart.PATIENTIDENTIFICATION;
-using PATIENTNAME = Entities.CCC.psmart.PATIENTNAME;
-using PHYSICALADDRESS = Entities.CCC.psmart.PHYSICALADDRESS;
-using PROVIDERDETAILS = Entities.CCC.psmart.PROVIDERDETAILS;
+using CARDDETAILS = Entities.CCC.PSmart.CARDDETAILS;
+using EXTERNALPATIENTID = Entities.CCC.PSmart.EXTERNALPATIENTID;
+using HIVTEST = Entities.CCC.PSmart.HIVTEST;
+using IMMUNIZATION = Entities.CCC.PSmart.IMMUNIZATION;
+using INTERNALPATIENTID = Entities.CCC.PSmart.INTERNALPATIENTID;
+using MOTHERDETAILS = Entities.CCC.PSmart.MOTHERDETAILS;
+using MOTHERIDENTIFIER = Entities.CCC.PSmart.MOTHERIDENTIFIER;
+using MOTHERNAME = Entities.CCC.PSmart.MOTHERNAME;
+using NEXTOFKIN = Entities.CCC.PSmart.NEXTOFKIN;
+using NOKNAME = Entities.CCC.PSmart.NOKNAME;
+using PATIENTADDRESS = Entities.CCC.PSmart.PATIENTADDRESS;
+using PATIENTIDENTIFICATION = Entities.CCC.PSmart.PATIENTIDENTIFICATION;
+using PATIENTNAME = Entities.CCC.PSmart.PATIENTNAME;
+using PHYSICALADDRESS = Entities.CCC.PSmart.PHYSICALADDRESS;
+using PROVIDERDETAILS = Entities.CCC.PSmart.PROVIDERDETAILS;
 
 namespace IQCare.WebApi.Logic.PSmart
 {

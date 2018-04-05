@@ -1,8 +1,8 @@
 ﻿using System;
 using DataAccess.Context;
-using Entities.CCC.psmart;
+using Entities.CCC.PSmart;
 using Entity.WebApi.PSmart;
-using IQCare.DTO.PSmart;
+
 
 namespace DataAccess.WebApi.Interface
 {

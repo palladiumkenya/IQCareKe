@@ -1,12 +1,10 @@
-﻿using System;
+﻿using DataAccess.Context;
+using DataAccess.WebApi.Interface;
+using Entities.CCC.PSmart;
+using Entity.WebApi.PSmart;
+using System;
 using System.Data.Entity.Core.Metadata.Edm;
 using System.Data.SqlClient;
-using System.Reflection;
-using DataAccess.Context;
-using DataAccess.WebApi.Interface;
-using Entities.CCC.psmart;
-using Entity.WebApi.PSmart;
-using IQCare.DTO.PSmart;
 
 namespace DataAccess.WebApi.Repository
 {
