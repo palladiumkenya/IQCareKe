@@ -12,6 +12,6 @@ namespace IQCare.Common.Core.Models
 
         public DateTime ScreeningDate { get; set; }
 
-        public DateTime BookingDate { get; set; }
+        public DateTime? BookingDate { get; set; }
     }
 }

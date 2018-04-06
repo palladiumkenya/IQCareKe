@@ -2,6 +2,10 @@
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
+    "iis": {
+      "applicationUrl": "http://localhost/IQCare",
+      "sslPort": 0
+    },
     "iisExpress": {
       "applicationUrl": "http://localhost:1225/",
       "sslPort": 0

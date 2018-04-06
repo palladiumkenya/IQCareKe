@@ -55,6 +55,22 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Encounter
                     await _unitOfWork.Repository<PatientScreening>().AddRangeAsync(screenings);
                     await _unitOfWork.SaveAsync();
 
+                    List<HtsScreening> htsScreenings = new List<HtsScreening>();
+                    foreach (var screening in screenings)
+                    {
+                        HtsScreening htsScreening = new HtsScreening()
+                        {
+                            PersonId = request.PersonId,
+                            PatientScreeningId = screening.Id,
+                            HtsScreeningOptionsId = htsScreeningOptions.Id
+                        };
+
+                        htsScreenings.Add(htsScreening);
+                    }
+
+                    await _unitOfWork.Repository<HtsScreening>().AddRangeAsync(htsScreenings);
+                    await _unitOfWork.SaveAsync();
+
                     _unitOfWork.Dispose();
 
                     return Result<PatientScreeningResponse>.Valid(new PatientScreeningResponse()

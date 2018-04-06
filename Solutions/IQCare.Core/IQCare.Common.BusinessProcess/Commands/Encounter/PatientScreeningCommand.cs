@@ -10,7 +10,7 @@ namespace IQCare.Common.BusinessProcess.Commands.Encounter
         public List<Screening> Screening { get; set; }
         public DateTime ScreeningDate { get; set; }
         public string Occupation { get; set; }
-        public DateTime BookingDate { get; set; }
+        public DateTime? BookingDate { get; set; }
         public int PatientId { get; set; }
         public int PersonId { get; set; }
         public int PatientMasterVisitId { get; set; }

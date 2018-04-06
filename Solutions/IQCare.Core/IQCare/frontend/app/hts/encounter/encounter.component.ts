@@ -119,13 +119,16 @@ export class EncounterComponent implements OnInit {
                 return obj.itemId == isConsented;
             });
 
-            const optionTestedAs = this.testedAs.filter(function (obj) {
-                return obj.itemId == testedAs;
-            });
+            if (testedAs) {
+                const optionTestedAs = this.testedAs.filter(function (obj) {
+                    return obj.itemId == testedAs;
+                });
 
-            if (optionTestedAs[0]['itemName'] == 'I: Individual') {
-                this.store.dispatch(new Consent.TestedAs(true));
+                if (optionTestedAs[0]['itemName'] == 'I: Individual') {
+                    this.store.dispatch(new Consent.TestedAs(true));
+                }
             }
+
 
             if (optionSelected[0]['itemName'] == 'Yes') {
                 this.store.dispatch(new Consent.ConsentTesting(true));

@@ -4,6 +4,8 @@ import {PnsTracing} from '../_models/pnstracing';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Store} from '@ngrx/store';
 import * as Consent from '../../shared/reducers/app.states';
+import {NotificationService} from '../../shared/_services/notification.service';
+import {SnotifyService} from 'ng-snotify';
 
 @Component({
   selector: 'app-pnstracing',
@@ -20,7 +22,9 @@ export class PnsTracingComponent implements OnInit {
                 private router: Router,
                 private route: ActivatedRoute,
                 public zone: NgZone,
-                private store: Store<AppState>) { }
+                private store: Store<AppState>,
+                private snotifyService: SnotifyService,
+                private notificationService: NotificationService) { }
 
     ngOnInit() {
         this.pnsTracing = new PnsTracing();
@@ -56,8 +60,14 @@ export class PnsTracingComponent implements OnInit {
         this.pnsTracingService.addPnsTracing(this.pnsTracing).subscribe(data => {
             console.log(data);
             this.store.dispatch(new Consent.IsPnsTracingDone(true));
+
+            this.snotifyService.success('Successful saving PNS screening',
+                'PNS Tracing', this.notificationService.getConfig());
+
             this.zone.run(() => { this.router.navigate(['/hts/pns'], {relativeTo: this.route }); });
         }, err => {
+            this.snotifyService.error('Error saving PNS tracing' + err,
+                'PNS Tracing', this.notificationService.getConfig());
             console.log(err);
         });
     }

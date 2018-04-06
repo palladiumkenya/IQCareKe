@@ -15,7 +15,7 @@
                             <fieldset>
                                 <div class="example-container">
                                     <div class="row">
-                                        <div class="col-lg-3">
+                                        <div class="col-lg-3 col-md-3 col-sm-3">
                                             <div class="form-group">
                                                 <mat-form-field>
                                                     <mat-select placeholder="Service" autofocus id="service" name="service" class="form-control" tabindex="1" [(ngModel)]="enrollment.ServiceAreaId" #ServiceAreaId="ngModel">
@@ -26,12 +26,12 @@
 
                                             <div class="form-group">
                                                 <mat-form-field>
-                                                    <input matInput placeholder="Enrollment Number" id="enrollmentNo" name="enrollmentNo" tabindex="3" [(ngModel)]="enrollment.EnrollmentNo" #EnrollmentNo="ngModel">
+                                                    <input matInput placeholder="Serial" id="enrollmentNo" name="enrollmentNo" tabindex="3" [(ngModel)]="enrollment.EnrollmentNo" #EnrollmentNo="ngModel">
                                                 </mat-form-field>
                                             </div>
                                         </div>
 
-                                        <div class="col-lg-3">
+                                        <div class="col-lg-3 col-md-3 col-sm-3">
                                             <div class="form-group">
                                                 <div>
                                                     <mat-form-field>
@@ -55,7 +55,7 @@
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-lg-3">
+                                        <div class="col-lg-3 col-md-3 col-sm-3">
                                             <div class="form-group">
                                                 <button class="btn btn-primary m-t-n-xs" value="submit" type="submit" [disabled]="!enrollmentForm.form.valid">
                                                     <strong>Save and Continue</strong>

@@ -4,17 +4,17 @@
     </div>
     <div class="ibox-content">
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-2 col-lg-2 col-sm-2">
                 <app-leftnav></app-leftnav>
             </div>
-            <div class="col-md-10 animated fadeInRight">
+            <div class="col-md-10 col-lg-10 col-sm-10 animated fadeInRight">
                 <div class="panel panel-default">
                     <div class="panel-heading">LINKAGE</div>
                     <div class="panel-body">
                         <form id="form" action="#" class="wizard-big" (ngSubmit)="onSubmit()" #linkageForm="ngForm">
                             <fieldset>
                                 <div class="row">
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-3 col-md-3 col-sm-3">
                                         <div class="form-group">
                                             <label>Facility *</label>
                                             <input id="facility" name="facility" type="text" class="form-control required" required [(ngModel)]="linkage.facility" #facility="ngModel">
@@ -46,7 +46,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-3 col-md-3 col-sm-3">
                                         <div class="form-group">
                                             <label>Date Enrolled *</label>
                                             <div>
@@ -82,7 +82,7 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-3 col-md-3 col-sm-3">
                                         <div class="form-group">
                                             <button class="btn btn-primary m-t-n-xs" value="submit" type="submit" [disabled]="!linkageForm.form.valid">
                                                 <strong>Save Changes</strong>

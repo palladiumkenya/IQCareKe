@@ -5,6 +5,8 @@ import {ClientService} from '../../shared/_services/client.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import * as Consent from '../../shared/reducers/app.states';
 import {select, Store} from '@ngrx/store';
+import {NotificationService} from '../../shared/_services/notification.service';
+import {SnotifyService} from 'ng-snotify';
 
 @Component({
   selector: 'app-pnsform',
@@ -30,7 +32,9 @@ export class PnsformComponent implements OnInit {
                 private router: Router,
                 private route: ActivatedRoute,
                 public zone: NgZone,
-                private store: Store<AppState>) { }
+                private store: Store<AppState>,
+                private snotifyService: SnotifyService,
+                private notificationService: NotificationService) { }
 
     ngOnInit() {
         this.pnsForm = new Pnsform();
@@ -122,7 +126,13 @@ export class PnsformComponent implements OnInit {
                 localStorage.setItem('store', JSON.stringify(res));
             });
 
+            this.snotifyService.success('Successfully pns screening',
+                'PNS Screening', this.notificationService.getConfig());
+
             this.zone.run(() => { this.router.navigate(['/hts/pns'], {relativeTo: this.route }); });
+        }, (err) => {
+            this.snotifyService.error('Error saving PNS screening ' + err,
+                'PNS Screening', this.notificationService.getConfig());
         });
     }
 

@@ -1,70 +1,67 @@
 <div class="ibox">
     <div class="ibox-title">
-        <h5>Family Member Screeening</h5>
+        <app-clientbrief></app-clientbrief>
     </div>
-
     <div class="ibox-content">
-        <form id="form" action="#" class="wizard-big" (ngSubmit)="onSubmit()" #familyScreeningForm="ngForm">
-            <fieldset>
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label>Date of Screening</label>
-                            <div>
-                                <mat-form-field>
-                                    <input matInput [matDatepicker]="myDatepicker" (click)="myDatepicker.open()" id="dateOfScreening" name="dateOfScreening" [(ngModel)]="familyScreening.dateOfScreening" #dateOfScreening="ngModel">
-                                    <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
-                                    <mat-datepicker #myDatepicker></mat-datepicker>
-                                </mat-form-field>
+        <div class="row">
+            <div class="col-md-2">
+                <app-leftnav></app-leftnav>
+            </div>
+            <div class="col-md-10 animated fadeInRight">
+                <div class="panel panel-default">
+                    <div class="panel-heading">PNS FORM</div>
+                    <div class="panel-body">
+                        <app-personbrief></app-personbrief>
+                        <br>
+
+                        <form [formGroup]="formGroup">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <mat-form-field>
+                                        <input matInput [matDatepicker]="myDatepicker" formControlName="dateOfScreening" placeholder="Date of Screening" tabindex="1" (click)="myDatepicker.open()">
+                                        <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+                                        <mat-datepicker #myDatepicker></mat-datepicker>
+                                    </mat-form-field>
+
+                                    <mat-form-field>
+                                        <mat-select placeholder="Eligible For Testing" formControlName="eligibleForTesting" tabindex="3">
+                                            <mat-option></mat-option>
+                                            <mat-option *ngFor="let option of eligibleTestingOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+
+                                </div>
+
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <mat-form-field>
+                                        <mat-select placeholder="HIV Status" formControlName="hivStatus" tabindex="2" (change)="onHivStatusSelected()">
+                                            <mat-option></mat-option>
+                                            <mat-option *ngFor="let option of hivStatusOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+
+                                    <mat-form-field>
+                                        <input matInput [matDatepicker]="datebookedDatepicker" formControlName="dateBooked" placeholder="Date Booked for testing" tabindex="4" (click)="datebookedDatepicker.open()">
+                                        <mat-datepicker-toggle matSuffix [for]="datebookedDatepicker"></mat-datepicker-toggle>
+                                        <mat-datepicker #datebookedDatepicker></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+
                             </div>
-                        </div>
 
-                        <div class="form-group">
-                            <label>Family member eligible for Testing</label>
-                            <select class="form-control" id="eligibleForTesting" name="eligibleForTesting" [(ngModel)]="familyScreening.eligibleForTesting" #eligibleForTesting="ngModel">
-                                <option></option>
-                                <option>Yes</option>
-                                <option>No</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label>HIV Status</label>
-                            <select class="form-control" id="hivStatus" name="hivStatus" [(ngModel)]="familyScreening.hivStatus" #hivStatus="ngModel">
-                                <option></option>
-                                <option>DK</option>
-                                <option>HEI</option>
-                                <option>KP</option>
-                                <option>N</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Date contact booked for testing</label>
-                            <div>
-                                <mat-form-field>
-                                    <input matInput [matDatepicker]="myDatepicker" (click)="myDatepicker.open()" id="dateBooked" name="dateBooked" [(ngModel)]="familyScreening.dateBooked" #dateBooked="ngModel">
-                                    <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
-                                    <mat-datepicker #myDatepicker></mat-datepicker>
-                                </mat-form-field>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6">&nbsp;</div>
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <button class="pull-right" mat-raised-button color="primary" (click)="onSubmit()">
+                                        <strong>Save Changes</strong>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    </div>
 
-                 </div>
-
-                <div class="row">
-                    <div class="col-lg-3">
-                        <div class="form-group">
-                            <button class="btn btn-primary m-t-n-xs" value="submit" [disabled]="!familyScreeningForm.form.valid">
-                                <strong>Save Changes</strong>
-                            </button>
-                        </div>
+                        </form>
                     </div>
                 </div>
-            </fieldset>
-        </form>
+            </div>
+        </div>
     </div>
 </div>

@@ -11,156 +11,119 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">REGISTER CLIENT</div>
                     <div class="panel-body">
-                        <div class="wizard" data-initialize="wizard" id="myWizard">
-                            <div class="steps-container">
-                                <ul class="steps">
-                                    <li data-step="1" data-name="campaign" class="active">
-                                        <span class="badge">1</span>DEMOGRAPHICS
-                                        <span class="chevron"></span>
-                                    </li>
-                                    <li data-step="2">
-                                        <span class="badge">2</span>CONTACTS
-                                        <span class="chevron"></span>
-                                    </li>
-                                    <li data-step="3">
-                                        <span class="badge">3</span>PROFILE
-                                        <span class="chevron"></span>
-                                    </li>
-                                </ul>
-                            </div>
+                        <form [formGroup]="formGroup">
+                            <mat-horizontal-stepper #stepper="matHorizontalStepper" formArrayName="formArray" [linear]="isLinear">
+                                <mat-step formGroupName="0" [stepControl]="formArray.get([0])">
+                                    <ng-template matStepLabel>Demographics</ng-template>
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-3 col-sm-3">
+                                            <mat-form-field>
+                                                <input matInput placeholder="First Name" formControlName="FirstName" id="firstName" name="firstName" tabindex="1" required>
+                                            </mat-form-field>
 
-                            <div class="actions">
-                                <button type="button" class="btn btn-default btn-prev">
-                                    <span class="glyphicon glyphicon-arrow-left"></span>Prev</button>
-                                <button type="button" class="btn btn-primary btn-next" data-last="Complete">Next
-                                    <span class="glyphicon glyphicon-arrow-right"></span>
-                                </button>
-                            </div>
+                                            <mat-form-field>
+                                                <input tabindex="5" placeholder="Date Of Birth" matInput [matDatepicker]="myDatepicker" [max]="maxDate" formControlName="DateOfBirth" required>
+                                                <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+                                                <mat-datepicker #myDatepicker name="DateOfBirth" ngDefaultControl (selectedChanged)="onDate($event)"></mat-datepicker>
+                                            </mat-form-field>
 
-                            <form id="form" action="#" class="wizard-big">
-                                <div class="step-content">
-                                    <div class="step-pane active sample-pane alert" id="datastep1" data-step="1" data-parsley-validate="true" data-show-errors="true">
-                                        <fieldset>
-                                            <div class="row">
-                                                <div class="col-lg-3">
-                                                    <div class="form-group">
-                                                        <label>First Name</label>
-                                                        <input id="firstName" name="firstName" tabindex="1" autofocus type="text" class="form-control required" [(ngModel)]="person.FirstName" #FirstName="ngModel" data-parsley-required="true">
-                                                    </div>
+                                        </div>
 
-                                                    <div class="form-group">
-                                                        <label>Date of Birth</label>
-                                                        <div>
-                                                            <mat-form-field>
-                                                                <input type="hidden" [matDatepicker]="myDatepicker">
-                                                                <input tabindex="5" matInput [max]="maxDate" id="DateOfBirth" name="DateOfBirth" [(ngModel)]="person.DateOfBirth" #DateOfBirth="ngModel" data-parsley-required="true">
-                                                                <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
-                                                                <mat-datepicker #myDatepicker name="DateOfBirth" [(ngModel)]="person.DateOfBirth" ngDefaultControl (selectedChanged)="onDate($event)"></mat-datepicker>
-                                                            </mat-form-field>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                        <div class="col-lg-3 col-md-3 col-sm-3">
+                                            <mat-form-field>
+                                                <input matInput placeholder="Middle Name" formControlName="MiddleName" tabindex="2">
+                                            </mat-form-field>
 
-                                                <div class="col-lg-3">
-                                                    <div class="form-group">
-                                                        <label>Middle Name</label>
-                                                        <input id="middleName" name="middleName" type="text" tabindex="2" class="form-control required" [(ngModel)]="person.MiddleName" #MiddleName="ngModel">
-                                                    </div>
+                                            <mat-form-field>
+                                                <input matInput placeholder="Age(Years)" type="number" formControlName="personAge" id="personAge" name="personAge" (keyup)="estimateDob()" required>
+                                            </mat-form-field>
+                                        </div>
 
-                                                    <div class="form-group">
-                                                        <label>Age(Years)</label>
-                                                        <input type="number" id="personAge" name="personAge" (keyup)="estimateDob(registrationVariables.personAge)" class="form-control" [(ngModel)]="registrationVariables.personAge" #personAge="ngModel" data-parsley-required="true">
-                                                    </div>
+                                        <div class="col-lg-3 col-md-3 col-sm-3">
+                                            <mat-form-field>
+                                                <input matInput placeholder="Last Name" formControlName="LastName" required tabindex="3">
+                                            </mat-form-field>
 
+                                            <mat-form-field>
+                                                <mat-select placeholder="Marital Status" formControlName="MaritalStatus" tabindex="6">
+                                                    <mat-option></mat-option>
+                                                    <mat-option *ngFor="let maritalStatus of maritalStatuses" [value]="maritalStatus.itemId">{{maritalStatus.itemName}}</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
 
-                                                </div>
-
-                                                <div class="col-lg-3">
-                                                    <div class="form-group">
-                                                        <label>Last Name</label>
-                                                        <input id="lastName" name="lastName" type="text" tabindex="3" class="form-control required" [(ngModel)]="person.LastName" #LastName="ngModel" data-parsley-required="true">
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label>Marital Status</label>
-                                                        <select tabindex="6" class="form-control m-b" name="maritalStatus" id="maritalStatus" [(ngModel)]="person.MaritalStatus" #MaritalStatus="ngModel" data-parsley-required="true">
-                                                            <option></option>
-                                                            <option *ngFor="let maritalStatus of maritalStatuses" [ngValue]="maritalStatus.itemId">{{maritalStatus.itemName}}</option>
-                                                        </select>
-                                                    </div>
-
-                                                </div>
-
-                                                <div class="col-lg-3">
-                                                    <label>Gender</label>
-                                                    <div class="form-group">
-                                                        <div class="radio radio-info radio-inline">
-                                                            <input type="radio" id="inlineRadio1" tabindex="4" [value]="male" name="radioInline" class="form-control" [(ngModel)]="person.Sex" data-parsley-required="true">
-                                                            <label for="inlineRadio1">Male</label>
-                                                        </div>
-
-                                                        <div class="radio radio-inline">
-                                                            <input type="radio" id="inlineRadio2" tabindex="4" [value]="female" name="radioInline" class="form-control" [(ngModel)]="person.Sex" data-parsley-required="true">
-                                                            <label for="inlineRadio2">Female</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                        <div class="col-lg-3 col-md-3 col-sm-3">
+                                            <label>Gender </label>
+                                            <div>
+                                                <mat-radio-group formControlName="Sex">
+                                                    <mat-radio-button [value]="male" tabindex="4">Male</mat-radio-button>
+                                                    <mat-radio-button [value]="female" tabindex="4">Female</mat-radio-button>
+                                                </mat-radio-group>
                                             </div>
+                                        </div>
 
-                                        </fieldset>
+                                    </div>
+                                    <div>
+                                        <button mat-button matStepperNext type="button">Next</button>
+                                    </div>
+                                </mat-step>
+
+                                <mat-step formGroupName="1" [stepControl]="formArray.get([1])">
+                                    <ng-template matStepLabel>Contacts</ng-template>
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-3 col-sm-3">
+                                            <mat-form-field>
+                                                <input matInput placeholder="Telephone" formControlName="PhoneNumber">
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-lg-3 col-md-3 col-sm-3">
+                                            <mat-form-field>
+                                                <input matInput placeholder="Landmark" formControlName="Landmark">
+                                            </mat-form-field>
+                                        </div>
+
                                     </div>
 
-                                    <div class="step-pane active sample-pane alert" id="datastep2" data-step="2" data-parsley-validate="true" data-show-errors="true">
-                                        <fieldset>
-                                            <div class="row">
-                                                <div class="col-lg-3">
-                                                    <div class="form-group">
-                                                        <label>Telephone</label>
-                                                        <input id="PhoneNumber" name="PhoneNumber" type="text" class="form-control required" [(ngModel)]="contact.PhoneNumber" #PhoneNumber="ngModel">
-                                                    </div>
-                                                </div>
+                                    <div>
+                                        <button mat-button matStepperPrevious type="button">Back</button>
+                                        <button mat-button matStepperNext type="button">Next</button>
+                                    </div>
+                                </mat-step>
+                                <mat-step formGroupName="2" [stepControl]="formArray.get([2])">
+                                    <ng-template matStepLabel>Profile</ng-template>
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-3 col-sm-3">
+                                            <mat-form-field>
+                                                <mat-select placeholder="Key Population" formControlName="KeyPopulation">
+                                                    <mat-option></mat-option>
+                                                    <mat-option *ngFor="let keyPop of keyPops" [value]="keyPop.itemId">{{keyPop.itemDisplayName}}</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
 
-                                                <div class="col-lg-3">
-                                                    <div class="form-group">
-                                                        <label>Landmark</label>
-                                                        <input id="Landmark" name="Landmark" type="text" class="form-control required" [(ngModel)]="contact.Landmark" #Landmark="ngModel">
-                                                    </div>
-                                                </div>
+                                        <div class="col-lg-3 col-md-3 col-sm-3">
+                                            <div *ngIf="isPartner == 'true'">
+                                                <mat-form-field>
+                                                    <mat-select placeholder="Key Population" formControlName="partnerRelationship">
+                                                        <mat-option></mat-option>
+                                                        <mat-option value="251">Partner</mat-option>
+                                                        <mat-option value="1442">Cowife</mat-option>
+                                                        <mat-option value="247">Spouse</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
                                             </div>
-                                        </fieldset>
+                                        </div>
+
                                     </div>
 
-                                    <div class="step-pane active sample-pane alert" id="datastep3" data-step="3" data-parsley-validate="true" data-show-errors="true">
-                                        <fieldset>
-                                            <div class="row">
-                                                <div class="col-lg-3">
-                                                    <div class="form-group">
-                                                        <label>Key Population</label>
-                                                        <select class="form-control m-b" name="keyPopulation" id="keyPopulation" [(ngModel)]="personPopulation.KeyPopulation" #KeyPopulation="ngModel" data-parsley-required="true">
-                                                            <option></option>
-                                                            <option *ngFor="let keyPop of keyPops" [ngValue]="keyPop.itemId">{{keyPop.itemDisplayName}}</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-lg-3">
-                                                    <div class="form-group" *ngIf="isPartner == 'true'">
-                                                        <label>Relation to Index {{ patientName }}</label>
-                                                        <select class="form-control m-b" name="relationToIndex" id="relationToIndex" [(ngModel)]="person.partnerRelationship" #partnerRelationship="ngModel">
-                                                            <option value="251">Partner</option>
-                                                            <option value="1442">Cowife</option>
-                                                            <option value="247">Spouse</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </fieldset>
+                                    <div>
+                                        <button mat-button matStepperPrevious type="button">Back</button>
+                                        <button mat-button type="button" (click)="onSubmitForm()">Complete</button>
                                     </div>
-
-                                </div>
-                            </form>
-                        </div>
+                                </mat-step>
+                            </mat-horizontal-stepper>
+                        </form>
                     </div>
                 </div>
             </div>

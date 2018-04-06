@@ -14,21 +14,21 @@
                         <form id="form" action="#" class="wizard-big" (ngSubmit)="onSubmit()" #searchForm="ngForm">
                             <fieldset>
                                 <div class="row">
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-3 col-md-3 col-sm-3">
                                         <div class="form-group">
                                             <label>Identification Number</label>
                                             <input type="text" id="identificationNumber" name="identificationNumber" class="form-control" tabindex="1" [(ngModel)]="search.identifierValue" #identifierValue="ngModel">
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-3 col-md-3 col-sm-3">
                                         <div class="form-group">
                                             <label>First Name</label>
                                             <input type="text" id="firstName" name="firstName" class="form-control" tabindex="2" [(ngModel)]="search.firstName" #firstName="ngModel">
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-3 col-md-3 col-sm-3">
                                         <div class="form-group">
                                             <label>Middle Name</label>
                                             <input type="text" id="middleName" name="middleName" class="form-control" tabindex="3" [(ngModel)]="search.midName" #midName="ngModel">
@@ -36,7 +36,7 @@
                                     </div>
 
 
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-3 col-md-3 col-sm-3">
                                         <div class="form-group">
                                             <label>Last Name</label>
                                             <input type="text" id="lastName" name="lastName" class="form-control" tabindex="4" [(ngModel)]="search.lastName" #lastName="ngModel">
@@ -45,7 +45,7 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-3 col-md-3 col-sm-3">
                                         <div class="form-group">
                                             <button class="btn btn-primary m-t-n-xs" value="submit" type="submit">
                                                 <strong>Search Client</strong>

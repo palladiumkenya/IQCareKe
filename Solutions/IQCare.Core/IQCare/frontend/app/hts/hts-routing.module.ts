@@ -9,6 +9,8 @@ import {FamilyScreeningComponent} from './family-screening/family-screening.comp
 import {LinkageComponent} from './linkage/linkage.component';
 import {PnsPartnersComponent} from './pns-partners/pns-partners.component';
 import {TestingComponent} from './testing/testing.component';
+import {FamilyComponent} from './family/family.component';
+import {FamilyScreeningResolver} from './family-screening/familyScreening.resolver';
 
 const routes: Routes = [
     {
@@ -32,12 +34,24 @@ const routes: Routes = [
         component: PnsTracingComponent
     },
     {
-        path: 'familytracing',
-        component: FamilyTracingComponent
-    },
-    {
-        path: 'familyscreening',
-        component: FamilyScreeningComponent
+        path: 'family',
+        children: [
+            {
+                path: '',
+                component: FamilyComponent
+            },
+            {
+                path: 'tracing',
+                component: FamilyTracingComponent
+            },
+            {
+                path: 'screening',
+                component: FamilyScreeningComponent,
+                resolve: {
+                    options: FamilyScreeningResolver
+                }
+            },
+        ]
     },
     {
         path: 'pnsform',
