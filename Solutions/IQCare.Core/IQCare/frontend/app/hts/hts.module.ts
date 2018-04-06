@@ -37,6 +37,9 @@ import { TestingComponent } from './testing/testing.component';
 import {TestDialogComponent} from './testdialog/testdialog.component';
 import {NotificationService} from '../shared/_services/notification.service';
 import {AppLoadService} from '../shared/_services/appload.service';
+import { FamilyComponent } from './family/family.component';
+import {FamilyService} from './_services/family.service';
+import {FamilyScreeningResolver} from './family-screening/familyScreening.resolver';
 
 
 @NgModule({
@@ -101,7 +104,8 @@ import {AppLoadService} from '../shared/_services/appload.service';
     LinkageComponent,
     PnsPartnersComponent,
     TestingComponent,
-      TestDialogComponent
+      TestDialogComponent,
+      FamilyComponent
   ],
   exports: [
   ],
@@ -111,7 +115,9 @@ import {AppLoadService} from '../shared/_services/appload.service';
       PnsService,
       DataService,
       NotificationService,
-      AppLoadService
+      AppLoadService,
+      FamilyService,
+      FamilyScreeningResolver
   ],
   entryComponents: [
       TestDialogComponent

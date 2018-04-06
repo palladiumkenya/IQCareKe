@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace IQCare.Common.Infrastructure.Mapping
 {
-    public class HtsPnsScreeningMapping : IEntityTypeConfiguration<HtsPnsScreening>
+    public class HtsPnsScreeningMapping : IEntityTypeConfiguration<HtsScreening>
     {
-        public void Configure(EntityTypeBuilder<HtsPnsScreening> builder)
+        public void Configure(EntityTypeBuilder<HtsScreening> builder)
         {
-            builder.ToTable("HtsPnsScreening")
+            builder.ToTable("HtsScreening")
                 .HasKey(c => c.Id);
         }
     }

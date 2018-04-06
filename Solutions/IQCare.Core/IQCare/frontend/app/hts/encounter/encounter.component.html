@@ -18,7 +18,7 @@
                                 <h2>PRE-TEST</h2>
                                 <div class="example-container">
                                     <div class="row">
-                                        <div class="col-lg-3">
+                                        <div class="col-lg-3 col-md-3 col-sm-3">
                                             <div class="form-group">
                                                 <mat-radio-group name="encounterType" [(ngModel)]="encounter.EncounterType" data-parsley-required="true" required>
                                                     <mat-radio-button [value]="1" id="initial">Initial Test</mat-radio-button>
@@ -28,7 +28,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-lg-3">
+                                        <div class="col-lg-3 col-md-3 col-sm-3">
                                             <div class="form-group">
                                                 <mat-form-field>
                                                     <input tabindex="1" matInput [max]="maxDate" placeholder="Encounter Date" required [matDatepicker]="encounterDatepicker" (click)="encounterDatepicker.open()" id="encounterDate" name="encounterDate" [(ngModel)]="encounter.EncounterDate" #EncounterDate="ngModel" data-parsley-required="true" required>
@@ -53,7 +53,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-lg-3">
+                                        <div class="col-lg-3 col-md-3 col-sm-3">
                                             <div class="form-group">
                                                 <mat-form-field>
                                                     <mat-select placeholder="Service Delivery Point" required name="serviceDeliveryPoint" id="serviceEntryPoint" [(ngModel)]="encounter.TestEntryPoint" #TestEntryPoint="ngModel" data-parsley-required="true" required>
@@ -89,7 +89,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-lg-3">
+                                        <div class="col-lg-3 col-md-3 col-sm-3">
                                             <div class="form-group">
                                                 <mat-form-field>
                                                     <mat-select placeholder="Consent" name="consent" id="consent" required [(ngModel)]="encounter.Consent" #Consent="ngModel" (change)="onConsentChanged(encounter.Consent)" data-parsley-required="true" required>
@@ -118,7 +118,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-lg-3">
+                                        <div class="col-lg-3 col-md-3 col-sm-3">
                                             <div class="form-group">
                                                 <mat-form-field>
                                                     <mat-select placeholder="TB Screeening" name="tbScreening" required id="tbScreening" [(ngModel)]="encounter.TbScreening" #TbScreening="ngModel" data-parsley-required="true" required>
@@ -138,7 +138,7 @@
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-lg-12">
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group pull-right">
                                                 <button mat-raised-button color="primary" (click)="validate()">
                                                     <strong>Save Changes</strong>

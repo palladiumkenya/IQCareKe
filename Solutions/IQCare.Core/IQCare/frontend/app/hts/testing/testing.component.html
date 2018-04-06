@@ -4,11 +4,11 @@
     </div>
     <div class="ibox-content">
         <div class="row">
-            <div class="col-lg-2">
+            <div class="col-lg-2 col-md-2 col-sm-2">
                 <app-leftnav></app-leftnav>
             </div>
 
-            <div class="col-md-10 animated fadeInRight">
+            <div class="col-md-10 col-lg-10 col-sm-10 animated fadeInRight">
                 <div class="panel panel-default">
                     <div class="panel-heading">HTS TESTING</div>
                     <div class="panel-body">
@@ -91,7 +91,7 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-3 col-md-3 col-sm-3">
                                         <div class="form-group">
                                             <label>Final Screening Test Result</label>
                                             <select id="finalResultHiv1" name="finalResultHiv1" class="form-control m-b required" [(ngModel)]="finalTestingResults.finalResultHiv1" #finalResultHiv1="ngModel" data-parsley-required="true" appNoneEvents>
@@ -117,7 +117,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-3 col-md-3 col-sm-3">
                                         <div class="form-group">
                                             <label>Final Result Given?</label>
                                             <select id="finalResultGiven" name="finalResultGiven" class="form-control m-b required" [(ngModel)]="finalTestingResults.finalResultGiven" #finalResultGiven="ngModel" data-parsley-required="true" [disabled]="isFinalResultGivenDisabled">
@@ -140,7 +140,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-3 col-md-3 col-sm-3">
                                         <div class="form-group">
                                             <label>Accepted to partner listing</label>
                                             <select class="form-control m-b" id="acceptedPartnerListing" name="acceptedPartnerListing" [(ngModel)]="finalTestingResults.acceptedPartnerListing" #acceptedPartnerListing="ngModel" data-parsley-required="true" (change)="onAcceptedPartnerListingChange(finalTestingResults.acceptedPartnerListing)" [disabled]="isAcceptedPartnerListingDisabled">

@@ -3,4 +3,9 @@ export class FamilyScreening {
     eligibleForTesting: number;
     hivStatus: number;
     dateBooked: string;
+
+    patientId: number;
+    personId: number;
+    patientMasterVisitId: number;
+    userId: number;
 }

@@ -1,6 +1,6 @@
 ﻿namespace IQCare.Common.Core.Models
 {
-    public class HtsPnsScreening
+    public class HtsScreening
     {
         public int Id { get; set; }
 

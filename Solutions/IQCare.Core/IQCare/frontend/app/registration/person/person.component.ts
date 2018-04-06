@@ -1,5 +1,6 @@
-import {Component, OnInit, NgZone, AfterViewInit} from '@angular/core';
-import {SnotifyService, SnotifyPosition, SnotifyToastConfig} from 'ng-snotify';
+import {Component, OnInit, NgZone} from '@angular/core';
+import {SnotifyService} from 'ng-snotify';
+import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 import {Person, RegistrationVariables} from '../_models/person';
 import {Contact} from '../_models/contacts';
@@ -38,6 +39,12 @@ export class PersonComponent implements OnInit {
 
     maxDate: any;
 
+    isLinear = true;
+    formGroup: FormGroup;
+
+    /** Returns a FormArray with the name 'formArray'. */
+    get formArray(): AbstractControl | null { return this.formGroup.get('formArray'); }
+
     constructor( private registrationService: RegistrationService,
                  private router: Router,
                  private route: ActivatedRoute,
@@ -45,18 +52,41 @@ export class PersonComponent implements OnInit {
                  private clientService: ClientService,
                  private store: Store<AppState>,
                  private snotifyService: SnotifyService,
-                 private notificationService: NotificationService) {
+                 private notificationService: NotificationService,
+                 private _formBuilder: FormBuilder) {
 
         this.maxDate = new Date();
     }
 
     ngOnInit() {
-        this.getRegistrationOptions();
-
         this.person = new Person();
         this.contact = new Contact();
         this.personPopulation = new PersonPopulation();
         this.registrationVariables = new RegistrationVariables();
+
+        this.formGroup = this._formBuilder.group({
+            formArray: this._formBuilder.array([
+                this._formBuilder.group({
+                    FirstName: new FormControl(this.person.FirstName, [Validators.required]),
+                    MiddleName: new FormControl(this.person.MiddleName),
+                    LastName: new FormControl(this.person.LastName, [Validators.required]),
+                    Sex: new FormControl(this.person.Sex, [Validators.required]),
+                    DateOfBirth: new FormControl(this.person.DateOfBirth, [Validators.required]),
+                    MaritalStatus: new FormControl(this.person.MaritalStatus, [Validators.required]),
+                    personAge: new FormControl(this.registrationVariables.personAge, [Validators.required]),
+                }),
+                this._formBuilder.group({
+                    PhoneNumber: new FormControl(this.contact.PhoneNumber),
+                    Landmark: new FormControl(this.contact.Landmark)
+                }),
+                this._formBuilder.group({
+                    KeyPopulation: new FormControl(this.personPopulation.KeyPopulation, [Validators.required]),
+                    partnerRelationship: new FormControl(this.person.partnerRelationship)
+                }),
+            ]),
+        });
+
+        this.getRegistrationOptions();
 
         this.isPartner = localStorage.getItem('isPartner');
         if (this.isPartner != null && this.isPartner == 'true') {
@@ -72,74 +102,6 @@ export class PersonComponent implements OnInit {
 
             this.store.dispatch(new Consent.ClearState());
         }
-        const self = this;
-
-        setTimeout(() => {
-            $('#myWizard').on('actionclicked.fu.wizard', function(evt, data) {
-
-                if (data.step === 1) {
-                    if (data.direction === 'previous') {
-                        return;
-                    } else {
-                        $('#datastep1').parsley().destroy();
-                        $('#datastep1').parsley({
-                            excluded: 'input[type=button], input[type=submit], ' +
-                            'input[type=reset], input[type=hidden], [max], [disabled], :hidden'
-                        });
-
-                        $('#DateOfBirth').parsley().removeError('error');
-                        if (self.person.DateOfBirth == null || moment(self.person.DateOfBirth).toDate() > new Date()) {
-                            $('#DateOfBirth').parsley().addError('error', {message: 'Date of Birth should not be blank or in the future'});
-                        }
-
-                        if ($('#datastep1').parsley().validate()) {
-                            // validated
-                        } else {
-                            evt.preventDefault();
-                            return;
-                        }
-                    }
-                } else if (data.step === 2) {
-                    if (data.direction === 'previous') {
-                        return;
-                    } else {
-                        $('#datastep2').parsley().destroy();
-                        $('#datastep2').parsley({
-                            excluded: 'input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden'
-                        });
-
-                        if ($('#datastep2').parsley().validate()) {
-                            // validated
-                        } else {
-                            console.log('Parseley Validated Error');
-                            evt.preventDefault();
-                            return;
-                        }
-                    }
-                } else if (data.step === 3) {
-                    if (data.direction === 'previous') {
-                        return;
-                    } else {
-                        $('#datastep3').parsley().destroy();
-                        $('#datastep3').parsley({
-                            excluded: 'input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden'
-                        });
-
-                        if ($('#datastep3').parsley().validate()) {
-                            /* submit all forms */
-                            self.onSubmitForm();
-                        } else {
-                            console.log('Parseley Validated Error');
-                            evt.preventDefault();
-                            return;
-                        }
-                    }
-                }
-            })
-            .on('changed.fu.wizard', function() {})
-            .on('stepclicked.fu.wizard', function() {})
-            .on('finished.fu.wizard', function(e) {});
-        }, 0 );
     }
 
     getRegistrationOptions() {
@@ -166,78 +128,90 @@ export class PersonComponent implements OnInit {
     }
 
     onSubmitForm() {
-        if (this.isPartner != null && this.isPartner == 'true') {
-            this.person.isPartner = true;
-            this.person.patientId = JSON.parse(localStorage.getItem('patientId'));
-        } else {
-            this.person.isPartner = false;
-        }
+        // console.log(this.formGroup);
+        if (this.formGroup.valid) {
+            this.person = Object.assign(this.person, this.formArray.get([0]).value);
+            this.contact = Object.assign(this.person, this.formArray.get([1]).value);
+            this.personPopulation.KeyPopulation = this.formArray.get([2]).value['KeyPopulation'];
+            this.person.partnerRelationship = this.formArray.get([2]).value['partnerRelationship'];
+            // console.log(this.formArray.get([2]).value);
+            // console.log(this.person);
 
-        this.registrationService.registerClient(this.person).subscribe(data => {
-            const personRelation = new Object();
-            personRelation['PersonId'] = data['personId'];
-            personRelation['PatientId'] = JSON.parse(localStorage.getItem('patientId'));
-            personRelation['RelationshipTypeId'] = this.person.partnerRelationship;
-            personRelation['UserId'] = 1; // JSON.parse(localStorage.getItem('userId'));
+            if (this.isPartner != null && this.isPartner == 'true') {
+                this.person.isPartner = true;
+                this.person.patientId = JSON.parse(localStorage.getItem('patientId'));
+            } else {
+                this.person.isPartner = false;
+            }
 
-            const patientAdd = !this.person.isPartner ? this.registrationService.addPatient(data['personId'],
-                this.person.DateOfBirth) :  this.registrationService.addPersonRelationship(personRelation);
+            console.log(this.person);
+            // partnerRelationship
+            this.registrationService.registerClient(this.person).subscribe(data => {
+                const personRelation = new Object();
+                personRelation['PersonId'] = data['personId'];
+                personRelation['PatientId'] = JSON.parse(localStorage.getItem('patientId'));
+                personRelation['RelationshipTypeId'] = this.person.partnerRelationship;
+                personRelation['UserId'] = 1; // JSON.parse(localStorage.getItem('userId'));
 
-            const personCont =  this.registrationService.addPersonContact(data['personId'],
-                null, this.contact.PhoneNumber,
-                null, null, this.userId);
+                const patientAdd = !this.person.isPartner ? this.registrationService.addPatient(data['personId'],
+                    this.person.DateOfBirth) :  this.registrationService.addPersonRelationship(personRelation);
+
+                const personCont =  this.registrationService.addPersonContact(data['personId'],
+                    null, this.contact.PhoneNumber,
+                    null, null, this.userId);
 
 
-            const matStatus = this.registrationService.addPersonMaritalStatus(data['personId'],
-                this.person.MaritalStatus, this.userId);
+                const matStatus = this.registrationService.addPersonMaritalStatus(data['personId'],
+                    this.person.MaritalStatus, this.userId);
 
-            const personLoc = this.registrationService.addPersonLocation(data['personId'], 0,
-                0, 0, this.userId, this.contact.Landmark);
+                const personLoc = this.registrationService.addPersonLocation(data['personId'], 0,
+                    0, 0, this.userId, this.contact.Landmark);
 
-            forkJoin([patientAdd, personCont, matStatus, personLoc]).subscribe(results => {
-                if (this.person.isPartner == false) {
-                    localStorage.setItem('patientId', results[0]['patientId']);
-                    localStorage.setItem('personId', data['personId']);
-                } else {
-                    localStorage.setItem('partnerId', data['personId']);
-                }
-            }, (err) => {
-                console.log('error');
-                this.snotifyService.error('Error registering client ' + err, 'Registration', this.notificationService.getConfig())
-            }, () => {
-                if (this.person.isPartner == true) {
-                    this.snotifyService.success('Successfully registered partner', 'Registration', this.notificationService.getConfig());
-                    this.zone.run(() => { this.router.navigate(['/hts/pns'], { relativeTo: this.route}); });
-                } else {
-                    this.snotifyService.success('Successfully registered client', 'Registration', this.notificationService.getConfig());
-                    this.zone.run(() => { this.router.navigate(['/registration/enrollment'], { relativeTo: this.route }); });
-                }
+                forkJoin([patientAdd, personCont, matStatus, personLoc]).subscribe(results => {
+                    if (this.person.isPartner == false) {
+                        localStorage.setItem('patientId', results[0]['patientId']);
+                        localStorage.setItem('personId', data['personId']);
+                    } else {
+                        localStorage.setItem('partnerId', data['personId']);
+                    }
+                }, (err) => {
+                    console.log('error');
+                    this.snotifyService.error('Error registering client ' + err,
+                        'Registration', this.notificationService.getConfig());
+                }, () => {
+                    if (this.person.isPartner == true) {
+                        this.snotifyService.success('Successfully registered partner',
+                            'Registration', this.notificationService.getConfig());
+                        this.zone.run(() => { this.router.navigate(['/hts/pns'], { relativeTo: this.route}); });
+                    } else {
+                        this.snotifyService.success('Successfully registered client', 'Registration', this.notificationService.getConfig());
+                        this.zone.run(() => { this.router.navigate(['/registration/enrollment'], { relativeTo: this.route }); });
+                    }
+                });
+
+            }, err => {
+                console.log(err);
+                this.snotifyService.error('Error registering client ' + err, 'Registration', this.notificationService.getConfig());
             });
 
-        }, err => {
-            console.log(err);
-            this.snotifyService.error('Error registering client ' + err, 'Registration', this.notificationService.getConfig());
-        });
+            return;
+        } else {
+            return;
+        }
     }
 
-    estimateDob(personAge) {
-        // console.log(personAge);
+    estimateDob() {
+        const personAge = this.formGroup.controls.formArray['controls'][0].controls.personAge.value;
         const currentDate = new Date();
         currentDate.setDate(15);
         currentDate.setMonth(5);
-        // console.log(currentDate);
         const estDob = moment(currentDate.toISOString());
         const dob = estDob.add((personAge * -1), 'years');
 
-        this.person.DateOfBirth = moment(dob).format('DD-MMM-YYYY');
-        // console.log(this.person.DateOfBirth);
+        this.formArray['controls'][0]['controls']['DateOfBirth'].setValue(moment(dob).toDate());
     }
 
     onDate(event): void {
-        // console.log(event);
-
-        const newDate = new Date(event);
-        this.person.DateOfBirth = moment(newDate).format('DD-MMM-YYYY');
         this.getAge(event);
     }
 
@@ -250,7 +224,7 @@ export class PersonComponent implements OnInit {
             age--;
         }
 
-        this.registrationVariables.personAge = age;
+        this.formArray['controls'][0]['controls']['personAge'].setValue(age);
     }
 
     getClientDetails() {

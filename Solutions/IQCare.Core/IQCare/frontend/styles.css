@@ -8583,3 +8583,20 @@ body.md-skin {
 ::ng-deep .cdk-overlay-container{
   z-index: 1200 !important;
 }
+
+.example-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.example-container > * {
+  width: 100%;
+}
+
+.mat-form-field{
+  display: block;
+}
+
+.mat-card {
+  background-color: #dff9fb;
+}

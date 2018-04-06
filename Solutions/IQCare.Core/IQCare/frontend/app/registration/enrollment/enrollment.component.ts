@@ -52,11 +52,11 @@ export class EnrollmentComponent implements OnInit {
 
         this.enrollmentService.enrollClient(this.enrollment).subscribe(data => {
             this.store.dispatch(new Consent.IsEnrolled(true));
-            this.snotifyService.success('Successfully Enrolled Client', 'Enrollment', this.notificationService.getConfig());
+            this.snotifyService.success('Successfully Registered to HTS', 'HTS Service Registration', this.notificationService.getConfig());
             this.zone.run(() => { this.router.navigate(['/registration/home'], { relativeTo: this.route }); });
         }, err => {
             console.log(err);
-            this.snotifyService.error('Error enrolling client ' + err, 'Enrollment', this.notificationService.getConfig());
+            this.snotifyService.error('Error Registering to HTS ' + err, 'HTS Service Registration', this.notificationService.getConfig());
         });
     }
 }
