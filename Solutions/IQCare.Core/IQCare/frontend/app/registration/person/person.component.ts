@@ -128,14 +128,13 @@ export class PersonComponent implements OnInit {
     }
 
     onSubmitForm() {
-        // console.log(this.formGroup);
         if (this.formGroup.valid) {
-            this.person = Object.assign(this.person, this.formArray.get([0]).value);
+            // this.person = Object.assign(this.person, this.formArray.get([0]).value);
+            this.person = {...this.person, ...this.formArray.get([0]).value};
             this.contact = Object.assign(this.person, this.formArray.get([1]).value);
             this.personPopulation.KeyPopulation = this.formArray.get([2]).value['KeyPopulation'];
             this.person.partnerRelationship = this.formArray.get([2]).value['partnerRelationship'];
-            // console.log(this.formArray.get([2]).value);
-            // console.log(this.person);
+            this.person.createdBy = JSON.parse(localStorage.getItem('appUserId'));
 
             if (this.isPartner != null && this.isPartner == 'true') {
                 this.person.isPartner = true;
@@ -144,17 +143,16 @@ export class PersonComponent implements OnInit {
                 this.person.isPartner = false;
             }
 
-            console.log(this.person);
-            // partnerRelationship
+            // send the person to IQCare API
             this.registrationService.registerClient(this.person).subscribe(data => {
-                const personRelation = new Object();
+                const personRelation = {};
                 personRelation['PersonId'] = data['personId'];
                 personRelation['PatientId'] = JSON.parse(localStorage.getItem('patientId'));
                 personRelation['RelationshipTypeId'] = this.person.partnerRelationship;
                 personRelation['UserId'] = 1; // JSON.parse(localStorage.getItem('userId'));
 
-                const patientAdd = !this.person.isPartner ? this.registrationService.addPatient(data['personId'],
-                    this.person.DateOfBirth) :  this.registrationService.addPersonRelationship(personRelation);
+                const patientAdd = !this.person.isPartner ? this.registrationService.addPatient(data['personId'], this.person.DateOfBirth)
+                    :  this.registrationService.addPersonRelationship(personRelation);
 
                 const personCont =  this.registrationService.addPersonContact(data['personId'],
                     null, this.contact.PhoneNumber,
@@ -167,6 +165,7 @@ export class PersonComponent implements OnInit {
                 const personLoc = this.registrationService.addPersonLocation(data['personId'], 0,
                     0, 0, this.userId, this.contact.Landmark);
 
+                //
                 forkJoin([patientAdd, personCont, matStatus, personLoc]).subscribe(results => {
                     if (this.person.isPartner == false) {
                         localStorage.setItem('patientId', results[0]['patientId']);
@@ -175,7 +174,6 @@ export class PersonComponent implements OnInit {
                         localStorage.setItem('partnerId', data['personId']);
                     }
                 }, (err) => {
-                    console.log('error');
                     this.snotifyService.error('Error registering client ' + err,
                         'Registration', this.notificationService.getConfig());
                 }, () => {
@@ -190,11 +188,8 @@ export class PersonComponent implements OnInit {
                 });
 
             }, err => {
-                console.log(err);
                 this.snotifyService.error('Error registering client ' + err, 'Registration', this.notificationService.getConfig());
             });
-
-            return;
         } else {
             return;
         }

@@ -27,6 +27,7 @@ import {AlertService} from '../shared/_services/alert.service';
 import {EncounterService} from '../hts/_services/encounter.service';
 import {NotificationService} from '../shared/_services/notification.service';
 import {AppLoadService} from '../shared/_services/appload.service';
+import {AppStateService} from '../shared/_services/appstate.service';
 
 
 
@@ -55,7 +56,8 @@ import {AppLoadService} from '../shared/_services/appload.service';
         AlertService,
         EncounterService,
         NotificationService,
-        AppLoadService
+        AppLoadService,
+        AppStateService
     ]
 
 })

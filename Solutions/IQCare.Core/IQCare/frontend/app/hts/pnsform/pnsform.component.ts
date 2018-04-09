@@ -87,6 +87,7 @@ export class PnsformComponent implements OnInit {
         this.pnsForm.personId = JSON.parse(localStorage.getItem('partnerId'));
         this.pnsForm.patientId = JSON.parse(localStorage.getItem('patientId'));
         this.pnsForm.patientMasterVisitId = JSON.parse(localStorage.getItem('patientMasterVisitId'));
+        this.pnsForm.userId = JSON.parse(localStorage.getItem('appUserId'));
 
         const arr = new Array();
 

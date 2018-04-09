@@ -28,6 +28,7 @@ namespace IQCare.Common.BusinessProcess.Commands
         public int Sex { get; set; }
         public bool IsPartner { get; set; }
         public int? PatientId { get; set; }
+        public int CreatedBy { get; set; }
     }
 
     public class Contact

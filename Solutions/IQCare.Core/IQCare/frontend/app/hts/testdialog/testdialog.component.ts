@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 
 @Component({
@@ -32,15 +32,20 @@ export class TestDialogComponent implements OnInit {
 
     ngOnInit() {
         this.form = this.fb.group({
-            kitName: [this.kitName, []],
-            lotNumber: [this.lotNumber, []],
-            expiryDate: [this.expiryDate, []],
-            hivResult: [this.hivResult, []]
+            kitName: new FormControl(this.kitName, [Validators.required]),
+            lotNumber: new FormControl(this.lotNumber, [Validators.required]),
+            expiryDate: new FormControl(this.expiryDate, [Validators.required]),
+            hivResult: new FormControl(this.hivResult, [Validators.required])
         });
     }
 
     save() {
-        this.dialogRef.close(this.form.value);
+        if (this.form.valid) {
+            this.dialogRef.close(this.form.value);
+        } else {
+            return;
+        }
+
     }
 
     close() {

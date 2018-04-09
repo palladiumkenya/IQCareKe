@@ -8,10 +8,11 @@ import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import {AppLoadService} from './shared/_services/appload.service';
+import {AppStateService} from './shared/_services/appstate.service';
 
-/*export function onAppInitGetFacilities(appLoadService: AppLoadService) {
-    return () => appLoadService.loadFacilities();
-}*/
+export function init_app(appStateService: AppStateService) {
+    return () => appStateService.initializeAppState();
+}
 
 @NgModule({
   declarations: [
@@ -29,8 +30,12 @@ import {AppLoadService} from './shared/_services/appload.service';
           provide: 'SnotifyToastConfig',
           useValue: ToastDefaults
       },
+      {
+          provide: APP_INITIALIZER, useFactory: init_app, deps: [AppStateService], multi: true
+      },
       SnotifyService,
-      AppLoadService
+      AppLoadService,
+      AppStateService
   ],
   bootstrap: [AppComponent]
 })

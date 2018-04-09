@@ -31,7 +31,7 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers
                     "Insert Into Person(FirstName, MidName,LastName,Sex,DateOfBirth,DobPrecision,Active,DeleteFlag,CreateDate,CreatedBy)" +
                     $"Values(ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{request.Person.FirstName}'), ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{request.Person.MiddleName}')," +
                     $"ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{request.Person.LastName}'), {request.Person.Sex}, '{request.Person.DateOfBirth}', 1," +
-                    "1,0,GETDATE(),1);" +
+                    $"1,0,GETDATE(), '{request.Person.CreatedBy}');" +
                     "SELECT [Id] , CAST(DECRYPTBYKEY(FirstName) AS VARCHAR(50)) [FirstName] ,CAST(DECRYPTBYKEY(MidName) AS VARCHAR(50)) MidName" +
                     ",CAST(DECRYPTBYKEY(LastName) AS VARCHAR(50)) [LastName] ,[Sex] ,[Active] ,[DeleteFlag] ,[CreateDate] " +
                     ",[CreatedBy] ,[AuditData] ,[DateOfBirth] ,[DobPrecision] FROM [dbo].[Person] WHERE Id = SCOPE_IDENTITY();" +

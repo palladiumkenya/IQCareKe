@@ -1,4 +1,4 @@
-import {APP_INITIALIZER, NgModule} from '@angular/core';
+import { NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { SharedRoutingModule } from './shared-routing.module';
@@ -12,6 +12,7 @@ import {DateAdapter, MAT_DATE_FORMATS, MatCardModule} from '@angular/material';
 import {APP_DATE_FORMATS, AppDateAdapter} from './dateadapter/momentDateAdapter';
 import {NotificationService} from './_services/notification.service';
 import {AppLoadService} from './_services/appload.service';
+import {AppStateService} from './_services/appstate.service';
 
 @NgModule({
     imports: [
@@ -36,6 +37,7 @@ import {AppLoadService} from './_services/appload.service';
         NotificationService,
         PnstracingService,
         AppLoadService,
+        AppStateService,
         {
             provide: DateAdapter, useClass: AppDateAdapter
         },

@@ -6,10 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nav-header.component.css']
 })
 export class NavHeaderComponent implements OnInit {
+    appUserName: string;
 
-  constructor() { }
+    constructor() { }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+        this.appUserName = JSON.parse(localStorage.getItem('appUserName'));
+    }
 
 }

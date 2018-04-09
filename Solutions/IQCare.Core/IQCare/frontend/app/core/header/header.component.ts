@@ -6,10 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+    facilityName: string;
 
-  constructor() { }
+    constructor() { }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+        this.facilityName = JSON.parse(localStorage.getItem('appLocation'));
+    }
 
 }

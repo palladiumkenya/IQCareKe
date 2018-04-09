@@ -21,7 +21,7 @@ export class LinkageComponent implements OnInit {
 
     onSubmit() {
         this.linkage.personId = JSON.parse(localStorage.getItem('personId'));
-        this.linkage.userId = 1;
+        this.linkage.userId = JSON.parse(localStorage.getItem('appUserId'));
 
         console.log(this.linkage);
         this.linkageService.addLinkage(this.linkage).subscribe(data => {
