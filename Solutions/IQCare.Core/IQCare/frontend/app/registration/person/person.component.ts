@@ -156,7 +156,6 @@ export class PersonComponent implements OnInit {
     }
 
     onSubmitForm() {
-        console.log(this.formGroup);
         if (this.formGroup.valid) {
             // this.person = Object.assign(this.person, this.formArray.get([0]).value);
             this.person = {...this.person, ...this.formArray.get([0]).value};
