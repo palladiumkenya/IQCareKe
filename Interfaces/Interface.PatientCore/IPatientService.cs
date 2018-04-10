@@ -7,6 +7,7 @@ namespace Interface.PatientCore
     public interface IPatientService
     {
         Patient GetPatient(int Id);
+        Patient GetPatient(string CardSerialNumber);
         PatientVisit GetPatientLastVisit(int patientId);
         List<PatientVisit> GetAllPatientVisits(int patientId);
 

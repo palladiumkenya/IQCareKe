@@ -102,7 +102,7 @@ namespace Entities.PatientCore
                return string.Format("{0} {1} {2}", FirstName, MiddleName, LastName);
             }
         }
-        
+        public string CardSerialNumber { get; set; }
         public List<PatientConsent> Consent { get; set; }
        
         [NotMapped]

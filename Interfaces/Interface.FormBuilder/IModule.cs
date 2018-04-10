@@ -44,7 +44,8 @@ namespace Interface.FormBuilder
         void DeleteModule(int ModuleId);
 
         List<ServiceRule> GetBusinessRule(int? moduleId= null);
-        
+        Module GetModuleByName(string name);
+        Module GetMstModueByName(String name);
 
     }
 }
