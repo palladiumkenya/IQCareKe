@@ -1,0 +1,78 @@
+<div class="ibox">
+    <div class="ibox-title">
+        <app-clientbrief></app-clientbrief>
+    </div>
+    <div class="ibox-content">
+        <div class="row">
+            <div class="col-md-2">
+                <app-leftnav></app-leftnav>
+            </div>
+            <div class="col-md-10 animated fadeIn">
+                <div class="panel panel-default">
+                    <div class="panel-heading">PNS FORM</div>
+                    <div class="panel-body">
+                        <app-personbrief></app-personbrief>
+                        <br>
+
+                        <form [formGroup]="formGroup">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-4">
+                                    <mat-form-field>
+                                        <mat-select placeholder="Type Of Tracing" formControlName="mode" tabindex="1">
+                                            <mat-option></mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+
+                                    <mat-form-field>
+                                        <mat-select placeholder="Outcome" formControlName="outcome" tabindex="4">
+                                            <mat-option></mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-sm-4">
+                                    <mat-form-field>
+                                        <input matInput [matDatepicker]="myDatepicker" formControlName="dateFamilyContacted" placeholder="Date Contacted" tabindex="2" (click)="myDatepicker.open()">
+                                        <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+                                        <mat-datepicker #myDatepicker></mat-datepicker>
+                                    </mat-form-field>
+
+                                    <mat-form-field>
+                                        <mat-select placeholder="Consent to Testing" formControlName="consent" tabindex="5">
+                                            <mat-option></mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-sm-4">
+                                    <mat-form-field>
+                                        <input matInput [matDatepicker]="indexDatepicker" formControlName="dateReminded" placeholder="Date Reminded" tabindex="3" (click)="indexDatepicker.open()">
+                                        <mat-datepicker-toggle matSuffix [for]="indexDatepicker"></mat-datepicker-toggle>
+                                        <mat-datepicker #indexDatepicker></mat-datepicker>
+                                    </mat-form-field>
+
+                                    <mat-form-field>
+                                        <input matInput [matDatepicker]="bookedDatepicker" formControlName="dateBooked" placeholder="Date Booked" tabindex="6" (click)="bookedDatepicker.open()">
+                                        <mat-datepicker-toggle matSuffix [for]="bookedDatepicker"></mat-datepicker-toggle>
+                                        <mat-datepicker #bookedDatepicker></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-4">&nbsp;</div>
+                                <div class="col-lg-4 col-md-4 col-sm-4">&nbsp;</div>
+                                <div class="col-lg-4 col-md-4 col-sm-4">
+                                    <button class="pull-right" mat-raised-button color="primary" (click)="onSubmit()">
+                                        <strong>Save Changes</strong>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,130 @@
+<div class="ibox">
+    <div class="ibox-title">
+        <h5>REGISTRATION</h5>
+    </div>
+    <div class="ibox-content">
+        <div class="row">
+            <div class="col-md-2">
+                <app-leftnav></app-leftnav>
+            </div>
+            <div class="col-md-10 animated fadeIn">
+                <div class="panel panel-default">
+                    <div class="panel-heading">REGISTER CLIENT</div>
+                    <div class="panel-body">
+                        <form [formGroup]="formGroup">
+                            <mat-horizontal-stepper #stepper="matHorizontalStepper" formArrayName="formArray" [linear]="isLinear">
+                                <mat-step formGroupName="0" [stepControl]="formArray.get([0])">
+                                    <ng-template matStepLabel>Demographics</ng-template>
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-3 col-sm-3">
+                                            <mat-form-field>
+                                                <input matInput placeholder="First Name" formControlName="FirstName" id="firstName" name="firstName" tabindex="1" required>
+                                            </mat-form-field>
+
+                                            <mat-form-field>
+                                                <input tabindex="5" placeholder="Date Of Birth" matInput [matDatepicker]="myDatepicker" [max]="maxDate" formControlName="DateOfBirth" required>
+                                                <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+                                                <mat-datepicker #myDatepicker name="DateOfBirth" ngDefaultControl (selectedChanged)="onDate($event)"></mat-datepicker>
+                                            </mat-form-field>
+
+                                        </div>
+
+                                        <div class="col-lg-3 col-md-3 col-sm-3">
+                                            <mat-form-field>
+                                                <input matInput placeholder="Middle Name" formControlName="MiddleName" tabindex="2">
+                                            </mat-form-field>
+
+                                            <mat-form-field>
+                                                <input matInput placeholder="Age(Years)" type="number" formControlName="personAge" id="personAge" name="personAge" (keyup)="estimateDob()" required>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-lg-3 col-md-3 col-sm-3">
+                                            <mat-form-field>
+                                                <input matInput placeholder="Last Name" formControlName="LastName" required tabindex="3">
+                                            </mat-form-field>
+
+                                            <mat-form-field>
+                                                <mat-select placeholder="Marital Status" formControlName="MaritalStatus" tabindex="6">
+                                                    <mat-option></mat-option>
+                                                    <mat-option *ngFor="let maritalStatus of maritalStatuses" [value]="maritalStatus.itemId">{{maritalStatus.itemName}}</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-lg-3 col-md-3 col-sm-3">
+                                            <label>Gender </label>
+                                            <div>
+                                                <mat-radio-group formControlName="Sex">
+                                                    <mat-radio-button [value]="male" tabindex="4">Male</mat-radio-button>
+                                                    <mat-radio-button [value]="female" tabindex="4">Female</mat-radio-button>
+                                                </mat-radio-group>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div>
+                                        <button mat-button matStepperNext type="button">Next</button>
+                                    </div>
+                                </mat-step>
+
+                                <mat-step formGroupName="1" [stepControl]="formArray.get([1])">
+                                    <ng-template matStepLabel>Contacts</ng-template>
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-3 col-sm-3">
+                                            <mat-form-field>
+                                                <input matInput placeholder="Telephone" formControlName="PhoneNumber">
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-lg-3 col-md-3 col-sm-3">
+                                            <mat-form-field>
+                                                <input matInput placeholder="Landmark" formControlName="Landmark">
+                                            </mat-form-field>
+                                        </div>
+
+                                    </div>
+
+                                    <div>
+                                        <button mat-button matStepperPrevious type="button">Back</button>
+                                        <button mat-button matStepperNext type="button">Next</button>
+                                    </div>
+                                </mat-step>
+                                <mat-step formGroupName="2" [stepControl]="formArray.get([2])">
+                                    <ng-template matStepLabel>Profile</ng-template>
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-3 col-sm-3">
+                                            <mat-form-field>
+                                                <mat-select placeholder="Key Population" formControlName="KeyPopulation">
+                                                    <mat-option></mat-option>
+                                                    <mat-option *ngFor="let keyPop of keyPops" [value]="keyPop.itemId">{{keyPop.itemDisplayName}}</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-lg-3 col-md-3 col-sm-3">
+                                            <div *ngIf="isPartner == 'true'">
+                                                <mat-form-field>
+                                                    <mat-select placeholder="Relationship" formControlName="partnerRelationship">
+                                                        <mat-option></mat-option>
+                                                        <mat-option *ngFor="let option of optionToShow" [value]="option.itemId">{{option.itemDisplayName}}</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div>
+                                        <button mat-button matStepperPrevious type="button">Back</button>
+                                        <button mat-button type="button" (click)="onSubmitForm()">Complete</button>
+                                    </div>
+                                </mat-step>
+                            </mat-horizontal-stepper>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

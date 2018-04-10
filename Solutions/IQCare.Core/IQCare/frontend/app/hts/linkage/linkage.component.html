@@ -1,0 +1,101 @@
+<div class="ibox">
+    <div class="ibox-title">
+        <app-clientbrief></app-clientbrief>
+    </div>
+    <div class="ibox-content">
+        <div class="row">
+            <div class="col-md-2 col-lg-2 col-sm-2">
+                <app-leftnav></app-leftnav>
+            </div>
+            <div class="col-md-10 col-lg-10 col-sm-10 animated fadeIn">
+                <div class="panel panel-default">
+                    <div class="panel-heading">LINKAGE</div>
+                    <div class="panel-body">
+                        <form id="form" action="#" class="wizard-big" (ngSubmit)="onSubmit()" #linkageForm="ngForm">
+                            <fieldset>
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                        <div class="form-group">
+                                            <label>Facility *</label>
+                                            <input id="facility" name="facility" type="text" class="form-control required" required [(ngModel)]="linkage.facility" #facility="ngModel">
+                                            <div *ngIf="facility.errors && (facility.dirty || facility.touched)" class="alert alert-danger">
+                                                <div [hidden]="!facility.errors.required">
+                                                    Linkage facility is required!
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Health Worker *</label>
+                                            <input id="healthWorker" name="healthWorker" type="text" class="form-control required" [(ngModel)]="linkage.healthworker" #healthworker="ngModel">
+                                            <div *ngIf="healthworker.errors && (healthworker.dirty || healthworker.touched)" class="alert alert-danger">
+                                                <div [hidden]="!healthworker.errors.required">
+                                                    Linkage health worker is required!
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Carde *</label>
+                                            <input id="carde" name="carde" type="text" class="form-control required" [(ngModel)]="linkage.carde" #carde="ngModel">
+                                            <div *ngIf="carde.errors && (carde.dirty || carde.touched)" class="alert alert-danger">
+                                                <div [hidden]="!healthworker.errors.required">
+                                                    Linkage carde worker is required!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                        <div class="form-group">
+                                            <label>Date Enrolled *</label>
+                                            <div>
+                                                <mat-form-field>
+                                                    <input matInput [matDatepicker]="myDatepicker" (click)="myDatepicker.open()" id="dateEnrolled" name="dateEnrolled" [(ngModel)]="linkage.dateEnrolled" #dateEnrolled="ngModel">
+                                                    <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+                                                    <mat-datepicker #myDatepicker></mat-datepicker>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div *ngIf="dateEnrolled.errors && (dateEnrolled.dirty || dateEnrolled.touched)" class="alert alert-danger">
+                                                <div [hidden]="!dateEnrolled.errors.required">
+                                                    Linkage Date Enrolled worker is required!
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>CCC Number *</label>
+                                            <input id="cccNumber" name="cccNumber" type="text" class="form-control required" [(ngModel)]="linkage.cccNumber" #cccNumber="ngModel">
+                                            <div *ngIf="cccNumber.errors && (cccNumber.dirty || cccNumber.touched)" class="alert alert-danger">
+                                                <div [hidden]="!cccNumber.errors.required">
+                                                    Linkage CCC Number worker is required!
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Remarks *</label>
+                                            <textarea class="form-control m-b" id="remarks" name="remarks" rows="3" [(ngModel)]="linkage.remarks" #remarks="ngModel"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                        <div class="form-group">
+                                            <button class="btn btn-primary m-t-n-xs" value="submit" type="submit" [disabled]="!linkageForm.form.valid">
+                                                <strong>Save Changes</strong>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

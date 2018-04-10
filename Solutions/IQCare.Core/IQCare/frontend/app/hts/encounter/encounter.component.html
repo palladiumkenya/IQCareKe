@@ -1,0 +1,158 @@
+<div class="ibox">
+    <div class="ibox-title">
+        <app-clientbrief></app-clientbrief>
+    </div>
+
+    <div class="ibox-content">
+        <div class="row">
+            <div class="col-lg-2">
+                <app-leftnav></app-leftnav>
+            </div>
+
+            <div class="col-md-10 animated fadeIn">
+                <div class="panel panel-default">
+                    <div class="panel-heading">HTS-LAB FORM</div>
+                    <div class="panel-body">
+                        <form id="form" action="#" class="wizard-big">
+                            <fieldset>
+                                <h2>PRE-TEST</h2>
+                                <div class="example-container">
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-3 col-sm-3">
+                                            <div class="form-group">
+                                                <mat-radio-group name="encounterType" [(ngModel)]="encounter.EncounterType" data-parsley-required="true" required>
+                                                    <mat-radio-button [value]="1" id="initial">Initial Test</mat-radio-button>
+                                                    <mat-radio-button [value]="2" id="repeat">Repeat Test</mat-radio-button>
+                                                </mat-radio-group>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-3 col-sm-3">
+                                            <div class="form-group">
+                                                <mat-form-field>
+                                                    <input tabindex="1" matInput [max]="maxDate" placeholder="Encounter Date" required [matDatepicker]="encounterDatepicker" (click)="encounterDatepicker.open()" id="encounterDate" name="encounterDate" [(ngModel)]="encounter.EncounterDate" #EncounterDate="ngModel" data-parsley-required="true" required>
+                                                    <mat-datepicker-toggle matSuffix [for]="encounterDatepicker"></mat-datepicker-toggle>
+                                                    <mat-datepicker #encounterDatepicker></mat-datepicker>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <mat-form-field>
+                                                    <mat-select placeholder="Ever Tested?" name="everTested" id="everTested" required [(ngModel)]="encounter.EverTested" #EverTested="ngModel" data-parsley-required="true" (change)="everTestedChanged(encounter.EverTested)" required>
+                                                        <mat-option value=""></mat-option>
+                                                        <mat-option *ngFor="let entryPoint of yesNoOptions" [value]="entryPoint.itemId">{{entryPoint.itemName}}</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <mat-form-field>
+                                                    <input matInput placeholder="Re-Testing (No. Months since last test)" id="noofmonthsretest" name="noofmonthsretest" type="text" class="form-control" [(ngModel)]="encounter.MonthsSinceLastTest" #MonthsSinceLastTest="ngModel" data-parsley-required="true" [disabled]="isNoOfMonths" required>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-3 col-md-3 col-sm-3">
+                                            <div class="form-group">
+                                                <mat-form-field>
+                                                    <mat-select placeholder="Service Delivery Point" required name="serviceDeliveryPoint" id="serviceEntryPoint" [(ngModel)]="encounter.TestEntryPoint" #TestEntryPoint="ngModel" data-parsley-required="true" required>
+                                                        <mat-option value=""></mat-option>
+                                                        <mat-option *ngFor="let entryPoint of entryPoints" [value]="entryPoint.itemId">{{entryPoint.itemName}}</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <mat-form-field>
+                                                    <mat-select placeholder="HIV self-test in the past 12 months" required id="selfTest" name="selfTest" [(ngModel)]="encounter.EverSelfTested" #EverSelfTested="ngModel" data-parsley-required="true" required>
+                                                        <mat-option value=""></mat-option>
+                                                        <mat-option *ngFor="let entryPoint of yesNoOptions" [value]="entryPoint.itemId">{{entryPoint.itemName}}</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <mat-form-field>
+                                                    <mat-select placeholder="Has Any Disability" id="hasDisability" required name="hasDisability" [(ngModel)]="encounter.HasDisability" #HasDisability="ngModel" data-parsley-required="true" (change)="hasDisabilityChanged(encounter.HasDisability)" required>
+                                                        <mat-option value=""></mat-option>
+                                                        <mat-option *ngFor="let entryPoint of yesNoOptions" [value]="entryPoint.itemId">{{entryPoint.itemName}}</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Disability</label>
+                                                <select class="form-control m-b" name="disability" id="disability" [(ngModel)]="encounter.Disabilities" #Disabilities="ngModel" data-parsley-required="true" multiple="multiple" [disabled]="isDisabilitiesEnabled" required>
+                                                    <option *ngFor="let option of disabilities" [ngValue]="option.itemId">{{option.itemName}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-3 col-md-3 col-sm-3">
+                                            <div class="form-group">
+                                                <mat-form-field>
+                                                    <mat-select placeholder="Consent" name="consent" id="consent" required [(ngModel)]="encounter.Consent" #Consent="ngModel" (change)="onConsentChanged(encounter.Consent)" data-parsley-required="true" required>
+                                                        <mat-option value=""></mat-option>
+                                                        <mat-option *ngFor="let entryPoint of yesNoOptions" [value]="entryPoint.itemId">{{entryPoint.itemName}}</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <mat-form-field>
+                                                    <mat-select placeholder="Client tested as" name="clientTestedAs" required id="clientTestedAs" [(ngModel)]="encounter.TestedAs" #TestedAs="ngModel" data-parsley-required="true" [disabled]="isClientTestedDisabled" required>
+                                                        <mat-option value=""></mat-option>
+                                                        <mat-option *ngFor="let option of testedAs" [value]="option.itemId">{{option.itemName}}</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <mat-form-field>
+                                                    <mat-select placeholder="Strategy" name="strategy" id="strategy" required [(ngModel)]="encounter.TestingStrategy" #TestingStrategy="ngModel" data-parsley-required="true" [disabled]="isStrategyDisabled" required>
+                                                        <mat-option value=""></mat-option>
+                                                        <mat-option *ngFor="let option of strategyOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-3 col-md-3 col-sm-3">
+                                            <div class="form-group">
+                                                <mat-form-field>
+                                                    <mat-select placeholder="TB Screeening" name="tbScreening" required id="tbScreening" [(ngModel)]="encounter.TbScreening" #TbScreening="ngModel" data-parsley-required="true" required>
+                                                        <mat-option value=""></mat-option>
+                                                        <mat-option *ngFor="let option of tbStatus" [value]="option.itemId">{{option.itemName}}</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <mat-form-field>
+                                                    <textarea matInput placeholder="Remarks" id="remarks" name="remarks" rows="6" [(ngModel)]="encounter.EncounterRemarks" #EncounterRemarks="ngModel"></textarea>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <div class="form-group pull-right">
+                                                <button mat-raised-button color="primary" (click)="validate()">
+                                                    <strong>Save Changes</strong>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

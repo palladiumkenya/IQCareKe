@@ -196,6 +196,7 @@
         $(document)
         .ready(function () {
             $("#signIn").parsley();
+            localStorage.clear();
         });
    
     </script>
