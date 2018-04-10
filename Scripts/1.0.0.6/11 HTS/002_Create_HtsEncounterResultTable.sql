@@ -31,7 +31,7 @@ IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE CONSTRAIN
 BEGIN
 	ALTER TABLE [dbo].[HtsEncounterResult]  WITH CHECK ADD  CONSTRAINT [FK_HtsEncounterResult_HtsEncounterId_HtsEncounter_Id] FOREIGN KEY([HtsEncounterId])
 	REFERENCES [dbo].[HtsEncounter] ([Id])
-	
+
 	ALTER TABLE [dbo].[HtsEncounterResult] CHECK CONSTRAINT [FK_HtsEncounterResult_HtsEncounterId_HtsEncounter_Id]
 END;
 GO
