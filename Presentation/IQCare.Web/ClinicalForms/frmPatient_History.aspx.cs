@@ -18,7 +18,7 @@ namespace IQCare.Web.Clinical
         /// The p identifier
         /// </summary>
         public string PId, PtnSts, DQ;
-  
+
 
         /// <summary>
         /// Forms the iq care.
@@ -33,7 +33,7 @@ namespace IQCare.Web.Clinical
             TreeNode root = new TreeNode();
             TreeNode theMRoot = new TreeNode();
             bool flagyear = true;
-           // int PtnPMTCTStatus = 0;
+            // int PtnPMTCTStatus = 0;
             int PtnARTStatus = 0;
             if (PtnSts == "0" || PtnSts == "")
             {
@@ -69,7 +69,7 @@ namespace IQCare.Web.Clinical
             foreach (DataRow theDR in theDS.Tables[1].Rows)
             {
 
-                if (theDR["TranDate"] != DBNull.Value && theDR["TranDate"].ToString().Trim()!="" &&  ((DateTime)theDR["TranDate"]).Year != 1900)
+                if (theDR["TranDate"] != DBNull.Value && theDR["TranDate"].ToString().Trim() != "" && ((DateTime)theDR["TranDate"]).Year != 1900)
                 {
                     DQ = "";
                     if (tmpYear != ((DateTime)theDR["TranDate"]).Year)
@@ -108,7 +108,7 @@ namespace IQCare.Web.Clinical
 
                     if (tmpYear == ((DateTime)theDR["TranDate"]).Year && tmpMonth == ((DateTime)theDR["TranDate"]).Month)
                     {
-                       int _locationId = Convert.ToInt32(theDS.Tables[0].Rows[0]["LocationID"].ToString());
+                        int _locationId = Convert.ToInt32(theDS.Tables[0].Rows[0]["LocationID"].ToString());
                         TreeNode theFrmRoot = new TreeNode();
                         theFrmRoot.Text = theDR["FormName"].ToString() + " ( " + ((DateTime)theDR["TranDate"]).ToString(Session["AppDateFormat"].ToString()) + " )";
                         string _formName = theDR["FormName"].ToString();
@@ -119,9 +119,9 @@ namespace IQCare.Web.Clinical
                                 theFrmRoot.ImageUrl = "~/images/15px-Yes_check.svg.png";
                             }
                             else if (theDR["CAUTION"].ToString() == "1")
-                                        {
-                                            theFrmRoot.ImageUrl = "~/images/caution.png";
-                                        }
+                            {
+                                theFrmRoot.ImageUrl = "~/images/caution.png";
+                            }
                             else
                             {
                                 theFrmRoot.ImageUrl = "~/Images/No_16x.ico";
@@ -129,7 +129,7 @@ namespace IQCare.Web.Clinical
                         }
                         else
                         {
-                            if((_formName == "Pharmacy") || (_formName == "Laboratory") || (_formName == "Paediatric Pharmacy") || _formName.Contains("Service Request"))
+                            if ((_formName == "Pharmacy") || (_formName == "Laboratory") || (_formName == "Paediatric Pharmacy") || _formName.Contains("Service Request"))
                             {
                                 if (Session["Paperless"].ToString() == "1")
                                 {
@@ -160,8 +160,8 @@ namespace IQCare.Web.Clinical
                             else
                             {
                                 //find if form is linked to this module
-                               
-                                if (linkedForms != null && linkedForms.Select("FormName = '"+_formName+"'").Length > 0)
+
+                                if (linkedForms != null && linkedForms.Select("FormName = '" + _formName + "'").Length > 0)
                                 {
                                     if (DQ != "")
                                     {
@@ -188,11 +188,11 @@ namespace IQCare.Web.Clinical
                         //        theFrmRoot.ImageToolTip = "You are Not Authorized to Access this Functionality";
                         //        theFrmRoot.SelectAction = TreeNodeSelectAction.None;
                         //    }
-                                
+
                         //    else if (Convert.ToString(Session["TechnicalAreaId"]) == Convert.ToString(theDR["Module"]) || (_formName == "Pharmacy") || 
                         //        (_formName == "Laboratory") || (_formName == "Paediatric Pharmacy") ||_formName.Contains("Service Request") )
                         //    {
-                               
+
                         //    }
                         //    else
                         //    {
@@ -225,26 +225,32 @@ namespace IQCare.Web.Clinical
             (Master.FindControl("levelOneNavigationUserControl1").FindControl("lblRoot") as Label).Text = "Clinical Forms >> ";
             (Master.FindControl("levelOneNavigationUserControl1").FindControl("lblheader") as Label).Text = "Patient History";
             (Master.FindControl("levelTwoNavigationUserControl1").FindControl("lblformname") as Label).Text = "Existing Forms";
-
-           
-
-            #region "Refresh Patient Records"
-            IPatientHome PManager;
-            if (null == Session["PatientInformation"])
-            {
-                PManager = (IPatientHome)ObjectFactory.CreateInstance("BusinessProcess.Clinical.BPatientHome, BusinessProcess.Clinical");
-                System.Data.DataSet thePDS = PManager.GetPatientDetails(Convert.ToInt32(Session["PatientId"]), Convert.ToInt32(Session["SystemId"]), Convert.ToInt32(Session["TechnicalAreaId"]));
-                //System.Data.DataSet thePDS = PManager.GetPatientDetails(Convert.ToInt32(Request.QueryString["PatientId"]), Convert.ToInt32(Session["SystemId"]));
-
-                Session["PatientInformation"] = thePDS.Tables[0];
-            }
-            #endregion
-
             IPatientHome PatientManager;
-            PatientManager = (IPatientHome)ObjectFactory.CreateInstance("BusinessProcess.Clinical.BPatientHome, BusinessProcess.Clinical");
-
             try
             {
+
+                #region "Refresh Patient Records"
+
+                if (null == Session["PatientInformation"])
+                {
+                    PatientManager = (IPatientHome)ObjectFactory.CreateInstance("BusinessProcess.Clinical.BPatientHome, BusinessProcess.Clinical");
+                    System.Data.DataSet thePDS = PatientManager.GetPatientDetails(Convert.ToInt32(Session["PatientId"]), Convert.ToInt32(Session["SystemId"]), Convert.ToInt32(Session["TechnicalAreaId"]));
+                    //System.Data.DataSet thePDS = PManager.GetPatientDetails(Convert.ToInt32(Request.QueryString["PatientId"]), Convert.ToInt32(Session["SystemId"]));
+                    if (null != thePDS && thePDS.Tables.Count > 0)
+                    {
+                        Session["PatientInformation"] = thePDS.Tables[0];
+                    }
+                    else
+                    {
+                        throw new Exception("Patient information could not be retrieved");
+                    }
+                }
+                #endregion
+
+               // IPatientHome PatientManager;
+                PatientManager = (IPatientHome)ObjectFactory.CreateInstance("BusinessProcess.Clinical.BPatientHome, BusinessProcess.Clinical");
+
+
                 (Master.FindControl("levelTwoNavigationUserControl1").FindControl("lblpntStatus") as Label).Text = Convert.ToString(Session["PatientStatus"]);
                 if (!IsPostBack)
                 {
@@ -259,7 +265,7 @@ namespace IQCare.Web.Clinical
                         Session["PatientId"] = Request.QueryString["PatientId"];  //remove it after session of patient set on find add when patient selected from grid.
                     }
 
-                    PId = Convert.ToString(Session["PatientId"]); 
+                    PId = Convert.ToString(Session["PatientId"]);
                     PtnSts = Convert.ToString(Session["PatientStatus"]); ;
                     if (Session["PatientId"] != null && Convert.ToInt32(Session["PatientId"]) != 0)
                     {
@@ -303,9 +309,9 @@ namespace IQCare.Web.Clinical
             {
                 origin = Session["urlOrigin"].ToString();
             }
-            
+
             ////theUrl = string.Format("{0}?PatientId={1}", "frmPatient_Home.aspx", Request.QueryString["PatientId"].ToString());
-            if(origin == "greencard")
+            if (origin == "greencard")
             {
                 theUrl = string.Format("{0}", "~/CCC/Patient/PatientHome.aspx");
             }
@@ -500,7 +506,7 @@ namespace IQCare.Web.Clinical
                         // theFrmRoot.NavigateUrl = url;
                         break;
 
-                    //default: break;
+                        //default: break;
 
                 }
             }

@@ -113,14 +113,47 @@ namespace IQCare.CCC.UILogic
 
         public PatientLookup GetPatientByCccNumber(string cccNumber)
         {
+            cccNumber = cccNumber.Trim();
+            PatientLookup patient = null;
             try
             {
-                return _patientLookupmanager.GetPatientByCccNumber(cccNumber);
+                patient = _patientLookupmanager.GetPatientByCccNumber(cccNumber);
+                if (patient == null)
+                {
+                    if (cccNumber.Contains("-"))
+                    {
+                        string[] numbers = cccNumber.Split('-');
+                        patient = _patientLookupmanager.GetPatientByCccNumber(numbers[1]);
+                        if (patient == null)
+                        {
+                            string cccAfterRemoveLeading = numbers[1].TrimStart('0');
+                            patient = _patientLookupmanager.GetPatientByCccNumber(cccAfterRemoveLeading);
+                        }
+                    }
+                    else
+                    {
+                        int cccNumberLength = cccNumber.Length;
+                        if (cccNumberLength == 10)
+                        {
+                            string ccc = cccNumber.Substring(5, 5);
+                            patient = _patientLookupmanager.GetPatientByCccNumber(ccc);
+                            if (patient == null)
+                            {
+                                patient = _patientLookupmanager.GetPatientByCccNumber(ccc.TrimStart('0'));
+                            }
+                        }
+                        else
+                        {
+                            patient = _patientLookupmanager.GetPatientByCccNumber(cccNumber.TrimStart('0'));
+                        }
+                    }
+                }
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
+            return patient;
         }
     }
 }

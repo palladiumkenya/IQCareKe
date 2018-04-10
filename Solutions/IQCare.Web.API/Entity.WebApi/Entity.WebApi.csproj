@@ -48,6 +48,10 @@
     <Compile Include="APIInteropSystem.cs" />
     <Compile Include="ApiOutbox.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PSmart\PsmartAuthUser.cs" />
+    <Compile Include="PSmart\psmartCard.cs" />
+    <Compile Include="PSmart\PsmartEligibleList.cs" />
+    <Compile Include="PSmart\Psmart_Store.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild">

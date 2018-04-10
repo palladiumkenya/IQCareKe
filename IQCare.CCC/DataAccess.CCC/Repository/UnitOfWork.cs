@@ -26,8 +26,10 @@ using DataAccess.CCC.Repository.Triage;
 using DataAccess.CCC.Repository.Screening;
 using DataAccess.CCC.Interface.assessment;
 using DataAccess.CCC.Interface.Interoperability;
+using DataAccess.CCC.Interface.Pharmacy;
 using DataAccess.CCC.Repository.assessment;
 using DataAccess.CCC.Repository.Interoperability;
+using DataAccess.CCC.Repository.Pharmacy;
 
 namespace DataAccess.CCC.Repository
 {
@@ -52,6 +54,7 @@ namespace DataAccess.CCC.Repository
         private IModuleRepository _moduleRepository;
 
         /* lookupContext */
+        private ILookupItemRepository _lookupItemRepository;
         private ILookupRepository _lookupRepository;
         private ILookupMasterRepository _lookupMasterRepository;
         private IPatientLookupRepository _patientLookupRepository;
@@ -153,6 +156,11 @@ namespace DataAccess.CCC.Repository
         private IInteropPlacerValuesRepository _interopPlacerValuesRepository;
         private IPatientVitalsMessageRepository _patientVitalsMessageRepository;
 
+        //pharmacy
+        private IPatientPharmacyDispenseRepository _patientPharmacyDispenseRepository;
+        private IPharmacyOrderRepository _pharmacyOrderRepository;
+        private IDrugRepository _drugRepository;
+
         public UnitOfWork(BaseContext context)
         {
             if (context == null)
@@ -238,6 +246,33 @@ namespace DataAccess.CCC.Repository
             {
                 return _viralLoadMessageRepository ??
                        (_viralLoadMessageRepository = new ViralLoadMessageRepository((LookupContext)_context));
+            }
+        }
+
+        public IPatientPharmacyDispenseRepository PatientPharmacyDispenseRepository
+        {
+            get
+            {
+                return _patientPharmacyDispenseRepository ?? 
+                    (_patientPharmacyDispenseRepository = new PatientPharmacyDispenseRepository((GreencardContext)_context));
+            }
+        }
+
+        public IPharmacyOrderRepository PharmacyOrderRepository
+        {
+            get
+            {
+                return _pharmacyOrderRepository ??
+                       (_pharmacyOrderRepository = new PharmacyOrderRepository((GreencardContext)_context));
+            }
+        }
+
+        public IDrugRepository DrugRepository
+        {
+            get
+            {
+                return _drugRepository ??
+                       (_drugRepository = new DrugRepository((GreencardContext)_context));
             }
         }
 
@@ -745,7 +780,9 @@ namespace DataAccess.CCC.Repository
             }
         }
 
-       // public IPatientAdverseEventOutcomeRepository PatientAdverseEventOutcomeRepository => throw new NotImplementedException();
+        public ILookupItemRepository LookupItemRepository => _lookupItemRepository ?? (_lookupItemRepository = new LookupItemRepository((LookupContext)_context));
+
+        // public IPatientAdverseEventOutcomeRepository PatientAdverseEventOutcomeRepository => throw new NotImplementedException();
 
         public int Complete()
         {

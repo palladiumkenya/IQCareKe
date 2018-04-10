@@ -16,72 +16,83 @@ namespace IQCare.Web.CCC
         {
             AppLocationId = Convert.ToInt32(HttpContext.Current.Session["AppLocationId"]);
             Session["PatientPK"] = 0;
-            var facilityStatistics= _lookupManager.GetLookupFacilityStatistics();
-            foreach (var item in facilityStatistics)
-            {
-                lblTotalPatients.Text = "<span class='badge pull-right'>" + item.TotalCumulativePatients.ToString()+"</span>";
-                lblOnART.Text = "<span class='badge pull-right'>" + item.TotalActiveOnArt.ToString()+"</span>";
-                lblctx.Text = "<span class='badge pull-right'>"+ item.TotalOnCtxDapson.ToString() + "</span>";
-                lbltransit.Text = "<span class='badge pull-right'>" + item.TotalTransit.ToString() +"</span>";
-                lbltransferin.Text = "<span class='badge pull-right'>" + item.TotalTransferIn.ToString()+"</span>";
-                lbldead.Text = "<span class='badge pull-right'>" + item.TotalPatientsDead.ToString() +"</span>";
-                lbltransferout.Text = "<span class='badge pull-right'>" + item.TotalPatientsTransferedOut.ToString() +"</span>";
-                lblundocumentedltf.Text = "<span class='badge pull-right'>" + item.TotalUndocumentedLTFU.ToString() + "</span>";
-                totalDocumetedLTFU.Text = "<span class='badge pull-right'>" + item.LostToFollowUp.ToString() + "</span>";
-                
-                //lblctx.Text = "<span class='badge pull-right'>" + +"</span>";
-            }
-
-
+            
             if (!IsPostBack)
             {
-                TestingSummaryStatisticsManager statistics = new TestingSummaryStatisticsManager();
-                PatientStabilitySummaryManager summaryManager = new PatientStabilitySummaryManager();
-
-                var statList = statistics.GetAllStatistics();
-                var summaryList = summaryManager.GetAllStabilitySummaries();
-
-                if (statList.Count > 0)
+                try
                 {
-                    var html = "";
-                    var Label = "";
+                    TestingSummaryStatisticsManager statistics = new TestingSummaryStatisticsManager();
+                    PatientStabilitySummaryManager summaryManager = new PatientStabilitySummaryManager();
 
-                    for (int i = 0; i < statList.Count; i++)
+                    var statList = statistics.GetAllStatistics();
+                    var summaryList = summaryManager.GetAllStabilitySummaries();
+
+                    if (statList.Count > 0)
                     {
-                        Label = "label" + i;
-                        html += "<div class='col-md-10'>";
-                        html += "<label class='control-label pull-left'>" + statList[i].Name + ":</label>";
-                        html += "</div>";
-                        html += "<div class='col-md-2 pull-right'>";
-                        html += "<label for='value' id='" + Label + "' class='control-label text-success pull-right'>";
-                        html += "<span class='badge pull-right'>" + statList[i].Value + "</span>";
-                        html += "</div>";
-                        html += "<div class='col-md-12'><hr></div>";
-                    }
-                    testingSummaryStatistics.InnerHtml = html;
-                }
+                        var html = "";
+                        var Label = "";
 
-                if (summaryList.Count > 0)
+                        for (int i = 0; i < statList.Count; i++)
+                        {
+                            Label = "label" + i;
+                            html += "<div class='col-md-10'>";
+                            html += "<label class='control-label pull-left'>" + statList[i].Name + ":</label>";
+                            html += "</div>";
+                            html += "<div class='col-md-2 pull-right'>";
+                            html += "<label for='value' id='" + Label + "' class='control-label text-success pull-right'>";
+                            html += "<span class='badge pull-right'>" + statList[i].Value + "</span>";
+                            html += "</div>";
+                            html += "<div class='col-md-12'><hr></div>";
+                        }
+                        testingSummaryStatistics.InnerHtml = html;
+                    }
+
+                    if (summaryList.Count > 0)
+                    {
+                        var html = "";
+                        var Label = "";
+
+                        for (int i = 0; i < summaryList.Count; i++)
+                        {
+                            Label = "label" + i;
+                            html += "<div class='col-md-9'>";
+                            html += "<label class='control-label pull-left'>" + summaryList[i].Category + ":</label>";
+                            html += "</div>";
+                            html += "<div class='col-md-2 pull-right'>";
+                            html += "<label for='value' id='" + Label + "' class='control-label text-success pull-right'>";
+                            html += "<span class='badge pull-right'>" + summaryList[i].Value + "</span>";
+                            html += "</div>";
+                            html += "<div class='col-md-12'><hr></div>";
+                        }
+                        stabilitySummaryStatictics.InnerHtml = html;
+                    }
+
+                }
+                catch (Exception ex)
                 {
-                    var html = "";
-                    var Label = "";
 
-                    for (int i = 0; i < summaryList.Count; i++)
-                    {
-                        Label = "label" + i;
-                        html += "<div class='col-md-9'>";
-                        html += "<label class='control-label pull-left'>" + summaryList[i].Category + ":</label>";
-                        html += "</div>";
-                        html += "<div class='col-md-2 pull-right'>";
-                        html += "<label for='value' id='" + Label + "' class='control-label text-success pull-right'>";
-                        html += "<span class='badge pull-right'>" + summaryList[i].Value + "</span>";
-                        html += "</div>";
-                        html += "<div class='col-md-12'><hr></div>";
-                    }
-                    stabilitySummaryStatictics.InnerHtml = html;
                 }
+                try
+                {
+                    var facilityStatistics = _lookupManager.GetLookupFacilityStatistics();
+                    foreach (var item in facilityStatistics)
+                    {
+                        lblTotalPatients.Text = "<span class='badge pull-right'>" + item.TotalCumulativePatients.ToString() + "</span>";
+                        lblOnART.Text = "<span class='badge pull-right'>" + item.TotalActiveOnArt.ToString() + "</span>";
+                        lblctx.Text = "<span class='badge pull-right'>" + item.TotalOnCtxDapson.ToString() + "</span>";
+                        lbltransit.Text = "<span class='badge pull-right'>" + item.TotalTransit.ToString() + "</span>";
+                        lbltransferin.Text = "<span class='badge pull-right'>" + item.TotalTransferIn.ToString() + "</span>";
+                        lbldead.Text = "<span class='badge pull-right'>" + item.TotalPatientsDead.ToString() + "</span>";
+                        lbltransferout.Text = "<span class='badge pull-right'>" + item.TotalPatientsTransferedOut.ToString() + "</span>";
+                        lblundocumentedltf.Text = "<span class='badge pull-right'>" + item.TotalUndocumentedLTFU.ToString() + "</span>";
+                        totalDocumetedLTFU.Text = "<span class='badge pull-right'>" + item.LostToFollowUp.ToString() + "</span>";
+
+                        //lblctx.Text = "<span class='badge pull-right'>" + +"</span>";
+                    }
+                }
+                catch (Exception ex) { }
             }
+
         }
-        
     }
 }

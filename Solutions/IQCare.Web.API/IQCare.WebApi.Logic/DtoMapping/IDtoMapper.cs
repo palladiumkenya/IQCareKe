@@ -1,4 +1,6 @@
-﻿using IQCare.DTO;
+﻿using Entities.CCC.PSmart;
+using IQCare.DTO;
+using IQCare.DTO.PSmart;
 using IQCare.WebApi.Logic.MappingEntities;
 
 namespace IQCare.WebApi.Logic.DtoMapping
@@ -6,21 +8,39 @@ namespace IQCare.WebApi.Logic.DtoMapping
     public interface IDtoMapper
     {
         Registration PatientRegistrationMapping(PatientRegistrationEntity entity);
+
         void PatientTransferIn();
+
         void UpdatedClientInformation();
+
         void PatientTransferOut();
+
         void RegimenChange();
+
         void StopDrugs();
+
         PrescriptionSourceDto DrugPrescriptionRaised(DrugPrescriptionEntity entity);
+
         void DrugOrderCancel();
-        DtoDrugDispensed DrugOrderFulfilment(DrugDispenseEntity entity);
+
+        DtoDrugDispensed DrugOrderFulfilment(PharmacyDispenseEntity entity);
+
         void AppointmentScheduling();
+
         void AppointmentUpdated();
+
         void AppointmentRescheduling();
+
         void AppointmentCanceled();
+
         void AppointmentHonored();
+
         void UniquePatientIdentification();
+
         void ViralLoadLabOrder();
+
         ViralLoadResultsDto ViralLoadResults(ViralLoadResultEntity entity);
+
+        DtoShr ShrMessageDto(SHR entity);
     }
 }

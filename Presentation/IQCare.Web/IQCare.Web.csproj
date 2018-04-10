@@ -346,9 +346,6 @@
     <Content Include="Statistics\HEI.aspx" />
     <Content Include="Statistics\HivCare.aspx" />
     <Content Include="Statistics\PMTCT.aspx" />
-    <None Include="log4net.log">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <Content Include="WardAdmission\Home.aspx" />
     <Content Include="WardAdmission\NewAdmission.aspx" />
     <Content Include="clientaccesspolicy.xml" />

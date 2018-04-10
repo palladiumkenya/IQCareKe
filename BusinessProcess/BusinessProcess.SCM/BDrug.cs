@@ -430,5 +430,22 @@ namespace BusinessProcess.SCM
             return (DataTable)PharmacyManager.ReturnObject(ClsUtility.theParams, "Pharmacy_SearchAllRegisteredPatients", ClsUtility.ObjectEnum.DataTable);
         }
 
+        public int detelePatientPharmacyOrder(int ptn_pharmacy_pk)
+        {
+            ClsObject PharmacyManager = new ClsObject();
+            ClsUtility.Init_Hashtable();
+            ClsUtility.AddParameters("@ptn_pharmacy_pk", SqlDbType.Int, ptn_pharmacy_pk.ToString());
+
+            return (int)PharmacyManager.ReturnObject(ClsUtility.theParams, "sp_deletePatientPharmacyOrder", ClsUtility.ObjectEnum.ExecuteNonQuery);
+        }
+
+        public DataSet pendingPharmacyOrders()
+        {
+            ClsObject PharmacyManager = new ClsObject();
+            ClsUtility.Init_Hashtable();
+
+            return (DataSet)PharmacyManager.ReturnObject(ClsUtility.theParams, "sp_PharmacyPendingOrders", ClsUtility.ObjectEnum.DataSet);
+        }
+
     }
 }

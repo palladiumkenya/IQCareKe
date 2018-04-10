@@ -13,9 +13,9 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
-	    <TrunkDir>..\..\</TrunkDir>
+    <TrunkDir>..\..\</TrunkDir>
     <RedDir Condition=" '$(RedDir)' == '' ">$(TrunkDir)package\service\</RedDir>
-	<WebDir Condition=" '$(WebDir)' == '' ">$(TrunkDir)package\web\bin\</WebDir>
+    <WebDir Condition=" '$(WebDir)' == '' ">$(TrunkDir)package\web\bin\</WebDir>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dispense.cs" />
     <Compile Include="PharmacyItem.cs" />
     <Compile Include="PrescriptionItem.cs" />
     <Compile Include="Prescription.cs" />
@@ -72,9 +73,9 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-   <Target Name="AfterBuild">
+  <Target Name="AfterBuild">
     <Copy SourceFiles="@(IntermediateAssembly)" DestinationFolder="$(RedDir)" SkipUnchangedFiles="true" />
-	<Copy SourceFiles="@(IntermediateAssembly)" DestinationFolder="$(WebDir)" SkipUnchangedFiles="false" />
+    <Copy SourceFiles="@(IntermediateAssembly)" DestinationFolder="$(WebDir)" SkipUnchangedFiles="false" />
     <Copy SourceFiles="@(DocFileItem)" DestinationFiles="@(FinalDocFile->'$(RedDir)%(FileName)%(Extension)')" SkipUnchangedFiles="true" Condition="'$(_DocumentationFileProduced)'=='true'" />
     <Copy SourceFiles="@(IntermediateSatelliteAssembliesWithTargetPath)" DestinationFiles="@(IntermediateSatelliteAssembliesWithTargetPath->'$(RedDir)%(Culture)\$(TargetName).resources.dll')" SkipUnchangedFiles="true" />
   </Target>

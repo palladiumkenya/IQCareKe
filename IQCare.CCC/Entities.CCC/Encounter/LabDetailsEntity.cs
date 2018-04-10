@@ -20,7 +20,7 @@ namespace Entities.CCC.Encounter
             public int LabOrderId { get; set; }        
             public int LabTestId { get; set; }
             public string TestNotes { get; set; }
-            public int IsParent { get; set; }
+            public bool IsParent { get; set; }
             public int? ParentTestId { get; set; }
             public string ResultNotes { get; set; }
             public int? ResultBy { get; set; }

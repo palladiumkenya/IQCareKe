@@ -2116,7 +2116,8 @@
 <script type="text/javascript">
 	var genderId = <%=genderID%>;
 	var gender = "<%=gender%>";
-	var Age = "<%=age%>";
+    var Age = "<%=age%>";
+	var DateOfEnrollment = "<%=DateOfEnrollment%>";
 	var isNoneChecked = false;
 
 	var PatientId = "<%=PtnId%>";
@@ -2153,12 +2154,12 @@
 			$("#IcfActionForm").hide();
 		}
 		/*$("#IcfActionForm").hide();*/
-		$("#IptForm").hide();
-		$("#IcfForm").hide();
-		$("#IptClientWorkupForm").hide();
-		$("#IptDetailsForm").hide();
-		$("#IptOutcomeDetailsForm").hide();
-		$("#onIpt").prop("disabled", true);
+		//$("#IptForm").hide();
+		//$("#IcfForm").hide();
+		//$("#IptClientWorkupForm").hide();
+		//$("#IptDetailsForm").hide();
+		//$("#IptOutcomeDetailsForm").hide();
+		//$("#onIpt").prop("disabled", true);
 		$("#MMAS8").hide();
 		//  $("#EverBeenOnIpt").prop("disabled", true);
 		//showHideFPControls();
@@ -2325,7 +2326,23 @@
 			restricted: [{ from: tomorrow, to: Infinity }],
 			momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
 			//restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
-		});
+        });
+
+        $('#DateOfVisit').on('changed.fu.datepicker dateClicked.fu.datepicker', function (event, date) {
+            var dateOfVisit = $('#DateOfVisit').datepicker('getDate');
+
+            //console.log("changed" + dateOfVisit);
+            //console.log("Enrollment Date: " + DateOfEnrollment);
+            //console.log("Moment 1 " + moment(dateOfVisit));
+            //console.log("Moment 1 " + moment(DateOfEnrollment));
+
+            var isBeforeDateOfEnrollment = moment(moment(dateOfVisit)).isBefore(moment(DateOfEnrollment));
+            if (isBeforeDateOfEnrollment) {
+                $("#<%=VisitDate.ClientID%>").val("");
+                toastr.error("Visit Date should not be before the date of Enrollment", "Clinical Encounter");
+            }
+            console.log(isBeforeDateOfEnrollment);
+        });
 
 		$("#prescribeDrugs").click(function () {
 			$("#btnClosePrecriptionModal").show("fast");
@@ -3314,7 +3331,7 @@
 			var rashAction = $("#rashAction").val();
 			var adheranceMeasurementAction = $("#adheranceAction").val();
 			var patientId = <%=PatientId%>;
-			var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            var patientMasterVisitId = <%=PatientMasterVisitId%>;
 			$.ajax({
 				type: "POST",
 				url: "../WebService/PatientTbService.asmx/AddIpt",
@@ -3336,10 +3353,11 @@
 			var yellowColouredUrine = $("#urineColour").val();
 			var numbness = $("#numbness").val();
 			var liverFunctionTests = $("#liverTest").val();
-			var startIpt = $("#startIpt").val();;
-			var iptStartDate = moment($("#iptStartDate").val()).format('DD-MMM-YYYY');
+			var startIpt = $("#startIpt").val();
+            var iptStartDate = $("#IPTStartDate").val();
 			var patientId = <%=PatientId%>;
-			var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            
 			$.ajax({
 				type: "POST",
 				url: "../WebService/PatientTbService.asmx/AddPatientIptWorkup",
@@ -3793,23 +3811,31 @@
 			});
 	}
 
-	function tbInfectedChange() {
-		if ($("#tbInfected").val() === 'False') {
+    function tbInfectedChange() {
+        if ($("#tbInfected").val() === 'False') {
 			$("#IptForm").show();
 			$("#IcfForm").show();
 			$("#tbscreeningstatus option").filter(function () { return $(this).text() === 'NoTB'; }).prop('selected', true);
 			$("#onIpt").prop("disabled", false);
-			$("#onIpt").val("");
-		} else {
+        } else if ($("#tbInfected").val() === 'True'){
 			$("#IptForm").hide();
 			$("#IcfForm").hide();
 			$("#IcfActionForm").hide();
-			$("#tbscreeningstatus option").filter(function () { return $(this).text() === 'TBRx'; }).prop('selected', true);
+            $("#tbscreeningstatus option").filter(function () { return $(this).text() === 'TBRx'; }).prop('selected', true);
 			$("#onIpt").prop("disabled", true);
-			$("#onIpt").val("False");
+			$("#onIpt").val("");
 			//$("#EverBeenOnIpt").prop("disabled", true);
 			// $("#EverBeenOnIpt").val("");
-		}
+        } else {
+            $("#IptForm").hide();
+            $("#IcfForm").hide();
+            $("#IcfActionForm").hide();
+            //$("#tbscreeningstatus option").filter(function () { return $(this).text() === 'TBRx'; }).prop('selected', true);
+            $("#onIpt").prop("disabled", true);
+            $("#onIpt").val("");
+            //$("#EverBeenOnIpt").prop("disabled", true);
+            // $("#EverBeenOnIpt").val("");
+        }
 
 	}
 

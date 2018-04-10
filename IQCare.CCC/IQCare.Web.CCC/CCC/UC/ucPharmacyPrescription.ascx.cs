@@ -26,7 +26,11 @@ namespace IQCare.Web.CCC.UC
         {
             if (Request.QueryString["visitId"] != null)
             {
-                Session["PatientMasterVisitId"] = Request.QueryString["visitId"].ToString();
+                Session["ExistingRecordPatientMasterVisitID"] = Request.QueryString["visitId"].ToString();
+            }
+            else
+            {
+                Session["ExistingRecordPatientMasterVisitID"] = "0";
             }
 
             if (!IsPostBack)
@@ -78,7 +82,7 @@ namespace IQCare.Web.CCC.UC
             LookupLogic lookUp = new LookupLogic();
             PatientEncounterLogic encounterLogic = new PatientEncounterLogic();
 
-            List<Entities.CCC.Encounter.PatientEncounter.PharmacyFields> lst = encounterLogic.getPharmacyFields(Session["PatientMasterVisitId"].ToString());
+            List<Entities.CCC.Encounter.PatientEncounter.PharmacyFields> lst = encounterLogic.getPharmacyFields(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString());
             if (lst.Count > 0)
             {
                 ddlTreatmentProgram.SelectedValue = lst[0].TreatmentProgram;

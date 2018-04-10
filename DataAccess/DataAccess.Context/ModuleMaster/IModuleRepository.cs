@@ -5,7 +5,7 @@ namespace DataAccess.Context.ModuleMaster
 {
     public interface IModuleRepository : IRepository<Module>
     {
-        Module GetByCode(string code);
+        Module GetByName(string name);
 
         List<ServiceArea> GetModuleServiceArea(int moduleId);
 

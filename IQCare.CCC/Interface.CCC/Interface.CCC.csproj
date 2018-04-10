@@ -12,6 +12,7 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TrunkDir>..\..\</TrunkDir>
+    <RedDir Condition=" '$(RedDir)' == '' ">$(TrunkDir)package\service\</RedDir>
     <WebDir Condition=" '$(WebDir)' == '' ">$(TrunkDir)package\web\bin\</WebDir>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -113,6 +114,9 @@
     <Compile Include="Lookup\ITestingSummaryStatisticsManager.cs" />
     <Compile Include="OneTimeEvent\IOneTimeEventsTrackerManager.cs" />
     <Compile Include="Patient\IPatientManager.cs" />
+    <Compile Include="Pharmacy\IDrugManager.cs" />
+    <Compile Include="Pharmacy\IPatientPharmacyDispenseManager.cs" />
+    <Compile Include="Pharmacy\IPharmacyOrderManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Screening\IPatientScreeningManager.cs" />
     <Compile Include="Triage\IPatientAdverseEventOutcomeManager.cs" />
@@ -151,6 +155,7 @@
   </Target>
   -->
   <Target Name="AfterBuild">
+    <Copy SourceFiles="@(IntermediateAssembly)" DestinationFolder="$(RedDir)" SkipUnchangedFiles="true" />
     <Copy SourceFiles="@(IntermediateAssembly)" DestinationFolder="$(WebDir)" SkipUnchangedFiles="false" />
     <Copy SourceFiles="@(DocFileItem)" DestinationFiles="@(FinalDocFile->'$(RedDir)%(FileName)%(Extension)')" SkipUnchangedFiles="true" Condition="'$(_DocumentationFileProduced)'=='true'" />
     <Copy SourceFiles="@(IntermediateSatelliteAssembliesWithTargetPath)" DestinationFiles="@(IntermediateSatelliteAssembliesWithTargetPath->'$(RedDir)%(Culture)\$(TargetName).resources.dll')" SkipUnchangedFiles="true" />

@@ -1,14 +1,39 @@
 -- LookupMaster
+If Not Exists(Select 1 From LookupMaster where Name='EncounterType') 
+Begin 
 INSERT INTO LookupMaster(Name,DisplayName,DeleteFlag) VALUES('EncounterType','EncounterType',0);
+End
 
 -- LookupItem
-INSERT INTO LookupItem(Name,DisplayName,DeleteFlag) VALUES('Registration-encounter','Registration',0);
+If Not Exists(Select 1 From LookupItem where Name='Registration-encounter') 
+Begin 
+INSERT INTO LookupItem(Name,DisplayName,DeleteFlag) VALUES('Registration-encounter','Registration',0); 
+End
+
+If Not Exists(Select 1 From LookupItem where Name='Triage-encounter') 
+Begin 
 INSERT INTO LookupItem(Name,DisplayName,DeleteFlag) VALUES('Triage-encounter','Triage',0);
+End
+If Not Exists(Select 1 From LookupItem where Name='ccc-encounter') 
+Begin
 INSERT INTO LookupItem(Name,DisplayName,DeleteFlag) VALUES('ccc-encounter','CCC',0);
+End
+If Not Exists(Select 1 From LookupItem where Name='pmtct-encounter') 
+Begin
 INSERT INTO LookupItem(Name,DisplayName,DeleteFlag) VALUES('pmtct-encounter','PMTCT',0);
+End
+If Not Exists(Select 1 From LookupItem where Name='tb-encounter') 
+Begin
 INSERT INTO LookupItem(Name,DisplayName,DeleteFlag) VALUES('tb-encounter','TB',0);
+End
+If Not Exists(Select 1 From LookupItem where Name='Lab-encounter') 
+Begin
 INSERT INTO LookupItem(Name,DisplayName,DeleteFlag) VALUES('Lab-encounter','Lab',0);
+End
+If Not Exists(Select 1 From LookupItem where Name='Pharmacy-encounter') 
+Begin
 INSERT INTO LookupItem(Name,DisplayName,DeleteFlag) VALUES('Pharmacy-encounter','Pharmacy',0);
+End
 
 -- LookupMasterItem
 INSERT INTO LookupMasterItem(LookupMasterId,LookupItemId,DisplayName,OrdRank) VALUES((SELECT top 1 id FROM LookupMaster l WHERE l.Name='EncounterType'),(SELECT TOP 1 Id FROM LookupItem i WHERE i.Name='registration-encounter'),'registration-encounter',1);

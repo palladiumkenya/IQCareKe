@@ -119,6 +119,7 @@ namespace Entities.CCC.Encounter
             public string NoticeableWeightLoss { get; set; }
             public string NightSweats { get; set; }
             public string SputumSmear { get; set; }
+            public string geneXpert { get; set; }
             public string ChestXray { get; set; }
             public string startAntiTB { get; set; }
             public string InvitationOfContacts { get; set; }
@@ -137,6 +138,8 @@ namespace Entities.CCC.Encounter
             public string YellownessOfEyes { get; set; }
             public string AdominalTenderness { get; set; }
             public string LiverFunctionTests { get; set; }
+            public string startIPT { get; set; }
+            public string IPTStartDate { get; set; }
         }
 
         [Serializable]

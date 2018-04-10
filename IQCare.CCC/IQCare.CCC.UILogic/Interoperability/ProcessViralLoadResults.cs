@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Script.Serialization;
 using Entities.CCC.Encounter;
 using IQCare.CCC.UILogic.Visit;
+using Entities.CCC.Lookup;
 
 namespace IQCare.CCC.UILogic.Interoperability
 {
@@ -16,6 +17,8 @@ namespace IQCare.CCC.UILogic.Interoperability
         //int _facilityId = Convert.ToInt32(HttpContext.Current.Session["AppLocationId"]);
         public string Save(ViralLoadResultsDto viralLoadResults)
         {
+            LabOrderEntity labOrder = null;
+            List<LabDetailsEntity> labDetails = null;
             var results = viralLoadResults.ViralLoadResult;
             if (results != null)
             {
@@ -25,62 +28,110 @@ namespace IQCare.CCC.UILogic.Interoperability
                     var labOrderManager = new PatientLabOrderManager();
                     var patientCcc = viralLoadResults.PatientIdentification.INTERNAL_PATIENT_ID.FirstOrDefault(n => n.IdentifierType == "CCC_NUMBER").IdentifierValue;
                     var patient = patientLookup.GetPatientByCccNumber(patientCcc);
-                    if (patient != null)
+                    string receivingFacilityMFLCode = viralLoadResults.MesssageHeader.ReceivingFacility;
+                    LookupLogic flm = new LookupLogic();
+                    LookupFacility thisFacility = flm.GetFacility(receivingFacilityMFLCode);
+                    if (thisFacility == null)
+                    {
+                        Msg = $"The facility {receivingFacilityMFLCode} does not exist";
+
+                        return Msg;
+                    }
+                    if (patient == null)
+                    {
+                        Msg = $"Patient {patientCcc} does not exist ";
+
+                        return Msg;
+                    }
+                    if (patient != null && thisFacility != null)
                     {
                         
                         //todo brian check
-                        var labOrder = labOrderManager.GetPatientLabOrdersByDate((int) patient.ptn_pk,
-                            results.FirstOrDefault().DateSampleCollected);
-                        
-                        if (labOrder.Count == 0)
+                        labOrder = labOrderManager.GetPatientLabOrdersByDate((int) patient.ptn_pk,results.FirstOrDefault().DateSampleCollected).DefaultIfEmpty(null).FirstOrDefault();
+                        DateTime sampleCollectionDate = results.FirstOrDefault().DateSampleCollected;
+                        if (labOrder == null)
                         {
                             var patientMasterVisitManager = new PatientMasterVisitManager();
-                            var lookupLogic = new LookupLogic();
-                            var visitType = lookupLogic.GetItemIdByGroupAndItemName("VisitType", "Enrollment")[0].ItemId;
-                            int patientMasterVisitId = patientMasterVisitManager.AddPatientMasterVisit(patient.Id, 1, visitType);
-                            var listLabOrder = new List<ListLabOrder>();
+                            
+                            //var visitType = flm.GetItemIdByGroupAndItemName("VisitType", "Enrollment")[0]
+                            //    .ItemId;
+                            int patientMasterVisitId =
+                                patientMasterVisitManager.AddPatientMasterVisit(patient.Id, 1, 316);
+                            var listOfTestsOrdered = new List<ListLabOrder>();
                             var order = new ListLabOrder()
                             {
                                 FacilityId = Convert.ToInt32(viralLoadResults.MesssageHeader.ReceivingFacility),
-                                LabName = results.FirstOrDefault().LabTestedIn,
-                                LabNameId = 0,
+                                LabName = "Viral Load",// results.FirstOrDefault().LabTestedIn,
+                                LabNameId = 3,
                                 LabNotes = results.FirstOrDefault().Regimen + " " + results.FirstOrDefault().SampleType,
-                                LabOrderDate = results.FirstOrDefault().DateSampleCollected,
+                                LabOrderDate = sampleCollectionDate,
                                 LabOrderId = 0,
                                 OrderReason = "",
                                 Results = results.FirstOrDefault().VlResult,
-                                VisitId = patientMasterVisitId
+                                VisitId = patientMasterVisitId,
+                                ResultDate = viralLoadResults.MesssageHeader.MessageDatetime
+                                
                             };
-                            listLabOrder.Add(order);
+                            listOfTestsOrdered.Add(order);
                             var jss = new JavaScriptSerializer();
-                            string patientLabOrder = jss.Serialize(listLabOrder);
+                            string patientLabOrder = jss.Serialize(listOfTestsOrdered);
                             //include userid and facility ID
-                            labOrderManager.savePatientLabOrder(patient.Id, (int)patient.ptn_pk, 1, 209, 203, patientMasterVisitId, DateTime.Today.ToString(), "IL lab order", patientLabOrder);
+                           int orderId= labOrderManager.savePatientLabOrder(patient.Id, (int)patient.ptn_pk, 1, thisFacility.FacilityID, 203, patientMasterVisitId, sampleCollectionDate.ToString(), "IL lab order", patientLabOrder,"completed");
+                            
+                            labOrder = labOrderManager.GetLabOrdersById( orderId);
+                            labDetails = labOrderManager.GetLabTestsOrderedById(labOrder.Id);
                         }
-                        var labDetails =
-                            labOrderManager.GetPatientLabDetailsByDate(labOrder.FirstOrDefault().Id, results.FirstOrDefault().DateSampleCollected);
-                        foreach (var result in results)
+                        else
                         {
-                            var labOrd = labOrder.FirstOrDefault();
-                            if (labOrd != null)
-                            {
-                                var labResults = new LabResultsEntity()
-                                {
-                                    //todo remove hard coding
-                                    LabOrderId = labOrd.Id,
-                                    LabOrderTestId = labDetails.FirstOrDefault().Id,
-                                    ParameterId = 3,
-                                    LabTestId = 0,
-                                    ResultValue = Convert.ToDecimal(result.VlResult),
-                                    ResultUnit = "copies/ml",
-                                    ResultUnitId = 129,
-                                };
-                                labOrderManager.AddPatientLabResults(labResults);
-                            }
+                        labDetails = labOrderManager.GetLabTestsOrderedById(labOrder.Id);
                         }
-                        Msg = "Sucess";
-                        //todo update laborder and lab details entities
 
+                        if (labOrder != null)
+                        {
+                            bool isUndetectable = false;
+                            string resultText = "";
+                            decimal decimalValue = Decimal.Zero;
+                            decimal? resultValue = null;
+                            foreach (var result in results)
+                            {
+                                if (result.VlResult.Contains("LDL"))
+                                {
+                                    isUndetectable = true;
+                                    resultText = result.VlResult;
+                                }
+                                else
+                                {
+                                    var resultString = result.VlResult.Replace("copies/ml", "");
+                                    bool isSuccess = decimal.TryParse(resultString, out decimalValue);
+                                    if (isSuccess) resultValue = decimalValue;
+                                }
+                                
+                                
+                                //var labOrd = labOrder.FirstOrDefault();
+                                if (labOrder != null)
+                                {
+
+                                    var labResults = new LabResultsEntity()
+                                    {
+                                        //todo remove hard coding
+                                        LabOrderId = labOrder.Id,
+                                        LabOrderTestId = labDetails.FirstOrDefault().Id,
+                                        ParameterId = 3,
+                                        LabTestId = 3,
+                                        ResultText = resultText,
+                                        ResultValue = resultValue,
+                                        ResultUnit = "copies/ml",
+                                        ResultUnitId = 129,
+                                        Undetectable = isUndetectable,
+                                        StatusDate = result.DateSampleTested,
+                                        HasResult = true
+                                    };
+                                    labOrderManager.AddPatientLabResults(labResults);
+                                }
+                            }
+                        Msg = "Sucess";
+                        }
+                        
                     }
                     else
                     {
