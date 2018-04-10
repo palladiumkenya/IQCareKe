@@ -66,7 +66,7 @@ namespace IQCare.Controllers.Common
         [HttpGet("registrationOptions")]
         public async Task<IActionResult> GetOptions()
         {
-            string[] options = new string[] { "MaritalStatus", "KeyPopulation", "Gender" };
+            string[] options = new string[] { "MaritalStatus", "KeyPopulation", "Gender", "Relationship" };
             var results = await _mediator.Send(new GetRegistrationOptionsCommand {RegistrationOptions = options},
                 HttpContext.RequestAborted);
 

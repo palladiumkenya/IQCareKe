@@ -11,7 +11,7 @@ export class NavHeaderComponent implements OnInit {
     constructor() { }
 
     ngOnInit() {
-        this.appUserName = JSON.parse(localStorage.getItem('appUserName'));
+        this.appUserName = localStorage.getItem('appUserName');
     }
 
 }

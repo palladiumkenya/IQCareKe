@@ -11,7 +11,8 @@ export class HeaderComponent implements OnInit {
     constructor() { }
 
     ngOnInit() {
-        this.facilityName = JSON.parse(localStorage.getItem('appLocation'));
+        console.log(localStorage.getItem('appLocation'));
+        this.facilityName = localStorage.getItem('appLocation');
     }
 
 }

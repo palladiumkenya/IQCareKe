@@ -30,6 +30,7 @@ export class FamilyComponent implements OnInit {
     newPartner() {
 
         localStorage.setItem('isPartner', 'true');
+        localStorage.setItem('isFamily', 'true');
         this.zone.run(() => { this.router.navigate(['/registration/register'], {relativeTo: this.route}); });
     }
 

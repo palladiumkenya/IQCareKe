@@ -137,5 +137,18 @@ namespace IQCare.Controllers.HTS
                 return Ok(response.Value);
             return BadRequest(response);
         }
+
+        [HttpGet("lastHtsEncounters/{PersonId}")]
+        public async Task<IActionResult> GetLastEncounter(int PersonId)
+        {
+            var response = await _mediator.Send(new GetPersonLastHtsEncounterCommand()
+            {
+                PersonId = PersonId
+            }, Request.HttpContext.RequestAborted);
+
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
     }
 }

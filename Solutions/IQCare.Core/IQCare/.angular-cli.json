@@ -6,7 +6,7 @@
   "apps": [
     {
       "root": "frontend",
-      "outDir": "..\\..\\..\\package\\web\\hts",
+      "outDir": "wwwroot",
       "assets": [
         "assets",
         "favicon.ico"

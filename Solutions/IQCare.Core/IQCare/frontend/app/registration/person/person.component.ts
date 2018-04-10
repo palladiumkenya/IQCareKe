@@ -13,6 +13,7 @@ import {ClientService} from '../../shared/_services/client.service';
 import {Store} from '@ngrx/store';
 import * as Consent from '../../shared/reducers/app.states';
 import {NotificationService} from '../../shared/_services/notification.service';
+import {overrideProvider} from '@angular/core/src/view';
 
 declare var $: any;
 
@@ -27,7 +28,11 @@ export class PersonComponent implements OnInit {
     personPopulation: PersonPopulation;
     registrationVariables: RegistrationVariables;
     isPartner: string;
-    userId: number = 1;
+    isFamily: string;
+    userId: number;
+    relationshipPartnerOptions: any[];
+    relationshipFamilyOptions: any[];
+    optionToShow: any[];
 
     maritalStatuses: any[];
     keyPops: any[];
@@ -63,6 +68,10 @@ export class PersonComponent implements OnInit {
         this.contact = new Contact();
         this.personPopulation = new PersonPopulation();
         this.registrationVariables = new RegistrationVariables();
+        this.userId = JSON.parse(localStorage.getItem('appUserId'));
+        this.relationshipPartnerOptions = [];
+        this.relationshipFamilyOptions = [];
+        this.optionToShow = [];
 
         this.formGroup = this._formBuilder.group({
             formArray: this._formBuilder.array([
@@ -81,7 +90,7 @@ export class PersonComponent implements OnInit {
                 }),
                 this._formBuilder.group({
                     KeyPopulation: new FormControl(this.personPopulation.KeyPopulation, [Validators.required]),
-                    partnerRelationship: new FormControl(this.person.partnerRelationship)
+                    partnerRelationship: new FormControl(this.person.partnerRelationship, [Validators.required])
                 }),
             ]),
         });
@@ -89,24 +98,34 @@ export class PersonComponent implements OnInit {
         this.getRegistrationOptions();
 
         this.isPartner = localStorage.getItem('isPartner');
+        this.isFamily = localStorage.getItem('isFamily');
         if (this.isPartner != null && this.isPartner == 'true') {
+            this.formGroup.controls.formArray['controls'][2].controls.partnerRelationship.enable({onlySelf: false});
             this.getClientDetails();
+            this.optionToShow = this.relationshipPartnerOptions;
         } else {
+            this.formGroup.controls.formArray['controls'][2].controls.partnerRelationship.disable({onlySelf: true});
             localStorage.removeItem('personId');
             localStorage.removeItem('patientId');
             localStorage.removeItem('partnerId');
             localStorage.removeItem('htsEncounterId');
             localStorage.removeItem('patientMasterVisitId');
             localStorage.removeItem('isPartner');
+            localStorage.removeItem('isFamily');
             localStorage.setItem('serviceAreaId', '2');
 
             this.store.dispatch(new Consent.ClearState());
+        }
+
+        if ((this.isPartner != null && this.isPartner == 'true') && (this.isFamily != null && this.isFamily == 'true')) {
+            this.optionToShow = this.relationshipFamilyOptions;
         }
     }
 
     getRegistrationOptions() {
         this.registrationService.getRegistrationOptions().subscribe(res => {
             const options = res['lookupItems'];
+            const partnerOptions = ['Partner', 'Co-Wife', 'Spouse'];
             // console.log(options);
             for (let i = 0; i < options.length; i++) {
                 if (options[i].key == 'MaritalStatus') {
@@ -122,12 +141,22 @@ export class PersonComponent implements OnInit {
                             this.female = options[i].value[j].itemId;
                         }
                     }
+                } else if (options[i].key == 'Relationship') {
+                    const returnOptions = options[i].value;
+                    for (let j = 0; j < returnOptions.length; j++) {
+                        if (partnerOptions.includes(returnOptions[j].itemName)) {
+                            this.relationshipPartnerOptions.push(returnOptions[j]);
+                        } else {
+                            this.relationshipFamilyOptions.push(returnOptions[j]);
+                        }
+                    }
                 }
             }
         });
     }
 
     onSubmitForm() {
+        console.log(this.formGroup);
         if (this.formGroup.valid) {
             // this.person = Object.assign(this.person, this.formArray.get([0]).value);
             this.person = {...this.person, ...this.formArray.get([0]).value};
@@ -149,7 +178,7 @@ export class PersonComponent implements OnInit {
                 personRelation['PersonId'] = data['personId'];
                 personRelation['PatientId'] = JSON.parse(localStorage.getItem('patientId'));
                 personRelation['RelationshipTypeId'] = this.person.partnerRelationship;
-                personRelation['UserId'] = 1; // JSON.parse(localStorage.getItem('userId'));
+                personRelation['UserId'] = JSON.parse(localStorage.getItem('appUserId'));
 
                 const patientAdd = !this.person.isPartner ? this.registrationService.addPatient(data['personId'], this.person.DateOfBirth)
                     :  this.registrationService.addPersonRelationship(personRelation);
@@ -180,6 +209,9 @@ export class PersonComponent implements OnInit {
                     if (this.person.isPartner == true) {
                         this.snotifyService.success('Successfully registered partner',
                             'Registration', this.notificationService.getConfig());
+                        if (this.isFamily == 'true') {
+                            this.zone.run(() => {this.router.navigate(['/hts/family'], { relativeTo: this.route }); });
+                        }
                         this.zone.run(() => { this.router.navigate(['/hts/pns'], { relativeTo: this.route}); });
                     } else {
                         this.snotifyService.success('Successfully registered client', 'Registration', this.notificationService.getConfig());

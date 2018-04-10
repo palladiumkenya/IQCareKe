@@ -7,7 +7,7 @@
             <div class="col-md-2">
                 <app-leftnav></app-leftnav>
             </div>
-            <div class="col-md-10 animated fadeInRight">
+            <div class="col-md-10 animated fadeIn">
                 <div class="panel panel-default">
                     <div class="panel-heading">REGISTER CLIENT</div>
                     <div class="panel-body">
@@ -105,11 +105,9 @@
                                         <div class="col-lg-3 col-md-3 col-sm-3">
                                             <div *ngIf="isPartner == 'true'">
                                                 <mat-form-field>
-                                                    <mat-select placeholder="Key Population" formControlName="partnerRelationship">
+                                                    <mat-select placeholder="Relationship" formControlName="partnerRelationship">
                                                         <mat-option></mat-option>
-                                                        <mat-option value="251">Partner</mat-option>
-                                                        <mat-option value="1442">Cowife</mat-option>
-                                                        <mat-option value="247">Spouse</mat-option>
+                                                        <mat-option *ngFor="let option of optionToShow" [value]="option.itemId">{{option.itemDisplayName}}</mat-option>
                                                     </mat-select>
                                                 </mat-form-field>
                                             </div>

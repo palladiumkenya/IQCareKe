@@ -11,9 +11,8 @@
         <div>
         </div>
     </form>
-    
-    <script type="text/javascript">
-        window.location.href = '/hts/';
-    </script>
 </body>
+    <script type="text/javascript">
+        window.location.href = '/IQCareApi/';
+    </script>
 </html>

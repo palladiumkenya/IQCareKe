@@ -49,6 +49,13 @@ export class SearchComponent implements OnInit {
         localStorage.setItem('personId', row['personId']);
         localStorage.setItem('patientId', row['patientId']);
 
+        this.searchService.lastHtsEncounter(row['personId']).subscribe((res) => {
+            console.log(res);
+            localStorage.setItem('htsEncounterId', res['encounterId']);
+            // localStorage.setItem('htsEncounterId', res['patientEncounterID']);
+            localStorage.setItem('patientMasterVisitId', res['patientMasterVisitId']);
+        });
+
         this.zone.run(() => { this.router.navigate(['/registration/home'], { relativeTo: this.route }); });
     }
 }
