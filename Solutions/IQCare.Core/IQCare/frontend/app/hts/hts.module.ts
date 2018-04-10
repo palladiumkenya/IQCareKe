@@ -5,17 +5,11 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {
     MatAutocompleteModule,
     MatButtonModule, MatButtonToggleModule, MatCardModule, MatCheckboxModule, MatChipsModule,
-    MatDatepickerModule, MatDialogModule, MatDividerModule, MatExpansionModule, MatFormFieldModule, MatGridListModule, MatIconModule,
-    MatInputModule,
-    MatListModule,
-    MatMenuModule,
+    MatDatepickerModule, MatDialogModule, MatDividerModule, MatExpansionModule, MatFormFieldModule,
+    MatGridListModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule,
     MatNativeDateModule, MatPaginatorModule, MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatRippleModule,
-    MatSelectModule,
-    MatSidenavModule, MatSliderModule,
-    MatSlideToggleModule,
-    MatSnackBarModule,
-    MatSortModule, MatStepperModule,
-    MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule
+    MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule,
+    MatSortModule, MatStepperModule, MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule
 } from '@angular/material';
 
 import { HtsRoutingModule } from './hts-routing.module';
@@ -40,58 +34,19 @@ import {AppLoadService} from '../shared/_services/appload.service';
 import { FamilyComponent } from './family/family.component';
 import {FamilyService} from './_services/family.service';
 import {FamilyScreeningResolver} from './family-screening/familyScreening.resolver';
+import {AppStateService} from '../shared/_services/appstate.service';
 
 
 @NgModule({
   imports: [
-      CommonModule,
-      HttpClientModule,
-      HtsRoutingModule,
-      FormsModule,
-      MatDatepickerModule,
-      MatFormFieldModule,
-      MatNativeDateModule,
-      MatInputModule,
-      SharedModule,
-      MatDatepickerModule,
-      MatFormFieldModule,
-      MatNativeDateModule,
-      MatInputModule,
-      SharedModule,
-      MatTableModule,
-      MatAutocompleteModule,
-      MatButtonModule,
-      MatButtonToggleModule,
-      MatCardModule,
-      MatCheckboxModule,
-      MatChipsModule,
-      MatDatepickerModule,
-      MatDialogModule,
-      MatDividerModule,
-      MatExpansionModule,
-      MatGridListModule,
-      MatIconModule,
-      MatInputModule,
-      MatListModule,
-      MatMenuModule,
-      MatNativeDateModule,
-      MatPaginatorModule,
-      MatProgressBarModule,
-      MatProgressSpinnerModule,
-      MatRadioModule,
-      MatRippleModule,
-      MatSelectModule,
-      MatSidenavModule,
-      MatSliderModule,
-      MatSlideToggleModule,
-      MatSnackBarModule,
-      MatSortModule,
-      MatStepperModule,
-      MatTableModule,
-      MatTabsModule,
-      MatToolbarModule,
-      MatTooltipModule,
-      ReactiveFormsModule
+      CommonModule, HttpClientModule, HtsRoutingModule, FormsModule, MatDatepickerModule, MatFormFieldModule,
+      MatNativeDateModule, MatInputModule, SharedModule, MatDatepickerModule, MatFormFieldModule, MatNativeDateModule,
+      MatTableModule, MatAutocompleteModule, MatButtonModule, MatButtonToggleModule, MatCardModule,
+      MatCheckboxModule, MatChipsModule, MatDatepickerModule, MatDialogModule, MatDividerModule, MatExpansionModule,
+      MatGridListModule, MatIconModule, MatListModule, MatMenuModule, MatNativeDateModule, MatPaginatorModule,
+      MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatSliderModule,
+      MatSlideToggleModule, MatSnackBarModule, MatSortModule, MatStepperModule, MatTableModule, MatTabsModule,
+      MatToolbarModule, MatTooltipModule, ReactiveFormsModule
   ],
   declarations: [
     EncounterComponent,
@@ -117,7 +72,8 @@ import {FamilyScreeningResolver} from './family-screening/familyScreening.resolv
       NotificationService,
       AppLoadService,
       FamilyService,
-      FamilyScreeningResolver
+      FamilyScreeningResolver,
+      AppStateService
   ],
   entryComponents: [
       TestDialogComponent

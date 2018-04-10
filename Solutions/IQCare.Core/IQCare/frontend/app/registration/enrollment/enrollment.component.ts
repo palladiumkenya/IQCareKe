@@ -6,6 +6,8 @@ import {Store} from '@ngrx/store';
 import * as Consent from '../../shared/reducers/app.states';
 import {NotificationService} from '../../shared/_services/notification.service';
 import {SnotifyService} from 'ng-snotify';
+import {AppStateService} from '../../shared/_services/appstate.service';
+import {AppEnum} from '../../shared/reducers/app.enum';
 
 @Component({
   selector: 'app-enrollment',
@@ -26,16 +28,16 @@ export class EnrollmentComponent implements OnInit {
                 public zone: NgZone,
                 private store: Store<AppState>,
                 private notificationService: NotificationService,
-                private snotifyService: SnotifyService) {
+                private snotifyService: SnotifyService,
+                private appStateService: AppStateService) {
         this.maxDate = new Date();
     }
     ngOnInit() {
-        localStorage.setItem('createdBy', JSON.stringify(1));
-        console.log(localStorage.getItem('patientId'));
-        console.log(localStorage.getItem('personId'));
+        // console.log(localStorage.getItem('patientId'));
+        // console.log(localStorage.getItem('personId'));
         this.patientId = JSON.parse(localStorage.getItem('patientId'));
         this.personId = JSON.parse(localStorage.getItem('personId'));
-        this.createdBy = JSON.parse(localStorage.getItem('createdBy'));
+        this.createdBy = JSON.parse(localStorage.getItem('appUserId'));
 
         this.enrollment = new Enrollment();
 
@@ -52,6 +54,10 @@ export class EnrollmentComponent implements OnInit {
 
         this.enrollmentService.enrollClient(this.enrollment).subscribe(data => {
             this.store.dispatch(new Consent.IsEnrolled(true));
+            this.appStateService.addAppState(AppEnum.ENROLLED, this.enrollment.PersonId, this.enrollment.PatientId,
+                null, null).subscribe(res => {
+                    console.log(res);
+            });
             this.snotifyService.success('Successfully Registered to HTS', 'HTS Service Registration', this.notificationService.getConfig());
             this.zone.run(() => { this.router.navigate(['/registration/home'], { relativeTo: this.route }); });
         }, err => {

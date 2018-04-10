@@ -28,6 +28,7 @@ export class FamilyScreeningComponent implements OnInit {
                 public zone: NgZone) { }
     ngOnInit() {
         this.familyScreening = new FamilyScreening();
+        this.familyScreening.userId = JSON.parse(localStorage.getItem('appUserId'));
 
         this.formGroup = this._formBuilder.group({
             dateOfScreening: new FormControl(this.familyScreening.dateOfScreening, [Validators.required]),

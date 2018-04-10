@@ -32,4 +32,22 @@
             </asp:Repeater>
         </div>
     </div>
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var appUserId = '<%= Session["AppUserId"] %>';
+            var appUserName = '<%= Session["AppUserName"] %>';
+            var appLocationId = '<%= Session["AppLocationId"] %>';
+            var appLocation = '<%= Session["AppLocation"] %>';
+            var appPosID = '<%= Session["AppPosID"] %>';
+
+            localStorage.setItem('appUserId', appUserId);
+            localStorage.setItem('appUserName', appUserName);
+            localStorage.setItem('appLocationId', appLocationId);
+            localStorage.setItem('appLocation', appLocation);
+            localStorage.setItem('appPosID', appPosID);
+
+            console.log(localStorage);
+        });
+    </script>
 </asp:Content>

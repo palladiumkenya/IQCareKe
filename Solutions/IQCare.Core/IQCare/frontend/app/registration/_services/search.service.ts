@@ -28,6 +28,13 @@ export class SearchService {
         );
     }
 
+    public lastHtsEncounter(personId: number): Observable<any> {
+        return this.http.get<any>(this.API_URL + '/api/HtsEncounter/lastHtsEncounters/' + personId, httpOptions).pipe(
+            tap((lastHtsEncounter: any) => this.log(`get client last encounter`)),
+            catchError(this.handleError<any>('lastHtsEncounter'))
+        );
+    }
+
 
     private handleError<T> (operation = 'operation', result?: T) {
         return (error: any): Observable<T> => {

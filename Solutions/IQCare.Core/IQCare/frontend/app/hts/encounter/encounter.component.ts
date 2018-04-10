@@ -5,6 +5,8 @@ import {FinalTestingResults, Testing} from '../_models/testing';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Store} from '@ngrx/store';
 import * as Consent from '../../shared/reducers/app.states';
+import {AppStateService} from '../../shared/_services/appstate.service';
+import {AppEnum} from '../../shared/reducers/app.enum';
 
 declare var $: any;
 
@@ -38,7 +40,8 @@ export class EncounterComponent implements OnInit {
                 private router: Router,
                 private route: ActivatedRoute,
                 public zone: NgZone,
-                private store: Store<AppState>) {
+                private store: Store<AppState>,
+                private appStateService: AppStateService) {
         this.maxDate = new Date();
     }
 
@@ -49,7 +52,7 @@ export class EncounterComponent implements OnInit {
         this.encounter.PatientId = JSON.parse(localStorage.getItem('patientId'));
         this.encounter.ServiceAreaId = 2;
 
-        this.encounter.ProviderId = 1;
+        this.encounter.ProviderId = JSON.parse(localStorage.getItem('appUserId'));
         this.encounter.PatientEncounterID = 1;
         this.encounter.MonthSinceSelfTest = null;
         this.encounter.GeoLocation = null;
@@ -126,12 +129,16 @@ export class EncounterComponent implements OnInit {
 
                 if (optionTestedAs[0]['itemName'] == 'I: Individual') {
                     this.store.dispatch(new Consent.TestedAs(true));
+                    this.appStateService.addAppState(AppEnum.TESTED_AS, this.encounter.PersonId,
+                        this.encounter.PatientId, data['patientMasterVisitId'], data['htsEncounterId']).subscribe();
                 }
             }
 
 
             if (optionSelected[0]['itemName'] == 'Yes') {
                 this.store.dispatch(new Consent.ConsentTesting(true));
+                this.appStateService.addAppState(AppEnum.CONSENT_TESTING, this.encounter.PersonId,
+                    this.encounter.PatientId, data['patientMasterVisitId'], data['htsEncounterId']).subscribe();
                 this.zone.run(() => { this.router.navigate(['/hts/testing'], {relativeTo: this.route }); });
             } else {
                 this.zone.run(() => { this.router.navigate(['/registration/home'], { relativeTo: this.route }); });

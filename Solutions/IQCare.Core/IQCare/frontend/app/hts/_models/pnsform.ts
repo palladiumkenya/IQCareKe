@@ -2,7 +2,7 @@ export class Pnsform {
     patientId: number;
     personId: number;
     patientMasterVisitId: number;
-    userId: number = 1;
+    userId: number;
 
     screeningDate: string;
     pnsAccepted: number;

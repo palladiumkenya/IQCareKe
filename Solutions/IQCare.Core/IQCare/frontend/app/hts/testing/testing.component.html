@@ -8,7 +8,7 @@
                 <app-leftnav></app-leftnav>
             </div>
 
-            <div class="col-md-10 col-lg-10 col-sm-10 animated fadeInRight">
+            <div class="col-md-10 col-lg-10 col-sm-10 animated fadeIn">
                 <div class="panel panel-default">
                     <div class="panel-heading">HTS TESTING</div>
                     <div class="panel-body">
@@ -24,9 +24,14 @@
                                         <div class="tab-content">
                                             <div id="tab-1" class="tab-pane active">
                                                 <div class="panel-body">
-                                                    <button type="button" class="btn" data-toggle="modal" data-target="#myModal1" *ngIf="testButton1" (click)="openDialog('Screening Test')">
+                                                    <!--<button type="button" class="btn" data-toggle="modal" data-target="#myModal1" *ngIf="testButton1" (click)="openDialog('Screening Test')">
+                                                        ADD SCREENING
+                                                    </button>-->
+
+                                                    <button mat-raised-button color="primary" *ngIf="testButton1" type="button" (click)="openDialog('Screening Test')"><i class="fa fa-plus"></i>
                                                         ADD SCREENING
                                                     </button>
+
                                                     <table class="table table-striped">
                                                         <thead>
                                                         <tr>
@@ -51,8 +56,12 @@
                                             </div>
                                             <div id="tab-2" class="tab-pane">
                                                 <div class="panel-body">
-                                                    <button type="button" class="btn" data-toggle="modal" data-target="#myModal2" *ngIf="testButton2" (click)="openDialog('Confirmatory Test')">
+                                                    <!--<button type="button" class="btn" data-toggle="modal" data-target="#myModal2" *ngIf="testButton2" (click)="openDialog('Confirmatory Test')">
                                                         ADD CONFIRMATORY
+                                                    </button>-->
+
+                                                    <button mat-raised-button color="primary" *ngIf="testButton2" type="button" (click)="openDialog('Confirmatory Test')"><i class="fa fa-plus"></i>
+                                                        ADD SCREENING
                                                     </button>
 
                                                     <table class="table table-striped">

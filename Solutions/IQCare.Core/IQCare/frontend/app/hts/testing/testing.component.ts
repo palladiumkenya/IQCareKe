@@ -94,6 +94,11 @@ export class TestingComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe(
             data => {
+
+                if (!data) {
+                    return;
+                }
+
                 if (screeningType == 'Screening Test') {
                     // console.log(data['kitName']);
                     /* Push results to hiv results array */
@@ -178,7 +183,7 @@ export class TestingComponent implements OnInit {
         const patientId = JSON.parse(localStorage.getItem('patientId'));
         const patientMasterVisitId = JSON.parse(localStorage.getItem('patientMasterVisitId'));
         const serviceAreaId = JSON.parse(localStorage.getItem('serviceAreaId'));
-        const providerId = 2;
+        const providerId = JSON.parse(localStorage.getItem('appUserId'));
 
         this.encounterService.addTesting(this.finalTestingResults, this.hiv1, this.hiv2,
             htsEncounterId, providerId, patientId, patientMasterVisitId, serviceAreaId).subscribe(data => {

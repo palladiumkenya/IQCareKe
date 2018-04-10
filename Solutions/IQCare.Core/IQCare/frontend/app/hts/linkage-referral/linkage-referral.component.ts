@@ -137,10 +137,10 @@ export class LinkageReferralComponent implements OnInit {
 
     onSubmitForm() {
         this.referral.personId = JSON.parse(localStorage.getItem('personId'));
-        // this.referral.facilityId = JSON.parse(localStorage.getItem('facilityId'));
-        // this.referral.userId = JSON.parse(localStorage.getItem('userId'));
-        this.referral.facilityId = 13050;
-        this.referral.userId = 1;
+        this.referral.facilityId = JSON.parse(localStorage.getItem('appPosID'));
+        this.referral.userId = JSON.parse(localStorage.getItem('appUserId'));
+        // this.referral.facilityId = 13050;
+        // this.referral.userId = 1;
         this.referral.serviceAreaId = 2;
         this.referral.referredTo = this.referral.referredToFacility.mflCode;
 

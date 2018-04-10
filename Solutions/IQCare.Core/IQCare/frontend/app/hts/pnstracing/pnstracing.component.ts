@@ -53,7 +53,7 @@ export class PnsTracingComponent implements OnInit {
 
     onSubmit() {
         this.pnsTracing.PersonId = JSON.parse(localStorage.getItem('partnerId'));
-        this.pnsTracing.UserId = 1; // JSON.parse(localStorage.getItem('partnerId'));
+        this.pnsTracing.UserId = JSON.parse(localStorage.getItem('appUserId'));
 
         console.log(this.pnsTracing);
 

@@ -8,6 +8,7 @@ export class Person {
     isPartner: boolean;
     partnerRelationship: number;
     patientId: any;
+    createdBy: number;
 }
 
 export class RegistrationVariables {
