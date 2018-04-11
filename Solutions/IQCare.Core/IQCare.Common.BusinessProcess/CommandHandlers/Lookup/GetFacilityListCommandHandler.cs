@@ -26,6 +26,8 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Lookup
                 {
                     var result = await _unitOfWork.Repository<FacilityList>().GetAllAsync();
 
+                    _unitOfWork.Dispose();
+
                     return Result<GetFacilityListResponse>.Valid(new GetFacilityListResponse()
                     {
                         FacilityList = result.ToList()

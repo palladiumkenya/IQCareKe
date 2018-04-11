@@ -5,6 +5,8 @@ import {EncounterService} from '../_services/encounter.service';
 import {FinalTestingResults, Testing} from '../_models/testing';
 import {select, Store} from '@ngrx/store';
 import {ActivatedRoute, Router} from '@angular/router';
+import {SnotifyService} from 'ng-snotify';
+import {NotificationService} from '../../shared/_services/notification.service';
 
 @Component({
   selector: 'app-testing',
@@ -40,7 +42,9 @@ export class TestingComponent implements OnInit {
                 private store: Store<AppState>,
                 private router: Router,
                 private route: ActivatedRoute,
-                public zone: NgZone) {
+                public zone: NgZone,
+                private snotifyService: SnotifyService,
+                private notificationService: NotificationService) {
 
         store.pipe(select('app')).subscribe(res => {
             this.isCoupleDiscordantDisabled = res['testedAs'];
@@ -188,6 +192,7 @@ export class TestingComponent implements OnInit {
         this.encounterService.addTesting(this.finalTestingResults, this.hiv1, this.hiv2,
             htsEncounterId, providerId, patientId, patientMasterVisitId, serviceAreaId).subscribe(data => {
             console.log(data);
+            this.snotifyService.success('Successfully saved', 'Testing', this.notificationService.getConfig());
             this.zone.run(() => { this.router.navigate(['/registration/home'], {relativeTo: this.route }); });
         });
     }

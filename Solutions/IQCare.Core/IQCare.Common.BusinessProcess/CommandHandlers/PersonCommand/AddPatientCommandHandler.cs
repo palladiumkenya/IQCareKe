@@ -34,6 +34,8 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.PersonCommand
 
                     var patientInsert = await _unitOfWork.Repository<Patient>().FromSql(sqlPatient);
 
+                    _unitOfWork.Dispose();
+
                     return Result<AddPatientResponse>.Valid(new AddPatientResponse()
                     {
                         PatientId = patientInsert[0].Id

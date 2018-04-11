@@ -7,6 +7,8 @@ import {Store} from '@ngrx/store';
 import * as Consent from '../../shared/reducers/app.states';
 import {AppStateService} from '../../shared/_services/appstate.service';
 import {AppEnum} from '../../shared/reducers/app.enum';
+import {SnotifyService} from 'ng-snotify';
+import {NotificationService} from '../../shared/_services/notification.service';
 
 declare var $: any;
 
@@ -41,7 +43,9 @@ export class EncounterComponent implements OnInit {
                 private route: ActivatedRoute,
                 public zone: NgZone,
                 private store: Store<AppState>,
-                private appStateService: AppStateService) {
+                private appStateService: AppStateService,
+                private snotifyService: SnotifyService,
+                private notificationService: NotificationService) {
         this.maxDate = new Date();
     }
 
@@ -134,11 +138,14 @@ export class EncounterComponent implements OnInit {
                 }
             }
 
+            this.snotifyService.success('Successfully saved encounter', 'Encounter', this.notificationService.getConfig());
 
             if (optionSelected[0]['itemName'] == 'Yes') {
                 this.store.dispatch(new Consent.ConsentTesting(true));
                 this.appStateService.addAppState(AppEnum.CONSENT_TESTING, this.encounter.PersonId,
                     this.encounter.PatientId, data['patientMasterVisitId'], data['htsEncounterId']).subscribe();
+
+
                 this.zone.run(() => { this.router.navigate(['/hts/testing'], {relativeTo: this.route }); });
             } else {
                 this.zone.run(() => { this.router.navigate(['/registration/home'], { relativeTo: this.route }); });
@@ -146,6 +153,7 @@ export class EncounterComponent implements OnInit {
 
         }, err => {
             console.log(err);
+            this.snotifyService.error('Error saving encounter', 'Encounter', this.notificationService.getConfig());
         });
     }
 

@@ -34,6 +34,8 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Partners
 
                     var results = await _unitOfWork.Repository<PartnersView>().FromSql(sql.ToString());
 
+                    _unitOfWork.Dispose();
+
                     return Result<List<PartnersView>>.Valid(results);
                 }
             }
