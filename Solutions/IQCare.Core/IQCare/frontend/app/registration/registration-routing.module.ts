@@ -4,6 +4,7 @@ import {PersonComponent} from './person/person.component';
 import {EnrollmentComponent} from './enrollment/enrollment.component';
 import {HomeComponent} from './home/home.component';
 import {SearchComponent} from './search/search.component';
+import {RegistrationResolver} from './_services/registration.resolver';
 
 const routes: Routes = [
     {
@@ -19,7 +20,10 @@ const routes: Routes = [
     {
         path: 'register',
         component: PersonComponent,
-        pathMatch: 'full'
+        pathMatch: 'full',
+        resolve: {
+            options: RegistrationResolver
+        }
     },
     {
         path: 'enrollment',

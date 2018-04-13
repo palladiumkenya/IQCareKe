@@ -35,7 +35,7 @@
                                             </mat-form-field>
 
                                             <mat-form-field>
-                                                <input matInput placeholder="Age(Years)" type="number" formControlName="personAge" id="personAge" name="personAge" (keyup)="estimateDob()" required>
+                                                <input matInput placeholder="Age(Years)" tabindex="6" type="number" formControlName="personAge" id="personAge" name="personAge" (keyup)="estimateDob()" required>
                                             </mat-form-field>
                                         </div>
 
@@ -45,7 +45,7 @@
                                             </mat-form-field>
 
                                             <mat-form-field>
-                                                <mat-select placeholder="Marital Status" formControlName="MaritalStatus" tabindex="6">
+                                                <mat-select placeholder="Marital Status" formControlName="MaritalStatus" tabindex="7">
                                                     <mat-option></mat-option>
                                                     <mat-option *ngFor="let maritalStatus of maritalStatuses" [value]="maritalStatus.itemId">{{maritalStatus.itemName}}</mat-option>
                                                 </mat-select>
@@ -55,16 +55,17 @@
                                         <div class="col-lg-3 col-md-3 col-sm-3">
                                             <label>Gender </label>
                                             <div>
-                                                <mat-radio-group formControlName="Sex">
-                                                    <mat-radio-button [value]="male" tabindex="4">Male</mat-radio-button>
-                                                    <mat-radio-button [value]="female" tabindex="4">Female</mat-radio-button>
+                                                <mat-radio-group formControlName="Sex" [required]="true" tabindex="4">
+                                                    <mat-radio-button [value]="male" required>Male</mat-radio-button>
+                                                    <mat-radio-button [value]="female" required>Female</mat-radio-button>
                                                 </mat-radio-group>
+                                                <mat-error *ngIf="!formGroup.controls['formArray']['controls'][0].controls.Sex.valid">Please select Gender</mat-error>
                                             </div>
                                         </div>
 
                                     </div>
                                     <div>
-                                        <button mat-button matStepperNext type="button">Next</button>
+                                        <button tabindex="8" mat-button matStepperNext type="button">Next</button>
                                     </div>
                                 </mat-step>
 

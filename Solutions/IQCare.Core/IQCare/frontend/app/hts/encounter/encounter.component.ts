@@ -9,6 +9,7 @@ import {AppStateService} from '../../shared/_services/appstate.service';
 import {AppEnum} from '../../shared/reducers/app.enum';
 import {SnotifyService} from 'ng-snotify';
 import {NotificationService} from '../../shared/_services/notification.service';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 declare var $: any;
 
@@ -19,6 +20,7 @@ declare var $: any;
 })
 export class EncounterComponent implements OnInit {
     encounter: Encounter;
+    form: FormGroup;
 
     isNoOfMonths: boolean = true;
     isDisabilitiesEnabled: boolean = true;
@@ -45,7 +47,8 @@ export class EncounterComponent implements OnInit {
                 private store: Store<AppState>,
                 private appStateService: AppStateService,
                 private snotifyService: SnotifyService,
-                private notificationService: NotificationService) {
+                private notificationService: NotificationService,
+                private fb: FormBuilder) {
         this.maxDate = new Date();
     }
 
@@ -63,25 +66,35 @@ export class EncounterComponent implements OnInit {
 
         this.getHtsOptions();
         this.getEncounterType();
+
+        this.form = this.fb.group({
+            EncounterType: new FormControl(this.encounter.EncounterType, [Validators.required]),
+            EncounterDate: new FormControl(this.encounter.EncounterDate, [Validators.required]),
+            EverTested: new FormControl(this.encounter.EverTested, [Validators.required]),
+            MonthsSinceLastTest: new FormControl(this.encounter.MonthsSinceLastTest, [Validators.required]),
+            TestEntryPoint: new FormControl(this.encounter.TestEntryPoint, [Validators.required]),
+            EverSelfTested: new FormControl(this.encounter.EverSelfTested, [Validators.required]),
+            HasDisability: new FormControl(this.encounter.HasDisability, [Validators.required]),
+            Consent: new FormControl(this.encounter.Consent, [Validators.required]),
+            TestedAs: new FormControl(this.encounter.TestedAs, [Validators.required]),
+            TestingStrategy: new FormControl(this.encounter.TestingStrategy, [Validators.required]),
+            TbScreening: new FormControl(this.encounter.TbScreening, [Validators.required]),
+            EncounterRemarks: new FormControl(this.encounter.EncounterRemarks),
+            Disabilities: new FormControl(this.encounter.Disabilities, [Validators.required]),
+        });
     }
 
     validate() {
-        const self = this;
-        setTimeout(() => {
-            $('#form').parsley().destroy();
-            $('#form').parsley({
-                excluded: 'input[type=button], input[type=submit], input[type=reset], input[type=hidden],[max], [disabled], :hidden'
-            });
-
-            $('#form').parsley().validate();
-            if ($('#form').parsley().isValid()) {
-                console.log('valid');
-                self.onSubmitForm();
-            } else {
-                console.log('not valid');
-                return false;
+        // console.log(this.form);
+        if (this.form.valid) {
+            this.encounter = {...this.encounter, ...this.form.value};
+            if (!this.encounter.Disabilities) {
+                this.encounter.Disabilities = [];
             }
-        }, 0);
+            this.onSubmitForm();
+        } else {
+            return false;
+        }
     }
 
     getHtsOptions() {
@@ -157,47 +170,49 @@ export class EncounterComponent implements OnInit {
         });
     }
 
-    everTestedChanged(everTested: number) {
+    everTestedChanged() {
+        const everTested = this.form.controls.EverTested.value;
         const optionSelected = this.yesNoOptions.filter(function( obj ) {
             return obj.itemId == everTested;
         });
 
         if (optionSelected[0].itemName == 'Yes') {
-            this.isNoOfMonths = false;
+            this.form.controls.MonthsSinceLastTest.enable({onlySelf: false});
         } else {
-            this.isNoOfMonths = true;
-            this.encounter.MonthsSinceLastTest = null;
+            this.form.controls.MonthsSinceLastTest.disable({onlySelf: true});
+            this.form.controls.MonthsSinceLastTest.setValue('');
         }
     }
 
-    hasDisabilityChanged(hasDisability: number) {
+    hasDisabilityChanged() {
+        const hasDisability = this.form.controls.HasDisability.value;
         const optionSelected = this.yesNoOptions.filter(function( obj ) {
             return obj.itemId == hasDisability;
         });
 
         if (optionSelected[0].itemName == 'Yes') {
-            this.isDisabilitiesEnabled = false;
+            this.form.controls.Disabilities.enable({onlySelf: false});
         } else {
-            this.isDisabilitiesEnabled = true;
-            this.encounter.Disabilities = [];
+            this.form.controls.Disabilities.disable({onlySelf: true});
+            this.form.controls.Disabilities.setValue([]);
         }
     }
 
-    onConsentChanged(consent: number) {
+    onConsentChanged() {
+        const consent = this.form.controls.Consent.value;
 
         const optionSelected = this.yesNoOptions.filter(function( obj ) {
             return obj.itemId == consent;
         });
 
         if (optionSelected[0].itemName == 'No') {
-            this.encounter.TestedAs = null;
-            this.encounter.TestingStrategy = null;
-
-            this.isClientTestedDisabled = true;
-            this.isStrategyDisabled = true;
+            this.form.controls.TestedAs.disable({onlySelf: true});
+            this.form.controls.TestingStrategy.disable({onlySelf: true});
+            this.form.controls.TestedAs.setValue('');
+            this.form.controls.TestingStrategy.setValue('');
         } else {
-            this.isClientTestedDisabled = false;
-            this.isStrategyDisabled = false;
+            this.form.controls.TestedAs.enable({onlySelf: false});
+            this.form.controls.TestingStrategy.enable({onlySelf: false});
         }
     }
 }

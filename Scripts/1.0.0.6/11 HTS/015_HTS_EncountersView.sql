@@ -25,9 +25,3 @@ PartnerListingConsent = (SELECT TOP 1 ItemName FROM [dbo].[LookupItemView] WHERE
 FROM [dbo].[PatientEncounter] PE
 INNER JOIN [dbo].[PatientMasterVisit] PM ON PM.Id = PE.PatientMasterVisitId
 INNER JOIN [dbo].[HtsEncounter] HE ON PE.Id = HE.PatientEncounterID
-
-
-
-
-
-GO
