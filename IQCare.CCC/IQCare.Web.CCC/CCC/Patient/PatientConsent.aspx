@@ -271,6 +271,8 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
+
+                    $("#btnSave").attr("disabled", true);
                     toastr.success(response.d, "Patient consent saved successfully");
                     //delay to show success message before redirect
                     setTimeout(function() { window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>'; }, 2500);

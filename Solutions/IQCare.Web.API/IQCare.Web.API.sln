@@ -22,6 +22,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entity.WebApi", "Entity.WebApi\Entity.WebApi.csproj", "{062E43AE-C832-49DE-8ACC-4FFC9ABB4073}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interface.WebApi", "Interface.WebApi\Interface.WebApi.csproj", "{13CA40EB-1DB9-43C8-A1FA-CB6580D27DC3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{062E43AE-C832-49DE-8ACC-4FFC9ABB4073} = {062E43AE-C832-49DE-8ACC-4FFC9ABB4073}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCare.WebApi.Logic", "IQCare.WebApi.Logic\IQCare.WebApi.Logic.csproj", "{62A2C82B-D183-4989-930A-E0451600A100}"
 	ProjectSection(ProjectDependencies) = postProject

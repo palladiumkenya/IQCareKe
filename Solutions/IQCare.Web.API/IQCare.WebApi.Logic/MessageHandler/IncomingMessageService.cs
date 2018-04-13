@@ -359,8 +359,8 @@ namespace IQCare.WebApi.Logic.MessageHandler
             var patientEnrollment = patientEnrollmentManager.GetPatientEnrollmentByPatientId(psmartCard.PATIENTID);
             int patientEnrollmentId = patientEnrollment[0].Id;
             int results = 0;
-            Identifier identifier = identifierManager.GetIdentifierByCode("GODS_NUMBER");
-
+            // Identifier identifier = identifierManager.GetIdentifierByCode("GODS_NUMBER");
+            Identifier identifier = identifierManager.GetIdentifierByCode("CARD_SERIAL_NUMBER");
             try
             {
                 var patientEntityIdentifier = new PatientEntityIdentifier()
