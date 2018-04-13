@@ -34,7 +34,7 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Enrollment
                     sql.Append($" AND MidName like \'%{request.middleName}%\'");
                 if (!string.IsNullOrWhiteSpace(request.lastName))
                     sql.Append($" AND LastName like \'%{request.lastName}%\';");
-                sql.Append("exec [dbo].[pr_CloseDecryptedSession];");
+                sql.Append(";exec [dbo].[pr_CloseDecryptedSession];");
 
 
                 var result = await _unitOfWork.Repository<PatientLookupView>().FromSql(sql.ToString());

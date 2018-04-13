@@ -9,6 +9,8 @@ import {select, Store} from '@ngrx/store';
 import * as Consent from '../../shared/reducers/app.states';
 import {Observable} from 'rxjs/Observable';
 import {debounceTime} from 'rxjs/operators';
+import {SnotifyService} from 'ng-snotify';
+import {NotificationService} from '../../shared/_services/notification.service';
 declare var $: any;
 
 @Component({
@@ -31,7 +33,9 @@ export class LinkageReferralComponent implements OnInit {
                 private router: Router,
                 private route: ActivatedRoute,
                 public zone: NgZone,
-                private store: Store<AppState>) {
+                private store: Store<AppState>,
+                private snotifyService: SnotifyService,
+                private notificationService: NotificationService) {
 
         this.myControl.valueChanges.pipe(
             debounceTime(400)
@@ -157,9 +161,12 @@ export class LinkageReferralComponent implements OnInit {
                 localStorage.setItem('store', JSON.stringify(res));
             });
 
+            this.snotifyService.success('Successfully Referral', 'Referral', this.notificationService.getConfig());
+
             this.zone.run(() => { this.router.navigate(['/registration/home'], { relativeTo: this.route }); });
         }, err => {
             console.log(err);
+            this.snotifyService.error('Error saving referral ' + err, 'Referral', this.notificationService.getConfig());
         });
     }
 

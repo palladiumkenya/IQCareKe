@@ -4,7 +4,7 @@ export class Person {
     MiddleName: string;
     DateOfBirth: string;
     MaritalStatus: number;
-    Sex: number = 0;
+    Sex: number;
     isPartner: boolean;
     partnerRelationship: number;
     patientId: any;

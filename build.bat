@@ -61,6 +61,10 @@ echo "********** Building Billing **********" >> %log%
 echo "********** Building IQCare.CCC **********" >> %log%
 @echo ********** Building IQCare.CCC **********
 "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\devenv.com" /build %config% "%BATDIR%\Solutions\IQCare.CCC\IQCare.CCC.sln" >> %log%
+echo "********** Building IQCare.PSmart **********" >> %log%
+@echo ********** Building IQCare.PSmart **********
+"C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\MSBuild.exe" "%BATDIR%\Solutions\IQCare.PSmart\IQCare.PSmart.sln" >> %log%
+echo "********** Building IQCare.Web.Api **********" >> %log%
 @echo ********** Building IQCare.Web.Api **********
 "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\MSBuild.exe" "%BATDIR%\Solutions\IQCare.Web.API\IQCare.Web.API.sln" >> %log%
 if /I %config%== release (

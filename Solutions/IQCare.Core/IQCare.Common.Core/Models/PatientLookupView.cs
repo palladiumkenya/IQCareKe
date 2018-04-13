@@ -38,6 +38,11 @@ namespace IQCare.Common.Core.Models
         public int ServiceAreaId { get; set; }
 
         public string ServiceAreaName { get; set; }
+        public string PhysicalAddress { get; set; }
+        public string MobileNumber { get; set; }
+        public int? MaritalStatusId { get; set; }
+        public string MaritalStatusName { get; set; }
+
         public string Age;
 
         public void CalculateYourAge()

@@ -92,6 +92,8 @@ export class AppStateService {
                         }
                     }
                 }
+        }, (err) => {
+                console.log('Error connecting to IQCareApi ', err);
         });
 
         return promise;

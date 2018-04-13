@@ -23,7 +23,7 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.ClientLookup
             {
                 var sql = "exec pr_OpenDecryptedSession;" +
                           $"SELECT * FROM Api_PatientsView WHERE ServiceAreaId = {request.ServiceAreaId}" +
-                          $"AND PatientId = {request.PatientId};" +
+                          $" AND PatientId = {request.PatientId};" +
                           "exec [dbo].[pr_CloseDecryptedSession];";
 
 

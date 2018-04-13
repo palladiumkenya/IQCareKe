@@ -25,7 +25,7 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.PersonCommand
                     var sqlPatient = "exec pr_OpenDecryptedSession;" +
                                      "Insert Into  Patient(ptn_pk,PersonId,PatientIndex,PatientType,FacilityId,Active,DateOfBirth,NationalId,DeleteFlag,CreatedBy,CreateDate,AuditData,DobPrecision)" +
                                      $"Values(0, {request.PersonId}, {DateTime.Now.Year + '-' + request.PersonId}, 258, 13028, 1," +
-                                     $"'{request.DateOfBirth}', ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '99999999'), 0, 1, GETDATE()," +
+                                     $"'{request.DateOfBirth.ToString("yyyy-MM-dd")}', ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '99999999'), 0, 1, GETDATE()," +
                                      $"NULL, 1);" +
                                      $"SELECT [Id],[ptn_pk],[PersonId],[PatientIndex],[PatientType],[FacilityId],[Active],[DateOfBirth]," +
                                      $"[DobPrecision],CAST(DECRYPTBYKEY(NationalId) AS VARCHAR(50)) [NationalId],[DeleteFlag],[CreatedBy]," +
@@ -33,6 +33,8 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.PersonCommand
                                      $"exec [dbo].[pr_CloseDecryptedSession];";
 
                     var patientInsert = await _unitOfWork.Repository<Patient>().FromSql(sqlPatient);
+
+                    _unitOfWork.Dispose();
 
                     return Result<AddPatientResponse>.Valid(new AddPatientResponse()
                     {
