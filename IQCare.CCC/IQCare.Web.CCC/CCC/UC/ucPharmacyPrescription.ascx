@@ -422,7 +422,7 @@
 		            //tp = treatmentProgram;
 		            if (gender === "Female" && age >= 9 && tp === "PMTCT") {
 
-		            } else if (tp === "PMTCT" && (gender != "Female" || age < 9)) {
+		            } else if (tp === "PMTCT" && (gender != "Female" || age > 9)) {
 		                 toastr.error("PMTCT is for female patients only who are older than 9 years", "Error");
 		                 $("#<%=ddlTreatmentProgram.ClientID%>").val("");
 		             }
@@ -944,6 +944,7 @@
                     return;
                 }
                 else {
+                    $("#btnSavePrescription").attr("disabled", true);
                     $.ajax({
                         url: '../WebService/PatientEncounterService.asmx/savePatientPharmacy',
                         type: 'POST',
@@ -955,13 +956,13 @@
                             JSON.stringify(drugPrescriptionArray) + "', 'regimenText':'" + regimenText + "'}",
                         contentType: "application/json; charset=utf-8",
                         success: function (data) {
-                            $("#btnSavePrescription").prop("disabled", true);
+                            $("#btnSavePrescription").attr("disabled", true);
                             toastr.success(data.d, "Saved successfully");
                             //$('#pharmacyModal').modal('hide');
 
                         },
                         error: function (data) {
-                            $("#btnSavePrescription").prop("disabled", false);
+                            $("#btnSavePrescription").removeAttr("disabled");
                             toastr.error(data.d, "Error");
                         }
                     });

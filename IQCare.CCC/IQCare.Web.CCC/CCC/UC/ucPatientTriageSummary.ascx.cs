@@ -145,6 +145,16 @@ namespace IQCare.Web.CCC.UC
 
                     lblbloodpressure.Text = bpAnalysis;
                 }
+
+                if (age > 15 & patientTriage.Muac > 0)
+                {
+                    lblMuac.Text = Convert.ToString(patientTriage.Muac)+ "cms";
+                    lblMuac.Text= "<span class='label label-warning'> " + Convert.ToString(patientTriage.Muac) +" | CMs "+ "</span>";
+                }
+                else
+                {
+                    lblMuac.Text = "<span class='label label-danger'>  0 | Cms </span>";
+                }
                 if (age > 15)
                 {
                     if (bmi < 18.5)
