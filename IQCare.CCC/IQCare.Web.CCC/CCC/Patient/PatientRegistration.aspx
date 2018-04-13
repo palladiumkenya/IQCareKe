@@ -795,7 +795,8 @@
 								});
 								if ($("#datastep4").parsley().validate()) {
 
-									var patientTypePopulationType = $('#<%= PopulationType.ClientID %> input:checked')
+                                   
+								    var patientTypePopulationType = $('#<%= PopulationType.ClientID %> input:checked')
 										.val();
 
 									var checked_radio = $("[id*=PopulationType] input:checked");
@@ -1172,10 +1173,10 @@
 							var itemList = JSON.parse(response.d);
 							$("#<%=KeyPopulationCategoryId.ClientID%>").find('option').remove().end();
 							$.each(itemList, function (index, itemList) {
-								if (itemList.ItemDisplayName == "Female Sex Worker" && sex == "Male") {
+								if (itemList.ItemDisplayName === "Female Sex Worker" && sex === "Male") {
 									
 								}
-								else if (itemList.ItemDisplayName == "Men having Sex with Men" && sex == "Female") {
+								else if (itemList.ItemDisplayName === "Men having Sex with Men" && sex === "Female") {
 
 								} else {
 									$("#<%=KeyPopulationCategoryId.ClientID%>").append('<option value="' + itemList.ItemId + '">' + itemList.ItemDisplayName + ' (' + itemList.ItemName + ')</option>');
@@ -1351,7 +1352,9 @@
 								$("#<%=KeyPopulationCategoryId.ClientID%>").find('option').remove().end();
 								$("#<%=KeyPopulationCategoryId.ClientID%>").append('<option value="0">N/A</option>');
 								$("#<%=KeyPopulationCategoryId.ClientID%>").prop('disabled', true);
-							} else {
+                            }
+
+							else {
 								setTimeout(function(){
 									$("#KeyPopulationCategoryId").val(patientDetails.PopulationCategoryId).trigger("change");
 								}, 2000);                               
@@ -1502,6 +1505,11 @@
 				{
 					personAge = $("#personAge").val();
 					//var patientType = $("#PatientTypeId").find(":selected").text();
+
+
+                    if (personAge < 15) { //if person age is less than 15 set key pop value to default
+
+                    }
 
 					var checked_radio = $("[id*=PatientTypeId] input:checked");
 					var patientType = checked_radio.closest("td").find("label").html();

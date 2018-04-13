@@ -33,8 +33,6 @@ export class EnrollmentComponent implements OnInit {
         this.maxDate = new Date();
     }
     ngOnInit() {
-        // console.log(localStorage.getItem('patientId'));
-        // console.log(localStorage.getItem('personId'));
         this.patientId = JSON.parse(localStorage.getItem('patientId'));
         this.personId = JSON.parse(localStorage.getItem('personId'));
         this.createdBy = JSON.parse(localStorage.getItem('appUserId'));

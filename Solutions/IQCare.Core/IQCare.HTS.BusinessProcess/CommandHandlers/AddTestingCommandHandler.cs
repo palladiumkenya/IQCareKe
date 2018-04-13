@@ -52,6 +52,8 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                     await _unitOfWork.Repository<HtsEncounterResult>().AddAsync(hTSEncounterResult);
                     await _unitOfWork.SaveAsync();
 
+                    _unitOfWork.Dispose();
+
                     return Result<AddTestingResponse>.Valid(new AddTestingResponse()
                     {
                         AddedSuccessfully = true

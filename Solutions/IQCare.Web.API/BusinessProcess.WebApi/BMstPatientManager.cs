@@ -46,9 +46,9 @@ namespace BusinessProcess.WebApi
                 ClsUtility.AddExtendedParameters("@htsId", SqlDbType.VarChar, htsId);
                 ClsUtility.AddExtendedParameters("@moduleId", SqlDbType.VarChar, moduleId);
                 ClsUtility.AddExtendedParameters("@serialNumber", SqlDbType.VarChar, cardSerial);
-             // ClsUtility.AddExtendedParameters("@village", SqlDbType.VarChar, village);
-               // ClsUtility.AddExtendedParameters("@ward", SqlDbType.VarChar, ward);
-               // ClsUtility.AddExtendedParameters("@subcounty", SqlDbType.VarChar, subcounty);
+                ClsUtility.AddExtendedParameters("@village", SqlDbType.VarChar, village);
+                ClsUtility.AddExtendedParameters("@ward", SqlDbType.VarChar, ward);
+                ClsUtility.AddExtendedParameters("@subcounty", SqlDbType.VarChar, subcounty);
                 ClsUtility.AddExtendedParameters("@heiNumber", SqlDbType.VarChar, heiId);
                 ClsUtility.AddExtendedParameters("@Address", SqlDbType.VarChar,_Address );
 

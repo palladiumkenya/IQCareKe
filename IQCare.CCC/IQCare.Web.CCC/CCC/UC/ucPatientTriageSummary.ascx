@@ -13,8 +13,8 @@
                             <td><asp:Label runat="server" ID="lblDatetaken" CssClass="pull-left "> #</asp:Label></td>
                             <td>Age:</td>
                             <td><asp:Label runat="server" ID="lblAge" CssClass="text-info pull-left"> 0 Years</asp:Label></td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
+                            <td>MUAC</td>
+                            <td><asp:Label runat="server" ID="lblMuac" CssClass="text-info pull-left"> 0 cms</asp:Label></td>
                         </tr>
                         <tr>
                             <td>Temperature:</td> 

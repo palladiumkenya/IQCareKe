@@ -10,7 +10,6 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BusinessProcess.Clinical</RootNamespace>
     <AssemblyName>BusinessProcess.Clinical</AssemblyName>
-  
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
@@ -49,7 +48,10 @@
     <Reference Include="DataAccess.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\References\DataAccess\DataAccess.Common.dll</HintPath>
     </Reference>
-    <Reference Include="DataAccess.Context, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="DataAccess.Context, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\DataAccess.Context.dll</HintPath>
+    </Reference>
     <Reference Include="DataAccess.Entity, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\References\DataAccess\DataAccess.Entity.dll</HintPath>
     </Reference>

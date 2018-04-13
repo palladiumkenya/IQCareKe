@@ -31,19 +31,27 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                 {
                     var result = await _unitOfWork.Repository<HtsEncounter>().Get(x => x.PersonId == request.PersonId)
                         .OrderByDescending(x => x.Id).FirstOrDefaultAsync();
-
-                    var patientEncounter = await _commonUnitOfWork.Repository<PatientEncounter>()
+                    var patientEncounter = new PatientEncounter();
+                    int encounterId = 0;
+                    if (result != null)
+                    {
+                        patientEncounter = await _commonUnitOfWork.Repository<PatientEncounter>()
                         .Get(x => x.Id == result.PatientEncounterID).FirstOrDefaultAsync();
+
+                        encounterId = result.Id;
+                    }
                     
                     _unitOfWork.Dispose();
                     _commonUnitOfWork.Dispose();
 
-                    return Result<GetPersonLastHtsEncounterResponse>.Valid(new GetPersonLastHtsEncounterResponse()
-                    {
-                        EncounterId = result.Id,
+                    var personLastHtsEncounter = new GetPersonLastHtsEncounterResponse() {
+                        EncounterId = encounterId,
                         PatientMasterVisitId = patientEncounter.PatientMasterVisitId,
                         PatientEncounterID = patientEncounter.Id
-                    });
+                        
+                    };
+
+                    return Result<GetPersonLastHtsEncounterResponse>.Valid(personLastHtsEncounter);
                 }
             }
             catch (Exception e)

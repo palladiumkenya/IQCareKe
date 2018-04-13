@@ -63,8 +63,11 @@
 		<Reference Include="IQCare.Events">
 			<HintPath>..\..\..\References\IQCare.Events.dll</HintPath>
 		</Reference>
+		<Reference Include="IQCare.Web.UILogic">
+		  <HintPath>..\..\..\References\IQCare.Web.UILogic.dll</HintPath>
+		</Reference>
 		<Reference Include="IQCare.WebApi.Logic">
-			<HintPath>..\..\..\References\IQCare.WebApi.Logic.dll</HintPath>
+		  <HintPath>..\..\..\References\IQCare.WebApi.Logic.dll</HintPath>
 		</Reference>
 		<Reference Include="log4net">
 		  <HintPath>..\..\..\References\log4net.dll</HintPath>

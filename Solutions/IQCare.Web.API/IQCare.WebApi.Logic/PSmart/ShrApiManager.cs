@@ -73,8 +73,8 @@ namespace IQCare.WebApi.Logic.PSmart
                 log.UserId = 1;
                 log.Request = _shrMessage;
                 log.TranLogId = new Guid();
-               
 
+                string HTSId = "";
                 bool hasErrors = false;
                 List<string> Errors = new List<string>();
                 //process
@@ -133,7 +133,8 @@ namespace IQCare.WebApi.Logic.PSmart
                     {
 
                         Errors.Add("Missing HTS_NUMBER. Cannot be processed");
-                        hasErrors = true;
+                        HTSId = "missing";
+                        //hasErrors = true;
                     }
                 }
                 if (clientName == null || clientName.FIRST_NAME == string.Empty || clientName.LAST_NAME == string.Empty)
@@ -177,7 +178,7 @@ namespace IQCare.WebApi.Logic.PSmart
                 {
 
                     log.LogMessage = "Valid Message. Ready to process";
-                    Module module = _moduleService.GetMstModueByName("HTC Module");
+                   // Module module = _moduleService.GetMstModueByName("HTC Module"); TODO enanble for OLD HTS ONLY:208 THE DEFAILT ID FOR NEW HTS MODULE 
                     //find if there is client record for the serial number if yes 
                     var patient = _patientCoreService.GetPatient(_cardserialnumber);
                     if (patient != null)
@@ -187,7 +188,7 @@ namespace IQCare.WebApi.Logic.PSmart
                         WaitingQueue queue = _queueService.GetQueueByName("HTS Services (PSmart)");
                         //to do create a psmart user or adjust the request from interactor to come with the logged in user
                         _queueService.QueuePatient(patient.Id, queue.QueueId, QueueStatus.Pending, QueuePriority.Normal,
-                            module.Id, 1);
+                            208, 1);
                         //(update demographics
 
                         //
@@ -287,7 +288,10 @@ namespace IQCare.WebApi.Logic.PSmart
                             switch (x.IDENTIFIER_TYPE)
                             {
                                 case "HTS_NUMBER":
-                                    HTSID = x.ID;
+                                   
+                                    if (HTSId == "missing")
+                                    {
+                                        HTSID = DateTime.Now.Ticks.ToString();}else { HTSID = x.ID; }
                                     break;
                                 case "CARD_SERIAL_NUMBER":
                                     CARD_SERIAL_NO = x.ID;
@@ -329,8 +333,9 @@ namespace IQCare.WebApi.Logic.PSmart
 
 
 
+
                         msg = _mstPatientManager.AddMstPatient(firstName, middleName, lastName, registrationDate, dob,
-                            dobPrecision, phone, gender, landmark, maritalStatus, HTSID, module.Id.ToString(),
+                            dobPrecision, phone, gender, landmark, maritalStatus, HTSID, 208.ToString(),
                             CARD_SERIAL_NO,
                             village, ward, subcounty, HEID, address).ToString();
 
