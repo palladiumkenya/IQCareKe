@@ -19,6 +19,8 @@ export class EnrollmentComponent implements OnInit {
     patientId: number;
     personId: number;
     createdBy: number;
+    facilityName: string;
+    appPosID: number;
 
     maxDate: any;
 
@@ -36,6 +38,8 @@ export class EnrollmentComponent implements OnInit {
         this.patientId = JSON.parse(localStorage.getItem('patientId'));
         this.personId = JSON.parse(localStorage.getItem('personId'));
         this.createdBy = JSON.parse(localStorage.getItem('appUserId'));
+        this.facilityName = localStorage.getItem('appLocation');
+        this.appPosID = JSON.parse(localStorage.getItem('appPosID'));
 
         this.enrollment = new Enrollment();
 

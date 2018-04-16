@@ -14,6 +14,7 @@ import {Store} from '@ngrx/store';
 import * as Consent from '../../shared/reducers/app.states';
 import {NotificationService} from '../../shared/_services/notification.service';
 import {overrideProvider} from '@angular/core/src/view';
+import {Partner} from '../../shared/_models/partner';
 
 declare var $: any;
 
@@ -27,8 +28,8 @@ export class PersonComponent implements OnInit {
     contact: Contact;
     personPopulation: PersonPopulation;
     registrationVariables: RegistrationVariables;
-    isPartner: string;
-    isFamily: string;
+    partnerType: Partner;
+
     userId: number;
     relationshipPartnerOptions: any[];
     relationshipFamilyOptions: any[];
@@ -69,6 +70,8 @@ export class PersonComponent implements OnInit {
         this.contact = new Contact();
         this.personPopulation = new PersonPopulation();
         this.registrationVariables = new RegistrationVariables();
+        this.partnerType = new Partner();
+
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
         this.relationshipPartnerOptions = [];
         this.relationshipFamilyOptions = [];
@@ -129,12 +132,22 @@ export class PersonComponent implements OnInit {
             ]),
         });
 
-        this.isPartner = localStorage.getItem('isPartner');
-        this.isFamily = localStorage.getItem('isFamily');
-        if (this.isPartner != null && this.isPartner == 'true') {
+        console.log('isPartner', localStorage.getItem('isPartner'));
+        this.partnerType = JSON.parse(localStorage.getItem('isPartner'));
+        console.log(this.partnerType);
+
+        // this.isPartner = localStorage.getItem('isPartner');
+        // this.isFamily = localStorage.getItem('isFamily');
+
+        if (this.partnerType != null) {
             this.formGroup.controls.formArray['controls'][2].controls.partnerRelationship.enable({onlySelf: false});
             this.getClientDetails();
-            this.optionToShow = this.relationshipPartnerOptions;
+            if (this.partnerType.partner == 1) {
+                this.optionToShow = this.relationshipPartnerOptions;
+            } else if (this.partnerType.family == 1) {
+                this.optionToShow = this.relationshipFamilyOptions;
+            }
+
         } else {
             this.formGroup.controls.formArray['controls'][2].controls.partnerRelationship.disable({onlySelf: true});
             localStorage.removeItem('personId');
@@ -143,14 +156,10 @@ export class PersonComponent implements OnInit {
             localStorage.removeItem('htsEncounterId');
             localStorage.removeItem('patientMasterVisitId');
             localStorage.removeItem('isPartner');
-            localStorage.removeItem('isFamily');
+            // localStorage.removeItem('isFamily');
             localStorage.setItem('serviceAreaId', '2');
 
             this.store.dispatch(new Consent.ClearState());
-        }
-
-        if ((this.isPartner != null && this.isPartner == 'true') && (this.isFamily != null && this.isFamily == 'true')) {
-            this.optionToShow = this.relationshipFamilyOptions;
         }
 
         console.log(this.formGroup.controls['formArray']['controls'][0].controls.Sex);
@@ -172,7 +181,7 @@ export class PersonComponent implements OnInit {
             this.person.partnerRelationship = this.formArray.get([2]).value['partnerRelationship'];
             this.person.createdBy = JSON.parse(localStorage.getItem('appUserId'));
 
-            if (this.isPartner != null && this.isPartner == 'true') {
+            if (this.partnerType != null && (this.partnerType.partner == 1 || this.partnerType.family == 1)) {
                 this.person.isPartner = true;
                 this.person.patientId = JSON.parse(localStorage.getItem('patientId'));
             } else {
@@ -216,10 +225,13 @@ export class PersonComponent implements OnInit {
                     if (this.person.isPartner == true) {
                         this.snotifyService.success('Successfully registered partner',
                             'Registration', this.notificationService.getConfig());
-                        if (this.isFamily == 'true') {
+
+                        localStorage.removeItem('isPartner');
+                        if (this.partnerType.family == 1) {
                             this.zone.run(() => {this.router.navigate(['/hts/family'], { relativeTo: this.route }); });
+                        } else {
+                            this.zone.run(() => { this.router.navigate(['/hts/pns'], { relativeTo: this.route}); });
                         }
-                        this.zone.run(() => { this.router.navigate(['/hts/pns'], { relativeTo: this.route}); });
                     } else {
                         this.snotifyService.success('Successfully registered client', 'Registration', this.notificationService.getConfig());
                         this.zone.run(() => { this.router.navigate(['/registration/enrollment'], { relativeTo: this.route }); });
