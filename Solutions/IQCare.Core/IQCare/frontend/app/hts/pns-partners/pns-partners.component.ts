@@ -15,8 +15,8 @@ export class PnsPartnersComponent implements OnInit {
     patientId: number;
     highlightedRow: any[] = [];
 
-    isPnsScreeningDone: boolean = true;
-    isPnsTracingDone: boolean = false;
+    isPnsScreeningDone = {};
+    isPnsTracingDone = {};
 
     displayedColumns = ['firstName', 'midName', 'lastName', 'dateOfBirth', 'gender', 'relationshipType', 'actionsColumn'];
     dataSource = new PnsDataSource(this.pnsService, this.patientId);
@@ -27,13 +27,23 @@ export class PnsPartnersComponent implements OnInit {
                 public zone: NgZone,
                 private store: Store<AppState>) {
         store.pipe(select('app')).subscribe(res => {
-            this.isPnsScreeningDone = res['isPnsScreened'];
-            console.log(res['isPnsScreened']);
+            if (typeof(res['isPnsScreened']) !== 'undefined' && res['isPnsScreened'] !== null) {
+                const pnsScreened = JSON.parse(res['isPnsScreened']);
+                const key = 'partnerId';
+                console.log(pnsScreened['partnerId']);
+                this.isPnsScreeningDone[key] = pnsScreened['partnerId'];
+                console.log(pnsScreened);
+            }
         });
 
         store.pipe(select('app')).subscribe(res => {
-            this.isPnsTracingDone = res['isPnsTracingDone'];
-            console.log(res['isPnsTracingDone']);
+            if (typeof(res['isPnsTracingDone']) !== 'undefined' && res['isPnsTracingDone']) {
+                const pnsTraced = JSON.parse(res['isPnsScreened']);
+                const key = 'partnerId';
+                console.log();
+                this.isPnsTracingDone[key] = pnsTraced['partnerId'];
+                console.log(res['isPnsTracingDone']);
+            }
         });
 
         this.store.pipe(select('app')).subscribe(res => {
@@ -42,6 +52,8 @@ export class PnsPartnersComponent implements OnInit {
     }
 
     ngOnInit() {
+        console.log(this.isPnsScreeningDone);
+
         this.personId = JSON.parse(localStorage.getItem('personId'));
         this.patientId = JSON.parse(localStorage.getItem('patientId'));
 
@@ -58,6 +70,7 @@ export class PnsPartnersComponent implements OnInit {
     }
 
     getSelectedRow(row) {
+        console.log(row);
         this.highlightedRow = [];
         this.highlightedRow.push(row);
     }

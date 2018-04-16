@@ -145,6 +145,10 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Enrollment
                         sqlBuilder.Append(");");
 
                         var insertResult = await _unitOfWork.Context.Database.ExecuteSqlCommandAsync(sqlBuilder.ToString());
+
+                        StringBuilder sqlPatient = new StringBuilder();
+                        sqlPatient.Append($"UPDATE Patient SET ptn_pk = '{result[0].Ptn_Pk}' WHERE Id = '{request.ClientEnrollment.PatientId}';");
+                        var updateResult = await _unitOfWork.Context.Database.ExecuteSqlCommandAsync(sqlPatient.ToString());
                     }
 
                     trans.Commit();

@@ -58,13 +58,13 @@ export class IsEnrolled implements Action {
 export class IsPnsScreened implements Action {
     readonly type = ClientActionTypes.PNS_SCREENED;
 
-    constructor(public payload: boolean) {}
+    constructor(public payload: any) {}
 }
 
 export class IsPnsTracingDone implements Action {
     readonly type = ClientActionTypes.PNS_TRACING;
 
-    constructor(public payload: boolean) {}
+    constructor(public payload: any) {}
 }
 
 export class ClearState implements Action {

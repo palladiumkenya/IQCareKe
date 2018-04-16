@@ -59,7 +59,11 @@ export class PnsTracingComponent implements OnInit {
 
         this.pnsTracingService.addPnsTracing(this.pnsTracing).subscribe(data => {
             console.log(data);
-            this.store.dispatch(new Consent.IsPnsTracingDone(true));
+            const partnerPnsTraced = {
+                'partnerId': this.pnsTracing.PersonId,
+                'pnsTraced': true
+            };
+            this.store.dispatch(new Consent.IsPnsTracingDone(JSON.stringify(partnerPnsTraced)));
 
             this.snotifyService.success('Successful saving PNS screening',
                 'PNS Tracing', this.notificationService.getConfig());
