@@ -105,9 +105,9 @@ CREATE PROCEDURE [dbo].[Psmart_ProcessNewClientRegistration]
 	@serialNumber varchar(50), --12
 	@facilityId int=null, --13
 	@moduleId varchar(5), --14
-	--@village varchar(50), --15
-	--@ward varchar(50), --16
-	--@subcounty varchar(50), --17
+	@village varchar(50) null, --15
+	@ward varchar(50) null, --16
+	@subcounty varchar(50) null, --17
 	@heiNumber varchar(15), --18
 	@Address varchar(250) --19
 AS
