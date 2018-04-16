@@ -60,7 +60,6 @@ export class PnsPartnersComponent implements OnInit {
     getSelectedRow(row) {
         this.highlightedRow = [];
         this.highlightedRow.push(row);
-
     }
 
     screenClient(row) {
@@ -74,8 +73,11 @@ export class PnsPartnersComponent implements OnInit {
     }
 
     newPartner() {
-
-        localStorage.setItem('isPartner', 'true');
+        const newPartner = {
+            'partner': 1,
+            'family': 0
+        };
+        localStorage.setItem('isPartner', JSON.stringify(newPartner));
         this.zone.run(() => { this.router.navigate(['/registration/register'], {relativeTo: this.route}); });
     }
 }

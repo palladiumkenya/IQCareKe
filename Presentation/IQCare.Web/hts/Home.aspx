@@ -13,6 +13,6 @@
     </form>
 </body>
     <script type="text/javascript">
-        window.location.href = '/IQCareApi/';
+        window.location.href = '/frontend/';
     </script>
 </html>
