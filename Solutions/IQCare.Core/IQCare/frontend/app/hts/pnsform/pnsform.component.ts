@@ -121,7 +121,12 @@ export class PnsformComponent implements OnInit {
         }
 
         this.pnsService.addPnsScreening(this.pnsForm, arr).subscribe(data => {
-            this.store.dispatch(new Consent.IsPnsScreened(true));
+            const partnerPnsScreened = {
+                'partnerId': this.pnsForm.personId,
+                'pnsScreened': true
+            };
+
+            this.store.dispatch(new Consent.IsPnsScreened(JSON.stringify(partnerPnsScreened)));
 
             this.store.pipe(select('app')).subscribe(res => {
                 localStorage.setItem('store', JSON.stringify(res));
