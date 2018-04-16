@@ -798,7 +798,7 @@ SELECT
 			WHEN 2 THEN 'CONFIRMATORY'
 			ELSE ''
 	   END [TYPE],
-      (SELECT top 1 NationalId FROM mst_Facility WHERE DeleteFlag=0) FACILITY,
+      (SELECT top 1 PosID FROM mst_Facility WHERE DeleteFlag=0) FACILITY,
 	  (SELECT Name FROM FacilityList WHERE MFLCode=(SELECT top 1 NationalId FROM mst_Facility WHERE DeleteFlag=0)) [FACILITYNAME],
 
  --    case  (select top 1 Name from mst_ModDeCode where CodeID=396 AND ID= h.strategyHTS)
