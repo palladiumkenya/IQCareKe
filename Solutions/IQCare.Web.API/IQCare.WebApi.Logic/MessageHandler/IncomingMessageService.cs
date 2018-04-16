@@ -421,9 +421,10 @@ namespace IQCare.WebApi.Logic.MessageHandler
 
             try
             {
-                int result = patientManager.UpdatePatientCardSerial(psmartCard);
+              //  int result = patientManager.UpdatePatientCardSerial(psmartCard);
+                string processCardStatus = this.ProcessCardSerialNumberIdentifier(psmartCard);
 
-                if (result > 0)
+                if (!string.IsNullOrEmpty(processCardStatus))
                 {
                     NewSHR = psmartShrCardSerialManager.GenerateShrForEmr(psmartCard.CARD_SERIAL_NO);
                 }
