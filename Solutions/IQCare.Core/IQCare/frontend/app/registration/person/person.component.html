@@ -104,7 +104,7 @@
                                         </div>
 
                                         <div class="col-lg-3 col-md-3 col-sm-3">
-                                            <div *ngIf="isPartner == 'true'">
+                                            <div *ngIf="partnerType != null">
                                                 <mat-form-field>
                                                     <mat-select placeholder="Relationship" formControlName="partnerRelationship">
                                                         <mat-option></mat-option>
