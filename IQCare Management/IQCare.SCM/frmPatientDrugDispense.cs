@@ -2567,7 +2567,7 @@ namespace IQCare.SCM
                         else
                         {
                             // NxtAppDate.Format = DateTimePickerFormat.Custom;
-                            NxtAppDate.CustomFormat = " ";
+                            //NxtAppDate.CustomFormat = " ";
                         }
                         if (theDS1.Tables[0].Rows[0]["AppReason"].ToString() != "")
                         {
@@ -2615,6 +2615,14 @@ namespace IQCare.SCM
                 {
                     //this.NextRefillValue.Text = ((DateTime)this.thePharmacyMaster.Tables[0].Rows[0]["NextRefillDate"]).ToString(GblIQCare.AppDateFormat.ToString());
                     this.NxtAppDate.Text = ((DateTime)this.thePharmacyMaster.Tables[0].Rows[0]["NextRefillDate"]).ToString(GblIQCare.AppDateFormat.ToString());
+                }
+                if (this.thePharmacyMaster.Tables[0].Rows[0].IsNull("AppointmentReason") == false)
+                {
+                    lblAppointmentReason.Text = this.thePharmacyMaster.Tables[0].Rows[0]["AppointmentReason"].ToString();
+                }
+                else
+                {
+                    lblAppointmentReason.Text = "";
                 }
                 if (this.thePharmacyMaster.Tables[0].Rows[0].IsNull("LastDispense"))
                 {

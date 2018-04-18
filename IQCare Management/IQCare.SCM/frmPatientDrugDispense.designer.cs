@@ -213,6 +213,9 @@
             this.MainTab = new System.Windows.Forms.TabControl();
             this.PendingTab = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.pnlPendingOrders = new System.Windows.Forms.Panel();
+            this.btnClosePendingOrderPanel = new System.Windows.Forms.Button();
+            this.dgvPharmacyPendingOrders = new System.Windows.Forms.DataGridView();
             this.gridPendingOrder = new System.Windows.Forms.DataGridView();
             this.P_PatientFacilityId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pFirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -229,6 +232,7 @@
             this.patDOB = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnPendingOrders = new System.Windows.Forms.Button();
             this.lblActual = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.lblExpected = new System.Windows.Forms.Label();
@@ -291,10 +295,7 @@
             this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnPendingOrders = new System.Windows.Forms.Button();
-            this.dgvPharmacyPendingOrders = new System.Windows.Forms.DataGridView();
-            this.pnlPendingOrders = new System.Windows.Forms.Panel();
-            this.btnClosePendingOrderPanel = new System.Windows.Forms.Button();
+            this.lblAppointmentReason = new System.Windows.Forms.Label();
             this.DispenseTab.SuspendLayout();
             this.panel1.SuspendLayout();
             this.grpBoxLastDispense.SuspendLayout();
@@ -315,6 +316,8 @@
             this.MainTab.SuspendLayout();
             this.PendingTab.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            this.pnlPendingOrders.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPharmacyPendingOrders)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridPendingOrder)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.ReturnTab.SuspendLayout();
@@ -324,8 +327,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.grdReturnDetail)).BeginInit();
             this.IQCareWeb.SuspendLayout();
             this.panelSave.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPharmacyPendingOrders)).BeginInit();
-            this.pnlPendingOrders.SuspendLayout();
             this.SuspendLayout();
             // 
             // DispenseTab
@@ -365,6 +366,7 @@
             this.grpBoxLastDispense.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grpBoxLastDispense.BackColor = System.Drawing.Color.Silver;
+            this.grpBoxLastDispense.Controls.Add(this.lblAppointmentReason);
             this.grpBoxLastDispense.Controls.Add(this.labelOrderValue);
             this.grpBoxLastDispense.Controls.Add(this.labelOrdertext);
             this.grpBoxLastDispense.Controls.Add(this.label12);
@@ -427,6 +429,7 @@
             this.label12.Tag = "lblLabel";
             this.label12.Text = "New Refill Date:";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label12.Visible = false;
             // 
             // NextRefillValue
             // 
@@ -449,6 +452,7 @@
             this.dtRefillApp.Size = new System.Drawing.Size(108, 20);
             this.dtRefillApp.TabIndex = 93;
             this.dtRefillApp.Tag = "dtRefillApp";
+            this.dtRefillApp.Visible = false;
             this.dtRefillApp.Enter += new System.EventHandler(this.dtRefillApp_Enter);
             // 
             // labelAppointmentReason
@@ -642,7 +646,7 @@
             this.cmbReason.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbReason.Enabled = false;
             this.cmbReason.FormattingEnabled = true;
-            this.cmbReason.Location = new System.Drawing.Point(541, 76);
+            this.cmbReason.Location = new System.Drawing.Point(941, 76);
             this.cmbReason.Name = "cmbReason";
             this.cmbReason.Size = new System.Drawing.Size(178, 21);
             this.cmbReason.TabIndex = 7;
@@ -2044,6 +2048,37 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Pending Orders";
             // 
+            // pnlPendingOrders
+            // 
+            this.pnlPendingOrders.Controls.Add(this.btnClosePendingOrderPanel);
+            this.pnlPendingOrders.Controls.Add(this.dgvPharmacyPendingOrders);
+            this.pnlPendingOrders.Location = new System.Drawing.Point(761, 6);
+            this.pnlPendingOrders.Name = "pnlPendingOrders";
+            this.pnlPendingOrders.Size = new System.Drawing.Size(278, 242);
+            this.pnlPendingOrders.TabIndex = 54;
+            this.pnlPendingOrders.Visible = false;
+            // 
+            // btnClosePendingOrderPanel
+            // 
+            this.btnClosePendingOrderPanel.Location = new System.Drawing.Point(109, 215);
+            this.btnClosePendingOrderPanel.Name = "btnClosePendingOrderPanel";
+            this.btnClosePendingOrderPanel.Size = new System.Drawing.Size(75, 23);
+            this.btnClosePendingOrderPanel.TabIndex = 54;
+            this.btnClosePendingOrderPanel.Text = "Close";
+            this.btnClosePendingOrderPanel.UseVisualStyleBackColor = true;
+            this.btnClosePendingOrderPanel.Click += new System.EventHandler(this.btnClosePendingOrderPanel_Click);
+            // 
+            // dgvPharmacyPendingOrders
+            // 
+            this.dgvPharmacyPendingOrders.AllowUserToAddRows = false;
+            this.dgvPharmacyPendingOrders.AllowUserToDeleteRows = false;
+            this.dgvPharmacyPendingOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPharmacyPendingOrders.Location = new System.Drawing.Point(3, 3);
+            this.dgvPharmacyPendingOrders.Name = "dgvPharmacyPendingOrders";
+            this.dgvPharmacyPendingOrders.ReadOnly = true;
+            this.dgvPharmacyPendingOrders.Size = new System.Drawing.Size(273, 206);
+            this.dgvPharmacyPendingOrders.TabIndex = 53;
+            // 
             // gridPendingOrder
             // 
             this.gridPendingOrder.AllowUserToAddRows = false;
@@ -2271,6 +2306,20 @@
             this.groupBox3.TabIndex = 48;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Find Order";
+            // 
+            // btnPendingOrders
+            // 
+            this.btnPendingOrders.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnPendingOrders.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPendingOrders.Location = new System.Drawing.Point(815, 14);
+            this.btnPendingOrders.Name = "btnPendingOrders";
+            this.btnPendingOrders.Size = new System.Drawing.Size(178, 23);
+            this.btnPendingOrders.TabIndex = 52;
+            this.btnPendingOrders.Tag = "";
+            this.btnPendingOrders.Text = "Pending Orders";
+            this.btnPendingOrders.UseVisualStyleBackColor = false;
+            this.btnPendingOrders.Visible = false;
+            this.btnPendingOrders.Click += new System.EventHandler(this.btnPendingOrders_Click);
             // 
             // lblActual
             // 
@@ -3057,50 +3106,15 @@
             this.dataGridViewTextBoxColumn23.Visible = false;
             this.dataGridViewTextBoxColumn23.Width = 10;
             // 
-            // btnPendingOrders
+            // lblAppointmentReason
             // 
-            this.btnPendingOrders.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnPendingOrders.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPendingOrders.Location = new System.Drawing.Point(815, 14);
-            this.btnPendingOrders.Name = "btnPendingOrders";
-            this.btnPendingOrders.Size = new System.Drawing.Size(178, 23);
-            this.btnPendingOrders.TabIndex = 52;
-            this.btnPendingOrders.Tag = "";
-            this.btnPendingOrders.Text = "Pending Orders";
-            this.btnPendingOrders.UseVisualStyleBackColor = false;
-            this.btnPendingOrders.Visible = false;
-            this.btnPendingOrders.Click += new System.EventHandler(this.btnPendingOrders_Click);
-            // 
-            // dgvPharmacyPendingOrders
-            // 
-            this.dgvPharmacyPendingOrders.AllowUserToAddRows = false;
-            this.dgvPharmacyPendingOrders.AllowUserToDeleteRows = false;
-            this.dgvPharmacyPendingOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPharmacyPendingOrders.Location = new System.Drawing.Point(3, 3);
-            this.dgvPharmacyPendingOrders.Name = "dgvPharmacyPendingOrders";
-            this.dgvPharmacyPendingOrders.ReadOnly = true;
-            this.dgvPharmacyPendingOrders.Size = new System.Drawing.Size(273, 206);
-            this.dgvPharmacyPendingOrders.TabIndex = 53;
-            // 
-            // pnlPendingOrders
-            // 
-            this.pnlPendingOrders.Controls.Add(this.btnClosePendingOrderPanel);
-            this.pnlPendingOrders.Controls.Add(this.dgvPharmacyPendingOrders);
-            this.pnlPendingOrders.Location = new System.Drawing.Point(761, 6);
-            this.pnlPendingOrders.Name = "pnlPendingOrders";
-            this.pnlPendingOrders.Size = new System.Drawing.Size(278, 242);
-            this.pnlPendingOrders.TabIndex = 54;
-            this.pnlPendingOrders.Visible = false;
-            // 
-            // btnClosePendingOrderPanel
-            // 
-            this.btnClosePendingOrderPanel.Location = new System.Drawing.Point(109, 215);
-            this.btnClosePendingOrderPanel.Name = "btnClosePendingOrderPanel";
-            this.btnClosePendingOrderPanel.Size = new System.Drawing.Size(75, 23);
-            this.btnClosePendingOrderPanel.TabIndex = 54;
-            this.btnClosePendingOrderPanel.Text = "Close";
-            this.btnClosePendingOrderPanel.UseVisualStyleBackColor = true;
-            this.btnClosePendingOrderPanel.Click += new System.EventHandler(this.btnClosePendingOrderPanel_Click);
+            this.lblAppointmentReason.AutoSize = true;
+            this.lblAppointmentReason.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAppointmentReason.Location = new System.Drawing.Point(538, 81);
+            this.lblAppointmentReason.Name = "lblAppointmentReason";
+            this.lblAppointmentReason.Size = new System.Drawing.Size(45, 13);
+            this.lblAppointmentReason.TabIndex = 97;
+            this.lblAppointmentReason.Text = "reason";
             // 
             // frmPatientDrugDispense
             // 
@@ -3148,6 +3162,8 @@
             this.MainTab.ResumeLayout(false);
             this.PendingTab.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
+            this.pnlPendingOrders.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPharmacyPendingOrders)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridPendingOrder)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
@@ -3161,8 +3177,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.grdReturnDetail)).EndInit();
             this.IQCareWeb.ResumeLayout(false);
             this.panelSave.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPharmacyPendingOrders)).EndInit();
-            this.pnlPendingOrders.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -3386,5 +3400,6 @@
         private System.Windows.Forms.DataGridView dgvPharmacyPendingOrders;
         private System.Windows.Forms.Panel pnlPendingOrders;
         private System.Windows.Forms.Button btnClosePendingOrderPanel;
+        private System.Windows.Forms.Label lblAppointmentReason;
     }
 }

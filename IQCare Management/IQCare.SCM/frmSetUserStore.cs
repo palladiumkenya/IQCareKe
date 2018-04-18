@@ -49,14 +49,14 @@ namespace IQCare.SCM
                 case MenuChoice.PurchaseOrder:  //purchase order or good received note
                 case MenuChoice.GoodReceived:
                 case MenuChoice.POWithGRN:
-                    theDV.RowFilter = "StoreCategory = 'Purchasing' ";
+                    theDV.RowFilter = "StoreCategory = 'Purchasing' OR StoreCategory = 'Purchasing and Dispensing' ";
                     break;
                 case MenuChoice.Dispense:
-                    theDV.RowFilter = "StoreCategory = 'Dispensing' ";
+                    theDV.RowFilter = "StoreCategory = 'Dispensing' OR StoreCategory = 'Purchasing and Dispensing' ";
                     break;
                 case MenuChoice.CounterRequistion: //counter requisition
                 case MenuChoice.CRWithIV:
-                    theDV.RowFilter = "StoreCategory <> 'Purchasing' ";
+                    theDV.RowFilter = "StoreCategory <> 'Purchasing' OR StoreCategory <> 'Purchasing and Dispensing' ";
                     break;
             }
             /*switch (GblIQCare.theArea)
@@ -102,7 +102,7 @@ namespace IQCare.SCM
                 DataView theDV = new DataView(theDT);
               
                 //theDV.RowFilter = "StoreId=" + ddlStoreName.SelectedValue.ToString() + " and CentralStore=1";
-                theDV.RowFilter = "StoreId=" + ddlStoreName.SelectedValue.ToString() + " and StoreCategory='Purchasing'";
+                theDV.RowFilter = "StoreId=" + ddlStoreName.SelectedValue.ToString() + " and (StoreCategory='Purchasing' OR StoreCategory = 'Purchasing and Dispensing')";
                 if (theDV.Count < 1)
                 {
                     //IQCareWindowMsgBox.ShowWindow("StoreNotAuthorize", this);
@@ -125,7 +125,7 @@ namespace IQCare.SCM
                 DataTable theDT = (DataTable)ddlStoreName.DataSource;
                 DataView theDV = new DataView(theDT);
                 //theDV.RowFilter = "StoreId=" + ddlStoreName.SelectedValue.ToString() + " and DispensingStore=1";
-                theDV.RowFilter = "StoreId=" + ddlStoreName.SelectedValue.ToString() + " and StoreCategory='Dispensing'";
+                theDV.RowFilter = "StoreId=" + ddlStoreName.SelectedValue.ToString() + " and (StoreCategory='Dispensing' OR StoreCategory = 'Purchasing and Dispensing')";
                 if (theDV.Count < 1)
                 {
                     IQCareWindowMsgBox.ShowWindow("StoreNotAuthorize", this);
@@ -146,12 +146,12 @@ namespace IQCare.SCM
                 string rowFilter = "StoreId=" + ddlStoreName.SelectedValue.ToString();
                 if ((GblIQCare.theArea == "GRN"))
                 {
-                    rowFilter += " and StoreCategory='Purchasing'";
+                    rowFilter += " and (StoreCategory='Purchasing' OR StoreCategory = 'Purchasing and Dispensing')";
                    // rowFilter += " and CentralStore=1";
                 }
                 if ((GblIQCare.theArea == "PO_GRN"))
                 {
-                    rowFilter += " and StoreCategory='Purchasing'";
+                    rowFilter += " and (StoreCategory='Purchasing' OR StoreCategory = 'Purchasing and Dispensing')";
                     // rowFilter += " and CentralStore=1";
                 }
                 theDV.RowFilter = rowFilter;
