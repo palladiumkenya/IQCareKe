@@ -2095,9 +2095,6 @@
     <ROW Fragment="FolderDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\FolderDlg.aip"/>
     <ROW Fragment="MaintenanceTypeDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\MaintenanceTypeDlg.aip"/>
     <ROW Fragment="MaintenanceWelcomeDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\MaintenanceWelcomeDlg.aip"/>
-    <ROW Fragment="PreparePrereqDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\PreparePrereqDlg.aip"/>
-    <ROW Fragment="PrerequisitesDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\PrerequisitesDlg.aip"/>
-    <ROW Fragment="ProgressPrereqDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\ProgressPrereqDlg.aip"/>
     <ROW Fragment="SequenceDialogs.aip" Path="&lt;AI_THEMES&gt;classic\fragments\SequenceDialogs.aip"/>
     <ROW Fragment="Sequences.aip" Path="&lt;AI_FRAGS&gt;Sequences.aip"/>
     <ROW Fragment="StaticUIStrings.aip" Path="&lt;AI_FRAGS&gt;StaticUIStrings.aip"/>
@@ -2106,7 +2103,6 @@
     <ROW Fragment="VerifyRemoveDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\VerifyRemoveDlg.aip"/>
     <ROW Fragment="VerifyRepairDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\VerifyRepairDlg.aip"/>
     <ROW Fragment="WelcomeDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\WelcomeDlg.aip"/>
-    <ROW Fragment="WelcomePrereqDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\WelcomePrereqDlg.aip"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.GenericXmlAttributeComponent">
     <ROW XmlAttribute="AppListEntry" XmlElement="VisualElements" Name="AppListEntry" Flags="0" Order="0" Value="none"/>
@@ -2174,7 +2170,6 @@
     <ROW Action="BrowseIISAppPools" Description="ActionText.Description.BrowseIISAppPools" DescriptionLocId="ActionText.Description.BrowseIISAppPools"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiBinaryComponent">
-    <ROW Name="Prereq.dll" SourcePath="&lt;AI_CUSTACTS&gt;Prereq.dll"/>
     <ROW Name="SoftwareDetector.dll" SourcePath="&lt;AI_CUSTACTS&gt;SoftwareDetector.dll"/>
     <ROW Name="WinOptionalFeatures.dll" SourcePath="&lt;AI_CUSTACTS&gt;WinOptionalFeatures.dll"/>
     <ROW Name="aicustact.dll" SourcePath="&lt;AI_CUSTACTS&gt;aicustact.dll"/>
@@ -2204,9 +2199,6 @@
     <ROW Dialog_="ResumeDlg" Control_="Install" Event="EndDialog" Argument="Return" Condition="AI_RESUME" Ordering="299"/>
     <ROW Dialog_="VerifyReadyDlg" Control_="Install" Event="EndDialog" Argument="Return" Condition="AI_PATCH" Ordering="199"/>
     <ROW Dialog_="VerifyReadyDlg" Control_="Back" Event="NewDialog" Argument="PatchWelcomeDlg" Condition="AI_PATCH" Ordering="203"/>
-    <ROW Dialog_="WelcomePrereqDlg" Control_="Next" Event="NewDialog" Argument="PrerequisitesDlg" Condition="AI_BOOTSTRAPPER" Ordering="1"/>
-    <ROW Dialog_="PrerequisitesDlg" Control_="Next" Event="EndDialog" Argument="Return" Condition="AI_BOOTSTRAPPER" Ordering="1"/>
-    <ROW Dialog_="PrerequisitesDlg" Control_="Back" Event="NewDialog" Argument="WelcomePrereqDlg" Condition="AI_BOOTSTRAPPER" Ordering="1"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCreateFolderComponent">
     <ROW Directory_="IQCare_Dir" Component_="IQCare" ManualDelete="true"/>
@@ -2214,7 +2206,6 @@
     <ROW Directory_="IQCareFrontend_Dir" Component_="frontend" ManualDelete="true"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCustActComponent">
-    <ROW Action="AI_AppSearchEx" Type="1" Source="Prereq.dll" Target="DoAppSearchEx"/>
     <ROW Action="AI_DATA_SETTER" Type="51" Source="CustomActionData" Target="App Pool Browse"/>
     <ROW Action="AI_DOWNGRADE" Type="19" Target="4010"/>
     <ROW Action="AI_DetectSoftware" Type="257" Source="SoftwareDetector.dll" Target="OnDetectSoftware"/>
@@ -2255,11 +2246,10 @@
     <ROW Action="AI_EnableDebugLog" Sequence="51"/>
     <ROW Action="AI_IIsInstall" Condition="(NOT PATCH AND NOT MSIPATCHREMOVE ) AND (NOT Reinstall AND AI_INSTALL_MODE &lt;&gt; &quot;Repair&quot;) AND ((VersionNT &gt;= 500 AND NOT Installed) OR (Installed AND REMOVE &lt;&gt; &quot;ALL&quot; AND AI_INSTALL_MODE &lt;&gt; &quot;Remove&quot;))" Sequence="6509"/>
     <ROW Action="AI_IIsUninstall" Condition="(VersionNT &gt;= 500) AND (REMOVE = &quot;ALL&quot;)" Sequence="1698"/>
-    <ROW Action="AI_DetectSoftware" Sequence="102"/>
+    <ROW Action="AI_DetectSoftware" Sequence="101"/>
     <ROW Action="AI_WinOptFeaturesInstall" Condition="(VersionNT &gt;= 600) AND (REMOVE &lt;&gt; &quot;ALL&quot;)" Sequence="1501"/>
     <ROW Action="AI_WinOptFeaturesUninstall" Condition="(VersionNT &gt;= 600) AND (REMOVE=&quot;ALL&quot;)" Sequence="1699"/>
     <ROW Action="AI_WinOptFeaturesCheckReboot" Condition="(VersionNT &gt;= 600)" Sequence="6501"/>
-    <ROW Action="AI_AppSearchEx" Sequence="101"/>
     <ROW Action="OpenUrl" Condition="( NOT Installed )" Sequence="6601"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiInstallUISequenceComponent">
@@ -2267,8 +2257,7 @@
     <ROW Action="AI_ResolveKnownFolders" Sequence="53"/>
     <ROW Action="AI_DpiContentScale" Sequence="52"/>
     <ROW Action="AI_EnableDebugLog" Sequence="51"/>
-    <ROW Action="AI_DetectSoftware" Sequence="102"/>
-    <ROW Action="AI_AppSearchEx" Sequence="101"/>
+    <ROW Action="AI_DetectSoftware" Sequence="101"/>
     <ROW Action="BrowseIISAppPools" Condition="1" Sequence="1229"/>
     <ROW Action="AI_DATA_SETTER" Condition="1" Sequence="1228"/>
   </COMPONENT>
@@ -2290,13 +2279,6 @@
   <COMPONENT cid="caphyon.advinst.msicomp.MsiUpgradeComponent">
     <ROW UpgradeCode="[|UpgradeCode]" VersionMin="0.0.1" VersionMax="[|ProductVersion]" Attributes="257" ActionProperty="OLDPRODUCTS"/>
     <ROW UpgradeCode="[|UpgradeCode]" VersionMin="[|ProductVersion]" Attributes="2" ActionProperty="AI_NEWERPRODUCTFOUND"/>
-  </COMPONENT>
-  <COMPONENT cid="caphyon.advinst.msicomp.PreReqComponent">
-    <ROW PrereqKey="E6EF03A03ACB41E28F8D6A76831D390C" DisplayName=".NET Framework 4.6.2" SetupFileUrl="C:\source\Repos\IQCare.KeHMIS\Solutions\IQCare.Setup\IQCare.Setup\IQCare.Setup\Prerequisites\.NET Framework 4.6.2\NDP462-KB3151800-x86-x64-AllOS-ENU.exe" Location="0" ExactSize="0" WinNTVersions="Windows XP SP3 x86, Windows Server 2003 SP2 x86, Windows Vista x86, Windows Server 2008 x86, Windows 7 RTM x86, Windows 10 version 1607 x86, Windows 10 version 1703 x86, Windows 10 version 1709 x86" WinNT64Versions="Windows XP SP2 x64, Windows Server 2003 SP2 x64, Windows Vista x64, Windows Server 2008 x64, Windows 7 RTM x64, Windows Server 2008 R2 RTM x64, Windows 10 version 1607 x64, Windows 10 version 1703 x64, Windows 10 version 1709 x64, Windows Server 2016 x64" Operator="1" NoUiComLine="/q /norestart" Options="xy" TargetName=".NET Framework 4.6.2\NDP462-KB3151800-x86-x64-AllOS-ENU.exe"/>
-    <ATTRIBUTE name="PrereqsOrder" value="E6EF03A03ACB41E28F8D6A76831D390C"/>
-  </COMPONENT>
-  <COMPONENT cid="caphyon.advinst.msicomp.PreReqSearchComponent">
-    <ROW SearchKey="E6EF03A03ACB41E28F8D6A76831D390CRel" Prereq="E6EF03A03ACB41E28F8D6A76831D390C" SearchType="9" SearchString="HKLM\SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full\Release" RefContent="G394805" Order="1" Property="PreReqSearch_E6EF03A03ACB41E28F8D6A"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.ServerRolesComponent">
     <ROW Name="Application Server" RoleId="Application-Server" Services="AS-NET-Framework" Condition="1"/>

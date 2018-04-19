@@ -27,7 +27,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                     Tracing pnstrace = new Tracing()
                     {
                         PersonID = request.PersonId,
-                        TracingType = 1,
+                        TracingType = request.TracingType,
                         DateTracingDone = request.TracingDate,
                         Mode = request.TracingMode,
                         Outcome = request.TracingOutcome,

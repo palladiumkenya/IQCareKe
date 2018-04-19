@@ -27,6 +27,16 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Enrollment
             {
                 try
                 {
+                    var previouslyIdentifiers = await _unitOfWork.Repository<PatientIdentifier>().Get(y =>
+                            y.IdentifierValue == request.ClientEnrollment.EnrollmentNo && y.IdentifierTypeId == 8)
+                        .ToListAsync();
+
+                    if (previouslyIdentifiers.Count > 0)
+                    {
+                        var exception = new Exception("No: " + request.ClientEnrollment.EnrollmentNo + " already exists");
+                        throw exception;
+                    }
+
                     var enrollmentVisitType = await _unitOfWork.Repository<LookupItemView>().Get(x => x.MasterName == "VisitType" && x.ItemName == "Enrollment").FirstOrDefaultAsync();
                     int? visitType = enrollmentVisitType != null ? enrollmentVisitType.ItemId : 0;
                     var patientMasterVisit = new PatientMasterVisit()

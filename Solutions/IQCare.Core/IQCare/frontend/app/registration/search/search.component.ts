@@ -54,8 +54,6 @@ export class SearchComponent implements OnInit, AfterViewInit {
     }
 
     getSelectedRow(row) {
-        console.log(row);
-
         localStorage.setItem('personId', row['personId']);
         localStorage.setItem('patientId', row['patientId']);
 

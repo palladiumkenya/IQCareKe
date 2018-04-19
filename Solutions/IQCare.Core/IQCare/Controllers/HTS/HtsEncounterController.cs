@@ -117,7 +117,7 @@ namespace IQCare.Controllers.HTS
             return BadRequest(response);
         }
 
-        [HttpPost("pnsTracing")]
+        [HttpPost("tracing")]
         public async Task<IActionResult> Post([FromBody]AddPnsTracingCommand addPnsTracingCommand)
         {
             var response = await _mediator.Send(addPnsTracingCommand, Request.HttpContext.RequestAborted);

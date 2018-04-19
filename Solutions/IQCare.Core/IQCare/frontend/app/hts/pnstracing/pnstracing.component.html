@@ -22,7 +22,7 @@
                                             <div class="form-group">
                                                 <div>
                                                     <mat-form-field>
-                                                        <input matInput [matDatepicker]="myDatepicker" placeholder="Tracing Date" tabindex="1" (click)="myDatepicker.open()" id="pnsTracingDate" name="pnsTracingDate" [(ngModel)]="pnsTracing.TracingDate" #tracingDate="ngModel">
+                                                        <input matInput [matDatepicker]="myDatepicker" placeholder="Tracing Date" tabindex="1" [max]="maxDate" (click)="myDatepicker.open()" id="pnsTracingDate" name="pnsTracingDate" [(ngModel)]="pnsTracing.TracingDate" #tracingDate="ngModel">
                                                         <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
                                                         <mat-datepicker #myDatepicker></mat-datepicker>
                                                     </mat-form-field>
@@ -43,7 +43,7 @@
                                             <div class="form-group">
                                                 <div>
                                                     <mat-form-field>
-                                                        <input matInput [matDatepicker]="pnsBookingDatepicker" placeholder="Date Booked for Testing" (click)="pnsBookingDatepicker.open()" id="pnsBookingDate" name="pnsBookingDate" [(ngModel)]="pnsTracing.DateBookedTesting" #dateBookedTesting="ngModel">
+                                                        <input matInput [matDatepicker]="pnsBookingDatepicker" placeholder="Date Booked for Testing" [min]="minDate" (click)="pnsBookingDatepicker.open()" id="pnsBookingDate" name="pnsBookingDate" [(ngModel)]="pnsTracing.DateBookedTesting" #dateBookedTesting="ngModel">
                                                         <mat-datepicker-toggle matSuffix [for]="pnsBookingDatepicker"></mat-datepicker-toggle>
                                                         <mat-datepicker #pnsBookingDatepicker></mat-datepicker>
                                                     </mat-form-field>

@@ -6,6 +6,7 @@ import {catchError, tap} from 'rxjs/operators';
 import 'rxjs/add/observable/of';
 import {Store} from '@ngrx/store';
 import * as Consent from '../reducers/app.states';
+import {ErrorHandlerService} from './errorhandler.service';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -17,7 +18,8 @@ export class AppStateService {
     private url = '/api/AppStore';
 
     constructor(private http: HttpClient,
-                private store: Store<AppState>) { }
+                private store: Store<AppState>,
+                private errorHandler: ErrorHandlerService) { }
 
     public addAppState(appStateId: number, personId: number, patientId: number, patientMasterVisitId: number,
                        encounterId: number): Observable<any> {
@@ -32,8 +34,8 @@ export class AppStateService {
         console.log(Indata);
 
         return this.http.post<any>(this.API_URL + this.url, JSON.stringify(Indata), httpOptions).pipe(
-            tap(addAppState => this.log('added observable to store')),
-            catchError(this.handleError<any[]>('addAppState', []))
+            tap(addAppState => this.errorHandler.log('added observable to store')),
+            catchError(this.errorHandler.handleError<any[]>('addAppState', []))
         );
     }
 
@@ -97,23 +99,5 @@ export class AppStateService {
         });
 
         return promise;
-    }
-
-    private handleError<T> (operation = 'operation', result?: T) {
-        return (error: any): Observable<T> => {
-
-            // TODO: send the error to remote logging infrastructure
-            console.error(error); // log to console instead
-
-            // TODO: better job of transforming error for user consumption
-            this.log(`${operation} failed: ${error.message}`);
-
-            return Observable.throw(error.message);
-        };
-    }
-
-    /** Log a HeroService message with the MessageService */
-    private log(message: string) {
-        console.log(message);
     }
 }

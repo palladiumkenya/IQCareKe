@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import {AppLoadService} from './shared/_services/appload.service';
 import {AppStateService} from './shared/_services/appstate.service';
+import {ErrorHandlerService} from './shared/_services/errorhandler.service';
 
 export function init_app(appStateService: AppStateService) {
     return () => appStateService.initializeAppState();
@@ -35,7 +36,8 @@ export function init_app(appStateService: AppStateService) {
       },
       SnotifyService,
       AppLoadService,
-      AppStateService
+      AppStateService,
+      ErrorHandlerService
   ],
   bootstrap: [AppComponent]
 })

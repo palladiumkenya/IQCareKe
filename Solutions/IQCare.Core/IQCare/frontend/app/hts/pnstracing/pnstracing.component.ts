@@ -17,6 +17,10 @@ export class PnsTracingComponent implements OnInit {
     yesNoOptions: any[];
     tracingModeOptions: any[];
     pnsTracingOutcome: any[];
+    tracingTypeOptions: any[];
+
+    maxDate: any;
+    minDate: any;
 
     constructor(private pnsTracingService: PnstracingService,
                 private router: Router,
@@ -24,7 +28,10 @@ export class PnsTracingComponent implements OnInit {
                 public zone: NgZone,
                 private store: Store<AppState>,
                 private snotifyService: SnotifyService,
-                private notificationService: NotificationService) { }
+                private notificationService: NotificationService) {
+        this.maxDate = new Date();
+        this.minDate = new Date();
+    }
 
     ngOnInit() {
         this.pnsTracing = new PnsTracing();
@@ -37,7 +44,6 @@ export class PnsTracingComponent implements OnInit {
 
     public getTracingOptions() {
         this.pnsTracingService.getTracingOptions().subscribe(data => {
-            console.log(data);
             const options = data['lookupItems'];
             for (let i = 0; i < options.length; i++) {
                 if (options[i].key == 'YesNo') {
@@ -46,6 +52,8 @@ export class PnsTracingComponent implements OnInit {
                     this.tracingModeOptions = options[i].value;
                 } else if (options[i].key == 'PnsTracingOutcome') {
                     this.pnsTracingOutcome = options[i].value;
+                } else if (options[i].key == 'TracingType') {
+                    this.tracingTypeOptions = options[i].value;
                 }
             }
         });
@@ -56,6 +64,13 @@ export class PnsTracingComponent implements OnInit {
         this.pnsTracing.UserId = JSON.parse(localStorage.getItem('appUserId'));
 
         console.log(this.pnsTracing);
+
+        const tracingTypeValue = this.tracingTypeOptions.filter(function (obj) {
+            return obj.itemName == 'Partner';
+        });
+
+        const tracingType = tracingTypeValue[0]['itemId'];
+        this.pnsTracing.TracingType = tracingType;
 
         this.pnsTracingService.addPnsTracing(this.pnsTracing).subscribe(data => {
             console.log(data);

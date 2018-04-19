@@ -11,6 +11,7 @@ import {PnsPartnersComponent} from './pns-partners/pns-partners.component';
 import {TestingComponent} from './testing/testing.component';
 import {FamilyComponent} from './family/family.component';
 import {FamilyScreeningResolver} from './family-screening/familyScreening.resolver';
+import {FamilyTracingResolver} from './family-tracing/familyTracing.resolver';
 
 const routes: Routes = [
     {
@@ -49,7 +50,10 @@ const routes: Routes = [
             {
                 path: 'tracing',
                 component: FamilyTracingComponent,
-                pathMatch: 'full'
+                pathMatch: 'full',
+                resolve: {
+                    options: FamilyTracingResolver
+                }
             },
             {
                 path: 'screening',

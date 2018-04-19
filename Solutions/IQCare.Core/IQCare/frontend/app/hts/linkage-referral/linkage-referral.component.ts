@@ -24,6 +24,7 @@ export class LinkageReferralComponent implements OnInit {
     tracingArray: Tracing[];
     tracingModeOptions: any[];
     tracingOutcomeOptions: any[];
+    tracingTypeOptions: any[];
     facilities: any[];
     filteredOptions: Observable<any[]>;
     myControl: FormControl = new FormControl();
@@ -131,6 +132,8 @@ export class LinkageReferralComponent implements OnInit {
                     this.tracingModeOptions = options[i].value;
                 } else if (options[i].key == 'TracingOutcome') {
                     this.tracingOutcomeOptions = options[i].value;
+                } else if (options[i].key == 'TracingType') {
+                    this.tracingTypeOptions = options[i].value;
                 }
             }
 
@@ -152,9 +155,14 @@ export class LinkageReferralComponent implements OnInit {
             return obj.itemName == 'CCCEnrollment';
         });
 
-        this.referral.referralReason = optionSelected[0]['itemId'];
+        const tracingTypeValue = this.tracingTypeOptions.filter(function (obj) {
+            return obj.itemName == 'Enrolment';
+        });
 
-        this._linkageReferralService.addReferralTracing(this.referral, this.tracingArray).subscribe(data => {
+        this.referral.referralReason = optionSelected[0]['itemId'];
+        const tracingType = tracingTypeValue[0]['itemId'];
+
+        this._linkageReferralService.addReferralTracing(this.referral, this.tracingArray, tracingType).subscribe(data => {
             this.store.dispatch(new Consent.IsReferred(true));
 
             this.store.pipe(select('app')).subscribe(res => {

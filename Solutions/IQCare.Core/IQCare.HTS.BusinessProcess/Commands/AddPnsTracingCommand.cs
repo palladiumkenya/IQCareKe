@@ -13,6 +13,7 @@ namespace IQCare.HTS.BusinessProcess.Commands
         public DateTime DateBookedTesting { get; set; }
         public int PersonId { get; set; }
         public int UserId { get; set; }
+        public int TracingType { get; set; }
     }
 
     public class AddPnsTracingResponse

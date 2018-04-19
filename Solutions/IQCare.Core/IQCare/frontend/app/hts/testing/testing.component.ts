@@ -18,11 +18,7 @@ export class TestingComponent implements OnInit, AfterViewInit {
     testButton1: boolean = true;
     testButton2: boolean = false;
     isDisabled: boolean = false;
-    isFinalResultDisabled: boolean = false;
-    isFinalResultGivenDisabled: boolean = false;
     isCoupleDiscordantDisabled: boolean = false;
-    isAcceptedPartnerListingDisabled: boolean = false;
-    isReasonsDeclinedListingDisabled: boolean = false;
 
     formTesting: FormGroup;
 
@@ -78,6 +74,8 @@ export class TestingComponent implements OnInit, AfterViewInit {
             reasonsDeclinePartnerListing: new FormControl(this.finalTestingResults.reasonsDeclinePartnerListing, [Validators.required]),
             finalResultsRemarks: new FormControl(this.finalTestingResults.finalResultsRemarks,[Validators.required]),
         });
+
+        this.formTesting.controls.finalResultsRemarks.setValue('n/a');
 
         this.encounterService.getCustomOptions().subscribe(data => {
             const options = data['lookupItems'];

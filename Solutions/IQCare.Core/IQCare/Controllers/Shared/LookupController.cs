@@ -66,7 +66,7 @@ namespace IQCare.Controllers.Common
         [HttpGet("registrationOptions")]
         public async Task<IActionResult> GetOptions()
         {
-            string[] options = new string[] { "MaritalStatus", "KeyPopulation", "Gender", "Relationship" };
+            string[] options = new string[] { "MaritalStatus", "KeyPopulation", "Gender", "Relationship", "PriorityPopulation" };
             var results = await _mediator.Send(new GetRegistrationOptionsCommand {RegistrationOptions = options},
                 HttpContext.RequestAborted);
 
@@ -78,7 +78,7 @@ namespace IQCare.Controllers.Common
         [HttpGet("htsTracingOptions")]
         public async Task<IActionResult> GetTracingOptions()
         {
-            string[] options = new string[] { "TracingMode", "TracingOutcome" };
+            string[] options = new string[] { "TracingMode", "TracingOutcome", "TracingType" };
             var results = await _mediator.Send(new GetRegistrationOptionsCommand {RegistrationOptions = options},
                 HttpContext.RequestAborted);
 

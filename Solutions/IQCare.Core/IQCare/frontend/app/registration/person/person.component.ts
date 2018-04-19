@@ -13,10 +13,7 @@ import {ClientService} from '../../shared/_services/client.service';
 import {Store} from '@ngrx/store';
 import * as Consent from '../../shared/reducers/app.states';
 import {NotificationService} from '../../shared/_services/notification.service';
-import {overrideProvider} from '@angular/core/src/view';
 import {Partner} from '../../shared/_models/partner';
-
-declare var $: any;
 
 @Component({
   selector: 'app-person',
@@ -38,6 +35,7 @@ export class PersonComponent implements OnInit {
     maritalStatuses: any[];
     keyPops: any[];
     gender: any[];
+    priorityPops: any[];
 
     male: number;
     female: number;
@@ -80,7 +78,6 @@ export class PersonComponent implements OnInit {
         // this.getRegistrationOptions();
         this.route.data.subscribe((res) => {
             const options = res['options']['lookupItems'];
-            // console.log(res['options']['lookupItems']);
 
             const partnerOptions = ['Partner', 'Co-Wife', 'Spouse'];
             for (let i = 0; i < options.length; i++) {
@@ -106,6 +103,8 @@ export class PersonComponent implements OnInit {
                             this.relationshipFamilyOptions.push(returnOptions[j]);
                         }
                     }
+                } else if (options[i].key == 'PriorityPopulation') {
+                    this.priorityPops = options[i].value;
                 }
             }
         });
@@ -126,18 +125,16 @@ export class PersonComponent implements OnInit {
                     Landmark: new FormControl(this.contact.Landmark)
                 }),
                 this._formBuilder.group({
+                    populationType: new FormControl(this.personPopulation.populationType, [Validators.required]),
+                    priorityPopulation: new FormControl(this.personPopulation.priorityPopulation, [Validators.required]),
+                    priorityPop: new FormControl(this.personPopulation.priorityPop, [Validators.required]),
                     KeyPopulation: new FormControl(this.personPopulation.KeyPopulation, [Validators.required]),
                     partnerRelationship: new FormControl(this.person.partnerRelationship, [Validators.required])
                 }),
             ]),
         });
 
-        console.log('isPartner', localStorage.getItem('isPartner'));
         this.partnerType = JSON.parse(localStorage.getItem('isPartner'));
-        console.log(this.partnerType);
-
-        // this.isPartner = localStorage.getItem('isPartner');
-        // this.isFamily = localStorage.getItem('isFamily');
 
         if (this.partnerType != null) {
             this.formGroup.controls.formArray['controls'][2].controls.partnerRelationship.enable({onlySelf: false});
@@ -156,28 +153,18 @@ export class PersonComponent implements OnInit {
             localStorage.removeItem('htsEncounterId');
             localStorage.removeItem('patientMasterVisitId');
             localStorage.removeItem('isPartner');
-            // localStorage.removeItem('isFamily');
             localStorage.setItem('serviceAreaId', '2');
 
             this.store.dispatch(new Consent.ClearState());
         }
-
-        console.log(this.formGroup.controls['formArray']['controls'][0].controls.Sex);
     }
 
-    /*getRegistrationOptions() {
-        this.registrationService.getRegistrationOptions().subscribe(res => {
-            const options = res['lookupItems'];
-
-        });
-    }*/
-
     onSubmitForm() {
+        // console.log(this.formGroup.valid);
         if (this.formGroup.valid) {
-            // this.person = Object.assign(this.person, this.formArray.get([0]).value);
             this.person = {...this.person, ...this.formArray.get([0]).value};
             this.contact = Object.assign(this.person, this.formArray.get([1]).value);
-            this.personPopulation.KeyPopulation = this.formArray.get([2]).value['KeyPopulation'];
+            this.personPopulation = {...this.personPopulation, ...this.formArray.get([2]).value};
             this.person.partnerRelationship = this.formArray.get([2]).value['partnerRelationship'];
             this.person.createdBy = JSON.parse(localStorage.getItem('appUserId'));
 
@@ -207,11 +194,14 @@ export class PersonComponent implements OnInit {
                 const matStatus = this.registrationService.addPersonMaritalStatus(data['personId'],
                     this.person.MaritalStatus, this.userId);
 
+                const populationTypes = this.registrationService.addPersonPopulationType(data['personId'],
+                    this.userId, this.personPopulation);
+
                 const personLoc = this.registrationService.addPersonLocation(data['personId'], 0,
                     0, 0, this.userId, this.contact.Landmark);
 
-                //
-                forkJoin([patientAdd, personCont, matStatus, personLoc]).subscribe(results => {
+                // join multiple requests
+                forkJoin([patientAdd, personCont, matStatus, personLoc, populationTypes]).subscribe(results => {
                     if (this.person.isPartner == false) {
                         localStorage.setItem('patientId', results[0]['patientId']);
                         localStorage.setItem('personId', data['personId']);
@@ -279,5 +269,65 @@ export class PersonComponent implements OnInit {
             const result = res['patientLookup'][0];
             this.patientName = result.firstName + ' ' + result.midName + ' ' + result.lastName;
         });
+    }
+
+    onPopulationTypeChange() {
+        const popType = this.formGroup.controls['formArray']['controls'][2].controls.populationType.value;
+        if (popType == 1) {
+            this.formGroup.controls['formArray']['controls'][2].controls.KeyPopulation.disable({onlySelf: true});
+            this.formGroup.controls['formArray']['controls'][2].controls.KeyPopulation.setValue([]);
+        } else if (popType == 2) {
+            this.formGroup.controls['formArray']['controls'][2].controls.KeyPopulation.enable({onlySelf: false});
+        }
+    }
+
+    onPriorityChange() {
+        const priorityPop = this.formGroup.controls['formArray']['controls'][2].controls.priorityPop.value;
+        if (priorityPop == 2) {
+            this.formGroup.controls['formArray']['controls'][2].controls.priorityPopulation.disable({onlySelf: true});
+            this.formGroup.controls['formArray']['controls'][2].controls.priorityPopulation.setValue([]);
+        } else if (priorityPop == 1) {
+            this.formGroup.controls['formArray']['controls'][2].controls.priorityPopulation.enable({onlySelf: false});
+        }
+    }
+
+    onSexChange() {
+        const clientSex = this.formGroup.controls['formArray']['controls'][0].controls.Sex.value;
+        const optionSelected = this.gender.filter(obj  => parseInt(obj.itemId, 10) == parseInt(clientSex, 10));
+
+        this.route.data.subscribe((res) => {
+            const options = res['options']['lookupItems'];
+
+            for (let i = 0; i < options.length; i++) {
+                if (options[i].key == 'KeyPopulation') {
+                    this.keyPops = options[i].value;
+                } else if (options[i].key == 'PriorityPopulation') {
+                    this.priorityPops = options[i].value;
+                }
+            }
+        });
+
+        if (optionSelected[0].itemName == 'Female') {
+            const options = this.keyPops.filter(function( obj ) {
+                return obj.itemName !== 'MSM';
+            });
+            this.keyPops = options;
+
+            const optionsVal = this.priorityPops.filter(function (obj) {
+                return obj.itemName !== 'MSW';
+            });
+            this.priorityPops = optionsVal;
+
+        } else if (optionSelected[0].itemName == 'Male') {
+            const options = this.keyPops.filter(function( obj ) {
+                return obj.itemName !== 'FSW';
+            });
+            this.keyPops = options;
+
+            const optionsVal = this.priorityPops.filter(function (obj) {
+                return obj.itemName !== 'Adolescent Girls and Young Women';
+            });
+            this.priorityPops = optionsVal;
+        }
     }
 }
