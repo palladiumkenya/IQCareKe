@@ -2810,6 +2810,26 @@
     <StrengthName>12mg/60mg/100mg</StrengthName>
     <DeleteFlag>false</DeleteFlag>
   </Mst_Strength>
+  <Mst_Strength>
+    <StrengthId>548</StrengthId>
+    <StrengthName>300mg/100mg</StrengthName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Strength>
+  <Mst_Strength>
+    <StrengthId>549</StrengthId>
+    <StrengthName>300mg/300mg/400mg</StrengthName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Strength>
+  <Mst_Strength>
+    <StrengthId>550</StrengthId>
+    <StrengthName>150/75/400/275mg</StrengthName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Strength>
+  <Mst_Strength>
+    <StrengthId>551</StrengthId>
+    <StrengthName>150/75mg</StrengthName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Strength>
   <Mst_FrequencyUnits>
     <Id>1</Id>
     <Name>OD</Name>
@@ -9412,12 +9432,12 @@
   <Mst_Drug>
     <Drug_PK>1146</Drug_PK>
     <DrugName>Abacavir-ABC60/3TC30 60mg/30mg</DrugName>
-    <DeleteFlag>false</DeleteFlag>
+    <DeleteFlag>true</DeleteFlag>
   </Mst_Drug>
   <Mst_Drug>
     <Drug_PK>1147</Drug_PK>
     <DrugName>Lamivudine/Abacavir-ABC60/3TC30 60mg/30mg</DrugName>
-    <DeleteFlag>false</DeleteFlag>
+    <DeleteFlag>true</DeleteFlag>
   </Mst_Drug>
   <Mst_Drug>
     <Drug_PK>1148</Drug_PK>
@@ -9858,42 +9878,37 @@
   </Mst_Drug>
   <Mst_Drug>
     <Drug_PK>1224</Drug_PK>
-    <DrugName>Plendil - Felodipine 2.5mg Tabs</DrugName>
+    <DrugName>Atazanavir/Ritonavir-Anzavir-R 300mg/100mg</DrugName>
     <DeleteFlag>false</DeleteFlag>
   </Mst_Drug>
   <Mst_Drug>
     <Drug_PK>1225</Drug_PK>
-    <DrugName>Plendil - Felodipine 5mg Tabs</DrugName>
+    <DrugName>Dolutegravir-Dolutegravir 50mg</DrugName>
     <DeleteFlag>false</DeleteFlag>
   </Mst_Drug>
   <Mst_Drug>
     <Drug_PK>1226</Drug_PK>
-    <DrugName>Plendil - Felodipine 10mg Tabs</DrugName>
+    <DrugName>Tenofovir DF/Lamivudine/Efavirenz-TDF/3TC/EFV- FDC 300mg/300mg/400mg</DrugName>
     <DeleteFlag>false</DeleteFlag>
   </Mst_Drug>
   <Mst_Drug>
     <Drug_PK>1227</Drug_PK>
-    <DrugName>Zestoretic - Lisinopril/HTCZ 20mg/12.5mg Tabs</DrugName>
+    <DrugName>Raltegravir-Raltegravir 400mg</DrugName>
     <DeleteFlag>false</DeleteFlag>
   </Mst_Drug>
   <Mst_Drug>
     <Drug_PK>1228</Drug_PK>
-    <DrugName>Hydrochlorothiazide (HCTZ) 12.5mg Tabs</DrugName>
+    <DrugName>Darunavir 600mg-Darunavir 600mg</DrugName>
     <DeleteFlag>false</DeleteFlag>
   </Mst_Drug>
   <Mst_Drug>
     <Drug_PK>1229</Drug_PK>
-    <DrugName>Hydrochlorothiazide (HCTZ) 25mg Tabs</DrugName>
+    <DrugName>Rifampin/Isoniazid/Pyrazinamide/Ethambutol-RHZE- 150/75/400/275mg 150/75/400/275mg</DrugName>
     <DeleteFlag>false</DeleteFlag>
   </Mst_Drug>
   <Mst_Drug>
     <Drug_PK>1230</Drug_PK>
-    <DrugName>Hydrochlorothiazide (HCTZ) 50mg Tabs</DrugName>
-    <DeleteFlag>false</DeleteFlag>
-  </Mst_Drug>
-  <Mst_Drug>
-    <Drug_PK>1231</Drug_PK>
-    <DrugName>Nifedipine 20mg Tabs</DrugName>
+    <DrugName>Rifampicin/Isoniazid-RH - 150/75mg 150/75mg</DrugName>
     <DeleteFlag>false</DeleteFlag>
   </Mst_Drug>
   <Mst_Generic>
@@ -10504,7 +10519,6 @@
   <Mst_Generic>
     <GenericId>153</GenericId>
     <GenericName>Hydrochlorothiazide</GenericName>
-    <GenericAbbrevation>HTCZ</GenericAbbrevation>
   </Mst_Generic>
   <Mst_Generic>
     <GenericId>154</GenericId>
@@ -10747,7 +10761,6 @@
   <Mst_Generic>
     <GenericId>213</GenericId>
     <GenericName>Nifedipine</GenericName>
-    <GenericAbbrevation>Nifedipine</GenericAbbrevation>
   </Mst_Generic>
   <Mst_Generic>
     <GenericId>214</GenericId>
@@ -12226,17 +12239,28 @@
   </Mst_Generic>
   <Mst_Generic>
     <GenericId>592</GenericId>
-    <GenericName>Felodipine</GenericName>
+    <GenericName>Atazanavir/Ritonavir-[ATV/RTV]</GenericName>
+    <GenericAbbrevation>ATVr</GenericAbbrevation>
   </Mst_Generic>
   <Mst_Generic>
     <GenericId>593</GenericId>
-    <GenericName>Lisinopril</GenericName>
-    <GenericAbbrevation>lisinopril</GenericAbbrevation>
+    <GenericName>Atazanavir/Ritonavir</GenericName>
+    <GenericAbbrevation>ATV/r</GenericAbbrevation>
   </Mst_Generic>
   <Mst_Generic>
     <GenericId>594</GenericId>
-    <GenericName>Atazanavir/Ritonavir</GenericName>
-    <GenericAbbrevation>ATV/r</GenericAbbrevation>
+    <GenericName>Dolutegravir</GenericName>
+    <GenericAbbrevation>DTG</GenericAbbrevation>
+  </Mst_Generic>
+  <Mst_Generic>
+    <GenericId>595</GenericId>
+    <GenericName>Raltegravir</GenericName>
+    <GenericAbbrevation>RAL</GenericAbbrevation>
+  </Mst_Generic>
+  <Mst_Generic>
+    <GenericId>596</GenericId>
+    <GenericName>Darunavir 600mg</GenericName>
+    <GenericAbbrevation>DRV 600</GenericAbbrevation>
   </Mst_Generic>
   <Mst_DrugType>
     <DrugTypeId>1</DrugTypeId>
