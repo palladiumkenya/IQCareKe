@@ -22,7 +22,7 @@
                                             <div class="form-group">
                                                 <div>
                                                     <mat-form-field>
-                                                        <input matInput [matDatepicker]="myDatepicker" placeholder="Screening Date" tabindex="1" (click)="myDatepicker.open()" id="screeningDate" name="screeningDate" [(ngModel)]="pnsForm.screeningDate" #screeningDate="ngModel">
+                                                        <input matInput [matDatepicker]="myDatepicker" placeholder="Screening Date" tabindex="1" [max]="maxDate" (click)="myDatepicker.open()" id="screeningDate" name="screeningDate" [(ngModel)]="pnsForm.screeningDate" #screeningDate="ngModel">
                                                         <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
                                                         <mat-datepicker #myDatepicker></mat-datepicker>
                                                     </mat-form-field>
@@ -122,7 +122,7 @@
                                             <div class="form-group">
                                                 <div>
                                                     <mat-form-field>
-                                                        <input matInput [matDatepicker]="bookingDatepicker" placeholder="Booking Date" (click)="bookingDatepicker.open()" id="bookingDate" tabindex="14" name="bookingDate" [(ngModel)]="pnsForm.bookingDate" #bookingDate="ngModel" [disabled]="ishivStatusPositive">
+                                                        <input matInput [matDatepicker]="bookingDatepicker" placeholder="Booking Date" (click)="bookingDatepicker.open()" [min]="minDate" id="bookingDate" tabindex="14" name="bookingDate" [(ngModel)]="pnsForm.bookingDate" #bookingDate="ngModel" [disabled]="ishivStatusPositive">
                                                         <mat-datepicker-toggle matSuffix [for]="bookingDatepicker"></mat-datepicker-toggle>
                                                         <mat-datepicker #bookingDatepicker></mat-datepicker>
                                                     </mat-form-field>

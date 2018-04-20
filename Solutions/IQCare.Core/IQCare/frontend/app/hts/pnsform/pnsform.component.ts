@@ -7,6 +7,8 @@ import * as Consent from '../../shared/reducers/app.states';
 import {select, Store} from '@ngrx/store';
 import {NotificationService} from '../../shared/_services/notification.service';
 import {SnotifyService} from 'ng-snotify';
+import {AppStateService} from '../../shared/_services/appstate.service';
+import {AppEnum} from '../../shared/reducers/app.enum';
 
 @Component({
   selector: 'app-pnsform',
@@ -27,6 +29,8 @@ export class PnsformComponent implements OnInit {
     ishivStatusPositive: boolean = false;
 
     serviceAreaId: number = 2;
+    maxDate: any;
+    minDate: any;
 
     constructor(private pnsService: PnsService,
                 private router: Router,
@@ -34,7 +38,11 @@ export class PnsformComponent implements OnInit {
                 public zone: NgZone,
                 private store: Store<AppState>,
                 private snotifyService: SnotifyService,
-                private notificationService: NotificationService) { }
+                private notificationService: NotificationService,
+                private appStateService: AppStateService) {
+        this.maxDate = new Date();
+        this.minDate = new Date();
+    }
 
     ngOnInit() {
         this.pnsForm = new Pnsform();
@@ -127,6 +135,7 @@ export class PnsformComponent implements OnInit {
             };
 
             this.store.dispatch(new Consent.IsPnsScreened(JSON.stringify(partnerPnsScreened)));
+            // this.appStateService.addAppState(AppEnum.PNS_SCREENED, );
 
             this.store.pipe(select('app')).subscribe(res => {
                 localStorage.setItem('store', JSON.stringify(res));

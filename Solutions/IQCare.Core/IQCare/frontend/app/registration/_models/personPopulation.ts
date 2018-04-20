@@ -1,3 +1,6 @@
 export class PersonPopulation {
-    KeyPopulation: number;
+    KeyPopulation: any[];
+    priorityPopulation: any[];
+    populationType: number;
+    priorityPop: number;
 }

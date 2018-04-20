@@ -38,7 +38,7 @@ export class FamilyScreeningComponent implements OnInit {
         });
 
         this.route.data.subscribe((res) => {
-            console.log(res);
+            // console.log(res);
             const options = res['options']['lookupItems'];
 
             for (let i = 0; i < options.length; i++) {

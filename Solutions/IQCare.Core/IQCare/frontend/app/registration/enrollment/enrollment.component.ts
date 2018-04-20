@@ -52,8 +52,6 @@ export class EnrollmentComponent implements OnInit {
         this.enrollment.PersonId = this.personId;
         this.enrollment.CreatedBy = this.createdBy;
 
-        console.log(this.enrollment);
-
         this.enrollmentService.enrollClient(this.enrollment).subscribe(data => {
             this.store.dispatch(new Consent.IsEnrolled(true));
             this.appStateService.addAppState(AppEnum.ENROLLED, this.enrollment.PersonId, this.enrollment.PatientId,

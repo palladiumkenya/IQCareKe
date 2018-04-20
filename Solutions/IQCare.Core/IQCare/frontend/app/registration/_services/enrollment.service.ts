@@ -7,6 +7,7 @@ import 'rxjs/add/observable/throw';
 import {catchError, tap} from 'rxjs/operators';
 import {Enrollment} from '../_models/enrollment';
 import {Person} from '../_models/person';
+import {ErrorHandlerService} from '../../shared/_services/errorhandler.service';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -17,7 +18,8 @@ export class EnrollmentService {
     private API_URL = environment.API_URL;
     private _url = '/api/Register/enrollment';
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient,
+                private errorHandler: ErrorHandlerService) { }
 
     public enrollClient(clientEnrollment: Enrollment): Observable<Enrollment> {
         const Indata = {
@@ -25,27 +27,8 @@ export class EnrollmentService {
         };
 
         return this.http.post(this.API_URL + this._url, JSON.stringify(Indata), httpOptions).pipe(
-            tap((enrolledClient: Enrollment) => this.log(`enrolled client w/ id`)),
-            catchError(this.handleError<Enrollment>('clientEnrollment'))
+            tap((enrolledClient: Enrollment) => this.errorHandler.log(`enrolled client w/ id`)),
+            catchError(this.errorHandler.handleError<Enrollment>('clientEnrollment'))
         );
     }
-
-    private handleError<T> (operation = 'operation', result?: T) {
-        return (error: any): Observable<T> => {
-
-            // TODO: send the error to remote logging infrastructure
-            console.error(error); // log to console instead
-
-            // TODO: better job of transforming error for user consumption
-            this.log(`${operation} failed: ${error.message}`);
-
-            return Observable.throw(error.message);
-        };
-    }
-
-    /** Log a HeroService message with the MessageService */
-    private log(message: string) {
-        console.log(message);
-    }
-
 }
