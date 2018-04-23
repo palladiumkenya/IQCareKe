@@ -12,7 +12,7 @@ namespace IQCare.CCC.UILogic
             (IPatientCareEnding)
             ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientCareEnding, BusinessProcess.CCC");
 
-        public int AddPatientCareEndingDeath(int patientId, int patientMasterVisitId, int patientEnrollmentId, int exitReason, DateTime exitDate, DateTime dateOfDeath, string careEndingNotes)
+        public int AddPatientCareEndingDeath(int patientId, int patientMasterVisitId, int patientEnrollmentId, int exitReason, DateTime exitDate, DateTime? dateOfDeath, string careEndingNotes)
         {
             PatientCareEnding patientCareEnding = new PatientCareEnding()
             {

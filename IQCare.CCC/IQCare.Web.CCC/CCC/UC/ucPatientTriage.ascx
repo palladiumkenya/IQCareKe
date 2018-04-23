@@ -114,7 +114,7 @@
                   <div class="col-md-12 col-xs-12 col-sm-12">
                     <div class="input-group">
                          <span class="input-group-addon">Systolic <label id="systolicAddon"></label></span>
-                         <asp:TextBox runat="server" ID="systolic" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="systolic.." data-parsley-trigger="keyup" data-parsley-type="number" data-parsley-range="[20, 190]" data-parsley-range-message="Systolic reading is out of reasonable range"></asp:TextBox>
+                         <asp:TextBox runat="server" ID="systolic" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="systolic.." data-parsley-trigger="keyup" data-parsley-type="number" data-parsley-range="[20, 2550]" data-parsley-range-message="Systolic reading is out of reasonable range"></asp:TextBox>
                          <span class="input-group-addon">mm[Hg]</span>
                     </div>
                     <label class="help-block pull-left"><strong>Normal Range: (70-190)</strong></label>

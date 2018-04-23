@@ -118,5 +118,10 @@ namespace IQCare.CCC.UILogic.Enrollment
         {
             return _mgr.GetAllPatientEntityIdentifiers(patientId);
         }
+
+        public PatientEntityIdentifier GetPatientByCardSerialNumber(string cardSerialNumber)
+        {
+            return _mgr.GetPatientByCardSerialNumber(cardSerialNumber);
+        }
     }
 }

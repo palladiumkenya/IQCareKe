@@ -125,5 +125,14 @@ namespace BusinessProcess.CCC.visit
             }
             return Result;
         }
+
+        public PatientEncounter GetEncounterIfExists(int patientId, int patientMasterVisitId, int encounterTypeId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var encounter = unitOfWork.PatientEncounterRepository.FindBy(x =>x.PatientId==patientId && x.PatientMasterVisitId==patientMasterVisitId && x.EncounterTypeId==encounterTypeId).FirstOrDefault();
+                return encounter;
+            }
+        }
     }
 }
