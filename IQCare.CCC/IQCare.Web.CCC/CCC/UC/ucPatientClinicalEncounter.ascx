@@ -812,7 +812,7 @@
 												<label class="control-label pull-left">Dose</label>
 											</div>
 											<div class="col-md-12">
-												<asp:TextBox runat="server" ID="treatmentDose" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="dose.."></asp:TextBox>
+												<asp:TextBox runat="server" ID="treatmentDose" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="dose.." data-parsley-min="1"></asp:TextBox>
 											</div>
 										</div>
 										
