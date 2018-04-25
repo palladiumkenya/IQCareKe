@@ -56,8 +56,8 @@
                                 <mat-header-cell *matHeaderCellDef>
                                 </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
-                                    <button mat-raised-button *ngIf="!(row['personId'] == isPnsScreeningDone['partnerId'])" [style.background]="'#4db6ac'" (click)="screenClient(row)">Screen</button>
-                                    <button mat-raised-button *ngIf="!(row['personId'] == isPnsTracingDone['partnerId'])" [style.background]="'#616161'" (click)="traceClient(row)">Trace</button>
+                                    <button mat-raised-button *ngIf="!isPnsScreened(row['personId'])" [style.background]="'#4db6ac'" (click)="screenClient(row)">Screen</button>
+                                    <button mat-raised-button *ngIf="!isPnsTracing(row['personId'])" [style.background]="'#616161'" (click)="traceClient(row)">Trace</button>
                                 </mat-cell>
                             </ng-container>
 

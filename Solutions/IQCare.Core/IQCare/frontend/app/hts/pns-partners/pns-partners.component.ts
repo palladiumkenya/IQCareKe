@@ -15,8 +15,8 @@ export class PnsPartnersComponent implements OnInit {
     patientId: number;
     highlightedRow: any[] = [];
 
-    isPnsScreeningDone = {};
-    isPnsTracingDone = {};
+    isPnsScreeningDone = [];
+    isPnsTracingDone = [];
 
     displayedColumns = ['firstName', 'midName', 'lastName', 'dateOfBirth', 'gender', 'relationshipType', 'actionsColumn'];
     dataSource = new PnsDataSource(this.pnsService, this.patientId);
@@ -28,26 +28,14 @@ export class PnsPartnersComponent implements OnInit {
                 private store: Store<AppState>) {
         store.pipe(select('app')).subscribe(res => {
             if (typeof(res['isPnsScreened']) !== 'undefined' && res['isPnsScreened'] !== null) {
-                const pnsScreened = JSON.parse(res['isPnsScreened']);
-                const key = 'partnerId';
-                console.log(pnsScreened['partnerId']);
-                this.isPnsScreeningDone[key] = pnsScreened['partnerId'];
-                console.log(pnsScreened);
+                this.isPnsScreeningDone = res['isPnsScreened'];
             }
         });
 
         store.pipe(select('app')).subscribe(res => {
-            if (typeof(res['isPnsTracingDone']) !== 'undefined' && res['isPnsTracingDone']) {
-                const pnsTraced = JSON.parse(res['isPnsScreened']);
-                const key = 'partnerId';
-                console.log();
-                this.isPnsTracingDone[key] = pnsTraced['partnerId'];
-                console.log(res['isPnsTracingDone']);
+            if (typeof(res['isPnsTracingDone']) !== 'undefined' && res['isPnsTracingDone'] !== null) {
+                this.isPnsTracingDone = res['isPnsTracingDone'];
             }
-        });
-
-        this.store.pipe(select('app')).subscribe(res => {
-            localStorage.setItem('store', JSON.stringify(res));
         });
     }
 
@@ -58,15 +46,6 @@ export class PnsPartnersComponent implements OnInit {
         this.patientId = JSON.parse(localStorage.getItem('patientId'));
 
         this.dataSource = new PnsDataSource(this.pnsService, this.patientId);
-        // this.getPartners();
-    }
-
-    getPartners() {
-        this.pnsService.getClientPartners(this.patientId).subscribe(data => {
-            console.log(data);
-        }, err => {
-            console.log(err);
-        });
     }
 
     getSelectedRow(row) {
@@ -92,6 +71,24 @@ export class PnsPartnersComponent implements OnInit {
         };
         localStorage.setItem('isPartner', JSON.stringify(newPartner));
         this.zone.run(() => { this.router.navigate(['/registration/register'], {relativeTo: this.route}); });
+    }
+
+    isPnsScreened(personID) {
+        for (let i = 0; i < this.isPnsScreeningDone.length; i++) {
+            if (this.isPnsScreeningDone[i]['partnerId'] == personID) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    isPnsTracing(personID) {
+        for (let i = 0; i < this.isPnsTracingDone.length; i++) {
+            if (this.isPnsTracingDone[i]['partnerId'] == personID) {
+                return true;
+            }
+        }
+        return false;
     }
 }
 

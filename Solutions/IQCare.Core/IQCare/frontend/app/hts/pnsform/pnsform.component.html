@@ -81,7 +81,7 @@
                                             <div class="form-group">
                                                 <div>
                                                     <mat-form-field>
-                                                        <mat-select name="pnsAccepted" id="pnsAccepted" tabindex="2" placeholder="Pns Accepted" [(ngModel)]="pnsForm.pnsAccepted" #pnsAccepted="ngModel">
+                                                        <mat-select name="pnsAccepted" id="pnsAccepted" tabindex="2" placeholder="Pns Accepted" [(ngModel)]="pnsForm.pnsAccepted" #pnsAccepted="ngModel" [disabled]="isPnsAcceptedDisabled">
                                                             <mat-option></mat-option>
                                                             <mat-option *ngFor="let option of yesNoOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
                                                         </mat-select>
