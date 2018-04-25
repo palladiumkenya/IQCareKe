@@ -13,8 +13,7 @@ using Interface.Clinical;
 using Interface.FormBuilder;
 using Interface.PatientCore;
 using Interface.WebApi;
-
-
+using IQCare.CCC.UILogic.Enrollment;
 using IQCare.DTO.PSmart;
 
 namespace IQCare.WebApi.Logic.PSmart
@@ -36,6 +35,7 @@ namespace IQCare.WebApi.Logic.PSmart
         private ImmunizationTrackerManager _immunizationTracker;
         private Utility _utility;
         private PsmartMotherDetailsViewManager _motherDetailsViewManager;
+        private PatientIdentifierManager _patientIdentifierManager;
 
         private int ptnpk=0;
         public ShrApiManager()
@@ -48,6 +48,7 @@ namespace IQCare.WebApi.Logic.PSmart
             _immunizationTracker=new ImmunizationTrackerManager();
             _utility=new Utility();
             _motherDetailsViewManager=new PsmartMotherDetailsViewManager();
+            _patientIdentifierManager=new PatientIdentifierManager();
         }
 
         private readonly JavaScriptSerializer _jsonSerialiser = new JavaScriptSerializer();
@@ -180,14 +181,16 @@ namespace IQCare.WebApi.Logic.PSmart
                     log.LogMessage = "Valid Message. Ready to process";
                    // Module module = _moduleService.GetMstModueByName("HTC Module"); TODO enanble for OLD HTS ONLY:208 THE DEFAILT ID FOR NEW HTS MODULE 
                     //find if there is client record for the serial number if yes 
-                    var patient = _patientCoreService.GetPatient(_cardserialnumber);
+                    //var patient = _patientCoreService.GetPatient(_cardserialnumber);TODO:Finds patient in mst_patient
+                    var patient = _patientIdentifierManager.GetPatientByCardSerialNumber(_cardserialnumber);
+
                     if (patient != null)
                     {
                         //(check in) , 
                        // Module modules = _moduleService.GetModuleByName("HTC Module");
                         WaitingQueue queue = _queueService.GetQueueByName("HTS Services (PSmart)");
                         //to do create a psmart user or adjust the request from interactor to come with the logged in user
-                        _queueService.QueuePatient(patient.Id, queue.QueueId, QueueStatus.Pending, QueuePriority.Normal,
+                        _queueService.QueuePatient(patient.PatientId, queue.QueueId, QueueStatus.Pending, QueuePriority.Normal,
                             208, 1);
                         //(update demographics
 
@@ -209,7 +212,7 @@ namespace IQCare.WebApi.Logic.PSmart
                             }
                         }
 
-                        if (!string.IsNullOrEmpty(patient.PersonId.ToString()))
+                        if (!string.IsNullOrEmpty(patient.PatientId.ToString()))
                         {
                             if (hivTests != null)
                             {
@@ -220,7 +223,7 @@ namespace IQCare.WebApi.Logic.PSmart
                                         CultureInfo.InvariantCulture);
                                     // resultDate = resultDate.ToString("yyyy-MM-dd");
 
-                                    _hivTestTrackerManager.AddHivTestTracker(Convert.ToInt32(patient.PersonId),
+                                    _hivTestTrackerManager.AddHivTestTracker(Convert.ToInt32(patient.PatientId),
                                         hivtest.FACILITY,
                                         hivtest.STRATEGY, hivtest.PROVIDER_DETAILS.NAME, hivtest.PROVIDER_DETAILS.ID,
                                         Convert.ToInt32(patient.Id), resultDate, hivtest.RESULT, hivtest.STRATEGY,
@@ -236,7 +239,7 @@ namespace IQCare.WebApi.Logic.PSmart
                                     DateTime administeredDate = DateTime.ParseExact(immunization.DATE_ADMINISTERED,
                                         "yyyyMMd", CultureInfo.InvariantCulture);
                                     ProcessImmunizationSegment(administeredDate, immunization.NAME,
-                                        Convert.ToInt32(patient.Id), Convert.ToInt32(patient.PersonId));
+                                        Convert.ToInt32(patient.Id), Convert.ToInt32(patient.PatientId));
                                 }
                             }
 
@@ -244,7 +247,7 @@ namespace IQCare.WebApi.Logic.PSmart
                             {
                                 MotherDetailsView motherDetailsView = new MotherDetailsView()
                                 {
-                                    Ptn_pk = Convert.ToInt32(patient.PersonId),
+                                    Ptn_pk = Convert.ToInt32(patient.PatientId),
                                     firstName = patientIdentification.MOTHER_DETAILS.MOTHER_NAME.FIRST_NAME,
                                     middleName = patientIdentification.MOTHER_DETAILS.MOTHER_NAME.MIDDLE_NAME,
                                     lastName = patientIdentification.MOTHER_DETAILS.MOTHER_NAME.LAST_NAME,

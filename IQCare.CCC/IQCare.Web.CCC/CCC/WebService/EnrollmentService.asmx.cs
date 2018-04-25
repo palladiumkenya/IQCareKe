@@ -564,9 +564,14 @@ namespace IQCare.Web.CCC.WebService
         {
             try
             {
+                DateTime? emptyDateOfDeath = null;
+
                 PatientCareEndingManager careEndingManager = new PatientCareEndingManager();
                 PatientEnrollmentManager enrollmentManager = new PatientEnrollmentManager();
                 PatientLookupManager patientLookupManager = new PatientLookupManager();
+                
+                
+
 
                 patientId = int.Parse(Session["PatientPK"].ToString());
                 patientMasterVisitId = int.Parse(Session["PatientMasterVisitId"].ToString());
@@ -587,12 +592,15 @@ namespace IQCare.Web.CCC.WebService
                     }
                     else if (String.IsNullOrWhiteSpace(facilityOutTransfer) && String.IsNullOrWhiteSpace(dateOfDeath))
                     {
-                        careEndingManager.AddPatientCareEndingOther(patientId, patientMasterVisitId, patientEnrollmentId,
+                        careEndingManager.AddPatientCareEndingOther(patientId, patientMasterVisitId,
+                            patientEnrollmentId,
                             exitReason, DateTime.Parse(exitDate), GlobalObject.unescape(careEndingNotes));
                     }
                     else
+                        
+
                         careEndingManager.AddPatientCareEndingDeath(patientId, patientMasterVisitId, patientEnrollmentId,
-                        exitReason, DateTime.Parse(exitDate), DateTime.Parse(dateOfDeath),  GlobalObject.unescape(careEndingNotes));
+                        exitReason, DateTime.Parse(exitDate), (string.IsNullOrEmpty(dateOfDeath))?DateTime.Parse(dateOfDeath):emptyDateOfDeath ,  GlobalObject.unescape(careEndingNotes));
 
 
 
