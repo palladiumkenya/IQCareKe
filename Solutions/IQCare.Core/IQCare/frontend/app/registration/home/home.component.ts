@@ -4,6 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import {DataSource} from '@angular/cdk/collections';
 import * as Consent from '../../shared/reducers/app.states';
 import {select, Store} from '@ngrx/store';
+import {AppStateService} from '../../shared/_services/appstate.service';
 
 @Component({
   selector: 'app-home',
@@ -20,7 +21,8 @@ export class HomeComponent implements OnInit {
     dataSource = new EncountersDataSource(this.encounterService, this.patientId);
 
     constructor(private encounterService: EncounterService,
-                private store: Store<AppState>) {
+                private store: Store<AppState>,
+                private appStateService: AppStateService) {
         store.pipe(select('app')).subscribe(res => {
             localStorage.setItem('store', JSON.stringify(res));
         });
@@ -35,7 +37,7 @@ export class HomeComponent implements OnInit {
     getClientEncounters(patientId: number) {
         this.encounterService.getEncounters(patientId).subscribe(data => {
             // console.log(data);
-            this.store.dispatch(new Consent.IsEnrolled(true));
+            /*this.store.dispatch(new Consent.IsEnrolled(true));
             for (let i = 0; i < data.length; i++) {
                 if (data[i]['finalResult'] == 'Positive') {
                     this.countPositive += 1;
@@ -46,7 +48,8 @@ export class HomeComponent implements OnInit {
                 if (data[i]['partnerListingConsent'] == 'Yes') {
                     this.store.dispatch(new Consent.ConsentPartnerListing(true));
                 }
-            }
+            }*/
+            this.appStateService.initializeAppState();
         }, err => {
             console.log(err);
         });

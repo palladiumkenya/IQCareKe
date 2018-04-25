@@ -10,6 +10,7 @@ namespace IQCare.Common.BusinessProcess.Commands.Encounter
         public int? PatientMasterVisitId { get; set; }
         public int? EncounterId { get; set; }
         public int AppStateId { get; set; }
+        public string AppStateObject { get; set; }
     }
 
     public class AddAppStoreResponse

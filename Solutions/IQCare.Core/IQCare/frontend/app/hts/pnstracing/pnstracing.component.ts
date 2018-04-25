@@ -6,6 +6,8 @@ import {Store} from '@ngrx/store';
 import * as Consent from '../../shared/reducers/app.states';
 import {NotificationService} from '../../shared/_services/notification.service';
 import {SnotifyService} from 'ng-snotify';
+import {AppEnum} from '../../shared/reducers/app.enum';
+import {AppStateService} from '../../shared/_services/appstate.service';
 
 @Component({
   selector: 'app-pnstracing',
@@ -28,7 +30,8 @@ export class PnsTracingComponent implements OnInit {
                 public zone: NgZone,
                 private store: Store<AppState>,
                 private snotifyService: SnotifyService,
-                private notificationService: NotificationService) {
+                private notificationService: NotificationService,
+                private appStateService: AppStateService) {
         this.maxDate = new Date();
         this.minDate = new Date();
     }
@@ -73,12 +76,16 @@ export class PnsTracingComponent implements OnInit {
         this.pnsTracing.TracingType = tracingType;
 
         this.pnsTracingService.addPnsTracing(this.pnsTracing).subscribe(data => {
-            console.log(data);
             const partnerPnsTraced = {
                 'partnerId': this.pnsTracing.PersonId,
                 'pnsTraced': true
             };
             this.store.dispatch(new Consent.IsPnsTracingDone(JSON.stringify(partnerPnsTraced)));
+            this.appStateService.addAppState(AppEnum.PNS_TRACING, JSON.parse(localStorage.getItem('personId')),
+                JSON.parse(localStorage.getItem('patientId')), null, null, JSON.stringify({
+                    'partnerId': this.pnsTracing.PersonId,
+                    'pnsTraced': true
+                })).subscribe();
 
             this.snotifyService.success('Successful saving PNS screening',
                 'PNS Tracing', this.notificationService.getConfig());

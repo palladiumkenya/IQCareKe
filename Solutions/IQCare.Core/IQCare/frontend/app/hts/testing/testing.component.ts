@@ -8,6 +8,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {SnotifyService} from 'ng-snotify';
 import {NotificationService} from '../../shared/_services/notification.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {AppStateService} from '../../shared/_services/appstate.service';
+import {AppEnum} from '../../shared/reducers/app.enum';
 
 @Component({
   selector: 'app-testing',
@@ -44,10 +46,10 @@ export class TestingComponent implements OnInit, AfterViewInit {
                 public zone: NgZone,
                 private snotifyService: SnotifyService,
                 private notificationService: NotificationService,
-                private fb: FormBuilder) {
+                private fb: FormBuilder,
+                private appStateService: AppStateService) {
         this.store.pipe(select('app')).subscribe(res => {
             this.isCoupleDiscordantDisabled = res['testedAs'];
-            console.log(this.isCoupleDiscordantDisabled);
         });
     }
 
@@ -74,8 +76,6 @@ export class TestingComponent implements OnInit, AfterViewInit {
             reasonsDeclinePartnerListing: new FormControl(this.finalTestingResults.reasonsDeclinePartnerListing, [Validators.required]),
             finalResultsRemarks: new FormControl(this.finalTestingResults.finalResultsRemarks,[Validators.required]),
         });
-
-        this.formTesting.controls.finalResultsRemarks.setValue('n/a');
 
         this.encounterService.getCustomOptions().subscribe(data => {
             const options = data['lookupItems'];
@@ -211,18 +211,39 @@ export class TestingComponent implements OnInit, AfterViewInit {
         console.log(this.formTesting);
         if (this.formTesting.valid) {
             this.finalTestingResults = {...this.finalTestingResults, ...this.formTesting.value};
+            console.log(this.finalTestingResults);
 
             const htsEncounterId = JSON.parse(localStorage.getItem('htsEncounterId'));
             const patientId = JSON.parse(localStorage.getItem('patientId'));
             const patientMasterVisitId = JSON.parse(localStorage.getItem('patientMasterVisitId'));
             const serviceAreaId = JSON.parse(localStorage.getItem('serviceAreaId'));
             const providerId = JSON.parse(localStorage.getItem('appUserId'));
+            const finalRes = this.finalTestingResults.finalResult;
+            const acceptList = this.finalTestingResults.acceptedPartnerListing;
 
             this.encounterService.addTesting(this.finalTestingResults, this.hiv1, this.hiv2,
                 htsEncounterId, providerId, patientId, patientMasterVisitId, serviceAreaId).subscribe(data => {
-                console.log(data);
-                this.snotifyService.success('Successfully saved', 'Testing', this.notificationService.getConfig());
-                this.zone.run(() => { this.router.navigate(['/registration/home'], {relativeTo: this.route }); });
+
+                    const options = this.hivFinalResultsOptions.filter(function( obj ) {
+                        return obj.itemId == finalRes;
+                    });
+
+                    const acceptListOption = this.yesNoOptions.filter(function (obj) {
+                        return obj.itemId == acceptList;
+                    });
+
+                    if (options[0]['itemName'] == 'Positive') {
+                        this.appStateService.addAppState(AppEnum.IS_POSITIVE, JSON.parse(localStorage.getItem('personId')),
+                            patientId, patientMasterVisitId, htsEncounterId).subscribe();
+                    }
+
+                    if (acceptListOption[0]['itemName'] == 'Yes') {
+                        this.appStateService.addAppState(AppEnum.CONSENT_PARTNER_LISTING, JSON.parse(localStorage.getItem('personId')),
+                            patientId, patientMasterVisitId, htsEncounterId).subscribe();
+                    }
+
+                    this.snotifyService.success('Successfully saved', 'Testing', this.notificationService.getConfig());
+                    this.zone.run(() => { this.router.navigate(['/registration/home'], {relativeTo: this.route }); });
             });
         } else {
             console.log(this.formTesting);

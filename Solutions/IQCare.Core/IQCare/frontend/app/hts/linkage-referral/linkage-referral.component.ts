@@ -11,6 +11,8 @@ import {Observable} from 'rxjs/Observable';
 import {debounceTime} from 'rxjs/operators';
 import {SnotifyService} from 'ng-snotify';
 import {NotificationService} from '../../shared/_services/notification.service';
+import {AppStateService} from '../../shared/_services/appstate.service';
+import {AppEnum} from '../../shared/reducers/app.enum';
 declare var $: any;
 
 @Component({
@@ -36,7 +38,8 @@ export class LinkageReferralComponent implements OnInit {
                 public zone: NgZone,
                 private store: Store<AppState>,
                 private snotifyService: SnotifyService,
-                private notificationService: NotificationService) {
+                private notificationService: NotificationService,
+                private appStateService: AppStateService) {
 
         this.myControl.valueChanges.pipe(
             debounceTime(400)
@@ -168,6 +171,9 @@ export class LinkageReferralComponent implements OnInit {
             this.store.pipe(select('app')).subscribe(res => {
                 localStorage.setItem('store', JSON.stringify(res));
             });
+
+            this.appStateService.addAppState(AppEnum.IS_REFERRED, this.referral.personId,
+                JSON.parse(localStorage.getItem('patientId')), null, null).subscribe();
 
             this.snotifyService.success('Successfully Referral', 'Referral', this.notificationService.getConfig());
 
