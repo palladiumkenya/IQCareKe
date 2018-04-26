@@ -32,3 +32,27 @@ BEGIN
 	ALTER TABLE ord_PatientPharmacyOrder ADD OrderedByName varchar(100)
 END
 GO
+
+If Exists(Select * from sys.columns where Name = N'AuditData' AND Object_ID = Object_ID(N'ord_Visit'))
+BEGIN
+	ALTER TABLE ord_Visit DROP COLUMN AuditData
+END
+GO
+
+If Exists(Select * from sys.columns where Name = N'CreateBy' AND Object_ID = Object_ID(N'PatientEncounter'))
+BEGIN
+	EXEC sp_rename 'patientEncounter.Createby', 'CreatedBy', 'COLUMN' 
+END
+GO
+
+If NOT Exists(Select * from sys.columns where Name = N'Status' AND Object_ID = Object_ID(N'PatientEncounter'))
+BEGIN
+	ALTER TABLE patientEncounter ADD Status int NOT NULL default 0
+END
+GO
+
+If NOT Exists(Select * from sys.columns where Name = N'AuditData' AND Object_ID = Object_ID(N'ord_visit'))
+BEGIN
+	ALTER TABLE ord_visit ADD AuditData XML
+END
+GO

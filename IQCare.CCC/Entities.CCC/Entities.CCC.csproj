@@ -150,6 +150,14 @@
     <Compile Include="Lookup\TestingSummaryStatistics.cs" />
     <Compile Include="pharmacy\PharmacyOrder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PSmart\FamilyInfo.cs" />
+    <Compile Include="PSmart\HivTestTracker.cs" />
+    <Compile Include="PSmart\ImmunizationTracker.cs" />
+    <Compile Include="PSmart\MotherDetailsView.cs" />
+    <Compile Include="PSmart\MstPatient.cs" />
+    <Compile Include="PSmart\PatientProgramStart.cs" />
+    <Compile Include="PSmart\SHR.cs" />
+    <Compile Include="PSmart\SmartcardPatientList.cs" />
     <Compile Include="Screening\PatientScreening.cs" />
     <Compile Include="Tb\PatientIcf.cs" />
     <Compile Include="Tb\PatientIcfAction.cs" />

@@ -1,5 +1,6 @@
 ﻿using DataAccess.Base;
 using DataAccess.Common;
+using DataAccess.Context.Repository;
 using DataAccess.Entity;
 using Entities.Queue;
 using Interface.Clinical;
@@ -36,6 +37,17 @@ namespace BusinessProcess.Clinical
                 ClsUtility.AddExtendedParameters("@PatientId", SqlDbType.Int, patientId);
                 return (DataTable)PatientManager.ReturnObject(ClsUtility.theParams, "pr_WaitingList_GetPatientsWaitingList", ClsUtility.ObjectEnum.DataTable);
             }
+        }
+
+        public WaitingQueue GetQueueById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public WaitingQueue GetQueueByName(string name)
+        {
+            QueueManagerRepository repo = new QueueManagerRepository();
+            return repo.QueueByName(name);
         }
 
         public DataTable GetQueuedPatient(int queueId, int moduleId)

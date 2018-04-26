@@ -18,8 +18,8 @@ namespace Entities.CCC.Triage
         public DateTime LMP { get; set; }
         public DateTime EDD { get; set; }
         public string PregnancyStatus { get; set; }
-        public int Outcome { get; set; }
-        public int PregnancyStatusId { get; set; }
+        public string Outcome { get; set; }
+        public int? PregnancyStatusId { get; set; }
         public string OutcomeStatus { get; set; }
     }
 }

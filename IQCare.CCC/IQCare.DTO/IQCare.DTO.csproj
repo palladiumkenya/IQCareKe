@@ -59,6 +59,9 @@
     <Compile Include="PharmacyEncorderOrderDto.cs" />
     <Compile Include="PlacerOrderNumberDto.cs" />
     <Compile Include="PrescriptionSourceDto.cs" />
+    <Compile Include="PSmart\DtoShr.cs" />
+    <Compile Include="PSmart\DtoSmartcardPatientList.cs" />
+    <Compile Include="PSmart\DtoUserAuth.cs" />
     <Compile Include="Registration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViralLoadResultsDto.cs" />

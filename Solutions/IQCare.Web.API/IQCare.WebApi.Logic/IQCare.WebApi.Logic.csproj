@@ -38,6 +38,10 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
       <HintPath>..\..\..\References\ADODB.dll</HintPath>
     </Reference>
+    <Reference Include="Application.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\Application.Common.dll</HintPath>
+    </Reference>
     <Reference Include="Application.Presentation">
       <HintPath>..\..\..\References\Application.Presentation.dll</HintPath>
     </Reference>
@@ -50,7 +54,24 @@
     <Reference Include="DataAccess.Context">
       <HintPath>..\..\..\References\DataAccess.Context.dll</HintPath>
     </Reference>
+    <Reference Include="Entities.Administration, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\Entities.Administration.dll</HintPath>
+    </Reference>
     <Reference Include="Entities.CCC, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <Reference Include="Entities.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <Reference Include="Entities.PatientCore, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\Entities.PatientCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Entities.PSmart, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\Entities.PSmart.dll</HintPath>
+    </Reference>
+    <Reference Include="Entities.Queue, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\Entities.Queue.dll</HintPath>
+    </Reference>
     <Reference Include="Entity.WebApi, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\References\Entity.WebApi.dll</HintPath>
@@ -61,9 +82,17 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\..\..\References\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="Interface.WebApi, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Interface.Clinical, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\References\Interface.WebApi.dll</HintPath>
+      <HintPath>..\..\..\References\Interface.Clinical.dll</HintPath>
+    </Reference>
+    <Reference Include="Interface.FormBuilder, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\Interface.FormBuilder.dll</HintPath>
+    </Reference>
+    <Reference Include="Interface.PatientCore, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\Interface.PatientCore.dll</HintPath>
     </Reference>
     <Reference Include="IQCare.CCC.UILogic, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -76,9 +105,6 @@
     <Reference Include="IQCare.Events, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\References\IQCare.Events.dll</HintPath>
-    </Reference>
-    <Reference Include="IQCare.Web.Api">
-      <HintPath>..\..\..\References\net461\IQCare.Web.Api.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -111,6 +137,7 @@
     <Compile Include="MappingEntities\ObservationResultEntity.cs" />
     <Compile Include="MappingEntities\PatientAppointmentEntity.cs" />
     <Compile Include="MappingEntities\PharmacyDispenseEntity.cs" />
+    <Compile Include="MappingEntities\PSmart\ClientShr.cs" />
     <Compile Include="MessageHandler\IIncomingMessageService.cs" />
     <Compile Include="MessageHandler\IncomingMessageService.cs" />
     <Compile Include="MessageHandler\IOutgoingMessageService.cs" />
@@ -123,12 +150,32 @@
     <Compile Include="MappingEntities\DrugPrescriptionEntity.cs" />
     <Compile Include="MappingEntities\PatientRegistrationEntity.cs" />
     <Compile Include="MappingEntities\ViralLoadResultEntity.cs" />
+    <Compile Include="MessageHandler\PSmartMesssageService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PSmart\FamilyInfoManager.cs" />
+    <Compile Include="PSmart\HivTestTrackerManager.cs" />
+    <Compile Include="PSmart\ImmunizationTrackerManager.cs" />
+    <Compile Include="PSmart\IPSmartAuthRequest.cs" />
+    <Compile Include="PSmart\IRequest.cs" />
+    <Compile Include="PSmart\MstPatientManager.cs" />
+    <Compile Include="PSmart\PSmartAuthManager.cs" />
+    <Compile Include="PSmart\PsmartMotherDetailsViewManager.cs" />
+    <Compile Include="PSmart\PSmartPatientProgramStartManager.cs" />
+    <Compile Include="PSmart\PsmartShrCardSerialManager.cs" />
+    <Compile Include="PSmart\PsmartShrManager.cs" />
+    <Compile Include="PSmart\PsmartStoreManager.cs" />
+    <Compile Include="PSmart\ShrApiManager.cs" />
+    <Compile Include="PSmart\SmartcardPatientListManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Interface.WebApi\Interface.WebApi.csproj">
+      <Project>{13CA40EB-1DB9-43C8-A1FA-CB6580D27DC3}</Project>
+      <Name>Interface.WebApi</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild">
     <Copy SourceFiles="@(IntermediateAssembly)" DestinationFolder="$(WebDir)" SkipUnchangedFiles="false" />

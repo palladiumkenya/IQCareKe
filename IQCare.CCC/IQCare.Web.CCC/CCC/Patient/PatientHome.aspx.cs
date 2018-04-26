@@ -272,11 +272,13 @@ namespace IQCare.Web.CCC.Patient
                             lblRegimenName.Text = ptnTreatmentInitiation.Regimen.ToString();
                             //lblCurrentRegimen.Text = "<span class='label label-success'>" + ptnTreatmentBaseline.Regimen.ToString() + "</span>";
                             lblARTInitiationDate.Text = ptnTreatmentBaseline.CreateDate.ToString("dd-MMM-yyyy");
+
+                           // lblRegimenName.Text = ptnTreatmentInitiation.Regimen.ToString();
+                            //lblCurrentRegimen.Text = "<span class='label label-success'>" + ptnTreatmentBaseline.Regimen.ToString() + "</span>";
+                            //lblARTInitiationDate.Text = ptnTreatmentBaseline.CreateDate.ToString("dd-MMM-yyyy");
                         }
 
-                        lblRegimenName.Text = ptnTreatmentInitiation.Regimen.ToString();
-                        //lblCurrentRegimen.Text = "<span class='label label-success'>" + ptnTreatmentBaseline.Regimen.ToString() + "</span>";
-                        lblARTInitiationDate.Text = ptnTreatmentBaseline.CreateDate.ToString("dd-MMM-yyyy");
+                        
                     }
                     else
                     {
@@ -386,6 +388,27 @@ namespace IQCare.Web.CCC.Patient
                                     lblvlDueDate.Text = "<span class='label label-danger'><strong> Overdue </strong></span>";
                                 }
                                 break;
+                        }
+                    }
+                    else
+                    {
+                        var patientEnrollment = new PatientEnrollmentManager();
+                        var enrolDate = patientEnrollment.GetPatientEnrollmentDate(PatientId);
+                        DateTime today = DateTime.Today;
+                        TimeSpan difference = today.Date - enrolDate.Date;
+                        int days = (int)difference.TotalDays;
+
+                        if (days < 180)
+                        {
+                            lblvlDueDate.Text = "<span class='label label-success'>" + enrolDate.AddMonths(6).ToString("dd-MMM-yyyy") + "</span>";
+                            lblVL.Text = "<span class='label label-success fa fa-exclamation'><strong>  VL Not Requested  </strong></span>";
+
+                        }
+                        else
+                        {
+
+                            lblVL.Text = "<span class='label label-danger'> Not Available </span>";
+                            lblvlDueDate.Text = "<span class='label label-danger'><strong> Overdue </strong></span>";
                         }
                     }
                     //}

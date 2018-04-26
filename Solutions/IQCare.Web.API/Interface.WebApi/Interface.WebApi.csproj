@@ -33,6 +33,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Entities.CCC, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\Entities.CCC.dll</HintPath>
+    </Reference>
+    <Reference Include="Entities.PSmart, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\Entities.PSmart.dll</HintPath>
+    </Reference>
+    <Reference Include="Entity.WebApi, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\Entity.WebApi.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,13 +58,19 @@
     <Compile Include="IApiInboxManager.cs" />
     <Compile Include="IApiInteropSystemsManager.cs" />
     <Compile Include="IApiOutboxManager.cs" />
+    <Compile Include="IBPsmartShrCardSerialManager.cs" />
+    <Compile Include="IFamilyInfoManager.cs" />
+    <Compile Include="IHivTestTrackerManager.cs" />
+    <Compile Include="IImmunizationTrackerManager.cs" />
+    <Compile Include="IMotherDetailsViewManager.cs" />
+    <Compile Include="IMstPatientManager.cs" />
+    <Compile Include="IPatientProgramStartManager.cs" />
+    <Compile Include="IPSmartAuthManager.cs" />
+    <Compile Include="IPsmartShrManager.cs" />
+    <Compile Include="IPsmartStoreManager.cs" />
+    <Compile Include="IShrApiManager.cs" />
+    <Compile Include="ISmartcardPatientListManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Entity.WebApi\Entity.WebApi.csproj">
-      <Project>{062E43AE-C832-49DE-8ACC-4FFC9ABB4073}</Project>
-      <Name>Entity.WebApi</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild">

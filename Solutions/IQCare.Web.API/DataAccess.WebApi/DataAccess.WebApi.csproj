@@ -39,6 +39,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\References\DataAccess.Context.dll</HintPath>
     </Reference>
+    <Reference Include="Entities.CCC, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\Entities.CCC.dll</HintPath>
+    </Reference>
+    <Reference Include="Entities.PSmart, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\Entities.PSmart.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\References\EntityFramework.dll</HintPath>
@@ -57,11 +65,62 @@
     <Compile Include="Interface\IApiInboxRepository.cs" />
     <Compile Include="Interface\IApiInteropSystemsRepository.cs" />
     <Compile Include="Interface\IApiOutboxRepository.cs" />
+    <Compile Include="Interface\ICardDetailsRepository.cs" />
+    <Compile Include="Interface\IExternalPatientIdRepository.cs" />
+    <Compile Include="Interface\IFamilyInfoRepository.cs" />
+    <Compile Include="Interface\IHivTestRepository.cs" />
+    <Compile Include="Interface\IHivTestTrackerRepository.cs" />
+    <Compile Include="Interface\IImmunizationRepository.cs" />
+    <Compile Include="Interface\IImmunizationTrackerRepository.cs" />
+    <Compile Include="Interface\IInternalPatientIdRepository.cs" />
+    <Compile Include="Interface\IMotherDetailsRepository.cs" />
+    <Compile Include="Interface\IMotherDetailsViewRepository.cs" />
+    <Compile Include="Interface\IMotherIdentifierRepository.cs" />
+    <Compile Include="Interface\IMotherNameRepository.cs" />
+    <Compile Include="Interface\IMstPatientReposiroty.cs" />
+    <Compile Include="Interface\INextOfKinRepository.cs" />
+    <Compile Include="Interface\INokNameRepository.cs" />
+    <Compile Include="Interface\IPatientAddressRepository.cs" />
+    <Compile Include="Interface\IPatientIdentificationRepository.cs" />
+    <Compile Include="Interface\IPatientNameRepository.cs" />
+    <Compile Include="Interface\IPatientProgramStartRepository.cs" />
+    <Compile Include="Interface\IPhysicalAddressRepository.cs" />
+    <Compile Include="Interface\IProviderDetailsRepository.cs" />
+    <Compile Include="Interface\IPSmartAuthRepository.cs" />
+    <Compile Include="Interface\IPsmartStoreRepository.cs" />
+    <Compile Include="Interface\IShrRepository.cs" />
+    <Compile Include="Interface\ISmartCardPatientListRepository.cs" />
     <Compile Include="Interface\IUnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PsmartContext.cs" />
     <Compile Include="Repository\ApiInboxRepository.cs" />
     <Compile Include="Repository\ApiInteropSystemRepository.cs" />
     <Compile Include="Repository\ApiOutboxRepository.cs" />
+    <Compile Include="Repository\CardDetailsRepository.cs" />
+    <Compile Include="Repository\ExternalPatientIdRepository.cs" />
+    <Compile Include="Repository\FamilyInfoRepository.cs" />
+    <Compile Include="Repository\HivTestRepository.cs" />
+    <Compile Include="Repository\HivTestTrackerRepository.cs" />
+    <Compile Include="Repository\ImmunizationRepository.cs" />
+    <Compile Include="Repository\ImmunizationTrackerRepository.cs" />
+    <Compile Include="Repository\InternalPatientIdRepository.cs" />
+    <Compile Include="Repository\MotherDetailsRepository.cs" />
+    <Compile Include="Repository\MotherDetailsViewRepository.cs" />
+    <Compile Include="Repository\MotherIdentifierRepository.cs" />
+    <Compile Include="Repository\MotherNameRepository.cs" />
+    <Compile Include="Repository\MstPatientRepository.cs" />
+    <Compile Include="Repository\NextOfKinRepository.cs" />
+    <Compile Include="Repository\NokNameRepository.cs" />
+    <Compile Include="Repository\PatientAddressRepository.cs" />
+    <Compile Include="Repository\PatientIdentificationRepository.cs" />
+    <Compile Include="Repository\PatientNameRepository.cs" />
+    <Compile Include="Repository\PatientPhysicalAddressRepository.cs" />
+    <Compile Include="Repository\PatientProgramStartRepository.cs" />
+    <Compile Include="Repository\ProviderDetailsRepository.cs" />
+    <Compile Include="Repository\PSmartAuthRepository.cs" />
+    <Compile Include="Repository\PsmartRepository.cs" />
+    <Compile Include="Repository\ShrRepository.cs" />
+    <Compile Include="Repository\SmartCardPatientListRepository.cs" />
     <Compile Include="Repository\UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>

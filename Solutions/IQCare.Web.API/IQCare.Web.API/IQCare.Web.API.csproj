@@ -48,6 +48,9 @@
 		<Reference Include="DataAccess.WebApi">
 			<HintPath>..\..\..\References\DataAccess.WebApi.dll</HintPath>
 		</Reference>
+		<Reference Include="Entity.WebApi">
+		  <HintPath>..\..\..\References\Entity.WebApi.dll</HintPath>
+		</Reference>
 		<Reference Include="EntityFramework">
 			<HintPath>..\..\..\References\EntityFramework.dll</HintPath>
 		</Reference>
@@ -60,17 +63,25 @@
 		<Reference Include="IQCare.Events">
 			<HintPath>..\..\..\References\IQCare.Events.dll</HintPath>
 		</Reference>
+		<Reference Include="IQCare.Web.UILogic">
+		  <HintPath>..\..\..\References\IQCare.Web.UILogic.dll</HintPath>
+		</Reference>
 		<Reference Include="IQCare.WebApi.Logic">
-			<HintPath>..\..\..\References\IQCare.WebApi.Logic.dll</HintPath>
+		  <HintPath>..\..\..\References\IQCare.WebApi.Logic.dll</HintPath>
 		</Reference>
 		<Reference Include="log4net">
 		  <HintPath>..\..\..\References\log4net.dll</HintPath>
 		</Reference>
 		<Reference Include="System.Configuration" />
 		<Reference Include="System.Web" />
-		<Reference Include="System.Web.Extensions">
-			<HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.Web.Extensions.dll</HintPath>
-		</Reference>
+    <Reference Include="Microsoft.JScript">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\Microsoft.JScript.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.Web.Extensions.dll</HintPath>
+    </Reference>
 	</ItemGroup>
 
 	<ItemGroup>

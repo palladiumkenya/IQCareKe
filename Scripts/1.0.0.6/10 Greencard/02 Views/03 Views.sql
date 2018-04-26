@@ -174,3 +174,11 @@ WHERE i.IdentifierTypeId = 1
 AND o.PatientMasterVisitId IS NOT NULL
   
 GO
+
+
+
+
+
+
+
+

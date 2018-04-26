@@ -72,7 +72,7 @@ namespace IQCare.Web.Api.Controllers.Interop
 
             log.Debug($"End Received {request}");
             log.Debug("Sent OK response");
-            return Ok();
+            return Ok(new { success = true });
         }
 
         // PUT api/values/5

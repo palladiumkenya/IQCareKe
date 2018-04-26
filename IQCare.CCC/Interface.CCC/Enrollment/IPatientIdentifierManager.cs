@@ -17,5 +17,6 @@ namespace Interface.CCC.Enrollment
         List<PatientEntityIdentifier> GetEntityIdentifiersByPatientIdEnrollmentId(int patientId,
             int patientEnrollmentId);
         List<PatientEntityIdentifier> GetAllPatientEntityIdentifiers(int patientId);
+        PatientEntityIdentifier GetPatientByCardSerialNumber(string cardSerialNumber);
     }
 }

@@ -418,7 +418,7 @@ namespace IQCare.CCC.UILogic
             try
             {
                 ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager,BusinessProcess.CCC");
-                return lookupManager.GetFacility(mflCode);
+                return lookupManager.GetFacility(mflCode.Trim());
             }
             catch (Exception e)
             {

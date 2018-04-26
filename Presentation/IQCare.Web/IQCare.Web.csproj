@@ -332,6 +332,7 @@
     <Content Include="favicon.ico" />
     <Content Include="frmFacilityHome.aspx" />
     <Content Include="Home\Default.aspx" />
+    <Content Include="hts\Home.aspx" />
     <Content Include="Images\iq_logo_small.gif" />
     <Content Include="Images\kenya1.png" />
     <Content Include="Images\kenya_small.png" />
@@ -2188,6 +2189,13 @@
     </Compile>
     <Compile Include="frmSystemCache.aspx.designer.cs">
       <DependentUpon>frmSystemCache.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="hts\Home.aspx.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="hts\Home.aspx.designer.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
     <Compile Include="IQTools\frmLinearReport.aspx.designer.cs">
       <DependentUpon>frmLinearReport.aspx</DependentUpon>

@@ -34,15 +34,25 @@
     <Reference Include="DataAccess.Base">
       <HintPath>..\..\..\References\DataAccess.Base.dll</HintPath>
     </Reference>
+    <Reference Include="DataAccess.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\DataAccess.Common.dll</HintPath>
+    </Reference>
     <Reference Include="DataAccess.Context">
       <HintPath>..\..\..\References\DataAccess.Context.dll</HintPath>
     </Reference>
+    <Reference Include="DataAccess.Entity, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\DataAccess.Entity.dll</HintPath>
+    </Reference>
+    <Reference Include="Entities.CCC, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\Entities.CCC.dll</HintPath>
+    </Reference>
+    <Reference Include="Entities.PSmart, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="Entity.WebApi, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\References\Entity.WebApi.dll</HintPath>
-    </Reference>
-    <Reference Include="Interface.WebApi">
-      <HintPath>..\..\..\References\Interface.WebApi.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -56,6 +66,18 @@
   <ItemGroup>
     <Compile Include="BApiInBox.cs" />
     <Compile Include="BApiInteropSystems.cs" />
+    <Compile Include="BFamilyInfoManager.cs" />
+    <Compile Include="BHivTestTrackerManager.cs" />
+    <Compile Include="BImmunizationTrackerManager.cs" />
+    <Compile Include="BMotherDetailsViewManager.cs" />
+    <Compile Include="BMstPatientManager.cs" />
+    <Compile Include="BPatientProgramStartManager.cs" />
+    <Compile Include="BPSmartAuth.cs" />
+    <Compile Include="BPsmartShrCardSerialManager.cs" />
+    <Compile Include="BPsmartShrManager.cs" />
+    <Compile Include="BPsmartStore.cs" />
+    <Compile Include="BShrApi.cs" />
+    <Compile Include="BSmartcardPatientList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -66,6 +88,13 @@
       <Project>{88FAAEFB-FF2F-46CF-98ED-62AB2704A12F}</Project>
       <Name>DataAccess.WebApi</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Interface.WebApi\Interface.WebApi.csproj">
+      <Project>{13CA40EB-1DB9-43C8-A1FA-CB6580D27DC3}</Project>
+      <Name>Interface.WebApi</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

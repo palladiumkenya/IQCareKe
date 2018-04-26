@@ -13,6 +13,13 @@ using IQCare.CCC.UILogic.Interoperability.Enrollment;
 using IQCare.DTO;
 using IQCare.DTO.PatientAppointment;
 using IQCare.DTO.PatientRegistration;
+using IQCare.WebApi.Logic.PSmart;
+using Entity.WebApi.PSmart;
+using Application.Common;
+using Entities.CCC.Enrollment;
+using Entities.CCC.PSmart;
+using IQCare.CCC.UILogic.Enrollment;
+using IQCare.DTO.PSmart;
 
 namespace IQCare.WebApi.Logic.MessageHandler
 {
@@ -20,17 +27,22 @@ namespace IQCare.WebApi.Logic.MessageHandler
     {
         private readonly IApiInboxManager _apiInboxmanager;
         private readonly IDtoMapper _dtoMapper;
-
+        private readonly IPsmartStoreManager _psmartStoreManager;
+        private readonly IPSmartAuthManager _pSmartAuthManager;
         public IncomingMessageService()
         {
             _apiInboxmanager = new ApiInboxManager();
             _dtoMapper = new DtoMapper();
         }
 
-        public IncomingMessageService(IApiInboxManager apiInboxmanager, IDtoMapper dtoMapper)
+        public IncomingMessageService(IApiInboxManager apiInboxmanager, IDtoMapper dtoMapper, IPsmartStoreManager psmartStoreManager, IPSmartAuthManager pSmartAuthManager)
         {
             _apiInboxmanager = apiInboxmanager;
             _dtoMapper = dtoMapper;
+            // _smartcardPatientListManager = smartcardPatientListManager;
+            // _shrApiManager = new ShrApiManager();
+            _psmartStoreManager = psmartStoreManager;
+            _pSmartAuthManager = pSmartAuthManager;
         }
 
         public void Handle(string messageType, string message)
@@ -168,11 +180,11 @@ namespace IQCare.WebApi.Logic.MessageHandler
                 Mapper.Initialize(cfg =>
                 {
                     cfg.CreateMap<DtoDrugDispensed, PharmacyDispenseEntity>().ReverseMap();
-                    cfg.CreateMap<MappingEntities.MESSAGEHEADER,DTO.MESSAGE_HEADER>().ForMember(x=>x.MESSAGE_DATETIME, z=>z.Ignore())
+                    cfg.CreateMap<MappingEntities.MESSAGEHEADER, DTO.MESSAGE_HEADER>().ForMember(x => x.MESSAGE_DATETIME, z => z.Ignore())
                     .AfterMap((src, dst) =>
                     {
                         if (!src.MESSAGE_DATETIME.Equals(""))
-                        dst.MESSAGE_DATETIME = DateTime.ParseExact(pharmacyDispenseEntity.MESSAGE_HEADER.MESSAGE_DATETIME, "yyyyMMddHHmmss", null);
+                            dst.MESSAGE_DATETIME = DateTime.ParseExact(pharmacyDispenseEntity.MESSAGE_HEADER.MESSAGE_DATETIME, "yyyyMMddHHmmss", null);
 
                     });
                     cfg.CreateMap<DTO.CommonEntities.APPOINTMENTPATIENTIDENTIFICATION, MappingEntities.APPOINTMENTPATIENTIDENTIFICATION>().ReverseMap();
@@ -236,6 +248,7 @@ namespace IQCare.WebApi.Logic.MessageHandler
                 });
                 var appointment = Mapper.Map<PatientAppointSchedulingDTO>(appointmentEntity);
                 var processAppoinment = new ProcessPatientAppointmentMessage();
+
                 foreach (var itemAppointment in appointment.APPOINTMENT_INFORMATION)
                 {
                     if (itemAppointment.ACTION_CODE == "A")
@@ -286,6 +299,156 @@ namespace IQCare.WebApi.Logic.MessageHandler
                 incomingMessage.LogMessage = e.Message;
                 incomingMessage.Processed = false;
                 _apiInboxmanager.EditApiInbox(incomingMessage);
+            }
+        }
+
+        public List<DtoSmartcardPatientList> FetchSmartcardEligibleList()
+        {
+            SmartcardPatientListManager smartcardPatientListManager = new SmartcardPatientListManager();
+            return smartcardPatientListManager.GetSmartcardPatientList();
+
+            // return _smartcardPatientListManager.GetSmartCardPatientList().ToString();
+        }
+
+        public DtoShr FetchClientShr(psmartCard psmartCard)
+        {
+            PsmartShrManager psmartShrManager = new PsmartShrManager();
+
+            if (psmartCard.PATIENTID is int i)
+            {
+                var shr = psmartShrManager.GenerateShrForEmr(psmartCard.PATIENTID);
+
+                return shr;
+            }
+            else
+            {
+                PsmartShrCardSerialManager psmartShrCardSerialManager = new PsmartShrCardSerialManager();
+                var shr = psmartShrCardSerialManager.GenerateShrForEmr(psmartCard.CARD_SERIAL_NO);
+                return shr;
+            }
+        }
+
+        public DtoShr FetchClientShrNew(int id)
+        {
+            PsmartShrManager psmartShrManager = new PsmartShrManager();
+
+            if (id is int i)
+            {
+                var shr = psmartShrManager.GenerateShrForEmr(id);
+
+                return shr;
+            }
+            else
+            {
+                PsmartShrCardSerialManager psmartShrCardSerialManager = new PsmartShrCardSerialManager();
+                var shr = psmartShrCardSerialManager.GenerateShrForEmr("");
+                return shr;
+            }
+        }
+
+        public int SaveShrFromMiddleware(Psmart_Store p)
+        {
+            return _psmartStoreManager.SaveShr(p);
+        }
+
+        public string ProcessCardSerialNumberIdentifier(psmartCard psmartCard)
+        {
+            PatientEnrollmentManager patientEnrollmentManager = new PatientEnrollmentManager();
+            IdentifierManager identifierManager = new IdentifierManager();
+            PatientIdentifierManager patientIdentifierManager = new PatientIdentifierManager();
+            var patientEnrollment = patientEnrollmentManager.GetPatientEnrollmentByPatientId(psmartCard.PATIENTID);
+            int patientEnrollmentId = patientEnrollment[0].Id;
+            int results = 0;
+            // Identifier identifier = identifierManager.GetIdentifierByCode("GODS_NUMBER");
+            Identifier identifier = identifierManager.GetIdentifierByCode("CARD_SERIAL_NUMBER");
+            try
+            {
+                var patientEntityIdentifier = new PatientEntityIdentifier()
+                {
+                    IdentifierTypeId = identifier.Id,
+                    IdentifierValue = psmartCard.CARD_SERIAL_NO,
+                    PatientEnrollmentId = patientEnrollmentId,
+                    PatientId = psmartCard.PATIENTID
+                };
+
+                string serialNumber = null;
+                var identifierLists = patientIdentifierManager.CheckIfIdentifierNumberIsUsed(psmartCard.CARD_SERIAL_NO, patientEntityIdentifier.IdentifierTypeId);
+
+                foreach (var identifierList in identifierLists)
+                {
+                    serialNumber = identifierList.IdentifierValue;
+                }
+                if (string.IsNullOrEmpty(serialNumber))
+                {
+                    results = patientIdentifierManager.addPatientIdentifier(patientEntityIdentifier.PatientId,
+                        patientEntityIdentifier.PatientEnrollmentId, patientEntityIdentifier.IdentifierTypeId,
+                        patientEntityIdentifier.IdentifierValue, 0, false);
+                    return (results) > 0 ? "Card serial Number Linked to a patient as identifier" : "Failed linking card Serial Number to patient";
+                }
+                else
+                {
+                    return "Card Serial Number : " + psmartCard.CARD_SERIAL_NO + " is already assigned to a Patient.";
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        public string Authentication(string username, string password)
+        {
+            PsmartAuthUser _user = _pSmartAuthManager.LoginValidate(username);
+            string response = @"{""status"":""false"", ""DisplayName"":""""}";
+
+            if (null != _user)
+            {
+                Utility util = new Utility();
+
+                if (_user.Password == util.Encrypt(password))
+                {
+                    response = @"{""status"":""true"", ""DisplayName"":""" + _user.DisplayName + "}";
+                }
+            }
+            return response;
+        }
+
+        public DtoShr ProcessCardSerialNumberIdentifierBluecard(psmartCard psmartCard)
+        {
+            MstPatientManager patientManager = new MstPatientManager();
+            PsmartShrCardSerialManager psmartShrCardSerialManager = new PsmartShrCardSerialManager();
+            DtoShr NewSHR = new DtoShr();
+
+            try
+            {
+              //  int result = patientManager.UpdatePatientCardSerial(psmartCard);
+                string processCardStatus = this.ProcessCardSerialNumberIdentifier(psmartCard);
+
+                if (!string.IsNullOrEmpty(processCardStatus))
+                {
+                    NewSHR = psmartShrCardSerialManager.GenerateShrForEmr(psmartCard.CARD_SERIAL_NO);
+                }
+                return NewSHR;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        public DtoShr LoadFromEmr(string CARD_SERIAL_NO)
+        {
+            PsmartShrCardSerialManager psmartShrCardSerialManager = new PsmartShrCardSerialManager();
+            DtoShr NewSHR = new DtoShr();
+
+            try
+            {
+                NewSHR = psmartShrCardSerialManager.GenerateShrForEmr(CARD_SERIAL_NO);
+                return NewSHR;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
             }
         }
     }

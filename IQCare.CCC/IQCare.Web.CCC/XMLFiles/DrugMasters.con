@@ -2810,11 +2810,6 @@
     <StrengthName>12mg/60mg/100mg</StrengthName>
     <DeleteFlag>false</DeleteFlag>
   </Mst_Strength>
-  <Mst_Strength>
-    <StrengthId>548</StrengthId>
-    <StrengthName>300mg/100mg</StrengthName>
-    <DeleteFlag>false</DeleteFlag>
-  </Mst_Strength>
   <Mst_FrequencyUnits>
     <Id>1</Id>
     <Name>OD</Name>
@@ -9417,12 +9412,12 @@
   <Mst_Drug>
     <Drug_PK>1146</Drug_PK>
     <DrugName>Abacavir-ABC60/3TC30 60mg/30mg</DrugName>
-    <DeleteFlag>true</DeleteFlag>
+    <DeleteFlag>false</DeleteFlag>
   </Mst_Drug>
   <Mst_Drug>
     <Drug_PK>1147</Drug_PK>
     <DrugName>Lamivudine/Abacavir-ABC60/3TC30 60mg/30mg</DrugName>
-    <DeleteFlag>true</DeleteFlag>
+    <DeleteFlag>false</DeleteFlag>
   </Mst_Drug>
   <Mst_Drug>
     <Drug_PK>1148</Drug_PK>
@@ -9863,7 +9858,42 @@
   </Mst_Drug>
   <Mst_Drug>
     <Drug_PK>1224</Drug_PK>
-    <DrugName>Atazanavir/Rotonavir-Anzavir-R 300mg/100mg</DrugName>
+    <DrugName>Plendil - Felodipine 2.5mg Tabs</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1225</Drug_PK>
+    <DrugName>Plendil - Felodipine 5mg Tabs</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1226</Drug_PK>
+    <DrugName>Plendil - Felodipine 10mg Tabs</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1227</Drug_PK>
+    <DrugName>Zestoretic - Lisinopril/HTCZ 20mg/12.5mg Tabs</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1228</Drug_PK>
+    <DrugName>Hydrochlorothiazide (HCTZ) 12.5mg Tabs</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1229</Drug_PK>
+    <DrugName>Hydrochlorothiazide (HCTZ) 25mg Tabs</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1230</Drug_PK>
+    <DrugName>Hydrochlorothiazide (HCTZ) 50mg Tabs</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1231</Drug_PK>
+    <DrugName>Nifedipine 20mg Tabs</DrugName>
     <DeleteFlag>false</DeleteFlag>
   </Mst_Drug>
   <Mst_Generic>
@@ -10474,6 +10504,7 @@
   <Mst_Generic>
     <GenericId>153</GenericId>
     <GenericName>Hydrochlorothiazide</GenericName>
+    <GenericAbbrevation>HTCZ</GenericAbbrevation>
   </Mst_Generic>
   <Mst_Generic>
     <GenericId>154</GenericId>
@@ -10716,6 +10747,7 @@
   <Mst_Generic>
     <GenericId>213</GenericId>
     <GenericName>Nifedipine</GenericName>
+    <GenericAbbrevation>Nifedipine</GenericAbbrevation>
   </Mst_Generic>
   <Mst_Generic>
     <GenericId>214</GenericId>
@@ -12194,17 +12226,17 @@
   </Mst_Generic>
   <Mst_Generic>
     <GenericId>592</GenericId>
-    <GenericName>Atazanavir/Rotonavir-[ATV/R]</GenericName>
-    <GenericAbbrevation>ATVr</GenericAbbrevation>
+    <GenericName>Felodipine</GenericName>
   </Mst_Generic>
   <Mst_Generic>
     <GenericId>593</GenericId>
-    <GenericName>Atazanavir/Ritonavir</GenericName>
-    <GenericAbbrevation>ATV/r</GenericAbbrevation>
+    <GenericName>Lisinopril</GenericName>
+    <GenericAbbrevation>lisinopril</GenericAbbrevation>
   </Mst_Generic>
   <Mst_Generic>
     <GenericId>594</GenericId>
-    <GenericName>Special Antibiotic</GenericName>
+    <GenericName>Atazanavir/Ritonavir</GenericName>
+    <GenericAbbrevation>ATV/r</GenericAbbrevation>
   </Mst_Generic>
   <Mst_DrugType>
     <DrugTypeId>1</DrugTypeId>

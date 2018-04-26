@@ -9,6 +9,7 @@ using System.Data;
 using Application.Common;
 using DataAccess.Common;
 using Entities.Common;
+using System.Linq;
 
 namespace BusinessProcess.PatientCore
 {
@@ -25,8 +26,17 @@ namespace BusinessProcess.PatientCore
             PatientRepository repo = new PatientRepository();
             return repo.GetRecentPatientVisit(patientId);
         }
+        public Patient GetPatient(string cardSerialNumber)
+        {
+            PatientRepository repo = new PatientRepository();
+            var results = repo.Filter(p => p.CardSerialNumber == cardSerialNumber && !string.IsNullOrEmpty(cardSerialNumber)).ToList<Patient>().FirstOrDefault();
+            if (results != null)
+            {
+                return results;
+            }
+            return null;
+        }
 
-       
         public Patient GetPatient(int Id)
         {
             PatientRepository repo = new PatientRepository();

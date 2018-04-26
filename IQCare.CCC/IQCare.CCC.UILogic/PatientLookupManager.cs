@@ -113,6 +113,7 @@ namespace IQCare.CCC.UILogic
 
         public PatientLookup GetPatientByCccNumber(string cccNumber)
         {
+            cccNumber = cccNumber.Trim();
             PatientLookup patient = null;
             try
             {
