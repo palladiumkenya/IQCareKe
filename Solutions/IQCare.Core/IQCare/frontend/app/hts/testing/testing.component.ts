@@ -246,7 +246,6 @@ export class TestingComponent implements OnInit, AfterViewInit {
                     this.zone.run(() => { this.router.navigate(['/registration/home'], {relativeTo: this.route }); });
             });
         } else {
-            console.log(this.formTesting);
             return false;
         }
 
@@ -254,12 +253,10 @@ export class TestingComponent implements OnInit, AfterViewInit {
 
     onFinalResultsGivenChange() {
         if (this.isCoupleDiscordantDisabled) {
-            console.log('hehe');
             this.formTesting.controls.coupleDiscordant.disable({onlySelf: true});
         } else {
             this.formTesting.controls.coupleDiscordant.enable({onlySelf: false});
             this.formTesting.controls.coupleDiscordant.setValue('');
-            console.log('haha');
         }
     }
 
@@ -270,11 +267,8 @@ export class TestingComponent implements OnInit, AfterViewInit {
         });
 
         if (optionSelected[0].itemName == 'Yes') {
-            // this.isReasonsDeclinedListingDisabled = true;
             this.formTesting.controls.reasonsDeclinePartnerListing.disable({onlySelf: true});
         } else {
-            // this.isReasonsDeclinedListingDisabled = false;
-            // this.finalTestingResults.reasonsDeclinePartnerListing = null;
             this.formTesting.controls.reasonsDeclinePartnerListing.enable({onlySelf: false});
             this.formTesting.controls.reasonsDeclinePartnerListing.setValue('');
         }

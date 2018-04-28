@@ -41,6 +41,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
         localStorage.removeItem('patientMasterVisitId');
         localStorage.removeItem('isPartner');
         localStorage.setItem('serviceAreaId', '2');
+        localStorage.removeItem('editEncounterId');
     }
 
     ngAfterViewInit() {

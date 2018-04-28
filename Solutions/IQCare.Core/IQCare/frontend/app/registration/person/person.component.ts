@@ -154,6 +154,7 @@ export class PersonComponent implements OnInit {
             localStorage.removeItem('patientMasterVisitId');
             localStorage.removeItem('isPartner');
             localStorage.setItem('serviceAreaId', '2');
+            localStorage.removeItem('editEncounterId');
 
             this.store.dispatch(new Consent.ClearState());
         }
