@@ -33,6 +33,13 @@ export class EncounterService {
         );
     }
 
+    public getEncounter(encounterId: number): Observable<any> {
+        return this.http.get<any>(this.API_URL + this._url + '/getEncounter/' + encounterId).pipe(
+            tap(getEncounter => this.errorHandler.log('fetched a single client encounter')),
+            catchError(this.errorHandler.handleError<any[]>('getEncounter', []))
+        );
+    }
+
     public getCustomOptions(): Observable<any[]> {
         const options = JSON.stringify(['HIVTestKits', 'HIVResults', 'HIVFinalResults', 'YesNo', 'ReasonsPartner']);
 
@@ -92,6 +99,19 @@ export class EncounterService {
         return this.http.post(this.API_URL + this._url, JSON.stringify(Indata), httpOptions).pipe(
             tap((addedEncounter: Encounter) => this.errorHandler.log(`added encounter w/ id`)),
             catchError(this.errorHandler.handleError<Encounter>('addEncounter'))
+        );
+    }
+
+    public editEncounter(encounter: Encounter, encounterID: number, patientMasterVisitId: number): Observable<Encounter> {
+        const encounterBody = encounter;
+        const Indata = {
+            'Encounter': encounterBody
+        };
+
+        return this.http.put(this.API_URL + '/api/HtsEncounter/updateEncounter/' + encounterID + '/' + patientMasterVisitId,
+            JSON.stringify(Indata), httpOptions).pipe(
+            tap((editEncounter: Encounter) => this.errorHandler.log(`edited encounter w/ id` + encounterID)),
+            catchError(this.errorHandler.handleError<Encounter>('editEncounter'))
         );
     }
 }

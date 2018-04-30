@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import {EncounterService} from '../../hts/_services/encounter.service';
 import {Observable} from 'rxjs/Observable';
 import {DataSource} from '@angular/cdk/collections';
 import * as Consent from '../../shared/reducers/app.states';
 import {select, Store} from '@ngrx/store';
 import {AppStateService} from '../../shared/_services/appstate.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -17,12 +18,15 @@ export class HomeComponent implements OnInit {
     isPositive: boolean = false;
 
     displayedColumns = ['encounterDate', 'testType', 'provider', 'resultOne',
-        'resultTwo', 'finalResult', 'consent' , 'partnerListingConsent'];
+        'resultTwo', 'finalResult', 'consent' , 'partnerListingConsent', 'edit'];
     dataSource = new EncountersDataSource(this.encounterService, this.patientId);
 
     constructor(private encounterService: EncounterService,
                 private store: Store<AppState>,
-                private appStateService: AppStateService) {
+                private appStateService: AppStateService,
+                private router: Router,
+                private route: ActivatedRoute,
+                public zone: NgZone) {
         store.pipe(select('app')).subscribe(res => {
             localStorage.setItem('store', JSON.stringify(res));
         });
@@ -36,23 +40,16 @@ export class HomeComponent implements OnInit {
 
     getClientEncounters(patientId: number) {
         this.encounterService.getEncounters(patientId).subscribe(data => {
-            // console.log(data);
-            /*this.store.dispatch(new Consent.IsEnrolled(true));
-            for (let i = 0; i < data.length; i++) {
-                if (data[i]['finalResult'] == 'Positive') {
-                    this.countPositive += 1;
-                    this.isPositive = true;
-                    this.store.dispatch(new Consent.IsPositive(true));
-                }
-
-                if (data[i]['partnerListingConsent'] == 'Yes') {
-                    this.store.dispatch(new Consent.ConsentPartnerListing(true));
-                }
-            }*/
             this.appStateService.initializeAppState();
         }, err => {
             console.log(err);
         });
+    }
+
+    onEdit(element) {
+        localStorage.setItem('editEncounterId', element['encounterId']);
+
+        this.zone.run(() => { this.router.navigate(['/hts'], { relativeTo: this.route }); });
     }
 
 }

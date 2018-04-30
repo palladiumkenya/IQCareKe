@@ -10,7 +10,8 @@ GO
 CREATE VIEW [dbo].[HTS_EncountersView]
 AS
 SELECT DISTINCT
-ISNULL(ROW_NUMBER() OVER(ORDER BY PE.Id ASC), -1) AS RowID, 
+ISNULL(ROW_NUMBER() OVER(ORDER BY PE.Id ASC), -1) AS RowID,
+HE.Id EncounterId,
 PE.Id,
 PE.PatientId,
 PE.EncounterStartTime EncounterDate,

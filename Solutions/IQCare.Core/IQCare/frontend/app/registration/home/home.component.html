@@ -63,6 +63,13 @@
                                 <mat-cell *matCellDef="let element"> {{element.partnerListingConsent }} </mat-cell>
                             </ng-container>
 
+                            <ng-container matColumnDef="edit">
+                                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                                <mat-cell *matCellDef="let element">
+                                    <mat-icon (click)="onEdit(element)">edit</mat-icon>
+                                </mat-cell>
+                            </ng-container>
+
 
 
                             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

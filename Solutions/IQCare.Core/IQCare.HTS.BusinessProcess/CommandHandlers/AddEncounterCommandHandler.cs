@@ -49,38 +49,6 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                     await _unitOfWork.Repository<HtsEncounter>().AddAsync(htsEncounter);
                     await _unitOfWork.SaveAsync();
 
-                    // Create Testing instances
-                    //List<Core.Model.Testing> testings = new List<Core.Model.Testing>();
-                    //request.Testing.ForEach(t => testings.Add(new Core.Model.Testing
-                    //{
-                    //    ExpiryDate = t.ExpiryDate,
-                    //    HtsEncounterId = htsEncounter.Id,
-                    //    KitId = t.KitId,
-                    //    KitLotNumber = t.KitLotNumber,
-                    //    Outcome = t.Outcome,
-                    //    ProviderId = htsEncounter.ProviderId,
-                    //    TestRound = t.TestRound
-                    //}));
-
-                    //if (testings.Count > 0)
-                    //{
-                    //    await _unitOfWork.Repository<Core.Model.Testing>().AddRangeAsync(testings);
-                    //    await _unitOfWork.SaveAsync();
-                    //}
-                    
-
-                    //// Create HtsEncounterResult instance
-                    //HtsEncounterResult hTSEncounterResult = new HtsEncounterResult
-                    //{
-                    //    FinalResult = request.FinalTestingResult.FinalResult,
-                    //    HtsEncounterId = htsEncounter.Id,
-                    //    RoundOneTestResult = request.FinalTestingResult.FinalResultHiv1,
-                    //    RoundTwoTestResult = request.FinalTestingResult.FinalResultHiv2
-                    //};
-
-                    //await _unitOfWork.Repository<HtsEncounterResult>().AddAsync(hTSEncounterResult);
-                    //await _unitOfWork.SaveAsync();
-
                     if (request.Encounter.Disabilities.Any())
                     {
                         List<ClientDisability> clientDisabilities = new List<ClientDisability>();
@@ -88,7 +56,10 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         {
                             DisabilityId = x,
                             PatientEncounterId = request.Encounter.PatientEncounterID,
-                            PersonId = request.Encounter.PersonId
+                            PersonId = request.Encounter.PersonId,
+                            CreateDate = DateTime.Now,
+                            CreatedBy = request.Encounter.ProviderId,
+                            DeleteFlag = false
                         }));
                         await _unitOfWork.Repository<ClientDisability>().AddRangeAsync(clientDisabilities);
                         await _unitOfWork.SaveAsync();
