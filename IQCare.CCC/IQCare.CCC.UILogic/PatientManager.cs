@@ -93,5 +93,10 @@ namespace IQCare.CCC.UILogic
             return String.Format("Age: {0} Year(s) {1} Month(s)",
             Years, Months);
         }
+
+        public int GetPersonId(int patientId)
+        {
+            return _mgr.GetPersonId(patientId);
+        }
     }
 }

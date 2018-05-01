@@ -256,7 +256,7 @@
         else if (age < 15 && pregnancyStatus<1) {
              $("#muacs").prop("disabled", false);
         }
-        else if (gender === 'Female'){
+        else if (gender === 'Female' & pregnancyStatus>0){
             $("#muacs").prop("disabled", false);
         }
         else if (age > 15 || gender==='Male') {
@@ -311,6 +311,10 @@
                 var current = 0;
                 var previous = 0;
 
+                
+                $("#<%=weights.ClientID%>").val(parseInt(vitalList.Weight));
+                $("#<%=Heights.ClientID%>").val(parseInt(vitalList.Height));
+
 
                 switch (vitalsType) {
 
@@ -318,6 +322,9 @@
                         
                         current =parseInt($("#<%=weights.ClientID%>").val());
                         previous = parseInt(vitalList.Weight);
+
+                        $("#<%=weights.ClientID%>").val(parseInt(vitalList.Weight));
+                        $("#<%=Heights.ClientID%>").val(parseInt(vitalList.Height));
 
                         if (current>previous && previous>0) {
                             $("#weightAddons").empty("");

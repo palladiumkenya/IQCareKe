@@ -85,7 +85,7 @@ namespace IQCare.WebApi.Logic.PSmart
 
                 DTO.PSmart.CARDDETAILS cardDetails = entity.CARD_DETAILS;
                 DTO.PSmart.PATIENTIDENTIFICATION patientIdentification = entity.PATIENT_IDENTIFICATION;
-              List<DTO.PSmart.NEXTOFKIN> nextOfKin = entity.NEXT_OF_KIN;
+                List<DTO.PSmart.NEXTOFKIN> nextOfKin = entity.NEXT_OF_KIN;
                 List<DTO.PSmart.IMMUNIZATION> immunizations = entity.IMMUNIZATION;
                 List<DTO.PSmart.HIVTEST> hivTests = entity.HIV_TEST;
                 DTO.PSmart.PATIENTNAME clientName = patientIdentification.PATIENT_NAME;

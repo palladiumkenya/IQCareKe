@@ -7,5 +7,6 @@ namespace Interface.CCC.Enrollment
     {
         int AddPersonIdentifier(PersonIdentifier personIdentifier);
         List<PersonIdentifier> GetPersonIdenfiers(int personId, int identifierId);
+        List<PersonIdentifier> CheckIfPersonIdentifierExists(string identifierValue, int identifierTypeId);
     }
 }
