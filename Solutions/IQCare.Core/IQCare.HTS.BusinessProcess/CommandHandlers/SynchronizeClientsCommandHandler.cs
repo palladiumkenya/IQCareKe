@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using IQCare.Common.BusinessProcess.Commands.Setup;
 using IQCare.Common.BusinessProcess.Services;
 using IQCare.Common.Core.Models;
 using IQCare.Common.Infrastructure;
 using IQCare.HTS.BusinessProcess.Commands;
 using IQCare.HTS.BusinessProcess.Services;
+using IQCare.HTS.Infrastructure;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
@@ -16,13 +18,16 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
     public class SynchronizeClientsCommandHandler : IRequestHandler<SynchronizeClientsCommand, Result<SynchronizeClientsResponse>>
     {
         private readonly ICommonUnitOfWork _unitOfWork;
-        public SynchronizeClientsCommandHandler(ICommonUnitOfWork unitOfWork)
+        private readonly IHTSUnitOfWork _htsUnitOfWork;
+        public SynchronizeClientsCommandHandler(ICommonUnitOfWork unitOfWork, IHTSUnitOfWork htsUnitOfWork)
         {
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
+            _htsUnitOfWork = htsUnitOfWork ?? throw new ArgumentNullException(nameof(htsUnitOfWork));
         }
 
         public async Task<Result<SynchronizeClientsResponse>> Handle(SynchronizeClientsCommand request, CancellationToken cancellationToken)
         {
+            using (_htsUnitOfWork)
             using (_unitOfWork)
             {
                 try
@@ -31,7 +36,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                     for (int i = 0; i < request.CLIENTS.Count; i++)
                     {
                         RegisterPersonService registerPersonService = new RegisterPersonService(_unitOfWork);
-                        EncounterTestingService encounterTestingService = new EncounterTestingService(_unitOfWork);
+                        EncounterTestingService encounterTestingService = new EncounterTestingService(_unitOfWork, _htsUnitOfWork);
 
                         string firstName = request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME;
                         string middleName = request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME;
@@ -88,15 +93,21 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
 
                         int encounterTypeId = emrEncounterTypes.ItemId;
 
+                        //Get consent to testing
                         int consentValue = request.CLIENTS[i].ENCOUNTER.PRE_TEST.CONSENT;
-
                         var consentType = await _unitOfWork.Repository<LookupItemView>().Get(x => x.MasterName == "ConsentType" && x.ItemName == "ConsentToListPartners").FirstOrDefaultAsync();
                         int consentTypeId = consentType != null ? consentType.ItemId : 0;
 
+                        //Get TBStatus masterId
                         var screeningType = await _unitOfWork.Repository<LookupItemView>().Get(x => x.MasterName == "TBStatus").FirstOrDefaultAsync();
                         int screeningTypeId = screeningType != null ? screeningType.MasterId : 0;
-
                         int tbStatus = request.CLIENTS[i].ENCOUNTER.PRE_TEST.TB_SCREENING;
+
+                        //Get Consent to screen partners itemId
+                        var consentPartnerType = await _unitOfWork.Repository<LookupItemView>()
+                            .Get(x => x.MasterName == "ConsentType" && x.ItemName == "ConsentToListPartners")
+                            .FirstOrDefaultAsync();
+                        int consentListPartnersTypeId = consentPartnerType != null ? consentPartnerType.ItemId : 0;
 
                         string htsEncounterRemarks = request.CLIENTS[i].ENCOUNTER.PRE_TEST.REMARKS;
                         int clientEverTested = request.CLIENTS[i].ENCOUNTER.PRE_TEST.EVER_TESTED;
@@ -108,6 +119,29 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         int clientTestedAs = request.CLIENTS[i].ENCOUNTER.PRE_TEST.TESTED_AS;
                         int monthsSinceLastTest = request.CLIENTS[i].ENCOUNTER.PRE_TEST.MONTHS_SINCE_LAST_TEST;
                         List<int> clientDisabilities = request.CLIENTS[i].ENCOUNTER.PRE_TEST.DISABILITIES;
+                        int pnsAccepted = request.CLIENTS[i].ENCOUNTER.HIV_TESTS.SUMMARY.PNS_ACCEPTED;
+                        int pnsDeclineReason = request.CLIENTS[i].ENCOUNTER.HIV_TESTS.SUMMARY.PNS_DECLINE_REASON;
+                        List<NewTests> screeningTests = request.CLIENTS[i].ENCOUNTER.HIV_TESTS.SCREENING;
+                        List<NewTests> confirmatoryTests = request.CLIENTS[i].ENCOUNTER.HIV_TESTS.CONFIRMATORY;
+                        int coupleDiscordant = request.CLIENTS[i].ENCOUNTER.HIV_TESTS.SUMMARY.COUPLE_DISCORDANT;
+                        int finalResultGiven = request.CLIENTS[i].ENCOUNTER.HIV_TESTS.SUMMARY.FINAL_RESULT_GIVEN;
+                        int roundOneTestResult = request.CLIENTS[i].ENCOUNTER.HIV_TESTS.SUMMARY.SCREENING_RESULT;
+                        int? roundTwoTestResult = request.CLIENTS[i].ENCOUNTER.HIV_TESTS.SUMMARY.CONFIRMATORY_RESULT;
+                        int? finalResult = request.CLIENTS[i].ENCOUNTER.HIV_TESTS.SUMMARY.FINAL_RESULT;
+                        DateTime dateLinkageEnrolled = DateTime.ParseExact(request.CLIENTS[i].ENCOUNTER.LINKAGE.DATE_ENROLLED, "yyyyMMdd", null);
+                        string linkageCCCNumber = request.CLIENTS[i].ENCOUNTER.LINKAGE.CCC_NUMBER;
+                        string linkageFacility = request.CLIENTS[i].ENCOUNTER.LINKAGE.FACILITY;
+                        string healthWorker = request.CLIENTS[i].ENCOUNTER.LINKAGE.HEALTH_WORKER;
+                        string carde = request.CLIENTS[i].ENCOUNTER.LINKAGE.CARDE;
+
+                        //Tracing
+                        var enrollmentTracing = await _unitOfWork.Repository<LookupItemView>()
+                            .Get(x => x.MasterName == "TracingType" && x.ItemName == "Enrolment").FirstOrDefaultAsync();
+                        int tracingType = enrollmentTracing.ItemId;
+                        DateTime tracingDate = DateTime.ParseExact(request.CLIENTS[i].ENCOUNTER.TRACING.TRACING_DATE, "yyyyMMdd", null);
+                        int mode = request.CLIENTS[i].ENCOUNTER.TRACING.TRACING_MODE;
+                        int outcome = request.CLIENTS[i].ENCOUNTER.TRACING.TRACING_OUTCOME;
+                        string tracingRemarks = String.Empty;
 
                         //add patient master visit
                         var patientMasterVisit = await encounterTestingService.AddPatientMasterVisit(patient.Id, 2, encounterDate, 1);
@@ -128,6 +162,38 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         //add disabilities
                         var disabilities = await encounterTestingService.addDisabilities(clientDisabilities,
                             patientEncounter.Id, person.Id, providerId);
+
+                        //add consent to list partners
+                        var partnersConsent = await encounterTestingService.addPatientConsent(patient.Id,
+                            patientMasterVisit.Id, 2, pnsAccepted, consentListPartnersTypeId, encounterDate, providerId,
+                            pnsDeclineReason);
+
+                        //add screening tests for client
+                        var clientScreeningTesting =
+                            await encounterTestingService.addTesting(screeningTests, htsEncounter.Id, providerId);
+
+                        //add confirmatory tests for client
+                        var clientConfirmatoryTesting =
+                            await encounterTestingService.addTesting(confirmatoryTests, htsEncounter.Id, providerId);
+
+                        //update testing for client
+                        htsEncounter.CoupleDiscordant = coupleDiscordant;
+                        htsEncounter.FinalResultGiven = finalResultGiven;
+
+                        await encounterTestingService.updateHtsEncounter(htsEncounter.Id, htsEncounter);
+                        var htsEncounterResult = await encounterTestingService.addHtsEncounterResult(htsEncounter.Id, roundOneTestResult, roundTwoTestResult, finalResult);
+
+                        //add referral
+                        /*await encounterTestingService.addReferral(person.Id, fromFacilityId: 1, serviceAreaId: 1,
+                            referralReason: 1, referredTo: 1, userId: 1, dateToBeEnrolled: DateTime.Now);*/
+
+                        //add Client Tracing
+                        var clientTracing = await encounterTestingService.addTracing(person.Id, tracingType, tracingDate, mode, outcome,
+                            providerId, tracingRemarks);
+
+                        //add Client Linkage
+                        var clientLinkage = await encounterTestingService.addLinkage(person.Id, dateLinkageEnrolled,
+                            linkageCCCNumber, linkageFacility, providerId, healthWorker, carde);
                     }
 
                     return Result<SynchronizeClientsResponse>.Valid(new SynchronizeClientsResponse()
