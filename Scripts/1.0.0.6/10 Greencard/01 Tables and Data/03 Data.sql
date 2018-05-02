@@ -44,6 +44,13 @@ INSERT INTO LookupMasterItem(LookupMasterId,LookupItemId,DisplayName,OrdRank) VA
 INSERT INTO LookupMasterItem(LookupMasterId,LookupItemId,DisplayName,OrdRank) VALUES((SELECT top 1 id FROM LookupMaster l WHERE l.Name='EncounterType'),(SELECT TOP 1 Id FROM LookupItem i WHERE i.Name='lab-encounter'),'lab-encounter',6);
 INSERT INTO LookupMasterItem(LookupMasterId,LookupItemId,DisplayName,OrdRank) VALUES((SELECT top 1 id FROM LookupMaster l WHERE l.Name='EncounterType'),(SELECT TOP 1 Id FROM LookupItem i WHERE i.Name='Pharmacy-encounter'),'Pharmacy-encounter',7);
 
+----Add PrEP and PEP regimens to Regimen classification
+insert into LookupMasterItem values((select top 1 Id from LookupMaster where Name='RegimenClassification'),
+(select top 1 Id from LookupItem where name = 'PrEP Regimens'),'PrEP Regimens',8)
+
+insert into LookupMasterItem values((select top 1 Id from LookupMaster where Name='RegimenClassification'),
+(select top 1 Id from LookupItem where name = 'PEP Regimens'),'PEP Regimens',9)
+
 ---duplicate PMTCT Regimens
 update LookupMasterItem set LookupItemId=(select id from lookupitem where name = 'PMTCTRegimens') 
 where LookupItemId=(select id from lookupitem where name = 'PMTCT Regimens')
