@@ -10,7 +10,14 @@ namespace IQCare.CCC.UILogic.Interoperability
         private static  InteropUser instance = null;
 
         private static readonly object padlock = new object();
-        public static int UserId = 0;
+        private int _userId;
+        public static int UserId
+        {
+            get
+            {
+                return Instance._userId;
+            }
+        }
         
         private InteropUser()
         {
@@ -18,7 +25,7 @@ namespace IQCare.CCC.UILogic.Interoperability
             DataTable dt = _mgr.GetUserByUserName("interop");
             if(dt != null && dt.Rows.Count == 1)
             {
-                UserId = Convert.ToInt32(dt.Rows[0]["UserId"]);
+                _userId = Convert.ToInt32(dt.Rows[0]["UserId"]);
             }
         }
         public static InteropUser Instance
@@ -27,7 +34,7 @@ namespace IQCare.CCC.UILogic.Interoperability
             {
                 lock (padlock)
                 {
-                    if (instance == null)
+                    if (instance == null )
                     {
                         instance = new InteropUser();
                     }
