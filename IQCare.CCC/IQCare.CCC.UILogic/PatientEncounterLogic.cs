@@ -213,7 +213,7 @@ namespace IQCare.CCC.UILogic
 
                 return filteredList[0].multiplier;
             }
-            catch(Exception ex)
+            catch
             {
                 return "0";
             }
