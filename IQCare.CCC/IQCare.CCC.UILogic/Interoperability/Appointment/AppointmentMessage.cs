@@ -191,7 +191,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
                 string appointmentReason = String.Empty;
                 string appointmentStatus = String.Empty;
                 string appointmentType = String.Empty;
-
+                int interopUserId = InteropUser.UserId;
                 foreach (var item in appointmentScheduling.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID)
                 {
                     if (item.IDENTIFIER_TYPE == "CCC_NUMBER" && item.ASSIGNING_AUTHORITY == "CCC")
@@ -213,13 +213,20 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
                             var personIdentifiers = personIdentifierManager.GetPersonIdentifiers(patient.PersonId, identifier.Id);
                             if (personIdentifiers.Count == 0)
                             {
-                                personIdentifierManager.AddPersonIdentifier(patient.PersonId, identifier.Id, godsNumber, 1);
+                                personIdentifierManager.AddPersonIdentifier(patient.PersonId, identifier.Id, godsNumber,interopUserId
+                 );
                             }
                         }
 
                         int patientMasterVisitId = masterVisitManager.GetLastPatientVisit(patient.Id).Id;
-                        int serviceAreaId = lookupLogic.GetItemIdByGroupAndItemName("ServiceArea", "MoH 257 GREENCARD")[0].ItemId;
-                        
+                        int serviceAreaId = 0;
+                        var areas = lookupLogic.GetItemIdByGroupAndItemName("ServiceArea", "MoH 257 GREENCARD");
+                        if (null == areas || areas.Count == 0)
+                        {
+                            serviceAreaId = 203;
+                        }
+                        else { serviceAreaId = areas[0].ItemId;
+                        }
 
                         foreach (var appointment in appointmentScheduling.APPOINTMENT_INFORMATION)
                         {
@@ -310,7 +317,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
                                     StatusId = statusId
                                 };
 
-                                int appointmentId = manager.AddPatientAppointments(patientAppointment);
+                                int appointmentId = manager.AddPatientAppointments(patientAppointment,false);
                                 InteropPlacerValues placerValues = new InteropPlacerValues()
                                 {
                                     IdentifierType = 3,

@@ -66,6 +66,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="Interface.Administration, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Interface.Administration.dll</HintPath>
+    </Reference>
     <Reference Include="Interface.CCC, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\Interface.CCC.dll</HintPath>
@@ -134,6 +138,7 @@
     <Compile Include="Interoperability\Enrollment\ProcessRegistration.cs" />
     <Compile Include="Interoperability\InteropPlacerTypeManager.cs" />
     <Compile Include="Interoperability\InteropPlacerValuesManager.cs" />
+    <Compile Include="Interoperability\InteropUser.cs" />
     <Compile Include="Interoperability\Observation\PatientVitalsMessageManager.cs" />
     <Compile Include="Interoperability\Observation\ProcessObservation.cs" />
     <Compile Include="Interoperability\Observation\ProcessObservationResultMessage.cs" />
