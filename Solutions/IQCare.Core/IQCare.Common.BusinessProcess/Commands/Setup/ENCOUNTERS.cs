@@ -25,8 +25,8 @@ namespace IQCare.Common.BusinessProcess.Commands.Setup
     public class NewTracing
     {
         public string TRACING_DATE { get; set; }
-        public string TRACING_MODE { get; set; }
-        public string TRACING_OUTCOME { get; set; }
+        public int TRACING_MODE { get; set; }
+        public int TRACING_OUTCOME { get; set; }
     }
 
     public class NewReferral
@@ -44,23 +44,24 @@ namespace IQCare.Common.BusinessProcess.Commands.Setup
 
     public class SUMMARY
     {
-        public string SCREENING_RESULT { get; set; }
-        public string CONFIRMATORY_RESULT { get; set; }
-        public string FINAL_RESULT { get; set; }
-        public string FINAL_RESULT_GIVEN { get; set; }
-        public string COUPLE_DISCORDANT { get; set; }
-        public string PNS_ACCEPTED { get; set; }
-        public string PNS_DECLINE_REASON { get; set; }
+        public int SCREENING_RESULT { get; set; }
+        public int CONFIRMATORY_RESULT { get; set; }
+        public int FINAL_RESULT { get; set; }
+        public int FINAL_RESULT_GIVEN { get; set; }
+        public int COUPLE_DISCORDANT { get; set; }
+        public int PNS_ACCEPTED { get; set; }
+        public int PNS_DECLINE_REASON { get; set; }
         public string REMARKS { get; set; }
     }
 
     public class NewTests
     {
-        public string KIT_TYPE { get; set; }
+        public int KIT_TYPE { get; set; }
         public string KIT_OTHER { get; set; }
         public string LOT_NUMBER { get; set; }
         public string EXPIRY_DATE { get; set; }
-        public string RESULT { get; set; }
+        public int RESULT { get; set; }
+        public int TEST_ROUND { get; set; }
     }
 
     public class PLACER_DETAIL
