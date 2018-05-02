@@ -1625,8 +1625,10 @@
                                     
                                         $("#<%=lblFirstline.ClientID%>").text(moment(itemList.DateStartedOnFirstline).format("DD-MMM-YYYY"));
                                         $("#<%=lblcohort.ClientID%>").text(itemList.Cohort);
-                                        $("#<%=lblRegimenName.ClientID%>").text(itemList.RegimenName);
-                                        $("#<%=lblbaselineVL.ClientID%>").text(itemList.BaselineViralLoad + ' copies/ml');
+                                    if (itemList.RegimenName === '') { $("#<%=lblRegimenName.ClientID%>").text("Not Issued");
+                                    } else {
+                                    $("#<%=lblRegimenName.ClientID%>").text(itemList.RegimenName);}
+                                        if (itemList.BaselineViralLoad === '') { $("#<%=lblbaselineVL.ClientID%>").text('Not Taken');} else { $("#<%=lblbaselineVL.ClientID%>").text(itemList.BaselineViralLoad + ' copies/ml');}
                                         $("#<%=lblBlDate.ClientID%>").text(moment(itemList.BaselineViralLoadDate).format("DD-MMM-YYYY"));
                                 }
                                 else if (patientType === 'New') {

@@ -59,9 +59,9 @@ namespace BusinessProcess.CCC.Patient
                 var patientInfo = unitOfWork.PatientRepository.GetById(id);
                 unitOfWork.Dispose();
                 return patientInfo;
-            }
-                
+            }                
         }
+
 
         public int UpdatePatient(PatientEntity patient, int id)
         {
@@ -131,6 +131,18 @@ namespace BusinessProcess.CCC.Patient
                 }
                 unitOfWork.Dispose();
                 return patientRegistrationLookups;
+            }
+        }
+
+        public int GetPersonId(int patientId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                int personId = unitOfWork.PatientRegistrationLookupRepository.FindBy(x => x.Id == patientId)
+                    .Select(x=>x.PersonId)
+                    .FirstOrDefault();
+
+                return personId;
             }
         }
     }

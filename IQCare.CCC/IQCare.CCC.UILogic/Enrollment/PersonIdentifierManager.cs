@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Application.Presentation;
 using Entities.CCC.Enrollment;
+using Entities.PatientCore;
 using Interface.CCC.Enrollment;
 
 namespace IQCare.CCC.UILogic.Enrollment
@@ -43,6 +44,21 @@ namespace IQCare.CCC.UILogic.Enrollment
             }
             catch (Exception e)
             {
+                throw new Exception(e.Message);
+            }
+        }
+
+        public List<PersonIdentifier> CheckIfPersonIdentifierExists(string identifierValue, int identifierTypeId)
+        {
+            try
+            {
+               // return _mgr .CheckIfIdentifierNumberIsUsed(identifierValue, identifierTypeId);
+                var identifierExist = _mgr.CheckIfPersonIdentifierExists(identifierValue, identifierTypeId);
+                return identifierExist;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
                 throw new Exception(e.Message);
             }
         }

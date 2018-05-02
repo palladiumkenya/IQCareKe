@@ -33,5 +33,18 @@ namespace BusinessProcess.CCC.Enrollment
                 return identifierList;
             }
         }
+
+        public List<PersonIdentifier> CheckIfPersonIdentifierExists(string identifierValue, int identifierTypeId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var identifiers =
+                    unitOfWork.PersonIdentifierRepository.FindBy(
+                        x => x.IdentifierValue == identifierValue && x.IdentifierId == identifierTypeId).ToList();
+                unitOfWork.Dispose();
+                return identifiers;
+            }
+        }
+
     }
 }
