@@ -213,8 +213,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
                             var personIdentifiers = personIdentifierManager.GetPersonIdentifiers(patient.PersonId, identifier.Id);
                             if (personIdentifiers.Count == 0)
                             {
-                                personIdentifierManager.AddPersonIdentifier(patient.PersonId, identifier.Id, godsNumber,interopUserId
-                 );
+                                personIdentifierManager.AddPersonIdentifier(patient.PersonId, identifier.Id, godsNumber,interopUserId                 );
                             }
                         }
 
@@ -314,7 +313,9 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
                                     DifferentiatedCareId = differentiatedCareId,
                                     ReasonId = reasonId,
                                     ServiceAreaId = serviceAreaId,
-                                    StatusId = statusId
+                                    StatusId = statusId,
+                                    CreatedBy= interopUserId,
+                                    CreateDate = DateTime.Now
                                 };
 
                                 int appointmentId = manager.AddPatientAppointments(patientAppointment,false);
@@ -362,6 +363,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
                 string appointmentReason = String.Empty;
                 string appointmentStatus = String.Empty;
                 string appointmentType = String.Empty;
+                int interopUserId = InteropUser.UserId;
 
                 foreach (var item in appointmentScheduling.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID)
                 {
@@ -384,7 +386,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
                             var personIdentifiers = personIdentifierManager.GetPersonIdentifiers(patient.PersonId, identifier.Id);
                             if (personIdentifiers.Count == 0)
                             {
-                                personIdentifierManager.AddPersonIdentifier(patient.PersonId, identifier.Id, godsNumber, 1);
+                                personIdentifierManager.AddPersonIdentifier(patient.PersonId, identifier.Id, godsNumber, interopUserId);
                             }
                         }
 
@@ -447,10 +449,27 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
                                     appointmentType = "Standard Care";
                                     break;
                             }
+                            var reasons = lookupLogic.GetItemIdByGroupAndItemName("AppointmentReason", appointmentReason);
+                            int reasonId = 0;
+                            if (reasons == null || reasons.Count > 0) {
+                                throw new Exception($"No matching reasons in the databases {appointmentReason}");
+                            }
+                            reasonId = reasons[0].ItemId;
+                            int statusId = 0;
+                            var status = lookupLogic.GetItemIdByGroupAndItemName("AppointmentStatus", appointmentStatus);
+                            if (status == null || status.Count > 0)
+                            {
+                                throw new Exception($"No matching appointmentstatus in the databases {appointmentStatus}");
+                            }
+                               statusId=  status[0].ItemId;
 
-                            int reasonId = lookupLogic.GetItemIdByGroupAndItemName("AppointmentReason", appointmentReason)[0].ItemId;
-                            int statusId = lookupLogic.GetItemIdByGroupAndItemName("AppointmentStatus", appointmentStatus)[0].ItemId;
-                            int differentiatedCareId = lookupLogic.GetItemIdByGroupAndItemName("DifferentiatedCare", appointmentType)[0].ItemId;
+                            int differentiatedCareId = 0;
+                            var diffCare = lookupLogic.GetItemIdByGroupAndItemName("DifferentiatedCare", appointmentType);
+                            if (diffCare == null || diffCare.Count > 0)
+                            {
+                                throw new Exception($"No matching differentiated care option in the databases {appointmentType}");
+                            }
+                            differentiatedCareId=  diffCare[0].ItemId;
 
                             InteropPlacerTypeManager interopPlacerTypeManager = new InteropPlacerTypeManager();
                             int interopPlacerTypeId = interopPlacerTypeManager.GetInteropPlacerTypeByName(appointment.PLACER_APPOINTMENT_NUMBER.ENTITY).Id;
@@ -478,7 +497,9 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
                                     DifferentiatedCareId = differentiatedCareId,
                                     ReasonId = reasonId,
                                     ServiceAreaId = serviceAreaId,
-                                    StatusId = statusId
+                                    StatusId = statusId,
+                                    CreatedBy= interopUserId,
+                                    CreateDate=DateTime.Now
                                 };
 
                                 int appointmentId = manager.AddPatientAppointments(patientAppointment);
