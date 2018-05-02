@@ -14,7 +14,7 @@ namespace Entities.CCC.Lookup
         public string SatelliteID { get; set; }        
         public int DeleteFlag { get; set; }
         public int UserID { get; set; }
-        [Column("NationalId")]
+        [Column("PosId")]
         public string MFLCode { get; set; }
         //public int AppGracePeriod { get; set; }
 
