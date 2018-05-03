@@ -3,6 +3,7 @@ using Entities.CCC.Lookup;
 using Entities.CCC.Visit;
 using Interface.CCC.Lookup;
 using Interface.CCC.Visit;
+using IQCare.Web.UILogic;
 using System;
 using System.Collections.Generic;
 using System.Web;
@@ -14,7 +15,7 @@ namespace IQCare.Web.CCC.Appointment
     {
         public int PatientId;
         public int PatientMasterVisitId;
-        
+        public int UserId;
         protected void Page_Load(object sender, EventArgs e)
         {
             this.GetSessionDetails();
@@ -71,6 +72,7 @@ namespace IQCare.Web.CCC.Appointment
         {
             PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
             PatientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientMasterVisitId"]);
+            UserId = SessionManager.UserId;
         }
     }
 }

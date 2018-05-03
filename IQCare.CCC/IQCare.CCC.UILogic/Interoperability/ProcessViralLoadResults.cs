@@ -31,6 +31,7 @@ namespace IQCare.CCC.UILogic.Interoperability
                     string receivingFacilityMFLCode = viralLoadResults.MesssageHeader.ReceivingFacility;
                     LookupLogic flm = new LookupLogic();
                     LookupFacility thisFacility = flm.GetFacility(receivingFacilityMFLCode);
+                    int interopUserId = InteropUser.UserId;
                     if (thisFacility == null)
                     {
                         Msg = $"The facility {receivingFacilityMFLCode} does not exist";
@@ -56,7 +57,7 @@ namespace IQCare.CCC.UILogic.Interoperability
                             //var visitType = flm.GetItemIdByGroupAndItemName("VisitType", "Enrollment")[0]
                             //    .ItemId;
                             int patientMasterVisitId =
-                                patientMasterVisitManager.AddPatientMasterVisit(patient.Id, 1, 316);
+                                patientMasterVisitManager.AddPatientMasterVisit(patient.Id, interopUserId, 316);
                             var listOfTestsOrdered = new List<ListLabOrder>();
                             var order = new ListLabOrder()
                             {
@@ -76,7 +77,7 @@ namespace IQCare.CCC.UILogic.Interoperability
                             var jss = new JavaScriptSerializer();
                             string patientLabOrder = jss.Serialize(listOfTestsOrdered);
                             //include userid and facility ID
-                           int orderId= labOrderManager.savePatientLabOrder(patient.Id, (int)patient.ptn_pk, 1, thisFacility.FacilityID, 203, patientMasterVisitId, sampleCollectionDate.ToString(), "IL lab order", patientLabOrder,"completed");
+                           int orderId= labOrderManager.savePatientLabOrder(patient.Id, (int)patient.ptn_pk, interopUserId, thisFacility.FacilityID, 203, patientMasterVisitId, sampleCollectionDate.ToString(), "IL lab order", patientLabOrder,"completed");
                             
                             labOrder = labOrderManager.GetLabOrdersById( orderId);
                             labDetails = labOrderManager.GetLabTestsOrderedById(labOrder.Id);

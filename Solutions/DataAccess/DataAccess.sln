@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemServer", "..\..\DataAccess\RemServer\RemServer.csproj", "{59A182CA-7E3E-4130-AA78-6D2E86E0EB4E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interface.IQToolsReport", "..\..\DataAccess\Interface.IQToolsReport\Interface.IQToolsReport.csproj", "{E3813087-AA07-4FD2-A695-FF80F19F4763}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8CD495D2-3A16-45E8-8A7F-876DD7BE550D} = {8CD495D2-3A16-45E8-8A7F-876DD7BE550D}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess.Common", "..\..\DataAccess\DataAccess.Common\DataAccess.Common.csproj", "{FA6D554F-BC52-454A-89D5-F8E576B3843E}"
 EndProject

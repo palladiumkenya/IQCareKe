@@ -159,7 +159,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
                             APPOINTMENT_LOCATION = appointmentLocation,
                             ACTION_CODE = "A",
                             APPOINTMENT_NOTE = appointmentMessage.Description,
-                            APPOINTMENT_HONORED = appointmentStatus
+                            APPOINTMENT_STATUS = appointmentStatus
                         };
 
                         appointmentScheduling.APPOINTMENT_INFORMATION.Add(appointmentInformation);
@@ -191,7 +191,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
                 string appointmentReason = String.Empty;
                 string appointmentStatus = String.Empty;
                 string appointmentType = String.Empty;
-
+                int interopUserId = InteropUser.UserId;
                 foreach (var item in appointmentScheduling.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID)
                 {
                     if (item.IDENTIFIER_TYPE == "CCC_NUMBER" && item.ASSIGNING_AUTHORITY == "CCC")
@@ -213,13 +213,19 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
                             var personIdentifiers = personIdentifierManager.GetPersonIdentifiers(patient.PersonId, identifier.Id);
                             if (personIdentifiers.Count == 0)
                             {
-                                personIdentifierManager.AddPersonIdentifier(patient.PersonId, identifier.Id, godsNumber, 1);
+                                personIdentifierManager.AddPersonIdentifier(patient.PersonId, identifier.Id, godsNumber,interopUserId                 );
                             }
                         }
 
                         int patientMasterVisitId = masterVisitManager.GetLastPatientVisit(patient.Id).Id;
-                        int serviceAreaId = lookupLogic.GetItemIdByGroupAndItemName("ServiceArea", "MoH 257 GREENCARD")[0].ItemId;
-                        
+                        int serviceAreaId = 0;
+                        var areas = lookupLogic.GetItemIdByGroupAndItemName("ServiceArea", "MoH 257 GREENCARD");
+                        if (null == areas || areas.Count == 0)
+                        {
+                            serviceAreaId = 203;
+                        }
+                        else { serviceAreaId = areas[0].ItemId;
+                        }
 
                         foreach (var appointment in appointmentScheduling.APPOINTMENT_INFORMATION)
                         {
@@ -242,7 +248,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
                                 break;
                             }
 
-                            switch (appointment.APPOINTMENT_HONORED)
+                            switch (appointment.APPOINTMENT_STATUS)
                             {
                                 case "HONORED":
                                     appointmentStatus = "Met";
@@ -307,10 +313,12 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
                                     DifferentiatedCareId = differentiatedCareId,
                                     ReasonId = reasonId,
                                     ServiceAreaId = serviceAreaId,
-                                    StatusId = statusId
+                                    StatusId = statusId,
+                                    CreatedBy= interopUserId,
+                                    CreateDate = DateTime.Now
                                 };
 
-                                int appointmentId = manager.AddPatientAppointments(patientAppointment);
+                                int appointmentId = manager.AddPatientAppointments(patientAppointment,false);
                                 InteropPlacerValues placerValues = new InteropPlacerValues()
                                 {
                                     IdentifierType = 3,
@@ -355,6 +363,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
                 string appointmentReason = String.Empty;
                 string appointmentStatus = String.Empty;
                 string appointmentType = String.Empty;
+                int interopUserId = InteropUser.UserId;
 
                 foreach (var item in appointmentScheduling.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID)
                 {
@@ -377,7 +386,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
                             var personIdentifiers = personIdentifierManager.GetPersonIdentifiers(patient.PersonId, identifier.Id);
                             if (personIdentifiers.Count == 0)
                             {
-                                personIdentifierManager.AddPersonIdentifier(patient.PersonId, identifier.Id, godsNumber, 1);
+                                personIdentifierManager.AddPersonIdentifier(patient.PersonId, identifier.Id, godsNumber, interopUserId);
                             }
                         }
 
@@ -406,7 +415,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
                                     break;
                             }
 
-                            switch (appointment.APPOINTMENT_HONORED)
+                            switch (appointment.APPOINTMENT_STATUS)
                             {
                                 case "HONORED":
                                     appointmentStatus = "Met";
@@ -440,10 +449,27 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
                                     appointmentType = "Standard Care";
                                     break;
                             }
+                            var reasons = lookupLogic.GetItemIdByGroupAndItemName("AppointmentReason", appointmentReason);
+                            int reasonId = 0;
+                            if (reasons == null || reasons.Count > 0) {
+                                throw new Exception($"No matching reasons in the databases {appointmentReason}");
+                            }
+                            reasonId = reasons[0].ItemId;
+                            int statusId = 0;
+                            var status = lookupLogic.GetItemIdByGroupAndItemName("AppointmentStatus", appointmentStatus);
+                            if (status == null || status.Count > 0)
+                            {
+                                throw new Exception($"No matching appointmentstatus in the databases {appointmentStatus}");
+                            }
+                               statusId=  status[0].ItemId;
 
-                            int reasonId = lookupLogic.GetItemIdByGroupAndItemName("AppointmentReason", appointmentReason)[0].ItemId;
-                            int statusId = lookupLogic.GetItemIdByGroupAndItemName("AppointmentStatus", appointmentStatus)[0].ItemId;
-                            int differentiatedCareId = lookupLogic.GetItemIdByGroupAndItemName("DifferentiatedCare", appointmentType)[0].ItemId;
+                            int differentiatedCareId = 0;
+                            var diffCare = lookupLogic.GetItemIdByGroupAndItemName("DifferentiatedCare", appointmentType);
+                            if (diffCare == null || diffCare.Count > 0)
+                            {
+                                throw new Exception($"No matching differentiated care option in the databases {appointmentType}");
+                            }
+                            differentiatedCareId=  diffCare[0].ItemId;
 
                             InteropPlacerTypeManager interopPlacerTypeManager = new InteropPlacerTypeManager();
                             int interopPlacerTypeId = interopPlacerTypeManager.GetInteropPlacerTypeByName(appointment.PLACER_APPOINTMENT_NUMBER.ENTITY).Id;
@@ -471,7 +497,9 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
                                     DifferentiatedCareId = differentiatedCareId,
                                     ReasonId = reasonId,
                                     ServiceAreaId = serviceAreaId,
-                                    StatusId = statusId
+                                    StatusId = statusId,
+                                    CreatedBy= interopUserId,
+                                    CreateDate=DateTime.Now
                                 };
 
                                 int appointmentId = manager.AddPatientAppointments(patientAppointment);

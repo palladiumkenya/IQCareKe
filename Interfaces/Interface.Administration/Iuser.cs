@@ -11,6 +11,7 @@ namespace Interface.Administration
         int SaveNewUser(string FName, string LName, string UserName, string Password, int UserId, int EmpId, Hashtable UserGroup);
         DataSet GetUserList();
         DataSet GetUserRecord(int UserId);
+        DataTable GetUserByUserName(string username);
         void UpdateUserRecord(string FName, string LName, string UserName, string Password, int UserId, int OperatorId, int EmpId, Hashtable UserGroup);
         //void DeleteUserRecord(int UserId);
         int DeleteUserRecord(int UserId);

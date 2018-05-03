@@ -51,6 +51,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                 {
                     throw new Exception(results);
                 }
+                int interopUserId = InteropUser.UserId;
                 //Get FacilityId
                 int facilityId = Convert.ToInt32(registration.MESSAGE_HEADER.SENDING_FACILITY);
                 //Get Gender
@@ -188,7 +189,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                     patient = patientLookup.GetPatientByCccNumber(cccNumber);
                     if (patient == null)
                     {
-                        msg = ProcessPatient.Add(firstName, middleName, lastName, sex, 1, DOB, DOB_Precision, facilityId, 
+                        msg = ProcessPatient.Add(firstName, middleName, lastName, sex, interopUserId, DOB, DOB_Precision, facilityId, 
                             patientType, nationalId, visitType, dateOfEnrollment, cccNumber, entryPointId, godsNumber, 
                             maritalStatusId, village, wardId, subCountyId, countyId, nearestLandMark, postalAdress, phoneNumber,
                             DateOfDeath, nextOfKin);
@@ -198,7 +199,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                         msg = ProcessPatient.Update(firstName, middleName, lastName, sex, patient.PersonId, patient.Id, patient.ptn_pk, DOB, DOB_Precision, nationalId, facilityId, 
                             entryPointId, dateOfEnrollment, cccNumber, patient, godsNumber, maritalStatusId, village, 
                             wardId, subCountyId, countyId, nearestLandMark, postalAdress, phoneNumber, DateOfDeath,
-                            nextOfKin);
+                            nextOfKin,interopUserId);
                     }
 
                 }
@@ -226,7 +227,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                 string cccNumber = String.Empty;
                 string nationalId = String.Empty;
                 PatientLookup patient = new PatientLookup();
-
+                int interopUserId = InteropUser.UserId;
                 string results = registrationValidation.ValidateDTO(registration);
                 if (!String.IsNullOrWhiteSpace(results))
                 {
@@ -372,11 +373,11 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                         msg = ProcessPatient.Update(firstName, middleName, lastName, sex, patient.PersonId, patient.Id, patient.ptn_pk, DOB, DOB_Precision, nationalId, facilityId,
                             entryPointId, enrollmentDate, cccNumber, patient, godsNumber, maritalStatusId, 
                             village, wardId, subCountyId, countyId, nearestLandMark, postalAdress, phoneNumber,
-                            DateOfDeath, nextOfKin);
+                            DateOfDeath, nextOfKin,interopUserId);
                     }
                     else
                     {
-                        msg = ProcessPatient.Add(firstName, middleName, lastName, sex, 1, DOB, DOB_Precision,
+                        msg = ProcessPatient.Add(firstName, middleName, lastName, sex, interopUserId, DOB, DOB_Precision,
                             patientType, facilityId, nationalId, visitType, enrollmentDate, cccNumber, entryPointId, 
                             godsNumber, maritalStatusId, village, wardId, subCountyId, countyId, nearestLandMark, postalAdress, phoneNumber,
                             DateOfDeath, nextOfKin);
