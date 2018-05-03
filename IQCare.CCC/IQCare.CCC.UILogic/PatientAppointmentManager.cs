@@ -34,7 +34,7 @@ namespace IQCare.CCC.UILogic
             };
 
             int returnVal = _appointment.AddPatientAppointments(appointment);
-            if (returnVal > 0)
+            if (returnVal > 0 && sendEvent)
             {
                 PatientLookupManager patientLookup = new PatientLookupManager();
                 var patient = patientLookup.GetPatientDetailSummary(p.PatientId);
