@@ -83,7 +83,7 @@ export class PersonComponent implements OnInit {
             for (let i = 0; i < options.length; i++) {
                 if (options[i].key == 'MaritalStatus') {
                     this.maritalStatuses = options[i].value;
-                } else if (options[i].key == 'KeyPopulation') {
+                } else if (options[i].key == 'HTSKeyPopulation') {
                     this.keyPops = options[i].value;
                 } else if (options[i].key == 'Gender') {
                     this.gender = options[i].value;
@@ -300,7 +300,7 @@ export class PersonComponent implements OnInit {
             const options = res['options']['lookupItems'];
 
             for (let i = 0; i < options.length; i++) {
-                if (options[i].key == 'KeyPopulation') {
+                if (options[i].key == 'HTSKeyPopulation') {
                     this.keyPops = options[i].value;
                 } else if (options[i].key == 'PriorityPopulation') {
                     this.priorityPops = options[i].value;
@@ -320,15 +320,20 @@ export class PersonComponent implements OnInit {
             this.priorityPops = optionsVal;
 
         } else if (optionSelected[0].itemName == 'Male') {
-            const options = this.keyPops.filter(function( obj ) {
+            /*const options = this.keyPops.filter(function( obj ) {
                 return obj.itemName !== 'FSW';
             });
-            this.keyPops = options;
+            this.keyPops = options;*/
 
             const optionsVal = this.priorityPops.filter(function (obj) {
                 return obj.itemName !== 'Adolescent Girls and Young Women';
             });
             this.priorityPops = optionsVal;
         }
+
+        const optionsHtsKeyPops = this.keyPops.filter(function( obj ) {
+            return obj.itemName !== 'Not Applicable';
+        });
+        this.keyPops = optionsHtsKeyPops;
     }
 }
