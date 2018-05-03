@@ -28,6 +28,7 @@ export class TestingComponent implements OnInit, AfterViewInit {
     hivResultsOptions: any[];
     hivFinalResultsOptions: any[];
     yesNoOptions: any[];
+    yesNoNA: any[];
     reasonsDeclined: any[];
 
     testing: Testing;
@@ -89,6 +90,8 @@ export class TestingComponent implements OnInit, AfterViewInit {
                     this.hivFinalResultsOptions = options[i].value;
                 } else if (options[i].key == 'YesNo') {
                     this.yesNoOptions = options[i].value;
+                } else if (options[i].key == 'YesNoNA') {
+                    this.yesNoNA = options[i].value;
                 } else if (options[i].key == 'ReasonsPartner') {
                     this.reasonsDeclined = options[i].value;
                 }

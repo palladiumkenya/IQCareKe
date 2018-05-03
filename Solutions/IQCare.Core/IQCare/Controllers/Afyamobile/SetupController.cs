@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IQCare.Common.BusinessProcess.Commands.Lookup;
 using IQCare.Common.BusinessProcess.Commands.Setup;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -33,6 +34,25 @@ namespace IQCare.Controllers.Afyamobile
         public async Task<IActionResult> GetUsers()
         {
             var response = await _mediator.Send(new GetActiveUsersCommand(), Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+        [HttpGet("htsOptions")]
+        public async Task<IActionResult> HtsOptions()
+        {
+            var options = new string[]
+            {
+                "Gender", "MaritalStatus", "TracingOutcome", "TracingMode", "HIVTestKits", "HIVResults", "YesNo",
+                "Strategy", "Disabilities", "TestedAs", "TbScreening", "HTSEntryPoints", "HIVFinalResults", "YesNoNA",
+                "HTSKeyPopulation", "Relationship", "HivStatus", "HivCareStatus", "ScreeningHivStatus",
+                "PnsTracingOutcome", "IpvOutcome", "PNSRealtionship", "PNSRelationship", "YesNoDeclined", "PnsApproach"
+            };
+            var response = await _mediator.Send(new GetAfyaMobileLookupsCommand()
+            {
+                options = options
+            }, Request.HttpContext.RequestAborted);
             if (response.IsValid)
                 return Ok(response.Value);
             return BadRequest(response);

@@ -41,7 +41,7 @@ export class EncounterService {
     }
 
     public getCustomOptions(): Observable<any[]> {
-        const options = JSON.stringify(['HIVTestKits', 'HIVResults', 'HIVFinalResults', 'YesNo', 'ReasonsPartner']);
+        const options = JSON.stringify(['HIVTestKits', 'HIVResults', 'HIVFinalResults', 'YesNo', 'YesNoNA', 'ReasonsPartner']);
 
         return this.http.post<any[]>(this.API_URL + this.lookup, options, httpOptions).pipe(
             tap(getCustomOptions => this.errorHandler.log('fetched all custom options')),
