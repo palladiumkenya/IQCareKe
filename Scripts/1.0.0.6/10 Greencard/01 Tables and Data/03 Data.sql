@@ -1311,3 +1311,9 @@ From (select c.drug_pk,d.GenericAbbrevation from mst_drug c inner join
 where genericabbrevation is not null and genericabbrevation <>'') d
 on c.Drug_pk = d.Drug_pk) ST2) tbl
 on Mst_ItemMaster.item_pk = tbl.Drug_pk
+GO
+
+-- SET /ACTIVATE QID/TID/TD
+   UPDATE mst_Frequency SET DeleteFlag=0 WHERE [NAME] IN('TD','TID','QID') AND DeleteFlag=1;
+   UPDATE mst_Frequency SET multiplier=3 WHERE [Name] IN('TD') AND multiplier=0;
+Go
