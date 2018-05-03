@@ -48,7 +48,7 @@ namespace IQCare.Events
                     }
                 }
             }
-            catch (Exception exception)
+            catch 
             {
                // throw new Exception(exception.Message);
             }

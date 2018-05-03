@@ -23,6 +23,13 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
             {
                 using (_unitOfWork)
                 {
+                    HtsEncounter encounter = await _unitOfWork.Repository<HtsEncounter>().FindByIdAsync(request.HtsEncounterId);
+                    encounter.CoupleDiscordant = request.FinalTestingResult.CoupleDiscordant;
+                    encounter.FinalResultGiven = request.FinalTestingResult.FinalResultGiven;
+
+                    _unitOfWork.Repository<HtsEncounter>().Update(encounter);
+                    await _unitOfWork.SaveAsync();
+
                     // Create Testing instances
                     List<Core.Model.Testing> testings = new List<Core.Model.Testing>();
                     request.Testing.ForEach(t => testings.Add(new Core.Model.Testing

@@ -46,8 +46,6 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Consent
                     await _unitOfWork.SaveAsync();
                 }
 
-                _unitOfWork.Dispose();
-
                 return Result<AddConsentResponse>.Valid(new AddConsentResponse()
                 {
                     IsConsentAdded = true

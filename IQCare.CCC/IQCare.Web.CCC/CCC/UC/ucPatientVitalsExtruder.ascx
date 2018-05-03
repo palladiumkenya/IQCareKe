@@ -95,23 +95,22 @@
 <div class="col-md-12 form-group">
     
     
-
     <div class="panel panel-default">
 
         <div class="panel-body">
             
-           <div class="col-md-12"><label class="control-label pull-left">Pregnancy Status</label></div> 
+           <div class="col-md-12"><label class="control-label pull-left fa fa-arrow-circle-o-right"> Pregnancy Status</label></div> 
             <div class="col-md-12"><hr/></div>
             <div class="col-md-12 form-group">
-    <div class="col-md-12"><asp:Label runat="server" CssClass="control-label pull-left" ID="lblPregnancyStatus">N/A</asp:Label></div>
+    <div class="col-md-12"><asp:Label runat="server" CssClass="control-label pull-left" ID="lblPregnancyStatus"></asp:Label></div>
 </div>
-<div class="col-md-12"><div class="col-md-12"><hr/></div></div>
+
 <div class="col-md-12 form-group">
-    <div class="col-md-12"><asp:Label runat="server" CssClass="control-label pull-left" ID="lblLMP">N/A</asp:Label></div>
+    <div class="col-md-12"><asp:Label runat="server" CssClass="control-label pull-left" ID="lblLMP"></asp:Label></div>
 </div>
-<div class="col-md-12"><div class="col-md-12"><hr/></div></div>
+
 <div class="col-md-12 form-group">
-    <div class="col-md-12"><asp:Label runat="server" CssClass="control-label pull-left" ID="lblEDD">N/A</asp:Label></div>
+    <div class="col-md-12"><asp:Label runat="server" CssClass="control-label pull-left" ID="lblEDD"></asp:Label></div>
 </div>
 
         </div>

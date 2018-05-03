@@ -4,6 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import {environment} from '../../../environments/environment';
 import {catchError, tap} from 'rxjs/operators';
 import {PnsTracing} from '../_models/pnstracing';
+import {ErrorHandlerService} from '../../shared/_services/errorhandler.service';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -15,39 +16,22 @@ export class PnstracingService {
     private lookup = '/api/Lookup/getCustomOptions';
     private url = '/api/HtsEncounter';
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient,
+                private errorHandler: ErrorHandlerService) { }
 
     public getTracingOptions(): Observable<any[]> {
-        const tracingOptions = JSON.stringify(['TracingMode', 'YesNo', 'PnsTracingOutcome']);
+        const tracingOptions = JSON.stringify(['TracingMode', 'YesNo', 'PnsTracingOutcome', 'TracingType']);
 
         return this.http.post<any[]>(this.API_URL + this.lookup, tracingOptions, httpOptions).pipe(
-            tap(getTracingOptions => this.log('fetched tracing options')),
-            catchError(this.handleError<any[]>('getTracingOptions'))
+            tap(getTracingOptions => this.errorHandler.log('fetched tracing options')),
+            catchError(this.errorHandler.handleError<any[]>('getTracingOptions'))
         );
     }
 
     public addPnsTracing(pnsTracingForm: PnsTracing): Observable<any> {
-        return this.http.post<any>(this.API_URL + this.url + '/pnsTracing', JSON.stringify(pnsTracingForm), httpOptions).pipe(
-            tap(addPnsTracing => this.log('successfully add pns tracing')),
-            catchError(this.handleError<any[]>('addPnsTracing'))
+        return this.http.post<any>(this.API_URL + this.url + '/tracing', JSON.stringify(pnsTracingForm), httpOptions).pipe(
+            tap(addPnsTracing => this.errorHandler.log('successfully add pns tracing')),
+            catchError(this.errorHandler.handleError<any[]>('addPnsTracing'))
         );
-    }
-
-    private handleError<T> (operation = 'operation', result?: T) {
-        return (error: any): Observable<T> => {
-
-            // TODO: send the error to remote logging infrastructure
-            console.error(error); // log to console instead
-
-            // TODO: better job of transforming error for user consumption
-            this.log(`${operation} failed: ${error.message}`);
-
-            return Observable.throw(error.message);
-        };
-    }
-
-    /** Log a HeroService message with the MessageService */
-    private log(message: string) {
-        console.log(message);
     }
 }

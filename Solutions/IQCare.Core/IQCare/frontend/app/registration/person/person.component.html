@@ -35,7 +35,7 @@
                                             </mat-form-field>
 
                                             <mat-form-field>
-                                                <input matInput placeholder="Age(Years)" tabindex="6" type="number" formControlName="personAge" id="personAge" name="personAge" (keyup)="estimateDob()" required>
+                                                <input matInput placeholder="Age(Years)" tabindex="6" type="number" formControlName="personAge" id="personAge" name="personAge" (change)="estimateDob()" required>
                                             </mat-form-field>
                                         </div>
 
@@ -55,7 +55,7 @@
                                         <div class="col-lg-3 col-md-3 col-sm-3">
                                             <label>Gender </label>
                                             <div>
-                                                <mat-radio-group formControlName="Sex" [required]="true" tabindex="4">
+                                                <mat-radio-group formControlName="Sex" [required]="true" tabindex="4" (change)="onSexChange()">
                                                     <mat-radio-button [value]="male" required>Male</mat-radio-button>
                                                     <mat-radio-button [value]="female" required>Female</mat-radio-button>
                                                 </mat-radio-group>
@@ -94,11 +94,40 @@
                                 <mat-step formGroupName="2" [stepControl]="formArray.get([2])">
                                     <ng-template matStepLabel>Profile</ng-template>
                                     <div class="row">
-                                        <div class="col-lg-3 col-md-3 col-sm-3">
+                                        <div class="col-lg-4 col-md-4 col-sm-4">
+                                            <label>Select Population type</label>
+                                            <div>
+                                                <mat-radio-group formControlName="populationType" [required]="true" (change)="onPopulationTypeChange()">
+                                                    <mat-radio-button [value]="1" required>General Population</mat-radio-button>
+                                                    <mat-radio-button [value]="2" required>Key Population</mat-radio-button>
+                                                </mat-radio-group>
+                                                <mat-error *ngIf="!formGroup.controls['formArray']['controls'][2].controls.populationType.valid">Please select Population Type</mat-error>
+                                            </div>
+
+                                            <br/>
+
+                                            <label>Priority Population</label>
+                                            <div>
+                                                <mat-radio-group formControlName="priorityPop" [required]="true" (change)="onPriorityChange()">
+                                                    <mat-radio-button [value]="1">Yes</mat-radio-button>
+                                                    <mat-radio-button [value]="2">No</mat-radio-button>
+                                                </mat-radio-group>
+                                                <mat-error *ngIf="!formGroup.controls['formArray']['controls'][2].controls.priorityPop.valid">Please select Priority Type</mat-error>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4 col-md-4 col-sm-4">
                                             <mat-form-field>
-                                                <mat-select placeholder="Key Population" formControlName="KeyPopulation">
-                                                    <mat-option></mat-option>
+                                                <mat-select placeholder="Key Population" formControlName="KeyPopulation" disableRipple multiple>
                                                     <mat-option *ngFor="let keyPop of keyPops" [value]="keyPop.itemId">{{keyPop.itemDisplayName}}</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+
+                                            <br/>
+
+                                            <mat-form-field>
+                                                <mat-select placeholder="Priority Population" formControlName="priorityPopulation" disableRipple multiple>
+                                                    <mat-option *ngFor="let option of priorityPops" [value]="option.itemId">{{option.itemDisplayName}}</mat-option>
                                                 </mat-select>
                                             </mat-form-field>
                                         </div>
@@ -116,7 +145,11 @@
 
                                     </div>
 
-                                    <div>
+                                    <div class="row">
+                                        &nbsp;
+                                    </div>
+
+                                    <div class="row">
                                         <button mat-button matStepperPrevious type="button">Back</button>
                                         <button mat-button type="button" (click)="onSubmitForm()">Complete</button>
                                     </div>

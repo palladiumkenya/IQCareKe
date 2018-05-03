@@ -18,6 +18,7 @@ using Entity.WebApi.PSmart;
 using Application.Common;
 using Entities.CCC.Enrollment;
 using Entities.CCC.PSmart;
+using IQCare.CCC.UILogic;
 using IQCare.CCC.UILogic.Enrollment;
 using IQCare.DTO.PSmart;
 
@@ -29,6 +30,9 @@ namespace IQCare.WebApi.Logic.MessageHandler
         private readonly IDtoMapper _dtoMapper;
         private readonly IPsmartStoreManager _psmartStoreManager;
         private readonly IPSmartAuthManager _pSmartAuthManager;
+        
+        private readonly PatientManager _patientManager;
+        private int personId = 0;
         public IncomingMessageService()
         {
             _apiInboxmanager = new ApiInboxManager();
@@ -42,7 +46,7 @@ namespace IQCare.WebApi.Logic.MessageHandler
             // _smartcardPatientListManager = smartcardPatientListManager;
             // _shrApiManager = new ShrApiManager();
             _psmartStoreManager = psmartStoreManager;
-            _pSmartAuthManager = pSmartAuthManager;
+            _pSmartAuthManager = pSmartAuthManager;          
         }
 
         public void Handle(string messageType, string message)
@@ -353,26 +357,40 @@ namespace IQCare.WebApi.Logic.MessageHandler
 
         public string ProcessCardSerialNumberIdentifier(psmartCard psmartCard)
         {
-            PatientEnrollmentManager patientEnrollmentManager = new PatientEnrollmentManager();
+           // PatientEnrollmentManager patientEnrollmentManager = new PatientEnrollmentManager();
             IdentifierManager identifierManager = new IdentifierManager();
-            PatientIdentifierManager patientIdentifierManager = new PatientIdentifierManager();
-            var patientEnrollment = patientEnrollmentManager.GetPatientEnrollmentByPatientId(psmartCard.PATIENTID);
-            int patientEnrollmentId = patientEnrollment[0].Id;
-            int results = 0;
+            PersonIdentifierManager personIdentifierManager = new PersonIdentifierManager();
+            PatientManager patientManager=new PatientManager();
+        // PatientIdentifierManager patientIdentifierManager = new PatientIdentifierManager();
+
+
+        // var patientEnrollment = patientEnrollmentManager.GetPatientEnrollmentByPatientId(psmartCard.PATIENTID);
+        // int patientEnrollmentId = patientEnrollment[0].Id;
+        int results = 0;
             // Identifier identifier = identifierManager.GetIdentifierByCode("GODS_NUMBER");
             Identifier identifier = identifierManager.GetIdentifierByCode("CARD_SERIAL_NUMBER");
+            personId = patientManager.GetPersonId(psmartCard.PATIENTID);
             try
             {
-                var patientEntityIdentifier = new PatientEntityIdentifier()
+                //var patientEntityIdentifier = new PatientEntityIdentifier()
+                //{
+                //    IdentifierTypeId = identifier.Id,
+                //    IdentifierValue = psmartCard.CARD_SERIAL_NO,
+                //    PatientEnrollmentId = patientEnrollmentId,
+                //    PatientId = psmartCard.PATIENTID
+                //};
+
+                var personEntityIdentifier=new PersonIdentifier()
                 {
-                    IdentifierTypeId = identifier.Id,
+                    IdentifierId = identifier.Id,
                     IdentifierValue = psmartCard.CARD_SERIAL_NO,
-                    PatientEnrollmentId = patientEnrollmentId,
-                    PatientId = psmartCard.PATIENTID
+                    PersonId = personId,
+
                 };
 
                 string serialNumber = null;
-                var identifierLists = patientIdentifierManager.CheckIfIdentifierNumberIsUsed(psmartCard.CARD_SERIAL_NO, patientEntityIdentifier.IdentifierTypeId);
+                //var identifierLists = patientIdentifierManager.CheckIfIdentifierNumberIsUsed(psmartCard.CARD_SERIAL_NO, patientEntityIdentifier.IdentifierTypeId);
+                var identifierLists = personIdentifierManager.CheckIfPersonIdentifierExists(psmartCard.CARD_SERIAL_NO, personEntityIdentifier.IdentifierId);
 
                 foreach (var identifierList in identifierLists)
                 {
@@ -380,9 +398,10 @@ namespace IQCare.WebApi.Logic.MessageHandler
                 }
                 if (string.IsNullOrEmpty(serialNumber))
                 {
-                    results = patientIdentifierManager.addPatientIdentifier(patientEntityIdentifier.PatientId,
-                        patientEntityIdentifier.PatientEnrollmentId, patientEntityIdentifier.IdentifierTypeId,
-                        patientEntityIdentifier.IdentifierValue, 0, false);
+                    //results = _personIdentifierManager.AddPersonIdentifier(patientEntityIdentifier.PatientId,
+                    //    patientEntityIdentifier.PatientEnrollmentId, patientEntityIdentifier.IdentifierTypeId,
+                    //    patientEntityIdentifier.IdentifierValue, 0, false);
+                    results = personIdentifierManager.AddPersonIdentifier(personId,personEntityIdentifier.IdentifierId, psmartCard.CARD_SERIAL_NO, 1);
                     return (results) > 0 ? "Card serial Number Linked to a patient as identifier" : "Failed linking card Serial Number to patient";
                 }
                 else
@@ -421,9 +440,10 @@ namespace IQCare.WebApi.Logic.MessageHandler
 
             try
             {
-                int result = patientManager.UpdatePatientCardSerial(psmartCard);
+              //  int result = patientManager.UpdatePatientCardSerial(psmartCard);
+                string processCardStatus = this.ProcessCardSerialNumberIdentifier(psmartCard);
 
-                if (result > 0)
+                if (!string.IsNullOrEmpty(processCardStatus))
                 {
                     NewSHR = psmartShrCardSerialManager.GenerateShrForEmr(psmartCard.CARD_SERIAL_NO);
                 }

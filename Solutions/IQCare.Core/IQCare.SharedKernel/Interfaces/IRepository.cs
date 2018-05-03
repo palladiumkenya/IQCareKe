@@ -11,6 +11,7 @@ namespace IQCare.SharedKernel.Interfaces
         TEntity FindById(object id);
         Task<TEntity> FindByIdAsync(object id);
         Task AddAsync(TEntity entity);
+        void Update(TEntity entity);
         Task AddRangeAsync(IEnumerable<TEntity> entities);
         Task<IEnumerable<TEntity>> GetAllAsync();
         Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> predicate);

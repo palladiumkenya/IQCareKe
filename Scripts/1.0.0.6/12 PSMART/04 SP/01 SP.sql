@@ -91,9 +91,9 @@ GO
 -- =============================================
 CREATE PROCEDURE [dbo].[Psmart_ProcessNewClientRegistration]
 	-- Add the parameters for the stored procedure here
-	@firstName varchar(100), --1
-	@middleName varchar(100)=null, --2
-	@lastName varchar(100), --3
+	@FirstName varchar(100), --1
+	@MiddleName varchar(100)=null, --2
+	@LastName varchar(100), --3
 	@registrationDate datetime, --4
 	@dob varchar(50), --5
 	@dobPrecision varchar(15), --6
@@ -284,12 +284,12 @@ BEGIN
 		)
 	-- PersonLocation
 	   
-	   IF(@village IS NOT NULL AND @ward IS NOT NULL AND @subcounty IS NOT NULL)
+	   IF(@village IS NOT NULL AND DATALENGTH(@village)>4 AND @ward IS NOT NULL AND DATALENGTH(@ward)>4 AND DATALENGTH(@ward)>4 AND  @subcounty IS NOT NULL AND DATALENGTH(@subcounty)>4)
 	   BEGIN
 		INSERT INTO PersonLocation(PersonId,County,SubCounty,Village,Ward,LandMark,CreatedBy,CreateDate) VALUES(
 			@PersonId,
 			(SELECT top 1 CountyId  FROM County WHERE Subcountyname=''+@subcounty+''),
-			(SELECT top 1 SubcountyId  FROM County WHERE Subcountyname=''+@subcounty+''),
+			ISNULL((SELECT top 1 SubcountyId  FROM County WHERE Subcountyname=''+@subcounty+''),0),
 			@village,
 			(SELECT top 1 CountyId  FROM County WHERE WardName=''+@ward+''),
 			@landmark,
@@ -298,11 +298,13 @@ BEGIN
 		)
 	   END
 	-- PatientENcounter
-	INSERT INTO PatientEncounter(PatientId,EncounterTypeId,EncounterStartTime,ServiceAreaId,CreateDate,createdby,Status) VALUES(
+	INSERT INTO PatientEncounter(PatientId,PatientMasterVisitId,EncounterTypeId,EncounterStartTime,EncounterEndTime,ServiceAreaId,CreateDate,createdby,Status) VALUES(
 		@PatientId,
+		@PatientMastrVisitId,
 		(SELECT top 1 Id FROM LookupItem WHERE Name='Hts-encounter'),
 		CONVERT(datetime,  @registrationDate , 104),
-		1,
+		CONVERT(datetime,  @registrationDate , 104),
+		2,
 		CONVERT(datetime,  @registrationDate , 104),
 		1,
 		0

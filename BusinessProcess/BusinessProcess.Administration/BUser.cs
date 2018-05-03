@@ -198,7 +198,17 @@ namespace BusinessProcess.Administration
             }
 
         }
-       #endregion
+
+        public DataTable GetUserByUserName(string username)
+        {
+            lock (this)
+            {
+                ClsObject UserManager = new ClsObject();
+                ClsUtility.Init_Hashtable();
+                return (DataTable)UserManager.ReturnObject(ClsUtility.theParams, $"Select UserId, UserFirstName, UserLastName, UserName, EmployeeId From mst_user Where username='{username.Trim()}' and deleteflag=0", ClsUtility.ObjectEnum.DataTable);
+            }
+        }
+        #endregion
 
     }
 }

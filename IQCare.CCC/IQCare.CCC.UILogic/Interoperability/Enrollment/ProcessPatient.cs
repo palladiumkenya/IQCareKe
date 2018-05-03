@@ -18,7 +18,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
         public static string Update(string firstName,string middleName,string lastName,int personSex, int personId, int patientId, int? ptn_pk, DateTime dateOfBirth, bool DOB_Precision, string nationalId, int facilityId, 
             int entryPointId, DateTime enrollmentDate, string cccNumber, PatientLookup patient, string godsNumber, int matStatusId,
             string village, int wardId, int subCountyId, int countyId, string nearestLandMark, string postalAdress, string phoneNumber, DateTime? deathDate,
-            List<NEXTOFKIN> nextofkin)
+            List<NEXTOFKIN> nextofkin,int userId)
         {
             try
             {
@@ -34,8 +34,8 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                 var personContactLookUp = new PersonContactLookUpManager();
                 var patientTreatmentlookupManager = new PatientTreatmentSupporterLookupManager();
                 var treatmentSupporterManager = new PatientTreatmentSupporterManager();
-
-                personManager.UpdatePerson(firstName, middleName, lastName, personSex, 1, patient.PersonId, dateOfBirth, DOB_Precision);
+              
+                personManager.UpdatePerson(firstName, middleName, lastName, personSex,userId, patient.PersonId, dateOfBirth, DOB_Precision);
 
                 if (!string.IsNullOrWhiteSpace(godsNumber))
                 {
@@ -44,7 +44,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                     var personIdentifiers = personIdentifierManager.GetPersonIdentifiers(personId, identifier.Id);
                     if (personIdentifiers.Count == 0)
                     {
-                        personIdentifierManager.AddPersonIdentifier(personId, identifier.Id, godsNumber, 1);
+                        personIdentifierManager.AddPersonIdentifier(personId, identifier.Id, godsNumber,userId);
                     }
                 }
                 if (matStatusId > 0)
@@ -57,7 +57,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                     }
                     else
                     {
-                        personMaritalStatusManager.AddPatientMaritalStatus(personId, matStatusId, 1);
+                        personMaritalStatusManager.AddPatientMaritalStatus(personId, matStatusId, userId);
                     }
                 }
 
@@ -69,7 +69,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                         currentLocation[0].DeleteFlag = true;
                         locationManager.UpdatePersonLocation(currentLocation[0]);
                     }
-                    locationManager.AddPersonLocation(personId, countyId, subCountyId, wardId, village, "", "", nearestLandMark, nearestLandMark, 1);
+                    locationManager.AddPersonLocation(personId, countyId, subCountyId, wardId, village, "", "", nearestLandMark, nearestLandMark, userId);
                 }
 
                 if (postalAdress != null || phoneNumber != null)
@@ -89,7 +89,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                     }
                     else
                     {
-                        contactManager.AddPersonContact(personId, postalAdress, phoneNumber, "", "", 1);
+                        contactManager.AddPersonContact(personId, postalAdress, phoneNumber, "", "", userId);
                     }         
                 }
 
@@ -108,7 +108,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                             var listPatientTreatmentSupporter = patientTreatmentlookupManager.GetAllPatientTreatmentSupporter(personId);
                             if (listPatientTreatmentSupporter.Count > 0)
                             {
-                                personManager.UpdatePerson(kin.NOK_NAME.FIRST_NAME, kin.NOK_NAME.MIDDLE_NAME, kin.NOK_NAME.LAST_NAME, sex, 1, listPatientTreatmentSupporter[0].SupporterId);
+                                personManager.UpdatePerson(kin.NOK_NAME.FIRST_NAME, kin.NOK_NAME.MIDDLE_NAME, kin.NOK_NAME.LAST_NAME, sex, userId, listPatientTreatmentSupporter[0].SupporterId);
                                 if (listPatientTreatmentSupporter[0].SupporterId > 0)
                                 {
                                     var treatmentSupporter = patientTreatmentlookupManager.GetAllPatientTreatmentSupporter(personId);
@@ -130,11 +130,11 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                             }
                             else
                             {
-                                int supporterId = personManager.AddPersonTreatmentSupporterUiLogic(kin.NOK_NAME.FIRST_NAME, kin.NOK_NAME.MIDDLE_NAME, kin.NOK_NAME.LAST_NAME, sex, 1);
+                                int supporterId = personManager.AddPersonTreatmentSupporterUiLogic(kin.NOK_NAME.FIRST_NAME, kin.NOK_NAME.MIDDLE_NAME, kin.NOK_NAME.LAST_NAME, sex,userId);
 
                                 if (supporterId > 0)
                                 {
-                                    treatmentSupporterManager.AddPatientTreatmentSupporter(personId, supporterId, kin.PHONE_NUMBER, 1);
+                                    treatmentSupporterManager.AddPatientTreatmentSupporter(personId, supporterId, kin.PHONE_NUMBER, userId);
                                 }
                             }
                         }
@@ -168,7 +168,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                 }
                 else
                 {
-                    patientEntryPointManager.addPatientEntryPoint(patientId, entryPointId, 1);
+                    patientEntryPointManager.addPatientEntryPoint(patientId, entryPointId,userId);
                 }
 
                 var identifiersByPatientId = patientIdentifierManager.GetPatientEntityIdentifiersByPatientId(patientId, 1);
@@ -211,8 +211,8 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                 }
                 else
                 {
-                    int patientEnrollmentId = patientEnrollmentManager.addPatientEnrollment(patientId, enrollmentDate.ToString(), 1);
-                    int patientEntryPointId = patientEntryPointManager.addPatientEntryPoint(patientId, entryPointId, 1);
+                    int patientEnrollmentId = patientEnrollmentManager.addPatientEnrollment(patientId, enrollmentDate.ToString(), userId);
+                    int patientEntryPointId = patientEntryPointManager.addPatientEntryPoint(patientId, entryPointId,userId);
                     int patientIdentifierId = patientIdentifierManager.addPatientIdentifier(patientId, patientEnrollmentId, 1, cccNumber, facilityId, false);
 
                     if (deathDate.HasValue)
@@ -245,6 +245,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
         {
             try
             {
+                
                 PersonManager personManager = new PersonManager();
                 PatientManager patientManager = new PatientManager();
                 PatientMasterVisitManager patientMasterVisitManager = new PatientMasterVisitManager();
@@ -267,11 +268,11 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                 //Start Saving
                 int personId = personManager.AddPersonUiLogic(firstName, middleName, lastName, sex, userId, dob, dobPrecision);
                 if (matStatusId > 0)
-                    personMaritalStatusManager.AddPatientMaritalStatus(personId, matStatusId, 1);
+                    personMaritalStatusManager.AddPatientMaritalStatus(personId, matStatusId, userId);
                 if (wardId > 0 && subCountyId > 0 && countyId > 0)
-                    locationManager.AddPersonLocation(personId, countyId, subCountyId, wardId, village, "", "", nearestLandMark, nearestLandMark, 1);
+                    locationManager.AddPersonLocation(personId, countyId, subCountyId, wardId, village, "", "", nearestLandMark, nearestLandMark, userId);
                 if (postalAdress != null || phoneNumber != null)
-                    contactManager.AddPersonContact(personId, postalAdress, phoneNumber, "", "", 1);
+                    contactManager.AddPersonContact(personId, postalAdress, phoneNumber, "", "",userId);
 
                 String sDate = DateTime.Now.ToString();
                 DateTime datevalue = Convert.ToDateTime(sDate);
@@ -284,7 +285,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                     var personIdentifiers = personIdentifierManager.GetPersonIdentifiers(personId, identifier.Id);
                     if (personIdentifiers.Count == 0)
                     {
-                        personIdentifierManager.AddPersonIdentifier(personId, identifier.Id, godsNumber, 1);
+                        personIdentifierManager.AddPersonIdentifier(personId, identifier.Id, godsNumber,userId);
                     }
                 }
 
@@ -304,7 +305,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
 
                             if (supporterId > 0)
                             {
-                                treatmentSupporterManager.AddPatientTreatmentSupporter(personId, supporterId, kin.PHONE_NUMBER, 1);
+                                treatmentSupporterManager.AddPatientTreatmentSupporter(personId, supporterId, kin.PHONE_NUMBER,userId);
                             }
                         }
                     }
@@ -403,7 +404,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
 
                     if (greencardptnpk.Count == 0)
                     {
-                        mstPatientLogic.AddOrdVisit(ptn_Pk, facilityId, DateTime.Now, 110, 1, DateTime.Now, 203);
+                        mstPatientLogic.AddOrdVisit(ptn_Pk, facilityId, DateTime.Now, 110, userId, DateTime.Now, 203);
                     }
                 }
 

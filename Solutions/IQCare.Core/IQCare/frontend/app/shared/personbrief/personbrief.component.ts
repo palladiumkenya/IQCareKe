@@ -22,7 +22,7 @@ export class PersonbriefComponent implements OnInit {
 
     getPartnerDetails() {
         this.clientService.getPersonDetails(this.partnerId).subscribe(res => {
-            console.log(res);
+            // console.log(res);
             // this.clientBrief = res['patientLookup'][0];
             this.partnerView.fullName = res['firstName'] + ' ' + res['midName'] + ' ' + res['lastName'];
             this.partnerView.DateOfBirth = res['dateOfBirth'];

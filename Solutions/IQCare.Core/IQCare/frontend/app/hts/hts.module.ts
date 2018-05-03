@@ -35,6 +35,8 @@ import { FamilyComponent } from './family/family.component';
 import {FamilyService} from './_services/family.service';
 import {FamilyScreeningResolver} from './family-screening/familyScreening.resolver';
 import {AppStateService} from '../shared/_services/appstate.service';
+import {ErrorHandlerService} from '../shared/_services/errorhandler.service';
+import {FamilyTracingResolver} from './family-tracing/familyTracing.resolver';
 
 
 @NgModule({
@@ -73,7 +75,9 @@ import {AppStateService} from '../shared/_services/appstate.service';
       AppLoadService,
       FamilyService,
       FamilyScreeningResolver,
-      AppStateService
+      AppStateService,
+      ErrorHandlerService,
+      FamilyTracingResolver
   ],
   entryComponents: [
       TestDialogComponent

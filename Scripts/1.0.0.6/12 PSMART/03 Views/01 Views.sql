@@ -61,6 +61,16 @@ GO
 ---- 
 
 
+/****** Object:  View [dbo].[psmart_HTSList]    Script Date: 4/30/2018 3:37:41 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+
 CREATE VIEW [dbo].[psmart_HTSList]
 AS
 SELECT    
@@ -68,9 +78,9 @@ SELECT
 	  h.PersonId,
 	  P.Id PatientId,
 	  PatientEncounterID,
-	 CASE WHEN  (SELECT i.IdentifierValue from PatientIdentifier i WHERE i.PatientId=P.Id AND i.IdentifierTypeId IN(SELECT top 1 Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER'))  IS NULL THEN ''
+	 CASE WHEN  (SELECT i.IdentifierValue from PersonIdentifier i WHERE i.PersonId=P.PersonId AND i.IdentifierId IN(SELECT top 1 Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER'))  IS NULL THEN ''
 	 ELSE 
-		(SELECT i.IdentifierValue from PatientIdentifier i WHERE i.PatientId=P.Id AND i.IdentifierTypeId IN(SELECT top 1 Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER')) 
+		(SELECT i.IdentifierValue from PersonIdentifier i WHERE i.PersonId=P.PersonId AND i.IdentifierId IN(SELECT top 1 Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER'))  
 	 END [CardSerialNumber],
 	  CAST(DECRYPTBYKEY(ps.FirstName) AS VARCHAR(50)) FirstName,
 	  CAST(DECRYPTBYKEY(ps.LastName) AS VARCHAR(50)) LastName,
@@ -197,9 +207,9 @@ SELECT
       p.Id Ptn_pk,
 	  p.Id [PatientId],
 	  p.PersonId [PersonId],
-	  CASE WHEN  (SELECT IdentifierValue FROM PatientIdentifier WHERE PatientId=P.Id AND IdentifierTypeId IN(SELECT Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER')) IS NULL THEN ''
+	  CASE WHEN H.CardSerialNumber is null then '' -- (SELECT IdentifierValue i FROM PersonIdentifier i WHERE i.PersonId=P.PersonId AND i.IdentifierId IN(SELECT Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER')) IS NULL THEN ''
 	  ELSE
-	   (SELECT IdentifierValue FROM PatientIdentifier WHERE PatientId=P.Id AND IdentifierTypeId IN(SELECT Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER')) 
+	   H.CardSerialNumber -- (SELECT IdentifierValue i FROM PersonIdentifier i WHERE i.PersonId=P.PersonId AND i.IdentifierId IN(SELECT Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER'))
 	  END [CardSerialNumber],
 	  CASE WHEN (SELECT IdentifierValue FROM PatientIdentifier WHERE PatientId=P.Id AND IdentifierTypeId IN(SELECT Id FROM Identifiers WHERE Code='GODS_NUMBER')) IS NULL THEN ''
 	  ELSE
@@ -258,9 +268,9 @@ AS
 		SELECT 
 		L.PatientId PatientId,
 		L.PersonId,
-		CASE WHEN (SELECT top 1 i.IdentifierValue FROM patientIdentifier i WHERE i.PatientId=L.PatientId AND i.IdentifierTypeId IN(SELECT top 1 Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER')) IS NULL THEN ''
+		CASE WHEN L.CardSerialNumber IS NULL THEN '' --(SELECT IdentifierValue i FROM PersonIdentifier i WHERE i.PersonId=L.PersonId AND i.IdentifierId IN(SELECT Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER')) IS NULL THEN ''
 		ELSE
-			(SELECT top 1  i.IdentifierValue FROM patientIdentifier i WHERE i.PatientId=L.PatientId AND i.IdentifierTypeId IN(SELECT top 1 Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER'))
+		  L.CardSerialNumber	-- (SELECT IdentifierValue i FROM PersonIdentifier i WHERE i.PersonId=L.PersonId AND i.IdentifierId IN(SELECT Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER'))
 		END [CardSerialNumber],
 		'HTS_NUMBER' [IDENTIFIER_TYPE],
 	    'HTS' [ASSIGNING_AUTHORITY],
@@ -277,16 +287,16 @@ AS
 	SELECT 
 		L.PatientId PatientId,
 		L.PersonId,
-		CASE WHEN (SELECT top 1 i.IdentifierValue FROM patientIdentifier i WHERE i.PatientId=L.PatientId AND i.IdentifierTypeId IN(SELECT top 1 Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER')) IS NULL THEN ''
+		CASE WHEN L.CardSerialNumber IS NULL THEN '' -- (SELECT IdentifierValue i FROM PersonIdentifier i WHERE i.PersonId=L.PersonId AND i.IdentifierId IN(SELECT Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER')) IS NULL THEN ''
 		ELSE
-			(SELECT top 1 i.IdentifierValue FROM patientIdentifier i WHERE i.PatientId=L.PatientId AND i.IdentifierTypeId IN(SELECT top 1 Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER'))
+		  L.CardSerialNumber	--(SELECT IdentifierValue i FROM PersonIdentifier i WHERE i.PersonId=L.PersonId AND i.IdentifierId IN(SELECT Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER'))
 		END [CardSerialNumber],
 		'CARD_SERIAL_NUMBER' [IDENTIFIER_TYPE],
 	    'CARD_REGISTRY' [ASSIGNING_AUTHORITY],
 	    (SELECT Top 1 NationalId FROM mst_Facility WHERE DeleteFlag=0) [ASSIGNING_FACILITY],
-				CASE WHEN (SELECT i.IdentifierValue FROM patientIdentifier i WHERE i.PatientId=L.PatientId AND i.IdentifierTypeId IN(SELECT top 1 Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER')) IS NULL THEN ''
+				CASE WHEN L.CardSerialNumber IS NULL THEN '' --(SELECT i.IdentifierValue FROM patientIdentifier i WHERE i.PatientId=L.PatientId AND i.IdentifierTypeId IN(SELECT top 1 Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER')) IS NULL THEN ''
 		ELSE
-			(SELECT i.IdentifierValue FROM patientIdentifier i WHERE i.PatientId=L.PatientId AND i.IdentifierTypeId IN(SELECT top 1 Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER'))
+			L.CardSerialNumber-- (SELECT i.IdentifierValue FROM patientIdentifier i WHERE i.PatientId=L.PatientId AND i.IdentifierTypeId IN(SELECT top 1 Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER'))
 		END [ID]
 	FROM psmart_HTSList L
 
@@ -331,19 +341,21 @@ AS
 SELECT 
 		L.PatientId,
 		L.PersonId,
-		CASE WHEN (SELECT i.IdentifierValue FROM patientIdentifier i WHERE i.PatientId=L.PatientId AND i.IdentifierTypeId IN(SELECT top 1 Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER')) IS NULL THEN ''
+		CASE WHEN L.CardSerialNumber IS NULL THEN '' --(SELECT IdentifierValue i FROM PersonIdentifier i WHERE i.PersonId=L.PersonId AND i.IdentifierId IN(SELECT Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER')) IS NULL THEN ''
 		ELSE
-			(SELECT i.IdentifierValue FROM patientIdentifier i WHERE i.PatientId=L.PatientId AND i.IdentifierTypeId IN(SELECT top 1 Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER'))
+			L.CardSerialNumber --(SELECT IdentifierValue i FROM PersonIdentifier i WHERE i.PersonId=L.PersonId AND i.IdentifierId IN(SELECT Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER'))
 		END [CardSerialNumber],
 		'CCC_NUMBER' [IDENTIFIER_TYPE],
 	    'CCC' [ASSIGNING_AUTHORITY],
 	    (SELECT Top 1 NationalId FROM mst_Facility WHERE DeleteFlag=0) [ASSIGNING_FACILITY],
-		CASE WHEN (SELECT i.IdentifierValue FROM patientIdentifier i WHERE i.PatientId=L.PatientId AND i.IdentifierTypeId IN(SELECT top 1 Id FROM Identifiers WHERE Code='CCCNumber')) IS NULL THEN ''
+		CASE WHEN L.CardSerialNumber IS NULL THEN '' -- (SELECT i.IdentifierValue FROM patientIdentifier i WHERE i.PatientId=L.PatientId AND i.IdentifierTypeId IN(SELECT top 1 Id FROM Identifiers WHERE Code='CCCNumber')) IS NULL THEN ''
 		ELSE
-			(SELECT i.IdentifierValue FROM patientIdentifier i WHERE i.PatientId=L.PatientId AND i.IdentifierTypeId IN(SELECT top 1 Id FROM Identifiers WHERE Code='CCCNumber'))
+			L.CardSerialNumber ---	(SELECT i.IdentifierValue FROM patientIdentifier i WHERE i.PatientId=L.PatientId AND i.IdentifierTypeId IN(SELECT top 1 Id FROM Identifiers WHERE Code='CCCNumber'))
 		END [ID]
 	FROM psmart_HTSList L WHERE (SELECT i.IdentifierValue FROM patientIdentifier i WHERE i.PatientId=L.PatientId AND i.IdentifierTypeId IN(SELECT top 1 Id FROM Identifiers WHERE Code='CCCNumber')) IS NOT NULL
+
 GO
+
 
 --- 
 
@@ -419,6 +431,7 @@ GO
 
 ------------
 
+
 CREATE VIEW [dbo].[PSmart_MotherIdentifier]
 AS
 
@@ -427,17 +440,28 @@ SELECT
   L.PersonId PersonId,
   L.CardSerialNumber,
 	
-	CASE WHEN (SELECT IdentifierValue FROM PatientIdentifier i WHERE i.PatientId=(SELECT id FROM patient p WHERE p.PersonId=L.PersonId) AND i.IdentifierTypeId IN(SELECT Id FROM Identifiers WHERE code='CCCNumber')) IS NULL THEN '' 
-	ELSE
-		(SELECT IdentifierValue FROM PatientIdentifier i WHERE i.PatientId=(SELECT id FROM patient p WHERE p.PersonId=L.PersonId) AND i.IdentifierTypeId IN(SELECT Id FROM Identifiers WHERE code='CCCNumber'))
-	END [ID],
+	--CASE WHEN (SELECT IdentifierValue FROM PatientIdentifier i WHERE i.PatientId=(SELECT id FROM patient p WHERE p.PersonId=L.PersonId) AND i.IdentifierTypeId IN(SELECT Id FROM Identifiers WHERE code='CCCNumber')) IS NULL THEN '' 
+	--ELSE
+	--	(SELECT IdentifierValue FROM PatientIdentifier i WHERE i.PatientId=(SELECT id FROM patient p WHERE p.PersonId=L.PersonId) AND i.IdentifierTypeId IN(SELECT Id FROM Identifiers WHERE code='CCCNumber'))
+	--END [ID],
+	I.IdentifierValue [ID],
 	-- 'CCC_NUMBER' IDENTIFIER_TYPE,
 	'' IDENTIFIER_TYPE,
 	--'CCC'  ASSIGNING_AUTHORITY,
 	'' ASSIGNING_AUTHORITY,
 	'' ASSIGNING_FACILITY -- (SELECT top 1 NationalId FROM mst_Facility WHERE DeleteFlag=0) ASSIGNING_FACILITY
 FROM 
+PersonRelationship R
+INNER JOIN 
+
 psmart_HTSList L
+ON
+L.PersonId=R.PersonId
+INNER JOIN 
+PatientIdentifier I
+On
+I.PatientId=L.PatientId
+WHERE I.IdentifierTypeId IN(SELECT Id FROM Identifiers i WHERE i.Code='CCCNumber')
 --INNER JOIN 
 --Patient P
 --ON
@@ -485,6 +509,9 @@ psmart_HTSList L
 
 GO
 
+
+
+
 -------------- 
 
 
@@ -496,9 +523,15 @@ SELECT
   p.Id PersonId,
   L.CardSerialNumber,
 	
-	(CAST(DECRYPTBYKEY((SELECT FirstName FROM Person WHERE Id=R.PersonId)) AS VARCHAR(50))) [FIRST_NAME],
-	(CAST(DECRYPTBYKEY((SELECT MidName FROM Person WHERE Id=R.PersonId)) AS VARCHAR(50))) [MIDDLE_NAME],
-	(CAST(DECRYPTBYKEY((SELECT LastName FROM Person WHERE Id=R.PersonId)) AS VARCHAR(50))) [LAST_NAME]
+CASE WHEN (CAST(DECRYPTBYKEY((SELECT FirstName FROM Person WHERE Id=R.PersonId)) AS VARCHAR(50))) IS NULL THEN '' 
+	ELSE
+	(CAST(DECRYPTBYKEY((SELECT FirstName FROM Person WHERE Id=R.PersonId)) AS VARCHAR(50))) END  [FIRST_NAME],
+	CASE WHEN (CAST(DECRYPTBYKEY((SELECT MidName FROM Person WHERE Id=R.PersonId)) AS VARCHAR(50))) IS NULL THEN ''
+	ELSE (CAST(DECRYPTBYKEY((SELECT MidName FROM Person WHERE Id=R.PersonId)) AS VARCHAR(50))) END [MIDDLE_NAME],
+	CASE WHEN (CAST(DECRYPTBYKEY((SELECT LastName FROM Person WHERE Id=R.PersonId)) AS VARCHAR(50))) IS NULL THEN ''
+	ELSE 
+	(CAST(DECRYPTBYKEY((SELECT LastName FROM Person WHERE Id=R.PersonId)) AS VARCHAR(50))) END
+	 [LAST_NAME]
 	--isnull(CAST(DECRYPTBYKEY(f.RMiddleName ) AS VARCHAR(50)),'') MIDDLE_NAME,
 	--isnull(CAST(DECRYPTBYKEY( f.RLastName ) AS VARCHAR(50)),'')LAST_NAME
 FROM 
@@ -605,14 +638,16 @@ FROM
 GO
 
 -----------
+
+
 CREATE VIEW [dbo].[PSmart_PatientIdentification]
 AS
 SELECT DISTINCT
 	L.PersonId
    ,L.PatientId
-   , CASE WHEN  (SELECT i.IdentifierValue from PatientIdentifier i WHERE i.PatientId=L.PatientId AND i.IdentifierTypeId IN(SELECT top 1 Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER'))  IS NULL THEN ''
+   , CASE WHEN L.CardSerialNumber IS NULL THEN ''  --(SELECT IdentifierValue i FROM PersonIdentifier i WHERE i.PersonId=L.PersonId AND i.IdentifierId IN(SELECT Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER')) IS NULL THEN ''
 	 ELSE 
-		(SELECT i.IdentifierValue from PatientIdentifier i WHERE i.PatientId=L.PatientId AND i.IdentifierTypeId IN(SELECT top 1 Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER')) 
+	  L.CardSerialNumber	--(SELECT IdentifierValue i FROM PersonIdentifier i WHERE i.PersonId=L.PersonId AND i.IdentifierId IN(SELECT Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER'))
 	 END [CardSerialNumber]
    ,case when
 		 format(cast(L.DateOfBirth  as date),'yyyyMMdd') is null THEN ''
@@ -664,14 +699,15 @@ ON
 
 GO
 ---  ----
+
 CREATE VIEW [dbo].[PSmart_PatientName]
 AS
 SELECT DISTINCT
 	L.PersonId PersonId
    ,L.PatientId PatientId,
-    CASE WHEN  (SELECT i.IdentifierValue from PatientIdentifier i WHERE i.PatientId=L.PatientId AND i.IdentifierTypeId IN(SELECT top 1 Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER'))  IS NULL THEN ''
+    CASE WHEN L.CardSerialNumber IS NULL THEN ''  --(SELECT IdentifierValue i FROM PersonIdentifier i WHERE i.PersonId=L.PersonId AND i.IdentifierId IN(SELECT Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER')) IS NULL THEN ''
 	 ELSE 
-		(SELECT i.IdentifierValue from PatientIdentifier i WHERE i.PatientId=L.PatientId AND i.IdentifierTypeId IN(SELECT top 1 Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER')) 
+		L.CardSerialNumber --(SELECT IdentifierValue i FROM PersonIdentifier i WHERE i.PersonId=L.PersonId AND i.IdentifierId IN(SELECT Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER'))
 	 END [CardSerialNumber]
    ,L.FirstName FIRST_NAME
    ,L.MidName MIDDLE_NAME
@@ -791,14 +827,14 @@ SELECT
 
       CASE WHEN  R.FinalResult IS NULL THEN ''
 	   ELSE
-	   ( SELECT top 1 Name FROM LookupItem WHERE id= R.FinalResult )
+	   ( SELECT top 1 rtrim(ltrim(UPPER(Name))) FROM LookupItem WHERE id= R.FinalResult )
 	   END [RESULT],
 	   CASE H.EncounterType
 			when 1 then 'SCREENING'
 			WHEN 2 THEN 'CONFIRMATORY'
 			ELSE ''
 	   END [TYPE],
-      (SELECT top 1 NationalId FROM mst_Facility WHERE DeleteFlag=0) FACILITY,
+      (SELECT top 1 PosID FROM mst_Facility WHERE DeleteFlag=0) FACILITY,
 	  (SELECT Name FROM FacilityList WHERE MFLCode=(SELECT top 1 NationalId FROM mst_Facility WHERE DeleteFlag=0)) [FACILITYNAME],
 
  --    case  (select top 1 Name from mst_ModDeCode where CodeID=396 AND ID= h.strategyHTS)
@@ -843,7 +879,7 @@ SELECT
 	L.PatientId PatientId,
 	L.CardSerialNumber [CardSerialNumber],
 	 format(cast(t.ResultDate as date),'yyyyMMdd') [DATE],
-	t.Result [RESULT],
+	rtrim(ltrim(UPPER(t.Result)))  [RESULT],
 	t.ResultCategory [TYPE],
 	t.MFLCode [FACILITY], 
 	(SELECT Name FROM FacilityList WHERE MFLCode=t.MFLCode) [FACILITYNAME],

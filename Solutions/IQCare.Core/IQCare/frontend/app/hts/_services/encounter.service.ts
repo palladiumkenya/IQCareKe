@@ -9,6 +9,7 @@ import 'rxjs/add/observable/throw';
 import { environment } from '../../../environments/environment';
 import {Encounter} from '../_models/encounter';
 import {FinalTestingResults} from '../_models/testing';
+import {ErrorHandlerService} from '../../shared/_services/errorhandler.service';
 
 
 const httpOptions = {
@@ -22,21 +23,29 @@ export class EncounterService {
     private _lookupurl = '/api/lookup';
     private lookup = '/api/Lookup/getCustomOptions';
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient,
+                private errorHandler: ErrorHandlerService) { }
 
     public getEncounters(patientId: number): Observable<any[]> {
         return this.http.get<any[]>(this.API_URL + this._url + '/' + patientId ).pipe(
-            tap(getEncounters => this.log('fetched all client encounters')),
-            catchError(this.handleError<any[]>('getEncounters', []), )
+            tap(getEncounters => this.errorHandler.log('fetched all client encounters')),
+            catchError(this.errorHandler.handleError<any[]>('getEncounters', []), )
+        );
+    }
+
+    public getEncounter(encounterId: number): Observable<any> {
+        return this.http.get<any>(this.API_URL + this._url + '/getEncounter/' + encounterId).pipe(
+            tap(getEncounter => this.errorHandler.log('fetched a single client encounter')),
+            catchError(this.errorHandler.handleError<any[]>('getEncounter', []))
         );
     }
 
     public getCustomOptions(): Observable<any[]> {
-        const options = JSON.stringify(['HIVTestKits', 'HIVResults', 'HIVFinalResults', 'YesNo', 'ReasonsPartner']);
+        const options = JSON.stringify(['HIVTestKits', 'HIVResults', 'HIVFinalResults', 'YesNo', 'YesNoNA', 'ReasonsPartner']);
 
         return this.http.post<any[]>(this.API_URL + this.lookup, options, httpOptions).pipe(
-            tap(getCustomOptions => this.log('fetched all custom options')),
-            catchError(this.handleError<any[]>('getCustomOptions'))
+            tap(getCustomOptions => this.errorHandler.log('fetched all custom options')),
+            catchError(this.errorHandler.handleError<any[]>('getCustomOptions'))
         );
     }
 
@@ -60,62 +69,49 @@ export class EncounterService {
         };
 
         return this.http.post<any>(this.API_URL + this._url + '/addTestResults', JSON.stringify(Indata), httpOptions).pipe(
-            tap((addTesting: any) => this.log(`added Testing`)),
-            catchError(this.handleError<any>('addTesting'))
+            tap((addTesting: any) => this.errorHandler.log(`added Testing`)),
+            catchError(this.errorHandler.handleError<any>('addTesting'))
         );
     }
 
     public getHtsEncounterOptions(): Observable<any[]> {
         return this.http.get<any[]>(this.API_URL + this._lookupurl + '/htsOptions').pipe(
-            tap(htsoptions => this.log('fetched all hts options')),
-            catchError(this.handleError<any[]>('getHtsOptions', []), )
+            tap(htsoptions => this.errorHandler.log('fetched all hts options')),
+            catchError(this.errorHandler.handleError<any[]>('getHtsOptions', []), )
         );
     }
 
     public getEncounterType(): Observable<any> {
         return this.http.get<any>(this.API_URL + this._lookupurl +
             '/optionsByGroupandItemName?groupName=EncounterType&itemName=Hts-encounter', httpOptions).pipe(
-            tap((getEncounterType: any) => this.log(`get encounter type`)),
-            catchError(this.handleError<any>('getEncounterType'))
+            tap((getEncounterType: any) => this.errorHandler.log(`get encounter type`)),
+            catchError(this.errorHandler.handleError<any>('getEncounterType'))
         );
     }
 
     public addEncounter(encounter: Encounter): Observable<Encounter> {
         const encounterBody = encounter;
-        /* const finalResultsBody = finalTestingResults;
-        const hivResultsBody = hivResults1;
-        if ( hivResults2.length > 0 ) {
-            hivResultsBody.push.apply(hivResults2);
-        } */
 
         const Indata = {
-            'Encounter': encounterBody,
-            // 'Testing': hivResultsBody,
-            // 'FinalTestingResult': finalResultsBody
+            'Encounter': encounterBody
         };
 
         return this.http.post(this.API_URL + this._url, JSON.stringify(Indata), httpOptions).pipe(
-            tap((addedEncounter: Encounter) => this.log(`added encounter w/ id`)),
-            catchError(this.handleError<Encounter>('addEncounter'))
+            tap((addedEncounter: Encounter) => this.errorHandler.log(`added encounter w/ id`)),
+            catchError(this.errorHandler.handleError<Encounter>('addEncounter'))
         );
     }
 
-    private handleError<T> (operation = 'operation', result?: T) {
-        return (error: any): Observable<T> => {
-
-            // TODO: send the error to remote logging infrastructure
-            console.error(error); // log to console instead
-
-            // TODO: better job of transforming error for user consumption
-            this.log(`${operation} failed: ${error.message}`);
-
-            return Observable.throw(error.message);
+    public editEncounter(encounter: Encounter, encounterID: number, patientMasterVisitId: number): Observable<Encounter> {
+        const encounterBody = encounter;
+        const Indata = {
+            'Encounter': encounterBody
         };
-    }
 
-    /** Log a HeroService message with the MessageService */
-    private log(message: string) {
-        console.log(message);
+        return this.http.put(this.API_URL + '/api/HtsEncounter/updateEncounter/' + encounterID + '/' + patientMasterVisitId,
+            JSON.stringify(Indata), httpOptions).pipe(
+            tap((editEncounter: Encounter) => this.errorHandler.log(`edited encounter w/ id` + encounterID)),
+            catchError(this.errorHandler.handleError<Encounter>('editEncounter'))
+        );
     }
-
 }

@@ -76,7 +76,7 @@ namespace IQCare.Web.Api.Controllers.PSmart
             else
             {
                 //TODO saving to Greencard Tables
-                string processCardStatus= _incomingMessageService.ProcessCardSerialNumberIdentifier(_card);
+               // string processCardStatus= _incomingMessageService.ProcessCardSerialNumberIdentifier(_card);
                 var result = _incomingMessageService.ProcessCardSerialNumberIdentifierBluecard(_card);
 
                 return Ok(result);

@@ -3,7 +3,7 @@ GO
 
 SET QUOTED_IDENTIFIER ON
 GO
-IF NOT EXISTS
+IF EXISTS
 (
     SELECT *
     FROM sys.objects
@@ -11,6 +11,8 @@ IF NOT EXISTS
           AND type IN(N'U')
 )
 BEGIN
+	alter table Referrals drop constraint [PK_Referrals]
+	alter table Referrals drop constraint [FK_Referrals_PatientMasterVisit]
 	DROP TABLE Referrals;
 END;
 GO

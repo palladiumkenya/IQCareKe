@@ -108,5 +108,16 @@ namespace BusinessProcess.CCC.Enrollment
                 return patientIdentifiers;
             }
         }
+
+        public PatientEntityIdentifier GetPatientByCardSerialNumber(string cardSerialNumber)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var patientIdentifier = unitOfWork.PatientIdentifierRepository
+                    .FindBy(x => x.IdentifierValue == cardSerialNumber).FirstOrDefault();
+                unitOfWork.Dispose();
+                return patientIdentifier;
+            }
+        }
     }
 }

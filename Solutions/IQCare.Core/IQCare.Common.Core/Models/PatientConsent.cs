@@ -12,7 +12,7 @@ namespace IQCare.Common.Core.Models
         public int ConsentType { get; set; }
         public int ConsentValue { get; set; }
         public DateTime ConsentDate { get; set; }
-        public string DeclineReason { get; set; }
+        public int? DeclineReason { get; set; }
         public bool DeleteFlag { get; set; }
         public int CreatedBy { get; set; }
         public DateTime CreateDate { get; set; }

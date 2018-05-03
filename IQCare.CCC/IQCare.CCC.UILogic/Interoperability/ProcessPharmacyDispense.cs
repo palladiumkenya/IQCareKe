@@ -42,6 +42,10 @@ namespace IQCare.CCC.UILogic.Interoperability
 
                 //check if it is the right facility
                 LookupFacility thisFacility = facilityLookup.GetFacility();
+                if(thisFacility == null)
+                {
+                    return Msg="Facility not found";
+                }
                 if (recieverfacility.FacilityID != thisFacility.FacilityID)
                 {
                     return Msg = $"This message belongs to {receivingFacilityMflCode}, not this facility {thisFacility.MFLCode}!";
@@ -86,7 +90,7 @@ namespace IQCare.CCC.UILogic.Interoperability
                             //drug.StrengthID = messageDispensed.STRENGTH;
                             drug.Duration = messageDispensed.DURATION;
                             drug.UpdateDate = DateTime.Now;
-                            drug.UserID = 1;
+                            drug.UserID = InteropUser.UserId;
                             //drug.SingleDose = Convert.ToDecimal(Regex.Replace(messageDispensed.DOSAGE, @"^[A-Za-z]+", ""));
 
                         }
@@ -139,7 +143,7 @@ namespace IQCare.CCC.UILogic.Interoperability
                 updatedPharmacyOrder.OrderedByName = orderingPhysician.PREFIX + " " + orderingPhysician.FIRST_NAME +
                                                      " " + orderingPhysician.LAST_NAME;
                 //todo harmonise users
-                updatedPharmacyOrder.DispensedBy = 1;
+                updatedPharmacyOrder.DispensedBy = InteropUser.UserId;
                 updatedPharmacyOrder.DispensedByDate = drugDispensed.MESSAGE_HEADER.MESSAGE_DATETIME;
                 updatedPharmacyOrder.OrderStatus = 2;
                 string str = updatedPharmacyOrder.PharmacyNotes;

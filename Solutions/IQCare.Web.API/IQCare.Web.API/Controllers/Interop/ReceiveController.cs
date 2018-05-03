@@ -41,7 +41,7 @@ namespace IQCare.Web.Api.Controllers.Interop
                 return BadRequest();
             }
 
-            log.Debug($"Recieved {request}");
+           // log.Debug($"Recieved {request}");
 
             //call incoming handlers
             var serializer = new JavaScriptSerializer();
@@ -57,22 +57,24 @@ namespace IQCare.Web.Api.Controllers.Interop
                         if (val.Key == "MESSAGE_TYPE")
                         {
                             messageType = val.Value;
+                            break;
                         }
                     }
                 }
+                break;
             }
 
             Task.Run(() =>
             {
-                log.Debug("beginning async...");
+               // log.Debug("beginning async...");
                 _incomingMessageService.Handle(messageType, request.ToString());
-                log.Debug("end...");
+                //log.Debug("end...");
                 return String.Empty;
             });
 
-            log.Debug($"End Received {request}");
-            log.Debug("Sent OK response");
-            return Ok();
+           // log.Debug($"End Received {request}");
+           // log.Debug("Sent OK response");
+            return Ok(new { success = true });
         }
 
         // PUT api/values/5

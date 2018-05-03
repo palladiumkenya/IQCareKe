@@ -1,19 +1,14 @@
 ﻿using Application.Presentation;
 using Interface.CCC;
+using IQCare.CCC.UILogic.Visit;
+using IQCare.Events;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Script.Serialization;
-using System.Web.UI;
 using System.Web.UI.WebControls;
-using Entities.Administration;
-using Entities.CCC.Lookup;
-using IQCare.CCC.UILogic.Visit;
-using IQCare.Events;
 using static Entities.CCC.Encounter.PatientEncounter;
 
 namespace IQCare.CCC.UILogic
@@ -23,6 +18,8 @@ namespace IQCare.CCC.UILogic
     public class PatientEncounterLogic
     {
          private int result = 0;
+       // private int encounterId = 0;
+        private int encounterTypeId = 0;
 
         public int savePatientEncounterPresentingComplaints(string patientMasterVisitID, string patientID, string serviceID, string VisitDate, string VisitScheduled, string VisitBy, string anyComplaints, string Complaints, int TBScreening, int NutritionalStatus, int userId, string adverseEvent, string presentingComplaints)
         {
@@ -36,11 +33,23 @@ namespace IQCare.CCC.UILogic
             int val = patientEncounter.savePresentingComplaints(patientMasterVisitID, patientID, serviceID,VisitDate,VisitScheduled,VisitBy, anyComplaints, Complaints, TBScreening, NutritionalStatus, userId, advEvent, pComplaints);
 
             //Set the Visit Encounter Here
-
-            if (val > 0)
+            //TODO: ALWAYS CHECK IF AN ENCOUNTER EXITS BEFRE ADDING:
+            encounterTypeId = patientEncounterManager.GetPatientEncounterId("EncounterType", "ccc-encounter".ToLower());
+            var foundEncounter= patientEncounterManager.GetEncounterIfExists(Convert.ToInt32(patientID),Convert.ToInt32(patientMasterVisitID),Convert.ToInt32(encounterTypeId));
+            if (foundEncounter != null)
             {
-              result=  patientEncounterManager.AddpatientEncounter(Convert.ToInt32(patientID), Convert.ToInt32(patientMasterVisitID), patientEncounterManager.GetPatientEncounterId("EncounterType", "ccc-encounter".ToLower()), 203, userId);
+                result = foundEncounter.Id;
             }
+            else
+            {
+                if (val > 0)
+                {
+                    result = patientEncounterManager.AddpatientEncounter(Convert.ToInt32(patientID),
+                        Convert.ToInt32(patientMasterVisitID),
+                        patientEncounterManager.GetPatientEncounterId("EncounterType", "ccc-encounter".ToLower()), 203,
+                        userId);
+                }
+            }           
             return (result > 0) ? val : 0;
         }
 
@@ -199,7 +208,7 @@ namespace IQCare.CCC.UILogic
 
                 return filteredList[0].multiplier;
             }
-            catch(Exception ex)
+            catch
             {
                 return "0";
             }

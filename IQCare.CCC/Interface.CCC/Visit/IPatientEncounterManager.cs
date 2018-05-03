@@ -13,5 +13,6 @@ namespace Interface.CCC.Visit
        List<PatientEncounter> GetPatientEncounterAll(int patientId);
        List<PatientEncounter> GetPatientEncounterByEncounterType(int patientId, string encounterName);
        int PatientEncounterCheckout(int patientEncounterId);
+       PatientEncounter GetEncounterIfExists(int patientId, int patientMasterVisitId, int encounterTypeId);
    }
 }

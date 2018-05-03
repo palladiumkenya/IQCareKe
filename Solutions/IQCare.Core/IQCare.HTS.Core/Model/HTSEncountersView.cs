@@ -5,6 +5,7 @@ namespace IQCare.HTS.Core.Model
     public class HTSEncountersView
     {
         public Int64 RowID { get; set; }
+        public int EncounterId { get; set; }
 
         public int PatientId { get; set; }
 

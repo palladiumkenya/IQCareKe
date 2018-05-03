@@ -46,7 +46,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                 request.Tracing.ForEach(t => tracings.Add(new Core.Model.Tracing
                 {
                     PersonID = request.PersonId,
-                    TracingType = 1,
+                    TracingType = t.TracingType,
                     DateTracingDone = t.TracingDate,
                     Mode = t.Mode,
                     Outcome = t.Outcome,
