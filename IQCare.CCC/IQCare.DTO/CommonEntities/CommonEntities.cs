@@ -159,6 +159,7 @@ namespace IQCare.DTO.CommonEntities
         public string APPOINTMENT_NOTE { get; set; }
 
         public string APPOINTMENT_STATUS { get; set; }
+        public string APPOINTMENT_HONORED { get; set; }
     }
 
     public class ORDERINGPHYSICIAN
