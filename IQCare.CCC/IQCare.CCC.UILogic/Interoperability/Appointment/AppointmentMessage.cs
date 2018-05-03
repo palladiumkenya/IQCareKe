@@ -159,7 +159,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
                             APPOINTMENT_LOCATION = appointmentLocation,
                             ACTION_CODE = "A",
                             APPOINTMENT_NOTE = appointmentMessage.Description,
-                            APPOINTMENT_HONORED = appointmentStatus
+                            APPOINTMENT_STATUS = appointmentStatus
                         };
 
                         appointmentScheduling.APPOINTMENT_INFORMATION.Add(appointmentInformation);
@@ -248,7 +248,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
                                 break;
                             }
 
-                            switch (appointment.APPOINTMENT_HONORED)
+                            switch (appointment.APPOINTMENT_STATUS)
                             {
                                 case "HONORED":
                                     appointmentStatus = "Met";
@@ -415,7 +415,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
                                     break;
                             }
 
-                            switch (appointment.APPOINTMENT_HONORED)
+                            switch (appointment.APPOINTMENT_STATUS)
                             {
                                 case "HONORED":
                                     appointmentStatus = "Met";
