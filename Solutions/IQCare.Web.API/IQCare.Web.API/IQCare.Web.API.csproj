@@ -40,15 +40,6 @@
 		<Reference Include="AutoMapper">
 		  <HintPath>..\..\..\Library\AutoMapper.dll</HintPath>
 		</Reference>
-		<Reference Include="DataAccess.Base">
-			<HintPath>..\..\..\References\DataAccess.Base.dll</HintPath>
-		</Reference>
-		<Reference Include="DataAccess.Context">
-			<HintPath>..\..\..\References\DataAccess.Context.dll</HintPath>
-		</Reference>
-		<Reference Include="DataAccess.WebApi">
-			<HintPath>..\..\..\References\DataAccess.WebApi.dll</HintPath>
-		</Reference>
 		<Reference Include="Entity.WebApi">
 		  <HintPath>..\..\..\References\Entity.WebApi.dll</HintPath>
 		</Reference>

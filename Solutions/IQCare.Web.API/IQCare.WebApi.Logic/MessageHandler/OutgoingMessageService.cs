@@ -1,5 +1,5 @@
 using Application.Presentation;
-using DataAccess.Base;
+
 using Entity.WebApi;
 using Interface.WebApi;
 using IQCare.CCC.UILogic.Interoperability;
@@ -19,7 +19,7 @@ using System.Web.Script.Serialization;
 
 namespace IQCare.WebApi.Logic.MessageHandler
 {
-    public class OutgoingMessageService : ProcessBase, IOutgoingMessageService
+    public class OutgoingMessageService :  IOutgoingMessageService
     {
         private readonly IJsonEntityMapper _jsonEntityMapper;
         private readonly IApiOutboxManager _apiOutboxManager = (IApiOutboxManager)ObjectFactory.CreateInstance("BusinessProcess.WebApi.BApiOutBox, BusinessProcess.WebApi");
