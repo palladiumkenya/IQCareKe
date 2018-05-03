@@ -56,3 +56,5 @@ BEGIN
 	ALTER TABLE ord_visit ADD AuditData XML
 END
 GO
+
+
