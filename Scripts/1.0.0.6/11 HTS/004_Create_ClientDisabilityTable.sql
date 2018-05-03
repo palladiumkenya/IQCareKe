@@ -39,3 +39,18 @@ BEGIN
 	ALTER TABLE [dbo].[ClientDisability] CHECK CONSTRAINT [FK_ClientDisability_PersonId_Person_Id]
 END;
 GO
+
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'DeleteFlag'AND Object_ID = OBJECT_ID(N'ClientDisability'))
+BEGIN
+	ALTER TABLE [dbo].[ClientDisability] ADD DeleteFlag bit null;
+END;
+
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'CreateDate'AND Object_ID = OBJECT_ID(N'ClientDisability'))
+BEGIN
+	ALTER TABLE [dbo].[ClientDisability] ADD CreateDate datetime null;
+END;
+
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'CreatedBy'AND Object_ID = OBJECT_ID(N'ClientDisability'))
+BEGIN
+	ALTER TABLE [dbo].[ClientDisability] ADD CreatedBy int null;
+END;

@@ -28,7 +28,7 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Encounter
                     for (int i = 0; i < request.ScreeningType.Count; i++)
                     {
                         var screening = request.ScreeningType[i];
-                        var screeningType = await _unitOfWork.Repository<LookupItemView>().Get(x => x.MasterName == "TBStatus").FirstOrDefaultAsync();
+                        var screeningType = await _unitOfWork.Repository<LookupItemView>().Get(x => x.MasterName == "TbScreening").FirstOrDefaultAsync();
                         int screeningTypeId = screeningType != null ? screeningType.MasterId : 0;
 
 

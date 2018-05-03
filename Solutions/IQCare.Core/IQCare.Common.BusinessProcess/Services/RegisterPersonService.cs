@@ -71,10 +71,23 @@ namespace IQCare.Common.BusinessProcess.Services
             try
             {
                 List<PersonPopulation> personPopulations = new List<PersonPopulation>();
+                var populationType = "Key Population";
+                for (int i = 0; i < populations.Count; i++)
+                {
+                    var keyPop = await _unitOfWork.Repository<LookupItemView>()
+                        .Get(x => x.MasterName == "HTSKeyPopulation" && x.ItemId == populations[i])
+                        .FirstOrDefaultAsync();
+
+                    if (keyPop.ItemName == "Not Applicable")
+                    {
+                        populationType = "General Population";
+                    }
+                }
+                
                 populations.ForEach(t => personPopulations.Add(new PersonPopulation
                 {
                     PersonId = personId,
-                    PopulationType = "Key Population",
+                    PopulationType = populationType,
                     PopulationCategory = t,
                     Active = true,
                     DeleteFlag = false,
@@ -143,6 +156,28 @@ namespace IQCare.Common.BusinessProcess.Services
                 await _unitOfWork.SaveAsync();
 
                 return personMaritalStatus;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public async Task<PersonIdentifier> addPersonIdentifiers(int personId, int identifierId, string identifierValue, int userId)
+        {
+            try
+            {
+                PersonIdentifier personIdentifier = new PersonIdentifier()
+                {
+                    PersonId = personId,
+                    IdentifierId = identifierId,
+                    IdentifierValue = identifierValue,
+                    DeleteFlag = false,
+                    CreatedBy = userId,
+                    CreateDate = DateTime.Now
+                };
+
+                return personIdentifier;
             }
             catch (Exception e)
             {
@@ -304,7 +339,7 @@ namespace IQCare.Common.BusinessProcess.Services
             }
         }
 
-        public async Task<Patient> AddPatient(int personID, DateTime dateOfBirth)
+        public async Task<Patient> AddPatient(int personID, DateTime dateOfBirth, int userId)
         {
             try
             {
@@ -315,7 +350,7 @@ namespace IQCare.Common.BusinessProcess.Services
                 var sqlPatient = "exec pr_OpenDecryptedSession;" +
                                  "Insert Into  Patient(ptn_pk,PersonId,PatientIndex,PatientType,FacilityId,Active,DateOfBirth,NationalId,DeleteFlag,CreatedBy,CreateDate,AuditData,DobPrecision)" +
                                  $"Values(0, {personID}, {DateTime.Now.Year + '-' + personID}, '{patientType.ItemId}', '{facility.PosID}', 1," +
-                                 $"'{dateOfBirth.ToString("yyyy-MM-dd")}', ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '99999999'), 0, 1, GETDATE()," +
+                                 $"'{dateOfBirth.ToString("yyyy-MM-dd")}', ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '99999999'), 0, '{userId}', GETDATE()," +
                                  $"NULL, 1);" +
                                  $"SELECT [Id],[ptn_pk],[PersonId],[PatientIndex],[PatientType],[FacilityId],[Active],[DateOfBirth]," +
                                  $"[DobPrecision],CAST(DECRYPTBYKEY(NationalId) AS VARCHAR(50)) [NationalId],[DeleteFlag],[CreatedBy]," +

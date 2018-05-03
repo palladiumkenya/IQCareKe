@@ -27,6 +27,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
 
         public async Task<Result<SynchronizeClientsResponse>> Handle(SynchronizeClientsCommand request, CancellationToken cancellationToken)
         {
+            string afyaMobileId = String.Empty;
             using (_htsUnitOfWork)
             using (_unitOfWork)
             {
@@ -49,8 +50,9 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                             .LANDMARK;
                         string physicalAddress = request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.POSTAL_ADDRESS;
                         string mobileNumber = request.CLIENTS[i].PATIENT_IDENTIFICATION.PHONE_NUMBER;
-
                         string enrollmentNo = string.Empty;
+                        int providerId = request.CLIENTS[i].ENCOUNTER.PLACER_DETAIL.PROVIDER_ID;
+
                         for (int j = 0; j < request.CLIENTS[j].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID.Count; j++)
                         {
                             if (request.CLIENTS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].ASSIGNING_AUTHORITY ==
@@ -59,27 +61,37 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                             {
                                 enrollmentNo = request.CLIENTS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].ID;
                             }
+
+                            if (request.CLIENTS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].IDENTIFIER_TYPE ==
+                                "AFYA_MOBILE_ID" &&
+                                request.CLIENTS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].ASSIGNING_AUTHORITY ==
+                                "AFYAMOBILE")
+                            {
+                                afyaMobileId = request.CLIENTS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].ID;
+                            }
                         }
 
 
                         // Add Person
                         var person = await registerPersonService.RegisterPerson(firstName, middleName, lastName, sex,
-                            dateOfBirth, 1);
+                            dateOfBirth, providerId);
                         // Add Patient
-                        var patient = await registerPersonService.AddPatient(person.Id, dateOfBirth);
+                        var patient = await registerPersonService.AddPatient(person.Id, dateOfBirth, providerId);
                         // Enroll patient
-                        var patientIdentifier = await registerPersonService.EnrollPatient(enrollmentNo, patient.Id, 2, 1, dateEnrollment);
+                        var patientIdentifier = await registerPersonService.EnrollPatient(enrollmentNo, patient.Id, 2, providerId, dateEnrollment);
+                        //Add PersonIdentifiers
+                        var personIdentifier = await registerPersonService.addPersonIdentifiers(person.Id, 10, afyaMobileId, providerId);
                         // Add Marital Status
-                        var maritalStatus = await registerPersonService.AddMaritalStatus(person.Id, maritalStatusId, 1);
+                        var maritalStatus = await registerPersonService.AddMaritalStatus(person.Id, maritalStatusId, providerId);
                         // Add Person Key pop
                         var population = await registerPersonService.addPersonPopulation(person.Id,
-                            request.CLIENTS[i].PATIENT_IDENTIFICATION.KEY_POP, 1);
+                            request.CLIENTS[i].PATIENT_IDENTIFICATION.KEY_POP, providerId);
                         // Add Person Location
                         var personLocation =
-                            await registerPersonService.addPersonLocation(person.Id, 0, 0, 0, "", landmark, 1);
+                            await registerPersonService.addPersonLocation(person.Id, 0, 0, 0, "", landmark, providerId);
                         //add Person Contact
                         var personContact = await registerPersonService.addPersonContact(person.Id, physicalAddress,
-                            mobileNumber, string.Empty, string.Empty, 1);
+                            mobileNumber, string.Empty, string.Empty, providerId);
 
 
                         /***
@@ -99,7 +111,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         int consentTypeId = consentType != null ? consentType.ItemId : 0;
 
                         //Get TBStatus masterId
-                        var screeningType = await _unitOfWork.Repository<LookupItemView>().Get(x => x.MasterName == "TBStatus").FirstOrDefaultAsync();
+                        var screeningType = await _unitOfWork.Repository<LookupItemView>().Get(x => x.MasterName == "TbScreening").FirstOrDefaultAsync();
                         int screeningTypeId = screeningType != null ? screeningType.MasterId : 0;
                         int tbStatus = request.CLIENTS[i].ENCOUNTER.PRE_TEST.TB_SCREENING;
 
@@ -112,7 +124,6 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         string htsEncounterRemarks = request.CLIENTS[i].ENCOUNTER.PRE_TEST.REMARKS;
                         int clientEverTested = request.CLIENTS[i].ENCOUNTER.PRE_TEST.EVER_TESTED;
                         int clientEverSelfTested = request.CLIENTS[i].ENCOUNTER.PRE_TEST.SELF_TEST_12_MONTHS;
-                        int providerId = request.CLIENTS[i].ENCOUNTER.PLACER_DETAIL.PROVIDER_ID;
                         int testEntryPoint = request.CLIENTS[i].ENCOUNTER.PRE_TEST.SERVICE_POINT;
                         int htsencounterType= request.CLIENTS[i].ENCOUNTER.PRE_TEST.ENCOUNTER_TYPE;
                         int testingStrategy = request.CLIENTS[i].ENCOUNTER.PRE_TEST.STRATEGY;
@@ -144,16 +155,16 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         string tracingRemarks = String.Empty;
 
                         //add patient master visit
-                        var patientMasterVisit = await encounterTestingService.AddPatientMasterVisit(patient.Id, 2, encounterDate, 1);
+                        var patientMasterVisit = await encounterTestingService.AddPatientMasterVisit(patient.Id, 2, encounterDate, providerId);
                         //add patient encounter
                         var patientEncounter = await encounterTestingService.AddPatientEncounter(patient.Id,
-                            encounterTypeId, patientMasterVisit.Id, encounterDate, 2, 1);
+                            encounterTypeId, patientMasterVisit.Id, encounterDate, 2, providerId);
                         //add patient consent
                         var consent = await encounterTestingService.addPatientConsent(patient.Id, patientMasterVisit.Id,
-                            2, consentValue, consentTypeId, encounterDate, 1, null);
+                            2, consentValue, consentTypeId, encounterDate, providerId, null);
                         //add patient screening
                         var patientScreening = await encounterTestingService.addPatientScreening(patient.Id,
-                            patientMasterVisit.Id, screeningTypeId, encounterDate, tbStatus, 1);
+                            patientMasterVisit.Id, screeningTypeId, encounterDate, tbStatus, providerId);
                         //add patient encounter
                         var htsEncounter = await encounterTestingService.addHtsEncounter(htsEncounterRemarks,
                             clientEverSelfTested, clientEverTested, null,
@@ -198,7 +209,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
 
                     return Result<SynchronizeClientsResponse>.Valid(new SynchronizeClientsResponse()
                     {
-
+                        afyaMobileId = afyaMobileId
                     });
                 }
                 catch (Exception e)

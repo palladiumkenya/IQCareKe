@@ -36,7 +36,7 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.PersonCommand
                     //var patientInsert = await _unitOfWork.Repository<Patient>().FromSql(sqlPatient);
 
                     RegisterPersonService registerPersonService = new RegisterPersonService(_unitOfWork);
-                    var patient = await registerPersonService.AddPatient(request.PersonId, request.DateOfBirth);
+                    var patient = await registerPersonService.AddPatient(request.PersonId, request.DateOfBirth, request.UserId);
 
                     _unitOfWork.Dispose();
 

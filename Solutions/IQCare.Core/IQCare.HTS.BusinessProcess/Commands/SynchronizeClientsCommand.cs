@@ -13,5 +13,6 @@ namespace IQCare.HTS.BusinessProcess.Commands
 
     public class SynchronizeClientsResponse
     {
+        public string afyaMobileId { get; set; }
     }
 }
