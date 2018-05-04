@@ -45,4 +45,9 @@ namespace IQCare.Common.BusinessProcess.Commands.Setup
         public string IDENTIFIER_TYPE { get; set; }
         public string ASSIGNING_AUTHORITY { get; set; }
     }
+
+    public class PARTNER_FAMILY_PATIENT_IDENTIFICATION : PATIENT_IDENTIFICATION
+    {
+        public int RELATIONSHIP_TYPE { get; set; }
+    }
 }

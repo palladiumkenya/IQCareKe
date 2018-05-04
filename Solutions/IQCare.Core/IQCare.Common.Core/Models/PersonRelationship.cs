@@ -8,7 +8,7 @@ namespace IQCare.Common.Core.Models
         public int PersonId { get; set; }
         public int PatientId { get; set; }
         public int RelationshipTypeId { get; set; }
-        public int BaselineResult { get; set; }
+        public int? BaselineResult { get; set; }
         public DateTime? BaselineDate { get; set; }
         public bool DeleteFlag { get; set; }
         public int CreatedBy { get; set; }
