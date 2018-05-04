@@ -1459,17 +1459,17 @@ namespace IQCare.Web.Clinical
             patientID = Convert.ToInt32(Session["PatientId"].ToString());
             locationID = Convert.ToInt32(Session["AppLocationId"].ToString());
             gender = Session["PatientSex"].ToString();
-            if (string.IsNullOrEmpty(Session["patientageinyearmonth"].ToString()))
+            if (null != (Session["patientageinyearmonth"]))
             {
                 age = Convert.ToDouble(Session["patientageinyearmonth"].ToString());
             }
 
-            if (string.IsNullOrEmpty(Session["PatientAge"].ToString()))
+            if (null != (Session["PatientAge"]))
             {
                 ageInYear = (int)Convert.ToDouble(Session["PatientAge"].ToString());
             }
 
-            if (string.IsNullOrEmpty(Session["PatientAge"].ToString()))
+            if (null!= (Session["PatientAge"]))
             {
                 ageInMonth = Convert.ToInt32(Session["PatientAge"].ToString().Substring(Session["PatientAge"].ToString().IndexOf(".") + 1));
             }
