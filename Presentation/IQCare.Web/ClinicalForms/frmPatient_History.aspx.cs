@@ -210,6 +210,7 @@ namespace IQCare.Web.Clinical
             }
 
         }
+        string origin = String.Empty;
 
         /// <summary>
         /// Handles the Load event of the Page control.
@@ -228,26 +229,37 @@ namespace IQCare.Web.Clinical
             IPatientHome PatientManager;
             try
             {
-
+                if (Session["urlOrigin"] != null)
+                {
+                    origin = Session["urlOrigin"].ToString();
+                }
                 #region "Refresh Patient Records"
 
-                if (null == Session["PatientInformation"])
+                if (null == Session["PatientInformation"] || origin == "greencard")
                 {
-                    PatientManager = (IPatientHome)ObjectFactory.CreateInstance("BusinessProcess.Clinical.BPatientHome, BusinessProcess.Clinical");
-                    System.Data.DataSet thePDS = PatientManager.GetPatientDetails(Convert.ToInt32(Session["PatientId"]), Convert.ToInt32(Session["SystemId"]), Convert.ToInt32(Session["TechnicalAreaId"]));
-                    //System.Data.DataSet thePDS = PManager.GetPatientDetails(Convert.ToInt32(Request.QueryString["PatientId"]), Convert.ToInt32(Session["SystemId"]));
-                    if (null != thePDS && thePDS.Tables.Count > 0)
+                    if (PatientService.LoadPatientModuleData(Convert.ToInt32(Session["TechnicalAreaId"]), Convert.ToInt32(Session["PatientId"]), Convert.ToInt32(Session["SystemId"])))
                     {
-                        Session["PatientInformation"] = thePDS.Tables[0];
+
                     }
                     else
                     {
                         throw new Exception("Patient information could not be retrieved");
                     }
+                    //PatientManager = (IPatientHome)ObjectFactory.CreateInstance("BusinessProcess.Clinical.BPatientHome, BusinessProcess.Clinical");
+                    //System.Data.DataSet thePDS = PatientManager.GetPatientDetails(Convert.ToInt32(Session["PatientId"]), Convert.ToInt32(Session["SystemId"]), Convert.ToInt32(Session["TechnicalAreaId"]));
+                    ////System.Data.DataSet thePDS = PManager.GetPatientDetails(Convert.ToInt32(Request.QueryString["PatientId"]), Convert.ToInt32(Session["SystemId"]));
+                    //if (null != thePDS && thePDS.Tables.Count > 0)
+                    //{
+                    //    Session["PatientInformation"] = thePDS.Tables[0];
+                    //}
+                    //else
+                    //{
+                    //    throw new Exception("Patient information could not be retrieved");
+                    //}
                 }
                 #endregion
 
-               // IPatientHome PatientManager;
+                // IPatientHome PatientManager;
                 PatientManager = (IPatientHome)ObjectFactory.CreateInstance("BusinessProcess.Clinical.BPatientHome, BusinessProcess.Clinical");
 
 
@@ -304,7 +316,7 @@ namespace IQCare.Web.Clinical
         protected void btnExit_Click(object sender, EventArgs e)
         {
             string theUrl;
-            string origin = String.Empty;
+            origin = String.Empty;
             if (Session["urlOrigin"] != null)
             {
                 origin = Session["urlOrigin"].ToString();

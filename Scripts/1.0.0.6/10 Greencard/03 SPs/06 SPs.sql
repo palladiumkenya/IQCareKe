@@ -89,7 +89,7 @@ BEGIN
 	case when resultvalue is not null then resultvalue else null end,
 	case when undetectable = 1 then 50 else null end
 	) resultvalue,
-	b.deleteflag,c.resultdate 
+	b.deleteflag,Isnull(c.resultdate ,c.StatusDate) ResultDate
 	from ord_laborder a inner join dtl_LabOrderTestResult b on a.id = b.laborderid
 	inner join dtl_LabOrderTest c on a.id = c.laborderid
 	where b.parameterid in (3,107) and a.ptn_pk=@ptnpk ) VLs
