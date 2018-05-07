@@ -7,13 +7,13 @@ CREATE TABLE NewDrugList (
 	Strength varchar(10)
 );
 
-INSERT INTO NewDrugList(DrugName,Abbreviation,strength) VALUES('Dolutegravir','DTG','50mg');
-INSERT INTO NewDrugList(DrugName,Abbreviation,strength) VALUES('Darunavir','DRV','300mg');
-INSERT INTO NewDrugList(DrugName,Abbreviation,strength) VALUES('Darunavir','DRV','600mg');
-INSERT INTO NewDrugList(DrugName,Abbreviation,strength) VALUES('Atazanavir/Ritonavir','ATV/r','300mg/100mg');
-INSERT INTO NewDrugList(DrugName,Abbreviation,strength) VALUES('Lopinavir/Ritonavir','LPV/r','200mg/50mg');
-INSERT INTO NewDrugList(DrugName,Abbreviation,strength) VALUES('Lopinavir/Ritonavir','LPV/r','80mg/20mg/ml');
-INSERT INTO NewDrugList(DrugName,Abbreviation,strength) VALUES('Reltegravir','RAL','400mg');
+INSERT INTO NewDrugList(DrugName,Abbreviation,strength) VALUES('Dolutegravir-50mg','DTG','50mg');
+INSERT INTO NewDrugList(DrugName,Abbreviation,strength) VALUES('Darunavir-300mg','DRV','300mg');
+INSERT INTO NewDrugList(DrugName,Abbreviation,strength) VALUES('Darunavir-600mg','DRV','600mg');
+INSERT INTO NewDrugList(DrugName,Abbreviation,strength) VALUES('Atazanavir/Ritonavir-300mg/100mg','ATV/r','300mg/100mg');
+INSERT INTO NewDrugList(DrugName,Abbreviation,strength) VALUES('Lopinavir/Ritonavir-200mg/50mg','LPV/r','200mg/50mg');
+INSERT INTO NewDrugList(DrugName,Abbreviation,strength) VALUES('Lopinavir/Ritonavir-80mg/20mg/ml','LPV/r','80mg/20mg/ml');
+INSERT INTO NewDrugList(DrugName,Abbreviation,strength) VALUES('Reltegravir-400mg','RAL','400mg');
 
 Declare @ItemId int=0,@genericId int,@count int,@counter int=0,@maxId int=0,@minId int=0;
 Declare @drugName varchar(100),@abbreviation varchar(10),@strength varchar(10);

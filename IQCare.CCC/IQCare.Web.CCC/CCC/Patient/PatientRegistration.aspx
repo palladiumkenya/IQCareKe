@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CCC/Greencard.Master" AutoEventWireup="true" CodeBehind="PatientRegistration.aspx.cs" Inherits="IQCare.Web.CCC.Patient.PatientRegistration" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
-	<div class="=col-md-12 col-sm-12 col-xs-12">
+    <div class="=col-md-12 col-sm-12 col-xs-12">
 		
 		<div class="col-md-12">
 			 <div class="bs-callout bs-callout-danger hidden">
