@@ -167,10 +167,10 @@ namespace BusinessProcess.CCC.visit
                         item.Status = 3;
                         item.End = DateTime.Now;
                         item.Active = true;
-                        item.VisitDate = null;
-                        item.VisitScheduled = null;
-                        item.VisitBy = null;
-                        item.VisitType = null;
+                       // item.VisitDate = null;
+                       // item.VisitScheduled = null;
+                       // item.VisitBy = null;
+                       // item.VisitType = null;
 
                         unitOfWork.PatientMasterVisitRepository.Update(item);
 

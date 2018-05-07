@@ -9896,6 +9896,11 @@
     <DrugName>Nifedipine 20mg Tabs</DrugName>
     <DeleteFlag>false</DeleteFlag>
   </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1232</Drug_PK>
+    <DrugName>sulfonamides-Cotrimoxazole/sulphax 400mg/80mg</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
   <Mst_Generic>
     <GenericId>1</GenericId>
     <GenericName>Abacavir</GenericName>
@@ -12237,6 +12242,10 @@
     <GenericId>594</GenericId>
     <GenericName>Atazanavir/Ritonavir</GenericName>
     <GenericAbbrevation>ATV/r</GenericAbbrevation>
+  </Mst_Generic>
+  <Mst_Generic>
+    <GenericId>595</GenericId>
+    <GenericName>sulfonamides</GenericName>
   </Mst_Generic>
   <Mst_DrugType>
     <DrugTypeId>1</DrugTypeId>
