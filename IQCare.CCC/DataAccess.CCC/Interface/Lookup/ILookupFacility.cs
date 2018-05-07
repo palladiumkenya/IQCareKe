@@ -11,6 +11,7 @@ namespace DataAccess.CCC.Interface.Lookup
     {
         LookupFacility GetFacility();
         List<LookupFacility> FindBy(Func<LookupFacility, bool> p);
-       // LookupFacility Findby(int facilityId);
+        // LookupFacility Findby(int facilityId);
+        LookupFacility GetFacilityByMflCode(string mflCode);
     }
 }

@@ -6,6 +6,7 @@ import {catchError, tap} from 'rxjs/operators';
 import 'rxjs/add/observable/of';
 import {Store} from '@ngrx/store';
 import * as Consent from '../reducers/app.states';
+import {ErrorHandlerService} from './errorhandler.service';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -17,23 +18,25 @@ export class AppStateService {
     private url = '/api/AppStore';
 
     constructor(private http: HttpClient,
-                private store: Store<AppState>) { }
+                private store: Store<AppState>,
+                private errorHandler: ErrorHandlerService) { }
 
     public addAppState(appStateId: number, personId: number, patientId: number, patientMasterVisitId: number,
-                       encounterId: number): Observable<any> {
+                       encounterId: number, appStateObject: string = ''): Observable<any> {
         const Indata = {
             PersonId: personId,
             PatientId: patientId,
             PatientMasterVisitId: patientMasterVisitId,
             EncounterId: encounterId,
-            AppStateId: appStateId
+            AppStateId: appStateId,
+            AppStateObject: appStateObject
         };
 
         console.log(Indata);
 
         return this.http.post<any>(this.API_URL + this.url, JSON.stringify(Indata), httpOptions).pipe(
-            tap(addAppState => this.log('added observable to store')),
-            catchError(this.handleError<any[]>('addAppState', []))
+            tap(addAppState => this.errorHandler.log('added observable to store')),
+            catchError(this.errorHandler.handleError<any[]>('addAppState', []))
         );
     }
 
@@ -42,8 +45,6 @@ export class AppStateService {
         const patientId = localStorage.getItem('patientId');
         const patientMasterVisitId = localStorage.getItem('patientMasterVisitId');
         const htsEncounterId = localStorage.getItem('htsEncounterId');
-
-        console.log(personId, patientId, patientMasterVisitId, htsEncounterId);
 
         const InData = {
             'personId': personId,
@@ -54,11 +55,9 @@ export class AppStateService {
 
         const promise = this.http.post<any>(this.API_URL + this.url + '/getState',
             JSON.stringify(InData), httpOptions).toPromise().then( (res) => {
-                console.log(`initialize `, res);
 
                 if (res['stateStore'].length > 0 && ((personId) || (patientId) || (patientMasterVisitId) || (htsEncounterId))) {
                     const response = res['stateStore'];
-                    console.log(response);
 
                     for (let i = 0; i < response.length; i++) {
                         switch (response[i].appStateId) {
@@ -84,34 +83,22 @@ export class AppStateService {
                                 this.store.dispatch(new Consent.IsEnrolled(true));
                                 break;
                             case 8:
-                                this.store.dispatch(new Consent.IsPnsScreened(true));
+                                for (let j = 0; j < response[i].appStateStoreObjects.length; j++) {
+                                    this.store.dispatch(new Consent.IsPnsScreened(response[i].appStateStoreObjects[j].appStateObject));
+                                }
                                 break;
                             case 9:
-                                this.store.dispatch(new Consent.IsPnsTracingDone(true));
+                                for (let j = 0; j < response[i].appStateStoreObjects.length; j++) {
+                                    this.store.dispatch(new Consent.IsPnsTracingDone(response[i].appStateStoreObjects[j].appStateObject));
+                                }
                                 break;
                         }
                     }
                 }
+        }, (err) => {
+                console.log('Error connecting to IQCareApi ', err);
         });
 
         return promise;
-    }
-
-    private handleError<T> (operation = 'operation', result?: T) {
-        return (error: any): Observable<T> => {
-
-            // TODO: send the error to remote logging infrastructure
-            console.error(error); // log to console instead
-
-            // TODO: better job of transforming error for user consumption
-            this.log(`${operation} failed: ${error.message}`);
-
-            return Observable.throw(error.message);
-        };
-    }
-
-    /** Log a HeroService message with the MessageService */
-    private log(message: string) {
-        console.log(message);
     }
 }

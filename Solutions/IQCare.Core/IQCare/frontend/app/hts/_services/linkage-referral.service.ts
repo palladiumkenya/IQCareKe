@@ -7,6 +7,7 @@ import 'rxjs/add/observable/throw';
 import {Referral} from '../_models/referral';
 import {Tracing} from '../_models/tracing';
 import {Linkage} from '../_models/linkage';
+import {ErrorHandlerService} from '../../shared/_services/errorhandler.service';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -18,39 +19,40 @@ export class LinkageReferralService {
     private _lookupurl = '/api/lookup/htsTracingOptions';
     private url = '/api/Referral';
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient,
+                private errorHandler: ErrorHandlerService) { }
 
     public getReferralReasons() {
         const options = JSON.stringify(['ReferralReason']);
 
         return this.http.post<any[]>(this.API_URL + '/api/Lookup/getCustomOptions', options, httpOptions).pipe(
-            tap(getReferralReasons => this.log('get referral reasons')),
-            catchError(this.handleError<any[]>('getReferralReasons'))
+            tap(getReferralReasons => this.errorHandler.log('get referral reasons')),
+            catchError(this.errorHandler.handleError<any[]>('getReferralReasons'))
         );
     }
 
     public filterFacilities(filterString: string) {
         return this.http.get<any[]>(this.API_URL + '/api/Lookup/searchFacilityList?searchString=' + filterString).pipe(
-            tap(filterFacilities => this.log('fetched filtered facilities')),
-            catchError(this.handleError<any[]>('filterFacilities'))
+            tap(filterFacilities => this.errorHandler.log('fetched filtered facilities')),
+            catchError(this.errorHandler.handleError<any[]>('filterFacilities'))
         );
     }
 
     public getTracingOptions(): Observable<any[]> {
         return this.http.get<any[]>(this.API_URL + this._lookupurl).pipe(
-            tap(tracingoptions => this.log('fetched all tracing options')),
-            catchError(this.handleError<any[]>('getTracingOptions'))
+            tap(tracingoptions => this.errorHandler.log('fetched all tracing options')),
+            catchError(this.errorHandler.handleError<any[]>('getTracingOptions'))
         );
     }
 
     public addLinkage(linkage: Linkage) {
         return this.http.post(this.API_URL + this.url + '/linkpatient', JSON.stringify(linkage), httpOptions).pipe(
-            tap((addedLinkage: Linkage) => this.log(`added linkage w/ id`)),
-            catchError(this.handleError<Linkage>('addLinkage'))
+            tap((addedLinkage: Linkage) => this.errorHandler.log(`added linkage w/ id`)),
+            catchError(this.errorHandler.handleError<Linkage>('addLinkage'))
         );
     }
 
-    public addReferralTracing(referral: Referral, tracing: Tracing[]): Observable<Referral> {
+    public addReferralTracing(referral: Referral, tracing: Tracing[], tracingType: number): Observable<Referral> {
         const trace = [];
         for (let i = 0; i < tracing.length; i++) {
             const mode = tracing[i]['mode']['itemId'];
@@ -58,7 +60,8 @@ export class LinkageReferralService {
             trace.push({
                 TracingDate: tracing[i].tracingDate,
                 Mode: mode,
-                Outcome: outcome
+                Outcome: outcome,
+                TracingType: tracingType
             });
         }
 
@@ -74,27 +77,8 @@ export class LinkageReferralService {
         };
 
         return this.http.post(this.API_URL + this.url, JSON.stringify(Indata), httpOptions).pipe(
-            tap((addedLinkageTracing: Referral) => this.log(`added referral and tracing w/ id`)),
-            catchError(this.handleError<Referral>('addReferralTracing'))
+            tap((addedLinkageTracing: Referral) => this.errorHandler.log(`added referral and tracing w/ id`)),
+            catchError(this.errorHandler.handleError<Referral>('addReferralTracing'))
         );
     }
-
-    private handleError<T> (operation = 'operation', result?: T) {
-        return (error: any): Observable<T> => {
-
-            // TODO: send the error to remote logging infrastructure
-            console.error(error); // log to console instead
-
-            // TODO: better job of transforming error for user consumption
-            this.log(`${operation} failed: ${error.message}`);
-
-            return Observable.throw(error.message);
-        };
-    }
-
-    /** Log a HeroService message with the MessageService */
-    private log(message: string) {
-        console.log(message);
-    }
-
 }

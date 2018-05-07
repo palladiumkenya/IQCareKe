@@ -22,6 +22,8 @@ namespace IQCare.Common.Infrastructure
         public async Task AddAsync(TEntity entity)
             => await _context.AddAsync(entity);
 
+        public void Update(TEntity entity) => _context.Entry(entity).State = EntityState.Modified;
+
         public async Task AddRangeAsync(IEnumerable<TEntity> entities)
             => await _context.AddRangeAsync(entities);
 

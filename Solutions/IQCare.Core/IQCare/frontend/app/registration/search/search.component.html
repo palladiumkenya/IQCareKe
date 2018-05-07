@@ -4,10 +4,10 @@
     </div>
     <div class="ibox-content">
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-2 col-lg-2 col-sm-2">
                 <app-leftnav></app-leftnav>
             </div>
-            <div class="col-md-10 animated fadeIn">
+            <div class="col-md-10 col-lg-10 col-sm-10 animated fadeIn">
                 <div class="panel panel-default">
                     <div class="panel-heading">CLIENTS</div>
                     <div class="panel-body">
@@ -105,15 +105,14 @@
                                 <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="getSelectedRow(row)"></mat-row>
                             </mat-table>
 
-                            <mat-paginator #paginator
-                                           [pageSize]="10"
-                                           [pageSizeOptions]="[5, 10, 20]"
+                            <mat-paginator [length]=""
+                                           [pageSize]="5"
+                                           [pageSizeOptions]="[3, 5, 10, 20]"
                                            [showFirstLastButtons]="true">
                             </mat-paginator>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

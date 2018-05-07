@@ -68,7 +68,7 @@ namespace IQCare.Web.CCC
                     }
 
                 }
-                catch (Exception ex)
+                catch 
                 {
 
                 }
@@ -90,7 +90,7 @@ namespace IQCare.Web.CCC
                         //lblctx.Text = "<span class='badge pull-right'>" + +"</span>";
                     }
                 }
-                catch (Exception ex) { }
+                catch{ }
             }
 
         }

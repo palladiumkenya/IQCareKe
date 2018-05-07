@@ -6,10 +6,11 @@
   "apps": [
     {
       "root": "frontend",
-      "outDir": "wwwroot",
+      "outDir": "..\\..\\..\\package\\frontend",
       "assets": [
         "assets",
-        "favicon.ico"
+        "favicon.ico",
+        "Web.config"
       ],
       "index": "index.html",
       "main": "main.ts",

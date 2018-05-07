@@ -1,4 +1,4 @@
-import {Component, NgZone, OnInit} from '@angular/core';
+import {AfterViewInit, Component, NgZone, OnInit, ViewChild} from '@angular/core';
 import {Search} from '../_models/search';
 import {SearchService} from '../_services/search.service';
 import {DataSource} from '@angular/cdk/collections';
@@ -7,17 +7,21 @@ import 'rxjs/add/observable/from';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Store} from '@ngrx/store';
 import * as Consent from '../../shared/reducers/app.states';
+import {MatPaginator, MatTableDataSource} from '@angular/material';
+import {tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css']
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, AfterViewInit {
     search: Search;
 
     displayedColumns = ['IdentifierValue', 'firstName', 'midName', 'lastName', 'dateOfBirth', 'enrollmentDate'];
     dataSource = new SearchDataSource(this.searchService, this.search);
+
+    @ViewChild(MatPaginator) paginator: MatPaginator;
 
     constructor(private searchService: SearchService,
                 private router: Router,
@@ -37,6 +41,13 @@ export class SearchComponent implements OnInit {
         localStorage.removeItem('patientMasterVisitId');
         localStorage.removeItem('isPartner');
         localStorage.setItem('serviceAreaId', '2');
+        localStorage.removeItem('editEncounterId');
+    }
+
+    ngAfterViewInit() {
+        /*this.paginator.page.pipe(
+            tap(() => this.)
+        ).subscribe();*/
     }
 
     onSubmit() {
@@ -44,16 +55,16 @@ export class SearchComponent implements OnInit {
     }
 
     getSelectedRow(row) {
-        console.log(row);
-
         localStorage.setItem('personId', row['personId']);
         localStorage.setItem('patientId', row['patientId']);
 
         this.searchService.lastHtsEncounter(row['personId']).subscribe((res) => {
-            console.log(res);
-            localStorage.setItem('htsEncounterId', res['encounterId']);
-            // localStorage.setItem('htsEncounterId', res['patientEncounterID']);
-            localStorage.setItem('patientMasterVisitId', res['patientMasterVisitId']);
+            if (res['encounterId']) {
+                localStorage.setItem('htsEncounterId', res['encounterId']);
+            }
+            if (res['patientMasterVisitId'] > 0) {
+                localStorage.setItem('patientMasterVisitId', res['patientMasterVisitId']);
+            }
         });
 
         this.zone.run(() => { this.router.navigate(['/registration/home'], { relativeTo: this.route }); });

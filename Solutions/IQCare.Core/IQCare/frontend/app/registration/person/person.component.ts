@@ -13,9 +13,7 @@ import {ClientService} from '../../shared/_services/client.service';
 import {Store} from '@ngrx/store';
 import * as Consent from '../../shared/reducers/app.states';
 import {NotificationService} from '../../shared/_services/notification.service';
-import {overrideProvider} from '@angular/core/src/view';
-
-declare var $: any;
+import {Partner} from '../../shared/_models/partner';
 
 @Component({
   selector: 'app-person',
@@ -27,8 +25,8 @@ export class PersonComponent implements OnInit {
     contact: Contact;
     personPopulation: PersonPopulation;
     registrationVariables: RegistrationVariables;
-    isPartner: string;
-    isFamily: string;
+    partnerType: Partner;
+
     userId: number;
     relationshipPartnerOptions: any[];
     relationshipFamilyOptions: any[];
@@ -37,9 +35,11 @@ export class PersonComponent implements OnInit {
     maritalStatuses: any[];
     keyPops: any[];
     gender: any[];
+    priorityPops: any[];
 
     male: number;
     female: number;
+
     patientName: string;
 
     maxDate: any;
@@ -68,69 +68,22 @@ export class PersonComponent implements OnInit {
         this.contact = new Contact();
         this.personPopulation = new PersonPopulation();
         this.registrationVariables = new RegistrationVariables();
+        this.partnerType = new Partner();
+
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
         this.relationshipPartnerOptions = [];
         this.relationshipFamilyOptions = [];
         this.optionToShow = [];
 
-        this.formGroup = this._formBuilder.group({
-            formArray: this._formBuilder.array([
-                this._formBuilder.group({
-                    FirstName: new FormControl(this.person.FirstName, [Validators.required]),
-                    MiddleName: new FormControl(this.person.MiddleName),
-                    LastName: new FormControl(this.person.LastName, [Validators.required]),
-                    Sex: new FormControl(this.person.Sex, [Validators.required]),
-                    DateOfBirth: new FormControl(this.person.DateOfBirth, [Validators.required]),
-                    MaritalStatus: new FormControl(this.person.MaritalStatus, [Validators.required]),
-                    personAge: new FormControl(this.registrationVariables.personAge, [Validators.required]),
-                }),
-                this._formBuilder.group({
-                    PhoneNumber: new FormControl(this.contact.PhoneNumber),
-                    Landmark: new FormControl(this.contact.Landmark)
-                }),
-                this._formBuilder.group({
-                    KeyPopulation: new FormControl(this.personPopulation.KeyPopulation, [Validators.required]),
-                    partnerRelationship: new FormControl(this.person.partnerRelationship, [Validators.required])
-                }),
-            ]),
-        });
+        // this.getRegistrationOptions();
+        this.route.data.subscribe((res) => {
+            const options = res['options']['lookupItems'];
 
-        this.getRegistrationOptions();
-
-        this.isPartner = localStorage.getItem('isPartner');
-        this.isFamily = localStorage.getItem('isFamily');
-        if (this.isPartner != null && this.isPartner == 'true') {
-            this.formGroup.controls.formArray['controls'][2].controls.partnerRelationship.enable({onlySelf: false});
-            this.getClientDetails();
-            this.optionToShow = this.relationshipPartnerOptions;
-        } else {
-            this.formGroup.controls.formArray['controls'][2].controls.partnerRelationship.disable({onlySelf: true});
-            localStorage.removeItem('personId');
-            localStorage.removeItem('patientId');
-            localStorage.removeItem('partnerId');
-            localStorage.removeItem('htsEncounterId');
-            localStorage.removeItem('patientMasterVisitId');
-            localStorage.removeItem('isPartner');
-            localStorage.removeItem('isFamily');
-            localStorage.setItem('serviceAreaId', '2');
-
-            this.store.dispatch(new Consent.ClearState());
-        }
-
-        if ((this.isPartner != null && this.isPartner == 'true') && (this.isFamily != null && this.isFamily == 'true')) {
-            this.optionToShow = this.relationshipFamilyOptions;
-        }
-    }
-
-    getRegistrationOptions() {
-        this.registrationService.getRegistrationOptions().subscribe(res => {
-            const options = res['lookupItems'];
             const partnerOptions = ['Partner', 'Co-Wife', 'Spouse'];
-            // console.log(options);
             for (let i = 0; i < options.length; i++) {
-                if (options[i].key == 'MaritalStatus') {
+                if (options[i].key == 'HTSMaritalStatus') {
                     this.maritalStatuses = options[i].value;
-                } else if (options[i].key == 'KeyPopulation') {
+                } else if (options[i].key == 'HTSKeyPopulation') {
                     this.keyPops = options[i].value;
                 } else if (options[i].key == 'Gender') {
                     this.gender = options[i].value;
@@ -150,21 +103,73 @@ export class PersonComponent implements OnInit {
                             this.relationshipFamilyOptions.push(returnOptions[j]);
                         }
                     }
+                } else if (options[i].key == 'PriorityPopulation') {
+                    this.priorityPops = options[i].value;
                 }
             }
         });
+
+        this.formGroup = this._formBuilder.group({
+            formArray: this._formBuilder.array([
+                this._formBuilder.group({
+                    FirstName: new FormControl(this.person.FirstName, [Validators.required]),
+                    MiddleName: new FormControl(this.person.MiddleName),
+                    LastName: new FormControl(this.person.LastName, [Validators.required]),
+                    Sex: new FormControl(this.person.Sex, [Validators.required]),
+                    DateOfBirth: new FormControl(this.person.DateOfBirth, [Validators.required]),
+                    MaritalStatus: new FormControl(this.person.MaritalStatus, [Validators.required]),
+                    personAge: new FormControl(this.registrationVariables.personAge, [Validators.required]),
+                }),
+                this._formBuilder.group({
+                    PhoneNumber: new FormControl(this.contact.PhoneNumber),
+                    Landmark: new FormControl(this.contact.Landmark)
+                }),
+                this._formBuilder.group({
+                    populationType: new FormControl(this.personPopulation.populationType, [Validators.required]),
+                    priorityPopulation: new FormControl(this.personPopulation.priorityPopulation, [Validators.required]),
+                    priorityPop: new FormControl(this.personPopulation.priorityPop, [Validators.required]),
+                    KeyPopulation: new FormControl(this.personPopulation.KeyPopulation, [Validators.required]),
+                    partnerRelationship: new FormControl(this.person.partnerRelationship, [Validators.required])
+                }),
+            ]),
+        });
+
+        this.partnerType = JSON.parse(localStorage.getItem('isPartner'));
+
+        if (this.partnerType != null) {
+            this.formGroup.controls.formArray['controls'][2].controls.partnerRelationship.enable({onlySelf: false});
+            this.getClientDetails();
+            if (this.partnerType.partner == 1) {
+                this.optionToShow = this.relationshipPartnerOptions;
+            } else if (this.partnerType.family == 1) {
+                this.optionToShow = this.relationshipFamilyOptions;
+            }
+
+        } else {
+            this.formGroup.controls.formArray['controls'][2].controls.partnerRelationship.disable({onlySelf: true});
+            localStorage.removeItem('personId');
+            localStorage.removeItem('patientId');
+            localStorage.removeItem('partnerId');
+            localStorage.removeItem('htsEncounterId');
+            localStorage.removeItem('patientMasterVisitId');
+            localStorage.removeItem('isPartner');
+            localStorage.setItem('serviceAreaId', '2');
+            localStorage.removeItem('editEncounterId');
+
+            this.store.dispatch(new Consent.ClearState());
+        }
     }
 
     onSubmitForm() {
+        // console.log(this.formGroup.valid);
         if (this.formGroup.valid) {
-            // this.person = Object.assign(this.person, this.formArray.get([0]).value);
             this.person = {...this.person, ...this.formArray.get([0]).value};
             this.contact = Object.assign(this.person, this.formArray.get([1]).value);
-            this.personPopulation.KeyPopulation = this.formArray.get([2]).value['KeyPopulation'];
+            this.personPopulation = {...this.personPopulation, ...this.formArray.get([2]).value};
             this.person.partnerRelationship = this.formArray.get([2]).value['partnerRelationship'];
             this.person.createdBy = JSON.parse(localStorage.getItem('appUserId'));
 
-            if (this.isPartner != null && this.isPartner == 'true') {
+            if (this.partnerType != null && (this.partnerType.partner == 1 || this.partnerType.family == 1)) {
                 this.person.isPartner = true;
                 this.person.patientId = JSON.parse(localStorage.getItem('patientId'));
             } else {
@@ -190,11 +195,14 @@ export class PersonComponent implements OnInit {
                 const matStatus = this.registrationService.addPersonMaritalStatus(data['personId'],
                     this.person.MaritalStatus, this.userId);
 
+                const populationTypes = this.registrationService.addPersonPopulationType(data['personId'],
+                    this.userId, this.personPopulation);
+
                 const personLoc = this.registrationService.addPersonLocation(data['personId'], 0,
                     0, 0, this.userId, this.contact.Landmark);
 
-                //
-                forkJoin([patientAdd, personCont, matStatus, personLoc]).subscribe(results => {
+                // join multiple requests
+                forkJoin([patientAdd, personCont, matStatus, personLoc, populationTypes]).subscribe(results => {
                     if (this.person.isPartner == false) {
                         localStorage.setItem('patientId', results[0]['patientId']);
                         localStorage.setItem('personId', data['personId']);
@@ -208,10 +216,13 @@ export class PersonComponent implements OnInit {
                     if (this.person.isPartner == true) {
                         this.snotifyService.success('Successfully registered partner',
                             'Registration', this.notificationService.getConfig());
-                        if (this.isFamily == 'true') {
+
+                        localStorage.removeItem('isPartner');
+                        if (this.partnerType.family == 1) {
                             this.zone.run(() => {this.router.navigate(['/hts/family'], { relativeTo: this.route }); });
+                        } else {
+                            this.zone.run(() => { this.router.navigate(['/hts/pns'], { relativeTo: this.route}); });
                         }
-                        this.zone.run(() => { this.router.navigate(['/hts/pns'], { relativeTo: this.route}); });
                     } else {
                         this.snotifyService.success('Successfully registered client', 'Registration', this.notificationService.getConfig());
                         this.zone.run(() => { this.router.navigate(['/registration/enrollment'], { relativeTo: this.route }); });
@@ -259,5 +270,70 @@ export class PersonComponent implements OnInit {
             const result = res['patientLookup'][0];
             this.patientName = result.firstName + ' ' + result.midName + ' ' + result.lastName;
         });
+    }
+
+    onPopulationTypeChange() {
+        const popType = this.formGroup.controls['formArray']['controls'][2].controls.populationType.value;
+        if (popType == 1) {
+            this.formGroup.controls['formArray']['controls'][2].controls.KeyPopulation.disable({onlySelf: true});
+            this.formGroup.controls['formArray']['controls'][2].controls.KeyPopulation.setValue([]);
+        } else if (popType == 2) {
+            this.formGroup.controls['formArray']['controls'][2].controls.KeyPopulation.enable({onlySelf: false});
+        }
+    }
+
+    onPriorityChange() {
+        const priorityPop = this.formGroup.controls['formArray']['controls'][2].controls.priorityPop.value;
+        if (priorityPop == 2) {
+            this.formGroup.controls['formArray']['controls'][2].controls.priorityPopulation.disable({onlySelf: true});
+            this.formGroup.controls['formArray']['controls'][2].controls.priorityPopulation.setValue([]);
+        } else if (priorityPop == 1) {
+            this.formGroup.controls['formArray']['controls'][2].controls.priorityPopulation.enable({onlySelf: false});
+        }
+    }
+
+    onSexChange() {
+        const clientSex = this.formGroup.controls['formArray']['controls'][0].controls.Sex.value;
+        const optionSelected = this.gender.filter(obj  => parseInt(obj.itemId, 10) == parseInt(clientSex, 10));
+
+        this.route.data.subscribe((res) => {
+            const options = res['options']['lookupItems'];
+
+            for (let i = 0; i < options.length; i++) {
+                if (options[i].key == 'HTSKeyPopulation') {
+                    this.keyPops = options[i].value;
+                } else if (options[i].key == 'PriorityPopulation') {
+                    this.priorityPops = options[i].value;
+                }
+            }
+        });
+
+        if (optionSelected[0].itemName == 'Female') {
+            const options = this.keyPops.filter(function( obj ) {
+                return obj.itemName !== 'MSM';
+            });
+            this.keyPops = options;
+
+            const optionsVal = this.priorityPops.filter(function (obj) {
+                return obj.itemName !== 'MSW';
+            });
+            this.priorityPops = optionsVal;
+
+        } else if (optionSelected[0].itemName == 'Male') {
+            /*const options = this.keyPops.filter(function( obj ) {
+                return obj.itemName !== 'FSW';
+            });
+            this.keyPops = options;*/
+
+            const optionsVal = this.priorityPops.filter(function (obj) {
+                return obj.itemName !== 'Adolescent Girls and Young Women';
+            });
+            this.priorityPops = optionsVal;
+        }
+
+        const optionsHtsKeyPops = this.keyPops.filter(function( obj ) {
+            return obj.itemName !== 'Not Applicable';
+        });
+        this.keyPops = optionsHtsKeyPops;
     }
 }

@@ -9,6 +9,10 @@ import {select, Store} from '@ngrx/store';
 import * as Consent from '../../shared/reducers/app.states';
 import {Observable} from 'rxjs/Observable';
 import {debounceTime} from 'rxjs/operators';
+import {SnotifyService} from 'ng-snotify';
+import {NotificationService} from '../../shared/_services/notification.service';
+import {AppStateService} from '../../shared/_services/appstate.service';
+import {AppEnum} from '../../shared/reducers/app.enum';
 declare var $: any;
 
 @Component({
@@ -22,6 +26,7 @@ export class LinkageReferralComponent implements OnInit {
     tracingArray: Tracing[];
     tracingModeOptions: any[];
     tracingOutcomeOptions: any[];
+    tracingTypeOptions: any[];
     facilities: any[];
     filteredOptions: Observable<any[]>;
     myControl: FormControl = new FormControl();
@@ -31,7 +36,10 @@ export class LinkageReferralComponent implements OnInit {
                 private router: Router,
                 private route: ActivatedRoute,
                 public zone: NgZone,
-                private store: Store<AppState>) {
+                private store: Store<AppState>,
+                private snotifyService: SnotifyService,
+                private notificationService: NotificationService,
+                private appStateService: AppStateService) {
 
         this.myControl.valueChanges.pipe(
             debounceTime(400)
@@ -127,6 +135,8 @@ export class LinkageReferralComponent implements OnInit {
                     this.tracingModeOptions = options[i].value;
                 } else if (options[i].key == 'TracingOutcome') {
                     this.tracingOutcomeOptions = options[i].value;
+                } else if (options[i].key == 'TracingType') {
+                    this.tracingTypeOptions = options[i].value;
                 }
             }
 
@@ -148,18 +158,29 @@ export class LinkageReferralComponent implements OnInit {
             return obj.itemName == 'CCCEnrollment';
         });
 
-        this.referral.referralReason = optionSelected[0]['itemId'];
+        const tracingTypeValue = this.tracingTypeOptions.filter(function (obj) {
+            return obj.itemName == 'Enrolment';
+        });
 
-        this._linkageReferralService.addReferralTracing(this.referral, this.tracingArray).subscribe(data => {
+        this.referral.referralReason = optionSelected[0]['itemId'];
+        const tracingType = tracingTypeValue[0]['itemId'];
+
+        this._linkageReferralService.addReferralTracing(this.referral, this.tracingArray, tracingType).subscribe(data => {
             this.store.dispatch(new Consent.IsReferred(true));
 
             this.store.pipe(select('app')).subscribe(res => {
                 localStorage.setItem('store', JSON.stringify(res));
             });
 
+            this.appStateService.addAppState(AppEnum.IS_REFERRED, this.referral.personId,
+                JSON.parse(localStorage.getItem('patientId')), null, null).subscribe();
+
+            this.snotifyService.success('Successfully Referral', 'Referral', this.notificationService.getConfig());
+
             this.zone.run(() => { this.router.navigate(['/registration/home'], { relativeTo: this.route }); });
         }, err => {
             console.log(err);
+            this.snotifyService.error('Error saving referral ' + err, 'Referral', this.notificationService.getConfig());
         });
     }
 

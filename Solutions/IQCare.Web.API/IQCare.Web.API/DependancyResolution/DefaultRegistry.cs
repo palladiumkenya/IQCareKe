@@ -1,4 +1,4 @@
-using DataAccess.WebApi;
+//using DataAccess.WebApi;
 using IQCare.WebApi.Logic.MessageHandler;
 using StructureMap;
 
@@ -16,8 +16,8 @@ namespace IQCare.Web.Api.DependancyResolution {
                     scan.With(new ControllerConvention());
                 });
 
-            For<ApiContext>().Use<ApiContext>()
-                .SelectConstructor(() => new ApiContext());
+            //For<ApiContext>().Use<ApiContext>()
+            //    .SelectConstructor(() => new ApiContext());
 
             // section for registring services
 

@@ -4,6 +4,7 @@ using Interface.CCC;
 using System;
 using System.Collections.Generic;
 using IQCare.Events;
+using IQCare.Web.UILogic;
 
 namespace IQCare.CCC.UILogic
 {
@@ -13,6 +14,11 @@ namespace IQCare.CCC.UILogic
 
         public int AddPatientAppointments(PatientAppointment p, bool sendEvent = true)
         {
+            try
+            {
+                if (p.CreatedBy == 0) { p.CreatedBy = SessionManager.UserId; }
+            }
+            catch { }
             PatientAppointment appointment = new PatientAppointment()
             {
                 PatientId = p.PatientId,
@@ -24,10 +30,11 @@ namespace IQCare.CCC.UILogic
                 ServiceAreaId = p.ServiceAreaId,
                 StatusId = p.StatusId,
                 StatusDate = DateTime.Now,
+                CreatedBy = p.CreatedBy
             };
 
             int returnVal = _appointment.AddPatientAppointments(appointment);
-            if (returnVal > 0)
+            if (returnVal > 0 && sendEvent)
             {
                 PatientLookupManager patientLookup = new PatientLookupManager();
                 var patient = patientLookup.GetPatientDetailSummary(p.PatientId);

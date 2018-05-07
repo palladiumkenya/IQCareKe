@@ -1,30 +1,34 @@
-import {Component, NgZone, OnInit} from '@angular/core';
+import {AfterViewInit, Component, NgZone, OnInit} from '@angular/core';
 import {MatDialog, MatDialogConfig} from '@angular/material';
 import {TestDialogComponent} from '../testdialog/testdialog.component';
 import {EncounterService} from '../_services/encounter.service';
 import {FinalTestingResults, Testing} from '../_models/testing';
 import {select, Store} from '@ngrx/store';
 import {ActivatedRoute, Router} from '@angular/router';
+import {SnotifyService} from 'ng-snotify';
+import {NotificationService} from '../../shared/_services/notification.service';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {AppStateService} from '../../shared/_services/appstate.service';
+import {AppEnum} from '../../shared/reducers/app.enum';
 
 @Component({
   selector: 'app-testing',
   templateUrl: './testing.component.html',
   styleUrls: ['./testing.component.css']
 })
-export class TestingComponent implements OnInit {
+export class TestingComponent implements OnInit, AfterViewInit {
     testButton1: boolean = true;
     testButton2: boolean = false;
     isDisabled: boolean = false;
-    isFinalResultDisabled: boolean = false;
-    isFinalResultGivenDisabled: boolean = false;
     isCoupleDiscordantDisabled: boolean = false;
-    isAcceptedPartnerListingDisabled: boolean = false;
-    isReasonsDeclinedListingDisabled: boolean = false;
+
+    formTesting: FormGroup;
 
     hivTestKits: any[];
     hivResultsOptions: any[];
     hivFinalResultsOptions: any[];
     yesNoOptions: any[];
+    yesNoNA: any[];
     reasonsDeclined: any[];
 
     testing: Testing;
@@ -40,11 +44,17 @@ export class TestingComponent implements OnInit {
                 private store: Store<AppState>,
                 private router: Router,
                 private route: ActivatedRoute,
-                public zone: NgZone) {
-
-        store.pipe(select('app')).subscribe(res => {
+                public zone: NgZone,
+                private snotifyService: SnotifyService,
+                private notificationService: NotificationService,
+                private fb: FormBuilder,
+                private appStateService: AppStateService) {
+        this.store.pipe(select('app')).subscribe(res => {
             this.isCoupleDiscordantDisabled = res['testedAs'];
         });
+    }
+
+    ngAfterViewInit() {
     }
 
     ngOnInit() {
@@ -56,6 +66,17 @@ export class TestingComponent implements OnInit {
 
         this.hiv1 = [];
         this.hiv2 = [];
+
+        this.formTesting = this.fb.group({
+            finalResultHiv1: new FormControl(this.finalTestingResults.finalResultHiv1, [Validators.required]),
+            finalResultHiv2: new FormControl(this.finalTestingResults.finalResultHiv2, [Validators.required]),
+            finalResult: new FormControl(this.finalTestingResults.finalResult, [Validators.required]),
+            finalResultGiven: new FormControl(this.finalTestingResults.finalResultGiven, [Validators.required]),
+            coupleDiscordant: new FormControl(this.finalTestingResults.coupleDiscordant, [Validators.required]),
+            acceptedPartnerListing: new FormControl(this.finalTestingResults.acceptedPartnerListing, [Validators.required]),
+            reasonsDeclinePartnerListing: new FormControl(this.finalTestingResults.reasonsDeclinePartnerListing, [Validators.required]),
+            finalResultsRemarks: new FormControl(this.finalTestingResults.finalResultsRemarks,[Validators.required]),
+        });
 
         this.encounterService.getCustomOptions().subscribe(data => {
             const options = data['lookupItems'];
@@ -69,6 +90,8 @@ export class TestingComponent implements OnInit {
                     this.hivFinalResultsOptions = options[i].value;
                 } else if (options[i].key == 'YesNo') {
                     this.yesNoOptions = options[i].value;
+                } else if (options[i].key == 'YesNoNA') {
+                    this.yesNoNA = options[i].value;
                 } else if (options[i].key == 'ReasonsPartner') {
                     this.reasonsDeclined = options[i].value;
                 }
@@ -118,18 +141,23 @@ export class TestingComponent implements OnInit {
                     this.hivResults1.push(this.testing);
                     this.hiv1.push(test);
 
-
                     if (this.testing['hivResult']['itemName'] === 'Negative') {
                         console.log('testing');
                         this.testButton1 = false;
                         this.testButton2 = false;
-                        this.finalTestingResults.finalResultHiv1 = this.testing['hivResult']['itemId'];
+                        this.formTesting.controls.finalResultHiv1.setValue(this.testing['hivResult']['itemId']);
+                        // this.finalTestingResults.finalResultHiv1 = this.testing['hivResult']['itemId'];
                         this.isDisabled = true;
-                        this.finalTestingResults.finalResult = this.testing['hivResult']['itemId'];
+                        this.formTesting.controls.finalResult.setValue(this.testing['hivResult']['itemId']);
+                        this.formTesting.controls.finalResultHiv2.disable({onlySelf: true});
+                        // this.finalTestingResults.finalResult = this.testing['hivResult']['itemId'];
                     } else if (this.testing['hivResult']['itemName'] === 'Positive') {
                         this.testButton1 = false;
                         this.testButton2 = true;
-                        this.finalTestingResults.finalResultHiv1 = this.testing['hivResult']['itemId'];
+                        // this.finalTestingResults.finalResultHiv1 = this.testing['hivResult']['itemId'];
+                        this.formTesting.controls.finalResultHiv1.setValue(this.testing['hivResult']['itemId']);
+                        this.formTesting.controls.finalResultHiv2.enable({onlySelf: false});
+                        this.formTesting.controls.finalResultHiv2.setValue('');
                     }
                     /* re-set the model */
                     this.testing = new Testing();
@@ -163,12 +191,16 @@ export class TestingComponent implements OnInit {
 
                     /* Logic for testing */
                     if (firstTest['hivResult']['itemName'] === 'Positive' && this.testing['hivResult']['itemName'] === 'Negative') {
-                        this.finalTestingResults.finalResultHiv2 = this.testing['hivResult']['itemId'];
-                        this.finalTestingResults.finalResult = inconculusive[0].itemId;
+                        // this.finalTestingResults.finalResultHiv2 = this.testing['hivResult']['itemId'];
+                        this.formTesting.controls.finalResultHiv2.setValue(this.testing['hivResult']['itemId']);
+                        // this.finalTestingResults.finalResult = inconculusive[0].itemId;
+                        this.formTesting.controls.finalResult.setValue(inconculusive[0].itemId);
                         this.testButton2 = false;
                     } else if (firstTest['hivResult']['itemName'] === 'Positive' && this.testing['hivResult']['itemName'] === 'Positive') {
-                        this.finalTestingResults.finalResultHiv2 = this.testing['hivResult']['itemId'];
-                        this.finalTestingResults.finalResult = this.testing['hivResult']['itemId'];
+                        // this.finalTestingResults.finalResultHiv2 = this.testing['hivResult']['itemId'];
+                        this.formTesting.controls.finalResultHiv2.setValue(this.testing['hivResult']['itemId']);
+                        // this.finalTestingResults.finalResult = this.testing['hivResult']['itemId'];
+                        this.formTesting.controls.finalResult.setValue(this.testing['hivResult']['itemId']);
                         this.testButton2 = false;
                     }
                     /* re-set the model */
@@ -179,29 +211,69 @@ export class TestingComponent implements OnInit {
     }
 
     onSubmit() {
-        const htsEncounterId = JSON.parse(localStorage.getItem('htsEncounterId'));
-        const patientId = JSON.parse(localStorage.getItem('patientId'));
-        const patientMasterVisitId = JSON.parse(localStorage.getItem('patientMasterVisitId'));
-        const serviceAreaId = JSON.parse(localStorage.getItem('serviceAreaId'));
-        const providerId = JSON.parse(localStorage.getItem('appUserId'));
+        console.log(this.formTesting);
+        if (this.formTesting.valid) {
+            this.finalTestingResults = {...this.finalTestingResults, ...this.formTesting.value};
+            console.log(this.finalTestingResults);
 
-        this.encounterService.addTesting(this.finalTestingResults, this.hiv1, this.hiv2,
-            htsEncounterId, providerId, patientId, patientMasterVisitId, serviceAreaId).subscribe(data => {
-            console.log(data);
-            this.zone.run(() => { this.router.navigate(['/registration/home'], {relativeTo: this.route }); });
-        });
+            const htsEncounterId = JSON.parse(localStorage.getItem('htsEncounterId'));
+            const patientId = JSON.parse(localStorage.getItem('patientId'));
+            const patientMasterVisitId = JSON.parse(localStorage.getItem('patientMasterVisitId'));
+            const serviceAreaId = JSON.parse(localStorage.getItem('serviceAreaId'));
+            const providerId = JSON.parse(localStorage.getItem('appUserId'));
+            const finalRes = this.finalTestingResults.finalResult;
+            const acceptList = this.finalTestingResults.acceptedPartnerListing;
+
+            this.encounterService.addTesting(this.finalTestingResults, this.hiv1, this.hiv2,
+                htsEncounterId, providerId, patientId, patientMasterVisitId, serviceAreaId).subscribe(data => {
+
+                    const options = this.hivFinalResultsOptions.filter(function( obj ) {
+                        return obj.itemId == finalRes;
+                    });
+
+                    const acceptListOption = this.yesNoOptions.filter(function (obj) {
+                        return obj.itemId == acceptList;
+                    });
+
+                    if (options[0]['itemName'] == 'Positive') {
+                        this.appStateService.addAppState(AppEnum.IS_POSITIVE, JSON.parse(localStorage.getItem('personId')),
+                            patientId, patientMasterVisitId, htsEncounterId).subscribe();
+                    }
+
+                    if (acceptListOption[0]['itemName'] == 'Yes') {
+                        this.appStateService.addAppState(AppEnum.CONSENT_PARTNER_LISTING, JSON.parse(localStorage.getItem('personId')),
+                            patientId, patientMasterVisitId, htsEncounterId).subscribe();
+                    }
+
+                    this.snotifyService.success('Successfully saved', 'Testing', this.notificationService.getConfig());
+                    this.zone.run(() => { this.router.navigate(['/registration/home'], {relativeTo: this.route }); });
+            });
+        } else {
+            return false;
+        }
+
     }
 
-    onAcceptedPartnerListingChange(acceptedPartnerListing: number) {
+    onFinalResultsGivenChange() {
+        if (this.isCoupleDiscordantDisabled) {
+            this.formTesting.controls.coupleDiscordant.disable({onlySelf: true});
+        } else {
+            this.formTesting.controls.coupleDiscordant.enable({onlySelf: false});
+            this.formTesting.controls.coupleDiscordant.setValue('');
+        }
+    }
+
+    onAcceptedPartnerListingChange() {
+        const acceptedPartnerListing = this.formTesting.controls.acceptedPartnerListing.value;
         const optionSelected = this.yesNoOptions.filter(function( obj ) {
             return obj.itemId == acceptedPartnerListing;
         });
 
         if (optionSelected[0].itemName == 'Yes') {
-            this.isReasonsDeclinedListingDisabled = true;
+            this.formTesting.controls.reasonsDeclinePartnerListing.disable({onlySelf: true});
         } else {
-            this.isReasonsDeclinedListingDisabled = false;
-            this.finalTestingResults.reasonsDeclinePartnerListing = null;
+            this.formTesting.controls.reasonsDeclinePartnerListing.enable({onlySelf: false});
+            this.formTesting.controls.reasonsDeclinePartnerListing.setValue('');
         }
     }
 }

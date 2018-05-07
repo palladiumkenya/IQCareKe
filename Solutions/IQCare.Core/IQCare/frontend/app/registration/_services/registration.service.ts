@@ -6,6 +6,8 @@ import 'rxjs/add/observable/throw';
 import {catchError, tap} from 'rxjs/operators';
 import {Person} from '../_models/person';
 import 'rxjs/add/observable/of';
+import {PersonPopulation} from '../_models/personPopulation';
+import {ErrorHandlerService} from '../../shared/_services/errorhandler.service';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -17,12 +19,13 @@ export class RegistrationService {
     private _lookupurl = '/api/lookup';
     private _url = '/api/Register';
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient,
+                private errorHandler: ErrorHandlerService) { }
 
     public getRegistrationOptions(): Observable<any[]> {
         return this.http.get<any[]>(this.API_URL + this._lookupurl + '/registrationOptions').pipe(
-            tap(registrationoptions => this.log('fetched all registration options')),
-            catchError(this.handleError<any[]>('getRegistrationOptions'))
+            tap(registrationoptions => this.errorHandler.log('fetched all registration options')),
+            catchError(this.errorHandler.handleError<any[]>('getRegistrationOptions'))
         );
     }
 
@@ -33,8 +36,8 @@ export class RegistrationService {
         };
 
         return this.http.post(this.API_URL + this._url, JSON.stringify(Indata), httpOptions).pipe(
-            tap((registeredClient: Person) => this.log(`added client w/ id`)),
-            catchError(this.handleError<Person>('registerClient'))
+            tap((registeredClient: Person) => this.errorHandler.log(`added client w/ id`)),
+            catchError(this.errorHandler.handleError<Person>('registerClient'))
         );
     }
 
@@ -45,8 +48,8 @@ export class RegistrationService {
         };
 
         return this.http.post<any>(this.API_URL + this._url + '/addPatient', JSON.stringify(Indata), httpOptions).pipe(
-            tap((addPatient: any) => this.log(`added patient w/ id`)),
-            catchError(this.handleError<any>('addPatient'))
+            tap((addPatient: any) => this.errorHandler.log(`added patient w/ id`)),
+            catchError(this.errorHandler.handleError<any>('addPatient'))
         );
     }
 
@@ -67,8 +70,8 @@ export class RegistrationService {
         };
 
         return this.http.post<any>(this.API_URL + this._url + '/addPersonContact', JSON.stringify(Indata), httpOptions).pipe(
-            tap((addPersonContact: any) => this.log(`added person contact w/ id`)),
-            catchError(this.handleError<any>('addPersonContact'))
+            tap((addPersonContact: any) => this.errorHandler.log(`added person contact w/ id`)),
+            catchError(this.errorHandler.handleError<any>('addPersonContact'))
         );
     }
 
@@ -84,8 +87,8 @@ export class RegistrationService {
         };
 
         return this.http.post<any>(this.API_URL + this._url + '/addPersonMaritalStatus', JSON.stringify(Indata), httpOptions).pipe(
-            tap((addPersonMaritalStatus: any) => this.log(`added person marital status w/ id`)),
-            catchError(this.handleError<any>('addPersonMaritalStatus'))
+            tap((addPersonMaritalStatus: any) => this.errorHandler.log(`added person marital status w/ id`)),
+            catchError(this.errorHandler.handleError<any>('addPersonMaritalStatus'))
         );
     }
 
@@ -106,36 +109,53 @@ export class RegistrationService {
         };
 
         return this.http.post<any>(this.API_URL + this._url + '/AddPersonLocation', JSON.stringify(Indata), httpOptions).pipe(
-            tap((addPersonLocation: any) => this.log(`added person location w/ id`)),
-            catchError(this.handleError<any>('addPersonLocation'))
+            tap((addPersonLocation: any) => this.errorHandler.log(`added person location w/ id`)),
+            catchError(this.errorHandler.handleError<any>('addPersonLocation'))
         );
     }
 
     public addPersonRelationship(personRelationship: any): Observable<any> {
         return this.http.post<any>(this.API_URL + this._url + '/addPersonRelationship',
             JSON.stringify(personRelationship), httpOptions).pipe(
-            tap((addPersonRelationship: any) => this.log(`added new person relationship w/ id`)),
-            catchError(this.handleError<any>('addPersonRelationship'))
+            tap((addPersonRelationship: any) => this.errorHandler.log(`added new person relationship w/ id`)),
+            catchError(this.errorHandler.handleError<any>('addPersonRelationship'))
         );
     }
 
+    public addPersonPopulationType(personId: number, userId: number, populations: PersonPopulation): Observable<any> {
+        console.log(populations);
+        const pops = [];
+        let priority = [];
+        if (populations.populationType == 1) {
+            const item = {
+                PopulationType: 'General Population',
+                PopulationCategory: 0
+            };
+            pops.push(item);
+        } else {
+            for (let i = 0; i < populations.KeyPopulation.length; i++) {
+                const item = {
+                    PopulationType: 'Key Population',
+                    PopulationCategory: populations.KeyPopulation[i]
+                };
+                pops.push(item);
+            }
+        }
 
-    private handleError<T> (operation = 'operation', result?: T) {
-        return (error: any): Observable<T> => {
+        if (populations.priorityPop === 1) {
+            priority = populations.priorityPopulation.map(priorityId => ({priorityId}));
+        }
 
-            // TODO: send the error to remote logging infrastructure
-            console.error(error); // log to console instead
-
-            // TODO: better job of transforming error for user consumption
-            this.log(`${operation} failed: ${error.message}`);
-
-            return Observable.throw(error.message);
+        const Indata = {
+            PersonId: personId,
+            Population: pops,
+            Priority: priority,
+            UserId: userId
         };
-    }
 
-    /** Log a HeroService message with the MessageService */
-    private log(message: string) {
-        console.log(message);
+        return this.http.post<any>(this.API_URL + this._url + '/AddPersonPopulationType', JSON.stringify(Indata), httpOptions).pipe(
+            tap((addPersonPopulationType: any) => this.errorHandler.log(`added person population type`)),
+            catchError(this.errorHandler.handleError<any>('addPersonPopulationType'))
+        );
     }
-
 }

@@ -9,7 +9,7 @@
             </div>
             <div class="col-md-10 animated fadeIn">
                 <div class="panel panel-default">
-                    <div class="panel-heading">PNS FORM</div>
+                    <div class="panel-heading">FAMILY TRACING</div>
                     <div class="panel-body">
                         <app-personbrief></app-personbrief>
                         <br>
@@ -18,14 +18,16 @@
                             <div class="row">
                                 <div class="col-lg-4 col-md-4 col-sm-4">
                                     <mat-form-field>
-                                        <mat-select placeholder="Type Of Tracing" formControlName="mode" tabindex="1">
+                                        <mat-select placeholder="Tracing Mode" formControlName="mode" tabindex="1">
                                             <mat-option></mat-option>
+                                            <mat-option *ngFor="let option of tracingModeOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
 
                                     <mat-form-field>
-                                        <mat-select placeholder="Outcome" formControlName="outcome" tabindex="4">
+                                        <mat-select placeholder="Tracing Outcome" formControlName="outcome" tabindex="4">
                                             <mat-option></mat-option>
+                                            <mat-option *ngFor="let option of tracingOutcomeOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
 
@@ -41,6 +43,7 @@
                                     <mat-form-field>
                                         <mat-select placeholder="Consent to Testing" formControlName="consent" tabindex="5">
                                             <mat-option></mat-option>
+                                            <mat-option *ngFor="let option of consentToTestingOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                 </div>

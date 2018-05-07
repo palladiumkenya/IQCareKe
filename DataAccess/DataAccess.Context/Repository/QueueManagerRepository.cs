@@ -15,7 +15,10 @@ namespace DataAccess.Context.Repository
             _context.Dispose();
         }
 
-        public QueueManagerRepository() : this(new QueueManagerContext()) => _context = new QueueManagerContext();
+        public QueueManagerRepository() : this(new QueueManagerContext())
+        {
+            _context = new QueueManagerContext();
+        }
         public QueueManagerRepository(QueueManagerContext context) : base(context)
         {
             _context = context;

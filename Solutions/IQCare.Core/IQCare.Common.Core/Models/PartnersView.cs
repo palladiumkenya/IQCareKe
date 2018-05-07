@@ -10,7 +10,7 @@ namespace IQCare.Common.Core.Models
         public string FirstName { get; set; }
         public string MidName { get; set; }
         public string LastName { get; set; }
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
         public int Sex { get; set; }
         public string Gender { get; set; }
         public int RelationshipTypeId { get; set; }

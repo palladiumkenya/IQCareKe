@@ -3,10 +3,10 @@
         <app-clientbrief></app-clientbrief>
     </div>
     <div class="ibox-content">
-        <div class="col-md-2">
+        <div class="col-md-2 col-lg-2 col-sm-2">
             <app-leftnav></app-leftnav>
         </div>
-        <div class="col-md-10">
+        <div class="col-md-10 col-lg-10 col-sm-10 animated fadeIn">
             <div class="panel panel-default">
                 <div class="panel-heading">HOME</div>
                 <div class="panel-body">
@@ -61,6 +61,13 @@
                             <ng-container matColumnDef="partnerListingConsent">
                                 <mat-header-cell *matHeaderCellDef> Partner Listing Consent </mat-header-cell>
                                 <mat-cell *matCellDef="let element"> {{element.partnerListingConsent }} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="edit">
+                                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                                <mat-cell *matCellDef="let element">
+                                    <mat-icon (click)="onEdit(element)">edit</mat-icon>
+                                </mat-cell>
                             </ng-container>
 
 

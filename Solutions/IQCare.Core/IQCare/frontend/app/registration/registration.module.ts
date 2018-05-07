@@ -28,6 +28,8 @@ import {EncounterService} from '../hts/_services/encounter.service';
 import {NotificationService} from '../shared/_services/notification.service';
 import {AppLoadService} from '../shared/_services/appload.service';
 import {AppStateService} from '../shared/_services/appstate.service';
+import {RegistrationResolver} from './_services/registration.resolver';
+import {ErrorHandlerService} from '../shared/_services/errorhandler.service';
 
 
 
@@ -57,7 +59,9 @@ import {AppStateService} from '../shared/_services/appstate.service';
         EncounterService,
         NotificationService,
         AppLoadService,
-        AppStateService
+        AppStateService,
+        RegistrationResolver,
+        ErrorHandlerService
     ]
 
 })

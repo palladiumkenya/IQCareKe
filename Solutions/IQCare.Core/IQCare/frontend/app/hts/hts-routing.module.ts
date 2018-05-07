@@ -11,42 +11,54 @@ import {PnsPartnersComponent} from './pns-partners/pns-partners.component';
 import {TestingComponent} from './testing/testing.component';
 import {FamilyComponent} from './family/family.component';
 import {FamilyScreeningResolver} from './family-screening/familyScreening.resolver';
+import {FamilyTracingResolver} from './family-tracing/familyTracing.resolver';
 
 const routes: Routes = [
     {
         path: '',
-        component: EncounterComponent
+        component: EncounterComponent,
+        pathMatch: 'full'
     },
     {
         path: 'linkage',
-        component: LinkageComponent
+        component: LinkageComponent,
+        pathMatch: 'full'
     },
     {
         path: 'referral',
-        component: LinkageReferralComponent
+        component: LinkageReferralComponent,
+        pathMatch: 'full'
     },
     {
         path: 'pns',
-        component: PnsPartnersComponent
+        component: PnsPartnersComponent,
+        pathMatch: 'full'
     },
     {
         path: 'pnstracing',
-        component: PnsTracingComponent
+        component: PnsTracingComponent,
+        pathMatch: 'full'
     },
     {
         path: 'family',
         children: [
             {
                 path: '',
-                component: FamilyComponent
+                component: FamilyComponent,
+                pathMatch: 'full'
             },
             {
                 path: 'tracing',
-                component: FamilyTracingComponent
+                component: FamilyTracingComponent,
+                pathMatch: 'full',
+                resolve: {
+                    options: FamilyTracingResolver
+                }
             },
             {
                 path: 'screening',
                 component: FamilyScreeningComponent,
+                pathMatch: 'full',
                 resolve: {
                     options: FamilyScreeningResolver
                 }
@@ -55,11 +67,13 @@ const routes: Routes = [
     },
     {
         path: 'pnsform',
-        component: PnsformComponent
+        component: PnsformComponent,
+        pathMatch: 'full'
     },
     {
         path: 'testing',
-        component: TestingComponent
+        component: TestingComponent,
+        pathMatch: 'full'
     }
 ];
 

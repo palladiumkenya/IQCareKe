@@ -10,7 +10,7 @@ GO
 CREATE VIEW [dbo].[Api_PatientsView]
 AS
 SELECT 
-	   ISNULL(ROW_NUMBER() OVER(ORDER BY PersonId ASC), -1) AS RowID,
+	   ISNULL(ROW_NUMBER() OVER(ORDER BY P.[Id] ASC), -1) AS RowID,
 	   P.[Id] PersonId,
 	   PT.Id PatientId,
 	   PT.ptn_pk,
@@ -27,7 +27,11 @@ SELECT
 	   PE.EnrollmentDate,
 	   pni.IdentifierValue,
 	   SE.Id ServiceAreaId,
-	   SE.Name ServiceAreaName
+	   SE.Name ServiceAreaName,
+	   CAST(DECRYPTBYKEY(PC.PhysicalAddress) AS VARCHAR(50)) AS PhysicalAddress,
+	   CAST(DECRYPTBYKEY(PC.MobileNumber) AS VARCHAR(50)) AS MobileNumber,
+	   PMS.MaritalStatusId,
+	   MaritalStatusName = (SELECT TOP 1 ItemName FROM LookupItemView WHERE ItemId = PMS.MaritalStatusId AND MasterName = 'MaritalStatus')
 	   
 FROM [dbo].[Person] P
 INNER JOIN dbo.Patient AS PT ON P.Id = PT.PersonId
@@ -35,5 +39,5 @@ INNER JOIN dbo.PatientEnrollment AS PE ON PT.Id = PE.PatientId
 INNER JOIN dbo.PatientIdentifier AS pni ON pni.PatientId = PT.Id 
 INNER JOIN dbo.Identifiers ON pni.IdentifierTypeId = dbo.Identifiers.Id
 INNER JOIN dbo.ServiceArea SE ON SE.Id = PE.ServiceAreaId
-
-G0
+LEFT JOIN dbo.PersonContact PC ON PC.PersonId = P.Id
+LEFT JOIN [dbo].[PatientMaritalStatus] PMS ON PMS.PersonId = P.Id

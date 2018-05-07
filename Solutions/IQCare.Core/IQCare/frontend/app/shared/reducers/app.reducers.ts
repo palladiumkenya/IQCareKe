@@ -18,9 +18,13 @@ export function consentReducer(state: {} = {}, action: ClientActions) {
         case ClientActionTypes.ENROLLED:
             return {...state, isEnrolled: action.payload}
         case ClientActionTypes.PNS_SCREENED:
-            return {...state, isPnsScreened: action.payload}
+            const newIsPnsScreened = ('isPnsScreened' in state) ?
+                [...state['isPnsScreened'], JSON.parse(action.payload)] : [JSON.parse(action.payload)];
+            return {...state, isPnsScreened: newIsPnsScreened}
         case ClientActionTypes.PNS_TRACING:
-            return {...state, isPnsTracingDone: action.payload}
+            const newIsPnsTracingDone = ('isPnsTracingDone' in state) ?
+                [...state['isPnsTracingDone'], JSON.parse(action.payload)] : [JSON.parse(action.payload)];
+            return {...state, isPnsTracingDone: newIsPnsTracingDone}
         case ClientActionTypes.CLEAR_STATE:
             state = {};
             return state;

@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using IQCare.Common.BusinessProcess.Commands.PersonCommand;
+using IQCare.Common.BusinessProcess.Services;
 using IQCare.Common.Core.Models;
 using IQCare.Common.Infrastructure;
 using MediatR;
@@ -22,25 +23,29 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.PersonCommand
             {
                 using (_unitOfWork)
                 {
-                    PersonLocation personLocation = new PersonLocation()
-                    {
-                        PersonId = request.PersonId,
-                        County = request.CountyId,
-                        SubCounty = request.SubCountyId,
-                        Ward = request.WardId,
-                        Village = request.Village,
-                        Location = "",
-                        SubLocation = "",
-                        LandMark = request.LandMark,
-                        NearestHealthCentre = "",
-                        Active = false,
-                        DeleteFlag = false,
-                        CreateDate = DateTime.Now,
-                        CreatedBy = request.UserId
-                    };
+                    //PersonLocation personLocation = new PersonLocation()
+                    //{
+                    //    PersonId = request.PersonId,
+                    //    County = request.CountyId,
+                    //    SubCounty = request.SubCountyId,
+                    //    Ward = request.WardId,
+                    //    Village = request.Village,
+                    //    Location = "",
+                    //    SubLocation = "",
+                    //    LandMark = request.LandMark,
+                    //    NearestHealthCentre = "",
+                    //    Active = false,
+                    //    DeleteFlag = false,
+                    //    CreateDate = DateTime.Now,
+                    //    CreatedBy = request.UserId
+                    //};
 
-                    await _unitOfWork.Repository<PersonLocation>().AddAsync(personLocation);
-                    await _unitOfWork.SaveAsync();
+                    //await _unitOfWork.Repository<PersonLocation>().AddAsync(personLocation);
+                    //await _unitOfWork.SaveAsync();
+
+                    RegisterPersonService personService = new RegisterPersonService(_unitOfWork);
+                    var personLocation = await personService.addPersonLocation(request.PersonId, request.CountyId,
+                        request.SubCountyId, request.WardId, request.Village, request.LandMark, request.UserId);
 
                     _unitOfWork.Dispose();
 

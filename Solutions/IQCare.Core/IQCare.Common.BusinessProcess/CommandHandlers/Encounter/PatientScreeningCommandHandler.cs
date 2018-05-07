@@ -35,22 +35,27 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Encounter
                     await _unitOfWork.SaveAsync();
 
                     List<PatientScreening> screenings = new List<PatientScreening>();
-                    request.Screening.ForEach(t => screenings.Add(new PatientScreening
-                    {
-                        PatientId = request.PatientId,
-                        PatientMasterVisitId = request.PatientMasterVisitId,
-                        ScreeningTypeId = t.ScreeningTypeId,
-                        ScreeningDone = true,
-                        ScreeningDate = request.ScreeningDate,
-                        ScreeningCategoryId = t.ScreeningCategoryId,
-                        ScreeningValueId = t.ScreeningValueId,
-                        Comment = null,
-                        Active = true,
-                        DeleteFlag = false,
-                        CreatedBy = request.UserId,
-                        CreateDate = DateTime.Now,
-                        VisitDate = request.ScreeningDate
-                    }));
+                    foreach (var t in request.Screening) {
+                        if (t.ScreeningValueId != 0)
+                        {
+                            screenings.Add(new PatientScreening
+                            {
+                                PatientId = request.PatientId,
+                                PatientMasterVisitId = request.PatientMasterVisitId,
+                                ScreeningTypeId = t.ScreeningTypeId,
+                                ScreeningDone = true,
+                                ScreeningDate = request.ScreeningDate,
+                                ScreeningCategoryId = t.ScreeningCategoryId,
+                                ScreeningValueId = t.ScreeningValueId,
+                                Comment = null,
+                                Active = true,
+                                DeleteFlag = false,
+                                CreatedBy = request.UserId,
+                                CreateDate = DateTime.Now,
+                                VisitDate = request.ScreeningDate
+                            });
+                        }
+                    }
 
                     await _unitOfWork.Repository<PatientScreening>().AddRangeAsync(screenings);
                     await _unitOfWork.SaveAsync();

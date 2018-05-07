@@ -41,6 +41,14 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.dgwStoreName = new System.Windows.Forms.DataGridView();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColStoreID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColStoreName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColPurchasingStore = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColDispensingStore = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StoreCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SRNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.chkDelete = new System.Windows.Forms.CheckBox();
             this.labelCategory = new System.Windows.Forms.Label();
@@ -65,14 +73,6 @@
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColStoreID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColStoreName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColPurchasingStore = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColDispensingStore = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StoreCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SRNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgwStoreName)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -223,6 +223,55 @@
             this.dgwStoreName.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwStoreName_CellClick);
             this.dgwStoreName.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgwStoreName_CellFormatting);
             // 
+            // ID
+            // 
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            // 
+            // ColStoreID
+            // 
+            this.ColStoreID.HeaderText = "Store ID";
+            this.ColStoreID.Name = "ColStoreID";
+            this.ColStoreID.ReadOnly = true;
+            // 
+            // ColStoreName
+            // 
+            this.ColStoreName.HeaderText = "Store Name";
+            this.ColStoreName.Name = "ColStoreName";
+            this.ColStoreName.ReadOnly = true;
+            this.ColStoreName.Width = 307;
+            // 
+            // ColPurchasingStore
+            // 
+            this.ColPurchasingStore.HeaderText = "Central Store";
+            this.ColPurchasingStore.Name = "ColPurchasingStore";
+            this.ColPurchasingStore.ReadOnly = true;
+            this.ColPurchasingStore.Visible = false;
+            // 
+            // ColDispensingStore
+            // 
+            this.ColDispensingStore.HeaderText = "Dispensing Store";
+            this.ColDispensingStore.Name = "ColDispensingStore";
+            this.ColDispensingStore.Visible = false;
+            // 
+            // StoreCategory
+            // 
+            this.StoreCategory.HeaderText = "Store Category";
+            this.StoreCategory.Name = "StoreCategory";
+            // 
+            // ColStatus
+            // 
+            this.ColStatus.HeaderText = "Status";
+            this.ColStatus.Name = "ColStatus";
+            this.ColStatus.ReadOnly = true;
+            // 
+            // SRNo
+            // 
+            this.SRNo.HeaderText = "SRNo";
+            this.SRNo.Name = "SRNo";
+            this.SRNo.Visible = false;
+            this.SRNo.Width = 5;
+            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.chkDelete);
@@ -275,6 +324,7 @@
             "",
             "Purchasing",
             "Dispensing",
+            "Purchasing and Dispensing",
             "Consumption",
             "External"});
             this.ddlStoreCategory.Location = new System.Drawing.Point(100, 49);
@@ -470,55 +520,6 @@
             this.dataGridViewTextBoxColumn8.HeaderText = "theColumnUserId";
             this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
             this.dataGridViewTextBoxColumn8.Visible = false;
-            // 
-            // ID
-            // 
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            // 
-            // ColStoreID
-            // 
-            this.ColStoreID.HeaderText = "Store ID";
-            this.ColStoreID.Name = "ColStoreID";
-            this.ColStoreID.ReadOnly = true;
-            // 
-            // ColStoreName
-            // 
-            this.ColStoreName.HeaderText = "Store Name";
-            this.ColStoreName.Name = "ColStoreName";
-            this.ColStoreName.ReadOnly = true;
-            this.ColStoreName.Width = 307;
-            // 
-            // ColPurchasingStore
-            // 
-            this.ColPurchasingStore.HeaderText = "Central Store";
-            this.ColPurchasingStore.Name = "ColPurchasingStore";
-            this.ColPurchasingStore.ReadOnly = true;
-            this.ColPurchasingStore.Visible = false;
-            // 
-            // ColDispensingStore
-            // 
-            this.ColDispensingStore.HeaderText = "Dispensing Store";
-            this.ColDispensingStore.Name = "ColDispensingStore";
-            this.ColDispensingStore.Visible = false;
-            // 
-            // StoreCategory
-            // 
-            this.StoreCategory.HeaderText = "Store Category";
-            this.StoreCategory.Name = "StoreCategory";
-            // 
-            // ColStatus
-            // 
-            this.ColStatus.HeaderText = "Status";
-            this.ColStatus.Name = "ColStatus";
-            this.ColStatus.ReadOnly = true;
-            // 
-            // SRNo
-            // 
-            this.SRNo.HeaderText = "SRNo";
-            this.SRNo.Name = "SRNo";
-            this.SRNo.Visible = false;
-            this.SRNo.Width = 5;
             // 
             // frmStoreMaster
             // 

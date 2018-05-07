@@ -130,5 +130,15 @@ namespace IQCare.Controllers.Registration
                 return Ok(response.Value);
             return BadRequest(response);
         }
+
+        [HttpPost("AddPersonPopulationType")]
+        public async Task<IActionResult> AddPersonPopulationType(
+            [FromBody] AddPersonPopulationCommand addPersonPopulationCommand)
+        {
+            var response = await _mediator.Send(addPersonPopulationCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
     }
 }
