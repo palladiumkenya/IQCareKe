@@ -95,6 +95,8 @@ If Not Exists(Select 1 From LookupItem where Name='Pr: Provider Referral') Begin
 
 If Not Exists(Select 1 From LookupItem where Name='ConsentToBeTested') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('ConsentToBeTested','ConsentToBeTested',0); End
 If Not Exists(Select 1 From LookupItem where Name='ConsentToListPartners') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('ConsentToListPartners','ConsentToListPartners',0); End
+If Not Exists(Select 1 From LookupItem where Name='ConsentToTestingFamily') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('ConsentToTestingFamily','ConsentToTestingFamily',0); End
+If Not Exists(Select 1 From LookupItem where Name='ConsentToTestingPartner') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('ConsentToTestingPartner','ConsentToTestingPartner',0); End
 
 
 If Not Exists(Select 1 From LookupItem where Name='PnsPhysicallyHurt') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('PnsPhysicallyHurt','PnsPhysicallyHurt',0); End
@@ -234,6 +236,8 @@ Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) 
 
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'ConsentToBeTested',3 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='ConsentToBeTested') ItemId FROM LookupMaster  WHERE Name='ConsentType') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'ConsentToListPartners',4 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='ConsentToListPartners') ItemId FROM LookupMaster  WHERE Name='ConsentType') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'ConsentToTestingFamily',5 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='ConsentToTestingFamily') ItemId FROM LookupMaster  WHERE Name='ConsentType') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'ConsentToTestingPartner',6 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='ConsentToTestingPartner') ItemId FROM LookupMaster  WHERE Name='ConsentType') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
 
 
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'PnsPhysicallyHurt',1 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='PnsPhysicallyHurt') ItemId FROM LookupMaster  WHERE Name='PnsScreening') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;

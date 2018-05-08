@@ -206,7 +206,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
 
                             //add Client Tracing
                             var clientTracing = await encounterTestingService.addTracing(person.Id, tracingType, tracingDate, mode, outcome,
-                                providerId, tracingRemarks);
+                                providerId, tracingRemarks, null, null, null);
 
                             //add Client Linkage
                             var clientLinkage = await encounterTestingService.addLinkage(person.Id, dateLinkageEnrolled,

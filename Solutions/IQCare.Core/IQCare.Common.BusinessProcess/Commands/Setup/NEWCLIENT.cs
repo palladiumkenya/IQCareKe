@@ -11,5 +11,12 @@ namespace IQCare.Common.BusinessProcess.Commands.Setup
     public class PARTNER
     {
         public PARTNER_FAMILY_PATIENT_IDENTIFICATION PATIENT_IDENTIFICATION { get; set; }
+        public PARTNER_ENCOUNTER ENCOUNTER { get; set; }
+    }
+
+    public class FAMILY
+    {
+        public PARTNER_FAMILY_PATIENT_IDENTIFICATION PATIENT_IDENTIFICATION { get; set; }
+        public FAMILY_ENCOUNTER ENCOUNTER { get; set; }
     }
 }
