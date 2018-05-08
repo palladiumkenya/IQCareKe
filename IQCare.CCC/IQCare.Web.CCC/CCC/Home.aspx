@@ -187,7 +187,7 @@
     </div><!-- .col-md-12 -->
 
     <div class="col-md-12 col-xs-12 col-sm-12">
-         <div class="col-md-3 col-xs-3 col-sm-3">
+        <!-- <div class="col-md-3 col-xs-3 col-sm-3">
                 <div class="col-md-12 label label-info">
                   <label class="label label-info fa fa-bar-chart fa-2x"> Facility Summary </label>
                 </div>
@@ -236,9 +236,9 @@
                     </div>
                 </div>
 
-         </div>
+         </div> -->
          
-             <div class="col-md-3 col-xs-3 col-sm-3">
+             <div class="col-md-4 col-xs-3 col-sm-3">
                 <div class="col-md-12 label label-info">
                   <label class="label label-info fa fa-pie-chart fa-2x"> Care Ending Summary </label>
                 </div>
@@ -268,7 +268,7 @@
                 <div class="col-md-12"><hr></div>
          </div>
 
-        <div class="col-md-3 col-xs-3 col-sm-3">
+        <div class="col-md-4 col-xs-3 col-sm-3">
             <div class="col-md-12 label label-info">
                 <label class="label label-info fa fa-line-chart fa-2x"> Family/Partner Testing </label>
             </div>
@@ -277,7 +277,7 @@
         </div>
       
 
-         <div class="col-md-3 col-xs-3 col-sm-3">
+         <div class="col-md-4 col-xs-3 col-sm-3">
               <div class="col-md-12 label label-warning">
                 <label class="label label-warning fa fa-bar-chart fa-2x pull-left"> Differentiated Care model Statistics</label>
               </div>
@@ -512,7 +512,8 @@
                     complete = response.d;
                     document.getElementById("completeVL").innerHTML = "<span class='badge'> " + response.d + " </span>";
                     percentage = ((complete / (pending + complete)) * 100);
-                    !isNaN(percentage) ? percentage.toFixed(2) : percentage=0;
+                    percentage = percentage.toFixed(2);
+                    !isNaN(percentage) ? percentage : percentage=0;
             $("#<%=lblvl.ClientID%>").html("Result Rate "+ percentage +" %");
 
 
