@@ -155,10 +155,18 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                             var enrollmentTracing = await _unitOfWork.Repository<LookupItemView>()
                                 .Get(x => x.MasterName == "TracingType" && x.ItemName == "Enrolment").FirstOrDefaultAsync();
                             int tracingType = enrollmentTracing.ItemId;
-                            DateTime tracingDate = DateTime.ParseExact(request.CLIENTS[i].ENCOUNTER.TRACING.TRACING_DATE, "yyyyMMdd", null);
-                            int mode = request.CLIENTS[i].ENCOUNTER.TRACING.TRACING_MODE;
-                            int outcome = request.CLIENTS[i].ENCOUNTER.TRACING.TRACING_OUTCOME;
                             string tracingRemarks = String.Empty;
+
+                            for (int j = 0; j < request.CLIENTS[i].ENCOUNTER.TRACING.Count; j++)
+                            {
+                                DateTime tracingDate = DateTime.ParseExact(request.CLIENTS[i].ENCOUNTER.TRACING[j].TRACING_DATE, "yyyyMMdd", null);
+                                int mode = request.CLIENTS[i].ENCOUNTER.TRACING[j].TRACING_MODE;
+                                int outcome = request.CLIENTS[i].ENCOUNTER.TRACING[j].TRACING_OUTCOME;
+
+                                //add Client Tracing
+                                var clientTracing = await encounterTestingService.addTracing(person.Id, tracingType, tracingDate, mode, outcome,
+                                    providerId, tracingRemarks, null, null, null);
+                            }
 
                             //add patient master visit
                             var patientMasterVisit = await encounterTestingService.AddPatientMasterVisit(patient.Id, 2, encounterDate, providerId);
@@ -203,10 +211,6 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                             //add referral
                             /*await encounterTestingService.addReferral(person.Id, fromFacilityId: 1, serviceAreaId: 1,
                                 referralReason: 1, referredTo: 1, userId: 1, dateToBeEnrolled: DateTime.Now);*/
-
-                            //add Client Tracing
-                            var clientTracing = await encounterTestingService.addTracing(person.Id, tracingType, tracingDate, mode, outcome,
-                                providerId, tracingRemarks, null, null, null);
 
                             //add Client Linkage
                             var clientLinkage = await encounterTestingService.addLinkage(person.Id, dateLinkageEnrolled,

@@ -10,6 +10,7 @@ import {NotificationService} from '../../shared/_services/notification.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AppStateService} from '../../shared/_services/appstate.service';
 import {AppEnum} from '../../shared/reducers/app.enum';
+import {ClientService} from '../../shared/_services/client.service';
 
 @Component({
   selector: 'app-testing',
@@ -48,7 +49,8 @@ export class TestingComponent implements OnInit, AfterViewInit {
                 private snotifyService: SnotifyService,
                 private notificationService: NotificationService,
                 private fb: FormBuilder,
-                private appStateService: AppStateService) {
+                private appStateService: AppStateService,
+                private clientService: ClientService) {
         this.store.pipe(select('app')).subscribe(res => {
             this.isCoupleDiscordantDisabled = res['testedAs'];
         });
@@ -75,7 +77,7 @@ export class TestingComponent implements OnInit, AfterViewInit {
             coupleDiscordant: new FormControl(this.finalTestingResults.coupleDiscordant, [Validators.required]),
             acceptedPartnerListing: new FormControl(this.finalTestingResults.acceptedPartnerListing, [Validators.required]),
             reasonsDeclinePartnerListing: new FormControl(this.finalTestingResults.reasonsDeclinePartnerListing, [Validators.required]),
-            finalResultsRemarks: new FormControl(this.finalTestingResults.finalResultsRemarks,[Validators.required]),
+            finalResultsRemarks: new FormControl(this.finalTestingResults.finalResultsRemarks, [Validators.required]),
         });
 
         this.encounterService.getCustomOptions().subscribe(data => {
@@ -96,7 +98,31 @@ export class TestingComponent implements OnInit, AfterViewInit {
                     this.reasonsDeclined = options[i].value;
                 }
             }
+
+            const optionSelected = this.yesNoNA.filter(function( obj ) {
+                return obj.itemName == 'N/A';
+            });
+
+            this.clientService.getClientDetails(JSON.parse(localStorage.getItem('patientId')), 2).subscribe(res => {
+                if (this.getAge(res['patientLookup'][0]['dateOfBirth']) < 15) {
+                    this.formTesting.controls.acceptedPartnerListing.disable({onlySelf: true});
+                    this.formTesting.controls.acceptedPartnerListing.setValue(optionSelected[0]['itemId']);
+                    this.formTesting.controls.reasonsDeclinePartnerListing.disable({onlySelf: true});
+                }
+            });
+
         });
+    }
+
+    getAge(dateString) {
+        const today = new Date();
+        const birthDate = new Date(dateString);
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+        return age;
     }
 
     openDialog(screeningType: string) {
@@ -265,7 +291,7 @@ export class TestingComponent implements OnInit, AfterViewInit {
 
     onAcceptedPartnerListingChange() {
         const acceptedPartnerListing = this.formTesting.controls.acceptedPartnerListing.value;
-        const optionSelected = this.yesNoOptions.filter(function( obj ) {
+        const optionSelected = this.yesNoNA.filter(function( obj ) {
             return obj.itemId == acceptedPartnerListing;
         });
 
