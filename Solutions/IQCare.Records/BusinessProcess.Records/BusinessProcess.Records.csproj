@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9705FAB1-AA70-4858-B03D-7691905E4F05}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BusinessProcess.Records</RootNamespace>
+    <AssemblyName>BusinessProcess.Records</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Application.Common">
+      <HintPath>..\..\..\References\Application.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Application.Presentation">
+      <HintPath>..\..\..\References\Application.Presentation.dll</HintPath>
+    </Reference>
+    <Reference Include="DataAccess.Base">
+      <HintPath>..\..\..\References\DataAccess.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="DataAccess.Common">
+      <HintPath>..\..\..\References\DataAccess.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="DataAccess.Context">
+      <HintPath>..\..\..\References\DataAccess.Context.dll</HintPath>
+    </Reference>
+    <Reference Include="DataAccess.Entity">
+      <HintPath>..\..\..\References\DataAccess.Entity.dll</HintPath>
+    </Reference>
+    <Reference Include="DataAccess.Lookup">
+      <HintPath>..\..\..\References\DataAccess.Lookup.dll</HintPath>
+    </Reference>
+    <Reference Include="Entities.Common">
+      <HintPath>..\..\..\References\Entities.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Entities.Lookup">
+      <HintPath>..\..\..\References\Entities.Lookup.dll</HintPath>
+    </Reference>
+    <Reference Include="Entities.PatientCore">
+      <HintPath>..\..\..\References\Entities.PatientCore.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Interface.Lookup">
+      <HintPath>..\..\..\References\Interface.Lookup.dll</HintPath>
+    </Reference>
+    <Reference Include="Interface.PatientCore">
+      <HintPath>..\..\..\References\Interface.PatientCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.EntityFrameworkCore">
+      <HintPath>..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.entityframeworkcore\2.0.1\lib\netstandard2.0\Microsoft.EntityFrameworkCore.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BLookupManager.cs" />
+    <Compile Include="BMstPatientInsert.cs" />
+    <Compile Include="BPatientLookupManager.cs" />
+    <Compile Include="BPersonContactManager.cs" />
+    <Compile Include="BPersonEducationManager.cs" />
+    <Compile Include="BPersonEmergencyContactManager.cs" />
+    <Compile Include="BPersonLocationmanager.cs" />
+    <Compile Include="BPersonLookUpManager.cs" />
+    <Compile Include="BPersonManager.cs" />
+    <Compile Include="BPersonOccupationManager.cs" />
+    <Compile Include="BPersonRelationshipManager.cs" />
+    <Compile Include="Enrollment\BIdentifier.cs" />
+    <Compile Include="Enrollment\BPatientEnrollment.cs" />
+    <Compile Include="Enrollment\BPatientEntryPoint.cs" />
+    <Compile Include="Enrollment\BPatientIdentifier.cs" />
+    <Compile Include="Enrollment\BPatientReEnrollment.cs" />
+    <Compile Include="Enrollment\BPersonIdentifier.cs" />
+    <Compile Include="Enrollment\BServiceAreaIdentifiers.cs" />
+    <Compile Include="PatientMaritalStatusManager.cs" />
+    <Compile Include="Patient\BPatient.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Visit\BPatientEncounterManager.cs" />
+    <Compile Include="Visit\BPatientMasterVisit.cs" />
+    <Compile Include="Visit\BPatientVisit.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataAccess.Records\DataAccess.Records.csproj">
+      <Project>{8996ff79-ebdd-4d9a-8e18-f1ad4d59cd88}</Project>
+      <Name>DataAccess.Records</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entities.Records\Entities.Records.csproj">
+      <Project>{72731D7D-9C69-4D8F-AD7B-084DBA4A0892}</Project>
+      <Name>Entities.Records</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interface.Records\Interface.Records.csproj">
+      <Project>{d767b5da-fb26-4c32-98c7-9dbcd435131f}</Project>
+      <Name>Interface.Records</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

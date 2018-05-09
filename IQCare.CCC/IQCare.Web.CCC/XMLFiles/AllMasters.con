@@ -106745,6 +106745,40 @@
     <ListName>PharmacyUnit</ListName>
   </Mst_Decode>
   <Mst_Decode>
+    <ID>340</ID>
+    <Name>Acute</Name>
+    <CodeID>210</CodeID>
+    <SRNo>1.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>1</SystemId>
+    <Code>1</Code>
+    <DisplayName>1 = Acute</DisplayName>
+    <ModuleId>0</ModuleId>
+    <ListName>Severity </ListName>
+  </Mst_Decode>
+  <Mst_Decode>
+    <ID>376</ID>
+    <Name>Standard</Name>
+    <CodeID>1008</CodeID>
+    <SRNo>1.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>1</SystemId>
+    <Code>STD</Code>
+    <DisplayName>STD = Standard</DisplayName>
+    <ListName>Billing Price Plans</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
+    <ID>377</ID>
+    <Name>Enrollment</Name>
+    <CodeID>1009</CodeID>
+    <SRNo>1.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>0</SystemId>
+    <Code>ENROLLMENT</Code>
+    <DisplayName>ENROLLMENT = Enrollment</DisplayName>
+    <ListName>Form Category</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
     <ID>381</ID>
     <Name>Clinical Form</Name>
     <CodeID>1010</CodeID>
@@ -106783,7 +106817,7 @@
     <ListName>Payment Exemption</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>419</ID>
+    <ID>425</ID>
     <Name>Under 5</Name>
     <CodeID>1011</CodeID>
     <SRNo>1.00</SRNo>
@@ -106792,7 +106826,7 @@
     <ListName>Payment Exemption</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>420</ID>
+    <ID>426</ID>
     <Name>Maternity</Name>
     <CodeID>1011</CodeID>
     <SRNo>1.00</SRNo>
@@ -106801,7 +106835,7 @@
     <ListName>Payment Exemption</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>421</ID>
+    <ID>427</ID>
     <Name>Prisoner</Name>
     <CodeID>1011</CodeID>
     <SRNo>1.00</SRNo>
@@ -106818,63 +106852,6 @@
     <DeleteFlag>0</DeleteFlag>
     <SystemId>0</SystemId>
     <ListName>ServiceRegisteredForAtPharmacy</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
-    <ID>376</ID>
-    <Name>Standard</Name>
-    <CodeID>1008</CodeID>
-    <SRNo>1.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <SystemId>1</SystemId>
-    <Code>STD</Code>
-    <DisplayName>STD = Standard</DisplayName>
-    <ListName>Billing Price Plans</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
-    <ID>377</ID>
-    <Name>Enrollment</Name>
-    <CodeID>1009</CodeID>
-    <SRNo>1.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <SystemId>0</SystemId>
-    <Code>ENROLLMENT</Code>
-    <DisplayName>ENROLLMENT = Enrollment</DisplayName>
-    <ListName>Form Category</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
-    <ID>340</ID>
-    <Name>Acute</Name>
-    <CodeID>210</CodeID>
-    <SRNo>1.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <SystemId>1</SystemId>
-    <Code>1</Code>
-    <DisplayName>1 = Acute</DisplayName>
-    <ModuleId>0</ModuleId>
-    <ListName>Severity </ListName>
-  </Mst_Decode>
-  <Mst_Decode>
-    <ID>341</ID>
-    <Name>Moderate</Name>
-    <CodeID>210</CodeID>
-    <SRNo>2.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <SystemId>1</SystemId>
-    <Code>2</Code>
-    <DisplayName>2 = Moderate</DisplayName>
-    <ModuleId>0</ModuleId>
-    <ListName>Severity </ListName>
-  </Mst_Decode>
-  <Mst_Decode>
-    <ID>378</ID>
-    <Name>Consultation</Name>
-    <CodeID>1009</CodeID>
-    <SRNo>2.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <SystemId>0</SystemId>
-    <Code>CONSULTATION</Code>
-    <DisplayName>CONSULTATION = Consultation</DisplayName>
-    <ListName>Form Category</ListName>
   </Mst_Decode>
   <Mst_Decode>
     <ID>414</ID>
@@ -106896,6 +106873,29 @@
     <Code>FACILITY_REPORT</Code>
     <DisplayName>FACILITY_REPORT = Facility Report</DisplayName>
     <ListName>Feature Type</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
+    <ID>378</ID>
+    <Name>Consultation</Name>
+    <CodeID>1009</CodeID>
+    <SRNo>2.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>0</SystemId>
+    <Code>CONSULTATION</Code>
+    <DisplayName>CONSULTATION = Consultation</DisplayName>
+    <ListName>Form Category</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
+    <ID>341</ID>
+    <Name>Moderate</Name>
+    <CodeID>210</CodeID>
+    <SRNo>2.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>1</SystemId>
+    <Code>2</Code>
+    <DisplayName>2 = Moderate</DisplayName>
+    <ModuleId>0</ModuleId>
+    <ListName>Severity </ListName>
   </Mst_Decode>
   <Mst_Decode>
     <ID>213</ID>
@@ -107272,6 +107272,29 @@
     <ListName>PharmacyUnit</ListName>
   </Mst_Decode>
   <Mst_Decode>
+    <ID>342</ID>
+    <Name>Mild</Name>
+    <CodeID>210</CodeID>
+    <SRNo>3.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>1</SystemId>
+    <Code>3</Code>
+    <DisplayName>3 = Mild</DisplayName>
+    <ModuleId>0</ModuleId>
+    <ListName>Severity </ListName>
+  </Mst_Decode>
+  <Mst_Decode>
+    <ID>379</ID>
+    <Name>Care Termination</Name>
+    <CodeID>1009</CodeID>
+    <SRNo>3.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>0</SystemId>
+    <Code>CARE_END</Code>
+    <DisplayName>CARE_END = Care Termination</DisplayName>
+    <ListName>Form Category</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
     <ID>383</ID>
     <Name>Patient Report</Name>
     <CodeID>1010</CodeID>
@@ -107293,27 +107316,15 @@
     <ListName>ServiceRegisteredForAtPharmacy</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>379</ID>
-    <Name>Care Termination</Name>
-    <CodeID>1009</CodeID>
-    <SRNo>3.00</SRNo>
+    <ID>384</ID>
+    <Name>List</Name>
+    <CodeID>1010</CodeID>
+    <SRNo>4.00</SRNo>
     <DeleteFlag>0</DeleteFlag>
     <SystemId>0</SystemId>
-    <Code>CARE_END</Code>
-    <DisplayName>CARE_END = Care Termination</DisplayName>
-    <ListName>Form Category</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
-    <ID>342</ID>
-    <Name>Mild</Name>
-    <CodeID>210</CodeID>
-    <SRNo>3.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <SystemId>1</SystemId>
-    <Code>3</Code>
-    <DisplayName>3 = Mild</DisplayName>
-    <ModuleId>0</ModuleId>
-    <ListName>Severity </ListName>
+    <Code>LIST</Code>
+    <DisplayName>LIST = List</DisplayName>
+    <ListName>Feature Type</ListName>
   </Mst_Decode>
   <Mst_Decode>
     <ID>380</ID>
@@ -107325,17 +107336,6 @@
     <Code>REGISTRATION</Code>
     <DisplayName>REGISTRATION = Registration</DisplayName>
     <ListName>Form Category</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
-    <ID>384</ID>
-    <Name>List</Name>
-    <CodeID>1010</CodeID>
-    <SRNo>4.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <SystemId>0</SystemId>
-    <Code>LIST</Code>
-    <DisplayName>LIST = List</DisplayName>
-    <ListName>Feature Type</ListName>
   </Mst_Decode>
   <Mst_Decode>
     <ID>215</ID>
@@ -107543,6 +107543,39 @@
     <ListName>MaritalStatus</ListName>
   </Mst_Decode>
   <Mst_Decode>
+    <ID>428</ID>
+    <Name>HTS Services (PSmart)</Name>
+    <CodeID>214</CodeID>
+    <SRNo>4.10</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>0</SystemId>
+    <Code>1</Code>
+    <DisplayName>1 = HTS Services (PSmart)</DisplayName>
+    <ListName>Waiting List</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
+    <ID>429</ID>
+    <Name>PSmart Issuance</Name>
+    <CodeID>214</CodeID>
+    <SRNo>4.12</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>0</SystemId>
+    <Code>1</Code>
+    <DisplayName>1 = PSmart Issuance</DisplayName>
+    <ListName>Waiting List</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
+    <ID>385</ID>
+    <Name>Admin Actions</Name>
+    <CodeID>1010</CodeID>
+    <SRNo>5.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>0</SystemId>
+    <Code>ADMIN_ACTION</Code>
+    <DisplayName>ADMIN_ACTION = Admin Actions</DisplayName>
+    <ListName>Feature Type</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
     <ID>290</ID>
     <Name>Married Polygamous</Name>
     <CodeID>12</CodeID>
@@ -107708,28 +107741,6 @@
     <ListName>PharmacyUnit</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>385</ID>
-    <Name>Admin Actions</Name>
-    <CodeID>1010</CodeID>
-    <SRNo>5.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <SystemId>0</SystemId>
-    <Code>ADMIN_ACTION</Code>
-    <DisplayName>ADMIN_ACTION = Admin Actions</DisplayName>
-    <ListName>Feature Type</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
-    <ID>386</ID>
-    <Name>Patient Actions</Name>
-    <CodeID>1010</CodeID>
-    <SRNo>6.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <SystemId>0</SystemId>
-    <Code>PATIENT_ACTION</Code>
-    <DisplayName>PATIENT_ACTION = Patient Actions</DisplayName>
-    <ListName>Feature Type</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
     <ID>217</ID>
     <Name>mcg</Name>
     <CodeID>32</CodeID>
@@ -107875,6 +107886,28 @@
     <ListName>Appointment Reason</ListName>
   </Mst_Decode>
   <Mst_Decode>
+    <ID>386</ID>
+    <Name>Patient Actions</Name>
+    <CodeID>1010</CodeID>
+    <SRNo>6.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>0</SystemId>
+    <Code>PATIENT_ACTION</Code>
+    <DisplayName>PATIENT_ACTION = Patient Actions</DisplayName>
+    <ListName>Feature Type</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
+    <ID>387</ID>
+    <Name>Module Actions</Name>
+    <CodeID>1010</CodeID>
+    <SRNo>7.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>0</SystemId>
+    <Code>MODULE_ACTION</Code>
+    <DisplayName>MODULE_ACTION = Module Actions</DisplayName>
+    <ListName>Feature Type</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
     <ID>364</ID>
     <Name>Pharmacy Refill</Name>
     <CodeID>26</CodeID>
@@ -107991,28 +108024,6 @@
     <ListName>PharmacyUnit</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>387</ID>
-    <Name>Module Actions</Name>
-    <CodeID>1010</CodeID>
-    <SRNo>7.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <SystemId>0</SystemId>
-    <Code>MODULE_ACTION</Code>
-    <DisplayName>MODULE_ACTION = Module Actions</DisplayName>
-    <ListName>Feature Type</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
-    <ID>388</ID>
-    <Name>Module Report</Name>
-    <CodeID>1010</CodeID>
-    <SRNo>8.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <SystemId>0</SystemId>
-    <Code>MODULE_REPORT</Code>
-    <DisplayName>MODULE_REPORT = Module Report</DisplayName>
-    <ListName>Feature Type</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
     <ID>219</ID>
     <Name>tab</Name>
     <CodeID>32</CodeID>
@@ -108108,6 +108119,17 @@
     <SystemId>0</SystemId>
     <ModuleId>3</ModuleId>
     <ListName>Patient Referred</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
+    <ID>388</ID>
+    <Name>Module Report</Name>
+    <CodeID>1010</CodeID>
+    <SRNo>8.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>0</SystemId>
+    <Code>MODULE_REPORT</Code>
+    <DisplayName>MODULE_REPORT = Module Report</DisplayName>
+    <ListName>Feature Type</ListName>
   </Mst_Decode>
   <Mst_Decode>
     <ID>327</ID>
