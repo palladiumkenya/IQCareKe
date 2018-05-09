@@ -3,8 +3,8 @@
 CREATE TABLE NewDrugList (
 	Id INT IDENTITY(1,1) PRIMARY KEY,
 	DrugName varchar(100),
-	Abbreviation varchar(10),
-	Strength varchar(10)
+	Abbreviation varchar(20),
+	Strength varchar(20)
 );
 
 INSERT INTO NewDrugList(DrugName,Abbreviation,strength) VALUES('Dolutegravir-50mg','DTG','50mg');
