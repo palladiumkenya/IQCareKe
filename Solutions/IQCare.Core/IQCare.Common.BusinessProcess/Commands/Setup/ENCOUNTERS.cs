@@ -10,7 +10,7 @@ namespace IQCare.Common.BusinessProcess.Commands.Setup
         public PRE_TEST PRE_TEST { get; set; }
         public HIV_TESTS HIV_TESTS { get; set; }
         public NewReferral REFERRAL { get; set; }
-        public NewTracing TRACING { get; set; }
+        public List<NewTracing> TRACING { get; set; }
         public NewLinkage LINKAGE { get; set; }
     }
 
