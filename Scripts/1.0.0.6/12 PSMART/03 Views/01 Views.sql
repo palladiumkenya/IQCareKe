@@ -7,9 +7,18 @@ GO
 IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[PSmart_ClientEligibleList]'))
 DROP VIEW [dbo].[PSmart_ClientEligibleList]
 GO
+IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[PsmartEligibleList]'))
+DROP VIEW [dbo].[PsmartEligibleList]
+GO
+
 IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[PSMart_ExternalPatientId]'))
 DROP VIEW [dbo].[PSMart_ExternalPatientId]
 GO
+
+IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[PSmart_InternalPatientId]'))
+DROP VIEW [dbo].[PSmart_InternalPatientId]
+GO
+
 IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[Psmart_HTSList]'))
 DROP VIEW [dbo].[Psmart_HTSList]
 GO
