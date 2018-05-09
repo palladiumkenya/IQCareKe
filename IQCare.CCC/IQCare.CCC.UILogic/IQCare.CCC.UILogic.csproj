@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>IQCare.CCC.UILogic</RootNamespace>
     <AssemblyName>IQCare.CCC.UILogic</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TrunkDir>..\..\</TrunkDir>
     <WebDir Condition=" '$(WebDir)' == '' ">$(TrunkDir)package\web\bin\</WebDir>
@@ -66,9 +66,25 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="Interface.Administration, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Interface.Administration.dll</HintPath>
+    </Reference>
+    <Reference Include="Interface.CCC, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Interface.CCC.dll</HintPath>
+    </Reference>
     <Reference Include="Interface.Security, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\Interface.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="IQCare.DTO, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\IQCare.DTO.dll</HintPath>
+    </Reference>
+    <Reference Include="IQCare.Events, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\IQCare.Events.dll</HintPath>
     </Reference>
     <Reference Include="IQCare.Web.UILogic, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -122,6 +138,7 @@
     <Compile Include="Interoperability\Enrollment\ProcessRegistration.cs" />
     <Compile Include="Interoperability\InteropPlacerTypeManager.cs" />
     <Compile Include="Interoperability\InteropPlacerValuesManager.cs" />
+    <Compile Include="Interoperability\InteropUser.cs" />
     <Compile Include="Interoperability\Observation\PatientVitalsMessageManager.cs" />
     <Compile Include="Interoperability\Observation\ProcessObservation.cs" />
     <Compile Include="Interoperability\Observation\ProcessObservationResultMessage.cs" />
@@ -177,29 +194,6 @@
     <Compile Include="Visit\PatientEncounterManager.cs" />
     <Compile Include="Visit\PatientMasterVisitManager.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BusinessProcess.CCC\BusinessProcess.CCC.csproj">
-      <Project>{5C3B0D75-6637-49B9-B801-1358B7E55A10}</Project>
-      <Name>BusinessProcess.CCC</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DataAccess.CCC\DataAccess.CCC.csproj">
-      <Project>{8CC162FB-01FB-42AE-B63F-47E007E469E6}</Project>
-      <Name>DataAccess.CCC</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Interface.CCC\Interface.CCC.csproj">
-      <Project>{174b280e-08d7-4fe7-b080-3a017f0944cd}</Project>
-      <Name>Interface.CCC</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\IQCare.DTO\IQCare.DTO.csproj">
-      <Project>{663E6443-D847-478F-B7A5-400448793A6E}</Project>
-      <Name>IQCare.DTO</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\IQCare.Events\IQCare.Events.csproj">
-      <Project>{43E1A1CC-ADC8-4843-ACB0-16E9C90BB980}</Project>
-      <Name>IQCare.Events</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

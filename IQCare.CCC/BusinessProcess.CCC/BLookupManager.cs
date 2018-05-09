@@ -245,7 +245,8 @@ namespace BusinessProcess.CCC
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                var item = unitOfWork.LookupFacilityRepository.FindBy(f => f.MFLCode == mflCode && f.DeleteFlag == 0).FirstOrDefault(); ;
+                var item = unitOfWork.LookupFacilityRepository.GetFacilityByMflCode(mflCode);
+                //.FindBy(f => f.MFLCode == mflCode && f.DeleteFlag == 0).FirstOrDefault(); ;
                 unitOfWork.Dispose();
                 return item;
             }

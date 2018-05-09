@@ -1,19 +1,14 @@
 ﻿using Application.Presentation;
 using Interface.CCC;
+using IQCare.CCC.UILogic.Visit;
+using IQCare.Events;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Script.Serialization;
-using System.Web.UI;
 using System.Web.UI.WebControls;
-using Entities.Administration;
-using Entities.CCC.Lookup;
-using IQCare.CCC.UILogic.Visit;
-using IQCare.Events;
 using static Entities.CCC.Encounter.PatientEncounter;
 
 namespace IQCare.CCC.UILogic
@@ -23,7 +18,7 @@ namespace IQCare.CCC.UILogic
     public class PatientEncounterLogic
     {
          private int result = 0;
-        private int encounterId = 0;
+       // private int encounterId = 0;
         private int encounterTypeId = 0;
 
         public int savePatientEncounterPresentingComplaints(string patientMasterVisitID, string patientID, string serviceID, string VisitDate, string VisitScheduled, string VisitBy, string anyComplaints, string Complaints, int TBScreening, int NutritionalStatus, int userId, string adverseEvent, string presentingComplaints)
@@ -213,7 +208,7 @@ namespace IQCare.CCC.UILogic
 
                 return filteredList[0].multiplier;
             }
-            catch(Exception ex)
+            catch
             {
                 return "0";
             }

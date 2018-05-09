@@ -10,9 +10,16 @@ GO
 
 CREATE VIEW [dbo].[API_PatientVitalsView]
 AS
-SELECT        Id, ptn_pk, PersonId, PatientIndex, PatientType, FacilityId, Active, DateOfBirth, DobPrecision, CAST(DECRYPTBYKEY(NationalId) AS VARCHAR(50)) AS NationalId, DeleteFlag, CreatedBy, CreateDate, AuditData, 
-                         RegistrationDate
-FROM            dbo.Patient
+SELECT        Id, ptn_pk, PersonId, PatientIndex, PatientType, FacilityId, Active, DateOfBirth, DobPrecision, CAST(DECRYPTBYKEY(NationalId) AS Select dbo.PatientVitals.id
+	  ,dbo.PatientVitals.PatientId
+	  ,dbo.PatientVitals.PatientMasterVisitId
+	  ,dbo.PatientVitals.Height
+	  ,'CMS' As HeightUnits
+	  ,dbo.PatientVitals.Weight
+	  ,'KGS' As WeightUnits
+	  ,format(cast(isnull(dbo.PatientMasterVisit.VisitDate, dbo.PatientMasterVisit.start) As datetime), 'yyyyMMddhhmmss') As VisitDate
+From dbo.PatientVitals
+Inner Join dbo.PatientMasterVisit On dbo.PatientVitals.PatientMasterVisitId = dbo.PatientMasterVisit.id
 
 GO
 

@@ -44,7 +44,7 @@ namespace IQCare.Controllers.Afyamobile
         {
             var options = new string[]
             {
-                "Gender", "MaritalStatus", "TracingOutcome", "TracingMode", "HIVTestKits", "HIVResults", "YesNo",
+                "Gender", "HTSMaritalStatus", "TracingOutcome", "TracingMode", "HIVTestKits", "HIVResults", "YesNo",
                 "Strategy", "Disabilities", "TestedAs", "TbScreening", "HTSEntryPoints", "HIVFinalResults", "YesNoNA",
                 "HTSKeyPopulation", "Relationship", "HivStatus", "HivCareStatus", "ScreeningHivStatus",
                 "PnsTracingOutcome", "IpvOutcome", "PNSRealtionship", "PNSRelationship", "YesNoDeclined", "PnsApproach"

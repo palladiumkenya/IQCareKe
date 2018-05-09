@@ -9,11 +9,12 @@ namespace IQCare.HTS.BusinessProcess.Commands
         public DateTime TracingDate { get; set; }
         public int TracingMode { get; set; }
         public int TracingOutcome { get; set; }
-        public int Consent { get; set; }
-        public DateTime DateBookedTesting { get; set; }
+        public int? Consent { get; set; }
+        public DateTime? DateBookedTesting { get; set; }
         public int PersonId { get; set; }
         public int UserId { get; set; }
         public int TracingType { get; set; }
+        public DateTime? DateReminded { get; set; }
     }
 
     public class AddPnsTracingResponse

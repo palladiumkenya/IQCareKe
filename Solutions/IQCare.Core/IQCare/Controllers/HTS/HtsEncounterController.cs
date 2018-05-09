@@ -98,7 +98,7 @@ namespace IQCare.Controllers.HTS
             }
 
             var screeningList = new List<KeyValuePair<string, int>>();
-            screeningList.Add(new KeyValuePair<string, int>("TBStatus", addEncounterCommand.Encounter.TbScreening));
+            screeningList.Add(new KeyValuePair<string, int>("TbScreening", addEncounterCommand.Encounter.TbScreening));
 
             var tbScreening = await _mediator.Send(new AddPatientScreeningCommand()
             {
@@ -135,7 +135,7 @@ namespace IQCare.Controllers.HTS
             updateEncounterCommand.encounterId = encounterId;
 
             var screeningList = new List<KeyValuePair<string, int>>();
-            screeningList.Add(new KeyValuePair<string, int>("TBStatus", updateEncounterCommand.Encounter.TbScreening));
+            screeningList.Add(new KeyValuePair<string, int>("TbScreening", updateEncounterCommand.Encounter.TbScreening));
 
             var result = await _mediator.Send(new UpdatePatientScreeningCommand()
             {

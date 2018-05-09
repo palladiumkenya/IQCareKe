@@ -81,7 +81,7 @@ export class PersonComponent implements OnInit {
 
             const partnerOptions = ['Partner', 'Co-Wife', 'Spouse'];
             for (let i = 0; i < options.length; i++) {
-                if (options[i].key == 'MaritalStatus') {
+                if (options[i].key == 'HTSMaritalStatus') {
                     this.maritalStatuses = options[i].value;
                 } else if (options[i].key == 'HTSKeyPopulation') {
                     this.keyPops = options[i].value;

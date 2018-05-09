@@ -16,9 +16,9 @@ namespace IQCare.CCC.UILogic
             return _personLookUpManager.GetPersonById(id);
         }
 
-        public List<PersonLookUp> GetPersonSearchResults(string firstName, string middleName, string lastName, string dob)
+        public List<PersonLookUp> GetPersonSearchResults(string firstName, string middleName, string lastName, string dob,int sex)
         {
-            return _personLookUpManager.GetPatientSearchresults(firstName, middleName, lastName, dob);
+            return _personLookUpManager.GetPatientSearchresults(firstName, middleName, lastName, dob ,sex);
         }
     }
 }

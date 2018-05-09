@@ -32,4 +32,20 @@ END;
 GO
 
 
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'Consent'AND Object_ID = OBJECT_ID(N'Tracing'))
+BEGIN
+	ALTER TABLE [dbo].[Tracing] ADD Consent int NULL;
+END;
+
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'ReminderDate'AND Object_ID = OBJECT_ID(N'Tracing'))
+BEGIN
+	ALTER TABLE [dbo].[Tracing] ADD ReminderDate datetime NULL;
+END;
+
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'DateBookedTesting'AND Object_ID = OBJECT_ID(N'Tracing'))
+BEGIN
+	ALTER TABLE [dbo].[Tracing] ADD DateBookedTesting datetime NULL;
+END;
+
+
 

@@ -14,6 +14,7 @@ namespace IQCare.Common.BusinessProcess.Commands.Setup
         public string PHONE_NUMBER { get; set; }
         public int MARITAL_STATUS { get; set; }
         public string REGISTRATION_DATE { get; set; }
+        public int USER_ID { get; set; }
     }
 
     public class PATIENT_ADDRESS
@@ -44,5 +45,10 @@ namespace IQCare.Common.BusinessProcess.Commands.Setup
         public string ID { get; set; }
         public string IDENTIFIER_TYPE { get; set; }
         public string ASSIGNING_AUTHORITY { get; set; }
+    }
+
+    public class PARTNER_FAMILY_PATIENT_IDENTIFICATION : PATIENT_IDENTIFICATION
+    {
+        public int RELATIONSHIP_TYPE { get; set; }
     }
 }
