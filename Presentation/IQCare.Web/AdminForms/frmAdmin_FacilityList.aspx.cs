@@ -50,6 +50,7 @@ namespace IQCare.Web.Admin
             theCol1.ItemStyle.CssClass = "textstyle";
             theCol1.SortExpression = "CountryId";
             theCol1.ReadOnly = true;
+            theCol1.Visible = false;
 
             BoundField theCol2 = new BoundField();
             theCol2.HeaderText = ((DataSet)ViewState["FacilityDS"]).Tables[1].Rows[1][0].ToString().Trim();

@@ -228,3 +228,4 @@ wwwroot/
 *.zip
 /IQCare.Release
 /build-jn.bat
+/Presentation/IQCare.Web/Images
