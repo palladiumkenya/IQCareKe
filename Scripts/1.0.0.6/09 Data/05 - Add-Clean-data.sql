@@ -14,3 +14,5 @@ row_number() over(partition by cast(IdentifierTypeId as varchar(3))+' ' +cast(Pa
 Delete I From DupId D Inner Join PatientIdentifier I on D.Id= I.Id where D.RowIndex >1
 
 Go
+Update app_systemlabels set Label='MFL Code' Where Label='Facility Number'
+Go
