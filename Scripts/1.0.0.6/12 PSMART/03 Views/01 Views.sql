@@ -16,9 +16,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[PSmart_Immunization]'))
 DROP VIEW [dbo].[PSmart_Immunization]
 GO
-IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[PSmart_InternalPatientId]'))
-DROP VIEW [dbo].[vw_PersonGodsNumber]
-GO
+
 IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[PSmart_MotherDetails]'))
 DROP VIEW [dbo].[PSmart_MotherDetails]
 
