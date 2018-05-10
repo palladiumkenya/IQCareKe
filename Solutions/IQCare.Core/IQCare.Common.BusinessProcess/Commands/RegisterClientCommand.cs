@@ -10,12 +10,6 @@ namespace IQCare.Common.BusinessProcess.Commands
     {
         // Client
         public Client Person { get; set; }
-
-        //Contact
-        //public Contact Contact { get; set; }
-
-        ////PersonPopulation
-        //public PersonPopulation PersonPopulation { get; set; }
     }
 
     public class Client
