@@ -105,8 +105,8 @@ namespace IQCare.HTS.BusinessProcess.Services
                     Cadre = carde
                 };
 
-                await _unitOfWork.Repository<PatientLinkage>().AddAsync(patientLinkage);
-                await _unitOfWork.SaveAsync();
+                await _htsunitOfWork.Repository<PatientLinkage>().AddAsync(patientLinkage);
+                await _htsunitOfWork.SaveAsync();
 
                 return patientLinkage;
             }
@@ -136,8 +136,8 @@ namespace IQCare.HTS.BusinessProcess.Services
                     ReminderDate = reminderDate
                 };
 
-                await _unitOfWork.Repository<Tracing>().AddAsync(pnstrace);
-                await _unitOfWork.SaveAsync();
+                await _htsunitOfWork.Repository<Tracing>().AddAsync(pnstrace);
+                await _htsunitOfWork.SaveAsync();
 
                 return pnstrace;
             }
@@ -190,8 +190,8 @@ namespace IQCare.HTS.BusinessProcess.Services
                     RoundTwoTestResult = roundTwoTestResult
                 };
 
-                await _unitOfWork.Repository<HtsEncounterResult>().AddAsync(hTSEncounterResult);
-                await _unitOfWork.SaveAsync();
+                await _htsunitOfWork.Repository<HtsEncounterResult>().AddAsync(hTSEncounterResult);
+                await _htsunitOfWork.SaveAsync();
 
                 return hTSEncounterResult;
             }

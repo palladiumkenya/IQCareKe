@@ -12,7 +12,6 @@ using DataAccess.Context;
 using Entities.CCC.Appointment;
 using Entities.CCC.Tb;
 using Entities.PatientCore;
-using Interface.CCC.Encounter;
 using Entities.CCC.Lookup;
 using Entities.CCC.Assessment;
 using Entities.CCC.Interoperability;

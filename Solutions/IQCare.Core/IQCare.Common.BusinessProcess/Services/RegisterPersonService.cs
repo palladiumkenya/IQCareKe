@@ -371,8 +371,6 @@ namespace IQCare.Common.BusinessProcess.Services
 
                     trans.Commit();
 
-                    _unitOfWork.Dispose();
-
                     return patientIdentifier;
                 }
                 catch (Exception ex)

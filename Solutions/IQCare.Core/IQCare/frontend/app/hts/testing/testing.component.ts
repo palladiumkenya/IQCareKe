@@ -257,16 +257,16 @@ export class TestingComponent implements OnInit, AfterViewInit {
                         return obj.itemId == finalRes;
                     });
 
-                    const acceptListOption = this.yesNoOptions.filter(function (obj) {
+                    const acceptListOption = this.yesNoNA.filter(function (obj) {
                         return obj.itemId == acceptList;
                     });
 
-                    if (options[0]['itemName'] == 'Positive') {
+                    if (options[0] !== undefined && options[0]['itemName'] == 'Positive') {
                         this.appStateService.addAppState(AppEnum.IS_POSITIVE, JSON.parse(localStorage.getItem('personId')),
                             patientId, patientMasterVisitId, htsEncounterId).subscribe();
                     }
 
-                    if (acceptListOption[0]['itemName'] == 'Yes') {
+                    if (acceptListOption[0] !== undefined && acceptListOption[0]['itemName'] == 'Yes') {
                         this.appStateService.addAppState(AppEnum.CONSENT_PARTNER_LISTING, JSON.parse(localStorage.getItem('personId')),
                             patientId, patientMasterVisitId, htsEncounterId).subscribe();
                     }

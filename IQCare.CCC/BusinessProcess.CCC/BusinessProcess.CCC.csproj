@@ -41,10 +41,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\DataAccess.Base.dll</HintPath>
     </Reference>
-    <Reference Include="DataAccess.CCC, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\References\DataAccess.CCC.dll</HintPath>
-    </Reference>
     <Reference Include="DataAccess.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\DataAccess.Common.dll</HintPath>
@@ -171,7 +167,12 @@
     <Compile Include="visit\BPatientmasterVisit.cs" />
     <Compile Include="visit\BPatientVisit.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\DataAccess.CCC\DataAccess.CCC.csproj">
+      <Project>{8CC162FB-01FB-42AE-B63F-47E007E469E6}</Project>
+      <Name>DataAccess.CCC</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
