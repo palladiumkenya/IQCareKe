@@ -118,7 +118,7 @@
                                         <mat-form-field appNoneEvents>
                                             <mat-select placeholder="Final Result" name="finalResult" id="finalResult" formControlName="finalResult" required>
                                                 <mat-option value=""></mat-option>
-                                                <mat-option *ngFor="let option of hivResultsOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
+                                                <mat-option *ngFor="let option of hivFinalResultsOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
                                             </mat-select>
                                         </mat-form-field>
                                     </div>

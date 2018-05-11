@@ -46,6 +46,25 @@ namespace IQCare.Common.BusinessProcess.Services
             }
         }
 
+        public async Task<PersonContact> UpdatePersonContact(int personId, string physicalAddress, string mobileNumber)
+        {
+            try
+            {
+                StringBuilder sql = new StringBuilder();
+                sql.Append("exec pr_OpenDecryptedSession;");
+                sql.Append($"UPDATE PersonContact SET PhysicalAddress = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{physicalAddress}'), MobileNumber = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{mobileNumber}') WHERE PersonId = {personId};");
+                sql.Append("exec [dbo].[pr_CloseDecryptedSession];");
+
+                var personContactInsert = await _unitOfWork.Repository<PersonContact>().FromSql(sql.ToString());
+
+                return personContactInsert.FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         public async Task<PersonContact> addPersonContact(int personId, string physicalAddress, string mobileNumber, string alternativeNumber, string emailAddress, int userId)
         {
             try
@@ -85,6 +104,29 @@ namespace IQCare.Common.BusinessProcess.Services
                 await _unitOfWork.SaveAsync();
 
                 return personPriorities;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public async Task<List<PersonPopulation>> UpdatePersonPopulation(int personId, List<int> populations, int userId)
+        {
+            try
+            {
+                var personPopulations = await _unitOfWork.Repository<PersonPopulation>()
+                    .Get(x => x.PersonId == personId).ToListAsync();
+                foreach (var population in personPopulations)
+                {
+                    population.DeleteFlag = true;
+                    _unitOfWork.Repository<PersonPopulation>().Update(population);
+                }
+
+                await addPersonPopulation(personId, populations, userId);
+                await _unitOfWork.SaveAsync();
+
+                return personPopulations;
             }
             catch (Exception e)
             {
@@ -132,6 +174,26 @@ namespace IQCare.Common.BusinessProcess.Services
             }
         }
 
+        public async Task<PersonLocation> UpdatePersonLocation(int personId, string landmark)
+        {
+            try
+            {
+                var location = await _unitOfWork.Repository<PersonLocation>().Get(x => x.PersonId == personId)
+                    .FirstOrDefaultAsync();
+
+                location.LandMark = landmark;
+
+                _unitOfWork.Repository<PersonLocation>().Update(location);
+                await _unitOfWork.SaveAsync();
+
+                return location;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         public async Task<PersonLocation> addPersonLocation(int personId, int countyId, int subCountyId, int wardId, string village, string landmark, int userId)
         {
             try
@@ -157,6 +219,24 @@ namespace IQCare.Common.BusinessProcess.Services
                 await _unitOfWork.SaveAsync();
 
                 return personLocation;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public async Task<PersonMaritalStatus> UpdateMaritalStatus(int personId, int maritalStatusId)
+        {
+            try
+            {
+                var maritalStatus = await _unitOfWork.Repository<PersonMaritalStatus>().Get(x => x.PersonId == personId)
+                    .FirstOrDefaultAsync();
+
+                maritalStatus.MaritalStatusId = maritalStatusId;
+                _unitOfWork.Repository<PersonMaritalStatus>().Update(maritalStatus);
+
+                return maritalStatus;
             }
             catch (Exception e)
             {
@@ -381,6 +461,25 @@ namespace IQCare.Common.BusinessProcess.Services
             }
         }
 
+        public async Task<Patient> UpdatePatient(int patientId, DateTime dateOfBirth, string facilityId)
+        {
+            try
+            {
+                StringBuilder sql = new StringBuilder();
+                sql.Append("exec pr_OpenDecryptedSession;");
+                sql.Append($"UPDATE Patient SET DateOfBirth = '{dateOfBirth.ToString("yyyy-MM-dd")}', FacilityId = '{facilityId}' WHERE Id = {patientId};");
+                sql.Append("exec [dbo].[pr_CloseDecryptedSession];");
+
+
+                var patientUpdate = await _unitOfWork.Repository<Patient>().FromSql(sql.ToString());
+                return patientUpdate.FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         public async Task<Patient> AddPatient(int personID, DateTime dateOfBirth, int userId, string facilityId = "")
         {
             try
@@ -473,6 +572,27 @@ namespace IQCare.Common.BusinessProcess.Services
                 var person = await _unitOfWork.Repository<Person>().FromSql(sql.ToString());
 
                 return person.FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public async Task<Person> UpdatePerson(int personId, string firstName, string middleName, string lastName, int sex, DateTime dateOfBirth)
+        {
+            try
+            {
+                StringBuilder sql = new StringBuilder();
+                sql.Append("exec pr_OpenDecryptedSession;");
+                sql.Append($"UPDATE Person SET FirstName = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{firstName}'), " +
+                           $"MidName = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{middleName}'), " +
+                           $"LastName = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{lastName}'), " +
+                           $"Sex = {sex}, DateOfBirth = '{dateOfBirth.ToString("yyyy-MM-dd")}' WHERE Id = {personId}; ");
+                sql.Append("exec [dbo].[pr_CloseDecryptedSession];");
+
+                var personInsert = await _unitOfWork.Repository<Person>().FromSql(sql.ToString());
+                return personInsert.FirstOrDefault();
             }
             catch (Exception e)
             {
