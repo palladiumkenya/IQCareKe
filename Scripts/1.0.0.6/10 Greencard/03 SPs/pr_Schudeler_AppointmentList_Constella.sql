@@ -1,14 +1,14 @@
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_Scheduler_AppointmentList_Constella]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [dbo].[sp_SaveUpdatePharmacy_GreenCard]
+DROP PROCEDURE [dbo].[pr_Scheduler_AppointmentList_Constella]
 GO
-
-/****** Object:  StoredProcedure [dbo].[pr_Scheduler_AppointmentList_Constella]    Script Date: 4/25/2018 12:05:59 PM ******/
+/****** Object:  StoredProcedure [dbo].[pr_Scheduler_AppointmentList_Constella]    Script Date: 5/11/2018 11:17:22 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE procedure [dbo].[pr_Scheduler_AppointmentList_Constella]                                   
+
+Create procedure [dbo].[pr_Scheduler_AppointmentList_Constella]                                   
 (                      
                      
 	 @LocationId int,            
@@ -29,10 +29,21 @@ Begin
 --Set @SymKey = 'Open symmetric key Key_CTC decryption by password=' + N'''ttwbvXWpqb5WOLfLrBgisw==''' + ''
 --Exec (@SymKey)
 
+declare @greenCardServiceAreaId int, @name varchar(100), @isCCc bit;
+set @isCCc =0
 
+select @isCCc = count(*)  From LookupItem where id=@ModuleId and name= 'MoH 257 GREENCARD';
 
 Select	@FromDate = case when @FromDate Is not Null Then dateadd(Second, 0, dateadd(Day, datediff(Day, 0, @FromDate), 0)) Else Null End,
 		@ToDate = case when @ToDate Is not Null Then dateadd(Second, -1, dateadd(Day, datediff(Day, 0, @ToDate) + 1, 0)) Else Null End;
+
+if(@ModuleId Is Not Null) BEgin
+
+Select @ModuleId = case when ModuleName In ('CCC Patient Card MoH 257','Green Card') Then 203 Else @ModuleId End ,
+		@isCCc = case when ModuleName In ('CCC Patient Card MoH 257','Green Card') Then 1 Else @isCCc End
+From mst_module where moduleid=@moduleid
+
+End
 
 Select	PA.Ptn_Pk PatientId,
 		AppointmentId,
@@ -65,15 +76,11 @@ Select	PA.Ptn_Pk PatientId,
 		PA.ModuleId ServiceAreaId,
  ServiceArea =
 		(
-		CASE (Select
+		CASE (Select top 1
 				ModuleName
 			From mst_module M
-			Where M.ModuleId = 203) WHEN 'CCC Patient Card MoH 257' THEN 'CCC Green Card MoH 257'
-			ELSE (Select
-				ModuleName
-			From mst_module M
-			Where M.ModuleId = 203)
-			END
+			Where M.ModuleId = PA.ModuleId) WHEN 'CCC Patient Card MoH 257' THEN 'CCC' When 'GreenCard' Then 'CCC'
+			ELSE (Select top 1 isnull(DisplayName,ModuleName)			From mst_module M	Where M.ModuleId = PA.ModuleId)			END
 		),
 		isnull(PA.UpdateDate, PA.CreateDate) StatusDate,
 		UC.CreatedById,
@@ -134,6 +141,11 @@ And (Case
 	Else 0
 End = 1)
 
+And (Case
+	When @ModuleId Is Null Or PA.ModuleId = @ModuleId Then 1
+	Else 0
+End = 1)
+
 union 
 
 
@@ -162,13 +174,13 @@ Select
  ,'' [Provider]
   ,'' AppNote
    ,203  ServiceAreaId
- ,ServiceArea =
-		(
-			Select
-				ModuleName
-			From mst_module M
-			Where M.ModuleId = 203
-		)
+ ,ServiceArea ='CCC'
+		--(
+		--	Select
+		--		ModuleName
+		--	From mst_module M
+		--	Where M.ModuleId = 203
+		--)
 		-- ,PA.CreatedBy
  	--	,PA. PurposeId
 		--AR.Name Purpose,
@@ -192,9 +204,26 @@ From PatientAppointment PA
 --Inner Join LookupItem L On L.Id = PA.StatusId
 INNER JOIN Patient Pt ON pt.Id=PA.PatientId
 INNER JOIN Person ps ON ps.Id=Pt.PersonId
+inner join (select itemid,ItemName, ID MstId, Name mstname from LookupItemView LV inner join mst_Decode d on d.Name=lv.ItemName where MasterName = 'Appointmentstatus') APPStatus
+on APPStatus.ItemId=pa.StatusId
 WHERE 
 	PA.DeleteFlag=0
-
+	And
+	Case
+		When @FromDate Is Not Null And @ToDate Is Not Null And AppointmentDate Between @FromDate And @ToDate Then 1
+		When @FromDate Is Null Or @ToDate Is Null Then 1
+		Else 0
+	End = 1
+	And (Case
+	When @PatientId Is Null Or Pt.ptn_pk = @PatientId Then 1
+	Else 0
+End = 1)
+And
+	Case
+		When @AppStatus Is Null Or @AppStatus = AppStatus.MstId Then 1
+		Else 0
+	End = 1
+And(@isccc=1 or @moduleid Is null)
 Order By AppDate Desc
 --Close Symmetric Key Key_CTC
 
