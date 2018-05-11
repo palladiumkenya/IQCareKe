@@ -172,7 +172,7 @@ export class EncounterComponent implements OnInit {
                     this.testedAs = options[i].value;
                 } else if (options[i].key == 'Strategy') {
                     this.strategyOptions = options[i].value;
-                } else if (options[i].key == 'TBStatus') {
+                } else if (options[i].key == 'TbScreening') {
                     this.tbStatus = options[i].value;
                 }
             }
