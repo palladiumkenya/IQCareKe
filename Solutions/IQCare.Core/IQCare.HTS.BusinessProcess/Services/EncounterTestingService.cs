@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IQCare.Common.BusinessProcess.Commands.Encounter;
 using IQCare.Common.BusinessProcess.Commands.Setup;
 using IQCare.Common.Core.Models;
 using IQCare.Common.Infrastructure;
@@ -18,6 +19,72 @@ namespace IQCare.HTS.BusinessProcess.Services
         {
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
             _htsunitOfWork = htsUnitOfWork ?? throw new ArgumentNullException(nameof(htsUnitOfWork));
+        }
+
+        public async Task<List<HtsScreening>> AddPartnerScreening(int personId, int patientId, int patientMasterVisitId, string occupation, DateTime screeningDate, DateTime bookingDate, List<Screening> partnerScreenings, int userId)
+        {
+            try
+            {
+                HtsScreeningOptions htsScreeningOptions = new HtsScreeningOptions()
+                {
+                    PersonId = personId,
+                    Occupation = occupation,
+                    ScreeningDate = screeningDate,
+                    BookingDate = bookingDate
+                };
+
+                await _unitOfWork.Repository<HtsScreeningOptions>().AddAsync(htsScreeningOptions);
+                await _unitOfWork.SaveAsync();
+
+                List<PatientScreening> screenings = new List<PatientScreening>();
+                foreach (var t in partnerScreenings)
+                {
+                    if (t.ScreeningValueId != 0)
+                    {
+                        screenings.Add(new PatientScreening
+                        {
+                            PatientId = patientId,
+                            PatientMasterVisitId = patientMasterVisitId,
+                            ScreeningTypeId = t.ScreeningTypeId,
+                            ScreeningDone = true,
+                            ScreeningDate = screeningDate,
+                            ScreeningCategoryId = t.ScreeningCategoryId,
+                            ScreeningValueId = t.ScreeningValueId,
+                            Comment = null,
+                            Active = true,
+                            DeleteFlag = false,
+                            CreatedBy = userId,
+                            CreateDate = DateTime.Now,
+                            VisitDate = screeningDate
+                        });
+                    }
+                }
+
+                await _unitOfWork.Repository<PatientScreening>().AddRangeAsync(screenings);
+                await _unitOfWork.SaveAsync();
+
+                List<HtsScreening> htsScreenings = new List<HtsScreening>();
+                foreach (var screening in screenings)
+                {
+                    HtsScreening htsScreening = new HtsScreening()
+                    {
+                        PersonId = personId,
+                        PatientScreeningId = screening.Id,
+                        HtsScreeningOptionsId = htsScreeningOptions.Id
+                    };
+
+                    htsScreenings.Add(htsScreening);
+                }
+
+                await _unitOfWork.Repository<HtsScreening>().AddRangeAsync(htsScreenings);
+                await _unitOfWork.SaveAsync();
+
+                return htsScreenings;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
         public async Task<PatientLinkage> addLinkage(int personId, DateTime dateEnrolled, string cccNumber, string facility, int userId, string healthWorker, string carde)
@@ -38,8 +105,8 @@ namespace IQCare.HTS.BusinessProcess.Services
                     Cadre = carde
                 };
 
-                await _unitOfWork.Repository<PatientLinkage>().AddAsync(patientLinkage);
-                await _unitOfWork.SaveAsync();
+                await _htsunitOfWork.Repository<PatientLinkage>().AddAsync(patientLinkage);
+                await _htsunitOfWork.SaveAsync();
 
                 return patientLinkage;
             }
@@ -49,7 +116,7 @@ namespace IQCare.HTS.BusinessProcess.Services
             }
         }
 
-        public async Task<Tracing> addTracing(int personId, int tracingType, DateTime tracingDate, int mode, int outcome, int userId, string remarks)
+        public async Task<Tracing> addTracing(int personId, int tracingType, DateTime tracingDate, int mode, int outcome, int userId, string remarks, int? consent, DateTime? dateBookedTesting, DateTime? reminderDate)
         {
             try
             {
@@ -63,11 +130,14 @@ namespace IQCare.HTS.BusinessProcess.Services
                     Remarks = remarks,
                     DeleteFlag = false,
                     CreatedBy = userId,
-                    CreateDate = DateTime.Now
+                    CreateDate = DateTime.Now,
+                    Consent = consent,
+                    DateBookedTesting = dateBookedTesting,
+                    ReminderDate = reminderDate
                 };
 
-                await _unitOfWork.Repository<Tracing>().AddAsync(pnstrace);
-                await _unitOfWork.SaveAsync();
+                await _htsunitOfWork.Repository<Tracing>().AddAsync(pnstrace);
+                await _htsunitOfWork.SaveAsync();
 
                 return pnstrace;
             }
@@ -120,8 +190,8 @@ namespace IQCare.HTS.BusinessProcess.Services
                     RoundTwoTestResult = roundTwoTestResult
                 };
 
-                await _unitOfWork.Repository<HtsEncounterResult>().AddAsync(hTSEncounterResult);
-                await _unitOfWork.SaveAsync();
+                await _htsunitOfWork.Repository<HtsEncounterResult>().AddAsync(hTSEncounterResult);
+                await _htsunitOfWork.SaveAsync();
 
                 return hTSEncounterResult;
             }

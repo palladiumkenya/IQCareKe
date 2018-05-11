@@ -14,6 +14,7 @@ namespace IQCare.Common.BusinessProcess.Commands.Setup
         public string PHONE_NUMBER { get; set; }
         public int MARITAL_STATUS { get; set; }
         public string REGISTRATION_DATE { get; set; }
+        public int USER_ID { get; set; }
     }
 
     public class PATIENT_ADDRESS

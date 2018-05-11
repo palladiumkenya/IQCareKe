@@ -7,18 +7,25 @@ GO
 IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[PSmart_ClientEligibleList]'))
 DROP VIEW [dbo].[PSmart_ClientEligibleList]
 GO
+IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[PsmartEligibleList]'))
+DROP VIEW [dbo].[PsmartEligibleList]
+GO
+
 IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[PSMart_ExternalPatientId]'))
 DROP VIEW [dbo].[PSMart_ExternalPatientId]
 GO
+
+IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[PSmart_InternalPatientId]'))
+DROP VIEW [dbo].[PSmart_InternalPatientId]
+GO
+
 IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[Psmart_HTSList]'))
 DROP VIEW [dbo].[Psmart_HTSList]
 GO
 IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[PSmart_Immunization]'))
 DROP VIEW [dbo].[PSmart_Immunization]
 GO
-IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[PSmart_InternalPatientId]'))
-DROP VIEW [dbo].[vw_PersonGodsNumber]
-GO
+
 IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[PSmart_MotherDetails]'))
 DROP VIEW [dbo].[PSmart_MotherDetails]
 
@@ -78,9 +85,9 @@ SELECT
 	  h.PersonId,
 	  P.Id PatientId,
 	  PatientEncounterID,
-	 CASE WHEN  (SELECT i.IdentifierValue from PersonIdentifier i WHERE i.PersonId=P.PersonId AND i.IdentifierId IN(SELECT top 1 Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER'))  IS NULL THEN ''
+	 CASE WHEN  (SELECT top 1 i.IdentifierValue from PersonIdentifier i WHERE i.PersonId=P.PersonId AND i.IdentifierId IN(SELECT top 1 Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER'))  IS NULL THEN ''
 	 ELSE 
-		(SELECT i.IdentifierValue from PersonIdentifier i WHERE i.PersonId=P.PersonId AND i.IdentifierId IN(SELECT top 1 Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER'))  
+		(SELECT top 1 i.IdentifierValue from PersonIdentifier i WHERE i.PersonId=P.PersonId AND i.IdentifierId IN(SELECT top 1 Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER'))  
 	 END [CardSerialNumber],
 	  CAST(DECRYPTBYKEY(ps.FirstName) AS VARCHAR(50)) FirstName,
 	  CAST(DECRYPTBYKEY(ps.LastName) AS VARCHAR(50)) LastName,
@@ -156,7 +163,7 @@ SELECT
 	'ACTIVE' [STATUS],
 	'' [REASON],
 	'' [LAST_UPDATED],
-	(SELECT top 1 NationalId FROM mst_Facility WHERE DeleteFlag=0) [LAST_UPDATED_FACILITY]
+	(SELECT top 1 PosID FROM mst_Facility WHERE DeleteFlag=0) [LAST_UPDATED_FACILITY]
 
 FROM psmart_HTSList L
 GO
@@ -217,7 +224,7 @@ SELECT
 	  END
 	   [ID],
 	  'GODS_NUMBER' [IDENTIFIER_TYPE],
-	  (SELECT Top 1 NationalId FROM mst_Facility WHERE DeleteFlag=0) [ASSIGNING_FACILITY] ,
+	  (SELECT Top 1 PosID FROM mst_Facility WHERE DeleteFlag=0) [ASSIGNING_FACILITY] ,
 	  'MPI' [ASSIGNING_AUTHORITY]
 FROM    
       dbo.psmart_HTSList H
@@ -274,7 +281,7 @@ AS
 		END [CardSerialNumber],
 		'HTS_NUMBER' [IDENTIFIER_TYPE],
 	    'HTS' [ASSIGNING_AUTHORITY],
-	    (SELECT Top 1 NationalId FROM mst_Facility WHERE DeleteFlag=0) [ASSIGNING_FACILITY],
+	    (SELECT Top 1 PosID FROM mst_Facility WHERE DeleteFlag=0) [ASSIGNING_FACILITY],
 			CASE WHEN (SELECT top 1 i.IdentifierValue FROM patientIdentifier i WHERE i.PatientId=L.PatientId AND i.IdentifierTypeId IN(SELECT top 1 Id FROM Identifiers WHERE Code='HTSNumber')) IS NULL THEN ''
 		ELSE
 			(SELECT top 1 i.IdentifierValue FROM patientIdentifier i WHERE i.PatientId=L.PatientId AND i.IdentifierTypeId IN(SELECT top 1 Id FROM Identifiers WHERE Code='HTSNumber'))
@@ -293,7 +300,7 @@ AS
 		END [CardSerialNumber],
 		'CARD_SERIAL_NUMBER' [IDENTIFIER_TYPE],
 	    'CARD_REGISTRY' [ASSIGNING_AUTHORITY],
-	    (SELECT Top 1 NationalId FROM mst_Facility WHERE DeleteFlag=0) [ASSIGNING_FACILITY],
+	    (SELECT Top 1 PosID FROM mst_Facility WHERE DeleteFlag=0) [ASSIGNING_FACILITY],
 				CASE WHEN L.CardSerialNumber IS NULL THEN '' --(SELECT i.IdentifierValue FROM patientIdentifier i WHERE i.PatientId=L.PatientId AND i.IdentifierTypeId IN(SELECT top 1 Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER')) IS NULL THEN ''
 		ELSE
 			L.CardSerialNumber-- (SELECT i.IdentifierValue FROM patientIdentifier i WHERE i.PatientId=L.PatientId AND i.IdentifierTypeId IN(SELECT top 1 Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER'))
@@ -347,7 +354,7 @@ SELECT
 		END [CardSerialNumber],
 		'CCC_NUMBER' [IDENTIFIER_TYPE],
 	    'CCC' [ASSIGNING_AUTHORITY],
-	    (SELECT Top 1 NationalId FROM mst_Facility WHERE DeleteFlag=0) [ASSIGNING_FACILITY],
+	    (SELECT Top 1 PosID FROM mst_Facility WHERE DeleteFlag=0) [ASSIGNING_FACILITY],
 		CASE WHEN L.CardSerialNumber IS NULL THEN '' -- (SELECT i.IdentifierValue FROM patientIdentifier i WHERE i.PatientId=L.PatientId AND i.IdentifierTypeId IN(SELECT top 1 Id FROM Identifiers WHERE Code='CCCNumber')) IS NULL THEN ''
 		ELSE
 			L.CardSerialNumber ---	(SELECT i.IdentifierValue FROM patientIdentifier i WHERE i.PatientId=L.PatientId AND i.IdentifierTypeId IN(SELECT top 1 Id FROM Identifiers WHERE Code='CCCNumber'))
@@ -766,7 +773,7 @@ SELECT
 	UserName,
 	UserFirstName +' '+ UserLastName [DisplayName],
 	[Password],
-	(SELECT top 1 NationalId FROM mst_Facility WHERE DeleteFlag=0) FACILITY
+	(SELECT top 1 PosID FROM mst_Facility WHERE DeleteFlag=0) FACILITY
 FROM 
 	dbo.mst_User where DeleteFlag = 0
 
@@ -835,7 +842,7 @@ SELECT
 			ELSE ''
 	   END [TYPE],
       (SELECT top 1 PosID FROM mst_Facility WHERE DeleteFlag=0) FACILITY,
-	  (SELECT Name FROM FacilityList WHERE MFLCode=(SELECT top 1 NationalId FROM mst_Facility WHERE DeleteFlag=0)) [FACILITYNAME],
+	  (SELECT Name FROM FacilityList WHERE MFLCode=(SELECT top 1 PosID FROM mst_Facility WHERE DeleteFlag=0)) [FACILITYNAME],
 
  --    case  (select top 1 Name from mst_ModDeCode where CodeID=396 AND ID= h.strategyHTS)
 	    

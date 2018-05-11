@@ -17,5 +17,9 @@ namespace IQCare.HTS.Core.Model
         public bool DeleteFlag { get; set; }
         [XmlIgnore]
         public string AuditData { get; set; }
+
+        public int? Consent { get; set; }
+        public DateTime? ReminderDate { get; set; }
+        public DateTime? DateBookedTesting { get; set; }
     }
 }

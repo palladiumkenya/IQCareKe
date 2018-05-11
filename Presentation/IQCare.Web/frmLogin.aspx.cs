@@ -78,7 +78,7 @@ namespace IQCare.Web
             chkPref.Checked = true;
             GetApplicationParameters();
             //lblLocation.Text = Session["AppLocation"].ToString();
-            BindCombo();
+          
             txtuname.Focus();
 
 
@@ -138,15 +138,13 @@ namespace IQCare.Web
             //IUser ApplicationManager;
             //  ApplicationManager = (IUser)ObjectFactory.CreateInstance("BusinessProcess.Security.BUser, BusinessProcess.Security");
             SystemSettingResponseCode response = SystemSetting.GetFacilitySettings();
+            DateTime theDTime = SystemSetting.SystemDate;
 
+            ViewState["theCurrentDate"] = theDTime;
+            lblDate.Text = theDTime.ToString("dd-MMM-yyyy");
+            Application["AppCurrentDate"] = theDTime.ToString("dd-MMM-yyyy");
+            Session["AppCurrentDateClass"] = theDTime.ToString("dd-MMM-yyyy");
 
-            if (response == SystemSettingResponseCode.NoFacilityDefined)
-            {
-                string theUrl = string.Format("{0}", "./AdminForms/frmAdmin_FacilityList.aspx");
-                //Response.Redirect(theUrl);
-                HttpContext.Current.ApplicationInstance.CompleteRequest();
-                Response.Redirect(theUrl, true);
-            }
 
             #region "Version Control"
 
@@ -163,11 +161,34 @@ namespace IQCare.Web
                 script += "</script>\n";
                 ClientScript.RegisterStartupScript(this.GetType(), "confirm", script);
                 btnLogin.Enabled = false;
+                return;
+            }
+
+            if (response == SystemSettingResponseCode.NoFacilityDefined)
+            {
+                btnLogin.Text = "Go to Setup";
+                txtuname.Text = "Admin";
+                txtpassword.Text = "SetupPassword";
+                txtpassword.ReadOnly = txtuname.ReadOnly = true;
+                ddLocation.Items.Insert(0, new ListItem("Select", "0"));
+                ddLocation.SelectedIndex = 0;
+                Session["AppUserId"] = "";
+                Session["AppUserName"] = "";
+                btnLogin.CommandName = "Setup";
+                Session["AppLocationId"] = "";
+                Session["AppLocation"] = "";
+                btnLogin.UseSubmitBehavior = true;
+                btnLogin.OnClientClick = string.Format("javascript:window.location='{0}'; return false;", "../AdminForms/frmAdmin_FacilityList.aspx");
+                //  string theUrl = string.Format("{0}", "./AdminForms/frmAdmin_FacilityList.aspx");
+
+                //HttpContext.Current.ApplicationInstance.CompleteRequest();
+                // Response.Redirect(theUrl,false);
+                return;
             }
             if (response == SystemSettingResponseCode.Success)
             {
                 SystemSetting setting = SystemSetting.CurrentSystem;
-
+                btnLogin.CommandName = "Login";
                 if (!string.IsNullOrEmpty(setting.DefaultFacility.LoginImage))
                 {
                     imgLogin.ImageUrl = string.Format("images/{0}", setting.DefaultFacility.LoginImage);
@@ -177,16 +198,12 @@ namespace IQCare.Web
                     imgLogin.ImageUrl = "~/Images/Login.jpg";
                 }
                 Session["SystemId"] = Convert.ToInt32(setting.DefaultFacility.SystemId);
+                BindCombo();
             }
             #endregion
 
 
-            DateTime theDTime = SystemSetting.SystemDate;
-
-            ViewState["theCurrentDate"] = theDTime;
-            lblDate.Text = theDTime.ToString("dd-MMM-yyyy");
-            Application["AppCurrentDate"] = theDTime.ToString("dd-MMM-yyyy");
-            Session["AppCurrentDateClass"] = theDTime.ToString("dd-MMM-yyyy");
+           
 
         }
         //[Ajax.AjaxMethod(Ajax.HttpSessionStateRequirement.ReadWrite)]
@@ -287,6 +304,15 @@ namespace IQCare.Web
         /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         protected void btnLogin_Click(object sender, EventArgs e)
         {
+            if (btnLogin.CommandName == "Setup")
+            {
+                 string theUrl = string.Format("{0}", "./AdminForms/frmAdmin_FacilityList.aspx");
+
+                HttpContext.Current.ApplicationInstance.CompleteRequest();
+                Response.Redirect(theUrl,false);
+                return;
+            }
+            
             if (ValidateLogin() == false)
             {
                 Init_Form();

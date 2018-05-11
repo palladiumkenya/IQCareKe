@@ -17,6 +17,10 @@ const routes: Routes = [
         loadChildren: '../registration/registration.module#RegistrationModule'
     },
     {
+        path: 'vvv',
+        loadChildren: '../vvvv/vvvv.module#vvvv'
+    },
+    {
         path: '**',
         component: NotFoundComponent
     }

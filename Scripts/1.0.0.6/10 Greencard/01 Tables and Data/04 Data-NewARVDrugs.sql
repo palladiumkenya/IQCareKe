@@ -3,8 +3,8 @@
 CREATE TABLE NewDrugList (
 	Id INT IDENTITY(1,1) PRIMARY KEY,
 	DrugName varchar(100),
-	Abbreviation varchar(10),
-	Strength varchar(10)
+	Abbreviation varchar(20),
+	Strength varchar(20)
 );
 
 INSERT INTO NewDrugList(DrugName,Abbreviation,strength) VALUES('Dolutegravir-50mg','DTG','50mg');
@@ -28,7 +28,7 @@ BEGIN
 	SET @abbreviation=(SELECT Abbreviation FROM NewDrugList WHERE Id=@minId);
 	SET @strength=(SELECT Strength FROM NewDrugList WHERE Id=@minId);
 
-	IF EXISTS(SELECT * FROM Mst_ItemMaster m WHERE m.ItemName=''+@drugName+'')
+	IF NOT EXISTS(SELECT * FROM Mst_ItemMaster m WHERE m.ItemName=''+@drugName+'')
 		BEGIN
 			INSERT INTO [dbo].[Mst_ItemMaster]([ItemCode],[ItemName],[ItemTypeID],[DeleteFlag],[CreatedBy],[CreateDate],[abbreviation])
 			VALUES (0,''+@drugName+'',378,0,1,GETDATE(),''+@abbreviation+'');

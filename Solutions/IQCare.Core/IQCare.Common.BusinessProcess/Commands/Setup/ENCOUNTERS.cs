@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace IQCare.Common.BusinessProcess.Commands.Setup
 {
@@ -8,7 +10,7 @@ namespace IQCare.Common.BusinessProcess.Commands.Setup
         public PRE_TEST PRE_TEST { get; set; }
         public HIV_TESTS HIV_TESTS { get; set; }
         public NewReferral REFERRAL { get; set; }
-        public NewTracing TRACING { get; set; }
+        public List<NewTracing> TRACING { get; set; }
         public NewLinkage LINKAGE { get; set; }
     }
 
@@ -84,6 +86,83 @@ namespace IQCare.Common.BusinessProcess.Commands.Setup
         public int TESTED_AS { get; set; }
         public int STRATEGY { get; set; }
         public int TB_SCREENING { get; set; }
+        public string REMARKS { get; set; }
+    }
+
+    public class PARTNER_ENCOUNTER
+    {
+        public PLACER_DETAIL PLACER_DETAIL { get; set; }
+        public PARTNER_SCREENING PARTNER_SCREENING { get; set; }
+        public List<PARTNER_TRACING> TRACING { get; set; }
+    }
+
+    public class PARTNER_TRACING
+    {
+        public string TRACING_DATE { get; set; }
+
+        public int TRACING_MODE { get; set; }
+
+        public int TRACING_OUTCOME { get; set; }
+
+        public int CONSENT { get; set; }
+
+        public string BOOKING_DATE { get; set; }
+    }
+
+    public class PARTNER_SCREENING
+    {
+        public int PNS_ACCEPTED { get; set; }
+
+        public string SCREENING_DATE { get; set; }
+
+        public int IPV_SCREENING_DONE { get; set; }
+
+        public int HURT_BY_PARTNER { get; set; }
+
+        public int THREAT_BY_PARTNER { get; set; }
+
+        public int SEXUAL_ABUSE_BY_PARTNER { get; set; }
+
+        public int IPV_OUTCOME { get; set; }
+
+        public string PARTNER_OCCUPATION { get; set; }
+
+        public int PARTNER_RELATIONSHIP { get; set; }
+
+        public int LIVING_WITH_CLIENT { get; set; }
+
+        public int HIV_STATUS { get; set; }
+
+        public int PNS_APPROACH { get; set; }
+
+        public int ELIGIBLE_FOR_HTS { get; set; }
+
+        public string BOOKING_DATE { get; set; }
+    }
+
+    public class FAMILY_ENCOUNTER
+    {
+        public PLACER_DETAIL PLACER_DETAIL { get; set; }
+        public FAMILY_SCREENING FAMILY_SCREENING { get; set; }
+        public List<FAMILY_TRACING> TRACING { get; set; }
+    }
+
+    public class FAMILY_TRACING
+    {
+        public string TRACING_DATE { get; set; }
+        public string REMINDER_DATE { get; set; }
+        public int TRACING_MODE { get; set; }
+        public int TRACING_OUTCOME { get; set; }
+        public int CONSENT { get; set; }
+        public string BOOKING_DATE { get; set; }
+    }
+
+    public class FAMILY_SCREENING
+    {
+        public string SCREENING_DATE { get; set; }
+        public int HIV_STATUS { get; set; }
+        public int ELIGIBLE_FOR_HTS { get; set; }
+        public string BOOKING_DATE { get; set; }
         public string REMARKS { get; set; }
     }
 }
