@@ -656,6 +656,22 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
+        public ArrayList DifferentiatedCareParameters()
+        {
+            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+            PatientEncounter.PatientCategorizationParameters categorizationParameters = new PatientEncounter.PatientCategorizationParameters();
+            categorizationParameters = patientEncounter.getPatientDSDParameters(Session["PatientPK"].ToString());
+
+            ArrayList rows = new ArrayList();
+
+            double[] i = new double[6] { categorizationParameters.SameRegimen12Months, categorizationParameters.ActiveOIs, categorizationParameters.VL, categorizationParameters.Completed6MonthsIPT, categorizationParameters.BMI, categorizationParameters.age };
+            rows.Add(i);
+
+            
+            return rows;
+        }
+
+        [WebMethod(EnableSession = true)]
         public ArrayList getZScoreValues(string height, string weight)
         {
             ArrayList result = new ArrayList();

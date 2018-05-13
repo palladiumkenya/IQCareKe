@@ -220,5 +220,18 @@ namespace Entities.CCC.Encounter
             public string presentingComplaint { get; set; }
             public string onsetDate { get; set; }
         }
+
+        public class PatientCategorizationParameters
+        {
+            public double age { get; set; }
+            public double BMI { get; set; }
+            public double VL { get; set; }
+            public int SameRegimen12Months { get; set; }
+            public double Completed6MonthsIPT { get; set; }
+            public int ActiveOIs { get; set; }
+            public string pregnant { get; set; }
+
+
+        }
     }
 }
