@@ -48,7 +48,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
 
                     //Get Client Screening for TB
                     var tbScreeningLookup = await _unitOfWork.Repository<LookupItemView>()
-                        .Get(x => x.MasterName == "TBStatus").FirstOrDefaultAsync();
+                        .Get(x => x.MasterName == "TbScreening").FirstOrDefaultAsync();
                     int tbScreeningId = tbScreeningLookup != null ? tbScreeningLookup.MasterId : 0;
                     var tbStatus = await _unitOfWork.Repository<PatientScreening>().Get(x =>
                         x.ScreeningTypeId == tbScreeningId && x.PatientId == patientEncounter[0].PatientId &&

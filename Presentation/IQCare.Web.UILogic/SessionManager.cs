@@ -74,8 +74,18 @@ namespace IQCare.Web.UILogic
         /// The location identifier.
         /// </value>
         public static int FacilityId { get { return Instance._facilityId; } set { Instance._facilityId = value; } }
-        public static string TechnicalAreaName { get => Instance._technicalAreaName; set => Instance._technicalAreaName = value; }
-        public static string TechnicalAreaId { get => Instance._technicalAreaId; set => Instance._technicalAreaId = value; }
+        public static string TechnicalAreaName
+        {
+            get { return Instance._technicalAreaName; }
+            set { Instance._technicalAreaName = value; }
+        }
+
+        public static string TechnicalAreaId
+        {
+            get { return Instance._technicalAreaId; }
+            set { Instance._technicalAreaId = value; }
+        }
+
         //Session["TechnicalAreaName"] = Request.QueryString["srvNm"];
         //Session["TechnicalAreaId"] = Request.QueryString["mod"]
         /// <summary>

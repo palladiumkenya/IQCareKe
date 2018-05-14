@@ -217,9 +217,8 @@ export class TestingComponent implements OnInit, AfterViewInit {
 
                     /* Logic for testing */
                     if (firstTest['hivResult']['itemName'] === 'Positive' && this.testing['hivResult']['itemName'] === 'Negative') {
-                        // this.finalTestingResults.finalResultHiv2 = this.testing['hivResult']['itemId'];
+                        console.log(inconculusive, 'inconculusive');
                         this.formTesting.controls.finalResultHiv2.setValue(this.testing['hivResult']['itemId']);
-                        // this.finalTestingResults.finalResult = inconculusive[0].itemId;
                         this.formTesting.controls.finalResult.setValue(inconculusive[0].itemId);
                         this.testButton2 = false;
                     } else if (firstTest['hivResult']['itemName'] === 'Positive' && this.testing['hivResult']['itemName'] === 'Positive') {
@@ -257,16 +256,16 @@ export class TestingComponent implements OnInit, AfterViewInit {
                         return obj.itemId == finalRes;
                     });
 
-                    const acceptListOption = this.yesNoOptions.filter(function (obj) {
+                    const acceptListOption = this.yesNoNA.filter(function (obj) {
                         return obj.itemId == acceptList;
                     });
 
-                    if (options[0]['itemName'] == 'Positive') {
+                    if (options[0] !== undefined && options[0]['itemName'] == 'Positive') {
                         this.appStateService.addAppState(AppEnum.IS_POSITIVE, JSON.parse(localStorage.getItem('personId')),
                             patientId, patientMasterVisitId, htsEncounterId).subscribe();
                     }
 
-                    if (acceptListOption[0]['itemName'] == 'Yes') {
+                    if (acceptListOption[0] !== undefined && acceptListOption[0]['itemName'] == 'Yes') {
                         this.appStateService.addAppState(AppEnum.CONSENT_PARTNER_LISTING, JSON.parse(localStorage.getItem('personId')),
                             patientId, patientMasterVisitId, htsEncounterId).subscribe();
                     }
@@ -297,8 +296,11 @@ export class TestingComponent implements OnInit, AfterViewInit {
 
         if (optionSelected[0].itemName == 'Yes') {
             this.formTesting.controls.reasonsDeclinePartnerListing.disable({onlySelf: true});
-        } else {
+        } else if (optionSelected[0].itemName == 'No') {
             this.formTesting.controls.reasonsDeclinePartnerListing.enable({onlySelf: false});
+            this.formTesting.controls.reasonsDeclinePartnerListing.setValue('');
+        } else if (optionSelected[0].itemName == 'N/A') {
+            this.formTesting.controls.reasonsDeclinePartnerListing.disable({onlySelf: true});
             this.formTesting.controls.reasonsDeclinePartnerListing.setValue('');
         }
     }

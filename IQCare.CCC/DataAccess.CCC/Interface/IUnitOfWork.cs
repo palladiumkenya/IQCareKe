@@ -10,11 +10,9 @@ using DataAccess.CCC.Interface.visit;
 using DataAccess.CCC.Interface.Triage;
 using DataAccess.CCC.Interface.Encounter;
 using DataAccess.CCC.Repository.person;
-using Interface.CCC.Lookup;
 using DataAccess.CCC.Interface.assessment;
 using DataAccess.CCC.Interface.Interoperability;
 using DataAccess.CCC.Interface.Pharmacy;
-using Interface.CCC.Interoperability;
 
 namespace DataAccess.CCC.Interface
 {
