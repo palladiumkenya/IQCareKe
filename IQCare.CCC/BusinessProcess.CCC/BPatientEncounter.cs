@@ -585,6 +585,30 @@ namespace BusinessProcess.CCC
             }
         }
 
+        public DataSet getPatientDSDParameters(string PatientID)
+        {
+            lock (this)
+            {
+                ClsObject PatientEncounter = new ClsObject();
+                ClsUtility.Init_Hashtable();
+                ClsUtility.AddParameters("@PatientID", SqlDbType.Int, PatientID);
+
+                return (DataSet)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_DifferentiatedCareParameters", ClsUtility.ObjectEnum.DataSet);
+            }
+        }
+
+        public DataTable isVisitScheduled(string PatientID)
+        {
+            lock (this)
+            {
+                ClsObject PatientEncounter = new ClsObject();
+                ClsUtility.Init_Hashtable();
+                ClsUtility.AddParameters("@PatientID", SqlDbType.Int, PatientID);
+
+                return (DataTable)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_IsVisitScheduled", ClsUtility.ObjectEnum.DataTable);
+            }
+        }
+
         public ZScoresParameters GetZScoreValues(string PatientID, string gender, string height)
         {
             lock (this)

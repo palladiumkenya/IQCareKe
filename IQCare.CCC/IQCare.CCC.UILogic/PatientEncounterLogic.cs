@@ -237,6 +237,50 @@ namespace IQCare.CCC.UILogic
             }
         }
 
+        public PatientCategorizationParameters getPatientDSDParameters(string patientId)
+        {
+            IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
+            PatientCategorizationParameters categorizationParameters = new PatientCategorizationParameters();
+            DataSet theDS = patientEncounter.getPatientDSDParameters(patientId);
+
+            if(theDS.Tables[0].Rows.Count > 0)
+                categorizationParameters.age = Convert.ToDouble(theDS.Tables[0].Rows[0][0].ToString());
+                
+
+            if (theDS.Tables[1].Rows.Count > 0)
+                categorizationParameters.BMI = Convert.ToDouble(theDS.Tables[1].Rows[0][0].ToString());
+
+            if(theDS.Tables[2].Rows.Count > 0)
+            {
+                if(theDS.Tables[2].Rows[0][2].ToString() == "" && theDS.Tables[2].Rows[0][3].ToString() == "True")
+                    categorizationParameters.VL = 50; //undetectable
+                else
+                    categorizationParameters.VL = Convert.ToDouble(theDS.Tables[2].Rows[0][2].ToString());
+            }
+            else
+            {
+                categorizationParameters.VL = 1001;
+            }
+
+
+            if (theDS.Tables[3].Rows.Count > 0)
+                categorizationParameters.SameRegimen12Months = Convert.ToInt32(theDS.Tables[3].Rows[0][0].ToString());
+
+            if (theDS.Tables[4].Rows.Count > 0 && theDS.Tables[4].Rows[0][0].ToString() != "")
+                categorizationParameters.Completed6MonthsIPT = Convert.ToDouble(theDS.Tables[4].Rows[0][0].ToString());
+
+            categorizationParameters.ActiveOIs = theDS.Tables[5].Rows.Count;
+
+            return categorizationParameters;
+        }
+
+        public int isVisitScheduled(string patientId)
+        {
+            IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
+            DataTable theDT = patientEncounter.isVisitScheduled(patientId);
+            return theDT.Rows.Count;
+        }
+
         public int saveUpdatePharmacy(string PatientMasterVisitID, string PatientId, string LocationID, string OrderedBy,
             string UserID, string DispensedBy, string RegimenLine, string ModuleID, string pmscmFlag, string prescription,
             string TreatmentProgram, string PeriodTaken, string TreatmentPlan, string TreatmentPlanReason, string Regimen,
