@@ -88,7 +88,9 @@
   <ItemGroup>
     <Compile Include="BLookupManager.cs" />
     <Compile Include="BMstPatientInsert.cs" />
+    <Compile Include="BPatientConsent.cs" />
     <Compile Include="BPatientLookupManager.cs" />
+    <Compile Include="BPersonContactLookupManager.cs" />
     <Compile Include="BPersonContactManager.cs" />
     <Compile Include="BPersonEducationManager.cs" />
     <Compile Include="BPersonEmergencyContactManager.cs" />
@@ -97,6 +99,7 @@
     <Compile Include="BPersonManager.cs" />
     <Compile Include="BPersonOccupationManager.cs" />
     <Compile Include="BPersonRelationshipManager.cs" />
+    <Compile Include="BServiceArea.cs" />
     <Compile Include="Enrollment\BIdentifier.cs" />
     <Compile Include="Enrollment\BPatientEnrollment.cs" />
     <Compile Include="Enrollment\BPatientEntryPoint.cs" />

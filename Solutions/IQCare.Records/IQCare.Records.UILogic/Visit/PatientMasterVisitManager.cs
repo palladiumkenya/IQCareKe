@@ -13,6 +13,7 @@ namespace IQCare.Records.UILogic.Visit
     {
         private readonly IPatientMasterVisitManager _patientMasterVisitManager = (IPatientMasterVisitManager)ObjectFactory.CreateInstance("BusinessProcess.Records.visit.BPatientmasterVisit, BusinessProcess.Records");
         private int _result = 0;
+        ServiceAreaManager sv = new ServiceAreaManager();
 
         public int AddPatientMasterVisit(int patientId, int userId, int visitType)
         {
@@ -21,7 +22,7 @@ namespace IQCare.Records.UILogic.Visit
                 PatientMasterVisit visit = new PatientMasterVisit
                 {
                     PatientId = patientId,
-                    ServiceId = 1,
+                    ServiceId = sv.GetServiceAreaById("Registration"),
                     Start = DateTime.Now,
                     Active = true,
                     CreateDate = DateTime.Now,
@@ -58,7 +59,7 @@ namespace IQCare.Records.UILogic.Visit
             var objPpatientMasterVisit = new PatientMasterVisit
             {
                 PatientId = patientId,
-                ServiceId = 1,
+                ServiceId = sv.GetServiceAreaById("Registration"),
                 Status = 1,
                 Start = DateTime.Now,
                 VisitDate = DateTime.Now,

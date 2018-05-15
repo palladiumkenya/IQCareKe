@@ -48,8 +48,16 @@ namespace BusinessProcess.Records
                 return mylist;
             }
         }
+        public PersonEducation GetCurrentPersonEducation(int personId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new RecordContext()))
+            {
+                PersonEducation patienteducation = unitOfWork.PersonEducationRepository.FindBy(x => x.PersonId == personId & x.DeleteFlag == false).OrderByDescending(x => x.Id).Take(1).FirstOrDefault();
+                unitOfWork.Dispose();
+                return patienteducation;
 
-
+            }
+        }
         public int UpdatePersonEducation (PersonEducation pe)
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new RecordContext()))

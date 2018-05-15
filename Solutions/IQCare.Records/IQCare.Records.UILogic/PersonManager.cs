@@ -119,7 +119,21 @@ namespace IQCare.Records.UILogic
             _mgr.UpdatePerson(person, id);
         }
 
+        public void UpdatePerson(string firstname, string middlename, string lastname, int gender, int userId, int id)
+        {
+            Person person = new Person()
+            {
+                FirstName = (_textInfo.ToTitleCase(firstname)),
+                MidName = (_textInfo.ToTitleCase(middlename)),
+                LastName = (_textInfo.ToTitleCase(lastname)),
+                Sex = gender,
+                //DateOfBirth = DateTime.Parse(dateOfBirth),
+                //NationalId = util.Encrypt(nationalId),
+                CreatedBy = userId
+            };
 
+            _mgr.UpdatePerson(person, id);
+        }
         public void DeletePerson(int id)
         {
             IPersonManager mgr = (IPersonManager)ObjectFactory.CreateInstance("BusinessProcess.Records.BPersonManager, BusinessProcess.Records");

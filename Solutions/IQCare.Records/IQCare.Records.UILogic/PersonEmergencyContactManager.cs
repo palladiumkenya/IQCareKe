@@ -61,6 +61,21 @@ namespace IQCare.Records.UILogic
             return myList;
         }
 
+        public PersonEmergencyContact GetSpecificEmergencyContact(int id, int personId)
+        {
+            PersonEmergencyContact pme;
+            try
+            {
+                pme = _mgr.GetSpecificEmergencyContact(id, personId);
+            }
+
+            catch (Exception e)
+            {
+                _msg = e.Message + ' ' + e.InnerException;
+                throw;
+            }
+            return pme;
+        }
         public List<PersonEmergencyContact> GetAllPersonEmergencyContact(int personId)
         {
             List<PersonEmergencyContact> myList;

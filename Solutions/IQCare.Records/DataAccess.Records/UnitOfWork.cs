@@ -24,13 +24,13 @@ namespace DataAccess.Records
         private IPatientRepository _patientRepository;
         private IPatientRegistrationLookupRepository _patientRegistrationLookupRepository;
         private IPatientVisitRepository _patientVisitRepository;
-        
+        private IPersonContactLookUpRepository _personContactLookUpRepository;
         private IPatientMasterVisitRepository _patientMasterVisitRepository;
         private IPatientEnrollmentRepository _patientEnrollmentRepository;
         private IPatientIdentifierRepository _patientIdentifierRepository;
         private IPatientEntryPointRepository _patientEntryPointRepository;
         private IPersonLookUpRepository _personLookUpRepository;
-
+        private ILookupFacility _lookupFacilityRepository;
 
         private IIdentifierRepository _identifierRepository;
         private IPatientReEnrollmentRepository _patientReEnrollmentRepository;
@@ -40,7 +40,8 @@ namespace DataAccess.Records
         private IPersonEmergencyContactRepository _personEmergencyContactRepository;
         private IPersonEducationRepository _personEducationRepository;
         private IPersonOccupationRepository _personOccupationRepository;
-
+        private IPatientConsentRepository _patientConsentRepository;
+        private IServiceAreaIndicatorRepository _serviceAreaIndicatorRepository;
         public DbContext Context { get { return _context; } }
         public  UnitOfWork(BaseContext context)
         {
@@ -54,7 +55,19 @@ namespace DataAccess.Records
         {
             return _context.SaveChanges();
         }
+        public ILookupFacility LookupFacilityRepository
+        {
+            get { return _lookupFacilityRepository ?? (_lookupFacilityRepository = new LookupFacilityRepository((LookupContext)_context)); }
+        }
+        public IServiceAreaIndicatorRepository ServiceAreaIndicatorRepository
+        {
+            get { return _serviceAreaIndicatorRepository ?? (_serviceAreaIndicatorRepository = new ServiceAreaIndicatorRepository((RecordContext)_context)); }
+        }
 
+        public IPatientConsentRepository PatientConsentRepository
+        {
+            get { return _patientConsentRepository ?? (_patientConsentRepository = new PatientConsentRepository((RecordContext)_context)); }
+        }
         public IPatientReEnrollmentRepository PatientReEnrollmentRepository
         {
             get { return _patientReEnrollmentRepository ?? (_patientReEnrollmentRepository = new PatientReEnrollmentRepository((RecordContext)_context)); }
@@ -112,6 +125,10 @@ namespace DataAccess.Records
             get { return _personRepository ?? (_personRepository = new PersonRepository((PersonContext)_context)); }
         }
         
+        public IPersonContactLookUpRepository PersonContactLookUpRepository
+        {
+            get { return _personContactLookUpRepository ?? (_personContactLookUpRepository = new PersonContactLookUpRepository((LookupContext)_context)); }
+        }
         public IPatientEnrollmentRepository PatientEnrollmentRepository
         {
             get { return _patientEnrollmentRepository ?? (_patientEnrollmentRepository = new PatientEnrollmentRepository((RecordContext)_context)); }

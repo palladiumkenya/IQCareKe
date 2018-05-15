@@ -6,8 +6,10 @@ namespace Interface.Records
     public interface IPersonOccupationManager
     {
         int AddPersonOccupation(PersonOccupation pated);
-        int DeletePersonPersonOccupation(int id);
+        int DeletePersonOccupation(int id);
         List<PersonOccupation> GetAllPersonOccupation(int personId);
         int UpdatePersonOccupation(PersonOccupation pe);
+
+        PersonOccupation GetCurrentOccupation(int personId);
     }
 }

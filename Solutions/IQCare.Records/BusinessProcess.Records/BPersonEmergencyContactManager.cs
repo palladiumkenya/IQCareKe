@@ -53,7 +53,16 @@ namespace BusinessProcess.Records
                 MobileContactParameter.Value = Encoding.ASCII.GetBytes(pmc.MobileContact);
                 SqlParameter userId = new SqlParameter("UserId", SqlDbType.Int);
                 userId.Value = pmc.CreatedBy;
-                _unitOfWork.PersonEmergencyContactRepository.ExecuteProcedure("exec PersonEmergencyContact_Update @personIdParameter,EmergencyContactPersonIdParameter,@MobileContactParameter,@UserId",
+                SqlParameter DeleteFlag = new SqlParameter("DeleteFlag", SqlDbType.Bit);
+                if (pmc.DeleteFlag == true)
+                {
+                    DeleteFlag.Value = 1;
+                }
+                else if(pmc.DeleteFlag==false)
+                {
+                    DeleteFlag.Value = 0;
+                }
+                _unitOfWork.PersonEmergencyContactRepository.ExecuteProcedure("exec PersonEmergencyContact_Update @personIdParameter,@EmergencyContactPersonIdParameter,@MobileContactParameter,@UserId",
                     personIdParameter, EmergencyContactPersonIdParameter, MobileContactParameter, userId);
 
                 _result = _unitOfWork.Complete();
@@ -88,7 +97,15 @@ namespace BusinessProcess.Records
                 return personEmergencyContacts;
             }
         }
-
+        public PersonEmergencyContact GetSpecificEmergencyContact(int id, int personId)
+        {
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new RecordContext()))
+            {
+                PersonEmergencyContact pme = _unitOfWork.PersonEmergencyContactRepository.FindBy(x => x.PersonId == personId & x.Id == id & x.DeleteFlag == false).OrderByDescending(x => x.Id).FirstOrDefault();
+                _unitOfWork.Dispose();
+                return pme;
+            }
+        }
         public List<PersonEmergencyContact> GetCurrentEmergencyContact(int personId)
         {
             using(UnitOfWork _unitOfWork = new UnitOfWork(new RecordContext()))

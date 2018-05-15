@@ -27,7 +27,7 @@ namespace BusinessProcess.Records
             }
         }
 
-        public int DeletePersonPersonOccupation(int id)
+        public int DeletePersonOccupation(int id)
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new RecordContext()))
             {
@@ -44,12 +44,21 @@ namespace BusinessProcess.Records
             {
                 List<PersonOccupation> mylist;
                 mylist = unitOfWork.PersonOccupationRepository.FindBy(x => x.PersonId == personId & !x.DeleteFlag).OrderBy(x => x.Id).ToList();
-
+               
                 return mylist;
             }
         }
 
-
+        public PersonOccupation GetCurrentOccupation(int personId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new RecordContext()))
+            {
+                PersonOccupation pmo;
+                pmo = unitOfWork.PersonOccupationRepository.FindBy(x => x.PersonId == personId & !x.DeleteFlag).OrderByDescending(o => o.CreateDate).FirstOrDefault();
+                unitOfWork.Dispose();
+                return pmo;
+            }
+        } 
         public int UpdatePersonOccupation(PersonOccupation pe)
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new RecordContext()))

@@ -11,5 +11,12 @@ namespace Interface.Records.Enrollment
     {
         int AddPersonIdentifier(PersonIdentifier personIdentifier);
         List<PersonIdentifier> GetPersonIdenfiers(int personId, int identifierId);
+
+        PersonIdentifier GetCurrentPersonIdentifier(int personId, int identifierId);
+       int UpdatePersondentifier(PersonIdentifier personIdentifier);
+       int  DeletePersonIdentifier(int id);
+
+
+       
     }
 }

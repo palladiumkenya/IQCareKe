@@ -64,6 +64,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuditDataUtility.cs" />
     <Compile Include="Enrollment\IdentifierManager.cs" />
     <Compile Include="Enrollment\PatientEncounterManager.cs" />
     <Compile Include="Enrollment\PatientEnrollmentManager.cs" />
@@ -74,14 +75,20 @@
     <Compile Include="Enrollment\ServiceAreaIdentifiersManager.cs" />
     <Compile Include="LookupLogic.cs" />
     <Compile Include="MstPatientLogic.cs" />
+    <Compile Include="PatientLookupManager.cs" />
+    <Compile Include="PatientManager.cs" />
+    <Compile Include="PersonContactLookupManager.cs" />
     <Compile Include="PersonContactManager.cs" />
+    <Compile Include="PersonEducationManager.cs" />
     <Compile Include="PersonEmergencyContactManager.cs" />
     <Compile Include="PersonLocationManager.cs" />
     <Compile Include="PersonLookUpManager.cs" />
     <Compile Include="PersonManager.cs" />
     <Compile Include="PersonMaritalStatusManager.cs" />
+    <Compile Include="PersonOccupationManager.cs" />
     <Compile Include="PersonRelationshipManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceAreaManager.cs" />
     <Compile Include="Visit\PatientEncounterManager.cs" />
     <Compile Include="Visit\PatientMasterVisitManager.cs" />
   </ItemGroup>

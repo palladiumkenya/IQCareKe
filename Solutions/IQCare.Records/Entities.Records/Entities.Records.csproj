@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Consent\PatientConsent.cs" />
     <Compile Include="Enrollment\Identifier.cs" />
     <Compile Include="Enrollment\PatientEntity.cs" />
     <Compile Include="Enrollment\PatientEntityEnrollment.cs" />
@@ -62,14 +63,17 @@
     <Compile Include="Enrollment\ServiceArea.cs" />
     <Compile Include="Enrollment\ServiceAreaIdentifier.cs" />
     <Compile Include="Lookup\LookupCounty.cs" />
+    <Compile Include="Lookup\LookupFacility.cs" />
     <Compile Include="Lookup\LookupItem.cs" />
     <Compile Include="Lookup\LookupItemView.cs" />
     <Compile Include="Lookup\LookupMaster.cs" />
     <Compile Include="Lookup\LookupMasterItem.cs" />
     <Compile Include="Lookup\PatientLookup.cs" />
     <Compile Include="Lookup\PatientRegistrationLookup.cs" />
+    <Compile Include="Lookup\PersonContactLookUp.cs" />
     <Compile Include="Lookup\PersonLookUp.cs" />
     <Compile Include="PersonEmergencyContact.cs" />
+    <Compile Include="Result.cs" />
     <Compile Include="Visit\PatientEncounter.cs" />
     <Compile Include="Visit\PatientMasterVisit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -14,6 +14,27 @@ namespace BusinessProcess.Records
 {
     public class BLookupManager : ProcessBase, ILookupManager
     {
+        public string GetLookupNameFromId(int id)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                var item =
+                    unitOfWork.LookupRepository.FindBy(x => x.ItemId == id).Select(x => x.ItemName).FirstOrDefault();
+                unitOfWork.Dispose();
+                return item;
+            }
+        }
+
+        public LookupFacility GetFacility()
+
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                var item = unitOfWork.LookupFacilityRepository.GetFacility();
+                unitOfWork.Dispose();
+                return item;
+            }
+        }
         public List<LookupItemView> GetGenderOptions()
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))

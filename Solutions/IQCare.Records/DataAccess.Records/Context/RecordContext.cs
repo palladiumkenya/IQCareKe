@@ -2,6 +2,7 @@
 using DataAccess.Context;
 using Entities.Common;
 using Entities.Records;
+using Entities.Records.Consent;
 using Entities.Records.Enrollment;
 using System;
 using System.Collections.Generic;
@@ -53,6 +54,11 @@ namespace DataAccess.Records.Context
         public DbSet<PersonEducation> PersonEducations { get; }
 
         public DbSet<PersonOccupation> PersonOccupations { get; }
+
+
+        public DbSet<PatientConsent> PatientConsents { get; }
+
+        
         
 
     }

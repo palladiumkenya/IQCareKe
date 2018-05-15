@@ -23,7 +23,7 @@ namespace DataAccess.Records.Context
             Database.SetInitializer<LookupContext>(null);
         }
 
-
+        public DbSet<LookupFacility> LookupFacility { get; set; }
         public DbSet<LookupCounty> LookupCounties { get; set; }
 
         public DbSet<LookupItem> LookupItems { get; set; }
@@ -40,6 +40,8 @@ namespace DataAccess.Records.Context
 
         public DbSet<PatientLookup> PatientLookups { get; set; }
         public DbSet<PersonLookUp> PersonLookUps { get; set; }
+
+        public DbSet<PersonContactLookUp> PersonContactLookups { get; set; }
 
 
         //p

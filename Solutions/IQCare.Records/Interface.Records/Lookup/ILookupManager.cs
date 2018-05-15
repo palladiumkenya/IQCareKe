@@ -9,7 +9,7 @@ namespace Interface.Records
 {
    public  interface ILookupManager
     {
-
+        LookupFacility GetFacility();
         List<LookupItemView> GetGenderOptions();
         List<LookupItemView> GetLookItemByGroup(string groupname);
         List<LookupItemView> GetLookItemByGroup(string groupname, string anotherGroupname);
@@ -22,7 +22,7 @@ namespace Interface.Records
 
         string GetLookupItemId(string lookupItemName);
         LookupCounty GetCountyDetailsByWardName(string wardName);
-
+        string GetLookupNameFromId(int id);
         List<LookupItemView> GetItemIdByGroupAndItemName(string groupName, string itemName);
 
 

@@ -56,6 +56,8 @@
     <Compile Include="Enrollment\IPatientReEnrollmentManager.cs" />
     <Compile Include="Enrollment\IPersonIdentifierManager.cs" />
     <Compile Include="Enrollment\IServiceAreaIdentifiers.cs" />
+    <Compile Include="IPatientConsent.cs" />
+    <Compile Include="IPersonContactLookUpManager.cs" />
     <Compile Include="IPersonOccupationManager.cs" />
     <Compile Include="IPersonEducationManager.cs" />
     <Compile Include="IMst_PatientInsert.cs" />
@@ -65,6 +67,7 @@
     <Compile Include="IPersonLocationManager.cs" />
     <Compile Include="IPersonManager.cs" />
     <Compile Include="IPersonRelationshipManager.cs" />
+    <Compile Include="IServiceArea.cs" />
     <Compile Include="Lookup\ILookupManager.cs" />
     <Compile Include="Lookup\IPatientLookupManager.cs" />
     <Compile Include="Lookup\IPersonLookUpManager.cs" />

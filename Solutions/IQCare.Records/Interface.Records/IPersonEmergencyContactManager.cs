@@ -11,5 +11,6 @@ namespace Interface.Records
 
         List<PersonEmergencyContact> GetCurrentEmergencyContact(int personId);
         int UpdatePersonEmergencyContact(PersonEmergencyContact pmc);
+        PersonEmergencyContact GetSpecificEmergencyContact(int id, int personId);
     }
 }

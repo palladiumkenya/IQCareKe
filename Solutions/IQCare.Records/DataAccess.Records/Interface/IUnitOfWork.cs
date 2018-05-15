@@ -13,6 +13,9 @@ namespace DataAccess.Records.Interface
         IPersonRepository PersonRepository { get; }
         IPatientMaritalStatusRepository PatientMaritalStatusRepository { get; }
 
+        IPersonContactLookUpRepository PersonContactLookUpRepository { get; }
+
+        IServiceAreaIndicatorRepository ServiceAreaIndicatorRepository { get; }
         IPersonRelationshipRepository PersonRelationshipRepository { get; }
 
         IPersonLocationRepository PersonLocationRepository { get; }
@@ -51,6 +54,8 @@ namespace DataAccess.Records.Interface
 
         IPersonOccupationRepository PersonOccupationRepository { get; }
         IPersonEducationRepository  PersonEducationRepository { get; }
+
+        IPatientConsentRepository PatientConsentRepository { get; }
 
     }
 }

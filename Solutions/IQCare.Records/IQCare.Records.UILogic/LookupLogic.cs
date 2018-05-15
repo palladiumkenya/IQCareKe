@@ -1,5 +1,6 @@
 ﻿using Application.Presentation;
 using Entities.Records;
+using Entities.Records.Lookup;
 using Interface.Records;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,22 @@ namespace IQCare.Records.UILogic
                 throw new Exception(e.Message);
             }
         }
+        public static string GetLookupNameById(int id)
+        {
+            string lookupName = null;
+            try
+            {
+                ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.Records.BLookupManager,BusinessProcess.Records");
+                lookupName = lookupManager.GetLookupNameFromId(id);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+            return lookupName;
+        }
 
         public List<LookupItemView> GetLookItemByGroup(string groupname)
         {try
@@ -38,7 +55,19 @@ namespace IQCare.Records.UILogic
                 throw new Exception(e.Message);
             }
         }
-
+        public LookupFacility GetFacility()
+        {
+            try
+            {
+                ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.Records.BLookupManager,BusinessProcess.Records");
+                return lookupManager.GetFacility();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
 
         public List<LookupItemView> GetListGenderOptions()
         {

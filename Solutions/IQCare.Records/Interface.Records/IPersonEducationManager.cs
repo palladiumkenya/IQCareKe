@@ -8,6 +8,7 @@ namespace Interface.Records
         int AddPersonEducationLevel(PersonEducation pated);
         int DeletePersonEducationLevel(int id);
         List<PersonEducation> GetAllPersonEducationLevel(int personId);
+       PersonEducation GetCurrentPersonEducation(int personId);
         int UpdatePersonEducation(PersonEducation pe);
     }
 }
