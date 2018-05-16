@@ -28,6 +28,7 @@
     "@ngrx/store": "^5.2.0",
     "classlist.js": "^1.1.20150312",
     "core-js": "^2.4.1",
+    "material-icons": "^0.2.3",
     "moment": "^2.21.0",
     "ng-snotify": "^4.2.0",
     "parsleyjs": "^2.8.1",

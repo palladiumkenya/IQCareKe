@@ -65,8 +65,8 @@
 
                             <ng-container matColumnDef="edit">
                                 <mat-header-cell *matHeaderCellDef></mat-header-cell>
-                                <mat-cell *matCellDef="let element">
-                                    <mat-icon (click)="onEdit(element)">edit</mat-icon>
+                                <mat-cell style="cursor: pointer;"  *matCellDef="let element">
+                                    <mat-icon  (click)="onEdit(element)">edit</mat-icon>
                                 </mat-cell>
                             </ng-container>
 
