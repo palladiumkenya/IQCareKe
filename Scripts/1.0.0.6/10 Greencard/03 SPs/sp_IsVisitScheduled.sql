@@ -1,3 +1,7 @@
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_IsVisitScheduled]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_IsVisitScheduled]
+GO
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -7,7 +11,7 @@ GO
 -- Create date: 11 May 2018
 -- Description:	<Description,,>
 -- =============================================
-ALTER PROCEDURE sp_IsVisitScheduled 
+CREATE PROCEDURE sp_IsVisitScheduled 
 	@PatientId int
 AS
 BEGIN
