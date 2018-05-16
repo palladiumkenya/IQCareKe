@@ -25,7 +25,7 @@
                                     </mat-form-field>
 
                                     <mat-form-field>
-                                        <mat-select placeholder="Tracing Outcome" formControlName="outcome" tabindex="4">
+                                        <mat-select placeholder="Tracing Outcome" formControlName="outcome" tabindex="4" (change)="onTracingOutcomeChange()">
                                             <mat-option></mat-option>
                                             <mat-option *ngFor="let option of tracingOutcomeOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
                                         </mat-select>

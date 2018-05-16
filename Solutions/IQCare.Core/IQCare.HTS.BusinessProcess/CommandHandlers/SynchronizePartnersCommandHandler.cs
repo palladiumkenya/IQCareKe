@@ -15,7 +15,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IQCare.HTS.BusinessProcess.CommandHandlers
 {
-    public class SynchronizePartnersCommandHandler : IRequestHandler<SynchronizePartnersCommand, Result<SynchronizePartnersResponse>>
+    public class SynchronizePartnersCommandHandler : IRequestHandler<SynchronizePartnersCommand, Result<string>>
     {
 
         private readonly ICommonUnitOfWork _unitOfWork;
@@ -26,21 +26,22 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
             _unitOfWork = commonUnitOfWork ?? throw new ArgumentNullException(nameof(commonUnitOfWork));
             _htsUnitOfWork = htsUnitOfWork ?? throw new ArgumentNullException(nameof(htsUnitOfWork));
         }
-        public async Task<Result<SynchronizePartnersResponse>> Handle(SynchronizePartnersCommand request, CancellationToken cancellationToken)
+        public async Task<Result<string>> Handle(SynchronizePartnersCommand request, CancellationToken cancellationToken)
         {
             using (_htsUnitOfWork)
             using (_unitOfWork)
             {
                 try
                 {
+                    string afyaMobileId = string.Empty;
+                    string indexClientAfyaMobileId = string.Empty;
+
                     RegisterPersonService registerPersonService = new RegisterPersonService(_unitOfWork);
                     EncounterTestingService encounterTestingService = new EncounterTestingService(_unitOfWork, _htsUnitOfWork);
 
                     var facilityId = request.MESSAGE_HEADER.SENDING_FACILITY;
                     for (int i = 0; i < request.PARTNERS.Count; i++)
                     {
-                        string afyaMobileId = string.Empty;
-                        string indexClientAfyaMobileId = string.Empty;
 
                         for (int j = 0; j < request.PARTNERS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID.Count; j++)
                         {
@@ -74,178 +75,364 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         if (indexClientIdentifiers.Count > 0)
                         {
                             //Get Index client
-                            var indexClient =
-                                await registerPersonService.GetPatientByPersonId(indexClientIdentifiers[0].PersonId);
-                            //Register Partner
-                            var person = await registerPersonService.RegisterPerson(firstName, middleName, lastName, sex, dateOfBirth, providerId);
-                            //Add afyamobile Id as an Id of the partner
-                            var personIdentifier = await registerPersonService.addPersonIdentifiers(person.Id, 10, afyaMobileId, providerId);
-                            //Add partner marital status
-                            var partnerMaritalStatus = await registerPersonService.AddMaritalStatus(person.Id, maritalStatusId, providerId);
-                            //add partner contacts
-                            var partnerContacts = await registerPersonService.addPersonContact(person.Id, null,
-                                mobileNumber, null, null, providerId);
-                            //add partner location
-                            var partnerLocation =
-                                await registerPersonService.addPersonLocation(person.Id, 0, 0, 0, null, landmark,
-                                    providerId);
-                            //Add PersonRelationship
-                            var personRelationship = await registerPersonService.addPersonRelationship(person.Id, indexClient.Id, relationshipType, providerId);
+                            var indexClient = await registerPersonService.GetPatientByPersonId(indexClientIdentifiers[0].PersonId);
 
-
-                            /***
-                             *Encounter
-                             */
-
-                            int pnsAccepted = request.PARTNERS[i].ENCOUNTER.PARTNER_SCREENING.PNS_ACCEPTED;
-                            DateTime screeningDate = DateTime.ParseExact(request.PARTNERS[i].ENCOUNTER.PARTNER_SCREENING.SCREENING_DATE, "yyyyMMdd", null);
-                            int ipvScreeningDone = request.PARTNERS[i].ENCOUNTER.PARTNER_SCREENING.IPV_SCREENING_DONE;
-                            int hurtByPartner = request.PARTNERS[i].ENCOUNTER.PARTNER_SCREENING.HURT_BY_PARTNER;
-                            int threatByPartner = request.PARTNERS[i].ENCOUNTER.PARTNER_SCREENING.THREAT_BY_PARTNER;
-                            int sexualAbuseByPartner = request.PARTNERS[i].ENCOUNTER.PARTNER_SCREENING.SEXUAL_ABUSE_BY_PARTNER;
-                            int ipvOutcome = request.PARTNERS[i].ENCOUNTER.PARTNER_SCREENING.IPV_OUTCOME;
-                            string partnerOccupation = request.PARTNERS[i].ENCOUNTER.PARTNER_SCREENING.PARTNER_OCCUPATION;
-                            int partnerRelationship = request.PARTNERS[i].ENCOUNTER.PARTNER_SCREENING.PARTNER_RELATIONSHIP;
-                            int livingWithClient = request.PARTNERS[i].ENCOUNTER.PARTNER_SCREENING.LIVING_WITH_CLIENT;
-                            int hivStatus = request.PARTNERS[i].ENCOUNTER.PARTNER_SCREENING.HIV_STATUS;
-                            int pnsApproach = request.PARTNERS[i].ENCOUNTER.PARTNER_SCREENING.PNS_APPROACH;
-                            int eligibleForHts = request.PARTNERS[i].ENCOUNTER.PARTNER_SCREENING.ELIGIBLE_FOR_HTS;
-                            DateTime bookingDate = DateTime.ParseExact(request.PARTNERS[i].ENCOUNTER.PARTNER_SCREENING.BOOKING_DATE, "yyyyMMdd", null);
-
-                            var pnsScreeningOptions = await _unitOfWork.Repository<LookupItemView>()
-                                .Get(x => x.MasterName == "PnsScreening").ToListAsync();
-
-                            List<Screening> newScreenings = new List<Screening>();
-                            for (int j = 0; j < pnsScreeningOptions.Count; j++)
+                            var partnetPersonIdentifiers = await registerPersonService.getPersonIdentifiers(afyaMobileId, 10);
+                            if (partnetPersonIdentifiers.Count > 0)
                             {
-                                if (pnsScreeningOptions[j].ItemName == "EligibleTesting")
+                                await registerPersonService.UpdatePerson(partnetPersonIdentifiers[0].PersonId,firstName, middleName, lastName, sex, dateOfBirth);
+                                //update maritalstatus id
+                                await registerPersonService.UpdateMaritalStatus(partnetPersonIdentifiers[0].PersonId, maritalStatusId);
+                                if(!string.IsNullOrWhiteSpace(mobileNumber))
+                                    await registerPersonService.UpdatePersonContact(partnetPersonIdentifiers[0].PersonId, null, mobileNumber);
+                                if (!string.IsNullOrWhiteSpace(landmark))
+                                    await registerPersonService.UpdatePersonLocation(partnetPersonIdentifiers[0].PersonId, landmark);
+
+                                var getPersonRelationship = await registerPersonService.GetPersonRelationshipByPatientIdPersonId(indexClient.Id, partnetPersonIdentifiers[0].PersonId);
+                                if (getPersonRelationship != null)
                                 {
-                                    Screening screening = new Screening()
-                                    {
-                                        ScreeningCategoryId = pnsScreeningOptions[j].ItemId,
-                                        ScreeningTypeId = pnsScreeningOptions[j].MasterId,
-                                        ScreeningValueId = eligibleForHts
-                                    };
-                                    newScreenings.Add(screening);
+                                    getPersonRelationship.RelationshipTypeId = relationshipType;
+                                    var updatedRelationship = await registerPersonService.UpdatePersonRelationship(getPersonRelationship);
                                 }
-                                else if (pnsScreeningOptions[j].ItemName == "PNSApproach")
+                                else
                                 {
-                                    Screening screening = new Screening()
-                                    {
-                                        ScreeningCategoryId = pnsScreeningOptions[j].ItemId,
-                                        ScreeningTypeId = pnsScreeningOptions[j].MasterId,
-                                        ScreeningValueId = pnsApproach
-                                    };
-                                    newScreenings.Add(screening);
+                                    //Add PersonRelationship
+                                    var personRelationship = await registerPersonService.addPersonRelationship(partnetPersonIdentifiers[0].PersonId, indexClient.Id, relationshipType, providerId);
                                 }
-                                else if (pnsScreeningOptions[j].ItemName == "HIVStatus")
+
+                                /***
+                                 *Encounter
+                                 */
+
+                                if (request.PARTNERS[i].ENCOUNTER != null)
                                 {
-                                    Screening screening = new Screening()
+                                    if (request.PARTNERS[i].ENCOUNTER.PARTNER_SCREENING != null)
                                     {
-                                        ScreeningCategoryId = pnsScreeningOptions[j].ItemId,
-                                        ScreeningTypeId = pnsScreeningOptions[j].MasterId,
-                                        ScreeningValueId = hivStatus
-                                    };
-                                    newScreenings.Add(screening);
-                                }
-                                else if (pnsScreeningOptions[j].ItemName == "LivingWithClient")
-                                {
-                                    Screening screening = new Screening()
+                                        int pnsAccepted = request.PARTNERS[i].ENCOUNTER.PARTNER_SCREENING.PNS_ACCEPTED;
+                                        DateTime screeningDate = DateTime.ParseExact(request.PARTNERS[i].ENCOUNTER.PARTNER_SCREENING.SCREENING_DATE, "yyyyMMdd", null);
+                                        int ipvScreeningDone = request.PARTNERS[i].ENCOUNTER.PARTNER_SCREENING.IPV_SCREENING_DONE;
+                                        int hurtByPartner = request.PARTNERS[i].ENCOUNTER.PARTNER_SCREENING.HURT_BY_PARTNER;
+                                        int threatByPartner = request.PARTNERS[i].ENCOUNTER.PARTNER_SCREENING.THREAT_BY_PARTNER;
+                                        int sexualAbuseByPartner = request.PARTNERS[i].ENCOUNTER.PARTNER_SCREENING.SEXUAL_ABUSE_BY_PARTNER;
+                                        int ipvOutcome = request.PARTNERS[i].ENCOUNTER.PARTNER_SCREENING.IPV_OUTCOME;
+                                        string partnerOccupation = request.PARTNERS[i].ENCOUNTER.PARTNER_SCREENING.PARTNER_OCCUPATION;
+                                        int partnerRelationship = request.PARTNERS[i].ENCOUNTER.PARTNER_SCREENING.PARTNER_RELATIONSHIP;
+                                        int livingWithClient = request.PARTNERS[i].ENCOUNTER.PARTNER_SCREENING.LIVING_WITH_CLIENT;
+                                        int hivStatus = request.PARTNERS[i].ENCOUNTER.PARTNER_SCREENING.HIV_STATUS;
+                                        int pnsApproach = request.PARTNERS[i].ENCOUNTER.PARTNER_SCREENING.PNS_APPROACH;
+                                        int eligibleForHts = request.PARTNERS[i].ENCOUNTER.PARTNER_SCREENING.ELIGIBLE_FOR_HTS;
+                                        DateTime bookingDate = DateTime.ParseExact(request.PARTNERS[i].ENCOUNTER.PARTNER_SCREENING.BOOKING_DATE, "yyyyMMdd", null);
+
+                                        var pnsScreeningOptions = await _unitOfWork.Repository<LookupItemView>()
+                                            .Get(x => x.MasterName == "PnsScreening").ToListAsync();
+
+                                        List<Screening> newScreenings = new List<Screening>();
+                                        for (int j = 0; j < pnsScreeningOptions.Count; j++)
+                                        {
+                                            if (pnsScreeningOptions[j].ItemName == "EligibleTesting")
+                                            {
+                                                Screening screening = new Screening()
+                                                {
+                                                    ScreeningCategoryId = pnsScreeningOptions[j].ItemId,
+                                                    ScreeningTypeId = pnsScreeningOptions[j].MasterId,
+                                                    ScreeningValueId = eligibleForHts
+                                                };
+                                                newScreenings.Add(screening);
+                                            }
+                                            else if (pnsScreeningOptions[j].ItemName == "PNSApproach")
+                                            {
+                                                Screening screening = new Screening()
+                                                {
+                                                    ScreeningCategoryId = pnsScreeningOptions[j].ItemId,
+                                                    ScreeningTypeId = pnsScreeningOptions[j].MasterId,
+                                                    ScreeningValueId = pnsApproach
+                                                };
+                                                newScreenings.Add(screening);
+                                            }
+                                            else if (pnsScreeningOptions[j].ItemName == "HIVStatus")
+                                            {
+                                                Screening screening = new Screening()
+                                                {
+                                                    ScreeningCategoryId = pnsScreeningOptions[j].ItemId,
+                                                    ScreeningTypeId = pnsScreeningOptions[j].MasterId,
+                                                    ScreeningValueId = hivStatus
+                                                };
+                                                newScreenings.Add(screening);
+                                            }
+                                            else if (pnsScreeningOptions[j].ItemName == "LivingWithClient")
+                                            {
+                                                Screening screening = new Screening()
+                                                {
+                                                    ScreeningCategoryId = pnsScreeningOptions[j].ItemId,
+                                                    ScreeningTypeId = pnsScreeningOptions[j].MasterId,
+                                                    ScreeningValueId = livingWithClient
+                                                };
+                                                newScreenings.Add(screening);
+                                            }
+                                            else if (pnsScreeningOptions[j].ItemName == "PnsRelationship")
+                                            {
+                                                Screening screening = new Screening()
+                                                {
+                                                    ScreeningCategoryId = pnsScreeningOptions[j].ItemId,
+                                                    ScreeningTypeId = pnsScreeningOptions[j].MasterId,
+                                                    ScreeningValueId = partnerRelationship
+                                                };
+                                                newScreenings.Add(screening);
+                                            }
+                                            else if (pnsScreeningOptions[j].ItemName == "IPVOutcome")
+                                            {
+                                                Screening screening = new Screening()
+                                                {
+                                                    ScreeningCategoryId = pnsScreeningOptions[j].ItemId,
+                                                    ScreeningTypeId = pnsScreeningOptions[j].MasterId,
+                                                    ScreeningValueId = ipvOutcome
+                                                };
+                                                newScreenings.Add(screening);
+                                            }
+                                            else if (pnsScreeningOptions[j].ItemName == "PnsForcedSexual")
+                                            {
+                                                Screening screening = new Screening()
+                                                {
+                                                    ScreeningCategoryId = pnsScreeningOptions[j].ItemId,
+                                                    ScreeningTypeId = pnsScreeningOptions[j].MasterId,
+                                                    ScreeningValueId = sexualAbuseByPartner
+                                                };
+                                                newScreenings.Add(screening);
+                                            }
+                                            else if (pnsScreeningOptions[j].ItemName == "PnsThreatenedHurt")
+                                            {
+                                                Screening screening = new Screening()
+                                                {
+                                                    ScreeningCategoryId = pnsScreeningOptions[j].ItemId,
+                                                    ScreeningTypeId = pnsScreeningOptions[j].MasterId,
+                                                    ScreeningValueId = threatByPartner
+                                                };
+                                                newScreenings.Add(screening);
+                                            }
+                                            else if (pnsScreeningOptions[j].ItemName == "PnsPhysicallyHurt")
+                                            {
+                                                Screening screening = new Screening()
+                                                {
+                                                    ScreeningCategoryId = pnsScreeningOptions[j].ItemId,
+                                                    ScreeningTypeId = pnsScreeningOptions[j].MasterId,
+                                                    ScreeningValueId = hurtByPartner
+                                                };
+                                                newScreenings.Add(screening);
+                                            }
+                                        }
+
+                                        var patientMasterVisitEntity = await _unitOfWork.Repository<PatientMasterVisit>()
+                                            .Get(x => x.PatientId == indexClient.Id && x.ServiceId == 2).ToListAsync();
+
+                                        int patientMasterVisitId = patientMasterVisitEntity.OrderBy(x => x.Id).FirstOrDefault().Id;
+
+                                        var partnHtsScreenings = await encounterTestingService.AddPartnerScreening(partnetPersonIdentifiers[0].PersonId, indexClient.Id, patientMasterVisitId, partnerOccupation,
+                                            screeningDate, bookingDate, newScreenings, providerId);
+                                    }
+
+                                    var tracingLookup = await _unitOfWork.Repository<LookupItemView>()
+                                        .Get(x => x.MasterName == "TracingType" && x.ItemName == "Family").ToListAsync();
+
+                                    int tracingType = tracingLookup.FirstOrDefault().ItemId;
+
+                                    for (int j = 0; j < request.PARTNERS[i].ENCOUNTER.TRACING.Count; j++)
                                     {
-                                        ScreeningCategoryId = pnsScreeningOptions[j].ItemId,
-                                        ScreeningTypeId = pnsScreeningOptions[j].MasterId,
-                                        ScreeningValueId = livingWithClient
-                                    };
-                                    newScreenings.Add(screening);
-                                }
-                                else if (pnsScreeningOptions[j].ItemName == "PnsRelationship")
-                                {
-                                    Screening screening = new Screening()
-                                    {
-                                        ScreeningCategoryId = pnsScreeningOptions[j].ItemId,
-                                        ScreeningTypeId = pnsScreeningOptions[j].MasterId,
-                                        ScreeningValueId = partnerRelationship
-                                    };
-                                    newScreenings.Add(screening);
-                                }
-                                else if (pnsScreeningOptions[j].ItemName == "IPVOutcome")
-                                {
-                                    Screening screening = new Screening()
-                                    {
-                                        ScreeningCategoryId = pnsScreeningOptions[j].ItemId,
-                                        ScreeningTypeId = pnsScreeningOptions[j].MasterId,
-                                        ScreeningValueId = ipvOutcome
-                                    };
-                                    newScreenings.Add(screening);
-                                }
-                                else if (pnsScreeningOptions[j].ItemName == "PnsForcedSexual")
-                                {
-                                    Screening screening = new Screening()
-                                    {
-                                        ScreeningCategoryId = pnsScreeningOptions[j].ItemId,
-                                        ScreeningTypeId = pnsScreeningOptions[j].MasterId,
-                                        ScreeningValueId = sexualAbuseByPartner
-                                    };
-                                    newScreenings.Add(screening);
-                                }
-                                else if (pnsScreeningOptions[j].ItemName == "PnsThreatenedHurt")
-                                {
-                                    Screening screening = new Screening()
-                                    {
-                                        ScreeningCategoryId = pnsScreeningOptions[j].ItemId,
-                                        ScreeningTypeId = pnsScreeningOptions[j].MasterId,
-                                        ScreeningValueId = threatByPartner
-                                    };
-                                    newScreenings.Add(screening);
-                                }
-                                else if (pnsScreeningOptions[j].ItemName == "PnsPhysicallyHurt")
-                                {
-                                    Screening screening = new Screening()
-                                    {
-                                        ScreeningCategoryId = pnsScreeningOptions[j].ItemId,
-                                        ScreeningTypeId = pnsScreeningOptions[j].MasterId,
-                                        ScreeningValueId = hurtByPartner
-                                    };
-                                    newScreenings.Add(screening);
+                                        DateTime tracingDate = DateTime.ParseExact(request.PARTNERS[i].ENCOUNTER.TRACING[j].TRACING_DATE, "yyyyMMdd", null);
+                                        int mode = request.PARTNERS[i].ENCOUNTER.TRACING[j].TRACING_MODE;
+                                        int outcome = request.PARTNERS[i].ENCOUNTER.TRACING[j].TRACING_OUTCOME;
+                                        int consent = request.PARTNERS[i].ENCOUNTER.TRACING[j].CONSENT;
+                                        DateTime? tracingBookingDate = null;
+                                        if (!string.IsNullOrWhiteSpace(request.PARTNERS[i].ENCOUNTER.TRACING[j].BOOKING_DATE))
+                                            tracingBookingDate = DateTime.ParseExact(request.PARTNERS[i].ENCOUNTER.TRACING[j].BOOKING_DATE, "yyyyMMdd", null);
+
+                                        var tracingOutcome = await encounterTestingService.addTracing(partnetPersonIdentifiers[0].PersonId, tracingType,
+                                            tracingDate, mode, outcome, providerId, null, consent, tracingBookingDate, null);
+                                    }
                                 }
                             }
-
-                            var patientMasterVisitEntity = await _unitOfWork.Repository<PatientMasterVisit>()
-                                .Get(x => x.PatientId == indexClient.Id && x.ServiceId == 2).ToListAsync();
-
-                            int patientMasterVisitId = patientMasterVisitEntity.OrderBy(x => x.Id).FirstOrDefault().Id;
-
-                            var partnHtsScreenings = await encounterTestingService.AddPartnerScreening(person.Id, indexClient.Id, patientMasterVisitId, partnerOccupation,
-                                screeningDate, bookingDate, newScreenings, providerId);
-
-                            var tracingLookup = await _unitOfWork.Repository<LookupItemView>()
-                                .Get(x => x.MasterName == "TracingType" && x.ItemName == "Family").ToListAsync();
-
-                            int tracingType = tracingLookup.FirstOrDefault().ItemId;
-
-                            for (int j = 0; j < request.PARTNERS[i].ENCOUNTER.TRACING.Count; j++)
+                            else
                             {
-                                DateTime tracingDate = DateTime.ParseExact(request.PARTNERS[i].ENCOUNTER.TRACING[j].TRACING_DATE, "yyyyMMdd", null);
-                                int mode = request.PARTNERS[i].ENCOUNTER.TRACING[j].TRACING_MODE;
-                                int outcome = request.PARTNERS[i].ENCOUNTER.TRACING[j].TRACING_OUTCOME;
-                                int consent = request.PARTNERS[i].ENCOUNTER.TRACING[j].CONSENT;
-                                DateTime tracingBookingDate = DateTime.ParseExact(request.PARTNERS[i].ENCOUNTER.TRACING[j].BOOKING_DATE, "yyyyMMdd", null);
+                                //Register Partner
+                                var person = await registerPersonService.RegisterPerson(firstName, middleName, lastName, sex, dateOfBirth, providerId);
+                                //Add afyamobile Id as an Id of the partner
+                                var personIdentifier = await registerPersonService.addPersonIdentifiers(person.Id, 10, afyaMobileId, providerId);
+                                //Add partner marital status
+                                var partnerMaritalStatus = await registerPersonService.AddMaritalStatus(person.Id, maritalStatusId, providerId);
+                                //add partner contacts
+                                if (!string.IsNullOrWhiteSpace(mobileNumber))
+                                {
+                                    var partnerContacts = await registerPersonService.addPersonContact(person.Id, null,
+                                        mobileNumber, null, null, providerId);
+                                }
+                                //add partner location
+                                if (!string.IsNullOrWhiteSpace(landmark))
+                                {
+                                    var partnerLocation =
+                                        await registerPersonService.addPersonLocation(person.Id, 0, 0, 0, null, landmark,
+                                            providerId);
+                                }
+                                
+                                //Add PersonRelationship
+                                var personRelationship = await registerPersonService.addPersonRelationship(person.Id, indexClient.Id, relationshipType, providerId);
 
-                                var tracingOutcome = await encounterTestingService.addTracing(person.Id, tracingType,
-                                    tracingDate, mode, outcome, providerId, null, consent, tracingBookingDate, null);
+
+                                /***
+                                 *Encounter
+                                 */
+
+                                if (request.PARTNERS[i].ENCOUNTER != null)
+                                {
+                                    if (request.PARTNERS[i].ENCOUNTER.PARTNER_SCREENING != null)
+                                    {
+                                        int pnsAccepted = request.PARTNERS[i].ENCOUNTER.PARTNER_SCREENING.PNS_ACCEPTED;
+                                        DateTime screeningDate = DateTime.ParseExact(request.PARTNERS[i].ENCOUNTER.PARTNER_SCREENING.SCREENING_DATE, "yyyyMMdd", null);
+                                        int ipvScreeningDone = request.PARTNERS[i].ENCOUNTER.PARTNER_SCREENING.IPV_SCREENING_DONE;
+                                        int hurtByPartner = request.PARTNERS[i].ENCOUNTER.PARTNER_SCREENING.HURT_BY_PARTNER;
+                                        int threatByPartner = request.PARTNERS[i].ENCOUNTER.PARTNER_SCREENING.THREAT_BY_PARTNER;
+                                        int sexualAbuseByPartner = request.PARTNERS[i].ENCOUNTER.PARTNER_SCREENING.SEXUAL_ABUSE_BY_PARTNER;
+                                        int ipvOutcome = request.PARTNERS[i].ENCOUNTER.PARTNER_SCREENING.IPV_OUTCOME;
+                                        string partnerOccupation = request.PARTNERS[i].ENCOUNTER.PARTNER_SCREENING.PARTNER_OCCUPATION;
+                                        int partnerRelationship = request.PARTNERS[i].ENCOUNTER.PARTNER_SCREENING.PARTNER_RELATIONSHIP;
+                                        int livingWithClient = request.PARTNERS[i].ENCOUNTER.PARTNER_SCREENING.LIVING_WITH_CLIENT;
+                                        int hivStatus = request.PARTNERS[i].ENCOUNTER.PARTNER_SCREENING.HIV_STATUS;
+                                        int pnsApproach = request.PARTNERS[i].ENCOUNTER.PARTNER_SCREENING.PNS_APPROACH;
+                                        int eligibleForHts = request.PARTNERS[i].ENCOUNTER.PARTNER_SCREENING.ELIGIBLE_FOR_HTS;
+                                        DateTime bookingDate = DateTime.ParseExact(request.PARTNERS[i].ENCOUNTER.PARTNER_SCREENING.BOOKING_DATE, "yyyyMMdd", null);
+
+                                        var pnsScreeningOptions = await _unitOfWork.Repository<LookupItemView>()
+                                            .Get(x => x.MasterName == "PnsScreening").ToListAsync();
+
+                                        List<Screening> newScreenings = new List<Screening>();
+                                        for (int j = 0; j < pnsScreeningOptions.Count; j++)
+                                        {
+                                            if (pnsScreeningOptions[j].ItemName == "EligibleTesting")
+                                            {
+                                                Screening screening = new Screening()
+                                                {
+                                                    ScreeningCategoryId = pnsScreeningOptions[j].ItemId,
+                                                    ScreeningTypeId = pnsScreeningOptions[j].MasterId,
+                                                    ScreeningValueId = eligibleForHts
+                                                };
+                                                newScreenings.Add(screening);
+                                            }
+                                            else if (pnsScreeningOptions[j].ItemName == "PNSApproach")
+                                            {
+                                                Screening screening = new Screening()
+                                                {
+                                                    ScreeningCategoryId = pnsScreeningOptions[j].ItemId,
+                                                    ScreeningTypeId = pnsScreeningOptions[j].MasterId,
+                                                    ScreeningValueId = pnsApproach
+                                                };
+                                                newScreenings.Add(screening);
+                                            }
+                                            else if (pnsScreeningOptions[j].ItemName == "HIVStatus")
+                                            {
+                                                Screening screening = new Screening()
+                                                {
+                                                    ScreeningCategoryId = pnsScreeningOptions[j].ItemId,
+                                                    ScreeningTypeId = pnsScreeningOptions[j].MasterId,
+                                                    ScreeningValueId = hivStatus
+                                                };
+                                                newScreenings.Add(screening);
+                                            }
+                                            else if (pnsScreeningOptions[j].ItemName == "LivingWithClient")
+                                            {
+                                                Screening screening = new Screening()
+                                                {
+                                                    ScreeningCategoryId = pnsScreeningOptions[j].ItemId,
+                                                    ScreeningTypeId = pnsScreeningOptions[j].MasterId,
+                                                    ScreeningValueId = livingWithClient
+                                                };
+                                                newScreenings.Add(screening);
+                                            }
+                                            else if (pnsScreeningOptions[j].ItemName == "PnsRelationship")
+                                            {
+                                                Screening screening = new Screening()
+                                                {
+                                                    ScreeningCategoryId = pnsScreeningOptions[j].ItemId,
+                                                    ScreeningTypeId = pnsScreeningOptions[j].MasterId,
+                                                    ScreeningValueId = partnerRelationship
+                                                };
+                                                newScreenings.Add(screening);
+                                            }
+                                            else if (pnsScreeningOptions[j].ItemName == "IPVOutcome")
+                                            {
+                                                Screening screening = new Screening()
+                                                {
+                                                    ScreeningCategoryId = pnsScreeningOptions[j].ItemId,
+                                                    ScreeningTypeId = pnsScreeningOptions[j].MasterId,
+                                                    ScreeningValueId = ipvOutcome
+                                                };
+                                                newScreenings.Add(screening);
+                                            }
+                                            else if (pnsScreeningOptions[j].ItemName == "PnsForcedSexual")
+                                            {
+                                                Screening screening = new Screening()
+                                                {
+                                                    ScreeningCategoryId = pnsScreeningOptions[j].ItemId,
+                                                    ScreeningTypeId = pnsScreeningOptions[j].MasterId,
+                                                    ScreeningValueId = sexualAbuseByPartner
+                                                };
+                                                newScreenings.Add(screening);
+                                            }
+                                            else if (pnsScreeningOptions[j].ItemName == "PnsThreatenedHurt")
+                                            {
+                                                Screening screening = new Screening()
+                                                {
+                                                    ScreeningCategoryId = pnsScreeningOptions[j].ItemId,
+                                                    ScreeningTypeId = pnsScreeningOptions[j].MasterId,
+                                                    ScreeningValueId = threatByPartner
+                                                };
+                                                newScreenings.Add(screening);
+                                            }
+                                            else if (pnsScreeningOptions[j].ItemName == "PnsPhysicallyHurt")
+                                            {
+                                                Screening screening = new Screening()
+                                                {
+                                                    ScreeningCategoryId = pnsScreeningOptions[j].ItemId,
+                                                    ScreeningTypeId = pnsScreeningOptions[j].MasterId,
+                                                    ScreeningValueId = hurtByPartner
+                                                };
+                                                newScreenings.Add(screening);
+                                            }
+                                        }
+
+                                        var patientMasterVisitEntity = await _unitOfWork.Repository<PatientMasterVisit>()
+                                            .Get(x => x.PatientId == indexClient.Id && x.ServiceId == 2).ToListAsync();
+
+                                        int patientMasterVisitId = patientMasterVisitEntity.OrderBy(x => x.Id).FirstOrDefault().Id;
+
+                                        var partnHtsScreenings = await encounterTestingService.AddPartnerScreening(person.Id, indexClient.Id, patientMasterVisitId, partnerOccupation,
+                                            screeningDate, bookingDate, newScreenings, providerId);
+                                    }
+
+                                    var tracingLookup = await _unitOfWork.Repository<LookupItemView>()
+                                        .Get(x => x.MasterName == "TracingType" && x.ItemName == "Family").ToListAsync();
+
+                                    int tracingType = tracingLookup.FirstOrDefault().ItemId;
+
+                                    for (int j = 0; j < request.PARTNERS[i].ENCOUNTER.TRACING.Count; j++)
+                                    {
+                                        DateTime tracingDate = DateTime.ParseExact(request.PARTNERS[i].ENCOUNTER.TRACING[j].TRACING_DATE, "yyyyMMdd", null);
+                                        int mode = request.PARTNERS[i].ENCOUNTER.TRACING[j].TRACING_MODE;
+                                        int outcome = request.PARTNERS[i].ENCOUNTER.TRACING[j].TRACING_OUTCOME;
+                                        int consent = request.PARTNERS[i].ENCOUNTER.TRACING[j].CONSENT;
+                                        DateTime? tracingBookingDate = null;
+                                        if (!string.IsNullOrWhiteSpace(request.PARTNERS[i].ENCOUNTER.TRACING[j].BOOKING_DATE))
+                                            tracingBookingDate = DateTime.ParseExact(request.PARTNERS[i].ENCOUNTER.TRACING[j].BOOKING_DATE, "yyyyMMdd", null);
+
+                                        var tracingOutcome = await encounterTestingService.addTracing(person.Id, tracingType,
+                                            tracingDate, mode, outcome, providerId, null, consent, tracingBookingDate, null);
+                                    }
+                                }
                             }
                         }
-                        
                     }
-
-                    return Result<SynchronizePartnersResponse>.Valid(new SynchronizePartnersResponse()
-                    {
-
-                    });
+                    return Result<string>.Valid(afyaMobileId);
                 }
                 catch (Exception e)
                 {
-                    return Result<SynchronizePartnersResponse>.Invalid(e.Message);
+                    return Result<string>.Invalid(e.Message);
                 }
             }
         }

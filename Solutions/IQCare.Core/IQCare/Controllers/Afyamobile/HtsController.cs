@@ -31,8 +31,8 @@ namespace IQCare.Controllers.Afyamobile
         {
             var response = await _mediator.Send(synchronizePartnersCommand, Request.HttpContext.RequestAborted);
             if (response.IsValid)
-                return Ok(response.Value);
-            return BadRequest(String.Join(",",response.Errors));
+                return Ok(response);
+            return BadRequest(response);
         }
 
         [HttpPost("family")]
@@ -40,7 +40,7 @@ namespace IQCare.Controllers.Afyamobile
         {
             var response = await _mediator.Send(synchronizeFamilyCommand, Request.HttpContext.RequestAborted);
             if (response.IsValid)
-                return Ok(response.Value);
+                return Ok(response);
             return BadRequest(response);
         }
     }
