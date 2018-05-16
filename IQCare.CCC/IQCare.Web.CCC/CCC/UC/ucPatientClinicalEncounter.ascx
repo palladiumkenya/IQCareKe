@@ -3841,12 +3841,13 @@
 		var differentiatedCareId = $("#<%=DifferentiatedCare.ClientID%>").val();
 		/*if (status === '') { status = null }*/
 		var appointmentDate = $("#<%=AppointmentDate.ClientID%>").val();
-		var patientId = <%=PatientId%>;
-		var patientMasterVisitId = <%=PatientMasterVisitId%>;
+        var patientId = <%=PatientId%>;
+        var userId = <%=UserId%>;
+        var patientMasterVisitId = <%=PatientMasterVisitId%>;
 		$.ajax({
 			type: "POST",
 			url: "../WebService/PatientService.asmx/AddPatientAppointment",
-			data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','appointmentDate': '" + appointmentDate + "','description': '" + description + "','reasonId': '" + reason + "','serviceAreaId': '" + serviceArea + "','statusId': '" + status + "','differentiatedCareId': '" + differentiatedCareId + "'}",
+            data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','appointmentDate': '" + appointmentDate + "','description': '" + description + "','reasonId': '" + reason + "','serviceAreaId': '" + serviceArea + "','statusId': '" + status + "','differentiatedCareId': '" + differentiatedCareId + "','userId': " + userId + "}",
 			contentType: "application/json; charset=utf-8",
 			dataType: "json",
 			success: function (response) {
