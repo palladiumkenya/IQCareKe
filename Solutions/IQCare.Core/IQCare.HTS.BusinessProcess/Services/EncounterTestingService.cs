@@ -8,6 +8,7 @@ using IQCare.Common.Core.Models;
 using IQCare.Common.Infrastructure;
 using IQCare.HTS.Core.Model;
 using IQCare.HTS.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 
 namespace IQCare.HTS.BusinessProcess.Services
 {
@@ -178,6 +179,36 @@ namespace IQCare.HTS.BusinessProcess.Services
             }
         }
 
+        public async Task<HtsEncounterResult> UpdateHtsEncounterResult(HtsEncounterResult htsEncounter)
+        {
+            try
+            {
+                _htsunitOfWork.Repository<HtsEncounterResult>().Update(htsEncounter);
+                await _htsunitOfWork.SaveAsync();
+
+                return htsEncounter;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public async Task<List<HtsEncounterResult>> GetHtsEncounterResultByEncounterId(int htsEncounterId)
+        {
+            try
+            {
+                var result = await _htsunitOfWork.Repository<HtsEncounterResult>()
+                    .Get(x => x.HtsEncounterId == htsEncounterId).ToListAsync();
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         public async Task<HtsEncounterResult> addHtsEncounterResult(int htsEncounterId, int roundOneTestResult, int? roundTwoTestResult, int? finalResult)
         {
             try
@@ -219,6 +250,30 @@ namespace IQCare.HTS.BusinessProcess.Services
             }
         }
 
+        public async Task<List<Core.Model.Testing>> UpdateTesting(int htsEncounterId, List<NewTests> tests, int providerId, int testRound)
+        {
+            try
+            {
+                var htsTestings = await _htsunitOfWork.Repository<Core.Model.Testing>()
+                    .Get(x => x.HtsEncounterId == htsEncounterId && x.TestRound == testRound).ToListAsync();
+
+                foreach (var htsTesting in htsTestings)
+                {
+                    htsTesting.DeleteFlag = true;
+
+                    _htsunitOfWork.Repository<Core.Model.Testing>().Update(htsTesting);
+                    await _htsunitOfWork.SaveAsync();
+                }
+
+                var result = await this.addTesting(tests, htsEncounterId, providerId);
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         public async Task<List<Core.Model.Testing>> addTesting(List<NewTests> tests, int htsEncounterId, int providerId)
         {
             try
@@ -233,7 +288,9 @@ namespace IQCare.HTS.BusinessProcess.Services
                     KitLotNumber = t.LOT_NUMBER,
                     Outcome = t.RESULT,
                     ProviderId = providerId,
-                    TestRound = t.TEST_ROUND
+                    TestRound = t.TEST_ROUND,
+                    DeleteFlag = false,
+                    CreateDate = DateTime.Now
                 }));
 
                 await _htsunitOfWork.Repository<Core.Model.Testing>().AddRangeAsync(testings);
@@ -246,6 +303,28 @@ namespace IQCare.HTS.BusinessProcess.Services
                 throw e;
             }
         }
+
+        public async Task<List<ClientDisability>> UpdateClientDisabilities(int personId, List<int> disabilyList, int patientEncounterId, int providerId)
+        {
+            try
+            {
+                var disabilities = await _htsunitOfWork.Repository<ClientDisability>().Get(x => x.PersonId == personId).ToListAsync();
+                foreach (var disability in disabilities)
+                {
+                    disability.DeleteFlag = true;
+
+                    _htsunitOfWork.Repository<ClientDisability>().Update(disability);
+                    await _htsunitOfWork.SaveAsync();
+                }
+
+                var res = await this.addDisabilities(disabilyList, patientEncounterId, personId, providerId);
+                return res;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        } 
 
         public async Task<List<ClientDisability>> addDisabilities(List<int> disabilities, int patientEncounterId, int personId, int providerId)
         {
@@ -268,6 +347,34 @@ namespace IQCare.HTS.BusinessProcess.Services
                 }
 
                 return clientDisabilities;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public async Task<HtsEncounter> UpdateHtsEncounter(HtsEncounter htsEncounter)
+        {
+            try
+            {
+                _htsunitOfWork.Repository<HtsEncounter>().Update(htsEncounter);
+                await _htsunitOfWork.SaveAsync();
+
+                return htsEncounter;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public async Task<HtsEncounter> GetHtsEncounter(int htsEncounterId)
+        {
+            try
+            {
+                var result = await _htsunitOfWork.Repository<HtsEncounter>().FindByIdAsync(htsEncounterId);
+                return result;
             }
             catch (Exception e)
             {
@@ -310,6 +417,37 @@ namespace IQCare.HTS.BusinessProcess.Services
             }
         }
 
+        public async Task<PatientScreening> UpdatePatientScreening(PatientScreening patientScreening)
+        {
+            try
+            {
+                _unitOfWork.Repository<PatientScreening>().Update(patientScreening);
+                await _unitOfWork.SaveAsync();
+
+                return patientScreening;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public async Task<List<PatientScreening>> GetPatientScreening(int patientId, int patientMasterVisitId, int screeningTypeId, int? screeningCategoryId)
+        {
+            try
+            {
+                var result = await _unitOfWork.Repository<PatientScreening>().Get(x =>
+                    x.PatientId == patientId && x.PatientMasterVisitId == patientMasterVisitId &&
+                    x.ScreeningCategoryId == screeningCategoryId && x.ScreeningTypeId == screeningTypeId).ToListAsync();
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         public async Task<PatientScreening> addPatientScreening(int patientId, int patientMasterVisitId, int screeningTypeId, DateTime screeningDate, int screeningValueId, int userId)
         {
             try
@@ -342,6 +480,37 @@ namespace IQCare.HTS.BusinessProcess.Services
             }
         }
 
+        public async Task<PatientConsent> UpdatePatientConsent(PatientConsent patientConsent)
+        {
+            try
+            {
+                _unitOfWork.Repository<PatientConsent>().Update(patientConsent);
+                await _unitOfWork.SaveAsync();
+
+                return patientConsent;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public async Task<List<PatientConsent>> GetPatientConsent(int patientId, int patientMasterVisitId, int serviceAreaId, int consentType)
+        {
+            try
+            {
+                var result = await _unitOfWork.Repository<PatientConsent>().Get(x =>
+                    x.PatientId == patientId && x.PatientMasterVisitId == patientMasterVisitId &&
+                    x.ServiceAreaId == serviceAreaId && x.ConsentType == consentType).ToListAsync();
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         public async Task<PatientConsent> addPatientConsent(int patientId, int patientMasterVisitId, int serviceAreaId, int consentValue, int consentTypeId, DateTime consentDate, int userId, int? declineReason)
         {
             try
@@ -364,6 +533,18 @@ namespace IQCare.HTS.BusinessProcess.Services
                 await _unitOfWork.SaveAsync();
 
                 return patientConsent;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public async Task<PatientEncounter> GetPatientEncounterById(int patientEncounterId)
+        {
+            try
+            {
+                return await _unitOfWork.Repository<PatientEncounter>().FindByIdAsync(patientEncounterId);
             }
             catch (Exception e)
             {

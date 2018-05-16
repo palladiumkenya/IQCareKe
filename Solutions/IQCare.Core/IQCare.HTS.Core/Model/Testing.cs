@@ -14,5 +14,7 @@ namespace IQCare.HTS.Core.Model
         public DateTime ExpiryDate { get; set; }
         public int Outcome { get; set; }
         public int TestRound { get; set; }
+        public bool DeleteFlag { get; set; }
+        public DateTime CreateDate { get; set; }
     }
 }

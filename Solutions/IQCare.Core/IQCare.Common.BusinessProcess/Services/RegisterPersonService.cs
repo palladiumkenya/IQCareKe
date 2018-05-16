@@ -21,6 +21,45 @@ namespace IQCare.Common.BusinessProcess.Services
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
 
+        public async Task<InteropPlacerValue> AddInteropPlacerValue(int entityId, int identifierType, int interopPlacerTypeId, string placerValue)
+        {
+            try
+            {
+                InteropPlacerValue interopPlacerValue = new InteropPlacerValue()
+                {
+                    EntityId = entityId,
+                    IdentifierType = identifierType,
+                    InteropPlacerTypeId = interopPlacerTypeId,
+                    PlacerValue = placerValue
+                };
+
+                await _unitOfWork.Repository<InteropPlacerValue>().AddAsync(interopPlacerValue);
+                await _unitOfWork.SaveAsync();
+
+                return interopPlacerValue;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public async Task<List<InteropPlacerValue>> GetInteropPlacerValue(int interopPlacerTypeId, int identifierType, string placerValue)
+        {
+            try
+            {
+                var result = await _unitOfWork.Repository<InteropPlacerValue>().Get(x =>
+                    x.InteropPlacerTypeId == interopPlacerTypeId && x.IdentifierType == identifierType &&
+                    x.PlacerValue == placerValue).ToListAsync();
+                
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         public async Task<PersonRelationship> addPersonRelationship(int personId, int patientId, int relationshipTypeId, int userId)
         {
             try
@@ -468,6 +507,7 @@ namespace IQCare.Common.BusinessProcess.Services
                 StringBuilder sql = new StringBuilder();
                 sql.Append("exec pr_OpenDecryptedSession;");
                 sql.Append($"UPDATE Patient SET DateOfBirth = '{dateOfBirth.ToString("yyyy-MM-dd")}', FacilityId = '{facilityId}' WHERE Id = {patientId};");
+                sql.Append($"SELECT * FROM Patient WHERE Id = {patientId};");
                 sql.Append("exec [dbo].[pr_CloseDecryptedSession];");
 
 
@@ -589,6 +629,7 @@ namespace IQCare.Common.BusinessProcess.Services
                            $"MidName = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{middleName}'), " +
                            $"LastName = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{lastName}'), " +
                            $"Sex = {sex}, DateOfBirth = '{dateOfBirth.ToString("yyyy-MM-dd")}' WHERE Id = {personId}; ");
+                sql.Append($"SELECT * FROM Person WHERE Id = {personId};");
                 sql.Append("exec [dbo].[pr_CloseDecryptedSession];");
 
                 var personInsert = await _unitOfWork.Repository<Person>().FromSql(sql.ToString());
