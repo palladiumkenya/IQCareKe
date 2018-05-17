@@ -13,6 +13,7 @@ import {APP_DATE_FORMATS, AppDateAdapter} from './dateadapter/momentDateAdapter'
 import {NotificationService} from './_services/notification.service';
 import {AppLoadService} from './_services/appload.service';
 import {AppStateService} from './_services/appstate.service';
+import {ErrorHandlerService} from './_services/errorhandler.service';
 
 @NgModule({
     imports: [
@@ -38,6 +39,7 @@ import {AppStateService} from './_services/appstate.service';
         PnstracingService,
         AppLoadService,
         AppStateService,
+        ErrorHandlerService,
         {
             provide: DateAdapter, useClass: AppDateAdapter
         },

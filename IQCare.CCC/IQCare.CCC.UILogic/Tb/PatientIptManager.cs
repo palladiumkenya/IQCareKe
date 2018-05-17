@@ -2,6 +2,7 @@
 using Entities.CCC.Tb;
 using Interface.CCC.Tb;
 using System.Collections.Generic;
+using IQCare.Web.UILogic;
 
 namespace IQCare.CCC.UILogic.Tb
 {
@@ -26,6 +27,7 @@ namespace IQCare.CCC.UILogic.Tb
                 PeripheralneoropathyAction = p.PeripheralneoropathyAction,
                 RashAction = p.RashAction,
                 AdheranceMeasurementAction = p.AdheranceMeasurementAction,
+                CreatedBy = SessionManager.UserId
             };
             return _patientIpt.AddPatientIpt(patientIpt);
         }
@@ -59,6 +61,7 @@ namespace IQCare.CCC.UILogic.Tb
                 PeripheralneoropathyAction = p.PeripheralneoropathyAction,
                 RashAction = p.RashAction,
                 AdheranceMeasurementAction = p.AdheranceMeasurementAction,
+                CreatedBy = SessionManager.UserId
             };
             return _patientIpt.UpdatePatientIpt(patientIpt);
         }

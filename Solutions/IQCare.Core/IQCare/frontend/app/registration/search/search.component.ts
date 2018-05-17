@@ -41,6 +41,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
         localStorage.removeItem('patientMasterVisitId');
         localStorage.removeItem('isPartner');
         localStorage.setItem('serviceAreaId', '2');
+        localStorage.removeItem('editEncounterId');
     }
 
     ngAfterViewInit() {
@@ -54,8 +55,6 @@ export class SearchComponent implements OnInit, AfterViewInit {
     }
 
     getSelectedRow(row) {
-        console.log(row);
-
         localStorage.setItem('personId', row['personId']);
         localStorage.setItem('patientId', row['patientId']);
 

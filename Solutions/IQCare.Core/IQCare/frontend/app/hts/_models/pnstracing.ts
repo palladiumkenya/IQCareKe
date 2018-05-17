@@ -6,4 +6,5 @@ export class PnsTracing {
     DateBookedTesting: number;
     PersonId: number;
     UserId: number;
+    TracingType: number;
 }

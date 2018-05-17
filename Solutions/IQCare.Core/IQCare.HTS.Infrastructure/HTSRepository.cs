@@ -67,5 +67,7 @@ namespace IQCare.HTS.Infrastructure
 
         public async Task<IEnumerable<TEntity>> GetAllAsync()
             => await _context.Set<TEntity>().ToListAsync();
+
+        public void Update(TEntity entity) => _context.Entry(entity).State = EntityState.Modified;
     }
 }

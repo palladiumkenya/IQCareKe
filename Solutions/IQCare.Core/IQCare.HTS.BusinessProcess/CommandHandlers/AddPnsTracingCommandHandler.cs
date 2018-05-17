@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using IQCare.Common.Core.Models;
@@ -6,6 +7,7 @@ using IQCare.HTS.BusinessProcess.Commands;
 using IQCare.HTS.Core.Model;
 using IQCare.HTS.Infrastructure;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace IQCare.HTS.BusinessProcess.CommandHandlers
 {
@@ -27,14 +29,17 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                     Tracing pnstrace = new Tracing()
                     {
                         PersonID = request.PersonId,
-                        TracingType = 1,
+                        TracingType = request.TracingType,
                         DateTracingDone = request.TracingDate,
                         Mode = request.TracingMode,
                         Outcome = request.TracingOutcome,
                         Remarks = null,
                         DeleteFlag = false,
                         CreatedBy = request.UserId,
-                        CreateDate = DateTime.Now
+                        CreateDate = DateTime.Now,
+                        Consent = request.Consent,
+                        DateBookedTesting = request.DateBookedTesting,
+                        ReminderDate = request.DateReminded
                     };
 
                     await _unitOfWork.Repository<Tracing>().AddAsync(pnstrace);

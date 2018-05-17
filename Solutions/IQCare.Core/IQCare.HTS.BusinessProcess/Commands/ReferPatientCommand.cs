@@ -24,6 +24,7 @@ namespace IQCare.HTS.BusinessProcess.Commands
         public DateTime TracingDate { get; set; }
         public int Mode { get; set; }
         public int Outcome { get; set; }
+        public int TracingType { get; set; }
     }
 
     public class ReferPatientResponse

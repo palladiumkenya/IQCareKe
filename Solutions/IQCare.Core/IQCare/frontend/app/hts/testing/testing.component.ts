@@ -8,6 +8,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {SnotifyService} from 'ng-snotify';
 import {NotificationService} from '../../shared/_services/notification.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {AppStateService} from '../../shared/_services/appstate.service';
+import {AppEnum} from '../../shared/reducers/app.enum';
+import {ClientService} from '../../shared/_services/client.service';
 
 @Component({
   selector: 'app-testing',
@@ -18,11 +21,7 @@ export class TestingComponent implements OnInit, AfterViewInit {
     testButton1: boolean = true;
     testButton2: boolean = false;
     isDisabled: boolean = false;
-    isFinalResultDisabled: boolean = false;
-    isFinalResultGivenDisabled: boolean = false;
     isCoupleDiscordantDisabled: boolean = false;
-    isAcceptedPartnerListingDisabled: boolean = false;
-    isReasonsDeclinedListingDisabled: boolean = false;
 
     formTesting: FormGroup;
 
@@ -30,6 +29,7 @@ export class TestingComponent implements OnInit, AfterViewInit {
     hivResultsOptions: any[];
     hivFinalResultsOptions: any[];
     yesNoOptions: any[];
+    yesNoNA: any[];
     reasonsDeclined: any[];
 
     testing: Testing;
@@ -48,10 +48,11 @@ export class TestingComponent implements OnInit, AfterViewInit {
                 public zone: NgZone,
                 private snotifyService: SnotifyService,
                 private notificationService: NotificationService,
-                private fb: FormBuilder) {
+                private fb: FormBuilder,
+                private appStateService: AppStateService,
+                private clientService: ClientService) {
         this.store.pipe(select('app')).subscribe(res => {
             this.isCoupleDiscordantDisabled = res['testedAs'];
-            console.log(this.isCoupleDiscordantDisabled);
         });
     }
 
@@ -76,7 +77,7 @@ export class TestingComponent implements OnInit, AfterViewInit {
             coupleDiscordant: new FormControl(this.finalTestingResults.coupleDiscordant, [Validators.required]),
             acceptedPartnerListing: new FormControl(this.finalTestingResults.acceptedPartnerListing, [Validators.required]),
             reasonsDeclinePartnerListing: new FormControl(this.finalTestingResults.reasonsDeclinePartnerListing, [Validators.required]),
-            finalResultsRemarks: new FormControl(this.finalTestingResults.finalResultsRemarks,[Validators.required]),
+            finalResultsRemarks: new FormControl(this.finalTestingResults.finalResultsRemarks, [Validators.required]),
         });
 
         this.encounterService.getCustomOptions().subscribe(data => {
@@ -91,11 +92,37 @@ export class TestingComponent implements OnInit, AfterViewInit {
                     this.hivFinalResultsOptions = options[i].value;
                 } else if (options[i].key == 'YesNo') {
                     this.yesNoOptions = options[i].value;
+                } else if (options[i].key == 'YesNoNA') {
+                    this.yesNoNA = options[i].value;
                 } else if (options[i].key == 'ReasonsPartner') {
                     this.reasonsDeclined = options[i].value;
                 }
             }
+
+            const optionSelected = this.yesNoNA.filter(function( obj ) {
+                return obj.itemName == 'N/A';
+            });
+
+            this.clientService.getClientDetails(JSON.parse(localStorage.getItem('patientId')), 2).subscribe(res => {
+                if (this.getAge(res['patientLookup'][0]['dateOfBirth']) < 15) {
+                    this.formTesting.controls.acceptedPartnerListing.disable({onlySelf: true});
+                    this.formTesting.controls.acceptedPartnerListing.setValue(optionSelected[0]['itemId']);
+                    this.formTesting.controls.reasonsDeclinePartnerListing.disable({onlySelf: true});
+                }
+            });
+
         });
+    }
+
+    getAge(dateString) {
+        const today = new Date();
+        const birthDate = new Date(dateString);
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+        return age;
     }
 
     openDialog(screeningType: string) {
@@ -190,9 +217,8 @@ export class TestingComponent implements OnInit, AfterViewInit {
 
                     /* Logic for testing */
                     if (firstTest['hivResult']['itemName'] === 'Positive' && this.testing['hivResult']['itemName'] === 'Negative') {
-                        // this.finalTestingResults.finalResultHiv2 = this.testing['hivResult']['itemId'];
+                        console.log(inconculusive, 'inconculusive');
                         this.formTesting.controls.finalResultHiv2.setValue(this.testing['hivResult']['itemId']);
-                        // this.finalTestingResults.finalResult = inconculusive[0].itemId;
                         this.formTesting.controls.finalResult.setValue(inconculusive[0].itemId);
                         this.testButton2 = false;
                     } else if (firstTest['hivResult']['itemName'] === 'Positive' && this.testing['hivResult']['itemName'] === 'Positive') {
@@ -213,21 +239,41 @@ export class TestingComponent implements OnInit, AfterViewInit {
         console.log(this.formTesting);
         if (this.formTesting.valid) {
             this.finalTestingResults = {...this.finalTestingResults, ...this.formTesting.value};
+            console.log(this.finalTestingResults);
 
             const htsEncounterId = JSON.parse(localStorage.getItem('htsEncounterId'));
             const patientId = JSON.parse(localStorage.getItem('patientId'));
             const patientMasterVisitId = JSON.parse(localStorage.getItem('patientMasterVisitId'));
             const serviceAreaId = JSON.parse(localStorage.getItem('serviceAreaId'));
             const providerId = JSON.parse(localStorage.getItem('appUserId'));
+            const finalRes = this.finalTestingResults.finalResult;
+            const acceptList = this.finalTestingResults.acceptedPartnerListing;
 
             this.encounterService.addTesting(this.finalTestingResults, this.hiv1, this.hiv2,
                 htsEncounterId, providerId, patientId, patientMasterVisitId, serviceAreaId).subscribe(data => {
-                console.log(data);
-                this.snotifyService.success('Successfully saved', 'Testing', this.notificationService.getConfig());
-                this.zone.run(() => { this.router.navigate(['/registration/home'], {relativeTo: this.route }); });
+
+                    const options = this.hivFinalResultsOptions.filter(function( obj ) {
+                        return obj.itemId == finalRes;
+                    });
+
+                    const acceptListOption = this.yesNoNA.filter(function (obj) {
+                        return obj.itemId == acceptList;
+                    });
+
+                    if (options[0] !== undefined && options[0]['itemName'] == 'Positive') {
+                        this.appStateService.addAppState(AppEnum.IS_POSITIVE, JSON.parse(localStorage.getItem('personId')),
+                            patientId, patientMasterVisitId, htsEncounterId).subscribe();
+                    }
+
+                    if (acceptListOption[0] !== undefined && acceptListOption[0]['itemName'] == 'Yes') {
+                        this.appStateService.addAppState(AppEnum.CONSENT_PARTNER_LISTING, JSON.parse(localStorage.getItem('personId')),
+                            patientId, patientMasterVisitId, htsEncounterId).subscribe();
+                    }
+
+                    this.snotifyService.success('Successfully saved', 'Testing', this.notificationService.getConfig());
+                    this.zone.run(() => { this.router.navigate(['/registration/home'], {relativeTo: this.route }); });
             });
         } else {
-            console.log(this.formTesting);
             return false;
         }
 
@@ -235,28 +281,26 @@ export class TestingComponent implements OnInit, AfterViewInit {
 
     onFinalResultsGivenChange() {
         if (this.isCoupleDiscordantDisabled) {
-            console.log('hehe');
             this.formTesting.controls.coupleDiscordant.disable({onlySelf: true});
         } else {
             this.formTesting.controls.coupleDiscordant.enable({onlySelf: false});
             this.formTesting.controls.coupleDiscordant.setValue('');
-            console.log('haha');
         }
     }
 
     onAcceptedPartnerListingChange() {
         const acceptedPartnerListing = this.formTesting.controls.acceptedPartnerListing.value;
-        const optionSelected = this.yesNoOptions.filter(function( obj ) {
+        const optionSelected = this.yesNoNA.filter(function( obj ) {
             return obj.itemId == acceptedPartnerListing;
         });
 
         if (optionSelected[0].itemName == 'Yes') {
-            // this.isReasonsDeclinedListingDisabled = true;
             this.formTesting.controls.reasonsDeclinePartnerListing.disable({onlySelf: true});
-        } else {
-            // this.isReasonsDeclinedListingDisabled = false;
-            // this.finalTestingResults.reasonsDeclinePartnerListing = null;
+        } else if (optionSelected[0].itemName == 'No') {
             this.formTesting.controls.reasonsDeclinePartnerListing.enable({onlySelf: false});
+            this.formTesting.controls.reasonsDeclinePartnerListing.setValue('');
+        } else if (optionSelected[0].itemName == 'N/A') {
+            this.formTesting.controls.reasonsDeclinePartnerListing.disable({onlySelf: true});
             this.formTesting.controls.reasonsDeclinePartnerListing.setValue('');
         }
     }

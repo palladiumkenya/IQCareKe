@@ -226,3 +226,6 @@ wwwroot/
 /*.con
 /Presentation/aspnet_client
 *.zip
+/IQCare.Release
+/build-jn.bat
+/Presentation/IQCare.Web/Images

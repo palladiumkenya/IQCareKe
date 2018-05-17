@@ -35,6 +35,17 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Encounter
                     await _unitOfWork.Repository<AppStateStore>().AddAsync(appStateStore);
                     await _unitOfWork.SaveAsync();
 
+                    if (!string.IsNullOrWhiteSpace(request.AppStateObject))
+                    {
+                        await _unitOfWork.Repository<AppStateStoreObjects>().AddAsync(new AppStateStoreObjects()
+                        {
+                            AppStateStoreId = appStateStore.Id,
+                            AppStateObject = request.AppStateObject
+                            
+                        });
+                        await _unitOfWork.SaveAsync();
+                    }
+
                     _unitOfWork.Dispose();
 
                     return Result<AddAppStoreResponse>.Valid(new AddAppStoreResponse()

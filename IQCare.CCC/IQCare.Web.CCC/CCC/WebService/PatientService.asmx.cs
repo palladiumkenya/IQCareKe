@@ -123,8 +123,9 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod]
-        public string AddPatientAppointment(int patientId, int patientMasterVisitId, DateTime appointmentDate, string description, int reasonId, int serviceAreaId, int statusId, int differentiatedCareId)
+        public string AddPatientAppointment(int patientId, int patientMasterVisitId, DateTime appointmentDate, string description, int reasonId, int serviceAreaId, int statusId, int differentiatedCareId, int userId)
         {
+            
             PatientAppointment patientAppointment = new PatientAppointment()
             {
                 PatientId = patientId,
@@ -135,6 +136,8 @@ namespace IQCare.Web.CCC.WebService
                 ReasonId = reasonId,
                 ServiceAreaId = serviceAreaId,
                 StatusId = statusId,
+                CreatedBy = userId,
+                CreateDate = DateTime.Now
             };
             try
             {

@@ -1,4 +1,5 @@
 ﻿using Application.Presentation;
+using Entities.CCC.Encounter;
 using Entities.CCC.Lookup;
 using Entities.CCC.Triage;
 using Interface.CCC.Lookup;
@@ -66,6 +67,12 @@ namespace IQCare.Web.CCC.UC
             else
             {
                 Session["ExistingRecordPatientMasterVisitID"] = "0";
+
+                ///////Check if visit is scheduled
+                if (PEL.isVisitScheduled(HttpContext.Current.Session["PatientPK"].ToString()) > 0)
+                    vsYes.Checked = true;
+                else
+                    vsNo.Checked = true;
             }
 
             // Get Gender
@@ -165,8 +172,8 @@ namespace IQCare.Web.CCC.UC
 
                 //if (Convert.ToInt32(Session["PatientMasterVisitId"]) > 0)
                 loadPatientEncounter();
-
-            }
+                
+            }   
         }
 
         private void loadPatientEncounter()

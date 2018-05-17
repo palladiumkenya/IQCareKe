@@ -81,20 +81,23 @@ namespace IQCare.Web.MasterPage
         protected void Page_Load(object sender, EventArgs e)
         {
             Page.Header.DataBind();
-            if (Session["AppLocation"] == null)
+            if (SystemSetting.CurrentSystem.Configured)
             {
-                IQCareMsgBox.Show("SessionExpired", this);
-                Response.Redirect("~/frmLogOff.aspx");
-            }
-            if (Session.Count == 0)
-            {
-                IQCareMsgBox.Show("SessionExpired", this);
-                Response.Redirect("~/frmLogOff.aspx");
-            }
-            if ((Session["AppUserID"] == null && Session["AppUserID"].ToString() == "") || CurrentSession.Current == null)
-            {
-                IQCareMsgBox.Show("SessionExpired", this);
-                Response.Redirect("~/frmLogOff.aspx");
+                if (Session["AppLocation"] == null)
+                {
+                    IQCareMsgBox.Show("SessionExpired", this);
+                    Response.Redirect("~/frmLogOff.aspx");
+                }
+                if (Session.Count == 0)
+                {
+                    IQCareMsgBox.Show("SessionExpired", this);
+                    Response.Redirect("~/frmLogOff.aspx");
+                }
+                if ((Session["AppUserID"] == null && Session["AppUserID"].ToString() == "") || CurrentSession.Current == null)
+                {
+                    IQCareMsgBox.Show("SessionExpired", this);
+                    Response.Redirect("~/frmLogOff.aspx");
+                }
             }
             lblTitle.Text = "International Quality Care Patient Management and Monitoring System [" + Session["AppLocation"].ToString() + "]";
             string url = Request.RawUrl.ToString();

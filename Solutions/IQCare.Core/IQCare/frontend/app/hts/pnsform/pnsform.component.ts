@@ -7,6 +7,8 @@ import * as Consent from '../../shared/reducers/app.states';
 import {select, Store} from '@ngrx/store';
 import {NotificationService} from '../../shared/_services/notification.service';
 import {SnotifyService} from 'ng-snotify';
+import {AppStateService} from '../../shared/_services/appstate.service';
+import {AppEnum} from '../../shared/reducers/app.enum';
 
 @Component({
   selector: 'app-pnsform',
@@ -25,8 +27,11 @@ export class PnsformComponent implements OnInit {
     pnsScreeningCategories: any[];
     isNotIPVDone: boolean = false;
     ishivStatusPositive: boolean = false;
+    isPnsAcceptedDisabled: boolean = true;
 
     serviceAreaId: number = 2;
+    maxDate: any;
+    minDate: any;
 
     constructor(private pnsService: PnsService,
                 private router: Router,
@@ -34,7 +39,11 @@ export class PnsformComponent implements OnInit {
                 public zone: NgZone,
                 private store: Store<AppState>,
                 private snotifyService: SnotifyService,
-                private notificationService: NotificationService) { }
+                private notificationService: NotificationService,
+                private appStateService: AppStateService) {
+        this.maxDate = new Date();
+        this.minDate = new Date();
+    }
 
     ngOnInit() {
         this.pnsForm = new Pnsform();
@@ -46,7 +55,6 @@ export class PnsformComponent implements OnInit {
 
     public getScreeningCategories() {
         this.pnsService.getScreeningCategories().subscribe(data => {
-            // console.log(data['lookupItems']);
             const options = data['lookupItems'];
             for (let i = 0; i < options.length; i++) {
                 if (options[i].key == 'PnsScreening') {
@@ -58,10 +66,8 @@ export class PnsformComponent implements OnInit {
 
     public getPnsOptions() {
         this.pnsService.getCustomOptions().subscribe(data => {
-            // console.log(data);
             const options = data['lookupItems'];
             for (let i = 0; i < options.length; i++) {
-                // console.log(options[i]);
                 if (options[i].key == 'YesNoNA') {
                     this.yesNoNAOptions = options[i].value;
                 } else if (options[i].key == 'YesNo') {
@@ -78,6 +84,13 @@ export class PnsformComponent implements OnInit {
                     this.pnsApproachOptions = options[i].value;
                 }
             }
+
+            const pnsAcceptedOption = this.yesNoOptions.filter(function( obj ) {
+                return obj.itemName == 'Yes';
+            });
+
+            this.pnsForm.pnsAccepted = pnsAcceptedOption[0]['itemId'];
+
         }, err => {
            console.log(err);
         });
@@ -96,23 +109,32 @@ export class PnsformComponent implements OnInit {
             pnsScreening['screeningTypeId'] = this.pnsScreeningCategories[i]['masterId'];
             pnsScreening['screeningCategoryId'] = this.pnsScreeningCategories[i]['itemId'];
 
-            if (this.pnsScreeningCategories[i]['itemName'] == 'PnsPhysicallyHurt') {
+            if (this.pnsScreeningCategories[i]['itemName'] == 'PnsPhysicallyHurt' && this.pnsForm.partnerPhysicallyHurt &&
+                this.pnsForm.partnerPhysicallyHurt != 0) {
                 pnsScreening['screeningValueId'] = this.pnsForm.partnerPhysicallyHurt;
-            } else if (this.pnsScreeningCategories[i]['itemName'] == 'PnsThreatenedHurt') {
+            } else if (this.pnsScreeningCategories[i]['itemName'] == 'PnsThreatenedHurt' && this.pnsForm.partnerThreatenedHurt &&
+                this.pnsForm.partnerThreatenedHurt != 0) {
                 pnsScreening['screeningValueId'] = this.pnsForm.partnerThreatenedHurt;
-            } else if (this.pnsScreeningCategories[i]['itemName'] == 'PnsForcedSexual') {
+            } else if (this.pnsScreeningCategories[i]['itemName'] == 'PnsForcedSexual' && this.pnsForm.forcedSexualUncomfortable &&
+                this.pnsForm.forcedSexualUncomfortable != 0) {
                 pnsScreening['screeningValueId'] = this.pnsForm.forcedSexualUncomfortable;
-            } else if (this.pnsScreeningCategories[i]['itemName'] == 'IPVOutcome') {
+            } else if (this.pnsScreeningCategories[i]['itemName'] == 'IPVOutcome' && this.pnsForm.ipvOutcome &&
+                this.pnsForm.ipvOutcome != 0) {
                 pnsScreening['screeningValueId'] = this.pnsForm.ipvOutcome;
-            } else if (this.pnsScreeningCategories[i]['itemName'] == 'PnsRelationship') {
+            } else if (this.pnsScreeningCategories[i]['itemName'] == 'PnsRelationship' && this.pnsForm.pnsRelationship &&
+                this.pnsForm.pnsRelationship != 0) {
                 pnsScreening['screeningValueId'] = this.pnsForm.pnsRelationship;
-            } else if (this.pnsScreeningCategories[i]['itemName'] == 'LivingWithClient') {
+            } else if (this.pnsScreeningCategories[i]['itemName'] == 'LivingWithClient' && this.pnsForm.livingWithClient &&
+                this.pnsForm.livingWithClient != 0) {
                 pnsScreening['screeningValueId'] = this.pnsForm.livingWithClient;
-            } else if (this.pnsScreeningCategories[i]['itemName'] == 'HIVStatus') {
+            } else if (this.pnsScreeningCategories[i]['itemName'] == 'HIVStatus' && this.pnsForm.hivStatus &&
+                this.pnsForm.hivStatus != 0) {
                 pnsScreening['screeningValueId'] = this.pnsForm.hivStatus;
-            } else if (this.pnsScreeningCategories[i]['itemName'] == 'PNSApproach') {
+            } else if (this.pnsScreeningCategories[i]['itemName'] == 'PNSApproach' && this.pnsForm.pnsApproach &&
+                this.pnsForm.pnsApproach != 0) {
                 pnsScreening['screeningValueId'] = this.pnsForm.pnsApproach;
-            } else if (this.pnsScreeningCategories[i]['itemName'] == 'EligibleTesting') {
+            } else if (this.pnsScreeningCategories[i]['itemName'] == 'EligibleTesting' && this.pnsForm.eligibleTesting &&
+                this.pnsForm.eligibleTesting != 0) {
                 pnsScreening['screeningValueId'] = this.pnsForm.eligibleTesting;
             }
 
@@ -127,6 +149,11 @@ export class PnsformComponent implements OnInit {
             };
 
             this.store.dispatch(new Consent.IsPnsScreened(JSON.stringify(partnerPnsScreened)));
+            this.appStateService.addAppState(AppEnum.PNS_SCREENED, JSON.parse(localStorage.getItem('personId')),
+                JSON.parse(localStorage.getItem('patientId')), null, null, JSON.stringify({
+                'partnerId': this.pnsForm.personId,
+                'pnsScreened': true
+            })).subscribe();
 
             this.store.pipe(select('app')).subscribe(res => {
                 localStorage.setItem('store', JSON.stringify(res));
@@ -155,12 +182,9 @@ export class PnsformComponent implements OnInit {
         } else {
             this.isNotIPVDone = false;
         }
-        // console.log(optionSelected);
     }
 
     public onHivStatus(val: number) {
-        console.log(val);
-
         const optionSelected = this.hivStatusOptions.filter(function (obj) {
             return obj.itemId == val;
         });

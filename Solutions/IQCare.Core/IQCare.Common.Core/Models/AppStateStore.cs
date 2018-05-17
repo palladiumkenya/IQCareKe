@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace IQCare.Common.Core.Models
 {
@@ -12,5 +13,7 @@ namespace IQCare.Common.Core.Models
         public int AppStateId { get; set; }
         public DateTime StatusDate { get; set; }
         public bool DeleteFlag { get; set; }
+
+        public virtual ICollection<AppStateStoreObjects> AppStateStoreObjects { get; set; }
     }
 }

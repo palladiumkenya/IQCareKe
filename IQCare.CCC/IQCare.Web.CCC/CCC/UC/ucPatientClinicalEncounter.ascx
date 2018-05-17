@@ -812,7 +812,7 @@
 												<label class="control-label pull-left">Dose</label>
 											</div>
 											<div class="col-md-12">
-												<asp:TextBox runat="server" ID="treatmentDose" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="dose.."></asp:TextBox>
+												<asp:TextBox runat="server" ID="treatmentDose" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="dose.." data-parsley-min="1"></asp:TextBox>
 											</div>
 										</div>
 										
@@ -2217,6 +2217,77 @@
 	        }
 	    });*/
 
+        $('#differentiatedModal').on('show.bs.modal', function (e) {
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientEncounterService.asmx/DifferentiatedCareParameters",
+                //data: "",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    var serverData = data.d;
+                    var radioArtRegimenYes = document.getElementById("ArtRegimenYes");
+                    var radioArtRegimenNo = document.getElementById("ArtRegimenNo");
+
+                    var radioOIYes = document.getElementById("OiYes");
+                    var radioOINo = document.getElementById("OiNo");
+
+                    var radioVisitsAdherantYes = document.getElementById("VisitsAdherantYes");
+                    var radioVisitsAdherantNo = document.getElementById("VisitsAdherantNo");
+
+                    var radioVlCopiesYes = document.getElementById("VlCopiesYes");
+                    var radioVlCopiesNo = document.getElementById("VlCopiesNo");
+
+                    var radioIptYes = document.getElementById("IptYes");
+                    var radioIptNo = document.getElementById("IptNo");
+
+                    var radioBmiYes = document.getElementById("BmiYes");
+                    var radioBmiNo = document.getElementById("BmiNo");
+
+                    var radioAgeYes = document.getElementById("AgeYes");
+                    var radioAgeNo = document.getElementById("AgeNo");
+                    
+                    var radioHealthcareConcernsYes = document.getElementById("HealthcareConcernsYes");
+                    var radioHealthcareConcernsNo = document.getElementById("HealthcareConcernsNo");
+        
+                    if (serverData[0][0] == 1)
+                        radioArtRegimenYes.checked = true;
+                    else
+                        radioArtRegimenNo.checked = true;
+
+                    if (serverData[0][1] == 0)
+                        radioOIYes.checked = true;
+                    else
+                        radioOINo.checked = true;
+
+                    if (serverData[0][2] < 1000)
+                        radioVlCopiesYes.checked = true;
+                    else
+                        radioVlCopiesNo.checked = true;
+
+                    if (serverData[0][3] >= 180)
+                        radioIptYes.checked = true;
+                    else
+                        radioIptNo.checked = true;
+
+                    if (serverData[0][4] >= 18.5)
+                        radioBmiYes.checked = true;
+                    else
+                        radioBmiNo.checked = true;
+
+                    if (serverData[0][5] >= 20)
+                        radioAgeYes.checked = true;
+                    else
+                        radioAgeNo.checked = true;
+                    
+                    
+                },
+                error: function (response) {
+                    toastr
+                        .error("Error in Fetching Categorization Parameters Data " + response.d);
+                }
+            });
+        })
 
 		//populate options for ADverEvents;
 		var mastrName = 'AdverseEventOutcome';
@@ -3770,12 +3841,13 @@
 		var differentiatedCareId = $("#<%=DifferentiatedCare.ClientID%>").val();
 		/*if (status === '') { status = null }*/
 		var appointmentDate = $("#<%=AppointmentDate.ClientID%>").val();
-		var patientId = <%=PatientId%>;
-		var patientMasterVisitId = <%=PatientMasterVisitId%>;
+        var patientId = <%=PatientId%>;
+        var userId = <%=UserId%>;
+        var patientMasterVisitId = <%=PatientMasterVisitId%>;
 		$.ajax({
 			type: "POST",
 			url: "../WebService/PatientService.asmx/AddPatientAppointment",
-			data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','appointmentDate': '" + appointmentDate + "','description': '" + description + "','reasonId': '" + reason + "','serviceAreaId': '" + serviceArea + "','statusId': '" + status + "','differentiatedCareId': '" + differentiatedCareId + "'}",
+            data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','appointmentDate': '" + appointmentDate + "','description': '" + description + "','reasonId': '" + reason + "','serviceAreaId': '" + serviceArea + "','statusId': '" + status + "','differentiatedCareId': '" + differentiatedCareId + "','userId': " + userId + "}",
 			contentType: "application/json; charset=utf-8",
 			dataType: "json",
 			success: function (response) {
@@ -3823,7 +3895,7 @@
 			$("#IcfActionForm").hide();
             $("#tbscreeningstatus option").filter(function () { return $(this).text() === 'TBRx'; }).prop('selected', true);
 			$("#onIpt").prop("disabled", true);
-			$("#onIpt").val("");
+            $("#onIpt").val("False");
 			//$("#EverBeenOnIpt").prop("disabled", true);
 			// $("#EverBeenOnIpt").val("");
         } else {

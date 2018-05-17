@@ -100,7 +100,7 @@ namespace IQCare.Web
             {
                 if (app.Context.CurrentHandler is Page)
                 {
-                    if (CurrentSession.Current == null || Session["AppUserId"] == null)
+                    if( (CurrentSession.Current == null || Session["AppUserId"] == null)&& SystemSetting.CurrentSystem.Configured)
                     {
 
                         if (!Context.Request.Url.AbsoluteUri.ToLower().Contains("frmlogin.aspx"))

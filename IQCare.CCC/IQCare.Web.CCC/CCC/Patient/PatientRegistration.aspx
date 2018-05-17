@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CCC/Greencard.Master" AutoEventWireup="true" CodeBehind="PatientRegistration.aspx.cs" Inherits="IQCare.Web.CCC.Patient.PatientRegistration" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
-	<div class="=col-md-12 col-sm-12 col-xs-12">
+    <div class="=col-md-12 col-sm-12 col-xs-12">
 		
 		<div class="col-md-12">
 			 <div class="bs-callout bs-callout-danger hidden">
@@ -1443,13 +1443,13 @@
 				});
 
 				function duplicateCheck() {
-					var personFname = $("#<%=personFname.ClientID%>").val();
-					var personMName = $("#<%=personMName.ClientID%>").val();
-					var personLName = $("#<%=personLName.ClientID%>").val();
-					var dateOfBirth = $('#MyDateOfBirth').datepicker('getDate');
+					var personFname = escape($("#<%=personFname.ClientID%>").val().trim());
+					var personMName = escape($("#<%=personMName.ClientID%>").val().trim());
+					var personLName =escape ($("#<%=personLName.ClientID%>").val().trim());
+					var dateOfBirth = escape($('#MyDateOfBirth').datepicker('getDate'));
 					var PatientId = '<%=Session["PatientEditId"]%>';
 					//console.log(PatientId);
-
+                    var sex =  $("#<%=Gender.ClientID%>").find(":selected").val().trim();
 					var dob = moment(dateOfBirth).format('DD-MMM-YYYY');
 					//console.log(dob);
 
@@ -1457,13 +1457,18 @@
 					//console.log(personMName);
 					//console.log(personLName);
 
-					if ((PatientId == "" || PatientId == 0) && (personFname != null && personFname != "") && (personLName != null && personLName != "")) {
+                    if ((PatientId == "" || PatientId == 0)
+                        && (personFname != null && personFname != "")
+                        && (personLName != null && personLName != "")
+                        &&(sex !=null && sex!="" && sex!="0")
+                    )
+                    {
 
 						$.ajax({
 							type: "POST",
 							url: "../WebService/PersonService.asmx/GetPatientSearchresults",
 							contentType: "application/json; charset=utf-8",
-							data: "{'firstName': '" + personFname + "', 'middleName': '"+ personMName +"', 'lastName':'" + personLName + "','dob':'" + dob + "'}",
+							data: "{'firstName': '" + personFname + "', 'middleName': '"+ personMName +"', 'lastName':'" + personLName + "','dob':'" + dob + "','sex':'"+sex+"'}",
 							dataType: "json",
 							success: function (response) {
 								var patientDetails = JSON.parse(response.d);

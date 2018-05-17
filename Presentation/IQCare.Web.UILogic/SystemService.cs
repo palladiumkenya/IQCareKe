@@ -48,7 +48,7 @@ namespace IQCare.Web.UILogic
         /// The response code
         /// </summary>
         public readonly SystemSettingResponseCode responseCode;
-
+        public readonly bool Configured;
         /// <summary>
         /// Returns true if ... is valid.
         /// </summary>
@@ -106,11 +106,13 @@ namespace IQCare.Web.UILogic
 
                               }
                  ).ToList();
+                Configured = true;
             }
             else
             {
                 this.responseCode = SystemSettingResponseCode.NoFacilityDefined;
                 this.isValid = false;
+                Configured = false;
             }
             if (version.AppVersion != GblIQCare.AppVersion || version.ReleaseDate.ToString("dd-MMM-yyyy") != GblIQCare.ReleaseDate)
             {
@@ -125,7 +127,7 @@ namespace IQCare.Web.UILogic
         /// </summary>
         /// <param name="StateInfo">The state information.</param>
         public static void GenerateCache(object StateInfo)
-        {try
+       {try
             {
                 string xmlPath = GblIQCare.GetXMLPath();
                 IIQCareSystem DateManager = (IIQCareSystem)ObjectFactory.CreateInstance("BusinessProcess.Security.BIQCareSystem, BusinessProcess.Security");

@@ -39,8 +39,6 @@ namespace IQCare
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            
-
             //Context
             services.AddDatabase(Configuration);
             services.AddCommonDatabase(Configuration);

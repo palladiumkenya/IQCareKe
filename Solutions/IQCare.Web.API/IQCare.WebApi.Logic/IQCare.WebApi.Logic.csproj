@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>IQCare.WebApi.Logic</RootNamespace>
     <AssemblyName>IQCare.WebApi.Logic</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TrunkDir>..\..\..\</TrunkDir>
     <WebDir Condition=" '$(WebDir)' == '' ">$(TrunkDir)package\web\bin\</WebDir>
@@ -47,12 +47,6 @@
     </Reference>
     <Reference Include="AutoMapper">
       <HintPath>..\..\..\Library\AutoMapper.dll</HintPath>
-    </Reference>
-    <Reference Include="DataAccess.Base">
-      <HintPath>..\..\..\References\DataAccess.Base.dll</HintPath>
-    </Reference>
-    <Reference Include="DataAccess.Context">
-      <HintPath>..\..\..\References\DataAccess.Context.dll</HintPath>
     </Reference>
     <Reference Include="Entities.Administration, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -105,6 +99,10 @@
     <Reference Include="IQCare.Events, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\References\IQCare.Events.dll</HintPath>
+    </Reference>
+    <Reference Include="IQCare.Web.UILogic, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\IQCare.Web.UILogic.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />

@@ -214,9 +214,9 @@ namespace IQCare.Web.CCC.UC
                 }
                 else
                 {
-                    lblLMP.Text = "N/A";
-                    lblEDD.Text = "N/A";
-                    lblPregnancyStatus.Text = "Not Pregnannt";
+                    //lblLMP.Text = "N/A";
+                    //lblEDD.Text = "N/A";
+                    lblPregnancyStatus.Text = "<span class='label label-success'> Not Pregnant </span>";
                 }
                 
             }

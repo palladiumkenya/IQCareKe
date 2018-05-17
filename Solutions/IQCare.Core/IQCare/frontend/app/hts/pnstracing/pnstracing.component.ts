@@ -6,6 +6,8 @@ import {Store} from '@ngrx/store';
 import * as Consent from '../../shared/reducers/app.states';
 import {NotificationService} from '../../shared/_services/notification.service';
 import {SnotifyService} from 'ng-snotify';
+import {AppEnum} from '../../shared/reducers/app.enum';
+import {AppStateService} from '../../shared/_services/appstate.service';
 
 @Component({
   selector: 'app-pnstracing',
@@ -17,6 +19,10 @@ export class PnsTracingComponent implements OnInit {
     yesNoOptions: any[];
     tracingModeOptions: any[];
     pnsTracingOutcome: any[];
+    tracingTypeOptions: any[];
+
+    maxDate: any;
+    minDate: any;
 
     constructor(private pnsTracingService: PnstracingService,
                 private router: Router,
@@ -24,7 +30,11 @@ export class PnsTracingComponent implements OnInit {
                 public zone: NgZone,
                 private store: Store<AppState>,
                 private snotifyService: SnotifyService,
-                private notificationService: NotificationService) { }
+                private notificationService: NotificationService,
+                private appStateService: AppStateService) {
+        this.maxDate = new Date();
+        this.minDate = new Date();
+    }
 
     ngOnInit() {
         this.pnsTracing = new PnsTracing();
@@ -37,7 +47,6 @@ export class PnsTracingComponent implements OnInit {
 
     public getTracingOptions() {
         this.pnsTracingService.getTracingOptions().subscribe(data => {
-            console.log(data);
             const options = data['lookupItems'];
             for (let i = 0; i < options.length; i++) {
                 if (options[i].key == 'YesNo') {
@@ -46,6 +55,8 @@ export class PnsTracingComponent implements OnInit {
                     this.tracingModeOptions = options[i].value;
                 } else if (options[i].key == 'PnsTracingOutcome') {
                     this.pnsTracingOutcome = options[i].value;
+                } else if (options[i].key == 'TracingType') {
+                    this.tracingTypeOptions = options[i].value;
                 }
             }
         });
@@ -57,13 +68,24 @@ export class PnsTracingComponent implements OnInit {
 
         console.log(this.pnsTracing);
 
+        const tracingTypeValue = this.tracingTypeOptions.filter(function (obj) {
+            return obj.itemName == 'Partner';
+        });
+
+        const tracingType = tracingTypeValue[0]['itemId'];
+        this.pnsTracing.TracingType = tracingType;
+
         this.pnsTracingService.addPnsTracing(this.pnsTracing).subscribe(data => {
-            console.log(data);
             const partnerPnsTraced = {
                 'partnerId': this.pnsTracing.PersonId,
                 'pnsTraced': true
             };
             this.store.dispatch(new Consent.IsPnsTracingDone(JSON.stringify(partnerPnsTraced)));
+            this.appStateService.addAppState(AppEnum.PNS_TRACING, JSON.parse(localStorage.getItem('personId')),
+                JSON.parse(localStorage.getItem('patientId')), null, null, JSON.stringify({
+                    'partnerId': this.pnsTracing.PersonId,
+                    'pnsTraced': true
+                })).subscribe();
 
             this.snotifyService.success('Successful saving PNS screening',
                 'PNS Tracing', this.notificationService.getConfig());

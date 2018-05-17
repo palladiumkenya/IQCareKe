@@ -22,11 +22,6 @@ export class EncounterComponent implements OnInit {
     encounter: Encounter;
     form: FormGroup;
 
-    isNoOfMonths: boolean = true;
-    isDisabilitiesEnabled: boolean = true;
-    isClientTestedDisabled: boolean = false;
-    isStrategyDisabled: boolean = false;
-
     entryPoints: any[];
     yesNoOptions: any[];
     disabilities: any[];
@@ -38,6 +33,8 @@ export class EncounterComponent implements OnInit {
     hivTestKits: any[];
 
     maxDate: any;
+
+    patientMasterVisitId: number;
 
 
     constructor(private _encounterService: EncounterService,
@@ -84,16 +81,79 @@ export class EncounterComponent implements OnInit {
         });
     }
 
+    setEncounterValuesForUpdate() {
+        if (localStorage['editEncounterId']) {
+            this._encounterService.getEncounter(JSON.parse(localStorage.getItem('editEncounterId'))).subscribe((res) => {
+                console.log(res);
+                if (res['encounter'].length > 0) {
+                    const encounterValue = res['encounter'][0];
+                    let hasDisability = this.yesNoOptions.find(obj => obj.itemName == 'No').itemId;
+                    const consent = res['consent'][0]['consentValue'];
+                    let tbScreening = '';
+                    if (res['tbStatus'].length > 0) {
+                        tbScreening = res['tbStatus'][0]['screeningValueId'];
+                    }
+
+                    const disabilities = [];
+                    if (res['disabilities'].length > 0) {
+                        const optionValue = this.yesNoOptions.find(obj => obj.itemName == 'Yes').itemId;
+                        hasDisability = optionValue;
+                        for (let i = 0; i < res['disabilities'].length; i++) {
+                            disabilities.push(res['disabilities'][i]['disabilityId']);
+                        }
+                    }
+                    let patientEncounter;
+                    if (res['patientEncounter'].length > 0) {
+                        patientEncounter = res['patientEncounter'][0];
+                    }
+
+                    let encounterDate;
+                    if (patientEncounter) {
+                        encounterDate = patientEncounter.encounterStartTime;
+                        this.encounter.PatientId = patientEncounter.patientId;
+                        this.patientMasterVisitId = patientEncounter.patientMasterVisitId;
+                    }
+
+                    this.form.setValue({
+                        EncounterType: encounterValue.encounterType,
+                        EncounterDate: encounterDate,
+                        EverTested: encounterValue.everTested,
+                        MonthsSinceLastTest: encounterValue.monthsSinceLastTest,
+                        TestEntryPoint: encounterValue.testEntryPoint,
+                        EverSelfTested: encounterValue.everSelfTested,
+                        HasDisability: hasDisability,
+                        Consent: consent,
+                        TestedAs: encounterValue.testedAs,
+                        TestingStrategy: encounterValue.testingStrategy,
+                        TbScreening: tbScreening,
+                        EncounterRemarks: encounterValue.encounterRemarks,
+                        Disabilities: disabilities,
+
+                    });
+
+                    this.encounter.PersonId = encounterValue['personId'];
+                    this.encounter.ProviderId = encounterValue['providerId'];
+                    this.encounter.PatientEncounterID = encounterValue['patientEncounterID'];
+
+
+                    this.form.controls.Consent.disable({onlySelf: true});
+                    this.everTestedChanged();
+                    this.hasDisabilityChanged();
+                    this.onConsentChanged();
+
+                    console.log(this.encounter);
+                }
+            });
+        }
+    }
+
     validate() {
-        // console.log(this.form);
         if (this.form.valid) {
             this.encounter = {...this.encounter, ...this.form.value};
             if (!this.encounter.Disabilities) {
                 this.encounter.Disabilities = [];
             }
             this.onSubmitForm();
-        } else {
-            return false;
         }
     }
 
@@ -112,10 +172,11 @@ export class EncounterComponent implements OnInit {
                     this.testedAs = options[i].value;
                 } else if (options[i].key == 'Strategy') {
                     this.strategyOptions = options[i].value;
-                } else if (options[i].key == 'TBStatus') {
+                } else if (options[i].key == 'TbScreening') {
                     this.tbStatus = options[i].value;
                 }
             }
+            this.setEncounterValuesForUpdate();
         });
     }
 
@@ -126,7 +187,26 @@ export class EncounterComponent implements OnInit {
     }
 
     onSubmitForm() {
-        // console.log(this.encounter);
+        if (localStorage['editEncounterId']) {
+            console.log('edit encounter');
+            this.editEncounter(JSON.parse(localStorage['editEncounterId']), this.patientMasterVisitId);
+        } else {
+            this.addNewEncounter();
+        }
+    }
+
+    editEncounter(encounterID: number, patientMasterVisitId: number) {
+        this._encounterService.editEncounter(this.encounter, encounterID, patientMasterVisitId).subscribe((res) => {
+            this.snotifyService.success('Successfully edited encounter', 'Encounter', this.notificationService.getConfig());
+            this.zone.run(() => { this.router.navigate(['/registration/home'], {relativeTo: this.route }); });
+        }, (err) => {
+            this.snotifyService.error('Error editing encounter ' + err, 'Encounter', this.notificationService.getConfig());
+        }, () => {
+            // this.zone.run(() => { this.router.navigate(['/hts/testing'], {relativeTo: this.route }); });
+        });
+    }
+
+    addNewEncounter() {
         const isConsented = this.encounter.Consent;
         const testedAs = this.encounter.TestedAs;
 
@@ -153,6 +233,7 @@ export class EncounterComponent implements OnInit {
 
             this.snotifyService.success('Successfully saved encounter', 'Encounter', this.notificationService.getConfig());
 
+            localStorage.removeItem('editEncounterId');
             if (optionSelected[0]['itemName'] == 'Yes') {
                 this.store.dispatch(new Consent.ConsentTesting(true));
                 this.appStateService.addAppState(AppEnum.CONSENT_TESTING, this.encounter.PersonId,
@@ -165,8 +246,7 @@ export class EncounterComponent implements OnInit {
             }
 
         }, err => {
-            console.log(err);
-            this.snotifyService.error('Error saving encounter', 'Encounter', this.notificationService.getConfig());
+            this.snotifyService.error('Error saving encounter ' + err, 'Encounter', this.notificationService.getConfig());
         });
     }
 

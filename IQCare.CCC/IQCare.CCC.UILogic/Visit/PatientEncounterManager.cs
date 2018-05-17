@@ -111,5 +111,18 @@ namespace IQCare.CCC.UILogic.Visit
             }
             return encounterId;
         }
+
+        public PatientEncounter GetEncounterIfExists(int patientId, int patientMasterVisitId, int encounterTypeId)
+        {
+            try
+            {
+                return _patientEncounterManager.GetEncounterIfExists(patientId, patientMasterVisitId, encounterTypeId);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

@@ -1023,18 +1023,24 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string GetPatientSearchresults(string firstName,string middleName,string lastName, string dob)
+        public string GetPatientSearchresults(string firstName,string middleName,string lastName, string dob,string sex)
         {
             try
             {
                 var personLookUpManager = new PersonLookUpManager();
                 //var dobb = "";
+           
+                if (dob != "Invalid Date" && firstName != "" && lastName != "" && sex!="0")
+                {
+                    firstName = GlobalObject.unescape(firstName);
+                    middleName = GlobalObject.unescape(middleName);
+                    lastName = GlobalObject.unescape(lastName);
+                    dob = GlobalObject.unescape(dob);
+                    var results = personLookUpManager.GetPersonSearchResults(firstName, middleName, lastName, dob,int.Parse(sex));
+                    var patientLookup = new PatientLookupManager();
 
-                var results = personLookUpManager.GetPersonSearchResults(firstName, middleName, lastName, dob);
-                var patientLookup = new PatientLookupManager();
-                
-                var newresults = results.Select(x => new string[]
-                   {
+                    var newresults = results.Select(x => new string[]
+                       {
                         x.Id.ToString(),
                         (x.FirstName),
                         (x.MiddleName),
@@ -1043,9 +1049,10 @@ namespace IQCare.Web.CCC.WebService
                         LookupLogic.GetLookupNameById(x.Sex),
                         patientLookup.IsPatientExists(x.Id).ToString(),
                         patientLookup.PatientId(x.Id).ToString()
-                   });
-
-                return new JavaScriptSerializer().Serialize(newresults);
+                       });
+                    return new JavaScriptSerializer().Serialize(newresults);
+                }
+                return string.Empty;
             }
             catch (Exception e)
             {

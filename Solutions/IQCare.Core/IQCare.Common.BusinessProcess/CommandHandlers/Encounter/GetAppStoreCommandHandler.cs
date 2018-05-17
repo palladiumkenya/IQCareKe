@@ -43,19 +43,19 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Encounter
 
                     if (request.PatientMasterVisitId != null)
                     {
-                        Expression<Func<AppStateStore, bool>> expressionPatientMasterVisitId = c => c.PatientMasterVisitId == request.PatientMasterVisitId;
+                        Expression<Func<AppStateStore, bool>> expressionPatientMasterVisitId = c => c.PatientMasterVisitId == request.PatientMasterVisitId || c.PatientMasterVisitId == null;
 
                         expressionFinal = PredicateBuilder.And(expressionFinal, expressionPatientMasterVisitId);
                     }
 
                     if (request.EncounterId != null)
                     {
-                        Expression<Func<AppStateStore, bool>> expressionEncounterId = c => c.EncounterId == request.EncounterId;
+                        Expression<Func<AppStateStore, bool>> expressionEncounterId = c => c.EncounterId == request.EncounterId || c.EncounterId == null;
 
                         expressionFinal = PredicateBuilder.And(expressionFinal, expressionEncounterId);
                     }
 
-                    var result = await _unitOfWork.Repository<AppStateStore>().Get(expressionFinal).ToListAsync();
+                    var result = await _unitOfWork.Repository<AppStateStore>().Get(expressionFinal).Include(b=>b.AppStateStoreObjects).ToListAsync();
 
                     _unitOfWork.Dispose();
 

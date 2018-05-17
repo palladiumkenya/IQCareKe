@@ -5,7 +5,7 @@ import {SnotifyPosition, SnotifyService, SnotifyToastConfig} from 'ng-snotify';
 export class NotificationService {
     timeout = 3000;
     position: SnotifyPosition = SnotifyPosition.centerCenter;
-    progressBar = true;
+    progressBar = false;
     closeClick = true;
     newTop = true;
 

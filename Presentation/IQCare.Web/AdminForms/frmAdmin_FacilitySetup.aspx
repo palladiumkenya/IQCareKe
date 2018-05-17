@@ -12,19 +12,19 @@
                     <td class="border pad5 whitebg" valign="top" width="100%" colspan="2">
                         <table width="100%">
                             <tr>
-                                <td align="right" style="width: 50%">
+                                <td style="vertical-align:top;width:100%; text-align:center">
                                     <label for="lblFacility_name" class="required">
                                         Facility/Satellite Name:</label>
-                                </td>
-                                <td align="left">
-                                    <asp:TextBox ID="txtfacilityname" runat="server" MaxLength="50"></asp:TextBox>
+                            <%--    </td>
+                                <td style="vertical-align:top;width:50%; text-align:left">--%>
+                                    <asp:TextBox ID="txtfacilityname" runat="server" MaxLength="150" Width="360px"></asp:TextBox>
                                 </td>
                             </tr>
                         </table>
                     </td>
                 </tr>
-                <tr>
-                    <td class="border pad5 whitebg" valign="top" width="50%">
+                <tr style="display:none">
+                    <td class="border pad5 whitebg" style="vertical-align:top;width:50%">
                         <table width="100%">
                             <tr>
                                 <td align="right" style="width: 50%">
@@ -32,12 +32,12 @@
                                         National Id:</label>
                                 </td>
                                 <td align="left">
-                                    <asp:TextBox ID="txtNationalId" runat="server" MaxLength="50"></asp:TextBox>
+                                    <asp:TextBox ID="txtNationalId" runat="server" MaxLength="50" Text="1"></asp:TextBox>
                                 </td>
                             </tr>
                         </table>
                     </td>
-                    <td class="border pad5 whitebg" valign="top" width="50%">
+                    <td class="border pad5 whitebg" style="vertical-align:top;width:50%">
                         <table width="100%">
                             <tr>
                                 <td align="right" style="width: 50%">
@@ -45,19 +45,19 @@
                                         Country number:</label>
                                 </td>
                                 <td align="left">
-                                    <asp:TextBox ID="txtcountryno" MaxLength="4" runat="server">695</asp:TextBox>
+                                    <asp:TextBox ID="txtcountryno" MaxLength="4" runat="server" Text="254"></asp:TextBox>
                                 </td>
                             </tr>
                         </table>
                     </td>
                 </tr>
                 <tr>
-                    <td class="border pad5 whitebg" valign="top" width="50%">
+                    <td class="border pad5 whitebg" style="vertical-align:top;width:50%">
                         <table width="100%">
                             <tr>
                                 <td align="right" style="width: 50%">
                                     <label id="lblPOS" runat="server" class="required" for="lblPOS">
-                                        Facility number:</label>
+                                        MFL Code :</label>
                                 </td>
                                 <td align="left">
                                     <asp:TextBox ID="txtLPTF" MaxLength="5" runat="server">11111</asp:TextBox>
@@ -73,7 +73,7 @@
                                         Satellite number:</label>
                                 </td>
                                 <td align="left">
-                                    <asp:TextBox ID="txtSatelliteID" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtSatelliteID" runat="server" Text="1"></asp:TextBox>
                                 </td>
                             </tr>
                         </table>
@@ -177,7 +177,7 @@
                             </tr>
                         </table>
                     </td>
-                    <td class="border pad5 whitebg" valign="top" width="50%">
+                    <td class="border pad5 whitebg" style="vertical-align:top;width:50%">
                         <table width="100%">
                             <tr>
                                 <td align="right" style="width: 50%">
