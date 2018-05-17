@@ -30,4 +30,4 @@ namespace IQCare.Records.UILogic
         }
     }
 }
-}
+

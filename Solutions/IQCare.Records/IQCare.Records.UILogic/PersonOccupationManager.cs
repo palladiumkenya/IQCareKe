@@ -90,5 +90,18 @@ namespace IQCare.Records.UILogic
             return _result;
         }
 
+        public int UpdateOccupation(PersonOccupation pm)
+        {
+            try
+            {
+                _result = _mgr.UpdatePersonOccupation(pm);
+                return _result;
+            }
+            catch (Exception e)
+            {
+                _msg = e.Message + ' ' + e.InnerException;
+                throw;
+            }
+        }
     }
 }

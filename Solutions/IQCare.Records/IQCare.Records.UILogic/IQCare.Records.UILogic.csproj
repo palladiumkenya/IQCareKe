@@ -16,7 +16,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\..\..\References\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -94,10 +94,6 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\BusinessProcess.Records\BusinessProcess.Records.csproj">
-      <Project>{9705fab1-aa70-4858-b03d-7691905e4f05}</Project>
-      <Name>BusinessProcess.Records</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Entities.Records\Entities.Records.csproj">
       <Project>{72731d7d-9c69-4d8f-ad7b-084dba4a0892}</Project>
       <Name>Entities.Records</Name>

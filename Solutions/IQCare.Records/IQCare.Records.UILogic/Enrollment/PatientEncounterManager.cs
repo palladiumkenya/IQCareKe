@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Interface.Records;
 using Interface.Records.Visit;
 using Application.Common;
-using BusinessProcess.Records.Enrollment;
 using Application.Presentation;
 using Entities.Records;
 

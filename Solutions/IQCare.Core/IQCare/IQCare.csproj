@@ -12,8 +12,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MediatR" Version="4.0.1" />
-    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="4.0.0" />
+    <PackageReference Include="MediatR" Version="4.1.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="4.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.2" />
     <PackageReference Include="Serilog.AspNetCore" Version="2.1.1" />
@@ -30,6 +31,36 @@
 
   <ItemGroup>
     <Content Include="**\*.ts" Exclude="$(GlobalExclude)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="frontend\app\records\records-routing.module.ts" />
+    <Content Remove="frontend\app\records\records.module.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="frontend\app\records\records-routing.module.ts" />
+    <None Remove="frontend\app\records\records.module.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Entities.Common">
+      <HintPath>..\..\..\References\netcoreapp2.0\Entities.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Entities.Records">
+      <HintPath>..\..\..\References\netcoreapp2.0\Entities.Records.dll</HintPath>
+    </Reference>
+    <Reference Include="IQCare.Records.UILogic">
+      <HintPath>..\..\..\References\netcoreapp2.0\IQCare.Records.UILogic.dll</HintPath>
+    </Reference>
+    <Reference Include="IQCareRecords.Common.BusinessProcess">
+      <HintPath>..\..\..\References\netcoreapp2.0\IQCareRecords.Common.BusinessProcess.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="frontend\app\records\records-routing.module.ts" />
+    <TypeScriptCompile Include="frontend\app\records\records.module.ts" />
   </ItemGroup>
 
 </Project>
