@@ -111,7 +111,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
 
                                     //Get consent to testing
                                     int consentValue = request.CLIENTS[i].ENCOUNTER.PRE_TEST.CONSENT;
-                                    var consentType = await _unitOfWork.Repository<LookupItemView>().Get(x => x.MasterName == "ConsentType" && x.ItemName == "ConsentToListPartners").FirstOrDefaultAsync();
+                                    var consentType = await _unitOfWork.Repository<LookupItemView>().Get(x => x.MasterName == "ConsentType" && x.ItemName == "ConsentToBeTested").FirstOrDefaultAsync();
                                     int consentTypeId = consentType != null ? consentType.ItemId : 0;
 
                                     //Get TBStatus masterId
@@ -402,7 +402,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
 
                                     //Get consent to testing
                                     int consentValue = request.CLIENTS[i].ENCOUNTER.PRE_TEST.CONSENT;
-                                    var consentType = await _unitOfWork.Repository<LookupItemView>().Get(x => x.MasterName == "ConsentType" && x.ItemName == "ConsentToListPartners").FirstOrDefaultAsync();
+                                    var consentType = await _unitOfWork.Repository<LookupItemView>().Get(x => x.MasterName == "ConsentType" && x.ItemName == "ConsentToBeTested").FirstOrDefaultAsync();
                                     int consentTypeId = consentType != null ? consentType.ItemId : 0;
 
                                     //Get TBStatus masterId
