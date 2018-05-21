@@ -771,7 +771,7 @@
 							<div class="panel panel-info">
 								<div class="panel-body">
 									<div class="col-md-12 form-group">
-										<label class="control-label pull-left">Chronic Illnesses & Comorbidities</label>
+										<label class="control-label pull-left">Chronic Illnesses</label>
 									</div>
 
 									<div class="col-md-12 form-group">

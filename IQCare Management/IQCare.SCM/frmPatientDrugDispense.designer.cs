@@ -81,6 +81,7 @@
             this.DispenseTab = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
             this.grpBoxLastDispense = new System.Windows.Forms.GroupBox();
+            this.lblAppointmentReason = new System.Windows.Forms.Label();
             this.labelOrderValue = new System.Windows.Forms.Label();
             this.labelOrdertext = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -295,7 +296,6 @@
             this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lblAppointmentReason = new System.Windows.Forms.Label();
             this.DispenseTab.SuspendLayout();
             this.panel1.SuspendLayout();
             this.grpBoxLastDispense.SuspendLayout();
@@ -398,6 +398,16 @@
             this.grpBoxLastDispense.TabIndex = 104;
             this.grpBoxLastDispense.TabStop = false;
             this.grpBoxLastDispense.Tag = "";
+            // 
+            // lblAppointmentReason
+            // 
+            this.lblAppointmentReason.AutoSize = true;
+            this.lblAppointmentReason.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAppointmentReason.Location = new System.Drawing.Point(538, 81);
+            this.lblAppointmentReason.Name = "lblAppointmentReason";
+            this.lblAppointmentReason.Size = new System.Drawing.Size(45, 13);
+            this.lblAppointmentReason.TabIndex = 97;
+            this.lblAppointmentReason.Text = "reason";
             // 
             // labelOrderValue
             // 
@@ -698,7 +708,7 @@
             this.cmdPeriodTaken.FormattingEnabled = true;
             this.cmdPeriodTaken.Location = new System.Drawing.Point(301, 45);
             this.cmdPeriodTaken.Name = "cmdPeriodTaken";
-            this.cmdPeriodTaken.Size = new System.Drawing.Size(87, 21);
+            this.cmdPeriodTaken.Size = new System.Drawing.Size(127, 21);
             this.cmdPeriodTaken.TabIndex = 3;
             this.cmdPeriodTaken.Tag = "ddlDropDownList";
             // 
@@ -3105,16 +3115,6 @@
             this.dataGridViewTextBoxColumn23.ReadOnly = true;
             this.dataGridViewTextBoxColumn23.Visible = false;
             this.dataGridViewTextBoxColumn23.Width = 10;
-            // 
-            // lblAppointmentReason
-            // 
-            this.lblAppointmentReason.AutoSize = true;
-            this.lblAppointmentReason.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAppointmentReason.Location = new System.Drawing.Point(538, 81);
-            this.lblAppointmentReason.Name = "lblAppointmentReason";
-            this.lblAppointmentReason.Size = new System.Drawing.Size(45, 13);
-            this.lblAppointmentReason.TabIndex = 97;
-            this.lblAppointmentReason.Text = "reason";
             // 
             // frmPatientDrugDispense
             // 
