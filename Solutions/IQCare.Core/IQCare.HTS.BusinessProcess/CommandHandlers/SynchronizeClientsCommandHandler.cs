@@ -233,7 +233,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                             int tracingType = enrollmentTracing.ItemId;
                                             string tracingRemarks = String.Empty;
 
-                                            for (int j = 0; j < request.CLIENTS[i].ENCOUNTER.TRACING.Count; j++)
+                                            for (int j = 0; request.CLIENTS[i].ENCOUNTER.TRACING != null && j < request.CLIENTS[i].ENCOUNTER.TRACING.Count; j++)
                                             {
                                                 DateTime tracingDate = DateTime.ParseExact(request.CLIENTS[i].ENCOUNTER.TRACING[j].TRACING_DATE, "yyyyMMdd", null);
                                                 int mode = request.CLIENTS[i].ENCOUNTER.TRACING[j].TRACING_MODE;
@@ -324,7 +324,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                         int tracingType = enrollmentTracing.ItemId;
                                         string tracingRemarks = String.Empty;
 
-                                        for (int j = 0; j < request.CLIENTS[i].ENCOUNTER.TRACING.Count; j++)
+                                        for (int j = 0; request.CLIENTS[i].ENCOUNTER.TRACING != null && j < request.CLIENTS[i].ENCOUNTER.TRACING.Count; j++)
                                         {
                                             DateTime tracingDate = DateTime.ParseExact(request.CLIENTS[i].ENCOUNTER.TRACING[j].TRACING_DATE, "yyyyMMdd", null);
                                             int mode = request.CLIENTS[i].ENCOUNTER.TRACING[j].TRACING_MODE;
@@ -490,7 +490,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                     int tracingType = enrollmentTracing.ItemId;
                                     string tracingRemarks = String.Empty;
 
-                                    for (int j = 0; j < request.CLIENTS[i].ENCOUNTER.TRACING.Count; j++)
+                                    for (int j = 0; request.CLIENTS[i].ENCOUNTER.TRACING != null && j < request.CLIENTS[i].ENCOUNTER.TRACING.Count; j++)
                                     {
                                         DateTime tracingDate = DateTime.ParseExact(request.CLIENTS[i].ENCOUNTER.TRACING[j].TRACING_DATE, "yyyyMMdd", null);
                                         int mode = request.CLIENTS[i].ENCOUNTER.TRACING[j].TRACING_MODE;

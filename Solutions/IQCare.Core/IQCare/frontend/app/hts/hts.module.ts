@@ -37,6 +37,7 @@ import {FamilyScreeningResolver} from './family-screening/familyScreening.resolv
 import {AppStateService} from '../shared/_services/appstate.service';
 import {ErrorHandlerService} from '../shared/_services/errorhandler.service';
 import {FamilyTracingResolver} from './family-tracing/familyTracing.resolver';
+import { ViewEncounterComponent } from './view-encounter/view-encounter.component';
 
 
 @NgModule({
@@ -62,7 +63,8 @@ import {FamilyTracingResolver} from './family-tracing/familyTracing.resolver';
     PnsPartnersComponent,
     TestingComponent,
       TestDialogComponent,
-      FamilyComponent
+      FamilyComponent,
+      ViewEncounterComponent
   ],
   exports: [
   ],
