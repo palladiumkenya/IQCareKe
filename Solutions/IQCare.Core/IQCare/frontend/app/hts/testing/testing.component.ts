@@ -272,6 +272,8 @@ export class TestingComponent implements OnInit, AfterViewInit {
 
                     this.snotifyService.success('Successfully saved', 'Testing', this.notificationService.getConfig());
                     this.zone.run(() => { this.router.navigate(['/registration/home'], {relativeTo: this.route }); });
+            }, (err) => {
+                    this.snotifyService.error('Error saving testing ' + err, 'Testing', this.notificationService.getConfig());
             });
         } else {
             return false;

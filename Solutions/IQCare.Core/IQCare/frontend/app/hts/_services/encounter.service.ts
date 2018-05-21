@@ -9,6 +9,7 @@ import { environment } from '../../../environments/environment';
 import {Encounter} from '../_models/encounter';
 import {FinalTestingResults} from '../_models/testing';
 import {ErrorHandlerService} from '../../shared/_services/errorhandler.service';
+import {EncounterDetails} from '../_models/encounterDetails';
 
 
 const httpOptions = {
@@ -29,6 +30,20 @@ export class EncounterService {
         return this.http.get<any[]>(this.API_URL + this._url + '/' + patientId ).pipe(
             tap(getEncounters => this.errorHandler.log('fetched all client encounters')),
             catchError(this.errorHandler.handleError<any[]>('getEncounters', []), )
+        );
+    }
+
+    public getEncounterDetails(encounterId: number): Observable<EncounterDetails[]> {
+        return this.http.get<EncounterDetails[]>(this.API_URL + this._url + '/getEncounterDetails/' + encounterId).pipe(
+            tap(getEncounterDetails => this.errorHandler.log('fetched a single client encounter')),
+            catchError(this.errorHandler.handleError<any[]>('getEncounterDetails', []))
+        );
+    }
+
+    public getClientDisability(personId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/Disability/GetClientDisability/' + personId).pipe(
+            tap(getClientDisability => this.errorHandler.log('fetched a single client disabilities')),
+            catchError(this.errorHandler.handleError<any[]>('getClientDisability', []))
         );
     }
 

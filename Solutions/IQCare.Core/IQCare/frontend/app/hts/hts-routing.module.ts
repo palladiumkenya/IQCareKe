@@ -12,12 +12,23 @@ import {TestingComponent} from './testing/testing.component';
 import {FamilyComponent} from './family/family.component';
 import {FamilyScreeningResolver} from './family-screening/familyScreening.resolver';
 import {FamilyTracingResolver} from './family-tracing/familyTracing.resolver';
+import {ViewEncounterComponent} from './view-encounter/view-encounter.component';
 
 const routes: Routes = [
     {
         path: '',
-        component: EncounterComponent,
-        pathMatch: 'full'
+        children: [
+            {
+                path: '',
+                component: EncounterComponent,
+                pathMatch: 'full'
+            },
+            {
+                path: 'viewencounter',
+                component: ViewEncounterComponent,
+                pathMatch: 'full'
+            }
+        ]
     },
     {
         path: 'linkage',

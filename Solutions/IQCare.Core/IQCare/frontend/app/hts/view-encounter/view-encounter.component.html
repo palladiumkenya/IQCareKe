@@ -1,0 +1,122 @@
+<div class="ibox">
+    <div class="ibox-title">
+        <app-clientbrief></app-clientbrief>
+    </div>
+    <div class="ibox-content">
+        <div class="row">
+            <div class="col-lg-2 col-md-2 col-sm-2">
+                <app-leftnav></app-leftnav>
+            </div>
+
+            <div class="col-md-10 col-sm-10 col-lg-10 animated fadeIn">
+                <div class="panel panel-default">
+                    <div class="panel-heading">VIEW HTS LAB FORM</div>
+                    <div class="panel-body">
+                        <mat-card>
+                            <mat-card-title>PRE-TEST</mat-card-title>
+                            <mat-divider></mat-divider>
+                            <mat-card-content style="padding-top: 1em;">
+                                <div class="row">
+                                    <div class="col-lg-4 col-sm-4 col-md-4">
+                                        <strong>Encounter Type:</strong> {{ encounterDetail['testType'] }}
+                                    </div>
+
+                                    <div class="col-lg-4 col-sm-4 col-md-4">
+                                        <strong>Encounter Date:</strong> {{ encounterDetail['encounterDate'] | date: 'dd-MMM-yyyy' }}
+                                    </div>
+
+                                    <div class="col-lg-4 col-sm-4 col-md-4">
+                                        <strong>Service Delivery Point:</strong> {{ encounterDetail['serviceEntryPoint'] }}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-4 col-sm-4 col-md-4">
+                                        <strong>Ever Tested:</strong> {{ encounterDetail['everTested'] }}
+                                    </div>
+
+                                    <div class="col-lg-4 col-sm-4 col-md-4">
+                                        <strong>Re-Testing (No. Months since last test):</strong> {{ encounterDetail['monthsSinceLastTest'] }}
+                                    </div>
+
+                                    <div class="col-lg-4 col-sm-4 col-md-4">
+                                        <strong>Self-test in the past 12 months:</strong> {{ encounterDetail['everSelfTested'] }}
+                                    </div>
+                                </div>
+                                <div class="row">&nbsp;</div>
+                                <div class="row">
+                                    <div class="col-lg-4 col-sm-4 col-md-4">
+                                        <strong>Has any Disability:</strong> {{ encounterDetail['HasDisability'] }}
+                                    </div>
+
+                                    <!--<div class="col-lg-4 col-sm-4 col-md-4">
+                                        <strong>Disability:</strong> None
+                                    </div>-->
+
+                                    <div class="col-lg-4 col-sm-4 col-md-4">
+                                        <strong>TB Screening:</strong> {{ encounterDetail['tbScreening'] }}
+                                    </div>
+
+                                    <div class="col-lg-4 col-sm-4 col-md-4">
+                                        <strong>Consent:</strong> {{ encounterDetail['consent'] }}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-4 col-sm-4 col-md-4">
+                                        <strong>Client Tested As:</strong> {{ encounterDetail['testedAs'] }}
+                                    </div>
+
+                                    <div class="col-lg-4 col-sm-4 col-md-4">
+                                        <strong>Strategy:</strong> {{ encounterDetail['testingStrategy'] }}
+                                    </div>
+                                    
+                                    <div class="col-lg-4 col-sm-4 col-md-4">
+                                        <strong>Remarks:</strong> {{ encounterDetail['encounterRemarks'] }}
+                                    </div>
+
+                                </div>
+                            </mat-card-content>
+                            <mat-divider></mat-divider>
+                            <mat-card-title style="padding-top: 1em;">TESTS</mat-card-title>
+                            <mat-divider></mat-divider>
+                            <mat-card-content style="padding-top: 1em;">
+                                <div class="row">
+                                    <div class="col-lg-4 col-sm-4 col-md-4">
+                                        <strong>Screening Test:</strong> {{ encounterDetail['resultOne'] }}
+                                    </div>
+
+                                    <div class="col-lg-4 col-sm-4 col-md-4">
+                                        <strong>Confirmatory Test:</strong> {{ encounterDetail['resultTwo'] }}
+                                    </div>
+
+                                    <div class="col-lg-4 col-sm-4 col-md-4">
+                                        <strong>Final Test:</strong> {{ encounterDetail['finalResult'] }}
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-4 col-sm-4 col-md-4">
+                                        <strong>Final Result Given:</strong> {{ encounterDetail['finalResultGiven'] }}
+                                    </div>
+
+                                    <div class="col-lg-4 col-sm-4 col-md-4">
+                                        <strong>Couple Discordant:</strong> {{ encounterDetail['coupleDiscordant'] ? encounterDetail['coupleDiscordant'] : 'N/A' }}
+                                    </div>
+
+                                    <div class="col-lg-4 col-sm-4 col-md-4">
+                                        <strong>Accepted to Partner Listing:</strong> {{ encounterDetail['partnerListingConsent'] }}
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-4 col-sm-4 col-md-4">
+                                        <strong>Reasons for decline:</strong> {{ encounterDetail['partnerListingConsentDeclineReason'] ? encounterDetail['partnerListingConsentDeclineReason'] : 'N/A' }}
+                                    </div>
+                                </div>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
