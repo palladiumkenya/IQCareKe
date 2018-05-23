@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs/Observable';
-import {environment} from '../../../environments/environment';
-import {catchError, tap} from 'rxjs/operators';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import { environment } from '../../../environments/environment';
+import { catchError, tap } from 'rxjs/operators';
 import 'rxjs/add/observable/of';
-import {Store} from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import * as Consent from '../reducers/app.states';
-import {ErrorHandlerService} from './errorhandler.service';
+import { ErrorHandlerService } from './errorhandler.service';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -18,11 +18,11 @@ export class AppStateService {
     private url = '/api/AppStore';
 
     constructor(private http: HttpClient,
-                private store: Store<AppState>,
-                private errorHandler: ErrorHandlerService) { }
+        private store: Store<AppState>,
+        private errorHandler: ErrorHandlerService) { }
 
     public addAppState(appStateId: number, personId: number, patientId: number, patientMasterVisitId: number,
-                       encounterId: number, appStateObject: string = ''): Observable<any> {
+        encounterId: number, appStateObject: string = ''): Observable<any> {
         const Indata = {
             PersonId: personId,
             PatientId: patientId,
@@ -54,7 +54,7 @@ export class AppStateService {
         };
 
         const promise = this.http.post<any>(this.API_URL + this.url + '/getState',
-            JSON.stringify(InData), httpOptions).toPromise().then( (res) => {
+            JSON.stringify(InData), httpOptions).toPromise().then((res) => {
 
                 if (res['stateStore'].length > 0 && ((personId) || (patientId) || (patientMasterVisitId) || (htsEncounterId))) {
                     const response = res['stateStore'];
@@ -95,9 +95,9 @@ export class AppStateService {
                         }
                     }
                 }
-        }, (err) => {
+            }, (err) => {
                 console.log('Error connecting to IQCareApi ', err);
-        });
+            });
 
         return promise;
     }

@@ -36,7 +36,7 @@ export class RegistrationService {
         };
 
         return this.http.post(this.API_URL + this._url, JSON.stringify(Indata), httpOptions).pipe(
-            tap((registeredClient: Person) => this.errorHandler.log(`added client w/ id`)),
+            tap((client: Person) => this.errorHandler.log(`added client w/ id` + client.Id)),
             catchError(this.errorHandler.handleError<Person>('registerClient'))
         );
     }

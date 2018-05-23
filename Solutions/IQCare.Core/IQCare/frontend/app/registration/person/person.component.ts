@@ -1,24 +1,24 @@
-import {Component, OnInit, NgZone} from '@angular/core';
-import {SnotifyService} from 'ng-snotify';
-import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { Component, OnInit, NgZone } from '@angular/core';
+import { SnotifyService } from 'ng-snotify';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
-import {Person, RegistrationVariables} from '../_models/person';
-import {Contact} from '../_models/contacts';
-import {PersonPopulation} from '../_models/personPopulation';
-import {RegistrationService} from '../_services/registration.service';
-import {Router, ActivatedRoute} from '@angular/router';
+import { Person, RegistrationVariables } from '../_models/person';
+import { Contact } from '../_models/contacts';
+import { PersonPopulation } from '../_models/personPopulation';
+import { RegistrationService } from '../_services/registration.service';
+import { Router, ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
-import {forkJoin} from 'rxjs/observable/forkJoin';
-import {ClientService} from '../../shared/_services/client.service';
-import {Store} from '@ngrx/store';
+import { forkJoin } from 'rxjs/observable/forkJoin';
+import { ClientService } from '../../shared/_services/client.service';
+import { Store } from '@ngrx/store';
 import * as Consent from '../../shared/reducers/app.states';
-import {NotificationService} from '../../shared/_services/notification.service';
-import {Partner} from '../../shared/_models/partner';
+import { NotificationService } from '../../shared/_services/notification.service';
+import { Partner } from '../../shared/_models/partner';
 
 @Component({
-  selector: 'app-person',
-  templateUrl: './person.component.html',
-  styleUrls: ['./person.component.css']
+    selector: 'app-person',
+    templateUrl: './person.component.html',
+    styleUrls: ['./person.component.css']
 })
 export class PersonComponent implements OnInit {
     person: Person;
@@ -50,15 +50,15 @@ export class PersonComponent implements OnInit {
     /** Returns a FormArray with the name 'formArray'. */
     get formArray(): AbstractControl | null { return this.formGroup.get('formArray'); }
 
-    constructor( private registrationService: RegistrationService,
-                 private router: Router,
-                 private route: ActivatedRoute,
-                 public zone: NgZone,
-                 private clientService: ClientService,
-                 private store: Store<AppState>,
-                 private snotifyService: SnotifyService,
-                 private notificationService: NotificationService,
-                 private _formBuilder: FormBuilder) {
+    constructor(private registrationService: RegistrationService,
+        private router: Router,
+        private route: ActivatedRoute,
+        public zone: NgZone,
+        private clientService: ClientService,
+        private store: Store<AppState>,
+        private snotifyService: SnotifyService,
+        private notificationService: NotificationService,
+        private _formBuilder: FormBuilder) {
 
         this.maxDate = new Date();
     }
@@ -137,7 +137,7 @@ export class PersonComponent implements OnInit {
         this.partnerType = JSON.parse(localStorage.getItem('isPartner'));
 
         if (this.partnerType != null) {
-            this.formGroup.controls.formArray['controls'][2].controls.partnerRelationship.enable({onlySelf: false});
+            this.formGroup.controls.formArray['controls'][2].controls.partnerRelationship.enable({ onlySelf: false });
             this.getClientDetails();
             if (this.partnerType.partner == 1) {
                 this.optionToShow = this.relationshipPartnerOptions;
@@ -146,7 +146,7 @@ export class PersonComponent implements OnInit {
             }
 
         } else {
-            this.formGroup.controls.formArray['controls'][2].controls.partnerRelationship.disable({onlySelf: true});
+            this.formGroup.controls.formArray['controls'][2].controls.partnerRelationship.disable({ onlySelf: true });
             localStorage.removeItem('personId');
             localStorage.removeItem('patientId');
             localStorage.removeItem('partnerId');
@@ -163,9 +163,9 @@ export class PersonComponent implements OnInit {
     onSubmitForm() {
         // console.log(this.formGroup.valid);
         if (this.formGroup.valid) {
-            this.person = {...this.person, ...this.formArray.get([0]).value};
+            this.person = { ...this.person, ...this.formArray.get([0]).value };
             this.contact = Object.assign(this.person, this.formArray.get([1]).value);
-            this.personPopulation = {...this.personPopulation, ...this.formArray.get([2]).value};
+            this.personPopulation = { ...this.personPopulation, ...this.formArray.get([2]).value };
             this.person.partnerRelationship = this.formArray.get([2]).value['partnerRelationship'];
             this.person.createdBy = JSON.parse(localStorage.getItem('appUserId'));
 
@@ -185,9 +185,9 @@ export class PersonComponent implements OnInit {
                 personRelation['UserId'] = JSON.parse(localStorage.getItem('appUserId'));
 
                 const patientAdd = !this.person.isPartner ? this.registrationService.addPatient(data['personId'], this.person.DateOfBirth)
-                    :  this.registrationService.addPersonRelationship(personRelation);
+                    : this.registrationService.addPersonRelationship(personRelation);
 
-                const personCont =  this.registrationService.addPersonContact(data['personId'],
+                const personCont = this.registrationService.addPersonContact(data['personId'],
                     null, this.contact.PhoneNumber,
                     null, null, this.userId);
 
@@ -219,9 +219,9 @@ export class PersonComponent implements OnInit {
 
                         localStorage.removeItem('isPartner');
                         if (this.partnerType.family == 1) {
-                            this.zone.run(() => {this.router.navigate(['/hts/family'], { relativeTo: this.route }); });
+                            this.zone.run(() => { this.router.navigate(['/hts/family'], { relativeTo: this.route }); });
                         } else {
-                            this.zone.run(() => { this.router.navigate(['/hts/pns'], { relativeTo: this.route}); });
+                            this.zone.run(() => { this.router.navigate(['/hts/pns'], { relativeTo: this.route }); });
                         }
                     } else {
                         this.snotifyService.success('Successfully registered client', 'Registration', this.notificationService.getConfig());
@@ -267,34 +267,34 @@ export class PersonComponent implements OnInit {
     getClientDetails() {
         this.clientService.getClientDetails(JSON.parse(localStorage.getItem('patientId')),
             JSON.parse(localStorage.getItem('serviceAreaId'))).subscribe(res => {
-            const result = res['patientLookup'][0];
-            this.patientName = result.firstName + ' ' + result.midName + ' ' + result.lastName;
-        });
+                const result = res['patientLookup'][0];
+                this.patientName = result.firstName + ' ' + result.midName + ' ' + result.lastName;
+            });
     }
 
     onPopulationTypeChange() {
         const popType = this.formGroup.controls['formArray']['controls'][2].controls.populationType.value;
         if (popType == 1) {
-            this.formGroup.controls['formArray']['controls'][2].controls.KeyPopulation.disable({onlySelf: true});
+            this.formGroup.controls['formArray']['controls'][2].controls.KeyPopulation.disable({ onlySelf: true });
             this.formGroup.controls['formArray']['controls'][2].controls.KeyPopulation.setValue([]);
         } else if (popType == 2) {
-            this.formGroup.controls['formArray']['controls'][2].controls.KeyPopulation.enable({onlySelf: false});
+            this.formGroup.controls['formArray']['controls'][2].controls.KeyPopulation.enable({ onlySelf: false });
         }
     }
 
     onPriorityChange() {
         const priorityPop = this.formGroup.controls['formArray']['controls'][2].controls.priorityPop.value;
         if (priorityPop == 2) {
-            this.formGroup.controls['formArray']['controls'][2].controls.priorityPopulation.disable({onlySelf: true});
+            this.formGroup.controls['formArray']['controls'][2].controls.priorityPopulation.disable({ onlySelf: true });
             this.formGroup.controls['formArray']['controls'][2].controls.priorityPopulation.setValue([]);
         } else if (priorityPop == 1) {
-            this.formGroup.controls['formArray']['controls'][2].controls.priorityPopulation.enable({onlySelf: false});
+            this.formGroup.controls['formArray']['controls'][2].controls.priorityPopulation.enable({ onlySelf: false });
         }
     }
 
     onSexChange() {
         const clientSex = this.formGroup.controls['formArray']['controls'][0].controls.Sex.value;
-        const optionSelected = this.gender.filter(obj  => parseInt(obj.itemId, 10) == parseInt(clientSex, 10));
+        const optionSelected = this.gender.filter(obj => parseInt(obj.itemId, 10) == parseInt(clientSex, 10));
 
         this.route.data.subscribe((res) => {
             const options = res['options']['lookupItems'];
@@ -309,7 +309,7 @@ export class PersonComponent implements OnInit {
         });
 
         if (optionSelected[0].itemName == 'Female') {
-            const options = this.keyPops.filter(function( obj ) {
+            const options = this.keyPops.filter(function (obj) {
                 return obj.itemName !== 'MSM';
             });
             this.keyPops = options;
@@ -331,7 +331,7 @@ export class PersonComponent implements OnInit {
             this.priorityPops = optionsVal;
         }
 
-        const optionsHtsKeyPops = this.keyPops.filter(function( obj ) {
+        const optionsHtsKeyPops = this.keyPops.filter(function (obj) {
             return obj.itemName !== 'Not Applicable';
         });
         this.keyPops = optionsHtsKeyPops;
