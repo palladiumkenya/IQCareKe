@@ -57,14 +57,12 @@
                                 </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                     <button mat-raised-button *ngIf="!isPnsScreened(row['personId'])" [style.background]="'#4db6ac'" (click)="screenClient(row)">Screen</button>
-                                    <button mat-raised-button *ngIf="!isPnsTracing(row['personId'])" [style.background]="'#616161'" (click)="traceClient(row)">Trace</button>
+                                    <button mat-raised-button [style.background]="'#616161'" (click)="traceClient(row)">Trace</button>
                                 </mat-cell>
                             </ng-container>
 
                             <mat-header-row *matHeaderRowDef="displayedColumns" [style.background]="'#f5f5f5'"></mat-header-row>
-                            <mat-row *matRowDef="let row; columns: displayedColumns;"
-                                     (click)="getSelectedRow(row)"
-                                     [style.background]="highlightedRow.indexOf(row) != -1 ? 'lightblue': '#ffffff'">
+                            <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="getSelectedRow(row)" [style.background]="highlightedRow.indexOf(row) != -1 ? 'lightblue': '#ffffff'">
 
                             </mat-row>
                         </mat-table>
@@ -75,7 +73,9 @@
                     </div>
 
                     <div class="button-row pull-right">
-                        <button mat-fab (click)="newPartner()"><i class="fa fa-plus"></i></button>
+                        <button mat-fab (click)="newPartner()">
+                            <i class="fa fa-plus"></i>
+                        </button>
                     </div>
                 </div>
             </div>
