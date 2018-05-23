@@ -1,10 +1,13 @@
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_SCM_SavePharmacyDispenseOrder_Futures]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[pr_SCM_SavePharmacyDispenseOrder_Futures]
+GO
 /****** Object:  StoredProcedure [dbo].[pr_SCM_SavePharmacyDispenseOrder_Futures]    Script Date: 5/23/2018 10:18:34 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-ALTER procedure [dbo].[pr_SCM_SavePharmacyDispenseOrder_Futures]                
+CREATE procedure [dbo].[pr_SCM_SavePharmacyDispenseOrder_Futures]                
 	@Ptn_Pk int,                
 	@LocationId int,                
 	@DispensedBy int,                
