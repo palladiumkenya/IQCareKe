@@ -192,6 +192,8 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
                 string appointmentStatus = String.Empty;
                 string appointmentType = String.Empty;
                 int interopUserId = InteropUser.UserId;
+                //todo: fetch assigning facility from the message
+                string assigning_Facility = "";
                 foreach (var item in appointmentScheduling.PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID)
                 {
                     if (item.IDENTIFIER_TYPE == "CCC_NUMBER" && item.ASSIGNING_AUTHORITY == "CCC")
@@ -213,7 +215,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
                             var personIdentifiers = personIdentifierManager.GetPersonIdentifiers(patient.PersonId, identifier.Id);
                             if (personIdentifiers.Count == 0)
                             {
-                                personIdentifierManager.AddPersonIdentifier(patient.PersonId, identifier.Id, godsNumber,interopUserId                 );
+                                personIdentifierManager.AddPersonIdentifier(patient.PersonId, identifier.Id, godsNumber,interopUserId ,assigning_Facility);
                             }
                         }
 
@@ -352,6 +354,8 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
         {
             try
             {
+                //todo: fetch assigning facility from the message
+                string assigning_Facility = "";
                 PatientAppointmentManager manager = new PatientAppointmentManager();
                 PatientLookupManager patientLookup = new PatientLookupManager();
                 LookupLogic lookupLogic = new LookupLogic();
@@ -386,7 +390,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
                             var personIdentifiers = personIdentifierManager.GetPersonIdentifiers(patient.PersonId, identifier.Id);
                             if (personIdentifiers.Count == 0)
                             {
-                                personIdentifierManager.AddPersonIdentifier(patient.PersonId, identifier.Id, godsNumber, interopUserId);
+                                personIdentifierManager.AddPersonIdentifier(patient.PersonId, identifier.Id, godsNumber, interopUserId,assigning_Facility);
                             }
                         }
 

@@ -25,4 +25,6 @@ namespace Entities.CCC.PSmart
        public string middleName { get; set; }
        public string lastName { get; set; }
     }
+
+    
 }

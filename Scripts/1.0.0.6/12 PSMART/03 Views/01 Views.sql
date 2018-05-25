@@ -900,3 +900,35 @@ ON
 L.PatientId=t.Ptn_pk
 
 GO
+IF  EXISTS (Select	*	From sys.views	Where object_id = object_id(N'[dbo].[psmart_FamilyInformation]'))
+Drop View [dbo].[psmart_FamilyInformation]
+Go
+Set Ansi_nulls On
+Go
+
+Set Quoted_identifier On
+Go
+
+Create VIEW [dbo].[psmart_FamilyInformation]
+AS
+Select Id
+	  ,ptn_pk
+	  ,Sex
+	  ,AgeYear
+	  ,RelationshipDate
+	  ,RelationshipType
+	  ,HivStatus
+	  ,HivCareStatus
+	  ,RegistrationNo
+	  ,FileNo
+	  ,ReferenceId
+	  ,UserId
+	  ,CreateDate
+	  ,UpdateDate
+	  ,MovedToFamilyTestingTable
+	  ,cast(decryptbykey(RFirstName) As varchar(50)) As firstName
+	  ,cast(decryptbykey(RMiddlename) As varchar(50)) As Middlename
+	  ,cast(decryptbykey(RLastName) As varchar(50)) As lastName
+From dtl_FamilyInfo
+
+Go
