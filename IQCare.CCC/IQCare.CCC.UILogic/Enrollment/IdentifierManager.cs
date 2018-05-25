@@ -9,6 +9,11 @@ using Interface.CCC.Enrollment;
 
 namespace IQCare.CCC.UILogic.Enrollment
 {
+    public enum IdentifierType
+    {
+        Patient = 1,
+            Person =2
+    }
     public class IdentifierManager
     {
         private IIdentifiersManager mgr =

@@ -126,7 +126,7 @@ namespace IQCare.Web.CCC.WebService
                 var identifiersObjects = new JavaScriptSerializer().Deserialize<Dictionary<string, string>>(identifiersList);
                 String sDate = DateTime.Now.ToString();
                 DateTime datevalue = Convert.ToDateTime(sDate);
-                List<PatientLookup> isPersonEnrolled = patientLookUpManager.GetPatientByPersonId(PersonId);
+                PatientLookup isPersonEnrolled = patientLookUpManager.GetPatientByPersonId(PersonId);
                 dobPrecision = String.IsNullOrWhiteSpace(dobPrecision) ? "false" : "true";
 
                 foreach (var item in identifiersObjects)
@@ -136,9 +136,9 @@ namespace IQCare.Web.CCC.WebService
                     {
                         foreach (var items in identifiers)
                         {
-                            if (isPersonEnrolled.Count > 0)
+                            if (isPersonEnrolled != null)
                             {
-                                if (items.PatientId == isPersonEnrolled[0].Id)
+                                if (items.PatientId == isPersonEnrolled.Id)
                                 {
 
                                 }
@@ -157,7 +157,7 @@ namespace IQCare.Web.CCC.WebService
                     }
                 }
 
-                if (isPersonEnrolled.Count == 0)
+                if (isPersonEnrolled != null)
                 {
                     List<PatientRegistrationLookup> patientsByPersonId = patientManager.GetPatientIdByPersonId(PersonId);
                     var patientIndex = datevalue.Year.ToString() + '-' + PersonId;
@@ -332,33 +332,37 @@ namespace IQCare.Web.CCC.WebService
                 else
                 {
                     var patientLookManager = new PatientLookupManager();
-                    List<PatientLookup> patient = patientLookManager.GetPatientByPersonId(PersonId);
-
-                    if (patient.Count > 0)
+                   PatientLookup patient = patientLookManager.GetPatientByPersonId(PersonId);
+                    List<PatientLookup> pk = new List<PatientLookup>();
+                    pk.Add(patient);
+                    if (patient !=null)
                     {
-                        Session["PatientPK"] = patient[0].Id;
+                        Session["PatientPK"] = patient.Id;
 
                         List<PatientEntity> listPatient = new List<PatientEntity>();
-                        var entity = patient.ConvertAll(x => new PatientEntity { Id = x.Id, Active = x.Active, DateOfBirth = x.DateOfBirth, ptn_pk = x.ptn_pk, PatientType = x.PatientType, PatientIndex = x.PatientIndex, NationalId = x.NationalId, FacilityId = x.FacilityId });
+                        var entity = pk.ConvertAll(x=>  new PatientEntity { Id = x.Id, Active = x.Active, DateOfBirth = x.DateOfBirth,
+                            ptn_pk = x.ptn_pk, PatientType = x.PatientType, PatientIndex = x.PatientIndex, NationalId = x.NationalId,
+                            FacilityId = x.FacilityId });
+
                         var patientAuditData = AuditDataUtility.Serializer(entity);
 
                         PatientEntity updatePatient = new PatientEntity();
-                        updatePatient.ptn_pk = patient[0].ptn_pk;
-                        updatePatient.DateOfBirth = patient[0].DateOfBirth;
+                        updatePatient.ptn_pk = patient.ptn_pk;
+                        updatePatient.DateOfBirth = patient.DateOfBirth;
                         updatePatient.NationalId = nationalId;
-                        updatePatient.FacilityId = patient[0].FacilityId;
+                        updatePatient.FacilityId = patient.FacilityId;
 
 
                         //listPatient.Add(entity);
                         updatePatient.AuditData = patientAuditData;
                         //var enrollmentAuditData = AuditDataUtility.Serializer(patient);
 
-                        patientManager.UpdatePatient(updatePatient, patient[0].Id);
+                        patientManager.UpdatePatient(updatePatient, patient.Id);
 
-                        int patientMasterVisitId = patientMasterVisitManager.PatientMasterVisitCheckin(patient[0].Id, userId);
+                        int patientMasterVisitId = patientMasterVisitManager.PatientMasterVisitCheckin(patient.Id, userId);
                         Session["PatientMasterVisitId"] = patientMasterVisitId;
 
-                        List<PatientEntryPoint> entryPoints = patientEntryPointManager.GetPatientEntryPoints(patient[0].Id);
+                        List<PatientEntryPoint> entryPoints = patientEntryPointManager.GetPatientEntryPoints(patient.Id);
 
                         if (entryPoints.Count > 0)
                         {
@@ -372,7 +376,7 @@ namespace IQCare.Web.CCC.WebService
                         foreach (var item in identifiersObjects)
                         {
                             var identifiersByPatientId = patientIdentifierManager
-                                .GetPatientEntityIdentifiersByPatientId(patient[0].Id, Convert.ToInt32(item.Key));
+                                .GetPatientEntityIdentifiersByPatientId(patient.Id, Convert.ToInt32(item.Key));
 
                             if (identifiersByPatientId.Count > 0)
                             {
@@ -399,9 +403,9 @@ namespace IQCare.Web.CCC.WebService
                             }
                             else
                             {
-                                patientEnrollmentId = patientEnrollmentManager.addPatientEnrollment(patient[0].Id, enrollmentDate, userId);
-                                patientEntryPointId = patientEntryPointManager.addPatientEntryPoint(patient[0].Id, entryPointId, userId);
-                                patientIdentifierId = patientIdentifierManager.addPatientIdentifier(patient[0].Id,
+                                patientEnrollmentId = patientEnrollmentManager.addPatientEnrollment(patient.Id, enrollmentDate, userId);
+                                patientEntryPointId = patientEntryPointManager.addPatientEntryPoint(patient.Id, entryPointId, userId);
+                                patientIdentifierId = patientIdentifierManager.addPatientIdentifier(patient.Id,
                                     patientEnrollmentId, Convert.ToInt32(item.Key), item.Value, facilityId);
                             }
                         }
@@ -674,12 +678,12 @@ namespace IQCare.Web.CCC.WebService
                 IdentifierManager ideManager = new IdentifierManager();
                 PersonLookUpManager personLookUp = new PersonLookUpManager();
 
-                List<PatientLookup> patientList = patientLookupManager.GetPatientByPersonId(PersonId);
+                PatientLookup patientList = patientLookupManager.GetPatientByPersonId(PersonId);
 
-                if (patientList.Count > 0)
+                if (patientList !=null)
                 {
-                    enrollmentDetails.DOB = String.Format("{0:dd-MMM-yyyy}", patientList[0].DateOfBirth);
-                    enrollmentDetails.DobPrecision = patientList[0].DobPrecision;
+                    enrollmentDetails.DOB = String.Format("{0:dd-MMM-yyyy}", patientList.DateOfBirth);
+                    enrollmentDetails.DobPrecision = patientList.DobPrecision;
                     if (enrollmentDetails.DOB == null)
                     {
                         PersonLookUp person = personLookUp.GetPersonById(PersonId);
@@ -689,11 +693,11 @@ namespace IQCare.Web.CCC.WebService
                             enrollmentDetails.DobPrecision = person.DobPrecision==null?false:Convert.ToBoolean(person.DobPrecision);
                         }                   
                     }
-                    enrollmentDetails.NationalId = patientList[0].NationalId;
-                    enrollmentDetails.EnrollmentDate = String.Format("{0:dd-MMM-yyyy}", patientList[0].EnrollmentDate);
+                    enrollmentDetails.NationalId = patientList.NationalId;
+                    enrollmentDetails.EnrollmentDate = String.Format("{0:dd-MMM-yyyy}", patientList.EnrollmentDate);
 
-                    var entryPoints  = entryPointManager.GetPatientEntryPoints(patientList[0].Id);
-                    var identifiers = identifierManager.GetAllPatientEntityIdentifiers(patientList[0].Id);
+                    var entryPoints  = entryPointManager.GetPatientEntryPoints(patientList.Id);
+                    var identifiers = identifierManager.GetAllPatientEntityIdentifiers(patientList.Id);
                     var dynamicFields = EnrollmentService.ServiceDynamicFields(1);
                     if (entryPoints.Count>0)
                     {

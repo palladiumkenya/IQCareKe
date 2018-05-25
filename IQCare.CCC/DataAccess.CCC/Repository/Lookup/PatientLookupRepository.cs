@@ -1,7 +1,9 @@
 ﻿using System.Linq;
 using DataAccess.CCC.Context;
 using DataAccess.CCC.Interface.Lookup;
+using DataAccess.CCC.Interface.Patient;
 using DataAccess.Context;
+using Entities.CCC;
 using Entities.CCC.Lookup;
 
 namespace DataAccess.CCC.Repository.Lookup
@@ -35,5 +37,14 @@ namespace DataAccess.CCC.Repository.Lookup
 
         }
     }
+    public class PatientRelationshipViewRepository:BaseRepository<PatientRelationshipDTO>, IPatientRelationshipViewRepository
+    {
+        private readonly ViewContext _context;
+        public PatientRelationshipViewRepository(ViewContext context) : base(context)
+        {
+            _context = context;
+        }
+    }
+
 
 }

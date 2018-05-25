@@ -9,7 +9,7 @@ Go
 
 IF Not  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[Patient]') AND name = N'NCI_Patient_DeleteFlag') Begin
 	CREATE NONCLUSTERED INDEX [NCI_Patient_DeleteFlag]	ON [dbo].[Patient] ([DeleteFlag])
-	INCLUDE ([Id])
+	INCLUDE ([Id],[ptn_pk],[PersonId])
 End
 GO
 
@@ -23,3 +23,4 @@ CREATE NONCLUSTERED INDEX [NCI_DTLPatientAppointment_DeleteFlag_UserId_Inc] ON [
 INCLUDE ([Ptn_pk],[LocationID],[Visit_pk],[AppDate],[AppReason],[AppStatus],[EmployeeID],[CreateDate],[UpdateDate],[ModuleId],[AppNote],[AppointmentId])
 End
 GO
+

@@ -19,7 +19,7 @@ namespace DataAccess.WebApi.Repository
             _context = context;
         }
     }
-    public class PSmartLogRepository : BaseRepository<TransactionLog>//, IPSmartTransactionRepository
+    public class PSmartLogRepository : BaseRepository<TransactionLog>, IPSmartTransactionLogRepository
     {
         private readonly PsmartContext _context;
 

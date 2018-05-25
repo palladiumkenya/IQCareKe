@@ -52,14 +52,23 @@ namespace BusinessProcess.CCC.Patient
             throw new NotImplementedException();
         }
 
-        public PatientEntity GetPatient(int id)
+        public PatientPersonViewEntity GetPatient(int id)
         {
-            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            //using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            //{
+            //    var patientInfo = unitOfWork.PatientRepository.GetById(id);
+            //    unitOfWork.Dispose();
+            //    return patientInfo;
+            //}     
+
+            using (GreencardContext context = new GreencardContext())
             {
-                var patientInfo = unitOfWork.PatientRepository.GetById(id);
-                unitOfWork.Dispose();
-                return patientInfo;
-            }                
+
+                var result = context.PatientPersonViewEntities.Where(pp => pp.Id == id).FirstOrDefault();
+
+
+                return result;
+            }
         }
 
 
@@ -84,26 +93,59 @@ namespace BusinessProcess.CCC.Patient
             return patientId;
         }
 
-        public List<PatientEntity> CheckPersonEnrolled(int persionId)
+        public PatientPersonViewEntity CheckPersonEnrolled(int personId)
         {
-            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (GreencardContext context = new GreencardContext())
             {
-                List<PatientEntity> person = unitOfWork.PatientRepository.FindBy(x => x.PersonId == persionId).ToList();
-                unitOfWork.Dispose();
-                return person;
+              
+                var result = context.PatientPersonViewEntities.Where(pp => pp.PersonId == personId).FirstOrDefault();
+                
+
+                return result;
             }
         }
+      public PatientPersonViewEntity GetPatientEntityByPersonId(int personId)
+        {
+            using (GreencardContext context = new GreencardContext())
+            {
+               // PatientEntity patientEntity = null;
+                var result = context.PatientPersonViewEntities.Where(pp => pp.PersonId == personId).FirstOrDefault();
+                //List<PatientPersonViewEntity> person = unitOfWork.PatientPersonViewRepository..FindBy(x => x.PersonId == persionId).ToList();
+                //unitOfWork.Dispose();
+                //if (result != null)
+                //{
+                //    patientEntity = new PatientEntity() { Id= result.Id, PersonId=result.PersonId, DateOfBirth = result.DateOfBirth, DobPrecision= result.}
+                //}
 
+                return result;
+            }
+            //using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            //{
+            //    PatientEntity entity = unitOfWork.PatientRepository.FindBy(x => x.PersonId == persionId).FirstOrDefault();
+            //    unitOfWork.Dispose();
+            //    return entity;
+            //}
+        }
         public int GetPatientType(int patientId)
         {
-            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+
+            using (GreencardContext context = new GreencardContext())
             {
-                var patientTypeId = unitOfWork.PatientRepository.FindBy(x => x.Id == patientId & !x.DeleteFlag)
-                                    .Select(x => x.PatientType).FirstOrDefault();
-                unitOfWork.Dispose();
-                return patientTypeId;
-                //return patientTypeId.FirstOrDefault();
+                // PatientEntity patientEntity = null;
+                var result = context.PatientPersonViewEntities.Where(pp => pp.Id == patientId).Select(x => x.PatientType).FirstOrDefault();
+               
+
+                return result;
             }
+
+            //using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            //{
+            //    var patientTypeId = unitOfWork.PatientRepository.FindBy(x => x.Id == patientId & !x.DeleteFlag)
+            //                        .Select(x => x.PatientType).FirstOrDefault();
+            //    unitOfWork.Dispose();
+            //    return patientTypeId;
+            //    //return patientTypeId.FirstOrDefault();
+            //}
         }
 
         public void UpdatePatientType(int PatientId, int PatientType)

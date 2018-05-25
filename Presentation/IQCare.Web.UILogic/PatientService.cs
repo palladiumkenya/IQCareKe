@@ -164,7 +164,8 @@ namespace IQCare.Web.UILogic
             IPatientHome PatientManager;
             PatientManager = (IPatientHome)ObjectFactory.CreateInstance("BusinessProcess.Clinical.BPatientHome, BusinessProcess.Clinical");
             System.Data.DataSet theDS = PatientManager.GetPatientDetails(ptnPk, systemId, moduleId);
-
+            HttpContext.Current.Session["PtnPrgStatus"] = theDS.Tables[19];
+            HttpContext.Current.Session["CEndedStatus"] = theDS.Tables[40];
             PatientManager = null;
             if (theDS.Tables[0].Rows.Count > 0)
             {
@@ -197,6 +198,7 @@ namespace IQCare.Web.UILogic
                 HttpContext.Current.Session["PatientInformation"] = theDS.Tables[0];
                 return true;
             }
+   
             return false;
         }
         /// <summary>
