@@ -61,3 +61,13 @@ BEGIN
 	ALTER TABLE PersonIdentifier ADD AssigningFacility varchar(15)
 END
 GO
+If Not Exists(Select * from sys.columns where Name = N'Active' AND Object_ID = Object_ID(N'PatientIdentifier'))
+BEGIN
+	ALTER TABLE PatientIdentifier ADD Active bit NOT NULL CONSTRAINT [DF_PatientIdentifier_Active]  DEFAULT ((1))
+END
+GO
+If Not Exists(Select * from sys.columns where Name = N'Active' AND Object_ID = Object_ID(N'PersonIdentifier'))
+BEGIN
+	ALTER TABLE PersonIdentifier ADD  Active bit NOT NULL CONSTRAINT [DF_PersonIdentifier_Active]  DEFAULT ((1))
+END
+GO
