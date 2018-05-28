@@ -710,11 +710,11 @@ GO
 CREATE VIEW [dbo].[PSmart_PatientName]
 AS
 SELECT DISTINCT
-	L.PersonId PersonId
-   ,L.PatientId PatientId,
-    CASE WHEN L.CardSerialNumber IS NULL THEN ''  --(SELECT IdentifierValue i FROM PersonIdentifier i WHERE i.PersonId=L.PersonId AND i.IdentifierId IN(SELECT Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER')) IS NULL THEN ''
+	L.PersonId PersonId,
+   L.PatientId PatientId,
+    CASE WHEN L.CardSerialNumber IS NULL THEN ''  
 	 ELSE 
-		L.CardSerialNumber --(SELECT IdentifierValue i FROM PersonIdentifier i WHERE i.PersonId=L.PersonId AND i.IdentifierId IN(SELECT Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER'))
+		L.CardSerialNumber
 	 END [CardSerialNumber]
    ,L.FirstName FIRST_NAME
    ,L.MidName MIDDLE_NAME
@@ -729,10 +729,10 @@ AS
 SELECT  
     DISTINCT     
 	L.PersonId,
-	L.PatientId
-		CASE WHEN L.CardSerialNumber IS NULL THEN '' --(SELECT IdentifierValue i FROM PersonIdentifier i WHERE i.PersonId=L.PersonId AND i.IdentifierId IN(SELECT Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER')) IS NULL THEN ''
+	L.PatientId,
+		CASE WHEN L.CardSerialNumber IS NULL THEN ''
 		ELSE
-		  L.CardSerialNumber	-- (SELECT IdentifierValue i FROM PersonIdentifier i WHERE i.PersonId=L.PersonId AND i.IdentifierId IN(SELECT Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER'))
+		  L.CardSerialNumber
 		END [CardSerialNumber],
 	 L.Village  [VILLAGE],
 	L.Ward	[WARD],
