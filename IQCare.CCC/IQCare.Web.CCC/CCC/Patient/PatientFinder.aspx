@@ -50,8 +50,15 @@
                      </div>
                  </div>  
                  
-                 <div class="col-md-3">
-                     
+                 <div class="col-md-3 col-xs-12">
+                     <div class="col-md-12"><label class="control-label pull-left"></label></div>
+                     <div class="col-md-12" style="margin-top: 25px"> <strong>
+                     <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox" id="lblNotEnrolled">
+                         <input class="sr-only input-lg" type="checkbox" id="notEnrolled" value="true">
+                         <span class="checkbox-label"><b>Not Enrolled Clients</b></span>
+                     </label></strong>
+                    </div>
+                 
                  </div>
                  
                  <div class="col-md-3">
@@ -150,6 +157,18 @@
                 cache: false
             });
 
+            var isEnrolled = "enrolledClients";
+
+            $("#lblNotEnrolled").on('checked.fu.checkbox',
+                function() {
+                    isEnrolled = 'notEnrolledClients';
+                   // alert(isEnrolled);
+                });
+            $("#lblNotEnrolled").on('unchecked.fu.checkbox',
+                function() {
+                    isEnrolled = 'enrolledClients';
+                    //alert(isEnrolled);
+                });
 
 
             $("#divAction").hide("fast");
@@ -229,7 +248,8 @@
                         aoData.push({ "name": "firstName", "value": ""+$("#<%=FirstName.ClientID%>").val()+"" });
                         aoData.push({ "name": "middleName", "value": ""+$("#<%=MiddleName.ClientID%>").val()+"" });
                         aoData.push({ "name": "lastName", "value": ""+$("#<%=LastName.ClientID%>").val()+"" });
-                        aoData.push({ "name": "facility", "value": ""+$("#<%=Facility.ClientID%>").find(":selected").val()+"" });
+                        aoData.push({ "name": "facility", "value": "" + $("#<%=Facility.ClientID%>").find(":selected").val() + "" });
+                        aoData.push({ "name": "isEnrolled", "value": ""+ isEnrolled +""});
 
                         $("#divActionString").text("Data features and table preparation complete");
                         var arrayReturn = [];
@@ -276,7 +296,16 @@
           $('#tblFindPatient').on('click', 'tbody tr', function () {
               // window.location.href = $(this).attr('href');
               var patientId = $(this).find('td').first().text();
-              setSession(patientId);
+              var patientStatus = $(this).find('td').last().text();
+
+              if (patientStatus === 'Not Enrolled') {
+                 // alert("personId:" + patientId + " " + "Patient Status :" + patientStatus);
+                  RedirectToRegistrationEdit(patientId, isEnrolled);
+              } else {
+                setSession(patientId);
+              }
+
+             
           });
 
         });
@@ -293,6 +322,27 @@
                 success: function (data) {
                     if (data.d == "success") {
                         setTimeout(function () { window.location.href = "../patient/patientHome.aspx" }, 500);
+                    }
+                },
+                error: function (result) {
+
+                    alert("error");
+
+                }
+            });
+        }
+
+        function RedirectToRegistrationEdit(personId,isEnrolled) {
+
+            $.ajax({
+                type: "POST",
+                url: "patientRegistration.aspx/RedirectToRegistrationEdit", //Pagename/Functionname
+                contentType: "application/json;charset=utf-8",
+                data: "{'personId':'" + personId + "','isEnrolled':'"+ isEnrolled +"'}",//data
+                dataType: "json",
+                success: function (data) {
+                    if (data.d === "success") {
+                        setTimeout(function () { window.location.href = "./patientRegistration.aspx" }, 500);
                     }
                 },
                 error: function (result) {

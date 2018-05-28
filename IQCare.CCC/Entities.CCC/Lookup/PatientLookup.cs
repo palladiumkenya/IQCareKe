@@ -19,9 +19,9 @@ namespace Entities.CCC.Lookup
         public string LastName { get; set; }
         public int Sex { get; set; }
         public bool Active { get; set; }
-        public DateTime RegistrationDate { get; set; }
+        public DateTime? RegistrationDate { get; set; }
         public DateTime EnrollmentDate { get; set; }
-        public bool TransferIn { get; set; }
+        public bool? TransferIn { get; set; }
         public DateTime DateOfBirth { get; set; }
         public bool DobPrecision { get; set; }
         public string NationalId { get; set; }

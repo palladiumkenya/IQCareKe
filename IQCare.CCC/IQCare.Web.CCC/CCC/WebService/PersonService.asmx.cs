@@ -81,6 +81,28 @@ namespace IQCare.Web.CCC.WebService
             return Year.ToString();
         }
     }
+
+    public class PersonNotEnrolled
+    {
+        public string FirstName { get; set; }
+        public string MiddleName { get; set; }
+        public string LastName { get; set; }
+        public string PatientType { get; set; }
+        public Decimal Age { get; set; }
+        public int Sex { get; set; }
+        public int MaritalStatus { get; set; }
+        public DateTime DoB { get; set; }
+        public bool DateOfBirthPrecision { get; set; }
+        public string KeyPopName { get; set; }
+        public string GetAge(DateTime DateOfBirth)
+        {
+            TimeSpan age = DateTime.Now - DateOfBirth;
+            int Year = DateTime.Now.Year - DateOfBirth.Year;
+            if (DateOfBirth.AddYears(Year) > DateTime.Now) Year--;
+
+            return Year.ToString();
+        }
+    }
     /// <summary>
     /// Summary description for PersonSeervice
     /// </summary>
@@ -823,6 +845,43 @@ namespace IQCare.Web.CCC.WebService
                 Msg = e.Message;
             }
             return Msg;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string GetPersonNoEnrolledDetails(int personId)
+        {
+            Session["PersonId"] = personId;
+            try
+            {
+                PersonNotEnrolled notEnrolled=new PersonNotEnrolled();
+                var patientLookUpManager = new PatientLookupManager();
+                var mstatus=new PersonMaritalStatusManager();
+                var keyPopulationManager = new PatientPopulationManager();
+                var personNotEnrolled = patientLookUpManager.GetPatientByPersonId(personId);
+                var maritalStatus = mstatus.GetCurrentPatientMaritalStatus(personId);
+                var KeyPop = keyPopulationManager.GetCurrentPatientPopulations(personId);
+               
+                PersonNotEnrolled personNotEnrolledData = new PersonNotEnrolled()
+                {
+                    FirstName = personNotEnrolled[0].FirstName,
+                    MiddleName = personNotEnrolled[0].MiddleName,
+                    LastName = personNotEnrolled[0].LastName,
+                    PatientType = personNotEnrolled[0].PatientType.ToString(),
+                    DoB = personNotEnrolled[0].DateOfBirth,
+                    Sex = personNotEnrolled[0].Sex,
+                    MaritalStatus = maritalStatus.MaritalStatusId,
+                    Age = Convert.ToDecimal(notEnrolled.GetAge(personNotEnrolled[0].DateOfBirth)),
+                    DateOfBirthPrecision = personNotEnrolled[0].DobPrecision,
+                    KeyPopName = (KeyPop.Count>0)? KeyPop[0].PopulationType:""
+                };
+                Session["editPersonId"] = 0;
+                return new JavaScriptSerializer().Serialize(personNotEnrolledData);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw new Exception(e.Message);
+            }
         }
 
         [WebMethod(EnableSession = true)]
