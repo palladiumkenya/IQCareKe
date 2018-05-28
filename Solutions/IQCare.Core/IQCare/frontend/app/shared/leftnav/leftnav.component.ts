@@ -14,17 +14,20 @@ export class LeftnavComponent implements OnInit {
     isReferred: boolean;
     hasConsentedPartnerListing: boolean;
     isEnrolled: boolean;
+    personId: number;
 
     constructor(private store: Store<AppState>) {
         // this.store.dispatch(new Consent.ConsentTesting(true));
         store.pipe(select('app')).subscribe(res => {
-            if (res['consent'])
+            if (res['consent']) {
                 this.consent = res['consent'];
+            }
         });
 
         store.pipe(select('app')).subscribe(res => {
-            if (res['isPositive'])
+            if (res['isPositive']) {
                 this.isPositive = res['isPositive'];
+            }
         });
 
         store.pipe(select('app')).subscribe(res => {
@@ -34,16 +37,19 @@ export class LeftnavComponent implements OnInit {
         });
 
         store.pipe(select('app')).subscribe(res => {
-            if (res['isReferred'])
+            if (res['isReferred']) {
                 this.isReferred = res['isReferred'];
+            }
         });
 
         store.pipe(select('app')).subscribe(res => {
-            if (res['isEnrolled'])
+            if (res['isEnrolled']) {
                 this.isEnrolled = res['isEnrolled'];
+            }
         });
     }
 
     ngOnInit() {
+        this.personId = JSON.parse(localStorage.getItem('personId'));
     }
 }
