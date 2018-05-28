@@ -606,13 +606,13 @@ namespace IQCare.CCC.UILogic
 
         public void GenerateExcel(string category)
         {
-            IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
-            DataTable theDT = patientEncounter.GenerateExcelDifferentiatedCare(category);
+            //IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
+            //DataTable theDT = patientEncounter.GenerateExcelDifferentiatedCare(category);
 
-            System.IO.Directory.CreateDirectory(@"C:\Reports");
-            Excel.ExcelUtlity obj = new Excel.ExcelUtlity();
-            obj.WriteDataTableToExcel(theDT, "Sheet1", "C:\\Reports\\" + (category.Replace("(","")).Replace(")","") + "_" + (DateTime.Now.ToString("dd/MM/yyyy").Replace("/","_")).Replace(":","_") + ".xlsx", "Details");
-            obj.openExcel("C:\\Reports\\" + (category.Replace("(", "")).Replace(")", "") + "_" + (DateTime.Now.ToString("dd/MM/yyyy").Replace("/","_")).Replace(":","_") + ".xlsx");
+            //System.IO.Directory.CreateDirectory(@"C:\Reports");
+            //Excel.ExcelUtlity obj = new Excel.ExcelUtlity();
+            //obj.WriteDataTableToExcel(theDT, "Sheet1", "C:\\Reports\\" + (category.Replace("(","")).Replace(")","") + "_" + (DateTime.Now.ToString("dd/MM/yyyy").Replace("/","_")).Replace(":","_") + ".xlsx", "Details");
+            //obj.openExcel("C:\\Reports\\" + (category.Replace("(", "")).Replace(")", "") + "_" + (DateTime.Now.ToString("dd/MM/yyyy").Replace("/","_")).Replace(":","_") + ".xlsx");
         }
     }
 }

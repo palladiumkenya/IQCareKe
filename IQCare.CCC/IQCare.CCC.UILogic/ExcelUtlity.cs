@@ -11,6 +11,7 @@ namespace Excel
 {
     public class ExcelUtlity
     {
+        /*
         /// <summary>
         /// FUNCTION FOR EXPORT TO EXCEL
         /// </summary>
@@ -137,6 +138,6 @@ namespace Excel
             excel.Visible = true;
             Microsoft.Office.Interop.Excel.Workbook wb = excel.Workbooks.Open(path);
         }
-
+        */
     }
 }
