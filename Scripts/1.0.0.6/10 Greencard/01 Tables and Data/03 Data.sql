@@ -1287,7 +1287,7 @@ insert into [FacilityList] values(17894,'Bwiti (Tiomin) Dispensary')
 
 UPDATE lnk_DrugGeneric  SET GenericID=(SELECT top 1 GenericID FROM mst_Generic WHERE GenericAbbrevation LIKE '%lpv/r%') WHERE Drug_pk IN(SELECT Drug_pk FROM mst_drug WHERE DrugName LIKE '%lpv%')
 
-UPDATE lnk_DrugGeneric  SET GenericID=(SELECT  top 1 GenericID FROM mst_Generic WHERE GenericAbbrevation LIKE '%atv/r%') WHERE Drug_pk IN(SELECT Drug_pk FROM mst_drug WHERE DrugName LIKE '%atv%')
+UPDATE lnk_DrugGeneric  SET GenericID=(SELECT top 1 GenericID FROM mst_Generic WHERE GenericAbbrevation LIKE '%atv/r%') WHERE Drug_pk IN(SELECT Drug_pk FROM mst_drug WHERE DrugName LIKE '%atv%')
 
 -- regenerate the abbreviations
 update Mst_ItemMaster

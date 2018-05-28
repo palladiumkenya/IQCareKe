@@ -9,6 +9,8 @@ GO
 
 CREATE VIEW [dbo].[Api_PatientsView]
 AS
+SELECT ISNULL(ROW_NUMBER() OVER(ORDER BY PersonId ASC), -1) AS RowID, *
+FROM (
 SELECT
 	   P.[Id] PersonId,
 	   PT.Id PatientId,
