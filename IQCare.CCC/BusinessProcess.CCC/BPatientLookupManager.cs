@@ -56,6 +56,7 @@ namespace BusinessProcess.CCC
                             Expression<Func<PatientLookup, bool>> expressionPatientStatus =
                                 c => c.PatientStatus.ToLower().Contains("not enrolled");
                             expresionFinal = PredicateBuilder.And(expresionFinal, expressionPatientStatus);
+                            //Expression<Func<PatientLookup, bool>> expressionPatientMax = 
                             break;
                         default:
                             Expression<Func<PatientLookup, bool>> expressionPatientStatusEnrolled =
@@ -65,7 +66,7 @@ namespace BusinessProcess.CCC
                     }
                 }
 
-                patientLookups = unitOfWork.PatientLookupRepository.Filter(expresionFinal).ToList();
+                patientLookups = unitOfWork.PatientLookupRepository.Filter(expresionFinal).Take(PredicateBuilder.MaxRecord).ToList();
 
                 return patientLookups;
 

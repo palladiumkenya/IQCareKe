@@ -863,15 +863,15 @@ namespace IQCare.Web.CCC.WebService
                
                 PersonNotEnrolled personNotEnrolledData = new PersonNotEnrolled()
                 {
-                    FirstName = personNotEnrolled[0].FirstName,
-                    MiddleName = personNotEnrolled[0].MiddleName,
-                    LastName = personNotEnrolled[0].LastName,
-                    PatientType = personNotEnrolled[0].PatientType.ToString(),
-                    DoB = personNotEnrolled[0].DateOfBirth,
-                    Sex = personNotEnrolled[0].Sex,
+                    FirstName = personNotEnrolled.FirstName,
+                    MiddleName = personNotEnrolled.MiddleName,
+                    LastName = personNotEnrolled.LastName,
+                    PatientType = personNotEnrolled.PatientType.ToString(),
+                    DoB = personNotEnrolled.DateOfBirth,
+                    Sex = personNotEnrolled.Sex,
                     MaritalStatus = maritalStatus.MaritalStatusId,
-                    Age = Convert.ToDecimal(notEnrolled.GetAge(personNotEnrolled[0].DateOfBirth)),
-                    DateOfBirthPrecision = personNotEnrolled[0].DobPrecision,
+                    Age = Convert.ToDecimal(notEnrolled.GetAge(personNotEnrolled.DateOfBirth)),
+                    DateOfBirthPrecision = personNotEnrolled.DobPrecision,
                     KeyPopName = (KeyPop.Count>0)? KeyPop[0].PopulationType:""
                 };
                 Session["editPersonId"] = 0;
