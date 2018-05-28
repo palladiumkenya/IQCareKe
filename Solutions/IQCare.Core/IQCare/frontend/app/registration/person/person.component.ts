@@ -107,6 +107,8 @@ export class PersonComponent implements OnInit {
                     this.priorityPops = options[i].value;
                 }
             }
+
+            this.getPersonDetailsForUpdate();
         });
 
         this.formGroup = this._formBuilder.group({
@@ -146,95 +148,154 @@ export class PersonComponent implements OnInit {
             }
 
         } else {
-            this.formGroup.controls.formArray['controls'][2].controls.partnerRelationship.disable({ onlySelf: true });
-            localStorage.removeItem('personId');
-            localStorage.removeItem('patientId');
-            localStorage.removeItem('partnerId');
-            localStorage.removeItem('htsEncounterId');
-            localStorage.removeItem('patientMasterVisitId');
-            localStorage.removeItem('isPartner');
-            localStorage.setItem('serviceAreaId', '2');
-            localStorage.removeItem('editEncounterId');
+            if (JSON.parse(localStorage.getItem('isHtsEnrolled')) == 1) {
 
+            } else {
+                this.formGroup.controls.formArray['controls'][2].controls.partnerRelationship.disable({ onlySelf: true });
+                localStorage.removeItem('personId');
+                localStorage.removeItem('patientId');
+                localStorage.removeItem('partnerId');
+                localStorage.removeItem('htsEncounterId');
+                localStorage.removeItem('patientMasterVisitId');
+                localStorage.removeItem('isPartner');
+                localStorage.setItem('serviceAreaId', '2');
+                localStorage.removeItem('editEncounterId');
+            }
             this.store.dispatch(new Consent.ClearState());
         }
     }
 
     onSubmitForm() {
-        // console.log(this.formGroup.valid);
+        console.log(this.formGroup.valid);
+        console.log(this.formGroup);
         if (this.formGroup.valid) {
-            this.person = { ...this.person, ...this.formArray.get([0]).value };
-            this.contact = Object.assign(this.person, this.formArray.get([1]).value);
-            this.personPopulation = { ...this.personPopulation, ...this.formArray.get([2]).value };
-            this.person.partnerRelationship = this.formArray.get([2]).value['partnerRelationship'];
-            this.person.createdBy = JSON.parse(localStorage.getItem('appUserId'));
-
-            if (this.partnerType != null && (this.partnerType.partner == 1 || this.partnerType.family == 1)) {
-                this.person.isPartner = true;
-                this.person.patientId = JSON.parse(localStorage.getItem('patientId'));
+            if (JSON.parse(localStorage.getItem('isHtsEnrolled')) == 1) {
+                this.updatePersonSubmit();
             } else {
-                this.person.isPartner = false;
+                this.onNewClientSubmit();
             }
 
-            // send the person to IQCare API
-            this.registrationService.registerClient(this.person).subscribe(data => {
-                const personRelation = {};
-                personRelation['PersonId'] = data['personId'];
-                personRelation['PatientId'] = JSON.parse(localStorage.getItem('patientId'));
-                personRelation['RelationshipTypeId'] = this.person.partnerRelationship;
-                personRelation['UserId'] = JSON.parse(localStorage.getItem('appUserId'));
-
-                const patientAdd = !this.person.isPartner ? this.registrationService.addPatient(data['personId'], this.person.DateOfBirth)
-                    : this.registrationService.addPersonRelationship(personRelation);
-
-                const personCont = this.registrationService.addPersonContact(data['personId'],
-                    null, this.contact.PhoneNumber,
-                    null, null, this.userId);
-
-
-                const matStatus = this.registrationService.addPersonMaritalStatus(data['personId'],
-                    this.person.MaritalStatus, this.userId);
-
-                const populationTypes = this.registrationService.addPersonPopulationType(data['personId'],
-                    this.userId, this.personPopulation);
-
-                const personLoc = this.registrationService.addPersonLocation(data['personId'], 0,
-                    0, 0, this.userId, this.contact.Landmark);
-
-                // join multiple requests
-                forkJoin([patientAdd, personCont, matStatus, personLoc, populationTypes]).subscribe(results => {
-                    if (this.person.isPartner == false) {
-                        localStorage.setItem('patientId', results[0]['patientId']);
-                        localStorage.setItem('personId', data['personId']);
-                    } else {
-                        localStorage.setItem('partnerId', data['personId']);
-                    }
-                }, (err) => {
-                    this.snotifyService.error('Error registering client ' + err,
-                        'Registration', this.notificationService.getConfig());
-                }, () => {
-                    if (this.person.isPartner == true) {
-                        this.snotifyService.success('Successfully registered partner',
-                            'Registration', this.notificationService.getConfig());
-
-                        localStorage.removeItem('isPartner');
-                        if (this.partnerType.family == 1) {
-                            this.zone.run(() => { this.router.navigate(['/hts/family'], { relativeTo: this.route }); });
-                        } else {
-                            this.zone.run(() => { this.router.navigate(['/hts/pns'], { relativeTo: this.route }); });
-                        }
-                    } else {
-                        this.snotifyService.success('Successfully registered client', 'Registration', this.notificationService.getConfig());
-                        this.zone.run(() => { this.router.navigate(['/registration/enrollment'], { relativeTo: this.route }); });
-                    }
-                });
-
-            }, err => {
-                this.snotifyService.error('Error registering client ' + err, 'Registration', this.notificationService.getConfig());
-            });
         } else {
             return;
         }
+    }
+
+    updatePersonSubmit() {
+        this.person = { ...this.person, ...this.formArray.get([0]).value };
+        this.contact = Object.assign(this.person, this.formArray.get([1]).value);
+        this.personPopulation = { ...this.personPopulation, ...this.formArray.get([2]).value };
+        this.person.partnerRelationship = this.formArray.get([2]).value['partnerRelationship'];
+        this.person.createdBy = JSON.parse(localStorage.getItem('appUserId'));
+        this.person.Id = JSON.parse(localStorage.getItem('personId'));
+
+        if (this.partnerType != null && (this.partnerType.partner == 1 || this.partnerType.family == 1)) {
+            this.person.isPartner = true;
+            this.person.patientId = JSON.parse(localStorage.getItem('patientId'));
+        } else {
+            this.person.isPartner = false;
+        }
+
+        this.registrationService.updatePersonDetails(this.person).subscribe((personRes) => {
+            console.log(personRes);
+
+            const personCont = this.registrationService.updatePersonContact(personRes['id'],
+                null, this.contact.PhoneNumber,
+                null, null, this.userId);
+
+            const matStatus = this.registrationService.updatePersonMaritalStatus(personRes['id'],
+                this.person.MaritalStatus, this.userId);
+
+
+            /*const populationTypes = this.registrationService.addPersonPopulationType(personRes.Id,
+                this.userId, this.personPopulation);*/
+
+            const personLoc = this.registrationService.updatePersonLocation(personRes['id'], 0,
+                0, 0, this.userId, this.contact.Landmark);
+
+            forkJoin([personCont, matStatus, personLoc]).subscribe((forkJoinRes) => {
+                console.log('success');
+            }, (error) => {
+                this.snotifyService.error('Error editing client ' + error, 'Registration', this.notificationService.getConfig());
+            }, () => {
+                this.snotifyService.success('Successfully registered client', 'Registration', this.notificationService.getConfig());
+                this.zone.run(() => { this.router.navigate(['/registration/enrollment'], { relativeTo: this.route }); });
+            });
+        }, (err) => {
+            this.snotifyService.error('Error editing client ' + err, 'Registration', this.notificationService.getConfig());
+        });
+    }
+
+    onNewClientSubmit() {
+        this.person = { ...this.person, ...this.formArray.get([0]).value };
+        this.contact = Object.assign(this.person, this.formArray.get([1]).value);
+        this.personPopulation = { ...this.personPopulation, ...this.formArray.get([2]).value };
+        this.person.partnerRelationship = this.formArray.get([2]).value['partnerRelationship'];
+        this.person.createdBy = JSON.parse(localStorage.getItem('appUserId'));
+
+        if (this.partnerType != null && (this.partnerType.partner == 1 || this.partnerType.family == 1)) {
+            this.person.isPartner = true;
+            this.person.patientId = JSON.parse(localStorage.getItem('patientId'));
+        } else {
+            this.person.isPartner = false;
+        }
+
+        // send the person to IQCare API
+        this.registrationService.registerClient(this.person).subscribe(data => {
+            const personRelation = {};
+            personRelation['PersonId'] = data['personId'];
+            personRelation['PatientId'] = JSON.parse(localStorage.getItem('patientId'));
+            personRelation['RelationshipTypeId'] = this.person.partnerRelationship;
+            personRelation['UserId'] = JSON.parse(localStorage.getItem('appUserId'));
+
+            const patientAdd = this.registrationService.addPersonRelationship(personRelation);
+
+            // this.registrationService.addPatient(data['personId'], this.person.DateOfBirth)
+
+            const personCont = this.registrationService.addPersonContact(data['personId'],
+                null, this.contact.PhoneNumber,
+                null, null, this.userId);
+
+
+            const matStatus = this.registrationService.addPersonMaritalStatus(data['personId'],
+                this.person.MaritalStatus, this.userId);
+
+            const populationTypes = this.registrationService.addPersonPopulationType(data['personId'],
+                this.userId, this.personPopulation);
+
+            const personLoc = this.registrationService.addPersonLocation(data['personId'], 0,
+                0, 0, this.userId, this.contact.Landmark);
+
+            // join multiple requests
+            forkJoin([patientAdd, personCont, matStatus, personLoc, populationTypes]).subscribe(results => {
+                if (this.person.isPartner == false) {
+                    // localStorage.setItem('patientId', results[0]['patientId']);
+                    localStorage.setItem('personId', data['personId']);
+                } else {
+                    localStorage.setItem('partnerId', data['personId']);
+                }
+            }, (err) => {
+                this.snotifyService.error('Error registering client ' + err,
+                    'Registration', this.notificationService.getConfig());
+            }, () => {
+                if (this.person.isPartner == true) {
+                    this.snotifyService.success('Successfully registered partner',
+                        'Registration', this.notificationService.getConfig());
+
+                    localStorage.removeItem('isPartner');
+                    if (this.partnerType.family == 1) {
+                        this.zone.run(() => { this.router.navigate(['/hts/family'], { relativeTo: this.route }); });
+                    } else {
+                        this.zone.run(() => { this.router.navigate(['/hts/pns'], { relativeTo: this.route }); });
+                    }
+                } else {
+                    this.snotifyService.success('Successfully registered client', 'Registration', this.notificationService.getConfig());
+                    this.zone.run(() => { this.router.navigate(['/registration/enrollment'], { relativeTo: this.route }); });
+                }
+            });
+
+        }, err => {
+            this.snotifyService.error('Error registering client ' + err, 'Registration', this.notificationService.getConfig());
+        });
     }
 
     estimateDob() {
@@ -335,5 +396,67 @@ export class PersonComponent implements OnInit {
             return obj.itemName !== 'Not Applicable';
         });
         this.keyPops = optionsHtsKeyPops;
+    }
+
+    getPersonDetailsForUpdate() {
+        if (JSON.parse(localStorage.getItem('isHtsEnrolled')) == 1) {
+            const personId = JSON.parse(localStorage.getItem('personId'));
+            this.registrationService.getPersonDetails(personId).subscribe((res) => {
+                console.log(this.formGroup);
+                console.log(res);
+
+                this.formGroup.controls.formArray['controls'][0]['controls'].FirstName.setValue(res.firstName);
+                this.formGroup.controls.formArray['controls'][0]['controls'].MiddleName.setValue(res.midName);
+                this.formGroup.controls.formArray['controls'][0]['controls'].LastName.setValue(res.lastName);
+                this.formGroup.controls.formArray['controls'][0]['controls'].Sex.setValue(res.sex);
+                this.formGroup.controls.formArray['controls'][0]['controls'].DateOfBirth.setValue(res.dateOfBirth);
+                this.formGroup.controls.formArray['controls'][0]['controls'].MaritalStatus.setValue(res.maritalStatusId);
+                this.formGroup.controls.formArray['controls'][0]['controls'].personAge.setValue(res.ageNumber);
+
+
+                this.formGroup.controls.formArray['controls'][1]['controls'].PhoneNumber.setValue(res.mobileNumber);
+                this.formGroup.controls.formArray['controls'][1]['controls'].Landmark.setValue(res.landMark);
+
+                this.registrationService.getPersonPopulationDetails(personId).subscribe((populationRes) => {
+                    if (populationRes.length == 0) {
+                        this.formGroup.controls.formArray['controls'][2]['controls'].populationType.setValue(1);
+                        this.formGroup.controls['formArray']['controls'][2].controls.KeyPopulation.disable({ onlySelf: true });
+                        this.formGroup.controls['formArray']['controls'][2].controls.KeyPopulation.setValue([]);
+                    } else {
+                        const keyPopValues = [];
+
+                        for (let i = 0; i < populationRes.length; i++) {
+                            if (populationRes[i].populationType == 'General Population') {
+                                this.formGroup.controls.formArray['controls'][2]['controls'].populationType.setValue(1);
+                                this.formGroup.controls['formArray']['controls'][2].controls.KeyPopulation.disable({ onlySelf: true });
+                                this.formGroup.controls['formArray']['controls'][2].controls.KeyPopulation.setValue([]);
+                            } else if (populationRes[i].populationType == 'Key Population') {
+                                this.formGroup.controls.formArray['controls'][2]['controls'].populationType.setValue(2);
+                                keyPopValues.push(populationRes[i].populationCategory);
+                            }
+                        }
+                        this.formGroup.controls.formArray['controls'][2]['controls'].KeyPopulation.setValue(keyPopValues);
+                    }
+                });
+
+                this.registrationService.getPersonPriorityDetails(personId).subscribe((priorityRes) => {
+                    if (priorityRes.length == 0) {
+                        this.formGroup.controls.formArray['controls'][2]['controls'].priorityPop.setValue(2);
+                        this.formGroup.controls['formArray']['controls'][2].controls.priorityPopulation.disable({ onlySelf: true });
+                        this.formGroup.controls['formArray']['controls'][2].controls.priorityPopulation.setValue([]);
+                    } else {
+                        this.formGroup.controls.formArray['controls'][2]['controls'].priorityPop.setValue(1);
+                        const priorityPersonValues = [];
+                        for (let i = 0; i < priorityRes.length; i++) {
+                            priorityPersonValues.push(priorityRes[i].PriorityId);
+                        }
+                        this.formGroup.controls.formArray['controls'][2]['controls'].priorityPopulation.setValue(priorityPersonValues);
+                    }
+                });
+
+                this.formGroup.controls.formArray['controls'][2]['controls'].partnerRelationship.disable({ onlySelf: true });
+                this.formGroup.controls['formArray']['controls'][2].controls.partnerRelationship.setValue('');
+            });
+        }
     }
 }

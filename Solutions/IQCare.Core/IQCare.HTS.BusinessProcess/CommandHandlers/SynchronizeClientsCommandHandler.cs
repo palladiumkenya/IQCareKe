@@ -362,7 +362,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                             var person = await registerPersonService.RegisterPerson(firstName, middleName, lastName, sex,
                                 dateOfBirth, userId);
                             // Add Patient
-                            var patient = await registerPersonService.AddPatient(person.Id, dateOfBirth, userId, facilityId);
+                            var patient = await registerPersonService.AddPatient(person.Id, userId, facilityId);
                             // Enroll patient
                             var patientIdentifier = await registerPersonService.EnrollPatient(enrollmentNo, patient.Id, 2, userId, dateEnrollment);
                             //Add PersonIdentifiers
