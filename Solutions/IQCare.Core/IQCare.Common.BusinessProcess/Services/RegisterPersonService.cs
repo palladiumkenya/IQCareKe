@@ -300,11 +300,26 @@ namespace IQCare.Common.BusinessProcess.Services
             }
         }
 
+        public async Task<List<PersonMaritalStatus>> GetPersonMaritalStatus(int personId)
+        {
+            try
+            {
+                var result = await _unitOfWork.Repository<PersonMaritalStatus>()
+                    .Get(x => x.PersonId == personId && x.DeleteFlag == false).ToListAsync();
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         public async Task<PersonMaritalStatus> UpdateMaritalStatus(int personId, int maritalStatusId)
         {
             try
             {
-                var maritalStatus = await _unitOfWork.Repository<PersonMaritalStatus>().Get(x => x.PersonId == personId)
+                var maritalStatus = await _unitOfWork.Repository<PersonMaritalStatus>().Get(x => x.PersonId == personId && x.DeleteFlag == false)
                     .FirstOrDefaultAsync();
 
                 maritalStatus.MaritalStatusId = maritalStatusId;
@@ -464,7 +479,12 @@ namespace IQCare.Common.BusinessProcess.Services
                         var maritalStatusId = await lookupLogic.GetDecodeIdByName(patientLookup[0].MaritalStatusName, 17);
                         var address = patientLookup[0].PhysicalAddress == null ? " " : patientLookup[0].PhysicalAddress;
                         var phone = patientLookup[0].MobileNumber == null ? " " : patientLookup[0].MobileNumber;
-                        var dobPrecision = patientLookup[0].DobPrecision ? 1 : 0;
+                        var dobPrecision = 0;
+                        if (patientLookup[0].DobPrecision.HasValue)
+                        {
+                            var dobPrecisionValue = patientLookup[0].DobPrecision.Value;
+                            dobPrecision = dobPrecisionValue ? 1 : 0;
+                        }
 
                         var gender = 0;
                         if (patientLookup[0].Gender == "Male")
@@ -475,6 +495,10 @@ namespace IQCare.Common.BusinessProcess.Services
                         {
                             gender = 17;
                         }
+
+                        string dateOfBirth = string.Empty;
+                        if (patientLookup[0].DateOfBirth.HasValue)
+                            dateOfBirth = patientLookup[0].DateOfBirth.Value.ToString("yyyy-MM-dd");
 
                         StringBuilder sql = new StringBuilder();
                         sql.Append("exec pr_OpenDecryptedSession;");
@@ -488,7 +512,7 @@ namespace IQCare.Common.BusinessProcess.Services
                         sql.Append($"'{referralId}',");
                         sql.Append($"'{dateOfEnrollment.ToString("yyyy-MM-dd")}',");
                         sql.Append($"'{gender}',");
-                        sql.Append($"'{patientLookup[0].DateOfBirth.ToString("yyyy-MM-dd")}',");
+                        sql.Append($"'{dateOfBirth}',");
                         sql.Append($"'{dobPrecision}',");
                         sql.Append($"'{maritalStatusId}',");
                         sql.Append($"ENCRYPTBYKEY(KEY_GUID('Key_CTC'),'{address}'),");

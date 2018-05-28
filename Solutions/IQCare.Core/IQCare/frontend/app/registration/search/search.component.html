@@ -17,7 +17,8 @@
                                     <div class="col-lg-3 col-md-3 col-sm-3">
                                         <div class="form-group">
                                             <label>Identification Number</label>
-                                            <input type="text" id="identificationNumber" name="identificationNumber" class="form-control" tabindex="1" [(ngModel)]="search.identifierValue" #identifierValue="ngModel">
+                                            <input type="text" id="identificationNumber" name="identificationNumber" class="form-control" tabindex="1" [(ngModel)]="search.identifierValue"
+                                                #identifierValue="ngModel">
                                         </div>
                                     </div>
 
@@ -100,15 +101,17 @@
                                 </ng-container>
 
 
+                                <!-- Enrolled in HTS? Column -->
+                                <ng-container matColumnDef="isHtsEnrolled">
+                                    <mat-header-cell *matHeaderCellDef> Enrolled </mat-header-cell>
+                                    <mat-cell *matCellDef="let element" [ngStyle]="{'color': element.isHtsEnrolled === 'Enrolled'? 'Green' : 'red' }"> {{element.isHtsEnrolled }} </mat-cell>
+                                </ng-container>
 
                                 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                                 <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="getSelectedRow(row)"></mat-row>
                             </mat-table>
 
-                            <mat-paginator [length]=""
-                                           [pageSize]="5"
-                                           [pageSizeOptions]="[3, 5, 10, 20]"
-                                           [showFirstLastButtons]="true">
+                            <mat-paginator [length]="" [pageSize]="5" [pageSizeOptions]="[3, 5, 10, 20]" [showFirstLastButtons]="true">
                             </mat-paginator>
                         </div>
                     </div>

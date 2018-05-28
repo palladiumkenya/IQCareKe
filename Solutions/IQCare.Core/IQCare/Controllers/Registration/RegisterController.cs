@@ -33,6 +33,15 @@ namespace IQCare.Controllers.Registration
             return BadRequest(response);
         }
 
+        [HttpPost("UpdatePerson")]
+        public async Task<IActionResult> UpdatePerson([FromBody] UpdatePersonCommand updatePersonCommand)
+        {
+            var response = await _mediator.Send(updatePersonCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
         [HttpPost("addPatient")]
         public async Task<IActionResult> Post([FromBody] AddPatientCommand addPatientCommand)
         {
