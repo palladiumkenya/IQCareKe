@@ -94,9 +94,9 @@ SELECT
 	  CAST(DECRYPTBYKEY(ps.MidName) AS VARCHAR(50)) MidName,
 	  P.DateOfBirth,
 	 CASE WHEN
-	   (SELECT top 1 Name FROM LookupItem WHERE id= ps.Sex) IS NULL THEN ''
+	   (SELECT top 1 LEFT(Name,1) FROM LookupItem WHERE id= ps.Sex) IS NULL THEN ''
 	 ELSE
-	  (SELECT top 1 Name FROM LookupItem WHERE id= ps.Sex) 
+	  (SELECT top 1 LEFT(Name,1) FROM LookupItem WHERE id= ps.Sex) 
 	 END Sex ,
 	  CAST(DATEDIFF(DD,P.DateOfBirth,GETDATE())/365.25 as INT) [AGE],
 	  p.DobPrecision,
@@ -730,10 +730,10 @@ SELECT
     DISTINCT     
 	L.PersonId,
 	L.PatientId
-	,CASE WHEN  (SELECT i.IdentifierValue from PatientIdentifier i WHERE i.PatientId=L.PatientId AND i.IdentifierTypeId IN(SELECT top 1 Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER'))  IS NULL THEN ''
-	 ELSE 
-		(SELECT i.IdentifierValue from PatientIdentifier i WHERE i.PatientId=L.PatientId AND i.IdentifierTypeId IN(SELECT top 1 Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER')) 
-	 END [CardSerialNumber],
+		CASE WHEN L.CardSerialNumber IS NULL THEN '' --(SELECT IdentifierValue i FROM PersonIdentifier i WHERE i.PersonId=L.PersonId AND i.IdentifierId IN(SELECT Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER')) IS NULL THEN ''
+		ELSE
+		  L.CardSerialNumber	-- (SELECT IdentifierValue i FROM PersonIdentifier i WHERE i.PersonId=L.PersonId AND i.IdentifierId IN(SELECT Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER'))
+		END [CardSerialNumber],
 	 L.Village  [VILLAGE],
 	L.Ward	[WARD],
 	L.SubCounty [SUB_COUNTY],
