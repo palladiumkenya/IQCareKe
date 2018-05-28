@@ -1,4 +1,5 @@
 ﻿using Application.Presentation;
+using Entities.CCC;
 using Entities.CCC.Lookup;
 using Interface.CCC.Lookup;
 using System;
@@ -9,11 +10,11 @@ namespace IQCare.CCC.UILogic
     public class PatientLookupManager
     {
         readonly IPatientLookupmanager _patientLookupmanager = (IPatientLookupmanager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientLookupManager, BusinessProcess.CCC");
-        
-       public PatientLookup GetPatientDetailSummary(int id)
+
+        public PatientLookup GetPatientDetailSummary(int id)
         {
             var patientDetails = _patientLookupmanager.GetPatientDetailsLookup(id);
-           // call invoke application decryption
+            // call invoke application decryption
             return patientDetails;
         }
 
@@ -29,16 +30,16 @@ namespace IQCare.CCC.UILogic
             }
         }
 
-        public List<PatientLookup> GetPatientSearchListPayload(string patientId, string firstName = null, string middleName = null, string lastName =null)
+        public List<PatientLookup> GetPatientSearchListPayload(string patientId,string isEnrolled, string firstName = null, string middleName = null, string lastName =null)
         {
-            var patientDetails = _patientLookupmanager.GetPatientSearchPayload(patientId, firstName, middleName, lastName);
+            var patientDetails = _patientLookupmanager.GetPatientSearchPayload(patientId,isEnrolled, firstName, middleName, lastName);
 
             return patientDetails;
         }
 
-        public List<PatientLookup> GetPatientSearchListPayload()
+        public List<PatientLookup> GetPatientSearchListPayload(string isEnrolled)
         {
-            var patientDetails = _patientLookupmanager.GetPatientSearchPayload();
+            var patientDetails = _patientLookupmanager.GetPatientSearchPayload(isEnrolled);
 
             return patientDetails;
         }
@@ -48,8 +49,7 @@ namespace IQCare.CCC.UILogic
         {
             IPatientLookupmanager patientLookupmanager = (IPatientLookupmanager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientLookupManager, BusinessProcess.CCC");
 
-            var patientList = patientLookupmanager.GetPatientSearchPayloadWithParameter(patientId, fname, mname, lname,
-                doB, sex, facility,start,length);
+            var patientList = patientLookupmanager.GetPatientSearchPayloadWithParameter(patientId, fname, mname, lname, doB, sex, facility, start, length);
             return patientList;
         }
 
@@ -59,22 +59,22 @@ namespace IQCare.CCC.UILogic
             return _patientLookupmanager.GetTotalpatientCount();
         }
 
-        public List<PatientLookup> GetPatientByPersonId(int personId)
+        public PatientLookup GetPatientByPersonId(int personId)
         {
             return _patientLookupmanager.GetPatientByPersonId(personId);
         }
 
         public string GetPatientTypeId(int patientId)
         {
-          return  LookupLogic.GetLookupNameById(_patientLookupmanager.GetPatientTypeId(patientId));
+            return LookupLogic.GetLookupNameById(_patientLookupmanager.GetPatientTypeId(patientId));
         }
 
         public string GetDobByPersonId(int personId)
         {
             var person = _patientLookupmanager.GetPatientByPersonId(personId);
-            if (person.Count > 0)
+            if (null != person)
             {
-                DateTime dob = person[0].DateOfBirth;
+                DateTime dob = person.DateOfBirth;
                 string stringDob = dob.ToString("dd-MMM-yyyy");
                 return stringDob;
             }
@@ -87,18 +87,19 @@ namespace IQCare.CCC.UILogic
         public int IsPatientExists(int personId)
         {
             var person = _patientLookupmanager.GetPatientByPersonId(personId);
-            var retVal = person.Count > 0 ? 1 : 0;
+            var retVal = person != null ? 1 : 0;
             return retVal;
         }
 
         public int PatientId(int personId)
         {
             var person = _patientLookupmanager.GetPatientByPersonId(personId);
-            var retVal = person.Count > 0 ? person[0].Id : 0;
+            var retVal = person != null ? person.Id : 0;
             return retVal;
         }
 
-        public List<PatientLookup> GetPatientListByParams(int patientId, string firstName, string middleName, string lastName,int sex)
+
+        public List<PatientLookup> GetPatientListByParams(int patientId, string firstName, string middleName, string lastName, int sex)
         {
             try
             {
@@ -154,6 +155,11 @@ namespace IQCare.CCC.UILogic
                 throw new Exception(e.Message);
             }
             return patient;
+        }
+
+        public List<PatientRelationshipDTO> GetPatientRelationshipView(int patientId)
+        {
+            return _patientLookupmanager.GetPatientRelationshipView(patientId);
         }
     }
 }

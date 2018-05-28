@@ -16,6 +16,7 @@ namespace Application.Common
         /// </summary>    
         public static Expression<Func<T, bool>> True<T>() { return param => true; }
 
+        public static int MaxRecord = 100;
         /// <summary>    
         /// Creates a predicate that evaluates to false.    
         /// </summary>    

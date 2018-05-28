@@ -161,6 +161,7 @@
                  <div class="col-md-7"><label class="control-label pull-left">Complete VL Tests</label></div>
                 <div class="col-md-5 pull-right">
                     <asp:Label runat="server" ClientIDMode="Static" ID="completeVL" CssClass="control-label text-success pull-right"></asp:Label>
+
                 </div>
             </div>
             <div class="col-md-12"><hr /></div>
@@ -403,8 +404,28 @@
     </div>--%>
     <script type="text/javascript">
          var facilityId = '<%=AppLocationId%>';
-    
+
+        function GenExcel(category) {
+            $.ajax({
+                url: 'WebService/PatientSummaryService.asmx/GenerateExcel',
+                data: "{'category':'" + category + "'}",
+                type: 'POST',
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                cache: false,
+                success: function (response) {
+                    //console.log(response.d);
+                    //pending = response.d;
+                    //document.getElementById("pendingVL").innerHTML = "<span class='badge'>" + response.d + "</span>";
+
+                }
+
+            });
+        }
+
         $(document).ready(function () {           
+
+            
 
             var ptncame=0;
             $('#AppointmentDate').datepicker({

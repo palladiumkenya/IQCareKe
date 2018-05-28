@@ -4,6 +4,7 @@ using Interface.CCC.Patient;
 using System;
 using System.Collections.Generic;
 using Entities.CCC.Lookup;
+using IQCare.CCC.UILogic.Helpers;
 
 namespace IQCare.CCC.UILogic
 {
@@ -40,15 +41,18 @@ namespace IQCare.CCC.UILogic
                 throw e;
             }
         }
-
-        public List<PatientEntity> CheckPersonEnrolled(int personId)
+        public PatientEntity GetPatientEntityByPersonId(int personId)
         {
-            return _mgr.CheckPersonEnrolled(personId);
+            return PatientEntityHelper.MapFromPatientPersonView(_mgr.GetPatientEntityByPersonId(personId));
+        }
+        public PatientEntity CheckPersonEnrolled(int personId)
+        {
+            return PatientEntityHelper.MapFromPatientPersonView(_mgr.CheckPersonEnrolled(personId));
         }
 
         public PatientEntity GetPatientEntity(int patientId)
         {
-            return _mgr.GetPatient(patientId);
+            return PatientEntityHelper.MapFromPatientPersonView(_mgr.GetPatient(patientId));
         }
 
         public string GetPatientType(int patientId)

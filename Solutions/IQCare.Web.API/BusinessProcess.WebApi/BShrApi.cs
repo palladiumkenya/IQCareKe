@@ -40,15 +40,26 @@ namespace BusinessProcess.WebApi
             }
         }
 
-        public void LogPSmartRequest(TransactionLog transactionLog)
+        public int LogPSmartRequest(TransactionLog transactionLog)
         {
            using (UnitOfWork unitOfWork = new UnitOfWork(new PsmartContext()))
             {
                 unitOfWork.LogRepository.Add(transactionLog);
+               int result = unitOfWork.Complete();
                 unitOfWork.Dispose();
+                return result;
             }
         }
 
-       
+        public int UpdateRequestLog(TransactionLog transactionLog)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new PsmartContext()))
+            {
+                unitOfWork.LogRepository.Update(transactionLog);
+                int result = unitOfWork.Complete();
+                unitOfWork.Dispose();
+                return result;
+            }
+        }
     }
 }

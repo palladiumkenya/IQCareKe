@@ -60,7 +60,8 @@ namespace IQCare.Web.CCC
                             html += "</div>";
                             html += "<div class='col-md-2 pull-right'>";
                             html += "<label for='value' id='" + Label + "' class='control-label text-success pull-right'>";
-                            html += "<span class='badge pull-right'>" + summaryList[i].Value + "</span>";
+                            //summaryList[i].Category = '"' + summaryList[i].Category + '"';
+                            html += "<button id='btn" + summaryList[i].Category + "' class='badge pull-right' onClick='GenExcel(\"" + summaryList[i].Category + "\");'>" + summaryList[i].Value + "</button>";
                             html += "</div>";
                             html += "<div class='col-md-12'><hr></div>";
                         }
@@ -92,7 +93,9 @@ namespace IQCare.Web.CCC
                 //}
                 //catch{ }
             }
-
+            
         }
+
+        
     }
 }

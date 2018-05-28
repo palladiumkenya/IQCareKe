@@ -155,7 +155,7 @@ namespace DataAccess.CCC.Repository
         private IInteropPlacerTypesRepository _interopPlacerTypesRepository;
         private IInteropPlacerValuesRepository _interopPlacerValuesRepository;
         private IPatientVitalsMessageRepository _patientVitalsMessageRepository;
-
+        IPatientPersonViewRepository _patientPersonViewRepository;
         //pharmacy
         private IPatientPharmacyDispenseRepository _patientPharmacyDispenseRepository;
         private IPharmacyOrderRepository _pharmacyOrderRepository;
@@ -443,6 +443,14 @@ namespace DataAccess.CCC.Repository
             get { return _patientEnrollmentRepository ?? (_patientEnrollmentRepository = new PatientEnrollmentRepository((GreencardContext)_context)); }
         }
 
+       
+       public IPatientPersonViewRepository PatientPersonViewRepository
+        {
+            get
+            {
+                 return _patientPersonViewRepository ?? (_patientPersonViewRepository = new PatientPersonViewRepository((GreencardContext)_context)); 
+            }
+        }
         public IPatientRepository PatientRepository
         {
             get { return _patientRepository ?? (_patientRepository = new Patient.PatientRepository((GreencardContext)_context)); }

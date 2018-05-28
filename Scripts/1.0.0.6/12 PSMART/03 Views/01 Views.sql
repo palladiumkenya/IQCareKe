@@ -94,9 +94,9 @@ SELECT
 	  CAST(DECRYPTBYKEY(ps.MidName) AS VARCHAR(50)) MidName,
 	  P.DateOfBirth,
 	 CASE WHEN
-	   (SELECT top 1 Name FROM LookupItem WHERE id= ps.Sex) IS NULL THEN ''
+	   (SELECT top 1 LEFT(Name,1) FROM LookupItem WHERE id= ps.Sex) IS NULL THEN ''
 	 ELSE
-	  (SELECT top 1 Name FROM LookupItem WHERE id= ps.Sex) 
+	  (SELECT top 1 LEFT(Name,1) FROM LookupItem WHERE id= ps.Sex) 
 	 END Sex ,
 	  CAST(DATEDIFF(DD,P.DateOfBirth,GETDATE())/365.25 as INT) [AGE],
 	  p.DobPrecision,
@@ -730,10 +730,10 @@ SELECT
     DISTINCT     
 	L.PersonId,
 	L.PatientId
-	,CASE WHEN  (SELECT i.IdentifierValue from PatientIdentifier i WHERE i.PatientId=L.PatientId AND i.IdentifierTypeId IN(SELECT top 1 Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER'))  IS NULL THEN ''
-	 ELSE 
-		(SELECT i.IdentifierValue from PatientIdentifier i WHERE i.PatientId=L.PatientId AND i.IdentifierTypeId IN(SELECT top 1 Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER')) 
-	 END [CardSerialNumber],
+		CASE WHEN L.CardSerialNumber IS NULL THEN '' --(SELECT IdentifierValue i FROM PersonIdentifier i WHERE i.PersonId=L.PersonId AND i.IdentifierId IN(SELECT Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER')) IS NULL THEN ''
+		ELSE
+		  L.CardSerialNumber	-- (SELECT IdentifierValue i FROM PersonIdentifier i WHERE i.PersonId=L.PersonId AND i.IdentifierId IN(SELECT Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER'))
+		END [CardSerialNumber],
 	 L.Village  [VILLAGE],
 	L.Ward	[WARD],
 	L.SubCounty [SUB_COUNTY],
@@ -900,3 +900,35 @@ ON
 L.PatientId=t.Ptn_pk
 
 GO
+IF  EXISTS (Select	*	From sys.views	Where object_id = object_id(N'[dbo].[psmart_FamilyInformation]'))
+Drop View [dbo].[psmart_FamilyInformation]
+Go
+Set Ansi_nulls On
+Go
+
+Set Quoted_identifier On
+Go
+
+Create VIEW [dbo].[psmart_FamilyInformation]
+AS
+Select Id
+	  ,ptn_pk
+	  ,Sex
+	  ,AgeYear
+	  ,RelationshipDate
+	  ,RelationshipType
+	  ,HivStatus
+	  ,HivCareStatus
+	  ,RegistrationNo
+	  ,FileNo
+	  ,ReferenceId
+	  ,UserId
+	  ,CreateDate
+	  ,UpdateDate
+	  ,MovedToFamilyTestingTable
+	  ,cast(decryptbykey(RFirstName) As varchar(50)) As firstName
+	  ,cast(decryptbykey(RMiddlename) As varchar(50)) As Middlename
+	  ,cast(decryptbykey(RLastName) As varchar(50)) As lastName
+From dtl_FamilyInfo
+
+Go

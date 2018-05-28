@@ -74,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\LookupContext.cs" />
+    <Compile Include="Context\ViewContext.cs" />
     <Compile Include="Interface\assessment\IPatientPsychosocialCriteriaRepository.cs" />
     <Compile Include="Interface\assessment\IPatientSupportSystemCriteriaRepository.cs" />
     <Compile Include="Interface\Baseline\IINHProphylaxisRepository.cs" />

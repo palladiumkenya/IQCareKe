@@ -223,7 +223,7 @@ namespace IQCare.Web.Pharmacy
 
         private bool IsPaperless
         {
-            get { return Session["Paperless"].ToString() == "1"; }
+            get { return Session["Paperless"] !=null && Session["Paperless"].ToString() == "1"; }
         }
 
         private bool PMSCMOn
@@ -1132,12 +1132,12 @@ namespace IQCare.Web.Pharmacy
                     txtautoDrugName.Enabled = false;
                 }
             }
-            if (Session["Paperless"].ToString() == "0")
+            if (!IsPaperless)
             {
                 labelForDispensedBy.Attributes.Add("Class", "required");
                 lbldispensedbydate.Attributes.Add("Class", "required");
             }
-            else if (Session["Paperless"].ToString() == "1" && Session["SCMModule"] == null) //pmscm is off, paperless on - enable drug drug search, disable dispensedby. dispensedate if it is a new order
+            else if (IsPaperless && Session["SCMModule"] == null) //pmscm is off, paperless on - enable drug drug search, disable dispensedby. dispensedate if it is a new order
             {
                 //txtautoDrugName.Enabled = true;
                 if (Convert.ToInt32(Session["PatientVisitId"]) != 0)
