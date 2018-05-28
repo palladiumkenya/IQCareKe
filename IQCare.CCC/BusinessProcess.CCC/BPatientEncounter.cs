@@ -609,6 +609,18 @@ namespace BusinessProcess.CCC
             }
         }
 
+        public DataTable GenerateExcelDifferentiatedCare(string category)
+        {
+            lock (this)
+            {
+                ClsObject PatientEncounter = new ClsObject();
+                ClsUtility.Init_Hashtable();
+                ClsUtility.AddParameters("@category", SqlDbType.VarChar, category);
+
+                return (DataTable)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_DifferentiatedCarePatientsPerCategory", ClsUtility.ObjectEnum.DataTable);
+            }
+        }
+
         public ZScoresParameters GetZScoreValues(string PatientID, string gender, string height)
         {
             lock (this)
