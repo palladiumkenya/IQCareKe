@@ -18,12 +18,12 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
-namespace IQCare.Web.Pharmacy
+namespace IQCare.Web.Pharmacy.Requests
 {
     /// <summary>
     ///
     /// </summary>
-    public partial class PharmacyForm : BasePage
+    public partial class EditPharmacyPrescription : BasePage
     {
         ////////////////////////////////////////////////////////////////////
         // Code Written By   : Sanjay Rana
@@ -36,8 +36,7 @@ namespace IQCare.Web.Pharmacy
         /// The drug table
         /// </summary>
         //
-
-        /// <summary>
+                /// <summary>
         /// The add arv
         /// </summary>
         public DataTable AddARV;
@@ -70,7 +69,7 @@ namespace IQCare.Web.Pharmacy
         public DataTable TBDrugs;
 
         public DataTable theDrugTable;
-
+        AuthenticationManager Authentiaction = new AuthenticationManager();
         /// <summary>
         /// The incompflag
         /// </summary>
@@ -99,7 +98,7 @@ namespace IQCare.Web.Pharmacy
         {
             get
             {
-                if (OrderId > 0)
+                if (EditOrderId > 0)
                 {
                     return "";
                 }
@@ -115,7 +114,7 @@ namespace IQCare.Web.Pharmacy
         {
             get
             {
-                return OrderId > 0 ? "none" : "";
+                return "";
             }
         }
 
@@ -123,7 +122,7 @@ namespace IQCare.Web.Pharmacy
         {
             get
             {
-                return OrderId > 0 ? "" : "none";
+                return "";
             }
         }
 
@@ -464,45 +463,9 @@ namespace IQCare.Web.Pharmacy
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         protected void btnsave_Click(object sender, EventArgs e)
         {
-            if (btnsave.CommandName == $"MODIFYPRESCRIPTION{this.OrderId}")
-            {
-                Session["EditPharmacyPK"] = this.OrderId;
-                Session["DispensedFlag"] = 1;
-                Guid g = Guid.NewGuid();
-                string theUrl = string.Format("{0}&PatientId={1}&key={2}", "./Requests/EditPharmacyPrescription.aspx?name=modify", Session["PatientId"].ToString(),
-                    g.ToString());
-                HttpContext.Current.ApplicationInstance.CompleteRequest();
-                Response.Redirect(theUrl, false);
-                
-                return;
-            }
-            if (Request.QueryString["name"] == "Delete")
-            {
-                //DeleteForm();
-                //******* show the message to the user*******//
-
-
-                string msgString;
-
-                msgString = "Are you sure you want to delete this Pharmacy form? \\n";
-
-                string script = "<script language = 'javascript' defer ='defer' id = 'aftersavefunction'>\n";
-                script += "var ans;\n";
-                script += "ans=window.confirm('" + msgString + "');\n";
-                script += "if (ans==true)\n";
-                script += "{\n";
-                script += "document.getElementById('" + btnOk.ClientID + "').click();\n";
-                script += "}\n";
-                script += "</script>\n";
-                ClientScript.RegisterStartupScript(this.GetType(), "aftersavefunction", script);
-
-                return;
-            }
-            else
-            {
+            
                 SavePharmacyForm(1);
-            }
-        }
+                    }
 
         /// <summary>
         /// Handles the SelectedIndexChanged event of the ddlFrequency control.
@@ -590,7 +553,7 @@ namespace IQCare.Web.Pharmacy
             }
         }
 
-        private int OrderId
+        private int EditOrderId
         {
             get
             {
@@ -648,8 +611,8 @@ namespace IQCare.Web.Pharmacy
             {
                 BindControls();
                 PediatricManager = (IPediatric)ObjectFactory.CreateInstance("BusinessProcess.Pharmacy.BPediatric, BusinessProcess.Pharmacy");
-                int pharmacyId = Convert.ToInt32(Session["PatientVisitId"]);
-                this.OrderId = pharmacyId;
+                int pharmacyId = Convert.ToInt32(Session["EditPharmacyPK"]);
+                this.EditOrderId = pharmacyId;
                 int PatientID = Convert.ToInt32(Session["PatientId"]);
                 ViewState["PatientId"] = PatientID;
                 //pr_Pharmacy_GetExistPaediatricDetails_Constella
@@ -669,36 +632,7 @@ namespace IQCare.Web.Pharmacy
                 }
                 //pr_Pharmacy_GetPediatricDetails_Constella
                 DataSet theDrugDS = this.PopulateTheDS(Convert.ToInt32(theExistDS.Tables[0].Rows[0]["Ptn_pk"].ToString()));
-                //DataSet theDrugDS = PediatricManager.GetPediatricFields(Convert.ToInt32(theExistDS.Tables[0].Rows[0]["Ptn_pk"].ToString()));
-                /*  #region "FixDoseCombination"
-              theDS = new DataSet();
-              theDS.Tables.Add(theDrugDS.Tables[17].Copy());//--0--performance - gen abbr & only active drugs
-              theDS.Tables.Add(theDrugDS.Tables[1].Copy());//--1--
-              theDS.Tables.Add(theDrugDS.Tables[2].Copy());//--2--
-              theDS.Tables.Add(theDrugDS.Tables[3].Copy());//--3--
-              theDS.Tables.Add(theDrugDS.Tables[4].Copy());//--4--
-              theDS.Tables.Add(theDrugDS.Tables[5].Copy());//--5--
-              theDS.Tables.Add(theDrugDS.Tables[6].Copy());//--6--
-              theDS.Tables.Add(theDrugDS.Tables[15].Copy());//--7-- for inactive units in case of edit;
-              theDS.Tables.Add(theDrugDS.Tables[8].Copy());//--8--
-              theDS.Tables.Add(theDrugDS.Tables[9].Copy());//--9--
-              theDS.Tables.Add(theDrugDS.Tables[10].Copy());//--10--
-              theDS.Tables.Add(theDrugDS.Tables[11].Copy());//--11--
-              theDS.Tables.Add(theDrugDS.Tables[12].Copy());//--12-- stores all (both active/inactive) drugs
-              theDS.Tables.Add(theDrugDS.Tables[13].Copy());//--13--  rupesh 04-sep for OI and other medication - for custom frq list
-              //theDS.Tables.Add(theDrugDS.Tables[14]);//  rupesh 19-sep-07 for ARV Provider
-              theDS.Tables.Add(theDrugDS.Tables[16].Copy());//--14--  rupesh 19-sep-07 for active/inactive ARV Provider
-              theDS.Tables.Add(theDrugDS.Tables[21].Copy());//--15--  29Feb08 -- Non-ARTDate
-              theDS.Tables.Add(theDrugDS.Tables[22].Copy());//-period taken
-              theDS.Tables.Add(theDrugDS.Tables[23].Copy());//-TB Regimen
-              theDS.Tables.Add(theDrugDS.Tables[24].Copy());
-              theDS.Tables.Add(theDrugDS.Tables[25].Copy());
-              theDS.Tables.Add(theDrugDS.Tables[26].Copy());
-              theDS.Tables.Add(theDrugDS.Tables[27].Copy());
-              theDS.Tables.Add(theDrugDS.Tables[28].Copy());
-              theDS.Tables.Add(theDrugDS.Tables[29].Copy());
-              #endregion "Class for Drug"
-              */
+                
 
                 //---rupesh -- for fixed drug strength / frequency -----
                 Session["FixDrugStrength"] = theDrugDS.Tables[18];
@@ -764,12 +698,9 @@ namespace IQCare.Web.Pharmacy
                 int s = 0;
                 int.TryParse(theExistDS.Tables[0].Rows[0]["EmployeeID"].ToString(), out s);
                 this.SignatureBy = s;
-                this.OrderId = Convert.ToInt32(theExistDS.Tables[0].Rows[0]["ptn_pharmacy_pk"]);
+                this.EditOrderId = Convert.ToInt32(theExistDS.Tables[0].Rows[0]["ptn_pharmacy_pk"]);
                 this.OrderStatus = Convert.ToInt32(theExistDS.Tables[2].Rows[0]["OrderStatus"]);
-                // BindDropdownOrderBy(theExistDS.Tables[0].Rows[0]["OrderedBy"].ToString());
-                // BindDropdownDispensedBy(theExistDS.Tables[0].Rows[0]["DispensedBy"].ToString());
-                // BindDropdownSignature(theExistDS.Tables[0].Rows[0]["EmployeeID"].ToString());
-
+               
                 ddlPharmOrderedbyName.ClearSelection();
                 //  ddlPharmOrderedbyName.SelectedValue = theExistDS.Tables[0].Rows[0]["OrderedBy"].ToString();
                 ddlDispensedBy.ClearSelection();
@@ -909,33 +840,17 @@ namespace IQCare.Web.Pharmacy
                     FillOldData(panelVaccine, dr, false);
                 }
                 this.OrderStatus = Convert.ToInt32(theExistDS.Tables[2].Rows[0]["OrderStatus"]);
-                if (Request.QueryString["name"] == "Delete")
-                {
-                    btnsave.Text = "Delete";
-                    btnsave.CommandName = $"DELETEPRESCRIPTION{this.OrderId}";
-                }
-               else if (this.OrderStatus > 1)
-                {
-                    Session["DispensedFlag"] = 1;
-                    if (CanEdit)
-                    {
-                        btnsave.Enabled = true;
-                        btnsave.Text = "Modify Prescription";
-                        btnsave.CommandName = $"MODIFYPRESCRIPTION{this.OrderId}";
-                        btnsave.CommandArgument = this.OrderId.ToString();
-                        
-                    }
-                    else
-                    {
-                       
-                        btnsave.Enabled = false;
-                    }
-                }
-                else if (this.OrderId > 0 && this.OrderStatus == 1)
-                {
-                    btnsave.Enabled = (this.UserId == this.PrescribedBy || this.UserId == this.SignatureBy) || (PMSCMOn == false && this.IsPaperless);
-                }
-                //BindChkImmunizations(theExistDS.Tables[0]);
+
+                //if (this.OrderStatus > 1)
+                //{
+                //    Session["DispensedFlag"] = 1;
+                //    btnsave.Enabled = false;
+                //}
+                //else if (this.EditOrderId > 0 && this.OrderStatus == 1)
+                //{
+                //    btnsave.Enabled = (this.UserId == this.PrescribedBy || this.UserId == this.SignatureBy) || (PMSCMOn == false && this.IsPaperless);
+                //}
+               
             }
             catch (Exception er)
             {
@@ -944,15 +859,8 @@ namespace IQCare.Web.Pharmacy
                 IQCareMsgBox.Show("C1#", theBuilder, this);
             }
         }
- AuthenticationManager Authentiaction = new AuthenticationManager();
-        protected bool CanEdit
-        {
-            get
-            {
-                return (Authentiaction.HasFunctionRight(ApplicationAccess.AdultPharmacy, FunctionAccess.Update, (DataTable)Session["UserRight"]));
-                
-            }
-        }
+ 
+       
 
         /// <summary>
         /// Gets the pediatric fields.
@@ -966,11 +874,7 @@ namespace IQCare.Web.Pharmacy
                 PediatricManager = (IPediatric)ObjectFactory.CreateInstance("BusinessProcess.Pharmacy.BPediatric, BusinessProcess.Pharmacy");
                 //pr_Pharmacy_GetPediatricDetails_Constella
                 DataSet theDrugDS = PopulateTheDS(patientId);
-                if (Convert.ToInt32(Session["PatientVisitId"]) == 0)
-                {
-                    this.mainDataSet.Tables[4].DefaultView.RowFilter = "DeleteFlag = 0";
-                }
-
+               
                 DataTable dtPatientInfo = (DataTable)Session["PatientInformation"];
 
                 DateTime theDOB = (DateTime)dtPatientInfo.Rows[0]["DOB"];// theDS.Tables[6].Rows[0]["DOB"];
@@ -981,37 +885,7 @@ namespace IQCare.Web.Pharmacy
                 BindddlControls(ref mainDataSet);
                 CreateControls(mainDataSet);
 
-                if (Convert.ToInt32(Session["PatientVisitId"]) == 0)
-                {
-                    BindControls();
-                    decimal? theWeight = null;
-                    decimal? theHeight = null;
-                    if (theDrugDS.Tables[31].Rows.Count > 0 && theDrugDS.Tables[31].Rows[0]["Weight"] != System.DBNull.Value)
-                    {
-                        theWeight = Convert.ToDecimal(theDrugDS.Tables[31].Rows[0]["Weight"].ToString());
-                        if (theWeight.HasValue && theWeight.Value > 0)
-                        {
-                            txtWeight.Text = Convert.ToString(theWeight);
-                            dtwt.InnerText = "Entered " + Convert.ToDateTime(theDrugDS.Tables[31].Rows[0]["VisitDate"]).ToString(Session["AppDateFormat"].ToString());
-                        }
-                    }
-                    if (theDrugDS.Tables[30].Rows.Count > 0 && theDrugDS.Tables[30].Rows[0]["Height"] != System.DBNull.Value)
-                    {
-                        theHeight = Convert.ToDecimal(theDrugDS.Tables[30].Rows[0]["Height"].ToString());
-                        if (theHeight.HasValue && theHeight.Value > 0)
-                        {
-                            txtHeight.Text = Convert.ToString(theHeight);
-                            dtht.InnerText = "Entered " + Convert.ToDateTime(theDrugDS.Tables[30].Rows[0]["VisitDate"]).ToString(Session["AppDateFormat"].ToString());
-                        }
-                    }
-                    if (theHeight.HasValue && theWeight.HasValue)
-                    {
-                        decimal theBSA = theWeight.Value * theHeight.Value / 3600;
-                        theBSA = (decimal)Math.Sqrt(Convert.ToDouble(theBSA));
-                        theBSA = Math.Round(theBSA, 2);
-                        txtBSA.Text = Convert.ToString(theBSA);
-                    }
-                }
+                
                 MakeRegimenGenericTable(mainDataSet);
                 BindInfantHealthSection((DataSet)ViewState["MasterData"]);
             }
@@ -1049,41 +923,47 @@ namespace IQCare.Web.Pharmacy
                 }
             }
 
-            if (currentSession.HasPMSCM) //pmscm is on disable dispensedby and dispensedate
-            {
-                EnableDisableControl();
-                ddlDispensedBy.Enabled = false;
-                txtpharmReportedbyDate.Disabled = true;
-            }
-            if (currentSession.Facility.PaperLess == false && currentSession.HasPMSCM) //pmscm is on, but paperless is off - freeze the page, disable search of drugs
-            {
-                txtautoDrugName.Enabled = false;
-                labelForDispensedBy.Attributes.Remove("Class");
-                lbldispensedbydate.Attributes.Remove("Class");
-                btnsave.Enabled = false;
-            }
-            else if (currentSession.Facility.PaperLess && currentSession.HasPMSCM) //pmsscm is on, paperless //enable search of drugs
-            {
-                txtautoDrugName.Enabled = true;
-            }
-            else if (currentSession.HasPMSCM) //pmscm is on - enable search of drugs
-            {
-                txtautoDrugName.Enabled = true;
-            }
+            //if (currentSession.HasPMSCM) //pmscm is on disable dispensedby and dispensedate
+            //{
+            //    EnableDisableControl();
+            //    ddlDispensedBy.Enabled = false;
+            //    txtpharmReportedbyDate.Disabled = true;
+            //}
+            //if (currentSession.Facility.PaperLess == false && currentSession.HasPMSCM) //pmscm is on, but paperless is off - freeze the page, disable search of drugs
+            //{
+            //    txtautoDrugName.Enabled = false;
+            //    labelForDispensedBy.Attributes.Remove("Class");
+            //    lbldispensedbydate.Attributes.Remove("Class");
+            //    btnsave.Enabled = false;
+            //}
+            //else if (currentSession.Facility.PaperLess && currentSession.HasPMSCM) //pmsscm is on, paperless //enable search of drugs
+            //{
+            //    txtautoDrugName.Enabled = true;
+            //}
+            //else if (currentSession.HasPMSCM) //pmscm is on - enable search of drugs
+            //{
+            //    txtautoDrugName.Enabled = true;
+            //}
 
             if (IsPostBack != true)
             {
-                Session["DispensedFlag"] = 0;
+               // Session["DispensedFlag"] = 0;
                 if (Request.QueryString["opento"] == "ArtForm")
                 {
                     Session["PatientVisitId"] = 0;
                 }
 
-                if (Request.QueryString["name"] == "Delete")
+                //if (Request.QueryString["name"] == "Delete")
+                //{
+                //    btnsave.Text = "Delete";
+                //}
+                if (Convert.ToInt32(Session["PatientVisitId"]) == 0)
                 {
-                    btnsave.Text = "Delete";
-                    btnsave.CommandName = "DELETEPRESCRIPTION";
+                    IQCareMsgBox.NotifyAction("The prescription to be modified cannot be retrieved", "Error Retriving Prescription", true, this, 
+                        "javascript: window.location.href = '../../ ClinicalForms / frmPatient_History.aspx';return false;");
                 }
+                    
+
                 Init_Form();
                 string strDispensedBy = this.DispensedBy > 0 ? this.DispensedBy.ToString() : "";
                 // string strPrescribedBy = this.PrescribedBy > 0 ? this.PrescribedBy.ToString() : "";
@@ -1092,33 +972,13 @@ namespace IQCare.Web.Pharmacy
                 this.BindDropdownOrderBy();
                 this.BindDropdownSignature(strSignature);
                 this.BindDropdownDispensedBy(strDispensedBy);
-                if (Request.QueryString["RefillFromLast"] == "true")
-                {
-                    Session["RefillFromLast"] = "1";
-                    DateTime cutOffDate = new DateTime(1, 1, 1).AddDays(Convert.ToInt32(Request.QueryString["offset"]));
-                    this.GetPatientLastPrescriptionByType(37, cutOffDate);
-                }
-                else
-                {
+                
                     Session["RefillFromLast"] = "0";
-                }
+                
             }
         }
 
-        private bool CanDispense
-        {
-            get
-            {
-                if (Session["Paperless"].ToString() == "1" && Session["SCMModule"] != null)
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
-            }
-        }
+       
 
         /// <summary>
         /// Handles the Load event of the Page control.
@@ -1147,61 +1007,27 @@ namespace IQCare.Web.Pharmacy
             {
                 btnsave.Enabled = false;
             }
-            if (this.OrderId > 0)
-            {
-                txtautoDrugName.Enabled = (this.UserId == this.PrescribedBy || this.UserId == this.SignatureBy) || (PMSCMOn == false && this.IsPaperless);
-                if (this.OrderStatus > 1)
-                {
-                    txtautoDrugName.Enabled = false;
-                }
-            }
-            if (!IsPaperless)
-            {
+           
+               txtautoDrugName.Enabled = true;
+            
+            
+            //if (!IsPaperless)
+            //{
                 labelForDispensedBy.Attributes.Add("Class", "required");
                 lbldispensedbydate.Attributes.Add("Class", "required");
-            }
-            else if (IsPaperless && Session["SCMModule"] == null) //pmscm is off, paperless on - enable drug drug search, disable dispensedby. dispensedate if it is a new order
-            {
-                //txtautoDrugName.Enabled = true;
-                if (Convert.ToInt32(Session["PatientVisitId"]) != 0)
-                {
-                    ddlDispensedBy.Enabled = true;
-                    txtpharmReportedbyDate.Disabled = false;
-                    labelForPrescribedBy.Attributes.Remove("Class");
-                    labelForPrescribedByDate.Attributes.Remove("Class");
-                    if (this.OrderStatus > 1)
-                    {
-                        labelForDispensedBy.Attributes.Remove("Class");
-                        lbldispensedbydate.Attributes.Remove("Class");
-                    }
-                    else
-                    {
-                        labelForDispensedBy.Attributes.Add("Class", "required");
-                        lbldispensedbydate.Attributes.Add("Class", "required");
-                    }
-                }
-                else
-                {
-                    ddlDispensedBy.Enabled = false;
-                    txtpharmReportedbyDate.Disabled = true;
-                    labelForDispensedBy.Attributes.Add("Class", "required");
-                    lbldispensedbydate.Attributes.Add("Class", "required");
-                }
-            }
-            DataTable theDTModule = (DataTable)Session["AppModule"];
-            string ModuleId = "";
-            foreach (DataRow theDR in theDTModule.Rows)
-            {
-                if (ModuleId == "")
-                    ModuleId = theDR["ModuleId"].ToString();
-                else
-                    ModuleId = ModuleId + "," + theDR["ModuleId"].ToString();
-            }
+            //}
+            //else if (IsPaperless && Session["SCMModule"] == null) //pmscm is off, paperless on - enable drug drug search, disable dispensedby. dispensedate if it is a new order
+            //{
+                
+            //        ddlDispensedBy.Enabled = false;
+            //        txtpharmReportedbyDate.Disabled = true;
+            //        labelForDispensedBy.Attributes.Add("Class", "required");
+            //        lbldispensedbydate.Attributes.Add("Class", "required");
+                
+            //}
+           
 
-            if (Convert.ToInt32(Session["PatientVisitId"]) == 0)
-            {
-                //theUti.SetSession();
-            }
+           
 
             PutCustomControl();
 
@@ -1429,62 +1255,7 @@ namespace IQCare.Web.Pharmacy
             {
                 btnsave.Enabled = true;
             }
-            //Page.ClientScript.RegisterStartupScript(this.GetType(), "onload", "<script language='javascript' type='text/javascript'>fnCheckUnCheck();</script>");
-
-            #region "Check ARTStop"
-
-            //IDrug theValidationManger = (IDrug)ObjectFactory.CreateInstance("BusinessProcess.Pharmacy.BDrug,BusinessProcess.Pharmacy");
-            //DataTable theValidateDT = theValidationManger.CheckARTStopStatus(Convert.ToInt32(Session["PatientId"]));
-            //if (theValidateDT != null && theValidateDT.Rows.Count > 0 && theValidateDT.Rows[0]["ARTStatus"].ToString() == "ART Stopped" && theValidateDT.Rows[0]["ARTEndDate"] != DBNull.Value)
-            //{
-            //    DateTime artEndDate = Convert.ToDateTime(theValidateDT.Rows[0]["ARTEndDate"]);
-            //    int treatment = 0;
-            //    int.TryParse(ddlTreatment.SelectedValue, out treatment);
-            //    if (Convert.ToInt32(Session["PatientVisitId"]) > 0 && theExistDS.Tables[0].Rows[0]["DispensedByDate"] != DBNull.Value)
-            //    {
-            //        DateTime theReportedbyDate = Convert.ToDateTime(theExistDS.Tables[0].Rows[0]["DispensedByDate"]);
-
-            //        if (theReportedbyDate >= artEndDate && treatment == 222)
-            //        {
-            //            pnlPedia.Enabled = false;
-            //        }
-            //    }
-            //    else if (Convert.ToInt32(Session["PatientVisitId"]) == 0)
-            //    {
-            //        if (treatment == 222)
-            //        {
-            //            pnlPedia.Enabled = false;
-            //        }
-            //    }
-            //    else
-            //    {
-            //        pnlPedia.Enabled = true;
-            //    }
-            //}
-
-            //if (
-            //    (theValidateDT.Rows.Count > 0 &&
-            //    theValidateDT.Rows[0]["ARTStatus"].ToString() == "ART Stopped" &&
-            //    Convert.ToInt32(Session["PatientVisitId"]) == 0 &&
-            //    Convert.ToInt32(ddlTreatment.SelectedValue) == 222
-            //    ) ||
-            //    (
-            //        theValidateDT.Rows.Count > 0 &&
-            //        theValidateDT.Rows[0]["ARTStatus"].ToString() == "ART Stopped" &&
-            //        Convert.ToInt32(Session["PatientVisitId"]) > 0 &&
-            //        Convert.ToDateTime(txtpharmReportedbyDate.Value) >= Convert.ToDateTime(theValidateDT.Rows[0]["ARTEndDate"]) &&
-            //        Convert.ToInt32(ddlTreatment.SelectedValue) == 222
-            //    )
-            //    )
-            //{
-            //    pnlPedia.Enabled = false;
-            //}
-            //else
-            //{
-            //    pnlPedia.Enabled = true;
-            //}
-
-            //theValidationManger = null;
+         
             //theValidateDT.Dispose();
             DateTime? dispensedDate = null;
             if (txtpharmReportedbyDate.Value.Trim() != "")
@@ -1493,7 +1264,7 @@ namespace IQCare.Web.Pharmacy
             }
 
             pnlPedia.Enabled = !CheckARTStop(dispensedDate);
-            #endregion "Check ARTStop"
+           
         }
 
         private bool CheckARTStop(DateTime? dispensedDate)
@@ -1661,14 +1432,7 @@ namespace IQCare.Web.Pharmacy
                     }
                 }
 
-                if (blnQtyDispensed == true)
-                {
-                    if (fieldValidationPaperLess() == false)
-                    {
-                        incompflag = 1;
-                        return;
-                    }
-                }
+                
                 if (blnQtyDispensed == true)
                 {
                     if (QuantityDispensed() == false)
@@ -1739,11 +1503,7 @@ namespace IQCare.Web.Pharmacy
 
                 ViewState["RegimenLine"] = ddlregimenLine.SelectedValue;
 
-                int SCMFlag;//if SCM Module is On then SCMFlag=1 else SCMFlag=2
-                if (Session["SCMModule"] != null)
-                    SCMFlag = 1;
-                else
-                    SCMFlag = 2;
+                int SCMFlag= 2;
 
                 foreach (DataRow theDR in theDT.Rows)
                 {
@@ -1752,18 +1512,18 @@ namespace IQCare.Web.Pharmacy
                         Session["PrintStatus"] = 1;
                     }
                 }
-                if ((Convert.ToInt32(Session["PatientVisitId"]) == 0) && (ViewState["PharmacyDetail"] == null || Convert.ToInt32(ViewState["PharmacyDetail"]) == 0))
+                if ( (ViewState["PharmacyDetail"] == null || Convert.ToInt32(ViewState["PharmacyDetail"]) == 0))
                 {
                     if (ViewState["PharmacyDetail"] == null || Convert.ToInt32(ViewState["PharmacyDetail"]) == 0)
                     {
                         CustomFieldClinical theCustomManager = new CustomFieldClinical();
                         DataTable theCustomDataDT = theCustomManager.GenerateInsertUpdateStatement(pnlCustomList, "Insert", ApplicationAccess.PaediatricPharmacy, (DataSet)ViewState["CustomFieldsDS"]);
 
-                        ViewState["PharmacyDetail"] = bPedMgr.SaveUpdatePaediatricDetail(patientId, 0, Convert.ToInt32(ViewState["LocationId"]),
-                            Convert.ToInt32(ViewState["RegimenLine"]), txtClinicalNotes.Text, theDT, theDrgMst, orderBy, Convert.ToDateTime(thepharmOrderedbyDate), dispensedBy,
-                            Convert.ToDateTime(thepharmReportedbyDate), signature, employeeId, orderType, VisitType, Convert.ToInt32(ViewState["UserID"]), height, weight,
-                            Convert.ToInt32(ViewState["flagFDC"]), theTreatmentID, theProviderID, theCustomDataDT, periodTaken, 1, SCMFlag, theAppntDate, theAppntReason,
-                            this.ModuleId);
+                        ViewState["PharmacyDetail"] = bPedMgr.ModifyPrescription(patientId, EditOrderId, locationId, Convert.ToInt32(ViewState["RegimenLine"]), txtClinicalNotes.Text.Trim(),
+                            theDT, theDrgMst, orderBy, Convert.ToDateTime(thepharmOrderedbyDate), dispensedBy, Convert.ToDateTime(thepharmReportedbyDate), signature, employeeId, orderType, VisitType, UserId, height, weight,
+                            Convert.ToInt32(ViewState["flagFDC"]), theTreatmentID, theProviderID, theCustomDataDT, periodTaken, 1,SCMFlag, theAppntDate,
+                            theAppntReason, txtEditReason.Text.Trim(), this.ModuleId);   
+                           
                         ViewState["PharmacyId"] = Convert.ToInt32(ViewState["PharmacyDetail"].ToString());
                         Session["PharmacyId"] = Convert.ToInt32(ViewState["PharmacyDetail"].ToString());
                         Session["PatientVisitId"] = Session["PharmacyId"];
@@ -1792,46 +1552,7 @@ namespace IQCare.Web.Pharmacy
                         theDT.Rows.Clear();
                     }
                 }
-                else
-                {
-                    int pharmacyId = Convert.ToInt32(Session["PharmacyId"]);
-                    if (pharmacyId != 0)
-                    {
-                        ViewState["PharmacyDetail"] = pharmacyId;
-                    }
-
-                    CustomFieldClinical theCustomManager = new CustomFieldClinical();
-                    DataTable theCustomDataDT = theCustomManager.GenerateInsertUpdateStatement(pnlCustomList, "Update", ApplicationAccess.PaediatricPharmacy, (DataSet)ViewState["CustomFieldsDS"]);
-                    ViewState["PharmacyDetail"] = bPedMgr.SaveUpdatePaediatricDetail(patientId, Convert.ToInt32(ViewState["PharmacyDetail"]), Convert.ToInt32(Session["AppLocationId"]), Convert.ToInt32(ViewState["RegimenLine"]), txtClinicalNotes.Text, theDT, theDrgMst, orderBy, Convert.ToDateTime(thepharmOrderedbyDate), dispensedBy, Convert.ToDateTime(thepharmReportedbyDate), signature, employeeId, orderType, VisitType, Convert.ToInt32(ViewState["UserID"]), height, weight, Convert.ToInt32(ViewState["flagFDC"]), theTreatmentID, theProviderID, theCustomDataDT, periodTaken, 2, SCMFlag, theAppntDate, theAppntReason, this.ModuleId); // rupesh 19-sep-07 for ARV Provider
-                    ViewState["PharmacyId"] = Convert.ToInt32(pharmacyId);
-                    Session["PharmacyId"] = pharmacyId.ToString();
-                    Session["PatientVisitId"] = Session["PharmacyId"];
-
-                    if (Convert.ToInt32(ViewState["PharmacyDetail"]) == 0)
-                    {
-                        IQCareMsgBox.Show("ErrorinSavingPaediatricDetail", this);
-                    }
-                    else
-                    {
-                        //IQCareMsgBox.Show("PaediatricDetailUpdate", this);
-                    }
-                    if (Convert.ToInt32(ViewState["PharmacyDetail"]) != 0)
-                    {
-                        if ((Convert.ToString(Session["PrintStatus"]) == "1") || (Session["PrintStatus"] == null))
-                        {
-                            SaveCancel(printflag);
-                        }
-                        else
-                        {
-                            if (printflag == 0)
-                            {
-                                SaveCancel(2);
-                            }
-                            else
-                                SaveCancel(printflag);
-                        }
-                    }
-                }
+               
             }
             catch (Exception err)
             {
@@ -3303,33 +3024,34 @@ namespace IQCare.Web.Pharmacy
             thelnkRemove.Width = 20;
             thelnkRemove.Text = "Remove";
             thelnkRemove.Click += new EventHandler(Remove_panel);
-            if (Session["ExistPharmacyData"] != null)
-            {
-                if (((DataTable)Session["ExistPharmacyData"]).Rows.Count > 0)
-                {
-                    IQCareUtils theUtilsCF = new IQCareUtils();
-                    DataView theExistDrgDV = new DataView((DataTable)Session["ExistPharmacyData"]);
-                    theExistDrgDV.RowFilter = "Drug_Pk=" + drugId;
-                    DataTable theDTfiltdrg = (DataTable)theUtilsCF.CreateTableFromDataView(theExistDrgDV);
-                    if (Convert.ToInt32(Session["PatientVisitId"]) > 0 && theDTfiltdrg.Rows.Count > 0)
-                    {
-                        //if (theDTfiltdrg.Rows[0]["DispensedByDate"].ToString().Equals(""))
-                        //{
-                        //    thelnkRemove.Visible = true;
-                        //}
-                        //else
-                        //{
-                        //    thelnkRemove.Visible = false;
-                        //}
-                        //  thelnkRemove.Visible = true;
-                        //if (this.OrderId > 0 && this.OrderStatus == 1)
-                        //{
-                        thelnkRemove.Visible = (this.UserId == this.PrescribedBy || this.UserId == this.SignatureBy) && (theDTfiltdrg.Rows[0]["DispensedByDate"].ToString().Equals(""));
-                        //}
-                        //thelnkRemove.Visible = false;
-                    }
-                }
-            }
+            thelnkRemove.Visible = true ;
+            //if (Session["ExistPharmacyData"] != null)
+            //{
+            //    if (((DataTable)Session["ExistPharmacyData"]).Rows.Count > 0)
+            //    {
+            //        IQCareUtils theUtilsCF = new IQCareUtils();
+            //        DataView theExistDrgDV = new DataView((DataTable)Session["ExistPharmacyData"]);
+            //        theExistDrgDV.RowFilter = "Drug_Pk=" + drugId;
+            //        DataTable theDTfiltdrg = (DataTable)theUtilsCF.CreateTableFromDataView(theExistDrgDV);
+            //        if (Convert.ToInt32(Session["PatientVisitId"]) > 0 && theDTfiltdrg.Rows.Count > 0)
+            //        {
+            //            //if (theDTfiltdrg.Rows[0]["DispensedByDate"].ToString().Equals(""))
+            //            //{
+            //            //    thelnkRemove.Visible = true;
+            //            //}
+            //            //else
+            //            //{
+            //            //    thelnkRemove.Visible = false;
+            //            //}
+            //            //  thelnkRemove.Visible = true;
+            //            //if (this.OrderId > 0 && this.OrderStatus == 1)
+            //            //{
+            //            thelnkRemove.Visible = (this.UserId == this.PrescribedBy || this.UserId == this.SignatureBy) && (theDTfiltdrg.Rows[0]["DispensedByDate"].ToString().Equals(""));
+            //            //}
+            //            //thelnkRemove.Visible = false;
+            //        }
+            //    }
+            //}
             thelnkRemove.OnClientClick = "return confirm('Are you sure you want to Remove this Drug?')";
             return thelnkRemove;
         }
@@ -3339,7 +3061,7 @@ namespace IQCare.Web.Pharmacy
             get
             {
                 DataSet theDS = new DataSet();
-                theDS.ReadXml(MapPath("..\\XMLFiles\\ALLMasters.con"));
+                theDS.ReadXml(GblIQCare.GetXMLPath()+"//ALLMasters.con");
 
                 IQCareUtils theUtils = new IQCareUtils();
                 DataTable dt = new DataTable("Users");
@@ -3360,7 +3082,7 @@ namespace IQCare.Web.Pharmacy
             get
             {
                 DataSet theDS = new DataSet();
-                theDS.ReadXml(MapPath("..\\XMLFiles\\ALLMasters.con"));
+                theDS.ReadXml(GblIQCare.GetXMLPath() + "//ALLMasters.con");
 
                 IQCareUtils theUtils = new IQCareUtils();
                 DataTable dt = new DataTable("Mst_Employee");
@@ -3398,9 +3120,9 @@ namespace IQCare.Web.Pharmacy
             DataTable theDT = new DataTable();
             DataSet theDSXML = new DataSet();
             IQCareUtils theUtils = new IQCareUtils();
-            theDSXML.ReadXml(Server.MapPath("..\\XMLFiles\\AllMasters.con"));
-
-            
+           // theDSXML.ReadXml(Server.MapPath("..\\XMLFiles\\AllMasters.con"));
+            theDSXML.ReadXml(GblIQCare.GetXMLPath() + "//ALLMasters.con"); 
+           
             if (theDSXML.Tables["Mst_Decode"] != null)
             {
                 theDV = new DataView(theDSXML.Tables["Mst_Decode"]);
@@ -3832,11 +3554,7 @@ namespace IQCare.Web.Pharmacy
             DataView theDV = new DataView(this.UserList);
 
             string rowFilter = "EmployeeId Is Not Null Or EmployeeId > 0 And UserDeleteFlag = 0";
-            if (userId != "")
-            {
-                rowFilter = "UserId = " + userId;
-            }
-            //}
+          
             theDV.RowFilter = rowFilter;
             if (theDV.Table != null)
             {
@@ -3872,18 +3590,11 @@ namespace IQCare.Web.Pharmacy
             DataView theDV = new DataView(this.UserList);
 
             string rowFilter = "EmployeeId Is Not Null Or EmployeeId > 0 And UserDeleteFlag = 0";
-            if (OrderId > 0)
+            if (EditOrderId > 0)
             {
                 userId = this.PrescribedBy.ToString();
             }
-            else if (IsPaperless && this.EmployeeId > 0)
-            {
-                userId = this.UserId.ToString();
-            }
-            if (userId != "")
-            {
-                rowFilter = "UserId = " + userId;
-            }
+            
             theDV.RowFilter = rowFilter;
             if (theDV.Table != null)
             {
@@ -3919,11 +3630,7 @@ namespace IQCare.Web.Pharmacy
             DataView theDV = new DataView(this.UserList);
 
             string rowFilter = "EmployeeId Is Not Null Or EmployeeId > 0 And UserDeleteFlag = 0";
-            if (userId != "")
-            {
-                rowFilter = "UserId = " + userId;
-            }
-            //}
+           
             theDV.RowFilter = rowFilter;
             if (theDV.Table != null)
             {
@@ -3941,27 +3648,7 @@ namespace IQCare.Web.Pharmacy
                     labelSignature.Text = item.Text;
                 }
             }
-            /*DataSet theDS = new DataSet();
-            theDS.ReadXml(MapPath("..\\XMLFiles\\ALLMasters.con"));
-            BindFunctions BindManager = new BindFunctions();
-            IQCareUtils theUtils = new IQCareUtils();
-            if (theDS.Tables["Users"] != null)
-            {
-                DataView theDV = new DataView(theDS.Tables["Users"]);
-                // theDV.RowFilter = "DeleteFlag = 0";
-                if (theDV.Table != null)
-                {
-                    DataTable theDT = (DataTable)theUtils.CreateTableFromDataView(theDV);
-                    if (Convert.ToInt32(Session["AppUserId"]) > 0)
-                    {
-                        theDV = new DataView(theDT);
-                        theDV.RowFilter = "UserId IN(" + Session["AppUserId"].ToString() + "," + userId + ")";
-                        if (theDV.Count > 0)
-                            theDT = theUtils.CreateTableFromDataView(theDV);
-                    }
-                    BindManager.BindCombo(ddlPharmSignature, theDT, "Names", "UserId");
-                }
-            }*/
+            
         }
 
         /// <summary>
@@ -4781,7 +4468,12 @@ namespace IQCare.Web.Pharmacy
                 IQCareMsgBox.Show("BlankDropDown", theMsg, this);
                 return false;
             }
-
+            if (string.IsNullOrWhiteSpace(txtEditReason.Text.Trim())){
+                MsgBuilder theMsg = new MsgBuilder();
+                theMsg.DataElements["Control"] = "Reason for modifying this prescription is required";
+                IQCareMsgBox.Show("BlankTextBox", theMsg, this);
+                return false;
+            }
             if (ddlPharmOrderedbyName.SelectedIndex == 0)
             {
                 MsgBuilder theMsg = new MsgBuilder();
@@ -4789,7 +4481,7 @@ namespace IQCare.Web.Pharmacy
                 IQCareMsgBox.Show("BlankDropDown", theMsg, this);
                 return false;
             }
-            if (currentSession.Facility.PaperLess == false && currentSession.HasPMSCM == false && (ddlDispensedBy.SelectedIndex == 0))
+            if ((ddlDispensedBy.SelectedIndex == 0))
             //if ((Session["Paperless"].ToString() == "0") && (Session["SCMModule"] == null) && (ddlDispensedBy.SelectedIndex == 0))
             {
                 MsgBuilder theMsg = new MsgBuilder();
@@ -4833,7 +4525,7 @@ namespace IQCare.Web.Pharmacy
                     }
                 }
             }
-            if ((Session["Paperless"].ToString() == "0") && (Session["SCMModule"] == null) && (txtpharmReportedbyDate.Value.Trim() == ""))
+            if ( (txtpharmReportedbyDate.Value.Trim() == ""))
             {
                 {
                     MsgBuilder theMsg = new MsgBuilder();
@@ -4932,196 +4624,7 @@ namespace IQCare.Web.Pharmacy
         /// Fields the validation paper less.
         /// </summary>
         /// <returns></returns>
-        private bool fieldValidationPaperLess()
-        {
-            //
-
-            theCurrentDate = SystemSetting.SystemDate;
-            IQCareUtils theUtils = new IQCareUtils();
-
-            if (ddlPharmOrderedbyName.SelectedIndex == 0)
-            {
-                MsgBuilder theMsg = new MsgBuilder();
-                theMsg.DataElements["Control"] = "Prescribed By";
-                IQCareMsgBox.Show("BlankDropDown", theMsg, this);
-                return false;
-            }
-
-            if (ddlPharmSignature.SelectedIndex == 0)
-            {
-                MsgBuilder theMsg = new MsgBuilder();
-                theMsg.DataElements["Control"] = "Signature";
-                IQCareMsgBox.Show("BlankDropDown", theMsg, this);
-                return false;
-            }
-
-            if (txtpharmOrderedbyDate.Value.Trim() == "")
-            {
-                MsgBuilder theMsg = new MsgBuilder();
-                theMsg.DataElements["Control"] = "PrescribedByDate";
-                IQCareMsgBox.Show("BlankTextBox", theMsg, this);
-                return false;
-            }
-            if (txtpharmOrderedbyDate.Value.Trim() != "")
-            {
-                DateTime theVisitDate = Convert.ToDateTime(theUtils.MakeDate(txtpharmOrderedbyDate.Value.Trim()));
-
-                if (ViewState["EnrolmentDate"] != null)
-                {
-                    DateTime theEnrolmentDate = Convert.ToDateTime(ViewState["EnrolmentDate"].ToString());
-                    if (theEnrolmentDate > theVisitDate)
-                    {
-                        IQCareMsgBox.Show("PharmacyDetailOrderDate", this);
-                        txtpharmOrderedbyDate.Focus();
-                        return false;
-                    }
-                    else if (theVisitDate > theCurrentDate)
-                    {
-                        IQCareMsgBox.Show("PharmacyDetailOrderTDate", this);
-                        txtpharmOrderedbyDate.Focus();
-                        return false;
-                    }
-                }
-            }
-
-            if (txtpharmReportedbyDate.Value.Trim() != "")
-            {
-                DateTime theVisitDate = Convert.ToDateTime(theUtils.MakeDate(txtpharmReportedbyDate.Value.Trim()));
-
-                if (ViewState["EnrolmentDate"] != null)
-                {
-                    DateTime theEnrolmentDate = Convert.ToDateTime(ViewState["EnrolmentDate"].ToString());
-                    if (theEnrolmentDate > theVisitDate)
-                    {
-                        IQCareMsgBox.Show("PharmacyDetailReportedDate", this);
-                        txtpharmReportedbyDate.Focus();
-                        return false;
-                    }
-                    else if (theVisitDate > theCurrentDate)
-                    {
-                        IQCareMsgBox.Show("PharmacyDetailReportedTDate", this);
-                        txtpharmReportedbyDate.Focus();
-                        return false;
-                    }
-                }
-            }
-
-            if ((txtpharmOrderedbyDate.Value.Trim() != "") && (txtpharmReportedbyDate.Value.Trim() != ""))
-            {
-                DateTime theOrdByDate = Convert.ToDateTime(theUtils.MakeDate(txtpharmOrderedbyDate.Value.Trim()));
-                DateTime theDispByDate = Convert.ToDateTime(theUtils.MakeDate(txtpharmReportedbyDate.Value.Trim()));
-                if (theOrdByDate > theDispByDate)
-                {
-                    IQCareMsgBox.Show("PharmacyOrderDispenseDate", this);
-                    txtpharmOrderedbyDate.Focus();
-                    return false;
-                }
-            }
-
-            //if (txtWeight.Text.Trim() == "")
-            //{
-            //    MsgBuilder theMsg = new MsgBuilder();
-            //    theMsg.DataElements["Control"] = "Weight";
-            //    IQCareMsgBox.Show("BlankTextBox", theMsg, this);
-            //    return false;
-            //}
-            if (txtWeight.Text.Trim() != "")
-            {
-                if (Convert.ToDecimal(txtWeight.Text.ToString()) <= 0)
-                {
-                    MsgBuilder theMsg = new MsgBuilder();
-                    theMsg.DataElements["Control"] = "Weight";
-                    IQCareMsgBox.Show("GreatThanZero", theMsg, this);
-                    return false;
-                }
-            }
-
-            //if (txtHeight.Text.Trim() == "")
-            //{
-            //    MsgBuilder theMsg = new MsgBuilder();
-            //    theMsg.DataElements["Control"] = "Height";
-            //    IQCareMsgBox.Show("BlankTextBox", theMsg, this);
-            //    return false;
-            //}
-            if (txtHeight.Text.Trim() != "")
-            {
-                if (Convert.ToDecimal(txtHeight.Text.ToString()) <= 0)
-                {
-                    MsgBuilder theMsg = new MsgBuilder();
-                    theMsg.DataElements["Control"] = "Height";
-                    IQCareMsgBox.Show("GreatThanZero", theMsg, this);
-                    return false;
-                }
-            }
-
-            //Decimal AgeD = Convert.ToDecimal(txtYr.Text.Trim().ToString()) + Convert.ToDecimal(txtMon.Text.Trim().ToString()) / 12;
-            //if (AgeD > 17)
-            //{
-            //    IQCareMsgBox.Show("PharmacyDetailAge", this);
-            //    return false;
-            //}
-
-            //---Non-ART already filled : starts-- 29Feb08//
-
-            DataTable theDT = ((DataSet)ViewState["MasterData"]).Tables[15];
-            if ((txtpharmOrderedbyDate.Value.Trim() != "") && (theDT.Rows.Count > 0))
-            {
-                DateTime theOrdByDate = Convert.ToDateTime(theUtils.MakeDate(txtpharmOrderedbyDate.Value.Trim()));
-                DateTime theNonARTDate;
-                foreach (DataRow theDR in theDT.Rows)
-                {
-                    theNonARTDate = Convert.ToDateTime(theDR["VisitDate"].ToString());
-                    if (theOrdByDate == theNonARTDate)
-                    {
-                        IQCareMsgBox.Show("PharmacyOrderNonARTDate", this);
-                        txtpharmOrderedbyDate.Focus();
-                        return false;
-                    }
-                }
-            }
-
-            //---Non-ART already filled : ends-- 29Feb08 //
-
-            int PtnID = Convert.ToInt32(Session["PatientId"]);
-            IPediatric PediatricManager = (IPediatric)ObjectFactory.CreateInstance("BusinessProcess.Pharmacy.BPediatric, BusinessProcess.Pharmacy");
-            DataSet dsExist = PediatricManager.GetExistPharmacyForm(PtnID, Convert.ToDateTime(theUtils.MakeDate(txtpharmOrderedbyDate.Value)));
-
-            if (dsExist != null && dsExist.Tables[0].Rows.Count > 0)
-            {
-                if ((Convert.ToInt32(Session["PatientVisitId"]) != 0) && (Convert.ToInt32(dsExist.Tables[0].Rows[0][0]) == 0))
-                {
-                    if (Convert.ToDateTime(ViewState["OrigOrdDate"]) != Convert.ToDateTime(theUtils.MakeDate(txtpharmOrderedbyDate.Value)))
-                    {
-                        IQCareMsgBox.Show("PharmacyDetailExists", this);
-                        return false;
-                    }
-                }
-                //for patient transfer date check
-                int PatientID = Convert.ToInt32(Session["PatientId"]);
-                if (TransferValidation(PatientID) == false)
-                {
-                    return false;
-                }
-                if ((Convert.ToInt32(Session["PatientVisitId"]) == 0) && (ViewState["PharmacyDetail"] == null))
-                {
-                    if (Convert.ToInt32(dsExist.Tables[0].Rows[0][0]) == 0)
-                    {
-                        IQCareMsgBox.Show("PharmacyDetailExists", this);
-                        return false;
-                    }
-                    else
-                    {
-                        return true;
-                    }
-                }
-                else
-                {
-                    return true;
-                }
-            }
-            return true;
-        }
-
+        
         /// <summary>
         /// Fills the old custom data.
         /// </summary>
@@ -6355,16 +5858,10 @@ namespace IQCare.Web.Pharmacy
                 if (theExistDS.Tables.Count > 0)
                     ddlTreatment.SelectedValue = theExistDS.Tables[0].Rows[0]["ProgId"].ToString();
 
-                this.OrderId = Convert.ToInt32(Session["PatientVisitId"]);
-                if (Convert.ToInt32(Session["PatientVisitId"]) == 0)
-                {
-                    ViewState["PtnID"] = Convert.ToInt32(Session["PatientId"]);
-                    GetPediatricFields(patientId);
-                }
-                else
-                {
+                this.EditOrderId = Convert.ToInt32(Session["PatientVisitId"]);
+               
                     GetExistPediatricFields();
-                }
+                
             }
             catch (Exception er)
             {
@@ -8824,7 +8321,10 @@ namespace IQCare.Web.Pharmacy
             }
         }
 
-    
+        protected void btnDelete_Click(object sender, EventArgs e)
+        {
+
+        }
 
         /// <summary>
         /// Transfers the validation.

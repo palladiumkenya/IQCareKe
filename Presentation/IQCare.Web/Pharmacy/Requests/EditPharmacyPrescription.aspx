@@ -1,5 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/IQCare.master" AutoEventWireup="true"
-    Inherits="IQCare.Web.Pharmacy.PharmacyForm" CodeBehind="frmPharmacyForm.aspx.cs" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/IQCare.master" AutoEventWireup="True"
+    Inherits="IQCare.Web.Pharmacy.Requests.EditPharmacyPrescription" CodeBehind="EditPharmacyPrescription.aspx.cs" %>
 
 <%@ MasterType VirtualPath="~/MasterPage/IQCare.master" %>
 <%@ Register Assembly="AjaxControlToolkit" TagPrefix="act" Namespace="AjaxControlToolkit" %>
@@ -43,10 +43,10 @@
         function Redirect(id, name, status) {
 
             if (name == "Add") {
-                window.location.href = "../ClinicalForms/frmPatient_Home.aspx";
+                window.location.href = "../../ClinicalForms/frmPatient_Home.aspx";
             }
             if (name == "Edit") {
-                window.location.href = "../ClinicalForms/frmPatient_History.aspx";
+                window.location.href = "../../ClinicalForms/frmPatient_History.aspx";
             }
         }
         function pageLoad() {
@@ -201,11 +201,13 @@
             width: 800px !important;
         }
     </style>
-    <%--    <form id="frmPharmacyForm" method="post" runat="server" title="Pharmacy Form">--%>
+    <%--<tr>
+                                <td class="form" colspan="2">
+                                </td>
+                            </tr>--%>
     <div class="row center" style="padding-top: 8px; padding-left: 8px; padding-right: 8px;">
-        <%-- <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true" 
-            ScriptMode="Auto" OnAsyncPostBackError="ActionScriptManager_AsyncPostBackError">
-        </asp:ScriptManager>--%>
+        <%--                                            <asp:Button ID="btnPresPrint" CssClass="btn btn-info" Text="Save and Print Prescription"
+                                                runat="server" OnClick="btnPresPrint_Click" />--%>
         <asp:UpdatePanel ID="Updatepanel" runat="server">
             <ContentTemplate>
                 <%--   Define panel here--%>
@@ -361,8 +363,8 @@
                                                                     runat="server" />
                                                                 <span class="input-group-addon">
                                                                     <img id="Img1" onclick="w_displayDatePicker('<%=txtpharmAppntDate.ClientID%>');"
-                                                                        height="22" alt="Date Helper" hspace="5" src="../images/cal_icon.gif" width="22"
-                                                                        border="0" name="appDateimg" /><span class="smallerlabel" id="Span1">(DD-MMM-YYYY)</span></span>
+                                                                        height="22" alt="Date Helper" " src="../images/cal_icon.gif" width="22"
+                                                                        border="0"  /><span class="smallerlabel" id="Span1">(DD-MMM-YYYY)</span></span>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -513,6 +515,19 @@
                             <table cellspacing="6" cellpadding="0" width="100%" border="0">
                                 <tbody>
                                     <tr>
+                                        <td class="form" width="100%" colspan="2">
+                                            <div class="col-md-8" style="padding-right: 0;">
+                                                <label class="required pull-left control-label" for="spanorderedby" runat="server"
+                                                    id="labeleModiyreason">
+                                                    *Reason for modification:</label>
+                                            </div>
+                                            <div class="col-md-12 pull-left" style="padding-left: 0;">
+                                                <asp:TextBox runat="server" ID="txtEditReason" TextMode="MultiLine" Width="100%" CssClass="form-control pull-left textarea"></asp:TextBox>
+                                                
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
                                         <td class="form" width="50%">
                                             <div class="col-md-4" style="padding-right: 0;">
                                                 <label class="required pull-left control-label" for="spanorderedby" runat="server"
@@ -520,10 +535,10 @@
                                                     *Prescribed by:</label>
                                             </div>
                                             <div class="col-md-6 pull-left" style="padding-left: 0;">
-                                                <span style='display: <%= sEdit %>' id="spanorderedby">
+                                                <span  id="spanorderedby">
                                                     <asp:DropDownList ID="ddlPharmOrderedbyName" CssClass="form-control pull-left" runat="Server">
                                                     </asp:DropDownList>
-                                                </span><span style='display: <%= sView %>'>
+                                                </span><span >
                                                     <asp:Label ID="labelOrderByName" runat="server" Visible="true" Text="" Font-Bold="true"></asp:Label></span>
                                             </div>
                                         </td>
@@ -538,16 +553,16 @@
                                                                 *Prescribed By Date:</label>
                                                         </div>
                                                         <div class="col-md-6 pull-left">
-                                                            <div class="input-group" style="padding-left: 0; padding-right: 0; display: <%= sEdit %>">
+                                                            <div class="input-group" style="padding-left: 0; padding-right: 0; ">
                                                                 <input id="txtpharmOrderedbyDate" class="form-control" maxlength="11" name="pharmOrderedbyDate"
                                                                     runat="server" />
                                                                 <span class="input-group-addon">
                                                                     <img id="appDateimg1" onclick="w_displayDatePicker('<%=txtpharmOrderedbyDate.ClientID%>');"
-                                                                        height="22" alt="Date Helper" hspace="5" src="../images/cal_icon.gif" width="22"
+                                                                        height="22" alt="Date Helper" hspace="5" src="../../images/cal_icon.gif" width="22"
                                                                         border="0" name="appDateimg" />
                                                                     <span class="smallerlabel" id="appDatespan1">(DD-MMM-YYYY)</span> </span>
                                                             </div>
-                                                            <span style='display: <%= sView %>'>
+                                                            <span>
                                                                 <asp:Label ID="labelOrderByDate" runat="server" Visible="true" Text="" Font-Bold="true"></asp:Label></span>
                                                         </div>
                                                         <%--<div class="col-md-2 pull-left" style="padding-left: 0%">
@@ -566,10 +581,10 @@
                                                     Dispensed by :</label>
                                             </div>
                                             <div class="col-md-6 pull-left" style="padding-left: 0;">
-                                                <span style='display: <%= sNotDispensed %>' id="spandispensed">
+                                                <span  id="spandispensed">
                                                     <asp:DropDownList ID="ddlDispensedBy" CssClass="form-control" runat="server">
                                                     </asp:DropDownList>
-                                                </span><span style='display: <%= sDispensed %>'>
+                                                </span><span>
                                                     <asp:Label ID="labelDispensedBy" runat="server" Visible="true" Text="" Font-Bold="true"></asp:Label></span>
                                             </div>
                                         </td>
@@ -583,30 +598,19 @@
                                                                 Dispensed by Date:</label>
                                                         </div>
                                                         <div class="col-md-6 pull-left">
-                                                            <div class="input-group" style="padding-left: 0; padding-right: 0; display: <%= sNotDispensed %>">
+                                                            <div class="input-group" style="padding-left: 0; padding-right: 0;">
                                                                 <input id="txtpharmReportedbyDate" class="form-control" maxlength="11" name="pharmReportedbyDate"
                                                                     runat="server" />
                                                                 <span class="input-group-addon">
                                                                     <img id="appDateimg2" onclick="w_displayDatePicker('<%=txtpharmReportedbyDate.ClientID%>');"
-                                                                        height="22" alt="Date Helper" hspace="5" src="../images/cal_icon.gif" width="22"
+                                                                        height="22" alt="Date Helper" hspace="5" src="../../images/cal_icon.gif" width="22"
                                                                         border="0" name="appDateimg2" />
                                                                     <span class="smallerlabel" id="Span2">(DD-MMM-YYYY)</span></span>
                                                             </div>
-                                                            <span style='display: <%= sDispensed %>'>
+                                                            <span>
                                                                 <asp:Label ID="labelDispensedDate" runat="server" Visible="true" Text="" Font-Bold="true"></asp:Label></span>
                                                         </div>
-                                                        <%--<div class="col-md-6 pull-left" style="padding-right: 0%; display: <%= sNotDispensed %>">
-                                                            <input id="txtpharmReportedbyDate" class="form-control" maxlength="11" size="11"
-                                                                name="pharmReportedbyDate" runat="server" />
-                                                        </div>
-                                                        <div class="col-md-2 pull-left" style="padding-left: 0%">
-                                                            <span style='display: <%= sNotDispensed %>'>
-                                                                <img id="appDateimg2" onclick="w_displayDatePicker('<%=txtpharmReportedbyDate.ClientID%>');"
-                                                                    height="22" alt="Date Helper" hspace="5" src="../images/cal_icon.gif" width="22"
-                                                                    border="0" name="appDateimg2" />
-                                                                <span class="smallerlabel" id="Span2">(DD-MMM-YYYY)</span> </span><span style='display: <%= sDispensed %>'>
-                                                                    <asp:Label ID="labelDispensedDate" runat="server" Visible="true" Text="" Font-Bold="true"></asp:Label></span>
-                                                        </div>--%>
+                                                       
                                                     </td>
                                                 </tr>
                                             </table>
@@ -649,9 +653,10 @@
                                                 runat="server" Text="OK " OnClick="btnOk_Click" />
                                             <asp:Button ID="btnPrint" CssClass="btn btn-info" Text="Print Pharmacy Form" runat="server"
                                                 OnClientClick="WindowPrint()" />
-                                         
-                                            <asp:Button ID="btncancel" CssClass="btn btn-danger" runat="server" Text="Close"
-                                                OnClick="btncancel_Click" />
+                                            <%--                                            <asp:Button ID="btnPresPrint" CssClass="btn btn-info" Text="Save and Print Prescription"
+                                                runat="server" OnClick="btnPresPrint_Click" />--%>
+                                           
+                                            <asp:Button ID="btncancel"  runat="server" Text="Close" CssClass="btn btn-info"   OnClick="btncancel_Click" />
                                         </td>
                                     </tr>
                                 </tbody>
