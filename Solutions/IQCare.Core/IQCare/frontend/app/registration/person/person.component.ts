@@ -198,23 +198,30 @@ export class PersonComponent implements OnInit {
         this.registrationService.updatePersonDetails(this.person).subscribe((personRes) => {
             console.log(personRes);
 
-            const personCont = this.registrationService.addPersonContact(personRes.Id,
+            const personCont = this.registrationService.updatePersonContact(personRes['id'],
                 null, this.contact.PhoneNumber,
                 null, null, this.userId);
 
-            const matStatus = this.registrationService.addPersonMaritalStatus(personRes.Id,
+            const matStatus = this.registrationService.updatePersonMaritalStatus(personRes['id'],
                 this.person.MaritalStatus, this.userId);
 
 
-            const populationTypes = this.registrationService.addPersonPopulationType(personRes.Id,
-                this.userId, this.personPopulation);
+            /*const populationTypes = this.registrationService.addPersonPopulationType(personRes.Id,
+                this.userId, this.personPopulation);*/
 
-            const personLoc = this.registrationService.addPersonLocation(personRes.Id, 0,
+            const personLoc = this.registrationService.updatePersonLocation(personRes['id'], 0,
                 0, 0, this.userId, this.contact.Landmark);
 
-            forkJoin([personCont, matStatus, populationTypes, personLoc]).subscribe((forkJoinRes) => {
-
+            forkJoin([personCont, matStatus, personLoc]).subscribe((forkJoinRes) => {
+                console.log('success');
+            }, (error) => {
+                this.snotifyService.error('Error editing client ' + error, 'Registration', this.notificationService.getConfig());
+            }, () => {
+                this.snotifyService.success('Successfully registered client', 'Registration', this.notificationService.getConfig());
+                this.zone.run(() => { this.router.navigate(['/registration/enrollment'], { relativeTo: this.route }); });
             });
+        }, (err) => {
+            this.snotifyService.error('Error editing client ' + err, 'Registration', this.notificationService.getConfig());
         });
     }
 
@@ -240,8 +247,9 @@ export class PersonComponent implements OnInit {
             personRelation['RelationshipTypeId'] = this.person.partnerRelationship;
             personRelation['UserId'] = JSON.parse(localStorage.getItem('appUserId'));
 
-            const patientAdd = !this.person.isPartner ? this.registrationService.addPatient(data['personId'], this.person.DateOfBirth)
-                : this.registrationService.addPersonRelationship(personRelation);
+            const patientAdd = this.registrationService.addPersonRelationship(personRelation);
+
+            // this.registrationService.addPatient(data['personId'], this.person.DateOfBirth)
 
             const personCont = this.registrationService.addPersonContact(data['personId'],
                 null, this.contact.PhoneNumber,
@@ -260,7 +268,7 @@ export class PersonComponent implements OnInit {
             // join multiple requests
             forkJoin([patientAdd, personCont, matStatus, personLoc, populationTypes]).subscribe(results => {
                 if (this.person.isPartner == false) {
-                    localStorage.setItem('patientId', results[0]['patientId']);
+                    // localStorage.setItem('patientId', results[0]['patientId']);
                     localStorage.setItem('personId', data['personId']);
                 } else {
                     localStorage.setItem('partnerId', data['personId']);

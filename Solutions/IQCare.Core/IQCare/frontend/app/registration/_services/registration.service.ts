@@ -85,15 +85,36 @@ export class RegistrationService {
         );
     }
 
-    public addPatient(personId: number, dateOfBirth: string): Observable<any> {
+    public addPatient(personId: number, userId: number): Observable<any> {
         const Indata = {
             PersonId: personId,
-            DateOfBirth: dateOfBirth
+            UserId: userId
         };
 
         return this.http.post<any>(this.API_URL + this._url + '/addPatient', JSON.stringify(Indata), httpOptions).pipe(
             tap((addPatient: any) => this.errorHandler.log(`added patient w/ id`)),
             catchError(this.errorHandler.handleError<any>('addPatient'))
+        );
+    }
+
+    public updatePersonContact(personId: number, physicalAddress: string, mobileNumber: string,
+        alternativeNumber: string, emailAddress: string, userId: number): Observable<any> {
+        if (!mobileNumber) {
+            return Observable.of([]);
+        }
+
+        const Indata = {
+            PersonId: personId,
+            PhysicalAddress: physicalAddress,
+            MobileNumber: mobileNumber,
+            AlternativeNumber: alternativeNumber,
+            EmailAddress: emailAddress,
+            UserId: userId
+        };
+
+        return this.http.post<any>(this.API_URL + this._url + '/updatePersonContact', JSON.stringify(Indata), httpOptions).pipe(
+            tap((updatePersonContact: any) => this.errorHandler.log(`updated person contact`)),
+            catchError(this.errorHandler.handleError<any>('updatePersonContact'))
         );
     }
 
@@ -119,6 +140,23 @@ export class RegistrationService {
         );
     }
 
+    public updatePersonMaritalStatus(personId: number, maritalStatusId: number, userId: number): Observable<any> {
+        if (!maritalStatusId) {
+            return Observable.of([]);
+        }
+
+        const Indata = {
+            PersonId: personId,
+            MaritalStatusId: maritalStatusId,
+            UserId: userId
+        };
+
+        return this.http.post<any>(this.API_URL + this._url + '/updatePersonMaritalStatus', JSON.stringify(Indata), httpOptions).pipe(
+            tap((updatePersonMaritalStatus: any) => this.errorHandler.log(`updated person marital status w/ id`)),
+            catchError(this.errorHandler.handleError<any>('updatePersonMaritalStatus'))
+        );
+    }
+
     public addPersonMaritalStatus(personId: number, maritalStatusId: number, userId: number): Observable<any> {
         if (!maritalStatusId) {
             return Observable.of([]);
@@ -134,6 +172,29 @@ export class RegistrationService {
             tap((addPersonMaritalStatus: any) => this.errorHandler.log(`added person marital status w/ id`)),
             catchError(this.errorHandler.handleError<any>('addPersonMaritalStatus'))
         );
+    }
+
+    public updatePersonLocation(personId: number, countyId: number, subCountyId: number,
+        wardId: number, userId: number, landMark: string): Observable<any> {
+        if (!landMark) {
+            return Observable.of([]);
+        }
+
+        const Indata = {
+            PersonId: personId,
+            CountyId: countyId,
+            SubCountyId: subCountyId,
+            WardId: wardId,
+            Village: ' ',
+            LandMark: landMark,
+            UserId: userId
+        };
+
+        return this.http.post<any>(this.API_URL + this._url + '/UpdatePersonLocation', JSON.stringify(Indata), httpOptions).pipe(
+            tap((updatePersonLocation: any) => this.errorHandler.log(`updated person location w/ id`)),
+            catchError(this.errorHandler.handleError<any>('updatePersonLocation'))
+        );
+
     }
 
     public addPersonLocation(personId: number, countyId: number, subCountyId: number,
@@ -159,6 +220,9 @@ export class RegistrationService {
     }
 
     public addPersonRelationship(personRelationship: any): Observable<any> {
+        if (!personRelationship['RelationshipTypeId']) {
+            return Observable.of([]);
+        }
         return this.http.post<any>(this.API_URL + this._url + '/addPersonRelationship',
             JSON.stringify(personRelationship), httpOptions).pipe(
                 tap((addPersonRelationship: any) => this.errorHandler.log(`added new person relationship w/ id`)),

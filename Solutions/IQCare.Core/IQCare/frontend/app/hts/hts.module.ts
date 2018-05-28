@@ -39,6 +39,8 @@ import { FamilyTracingResolver } from './family-tracing/familyTracing.resolver';
 import { ViewEncounterComponent } from './view-encounter/view-encounter.component';
 import { PnsTracingListComponent } from './pns/pns-tracing-list/pns-tracing-list.component';
 import { PnsTracingComponent } from './pns/pnstracing/pnstracing.component';
+import { PsmartComponent } from './psmart/psmart.component';
+import { PsmartService } from './_services/psmart.service';
 
 
 @NgModule({
@@ -66,7 +68,8 @@ import { PnsTracingComponent } from './pns/pnstracing/pnstracing.component';
         TestDialogComponent,
         FamilyComponent,
         ViewEncounterComponent,
-        PnsTracingListComponent
+        PnsTracingListComponent,
+        PsmartComponent
     ],
     exports: [
     ],
@@ -81,7 +84,8 @@ import { PnsTracingComponent } from './pns/pnstracing/pnstracing.component';
         FamilyScreeningResolver,
         AppStateService,
         ErrorHandlerService,
-        FamilyTracingResolver
+        FamilyTracingResolver,
+        PsmartService
     ],
     entryComponents: [
         TestDialogComponent

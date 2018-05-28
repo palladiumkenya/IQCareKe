@@ -16,7 +16,7 @@
                                 <div class="row">
                                     <div class="col-lg-3 col-md-3 col-sm-3">
                                         <div class="form-group">
-                                            <label>Identification Number</label>
+                                            <label>Serial Number</label>
                                             <input type="text" id="identificationNumber" name="identificationNumber" class="form-control" tabindex="1" [(ngModel)]="search.identifierValue"
                                                 #identifierValue="ngModel">
                                         </div>
@@ -66,7 +66,7 @@
 
                                 <!-- FirstName Column -->
                                 <ng-container matColumnDef="IdentifierValue">
-                                    <mat-header-cell *matHeaderCellDef> Enrollment Number </mat-header-cell>
+                                    <mat-header-cell *matHeaderCellDef> Serial Number </mat-header-cell>
                                     <mat-cell *matCellDef="let element"> {{element.identifierValue}} </mat-cell>
                                 </ng-container>
 
