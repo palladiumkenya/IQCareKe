@@ -25,52 +25,54 @@ namespace IQCare.Web.UILogic
             get
             {
                 CurrentSession session = CurrentSession.Current;
-                List<StaticFormMap> map = new List<StaticFormMap>();
-                map.Add(new StaticFormMap()
+                List<StaticFormMap> map = new List<StaticFormMap>
                 {
-                    ReferenceId = "LABORATORY",
-                    FormName = "Laboratory",
-                    Url = session.Facility.PaperLess ? "~/Laboratory/LabRequestForm.aspx?key=" + Guid.NewGuid().ToString() : "~/Laboratory/LabRecordEntry.aspx?key=" + Guid.NewGuid().ToString()
-                });
-                map.Add(new StaticFormMap()
-                {
-                    ReferenceId = "PHARMACY",
-                    FormName = "Pharmacy",
-                    Url = "~/Pharmacy/frmPharmacyForm.aspx?key=" + Guid.NewGuid().ToString()
-                });
+                    new StaticFormMap()
+                    {
+                        ReferenceId = "LABORATORY",
+                        FormName = "Laboratory",
+                        Url = session.Facility.PaperLess ? "~/Laboratory/LabRequestForm.aspx?key=" + Guid.NewGuid().ToString() : "~/Laboratory/LabRecordEntry.aspx?key=" + Guid.NewGuid().ToString()
+                    },
+                    new StaticFormMap()
+                    {
+                        ReferenceId = "PHARMACY",
+                        FormName = "Pharmacy",
+                        Url = "~/Pharmacy/frmPharmacyForm.aspx?key=" + Guid.NewGuid().ToString()
+                    },
 
 
-                map.Add(new StaticFormMap()
-                {
-                    ReferenceId = "SERVICE_REQUEST",
-                    FormName = "Service Request",
-                    Url = string.Format("~/ClinicalService/ServiceRecordEntry.aspx?key={0}&name=add", Guid.NewGuid().ToString())
-                });
-                map.Add(new StaticFormMap()
-                {
-                    ReferenceId = "CONSUMABLES_ISSUANCE",
-                    FormName = "Consumables Issuance",
-                    Url = "~/Billing/frmBilling_BillingPanel.aspx?mode=clinical&key=" + Guid.NewGuid().ToString()
-                });
-                map.Add(new StaticFormMap()
-                {
-                    ReferenceId = "ART_THERAPY",
-                    FormName = "ART Therapy",
-                    Url = "~/ClinicalForms/frmClinical_ARVTherapy.aspx"
-                });
-                map.Add(new StaticFormMap()
-                {
-                    ReferenceId = "ART_HISTORY",
-                    FormName = "ART History",
-                    Url = "~/ClinicalForms/frmClinical_ARTHistory.aspx"
-                });
-                map.Add(new StaticFormMap()
-                {
-                    ReferenceId = "CCC_INITIAL_FOLLOWUP",
-                    FormName = "Initial and Follow up Visits",
-                    Url = "~/ClinicalForms/frmClinical_InitialFollowupVisit.aspx"
+                    new StaticFormMap()
+                    {
+                        ReferenceId = "SERVICE_REQUEST",
+                        FormName = "Service Request",
+                        Url = string.Format("~/ClinicalService/ServiceRecordEntry.aspx?key={0}&name=add", Guid.NewGuid().ToString())
+                    },
+                    new StaticFormMap()
+                    {
+                        ReferenceId = "CONSUMABLES_ISSUANCE",
+                        FormName = "Consumables Issuance",
+                        Url = "~/Billing/frmBilling_BillingPanel.aspx?mode=clinical&key=" + Guid.NewGuid().ToString()
+                    },
+                    new StaticFormMap()
+                    {
+                        ReferenceId = "ART_THERAPY",
+                        FormName = "ART Therapy",
+                        Url = "~/ClinicalForms/frmClinical_ARVTherapy.aspx"
+                    },
+                    new StaticFormMap()
+                    {
+                        ReferenceId = "ART_HISTORY",
+                        FormName = "ART History",
+                        Url = "~/ClinicalForms/frmClinical_ARTHistory.aspx"
+                    },
+                    new StaticFormMap()
+                    {
+                        ReferenceId = "CCC_INITIAL_FOLLOWUP",
+                        FormName = "Initial and Follow up Visits",
+                        Url = "~/ClinicalForms/frmClinical_InitialFollowupVisit.aspx"
 
-                });
+                    }
+                };
                 return map;
             }
         }
