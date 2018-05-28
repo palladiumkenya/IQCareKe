@@ -383,7 +383,8 @@
 													</div>
 													<div class="col-md-12">
 														<asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="cough" ClientIDMode="Static" onChange="IcfChange();">
-															<asp:ListItem Text="Yes" Value="True"></asp:ListItem>
+															<asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
+                                                            <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
 															<asp:ListItem Text="No" Value="False" Selected="True"></asp:ListItem>
 														</asp:DropDownList>
 													</div>
@@ -395,7 +396,8 @@
 													</div>
 													<div class="col-md-12">
 														<asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="fever" ClientIDMode="Static" onChange="IcfChange();">
-															<asp:ListItem Text="Yes" Value="True"></asp:ListItem>
+															<asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
+                                                            <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
 															<asp:ListItem Text="No" Value="False" Selected="True"></asp:ListItem>
 														</asp:DropDownList>
 													</div>
@@ -406,7 +408,8 @@
 													</div>
 													<div class="col-md-12">
 														<asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="weightLoss" ClientIDMode="Static" onChange="IcfChange();">
-															<asp:ListItem Text="Yes" Value="True"></asp:ListItem>
+															<asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
+                                                            <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
 															<asp:ListItem Text="No" Value="False" Selected="True"></asp:ListItem>
 														</asp:DropDownList>
 													</div>
@@ -417,7 +420,8 @@
 													</div>
 													<div class="col-md-12">
 														<asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="nightSweats" ClientIDMode="Static" onChange="IcfChange();">
-															<asp:ListItem Text="Yes" Value="True"></asp:ListItem>
+															<asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
+                                                            <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
 															<asp:ListItem Text="No" Value="False" Selected="True"></asp:ListItem>
 														</asp:DropDownList>
 													</div>
@@ -3903,7 +3907,7 @@
             $("#IcfForm").hide();
             $("#IcfActionForm").hide();
             //$("#tbscreeningstatus option").filter(function () { return $(this).text() === 'TBRx'; }).prop('selected', true);
-            $("#onIpt").prop("disabled", true);
+            $("#onIpt").prop("disabled", false);
             $("#onIpt").val("");
             //$("#EverBeenOnIpt").prop("disabled", true);
             // $("#EverBeenOnIpt").val("");
