@@ -52,8 +52,8 @@ insert into LookupMasterItem values((select top 1 Id from LookupMaster where Nam
 (select top 1 Id from LookupItem where name = 'PEP Regimens'),'PEP Regimens',9)
 
 ---duplicate PMTCT Regimens
-update LookupMasterItem set LookupItemId=(select id from lookupitem where name = 'PMTCTRegimens') 
-where LookupItemId=(select id from lookupitem where name = 'PMTCT Regimens')
+update LookupMasterItem set LookupItemId=(select top 1 id from lookupitem where name = 'PMTCTRegimens') 
+where LookupItemId=(select top 1 id from lookupitem where name = 'PMTCT Regimens')
 
 -----------------Update LPV/r and ATV/r--------------------------------
 update dtl_RegimenMap set RegimenType = 'TDF/3TC/ATV/r' where RegimenType='3TC/ATV/RTV/TDF'
@@ -1285,9 +1285,9 @@ insert into [FacilityList] values(17894,'Bwiti (Tiomin) Dispensary')
 ------------------------------------------------------------------------------------------------------
 --- Second line drugs abbreaviation setup.
 
-UPDATE lnk_DrugGeneric  SET GenericID=(SELECT GenericID FROM mst_Generic WHERE GenericAbbrevation LIKE '%lpv/r%') WHERE Drug_pk IN(SELECT Drug_pk FROM mst_drug WHERE DrugName LIKE '%lpv%')
+UPDATE lnk_DrugGeneric  SET GenericID=(SELECT top 1 GenericID FROM mst_Generic WHERE GenericAbbrevation LIKE '%lpv/r%') WHERE Drug_pk IN(SELECT Drug_pk FROM mst_drug WHERE DrugName LIKE '%lpv%')
 
-UPDATE lnk_DrugGeneric  SET GenericID=(SELECT GenericID FROM mst_Generic WHERE GenericAbbrevation LIKE '%atv/r%') WHERE Drug_pk IN(SELECT Drug_pk FROM mst_drug WHERE DrugName LIKE '%atv%')
+UPDATE lnk_DrugGeneric  SET GenericID=(SELECT top 1 GenericID FROM mst_Generic WHERE GenericAbbrevation LIKE '%atv/r%') WHERE Drug_pk IN(SELECT Drug_pk FROM mst_drug WHERE DrugName LIKE '%atv%')
 
 -- regenerate the abbreviations
 update Mst_ItemMaster
