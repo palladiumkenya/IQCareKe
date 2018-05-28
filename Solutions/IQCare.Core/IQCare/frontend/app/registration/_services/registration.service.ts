@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import {environment} from '../../../environments/environment';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs/Observable';
+import { environment } from '../../../environments/environment';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
-import {catchError, tap} from 'rxjs/operators';
-import {Person} from '../_models/person';
+import { catchError, tap } from 'rxjs/operators';
+import { Person } from '../_models/person';
 import 'rxjs/add/observable/of';
-import {PersonPopulation} from '../_models/personPopulation';
-import {ErrorHandlerService} from '../../shared/_services/errorhandler.service';
+import { PersonPopulation } from '../_models/personPopulation';
+import { ErrorHandlerService } from '../../shared/_services/errorhandler.service';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -20,7 +20,7 @@ export class RegistrationService {
     private _url = '/api/Register';
 
     constructor(private http: HttpClient,
-                private errorHandler: ErrorHandlerService) { }
+        private errorHandler: ErrorHandlerService) { }
 
     public getRegistrationOptions(): Observable<any[]> {
         return this.http.get<any[]>(this.API_URL + this._lookupurl + '/registrationOptions').pipe(
@@ -54,7 +54,7 @@ export class RegistrationService {
     }
 
     public addPersonContact(personId: number, physicalAddress: string, mobileNumber: string,
-                            alternativeNumber: string, emailAddress: string, userId: number): Observable<any> {
+        alternativeNumber: string, emailAddress: string, userId: number): Observable<any> {
 
         if (!mobileNumber) {
             return Observable.of([]);
@@ -93,7 +93,7 @@ export class RegistrationService {
     }
 
     public addPersonLocation(personId: number, countyId: number, subCountyId: number,
-                             wardId: number, userId: number, landMark: string): Observable<any> {
+        wardId: number, userId: number, landMark: string): Observable<any> {
         if (!landMark) {
             return Observable.of([]);
         }
@@ -115,11 +115,15 @@ export class RegistrationService {
     }
 
     public addPersonRelationship(personRelationship: any): Observable<any> {
+        if (!personRelationship) {
+            return Observable.of([]);
+        }
+
         return this.http.post<any>(this.API_URL + this._url + '/addPersonRelationship',
             JSON.stringify(personRelationship), httpOptions).pipe(
-            tap((addPersonRelationship: any) => this.errorHandler.log(`added new person relationship w/ id`)),
-            catchError(this.errorHandler.handleError<any>('addPersonRelationship'))
-        );
+                tap((addPersonRelationship: any) => this.errorHandler.log(`added new person relationship w/ id`)),
+                catchError(this.errorHandler.handleError<any>('addPersonRelationship'))
+            );
     }
 
     public addPersonPopulationType(personId: number, userId: number, populations: PersonPopulation): Observable<any> {
@@ -143,7 +147,7 @@ export class RegistrationService {
         }
 
         if (populations.priorityPop === 1) {
-            priority = populations.priorityPopulation.map(priorityId => ({priorityId}));
+            priority = populations.priorityPopulation.map(priorityId => ({ priorityId }));
         }
 
         const Indata = {
