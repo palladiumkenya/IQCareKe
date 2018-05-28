@@ -18,7 +18,12 @@ BEGIN
 	ALTER TABLE mst_Patient 
 		ADD  HTSID varchar(60) null
 END
-
+Go
+If Not Exists(Select * from sys.columns where Name = N'AssigningAuthority' AND Object_ID = Object_ID(N'Identifiers'))
+BEGIN
+	ALTER TABLE Identifiers ADD AssigningAuthority varchar(15)
+END
+GO
 IF NOT EXISTS(SELECT * FROM Identifiers WHERE code='CARD_SERIALNUMBER')
 BEGIN
   INSERT INTO Identifiers ([Name],Code,DisplayName,DataType,PrefixType,SuffixType,IdentifierType,CreatedBy,AssigningAuthority) VALUES(
