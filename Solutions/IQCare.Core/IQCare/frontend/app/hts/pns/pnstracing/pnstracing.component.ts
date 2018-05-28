@@ -1,18 +1,18 @@
-import {Component, NgZone, OnInit} from '@angular/core';
-import {PnstracingService} from '../_services/pnstracing.service';
-import {PnsTracing} from '../_models/pnstracing';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Store} from '@ngrx/store';
-import * as Consent from '../../shared/reducers/app.states';
-import {NotificationService} from '../../shared/_services/notification.service';
-import {SnotifyService} from 'ng-snotify';
-import {AppEnum} from '../../shared/reducers/app.enum';
-import {AppStateService} from '../../shared/_services/appstate.service';
+import { Component, NgZone, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import * as Consent from '../../../shared/reducers/app.states';
+import { NotificationService } from '../../../shared/_services/notification.service';
+import { SnotifyService } from 'ng-snotify';
+import { AppEnum } from '../../../shared/reducers/app.enum';
+import { AppStateService } from '../../../shared/_services/appstate.service';
+import { PnstracingService } from '../../_services/pnstracing.service';
+import { PnsTracing } from '../../_models/pnstracing';
 
 @Component({
-  selector: 'app-pnstracing',
-  templateUrl: './pnstracing.component.html',
-  styleUrls: ['./pnstracing.component.css']
+    selector: 'app-pnstracing',
+    templateUrl: './pnstracing.component.html',
+    styleUrls: ['./pnstracing.component.css']
 })
 export class PnsTracingComponent implements OnInit {
     pnsTracing: PnsTracing;
@@ -25,13 +25,13 @@ export class PnsTracingComponent implements OnInit {
     minDate: any;
 
     constructor(private pnsTracingService: PnstracingService,
-                private router: Router,
-                private route: ActivatedRoute,
-                public zone: NgZone,
-                private store: Store<AppState>,
-                private snotifyService: SnotifyService,
-                private notificationService: NotificationService,
-                private appStateService: AppStateService) {
+        private router: Router,
+        private route: ActivatedRoute,
+        public zone: NgZone,
+        private store: Store<AppState>,
+        private snotifyService: SnotifyService,
+        private notificationService: NotificationService,
+        private appStateService: AppStateService) {
         this.maxDate = new Date();
         this.minDate = new Date();
     }
@@ -90,7 +90,7 @@ export class PnsTracingComponent implements OnInit {
             this.snotifyService.success('Successful saving PNS screening',
                 'PNS Tracing', this.notificationService.getConfig());
 
-            this.zone.run(() => { this.router.navigate(['/hts/pns'], {relativeTo: this.route }); });
+            this.zone.run(() => { this.router.navigate(['/hts/pns/pnslist'], { relativeTo: this.route }); });
         }, err => {
             this.snotifyService.error('Error saving PNS tracing' + err,
                 'PNS Tracing', this.notificationService.getConfig());

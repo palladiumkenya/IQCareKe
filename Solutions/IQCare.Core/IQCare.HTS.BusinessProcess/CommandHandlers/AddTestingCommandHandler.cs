@@ -40,7 +40,9 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         KitLotNumber = t.KitLotNumber,
                         Outcome = t.Outcome,
                         ProviderId = request.ProviderId,
-                        TestRound = t.TestRound
+                        TestRound = t.TestRound,
+                        CreateDate = DateTime.Now,
+                        DeleteFlag = false
                     }));
 
                     await _unitOfWork.Repository<Core.Model.Testing>().AddRangeAsync(testings);

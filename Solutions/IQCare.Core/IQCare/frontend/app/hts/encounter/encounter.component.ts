@@ -1,7 +1,6 @@
 import {Component, NgZone, OnInit} from '@angular/core';
 import {Encounter} from '../_models/encounter';
 import {EncounterService} from '../_services/encounter.service';
-import {FinalTestingResults, Testing} from '../_models/testing';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Store} from '@ngrx/store';
 import * as Consent from '../../shared/reducers/app.states';
@@ -29,7 +28,6 @@ export class EncounterComponent implements OnInit {
     strategyOptions: any[];
     tbStatus: any[];
     hivResultsOptions: any[];
-    hivFinalResultsOptions: any[];
     hivTestKits: any[];
 
     maxDate: any;
@@ -84,7 +82,6 @@ export class EncounterComponent implements OnInit {
     setEncounterValuesForUpdate() {
         if (localStorage['editEncounterId']) {
             this._encounterService.getEncounter(JSON.parse(localStorage.getItem('editEncounterId'))).subscribe((res) => {
-                console.log(res);
                 if (res['encounter'].length > 0) {
                     const encounterValue = res['encounter'][0];
                     let hasDisability = this.yesNoOptions.find(obj => obj.itemName == 'No').itemId;

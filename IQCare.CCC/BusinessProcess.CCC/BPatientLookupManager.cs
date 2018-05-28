@@ -11,6 +11,7 @@ using DataAccess.Base;
 using DataAccess.CCC.Context;
 using DataAccess.Common;
 using DataAccess.Entity;
+using Entities.CCC;
 
 namespace BusinessProcess.CCC
 {
@@ -31,11 +32,11 @@ namespace BusinessProcess.CCC
 
         }
 
-        public List<PatientLookup> GetPatientByPersonId(int personId)
+        public PatientLookup GetPatientByPersonId(int personId)
         {
             using (UnitOfWork u = new UnitOfWork(new LookupContext()))
             {
-                return u.PatientLookupRepository.FindBy(x => x.PersonId == personId).ToList();
+                return u.PatientLookupRepository.FindBy(x => x.PersonId == personId).ToList().FirstOrDefault();
             }
         }
       
@@ -244,6 +245,14 @@ namespace BusinessProcess.CCC
                 PatientLookup patientLookup = unitOfWork.PatientLookupRepository.FindBy(x => x.EnrollmentNumber == cccNumber).FirstOrDefault();
                 unitOfWork.Dispose();
                 return patientLookup;
+            }
+        }
+
+        public List<PatientRelationshipDTO> GetPatientRelationshipView(int patientId)
+        {
+            using(ViewContext context = new ViewContext())
+            {
+                return context.PatientRelationshipList.Where(p => p.PatientId == patientId).ToList();
             }
         }
     }

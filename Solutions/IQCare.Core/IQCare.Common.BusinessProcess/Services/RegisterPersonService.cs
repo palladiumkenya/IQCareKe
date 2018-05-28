@@ -123,6 +123,10 @@ namespace IQCare.Common.BusinessProcess.Services
                 StringBuilder sql = new StringBuilder();
                 sql.Append("exec pr_OpenDecryptedSession;");
                 sql.Append($"UPDATE PersonContact SET PhysicalAddress = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{physicalAddress}'), MobileNumber = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{mobileNumber}') WHERE PersonId = {personId};");
+                sql.Append($"SELECT [Id] ,[PersonId], CAST(DECRYPTBYKEY([PhysicalAddress]) AS VARCHAR(50)) [PhysicalAddress]," +
+                           $"CAST(DECRYPTBYKEY([MobileNumber]) AS VARCHAR(50)) [MobileNumber]," +
+                           $"CAST(DECRYPTBYKEY([AlternativeNumber]) AS VARCHAR(50)) [AlternativeNumber]," +
+                           $"CAST(DECRYPTBYKEY([EmailAddress]) AS VARCHAR(50)) [EmailAddress],[Active],[DeleteFlag],[CreatedBy],[CreateDate],[AuditData] FROM [dbo].[PersonContact];");
                 sql.Append("exec [dbo].[pr_CloseDecryptedSession];");
 
                 var personContactInsert = await _unitOfWork.Repository<PersonContact>().FromSql(sql.ToString());

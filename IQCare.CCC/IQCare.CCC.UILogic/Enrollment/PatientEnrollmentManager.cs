@@ -14,7 +14,7 @@ namespace IQCare.CCC.UILogic.Enrollment
         public int addPatientEnrollment(int patientId, string enrollmentDate, int userId)
         {
             int returnValue;
-            int result;
+           // int result;
             PatientEncounterManager patientEncounterManager=new PatientEncounterManager();
             try
             {
