@@ -5,7 +5,7 @@ using MediatR;
 
 namespace IQCare.HTS.BusinessProcess.Commands
 {
-    public class SynchronizePartnersCommand : IRequest<Result<SynchronizePartnersResponse>>
+    public class SynchronizePartnersCommand : IRequest<Result<string>>
     {
         public MESSAGE_HEADER MESSAGE_HEADER { get; set; }
         public List<PARTNER> PARTNERS { get; set; }

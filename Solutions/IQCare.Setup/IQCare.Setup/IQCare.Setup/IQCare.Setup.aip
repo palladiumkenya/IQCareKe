@@ -2,7 +2,6 @@
 <DOCUMENT Type="Advanced Installer" CreateVersion="14.5.2" version="14.5.2" Modules="enterprise" RootPath="..\..\..\..\Release*" Language="en" Id="{1800045D-F422-4A86-B3A6-A71F6AD68C61}">
   <COMPONENT cid="caphyon.advinst.msicomp.MsiPropsComponent">
     <ROW Property="AI_BITMAP_DISPLAY_MODE" Value="0"/>
-    <ROW Property="AI_PREDEF_LCONDS_PROPS" Value="AI_DETECTED_INTERNET_CONNECTION"/>
     <ROW Property="AI_ThemeStyle" Value="aero" MultiBuildValue="DefaultBuild:style8" MsiKey="AI_ThemeStyle"/>
     <ROW Property="ALLUSERS" Value="1"/>
     <ROW Property="ARPCOMMENTS" Value="This installer database contains the logic and data required to install [|ProductName]." ValueLocId="*"/>
@@ -1964,7 +1963,7 @@
     <ROW File="WallisAndFutuna.png_2" Component_="Abkhazia.png_2" FileName="WALLIS~1.PNG|Wallis-And-Futuna.png" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\assets\img\flags\64\Wallis-And-Futuna.png" SelfReg="false" NextFile="WesternSahara.png_2"/>
     <ROW File="Web.config_1" Component_="BillKnockOff.aspx" FileName="WEB~1.CON|Web.config" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\Billing\Web.config" SelfReg="false" NextFile="ActiveDatabaseSoftware.ActiveQueryBuilder2.dll"/>
     <ROW File="Web.config_2" Component_="tsconfig.app.json" FileName="WEB~1.CON|Web.config" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\api\frontend\Web.config" SelfReg="false" NextFile="IQCare.Common.BusinessProcess.dll"/>
-    <ROW File="Web.config_4" Component_="f11d8565e277e8b96c.chunk.js" FileName="WEB~1.CON|Web.config" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\Web.config" SelfReg="false"/>
+    <ROW File="Web.config_4" Component_="f11d8565e277e8b96c.chunk.js" FileName="WEB~1.CON|Web.config" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\Web.config" SelfReg="false" NextFile="f13fb17b5eba18ab9b95.chunk.js"/>
     <ROW File="WeightBMI.GIF" Component_="pxYes_check.svg.png" FileName="WEIGHT~1.GIF|WeightBMI.GIF" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\Images\WeightBMI.GIF" SelfReg="false" NextFile="arrow_left.gif_1"/>
     <ROW File="WesternSahara.png" Component_="Abkhazia.png" FileName="WESTER~1.PNG|Western-Sahara.png" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\assets\img\flags\16\Western-Sahara.png" SelfReg="false" NextFile="Yemen.png"/>
     <ROW File="WesternSahara.png_1" Component_="Abkhazia.png_1" FileName="WESTER~1.PNG|Western-Sahara.png" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\assets\img\flags\32\Western-Sahara.png" SelfReg="false" NextFile="Yemen.png_1"/>
@@ -2467,7 +2466,7 @@
     <ROW File="customreporttypesql.png" Component_="frame_header_dummy.htm" FileName="CUSTO~14.PNG|customreporttypesql.png" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\IQCareHelp\customreporttypesql.png" SelfReg="false" NextFile="custom_field_custom_lists.htm"/>
     <ROW File="cypher.js" Component_="cypher.js" FileName="cypher.js" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\assets\js\plugins\codemirror\mode\cypher\cypher.js" SelfReg="false" NextFile="index.html_9"/>
     <ROW File="d.js" Component_="d.js" FileName="d.js" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\assets\js\plugins\codemirror\mode\d\d.js" SelfReg="false" NextFile="index.html_10"/>
-    <ROW File="d23c58478548c73d2.chunk.js" Component_="f11d8565e277e8b96c.chunk.js" FileName="1464D2~1.JS|1.464d23c58478548c73d2.chunk.js" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\1.464d23c58478548c73d2.chunk.js" SelfReg="false" NextFile="dc776f9ce0871565927.chunk.js"/>
+    <ROW File="d23c58478548c73d2.chunk.js" Component_="f11d8565e277e8b96c.chunk.js" FileName="1464D2~1.JS|1.464d23c58478548c73d2.chunk.js" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\1.464d23c58478548c73d2.chunk.js" SelfReg="false" NextFile="rdpartylicenses.txt"/>
     <ROW File="d3.min.js" Component_="d3.min.js" FileName="D3MIN~1.JS|d3.min.js" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\assets\js\plugins\d3\d3.min.js" SelfReg="false" NextFile="LICENSE"/>
     <ROW File="d3.v3.js" Component_="d3.v3.js" FileName="D3V3~1.JS|d3.v3.js" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\assets\js\plugins\rickshaw\vendor\d3.v3.js" SelfReg="false" NextFile="select2.full.min.js"/>
     <ROW File="dashboard.png" Component_="avatar1.jpg" FileName="DASHBO~1.PNG|dashboard.png" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\assets\img\landing\dashboard.png" SelfReg="false" NextFile="header_one.jpg"/>
@@ -2488,7 +2487,6 @@
     <ROW File="daterangepicker.css" Component_="awesomplete.css" FileName="DATERA~1.CSS|daterangepicker.css" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\Content\css\daterangepicker.css" SelfReg="false" NextFile="fontawesome.css"/>
     <ROW File="daterangepicker.js" Component_="daterangepicker.js" FileName="DATERA~1.JS|daterangepicker.js" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\assets\js\plugins\daterangepicker\daterangepicker.js" SelfReg="false" NextFile="COPYING"/>
     <ROW File="daterangepickerbs3.css" Component_="daterangepickerbs3.css" FileName="DATERA~1.CSS|daterangepicker-bs3.css" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\assets\plugins\daterangepicker\daterangepicker-bs3.css" SelfReg="false" NextFile="basic.css"/>
-    <ROW File="dc776f9ce0871565927.chunk.js" Component_="f11d8565e277e8b96c.chunk.js" FileName="21DC77~1.JS|2.1dc776f9ce0871565927.chunk.js" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\2.1dc776f9ce0871565927.chunk.js" SelfReg="false" NextFile="rdpartylicenses.txt"/>
     <ROW File="dd77cc9a389082233e62.png" Component_="f11d8565e277e8b96c.chunk.js" FileName="4DD77C~1.PNG|4.dd77cc9a389082233e62.png" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\4.dd77cc9a389082233e62.png" SelfReg="false" NextFile="animate.css_1"/>
     <ROW File="default.css" Component_="frame_header_dummy.htm" FileName="default.css" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\IQCareHelp\default.css" SelfReg="false" NextFile="delete_a_form.htm"/>
     <ROW File="del.gif" Component_="pxYes_check.svg.png" FileName="del.gif" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\Images\del.gif" SelfReg="false" NextFile="down.gif"/>
@@ -2567,6 +2565,7 @@
     <ROW File="exposed_infant2.htm" Component_="frame_header_dummy.htm" FileName="EXPOSE~2.HTM|exposed_infant2.htm" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\IQCareHelp\exposed_infant2.htm" SelfReg="false" NextFile="exposed_infant_br.htm"/>
     <ROW File="exposed_infant_br.htm" Component_="frame_header_dummy.htm" FileName="EXPOSE~3.HTM|exposed_infant_br.htm" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\IQCareHelp\exposed_infant_br.htm" SelfReg="false" NextFile="facilityhomepage.png"/>
     <ROW File="f11d8565e277e8b96c.chunk.js" Component_="f11d8565e277e8b96c.chunk.js" FileName="034F11~1.JS|0.34f11d8565e277e8b96c.chunk.js" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\0.34f11d8565e277e8b96c.chunk.js" SelfReg="false" NextFile="d23c58478548c73d2.chunk.js"/>
+    <ROW File="f13fb17b5eba18ab9b95.chunk.js" Component_="f11d8565e277e8b96c.chunk.js" FileName="2F13FB~1.JS|2.f13fb17b5eba18ab9b95.chunk.js" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\2.f13fb17b5eba18ab9b95.chunk.js" SelfReg="false" NextFile="inline.35a3125853dfa721375e.bundle.js"/>
     <ROW File="facilityLevelBanner.png" Component_="pxYes_check.svg.png" FileName="FACILI~1.PNG|facilityLevelBanner.png" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\Images\facilityLevelBanner.png" SelfReg="false" NextFile="FGI.bmp"/>
     <ROW File="facility_reports.htm" Component_="frame_header_dummy.htm" FileName="FACILI~5.HTM|facility_reports.htm" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\IQCareHelp\facility_reports.htm" SelfReg="false" NextFile="facility_reports__pmtct.htm"/>
     <ROW File="facility_reports___pmtct.htm" Component_="frame_header_dummy.htm" FileName="FACILI~7.HTM|facility_reports___pmtct.htm" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\IQCareHelp\facility_reports___pmtct.htm" SelfReg="false" NextFile="facility_setup_and_patient_number.htm"/>
@@ -3039,14 +3038,14 @@
     <ROW File="index.html_84" Component_="index.html_54" FileName="INDEX~1.HTM|index.html" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\assets\js\plugins\codemirror\mode\xquery\index.html" SelfReg="false" NextFile="test.js_13"/>
     <ROW File="index.html_85" Component_="index.html_55" FileName="INDEX~1.HTM|index.html" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\assets\js\plugins\codemirror\mode\yaml\index.html" SelfReg="false" NextFile="yaml.js"/>
     <ROW File="index.html_86" Component_="index.html_56" FileName="INDEX~1.HTM|index.html" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\assets\js\plugins\codemirror\mode\z80\index.html" SelfReg="false" NextFile="z80.js"/>
-    <ROW File="index.html_87" Component_="f11d8565e277e8b96c.chunk.js" FileName="INDEX~1.HTM|index.html" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\index.html" SelfReg="false" NextFile="inline.b7a2931babc1b24c0a7f.bundle.js"/>
+    <ROW File="index.html_87" Component_="f11d8565e277e8b96c.chunk.js" FileName="INDEX~1.HTM|index.html" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\index.html" SelfReg="false" NextFile="scripts.bae82b916902c1ddd62e.bundle.js"/>
     <ROW File="index.html_9" Component_="cypher.js" FileName="INDEX~1.HTM|index.html" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\assets\js\plugins\codemirror\mode\cypher\index.html" SelfReg="false" NextFile="d.js"/>
     <ROW File="infinitescroll.hbs" Component_="checkbox.hbs" FileName="INFINI~1.HBS|infinite-scroll.hbs" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\assets\fuelux\templates\handlebars\fuelux\infinite-scroll.hbs" SelfReg="false" NextFile="loader.hbs"/>
     <ROW File="init.js" Component_="bootbox.js" FileName="init.js" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\CCC\Scripts\js\init.js" SelfReg="false" NextFile="jqueryui1.8.custom.min.js"/>
     <ROW File="initial_evaluation_ar_br.htm" Component_="frame_header_dummy.htm" FileName="INITIA~1.HTM|initial_evaluation_ar_br.htm" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\IQCareHelp\initial_evaluation_ar_br.htm" SelfReg="false" NextFile="initial_evaluation_form.htm"/>
     <ROW File="initial_evaluation_form.htm" Component_="frame_header_dummy.htm" FileName="INITIA~2.HTM|initial_evaluation_form.htm" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\IQCareHelp\initial_evaluation_form.htm" SelfReg="false" NextFile="initial_product_configuration.htm"/>
     <ROW File="initial_product_configuration.htm" Component_="frame_header_dummy.htm" FileName="INITIA~3.HTM|initial_product_configuration.htm" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\IQCareHelp\initial_product_configuration.htm" SelfReg="false" NextFile="international_standards.htm"/>
-    <ROW File="inline.b7a2931babc1b24c0a7f.bundle.js" Component_="f11d8565e277e8b96c.chunk.js" FileName="INLINE~1.JS|inline.b7a2931babc1b24c0a7f.bundle.js" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\inline.b7a2931babc1b24c0a7f.bundle.js" SelfReg="false" NextFile="main.1a3e8afde38eee03fe33.bundle.js"/>
+    <ROW File="inline.35a3125853dfa721375e.bundle.js" Component_="f11d8565e277e8b96c.chunk.js" FileName="INLINE~2.JS|inline.35a3125853dfa721375e.bundle.js" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\inline.35a3125853dfa721375e.bundle.js" SelfReg="false" NextFile="main.75c43e8cf424703369f9.bundle.js"/>
     <ROW File="input.hbs" Component_="button.hbs" FileName="input.hbs" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\assets\fuelux\templates\handlebars\bootstrap\input.hbs" SelfReg="false" NextFile="modaltrigger.hbs"/>
     <ROW File="input.html" Component_="buttongroup.html" FileName="INPUT~1.HTM|input.html" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\assets\fuelux\templates\underscore\bootstrap\input.html" SelfReg="false" NextFile="select.html"/>
     <ROW File="inputwithbuttondropdown.html" Component_="buttongroup.html" FileName="INPUT-~1.HTM|input-with-button-dropdown.html" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\assets\fuelux\templates\underscore\bootstrap\input-with-button-dropdown.html" SelfReg="false" NextFile="inputwithcheckbox.html"/>
@@ -3274,7 +3273,7 @@
     <ROW File="lua.js" Component_="index.html_7" FileName="lua.js" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\assets\js\plugins\codemirror\mode\lua\lua.js" SelfReg="false" NextFile="index.html_38"/>
     <ROW File="mail.gif" Component_="frame_header_dummy.htm" FileName="mail.gif" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\IQCareHelp\mail.gif" SelfReg="false" NextFile="mail_h.gif"/>
     <ROW File="mail_h.gif" Component_="frame_header_dummy.htm" FileName="mail_h.gif" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\IQCareHelp\mail_h.gif" SelfReg="false" NextFile="make_a_back_up.htm"/>
-    <ROW File="main.1a3e8afde38eee03fe33.bundle.js" Component_="f11d8565e277e8b96c.chunk.js" FileName="MAIN1A~1.JS|main.1a3e8afde38eee03fe33.bundle.js" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\main.1a3e8afde38eee03fe33.bundle.js" SelfReg="false" NextFile="polyfills.e909e7fa9acd66eba85e.bundle.js"/>
+    <ROW File="main.75c43e8cf424703369f9.bundle.js" Component_="f11d8565e277e8b96c.chunk.js" FileName="MAIN75~1.JS|main.75c43e8cf424703369f9.bundle.js" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\main.75c43e8cf424703369f9.bundle.js" SelfReg="false" NextFile="polyfills.ab834b8bb3e2aa842308.bundle.js"/>
     <ROW File="make_a_back_up.htm" Component_="frame_header_dummy.htm" FileName="MAKE_A~1.HTM|make_a_back_up.htm" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\IQCareHelp\make_a_back_up.htm" SelfReg="false" NextFile="managecareendedfields.png"/>
     <ROW File="manage_care_ended_fields.htm" Component_="frame_header_dummy.htm" FileName="MANAGE~1.HTM|manage_care_ended_fields.htm" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\IQCareHelp\manage_care_ended_fields.htm" SelfReg="false" NextFile="manage_care_ended_forms.htm"/>
     <ROW File="manage_care_ended_forms.htm" Component_="frame_header_dummy.htm" FileName="MANAGE~2.HTM|manage_care_ended_forms.htm" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\IQCareHelp\manage_care_ended_forms.htm" SelfReg="false" NextFile="manage_fields.htm"/>
@@ -3454,7 +3453,7 @@
     <ROW File="pmtct_form_naming_convention.htm" Component_="frame_header_dummy.htm" FileName="PMTCT_~2.HTM|pmtct_form_naming_convention.htm" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\IQCareHelp\pmtct_form_naming_convention.htm" SelfReg="false" NextFile="pmtct_form_set.htm"/>
     <ROW File="pmtct_form_set.htm" Component_="frame_header_dummy.htm" FileName="PMTCT_~3.HTM|pmtct_form_set.htm" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\IQCareHelp\pmtct_form_set.htm" SelfReg="false" NextFile="predefined_fields.htm"/>
     <ROW File="pmtctadultpharmacy.png" Component_="frame_header_dummy.htm" FileName="PMTCTA~1.PNG|pmtctadultpharmacy.png" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\IQCareHelp\pmtctadultpharmacy.png" SelfReg="false" NextFile="pmtct_fields.htm"/>
-    <ROW File="polyfills.e909e7fa9acd66eba85e.bundle.js" Component_="f11d8565e277e8b96c.chunk.js" FileName="POLYFI~1.JS|polyfills.e909e7fa9acd66eba85e.bundle.js" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\polyfills.e909e7fa9acd66eba85e.bundle.js" SelfReg="false" NextFile="scripts.bae82b916902c1ddd62e.bundle.js"/>
+    <ROW File="polyfills.ab834b8bb3e2aa842308.bundle.js" Component_="f11d8565e277e8b96c.chunk.js" FileName="POLYFI~2.JS|polyfills.ab834b8bb3e2aa842308.bundle.js" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\polyfills.ab834b8bb3e2aa842308.bundle.js" SelfReg="false"/>
     <ROW File="pre_defined_fields.htm" Component_="frame_header_dummy.htm" FileName="PRE_DE~1.HTM|pre_defined_fields.htm" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\IQCareHelp\pre_defined_fields.htm" SelfReg="false" NextFile="print.gif"/>
     <ROW File="predefined_fields.htm" Component_="frame_header_dummy.htm" FileName="PRE-DE~1.HTM|pre-defined_fields.htm" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\IQCareHelp\pre-defined_fields.htm" SelfReg="false" NextFile="predefinedcustomlists.htm"/>
     <ROW File="predefinedcustomlists.htm" Component_="frame_header_dummy.htm" FileName="PREDEF~1.HTM|predefinedcustomlists.htm" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\IQCareHelp\predefinedcustomlists.htm" SelfReg="false" NextFile="predefinedreports.htm"/>
@@ -3949,9 +3948,6 @@
   <COMPONENT cid="caphyon.advinst.msicomp.AppXCfgComponent">
     <ROW ID="Configuration" Order="1" ManifestFile="AppxManifest.xml" TargetOs="4"/>
   </COMPONENT>
-  <COMPONENT cid="caphyon.advinst.msicomp.BootstrapperUISequenceComponent">
-    <ROW Action="AI_DetectSoftware" Sequence="101"/>
-  </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.BuildComponent">
     <ROW BuildKey="BuildUwpAppX" BuildName="BuildUwpAppX" BuildOrder="2" BuildType="7" PackageFolder="C:\source\Repos\IQCare.KeHMIS\Solutions\IQCare.Setup\IQCare.Setup\IQCare.Setup\BuildUwpAppXSetupFiles" Languages="en" UwpTargetDesktop="TargetDeviceFamily"/>
     <ROW BuildKey="DefaultBuild" BuildName="DefaultBuild" BuildOrder="1" BuildType="1" PackageFolder="." PackageFileName="IQCare.Web.Setup" Languages="en" InstallationType="4" PackageType="1" ExeIconPath="D:\source\palladium\package\web\IQRunning.ico" ExtUI="true" UseLargeSchema="true" ExeName="IQCare.Web.Setup" UACExecutionLevel="2"/>
@@ -4039,7 +4035,6 @@
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiBinaryComponent">
     <ROW Name="PowerShellScriptLauncher.dll" SourcePath="&lt;AI_CUSTACTS&gt;PowerShellScriptLauncher.dll"/>
-    <ROW Name="SoftwareDetector.dll" SourcePath="&lt;AI_CUSTACTS&gt;SoftwareDetector.dll"/>
     <ROW Name="aicustact.dll" SourcePath="&lt;AI_CUSTACTS&gt;aicustact.dll"/>
     <ROW Name="iis.dll" SourcePath="&lt;AI_CUSTACTS&gt;iis.dll"/>
     <ROW Name="viewer.exe" SourcePath="&lt;AI_CUSTACTS&gt;viewer.exe"/>
@@ -4077,7 +4072,6 @@
     <ROW Action="AI_DATA_SETTER" Type="51" Source="CustomActionData" Target="App Pool Browse"/>
     <ROW Action="AI_DATA_SETTER_1" Type="51" Source="CustomActionData" Target="AEkAcwA2ADQAQgBpAHQAAgABAFAAYQByAGEAbQBzAAIAAQBTAGMAcgBpAHAAdAACACMAIABCAGwAbwBjAGsAIABmAG8AcgAgAGQAZQBjAGwAYQByAGkAbgBnACAAdABoAGUAIABzAGMAcgBpAHAAdAAgAHAAYQByAGEAbQBlAHQAZQByAHMALgANAAoAUABhAHIAYQBtACgAKQANAAoADQAKACMAIABZAG8AdQByACAAYwBvAGQAZQAgAGcAbwBlAHMAIABoAGUAcgBlAC4ADQAKAG4AZQB0ACAAcwB0AG8AcAAgAHcAYQBzACAALwB5AA0ACgBuAGUAdAAgAHMAdABhAHIAdAAgAHcAMwBzAHYAYw=="/>
     <ROW Action="AI_DOWNGRADE" Type="19" Target="4010"/>
-    <ROW Action="AI_DetectSoftware" Type="257" Source="SoftwareDetector.dll" Target="OnDetectSoftware"/>
     <ROW Action="AI_DpiContentScale" Type="1" Source="aicustact.dll" Target="DpiContentScale"/>
     <ROW Action="AI_EnableDebugLog" Type="321" Source="aicustact.dll" Target="EnableDebugLog"/>
     <ROW Action="AI_IIsConfig" Type="11265" Source="iis.dll" Target="OnIIsConfig" WithoutSeq="true"/>
@@ -4110,7 +4104,6 @@
     <ROW Action="AI_EnableDebugLog" Sequence="51"/>
     <ROW Action="AI_IIsInstall" Condition="(NOT PATCH AND NOT MSIPATCHREMOVE ) AND (NOT Reinstall AND AI_INSTALL_MODE &lt;&gt; &quot;Repair&quot;) AND ((VersionNT &gt;= 500 AND NOT Installed) OR (Installed AND REMOVE &lt;&gt; &quot;ALL&quot; AND AI_INSTALL_MODE &lt;&gt; &quot;Remove&quot;))" Sequence="6509"/>
     <ROW Action="AI_IIsUninstall" Condition="(VersionNT &gt;= 500) AND (REMOVE = &quot;ALL&quot;)" Sequence="1698"/>
-    <ROW Action="AI_DetectSoftware" Sequence="101"/>
     <ROW Action="OpenUrl" Condition="( NOT Installed )" Sequence="6603"/>
     <ROW Action="PowerShellScriptInline" Condition="(VersionNT &gt; 501) OR (VersionNT = 501 AND ServicePackLevel &gt;= 2)" Sequence="6602"/>
     <ROW Action="AI_DATA_SETTER_1" Condition="(VersionNT &gt; 501) OR (VersionNT = 501 AND ServicePackLevel &gt;= 2)" Sequence="6601"/>
@@ -4120,7 +4113,6 @@
     <ROW Action="AI_ResolveKnownFolders" Sequence="53"/>
     <ROW Action="AI_DpiContentScale" Sequence="52"/>
     <ROW Action="AI_EnableDebugLog" Sequence="51"/>
-    <ROW Action="AI_DetectSoftware" Sequence="101"/>
     <ROW Action="BrowseIISAppPools" Condition="1" Sequence="1229"/>
     <ROW Action="AI_DATA_SETTER" Condition="1" Sequence="1228"/>
   </COMPONENT>
@@ -4128,7 +4120,6 @@
     <ROW Condition="(VersionNT &lt;&gt; 400)" Description="[ProductName] cannot be installed on [WindowsTypeNT40Display]." DescriptionLocId="AI.LaunchCondition.NoNT40" IsPredefined="true" Builds="DefaultBuild"/>
     <ROW Condition="(VersionNT &lt;&gt; 500)" Description="[ProductName] cannot be installed on [WindowsTypeNT50Display]." DescriptionLocId="AI.LaunchCondition.NoNT50" IsPredefined="true" Builds="DefaultBuild"/>
     <ROW Condition="(VersionNT64 OR ((VersionNT &lt;&gt; 501) OR (ServicePackLevel = 3))) AND ((VersionNT &lt;&gt; 502) OR (ServicePackLevel = 2))" Description="[ProductName] cannot be installed on [WindowsTypeNT5XDisplay]." DescriptionLocId="AI.LaunchCondition.NoNT5X" IsPredefined="true" Builds="DefaultBuild"/>
-    <ROW Condition="AI_DETECTED_INTERNET_CONNECTION" Description="[ProductName] requires an active Internet connection for installation. Please check your network configuration and proxy settings." DescriptionLocId="AI.LaunchCondition.Internet" IsPredefined="true" Builds="DefaultBuild"/>
     <ROW Condition="SETUPEXEDIR OR (REMOVE=&quot;ALL&quot;)" Description="This package can only be run from a bootstrapper." DescriptionLocId="AI.LaunchCondition.RequireBootstrapper" IsPredefined="true" Builds="DefaultBuild"/>
     <ROW Condition="VersionNT" Description="[ProductName] cannot be installed on [WindowsType9XDisplay]." DescriptionLocId="AI.LaunchCondition.No9X" IsPredefined="true" Builds="DefaultBuild"/>
   </COMPONENT>

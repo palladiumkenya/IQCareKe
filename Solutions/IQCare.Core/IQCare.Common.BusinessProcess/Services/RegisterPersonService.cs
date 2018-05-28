@@ -21,6 +21,76 @@ namespace IQCare.Common.BusinessProcess.Services
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
 
+        public async Task<InteropPlacerValue> AddInteropPlacerValue(int entityId, int identifierType, int interopPlacerTypeId, string placerValue)
+        {
+            try
+            {
+                InteropPlacerValue interopPlacerValue = new InteropPlacerValue()
+                {
+                    EntityId = entityId,
+                    IdentifierType = identifierType,
+                    InteropPlacerTypeId = interopPlacerTypeId,
+                    PlacerValue = placerValue
+                };
+
+                await _unitOfWork.Repository<InteropPlacerValue>().AddAsync(interopPlacerValue);
+                await _unitOfWork.SaveAsync();
+
+                return interopPlacerValue;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public async Task<List<InteropPlacerValue>> GetInteropPlacerValue(int interopPlacerTypeId, int identifierType, string placerValue)
+        {
+            try
+            {
+                var result = await _unitOfWork.Repository<InteropPlacerValue>().Get(x =>
+                    x.InteropPlacerTypeId == interopPlacerTypeId && x.IdentifierType == identifierType &&
+                    x.PlacerValue == placerValue).ToListAsync();
+                
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public async Task<PersonRelationship> GetPersonRelationshipByPatientIdPersonId(int patientId, int personId)
+        {
+            try
+            {
+                var result = await _unitOfWork.Repository<PersonRelationship>()
+                    .Get(x => x.PersonId == personId && x.PatientId == patientId).ToListAsync();
+
+                return result.FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public async Task<PersonRelationship> UpdatePersonRelationship(PersonRelationship personRelationship)
+        {
+            try
+            {
+                _unitOfWork.Repository<PersonRelationship>().Update(personRelationship);
+                await _unitOfWork.SaveAsync();
+
+                return personRelationship;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw e;
+            }
+        }
+
         public async Task<PersonRelationship> addPersonRelationship(int personId, int patientId, int relationshipTypeId, int userId)
         {
             try
@@ -468,6 +538,9 @@ namespace IQCare.Common.BusinessProcess.Services
                 StringBuilder sql = new StringBuilder();
                 sql.Append("exec pr_OpenDecryptedSession;");
                 sql.Append($"UPDATE Patient SET DateOfBirth = '{dateOfBirth.ToString("yyyy-MM-dd")}', FacilityId = '{facilityId}' WHERE Id = {patientId};");
+                sql.Append($"SELECT [Id],[ptn_pk],[PersonId],[PatientIndex],[PatientType],[FacilityId],[Active],[DateOfBirth]," +
+                           $"[DobPrecision],CAST(DECRYPTBYKEY(NationalId) AS VARCHAR(50)) [NationalId],[DeleteFlag],[CreatedBy]," +
+                           $"[CreateDate],[AuditData],[RegistrationDate] FROM Patient WHERE Id = '{patientId}';");
                 sql.Append("exec [dbo].[pr_CloseDecryptedSession];");
 
 
@@ -589,6 +662,9 @@ namespace IQCare.Common.BusinessProcess.Services
                            $"MidName = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{middleName}'), " +
                            $"LastName = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{lastName}'), " +
                            $"Sex = {sex}, DateOfBirth = '{dateOfBirth.ToString("yyyy-MM-dd")}' WHERE Id = {personId}; ");
+                sql.Append($"SELECT [Id] , CAST(DECRYPTBYKEY(FirstName) AS VARCHAR(50)) [FirstName] ,CAST(DECRYPTBYKEY(MidName) AS VARCHAR(50)) MidName" +
+                           $",CAST(DECRYPTBYKEY(LastName) AS VARCHAR(50)) [LastName] ,[Sex] ,[Active] ,[DeleteFlag] ,[CreateDate] " +
+                           $",[CreatedBy] ,[AuditData] ,[DateOfBirth] ,[DobPrecision] FROM Person WHERE Id = '{personId}';");
                 sql.Append("exec [dbo].[pr_CloseDecryptedSession];");
 
                 var personInsert = await _unitOfWork.Repository<Person>().FromSql(sql.ToString());

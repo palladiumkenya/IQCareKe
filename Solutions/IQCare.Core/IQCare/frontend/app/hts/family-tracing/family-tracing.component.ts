@@ -89,4 +89,17 @@ export class FamilyTracingComponent implements OnInit {
         }
     }
 
+    onTracingOutcomeChange() {
+        console.log(this.formGroup.value.outcome);
+        const selectedItem = this.tracingOutcomeOptions.filter(obj => obj.itemId == this.formGroup.value.outcome);
+        if (selectedItem.length > 0 && selectedItem[0].itemName == 'Not Contacted') {
+            this.formGroup.controls.consent.disable({onlySelf: true});
+            this.formGroup.controls.consent.setValue('');
+            this.formGroup.controls.dateBooked.disable({onlySelf: true});
+            this.formGroup.controls.dateBooked.setValue('');
+        } else {
+            this.formGroup.controls.consent.enable({onlySelf: false});
+            this.formGroup.controls.dateBooked.enable({onlySelf: false});
+        }
+    }
 }

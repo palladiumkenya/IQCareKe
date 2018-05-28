@@ -40,3 +40,13 @@ BEGIN
 	ALTER TABLE [dbo].[Testing] CHECK CONSTRAINT [FK_Testing_HtsEncounterId_HtsEncounter_Id]
 END;
 GO
+
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'DeleteFlag'AND Object_ID = OBJECT_ID(N'Testing'))
+BEGIN
+	ALTER TABLE [dbo].[Testing] ADD DeleteFlag bit null;
+END;
+
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'CreateDate'AND Object_ID = OBJECT_ID(N'Testing'))
+BEGIN
+	ALTER TABLE [dbo].[Testing] ADD CreateDate datetime null;
+END;
