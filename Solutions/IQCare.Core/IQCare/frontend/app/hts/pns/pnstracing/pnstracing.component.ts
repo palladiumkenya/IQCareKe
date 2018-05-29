@@ -1,3 +1,4 @@
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Component, NgZone, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -24,6 +25,8 @@ export class PnsTracingComponent implements OnInit {
     maxDate: any;
     minDate: any;
 
+    form: FormGroup;
+
     constructor(private pnsTracingService: PnstracingService,
         private router: Router,
         private route: ActivatedRoute,
@@ -31,7 +34,8 @@ export class PnsTracingComponent implements OnInit {
         private store: Store<AppState>,
         private snotifyService: SnotifyService,
         private notificationService: NotificationService,
-        private appStateService: AppStateService) {
+        private appStateService: AppStateService,
+        private fb: FormBuilder) {
         this.maxDate = new Date();
         this.minDate = new Date();
     }
@@ -43,6 +47,14 @@ export class PnsTracingComponent implements OnInit {
         this.pnsTracingOutcome = [];
 
         this.getTracingOptions();
+
+        this.form = this.fb.group({
+            TracingDate: new FormControl(this.pnsTracing.TracingDate, [Validators.required]),
+            TracingOutcome: new FormControl(this.pnsTracing.TracingOutcome, [Validators.required]),
+            DateBookedTesting: new FormControl(this.pnsTracing.DateBookedTesting, [Validators.required]),
+            TracingMode: new FormControl(this.pnsTracing.TracingMode, [Validators.required]),
+            Consent: new FormControl(this.pnsTracing.Consent, [Validators.required])
+        });
     }
 
     public getTracingOptions() {
@@ -63,38 +75,78 @@ export class PnsTracingComponent implements OnInit {
     }
 
     onSubmit() {
-        this.pnsTracing.PersonId = JSON.parse(localStorage.getItem('partnerId'));
-        this.pnsTracing.UserId = JSON.parse(localStorage.getItem('appUserId'));
+        if (this.form.valid) {
+            this.pnsTracing = { ...this.form.value };
+            this.pnsTracing.PersonId = JSON.parse(localStorage.getItem('partnerId'));
+            this.pnsTracing.UserId = JSON.parse(localStorage.getItem('appUserId'));
 
-        console.log(this.pnsTracing);
+            console.log(this.pnsTracing);
 
-        const tracingTypeValue = this.tracingTypeOptions.filter(function (obj) {
-            return obj.itemName == 'Partner';
-        });
+            const tracingTypeValue = this.tracingTypeOptions.filter(function (obj) {
+                return obj.itemName == 'Partner';
+            });
 
-        const tracingType = tracingTypeValue[0]['itemId'];
-        this.pnsTracing.TracingType = tracingType;
+            const tracingType = tracingTypeValue[0]['itemId'];
+            this.pnsTracing.TracingType = tracingType;
 
-        this.pnsTracingService.addPnsTracing(this.pnsTracing).subscribe(data => {
-            const partnerPnsTraced = {
-                'partnerId': this.pnsTracing.PersonId,
-                'pnsTraced': true
-            };
-            this.store.dispatch(new Consent.IsPnsTracingDone(JSON.stringify(partnerPnsTraced)));
-            this.appStateService.addAppState(AppEnum.PNS_TRACING, JSON.parse(localStorage.getItem('personId')),
-                JSON.parse(localStorage.getItem('patientId')), null, null, JSON.stringify({
+            this.pnsTracingService.addPnsTracing(this.pnsTracing).subscribe(data => {
+                const partnerPnsTraced = {
                     'partnerId': this.pnsTracing.PersonId,
                     'pnsTraced': true
-                })).subscribe();
+                };
+                this.store.dispatch(new Consent.IsPnsTracingDone(JSON.stringify(partnerPnsTraced)));
+                this.appStateService.addAppState(AppEnum.PNS_TRACING, JSON.parse(localStorage.getItem('personId')),
+                    JSON.parse(localStorage.getItem('patientId')), null, null, JSON.stringify({
+                        'partnerId': this.pnsTracing.PersonId,
+                        'pnsTraced': true
+                    })).subscribe();
 
-            this.snotifyService.success('Successful saving PNS screening',
-                'PNS Tracing', this.notificationService.getConfig());
+                this.snotifyService.success('Successful saving PNS screening',
+                    'PNS Tracing', this.notificationService.getConfig());
 
-            this.zone.run(() => { this.router.navigate(['/hts/pns/pnslist'], { relativeTo: this.route }); });
-        }, err => {
-            this.snotifyService.error('Error saving PNS tracing' + err,
-                'PNS Tracing', this.notificationService.getConfig());
-            console.log(err);
-        });
+                this.zone.run(() => { this.router.navigate(['/hts/pns/pnslist'], { relativeTo: this.route }); });
+            }, err => {
+                this.snotifyService.error('Error saving PNS tracing' + err,
+                    'PNS Tracing', this.notificationService.getConfig());
+                console.log(err);
+            });
+        } else {
+            return;
+        }
     }
+
+    onConsentChange() {
+        const consentValue = this.form.controls.Consent.value;
+        const selectedOption = this.yesNoOptions.filter(function (obj) {
+            return obj.itemId == consentValue;
+        });
+
+        if (selectedOption[0]['itemName'] == 'No') {
+            this.form.controls.DateBookedTesting.disable({ onlySelf: true });
+            this.form.controls.DateBookedTesting.setValue('');
+        } else {
+            this.form.controls.DateBookedTesting.enable({ onlySelf: false });
+        }
+    }
+
+    onTracingOutcomeChange() {
+        const tracingOutcomeValue = this.form.controls.TracingOutcome.value;
+        const selectedOption = this.pnsTracingOutcome.filter(function (obj) {
+            return obj.itemId == tracingOutcomeValue;
+        });
+
+        if (selectedOption[0]['itemName'] == 'Not Contacted') {
+            // disable consent since they were not contacted
+            this.form.controls.Consent.disable({ onlySelf: true });
+            this.form.controls.Consent.setValue('');
+            // disable date booked for testing since they were not contacted
+            this.form.controls.DateBookedTesting.disable({ onlySelf: true });
+            this.form.controls.DateBookedTesting.setValue('');
+        } else {
+            // re-enable
+            this.form.controls.Consent.enable({ onlySelf: false });
+            this.form.controls.DateBookedTesting.enable({ onlySelf: false });
+        }
+    }
+
 }
