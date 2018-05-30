@@ -359,11 +359,15 @@ function AddDiagnosis() {
 
 var PresentingComplaintsList = new Array();
 function AddPresentingComplaints() {
+
     var presentingComplaintsID = $("#txtPresentingComplaintsID").val();
     
     var presentingComplaints = $('#txtPresentingComplaints').val();
+  
     var numberOfDays = $('#numberOfDays').val();
-    var onsetDate = moment($('#VisitDate').val()).subtract(numberOfDays, 'd').format('DD-MMM-YYYY');
+    var visitDate = $('#DateOfVisit').datepicker('getDate');
+    var onsetDate = moment(visitDate).subtract(numberOfDays, 'days').format('DD-MMM-YYYY');
+    
     //Validate duplication
     var presentingComplaintFound = 0;
 

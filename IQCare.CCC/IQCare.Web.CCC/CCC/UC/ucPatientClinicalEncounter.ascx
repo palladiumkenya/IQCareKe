@@ -292,7 +292,7 @@
 													<label class="control-label pull-left"></label>
 												</div>
 												<div class="col-md-12">
-													<button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddPresentingComplaints" onclick="AddPresentingComplaints();">Add</button>
+													<button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddPresentingComplaints">Add</button>
 												</div>
 											</div>
 										</div>
@@ -383,7 +383,8 @@
 													</div>
 													<div class="col-md-12">
 														<asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="cough" ClientIDMode="Static" onChange="IcfChange();">
-															<asp:ListItem Text="Yes" Value="True"></asp:ListItem>
+														    <asp:ListItem Text="select" Value="select"></asp:ListItem>
+														    <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
 															<asp:ListItem Text="No" Value="False" Selected="True"></asp:ListItem>
 														</asp:DropDownList>
 													</div>
@@ -395,7 +396,8 @@
 													</div>
 													<div class="col-md-12">
 														<asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="fever" ClientIDMode="Static" onChange="IcfChange();">
-															<asp:ListItem Text="Yes" Value="True"></asp:ListItem>
+														    <asp:ListItem Text="select" Value="select"></asp:ListItem>
+														    <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
 															<asp:ListItem Text="No" Value="False" Selected="True"></asp:ListItem>
 														</asp:DropDownList>
 													</div>
@@ -406,7 +408,8 @@
 													</div>
 													<div class="col-md-12">
 														<asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="weightLoss" ClientIDMode="Static" onChange="IcfChange();">
-															<asp:ListItem Text="Yes" Value="True"></asp:ListItem>
+														    <asp:ListItem Text="select" Value="select"></asp:ListItem>
+														    <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
 															<asp:ListItem Text="No" Value="False" Selected="True"></asp:ListItem>
 														</asp:DropDownList>
 													</div>
@@ -417,7 +420,8 @@
 													</div>
 													<div class="col-md-12">
 														<asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="nightSweats" ClientIDMode="Static" onChange="IcfChange();">
-															<asp:ListItem Text="Yes" Value="True"></asp:ListItem>
+														    <asp:ListItem Text="select" Value="select"></asp:ListItem>
+														    <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
 															<asp:ListItem Text="No" Value="False" Selected="True"></asp:ListItem>
 														</asp:DropDownList>
 													</div>
@@ -1577,11 +1581,11 @@
 													<div class="col-md-3">
 
 														<div class="col-md-6">
-															<asp:RadioButton ID="Question5_Yes" runat="server" GroupName="Question5" ClientIDMode="Static" Value="0" />
+															<asp:RadioButton ID="Question5_Yes" runat="server" GroupName="Question5" ClientIDMode="Static" Value="1" />
 														</div>
 
 														<div class="col-md-6">
-															<asp:RadioButton ID="Question5_No" runat="server" GroupName="Question5" ClientIDMode="Static" Value="1" />
+															<asp:RadioButton ID="Question5_No" runat="server" GroupName="Question5" ClientIDMode="Static" Value="0" />
 														</div>
 
 														<div class="errorBlock5" style="color: red;">Please select one option </div>
@@ -1595,11 +1599,11 @@
 													<div class="col-md-3">
 
 														<div class="col-md-6">
-															<asp:RadioButton ID="Question6_Yes" runat="server" GroupName="Question6" ClientIDMode="Static" Value="0" />
+															<asp:RadioButton ID="Question6_Yes" runat="server" GroupName="Question6" ClientIDMode="Static" Value="1" />
 														</div>
 
 														<div class="col-md-6">
-															<asp:RadioButton ID="Question6_No" runat="server" GroupName="Question6" ClientIDMode="Static" Value="1" />
+															<asp:RadioButton ID="Question6_No" runat="server" GroupName="Question6" ClientIDMode="Static" Value="0" />
 														</div>
 
 														<div class="errorBlock6" style="color: red;">Please select one option </div>
@@ -1613,11 +1617,11 @@
 													<div class="col-md-3">
 
 														<div class="col-md-6">
-															<asp:RadioButton ID="Question7_Yes" runat="server" GroupName="Question7" ClientIDMode="Static" Value="0" />
+															<asp:RadioButton ID="Question7_Yes" runat="server" GroupName="Question7" ClientIDMode="Static" Value="1" />
 														</div>
 
 														<div class="col-md-6">
-															<asp:RadioButton ID="Question7_No" runat="server" GroupName="Question7" ClientIDMode="Static" Value="1" />
+															<asp:RadioButton ID="Question7_No" runat="server" GroupName="Question7" ClientIDMode="Static" Value="0" />
 														</div>
 
 														<div class="errorBlock7" style="color: red;">Please select one option </div>
@@ -2172,7 +2176,55 @@
 		showHideAdverseEventsDivs();
 		showHideSystemsOkayDivs();
 		showHideVisitByTS();
-		GetPatientExaminationTypeID();
+        GetPatientExaminationTypeID();
+
+	    var PresentingComplaintsList = new Array();
+	    $("#btnAddPresentingComplaints").on("click",
+	        function() {
+                var visitDate = $('#DateOfVisit').datepicker('getDate');
+              
+	            var presentingComplaintsID = $("#txtPresentingComplaintsID").val();
+    
+	            var presentingComplaints = $('#txtPresentingComplaints').val();
+  
+	            var numberOfDays = $('#numberOfDays').val();
+	            var visitDate = $('#DateOfVisit').datepicker('getDate');
+	            var onsetDate = moment(visitDate).subtract(numberOfDays, 'days').format('DD-MMM-YYYY');
+    
+	            //Validate duplication
+	            var presentingComplaintFound = 0;
+
+	            if (presentingComplaints === "") {
+	                toastr.error("Error", "Please enter Presenting Complaint");
+	                return false;
+	            }
+
+	            presentingComplaintFound = $.inArray("" + presentingComplaints + "", PresentingComplaintsList);
+
+	            if (presentingComplaintFound > -1) {
+	                toastr.error("Error", "Presenting Complaint already exists.");
+	                return false;
+
+	            } else {
+
+
+	                PresentingComplaintsList.push("" + presentingComplaints + "");
+
+	                arrPresentingComplaintUI = [];
+
+	                arrPresentingComplaintUI.push([
+	                    presentingComplaintsID, presentingComplaints,onsetDate,
+	                    "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"
+	                ]);
+
+	                DrawDataTable("dtlPresentingComplaints", arrPresentingComplaintUI);
+
+	                $('#txtPresentingComplaints').val("");
+	                $('#numberOfDays').val("");
+	            }
+	        });
+
+
 
 		// Manage adverse Events
 		$("#divAdverseEventOther").hide("fast");
@@ -2414,6 +2466,8 @@
             }
             console.log(isBeforeDateOfEnrollment);
         });
+
+
 
 		$("#prescribeDrugs").click(function () {
 			$("#btnClosePrecriptionModal").show("fast");
@@ -2963,7 +3017,15 @@
 
 					/* add constraints based on age*/
 					if ($('#datastep1').parsley().validate()) {
-						addPatientIcf();
+                        if (($("#tbInfected").val() === 'True') && ($("#onIpt").val() === 'False') && ($("#EverBeenOnIpt").val() === 'True'))
+	                    {
+
+                        }else
+	                        {
+                                addPatientIcf();
+	                        }
+
+					    
 						if (($("#cough").val() === 'True') || ($("#fever").val() === 'True') || ($("#weightLoss").val() === 'True') || ($("#nightSweats").val() === 'True')) {
 							addPatientIcfAction();
 						}
