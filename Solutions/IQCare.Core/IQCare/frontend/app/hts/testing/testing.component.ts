@@ -223,6 +223,15 @@ export class TestingComponent implements OnInit, AfterViewInit {
                 } else if (screeningType == 'Confirmatory Test') {
                     const firstTest = this.hivResults1.slice(-1)[0];
 
+                    console.log(firstTest);
+                    console.log(data);
+
+                    if (firstTest.kitName['itemName'] == data.kitName['itemName']) {
+                        console.log('test');
+                        this.snotifyService.info('The same kitname has been used for screening and confirmatory test.' +
+                            'Please select another kitname.', 'Testing', this.notificationService.getConfig());
+                        return;
+                    }
                     /* Push results to hiv results array */
                     this.testing = data;
                     this.testing.KitId = data['kitName']['itemId'];

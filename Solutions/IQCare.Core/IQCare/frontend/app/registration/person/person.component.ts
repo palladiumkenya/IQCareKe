@@ -380,12 +380,9 @@ export class PersonComponent implements OnInit {
             });
             this.priorityPops = optionsVal;
 
-        } else if (optionSelected[0].itemName == 'Male') {
-            /*const options = this.keyPops.filter(function( obj ) {
-                return obj.itemName !== 'FSW';
-            });
-            this.keyPops = options;*/
+            console.log(this.formGroup);
 
+        } else if (optionSelected[0].itemName == 'Male') {
             const optionsVal = this.priorityPops.filter(function (obj) {
                 return obj.itemName !== 'Adolescent Girls and Young Women';
             });
@@ -402,9 +399,6 @@ export class PersonComponent implements OnInit {
         if (JSON.parse(localStorage.getItem('isHtsEnrolled')) == 1) {
             const personId = JSON.parse(localStorage.getItem('personId'));
             this.registrationService.getPersonDetails(personId).subscribe((res) => {
-                console.log(this.formGroup);
-                console.log(res);
-
                 this.formGroup.controls.formArray['controls'][0]['controls'].FirstName.setValue(res.firstName);
                 this.formGroup.controls.formArray['controls'][0]['controls'].MiddleName.setValue(res.midName);
                 this.formGroup.controls.formArray['controls'][0]['controls'].LastName.setValue(res.lastName);
@@ -457,6 +451,22 @@ export class PersonComponent implements OnInit {
                 this.formGroup.controls.formArray['controls'][2]['controls'].partnerRelationship.disable({ onlySelf: true });
                 this.formGroup.controls['formArray']['controls'][2].controls.partnerRelationship.setValue('');
             });
+        }
+    }
+
+    onFirstTabClick() {
+        if (this.formGroup.controls.formArray['controls'][0]['controls'].personAge.value < 10 ||
+            this.formGroup.controls.formArray['controls'][0]['controls'].personAge.value > 19) {
+            const clientSex = this.formGroup.controls['formArray']['controls'][0].controls.Sex.value;
+            const optionSelected = this.gender.filter(obj => parseInt(obj.itemId, 10) == parseInt(clientSex, 10));
+
+            if (optionSelected.length > 0 && optionSelected[0].itemName == 'Female') {
+                const optionsAdolescent = this.priorityPops.filter(function (obj) {
+                    return obj.itemName !== 'Adolescent Girls and Young Women';
+                });
+
+                this.priorityPops = optionsAdolescent;
+            }
         }
     }
 }
