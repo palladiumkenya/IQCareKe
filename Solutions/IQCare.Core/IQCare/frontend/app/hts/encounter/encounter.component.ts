@@ -1,21 +1,21 @@
-import {Component, NgZone, OnInit} from '@angular/core';
-import {Encounter} from '../_models/encounter';
-import {EncounterService} from '../_services/encounter.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Store} from '@ngrx/store';
+import { Component, NgZone, OnInit } from '@angular/core';
+import { Encounter } from '../_models/encounter';
+import { EncounterService } from '../_services/encounter.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import * as Consent from '../../shared/reducers/app.states';
-import {AppStateService} from '../../shared/_services/appstate.service';
-import {AppEnum} from '../../shared/reducers/app.enum';
-import {SnotifyService} from 'ng-snotify';
-import {NotificationService} from '../../shared/_services/notification.service';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { AppStateService } from '../../shared/_services/appstate.service';
+import { AppEnum } from '../../shared/reducers/app.enum';
+import { SnotifyService } from 'ng-snotify';
+import { NotificationService } from '../../shared/_services/notification.service';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 declare var $: any;
 
 @Component({
-  selector: 'app-encounter',
-  templateUrl: './encounter.component.html',
-  styleUrls: ['./encounter.component.css']
+    selector: 'app-encounter',
+    templateUrl: './encounter.component.html',
+    styleUrls: ['./encounter.component.css']
 })
 export class EncounterComponent implements OnInit {
     encounter: Encounter;
@@ -36,14 +36,14 @@ export class EncounterComponent implements OnInit {
 
 
     constructor(private _encounterService: EncounterService,
-                private router: Router,
-                private route: ActivatedRoute,
-                public zone: NgZone,
-                private store: Store<AppState>,
-                private appStateService: AppStateService,
-                private snotifyService: SnotifyService,
-                private notificationService: NotificationService,
-                private fb: FormBuilder) {
+        private router: Router,
+        private route: ActivatedRoute,
+        public zone: NgZone,
+        private store: Store<AppState>,
+        private appStateService: AppStateService,
+        private snotifyService: SnotifyService,
+        private notificationService: NotificationService,
+        private fb: FormBuilder) {
         this.maxDate = new Date();
     }
 
@@ -133,7 +133,7 @@ export class EncounterComponent implements OnInit {
                     this.encounter.PatientEncounterID = encounterValue['patientEncounterID'];
 
 
-                    this.form.controls.Consent.disable({onlySelf: true});
+                    this.form.controls.Consent.disable({ onlySelf: true });
                     this.everTestedChanged();
                     this.hasDisabilityChanged();
                     this.onConsentChanged();
@@ -146,7 +146,7 @@ export class EncounterComponent implements OnInit {
 
     validate() {
         if (this.form.valid) {
-            this.encounter = {...this.encounter, ...this.form.value};
+            this.encounter = { ...this.encounter, ...this.form.value };
             if (!this.encounter.Disabilities) {
                 this.encounter.Disabilities = [];
             }
@@ -195,7 +195,7 @@ export class EncounterComponent implements OnInit {
     editEncounter(encounterID: number, patientMasterVisitId: number) {
         this._encounterService.editEncounter(this.encounter, encounterID, patientMasterVisitId).subscribe((res) => {
             this.snotifyService.success('Successfully edited encounter', 'Encounter', this.notificationService.getConfig());
-            this.zone.run(() => { this.router.navigate(['/registration/home'], {relativeTo: this.route }); });
+            this.zone.run(() => { this.router.navigate(['/registration/home'], { relativeTo: this.route }); });
         }, (err) => {
             this.snotifyService.error('Error editing encounter ' + err, 'Encounter', this.notificationService.getConfig());
         }, () => {
@@ -212,7 +212,7 @@ export class EncounterComponent implements OnInit {
             localStorage.setItem('htsEncounterId', data['htsEncounterId']);
             localStorage.setItem('patientMasterVisitId', data['patientMasterVisitId']);
 
-            const optionSelected = this.yesNoOptions.filter(function( obj ) {
+            const optionSelected = this.yesNoOptions.filter(function (obj) {
                 return obj.itemId == isConsented;
             });
 
@@ -237,7 +237,7 @@ export class EncounterComponent implements OnInit {
                     this.encounter.PatientId, data['patientMasterVisitId'], data['htsEncounterId']).subscribe();
 
 
-                this.zone.run(() => { this.router.navigate(['/hts/testing'], {relativeTo: this.route }); });
+                this.zone.run(() => { this.router.navigate(['/hts/testing'], { relativeTo: this.route }); });
             } else {
                 this.zone.run(() => { this.router.navigate(['/registration/home'], { relativeTo: this.route }); });
             }
@@ -249,28 +249,28 @@ export class EncounterComponent implements OnInit {
 
     everTestedChanged() {
         const everTested = this.form.controls.EverTested.value;
-        const optionSelected = this.yesNoOptions.filter(function( obj ) {
+        const optionSelected = this.yesNoOptions.filter(function (obj) {
             return obj.itemId == everTested;
         });
 
         if (optionSelected[0].itemName == 'Yes') {
-            this.form.controls.MonthsSinceLastTest.enable({onlySelf: false});
+            this.form.controls.MonthsSinceLastTest.enable({ onlySelf: false });
         } else {
-            this.form.controls.MonthsSinceLastTest.disable({onlySelf: true});
+            this.form.controls.MonthsSinceLastTest.disable({ onlySelf: true });
             this.form.controls.MonthsSinceLastTest.setValue('');
         }
     }
 
     hasDisabilityChanged() {
         const hasDisability = this.form.controls.HasDisability.value;
-        const optionSelected = this.yesNoOptions.filter(function( obj ) {
+        const optionSelected = this.yesNoOptions.filter(function (obj) {
             return obj.itemId == hasDisability;
         });
 
         if (optionSelected[0].itemName == 'Yes') {
-            this.form.controls.Disabilities.enable({onlySelf: false});
+            this.form.controls.Disabilities.enable({ onlySelf: false });
         } else {
-            this.form.controls.Disabilities.disable({onlySelf: true});
+            this.form.controls.Disabilities.disable({ onlySelf: true });
             this.form.controls.Disabilities.setValue([]);
         }
     }
@@ -278,18 +278,18 @@ export class EncounterComponent implements OnInit {
     onConsentChanged() {
         const consent = this.form.controls.Consent.value;
 
-        const optionSelected = this.yesNoOptions.filter(function( obj ) {
+        const optionSelected = this.yesNoOptions.filter(function (obj) {
             return obj.itemId == consent;
         });
 
         if (optionSelected[0].itemName == 'No') {
-            this.form.controls.TestedAs.disable({onlySelf: true});
-            this.form.controls.TestingStrategy.disable({onlySelf: true});
+            this.form.controls.TestedAs.disable({ onlySelf: true });
+            this.form.controls.TestingStrategy.disable({ onlySelf: true });
             this.form.controls.TestedAs.setValue('');
             this.form.controls.TestingStrategy.setValue('');
         } else {
-            this.form.controls.TestedAs.enable({onlySelf: false});
-            this.form.controls.TestingStrategy.enable({onlySelf: false});
+            this.form.controls.TestedAs.enable({ onlySelf: false });
+            this.form.controls.TestingStrategy.enable({ onlySelf: false });
         }
     }
 }

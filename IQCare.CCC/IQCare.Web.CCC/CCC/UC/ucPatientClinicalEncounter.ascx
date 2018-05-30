@@ -3965,7 +3965,7 @@
             $("#IcfForm").hide();
             $("#IcfActionForm").hide();
             //$("#tbscreeningstatus option").filter(function () { return $(this).text() === 'TBRx'; }).prop('selected', true);
-            $("#onIpt").prop("disabled", true);
+            $("#onIpt").prop("disabled", false);
             $("#onIpt").val("");
             //$("#EverBeenOnIpt").prop("disabled", true);
             // $("#EverBeenOnIpt").val("");

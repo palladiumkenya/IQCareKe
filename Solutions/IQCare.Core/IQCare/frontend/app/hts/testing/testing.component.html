@@ -117,35 +117,37 @@
                                 <div class="row">
                                     <div class="col-lg-3 col-md-3 col-sm-3">
                                         <mat-form-field appNoneEvents>
-                                            <mat-select placeholder="Final Screening Test Result" name="finalResultHiv1" id="finalResultHiv1" formControlName="finalResultHiv1"
+                                            <mat-select placeholder="Screening Test Result" name="finalResultHiv1" id="finalResultHiv1" formControlName="finalResultHiv1"
                                                 required>
                                                 <mat-option value=""></mat-option>
                                                 <mat-option *ngFor="let option of hivResultsOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
                                             </mat-select>
                                         </mat-form-field>
 
-                                        <mat-form-field appNoneEvents>
-                                            <mat-select placeholder="Final Confirmatory Test Result" name="finalResultHiv2" id="finalResultHiv2" formControlName="finalResultHiv2"
-                                                required>
-                                                <mat-option value=""></mat-option>
-                                                <mat-option *ngFor="let option of hivResultsOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
-                                            </mat-select>
-                                        </mat-form-field>
-
-                                        <mat-form-field appNoneEvents>
-                                            <mat-select placeholder="Final Result" name="finalResult" id="finalResult" formControlName="finalResult" required>
-                                                <mat-option value=""></mat-option>
-                                                <mat-option *ngFor="let option of hivFinalResultsOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
-                                            </mat-select>
-                                        </mat-form-field>
-                                    </div>
-
-                                    <div class="col-lg-3 col-md-3 col-sm-3">
                                         <mat-form-field>
                                             <mat-select placeholder="Final Result Given?" name="finalResultGiven" id="finalResultGiven" formControlName="finalResultGiven"
                                                 (change)="onFinalResultsGivenChange()" required>
                                                 <mat-option value=""></mat-option>
                                                 <mat-option *ngFor="let option of yesNoOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+
+
+                                        <mat-form-field>
+                                            <mat-select placeholder="Accepted to partner listing" name="acceptedPartnerListing" id="acceptedPartnerListing" (change)="onAcceptedPartnerListingChange()"
+                                                formControlName="acceptedPartnerListing" required>
+                                                <mat-option value=""></mat-option>
+                                                <mat-option *ngFor="let option of yesNoNA" [value]="option.itemId">{{option.itemName}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                        <mat-form-field appNoneEvents>
+                                            <mat-select placeholder="Confirmatory Test Result" name="finalResultHiv2" id="finalResultHiv2" formControlName="finalResultHiv2"
+                                                required>
+                                                <mat-option value=""></mat-option>
+                                                <mat-option *ngFor="let option of hivResultsOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
                                             </mat-select>
                                         </mat-form-field>
 
@@ -158,27 +160,26 @@
                                         </mat-form-field>
 
                                         <mat-form-field>
-                                            <textarea matInput placeholder="Remarks" id="remarks" name="remarks" rows="5" formControlName="finalResultsRemarks" required></textarea>
-                                        </mat-form-field>
-                                        <mat-error *ngIf="!formTesting.controls['finalResultsRemarks'].valid">Please add remarks</mat-error>
-                                    </div>
-
-                                    <div class="col-lg-3 col-md-3 col-sm-3">
-                                        <mat-form-field>
-                                            <mat-select placeholder="Accepted to partner listing" name="acceptedPartnerListing" id="acceptedPartnerListing" (change)="onAcceptedPartnerListingChange()"
-                                                formControlName="acceptedPartnerListing" required>
-                                                <mat-option value=""></mat-option>
-                                                <mat-option *ngFor="let option of yesNoNA" [value]="option.itemId">{{option.itemName}}</mat-option>
-                                            </mat-select>
-                                        </mat-form-field>
-
-                                        <mat-form-field>
                                             <mat-select placeholder="Reasons for decline to partner listing" name="reasonsDeclinePartnerListing" id="reasonsDeclinePartnerListing"
                                                 formControlName="reasonsDeclinePartnerListing" required>
                                                 <mat-option value=""></mat-option>
                                                 <mat-option *ngFor="let option of reasonsDeclined" [value]="option.itemId">{{option.itemName}}</mat-option>
                                             </mat-select>
                                         </mat-form-field>
+                                    </div>
+
+                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                        <mat-form-field appNoneEvents>
+                                            <mat-select placeholder="Final Result" name="finalResult" id="finalResult" formControlName="finalResult" required>
+                                                <mat-option value=""></mat-option>
+                                                <mat-option *ngFor="let option of hivFinalResultsOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <mat-form-field>
+                                            <textarea matInput placeholder="Remarks" id="remarks" name="remarks" rows="5" formControlName="finalResultsRemarks" required></textarea>
+                                        </mat-form-field>
+                                        <mat-error *ngIf="!formTesting.controls['finalResultsRemarks'].valid">Please add remarks</mat-error>
                                     </div>
                                 </div>
 

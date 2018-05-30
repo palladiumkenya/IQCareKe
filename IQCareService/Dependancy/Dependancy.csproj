@@ -125,7 +125,7 @@
       <HintPath>..\..\References\DataAccess.Report.dll</HintPath>
     </Reference>
     <Reference Include="DataAccess.WebApi">
-      <HintPath>..\..\References\net461\DataAccess.WebApi.dll</HintPath>
+      <HintPath>..\..\References\DataAccess.WebApi.dll</HintPath>
     </Reference>
     <Reference Include="Entities.CCC">
       <HintPath>..\..\References\Entities.CCC.dll</HintPath>

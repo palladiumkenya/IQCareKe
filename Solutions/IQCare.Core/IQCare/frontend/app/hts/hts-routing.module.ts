@@ -14,6 +14,7 @@ import { FamilyTracingResolver } from './family-tracing/familyTracing.resolver';
 import { ViewEncounterComponent } from './view-encounter/view-encounter.component';
 import { PnsTracingListComponent } from './pns/pns-tracing-list/pns-tracing-list.component';
 import { PnsTracingComponent } from './pns/pnstracing/pnstracing.component';
+import { PsmartComponent } from './psmart/psmart.component';
 
 const routes: Routes = [
     {
@@ -95,6 +96,11 @@ const routes: Routes = [
     {
         path: 'testing',
         component: TestingComponent,
+        pathMatch: 'full'
+    },
+    {
+        path: 'psmart',
+        component: PsmartComponent,
         pathMatch: 'full'
     }
 ];
