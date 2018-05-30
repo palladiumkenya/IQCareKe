@@ -447,7 +447,7 @@
 
             function AppointmentStatistics() {
                 jQuery.support.cors = true;
-                var date = $("#<%=Date.ClientID%>").val();
+                var date =moment($("#<%=Date.ClientID%>").val()).format('DD-MMM-YYYY');
                 $.ajax(
                 {
                     type: "POST",
