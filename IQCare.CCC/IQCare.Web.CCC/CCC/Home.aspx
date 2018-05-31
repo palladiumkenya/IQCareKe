@@ -514,13 +514,14 @@
                 cache: false,
                 success: function (response) {
                     //console.log(response.d);
-                    pending = response.d;
+                    var pendingCount = JSON.parse(response.d);
+                    pending = pendingCount;
                     document.getElementById("pendingVL").innerHTML= "<span class='badge'>"+ response.d + "</span>";
 
                 }
-
             });
 
+            $("#<%=lblvl.ClientID%>").html();
             $.ajax({
                 url: 'WebService/LabService.asmx/GetFacilityVLCompleteCount',
                 data: "{'facilityId':'" + facilityId + "'}",
@@ -530,14 +531,14 @@
                 cache: false,
                 success: function (response) {
                     //console.log(response.d);
+
                     complete = response.d;
+
                     document.getElementById("completeVL").innerHTML = "<span class='badge'> " + response.d + " </span>";
                     percentage = ((complete / (pending + complete)) * 100);
                     percentage = percentage.toFixed(2);
                     !isNaN(percentage) ? percentage : percentage=0;
-            $("#<%=lblvl.ClientID%>").html("Result Rate "+ percentage +" %");
-
-
+                   $("#<%=lblvl.ClientID%>").html("Result Rate "+ percentage +" %");
                 }
 
             });
