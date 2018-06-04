@@ -28,7 +28,7 @@ SELECT DISTINCT pt.Id
 					FROM identifiers z
 					WHERE z.Code = 'CCCNumber'
 					)
-			), (ISNULL(pt.FacilityId+'-00000','00000-00000'))) AS EnrollmentNumber
+			), (ISNULL(pt.FacilityId+'-00000',(SELECT top 1 PosID FROM mst_Facility WHERE DeleteFlag=0) +'-00000'))) AS EnrollmentNumber
 	,pt.PatientIndex
 	,CAST(DECRYPTBYKEY(pn.FirstName) AS VARCHAR(50)) AS FirstName
 	,CAST(DECRYPTBYKEY(pn.MidName) AS VARCHAR(50)) AS MiddleName
