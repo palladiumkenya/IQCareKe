@@ -212,7 +212,7 @@ namespace IQCare.Web.CCC.Patient
                     if (curentRegimen.RegimenId > 0)
                     {
                         //lblCurrentRegimen.Text = "<span class='label label-success'>" + curentRegimen.Regimen.ToString() + " started on : " + Convert.ToDateTime(curentRegimen.DispensedByDate).ToString("dd-MMM-yyyy") + "</span>";
-                        lblCurrentRegimen.Text = "<span class='label label-success'>" + curentRegimen.Regimen.ToString() + "</span>";
+                        lblCurrentRegimen.Text = "<span class='label label-success'>" + curentRegimen.Regimen.ToString() + " | "+ Convert.ToDateTime(curentRegimen.DispensedByDate).ToString("dd-MMM-yyyy") +"</span>";
                     }
                     else
                     {
@@ -382,24 +382,33 @@ namespace IQCare.Web.CCC.Patient
                                 TimeSpan difference = today.Date - patientBaseline.CreateDate;
                                 int days = (int)difference.TotalDays;
 
-                                if (patientBaseline.RegimenId > 0)
+                                if (patientBaseline != null)
                                 {
-                                    if (days < 180)
+                                    if (patientBaseline.RegimenId > 0)
                                     {
-                                        lblvlDueDate.Text = "<span class='label label-success'>" + enrolDate.AddMonths(6).ToString("dd-MMM-yyyy") + "</span>";
-                                        lblVL.Text = "<span class='label label-success fa fa-exclamation'><strong>  VL Not Requested  </strong></span>";
+                                        if (days < 180)
+                                        {
+                                            lblvlDueDate.Text = "<span class='label label-success'>" + patientBaseline.CreateDate.AddMonths(6).ToString("dd-MMM-yyyy") + "</span>";
+                                            lblVL.Text = "<span class='label label-success fa fa-exclamation'><strong>  VL Not Requested  </strong></span>";
 
+                                        }
+                                        else
+                                        {
+                                            lblVL.Text = "<span class='label label-danger'> Not Done </span>";
+                                            lblvlDueDate.Text = "<span class='label label-danger'><strong> Overdue Since | "+ patientBaseline.CreateDate.AddMonths(6).ToString("dd-MMM-yyyy") + " </strong></span>";
+                                        }
                                     }
                                     else
                                     {
-                                        lblVL.Text = "<span class='label label-danger'> Not on ARVs </span>";
-                                        lblvlDueDate.Text = "<span class='label label-danger'><strong> Overdue </strong></span>";
+                                        lblVL.Text = "<span class='label label-danger'> Not Available </span>";
+                                        lblvlDueDate.Text = "<span class='label label-danger'><strong> unknown </strong></span>";
                                     }
+
                                 }
                                 else
                                 {
-                                    lblVL.Text = "<span class='label label-danger'> Not Available </span>";
-                                    lblvlDueDate.Text = "<span class='label label-danger'><strong> unknown </strong></span>";
+                                    lblVL.Text = "<span class='label label-danger'> Not Done </span>";
+                                    lblvlDueDate.Text = "<span class='label label-danger'><strong>  Overdue Since | " + patientBaseline.CreateDate.AddMonths(6).ToString("dd-MMM-yyyy") + " </strong></span>";
                                 }
 
 
@@ -414,11 +423,60 @@ namespace IQCare.Web.CCC.Patient
                         var treatmentTrackerManager = new PatientTreatmentTrackerManager();
                         var patientBaseline = treatmentTrackerManager.GetPatientbaselineRegimenLookup(PatientId);
 
+                        if (patientBaseline != null)
+                        {
+                            if (patientBaseline.RegimenId > 0)
+                            {
+                                DateTime today = DateTime.Today;
+                                //TimeSpan difference = today.Date - enrolDate.Date;
+                                TimeSpan difference = today.Date - patientBaseline.CreateDate;
+                                int days = (int)difference.TotalDays;
+
+                                if (days < 180)
+                                {
+                                    lblvlDueDate.Text = "<span class='label label-success'>" + patientBaseline.CreateDate.AddMonths(6).ToString("dd-MMM-yyyy") + "</span>";
+                                    lblVL.Text = "<span class='label label-success fa fa-exclamation'><strong>  VL Not Requested  </strong></span>";
+
+                                }
+                                else
+                                {
+
+                                    lblVL.Text = "<span class='label label-danger'> Not Done </span>";
+                                    lblvlDueDate.Text = "<span class='label label-danger'><strong>  Overdue Since | " + patientBaseline.CreateDate.AddMonths(6).ToString("dd-MMM-yyyy") + " </strong></span>";
+                                }
+                            }
+                            else
+                            {
+                                lblVL.Text = "<span class='label label-danger'> Not Done</span>";
+                                lblvlDueDate.Text = "<span class='label label-danger'><strong> unknown </strong></span>";
+                            }
+                        }
+                        else
+                        {
+                            lblVL.Text = "<span class='label label-danger'> Not Done </span>";
+                            lblvlDueDate.Text = "<span class='label label-danger'><strong> unknown </strong></span>";
+                        }
+                        
+   
+                    }
+                    //}
+                }
+                else
+                {
+                    //var patientEnrollment = new PatientEnrollmentManager();
+                    //var enrolDate = patientEnrollment.GetPatientEnrollmentDate(PatientId);
+
+                    var treatmentTrackerManager = new PatientTreatmentTrackerManager();
+                    var patientBaseline = treatmentTrackerManager.GetPatientbaselineRegimenLookup(PatientId);
+
+                    DateTime today = DateTime.Today;
+                    //TimeSpan difference = today.Date - enrolDate.Date;
+                    TimeSpan difference = today.Date - patientBaseline.CreateDate;
+
+                    if (patientBaseline != null)
+                    {
                         if (patientBaseline.RegimenId > 0)
                         {
-                         DateTime today = DateTime.Today;
-                            //TimeSpan difference = today.Date - enrolDate.Date;
-                            TimeSpan difference = today.Date - patientBaseline.CreateDate;
                             int days = (int)difference.TotalDays;
 
                             if (days < 180)
@@ -436,47 +494,16 @@ namespace IQCare.Web.CCC.Patient
                         }
                         else
                         {
-                            lblVL.Text = "<span class='label label-danger'> Not on ARVs </span>";
+                            lblVL.Text = "<span class='label label-danger'> Not Done </span>";
                             lblvlDueDate.Text = "<span class='label label-danger'><strong> unknown </strong></span>";
-                        }
-   
-                    }
-                    //}
-                }
-                else
-                {
-                    //var patientEnrollment = new PatientEnrollmentManager();
-                    //var enrolDate = patientEnrollment.GetPatientEnrollmentDate(PatientId);
-
-                    var treatmentTrackerManager = new PatientTreatmentTrackerManager();
-                    var patientBaseline = treatmentTrackerManager.GetPatientbaselineRegimenLookup(PatientId);
-
-                    DateTime today = DateTime.Today;
-                    //TimeSpan difference = today.Date - enrolDate.Date;
-                    TimeSpan difference = today.Date - patientBaseline.CreateDate;
-
-                    if (patientBaseline.RegimenId > 0)
-                    {
-                        int days = (int)difference.TotalDays;
-
-                        if (days < 180)
-                        {
-                            lblvlDueDate.Text = "<span class='label label-success'>" + patientBaseline.CreateDate.AddMonths(6).ToString("dd-MMM-yyyy") + "</span>";
-                            lblVL.Text = "<span class='label label-success fa fa-exclamation'><strong>  VL Not Requested  </strong></span>";
-
-                        }
-                        else
-                        {
-
-                            lblVL.Text = "<span class='label label-danger'> Not Available </span>";
-                            lblvlDueDate.Text = "<span class='label label-danger'><strong> Overdue </strong></span>";
                         }
                     }
                     else
                     {
-                        lblVL.Text = "<span class='label label-danger'> Not on ARVs </span>";
+                        lblVL.Text = "<span class='label label-danger'> Not Done </span>";
                         lblvlDueDate.Text = "<span class='label label-danger'><strong> unknown </strong></span>";
                     }
+                    
 
                 }
             }
