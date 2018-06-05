@@ -252,10 +252,12 @@ namespace IQCare.CCC.UILogic
 
             if(theDS.Tables[2].Rows.Count > 0)
             {
-                if(theDS.Tables[2].Rows[0][2].ToString() == "" && theDS.Tables[2].Rows[0][3].ToString() == "True")
+                if (theDS.Tables[2].Rows[0][2].ToString() == "" && theDS.Tables[2].Rows[0][3].ToString() == "True")
                     categorizationParameters.VL = 50; //undetectable
-                else
+                else if (theDS.Tables[2].Rows[0][2].ToString() != "")
                     categorizationParameters.VL = Convert.ToDouble(theDS.Tables[2].Rows[0][2].ToString());
+                else
+                    categorizationParameters.VL = 1001;
             }
             else
             {
