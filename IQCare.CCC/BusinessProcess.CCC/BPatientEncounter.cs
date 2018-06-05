@@ -351,7 +351,8 @@ namespace BusinessProcess.CCC
 
                 if (theDS.Tables[0].Rows.Count > 0)
                 {
-                    pce.visitDate = ((DateTime)theDS.Tables[0].Rows[0]["visitDate"]).ToString("dd-MMM-yyyy");
+                    //pce.visitDate = ((DateTime)theDS.Tables[0].Rows[0]["visitDate"]).ToString("dd-MMM-yyyy");
+                    pce.visitDate = theDS.Tables[0].Rows[0]["visitDate"].ToString();
                     pce.visitScheduled = theDS.Tables[0].Rows[0]["visitScheduled"].ToString();
                     pce.visitBy = theDS.Tables[0].Rows[0]["visitBy"].ToString();
                 }
@@ -415,15 +416,37 @@ namespace BusinessProcess.CCC
                 if (theDS.Tables[10].Rows.Count > 0)
                 {
                     pce.SputumSmear = theDS.Tables[10].Rows[0]["SputumSmear"].ToString();
+                    pce.geneXpert = theDS.Tables[10].Rows[0]["GeneXpert"].ToString();
                     pce.ChestXray = theDS.Tables[10].Rows[0]["ChestXRay"].ToString();
                     pce.startAntiTB = theDS.Tables[10].Rows[0]["StartAntiTb"].ToString();
                     pce.InvitationOfContacts = theDS.Tables[10].Rows[0]["InvitationOfContacts"].ToString();
                     pce.EvaluatedForIPT = theDS.Tables[10].Rows[0]["EvaluatedForIPT"].ToString();
                 }
 
+                if (theDS.Tables[13].Rows.Count > 0)
+                {
+                    pce.YellowColouredUrine = theDS.Tables[13].Rows[0]["YellowColouredUrine"].ToString();
+                    pce.Numbness = theDS.Tables[13].Rows[0]["Numbness"].ToString();
+                    pce.YellownessOfEyes = theDS.Tables[13].Rows[0]["YellownessOfEyes"].ToString();
+                    pce.AdominalTenderness = theDS.Tables[13].Rows[0]["AbdominalTenderness"].ToString();
+                    pce.LiverFunctionTests = theDS.Tables[13].Rows[0]["LiverFunctionTests"].ToString();
+                    pce.startIPT = theDS.Tables[13].Rows[0]["startIPT"].ToString();
+                    pce.IPTStartDate = theDS.Tables[13].Rows[0]["StartIPTDate"].ToString();
+                }
+
                 if (theDS.Tables[14].Rows.Count > 0)
                 {
                     pce.WhoStage = theDS.Tables[14].Rows[0]["WHOStage"].ToString();
+                }
+
+                if (theDS.Tables[15].Rows.Count > 0)
+                {
+                    pce.nextAppointmentDate = theDS.Tables[15].Rows[0]["AppointmentDate"].ToString();
+                    pce.appointmentServiceArea = theDS.Tables[15].Rows[0]["ServiceAreaId"].ToString();
+                    pce.appointmentReason = theDS.Tables[15].Rows[0]["ReasonId"].ToString();
+                    pce.nextAppointmentType = theDS.Tables[15].Rows[0]["DifferentiatedCareId"].ToString();
+                    pce.appointmentDesc = theDS.Tables[15].Rows[0]["Description"].ToString();
+                    pce.appontmentStatus = theDS.Tables[15].Rows[0]["StatusId"].ToString();
                 }
 
 
@@ -546,6 +569,55 @@ namespace BusinessProcess.CCC
 
                 return (DataTable)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_getPatientWorkPlan", ClsUtility.ObjectEnum.DataTable);
 
+            }
+        }
+
+        public DataTable patientCategorizationAtEnrollment(string PatientID)
+        {
+            lock (this)
+            {
+                ClsObject PatientEncounter = new ClsObject();
+                ClsUtility.Init_Hashtable();
+                ClsUtility.AddParameters("@PatientID", SqlDbType.Int, PatientID);
+
+                return (DataTable)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_patientCategorizationAtEnrollment", ClsUtility.ObjectEnum.DataTable);
+
+            }
+        }
+
+        public DataSet getPatientDSDParameters(string PatientID)
+        {
+            lock (this)
+            {
+                ClsObject PatientEncounter = new ClsObject();
+                ClsUtility.Init_Hashtable();
+                ClsUtility.AddParameters("@PatientID", SqlDbType.Int, PatientID);
+
+                return (DataSet)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_DifferentiatedCareParameters", ClsUtility.ObjectEnum.DataSet);
+            }
+        }
+
+        public DataTable isVisitScheduled(string PatientID)
+        {
+            lock (this)
+            {
+                ClsObject PatientEncounter = new ClsObject();
+                ClsUtility.Init_Hashtable();
+                ClsUtility.AddParameters("@PatientID", SqlDbType.Int, PatientID);
+
+                return (DataTable)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_IsVisitScheduled", ClsUtility.ObjectEnum.DataTable);
+            }
+        }
+
+        public DataTable GenerateExcelDifferentiatedCare(string category)
+        {
+            lock (this)
+            {
+                ClsObject PatientEncounter = new ClsObject();
+                ClsUtility.Init_Hashtable();
+                ClsUtility.AddParameters("@category", SqlDbType.VarChar, category);
+
+                return (DataTable)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_DifferentiatedCarePatientsPerCategory", ClsUtility.ObjectEnum.DataTable);
             }
         }
 

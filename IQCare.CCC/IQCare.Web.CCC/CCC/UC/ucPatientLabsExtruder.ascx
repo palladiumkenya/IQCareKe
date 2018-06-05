@@ -114,7 +114,7 @@
                     if (resultUnits == null) {
                         resultUnits = "";
                     }
-                    
+                    if (resultTexts == "") resultTexts = null;
                     //Results values==>Text==>Options
                     if (resultTexts == null && resultOptions == null) {
                         labResults = resultValues;
@@ -132,7 +132,7 @@
                     }
 
                
-                    table += '<tr><td></td><td>' + itemList.LabName + '</td><td>' + itemList.Reasons + '</td><td>' + sampleDate + '</td><td>' + labResults +" "+ resultUnits + '</td></tr>';
+                    table += '<tr><td></td><td>' + itemList.LabName + '</td><td>' + itemList.Reasons + '</td><td>' + sampleDate + '</td><td>' + labResults +   '</td></tr>';
 
                 });
                 $("#xtblCompleteLabs td").parent().remove();

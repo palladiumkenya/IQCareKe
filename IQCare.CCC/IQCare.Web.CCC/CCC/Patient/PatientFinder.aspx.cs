@@ -40,6 +40,7 @@ namespace IQCare.Web.CCC.Patient
         public static string SetSelectedPatient(int patientId)
         {
                       HttpContext.Current.Session["PatientPK"] = patientId;
+            HttpContext.Current.Session["PatientInformation"] = null;
             return "success";
         }
 

@@ -6,6 +6,7 @@ using Application.Presentation;
 using Entities.CCC.Triage;
 using Interface.CCC;
 using IQCare.CCC.UILogic;
+using IQCare.CCC.UILogic.Triage;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -52,7 +53,8 @@ namespace IQCare.Web.CCC.WebService
             _patientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
 
             List<PatientDetailsVitals> patientDetailsVitalses = new List<PatientDetailsVitals>();
-            List<PatientVital> listVitals = _vitals.GetCurrentPatientVital(_patientId);
+            //List<PatientVital> listVitals = _vitals.GetCurrentPatientVital(_patientId);
+            List<PatientVital> listVitals = _vitals.GetAllPatientVitals(_patientId);
 
             if (listVitals != null )
             {
@@ -85,6 +87,24 @@ namespace IQCare.Web.CCC.WebService
             var patientVitalsManager = new PatientVitalsManager();
             int patient = Convert.ToInt32(Session["PatientPK"].ToString());
             return patientVitalsManager.GetByPatientId(patient);
+        }
+
+
+        [WebMethod(EnableSession = true)]
+        public string GetCurrentPatientVitalsByPatientId()
+        {
+            var patientVitalsManager = new PatientVitalsManager();
+            int patient = Convert.ToInt32(Session["PatientPK"].ToString());
+           var vitals=  patientVitalsManager.GetByPatientId(patient);
+            return new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(vitals);
+        }
+
+        [WebMethod(EnableSession = true)]
+        public PregnancyOutcomeLookup GetPatientPregnancyOutcomeLookup()
+        {
+            int patient = Convert.ToInt32(Session["PatientPK"].ToString());
+            PregnancyOutcomeLookupManager pregnancyOutcome = new PregnancyOutcomeLookupManager();
+            return pregnancyOutcome.GetLastPregnancyOutcomeLookup(patient);
         }
     }
 }

@@ -5,8 +5,7 @@ using System.Web.Services;
 using Application.Common;
 using Entities.CCC.Lookup;
 using IQCare.CCC.UILogic;
-using Newtonsoft.Json;
-
+using System.Web.Script.Serialization;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -44,6 +43,7 @@ namespace IQCare.Web.CCC.WebService
                 string firstName = null;
                 string middleName = null;
                 string lastName = null;
+                string isEnrolled = null;
 
                 PatientLookupManager patientLookup = new PatientLookupManager();
 
@@ -52,16 +52,17 @@ namespace IQCare.Web.CCC.WebService
                 firstName = Convert.ToString(dataPayLoad.FirstOrDefault(x => x.name == "firstName").value);
                 middleName = Convert.ToString(dataPayLoad.FirstOrDefault(x => x.name == "middleName").value);
                 lastName = Convert.ToString(dataPayLoad.FirstOrDefault(x => x.name == "lastName").value);
+                isEnrolled = Convert.ToString(dataPayLoad.FirstOrDefault(x=>x.name== "isEnrolled").value);
 
                 //patientId = patientId != "" ? patientId : 0;
 
                 if (patientId !="" || !string.IsNullOrWhiteSpace(firstName) || !string.IsNullOrWhiteSpace(middleName) || !string.IsNullOrWhiteSpace(lastName))
                 {
-                    jsonData = patientLookup.GetPatientSearchListPayload(patientId, firstName, middleName, lastName);
+                    jsonData = patientLookup.GetPatientSearchListPayload(patientId,isEnrolled, firstName, middleName, lastName);
                 }
                 else
                 {
-                    jsonData = patientLookup.GetPatientSearchListPayload();
+                    jsonData = patientLookup.GetPatientSearchListPayload(isEnrolled);
                 }
 
                 if (jsonData.Count > 0)
@@ -196,8 +197,8 @@ namespace IQCare.Web.CCC.WebService
 
                         data = jsonData.Select(x => new string[]
                         {
-                        
-                            x.Id.ToString(),
+
+                            (isEnrolled=="notEnrolledClients")? x.PersonId.ToString(): x.Id.ToString(),
                             x.EnrollmentNumber.ToString(),
                             x.FirstName,
                             x.MiddleName,
@@ -205,12 +206,14 @@ namespace IQCare.Web.CCC.WebService
                             x.DateOfBirth.ToString("dd-MMM-yyyy"),
                             LookupLogic.GetLookupNameById(x.Sex),
                             //x.RegistrationDate.ToString("dd-MMM-yyyy"),
-                            x.EnrollmentDate.ToString("dd-MMM-yyyy"),
+                            (isEnrolled=="notEnrolledClients")? Convert.ToDateTime(x.RegistrationDate).ToString("dd-MMM-yyyy") : x.EnrollmentDate.ToString("dd-MMM-yyyy"),
                             x.PatientStatus.ToString()
                             //,utility.Decrypt(x.MobileNumber)
                         })
                     };
-                    output = JsonConvert.SerializeObject(json);
+
+                    //output = JsonConvert.SerializeObject(json);
+                    output = new JavaScriptSerializer().Serialize(json);
                 }
             }
             catch (Exception e)
@@ -279,7 +282,9 @@ namespace IQCare.Web.CCC.WebService
                     };
                     patientList= json;
                 }
-                return JsonConvert.SerializeObject(patientList);
+
+                //return JsonConvert.SerializeObject(patientList);
+                return new JavaScriptSerializer().Serialize(patientList);
             }
             catch (Exception e)
             {
@@ -355,7 +360,8 @@ namespace IQCare.Web.CCC.WebService
                 throw;
             }
 
-            return JsonConvert.SerializeObject(newresults);
+            //return JsonConvert.SerializeObject(newresults);
+            return new JavaScriptSerializer().Serialize(newresults);
         }
     }
     public class Data

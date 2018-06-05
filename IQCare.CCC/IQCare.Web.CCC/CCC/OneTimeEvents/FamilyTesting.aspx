@@ -577,7 +577,7 @@
                                                 <span class="input-group-addon">
                                                     <span class="glyphicon glyphicon-calendar"></span>
                                                 </span>
-                                                <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="CccReferalModDDate" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>        
+                                                <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="CccReferalModDDate"  data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>        
                                             </div>
                                         </div>
                                     </div>
@@ -1357,26 +1357,35 @@
             var testingResult = $("#hivtestingresult :selected").text();
 
             if ((testingResult === "Tested Negative")) {
-                $("#<%=cccNumber.ClientID%>").prop('disabled',true);
+                $("#<%=cccNumber.ClientID%>").prop('disabled', true);
                 $("#<%=CccReferal.ClientID%>").val();
                 $("#<%=CccReferal.ClientID%>").prop('disabled', true);
                 $("#CCCReferalDate").prop('disabled', true);
                 $("#HIVTestingDate").prop('disabled', false);
-            } else if (testingResult == "Never Tested") {
+            } else if (testingResult === "Never Tested") {
                 $("#<%=cccNumber.ClientID%>").prop('disabled', true);
                 $("#<%=CccReferal.ClientID%>").val();
                 $("#<%=CccReferal.ClientID%>").prop('disabled', true);
                 $("#CCCReferalDate").prop('disabled', true);
                 $("#HIVTestingDate").prop('disabled', true);
+            } else {
+                $("#<%=cccNumber.ClientID%>").prop('disabled',true);
+                $("#<%=CccReferal.ClientID%>").prop('disabled', false);
+                $("#CCCReferalDate").prop('disabled', true);
             }
-            else if ($("#CccReferal").val() === 'False') {
+
+            if ($("#CccReferal").val() === 'False') {
                 $("#<%=cccNumber.ClientID%>").prop('disabled', true);
                 $("#CCCReferalDate").prop('disabled', true);
-            } else {
-                $("#<%=cccNumber.ClientID%>").prop('disabled',false);
+            } else if ($("#CccReferal").val() === 'True')
+            {
+                 $("#<%=cccNumber.ClientID%>").prop('disabled',false);
                 $("#<%=CccReferal.ClientID%>").prop('disabled', false);
                 $("#CCCReferalDate").prop('disabled', false);
-                //$("#HIVTestingDate").prop('disabled', false);
+
+                
+  
+                $("#CCCReferaldatepicker").removeClass('noneevents');
             }
         }
       
@@ -1640,7 +1649,7 @@
                     //console.log(response.d);
                     var data = JSON.parse(response.d);
                     //window.familyMembers = data;
-                    console.log(data);
+                    //console.log(data);
                     for (var i = 0, len = data.length; i < len; i++) {
                         arrayReturn.push(
                             [data[i].EnrollmentNumber, data[i].FirstName, data[i].MiddleName, data[i].LastName,

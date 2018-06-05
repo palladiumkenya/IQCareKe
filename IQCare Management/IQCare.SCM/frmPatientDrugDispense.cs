@@ -282,16 +282,18 @@ namespace IQCare.SCM
             //theBindManager.Win_BindCombo(cmbRegimenLine, theDTRegimenLine, "Name", "Id");
             IDrug regimen = (IDrug)ObjectFactory.CreateInstance("BusinessProcess.SCM.BDrug, BusinessProcess.SCM");
             theBindManager.Win_BindCombo(cmbRegimenLine, regimen.GetPharmacyRegimenClassification(), "DisplayName", "LookUpItemId");
+            theBindManager.Win_BindCombo(cmdPeriodTaken, regimen.GetPMTCTPeriodDrugTaken(), "DisplayName", "LookUpItemId");
 
             theDV = new DataView(XMLDS.Tables["mst_Decode"]);
             theDV.RowFilter = "CodeId = 26 and (DeleteFlag =0 or DeleteFlag is null)";
             DataTable theDTReason = theDV.ToTable();
             theBindManager.Win_BindCombo(cmbReason, theDTReason, "Name", "Id");
 
-            theDV = new DataView(XMLDS.Tables["mst_Decode"]);
-            theDV.RowFilter = "CodeId = 31 and (DeleteFlag =0 or DeleteFlag is null) and id in(140,141,142)";
-            DataTable thePeriodTaken = theDV.ToTable();
-            theBindManager.Win_BindCombo(cmdPeriodTaken, thePeriodTaken, "Name", "Id");
+            //theDV = new DataView(XMLDS.Tables["mst_Decode"]);
+            //theDV.RowFilter = "CodeId = 31 and (DeleteFlag =0 or DeleteFlag is null) and id in(140,141,142)";
+            //DataTable thePeriodTaken = theDV.ToTable();
+            //theBindManager.Win_BindCombo(cmdPeriodTaken, thePeriodTaken, "Name", "Id");
+
 
             IViewAssociation objViewAssociation = (IViewAssociation)ObjectFactory.CreateInstance("BusinessProcess.FormBuilder.BViewAssociation,BusinessProcess.FormBuilder");
             DataSet objDsViewAssociation = objViewAssociation.GetMoudleName();
@@ -1323,6 +1325,7 @@ namespace IQCare.SCM
             this.lblPayAmount.Text = "0.0";
             this.clearPopup();
             //btnART_Click(sender, e);
+            btnDeleteOrder.Visible = false;
         }
 
         /// <summary>
@@ -1920,6 +1923,7 @@ namespace IQCare.SCM
             txtPatientIdentification.Select();
             ActaulExpectedVisits();
             fillPendingOrdersGrid();
+            PendingOrders();
         }
 
         private void fillPendingOrdersGrid()
@@ -1939,6 +1943,25 @@ namespace IQCare.SCM
             gridPendingOrder.DataSource = theDT;
         }
 
+        private void PendingOrders()
+        {
+            IDrug drg = (IDrug)ObjectFactory.CreateInstance("BusinessProcess.SCM.BDrug, BusinessProcess.SCM");
+            DataSet theDS = drg.pendingPharmacyOrders();
+            if (theDS.Tables[0].Rows.Count > 0)
+            {
+                if(Convert.ToInt32(theDS.Tables[0].Rows[0][0].ToString()) > 0)
+                {
+                    btnPendingOrders.Visible = true;
+                    btnPendingOrders.Text = "Pending Orders : " + theDS.Tables[0].Rows[0][0].ToString();
+                    btnPendingOrders.ForeColor = Color.Red;
+                }
+            }
+
+            if (theDS.Tables[1].Rows.Count > 0)
+            {
+                dgvPharmacyPendingOrders.DataSource = theDS.Tables[1];
+            }
+        }
         /// <summary>
         /// Gets the currency.
         /// </summary>
@@ -1952,13 +1975,13 @@ namespace IQCare.SCM
             string thestringCurrency = theCurrDV[0]["Name"].ToString();
             return thestringCurrency.Substring(thestringCurrency.LastIndexOf("(") + 1, 3);
         }
- IBilling bMgr = (IBilling)ObjectFactory.CreateInstance("BusinessProcess.Billing.BBilling,BusinessProcess.Billing");
+ 
         private decimal GetPrice(int theItemId, int itemTypeId, DateTime? priceDate=null)
         {
             Price itemPrice = null;
             try
             {
-               
+               IBilling bMgr = (IBilling)ObjectFactory.CreateInstance("BusinessProcess.Billing.BBilling,BusinessProcess.Billing");
                 itemPrice = bMgr.GetItemPrice(theItemId, itemTypeId, priceDate);
                 theSellingPrice = Convert.ToDecimal(itemPrice.Amount);
                 this.priceBundled = itemPrice.IsBundled;
@@ -2296,6 +2319,11 @@ namespace IQCare.SCM
             //   this.theOrderStatus = grdExitingPharDisp.Rows[grdExitingPharDisp.CurrentRow.Index].Cells[1].Value.ToString();
             this.theOrderStatus = currentRow.Cells["Status"].Value.ToString();
             GetSelectedPrescription();
+
+            if (theOrderId > 0)
+                btnDeleteOrder.Visible = true;
+
+
             /*
             IDrug drugMgr = (IDrug)ObjectFactory.CreateInstance("BusinessProcess.SCM.BDrug, BusinessProcess.SCM");
             DataSet existingRecordDetails = drugMgr.GetPharmacyExistingRecordDetails(this.theOrderId);
@@ -2541,7 +2569,7 @@ namespace IQCare.SCM
                         else
                         {
                             // NxtAppDate.Format = DateTimePickerFormat.Custom;
-                            NxtAppDate.CustomFormat = " ";
+                            //NxtAppDate.CustomFormat = " ";
                         }
                         if (theDS1.Tables[0].Rows[0]["AppReason"].ToString() != "")
                         {
@@ -2582,12 +2610,21 @@ namespace IQCare.SCM
             {
                 if (this.thePharmacyMaster.Tables[0].Rows[0].IsNull("NextRefillDate"))
                 {
-                    this.NextRefillValue.Text = "";
-
+                    //this.NextRefillValue.Text = "";
+                    NxtAppDate.Text = "";
                 }
                 else
                 {
-                    this.NextRefillValue.Text = ((DateTime)this.thePharmacyMaster.Tables[0].Rows[0]["NextRefillDate"]).ToString(GblIQCare.AppDateFormat.ToString());
+                    //this.NextRefillValue.Text = ((DateTime)this.thePharmacyMaster.Tables[0].Rows[0]["NextRefillDate"]).ToString(GblIQCare.AppDateFormat.ToString());
+                    this.NxtAppDate.Text = ((DateTime)this.thePharmacyMaster.Tables[0].Rows[0]["NextRefillDate"]).ToString(GblIQCare.AppDateFormat.ToString());
+                }
+                if (this.thePharmacyMaster.Tables[0].Rows[0].IsNull("AppointmentReason") == false)
+                {
+                    lblAppointmentReason.Text = this.thePharmacyMaster.Tables[0].Rows[0]["AppointmentReason"].ToString();
+                }
+                else
+                {
+                    lblAppointmentReason.Text = "";
                 }
                 if (this.thePharmacyMaster.Tables[0].Rows[0].IsNull("LastDispense"))
                 {
@@ -3009,6 +3046,7 @@ namespace IQCare.SCM
             {
                 MainTab.SelectedTab = MainTab.TabPages["PendingTab"];
                 dtpFilterDate.Value = Convert.ToDateTime(GblIQCare.CurrentDate);
+                PendingOrders();
                 btnFindOrder_Click(btnFindOrder, null);
                 return;
             }
@@ -3621,15 +3659,19 @@ namespace IQCare.SCM
 
         private void cmbGrdDrugDispense_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string s = cmbGrdDrugDispense.Text;
-            string[] values = s.Split('~');
-            string quantity = values[0].ToString().Split('(', ')')[1];
+            try
+            {
+                string s = cmbGrdDrugDispense.Text;
+                string[] values = s.Split('~');
+                string quantity = values[0].ToString().Split('(', ')')[1];
 
-            this.grdDrugDispense.CurrentCell.Value = values[0].ToString();
-            grdDrugDispense.Rows[grdDrugDispense.SelectedCells[0].RowIndex].Cells["ExpiryDate"].Value = values[1].ToString();
-            grdDrugDispense.Rows[grdDrugDispense.SelectedCells[0].RowIndex].Cells["BatchId"].Value = cmbGrdDrugDispense.SelectedValue;
-            grdDrugDispense.Rows[grdDrugDispense.SelectedCells[0].RowIndex].Cells["BatchQty"].Value = quantity;
-            this.cmbGrdDrugDispense.Hide();
+                this.grdDrugDispense.CurrentCell.Value = values[0].ToString();
+                grdDrugDispense.Rows[grdDrugDispense.SelectedCells[0].RowIndex].Cells["ExpiryDate"].Value = values[1].ToString();
+                grdDrugDispense.Rows[grdDrugDispense.SelectedCells[0].RowIndex].Cells["BatchId"].Value = cmbGrdDrugDispense.SelectedValue;
+                grdDrugDispense.Rows[grdDrugDispense.SelectedCells[0].RowIndex].Cells["BatchQty"].Value = quantity;
+                this.cmbGrdDrugDispense.Hide();
+            }
+            catch { }
             
 
 
@@ -3661,11 +3703,15 @@ namespace IQCare.SCM
 
         private void cmbGrdDrugDispenseFreq_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-            this.grdDrugDispense.CurrentCell.Value = cmbGrdDrugDispenseFreq.Text;
-            grdDrugDispense.Rows[grdDrugDispense.SelectedCells[0].RowIndex].Cells["FrequencyId"].Value = cmbGrdDrugDispenseFreq.SelectedValue;
-            grdDrugDispense.Rows[grdDrugDispense.SelectedCells[0].RowIndex].Cells["FreqMultiplier"].Value = FrequencyMultiplier(Convert.ToInt32(cmbGrdDrugDispenseFreq.SelectedValue));
-            this.cmbGrdDrugDispenseFreq.Hide();
+            try
+            {
+                this.grdDrugDispense.CurrentCell.Value = cmbGrdDrugDispenseFreq.Text;
+                grdDrugDispense.Rows[grdDrugDispense.SelectedCells[0].RowIndex].Cells["FrequencyId"].Value = cmbGrdDrugDispenseFreq.SelectedValue;
+                grdDrugDispense.Rows[grdDrugDispense.SelectedCells[0].RowIndex].Cells["FreqMultiplier"].Value = FrequencyMultiplier(Convert.ToInt32(cmbGrdDrugDispenseFreq.SelectedValue));
+                this.cmbGrdDrugDispenseFreq.Hide();
+            }
+            catch
+            { }
         }
 
         private void grdDrugDispense_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -3798,6 +3844,9 @@ namespace IQCare.SCM
             this.lblReturnIQNumber.Text = currentRow.Cells["P_PatientFacilityId"].Value.ToString();
             GetSelectedPatient();
             GetSelectedPrescription();
+
+            if (theOrderId > 0)
+                btnDeleteOrder.Visible = true;
         }
 
         private DataTable ToDataTable(DataGridView dataGridView)
@@ -3828,6 +3877,86 @@ namespace IQCare.SCM
             //"BillAmount"
             //"ItemId
             
+        }
+
+        private void btnDeleteOrder_Click(object sender, EventArgs e)
+        {
+            if(theOrderId > 0)
+            {
+                IDrug drug = (IDrug)ObjectFactory.CreateInstance("BusinessProcess.SCM.BDrug, BusinessProcess.SCM");
+                drug.detelePatientPharmacyOrder(theOrderId);
+                MessageBox.Show("Order deleted successfully.");
+
+                this.thePrecribeAmt = new Decimal(0);
+                this.theOrderId = 0;
+                DataTable pharmacyDispenseTable = CreatePharmacyDispenseTable();
+                this.grdDrugDispense.DataSource = (object)pharmacyDispenseTable;
+                this.BindPharmacyDispenseGrid(pharmacyDispenseTable);
+                this.dtDispensedDate.Text = GblIQCare.CurrentDate;
+                this.cmbprogram.SelectedValue = "0";
+                this.theItemId = 0;
+                this.theDispensingUnit = 0;
+                this.theBatchId = 0;
+                this.theCostPrice = 0;
+                this.theMargin = 0;
+                this.theBillAmt = 0;
+                this.theDispensingUnitName = "";
+                this.txtItemName.Text = "";
+                this.txtBatchNo.Text = "";
+                this.cmbFrequency.SelectedValue = "0";
+                this.txtPillCount.Text = "";
+                this.txtQtyDispensed.Text = "";
+                labelOrderValue.Text = textPrescriptionNote.Text = "";
+                textPrescriptionNote.ReadOnly = false;
+                this.txtExpirydate.Text = "";
+                this.txtSellingPrice.Text = "";
+                this.txtDose.Text = "";
+                this.txtDuration.Text = "";
+                this.txtItemName.Select();
+                this.txtQtyPrescribed.Text = "";
+                this.txtQtyPrescribed.Enabled = true;
+                this.txtWeight.Text = "";
+                this.txtHeight.Text = "";
+                this.txtBSA.Text = "";
+                // this.chkPrintPrescription.Checked = false;
+                this.txtPatientInstructions.Text = "";
+                this.cmdPeriodTaken.SelectedValue = "0";
+                this.cmbProvider.SelectedValue = "0";
+                this.cmbRegimenLine.SelectedValue = "0";
+                this.cmbReason.SelectedValue = "0";
+                //  this.btnART.Enabled = false;
+                this.grpBoxLastDispense.Visible = true;
+                this.cmdSave.Enabled = true;
+                this.labelWhyPartial.Visible = txtWhyPartial.Visible = false;
+                this.txtWhyPartial.Text = "";
+                this.NxtAppDate.Format = DateTimePickerFormat.Custom;
+                dtDispensedDate.Enabled = true;
+                this.NxtAppDate.CustomFormat = " ";
+                this.makeGridEditable = "Yes";
+                this.dtRefillApp.CustomFormat = " ";
+                this.valuePrescriptionDate.Text = "";
+                this.labelPrescriptionDate.Visible = this.valuePrescriptionDate.Visible = false;
+                //   this.chkPharmacyRefill.Checked = false;
+                this.lblPayAmount.Text = "0.0";
+                this.clearPopup();
+                //btnART_Click(sender, e);
+                btnDeleteOrder.Visible = false;
+            }
+            else
+            {
+                MessageBox.Show("Kindly select a pharmacy order to delete.");
+            }
+        }
+
+        private void btnPendingOrders_Click(object sender, EventArgs e)
+        {
+            PendingOrders();
+            pnlPendingOrders.Visible = true;
+        }
+
+        private void btnClosePendingOrderPanel_Click(object sender, EventArgs e)
+        {
+            pnlPendingOrders.Visible = false;
         }
     }
 }

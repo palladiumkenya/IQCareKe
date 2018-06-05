@@ -25,52 +25,54 @@ namespace IQCare.Web.UILogic
             get
             {
                 CurrentSession session = CurrentSession.Current;
-                List<StaticFormMap> map = new List<StaticFormMap>();
-                map.Add(new StaticFormMap()
+                List<StaticFormMap> map = new List<StaticFormMap>
                 {
-                    ReferenceId = "LABORATORY",
-                    FormName = "Laboratory",
-                    Url = session.Facility.PaperLess ? "~/Laboratory/LabRequestForm.aspx?key=" + Guid.NewGuid().ToString() : "~/Laboratory/LabRecordEntry.aspx?key=" + Guid.NewGuid().ToString()
-                });
-                map.Add(new StaticFormMap()
-                {
-                    ReferenceId = "PHARMACY",
-                    FormName = "Pharmacy",
-                    Url = "~/Pharmacy/frmPharmacyForm.aspx?key=" + Guid.NewGuid().ToString()
-                });
+                    new StaticFormMap()
+                    {
+                        ReferenceId = "LABORATORY",
+                        FormName = "Laboratory",
+                        Url = session.Facility.PaperLess ? "~/Laboratory/LabRequestForm.aspx?key=" + Guid.NewGuid().ToString() : "~/Laboratory/LabRecordEntry.aspx?key=" + Guid.NewGuid().ToString()
+                    },
+                    new StaticFormMap()
+                    {
+                        ReferenceId = "PHARMACY",
+                        FormName = "Pharmacy",
+                        Url = "~/Pharmacy/frmPharmacyForm.aspx?key=" + Guid.NewGuid().ToString()
+                    },
 
 
-                map.Add(new StaticFormMap()
-                {
-                    ReferenceId = "SERVICE_REQUEST",
-                    FormName = "Service Request",
-                    Url = string.Format("~/ClinicalService/ServiceRecordEntry.aspx?key={0}&name=add", Guid.NewGuid().ToString())
-                });
-                map.Add(new StaticFormMap()
-                {
-                    ReferenceId = "CONSUMABLES_ISSUANCE",
-                    FormName = "Consumables Issuance",
-                    Url = "~/Billing/frmBilling_BillingPanel.aspx?mode=clinical&key=" + Guid.NewGuid().ToString()
-                });
-                map.Add(new StaticFormMap()
-                {
-                    ReferenceId = "ART_THERAPY",
-                    FormName = "ART Therapy",
-                    Url = "~/ClinicalForms/frmClinical_ARVTherapy.aspx"
-                });
-                map.Add(new StaticFormMap()
-                {
-                    ReferenceId = "ART_HISTORY",
-                    FormName = "ART History",
-                    Url = "~/ClinicalForms/frmClinical_ARTHistory.aspx"
-                });
-                map.Add(new StaticFormMap()
-                {
-                    ReferenceId = "CCC_INITIAL_FOLLOWUP",
-                    FormName = "Initial and Follow up Visits",
-                    Url = "~/ClinicalForms/frmClinical_InitialFollowupVisit.aspx"
+                    new StaticFormMap()
+                    {
+                        ReferenceId = "SERVICE_REQUEST",
+                        FormName = "Service Request",
+                        Url = string.Format("~/ClinicalService/ServiceRecordEntry.aspx?key={0}&name=add", Guid.NewGuid().ToString())
+                    },
+                    new StaticFormMap()
+                    {
+                        ReferenceId = "CONSUMABLES_ISSUANCE",
+                        FormName = "Consumables Issuance",
+                        Url = "~/Billing/frmBilling_BillingPanel.aspx?mode=clinical&key=" + Guid.NewGuid().ToString()
+                    },
+                    new StaticFormMap()
+                    {
+                        ReferenceId = "ART_THERAPY",
+                        FormName = "ART Therapy",
+                        Url = "~/ClinicalForms/frmClinical_ARVTherapy.aspx"
+                    },
+                    new StaticFormMap()
+                    {
+                        ReferenceId = "ART_HISTORY",
+                        FormName = "ART History",
+                        Url = "~/ClinicalForms/frmClinical_ARTHistory.aspx"
+                    },
+                    new StaticFormMap()
+                    {
+                        ReferenceId = "CCC_INITIAL_FOLLOWUP",
+                        FormName = "Initial and Follow up Visits",
+                        Url = "~/ClinicalForms/frmClinical_InitialFollowupVisit.aspx"
 
-                });
+                    }
+                };
                 return map;
             }
         }
@@ -159,7 +161,48 @@ namespace IQCare.Web.UILogic
             DataTable dtForms = ptmhm.GetModuleForms(moduleId, locationId);
             return dtForms;
         }
+        public static bool LoadPatientModuleData(int moduleId, int ptnPk, int systemId = 1)
+        {
+            IPatientHome PatientManager;
+            PatientManager = (IPatientHome)ObjectFactory.CreateInstance("BusinessProcess.Clinical.BPatientHome, BusinessProcess.Clinical");
+            System.Data.DataSet theDS = PatientManager.GetPatientDetails(ptnPk, systemId, moduleId);
+            HttpContext.Current.Session["PtnPrgStatus"] = theDS.Tables[19];
+            HttpContext.Current.Session["CEndedStatus"] = theDS.Tables[40];
+            PatientManager = null;
+            if (theDS.Tables[0].Rows.Count > 0)
+            {
+                HttpContext.Current.Session["PatientInformation"] = theDS.Tables[0];
+                HttpContext.Current.Session["EmerPhNo"] = theDS.Tables[0].Rows[0]["phone"].ToString();
+                HttpContext.Current.Session["District"] = theDS.Tables[0].Rows[0]["District"].ToString();
+                HttpContext.Current.Session["DistrictID"] = theDS.Tables[0].Rows[0]["DistrictId"].ToString();
+                HttpContext.Current.Session["VillageID"] = theDS.Tables[0].Rows[0]["VillageId"].ToString();
+                HttpContext.Current.Session["PatientName"] = theDS.Tables[0].Rows[0]["LastName"].ToString() + ", " + theDS.Tables[0].Rows[0]["MiddleName"].ToString() + " , " + theDS.Tables[0].Rows[0]["FirstName"].ToString();
+                if (theDS.Tables[0].Rows[0]["Address"].ToString() != "")
+                {
+                    HttpContext.Current.Session["Address"] = theDS.Tables[0].Rows[0]["Address"].ToString();
+                }
 
+                if (theDS.Tables[0].Rows[0]["VillageNM"].ToString() != "")
+                {
+
+                    HttpContext.Current.Session["Village"] = theDS.Tables[0].Rows[0]["VillageNM"].ToString();
+                }
+                else
+                {
+
+                    HttpContext.Current.Session["Village"] = "/";
+
+                }
+
+                HttpContext.Current.Session["PatientSex"] = theDS.Tables[0].Rows[0]["SexNM"].ToString();
+                HttpContext.Current.Session["PatientAge"] = theDS.Tables[0].Rows[0]["AGE"].ToString() + "." + theDS.Tables[0].Rows[0]["AgeInMonths"].ToString();
+                HttpContext.Current.Session["patientageinyearmonth"] = theDS.Tables[0].Rows[0]["AGEINYEARMONTH"].ToString();
+                HttpContext.Current.Session["PatientInformation"] = theDS.Tables[0];
+                return true;
+            }
+   
+            return false;
+        }
         /// <summary>
         /// Gets the forms for patient and module.
         /// </summary>

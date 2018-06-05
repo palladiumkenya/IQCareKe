@@ -33,12 +33,12 @@
                         Value="Facility Home" NavigateUrl="~/frmFacilityHome.aspx"></asp:MenuItem>
                     <asp:MenuItem Text="<i class='fa fa-bar-chart fa-1x text-muted' aria-hidden='true'></i> <span class='fa-1x text-muted'> <strong>Reports</strong></span>"
                         Value="Reports" Selectable="False">
-                        <asp:MenuItem Text="Facility Reports" Enabled="true" Value="Facility Reports" NavigateUrl="~/Reports/frmReportFacilityJump.aspx">
+                       <%-- <asp:MenuItem Text="Facility Reports" Enabled="true" Value="Facility Reports" NavigateUrl="~/Reports/frmReportFacilityJump.aspx">
                         </asp:MenuItem>
                         <asp:MenuItem Text="Donor Reports" Enabled="true" Value="Donor Reports" NavigateUrl="~/Reports/frmReportDonorJump.aspx">
                         </asp:MenuItem>
                         <asp:MenuItem Text="Custom Reports" Value="Custom Reports" NavigateUrl="~/Reports/frmReportCustom.aspx"
-                            Enabled="false"></asp:MenuItem>
+                            Enabled="false"></asp:MenuItem>--%>
                         <asp:MenuItem Text="Query Builder Reports" Value="Query Builder Reports" NavigateUrl="~/Reports/frmQueryBuilderReports.aspx">
                         </asp:MenuItem>
                         <asp:MenuItem Text="IQTools Reports" Value="IQTools Reports" NavigateUrl="~/IQTools/frmTemplateReport.aspx">

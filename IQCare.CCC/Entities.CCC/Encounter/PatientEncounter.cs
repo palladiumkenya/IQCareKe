@@ -99,6 +99,11 @@ namespace Entities.CCC.Encounter
             public string[] phdp { get; set; }
             public string[] generalExams { get; set; }
             public string WhoStage { get; set; }
+            public string appointmentServiceArea { get; set; }
+            public string appointmentReason { get; set; }
+            public string appointmentDesc { get; set; }
+            public string appontmentStatus { get; set; }
+
             
 
         }
@@ -114,6 +119,7 @@ namespace Entities.CCC.Encounter
             public string NoticeableWeightLoss { get; set; }
             public string NightSweats { get; set; }
             public string SputumSmear { get; set; }
+            public string geneXpert { get; set; }
             public string ChestXray { get; set; }
             public string startAntiTB { get; set; }
             public string InvitationOfContacts { get; set; }
@@ -132,6 +138,8 @@ namespace Entities.CCC.Encounter
             public string YellownessOfEyes { get; set; }
             public string AdominalTenderness { get; set; }
             public string LiverFunctionTests { get; set; }
+            public string startIPT { get; set; }
+            public string IPTStartDate { get; set; }
         }
 
         [Serializable]
@@ -211,6 +219,19 @@ namespace Entities.CCC.Encounter
             public string presentingComplaintID { get; set; }
             public string presentingComplaint { get; set; }
             public string onsetDate { get; set; }
+        }
+
+        public class PatientCategorizationParameters
+        {
+            public double age { get; set; }
+            public double BMI { get; set; }
+            public double VL { get; set; }
+            public int SameRegimen12Months { get; set; }
+            public double Completed6MonthsIPT { get; set; }
+            public int ActiveOIs { get; set; }
+            public string pregnant { get; set; }
+
+
         }
     }
 }

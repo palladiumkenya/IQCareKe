@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Entities.CCC.Encounter;
 using Entities.CCC.Visit;
-using Entities.CCC.Encounter;
-using Entities.CCC.Lookup;
+using System;
+using System.Collections.Generic;
 
 namespace Interface.CCC.Visit
 {
@@ -20,7 +19,12 @@ namespace Interface.CCC.Visit
         List<PatientLabTracker> GetPatientVL(int patientId);
         List<PatientLabTracker> GetPatientVlById(int Id);
         PatientLabTracker GetPatientCurrentviralLoadInfo(int patientId);
-      
+        List<LabOrderEntity> GetPatientLabOrdersByDate(int patientId, DateTime visitDate);
+        List<LabDetailsEntity> GetPatientLabDetailsByDate(int labOrderId, DateTime visitDate);
+        List<LabDetailsEntity> GetPatientLabDetailsByLabOrderId(int labOrderId);
+        List<PatientLabTracker> GetAllPatientVLs(int patientId);
+        PatientLabTracker GetPatientLastVL(int patientId);
 
+        LabOrderEntity GetLabOrderById(int labOrderId);
     }
 }

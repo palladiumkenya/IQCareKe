@@ -23,22 +23,22 @@
 
         <div class="col-md-12 col-xs-12 col-sm-12 form-group" id="anthropometricMeasurement" data-parsley-validate="true" data-show-errors="true">
             
-            <div class="col-md-12">
-                <label class="control-label text-primary pull-left text-muted">Anthropometric Measurement</label>
+            <div class="col-md-12 form-group">
+                <label class="control-label text-primary pull-left text-muted">Anthropometric Measurement</label> <label id="lblweightAlert"></label>
             </div>
 
             <div class="col-md-12 col-xs-12 col-sm-12 form-group">
                
                 <div class="col-md-4 col-xs-12 col-sm-12">
                         <div class="input-group">
-                            <span class="input-group-addon"><small class="text-danger">*</small> Weight(kgs)</span>
+                            <span class="input-group-addon" id="weightAddon"><small class="text-danger">*</small> Weight(kgs) <label id="weightAddons"></label></span>
                             <asp:TextBox runat="server" ID="weights" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="kgs.." required="true" data-parsley-required="true" Type="Number" Min="0" data-parsley-range="[0, 400]"></asp:TextBox>
                         </div>
                  </div>
 
                 <div class="col-md-4 col-xs-12 col-sm-12">
                         <div class="input-group">
-                            <span class="input-group-addon"><small class="text-danger">*</small> Height(cm)</span>
+                            <span class="input-group-addon"><small class="text-danger">*</small> Height(cm)<label id="heightAddon"></label> </span>
                             <asp:TextBox runat="server" ID="Heights" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="cms.." required="true" data-parsley-required="true" Type="Number" Min="10" Max="250" data-parsley-range="[10, 250]" data-parsley-range-message="Height is out of reasonable range"></asp:TextBox>
                         </div>
                     </div>
@@ -46,7 +46,7 @@
                 <div id="divBMI" class="col-md-4 col-xs-12 col-sm-12">
                         <%--<asp:Label runat="server"  ID ="bmi" Value = "" CssClass="control-label text-warning pull-left"></asp:Label>--%>
                         <div class="input-group">
-                            <span class="input-group-addon">BMI (kg/m2)</span>
+                            <span class="input-group-addon">BMI (kg/m2) <label id="bmiAddon"></label></span>
                             <asp:TextBox runat="server" ID="bmivalue" Enabled="False" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="bmi"></asp:TextBox>
                         </div>
                  </div>
@@ -58,7 +58,7 @@
             <div id="peadsZScores" class="col-md-12 col-xs-12 col-sm-12 form-group">
                 <div class="col-md-4 col-xs-12 col-sm-12">
                         <div class="input-group">
-                            <span class="input-group-addon"><small class="text-danger">*</small> BMIz</span>
+                            <span class="input-group-addon"><small class="text-danger">*</small> BMIz<label id="dmiAddon"></label></span>
                             <asp:TextBox runat="server" ID="txtBMIz" Enabled="False" ClientIDMode="Static" CssClass="form-control input-sm"></asp:TextBox>
                         </div>
                  </div>
@@ -82,7 +82,7 @@
                 <div class="col-md-4 col-xs-12 col-sm-12">
                         <div class="input-group">
                             <span class="input-group-addon"><small class="text-danger"></small>MUAC (cm)</span> 
-                             <asp:TextBox runat="server" ID="muacs" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="cms.." Type="Number" Min="1" Max="30" data-parsley-range="[1, 30]" data-parsley-range-message="MUAC is out of reasonable range"></asp:TextBox>
+                             <asp:TextBox runat="server" ID="muacs" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="cms.." Type="Number" Min="1" Max="40" data-parsley-range="[1, 40]" data-parsley-range-message="MUAC is out of reasonable range"></asp:TextBox>
                         </div>
                     </div>
 
@@ -95,7 +95,7 @@
                     </div>
                  <div class="col-md-4 col-xs-12 col-sm-12">
                     <div class="input-group">
-                        <span class="input-group-addon">Temperature (°C)</span>
+                        <span class="input-group-addon">Temperature (°C) <label id="tempAddon"></label></span>
                         <asp:TextBox runat="server" ID="Temperature" ClientIDMode="Static" CssClass="form-control input-sm" placeholder=".." Type="Number" Min="25" Max="43" data-parsley-range="[25, 43]" data-parsley-range-message="Temperature is out of reasonable range"></asp:TextBox>
                     </div>
                     <p class="help-block pull-left"><strong>Normal 36.5–37.5 °C </strong></p>
@@ -113,17 +113,17 @@
                 
                   <div class="col-md-12 col-xs-12 col-sm-12">
                     <div class="input-group">
-                         <span class="input-group-addon">Systolic</span>
-                         <asp:TextBox runat="server" ID="systolic" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="systolic.." data-parsley-trigger="keyup" data-parsley-type="number" data-parsley-range="[0, 400]" data-parsley-range-message="Systolic reading is out of reasonable range"></asp:TextBox>
+                         <span class="input-group-addon">Systolic <label id="systolicAddon"></label></span>
+                         <asp:TextBox runat="server" ID="systolic" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="systolic.." data-parsley-trigger="keyup" data-parsley-type="number" data-parsley-range="[20, 250]" data-parsley-range-message="Systolic reading is out of reasonable range"></asp:TextBox>
                          <span class="input-group-addon">mm[Hg]</span>
                     </div>
-                    <label class="help-block pull-left"><strong>Normal Range: (80-180)</strong></label>
+                    <label class="help-block pull-left"><strong>Normal Range: (70-190)</strong></label>
                  </div>
 
                   <div class="col-md-12 col-xs-12 col-sm-12 form-group" style=" padding-bottom: 0%">
                      <div class="input-group">
-                         <span class="input-group-addon">Diastolic</span>
-                         <asp:TextBox runat="server" ID="distolic" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="diastolic.." data-parsley-trigger="keyup" data-parsley-type="number" data-parsley-range="[0, 200]" data-parsley-range-message="Diastolic reading is out of reasonable range"></asp:TextBox>
+                         <span class="input-group-addon">Diastolic <label id="distolicAddon"></label></span>
+                         <asp:TextBox runat="server" ID="distolic" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="diastolic.." data-parsley-trigger="keyup" data-parsley-type="number" data-parsley-range="[20, 150]" data-parsley-range-message="Diastolic reading is out of reasonable range"></asp:TextBox>
                          <span class="input-group-addon">mm[Hg]</span>
                      </div>
                       <p class="help-block pull-left"><strong>Normal Range: (40-100)</strong></p>
@@ -188,6 +188,27 @@
         var gender = "<%=PatientGender%>";
         var pregnancyStatus = <%=PregnancyStatus%>;
 
+        $("#<%=weights.ClientID%>").focusout(function() {
+            getLastVisitVitals("weight");
+        });
+
+        $("#<%=Heights.ClientID%>").focusout(function() {
+            getLastVisitVitals("height");
+        });
+
+        $("#<%=bmivalue.ClientID%>").on('change',function () {
+            getLastVisitVitals("bmi");
+        });
+
+        $("#<%=systolic.ClientID%>").focusout(function () {
+            getLastVisitVitals("systolic");
+        });
+
+        $("#<%=distolic.ClientID%>").focusout(function () {
+            getLastVisitVitals("distolic");
+        });
+
+
         var visitDate;
         $("#muacs").prop("disabled", true);
             $('#circumference').prop("disabled", true);
@@ -235,6 +256,9 @@
         else if (age < 15 && pregnancyStatus<1) {
              $("#muacs").prop("disabled", false);
         }
+        else if (gender === 'Female' & pregnancyStatus>0){
+            $("#muacs").prop("disabled", false);
+        }
         else if (age > 15 || gender==='Male') {
             $("#muacs").prop("disabled", true);
             $('#circumference').prop("disabled", true);
@@ -264,15 +288,155 @@
             window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>';
         });
 
+        $("#weight").focusout(function() {
+
+        });
+
     });
-    $("#Heights").change(function () {
+
+
+    /* monitor changes in patient vitals */
+
+    function getLastVisitVitals(vitalsType) {
+
+        $.ajax({
+            type: "POST",
+            url: "../WebService/PatientVitals.asmx/GetCurrentPatientVitalsByPatientId",
+            data: "",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                var vitalList = JSON.parse(response.d);
+
+                var current = 0;
+                var previous = 0;
+
+                
+                <%--$("#<%=weights.ClientID%>").val(parseInt(vitalList.Weight));
+                $("#<%=Heights.ClientID%>").val(parseInt(vitalList.Height));--%>
+
+
+                switch (vitalsType) {
+
+                    case "weight":
+                        
+                        current =parseInt($("#<%=weights.ClientID%>").val());
+                        previous = parseInt(vitalList.Weight);
+
+                        <%--$("#<%=weights.ClientID%>").val(parseInt(vitalList.Weight));
+                        $("#<%=Heights.ClientID%>").val(parseInt(vitalList.Height));--%>
+
+                        if (current>previous && previous>0) {
+                            $("#weightAddons").empty("");
+                            $("#weightAddons").html("<strong class='label label-danger'>Gained " + (current - previous) + " Kgs</strong>");
+                            return false;
+                        } else if (current == previous) {
+                            $("#weightAddons").empty("");
+                            $("#weightAddons").append("<strong class='label label-danger'> No Change </strong>");
+                            return false;
+                        }
+                        else {
+                            $("#weightAddons").empty("");
+                            $("#weightAddons").append("<strong class='label label-danger'> Lost " + (previous -current) + " Kgs</strong>");
+                            return false;
+                        }
+                    break;
+                    case "height":
+                        current = parseInt($("#<%=Heights.ClientID%>").val());
+                        previous = parseInt(vitalList.Height);
+                        if (current > previous && previous>0) {
+                            $("#heightAddon").empty("");
+                            $("#heightAddon").html("<strong class='label label-danger'> Gained " + (current - previous) + " cms</strong>");
+                            return false;
+                        } else if (current == previous) {
+                            $("#heightAddon").empty("");
+                            $("#heightAddon").append("<strong class='label label-danger'> No Change </strong>");
+                            return false;
+                        }
+                        else {
+                            $("#heightAddon").empty("");
+                            $("#heightAddon").append("<strong class='label label-danger'> Lost " + (previous - current) + " cms</strong>");
+                            return false;
+                        }
+                        break;
+                    case "bmi":
+                        current = parseInt($("#<%=bmivalue.ClientID%>").val());
+                        previous = parseFloat(vitalList.BMI);
+                        var bmitransalated = "";
+                        if (previous < 18.5) { bmitransalated = '(Under weight)'; } else if (bmi >= 18.5 && bmi < 25) { bmitransalated = '(Normal weight)'; } else if (bmi >= 25 && bmi < 30) { bmitransalated = '(Over weight)'; } else { bmitransalated = '(Obese)'; }
+                        if (current > previous && previous>0) {
+                            $("#bmiAddon").empty("");
+                            $("#bmiAddon").html("<strong class='label label-danger'> " + bmitransalated + " cms</strong>");
+                            return false;
+                        } else if (current == previous) {
+                            $("#bmiAddon").empty("");
+                            $("#bmiAddon").append("<strong class='label label-danger'> No CHnage </strong>");
+                            return false;
+                        }
+                        else {
+                            $("#bmiAddon").empty("");
+                            $("#bmiAddon").append("<strong class='label label-danger'> " + bmitransalated+ " cms</strong>");
+                            return false;
+                        }
+                        break;
+                    case "distolic":
+                        current = parseInt($("#<%=distolic.ClientID%>").val());
+                        previous = parseInt(vitalList.Bpdiastolic);
+
+                        if (current > previous && previous>0) {
+                            $("#distolicAddon").empty("");
+                            $("#distolicAddon").html("<strong class='label label-danger'> Increased " + (current - previous) + " mm[Hg]</strong>");
+                            return false;
+                        } else if (current == previous) {
+                            $("#distolicAddon").empty("");
+                            $("#distolicAddon").append("<strong class='label label-danger'> No Change </strong>");
+                            return false;
+                        }
+                        else {
+                            $("#distolicAddon").empty("");
+                            $("#distolicAddon").append("<strong class='label label-danger'> Reduced " + (previous - current) + " mm[Hg]</strong>");
+                            return false;
+                        }
+                        break;
+                    case "systolic":
+                        current = parseInt($("#<%=systolic.ClientID%>").val());
+                        previous = parseInt(vitalList.BpSystolic);
+                        if (current > previous && previous>0) {
+                            $("#systolicAddon").empty("");
+                            $("#systolicAddon").html("<strong class='label label-danger'> Increased " + (current - previous) + " mm[Hg]</strong>");
+                            return false;
+                        } else if (current == previous) {
+                            $("#systolicAddon").empty("");
+                            $("#systolicAddon").append("<strong class='label label-danger'> No Change </strong>");
+                            return false;
+                        }
+                        else {
+                            $("#systolicAddon").empty("");
+                            $("#systolicAddon").append("<strong class='label label-danger'> Reduced " + (previous - current) + " mm[Hg]</strong>");
+                            return false;
+                        }
+                        break;
+                default:
+
+                }
+                // <%--window.location.href('<%=ResolveClientUrl("~/CCC/patient/PatientHome.aspx")%>');--%>
+            },
+            error: function (xhr, errorType, exception) {
+                var jsonError = jQuery.parseJSON(xhr.responseText);
+                toastr.error("" + xhr.status + "" + jsonError.Message);
+            }
+        });
+
+    }
+
+    $("#Heights").blur(function () {
         var bmi = calcBMI();
         var weight = '';
         if (bmi < 18.5) {weight = '(Under weight)';} else if (bmi >= 18.5 && bmi < 25) {weight = '(Normal weight)';} else if (bmi >= 25 && bmi < 30) {weight = '(Over weight)';} else {weight = '(Obese)';}
         document.getElementById("bmivalue").value = bmi+weight;
         calcZScore();
     });
-    $("#weights").change(function () {
+    $("#weights").blur(function () {
         var bmi = calcBMI();
         var weight = '';
         if (bmi < 18.5) {weight = '(Under weight)';} else if (bmi >= 18.5 && bmi < 25) {weight = '(Normal weight)';} else if (bmi >= 25 && bmi < 30) {weight = '(Over weight)';} else {weight = '(Obese)';}
@@ -296,9 +460,10 @@
         //       });
         var bmiz = $("#<%=txtBMIz.ClientID%>").val();
         var weightForAge = $("#<%=txtWAz.ClientID%>").val();
-         var weightForHeight = $("#<%=txtWHz.ClientID%>").val();
-        var dateOfVisit = $('#myVisitDate').datepicker('getDate');
-        dateOfVisit = moment(dateOfVisit).format('DD-MMM-YYYY');
+        var weightForHeight = $("#<%=txtWHz.ClientID%>").val();
+        var dateOfVisit = $("#PersonDoB").val();
+        //var dateOfVisit = $('#VisitDatedatepicker').datepicker('getDate');
+        //dateOfVisit = moment(dateOfVisit).format('DD-MMM-YYYY');
         var bmi = calcBMI();
       
         if (bmi === '') { bmi = 0 }
@@ -330,7 +495,7 @@
                 toastr.success(response.d, "Vitals saved successfully");
                 resetElements();
                 //redirect
-                window.location.href="<%=ResolveClientUrl("~/CCC/patient/PatientHome.aspx")%>";
+                <%--window.location.href="<%=ResolveClientUrl("~/CCC/patient/PatientHome.aspx")%>";--%>
             },
             error: function (response) {
                 toastr.success(response.d, "Vitals not saved");

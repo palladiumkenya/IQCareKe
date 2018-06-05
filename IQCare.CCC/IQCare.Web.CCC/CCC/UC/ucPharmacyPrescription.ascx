@@ -36,9 +36,7 @@
                                         </div>                  
                                     </div>
 
-                                    
-
-                                     
+       
                             </div>
                             <div class="col-md-12">
                                 <div class="col-md-3 form-group">                  
@@ -130,7 +128,7 @@
                             <div class="col-md-6">
                                 <div class="datepicker fuelux form-group pull-left" id="PrescriptionDate">
                                     <div class="input-group pull-left">
-                                        <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm pull-left" ID="txtPrescriptionDate" onBlur="ValidatePrescriptionDate();DateFormat(this,this.value,event,false,'3');" data-parsley-required="true" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
+                                        <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm pull-left" ID="txtPrescriptionDate" onBlur="checkEnrolmentPrescriptionDates();ValidatePrescriptionDate();DateFormat(this,this.value,event,false,'3');" data-parsley-required="true" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
                                         <div class="input-group-btn">
                                             <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -352,6 +350,7 @@
     var pmscmFlag = "0";
     var prescriptionDate = "<%= this.prescriptionDate %>";
     var dispenseDate = "<%= this.dispenseDate %>";
+    var enrolmentDate = "<%= this.enrolmentDate %>";
     var startTreatment = "<%=StartTreatment.ToString().ToLower() %>";
     var patType = "<%=patType.ToString().ToLower() %>";
     var gender = "<%=Session["Gender"]%>";
@@ -366,12 +365,44 @@
 
     if (dispenseDate === '' || dispenseDate === '01-Jan-1900')
         dispenseDate = 0;
+
+    if (enrolmentDate === '' || enrolmentDate === '01-Jan-1900')
+        enrolmentDate = 0;
     
     $(document).ready(function () {
         
         //alert(pmscmSamePointDispense);
+        ///////////////////////////////////////////////////////////////////////////////////////
+        tp = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
 
-            // drugList(0, $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text());
+        if (pmscmSamePointDispense === "PM/SCM With Same point dispense") {
+                       // tp = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
+
+            pmscmFlag = "1";
+            drugList(1, tp);
+            $("#ddlBatch").prop('disabled', false);
+            $("#txtQuantityDisp").prop('disabled', false);
+            $("#txtDateDispensed").prop('disabled', false);
+            $("#btnDateDisp").prop('disabled', false);
+
+        }
+        else if (pmscm === "PM/SCM") {
+
+            drugList(1, tp);
+            $("#ddlBatch").prop('disabled', true);
+            $("#txtQuantityDisp").prop('disabled', true);
+            $("#txtDateDispensed").prop('disabled', true);
+            $("#btnDateDisp").prop('disabled', true);
+        }
+        else {
+
+            drugList(0, tp);
+            $("#ddlBatch").prop('disabled', true);
+            $("#txtQuantityDisp").prop('disabled', false);
+            $("#txtDateDispensed").prop('disabled', false);
+            $("#btnDateDisp").prop('disabled', false);
+        }
+        ////////////////////////////////////////////////////////////////////////////////////////////////
 
             $("#<%=ddlTreatmentProgram.ClientID%>").on('change',
                 function () {
@@ -389,7 +420,7 @@
 		            //tp = treatmentProgram;
 		            if (gender === "Female" && age >= 9 && tp === "PMTCT") {
 
-		            } else if (tp === "PMTCT" && (gender != "Female" || age < 9)) {
+		            } else if (tp === "PMTCT" && (gender != "Female" || age > 9)) {
 		                 toastr.error("PMTCT is for female patients only who are older than 9 years", "Error");
 		                 $("#<%=ddlTreatmentProgram.ClientID%>").val("");
 		             }
@@ -407,7 +438,6 @@
 
                     }
                     else if (pmscm === "PM/SCM") {
-                       // tp = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
 
                         drugList(1, tp);
                         $("#ddlBatch").prop('disabled', true);
@@ -416,7 +446,6 @@
                         $("#btnDateDisp").prop('disabled', true);
                     }
                     else {
-                       // tp = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
 
                         drugList(0, tp);
                         $("#ddlBatch").prop('disabled', true);
@@ -443,9 +472,7 @@
             restricted: [{ from: tomorrow, to: Infinity }]
         });
 
-     /*   $("#<%=ddlTreatmentProgram.ClientID%>").change(function () {
-            
-        });*/
+        
 
         $("#<%=ddlTreatmentPlan.ClientID%>").change(function () {
             var treatmentProgram = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
@@ -476,6 +503,7 @@
         });
 
         treatmentProgram();
+
     });
 
     $(function () {
@@ -585,9 +613,9 @@
                 });
 
       
-           function SelectDrug(){
+           function SelectDrug() {
                    var result = this.value.split("~");
-                   if(pmscm ==="1"){ getBatches(result[0]);}
+                   if (pmscmSamePointDispense ==="PM/SCM With Same point dispense"){ getBatches(result[0]);}
                    this.value = result[2];
                    $("#<%=drugID.ClientID%>").val(result[0]);
                    $("#<%=drugAbbr.ClientID%>").val(result[1]);
@@ -678,7 +706,7 @@
 
         if (valSelected === "PMTCT") {
             $("#<%=ddlPeriodTaken.ClientID%>").prop('disabled', false);
-            $("#<%=ddlPeriodTaken.ClientID%>").val("");
+            <%--$("#<%=ddlPeriodTaken.ClientID%>").val("");--%>
             $("#<%=ddlTreatmentPlan.ClientID%>").prop('disabled', false);
             $("#<%=ddlTreatmentPlan.ClientID%>").val("");
             $("#<%=ddlSwitchInterruptionReason.ClientID%>").prop('disabled', false);
@@ -899,21 +927,24 @@
                 }
 
             }
-            catch (err) { }
+            catch (err) {
+                toastr.error("Error", "");
+            }
 
             if (sumAllAbbr > 0) {
-                if (treatmentPlanName === 'ART') {
+                if (treatmentProgramName === 'ART' || treatmentProgramName === 'PMTCT') {
                     if (regimenLine === "0") {
                         toastr.error("Error", "Please select the Regimen Line");
                         return;
                     }
-                }
+                }  
 
-                if (sumAllAbbr !== sumSelectedRegimen && treatmentPlanName === 'ART') {
+                if (sumAllAbbr !== sumSelectedRegimen && (treatmentProgramName === 'ART' || treatmentProgramName === 'PMTCT') && sumSelectedRegimen < 1500) {
                     toastr.error("Error", "Selected Regimen is not equal to Prescribed Regimen!");
                     return;
                 }
                 else {
+                    $("#btnSavePrescription").attr("disabled", true);
                     $.ajax({
                         url: '../WebService/PatientEncounterService.asmx/savePatientPharmacy',
                         type: 'POST',
@@ -925,13 +956,13 @@
                             JSON.stringify(drugPrescriptionArray) + "', 'regimenText':'" + regimenText + "'}",
                         contentType: "application/json; charset=utf-8",
                         success: function (data) {
-                            $("#btnSavePrescription").prop("disabled", true);
+                            $("#btnSavePrescription").attr("disabled", true);
                             toastr.success(data.d, "Saved successfully");
                             //$('#pharmacyModal').modal('hide');
 
                         },
                         error: function (data) {
-                            $("#btnSavePrescription").prop("disabled", false);
+                            $("#btnSavePrescription").removeAttr("disabled");
                             toastr.error(data.d, "Error");
                         }
                     });
@@ -1080,7 +1111,20 @@
         
     }
 
-    
+    function checkEnrolmentPrescriptionDates()
+    {
+        var prescriptionDt = $("#txtPrescriptionDate").val();
+        if (enrolmentDate != "" && prescriptionDt != "")
+        {
+            var presDt = Date.parse(prescriptionDt);
+            var enrolDt = Date.parse(enrolmentDate);
+            if (presDt < enrolDt)
+            {
+                toastr.error("Prescription date cannot be less than Enrollment date.");
+                $("#txtPrescriptionDate").val("");
+            }
+        }
+    }
     
 
 </script>

@@ -2,6 +2,7 @@
 using Entities.CCC.Tb;
 using Interface.CCC.Tb;
 using System.Collections.Generic;
+using IQCare.Web.UILogic;
 
 namespace IQCare.CCC.UILogic.Tb
 {
@@ -22,7 +23,8 @@ namespace IQCare.CCC.UILogic.Tb
                 InvitationOfContacts = p.InvitationOfContacts,
                 SputumSmear = p.SputumSmear,
                 StartAntiTb = p.StartAntiTb,
-                GeneXpert = p.GeneXpert
+                GeneXpert = p.GeneXpert,
+                CreatedBy = SessionManager.UserId
             };
             return _patientIcfAction.AddPatientIcfAction(patientIcfAction);
         }
@@ -50,7 +52,8 @@ namespace IQCare.CCC.UILogic.Tb
                 InvitationOfContacts = p.InvitationOfContacts,
                 SputumSmear = p.SputumSmear,
                 StartAntiTb = p.StartAntiTb,
-                GeneXpert = p.GeneXpert
+                GeneXpert = p.GeneXpert,
+                CreatedBy = SessionManager.UserId
             };
             return _patientIcfAction.UpdatePatientIcfAction(patientIcfAction);
         }

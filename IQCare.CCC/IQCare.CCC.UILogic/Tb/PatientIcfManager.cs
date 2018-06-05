@@ -2,6 +2,7 @@
 using Entities.CCC.Tb;
 using Interface.CCC.Tb;
 using System.Collections.Generic;
+using IQCare.Web.UILogic;
 
 namespace IQCare.CCC.UILogic.Tb
 {
@@ -21,7 +22,9 @@ namespace IQCare.CCC.UILogic.Tb
                 WeightLoss = p.WeightLoss,
                 OnAntiTbDrugs = p.OnAntiTbDrugs,
                 OnIpt = p.OnIpt,
-                EverBeenOnIpt = p.EverBeenOnIpt
+                EverBeenOnIpt = p.EverBeenOnIpt,
+                CreatedBy = SessionManager.UserId
+
             };
             return _patientIcf.AddPatientIcf(patientIcf);
         }

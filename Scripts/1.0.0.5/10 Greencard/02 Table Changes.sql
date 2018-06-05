@@ -19,6 +19,14 @@ BEGIN
 	ALTER TABLE LookupMasterItem ALTER COLUMN DisplayName varchar(250) NULL
 END
 GO
+If NOT Exists(Select * from sys.columns where Name = N'IdentifierType' AND Object_ID = Object_ID(N'Identifiers'))
+BEGIN
+	ALTER TABLE Identifiers ADD IdentifierType INT NULL
+END
+GO
+
+
+
 If Exists(Select * from sys.columns where Name = N'EnrollmentDate' AND Object_ID = Object_ID(N'PatientHivDiagnosis'))
 BEGIN
 	ALTER TABLE PatientHivDiagnosis ALTER COLUMN EnrollmentDate DATETIME NULL

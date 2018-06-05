@@ -60,5 +60,17 @@ namespace IQCare.CCC.UILogic.Enrollment
                 throw e;
             }
         }
+
+        public List<PatientEntryPoint> GetPatientEntryPoints(int patientId, int serviceAreaId)
+        {
+            try
+            {
+                return _mgr.GetPatientEntryPoints(patientId, serviceAreaId);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

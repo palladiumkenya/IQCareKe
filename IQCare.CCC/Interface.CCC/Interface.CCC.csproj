@@ -9,8 +9,11 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Interface.CCC</RootNamespace>
     <AssemblyName>Interface.CCC</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TrunkDir>..\..\</TrunkDir>
+    <RedDir Condition=" '$(RedDir)' == '' ">$(TrunkDir)package\service\</RedDir>
+    <WebDir Condition=" '$(WebDir)' == '' ">$(TrunkDir)package\web\bin\</WebDir>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -21,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,8 +33,13 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Entities.CCC, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Entities.CCC.dll</HintPath>
+    </Reference>
     <Reference Include="Entities.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\Entities.Common.dll</HintPath>
@@ -72,8 +81,16 @@
     <Compile Include="Enrollment\IPatientEntryPointManager.cs" />
     <Compile Include="Enrollment\IPatientIdentifierManager.cs" />
     <Compile Include="Enrollment\IPatientReEnrollmentManager.cs" />
+    <Compile Include="Enrollment\IPersonIdentifierManager.cs" />
     <Compile Include="Enrollment\IServiceAreaIdentifiers.cs" />
     <Compile Include="IMst_PatientInsert.cs" />
+    <Compile Include="Interoperability\IDrugPrescriptionManager.cs" />
+    <Compile Include="Interoperability\IInteropPlacerTypeManager.cs" />
+    <Compile Include="Interoperability\IInteropPlacerValuesManager.cs" />
+    <Compile Include="Interoperability\IPatientAppointmentMessageManager.cs" />
+    <Compile Include="Interoperability\IPatientMessageManager.cs" />
+    <Compile Include="Interoperability\IPatientVitalsMessageManager.cs" />
+    <Compile Include="Interoperability\IViralLoadMessageManager.cs" />
     <Compile Include="IPatientAppointment.cs" />
     <Compile Include="Baseline\IPatientHivTestingManager.cs" />
     <Compile Include="IPatientCategorizationmanager.cs" />
@@ -103,6 +120,9 @@
     <Compile Include="Lookup\ITestingSummaryStatisticsManager.cs" />
     <Compile Include="OneTimeEvent\IOneTimeEventsTrackerManager.cs" />
     <Compile Include="Patient\IPatientManager.cs" />
+    <Compile Include="Pharmacy\IDrugManager.cs" />
+    <Compile Include="Pharmacy\IPatientPharmacyDispenseManager.cs" />
+    <Compile Include="Pharmacy\IPharmacyOrderManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Screening\IPatientScreeningManager.cs" />
     <Compile Include="Triage\IPatientAdverseEventOutcomeManager.cs" />
@@ -115,6 +135,7 @@
     <Compile Include="Tb\IPatientIpt.cs" />
     <Compile Include="Tb\IPatientIptWorkup.cs" />
     <Compile Include="Tb\IPatientIcfAction.cs" />
+    <Compile Include="Triage\IPregnancyOutcomeLookupManager.cs" />
     <Compile Include="Visit\IPatientEncounterManager.cs" />
     <Compile Include="Visit\IPatientIdentifierManager.cs" />
     <Compile Include="Visit\IPatientLabOrderManager.cs" />
@@ -122,15 +143,6 @@
     <Compile Include="Visit\IPatientVisitManager.cs" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <ProjectReference Include="..\Entities.CCC\Entities.CCC.csproj">
-      <Project>{BBCC4817-4E69-4722-A560-8988A795CE50}</Project>
-      <Name>Entities.CCC</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -139,4 +151,10 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <Target Name="AfterBuild">
+    <Copy SourceFiles="@(IntermediateAssembly)" DestinationFolder="$(RedDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(IntermediateAssembly)" DestinationFolder="$(WebDir)" SkipUnchangedFiles="false" />
+    <Copy SourceFiles="@(DocFileItem)" DestinationFiles="@(FinalDocFile->'$(RedDir)%(FileName)%(Extension)')" SkipUnchangedFiles="true" Condition="'$(_DocumentationFileProduced)'=='true'" />
+    <Copy SourceFiles="@(IntermediateSatelliteAssembliesWithTargetPath)" DestinationFiles="@(IntermediateSatelliteAssembliesWithTargetPath->'$(RedDir)%(Culture)\$(TargetName).resources.dll')" SkipUnchangedFiles="true" />
+  </Target>
 </Project>

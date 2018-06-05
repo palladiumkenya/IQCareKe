@@ -54,10 +54,11 @@ namespace DataAccess.Context
             return context.Set<Patient>().Find(id);
         }
 
-        //public override IQueryable<PatientVisit> Filter(System.Linq.Expressions.Expression<Func<PatientVisit, bool>> filter)
-       
-        //    return context.PatientVisit.Where(filter);
-        //}
+        public IQueryable<Patient> Filter(System.Linq.Expressions.Expression<Func<Patient, bool>> filter)
+        {
+
+            return context.PatientCore.Where(filter);
+        }
         public virtual List<PatientVisit> GetAllPatientVisits(int patientId)
         {
             var visits = context.Set<PatientVisit>().Where(v => v.PatientId == patientId).OrderByDescending(v1 => v1.VisitDate);

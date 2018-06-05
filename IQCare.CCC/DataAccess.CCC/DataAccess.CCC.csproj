@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DataAccess.CCC</RootNamespace>
     <AssemblyName>DataAccess.CCC</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,6 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DataAccess.Base, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -38,6 +40,10 @@
     <Reference Include="DataAccess.Context, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\IQCare.Web.CCC\Bin\DataAccess.Context.dll</HintPath>
+    </Reference>
+    <Reference Include="Entities.CCC, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Entities.CCC.dll</HintPath>
     </Reference>
     <Reference Include="Entities.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -68,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\LookupContext.cs" />
+    <Compile Include="Context\ViewContext.cs" />
     <Compile Include="Interface\assessment\IPatientPsychosocialCriteriaRepository.cs" />
     <Compile Include="Interface\assessment\IPatientSupportSystemCriteriaRepository.cs" />
     <Compile Include="Interface\Baseline\IINHProphylaxisRepository.cs" />
@@ -94,7 +101,15 @@
     <Compile Include="Interface\enrollment\IPatientEntryPointRepository.cs" />
     <Compile Include="Interface\enrollment\IPatientIdentifierRepository.cs" />
     <Compile Include="Interface\enrollment\IPatientReEnrollmentRepository.cs" />
+    <Compile Include="Interface\enrollment\IPersonIdentifierRepository.cs" />
     <Compile Include="Interface\enrollment\IServiceAreaIdentifiersRepository.cs" />
+    <Compile Include="Interface\Interoperability\IDrugPrescriptionMessageRepository.cs" />
+    <Compile Include="Interface\Interoperability\IInteropPlacerTypesRepository.cs" />
+    <Compile Include="Interface\Interoperability\IInteropPlacerValuesRepository.cs" />
+    <Compile Include="Interface\Interoperability\IPatientAppointmentMessageRepository.cs" />
+    <Compile Include="Interface\Interoperability\IPatientMessageRepository.cs" />
+    <Compile Include="Interface\Interoperability\IPatientVitalsMessageRepository.cs" />
+    <Compile Include="Interface\Interoperability\IViralLoadMessageRepository.cs" />
     <Compile Include="Interface\Lookup\IFacilityListRepository.cs" />
     <Compile Include="Interface\Lookup\ILookupFacilityStatisticsRepository.cs" />
     <Compile Include="Interface\Lookup\ILookupFacilityViralLoad.cs" />
@@ -111,6 +126,9 @@
     <Compile Include="Interface\Lookup\ITestingSummaryStatisticsRepository.cs" />
     <Compile Include="Interface\Patient\IBluecardAppointmentRepository.cs" />
     <Compile Include="Interface\Patient\IPatientCategorizationRepository.cs" />
+    <Compile Include="Interface\Pharmacy\IDrugRepository.cs" />
+    <Compile Include="Interface\Pharmacy\IPatientPharmacyDispenseRepository.cs" />
+    <Compile Include="Interface\Pharmacy\IPharmacyOrderRepository.cs" />
     <Compile Include="Interface\Screening\IPatientScreeningRepository.cs" />
     <Compile Include="Interface\Lookup\ILookupCounty.cs" />
     <Compile Include="Interface\Lookup\ILookupFacility.cs" />
@@ -138,6 +156,7 @@
     <Compile Include="Interface\Tb\IPatientIptOutcomeRepository.cs" />
     <Compile Include="Interface\Tb\IPatientIptRepository.cs" />
     <Compile Include="Interface\Tb\IPatientIptWorkupRepository.cs" />
+    <Compile Include="Interface\Triage\IPregnancyOutcomeLookupRepository.cs" />
     <Compile Include="Interface\visit\IPatientEncounterRepository.cs" />
     <Compile Include="Interface\person\IPatientMaritalStatusRepository.cs" />
     <Compile Include="Interface\person\IPatientOVCStatusRepository.cs" />
@@ -173,7 +192,15 @@
     <Compile Include="Repository\Enrollment\PatientEnrollmentRepository.cs" />
     <Compile Include="Repository\Enrollment\PatientEntrypointRepository.cs" />
     <Compile Include="Repository\Enrollment\PatientReEnrollmentRepository.cs" />
+    <Compile Include="Repository\Enrollment\PersonIdentifierRepository.cs" />
     <Compile Include="Repository\Enrollment\ServiceAreaIdentifiersRepository.cs" />
+    <Compile Include="Repository\Interoperability\DrugPrescriptionMessageRepository.cs" />
+    <Compile Include="Repository\Interoperability\InteropPlacerTypeRepository.cs" />
+    <Compile Include="Repository\Interoperability\InteropPlacerValuesRepository.cs" />
+    <Compile Include="Repository\Interoperability\PatientAppointmentMessageRepository.cs" />
+    <Compile Include="Repository\Interoperability\PatientMessageRepository.cs" />
+    <Compile Include="Repository\Interoperability\PatientVitalsMessageRepository.cs" />
+    <Compile Include="Repository\Interoperability\ViralLoadMessageRepository.cs" />
     <Compile Include="Repository\Lookup\FacilityListRepository.cs" />
     <Compile Include="Repository\Lookup\LookupFacilityRepository.cs" />
     <Compile Include="Repository\Lookup\LookupFacilityStatisticsRepository.cs" />
@@ -221,6 +248,9 @@
     <Compile Include="Interface\IUnitOfWork.cs" />
     <Compile Include="Context\GreencardContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\Pharmacy\DrugRepository.cs" />
+    <Compile Include="Repository\Pharmacy\PatientPharmacyDispenseRepository.cs" />
+    <Compile Include="Repository\Pharmacy\PharmacyOrderRepository.cs" />
     <Compile Include="Repository\Screening\PatientScreeningRepository.cs" />
     <Compile Include="Repository\Triage\PatientAdverseEventOutcomeRepository.cs" />
     <Compile Include="Repository\Triage\PatientFamilyPlanningMethodRepsotory.cs" />
@@ -232,6 +262,7 @@
     <Compile Include="Repository\Tb\PatientIptOutcomeRepository.cs" />
     <Compile Include="Repository\Tb\PatientIptRepository.cs" />
     <Compile Include="Repository\Tb\PatientIptWorkupRepository.cs" />
+    <Compile Include="Repository\Triage\PregnancyOutcomeLookupRepository.cs" />
     <Compile Include="Repository\UnitOfWork.cs" />
     <Compile Include="Repository\visit\PatientEncounterRepository.cs" />
     <Compile Include="Repository\Enrollment\PatientIdentifierRepository.cs" />
@@ -240,16 +271,6 @@
     <Compile Include="Repository\visit\PatientVisitRepository.cs" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <ProjectReference Include="..\Entities.CCC\Entities.CCC.csproj">
-      <Project>{bbcc4817-4e69-4722-a560-8988a795ce50}</Project>
-      <Name>Entities.CCC</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Interface.CCC\Interface.CCC.csproj">
-      <Project>{174B280E-08D7-4FE7-B080-3A017F0944CD}</Project>
-      <Name>Interface.CCC</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

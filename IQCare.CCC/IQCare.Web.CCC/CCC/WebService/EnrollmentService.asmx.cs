@@ -18,8 +18,7 @@ using System.Web.Services.Protocols;
 using Application.Presentation;
 using Entities.CCC.Baseline;
 using Interface.CCC.Baseline;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using IQCare.Events;
 using Convert = System.Convert;
 
 namespace IQCare.Web.CCC.WebService
@@ -123,21 +122,23 @@ namespace IQCare.Web.CCC.WebService
                 var personLookUp = new PersonLookUpManager();
                 var lookupLogic = new LookupLogic();
 
-                var identifiersObjects = JsonConvert.DeserializeObject<Dictionary<int, string>>(identifiersList);
+                //var identifiersObjects = JsonConvert.DeserializeObject<Dictionary<int, string>>(identifiersList);
+                var identifiersObjects = new JavaScriptSerializer().Deserialize<Dictionary<string, string>>(identifiersList);
                 String sDate = DateTime.Now.ToString();
                 DateTime datevalue = Convert.ToDateTime(sDate);
-                List<PatientLookup> isPersonEnrolled = patientLookUpManager.GetPatientByPersonId(PersonId);
+                PatientLookup isPersonEnrolled = patientLookUpManager.GetPatientByPersonId(PersonId);
+                dobPrecision = String.IsNullOrWhiteSpace(dobPrecision) ? "false" : "true";
 
                 foreach (var item in identifiersObjects)
                 {
-                    var identifiers = patientIdentifierManager.CheckIfIdentifierNumberIsUsed(item.Value, item.Key);
+                    var identifiers = patientIdentifierManager.CheckIfIdentifierNumberIsUsed(item.Value, Convert.ToInt32(item.Key));
                     if (identifiers.Count > 0)
                     {
                         foreach (var items in identifiers)
                         {
-                            if (isPersonEnrolled.Count > 0)
+                            if (isPersonEnrolled != null)
                             {
-                                if (items.PatientId == isPersonEnrolled[0].Id)
+                                if (items.PatientId == isPersonEnrolled.Id)
                                 {
 
                                 }
@@ -156,7 +157,7 @@ namespace IQCare.Web.CCC.WebService
                     }
                 }
 
-                if (isPersonEnrolled.Count == 0)
+                if (isPersonEnrolled != null)
                 {
                     List<PatientRegistrationLookup> patientsByPersonId = patientManager.GetPatientIdByPersonId(PersonId);
                     var patientIndex = datevalue.Year.ToString() + '-' + PersonId;
@@ -203,11 +204,9 @@ namespace IQCare.Web.CCC.WebService
                         patientMasterVisitId =
                             patientMasterVisitManager.AddPatientMasterVisit(patientId, userId, visitType);
                         //Enroll Patient to service
-                        patientEnrollmentId =
-                            patientEnrollmentManager.addPatientEnrollment(patientId, enrollmentDate, userId);
+                        patientEnrollmentId = patientEnrollmentManager.addPatientEnrollment(patientId, enrollmentDate, userId);
                         //Add enrollment entry point
-                        patientEntryPointId =
-                            patientEntryPointManager.addPatientEntryPoint(patientId, entryPointId, userId);
+                        patientEntryPointId = patientEntryPointManager.addPatientEntryPoint(patientId, entryPointId, userId);
 
                         //Get User Details to be used in BLUE CARD
                         var patient_person_details = personLookUp.GetPersonById(PersonId);
@@ -249,7 +248,7 @@ namespace IQCare.Web.CCC.WebService
 
                             foreach (var item in identifiersObjects)
                             {
-                                if (item.Key == 1)
+                                if (Convert.ToInt32(item.Key) == 1)
                                 {
                                     enrollmentBlueCardId = item.Value;
                                 }
@@ -287,10 +286,10 @@ namespace IQCare.Web.CCC.WebService
                             foreach (var item in identifiersObjects)
                             {
                                 patientIdentifierId = patientIdentifierManager.addPatientIdentifier(patientId,
-                                patientEnrollmentId, item.Key, item.Value);
+                                patientEnrollmentId, Convert.ToInt32(item.Key), item.Value, facilityId);
                                 
                                 var identifierManager = new IdentifierManager();
-                                var identifierList = identifierManager.GetIdentifiersById(item.Key);
+                                var identifierList = identifierManager.GetIdentifiersById(Convert.ToInt32(item.Key));
                                 var hivtesting = _hivTestingManager.GetAll().OrderByDescending(y => y.Id).FirstOrDefault(n => n.PersonId == PersonId);
                                 if (identifierList.Count > 0)
                                 {
@@ -333,33 +332,37 @@ namespace IQCare.Web.CCC.WebService
                 else
                 {
                     var patientLookManager = new PatientLookupManager();
-                    List<PatientLookup> patient = patientLookManager.GetPatientByPersonId(PersonId);
-
-                    if (patient.Count > 0)
+                   PatientLookup patient = patientLookManager.GetPatientByPersonId(PersonId);
+                    List<PatientLookup> pk = new List<PatientLookup>();
+                    pk.Add(patient);
+                    if (patient !=null)
                     {
-                        Session["PatientPK"] = patient[0].Id;
+                        Session["PatientPK"] = patient.Id;
 
                         List<PatientEntity> listPatient = new List<PatientEntity>();
-                        var entity = patient.ConvertAll(x => new PatientEntity { Id = x.Id, Active = x.Active, DateOfBirth = x.DateOfBirth, ptn_pk = x.ptn_pk, PatientType = x.PatientType, PatientIndex = x.PatientIndex, NationalId = x.NationalId, FacilityId = x.FacilityId });
+                        var entity = pk.ConvertAll(x=>  new PatientEntity { Id = x.Id, Active = x.Active, DateOfBirth = x.DateOfBirth,
+                            ptn_pk = x.ptn_pk, PatientType = x.PatientType, PatientIndex = x.PatientIndex, NationalId = x.NationalId,
+                            FacilityId = x.FacilityId });
+
                         var patientAuditData = AuditDataUtility.Serializer(entity);
 
                         PatientEntity updatePatient = new PatientEntity();
-                        updatePatient.ptn_pk = patient[0].ptn_pk;
-                        updatePatient.DateOfBirth = patient[0].DateOfBirth;
+                        updatePatient.ptn_pk = patient.ptn_pk;
+                        updatePatient.DateOfBirth = patient.DateOfBirth;
                         updatePatient.NationalId = nationalId;
-                        updatePatient.FacilityId = patient[0].FacilityId;
+                        updatePatient.FacilityId = patient.FacilityId;
 
 
                         //listPatient.Add(entity);
                         updatePatient.AuditData = patientAuditData;
                         //var enrollmentAuditData = AuditDataUtility.Serializer(patient);
 
-                        patientManager.UpdatePatient(updatePatient, patient[0].Id);
+                        patientManager.UpdatePatient(updatePatient, patient.Id);
 
-                        int patientMasterVisitId = patientMasterVisitManager.PatientMasterVisitCheckin(patient[0].Id, userId);
+                        int patientMasterVisitId = patientMasterVisitManager.PatientMasterVisitCheckin(patient.Id, userId);
                         Session["PatientMasterVisitId"] = patientMasterVisitId;
 
-                        List<PatientEntryPoint> entryPoints = patientEntryPointManager.GetPatientEntryPoints(patient[0].Id);
+                        List<PatientEntryPoint> entryPoints = patientEntryPointManager.GetPatientEntryPoints(patient.Id);
 
                         if (entryPoints.Count > 0)
                         {
@@ -373,7 +376,7 @@ namespace IQCare.Web.CCC.WebService
                         foreach (var item in identifiersObjects)
                         {
                             var identifiersByPatientId = patientIdentifierManager
-                                .GetPatientEntityIdentifiersByPatientId(patient[0].Id, item.Key);
+                                .GetPatientEntityIdentifiersByPatientId(patient.Id, Convert.ToInt32(item.Key));
 
                             if (identifiersByPatientId.Count > 0)
                             {
@@ -395,15 +398,15 @@ namespace IQCare.Web.CCC.WebService
                                     var entityIdentifierAuditData = AuditDataUtility.Serializer(identifiersByPatientId);
                                     entityIdentifier.IdentifierValue = item.Value;
                                     entityIdentifier.AuditData = entityIdentifierAuditData;
-                                    patientIdentifierManager.UpdatePatientIdentifier(entityIdentifier);
+                                    patientIdentifierManager.UpdatePatientIdentifier(entityIdentifier, facilityId);
                                 }
                             }
                             else
                             {
-                                patientEnrollmentId = patientEnrollmentManager.addPatientEnrollment(patient[0].Id, enrollmentDate, userId);
-                                patientEntryPointId = patientEntryPointManager.addPatientEntryPoint(patient[0].Id, entryPointId, userId);
-                                patientIdentifierId = patientIdentifierManager.addPatientIdentifier(patient[0].Id,
-                                    patientEnrollmentId, item.Key, item.Value);
+                                patientEnrollmentId = patientEnrollmentManager.addPatientEnrollment(patient.Id, enrollmentDate, userId);
+                                patientEntryPointId = patientEntryPointManager.addPatientEntryPoint(patient.Id, entryPointId, userId);
+                                patientIdentifierId = patientIdentifierManager.addPatientIdentifier(patient.Id,
+                                    patientEnrollmentId, Convert.ToInt32(item.Key), item.Value, facilityId);
                             }
                         }
                     }
@@ -536,7 +539,7 @@ namespace IQCare.Web.CCC.WebService
                             identifiers[0].AuditData = identifiersAuditData;
 
 
-                            patientIdentifier.UpdatePatientIdentifier(identifiers[0]);
+                            patientIdentifier.UpdatePatientIdentifier(identifiers[0], patient.FacilityId);
                         }
 
                         var enrollmentAuditData = AuditDataUtility.Serializer(entityEnrollments);
@@ -565,14 +568,22 @@ namespace IQCare.Web.CCC.WebService
         {
             try
             {
+                DateTime? emptyDateOfDeath = null;
+
                 PatientCareEndingManager careEndingManager = new PatientCareEndingManager();
                 PatientEnrollmentManager enrollmentManager = new PatientEnrollmentManager();
+                PatientLookupManager patientLookupManager = new PatientLookupManager();
+                
+                
+
 
                 patientId = int.Parse(Session["PatientPK"].ToString());
                 patientMasterVisitId = int.Parse(Session["PatientMasterVisitId"].ToString());
                 var enrollments = enrollmentManager.GetPatientEnrollmentByPatientId(patientId);
                 if (enrollments.Count > 0)
                     patientEnrollmentId = enrollments[0].Id;
+
+                var patient = patientLookupManager.GetPatientDetailSummary(patientId);
 
                 if (patientEnrollmentId > 0)
                 {
@@ -585,12 +596,17 @@ namespace IQCare.Web.CCC.WebService
                     }
                     else if (String.IsNullOrWhiteSpace(facilityOutTransfer) && String.IsNullOrWhiteSpace(dateOfDeath))
                     {
-                        careEndingManager.AddPatientCareEndingOther(patientId, patientMasterVisitId, patientEnrollmentId,
+                        careEndingManager.AddPatientCareEndingOther(patientId, patientMasterVisitId,
+                            patientEnrollmentId,
                             exitReason, DateTime.Parse(exitDate), GlobalObject.unescape(careEndingNotes));
                     }
                     else
+                        
+
                         careEndingManager.AddPatientCareEndingDeath(patientId, patientMasterVisitId, patientEnrollmentId,
-                        exitReason, DateTime.Parse(exitDate), DateTime.Parse(dateOfDeath),  GlobalObject.unescape(careEndingNotes));
+                        exitReason, DateTime.Parse(exitDate), (string.IsNullOrEmpty(dateOfDeath))?DateTime.Parse(dateOfDeath):emptyDateOfDeath ,  GlobalObject.unescape(careEndingNotes));
+
+
 
                     PatientEntityEnrollment entityEnrollment =
                         enrollmentManager.GetPatientEntityEnrollment(patientEnrollmentId);
@@ -600,6 +616,15 @@ namespace IQCare.Web.CCC.WebService
                     Session["PatientEditId"] = 0;
                     Session["PatientPK"] = 0;
                     Msg = "Patient has been successfully care ended";
+                    MessageEventArgs args = new MessageEventArgs()
+                    {
+                        PatientId = patientId,
+                        EntityId = patientEnrollmentId,
+                        MessageType = MessageType.UpdatedClientInformation,
+                        EventOccurred = "Patient CareEnded Identifier = ",
+                        FacilityId = patient.FacilityId
+                    };
+                    Publisher.RaiseEventAsync(this, args).ConfigureAwait(false);
                 }
                 else
                 {
@@ -653,12 +678,12 @@ namespace IQCare.Web.CCC.WebService
                 IdentifierManager ideManager = new IdentifierManager();
                 PersonLookUpManager personLookUp = new PersonLookUpManager();
 
-                List<PatientLookup> patientList = patientLookupManager.GetPatientByPersonId(PersonId);
+                PatientLookup patientList = patientLookupManager.GetPatientByPersonId(PersonId);
 
-                if (patientList.Count > 0)
+                if (patientList !=null)
                 {
-                    enrollmentDetails.DOB = String.Format("{0:dd-MMM-yyyy}", patientList[0].DateOfBirth);
-                    enrollmentDetails.DobPrecision = patientList[0].DobPrecision;
+                    enrollmentDetails.DOB = String.Format("{0:dd-MMM-yyyy}", patientList.DateOfBirth);
+                    enrollmentDetails.DobPrecision = patientList.DobPrecision;
                     if (enrollmentDetails.DOB == null)
                     {
                         PersonLookUp person = personLookUp.GetPersonById(PersonId);
@@ -668,11 +693,11 @@ namespace IQCare.Web.CCC.WebService
                             enrollmentDetails.DobPrecision = person.DobPrecision==null?false:Convert.ToBoolean(person.DobPrecision);
                         }                   
                     }
-                    enrollmentDetails.NationalId = patientList[0].NationalId;
-                    enrollmentDetails.EnrollmentDate = String.Format("{0:dd-MMM-yyyy}", patientList[0].EnrollmentDate);
+                    enrollmentDetails.NationalId = patientList.NationalId;
+                    enrollmentDetails.EnrollmentDate = String.Format("{0:dd-MMM-yyyy}", patientList.EnrollmentDate);
 
-                    var entryPoints  = entryPointManager.GetPatientEntryPoints(patientList[0].Id);
-                    var identifiers = identifierManager.GetAllPatientEntityIdentifiers(patientList[0].Id);
+                    var entryPoints  = entryPointManager.GetPatientEntryPoints(patientList.Id);
+                    var identifiers = identifierManager.GetAllPatientEntityIdentifiers(patientList.Id);
                     var dynamicFields = EnrollmentService.ServiceDynamicFields(1);
                     if (entryPoints.Count>0)
                     {

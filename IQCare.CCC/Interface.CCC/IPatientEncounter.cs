@@ -25,6 +25,10 @@ namespace Interface.CCC
         ZScoresParameters GetZScoreValues(string PatientID, string gender, string height);
         DataTable getPatientEncounterComplaints(string PatientMasterVisitID, string PatientID);
         DataTable getPatientWorkPlan(string PatientID);
+        DataSet getPatientDSDParameters(string PatientID);
+        DataTable isVisitScheduled(string PatientID);
+        DataTable patientCategorizationAtEnrollment(string PatientID);
+        DataTable GenerateExcelDifferentiatedCare(string category);
 
 
 

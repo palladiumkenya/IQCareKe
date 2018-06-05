@@ -3,6 +3,7 @@ using Entities.CCC.Enrollment;
 using Interface.CCC.Enrollment;
 using System;
 using System.Collections.Generic;
+using IQCare.CCC.UILogic.Visit;
 
 namespace IQCare.CCC.UILogic.Enrollment
 {
@@ -13,6 +14,8 @@ namespace IQCare.CCC.UILogic.Enrollment
         public int addPatientEnrollment(int patientId, string enrollmentDate, int userId)
         {
             int returnValue;
+           // int result;
+            PatientEncounterManager patientEncounterManager=new PatientEncounterManager();
             try
             {
                 PatientEntityEnrollment patientEnrollment = new PatientEntityEnrollment
@@ -30,7 +33,7 @@ namespace IQCare.CCC.UILogic.Enrollment
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception(ex.Message);
             }
         }
 
@@ -43,7 +46,7 @@ namespace IQCare.CCC.UILogic.Enrollment
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                throw;
+                throw new Exception(e.Message);
             }
         }
 

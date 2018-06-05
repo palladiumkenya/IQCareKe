@@ -2,8 +2,10 @@
 using Entities.CCC.Appointment;
 using Entities.CCC.Lookup;
 using Entities.CCC.Triage;
+using Entities.CCC.Visit;
 using Interface.CCC.Lookup;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Services;
@@ -16,12 +18,12 @@ using IQCare.CCC.UILogic.Baseline;
 using IQCare.CCC.UILogic.Screening;
 using Microsoft.JScript;
 using Convert = System.Convert;
-using Newtonsoft.Json;
 using System.Web;
 using System.Web.Script.Serialization;
 using Entities.CCC.Encounter;
 using Entities.CCC.Enrollment;
 using IQCare.CCC.UILogic.Enrollment;
+using IQCare.CCC.UILogic.Visit;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -55,13 +57,16 @@ namespace IQCare.Web.CCC.WebService
         private string Msg { get; set; }
         private int Result { get; set; }
 
-        [WebMethod]
+        [WebMethod(EnableSession = true)]
         public string AddpatientVitals(int patientId, int bpSystolic, int bpDiastolic, decimal heartRate, decimal height,
             decimal muac, int patientMasterVisitId, decimal respiratoryRate, decimal spo2, decimal tempreture,
             decimal weight, decimal bmi, decimal headCircumference,string bmiz,string weightForAge,string weightForHeight,DateTime visitDate)
         {
             try
             {
+                PatientEncounterManager patientEncounterManager=new PatientEncounterManager();
+                int facilityId = Convert.ToInt32(Session["AppPosID"]);
+               
                 PatientVital patientVital = new PatientVital()
                 {
                     PatientId = patientId,
@@ -83,10 +88,15 @@ namespace IQCare.Web.CCC.WebService
                     WeightForHeight = weightForHeight,
                 };
                 var vital = new PatientVitalsManager();
-                Result = vital.AddPatientVitals(patientVital);
+                Result = vital.AddPatientVitals(patientVital, facilityId);
+                int userId = Convert.ToInt32(Session["AppUserId"]);
+
                 if (Result > 0)
                 {
-                    Msg = "Patient Vitals Added Successfully!";
+                    Result = patientEncounterManager.AddpatientEncounter(patientId,patientMasterVisitId,patientEncounterManager.GetPatientEncounterId("EncounterType", "Triage-encounter".ToLower()),204, userId);
+                    
+                    if (Result > 0) { Msg = "Patient Vitals Added Successfully!"; }
+
                 }
             }
             catch (Exception e)
@@ -113,8 +123,9 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod]
-        public string AddPatientAppointment(int patientId, int patientMasterVisitId, DateTime appointmentDate, string description, int reasonId, int serviceAreaId, int statusId, int differentiatedCareId)
+        public string AddPatientAppointment(int patientId, int patientMasterVisitId, DateTime appointmentDate, string description, int reasonId, int serviceAreaId, int statusId, int differentiatedCareId, int userId)
         {
+            
             PatientAppointment patientAppointment = new PatientAppointment()
             {
                 PatientId = patientId,
@@ -125,6 +136,8 @@ namespace IQCare.Web.CCC.WebService
                 ReasonId = reasonId,
                 ServiceAreaId = serviceAreaId,
                 StatusId = statusId,
+                CreatedBy = userId,
+                CreateDate = DateTime.Now
             };
             try
             {
@@ -149,7 +162,9 @@ namespace IQCare.Web.CCC.WebService
             DateTime? linkageDate;
             bool dobPrecision;
 
-            FamilyMembers[] familyMembrs = JsonConvert.DeserializeObject<FamilyMembers[]>(familyMembers);
+            //FamilyMembers[] familyMembrs = JsonConvert.DeserializeObject<FamilyMembers[]>(familyMembers);
+            FamilyMembers[] familyMembrs = new JavaScriptSerializer().Deserialize<FamilyMembers[]>(familyMembers);
+
             int count = familyMembrs.Length;
             for(int i=0; i < count; i++)
             {
@@ -365,9 +380,10 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod]
-        public List<PatientAppointmentDisplay> GetPatientAppointments(string patientId)
+        public IEnumerable<PatientAppointmentDisplay> GetPatientAppointments(string patientId)
         {
             List<PatientAppointmentDisplay> appointmentsDisplay = new List<PatientAppointmentDisplay>();
+            IEnumerable<PatientAppointmentDisplay> listAppointments = new List<PatientAppointmentDisplay>();
             var appointments = new List<PatientAppointment>();
             var bluecardAppointments = new List<BlueCardAppointment>();
             try
@@ -387,14 +403,15 @@ namespace IQCare.Web.CCC.WebService
                     PatientAppointmentDisplay appointmentDisplay = MapBluecardappointments(appointment);
                     appointmentsDisplay.Add(appointmentDisplay);
                 }
-                appointmentsDisplay.OrderByDescending(n => n.AppointmentDate);
+
+                listAppointments = appointmentsDisplay.OrderByDescending(n => n.AppointmentDate);
 
             }
             catch (Exception e)
             {
                 Msg = e.Message;
             }
-            return appointmentsDisplay;
+            return listAppointments;
         }
 
         [WebMethod]

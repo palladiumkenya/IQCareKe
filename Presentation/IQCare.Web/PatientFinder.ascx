@@ -62,21 +62,21 @@
                                         Last Name:</label>
                                     <asp:TextBox ID="txtlastname" class="form-control input-sm" runat="server" MaxLength="20"></asp:TextBox>
                                     <ajaxToolkit:FilteredTextBoxExtender ID="FTELName" runat="server" FilterType="UppercaseLetters, LowercaseLetters,Custom"
-                                        TargetControlID="txtlastname" ValidChars="-,.@*' " />
+                                        TargetControlID="txtlastname" ValidChars="- " />
                                 </div>
                                 <div class="form-group col-md-10">
                                     <label class="control-label pull-left" runat="server" id="lblmiddlename" for="FTEMName">
                                         Middle Name:</label>
                                     <asp:TextBox ID="txtmiddlename" CssClass="form-control input-sm" runat="server" MaxLength="20"></asp:TextBox>
                                     <ajaxToolkit:FilteredTextBoxExtender ID="FTEMName" runat="server" FilterType="UppercaseLetters, LowercaseLetters,Custom"
-                                        TargetControlID="txtmiddlename" ValidChars="-,.@*' " />
+                                        TargetControlID="txtmiddlename" ValidChars="- " />
                                 </div>
                                 <div class="form-group col-md-10">
                                     <label for="FTEFName" class="control-label pull-left">
                                         First Name:</label>
                                     <asp:TextBox ID="txtfirstname" CssClass="form-control input-sm" runat="server" MaxLength="20"></asp:TextBox>
                                     <ajaxToolkit:FilteredTextBoxExtender ID="FTEFName" runat="server" FilterType="UppercaseLetters, LowercaseLetters,Custom"
-                                        TargetControlID="txtfirstname" ValidChars="-,.@*' " />
+                                        TargetControlID="txtfirstname" ValidChars="- " />
                                 </div>
                                 <!-- .form-group-->
                             </div>

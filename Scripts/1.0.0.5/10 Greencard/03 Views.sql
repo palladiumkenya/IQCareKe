@@ -1,18 +1,18 @@
 ﻿ALTER VIEW [dbo].[PatientTreatmentTrackerView]
 AS
 SELECT  a.Id, a.PatientId, p.ptn_pk, a.ServiceAreaId, a.PatientMasterVisitId, a.RegimenStartDate, a.RegimenId,
-    (SELECT        Name + '(' + DisplayName + ')' AS Expr1
-    FROM            dbo.LookupItem
-    WHERE        (Id = a.RegimenId)) AS Regimen, a.RegimenLineId,
-    (SELECT        Name
-    FROM            dbo.LookupItem AS LookupItem_3
-    WHERE        (Id = a.RegimenLineId)) AS RegimenLine, a.DrugId, a.RegimenStatusDate, a.TreatmentStatusId,
-    (SELECT        Name
-    FROM            dbo.LookupItem AS LookupItem_2
-    WHERE        (Id = a.TreatmentStatusId)) AS TreatmentStatus, a.ParentId, a.CreateBy AS CreatedBy, a.CreateDate, a.DeleteFlag, a.TreatmentStatusReasonId,
-    (SELECT        Name
-    FROM            dbo.LookupItem AS LookupItem_1
-    WHERE        (Id = a.TreatmentStatusReasonId)) AS TreatmentReason, dbo.ord_PatientPharmacyOrder.DispensedByDate, (SELECT top 1 isnull(M.visitDate,M.Start) FROM PATIENTMASTERVISIT M WHERE M.PatientId=a.PatientId) as VisitDate
+	(SELECT        Name + '(' + DisplayName + ')' AS Expr1
+	FROM            dbo.LookupItem
+	WHERE        (Id = a.RegimenId)) AS Regimen, a.RegimenLineId,
+	(SELECT        Name
+	FROM            dbo.LookupItem AS LookupItem_3
+	WHERE        (Id = a.RegimenLineId)) AS RegimenLine, a.DrugId, a.RegimenStatusDate, a.TreatmentStatusId,
+	(SELECT        Name
+	FROM            dbo.LookupItem AS LookupItem_2
+	WHERE        (Id = a.TreatmentStatusId)) AS TreatmentStatus, a.ParentId, a.CreateBy AS CreatedBy, a.CreateDate, a.DeleteFlag, a.TreatmentStatusReasonId,
+	(SELECT        Name
+	FROM            dbo.LookupItem AS LookupItem_1
+	WHERE        (Id = a.TreatmentStatusReasonId)) AS TreatmentReason, dbo.ord_PatientPharmacyOrder.DispensedByDate, (SELECT top 1 isnull(M.visitDate,M.Start) FROM PATIENTMASTERVISIT M WHERE M.PatientId=a.PatientId) as VisitDate
 FROM            dbo.ARVTreatmentTracker AS a INNER JOIN
 dbo.Patient AS p ON p.Id = a.PatientId INNER JOIN
 dbo.ord_PatientPharmacyOrder ON a.PatientMasterVisitId = dbo.ord_PatientPharmacyOrder.PatientMasterVisitId

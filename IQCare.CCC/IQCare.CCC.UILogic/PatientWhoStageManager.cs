@@ -55,5 +55,17 @@ namespace IQCare.CCC.UILogic
                 throw new Exception(e.Message);
             }
         }
+
+        public PatientWhoStage GetWhoStageById(int entityId)
+        {
+            try
+            {
+                return _mgr.GetWhoStageById(entityId);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

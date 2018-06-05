@@ -12,9 +12,10 @@ using DataAccess.Context;
 using Entities.CCC.Appointment;
 using Entities.CCC.Tb;
 using Entities.PatientCore;
-using Interface.CCC.Encounter;
 using Entities.CCC.Lookup;
 using Entities.CCC.Assessment;
+using Entities.CCC.Interoperability;
+using Entities.CCC.pharmacy;
 
 namespace DataAccess.CCC.Context
 {
@@ -27,7 +28,7 @@ namespace DataAccess.CCC.Context
             Configuration.LazyLoadingEnabled = false;
             Database.SetInitializer<GreencardContext>(null);
         }
-
+        public DbSet<PatientPersonViewEntity> PatientPersonViewEntities { get; set; }
 
         public DbSet<PatientEntity> Patients { get; set; }
         public DbSet<PersonContact> PatientContacts { get; set; }
@@ -44,6 +45,7 @@ namespace DataAccess.CCC.Context
         public DbSet<PatientReEnrollment> ReEnrollments { get; set; }
         public DbSet<HivReConfirmatoryTest> HivReConfirmatoryTests { get; set; }
         public DbSet<PatientArtDistribution> PatientArtDistributions { get; set; }
+        public DbSet<PersonIdentifier> PersonIdentifiers { get; set; }
 
         //Screening
         public DbSet<PatientScreening> PatientScreenings { get; set; }
@@ -127,6 +129,13 @@ namespace DataAccess.CCC.Context
         // Patient Assessment| ART Treatment Preparation
         public DbSet<PatientPsychoscialCriteria> PatientPsychosocialCriteria { get; set; }
         public DbSet<PatientSupportSystemCriteria> PatientSupportSystemCriteria { get; set; }
+        //Interop
+        public DbSet<InteropPlacerType> InteropPlacerTypes { get; set; }
+        public DbSet<InteropPlacerValues> InteropPlacerValues { get; set; }
 
+        //Pharmacy
+        public DbSet<PatientPharmacyDispense> PatientPharmacyDispenses { get; set; }
+        public DbSet<PharmacyOrder> PharmacyOrders { get; set; }
+        public DbSet<Drug> DrugLists { get; set; }
     }
 }

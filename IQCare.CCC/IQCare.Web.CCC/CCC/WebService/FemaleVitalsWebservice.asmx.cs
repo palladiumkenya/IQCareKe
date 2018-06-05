@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Script.Serialization;
 using System.Web.Services;
 using Entities.CCC.Triage;
-using Newtonsoft.Json;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -108,7 +108,8 @@ namespace IQCare.Web.CCC.WebService
 
                 var fpMethod = new PatientFamilyPlanningMethodManager();
                 int familyPlanningStatus = Convert.ToInt32(Session["FamilyPlanningStatus"].ToString());
-                var familyPlanningMethods = JsonConvert.DeserializeObject<IEnumerable<object>>(PatientFPId);
+                //var familyPlanningMethods = JsonConvert.DeserializeObject<IEnumerable<object>>(PatientFPId);
+                var familyPlanningMethods = new JavaScriptSerializer().Deserialize<IEnumerable<object>>(PatientFPId);
 
                 int count = familyPlanningMethods.Count();
                 if (count > 0)

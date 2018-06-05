@@ -348,7 +348,8 @@ namespace IQCare.Web.Clinical
                                 TreeNode theFrmRoot = new TreeNode();
                                 //theFrmRoot.NavigateUrl = "";
                                 theFrmRoot.Text = theDR["FormName"].ToString() + " ( " + ((DateTime)theDR["TranDate"]).ToString(Session["AppDateFormat"].ToString()) + " )";
-                                if (Convert.ToString(Session["TechnicalAreaId"]) == Convert.ToString(theDR["Module"]) || theDR["FormName"].ToString() == "Patient Registration")
+
+                                if (Convert.ToString(Session["TechnicalAreaId"]) == Convert.ToString(theDR["Module"]))
                                 {
                                     if (DQ != "")
                                     {
@@ -361,15 +362,16 @@ namespace IQCare.Web.Clinical
                                 }
                                 else
                                 {
-                                    if (Convert.ToInt32(theDR["Module"]) > 2)
-                                    {
-                                        theFrmRoot.ImageUrl = "~/Images/lock.jpg";
-                                        theFrmRoot.ImageToolTip = "You are Not Authorized to Access this Functionality";
-                                        theFrmRoot.SelectAction = TreeNodeSelectAction.None;
+                                    //if (Convert.ToInt32(theDR["Module"]) > 2)
+                                    //{
+                                    //    //theFrmRoot.ImageUrl = "~/Images/lock.jpg";
+                                    //    //theFrmRoot.ImageToolTip = "You are Not Authorized to Access this Functionality";
+                                    //    //theFrmRoot.SelectAction = TreeNodeSelectAction.None;
 
 
-                                    }
-                                    else if (Convert.ToString(Session["TechnicalAreaId"]) == Convert.ToString(theDR["Module"]) || (theDR["FormName"].ToString() == "Paediatric Pharmacy"))
+                                    //}
+                                    //else 
+                                    if ((theDR["FormName"].ToString() == "Paediatric Pharmacy"))
                                     {
                                         if (Session["Paperless"].ToString() == "1")
                                         {
@@ -377,13 +379,16 @@ namespace IQCare.Web.Clinical
                                             {
                                                 theFrmRoot.ImageUrl = "~/images/caution.png";
                                             }
+                                            else
+                                                theFrmRoot.ImageUrl = "~/images/15px-Yes_check.svg.png";
 
                                         }
                                         else
                                         {
                                             if (DQ != "")
                                             {
-                                                //theFrmRoot.NavigateUrl = "~/./Pharmacy/frmPharmacy_Paediatric.aspx?name=Delete";
+
+                                                //theFrmRoot.NavigateUrl = "~/./Laboratory/frmLabOrder.aspx?name=Delete";
                                                 theFrmRoot.ImageUrl = "~/images/15px-Yes_check.svg.png";
                                             }
                                             else
@@ -393,8 +398,37 @@ namespace IQCare.Web.Clinical
                                         }
 
                                     }
+                                   
+                                    else if ((theDR["FormName"].ToString() == "Pharmacy"))
+                                    {
 
-                                    else if (Convert.ToString(Session["TechnicalAreaId"]) == Convert.ToString(theDR["Module"]) || (theDR["FormName"].ToString() == "Laboratory"))
+                                        
+                                                if (Session["Paperless"].ToString() == "1")
+                                                {
+                                                    if (theDR["CAUTION"].ToString() == "1")
+                                                    {
+                                                        theFrmRoot.ImageUrl = "~/images/caution.png";
+                                                    }
+                                                    else
+                                                        theFrmRoot.ImageUrl = "~/images/15px-Yes_check.svg.png";
+
+                                                }
+                                                else
+                                                {
+                                                    if (DQ != "")
+                                                    {
+                                                        //theFrmRoot.NavigateUrl = "~/./Pharmacy/frmPharmacy_Adult.aspx?name=Delete";
+                                                        theFrmRoot.ImageUrl = "~/images/15px-Yes_check.svg.png";
+                                                    }
+                                                    else
+                                                    {
+                                                        theFrmRoot.ImageUrl = "~/Images/No_16x.ico";
+                                                    }
+                                                }
+                                            
+                                        
+                                    }
+                                    else if ( (theDR["FormName"].ToString() == "Laboratory"))
                                     {
 
                                         if ((theDR["FormName"].ToString() == "Laboratory") && (Convert.ToString(Session["TechnicalAreaId"]) != "0") && (Convert.ToInt32(Session["TechnicalAreaId"]) > 2))
@@ -431,58 +465,7 @@ namespace IQCare.Web.Clinical
                                         }
                                     }
 
-                                    else if (Convert.ToString(Session["TechnicalAreaId"]) == Convert.ToString(theDR["Module"]) || (theDR["FormName"].ToString() == "Pharmacy"))
-                                    {
-
-                                        if ((theDR["FormName"].ToString() == "Pharmacy") && (Convert.ToInt32(Session["TechnicalAreaId"]) > 2))
-                                        {
-                                            theFrmRoot.ImageUrl = "~/Images/lock.jpg";
-                                            theFrmRoot.ImageToolTip = "You are Not Authorized to Access this Functionality";
-                                            theFrmRoot.SelectAction = TreeNodeSelectAction.None;
-                                        }
-                                        else
-                                        {
-                                            if ((Convert.ToString(theDR["ID"]) == "222") && (Convert.ToString(Session["TechnicalAreaId"]) == "1"))
-                                            {
-                                                theFrmRoot.ImageUrl = "~/Images/lock.jpg";
-                                                theFrmRoot.ImageToolTip = "You are Not Authorized to Access this Functionality";
-                                                theFrmRoot.SelectAction = TreeNodeSelectAction.None;
-
-                                            }
-                                            else if ((Convert.ToString(theDR["ID"]) == "223") && (Convert.ToString(Session["TechnicalAreaId"]) == "2"))
-                                            {
-                                                theFrmRoot.ImageUrl = "~/Images/lock.jpg";
-                                                theFrmRoot.ImageToolTip = "You are Not Authorized to Access this Functionality";
-                                                theFrmRoot.SelectAction = TreeNodeSelectAction.None;
-
-                                            }
-                                            else
-                                            {
-                                                if (Session["Paperless"].ToString() == "1")
-                                                {
-                                                    if (theDR["CAUTION"].ToString() == "1")
-                                                    {
-                                                        theFrmRoot.ImageUrl = "~/images/caution.png";
-                                                    }
-                                                    else
-                                                        theFrmRoot.ImageUrl = "~/images/15px-Yes_check.svg.png";
-
-                                                }
-                                                else
-                                                {
-                                                    if (DQ != "")
-                                                    {
-                                                        //theFrmRoot.NavigateUrl = "~/./Pharmacy/frmPharmacy_Adult.aspx?name=Delete";
-                                                        theFrmRoot.ImageUrl = "~/images/15px-Yes_check.svg.png";
-                                                    }
-                                                    else
-                                                    {
-                                                        theFrmRoot.ImageUrl = "~/Images/No_16x.ico";
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
+                                    
 
                                     else if (Convert.ToString(Session["TechnicalAreaId"]) == Convert.ToString(theDR["Module"]) || (theDR["FormName"].ToString() == "ART Follow-Up"))
                                     {
@@ -561,7 +544,7 @@ namespace IQCare.Web.Clinical
 
                                     }
 
-                                    else if (Convert.ToString(Session["TechnicalAreaId"]) == Convert.ToString(theDR["Module"]) || (theDR["FormName"].ToString() == "Care Tracking"))
+                                    else if (Convert.ToString(Session["TechnicalAreaId"]) == Convert.ToString(theDR["Module"]) && (theDR["FormName"].ToString() == "Care Tracking"))
                                     {
 
                                         if (Convert.ToString(Session["TechnicalAreaId"]) == "2")
@@ -578,46 +561,20 @@ namespace IQCare.Web.Clinical
                                                 theFrmRoot.ImageUrl = "~/Images/No_16x.ico";
                                             }
                                         }
-                                        else
-                                        {
+                                        //else
+                                        //{
 
-                                            theFrmRoot.ImageUrl = "~/Images/lock.jpg";
-                                            theFrmRoot.ImageToolTip = "You are Not Authorized to Access this Functionality";
-                                            theFrmRoot.SelectAction = TreeNodeSelectAction.None;
-
-
-                                        }
+                                        //    theFrmRoot.ImageUrl = "~/Images/lock.jpg";
+                                        //    theFrmRoot.ImageToolTip = "You are Not Authorized to Access this Functionality";
+                                        //    theFrmRoot.SelectAction = TreeNodeSelectAction.None;
 
 
-                                    }
+                                        //}
 
-                                    else if (Convert.ToString(Session["TechnicalAreaId"]) == Convert.ToString(theDR["Module"]) || (theDR["FormName"].ToString() == "Paediatric Pharmacy"))
-                                    {
-                                        if (Session["Paperless"].ToString() == "1")
-                                        {
-                                            if (theDR["CAUTION"].ToString() == "1")
-                                            {
-                                                theFrmRoot.ImageUrl = "~/images/caution.png";
-                                            }
-                                            else
-                                                theFrmRoot.ImageUrl = "~/images/15px-Yes_check.svg.png";
-
-                                        }
-                                        else
-                                        {
-                                            if (DQ != "")
-                                            {
-
-                                                //theFrmRoot.NavigateUrl = "~/./Pharmacy/frmPharmacy_Paediatric.aspx?name=Delete";
-                                                theFrmRoot.ImageUrl = "~/images/15px-Yes_check.svg.png";
-                                            }
-                                            else
-                                            {
-                                                theFrmRoot.ImageUrl = "~/Images/No_16x.ico";
-                                            }
-                                        }
 
                                     }
+
+                                   
 
                                     else if (Convert.ToString(Session["TechnicalAreaId"]) == Convert.ToString(theDR["Module"]) || (theDR["FormName"].ToString() == "Initial Evaluation"))
                                     {

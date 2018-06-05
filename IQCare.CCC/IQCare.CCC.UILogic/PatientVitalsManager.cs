@@ -1,14 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using Application.Presentation;
 using Entities.CCC.Triage;
 using Interface.CCC;
+using IQCare.Events;
 
 namespace IQCare.CCC.UILogic
 {
     public class PatientVitalsManager 
     {
         IPatientVitals _vitals = (IPatientVitals)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientVitals, BusinessProcess.CCC");
-        public int AddPatientVitals(PatientVital p)
+        public int AddPatientVitals(PatientVital p, int facilityId)
         {
             PatientVital patientVital = new PatientVital()
             {
@@ -31,7 +33,23 @@ namespace IQCare.CCC.UILogic
                 VisitDate = p.VisitDate
                
             };
-            return _vitals.AddPatientVitals(patientVital);
+            int vitalsId = _vitals.AddPatientVitals(patientVital);
+            if (vitalsId > 1)
+            {
+                MessageEventArgs args = new MessageEventArgs()
+                {
+                    PatientId = p.PatientId,
+                    PatientMasterVisitId = p.PatientMasterVisitId,
+                    EntityId = vitalsId,
+                    MessageType = MessageType.ObservationResult,
+                    EventOccurred = "Observation Result Unsolicited = ",
+                    FacilityId = facilityId,
+                    ObservationType = ObservationType.Vitals
+                };
+
+                Publisher.RaiseEventAsync(this, args).ConfigureAwait(false);
+            }
+            return vitalsId;
         }
 
         public PatientVital GetPatientVitals(int id)
@@ -70,6 +88,12 @@ namespace IQCare.CCC.UILogic
         public PatientVital GetByPatientId(int patientId)
         {
             var patientVitals = _vitals.GetByPatientId(patientId);
+            return patientVitals;
+        }
+
+        public PatientVital GetByPatientVisitId(int patientVisitId)
+        {
+            var patientVitals = _vitals.GetByPatientVisitId(patientVisitId);
             return patientVitals;
         }
 

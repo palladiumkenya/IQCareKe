@@ -140,10 +140,10 @@ namespace BusinessProcess.CCC.visit
                     patientVisit.Status = 2;
                     patientVisit.End = DateTime.Now;
                     patientVisit.Active = true;
-                    patientVisit.VisitDate = visitDate;
-                    patientVisit.VisitScheduled = visitSchedule;
-                    patientVisit.VisitBy = visitBy;
-                    patientVisit.VisitType = visitType;
+                    //patientVisit.VisitDate = visitDate;
+                    //patientVisit.VisitScheduled = visitSchedule;
+                    //patientVisit.VisitBy = visitBy;
+                    //patientVisit.VisitType = visitType;
 
                     unitOfWork.PatientMasterVisitRepository.Update(patientVisit);
                     Result = unitOfWork.Complete();
@@ -167,10 +167,10 @@ namespace BusinessProcess.CCC.visit
                         item.Status = 3;
                         item.End = DateTime.Now;
                         item.Active = true;
-                        item.VisitDate = null;
-                        item.VisitScheduled = null;
-                        item.VisitBy = null;
-                        item.VisitType = null;
+                       // item.VisitDate = null;
+                       // item.VisitScheduled = null;
+                       // item.VisitBy = null;
+                       // item.VisitType = null;
 
                         unitOfWork.PatientMasterVisitRepository.Update(item);
 
@@ -217,6 +217,27 @@ namespace BusinessProcess.CCC.visit
                         .FindBy(x => x.PatientId == patientId && (x.VisitType == null || x.VisitType != visitType)).ToList();
                 unitOfWork.Dispose();
                 return patientMasterVisits;
+            }
+        }
+
+        public PatientMasterVisit GetLastPatientVisit(int patientId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                PatientMasterVisit visit = unitOfWork.PatientMasterVisitRepository.FindBy(x => x.PatientId == patientId)
+                    .OrderByDescending(y => y.Id).FirstOrDefault();
+                unitOfWork.Dispose();
+                return visit;
+            }
+        }
+
+        public PatientMasterVisit GetVisitById(int id)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                PatientMasterVisit visit = unitOfWork.PatientMasterVisitRepository.GetById(id);
+                unitOfWork.Dispose();
+                return visit;
             }
         }
     }

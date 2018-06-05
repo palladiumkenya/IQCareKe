@@ -1,4 +1,5 @@
 ﻿using Application.Presentation;
+using Entities.CCC.Encounter;
 using Entities.CCC.Lookup;
 using Entities.CCC.Triage;
 using Interface.CCC.Lookup;
@@ -6,6 +7,7 @@ using IQCare.CCC.UILogic;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Web;
 using System.Web.UI.WebControls;
 
@@ -39,7 +41,12 @@ namespace IQCare.Web.CCC.UC
 
         protected int PmVisitId
         {
-            get { return Convert.ToInt32(Session["patientMasterVisitId"]); }
+            get { return Convert.ToInt32(Request.QueryString["visitId"] != null ? Request.QueryString["visitId"] : Session["patientMasterVisitId"]); }
+        }
+
+        protected string DateOfEnrollment
+        {
+            get { return Session["DateOfEnrollment"].ToString(); }
         }
 
 
@@ -51,11 +58,21 @@ namespace IQCare.Web.CCC.UC
         {
             age = Convert.ToInt32(HttpContext.Current.Session["Age"]);
             PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
-            PatientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientMasterVisitId"]);
+            PatientMasterVisitId = Convert.ToInt32(Request.QueryString["visitId"] != null ? Request.QueryString["visitId"] : HttpContext.Current.Session["PatientMasterVisitId"]);
             if (Request.QueryString["visitId"] != null)
             {
-                Session["PatientMasterVisitId"] = Request.QueryString["visitId"].ToString();
+                Session["ExistingRecordPatientMasterVisitID"] = Request.QueryString["visitId"].ToString();
                 PatientEncounterExists = Convert.ToInt32(Request.QueryString["visitId"].ToString());
+            }
+            else
+            {
+                Session["ExistingRecordPatientMasterVisitID"] = "0";
+
+                ///////Check if visit is scheduled
+                if (PEL.isVisitScheduled(HttpContext.Current.Session["PatientPK"].ToString()) > 0)
+                    vsYes.Checked = true;
+                else
+                    vsNo.Checked = true;
             }
 
             // Get Gender
@@ -153,25 +170,30 @@ namespace IQCare.Web.CCC.UC
                 }
 
 
-                if (Convert.ToInt32(Session["PatientMasterVisitId"]) > 0)
-                    loadPatientEncounter();
-
-            }
+                //if (Convert.ToInt32(Session["PatientMasterVisitId"]) > 0)
+                loadPatientEncounter();
+                
+            }   
         }
 
         private void loadPatientEncounter()
         {
             Entities.CCC.Encounter.PatientEncounter.PresentingComplaintsEntity pce = new Entities.CCC.Encounter.PatientEncounter.PresentingComplaintsEntity();
-            pce = PEL.loadPatientEncounter(Session["PatientMasterVisitId"].ToString(), Session["PatientPK"].ToString());
+            pce = PEL.loadPatientEncounter(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString(), Session["PatientPK"].ToString());
 
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
 
-            DataTable theDT = patientEncounter.loadPatientEncounterPhysicalExam(Session["PatientMasterVisitID"].ToString(), Session["PatientPK"].ToString());
-            DataTable theDTAdverse = patientEncounter.loadPatientEncounterAdverseEvents(Session["PatientMasterVisitID"].ToString(), Session["PatientPK"].ToString());
+            DataTable theDT = patientEncounter.loadPatientEncounterPhysicalExam(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString(), Session["PatientPK"].ToString());
+            DataTable theDTAdverse = patientEncounter.loadPatientEncounterAdverseEvents(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString(), Session["PatientPK"].ToString());
             bool isOnEdit = false;
 
             /////PRESENTING COMPLAINTS
             visitdateval = pce.visitDate;
+            //if (pce.visitDate != "")
+            //    visitdateval = pce.visitDate;
+            //else
+            //    visitdateval = "";
+
             LMPval = pce.lmp;
             EDDval = pce.edd;
             nxtAppDateval = pce.nextAppointmentDate;
@@ -197,6 +219,27 @@ namespace IQCare.Web.CCC.UC
             tbInfected.SelectedValue = pce.OnAntiTB;
             onIpt.SelectedValue = pce.OnIPT;
             EverBeenOnIpt.SelectedValue = pce.EverBeenOnIPT;
+
+            cough.SelectedValue = pce.Cough;
+            fever.SelectedValue = pce.Fever;
+            weightLoss.SelectedValue = pce.NoticeableWeightLoss;
+            nightSweats.SelectedValue = pce.NightSweats;
+
+            sputum.SelectedValue = pce.SputumSmear;
+            geneXpert.SelectedValue = pce.geneXpert;
+            chest.SelectedValue = pce.ChestXray;
+            antiTb.SelectedValue = pce.startAntiTB;
+            contactsInvitation.SelectedValue = pce.InvitationOfContacts;
+            iptEvaluation.SelectedValue = pce.EvaluatedForIPT;
+
+            IptCw.IPTurineColour.SelectedValue = pce.YellowColouredUrine;
+            IptCw.IPTNumbness.SelectedValue = pce.Numbness;
+            IptCw.IPTYellowEyes.SelectedValue = pce.YellownessOfEyes;
+            IptCw.IPTAbdominalTenderness.SelectedValue = pce.AdominalTenderness;
+            IptCw.IPTLiverTest.Text = pce.LiverFunctionTests;
+            IptCw.IPTStartIPT.SelectedValue = pce.startIPT;
+            IptCw.StartDateIPT.Text = pce.IPTStartDate;
+
 
             tbscreeningstatus.SelectedValue = pce.tbScreening;
             nutritionscreeningstatus.SelectedValue = pce.nutritionStatus;
@@ -248,6 +291,23 @@ namespace IQCare.Web.CCC.UC
                 rdAnyAdverseEventsNo.Checked = true;
             }
 
+            AppointmentDate.Text = pce.nextAppointmentDate;
+            //if (pce.nextAppointmentDate != "")
+            //{
+            //    if (pce.nextAppointmentDate != null)
+            //        AppointmentDate.Text = DateTime.Parse(pce.nextAppointmentDate.Trim()).ToString("dd-MMM-yyyy", CultureInfo.InvariantCulture);
+            //}
+            ServiceArea.SelectedValue = pce.appointmentServiceArea;
+            Reason.SelectedValue = pce.appointmentReason;
+            DifferentiatedCare.SelectedValue = pce.nextAppointmentType;
+            description.Text = pce.appointmentDesc;
+            //status.SelectedValue = pce.appontmentStatus;
+
+            //ipt pop ups
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "tbInfectedYesNo", "tbInfectedChange();", true);
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "IcfChange", "IcfChange();", true);
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "IcfActionChange", "IcfActionChange();", true);
+            
         }
     }
 }
