@@ -112,7 +112,7 @@ namespace IQCare.Web.CCC.UC
                 // lblCCCReg.Text = x.EnrollmentNumber;
                 lblCCCRegNo.Text = thisPatient.EnrollmentNumber;
                 lblEnrollmentDate.Text = "" + thisPatient.EnrollmentDate.ToString("dd-MMM-yyyy");
-                Session["DateOfEnrollment"] = thisPatient.EnrollmentDate.ToString("dd-MM-yyyy");
+                Session["DateOfEnrollment"] = thisPatient.EnrollmentDate.ToString("dd-MMM-yyyy");
 
                 //SET TB STATUS
                 if (thisPatient.TBStatus<1)
