@@ -56,5 +56,7 @@ namespace DataAccess.CCC.Context
         public DbSet<PatientAppointmentMessage> PatientAppointmentMessages { get; set; }
         public DbSet<PatientVitalsMessage> PatientVitalsMessages { get; set; }
         public DbSet<PregnancyOutcomeLookup> PregnancyOutcomeLookups { get; set; }
+
+        public DbSet<PersonExtLookup> PersonExtLookup { get; set; }
     }
 }
