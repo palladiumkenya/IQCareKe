@@ -198,7 +198,8 @@ namespace IQCare.Web.CCC.WebService
                         data = jsonData.Select(x => new string[]
                         {
 
-                            (isEnrolled=="notEnrolledClients")? x.PersonId.ToString(): x.Id.ToString(),
+//(isEnrolled=="notEnrolledClients")? x.PersonId.ToString(): x.Id.ToString(),
+                            (isEnrolled=="notEnrolledClients")? "0": x.Id.ToString(),
                             x.EnrollmentNumber.ToString(),
                             x.FirstName,
                             x.MiddleName,
@@ -207,7 +208,8 @@ namespace IQCare.Web.CCC.WebService
                             LookupLogic.GetLookupNameById(x.Sex),
                             //x.RegistrationDate.ToString("dd-MMM-yyyy"),
                             (isEnrolled=="notEnrolledClients")? Convert.ToDateTime(x.RegistrationDate).ToString("dd-MMM-yyyy") : x.EnrollmentDate.ToString("dd-MMM-yyyy"),
-                            x.PatientStatus.ToString()
+                            x.PatientStatus.ToString(),
+                            x.PersonId.ToString()
                             //,utility.Decrypt(x.MobileNumber)
                         })
                     };

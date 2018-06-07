@@ -30,6 +30,17 @@ namespace BusinessProcess.CCC
 
                 return patientDetails;
             }
+        }
+
+        public PatientLookup GetPatientDetailsLookupBrief(int patientId, int personId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                var patientDetails = unitOfWork.PatientLookupRepository
+                    .FindBy(x => x.Id == patientId && x.PersonId == personId).DefaultIfEmpty(null).FirstOrDefault();
+
+                return patientDetails;
+            }
 
         }
 
@@ -233,26 +244,26 @@ namespace BusinessProcess.CCC
                         expresionFinal = PredicateBuilder.And(expresionFinal, expressionPatientId);
                     }
 
-                    if (!string.IsNullOrWhiteSpace(firstName))
-                    {
-                        Expression<Func<PatientLookup, bool>> expressionFirstName =
-                            c => c.FirstName.ToLower().Contains(firstName.ToLower());
+                if (!string.IsNullOrWhiteSpace(firstName.Trim()))
+                {
+                    Expression<Func<PatientLookup, bool>> expressionFirstName =
+                        c => c.FirstName.ToLower().Contains(firstName.ToLower());
 
                         expresionFinal = PredicateBuilder.And(expresionFinal, expressionFirstName);
                     }
 
-                    if (!string.IsNullOrWhiteSpace(middleName))
-                    {
-                        Expression<Func<PatientLookup, bool>> expressionMiddleName =
-                            c => c.MiddleName.ToLower().Contains(middleName.ToLower());
+                if (!string.IsNullOrWhiteSpace(middleName.Trim()))
+                {
+                    Expression<Func<PatientLookup, bool>> expressionMiddleName =
+                        c => c.MiddleName.ToLower().Contains(middleName.ToLower());
 
                         expresionFinal = PredicateBuilder.And(expresionFinal, expressionMiddleName);
                     }
 
-                    if (!string.IsNullOrWhiteSpace(lastName))
-                    {
-                        Expression<Func<PatientLookup, bool>> expressionLastName =
-                            c => c.LastName.ToLower().Contains(lastName.ToLower());
+                if (!string.IsNullOrWhiteSpace(lastName.Trim()))
+                {
+                    Expression<Func<PatientLookup, bool>> expressionLastName =
+                        c => c.LastName.ToLower().Contains(lastName.ToLower());
 
                         expresionFinal = PredicateBuilder.And(expresionFinal, expressionLastName);
                     }

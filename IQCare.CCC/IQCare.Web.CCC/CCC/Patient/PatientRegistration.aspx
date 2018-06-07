@@ -1316,7 +1316,7 @@
 							//$("#Gender").prop('disabled', true);
 							
 							/*Social Status*/
-							$('#MyDateOfBirth').datepicker('setDate', patientDetails.PersonDoB);
+							$('#MyDateOfBirth').datepicker('setDate',patientDetails.PersonDoB);
 							$("#<%=dobPrecision.ClientID%>").val(patientDetails.DateOfBirthPrecision);
 							$("#ChildOrphan").val(patientDetails.ChildOrphan);
 							$("#Inschool").val(patientDetails.Inschool);

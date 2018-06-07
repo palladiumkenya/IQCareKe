@@ -25,6 +25,7 @@ namespace IQCare.Web.CCC.UC
             string categorization = "Not done";
 
             int patientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
+            int personId = Convert.ToInt32(HttpContext.Current.Session["personId"]);
             
             //if (Request.QueryString["patient"] != null)
             //{
@@ -37,7 +38,8 @@ namespace IQCare.Web.CCC.UC
             //IPatientLookupmanager patientLookupmanager = (IPatientLookupmanager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientLookupManager, BusinessProcess.CCC");
 
            // List<PatientLookup> patientLookups = patientLookupmanager.GetPatientDetailsLookup(patientId);
-            PatientLookup thisPatient = pMgr.GetPatientDetailSummary(patientId);
+
+            PatientLookup thisPatient = pMgr.GetPatientDetailSummaryBrief(patientId,personId);
             pMgr = null;
             if (null != thisPatient)
             {

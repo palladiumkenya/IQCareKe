@@ -18,6 +18,13 @@ namespace IQCare.CCC.UILogic
             return patientDetails;
         }
 
+        public PatientLookup GetPatientDetailSummaryBrief(int patientId,int personId)
+        {
+            var patientDetails = _patientLookupmanager.GetPatientDetailsLookupBrief(patientId,personId);
+            // call invoke application decryption
+            return patientDetails;
+        }
+
         public int GetPatientSexId(int patientId)
         {
             try
