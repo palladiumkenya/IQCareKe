@@ -1248,7 +1248,15 @@
                             $("#personLName").val(personDetails.LastName);
 		                    $('input[name=PatientTypeId][value=' + personDetails.patientType + ']').attr('checked', true);
                             $("#Gender").val(personDetails.Sex);
-                            $('#MyDateOfBirth').datepicker('setDate', moment( personDetails.DoB).format('DD-MMM-YYYY'));
+                           
+
+                            if (moment('1900-06-15').isSame(personDetails.DoB)) {
+                                $("#DateOfEnrollment").val("");
+                            } else {
+                                $('#MyDateOfBirth').datepicker('setDate', moment(personDetails.DoB).format('DD-MMM-YYYY'));
+                                $("#personAge").val(personDetails.Age);
+                            }
+
 		                    var RBID = '<%=PatientTypeId.ClientID %>';
 		                    var RB1 = document.getElementById(RBID);
 		                    var radio = RB1.getElementsByTagName("input");
@@ -1260,7 +1268,7 @@
 		                        }
                             }
                             $("#MaritalStatusId").val(personDetails.MaritalStatus);
-                            $("#personAge").val(personDetails.Age);
+                            
                             $("#<%=dobPrecision.ClientID%>").val(personDetails.DateOfBirthPrecision);
 
 		                    var RBID = '<%=PopulationType.ClientID %>';
@@ -1692,7 +1700,7 @@
 					//console.log(_fp);
 					//return false;
 					if (Object.keys(_fp).length > 0) {
-						if (_fp["IsPatient"] == 1) {
+						if (_fp["IsPatient"] === 1) {
 							$.when(setPatientIdSession(_fp["PatientId"])).then(function () {
 								setTimeout(function () {
 									window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientHome.aspx")%>';
