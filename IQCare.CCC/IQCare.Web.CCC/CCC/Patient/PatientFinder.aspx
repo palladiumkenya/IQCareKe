@@ -121,7 +121,7 @@
       	                <th>Sex</th>
       	                <th>Enrollment Date</th>
                         <th>PatientStatus</th>
-                       
+                        <th style="width:10px; display: none;">PersonId</th>
                     </tr>
                  </thead>
                  <tbody></tbody>
@@ -136,7 +136,7 @@
       	                <th>Sex</th>
       	                <th>Enrollment Date</th>
                         <th>PatientStatus</th>
-                       
+                        <th style="width: 10px; display: none;">PersonId</th>
                         
                     </tr>
                  </tfoot>
@@ -241,6 +241,7 @@
                                     null,
                                     null,
                                     null,
+                                    null,
                                     null
                                 ],
                     "fnServerData": function (sSource, aoData, fnCallback) {
@@ -250,7 +251,7 @@
                         aoData.push({ "name": "lastName", "value": ""+$("#<%=LastName.ClientID%>").val()+"" });
                         aoData.push({ "name": "facility", "value": "" + $("#<%=Facility.ClientID%>").find(":selected").val() + "" });
                         aoData.push({ "name": "isEnrolled", "value": ""+ isEnrolled +""});
-
+                 
                         $("#divActionString").text("Data features and table preparation complete");
                         var arrayReturn = [];
                         
@@ -295,14 +296,15 @@
             //row selection
           $('#tblFindPatient').on('click', 'tbody tr', function () {
               // window.location.href = $(this).attr('href');
-              var patientId = $(this).find('td').first().text();
-              var patientStatus = $(this).find('td').last().text();
+              var patientId = $(this).find('td').eq(0).text();
+              var patientStatus = $(this).find('td').eq(8).text();
+              var personId = $(this).find('td').eq(9).text();
 
               if (patientStatus === 'Not Enrolled') {
                  // alert("personId:" + patientId + " " + "Patient Status :" + patientStatus);
-                  RedirectToRegistrationEdit(patientId, isEnrolled);
+                  RedirectToRegistrationEdit(personId, isEnrolled);
               } else {
-                setSession(patientId);
+                setSession(patientId,personId);
               }
 
              
@@ -310,14 +312,14 @@
 
         });
 
-        function setSession(patientId) {
+        function setSession(patientId,personId) {
             //console.log(patientId);
 
             $.ajax({
                 type: "POST",
                 url: "PatientFinder.aspx/SetSelectedPatient", //Pagename/Functionname
                 contentType: "application/json;charset=utf-8",
-                data: "{'patientId':'" + patientId + "'}",//data
+                data: "{'patientId':'" + patientId + "','personId':'"+personId+"'}",//data
                 dataType: "json",
                 success: function (data) {
                     if (data.d == "success") {
@@ -333,7 +335,7 @@
         }
 
         function RedirectToRegistrationEdit(personId,isEnrolled) {
-
+          
             $.ajax({
                 type: "POST",
                 url: "patientRegistration.aspx/RedirectToRegistrationEdit", //Pagename/Functionname
