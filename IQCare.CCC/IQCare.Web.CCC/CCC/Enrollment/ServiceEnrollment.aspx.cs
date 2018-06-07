@@ -33,7 +33,7 @@ namespace IQCare.Web.CCC.Enrollment
             var patientLookManager = new PatientLookupManager();
             int person = int.Parse(Session["PersonId"].ToString());
             PatientLookup patient = patientLookManager.GetPatientByPersonId(person);
-            if (patient !=null)
+            if (patient !=null && patient.ptn_pk.HasValue && patient.ptn_pk.Value>0)
             {
                 PatientExists = patient.Id;
             }

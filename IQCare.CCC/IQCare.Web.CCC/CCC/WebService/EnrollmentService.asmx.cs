@@ -157,7 +157,7 @@ namespace IQCare.Web.CCC.WebService
                     }
                 }
 
-                if (isPersonEnrolled != null)
+                if (isPersonEnrolled == null || isPersonEnrolled.Id < 1)
                 {
                     List<PatientRegistrationLookup> patientsByPersonId = patientManager.GetPatientIdByPersonId(PersonId);
                     var patientIndex = datevalue.Year.ToString() + '-' + PersonId;
@@ -175,7 +175,7 @@ namespace IQCare.Web.CCC.WebService
                     else
                     {
                         patient.PersonId = PersonId;
-                        patient.ptn_pk = 0;
+                        patient.ptn_pk = isPersonEnrolled.ptn_pk;
                         patient.FacilityId = facilityId;
                         patient.PatientType = patientType;
                         patient.PatientIndex = patientIndex;
@@ -201,6 +201,7 @@ namespace IQCare.Web.CCC.WebService
                         }
 
                         //Add enrollment visit
+                       
                         patientMasterVisitId =
                             patientMasterVisitManager.AddPatientMasterVisit(patientId, userId, visitType);
                         //Enroll Patient to service

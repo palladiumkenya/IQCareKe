@@ -768,7 +768,7 @@
             var patientExists = '<%=PatientExists%>';
 
             //console.log(patientExists);
-            if (patientType != "New" || patientExists > 0) {
+            if (patientType != "New" || patientExists>0) {
                 $("#ReconfirmatoryTest").prop("disabled", true);
                 $("#ReConfirmatory").hide();
             } else {

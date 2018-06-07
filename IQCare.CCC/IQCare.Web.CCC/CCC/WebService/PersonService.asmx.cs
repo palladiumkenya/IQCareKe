@@ -855,23 +855,33 @@ namespace IQCare.Web.CCC.WebService
             {
                 PersonNotEnrolled notEnrolled=new PersonNotEnrolled();
                 var patientLookUpManager = new PatientLookupManager();
+                var lkMgr = new LookupLogic();
+                var personMgr = new PersonLookUpManager();
                 var mstatus=new PersonMaritalStatusManager();
                 var keyPopulationManager = new PatientPopulationManager();
-                var personNotEnrolled = patientLookUpManager.GetPatientByPersonId(personId);
+                var personNotEnrolled = personMgr.GetPersonById(personId);
                 var maritalStatus = mstatus.GetCurrentPatientMaritalStatus(personId);
                 var KeyPop = keyPopulationManager.GetCurrentPatientPopulations(personId);
-               
+                int patientType = 261;
+                var ptype = lkMgr.GetItemIdByGroupAndItemName("PatientType", "New").FirstOrDefault();
+                if(ptype != null)
+                {
+                    patientType = ptype.ItemId;
+                }
+
+                DateTime? dob = personNotEnrolled.DateOfBirth.HasValue? personNotEnrolled.DateOfBirth.Value : new DateTime(1900, 6, 15);
+
                 PersonNotEnrolled personNotEnrolledData = new PersonNotEnrolled()
                 {
                     FirstName = personNotEnrolled.FirstName,
                     MiddleName = personNotEnrolled.MiddleName,
                     LastName = personNotEnrolled.LastName,
-                    PatientType = personNotEnrolled.PatientType.ToString(),
-                    DoB = personNotEnrolled.DateOfBirth,
+                    PatientType = patientType.ToString(),
+                    DoB = dob.Value,
                     Sex = personNotEnrolled.Sex,
                     MaritalStatus = (null==maritalStatus)?0: maritalStatus.MaritalStatusId,
-                    Age = Convert.ToDecimal(notEnrolled.GetAge(personNotEnrolled.DateOfBirth)),
-                    DateOfBirthPrecision = personNotEnrolled.DobPrecision,
+                    Age = Convert.ToDecimal(notEnrolled.GetAge(dob.Value)),
+                    DateOfBirthPrecision = true,
                     KeyPopName = (KeyPop.Count>0)? KeyPop[0].PopulationType:""
                 };
                 Session["editPersonId"] = 0;

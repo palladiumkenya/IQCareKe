@@ -62,7 +62,7 @@ namespace IQCare.Web.CCC.WebService
                 }
                 else
                 {
-                    jsonData = patientLookup.GetPatientSearchListPayload(isEnrolled);
+                   jsonData = patientLookup.GetPatientSearchListPayload(isEnrolled);
                 }
 
                 if (jsonData.Count > 0)
