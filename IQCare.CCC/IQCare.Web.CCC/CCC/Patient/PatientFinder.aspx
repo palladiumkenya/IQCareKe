@@ -121,7 +121,7 @@
       	                <th>Sex</th>
       	                <th>Enrollment Date</th>
                         <th>PatientStatus</th>
-                        <th style="width:10px; display: none;">PersonId</th>
+                        <th style="width:10px;">PersonId</th>
                     </tr>
                  </thead>
                  <tbody></tbody>
@@ -136,7 +136,7 @@
       	                <th>Sex</th>
       	                <th>Enrollment Date</th>
                         <th>PatientStatus</th>
-                        <th style="width: 10px; display: none;">PersonId</th>
+                        <th style="width: 10px;">PersonId</th>
                         
                     </tr>
                  </tfoot>
