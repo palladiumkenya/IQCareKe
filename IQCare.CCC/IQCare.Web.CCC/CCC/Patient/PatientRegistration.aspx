@@ -1699,6 +1699,7 @@
 					//console.log("here");
 					//console.log(_fp);
 					//return false;
+				    var isEnrolled = 'notEnrolledClients';
 					if (Object.keys(_fp).length > 0) {
 						if (_fp["IsPatient"] === 1) {
 							$.when(setPatientIdSession(_fp["PatientId"])).then(function () {
@@ -1709,10 +1710,26 @@
 						} else {
 							var personId = _fp["PersonId"];
 							getPatientTypeId("PatientType", "New");
+						    $.ajax({
+						        type: "POST",
+						        url: "patientRegistration.aspx/RedirectToRegistrationEdit", //Pagename/Functionname
+						        contentType: "application/json;charset=utf-8",
+						        data: "{'personId':'" + personId + "','isEnrolled':'"+ isEnrolled +"'}",//data
+						        dataType: "json",
+						        success: function (data) {
+						            if (data.d === "success") {
+						                setTimeout(function () { window.location.href = "./patientRegistration.aspx" }, 500);
+						            }
+						        },
+						        error: function (result) {
 
-							$.ajax({
+						            alert("error");
+						        }
+						    });
+
+							<%--$.ajax({
 								type: "POST",
-								url: "../WebService/PersonService.asmx/SetSession",
+								url: "../WebService/PatientRegistration.asmx/RedirectToRegistrationEdit",
 								contentType: "application/json; charset=utf-8",
 								data: "{'personId': '" + personId + "'}",
 								dataType: "json",
@@ -1722,7 +1739,7 @@
 								error: function (response) {
 									generate('error', response.d);
 								}
-							});
+							});--%>
 						}
 					} else {
 						toastr.error("Please Select one person from the list", "Patient Duplicates");
