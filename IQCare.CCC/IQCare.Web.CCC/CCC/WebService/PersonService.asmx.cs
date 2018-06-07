@@ -869,7 +869,7 @@ namespace IQCare.Web.CCC.WebService
                     PatientType = personNotEnrolled.PatientType.ToString(),
                     DoB = personNotEnrolled.DateOfBirth,
                     Sex = personNotEnrolled.Sex,
-                    MaritalStatus = maritalStatus.MaritalStatusId,
+                    MaritalStatus = (null==maritalStatus)?0: maritalStatus.MaritalStatusId,
                     Age = Convert.ToDecimal(notEnrolled.GetAge(personNotEnrolled.DateOfBirth)),
                     DateOfBirthPrecision = personNotEnrolled.DobPrecision,
                     KeyPopName = (KeyPop.Count>0)? KeyPop[0].PopulationType:""

@@ -25,7 +25,18 @@ namespace BusinessProcess.CCC
             using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
                 var patientDetails = unitOfWork.PatientLookupRepository
-                .FindBy(x => x.Id == id ).DefaultIfEmpty(null).FirstOrDefault();
+                .FindBy(x => x.Id == id).DefaultIfEmpty(null).FirstOrDefault();
+
+                return patientDetails;
+            }
+        }
+
+        public PatientLookup GetPatientDetailsLookupBrief(int patientId, int personId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                var patientDetails = unitOfWork.PatientLookupRepository
+                    .FindBy(x => x.Id == patientId && x.PersonId == personId).DefaultIfEmpty(null).FirstOrDefault();
 
                 return patientDetails;
             }
@@ -62,6 +73,7 @@ namespace BusinessProcess.CCC
                             Expression<Func<PatientLookup, bool>> expressionPatientStatusEnrolled =
                                 c => c.PatientStatus.ToLower().Contains("active") || c.PatientStatus.ToLower().Contains("death") || c.PatientStatus.ToLower().Contains("losttofollowup") || c.PatientStatus.ToLower().Contains("transfer out") || c.PatientStatus.ToLower().Contains("hiv negative");
                             expresionFinal = PredicateBuilder.And(expresionFinal, expressionPatientStatusEnrolled);
+
                             break;
                     }
                 }
@@ -84,7 +96,7 @@ namespace BusinessProcess.CCC
             {
                 List<PatientLookup> patientLookups = new List<PatientLookup>();
 
-                Expression<Func<PatientLookup, bool>> expresionFinal = c=>c.Id > 0;
+                Expression<Func<PatientLookup, bool>> expresionFinal = c=>c.PersonId > 0;
 
                 if (!string.IsNullOrEmpty(patientId.Trim()))
                 {
@@ -94,7 +106,7 @@ namespace BusinessProcess.CCC
                     expresionFinal = PredicateBuilder.And(expresionFinal, expressionPatientId);
                 }
 
-                if (!string.IsNullOrWhiteSpace(firstName))
+                if (!string.IsNullOrWhiteSpace(firstName.Trim()))
                 {
                     Expression<Func<PatientLookup, bool>> expressionFirstName =
                         c => c.FirstName.ToLower().Contains(firstName.ToLower());
@@ -102,7 +114,7 @@ namespace BusinessProcess.CCC
                     expresionFinal = PredicateBuilder.And(expresionFinal, expressionFirstName);
                 }
 
-                if (!string.IsNullOrWhiteSpace(middleName))
+                if (!string.IsNullOrWhiteSpace(middleName.Trim()))
                 {
                     Expression<Func<PatientLookup, bool>> expressionMiddleName =
                         c => c.MiddleName.ToLower().Contains(middleName.ToLower());
@@ -110,7 +122,7 @@ namespace BusinessProcess.CCC
                     expresionFinal = PredicateBuilder.And(expresionFinal, expressionMiddleName);
                 }
 
-                if (!string.IsNullOrWhiteSpace(lastName))
+                if (!string.IsNullOrWhiteSpace(lastName.Trim()))
                 {
                     Expression<Func<PatientLookup, bool>> expressionLastName =
                         c => c.LastName.ToLower().Contains(lastName.ToLower());
@@ -126,6 +138,7 @@ namespace BusinessProcess.CCC
                             Expression<Func<PatientLookup, bool>> expressionPatientStatus =
                                 c => c.PatientStatus.ToLower().Contains("not enrolled");
                             expresionFinal = PredicateBuilder.And(expresionFinal, expressionPatientStatus);
+
                             break;
                         default:
                             Expression<Func<PatientLookup, bool>> expressionPatientStatusEnrolled =
