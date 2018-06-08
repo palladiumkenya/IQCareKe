@@ -175,7 +175,7 @@ namespace IQCare.Web.CCC.WebService
                     else
                     {
                         patient.PersonId = PersonId;
-                        patient.ptn_pk = isPersonEnrolled.ptn_pk;
+                        patient.ptn_pk =(isPersonEnrolled==null)? 0: isPersonEnrolled.ptn_pk;
                         patient.FacilityId = facilityId;
                         patient.PatientType = patientType;
                         patient.PatientIndex = patientIndex;
