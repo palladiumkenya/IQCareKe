@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <TypeScriptToolsVersion>2.6</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>2.5</TypeScriptToolsVersion>
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
   </PropertyGroup>
 
@@ -27,6 +27,7 @@
     <ProjectReference Include="..\IQCare.Common.Infrastructure\IQCare.Common.Infrastructure.csproj" />
     <ProjectReference Include="..\IQCare.HTS.BusinessProcess\IQCare.HTS.BusinessProcess.csproj" />
     <ProjectReference Include="..\IQCare.HTS.Infrastructure\IQCare.HTS.Infrastructure.csproj" />
+    <ProjectReference Include="..\IQCare.Records.BusinessProcess\IQCare.Records.BusinessProcess.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,33 +35,39 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="frontend\app\records\models\emergencyvalidator.ts" />
+    <Content Remove="frontend\app\records\models\person.ts" />
+    <Content Remove="frontend\app\records\models\RequiredIfDirective.ts" />
+    <Content Remove="frontend\app\records\models\search.ts" />
     <Content Remove="frontend\app\records\records-routing.module.ts" />
     <Content Remove="frontend\app\records\records.module.ts" />
+    <Content Remove="frontend\app\records\RecordsRegistrationService.ts" />
+    <Content Remove="frontend\app\records\services\recordsregistration.resolver.ts" />
+    <Content Remove="frontend\app\records\services\recordssearch.ts" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="frontend\app\records\models\emergencyvalidator.ts" />
+    <None Remove="frontend\app\records\models\person.ts" />
+    <None Remove="frontend\app\records\models\RequiredIfDirective.ts" />
+    <None Remove="frontend\app\records\models\search.ts" />
     <None Remove="frontend\app\records\records-routing.module.ts" />
     <None Remove="frontend\app\records\records.module.ts" />
+    <None Remove="frontend\app\records\RecordsRegistrationService.ts" />
+    <None Remove="frontend\app\records\services\recordsregistration.resolver.ts" />
+    <None Remove="frontend\app\records\services\recordssearch.ts" />
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="Entities.Common">
-      <HintPath>..\..\..\References\netcoreapp2.0\Entities.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Entities.Records">
-      <HintPath>..\..\..\References\netcoreapp2.0\Entities.Records.dll</HintPath>
-    </Reference>
-    <Reference Include="IQCare.Records.UILogic">
-      <HintPath>..\..\..\References\netcoreapp2.0\IQCare.Records.UILogic.dll</HintPath>
-    </Reference>
-    <Reference Include="IQCareRecords.Common.BusinessProcess">
-      <HintPath>..\..\..\References\netcoreapp2.0\IQCareRecords.Common.BusinessProcess.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
-  <ItemGroup>
+    <TypeScriptCompile Include="frontend\app\records\models\emergencyvalidator.ts" />
+    <TypeScriptCompile Include="frontend\app\records\models\person.ts" />
+    <TypeScriptCompile Include="frontend\app\records\models\RequiredIfDirective.ts" />
+    <TypeScriptCompile Include="frontend\app\records\models\search.ts" />
     <TypeScriptCompile Include="frontend\app\records\records-routing.module.ts" />
     <TypeScriptCompile Include="frontend\app\records\records.module.ts" />
+    <TypeScriptCompile Include="frontend\app\records\services\recordsregistration.resolver.ts" />
+    <TypeScriptCompile Include="frontend\app\records\services\RecordsRegistrationService.ts" />
+    <TypeScriptCompile Include="frontend\app\records\services\recordssearch.ts" />
   </ItemGroup>
 
 </Project>

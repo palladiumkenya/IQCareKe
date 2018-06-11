@@ -10,7 +10,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.IO;
 using System.Reflection;
-using Entities.Common;
 using IQCareRecords.Common.BusinessProcess;
 using Microsoft.AspNetCore.Http;
 using System.Web;
@@ -39,6 +38,7 @@ namespace IQCare
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+
             //Context
             services.AddDatabase(Configuration);
             services.AddCommonDatabase(Configuration);
@@ -49,20 +49,7 @@ namespace IQCare
             {
                 assemblies.Add(Assembly.Load(assemblyName));
             }
-            //string assemblyNam = "Entities.Common.dll";
-
-            //// string assemblyPath= Path.Combine(Directory.GetCurrentDirectory(), assemblyNam);
-            ////FileInfo f = new FileInfo(assemblyNam);
-            ////string fullname = f.FullName;
-            //HostingEnvironment env = new HostingEnvironment();
-            //Microsoft.Extensions.PlatformAbstractions.ApplicationEnvironment appenv = new ApplicationEnvironment();
-            //string sAppPath = Directory.GetCurrentDirectory();
-            //string sRootPath = Path.GetFullPath(sAppPath);
-            //string sBinFolderPath = @"IQCare\bin\" + appenv.ApplicationName;
-            //string sBinPath = Path.Combine(sRootPath, sBinFolderPath);
-            //string assemblyPath = Path.Combine("~/bin/" + assemblyNam);
-            //Assembly assembly = Assembly.LoadFile(assemblyPath);
-            //assemblies.Add(assembly);
+           
             services.AddMediatR(assemblies);
             services.AddMvc()
                 .AddMvcOptions(o => o.OutputFormatters.Add(new XmlDataContractSerializerOutputFormatter()))

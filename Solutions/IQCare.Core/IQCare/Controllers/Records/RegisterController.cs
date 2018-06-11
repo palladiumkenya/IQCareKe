@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using IQCareRecords.Common.BusinessProcess.Commands;
-using MediatR;
+using IQCareRecords.Common.BusinessProcess.Command;
+ using MediatR;
 using IQCare.Common.BusinessProcess.Commands.Partners;
+using IQCare.Records.BusinessProcess.Command;
 
 namespace IQCare.Controllers.Records
 {
     [Produces("application/json")]
-    [Route("Records/api/Register")]
+    [Route("records/api/Register")]
     public class RegisterController : Controller
     {
         private readonly IMediator _mediator;
@@ -31,7 +32,7 @@ namespace IQCare.Controllers.Records
             
         }
 
-        [HttpPost("addEducationLevel")]
+        [HttpPost("addPersonEducationalLevel")]
         public async Task<IActionResult> Post([FromBody] PersonEducationLevelCommand registerEducationCommand)
         {
             var response = await _mediator.Send(registerEducationCommand, Request.HttpContext.RequestAborted);
@@ -63,7 +64,7 @@ namespace IQCare.Controllers.Records
             return BadRequest(response);
         }
 
-        [HttpPost("AddPersonLocation")]
+        [HttpPost("addPersonLocation")]
         public async Task<IActionResult> Post([FromBody] AddUpdatePersonLocationCommand registerpersonlocationcommand)
         {
             var response = await _mediator.Send(registerpersonlocationcommand, Request.HttpContext.RequestAborted);
@@ -74,7 +75,7 @@ namespace IQCare.Controllers.Records
             return BadRequest(response);
         }
 
-        [HttpPost("AddPersonEmergencyContact")]
+        [HttpPost("addPersonEmergencyContact")]
         public async Task<IActionResult> Post([FromBody] PersonEmergencyContactCommand personEmergencyContactCommand)
         {
             var response = await _mediator.Send(personEmergencyContactCommand, Request.HttpContext.RequestAborted);
@@ -85,15 +86,34 @@ namespace IQCare.Controllers.Records
             return BadRequest(response);
         }
 
-        [HttpPost("addPersonRelationship")]
-        public async Task<IActionResult> AddPersonRelationship(
-           [FromBody] AddPersonRelationshipCommand addPersonRelationshipCommand)
+       [HttpPost("AddPersonContact")]
+        public async Task<IActionResult> Post([FromBody] AddUpdatePersonContactCommand addUpdatePersonContactCommand)
         {
-            var response = await _mediator.Send(addPersonRelationshipCommand, Request.HttpContext.RequestAborted);
+            var response = await _mediator.Send(addUpdatePersonContactCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+            {
+                return Ok(response.Value);
+            }
+            return BadRequest(response);
+        }
+
+
+
+        [HttpGet("search")]
+        public async Task<IActionResult> Get(string identificationNumber, string firstName, string middleName, string lastName)
+        {
+            var response = await _mediator.Send(new SearchPersonCommand
+            {
+                identificationNumber = identificationNumber,
+                firstName = firstName,
+                middleName = middleName,
+                lastName = lastName
+            });
+
             if (response.IsValid)
                 return Ok(response.Value);
             return BadRequest(response);
         }
-       
+
     }
 }

@@ -1,0 +1,419 @@
+<div class="ibox">
+    <div class="ibox-title">
+        <h5>Registration</h5>
+    </div>
+    <div class="ibox-content">
+        <div class="row">
+            <div class="col-md-2">
+                <Record-nav></Record-nav>
+            </div>
+
+            <div class="col-md-10 animated fadeIn">
+                <div class="panel panel-default">
+                    <div class="panel-heading">REGISTER PATIENT</div>
+                    <div class="panel-body">
+                        <form [formGroup]="formGroup">
+                            <mat-horizontal-stepper #stepper="matHorizontalStepper" formArrayName="formArray"  [linear]="isLinear">
+                                <mat-step formGroupName="0" [stepControl]="formArray.get([0])">
+                                    <ng-template matStepLabel>Patient Profile</ng-template>
+                                    <div class="row top-buffer">
+
+                                        <mat-form-field class="col-md-6">
+                                            <input tabindex="1" placeholder="Registation Date" matInput [matDatepicker]="myRegistrationDatepicker" [max]="maxDate" formControlName="RegistrationDate" required>
+                                            <mat-datepicker-toggle matSuffix [for]="myRegistrationDatepicker"></mat-datepicker-toggle>
+                                            <mat-datepicker #myRegistrationDatepicker name="RegistrationDate"> </mat-datepicker>
+                                        </mat-form-field>
+
+
+                                    </div>
+                                    <div class="row top-buffer">
+
+                                        <mat-form-field class="col-md-6">
+                                            <input matInput placeholder="First Name" formControlName="FirstName" id="FirstName" tabindex="2" required />
+                                        </mat-form-field>
+
+
+                                        <mat-form-field class="col-md-6">
+                                            <input matInput placeholder="Middle Name" formControlName="MiddleName" tabindex="3" />
+                                        </mat-form-field>
+
+                                    </div>
+                                    <div class="row top-buffer">
+
+                                        <mat-form-field class="col-md-6">
+                                            <input matInput placeholder="Last Name" formControlName="LastName" required tabindex="4">
+                                        </mat-form-field>
+
+
+                                        <mat-form-field class="col-md-6">
+                                            <mat-select placeholder="Gender" formControlName="Sex" tabindex="5">
+                                                <mat-option></mat-option>
+                                                <mat-option *ngFor="let gen of gender" [value]="gen.itemId">{{gen.itemName}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+
+
+
+                                    </div>
+                                    <div class="row top-buffer">
+
+                                        <mat-form-field class="col-md-3">
+                                            <input tabindex="6" placeholder="Date Of Birth" matInput [matDatepicker]="myDatepicker" [max]="maxDate" formControlName="DateOfBirth" required>
+                                            <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+                                            <mat-datepicker #myDatepicker name="DateOfBirth" #db  ngDefaultControl (selectedChanged)="onDate($event)"></mat-datepicker>
+                                        </mat-form-field>
+
+
+                                        <mat-form-field class="col-md-3">
+                                            <input matInput placeholder="Age(Years)" tabindex="7" type="number" formControlName="personAge" id="personAge" name="personAge"  (change)="estimateDob()" required>
+                                        </mat-form-field>
+
+
+                                        <mat-form-field class="col-md-3">
+                                            <input matInput placeholder="Age(Month)" tabindex="8" type="number" formControlName="personMonth" id="personMonth" name="personMonth" (change)="estimateDob()" required>
+                                        </mat-form-field>
+
+
+                                        <mat-radio-group class="col-md-3 " formControlName="DobPrecision" [required]="true" tabindex="9">
+                                            <mat-radio-button value="0" required>Estimated</mat-radio-button>
+                                            <mat-radio-button value="1" required>Exact</mat-radio-button>
+                                        </mat-radio-group>
+
+
+
+                                    </div>
+                                    <div class="row top-buffer">
+
+                                        <mat-form-field class="col-md-4">
+                                            <mat-select placeholder="Marital Status" formControlName="MaritalStatus" tabindex="12">
+                                                <mat-option></mat-option>
+                                                <mat-option *ngFor="let maritalStatus of maritalstatuses" [value]="maritalStatus.itemId">{{maritalStatus.itemName}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <mat-form-field class="col-md-4">
+                                            <mat-select placeholder="Patient Educationallevel" formControlName="Educationallevel" tabindex="10">
+                                                <mat-option></mat-option>
+                                                <mat-option *ngFor="let education of educationallevel" [value]="education.itemId">{{education.itemName}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <mat-form-field class="col-md-4">
+                                            <mat-select placeholder="Patient Occupation" formControlName="Occupation" tabindex="11">
+                                                <mat-option></mat-option>
+                                                <mat-option *ngFor="let occ of occupations" [value]="occ.itemId">{{occ.itemName}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                    </div>
+
+
+                                    <div class="row top-buffer">
+
+                                        <mat-form-field class="col-md-6">
+                                            <mat-select placeholder="Identifyer Type" formControlName="IdentifyerType" tabindex="13">
+                                                <mat-option></mat-option>
+                                                <mat-option *ngFor="let Identifyer of IdentifyerTypes" [value]="Identifyer.id">{{Identifyer.displayName}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+
+
+                                        <mat-form-field class="col-md-6">
+                                            <input matInput placeholder="Identifyer Number" formControlName="IdentifyerNumber" required tabindex="14">
+                                        </mat-form-field>
+
+
+                                    </div>
+                                    <div class="row top-buffer">
+                                        <button tabindex="8" mat-button matStepperNext type="button">Next</button>
+                                    </div>
+
+
+
+
+
+
+                                </mat-step>
+
+                                <mat-step formGroupName="1" [stepControl]="formArray.get([1])">
+                                    <ng-template matStepLabel>Patient Client Address</ng-template>
+
+                                    <div class="row top-buffer">
+
+                                        <mat-form-field class="col-md-6" tabindex="1">
+                                            <mat-select placeholder="County" formControlName="County" #t (change)=" OnSubCountySelect(t.value)">
+                                                <mat-option value="0">Select</mat-option>
+                                                <mat-option *ngFor="let county of counties" [value]="county.countyId">{{county.countyName}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div class="row top-buffer">
+
+                                        <mat-form-field class="col-md-6" tabindex="2">
+                                            <mat-select placeholder="SubCounty" formControlName="SubCounty" #sc (change)="OnWardCountListSelect(sc.value)">
+                                                <mat-option value="0">Select</mat-option>
+                                                <mat-option *ngFor="let subcounty of subcounties" [value]="subcounty.subCountyId">{{subcounty.subCountyName}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+
+
+                                    <div class="row top-buffer">
+
+                                        <mat-form-field class="col-md-6">
+                                            <mat-select placeholder="Ward" formControlName="Ward" tabindex="4">
+                                                <mat-option value="0">Select</mat-option>
+                                                <mat-option *ngFor="let ward of wardlist" [value]="ward.wardId">{{ward.wardName}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div class="row top-buffer">
+                                        <mat-form-field class="col-md-6" tabindex="5">
+
+                                            <textarea matInput placeholder="Nearest Health Center" formControlName="NearestHealthCenter" rows="6"></textarea>
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div class="row top-buffer">
+                                        <mat-form-field class="col-md-6" tabindex="6">
+                                            <textarea matInput placeholder="Village/LandMark" id="LandMark" formControlName="LandMark"   rows="6"></textarea>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="row top-buffer">
+                                        <button mat-button matStepperPrevious type="button">Back</button>
+                                        <button mat-button matStepperNext type="button">Next</button>
+                                    </div>
+                                </mat-step>
+
+                                <mat-step formGroupName="2" [stepControl]="formArray.get([2])">
+                                    <ng-template matStepLabel>Emergency Contacts</ng-template>
+
+                                    <div class="row top-buffer">
+                                        <mat-form-field class="col-md-4">
+                                            <input matInput placeholder="Mobilenumber" formControlName="Mobilenumber" required tabindex="1">
+                                        </mat-form-field>
+
+                                        <mat-form-field class="col-md-4">
+                                            <input matInput placeholder="Alternative Number" formControlName="AlternativeNumber"  tabindex="2">
+                                        </mat-form-field>
+
+                                        <mat-form-field class="col-md-4">
+                                            <input matInput placeholder="emailaddress" formControlName="emailaddress"  tabindex="3">
+                                        </mat-form-field>
+                                    </div>
+
+
+                                    <div class="row top-buffer">
+                                        <label class="col-md-3">Registered to Clinic </label>
+                                        <mat-radio-group class="col-md-6" id=" emgRegisteredClinic" formControlName="emgRegisteredClinic" [(ngModel)]="newItem.emgRegisteredClinic"  tabindex="4">
+                                            <mat-radio-button [value]="1" required>Yes</mat-radio-button>
+                                            <mat-radio-button [value]="0" required>No</mat-radio-button>
+                                        </mat-radio-group>
+
+                                    </div>
+                                    <div class="row top-buffer">
+                                        <mat-form-field class="col-md-3">
+                                            <input matInput placeholder="EmergencyContact FirstName" id="emgFirstName" formControlName="emgFirstName" [(ngModel)]="newItem.emgFirstName"  tabindex="5">
+                                        </mat-form-field>
+
+                                        <mat-form-field class="col-md-3">
+                                            <input matInput placeholder="Emergency Contact MiddleName" id="emgMiddleName" formControlName="emgMiddleName" [(ngModel)]="newItem.emgMiddleName"  tabindex="6">
+                                        </mat-form-field>
+
+                                        <mat-form-field class="col-md-3">
+                                            <input matInput placeholder="Emegency Contact LastName" id="emgLastName" formControlName="emgLastName" [(ngModel)]="newItem.emgLastName" tabindex="7">
+                                        </mat-form-field>
+
+                                        <mat-form-field class="col-md-3">
+                                            <mat-select placeholder="EmergencyContact Gender" formControlName="emgGender" id="emgGender" [(ngModel)]="newItem.emgGender" tabindex="8">
+                                                <mat-option></mat-option>
+                                                <mat-option *ngFor="let gen of gender" [value]="gen.itemId">{{gen.itemName}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div class="row top-buffer">
+                                        <mat-form-field class="col-md-3">
+                                            <mat-select placeholder="EmergencyContactRelations" id="emgRelationShip" formControlName="emgRelationShip" [(ngModel)]="newItem.emgRelationShip" tabindex="9">
+                                                <mat-option></mat-option>
+                                                <mat-option *ngFor="let rel of relationshipEmergencyOptions" [value]="rel.itemId">{{rel.itemName}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <mat-form-field class="col-md-3">
+                                            <input matInput placeholder="Emegency Contact Primary MobileNo" id="emgPrimaryMobileNo" formControlName="emgPrimaryMobileNo" [(ngModel)]="newItem.emgPrimaryMobileNo"  tabindex="10">
+
+                                        </mat-form-field>
+                                        <mat-form-field class="col-md-3">
+                                            <mat-select placeholder="ConsentToCall/SMS" tabindex="11" formControlName="emgConsentToCall" id="emgConsentToCall" #ecc [(ngModel)]="newItem.emgConsentToCall" (change)="selectchange(ecc.value)">
+                                                <mat-option></mat-option>
+                                                <mat-option *ngFor="let rel of consentoptions" [value]="rel.itemId">{{rel.itemName}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <mat-form-field class="col-md-3" [style.visibility]="toggoleShowHide">
+                                            <input matInput placeholder="LimitedConsentIsGiven" id="emgLimitedConsent" formControlName="emgLimitedConsent" [(ngModel)]="newItem.emgLimitedConsent" tabindex="12">
+
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="row top-buffer ">
+                                        <button  (click)="addRow()" class="btn btn-primary col-md-3">Add </button>
+
+                                    </div>
+                                    <div class="row top-buffer">
+                                        <table class="table table-bordered  col-md-12 ">
+                                            <thead>
+                                                <tr>
+                                                    <th>Registered To Clinic</th>
+                                                    <th>FirstName</th>
+                                                    <th>LastName</th>
+                                                    <th>MiddleName</th>
+                                                    <th>Gender</th>
+                                                    <th>ConsentToSms</th>
+                                                    <th>LimitedConsent</th>
+                                                    <th>PrimaryMobileNo</th>
+                                                    <th>RelationShip</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let list of itemslist; let i=index">
+                                                    <td>{{list.emgRegisteredClinic}}</td>
+                                                    <td>{{list.emgFirstName}}</td>
+                                                    <td>{{list.emgLastName}}</td>
+                                                    <td>{{list.emgMiddleName}}</td>
+                                                    <td>{{list.emgGender}}</td>
+                                                    <td>{{list.emgConsentToCall}}</td>
+                                                    <td>{{list.emgLimitedConsent}}</td>
+                                                    <td>{{list.emgPrimaryMobileNo}}</td>
+                                                    <td>{{list.emgRelationShip}}</td>
+                                                    <td>
+
+                                                        <a class="btn btn-danger" (click)="delete(i)">Delete</a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                    <div class="row top-buffer">
+
+                                        <button mat-button matStepperPrevious type="button">Back</button>
+                                        <button mat-button matStepperNext type="button">Next</button>
+
+                                    </div>
+                                </mat-step>
+                                <mat-step formGroupName="3" [stepControl]="formArray.get([3])">
+                                    <ng-template matStepLabel>Next of Kin</ng-template>
+
+                                    <div class="row top-buffer">
+                                        <label class="col-md-3">Registered to Clinic </label>
+                                        <mat-radio-group class="col-md-6" id=" nokRegisteredClinic" formControlName="nokRegisteredClinic" [(ngModel)]="newnextofkin.nokRegisteredClinic"  tabindex="4">
+                                            <mat-radio-button [value]="1" required>Yes</mat-radio-button>
+                                            <mat-radio-button [value]="0" required>No</mat-radio-button>
+                                        </mat-radio-group>
+
+                                    </div>
+                                    <div class="row top-buffer">
+                                        <mat-form-field class="col-md-3">
+                                            <input matInput placeholder="EmergencyContact FirstName" id="nokFirstName" formControlName="nokFirstName" [(ngModel)]="newnextofkin.nokFirstName"  tabindex="5">
+                                        </mat-form-field>
+
+                                        <mat-form-field class="col-md-3">
+                                            <input matInput placeholder="Emergency Contact MiddleName" id="nokMiddleName" formControlName="nokMiddleName" [(ngModel)]="newnextofkin.nokMiddleName" tabindex="6">
+                                        </mat-form-field>
+
+                                        <mat-form-field class="col-md-3">
+                                            <input matInput placeholder="Emegency Contact LastName" id="nokLastName" formControlName="nokLastName" [(ngModel)]="newnextofkin.nokLastName"  tabindex="7">
+                                        </mat-form-field>
+
+                                        <mat-form-field class="col-md-3">
+                                            <mat-select placeholder=" Gender" formControlName="nokGender" id="emgGender" [(ngModel)]="newnextofkin.nokGender" tabindex="8">
+                                                <mat-option></mat-option>
+                                                <mat-option *ngFor="let gen of gender" [value]="gen.itemId">{{gen.itemName}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div class="row top-buffer">
+                                        <mat-form-field class="col-md-3">
+                                            <mat-select placeholder="Emergency Contact Relationship" id="nokRelationShip" formControlName="nokRelationShip" [(ngModel)]="newnextofkin.nokRelationShip" tabindex="9">
+                                                <mat-option></mat-option>
+                                                <mat-option *ngFor="let rel of relationshipEmergencyOptions" [value]="rel.itemId">{{rel.itemName}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <mat-form-field class="col-md-3">
+                                            <input matInput placeholder="Emegency Contact Primary MobileNo" id="nokPrimaryMobileNo" formControlName="nokPrimaryMobileNo" [(ngModel)]="newnextofkin.nokPrimaryMobileNo"  tabindex="10">
+
+                                        </mat-form-field>
+                                        <mat-form-field class="col-md-3">
+                                            <mat-select placeholder="ConsentToCall/SMS" tabindex="11" formControlName="nokConsentToCall" id="nokConsentToCall" #ecc [(ngModel)]="newnextofkin.nokConsentToCall" (change)="selectchange(ecc.value)">
+                                                <mat-option></mat-option>
+                                                <mat-option *ngFor="let rel of consentoptions" [value]="rel.itemId">{{rel.itemName}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <mat-form-field class="col-md-3" [style.visibility]="toggoleShowHide">
+                                            <input matInput placeholder="LimitedConsentIsGiven" id="nokLimitedConsent" formControlName="nokLimitedConsent" [(ngModel)]="newnextofkin.nokLimitedConsent" tabindex="12">
+
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="row top-buffer ">
+                                        <button class="btn-primary  col-md-3" (click)="addNextofKinRow()">Add </button>
+
+                                    </div>
+                                    <div class="row top-buffer">
+                                       
+                                            <table class="table table-bordered row  table.speaker-list">
+                                                <thead>
+                                                    <tr>
+                                                        <th>RegisteredToCall</th>
+                                                        <th>FirstName</th>
+                                                        <th>LastName</th>
+                                                        <th>MiddleName</th>
+                                                        <th>Gender</th>
+                                                        <th>ConsentToSms</th>
+                                                        <th>LimitedConsent</th>
+                                                        <th>PrimaryMobileNo</th>
+                                                        <th>RelationShip</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let list of itemlistnextofkin; let i=index">
+                                                        <td>{{list.nokRegisteredClinic}}</td>
+                                                        <td>{{list.nokFirstName}}</td>
+                                                        <td>{{list.nokLastName}}</td>
+                                                        <td>{{list.nokMiddleName}}</td>
+                                                        <td>{{list.nokGender}}</td>
+                                                        <td>{{list.nokConsentToCall}}</td>
+                                                        <td>{{list.nokLimitedConsent}}</td>
+                                                        <td>{{list.nokPrimaryMobileNo}}</td>
+                                                        <td>{{list.nokRelationShip}}</td>
+                                                        <td>
+
+                                                            <a class="btn btn-danger" (click)="deletenextofkin(i)">Delete</a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    <div class="row top-buffer">
+                                        <button mat-button matStepperPrevious type="button">Back</button>
+                                       <button mat-button type="button" (click)="onSubmitForm()">Complete</button>
+                                    </div>
+                                </mat-step>
+
+
+                            </mat-horizontal-stepper>
+                           
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>

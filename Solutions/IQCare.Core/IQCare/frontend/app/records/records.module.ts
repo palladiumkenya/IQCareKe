@@ -2,6 +2,7 @@
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+
 import {
     MatAutocompleteModule, MatButtonModule, MatButtonToggleModule,
     MatCardModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule,
@@ -18,7 +19,15 @@ import { RecordsRoutingModule } from './records-routing.module';
 import { RecordsHomeComponent } from './home/home.component';
 import { SharedModule } from '../shared/shared.module';
 import { RecordsNavComponent } from './nav/nav.component';
-
+import { RegistrationService } from './services/RecordsRegistrationService';
+import { SearchService } from './services/recordssearch';
+import { RecordsRegisterComponent } from'./register/register.component';
+import { RegistrationResolver } from './services/recordsregistration.resolver';
+import { EducationOppConsentResolver } from './services/recordsregistration.resolver';
+import { ConsentTypeResolver } from './services/recordsregistration.resolver';
+import { IdentifierTypeResolver } from './services/recordsregistration.resolver';
+import { MaritalStatusResolver } from './services/recordsregistration.resolver';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
     imports: [CommonModule, RecordsRoutingModule, ReactiveFormsModule, FormsModule,
@@ -31,9 +40,11 @@ import { RecordsNavComponent } from './nav/nav.component';
         MatSidenavModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule,
         MatSortModule, MatStepperModule, MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule
     ],
-    declarations: [RecordsHomeComponent,RecordsNavComponent
+    declarations: [RecordsHomeComponent, RecordsNavComponent, RecordsRegisterComponent, SearchComponent
 
-    ]
+    ],
+
+    providers: [RegistrationService,SearchService,RegistrationResolver,EducationOppConsentResolver,ConsentTypeResolver,IdentifierTypeResolver,MaritalStatusResolver]
 })
 
 export class RecordModule {}
