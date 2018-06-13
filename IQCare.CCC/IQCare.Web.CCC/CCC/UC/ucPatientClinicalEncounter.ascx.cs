@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using System.Web;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace IQCare.Web.CCC.UC
@@ -28,6 +29,7 @@ namespace IQCare.Web.CCC.UC
         public int PatientMasterVisitId;
         public int age;
         public string Weight = "0";
+        public string AppointmentId;
 
         protected int UserId
         {
@@ -173,7 +175,22 @@ namespace IQCare.Web.CCC.UC
                 //if (Convert.ToInt32(Session["PatientMasterVisitId"]) > 0)
                 loadPatientEncounter();
                 
-            }   
+            }
+            if (age < 5)
+            {
+                Control NeonatalHistoryCtrl = Page.LoadControl("~/CCC/UC/ucNeonatalHistory.ascx");
+                //divControls.Controls.Clear();
+                NeonatalHistoryPH.Controls.Add(NeonatalHistoryCtrl);
+            }
+
+            if (age>=9 && age<= 19)
+            {
+                Control TannerStagingCtrl = Page.LoadControl("~/CCC/UC/ucTannerStaging.ascx");
+                TannersStagingPH.Controls.Add(TannerStagingCtrl);
+            }
+
+            Control SocialHoistoryCtrl = Page.LoadControl("~/CCC/UC/ucSocialHistory.ascx");
+            SocialHistoryPH.Controls.Add(SocialHoistoryCtrl);
         }
 
         private void loadPatientEncounter()
@@ -290,7 +307,7 @@ namespace IQCare.Web.CCC.UC
             {
                 rdAnyAdverseEventsNo.Checked = true;
             }
-
+            AppointmentId = pce.appointmentId;
             AppointmentDate.Text = pce.nextAppointmentDate;
             //if (pce.nextAppointmentDate != "")
             //{

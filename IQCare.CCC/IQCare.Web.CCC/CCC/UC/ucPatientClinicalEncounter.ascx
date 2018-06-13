@@ -5,7 +5,7 @@
 <%@ Register Src="~/CCC/UC/ucIptOutcome.ascx" TagPrefix="uc" TagName="IptOutcome" %>
 <%@ Register Src="~/CCC/UC/ucPharmacyPrescription.ascx" TagPrefix="uc" TagName="ucPharmacyPrescription" %>
 <%@ Register Src="~/CCC/UC/ucPatientLabs.ascx" TagPrefix="uc" TagName="ucPatientLabs" %>
-
+<%@ Register Src="~/CCC/UC/ucNeonatalHistory.ascx" TagPrefix="uc" TagName="ucNeonatalHistory" %>
 
 <div class="col-md-12" style="padding-top: 20px">
 
@@ -19,7 +19,7 @@
 								<span class="chevron"></span>
 					</li>
 
-					<li data-step="2">
+					<li data-step="2" id="dsAdditionalHistory">
 						<span class="badge">2</span>Additional History
 								<span class="chevron"></span>
 					</li>
@@ -761,12 +761,17 @@
 						</div>
 				</div>
 				<%-- .data-step-1--%>
-
-				<div class="step-pane sample-pane" data-step="2">
+				<div class="step-pane sample-pane" id="datastep2" data-step="2">
 					<%--<div class="col-md-12"><small class="muted pull-left"><strong>PATIENT Chronic Illness </strong></small></div> <div class="col-md-12"><hr /> </div>--%>
 					<div class="col-md-12">
 
 						<div class="col-md-12">
+                            <div class="neonatal-history-wrap">
+                                <asp:PlaceHolder ID="NeonatalHistoryPH" runat="server"></asp:PlaceHolder>
+                            </div>
+                            <div class="tanners-staging-warp">
+                                <asp:PlaceHolder ID="TannersStagingPH" runat="server"></asp:PlaceHolder>
+                            </div>
 							<%--<div class="col-md-12"><hr /></div>--%>
 							<div class="panel panel-info">
 								<div class="panel-body">
@@ -1180,6 +1185,9 @@
 								</div>
 								<%-- .panel-body--%>
 							</div>
+                            <div class="SocialHistoryPH">
+                                <asp:PlaceHolder ID="SocialHistoryPH" runat="server"></asp:PlaceHolder>
+                            </div>
 							<%--.panel--%>
 						</div>
 
@@ -1889,7 +1897,7 @@
 														<span class="input-group-addon">
 															<span class="glyphicon glyphicon-calendar"></span>
 														</span>
-														<asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="AppointmentDate" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')" required ="True" data-parsley-min-message="Input the appointment date"></asp:TextBox>
+														<asp:TextBox runat="server"  CssClass="form-control input-sm" ID="AppointmentDate" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')" required ="True" data-parsley-min-message="Input the appointment date"></asp:TextBox>
 													</div>
 												</div>
 											</div>
@@ -2389,7 +2397,38 @@
 		var tomorrow = new Date();
 		tomorrow.setDate(today.getDate() + 1);
 
-		var minDate = moment(today).add(-1, 'hours');
+        var minDate = moment(today).add(-1, 'hours');
+
+        $("#PersonAppointmentDateD").datetimepicker({
+            defaultDate: getNxtAppDateVal,
+            format: 'DD-MMM-YYYY',
+            allowInputToggle: true,
+            useCurrent: false            
+        });
+
+        $("#AppointmentDate").change(function () {
+            var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
+            var appDate = $("#<%=AppointmentDate.ClientID%>").val();
+            if (moment('' + appDate + '').isAfter(futureDate)) {
+                toastr.error("Appointment date cannot be set to over 7 months");
+                $("#<%=AppointmentDate.ClientID%>").val("");
+                return false;
+            }
+            appointmentCount();
+         });
+
+
+
+        $('#PersonAppointmentDateD').datetimepicker().on('dp.change', function (e) {
+            var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
+            var appDate = $("#<%=AppointmentDate.ClientID%>").val();
+			if (moment('' + appDate + '').isAfter(futureDate)) {
+				toastr.error("Appointment date cannot be set to over 7 months");
+				$("#<%=AppointmentDate.ClientID%>").val("");
+				return false;
+			}
+            appointmentCount();
+        });
 
 		$('#DateOfVisit').datepicker({
 			allowPastDates: true,
@@ -2492,45 +2531,7 @@
 		//    momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
 		//});
 
-		$("#PersonAppointmentDateD").datetimepicker({
-			format: 'DD-MMM-YYYY',
-			allowInputToggle: true,
-			useCurrent: false,
-			minDate: minDate
-		});
 
-		$("#AppointmentDate").change(function () {
-			var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
-			var appDate = $("#<%=AppointmentDate.ClientID%>").val();
-			if (moment('' + appDate + '').isAfter(futureDate)) {
-				toastr.error("Appointment date cannot be set to over 7 months");
-				$("#<%=AppointmentDate.ClientID%>").val("");
-				return false;
-			}
-			appointmentCount();
-		});
-
-		<%--$('#PersonAppointmentDate').on('changed.fu.datepicker dateClicked.fu.datepicker', function (event, date) {
-			var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
-			var appDate = $("#<%=AppointmentDate.ClientID%>").val();
-			if (moment('' + appDate + '').isAfter(futureDate)) {
-				toastr.error("Appointment date cannot be set to over 7 months");
-				$("#<%=AppointmentDate.ClientID%>").val("");
-				return false;
-			}
-			appointmentCount();
-		});--%>
-
-		$('#PersonAppointmentDateD').datetimepicker().on('dp.change',function(e) {
-			var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
-			var appDate = $("#<%=AppointmentDate.ClientID%>").val();
-			if (moment('' + appDate + '').isAfter(futureDate)) {
-				toastr.error("Appointment date cannot be set to over 7 months");
-				$("#<%=AppointmentDate.ClientID%>").val("");
-				return false;
-			}
-			appointmentCount();
-		});
 
 
 		$('#PCDateOfOnset').on('changed.fu.datepicker dateClicked.fu.datepicker', function (event, date) {
@@ -3805,7 +3806,8 @@
 
 	//Appointment 
 
-	function checkExistingAppointment() {
+    function checkExistingAppointment() {
+        var appointmentId = "<%=AppointmentId%>";
 		var patientId = "<%=PatientId%>";
 		var appointmentDate = $("#<%=AppointmentDate.ClientID%>").val();
 		var serviceArea = $("#<%=ServiceArea.ClientID%>").val();
@@ -3821,11 +3823,24 @@
 				async: false,
 				cache: false,
 				success: function (response) {
-					if (response.d != null) {
-						toastr.error("Appointment already exists");
-						return false;
-					}
-					addPatientAppointment();
+                    if (response.d != null) {
+                        if (appointmentId = JSON.stringify(response.d.AppointmentId))
+                        {
+                            updateAppointment(appointmentId);
+                        }
+                        else {
+                            toastr.error("Appointment already exists");
+                            return false;
+                        }
+                        //alert(JSON.stringify(response.d.AppointmentId));
+                        //updateAppointment(response.d.AppointmentId);
+                    }
+                    if (appointmentId > 0) {
+                        updateAppointment(appointmentId);
+                    }
+                    else {
+                        addPatientAppointment();
+                    }
 				},
 				error: function (msg) {
 					alert(msg.responseText);
@@ -3858,7 +3873,36 @@
 				toastr.error(response.d, "Appointment not saved");
 			}
 		});
-	}
+    }
+
+    function updateAppointment(AppointmentId) {
+        var serviceArea = $("#<%=ServiceArea.ClientID%>").val();
+        var reason = $("#<%=Reason.ClientID%>").val();
+            var description = $("#<%=description.ClientID%>").val();
+            var status = $("#<%=status.ClientID%>").val();
+            var differentiatedCareId = $("#<%=DifferentiatedCare.ClientID%>").val();
+            /*if (status === '') { status = null }*/
+            var appointmentDate = $("#<%=AppointmentDate.ClientID%>").val();
+            var patientId = <%=PatientId%>;
+            var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            var userId = <%=UserId%>;
+            var appointmentid = AppointmentId;
+                $.ajax({
+                    type: "POST",
+                    url: "../WebService/PatientService.asmx/UpdatePatientAppointment",
+                    data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','appointmentDate': '" + appointmentDate + "','description': '" + description + "','reasonId': '" + reason + "','serviceAreaId': '" + serviceArea + "','statusId': '" + status + "','differentiatedCareId': '" + differentiatedCareId + "','userId':'" + userId + "','appointmentId':'" + appointmentid + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        toastr.success(response.d, "Appointment updated successfully");
+                        resetFields();
+                        setTimeout(function () { window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>'; }, 2500);
+                    },
+                    error: function (response) {
+                        toastr.error(response.d, "Appointment not saved");
+                    }
+                });
+    }
 
 	function appointmentCount() {
 		jQuery.support.cors = true;

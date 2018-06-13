@@ -7,9 +7,7 @@
 <%@ Register Src="~/CCC/UC/ucPatientClinicalEncounter.ascx" TagPrefix="uc" TagName="ucPatientClinicalEncounter" %>
 <%@ Register Src="~/CCC/UC/ucPatientLabs.ascx" TagPrefix="uc" TagName="ucPatientLabs" %>
 <%@ Register Src="~/CCC/UC/ucPatientSychosocialCriteria.ascx" TagPrefix="uc" TagName="ucPatientPsycho" %>
-
-
-
+<%@ Register Src="~/CCC/UC/ucNeonatalHistory.ascx" TagPrefix="uc" TagName="ucNeonatalHistory" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
     
@@ -31,9 +29,10 @@
     <div class="col-md-12 col-xs-12">
 
          <div class="tab-content">
+             
 
             <div role="tabpanel" class="tab-pane fade" id="encounter">
-               
+                <%--<uc:ucNeonatalHistory runat="server" id="ucNeonatalHistory" />--%>
                 <uc:ucPatientClinicalEncounter runat="server" id="ucPatientClinicalEncounter" />
             </div>
 
