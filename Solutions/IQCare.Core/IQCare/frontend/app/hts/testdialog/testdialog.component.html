@@ -19,7 +19,8 @@
         </mat-form-field>
 
         <mat-form-field>
-            <input matInput [min]="minDate" placeholder="Expiry Date" required [matDatepicker]="expiryDatepicker" (click)="expiryDatepicker.open()" id="expiryDatepicker" name="expiryDatepicker" formControlName="expiryDate" required>
+            <input matInput [min]="minDate" placeholder="Expiry Date" required [matDatepicker]="expiryDatepicker" (click)="expiryDatepicker.open()"
+                id="expiryDatepicker" name="expiryDatepicker" formControlName="expiryDate" required>
             <mat-datepicker-toggle matSuffix [for]="expiryDatepicker"></mat-datepicker-toggle>
             <mat-datepicker #expiryDatepicker></mat-datepicker>
             <mat-error *ngIf="!form.controls['expiryDate'].valid">Please select an Expiry Date</mat-error>
