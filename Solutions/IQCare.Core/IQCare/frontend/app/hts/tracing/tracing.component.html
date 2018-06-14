@@ -1,0 +1,38 @@
+<h2 mat-dialog-title>TRACING Detail</h2>
+
+<mat-divider></mat-divider>
+<br/>
+<br/>
+
+<form [formGroup]="form">
+    <mat-dialog-content>
+        <mat-form-field>
+            <input matInput [max]="maxTracingDate" placeholder="Tracing Date" required [matDatepicker]="tracingDatepicker" (click)="tracingDatepicker.open()"
+                id="tracingDatepicker" name="tracingDatepicker" formControlName="tracingDate" required>
+            <mat-datepicker-toggle matSuffix [for]="tracingDatepicker"></mat-datepicker-toggle>
+            <mat-datepicker #tracingDatepicker></mat-datepicker>
+            <mat-error *ngIf="!form.controls['tracingDate'].valid">Please select a Tracing Date</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-select placeholder="Mode" formControlName="mode" required>
+                <mat-option value=""></mat-option>
+                <mat-option *ngFor="let option of tracingModeOptions" [value]="option">{{option.itemName}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="!form.controls['mode'].valid">Please select Tracing Mode</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-select placeholder="Outcome" formControlName="outcome" required>
+                <mat-option value=""></mat-option>
+                <mat-option *ngFor="let option of tracingOutcomeOptions" [value]="option">{{option.itemName}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="!form.controls['outcome'].valid">Please select Tracing Outcome</mat-error>
+        </mat-form-field>
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+        <button class="mat-raised-button" (click)="close()">Close</button>
+        <button class="mat-raised-button mat-primary" (click)="save()">Save</button>
+    </mat-dialog-actions>
+</form>

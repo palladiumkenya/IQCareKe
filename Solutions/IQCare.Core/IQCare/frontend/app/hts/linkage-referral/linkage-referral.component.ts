@@ -1,26 +1,28 @@
-import {Component, NgZone, OnInit} from '@angular/core';
-import {FormControl} from '@angular/forms';
+import { MatDialogConfig, MatDialog } from '@angular/material';
+import { Component, NgZone, OnInit } from '@angular/core';
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import {Referral} from '../_models/referral';
-import {LinkageReferralService} from '../_services/linkage-referral.service';
-import {Tracing} from '../_models/tracing';
-import {ActivatedRoute, Router} from '@angular/router';
-import {select, Store} from '@ngrx/store';
+import { Referral } from '../_models/referral';
+import { LinkageReferralService } from '../_services/linkage-referral.service';
+import { Tracing } from '../_models/tracing';
+import { ActivatedRoute, Router } from '@angular/router';
+import { select, Store } from '@ngrx/store';
 import * as Consent from '../../shared/reducers/app.states';
-import {Observable} from 'rxjs/Observable';
-import {debounceTime} from 'rxjs/operators';
-import {SnotifyService} from 'ng-snotify';
-import {NotificationService} from '../../shared/_services/notification.service';
-import {AppStateService} from '../../shared/_services/appstate.service';
-import {AppEnum} from '../../shared/reducers/app.enum';
-declare var $: any;
+import { Observable } from 'rxjs/Observable';
+import { debounceTime } from 'rxjs/operators';
+import { SnotifyService } from 'ng-snotify';
+import { NotificationService } from '../../shared/_services/notification.service';
+import { AppStateService } from '../../shared/_services/appstate.service';
+import { AppEnum } from '../../shared/reducers/app.enum';
+import { TracingComponent } from '../tracing/tracing.component';
 
 @Component({
-  selector: 'app-linkage-referral',
-  templateUrl: './linkage-referral.component.html',
-  styleUrls: ['./linkage-referral.component.css']
+    selector: 'app-linkage-referral',
+    templateUrl: './linkage-referral.component.html',
+    styleUrls: ['./linkage-referral.component.css']
 })
 export class LinkageReferralComponent implements OnInit {
+    form: FormGroup;
     referral: Referral;
     tracing: Tracing;
     tracingArray: Tracing[];
@@ -31,21 +33,27 @@ export class LinkageReferralComponent implements OnInit {
     filteredOptions: Observable<any[]>;
     myControl: FormControl = new FormControl();
     referralReasons: any[];
+    minDateEnrolled: any;
+
+    isEdit: boolean = false;
 
     constructor(private _linkageReferralService: LinkageReferralService,
-                private router: Router,
-                private route: ActivatedRoute,
-                public zone: NgZone,
-                private store: Store<AppState>,
-                private snotifyService: SnotifyService,
-                private notificationService: NotificationService,
-                private appStateService: AppStateService) {
+        private router: Router,
+        private route: ActivatedRoute,
+        public zone: NgZone,
+        private store: Store<AppState>,
+        private snotifyService: SnotifyService,
+        private notificationService: NotificationService,
+        private appStateService: AppStateService,
+        private _formBuilder: FormBuilder,
+        private dialog: MatDialog) {
+
+        this.minDateEnrolled = new Date();
 
         this.myControl.valueChanges.pipe(
             debounceTime(400)
         ).subscribe(data => {
             this._linkageReferralService.filterFacilities(data).subscribe(res => {
-                // console.log(res);
                 this.filteredOptions = res['facilityList'];
             });
         });
@@ -56,53 +64,71 @@ export class LinkageReferralComponent implements OnInit {
         this.tracing = new Tracing();
         this.tracingArray = [];
 
+        this.form = this._formBuilder.group({
+            dateToBeEnrolled: new FormControl(this.referral.dateToBeEnrolled, [Validators.required])
+        });
+
+        // Fetch previous referral if it exists
+        this.getClientReferral();
+
         this.getTracingOptions();
         this.getReferralReasons();
+    }
 
-        const self = this;
-
-        setTimeout(() => {
-            $('#linkageWizard').on('actionclicked.fu.wizard', function(evt, data) {
-                if (data.step === 1) {
-                    if (data.direction === 'previous') {
-                        return;
-                    } else {
-                        $('#datastep1').parsley().destroy();
-                        $('#datastep1').parsley({
-                            excluded: 'input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden'
-                        });
-
-                        if ($('#datastep1').parsley().validate()) {
-                            // validated
-                        } else {
-                            evt.preventDefault();
-                            return;
+    getClientReferral() {
+        const personId = JSON.parse(localStorage.getItem('personId'));
+        this._linkageReferralService.getClientReferral(personId).subscribe(
+            (res) => {
+                if (res.length > 0) {
+                    this.form.controls.dateToBeEnrolled.setValue(res[0]['referralDate']);
+                    this._linkageReferralService.getFacility(res[0]['toFacility']).subscribe(
+                        (result) => {
+                            if (result.length > 0) {
+                                console.log(result);
+                                this.filteredOptions = result;
+                                this.myControl.setValue(result[0]);
+                            }
                         }
-                    }
-                } else if (data.step === 2) {
-                    if (data.direction === 'previous') {
-                        return;
-                    } else {
-                        $('#datastep2').parsley().destroy();
-                        $('#datastep2').parsley({
-                            excluded: 'input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden'
-                        });
-
-                        if ($('#datastep2').parsley().validate()) {
-                            /* submit all forms */
-                            self.onSubmitForm();
-                        } else {
-                            console.log('Parseley Validated Error');
-                            evt.preventDefault();
-                            return;
-                        }
-                    }
+                    );
+                    this.isEdit = true;
+                } else {
+                    this.isEdit = false;
                 }
-            })
-                .on('changed.fu.wizard', function() {})
-                .on('stepclicked.fu.wizard', function() {})
-                .on('finished.fu.wizard', function(e) {});
-        }, 0 );
+            },
+            (error) => {
+
+            }
+        );
+    }
+
+    newTrace() {
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.height = '75%';
+        dialogConfig.width = '60%';
+
+        dialogConfig.data = {
+            tracingMode: this.tracingModeOptions,
+            tracingOutcome: this.tracingOutcomeOptions
+        };
+
+        const dialogRef = this.dialog.open(TracingComponent, dialogConfig);
+
+        dialogRef.afterClosed().subscribe(
+            data => {
+                if (!data) {
+                    return;
+                }
+
+                this.tracing.tracingDate = data.tracingDate;
+                this.tracing.outcome = data.outcome;
+                this.tracing.mode = data.mode;
+
+                this.tracingArray.push(this.tracing);
+                this.tracing = new Tracing();
+            }
+        );
     }
 
     getReferralReasons() {
@@ -116,14 +142,6 @@ export class LinkageReferralComponent implements OnInit {
 
     displayFn(facility?: any): string | undefined {
         return facility ? facility.name : undefined;
-    }
-
-    onAddingTracing() {
-        this.tracingArray.push(this.tracing);
-        // console.log(this.tracingArray);
-        this.tracing = new Tracing();
-        /*Hide the modal after saving*/
-        $('#tracingModal').modal('hide');
     }
 
     getTracingOptions() {
@@ -146,15 +164,24 @@ export class LinkageReferralComponent implements OnInit {
     }
 
     onSubmitForm() {
+        console.log(this.myControl);
+        if (!this.form.valid) {
+            return;
+        }
+
+        if (!this.myControl.value || !this.myControl.value.hasOwnProperty('mflCode')) {
+            this.snotifyService.error('Please select a valid facility', 'Referral', this.notificationService.getConfig());
+            return;
+        }
+
         this.referral.personId = JSON.parse(localStorage.getItem('personId'));
         this.referral.facilityId = JSON.parse(localStorage.getItem('appPosID'));
         this.referral.userId = JSON.parse(localStorage.getItem('appUserId'));
-        // this.referral.facilityId = 13050;
-        // this.referral.userId = 1;
         this.referral.serviceAreaId = 2;
-        this.referral.referredTo = this.referral.referredToFacility.mflCode;
+        this.referral.referredTo = this.myControl.value.mflCode;
+        this.referral.dateToBeEnrolled = this.form.value.dateToBeEnrolled;
 
-        const optionSelected = this.referralReasons.filter(function( obj ) {
+        const optionSelected = this.referralReasons.filter(function (obj) {
             return obj.itemName == 'CCCEnrollment';
         });
 
@@ -165,7 +192,16 @@ export class LinkageReferralComponent implements OnInit {
         this.referral.referralReason = optionSelected[0]['itemId'];
         const tracingType = tracingTypeValue[0]['itemId'];
 
-        this._linkageReferralService.addReferralTracing(this.referral, this.tracingArray, tracingType).subscribe(data => {
+
+        if (this.isEdit) {
+            this.addNewReferralTracing(tracingType, true);
+        } else {
+            this.addNewReferralTracing(tracingType, false);
+        }
+    }
+
+    addNewReferralTracing(tracingType: any, isEdit: boolean) {
+        this._linkageReferralService.addReferralTracing(this.referral, this.tracingArray, tracingType, isEdit).subscribe(data => {
             this.store.dispatch(new Consent.IsReferred(true));
 
             this.store.pipe(select('app')).subscribe(res => {
