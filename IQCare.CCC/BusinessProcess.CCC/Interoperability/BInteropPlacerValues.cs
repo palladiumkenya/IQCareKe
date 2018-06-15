@@ -20,7 +20,7 @@ namespace BusinessProcess.CCC.Interoperability
             }
         }
 
-        public InteropPlacerValues GetInteropPlacerValues(int interopPlacerTypeId, int identifierType, int placerValue)
+        public InteropPlacerValues GetInteropPlacerValues(int interopPlacerTypeId, int identifierType, string placerValue)
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {

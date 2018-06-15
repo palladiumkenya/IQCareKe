@@ -21,6 +21,43 @@ namespace IQCare.Common.BusinessProcess.Services
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
 
+        public async Task<AppStateStore> AddAppStateStore(int personId, int patientId, int appStateId, int? patientMasterVisitId, int? encounterId, string appStateStoreObjects = null)
+        {
+            try
+            {
+                AppStateStore appStateStore = new AppStateStore()
+                {
+                    AppStateId = appStateId,
+                    EncounterId = encounterId,
+                    PatientId = patientId,
+                    PatientMasterVisitId = patientMasterVisitId,
+                    DeleteFlag = false,
+                    PersonId = personId,
+                    StatusDate = DateTime.Now
+                };
+
+                await _unitOfWork.Repository<AppStateStore>().AddAsync(appStateStore);
+                await _unitOfWork.SaveAsync();
+
+                if (!string.IsNullOrWhiteSpace(appStateStoreObjects))
+                {
+                    await _unitOfWork.Repository<AppStateStoreObjects>().AddAsync(new AppStateStoreObjects()
+                    {
+                        AppStateStoreId = appStateStore.Id,
+                        AppStateObject = appStateStoreObjects
+
+                    });
+                    await _unitOfWork.SaveAsync();
+                }
+
+                return appStateStore;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         public async Task<InteropPlacerValue> AddInteropPlacerValue(int entityId, int identifierType, int interopPlacerTypeId, string placerValue)
         {
             try

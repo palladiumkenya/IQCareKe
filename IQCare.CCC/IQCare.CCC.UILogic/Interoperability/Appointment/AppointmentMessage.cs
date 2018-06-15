@@ -292,7 +292,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
                             InteropPlacerTypeManager interopPlacerTypeManager = new InteropPlacerTypeManager();
                             int interopPlacerTypeId = interopPlacerTypeManager.GetInteropPlacerTypeByName(appointment.PLACER_APPOINTMENT_NUMBER.ENTITY).Id;
 
-                            var interopPlacerValues = interopPlacerValuesManager.GetInteropPlacerValues(interopPlacerTypeId, 3, Convert.ToInt32(appointment.PLACER_APPOINTMENT_NUMBER.NUMBER));
+                            var interopPlacerValues = interopPlacerValuesManager.GetInteropPlacerValues(interopPlacerTypeId, 3, appointment.PLACER_APPOINTMENT_NUMBER.NUMBER);
                             if (interopPlacerValues != null)
                             {
                                 PatientAppointment patientAppointment = manager.GetPatientAppointment(interopPlacerValues.EntityId);
@@ -326,7 +326,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
                                     IdentifierType = 3,
                                     EntityId = appointmentId,
                                     InteropPlacerTypeId = interopPlacerTypeId,
-                                    PlacerValue = Convert.ToInt32(appointment.PLACER_APPOINTMENT_NUMBER.NUMBER)
+                                    PlacerValue = appointment.PLACER_APPOINTMENT_NUMBER.NUMBER
                                 };
                                 interopPlacerValuesManager.AddInteropPlacerValue(placerValues);
                             }
@@ -478,7 +478,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
                             InteropPlacerTypeManager interopPlacerTypeManager = new InteropPlacerTypeManager();
                             int interopPlacerTypeId = interopPlacerTypeManager.GetInteropPlacerTypeByName(appointment.PLACER_APPOINTMENT_NUMBER.ENTITY).Id;
 
-                            var interopPlacerValues = interopPlacerValuesManager.GetInteropPlacerValues(interopPlacerTypeId, 3, Convert.ToInt32(appointment.PLACER_APPOINTMENT_NUMBER.NUMBER));
+                            var interopPlacerValues = interopPlacerValuesManager.GetInteropPlacerValues(interopPlacerTypeId, 3, appointment.PLACER_APPOINTMENT_NUMBER.NUMBER);
                             if (interopPlacerValues != null)
                             {
                                 PatientAppointment patientAppointment = manager.GetPatientAppointment(interopPlacerValues.EntityId);
@@ -506,13 +506,13 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
                                     CreateDate=DateTime.Now
                                 };
 
-                                int appointmentId = manager.AddPatientAppointments(patientAppointment);
+                                int appointmentId = manager.AddPatientAppointments(patientAppointment, false);
                                 InteropPlacerValues placerValues = new InteropPlacerValues()
                                 {
                                     IdentifierType = 3,
                                     EntityId = appointmentId,
                                     InteropPlacerTypeId = interopPlacerTypeId,
-                                    PlacerValue = Convert.ToInt32(appointment.PLACER_APPOINTMENT_NUMBER.NUMBER)
+                                    PlacerValue = appointment.PLACER_APPOINTMENT_NUMBER.NUMBER
                                 };
                                 interopPlacerValuesManager.AddInteropPlacerValue(placerValues);
                             }
