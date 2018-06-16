@@ -378,7 +378,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                     else
                     {
                         msg = ProcessPatient.Add(firstName, middleName, lastName, sex, interopUserId, DOB, DOB_Precision,
-                            patientType, facilityId, nationalId, visitType, enrollmentDate, cccNumber, entryPointId, 
+                            facilityId, patientType,  nationalId, visitType, enrollmentDate, cccNumber, entryPointId, 
                             godsNumber, maritalStatusId, village, wardId, subCountyId, countyId, nearestLandMark, postalAdress, phoneNumber,
                             DateOfDeath, nextOfKin);
                     }
