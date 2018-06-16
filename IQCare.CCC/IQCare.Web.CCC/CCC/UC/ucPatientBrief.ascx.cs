@@ -84,7 +84,11 @@ namespace IQCare.Web.CCC.UC
                 //    Session["Gender"] = _lookupManager.GetLookupNameFromId(x.Sex).ToLower();
                 //}
                 //todo patientManagershould have the lookups resolved
-                lblPatientType.Text = LookupLogic.GetLookupNameById(thisPatient.PatientType).ToUpper();
+                var patType = LookupLogic.GetLookupNameById(thisPatient.PatientType);
+                if (patType != null)
+                {
+                    lblPatientType.Text = patType.ToUpper();
+                }
                 // _lookupManager.GetLookupNameFromId(thisPatient.PatientType).ToUpper();
 
                 //lblDOB.Text = thisPatient.DateOfBirth.ToString("dd-MMM-yyyy");

@@ -363,6 +363,8 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                 dateOfBirth, userId);
                             // Add Patient
                             var patient = await registerPersonService.AddPatient(person.Id, userId, facilityId);
+                            // Person is enrolled state
+                            var enrollmentAppState = await registerPersonService.AddAppStateStore(person.Id, patient.Id, 7, null, null);
                             // Enroll patient
                             var patientIdentifier = await registerPersonService.EnrollPatient(enrollmentNo, patient.Id, 2, userId, dateEnrollment);
                             //Add PersonIdentifiers
@@ -450,6 +452,11 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                     //add afya mobile placer value
                                     var addplacerHtsPlacer = await registerPersonService.AddInteropPlacerValue(htsEncounter.Id, 4, 7, encounterNumber);
 
+                                    // Person is tested as state
+                                    var testedAsAppState = await registerPersonService.AddAppStateStore(person.Id, patient.Id, 6, patientMasterVisit.Id, htsEncounter.Id);
+                                    // Person is consent to testing state
+                                    var consentintToTestingAppState = await registerPersonService.AddAppStateStore(person.Id, patient.Id, 1, patientMasterVisit.Id, htsEncounter.Id);
+
                                     //check for hiv tests
                                     if (request.CLIENTS[i].ENCOUNTER.HIV_TESTS != null)
                                     {
@@ -469,6 +476,9 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                             patientMasterVisit.Id, 2, pnsAccepted, consentListPartnersTypeId, encounterDate, providerId,
                                             pnsDeclineReason);
 
+                                        // Person is consent to list partners
+                                        var consentToListPartnersAppState = await registerPersonService.AddAppStateStore(person.Id, patient.Id, 3, patientMasterVisit.Id, htsEncounter.Id);
+
                                         //add screening tests for client
                                         var clientScreeningTesting =
                                             await encounterTestingService.addTesting(screeningTests, htsEncounter.Id, providerId);
@@ -482,6 +492,9 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
 
                                         await encounterTestingService.updateHtsEncounter(htsEncounter.Id, htsEncounter);
                                         var htsEncounterResult = await encounterTestingService.addHtsEncounterResult(htsEncounter.Id, roundOneTestResult, roundTwoTestResult, finalResult);
+
+                                        // Person is positive
+                                        var partnerIsPositiveAppState = await registerPersonService.AddAppStateStore(person.Id, patient.Id, 4, patientMasterVisit.Id, htsEncounter.Id);
                                     }
 
                                     //Tracing

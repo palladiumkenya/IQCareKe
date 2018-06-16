@@ -8,7 +8,7 @@ namespace Interface.CCC.Interoperability
 {
     public interface IInteropPlacerValuesManager
     {
-        InteropPlacerValues GetInteropPlacerValues(int interopPlacerTypeId, int identifierType, int placerValue);
+        InteropPlacerValues GetInteropPlacerValues(int interopPlacerTypeId, int identifierType, string placerValue);
 
         int AddInteropPlacerValue(InteropPlacerValues interopPlacerValues);
     }

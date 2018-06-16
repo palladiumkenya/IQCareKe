@@ -403,7 +403,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
 
                 if (patientMasterVisitId > 0)
                 {
-                    int patientIdentifierId = patientIdentifierManager.addPatientIdentifier(patientId, patientEnrollmentId, 1, cccNumber, facilityId);
+                    int patientIdentifierId = patientIdentifierManager.addPatientIdentifier(patientId, patientEnrollmentId, 1, cccNumber, facilityId, false);
 
                     if (greencardptnpk.Count == 0)
                     {
