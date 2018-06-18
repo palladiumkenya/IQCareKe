@@ -187,6 +187,9 @@
         var age = "<%=PatientAge%>";
         var gender = "<%=PatientGender%>";
         var pregnancyStatus = <%=PregnancyStatus%>;
+        var enrollmentDate = "<%=DateOfEnrollment%>";
+
+       // alert(enrollmentDate);
 
         $("#<%=weights.ClientID%>").focusout(function() {
             getLastVisitVitals("weight");
@@ -240,10 +243,17 @@
         $('#VisitDatedatepicker').on('dp.change', function (e) {
 
             var vDate = moment($("#PersonDoB").val(), 'DD-MMM-YYYYY').toDate();
+            var validDateOfVisit = moment(vDate).isBefore(enrollmentDate);
             var futuredate = moment(vDate).isAfter(new Date());
             if (futuredate) {
                 $("#<%=PersonDoB.ClientID%>").val('');
                 toastr.error("Future dates not allowed!");
+               
+                return false;
+            }
+            if (validDateOfVisit) {
+                toastr.error("VISIT date CANNOT be before ENROLLMENT date");
+                $("#<%=PersonDoB.ClientID%>").val('');
                 return false;
             }
 
@@ -452,6 +462,7 @@
     }
 
     function addPatientVitals() {
+
         var height = $("#<%=Heights.ClientID%>").val();
         var weight = $("#<%=weights.ClientID%>").val();
         //var dateOfVisit;

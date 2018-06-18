@@ -139,6 +139,7 @@
     <Compile Include="Interoperability\Enrollment\ProcessPatient.cs" />
     <Compile Include="Interoperability\Appointment\ProcessPatientAppointmentMessage.cs" />
     <Compile Include="Interoperability\Enrollment\ProcessRegistration.cs" />
+    <Compile Include="Interoperability\IlStatisticsManager.cs" />
     <Compile Include="Interoperability\InteropPlacerTypeManager.cs" />
     <Compile Include="Interoperability\InteropPlacerValuesManager.cs" />
     <Compile Include="Interoperability\InteropUser.cs" />
