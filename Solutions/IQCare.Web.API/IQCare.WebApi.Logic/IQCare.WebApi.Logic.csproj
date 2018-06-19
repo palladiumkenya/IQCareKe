@@ -121,6 +121,7 @@
     <Compile Include="ApiInteropManager.cs" />
     <Compile Include="ApiOutboxmanager.cs" />
     <Compile Include="Helpers\AppSettings.cs" />
+    <Compile Include="Helpers\IQConfig.cs" />
     <Compile Include="MappingEntities\drugs\COMMONORDERDETAILS.cs" />
     <Compile Include="MappingEntities\drugs\CommonOrderDetailsEntity.cs" />
     <Compile Include="MappingEntities\drugs\IdentificationEntity.cs" />
