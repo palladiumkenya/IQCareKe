@@ -1300,7 +1300,7 @@
 						dataType: "json",
 						success: function (response) {
                             var patientDetails = JSON.parse(response.d);
-						    alert(response.d);
+						    //alert(response.d);
 							console.log(patientDetails);
 							/*Patient Type*/
 							//console.log(patientDetails.PatientType);

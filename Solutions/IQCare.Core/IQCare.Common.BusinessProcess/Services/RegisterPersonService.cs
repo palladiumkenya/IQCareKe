@@ -21,6 +21,52 @@ namespace IQCare.Common.BusinessProcess.Services
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
 
+        public async Task<AfyaMobileInbox> UpdateAfyaMobileInbox(int id, string afyamobileId = null, bool processed = false, DateTime? dateProcessed = null, string logMessage = null)
+        {
+            try
+            {
+                var afyaMobileMessage = await _unitOfWork.Repository<AfyaMobileInbox>().FindByIdAsync(id);
+                afyaMobileMessage.AfyamobileId = afyamobileId;
+                afyaMobileMessage.Processed = processed;
+                afyaMobileMessage.DateProcessed = dateProcessed;
+                afyaMobileMessage.LogMessage = logMessage;
+
+                _unitOfWork.Repository<AfyaMobileInbox>().Update(afyaMobileMessage);
+                await _unitOfWork.SaveAsync();
+
+                return afyaMobileMessage;
+            }
+            catch (Exception e)
+            {
+                Log.Error(e.Message);
+                throw e;
+            }
+        }
+
+        public async Task<AfyaMobileInbox> AddAfyaMobileInbox(DateTime dateReceived, string afyaMobileId = null, string message = null, bool processed = false, DateTime? dateProcessed = null, string logMessage = null)
+        {
+            try
+            {
+                AfyaMobileInbox afyaMobileInbox = new AfyaMobileInbox()
+                {
+                    DateReceived = dateReceived,
+                    AfyamobileId = afyaMobileId,
+                    Message = message,
+                    Processed = processed,
+                    DateProcessed = dateProcessed,
+                    LogMessage = logMessage
+                };
+                await _unitOfWork.Repository<AfyaMobileInbox>().AddAsync(afyaMobileInbox);
+                await _unitOfWork.SaveAsync();
+                return afyaMobileInbox;
+            }
+            catch (Exception e)
+            {
+                Log.Error(e.Message);
+                throw e;
+            }
+        }
+
         public async Task<AppStateStore> AddAppStateStore(int personId, int patientId, int appStateId, int? patientMasterVisitId, int? encounterId, string appStateStoreObjects = null)
         {
             try
