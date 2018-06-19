@@ -133,6 +133,18 @@ namespace DataAccess.Base
             string constr = objUtil.Decrypt(ConfigurationManager.AppSettings.Get(key));
             return constr;
         }
+
+        public static string ConnectionString
+        {
+            get
+            {
+                Utility objUtil = new Utility();
+                string key = "ConnectionString";
+                string constr = objUtil.Decrypt(ConfigurationManager.AppSettings.Get(key));
+                return constr;
+            }
+        }
+
         /// <summary>
         /// Tests the connection.
         /// </summary>
