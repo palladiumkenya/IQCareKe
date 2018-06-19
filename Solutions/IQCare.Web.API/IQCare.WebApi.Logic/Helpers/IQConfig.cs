@@ -1,4 +1,5 @@
-﻿using Application.Presentation;
+﻿using Application.Common;
+using Application.Presentation;
 using Interface.WebApi;
 
 namespace IQCare.WebApi.Logic.Helpers
@@ -9,7 +10,8 @@ namespace IQCare.WebApi.Logic.Helpers
 
         public string GetIQCareConnectionString()
         {
-            return iQConfig.EMRConnectionString;
+            Utility objUtil = new Utility();
+            return  objUtil.Decrypt(iQConfig.EMRConnectionString);
         }
     }
 }

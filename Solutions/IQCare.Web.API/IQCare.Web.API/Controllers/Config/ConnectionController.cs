@@ -8,7 +8,7 @@ namespace IQCare.Web.Api.Controllers.Config
     [RoutePrefix("api/config/{controller}/{Id}")]
     public class ConnectionController : ApiController
     {
-        readonly string TOKEN = "IQCARE_API";
+        readonly string TOKEN = "31LgBzXbDSPj28AwWars8Q==";
         readonly IQConfig ConfigHelper;
         public ConnectionController()
         {

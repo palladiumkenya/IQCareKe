@@ -134,13 +134,13 @@ namespace DataAccess.Base
             return constr;
         }
 
-        public static string ConnectionString
+        public static string SecureConnectionString
         {
             get
             {
-                Utility objUtil = new Utility();
+                
                 string key = "ConnectionString";
-                string constr = objUtil.Decrypt(ConfigurationManager.AppSettings.Get(key));
+                string constr = ConfigurationManager.AppSettings.Get(key);
                 return constr;
             }
         }

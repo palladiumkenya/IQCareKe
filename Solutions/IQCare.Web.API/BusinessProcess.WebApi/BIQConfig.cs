@@ -5,6 +5,6 @@ namespace BusinessProcess.WebApi
 {
     public class BIQConfig : ProcessBase, IIQConfig
     {
-        public string EMRConnectionString => DataMgr.ConnectionString;
+        public string EMRConnectionString => DataMgr.SecureConnectionString;
     }
 }
