@@ -117,6 +117,7 @@
     <Compile Include="Lookup\IPatientTreatmentSupporterLookupManager.cs" />
     <Compile Include="Lookup\IPatientTreatmentTrackerManager.cs" />
     <Compile Include="Lookup\IPersonContactLookUpManager.cs" />
+    <Compile Include="Lookup\IPersonExtendedLookupManager.cs" />
     <Compile Include="Lookup\IPersonGreenCardLookupManager.cs" />
     <Compile Include="Lookup\IPersonLookUpManager.cs" />
     <Compile Include="Lookup\ITestingSummaryStatisticsManager.cs" />

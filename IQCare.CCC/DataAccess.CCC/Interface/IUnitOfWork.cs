@@ -37,6 +37,7 @@ namespace DataAccess.CCC.Interface
         //ILookupPatientRegimenMap LookupPatientRegimenMapRepository { get; }
         IIlStatisticsRepository IlStatisticsRepository { get; }
         IIlMessengerRepository IlMessengerRepository { get; }
+        IPersonExtendedLookupRepository PersonExtendedLookupRepository { get; }
 
         /* person and patient */
         IPersonRepository PersonRepository { get; }

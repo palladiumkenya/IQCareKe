@@ -124,6 +124,7 @@
     <Compile Include="Interface\Lookup\IPatientTreatmentTrackerLookupRepository.cs" />
     <Compile Include="Interface\Lookup\IPatientServiceEnrollmentLookupRepository.cs" />
     <Compile Include="Interface\Lookup\IPatientTreatmentSupporterLookupRepository.cs" />
+    <Compile Include="Interface\Lookup\IPersonExtendedLookupRepository.cs" />
     <Compile Include="Interface\Lookup\IPersonGreenCardLookupRepository.cs" />
     <Compile Include="Interface\Lookup\ITestingSummaryStatisticsRepository.cs" />
     <Compile Include="Interface\Patient\IBluecardAppointmentRepository.cs" />
@@ -221,6 +222,7 @@
     <Compile Include="Repository\Lookup\PatientTreatmentSupporterLookupRepository.cs" />
     <Compile Include="Repository\Lookup\PatientTreatmentTrackerLookupRepository.cs" />
     <Compile Include="Repository\Lookup\PersonContactLookUpRepository.cs" />
+    <Compile Include="Repository\Lookup\PersonExtendedLookupRepository.cs" />
     <Compile Include="Repository\Lookup\PersonGreenCardLookupRepository.cs" />
     <Compile Include="Repository\Lookup\PersonLookUpRepository.cs" />
     <Compile Include="Repository\Lookup\TestingSummaryStatisticsRepository.cs" />

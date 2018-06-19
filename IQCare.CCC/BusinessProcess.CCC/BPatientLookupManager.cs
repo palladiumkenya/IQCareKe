@@ -407,5 +407,14 @@ namespace BusinessProcess.CCC
                 return context.PatientRelationshipList.Where(p => p.PatientId == patientId).ToList();
             }
         }
+
+        public PersonExtLookup GetPersonExtLookups(int personId)
+        {
+          
+            using (LookupContext context = new LookupContext())
+            {
+                return context.PersonExtLookup.Where(x => x.PersonId == personId).First();
+            }
+        }
     }
 }
