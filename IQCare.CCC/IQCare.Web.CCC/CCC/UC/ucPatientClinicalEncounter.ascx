@@ -2127,7 +2127,9 @@
 	var PatientId = "<%=PtnId%>";
 	var PatientMasterVisitId = "<%=PmVisitId%>";
 	var adverseEventName = "";
-	var adverseEventId = 0;
+    var adverseEventId = 0;
+
+	//alert(DateOfEnrollment);
 
 	document.getElementById('txtPresentingComplaintsID').style.display = 'none';
 	document.getElementById('txtAllergyId').style.display = 'none';
@@ -2574,6 +2576,32 @@
 			}
 			appointmentCount();
 		});--%>
+
+	    /* limit future dates viralload baseline date*/
+	    $("#DateOfVisit").on('changed.fu.datepicker dateClicked.fu.datepicker',function(event, date) {
+            var dlDate = $('#DateOfVisit').datepicker('getDate');
+	        //alert(dlDate);
+
+            //var beforeEnrollment = moment(dlDate).isBefore(DateOfEnrollment);
+            //if (beforeEnrollment) {
+            //    toastr.error("VISIT Date CANNOT be before ENROLLMENT Date");
+            //    //        $("#TreatmeantInitiationBaselineViralloadDate").val('');
+            //           return false;
+            //}
+	        //var futureDate = moment(dlDate).isAfter(today);
+	        //    if (futureDate) {
+	        //        toastr.error("Future dates NOT allowed on Baseline ViralLoad Entries");
+	        //        $("#TreatmeantInitiationBaselineViralloadDate").val('');
+	        //        return false;
+	        //    }
+	        //    var dhid = $("#DHID").datepicker('getDate');
+	        //    if (moment(dlDate).isBefore(dhid)) {
+	        //        $("#TreatmeantInitiationBaselineViralloadDate").val('');
+	        //        toastr.error("Baseline Viral Load date CANNOT be ealier than HIV Diagnosis Date");
+	        //        return false;
+	        //    }
+	    });
+
 
 		$('#PersonAppointmentDateD').datetimepicker().on('dp.change',function(e) {
 			var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');

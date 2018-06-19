@@ -3,6 +3,7 @@ using System.Web;
 using Application.Presentation;
 using Interface.CCC.Lookup;
 using IQCare.CCC.UILogic;
+using IQCare.CCC.UILogic.Interoperability;
 
 namespace IQCare.Web.CCC
 {
@@ -23,7 +24,12 @@ namespace IQCare.Web.CCC
                 {
                     TestingSummaryStatisticsManager statistics = new TestingSummaryStatisticsManager();
                     PatientStabilitySummaryManager summaryManager = new PatientStabilitySummaryManager();
+                    IlStatisticsManager ilStatisticsManager = new IlStatisticsManager();
 
+                    var stats = ilStatisticsManager.GetILStatistics();
+                    lblOutgoing.Text = stats.Outbox.ToString();
+                    lblIncoming.Text = stats.Inbox.ToString();
+                  
                     var statList = statistics.GetAllStatistics();
                     var summaryList = summaryManager.GetAllStabilitySummaries();
 

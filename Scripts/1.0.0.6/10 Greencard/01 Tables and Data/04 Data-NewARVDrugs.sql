@@ -13,6 +13,7 @@ INSERT INTO NewDrugList(DrugName,Abbreviation,strength) VALUES('Darunavir-600mg'
 INSERT INTO NewDrugList(DrugName,Abbreviation,strength) VALUES('Atazanavir/Ritonavir-300mg/100mg','ATV/r','300mg/100mg');
 INSERT INTO NewDrugList(DrugName,Abbreviation,strength) VALUES('Lopinavir/Ritonavir-200mg/50mg','LPV/r','200mg/50mg');
 INSERT INTO NewDrugList(DrugName,Abbreviation,strength) VALUES('Lopinavir/Ritonavir-80mg/20mg/ml','LPV/r','80mg/20mg/ml');
+INSERT INTO NewDrugList(DrugName,Abbreviation,strength) VALUES('Lopinavir/Ritonavir-40mg/10mg','LPV/r','40mg/10mg');
 INSERT INTO NewDrugList(DrugName,Abbreviation,strength) VALUES('Reltegravir-400mg','RAL','400mg');
 
 Declare @ItemId int=0,@genericId int,@count int,@counter int=0,@maxId int=0,@minId int=0;
