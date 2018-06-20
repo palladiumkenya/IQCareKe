@@ -349,20 +349,20 @@
     <ROW Directory="z80_Dir" Directory_Parent="mode_Dir" DefaultDir="z80" DirectoryOptions="3"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCompsComponent">
-    <ROW Component="ADODB.dll" ComponentId="{ED4AE715-86E2-4477-85D5-A0E3EE0EDBBE}" Directory_="bin_Dir" Attributes="0" KeyPath="ADODB.dll"/>
+    <ROW Component="ADODB.dll" ComponentId="{70E6F22A-5B2D-4160-8535-9378EF9162BB}" Directory_="bin_Dir" Attributes="0" KeyPath="ADODB.dll"/>
     <ROW Component="ARVcohortstatus.xml" ComponentId="{DDB4D7C1-9073-47FE-A221-363FF241FA2A}" Directory_="Templates_Dir" Attributes="0" KeyPath="ARVcohortstatus.xml" Type="0"/>
     <ROW Component="Abkhazia.png" ComponentId="{CF382DA1-C58C-4E81-B7CF-822007466D64}" Directory_="__Dir" Attributes="0" KeyPath="Abkhazia.png" Type="0"/>
     <ROW Component="Abkhazia.png_1" ComponentId="{BA0A5C06-9752-47E5-BE43-A551189CCA9E}" Directory_="__1_Dir" Attributes="0" KeyPath="Abkhazia.png_1" Type="0"/>
     <ROW Component="Abkhazia.png_2" ComponentId="{E4E33208-EF6B-4477-B78B-E7299947443E}" Directory_="__2_Dir" Attributes="0" KeyPath="Abkhazia.png_2" Type="0"/>
-    <ROW Component="ActiveDatabaseSoftware.ActiveQueryBuilder2.dll" ComponentId="{7D45CE32-9D49-49FA-98FF-823FFCC57985}" Directory_="bin_Dir" Attributes="0" KeyPath="ActiveDatabaseSoftware.ActiveQueryBuilder2.dll"/>
-    <ROW Component="ActiveDatabaseSoftware.MSSQLMetadataProvider2.dll" ComponentId="{F128E350-77B7-4BDE-BDBA-3DB5F7EE8847}" Directory_="bin_Dir" Attributes="0" KeyPath="ActiveDatabaseSoftware.MSSQLMetadataProvider2.dll"/>
-    <ROW Component="ActiveDatabaseSoftware.OLEDBMetadataProvider2.dll" ComponentId="{6006113C-268B-47A9-80E2-7680BA04EC65}" Directory_="bin_Dir" Attributes="0" KeyPath="ActiveDatabaseSoftware.OLEDBMetadataProvider2.dll"/>
-    <ROW Component="ActiveDatabaseSoftware.UniversalMetadataProvider2.dll" ComponentId="{2A283B72-3AAB-4E51-A70D-D4C28782863C}" Directory_="bin_Dir" Attributes="0" KeyPath="ActiveDatabaseSoftware.UniversalMetadataProvider2.dll"/>
+    <ROW Component="ActiveDatabaseSoftware.ActiveQueryBuilder2.dll" ComponentId="{8085F6D8-D0B7-4386-902A-41ADBE30512C}" Directory_="bin_Dir" Attributes="0" KeyPath="ActiveDatabaseSoftware.ActiveQueryBuilder2.dll"/>
+    <ROW Component="ActiveDatabaseSoftware.MSSQLMetadataProvider2.dll" ComponentId="{FE1EAF86-D3D1-4A2C-8321-20EF0D3CCF6C}" Directory_="bin_Dir" Attributes="0" KeyPath="ActiveDatabaseSoftware.MSSQLMetadataProvider2.dll"/>
+    <ROW Component="ActiveDatabaseSoftware.OLEDBMetadataProvider2.dll" ComponentId="{6F4E744D-2258-46CD-9ACA-E195C4E41A26}" Directory_="bin_Dir" Attributes="0" KeyPath="ActiveDatabaseSoftware.OLEDBMetadataProvider2.dll"/>
+    <ROW Component="ActiveDatabaseSoftware.UniversalMetadataProvider2.dll" ComponentId="{B41B84B9-8291-4B44-9D8E-17B8650235CE}" Directory_="bin_Dir" Attributes="0" KeyPath="ActiveDatabaseSoftware.UniversalMetadataProvider2.dll"/>
     <ROW Component="AddTechnicalArea.aspx" ComponentId="{71453F69-2D08-4565-A6B3-B6069D466A98}" Directory_="Patient_1_Dir" Attributes="0" KeyPath="AddTechnicalArea.aspx" Type="0"/>
     <ROW Component="Add_Edit_Education.aspx" ComponentId="{E7E2ADD0-DC08-462B-860E-506260E1842E}" Directory_="AdminForms_Dir" Attributes="0" KeyPath="Add_Edit_Education.aspx" Type="0"/>
     <ROW Component="AdmitPatient.ascx" ComponentId="{85EC1475-07F7-4D6C-93AF-7405BDBD6103}" Directory_="WardAdmission_Dir" Attributes="0" KeyPath="AdmitPatient.ascx" Type="0"/>
-    <ROW Component="Ajax.dll" ComponentId="{9D7C8CF3-58FC-4048-B1B9-D8EC0F3481D3}" Directory_="bin_Dir" Attributes="0" KeyPath="Ajax.dll"/>
-    <ROW Component="AjaxControlToolkit.dll" ComponentId="{FDE11913-BCBF-4DEF-BBFB-732307A451A6}" Directory_="bin_Dir" Attributes="0" KeyPath="AjaxControlToolkit.dll"/>
+    <ROW Component="Ajax.dll" ComponentId="{AE5D595D-7579-4A37-A55A-BADEA7BC44DD}" Directory_="bin_Dir" Attributes="0" KeyPath="Ajax.dll"/>
+    <ROW Component="AjaxControlToolkit.dll" ComponentId="{6C4BE3EB-8411-4E11-84C5-0FBF4DC4A720}" Directory_="bin_Dir" Attributes="0" KeyPath="AjaxControlToolkit.dll"/>
     <ROW Component="Application.BusinessProcess.dll" ComponentId="{630F77EB-31ED-44D1-A121-016CA5471023}" Directory_="bin_Dir" Attributes="0" KeyPath="Application.BusinessProcess.dll"/>
     <ROW Component="Application.Common.dll" ComponentId="{C5E8249F-AFBA-4AD5-940C-A6CA62442684}" Directory_="bin_Dir" Attributes="0" KeyPath="Application.Common.dll"/>
     <ROW Component="Application.Interface.dll" ComponentId="{FDFDF337-30F3-4794-9F41-30D0153C19A3}" Directory_="bin_Dir" Attributes="0" KeyPath="Application.Interface.dll"/>
@@ -371,7 +371,7 @@
     <ROW Component="Application.Presentation.dll" ComponentId="{2DF0A676-EA0C-4407-B67D-A3CA757F647E}" Directory_="bin_Dir" Attributes="0" KeyPath="Application.Presentation.dll"/>
     <ROW Component="AppointmentList.ascx" ComponentId="{507FA451-7B9F-4843-874D-2DF6D80C8018}" Directory_="Scheduler_Dir" Attributes="0" KeyPath="AppointmentList.ascx" Type="0"/>
     <ROW Component="ArtDistributionForm.aspx" ComponentId="{8F454762-B185-4276-87C1-B5B1412DBBAA}" Directory_="Encounter_Dir" Attributes="0" KeyPath="ArtDistributionForm.aspx" Type="0"/>
-    <ROW Component="AutoMapper.dll" ComponentId="{5EB7EDD9-AB08-4DA7-A368-46D15974017B}" Directory_="bin_Dir" Attributes="0" KeyPath="AutoMapper.dll"/>
+    <ROW Component="AutoMapper.dll" ComponentId="{DD63EBB1-6032-424D-88B4-0FB43BD354CC}" Directory_="bin_Dir" Attributes="0" KeyPath="AutoMapper.dll"/>
     <ROW Component="Backupstyles.css" ComponentId="{FE055FE6-D38A-410B-A282-FC4A06332F23}" Directory_="Style_Dir" Attributes="0" KeyPath="Backupstyles.css" Type="0"/>
     <ROW Component="Backupstyles.css_1" ComponentId="{598DC75E-A47E-4216-8659-E6D2253F100F}" Directory_="Style_1_Dir" Attributes="0" KeyPath="Backupstyles.css_1" Type="0"/>
     <ROW Component="Baseline.aspx" ComponentId="{12FE8171-5F44-4A8E-BC89-69681166E1CB}" Directory_="OneTimeEvents_Dir" Attributes="0" KeyPath="Baseline.aspx" Type="0"/>
@@ -379,10 +379,10 @@
     <ROW Component="BillingOutstandingSalesDetails.rpt" ComponentId="{03E38E70-6A8A-454F-96AB-0A367775252D}" Directory_="Reports_Dir" Attributes="0" KeyPath="BillingOutstandingSalesDetails.rpt" Type="0"/>
     <ROW Component="COPYING" ComponentId="{62A1C14C-F482-4044-A049-75CD697F2141}" Directory_="diff_match_patch_Dir" Attributes="0" KeyPath="COPYING" Type="0"/>
     <ROW Component="Chart.min.js" ComponentId="{60B805BC-4774-4A97-9A38-4BAE3844EABC}" Directory_="chartJs_Dir" Attributes="0" KeyPath="Chart.min.js" Type="0"/>
-    <ROW Component="CrystalDecisions.CrystalReports.Engine.dll" ComponentId="{8790304A-808F-4E39-912E-25E2230819CE}" Directory_="bin_Dir" Attributes="0" KeyPath="CrystalDecisions.CrystalReports.Engine.dll"/>
-    <ROW Component="CrystalDecisions.ReportSource.dll" ComponentId="{C1328BD6-DDAE-452E-BF7B-560271EEED5C}" Directory_="bin_Dir" Attributes="0" KeyPath="CrystalDecisions.ReportSource.dll"/>
-    <ROW Component="CrystalDecisions.Shared.dll" ComponentId="{F0E3CA2F-98EB-4A77-AAD7-FFDCA105ADA2}" Directory_="bin_Dir" Attributes="0" KeyPath="CrystalDecisions.Shared.dll"/>
-    <ROW Component="CrystalDecisions.Web.dll" ComponentId="{02BD54CE-33E4-4228-BBD2-4CC66070C714}" Directory_="bin_Dir" Attributes="0" KeyPath="CrystalDecisions.Web.dll"/>
+    <ROW Component="CrystalDecisions.CrystalReports.Engine.dll" ComponentId="{B953C1F8-FDF5-46EA-873C-439497D85C7E}" Directory_="bin_Dir" Attributes="0" KeyPath="CrystalDecisions.CrystalReports.Engine.dll"/>
+    <ROW Component="CrystalDecisions.ReportSource.dll" ComponentId="{018A9214-5D4A-43AB-88AB-ED64F5972E03}" Directory_="bin_Dir" Attributes="0" KeyPath="CrystalDecisions.ReportSource.dll"/>
+    <ROW Component="CrystalDecisions.Shared.dll" ComponentId="{5D19473A-E4DD-4A29-87A7-A3E86B0D81D6}" Directory_="bin_Dir" Attributes="0" KeyPath="CrystalDecisions.Shared.dll"/>
+    <ROW Component="CrystalDecisions.Web.dll" ComponentId="{6AB9A8B8-C426-4DAA-B79E-96FAC9B0F189}" Directory_="bin_Dir" Attributes="0" KeyPath="CrystalDecisions.Web.dll"/>
     <ROW Component="CustomForm.aspx" ComponentId="{3E30355A-CEDC-47EC-B869-413630DB13C7}" Directory_="ClinicalForms_Dir" Attributes="0" KeyPath="CustomForm.aspx" Type="0"/>
     <ROW Component="Default.aspx" ComponentId="{64A1E6C3-0B7D-41A6-8C29-10A5A9569350}" Directory_="Home_Dir" Attributes="0" KeyPath="Default.aspx_2" Type="0"/>
     <ROW Component="EditPharmacyPrescription.aspx" ComponentId="{5F836148-246C-4F76-BFEB-2598354866B9}" Directory_="Requests_Dir" Attributes="0" KeyPath="EditPharmacyPrescription.aspx" Type="0"/>
@@ -401,8 +401,8 @@
     <ROW Component="Entities.Pharmacy.dll" ComponentId="{81625D4A-6E6C-4EFA-BF14-1876949C6497}" Directory_="bin_Dir" Attributes="0" KeyPath="Entities.Pharmacy.dll"/>
     <ROW Component="Entities.Queue.dll" ComponentId="{C6D0B935-D3A9-4E05-9E79-9B7246B5F8C4}" Directory_="bin_Dir" Attributes="0" KeyPath="Entities.Queue.dll"/>
     <ROW Component="Entity.WebApi.dll" ComponentId="{CCB51623-24BF-42F8-A26E-64F81F638A02}" Directory_="bin_Dir" Attributes="0" KeyPath="Entity.WebApi.dll"/>
-    <ROW Component="EntityFramework.SqlServer.dll" ComponentId="{889E4BC9-4C1E-4FD6-8B21-650BB8E59AAB}" Directory_="bin_Dir" Attributes="0" KeyPath="EntityFramework.SqlServer.dll"/>
-    <ROW Component="EntityFramework.dll" ComponentId="{299CDAB9-57E9-4B65-9F7A-7676738A72EC}" Directory_="bin_Dir" Attributes="0" KeyPath="EntityFramework.dll"/>
+    <ROW Component="EntityFramework.SqlServer.dll" ComponentId="{3B8755A3-E7CE-47EB-8D83-22339CBF0143}" Directory_="bin_Dir" Attributes="0" KeyPath="EntityFramework.SqlServer.dll"/>
+    <ROW Component="EntityFramework.dll" ComponentId="{9328862B-B849-4C13-86CD-279038D92EF1}" Directory_="bin_Dir" Attributes="0" KeyPath="EntityFramework.dll"/>
     <ROW Component="Facility.aspx" ComponentId="{FBE997EC-FDD6-481F-91A0-68D434657137}" Directory_="Statistics_Dir" Attributes="0" KeyPath="Facility.aspx" Type="0"/>
     <ROW Component="FindLabOrder.aspx" ComponentId="{B372D288-ACCF-42E5-B57B-4422E1F6DD08}" Directory_="Request_Dir" Attributes="0" KeyPath="FindLabOrder.aspx" Type="0"/>
     <ROW Component="FindServiceOrder.aspx" ComponentId="{47B602D2-E449-40CA-87DA-43F4783D86D3}" Directory_="ClinicalService_Dir" Attributes="0" KeyPath="FindServiceOrder.aspx" Type="0"/>
@@ -457,7 +457,7 @@
     <ROW Component="Interface.Service.dll" ComponentId="{7FAB7543-C175-44A0-B074-7674597AD3B1}" Directory_="bin_Dir" Attributes="0" KeyPath="Interface.Service.dll"/>
     <ROW Component="Interface.WebApi.dll" ComponentId="{A98BF77E-52CD-42C9-91BD-80183B7686BD}" Directory_="bin_Dir" Attributes="0" KeyPath="Interface.WebApi.dll"/>
     <ROW Component="LICENSE" ComponentId="{82D8A0AA-55AC-4EDB-9C4E-43DEE91E9707}" Directory_="topojson_Dir" Attributes="0" KeyPath="LICENSE_1" Type="0"/>
-    <ROW Component="MSDATASRC.dll" ComponentId="{D234B263-6DA1-4D20-8093-B9295DC56165}" Directory_="bin_Dir" Attributes="0" KeyPath="MSDATASRC.dll"/>
+    <ROW Component="MSDATASRC.dll" ComponentId="{CF1A5B76-45D0-490A-B6F7-4799FC2D3851}" Directory_="bin_Dir" Attributes="0" KeyPath="MSDATASRC.dll"/>
     <ROW Component="MediatR.Extensions.Microsoft.DependencyInjection.dll" ComponentId="{272AA982-5307-44BB-A751-BE51298BB10A}" Directory_="IQCareAPI_Dir" Attributes="0" KeyPath="MediatR.Extensions.Microsoft.DependencyInjection.dll"/>
     <ROW Component="MediatR.dll" ComponentId="{30962CB0-9901-4589-B472-9EE22AA021AF}" Directory_="IQCareAPI_Dir" Attributes="0" KeyPath="MediatR.dll"/>
     <ROW Component="Microsoft.CodeAnalysis.CSharp.Workspaces.dll" ComponentId="{EF1EA965-F8B0-4FFC-9248-A2AC5723EA27}" Directory_="IQCareAPI_Dir" Attributes="0" KeyPath="Microsoft.CodeAnalysis.CSharp.Workspaces.dll"/>
@@ -471,7 +471,7 @@
     <ROW Component="Microsoft.Extensions.Logging.Abstractions.dll" ComponentId="{5BBC6333-EE6A-4AB8-BC1C-88A9FD422136}" Directory_="IQCareAPI_Dir" Attributes="0" KeyPath="Microsoft.Extensions.Logging.Abstractions.dll"/>
     <ROW Component="Microsoft.Extensions.Logging.dll" ComponentId="{63D70A10-C514-4DD1-8280-88835D8E7B84}" Directory_="IQCareAPI_Dir" Attributes="0" KeyPath="Microsoft.Extensions.Logging.dll"/>
     <ROW Component="Microsoft.Extensions.Options.dll" ComponentId="{89DC81CA-710B-40F4-A9EF-56406B341840}" Directory_="IQCareAPI_Dir" Attributes="0" KeyPath="Microsoft.Extensions.Options.dll"/>
-    <ROW Component="Microsoft.Office.Interop.Owc11.dll" ComponentId="{80C6B135-0690-46EA-865A-D4EB9174948A}" Directory_="bin_Dir" Attributes="0" KeyPath="Microsoft.Office.Interop.Owc11.dll"/>
+    <ROW Component="Microsoft.Office.Interop.Owc11.dll" ComponentId="{8AB23217-95DD-4F89-BB62-5F264B609392}" Directory_="bin_Dir" Attributes="0" KeyPath="Microsoft.Office.Interop.Owc11.dll"/>
     <ROW Component="Microsoft.VisualStudio.Web.CodeGeneration.Contracts.dll" ComponentId="{56F99A07-06CE-4CD3-A461-8B1722E4FF48}" Directory_="IQCareAPI_Dir" Attributes="0" KeyPath="Microsoft.VisualStudio.Web.CodeGeneration.Contracts.dll"/>
     <ROW Component="Microsoft.VisualStudio.Web.CodeGeneration.Core.dll" ComponentId="{D810A191-3A04-4770-9EA9-2FD4A45508C7}" Directory_="IQCareAPI_Dir" Attributes="0" KeyPath="Microsoft.VisualStudio.Web.CodeGeneration.Core.dll"/>
     <ROW Component="Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore.dll" ComponentId="{86C5E0A4-E174-4D97-890C-D6141FD64F96}" Directory_="IQCareAPI_Dir" Attributes="0" KeyPath="Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore.dll"/>
@@ -479,8 +479,8 @@
     <ROW Component="Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll" ComponentId="{C9FAC348-C781-49B4-A861-D16E863B972F}" Directory_="IQCareAPI_Dir" Attributes="0" KeyPath="Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll"/>
     <ROW Component="Microsoft.VisualStudio.Web.CodeGeneration.dll" ComponentId="{1F6B0506-BE7B-43C1-B7E8-E0679673EF80}" Directory_="IQCareAPI_Dir" Attributes="0" KeyPath="Microsoft.VisualStudio.Web.CodeGeneration.dll"/>
     <ROW Component="Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll" ComponentId="{8A9CA851-B49F-4832-BF5A-9C1CE34524BC}" Directory_="IQCareAPI_Dir" Attributes="0" KeyPath="Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll"/>
-    <ROW Component="Microsoft.Web.Infrastructure.dll" ComponentId="{F0E15B5D-21D8-413B-88AA-1352FD64BAE1}" Directory_="bin_Dir" Attributes="0" KeyPath="Microsoft.Web.Infrastructure.dll"/>
-    <ROW Component="Newtonsoft.Json.dll" ComponentId="{8D5E9F0D-B076-4F26-91B4-D95ACD14364C}" Directory_="bin_Dir" Attributes="0" KeyPath="Newtonsoft.Json.dll"/>
+    <ROW Component="Microsoft.Web.Infrastructure.dll" ComponentId="{6EF51158-2EBD-4EE5-BFE0-3D2544C1D182}" Directory_="bin_Dir" Attributes="0" KeyPath="Microsoft.Web.Infrastructure.dll"/>
+    <ROW Component="Newtonsoft.Json.dll" ComponentId="{5A461816-6F61-42BD-8B55-0CB577CCA9FF}" Directory_="bin_Dir" Attributes="0" KeyPath="Newtonsoft.Json.dll"/>
     <ROW Component="Newtonsoft.Json.dll_1" ComponentId="{F624AFFF-40BB-40E3-ACEA-D15990B45295}" Directory_="IQCareAPI_Dir" Attributes="0" KeyPath="Newtonsoft.Json.dll_1"/>
     <ROW Component="Non_ARTPatient.xml" ComponentId="{019EC0D8-876B-4B9F-A830-B7154DE6B999}" Directory_="ExcelFiles_Dir" Attributes="0" KeyPath="Non_ARTPatient.xml" Type="0"/>
     <ROW Component="NuGet.Frameworks.dll" ComponentId="{43859AD3-EB16-4C58-93E7-BAF9D1A2E884}" Directory_="IQCareAPI_Dir" Attributes="0" KeyPath="NuGet.Frameworks.dll"/>
@@ -489,7 +489,7 @@
     <ROW Component="PrintOut.aspx" ComponentId="{9D9959DB-E532-47F6-830E-B153F4EBCE6A}" Directory_="Reports_1_Dir" Attributes="0" KeyPath="PrintOut.aspx" Type="0"/>
     <ROW Component="ProductInformation" ComponentId="{9B993FEF-E8A3-4DC9-987A-4E7C1A8D46EB}" Directory_="APPDIR" Attributes="4" KeyPath="Version"/>
     <ROW Component="RobotoBold.eot" ComponentId="{43DC7DA0-E0C1-41D0-8057-8119E68D3733}" Directory_="robot_Dir" Attributes="0" KeyPath="RobotoBold.eot" Type="0"/>
-    <ROW Component="Sand.Security.Cryptography.dll" ComponentId="{CCC83837-43CF-4829-8494-F6DF21CB1D54}" Directory_="bin_Dir" Attributes="0" KeyPath="Sand.Security.Cryptography.dll"/>
+    <ROW Component="Sand.Security.Cryptography.dll" ComponentId="{8567B62E-3C07-4E60-949D-5E9741765F71}" Directory_="bin_Dir" Attributes="0" KeyPath="Sand.Security.Cryptography.dll"/>
     <ROW Component="Serilog.AspNetCore.dll" ComponentId="{6248B44D-664C-4B94-99E1-46C707E1AC2C}" Directory_="IQCareAPI_Dir" Attributes="0" KeyPath="Serilog.AspNetCore.dll"/>
     <ROW Component="Serilog.Extensions.Logging.dll" ComponentId="{2B213D2B-185F-4616-9A57-248BAD2B4E98}" Directory_="IQCareAPI_Dir" Attributes="0" KeyPath="Serilog.Extensions.Logging.dll"/>
     <ROW Component="Serilog.Sinks.ColoredConsole.dll" ComponentId="{1CC5B858-1ABF-4631-AC98-31538F919B9C}" Directory_="IQCareAPI_Dir" Attributes="0" KeyPath="Serilog.Sinks.ColoredConsole.dll"/>
@@ -508,17 +508,17 @@
     <ROW Component="System.Data.SqlClient.dll" ComponentId="{742279D0-5473-44FB-B1C5-646BD97110E1}" Directory_="netstandard2.0_Dir" Attributes="0" KeyPath="System.Data.SqlClient.dll"/>
     <ROW Component="System.Data.SqlClient.dll_1" ComponentId="{94C8BDCB-6519-4B0A-8B7D-535D47CC748A}" Directory_="netstandard2.0_1_Dir" Attributes="0" KeyPath="System.Data.SqlClient.dll_1"/>
     <ROW Component="System.Data.SqlClient.dll_2" ComponentId="{BDAF1A82-C63E-4E58-BF6A-F120F64CE86D}" Directory_="IQCareAPI_Dir" Attributes="0" KeyPath="System.Data.SqlClient.dll_2"/>
-    <ROW Component="System.Net.Http.Formatting.dll" ComponentId="{3290111D-21ED-41BE-8349-D995E096D227}" Directory_="bin_Dir" Attributes="0" KeyPath="System.Net.Http.Formatting.dll"/>
-    <ROW Component="System.Net.Http.dll" ComponentId="{88C783A6-2DB4-40B2-B905-F3023629D302}" Directory_="bin_Dir" Attributes="0" KeyPath="System.Net.Http.dll"/>
-    <ROW Component="System.Web.Helpers.dll" ComponentId="{1274FDEC-2120-4B20-867A-41C6473EC7FD}" Directory_="bin_Dir" Attributes="0" KeyPath="System.Web.Helpers.dll"/>
-    <ROW Component="System.Web.Http.WebHost.dll" ComponentId="{D7857A84-FB0D-4B89-967D-D9255A3D3AEA}" Directory_="bin_Dir" Attributes="0" KeyPath="System.Web.Http.WebHost.dll"/>
-    <ROW Component="System.Web.Http.dll" ComponentId="{AAAB6EE0-9E60-4633-81B0-F2FB2D6CD399}" Directory_="bin_Dir" Attributes="0" KeyPath="System.Web.Http.dll"/>
-    <ROW Component="System.Web.Mvc.dll" ComponentId="{0AE4F388-2156-4D0C-9FF9-C6A1D6979783}" Directory_="bin_Dir" Attributes="0" KeyPath="System.Web.Mvc.dll"/>
-    <ROW Component="System.Web.Razor.dll" ComponentId="{EBB35C28-CF2C-4B6F-858A-753F962F27B5}" Directory_="bin_Dir" Attributes="0" KeyPath="System.Web.Razor.dll"/>
-    <ROW Component="System.Web.WebPages.Deployment.dll" ComponentId="{3A1462CE-4880-4C63-B99B-EACF94E53B6F}" Directory_="bin_Dir" Attributes="0" KeyPath="System.Web.WebPages.Deployment.dll"/>
-    <ROW Component="System.Web.WebPages.Razor.dll" ComponentId="{46862B14-54BC-4E11-B6F0-C0DC36E156CC}" Directory_="bin_Dir" Attributes="0" KeyPath="System.Web.WebPages.Razor.dll"/>
-    <ROW Component="System.Web.WebPages.dll" ComponentId="{12884D6D-ABCE-494F-9818-71AB9444F418}" Directory_="bin_Dir" Attributes="0" KeyPath="System.Web.WebPages.dll"/>
-    <ROW Component="Telerik.Web.UI.dll" ComponentId="{70A4EE7B-6D42-47D2-8AA1-A1ABB7BE8657}" Directory_="bin_Dir" Attributes="0" KeyPath="Telerik.Web.UI.dll"/>
+    <ROW Component="System.Net.Http.Formatting.dll" ComponentId="{B6BFFA3E-297D-424D-B266-FFBE4117C47F}" Directory_="bin_Dir" Attributes="0" KeyPath="System.Net.Http.Formatting.dll"/>
+    <ROW Component="System.Net.Http.dll" ComponentId="{72547A59-9401-4C33-A400-F5DB1B40A0B6}" Directory_="bin_Dir" Attributes="0" KeyPath="System.Net.Http.dll"/>
+    <ROW Component="System.Web.Helpers.dll" ComponentId="{2EF98059-EEBB-4035-90D4-7BC36DA6AACE}" Directory_="bin_Dir" Attributes="0" KeyPath="System.Web.Helpers.dll"/>
+    <ROW Component="System.Web.Http.WebHost.dll" ComponentId="{51FFBAF1-2E40-43CE-9C3E-C43CEF03553C}" Directory_="bin_Dir" Attributes="0" KeyPath="System.Web.Http.WebHost.dll"/>
+    <ROW Component="System.Web.Http.dll" ComponentId="{979C3003-84D7-4D5E-BAFF-A9F2212D712F}" Directory_="bin_Dir" Attributes="0" KeyPath="System.Web.Http.dll"/>
+    <ROW Component="System.Web.Mvc.dll" ComponentId="{9FCBA7E6-A340-481D-9847-8E79CBE4DD73}" Directory_="bin_Dir" Attributes="0" KeyPath="System.Web.Mvc.dll"/>
+    <ROW Component="System.Web.Razor.dll" ComponentId="{01CB9FEA-9106-497F-8E23-036E3D08211C}" Directory_="bin_Dir" Attributes="0" KeyPath="System.Web.Razor.dll"/>
+    <ROW Component="System.Web.WebPages.Deployment.dll" ComponentId="{0003ADE1-C3BF-4240-B739-5FADE82DEECC}" Directory_="bin_Dir" Attributes="0" KeyPath="System.Web.WebPages.Deployment.dll"/>
+    <ROW Component="System.Web.WebPages.Razor.dll" ComponentId="{09F93FD7-AAFD-4A59-AC99-E9309BD59E9C}" Directory_="bin_Dir" Attributes="0" KeyPath="System.Web.WebPages.Razor.dll"/>
+    <ROW Component="System.Web.WebPages.dll" ComponentId="{55F2FD89-2615-46A2-BA26-DEB6FC3B82AA}" Directory_="bin_Dir" Attributes="0" KeyPath="System.Web.WebPages.dll"/>
+    <ROW Component="Telerik.Web.UI.dll" ComponentId="{7ED220A4-4B44-40BD-A4B8-94DB1FE350AC}" Directory_="bin_Dir" Attributes="0" KeyPath="Telerik.Web.UI.dll"/>
     <ROW Component="adultpharmacylist.xml" ComponentId="{44C69E7A-46EA-4391-81C2-586C9BFCFE68}" Directory_="XMLFiles_Dir" Attributes="0" KeyPath="adultpharmacylist.xml" Type="0"/>
     <ROW Component="ajaxloader.gif" ComponentId="{23AF499D-0B5F-4A8E-B3DE-F60D1C3DE8CE}" Directory_="slick_1_Dir" Attributes="0" KeyPath="ajaxloader.gif" Type="0"/>
     <ROW Component="alphahorizontal.png" ComponentId="{42D5FD99-F511-47A9-93C8-2FA324D9B6D0}" Directory_="bootstrapcolorpicker_Dir" Attributes="0" KeyPath="alphahorizontal.png" Type="0"/>
@@ -705,7 +705,7 @@
     <ROW Component="ion.rangeSlider.css" ComponentId="{B5930E4F-E272-4A44-8976-1598ECAAD38E}" Directory_="ionRangeSlider_1_Dir" Attributes="0" KeyPath="ion.rangeSlider.css" Type="0"/>
     <ROW Component="ion.rangeSlider.min.js" ComponentId="{4FC2631F-BF81-4079-87D3-B6FCF1DEEB15}" Directory_="ionRangeSlider_Dir" Attributes="0" KeyPath="ion.rangeSlider.min.js" Type="0"/>
     <ROW Component="iqSolutions.png" ComponentId="{89460C5F-9E39-4304-B75D-36E32BB13937}" Directory_="img_2_Dir" Attributes="0" KeyPath="iqSolutions.png" Type="0"/>
-    <ROW Component="itextsharp.dll" ComponentId="{4B21F366-AD85-4DDE-AEF4-FDB9D7854DF4}" Directory_="bin_Dir" Attributes="0" KeyPath="itextsharp.dll"/>
+    <ROW Component="itextsharp.dll" ComponentId="{6C91565A-8E40-4956-B73C-8B575410823A}" Directory_="bin_Dir" Attributes="0" KeyPath="itextsharp.dll"/>
     <ROW Component="jasnybootstrap.min.css" ComponentId="{5CF6F8DB-EA01-4B3D-87C2-F248FC0064CE}" Directory_="jasny_1_Dir" Attributes="0" KeyPath="jasnybootstrap.min.css" Type="0"/>
     <ROW Component="jasnybootstrap.min.js" ComponentId="{E88E6238-9C7E-4F86-B8BF-BD4FCDEC0A56}" Directory_="jasny_Dir" Attributes="0" KeyPath="jasnybootstrap.min.js" Type="0"/>
     <ROW Component="jpg" ComponentId="{7A7B7CDB-985C-4E39-90BC-CB10F8687AD8}" Directory_="gallery_Dir" Attributes="0" KeyPath="jpg" Type="0"/>
@@ -739,12 +739,12 @@
     <ROW Component="jstree.min.js" ComponentId="{61A64937-5C83-4465-8CE8-8F21D30D05ED}" Directory_="jsTree_Dir" Attributes="0" KeyPath="jstree.min.js" Type="0"/>
     <ROW Component="ladda.jquery.min.js" ComponentId="{2A72F1BC-9C7A-454B-A683-171A5FDC4F7F}" Directory_="ladda_Dir" Attributes="0" KeyPath="ladda.jquery.min.js" Type="0"/>
     <ROW Component="laddathemeless.min.css" ComponentId="{F75FD672-3426-4604-9294-6CD0F2D3536F}" Directory_="ladda_1_Dir" Attributes="0" KeyPath="laddathemeless.min.css" Type="0"/>
-    <ROW Component="log4net.dll" ComponentId="{0348D62A-FD24-4FB4-8235-179604E09D82}" Directory_="bin_Dir" Attributes="0" KeyPath="log4net.dll"/>
+    <ROW Component="log4net.dll" ComponentId="{CD43DF1B-755B-487A-B2E2-7042A6BF718D}" Directory_="bin_Dir" Attributes="0" KeyPath="log4net.dll"/>
     <ROW Component="masonry.pkgd.min.js" ComponentId="{088FFD6A-8142-4317-8802-27AD40D717B8}" Directory_="masonary_Dir" Attributes="0" KeyPath="masonry.pkgd.min.js" Type="0"/>
     <ROW Component="mdb.scss" ComponentId="{000E7B93-52D9-4178-BDF7-4B37C8B054F9}" Directory_="sass_1_Dir" Attributes="0" KeyPath="mdb.scss" Type="0"/>
     <ROW Component="morris.js" ComponentId="{A6D0212A-733A-45E9-895F-201B1BBEA431}" Directory_="morris_Dir" Attributes="0" KeyPath="morris.js" Type="0"/>
     <ROW Component="morris0.4.3.min.css" ComponentId="{226747A0-8103-41E9-937D-1537769A7626}" Directory_="morris_1_Dir" Attributes="0" KeyPath="morris0.4.3.min.css" Type="0"/>
-    <ROW Component="netchartdir.dll" ComponentId="{18C5839A-73AB-4AB1-89BC-ADEE185F047F}" Directory_="bin_Dir" Attributes="0" KeyPath="netchartdir.dll"/>
+    <ROW Component="netchartdir.dll" ComponentId="{998414FC-94D7-481A-92E1-B08031F8AA9C}" Directory_="bin_Dir" Attributes="0" KeyPath="netchartdir.dll"/>
     <ROW Component="pace.css" ComponentId="{A4F331B8-1132-4B6F-B8FD-EC91F00F795E}" Directory_="css_9_Dir" Attributes="0" KeyPath="pace.css" Type="0"/>
     <ROW Component="pace.js" ComponentId="{7C7300C3-867C-4DE8-AB2F-A973F36F3DFB}" Directory_="js_7_Dir" Attributes="0" KeyPath="pace.js" Type="0"/>
     <ROW Component="pace.min.js" ComponentId="{B2D4C960-A6C6-433E-88AE-DB691604F63C}" Directory_="pace_Dir" Attributes="0" KeyPath="pace.min.js" Type="0"/>
@@ -762,7 +762,7 @@
     <ROW Component="sort.png" ComponentId="{2CE61232-B9AC-4ED8-9B46-B25BC09A0569}" Directory_="images_2_Dir" Attributes="0" KeyPath="sort.png" Type="0"/>
     <ROW Component="spinners.css" ComponentId="{5BE51CD2-8E7E-4786-8F47-A554C13C3F76}" Directory_="textSpinners_Dir" Attributes="0" KeyPath="spinners.css" Type="0"/>
     <ROW Component="sprite.png" ComponentId="{9C399B60-F932-43BD-B4ED-C8C0C59F2494}" Directory_="yui_Dir" Attributes="0" KeyPath="sprite.png_1" Type="0"/>
-    <ROW Component="stdole.dll" ComponentId="{1D36A056-9FB5-4CEB-9FA6-1373E1F51EF7}" Directory_="bin_Dir" Attributes="0" KeyPath="stdole.dll"/>
+    <ROW Component="stdole.dll" ComponentId="{9FDCB34A-6672-48C2-AE21-F2DCFD01EFEA}" Directory_="bin_Dir" Attributes="0" KeyPath="stdole.dll"/>
     <ROW Component="summernote.eot" ComponentId="{E4D5933B-480C-4207-87A2-F1E36006C941}" Directory_="font_Dir" Attributes="0" KeyPath="summernote.eot" Type="0"/>
     <ROW Component="summernote.min.js" ComponentId="{A3FF2FB3-416A-47D7-BCBE-09263EA825A2}" Directory_="summernote_Dir" Attributes="0" KeyPath="summernote.min.js" Type="0"/>
     <ROW Component="summernotebs3.css" ComponentId="{5D5DF842-DFC5-4553-8790-B3D144E7A19E}" Directory_="summernote_1_Dir" Attributes="0" KeyPath="summernotebs3.css" Type="0"/>
@@ -810,7 +810,7 @@
     <ROW File="Afghanistan.png_1" Component_="Abkhazia.png_1" FileName="AFGHAN~1.PNG|Afghanistan.png" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\assets\img\flags\32\Afghanistan.png" SelfReg="false" NextFile="Aland.png_1"/>
     <ROW File="Afghanistan.png_2" Component_="Abkhazia.png_2" FileName="AFGHAN~1.PNG|Afghanistan.png" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\assets\img\flags\64\Afghanistan.png" SelfReg="false" NextFile="Aland.png_2"/>
     <ROW File="Ajax.dll" Component_="Ajax.dll" FileName="Ajax.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\bin\Ajax.dll" SelfReg="false" NextFile="AjaxControlToolkit.dll"/>
-    <ROW File="AjaxControlToolkit.dll" Component_="AjaxControlToolkit.dll" FileName="AJAXCO~1.DLL|AjaxControlToolkit.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\bin\AjaxControlToolkit.dll" SelfReg="false" NextFile="Application.BusinessProcess.dll"/>
+    <ROW File="AjaxControlToolkit.dll" Component_="AjaxControlToolkit.dll" FileName="AJAXCO~1.DLL|AjaxControlToolkit.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\bin\AjaxControlToolkit.dll" SelfReg="false" NextFile="AutoMapper.dll"/>
     <ROW File="Aland.png" Component_="Abkhazia.png" FileName="Aland.png" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\assets\img\flags\16\Aland.png" SelfReg="false" NextFile="Albania.png"/>
     <ROW File="Aland.png_1" Component_="Abkhazia.png_1" FileName="Aland.png" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\assets\img\flags\32\Aland.png" SelfReg="false" NextFile="Albania.png_1"/>
     <ROW File="Aland.png_2" Component_="Abkhazia.png_2" FileName="Aland.png" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\assets\img\flags\64\Aland.png" SelfReg="false" NextFile="Albania.png_2"/>
@@ -844,7 +844,7 @@
     <ROW File="Application.Interface.dll" Component_="Application.Interface.dll" FileName="APPLIC~3.DLL|Application.Interface.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\bin\Application.Interface.dll" SelfReg="false" NextFile="Application.Logger.dll_1"/>
     <ROW File="Application.Logger.dll" Component_="Application.Logger.dll" FileName="APPLIC~1.DLL|Application.Logger.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\Application.Logger.dll" SelfReg="false" NextFile="BillKnockOff.aspx"/>
     <ROW File="Application.Logger.dll_1" Component_="Application.Logger.dll_1" FileName="APPLIC~4.DLL|Application.Logger.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\bin\Application.Logger.dll" SelfReg="false" NextFile="Application.Presentation.dll"/>
-    <ROW File="Application.Presentation.dll" Component_="Application.Presentation.dll" FileName="APPLIC~5.DLL|Application.Presentation.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\bin\Application.Presentation.dll" SelfReg="false" NextFile="AutoMapper.dll"/>
+    <ROW File="Application.Presentation.dll" Component_="Application.Presentation.dll" FileName="APPLIC~5.DLL|Application.Presentation.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\bin\Application.Presentation.dll" SelfReg="false" NextFile="Entities.Administration.dll"/>
     <ROW File="AppointmentList.ascx" Component_="AppointmentList.ascx" FileName="APPOIN~1.ASC|AppointmentList.ascx" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\Scheduler\AppointmentList.ascx" SelfReg="false" NextFile="FindSchedulePatient.aspx"/>
     <ROW File="Argentina.png" Component_="Abkhazia.png" FileName="ARGENT~1.PNG|Argentina.png" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\assets\img\flags\16\Argentina.png" SelfReg="false" NextFile="Armenia.png"/>
     <ROW File="Argentina.png_1" Component_="Abkhazia.png_1" FileName="ARGENT~1.PNG|Argentina.png" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\assets\img\flags\32\Argentina.png" SelfReg="false" NextFile="Armenia.png_1"/>
@@ -1012,7 +1012,7 @@
     <ROW File="CrystalDecisions.CrystalReports.Engine.dll" Component_="CrystalDecisions.CrystalReports.Engine.dll" FileName="CRYSTA~1.DLL|CrystalDecisions.CrystalReports.Engine.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\bin\CrystalDecisions.CrystalReports.Engine.dll" SelfReg="false" NextFile="CrystalDecisions.ReportSource.dll"/>
     <ROW File="CrystalDecisions.ReportSource.dll" Component_="CrystalDecisions.ReportSource.dll" FileName="CRYSTA~2.DLL|CrystalDecisions.ReportSource.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\bin\CrystalDecisions.ReportSource.dll" SelfReg="false" NextFile="CrystalDecisions.Shared.dll"/>
     <ROW File="CrystalDecisions.Shared.dll" Component_="CrystalDecisions.Shared.dll" FileName="CRYSTA~3.DLL|CrystalDecisions.Shared.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\bin\CrystalDecisions.Shared.dll" SelfReg="false" NextFile="CrystalDecisions.Web.dll"/>
-    <ROW File="CrystalDecisions.Web.dll" Component_="CrystalDecisions.Web.dll" FileName="CRYSTA~4.DLL|CrystalDecisions.Web.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\bin\CrystalDecisions.Web.dll" SelfReg="false" NextFile="Entities.Administration.dll"/>
+    <ROW File="CrystalDecisions.Web.dll" Component_="CrystalDecisions.Web.dll" FileName="CRYSTA~4.DLL|CrystalDecisions.Web.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\bin\CrystalDecisions.Web.dll" SelfReg="false" NextFile="EntityFramework.dll"/>
     <ROW File="Cuba.png" Component_="Abkhazia.png" FileName="Cuba.png" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\assets\img\flags\16\Cuba.png" SelfReg="false" NextFile="Curacao.png"/>
     <ROW File="Cuba.png_1" Component_="Abkhazia.png_1" FileName="Cuba.png" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\assets\img\flags\32\Cuba.png" SelfReg="false" NextFile="Curacao.png_1"/>
     <ROW File="Cuba.png_2" Component_="Abkhazia.png_2" FileName="Cuba.png" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\assets\img\flags\64\Cuba.png" SelfReg="false" NextFile="Curacao.png_2"/>
@@ -1089,8 +1089,8 @@
     <ROW File="Entities.PatientCore.dll" Component_="Entities.PatientCore.dll" FileName="ENTITI~9.DLL|Entities.PatientCore.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\bin\Entities.PatientCore.dll" SelfReg="false" NextFile="Entities.Pharmacy.dll"/>
     <ROW File="Entities.Pharmacy.dll" Component_="Entities.Pharmacy.dll" FileName="ENTIT~10.DLL|Entities.Pharmacy.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\bin\Entities.Pharmacy.dll" SelfReg="false" NextFile="Entities.PSmart.dll"/>
     <ROW File="Entities.Queue.dll" Component_="Entities.Queue.dll" FileName="ENTIT~12.DLL|Entities.Queue.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\bin\Entities.Queue.dll" SelfReg="false" NextFile="Entity.WebApi.dll"/>
-    <ROW File="Entity.WebApi.dll" Component_="Entity.WebApi.dll" FileName="ENTITY~1.DLL|Entity.WebApi.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\bin\Entity.WebApi.dll" SelfReg="false" NextFile="EntityFramework.dll"/>
-    <ROW File="EntityFramework.SqlServer.dll" Component_="EntityFramework.SqlServer.dll" FileName="ENTITY~3.DLL|EntityFramework.SqlServer.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\bin\EntityFramework.SqlServer.dll" SelfReg="false" NextFile="Interface.Administration.dll"/>
+    <ROW File="Entity.WebApi.dll" Component_="Entity.WebApi.dll" FileName="ENTITY~1.DLL|Entity.WebApi.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\bin\Entity.WebApi.dll" SelfReg="false" NextFile="Interface.Administration.dll"/>
+    <ROW File="EntityFramework.SqlServer.dll" Component_="EntityFramework.SqlServer.dll" FileName="ENTITY~3.DLL|EntityFramework.SqlServer.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\bin\EntityFramework.SqlServer.dll" SelfReg="false" NextFile="itextsharp.dll"/>
     <ROW File="EntityFramework.dll" Component_="EntityFramework.dll" FileName="ENTITY~2.DLL|EntityFramework.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\bin\EntityFramework.dll" SelfReg="false" NextFile="EntityFramework.SqlServer.dll"/>
     <ROW File="EquatorialGuinea.png" Component_="Abkhazia.png" FileName="EQUATO~1.PNG|Equatorial-Guinea.png" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\assets\img\flags\16\Equatorial-Guinea.png" SelfReg="false" NextFile="Eritrea.png"/>
     <ROW File="EquatorialGuinea.png_1" Component_="Abkhazia.png_1" FileName="EQUATO~1.PNG|Equatorial-Guinea.png" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\assets\img\flags\32\Equatorial-Guinea.png" SelfReg="false" NextFile="Eritrea.png_1"/>
@@ -1260,7 +1260,7 @@
     <ROW File="IQCare.Web.UILogic.dll" Component_="IQCare.Web.UILogic.dll" FileName="IQCAR~11.DLL|IQCare.Web.UILogic.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\bin\IQCare.Web.UILogic.dll" SelfReg="false" NextFile="IQCare.Web.WebService.dll"/>
     <ROW File="IQCare.Web.WebService.dll" Component_="IQCare.Web.WebService.dll" FileName="IQCAR~12.DLL|IQCare.Web.WebService.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\bin\IQCare.Web.WebService.dll" SelfReg="false" NextFile="IQCare.WebApi.Logic.dll"/>
     <ROW File="IQCare.Web.dll" Component_="IQCare.Web.dll" FileName="IQCAR~10.DLL|IQCare.Web.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\bin\IQCare.Web.dll" SelfReg="false" NextFile="IQCare.Web.UILogic.dll"/>
-    <ROW File="IQCare.WebApi.Logic.dll" Component_="IQCare.WebApi.Logic.dll" FileName="IQCAR~13.DLL|IQCare.WebApi.Logic.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\bin\IQCare.WebApi.Logic.dll" SelfReg="false" NextFile="itextsharp.dll"/>
+    <ROW File="IQCare.WebApi.Logic.dll" Component_="IQCare.WebApi.Logic.dll" FileName="IQCAR~13.DLL|IQCare.WebApi.Logic.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\bin\IQCare.WebApi.Logic.dll" SelfReg="false" NextFile="PatientAppointments.aspx"/>
     <ROW File="IQCare.deps.json" Component_="angularcli.json" FileName="IQCARE~1.JSO|IQCare.deps.json" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\api\IQCare.deps.json" SelfReg="false" NextFile="IQCare.dll"/>
     <ROW File="IQCare.dll" Component_="IQCare.dll" FileName="IQCare.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\api\IQCare.dll" SelfReg="false" NextFile="IQCare.HTS.BusinessProcess.dll"/>
     <ROW File="IQCare.master" Component_="IQCare.master" FileName="IQCARE~1.MAS|IQCare.master" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\MasterPage\IQCare.master" SelfReg="false" NextFile="levelOneNavigationUserControl.ascx"/>
@@ -1858,7 +1858,7 @@
     <ROW File="TanzaniaMOHReport.xml" Component_="ARVcohortstatus.xml" FileName="TANZAN~1.XML|Tanzania MOH Report.xml" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\ExcelFiles\Templates\Tanzania MOH Report.xml" SelfReg="false" NextFile="TanzaniaMOHReport.xml_1"/>
     <ROW File="TanzaniaMOHReport.xml_1" Component_="ARVcohortstatus.xml" FileName="TANZAN~2.XML|TanzaniaMOHReport.xml" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\ExcelFiles\Templates\TanzaniaMOHReport.xml" SelfReg="false" NextFile="TanzaniaNACPMonthlyreport.xml"/>
     <ROW File="TanzaniaNACPMonthlyreport.xml" Component_="ARVcohortstatus.xml" FileName="TANZAN~3.XML|TanzaniaNACPMonthlyreport.xml" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\ExcelFiles\Templates\TanzaniaNACPMonthlyreport.xml" SelfReg="false" NextFile="TBStatusbyAgeandSex.xml"/>
-    <ROW File="Telerik.Web.UI.dll" Component_="Telerik.Web.UI.dll" FileName="TELERI~1.DLL|Telerik.Web.UI.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\bin\Telerik.Web.UI.dll" SelfReg="false" NextFile="PatientAppointments.aspx"/>
+    <ROW File="Telerik.Web.UI.dll" Component_="Telerik.Web.UI.dll" FileName="TELERI~1.DLL|Telerik.Web.UI.dll" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\bin\Telerik.Web.UI.dll" SelfReg="false"/>
     <ROW File="Test.bmp" Component_="pxYes_check.svg.png" FileName="Test.bmp" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\Images\Test.bmp" SelfReg="false" NextFile="uc2_anim05.gif"/>
     <ROW File="TestParameterMaster.aspx" Component_="Home.aspx_1" FileName="TESTPA~1.ASP|TestParameterMaster.aspx" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\Laboratory\Admin\TestParameterMaster.aspx" SelfReg="false" NextFile="EnterResultPage.aspx"/>
     <ROW File="Thailand.png" Component_="Abkhazia.png" FileName="Thailand.png" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\assets\img\flags\16\Thailand.png" SelfReg="false" NextFile="Togo.png"/>
@@ -1949,7 +1949,7 @@
     <ROW File="WallisAndFutuna.png_1" Component_="Abkhazia.png_1" FileName="WALLIS~1.PNG|Wallis-And-Futuna.png" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\assets\img\flags\32\Wallis-And-Futuna.png" SelfReg="false" NextFile="WesternSahara.png_1"/>
     <ROW File="WallisAndFutuna.png_2" Component_="Abkhazia.png_2" FileName="WALLIS~1.PNG|Wallis-And-Futuna.png" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\assets\img\flags\64\Wallis-And-Futuna.png" SelfReg="false" NextFile="WesternSahara.png_2"/>
     <ROW File="Web.config" Component_="f1ab6baadd16a40d49c9.chunk.js" FileName="WEB~1.CON|Web.config" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\Web.config" SelfReg="false" NextFile="Add_Edit_Education.aspx"/>
-    <ROW File="Web.config_1" Component_="BillKnockOff.aspx" FileName="WEB~1.CON|Web.config" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\Billing\Web.config" SelfReg="false" NextFile="ActiveDatabaseSoftware.ActiveQueryBuilder2.dll"/>
+    <ROW File="Web.config_1" Component_="BillKnockOff.aspx" FileName="WEB~1.CON|Web.config" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\Billing\Web.config" SelfReg="false" NextFile="Application.BusinessProcess.dll"/>
     <ROW File="Web.config_3" Component_="tsconfig.app.json" FileName="WEB~1.CON|Web.config" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\api\frontend\Web.config" SelfReg="false" NextFile="IQCare.Common.BusinessProcess.dll"/>
     <ROW File="WeightBMI.GIF" Component_="pxYes_check.svg.png" FileName="WEIGHT~1.GIF|WeightBMI.GIF" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\Images\WeightBMI.GIF" SelfReg="false" NextFile="arrow_left.gif_1"/>
     <ROW File="WesternSahara.png" Component_="Abkhazia.png" FileName="WESTER~1.PNG|Western-Sahara.png" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\frontend\assets\img\flags\16\Western-Sahara.png" SelfReg="false" NextFile="Yemen.png"/>
@@ -3863,7 +3863,7 @@
     <ROW File="web.Debug.config" Component_="clientaccesspolicy.xml" FileName="WEBDEB~1.CON|web.Debug.config" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\web.Debug.config" SelfReg="false" NextFile="web.Release.config"/>
     <ROW File="web.Release.config" Component_="clientaccesspolicy.xml" FileName="WEBREL~1.CON|web.Release.config" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\web.Release.config" SelfReg="false" NextFile="IQLookupWS.asmx"/>
     <ROW File="web.config_2" Component_="clientaccesspolicy.xml" FileName="WEB~1.CON|web.config" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\web.config" SelfReg="false" NextFile="web.Debug.config"/>
-    <ROW File="web.config_4" Component_="angularcli.json" FileName="WEB~1.CON|web.config" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\api\web.config" SelfReg="false"/>
+    <ROW File="web.config_4" Component_="angularcli.json" FileName="WEB~1.CON|web.config" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\api\web.config" SelfReg="false" NextFile="ActiveDatabaseSoftware.ActiveQueryBuilder2.dll"/>
     <ROW File="webgadgets.png" Component_="displaypictures.png" FileName="WEBGAD~1.PNG|webgadgets.png" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\Style\Img\msngallery\webgadgets.png" SelfReg="false" NextFile="winks.png"/>
     <ROW File="weeklycalendar.js" Component_="arrow_left.gif" FileName="WEEKLY~1.JS|weeklycalendar.js" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\Incl\weeklycalendar.js" SelfReg="false" NextFile="frame_header_dummy.htm"/>
     <ROW File="weight.bmp" Component_="pxYes_check.svg.png" FileName="weight.bmp" Version="65535.65535.65535.65535" Attributes="0" SourcePath="D:\source\palladium\package\web\Images\weight.bmp" SelfReg="false" NextFile="WeightBMI.GIF"/>
