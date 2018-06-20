@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -18,7 +19,7 @@ namespace IQCare.Helpers
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 client.DefaultRequestHeaders.Add("TOKEN", "31LgBzXbDSPj28AwWars8Q==");
 
-                HttpResponseMessage response = await client.GetAsync("/api/config/connection");
+                HttpResponseMessage response = await client.GetAsync("api/config/connection");
                 if (response.IsSuccessStatusCode)
                 {
                     connectionString = await response.Content.ReadAsStringAsync();
