@@ -4,6 +4,6 @@ namespace IQCare.Helpers
 {
     public interface IConnectionString
     {
-        Task<string> GetConnectionString();
+        Task<string> GetConnectionString(string iqcareUri);
     }
 }

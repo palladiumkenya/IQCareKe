@@ -473,7 +473,7 @@ namespace IQCare.CCC.UILogic
                         //    }
                         //}
 
-                        if (theDR["VisitName"].ToString() == "CCC")
+                        if ((theDR["VisitName"].ToString() == "CCC") || (theDR["VisitName"].ToString() == "ccc-encounter"))
                         {
                             theFrmRoot.NavigateUrl = "PatientEncounter.aspx?visitId=" + theDR["visitID"].ToString();
                             theFrmRoot.ImageUrl = "~/images/15px-Yes_check.svg.png";
