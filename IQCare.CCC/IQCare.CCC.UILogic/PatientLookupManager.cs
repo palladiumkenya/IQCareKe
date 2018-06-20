@@ -168,5 +168,10 @@ namespace IQCare.CCC.UILogic
         {
             return _patientLookupmanager.GetPatientRelationshipView(patientId);
         }
+
+        public PersonExtLookup GetPersonExtLookups(int personId)
+        {
+            return _patientLookupmanager.GetPersonExtLookups(personId);
+        }
     }
 }

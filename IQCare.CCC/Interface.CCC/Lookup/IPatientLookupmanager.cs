@@ -21,6 +21,7 @@ namespace Interface.CCC.Lookup
         PatientLookup GetPatientByCccNumber(string cccNumber);
 
         List<PatientRelationshipDTO> GetPatientRelationshipView(int patientId);
+        PersonExtLookup GetPersonExtLookups(int personId);
     }
 }
  

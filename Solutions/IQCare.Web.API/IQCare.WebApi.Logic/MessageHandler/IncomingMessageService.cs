@@ -6,9 +6,6 @@ using IQCare.WebApi.Logic.MappingEntities;
 using System;
 using System.Collections.Generic;
 using System.Web.Script.Serialization;
-using IQCare.CCC.UILogic.Interoperability;
-using IQCare.CCC.UILogic.Interoperability.Appointment;
-using IQCare.CCC.UILogic.Interoperability.Enrollment;
 using IQCare.DTO;
 using IQCare.DTO.PatientAppointment;
 using IQCare.DTO.PatientRegistration;
@@ -16,10 +13,13 @@ using IQCare.WebApi.Logic.PSmart;
 using Entity.WebApi.PSmart;
 using Application.Common;
 using Entities.CCC.Enrollment;
-using IQCare.CCC.UILogic;
-using IQCare.CCC.UILogic.Enrollment;
 using IQCare.DTO.PSmart;
 using Entities.CCC.Lookup;
+using IQCare.CCC.UILogic;
+using IQCare.CCC.UILogic.Enrollment;
+using IQCare.CCC.UILogic.Interoperability;
+using IQCare.CCC.UILogic.Interoperability.Appointment;
+using IQCare.CCC.UILogic.Interoperability.Enrollment;
 
 namespace IQCare.WebApi.Logic.MessageHandler
 {
@@ -361,6 +361,7 @@ namespace IQCare.WebApi.Logic.MessageHandler
             PersonIdentifierManager personIdentifierManager = new PersonIdentifierManager();
             PatientManager patientManager=new PatientManager();
             PatientLookupManager lookupManager = new PatientLookupManager();
+            PersonExtendedLookupManager personExtendedLookupManager= new PersonExtendedLookupManager();
         // PatientIdentifierManager patientIdentifierManager = new PatientIdentifierManager();
 
 
@@ -379,8 +380,12 @@ namespace IQCare.WebApi.Logic.MessageHandler
                 //    PatientEnrollmentId = patientEnrollmentId,
                 //    PatientId = psmartCard.PATIENTID
                 //};
-                PatientLookup patient = lookupManager.GetPatientByPersonId(personId);
-                var personEntityIdentifier = new PersonIdentifier()
+
+               // PatientLookup patient = lookupManager.GetPatientByPersonId(personId);
+
+                var patient = personExtendedLookupManager.GetPatientDetailsByPersonId(personId);
+
+                 var personEntityIdentifier = new PersonIdentifier()
                 {
                     IdentifierId = identifier.Id,
                     IdentifierValue = psmartCard.CARD_SERIAL_NO,

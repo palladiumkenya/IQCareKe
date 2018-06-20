@@ -141,6 +141,7 @@
     <Compile Include="Lookup\BPatientTreatmentSupporterLookupManager.cs" />
     <Compile Include="Lookup\BPatientTreatmentTrackerManager.cs" />
     <Compile Include="Lookup\BPersonContactLookUpManager.cs" />
+    <Compile Include="Lookup\BPersonExtendedLookupManager.cs" />
     <Compile Include="Lookup\BPersonGreenCardLookupManager.cs" />
     <Compile Include="Lookup\BTestingSummaryStatisticsManager.cs" />
     <Compile Include="PatientMaritalStatusManager.cs" />

@@ -81,6 +81,7 @@ namespace DataAccess.CCC.Repository
         private IPregnancyOutcomeLookupRepository _pregnancyOutcomeLookupRepository;
         private IIlStatisticsRepository _ilStatisticsRepository;
         private IIlMessengerRepository _ilMessengerRepository;
+        private IPersonExtendedLookupRepository _personExtendedLookupRepository;
 
         /* visit */
         private IPatientMasterVisitRepository _patientMasterVisitRepository;
@@ -357,6 +358,13 @@ namespace DataAccess.CCC.Repository
             {
                 return _ilMessengerRepository ??
                        (_ilMessengerRepository = new IlMessengerRepository((LookupContext) _context));
+            }
+        }
+
+        public IPersonExtendedLookupRepository PersonExtendedLookupRepository
+        {
+            get {
+                return _personExtendedLookupRepository ??(_personExtendedLookupRepository=new PersonExtendedLookupRepository((LookupContext)_context));
             }
         }
 

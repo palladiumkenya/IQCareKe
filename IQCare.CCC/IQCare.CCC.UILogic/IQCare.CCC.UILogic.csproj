@@ -172,6 +172,7 @@
     <Compile Include="PatientWhoStageManager.cs" />
     <Compile Include="PersonContactLookUpManager.cs" />
     <Compile Include="PersonContactManager.cs" />
+    <Compile Include="PersonExtendedLookupManager.cs" />
     <Compile Include="PersonGreenCardLookupManager.cs" />
     <Compile Include="PersonLocationManager.cs" />
     <Compile Include="PersonLookUpManager.cs" />
