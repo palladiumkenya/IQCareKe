@@ -139,7 +139,7 @@ namespace IQCare.CCC.UILogic.Interoperability
                                     {
                                         if(Regex.IsMatch(numbers[i], @"^\d+$"))
                                         {
-                                            resultValue = Convert.ToInt32(numbers[i]);
+                                            resultValue = Convert.ToDecimal(numbers[i]);
                                             break;
                                         }
                                     }
