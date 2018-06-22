@@ -301,6 +301,7 @@ namespace IQCare.Common.BusinessProcess.Services
                 {
                     population.DeleteFlag = true;
                     _unitOfWork.Repository<PersonPopulation>().Update(population);
+                    await _unitOfWork.SaveAsync();
                 }
 
                 await addPersonPopulation(personId, populations, userId);
@@ -326,7 +327,7 @@ namespace IQCare.Common.BusinessProcess.Services
                         .Get(x => x.MasterName == "HTSKeyPopulation" && x.ItemId == populations[i])
                         .FirstOrDefaultAsync();
 
-                    if (keyPop.ItemName == "Not Applicable")
+                    if (keyPop !=null && keyPop.ItemName == "Not Applicable")
                     {
                         populationType = "General Population";
                     }
@@ -375,11 +376,16 @@ namespace IQCare.Common.BusinessProcess.Services
                 var location = await _unitOfWork.Repository<PersonLocation>().Get(x => x.PersonId == personId)
                     .FirstOrDefaultAsync();
 
-                location.LandMark = landmark;
-
-                _unitOfWork.Repository<PersonLocation>().Update(location);
-                await _unitOfWork.SaveAsync();
-
+                if (location != null)
+                {
+                    location.LandMark = landmark;
+                    _unitOfWork.Repository<PersonLocation>().Update(location);
+                    await _unitOfWork.SaveAsync();
+                }
+                else
+                {
+                    location = await addPersonLocation(personId, 0, 0, 0, "", landmark, 1);
+                }
                 return location;
             }
             catch (Exception e)

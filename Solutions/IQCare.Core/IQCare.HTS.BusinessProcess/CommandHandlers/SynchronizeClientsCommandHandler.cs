@@ -84,9 +84,34 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         if (identifiers.Count > 0)
                         {
                             var registeredPerson = await registerPersonService.GetPerson(identifiers[0].PersonId);
-                            var updatedPerson = await registerPersonService.UpdatePerson(identifiers[0].PersonId, firstName, middleName, lastName, sex, dateOfBirth);
+                            if (registeredPerson != null)
+                            {
+                                var updatedPerson = await registerPersonService.UpdatePerson(identifiers[0].PersonId,
+                                    firstName, middleName, lastName, sex, dateOfBirth);
+                            }
+                            else
+                            {
+                                var person = await registerPersonService.RegisterPerson(firstName, middleName, lastName,
+                                    sex, dateOfBirth, userId);
+                            }
+                            
                             var patient = await registerPersonService.GetPatientByPersonId(identifiers[0].PersonId);
-                            var updatedPatient = await registerPersonService.UpdatePatient(patient.Id, dateOfBirth, facilityId);
+                            if (patient != null)
+                            {
+                                var updatedPatient = await registerPersonService.UpdatePatient(patient.Id, dateOfBirth, facilityId);
+                            }
+                            else
+                            {
+                                patient = await registerPersonService.AddPatient(identifiers[0].PersonId, userId, facilityId);
+
+                                // Person is enrolled state
+                                var enrollmentAppState = await registerPersonService.AddAppStateStore(identifiers[0].PersonId, patient.Id, 7, null, null);
+                                // Enroll patient
+                                var patientIdentifier = await registerPersonService.EnrollPatient(enrollmentNo, patient.Id, 2, userId, dateEnrollment);
+                                //Add PersonIdentifiers
+                                var personIdentifier = await registerPersonService.addPersonIdentifiers(identifiers[0].PersonId, 10, afyaMobileId, userId);
+                            }
+                            
                             var updatedPersonPopulations = await registerPersonService.UpdatePersonPopulation(identifiers[0].PersonId,
                                 request.CLIENTS[i].PATIENT_IDENTIFICATION.KEY_POP, userId);
                             if (!string.IsNullOrWhiteSpace(landmark))
