@@ -7,6 +7,7 @@ using System.Web.Script.Serialization;
 using Entities.CCC.Encounter;
 using IQCare.CCC.UILogic.Visit;
 using Entities.CCC.Lookup;
+using System.Text.RegularExpressions;
 
 namespace IQCare.CCC.UILogic.Interoperability
 {
@@ -42,6 +43,33 @@ namespace IQCare.CCC.UILogic.Interoperability
                     {
                         Msg = $"Patient {patientCcc} does not exist ";
 
+                        return Msg;
+                    }
+                    if (results.Count(r=> string.IsNullOrWhiteSpace(r.VlResult.Trim()))> 0)
+                    {
+                        Msg = $"Viral load message has no results indicated ";
+                        return Msg;
+                    }
+                    int invalidResult = 0;
+                    foreach (var result in results)
+                    {
+                        if (result.VlResult.Contains("LDL"))
+                        {
+
+                        }else if(Regex.Split(result.VlResult, @"[^0-9\.]+").Length > 0)
+                        {
+
+                        }
+                        else
+                        {
+                            invalidResult++;
+
+                        }
+                    }
+                        
+                    if (invalidResult > 0)
+                    {
+                        Msg = $"Viral load message has invalid results indicated ";
                         return Msg;
                     }
                     if (patient != null && thisFacility != null)
@@ -103,6 +131,7 @@ namespace IQCare.CCC.UILogic.Interoperability
                                 else
                                 {
                                     var resultString = result.VlResult.Replace("copies/ml", "");
+                                    string[] numbers =  Regex.Split(resultString, @"[^0-9\.]+");
                                     bool isSuccess = decimal.TryParse(resultString, out decimalValue);
                                     if (isSuccess) resultValue = decimalValue;
                                 }
