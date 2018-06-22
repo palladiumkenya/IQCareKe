@@ -133,8 +133,17 @@ namespace IQCare.CCC.UILogic.Interoperability
                                 {
                                     var resultString = result.VlResult.Replace("copies/ml", "");
                                     string[] numbers =  Regex.Split(resultString, @"[^0-9\.]+");
-                                    bool isSuccess = decimal.TryParse(resultString, out decimalValue);
-                                    if (isSuccess) resultValue = decimalValue;
+                                    //bool isSuccess = decimal.TryParse(resultString, out decimalValue);
+                                    //if (isSuccess) resultValue = decimalValue;
+                                    for (int i = 0; i < numbers.Length; i++)
+                                    {
+                                        if(Regex.IsMatch(numbers[i], @"^\d+$"))
+                                        {
+                                            resultValue = Convert.ToInt32(numbers[i]);
+                                            break;
+                                        }
+                                    }
+
                                 }
                                 
                                 
