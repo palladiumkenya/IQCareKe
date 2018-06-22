@@ -56,7 +56,8 @@ namespace IQCare.CCC.UILogic.Interoperability
                         if (result.VlResult.Contains("LDL"))
                         {
 
-                        }else if(Regex.Split(result.VlResult, @"[^0-9\.]+").Length > 0)
+                        }
+                        else if(Regex.Split(result.VlResult, @"[^0-9\.]+").Length > 0)
                         {
 
                         }
