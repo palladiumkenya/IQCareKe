@@ -472,3 +472,44 @@ INCLUDE (
 	[ParameterId],
 	[ResultValue]) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[LookupItem]') AND name = N'NCI_LookupItem_Name')
+DROP INDEX [NCI_LookupItem_Name] ON [dbo].[LookupItem]
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [NCI_LookupItem_Name] ON [dbo].[LookupItem]
+(
+	[Name] ASC
+)
+GO
+
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[LookupMaster]') AND name = N'NCI_LookupMaster_Name')
+DROP INDEX [NCI_LookupMaster_Name] ON [dbo].[LookupMaster]
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [NCI_LookupMaster_Name] ON [dbo].[LookupMaster]
+(
+	[Name] ASC
+)
+GO
+--Mark duplicates in LookupItem and LookupMaster tables as deleted
+;
+With dups As( Select *  ,row_number() Over (Partition By Name Order By Id) R From LookupItem)
+Update I
+Set DeleteFlag = 1
+   ,Name = I.Name + '(deleted duplicate:' + cast(R - 1 As varchar(3)) + ' original:' +
+	cast((Select Top 1 Id From dups x Where R = 1 And x.Name = I.Name) As varchar(6))
+From LookupItem I
+Inner Join dups D	On I.Id = D.Id
+Where D.R > 1
+
+Go
+
+;
+With dupMaster As( Select *  ,row_number() Over (Partition By Name Order By Id) R From LookupMaster)
+Update M
+Set DeleteFlag = 1
+   ,Name = M.Name + '(deleted duplicate:' + cast(R - 1 As varchar(3)) + ' original:' +
+	cast((Select Top 1 Id From dupMaster x Where R = 1 And x.Name = M.Name) As varchar(6))
+From LookupMaster M
+Inner Join dupMaster D	On M.Id = D.Id
+Where D.R > 1
+
+Go
