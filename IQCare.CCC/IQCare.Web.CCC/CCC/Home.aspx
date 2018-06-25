@@ -510,7 +510,7 @@
                     },
 
                     error: function (msg) {
-                        alert(msg.responseText);
+                        console.log(msg.responseText);
                     }
                 });
             }
