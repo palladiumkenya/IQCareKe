@@ -19,15 +19,20 @@ namespace IQCare.Common.Core.Models
         public string AuditData { get; set; }
         public DateTime? DateOfBirth { get; set; }
         public bool? DobPrecision { get; set; }
-        public string PersonIdentifier { get; set; }
+        public int? PersonIdentifier { get; set; }
         public string PersonIdentifierType { get; set; }
 
         public string PersonIdentifierValue { get; set; }
-        public string PatientIdentifier { get; set; }
+        public int? PatientIdentifier { get; set; }
         public string PatientIdentifierType { get; set; }
 
         public string PatientIdentifierValue { get; set; }
 
+        public int? Patientid { get; set; }
+
+        public DateTime? RegistrationDate { get; set; }
+
+        public string EnrollmentNumber { get; set; }
 
       
     }

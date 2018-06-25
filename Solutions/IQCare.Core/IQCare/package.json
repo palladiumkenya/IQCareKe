@@ -33,6 +33,7 @@
     "angular-aria": "^1.7.0",
     "angular-material": "^1.1.9",
     "angular-messages": "^1.7.0",
+    "angular4-material-table": "0.0.5",
     "classlist.js": "^1.1.20150312",
     "compression": "^1.7.2",
     "core-js": "^2.4.1",

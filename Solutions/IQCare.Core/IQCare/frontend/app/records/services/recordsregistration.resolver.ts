@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 
 
 @Injectable()
-export class RegistrationResolver implements Resolve<Observable<any[]>> {
+export class RelationshipResolver implements Resolve<Observable<any[]>> {
     constructor(private registrationService: RegistrationService) {
 
     }
@@ -14,7 +14,39 @@ export class RegistrationResolver implements Resolve<Observable<any[]>> {
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
     ): Observable<any[]> {
-        return this.registrationService.getRelGenderOptions();
+        return this.registrationService.getRelOptions();
+
+    }
+}
+
+
+@Injectable()
+export class OccupationResolver implements Resolve<Observable<any[]>> {
+    constructor(private registrationService: RegistrationService) {
+
+    }
+
+    public resolve(
+        route: ActivatedRouteSnapshot,
+        state: RouterStateSnapshot
+    ): Observable<any[]> {
+        return this.registrationService.getOppOptions();
+
+    }
+}
+
+
+@Injectable()
+export class GenderResolver implements Resolve<Observable<any[]>> {
+    constructor(private registrationService: RegistrationService) {
+
+    }
+
+    public resolve(
+        route: ActivatedRouteSnapshot,
+        state: RouterStateSnapshot
+    ): Observable<any[]> {
+        return this.registrationService.getGenderOptions();
 
     }
 }
@@ -34,8 +66,9 @@ export class MaritalStatusResolver implements Resolve<Observable<any[]>> {
     }
 }
 
+
 @Injectable()
-export class EducationOppConsentResolver implements Resolve<Observable<any[]>> {
+export class OppEducationResolver implements Resolve<Observable<any[]>> {
     constructor(private registrationService: RegistrationService) {
 
     }
@@ -44,7 +77,22 @@ export class EducationOppConsentResolver implements Resolve<Observable<any[]>> {
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
     ): Observable<any[]> {
-        return this.registrationService.getOppConsentEduOptions()
+        return this.registrationService.getOppEducationOptions()
+
+    }
+}
+
+@Injectable()
+export class OppConsentResolver implements Resolve<Observable<any[]>> {
+    constructor(private registrationService: RegistrationService) {
+
+    }
+
+    public resolve(
+        route: ActivatedRouteSnapshot,
+        state: RouterStateSnapshot
+    ): Observable<any[]> {
+        return this.registrationService.getOppConsentOptions()
 
     }
 }
@@ -79,6 +127,23 @@ export class IdentifierTypeResolver implements Resolve<Observable<any[]>> {
         return this.registrationService.getIdentifierType();
 
     }
+}
+@Injectable()
+export class GetPersonDetailsResolver implements Resolve<Observable<any[]>>{
+    constructor(private registrationService: RegistrationService) {
+
+    }
+
+    public resolve(
+        route: ActivatedRouteSnapshot,
+        state: RouterStateSnapshot
+    ): Observable<any[]> {
+        
+        return this.registrationService.getPersonDetails(parseInt(localStorage.getItem("personId")));
+
+    }
+
+
 }
 
 

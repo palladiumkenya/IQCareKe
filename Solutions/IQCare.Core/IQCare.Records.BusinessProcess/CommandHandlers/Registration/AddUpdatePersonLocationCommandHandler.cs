@@ -46,8 +46,8 @@ namespace IQCareRecords.Common.BusinessProcess.CommandHandlers
                     }
                     else
                     {
-                        res = await rs.AddPersonLocation(request.PersonId, request.CountyId, request.SubCountyId, request.WardId, "", "", "", request.LandMark, request.NearestHealthCentre, request.UserId);
-                        if (res > 0)
+                        var res = await rs.AddPersonLocation(request.PersonId, request.CountyId, request.SubCountyId, request.WardId, "", "", "", request.LandMark, request.NearestHealthCentre, request.UserId);
+                        if (res !=null)
                         {
                             msg += "Person Location Successfully Added";
                         }

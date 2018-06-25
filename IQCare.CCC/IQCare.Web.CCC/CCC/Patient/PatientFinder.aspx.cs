@@ -64,5 +64,10 @@ namespace IQCare.Web.CCC.Patient
                throw new Exception("",ex);
             }
         }
+
+        protected void btnFindPatient_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

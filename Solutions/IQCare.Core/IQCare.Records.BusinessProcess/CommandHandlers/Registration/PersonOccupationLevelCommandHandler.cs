@@ -31,7 +31,7 @@ namespace IQCareRecords.Common.BusinessProcess.CommandHandlers.Registration
                     pmo = await  sc.GetCurrentOccupation(request.PersonId);
                     if (pmo != null)
                     {
-                      pmo.DeleteFlag = true;
+                     
                         var pm =await sc.UpdateOccupation(pmo);
 
                       

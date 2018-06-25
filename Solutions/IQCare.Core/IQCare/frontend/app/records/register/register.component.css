@@ -1,9 +1,8 @@
-/.example-container {
+.example-container {
     display: flex;
     flex-direction: column;
-}*
-
-    .example-container > * {
+}
+.example-container > * {
         width: 100%;
     }
 
@@ -11,7 +10,10 @@
     display: block;
  
 }
-
+.highlight {
+    color: white;
+    background: #777;
+}
 table.speaker-list {
     table-layout: fixed;
 }

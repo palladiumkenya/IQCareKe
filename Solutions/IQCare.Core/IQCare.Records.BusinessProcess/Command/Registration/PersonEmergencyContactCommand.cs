@@ -44,6 +44,12 @@ namespace IQCareRecords.Common.BusinessProcess.Command
         public bool DeleteFlag { get; set; }
 
         public int RelationshipType { get; set; }
+        
+
+        public bool? RegisteredToClinic { get; set; }
+
+        public int emgEmergencyContactType { get; set; }
+        public int emgNextofKinContactType { get; set; }
 
     }
 

@@ -77,20 +77,30 @@ namespace IQCare.Controllers.Common
         [HttpGet("getocc")]
         public async Task<IActionResult>  GetOccupations()
         {
-            string[] options = new String[] { "Occupation" };
-            var results = await _mediator.Send(new GetRegistrationOptionsCommand { RegistrationOptions = options }, HttpContext.RequestAborted);
+            string options =  "Occupation";
+            var results = await _mediator.Send(new GetOptionsByGroupNameCommand { GroupName = options }, HttpContext.RequestAborted);
             if (results.IsValid)
                 return Ok(results.Value);
             return BadRequest(results);
 
        
        }
-
-        [HttpGet("getRegConsentEducationOptions")]
+        [HttpGet("getEducation")]
         public async Task<IActionResult> GetRegConsentEducationOptions()
         {
-            string[] options = new string[] { "EducationalLevel","ConsentOptions"};
-            var results = await _mediator.Send(new GetRegistrationOptionsCommand { RegistrationOptions = options }, HttpContext.RequestAborted);
+            string options = "EducationalLevel";
+            var results = await _mediator.Send(new GetOptionsByGroupNameCommand { GroupName =options }, HttpContext.RequestAborted);
+            if (results.IsValid)
+                return Ok(results.Value);
+            return BadRequest(results);
+
+        }
+
+        [HttpGet("getRegConsentOptions")]
+        public async Task<IActionResult> GetRegConsentOptions()
+        {
+            string options = "ConsentOptions";
+            var results = await _mediator.Send(new GetOptionsByGroupNameCommand { GroupName = options }, HttpContext.RequestAborted);
             if (results.IsValid)
                 return Ok(results.Value);
             return BadRequest(results);
@@ -100,18 +110,40 @@ namespace IQCare.Controllers.Common
         [HttpGet("getMaritalStatusOptions")]
         public async Task<IActionResult> GetMaritalStatusOptions()
         {
-            string[] options = new string[] {  "MaritalStatus" };
-            var results = await _mediator.Send(new GetRegistrationOptionsCommand { RegistrationOptions = options }, HttpContext.RequestAborted);
+            string options =   "MaritalStatus" ;
+            var results = await _mediator.Send(new GetOptionsByGroupNameCommand { GroupName = options }, HttpContext.RequestAborted);
             if (results.IsValid)
                 return Ok(results.Value);
             return BadRequest(results);
         }
-         
-        [HttpGet("getRelGenderOptions")]
-        public async Task<IActionResult> GetRecordOptions()
+
+        [HttpGet("getContactType")]
+        public async Task<IActionResult> GetContactType()
         {
-            string[] options = new string[] { "Gender", "Relationship"};
-            var results = await _mediator.Send(new GetRegistrationOptionsCommand { RegistrationOptions = options },
+            string[] options = new string[] {"PersonContactType"};
+            var results = await _mediator.Send(new GetRegistrationOptionsCommand { RegistrationOptions = options }, HttpContext.RequestAborted);
+            if (results.IsValid)
+                return Ok(results.Value);
+            return BadRequest(results);
+
+        }
+        [HttpGet("getRelOptions")]
+        public async Task<IActionResult> GetRelationshipOptions()
+        {
+            string options =  "Relationship" ;
+            var results = await _mediator.Send(new GetOptionsByGroupNameCommand { GroupName = options },
+                HttpContext.RequestAborted);
+
+            if (results.IsValid)
+                return Ok(results.Value);
+            return BadRequest(results);
+        }
+
+        [HttpGet("getGenderOptions")]
+        public async Task<IActionResult> GetGenderOptions()
+        {
+            string options =  "Gender";
+            var results = await _mediator.Send(new GetOptionsByGroupNameCommand { GroupName = options },
                 HttpContext.RequestAborted);
 
             if (results.IsValid)

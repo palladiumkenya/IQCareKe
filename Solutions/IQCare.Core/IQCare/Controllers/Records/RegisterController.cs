@@ -7,6 +7,7 @@ using IQCareRecords.Common.BusinessProcess.Command;
  using MediatR;
 using IQCare.Common.BusinessProcess.Commands.Partners;
 using IQCare.Records.BusinessProcess.Command;
+using IQCare.Records.BusinessProcess.Command.Lookup;
 
 namespace IQCare.Controllers.Records
 {
@@ -64,6 +65,19 @@ namespace IQCare.Controllers.Records
             return BadRequest(response);
         }
 
+        [HttpPost("addPatientRegistration")]
+        public async Task<IActionResult> Post([FromBody] AddRegistrationPatientCommand registerpatientcommand)
+        {
+            var response = await _mediator.Send(registerpatientcommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+            {
+                return Ok(response.Value);
+            }
+            return BadRequest(response);
+        }
+       
+         
+
         [HttpPost("addPersonLocation")]
         public async Task<IActionResult> Post([FromBody] AddUpdatePersonLocationCommand registerpersonlocationcommand)
         {
@@ -96,23 +110,75 @@ namespace IQCare.Controllers.Records
             }
             return BadRequest(response);
         }
+        [HttpGet("searchpersonlist")]
+        public async Task<IActionResult> Get(string identificationNumber, string firstName, string middleName, string lastName,
+            string DateofBirth)
+        {
 
+            var response = await _mediator.Send(new SearchPersonListCommand
+            {
+                identificationNumber = identificationNumber,
+                firstName = firstName,
+                middleName = middleName,
+                lastName = lastName,
+                BirthDate = Convert.ToDateTime(DateofBirth)
+
+
+            });
+
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
 
 
         [HttpGet("search")]
-        public async Task<IActionResult> Get(string identificationNumber, string firstName, string middleName, string lastName)
+        public async Task<IActionResult> Get(string identificationNumber, string firstName, string middleName, string lastName,string enrollmentNumber,Boolean notClient)
         {
             var response = await _mediator.Send(new SearchPersonCommand
             {
                 identificationNumber = identificationNumber,
                 firstName = firstName,
                 middleName = middleName,
-                lastName = lastName
+                lastName = lastName,
+                EnrollmentNumber = enrollmentNumber,
+                NotClient = notClient
+                
             });
 
             if (response.IsValid)
                 return Ok(response.Value);
             return BadRequest(response);
+        }
+        [HttpGet("SearchContact")]
+        public async Task<IActionResult> GetContacts(string identificationNumber, string firstName, string middleName, string lastName, string enrollmentNumber)
+        {
+            var response = await _mediator.Send(new SearchPersonContactListCommand
+            {
+                identificationNumber = identificationNumber,
+                firstName = firstName,
+                middleName = middleName,
+                lastName = lastName,
+                EnrollmentNumber = enrollmentNumber
+                
+
+            });
+
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+        [HttpGet("GetPersonDetails")]
+        public async Task<IActionResult> GetPersonDetails(int personId)
+        {
+            var response = await _mediator.Send(new GetPersonDetailsCommand
+            {
+                PersonId=personId
+            });
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+
         }
 
     }

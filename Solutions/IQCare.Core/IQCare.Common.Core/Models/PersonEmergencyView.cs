@@ -8,26 +8,51 @@ namespace IQCare.Common.Core.Models
     {
         public int Id { get; set; }
         public int PersonId { get; set; }
-        public string FirstName { get; set; }
-        public string MiddleName { get; set; }
-        public string LastName { get; set; }
-        public int Sex { get; set; }
-        public bool? Active { get; set; }
+
+        public int EmergencyContactPersonId { get; set; }
+
+
+        public bool RegisteredToClinic { get; set; }
+
+
+        public string MobileContact { get; set; }
+
+        public int? RelationshipTypeId { get; set; }
+        
         public bool DeleteFlag { get; set; }
-        public DateTime CreateDate { get; set; }
+
+        public int? ConsentType { get; set; }
+
+        public int? ConsentValue { get; set; }
+
+        public string ConsentReason { get; set; }
         public int CreatedBy { get; set; }
-        public string AuditData { get; set; }
-        public DateTime? DateOfBirth { get; set; }
-        public bool? DobPrecision { get; set; }
-        public string PersonIdentifier { get; set; }
-        public string PersonIdentifierType { get; set; }
+       
+        
 
-        public string PersonIdentifierValue { get; set; }
-        public string PatientIdentifier { get; set; }
-        public string PatientIdentifierType { get; set; }
 
-        public string PatientIdentifierValue { get; set; }
+        public string EmergencyFirstName { get; set; }
 
+        public string EmergencyLastName { get; set; }
+
+        public string EmergencyMidName { get; set; }
+
+        public string Gender { get; set; }
+
+       
+          public int Sex { get; set; }
+
+
+
+        public string EmergencyItemName { get; set; }
+
+        public int? EmergencyItemId { get; set; }
+
+        public string NextofkinItemName { get; set; }
+
+        public int? NextofKinItemId { get; set; }
+
+        public DateTime? CreateDate { get; set; }
 
 
     }

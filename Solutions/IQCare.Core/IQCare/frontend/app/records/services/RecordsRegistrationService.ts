@@ -26,18 +26,31 @@ export class RegistrationService {
     constructor(private http: HttpClient,
         private errorHandler: ErrorHandlerService) { }
 
-    public getRelGenderOptions(): Observable<any[]> {
-        return this.http.get<any[]>(this.API_URL + this._lookupurl + '/getRelGenderOptions').pipe(
-            tap(registrationoptions => this.errorHandler.log('fetched all relationship gender options')),
-            catchError(this.errorHandler.handleError<any[]>('getRegistrationOptions'))
+    public getGenderOptions(): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + this._lookupurl + '/getGenderOptions').pipe(
+            tap(registrationoptions => this.errorHandler.log('fetched all  gender options')),
+            catchError(this.errorHandler.handleError<any[]>('getGenderOptions'))
         );
     }
 
+    public getRelOptions(): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + this._lookupurl + '/getRelOptions').pipe(
+            tap(registrationoptions => this.errorHandler.log('fetched all  relationship options')),
+            catchError(this.errorHandler.handleError<any[]>('getRelOptions'))
+        );
+    }
+
+    public getContactTypeOptions(): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + this._lookupurl + '/getContactType').pipe(
+            tap(contacttypeoptions => this.errorHandler.log('fetched all contact type')),
+            catchError(this.errorHandler.handleError<any[]>('getContactType'))
+        );
+    }
 
     public getMaritalStatusOptions(): Observable<any[]> {
         return this.http.get<any[]>(this.API_URL + this._lookupurl + '/getMaritalStatusOptions').pipe(
             tap(OppEduConsentOptions => this.errorHandler.log('fetched marital status options ')),
-            catchError(this.errorHandler.handleError<any[]>('getocc'))
+            catchError(this.errorHandler.handleError<any[]>('getMaritalStatusOptions'))
         );
 
 
@@ -53,15 +66,32 @@ export class RegistrationService {
 
     }
 
-    public getOppConsentEduOptions(): Observable<any[]> {
-        return this.http.get<any[]>(this.API_URL + this._lookupurl + '/getRegConsentEducationOptions').pipe(
+    public getOppConsentOptions(): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + this._lookupurl + '/getRegConsentOptions').pipe(
             tap(OppEduConsentOptions => this.errorHandler.log('fetched Education and consent options')),
-            catchError(this.errorHandler.handleError<any[]>('getRegConsentEducationOptions'))
+            catchError(this.errorHandler.handleError<any[]>('getRegConsentOptions'))
         );
 
 
     }
 
+    public getOppEducationOptions(): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + this._lookupurl + '/getEducation').pipe(
+            tap(OppEduConsentOptions => this.errorHandler.log('fetched Education  options')),
+            catchError(this.errorHandler.handleError<any[]>('getEducation'))
+        );
+
+
+    }
+
+
+    public getPersonDetails(personId: number): Observable<any[]> {
+        
+        return this.http.get<any[]>(this.API_URL + this._url + '/GetPersonDetails?personId=' +personId , httpOptions).pipe(
+            tap((personDetails: any) => this.errorHandler.log(`get person details`)),
+            catchError(this.errorHandler.handleError<any>('Get personal details'))
+            );
+    }
 
     public getSubCounty(county: string):Observable<any[]>{
         let params = new HttpParams().set('countyid', county).set('subcountyid', '0');
@@ -143,6 +173,20 @@ export class RegistrationService {
 
     }
 
+    public addPatientRegistration(personId:number,dateofBirth:string,userId:number,nationalId:string,registrationDate:string): Observable<any> {
+        const Indata = {
+            PersonId: personId,
+            DateOfBirth: dateofBirth,
+            UserId: userId,
+            NationalId: nationalId,
+            RegistrationDate:registrationDate
+        };
+        return this.http.post<any>(this.API_URL + this._url + '/addPatientRegistration', JSON.stringify(Indata), httpOptions).pipe(
+            tap((addPersonOccupation: any) => this.errorHandler.log(`added patient registration w/ id`)),
+            catchError(this.errorHandler.handleError<any>('addPatientRegistration'))
+        );
+
+    }
 
     public addPersonContact(personId: number, physicalAddress: string, mobileNumber: string,
         alternativeNumber: string, emailAddress: string, userId: number): Observable<any> {
@@ -200,28 +244,37 @@ export class RegistrationService {
 
         return this.http.post<any>(this.API_URL + this._url + '/addPersonLocation', JSON.stringify(Indata), httpOptions).pipe(
             tap((addPersonLocation: any) => this.errorHandler.log(`added person location w/ id`)),
-            catchError(this.errorHandler.handleError<any>('addPersonLocation'))
+            catchError(this.errorHandler.handleError<any>('addPersonLocation')
+            )
+            
         );
     }
 
 
-    public addPersonEmergencyContact(emergencycontacts:EmergencyArray[]): Observable<any> {
+    public addPersonEmergencyContact(): Observable<any> {
 
         const InData = {
-            EmergencyContacts: emergencycontacts
+            EmergencyContacts: this.arrayemergency
         }
-    
-        return this.http.post<any>(this.API_URL + this._url + '/addPersonEmergencyContact', JSON.stringify(InData), httpOptions).pipe(
+       
+
+         return this.http.post<any>(this.API_URL + this._url + '/addPersonEmergencyContact', JSON.stringify(InData), httpOptions).pipe(
             tap((addPersonEmergencyContact: any) => this.errorHandler.log(`added person  emergencycontact w/ id`)),
             catchError(this.errorHandler.handleError<any>('addPersonEmergencyContact'))
+
+            
         );
+        
 
     }
 
 
+    public cleararray() {
+        this.arrayemergency.length = 0;
+    }
     public addPersonEmergencyContactArray(personId: number, firstname: string, middlename: string, lastname: string,
         gender: number, emergencycontactpersonid: number, mobilecontact: string, createdby: number, deleteflag: boolean, relationshiptype: number, consentType: number, ConsentValue: number
-        , ConsentReason: string): EmergencyArray[] {
+        , ConsentReason: string,RegisteredtoClinic:number,emgEmergencyContactType:number,emgNextofKinContactType:number): EmergencyArray[] {
         this.Emerg = new EmergencyArray();
         
         this.Emerg.PersonId = personId;
@@ -237,6 +290,16 @@ export class RegistrationService {
         this.Emerg.ConsentType = consentType
         this.Emerg.ConsentValue = ConsentValue;
         this.Emerg.ConsentReason = ConsentReason;
+       
+        this.Emerg.emgEmergencyContactType = emgEmergencyContactType;
+        this.Emerg.emgNextofKinContactType = emgNextofKinContactType;
+        if (RegisteredtoClinic = 1) {
+            this.Emerg.RegisteredToClinic = true;
+        }
+        else if (RegisteredtoClinic = 0) {
+            this.Emerg.RegisteredToClinic = false;
+        }
+
         this.arrayemergency.push(this.Emerg);
 
         return this.arrayemergency;

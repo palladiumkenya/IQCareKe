@@ -20,15 +20,21 @@ import { RecordsHomeComponent } from './home/home.component';
 import { SharedModule } from '../shared/shared.module';
 import { RecordsNavComponent } from './nav/nav.component';
 import { RegistrationService } from './services/RecordsRegistrationService';
+import { NavigationService } from './services/navigationservice';
 import { SearchService } from './services/recordssearch';
 import { RecordsRegisterComponent } from'./register/register.component';
-import { RegistrationResolver } from './services/recordsregistration.resolver';
-import { EducationOppConsentResolver } from './services/recordsregistration.resolver';
+import { GenderResolver } from './services/recordsregistration.resolver';
+import { RelationshipResolver } from './services/recordsregistration.resolver';
 import { ConsentTypeResolver } from './services/recordsregistration.resolver';
 import { IdentifierTypeResolver } from './services/recordsregistration.resolver';
 import { MaritalStatusResolver } from './services/recordsregistration.resolver';
+import { OccupationResolver } from './services/recordsregistration.resolver';
+import { OppEducationResolver } from './services/recordsregistration.resolver';
+import { OppConsentResolver } from './services/recordsregistration.resolver';
 import { SearchComponent } from './search/search.component';
-
+import { ProfileComponent } from './profile/profile.component';
+import { GetPersonDetailsResolver } from './services/recordsregistration.resolver';
+import { FieldErrorDisplayComponent } from './errors/field-error-display.component';
 @NgModule({
     imports: [CommonModule, RecordsRoutingModule, ReactiveFormsModule, FormsModule,
         HttpClientModule, MatDatepickerModule, MatFormFieldModule, MatNativeDateModule,
@@ -40,11 +46,11 @@ import { SearchComponent } from './search/search.component';
         MatSidenavModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule,
         MatSortModule, MatStepperModule, MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule
     ],
-    declarations: [RecordsHomeComponent, RecordsNavComponent, RecordsRegisterComponent, SearchComponent
+    declarations: [RecordsHomeComponent, RecordsNavComponent, FieldErrorDisplayComponent ,RecordsRegisterComponent, SearchComponent, ProfileComponent
 
     ],
 
-    providers: [RegistrationService,SearchService,RegistrationResolver,EducationOppConsentResolver,ConsentTypeResolver,IdentifierTypeResolver,MaritalStatusResolver]
+    providers: [RegistrationService, NavigationService, SearchService, GetPersonDetailsResolver,RelationshipResolver,OccupationResolver,GenderResolver,OppEducationResolver,OppConsentResolver,ConsentTypeResolver,ConsentTypeResolver,IdentifierTypeResolver,MaritalStatusResolver]
 })
 
 export class RecordModule {}

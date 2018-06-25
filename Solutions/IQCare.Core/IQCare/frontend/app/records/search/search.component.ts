@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { tap } from 'rxjs/operators';
-import { Search, SearchList } from '../models/search';
+import { Search, SearchList, SearchContact } from '../models/search';
 import { SearchService } from '../services/recordssearch'
 import { DataSource } from '@angular/cdk/collections';
 import { Observable } from "rxjs/Rx";
@@ -28,9 +28,10 @@ export class SearchComponent implements OnInit,AfterViewInit {
     @ViewChild(MatPaginator) paginator: MatPaginator;
     element: any[] = [];
     selectedRowIndex: number = -1;
+    selectedEmergencyIndex: number = -1;
     // public element: any[] = [];
-    personsearch: Search;
-    displayedColumns = ['firstName', 'middleName', 'lastName', 'dateOfBirth'];
+    personsearch: SearchContact;
+    displayedColumns = ['personIdentificationNumber', 'firstName', 'middleName', 'lastName', 'mobileNumber' , 'Gender','enrollmentNumber','Add'];
 
 
     //dataSource = new SearchDataSource(this.searchService, this.personsearch);
@@ -39,7 +40,7 @@ export class SearchComponent implements OnInit,AfterViewInit {
         private router: Router,
         private route: ActivatedRoute,
         public zone: NgZone) {
-        this.personsearch = new Search();
+        this.personsearch = new SearchContact();
 
         this.LoadData();
         // this.dataSource = new SearchDataSource(this.searchService, this.personsearch);
@@ -62,8 +63,9 @@ export class SearchComponent implements OnInit,AfterViewInit {
     getSelectedRow(row) {
         this.selectedRowIndex = row.id;
         localStorage.setItem('personId', row['personId']);
-        
-        console.log(row['personId']);
+        //this.zone.run(() => { this.router.navigate(['/re/patientprofile'], { relativeTo: this.route }); });
+        //this.router.navigateByUrl('/patientprofile');
+        //console.log(this.router.navigateByUrl('/patientprofile'));
     }
 
 
@@ -84,7 +86,7 @@ export class SearchComponent implements OnInit,AfterViewInit {
 
         } else {
 
-            this.searchService.searchPerson(this.personsearch).subscribe(data => {
+            this.searchService.searchPersonContact(this.personsearch).subscribe(data => {
 
 
                 this.dataSource.data = data["personSearch"];
@@ -113,27 +115,21 @@ export class Element {
     FirstName: string;
     MiddleName: string;
     LastName: string;
-    Sex: number;
-    Active?: boolean;
-    DeleteFlag?: boolean;
-    CreateDate?: Date;
-    CreatedBy?: number;
-    AuditData: string;
-    DateOfBirth?: Date;
-    DobPrecision?: boolean;
-    PersonIdentifier: string;
-    PersonIdentifierType: string;
-    PersonIdentifierValue: string;
-    PatientIdentifier: string;
-    PatientIdentifierType: string;
-    PatientIdentifierValue: string;
+    PhysicalAddress?: string;
+    MobileNumber?: string;
+    AlternativeNumber?: string;
+    EmailAddress?: string;
+    EnrollmentNumber?: string;
+    PersonIdentificationNumber?: string;
+    Gender?: string;
+    
 
 
 }
 
 export class SearchDataSource extends DataSource<any>{
     element: any[] = [];
-    constructor(private searchService: SearchService, private search: Search) {
+    constructor(private searchService: SearchService, private search: SearchContact) {
         super();
 
     }
@@ -144,10 +140,11 @@ export class SearchDataSource extends DataSource<any>{
 
         } else {
 
-            this.searchService.searchPerson(this.search).subscribe((data: any) => {
+            this.searchService.searchPersonContact(this.search).subscribe((data: any) => {
 
 
                 this.element = data["personSearch"];
+                console.log(this.element);
 
 
             });

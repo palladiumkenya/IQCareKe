@@ -3,8 +3,25 @@
     firstName: string = '';
     midName: string = '';
     lastName: string = '';
+    EnrollmentNumber: string = '';
+    NotClient: boolean =true;
 }
 
+export class SearchRegList {
+    identifierValue: string = '';
+    firstName: string = '';
+    midName: string = '';
+    lastName: string = '';
+    DateofBirth: string;
+   
+}
+export class SearchContact {
+    identifierValue: string = '';
+    firstName: string = '';
+    midName: string = '';
+    lastName: string = '';
+    EnrollmentNumber: string = '';
+}
 export class SearchList{
 
     Id: number;

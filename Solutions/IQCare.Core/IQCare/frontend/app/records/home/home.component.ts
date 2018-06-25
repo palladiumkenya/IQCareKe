@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, NgZone, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { MatPaginator, MatTableDataSource,MatCheckboxChange } from '@angular/material';
 import { tap } from 'rxjs/operators';
 import { Search,SearchList } from '../models/search';
 import { SearchService } from '../services/recordssearch'
@@ -31,7 +31,7 @@ export class RecordsHomeComponent implements OnInit, AfterViewInit {
     selectedRowIndex: number = -1;
    // public element: any[] = [];
    personsearch: Search;
-   displayedColumns = [ 'firstName', 'middleName', 'lastName', 'dateOfBirth'];
+   displayedColumns = ['firstName', 'middleName', 'lastName', 'dateOfBirth', 'enrollmentNumber'];
   
    
    //dataSource = new SearchDataSource(this.searchService, this.personsearch);
@@ -63,7 +63,8 @@ export class RecordsHomeComponent implements OnInit, AfterViewInit {
     getSelectedRow(row) {
         this.selectedRowIndex = row.id;
         localStorage.setItem('personId', row['personId']);
-        console.log(row['personId']);
+        this.zone.run(() => { this.router.navigate(['/recordregistration/patientprofile'], { relativeTo: this.route }); });
+        //console.log(row['personId']);
     }
 
 
@@ -101,11 +102,17 @@ export class RecordsHomeComponent implements OnInit, AfterViewInit {
     highlight(row) {
         this.selectedRowIndex = row.id;
     }
-
+    public onChange(event: MatCheckboxChange) {
+        if (event.checked) {
+            this.personsearch.NotClient = true;
+        }
+        else {
+            this.personsearch.NotClient = false;
+        }
+    }
  
 }
-
-
+  
 export class Element {
 
     Id: number;
@@ -130,6 +137,8 @@ export class Element {
     
     
 }
+
+
 
 export class SearchDataSource extends DataSource<any>{
     element: any[] = [];

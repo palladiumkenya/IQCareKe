@@ -39,8 +39,23 @@
                                 </div>
                             </div>
 
-                            
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Enrollment Number</label>
+                                        <input type="text" id="enrollmentNumber" name="enrollmentNumber" (keyup)=(OnKeyUp()) class="form-control"  [(ngModel)]="personsearch.EnrollmentNumber" #identifierValue="ngModel">
+                                    </div>
+                                </div>
 
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>NotAClient</label>
+                                         <input type="checkbox" id="NotAClient" name="NotAClient" class="form-control" [checked]="personsearch.NotClient"  (change)="onChange($event)" [(ngModel)]="personsearch.NotClient" />
+                                    </div>
+                                </div>
+
+                            </div>
+                         
                    
 
                        
@@ -49,7 +64,7 @@
 
 
                                     <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
+    The actual rendered columns are set as a property on the row definition" -->
                                     <!-- FirstName Column -->
                                     <ng-container matColumnDef="IdentifierValue">
                                         <mat-header-cell *matHeaderCellDef> PersonIdentification Number </mat-header-cell>
@@ -69,7 +84,12 @@
                                     <ng-container matColumnDef="lastName">
                                         <mat-header-cell *matHeaderCellDef> Last Name </mat-header-cell>
                                         <mat-cell *matCellDef="let row"> {{row.lastName}} </mat-cell>
-                                    </ng-container>-->
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="enrollmentNumber">
+                                        <mat-header-cell *matHeaderCellDef> EnrollmentNumber </mat-header-cell>
+                                        <mat-cell *matCellDef="let row"> {{row.enrollmentNumber }} </mat-cell>
+                                    </ng-container>
                                     <!-- Date Of Birth Column -->
                                     <ng-container matColumnDef="dateOfBirth">
                                         <mat-header-cell *matHeaderCellDef> Date Of Birth </mat-header-cell>
@@ -81,7 +101,7 @@
 
 
                                     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                                    <mat-row *matRowDef="let row; columns: displayedColumns;"   [ngClass]="{'highlight': selectedRowIndex == row.id}" (click)="getSelectedRow(row)"></mat-row>
+                                    <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlight': selectedRowIndex == row.id}" (click)="getSelectedRow(row)"></mat-row>
                                 </mat-table>
 
                                 <mat-paginator [length]="5"

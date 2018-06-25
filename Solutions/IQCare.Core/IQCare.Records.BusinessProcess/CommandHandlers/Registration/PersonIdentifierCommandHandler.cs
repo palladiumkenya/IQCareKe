@@ -35,10 +35,13 @@ namespace IQCareRecords.Common.BusinessProcess.CommandHandlers
 
                     if(pidm !=null)
                     {
-                        pidm.DeleteFlag = true;
-                       var pdm = await Task.Run(() => rs.UpdatePersonIdentifier(pidm));
-                       var  finalupdate = await rs.addPersonIdentifiers(request.PersonId, request.IdentifierId, request.IdentifierValue, request.UserId);
-                        if(finalupdate !=null)
+                        //pidm.DeleteFlag = true;
+                       //var pdm = await Task.Run(() => rs.UpdatePersonIdentifier(pidm));
+                        pidm.IdentifierId = request.IdentifierId;
+                        pidm.IdentifierValue = request.IdentifierValue;
+                        var finalupdate=await Task.Run(() => rs.UpdatePersonIdentifier(pidm));
+                        //var  finalupdate = await rs.addPersonIdentifiers(request.PersonId, request.IdentifierId, request.IdentifierValue, request.UserId);
+                        if (finalupdate !=null)
                         {
                             if(finalupdate.Id > 0)
                             {

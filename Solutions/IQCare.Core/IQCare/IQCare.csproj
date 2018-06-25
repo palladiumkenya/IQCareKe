@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="frontend\app\records\listduplicate\" />
     <Folder Include="logs\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
@@ -39,23 +40,30 @@
     <Content Remove="frontend\app\records\models\person.ts" />
     <Content Remove="frontend\app\records\models\RequiredIfDirective.ts" />
     <Content Remove="frontend\app\records\models\search.ts" />
+    <Content Remove="frontend\app\records\models\viewprofile.ts" />
     <Content Remove="frontend\app\records\records-routing.module.ts" />
     <Content Remove="frontend\app\records\records.module.ts" />
     <Content Remove="frontend\app\records\RecordsRegistrationService.ts" />
+    <Content Remove="frontend\app\records\services\navigationservice.ts" />
     <Content Remove="frontend\app\records\services\recordsregistration.resolver.ts" />
     <Content Remove="frontend\app\records\services\recordssearch.ts" />
+    <Content Remove="frontend\app\records\validators\telephonevalidator.ts" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="frontend\app\records\errors\field-error-display.component.ts" />
     <None Remove="frontend\app\records\models\emergencyvalidator.ts" />
     <None Remove="frontend\app\records\models\person.ts" />
     <None Remove="frontend\app\records\models\RequiredIfDirective.ts" />
     <None Remove="frontend\app\records\models\search.ts" />
+    <None Remove="frontend\app\records\models\viewprofile.ts" />
     <None Remove="frontend\app\records\records-routing.module.ts" />
     <None Remove="frontend\app\records\records.module.ts" />
     <None Remove="frontend\app\records\RecordsRegistrationService.ts" />
+    <None Remove="frontend\app\records\services\navigationservice.ts" />
     <None Remove="frontend\app\records\services\recordsregistration.resolver.ts" />
     <None Remove="frontend\app\records\services\recordssearch.ts" />
+    <None Remove="frontend\app\records\validators\telephonevalidator.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -63,11 +71,14 @@
     <TypeScriptCompile Include="frontend\app\records\models\person.ts" />
     <TypeScriptCompile Include="frontend\app\records\models\RequiredIfDirective.ts" />
     <TypeScriptCompile Include="frontend\app\records\models\search.ts" />
+    <TypeScriptCompile Include="frontend\app\records\models\viewprofile.ts" />
     <TypeScriptCompile Include="frontend\app\records\records-routing.module.ts" />
     <TypeScriptCompile Include="frontend\app\records\records.module.ts" />
+    <TypeScriptCompile Include="frontend\app\records\services\navigationservice.ts" />
     <TypeScriptCompile Include="frontend\app\records\services\recordsregistration.resolver.ts" />
     <TypeScriptCompile Include="frontend\app\records\services\RecordsRegistrationService.ts" />
     <TypeScriptCompile Include="frontend\app\records\services\recordssearch.ts" />
+    <TypeScriptCompile Include="frontend\app\records\validators\telephonevalidator.ts" />
   </ItemGroup>
 
 </Project>

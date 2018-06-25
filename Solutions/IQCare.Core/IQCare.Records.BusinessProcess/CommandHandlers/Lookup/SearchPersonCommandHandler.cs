@@ -36,12 +36,17 @@ namespace IQCare.Records.BusinessProcess.CommandHandlers.Lookup
                     sql.Append("exec pr_OpenDecryptedSession;");
                 sql.Append("Select top 10 * from PersonIdentifierView where (DeleteFlag=0 or DeleteFlag is null) ");
                 }
-                else
+                
+               if(request.NotClient == true)
                 {
-                    sql.Append("exec pr_OpenDecryptedSession;");
-                    sql.Append("Select top 10 * from PersonIdentifierView where (DeleteFlag=0 or DeleteFlag is null) ");
-
+                    sql.Append($" AND Patientid is null");
                 }
+                if (request.NotClient == false)
+                {
+                    sql.Append($"AND Patientid is not null");
+                }
+                if (!string.IsNullOrWhiteSpace(request.EnrollmentNumber))
+                    sql.Append($" AND EnrollmentNumber like \'%{request.EnrollmentNumber}%\'");
               if (!string.IsNullOrWhiteSpace(request.identificationNumber))
                         sql.Append($" AND PersonIdentifierValue like \'%{request.identificationNumber}%\'");
                 if (!string.IsNullOrWhiteSpace(request.identificationNumber))
