@@ -89,7 +89,7 @@ Select	PA.Ptn_Pk PatientId,
 		MD.UpdatedBy
 From dtl_PatientAppointment PA
 Inner Join mst_patient P On p.Ptn_Pk = PA.Ptn_pk
-Left outer Join vw_AppointmentReasons AR On AR.ID = AppReason
+Left outer Join vw_AppointmentReasons AR On AR.ID = AppReason 
 Inner Join
 	(
 		Select
@@ -165,7 +165,10 @@ Select
   ,(Select Top 1 F.FacilityName From mst_Facility F Where f.DeleteFlag=0) FacilityName
  ,PA.PatientMasterVisitId VisitId
  ,PA.AppointmentDate AppointmentDate
- ,PA.StatusDate MetDate
+ , CASE WHEN (SELECT top 1 [Name] FROM LookupItem i WHERE i.Id=PA.StatusId)='pending' THEN NULL
+		ELSE
+		 PA.StatusDate 
+		END MetDate
  ,PA.ReasonId PurposeId
  ,(SELECT top 1 [Name] FROM LookupItem l WHERE l.Id=PA.ReasonId) Purpose
  ,PA.StatusId AppointmentStatusId
@@ -195,7 +198,14 @@ Select
   --,	sum(Case L.Name   When 'Met' Then 1	   Else 0	   End) Met
   --,	sum(Case L.Name   When 'Pending' Then 1	   Else 0   End) Pending
   --,	sum(Case L.Name   When 'PreviouslyMissed' Then 1	   Else 0   End) PreviouslyMissed
-  		,PA.StatusDate StatusDate
+
+
+  ------------------------------------------------
+  --		,CASE WHEN (SELECT top 1 [Name] FROM LookupItem i WHERE i.Id=PA.StatusId)='pending' THEN NULL
+		--ELSE
+		-- PA.StatusDate 
+		--END StatusDate
+		, PA.StatusDate StatusDate
 		,PA.CreatedBy CreatedById
 		,(SELECT u.UserFirstName + ' '+ u.UserLastName FROM mst_User u WHERE u.UserID=PA.CreatedBy) CreatedBy
 		,'' UpdatedById

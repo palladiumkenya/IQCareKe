@@ -2610,12 +2610,12 @@ namespace IQCare.SCM
             {
                 if (this.thePharmacyMaster.Tables[0].Rows[0].IsNull("NextRefillDate"))
                 {
-                    //this.NextRefillValue.Text = "";
+                    this.NextRefillValue.Text = "";
                     NxtAppDate.Text = "";
                 }
                 else
                 {
-                    //this.NextRefillValue.Text = ((DateTime)this.thePharmacyMaster.Tables[0].Rows[0]["NextRefillDate"]).ToString(GblIQCare.AppDateFormat.ToString());
+                    this.NextRefillValue.Text = ((DateTime)this.thePharmacyMaster.Tables[0].Rows[0]["NextRefillDate"]).ToString(GblIQCare.AppDateFormat.ToString());
                     this.NxtAppDate.Text = ((DateTime)this.thePharmacyMaster.Tables[0].Rows[0]["NextRefillDate"]).ToString(GblIQCare.AppDateFormat.ToString());
                 }
                 if (this.thePharmacyMaster.Tables[0].Rows[0].IsNull("AppointmentReason") == false)
@@ -3957,6 +3957,11 @@ namespace IQCare.SCM
         private void btnClosePendingOrderPanel_Click(object sender, EventArgs e)
         {
             pnlPendingOrders.Visible = false;
+        }
+
+        private void panelSave_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
