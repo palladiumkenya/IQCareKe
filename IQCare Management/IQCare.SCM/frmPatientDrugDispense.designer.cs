@@ -439,7 +439,6 @@
             this.label12.Tag = "lblLabel";
             this.label12.Text = "New Refill Date:";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label12.Visible = false;
             // 
             // NextRefillValue
             // 
@@ -462,7 +461,6 @@
             this.dtRefillApp.Size = new System.Drawing.Size(108, 20);
             this.dtRefillApp.TabIndex = 93;
             this.dtRefillApp.Tag = "dtRefillApp";
-            this.dtRefillApp.Visible = false;
             this.dtRefillApp.Enter += new System.EventHandler(this.dtRefillApp_Enter);
             // 
             // labelAppointmentReason
@@ -2796,6 +2794,7 @@
             this.panelSave.Size = new System.Drawing.Size(1271, 54);
             this.panelSave.TabIndex = 59;
             this.panelSave.Tag = "pnlSubPanel";
+            this.panelSave.Paint += new System.Windows.Forms.PaintEventHandler(this.panelSave_Paint);
             // 
             // btnDeleteOrder
             // 
