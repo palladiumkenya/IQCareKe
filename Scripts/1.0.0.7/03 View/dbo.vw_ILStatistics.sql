@@ -14,7 +14,8 @@ EXEC dbo.sp_executesql @statement = N'
 CREATE VIEW [dbo].[vw_ILStatistics]
 AS
 SELECT        
-		''Outgoing Messages'' [Outbox_Messages]
+		1 [Id]
+		,''Outgoing Messages'' [Outbox_Messages]
 		,COUNT(Id) [Outbox]
 		,(SELECT COUNT(ID) FROM ApiInbox) [Inbox]
 		,''Incoming Messages'' [Incoming_Messages]
