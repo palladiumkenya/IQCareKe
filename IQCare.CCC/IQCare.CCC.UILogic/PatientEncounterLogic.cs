@@ -71,6 +71,14 @@ namespace IQCare.CCC.UILogic
             int val = patientEncounter.saveChronicIllness(masterVisitID, patientID, userID, chrIllness, vacc, allergy);
         }
 
+        public int saveNeonatalMilestone(int masterVisitID,int patientID,int userID, string mlAssessed, string mlOnsetDate, string mlAchieved, string mlStatus, string mlComment)
+        {
+            IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
+            JavaScriptSerializer parser = new JavaScriptSerializer();
+            int Val = patientEncounter.saveNeonatalMilestone(masterVisitID, patientID, userID, mlAssessed, mlOnsetDate, mlAchieved,mlStatus,mlComment);
+            return Val;
+        }
+
         public void savePatientEncounterPhysicalExam(string masterVisitID, string patientID, string userID, string physicalExam, string generalExam)
         {
             IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
@@ -476,6 +484,11 @@ namespace IQCare.CCC.UILogic
                             theFrmRoot.NavigateUrl = "PatientEncounter.aspx?visitId=" + theDR["visitID"].ToString();
                             theFrmRoot.ImageUrl = "~/images/15px-Yes_check.svg.png";
                         }
+                        if (theDR["VisitName"].ToString() == "Adherence Barriers")
+                        {
+                            theFrmRoot.NavigateUrl = "../Adherence/AdherenceBarriers.aspx?visitId=" + theDR["visitID"].ToString();
+                            theFrmRoot.ImageUrl = "~/images/15px-Yes_check.svg.png";
+                        }
                         if (theDR["VisitName"].ToString() == "Triage")
                         {
                             theFrmRoot.NavigateUrl = "VitalSigns.aspx?visitId=" + theDR["visitID"].ToString();
@@ -603,5 +616,38 @@ namespace IQCare.CCC.UILogic
             /////////////////////////////////////////////////////////////
 
         }
+
+
+        public DataTable loadPatientVitalSigns(string PatientMasterVisitID, string PatientID)
+        {
+            IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
+            return patientEncounter.getPatientPreviousTriage(PatientMasterVisitID, PatientID);
+        }
+
+        public DataTable loadPatientMilestones(string PatientID)
+        {
+            IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
+            return patientEncounter.getPatientMilestones(PatientID);
+        }
+
+        public DataTable loadImmunizationHistory(string PatientMasterVisitID, string PatientID)
+        {
+            IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
+            return patientEncounter.getImmunizationHistory(PatientMasterVisitID, PatientID);
+        }
+
+        public DataTable loadTannersStaging(string PatientMasterVisitID, string PatientID)
+        {
+            IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
+            return patientEncounter.getTannersStaging(PatientMasterVisitID, PatientID);
+        }
+
+        //public int saveImmunizationHistorry(int PatientMasterVisitID, int PatientID, int UserId, int ImmunizationPeriod, int ImmunizationGiven, int ImmunizationDate)
+        //{
+        //    IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
+        //    JavaScriptSerializer parser = new JavaScriptSerializer();
+        //    int Val = patientEncounter.saveImmunizationHistory(PatientMasterVisitID, PatientID, UserId, ImmunizationPeriod, ImmunizationGiven, ImmunizationDate);
+        //    return Val;
+        //}
     }
 }

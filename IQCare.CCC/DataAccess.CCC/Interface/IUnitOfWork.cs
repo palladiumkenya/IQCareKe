@@ -13,6 +13,7 @@ using DataAccess.CCC.Repository.person;
 using DataAccess.CCC.Interface.assessment;
 using DataAccess.CCC.Interface.Interoperability;
 using DataAccess.CCC.Interface.Pharmacy;
+//using DataAccess.CCC.Interface.Neonatal;
 
 namespace DataAccess.CCC.Interface
 {
@@ -108,6 +109,11 @@ namespace DataAccess.CCC.Interface
         IPatientPharmacyDispenseRepository PatientPharmacyDispenseRepository { get; }
         IPharmacyOrderRepository PharmacyOrderRepository { get; }
         IDrugRepository DrugRepository { get; }
+
+        //Neonatal
+        IPatientNeonatalRepository PatientNeonatalRepository { get; }
+        IImmunizationHistoryRepository ImmunizationHistoryRepository { get; }
+        ITannersStagingRepository TannersStagingRepository { get; }
 
     }
 }
