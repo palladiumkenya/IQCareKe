@@ -157,6 +157,18 @@ namespace IQCare.Web.CCC.WebService
                     }
                 }
 
+                //List<PatientRegistrationLookup> personByPtnPk = patientManager.GetPatientByPtn_Pk(0);
+                //if (personByPtnPk.Count > 0)
+                //{
+                //    var personDetailLookup = personLookUp.GetPersonById(PersonId);
+                //    if (personDetailLookup != null)
+                //    {
+                //        var exception = new SoapException("Enrollment for Patient: " + personDetailLookup.FirstName + " " + personDetailLookup.MiddleName + " " + personDetailLookup.LastName + " " + 
+                //            " was not completed. Please complete their enrollment to avoid error before continuing.", SoapException.ClientFaultCode);
+                //        throw exception;
+                //    }
+                //}
+
                 if (isPersonEnrolled == null || isPersonEnrolled.Id < 1)
                 {
                     List<PatientRegistrationLookup> patientsByPersonId = patientManager.GetPatientIdByPersonId(PersonId);
@@ -271,6 +283,13 @@ namespace IQCare.Web.CCC.WebService
 
                                 patient.ptn_pk = ptn_Pk;
                                 patientManager.UpdatePatient(patient, patientId);
+
+                                PersonGreenCardLookup greenCardLookup = new PersonGreenCardLookup()
+                                {
+                                    PersonId = PersonId,
+                                    Ptn_Pk = ptn_Pk
+                                };
+                                greencardlookup.AddPersonToBlueCardLookup(greenCardLookup);
                             }
                             else
                             {
@@ -333,13 +352,88 @@ namespace IQCare.Web.CCC.WebService
                 else
                 {
                     var patientLookManager = new PatientLookupManager();
-                   PatientLookup patient = patientLookManager.GetPatientByPersonId(PersonId);
+                    PatientLookup patient = patientLookManager.GetPatientByPersonId(PersonId);
                     List<PatientLookup> pk = new List<PatientLookup>();
-                    pk.Add(patient);
+                    //pk.Add(patient);
                     if (patient !=null)
                     {
                         Session["PatientPK"] = patient.Id;
 
+                        //Get User Details to be used in BLUE CARD
+                        var patient_person_details = personLookUp.GetPersonById(PersonId);
+                        var greencardlookup = new PersonGreenCardLookupManager();
+                        var greencardptnpk = greencardlookup.GetPtnPkByPersonId(PersonId);
+                        if (patient_person_details != null)
+                        {
+                            var maritalStatus =
+                                new PersonMaritalStatusManager().GetCurrentPatientMaritalStatus(PersonId);
+                            personContacts = personContactLookUpManager.GetPersonContactByPersonId(PersonId);
+                            var address = "";
+                            var phone = "";
+                            var facility = lookupLogic.GetFacility();
+
+                            if (personContacts.Count > 0)
+                            {
+                                address = personContacts[0].PhysicalAddress;
+                                phone = personContacts[0].MobileNumber;
+                            }
+
+                            var MaritalStatusId = 0;
+                            if (maritalStatus != null)
+                            {
+                                MaritalStatusId = maritalStatus.MaritalStatusId;
+                            }
+
+                            var sex = 0;
+                            var enrollmentBlueCardId = "";
+
+                            if (LookupLogic.GetLookupNameById(patient_person_details.Sex) == "Male")
+                            {
+                                sex = 16;
+                            }
+                            else if (LookupLogic.GetLookupNameById(patient_person_details.Sex) == "Female")
+                            {
+                                sex = 17;
+                            }
+
+                            foreach (var item in identifiersObjects)
+                            {
+                                if (Convert.ToInt32(item.Key) == 1)
+                                {
+                                    enrollmentBlueCardId = item.Value;
+                                }
+                            }
+
+
+                            if (greencardptnpk.Count == 0)
+                            {
+                                ptn_Pk = mstPatientLogic.InsertMstPatient(
+                                    (patient_person_details.FirstName),
+                                    (patient_person_details.LastName),
+                                    (patient_person_details.MiddleName),
+                                    facility.FacilityID, enrollmentBlueCardId, entryPointId,
+                                    DateTime.Parse(enrollmentDate), sex,
+                                    DateTime.Parse(personDateOfBirth),
+                                    1, MaritalStatusId,
+                                    address, phone, userId, Session["AppPosID"].ToString(),
+                                    203, DateTime.Parse(enrollmentDate), DateTime.Now);
+
+                                PatientEntity patientEntity = new PatientEntity();
+                                patientEntity.ptn_pk = ptn_Pk;
+                                patientEntity.DateOfBirth = patient.DateOfBirth;
+                                patientEntity.NationalId = nationalId;
+                                patientEntity.FacilityId = patient.FacilityId;
+                                patientManager.UpdatePatient(patientEntity, patient.Id);
+
+                                PersonGreenCardLookup greenCardLookup = new PersonGreenCardLookup()
+                                {
+                                    PersonId = PersonId,
+                                    Ptn_Pk = ptn_Pk
+                                };
+                                greencardlookup.AddPersonToBlueCardLookup(greenCardLookup);
+                            }
+                        }
+                        pk.Add(patientLookManager.GetPatientByPersonId(PersonId));
                         List<PatientEntity> listPatient = new List<PatientEntity>();
                         var entity = pk.ConvertAll(x=>  new PatientEntity { Id = x.Id, Active = x.Active, DateOfBirth = x.DateOfBirth,
                             ptn_pk = x.ptn_pk, PatientType = x.PatientType, PatientIndex = x.PatientIndex, NationalId = x.NationalId,
@@ -412,7 +506,6 @@ namespace IQCare.Web.CCC.WebService
                         }
                     }
                 }
-
             }
             catch (SoapException ex)
             {
@@ -780,7 +873,7 @@ namespace IQCare.Web.CCC.WebService
                 else
                 {
                     PersonLookUp person = personLookUp.GetPersonById(PersonId);
-                    if (person.DateOfBirth != null)
+                    if (person != null && person.DateOfBirth != null)
                     {
                         enrollmentDetails.DOB = String.Format("{0:dd-MMM-yyyy}", person.DateOfBirth);
                         enrollmentDetails.DobPrecision = person.DobPrecision == null ? false : Convert.ToBoolean(person.DobPrecision);

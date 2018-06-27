@@ -15,6 +15,7 @@ namespace Interface.CCC.Patient
         int GetPatientType(int patientId);
         int GetPersonId(int patientId);
         List<PatientRegistrationLookup> GetPatientIdByPersonId(int personId);
+        List<PatientRegistrationLookup> GetPatientByPtn_Pk(int ptn_pk);
         void UpdatePatientType(int PatientId, int PatientType);
     }
 }
