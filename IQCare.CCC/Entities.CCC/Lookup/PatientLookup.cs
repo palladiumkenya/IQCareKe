@@ -32,6 +32,43 @@ namespace Entities.CCC.Lookup
         public int TBStatus { get; set; }
         public int NutritionStatus { get; set; }
         public int categorization { get; set; }
+        [NotMapped]
+        public int EnrollmentNumberNormalized { get { return NormalizeNumber(); } }
+
+        public int NormalizeNumber()
+        {
+            int intNormalNumber;
+            if (int.TryParse(this.EnrollmentNumber, out intNormalNumber))
+            {
+                return intNormalNumber;
+            }
+
+            var result = String.Empty;
+            if (this.EnrollmentNumber.Length == 11 && this.EnrollmentNumber.Contains("-"))
+            {
+                result = this.EnrollmentNumber.Replace("-","");
+            }
+            else
+            {
+                if (this.EnrollmentNumber.Contains("/"))
+                {
+                    result = this.EnrollmentNumber.Split('/')[0];
+                }
+                else if (this.EnrollmentNumber.Contains("-"))
+                {
+                    result = this.EnrollmentNumber.Split('-')[0];
+                }
+                else
+                {
+                    int intout;
+                    if (int.TryParse(this.EnrollmentNumber, out intout))
+                    {
+                        return intout;
+                    }
+                }
+            }
+            return Convert.ToInt32(result);
+        }
     }
     [Serializable]
     [Table("PersonExtView")]
