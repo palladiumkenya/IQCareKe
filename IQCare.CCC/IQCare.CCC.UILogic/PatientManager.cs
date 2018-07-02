@@ -3,6 +3,8 @@ using Entities.CCC.Enrollment;
 using Interface.CCC.Patient;
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using System.Web.Services.Discovery;
 using Entities.CCC.Lookup;
 using IQCare.CCC.UILogic.Helpers;
 
@@ -71,6 +73,18 @@ namespace IQCare.CCC.UILogic
             catch (Exception e)
             {
                 throw new Exception(e.Message);
+            }
+        }
+
+        public List<PatientRegistrationLookup> GetPatientByPtn_Pk(int ptn_pk)
+        {
+            try
+            {
+                return _mgr.GetPatientByPtn_Pk(ptn_pk);
+            }
+            catch (Exception e)
+            {
+                throw e;
             }
         }
 
