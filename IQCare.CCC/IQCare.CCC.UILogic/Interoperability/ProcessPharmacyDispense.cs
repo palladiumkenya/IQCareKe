@@ -90,7 +90,8 @@ namespace IQCare.CCC.UILogic.Interoperability
                             //drug.StrengthID = messageDispensed.STRENGTH;
                             drug.Duration = messageDispensed.DURATION;
                             drug.UpdateDate = DateTime.Now;
-                            drug.UserID = InteropUser.UserId;
+                            //drug.UserID = InteropUser.UserId;
+                            drug.UserID = 36;
                             //drug.SingleDose = Convert.ToDecimal(Regex.Replace(messageDispensed.DOSAGE, @"^[A-Za-z]+", ""));
 
                         }
@@ -143,7 +144,8 @@ namespace IQCare.CCC.UILogic.Interoperability
                 updatedPharmacyOrder.OrderedByName = orderingPhysician.PREFIX + " " + orderingPhysician.FIRST_NAME +
                                                      " " + orderingPhysician.LAST_NAME;
                 //todo harmonise users
-                updatedPharmacyOrder.DispensedBy = InteropUser.UserId;
+                //updatedPharmacyOrder.DispensedBy = InteropUser.UserId;
+                updatedPharmacyOrder.DispensedBy = 36;
                 updatedPharmacyOrder.DispensedByDate = drugDispensed.MESSAGE_HEADER.MESSAGE_DATETIME;
                 updatedPharmacyOrder.OrderStatus = 2;
                 string str = updatedPharmacyOrder.PharmacyNotes;
