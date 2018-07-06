@@ -104,6 +104,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adherence\AdherenceLogic.cs" />
     <Compile Include="assessment\PatientPsychosocialCriteriaManager.cs" />
     <Compile Include="assessment\PatientSupportSystemCriteriaManager.cs" />
     <Compile Include="Baseline\INHProphylaxisManager.cs" />
@@ -116,6 +117,10 @@
     <Compile Include="Baseline\PatientTransferInmanager.cs" />
     <Compile Include="Baseline\PatientTreatmentInitiationManager.cs" />
     <Compile Include="Baseline\PatientVaccinationManager.cs" />
+    <Compile Include="Encounter\ImmunizationLogic.cs" />
+    <Compile Include="Encounter\NeonatalHistoryLogic.cs" />
+    <Compile Include="Encounter\PatientClinicalNotesLogic.cs" />
+    <Compile Include="Encounter\SocialHistoryLogic.cs" />
     <Compile Include="Enrollment\HivReConfirmatoryTestManager.cs" />
     <Compile Include="Enrollment\IdentifierManager.cs" />
     <Compile Include="Enrollment\PatientArtDistributionManager.cs" />
@@ -148,6 +153,7 @@
     <Compile Include="Interoperability\ViralLoadMessageManager.cs" />
     <Compile Include="LookupLogic.cs" />
     <Compile Include="MstPatientLogic.cs" />
+    <Compile Include="NeontalEncounterManager.cs" />
     <Compile Include="PatientAdherenceAssessmentManager.cs" />
     <Compile Include="PatientAppointmentManager.cs" />
     <Compile Include="PatientBaselineLookupManager.cs" />
@@ -158,6 +164,7 @@
     <Compile Include="PatientDisclosureManager.cs" />
     <Compile Include="PatientLookupManager.cs" />
     <Compile Include="PatientManager.cs" />
+    <Compile Include="PatientNeonatalManager.cs" />
     <Compile Include="PatientPopulationManager.cs" />
     <Compile Include="PatientServiceEnrollmentLookupManager.cs" />
     <Compile Include="PatientStabilitySummaryManager.cs" />
@@ -178,6 +185,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PatientLabOrderManager.cs" />
     <Compile Include="Screening\PatientScreeningManager.cs" />
+    <Compile Include="TannersStagingManager.cs" />
     <Compile Include="TestingSummaryStatisticsManager.cs" />
     <Compile Include="Triage\PatientAdverseEventOutcomeManager.cs" />
     <Compile Include="Triage\PatientFamilyPlanningManager.cs" />

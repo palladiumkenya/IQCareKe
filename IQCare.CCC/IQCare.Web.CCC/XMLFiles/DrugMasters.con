@@ -12262,6 +12262,36 @@
     <GenericName>Darunavir 600mg</GenericName>
     <GenericAbbrevation>DRV 600</GenericAbbrevation>
   </Mst_Generic>
+  <Mst_Generic>
+    <GenericId>597</GenericId>
+    <GenericName>Dolutegravir-50mg</GenericName>
+    <GenericAbbrevation>DTG</GenericAbbrevation>
+  </Mst_Generic>
+  <Mst_Generic>
+    <GenericId>598</GenericId>
+    <GenericName>Darunavir-300mg</GenericName>
+    <GenericAbbrevation>DRV</GenericAbbrevation>
+  </Mst_Generic>
+  <Mst_Generic>
+    <GenericId>599</GenericId>
+    <GenericName>Darunavir-600mg</GenericName>
+    <GenericAbbrevation>DRV</GenericAbbrevation>
+  </Mst_Generic>
+  <Mst_Generic>
+    <GenericId>600</GenericId>
+    <GenericName>Atazanavir/Ritonavir-300mg/100mg</GenericName>
+    <GenericAbbrevation>ATV/r</GenericAbbrevation>
+  </Mst_Generic>
+  <Mst_Generic>
+    <GenericId>601</GenericId>
+    <GenericName>Lopinavir/Ritonavir-200mg/50mg</GenericName>
+    <GenericAbbrevation>LPV/r</GenericAbbrevation>
+  </Mst_Generic>
+  <Mst_Generic>
+    <GenericId>602</GenericId>
+    <GenericName>Lopinavir/Ritonavir-80mg/20mg/ml</GenericName>
+    <GenericAbbrevation>LPV/r</GenericAbbrevation>
+  </Mst_Generic>
   <Mst_DrugType>
     <DrugTypeId>1</DrugTypeId>
     <DrugTypeName>Amphetamine</DrugTypeName>
@@ -12780,8 +12810,8 @@
     <Id>8</Id>
     <Name>TD</Name>
     <SRNO>8.00</SRNO>
-    <Deleteflag>1</Deleteflag>
-    <multiplier>0</multiplier>
+    <Deleteflag>0</Deleteflag>
+    <multiplier>3</multiplier>
   </Mst_Frequency>
   <Mst_Frequency>
     <Id>9</Id>

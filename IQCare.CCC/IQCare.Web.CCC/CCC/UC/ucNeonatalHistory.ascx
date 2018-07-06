@@ -8,19 +8,10 @@
 <div class="panel panel-info">
 	<div class="panel-body">
         <div class="col-md-12 form-group">
-		    <div>
-			    <label class="control-label  pull-left text-primary">Record Neonatal History</label>
-		    </div>
-
-		    <div>
-                <asp:RadioButtonList ClientIDMode="Static" ID="rbRecordNeonatalHistory" RepeatColumns="2" RepeatDirection="Horizontal" runat="server" CssClass="rbList" CellPadding="3" CellSpacing="2"> 
-                </asp:RadioButtonList>
-		    </div>
+            <div id="recordNeonatalHistory">
+                <asp:PlaceHolder ID="PHNeonatalHistory" runat="server"></asp:PlaceHolder>
+            </div>
 	    </div>
-		<%--<div class="col-md-12 form-group">
-			<label class="control-label pull-left">Milestones</label>
-            <div class="milestone-link"><a target="_blank" href="../../Content/resources/Milestones.pdf">Milestone Guides</a></div>
-		</div>--%>
         <div class="" id="neonatalcontentpanel">
             <div class="milestones-panel">
                 <div class="col-md-12 form-group">
@@ -31,7 +22,6 @@
 			        <div class="col-md-3 form-group">
 				        <div class="col-md-12">
                             <label for="txtMilestoneAssessed" class="control-label pull-left">Milestone Assessed</label>
-					        <%--<label for="ChronicIllnessName" class="control-label pull-left">Illness</label>--%>
 				        </div>
 				        <div class="col-md-12">
 					        <asp:DropDownList runat="server" ID="ddlMilestoneAssessed" CssClass="form-control input-sm" ClientIDMode="Static" />
@@ -186,8 +176,9 @@
 	        </div>
             <div class="panel-body">
                 <div class="col-md-12 form-group">
-			        <label class="control-label pull-left">Neonatal History Notes</label>
-                    <textarea runat="server" clientidmode="Static" id="neonatalhistorynotes" class="form-control input-sm" placeholder="" rows="3"></textarea>
+                    <asp:PlaceHolder ID="PHNeonatalHistoryNotes" runat="server"></asp:PlaceHolder>
+			        <%--<label class="control-label pull-left">Neonatal History Notes</label>
+                    <textarea runat="server" clientidmode="Static" id="neonatalhistorynotes" class="form-control input-sm" placeholder="" rows="3"></textarea>--%>
 		        </div>
             </div>
 	    </div>
@@ -322,7 +313,14 @@
             dataType: "json",
             success: function (response) {
                 getImmunization();
-                toastr.success(response.d, "Neonatal Milestone saved successfully");
+                if (response.d == "success")
+                {
+                    toastr.success(response.d, "Neonatal Milestone saved successfully");
+                }
+                else {
+                    toastr.error(response.d, "Immunization stage already existing");
+                }
+                
             },
             error: function (response) {
                 toastr.error(response.d, "Immunization History Not Saved");
@@ -334,63 +332,65 @@
     $(document).on('click', '.btn-next', function () {
         if ($('#dsAdditionalHistory').hasClass('complete') && $('#dsPatientExamination').hasClass('active')) {
             var notesId = <%=NotesId%>;
-            if (notesId > 0) {
-                updatePatientNeonatalHistory(notesId);
-            }
-            else {
-                addPatientNeonatalHistory();
-            }
+            updateNeonatalScreeningData();
+            updateNeonatalNotes();
         }
     });
 
-    function addPatientNeonatalHistory() {
-        var patientId = <%=PatientId%>;
-        var patientMasterVisitId = <%=PatientMasterVisitId%>;
-        var notes = $("#<%=neonatalhistorynotes.ClientID%>").val();
-        var recordNeonatalHistory = $("input[name='<%=rbRecordNeonatalHistory.UniqueID %>']:checked").val();
-        $.ajax({
-            type: "POST",
-            url: "../WebService/NeonatalEncounterService.asmx/addPatientNeonatalHistory",
-            data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','notes': '" + notes + "','recordNeonatalHistory':'" + recordNeonatalHistory +"'}",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (response) {
-                toastr.success(response.d, "Neonatal history saved");
-            },
-            error: function (response) {
-                toastr.success(response.d, "Neonatal history not saved");
-            }
+    function updateNeonatalScreeningData()
+    {
+        var error = 0;
+        $("#recordNeonatalHistory input[type=radio]:checked").each(function () {
+            var screeningValue = $(this).val();
+            var screeningCategory = $(this).closest("table").attr('id');
+            var screeningType = <%=screenTypeId%>;
+            var patientId = <%=PatientId%>;
+            var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            var userId = <%=userId%>;
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientEncounterService.asmx/updateScreeningYesNo",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','screeningType':'" + screeningType + "','screeningCategory':'" + screeningCategory + "','screeningValue':'" + screeningValue + "','userId':'" + userId + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    error = 0;
+                },
+                error: function (response) {
+                    toastr.error(JSON.stringify(response));
+                    break;
+                }
+            });
         });
-    }
-
-    function updatePatientNeonatalHistory(notesId) {
-        var patientId = <%=PatientId%>;
-        var patientMasterVisitId = <%=PatientMasterVisitId%>;
-        var notes = $("#<%=neonatalhistorynotes.ClientID%>").val();
-        var recordNeonatalHistory = $("input[name='<%=rbRecordNeonatalHistory.UniqueID %>']:checked").val();
-        $.ajax({
-            type: "POST",
-            url: "../WebService/NeonatalEncounterService.asmx/updatePatientNeonatalHistory",
-            data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','notes': '" + notes + "','notesid':'" + notesId + "','recordNeonatalHistory':'" + recordNeonatalHistory +"'}",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (response) {
-                toastr.success(response.d, "Neonatal history updated");
-            },
-            error: function (response) {
-                toastr.error(response.d, "Neonatal history not updated");
-                //toastr.error(JSON.stringify(response));
-            }
-        });
-    }
-
-    function showHideNeonatalHistoryDiv() {
-        var anyNeonatalHistory = $("input[name = '<%=rbRecordNeonatalHistory.ClientID%>']:checked").val();
-        if (anyNeonatalHistory = 1) {
-            document.getElementById('neonatal-content').style.display = 'block';
+        if (error == 0) {
+            toastr.success("Neonatal History Saved");
         }
-        else {
-            document.getElementById('neonatal-content').style.display = 'none';
+    }
+
+    function updateNeonatalNotes()
+    {
+        var categoryId = <%=NotesId%>;
+        var patientId = <%=PatientId%>;
+        var patientMasterVisitId = <%=PatientMasterVisitId%>;
+        var clinicalNotes = $("#<%=notesTb.ClientID%>").val();
+        var serviceAreaId = 203;
+        var userId = <%=userId%>;
+        $.ajax({
+            type: "POST",
+            url: "../WebService/PatientClinicalNotesService.asmx/addPatientClinicalNotes",
+            data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','serviceAreaId':'" + serviceAreaId + "','notesCategoryId':'" + categoryId + "','clinicalNotes':'" + clinicalNotes + "','userId':'" + userId + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                error = 0;
+            },
+            error: function (response) {
+                toastr.error(JSON.stringify(response));
+                break;
+            }
+        });
+        if (error == 0) {
+            toastr.success("Notes Saved");
         }
     }
 
@@ -481,15 +481,15 @@
         });
     }
     $(document).ready(function () {
-        showHideNeonatalHistoryPanel();
+       showHideNeonatalHistoryPanel();
     });
 
-    $("input[name='<%=rbRecordNeonatalHistory.UniqueID%>']").change(function () {
+    $("input[name = '<%=rbList.UniqueID %>']").change(function () {
         showHideNeonatalHistoryPanel();
     });
 
     function showHideNeonatalHistoryPanel() {
-        var radioButtons = $("input[name='<%=rbRecordNeonatalHistory.UniqueID%>']");
+        var radioButtons = $("input[name='<%=rbList.UniqueID%>']");
         var selectedIndex = radioButtons.index(radioButtons.filter(':checked'));
         if (selectedIndex == 1)
         {

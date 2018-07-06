@@ -87,7 +87,7 @@ namespace IQCare.Web.CCC.WebService
                     BMIZ = bmiz,
                     WeightForAge = weightForAge,
                     WeightForHeight = weightForHeight,
-                    AgeforZ = ageforZ,
+                    //AgeforZ = ageforZ,
                     NursesComments = nursesComments
                 };
                 var vital = new PatientVitalsManager();

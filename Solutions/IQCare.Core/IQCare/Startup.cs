@@ -10,7 +10,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.IO;
 using System.Reflection;
-using Entities.Common;
 using IQCareRecords.Common.BusinessProcess;
 using Microsoft.AspNetCore.Http;
 using System.Web;

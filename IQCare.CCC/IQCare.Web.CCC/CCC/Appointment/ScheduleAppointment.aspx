@@ -230,9 +230,9 @@
     </div>
 
     <script type="text/javascript">
-        $("#<%=AppointmentDate.ClientID%>").val("09-JUN-2018");
+        //$("#<%=AppointmentDate.ClientID%>").val("09-JUN-2018");
         $("#PersonAppointmentDate").datetimepicker({
-            defaultDate: '09-JUN-2018',
+            defaultDate: $("#<%=AppointmentDate.ClientID%>").val(),
             format: 'DD-MMM-YYYY',
             allowInputToggle: true,
             useCurrent: false
@@ -356,7 +356,10 @@
                             toastr.error("Appointment already exists");
                             return false;
                         }
-                        addPatientAppointment();
+                        else
+                        {
+                            addPatientAppointment();
+                        }
                     },
                     error: function (msg) {
                         //alert(msg.responseText);

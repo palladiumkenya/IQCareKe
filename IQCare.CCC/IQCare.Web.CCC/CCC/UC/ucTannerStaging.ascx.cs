@@ -11,7 +11,11 @@ using System.Globalization;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Entities.CCC.Tanners;
+using IQCare.CCC.UILogic.Encounter;
+using System.Web.Script.Serialization;
+using Entities.CCC.Screening;
+using IQCare.CCC.UILogic.Screening;
+using System.Linq;
 
 namespace IQCare.Web.CCC.UC
 {
@@ -31,6 +35,8 @@ namespace IQCare.Web.CCC.UC
         public string Weight = "0";
         public int userId;
         public int TannersId;
+        public RadioButtonList rbList;
+        public int screenTypeId = 0;
 
         protected int UserId
         {
@@ -60,21 +66,52 @@ namespace IQCare.Web.CCC.UC
 
             if (!IsPostBack)
             {
-                LookupLogic lookUp = new LookupLogic();
-                lookUp.populateDDL(ddlBreastsGenitals, "BreastsGenitals");
-                lookUp.populateDDL(ddlPubicHair, "PubicHair");
-                lookUp.populateRBL(rbRecordTannersStaging, "GeneralYesNo");
+                populateCtrls();
                 getRecordTannersStaging(PatientId);
             }
         }
         protected void getRecordTannersStaging(int PatientId)
         {
-            var stgMgr = new TannersStagingManager();
-            List<TannersStaging> tannersRecordList = stgMgr.getRecordTannersStaging(PatientId);
-            foreach (var value in tannersRecordList)
+            var PSM = new PatientScreeningManager();
+            List<PatientScreening> screeningList = PSM.GetPatientScreening(PatientId);
+            if (screeningList != null)
             {
-                rbRecordTannersStaging.SelectedValue = value.RecordTannersStaging.ToString();
-                TannersId = value.Id;
+                foreach (var value in screeningList)
+                {
+                    RadioButtonList rbl = (RadioButtonList)PHTannersStaging.FindControl(value.ScreeningCategoryId.ToString());
+                    if (rbl != null)
+                    {
+                        rbl.SelectedValue = value.ScreeningValueId.ToString();
+                    }
+                }
+            }
+        }
+        protected void populateCtrls()
+        {
+            LookupLogic lookUp = new LookupLogic();
+            lookUp.populateDDL(ddlBreastsGenitals, "BreastsGenitals");
+            lookUp.populateDDL(ddlPubicHair, "PubicHair");
+            string jsonObject = "[]";
+            jsonObject = LookupLogic.GetLookupItemByName("TannersStaging");
+            JavaScriptSerializer ser = new JavaScriptSerializer();
+            List<LookupItemView> lookupList = ser.Deserialize<List<LookupItemView>>(jsonObject);
+            foreach (var value in lookupList)
+            {
+                if (value.ItemName == "TannersRecord")
+                {
+                    screenTypeId = value.MasterId;
+                    PHTannersStaging.Controls.Add(new LiteralControl("<label class='control-label  pull-left text-primary'>" + value.ItemDisplayName + "</label>"));
+                    rbList = new RadioButtonList();
+                    rbList.ID = value.ItemId.ToString();
+                    rbList.RepeatColumns = 2;
+                    rbList.ClientIDMode = System.Web.UI.ClientIDMode.Static;
+                    rbList.CssClass = "rbList";
+                    rbList.SelectedValue = "104";
+                    lookUp.populateRBL(rbList, "GeneralYesNo");
+                    PHTannersStaging.Controls.Add(rbList);
+                    RadioButtonList rbl = (RadioButtonList)PHTannersStaging.FindControl(value.ItemId.ToString());
+                    rbl.SelectedValue = LookupLogic.GetLookupItemId("No");
+                }
             }
         }
     }

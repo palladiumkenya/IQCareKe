@@ -3,14 +3,9 @@
 <div class="panel panel-info">
 	<div class="panel-body">
         <div class="col-md-12 form-group">
-		    <div>
-			    <label class="control-label  pull-left text-primary">Record Tanners Staging</label>
-		    </div>
-
-		    <div>
-			    <asp:RadioButtonList ClientIDMode="Static" ID="rbRecordTannersStaging" RepeatColumns="2" RepeatDirection="Horizontal" runat="server" CssClass="rbList" CellPadding="3" CellSpacing="2"> 
-                </asp:RadioButtonList>
-		    </div>
+		    <div id="recordTannersStaging">
+                <asp:PlaceHolder ID="PHTannersStaging" runat="server"></asp:PlaceHolder>
+            </div>
 	    </div>
         <div id="tannerspanel">
             <div class="col-md-12 form-group">
@@ -98,12 +93,7 @@
         var currentStep = data.step;
         if (currentStep == 2) {
             var tannersId = <%=TannersId%>;
-            if (tannersId > 0) {
-                updateRecordTannersStaging(tannersId);
-            }
-            else {
-                recordTannersStaging();
-            }
+            updateTannersStagingRecord();
         }
     });
 
@@ -211,57 +201,45 @@
         $("#ddlPubicHair").val(1);
     }
 
-    function recordTannersStaging()
-    {
-        var recordTannersStaging = $("input[name='<%=rbRecordTannersStaging.UniqueID %>']:checked").val();
-        var patientId = <%=PatientId%>;
-        var userId = <%=userId%>;
-        var patientMasterVisitId = <%=PatientMasterVisitId%>;
-        $.ajax({
-            type: "POST",
-            url: "../WebService/TannersStagingService.asmx/recordTannersStaging",
-            data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','createdBy':'" + userId + "','recordTannersStaging': '" + recordTannersStaging + "'}",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (response) {
-                toastr.success("Tanners staging recorded");
-            },
-            error: function (response) {
-                toastr.error("Tanners staging not recorded");
-            }
+    function updateTannersStagingRecord() {
+        var error = 0;
+        $("#recordTannersStaging input[type=radio]:checked").each(function () {
+            var screeningValue = $(this).val();
+            var screeningCategory = $(this).closest("table").attr('id');
+            var screeningType = <%=screenTypeId%>;
+            var patientId = <%=PatientId%>;
+            var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            var userId = <%=userId%>;
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientEncounterService.asmx/updateScreeningYesNo",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','screeningType':'" + screeningType + "','screeningCategory':'" + screeningCategory + "','screeningValue':'" + screeningValue + "','userId':'" + userId + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    error = 0;
+                },
+                error: function (response) {
+                    toastr.error(JSON.stringify(response));
+                    break;
+                }
+            });
         });
-    }
-    function updateRecordTannersStaging(tannersId)
-    {
-        var recordTannersStaging = $("input[name='<%=rbRecordTannersStaging.UniqueID %>']:checked").val();
-        var patientId = <%=PatientId%>;
-        var userId = <%=userId%>;
-        var patientMasterVisitId = <%=PatientMasterVisitId%>;
-        $.ajax({
-            type: "POST",
-            url: "../WebService/TannersStagingService.asmx/updateRecordTannersStaging",
-            data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','recordTannersStaging': '" + recordTannersStaging + "','tannersId':'" + tannersId + "'}",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (response) {
-                toastr.success("Tanners staging updated");
-            },
-            error: function (response) {
-                toastr.error("Tanners staging not updated");
-            }
-        });
+        if (error == 0) {
+            toastr.success("Tanners staging saved");
+        }
     }
 
     $(document).ready(function () {
         showHideTannersPanel();
     });
 
-    $("input[name='<%=rbRecordTannersStaging.UniqueID%>']").change(function () {
+    $("input[name='<%=rbList.UniqueID%>']").change(function () {
         showHideTannersPanel();
     });
 
     function showHideTannersPanel() {
-        var radioButtons = $("input[name='<%=rbRecordTannersStaging.UniqueID%>']");
+        var radioButtons = $("input[name='<%=rbList.UniqueID%>']");
         var selectedIndex = radioButtons.index(radioButtons.filter(':checked'));
         if (selectedIndex == 1) {
             $("#tannerspanel").hide();

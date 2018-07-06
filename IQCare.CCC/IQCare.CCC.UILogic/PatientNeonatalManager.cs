@@ -5,12 +5,15 @@ using Entities.CCC.Neonatal;
 using Interface.CCC;
 using IQCare.Events;
 using Entities.CCC.Encounter;
+using Interface.CCC.Screening;
+using Entities.CCC.Screening;
 
 namespace IQCare.CCC.UILogic
 {
     public class PatientNeonatalManager
     {
         IPatientNeonatal _neonatal = (IPatientNeonatal)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientNeonatal, BusinessProcess.CCC");
+        private IPatientScreeningManager _patientScreening = (IPatientScreeningManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Screening.BPatientScreeningManager, BusinessProcess.CCC");
         public int AddPatientNeonatal(PatientMilestone p)
         {
             PatientMilestone patientNeonatal = new PatientMilestone()
@@ -43,17 +46,52 @@ namespace IQCare.CCC.UILogic
             return immunizationHistoryId;
         }
 
-        public int addPatientNeonatalHistory(int patientId, int patientMasterVisitId, string notes, int recordNeonatalHistory)
+        public int updateNeonatalScreeningData(int patientId, int patientMasterVisitId, int screeningType, int screeningCategory, int screeningValue, int userId)
         {
-            PatientNeonatalHistory patientNeonatal = new PatientNeonatalHistory()
+            try
             {
-                PatientId = patientId,
-                PatientMasterVisitId = patientMasterVisitId,
-                NeonatalHistoryNotes = notes,
-                RecordNeonatalHistory = recordNeonatalHistory
-            };
-            int patientNeonatalId = _neonatal.AddPatientNeonatalHistory(patientNeonatal);
-            return patientNeonatalId;
+                //(screening>0) ? update:add
+                int screeningResult = _patientScreening.checkScreeningByScreeningCategoryId(patientId, screeningType, screeningCategory);
+                if (screeningResult > 0)
+                {
+                    var PS = new PatientScreening()
+                    {
+                        PatientId = patientId,
+                        PatientMasterVisitId = patientMasterVisitId,
+                        VisitDate = DateTime.Today,
+                        ScreeningTypeId = screeningType,
+                        ScreeningDone = true,
+                        ScreeningDate = DateTime.Today,
+                        ScreeningCategoryId = screeningCategory,
+                        ScreeningValueId = screeningValue,
+                        Comment = null,
+                        CreatedBy = userId,
+                        Id = screeningResult
+                    };
+                    return _patientScreening.updatePatientScreeningById(PS);
+                }
+                else
+                {
+                    var PS = new PatientScreening()
+                    {
+                        PatientId = patientId,
+                        PatientMasterVisitId = patientMasterVisitId,
+                        VisitDate = DateTime.Today,
+                        ScreeningTypeId = screeningType,
+                        ScreeningDone = true,
+                        ScreeningDate = DateTime.Today,
+                        ScreeningCategoryId = screeningCategory,
+                        ScreeningValueId = screeningValue,
+                        Comment = null,
+                        CreatedBy = userId
+                    };
+                    return _patientScreening.AddPatientScreening(PS);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
         public void DeleteImmunization(int Id)
         {

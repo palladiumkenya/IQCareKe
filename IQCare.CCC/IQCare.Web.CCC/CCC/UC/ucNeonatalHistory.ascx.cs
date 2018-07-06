@@ -12,6 +12,10 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using IQCare.CCC.UILogic.Encounter;
+using System.Web.Script.Serialization;
+using Entities.CCC.Screening;
+using IQCare.CCC.UILogic.Screening;
+using System.Linq;
 
 namespace IQCare.Web.CCC.UC
 {
@@ -26,6 +30,9 @@ namespace IQCare.Web.CCC.UC
         public string Weight = "0";
         public int userId;
         public int NotesId;
+        public RadioButtonList rbList;
+        public TextBox notesTb;
+        public int screenTypeId = 0;
 
         protected int UserId
         {
@@ -56,31 +63,80 @@ namespace IQCare.Web.CCC.UC
 
             if (!IsPostBack)
             {
-                LookupLogic lookUp = new LookupLogic();
-                lookUp.populateDDL(ddlMilestoneAssessed, "MilestoneAssessed");
-                lookUp.populateDDL(ddlMilestoneStatus, "MilestoneStatus");
-                lookUp.populateDDL(ddlImmunizationPeriod, "ImmunizationPeriod");
-                lookUp.populateDDL(ddlImmunizationGiven, "ImmunizationGiven");
-                populateRadioButtons();
-                getNeonatalNotes(PatientId, PatientMasterVisitId);
+                populateCTRLS();
+                getNeonatalScreeningData(PatientId);
             }
         }
 
-        private void getNeonatalNotes(int PatientId, int PatientMasterVisitId)
+        private void getNeonatalScreeningData(int PatientId)
         {
-            var nHtx = new NeonatalHistoryLogic();
-            List<PatientNeonatalHistory> neonatalNotesList = nHtx.getNeonatalNotes(PatientId, PatientMasterVisitId);
-            foreach(var value in neonatalNotesList)
+            var PSM = new PatientScreeningManager();
+            List<PatientScreening> screeningList = PSM.GetPatientScreening(PatientId);
+            if (screeningList != null)
             {
-                neonatalhistorynotes.InnerText = value.NeonatalHistoryNotes.ToString();
-                rbRecordNeonatalHistory.SelectedValue = value.RecordNeonatalHistory.ToString();
-                NotesId = value.Id;
+                foreach (var value in screeningList)
+                {
+                    RadioButtonList rbl = (RadioButtonList)PHNeonatalHistory.FindControl(value.ScreeningCategoryId.ToString());
+                    if (rbl != null)
+                    {
+                        rbl.SelectedValue = value.ScreeningValueId.ToString();
+                    }
+                }
+            }
+            var PCN = new PatientClinicalNotesLogic();
+            List<PatientClinicalNotes> neonatalNotesList = PCN.getPatientClinicalNotesById(PatientId, Convert.ToInt32(LookupLogic.GetLookupItemId("NeonatalNotes")));
+            if(neonatalNotesList.Any())
+            {
+                foreach (var value in neonatalNotesList)
+                {
+                    TextBox ntb = (TextBox)PHNeonatalHistoryNotes.FindControl(value.NotesCategoryId.ToString());
+                    if (ntb != null)
+                    {
+                        ntb.Text = value.ClinicalNotes;
+                    }
+                }  
             }
         }
-        protected void populateRadioButtons()
+        protected void populateCTRLS()
         {
             LookupLogic lookUp = new LookupLogic();
-            lookUp.populateRBL(rbRecordNeonatalHistory, "GeneralYesNo");
+            lookUp.populateDDL(ddlMilestoneAssessed, "MilestoneAssessed");
+            lookUp.populateDDL(ddlMilestoneStatus, "MilestoneStatus");
+            lookUp.populateDDL(ddlImmunizationPeriod, "ImmunizationPeriod");
+            lookUp.populateDDL(ddlImmunizationGiven, "ImmunizationGiven");
+            string jsonObject = "[]";
+            jsonObject = LookupLogic.GetLookupItemByName("NeonatalHistory");
+            JavaScriptSerializer ser = new JavaScriptSerializer();
+            List<LookupItemView> lookupList = ser.Deserialize<List<LookupItemView>>(jsonObject);
+            foreach (var value in lookupList)
+            {
+                if(value.ItemName == "NeonatalRecord")
+                {
+                    screenTypeId = value.MasterId;
+                    PHNeonatalHistory.Controls.Add(new LiteralControl("<label class='control-label  pull-left text-primary'>"+value.ItemDisplayName+"</label>"));
+                    rbList = new RadioButtonList();
+                    rbList.ID = value.ItemId.ToString();
+                    rbList.RepeatColumns = 2;
+                    rbList.ClientIDMode = System.Web.UI.ClientIDMode.Static;
+                    rbList.CssClass = "rbList";
+                    rbList.SelectedValue = "104";
+                    lookUp.populateRBL(rbList, "GeneralYesNo");
+                    PHNeonatalHistory.Controls.Add(rbList);
+                    RadioButtonList rbl = (RadioButtonList)PHNeonatalHistory.FindControl(value.ItemId.ToString());
+                    rbl.SelectedValue = LookupLogic.GetLookupItemId("No");
+                }
+                if (value.ItemName == "NeonatalNotes")
+                {
+                    PHNeonatalHistoryNotes.Controls.Add(new LiteralControl("<label class='control-label  pull-left text-primary'>" + value.ItemDisplayName + "</label>"));
+                    NotesId = value.ItemId;
+                    notesTb = new TextBox();
+                    notesTb.TextMode = TextBoxMode.MultiLine;
+                    notesTb.CssClass = "form-control input-sm";
+                    notesTb.ID = value.ItemId.ToString();
+                    notesTb.Rows = 3;
+                    PHNeonatalHistoryNotes.Controls.Add(notesTb);
+                }
+            }
         }
     }
 }

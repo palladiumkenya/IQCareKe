@@ -63,6 +63,12 @@ namespace IQCare.Common.Infrastructure
         public void Save()
             => _context.SaveChanges();
 
+
+        public async Task<int> SaveChangesAsync()
+        {
+           
+           return await _context.SaveChangesAsync();
+        }
         public async Task SaveAsync()
             => await _context.SaveChangesAsync();
     }

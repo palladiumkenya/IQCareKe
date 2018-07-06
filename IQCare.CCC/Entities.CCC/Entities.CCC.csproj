@@ -66,6 +66,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adherence\AdherenceScreening.cs" />
+    <Compile Include="Adherence\DailyRoutine.cs" />
+    <Compile Include="Adherence\HIVStatus.cs" />
+    <Compile Include="Adherence\PsychosocialCircumstances.cs" />
+    <Compile Include="Adherence\Referrals.cs" />
+    <Compile Include="Adherence\UnderstandingHIV.cs" />
     <Compile Include="Appointment\BlueCardAppointment.cs" />
     <Compile Include="Appointment\PatientAppointment.cs" />
     <Compile Include="Assessment\PatientPsychoscialCriteria.cs" />
@@ -95,7 +101,14 @@
     <Compile Include="Encounter\PatientFamilyPlanningMethod.cs" />
     <Compile Include="Baseline\PatientHivTesting.cs" />
     <Compile Include="Baseline\PatientFamilyTesting.cs" />
+    <Compile Include="Encounter\PatientNeonatalHistory.cs" />
+    <Compile Include="Encounter\PatientSocialHistory.cs" />
+    <Compile Include="Encounter\SocialHistory.cs" />
     <Compile Include="Interoperability\PatientVitalsMessage.cs" />
+    <Compile Include="Neonatal\ImmunizationHistory.cs" />
+    <Compile Include="Neonatal\PatientImmunizationHistory.cs" />
+    <Compile Include="Neonatal\PatientMilestone.cs" />
+    <Compile Include="Neonatal\PatientNeonatal.cs" />
     <Compile Include="pharmacy\Drug.cs" />
     <Compile Include="pharmacy\PatientPharmacyDispense.cs" />
     <Compile Include="Encounter\PatientProphylaxis.cs" />
@@ -161,6 +174,8 @@
     <Compile Include="PSmart\SHR.cs" />
     <Compile Include="PSmart\SmartcardPatientList.cs" />
     <Compile Include="Screening\PatientScreening.cs" />
+    <Compile Include="Tanners\PatientTannersStaging.cs" />
+    <Compile Include="Tanners\TannersStaging.cs" />
     <Compile Include="Tb\PatientIcf.cs" />
     <Compile Include="Tb\PatientIcfAction.cs" />
     <Compile Include="Tb\PatientIpt.cs" />

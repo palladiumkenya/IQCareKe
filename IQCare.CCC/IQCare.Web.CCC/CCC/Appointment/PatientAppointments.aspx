@@ -114,12 +114,6 @@
 
         $("#tblAppointment").on('click', '.btnDelete', function () {
             var AppointmentId = tableAppointments.row($(this).parents('tr')).data()["8"];
-            //var AppintmentDate = tableAppointments.row($(this).parents('tr')).data()["7"];
-            //var ServiceArea = tableAppointments.row($(this).parents('tr')).data()["7"];
-            //var Reason = tableAppointments.row($(this).parents('tr')).data()["7"];
-            //var DifferentialCare = tableAppointments.row($(this).parents('tr')).data()["7"];
-            //var DeleteFlag = tableAppointments.row($(this).parents('tr')).data()["7"];
-            //alert(datas);
             DeleteAppointment(AppointmentId);
             tableAppointments.row($(this).parents('tr'))
             .remove()

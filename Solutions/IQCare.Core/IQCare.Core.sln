@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2024
+VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQCare", "IQCare\IQCare.csproj", "{EACDD6C6-0BD9-42CB-9B34-0CC9877F695D}"
 EndProject
@@ -37,7 +37,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQCare.Common.Core", "IQCar
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{28CA44D5-B4AF-4374-BA97-55094C5D1FD1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCare.Library", "IQCare.Library\IQCare.Library.csproj", "{06FA84C3-3212-44C1-AFE9-A58F827D345B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQCare.Library", "IQCare.Library\IQCare.Library.csproj", "{06FA84C3-3212-44C1-AFE9-A58F827D345B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCareRecords.Common.BusinessProcess", "IQCareRecords.Common.BusinessProcess\IQCareRecords.Common.BusinessProcess.csproj", "{A5FFB4E0-5755-402E-917C-926C32FB8F5C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -89,6 +91,10 @@ Global
 		{06FA84C3-3212-44C1-AFE9-A58F827D345B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06FA84C3-3212-44C1-AFE9-A58F827D345B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06FA84C3-3212-44C1-AFE9-A58F827D345B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5FFB4E0-5755-402E-917C-926C32FB8F5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5FFB4E0-5755-402E-917C-926C32FB8F5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5FFB4E0-5755-402E-917C-926C32FB8F5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5FFB4E0-5755-402E-917C-926C32FB8F5C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -105,6 +111,7 @@ Global
 		{BC197B1A-999C-49B0-8CB4-4ACA6E512809} = {A81EE81E-A949-4968-B7EB-BFD442FE773F}
 		{D3F6CD28-BA14-4DA8-B09D-3967DB8D4B0B} = {A81EE81E-A949-4968-B7EB-BFD442FE773F}
 		{06FA84C3-3212-44C1-AFE9-A58F827D345B} = {28CA44D5-B4AF-4374-BA97-55094C5D1FD1}
+		{A5FFB4E0-5755-402E-917C-926C32FB8F5C} = {A81EE81E-A949-4968-B7EB-BFD442FE773F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6748284C-28D2-4D64-B4DE-832CF3A54CC2}

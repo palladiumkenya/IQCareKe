@@ -13,13 +13,13 @@ namespace IQCare.Web.CCC.UC {
     public partial class ucTannerStaging {
         
         /// <summary>
-        /// rbRecordTannersStaging control.
+        /// PHTannersStaging control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rbRecordTannersStaging;
+        protected global::System.Web.UI.WebControls.PlaceHolder PHTannersStaging;
         
         /// <summary>
         /// txtTannerStagingDate control.

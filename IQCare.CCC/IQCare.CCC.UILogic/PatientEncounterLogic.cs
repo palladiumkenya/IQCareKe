@@ -10,6 +10,8 @@ using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.UI.WebControls;
 using static Entities.CCC.Encounter.PatientEncounter;
+using Interface.CCC.Screening;
+using Entities.CCC.Screening;
 
 namespace IQCare.CCC.UILogic
 {
@@ -642,12 +644,53 @@ namespace IQCare.CCC.UILogic
             return patientEncounter.getTannersStaging(PatientMasterVisitID, PatientID);
         }
 
-        //public int saveImmunizationHistorry(int PatientMasterVisitID, int PatientID, int UserId, int ImmunizationPeriod, int ImmunizationGiven, int ImmunizationDate)
-        //{
-        //    IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
-        //    JavaScriptSerializer parser = new JavaScriptSerializer();
-        //    int Val = patientEncounter.saveImmunizationHistory(PatientMasterVisitID, PatientID, UserId, ImmunizationPeriod, ImmunizationGiven, ImmunizationDate);
-        //    return Val;
-        //}
+        public int updateScreeningYesNo(int patientId, int patientMasterVisitId, int screeningType, int screeningCategory, int screeningValue, int userId)
+        {
+            IPatientScreeningManager _patientScreening = (IPatientScreeningManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Screening.BPatientScreeningManager, BusinessProcess.CCC");
+            try
+            {
+                //(screening>0) ? update:add
+                int screeningResult = _patientScreening.checkScreeningByScreeningCategoryId(patientId, screeningType, screeningCategory);
+                if (screeningResult > 0)
+                {
+                    var PS = new PatientScreening()
+                    {
+                        PatientId = patientId,
+                        PatientMasterVisitId = patientMasterVisitId,
+                        VisitDate = DateTime.Today,
+                        ScreeningTypeId = screeningType,
+                        ScreeningDone = true,
+                        ScreeningDate = DateTime.Today,
+                        ScreeningCategoryId = screeningCategory,
+                        ScreeningValueId = screeningValue,
+                        Comment = null,
+                        CreatedBy = userId,
+                        Id = screeningResult
+                    };
+                    return _patientScreening.updatePatientScreeningById(PS);
+                }
+                else
+                {
+                    var PS = new PatientScreening()
+                    {
+                        PatientId = patientId,
+                        PatientMasterVisitId = patientMasterVisitId,
+                        VisitDate = DateTime.Today,
+                        ScreeningTypeId = screeningType,
+                        ScreeningDone = true,
+                        ScreeningDate = DateTime.Today,
+                        ScreeningCategoryId = screeningCategory,
+                        ScreeningValueId = screeningValue,
+                        Comment = null,
+                        CreatedBy = userId
+                    };
+                    return _patientScreening.AddPatientScreening(PS);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

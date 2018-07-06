@@ -30,8 +30,9 @@ namespace IQCare.CCC.UILogic
                 BMIZ = p.BMIZ,
                 WeightForHeight = p.WeightForHeight,
                 WeightForAge = p.WeightForAge,
-                VisitDate = p.VisitDate
-               
+                VisitDate = p.VisitDate,
+                //AgeforZ = p.AgeforZ,
+                NursesComments = p.NursesComments
             };
             int vitalsId = _vitals.AddPatientVitals(patientVital);
             if (vitalsId > 1)

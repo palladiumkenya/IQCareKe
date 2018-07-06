@@ -18,6 +18,7 @@ using IQCare.CCC.UILogic.Triage;
 using AutoMapper;
 using IQCare.Events;
 using Entities.CCC.Lookup;
+using System.Linq;
 
 //using static Entities.CCC.Encounter.PatientEncounter;
 
@@ -301,14 +302,19 @@ namespace IQCare.Web.CCC.WebService
         public ArrayList GetVaccines()
         {
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
-
+            LookupLogic ll = new LookupLogic();
             DataTable theDT = patientEncounter.loadPatientEncounterVaccines(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString(), Session["PatientPK"].ToString());
             ArrayList rows = new ArrayList();
 
             foreach (DataRow row in theDT.Rows)
             {
-                string[] i = new string[6] { row["vaccineID"].ToString(), row["vaccineStageID"].ToString(), row["VaccineName"].ToString(), row["VaccineStageName"].ToString(), row["VaccineDate"].ToString(), "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>" };
-                rows.Add(i);
+                List<LookupItemView> lookupList = ll.GetItemIdByGroupAndItemName("VaccinationStages", LookupLogic.GetLookupNameById(Convert.ToInt32(row["vaccineStageID"])).ToString());
+                if (lookupList.Any())
+                {
+                    string[] i = new string[6] { row["vaccineID"].ToString(), row["vaccineStageID"].ToString(), row["VaccineName"].ToString(), row["VaccineStageName"].ToString(), row["VaccineDate"].ToString(), "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>" };
+                    rows.Add(i);
+                }
+                    
             }
             return rows;
         }
@@ -1067,53 +1073,23 @@ namespace IQCare.Web.CCC.WebService
             return rows;
         }
 
-        [WebMethod(EnableSession = true)]
-        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
-        public ArrayList LoadMilestones()
+        [WebMethod]
+        public string updateScreeningYesNo(int patientId, int patientMasterVisitId, int screeningType, int screeningCategory, int screeningValue, int userId)
         {
-            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
-            DataTable theDT = patientEncounter.loadPatientMilestones(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString(), Session["PatientPK"].ToString());
-            ArrayList rows = new ArrayList();
-            
-            foreach (DataRow row in theDT.Rows)
+            try
             {
-                string[] i = new string[6] { row["Id"].ToString(),LookupLogic.GetLookupNameById(Convert.ToInt32(row["MilestoneAssessed"])).ToString().ToUpper(), Convert.ToDateTime(row["MilestoneDate"]).ToString("dd-MMM-yyyy"),Convert.ToBoolean(row["MilestoneAchieved"]).ToString(),
-                    LookupLogic.GetLookupNameById(Convert.ToInt32(row["MilestoneStatus"])).ToString().ToUpper(),row["MilestoneComments"].ToString()};
-                rows.Add(i);
+                var NM = new PatientEncounterLogic();
+                Result = NM.updateScreeningYesNo(patientId, patientMasterVisitId, screeningType, screeningCategory, screeningValue, userId);
+                if (Result > 0)
+                {
+                    Msg = "Saved";
+                }
             }
-            return rows;
-        }
-
-        [WebMethod(EnableSession = true)]
-        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
-        public ArrayList loadImmunization()
-        {
-            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
-            DataTable theDT = patientEncounter.loadImmunizationHistory(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString(), Session["PatientPK"].ToString());
-            ArrayList rows = new ArrayList();
-
-            foreach (DataRow row in theDT.Rows)
+            catch (Exception e)
             {
-                string[] i = new string[4] { row["Id"].ToString(), LookupLogic.GetLookupNameById(Convert.ToInt32(row["ImmunizationPeriod"])).ToString(), LookupLogic.GetLookupNameById(Convert.ToInt32(row["ImmunizationGiven"])).ToString(), Convert.ToDateTime(row["ImmunizationDate"]).ToString("dd-MMM-yyyy") };
-                rows.Add(i);
+                Msg = e.Message;
             }
-            return rows;
+            return Msg;
         }
-
-        [WebMethod(EnableSession = true)]
-        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
-        public ArrayList getTannersStaging()
-        {
-            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
-            DataTable theDT = patientEncounter.loadTannersStaging(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString(), Session["PatientPK"].ToString());
-            ArrayList rows = new ArrayList();
-            foreach (DataRow row in theDT.Rows)
-            {
-                string[] i = new string[4] { row["Id"].ToString(), Convert.ToDateTime(row["TannersStagingDate"]).ToString("dd-MMM-yyyy"), LookupLogic.GetLookupNameById(Convert.ToInt32(row["BreastsGenitals"])).ToString(), LookupLogic.GetLookupNameById(Convert.ToInt32(row["PubicHair"])).ToString() };
-                rows.Add(i);
-            }
-            return rows;
-        }
-
     }
 }

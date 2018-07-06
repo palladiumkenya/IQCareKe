@@ -105727,16 +105727,6 @@
     <ListName>Appointment Status</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>15</ID>
-    <Name>All</Name>
-    <CodeID>3</CodeID>
-    <SRNo>0.00</SRNo>
-    <UpdateFlag>0</UpdateFlag>
-    <DeleteFlag>0</DeleteFlag>
-    <SystemId>0</SystemId>
-    <ListName>Appointment Status</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
     <ID>226</ID>
     <Name>CareEnded</Name>
     <CodeID>3</CodeID>
@@ -106817,7 +106807,7 @@
     <ListName>Payment Exemption</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>425</ID>
+    <ID>433</ID>
     <Name>Under 5</Name>
     <CodeID>1011</CodeID>
     <SRNo>1.00</SRNo>
@@ -106826,7 +106816,7 @@
     <ListName>Payment Exemption</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>426</ID>
+    <ID>434</ID>
     <Name>Maternity</Name>
     <CodeID>1011</CodeID>
     <SRNo>1.00</SRNo>
@@ -106835,7 +106825,7 @@
     <ListName>Payment Exemption</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>427</ID>
+    <ID>435</ID>
     <Name>Prisoner</Name>
     <CodeID>1011</CodeID>
     <SRNo>1.00</SRNo>
@@ -107680,7 +107670,7 @@
     <Name>Pharmacy Refill</Name>
     <CodeID>26</CodeID>
     <SRNo>5.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
+    <DeleteFlag>1</DeleteFlag>
     <SystemId>0</SystemId>
     <ListName>Appointment Reason</ListName>
   </Mst_Decode>
@@ -107881,7 +107871,7 @@
     <Name>Pharmacy Refill</Name>
     <CodeID>26</CodeID>
     <SRNo>6.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
+    <DeleteFlag>1</DeleteFlag>
     <SystemId>0</SystemId>
     <ListName>Appointment Reason</ListName>
   </Mst_Decode>
@@ -107912,7 +107902,7 @@
     <Name>Pharmacy Refill</Name>
     <CodeID>26</CodeID>
     <SRNo>7.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
+    <DeleteFlag>1</DeleteFlag>
     <SystemId>0</SystemId>
     <ListName>Appointment Reason</ListName>
   </Mst_Decode>
@@ -120085,6 +120075,11 @@
   <Mst_Module>
     <ModuleID>210</ModuleID>
     <ModuleName>Billing</ModuleName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Module>
+  <Mst_Module>
+    <ModuleID>283</ModuleID>
+    <ModuleName>HTS</ModuleName>
     <DeleteFlag>false</DeleteFlag>
   </Mst_Module>
   <Mst_ModDecode>
@@ -133379,6 +133374,13 @@
     <SystemUserName>eingutia</SystemUserName>
     <Name>Ingutia Eddie</Name>
     <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>6076</UserId>
+    <SystemUserName>interop</SystemUserName>
+    <Name>Interop System</Name>
+    <UserDeleteFlag>0</UserDeleteFlag>
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
   <Users>

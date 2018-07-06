@@ -13,48 +13,30 @@ namespace IQCare.Web.CCC.UC {
     public partial class ucSocialHistory {
         
         /// <summary>
-        /// rbRecordSocialHistory control.
+        /// PHSocialHistory control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rbRecordSocialHistory;
+        protected global::System.Web.UI.WebControls.PlaceHolder PHSocialHistory;
         
         /// <summary>
-        /// rbDrinkAlcohol control.
+        /// PlaceHolder1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rbDrinkAlcohol;
+        protected global::System.Web.UI.WebControls.PlaceHolder PlaceHolder1;
         
         /// <summary>
-        /// rbSmoke control.
+        /// PHSocialHistoryNotes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rbSmoke;
-        
-        /// <summary>
-        /// rbUseDrugs control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rbUseDrugs;
-        
-        /// <summary>
-        /// tbSocialHistoryNotes control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbSocialHistoryNotes;
+        protected global::System.Web.UI.WebControls.PlaceHolder PHSocialHistoryNotes;
     }
 }

@@ -11,13 +11,15 @@ import {AppLoadService} from './shared/_services/appload.service';
 import {AppStateService} from './shared/_services/appstate.service';
 import {ErrorHandlerService} from './shared/_services/errorhandler.service';
 
+
 export function init_app(appStateService: AppStateService) {
     return () => appStateService.initializeAppState();
 }
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+   
   ],
   imports: [
       BrowserModule,

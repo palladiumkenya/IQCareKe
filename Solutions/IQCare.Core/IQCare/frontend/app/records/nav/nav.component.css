@@ -1,3 +1,7 @@
+body, html {
+    height: 100%;
+}
+
 nav.sidebar, .main {
     -webkit-transition: margin 200ms ease-out;
     -moz-transition: margin 200ms ease-out;
@@ -64,12 +68,11 @@ nav.sidebar, .main {
     }
 
     nav.sidebar {
-        width: auto;
+        width: 200px;
         height: 100%;
         margin-left: -160px;
         float: left;
         margin-bottom: 0px;
-        margin-left: 0px;
     }
 
         nav.sidebar li {

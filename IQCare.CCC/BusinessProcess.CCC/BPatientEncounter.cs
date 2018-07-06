@@ -161,7 +161,7 @@ namespace BusinessProcess.CCC
                     ClsUtility.AddParameters("@PatientMasterVisitID", SqlDbType.Int, masterVisitID);
                     ClsUtility.AddParameters("@PatientID", SqlDbType.Int, patientID);
 
-                    int b = (int)objj.ReturnObject(ClsUtility.theParams, "sp_deletePatientEncounterVaccines", ClsUtility.ObjectEnum.ExecuteNonQuery);
+                    //int b = (int)objj.ReturnObject(ClsUtility.theParams, "sp_deletePatientEncounterVaccines", ClsUtility.ObjectEnum.ExecuteNonQuery);
 
                     foreach (var vacc in Vaccines)
                     {
@@ -730,13 +730,13 @@ namespace BusinessProcess.CCC
             }
         }
 
-        public DataTable getPatientMilestones(string PatientMasterVisitID, string PatientID)
+        public DataTable getPatientMilestones(string PatientID)
         {
             lock (this)
             {
                 ClsObject PatientEncounter = new ClsObject();
                 ClsUtility.Init_Hashtable();
-                ClsUtility.AddParameters("@PatientMasterVisitID", SqlDbType.Int, PatientMasterVisitID);
+                //ClsUtility.AddParameters("@PatientMasterVisitID", SqlDbType.Int, PatientMasterVisitID);
                 ClsUtility.AddParameters("@PatientID", SqlDbType.Int, PatientID);
 
                 return (DataTable)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_getPatientMilestones", ClsUtility.ObjectEnum.DataTable);

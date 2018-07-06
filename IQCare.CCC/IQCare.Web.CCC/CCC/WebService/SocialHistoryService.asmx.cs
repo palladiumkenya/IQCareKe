@@ -6,6 +6,7 @@ using Entities.CCC.Encounter;
 using System.Data;
 using System.Text;
 using System.Collections.Generic;
+using IQCare.CCC.UILogic.Screening;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -22,12 +23,13 @@ namespace IQCare.Web.CCC.WebService
         private string Msg { get; set; }
         private int Result { get; set; }
         [WebMethod]
-        public string addSocialHistory(int patientId, int patientMasterVisitId, int createdBy,int DrinkAlcohol,int Smoke,int UseDrugs,string SocialHistoryNotes, int RecordSocialHistory)
+        public string addSocialHistory(int patientId, int patientMasterVisitId,int screeningType, int screeningCategory, int screeningValue, int userId)
         {
             try
             {
-                var SH = new SocialHistoryLogic();
-                Result = SH.addSocialHistory(patientId,patientMasterVisitId,createdBy,DrinkAlcohol,Smoke,UseDrugs,SocialHistoryNotes,RecordSocialHistory);
+                var SM = new SocialHistoryLogic();
+                Result = SM.addSocialHistory(patientId,patientMasterVisitId,screeningType,screeningCategory,screeningValue,userId);
+                //Result = SM.addSocialHistory(patientId,patientMasterVisitId,createdBy,DrinkAlcohol,Smoke,UseDrugs,SocialHistoryNotes,RecordSocialHistory);
                 if (Result > 0)
                 {
                     Msg = "Social History Added Successfully";

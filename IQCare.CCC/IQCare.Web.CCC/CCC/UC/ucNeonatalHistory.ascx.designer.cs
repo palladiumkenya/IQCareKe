@@ -13,13 +13,13 @@ namespace IQCare.Web.CCC.UC {
     public partial class ucNeonatalHistory {
         
         /// <summary>
-        /// rbRecordNeonatalHistory control.
+        /// PHNeonatalHistory control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rbRecordNeonatalHistory;
+        protected global::System.Web.UI.WebControls.PlaceHolder PHNeonatalHistory;
         
         /// <summary>
         /// ddlMilestoneAssessed control.
@@ -94,12 +94,12 @@ namespace IQCare.Web.CCC.UC {
         protected global::System.Web.UI.WebControls.TextBox txtImmunizationDate;
         
         /// <summary>
-        /// neonatalhistorynotes control.
+        /// PHNeonatalHistoryNotes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTextArea neonatalhistorynotes;
+        protected global::System.Web.UI.WebControls.PlaceHolder PHNeonatalHistoryNotes;
     }
 }

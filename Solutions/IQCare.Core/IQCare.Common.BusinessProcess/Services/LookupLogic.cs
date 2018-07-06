@@ -32,6 +32,21 @@ namespace IQCare.Common.BusinessProcess.Services
             }
         }
 
+        public async Task<int> GetLookupIdbyName(string name)
+        {
+            try
+            {
+                var result = await _unitOfWork.Repository<LookupItemView>().Get(x => x.ItemName == name).Select(y => y.ItemId).FirstOrDefaultAsync();
+                return result;
+            }
+            catch(Exception e)
+            {
+                Log.Error(e.Message);
+                return 0;
+            }
+
+
+        }
         public async Task<int> GetDecodeIdByName(string name, int codeId)
         {
             try

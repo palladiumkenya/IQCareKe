@@ -97,6 +97,7 @@
     <Compile Include="Interface\Encounter\INeonatalRepository.cs" />
     <Compile Include="Interface\Encounter\IPatientAdherenceAssessmentRepository.cs" />
     <Compile Include="Interface\Encounter\IPatientCareEndingRepository.cs" />
+    <Compile Include="Interface\Encounter\IPatientClinicalNotesRepository.cs" />
     <Compile Include="Interface\Encounter\IPatientLabDetailsRepository.cs" />
     <Compile Include="Interface\Encounter\IPatientLabOrderRepository .cs" />
     <Compile Include="Interface\Encounter\IPatientLabResultsRepository.cs" />
@@ -201,6 +202,7 @@
     <Compile Include="Repository\Encounter\NeonatalRepository.cs" />
     <Compile Include="Repository\Encounter\PatientAdherenceAssessmentRepository.cs" />
     <Compile Include="Repository\Encounter\PatientCareEndingRepository.cs" />
+    <Compile Include="Repository\Encounter\PatientClinicalNotesRepository.cs" />
     <Compile Include="Repository\Encounter\PatientLabDetailsRepository.cs" />
     <Compile Include="Repository\Encounter\PatientLabOrderRepository .cs" />
     <Compile Include="Repository\Encounter\PatientLabResultsRepository.cs" />
