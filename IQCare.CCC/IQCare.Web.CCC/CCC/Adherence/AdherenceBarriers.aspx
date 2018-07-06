@@ -73,4 +73,19 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+        jQuery(function ($) {
+            $('#myWizard').wizard();
+            $('#myWizard').find('#dsSectionOne').toggleClass('complete', true);
+            $('#myWizard').find('#dsSectionTwo').toggleClass('complete', true);
+            $('#myWizard').find('#dsSectionThree').toggleClass('complete', true);
+            $('#myWizard').find('#dsSectionFour').toggleClass('complete', true);
+            $('#myWizard').on('changed.fu.wizard', function (evt, data) {
+                $('#myWizard').find('#dsSectionOne').toggleClass('complete', true);
+                $('#myWizard').find('#dsSectionTwo').toggleClass('complete', true);
+                $('#myWizard').find('#dsSectionThree').toggleClass('complete', true);
+                $('#myWizard').find('#dsSectionFour').toggleClass('complete', true);
+            });
+        });
+    </script>
 </asp:Content>
