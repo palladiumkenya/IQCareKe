@@ -13,6 +13,7 @@ using DataAccess.Common;
 using DataAccess.Entity;
 using Entities.CCC;
 using DataAccess.CCC.Repository.Lookup;
+using DataAccess.Context;
 
 namespace BusinessProcess.CCC
 {

@@ -57,7 +57,6 @@ namespace IQCare.Web.CCC.WebService
         private string Msg { get; set; }
         private int Result { get; set; }
         string appointmentid;
-        string appointmentid;
 
 
         [WebMethod(EnableSession = true)]
@@ -649,9 +648,6 @@ namespace IQCare.Web.CCC.WebService
             string editAppointment = "<a href='ScheduleAppointment.aspx?appointmentid="+appointmentid+"' type='button' class='btn btn-success fa fa-pencil-square btn-fill' > Edit</a>";
             string deleteAppointment = "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>";
             List <LookupItemView> statuses = mgr.GetLookItemByGroup("AppointmentStatus");
-            string editAppointment = "<a href='ScheduleAppointment.aspx?appointmentid=" + appointmentid + "' type='button' class='btn btn-success fa fa-pencil-square btn-fill' > Edit</a>";
-            string deleteAppointment = "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>";
-            List<LookupItemView> statuses = mgr.GetLookItemByGroup("AppointmentStatus");
             var s = statuses.FirstOrDefault(n => n.ItemId == a.StatusId);
             if (s != null)
             {
@@ -814,56 +810,6 @@ namespace IQCare.Web.CCC.WebService
             };
 
             return appointment;
-        }
-
-        [WebMethod]
-        public string UpdatePatientAppointment(int patientId, int patientMasterVisitId, DateTime appointmentDate, string description, int reasonId, int serviceAreaId, int statusId, int differentiatedCareId, int userId, int appointmentId)
-        {
-
-            PatientAppointment patientAppointment = new PatientAppointment()
-            {
-                PatientId = patientId,
-                PatientMasterVisitId = patientMasterVisitId,
-                AppointmentDate = appointmentDate,
-                Description = description,
-                DifferentiatedCareId = differentiatedCareId,
-                ReasonId = reasonId,
-                ServiceAreaId = serviceAreaId,
-                StatusId = statusId,
-                CreatedBy = userId,
-                CreateDate = DateTime.Now,
-                Id = appointmentId
-            };
-            try
-            {
-                var appointment = new PatientAppointmentManager();
-                Result = appointment.UpdatePatientAppointments(patientAppointment);
-                if (Result > 0)
-                {
-                    Msg = "Patient appointment Updated Successfully!";
-                }
-            }
-            catch (Exception e)
-            {
-                Msg = e.Message;
-            }
-            return Msg;
-        }
-
-        [WebMethod]
-        public string DeleteAppointment(int AppointmentId)
-        {
-            try
-            {
-                var appointment = new PatientAppointmentManager();
-                appointment.DeletePatientAppointments(AppointmentId);
-                Msg = "Appointment Deleted Successfully!";
-            }
-            catch (Exception e)
-            {
-                Msg = e.Message;
-            }
-            return Msg;
         }
     }
 

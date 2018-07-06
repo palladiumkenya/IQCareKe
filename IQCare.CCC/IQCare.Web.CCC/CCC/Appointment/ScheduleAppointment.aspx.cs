@@ -24,8 +24,6 @@ namespace IQCare.Web.CCC.Appointment
         public int UserId;
         public int AppointmentId;
         public string UpdateAppointmentDate;
-        public int AppointmentId;
-        public string UpdateAppointmentDate;
 
         protected void Page_Load(object sender, EventArgs e)
         {
