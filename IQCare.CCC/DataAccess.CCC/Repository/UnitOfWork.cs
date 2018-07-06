@@ -179,6 +179,9 @@ namespace DataAccess.CCC.Repository
         private IAdherenceDailyRoutineRepository _adherenceDailyRoutineRepository;
         private IAdherenceHIVInfectionRepository _adherenceHIVInfectionRepository;
         private IAdherenceReferralsRepository _adherenceReferralsRepository;
+
+        //Notes
+        private IPatientClinicalNotesRepository _patientClinicalNotesRepository;
         
 
         public UnitOfWork(BaseContext context)
@@ -857,6 +860,10 @@ namespace DataAccess.CCC.Repository
         public IAdherenceReferralsRepository AdherenceReferralsRepository
         {
             get { return _adherenceReferralsRepository ?? (_adherenceReferralsRepository = new AdherenceReferralsRepository((GreencardContext)_context)); }
+        }
+        public IPatientClinicalNotesRepository PatientClinicalNotesRepository
+        {
+            get { return _patientClinicalNotesRepository ?? (_patientClinicalNotesRepository = new PatientClinicalNotesRepository((GreencardContext)_context)); }
         }
 
 
