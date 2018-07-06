@@ -3,6 +3,7 @@ using System.Web;
 using Application.Presentation;
 using Interface.CCC.Lookup;
 using IQCare.CCC.UILogic;
+using IQCare.CCC.UILogic.Interoperability;
 
 namespace IQCare.Web.CCC
 {
@@ -23,7 +24,12 @@ namespace IQCare.Web.CCC
                 {
                     TestingSummaryStatisticsManager statistics = new TestingSummaryStatisticsManager();
                     PatientStabilitySummaryManager summaryManager = new PatientStabilitySummaryManager();
+                    IlStatisticsManager ilStatisticsManager = new IlStatisticsManager();
 
+                    var stats = ilStatisticsManager.GetILStatistics();
+                    lblOutgoing.Text = stats.Outbox.ToString();
+                    lblIncoming.Text = stats.Inbox.ToString();
+                  
                     var statList = statistics.GetAllStatistics();
                     var summaryList = summaryManager.GetAllStabilitySummaries();
 
@@ -60,7 +66,8 @@ namespace IQCare.Web.CCC
                             html += "</div>";
                             html += "<div class='col-md-2 pull-right'>";
                             html += "<label for='value' id='" + Label + "' class='control-label text-success pull-right'>";
-                            html += "<span class='badge pull-right'>" + summaryList[i].Value + "</span>";
+                            //summaryList[i].Category = '"' + summaryList[i].Category + '"';
+                            html += "<button id='btn" + summaryList[i].Category + "' class='badge pull-right' onClick='GenExcel(\"" + summaryList[i].Category + "\");'>" + summaryList[i].Value + "</button>";
                             html += "</div>";
                             html += "<div class='col-md-12'><hr></div>";
                         }
@@ -72,27 +79,29 @@ namespace IQCare.Web.CCC
                 {
 
                 }
-                //try
-                //{
-                //    var facilityStatistics = _lookupManager.GetLookupFacilityStatistics();
-                //    foreach (var item in facilityStatistics)
-                //    {
-                //        lblTotalPatients.Text = "<span class='badge pull-right'>" + item.TotalCumulativePatients.ToString() + "</span>";
-                //        lblOnART.Text = "<span class='badge pull-right'>" + item.TotalActiveOnArt.ToString() + "</span>";
-                //        lblctx.Text = "<span class='badge pull-right'>" + item.TotalOnCtxDapson.ToString() + "</span>";
-                //        lbltransit.Text = "<span class='badge pull-right'>" + item.TotalTransit.ToString() + "</span>";
-                //        lbltransferin.Text = "<span class='badge pull-right'>" + item.TotalTransferIn.ToString() + "</span>";
-                //        lbldead.Text = "<span class='badge pull-right'>" + item.TotalPatientsDead.ToString() + "</span>";
-                //        lbltransferout.Text = "<span class='badge pull-right'>" + item.TotalPatientsTransferedOut.ToString() + "</span>";
-                //        lblundocumentedltf.Text = "<span class='badge pull-right'>" + item.TotalUndocumentedLTFU.ToString() + "</span>";
-                //        totalDocumetedLTFU.Text = "<span class='badge pull-right'>" + item.LostToFollowUp.ToString() + "</span>";
+                try
+                {
+                    var facilityStatistics = _lookupManager.GetLookupFacilityStatistics();
+                    foreach (var item in facilityStatistics)
+                    {
+                        //lblTotalPatients.Text = "<span class='badge pull-right'>" + item.TotalCumulativePatients.ToString() + "</span>";
+                        //lblOnART.Text = "<span class='badge pull-right'>" + item.TotalActiveOnArt.ToString() + "</span>";
+                        //lblctx.Text = "<span class='badge pull-right'>" + item.TotalOnCtxDapson.ToString() + "</span>";
+                        //lbltransit.Text = "<span class='badge pull-right'>" + item.TotalTransit.ToString() + "</span>";
+                        //lbltransferin.Text = "<span class='badge pull-right'>" + item.TotalTransferIn.ToString() + "</span>";
+                        lbldead.Text = "<span class='badge pull-right'>" + item.TotalPatientsDead.ToString() + "</span>";
+                        lbltransferout.Text = "<span class='badge pull-right'>" + item.TotalPatientsTransferedOut.ToString() + "</span>";
+                        //lblundocumentedltf.Text = "<span class='badge pull-right'>" + item.TotalUndocumentedLTFU.ToString() + "</span>";
+                        totalDocumetedLTFU.Text = "<span class='badge pull-right'>" + item.LostToFollowUp.ToString() + "</span>";
 
-                //        //lblctx.Text = "<span class='badge pull-right'>" + +"</span>";
-                //    }
-                //}
-                //catch{ }
+                        //lblctx.Text = "<span class='badge pull-right'>" + +"</span>";
+                    }
+                }
+                catch{ }
             }
-
+            
         }
+
+        
     }
 }

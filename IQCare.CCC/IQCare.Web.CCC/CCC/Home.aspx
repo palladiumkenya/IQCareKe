@@ -161,6 +161,7 @@
                  <div class="col-md-7"><label class="control-label pull-left">Complete VL Tests</label></div>
                 <div class="col-md-5 pull-right">
                     <asp:Label runat="server" ClientIDMode="Static" ID="completeVL" CssClass="control-label text-success pull-right"></asp:Label>
+
                 </div>
             </div>
             <div class="col-md-12"><hr /></div>
@@ -285,6 +286,31 @@
               <div class="col-md-12" id="stabilitySummaryStatictics" runat="server"></div>
          </div>
     </div> <!-- .col-md-12-->
+    <div class="col-md-12 form-group">
+
+        <div class="col-md-4 col-xs-12" style="padding-top:2%">
+            <div class="col-md-12 label label-primary">
+                <label class="label label-primary fa fa-exchange fa-2x pull-left"> Interoperability Layer Statistics</label>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-10"><label class="control-label pull-left">Total Outgoing Messages :</label></div>
+                <div class="col-md-2 pull-right">
+                    <asp:Label runat="server" ClientIDMode="Static" ID="lblOutgoing" CssClass="control-label text-success pull-right"><span class="badge">0</span></asp:Label>
+                </div>
+            </div>
+            <div class="col-md-12"><hr></div>
+            <div class="col-md-12">
+                <div class="col-md-10"><label class="control-label pull-left">Total Incoming Messages :</label></div>
+                <div class="col-md-2 pull-right">
+                    <asp:Label runat="server" ClientIDMode="Static" ID="lblIncoming" CssClass="control-label text-success pull-right"><span class="badge">0</span></asp:Label>
+                </div>
+            </div>
+            <div class="col-md-12"><hr></div>
+        </div>
+
+        <div class="col-md-4"></div>
+        <div class="col-md-4"></div>
+    </div>
     
     <%--<div id="callout-labels-inline-block" class="col-md-12  bs-callout bs-callout-primary" style="padding-bottom: 1%">
         <div class="col-md-12 form-group">
@@ -403,8 +429,28 @@
     </div>--%>
     <script type="text/javascript">
          var facilityId = '<%=AppLocationId%>';
-    
+
+        function GenExcel(category) {
+            $.ajax({
+                url: 'WebService/PatientSummaryService.asmx/GenerateExcel',
+                data: "{'category':'" + category + "'}",
+                type: 'POST',
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                cache: false,
+                success: function (response) {
+                    //console.log(response.d);
+                    //pending = response.d;
+                    //document.getElementById("pendingVL").innerHTML = "<span class='badge'>" + response.d + "</span>";
+
+                }
+
+            });
+        }
+
         $(document).ready(function () {           
+
+            
 
             var ptncame=0;
             $('#AppointmentDate').datepicker({
@@ -426,7 +472,7 @@
 
             function AppointmentStatistics() {
                 jQuery.support.cors = true;
-                var date = $("#<%=Date.ClientID%>").val();
+                var date =moment($("#<%=Date.ClientID%>").val()).format('DD-MMM-YYYY');
                 $.ajax(
                 {
                     type: "POST",
@@ -464,7 +510,7 @@
                     },
 
                     error: function (msg) {
-                        alert(msg.responseText);
+                        console.log(msg.responseText);
                     }
                 });
             }
@@ -493,13 +539,14 @@
                 cache: false,
                 success: function (response) {
                     //console.log(response.d);
-                    pending = response.d;
+                    var pendingCount = JSON.parse(response.d);
+                    pending = pendingCount;
                     document.getElementById("pendingVL").innerHTML= "<span class='badge'>"+ response.d + "</span>";
 
                 }
-
             });
 
+            $("#<%=lblvl.ClientID%>").html();
             $.ajax({
                 url: 'WebService/LabService.asmx/GetFacilityVLCompleteCount',
                 data: "{'facilityId':'" + facilityId + "'}",
@@ -509,14 +556,14 @@
                 cache: false,
                 success: function (response) {
                     //console.log(response.d);
+
                     complete = response.d;
+
                     document.getElementById("completeVL").innerHTML = "<span class='badge'> " + response.d + " </span>";
                     percentage = ((complete / (pending + complete)) * 100);
                     percentage = percentage.toFixed(2);
                     !isNaN(percentage) ? percentage : percentage=0;
-            $("#<%=lblvl.ClientID%>").html("Result Rate "+ percentage +" %");
-
-
+                   $("#<%=lblvl.ClientID%>").html("Result Rate "+ percentage +" %");
                 }
 
             });

@@ -39,7 +39,7 @@ namespace DataAccess.WebApi.Repository
         private IMstPatientReposiroty _mstPatientReposiroty;
         private IPatientProgramStartRepository _patientProgramStartRepository;
         private MotherDetailsViewRepository _motherDetailsViewRepository;
-         PSmartLogRepository _pSmartLogRepository;
+        IPSmartTransactionLogRepository _pSmartLogRepository;
 
 
         public UnitOfWork(BaseContext context)
@@ -49,14 +49,22 @@ namespace DataAccess.WebApi.Repository
                 throw new ArgumentNullException("missing context");
             }
             _context = context;
-            _pSmartLogRepository = new PSmartLogRepository();
+           // _pSmartLogRepository = new PSmartLogRepository();
         }
 
         public UnitOfWork()
         {
         }
 
-        public PSmartLogRepository LogRepository => _pSmartLogRepository ?? (_pSmartLogRepository = new PSmartLogRepository((PsmartContext)_context));
+        //public PSmartLogRepository LogRepository => _pSmartLogRepository ?? (_pSmartLogRepository = new PSmartLogRepository((PsmartContext)_context));
+
+        public IPSmartTransactionLogRepository LogRepository
+        {
+            get
+            {
+                return _pSmartLogRepository ??                    (_pSmartLogRepository = new PSmartLogRepository((PsmartContext)_context));
+            }
+        }
         public DbContext Context { get { return _context; } }
 
         public IApiInboxRepository ApiInboxRepository

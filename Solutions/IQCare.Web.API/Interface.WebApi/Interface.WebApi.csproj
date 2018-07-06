@@ -59,6 +59,7 @@
     <Compile Include="IApiInteropSystemsManager.cs" />
     <Compile Include="IApiOutboxManager.cs" />
     <Compile Include="IBPsmartShrCardSerialManager.cs" />
+    <Compile Include="IIQConfig.cs" />
     <Compile Include="IFamilyInfoManager.cs" />
     <Compile Include="IHivTestTrackerManager.cs" />
     <Compile Include="IImmunizationTrackerManager.cs" />

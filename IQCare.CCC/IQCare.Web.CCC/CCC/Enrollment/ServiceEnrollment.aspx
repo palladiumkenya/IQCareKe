@@ -713,7 +713,11 @@
                         }
                             
                         if (messageResponse.EnrollmentDate != null) {
-                            $("#DateOfEnrollment").val(messageResponse.EnrollmentDate);
+                            //alert(messageResponse.EnrollmentDate);
+                            if (moment('1900-06-15').isSame(messageResponse.EnrollmentDate)) {
+                                $("#DateOfEnrollment").val("");
+                            } else { $("#DateOfEnrollment").val(messageResponse.EnrollmentDate);}
+                           
                         }
 
                         if (messageResponse.EntryPointIdUnknown == false) {
@@ -764,11 +768,11 @@
             var patientExists = '<%=PatientExists%>';
 
             //console.log(patientExists);
-            if (patientType != "New" || patientExists > 0) {
+            if (patientType != "New" || patientExists>0) {
                 $("#ReconfirmatoryTest").prop("disabled", true);
                 $("#ReConfirmatory").hide();
             } else {
-                if (reconfirmTest == "No") {
+                if (reconfirmTest === "No") {
                     $("#ResultReConfirmatoryTest").prop("disabled", true);
                     $("#TypeOfReConfirmatoryTest").prop("disabled", true);
                     $("#ReConfirmatoryTestDate").prop("disabled", true);
@@ -781,14 +785,14 @@
                     $("#btnEnroll").addClass("noneevents");
                     $("#btnRese").prop("disabled", false);
                     $("#btnRese").addClass("noneevents");
-                } else if (reconfirmTest == "Yes") {
+                } else if (reconfirmTest === "Yes") {
                     $("#ResultReConfirmatoryTest").prop("disabled", false);
                     $("#TypeOfReConfirmatoryTest").prop("disabled", false);
                     $("#ReConfirmatoryTestDate").prop("disabled", false);
                     $("#DateOfEnrollment").prop("disabled", false);
                     $("#entryPoint").prop("disabled", false);
                     $("#CCCNumber").prop("disabled", false);
-                    if (patientType != "New") {
+                    if (patientType !== "New") {
                         $("#mfl_code").prop("disabled", false);
                     }
                 } else {
@@ -808,11 +812,11 @@
             var result = $("#ResultReConfirmatoryTest :selected").text();
             var patientType = '<%=patType%>';
 
-            if (result == "Positive") {
+            if (result === "Positive") {
                 $("#DateOfEnrollment").prop("disabled", false);
                 $("#entryPoint").prop("disabled", false);
                 $("#CCCNumber").prop("disabled", false);
-                if (patientType != "New") {
+                if (patientType !== "New") {
                     $("#mfl_code").prop("disabled", false);
                 }
 
@@ -820,7 +824,7 @@
                 $("#btnEnroll").removeClass("noneevents");
                 $("#btnRese").prop("disabled", false);
                 $("#btnRese").removeClass("noneevents");
-            } else if (result == "Negative") {
+            } else if (result === "Negative") {
                 $("#DateOfEnrollment").prop("disabled", true);
                 $("#entryPoint").prop("disabled", true);
                 $("#CCCNumber").prop("disabled", true);

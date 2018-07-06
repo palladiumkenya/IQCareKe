@@ -47,7 +47,7 @@ namespace IQCare.CCC.UILogic
             var myList = _mgr.GetAllPersonRelationship(patientid);
             return myList;
         }
-
+        
         public bool PersonLinkedToPatient(int personId, int patientId)
         {
             return _mgr.PersonLinkedToPatient(personId, patientId);

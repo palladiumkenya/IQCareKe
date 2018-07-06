@@ -36,9 +36,7 @@
                                         </div>                  
                                     </div>
 
-                                    
-
-                                     
+       
                             </div>
                             <div class="col-md-12">
                                 <div class="col-md-3 form-group">                  
@@ -357,6 +355,7 @@
     var patType = "<%=patType.ToString().ToLower() %>";
     var gender = "<%=Session["Gender"]%>";
     var age = "<%=Session["Age"]%>";
+
     //Date processing
     var today = new Date();
     var tomorrow = new Date();
@@ -421,8 +420,8 @@
 					
 		            //tp = treatmentProgram;
 		            if (gender === "Female" && age >= 9 && tp === "PMTCT") {
-
-		            } else if (tp === "PMTCT" && (gender != "Female" || age > 9)) {
+ 
+		            } else if (tp === "PMTCT" && (gender !== "Female" || age < 9)) {
 		                 toastr.error("PMTCT is for female patients only who are older than 9 years", "Error");
 		                 $("#<%=ddlTreatmentProgram.ClientID%>").val("");
 		             }
@@ -929,17 +928,19 @@
                 }
 
             }
-            catch (err) { }
+            catch (err) {
+                toastr.error("Error", "");
+            }
 
             if (sumAllAbbr > 0) {
-                if (treatmentProgramName === 'ART') {
+                if (treatmentProgramName === 'ART' || treatmentProgramName === 'PMTCT') {
                     if (regimenLine === "0") {
                         toastr.error("Error", "Please select the Regimen Line");
                         return;
                     }
-                }
+                }  
 
-                if (sumAllAbbr !== sumSelectedRegimen && treatmentProgramName === 'ART') {
+                if (sumAllAbbr !== sumSelectedRegimen && (treatmentProgramName === 'ART' || treatmentProgramName === 'PMTCT') && sumSelectedRegimen < 1500) {
                     toastr.error("Error", "Selected Regimen is not equal to Prescribed Regimen!");
                     return;
                 }

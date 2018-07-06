@@ -282,16 +282,18 @@ namespace IQCare.SCM
             //theBindManager.Win_BindCombo(cmbRegimenLine, theDTRegimenLine, "Name", "Id");
             IDrug regimen = (IDrug)ObjectFactory.CreateInstance("BusinessProcess.SCM.BDrug, BusinessProcess.SCM");
             theBindManager.Win_BindCombo(cmbRegimenLine, regimen.GetPharmacyRegimenClassification(), "DisplayName", "LookUpItemId");
+            theBindManager.Win_BindCombo(cmdPeriodTaken, regimen.GetPMTCTPeriodDrugTaken(), "DisplayName", "LookUpItemId");
 
             theDV = new DataView(XMLDS.Tables["mst_Decode"]);
             theDV.RowFilter = "CodeId = 26 and (DeleteFlag =0 or DeleteFlag is null)";
             DataTable theDTReason = theDV.ToTable();
             theBindManager.Win_BindCombo(cmbReason, theDTReason, "Name", "Id");
 
-            theDV = new DataView(XMLDS.Tables["mst_Decode"]);
-            theDV.RowFilter = "CodeId = 31 and (DeleteFlag =0 or DeleteFlag is null) and id in(140,141,142)";
-            DataTable thePeriodTaken = theDV.ToTable();
-            theBindManager.Win_BindCombo(cmdPeriodTaken, thePeriodTaken, "Name", "Id");
+            //theDV = new DataView(XMLDS.Tables["mst_Decode"]);
+            //theDV.RowFilter = "CodeId = 31 and (DeleteFlag =0 or DeleteFlag is null) and id in(140,141,142)";
+            //DataTable thePeriodTaken = theDV.ToTable();
+            //theBindManager.Win_BindCombo(cmdPeriodTaken, thePeriodTaken, "Name", "Id");
+
 
             IViewAssociation objViewAssociation = (IViewAssociation)ObjectFactory.CreateInstance("BusinessProcess.FormBuilder.BViewAssociation,BusinessProcess.FormBuilder");
             DataSet objDsViewAssociation = objViewAssociation.GetMoudleName();
@@ -2608,12 +2610,12 @@ namespace IQCare.SCM
             {
                 if (this.thePharmacyMaster.Tables[0].Rows[0].IsNull("NextRefillDate"))
                 {
-                    //this.NextRefillValue.Text = "";
+                    this.NextRefillValue.Text = "";
                     NxtAppDate.Text = "";
                 }
                 else
                 {
-                    //this.NextRefillValue.Text = ((DateTime)this.thePharmacyMaster.Tables[0].Rows[0]["NextRefillDate"]).ToString(GblIQCare.AppDateFormat.ToString());
+                    this.NextRefillValue.Text = ((DateTime)this.thePharmacyMaster.Tables[0].Rows[0]["NextRefillDate"]).ToString(GblIQCare.AppDateFormat.ToString());
                     this.NxtAppDate.Text = ((DateTime)this.thePharmacyMaster.Tables[0].Rows[0]["NextRefillDate"]).ToString(GblIQCare.AppDateFormat.ToString());
                 }
                 if (this.thePharmacyMaster.Tables[0].Rows[0].IsNull("AppointmentReason") == false)
@@ -3955,6 +3957,11 @@ namespace IQCare.SCM
         private void btnClosePendingOrderPanel_Click(object sender, EventArgs e)
         {
             pnlPendingOrders.Visible = false;
+        }
+
+        private void panelSave_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

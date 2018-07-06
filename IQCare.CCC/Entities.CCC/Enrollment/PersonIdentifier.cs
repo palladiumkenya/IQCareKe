@@ -13,6 +13,8 @@ namespace Entities.CCC.Enrollment
 
         public int PersonId { get; set; }
         public int IdentifierId { get; set; }
+        public bool Active { get; set; }
+        public string AssigningFacility { get; set; }
         public string IdentifierValue { get; set; }
         [ForeignKey("PersonId")]
         public virtual Person Person { get; set; }

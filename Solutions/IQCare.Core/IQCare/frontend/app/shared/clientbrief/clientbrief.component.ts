@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {ClientService} from '../_services/client.service';
-import {ClientBrief} from '../_models/ClientBrief';
+import { ClientService } from '../_services/client.service';
+import { ClientBrief } from '../_models/ClientBrief';
 
 @Component({
-  selector: 'app-clientbrief',
-  templateUrl: './clientbrief.component.html',
-  styleUrls: ['./clientbrief.component.css']
+    selector: 'app-clientbrief',
+    templateUrl: './clientbrief.component.html',
+    styleUrls: ['./clientbrief.component.css']
 })
 export class ClientbriefComponent implements OnInit {
     patientId: number;
@@ -29,7 +29,6 @@ export class ClientbriefComponent implements OnInit {
             // console.log(res);
             this.clientBrief = res['patientLookup'][0];
             this.clientBrief.fullName = this.clientBrief.firstName + ' ' + this.clientBrief.midName + ' ' + this.clientBrief.lastName;
-            // console.log(this.clientBrief);
         });
     }
 }

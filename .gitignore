@@ -229,3 +229,6 @@ wwwroot/
 /IQCare.Release
 /build-jn.bat
 /Presentation/IQCare.Web/Images
+/IQCare.CCC/IQCare.Web.CCC/Pharmacy
+/Solutions/IQCare.Setup/IQCare.Setup/IQCare.Setup/IQCare.Setup-cache/*
+/Solutions/IQCare.Setup/IQCare.Setup/IQCare.Setup/IQCare.Setup-SetupFiles/*

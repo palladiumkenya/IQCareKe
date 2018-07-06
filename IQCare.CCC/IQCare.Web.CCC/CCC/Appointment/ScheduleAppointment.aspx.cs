@@ -12,6 +12,8 @@ using Entities.CCC.Appointment;
 using Interface.CCC;
 using IQCare.CCC.UILogic;
 using System.Data;
+using Entities.CCC.Appointment;
+using IQCare.CCC.UILogic;
 
 namespace IQCare.Web.CCC.Appointment
 {
@@ -22,6 +24,9 @@ namespace IQCare.Web.CCC.Appointment
         public int UserId;
         public int AppointmentId;
         public string UpdateAppointmentDate;
+        public int AppointmentId;
+        public string UpdateAppointmentDate;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             this.GetSessionDetails();

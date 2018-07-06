@@ -104,7 +104,10 @@
     <Compile Include="Encounter\PatientNeonatalHistory.cs" />
     <Compile Include="Encounter\PatientSocialHistory.cs" />
     <Compile Include="Encounter\SocialHistory.cs" />
+    <Compile Include="IL\IlMessengerLog.cs" />
+    <Compile Include="IL\IlStatistics.cs" />
     <Compile Include="Interoperability\PatientVitalsMessage.cs" />
+    <Compile Include="PatientRelationshipDTO.cs" />
     <Compile Include="Neonatal\ImmunizationHistory.cs" />
     <Compile Include="Neonatal\PatientImmunizationHistory.cs" />
     <Compile Include="Neonatal\PatientMilestone.cs" />

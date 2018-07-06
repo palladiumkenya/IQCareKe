@@ -13,10 +13,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQCare.HTS.Infrastructure",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQCare.HTS.Core", "IQCare.HTS.Core\IQCare.HTS.Core.csproj", "{83929769-CCD8-4E35-A238-56BCCA80FC9C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PMTCT", "PMTCT", "{BD3B61B0-9E31-4B48-B7C5-6A44366950D5}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RDE", "RDE", "{BC65A25B-35B2-4296-A35A-8CDD17E90919}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SharedKernel", "SharedKernel", "{B6F605B1-712A-49E9-8468-C010AA4690CA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQCare.SharedKernel", "IQCare.SharedKernel\IQCare.SharedKernel.csproj", "{B03D2E58-5623-42B9-92C1-1B5988785663}"
@@ -40,6 +36,7 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQCare.Library", "IQCare.Library\IQCare.Library.csproj", "{06FA84C3-3212-44C1-AFE9-A58F827D345B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCareRecords.Common.BusinessProcess", "IQCareRecords.Common.BusinessProcess\IQCareRecords.Common.BusinessProcess.csproj", "{A5FFB4E0-5755-402E-917C-926C32FB8F5C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQCare.Library", "IQCare.Library\IQCare.Library.csproj", "{06FA84C3-3212-44C1-AFE9-A58F827D345B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -34,5 +34,9 @@ namespace Interface.CCC
         DataTable getImmunizationHistory(string PatientMasterVisitID, string PatientID);
         DataTable getTannersStaging(string PatientMasterVisitID, string PatientID);
         //DataTable saveImmunizationHistory(int PatientMasterVisitID, int PatientID, int UserId, int ImmunizationPeriod, int ImmunizationGiven, int ImmunizationDate);
+        DataTable GenerateExcelDifferentiatedCare(string category);
+
+
+
     }
 }

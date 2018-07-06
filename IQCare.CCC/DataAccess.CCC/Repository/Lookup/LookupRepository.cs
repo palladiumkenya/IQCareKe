@@ -68,4 +68,17 @@ namespace DataAccess.CCC.Repository.Lookup
 
         }
     }
+    public class PersonExtRepository : BaseRepository<PersonExtLookup>, IRepository<PersonExtLookup>
+    {
+        private readonly LookupContext _context;
+
+        public PersonExtRepository() : this(new LookupContext())
+        {
+        }
+
+        public PersonExtRepository(LookupContext context) : base(context)
+        {
+            _context = context;
+        }
+    }
 }

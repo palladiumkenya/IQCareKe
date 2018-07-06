@@ -56,7 +56,7 @@
                                <span class="input-group-addon">
                                    <span class="glyphicon glyphicon-calendar"></span>
                                </span>
-                               <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="lmp" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>        
+                               <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="lmp" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>        
                            </div>
                        </div>
                    </div>

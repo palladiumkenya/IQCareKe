@@ -31,7 +31,7 @@ namespace DataAccess.CCC.Context
             Configuration.LazyLoadingEnabled = false;
             Database.SetInitializer<GreencardContext>(null);
         }
-
+        public DbSet<PatientPersonViewEntity> PatientPersonViewEntities { get; set; }
 
         public DbSet<PatientEntity> Patients { get; set; }
         public DbSet<PersonContact> PatientContacts { get; set; }

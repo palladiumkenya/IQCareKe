@@ -1,0 +1,67 @@
+<div class="ibox">
+    <div class="ibox-title">
+        <app-clientbrief></app-clientbrief>
+    </div>
+    <div class="ibox-content">
+        <div class="col-md-2">
+            <app-leftnav></app-leftnav>
+        </div>
+        <div class="col-md-10 col-lg-10 col-sm-10 animated fadeIn">
+            <div class="panel panel-default">
+                <div class="panel-heading">PARTNERS TRACING</div>
+                <div class="panel-body">
+                    <div class="example-container mat-elevation-z8">
+                        <mat-table #table [dataSource]="dataSource">
+
+                            <!--- Note that these columns can be defined in any order.
+                                    The actual rendered columns are set as a property on the row definition" -->
+
+                            <!-- Tracing Date Column -->
+                            <ng-container matColumnDef="tracingDate">
+                                <mat-header-cell *matHeaderCellDef> Tracing Date </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{ element.tracingDate | date: 'dd-MMM-yyyy' }} </mat-cell>
+                            </ng-container>
+
+                            <!-- TracingMode Column -->
+                            <ng-container matColumnDef="tracingMode">
+                                <mat-header-cell *matHeaderCellDef> Tracing Mode </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{ element.tracingMode}} </mat-cell>
+                            </ng-container>
+
+                            <!-- Tracing Outcome Column -->
+                            <ng-container matColumnDef="tracingOutcome">
+                                <mat-header-cell *matHeaderCellDef> Tracing Outcome </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{ element.tracingOutcome}} </mat-cell>
+                            </ng-container>
+
+                            <!-- Consent To Testing Column -->
+                            <ng-container matColumnDef="consent">
+                                <mat-header-cell *matHeaderCellDef> Consent To Testing </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{ element.consent }} </mat-cell>
+                            </ng-container>
+
+                            <!-- Date Booked for Testing Column -->
+                            <ng-container matColumnDef="dateBookedTesting">
+                                <mat-header-cell *matHeaderCellDef> Date Booked for Testing </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{ element.dateBookedTesting | date: 'dd-MMM-yyyy' }} </mat-cell>
+                            </ng-container>
+
+                            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                        </mat-table>
+                    </div>
+
+                    <div>
+                        &nbsp;
+                    </div>
+
+                    <div class="button-row pull-right">
+                        <button mat-fab (click)="newTracing()">
+                            <i class="fa fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

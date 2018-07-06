@@ -245,6 +245,9 @@
         var age = "<%=PatientAge%>";
         var gender = "<%=PatientGender%>";
         var pregnancyStatus = <%=PregnancyStatus%>;
+        var enrollmentDate = "<%=DateOfEnrollment%>";
+
+       // alert(enrollmentDate);
 
         $("#<%=weights.ClientID%>").focusout(function() {
             getLastVisitVitals("weight");
@@ -299,10 +302,17 @@
         $('#VisitDatedatepicker').on('dp.change', function (e) {
 
             var vDate = moment($("#PersonDoB").val(), 'DD-MMM-YYYYY').toDate();
+            var validDateOfVisit = moment(vDate).isBefore(enrollmentDate);
             var futuredate = moment(vDate).isAfter(new Date());
             if (futuredate) {
                 $("#<%=PersonDoB.ClientID%>").val('');
                 toastr.error("Future dates not allowed!");
+               
+                return false;
+            }
+            if (validDateOfVisit) {
+                toastr.error("VISIT date CANNOT be before ENROLLMENT date");
+                $("#<%=PersonDoB.ClientID%>").val('');
                 return false;
             }
 
@@ -371,8 +381,8 @@
                 var previous = 0;
 
                 
-                $("#<%=weights.ClientID%>").val(parseInt(vitalList.Weight));
-                $("#<%=Heights.ClientID%>").val(parseInt(vitalList.Height));
+                <%--$("#<%=weights.ClientID%>").val(parseInt(vitalList.Weight));
+                $("#<%=Heights.ClientID%>").val(parseInt(vitalList.Height));--%>
 
 
                 switch (vitalsType) {
@@ -382,8 +392,8 @@
                         current =parseInt($("#<%=weights.ClientID%>").val());
                         previous = parseInt(vitalList.Weight);
 
-                        $("#<%=weights.ClientID%>").val(parseInt(vitalList.Weight));
-                        $("#<%=Heights.ClientID%>").val(parseInt(vitalList.Height));
+                        <%--$("#<%=weights.ClientID%>").val(parseInt(vitalList.Weight));
+                        $("#<%=Heights.ClientID%>").val(parseInt(vitalList.Height));--%>
 
                         if (current>previous && previous>0) {
                             $("#weightAddons").empty("");
@@ -488,14 +498,14 @@
 
     }
 
-    $("#Heights").change(function () {
+    $("#Heights").blur(function () {
         var bmi = calcBMI();
         var weight = '';
         if (bmi < 18.5) {weight = '(Under weight)';} else if (bmi >= 18.5 && bmi < 25) {weight = '(Normal weight)';} else if (bmi >= 25 && bmi < 30) {weight = '(Over weight)';} else {weight = '(Obese)';}
         document.getElementById("bmivalue").value = bmi+weight;
         calcZScore();
     });
-    $("#weights").change(function () {
+    $("#weights").blur(function () {
         var bmi = calcBMI();
         var weight = '';
         if (bmi < 18.5) {weight = '(Under weight)';} else if (bmi >= 18.5 && bmi < 25) {weight = '(Normal weight)';} else if (bmi >= 25 && bmi < 30) {weight = '(Over weight)';} else {weight = '(Obese)';}
@@ -511,6 +521,7 @@
     }
 
     function addPatientVitals() {
+
         var height = $("#<%=Heights.ClientID%>").val();
         var weight = $("#<%=weights.ClientID%>").val();
         //var dateOfVisit;
@@ -557,7 +568,7 @@
                 toastr.success(response.d, "Vitals saved successfully");
                 resetElements();
                 //redirect
-                window.location.href="<%=ResolveClientUrl("~/CCC/patient/PatientHome.aspx")%>";
+                <%--window.location.href="<%=ResolveClientUrl("~/CCC/patient/PatientHome.aspx")%>";--%>
             },
             error: function (response) {
                 toastr.success(response.d, "Vitals not saved");

@@ -118,41 +118,213 @@ namespace BusinessProcess.Pharmacy
         }
 
         #endregion "Paediatric List"
+        string GenerateRegimenString(ref DataTable theDT, ref DataSet theDrgMst)
+        {
+            string theRegimen = "";
 
+            for (int i = 0; i < theDT.Rows.Count; i++)
+            {
+                if (Convert.ToInt32(theDT.Rows[i]["GenericId"]) == 0)
+                {
+                    DataView theDV = new DataView(theDrgMst.Tables[23]);
+                    theDV.RowFilter = "Drug_Pk = " + theDT.Rows[i]["DrugId"] + " and DrugTypeID = 37"; ///DrugAbbreviation = " + theDrgMst.Rows[i][2];
+                    if (theDV.Count > 0)
+                    {
+                        if (theRegimen == "")
+                        {
+                            theRegimen = theDV[0]["GenericAbbrevation"].ToString();
+                        }
+                        else
+                        {
+                            theRegimen = theRegimen + "/" + theDV[0]["GenericAbbrevation"].ToString();
+                        }
+                    }
+                    theRegimen = theRegimen.Trim();
+                }
+                else
+                {
+                    DataView theDV = new DataView(theDrgMst.Tables[4]);
+                    theDV.RowFilter = "GenericId = " + theDT.Rows[i]["GenericId"] + " and DrugTypeID = 37"; ///DrugAbbreviation = " + theDrgMst.Rows[i][2];
+                    if (theDV.Count > 0)
+                    {
+                        if (theRegimen == "")
+                        {
+                            theRegimen = theDV[0]["GenericAbbrevation"].ToString();
+                        }
+                        else
+                        {
+                            theRegimen = theRegimen + "/" + theDV[0]["GenericAbbrevation"].ToString();
+                        }
+                    }
+                    theRegimen = theRegimen.Trim();
+                }
+            }
+
+            List<string> s = theRegimen.Split('/').ToList();
+            List<string> distinctS = s.Distinct().ToList();
+            string distinctRegimen = "";
+            for (int i = 0; i < distinctS.Count; i++)
+            {
+                distinctRegimen += distinctS[i].ToString() + "/";
+            }
+            theRegimen = distinctRegimen.TrimEnd('/');
+            return theRegimen;
+
+        }
+        void AddPrescribedDrugs(ref DataTable theDT, int userId,int prescriptionId, ClsObject _mgr)
+        {
+            for (int i = 0; i < theDT.Rows.Count; i++)
+            {
+                ClsUtility.Init_Hashtable();
+
+                ClsUtility.AddParameters("@Drug_Pk", SqlDbType.Int, theDT.Rows[i]["DrugID"].ToString());
+                ClsUtility.AddParameters("@StrengthID", SqlDbType.Int, theDT.Rows[i]["Strengthid"].ToString());
+                //ClsUtility.AddParameters("@Dose", SqlDbType.Decimal, theDT.Rows[i]["Dose"].ToString());
+                ClsUtility.AddParameters("@FrequencyID", SqlDbType.Int, theDT.Rows[i]["Frequencyid"].ToString());
+                ClsUtility.AddParameters("@SingleDose", SqlDbType.Decimal, theDT.Rows[i]["Dose"].ToString());
+                ClsUtility.AddParameters("@Duration", SqlDbType.Decimal, theDT.Rows[i]["Duration"].ToString());
+                ClsUtility.AddParameters("@OrderedQuantity", SqlDbType.Decimal, theDT.Rows[i]["QtyPrescribed"].ToString());
+                if (theDT.Rows[i]["QtyDispensed"].ToString() == "")
+                {
+                    ClsUtility.AddParameters("@DispensedQuantity", SqlDbType.Decimal, "0");
+                }
+                else
+                {
+                    ClsUtility.AddParameters("@DispensedQuantity", SqlDbType.Decimal, theDT.Rows[i]["QtyDispensed"].ToString());
+                }
+                ClsUtility.AddParameters("@Finance", SqlDbType.Int, theDT.Rows[i]["Financed"].ToString());
+                ClsUtility.AddParameters("@GenericId", SqlDbType.Int, theDT.Rows[i]["Genericid"].ToString());
+                ClsUtility.AddParameters("@TBRegimenID", SqlDbType.Int, theDT.Rows[i]["TBRegimenId"].ToString());
+                ClsUtility.AddParameters("@TreatmentPhase", SqlDbType.VarChar, theDT.Rows[i]["TreatmentPhase"].ToString());
+                ClsUtility.AddParameters("@TrMonth", SqlDbType.Int, theDT.Rows[i]["TrMonth"].ToString());
+                ClsUtility.AddParameters("@UnitId", SqlDbType.Int, theDT.Rows[i]["Unitid"].ToString());
+                ClsUtility.AddExtendedParameters("@UserID", SqlDbType.Int, userId);
+                ClsUtility.AddExtendedParameters("@ptn_pharmacy_pk", SqlDbType.Int, prescriptionId);
+                //ClsUtility.AddParameters("@TotDailyDose", SqlDbType.Decimal, theDT.Rows[i]["TotDailyDose"].ToString());
+                ClsUtility.AddParameters("@flag", SqlDbType.Int, "1");
+                ClsUtility.AddParameters("@SCMflag", SqlDbType.Int, "0");
+                ClsUtility.AddParameters("@Prophylaxis", SqlDbType.Int, theDT.Rows[i]["Prophylaxis"].ToString());
+                ClsUtility.AddParameters("@DrugSchedule", SqlDbType.Int, theDT.Rows[i]["ScheduleId"].ToString());
+                ClsUtility.AddParameters("@PrintPrescriptionStatus", SqlDbType.Int, theDT.Rows[i]["PrintPrescriptionStatus"].ToString());
+                ClsUtility.AddParameters("@PatientInstructions", SqlDbType.Int, theDT.Rows[i]["PatientInstructions"].ToString());
+                int rowCount = (int)_mgr.ReturnObject(ClsUtility.theParams, "pr_Pharmacy_SavePatientPediatric_Constella", ClsUtility.ObjectEnum.ExecuteNonQuery);
+
+                if (rowCount == 0)
+                {
+                    MsgBuilder theMsg = new MsgBuilder();
+                    theMsg.DataElements["MessageText"] = "Error in Saving PharmacyDetails. Try Again..";
+                    AppException.Create("#C1", theMsg);
+                }
+            }
+        }
         #region "Save Paediatric Details"
+        
+        public int ModifyPrescription(int patientId, int pharmacyId, int locationId, int regimenLine, string PharmacyNotes, DataTable theDT, DataSet theDrgMst, int orderedBy, DateTime orderedByDate, int dispensedBy, DateTime dispensedByDate, int signature, int employeedId, int orderType, int visitType, int userId, decimal height, decimal weight, int FDC, int progId, int providerId, DataTable theCustomFieldData, int periodTaken, int flag, int sCMFlag, DateTime appntDate, int appntReason, string editReason, int? moduleId = null)
+        {
+           
+            try
+            {
+                
+                DataRow theDR;
+               
+                string theRegimen = GenerateRegimenString(ref theDT, ref theDrgMst);
 
-        /// <summary>
-        /// Saves the update paediatric detail.
-        /// </summary>
-        /// <param name="patientID">The patient identifier.</param>
-        /// <param name="PharmacyID">The pharmacy identifier.</param>
-        /// <param name="LocationID">The location identifier.</param>
-        /// <param name="RegimenLine">The regimen line.</param>
-        /// <param name="PharmacyNotes">The pharmacy notes.</param>
-        /// <param name="theDT">The dt.</param>
-        /// <param name="theDrgMst">The DRG MST.</param>
-        /// <param name="OrderedBy">The ordered by.</param>
-        /// <param name="OrderedByDate">The ordered by date.</param>
-        /// <param name="DispensedBy">The dispensed by.</param>
-        /// <param name="dispensedByDate">The dispensed by date.</param>
-        /// <param name="signature">The signature.</param>
-        /// <param name="employeeId">The employee identifier.</param>
-        /// <param name="OrderType">Type of the order.</param>
-        /// <param name="VisitType">Type of the visit.</param>
-        /// <param name="userId">The user identifier.</param>
-        /// <param name="Height">The height.</param>
-        /// <param name="Weight">The weight.</param>
-        /// <param name="FDC">The FDC.</param>
-        /// <param name="progId">The prog identifier.</param>
-        /// <param name="ProviderID">The provider identifier.</param>
-        /// <param name="theCustomFieldData">The custom field data.</param>
-        /// <param name="PeriodTaken">The period taken.</param>
-        /// <param name="flag">The flag.</param>
-        /// <param name="SCMFlag">The SCM flag.</param>
-        /// <param name="AppntDate">The appnt date.</param>
-        /// <param name="AppntReason">The appnt reason.</param>
-        /// <param name="ModuleID">The module identifier.</param>
-        /// <returns></returns>
+                
+                ClsUtility.Init_Hashtable();
+                ClsUtility.AddParameters("@Ptn_pk", SqlDbType.Int, patientId.ToString());
+                ClsUtility.AddParameters("@ptn_pharmacy_pk", SqlDbType.Int, pharmacyId.ToString());
+                ClsUtility.AddParameters("@LocationID", SqlDbType.Int, locationId.ToString());
+                ClsUtility.AddParameters("@OrderedBy", SqlDbType.Int, orderedBy.ToString());
+                ClsUtility.AddExtendedParameters("@OrderedByDate", SqlDbType.DateTime, orderedByDate);
+                ClsUtility.AddParameters("@DispensedBy", SqlDbType.Int, dispensedBy.ToString());
+                if (dispensedByDate.Year.ToString() != "1900")
+                {
+                    ClsUtility.AddExtendedParameters("@DispensedByDate", SqlDbType.DateTime, dispensedByDate);
+                }
+                if (flag == 2)
+                {
+                    if (dispensedByDate.Year.ToString() != "1900")
+                    {
+                        ClsUtility.AddExtendedParameters("@ReportedByDate", SqlDbType.DateTime, dispensedByDate);
+                    }
+                }
+                //ClsUtility.AddParameters("@DispensedByDate", SqlDbType.DateTime, DispensedByDate.ToString());
+                ClsUtility.AddExtendedParameters("@OrderType", SqlDbType.Int, orderType);
+                ClsUtility.AddExtendedParameters("@Signature", SqlDbType.Int, signature);
+                ClsUtility.AddExtendedParameters("@EmployeeID", SqlDbType.Int, employeedId);
+                ClsUtility.AddExtendedParameters("@VisitType", SqlDbType.Int, visitType);
+                ClsUtility.AddExtendedParameters("@UserID", SqlDbType.Int, userId);
+                ClsUtility.AddParameters("@RegimenType", SqlDbType.VarChar, theRegimen);
+                ClsUtility.AddExtendedParameters("@RegimenLine", SqlDbType.Int, regimenLine);
+                ClsUtility.AddParameters("@PharmacyNotes", SqlDbType.VarChar, PharmacyNotes);
+                ClsUtility.AddExtendedParameters("@Height", SqlDbType.Decimal, height);
+                ClsUtility.AddExtendedParameters("@Weight", SqlDbType.Decimal, weight);
+                ClsUtility.AddExtendedParameters("@FDC", SqlDbType.Int, FDC);
+                ClsUtility.AddExtendedParameters("@ProgID", SqlDbType.Int, progId);
+                ClsUtility.AddExtendedParameters("@ProviderID", SqlDbType.Int, providerId);
+                ClsUtility.AddExtendedParameters("@PeriodTaken", SqlDbType.Int, periodTaken);
+                ClsUtility.AddExtendedParameters("@EditReason", SqlDbType.VarChar, editReason);
+                if (appntDate.Year.ToString() != "1900")
+                {
+                    ClsUtility.AddExtendedParameters("@AppntDate", SqlDbType.DateTime, appntDate);
+                }
+
+                ClsUtility.AddExtendedParameters("@AppntReason", SqlDbType.Int, appntReason);
+                if (moduleId.HasValue)
+                {
+                    ClsUtility.AddExtendedParameters("@ModuleID", SqlDbType.Int, moduleId.Value);
+                }
+                this.Connection = DataMgr.GetConnection();
+                this.Transaction = DataMgr.BeginTransaction(this.Connection);
+                   ClsObject _mgr = new ClsObject();
+                _mgr.Connection = this.Connection;
+                _mgr.Transaction = this.Transaction;
+
+                theDR = (DataRow)_mgr.ReturnObject(ClsUtility.theParams, "Pharmacy_ModifyPrescription", ClsUtility.ObjectEnum.DataRow);
+
+                pharmacyId = Convert.ToInt32(theDR[0].ToString());
+                if (pharmacyId == 0)
+                {
+                    MsgBuilder theMsg = new MsgBuilder();
+                    theMsg.DataElements["MessageText"] = "Error in Saving PatientPharmacy Records. Try Again..";
+                    AppException.Create("#C1", theMsg);
+                    return pharmacyId;
+                }
+                this.AddPrescribedDrugs(ref theDT, userId, pharmacyId, _mgr);
+                for (int i = 0; i < theCustomFieldData.Rows.Count; i++)
+                {
+                    ClsUtility.Init_Hashtable();
+
+                    string theQuery = theCustomFieldData.Rows[i]["Query"].ToString();
+                    theQuery = theQuery.Replace("#99#", patientId.ToString());
+                    theQuery = theQuery.Replace("#88#", locationId.ToString());
+                    theQuery = theQuery.Replace("#55#", pharmacyId.ToString());
+                    theQuery = theQuery.Replace("#44#", "'" + orderedByDate.ToString() + "'");
+                    ClsUtility.AddParameters("@QryString", SqlDbType.VarChar, theQuery);
+
+                    int RowsAffected = (Int32)_mgr.ReturnObject(ClsUtility.theParams, "pr_General_Dynamic_Insert", ClsUtility.ObjectEnum.ExecuteNonQuery);
+                    _mgr = null;
+                }
+
+                DataMgr.CommitTransaction(this.Transaction);
+                DataMgr.ReleaseConnection(this.Connection);
+                return pharmacyId;
+            }
+            catch
+            {
+                DataMgr.RollBackTransation(this.Transaction);
+                throw;
+            }
+            finally
+            {
+              
+                if (this.Connection != null)
+                    DataMgr.ReleaseConnection(this.Connection);
+            }
+
+
+        
+        }
         public int SaveUpdatePaediatricDetail(int patientId, int pharmacyId, int locationId,
             int regimenLine, string pharmacyNotes, DataTable theDT, DataSet theDrgMst, int OrderedBy,
             DateTime OrderedByDate, int DispensedBy, DateTime dispensedByDate, int signature,
@@ -860,5 +1032,7 @@ namespace BusinessProcess.Pharmacy
             DataTable dt = _clsObject.ReturnObject(ClsUtility.theParams, "dbo.pr_Pharmacy_GetPatientPharmacyOrderList", ClsUtility.ObjectEnum.DataTable) as DataTable;
             return dt;
         }
+
+      
     }
 }

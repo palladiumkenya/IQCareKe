@@ -27,7 +27,8 @@
 
         var gender = "<%=Gender%>";
         var patientAge = "<%=PatientAge%>";
-  
+
+        
 
         if (gender === 'Male') {
             $("#divBtnVitals").hide("fast");

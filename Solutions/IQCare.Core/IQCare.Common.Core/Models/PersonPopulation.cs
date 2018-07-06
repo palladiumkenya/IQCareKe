@@ -9,7 +9,7 @@ namespace IQCare.Common.Core.Models
         public string PopulationType { get; set; }
         public int PopulationCategory { get; set; }
         public bool Active { get; set; }
-        public int PopulationTypeId { get; set; }
+        public int? PopulationTypeId { get; set; }
         public bool DeleteFlag { get; set; }
         public int CreatedBy { get; set; }
         public DateTime CreateDate { get; set; }

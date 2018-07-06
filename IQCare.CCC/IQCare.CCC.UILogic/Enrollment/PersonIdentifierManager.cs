@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Application.Presentation;
+﻿using Application.Presentation;
 using Entities.CCC.Enrollment;
-using Entities.PatientCore;
 using Interface.CCC.Enrollment;
+using System;
+using System.Collections.Generic;
 
 namespace IQCare.CCC.UILogic.Enrollment
 {
@@ -14,7 +10,7 @@ namespace IQCare.CCC.UILogic.Enrollment
     {
         IPersonIdentifierManager _mgr = (IPersonIdentifierManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Enrollment.BPersonIdentifier, BusinessProcess.CCC");
 
-        public int AddPersonIdentifier(int personId, int identifierId, string identifierValue, int userId)
+        public int AddPersonIdentifier(int personId, int identifierId, string identifierValue, int userId, string assigning_facility)
         {
             try
             {
@@ -25,7 +21,9 @@ namespace IQCare.CCC.UILogic.Enrollment
                     IdentifierValue = identifierValue,
                     DeleteFlag = false,
                     CreateDate = DateTime.Now,
-                    CreatedBy = userId
+                    CreatedBy = userId,
+                    AssigningFacility= assigning_facility,
+                    Active=true
                 };
 
                 return _mgr.AddPersonIdentifier(personIdentifier);
@@ -62,5 +60,7 @@ namespace IQCare.CCC.UILogic.Enrollment
                 throw new Exception(e.Message);
             }
         }
+
+        
     }
 }

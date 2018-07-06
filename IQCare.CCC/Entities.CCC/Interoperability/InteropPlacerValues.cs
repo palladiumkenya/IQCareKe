@@ -14,6 +14,6 @@ namespace Entities.CCC.Interoperability
         public int InteropPlacerTypeId { get; set; }
         public int IdentifierType { get; set; }
         public int EntityId { get; set; }
-        public int PlacerValue { get; set; }
+        public string PlacerValue { get; set; }
     }
 }

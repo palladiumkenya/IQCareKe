@@ -49,7 +49,6 @@ namespace IQCare
                 .UseIISIntegration()
                 .UseStartup<Startup>()
                 .UseSerilog()
-                .UseUrls("http://0.0.0.0:3333")
                 .Build();
             return host;
         }   
