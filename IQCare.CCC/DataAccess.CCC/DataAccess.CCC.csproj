@@ -74,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\LookupContext.cs" />
+    <Compile Include="Context\ViewContext.cs" />
     <Compile Include="Interface\Adherence\IAdherenceDailyRoutineRepository.cs" />
     <Compile Include="Interface\Adherence\IAdherenceHIVInfectionRepository.cs" />
     <Compile Include="Interface\Adherence\IAdherencePsychosocialRepository.cs" />
