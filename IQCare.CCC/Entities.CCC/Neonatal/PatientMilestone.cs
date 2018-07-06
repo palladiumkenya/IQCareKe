@@ -19,11 +19,11 @@ namespace Entities.CCC.Neonatal
         public int PatientMasterVisitId { get; set; }
         [ForeignKey("PatientMasterVisitId")]
         public virtual PatientMasterVisit PatientMasterVisit { get; set; }
-        public int milestoneAssessedId { get; set; }
-        public DateTime milestoneDate { get; set; }
-        public int milestoneAchievedId { get; set; }
-        public int milestoneStatusId { get; set; }
-        public string milestoneComments { get; set; }
+        public int MilestoneAssessedId { get; set; }
+        public DateTime MilestoneDate { get; set; }
+        public int MilestoneAchievedId { get; set; }
+        public int MilestoneStatusId { get; set; }
+        public string MilestoneComments { get; set; }
     }
 }
 

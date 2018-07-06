@@ -28,7 +28,7 @@ namespace DataAccess.CCC.Repository.Encounter
         public List<PatientMilestone> getMilestoneAssessed(int milestoneAssessed)
         {
             IMilestonesRepository neonatalRepository = new MilestonesRepository();
-            var milestoneList = neonatalRepository.GetAll().Where(x => x.milestoneAssessedId == milestoneAssessed);
+            var milestoneList = neonatalRepository.GetAll().Where(x => x.MilestoneAssessedId == milestoneAssessed);
             return milestoneList.ToList();
         }
     }

@@ -12292,6 +12292,11 @@
     <GenericName>Lopinavir/Ritonavir-80mg/20mg/ml</GenericName>
     <GenericAbbrevation>LPV/r</GenericAbbrevation>
   </Mst_Generic>
+  <Mst_Generic>
+    <GenericId>603</GenericId>
+    <GenericName>Lopinavir/Ritonavir-40mg/10mg</GenericName>
+    <GenericAbbrevation>LPV/r</GenericAbbrevation>
+  </Mst_Generic>
   <Mst_DrugType>
     <DrugTypeId>1</DrugTypeId>
     <DrugTypeName>Amphetamine</DrugTypeName>

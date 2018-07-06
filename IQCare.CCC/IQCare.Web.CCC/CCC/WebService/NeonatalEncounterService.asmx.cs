@@ -41,11 +41,11 @@ namespace IQCare.Web.CCC.WebService
                     PatientId = patientId,
                     PatientMasterVisitId = patientMasterVisitId,
                     CreatedBy = createdBy,
-                    milestoneAssessedId = milestoneAssessed,
-                    milestoneDate = milestoneOnsetDate,
-                    milestoneAchievedId = milestoneAchieved,
-                    milestoneStatusId = milestoneStatus,
-                    milestoneComments = milestoneComment
+                    MilestoneAssessedId = milestoneAssessed,
+                    MilestoneDate = milestoneOnsetDate,
+                    MilestoneAchievedId = milestoneAchieved,
+                    MilestoneStatusId = milestoneStatus,
+                    MilestoneComments = milestoneComment
                 };
                 var neonatal = new PatientNeonatalManager();
                 //Check if milestone assessed exists
@@ -55,7 +55,7 @@ namespace IQCare.Web.CCC.WebService
                 int existingMilestone = 0;
                 foreach (var items in list)
                 {
-                    existingMilestone = items.milestoneAssessedId;
+                    existingMilestone = items.MilestoneAssessedId;
                 }
 
                 if(existingMilestone == milestoneAssessed)
@@ -209,10 +209,14 @@ namespace IQCare.Web.CCC.WebService
             var MilestonesLogic = new NeonatalHistoryLogic();
             List<PatientMilestone> list = new List<PatientMilestone>();
             list = MilestonesLogic.getPatientMilestones(Convert.ToInt32(Session["PatientPK"]));
-            foreach(var items in list)
+            if(list.Any())
             {
-                string[] i = new string[7] { items.Id.ToString(), LookupLogic.GetLookupNameById(items.milestoneAssessedId).ToString(), items.milestoneDate.ToString("dd-MMM-yyyy"), items.milestoneAchievedId == 1?"Yes":"No", LookupLogic.GetLookupNameById(items.milestoneStatusId).ToString(),items.milestoneComments.ToString(),"<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"};
-                rows.Add(i);
+                foreach (var items in list)
+                {
+                    string milestoneAssessed = LookupLogic.GetLookupNameById(items.MilestoneAssessedId).ToString();
+                    string[] i = new string[7] { items.Id.ToString(), LookupLogic.GetLookupNameById(items.MilestoneAssessedId).ToString(), items.MilestoneDate.ToString("dd-MMM-yyyy"), items.MilestoneAchievedId == 1 ? "Yes" : "No", LookupLogic.GetLookupNameById(items.MilestoneStatusId).ToString(), items.MilestoneComments.ToString(), "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>" };
+                    rows.Add(i);
+                }
             }
             return rows;
         }

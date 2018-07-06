@@ -21,11 +21,11 @@ namespace IQCare.CCC.UILogic
                 PatientId = p.PatientId,
                 PatientMasterVisitId = p.PatientMasterVisitId,
                 CreatedBy = p.CreatedBy,
-                milestoneAssessedId = p.milestoneAssessedId,
-                milestoneDate = p.milestoneDate,
-                milestoneAchievedId = p.milestoneAchievedId,
-                milestoneStatusId = p.milestoneStatusId,
-                milestoneComments = p.milestoneComments
+                MilestoneAssessedId = p.MilestoneAssessedId,
+                MilestoneDate = p.MilestoneDate,
+                MilestoneAchievedId = p.MilestoneAchievedId,
+                MilestoneStatusId = p.MilestoneStatusId,
+                MilestoneComments = p.MilestoneComments
             };
             int neonatalId = _neonatal.AddPatientNeonatal(patientNeonatal);
             return neonatalId;
