@@ -53,6 +53,7 @@ namespace DataAccess.CCC.Repository
         /* Modules */
         private IModuleRepository _moduleRepository;
 
+        private IPatientOIRepository _patientOIRepository;
         /* lookupContext */
         private ILookupItemRepository _lookupItemRepository;
         private ILookupRepository _lookupRepository;
@@ -180,6 +181,14 @@ namespace DataAccess.CCC.Repository
             }
         }
 
+        public IPatientOIRepository PatientOIRepository
+        {
+            get
+            {
+                return _patientOIRepository ??
+                 (_patientOIRepository = new PatientOIRepository((GreencardContext)_context));
+            }
+        }
      
         public ILookupRepository LookupRepository
         {

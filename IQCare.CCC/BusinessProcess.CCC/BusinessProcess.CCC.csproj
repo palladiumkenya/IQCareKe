@@ -106,6 +106,7 @@
     <Compile Include="BPatientConsent.cs" />
     <Compile Include="BPatientEncounter.cs" />
     <Compile Include="BPatientLookupManager.cs" />
+    <Compile Include="BPatientOIManager.cs" />
     <Compile Include="BPatientPharmacy.cs" />
     <Compile Include="BPatientPopulationManager.cs" />
     <Compile Include="BPatientTreatmentSupporterManager.cs" />

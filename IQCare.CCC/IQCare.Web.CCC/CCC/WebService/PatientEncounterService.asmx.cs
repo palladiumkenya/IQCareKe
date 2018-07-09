@@ -36,19 +36,30 @@ namespace IQCare.Web.CCC.WebService
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
     [System.Web.Script.Services.ScriptService]
 
+
     public class PatientEncounterService : System.Web.Services.WebService
     {
+
+        public class OIData
+        {
+            public int OI { get; set; }
+            public bool Checked { get; set; }
+
+            public DateTime? Current { get; set; }
+
+            public bool DeleteFlag { get; set; }
+        }
         private string Msg { get; set; }
         private int Result { get; set; }
         private readonly IPatientMasterVisitManager _visitManager = (IPatientMasterVisitManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientmasterVisit, BusinessProcess.CCC");
         [WebMethod(EnableSession = true)]
-        public int savePatientEncounterPresentingComplaints(string VisitDate,string VisitScheduled, string VisitBy, string anyComplaints, string Complaints, int TBScreening, int NutritionalStatus, string adverseEvent, string presentingComplaints)
+        public int savePatientEncounterPresentingComplaints(string VisitDate, string VisitScheduled, string VisitBy, string anyComplaints, string Complaints, int TBScreening, int NutritionalStatus, string adverseEvent, string presentingComplaints)
         {
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
 
-            int val = patientEncounter.savePatientEncounterPresentingComplaints(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString(), Session["PatientPK"].ToString(), "203",VisitDate,VisitScheduled,VisitBy, anyComplaints, Complaints,TBScreening,NutritionalStatus, Convert.ToInt32(Session["AppUserId"].ToString()), adverseEvent, presentingComplaints);
+            int val = patientEncounter.savePatientEncounterPresentingComplaints(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString(), Session["PatientPK"].ToString(), "203", VisitDate, VisitScheduled, VisitBy, anyComplaints, Complaints, TBScreening, NutritionalStatus, Convert.ToInt32(Session["AppUserId"].ToString()), adverseEvent, presentingComplaints);
 
-            
+
             return val;
 
         }
@@ -68,7 +79,7 @@ namespace IQCare.Web.CCC.WebService
         {
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
 
-            patientEncounter.savePatientEncounterChronicIllness(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString(), Session["PatientPK"].ToString(), Session["AppUserId"].ToString(), chronicIllness,vaccines,allergies);
+            patientEncounter.savePatientEncounterChronicIllness(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString(), Session["PatientPK"].ToString(), Session["AppUserId"].ToString(), chronicIllness, vaccines, allergies);
         }
 
         [WebMethod(EnableSession = true)]
@@ -78,7 +89,79 @@ namespace IQCare.Web.CCC.WebService
 
             patientEncounter.savePatientEncounterPhysicalExam(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString(), Session["PatientPK"].ToString(), Session["AppUserId"].ToString(), physicalExam, generalExam);
         }
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
+        public ArrayList GetPatientOIs()
+        {
+            int patientId = Convert.ToInt32(Session["PatientPK"].ToString());
+            PatientOIManager patientoiManager = new PatientOIManager();
+            int patientMasterVisitId = Convert.ToInt32(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString());
+            List<PatientOI> list = new List<PatientOI>();
+            list = patientoiManager.GetPatientsOI(patientId, patientMasterVisitId);
+            ArrayList arrayList = new ArrayList(list);
+            return arrayList;
+        }
 
+
+        [WebMethod(EnableSession = true)]
+        public void SavePatientOI(string data)
+        {
+            int userId = Convert.ToInt32(Session["AppUserId"]);
+            JavaScriptSerializer json = new JavaScriptSerializer();
+            List<OIData> oidata = json.Deserialize<List<OIData>>(data);
+            PatientOIManager patientoiManager = new PatientOIManager();
+            foreach (OIData oi in oidata)
+            {
+                int patientId = Convert.ToInt32(Session["PatientPK"].ToString());
+                int patientMasterVisitId = Convert.ToInt32(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString());
+
+                if (oi != null)
+                {
+
+                    PatientOI patientoi = new PatientOI();
+                    patientoi = patientoiManager.GetPatientOI(patientId, patientMasterVisitId, oi.OI);
+                    if (patientoi != null)
+                    {
+                        patientoi.OIId = oi.OI;
+                        patientoi.UpdateDate = DateTime.Now;
+                        patientoi.Current =oi.Current;
+                        patientoi.CreatedBy = userId;
+                        patientoi.PatientId = patientId;
+                        patientoi.PatientMasterVisitId = patientMasterVisitId;
+                        patientoi.DeleteFlag = oi.DeleteFlag;
+                        patientoiManager.UpdatePatientOI(patientoi);
+                    }
+                    else
+                    {
+                        PatientOI patient = new PatientOI();
+                           patient = patientoiManager.addPatientOI(patientId, patientMasterVisitId, oi.OI, userId,oi.Current);
+                        if(patient!=null)
+                        {
+
+                            int facilityId = Convert.ToInt32(Session["AppPosID"]);
+                            MessageEventArgs args = new MessageEventArgs()
+                            {
+                                PatientId = patientId,
+                                EntityId = patient.Id,
+                                MessageType = MessageType.ObservationResult,
+                                EventOccurred = "Patient Observation Result",
+                                FacilityId = facilityId,
+                                ObservationType = ObservationType.PatientOI
+                            };
+
+                            Publisher.RaiseEventAsync(this, args).ConfigureAwait(false);
+                        }
+                       
+                            
+
+                    }
+
+                }
+            }
+        }
+    
+
+        
         [WebMethod(EnableSession = true)]
         public void savePatientWhoStage(int whoStage)
         {

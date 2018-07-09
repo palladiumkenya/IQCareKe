@@ -92,6 +92,7 @@
     <Compile Include="Interface\Encounter\IPatientLabDetailsRepository.cs" />
     <Compile Include="Interface\Encounter\IPatientLabOrderRepository .cs" />
     <Compile Include="Interface\Encounter\IPatientLabResultsRepository.cs" />
+    <Compile Include="Interface\Encounter\IPatientOIRepository.cs" />
     <Compile Include="Interface\Encounter\IPatientWHOStageRepository.cs" />
     <Compile Include="Interface\enrollment\IHivReConfirmatoryTestRepository.cs" />
     <Compile Include="Interface\enrollment\IIdentifierRepository.cs" />
@@ -184,6 +185,7 @@
     <Compile Include="Repository\Encounter\PatientLabDetailsRepository.cs" />
     <Compile Include="Repository\Encounter\PatientLabOrderRepository .cs" />
     <Compile Include="Repository\Encounter\PatientLabResultsRepository.cs" />
+    <Compile Include="Repository\Encounter\PatientOIRepository.cs" />
     <Compile Include="Repository\Encounter\PatientWhoStageRepository.cs" />
     <Compile Include="Repository\Enrollment\HivReConfirmatoryTestRepository.cs" />
     <Compile Include="Repository\Enrollment\IdentifierRepository.cs" />

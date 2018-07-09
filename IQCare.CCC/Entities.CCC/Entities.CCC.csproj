@@ -95,6 +95,7 @@
     <Compile Include="Encounter\PatientFamilyPlanningMethod.cs" />
     <Compile Include="Baseline\PatientHivTesting.cs" />
     <Compile Include="Baseline\PatientFamilyTesting.cs" />
+    <Compile Include="Encounter\PatientOI.cs" />
     <Compile Include="Interoperability\PatientVitalsMessage.cs" />
     <Compile Include="pharmacy\Drug.cs" />
     <Compile Include="pharmacy\PatientPharmacyDispense.cs" />

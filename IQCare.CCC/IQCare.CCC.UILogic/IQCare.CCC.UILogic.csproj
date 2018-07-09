@@ -158,6 +158,7 @@
     <Compile Include="PatientDisclosureManager.cs" />
     <Compile Include="PatientLookupManager.cs" />
     <Compile Include="PatientManager.cs" />
+    <Compile Include="PatientOIManager.cs" />
     <Compile Include="PatientPopulationManager.cs" />
     <Compile Include="PatientServiceEnrollmentLookupManager.cs" />
     <Compile Include="PatientStabilitySummaryManager.cs" />
