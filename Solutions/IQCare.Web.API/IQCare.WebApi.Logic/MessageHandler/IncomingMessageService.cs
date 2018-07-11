@@ -1,25 +1,25 @@
-﻿using AutoMapper;
-using Entity.WebApi;
-using Interface.WebApi;
-using IQCare.WebApi.Logic.DtoMapping;
-using IQCare.WebApi.Logic.MappingEntities;
-using System;
-using System.Collections.Generic;
-using System.Web.Script.Serialization;
-using IQCare.DTO;
-using IQCare.DTO.PatientAppointment;
-using IQCare.DTO.PatientRegistration;
-using IQCare.WebApi.Logic.PSmart;
-using Entity.WebApi.PSmart;
-using Application.Common;
+﻿using Application.Common;
+using AutoMapper;
 using Entities.CCC.Enrollment;
-using IQCare.DTO.PSmart;
-using Entities.CCC.Lookup;
+using Entity.WebApi;
+using Entity.WebApi.PSmart;
+using Interface.WebApi;
 using IQCare.CCC.UILogic;
 using IQCare.CCC.UILogic.Enrollment;
 using IQCare.CCC.UILogic.Interoperability;
 using IQCare.CCC.UILogic.Interoperability.Appointment;
 using IQCare.CCC.UILogic.Interoperability.Enrollment;
+using IQCare.DTO;
+using IQCare.DTO.PatientAppointment;
+using IQCare.DTO.PatientRegistration;
+using IQCare.DTO.PSmart;
+using IQCare.WebApi.Logic.DtoMapping;
+using IQCare.WebApi.Logic.Helpers;
+using IQCare.WebApi.Logic.MappingEntities;
+using IQCare.WebApi.Logic.PSmart;
+using System;
+using System.Collections.Generic;
+using System.Web.Script.Serialization;
 
 namespace IQCare.WebApi.Logic.MessageHandler
 {
@@ -50,11 +50,54 @@ namespace IQCare.WebApi.Logic.MessageHandler
 
         public void Handle(string messageType, string message)
         {
+            var serializer = new JavaScriptSerializer();
+            var jsonObject = serializer.DeserializeObject((dynamic)message);
+            string sendingApplication = String.Empty;
+            int senderId;
+            foreach (var item in jsonObject)
+            {
+                if (item.Key == "MESSAGE_HEADER")
+                {
+                    foreach (var val in item.Value)
+                    {
+                        if (val.Key == "SENDING_APPLICATION")
+                        {
+                            sendingApplication = val.Value;
+                            break;
+                        }
+                    }
+                }
+                break;
+            }
+
+            switch (sendingApplication)
+            {
+                case "ADT":
+                    senderId = (int)Senders.ADT;
+                    break;
+                case "T4A":
+                    senderId = (int)Senders.T4A;
+                    break;
+                case "MLAB":
+                    senderId = (int)Senders.MLAB;
+                    break;
+                case "MLAB SMS APP":
+                    senderId = (int) Senders.MLAB_SMS_APP;
+                    break;
+                case "KENYAEMR":
+                    senderId = (int) Senders.KENYAEMR;
+                    break;
+                    default:
+                        senderId = 1;
+                    break;
+            }
+
             var apiInbox = new ApiInbox()
             {
                 DateReceived = DateTime.Now,
                 Message = message,
-                SenderId = 1
+                SenderId = senderId,
+                MessageType = messageType
             };
 
             switch (messageType)
@@ -116,13 +159,15 @@ namespace IQCare.WebApi.Logic.MessageHandler
                 //update message set processed=1, erromsq=null
                 incomingMessage.DateProcessed = DateTime.Now;
                 incomingMessage.Processed = true;
+                incomingMessage.IsSuccess = true;
                 _apiInboxmanager.EditApiInbox(incomingMessage);
             }
             catch (Exception e)
             {
                 //update message set processed=1, erromsq
                 incomingMessage.LogMessage = e.Message;
-                incomingMessage.Processed = false;
+                incomingMessage.Processed = true;
+                incomingMessage.IsSuccess = false;
                 _apiInboxmanager.EditApiInbox(incomingMessage);
             }
         }
@@ -157,12 +202,14 @@ namespace IQCare.WebApi.Logic.MessageHandler
                 //update message that it has been processed
                 incomingMessage.DateProcessed = DateTime.Now;
                 incomingMessage.Processed = true;
+                incomingMessage.IsSuccess = true;
                 _apiInboxmanager.EditApiInbox(incomingMessage);
             }
             catch (Exception e)
             {
                 incomingMessage.LogMessage = e.Message;
-                incomingMessage.Processed = false;
+                incomingMessage.Processed = true;
+                incomingMessage.IsSuccess = false;
                 _apiInboxmanager.EditApiInbox(incomingMessage);
             }
         }
@@ -218,12 +265,14 @@ namespace IQCare.WebApi.Logic.MessageHandler
 
                 incomingMessage.DateProcessed = DateTime.Now;
                 incomingMessage.Processed = true;
+                incomingMessage.IsSuccess = true;
                 _apiInboxmanager.EditApiInbox(incomingMessage);
             }
             catch (Exception e)
             {
                 incomingMessage.LogMessage = e.Message;
-                incomingMessage.Processed = false;
+                incomingMessage.Processed = true;
+                incomingMessage.IsSuccess = false;
                 _apiInboxmanager.AddApiInbox(incomingMessage);
             }
         }
@@ -267,12 +316,14 @@ namespace IQCare.WebApi.Logic.MessageHandler
                 //update message that it has been processed
                 incomingMessage.DateProcessed = DateTime.Now;
                 incomingMessage.Processed = true;
+                incomingMessage.IsSuccess = true;
                 _apiInboxmanager.EditApiInbox(incomingMessage);
             }
             catch (Exception e)
             {
                 incomingMessage.LogMessage = e.Message;
-                incomingMessage.Processed = false;
+                incomingMessage.Processed = true;
+                incomingMessage.IsSuccess = false;
                 _apiInboxmanager.EditApiInbox(incomingMessage);
             }
         }
@@ -295,12 +346,14 @@ namespace IQCare.WebApi.Logic.MessageHandler
                 //update message that it has been processed
                 incomingMessage.DateProcessed = DateTime.Now;
                 incomingMessage.Processed = true;
+                incomingMessage.IsSuccess = true;
                 _apiInboxmanager.EditApiInbox(incomingMessage);
             }
             catch (Exception e)
             {
                 incomingMessage.LogMessage = e.Message;
-                incomingMessage.Processed = false;
+                incomingMessage.Processed = true;
+                incomingMessage.IsSuccess = false;
                 _apiInboxmanager.EditApiInbox(incomingMessage);
             }
         }
