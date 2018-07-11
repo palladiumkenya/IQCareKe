@@ -1,9 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+﻿using System.ComponentModel.DataAnnotations;
+using IQCare.Library;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace IQCare.Common.BusinessProcess.Commands.Setup
 {
     public class NEWCLIENT
     {
+        [Required, ValidateObject]
         public PATIENT_IDENTIFICATION PATIENT_IDENTIFICATION { get; set; }
         public ENCOUNTERS ENCOUNTER { get; set; }
     }
