@@ -1,25 +1,24 @@
 import { AfterViewInit, Component, NgZone, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { MatPaginator, MatTableDataSource,MatCheckboxChange } from '@angular/material';
-import { tap } from 'rxjs/operators';
-import { Search,SearchList } from '../models/search';
-import { SearchService } from '../services/recordssearch'
+import { MatPaginator, MatTableDataSource, MatCheckboxChange } from '@angular/material';
+import { Search, SearchList } from '../models/search';
+import { SearchService } from '../services/recordssearch';
 import { DataSource } from '@angular/cdk/collections';
-import { Observable } from "rxjs/Rx";
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { Observable } from 'rxjs';
+import { from as observableFrom } from 'rxjs';
+import { of as observableOf } from 'rxjs';
 
 import {
-        TableColumn,
+    TableColumn,
     ColumnMode
 } from '@swimlane/ngx-datatable';
-import 'rxjs/add/observable/fromEvent';
+
 import { CollectionViewer } from '@angular/cdk/collections';
 
 @Component({
-  selector: 'app-Recordshome',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+    selector: 'app-Recordshome',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.css']
 })
 
 
@@ -29,28 +28,26 @@ export class RecordsHomeComponent implements OnInit, AfterViewInit {
     @ViewChild(MatPaginator) paginator: MatPaginator;
     element: any[] = [];
     selectedRowIndex: number = -1;
-   // public element: any[] = [];
-   personsearch: Search;
-   displayedColumns = ['firstName', 'middleName', 'lastName', 'dateOfBirth', 'enrollmentNumber'];
-  
-   
-   //dataSource = new SearchDataSource(this.searchService, this.personsearch);
-   dataSource = new MatTableDataSource();
+    // public element: any[] = [];
+    personsearch: Search;
+    displayedColumns = ['firstName', 'middleName', 'lastName', 'dateOfBirth', 'enrollmentNumber'];
+
+    dataSource = new MatTableDataSource();
     constructor(private searchService: SearchService,
         private router: Router,
         private route: ActivatedRoute,
         public zone: NgZone) {
         this.personsearch = new Search();
-        
+
         this.LoadData();
-       // this.dataSource = new SearchDataSource(this.searchService, this.personsearch);
+        // this.dataSource = new SearchDataSource(this.searchService, this.personsearch);
     }
 
 
     ngOnInit() {
 
         localStorage.removeItem('personId');
-        
+
     }
 
     ngAfterViewInit() {
@@ -64,39 +61,29 @@ export class RecordsHomeComponent implements OnInit, AfterViewInit {
         this.selectedRowIndex = row.id;
         localStorage.setItem('personId', row['personId']);
         this.zone.run(() => { this.router.navigate(['/recordregistration/patientprofile'], { relativeTo: this.route }); });
-        //console.log(row['personId']);
+        // console.log(row['personId']);
     }
 
 
     OnKeyUp() {
 
-       
-        //this.dataSource = new SearchDataSource(this.searchService, this.personsearch);
+
+        // this.dataSource = new SearchDataSource(this.searchService, this.personsearch);
         this.LoadData();
         console.log(this.dataSource);
-       
-        
+
+
     }
 
-    LoadData(){
+    LoadData() {
 
         if (this.personsearch == undefined) {
-            return Observable.from([]);
-
+            return observableFrom([]);
         } else {
-
             this.searchService.searchPerson(this.personsearch).subscribe(data => {
-
-
-                this.dataSource.data = data["personSearch"];
+                this.dataSource.data = data['personSearch'];
                 console.log(this.dataSource.data);
-
-
             });
-            
-            
-
-
         }
     }
     highlight(row) {
@@ -105,14 +92,13 @@ export class RecordsHomeComponent implements OnInit, AfterViewInit {
     public onChange(event: MatCheckboxChange) {
         if (event.checked) {
             this.personsearch.NotClient = true;
-        }
-        else {
+        } else {
             this.personsearch.NotClient = false;
         }
     }
- 
+
 }
-  
+
 export class Element {
 
     Id: number;
@@ -134,35 +120,28 @@ export class Element {
     PatientIdentifier: string;
     PatientIdentifierType: string;
     PatientIdentifierValue: string;
-    
-    
+
+
 }
 
 
 
 export class SearchDataSource extends DataSource<any>{
     element: any[] = [];
-constructor(private searchService: SearchService, private search: Search) {
-    super();
-    
+    constructor(private searchService: SearchService, private search: Search) {
+        super();
+
     }
 
-    connect():Observable<any[]> {
+    connect(): Observable<any[]> {
         if (this.search == undefined) {
-            return Observable.from([]);
-
+            return observableFrom([]);
         } else {
 
             this.searchService.searchPerson(this.search).subscribe((data: any) => {
-
-                
-                this.element = data["personSearch"];
-               
-              
+                this.element = data['personSearch'];
             });
-            return Observable.of(this.element);
-
-           
+            return observableOf(this.element);
         }
 
     }

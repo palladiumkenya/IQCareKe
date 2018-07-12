@@ -1,19 +1,21 @@
-import {AfterViewInit, Component, NgZone, OnInit, ViewChild} from '@angular/core';
-import {Search} from '../_models/search';
-import {SearchService} from '../_services/search.service';
-import {DataSource} from '@angular/cdk/collections';
-import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/observable/from';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Store} from '@ngrx/store';
+import { AfterViewInit, Component, NgZone, OnInit, ViewChild } from '@angular/core';
+import { Search } from '../_models/search';
+import { SearchService } from '../_services/search.service';
+import { DataSource } from '@angular/cdk/collections';
+import { Observable } from 'rxjs';
+
+import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import * as Consent from '../../shared/reducers/app.states';
-import {MatPaginator, MatTableDataSource} from '@angular/material';
-import {tap} from 'rxjs/operators';
+import { MatPaginator } from '@angular/material';
+
+import { from as observableFrom } from 'rxjs';
+import { of as observableOf } from 'rxjs';
 
 @Component({
-  selector: 'app-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css']
+    selector: 'app-search',
+    templateUrl: './search.component.html',
+    styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit, AfterViewInit {
     search: Search;
@@ -24,10 +26,10 @@ export class SearchComponent implements OnInit, AfterViewInit {
     @ViewChild(MatPaginator) paginator: MatPaginator;
 
     constructor(private searchService: SearchService,
-                private router: Router,
-                private route: ActivatedRoute,
-                public zone: NgZone,
-                private store: Store<AppState>) {
+        private router: Router,
+        private route: ActivatedRoute,
+        public zone: NgZone,
+        private store: Store<AppState>) {
         this.search = new Search();
 
         this.store.dispatch(new Consent.ClearState());
@@ -78,12 +80,13 @@ export class SearchDataSource extends DataSource<any> {
 
     connect(): Observable<any[]> {
         if (this.search == undefined) {
-            return Observable.from([]);
+            return observableFrom([]);
+            // return Observable.from([]);
         } else {
             return this.searchService.searchClient(this.search);
         }
 
     }
 
-    disconnect() {}
+    disconnect() { }
 }

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {environment} from '../../../environments/environment';
 import {catchError, tap} from 'rxjs/operators';
-import 'rxjs/add/observable/of';
+
 import {Store} from '@ngrx/store';
 import * as Consent from '../reducers/app.states';
 import {ErrorHandlerService} from './errorhandler.service';

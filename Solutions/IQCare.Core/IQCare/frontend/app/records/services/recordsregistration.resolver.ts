@@ -1,5 +1,5 @@
-﻿import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
+import { Observable } from 'rxjs';
 import { RegistrationService } from './RecordsRegistrationService';
 import { Injectable } from '@angular/core';
 

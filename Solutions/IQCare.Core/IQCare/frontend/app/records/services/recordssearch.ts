@@ -1,8 +1,8 @@
-﻿import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/throw';
+import { Observable } from 'rxjs';
+
 import { catchError, tap } from 'rxjs/operators';
 import { Search ,SearchList, SearchContact,SearchRegList} from '../models/search';
 import { ErrorHandlerService } from '../../shared/_services/errorhandler.service';

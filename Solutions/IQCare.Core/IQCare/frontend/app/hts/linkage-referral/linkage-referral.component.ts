@@ -7,7 +7,7 @@ import {Tracing} from '../_models/tracing';
 import {ActivatedRoute, Router} from '@angular/router';
 import {select, Store} from '@ngrx/store';
 import * as Consent from '../../shared/reducers/app.states';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {debounceTime} from 'rxjs/operators';
 import {SnotifyService} from 'ng-snotify';
 import {NotificationService} from '../../shared/_services/notification.service';

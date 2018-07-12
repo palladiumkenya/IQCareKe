@@ -1,24 +1,26 @@
-import { Component, OnInit ,NgZone, ViewChild,AfterViewInit} from '@angular/core';
+import { Component, OnInit, NgZone, ViewChild, AfterViewInit } from '@angular/core';
 import { SnotifyService } from 'ng-snotify';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators,FormArray } from '@angular/forms';
-import { Person, Person2, EmergencyArray, errorMessages ,RegistrationVariables,PersonLocation,County,SubCounty,PersonIdentification,Ward,PersonAddress,Emergency,EmergencyList,NextofKinEmergency,NextofKinEmergencyList} from '../models/person';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
+import { Person, Person2, EmergencyArray, errorMessages, RegistrationVariables, PersonLocation, County, SubCounty, PersonIdentification, Ward, PersonAddress, Emergency, EmergencyList, NextofKinEmergency, NextofKinEmergencyList } from '../models/person';
 import { RegistrationService } from '../services/RecordsRegistrationService';
 import { Router, ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
-import { forkJoin } from 'rxjs/observable/forkJoin';
+import { forkJoin, Observable } from 'rxjs';
 import { ClientService } from '../../shared/_services/client.service';
 import { Store } from '@ngrx/store';
 import * as Consent from '../../shared/reducers/app.states';
 import { NotificationService } from '../../shared/_services/notification.service';
-import { Observable } from 'rxjs/Observable';
 import { emergencyValidator } from '../models/emergencyvalidator'
 import { MatStepper } from '@angular/material';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { tap } from 'rxjs/operators';
-import { Search, SearchList ,SearchRegList,SearchContact} from '../models/search';
+import { Search, SearchList, SearchRegList, SearchContact } from '../models/search';
 import { SearchService } from '../services/recordssearch'
 import { DataSource } from '@angular/cdk/collections';
 import { MatRadioChange, MatCheckboxChange, MatSelectChange } from '@angular/material';
+
+import { from as observableFrom } from 'rxjs';
+import { of as observableOf } from 'rxjs';
 
 @Component({
     selector: 'recordsregister',
@@ -28,7 +30,7 @@ import { MatRadioChange, MatCheckboxChange, MatSelectChange } from '@angular/mat
 
 
 export class RecordsRegisterComponent implements OnInit {
-    nextofkinmessage:Observable<any>;
+    nextofkinmessage: Observable<any>;
     personemergencymessage: Observable<any>;
     toggoleShowHide: string = "hidden";
     PersonIdent: PersonIdentification;
@@ -106,11 +108,11 @@ export class RecordsRegisterComponent implements OnInit {
     personsearch: SearchRegList
     searchcontactlist: SearchContact;
     displayedColumns = ['firstName', 'middleName', 'lastName', 'dateOfBirth', 'enrollmentNumber'];
-    displayedColumnlist = ['personIdentificationNumber', 'firstName', 'middleName', 'lastName', 'mobileNumber', 'Gender', 'RelationshipOptions', 'contacttype' ,'Add'];
+    displayedColumnlist = ['personIdentificationNumber', 'firstName', 'middleName', 'lastName', 'mobileNumber', 'Gender', 'RelationshipOptions', 'contacttype', 'Add'];
     dataSource = new MatTableDataSource();
     dataSourceEmergency = new MatTableDataSource();
     constructor(private registrationService: RegistrationService,
-        private searchService:SearchService,
+        private searchService: SearchService,
         private router: Router,
         private route: ActivatedRoute,
         public zone: NgZone,
@@ -120,10 +122,10 @@ export class RecordsRegisterComponent implements OnInit {
         private notificationService: NotificationService,
         private _formBuilder: FormBuilder) {
 
-        
+
 
         this.maxDate = new Date();
-       
+
 
     }
     ngAfterViewInit() {
@@ -131,7 +133,7 @@ export class RecordsRegisterComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
         this.dataSourceEmergency.paginator = this.paginator;
     }
-    
+
     ngOnInit() {
 
         this.PersonIdent = new PersonIdentification;
@@ -165,8 +167,8 @@ export class RecordsRegisterComponent implements OnInit {
 
 
             });
-        
-    
+
+
         this.registrationService.getContactTypeOptions().subscribe(
             (data: any) => {
                 console.log(data);
@@ -185,7 +187,7 @@ export class RecordsRegisterComponent implements OnInit {
                 }
             }
         );
-      
+
         this.ConsentType = this.route.snapshot.data["ConsentType"]["consentType"];
         console.log(this.ConsentType);
         this.IdentifyerTypes = this.route.snapshot.data["IdentifyerType"]['identifers'];
@@ -273,21 +275,21 @@ export class RecordsRegisterComponent implements OnInit {
                     County: new FormControl(this.personlocation.countyId, [Validators.required]),
                     SubCounty: new FormControl(this.personlocation.subcountyId, [Validators.required]),
                     Ward: new FormControl(this.personlocation.WardId, [Validators.required]),
-                    NearestHealthCenter: new FormControl(this.personlocation.NearestHealthCenter,[Validators.required]),
-                    LandMark: new FormControl(this.personlocation.LandMark,[Validators.required])
+                    NearestHealthCenter: new FormControl(this.personlocation.NearestHealthCenter, [Validators.required]),
+                    LandMark: new FormControl(this.personlocation.LandMark, [Validators.required])
                 }),
                 this._formBuilder.group({
-                    identifierValue:new FormControl(this.searchcontactlist.identifierValue),
-                    firstName:new FormControl(this.searchcontactlist.firstName),
-                    lastName:new FormControl(this.searchcontactlist.lastName),
+                    identifierValue: new FormControl(this.searchcontactlist.identifierValue),
+                    firstName: new FormControl(this.searchcontactlist.firstName),
+                    lastName: new FormControl(this.searchcontactlist.lastName),
                     middleName: new FormControl(this.searchcontactlist.midName),
-                    enrollmentNumber:new FormControl(this.searchcontactlist.EnrollmentNumber),
-                    emgFirstName: new FormControl(this.emergency.emgFirstName ),
-                    emgMiddleName: new FormControl(this.emergency.emgMiddleName ),
+                    enrollmentNumber: new FormControl(this.searchcontactlist.EnrollmentNumber),
+                    emgFirstName: new FormControl(this.emergency.emgFirstName),
+                    emgMiddleName: new FormControl(this.emergency.emgMiddleName),
                     emgLastName: new FormControl(this.emergency.emgLastName),
                     emgGender: new FormControl(this.emergency.emgGender),
-                    emgRelationShip: new FormControl(this.emergency.emgRelationShip ),
-                    emgPrimaryMobileNo: new FormControl(this.emergency.emgPrimaryMobileNo ),
+                    emgRelationShip: new FormControl(this.emergency.emgRelationShip),
+                    emgPrimaryMobileNo: new FormControl(this.emergency.emgPrimaryMobileNo),
                     emgConsentToCall: new FormControl(this.emergency.emgConsentToCall),
                     emgLimitedConsent: new FormControl(this.emergency.emgLimitedConsent),
                     emgRegisteredClinic: new FormControl(this.emergency.emgRegisteredClinic),
@@ -320,9 +322,9 @@ export class RecordsRegisterComponent implements OnInit {
         console.log(this.formGroup.controls.formArray['controls'][0].controls.RegistrationDate.valid);
         //console.log(this.formGroup.controls.formArray['controls'][0].controls.get('RegistrationDate'));
         console.log(this.formArray.get([0]).get('FirstName').valid);
-            //.value['FirstName'])
+        //.value['FirstName'])
         console.log(this.formArray.get([0]).get)
-        
+
 
 
 
@@ -339,12 +341,13 @@ export class RecordsRegisterComponent implements OnInit {
     }
     LoadContactList() {
         if (this.searchcontactlist == undefined) {
-            return Observable.from([]);
+            return observableFrom([]);
+            // return Observable.from([]);
         } else {
             this.searchService.searchPersonContact(this.searchcontactlist).subscribe(data => {
 
 
-                this.dataSourceEmergency.data = data["personSearch"];
+                this.dataSourceEmergency.data = data['personSearch'];
                 console.log(this.dataSourceEmergency.data);
 
 
@@ -356,8 +359,9 @@ export class RecordsRegisterComponent implements OnInit {
 
 
         if (this.personsearch == undefined) {
-            return Observable.from([]);
-           
+            return observableFrom([]);
+            // return Observable.from([]);
+
 
         } else {
 
@@ -367,19 +371,19 @@ export class RecordsRegisterComponent implements OnInit {
                 this.dataSource.data = data["personSearch"];
                 this.hidden = false;
                 console.log(this.dataSource.data);
-                
+
 
             });
 
-            
+
 
 
         }
     }
 
-goBack(stepper: MatStepper){
-    stepper.previous();
-}
+    goBack(stepper: MatStepper) {
+        stepper.previous();
+    }
 
     goForward(stepper: MatStepper) {
         if (stepper.selectedIndex == 0) {
@@ -388,41 +392,41 @@ goBack(stepper: MatStepper){
                 stepper.next();
             }
             else {
-                this.validateAllFormFields(this.formGroup,0);
+                this.validateAllFormFields(this.formGroup, 0);
             }
         }
         else if (stepper.selectedIndex == 1) {
             if (this.formGroup.controls.formArray['controls'][1].valid) {
-               
-           
+
+
                 this.personsearch.firstName = this.formArray.get([0]).value['FirstName'];
                 this.personsearch.midName = this.formArray.get([0]).value['MiddleName'];
                 this.personsearch.lastName = this.formArray.get([0]).value['LastName'];
                 this.personsearch.identifierValue = this.formArray.get([0]).value['IdentifyerNumber'];
-                
-                
+
+
                 const birthDate = new Date(this.formArray.get([0]).value['DateOfBirth']);
-                 this.personsearch.DateofBirth= moment(birthDate).format('DD-MMM-YYYY');
-                
+                this.personsearch.DateofBirth = moment(birthDate).format('DD-MMM-YYYY');
+
                 //this.personsearch.DateofBirth = birthDate.toString();
-               
+
                 this.LoadData();
                 //if (this.hidden === true) {
-                  //  stepper.next()
+                //  stepper.next()
                 //}
-              //  stepper.next();
+                //  stepper.next();
             }
             else {
                 this.validateAllFormFields(this.formGroup, 1);
             }
         }
-       
-        
-   // stepper.next();
-       
-}
-  
-   
+
+
+        // stepper.next();
+
+    }
+
+
 
     Proceed(stepper: MatStepper) {
         stepper.next();
@@ -437,11 +441,10 @@ goBack(stepper: MatStepper){
     getSelectedEmergencyRow(row) {
         console.log(this.dataSourceEmergency);
         console.log(this.formGroup);
-       // if (this.relation.toString() === null || this.relation.toString() === "undefined" || this.relation.toString() === "")) {
-         //   this.displayerror = false;
+        // if (this.relation.toString() === null || this.relation.toString() === "undefined" || this.relation.toString() === "")) {
+        //   this.displayerror = false;
         //}
-        if (this.emergencytype.toString() === "" || this.emergencytype.toString() === "null" || this.emergencytype.toString() === "undefined")
-        {
+        if (this.emergencytype.toString() === "" || this.emergencytype.toString() === "null" || this.emergencytype.toString() === "undefined") {
             this.displaycontacttype = false;
         }
         this.selectedRowIndex = row.id;
@@ -456,17 +459,17 @@ goBack(stepper: MatStepper){
 
         this.emergencylist.emgFirstName = row['firstName'];
         this.emergencylist.emgLastName = row['lastName'];
-        this.emergencylist.emgMiddleName =row['middleName'];
-       // var consent = this.consentoptions.find(s => s.itemId == this.newItem.emgConsentToCall);
+        this.emergencylist.emgMiddleName = row['middleName'];
+        // var consent = this.consentoptions.find(s => s.itemId == this.newItem.emgConsentToCall);
 
 
-       // this.emergencylist.emgConsentToCall = consent["itemName"];
-       // var gender = this.gender.find(s => s.itemId == this.newItem.emgGender);
+        // this.emergencylist.emgConsentToCall = consent["itemName"];
+        // var gender = this.gender.find(s => s.itemId == this.newItem.emgGender);
         this.emergencylist.emgGender = row['gender'];
 
 
 
-       // this.emergencylist.emgLimitedConsent = this.newItem.emgLimitedConsent;
+        // this.emergencylist.emgLimitedConsent = this.newItem.emgLimitedConsent;
         var rel = this.relationshipoptions.find(s => s.itemId == this.relation);
         this.emergencylist.emgRelationShip = rel["itemName"];
         this.emergencylist.emgPrimaryMobileNo = row['mobileNumber'];
@@ -479,7 +482,7 @@ goBack(stepper: MatStepper){
             this.emergencylist.emgNextofKinContactType = nextkin["itemName"];
         }
         this.itemslist.push(this.emergencylist);
-       
+
         this.emg = new Emergency();
         this.emg.emgEmergencyContactPersonId = row['personId'];
         this.emg.emgFirstName = row['firstName'];
@@ -492,10 +495,10 @@ goBack(stepper: MatStepper){
         this.emg.emgEmergencyContactType = this.emergencytype;
         this.emg.emgNextofKinContactType = this.nextkintype;
         this.items.push(this.emg);
-        
+
         this.formGroup.controls.formArray['controls'][2].controls.items.setValue(this.items);
 
-      
+
 
     }
     getSelectedRow(row) {
@@ -504,23 +507,23 @@ goBack(stepper: MatStepper){
         this.zone.run(() => { this.router.navigate(['/recordregistration/patientprofile'], { relativeTo: this.route }); });
         //console.log(row['personId']);
     }
-    getErrorMessage(field: string):string {
-       // console.log(this.formArray.get([0]).get(field.toString()));
-             var res = (field.toString() + ' is required');
-             return (res.toString());
-        
-        
+    getErrorMessage(field: string): string {
+        // console.log(this.formArray.get([0]).get(field.toString()));
+        var res = (field.toString() + ' is required');
+        return (res.toString());
+
+
     }
 
     isFieldValid(field: string) {
-     
-       //console.log(this.formGroup.controls.formArray['controls'][0].controls.field);
+
+        //console.log(this.formGroup.controls.formArray['controls'][0].controls.field);
         //console.log(this.formArray.get([0]).value[field.toString()])
         //this.formGroup.controls.formArray['controls'][0].controls.
         return this.formArray.get([0]).get(field.toString()).valid && this.formArray.get([0]).get(field.toString()).touched;
     }
 
-   
+
     displayFieldCss(field: string) {
         return {
             'has-error': this.isFieldValid(field),
@@ -528,30 +531,30 @@ goBack(stepper: MatStepper){
         };
     }
 
-    
-    validateAllFormFields(formGroup:FormGroup, i:number) {
+
+    validateAllFormFields(formGroup: FormGroup, i: number) {
         Object.keys(formGroup.controls.formArray['controls'][i].controls).forEach(field => {
-           // this.formGroup.controls.formArray['controls'][0].controls)
+            // this.formGroup.controls.formArray['controls'][0].controls)
             //console.log(field);
             const control = this.formArray.get([i]).get(field);
             if (control instanceof FormControl) {
                 control.markAsTouched({ onlySelf: true });
-                
+
             }
-           else if (control instanceof FormGroup) {
-                this.validateAllFormFields(control,i);
+            else if (control instanceof FormGroup) {
+                this.validateAllFormFields(control, i);
             }
-           // else if (control instanceof this.formGroup.controls.formArray['controls'][0].controls) {
-             //   this.validateAllFormFields();
+            // else if (control instanceof this.formGroup.controls.formArray['controls'][0].controls) {
+            //   this.validateAllFormFields();
 
             //}
         });
     }
-   
+
     addNextofKinRow() {
         const nokFirstName = this.formGroup.controls.formArray['controls'][3].controls.nokFirstName.value;
         const nokFirstName2 = this.formGroup.controls.formArray['controls'][3].controls.nokFirstName
-        
+
         const nokMiddleName = this.formGroup.controls.formArray['controls'][3].controls.nokMiddleName.value;
         const nokMiddleName2 = this.formGroup.controls.formArray['controls'][3].controls.nokLastName
 
@@ -576,11 +579,11 @@ goBack(stepper: MatStepper){
             || !(nokConsentToCall === undefined || nokConsentToCall === '' || nokConsentToCall === null)
             || !(nokRegisteredClinic === undefined || nokRegisteredClinic === '' || nokRegisteredClinic === null)) {
             {
-               
+
                 this.nextofkinemergencylist = new NextofKinEmergencyList();
                 if (this.newnextofkin.nokRegisteredClinic == '1') {
                     this.nextofkinemergencylist.nokRegisteredClinic = "Yes";
-                    
+
                 }
                 else {
                     this.nextofkinemergencylist.nokRegisteredClinic = "No";
@@ -603,11 +606,11 @@ goBack(stepper: MatStepper){
 
                 this.itemlistnextofkin.push(this.nextofkinemergencylist);
 
-             
+
                 this.itemnextofkin.push(this.newnextofkin);
 
                 this.formGroup.controls.formArray['controls'][3].controls.itemnextofkin.setValue(this.itemnextofkin);
-                
+
 
                 this.newnextofkin = {};
             }
@@ -760,8 +763,8 @@ goBack(stepper: MatStepper){
         this.personlocation.LandMark = this.formGroup.controls.formArray['controls'][1].controls.LandMark.value;
         console.log(this.personlocation.NearestHealthCenter);
         console.log(this.personlocation.LandMark);
-       // console.log(this.items);
-       // console.log(this.itemnextofkin);
+        // console.log(this.items);
+        // console.log(this.itemnextofkin);
         console.log(this.formArray)
         console.log(this.formGroup.controls.formArray['controls'][2].controls.items);
         this.items = this.formGroup.controls.formArray['controls'][2].controls.items.value;
@@ -769,8 +772,8 @@ goBack(stepper: MatStepper){
         this.itemnextofkin = this.formGroup.controls.formArray['controls'][3].controls.itemnextofkin.value;
         console.log(this.itemnextofkin);
     }
-    
-    validate():boolean {
+
+    validate(): boolean {
         const emgFirstName = this.formGroup.controls.formArray['controls'][2].controls.emgFirstName.value;
         const emgFirstName2 = this.formGroup.controls.formArray['controls'][2].controls.emgFirstName
         const emgMiddleName = this.formGroup.controls.formArray['controls'][2].controls.emgMiddleName.value;
@@ -789,7 +792,7 @@ goBack(stepper: MatStepper){
         const emgRegisteredClinic = this.formGroup.controls.formArray['controls'][2].controls.emgRegisteredClinic.value;
         const emgRegisteredClinic2 = this.formGroup.controls.formArray['controls'][2].controls.emgRegisteredClinic
         if ((emgFirstName === undefined || emgFirstName === '' || emgFirstName === null)
-            ||(emgMiddleName === undefined || emgMiddleName === '' || emgMiddleName === null)
+            || (emgMiddleName === undefined || emgMiddleName === '' || emgMiddleName === null)
             || (emgLastName === undefined || emgLastName === '' || emgLastName !== null)
             || (emgGender === undefined || emgGender === '' || emgGender === null)
             || (emgRelationShip === undefined || emgRelationShip === '' || emgRelationShip !== null)
@@ -840,28 +843,28 @@ goBack(stepper: MatStepper){
             this.person.MiddleName = this.formArray.get([0]).value['MiddleName'];
             this.person.LastName = this.formArray.get([0]).value['LastName'];
             this.person.Sex = this.formArray.get([0]).value['Sex'];
-            this.person.DateOfBirth = this.formArray.get([0]).value['DateOfBirth'];           
+            this.person.DateOfBirth = this.formArray.get([0]).value['DateOfBirth'];
             this.person.MaritalStatus = this.formArray.get([0]).value['MaritalStatus'];
             this.person.Educationallevel = this.formArray.get([0]).value['Educationallevel'];
-            this.person.Occcupation= this.formArray.get([0]).value['Occupation'];                     
-            this.person.IdentifyerType = this.formArray.get([0]).value['IdentifyerType'];                           
-            this.person.IdentifyerNumber = this.formArray.get([0]).value['IdentifyerNumber'];                           
-            this.person.RegistrationDate = this.formArray.get([0]).value['RegistrationDate'];                      
-            this.person.DobPrecision = this.formArray.get([0]).value['DobPrecision'];                                  
-            this.personlocation.countyId =this.formArray.get([1]).value['County'];    
-            this.personlocation.subcountyId = this.formArray.get([1]).value['SubCounty']; 
+            this.person.Occcupation = this.formArray.get([0]).value['Occupation'];
+            this.person.IdentifyerType = this.formArray.get([0]).value['IdentifyerType'];
+            this.person.IdentifyerNumber = this.formArray.get([0]).value['IdentifyerNumber'];
+            this.person.RegistrationDate = this.formArray.get([0]).value['RegistrationDate'];
+            this.person.DobPrecision = this.formArray.get([0]).value['DobPrecision'];
+            this.personlocation.countyId = this.formArray.get([1]).value['County'];
+            this.personlocation.subcountyId = this.formArray.get([1]).value['SubCounty'];
             console.log(this.personlocation.subcountyId);
             console.log(this.formGroup.controls);
-            this.personlocation.WardId = this.formArray.get([1]).value['Ward'];    
-           // this.personlocation.NearestHealthCenter = this.formArray.get([1]).['NearestHealthCenter'];  
+            this.personlocation.WardId = this.formArray.get([1]).value['Ward'];
+            // this.personlocation.NearestHealthCenter = this.formArray.get([1]).['NearestHealthCenter'];  
 
             this.personlocation.NearestHealthCenter = this.formGroup.controls.formArray['controls'][1].controls.NearestHealthCenter.value;
             console.log(this.personlocation.NearestHealthCenter);
             this.personlocation.LandMark = this.formGroup.controls.formArray['controls'][1].controls.LandMark.value;
-                
+
             console.log(this.personlocation.LandMark);
-                      
-                         
+
+
 
             this.person2.FirstName = this.formArray.get([0]).value['FirstName'];
             this.person2.MiddleName = this.formArray.get([0]).value['MiddleName'];
@@ -872,89 +875,89 @@ goBack(stepper: MatStepper){
             this.person2.CreatedBy = 1;
             this.person2.DobPrecision = this.person.DobPrecision
             this.person2.PersonId = 0;
-        
-           this.personAddress.MobilePhonenumber = this.formArray.get([1]).value['Mobilenumber'];
-           this.personAddress.Alternativenumber = this.formArray.get([1]).value['AlternativeNumber'];
-           console.log(this.personAddress.Alternativenumber);
+
+            this.personAddress.MobilePhonenumber = this.formArray.get([1]).value['Mobilenumber'];
+            this.personAddress.Alternativenumber = this.formArray.get([1]).value['AlternativeNumber'];
+            console.log(this.personAddress.Alternativenumber);
             this.personAddress.EmailAddress = this.formArray.get([1]).value['emailaddress'];
             this.items = this.formGroup.controls.formArray['controls'][2].controls.items.value;
-         
+
             this.itemnextofkin = this.formGroup.controls.formArray['controls'][3].controls.itemnextofkin.value;
-            
+
             this.registrationService.registerClient(this.person2).subscribe(data => {
                 console.log(data);
                 this.PersonIdent.PersonId = data['personId'];
                 console.log(this.PersonIdent.PersonId)
                 const personEducation = this.registrationService.addPersonEducationalLevel(this.PersonIdent.PersonId, this.person.Educationallevel, this.person2.CreatedBy);
-                const personContact = this.registrationService.addPersonContact(this.PersonIdent.PersonId,'', this.personAddress.MobilePhonenumber, this.personAddress.Alternativenumber, this.personAddress.EmailAddress, this.person2.CreatedBy)
+                const personContact = this.registrationService.addPersonContact(this.PersonIdent.PersonId, '', this.personAddress.MobilePhonenumber, this.personAddress.Alternativenumber, this.personAddress.EmailAddress, this.person2.CreatedBy)
                 const personOccupation = this.registrationService.addPersonOccupation(this.PersonIdent.PersonId, this.person.Occcupation, this.person2.CreatedBy);
-                const personLocation = this.registrationService.addPersonLocation(this.PersonIdent.PersonId, this.personlocation.countyId, this.personlocation.subcountyId, this.personlocation.WardId, this.person2.CreatedBy, this.personlocation.LandMark,this.personlocation.NearestHealthCenter);
+                const personLocation = this.registrationService.addPersonLocation(this.PersonIdent.PersonId, this.personlocation.countyId, this.personlocation.subcountyId, this.personlocation.WardId, this.person2.CreatedBy, this.personlocation.LandMark, this.personlocation.NearestHealthCenter);
                 const personIdentifier = this.registrationService.addPersonIdentifier(this.PersonIdent.PersonId, this.person.IdentifyerType, this.person.IdentifyerNumber, this.person2.CreatedBy);
-                let observables: Observable<any>[] = []; 
+                let observables: Observable<any>[] = [];
                 this.registrationService.cleararray();
                 if (this.items != null || this.items != undefined) {
                     for (let i = 0; i < this.items.length; i++) {
-                      
-                            this.emg.emgEmergencyContactType = this.emergencytype;
-                            this.emg.emgNextofKinContactType = this.nextkintype;
-                            var limitedconsent = "";
-                            //console.log(this.items[i].emgFirstName);
-                            if (this.items[i].emgLimitedConsent === undefined) {
-                                limitedconsent = "";
+
+                        this.emg.emgEmergencyContactType = this.emergencytype;
+                        this.emg.emgNextofKinContactType = this.nextkintype;
+                        var limitedconsent = "";
+                        //console.log(this.items[i].emgFirstName);
+                        if (this.items[i].emgLimitedConsent === undefined) {
+                            limitedconsent = "";
 
 
 
-                                console.log(this.items[i].emgLimitedConsent);
-                                console.log(limitedconsent);
-                            }
-                            else {
-                                limitedconsent = this.items[i].emgLimitedConsent
+                            console.log(this.items[i].emgLimitedConsent);
+                            console.log(limitedconsent);
+                        }
+                        else {
+                            limitedconsent = this.items[i].emgLimitedConsent
 
 
 
-                                console.log(this.items[i].emgLimitedConsent);
-                                console.log(limitedconsent);
-                            }
-
-                            this.emergencycontactarray = this.registrationService.addPersonEmergencyContactArray(this.PersonIdent.PersonId, this.items[i].emgFirstName, this.items[i].emgMiddleName, this.items[i].emgLastName, this.items[i].emgGender, this.items[i].emgEmergencyContactPersonId, this.items[i].emgPrimaryMobileNo, 1, false, this.items[i].emgRelationShip, this.ConsentType, this.items[i].emgConsentToCall, limitedconsent, this.items[i].emgRegisteredClinic,this.items[i].emgEmergencyContactType,this.items[i].emgNextofKinContactType);
+                            console.log(this.items[i].emgLimitedConsent);
+                            console.log(limitedconsent);
                         }
 
-                    
-                }
-                
+                        this.emergencycontactarray = this.registrationService.addPersonEmergencyContactArray(this.PersonIdent.PersonId, this.items[i].emgFirstName, this.items[i].emgMiddleName, this.items[i].emgLastName, this.items[i].emgGender, this.items[i].emgEmergencyContactPersonId, this.items[i].emgPrimaryMobileNo, 1, false, this.items[i].emgRelationShip, this.ConsentType, this.items[i].emgConsentToCall, limitedconsent, this.items[i].emgRegisteredClinic, this.items[i].emgEmergencyContactType, this.items[i].emgNextofKinContactType);
+                    }
 
-               
+
+                }
+
+
+
 
                 const personEmergencyContact = this.registrationService.addPersonEmergencyContact();
 
                 const addPatientRegistration = this.registrationService.addPatientRegistration(this.PersonIdent.PersonId, this.person2.DateOfBirth, this.person2.CreatedBy, this.person.IdentifyerNumber, this.person.RegistrationDate);
-               // const personNextofKincontact = this.registrationService.addPersonEmergencyContact(this.nextofkincontactarray);
+                // const personNextofKincontact = this.registrationService.addPersonEmergencyContact(this.nextofkincontactarray);
 
-                
-                
-        
-                
-                forkJoin([personEducation, personOccupation, personLocation, personIdentifier, personContact, personEmergencyContact,addPatientRegistration
+
+
+
+
+                forkJoin([personEducation, personOccupation, personLocation, personIdentifier, personContact, personEmergencyContact, addPatientRegistration
                     //, personNextofKincontact
-         ]).subscribe(results => {
+                ]).subscribe(results => {
 
                     localStorage.setItem('personId', this.PersonIdent.PersonId.toString());
-                 this.snotifyService.success('Successfully registered client', 'Registration', this.notificationService.getConfig());
+                    this.snotifyService.success('Successfully registered client', 'Registration', this.notificationService.getConfig());
                     this.zone.run(() => { this.router.navigate(['/'], { relativeTo: this.route }); });
                 }, (err) => {
                     this.snotifyService.error('Error registering client ' + err, 'Registration', this.notificationService.getConfig());
                 });
-               
+
             }, err => {
                 this.snotifyService.error('Error registering client ' + err, 'Registration', this.notificationService.getConfig());
-                });
+            });
             console.log(this.PersonIdent.PersonId);
 
             console.log(this.items);
             console.log(this.itemnextofkin);
-         
-           
-            
+
+
+
         } else {
             return;
 
@@ -964,57 +967,56 @@ goBack(stepper: MatStepper){
     selectchangeRel(event: any) {
         this.relation = event;
         this.displayerror = true;
-        
-        
-    }
-   public onChange(event: MatCheckboxChange) {
-       if (event.checked) {
-           this.displaycontacttype = true;
-           this.displayemgtype = true;
-           this.contactrel = parseInt(event.source.value);
-           
-           if (this.contactrel.toString() === this.emergencycontacttype.toString()) {
-               this.emergencytype = this.contactrel;
-           }
-           if (this.contactrel.toString() === this.nextofkincontacttype.toString()) {
-               this.nextkintype = this.contactrel;
-           }
 
-       }
-       
 
     }
-selectchange(value: any) {
-       
+    public onChange(event: MatCheckboxChange) {
+        if (event.checked) {
+            this.displaycontacttype = true;
+            this.displayemgtype = true;
+            this.contactrel = parseInt(event.source.value);
+
+            if (this.contactrel.toString() === this.emergencycontacttype.toString()) {
+                this.emergencytype = this.contactrel;
+            }
+            if (this.contactrel.toString() === this.nextofkincontacttype.toString()) {
+                this.nextkintype = this.contactrel;
+            }
+
+        }
+
+
+    }
+    selectchange(value: any) {
+
         this.consentoptype = value;
-        var res = this.consentoptions.find(s => s.itemId==this.consentoptype);
-      
+        var res = this.consentoptions.find(s => s.itemId == this.consentoptype);
+
         if (res)
             this.consent = res["itemName"]
-   
+
         if (this.consent == "Limitedconcent") {
             this.toggoleShowHide = "visible";
         }
-            else 
-        {
+        else {
             this.toggoleShowHide = "hidden";
         }
     }
 
     OnWardCountListSelect(value: any) {
         this.subcountyid = value;
-       
+
         if (this.subcountyid == null)
             this.subcounties = null;
         else {
             this.registrationService.getWardList(this.subcountyid).subscribe((data: any) => {
 
-              
+
                 this.wardlist = data["wards"];
-              
+
             });
         }
-        }
+    }
 
     selectedregistered(event: MatRadioChange) {
         this.registeredclinic = event.value;
@@ -1033,20 +1035,20 @@ selectchange(value: any) {
         else {
             this.registrationService.getSubCounty(this.countyid).subscribe(
                 (data: any) => {
-               
+
                     this.subcounties = data["subCounties"];
 
-                    
+
                 });
 
 
 
-               
+
         }
-        
+
     }
- }
-   
+}
+
 
 
 

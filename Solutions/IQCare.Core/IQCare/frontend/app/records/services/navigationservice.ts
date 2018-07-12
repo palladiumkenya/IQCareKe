@@ -1,7 +1,6 @@
-﻿import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
-import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject ,  Observable } from 'rxjs';
 @Injectable()
 export class NavigationService {
     private profile: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
