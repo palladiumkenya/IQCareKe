@@ -13,21 +13,12 @@ namespace IQCare.Web.CCC.UC.Adherence {
     public partial class ucHIVAwareness {
         
         /// <summary>
-        /// rbAccepted control.
+        /// QuestionsPlaceholder control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rbAccepted;
-        
-        /// <summary>
-        /// rbDisclosureComplete control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rbDisclosureComplete;
+        protected global::System.Web.UI.WebControls.PlaceHolder QuestionsPlaceholder;
     }
 }

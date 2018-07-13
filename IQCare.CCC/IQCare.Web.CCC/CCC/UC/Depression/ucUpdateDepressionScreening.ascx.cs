@@ -13,7 +13,7 @@ using IQCare.CCC.UILogic.Encounter;
 
 namespace IQCare.Web.CCC.UC.Depression
 {
-    public partial class ucDepressionScreening : System.Web.UI.UserControl
+    public partial class ucUpdateDepressionScreening : System.Web.UI.UserControl
     {
         public int depressionId, PatientId, PatientMasterVisitId, userId, NotesId, screenTypeId;
         public RadioButtonList rbList;
@@ -46,7 +46,7 @@ namespace IQCare.Web.CCC.UC.Depression
                 PlaceHolder2.Controls.Add(new LiteralControl("</div>"));
                 PlaceHolder2.Controls.Add(new LiteralControl("<div class='col-md-4 text-right'>"));
                 rbList = new RadioButtonList();
-                rbList.ID = value.ItemId.ToString();
+                rbList.ID = "uds"+value.ItemId.ToString();
                 rbList.RepeatColumns = 4;
                 rbList.ClientIDMode = System.Web.UI.ClientIDMode.Static;
                 rbList.CssClass = "rbList";
@@ -65,7 +65,7 @@ namespace IQCare.Web.CCC.UC.Depression
                 PlaceHolder1.Controls.Add(new LiteralControl("</div>"));
                 PlaceHolder1.Controls.Add(new LiteralControl("<div class='col-md-7 text-right'>"));
                 rbList = new RadioButtonList();
-                rbList.ID = value.ItemId.ToString();
+                rbList.ID = "uds"+value.ItemId.ToString();
                 rbList.RepeatColumns = 4;
                 rbList.ClientIDMode = System.Web.UI.ClientIDMode.Static;
                 rbList.CssClass = "rbList";
@@ -81,7 +81,7 @@ namespace IQCare.Web.CCC.UC.Depression
             depressionTotalTb = new TextBox();
             depressionTotalTb.CssClass = "form-control input-sm";
             depressionTotalTb.ClientIDMode = System.Web.UI.ClientIDMode.Static;
-            depressionTotalTb.ID = LookupLogic.GetLookupItemId("DepressionTotal");
+            depressionTotalTb.ID = "uds"+LookupLogic.GetLookupItemId("DepressionTotal");
             depressionTotalTb.Enabled = false;
             PHDepressionTotal.Controls.Add(depressionTotalTb);
             PHDepressionTotal.Controls.Add(new LiteralControl("<span class='input-group-addon'>/ 30</span>"));
@@ -92,7 +92,7 @@ namespace IQCare.Web.CCC.UC.Depression
             depressionSeverityTb = new TextBox();
             depressionSeverityTb.CssClass = "form-control input-sm";
             depressionSeverityTb.ClientIDMode = System.Web.UI.ClientIDMode.Static;
-            depressionSeverityTb.ID = LookupLogic.GetLookupItemId("DepressionSeverity");
+            depressionSeverityTb.ID = "uds" + LookupLogic.GetLookupItemId("DepressionSeverity");
             depressionSeverityTb.Enabled = false;
             PHDepressionSeverity.Controls.Add(depressionSeverityTb);
             PHDepressionSeverity.Controls.Add(new LiteralControl("</div>"));
@@ -102,7 +102,7 @@ namespace IQCare.Web.CCC.UC.Depression
             depressionReccommendationTb = new TextBox();
             depressionReccommendationTb.CssClass = "form-control input-sm";
             depressionReccommendationTb.ClientIDMode = System.Web.UI.ClientIDMode.Static;
-            depressionReccommendationTb.ID = LookupLogic.GetLookupItemId("ReccommendedManagement");
+            depressionReccommendationTb.ID = "uds" + LookupLogic.GetLookupItemId("ReccommendedManagement");
             depressionReccommendationTb.Enabled = false;
             PHRecommendedManagement.Controls.Add(depressionReccommendationTb);
             PHRecommendedManagement.Controls.Add(new LiteralControl("</div>"));
@@ -117,12 +117,12 @@ namespace IQCare.Web.CCC.UC.Depression
                 foreach (var value in screeningList)
                 {
                     depressionId = Convert.ToInt32(value.ScreeningTypeId);
-                    RadioButtonList rblPC1Qs = (RadioButtonList)PlaceHolder1.FindControl(value.ScreeningCategoryId.ToString());
+                    RadioButtonList rblPC1Qs = (RadioButtonList)PlaceHolder1.FindControl("uds" + value.ScreeningCategoryId.ToString());
                     if (rblPC1Qs != null)
                     {
                         rblPC1Qs.SelectedValue = value.ScreeningValueId.ToString();
                     }
-                    RadioButtonList rblPC2Qs = (RadioButtonList)PlaceHolder2.FindControl(value.ScreeningCategoryId.ToString());
+                    RadioButtonList rblPC2Qs = (RadioButtonList)PlaceHolder2.FindControl("uds" + value.ScreeningCategoryId.ToString());
                     if (rblPC2Qs != null)
                     {
                         rblPC2Qs.SelectedValue = value.ScreeningValueId.ToString();
@@ -135,7 +135,7 @@ namespace IQCare.Web.CCC.UC.Depression
             {
                 foreach (var value in notesList)
                 {
-                    TextBox ntb = (TextBox)PlaceHolder2.FindControl(value.NotesCategoryId.ToString());
+                    TextBox ntb = (TextBox)PlaceHolder2.FindControl("uds" + value.NotesCategoryId.ToString());
                     if (ntb != null)
                     {
                         ntb.Text = value.ClinicalNotes;

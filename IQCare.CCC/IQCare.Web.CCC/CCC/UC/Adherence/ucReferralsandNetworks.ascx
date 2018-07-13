@@ -7,39 +7,8 @@
 					<label class="control-label pull-left"><span class="text-primary">Referrals and Networks</span></label>
 				</div>
 
-				<div class="col-md-12 form-group">
-					<div class="row">
-						<div class="col-md-10 text-left">
-							<label>Has the patient been referred to other other services? [Nutrition, psychosocial support services, other medical clinics, substance us treatment, etc]</label>
-						</div>
-						<div class="col-md-2">
-							<asp:RadioButtonList ClientIDMode="Static" ID="rbPatientReferred" RepeatColumns="2" RepeatDirection="Horizontal" runat="server" CssClass="rbList" CellPadding="3" CellSpacing="2"> 
-                                <asp:ListItem Text="Yes" Value="0"/>
-                                <asp:ListItem Text="No" Value="1"/>
-                            </asp:RadioButtonList>
-						</div>
-					</div>
-                    <hr />
-					<div class="row">
-						<div class="col-md-10 text-left">
-							<label>Did he/she attend the appointments?</label>
-						</div>
-						<div class="col-md-2">
-							<asp:RadioButtonList ClientIDMode="Static" ID="rbAppointmentsAttended" RepeatColumns="2" RepeatDirection="Horizontal" runat="server" CssClass="rbList" CellPadding="3" CellSpacing="2"> 
-                                <asp:ListItem Text="Yes" Value="0"/>
-                                <asp:ListItem Text="No" Value="1"/>
-                            </asp:RadioButtonList>
-						</div>
-					</div>
-                    <hr />
-                    <div class="row">
-                        <div class="col-md-12 text-left">
-							<label>What was the experience? Do the referrals need to be re-organized?</label>
-						</div>
-                        <div class="col-md-12">
-                            <asp:TextBox id="tbExperience" ClientIDMode="Static" TextMode="multiline" Rows="3" runat="server" class="form-control input-sm" width="100%"/>
-                        </div>
-                    </div>
+				<div class="col-md-12 form-group" id="referralsandnetworks">
+					<asp:PlaceHolder ID="QuestionsPlaceholder" runat="server"></asp:PlaceHolder>
 				</div>
 			</div>
 		</div>
@@ -49,61 +18,59 @@
     $("#myWizard").on("actionclicked.fu.wizard", function (evt, data) {
         var currentStep = data.step;
         if (currentStep == 4) {
-            var refId = <%=RefId%>;
-            if (refId > 0) {
-                updateAdherenceReferrals(refId);
-            }
-            else {
-                addAdherenceReferrals();
-            }
+            addUpdateRNScreeningData();
         }
     });
 
-    function updateAdherenceReferrals(refId) {
-        var refId = refId;
-        var patientId = <%=PatientId%>;
-        var userId = <%=userId%>;
-        var patientMasterVisitId = <%=PatientMasterVisitId%>;
-        var patientReferred = $("input[name='<%=rbPatientReferred.UniqueID %>']:checked").val();
-        var appointmentsAttended = $("input[name='<%=rbAppointmentsAttended.UniqueID %>']:checked").val();
-        var experience = $("#<%=tbExperience.ClientID%>").val();
-        $.ajax({
-            type: "POST",
-            url: "../WebService/AdherenceService.asmx/addAdherenceReferrals",
-            data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','createdBy':'" + userId + "','patientReferred': '" + patientReferred + "'," +
-            "'appointmentsAttended': '" + appointmentsAttended + "','experience':'" + experience + "','RefId':'" + refId + "'}",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (response) {
-                toastr.success(response.d, "Referrals and Networks saved");
-            },
-            error: function (response) {
-                toastr.error(JSON.stringify(response));
-            }
+    function addUpdateRNScreeningData()
+    {
+        var error = 0;
+        $("#referralsandnetworks input[type=radio]:checked").each(function () {
+            alert("Saving");
+            var screeningValue = $(this).val();
+            var screeningCategory = $(this).closest("table").attr('id');
+            var screeningType = <%=screenTypeId%>;
+            var patientId = <%=PatientId%>;
+            var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            var userId = <%=userId%>;
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientScreeningService.asmx/AddUpdateScreeningData",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','screeningType':'" + screeningType + "','screeningCategory':'" + screeningCategory + "','screeningValue':'" + screeningValue + "','userId':'" + userId + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    error = 0;
+                },
+                error: function (response) {
+                    error = 1;
+                }
+            });
         });
-    }
-
-    function addAdherenceReferrals() {
-        var patientId = <%=PatientId%>;
-        var userId = <%=userId%>;
-        var patientMasterVisitId = <%=PatientMasterVisitId%>;
-        var patientReferred = $("input[name='<%=rbPatientReferred.UniqueID %>']:checked").val();
-        var appointmentsAttended = $("input[name='<%=rbAppointmentsAttended.UniqueID %>']:checked").val();
-        var experience = $("#<%=tbExperience.ClientID%>").val();
-        $.ajax({
-            type: "POST",
-            url: "../WebService/AdherenceService.asmx/addAdherenceReferrals",
-            data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','createdBy':'" + userId + "','patientReferred': '" + patientReferred + "'," +
-            "'appointmentsAttended': '" + appointmentsAttended + "','experience':'" + experience + "'}",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (response) {
-                toastr.success(response.d, "Referrals and Networks saved");
-            },
-            error: function (response) {
-                toastr.error(JSON.stringify(response));
-            }
+        $("#referralsandnetworks textarea").each(function () {
+            var categoryId = $(this).attr('id');
+            var patientId = <%=PatientId%>;
+            var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            var clinicalNotes = $(this).val();
+            var serviceAreaId = 203;
+            var userId = <%=userId%>;
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientClinicalNotesService.asmx/addPatientClinicalNotes",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','serviceAreaId':'" + serviceAreaId + "','notesCategoryId':'" + categoryId + "','clinicalNotes':'" + clinicalNotes + "','userId':'" + userId + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    error = 0;
+                },
+                error: function (response) {
+                    error = 1;
+                }
+            });
         });
+        if (error == 0) {
+            toastr.success("Referrals and Networks Saved");
+        }
     }
 
     jQuery(function ($) {

@@ -7,68 +7,8 @@
 					<label class="control-label pull-left"><span class="text-primary">Understanding of HIV infection and ART</span></label>
 				</div>
 
-				<div class="col-md-12 form-group">
-					<div class="row">
-						<div class="col-md-10 text-left">
-							<label>1. Understands how HIV affects the body and risk of transmission to sexual partners and 
-                                children during pregnancy and breastfeeding</label>
-						</div>
-						<div class="col-md-2 text-right">
-							<asp:RadioButtonList ClientIDMode="Static" ID="rbUnderstandHIVEffects" RepeatColumns="2" RepeatDirection="Horizontal" runat="server" CssClass="rbList" CellPadding="3" CellSpacing="2"> 
-                                <asp:ListItem Text="Yes" Value="0"/>
-                                <asp:ListItem Text="No" Value="1"/>
-                            </asp:RadioButtonList>
-						</div>
-                        <div class="clearfix"></div>
-					</div>
-                    <hr />
-					<div class="row">
-						<div class="col-md-10 text-left">
-							<label>2. Understands ART and how it works</label>
-						</div>
-						<div class="col-md-2 text-right">
-							<asp:RadioButtonList ClientIDMode="Static" ID="rbUnderstandART" RepeatColumns="2" RepeatDirection="Horizontal" runat="server" CssClass="rbList" CellPadding="3" CellSpacing="2"> 
-                                <asp:ListItem Text="Yes" Value="0"/>
-                                <asp:ListItem Text="No" Value="1"/>
-                            </asp:RadioButtonList>
-						</div>
-					</div>
-                    <hr />
-                    <div class="row">
-						<div class="col-md-10 text-left">
-							<label>3. Understands side effects and what to do in case of side effects</label>
-						</div>
-						<div class="col-md-2 text-right">
-							<asp:RadioButtonList ClientIDMode="Static" ID="rbUnderstandSideEffects" RepeatColumns="2" RepeatDirection="Horizontal" runat="server" CssClass="rbList" CellPadding="3" CellSpacing="2"> 
-                                <asp:ListItem Text="Yes" Value="0"/>
-                                <asp:ListItem Text="No" Value="1"/>
-                            </asp:RadioButtonList>
-						</div>
-					</div>
-                    <hr />
-                    <div class="row">
-						<div class="col-md-10 text-left">
-							<label>4. Understands benefits of adherence</label>
-						</div>
-						<div class="col-md-2 text-right">
-							<asp:RadioButtonList ClientIDMode="Static" ID="rbUnderstandAdherenceBenefits" RepeatColumns="2" RepeatDirection="Horizontal" runat="server" CssClass="rbList" CellPadding="3" CellSpacing="2"> 
-                                <asp:ListItem Text="Yes" Value="0"/>
-                                <asp:ListItem Text="No" Value="1"/>
-                            </asp:RadioButtonList>
-						</div>
-					</div>
-                    <hr />
-                    <div class="row">
-						<div class="col-md-10 text-left">
-							<label>5. Understands consequences of non-adherence including drug resistance and treatment failure</label>
-						</div>
-						<div class="col-md-2 text-right">
-							<asp:RadioButtonList ClientIDMode="Static" ID="rbUnderstandConsequences" RepeatColumns="2" RepeatDirection="Horizontal" runat="server" CssClass="rbList" CellPadding="3" CellSpacing="2"> 
-                                <asp:ListItem Text="Yes" Value="0"/>
-                                <asp:ListItem Text="No" Value="1"/>
-                            </asp:RadioButtonList>
-						</div>
-					</div>
+				<div class="col-md-12 form-group" id="UnderstandingHIVInfection">
+					<asp:PlaceHolder ID="QuestionsPlaceholder" runat="server"></asp:PlaceHolder>
 				</div>
 			</div>
 		</div>
@@ -78,65 +18,38 @@
     $("#myWizard").on("actionclicked.fu.wizard", function (evt, data) {
         var currentStep = data.step;
         if (currentStep == 1) {
-            var uId = <%=understandingId%>;
-            if (uId > 0) {
-                updateUnderstandHIV(uId);
-            }
-            else {
-                addUnderstandHIV();
-            }
+            addUpdateUHScreeningData();
         }
     });
 
-    function addUnderstandHIV() {
-        var patientId = <%=PatientId%>;
-        var userId = <%=userId%>;
-        var patientMasterVisitId = <%=PatientMasterVisitId%>;
-        var understandHIVEffects = $("input[name='<%=rbUnderstandHIVEffects.UniqueID %>']:checked").val();
-        var understandART = $("input[name='<%=rbUnderstandART.UniqueID %>']:checked").val();
-        var understandSideEffects = $("input[name='<%=rbUnderstandSideEffects.UniqueID %>']:checked").val();
-        var understandAdherenceBenefits = $("input[name='<%=rbUnderstandAdherenceBenefits.UniqueID %>']:checked").val();
-        var understandConsequences = $("input[name='<%=rbUnderstandConsequences.UniqueID %>']:checked").val();
-        $.ajax({
-            type: "POST",
-            url: "../WebService/AdherenceService.asmx/addUnderstandHIV",
-            data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','createdBy':'" + userId + "','understandHIVEffects': '" + understandHIVEffects + "'," +
-            "'understandART': '" + understandART + "','understandSideEffects':'" + understandSideEffects + "','understandAdherenceBenefits':'" + understandAdherenceBenefits + "','understandConsequences':'" + understandConsequences + "'}",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (response) {
-                toastr.success(response.d, "Understanding HIV infection and ART saved successfully");
-            },
-            error: function (response) {
-                toastr.error(JSON.stringify(response));
-            }
+    function addUpdateUHScreeningData() {
+        var error = 0;
+        $("#UnderstandingHIVInfection input[type=radio]:checked").each(function () {
+            alert("Saving");
+            var screeningValue = $(this).val();
+            var screeningCategory = $(this).closest("table").attr('id');
+            var screeningType = <%=screenTypeId%>;
+            var patientId = <%=PatientId%>;
+            var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            var userId = <%=userId%>;
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientScreeningService.asmx/AddUpdateScreeningData",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','screeningType':'" + screeningType + "','screeningCategory':'" + screeningCategory + "','screeningValue':'" + screeningValue + "','userId':'" + userId + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    error = 0;
+                },
+                error: function (response) {
+                    error = 1;
+                }
+            });
+            alert("Done");
         });
-    }
-
-    function updateUnderstandHIV(uId) {
-        var uId = uId;
-        var patientId = <%=PatientId%>;
-        var userId = <%=userId%>;
-        var patientMasterVisitId = <%=PatientMasterVisitId%>;
-        var understandHIVEffects = $("input[name='<%=rbUnderstandHIVEffects.UniqueID %>']:checked").val();
-        var understandART = $("input[name='<%=rbUnderstandART.UniqueID %>']:checked").val();
-        var understandSideEffects = $("input[name='<%=rbUnderstandSideEffects.UniqueID %>']:checked").val();
-        var understandAdherenceBenefits = $("input[name='<%=rbUnderstandAdherenceBenefits.UniqueID %>']:checked").val();
-        var understandConsequences = $("input[name='<%=rbUnderstandConsequences.UniqueID %>']:checked").val();
-        $.ajax({
-            type: "POST",
-            url: "../WebService/AdherenceService.asmx/addUnderstandHIV",
-            data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','createdBy':'" + userId + "','understandHIVEffects': '" + understandHIVEffects + "'," +
-            "'understandART': '" + understandART + "','understandSideEffects':'" + understandSideEffects + "','understandAdherenceBenefits':'" + understandAdherenceBenefits + "','understandConsequences':'" + understandConsequences + "','uId':'" + uId + "'}",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (response) {
-                toastr.success(response.d, "Understanding HIV infection and ART updated");
-            },
-            error: function (response) {
-                toastr.error("Understanding HIV infection and ART not updated");
-            }
-        });
+        if (error == 0) {
+            toastr.success("Understanding of HIV infection and ART Saved");
+        }
     }
 
     jQuery(function ($) {

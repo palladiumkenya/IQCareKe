@@ -10,42 +10,60 @@
 namespace IQCare.Web.CCC.UC.Adherence {
     
     
-    public partial class ucScreening {
+    public partial class ucAdherenceBarriersHome {
         
         /// <summary>
-        /// PHDepressionTotal control.
+        /// HIVAwareness control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder PHDepressionTotal;
+        protected global::IQCare.Web.CCC.UC.Adherence.ucHIVAwareness HIVAwareness;
         
         /// <summary>
-        /// PHDepressionSeverity control.
+        /// Understanding control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder PHDepressionSeverity;
+        protected global::IQCare.Web.CCC.UC.Adherence.ucUnderstanding Understanding;
         
         /// <summary>
-        /// PHRecommendedManagement control.
+        /// DailyRoutine control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder PHRecommendedManagement;
+        protected global::IQCare.Web.CCC.UC.Adherence.ucDailyRoutine DailyRoutine;
         
         /// <summary>
-        /// DepressionScreeningPanel control.
+        /// PsychosocialCircumstances control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::IQCare.Web.CCC.UC.Depression.ucUpdateDepressionScreening DepressionScreeningPanel;
+        protected global::IQCare.Web.CCC.UC.Adherence.ucPsychosocialCircumstances PsychosocialCircumstances;
+        
+        /// <summary>
+        /// Screening control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::IQCare.Web.CCC.UC.Adherence.ucScreening Screening;
+        
+        /// <summary>
+        /// ReferralsandNetworks control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::IQCare.Web.CCC.UC.Adherence.ucReferralsandNetworks ReferralsandNetworks;
     }
 }

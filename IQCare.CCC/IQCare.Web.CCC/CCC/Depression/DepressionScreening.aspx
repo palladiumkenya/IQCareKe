@@ -8,7 +8,7 @@
             <div class="wizard" data-initialize="wizard" id="myWizard">
                 <div class="steps-container">
                     <ul class="steps">
-					    <li data-step="1" id="dsSectionOne" data-name="template" class="active complete">
+					    <li data-step="1" id="depressiondatastep" data-name="template" class="active complete">
 						    <span class="badge">1</span>Depression Screening
 							<span class="chevron"></span>
 					    </li>

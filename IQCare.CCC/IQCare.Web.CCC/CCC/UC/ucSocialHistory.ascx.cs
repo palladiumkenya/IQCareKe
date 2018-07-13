@@ -11,8 +11,6 @@ using Entities.CCC.Lookup;
 using IQCare.CCC.UILogic.Screening;
 using Entities.CCC.Screening;
 using System.Web.Script.Serialization;
-using Entities.CCC.Screening;
-using IQCare.CCC.UILogic.Screening;
 
 
 namespace IQCare.Web.CCC.UC

@@ -13,22 +13,13 @@ namespace IQCare.Web.CCC.UC.Depression {
     public partial class ucDepressionScreening {
         
         /// <summary>
-        /// rbBotheredbyHopeless control.
+        /// PlaceHolder2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rbBotheredbyHopeless;
-        
-        /// <summary>
-        /// rbBotheredByLittleInterest control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rbBotheredByLittleInterest;
+        protected global::System.Web.UI.WebControls.PlaceHolder PlaceHolder2;
         
         /// <summary>
         /// PlaceHolder1 control.
@@ -40,30 +31,30 @@ namespace IQCare.Web.CCC.UC.Depression {
         protected global::System.Web.UI.WebControls.PlaceHolder PlaceHolder1;
         
         /// <summary>
-        /// HeartRate control.
+        /// PHDepressionTotal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox HeartRate;
+        protected global::System.Web.UI.WebControls.PlaceHolder PHDepressionTotal;
         
         /// <summary>
-        /// TextBox1 control.
+        /// PHDepressionSeverity control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.PlaceHolder PHDepressionSeverity;
         
         /// <summary>
-        /// AgefoZ control.
+        /// PHRecommendedManagement control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox AgefoZ;
+        protected global::System.Web.UI.WebControls.PlaceHolder PHRecommendedManagement;
     }
 }

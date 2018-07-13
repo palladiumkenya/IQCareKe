@@ -5,6 +5,9 @@ using System.Web;
 using System.Web.Services;
 using IQCare.CCC.UILogic.Encounter;
 using Entities.CCC.Encounter;
+using Entities.CCC.Lookup;
+using IQCare.CCC.UILogic;
+using System.Web.Script.Serialization;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -40,6 +43,7 @@ namespace IQCare.Web.CCC.WebService
             return Msg;
         }
 
+        [WebMethod]
         public List<PatientClinicalNotes> getPatientClinicalNotesByCategory(int patientId,int notesCategoryId)
         {
             try
@@ -52,5 +56,42 @@ namespace IQCare.Web.CCC.WebService
                 throw;
             }
         }
+        [WebMethod]
+        public string getDepressionSeverityNotes(int depressionFrequency)
+        {
+            string depressionSeverity = "";
+            string jsonObject = "[]";
+            jsonObject = LookupLogic.GetLookupItemByName("DepressionSeverity");
+            JavaScriptSerializer ser = new JavaScriptSerializer();
+            List<LookupItemView> lookupList = ser.Deserialize<List<LookupItemView>>(jsonObject);
+            foreach (var value in lookupList)
+            {
+                if (Convert.ToInt32(value.OrdRank) > depressionFrequency)
+                {
+                    break;
+                }
+                depressionSeverity = value.DisplayName;
+            }
+            return depressionSeverity;
+        }
+        [WebMethod]
+        public string getDepressionRMNotes(int depressionFrequency)
+        {
+            string recommendedManagement = "";
+            string jsonObject = "[]";
+            jsonObject = LookupLogic.GetLookupItemByName("RecommendedManagement");
+            JavaScriptSerializer ser = new JavaScriptSerializer();
+            List<LookupItemView> lookupList = ser.Deserialize<List<LookupItemView>>(jsonObject);
+            foreach (var value in lookupList)
+            {
+                if (Convert.ToInt32(value.OrdRank) > depressionFrequency)
+                {
+                    break;
+                }
+                recommendedManagement = value.DisplayName;
+            }
+            return recommendedManagement;
+        }
+        
     }
 }

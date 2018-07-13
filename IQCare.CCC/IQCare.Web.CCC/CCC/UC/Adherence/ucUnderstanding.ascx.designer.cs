@@ -13,48 +13,12 @@ namespace IQCare.Web.CCC.UC.Adherence {
     public partial class ucUnderstanding {
         
         /// <summary>
-        /// rbUnderstandHIVEffects control.
+        /// QuestionsPlaceholder control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rbUnderstandHIVEffects;
-        
-        /// <summary>
-        /// rbUnderstandART control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rbUnderstandART;
-        
-        /// <summary>
-        /// rbUnderstandSideEffects control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rbUnderstandSideEffects;
-        
-        /// <summary>
-        /// rbUnderstandAdherenceBenefits control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rbUnderstandAdherenceBenefits;
-        
-        /// <summary>
-        /// rbUnderstandConsequences control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rbUnderstandConsequences;
+        protected global::System.Web.UI.WebControls.PlaceHolder QuestionsPlaceholder;
     }
 }

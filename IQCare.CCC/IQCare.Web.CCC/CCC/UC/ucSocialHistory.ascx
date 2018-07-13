@@ -22,8 +22,6 @@
 		    </div>
             <div class="col-md-12">
                 <asp:PlaceHolder ID="PHSocialHistoryNotes" runat="server"></asp:PlaceHolder>
-                <%--<label for="taSocialHistoryNotes" class="control-label pull-left">Social History Notes</label>
-                <asp:TextBox id="tbSocialHistoryNotes" ClientIDMode="Static" TextMode="multiline" Rows="3" runat="server" class="form-control input-sm" width="100%"/>--%>
             </div>
         </div>
 	</div>

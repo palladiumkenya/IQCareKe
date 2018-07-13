@@ -7,45 +7,63 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace IQCare.Web.CCC.UC.Adherence {
+namespace IQCare.Web.CCC.UC.Depression {
     
     
-    public partial class ucScreening {
+    public partial class ucCAGEAID {
         
         /// <summary>
-        /// PHDepressionTotal control.
+        /// PHCageFrequency control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder PHDepressionTotal;
+        protected global::System.Web.UI.WebControls.PlaceHolder PHCageFrequency;
         
         /// <summary>
-        /// PHDepressionSeverity control.
+        /// PHCAGEAlcoholScreening control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder PHDepressionSeverity;
+        protected global::System.Web.UI.WebControls.PlaceHolder PHCAGEAlcoholScreening;
         
         /// <summary>
-        /// PHRecommendedManagement control.
+        /// PHCAGEAIDScore control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder PHRecommendedManagement;
+        protected global::System.Web.UI.WebControls.PlaceHolder PHCAGEAIDScore;
         
         /// <summary>
-        /// DepressionScreeningPanel control.
+        /// PHRisk control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::IQCare.Web.CCC.UC.Depression.ucUpdateDepressionScreening DepressionScreeningPanel;
+        protected global::System.Web.UI.WebControls.PlaceHolder PHRisk;
+        
+        /// <summary>
+        /// PHCageSmokingScreening control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder PHCageSmokingScreening;
+        
+        /// <summary>
+        /// PHCageNotes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder PHCageNotes;
     }
 }
