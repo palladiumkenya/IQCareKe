@@ -68,7 +68,8 @@ namespace IQCare.Web.CCC.WebService
             {
                 PatientEncounterManager patientEncounterManager=new PatientEncounterManager();
                 int facilityId = Convert.ToInt32(Session["AppPosID"]);
-               
+                int createdBy = Session["AppUserID"] != null ? Convert.ToInt32(Session["AppUserID"]) : 0;
+
                 PatientVital patientVital = new PatientVital()
                 {
                     PatientId = patientId,
@@ -88,6 +89,7 @@ namespace IQCare.Web.CCC.WebService
                     BMIZ = bmiz,
                     WeightForAge = weightForAge,
                     WeightForHeight = weightForHeight,
+                    CreatedBy = createdBy
                 };
                 var vital = new PatientVitalsManager();
                 Result = vital.AddPatientVitals(patientVital, facilityId);
