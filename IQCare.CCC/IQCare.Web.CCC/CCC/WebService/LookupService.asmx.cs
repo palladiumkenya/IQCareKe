@@ -197,7 +197,7 @@ namespace IQCare.Web.CCC.WebService
                     ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
             try
             {
-                return mgr.GetLookItemByGroup("KeyPopulation");
+                return mgr.GetLookItemByGroup(groupName);
             }
             catch (Exception e)
             {
