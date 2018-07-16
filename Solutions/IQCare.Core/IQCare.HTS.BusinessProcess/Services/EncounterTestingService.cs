@@ -148,7 +148,7 @@ namespace IQCare.HTS.BusinessProcess.Services
             }
         }
 
-        public async Task<Referral> addReferral(int personId, int fromFacilityId, int serviceAreaId, int referredTo, int referralReason, int userId, DateTime dateToBeEnrolled)
+        public async Task<Referral> AddReferral(int personId, int fromFacilityId, int serviceAreaId, int referredTo, int referralReason, int userId, DateTime dateToBeEnrolled)
         {
             try
             {
@@ -601,6 +601,34 @@ namespace IQCare.HTS.BusinessProcess.Services
                 await _unitOfWork.SaveAsync();
 
                 return patientMasterVisit;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public async Task<List<Facility>> GetCurrentFacility()
+        {
+            try
+            {
+                var facility = await _unitOfWork.Repository<Facility>().Get(x => x.DeleteFlag == 0 && x.Preferred == 1).ToListAsync();
+                return facility;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public async Task<List<FacilityList>> SearchFacility(string facilityName)
+        {
+            try
+            {
+                var facility = await _unitOfWork.Repository<FacilityList>()
+                    .Get(x => x.Name.ToLower().Contains(facilityName.ToLower())).ToListAsync();
+
+                return facility;
             }
             catch (Exception e)
             {

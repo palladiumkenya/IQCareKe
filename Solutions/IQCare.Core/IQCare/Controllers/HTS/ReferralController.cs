@@ -22,8 +22,20 @@ namespace IQCare.Controllers.HTS
         {
             var response = await _mediator.Send(command, Request.HttpContext.RequestAborted);
             if (response.IsValid)
-                return Ok();
-            return BadRequest();
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+        [HttpGet("getClientReferral/{personId}")]
+        public async Task<IActionResult> Get(int personId)
+        {
+            var response = await _mediator.Send(new GetClientReferralCommand()
+            {
+                PersonId = personId
+            }, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
         }
 
         [HttpPost("linkpatient")]

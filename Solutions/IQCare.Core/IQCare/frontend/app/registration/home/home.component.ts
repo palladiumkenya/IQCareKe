@@ -14,7 +14,6 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class HomeComponent implements OnInit {
     patientId: number;
-    countPositive: number;
     isPositive: boolean = false;
 
     displayedColumns = ['encounterDate', 'testType', 'provider', 'resultOne',
@@ -30,6 +29,13 @@ export class HomeComponent implements OnInit {
         store.pipe(select('app')).subscribe(res => {
             localStorage.setItem('store', JSON.stringify(res));
         });
+
+        store.pipe(select('app' )).subscribe(res => {
+            this.isPositive = res['isPositive'];
+        });
+
+        localStorage.removeItem('editEncounterId');
+        localStorage.removeItem('viewEncounterId');
     }
     ngOnInit() {
         this.patientId = JSON.parse(localStorage.getItem('patientId'));
@@ -52,6 +58,12 @@ export class HomeComponent implements OnInit {
         this.zone.run(() => { this.router.navigate(['/hts'], { relativeTo: this.route }); });
     }
 
+    onView(element) {
+        console.log(element);
+
+        localStorage.setItem('viewEncounterId', element['encounterId']);
+        this.zone.run(() => { this.router.navigate(['/hts/viewencounter'], { relativeTo: this.route }); });
+    }
 }
 
 

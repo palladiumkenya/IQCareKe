@@ -56,6 +56,7 @@
     <Content Include="CCC\Encounter\EncounterHistory.aspx" />
     <Content Include="CCC\Encounter\LabOrder.aspx" />
     <Content Include="CCC\Encounter\PharmacyPrescription.aspx" />
+    <Content Include="CCC\IL\MessageViewer.aspx" />
     <Content Include="CCC\Patient\PatientCareEnded.aspx" />
     <Content Include="CCC\Patient\PatientConsent.aspx" />
     <Content Include="CCC\Scripts\css\bootstrap-datetimepicker.css" />
@@ -454,6 +455,13 @@
     </Compile>
     <Compile Include="CCC\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\IL\MessageViewer.aspx.cs">
+      <DependentUpon>MessageViewer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\IL\MessageViewer.aspx.designer.cs">
+      <DependentUpon>MessageViewer.aspx</DependentUpon>
     </Compile>
     <Compile Include="CCC\Patient\PatientCareEnded.aspx.cs">
       <DependentUpon>PatientCareEnded.aspx</DependentUpon>

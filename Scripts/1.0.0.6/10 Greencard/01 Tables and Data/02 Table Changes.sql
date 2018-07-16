@@ -11,14 +11,18 @@ BEGIN
 END
 GO
 
-If Not Exists(Select * from sys.columns where Name = N'Status' AND Object_ID = Object_ID(N'patientencounter'))
+If NOT Exists(Select * from sys.columns where Name = N'Status' AND Object_ID = Object_ID(N'PatientEncounter'))
 BEGIN
-	ALTER TABLE patientencounter ADD Status int
+	ALTER TABLE patientEncounter ADD Status int NOT NULL default 0
 END
 GO
 
-EXEC sp_RENAME 'dbo.patientencounter.createby' , 'createdby', 'COLUMN'
-Go
+
+If Exists(Select * from sys.columns where Name = N'CreateBy' AND Object_ID = Object_ID(N'PatientEncounter'))
+BEGIN
+	EXEC sp_rename 'patientEncounter.Createby', 'CreatedBy', 'COLUMN' 
+END
+GO
 ---
 --LogMessage Column
 ---
@@ -39,21 +43,15 @@ BEGIN
 END
 GO
 
-If Exists(Select * from sys.columns where Name = N'CreateBy' AND Object_ID = Object_ID(N'PatientEncounter'))
-BEGIN
-	EXEC sp_rename 'patientEncounter.Createby', 'CreatedBy', 'COLUMN' 
-END
-GO
-
-If NOT Exists(Select * from sys.columns where Name = N'Status' AND Object_ID = Object_ID(N'PatientEncounter'))
-BEGIN
-	ALTER TABLE patientEncounter ADD Status int NOT NULL default 0
-END
-GO
-
 If NOT Exists(Select * from sys.columns where Name = N'AuditData' AND Object_ID = Object_ID(N'ord_visit'))
 BEGIN
 	ALTER TABLE ord_visit ADD AuditData XML
+END
+GO
+
+If Exists(Select * from sys.columns where Name = N'PlacerValue' AND Object_ID = Object_ID(N'Interop_PlacerValues'))
+BEGIN
+	Alter table Interop_PlacerValues Alter Column PlacerValue varchar(max)
 END
 GO
 

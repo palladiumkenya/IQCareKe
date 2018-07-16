@@ -223,7 +223,7 @@ namespace IQCare.Web.Pharmacy
 
         private bool IsPaperless
         {
-            get { return Session["Paperless"].ToString() == "1"; }
+            get { return Session["Paperless"] !=null && Session["Paperless"].ToString() == "1"; }
         }
 
         private bool PMSCMOn
@@ -464,13 +464,27 @@ namespace IQCare.Web.Pharmacy
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         protected void btnsave_Click(object sender, EventArgs e)
         {
+            if (btnsave.CommandName == $"MODIFYPRESCRIPTION{this.OrderId}")
+            {
+                Session["EditPharmacyPK"] = this.OrderId;
+                Session["DispensedFlag"] = 1;
+                Guid g = Guid.NewGuid();
+                string theUrl = string.Format("{0}&PatientId={1}&key={2}", "./Requests/EditPharmacyPrescription.aspx?name=modify", Session["PatientId"].ToString(),
+                    g.ToString());
+                HttpContext.Current.ApplicationInstance.CompleteRequest();
+                Response.Redirect(theUrl, false);
+                
+                return;
+            }
             if (Request.QueryString["name"] == "Delete")
             {
                 //DeleteForm();
                 //******* show the message to the user*******//
+
+
                 string msgString;
 
-                msgString = "Are you sure you want to delete Adult Pharmacy form? \\n";
+                msgString = "Are you sure you want to delete this Pharmacy form? \\n";
 
                 string script = "<script language = 'javascript' defer ='defer' id = 'aftersavefunction'>\n";
                 script += "var ans;\n";
@@ -895,11 +909,27 @@ namespace IQCare.Web.Pharmacy
                     FillOldData(panelVaccine, dr, false);
                 }
                 this.OrderStatus = Convert.ToInt32(theExistDS.Tables[2].Rows[0]["OrderStatus"]);
-
-                if (this.OrderStatus > 1)
+                if (Request.QueryString["name"] == "Delete")
+                {
+                    btnsave.Text = "Delete";
+                    btnsave.CommandName = $"DELETEPRESCRIPTION{this.OrderId}";
+                }
+               else if (this.OrderStatus > 1)
                 {
                     Session["DispensedFlag"] = 1;
-                    btnsave.Enabled = false;
+                    if (CanEdit)
+                    {
+                        btnsave.Enabled = true;
+                        btnsave.Text = "Modify Prescription";
+                        btnsave.CommandName = $"MODIFYPRESCRIPTION{this.OrderId}";
+                        btnsave.CommandArgument = this.OrderId.ToString();
+                        
+                    }
+                    else
+                    {
+                       
+                        btnsave.Enabled = false;
+                    }
                 }
                 else if (this.OrderId > 0 && this.OrderStatus == 1)
                 {
@@ -914,21 +944,13 @@ namespace IQCare.Web.Pharmacy
                 IQCareMsgBox.Show("C1#", theBuilder, this);
             }
         }
-
+ AuthenticationManager Authentiaction = new AuthenticationManager();
         protected bool CanEdit
         {
             get
             {
-                AuthenticationManager Authentiaction = new AuthenticationManager();
-                if ((Authentiaction.HasFunctionRight(ApplicationAccess.AdultPharmacy, FunctionAccess.Update, (DataTable)Session["UserRight"]) == false))
-                {
-                    return (this.OrderId > 1 && (this.UserId == this.PrescribedBy || this.UserId == this.SignatureBy) && OrderStatus == 1) ||
-                        (this.OrderId > 1 && this.OrderStatus == 1 && PMSCMOn == false);
-                }
-                else
-                {
-                    return false;
-                }
+                return (Authentiaction.HasFunctionRight(ApplicationAccess.AdultPharmacy, FunctionAccess.Update, (DataTable)Session["UserRight"]));
+                
             }
         }
 
@@ -1060,6 +1082,7 @@ namespace IQCare.Web.Pharmacy
                 if (Request.QueryString["name"] == "Delete")
                 {
                     btnsave.Text = "Delete";
+                    btnsave.CommandName = "DELETEPRESCRIPTION";
                 }
                 Init_Form();
                 string strDispensedBy = this.DispensedBy > 0 ? this.DispensedBy.ToString() : "";
@@ -1132,12 +1155,12 @@ namespace IQCare.Web.Pharmacy
                     txtautoDrugName.Enabled = false;
                 }
             }
-            if (Session["Paperless"].ToString() == "0")
+            if (!IsPaperless)
             {
                 labelForDispensedBy.Attributes.Add("Class", "required");
                 lbldispensedbydate.Attributes.Add("Class", "required");
             }
-            else if (Session["Paperless"].ToString() == "1" && Session["SCMModule"] == null) //pmscm is off, paperless on - enable drug drug search, disable dispensedby. dispensedate if it is a new order
+            else if (IsPaperless && Session["SCMModule"] == null) //pmscm is off, paperless on - enable drug drug search, disable dispensedby. dispensedate if it is a new order
             {
                 //txtautoDrugName.Enabled = true;
                 if (Convert.ToInt32(Session["PatientVisitId"]) != 0)
@@ -2149,8 +2172,7 @@ namespace IQCare.Web.Pharmacy
         /// </summary>
         private void Authenticate()
         {
-            /***************** Check For User Rights ****************/
-            AuthenticationManager Authentiaction = new AuthenticationManager();
+            
             if (Authentiaction.HasFunctionRight(ApplicationAccess.AdultPharmacy, FunctionAccess.Print, (DataTable)Session["UserRight"]) == false)
             {
                 btnPrint.Enabled = false;
@@ -3378,46 +3400,7 @@ namespace IQCare.Web.Pharmacy
             IQCareUtils theUtils = new IQCareUtils();
             theDSXML.ReadXml(Server.MapPath("..\\XMLFiles\\AllMasters.con"));
 
-            //if (Convert.ToInt32(Session["PatientVisitId"]) == 0)
-            //{
-            /*if (theDSXML.Tables["Users"] != null)
-            {
-                theDV = new DataView(theDSXML.Tables["Users"]);
-                if (theDV.Table != null)
-                {
-                    if (Convert.ToInt32(Session["PatientVisitId"]) == 0)
-                    {
-                        theDV.RowFilter = "DeleteFlag = 0 And EmployeeID > 0";
-                    }
-                    theDT = (DataTable)theUtils.CreateTableFromDataView(theDV);
-
-                    theBindMgr.BindCombo(ddlPharmOrderedbyName, theDT, "Names", "UserId", "",Session["AppUserId"].ToString());
-                    string strDispensedBy = "";
-                    if (Session["SCMModule"] == null)
-                    {
-                        strDispensedBy = Session["AppUserId"].ToString();
-                    }
-                    else
-                    {
-                        theDT.DefaultView.RowFilter = "Names = 'Select'";
-                    }
-                    theBindMgr.BindCombo(ddlDispensedBy, theDT.DefaultView.ToTable(), "Names", "UserId", "", strDispensedBy);
-                }
-                theDV = new DataView(theDSXML.Tables["Users"]);
-
-                if (theDV.Table != null)
-                {
-                    theDT = (DataTable)theUtils.CreateTableFromDataView(theDV);
-                    theDV = new DataView(theDT);
-                    string rowFilter = "UserId = " + Session["AppUserId"].ToString();
-                    theDV.RowFilter = rowFilter;
-                    if (theDV.Count > 0)
-                        theDT = theUtils.CreateTableFromDataView(theDV);
-                    theBindMgr.BindCombo(ddlPharmSignature, theDT, "Names", "UserId", "", Session["AppUserId"].ToString());
-                    theDV.Dispose();
-                    theDT.Clear();
-                }
-            }*/
+            
             if (theDSXML.Tables["Mst_Decode"] != null)
             {
                 theDV = new DataView(theDSXML.Tables["Mst_Decode"]);
@@ -8840,6 +8823,8 @@ namespace IQCare.Web.Pharmacy
                 Response.Redirect(theUrl);
             }
         }
+
+    
 
         /// <summary>
         /// Transfers the validation.

@@ -7,7 +7,6 @@ namespace IQCare.Common.BusinessProcess.Commands.PersonCommand
     public class AddPatientCommand : IRequest<Result<AddPatientResponse>>
     {
         public int PersonId { get; set; }
-        public DateTime DateOfBirth { get; set; }
         public int UserId { get; set; }
     }
 

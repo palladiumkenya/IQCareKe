@@ -1,18 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Net.Http;
-using System.Text;
-using System.Web.Script.Serialization;
-using System.Web.UI.WebControls;
-using Application.Presentation;
-using AutoMapper;
+﻿using Application.Presentation;
 using Entities.CCC.PSmart;
 using Interface.WebApi;
 using IQCare.DTO.PSmart;
 using IQCare.WebApi.Logic.DtoMapping;
-using IQCare.WebApi.Logic.EntityMapper;
-using IQCare.WebApi.Logic.MappingEntities.PSmart;
+using System.Collections.Generic;
 using CARDDETAILS = Entities.CCC.PSmart.CARDDETAILS;
 using EXTERNALPATIENTID = Entities.CCC.PSmart.EXTERNALPATIENTID;
 using HIVTEST = Entities.CCC.PSmart.HIVTEST;
@@ -31,7 +22,7 @@ using PROVIDERDETAILS = Entities.CCC.PSmart.PROVIDERDETAILS;
 
 namespace IQCare.WebApi.Logic.PSmart
 {
-   public class PsmartShrManager 
+    public class PsmartShrManager 
     {
         private readonly IPsmartShrManager  _pSmartShrManager = (IPsmartShrManager)ObjectFactory.CreateInstance("BusinessProcess.WebApi.BPsmartShrManager, BusinessProcess.WebApi");
       //  private readonly IShrVersionManager _shrVersionManager  = (IShrVersionManager)ObjectFactory.CreateInstance("BusinessProcess.WebApi.BShrVersion, BusinessProcess.WebApi");

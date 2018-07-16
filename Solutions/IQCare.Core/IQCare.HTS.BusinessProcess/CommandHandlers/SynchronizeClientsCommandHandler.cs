@@ -11,6 +11,7 @@ using IQCare.HTS.BusinessProcess.Services;
 using IQCare.HTS.Infrastructure;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using Serilog;
 
 namespace IQCare.HTS.BusinessProcess.CommandHandlers
@@ -52,6 +53,12 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         string enrollmentNo = string.Empty;
                         int userId = request.CLIENTS[i].PATIENT_IDENTIFICATION.USER_ID;
 
+                        //Tracing
+                        var enrollmentTracing = await _unitOfWork.Repository<LookupItemView>()
+                            .Get(x => x.MasterName == "TracingType" && x.ItemName == "Enrolment").FirstOrDefaultAsync();
+                        int tracingType = enrollmentTracing.ItemId;
+                        string tracingRemarks = String.Empty;
+
                         for (int j = 0; j < request.CLIENTS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID.Count; j++)
                         {
                             if (request.CLIENTS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].ASSIGNING_AUTHORITY ==
@@ -70,14 +77,41 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                             }
                         }
 
+                        var afyaMobileMessage = await registerPersonService.AddAfyaMobileInbox(DateTime.Now, afyaMobileId, JsonConvert.SerializeObject(request), false);
+
                         //check if person already exists
                         var identifiers = await registerPersonService.getPersonIdentifiers(afyaMobileId, 10);
                         if (identifiers.Count > 0)
                         {
                             var registeredPerson = await registerPersonService.GetPerson(identifiers[0].PersonId);
-                            var updatedPerson = await registerPersonService.UpdatePerson(identifiers[0].PersonId, firstName, middleName, lastName, sex, dateOfBirth);
+                            if (registeredPerson != null)
+                            {
+                                var updatedPerson = await registerPersonService.UpdatePerson(identifiers[0].PersonId,
+                                    firstName, middleName, lastName, sex, dateOfBirth);
+                            }
+                            else
+                            {
+                                var person = await registerPersonService.RegisterPerson(firstName, middleName, lastName,
+                                    sex, dateOfBirth, userId);
+                            }
+                            
                             var patient = await registerPersonService.GetPatientByPersonId(identifiers[0].PersonId);
-                            var updatedPatient = await registerPersonService.UpdatePatient(patient.Id, dateOfBirth, facilityId);
+                            if (patient != null)
+                            {
+                                var updatedPatient = await registerPersonService.UpdatePatient(patient.Id, dateOfBirth, facilityId);
+                            }
+                            else
+                            {
+                                patient = await registerPersonService.AddPatient(identifiers[0].PersonId, userId, facilityId);
+
+                                // Person is enrolled state
+                                var enrollmentAppState = await registerPersonService.AddAppStateStore(identifiers[0].PersonId, patient.Id, 7, null, null);
+                                // Enroll patient
+                                var patientIdentifier = await registerPersonService.EnrollPatient(enrollmentNo, patient.Id, 2, userId, dateEnrollment);
+                                //Add PersonIdentifiers
+                                var personIdentifier = await registerPersonService.addPersonIdentifiers(identifiers[0].PersonId, 10, afyaMobileId, userId);
+                            }
+                            
                             var updatedPersonPopulations = await registerPersonService.UpdatePersonPopulation(identifiers[0].PersonId,
                                 request.CLIENTS[i].PATIENT_IDENTIFICATION.KEY_POP, userId);
                             if (!string.IsNullOrWhiteSpace(landmark))
@@ -111,7 +145,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
 
                                     //Get consent to testing
                                     int consentValue = request.CLIENTS[i].ENCOUNTER.PRE_TEST.CONSENT;
-                                    var consentType = await _unitOfWork.Repository<LookupItemView>().Get(x => x.MasterName == "ConsentType" && x.ItemName == "ConsentToListPartners").FirstOrDefaultAsync();
+                                    var consentType = await _unitOfWork.Repository<LookupItemView>().Get(x => x.MasterName == "ConsentType" && x.ItemName == "ConsentToBeTested").FirstOrDefaultAsync();
                                     int consentTypeId = consentType != null ? consentType.ItemId : 0;
 
                                     //Get TBStatus masterId
@@ -226,36 +260,52 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                             {
                                                 var htsEncounterResult = await encounterTestingService.addHtsEncounterResult(getHtsEncounter.Id, roundOneTestResult, roundTwoTestResult, finalResult);
                                             }
+                                        }
 
-                                            //Tracing
-                                            var enrollmentTracing = await _unitOfWork.Repository<LookupItemView>()
-                                                .Get(x => x.MasterName == "TracingType" && x.ItemName == "Enrolment").FirstOrDefaultAsync();
-                                            int tracingType = enrollmentTracing.ItemId;
-                                            string tracingRemarks = String.Empty;
+                                        for (int j = 0; request.CLIENTS[i].ENCOUNTER.TRACING != null && j < request.CLIENTS[i].ENCOUNTER.TRACING.Count; j++)
+                                        {
+                                            DateTime tracingDate = DateTime.ParseExact(request.CLIENTS[i].ENCOUNTER.TRACING[j].TRACING_DATE, "yyyyMMdd", null);
+                                            int mode = request.CLIENTS[i].ENCOUNTER.TRACING[j].TRACING_MODE;
+                                            int outcome = request.CLIENTS[i].ENCOUNTER.TRACING[j].TRACING_OUTCOME;
 
-                                            for (int j = 0; j < request.CLIENTS[i].ENCOUNTER.TRACING.Count; j++)
+                                            //add Client Tracing
+                                            var clientTracing = await encounterTestingService.addTracing(identifiers[0].PersonId, tracingType, tracingDate, mode, outcome,
+                                                providerId, tracingRemarks, null, null, null);
+                                        }
+
+                                        //check for linkage
+                                        if (request.CLIENTS[i].ENCOUNTER.LINKAGE != null)
+                                        {
+                                            DateTime dateLinkageEnrolled = DateTime.ParseExact(request.CLIENTS[i].ENCOUNTER.LINKAGE.DATE_ENROLLED, "yyyyMMdd", null);
+                                            string linkageCCCNumber = request.CLIENTS[i].ENCOUNTER.LINKAGE.CCC_NUMBER;
+                                            string linkageFacility = request.CLIENTS[i].ENCOUNTER.LINKAGE.FACILITY;
+                                            string healthWorker = request.CLIENTS[i].ENCOUNTER.LINKAGE.HEALTH_WORKER;
+                                            string carde = request.CLIENTS[i].ENCOUNTER.LINKAGE.CARDE;
+
+                                            //add Client Linkage
+                                            var clientLinkage = await encounterTestingService.addLinkage(identifiers[0].PersonId, dateLinkageEnrolled,
+                                                linkageCCCNumber, linkageFacility, providerId, healthWorker, carde);
+                                        }
+
+                                        if (request.CLIENTS[i].ENCOUNTER.REFERRAL != null)
+                                        {
+                                            //add referral
+                                            var facility = await encounterTestingService.GetCurrentFacility();
+                                            if (facility.Count > 0)
                                             {
-                                                DateTime tracingDate = DateTime.ParseExact(request.CLIENTS[i].ENCOUNTER.TRACING[j].TRACING_DATE, "yyyyMMdd", null);
-                                                int mode = request.CLIENTS[i].ENCOUNTER.TRACING[j].TRACING_MODE;
-                                                int outcome = request.CLIENTS[i].ENCOUNTER.TRACING[j].TRACING_OUTCOME;
+                                                DateTime dateToBeEnrolled = DateTime.ParseExact(request.CLIENTS[i].ENCOUNTER.REFERRAL.DATE_TO_BE_ENROLLED, "yyyyMMdd", null);
+                                                string facilityReferred = request.CLIENTS[i].ENCOUNTER.REFERRAL.REFERRED_TO;
 
-                                                //add Client Tracing
-                                                var clientTracing = await encounterTestingService.addTracing(identifiers[0].PersonId, tracingType, tracingDate, mode, outcome,
-                                                    providerId, tracingRemarks, null, null, null);
-                                            }
+                                                var referralReason = await _unitOfWork.Repository<LookupItemView>()
+                                                    .Get(x => x.MasterName == "ReferralReason" &&
+                                                              x.ItemName == "CCCEnrollment").ToListAsync();
+                                                var searchFacility = await encounterTestingService.SearchFacility(facilityReferred);
 
-                                            //check for linkage
-                                            if (request.CLIENTS[i].ENCOUNTER.LINKAGE != null)
-                                            {
-                                                DateTime dateLinkageEnrolled = DateTime.ParseExact(request.CLIENTS[i].ENCOUNTER.LINKAGE.DATE_ENROLLED, "yyyyMMdd", null);
-                                                string linkageCCCNumber = request.CLIENTS[i].ENCOUNTER.LINKAGE.CCC_NUMBER;
-                                                string linkageFacility = request.CLIENTS[i].ENCOUNTER.LINKAGE.FACILITY;
-                                                string healthWorker = request.CLIENTS[i].ENCOUNTER.LINKAGE.HEALTH_WORKER;
-                                                string carde = request.CLIENTS[i].ENCOUNTER.LINKAGE.CARDE;
-
-                                                //add Client Linkage
-                                                var clientLinkage = await encounterTestingService.addLinkage(identifiers[0].PersonId, dateLinkageEnrolled,
-                                                    linkageCCCNumber, linkageFacility, providerId, healthWorker, carde);
+                                                if (searchFacility.Count > 0)
+                                                {
+                                                    await encounterTestingService.AddReferral(identifiers[0].PersonId, facility[0].FacilityID, 2,
+                                                        referralReason[0].ItemId, Convert.ToInt32(searchFacility[0].MFLCode), userId, dateToBeEnrolled);
+                                                }
                                             }
                                         }
                                     }
@@ -316,45 +366,59 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                             await encounterTestingService.updateHtsEncounter(htsEncounter.Id, htsEncounter);
                                             var htsEncounterResult = await encounterTestingService.addHtsEncounterResult(htsEncounter.Id, roundOneTestResult, roundTwoTestResult, finalResult);
                                         }
-
-
-                                        //Tracing
-                                        var enrollmentTracing = await _unitOfWork.Repository<LookupItemView>()
-                                            .Get(x => x.MasterName == "TracingType" && x.ItemName == "Enrolment").FirstOrDefaultAsync();
-                                        int tracingType = enrollmentTracing.ItemId;
-                                        string tracingRemarks = String.Empty;
-
-                                        for (int j = 0; j < request.CLIENTS[i].ENCOUNTER.TRACING.Count; j++)
-                                        {
-                                            DateTime tracingDate = DateTime.ParseExact(request.CLIENTS[i].ENCOUNTER.TRACING[j].TRACING_DATE, "yyyyMMdd", null);
-                                            int mode = request.CLIENTS[i].ENCOUNTER.TRACING[j].TRACING_MODE;
-                                            int outcome = request.CLIENTS[i].ENCOUNTER.TRACING[j].TRACING_OUTCOME;
-
-                                            //add Client Tracing
-                                            var clientTracing = await encounterTestingService.addTracing(identifiers[0].PersonId, tracingType, tracingDate, mode, outcome,
-                                                providerId, tracingRemarks, null, null, null);
-                                        }
-
-                                        //check for linkage
-                                        if (request.CLIENTS[i].ENCOUNTER.LINKAGE != null)
-                                        {
-                                            DateTime dateLinkageEnrolled = DateTime.ParseExact(request.CLIENTS[i].ENCOUNTER.LINKAGE.DATE_ENROLLED, "yyyyMMdd", null);
-                                            string linkageCCCNumber = request.CLIENTS[i].ENCOUNTER.LINKAGE.CCC_NUMBER;
-                                            string linkageFacility = request.CLIENTS[i].ENCOUNTER.LINKAGE.FACILITY;
-                                            string healthWorker = request.CLIENTS[i].ENCOUNTER.LINKAGE.HEALTH_WORKER;
-                                            string carde = request.CLIENTS[i].ENCOUNTER.LINKAGE.CARDE;
-
-                                            //add Client Linkage
-                                            var clientLinkage = await encounterTestingService.addLinkage(identifiers[0].PersonId, dateLinkageEnrolled,
-                                                linkageCCCNumber, linkageFacility, providerId, healthWorker, carde);
-                                        }
-
-                                        //add referral
-                                        /*await encounterTestingService.addReferral(person.Id, fromFacilityId: 1, serviceAreaId: 1,
-                                            referralReason: 1, referredTo: 1, userId: 1, dateToBeEnrolled: DateTime.Now);*/
                                     }
                                 }
+
+                                for (int j = 0; request.CLIENTS[i].ENCOUNTER.TRACING != null && j < request.CLIENTS[i].ENCOUNTER.TRACING.Count; j++)
+                                {
+                                    DateTime tracingDate = DateTime.ParseExact(request.CLIENTS[i].ENCOUNTER.TRACING[j].TRACING_DATE, "yyyyMMdd", null);
+                                    int mode = request.CLIENTS[i].ENCOUNTER.TRACING[j].TRACING_MODE;
+                                    int outcome = request.CLIENTS[i].ENCOUNTER.TRACING[j].TRACING_OUTCOME;
+
+                                    //add Client Tracing
+                                    var clientTracing = await encounterTestingService.addTracing(identifiers[0].PersonId, tracingType, tracingDate, mode, outcome,
+                                        userId, tracingRemarks, null, null, null);
+                                }
+
+                                //check for linkage
+                                if (request.CLIENTS[i].ENCOUNTER.LINKAGE != null)
+                                {
+                                    DateTime dateLinkageEnrolled = DateTime.ParseExact(request.CLIENTS[i].ENCOUNTER.LINKAGE.DATE_ENROLLED, "yyyyMMdd", null);
+                                    string linkageCCCNumber = request.CLIENTS[i].ENCOUNTER.LINKAGE.CCC_NUMBER;
+                                    string linkageFacility = request.CLIENTS[i].ENCOUNTER.LINKAGE.FACILITY;
+                                    string healthWorker = request.CLIENTS[i].ENCOUNTER.LINKAGE.HEALTH_WORKER;
+                                    string carde = request.CLIENTS[i].ENCOUNTER.LINKAGE.CARDE;
+
+                                    //add Client Linkage
+                                    var clientLinkage = await encounterTestingService.addLinkage(identifiers[0].PersonId, dateLinkageEnrolled,
+                                        linkageCCCNumber, linkageFacility, userId, healthWorker, carde);
+                                }
+
+                                if (request.CLIENTS[i].ENCOUNTER.REFERRAL != null)
+                                {
+                                    //add referral
+                                    var facility = await encounterTestingService.GetCurrentFacility();
+                                    if (facility.Count > 0)
+                                    {
+                                        DateTime dateToBeEnrolled = DateTime.ParseExact(request.CLIENTS[i].ENCOUNTER.REFERRAL.DATE_TO_BE_ENROLLED, "yyyyMMdd", null);
+                                        string facilityReferred = request.CLIENTS[i].ENCOUNTER.REFERRAL.REFERRED_TO;
+
+                                        var referralReason = await _unitOfWork.Repository<LookupItemView>()
+                                            .Get(x => x.MasterName == "ReferralReason" &&
+                                                      x.ItemName == "CCCEnrollment").ToListAsync();
+                                        var searchFacility = await encounterTestingService.SearchFacility(facilityReferred);
+
+                                        if (searchFacility.Count > 0)
+                                        {
+                                            await encounterTestingService.AddReferral(identifiers[0].PersonId, facility[0].FacilityID, 2,
+                                                referralReason[0].ItemId, Convert.ToInt32(searchFacility[0].MFLCode), userId, dateToBeEnrolled);
+                                        }
+                                    }
+                                }
+
                             }
+                            // update message as processed
+                            await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now);
                         }
                         else
                         {
@@ -362,7 +426,9 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                             var person = await registerPersonService.RegisterPerson(firstName, middleName, lastName, sex,
                                 dateOfBirth, userId);
                             // Add Patient
-                            var patient = await registerPersonService.AddPatient(person.Id, dateOfBirth, userId, facilityId);
+                            var patient = await registerPersonService.AddPatient(person.Id, userId, facilityId);
+                            // Person is enrolled state
+                            var enrollmentAppState = await registerPersonService.AddAppStateStore(person.Id, patient.Id, 7, null, null);
                             // Enroll patient
                             var patientIdentifier = await registerPersonService.EnrollPatient(enrollmentNo, patient.Id, 2, userId, dateEnrollment);
                             //Add PersonIdentifiers
@@ -402,7 +468,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
 
                                     //Get consent to testing
                                     int consentValue = request.CLIENTS[i].ENCOUNTER.PRE_TEST.CONSENT;
-                                    var consentType = await _unitOfWork.Repository<LookupItemView>().Get(x => x.MasterName == "ConsentType" && x.ItemName == "ConsentToListPartners").FirstOrDefaultAsync();
+                                    var consentType = await _unitOfWork.Repository<LookupItemView>().Get(x => x.MasterName == "ConsentType" && x.ItemName == "ConsentToBeTested").FirstOrDefaultAsync();
                                     int consentTypeId = consentType != null ? consentType.ItemId : 0;
 
                                     //Get TBStatus masterId
@@ -450,6 +516,11 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                     //add afya mobile placer value
                                     var addplacerHtsPlacer = await registerPersonService.AddInteropPlacerValue(htsEncounter.Id, 4, 7, encounterNumber);
 
+                                    // Person is tested as state
+                                    var testedAsAppState = await registerPersonService.AddAppStateStore(person.Id, patient.Id, 6, patientMasterVisit.Id, htsEncounter.Id);
+                                    // Person is consent to testing state
+                                    var consentintToTestingAppState = await registerPersonService.AddAppStateStore(person.Id, patient.Id, 1, patientMasterVisit.Id, htsEncounter.Id);
+
                                     //check for hiv tests
                                     if (request.CLIENTS[i].ENCOUNTER.HIV_TESTS != null)
                                     {
@@ -469,6 +540,9 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                             patientMasterVisit.Id, 2, pnsAccepted, consentListPartnersTypeId, encounterDate, providerId,
                                             pnsDeclineReason);
 
+                                        // Person is consent to list partners
+                                        var consentToListPartnersAppState = await registerPersonService.AddAppStateStore(person.Id, patient.Id, 3, patientMasterVisit.Id, htsEncounter.Id);
+
                                         //add screening tests for client
                                         var clientScreeningTesting =
                                             await encounterTestingService.addTesting(screeningTests, htsEncounter.Id, providerId);
@@ -482,15 +556,12 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
 
                                         await encounterTestingService.updateHtsEncounter(htsEncounter.Id, htsEncounter);
                                         var htsEncounterResult = await encounterTestingService.addHtsEncounterResult(htsEncounter.Id, roundOneTestResult, roundTwoTestResult, finalResult);
+
+                                        // Person is positive
+                                        var partnerIsPositiveAppState = await registerPersonService.AddAppStateStore(person.Id, patient.Id, 4, patientMasterVisit.Id, htsEncounter.Id);
                                     }
 
-                                    //Tracing
-                                    var enrollmentTracing = await _unitOfWork.Repository<LookupItemView>()
-                                        .Get(x => x.MasterName == "TracingType" && x.ItemName == "Enrolment").FirstOrDefaultAsync();
-                                    int tracingType = enrollmentTracing.ItemId;
-                                    string tracingRemarks = String.Empty;
-
-                                    for (int j = 0; j < request.CLIENTS[i].ENCOUNTER.TRACING.Count; j++)
+                                    for (int j = 0; request.CLIENTS[i].ENCOUNTER.TRACING != null && j < request.CLIENTS[i].ENCOUNTER.TRACING.Count; j++)
                                     {
                                         DateTime tracingDate = DateTime.ParseExact(request.CLIENTS[i].ENCOUNTER.TRACING[j].TRACING_DATE, "yyyyMMdd", null);
                                         int mode = request.CLIENTS[i].ENCOUNTER.TRACING[j].TRACING_MODE;
@@ -515,11 +586,32 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                             linkageCCCNumber, linkageFacility, providerId, healthWorker, carde);
                                     }
 
-                                    //add referral
-                                    /*await encounterTestingService.addReferral(person.Id, fromFacilityId: 1, serviceAreaId: 1,
-                                        referralReason: 1, referredTo: 1, userId: 1, dateToBeEnrolled: DateTime.Now);*/
+                                    if (request.CLIENTS[i].ENCOUNTER.REFERRAL != null)
+                                    {
+                                        //add referral
+                                        var facility = await encounterTestingService.GetCurrentFacility();
+                                        if (facility.Count > 0)
+                                        {
+                                            DateTime dateToBeEnrolled = DateTime.ParseExact(request.CLIENTS[i].ENCOUNTER.REFERRAL.DATE_TO_BE_ENROLLED, "yyyyMMdd", null);
+                                            string facilityReferred = request.CLIENTS[i].ENCOUNTER.REFERRAL.REFERRED_TO;
+
+                                            var referralReason = await _unitOfWork.Repository<LookupItemView>()
+                                                .Get(x => x.MasterName == "ReferralReason" &&
+                                                          x.ItemName == "CCCEnrollment").ToListAsync();
+                                            var searchFacility = await encounterTestingService.SearchFacility(facilityReferred);
+
+                                            if (searchFacility.Count > 0)
+                                            {
+                                                await encounterTestingService.AddReferral(identifiers[0].PersonId, facility[0].FacilityID, 2,
+                                                    referralReason[0].ItemId, Convert.ToInt32(searchFacility[0].MFLCode), userId, dateToBeEnrolled);
+                                            }
+                                        }
+                                    }
                                 }
                             }
+
+                            //update message has been processed
+                            await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now);
                         }
                     }
 

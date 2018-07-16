@@ -1,26 +1,25 @@
-﻿using AutoMapper;
+﻿using Application.Common;
+using AutoMapper;
+using Entities.CCC.Enrollment;
 using Entity.WebApi;
+using Entity.WebApi.PSmart;
 using Interface.WebApi;
-using IQCare.WebApi.Logic.DtoMapping;
-using IQCare.WebApi.Logic.MappingEntities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Script.Serialization;
+using IQCare.CCC.UILogic;
+using IQCare.CCC.UILogic.Enrollment;
 using IQCare.CCC.UILogic.Interoperability;
 using IQCare.CCC.UILogic.Interoperability.Appointment;
 using IQCare.CCC.UILogic.Interoperability.Enrollment;
 using IQCare.DTO;
 using IQCare.DTO.PatientAppointment;
 using IQCare.DTO.PatientRegistration;
-using IQCare.WebApi.Logic.PSmart;
-using Entity.WebApi.PSmart;
-using Application.Common;
-using Entities.CCC.Enrollment;
-using Entities.CCC.PSmart;
-using IQCare.CCC.UILogic;
-using IQCare.CCC.UILogic.Enrollment;
 using IQCare.DTO.PSmart;
+using IQCare.WebApi.Logic.DtoMapping;
+using IQCare.WebApi.Logic.Helpers;
+using IQCare.WebApi.Logic.MappingEntities;
+using IQCare.WebApi.Logic.PSmart;
+using System;
+using System.Collections.Generic;
+using System.Web.Script.Serialization;
 
 namespace IQCare.WebApi.Logic.MessageHandler
 {
@@ -31,7 +30,7 @@ namespace IQCare.WebApi.Logic.MessageHandler
         private readonly IPsmartStoreManager _psmartStoreManager;
         private readonly IPSmartAuthManager _pSmartAuthManager;
         
-        private readonly PatientManager _patientManager;
+       // private readonly PatientManager _patientManager;
         private int personId = 0;
         public IncomingMessageService()
         {
@@ -51,11 +50,54 @@ namespace IQCare.WebApi.Logic.MessageHandler
 
         public void Handle(string messageType, string message)
         {
+            var serializer = new JavaScriptSerializer();
+            var jsonObject = serializer.DeserializeObject((dynamic)message);
+            string sendingApplication = String.Empty;
+            int senderId;
+            foreach (var item in jsonObject)
+            {
+                if (item.Key == "MESSAGE_HEADER")
+                {
+                    foreach (var val in item.Value)
+                    {
+                        if (val.Key == "SENDING_APPLICATION")
+                        {
+                            sendingApplication = val.Value;
+                            break;
+                        }
+                    }
+                }
+                break;
+            }
+
+            switch (sendingApplication)
+            {
+                case "ADT":
+                    senderId = (int)Senders.ADT;
+                    break;
+                case "T4A":
+                    senderId = (int)Senders.T4A;
+                    break;
+                case "MLAB":
+                    senderId = (int)Senders.MLAB;
+                    break;
+                case "MLAB SMS APP":
+                    senderId = (int) Senders.MLAB_SMS_APP;
+                    break;
+                case "KENYAEMR":
+                    senderId = (int) Senders.KENYAEMR;
+                    break;
+                    default:
+                        senderId = 1;
+                    break;
+            }
+
             var apiInbox = new ApiInbox()
             {
                 DateReceived = DateTime.Now,
                 Message = message,
-                SenderId = 1
+                SenderId = senderId,
+                MessageType = messageType
             };
 
             switch (messageType)
@@ -117,13 +159,15 @@ namespace IQCare.WebApi.Logic.MessageHandler
                 //update message set processed=1, erromsq=null
                 incomingMessage.DateProcessed = DateTime.Now;
                 incomingMessage.Processed = true;
+                incomingMessage.IsSuccess = true;
                 _apiInboxmanager.EditApiInbox(incomingMessage);
             }
             catch (Exception e)
             {
                 //update message set processed=1, erromsq
                 incomingMessage.LogMessage = e.Message;
-                incomingMessage.Processed = false;
+                incomingMessage.Processed = true;
+                incomingMessage.IsSuccess = false;
                 _apiInboxmanager.EditApiInbox(incomingMessage);
             }
         }
@@ -158,12 +202,14 @@ namespace IQCare.WebApi.Logic.MessageHandler
                 //update message that it has been processed
                 incomingMessage.DateProcessed = DateTime.Now;
                 incomingMessage.Processed = true;
+                incomingMessage.IsSuccess = true;
                 _apiInboxmanager.EditApiInbox(incomingMessage);
             }
             catch (Exception e)
             {
                 incomingMessage.LogMessage = e.Message;
-                incomingMessage.Processed = false;
+                incomingMessage.Processed = true;
+                incomingMessage.IsSuccess = false;
                 _apiInboxmanager.EditApiInbox(incomingMessage);
             }
         }
@@ -219,12 +265,14 @@ namespace IQCare.WebApi.Logic.MessageHandler
 
                 incomingMessage.DateProcessed = DateTime.Now;
                 incomingMessage.Processed = true;
+                incomingMessage.IsSuccess = true;
                 _apiInboxmanager.EditApiInbox(incomingMessage);
             }
             catch (Exception e)
             {
                 incomingMessage.LogMessage = e.Message;
-                incomingMessage.Processed = false;
+                incomingMessage.Processed = true;
+                incomingMessage.IsSuccess = false;
                 _apiInboxmanager.AddApiInbox(incomingMessage);
             }
         }
@@ -268,12 +316,14 @@ namespace IQCare.WebApi.Logic.MessageHandler
                 //update message that it has been processed
                 incomingMessage.DateProcessed = DateTime.Now;
                 incomingMessage.Processed = true;
+                incomingMessage.IsSuccess = true;
                 _apiInboxmanager.EditApiInbox(incomingMessage);
             }
             catch (Exception e)
             {
                 incomingMessage.LogMessage = e.Message;
-                incomingMessage.Processed = false;
+                incomingMessage.Processed = true;
+                incomingMessage.IsSuccess = false;
                 _apiInboxmanager.EditApiInbox(incomingMessage);
             }
         }
@@ -296,12 +346,14 @@ namespace IQCare.WebApi.Logic.MessageHandler
                 //update message that it has been processed
                 incomingMessage.DateProcessed = DateTime.Now;
                 incomingMessage.Processed = true;
+                incomingMessage.IsSuccess = true;
                 _apiInboxmanager.EditApiInbox(incomingMessage);
             }
             catch (Exception e)
             {
                 incomingMessage.LogMessage = e.Message;
-                incomingMessage.Processed = false;
+                incomingMessage.Processed = true;
+                incomingMessage.IsSuccess = false;
                 _apiInboxmanager.EditApiInbox(incomingMessage);
             }
         }
@@ -361,12 +413,14 @@ namespace IQCare.WebApi.Logic.MessageHandler
             IdentifierManager identifierManager = new IdentifierManager();
             PersonIdentifierManager personIdentifierManager = new PersonIdentifierManager();
             PatientManager patientManager=new PatientManager();
+            PatientLookupManager lookupManager = new PatientLookupManager();
+            PersonExtendedLookupManager personExtendedLookupManager= new PersonExtendedLookupManager();
         // PatientIdentifierManager patientIdentifierManager = new PatientIdentifierManager();
 
 
-        // var patientEnrollment = patientEnrollmentManager.GetPatientEnrollmentByPatientId(psmartCard.PATIENTID);
-        // int patientEnrollmentId = patientEnrollment[0].Id;
-        int results = 0;
+            // var patientEnrollment = patientEnrollmentManager.GetPatientEnrollmentByPatientId(psmartCard.PATIENTID);
+            // int patientEnrollmentId = patientEnrollment[0].Id;
+            int results = 0;
             // Identifier identifier = identifierManager.GetIdentifierByCode("GODS_NUMBER");
             Identifier identifier = identifierManager.GetIdentifierByCode("CARD_SERIAL_NUMBER");
             personId = patientManager.GetPersonId(psmartCard.PATIENTID);
@@ -380,11 +434,18 @@ namespace IQCare.WebApi.Logic.MessageHandler
                 //    PatientId = psmartCard.PATIENTID
                 //};
 
-                var personEntityIdentifier=new PersonIdentifier()
+               // PatientLookup patient = lookupManager.GetPatientByPersonId(personId);
+
+                var patient = personExtendedLookupManager.GetPatientDetailsByPersonId(personId);
+
+                 var personEntityIdentifier = new PersonIdentifier()
                 {
                     IdentifierId = identifier.Id,
                     IdentifierValue = psmartCard.CARD_SERIAL_NO,
                     PersonId = personId,
+                    AssigningFacility = patient.FacilityId.ToString(),
+                    Active=true,
+                    DeleteFlag=false
 
                 };
 
@@ -401,7 +462,7 @@ namespace IQCare.WebApi.Logic.MessageHandler
                     //results = _personIdentifierManager.AddPersonIdentifier(patientEntityIdentifier.PatientId,
                     //    patientEntityIdentifier.PatientEnrollmentId, patientEntityIdentifier.IdentifierTypeId,
                     //    patientEntityIdentifier.IdentifierValue, 0, false);
-                    results = personIdentifierManager.AddPersonIdentifier(personId,personEntityIdentifier.IdentifierId, psmartCard.CARD_SERIAL_NO, 1);
+                    results = personIdentifierManager.AddPersonIdentifier(personId,personEntityIdentifier.IdentifierId, psmartCard.CARD_SERIAL_NO, 1, personEntityIdentifier.AssigningFacility);
                     return (results) > 0 ? "Card serial Number Linked to a patient as identifier" : "Failed linking card Serial Number to patient";
                 }
                 else

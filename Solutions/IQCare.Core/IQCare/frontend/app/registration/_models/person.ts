@@ -9,6 +9,7 @@ export class Person {
     partnerRelationship: number;
     patientId: any;
     createdBy: number;
+    Id: number;
 }
 
 export class RegistrationVariables {

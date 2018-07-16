@@ -192,5 +192,13 @@ namespace IQCare.Web.CCC.WebService
 
             return msg;
         }
+
+        [WebMethod]
+        public int GenerateExcel(string category)
+        {
+            PatientEncounterLogic pel = new PatientEncounterLogic();
+            pel.GenerateExcel(category);
+            return 0;
+        }
     }
 }

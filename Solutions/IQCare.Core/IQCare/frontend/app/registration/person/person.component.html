@@ -22,7 +22,8 @@
                                             </mat-form-field>
 
                                             <mat-form-field>
-                                                <input tabindex="5" placeholder="Date Of Birth" matInput [matDatepicker]="myDatepicker" [max]="maxDate" formControlName="DateOfBirth" required>
+                                                <input tabindex="5" placeholder="Date Of Birth" matInput [matDatepicker]="myDatepicker" [max]="maxDate" formControlName="DateOfBirth"
+                                                    required>
                                                 <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
                                                 <mat-datepicker #myDatepicker name="DateOfBirth" ngDefaultControl (selectedChanged)="onDate($event)"></mat-datepicker>
                                             </mat-form-field>
@@ -35,7 +36,8 @@
                                             </mat-form-field>
 
                                             <mat-form-field>
-                                                <input matInput placeholder="Age(Years)" tabindex="6" type="number" formControlName="personAge" id="personAge" name="personAge" (change)="estimateDob()" required>
+                                                <input matInput placeholder="Age(Years)" tabindex="6" type="number" formControlName="personAge" id="personAge" name="personAge"
+                                                    (change)="estimateDob()" required>
                                             </mat-form-field>
                                         </div>
 
@@ -65,7 +67,7 @@
 
                                     </div>
                                     <div>
-                                        <button tabindex="8" mat-button matStepperNext type="button">Next</button>
+                                        <button tabindex="8" mat-button matStepperNext type="button" (click)="onFirstTabClick()">Next</button>
                                     </div>
                                 </mat-step>
 
@@ -118,7 +120,7 @@
 
                                         <div class="col-lg-4 col-md-4 col-sm-4">
                                             <mat-form-field>
-                                                <mat-select placeholder="Key Population" formControlName="KeyPopulation" disableRipple multiple>
+                                                <mat-select placeholder="Key Population" formControlName="KeyPopulation" disableRipple multiple required>
                                                     <mat-option *ngFor="let keyPop of keyPops" [value]="keyPop.itemId">{{keyPop.itemDisplayName}}</mat-option>
                                                 </mat-select>
                                             </mat-form-field>
@@ -126,7 +128,7 @@
                                             <br/>
 
                                             <mat-form-field>
-                                                <mat-select placeholder="Priority Population" formControlName="priorityPopulation" disableRipple multiple>
+                                                <mat-select placeholder="Priority Population" formControlName="priorityPopulation" disableRipple multiple required>
                                                     <mat-option *ngFor="let option of priorityPops" [value]="option.itemId">{{option.itemDisplayName}}</mat-option>
                                                 </mat-select>
                                             </mat-form-field>
@@ -135,7 +137,7 @@
                                         <div class="col-lg-3 col-md-3 col-sm-3">
                                             <div *ngIf="partnerType != null">
                                                 <mat-form-field>
-                                                    <mat-select placeholder="Relationship" formControlName="partnerRelationship">
+                                                    <mat-select placeholder="Relationship" formControlName="partnerRelationship" required>
                                                         <mat-option></mat-option>
                                                         <mat-option *ngFor="let option of optionToShow" [value]="option.itemId">{{option.itemDisplayName}}</mat-option>
                                                     </mat-select>
@@ -151,7 +153,7 @@
 
                                     <div class="row">
                                         <button mat-button matStepperPrevious type="button">Back</button>
-                                        <button mat-button type="button" (click)="onSubmitForm()">Complete</button>
+                                        <button mat-button type="submit" (click)="onSubmitForm()">Complete</button>
                                     </div>
                                 </mat-step>
                             </mat-horizontal-stepper>
