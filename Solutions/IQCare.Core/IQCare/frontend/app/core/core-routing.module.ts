@@ -21,7 +21,7 @@ const routes: Routes = [
         loadChildren: '../registration/registration.module#RegistrationModule'
     },
     {
-        path: 'recordregistration',
+        path: 'record',
         loadChildren: '../records/records.module#RecordModule'
     },
     {

@@ -21,7 +21,9 @@
                             "frontend/favicon.ico",
                             "frontend/Web.config"
                         ],
-                        "styles": [],
+                        "styles": [
+                            "frontend/styles.css"
+                        ],
                         "scripts": []
                     },
                     "configurations": {
