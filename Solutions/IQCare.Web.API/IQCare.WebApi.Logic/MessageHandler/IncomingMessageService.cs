@@ -67,7 +67,7 @@ namespace IQCare.WebApi.Logic.MessageHandler
                     HandleUpdatedClientInformation(apiInbox);
                     break;
 
-                case "RDE^001 ":
+                case "RDE^001":
                     HandleDrugPrescriptionRaised(apiInbox);
                     break;
 
@@ -216,9 +216,9 @@ namespace IQCare.WebApi.Logic.MessageHandler
                 incomingMessage.Processed = true;
                 _apiInboxmanager.EditApiInbox(incomingMessage);
 
-                incomingMessage.DateProcessed = DateTime.Now;
-                incomingMessage.Processed = true;
-                _apiInboxmanager.EditApiInbox(incomingMessage);
+               // incomingMessage.DateProcessed = DateTime.Now;
+               // incomingMessage.Processed = true;
+               // _apiInboxmanager.EditApiInbox(incomingMessage);
             }
             catch (Exception e)
             {
