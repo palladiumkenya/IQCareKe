@@ -36,19 +36,17 @@ namespace IQCare.CCC.UILogic.Interoperability
                     if (thisFacility == null)
                     {
                         Msg = $"The facility {receivingFacilityMFLCode} does not exist";
-
-                        return Msg;
+                        throw new Exception(Msg);
                     }
                     if (patient == null)
                     {
                         Msg = $"Patient {patientCcc} does not exist ";
-
-                        return Msg;
+                        throw new Exception(Msg);
                     }
                     if (results.Count(r=> string.IsNullOrWhiteSpace(r.VlResult.Trim()))> 0)
                     {
                         Msg = $"Viral load message has no results indicated ";
-                        return Msg;
+                        throw new Exception(Msg);
                     }
                     int invalidResult = 0;
                     foreach (var result in results)
@@ -71,7 +69,7 @@ namespace IQCare.CCC.UILogic.Interoperability
                     if (invalidResult > 0)
                     {
                         Msg = $"Viral load message has invalid results indicated ";
-                        return Msg;
+                        throw new Exception(Msg);
                     }
                     if (patient != null && thisFacility != null)
                     {
@@ -182,13 +180,14 @@ namespace IQCare.CCC.UILogic.Interoperability
                 catch (Exception e)
                 {
                     Msg = "error " + e.Message;
+                    throw e;
                 }
             }
             else
             {
                 Msg = "Message does not contain results";
+                throw new Exception(Msg);
             }
-            
             return Msg;
         }
 

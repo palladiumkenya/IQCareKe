@@ -80,6 +80,8 @@ namespace DataAccess.CCC.Repository
         private IPatientStabilitySummaryRepository _patientStabilitySummaryRepository;
         private IPregnancyOutcomeLookupRepository _pregnancyOutcomeLookupRepository;
         private IIlStatisticsRepository _ilStatisticsRepository;
+        private iILMessageStatsRepository _ilMessageStatsRepository;
+        private iILMessageViewerRepository _ilMessageViewerRepository;
         private IIlMessengerRepository _ilMessengerRepository;
         private IPersonExtendedLookupRepository _personExtendedLookupRepository;
 
@@ -736,6 +738,24 @@ namespace DataAccess.CCC.Repository
             get {
                 return _ilStatisticsRepository??(_ilStatisticsRepository= new IlStatisticsRepository((LookupContext)_context));
 
+            }
+        }
+
+        public iILMessageStatsRepository IIlMessageStatsRepository
+        {
+            get
+            {
+                return _ilMessageStatsRepository ??
+                       (_ilMessageStatsRepository = new ILMessageStatsRepository((LookupContext) _context));
+            }
+        }
+
+        public iILMessageViewerRepository IIlMessageViewerRepository
+        {
+            get
+            {
+                return _ilMessageViewerRepository ??
+                       (_ilMessageViewerRepository = new ILMessageViewerRepository((LookupContext) _context));
             }
         }
 
