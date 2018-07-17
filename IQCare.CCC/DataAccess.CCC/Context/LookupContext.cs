@@ -63,7 +63,5 @@ namespace DataAccess.CCC.Context
         // IL 
         public  DbSet<IlMessengerLog> IlMessengerLogs { get; set; }
         public  DbSet<IlStatistics> IlStatistics { get; set; }
-        public DbSet<ILMessageStats> IlMessageStats { get; set; }
-        public DbSet<ILMessageViewer> IlMessageViewers { get; set; }
     }
 }

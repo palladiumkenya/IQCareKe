@@ -148,23 +148,6 @@ namespace BusinessProcess.CCC.Patient
             //}
         }
 
-        public List<PatientRegistrationLookup> GetPatientByPtn_Pk(int ptn_pk)
-        {
-            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
-            {
-                List<PatientRegistrationLookup> patientRegistrationLookups = new List<PatientRegistrationLookup>();
-
-                bool patientExists = unitOfWork.PatientRegistrationLookupRepository.FindBy(x => x.ptn_pk == ptn_pk)
-                    .Any();
-                if (patientExists)
-                {
-                    patientRegistrationLookups = unitOfWork.PatientRegistrationLookupRepository.FindBy(x => x.ptn_pk == ptn_pk).ToList();
-                }
-                unitOfWork.Dispose();
-                return patientRegistrationLookups;
-            }
-        }
-
         public void UpdatePatientType(int PatientId, int PatientType)
         {
             ClsObject obj = new ClsObject();

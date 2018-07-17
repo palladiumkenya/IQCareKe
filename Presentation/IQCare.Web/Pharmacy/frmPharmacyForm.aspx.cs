@@ -919,16 +919,19 @@ namespace IQCare.Web.Pharmacy
                     Session["DispensedFlag"] = 1;
                     if (CanEdit)
                     {
+                        Guid g = Guid.NewGuid();
+                        string theUrl = string.Format("{0}&PatientId={1}&key={2}", "./Requests/EditPharmacyPrescription.aspx?name=modify", Session["PatientId"].ToString(),  g.ToString());
+                        btnsave.OnClientClick = $"javascript:window.location='{theUrl}';return false;";
                         btnsave.Enabled = true;
                         btnsave.Text = "Modify Prescription";
                         btnsave.CommandName = $"MODIFYPRESCRIPTION{this.OrderId}";
                         btnsave.CommandArgument = this.OrderId.ToString();
-                        
+                        Session["EditPharmacyPK"] = this.OrderId;
                     }
                     else
                     {
-                       
-                        btnsave.Enabled = false;
+                        Session["EditPharmacyPK"] = null;
+                         btnsave.Enabled = false;
                     }
                 }
                 else if (this.OrderId > 0 && this.OrderStatus == 1)
