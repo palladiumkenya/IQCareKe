@@ -59,6 +59,7 @@ namespace IQCare.Web.CCC.UC
 
             if (screeningQuestions != null && screeningQuestions.Count > 0)
             {
+
                 foreach (var screeningQuestion in screeningQuestions)
                 {
                     HtmlTableRow row = new HtmlTableRow();
@@ -74,7 +75,7 @@ namespace IQCare.Web.CCC.UC
                     {
                         HtmlInputRadioButton radioButton = new HtmlInputRadioButton
                         {
-                            ID = string.Format("|{0}", screeningQuestion.ItemId.ToString(), k.ItemId.ToString()),
+                            ID = string.Format("|{0}|{1}", screeningQuestion.ItemId.ToString(), k.ItemId.ToString()),
                             Name = screeningQuestion.ItemName,
                             Value = k.ItemId.ToString(),
                         };

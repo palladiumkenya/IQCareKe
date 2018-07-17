@@ -5,6 +5,8 @@
 <%@ Register Src="~/CCC/UC/ucIptOutcome.ascx" TagPrefix="uc" TagName="IptOutcome" %>
 <%@ Register Src="~/CCC/UC/ucPharmacyPrescription.ascx" TagPrefix="uc" TagName="ucPharmacyPrescription" %>
 <%@ Register Src="~/CCC/UC/ucPatientLabs.ascx" TagPrefix="uc" TagName="ucPatientLabs" %>
+<%@ Register Src="~/CCC/UC/ucGenderBasedViolenceAssessment.ascx" TagPrefix="uc" TagName="ucGenderBasedViolenceAssessment" %>
+
 
 
 <div class="col-md-12" style="padding-top: 20px">
@@ -1373,6 +1375,24 @@
 							</div>
 						</div>
 					</div>
+
+					<div class="col-md-12">
+						<div class="col-md-2">
+							<button type="button" id="btnGbvAsessment" name="btnGbvAsessment" class="btn btn-info btn-sm pull-left" data-toggle="modal" data-target="#gbvAssessmentModal">GBV Assessment</button>
+						</div>
+
+						<div class="col-md-5">
+							<div class="col-md-12 form-group">
+								<div class="col-md-6">
+									<label class="control-label pull-left">GBV Assessment done?</label>
+								</div>
+								<div class="col-md-6">
+                                    <label class="control-label pull-left" id="lblGbvAssessmentDone">Yes/No</label>
+								</div>
+							</div>
+						</div>
+					</div>
+
 					<div class="col-md-12">
 						<hr />
 					</div>
@@ -1868,7 +1888,20 @@
 							</div>
 						</div>
 
-						<div class="col-md-12">
+                        <div id="gbvAssessmentModal" class="modal fade" role="dialog" data-parsley-validate="true" data-show-errors="true" style="width: 100%">
+                            <div class="modal-dialog" style="width: 100%">
+                                <!-- Modal content-->
+                                <div class="modal-content" style="width: 100%">
+                                    <div class="modal-body" style="width: 100%">
+                                        <div class="row">
+                                            <uc:ucGenderBasedViolenceAssessment runat="server" ID="ucGenderBasedViolenceAssessment" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
 							<hr />
 						</div>
 
@@ -4477,7 +4510,38 @@
 				$("#hfExaminationReviewSystems").val(obj);
 			}
 		});
-	}
+    }
+
+    function GetGBVScreeningStatus() {
+        var patientId ="<%=PatientId%>";
+        var visitDate = moment("<%=visitdateval%>");
+        var screeningCategoryId = "<%=GbvScreeningCategoryId%>";
+
+        if (visitDate.isValid()) {
+            visitDate = visitDate.format('YYYY-MM-DD');
+
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientService.asmx/getPatientScreening",
+                data: "{'patientId':'" + patientId + "', 'visitDate': '" + visitDate + "', 'screeningcategoryId': '" + screeningCategoryId + "'}",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+
+                success: function (response) {
+                    var itemList = JSON.parse(response.d);
+
+                    $("#lblGbvAssessmentDone").text(itemList.length > 0 ? 'Yes' : 'No');
+
+                }
+            });
+        } else {
+
+            $("#lblGbvAssessmentDone").text('No');
+
+        }
+    }
+
+    GetGBVScreeningStatus();
 
 </script>
 

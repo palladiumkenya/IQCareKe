@@ -81,5 +81,21 @@ namespace IQCare.Web.CCC.WebService
             }
             return _jsonMessage;
         }
+
+        [WebMethod(EnableSession = true)]
+        public string GetVisitById(int visitId)
+        {
+            try
+            {
+                PatientMasterVisitManager patientMasterVisitManager = new PatientMasterVisitManager();
+                _jsonMessage = new JavaScriptSerializer().Serialize(patientMasterVisitManager.GetVisitById(visitId));
+            }
+            catch (Exception e)
+            {
+                _jsonMessage = e.Message;
+            }
+            return _jsonMessage;
+        }
+        
     }
 }

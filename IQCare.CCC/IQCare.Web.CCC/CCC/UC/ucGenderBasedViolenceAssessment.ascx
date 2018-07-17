@@ -22,9 +22,6 @@
         </div>
     </div>
     <div class="col-md-12">
-        <hr />
-    </div>
-    <div class="col-md-12">
         <div class="col-md-4">
             <div class="col-md-12">
                 <label class="required control-label pull-left">Visit Date</label>
@@ -67,10 +64,8 @@
                 </div>
                 <div class="col-md-4 col-xs-12 col-sm-12">
                     <asp:LinkButton runat="server" ID="btnCancelGbvAssessment" CssClass="btn btn-danger fa fa-times btn-lg" ClientIDMode="Static" OnClientClick="return false;"> Close</asp:LinkButton>
+                    <asp:LinkButton runat="server" ID="btnCancelGbvAssessmentModal" CssClass="btn btn-danger fa fa-times btn-lg" ClientIDMode="Static" OnClientClick="return false;" data-dismiss="modal"> Close</asp:LinkButton>
                 </div>
-            </div>
-            <div class="col-md-12">
-                <hr />
             </div>
         </div>
     </div>
@@ -193,9 +188,41 @@
 
         }
 
+        function getPatientVisit(visitId) {
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientMasterVisitService.asmx/GetVisitById",
+                data: "{'visitId':'" + visitId + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var patientVisit = JSON.parse(response.d);
+
+                    gbvVisitDate.val(moment(patientVisit.VisitDate).format('DD-MMM-YYYY'));
+
+                    var patientId ="<%=PatientId%>";
+                    var visitDate = moment(gbvVisitDate.val());
+                    var screeningCategoryId = "<%=ScreeningCategoryId%>";
+
+                    if (visitDate.isValid()) {
+                        visitDate = moment(gbvVisitDate.val()).format('YYYY-MM-DD');
+                        getPatientScreening(patientId, visitDate, screeningCategoryId);
+                    }                    
+
+                },
+                error: function (response) {
+                    toastr
+                        .error("Error fetching GBV Screening List " + response.d);
+                }
+            });
+
+        }
+
         function resetElements(parameters) {
             responseOptions.prop('checked', false);
-            gbvVisitDate.val('');
+            if (gbvVisitDate.is(':visible')) {
+                gbvVisitDate.val('');
+            }
         }
 
         gbvResetBtn.click(function () {
@@ -206,6 +233,22 @@
             window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>';
         });
 
+        if ($('#gbvAssessmentModal').is(':visible')) {
+            $("#btnCancelGbvAssessmentModal").show("fast");
+            $("#btnCancelGbvAssessment").hide("fast");
+        } else {
+            $("#btnCancelGbvAssessmentModal").hide("fast");
+            $("#btnCancelGbvAssessment").show("fast");
+        }
+
+        $('#gbvAssessmentModal').on('show.bs.modal', function () {
+            getPatientVisit(<%=Session["PatientMasterVisitId"]%>);
+            gbvVisitDate.parents('.col-md-12:first').hide();
+
+            //Hide visit date cells
+            $("#btnCancelGbvAssessmentModal").show("fast");
+            $("#btnCancelGbvAssessment").hide("fast");
+        });
 
         notifyPositiveScreening();
     });
