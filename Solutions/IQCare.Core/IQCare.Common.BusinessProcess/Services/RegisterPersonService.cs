@@ -593,85 +593,23 @@ namespace IQCare.Common.BusinessProcess.Services
                     await _unitOfWork.Repository<PatientIdentifier>().AddAsync(patientIdentifier);
                     await _unitOfWork.SaveAsync();
 
-                    GetPatientDetails patientDetails = new GetPatientDetails(_unitOfWork);
-                    LookupLogic lookupLogic = new LookupLogic(_unitOfWork);
+                    //GetPatientDetails patientDetails = new GetPatientDetails(_unitOfWork);
+                    
 
-                    var patientLookup = await patientDetails.GetPatientByPatientId(patientId);
+                    //var patientLookup = await patientDetails.GetPatientByPatientId(patientId);
 
-                    if (patientLookup.Count > 0)
-                    {
-                        Facility facility = await _unitOfWork.Repository<Facility>().Get(x => x.DeleteFlag == 0).FirstOrDefaultAsync();
-                        var referralId = await lookupLogic.GetDecodeIdByName("VCT", 17);
-                        var maritalStatusId = await lookupLogic.GetDecodeIdByName(patientLookup[0].MaritalStatusName, 17);
-                        var address = patientLookup[0].PhysicalAddress == null ? " " : patientLookup[0].PhysicalAddress;
-                        var phone = patientLookup[0].MobileNumber == null ? " " : patientLookup[0].MobileNumber;
-                        var dobPrecision = 0;
-                        if (patientLookup[0].DobPrecision.HasValue)
-                        {
-                            var dobPrecisionValue = patientLookup[0].DobPrecision.Value;
-                            dobPrecision = dobPrecisionValue ? 1 : 0;
-                        }
+                    //if (patientLookup.Count > 0)
+                    //{
+                        
 
-                        var gender = 0;
-                        if (patientLookup[0].Gender == "Male")
-                        {
-                            gender = 16;
-                        }
-                        else if (patientLookup[0].Gender == "Female")
-                        {
-                            gender = 17;
-                        }
+                        
 
-                        string dateOfBirth = string.Empty;
-                        if (patientLookup[0].DateOfBirth.HasValue)
-                            dateOfBirth = patientLookup[0].DateOfBirth.Value.ToString("yyyy-MM-dd");
+                        
 
-                        StringBuilder sql = new StringBuilder();
-                        sql.Append("exec pr_OpenDecryptedSession;");
-                        sql.Append("Insert Into mst_Patient(FirstName, LastName, MiddleName, LocationID, PatientEnrollmentID, ReferredFrom, RegistrationDate, Sex, DOB, DobPrecision, MaritalStatus, Address, Phone, UserID, PosId, Status, DeleteFlag, CreateDate,MovedToPatientTable)");
-                        sql.Append("Values(");
-                        sql.Append($"ENCRYPTBYKEY(KEY_GUID('Key_CTC'),'{patientLookup[0].FirstName}'),");
-                        sql.Append($"ENCRYPTBYKEY(KEY_GUID('Key_CTC'),'{patientLookup[0].LastName}'),");
-                        sql.Append($"ENCRYPTBYKEY(KEY_GUID('Key_CTC'),'{patientLookup[0].MidName}'),");
-                        sql.Append($"'{facility.FacilityID}',");
-                        sql.Append("' ',");
-                        sql.Append($"'{referralId}',");
-                        sql.Append($"'{dateOfEnrollment.ToString("yyyy-MM-dd")}',");
-                        sql.Append($"'{gender}',");
-                        sql.Append($"'{dateOfBirth}',");
-                        sql.Append($"'{dobPrecision}',");
-                        sql.Append($"'{maritalStatusId}',");
-                        sql.Append($"ENCRYPTBYKEY(KEY_GUID('Key_CTC'),'{address}'),");
-                        sql.Append($"ENCRYPTBYKEY(KEY_GUID('Key_CTC'),'{phone}'),");
-                        sql.Append($"'{createdBy}',");
-                        sql.Append($"'{facility.PosID}',");
-                        sql.Append("0,");
-                        sql.Append("0,");
-                        sql.Append($"'{dateOfEnrollment.ToString("yyyy-MM-dd")}',");
-                        sql.Append("1");
-                        sql.Append(");");
-
-                        sql.Append("SELECT Ptn_Pk, CAST(DECRYPTBYKEY([FirstName]) AS VARCHAR(50)) AS FirstName, CAST(DECRYPTBYKEY([LastName]) AS VARCHAR(50)) AS LastName, LocationID FROM [dbo].[mst_Patient] WHERE [Ptn_Pk] = SCOPE_IDENTITY();");
-                        sql.Append("exec [dbo].[pr_CloseDecryptedSession];");
-
-                        var result = await _unitOfWork.Repository<MstPatient>().FromSql(sql.ToString());
-
-                        StringBuilder sqlBuilder = new StringBuilder();
-                        sqlBuilder.Append("Insert Into Lnk_PatientProgramStart(Ptn_pk, ModuleId, StartDate, UserID, CreateDate)");
-                        sqlBuilder.Append("Values(");
-                        sqlBuilder.Append($"'{result[0].Ptn_Pk}',");
-                        sqlBuilder.Append("283,");
-                        sqlBuilder.Append($"'{dateOfEnrollment.ToString("yyyy-MM-dd")}',");
-                        sqlBuilder.Append($"'{createdBy}',");
-                        sqlBuilder.Append($"'{dateOfEnrollment.ToString("yyyy-MM-dd")}'");
-                        sqlBuilder.Append(");");
-
-                        var insertResult = await _unitOfWork.Context.Database.ExecuteSqlCommandAsync(sqlBuilder.ToString());
-
-                        StringBuilder sqlPatient = new StringBuilder();
-                        sqlPatient.Append($"UPDATE Patient SET ptn_pk = '{result[0].Ptn_Pk}' WHERE Id = '{patientId}';");
-                        var updateResult = await _unitOfWork.Context.Database.ExecuteSqlCommandAsync(sqlPatient.ToString());
-                    }
+                    //    StringBuilder sqlPatient = new StringBuilder();
+                    //    sqlPatient.Append($"UPDATE Patient SET ptn_pk = '{result[0].Ptn_Pk}' WHERE Id = '{patientId}';");
+                    //    var updateResult = await _unitOfWork.Context.Database.ExecuteSqlCommandAsync(sqlPatient.ToString());
+                    //}
 
                     trans.Commit();
 
@@ -682,6 +620,83 @@ namespace IQCare.Common.BusinessProcess.Services
                     trans.Rollback();
                     throw ex;
                 }
+            }
+        }
+
+
+        public async Task<List<MstPatient>> InsertIntoBlueCard(string firstName, string lastName, string midName, DateTime dateOfEnrollment, 
+            string maritalStatusName, string physicalAddress, string mobileNumber, string sex, string isDobPrecision, DateTime dob, int createdBy)
+        {
+            try
+            {
+                LookupLogic lookupLogic = new LookupLogic(_unitOfWork);
+                Facility facility = await _unitOfWork.Repository<Facility>().Get(x => x.DeleteFlag == 0).FirstOrDefaultAsync();
+                var referralId = await lookupLogic.GetDecodeIdByName("VCT", 17);
+
+                var maritalStatusId = await lookupLogic.GetDecodeIdByName(maritalStatusName, 17);
+                var address = physicalAddress == null ? " " : physicalAddress;
+                var phone = mobileNumber == null ? " " : mobileNumber;
+                var dobPrecision = isDobPrecision == "ESTIMATED" ? 1 : 0;
+
+                var gender = 0;
+                if (sex == "Male")
+                {
+                    gender = 16;
+                }
+                else if (sex == "Female")
+                {
+                    gender = 17;
+                }
+
+                string dateOfBirth = dob.ToString("yyyy-MM-dd");
+
+                StringBuilder sql = new StringBuilder();
+                sql.Append("exec pr_OpenDecryptedSession;");
+                sql.Append("Insert Into mst_Patient(FirstName, LastName, MiddleName, LocationID, PatientEnrollmentID, ReferredFrom, RegistrationDate, Sex, DOB, DobPrecision, MaritalStatus, Address, Phone, UserID, PosId, Status, DeleteFlag, CreateDate,MovedToPatientTable)");
+                sql.Append("Values(");
+                sql.Append($"ENCRYPTBYKEY(KEY_GUID('Key_CTC'),'{firstName}'),");
+                sql.Append($"ENCRYPTBYKEY(KEY_GUID('Key_CTC'),'{lastName}'),");
+                sql.Append($"ENCRYPTBYKEY(KEY_GUID('Key_CTC'),'{midName}'),");
+                sql.Append($"'{facility.FacilityID}',");
+                sql.Append("' ',");
+                sql.Append($"'{referralId}',");
+                sql.Append($"'{dateOfEnrollment.ToString("yyyy-MM-dd")}',");
+                sql.Append($"'{gender}',");
+                sql.Append($"'{dateOfBirth}',");
+                sql.Append($"'{dobPrecision}',");
+                sql.Append($"'{maritalStatusId}',");
+                sql.Append($"ENCRYPTBYKEY(KEY_GUID('Key_CTC'),'{address}'),");
+                sql.Append($"ENCRYPTBYKEY(KEY_GUID('Key_CTC'),'{phone}'),");
+                sql.Append($"'{createdBy}',");
+                sql.Append($"'{facility.PosID}',");
+                sql.Append("0,");
+                sql.Append("0,");
+                sql.Append($"'{dateOfEnrollment.ToString("yyyy-MM-dd")}',");
+                sql.Append("1");
+                sql.Append(");");
+
+                sql.Append("SELECT Ptn_Pk, CAST(DECRYPTBYKEY([FirstName]) AS VARCHAR(50)) AS FirstName, CAST(DECRYPTBYKEY([LastName]) AS VARCHAR(50)) AS LastName, LocationID FROM [dbo].[mst_Patient] WHERE [Ptn_Pk] = SCOPE_IDENTITY();");
+                sql.Append("exec [dbo].[pr_CloseDecryptedSession];");
+
+                var result = await _unitOfWork.Repository<MstPatient>().FromSql(sql.ToString());
+
+                StringBuilder sqlBuilder = new StringBuilder();
+                sqlBuilder.Append("Insert Into Lnk_PatientProgramStart(Ptn_pk, ModuleId, StartDate, UserID, CreateDate)");
+                sqlBuilder.Append("Values(");
+                sqlBuilder.Append($"'{result[0].Ptn_Pk}',");
+                sqlBuilder.Append("283,");
+                sqlBuilder.Append($"'{dateOfEnrollment.ToString("yyyy-MM-dd")}',");
+                sqlBuilder.Append($"'{createdBy}',");
+                sqlBuilder.Append($"'{dateOfEnrollment.ToString("yyyy-MM-dd")}'");
+                sqlBuilder.Append(");");
+
+                var insertResult = await _unitOfWork.Context.Database.ExecuteSqlCommandAsync(sqlBuilder.ToString());
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw e;
             }
         }
 
@@ -700,6 +715,54 @@ namespace IQCare.Common.BusinessProcess.Services
 
                 var patientUpdate = await _unitOfWork.Repository<Patient>().FromSql(sql.ToString());
                 return patientUpdate.FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public async Task<Patient> AddPatient(int personID, int userId, int ptn_pk, string facilityId = "")
+        {
+            try
+            {
+                var facility = await _unitOfWork.Repository<Facility>().Get(x => x.DeleteFlag == 0).FirstOrDefaultAsync();
+                var patientType = await _unitOfWork.Repository<LookupItemView>()
+                    .Get(x => x.MasterName == "PatientType" && x.ItemName == "New").FirstOrDefaultAsync();
+
+                var patient = await this.GetPatientByPersonId(personID);
+                if (patient == null)
+                {
+                    var person = await this.GetPerson(personID);
+                    DateTime dateOfBirth = DateTime.Now;
+                    if (person != null)
+                    {
+                        dateOfBirth = person.DateOfBirth;
+                    }
+
+                    if (string.IsNullOrWhiteSpace(facilityId))
+                    {
+                        facilityId = facility.PosID;
+                    }
+
+                    var sqlPatient = "exec pr_OpenDecryptedSession;" +
+                                     "Insert Into  Patient(ptn_pk,PersonId,PatientIndex,PatientType,FacilityId,Active,DateOfBirth,NationalId,DeleteFlag,CreatedBy,CreateDate,AuditData,DobPrecision)" +
+                                     $"Values({ptn_pk}, {personID}, {DateTime.Now.Year + '-' + personID}, '{patientType.ItemId}', '{facilityId}', 1," +
+                                     $"'{dateOfBirth.ToString("yyyy-MM-dd")}', ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '99999999'), 0, '{userId}', GETDATE()," +
+                                     $"NULL, 1);" +
+                                     $"SELECT [Id],[ptn_pk],[PersonId],[PatientIndex],[PatientType],[FacilityId],[Active],[DateOfBirth]," +
+                                     $"[DobPrecision],CAST(DECRYPTBYKEY(NationalId) AS VARCHAR(50)) [NationalId],[DeleteFlag],[CreatedBy]," +
+                                     $"[CreateDate],[AuditData],[RegistrationDate] FROM [dbo].[Patient] WHERE Id = SCOPE_IDENTITY();" +
+                                     $"exec [dbo].[pr_CloseDecryptedSession];";
+
+                    var patientInsert = await _unitOfWork.Repository<Patient>().FromSql(sqlPatient);
+
+                    return patientInsert.FirstOrDefault();
+                }
+                else
+                {
+                    return patient;
+                }
             }
             catch (Exception e)
             {
