@@ -2271,6 +2271,29 @@
 		showHideVisitByTS();
 		GetPatientExaminationTypeID();
 
+
+
+        var WhoStage1 = 'WHOStageIConditions';
+        var WhoStage2 = 'WHOStageIIConditions';
+        var WhoStage3 = 'WHOStageIIIConditions';
+        var WhoStage4 = 'WHOStageIVConditions';
+        loadWhoStageOIS(WhoStage1, "#dtlStageI", "1");
+        loadWhoStageOIS(WhoStage2, "#dtlStageII", "2");
+        loadWhoStageOIS(WhoStage3, "#dtlStageIII", "3");
+        loadWhoStageOIS(WhoStage4, "#dtlStageIV", "4");
+        GetPatientOIS();
+
+        $(document).on('change', 'input[type=checkbox].flat-red', function (e) {
+            if (this.checked) {
+                WhoStageCheckBoxClick(this, false);
+            }
+            else {
+                WhoStageCheckBoxClick(this, true);
+            }
+        });
+
+
+        selectedstage = $("#WHOStage option:selected").text();
 		// Manage adverse Events
 		$("#divAdverseEventOther").hide("fast");
 		$("#adverseEvent").focusout(function () {

@@ -258,7 +258,7 @@ namespace IQCare.Controllers.Common
 
 
 
-    }
+    
 
         [HttpGet("getFacility/{mflCode}")]
         public async Task<IActionResult> GetFacility(string mflCode)
