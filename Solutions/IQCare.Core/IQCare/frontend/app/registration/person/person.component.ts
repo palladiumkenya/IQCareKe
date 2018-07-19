@@ -8,7 +8,7 @@ import { PersonPopulation } from '../_models/personPopulation';
 import { RegistrationService } from '../_services/registration.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
-import { forkJoin } from 'rxjs/observable/forkJoin';
+import { forkJoin } from 'rxjs';
 import { ClientService } from '../../shared/_services/client.service';
 import { Store } from '@ngrx/store';
 import * as Consent from '../../shared/reducers/app.states';

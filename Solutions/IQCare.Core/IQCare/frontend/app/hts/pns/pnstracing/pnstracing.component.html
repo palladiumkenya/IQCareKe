@@ -34,7 +34,7 @@
                                             <div class="form-group">
                                                 <div>
                                                     <mat-form-field>
-                                                        <mat-select name="tracingOutcome" id="tracingOutcome" placeholder="Tracing Outcome" formControlName="TracingOutcome" (change)="onTracingOutcomeChange()"
+                                                        <mat-select name="tracingOutcome" id="tracingOutcome" placeholder="Tracing Outcome" formControlName="TracingOutcome" (selectionChange)="onTracingOutcomeChange()"
                                                             required>
                                                             <mat-option></mat-option>
                                                             <mat-option *ngFor="let option of pnsTracingOutcome" [value]="option.itemId">{{option.itemName}}</mat-option>
@@ -71,7 +71,7 @@
                                             <div class="form-group">
                                                 <div>
                                                     <mat-form-field>
-                                                        <mat-select name="consent" id="consent" tabindex="2" placeholder="Consent for Testing" formControlName="Consent" (change)="onConsentChange()">
+                                                        <mat-select name="consent" id="consent" tabindex="2" placeholder="Consent for Testing" formControlName="Consent" (selectionChange)="onConsentChange()">
                                                             <mat-option></mat-option>
                                                             <mat-option *ngFor="let option of yesNoOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
                                                         </mat-select>

@@ -1,5 +1,5 @@
 import { PnsService } from './../../_services/pns.service';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { DataSource } from '@angular/cdk/collections';
 import { Component, OnInit, NgZone } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';

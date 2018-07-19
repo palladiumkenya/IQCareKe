@@ -1,9 +1,10 @@
+
+import {from as observableFrom,  Observable } from 'rxjs';
 import { AfterViewInit, Component, NgZone, OnInit, ViewChild } from '@angular/core';
 import { Search } from '../_models/search';
 import { SearchService } from '../_services/search.service';
 import { DataSource } from '@angular/cdk/collections';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/from';
+
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as Consent from '../../shared/reducers/app.states';
@@ -85,7 +86,7 @@ export class SearchDataSource extends DataSource<any> {
 
     connect(): Observable<any[]> {
         if (this.search == undefined) {
-            return Observable.from([]);
+            return observableFrom([]);
         } else {
             return this.searchService.searchClient(this.search);
         }

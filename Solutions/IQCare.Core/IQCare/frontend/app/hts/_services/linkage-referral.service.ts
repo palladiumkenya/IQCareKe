@@ -2,9 +2,9 @@ import { Store } from '@ngrx/store';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import 'rxjs/add/observable/throw';
+
 import { Referral } from '../_models/referral';
 import { Tracing } from '../_models/tracing';
 import { Linkage } from '../_models/linkage';
