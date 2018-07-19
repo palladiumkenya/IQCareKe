@@ -469,14 +469,14 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                 middleName, dateEnrollment, maritalStatusName, physicalAddress, mobileNumber, gender, dobPrecision, dateOfBirth, userId);
                             if (mstResult.Count > 0)
                             {
+                                //Add PersonIdentifiers
+                                var personIdentifier = await registerPersonService.addPersonIdentifiers(person.Id, 10, afyaMobileId, userId);
                                 // Add Patient
                                 var patient = await registerPersonService.AddPatient(person.Id, userId, mstResult[0].Ptn_Pk, facilityId);
                                 // Person is enrolled state
                                 var enrollmentAppState = await registerPersonService.AddAppStateStore(person.Id, patient.Id, 7, null, null);
                                 // Enroll patient
                                 var patientIdentifier = await registerPersonService.EnrollPatient(enrollmentNo, patient.Id, 2, userId, dateEnrollment);
-                                //Add PersonIdentifiers
-                                var personIdentifier = await registerPersonService.addPersonIdentifiers(person.Id, 10, afyaMobileId, userId);
                                 // Add Marital Status
                                 var maritalStatus = await registerPersonService.AddMaritalStatus(person.Id, maritalStatusId, userId);
                                 // Add Person Key pop
