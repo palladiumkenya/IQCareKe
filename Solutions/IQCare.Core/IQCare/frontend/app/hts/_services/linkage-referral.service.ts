@@ -60,10 +60,24 @@ export class LinkageReferralService {
         );
     }
 
+    public getPersonLinkage(personId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/Linkage/GetPersonLinkage/' + personId).pipe(
+            tap((getPersonLinkage) => this.errorHandler.log(`fetched client linkage`)),
+            catchError(this.errorHandler.handleError<any[]>('getPersonLinkage'))
+        );
+    }
+
     public getClientReferral(personId: number): Observable<any[]> {
         return this.http.get<any[]>(this.API_URL + this.url + '/getClientReferral/' + personId).pipe(
             tap((getClientReferral) => this.errorHandler.log(`fetched client referral`)),
             catchError(this.errorHandler.handleError<any[]>('getClientReferral'))
+        );
+    }
+
+    public getClientPreviousTracing(personId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/hts/Tracing/GetPersonTracingList/' + personId).pipe(
+            tap((getClientPreviousTracing) => this.errorHandler.log(`fetched client previous referral`)),
+            catchError(this.errorHandler.handleError<any[]>('getClientPreviousTracing'))
         );
     }
 
