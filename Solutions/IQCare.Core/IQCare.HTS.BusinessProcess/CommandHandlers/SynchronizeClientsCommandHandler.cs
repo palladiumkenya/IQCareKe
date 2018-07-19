@@ -29,6 +29,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
         public async Task<Result<string>> Handle(SynchronizeClientsCommand request, CancellationToken cancellationToken)
         {
             string afyaMobileId = String.Empty;
+            using (var trans = _unitOfWork.Context.Database.BeginTransaction())
             using (_htsUnitOfWork)
             using (_unitOfWork)
             {
@@ -57,7 +58,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                     for (int i = 0; i < request.CLIENTS.Count; i++)
                     {
                         string firstName = request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME;
-                        string middleName = string.IsNullOrWhiteSpace(request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME)?"": request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME;
+                        string middleName = string.IsNullOrWhiteSpace(request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME) ? "" : request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME;
                         string lastName = request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_NAME.LAST_NAME;
                         int sex = request.CLIENTS[i].PATIENT_IDENTIFICATION.SEX;
                         DateTime dateOfBirth = DateTime.ParseExact(request.CLIENTS[i].PATIENT_IDENTIFICATION.DATE_OF_BIRTH, "yyyyMMdd", null);
@@ -110,7 +111,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         }
 
                         //var afyaMobileMessage = await registerPersonService.AddAfyaMobileInbox(DateTime.Now, afyaMobileId, JsonConvert.SerializeObject(request), false);
-                        
+
                         //check if person already exists
                         var identifiers = await registerPersonService.getPersonIdentifiers(afyaMobileId, 10);
                         if (identifiers.Count > 0)
@@ -126,7 +127,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                 var person = await registerPersonService.RegisterPerson(firstName, middleName, lastName,
                                     sex, dateOfBirth, userId);
                             }
-                            
+
                             var patient = await registerPersonService.GetPatientByPersonId(identifiers[0].PersonId);
                             if (patient != null)
                             {
@@ -148,7 +149,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                     var personIdentifier = await registerPersonService.addPersonIdentifiers(identifiers[0].PersonId, 10, afyaMobileId, userId);
                                 }
                             }
-                            
+
                             var updatedPersonPopulations = await registerPersonService.UpdatePersonPopulation(identifiers[0].PersonId,
                                 request.CLIENTS[i].PATIENT_IDENTIFICATION.KEY_POP, userId);
                             if (!string.IsNullOrWhiteSpace(landmark))
@@ -605,7 +606,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                             var partnerIsPositiveAppState = await registerPersonService.AddAppStateStore(person.Id, patient.Id, 4, patientMasterVisit.Id, htsEncounter.Id);
                                         }
 
-                                        
+
                                     }
                                 }
 
@@ -667,11 +668,13 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         }
                     }
 
+                    trans.Commit();
                     return Result<string>.Valid(afyaMobileId);
                 }
                 catch (Exception e)
                 {
                     Log.Error(e.Message);
+                    trans.Rollback();
                     // update message as processed
                     await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, false, DateTime.Now, e.Message);
                     return Result<string>.Invalid(e.Message);
