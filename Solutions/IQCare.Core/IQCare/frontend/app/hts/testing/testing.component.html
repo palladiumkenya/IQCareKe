@@ -122,7 +122,7 @@
 
                                         <mat-form-field>
                                             <mat-select placeholder="Final Result Given?" name="finalResultGiven" id="finalResultGiven" formControlName="finalResultGiven"
-                                                (change)="onFinalResultsGivenChange()" required>
+                                                (selectionChange)="onFinalResultsGivenChange()" required>
                                                 <mat-option value=""></mat-option>
                                                 <mat-option *ngFor="let option of yesNoOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
                                             </mat-select>
@@ -130,7 +130,7 @@
 
 
                                         <mat-form-field>
-                                            <mat-select placeholder="Accepted to partner listing" name="acceptedPartnerListing" id="acceptedPartnerListing" (change)="onAcceptedPartnerListingChange()"
+                                            <mat-select placeholder="Accepted to partner listing" name="acceptedPartnerListing" id="acceptedPartnerListing" (selectionChange)="onAcceptedPartnerListingChange()"
                                                 formControlName="acceptedPartnerListing" required>
                                                 <mat-option value=""></mat-option>
                                                 <mat-option *ngFor="let option of yesNoNA" [value]="option.itemId">{{option.itemName}}</mat-option>

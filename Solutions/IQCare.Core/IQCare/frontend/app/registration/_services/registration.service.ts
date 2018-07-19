@@ -1,12 +1,13 @@
+
+import {of as observableOf,  Observable } from 'rxjs';
 import { PersonDetails } from './../_models/persondetails';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/throw';
+
 import { catchError, tap } from 'rxjs/operators';
 import { Person } from '../_models/person';
-import 'rxjs/add/observable/of';
+
 import { PersonPopulation } from '../_models/personPopulation';
 import { ErrorHandlerService } from '../../shared/_services/errorhandler.service';
 import { PersonPopulationDetails } from '../_models/personpopulationdetails';
@@ -100,7 +101,7 @@ export class RegistrationService {
     public updatePersonContact(personId: number, physicalAddress: string, mobileNumber: string,
         alternativeNumber: string, emailAddress: string, userId: number): Observable<any> {
         if (!mobileNumber) {
-            return Observable.of([]);
+            return observableOf([]);
         }
 
         const Indata = {
@@ -122,7 +123,7 @@ export class RegistrationService {
         alternativeNumber: string, emailAddress: string, userId: number): Observable<any> {
 
         if (!mobileNumber) {
-            return Observable.of([]);
+            return observableOf([]);
         }
 
         const Indata = {
@@ -142,7 +143,7 @@ export class RegistrationService {
 
     public updatePersonMaritalStatus(personId: number, maritalStatusId: number, userId: number): Observable<any> {
         if (!maritalStatusId) {
-            return Observable.of([]);
+            return observableOf([]);
         }
 
         const Indata = {
@@ -159,7 +160,7 @@ export class RegistrationService {
 
     public addPersonMaritalStatus(personId: number, maritalStatusId: number, userId: number): Observable<any> {
         if (!maritalStatusId) {
-            return Observable.of([]);
+            return observableOf([]);
         }
 
         const Indata = {
@@ -177,7 +178,7 @@ export class RegistrationService {
     public updatePersonLocation(personId: number, countyId: number, subCountyId: number,
         wardId: number, userId: number, landMark: string): Observable<any> {
         if (!landMark) {
-            return Observable.of([]);
+            return observableOf([]);
         }
 
         const Indata = {
@@ -200,7 +201,7 @@ export class RegistrationService {
     public addPersonLocation(personId: number, countyId: number, subCountyId: number,
         wardId: number, userId: number, landMark: string): Observable<any> {
         if (!landMark) {
-            return Observable.of([]);
+            return observableOf([]);
         }
 
         const Indata = {
@@ -221,7 +222,7 @@ export class RegistrationService {
 
     public addPersonRelationship(personRelationship: any): Observable<any> {
         if (!personRelationship['RelationshipTypeId']) {
-            return Observable.of([]);
+            return observableOf([]);
         }
         return this.http.post<any>(this.API_URL + this._url + '/addPersonRelationship',
             JSON.stringify(personRelationship), httpOptions).pipe(

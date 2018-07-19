@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import 'rxjs/add/observable/throw';
+
 
 import { environment } from '../../../environments/environment';
 import {Encounter} from '../_models/encounter';
