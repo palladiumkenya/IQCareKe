@@ -12,6 +12,7 @@ using IQCare.HTS.BusinessProcess.Services;
 using IQCare.HTS.Infrastructure;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 namespace IQCare.HTS.BusinessProcess.CommandHandlers
 {
@@ -432,6 +433,8 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                 }
                 catch (Exception e)
                 {
+                    Log.Error(e.Message);
+                    Log.Error(e.InnerException.ToString());
                     return Result<string>.Invalid(e.Message);
                 }
             }
