@@ -268,7 +268,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                 if (!string.IsNullOrWhiteSpace(landmark))
                                 {
                                     var partnerLocation =
-                                        await registerPersonService.addPersonLocation(person.Id, 0, 0, 0, null, landmark,
+                                        await registerPersonService.addPersonLocation(person.Id, 0, 0, 0, " ", landmark,
                                             providerId);
                                 }
                                 
