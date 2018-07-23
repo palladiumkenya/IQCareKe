@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Transactions;
 using IQCare.Common.BusinessProcess.Commands.Setup;
 using IQCare.Common.BusinessProcess.Services;
 using IQCare.Common.Core.Models;
@@ -11,6 +14,7 @@ using IQCare.HTS.BusinessProcess.Services;
 using IQCare.HTS.Infrastructure;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using Newtonsoft.Json;
 using Serilog;
 
@@ -29,12 +33,13 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
         public async Task<Result<string>> Handle(SynchronizeClientsCommand request, CancellationToken cancellationToken)
         {
             string afyaMobileId = String.Empty;
-            using (var trans = _unitOfWork.Context.Database.BeginTransaction())
-            using (_htsUnitOfWork)
+
             using (_unitOfWork)
+            using (_htsUnitOfWork)
             {
                 LookupLogic lookupLogic = new LookupLogic(_unitOfWork);
                 RegisterPersonService registerPersonService = new RegisterPersonService(_unitOfWork);
+                EncounterTestingService encounterTestingService = new EncounterTestingService(_unitOfWork, _htsUnitOfWork);
 
                 for (int i = 0; i < request.CLIENTS.Count; i++)
                 {
@@ -53,7 +58,6 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                 try
                 {
                     var facilityId = request.MESSAGE_HEADER.SENDING_FACILITY;
-                    EncounterTestingService encounterTestingService = new EncounterTestingService(_unitOfWork, _htsUnitOfWork);
 
                     for (int i = 0; i < request.CLIENTS.Count; i++)
                     {
@@ -354,17 +358,19 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                         //add patient encounter
                                         var patientEncounter = await encounterTestingService.AddPatientEncounter(patient.Id,
                                             encounterTypeId, patientMasterVisit.Id, encounterDate, 2, providerId);
+                                        //add patient encounter
+                                        var htsEncounter = await encounterTestingService.addHtsEncounter(htsEncounterRemarks,
+                                            clientEverSelfTested, clientEverTested,
+                                            patientEncounter.Id, identifiers[0].PersonId, providerId, testEntryPoint, htsencounterType,
+                                            testingStrategy, clientTestedAs, monthsSinceLastTest, null);
+
                                         //add patient consent
                                         var consent = await encounterTestingService.addPatientConsent(patient.Id, patientMasterVisit.Id,
                                             2, consentValue, consentTypeId, encounterDate, providerId, null);
                                         //add patient screening
                                         var patientScreening = await encounterTestingService.addPatientScreening(patient.Id,
                                             patientMasterVisit.Id, screeningTypeId, encounterDate, tbStatus, providerId);
-                                        //add patient encounter
-                                        var htsEncounter = await encounterTestingService.addHtsEncounter(htsEncounterRemarks,
-                                            clientEverSelfTested, clientEverTested, null,
-                                            patientEncounter.Id, identifiers[0].PersonId, providerId, testEntryPoint, htsencounterType,
-                                            testingStrategy, clientTestedAs, monthsSinceLastTest, null);
+                                        
                                         //add disabilities
                                         var disabilities = await encounterTestingService.addDisabilities(clientDisabilities,
                                             patientEncounter.Id, identifiers[0].PersonId, providerId);
@@ -552,7 +558,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                             patientMasterVisit.Id, screeningTypeId, encounterDate, tbStatus, providerId);
                                         //add patient encounter
                                         var htsEncounter = await encounterTestingService.addHtsEncounter(htsEncounterRemarks,
-                                            clientEverSelfTested, clientEverTested, null,
+                                            clientEverSelfTested, clientEverTested,
                                             patientEncounter.Id, person.Id, providerId, testEntryPoint, htsencounterType,
                                             testingStrategy, clientTestedAs, monthsSinceLastTest, null);
                                         //add disabilities
@@ -667,14 +673,11 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                             }
                         }
                     }
-
-                    trans.Commit();
                     return Result<string>.Valid(afyaMobileId);
                 }
                 catch (Exception e)
                 {
                     Log.Error(e.Message);
-                    trans.Rollback();
                     // update message as processed
                     await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, false, DateTime.Now, e.Message);
                     return Result<string>.Invalid(e.Message);
