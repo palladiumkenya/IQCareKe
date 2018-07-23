@@ -526,100 +526,76 @@ namespace IQCare.Common.BusinessProcess.Services
 
         public async Task<PatientIdentifier> EnrollPatient(string enrollmentNo, int patientId, int serviceAreaId, int createdBy, DateTime dateOfEnrollment)
         {
-            using (var trans = _unitOfWork.Context.Database.BeginTransaction())
+            try
             {
-                try
+                var previouslyIdentifiers = await _unitOfWork.Repository<PatientIdentifier>().Get(y =>
+                        y.IdentifierValue == enrollmentNo && y.IdentifierTypeId == 8)
+                    .ToListAsync();
+
+                if (previouslyIdentifiers.Count > 0)
                 {
-                    var previouslyIdentifiers = await _unitOfWork.Repository<PatientIdentifier>().Get(y =>
-                            y.IdentifierValue == enrollmentNo && y.IdentifierTypeId == 8)
-                        .ToListAsync();
-
-                    if (previouslyIdentifiers.Count > 0)
-                    {
-                        var exception = new Exception("No: " + enrollmentNo + " already exists");
-                        throw exception;
-                    }
-
-                    var enrollmentVisitType = await _unitOfWork.Repository<LookupItemView>().Get(x => x.MasterName == "VisitType" && x.ItemName == "Enrollment").FirstOrDefaultAsync();
-                    int? visitType = enrollmentVisitType != null ? enrollmentVisitType.ItemId : 0;
-                    var patientMasterVisit = new PatientMasterVisit()
-                    {
-                        PatientId = patientId,
-                        ServiceId = serviceAreaId,
-                        Start = DateTime.Now,
-                        End = null,
-                        Active = false,
-                        VisitDate = DateTime.Now,
-                        VisitType = visitType,
-                        Status = 1,
-                        CreateDate = DateTime.Now,
-                        DeleteFlag = false,
-                        CreatedBy = createdBy
-                    };
-
-                    await _unitOfWork.Repository<PatientMasterVisit>().AddAsync(patientMasterVisit);
-                    await _unitOfWork.SaveAsync();
-
-                    var patientEnrollment = new PatientEnrollment()
-                    {
-                        PatientId = patientId,
-                        ServiceAreaId = serviceAreaId,
-                        EnrollmentDate = dateOfEnrollment,
-                        EnrollmentStatusId = 0,
-                        TransferIn = false,
-                        CareEnded = false,
-                        DeleteFlag = false,
-                        CreatedBy = createdBy,
-                        CreateDate = DateTime.Now
-
-                    };
-
-                    await _unitOfWork.Repository<PatientEnrollment>().AddAsync(patientEnrollment);
-                    await _unitOfWork.SaveAsync();
-
-                    var patientIdentifier = new PatientIdentifier()
-                    {
-                        PatientId = patientId,
-                        PatientEnrollmentId = patientEnrollment.Id,
-                        IdentifierTypeId = 8,
-                        IdentifierValue = enrollmentNo,
-                        DeleteFlag = false,
-                        CreatedBy = createdBy,
-                        CreateDate = DateTime.Now,
-                        Active = true
-
-                    };
-
-                    await _unitOfWork.Repository<PatientIdentifier>().AddAsync(patientIdentifier);
-                    await _unitOfWork.SaveAsync();
-
-                    //GetPatientDetails patientDetails = new GetPatientDetails(_unitOfWork);
-                    
-
-                    //var patientLookup = await patientDetails.GetPatientByPatientId(patientId);
-
-                    //if (patientLookup.Count > 0)
-                    //{
-                        
-
-                        
-
-                        
-
-                    //    StringBuilder sqlPatient = new StringBuilder();
-                    //    sqlPatient.Append($"UPDATE Patient SET ptn_pk = '{result[0].Ptn_Pk}' WHERE Id = '{patientId}';");
-                    //    var updateResult = await _unitOfWork.Context.Database.ExecuteSqlCommandAsync(sqlPatient.ToString());
-                    //}
-
-                    trans.Commit();
-
-                    return patientIdentifier;
+                    var exception = new Exception("No: " + enrollmentNo + " already exists");
+                    throw exception;
                 }
-                catch (Exception ex)
+
+                var enrollmentVisitType = await _unitOfWork.Repository<LookupItemView>().Get(x => x.MasterName == "VisitType" && x.ItemName == "Enrollment").FirstOrDefaultAsync();
+                int? visitType = enrollmentVisitType != null ? enrollmentVisitType.ItemId : 0;
+                var patientMasterVisit = new PatientMasterVisit()
                 {
-                    trans.Rollback();
-                    throw ex;
-                }
+                    PatientId = patientId,
+                    ServiceId = serviceAreaId,
+                    Start = DateTime.Now,
+                    End = null,
+                    Active = false,
+                    VisitDate = DateTime.Now,
+                    VisitType = visitType,
+                    Status = 1,
+                    CreateDate = DateTime.Now,
+                    DeleteFlag = false,
+                    CreatedBy = createdBy
+                };
+
+                await _unitOfWork.Repository<PatientMasterVisit>().AddAsync(patientMasterVisit);
+                await _unitOfWork.SaveAsync();
+
+                var patientEnrollment = new PatientEnrollment()
+                {
+                    PatientId = patientId,
+                    ServiceAreaId = serviceAreaId,
+                    EnrollmentDate = dateOfEnrollment,
+                    EnrollmentStatusId = 0,
+                    TransferIn = false,
+                    CareEnded = false,
+                    DeleteFlag = false,
+                    CreatedBy = createdBy,
+                    CreateDate = DateTime.Now
+
+                };
+
+                await _unitOfWork.Repository<PatientEnrollment>().AddAsync(patientEnrollment);
+                await _unitOfWork.SaveAsync();
+
+                var patientIdentifier = new PatientIdentifier()
+                {
+                    PatientId = patientId,
+                    PatientEnrollmentId = patientEnrollment.Id,
+                    IdentifierTypeId = 8,
+                    IdentifierValue = enrollmentNo,
+                    DeleteFlag = false,
+                    CreatedBy = createdBy,
+                    CreateDate = DateTime.Now,
+                    Active = true
+
+                };
+
+                await _unitOfWork.Repository<PatientIdentifier>().AddAsync(patientIdentifier);
+                await _unitOfWork.SaveAsync();
+
+                return patientIdentifier;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
 
