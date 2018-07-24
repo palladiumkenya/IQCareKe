@@ -304,7 +304,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                             }
                                         }
 
-                                        for (int j = 0; request.CLIENTS[i].ENCOUNTER.TRACING != null && j < request.CLIENTS[i].ENCOUNTER.TRACING.Count; j++)
+                                        for (int j = 0; request.CLIENTS[i].ENCOUNTER != null  && request.CLIENTS[i].ENCOUNTER.TRACING != null && j < request.CLIENTS[i].ENCOUNTER.TRACING.Count; j++)
                                         {
                                             DateTime tracingDate = DateTime.ParseExact(request.CLIENTS[i].ENCOUNTER.TRACING[j].TRACING_DATE, "yyyyMMdd", null);
                                             int mode = request.CLIENTS[i].ENCOUNTER.TRACING[j].TRACING_MODE;
@@ -316,7 +316,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                         }
 
                                         //check for linkage
-                                        if (request.CLIENTS[i].ENCOUNTER.LINKAGE != null)
+                                        if (request.CLIENTS[i].ENCOUNTER != null && request.CLIENTS[i].ENCOUNTER.LINKAGE != null)
                                         {
                                             DateTime dateLinkageEnrolled = DateTime.ParseExact(request.CLIENTS[i].ENCOUNTER.LINKAGE.DATE_ENROLLED, "yyyyMMdd", null);
                                             string linkageCCCNumber = request.CLIENTS[i].ENCOUNTER.LINKAGE.CCC_NUMBER;
@@ -329,7 +329,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                                 linkageCCCNumber, linkageFacility, providerId, healthWorker, carde);
                                         }
 
-                                        if (request.CLIENTS[i].ENCOUNTER.REFERRAL != null)
+                                        if (request.CLIENTS[i].ENCOUNTER != null && request.CLIENTS[i].ENCOUNTER.REFERRAL != null)
                                         {
                                             //add referral
                                             var facility = await encounterTestingService.GetCurrentFacility();
@@ -415,7 +415,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                             }
 
                             //check for tracing
-                            for (int j = 0; request.CLIENTS[i].ENCOUNTER.TRACING != null && j < request.CLIENTS[i].ENCOUNTER.TRACING.Count; j++)
+                            for (int j = 0; request.CLIENTS[i].ENCOUNTER != null && request.CLIENTS[i].ENCOUNTER.TRACING != null && j < request.CLIENTS[i].ENCOUNTER.TRACING.Count; j++)
                             {
                                 DateTime tracingDate = DateTime.ParseExact(request.CLIENTS[i].ENCOUNTER.TRACING[j].TRACING_DATE, "yyyyMMdd", null);
                                 int mode = request.CLIENTS[i].ENCOUNTER.TRACING[j].TRACING_MODE;
@@ -427,7 +427,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                             }
 
                             //check for linkage
-                            if (request.CLIENTS[i].ENCOUNTER.LINKAGE != null)
+                            if (request.CLIENTS[i].ENCOUNTER != null && request.CLIENTS[i].ENCOUNTER.LINKAGE != null)
                             {
                                 DateTime dateLinkageEnrolled = DateTime.ParseExact(request.CLIENTS[i].ENCOUNTER.LINKAGE.DATE_ENROLLED, "yyyyMMdd", null);
                                 string linkageCCCNumber = request.CLIENTS[i].ENCOUNTER.LINKAGE.CCC_NUMBER;
@@ -441,7 +441,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                             }
 
                             //check for referral
-                            if (request.CLIENTS[i].ENCOUNTER.REFERRAL != null)
+                            if (request.CLIENTS[i].ENCOUNTER != null && request.CLIENTS[i].ENCOUNTER.REFERRAL != null)
                             {
                                 //add referral
                                 var facility = await encounterTestingService.GetCurrentFacility();
@@ -617,7 +617,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                 }
 
                                 //check for client tracing
-                                for (int j = 0; request.CLIENTS[i].ENCOUNTER.TRACING != null && j < request.CLIENTS[i].ENCOUNTER.TRACING.Count; j++)
+                                for (int j = 0; (request.CLIENTS[i].ENCOUNTER != null && request.CLIENTS[i].ENCOUNTER.TRACING != null && j < request.CLIENTS[i].ENCOUNTER.TRACING.Count); j++)
                                 {
                                     DateTime tracingDate = DateTime.ParseExact(request.CLIENTS[i].ENCOUNTER.TRACING[j].TRACING_DATE, "yyyyMMdd", null);
                                     int mode = request.CLIENTS[i].ENCOUNTER.TRACING[j].TRACING_MODE;
@@ -629,7 +629,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                 }
 
                                 //check for linkage
-                                if (request.CLIENTS[i].ENCOUNTER.LINKAGE != null)
+                                if (request.CLIENTS[i].ENCOUNTER != null && request.CLIENTS[i].ENCOUNTER.LINKAGE != null)
                                 {
                                     DateTime dateLinkageEnrolled = DateTime.ParseExact(request.CLIENTS[i].ENCOUNTER.LINKAGE.DATE_ENROLLED, "yyyyMMdd", null);
                                     string linkageCCCNumber = request.CLIENTS[i].ENCOUNTER.LINKAGE.CCC_NUMBER;
@@ -643,7 +643,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                 }
 
                                 //check for referral
-                                if (request.CLIENTS[i].ENCOUNTER.REFERRAL != null)
+                                if (request.CLIENTS[i].ENCOUNTER != null && request.CLIENTS[i].ENCOUNTER.REFERRAL != null)
                                 {
                                     //add referral
                                     var facility = await encounterTestingService.GetCurrentFacility();
@@ -673,11 +673,15 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                             }
                         }
                     }
+
+                    //update message has been processed
+                    await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now, "success");
                     return Result<string>.Valid(afyaMobileId);
                 }
                 catch (Exception e)
                 {
                     Log.Error(e.Message);
+                    Log.Error(e.InnerException.ToString());
                     // update message as processed
                     await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, false, DateTime.Now, e.Message);
                     return Result<string>.Invalid(e.Message);
