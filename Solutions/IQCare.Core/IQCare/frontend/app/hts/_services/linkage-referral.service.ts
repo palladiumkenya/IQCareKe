@@ -1,13 +1,14 @@
+import { Store } from '@ngrx/store';
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {environment} from '../../../environments/environment';
-import {Observable} from 'rxjs';
-import {catchError, tap} from 'rxjs/operators';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
+import { Observable } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 
-import {Referral} from '../_models/referral';
-import {Tracing} from '../_models/tracing';
-import {Linkage} from '../_models/linkage';
-import {ErrorHandlerService} from '../../shared/_services/errorhandler.service';
+import { Referral } from '../_models/referral';
+import { Tracing } from '../_models/tracing';
+import { Linkage } from '../_models/linkage';
+import { ErrorHandlerService } from '../../shared/_services/errorhandler.service';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -20,7 +21,7 @@ export class LinkageReferralService {
     private url = '/api/Referral';
 
     constructor(private http: HttpClient,
-                private errorHandler: ErrorHandlerService) { }
+        private errorHandler: ErrorHandlerService) { }
 
     public getReferralReasons() {
         const options = JSON.stringify(['ReferralReason']);
@@ -38,6 +39,13 @@ export class LinkageReferralService {
         );
     }
 
+    public getFacility(mflCode: string) {
+        return this.http.get<any>(this.API_URL + '/api/Lookup/getFacility/' + mflCode).pipe(
+            tap(getFacility => this.errorHandler.log('get Facility')),
+            catchError(this.errorHandler.handleError<any[]>('getFacility'))
+        );
+    }
+
     public getTracingOptions(): Observable<any[]> {
         return this.http.get<any[]>(this.API_URL + this._lookupurl).pipe(
             tap(tracingoptions => this.errorHandler.log('fetched all tracing options')),
@@ -52,7 +60,28 @@ export class LinkageReferralService {
         );
     }
 
-    public addReferralTracing(referral: Referral, tracing: Tracing[], tracingType: number): Observable<Referral> {
+    public getPersonLinkage(personId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/Linkage/GetPersonLinkage/' + personId).pipe(
+            tap((getPersonLinkage) => this.errorHandler.log(`fetched client linkage`)),
+            catchError(this.errorHandler.handleError<any[]>('getPersonLinkage'))
+        );
+    }
+
+    public getClientReferral(personId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + this.url + '/getClientReferral/' + personId).pipe(
+            tap((getClientReferral) => this.errorHandler.log(`fetched client referral`)),
+            catchError(this.errorHandler.handleError<any[]>('getClientReferral'))
+        );
+    }
+
+    public getClientPreviousTracing(personId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/hts/Tracing/GetPersonTracingList/' + personId).pipe(
+            tap((getClientPreviousTracing) => this.errorHandler.log(`fetched client previous referral`)),
+            catchError(this.errorHandler.handleError<any[]>('getClientPreviousTracing'))
+        );
+    }
+
+    public addReferralTracing(referral: Referral, tracing: Tracing[], tracingType: number, isEdit: boolean): Observable<Referral> {
         const trace = [];
         for (let i = 0; i < tracing.length; i++) {
             const mode = tracing[i]['mode']['itemId'];
@@ -66,14 +95,15 @@ export class LinkageReferralService {
         }
 
         const Indata = {
-            ReferredTo : referral.referredTo,
+            ReferredTo: referral.referredTo,
             DateToBeEnrolled: referral.dateToBeEnrolled,
             ReferralReason: referral.referralReason,
             UserId: referral.userId,
             ServiceAreaId: referral.serviceAreaId,
             PersonId: referral.personId,
             FromFacilityId: referral.facilityId,
-            Tracing: trace
+            Tracing: trace,
+            IsEdit: isEdit
         };
 
         return this.http.post(this.API_URL + this.url, JSON.stringify(Indata), httpOptions).pipe(

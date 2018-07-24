@@ -26,20 +26,6 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers
         {
             try
             {
-
-                //var sql =
-                //    "exec pr_OpenDecryptedSession;" +
-                //    "Insert Into Person(FirstName, MidName,LastName,Sex,DateOfBirth,DobPrecision,Active,DeleteFlag,CreateDate,CreatedBy)" +
-                //    $"Values(ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{request.Person.FirstName}'), ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{request.Person.MiddleName}')," +
-                //    $"ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{request.Person.LastName}'), {request.Person.Sex}, '{request.Person.DateOfBirth.ToString("yyyy-MM-dd")}', 1," +
-                //    $"1,0,GETDATE(), '{request.Person.CreatedBy}');" +
-                //    "SELECT [Id] , CAST(DECRYPTBYKEY(FirstName) AS VARCHAR(50)) [FirstName] ,CAST(DECRYPTBYKEY(MidName) AS VARCHAR(50)) MidName" +
-                //    ",CAST(DECRYPTBYKEY(LastName) AS VARCHAR(50)) [LastName] ,[Sex] ,[Active] ,[DeleteFlag] ,[CreateDate] " +
-                //    ",[CreatedBy] ,[AuditData] ,[DateOfBirth] ,[DobPrecision] FROM [dbo].[Person] WHERE Id = SCOPE_IDENTITY();" +
-                //    "exec [dbo].[pr_CloseDecryptedSession];";
-
-                //var personInsert = await _unitOfWork.Repository<Person>().FromSql(sql);
-
                 RegisterPersonService registerPersonService = new RegisterPersonService(_unitOfWork);
                 var result = await registerPersonService.RegisterPerson(request.Person.FirstName, request.Person.MiddleName,
                     request.Person.LastName, request.Person.Sex, request.Person.DateOfBirth, request.Person.CreatedBy);

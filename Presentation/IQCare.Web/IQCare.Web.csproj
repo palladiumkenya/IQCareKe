@@ -354,6 +354,7 @@
     <Content Include="Patient\AddTechnicalArea.aspx" />
     <Content Include="Patient\FindAdd.aspx" />
     <Content Include="Patient\Registration.aspx" />
+    <Content Include="Pharmacy\Requests\EditPharmacyPrescription.aspx" />
     <Content Include="Statistics\Facility.aspx" />
     <Content Include="Statistics\HEI.aspx" />
     <Content Include="Statistics\HivCare.aspx" />
@@ -2337,8 +2338,15 @@
     <Compile Include="Pharmacy\frmpharmacyselector.aspx.designer.cs">
       <DependentUpon>frmpharmacyselector.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pharmacy\Requests\EditPharmacyPrescription.aspx.designer.cs">
+      <DependentUpon>EditPharmacyPrescription.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pharmacy\Requests\FindPharmacyPrescription.aspx.designer.cs">
       <DependentUpon>FindPharmacyPrescription.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pharmacy\Requests\EditPharmacyPrescription.aspx.cs">
+      <DependentUpon>EditPharmacyPrescription.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ProgressControl.ascx.designer.cs">
       <DependentUpon>ProgressControl.ascx</DependentUpon>
@@ -3137,7 +3145,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>54866</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:54866/</IISUrl>
+          <IISUrl>http://localhost:1155/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

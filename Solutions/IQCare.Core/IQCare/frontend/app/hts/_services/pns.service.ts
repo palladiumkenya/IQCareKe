@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {environment} from '../../../environments/environment';
-import {catchError, tap} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
+import { catchError, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
-import {Pnsform} from '../_models/pnsform';
-import {ErrorHandlerService} from '../../shared/_services/errorhandler.service';
+import { Pnsform } from '../_models/pnsform';
+import { ErrorHandlerService } from '../../shared/_services/errorhandler.service';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -19,16 +19,16 @@ export class PnsService {
     private lookup = '/api/Lookup/getCustomOptions';
 
     constructor(private http: HttpClient,
-                private errorHandler: ErrorHandlerService) { }
+        private errorHandler: ErrorHandlerService) { }
 
     public getClientPartners(patientId: number): Observable<any[]> {
         const relationshipTypes = JSON.stringify(['Co-Wife', 'Partner', 'Spouse']);
 
         return this.http.post<any[]>(this.API_URL + this.url + '/getPartners/?patientId='
             + patientId, relationshipTypes, httpOptions).pipe(
-            tap(getClientPartners => this.errorHandler.log('fetched all partners')),
-            catchError(this.errorHandler.handleError<any[]>('getClientPartners'))
-        );
+                tap(getClientPartners => this.errorHandler.log('fetched all partners')),
+                catchError(this.errorHandler.handleError<any[]>('getClientPartners'))
+            );
     }
 
     public getCustomOptions(): Observable<any[]> {
@@ -64,6 +64,13 @@ export class PnsService {
         return this.http.post<any>(this.API_URL + this.pns, JSON.stringify(Indata), httpOptions).pipe(
             tap(addedPnsScreening => this.errorHandler.log('add pns screening')),
             catchError(this.errorHandler.handleError<any[]>('addPnsScreening'))
+        );
+    }
+
+    public geTracingList(personId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/hts/Tracing/GetPersonTracingList/' + personId).pipe(
+            tap(getPnsTracingList => this.errorHandler.log('get personId tracings')),
+            catchError(this.errorHandler.handleError<any[]>('getPnsTracingList'))
         );
     }
 }

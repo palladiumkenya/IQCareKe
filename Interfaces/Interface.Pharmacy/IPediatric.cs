@@ -11,10 +11,16 @@ namespace Interface.Pharmacy
     {
         List<Prescription> GetAll(Entities.Common.IFilter orderFilters);
     }
+  
     public interface IPediatric
     {
         DataSet GetPediatricFields(int patientId);
         DataSet GetExistPaediatricDetails(int patientId);
+        int ModifyPrescription(int patientId, int pharmacyId, int locationId, int regimenLine,
+           string PharmacyNotes, DataTable theDT, DataSet theDrgMst, int orderedBy, DateTime orderedByDate,
+           int dispensedBy, DateTime dispensedByDate, int signature, int employeedId, int orderType, int visitType, int userId,
+           decimal height, decimal weight, int FDC, int progId, int providerId, DataTable theCustomFieldData, int periodTaken,
+           int flag, int sCMFlag, DateTime appntDate, int appntReason, string editReason, int? moduleId = null);
         int SaveUpdatePaediatricDetail(int patientId, int pharmacyId, int locationId, int regimenLine,
             string PharmacyNotes, DataTable theDT, DataSet theDrgMst, int orderedBy, DateTime orderedByDate,
             int dispensedBy, DateTime dispensedByDate, int signature, int employeedId, int orderType, int visitType, int userId,

@@ -252,10 +252,12 @@ namespace IQCare.CCC.UILogic
 
             if(theDS.Tables[2].Rows.Count > 0)
             {
-                if(theDS.Tables[2].Rows[0][2].ToString() == "" && theDS.Tables[2].Rows[0][3].ToString() == "True")
+                if (theDS.Tables[2].Rows[0][2].ToString() == "" && theDS.Tables[2].Rows[0][3].ToString() == "True")
                     categorizationParameters.VL = 50; //undetectable
-                else
+                else if (theDS.Tables[2].Rows[0][2].ToString() != "")
                     categorizationParameters.VL = Convert.ToDouble(theDS.Tables[2].Rows[0][2].ToString());
+                else
+                    categorizationParameters.VL = 1001;
             }
             else
             {
@@ -471,7 +473,7 @@ namespace IQCare.CCC.UILogic
                         //    }
                         //}
 
-                        if (theDR["VisitName"].ToString() == "CCC")
+                        if ((theDR["VisitName"].ToString() == "CCC") || (theDR["VisitName"].ToString() == "ccc-encounter"))
                         {
                             theFrmRoot.NavigateUrl = "PatientEncounter.aspx?visitId=" + theDR["visitID"].ToString();
                             theFrmRoot.ImageUrl = "~/images/15px-Yes_check.svg.png";
@@ -602,6 +604,17 @@ namespace IQCare.CCC.UILogic
 
             /////////////////////////////////////////////////////////////
 
+        }
+
+        public void GenerateExcel(string category)
+        {
+            //IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
+            //DataTable theDT = patientEncounter.GenerateExcelDifferentiatedCare(category);
+
+            //System.IO.Directory.CreateDirectory(@"C:\Reports");
+            //Excel.ExcelUtlity obj = new Excel.ExcelUtlity();
+            //obj.WriteDataTableToExcel(theDT, "Sheet1", "C:\\Reports\\" + (category.Replace("(","")).Replace(")","") + "_" + (DateTime.Now.ToString("dd/MM/yyyy").Replace("/","_")).Replace(":","_") + ".xlsx", "Details");
+            //obj.openExcel("C:\\Reports\\" + (category.Replace("(", "")).Replace(")", "") + "_" + (DateTime.Now.ToString("dd/MM/yyyy").Replace("/","_")).Replace(":","_") + ".xlsx");
         }
     }
 }

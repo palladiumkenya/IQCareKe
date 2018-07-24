@@ -589,7 +589,9 @@
 
 				var personAge = 0;
 				var userId=<%=UserId%>;
-				var personId = 0;
+                var personId = 0;
+
+		        var editPersonId = 0;
 
 				/*----- make readonly by default ----- */
 				$("#<%=ChildOrphan.ClientID%>").attr('disabled', 'disbaled');
@@ -626,7 +628,8 @@
 					personAgeRule();
 					duplicateCheck();
 					$("#dobPrecision").val("true");
-					PageMethods.SetDobPrecisionSession(true);
+                    PageMethods.SetDobPrecisionSession(true);
+                    
 				});
 
 				$('#<%=countyId.ClientID%>').on("change", function() {
@@ -1241,9 +1244,67 @@
 					}
 				}*/
 
-				var PatientId = '<%=Session["PatientEditId"]%>';
+                var PatientId = '<%=Session["PatientEditId"]%>';
 
-				//console.log(PatientId);
+                var editPersonId = '<%=Session["editPersonId"]%>';
+
+		        if (editPersonId > 0) {
+
+		            $.ajax({
+		                type: "POST",
+		                url: "../WebService/PersonService.asmx/GetPersonNoEnrolledDetails",
+		                data: "{'personId':'" + editPersonId + "'}",
+		                contentType: "application/json; charset=utf-8",
+		                dataType: "json",
+		                success: function(response) {
+		                    var personDetails = JSON.parse(response.d);
+		                     $("#personFname").val(personDetails.FirstName);
+		                    $("#personMName").val(personDetails.MiddleName);
+                            $("#personLName").val(personDetails.LastName);
+		                    $('input[name=PatientTypeId][value=' + personDetails.patientType + ']').attr('checked', true);
+                            $("#Gender").val(personDetails.Sex);
+                           
+
+                            if (moment('1900-06-15').isSame(personDetails.DoB)) {
+                                $("#DateOfEnrollment").val("");
+                            } else {
+                                $('#MyDateOfBirth').datepicker('setDate', moment(personDetails.DoB).format('DD-MMM-YYYY'));
+                                $("#personAge").val(personDetails.Age);
+                            }
+
+		                    var RBID = '<%=PatientTypeId.ClientID %>';
+		                    var RB1 = document.getElementById(RBID);
+		                    var radio = RB1.getElementsByTagName("input");
+ 
+		                    for (var i = 0; i < radio.length; i++) {
+		                        //radio[i].disabled = true;
+		                        if (radio[i].value == personDetails.PatientType) {
+		                            radio[i].checked = true;
+		                        }
+                            }
+                            $("#MaritalStatusId").val(personDetails.MaritalStatus);
+                            
+                            $("#<%=dobPrecision.ClientID%>").val(personDetails.DateOfBirthPrecision);
+
+		                    var RBID = '<%=PopulationType.ClientID %>';
+		                    var RB1 = document.getElementById(RBID);
+		                    var radio = RB1.getElementsByTagName("input");
+ 
+		                    for (var i = 0; i < radio.length; i++) {
+		                        if (radio[i].value == personDetails.KeyPopName) {
+		                            radio[i].checked = true;
+		                        }
+		                    }
+		                    
+		                },
+		                error: function(response) {
+		                    generate('error', response.d);
+		                }
+
+		            });
+		        }
+
+		        //console.log(PatientId);
 
 				if (PatientId > 0) {
 					$.ajax({
@@ -1253,7 +1314,8 @@
 						contentType: "application/json; charset=utf-8",
 						dataType: "json",
 						success: function (response) {
-							var patientDetails = JSON.parse(response.d);
+                            var patientDetails = JSON.parse(response.d);
+						    //alert(response.d);
 							console.log(patientDetails);
 							/*Patient Type*/
 							//console.log(patientDetails.PatientType);
@@ -1277,7 +1339,7 @@
 							//$("#Gender").prop('disabled', true);
 							
 							/*Social Status*/
-							$('#MyDateOfBirth').datepicker('setDate', patientDetails.PersonDoB);
+							$('#MyDateOfBirth').datepicker('setDate',patientDetails.PersonDoB);
 							$("#<%=dobPrecision.ClientID%>").val(patientDetails.DateOfBirthPrecision);
 							$("#ChildOrphan").val(patientDetails.ChildOrphan);
 							$("#Inschool").val(patientDetails.Inschool);
@@ -1652,8 +1714,9 @@
 					//console.log("here");
 					//console.log(_fp);
 					//return false;
+				    var isEnrolled = 'notEnrolledClients';
 					if (Object.keys(_fp).length > 0) {
-						if (_fp["IsPatient"] == 1) {
+						if (_fp["IsPatient"] === 1) {
 							$.when(setPatientIdSession(_fp["PatientId"])).then(function () {
 								setTimeout(function () {
 									window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientHome.aspx")%>';
@@ -1662,10 +1725,26 @@
 						} else {
 							var personId = _fp["PersonId"];
 							getPatientTypeId("PatientType", "New");
+						    $.ajax({
+						        type: "POST",
+						        url: "patientRegistration.aspx/RedirectToRegistrationEdit", //Pagename/Functionname
+						        contentType: "application/json;charset=utf-8",
+						        data: "{'personId':'" + personId + "','isEnrolled':'"+ isEnrolled +"'}",//data
+						        dataType: "json",
+						        success: function (data) {
+						            if (data.d === "success") {
+						                setTimeout(function () { window.location.href = "./patientRegistration.aspx" }, 500);
+						            }
+						        },
+						        error: function (result) {
 
-							$.ajax({
+						            alert("error");
+						        }
+						    });
+
+							<%--$.ajax({
 								type: "POST",
-								url: "../WebService/PersonService.asmx/SetSession",
+								url: "../WebService/PatientRegistration.asmx/RedirectToRegistrationEdit",
 								contentType: "application/json; charset=utf-8",
 								data: "{'personId': '" + personId + "'}",
 								dataType: "json",
@@ -1675,7 +1754,7 @@
 								error: function (response) {
 									generate('error', response.d);
 								}
-							});
+							});--%>
 						}
 					} else {
 						toastr.error("Please Select one person from the list", "Patient Duplicates");

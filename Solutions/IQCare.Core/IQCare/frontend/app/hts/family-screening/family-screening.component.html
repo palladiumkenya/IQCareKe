@@ -34,7 +34,7 @@
 
                                 <div class="col-lg-6 col-md-6 col-sm-6">
                                     <mat-form-field>
-                                        <mat-select placeholder="HIV Status" formControlName="hivStatus" tabindex="2" (change)="onHivStatusSelected()">
+                                        <mat-select placeholder="HIV Status" formControlName="hivStatus" tabindex="2" (selectionChange)="onHivStatusSelected()">
                                             <mat-option></mat-option>
                                             <mat-option *ngFor="let option of hivStatusOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
                                         </mat-select>

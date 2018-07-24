@@ -15,8 +15,8 @@ namespace IQCare.HTS.BusinessProcess.Commands
         public int ServiceAreaId { get; set; }
         public int PersonId { get; set; }
         public int FromFacilityId { get; set; }
-
         public List<TracingArray> Tracing { get; set; }
+        public bool IsEdit { get; set; }
     }
 
     public class TracingArray

@@ -1,21 +1,21 @@
-import {AfterViewInit, Component, NgZone, OnInit} from '@angular/core';
-import {MatDialog, MatDialogConfig} from '@angular/material';
-import {TestDialogComponent} from '../testdialog/testdialog.component';
-import {EncounterService} from '../_services/encounter.service';
-import {FinalTestingResults, Testing} from '../_models/testing';
-import {select, Store} from '@ngrx/store';
-import {ActivatedRoute, Router} from '@angular/router';
-import {SnotifyService} from 'ng-snotify';
-import {NotificationService} from '../../shared/_services/notification.service';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {AppStateService} from '../../shared/_services/appstate.service';
-import {AppEnum} from '../../shared/reducers/app.enum';
-import {ClientService} from '../../shared/_services/client.service';
+import { AfterViewInit, Component, NgZone, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { TestDialogComponent } from '../testdialog/testdialog.component';
+import { EncounterService } from '../_services/encounter.service';
+import { FinalTestingResults, Testing } from '../_models/testing';
+import { select, Store } from '@ngrx/store';
+import { ActivatedRoute, Router } from '@angular/router';
+import { SnotifyService, SnotifyPosition } from 'ng-snotify';
+import { NotificationService } from '../../shared/_services/notification.service';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AppStateService } from '../../shared/_services/appstate.service';
+import { AppEnum } from '../../shared/reducers/app.enum';
+import { ClientService } from '../../shared/_services/client.service';
 
 @Component({
-  selector: 'app-testing',
-  templateUrl: './testing.component.html',
-  styleUrls: ['./testing.component.css']
+    selector: 'app-testing',
+    templateUrl: './testing.component.html',
+    styleUrls: ['./testing.component.css']
 })
 export class TestingComponent implements OnInit, AfterViewInit {
     testButton1: boolean = true;
@@ -41,16 +41,16 @@ export class TestingComponent implements OnInit, AfterViewInit {
     finalTestingResults: FinalTestingResults;
 
     constructor(private dialog: MatDialog,
-                private encounterService: EncounterService,
-                private store: Store<AppState>,
-                private router: Router,
-                private route: ActivatedRoute,
-                public zone: NgZone,
-                private snotifyService: SnotifyService,
-                private notificationService: NotificationService,
-                private fb: FormBuilder,
-                private appStateService: AppStateService,
-                private clientService: ClientService) {
+        private encounterService: EncounterService,
+        private store: Store<AppState>,
+        private router: Router,
+        private route: ActivatedRoute,
+        public zone: NgZone,
+        private snotifyService: SnotifyService,
+        private notificationService: NotificationService,
+        private fb: FormBuilder,
+        private appStateService: AppStateService,
+        private clientService: ClientService) {
         this.store.pipe(select('app')).subscribe(res => {
             this.isCoupleDiscordantDisabled = res['testedAs'];
         });
@@ -99,15 +99,15 @@ export class TestingComponent implements OnInit, AfterViewInit {
                 }
             }
 
-            const optionSelected = this.yesNoNA.filter(function( obj ) {
+            const optionSelected = this.yesNoNA.filter(function (obj) {
                 return obj.itemName == 'N/A';
             });
 
             this.clientService.getClientDetails(JSON.parse(localStorage.getItem('patientId')), 2).subscribe(res => {
                 if (this.getAge(res['patientLookup'][0]['dateOfBirth']) < 15) {
-                    this.formTesting.controls.acceptedPartnerListing.disable({onlySelf: true});
+                    this.formTesting.controls.acceptedPartnerListing.disable({ onlySelf: true });
                     this.formTesting.controls.acceptedPartnerListing.setValue(optionSelected[0]['itemId']);
-                    this.formTesting.controls.reasonsDeclinePartnerListing.disable({onlySelf: true});
+                    this.formTesting.controls.reasonsDeclinePartnerListing.disable({ onlySelf: true });
                 }
             });
 
@@ -128,7 +128,7 @@ export class TestingComponent implements OnInit, AfterViewInit {
     openDialog(screeningType: string) {
         const dialogConfig = new MatDialogConfig();
 
-        dialogConfig.disableClose =  true;
+        dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
         dialogConfig.height = '75%';
         dialogConfig.width = '60%';
@@ -148,8 +148,12 @@ export class TestingComponent implements OnInit, AfterViewInit {
                     return;
                 }
 
+                /* Get inconclusive value from array */
+                const inconculusive = this.hivFinalResultsOptions.filter(function (obj) {
+                    return obj.itemName == 'Inconclusive';
+                });
+
                 if (screeningType == 'Screening Test') {
-                    // console.log(data['kitName']);
                     /* Push results to hiv results array */
                     this.testing = data;
                     this.testing.KitId = data['kitName']['itemId'];
@@ -168,30 +172,66 @@ export class TestingComponent implements OnInit, AfterViewInit {
                     this.hiv1.push(test);
 
                     if (this.testing['hivResult']['itemName'] === 'Negative') {
-                        console.log('testing');
-                        this.testButton1 = false;
-                        this.testButton2 = false;
                         this.formTesting.controls.finalResultHiv1.setValue(this.testing['hivResult']['itemId']);
-                        // this.finalTestingResults.finalResultHiv1 = this.testing['hivResult']['itemId'];
-                        this.isDisabled = true;
-                        this.formTesting.controls.finalResult.setValue(this.testing['hivResult']['itemId']);
-                        this.formTesting.controls.finalResultHiv2.disable({onlySelf: true});
-                        // this.finalTestingResults.finalResult = this.testing['hivResult']['itemId'];
+                        this.testButton1 = false;
+
+                        /* Check if the screening test was deleted and confirmatory test was not deleted */
+                        if (this.formTesting.controls.finalResultHiv2.value) {
+                            const confirmatoryTestPreviousValue = this.hivFinalResultsOptions.filter((obj) => {
+                                return obj.itemId ==
+                                    this.formTesting.controls.finalResultHiv2.value;
+                            });
+
+                            if (confirmatoryTestPreviousValue[0]['itemName'] == 'Positive') {
+                                this.formTesting.controls.finalResult.setValue(inconculusive[0].itemId);
+                            } else if (confirmatoryTestPreviousValue[0]['itemName'] == 'Negative') {
+                                this.formTesting.controls.finalResult.setValue(this.testing['hivResult']['itemId']);
+                            }
+                        } else {
+                            this.testButton2 = false;
+
+                            this.isDisabled = true;
+                            this.formTesting.controls.finalResult.setValue(this.testing['hivResult']['itemId']);
+                            this.formTesting.controls.finalResultHiv2.disable({ onlySelf: true });
+                        }
                     } else if (this.testing['hivResult']['itemName'] === 'Positive') {
-                        this.testButton1 = false;
-                        this.testButton2 = true;
-                        // this.finalTestingResults.finalResultHiv1 = this.testing['hivResult']['itemId'];
                         this.formTesting.controls.finalResultHiv1.setValue(this.testing['hivResult']['itemId']);
-                        this.formTesting.controls.finalResultHiv2.enable({onlySelf: false});
-                        this.formTesting.controls.finalResultHiv2.setValue('');
+                        this.testButton1 = false;
+
+                        /* Check if the confirmatory record has not been deleted */
+                        if (this.formTesting.controls.finalResultHiv2.value) {
+                            const confirmatoryTestPreviousValue = this.hivFinalResultsOptions.filter((obj) => {
+                                return obj.itemId ==
+                                    this.formTesting.controls.finalResultHiv2.value;
+                            });
+
+                            if (confirmatoryTestPreviousValue[0]['itemName'] == 'Positive') {
+                                this.formTesting.controls.finalResult.setValue(this.testing['hivResult']['itemId']);
+                            } else if (confirmatoryTestPreviousValue[0]['itemName'] == 'Negative') {
+                                this.formTesting.controls.finalResult.setValue(inconculusive[0].itemId);
+                            }
+                        } else {
+                            this.testButton2 = true;
+
+                            this.formTesting.controls.finalResultHiv2.enable({ onlySelf: false });
+                            this.formTesting.controls.finalResultHiv2.setValue('');
+                        }
                     }
                     /* re-set the model */
                     this.testing = new Testing();
 
                 } else if (screeningType == 'Confirmatory Test') {
                     const firstTest = this.hivResults1.slice(-1)[0];
-                    console.log(firstTest);
 
+                    console.log(firstTest);
+                    console.log(data);
+
+                    if (firstTest.kitName['itemName'] == data.kitName['itemName']) {
+                        console.log('test');
+                        this.snotifyService.info('The same kitname has been used for screening and confirmatory test.' +
+                            'Please select another kitname.', 'Testing', this.notificationService.getConfig());
+                        return;
+                    }
                     /* Push results to hiv results array */
                     this.testing = data;
                     this.testing.KitId = data['kitName']['itemId'];
@@ -209,15 +249,8 @@ export class TestingComponent implements OnInit, AfterViewInit {
                     this.hivResults2.push(this.testing);
                     this.hiv2.push(test);
 
-                    /* Get inconclusive value from array */
-                    console.log(this.hivFinalResultsOptions);
-                    const inconculusive = this.hivFinalResultsOptions.filter(function( obj ) {
-                        return obj.itemName == 'Inconclusive';
-                    });
-
                     /* Logic for testing */
                     if (firstTest['hivResult']['itemName'] === 'Positive' && this.testing['hivResult']['itemName'] === 'Negative') {
-                        console.log(inconculusive, 'inconculusive');
                         this.formTesting.controls.finalResultHiv2.setValue(this.testing['hivResult']['itemId']);
                         this.formTesting.controls.finalResult.setValue(inconculusive[0].itemId);
                         this.testButton2 = false;
@@ -238,7 +271,7 @@ export class TestingComponent implements OnInit, AfterViewInit {
     onSubmit() {
         console.log(this.formTesting);
         if (this.formTesting.valid) {
-            this.finalTestingResults = {...this.finalTestingResults, ...this.formTesting.value};
+            this.finalTestingResults = { ...this.finalTestingResults, ...this.formTesting.value };
             console.log(this.finalTestingResults);
 
             const htsEncounterId = JSON.parse(localStorage.getItem('htsEncounterId'));
@@ -252,7 +285,7 @@ export class TestingComponent implements OnInit, AfterViewInit {
             this.encounterService.addTesting(this.finalTestingResults, this.hiv1, this.hiv2,
                 htsEncounterId, providerId, patientId, patientMasterVisitId, serviceAreaId).subscribe(data => {
 
-                    const options = this.hivFinalResultsOptions.filter(function( obj ) {
+                    const options = this.hivFinalResultsOptions.filter(function (obj) {
                         return obj.itemId == finalRes;
                     });
 
@@ -271,8 +304,10 @@ export class TestingComponent implements OnInit, AfterViewInit {
                     }
 
                     this.snotifyService.success('Successfully saved', 'Testing', this.notificationService.getConfig());
-                    this.zone.run(() => { this.router.navigate(['/registration/home'], {relativeTo: this.route }); });
-            });
+                    this.zone.run(() => { this.router.navigate(['/registration/home'], { relativeTo: this.route }); });
+                }, (err) => {
+                    this.snotifyService.error('Error saving testing ' + err, 'Testing', this.notificationService.getConfig());
+                });
         } else {
             return false;
         }
@@ -281,27 +316,82 @@ export class TestingComponent implements OnInit, AfterViewInit {
 
     onFinalResultsGivenChange() {
         if (this.isCoupleDiscordantDisabled) {
-            this.formTesting.controls.coupleDiscordant.disable({onlySelf: true});
+            this.formTesting.controls.coupleDiscordant.disable({ onlySelf: true });
         } else {
-            this.formTesting.controls.coupleDiscordant.enable({onlySelf: false});
+            this.formTesting.controls.coupleDiscordant.enable({ onlySelf: false });
             this.formTesting.controls.coupleDiscordant.setValue('');
         }
     }
 
     onAcceptedPartnerListingChange() {
         const acceptedPartnerListing = this.formTesting.controls.acceptedPartnerListing.value;
-        const optionSelected = this.yesNoNA.filter(function( obj ) {
+        const optionSelected = this.yesNoNA.filter(function (obj) {
             return obj.itemId == acceptedPartnerListing;
         });
 
         if (optionSelected[0].itemName == 'Yes') {
-            this.formTesting.controls.reasonsDeclinePartnerListing.disable({onlySelf: true});
+            this.formTesting.controls.reasonsDeclinePartnerListing.disable({ onlySelf: true });
         } else if (optionSelected[0].itemName == 'No') {
-            this.formTesting.controls.reasonsDeclinePartnerListing.enable({onlySelf: false});
+            this.formTesting.controls.reasonsDeclinePartnerListing.enable({ onlySelf: false });
             this.formTesting.controls.reasonsDeclinePartnerListing.setValue('');
         } else if (optionSelected[0].itemName == 'N/A') {
-            this.formTesting.controls.reasonsDeclinePartnerListing.disable({onlySelf: true});
+            this.formTesting.controls.reasonsDeclinePartnerListing.disable({ onlySelf: true });
             this.formTesting.controls.reasonsDeclinePartnerListing.setValue('');
+        }
+    }
+
+    deleteTest(hivResult: Testing, type: number, index: number, event: any) {
+        if (type == 1) {
+            const result = this.snotifyService.confirm('Are you sure you want to delete?', 'Testing', {
+                closeOnClick: true,
+                position: SnotifyPosition.centerCenter,
+                buttons: [
+                    {
+                        text: 'Yes', action: () => {
+
+                            const hiv1Filtered = this.hiv1.filter((obj) => {
+                                return obj.KitId !== hivResult.KitId
+                                    && obj.KitLotNumber !== hivResult['lotNumber'];
+                            });
+
+                            this.hiv1 = hiv1Filtered;
+                            this.hivResults1.splice(index, 1);
+
+                            if (hivResult['hivResult']['itemName'] == 'Negative' || hivResult['hivResult']['itemName'] == 'Positive') {
+                                this.formTesting.controls.finalResult.setValue('');
+                                this.formTesting.controls.finalResultHiv1.setValue('');
+                                this.testButton1 = true;
+                            }
+                        }, bold: false
+                    },
+                    { text: 'No', action: () => console.log('Clicked: No') }
+                ]
+            });
+        } else {
+            const result = this.snotifyService.confirm('Are you sure you want to delete?', 'Testing', {
+                closeOnClick: true,
+                position: SnotifyPosition.centerCenter,
+                buttons: [
+                    {
+                        text: 'Yes', action: () => {
+                            const hiv2Filtered = this.hiv2.filter((obj) => {
+                                return obj.KitId !== hivResult.KitId
+                                    && obj.KitLotNumber !== hivResult['lotNumber'];
+                            });
+
+                            this.hiv2 = hiv2Filtered;
+                            this.hivResults2.splice(index, 1);
+
+                            if (hivResult['hivResult']['itemName'] == 'Negative' || hivResult['hivResult']['itemName'] == 'Positive') {
+                                this.formTesting.controls.finalResult.setValue('');
+                                this.formTesting.controls.finalResultHiv2.setValue('');
+                                this.testButton2 = true;
+                            }
+                        }, bold: false
+                    },
+                    { text: 'No', action: () => console.log('Clicked: No') }
+                ]
+            });
         }
     }
 }

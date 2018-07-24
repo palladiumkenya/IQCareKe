@@ -201,7 +201,7 @@ namespace RemServer
                 else
                 {
                     MessageBox.Show("Connection Failed. Try Again..");
-                    ConfigurationSettings.AppSettings.Set("ConnectionString", "");
+                    ConfigurationManager.AppSettings.Set("ConnectionString", "");
                     this.Close();
                 }
             }

@@ -23,22 +23,37 @@ namespace IQCare.CCC.UILogic.Interoperability
                 LookupLogic facilityLookup = new LookupLogic();
                 string receivingFacilityMflCode = drugDispensed.MESSAGE_HEADER.RECEIVING_FACILITY;
                 string sendingFacilityMflCode = drugDispensed.MESSAGE_HEADER.SENDING_FACILITY;
+                int interopUserId = InteropUser.UserId;
+                if (string.IsNullOrEmpty(receivingFacilityMflCode))
+                {
+                    Msg = "The receiving facility mfl code is missing";
+                    return Msg;
+                }
+                if (string.IsNullOrEmpty(sendingFacilityMflCode))
+                {
+                    Msg = "The sending facility mfl code is missing";
+                    return Msg;
+                }
+                if (receivingFacilityMflCode != sendingFacilityMflCode)
+                {
+                    return Msg = "The sending facility is not the same as the receiving facility!";
+                }
                 //check if facility exists
                 LookupFacility recieverfacility = facilityLookup.GetFacility(receivingFacilityMflCode);
-                LookupFacility senderfacility = facilityLookup.GetFacility(sendingFacilityMflCode);
+              //  LookupFacility senderfacility = facilityLookup.GetFacility(sendingFacilityMflCode);
                 if (recieverfacility == null)
                 {
                     return Msg = $"The facility {receivingFacilityMflCode} does not exist";
                 }
-                if (senderfacility == null)
-                {
-                    return Msg = $"The facility {sendingFacilityMflCode} does not exist";
-                }
+                //if (senderfacility == null)
+                //{
+                //    return Msg = $"The facility {sendingFacilityMflCode} does not exist";
+                //}
                 
-                if (recieverfacility.FacilityID != senderfacility.FacilityID)
-                {
-                    return Msg = "The sending facility is not the same as the receiving facility!";
-                }
+                //if (recieverfacility.FacilityID != senderfacility.FacilityID)
+                //{
+                //    return Msg = "The sending facility is not the same as the receiving facility!";
+                //}
 
                 //check if it is the right facility
                 LookupFacility thisFacility = facilityLookup.GetFacility();
@@ -64,6 +79,7 @@ namespace IQCare.CCC.UILogic.Interoperability
                 }
                 //check pharmacy order exists
                 int orderId = Convert.ToInt32(drugDispensed.COMMON_ORDER_DETAILS.PLACER_ORDER_NUMBER.NUMBER);
+                int drugCount = 0;
                 var pharmacyOrder = _pharmacyOrderManager.GetPharmacyOrder(orderId);
                 if (pharmacyOrder == null)
                 {
@@ -90,19 +106,21 @@ namespace IQCare.CCC.UILogic.Interoperability
                             //drug.StrengthID = messageDispensed.STRENGTH;
                             drug.Duration = messageDispensed.DURATION;
                             drug.UpdateDate = DateTime.Now;
-                            drug.UserID = InteropUser.UserId;
+                            drug.UserID = interopUserId;
                             //drug.SingleDose = Convert.ToDecimal(Regex.Replace(messageDispensed.DOSAGE, @"^[A-Za-z]+", ""));
+                            try
+                            {
+                                _pharmacyDispenseManager.UpdatePatientPharmacyDispense(drug);
+                                drugCount++;
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e);
+                                return Msg = "error " + e.Message;
+                            }
 
                         }
-                        try
-                        {
-                            _pharmacyDispenseManager.UpdatePatientPharmacyDispense(drug);
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine(e);
-                            return Msg = "error " + e.Message;
-                        }
+                        
                     }
                 }
                 else
@@ -127,41 +145,58 @@ namespace IQCare.CCC.UILogic.Interoperability
                     {
                         newlyDispensedDrugs.OrderedQuantity = Convert.ToInt32(order.QUANTITY_PRESCRIBED);
                         newlyDispensedDrugs.PatientInstructions = order.PRESCRIPTION_NOTES;
-                    }
                     try
                     {
                         _pharmacyDispenseManager.AddPatientPharmacyDispense(newlyDispensedDrugs);
+                        drugCount++;
                     }
                     catch (Exception e)
                     {
                         Console.WriteLine(e);
                         return Msg = "error " + e.Message;
                     }
+                    }
+                   
                 }
-                var updatedPharmacyOrder = pharmacyOrder;
-                var orderingPhysician = drugDispensed.COMMON_ORDER_DETAILS.ORDERING_PHYSICIAN;
-                updatedPharmacyOrder.OrderedByName = orderingPhysician.PREFIX + " " + orderingPhysician.FIRST_NAME +
-                                                     " " + orderingPhysician.LAST_NAME;
-                //todo harmonise users
-                updatedPharmacyOrder.DispensedBy = InteropUser.UserId;
-                updatedPharmacyOrder.DispensedByDate = drugDispensed.MESSAGE_HEADER.MESSAGE_DATETIME;
-                updatedPharmacyOrder.OrderStatus = 2;
-                string str = updatedPharmacyOrder.PharmacyNotes;
-                if (str != null)
+                if (drugCount > 0)
                 {
-                    str += " Dispensed from IL";
+                    var updatedPharmacyOrder = pharmacyOrder;
+                    var orderingPhysician = drugDispensed.COMMON_ORDER_DETAILS.ORDERING_PHYSICIAN;
+                    updatedPharmacyOrder.OrderedByName = orderingPhysician.PREFIX + " " + orderingPhysician.FIRST_NAME +
+                                                         " " + orderingPhysician.LAST_NAME;
+                    //todo harmonise users
+                    updatedPharmacyOrder.DispensedBy = interopUserId;
+                    updatedPharmacyOrder.DispensedByDate = drugDispensed.MESSAGE_HEADER.MESSAGE_DATETIME;
+                    updatedPharmacyOrder.OrderStatus = 2;
+                    if (string.IsNullOrEmpty(updatedPharmacyOrder.PharmacyNotes))
+                    {
+                        updatedPharmacyOrder.PharmacyNotes = "Dispensed from IL";
+                    }
+                    else
+                    {
+                        updatedPharmacyOrder.PharmacyNotes += " Dispensed from IL";
+                    }
+                    //    string str = updatedPharmacyOrder.PharmacyNotes;
+                    //if (str != null)
+                    //{
+                    //    str += " Dispensed from IL";
+                    //}
+                    //updatedPharmacyOrder.PharmacyNotes = str;
+                    try
+                    {
+                        _pharmacyOrderManager.UpdatePharmacyOrder(updatedPharmacyOrder);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                        return Msg = "error " + e.Message;
+                    }
+                    Msg = "Success";
                 }
-                updatedPharmacyOrder.PharmacyNotes = str;
-                try
+                else
                 {
-                    _pharmacyOrderManager.UpdatePharmacyOrder(updatedPharmacyOrder);
+                    Msg = "Unable to match the drugs in the dispense message with the drug in the order";
                 }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                    return Msg = "error " + e.Message;
-                }
-                Msg = "Success";
             }
             catch (Exception e)
             {

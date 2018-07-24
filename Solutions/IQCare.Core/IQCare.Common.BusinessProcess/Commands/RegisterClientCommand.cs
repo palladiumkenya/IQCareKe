@@ -24,15 +24,4 @@ namespace IQCare.Common.BusinessProcess.Commands
         public int? PatientId { get; set; }
         public int CreatedBy { get; set; }
     }
-
-    public class Contact
-    {
-        public string PhoneNumber { get; set; }
-        public string Landmark { get; set; }
-    }
-
-    public class PersonPopulation
-    {
-        public int KeyPopulation { get; set; }
-    }
 }

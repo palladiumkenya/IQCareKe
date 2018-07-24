@@ -292,7 +292,7 @@
 													<label class="control-label pull-left"></label>
 												</div>
 												<div class="col-md-12">
-													<button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddPresentingComplaints" onclick="AddPresentingComplaints();">Add</button>
+													<button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddPresentingComplaints">Add</button>
 												</div>
 											</div>
 										</div>
@@ -383,7 +383,8 @@
 													</div>
 													<div class="col-md-12">
 														<asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="cough" ClientIDMode="Static" onChange="IcfChange();">
-															<asp:ListItem Text="Yes" Value="True"></asp:ListItem>
+														    <asp:ListItem Text="select" Value="select"></asp:ListItem>
+														    <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
 															<asp:ListItem Text="No" Value="False" Selected="True"></asp:ListItem>
 														</asp:DropDownList>
 													</div>
@@ -395,7 +396,8 @@
 													</div>
 													<div class="col-md-12">
 														<asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="fever" ClientIDMode="Static" onChange="IcfChange();">
-															<asp:ListItem Text="Yes" Value="True"></asp:ListItem>
+														    <asp:ListItem Text="select" Value="select"></asp:ListItem>
+														    <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
 															<asp:ListItem Text="No" Value="False" Selected="True"></asp:ListItem>
 														</asp:DropDownList>
 													</div>
@@ -406,7 +408,8 @@
 													</div>
 													<div class="col-md-12">
 														<asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="weightLoss" ClientIDMode="Static" onChange="IcfChange();">
-															<asp:ListItem Text="Yes" Value="True"></asp:ListItem>
+														    <asp:ListItem Text="select" Value="select"></asp:ListItem>
+														    <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
 															<asp:ListItem Text="No" Value="False" Selected="True"></asp:ListItem>
 														</asp:DropDownList>
 													</div>
@@ -417,7 +420,8 @@
 													</div>
 													<div class="col-md-12">
 														<asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="nightSweats" ClientIDMode="Static" onChange="IcfChange();">
-															<asp:ListItem Text="Yes" Value="True"></asp:ListItem>
+														    <asp:ListItem Text="select" Value="select"></asp:ListItem>
+														    <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
 															<asp:ListItem Text="No" Value="False" Selected="True"></asp:ListItem>
 														</asp:DropDownList>
 													</div>
@@ -771,7 +775,7 @@
 							<div class="panel panel-info">
 								<div class="panel-body">
 									<div class="col-md-12 form-group">
-										<label class="control-label pull-left">Chronic Illnesses & Comorbidities</label>
+										<label class="control-label pull-left">Chronic Illnesses</label>
 									</div>
 
 									<div class="col-md-12 form-group">
@@ -1667,11 +1671,11 @@
 													<div class="col-md-3">
 
 														<div class="col-md-6">
-															<asp:RadioButton ID="Question5_Yes" runat="server" GroupName="Question5" ClientIDMode="Static" Value="0" />
+															<asp:RadioButton ID="Question5_Yes" runat="server" GroupName="Question5" ClientIDMode="Static" Value="1" />
 														</div>
 
 														<div class="col-md-6">
-															<asp:RadioButton ID="Question5_No" runat="server" GroupName="Question5" ClientIDMode="Static" Value="1" />
+															<asp:RadioButton ID="Question5_No" runat="server" GroupName="Question5" ClientIDMode="Static" Value="0" />
 														</div>
 
 														<div class="errorBlock5" style="color: red;">Please select one option </div>
@@ -1685,11 +1689,11 @@
 													<div class="col-md-3">
 
 														<div class="col-md-6">
-															<asp:RadioButton ID="Question6_Yes" runat="server" GroupName="Question6" ClientIDMode="Static" Value="0" />
+															<asp:RadioButton ID="Question6_Yes" runat="server" GroupName="Question6" ClientIDMode="Static" Value="1" />
 														</div>
 
 														<div class="col-md-6">
-															<asp:RadioButton ID="Question6_No" runat="server" GroupName="Question6" ClientIDMode="Static" Value="1" />
+															<asp:RadioButton ID="Question6_No" runat="server" GroupName="Question6" ClientIDMode="Static" Value="0" />
 														</div>
 
 														<div class="errorBlock6" style="color: red;">Please select one option </div>
@@ -1703,11 +1707,11 @@
 													<div class="col-md-3">
 
 														<div class="col-md-6">
-															<asp:RadioButton ID="Question7_Yes" runat="server" GroupName="Question7" ClientIDMode="Static" Value="0" />
+															<asp:RadioButton ID="Question7_Yes" runat="server" GroupName="Question7" ClientIDMode="Static" Value="1" />
 														</div>
 
 														<div class="col-md-6">
-															<asp:RadioButton ID="Question7_No" runat="server" GroupName="Question7" ClientIDMode="Static" Value="1" />
+															<asp:RadioButton ID="Question7_No" runat="server" GroupName="Question7" ClientIDMode="Static" Value="0" />
 														</div>
 
 														<div class="errorBlock7" style="color: red;">Please select one option </div>
@@ -2210,6 +2214,9 @@
 	var DateOfEnrollment = "<%=DateOfEnrollment%>";
 	var isNoneChecked = false;
     var arrWHoStage = [];
+
+    var isEditAppointment = "<%=IsEditAppointment%>";
+    var isEditAppointmentId="<%=IsEditAppointmentId%>";
 	var PatientId = "<%=PtnId%>";
 	var PatientMasterVisitId = "<%=PmVisitId%>";
 	var adverseEventName = "";
@@ -2217,6 +2224,11 @@
     var selectedstage="";
     var OIdata = [];
     var PatientOIData = [];
+    var adverseEventId = 0;
+    var NextAppointmentDate = "<%=NextAppointmentDate%>";
+	//alert(NextAppointmentDate);
+
+	//alert(DateOfEnrollment);
 
 	document.getElementById('txtPresentingComplaintsID').style.display = 'none';
 	document.getElementById('txtAllergyId').style.display = 'none';
@@ -2292,6 +2304,56 @@
         
         
       
+        GetPatientExaminationTypeID();
+
+	    var PresentingComplaintsList = new Array();
+	    $("#btnAddPresentingComplaints").on("click",
+	        function() {
+                var visitDate = $('#DateOfVisit').datepicker('getDate');
+              
+	            var presentingComplaintsID = $("#txtPresentingComplaintsID").val();
+    
+	            var presentingComplaints = $('#txtPresentingComplaints').val();
+  
+	            var numberOfDays = $('#numberOfDays').val();
+	            var visitDate = $('#DateOfVisit').datepicker('getDate');
+	            var onsetDate = moment(visitDate).subtract(numberOfDays, 'days').format('DD-MMM-YYYY');
+    
+	            //Validate duplication
+	            var presentingComplaintFound = 0;
+
+	            if (presentingComplaints === "") {
+	                toastr.error("Error", "Please enter Presenting Complaint");
+	                return false;
+	            }
+
+	            presentingComplaintFound = $.inArray("" + presentingComplaints + "", PresentingComplaintsList);
+
+	            if (presentingComplaintFound > -1) {
+	                toastr.error("Error", "Presenting Complaint already exists.");
+	                return false;
+
+	            } else {
+
+
+	                PresentingComplaintsList.push("" + presentingComplaints + "");
+
+	                arrPresentingComplaintUI = [];
+
+	                arrPresentingComplaintUI.push([
+	                    presentingComplaintsID, presentingComplaints,onsetDate,
+	                    "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"
+	                ]);
+
+	                DrawDataTable("dtlPresentingComplaints", arrPresentingComplaintUI);
+
+	                $('#txtPresentingComplaints').val("");
+	                $('#numberOfDays').val("");
+	            }
+	        });
+
+
+
 		// Manage adverse Events
 		$("#divAdverseEventOther").hide("fast");
 		$("#adverseEvent").focusout(function () {
@@ -2535,6 +2597,8 @@
             console.log(isBeforeDateOfEnrollment);
         });
 
+
+
 		$("#prescribeDrugs").click(function () {
 			$("#btnClosePrecriptionModal").show("fast");
 			$("#btnClosePrecription").hide("fast");
@@ -2619,6 +2683,10 @@
 			minDate: minDate
 		});
        
+        });
+
+	    $("#<%=AppointmentDate.ClientID%>").val(moment(NextAppointmentDate).format('DD-MMM-YYYY'));
+
 		$("#AppointmentDate").change(function () {
 			var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
 			var appDate = $("#<%=AppointmentDate.ClientID%>").val();
@@ -2640,6 +2708,32 @@
 			}
 			appointmentCount();
 		});--%>
+
+	    /* limit future dates viralload baseline date*/
+	    $("#DateOfVisit").on('changed.fu.datepicker dateClicked.fu.datepicker',function(event, date) {
+            var dlDate = $('#DateOfVisit').datepicker('getDate');
+	        //alert(dlDate);
+
+            //var beforeEnrollment = moment(dlDate).isBefore(DateOfEnrollment);
+            //if (beforeEnrollment) {
+            //    toastr.error("VISIT Date CANNOT be before ENROLLMENT Date");
+            //    //        $("#TreatmeantInitiationBaselineViralloadDate").val('');
+            //           return false;
+            //}
+	        //var futureDate = moment(dlDate).isAfter(today);
+	        //    if (futureDate) {
+	        //        toastr.error("Future dates NOT allowed on Baseline ViralLoad Entries");
+	        //        $("#TreatmeantInitiationBaselineViralloadDate").val('');
+	        //        return false;
+	        //    }
+	        //    var dhid = $("#DHID").datepicker('getDate');
+	        //    if (moment(dlDate).isBefore(dhid)) {
+	        //        $("#TreatmeantInitiationBaselineViralloadDate").val('');
+	        //        toastr.error("Baseline Viral Load date CANNOT be ealier than HIV Diagnosis Date");
+	        //        return false;
+	        //    }
+	    });
+
 
 		$('#PersonAppointmentDateD').datetimepicker().on('dp.change',function(e) {
 			var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
@@ -3083,7 +3177,15 @@
 
 					/* add constraints based on age*/
 					if ($('#datastep1').parsley().validate()) {
-						addPatientIcf();
+                        if (($("#tbInfected").val() === 'True') && ($("#onIpt").val() === 'False') && ($("#EverBeenOnIpt").val() === 'True'))
+	                    {
+
+                        }else
+	                        {
+                                addPatientIcf();
+	                        }
+
+					    
 						if (($("#cough").val() === 'True') || ($("#fever").val() === 'True') || ($("#weightLoss").val() === 'True') || ($("#nightSweats").val() === 'True')) {
 							addPatientIcfAction();
 						}
@@ -3955,13 +4057,25 @@
 				cache: false,
 				success: function (response) {
 					if (response.d != null) {
-						toastr.error("Appointment already exists");
-						return false;
-					}
-					addPatientAppointment();
+                        if (isEditAppointment) {
+
+                        } else {
+					        toastr.error("Appointment already exists");
+						    return false;
+                        }
+
+                    }
+                    if (isEditAppointment) {
+                        EditPatientAppointment();
+                    } else {
+                        addPatientAppointment();
+                    }
+					
 				},
 				error: function (msg) {
-					alert(msg.responseText);
+				    toastr.error(""+msg+"");
+				    return false;
+				   // alert(msg.responseText);
 				}
 			});
 	}
@@ -3991,6 +4105,33 @@
 				toastr.error(response.d, "Appointment not saved");
 			}
 		});
+    }
+
+	function EditPatientAppointment() {
+	    var serviceArea = $("#<%=ServiceArea.ClientID%>").val();
+	    var reason = $("#<%=Reason.ClientID%>").val();
+	    var description = $("#<%=description.ClientID%>").val();
+	    var status = $("#<%=status.ClientID%>").val();
+	    var differentiatedCareId = $("#<%=DifferentiatedCare.ClientID%>").val();
+	    /*if (status === '') { status = null }*/
+	    var appointmentDate = $("#<%=AppointmentDate.ClientID%>").val();
+	    var patientId = <%=PatientId%>;
+	    var userId = <%=UserId%>;
+	    var patientMasterVisitId = <%=PatientMasterVisitId%>;
+	    $.ajax({
+	        type: "POST",
+	        url: "../WebService/PatientService.asmx/UpdatePatientAppointment",
+	        data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','appointmentDate': '" + appointmentDate + "','description': '" + description + "','reasonId': '" + reason + "','serviceAreaId': '" + serviceArea + "','statusId': '" + status + "','differentiatedCareId': '" + differentiatedCareId + "','userId': '" + userId + "','appointmentId':"+isEditAppointmentId+"}",
+	        contentType: "application/json; charset=utf-8",
+	        dataType: "json",
+	        success: function (response) {
+	            toastr.success(response.d, "Appointment Edited successfully");
+	            resetAppointmentFields();
+	        },
+	        error: function (response) {
+	            toastr.error(response.d, "Appointment not Edited");
+	        }
+	    });
 	}
 
 	function appointmentCount() {
@@ -4036,7 +4177,7 @@
             $("#IcfForm").hide();
             $("#IcfActionForm").hide();
             //$("#tbscreeningstatus option").filter(function () { return $(this).text() === 'TBRx'; }).prop('selected', true);
-            $("#onIpt").prop("disabled", true);
+            $("#onIpt").prop("disabled", false);
             $("#onIpt").val("");
             //$("#EverBeenOnIpt").prop("disabled", true);
             // $("#EverBeenOnIpt").val("");

@@ -28,6 +28,7 @@ namespace Interface.CCC
         DataSet getPatientDSDParameters(string PatientID);
         DataTable isVisitScheduled(string PatientID);
         DataTable patientCategorizationAtEnrollment(string PatientID);
+        DataTable GenerateExcelDifferentiatedCare(string category);
 
 
 

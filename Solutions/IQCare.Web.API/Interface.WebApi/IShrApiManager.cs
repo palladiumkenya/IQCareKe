@@ -8,6 +8,7 @@ namespace Interface.WebApi
         SHR GetShrByPatientId(int patientId);
         SHR GetShrBtPatientCardSerialNumber(string serial);
 
-        void LogPSmartRequest(TransactionLog transactionLog);
+        int LogPSmartRequest(TransactionLog transactionLog);
+        int UpdateRequestLog(TransactionLog transactionLog);
     }
 }

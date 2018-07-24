@@ -20,7 +20,7 @@ namespace DataAccess.WebApi.Repository
             _context = context;
         }
 
-        public void InsertNewClients(string firstName, string middleName, string lastName, DateTime registrationDate, string dob, string dobPrecision, string phone, string gender, string landmark, string maritalStatus, string htsId, int moduleId, string cardSerial, string village, string ward, string subcounty, string heiId, string Address)
+        public void InsertNewClients(string firstName, string middleName, string lastName, DateTime registrationDate, string dob, string dobPrecision, string phone, string gender, string landmark, string maritalStatus, string htsId, int moduleId, string cardSerial, string village, string ward, string subcounty, string heiId, string Address,string _card_issuing_facility)
         {
             try
             {
@@ -57,7 +57,7 @@ namespace DataAccess.WebApi.Repository
                 //    encryptbykey(key_guid('Key_CTC'), '{Phone}'), '{landmark}', '{htsId}', '{(SELECT Id FROM mst_decode WHERE Id=maritalStatus)}'); SELECT SCOPE_IDENTITY(); ");
 
                 _context.Database.SqlQuery<EntityType>(
-                    "EXEC Psmart_ProcessNewClientRegistration @param1,@param2,@param3,@param4,@param5,@param6,@param7,@param8,@param9,@param10,@param11,@param12,@param13,@param14,@param15,@param16,@param17,@param18,@param19",
+                    "EXEC Psmart_ProcessNewClientRegistration @param1,@param2,@param3,@param4,@param5,@param6,@param7,@param8,@param9,@param10,@param11,@param12,@param13,@param14,@param15,@param16,@param17,@param18,@param19,@param20",
                     new SqlParameter("param1", firstName),
                     new SqlParameter("param2", middleName),
                     new SqlParameter("param3", lastName),
@@ -76,7 +76,8 @@ namespace DataAccess.WebApi.Repository
                     new SqlParameter("param16", ward),
                     new SqlParameter("param17", subcounty),
                     new SqlParameter("param18", heiId),
-                    new SqlParameter("param19", Address)
+                    new SqlParameter("param19", Address),
+                      new SqlParameter("param20", _card_issuing_facility)
                 );
 
             }

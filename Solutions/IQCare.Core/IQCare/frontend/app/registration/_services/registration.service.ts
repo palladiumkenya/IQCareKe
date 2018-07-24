@@ -1,16 +1,16 @@
+
+import {of as observableOf,  Observable } from 'rxjs';
+import { PersonDetails } from './../_models/persondetails';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
 
 import { catchError, tap } from 'rxjs/operators';
 import { Person } from '../_models/person';
 
 import { PersonPopulation } from '../_models/personPopulation';
 import { ErrorHandlerService } from '../../shared/_services/errorhandler.service';
-
-import { from as observableFrom } from 'rxjs';
-import { of as observableOf } from 'rxjs';
+import { PersonPopulationDetails } from '../_models/personpopulationdetails';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -25,10 +25,52 @@ export class RegistrationService {
     constructor(private http: HttpClient,
         private errorHandler: ErrorHandlerService) { }
 
+    public getPersonPriorityDetails(personId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/Registration/Person/GetPersonPriorityDetails/' + personId).pipe(
+            tap(getPersonPriorityDetails => this.errorHandler.log(`fetched person priority list details for personId` + personId)),
+            catchError(this.errorHandler.handleError<any[]>('getPersonPriorityDetails'))
+        );
+    }
+
+    public getPersonPopulationDetails(personId: number): Observable<PersonPopulationDetails[]> {
+        return this.http.get<PersonPopulationDetails[]>(this.API_URL + '/api/Registration/Person/GetPersonPopulationDetails/' +
+            personId).pipe(
+                tap(getPersonPopulationDetails => this.errorHandler.log(`fetched person population list details for personId` + personId)),
+                catchError(this.errorHandler.handleError<any[]>('getPersonPopulationDetails'))
+            );
+    }
+
+    public getPersonDetails(personId: number): Observable<PersonDetails> {
+        return this.http.get<any>(this.API_URL + '/api/Registration/Person/getPersonDetails/' + personId).pipe(
+            tap(getPersonDetails => this.errorHandler.log(`fetched person details for ` + personId)),
+            catchError(this.errorHandler.handleError<any[]>('getPersonDetails'))
+        );
+    }
+
     public getRegistrationOptions(): Observable<any[]> {
         return this.http.get<any[]>(this.API_URL + this._lookupurl + '/registrationOptions').pipe(
             tap(registrationoptions => this.errorHandler.log('fetched all registration options')),
             catchError(this.errorHandler.handleError<any[]>('getRegistrationOptions'))
+        );
+    }
+
+    public updatePersonDetails(person: Person): Observable<Person> {
+        const Indata = {
+            'PersonId': person.Id,
+            'FirstName': person.FirstName,
+            'MiddleName': person.MiddleName,
+            'LastName': person.LastName,
+            'DateOfBirth': person.DateOfBirth,
+            'MaritalStatus': person.MaritalStatus,
+            'Sex': person.Sex,
+            'IsPartner': person.isPartner,
+            'PatientId': person.patientId,
+            'CreatedBy': person.createdBy
+        };
+
+        return this.http.post<Person>(this.API_URL + '/api/Register/UpdatePerson', JSON.stringify(Indata), httpOptions).pipe(
+            tap((client: Person) => this.errorHandler.log(`added client w/ id` + client.Id)),
+            catchError(this.errorHandler.handleError<Person>('registerClient'))
         );
     }
 
@@ -39,15 +81,15 @@ export class RegistrationService {
         };
 
         return this.http.post(this.API_URL + this._url, JSON.stringify(Indata), httpOptions).pipe(
-            tap((registeredClient: Person) => this.errorHandler.log(`added client w/ id`)),
+            tap((client: Person) => this.errorHandler.log(`added client w/ id` + client.Id)),
             catchError(this.errorHandler.handleError<Person>('registerClient'))
         );
     }
 
-    public addPatient(personId: number, dateOfBirth: string): Observable<any> {
+    public addPatient(personId: number, userId: number): Observable<any> {
         const Indata = {
             PersonId: personId,
-            DateOfBirth: dateOfBirth
+            UserId: userId
         };
 
         return this.http.post<any>(this.API_URL + this._url + '/addPatient', JSON.stringify(Indata), httpOptions).pipe(
@@ -56,12 +98,32 @@ export class RegistrationService {
         );
     }
 
+    public updatePersonContact(personId: number, physicalAddress: string, mobileNumber: string,
+        alternativeNumber: string, emailAddress: string, userId: number): Observable<any> {
+        if (!mobileNumber) {
+            return observableOf([]);
+        }
+
+        const Indata = {
+            PersonId: personId,
+            PhysicalAddress: physicalAddress,
+            MobileNumber: mobileNumber,
+            AlternativeNumber: alternativeNumber,
+            EmailAddress: emailAddress,
+            UserId: userId
+        };
+
+        return this.http.post<any>(this.API_URL + this._url + '/updatePersonContact', JSON.stringify(Indata), httpOptions).pipe(
+            tap((updatePersonContact: any) => this.errorHandler.log(`updated person contact`)),
+            catchError(this.errorHandler.handleError<any>('updatePersonContact'))
+        );
+    }
+
     public addPersonContact(personId: number, physicalAddress: string, mobileNumber: string,
         alternativeNumber: string, emailAddress: string, userId: number): Observable<any> {
 
         if (!mobileNumber) {
             return observableOf([]);
-            // return Observable.of([]);
         }
 
         const Indata = {
@@ -79,10 +141,26 @@ export class RegistrationService {
         );
     }
 
+    public updatePersonMaritalStatus(personId: number, maritalStatusId: number, userId: number): Observable<any> {
+        if (!maritalStatusId) {
+            return observableOf([]);
+        }
+
+        const Indata = {
+            PersonId: personId,
+            MaritalStatusId: maritalStatusId,
+            UserId: userId
+        };
+
+        return this.http.post<any>(this.API_URL + this._url + '/updatePersonMaritalStatus', JSON.stringify(Indata), httpOptions).pipe(
+            tap((updatePersonMaritalStatus: any) => this.errorHandler.log(`updated person marital status w/ id`)),
+            catchError(this.errorHandler.handleError<any>('updatePersonMaritalStatus'))
+        );
+    }
+
     public addPersonMaritalStatus(personId: number, maritalStatusId: number, userId: number): Observable<any> {
         if (!maritalStatusId) {
             return observableOf([]);
-            // return Observable.of([]);
         }
 
         const Indata = {
@@ -97,11 +175,33 @@ export class RegistrationService {
         );
     }
 
+    public updatePersonLocation(personId: number, countyId: number, subCountyId: number,
+        wardId: number, userId: number, landMark: string): Observable<any> {
+        if (!landMark) {
+            return observableOf([]);
+        }
+
+        const Indata = {
+            PersonId: personId,
+            CountyId: countyId,
+            SubCountyId: subCountyId,
+            WardId: wardId,
+            Village: ' ',
+            LandMark: landMark,
+            UserId: userId
+        };
+
+        return this.http.post<any>(this.API_URL + this._url + '/UpdatePersonLocation', JSON.stringify(Indata), httpOptions).pipe(
+            tap((updatePersonLocation: any) => this.errorHandler.log(`updated person location w/ id`)),
+            catchError(this.errorHandler.handleError<any>('updatePersonLocation'))
+        );
+
+    }
+
     public addPersonLocation(personId: number, countyId: number, subCountyId: number,
         wardId: number, userId: number, landMark: string): Observable<any> {
         if (!landMark) {
             return observableOf([]);
-            // return Observable.of([]);
         }
 
         const Indata = {
@@ -121,6 +221,9 @@ export class RegistrationService {
     }
 
     public addPersonRelationship(personRelationship: any): Observable<any> {
+        if (!personRelationship['RelationshipTypeId']) {
+            return observableOf([]);
+        }
         return this.http.post<any>(this.API_URL + this._url + '/addPersonRelationship',
             JSON.stringify(personRelationship), httpOptions).pipe(
                 tap((addPersonRelationship: any) => this.errorHandler.log(`added new person relationship w/ id`)),

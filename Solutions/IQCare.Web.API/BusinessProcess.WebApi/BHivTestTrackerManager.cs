@@ -36,7 +36,7 @@ namespace BusinessProcess.WebApi
                             PersonId = personId, //hivtest.PersonId,
                             ProviderName = providerName,
                             ProviderId = providerId,
-                            Ptn_pk = personId,
+                            Ptn_pk = ptnpk,
                             ResultDate = resultDate,
                             ResultCategory = testCategory,
                             Result = testResult,
@@ -80,6 +80,12 @@ namespace BusinessProcess.WebApi
             }
         }
 
+        public List<HivTestTracker> GetPersonHIVTest(int personId)
+        {
+            HivTestTrackerRepository repo = new HivTestTrackerRepository(new PsmartContext());
+            return repo.FindBy(xx => xx.PersonId == personId).ToList();
+        }
+
         //public int AddHivTestTracker(int personId, List<IQCare.DTO.PSmart.HIVTEST> hivtests)
         //{
         //    try
@@ -111,7 +117,7 @@ namespace BusinessProcess.WebApi
 
         //                  //  unitOfWork.HivTestTrackerRepository.Add(newHivTest);
         //                    _result = unitOfWork.Complete();
-                           
+
         //                    return _result;
         //                }
         //            }

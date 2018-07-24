@@ -14,7 +14,6 @@ namespace Entity.WebApi
         public string Message { get; set; }
         public int AttemptCount { get; set; }
         public string LogMessage { get; set; }
-
         public bool Retry => AttemptCount <= 5;
     }
 }

@@ -7,4 +7,6 @@ export class Linkage {
     remarks: string;
     personId: number;
     userId: number;
+    id?: number;
+    IsEdit?: boolean;
 }

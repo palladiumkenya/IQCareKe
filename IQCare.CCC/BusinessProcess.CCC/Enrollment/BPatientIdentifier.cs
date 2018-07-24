@@ -6,6 +6,7 @@ using DataAccess.CCC.Context;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using Interface.CCC.Lookup;
 
 namespace BusinessProcess.CCC.Enrollment
 {
@@ -111,6 +112,7 @@ namespace BusinessProcess.CCC.Enrollment
 
         public PatientEntityIdentifier GetPatientByCardSerialNumber(string cardSerialNumber)
         {
+             
             using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 var patientIdentifier = unitOfWork.PatientIdentifierRepository

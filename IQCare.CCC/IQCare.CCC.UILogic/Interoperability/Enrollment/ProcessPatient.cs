@@ -22,6 +22,8 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
         {
             try
             {
+                //todo: fetch assigning facility from the message
+                string assigning_Facility = "";
                 PersonManager personManager = new PersonManager();
                 var patientManager = new PatientManager();
                 var patientEntryPointManager = new PatientEntryPointManager();
@@ -44,7 +46,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                     var personIdentifiers = personIdentifierManager.GetPersonIdentifiers(personId, identifier.Id);
                     if (personIdentifiers.Count == 0)
                     {
-                        personIdentifierManager.AddPersonIdentifier(personId, identifier.Id, godsNumber,userId);
+                        personIdentifierManager.AddPersonIdentifier(personId, identifier.Id, godsNumber,userId,assigning_Facility);
                     }
                 }
                 if (matStatusId > 0)
@@ -261,7 +263,8 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                 var treatmentSupporterManager = new PatientTreatmentSupporterManager();
 
                 var personIdentifierManager = new PersonIdentifierManager();
-
+                //todo: fetch assigning facility from the message
+                string assigning_Facility = "";
                 var personContacts = new List<PersonContactLookUp>();
                 int ptn_Pk = 0;
 
@@ -285,7 +288,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                     var personIdentifiers = personIdentifierManager.GetPersonIdentifiers(personId, identifier.Id);
                     if (personIdentifiers.Count == 0)
                     {
-                        personIdentifierManager.AddPersonIdentifier(personId, identifier.Id, godsNumber,userId);
+                        personIdentifierManager.AddPersonIdentifier(personId, identifier.Id, godsNumber,userId,assigning_Facility);
                     }
                 }
 
@@ -400,7 +403,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
 
                 if (patientMasterVisitId > 0)
                 {
-                    int patientIdentifierId = patientIdentifierManager.addPatientIdentifier(patientId, patientEnrollmentId, 1, cccNumber, facilityId);
+                    int patientIdentifierId = patientIdentifierManager.addPatientIdentifier(patientId, patientEnrollmentId, 1, cccNumber, facilityId, false);
 
                     if (greencardptnpk.Count == 0)
                     {
