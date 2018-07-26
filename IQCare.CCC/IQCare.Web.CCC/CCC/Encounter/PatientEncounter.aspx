@@ -8,8 +8,8 @@
 <%@ Register Src="~/CCC/UC/ucPatientLabs.ascx" TagPrefix="uc" TagName="ucPatientLabs" %>
 <%@ Register Src="~/CCC/UC/ucPatientSychosocialCriteria.ascx" TagPrefix="uc" TagName="ucPatientPsycho" %>
 <%@ Register Src="~/CCC/UC/ucNeonatalHistory.ascx" TagPrefix="uc" TagName="ucNeonatalHistory" %>
-<%@ Register Src="~/CCC/UC/Adherence/ucAdherenceBarriersHome.ascx" TagPrefix="uc" TagName="ucAdherenceBarriers" %>
-<%@ Register Src="~/CCC/UC/Depression/ucScreeningHome.ascx" TagPrefix="uc" TagName="ucHealthScreening" %>
+<%--<%@ Register Src="~/CCC/UC/Adherence/ucAdherenceBarriersHome.ascx" TagPrefix="uc" TagName="ucAdherenceBarriers" %>
+<%@ Register Src="~/CCC/UC/Depression/ucScreeningHome.ascx" TagPrefix="uc" TagName="ucHealthScreening" %>--%>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
     
@@ -22,8 +22,9 @@
             <li role="presentation" class="active"><a href="#ARTReadiness" aria-controls="ARTReadiness" role="tab" data-toggle="tab"><i class="fa fa-flask fa-lg" aria-hidden="true"></i> ART Readiness Assessment</a></li>
             <li role="presentation" class=""><a href="#encounter" aria-controls="encounter" role="tab" data-toggle="tab"><i class="fa fa-exchange fa-lg" aria-hidden="true"></i> Clinical Encounter</a></li>
             <li role="presentation"><a href="#vlTracker" aria-controls="vlTracker" role="tab" data-toggle="tab"><i class="fa fa-line-chart fa-lg" aria-hidden="true"></i> Viraload Tracker</a></li>
-            <li role="presentation"><a href="#adherencebarriers" aria-controls="adherencebarriers" role="tab" data-toggle="tab"><i class="fa fa-exclamation-triangle fa-lg" aria-hidden="true"></i> Barriers to Adherence</a></li>
-            <li role="presentation"><a href="#healthscreening" aria-controls="healthscreening" role="tab" data-toggle="tab"><i class="fa fa-stethoscope fa-lg" aria-hidden="true"></i> Assessments</a></li>
+            <li role="presentation"><a href="#adherencebarriers" aria-controls="adherencebarriers" role="tab" data-toggle="tab" id="loadAdherenceBarriers"><i class="fa fa-exclamation-triangle fa-lg" aria-hidden="true"></i> Barriers to Adherence</a></li>
+            <li role="presentation"><a href="#healthscreening" aria-controls="healthscreening" role="tab" data-toggle="tab" id="loadHealthScreening"><i class="fa fa-stethoscope fa-lg" aria-hidden="true"></i> Assessments</a></li>
+            <li role="presentation"><a href="#EnhanceAdherence" aria-controls="EnhanceAdherence" role="tab" data-toggle="tab" id="loadEnhanceAdherence"><i class="fa fa-heart fa-lg" aria-hidden="true"></i> Enhance Adherence</a></li>
             <%--<li role="presentation"><a href="#Laboratory" aria-controls="Laboratory" role="tab" data-toggle="tab"><i class="fa fa-flask fa-lg" aria-hidden="true"></i>Laboratory</a></li>
             <li role="presentation"><a href="#Pharmacy" aria-controls="Pharmacy" role="tab" data-toggle="tab"><i class="fa fa-tint fa-lg" aria-hidden="true"></i>Pharmacy</a></li>--%>
         </ul>
@@ -105,10 +106,13 @@
                       <!-- pw .implementation of viral load tracker line graph here-->
                 </div><!-- .viraload tracker-->
                 <div role="tabpanel" class="tab-pane fade" id="adherencebarriers">
-                    <uc:ucAdherenceBarriers runat="server" id="ucAdherenceBarriers" />
+                    <div class="loading" style="display: none;"><img src="../../Images/PEPloading.gif" /></div>
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="healthscreening">
-                    <uc:ucHealthScreening runat="server" id="ucHealthScreening" />
+                    <div class="loading" style="display: none;"><img src="../../Images/PEPloading.gif" /></div>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="EnhanceAdherence">
+                    <div class="loading" style="display: none;"><img src="../../Images/PEPloading.gif" /></div>
                 </div>
         </div>
     </div>
@@ -538,7 +542,23 @@
             $("#AppointmentDate").val("");
         }
             
+        $("#loadEnhanceAdherence").click(function () {
+            $("#EnhanceAdherence .loading").show();
+            $("#EnhanceAdherence").load("../UC/EnhanceAdherenceCounselling/EnhanceAdherenceHome.aspx");
+            //$("#EnhanceAdherence .loading").hide();
+        });
 
+        $("#loadAdherenceBarriers").click(function () {
+            $("#adherencebarriers .loading").show();
+            $("#adherencebarriers").load("../UC/Adherence/AdherenceBarriersHome.aspx");
+            //$("#adherencebarriers .loading").hide();
+        });
+
+        $("#loadHealthScreening").click(function () {
+            $("#healthscreening .loading").show();
+            $("#healthscreening").load("../UC/Depression/ScreeningHome.aspx");
+            //$("#healthscreening .loading").hide();
+        });
     </script>
 
 </asp:Content>

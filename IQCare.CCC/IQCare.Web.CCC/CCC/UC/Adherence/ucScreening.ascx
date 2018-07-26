@@ -68,67 +68,6 @@
     </div>
 </div>
 <script type="text/javascript">
-    $("#scmyWizard").on("actionclicked.fu.wizard", function (evt, data) {
-        var currentStep = data.step;
-        if (currentStep == 4) {
-            var ScreenId = <%=ScreenId%>;
-            if (ScreenId > 0) {
-                updateAdherenceScreen(ScreenId);
-            }
-            else {
-                addAdherenceScreen();
-            }
-        }
-    });
-
-    function updateAdherenceScreen(ScreenId)
-    {
-        <%--var ScreenId = ScreenId;
-        var patientId = <%=PatientId%>;
-        var userId = <%=userId%>;
-        var patientMasterVisitId = <%=PatientMasterVisitId%>;
-        var total = $("#<%=tbTotal.ClientID%>").val();
-        var depressionSeverity = $("#<%=tbDepressionSeverity.ClientID%>").val();
-        var recommendedManagement = $("#<%=tbRecommendedManagement.ClientID%>").val();
-        $.ajax({
-            type: "POST",
-            url: "../WebService/AdherenceService.asmx/addAdherenceScreen",
-            data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','createdBy':'" + userId + "','total': '" + total + "'," +
-            "'depressionSeverity': '" + depressionSeverity + "','recommendedManagement':'" + recommendedManagement + "','ScreeningId':'" + ScreenId + "'}",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (response) {
-                toastr.success(response.d, "Depression screen updated");
-            },
-            error: function (response) {
-                toastr.error("Depression screen not updated");
-            }
-        });--%>
-    }
-
-    function addAdherenceScreen() {
-        <%--var patientId = <%=PatientId%>;
-        var userId = <%=userId%>;
-        var patientMasterVisitId = <%=PatientMasterVisitId%>;
-        var total = $("#<%=tbTotal.ClientID%>").val();
-        var depressionSeverity = $("#<%=tbDepressionSeverity.ClientID%>").val();
-        var recommendedManagement = $("#<%=tbRecommendedManagement.ClientID%>").val();
-        $.ajax({
-            type: "POST",
-            url: "../WebService/AdherenceService.asmx/addAdherenceScreen",
-            data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','createdBy':'" + userId + "','total': '" + total + "'," +
-            "'depressionSeverity': '" + depressionSeverity + "','recommendedManagement':'" + recommendedManagement + "'}",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (response) {
-                toastr.success(response.d, "Depression screen saved");
-            },
-            error: function (response) {
-                toastr.error(JSON.stringify(response));
-            }
-        });--%>
-    }
-
     jQuery(function ($) {
         var ScreenId = <%=ScreenId%>;
         if (ScreenId > 0) {

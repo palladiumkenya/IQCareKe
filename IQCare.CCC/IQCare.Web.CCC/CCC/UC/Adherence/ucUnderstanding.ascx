@@ -15,7 +15,7 @@
 	</div>
 </div>
 <script type="text/javascript">
-    $("#myWizard").on("actionclicked.fu.wizard", function (evt, data) {
+    $("#abmyWizard").on("actionclicked.fu.wizard", function (evt, data) {
         var currentStep = data.step;
         if (currentStep == 1) {
             addUpdateUHScreeningData();
@@ -55,10 +55,10 @@
     jQuery(function ($) {
         var uId = <%=understandingId%>;
         if (uId > 0) {
-            $('#myWizard').wizard();
-            $('#myWizard').find('#dsSectionOne').toggleClass('complete', true);
-            $('#myWizard').on('changed.fu.wizard', function (evt, data) {
-                $('#myWizard').find('#dsSectionOne').toggleClass('complete', true);
+            $('#abmyWizard').wizard();
+            $('#abmyWizard').find('#dsSectionOne').toggleClass('complete', true);
+            $('#abmyWizard').on('changed.fu.wizard', function (evt, data) {
+                $('#abmyWizard').find('#dsSectionOne').toggleClass('complete', true);
             });
         }
     });

@@ -7,54 +7,54 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace IQCare.Web.CCC.UC.Depression {
+namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling {
     
     
-    public partial class ucScreeningHome {
+    public partial class EnhanceAdherenceHome {
         
         /// <summary>
-        /// gbvdatastep control.
+        /// tnSession1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl gbvdatastep;
+        protected global::IQCare.Web.CCC.UC.EnhanceAdherenceCounselling.ucSession1 tnSession1;
         
         /// <summary>
-        /// DepressionScreeningPanel control.
+        /// tnSession2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::IQCare.Web.CCC.UC.Depression.ucDepressionScreening DepressionScreeningPanel;
+        protected global::IQCare.Web.CCC.UC.EnhanceAdherenceCounselling.ucSession2 tnSession2;
         
         /// <summary>
-        /// PHAlcoholSection control.
+        /// tnSession3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder PHAlcoholSection;
+        protected global::IQCare.Web.CCC.UC.EnhanceAdherenceCounselling.ucSession3 tnSession3;
         
         /// <summary>
-        /// scdatastep3 control.
+        /// tnSession4 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl scdatastep3;
+        protected global::IQCare.Web.CCC.UC.EnhanceAdherenceCounselling.ucSession4 tnSession4;
         
         /// <summary>
-        /// GBVScreeningPanel control.
+        /// endSessionViralLoad control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::IQCare.Web.CCC.UC.Depression.ucGBVScreening GBVScreeningPanel;
+        protected global::IQCare.Web.CCC.UC.EnhanceAdherenceCounselling.ucEndSessionViralLoad endSessionViralLoad;
     }
 }

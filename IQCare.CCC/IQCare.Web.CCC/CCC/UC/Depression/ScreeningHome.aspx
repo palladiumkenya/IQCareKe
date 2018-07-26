@@ -1,8 +1,9 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucScreeningHome.ascx.cs" Inherits="IQCare.Web.CCC.UC.Depression.ucScreeningHome" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ScreeningHome.aspx.cs" Inherits="IQCare.Web.CCC.UC.Depression.ScreeningHome" %>
 <%@ Register TagPrefix="uc" TagName="tnDepressionScreening" Src="~/CCC/UC/Depression/ucDepressionScreening.ascx" %>
 <%@ Register TagPrefix="uc" TagName="tnCAGEAIDScreening" Src="~/CCC/UC/Depression/ucCAGEAID.ascx" %>
 <%@ Register TagPrefix="uc" TagName="tnCRAFFTScreening" Src="~/CCC/UC/Depression/ucCRAFFT.ascx" %>
 <%@ Register TagPrefix="uc" TagName="tnGBVScreening" Src="~/CCC/UC/Depression/ucGBVScreening.ascx" %>
+<form runat="server">
     <div class="col-md-12" style="padding-top: 20px">
         <div class="col-md-12">
             <div class="wizard" data-initialize="wizard" id="scmyWizard">
@@ -53,6 +54,7 @@
             </div>
         </div>
     </div>
+</form>
         <script type="text/javascript">
         jQuery(function ($) {
             $('#scmyWizard').wizard();

@@ -7,54 +7,63 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace IQCare.Web.CCC.UC.Depression {
+namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling {
     
     
-    public partial class ucScreeningHome {
+    public partial class ucMMAS4 {
         
         /// <summary>
-        /// gbvdatastep control.
+        /// PHMMAS4 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl gbvdatastep;
+        protected global::System.Web.UI.WebControls.PlaceHolder PHMMAS4;
         
         /// <summary>
-        /// DepressionScreeningPanel control.
+        /// PHMMAS4Scores control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::IQCare.Web.CCC.UC.Depression.ucDepressionScreening DepressionScreeningPanel;
+        protected global::System.Web.UI.WebControls.PlaceHolder PHMMAS4Scores;
         
         /// <summary>
-        /// PHAlcoholSection control.
+        /// PHMMAS4Rating control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder PHAlcoholSection;
+        protected global::System.Web.UI.WebControls.PlaceHolder PHMMAS4Rating;
         
         /// <summary>
-        /// scdatastep3 control.
+        /// PHMMAS8 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl scdatastep3;
+        protected global::System.Web.UI.WebControls.PlaceHolder PHMMAS8;
         
         /// <summary>
-        /// GBVScreeningPanel control.
+        /// PHMMAS8Scores control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::IQCare.Web.CCC.UC.Depression.ucGBVScreening GBVScreeningPanel;
+        protected global::System.Web.UI.WebControls.PlaceHolder PHMMAS8Scores;
+        
+        /// <summary>
+        /// PHMMAS8Rating control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder PHMMAS8Rating;
     }
 }

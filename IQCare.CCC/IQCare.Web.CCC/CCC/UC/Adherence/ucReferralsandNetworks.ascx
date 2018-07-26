@@ -15,7 +15,7 @@
 	</div>
 </div>
 <script type="text/javascript">
-    $("#myWizard").on("actionclicked.fu.wizard", function (evt, data) {
+    $("#abmyWizard").on("actionclicked.fu.wizard", function (evt, data) {
         var currentStep = data.step;
         if (currentStep == 4) {
             addUpdateRNScreeningData();
@@ -26,7 +26,6 @@
     {
         var error = 0;
         $("#referralsandnetworks input[type=radio]:checked").each(function () {
-            alert("Saving");
             var screeningValue = $(this).val();
             var screeningCategory = $(this).closest("table").attr('id');
             var screeningType = <%=screenTypeId%>;
@@ -76,10 +75,10 @@
     jQuery(function ($) {
         var refId = <%=RefId%>;
         if (refId > 0) {
-            $('#myWizard').wizard();
-            $('#myWizard').find('#dsSectionFour').toggleClass('complete', true);
-            $('#myWizard').on('changed.fu.wizard', function (evt, data) {
-                $('#myWizard').find('#dsSectionFour').toggleClass('complete', true);
+            $('#abmyWizard').wizard();
+            $('#abmyWizard').find('#dsSectionFour').toggleClass('complete', true);
+            $('#abmyWizard').on('changed.fu.wizard', function (evt, data) {
+                $('#abmyWizard').find('#dsSectionFour').toggleClass('complete', true);
             });
         }
     });

@@ -19,7 +19,7 @@
 </div>
 <script type="text/javascript">
     var currentStep;
-    $("#myWizard").on("actionclicked.fu.wizard", function (evt, data) {
+    $("#abmyWizard").on("actionclicked.fu.wizard", function (evt, data) {
         currentStep = data.step;
         if (currentStep == 3) {
             addUpdatePCScreeningData();
@@ -88,7 +88,7 @@
 
     function showhidenotes(parentPanel, selectedValue, rbName)
     {
-        var radioButtons = $("input[name='" + rbName + "']");
+        var radioButtons = $("#psychosocialcircumstancessection input[name='" + rbName + "']");
         var selectedIndex = radioButtons.index(radioButtons.filter(':checked'));
         if (selectedIndex == 0)
         {
@@ -111,10 +111,10 @@
 
     jQuery(function ($) {
         var PCId = <%=PCId%>;        if (PCId > 0) {
-            $('#myWizard').wizard();
-            $('#myWizard').find('#dsSectionThree').toggleClass('complete', true);
-            $('#myWizard').on('changed.fu.wizard', function (evt, data) {
-                $('#myWizard').find('#dsSectionThree').toggleClass('complete', true);
+            $('#abmyWizard').wizard();
+            $('#abmyWizard').find('#dsSectionThree').toggleClass('complete', true);
+            $('#abmyWizard').on('changed.fu.wizard', function (evt, data) {
+                $('#abmyWizard').find('#dsSectionThree').toggleClass('complete', true);
             });
         }
     });

@@ -33,16 +33,13 @@ namespace IQCare.Web.CCC.UC.Depression
             {
                 //Alcohol Frequency
                 getFrequencyCTRLs();
-                getFrequencyData(PatientId);
                 //Alcohol Screening
                 getAlcoholCTRLs();
-                getAlcoholData(PatientId);
                 //Smoking Screening
                 getSmokingCTRLs();
-                getSmokingData(PatientId);
                 //cageaid Notes
                 getNotesCTRLS();
-                getNotesData(PatientId);
+                getCageaidData(PatientId);
             }
         }
         private void getFrequencyData(int patientId)
@@ -77,7 +74,14 @@ namespace IQCare.Web.CCC.UC.Depression
                 rbList.ID = "cage"+value.ItemId.ToString();
                 rbList.RepeatColumns = 1;
                 rbList.ClientIDMode = System.Web.UI.ClientIDMode.Static;
-                rbList.CssClass = "cageaidrbList";
+                if(value.ItemDisplayName.Contains("smoke"))
+                {
+                    rbList.CssClass = "cagerbList smokerb";
+                }
+                else
+                {
+                    rbList.CssClass = "cagerbList alcoholrb";
+                }
                 lookUp.populateRBL(rbList, value.ItemName);
                 PHCageFrequency.Controls.Add(rbList);
                 PHCageFrequency.Controls.Add(new LiteralControl("</div>"));
@@ -99,10 +103,10 @@ namespace IQCare.Web.CCC.UC.Depression
                 PHCAGEAlcoholScreening.Controls.Add(new LiteralControl("</div>"));
                 PHCAGEAlcoholScreening.Controls.Add(new LiteralControl("<div class='col-md-2 text-right'>"));
                 rbList = new RadioButtonList();
-                rbList.ID = "cagea"+value.ItemId.ToString();
+                rbList.ID = "cage"+value.ItemId.ToString();
                 rbList.RepeatColumns = 4;
                 rbList.ClientIDMode = System.Web.UI.ClientIDMode.Static;
-                rbList.CssClass = "rbList";
+                rbList.CssClass = "cagerbList";
                 lookUp.populateRBL(rbList, "GeneralYesNo");
                 PHCAGEAlcoholScreening.Controls.Add(rbList);
                 PHCAGEAlcoholScreening.Controls.Add(new LiteralControl("</div>"));
@@ -121,7 +125,7 @@ namespace IQCare.Web.CCC.UC.Depression
             tbCageScore = new TextBox();
             tbCageScore.CssClass = "form-control input-sm";
             tbCageScore.ClientIDMode = System.Web.UI.ClientIDMode.Static;
-            tbCageScore.ID = LookupLogic.GetLookupItemId("AlcoholScore");
+            tbCageScore.ID = "cage"+LookupLogic.GetLookupItemId("AlcoholScore");
             tbCageScore.Enabled = false;
             PHCAGEAIDScore.Controls.Add(tbCageScore);
             PHCAGEAIDScore.Controls.Add(new LiteralControl("<span class='input-group-addon'>/ 4</span>"));
@@ -132,14 +136,10 @@ namespace IQCare.Web.CCC.UC.Depression
             tbCageRisk = new TextBox();
             tbCageRisk.CssClass = "form-control input-sm";
             tbCageRisk.ClientIDMode = System.Web.UI.ClientIDMode.Static;
-            tbCageRisk.ID = LookupLogic.GetLookupItemId("AlcoholRiskLevel");
+            tbCageRisk.ID = "cage"+LookupLogic.GetLookupItemId("AlcoholRiskLevel");
             tbCageRisk.Enabled = false;
             PHRisk.Controls.Add(tbCageRisk);
             PHRisk.Controls.Add(new LiteralControl("</div>"));
-        }
-        private void getAlcoholData(int patientId)
-        {
-
         }
         private void getNotesCTRLS()
         {
@@ -157,6 +157,7 @@ namespace IQCare.Web.CCC.UC.Depression
                     notesTb = new TextBox();
                     notesTb.TextMode = TextBoxMode.MultiLine;
                     notesTb.CssClass = "form-control input-sm";
+                    notesTb.ClientIDMode = System.Web.UI.ClientIDMode.Static;
                     notesTb.ID = "cage"+value.ItemId.ToString();
                     notesTb.Rows = 3;
                     PHCageNotes.Controls.Add(notesTb);
@@ -194,10 +195,10 @@ namespace IQCare.Web.CCC.UC.Depression
                 PHCageSmokingScreening.Controls.Add(new LiteralControl("</div>"));
                 PHCageSmokingScreening.Controls.Add(new LiteralControl("<div class='col-md-2 text-right'>"));
                 rbList = new RadioButtonList();
-                rbList.ID = "cagesm"+value.ItemId.ToString();
+                rbList.ID = "cage"+value.ItemId.ToString();
                 rbList.RepeatColumns = 4;
                 rbList.ClientIDMode = System.Web.UI.ClientIDMode.Static;
-                rbList.CssClass = "rbList";
+                rbList.CssClass = "cagerbList";
                 lookUp.populateRBL(rbList, "GeneralYesNo");
                 PHCageSmokingScreening.Controls.Add(rbList);
                 PHCageSmokingScreening.Controls.Add(new LiteralControl("</div>"));
@@ -209,9 +210,35 @@ namespace IQCare.Web.CCC.UC.Depression
                 }
             }
         }
-        private void getSmokingData(int patientId)
+        public void getCageaidData(int PatientId)
         {
-
+            var PSM = new PatientScreeningManager();
+            List<PatientScreening> screeningList = PSM.GetPatientScreening(PatientId);
+            if (screeningList != null)
+            {
+                foreach (var value in screeningList)
+                {
+                    screenTypeId = Convert.ToInt32(value.ScreeningTypeId);
+                    RadioButtonList rblPC1Qs = (RadioButtonList)PHCageFrequency.FindControl("cage" + value.ScreeningCategoryId.ToString());
+                    if (rblPC1Qs != null)
+                    {
+                        rblPC1Qs.SelectedValue = value.ScreeningValueId.ToString();
+                    }
+                }
+            }
+            var PCN = new PatientClinicalNotesLogic();
+            List<PatientClinicalNotes> notesList = PCN.getPatientClinicalNotes(PatientId);
+            if (notesList.Any())
+            {
+                foreach (var value in notesList)
+                {
+                    TextBox ntb = (TextBox)PHCAGEAIDScore.FindControl("cage" + value.NotesCategoryId.ToString());
+                    if (ntb != null)
+                    {
+                        ntb.Text = value.ClinicalNotes;
+                    }
+                }
+            }
         }
     }
 }

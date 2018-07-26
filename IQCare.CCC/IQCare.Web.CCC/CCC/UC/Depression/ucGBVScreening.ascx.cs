@@ -65,7 +65,20 @@ namespace IQCare.Web.CCC.UC.Depression
         }
         public void getGbvScreeningData(int PatientId)
         {
-
+            var PSM = new PatientScreeningManager();
+            List<PatientScreening> screeningList = PSM.GetPatientScreening(PatientId);
+            if (screeningList != null)
+            {
+                foreach (var value in screeningList)
+                {
+                    screenTypeId = Convert.ToInt32(value.ScreeningTypeId);
+                    RadioButtonList rblPC1Qs = (RadioButtonList)PHgbvquestions.FindControl("gbv" + value.ScreeningCategoryId.ToString());
+                    if (rblPC1Qs != null)
+                    {
+                        rblPC1Qs.SelectedValue = value.ScreeningValueId.ToString();
+                    }
+                }
+            }
         }
     }
 }

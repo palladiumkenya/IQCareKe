@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace IQCare.Web.CCC.UC.Depression
 {
-    public partial class ucScreeningHome : System.Web.UI.UserControl
+    public partial class ScreeningHome : System.Web.UI.Page
     {
         public string visitdateval = "";
         public string LMPval = "";
@@ -33,12 +33,12 @@ namespace IQCare.Web.CCC.UC.Depression
                 Control crafftControl = Page.LoadControl("~/CCC/UC/Depression/ucCRAFFT.ascx");
                 PHAlcoholSection.Controls.Add(crafftControl);
             }
-            if(age>20)
+            if (age > 20)
             {
                 Control cageControl = Page.LoadControl("~/CCC/UC/Depression/ucCAGEAID.ascx");
                 PHAlcoholSection.Controls.Add(cageControl);
             }
-            if(gender == "Male")
+            if (gender == "Male")
             {
                 gbvdatastep.Visible = false;
                 scdatastep3.Visible = false;

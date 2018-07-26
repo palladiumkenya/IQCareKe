@@ -10,7 +10,7 @@
 namespace IQCare.Web.CCC.UC.Depression {
     
     
-    public partial class ucScreeningHome {
+    public partial class ScreeningHome {
         
         /// <summary>
         /// gbvdatastep control.

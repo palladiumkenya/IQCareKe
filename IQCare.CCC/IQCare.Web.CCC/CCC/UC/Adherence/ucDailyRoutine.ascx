@@ -15,13 +15,12 @@
 	</div>
 </div>
 <script type="text/javascript">
-    $("#myWizard").on("actionclicked.fu.wizard", function (evt, data) {
+    $("#abmyWizard").on("actionclicked.fu.wizard", function (evt, data) {
         var currentStep = data.step;
         if (currentStep == 2) {
             var error = 0;
             $("#dailyroutinescreening textarea").each(function () {
                 var categoryId = $(this).attr('id');
-                alert(categoryId);
                 var patientId = <%=PatientId%>;
                 var patientMasterVisitId = <%=PatientMasterVisitId%>;
                 var clinicalNotes = $(this).val();
@@ -49,10 +48,10 @@
 
     jQuery(function ($) {
         var dailyRoutineId = <%=dailyRoutineId%>;        if (dailyRoutineId > 0) {
-            $('#myWizard').wizard();
-            $('#myWizard').find('#dsSectionTwo').toggleClass('complete', true);
-            $('#myWizard').on('changed.fu.wizard', function (evt, data) {
-                $('#myWizard').find('#dsSectionTwo').toggleClass('complete', true);
+            $('#abmyWizard').wizard();
+            $('#abmyWizard').find('#dsSectionTwo').toggleClass('complete', true);
+            $('#abmyWizard').on('changed.fu.wizard', function (evt, data) {
+                $('#abmyWizard').find('#dsSectionTwo').toggleClass('complete', true);
             });
         }
     });
