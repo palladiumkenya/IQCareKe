@@ -125,6 +125,7 @@
     <Content Include="CCC\Scripts\js\linegraph1.js" />
     <Content Include="CCC\Scripts\js\PatientRegistration.js" />
     <Content Include="CCC\UC\ucExtruder.ascx" />
+    <Content Include="CCC\UC\ucFamilyFinder.ascx" />
     <Content Include="CCC\UC\ucFemaleVitals.ascx" />
     <Content Include="CCC\UC\ucIpt.ascx" />
     <Content Include="CCC\UC\ucIptClientWorkup.ascx" />
@@ -539,6 +540,13 @@
     </Compile>
     <Compile Include="CCC\UC\ucExtruder.ascx.designer.cs">
       <DependentUpon>ucExtruder.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\ucFamilyFinder.ascx.cs">
+      <DependentUpon>ucFamilyFinder.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucFamilyFinder.ascx.designer.cs">
+      <DependentUpon>ucFamilyFinder.ascx</DependentUpon>
     </Compile>
     <Compile Include="CCC\UC\ucFemaleVitals.ascx.cs">
       <DependentUpon>ucFemaleVitals.ascx</DependentUpon>

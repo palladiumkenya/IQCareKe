@@ -107,6 +107,7 @@
   <ItemGroup>
     <Compile Include="assessment\PatientPsychosocialCriteriaManager.cs" />
     <Compile Include="assessment\PatientSupportSystemCriteriaManager.cs" />
+    <Compile Include="Baseline\PatientHivTestingManager.cs" />
     <Compile Include="Baseline\INHProphylaxisManager.cs" />
     <Compile Include="Baseline\PatientBaselineAssessmentManager.cs" />
     <Compile Include="Baseline\PatientArvHistoryManager.cs" />

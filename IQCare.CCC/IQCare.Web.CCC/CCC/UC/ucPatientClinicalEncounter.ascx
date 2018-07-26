@@ -2220,7 +2220,11 @@
 	var PatientId = "<%=PtnId%>";
 	var PatientMasterVisitId = "<%=PmVisitId%>";
 	var adverseEventName = "";
-	var adverseEventId = 0;
+    var adverseEventId = 0;
+    var NextAppointmentDate = "<%=NextAppointmentDate%>";
+    var selectedstage = "";
+    var OIdata = [];
+    var PatientOIData = [];
 
 	document.getElementById('txtPresentingComplaintsID').style.display = 'none';
 	document.getElementById('txtAllergyId').style.display = 'none';
@@ -2625,7 +2629,7 @@
 
 	    $("#<%=AppointmentDate.ClientID%>").val(moment(NextAppointmentDate).format('DD-MMM-YYYY'));
 
-		});
+		
        
 		$("#AppointmentDate").change(function () {
 			var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
@@ -3911,41 +3915,43 @@
 				}
 				$("#<%=mmas8Adherence.ClientID%>").text(MMAS8Score);        
 			}
-		}
+        }
+    
 
-		function AddPatientCategorization() {
-			var artRegimenPeriod = $("input[name$=ArtRegimenPeriod]:checked").val();
-			var activeOis = $("input[name$=ActiveOis]:checked").val();
-			var visitsAdherant = $("input[name$=VisitsAdherant]:checked").val();
-			var vlCopies = $("input[name$=VlCopies]:checked").val();
-			var ipt = $("input[name$=Ipt]:checked").val();
-			var bmi = $("input[name$=Bmi]:checked").val();
-			var age = $("input[name$=Age]:checked").val();
-			var healthcareConcerns = $("input[name$=HealthcareConcerns]:checked").val();
-			var patientId = <%=PatientId%>;
-			var patientMasterVisitId = <%=PatientMasterVisitId%>;
-			$.ajax({
-				type: "POST",
-				url: "../WebService/PatientService.asmx/AddPatientCategorization",
-				data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','artRegimenPeriod': '" + artRegimenPeriod + "','activeOis': '" + activeOis + "','visitsAdherant': '" + visitsAdherant + "','vlCopies': '" + vlCopies + "','ipt': '" + ipt + "','bmi': '" + bmi + "','age': '" + age + "','healthcareConcerns': '" + healthcareConcerns + "'}",
-				contentType: "application/json; charset=utf-8",
-				dataType: "json",
-				success: function (response) {
-					console.log(response.d);
-					var returnValue = JSON.parse(response.d);
+        function AddPatientCategorization() {
+            var artRegimenPeriod = $("input[name$=ArtRegimenPeriod]:checked").val();
+            var activeOis = $("input[name$=ActiveOis]:checked").val();
+            var visitsAdherant = $("input[name$=VisitsAdherant]:checked").val();
+            var vlCopies = $("input[name$=VlCopies]:checked").val();
+            var ipt = $("input[name$=Ipt]:checked").val();
+            var bmi = $("input[name$=Bmi]:checked").val();
+            var age = $("input[name$=Age]:checked").val();
+            var healthcareConcerns = $("input[name$=HealthcareConcerns]:checked").val();
+            var patientId = <%=PatientId%>;
+            var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientService.asmx/AddPatientCategorization",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','artRegimenPeriod': '" + artRegimenPeriod + "','activeOis': '" + activeOis + "','visitsAdherant': '" + visitsAdherant + "','vlCopies': '" + vlCopies + "','ipt': '" + ipt + "','bmi': '" + bmi + "','age': '" + age + "','healthcareConcerns': '" + healthcareConcerns + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    console.log(response.d);
+                    var returnValue = JSON.parse(response.d);
 
-					toastr.success(returnValue[0], "Patient Categorization");
+                    toastr.success(returnValue[0], "Patient Categorization");
 
-					$("#<%=stabilityStatus.ClientID%>").val(returnValue[1]);
-					setTimeout(function () { $('#differentiatedModal').modal('hide'); }, 2000);
-				},
-				error: function (xhr, errorType, exception) {
-					var jsonError = jQuery.parseJSON(xhr.responseText);
-					toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);
-					return false;
-				}
-			});
-		}
+                    $("#<%=stabilityStatus.ClientID%>").val(returnValue[1]);
+                    setTimeout(function () { $('#differentiatedModal').modal('hide'); }, 2000);
+                },
+                error: function (xhr, errorType, exception) {
+                    var jsonError = jQuery.parseJSON(xhr.responseText);
+                    toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);
+                    return false;
+                }
+            });
+        }
+    
 
 
 		function getSelectedItemsList(elementId) {
@@ -4575,7 +4581,7 @@
 
                 var itemList = JSON.parse(response.d);
                 console.log(itemList,WhoStage);
-                toastr.success(response.d, "WHOStageConditions");
+                
                 BindWhoStage(itemList,WhoStage,id,title);
 
             },
