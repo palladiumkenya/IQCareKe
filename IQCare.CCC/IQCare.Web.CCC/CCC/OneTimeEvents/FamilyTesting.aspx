@@ -643,7 +643,22 @@
         var tablefamily = null;
         var cccArrayList = new Array();
         var RelationshipPersonId = 0;
-        var RelationshipRelationshipType =0;
+        var RelationshipRelationshipType = 0;
+        var CCCNumber = "";
+        var HivTestingResult = "";
+        var Relationshiptype = "";
+        var BaselineResult = "";
+        var HivTestingDate = "";
+        var ReferredToCare = "";
+        var LinkageDate = "";
+        var EnrollmentNumber = "";
+        var FirstName = "";
+        var MiddleName = "";
+        var DOB = "";
+        var LastName = "";
+        var gender = "";
+        var BaselineDate = "";
+        var DobPrecision = "";
         $(document).ready(function () {
             window.patientAge = <%=PatientAge%>;
             var date = moment("<%=PatientDateOfBirth%>").format('DD-MMM-YYYY');
@@ -845,22 +860,22 @@
                                 RelationshipRelationshipType = "";
                                 RelationshipPersonId = GetDictionaryValue(json, "PersonId");
                               
-                                var CCCNumber = GetDictionaryValue(json, "CCCNumber");
-                                var HivTestingResult = GetDictionaryValue(json, "HivTestingResult");
-                                var Relationshiptype = GetDictionaryValue(json, "Relationshiptype");
-                                var BaselineResult = GetDictionaryValue(json, "BaselineResult");
-                                var HivTestingDate = GetDictionaryValue(json, "HivTestingDate");
-                                var ReferredToCare = GetDictionaryValue(json, "ReferredToCare");
-                                var LinkageDate = GetDictionaryValue(json, "LinkageDate");
+                                CCCNumber = GetDictionaryValue(json, "CCCNumber");
+                                 HivTestingResult = GetDictionaryValue(json, "HivTestingResult");
+                                 Relationshiptype = GetDictionaryValue(json, "Relationshiptype");
+                                 BaselineResult = GetDictionaryValue(json, "BaselineResult");
+                                 HivTestingDate = GetDictionaryValue(json, "HivTestingDate");
+                                 ReferredToCare = GetDictionaryValue(json, "ReferredToCare");
+                                 LinkageDate = GetDictionaryValue(json, "LinkageDate");
 
-                                var EnrollmentNumber = GetDictionaryValue(json, "EnrollmentNumber");
-                                var FirstName = GetDictionaryValue(json, "FirstName");
-                                var MiddleName = GetDictionaryValue(json, "MiddleName");
-                                var DOB = GetDictionaryValue(json, "DOB");
-                                var LastName = GetDictionaryValue(json, "LastName");
-                                var gender = GetDictionaryValue(json, "gender");
-                                var BaselineDate = GetDictionaryValue(json, "BaselineDate");
-                                var DobPrecision = GetDictionaryValue(json, "DobPrecision");
+                                 EnrollmentNumber = GetDictionaryValue(json, "EnrollmentNumber");
+                                 FirstName = GetDictionaryValue(json, "FirstName");
+                                 MiddleName = GetDictionaryValue(json, "MiddleName");
+                                 DOB = GetDictionaryValue(json, "DOB");
+                                 LastName = GetDictionaryValue(json, "LastName");
+                                 gender = GetDictionaryValue(json, "gender");
+                                 BaselineDate = GetDictionaryValue(json, "BaselineDate");
+                                 DobPrecision = GetDictionaryValue(json, "DobPrecision");
                                 if (!(FirstName == null || FirstName == "undefined" || FirstName == "")) {
                                     $("#<%=FirstName.ClientID%>").val(FirstName);
                                 }
@@ -1666,10 +1681,20 @@
                 $("#<%=CccReferal.ClientID%>").prop('disabled', true);
                 $("#<%=BaselineHIVStatusDate.ClientID%>").prop('disabled', true);
                 $("#BaselineHIVStatusD").addClass('noneevents');
-
-                $("#hivtestingresult").val("");
+                if (!(HivTestingResult == null || HivTestingResult == 'undefined' || HivTestingResult == "")) {
+                    $("#hivtestingresult").val(HivTestingResult);
+                }
+                else {
+                    $("#hivtestingresult").val("");
+                }
                 $("#hivtestingresult").prop('disabled', false);
-                $("#HIVTestingDate").val("");
+
+                if (!(HivTestingDate == null || HivTestingDate == 'undefined' || HivTestingDate == "")) {
+                    $("#HIVTestingDate").val(moment(HivTestingDate).format('DD-MMM-YYYY'))
+                }
+                else {
+                        $("#HIVTestingDate").val("");
+                }
                 $("#HIVTestingDate").prop('disabled', false);        
                 $("#TestingDate").removeClass('noneevents');
 
@@ -1677,9 +1702,19 @@
                 $("#CCCReferaldatepicker").addClass('noneevents');
 
             } else if (baselinehivstatus === "Tested Positive") {
-                $("#hivtestingresult").val("");
+                if (!(HivTestingResult == null || HivTestingResult == 'undefined' || HivTestingResult == "")) {
+                    $("#hivtestingresult").val(HivTestingResult);
+                }
+                else {
+                    $("#hivtestingresult").val("");
+                }
                 $("#hivtestingresult").prop('disabled', true);
-                $("#HIVTestingDate").val("");
+                if (!(HivTestingDate == null || HivTestingDate == 'undefined' || HivTestingDate == "")) {
+                    $("#HIVTestingDate").val(moment(HivTestingDate).format('DD-MMM-YYYY'))
+                }
+                else {
+                    $("#HIVTestingDate").val("");
+                }
                 $("#HIVTestingDate").prop('disabled', true);
                 $("#TestingDate").addClass('noneevents');
 
@@ -1694,9 +1729,19 @@
                 $("#<%=CccReferal.ClientID%>").prop('disabled', false);
 
             } else if (baselinehivstatus === "Tested Negative") {
-                $("#hivtestingresult").val("");
+                if (!(HivTestingResult == null || HivTestingResult == 'undefined' || HivTestingResult == "")) {
+                    $("#hivtestingresult").val(HivTestingResult);
+                }
+                else {
+                    $("#hivtestingresult").val("");
+                }
                 $("#hivtestingresult").prop('disabled', false);
-                $("#HIVTestingDate").val("");
+                if (!(HivTestingDate == null || HivTestingDate == 'undefined' || HivTestingDate == "")) {
+                    $("#HIVTestingDate").val(moment(HivTestingDate).format('DD-MMM-YYYY'))
+                }
+                else {
+                    $("#HIVTestingDate").val("");
+                }
                 $("#HIVTestingDate").prop('disabled', false);
                 $("#TestingDate").removeClass('noneevents');
 
