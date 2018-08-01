@@ -14,6 +14,8 @@ import { ChatbarComponent } from './chatbar/chatbar.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { PageheaderComponent } from './pageheader/pageheader.component';
 
+
+
 @NgModule({
     imports: [
         CommonModule,
@@ -29,7 +31,7 @@ import { PageheaderComponent } from './pageheader/pageheader.component';
         SidebarComponent,
         ChatbarComponent,
         BreadcrumbComponent,
-        PageheaderComponent,
+        PageheaderComponent
     ],
     exports: [
         HeaderComponent,

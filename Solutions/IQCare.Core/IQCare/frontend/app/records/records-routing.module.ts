@@ -42,7 +42,7 @@ const routes: Routes = [
     {
         path: 'searchcontact',
         component: SearchComponent,
-        pathMatch:'full'
+        pathMatch: 'full'
     },
     {
         path: 'patientrecord',

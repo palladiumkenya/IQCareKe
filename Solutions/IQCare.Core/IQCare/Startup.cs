@@ -42,6 +42,8 @@ namespace IQCare
             //Context
             services.AddDatabase(Configuration);
             services.AddCommonDatabase(Configuration);
+            services.AddPmtctDatabase(Configuration);
+
             services.AddMediatR();
             var assemblyNames =  Assembly.GetEntryAssembly().GetReferencedAssemblies();
             List<Assembly> assemblies = new List<Assembly>();

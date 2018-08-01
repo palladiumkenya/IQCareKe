@@ -1,17 +1,17 @@
 ﻿using IQCare.Common.BusinessProcess.Commands.Encounter;
 using IQCare.Common.Core.Models;
 using IQCare.Common.Infrastructure;
-using IQCare.Library;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
+using IQCare.Library;
 
 namespace IQCare.Common.BusinessProcess.CommandHandlers.Encounter
 {
-    public class GetAppStoreCommandHandler : IRequestHandler<GetAppStoreCommand, Result<GetAppStoreResponse>>
+    public class GetAppStoreCommandHandler : IRequestHandler<GetAppStoreCommand, Core.Models.Result<GetAppStoreResponse>>
     {
         private readonly ICommonUnitOfWork _unitOfWork;
         public GetAppStoreCommandHandler(ICommonUnitOfWork unitOfWork)
@@ -19,7 +19,7 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Encounter
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
 
-        public async Task<Result<GetAppStoreResponse>> Handle(GetAppStoreCommand request, CancellationToken cancellationToken)
+        public async Task<Core.Models.Result<GetAppStoreResponse>> Handle(GetAppStoreCommand request, CancellationToken cancellationToken)
         {
             try
             {
@@ -59,7 +59,7 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Encounter
 
                     _unitOfWork.Dispose();
 
-                    return Result<GetAppStoreResponse>.Valid(new GetAppStoreResponse()
+                    return Core.Models.Result<GetAppStoreResponse>.Valid(new GetAppStoreResponse()
                     {
                         StateStore = result
                     });
@@ -67,7 +67,7 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Encounter
             }
             catch (Exception e)
             {
-                return Result<GetAppStoreResponse>.Invalid(e.Message);
+                return Core.Models.Result<GetAppStoreResponse>.Invalid(e.Message);
             }
         }
     }
