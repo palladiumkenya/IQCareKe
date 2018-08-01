@@ -21,8 +21,19 @@ namespace IQCare.CCC.UILogic
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                throw e;
+            }
+        }
+
+        public PersonGreenCardLookup AddPersonToBlueCardLookup(PersonGreenCardLookup personGreenCardLookup)
+        {
+            try
+            {
+                return _personLookUpManager.AddPersonToBlueCardLookup(personGreenCardLookup);
+            }
+            catch (Exception e)
+            {
+                throw e;
             }
         }
     }

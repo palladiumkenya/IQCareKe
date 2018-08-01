@@ -26,8 +26,6 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.ClientLookup
                           $" AND PatientId = {request.PatientId};" +
                           "exec [dbo].[pr_CloseDecryptedSession];";
 
-
-
                 var result = await _unitOfWork.Repository<PatientLookupView>().FromSql(sql);
 
                 result.ForEach(item=>item.CalculateYourAge());

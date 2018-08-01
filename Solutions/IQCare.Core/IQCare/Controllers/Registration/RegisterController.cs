@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using IQCare.Common.BusinessProcess.Commands.Enrollment;
 using IQCare.Common.BusinessProcess.Commands.Partners;
 using IQCare.Common.BusinessProcess.Commands.PersonCommand;
+using Remotion.Linq.Parsing.Structure.IntermediateModel;
 
 namespace IQCare.Controllers.Registration
 {
@@ -33,6 +34,15 @@ namespace IQCare.Controllers.Registration
             return BadRequest(response);
         }
 
+        [HttpPost("UpdatePerson")]
+        public async Task<IActionResult> UpdatePerson([FromBody] UpdatePersonCommand updatePersonCommand)
+        {
+            var response = await _mediator.Send(updatePersonCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
         [HttpPost("addPatient")]
         public async Task<IActionResult> Post([FromBody] AddPatientCommand addPatientCommand)
         {
@@ -46,6 +56,24 @@ namespace IQCare.Controllers.Registration
         public async Task<IActionResult> Post([FromBody] AddPersonContactCommand addPersonContactCommand)
         {
             var response = await _mediator.Send(addPersonContactCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+        [HttpPost("updatePersonContact")]
+        public async Task<IActionResult> Post([FromBody]UpdatePersonContactCommand updatePersonContactCommand)
+        {
+            var response = await _mediator.Send(updatePersonContactCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+        [HttpPost("updatePersonMaritalStatus")]
+        public async Task<IActionResult> Post([FromBody] UpdatePersonMaritalStatusCommand updatePersonMaritalStatusCommand)
+        {
+            var response = await _mediator.Send(updatePersonMaritalStatusCommand, Request.HttpContext.RequestAborted);
             if (response.IsValid)
                 return Ok(response.Value);
             return BadRequest(response);
@@ -117,6 +145,15 @@ namespace IQCare.Controllers.Registration
             [FromBody] AddPersonRelationshipCommand addPersonRelationshipCommand)
         {
             var response = await _mediator.Send(addPersonRelationshipCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+        [HttpPost("UpdatePersonLocation")]
+        public async Task<IActionResult> Post([FromBody]UpdatePersonLocationCommand updatePersonLocationCommand)
+        {
+            var response = await _mediator.Send(updatePersonLocationCommand, Request.HttpContext.RequestAborted);
             if (response.IsValid)
                 return Ok(response.Value);
             return BadRequest(response);

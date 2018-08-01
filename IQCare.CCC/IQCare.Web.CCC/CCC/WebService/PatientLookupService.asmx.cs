@@ -43,6 +43,7 @@ namespace IQCare.Web.CCC.WebService
                 string firstName = null;
                 string middleName = null;
                 string lastName = null;
+                string isEnrolled = null;
 
                 PatientLookupManager patientLookup = new PatientLookupManager();
 
@@ -51,16 +52,17 @@ namespace IQCare.Web.CCC.WebService
                 firstName = Convert.ToString(dataPayLoad.FirstOrDefault(x => x.name == "firstName").value);
                 middleName = Convert.ToString(dataPayLoad.FirstOrDefault(x => x.name == "middleName").value);
                 lastName = Convert.ToString(dataPayLoad.FirstOrDefault(x => x.name == "lastName").value);
+                isEnrolled = Convert.ToString(dataPayLoad.FirstOrDefault(x=>x.name== "isEnrolled").value);
 
                 //patientId = patientId != "" ? patientId : 0;
 
                 if (patientId !="" || !string.IsNullOrWhiteSpace(firstName) || !string.IsNullOrWhiteSpace(middleName) || !string.IsNullOrWhiteSpace(lastName))
                 {
-                    jsonData = patientLookup.GetPatientSearchListPayload(patientId, firstName, middleName, lastName);
+                    jsonData = patientLookup.GetPatientSearchListPayload(patientId,isEnrolled, firstName, middleName, lastName);
                 }
                 else
                 {
-                    jsonData = patientLookup.GetPatientSearchListPayload();
+                   jsonData = patientLookup.GetPatientSearchListPayload(isEnrolled);
                 }
 
                 if (jsonData.Count > 0)
@@ -195,8 +197,9 @@ namespace IQCare.Web.CCC.WebService
 
                         data = jsonData.Select(x => new string[]
                         {
-                        
-                            x.Id.ToString(),
+
+//(isEnrolled=="notEnrolledClients")? x.PersonId.ToString(): x.Id.ToString(),
+                            (isEnrolled=="notEnrolledClients")? "0": x.Id.ToString(),
                             x.EnrollmentNumber.ToString(),
                             x.FirstName,
                             x.MiddleName,
@@ -204,8 +207,9 @@ namespace IQCare.Web.CCC.WebService
                             x.DateOfBirth.ToString("dd-MMM-yyyy"),
                             LookupLogic.GetLookupNameById(x.Sex),
                             //x.RegistrationDate.ToString("dd-MMM-yyyy"),
-                            x.EnrollmentDate.ToString("dd-MMM-yyyy"),
-                            x.PatientStatus.ToString()
+                            (isEnrolled=="notEnrolledClients")? Convert.ToDateTime(x.RegistrationDate).ToString("dd-MMM-yyyy") : x.EnrollmentDate.ToString("dd-MMM-yyyy"),
+                            x.PatientStatus.ToString(),
+                            x.PersonId.ToString()
                             //,utility.Decrypt(x.MobileNumber)
                         })
                     };

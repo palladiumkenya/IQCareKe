@@ -1,16 +1,15 @@
+
+import {from as observableFrom,  Observable } from 'rxjs';
 import { AfterViewInit, Component, NgZone, OnInit, ViewChild } from '@angular/core';
 import { Search } from '../_models/search';
 import { SearchService } from '../_services/search.service';
 import { DataSource } from '@angular/cdk/collections';
-import { Observable } from 'rxjs';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as Consent from '../../shared/reducers/app.states';
-import { MatPaginator } from '@angular/material';
-
-import { from as observableFrom } from 'rxjs';
-import { of as observableOf } from 'rxjs';
+import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { tap } from 'rxjs/operators';
 
 @Component({
     selector: 'app-search',
@@ -20,7 +19,7 @@ import { of as observableOf } from 'rxjs';
 export class SearchComponent implements OnInit, AfterViewInit {
     search: Search;
 
-    displayedColumns = ['IdentifierValue', 'firstName', 'midName', 'lastName', 'dateOfBirth', 'enrollmentDate'];
+    displayedColumns = ['IdentifierValue', 'firstName', 'midName', 'lastName', 'dateOfBirth', 'enrollmentDate', 'isHtsEnrolled'];
     dataSource = new SearchDataSource(this.searchService, this.search);
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -58,18 +57,25 @@ export class SearchComponent implements OnInit, AfterViewInit {
 
     getSelectedRow(row) {
         localStorage.setItem('personId', row['personId']);
-        localStorage.setItem('patientId', row['patientId']);
+        localStorage.setItem('isHtsEnrolled', '0');
+        console.log(row);
+        if (row['isHtsEnrolled'] == 'Enrolled') {
+            localStorage.setItem('patientId', row['patientId']);
 
-        this.searchService.lastHtsEncounter(row['personId']).subscribe((res) => {
-            if (res['encounterId']) {
-                localStorage.setItem('htsEncounterId', res['encounterId']);
-            }
-            if (res['patientMasterVisitId'] > 0) {
-                localStorage.setItem('patientMasterVisitId', res['patientMasterVisitId']);
-            }
-        });
+            this.searchService.lastHtsEncounter(row['personId']).subscribe((res) => {
+                if (res['encounterId']) {
+                    localStorage.setItem('htsEncounterId', res['encounterId']);
+                }
+                if (res['patientMasterVisitId'] > 0) {
+                    localStorage.setItem('patientMasterVisitId', res['patientMasterVisitId']);
+                }
+            });
 
-        this.zone.run(() => { this.router.navigate(['/registration/home'], { relativeTo: this.route }); });
+            this.zone.run(() => { this.router.navigate(['/registration/home'], { relativeTo: this.route }); });
+        } else if (row['isHtsEnrolled'] == 'Not Enrolled') {
+            localStorage.setItem('isHtsEnrolled', '1');
+            this.zone.run(() => { this.router.navigate(['/registration/register'], { relativeTo: this.route }); });
+        }
     }
 }
 
@@ -81,7 +87,6 @@ export class SearchDataSource extends DataSource<any> {
     connect(): Observable<any[]> {
         if (this.search == undefined) {
             return observableFrom([]);
-            // return Observable.from([]);
         } else {
             return this.searchService.searchClient(this.search);
         }

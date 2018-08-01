@@ -1,5 +1,5 @@
 /*Sets Themed Colors Based on Themes*/
-
+alert('here');
 var themeprimary = getThemeColorFromCss('themeprimary');
 var themesecondary = getThemeColorFromCss('themesecondary');
 var themethirdcolor = getThemeColorFromCss('themethirdcolor');
@@ -120,7 +120,7 @@ $.each(popovers, function () {
                 .data("class") +
                 '"><div class="arrow"></div><h3 class="popover-title ' +
                 $(this)
-                .data("titleclass") + '">Popover right</h3><div class="popover-content"></div></div>'
+                    .data("titleclass") + '">Popover right</h3><div class="popover-content"></div></div>'
         });
 });
 
@@ -133,7 +133,7 @@ $.each(hoverpopovers, function () {
                 .data("class") +
                 '"><div class="arrow"></div><h3 class="popover-title ' +
                 $(this)
-                .data("titleclass") + '">Popover right</h3><div class="popover-content"></div></div>',
+                    .data("titleclass") + '">Popover right</h3><div class="popover-content"></div></div>',
             trigger: "hover"
         });
 });
@@ -153,6 +153,7 @@ function InitiateSideMenu() {
 
     //Sidebar Toggler
     $(".sidebar-toggler").on('click', function () {
+        alert('here');
         $("#sidebar").toggleClass("hide");
         $(".sidebar-toggler").toggleClass("active");
         return false;
@@ -369,7 +370,7 @@ function InitiateSettings() {
 
             if (($('#checkbox_fixedbreadcrumbs')
                 .is(":checked")) && !($(this)
-                .is(":checked"))) {
+                    .is(":checked"))) {
                 $('#checkbox_fixedbreadcrumbs')
                     .prop('checked', false);
                 $('.page-breadcrumbs')
@@ -378,7 +379,7 @@ function InitiateSettings() {
 
             if (($('#checkbox_fixedheader')
                 .is(":checked")) && !($(this)
-                .is(":checked"))) {
+                    .is(":checked"))) {
                 $('#checkbox_fixedheader')
                     .prop('checked', false);
                 $('.page-header')
@@ -402,7 +403,7 @@ function InitiateSettings() {
             }
             if (($('#checkbox_fixedbreadcrumbs')
                 .is(":checked")) && !($(this)
-                .is(":checked"))) {
+                    .is(":checked"))) {
                 $('#checkbox_fixedbreadcrumbs')
                     .prop('checked', false);
                 $('.page-breadcrumbs')
@@ -411,7 +412,7 @@ function InitiateSettings() {
 
             if (($('#checkbox_fixedheader')
                 .is(":checked")) && !($(this)
-                .is(":checked"))) {
+                    .is(":checked"))) {
                 $('#checkbox_fixedheader')
                     .prop('checked', false);
                 $('.page-header')
@@ -443,7 +444,7 @@ function InitiateSettings() {
             }
             if (($('#checkbox_fixedheader')
                 .is(":checked")) && !($(this)
-                .is(":checked"))) {
+                    .is(":checked"))) {
                 $('#checkbox_fixedheader')
                     .prop('checked', false);
                 $('.page-header')

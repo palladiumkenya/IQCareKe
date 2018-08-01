@@ -52,8 +52,8 @@ insert into LookupMasterItem values((select top 1 Id from LookupMaster where Nam
 (select top 1 Id from LookupItem where name = 'PEP Regimens'),'PEP Regimens',9)
 
 ---duplicate PMTCT Regimens
-update LookupMasterItem set LookupItemId=(select id from lookupitem where name = 'PMTCTRegimens') 
-where LookupItemId=(select id from lookupitem where name = 'PMTCT Regimens')
+update LookupMasterItem set LookupItemId=(select top 1 id from lookupitem where name = 'PMTCTRegimens') 
+where LookupItemId=(select top 1 id from lookupitem where name = 'PMTCT Regimens')
 
 -----------------Update LPV/r and ATV/r--------------------------------
 update dtl_RegimenMap set RegimenType = 'TDF/3TC/ATV/r' where RegimenType='3TC/ATV/RTV/TDF'
@@ -1285,9 +1285,9 @@ insert into [FacilityList] values(17894,'Bwiti (Tiomin) Dispensary')
 ------------------------------------------------------------------------------------------------------
 --- Second line drugs abbreaviation setup.
 
-UPDATE lnk_DrugGeneric  SET GenericID=(SELECT GenericID FROM mst_Generic WHERE GenericAbbrevation LIKE '%lpv/r%') WHERE Drug_pk IN(SELECT Drug_pk FROM mst_drug WHERE DrugName LIKE '%lpv%')
+UPDATE lnk_DrugGeneric  SET GenericID=(SELECT top 1 GenericID FROM mst_Generic WHERE GenericAbbrevation LIKE '%lpv/r%') WHERE Drug_pk IN(SELECT Drug_pk FROM mst_drug WHERE DrugName LIKE '%lpv%')
 
-UPDATE lnk_DrugGeneric  SET GenericID=(SELECT GenericID FROM mst_Generic WHERE GenericAbbrevation LIKE '%atv/r%') WHERE Drug_pk IN(SELECT Drug_pk FROM mst_drug WHERE DrugName LIKE '%atv%')
+UPDATE lnk_DrugGeneric  SET GenericID=(SELECT top 1 GenericID FROM mst_Generic WHERE GenericAbbrevation LIKE '%atv/r%') WHERE Drug_pk IN(SELECT Drug_pk FROM mst_drug WHERE DrugName LIKE '%atv%')
 
 -- regenerate the abbreviations
 update Mst_ItemMaster
@@ -1316,4 +1316,20 @@ GO
 -- SET /ACTIVATE QID/TID/TD
    UPDATE mst_Frequency SET DeleteFlag=0 WHERE [NAME] IN('TD','TID','QID') AND DeleteFlag=1;
    UPDATE mst_Frequency SET multiplier=3 WHERE [Name] IN('TD') AND multiplier=0;
+
+-- Missing lookup Items
+ IF NOT EXISTS(SELECT id FROM LookupMaster WHERE Name='Genito-urinary')
+ BEGIN
+	INSERT INTO LookupMaster (Name,DisplayName,DeleteFlag) VALUES('Genito-urinary','Genito-urinary',0)
+    INSERT INTO LookupMasterItem (LookupMasterId,LookupItemId,DisplayName,OrdRank) VALUES((SELECT top 1 Id FROM LookupMaster WHERE Name='Genito-urinary'),(SELECT Id FROM LookupItem WHERE Name='Bleeding'),'Bleeding ',1);
+	INSERT INTO LookupMasterItem (LookupMasterId,LookupItemId,DisplayName,OrdRank) VALUES((SELECT top 1 Id FROM LookupMaster WHERE Name='Genito-urinary'),(SELECT Id FROM LookupItem WHERE Name='Discharge'),'Discharge ',2);
+	INSERT INTO LookupMasterItem (LookupMasterId,LookupItemId,DisplayName,OrdRank) VALUES((SELECT top 1 Id FROM LookupMaster WHERE Name='Genito-urinary'),(SELECT Id FROM LookupItem WHERE Name='ulceration'),'ulceration ',3);
+	INSERT INTO LookupMasterItem (LookupMasterId,LookupItemId,DisplayName,OrdRank) VALUES((SELECT top 1 Id FROM LookupMaster WHERE Name='Genito-urinary'),(SELECT Id FROM LookupItem WHERE Name='urethral discharge'),'urethral discharge ',4);
+	INSERT INTO LookupMasterItem (LookupMasterId,LookupItemId,DisplayName,OrdRank) VALUES((SELECT top 1 Id FROM LookupMaster WHERE Name='Genito-urinary'),(SELECT Id FROM LookupItem WHERE Name='vaginal discharge'),'vaginal discharge ',5);
+ END
+
+ IF NOT EXISTS(SELECT * FROM LookupMasterItem WHERE LookupItemId=(SELECT top 1 Id FROM LookupMaster WHERE Name='HistoryARTUse') AND LookupItemId=(SELECT Id FROM LookupItem WHERE Name='ART') )
+ BEGIN
+	 INSERT INTO LookupMasterItem (LookupMasterId,LookupItemId,DisplayName,OrdRank) VALUES((SELECT top 1 Id FROM LookupMaster WHERE Name='HistoryARTUse'),(SELECT Id FROM LookupItem WHERE Name='ART'),'ART',4);
+ END
 Go

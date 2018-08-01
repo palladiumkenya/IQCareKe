@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using IQCare.Common.BusinessProcess.Commands.ClientLookup;
 using IQCare.Common.BusinessProcess.Commands.Consent;
 
 namespace IQCare.Controllers.HTS
@@ -209,6 +210,31 @@ namespace IQCare.Controllers.HTS
             var response = await _mediator.Send(new GetPersonLastHtsEncounterCommand()
             {
                 PersonId = PersonId
+            }, Request.HttpContext.RequestAborted);
+
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+        [HttpGet("getEncounterDetails/{encounterId}")]
+        public async Task<IActionResult> GetEncounterDetails(int encounterId)
+        {
+            var response = await _mediator.Send(new GetHtsEncounterDetailsViewCommand()
+            {
+                EncounterId = encounterId
+            }, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+        [HttpGet("getPsmartData/{personId}")]
+        public async Task<IActionResult> GetPsmartData(int personId)
+        {
+            var response = await _mediator.Send(new GetClientPsmartDataCommand()
+            {
+                PersonId = personId
             }, Request.HttpContext.RequestAborted);
 
             if (response.IsValid)

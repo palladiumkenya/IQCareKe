@@ -111,7 +111,7 @@
                                             <div class="form-group">
                                                 <div>
                                                     <mat-form-field>
-                                                        <mat-select name="hivStatus" id="hivStatus" tabindex="11" placeholder="HIV Status" [(ngModel)]="pnsForm.hivStatus" #hivStatus="ngModel" (change)="onHivStatus(pnsForm.hivStatus)">
+                                                        <mat-select name="hivStatus" id="hivStatus" tabindex="11" placeholder="HIV Status" [(ngModel)]="pnsForm.hivStatus" #hivStatus="ngModel" (selectionChange)="onHivStatus(pnsForm.hivStatus)">
                                                             <mat-option></mat-option>
                                                             <mat-option *ngFor="let option of hivStatusOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
                                                         </mat-select>
@@ -135,7 +135,7 @@
                                             <div class="form-group">
                                                 <div>
                                                     <mat-form-field>
-                                                        <mat-select name="ipvScreeningDone" id="ipvScreeningDone" tabindex="3" placeholder="IPV Screening Done" [(ngModel)]="pnsForm.ipvScreeningDone" #ipvScreeningDone="ngModel" (change)="onIpvScreeningChange(pnsForm.ipvScreeningDone)">
+                                                        <mat-select name="ipvScreeningDone" id="ipvScreeningDone" tabindex="3" placeholder="IPV Screening Done" [(ngModel)]="pnsForm.ipvScreeningDone" #ipvScreeningDone="ngModel" (selectionChange)="onIpvScreeningChange(pnsForm.ipvScreeningDone)">
                                                             <mat-option></mat-option>
                                                             <mat-option *ngFor="let option of yesNoNAOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
                                                         </mat-select>

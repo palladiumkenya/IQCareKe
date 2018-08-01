@@ -15,7 +15,7 @@ namespace IQCare.CCC.UILogic.Interoperability
             return _mgr.AddInteropPlacerValue(interopPlacerValues);
         }
 
-        public InteropPlacerValues GetInteropPlacerValues(int interopPlacerTypeId, int identifierType, int placerValue)
+        public InteropPlacerValues GetInteropPlacerValues(int interopPlacerTypeId, int identifierType, string placerValue)
         {
             try
             {

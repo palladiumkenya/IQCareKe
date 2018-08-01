@@ -1,8 +1,8 @@
-import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
-import { Observable } from 'rxjs';
-import { EncounterService } from './encounter.service';
-import { Injectable } from '@angular/core';
-import { LookupItemView } from '../../shared/_models/LookupItemView';
+import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
+import {Observable} from 'rxjs';
+import {EncounterService} from './encounter.service';
+import {Injectable} from '@angular/core';
+import {LookupItemView} from '../../shared/_models/LookupItemView';
 
 @Injectable()
 export class EncounterResolver implements Resolve<Observable<any[]>> {

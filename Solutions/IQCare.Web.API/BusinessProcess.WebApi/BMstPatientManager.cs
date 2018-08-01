@@ -16,7 +16,7 @@ namespace BusinessProcess.WebApi
     public class BMstPatientManager:ProcessBase,IMstPatientManager
     {
         private int _result = 0;
-        public int AddMstPatient(string firstName, string middleName, string lastName, DateTime registrationDate, string dob, string dobPrecision, string phone, string gender, string landmark, string maritalStatus, string htsId, string moduleId, string cardSerial, string village, string ward, string subcounty, string heiId, string Address)
+        public int AddMstPatient(string firstName, string middleName, string lastName, DateTime registrationDate, DateTime dob, string dobPrecision, string phone, string gender, string landmark, string maritalStatus, string htsId, string moduleId, string cardSerial, string village, string ward, string subcounty, string heiId, string Address,string card_issuing_facility,string hts_number_issuing_facility)
         {
             try
             {
@@ -36,8 +36,8 @@ namespace BusinessProcess.WebApi
                 ClsUtility.AddExtendedParameters("@LastName", SqlDbType.VarChar, lastName);
 
                // ClsUtility.AddExtendedParameters("@facilityId", SqlDbType.VarChar, registrationDate);
-                ClsUtility.AddExtendedParameters("@registrationDate", SqlDbType.VarChar, registrationDate);
-                ClsUtility.AddExtendedParameters("@dob", SqlDbType.VarChar, dob);
+                ClsUtility.AddExtendedParameters("@registrationDate", SqlDbType.DateTime, registrationDate);
+                ClsUtility.AddExtendedParameters("@dob", SqlDbType.DateTime, dob);
                 ClsUtility.AddExtendedParameters("@dobPrecision", SqlDbType.VarChar, dobPrecision);
                 ClsUtility.AddExtendedParameters("@phone", SqlDbType.VarChar, phone);
                 ClsUtility.AddExtendedParameters("@gender", SqlDbType.VarChar, gender=="F"? "Female" : "Male");
@@ -51,6 +51,8 @@ namespace BusinessProcess.WebApi
                 ClsUtility.AddExtendedParameters("@subcounty", SqlDbType.VarChar, subcounty);
                 ClsUtility.AddExtendedParameters("@heiNumber", SqlDbType.VarChar, heiId);
                 ClsUtility.AddExtendedParameters("@Address", SqlDbType.VarChar,_Address );
+                ClsUtility.AddExtendedParameters("@FacilityId", SqlDbType.VarChar, card_issuing_facility);
+                ClsUtility.AddExtendedParameters("@hts_facility_id", SqlDbType.VarChar, hts_number_issuing_facility);
 
                 DataTable dt = (DataTable)obj.ReturnObject(ClsUtility.theParams, "Psmart_ProcessNewClientRegistration", ClsUtility.ObjectEnum.DataTable);
                 if (dt != null && dt.Rows.Count > 0)
@@ -115,14 +117,14 @@ namespace BusinessProcess.WebApi
                 throw;
             }
         }
-
-        public void InsertNewClient(string firstName, string middleName, string lastName, DateTime registrationDate, string dob, string dobPrecision, string phone, string gender, string landmark, string maritalStatus, string htsId, int moduleId, string cardSerial, string village, string ward, string subcounty, string heiId, string Address)
+      
+        public void InsertNewClient(string firstName, string middleName, string lastName, DateTime registrationDate, string dob, string dobPrecision, string phone, string gender, string landmark, string maritalStatus, string htsId, int moduleId, string cardSerial, string village, string ward, string subcounty, string heiId, string Address,string _card_issuing_facility)
         {
             try
             {
                 using (UnitOfWork unitOfWork = new UnitOfWork(new PsmartContext()))
                 {
-                   unitOfWork.MstPatientReposiroty.InsertNewClients( firstName,  middleName,  lastName,  registrationDate,  dob,  dobPrecision,  phone,  gender,  landmark,  maritalStatus,  htsId,moduleId,cardSerial,village,ward,subcounty,heiId,Address);
+                   unitOfWork.MstPatientReposiroty.InsertNewClients( firstName,  middleName,  lastName,  registrationDate,  dob,  dobPrecision,  phone,  gender,  landmark,  maritalStatus,  htsId,moduleId,cardSerial,village,ward,subcounty,heiId,Address, _card_issuing_facility);
                    
                 }
             }
@@ -169,5 +171,6 @@ namespace BusinessProcess.WebApi
             }
         }
 
+       
     }
 }

@@ -1,0 +1,52 @@
+<div class="ibox">
+    <div class="ibox-title">
+        <app-clientbrief></app-clientbrief>
+    </div>
+    <div class="ibox-content">
+        <div class="col-md-2">
+            <app-leftnav></app-leftnav>
+        </div>
+        <div class="col-md-10 col-lg-10 col-sm-10 animated fadeIn">
+            <div class="panel panel-default">
+                <div class="panel-heading">PSMART TESTS</div>
+                <div class="panel-body">
+                    <div class="example-container mat-elevation-z8">
+                        <mat-table #table [dataSource]="dataSource">
+
+                            <!--- Note that these columns can be defined in any order.
+                                    The actual rendered columns are set as a property on the row definition" -->
+
+                            <ng-container matColumnDef="diagnosisMode">
+                                <mat-header-cell *matHeaderCellDef> Diagnosis Mode </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{element.diagnosisMode}} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="result">
+                                <mat-header-cell *matHeaderCellDef> Result </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{element.result}} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="resultDate">
+                                <mat-header-cell *matHeaderCellDef> Result Date </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{element.resultDate | date: 'dd-MMM-yyyy' }} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="resultCategory">
+                                <mat-header-cell *matHeaderCellDef> Result Category </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{element.resultCategory }} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="mflCode">
+                                <mat-header-cell *matHeaderCellDef> MflCode </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{element.mflCode }} </mat-cell>
+                            </ng-container>
+
+                            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                        </mat-table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
