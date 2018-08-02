@@ -7,7 +7,7 @@ using MediatR;
 
 namespace IQCare.HTS.BusinessProcess.Commands
 {
-    public class SynchronizeClientsCommand : IRequest<Result<string>>
+    public class SynchronizeClientsCommand : IRequest<Common.Core.Models.Result<string>>
     {
         [Required, ValidateObject]
         public MESSAGE_HEADER MESSAGE_HEADER { get; set; }

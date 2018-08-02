@@ -22,7 +22,7 @@ import { RecordsNavComponent } from './nav/nav.component';
 import { RegistrationService } from './services/RecordsRegistrationService';
 import { NavigationService } from './services/navigationservice';
 import { SearchService } from './services/recordssearch';
-import { RecordsRegisterComponent } from'./register/register.component';
+import { RecordsRegisterComponent } from './register/register.component';
 import { GenderResolver } from './services/recordsregistration.resolver';
 import { RelationshipResolver } from './services/recordsregistration.resolver';
 import { ConsentTypeResolver } from './services/recordsregistration.resolver';
@@ -32,7 +32,6 @@ import { OccupationResolver } from './services/recordsregistration.resolver';
 import { OppEducationResolver } from './services/recordsregistration.resolver';
 import { OppConsentResolver } from './services/recordsregistration.resolver';
 import { SearchComponent } from './search/search.component';
-import { ProfileComponent } from './profile/profile.component';
 import { GetPersonDetailsResolver } from './services/recordsregistration.resolver';
 import { FieldErrorDisplayComponent } from './errors/field-error-display.component';
 @NgModule({
@@ -46,11 +45,11 @@ import { FieldErrorDisplayComponent } from './errors/field-error-display.compone
         MatSidenavModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule,
         MatSortModule, MatStepperModule, MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule
     ],
-    declarations: [RecordsHomeComponent, RecordsNavComponent, FieldErrorDisplayComponent ,RecordsRegisterComponent, SearchComponent, ProfileComponent
+    declarations: [RecordsHomeComponent, RecordsNavComponent, FieldErrorDisplayComponent, RecordsRegisterComponent, SearchComponent
 
     ],
 
-    providers: [RegistrationService, NavigationService, SearchService, GetPersonDetailsResolver,RelationshipResolver,OccupationResolver,GenderResolver,OppEducationResolver,OppConsentResolver,ConsentTypeResolver,ConsentTypeResolver,IdentifierTypeResolver,MaritalStatusResolver]
+    providers: [RegistrationService, NavigationService, SearchService, GetPersonDetailsResolver, RelationshipResolver, OccupationResolver, GenderResolver, OppEducationResolver, OppConsentResolver, ConsentTypeResolver, ConsentTypeResolver, IdentifierTypeResolver, MaritalStatusResolver]
 })
 
-export class RecordModule {}
+export class RecordModule { }
