@@ -17,6 +17,7 @@ import {
 import { RecordsRoutingModule } from './records-routing.module';
 import { SearchComponent } from './search/search.component';
 import { RegisterComponent } from './person/register/register.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
     imports: [
@@ -34,7 +35,8 @@ import { RegisterComponent } from './person/register/register.component';
         MatListModule, MatMenuModule, MatNativeDateModule,
         MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatRippleModule,
         MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule,
-        MatSnackBarModule, MatStepperModule, MatTabsModule, MatToolbarModule, MatTooltipModule
+        MatSnackBarModule, MatStepperModule, MatTabsModule, MatToolbarModule, MatTooltipModule,
+        SharedModule
     ],
     declarations: [SearchComponent, RegisterComponent]
 })
