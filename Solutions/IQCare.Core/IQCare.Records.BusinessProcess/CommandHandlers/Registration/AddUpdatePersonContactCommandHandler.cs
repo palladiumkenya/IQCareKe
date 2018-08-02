@@ -37,12 +37,12 @@ namespace IQCareRecords.Common.BusinessProcess.CommandHandlers.Registration
                         pc.EmailAddress = request.EmailAddress;
                         pc.PersonId = request.PersonId;
 
-                        var personcontact = await rs.UpdatePersonContact(pc.PersonId, pc.MobileNumber, pc.AlternativeNumber, pc.Id);
-                        if(personcontact !=null)
-                        {
-                            res = personcontact.Id;
-                            msg += "Person Contact Updated Successfully";
-                        }
+                        //var personcontact = await rs.UpdatePersonContact(pc.PersonId, pc.MobileNumber, pc.AlternativeNumber, pc.Id);
+                        //if(personcontact !=null)
+                        //{
+                        //    res = personcontact.Id;
+                        //    msg += "Person Contact Updated Successfully";
+                        //}
                     }
                     else
                     {

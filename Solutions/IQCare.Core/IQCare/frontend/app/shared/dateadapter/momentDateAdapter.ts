@@ -1,6 +1,6 @@
 import { NativeDateAdapter } from '@angular/material';
 import * as moment from 'moment';
-import { Platform } from '../../../../node_modules/@angular/cdk/platform';
+import { Platform } from '@angular/cdk/platform';
 
 
 export class AppDateAdapter extends NativeDateAdapter {

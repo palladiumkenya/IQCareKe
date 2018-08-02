@@ -13,10 +13,20 @@ namespace IQCare.Records.BusinessProcess.Command.Lookup
         public string middleName { get; set; }
         public string lastName { get; set; }
         public DateTime? BirthDate { get; set; }
+        public string FullName { get; set; }
     }
 
     public class SearchPersonListResponse
     {
         public List<PersonListView> PersonSearch { get; set; }
+    }
+
+    public class SearchQuery
+    {
+        public string IdentifierValue { get; set; }
+        public string FirstName { get; set; }
+        public string MiddleName { get; set; }
+        public string LastName { get; set; }
+        public string FullName { get; set; }
     }
 }

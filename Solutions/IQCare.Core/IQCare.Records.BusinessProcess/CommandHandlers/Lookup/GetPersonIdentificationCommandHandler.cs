@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace IQCareRecords.Common.BusinessProcess.CommandHandlers.Lookup
 {
-    
+
 
     public class GetPersonIdentificationCommandHandler : IRequestHandler<GetPersonIdentificationCommand, Result<GetPersonIdentificationResponse>>
     {
@@ -21,7 +21,7 @@ namespace IQCareRecords.Common.BusinessProcess.CommandHandlers.Lookup
         {
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
-       
+
 
         public async Task<Result<GetPersonIdentificationResponse>> Handle(GetPersonIdentificationCommand request, CancellationToken cancellationToken)
         {

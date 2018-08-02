@@ -30,37 +30,37 @@ namespace IQCareRecords.Common.BusinessProcess.CommandHandlers
                 RegisterPersonService rs = new RegisterPersonService(_unitOfWork);
                 if(request.PersonId> 0)
                 {
-                    PersonIdentifier pidm = new PersonIdentifier();
-                     pidm =await rs.GetCurrentPersonIdentifier(request.IdentifierId,request.PersonId);
+                    //PersonIdentifier pidm = new PersonIdentifier();
+                    // pidm =await rs.GetCurrentPersonIdentifier(request.IdentifierId,request.PersonId);
 
-                    if(pidm !=null)
-                    {
-                        //pidm.DeleteFlag = true;
-                       //var pdm = await Task.Run(() => rs.UpdatePersonIdentifier(pidm));
-                        pidm.IdentifierId = request.IdentifierId;
-                        pidm.IdentifierValue = request.IdentifierValue;
-                        var finalupdate=await Task.Run(() => rs.UpdatePersonIdentifier(pidm));
-                        //var  finalupdate = await rs.addPersonIdentifiers(request.PersonId, request.IdentifierId, request.IdentifierValue, request.UserId);
-                        if (finalupdate !=null)
-                        {
-                            if(finalupdate.Id > 0)
-                            {
-                                msg += "PersonIdentifier updated successfully";
-                            }
-                        }
-                    }
+                    //if(pidm !=null)
+                    //{
+                    //    //pidm.DeleteFlag = true;
+                    //   //var pdm = await Task.Run(() => rs.UpdatePersonIdentifier(pidm));
+                    //    pidm.IdentifierId = request.IdentifierId;
+                    //    pidm.IdentifierValue = request.IdentifierValue;
+                    //    var finalupdate=await Task.Run(() => rs.UpdatePersonIdentifier(pidm));
+                    //    //var  finalupdate = await rs.addPersonIdentifiers(request.PersonId, request.IdentifierId, request.IdentifierValue, request.UserId);
+                    //    if (finalupdate !=null)
+                    //    {
+                    //        if(finalupdate.Id > 0)
+                    //        {
+                    //            msg += "PersonIdentifier updated successfully";
+                    //        }
+                    //    }
+                    //}
 
-                    else
-                    {
-                       var finalIdent = await rs.addPersonIdentifiers(request.PersonId, request.IdentifierId, request.IdentifierValue, request.UserId);
-                        if (finalIdent != null)
-                        {
-                            if (finalIdent.Id > 0)
-                            {
-                                msg += "PersonIdentifierType added successfully";
-                            }
-                        }
-                    }
+                    //else
+                    //{
+                    //   var finalIdent = await rs.addPersonIdentifiers(request.PersonId, request.IdentifierId, request.IdentifierValue, request.UserId);
+                    //    if (finalIdent != null)
+                    //    {
+                    //        if (finalIdent.Id > 0)
+                    //        {
+                    //            msg += "PersonIdentifierType added successfully";
+                    //        }
+                    //    }
+                    //}
                 }
 
 

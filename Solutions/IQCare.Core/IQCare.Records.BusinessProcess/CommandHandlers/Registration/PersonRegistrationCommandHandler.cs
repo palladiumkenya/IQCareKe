@@ -50,82 +50,82 @@ namespace IQCareRecords.Common.BusinessProcess.CommandHandlers
                     if (PerId > 0)
                     {
 
-                        var result = await Task.Run(() => rs.UpdatePerson(PerId, c.FirstName, c.MiddleName, c.LastName, c.Sex, c.CreatedBy, c.DateOfBirth, c.DobPrecision));
-                        PId = result.Id;
-                        msg = String.Format("Person with the PersonId: {0} updated successfully", PId);
-                        var _marStatus = await Task.Run(() => rs.GetFirstPatientMaritalStatus(PerId));
-                        if (_marStatus != null && c.MaritalStatus > 0)
-                        {
+                        //var result = await Task.Run(() => rs.UpdatePerson(PerId, c.FirstName, c.MiddleName, c.LastName, c.Sex, c.CreatedBy, c.DateOfBirth, c.DobPrecision));
+                        //PId = result.Id;
+                        //msg = String.Format("Person with the PersonId: {0} updated successfully", PId);
+                        //var _marStatus = await Task.Run(() => rs.GetFirstPatientMaritalStatus(PerId));
+                        //if (_marStatus != null && c.MaritalStatus > 0)
+                        //{
 
 
-                            //_marStatus.DeleteFlag = true;
-                            var maritalStatus = await Task.Run(() => rs.UpdateMaritalStatus(_marStatus));
-                           // var finalupdatestatus = await Task.Run(() => rs.AddMaritalStatus(PerId, c.MaritalStatus, c.CreatedBy));
-                            if (maritalStatus!=null)
-                            {
-                                msg += "PersonMaritalStatus Updated Successfully";
+                        //    //_marStatus.DeleteFlag = true;
+                        //   // var maritalStatus = await Task.Run(() => rs.UpdateMaritalStatus(_marStatus));
+                        //   //// var finalupdatestatus = await Task.Run(() => rs.AddMaritalStatus(PerId, c.MaritalStatus, c.CreatedBy));
+                        //   // if (maritalStatus!=null)
+                        //   // {
+                        //   //     msg += "PersonMaritalStatus Updated Successfully";
 
-                            }
-                        }
-                        else if (_marStatus != null && c.MaritalStatus == 0)
-                        {
-                            _marStatus.DeleteFlag = true;
-                            var maritalStatus = await Task.Run(() => rs.UpdateMaritalStatus(_marStatus));
-                            if (maritalStatus.DeleteFlag == true)
-                            {
-                                msg += "Person MaritalStatus Updated Successfully";
-                            }
-                        }
-                        else
-                        {
-                            if (c.MaritalStatus > 0)
-                            {
-                                var finalupdatestatus = await Task.Run(() => rs.AddMaritalStatus(PerId, c.MaritalStatus, c.CreatedBy));
-                                if (finalupdatestatus != null)
-                                {
-                                    msg += "PersonMaritalStatus Added Successfully!";
-                                }
-                            }
-                        }
+                        //   // }
+                        //}
+                        //else if (_marStatus != null && c.MaritalStatus == 0)
+                        //{
+                        //    _marStatus.DeleteFlag = true;
+                        //    //var maritalStatus = await Task.Run(() => rs.UpdateMaritalStatus(_marStatus));
+                        //    //if (maritalStatus.DeleteFlag == true)
+                        //    //{
+                        //    //    msg += "Person MaritalStatus Updated Successfully";
+                        //    //}
+                        //}
+                        //else
+                        //{
+                        //    if (c.MaritalStatus > 0)
+                        //    {
+                        //        var finalupdatestatus = await Task.Run(() => rs.AddMaritalStatus(PerId, c.MaritalStatus, c.CreatedBy));
+                        //        if (finalupdatestatus != null)
+                        //        {
+                        //            msg += "PersonMaritalStatus Added Successfully!";
+                        //        }
+                        //    }
+                        //}
                     }
                     else
                     {
-                        var reg = await rs.RegisterPerson(c.FirstName, c.MiddleName, c.LastName, c.Sex, c.DateOfBirth, c.CreatedBy, c.DobPrecision);
-                        if (reg != null && reg.Id > 0)
-                        {
-                            int perId = reg.Id;
-                            PId = reg.Id;
-                            msg += String.Format("New Person Added Successsfully:PersonId=>,{0}", reg.Id);
-                            if (c.MaritalStatus > 0)
-                            {
-                                var mar = await rs.AddMaritalStatus(perId, c.MaritalStatus, c.CreatedBy);
-                                if (mar != null)
-                                {
-                                    msg += "Person Marital Status added successfully";
-                                }
-                            }
-                        }
+                        //var reg = await rs.RegisterPerson(c.FirstName, c.MiddleName, c.LastName, c.Sex, c.DateOfBirth, c.CreatedBy, c.DobPrecision);
+                        //if (reg != null && reg.Id > 0)
+                        //{
+                        //    int perId = reg.Id;
+                        //    PId = reg.Id;
+                        //    msg += String.Format("New Person Added Successsfully:PersonId=>,{0}", reg.Id);
+                        //    if (c.MaritalStatus > 0)
+                        //    {
+                        //        var mar = await rs.AddMaritalStatus(perId, c.MaritalStatus, c.CreatedBy);
+                        //        if (mar != null)
+                        //        {
+                        //            msg += "Person Marital Status added successfully";
+                        //        }
+                        //    }
+                        //}
                     }
 
 
                 }
                 else
                 {
-                    var reg =await rs.RegisterPerson(c.FirstName, c.MiddleName, c.LastName, c.Sex, c.DateOfBirth, c.CreatedBy, c.DobPrecision);
-                    if (reg != null && reg.Id > 0)
-                    {
-                        int perId = reg.Id;
-                        PId = reg.Id;
-                        msg += String.Format("New Person Added Successsfully:PersonId=>,{0}", reg.Id);
-                        if (c.MaritalStatus > 0)
-                        {
-                            var mar =await  rs.AddMaritalStatus(perId, c.MaritalStatus, c.CreatedBy);
-                            if (mar != null)
-                            {
-                                msg += "Person Marital Status added successfully";
-                            }
-                        }
-                    }
+                    //var reg =await rs.RegisterPerson(c.FirstName, c.MiddleName, c.LastName, c.Sex, c.DateOfBirth, c.CreatedBy, c.DobPrecision);
+                    //if (reg != null && reg.Id > 0)
+                    //{
+                    //    int perId = reg.Id;
+                    //    PId = reg.Id;
+                    //    msg += String.Format("New Person Added Successsfully:PersonId=>,{0}", reg.Id);
+                    //    if (c.MaritalStatus > 0)
+                    //    {
+                    //        var mar =await  rs.AddMaritalStatus(perId, c.MaritalStatus, c.CreatedBy);
+                    //        if (mar != null)
+                    //        {
+                    //            msg += "Person Marital Status added successfully";
+                    //        }
+                    //    }
+                    //}
                 }
 
 
