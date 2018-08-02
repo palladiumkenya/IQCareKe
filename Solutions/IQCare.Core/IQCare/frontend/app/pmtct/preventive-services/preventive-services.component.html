@@ -1,0 +1,77 @@
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="row">
+            <div class="col-lg-12 col-md-3 col-sm-6 col-xs-12">
+                <div class="widget">
+                    <div class="widget-header bordered-bottom bordered-blue">
+                        <span class="widget-caption">
+                            <i class="typcn typcn-keyboard"></i> Preventive Services </span>
+                    </div>
+                    <div class="widget-body">
+                      <div class="" style="margin-bottom: 5px"></div>  
+                      <div class="row">
+                            <div class="col-md-4 col-xs-12 col-sm-6">
+                                <mat-form-field class="col-md-12">
+                                    <mat-select  placeholder="Preventive Service">
+                                      <mat-option id="slctTopic" *ngFor="let service of services" [value]="service.value">
+                                        {{service.viewValue}}
+                                      </mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                            </div>
+                            <div class="col-md-2 col-xs-12 col-sm-6">
+                                <mat-form-field class="col-md-12">
+                                    <input id="dateGiven" matInput [matDatepicker]="dateGiven" placeholder="Date Given">
+                                    <mat-datepicker-toggle matSuffix [for]="dateGiven"></mat-datepicker-toggle>
+                                    <mat-datepicker #dateGiven></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-2 col-xs-12 col-sm-6">
+                                <mat-form-field class="col-md-12">
+                                    <input matInput placeholder="Comments">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-2 col-xs-12 col-sm-6">
+                                <mat-form-field class="col-md-12">
+                                    <input id="nextSchedule" matInput [matDatepicker]="nextSchedule" placeholder="Next Schedule">
+                                    <mat-datepicker-toggle matSuffix [for]="nextSchedule"></mat-datepicker-toggle>
+                                    <mat-datepicker #nextSchedule></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-2 col-xs-12 col-sm-6">
+                                <button mat-raised-button color="primary">Add Service</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h5>Insecticide Treated Net given</h5>
+                                <mat-radio-group>
+                                    <mat-radio-button class="col-md-12" value="1">Yes</mat-radio-button>
+                                    <mat-radio-button class="col-md-12" value="2">No</mat-radio-button>
+                                  </mat-radio-group>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field class="col-md-12">
+                                    <input id="insecticideGivenDate" matInput [matDatepicker]="insecticideGivenDate" placeholder="Date Given">
+                                    <mat-datepicker-toggle matSuffix [for]="insecticideGivenDate"></mat-datepicker-toggle>
+                                    <mat-datepicker #insecticideGivenDate></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-5"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h5>Underwent antenatal exercise on this visit</h5>
+                                <mat-radio-group>
+                                    <mat-radio-button class="col-md-12" value="1">Yes</mat-radio-button>
+                                    <mat-radio-button class="col-md-12" value="2">No</mat-radio-button>
+                                  </mat-radio-group>
+                            </div>
+                            <div class="col-md-8"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

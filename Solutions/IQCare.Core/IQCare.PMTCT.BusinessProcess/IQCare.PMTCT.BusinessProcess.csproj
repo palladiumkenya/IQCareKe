@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IQCare.Library\IQCare.Library.csproj" />
+    <ProjectReference Include="..\IQCare.PMTCT.Core\IQCare.PMTCT.Core.csproj" />
+    <ProjectReference Include="..\IQCare.PMTCT.Infrastructure\IQCare.PMTCT.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="MediatR">
+      <HintPath>C:\Users\sosewe\.nuget\packages\mediatr\4.0.1\lib\netstandard1.1\MediatR.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

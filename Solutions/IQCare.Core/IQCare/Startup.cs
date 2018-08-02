@@ -45,6 +45,10 @@ namespace IQCare
             services.AddSingleton<IConnectionString, ConnectionString>();
 
             //Context
+            services.AddDatabase(Configuration);
+            services.AddCommonDatabase(Configuration);
+            services.AddPmtctDatabase(Configuration);
+
             services.AddDatabase(Configuration, ConnectionString);
             services.AddCommonDatabase(Configuration, ConnectionString);
             services.AddMediatR();

@@ -36,7 +36,18 @@ namespace IQCare
             return services;
         }
 
-        public static IServiceCollection AddCommonDatabase(this IServiceCollection services, IConfiguration configuration, IConnectionString connectionString)
+        public static IServiceCollection AddPmtctDatabase(this IServiceCollection services, IConfiguration configuration)
+        {
+            var dbConnectionString = configuration.GetConnectionString("IQCareConnection");
+            //services.AddDbContext<PmtctDbContext>(b => b.UseSqlServer(dbConnectionString));
+            //services.AddScoped(typeof(IPmtctRepository<>), typeof(PmtctRepository<>));
+            //services.AddScoped<IPmtctUnitOfWork>(c => new PmtctUnitOfWork(c.GetRequiredService<PmtctDbContext>()));
+
+            return services;
+        }
+
+        public static IServiceCollection AddCommonDatabase(this IServiceCollection services,
+            IConfiguration configuration)
         {
             //var dbConnectionString = configuration.GetConnectionString("IQCareConnection");
             //var iqcareuri = configuration.GetSection("IQCareUri").Get<string>();
