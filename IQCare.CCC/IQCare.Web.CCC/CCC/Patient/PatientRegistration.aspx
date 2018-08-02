@@ -414,7 +414,7 @@
 							   </div>
 							   
 							   <div class="col-md-3">
-									<div class="col-md-12"><label class="required control-label pull-left">Nearest Health Centre</label></div>
+									<div class="col-md-12"><label class="required control-label pull-left">Nearest Health Facility</label></div>
 									<div class="col-md-12">
 										 <asp:TextBox runat="server" ID="NearestHealthCentre" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="nearest health centre" data-parsley-required="true" data-parsley-length="[2,30]" ></asp:TextBox>
 									</div>
