@@ -3951,7 +3951,7 @@
 				cache: false,
 				success: function (response) {
 					if (response.d != null) {
-                        if (isEditAppointment) {
+                        if (isEditAppointment == 'True') {
 
                         } else {
 					        toastr.error("Appointment already exists");
@@ -3959,7 +3959,7 @@
                         }
 
                     }
-                    if (isEditAppointment) {
+                    if (isEditAppointment == 'True') {
                         EditPatientAppointment();
                     } else {
                         addPatientAppointment();
