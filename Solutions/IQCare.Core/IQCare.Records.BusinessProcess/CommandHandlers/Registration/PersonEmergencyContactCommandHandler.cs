@@ -38,7 +38,7 @@ namespace IQCareRecords.Common.BusinessProcess.CommandHandlers.Registration
                                 PersonEmergencyContact pmt = new PersonEmergencyContact();
                                 if (em.emgEmergencyContactType > 0)
                                 {
-                                    pme = await rs.GetSpecificEmergencyContacts(Convert.ToInt32(em.EmergencyContactPersonId), em.PersonId);
+                                    //pme = await rs.GetSpecificEmergencyContacts(Convert.ToInt32(em.EmergencyContactPersonId), em.PersonId);
                                     //pmt = await rs.GetNextofkinEmergencyContacts(Convert.ToInt32(em.EmergencyContactPersonId), em.PersonId);
                                     if (pme != null)
                                     {
@@ -55,13 +55,13 @@ namespace IQCareRecords.Common.BusinessProcess.CommandHandlers.Registration
 
                                         pme.RegisteredToClinic = em.RegisteredToClinic;
 
-                                        int res = await rs.UpdatePersonEmergencyContact(pme);
-                                        if (res > 0)
-                                        {
-                                            msg += "Person Emergency Mobile Contact Updated Successfully";
-                                            personEmergencyContactId = em.EmergencyContactPersonId;
+                                        //int res = await rs.UpdatePersonEmergencyContact(pme);
+                                        //if (res > 0)
+                                        //{
+                                        //    msg += "Person Emergency Mobile Contact Updated Successfully";
+                                        //    personEmergencyContactId = em.EmergencyContactPersonId;
 
-                                        }
+                                        //}
                                     }
                                     else
                                     {
@@ -86,61 +86,61 @@ namespace IQCareRecords.Common.BusinessProcess.CommandHandlers.Registration
 
                                         }
                                     }
-                                        var personconsent = await rs.GetCurrentPersonConsent(em.EmergencyContactPersonId, Convert.ToInt32(em.PersonId));
-                                        if (personconsent != null)
-                                        {
-                                            personconsent.ConsentType = em.ConsentType;
-                                            personconsent.ConsentValue = em.ConsentValue;
-                                            personconsent.ConsentDate = DateTime.Now;
-                                            personconsent.ConsentReason = em.ConsentReason;
+                                       // var personconsent = await rs.GetCurrentPersonConsent(em.EmergencyContactPersonId, Convert.ToInt32(em.PersonId));
+                                       // if (personconsent != null)
+                                       // {
+                                       //     personconsent.ConsentType = em.ConsentType;
+                                       //     personconsent.ConsentValue = em.ConsentValue;
+                                       //     personconsent.ConsentDate = DateTime.Now;
+                                       //     personconsent.ConsentReason = em.ConsentReason;
 
-                                            int consent = await rs.UpdatePersonConsent(personconsent);
-                                            if (consent > 0)
-                                            {
-                                                msg += "Person Consent has been updated successfully";
-                                            }
+                                       //     int consent = await rs.UpdatePersonConsent(personconsent);
+                                       //     if (consent > 0)
+                                       //     {
+                                       //         msg += "Person Consent has been updated successfully";
+                                       //     }
 
-                                        }
-                                        else
-                                        {
-                                            PersonConsent pcs = new PersonConsent();
-                                            pcs.PersonId = em.PersonId;
-                                            pcs.EmergencyContactId = em.EmergencyContactPersonId;
-                                            pcs.ConsentType = em.ConsentType;
-                                            pcs.ConsentValue = em.ConsentValue;
-                                            pcs.ConsentDate = DateTime.Now;
-                                            pcs.ConsentReason = em.ConsentReason;
+                                       // }
+                                       // else
+                                       // {
+                                       //     PersonConsent pcs = new PersonConsent();
+                                       //     pcs.PersonId = em.PersonId;
+                                       //     pcs.EmergencyContactId = em.EmergencyContactPersonId;
+                                       //     pcs.ConsentType = em.ConsentType;
+                                       //     pcs.ConsentValue = em.ConsentValue;
+                                       //     pcs.ConsentDate = DateTime.Now;
+                                       //     pcs.ConsentReason = em.ConsentReason;
 
-                                            var perc = await rs.AddPersonConsent(pcs);
+                                       //     var perc = await rs.AddPersonConsent(pcs);
 
-                                            if (perc != null)
-                                            {
-                                                msg += "Person Consent Has been added successfully";
-                                            }
+                                       //     if (perc != null)
+                                       //     {
+                                       //         msg += "Person Consent Has been added successfully";
+                                       //     }
 
-                                        }
-
-
-
-                                        Person per = new Person();
-
-                                        per.FirstName = em.firstname;
-                                        per.MidName = em.middlename;
-                                        per.LastName = em.lastname;
-                                        per.Sex = em.gender;
-                                        per.Id = em.EmergencyContactPersonId;
+                                       // }
 
 
-                                       var resupd = await rs.UpdateEmergencyPerson(per);
-                                        if (resupd!=null)
-                                        {
-                                            msg += "PersonEmergencyContact updated successfully";
-                                        }
+
+                                       // Person per = new Person();
+
+                                       // per.FirstName = em.firstname;
+                                       // per.MidName = em.middlename;
+                                       // per.LastName = em.lastname;
+                                       // per.Sex = em.gender;
+                                       // per.Id = em.EmergencyContactPersonId;
+
+
+                                       //var resupd = await rs.UpdateEmergencyPerson(per);
+                                       // if (resupd!=null)
+                                       // {
+                                       //     msg += "PersonEmergencyContact updated successfully";
+                                       // }
                                     
                                 }
                                 if (em.emgNextofKinContactType > 0)
                                 {
-                                    pmt = await rs.GetNextofkinEmergencyContacts(Convert.ToInt32(em.EmergencyContactPersonId), em.PersonId);
+                                    //pmt = await rs.GetNextofkinEmergencyContacts(Convert.ToInt32(em.EmergencyContactPersonId), em.PersonId);
 
                                     if (pmt != null)
                                     {
@@ -157,13 +157,13 @@ namespace IQCareRecords.Common.BusinessProcess.CommandHandlers.Registration
 
                                         pmt.RegisteredToClinic = em.RegisteredToClinic;
 
-                                        int res = await rs.UpdatePersonEmergencyContact(pmt);
-                                        if (res > 0)
-                                        {
-                                            msg += "Person Emergency Mobile Contact Updated Successfully";
-                                            personEmergencyContactId = em.EmergencyContactPersonId;
+                                        //int res = await rs.UpdatePersonEmergencyContact(pmt);
+                                        //if (res > 0)
+                                        //{
+                                        //    msg += "Person Emergency Mobile Contact Updated Successfully";
+                                        //    personEmergencyContactId = em.EmergencyContactPersonId;
 
-                                        }
+                                        //}
                                     }
                                     else
                                     {
@@ -188,58 +188,58 @@ namespace IQCareRecords.Common.BusinessProcess.CommandHandlers.Registration
 
                                         }
                                     }
-                                    var personconsent = await rs.GetCurrentPersonConsent(em.EmergencyContactPersonId, Convert.ToInt32(em.PersonId));
-                                            if (personconsent != null)
-                                            {
-                                                personconsent.ConsentType = em.ConsentType;
-                                                personconsent.ConsentValue = em.ConsentValue;
-                                                personconsent.ConsentDate = DateTime.Now;
-                                                personconsent.ConsentReason = em.ConsentReason;
+                                    //var personconsent = await rs.GetCurrentPersonConsent(em.EmergencyContactPersonId, Convert.ToInt32(em.PersonId));
+                                    //        if (personconsent != null)
+                                    //        {
+                                    //            personconsent.ConsentType = em.ConsentType;
+                                    //            personconsent.ConsentValue = em.ConsentValue;
+                                    //            personconsent.ConsentDate = DateTime.Now;
+                                    //            personconsent.ConsentReason = em.ConsentReason;
 
-                                                int consent = await rs.UpdatePersonConsent(personconsent);
-                                                if (consent > 0)
-                                                {
-                                                    msg += "Person Consent has been updated successfully";
-                                                }
+                                    //            int consent = await rs.UpdatePersonConsent(personconsent);
+                                    //            if (consent > 0)
+                                    //            {
+                                    //                msg += "Person Consent has been updated successfully";
+                                    //            }
 
-                                            }
-                                            else
-                                            {
-                                            if (em.ConsentValue > 0)
-                                            {
-                                                PersonConsent pcs = new PersonConsent();
-                                                pcs.PersonId = em.PersonId;
-                                                pcs.EmergencyContactId = pme.Id;
-                                                pcs.ConsentType = em.ConsentType;
-                                                pcs.ConsentValue = em.ConsentValue;
-                                                pcs.ConsentDate = DateTime.Now;
-                                                pcs.ConsentReason = em.ConsentReason;
+                                    //        }
+                                    //        else
+                                    //        {
+                                    //        if (em.ConsentValue > 0)
+                                    //        {
+                                    //            PersonConsent pcs = new PersonConsent();
+                                    //            pcs.PersonId = em.PersonId;
+                                    //            pcs.EmergencyContactId = pme.Id;
+                                    //            pcs.ConsentType = em.ConsentType;
+                                    //            pcs.ConsentValue = em.ConsentValue;
+                                    //            pcs.ConsentDate = DateTime.Now;
+                                    //            pcs.ConsentReason = em.ConsentReason;
 
-                                                var perc = await rs.AddPersonConsent(pcs);
+                                    //            var perc = await rs.AddPersonConsent(pcs);
 
-                                                if (perc != null)
-                                                {
-                                                    msg += "Person Consent Has been added successfully";
-                                                }
-                                            }
-                                            }
-
-
-
-                                            Person per = new Person();
-
-                                            per.FirstName = em.firstname;
-                                            per.MidName = em.middlename;
-                                            per.LastName = em.lastname;
-                                            per.Sex = em.gender;
-                                            per.Id = em.EmergencyContactPersonId;
+                                    //            if (perc != null)
+                                    //            {
+                                    //                msg += "Person Consent Has been added successfully";
+                                    //            }
+                                    //        }
+                                    //        }
 
 
-                                           var resupda = await rs.UpdateEmergencyPerson(per);
-                                            if (resupda !=null)
-                                            {
-                                                msg += "PersonEmergencyContact updated successfully";
-                                            }
+
+                                    //        Person per = new Person();
+
+                                    //        per.FirstName = em.firstname;
+                                    //        per.MidName = em.middlename;
+                                    //        per.LastName = em.lastname;
+                                    //        per.Sex = em.gender;
+                                    //        per.Id = em.EmergencyContactPersonId;
+
+
+                                    //       var resupda = await rs.UpdateEmergencyPerson(per);
+                                    //        if (resupda !=null)
+                                    //        {
+                                    //            msg += "PersonEmergencyContact updated successfully";
+                                    //        }
                                         
                                     
 
@@ -248,81 +248,81 @@ namespace IQCareRecords.Common.BusinessProcess.CommandHandlers.Registration
                             else
                             {
                                
-                                var personEmerg = await rs.InsertPerson(em.firstname, em.middlename, em.lastname, em.gender, em.CreatedBy);
+                                //var personEmerg = await rs.InsertPerson(em.firstname, em.middlename, em.lastname, em.gender, em.CreatedBy);
 
-                                if (personEmerg != null)
-                                {
-                                    personEmergencyContactId = personEmerg.Id;
-                                    if (em.emgEmergencyContactType > 0)
-                                    {
-                                        PersonEmergencyContact pmm = new PersonEmergencyContact()
-                                        {
-                                            PersonId = em.PersonId,
-                                            EmergencyContactPersonId = personEmerg.Id,
-                                            MobileContact = em.MobileContact,
-                                            CreatedBy = em.CreatedBy,
-                                            DeleteFlag = em.DeleteFlag,
-                                            ContactType = em.emgEmergencyContactType,
-                                            RegisteredToClinic = em.RegisteredToClinic
-                                        };
+                                //if (personEmerg != null)
+                                //{
+                                //    personEmergencyContactId = personEmerg.Id;
+                                //    if (em.emgEmergencyContactType > 0)
+                                //    {
+                                //        PersonEmergencyContact pmm = new PersonEmergencyContact()
+                                //        {
+                                //            PersonId = em.PersonId,
+                                //            EmergencyContactPersonId = personEmerg.Id,
+                                //            MobileContact = em.MobileContact,
+                                //            CreatedBy = em.CreatedBy,
+                                //            DeleteFlag = em.DeleteFlag,
+                                //            ContactType = em.emgEmergencyContactType,
+                                //            RegisteredToClinic = em.RegisteredToClinic
+                                //        };
 
-                                        PersonEmergencyContact pmeid = new PersonEmergencyContact();
-                                        pmeid = await rs.AddPersonEmergencyContact(pmm);
+                                //        PersonEmergencyContact pmeid = new PersonEmergencyContact();
+                                //        pmeid = await rs.AddPersonEmergencyContact(pmm);
 
-                                        if (pmeid != null)
-                                        {
-                                            msg += "New Person Emergencycontact Added successfully";
+                                //        if (pmeid != null)
+                                //        {
+                                //            msg += "New Person Emergencycontact Added successfully";
 
-                                        }
-                                    }
-                                    if(em.emgNextofKinContactType > 0)
-                                    {
-                                        PersonEmergencyContact pmm = new PersonEmergencyContact()
-                                        {
-                                            PersonId = em.PersonId,
-                                            EmergencyContactPersonId = personEmerg.Id,
-                                            MobileContact = em.MobileContact,
-                                            CreatedBy = em.CreatedBy,
-                                            DeleteFlag = em.DeleteFlag,
-                                            ContactType = em.emgNextofKinContactType,
-                                            RegisteredToClinic = em.RegisteredToClinic
-                                        };
+                                //        }
+                                //    }
+                                //    if(em.emgNextofKinContactType > 0)
+                                //    {
+                                //        PersonEmergencyContact pmm = new PersonEmergencyContact()
+                                //        {
+                                //            PersonId = em.PersonId,
+                                //            EmergencyContactPersonId = personEmerg.Id,
+                                //            MobileContact = em.MobileContact,
+                                //            CreatedBy = em.CreatedBy,
+                                //            DeleteFlag = em.DeleteFlag,
+                                //            ContactType = em.emgNextofKinContactType,
+                                //            RegisteredToClinic = em.RegisteredToClinic
+                                //        };
 
-                                        PersonEmergencyContact pmeid = new PersonEmergencyContact();
-                                        pmeid = await rs.AddPersonEmergencyContact(pmm);
+                                //        PersonEmergencyContact pmeid = new PersonEmergencyContact();
+                                //        pmeid = await rs.AddPersonEmergencyContact(pmm);
 
-                                        if (pmeid != null)
-                                        {
-                                            msg += "New Person Emergencycontact Added successfully";
+                                //        if (pmeid != null)
+                                //        {
+                                //            msg += "New Person Emergencycontact Added successfully";
 
-                                        }
-                                    }
-                                    if (em.ConsentValue > 0)
-                                    {
-                                        PersonConsent pcs = new PersonConsent();
-                                        pcs.PersonId = em.PersonId;
-                                        pcs.EmergencyContactId = personEmergencyContactId;
-                                        pcs.ConsentType = em.ConsentType;
-                                        pcs.ConsentValue = em.ConsentValue;
-                                        pcs.ConsentDate = DateTime.Now;
-                                        pcs.ConsentReason = em.ConsentReason;
+                                //        }
+                                //    }
+                                //    if (em.ConsentValue > 0)
+                                //    {
+                                //        PersonConsent pcs = new PersonConsent();
+                                //        pcs.PersonId = em.PersonId;
+                                //        pcs.EmergencyContactId = personEmergencyContactId;
+                                //        pcs.ConsentType = em.ConsentType;
+                                //        pcs.ConsentValue = em.ConsentValue;
+                                //        pcs.ConsentDate = DateTime.Now;
+                                //        pcs.ConsentReason = em.ConsentReason;
 
-                                        var perc = await rs.AddPersonConsent(pcs);
+                                //        var perc = await rs.AddPersonConsent(pcs);
 
-                                        if (perc != null)
-                                        {
-                                            msg += "Person Consent Has been added successfully";
-                                        }
+                                //        if (perc != null)
+                                //        {
+                                //            msg += "Person Consent Has been added successfully";
+                                //        }
 
-                                    }
-                                    PersonRelationship pl = new PersonRelationship();
-                                    var personrel = await rs.AddPersonRelationship(em.PersonId, personEmerg.Id, em.RelationshipType, em.CreatedBy);
+                                //    }
+                                //    PersonRelationship pl = new PersonRelationship();
+                                //    var personrel = await rs.AddPersonRelationship(em.PersonId, personEmerg.Id, em.RelationshipType, em.CreatedBy);
 
-                                    if (personrel != null)
-                                    {
-                                        msg += "Person EmergencyContact relationship added successfully";
-                                    }
-                                }
+                                //    if (personrel != null)
+                                //    {
+                                //        msg += "Person EmergencyContact relationship added successfully";
+                                //    }
+                                //}
                             }
 
                         }

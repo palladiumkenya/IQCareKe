@@ -3,3 +3,8 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "~ng-snotify/styles/material.css";
 @import "~material-icons/iconfont/material-icons.css";
+
+
+.mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label:not(.mat-empty):not(.mat-form-field-empty) {
+	font-size: 20px;
+}

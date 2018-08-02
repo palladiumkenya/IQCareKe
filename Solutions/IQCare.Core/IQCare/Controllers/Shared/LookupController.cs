@@ -260,14 +260,14 @@ namespace IQCare.Controllers.Common
 
     }
 
-        [HttpGet("getFacility/{mflCode}")]
-        public async Task<IActionResult> GetFacility(string mflCode)
-        {
-            var response = await _mediator.Send(new GetFacilityCommand() {MflCode = mflCode},
-                Request.HttpContext.RequestAborted);
-            if (response.IsValid)
-                return Ok(response.Value);
-            return BadRequest(response);
-        }
-    } 
+        //[HttpGet("getFacility/{mflCode}")]
+        //public async Task<IActionResult> GetFacility(string mflCode)
+        //{
+        //    var response = await _mediator.Send(new GetFacilityCommand() {MflCode = mflCode},
+        //        Request.HttpContext.RequestAborted);
+        //    if (response.IsValid)
+        //        return Ok(response.Value);
+        //    return BadRequest(response);
+        //}
+    //} 
 }

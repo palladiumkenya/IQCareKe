@@ -32,21 +32,21 @@ namespace IQCareRecords.Common.BusinessProcess.CommandHandlers.Registration
                     if (pmo != null)
                     {
                      
-                        var pm =await sc.UpdateOccupation(pmo);
+                        //var pm =await sc.UpdateOccupation(pmo);
 
                       
-                        if (pm != null)
-                        {
-                            msg = "PersonOccupation Updated successfully";
-                        }
+                        //if (pm != null)
+                        //{
+                        //    msg = "PersonOccupation Updated successfully";
+                        //}
                     }
                     else
                     {
-                        var AddedPersonOcc = await  sc.AddPersonOccupation( request.UserId, request.Occupation, request.PersonId);
-                        if (AddedPersonOcc != null)
-                        {
-                            msg = "PersonOccupation Added  successfully for personId" + request.PersonId;
-                        }
+                        //var AddedPersonOcc = await  sc.AddPersonOccupation( request.UserId, request.Occupation, request.PersonId);
+                        //if (AddedPersonOcc != null)
+                        //{
+                        //    msg = "PersonOccupation Added  successfully for personId" + request.PersonId;
+                        //}
                     }
 
                 }

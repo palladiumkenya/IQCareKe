@@ -29,46 +29,23 @@ namespace IQCare.Records.BusinessProcess.CommandHandlers.Lookup
 
                 StringBuilder sql = new StringBuilder();
 
-                if (!string.IsNullOrWhiteSpace(request.firstName) || !string.IsNullOrWhiteSpace(request.identificationNumber) ||
-                    !string.IsNullOrWhiteSpace(request.middleName) || !string.IsNullOrWhiteSpace(request.lastName))
-                {
-                    sql.Append("exec pr_OpenDecryptedSession;");
-                    sql.Append("Select  top 10.* from PersonListView where (DeleteFlag=0 or DeleteFlag is null) ");
-                }
-                    if (!string.IsNullOrWhiteSpace(request.firstName))
-                        sql.Append($" AND FirstName like \'{request.firstName}%\'");
-                    if (!string.IsNullOrWhiteSpace(request.middleName))
-                        sql.Append($" AND MiddleName like \'{request.middleName}%\'");
-                    if (!string.IsNullOrWhiteSpace(request.lastName))
-                        sql.Append($" AND LastName like \'{request.lastName}%\'");
-                    if (request.BirthDate.HasValue)
-                        sql.Append($" and DateOfBirth  like \'{request.BirthDate}\'");
-                    if (!string.IsNullOrWhiteSpace(request.identificationNumber))
-                    {
-                        sql.Append($" or PersonIdentifierValue like \'{request.identificationNumber}\'");
-                        sql.Append($" or PatientIdentifierValue like \'{request.identificationNumber}\'");
-                    }
+                sql.Append("exec pr_OpenDecryptedSession;");
+                sql.Append("Select  top 100.* from PersonListView where (DeleteFlag=0 or DeleteFlag is null) ");
 
+                if (!string.IsNullOrWhiteSpace(request.FullName))
+                    sql.Append($" AND FullName like \'%{request.FullName}%\'");
 
-              
-               
+                if (!string.IsNullOrWhiteSpace(request.identificationNumber))
+                    sql.Append($" AND IdentifierValue like \'%{request.identificationNumber}%\'");
 
                 sql.Append(";exec [dbo].[pr_CloseDecryptedSession];");
                 var result = await _unitOfWork.Repository<PersonListView>().FromSql(sql.ToString());
-
-                list = result;
-
-
                 _unitOfWork.Dispose();
-
 
                 return Result<SearchPersonListResponse>.Valid(new SearchPersonListResponse()
                 {
-
-                    PersonSearch = list,
-
+                    PersonSearch = result
                 });
-
             }
             catch (Exception e)
             {

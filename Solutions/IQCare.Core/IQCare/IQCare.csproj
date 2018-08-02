@@ -36,6 +36,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="angular_material_schematics-QYLYm6\**" />
+    <Content Remove="angular_material_schematics-QYLYm6\**" />
+    <EmbeddedResource Remove="angular_material_schematics-QYLYm6\**" />
+    <None Remove="angular_material_schematics-QYLYm6\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="frontend\app\records\models\emergencyvalidator.ts" />
     <Content Remove="frontend\app\records\models\person.ts" />
     <Content Remove="frontend\app\records\models\RequiredIfDirective.ts" />

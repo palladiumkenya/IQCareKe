@@ -1,5 +1,4 @@
 /*Sets Themed Colors Based on Themes*/
-alert('here');
 var themeprimary = getThemeColorFromCss('themeprimary');
 var themesecondary = getThemeColorFromCss('themesecondary');
 var themethirdcolor = getThemeColorFromCss('themethirdcolor');
