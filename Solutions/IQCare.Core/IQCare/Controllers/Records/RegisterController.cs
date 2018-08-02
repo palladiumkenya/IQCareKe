@@ -111,19 +111,12 @@ namespace IQCare.Controllers.Records
             return BadRequest(response);
         }
         [HttpGet("searchpersonlist")]
-        public async Task<IActionResult> Get(string identificationNumber, string firstName, string middleName, string lastName,
-            string DateofBirth)
+        public async Task<IActionResult> Get([FromQuery]SearchQuery searchQuery)
         {
-
             var response = await _mediator.Send(new SearchPersonListCommand
             {
-                identificationNumber = identificationNumber,
-                firstName = firstName,
-                middleName = middleName,
-                lastName = lastName,
-                BirthDate = Convert.ToDateTime(DateofBirth)
-
-
+                identificationNumber = searchQuery.IdentifierValue,
+                FullName = searchQuery.FullName
             });
 
             if (response.IsValid)

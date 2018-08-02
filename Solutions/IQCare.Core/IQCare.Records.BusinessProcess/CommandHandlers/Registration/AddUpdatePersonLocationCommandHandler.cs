@@ -37,20 +37,20 @@ namespace IQCareRecords.Common.BusinessProcess.CommandHandlers
                         currentlocation.NearestHealthCentre = request.NearestHealthCentre;
                         currentlocation.CreatedBy = request.UserId;
 
-                        res = await rs.UpdatePersonLocation(currentlocation);
-                        if(res > 0)
-                        {
-                            msg += "Person Location Successfully Updated";
-                        }
+                        //res = await rs.UpdatePersonLocation(currentlocation);
+                        //if(res > 0)
+                        //{
+                        //    msg += "Person Location Successfully Updated";
+                        //}
 
                     }
                     else
                     {
-                        var res = await rs.AddPersonLocation(request.PersonId, request.CountyId, request.SubCountyId, request.WardId, "", "", "", request.LandMark, request.NearestHealthCentre, request.UserId);
-                        if (res !=null)
-                        {
-                            msg += "Person Location Successfully Added";
-                        }
+                        //var res = await rs.AddPersonLocation(request.PersonId, request.CountyId, request.SubCountyId, request.WardId, "", "", "", request.LandMark, request.NearestHealthCentre, request.UserId);
+                        //if (res !=null)
+                        //{
+                        //    msg += "Person Location Successfully Added";
+                        //}
 
                     }
                 }

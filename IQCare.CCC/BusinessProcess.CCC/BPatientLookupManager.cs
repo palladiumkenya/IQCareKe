@@ -284,7 +284,12 @@ namespace BusinessProcess.CCC
                                 break;
                             default:
                                 Expression<Func<PatientLookup, bool>> expressionPatientStatusEnrolled =
-                                    c => c.PatientStatus.ToLower().Contains("active");
+                                    c => c.PatientStatus.ToLower().Contains("active") ||
+                                         c.PatientStatus.ToLower().Contains("death") ||
+                                         c.PatientStatus.ToLower().Contains("losttofollowup") ||
+                                         c.PatientStatus.ToLower().Contains("transfer out") ||
+                                         c.PatientStatus.ToLower().Contains("confirmed hiv negative") ||
+                                         c.PatientStatus.ToLower().Contains("hiv negative");
                                 expresionFinal = PredicateBuilder.And(expresionFinal, expressionPatientStatusEnrolled);
                                 break;
                         }

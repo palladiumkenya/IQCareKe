@@ -1,117 +1,75 @@
-<div class="ibox">
-    <div class="ibox-content">
-        <div class="col-md-2">
-            <Record-nav></Record-nav>
-        </div>
-        <div class="col-md-10 animated fadeIn">
-            <div class="panel panel-default">
-                <div class="panel-heading">CLIENTS</div>
-                <div>
-                    <!---class="panel-body">-->
-
-                    <div class="row">
-                        <div class=" col-md-3 ">
-                            <div class="form-group">
-                                <label>Identification Number</label>
-                                <input type="text" id="identificationNumber" name="identificationNumber" (keyup)=(OnKeyUp()) class="form-control" tabindex="1" [(ngModel)]="personsearch.identifierValue" #identifierValue="ngModel">
-                            </div>
-                        </div>
-
-                        <div class="col-md-3 ">
-                            <div class="form-group">
-                                <label>First Name</label>
-                                <input type="text" id="firstName" name="firstName" class="form-control" (keyup)=(OnKeyUp()) tabindex="2" [(ngModel)]="personsearch.firstName" #firstName="ngModel">
-                            </div>
-                        </div>
-
-                        <div class=" col-md-3 ">
-                            <div class="form-group">
-                                <label>Middle Name</label>
-                                <input type="text" id="middleName" name="middleName" class="form-control" (keyup)=(OnKeyUp()) tabindex="3" [(ngModel)]="personsearch.midName" #midName="ngModel">
-                            </div>
-                        </div>
-
-
-                        <div class=" col-md-3 ">
-                            <div class="form-group">
-                                <label>Last Name</label>
-                                <input type="text" id="lastName" name="lastName" class="form-control" tabindex="4" (keyup)=(OnKeyUp()) [(ngModel)]="personsearch.lastName" #lastName="ngModel">
-                            </div>
-                        </div>
-
-
-
-
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 col-xs-12">
+                <div class="widget">
+                    <div class="widget-header bordered-left">
+                        <span class="widget-caption">SEARCH</span>
                     </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>Enrollment Number</label>
-                                <input type="text" id="enrollmentNumber" name="enrollmentNumber" (keyup)=(OnKeyUp()) class="form-control" tabindex="1" [(ngModel)]="personsearch.EnrollmentNumber" #identifierValue="ngModel">
-                            </div>
-                        </div>
+                    <div class="widget-body bordered-left">
+                        <form class="form-inline" role="form">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="identifierNumber">Identifier Number</label>
+                                        <input type="text" class="form-control" id="identifierNumber" name="identifierNumber" placeholder="Identifier Number" tabindex="1"
+                                            [(ngModel)]="clientSearch.identifierValue" #identifierValue="ngModel" (keyup)="OnKeyUp($event)">
+                                    </div>
+                                </div>
 
-                    
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="fullName">Full Name</label>
+                                        <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Full Name" tabindex="2" [(ngModel)]="clientSearch.fullName"
+                                            #fullName="ngModel" (keyup)="OnKeyUp($event)">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div>
+                        &nbsp;
                     </div>
 
                     <div class="example-container mat-elevation-z8">
+                        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
-
-                        <mat-table #table [dataSource]="dataSource" matSort class="mat-cell">
-
-
-                            <!--- Note that these columns can be defined in any order.
-    The actual rendered columns are set as a property on the row definition" -->
-                            <!-- FirstName Column -->
-                            <ng-container matColumnDef="personIdentificationNumber">
-                                <mat-header-cell *matHeaderCellDef> PersonIdentification Number </mat-header-cell>
-                                <mat-cell *matCellDef="let row"> {{row.personIdentificationNumber}} </mat-cell>
+                            <!-- identifierValue Column -->
+                            <ng-container matColumnDef="identifierValue">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Identifier Value. </th>
+                                <td mat-cell *matCellDef="let element"> {{element.identifierValue}} </td>
                             </ng-container>
-                            <!-- FirstName Column -->
+
+                            <!-- First Name Column -->
                             <ng-container matColumnDef="firstName">
-                                <mat-header-cell *matHeaderCellDef> First Name </mat-header-cell>
-                                <mat-cell *matCellDef="let row"> {{row.firstName}} </mat-cell>
-                            </ng-container>-->
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
+                                <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+                            </ng-container>
+
                             <!-- Middle Name Column -->
                             <ng-container matColumnDef="middleName">
-                                <mat-header-cell *matHeaderCellDef> Middle Name </mat-header-cell>
-                                <mat-cell *matCellDef="let row">{{row.middleName}} </mat-cell>
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Middle Name </th>
+                                <td mat-cell *matCellDef="let element"> {{element.middleName}} </td>
                             </ng-container>
+
                             <!-- Last Name Column -->
                             <ng-container matColumnDef="lastName">
-                                <mat-header-cell *matHeaderCellDef> Last Name </mat-header-cell>
-                                <mat-cell *matCellDef="let row"> {{row.lastName}} </mat-cell>
-                            </ng-container>-->
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
+                                <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+                            </ng-container>
+
                             <!-- Date Of Birth Column -->
-                            <ng-container matColumnDef="mobileNumber">
-                                <mat-header-cell *matHeaderCellDef> Mobile Number </mat-header-cell>
-                                <mat-cell *matCellDef="let row"> {{row.mobileNumber }} </mat-cell>
-                            </ng-container>
-                            <ng-container matColumnDef="Gender">
-                                <mat-header-cell *matHeaderCellDef> Gender </mat-header-cell>
-                                <mat-cell *matCellDef="let row"> {{row.gender}} </mat-cell>
-                            </ng-container>
-                            <ng-container matColumnDef="enrollmentNumber">
-                                <mat-header-cell *matHeaderCellDef>EnrollmentNumber</mat-header-cell>
-                                <mat-cell *matCellDef="let row"> {{row.enrollmentNumber}} </mat-cell>
-                            </ng-container>
-                            <ng-container matColumnDef="Add">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header> Add </mat-header-cell>
-                                <mat-cell *matCellDef="let row">
-                                    <button mat-raised-button color="primary" (click)="getSelectedRow(row)">Add</button>
-                                </mat-cell>
+                            <ng-container matColumnDef="dateOfBirth">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Date Of Birth </th>
+                                <td mat-cell *matCellDef="let element"> {{element.dateOfBirth | date: 'dd-MMM-yyyy'}} </td>
                             </ng-container>
 
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
 
-
-                            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-                        </mat-table>
-
-                        <mat-paginator [length]="5"
-                                       [pageSize]="5"
-                                       [pageSizeOptions]="[3, 5, 10, 20]"
-                                       [showFirstLastButtons]="true">
+                        <mat-paginator [length]="5" [pageSize]="5" [pageSizeOptions]="[3, 5, 10, 20]" [showFirstLastButtons]="true">
                         </mat-paginator>
                     </div>
                 </div>

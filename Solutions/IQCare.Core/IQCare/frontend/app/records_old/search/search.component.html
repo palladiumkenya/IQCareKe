@@ -1,0 +1,92 @@
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 col-xs-12">
+                <div class="widget">
+                    <div class="widget-header bordered-left">
+                        <span class="widget-caption">SEARCH</span>
+                    </div>
+                    <div class="widget-body bordered-left">
+                        <form class="form-inline" role="form">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="identifierNumber">Identifier Number</label>
+                                        <input type="text" class="form-control" id="identifierNumber" name="identifierNumber" placeholder="Identifier Number" tabindex="1"
+                                            [(ngModel)]="clientSearch.identifierValue" #identifierValue="ngModel" (keyup)="OnKeyUp($event)">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="firstName">First Name</label>
+                                        <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name" tabindex="2" [(ngModel)]="clientSearch.firstName"
+                                            #firstName="ngModel" (keyup)="OnKeyUp($event)">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="middleName">Middle Name</label>
+                                        <input type="text" class="form-control" id="middleName" name="middleName" placeholder="Middle Name" tabindex="3" [(ngModel)]="clientSearch.middleName"
+                                            #middleName="ngModel" (keyup)="OnKeyUp($event)">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="lastName">Last Name</label>
+                                        <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last Name" tabindex="4" [(ngModel)]="clientSearch.lastName"
+                                            #lastName="ngModel" (keyup)="OnKeyUp($event)">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div>
+                        &nbsp;
+                    </div>
+
+                    <div class="example-container mat-elevation-z8">
+                        <mat-table #table [dataSource]="dataSource" matSort class="mat-cell">
+
+                            <!-- Enrollment Number Column -->
+                            <ng-container matColumnDef="enrollmentNumber">
+                                <mat-header-cell *matHeaderCellDef> Identifier Number </mat-header-cell>
+                                <mat-cell *matCellDef="let row"> {{row.enrollmentNumber }} </mat-cell>
+                            </ng-container>
+                            <!-- FirstName Column -->
+                            <ng-container matColumnDef="firstName">
+                                <mat-header-cell *matHeaderCellDef> First Name </mat-header-cell>
+                                <mat-cell *matCellDef="let row"> {{row.firstName}} </mat-cell>
+                            </ng-container>-->
+                            <!-- Middle Name Column -->
+                            <ng-container matColumnDef="middleName">
+                                <mat-header-cell *matHeaderCellDef> Middle Name </mat-header-cell>
+                                <mat-cell *matCellDef="let row">{{row.middleName}} </mat-cell>
+                            </ng-container>
+                            <!-- Last Name Column -->
+                            <ng-container matColumnDef="lastName">
+                                <mat-header-cell *matHeaderCellDef> Last Name </mat-header-cell>
+                                <mat-cell *matCellDef="let row"> {{row.lastName}} </mat-cell>
+                            </ng-container>
+
+                            <!-- Date Of Birth Column -->
+                            <ng-container matColumnDef="dateOfBirth">
+                                <mat-header-cell *matHeaderCellDef> Date Of Birth </mat-header-cell>
+                                <mat-cell *matCellDef="let row"> {{row.dateOfBirth | date: 'dd-MMM-yyyy' }} </mat-cell>
+                            </ng-container>
+
+                            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                            <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlight': selectedRowIndex == row.id}" (click)="getSelectedRow(row)"></mat-row>
+                        </mat-table>
+
+                        <mat-paginator [length]="5" [pageSize]="5" [pageSizeOptions]="[3, 5, 10, 20]" [showFirstLastButtons]="true">
+                        </mat-paginator>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
