@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, AbstractControl } from '../../../../../node_modules/@angular/forms';
 import { Person } from '../../_models/person';
 import { ClientContact } from '../../_models/clientcontact';
+import { NextOfKin } from '../../_models/nextofkin';
 
 @Component({
     selector: 'app-register',
@@ -13,15 +14,20 @@ import { ClientContact } from '../../_models/clientcontact';
     styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-
+    /**
+     * Component variables
+     */
     isLinear = false;
     formGroup: FormGroup;
+    /** Returns a FormArray with the name 'formArray'. */
+    get formArray(): AbstractControl | null { return this.formGroup.get('formArray'); }
+
     person: Person;
     clientAddress: ClientAddress;
     clientContact: ClientContact;
     emergencyContact: EmergencyContact;
-    /** Returns a FormArray with the name 'formArray'. */
-    get formArray(): AbstractControl | null { return this.formGroup.get('formArray'); }
+    nextOfKin: NextOfKin;
+
 
     constructor(private _formBuilder: FormBuilder) { }
 
@@ -30,6 +36,7 @@ export class RegisterComponent implements OnInit {
         this.clientAddress = new ClientAddress();
         this.clientContact = new ClientContact();
         this.emergencyContact = new EmergencyContact();
+        this.nextOfKin = new NextOfKin();
 
         this.formGroup = this._formBuilder.group({
             formArray: this._formBuilder.array([
@@ -66,10 +73,17 @@ export class RegisterComponent implements OnInit {
                     EmergencyContactLastName: new FormControl(this.emergencyContact.lastName),
                     EmergencyContactSex: new FormControl(this.emergencyContact.sex),
                     EmergencyContactRelationship: new FormControl(this.emergencyContact.emergencyContactRelationship),
-
+                    EmergencyContactMobileNumber: new FormControl(this.emergencyContact.emergencyContactRelationship)
                 }),
                 this._formBuilder.group({
-
+                    NextOfKinFirstName: new FormControl(this.nextOfKin.firstName),
+                    NextOfKinMiddleName: new FormControl(this.nextOfKin.middleName),
+                    NextOfKinLastName: new FormControl(this.nextOfKin.lastName),
+                    NextOfKinSex: new FormControl(this.nextOfKin.sex),
+                    NextOfKinRelationship: new FormControl(this.nextOfKin.kinContactRelationship),
+                    NextOfKinMobileNumber: new FormControl(this.nextOfKin.kinContactRelationship),
+                    NextOfKinConsent: new FormControl(this.nextOfKin.kinConsentToSMS),
+                    NextOfKinConsentDeclineReason: new FormControl(this.nextOfKin.consentDeclineReason)
                 })
             ])
         });
