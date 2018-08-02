@@ -45,12 +45,10 @@ namespace IQCare
             services.AddSingleton<IConnectionString, ConnectionString>();
 
             //Context
-            services.AddDatabase(Configuration);
+            services.AddDatabase(Configuration, ConnectionString);
             services.AddCommonDatabase(Configuration);
             services.AddPmtctDatabase(Configuration);
 
-            services.AddDatabase(Configuration, ConnectionString);
-            services.AddCommonDatabase(Configuration, ConnectionString);
             services.AddMediatR();
             var assemblyNames =  Assembly.GetEntryAssembly().GetReferencedAssemblies();
             List<Assembly> assemblies = new List<Assembly>();

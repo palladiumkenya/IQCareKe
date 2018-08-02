@@ -24,7 +24,7 @@ const routes: Routes = [
         path: 'rec',
         component: RecordsHomeComponent
     },
-    {
+    /*{
         path: 'patientprofile',
         component: ProfileComponent,
         pathMatch: 'full',
@@ -41,7 +41,7 @@ const routes: Routes = [
 
         }
 
-    },
+    },*/
     {
         path: 'searchcontact',
         component: SearchComponent,
