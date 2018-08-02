@@ -29,12 +29,13 @@ const routes: Routes = [
         loadChildren: '../records_old/records_.module#RecordModule'
     },
     {
+        path: 'pmtct', 
+        loadChildren: '../pmtct/pmtct.module#PmtctModule'
+    },
+    {
         path: '**',
         component: NotFoundComponent
     }
-
-
-
 ];
 
 @NgModule({
