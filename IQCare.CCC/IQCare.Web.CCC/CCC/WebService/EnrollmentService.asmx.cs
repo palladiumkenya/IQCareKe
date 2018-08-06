@@ -128,6 +128,7 @@ namespace IQCare.Web.CCC.WebService
                 DateTime datevalue = Convert.ToDateTime(sDate);
                 PatientLookup isPersonEnrolled = patientLookUpManager.GetPatientByPersonId(PersonId);
                 dobPrecision = String.IsNullOrWhiteSpace(dobPrecision) ? "false" : "true";
+                var patientTypeName = lookupLogic.GetLookupItemNameByMasterNameItemId(patientType, "PatientType");
 
                 foreach (var item in identifiersObjects)
                 {
@@ -156,18 +157,6 @@ namespace IQCare.Web.CCC.WebService
                         }
                     }
                 }
-
-                //List<PatientRegistrationLookup> personByPtnPk = patientManager.GetPatientByPtn_Pk(0);
-                //if (personByPtnPk.Count > 0)
-                //{
-                //    var personDetailLookup = personLookUp.GetPersonById(PersonId);
-                //    if (personDetailLookup != null)
-                //    {
-                //        var exception = new SoapException("Enrollment for Patient: " + personDetailLookup.FirstName + " " + personDetailLookup.MiddleName + " " + personDetailLookup.LastName + " " + 
-                //            " was not completed. Please complete their enrollment to avoid error before continuing.", SoapException.ClientFaultCode);
-                //        throw exception;
-                //    }
-                //}
 
                 if (isPersonEnrolled == null || isPersonEnrolled.Id < 1)
                 {
@@ -306,9 +295,14 @@ namespace IQCare.Web.CCC.WebService
                             foreach (var item in identifiersObjects)
                             {
                                 var assigningFacility = "";
-                                if (Convert.ToInt32(item.Key) == 1)
+                                if (Convert.ToInt32(item.Key) == 1 &&
+                                    (patientTypeName == "Transit" || patientTypeName == "Transfer-In"))
                                 {
                                     assigningFacility = item.Value.Substring(0, 5);
+                                }
+                                else
+                                {
+                                    assigningFacility = facilityId.ToString();
                                 }
 
                                 patientIdentifierId = patientIdentifierManager.addPatientIdentifier(patientId,
@@ -505,9 +499,14 @@ namespace IQCare.Web.CCC.WebService
                             else
                             {
                                 var assigningFacility = "";
-                                if (Convert.ToInt32(item.Key) == 1)
+                                if (Convert.ToInt32(item.Key) == 1 &&
+                                    (patientTypeName == "Transit" || patientTypeName == "Transfer-In"))
                                 {
                                     assigningFacility = item.Value.Substring(0, 5);
+                                }
+                                else
+                                {
+                                    assigningFacility = facilityId.ToString();
                                 }
                                 patientEnrollmentId = patientEnrollmentManager.addPatientEnrollment(patient.Id, enrollmentDate, userId);
                                 patientEntryPointId = patientEntryPointManager.addPatientEntryPoint(patient.Id, entryPointId, userId);

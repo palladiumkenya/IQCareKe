@@ -118,7 +118,6 @@ namespace IQCare.CCC.UILogic.Interoperability
                         {
                             bool isUndetectable = false;
                             string resultText = "";
-                            decimal decimalValue = Decimal.Zero;
                             decimal? resultValue = null;
                             foreach (var result in results)
                             {
