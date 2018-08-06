@@ -10,41 +10,30 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <mat-horizontal-stepper [linear]="isLinear" #stepper>
-                                    <mat-step [stepControl]= "visitDetailsFormGroup">
-                                              
-                                        <form [formGroup]= "visitDetailsFormGroup">
-                                                <ng-template matStepLabel>Visit Details </ng-template>
-                                                <div class="col-md-12">
-                                                    <app-visit-details></app-visit-details> 
-                                                </div>
-
-                                                <div>
-                                                  <button mat-raised-button class="primary" matStepperNext [disabled]="!visitDetailsFormGroup.valid" >Next</button>
-                                                </div>
-                                        </form>
+                                    <mat-step >
+                                      
+                                        <ng-template matStepLabel>ANC Visit Details</ng-template>
+                                        <app-visit-details></app-visit-details>
+                                        
                                     </mat-step>
-
-                                            <mat-step [stepControl]="secondFormGroup">
-                                              <form [formGroup]="secondFormGroup">
-                                                <ng-template matStepLabel>Fill out your address</ng-template>
-                                                <mat-form-field>
-                                                  <input matInput placeholder="Address" formControlName="secondCtrl" required>
-                                                </mat-form-field>
-                                                <div>
-                                                  <button mat-button matStepperPrevious>Back</button>
-                                                  <button mat-button matStepperNext>Next</button>
-                                                </div>
-                                              </form>
-                                            </mat-step>
-                                            <mat-step>
-                                              <ng-template matStepLabel>Done</ng-template>
-                                              You are now done.
-                                              <div>
-                                                <button mat-button matStepperPrevious>Back</button>
-                                                <button mat-button (click)="stepper.reset()">Reset</button>
-                                              </div>
+                                    <mat-step>                                     
+                                        <ng-template matStepLabel>Education & Profile</ng-template>
+                                        <app-patient-education-examination></app-patient-education-examination>                               
                                     </mat-step>
-                                </mat-horizontal-stepper>
+                                    <mat-step>
+                                            <ng-template matStepLabel>HIV Status </ng-template>
+                                            
+                                            <app-hiv-status></app-hiv-status>
+                                    </mat-step>
+                                    <mat-step>
+                                      <ng-template matStepLabel>Done</ng-template>
+                                      You are now done.
+                                      <div>
+                                        <button mat-raised-button matStepperPrevious>Back</button>
+                                        <button mat-raised-button (click)="stepper.reset()">Reset</button>
+                                      </div>
+                                    </mat-step>
+                                  </mat-horizontal-stepper>
                             </div>
                         </div>                                            
                     </div><!--Widget Body-->

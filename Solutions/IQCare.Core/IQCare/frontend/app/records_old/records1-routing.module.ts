@@ -11,7 +11,7 @@ import { GetPersonDetailsResolver } from './services/recordsregistration.resolve
 import { OccupationResolver } from './services/recordsregistration.resolver';
 import { OppEducationResolver } from './services/recordsregistration.resolver';
 import { OppConsentResolver } from './services/recordsregistration.resolver';
-import { ProfileComponent } from './profile/profile.component';
+// import { ProfileComponent } from './profile/profile.component';
 import { SearchComponent } from './search/search.component';
 import { NgModule } from '@angular/core';
 const routes: Routes = [

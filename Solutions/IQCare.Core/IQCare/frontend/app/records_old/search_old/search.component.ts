@@ -7,15 +7,6 @@ import { Search, SearchList, SearchContact } from '../models/search';
 import { SearchService } from '../services/recordssearch';
 import { DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs';
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-import { from as observableFrom } from 'rxjs';
-import { of as observableOf } from 'rxjs';
-
-import {
-    TableColumn,
-    ColumnMode
-} from '@swimlane/ngx-datatable';
-
 import { CollectionViewer } from '@angular/cdk/collections';
 
 
@@ -79,7 +70,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
     LoadData() {
 
         if (this.personsearch == undefined) {
-            return observableFrom([]);
+            // return observableFrom([]);
             // return Observable.from([]);
         } else {
 
@@ -122,28 +113,4 @@ export class Element {
 
 
 
-}
-
-export class SearchDataSource extends DataSource<any>{
-    element: any[] = [];
-    constructor(private searchService: SearchService, private search: SearchContact) {
-        super();
-
-    }
-
-    connect(): Observable<any[]> {
-        if (this.search == undefined) {
-            return observableFrom([]);
-        } else {
-
-            this.searchService.searchPersonContact(this.search).subscribe((data: any) => {
-                this.element = data['personSearch'];
-                console.log(this.element);
-            });
-            return observableOf(this.element);
-        }
-
-    }
-
-    disconnect() { }
 }

@@ -8,11 +8,6 @@ import { Observable } from 'rxjs';
 import { from as observableFrom } from 'rxjs';
 import { of as observableOf } from 'rxjs';
 
-import {
-    TableColumn,
-    ColumnMode
-} from '@swimlane/ngx-datatable';
-
 import { CollectionViewer } from '@angular/cdk/collections';
 
 @Component({
