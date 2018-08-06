@@ -49,9 +49,11 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="CCC\Adherence\AdherenceBarriers.aspx" />
     <Content Include="CCC\Appointment\ScheduleAppointment.aspx" />
     <Content Include="CCC\Appointment\PatientAppointments.aspx" />
     <Content Include="CCC\Data\States.xml" />
+    <Content Include="CCC\Depression\DepressionScreening.aspx" />
     <Content Include="CCC\Encounter\ArtDistributionForm.aspx" />
     <Content Include="CCC\Encounter\EncounterHistory.aspx" />
     <Content Include="CCC\Encounter\LabOrder.aspx" />
@@ -124,12 +126,43 @@
     <Content Include="CCC\Scripts\js\jquery-ui-1.8.custom.min.js" />
     <Content Include="CCC\Scripts\js\linegraph1.js" />
     <Content Include="CCC\Scripts\js\PatientRegistration.js" />
+    <Content Include="CCC\UC\Adherence\AdherenceBarriersHome.aspx" />
+    <Content Include="CCC\UC\Adherence\ucAdherenceBarriersHome.ascx" />
+    <Content Include="CCC\UC\Adherence\ucDailyRoutine.ascx" />
+    <Content Include="CCC\UC\Adherence\ucHIVAwareness.ascx" />
+    <Content Include="CCC\UC\Adherence\ucPsychosocialCircumstances.ascx" />
+    <Content Include="CCC\UC\Adherence\ucReferralsandNetworks.ascx" />
+    <Content Include="CCC\UC\Adherence\ucScreening.ascx" />
+    <Content Include="CCC\UC\Adherence\ucUnderstanding.ascx" />
+    <Content Include="CCC\UC\Depression\ScreeningHome.aspx" />
+    <Content Include="CCC\UC\Depression\ucCAGEAID.ascx" />
+    <Content Include="CCC\UC\Depression\ucCRAFFT.ascx" />
+    <Content Include="CCC\UC\Depression\ucDepressionScreening.ascx" />
+    <Content Include="CCC\UC\Depression\ucDisclosure.ascx" />
+    <Content Include="CCC\UC\Depression\ucGBVScreening.ascx" />
+    <Content Include="CCC\UC\Depression\ucScreeningHome.ascx" />
+    <Content Include="CCC\UC\Depression\ucUpdateDepressionScreening.ascx" />
+    <Content Include="CCC\UC\EnhanceAdherenceCounselling\EnhanceAdherenceHome.aspx" />
+    <Content Include="CCC\UC\EnhanceAdherenceCounselling\session1.aspx" />
+    <Content Include="CCC\UC\EnhanceAdherenceCounselling\session2.aspx" />
+    <Content Include="CCC\UC\EnhanceAdherenceCounselling\session3.aspx" />
+    <Content Include="CCC\UC\EnhanceAdherenceCounselling\session4.aspx" />
+    <Content Include="CCC\UC\EnhanceAdherenceCounselling\ucEndSessionViralLoad.ascx" />
+    <Content Include="CCC\UC\EnhanceAdherenceCounselling\ucEnhanceAdherenceHome.ascx" />
+    <Content Include="CCC\UC\EnhanceAdherenceCounselling\ucMMAS4.ascx" />
+    <Content Include="CCC\UC\EnhanceAdherenceCounselling\ucSession1.ascx" />
+    <Content Include="CCC\UC\EnhanceAdherenceCounselling\ucSession2.ascx" />
+    <Content Include="CCC\UC\EnhanceAdherenceCounselling\ucSession3.ascx" />
+    <Content Include="CCC\UC\EnhanceAdherenceCounselling\ucSession4.ascx" />
+    <Content Include="CCC\UC\EnhanceAdherenceCounselling\ucViralLoad.ascx" />
+    <Content Include="CCC\UC\EnhanceAdherenceCounselling\viralload.aspx" />
     <Content Include="CCC\UC\ucExtruder.ascx" />
     <Content Include="CCC\UC\ucFemaleVitals.ascx" />
     <Content Include="CCC\UC\ucGenderBasedViolenceAssessment.ascx" />
     <Content Include="CCC\UC\ucIpt.ascx" />
     <Content Include="CCC\UC\ucIptClientWorkup.ascx" />
     <Content Include="CCC\UC\ucIptOutcome.ascx" />
+    <Content Include="CCC\UC\ucNeonatalHistory.ascx" />
     <Content Include="CCC\UC\ucPatientBrief.ascx" />
     <Content Include="CCC\UC\ucPatientClinicalEncounter.ascx" />
     <Content Include="CCC\UC\ucPatientDetails.ascx" />
@@ -141,17 +174,25 @@
     <Content Include="CCC\UC\ucPatientVitalsExtruder.ascx" />
     <Content Include="CCC\UC\ucPatientWorkPlan.ascx" />
     <Content Include="CCC\UC\ucPharmacyPrescription.ascx" />
+    <Content Include="CCC\UC\ucSocialHistory.ascx" />
+    <Content Include="CCC\UC\ucTannerStaging.ascx" />
     <Content Include="CCC\UC\ucVisitDetails.ascx" />
+    <Content Include="CCC\WebService\AdherenceService.asmx" />
+    <Content Include="CCC\WebService\DepressionScreeningService.asmx" />
+    <Content Include="CCC\WebService\EnhanceAdherenceService.asmx" />
     <Content Include="CCC\WebService\EnrollmentService.asmx" />
     <Content Include="CCC\WebService\FacilityService.asmx" />
     <Content Include="CCC\WebService\LabService.asmx" />
+    <Content Include="CCC\WebService\NeonatalEncounterService.asmx" />
     <Content Include="CCC\WebService\OneTimeEventsTrackerService.asmx" />
     <Content Include="CCC\WebService\PatientAdverseEventOutcome.asmx" />
     <Content Include="CCC\WebService\PatientBaselineService.asmx" />
+    <Content Include="CCC\WebService\PatientClinicalNotesService.asmx" />
     <Content Include="CCC\WebService\PatientEncounterService.asmx" />
     <Content Include="CCC\WebService\PatientLookupService.asmx" />
     <Content Include="CCC\WebService\PatientMasterVisitService.asmx" />
     <Content Include="CCC\WebService\PatientReEnrollment.asmx" />
+    <Content Include="CCC\WebService\PatientScreeningService.asmx" />
     <Content Include="CCC\WebService\PatientService.asmx" />
     <Content Include="CCC\WebService\PatientSummaryService.asmx" />
     <Content Include="CCC\WebService\PatientTbService.asmx" />
@@ -160,6 +201,8 @@
     <Content Include="CCC\WebService\PersonService.asmx" />
     <Content Include="CCC\WebService\LookupService.asmx" />
     <Content Include="CCC\WebService\FemaleVitalsWebservice.asmx" />
+    <Content Include="CCC\WebService\SocialHistoryService.asmx" />
+    <Content Include="CCC\WebService\TannersStagingService.asmx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -196,6 +239,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CCC\Adherence\AdherenceBarriers.aspx.cs">
+      <DependentUpon>AdherenceBarriers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\Adherence\AdherenceBarriers.aspx.designer.cs">
+      <DependentUpon>AdherenceBarriers.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CCC\Appointment\ScheduleAppointment.aspx.cs">
       <DependentUpon>ScheduleAppointment.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -209,6 +259,13 @@
     </Compile>
     <Compile Include="CCC\Appointment\PatientAppointments.aspx.designer.cs">
       <DependentUpon>PatientAppointments.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\Depression\DepressionScreening.aspx.cs">
+      <DependentUpon>DepressionScreening.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\Depression\DepressionScreening.aspx.designer.cs">
+      <DependentUpon>DepressionScreening.aspx</DependentUpon>
     </Compile>
     <Compile Include="CCC\Encounter\ArtDistributionForm.aspx.cs">
       <DependentUpon>ArtDistributionForm.aspx</DependentUpon>
@@ -357,6 +414,216 @@
     <Compile Include="CCC\OneTimeEvents\OneTimeEventsTracker.aspx.designer.cs">
       <DependentUpon>OneTimeEventsTracker.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CCC\UC\Adherence\AdherenceBarriersHome.aspx.cs">
+      <DependentUpon>AdherenceBarriersHome.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\Adherence\AdherenceBarriersHome.aspx.designer.cs">
+      <DependentUpon>AdherenceBarriersHome.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\Adherence\ucAdherenceBarriersHome.ascx.cs">
+      <DependentUpon>ucAdherenceBarriersHome.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\Adherence\ucAdherenceBarriersHome.ascx.designer.cs">
+      <DependentUpon>ucAdherenceBarriersHome.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\Adherence\ucDailyRoutine.ascx.cs">
+      <DependentUpon>ucDailyRoutine.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\Adherence\ucDailyRoutine.ascx.designer.cs">
+      <DependentUpon>ucDailyRoutine.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\Adherence\ucHIVAwareness.ascx.cs">
+      <DependentUpon>ucHIVAwareness.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\Adherence\ucHIVAwareness.ascx.designer.cs">
+      <DependentUpon>ucHIVAwareness.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\Adherence\ucPsychosocialCircumstances.ascx.cs">
+      <DependentUpon>ucPsychosocialCircumstances.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\Adherence\ucPsychosocialCircumstances.ascx.designer.cs">
+      <DependentUpon>ucPsychosocialCircumstances.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\Adherence\ucReferralsandNetworks.ascx.cs">
+      <DependentUpon>ucReferralsandNetworks.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\Adherence\ucReferralsandNetworks.ascx.designer.cs">
+      <DependentUpon>ucReferralsandNetworks.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\Adherence\ucScreening.ascx.cs">
+      <DependentUpon>ucScreening.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\Adherence\ucScreening.ascx.designer.cs">
+      <DependentUpon>ucScreening.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\Adherence\ucUnderstanding.ascx.cs">
+      <DependentUpon>ucUnderstanding.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\Adherence\ucUnderstanding.ascx.designer.cs">
+      <DependentUpon>ucUnderstanding.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\Depression\ScreeningHome.aspx.cs">
+      <DependentUpon>ScreeningHome.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\Depression\ScreeningHome.aspx.designer.cs">
+      <DependentUpon>ScreeningHome.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\Depression\ucCAGEAID.ascx.cs">
+      <DependentUpon>ucCAGEAID.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\Depression\ucCAGEAID.ascx.designer.cs">
+      <DependentUpon>ucCAGEAID.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\Depression\ucCRAFFT.ascx.cs">
+      <DependentUpon>ucCRAFFT.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\Depression\ucCRAFFT.ascx.designer.cs">
+      <DependentUpon>ucCRAFFT.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\Depression\ucDepressionScreening.ascx.cs">
+      <DependentUpon>ucDepressionScreening.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\Depression\ucDepressionScreening.ascx.designer.cs">
+      <DependentUpon>ucDepressionScreening.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\Depression\ucDisclosure.ascx.cs">
+      <DependentUpon>ucDisclosure.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\Depression\ucDisclosure.ascx.designer.cs">
+      <DependentUpon>ucDisclosure.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\Depression\ucGBVScreening.ascx.cs">
+      <DependentUpon>ucGBVScreening.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\Depression\ucGBVScreening.ascx.designer.cs">
+      <DependentUpon>ucGBVScreening.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\Depression\ucScreeningHome.ascx.cs">
+      <DependentUpon>ucScreeningHome.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\Depression\ucScreeningHome.ascx.designer.cs">
+      <DependentUpon>ucScreeningHome.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\Depression\ucUpdateDepressionScreening.ascx.cs">
+      <DependentUpon>ucUpdateDepressionScreening.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\Depression\ucUpdateDepressionScreening.ascx.designer.cs">
+      <DependentUpon>ucUpdateDepressionScreening.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\EnhanceAdherenceHome.aspx.cs">
+      <DependentUpon>EnhanceAdherenceHome.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\EnhanceAdherenceHome.aspx.designer.cs">
+      <DependentUpon>EnhanceAdherenceHome.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\session1.aspx.cs">
+      <DependentUpon>session1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\session1.aspx.designer.cs">
+      <DependentUpon>session1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\session2.aspx.cs">
+      <DependentUpon>session2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\session2.aspx.designer.cs">
+      <DependentUpon>session2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\session3.aspx.cs">
+      <DependentUpon>session3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\session3.aspx.designer.cs">
+      <DependentUpon>session3.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\session4.aspx.cs">
+      <DependentUpon>session4.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\session4.aspx.designer.cs">
+      <DependentUpon>session4.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\ucEndSessionViralLoad.ascx.cs">
+      <DependentUpon>ucEndSessionViralLoad.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\ucEndSessionViralLoad.ascx.designer.cs">
+      <DependentUpon>ucEndSessionViralLoad.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\ucEnhanceAdherenceHome.ascx.cs">
+      <DependentUpon>ucEnhanceAdherenceHome.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\ucEnhanceAdherenceHome.ascx.designer.cs">
+      <DependentUpon>ucEnhanceAdherenceHome.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\ucMMAS4.ascx.cs">
+      <DependentUpon>ucMMAS4.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\ucMMAS4.ascx.designer.cs">
+      <DependentUpon>ucMMAS4.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\ucSession1.ascx.cs">
+      <DependentUpon>ucSession1.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\ucSession1.ascx.designer.cs">
+      <DependentUpon>ucSession1.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\ucSession2.ascx.cs">
+      <DependentUpon>ucSession2.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\ucSession2.ascx.designer.cs">
+      <DependentUpon>ucSession2.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\ucSession3.ascx.cs">
+      <DependentUpon>ucSession3.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\ucSession3.ascx.designer.cs">
+      <DependentUpon>ucSession3.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\ucSession4.ascx.cs">
+      <DependentUpon>ucSession4.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\ucSession4.ascx.designer.cs">
+      <DependentUpon>ucSession4.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\ucViralLoad.ascx.cs">
+      <DependentUpon>ucViralLoad.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\ucViralLoad.ascx.designer.cs">
+      <DependentUpon>ucViralLoad.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\viralload.aspx.cs">
+      <DependentUpon>viralload.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\viralload.aspx.designer.cs">
+      <DependentUpon>viralload.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CCC\UC\ucExtruder.ascx.cs">
       <DependentUpon>ucExtruder.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -398,6 +665,13 @@
     </Compile>
     <Compile Include="CCC\UC\ucIptOutcome.ascx.designer.cs">
       <DependentUpon>ucIptOutcome.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\ucNeonatalHistory.ascx.cs">
+      <DependentUpon>ucNeonatalHistory.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucNeonatalHistory.ascx.designer.cs">
+      <DependentUpon>ucNeonatalHistory.ascx</DependentUpon>
     </Compile>
     <Compile Include="CCC\UC\ucPatientBrief.ascx.cs">
       <DependentUpon>ucPatientBrief.ascx</DependentUpon>
@@ -476,12 +750,38 @@
     <Compile Include="CCC\UC\ucPharmacyPrescription.ascx.designer.cs">
       <DependentUpon>ucPharmacyPrescription.ascx</DependentUpon>
     </Compile>
+    <Compile Include="CCC\UC\ucSocialHistory.ascx.cs">
+      <DependentUpon>ucSocialHistory.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucSocialHistory.ascx.designer.cs">
+      <DependentUpon>ucSocialHistory.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\ucTannerStaging.ascx.cs">
+      <DependentUpon>ucTannerStaging.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucTannerStaging.ascx.designer.cs">
+      <DependentUpon>ucTannerStaging.ascx</DependentUpon>
+    </Compile>
     <Compile Include="CCC\UC\ucVisitDetails.ascx.cs">
       <DependentUpon>ucVisitDetails.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CCC\UC\ucVisitDetails.ascx.designer.cs">
       <DependentUpon>ucVisitDetails.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\WebService\AdherenceService.asmx.cs">
+      <DependentUpon>AdherenceService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CCC\WebService\DepressionScreeningService.asmx.cs">
+      <DependentUpon>DepressionScreeningService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CCC\WebService\EnhanceAdherenceService.asmx.cs">
+      <DependentUpon>EnhanceAdherenceService.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="CCC\WebService\EnrollmentService.asmx.cs">
       <DependentUpon>EnrollmentService.asmx</DependentUpon>
@@ -497,6 +797,10 @@
       <DependentUpon>LookupService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="CCC\WebService\NeonatalEncounterService.asmx.cs">
+      <DependentUpon>NeonatalEncounterService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CCC\WebService\OneTimeEventsTrackerService.asmx.cs">
       <DependentUpon>OneTimeEventsTrackerService.asmx</DependentUpon>
     </Compile>
@@ -506,6 +810,10 @@
     </Compile>
     <Compile Include="CCC\WebService\PatientBaselineService.asmx.cs">
       <DependentUpon>PatientBaselineService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CCC\WebService\PatientClinicalNotesService.asmx.cs">
+      <DependentUpon>PatientClinicalNotesService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CCC\WebService\PatientEncounterService.asmx.cs">
@@ -521,6 +829,10 @@
     </Compile>
     <Compile Include="CCC\WebService\PatientReEnrollment.asmx.cs">
       <DependentUpon>PatientReEnrollment.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CCC\WebService\PatientScreeningService.asmx.cs">
+      <DependentUpon>PatientScreeningService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CCC\WebService\PatientService.asmx.cs">
@@ -546,6 +858,14 @@
     </Compile>
     <Compile Include="CCC\WebService\FemaleVitalsWebservice.asmx.cs">
       <DependentUpon>FemaleVitalsWebservice.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CCC\WebService\SocialHistoryService.asmx.cs">
+      <DependentUpon>SocialHistoryService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CCC\WebService\TannersStagingService.asmx.cs">
+      <DependentUpon>TannersStagingService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -663,6 +983,7 @@
       <HintPath>..\..\Library\Telerik.Web.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

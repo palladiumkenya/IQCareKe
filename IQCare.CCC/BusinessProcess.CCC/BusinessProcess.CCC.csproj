@@ -83,6 +83,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adherence\BAdherence.cs" />
     <Compile Include="assessment\BPatientPsychosocialCriteriaManager.cs" />
     <Compile Include="assessment\BPatientSupportCriteriaManager.cs" />
     <Compile Include="assessment\BPatientSupportSystemCriteriaManager.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="BPatientConsent.cs" />
     <Compile Include="BPatientEncounter.cs" />
     <Compile Include="BPatientLookupManager.cs" />
+    <Compile Include="BPatientNeonatal.cs" />
     <Compile Include="BPatientPharmacy.cs" />
     <Compile Include="BPatientPopulationManager.cs" />
     <Compile Include="BPatientTreatmentSupporterManager.cs" />
@@ -116,6 +118,10 @@
     <Compile Include="BPersonManager.cs" />
     <Compile Include="BPersonContactManager.cs" />
     <Compile Include="BPersonRelationshipManager.cs" />
+    <Compile Include="BTannersStaging.cs" />
+    <Compile Include="Encounters\BNeonatalHistory.cs" />
+    <Compile Include="Encounters\BPatientClinicalNotes.cs" />
+    <Compile Include="Encounters\BSocialHistory.cs" />
     <Compile Include="Enrollment\BHivReConfirmatoryTest.cs" />
     <Compile Include="Enrollment\BIdentifier.cs" />
     <Compile Include="Enrollment\BPatientArtDistribution.cs" />
@@ -178,6 +184,7 @@
       <Name>DataAccess.CCC</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

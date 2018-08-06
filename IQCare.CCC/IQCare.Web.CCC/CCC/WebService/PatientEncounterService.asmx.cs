@@ -18,6 +18,7 @@ using IQCare.CCC.UILogic.Triage;
 using AutoMapper;
 using IQCare.Events;
 using Entities.CCC.Lookup;
+using System.Linq;
 
 //using static Entities.CCC.Encounter.PatientEncounter;
 
@@ -301,14 +302,19 @@ namespace IQCare.Web.CCC.WebService
         public ArrayList GetVaccines()
         {
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
-
+            LookupLogic ll = new LookupLogic();
             DataTable theDT = patientEncounter.loadPatientEncounterVaccines(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString(), Session["PatientPK"].ToString());
             ArrayList rows = new ArrayList();
 
             foreach (DataRow row in theDT.Rows)
             {
-                string[] i = new string[6] { row["vaccineID"].ToString(), row["vaccineStageID"].ToString(), row["VaccineName"].ToString(), row["VaccineStageName"].ToString(), row["VaccineDate"].ToString(), "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>" };
-                rows.Add(i);
+                List<LookupItemView> lookupList = ll.GetItemIdByGroupAndItemName("VaccinationStages", LookupLogic.GetLookupNameById(Convert.ToInt32(row["vaccineStageID"])).ToString());
+                if (lookupList.Any())
+                {
+                    string[] i = new string[6] { row["vaccineID"].ToString(), row["vaccineStageID"].ToString(), row["VaccineName"].ToString(), row["VaccineStageName"].ToString(), row["VaccineDate"].ToString(), "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>" };
+                    rows.Add(i);
+                }
+                    
             }
             return rows;
         }
@@ -840,6 +846,29 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
+        public int saveNeonatalMilestones(string milestoneAssessed, string milestoneOnsetDate, string milestoneAchieved, string milestoneStatus, string milestoneComment)
+        {
+            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+            int patientId = Convert.ToInt32(Session["PatientPK"].ToString());
+            int patientMasterVisitId = Convert.ToInt32(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString());
+            int userId = Convert.ToInt32(Session["AppUserId"].ToString());
+            return patientEncounter.saveNeonatalMilestone(patientMasterVisitId, patientId, userId, milestoneAssessed, milestoneOnsetDate, milestoneAchieved, milestoneStatus, milestoneComment);
+        }
+
+        //[WebMethod(EnableSession = true)]
+        //public int addNeonatalMilestone(int patientId, int patientVisitId, string milestoneAssessed, string milestoneOnsetDate, string milestoneAchieved, string milestoneStatus, string milestoneComment)
+        //{
+        //    try
+        //    {
+ 
+        //        PatientVital patientVital = new PatientVital()
+        //        {
+        //        }
+        //    }
+        //}
+
+
+        [WebMethod(EnableSession = true)]
         public string SavePatientAdherenceAssessment(string feelBetter, string carelessAboutMedicine, string feelWorse, string forgetMedicine, string takeMedicine, string stopMedicine, string underPressure, string difficultyRemembering)
         {
             PatientAdherenceAssessmentManager patientAdherenceAssessment = new PatientAdherenceAssessmentManager();
@@ -1024,6 +1053,43 @@ namespace IQCare.Web.CCC.WebService
             }
             return new JavaScriptSerializer().Serialize(results);
         }
-        
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
+        public ArrayList LoadVitalSigns()
+        {
+            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+            DataTable theDT = patientEncounter.loadPatientVitalSigns(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString(), Session["PatientPK"].ToString());
+            //DataTable theDT = patientEncounter.loadPatientEncounterComplaints(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString(), Session["PatientPK"].ToString());
+            ArrayList rows = new ArrayList();
+
+            foreach (DataRow row in theDT.Rows)
+            {
+                string[] i = new string[10] { row["VisitDate"].ToString(), row["Height"].ToString(), row["Weight"].ToString(), row["Muac"].ToString(),
+                row["BPSystolic"].ToString(),row["BPDiastolic"].ToString(),row["Temperature"].ToString(),row["HeartRate"].ToString(),row["RespiratoryRate"].ToString(),
+                row["SpO2"].ToString()};
+                rows.Add(i);
+            }
+            return rows;
+        }
+
+        [WebMethod]
+        public string updateScreeningYesNo(int patientId, int patientMasterVisitId, int screeningType, int screeningCategory, int screeningValue, int userId)
+        {
+            try
+            {
+                var NM = new PatientEncounterLogic();
+                Result = NM.updateScreeningYesNo(patientId, patientMasterVisitId, screeningType, screeningCategory, screeningValue, userId);
+                if (Result > 0)
+                {
+                    Msg = "Saved";
+                }
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message;
+            }
+            return Msg;
+        }
     }
 }

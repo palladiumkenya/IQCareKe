@@ -10,7 +10,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.IO;
 using System.Reflection;
+using IQCareRecords.Common.BusinessProcess;
+using Microsoft.AspNetCore.Http;
+using System.Web;
+using Microsoft.AspNetCore.Hosting.Internal;
 using IQCare.Helpers;
+
+using Microsoft.Extensions.PlatformAbstractions;
 
 namespace IQCare
 {
@@ -48,6 +54,20 @@ namespace IQCare
             {
                 assemblies.Add(Assembly.Load(assemblyName));
             }
+            //string assemblyNam = "Entities.Common.dll";
+
+            //// string assemblyPath= Path.Combine(Directory.GetCurrentDirectory(), assemblyNam);
+            ////FileInfo f = new FileInfo(assemblyNam);
+            ////string fullname = f.FullName;
+            //HostingEnvironment env = new HostingEnvironment();
+            //Microsoft.Extensions.PlatformAbstractions.ApplicationEnvironment appenv = new ApplicationEnvironment();
+            //string sAppPath = Directory.GetCurrentDirectory();
+            //string sRootPath = Path.GetFullPath(sAppPath);
+            //string sBinFolderPath = @"IQCare\bin\" + appenv.ApplicationName;
+            //string sBinPath = Path.Combine(sRootPath, sBinFolderPath);
+            //string assemblyPath = Path.Combine("~/bin/" + assemblyNam);
+            //Assembly assembly = Assembly.LoadFile(assemblyPath);
+            //assemblies.Add(assembly);
             services.AddMediatR(assemblies);
             services.AddMvc()
                 .AddMvcOptions(o => o.OutputFormatters.Add(new XmlDataContractSerializerOutputFormatter()))

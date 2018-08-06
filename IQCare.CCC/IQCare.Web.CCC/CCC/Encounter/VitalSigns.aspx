@@ -10,9 +10,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
     <div class="col-md-12 col-xs-12 col-sm-12">
          <uc:PatientDetails ID="PatientSummary" runat="server" />
-         <uc:PatientTriageSummary ID="ptnVitalSummary" runat="server" />
-         
-        
+         <uc:PatientTriageSummary ID="ptnVitalSummary" runat="server" /> 
     </div>
     <div class="col-md-12 col-xs-12 col-sm-12" id="PatientVitals">
         <uc:PatientTriage ID="ptnVitalSigns" runat="server" />

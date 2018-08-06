@@ -5,6 +5,7 @@
 
 .example-container > * {
     width: 100%;
+  
 }
 
 .mat-form-field{
@@ -13,4 +14,11 @@
 
 .mat-card {
     background-color: #dff9fb;
+    height:100%;
+}
+
+
+
+.iboxcontent{
+    height:100%;
 }

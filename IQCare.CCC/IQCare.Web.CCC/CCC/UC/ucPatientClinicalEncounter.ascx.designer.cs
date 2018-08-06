@@ -94,6 +94,15 @@ namespace IQCare.Web.CCC.UC {
         protected global::System.Web.UI.WebControls.DropDownList nutritionscreeningstatus;
         
         /// <summary>
+        /// PHNutritionScreeningNotes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder PHNutritionScreeningNotes;
+        
+        /// <summary>
         /// rdAnyComplaintsYes control.
         /// </summary>
         /// <remarks>
@@ -373,6 +382,24 @@ namespace IQCare.Web.CCC.UC {
         protected global::System.Web.UI.WebControls.TextBox txtAdverseEventOther;
         
         /// <summary>
+        /// NeonatalHistoryPH control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder NeonatalHistoryPH;
+        
+        /// <summary>
+        /// TannersStagingPH control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder TannersStagingPH;
+        
+        /// <summary>
         /// ChronicIllnessName control.
         /// </summary>
         /// <remarks>
@@ -488,6 +515,15 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtVaccinationDate;
+        
+        /// <summary>
+        /// SocialHistoryPH control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder SocialHistoryPH;
         
         /// <summary>
         /// cblGeneralExamination control.

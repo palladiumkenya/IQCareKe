@@ -17,9 +17,16 @@ const routes: Routes = [
         loadChildren: '../registration/registration.module#RegistrationModule'
     },
     {
+        path: 'recordregistration',
+        loadChildren:'../records/records.module#RecordModule'
+    },
+    {
         path: '**',
         component: NotFoundComponent
     }
+
+
+
 ];
 
 @NgModule({

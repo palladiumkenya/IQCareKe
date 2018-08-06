@@ -522,6 +522,7 @@
 				$("#menuLabOrder").hide();
                 $("#menuPatientVitals").hide();
                 $("#menuArtDistribution").hide();
+                $("#menuAdherenceBarriers").hide();
 			  // $("#LinkButton2").show();
 				//$("#menuStartEncounter").show();
                 $('#<%=lblRegistration.ClientID%>').text("Register Patient");
@@ -544,7 +545,8 @@
 				$("#menuCaptureVitals").show();
 				$("#menuNewEncounter").show();
 				$("#menuPharmacyPrescription").show();
-				$("#menuLabOrder").show();
+                $("#menuLabOrder").show();
+                $("#menuAdherenceBarriers").show();
 				
 				$("#menuStartEncounter").hide();
 				startEncounter = 1;
@@ -581,7 +583,8 @@
                 $("#menuPatientVitals").hide();
                 $("#menuArtDistribution").hide();
 			    $("#LinkButton2").hide();
-				$("#menuStartEncounter").hide();
+                $("#menuStartEncounter").hide();
+                $("#menuAdherenceBarriers").hide();
                 $('#<%=lblRegistration.ClientID%>').text("Register Patient");
             }
 

@@ -63,7 +63,8 @@ namespace IQCare.Web.CCC.WebService
         [WebMethod(EnableSession = true)]
         public string AddpatientVitals(int patientId, int bpSystolic, int bpDiastolic, decimal heartRate, decimal height,
             decimal muac, int patientMasterVisitId, decimal respiratoryRate, decimal spo2, decimal tempreture,
-            decimal weight, decimal bmi, decimal headCircumference,string bmiz,string weightForAge,string weightForHeight,DateTime visitDate)
+            decimal weight, decimal bmi, decimal headCircumference,string bmiz,string weightForAge,string weightForHeight,DateTime visitDate,
+            decimal ageforZ, string nursesComments)
         {
             try
             {
@@ -691,9 +692,9 @@ namespace IQCare.Web.CCC.WebService
             string reason = "";
             string serviceArea = "";
             string differentiatedCare = "";
-            string editAppointment = "<a href='ScheduleAppointment.aspx?appointmentid=" + appointmentid + "' type='button' class='btn btn-success fa fa-pencil-square btn-fill' > Edit</a>";
+            string editAppointment = "<a href='ScheduleAppointment.aspx?appointmentid="+appointmentid+"' type='button' class='btn btn-success fa fa-pencil-square btn-fill' > Edit</a>";
             string deleteAppointment = "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>";
-            List<LookupItemView> statuses = mgr.GetLookItemByGroup("AppointmentStatus");
+            List <LookupItemView> statuses = mgr.GetLookItemByGroup("AppointmentStatus");
             var s = statuses.FirstOrDefault(n => n.ItemId == a.StatusId);
             if (s != null)
             {

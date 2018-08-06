@@ -21,7 +21,7 @@ namespace IQCare.CCC.UILogic.Screening
                     PatientMasterVisitId = patientMasterVisitid,
                     VisitDate = visitDate,
                     ScreeningTypeId = screeningTypeId,
-                    ScreeningDone = screeningDone,
+                    ScreeningDone = Convert.ToBoolean(screeningDone),
                     ScreeningDate = screeningDate,
                     ScreeningCategoryId = screeningCategoryId,
                     ScreeningValueId = screeningValueId,
@@ -36,7 +36,53 @@ namespace IQCare.CCC.UILogic.Screening
                 throw;
             }
         }
-
+        public int AddUpdatePatientScreening(int patientId, int patientMasterVisitId, int screeningType, int screeningCategory, int screeningValue, int userId)
+        {
+            try
+            {
+                //(screening>0) ? update:add
+                int screeningResult = _patientScreening.checkScreeningByScreeningCategoryId(patientId, screeningType, screeningCategory);
+                if (screeningResult > 0)
+                {
+                    var PS = new PatientScreening()
+                    {
+                        PatientId = patientId,
+                        PatientMasterVisitId = patientMasterVisitId,
+                        VisitDate = DateTime.Today,
+                        ScreeningTypeId = screeningType,
+                        ScreeningDone = true,
+                        ScreeningDate = DateTime.Today,
+                        ScreeningCategoryId = screeningCategory,
+                        ScreeningValueId = screeningValue,
+                        Comment = null,
+                        CreatedBy = userId,
+                        Id = screeningResult
+                    };
+                    return _patientScreening.updatePatientScreeningById(PS);
+                }
+                else
+                {
+                    var PS = new PatientScreening()
+                    {
+                        PatientId = patientId,
+                        PatientMasterVisitId = patientMasterVisitId,
+                        VisitDate = DateTime.Today,
+                        ScreeningTypeId = screeningType,
+                        ScreeningDone = true,
+                        ScreeningDate = DateTime.Today,
+                        ScreeningCategoryId = screeningCategory,
+                        ScreeningValueId = screeningValue,
+                        Comment = null,
+                        CreatedBy = userId
+                    };
+                    return _patientScreening.AddPatientScreening(PS);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public int CheckIfPatientScreeningExists(int patientId)
         {
             try
@@ -111,7 +157,7 @@ namespace IQCare.CCC.UILogic.Screening
                     Id = id,
                     VisitDate = visitDate,
                     ScreeningTypeId = screeningTypeId,
-                    ScreeningDone = screeningDone,
+                    ScreeningDone = Convert.ToBoolean(screeningDone),
                     ScreeningDate = screeningDate,
                     ScreeningCategoryId = screeningCategoryId,
                     ScreeningValueId = screeningValueId,

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using IQCare.Common.BusinessProcess.Commands.Lookup;
 using IQCare.Common.BusinessProcess.Interfaces;
+using IQCareRecords.Common.BusinessProcess.Command;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -62,7 +63,27 @@ namespace IQCare.Controllers.Common
             return BadRequest(results);
         }
 
+        [HttpGet("getIdentifyerTypes")]
+        public async Task<IActionResult> GetIdentifierType()
+        {
+            var results = await _mediator.Send(new GetPersonIdentificationCommand { CodeName = "PersonIdentification" }, HttpContext.RequestAborted);
 
+            if (results.IsValid)
+                return Ok(results.Value);
+            return BadRequest(results);
+
+        }
+
+        [HttpGet("getRegOccConsentEducationOptions")]
+        public async Task<IActionResult> GetRegOccConsentEducationOptions()
+        {
+            string[] options = new string[] { "Occupation", "EducationalLevel","ConsentOptions","MaritalStatus"};
+            var results = await _mediator.Send(new GetRegistrationOptionsCommand { RegistrationOptions = options }, HttpContext.RequestAborted);
+            if (results.IsValid)
+                return Ok(results.Value);
+            return BadRequest(results);
+
+        }
         [HttpGet("registrationOptions")]
         public async Task<IActionResult> GetOptions()
         {
@@ -124,6 +145,19 @@ namespace IQCare.Controllers.Common
                 return Ok(results.Value);
             return BadRequest(results);
         }
+
+
+        [HttpGet("getConsentType")]
+        public async Task<IActionResult> GetConsentOptions()
+        {
+            var results = await _mediator.Send(new GetConsentTypeCommand() { ItemName = "ConsentToSendSMS" }, HttpContext.RequestAborted);
+            if (results.IsValid)
+                return Ok(results.Value);
+            return BadRequest(results);
+        }
+
+            
+            
 
         [HttpGet("getFacility/{mflCode}")]
         public async Task<IActionResult> GetFacility(string mflCode)

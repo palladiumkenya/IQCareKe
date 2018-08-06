@@ -13,5 +13,7 @@ namespace Interface.CCC.Screening
         List<PatientScreening> GetPatientScreening(int patientId, DateTime visitdate, int screeningCategoryId);
         int CheckIfPatientScreeningExists(int patientId);
         int CheckIfPatientScreeningExists(int patientId, DateTime visitDate, int screeningCategoryId, int screeningTypeId);
+        int checkScreeningByScreeningCategoryId(int patientId, int screenTypeId, int screeningCategoryId);
+        int updatePatientScreeningById(PatientScreening p);
     }
 }
