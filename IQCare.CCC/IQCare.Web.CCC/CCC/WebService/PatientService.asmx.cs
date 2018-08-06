@@ -137,13 +137,13 @@ namespace IQCare.Web.CCC.WebService
                 var screening = new PatientScreeningManager();
                 foreach (PatientScreening patientScreening in screeningResponses)
                 {
-                    patientScreening.Id = screening.CheckIfPatientScreeningExists((Int32)patientScreening.PatientId, (DateTime)patientScreening.VisitDate, patientScreening.ScreeningCategoryId, (Int32)patientScreening.ScreeningTypeId);
+                    patientScreening.Id = screening.CheckIfPatientScreeningExists((Int32)patientScreening.PatientId, (DateTime)patientScreening.VisitDate, (Int32)patientScreening.ScreeningCategoryId, (Int32)patientScreening.ScreeningTypeId);
                     if ( patientScreening.Id <= 0)
                     {
-                        Result = screening.AddPatientScreening(patientScreening.PatientId, patientScreening.PatientMasterVisitId, (DateTime)patientScreening.VisitDate, (Int32)patientScreening.ScreeningTypeId, (bool)patientScreening.ScreeningDone, (DateTime)patientScreening.ScreeningDate, patientScreening.ScreeningCategoryId, patientScreening.ScreeningValueId, patientScreening.Comment, userId);
+                        Result = screening.AddPatientScreening(patientScreening.PatientId, patientScreening.PatientMasterVisitId, (DateTime)patientScreening.VisitDate, (Int32)patientScreening.ScreeningTypeId, (bool)patientScreening.ScreeningDone, (DateTime)patientScreening.ScreeningDate, (Int32)patientScreening.ScreeningCategoryId, patientScreening.ScreeningValueId, patientScreening.Comment, userId);
                     }
                     else {
-                        Result = screening.UpdatePatientScreening(patientScreening.PatientId, (DateTime)patientScreening.VisitDate, (Int32)patientScreening.ScreeningTypeId, (bool)patientScreening.ScreeningDone, (DateTime)patientScreening.ScreeningDate, patientScreening.ScreeningCategoryId, patientScreening.ScreeningValueId, patientScreening.Comment);
+                        Result = screening.UpdatePatientScreening(patientScreening.PatientId, (DateTime)patientScreening.VisitDate, (Int32)patientScreening.ScreeningTypeId, (bool)patientScreening.ScreeningDone, (DateTime)patientScreening.ScreeningDate, (Int32)patientScreening.ScreeningCategoryId, patientScreening.ScreeningValueId, patientScreening.Comment);
                     }
                 }
                 Msg = (Result > 0) ? "Patient Screening Updated Successfully" : "";
