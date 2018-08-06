@@ -200,6 +200,12 @@
 									<span class="fa fa-home fa-2x pull-left text-info"></span> <strong class="text-info">Patient Home</strong>
 								</a>
 							  
+                              <a  href='<%=ResolveClientUrl("~/CCC/ClinicalSummary/ClinicalSummary.aspx") %>' class="list-group-item" id="menuClinicalSummary" >
+									<span class="fa fa-home fa-2x pull-left text-info"></span> <strong class="text-info">Clinical Summary</strong>
+								</a>
+                              <a  href='<%=ResolveClientUrl("~/CCC/FollowupEducation/frmFollowUpEducation.aspx") %>' class="list-group-item" id="menuFollowUpEducationClinical" >
+									<span class="fa fa-home fa-2x pull-left text-info"></span> <strong class="text-info">Follow-Up Education</strong>
+								</a>
 							 
 
 <%--                              <asp:LinkButton ID="LinkButton1" runat="server" OnClick="New_Encounter_Click" CssClass="list-group-item">

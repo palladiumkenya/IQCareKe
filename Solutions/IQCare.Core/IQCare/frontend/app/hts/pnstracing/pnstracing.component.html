@@ -1,0 +1,99 @@
+<div class="ibox">
+    <div class="ibox-title">
+        <app-clientbrief></app-clientbrief>
+    </div>
+    <div class="ibox-content">
+        <div class="row">
+            <div class="col-md-2 col-lg-2 col-sm-2">
+                <app-leftnav></app-leftnav>
+            </div>
+            <div class="col-md-10 col-lg-10 col-sm-10 animated fadeIn">
+                <div class="panel panel-default">
+                    <div class="panel-heading">PNS TRACING</div>
+                    <div class="panel-body">
+                        <app-personbrief></app-personbrief>
+                        <br>
+                        <form id="form" action="#" class="wizard-big" (ngSubmit)="onSubmit()" #pnsTracingForm="ngForm">
+                            <fieldset>
+                                <h2>Contact Tracing and Outcomes</h2>
+                                <div class="example-container">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-6">
+                                            <div class="form-group">
+                                                <div>
+                                                    <mat-form-field>
+                                                        <input matInput [matDatepicker]="myDatepicker" placeholder="Tracing Date" tabindex="1" [max]="maxDate" (click)="myDatepicker.open()" id="pnsTracingDate" name="pnsTracingDate" [(ngModel)]="pnsTracing.TracingDate" #tracingDate="ngModel">
+                                                        <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+                                                        <mat-datepicker #myDatepicker></mat-datepicker>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div>
+                                                    <mat-form-field>
+                                                        <mat-select name="tracingOutcome" id="tracingOutcome" placeholder="Tracing Outcome" [(ngModel)]="pnsTracing.TracingOutcome" #tracingOutcome="ngModel">
+                                                            <mat-option></mat-option>
+                                                            <mat-option *ngFor="let option of pnsTracingOutcome" [value]="option.itemId">{{option.itemName}}</mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div>
+                                                    <mat-form-field>
+                                                        <input matInput [matDatepicker]="pnsBookingDatepicker" placeholder="Date Booked for Testing" [min]="minDate" (click)="pnsBookingDatepicker.open()" id="pnsBookingDate" name="pnsBookingDate" [(ngModel)]="pnsTracing.DateBookedTesting" #dateBookedTesting="ngModel">
+                                                        <mat-datepicker-toggle matSuffix [for]="pnsBookingDatepicker"></mat-datepicker-toggle>
+                                                        <mat-datepicker #pnsBookingDatepicker></mat-datepicker>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-lg-6 col-md-6 col-sm-6">
+                                            <div class="form-group">
+                                                <div>
+                                                    <mat-form-field>
+                                                        <mat-select name="tracingMode" id="tracingMode" placeholder="Tracing Mode" [(ngModel)]="pnsTracing.TracingMode" #tracingMode="ngModel">
+                                                            <mat-option></mat-option>
+                                                            <mat-option *ngFor="let option of tracingModeOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div>
+                                                    <mat-form-field>
+                                                        <mat-select name="consent" id="consent" tabindex="2" placeholder="Consent for Testing" [(ngModel)]="pnsTracing.Consent" #consentTesting="ngModel">
+                                                            <mat-option></mat-option>
+                                                            <mat-option *ngFor="let option of yesNoOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                        <div class="form-group pull-right">
+                                            <button mat-raised-button color="primary">
+                                                <strong>Save Changes</strong>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
