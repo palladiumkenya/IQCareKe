@@ -672,6 +672,8 @@ namespace IQCare.Common.BusinessProcess.Services
             }
             catch (Exception e)
             {
+                Log.Error(e.Message);
+                Log.Error(e.InnerException.ToString());
                 throw e;
             }
         }

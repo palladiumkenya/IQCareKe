@@ -305,8 +305,14 @@ namespace IQCare.Web.CCC.WebService
                         {
                             foreach (var item in identifiersObjects)
                             {
+                                var assigningFacility = "";
+                                if (Convert.ToInt32(item.Key) == 1)
+                                {
+                                    assigningFacility = item.Value.Substring(0, 5);
+                                }
+
                                 patientIdentifierId = patientIdentifierManager.addPatientIdentifier(patientId,
-                                patientEnrollmentId, Convert.ToInt32(item.Key), item.Value, facilityId);
+                                patientEnrollmentId, Convert.ToInt32(item.Key), item.Value, facilityId, assigningFacility);
                                 
                                 var identifierManager = new IdentifierManager();
                                 var identifierList = identifierManager.GetIdentifiersById(Convert.ToInt32(item.Key));
@@ -498,10 +504,15 @@ namespace IQCare.Web.CCC.WebService
                             }
                             else
                             {
+                                var assigningFacility = "";
+                                if (Convert.ToInt32(item.Key) == 1)
+                                {
+                                    assigningFacility = item.Value.Substring(0, 5);
+                                }
                                 patientEnrollmentId = patientEnrollmentManager.addPatientEnrollment(patient.Id, enrollmentDate, userId);
                                 patientEntryPointId = patientEntryPointManager.addPatientEntryPoint(patient.Id, entryPointId, userId);
                                 patientIdentifierId = patientIdentifierManager.addPatientIdentifier(patient.Id,
-                                    patientEnrollmentId, Convert.ToInt32(item.Key), item.Value, facilityId);
+                                    patientEnrollmentId, Convert.ToInt32(item.Key), item.Value, facilityId, assigningFacility);
                             }
                         }
                     }
