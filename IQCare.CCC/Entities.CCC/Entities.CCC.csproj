@@ -101,6 +101,8 @@
     <Compile Include="Encounter\PatientFamilyPlanningMethod.cs" />
     <Compile Include="Baseline\PatientHivTesting.cs" />
     <Compile Include="Baseline\PatientFamilyTesting.cs" />
+    <Compile Include="IL\ILMessageStats.cs" />
+    <Compile Include="IL\ILMessageViewer.cs" />
     <Compile Include="Encounter\PatientNeonatalHistory.cs" />
     <Compile Include="Encounter\PatientSocialHistory.cs" />
     <Compile Include="Encounter\SocialHistory.cs" />

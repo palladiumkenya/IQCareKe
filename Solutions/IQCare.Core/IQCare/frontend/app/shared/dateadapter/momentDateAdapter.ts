@@ -1,12 +1,13 @@
 import { NativeDateAdapter } from '@angular/material';
 import * as moment from 'moment';
+import { Platform } from '../../../../node_modules/@angular/cdk/platform';
 
 
 export class AppDateAdapter extends NativeDateAdapter {
 
-    constructor() {
-        super('en-US');
-    }
+    /*constructor() {
+        super('en-US', Platform);
+    }*/
 
     format(date: Date, displayFormat: Object): string {
         if (displayFormat === 'input') {

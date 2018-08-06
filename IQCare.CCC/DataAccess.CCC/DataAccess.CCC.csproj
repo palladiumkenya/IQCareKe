@@ -113,6 +113,8 @@
     <Compile Include="Interface\enrollment\IPatientReEnrollmentRepository.cs" />
     <Compile Include="Interface\enrollment\IPersonIdentifierRepository.cs" />
     <Compile Include="Interface\enrollment\IServiceAreaIdentifiersRepository.cs" />
+    <Compile Include="Interface\IL\iILMessageStatsRepository.cs" />
+    <Compile Include="Interface\IL\iILMessageViewerRepository.cs" />
     <Compile Include="Interface\IL\IIlMessengerRepository.cs" />
     <Compile Include="Interface\IL\IIlStatisticsRepository.cs" />
     <Compile Include="Interface\Interoperability\IDrugPrescriptionMessageRepository.cs" />
@@ -220,6 +222,8 @@
     <Compile Include="Repository\Enrollment\PatientReEnrollmentRepository.cs" />
     <Compile Include="Repository\Enrollment\PersonIdentifierRepository.cs" />
     <Compile Include="Repository\Enrollment\ServiceAreaIdentifiersRepository.cs" />
+    <Compile Include="Repository\IL\ILMessageStatsRepository.cs" />
+    <Compile Include="Repository\IL\ILMessageViewerRepository.cs" />
     <Compile Include="Repository\IL\IlMessengerRepository.cs" />
     <Compile Include="Repository\IL\IlStatisticsRepository.cs" />
     <Compile Include="Repository\Interoperability\DrugPrescriptionMessageRepository.cs" />

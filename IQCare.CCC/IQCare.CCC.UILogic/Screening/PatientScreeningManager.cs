@@ -11,7 +11,7 @@ namespace IQCare.CCC.UILogic.Screening
         private IPatientScreeningManager _patientScreening = (IPatientScreeningManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Screening.BPatientScreeningManager, BusinessProcess.CCC");
 
 
-        public int AddPatientScreening(int patientId,int patientMasterVisitid,DateTime visitDate,int screeningTypeId,int screeningDone,DateTime screeningDate,int screeningCategoryId,int screeningValueId,string comment,int userId)
+        public int AddPatientScreening(int patientId,int patientMasterVisitid,DateTime visitDate,int screeningTypeId,bool screeningDone,DateTime screeningDate,int screeningCategoryId,int screeningValueId,string comment,int userId)
         {
             try
             {
@@ -96,6 +96,19 @@ namespace IQCare.CCC.UILogic.Screening
             }
         }
 
+        public int CheckIfPatientScreeningExists(int patientId, DateTime visitDate, int screeningCategoryId, int screeningTypeId)
+        {
+            try
+            {
+                return _patientScreening.CheckIfPatientScreeningExists(patientId, visitDate, screeningCategoryId, screeningTypeId);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public int DeletePatientScreening(int Id)
         {
             try
@@ -122,7 +135,20 @@ namespace IQCare.CCC.UILogic.Screening
             }
         }
 
-        public int UpdatePatientScreening(int id,DateTime visitDate ,int screeningTypeId, int screeningDone, DateTime screeningDate, int screeningCategoryId, int screeningValueId, string comment)
+        public List<PatientScreening> GetPatientScreening(int patientId, DateTime visitDate, int screeningCategoryId)
+        {
+            try
+            {
+                return _patientScreening.GetPatientScreening(patientId, visitDate, screeningCategoryId);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public int UpdatePatientScreening(int id,DateTime visitDate ,int screeningTypeId, bool screeningDone, DateTime screeningDate, int screeningCategoryId, int screeningValueId, string comment)
         {
             try
             {

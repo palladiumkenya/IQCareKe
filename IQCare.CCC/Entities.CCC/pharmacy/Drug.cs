@@ -7,6 +7,12 @@ namespace Entities.CCC.pharmacy
     [Table("Mst_Drug")]
     public class Drug
     {
+        public Drug()
+        {
+            DrugID = "";
+            ItemInstructions = "";
+            Abbreviation = "";
+        }
         public int Drug_pk { get; set; }
         public string DrugID { get; set; }
         public int ItemTypeID { get; set; }

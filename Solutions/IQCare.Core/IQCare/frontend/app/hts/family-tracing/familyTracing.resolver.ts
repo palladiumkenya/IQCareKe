@@ -1,5 +1,5 @@
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {LookupItemView} from '../../shared/_models/LookupItemView';
 import {Injectable} from '@angular/core';
 import {FamilyService} from '../_services/family.service';

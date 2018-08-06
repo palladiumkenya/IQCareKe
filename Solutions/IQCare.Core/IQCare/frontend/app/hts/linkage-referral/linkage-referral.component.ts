@@ -8,7 +8,7 @@ import { Tracing } from '../_models/tracing';
 import { ActivatedRoute, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import * as Consent from '../../shared/reducers/app.states';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { SnotifyService } from 'ng-snotify';
 import { NotificationService } from '../../shared/_services/notification.service';
@@ -25,7 +25,10 @@ export class LinkageReferralComponent implements OnInit {
     form: FormGroup;
     referral: Referral;
     tracing: Tracing;
+
     tracingArray: Tracing[];
+    tracingMergeArray: Tracing[];
+
     tracingModeOptions: any[];
     tracingOutcomeOptions: any[];
     tracingTypeOptions: any[];
@@ -63,6 +66,7 @@ export class LinkageReferralComponent implements OnInit {
         this.referral = new Referral();
         this.tracing = new Tracing();
         this.tracingArray = [];
+        this.tracingMergeArray = [];
 
         this.form = this._formBuilder.group({
             dateToBeEnrolled: new FormControl(this.referral.dateToBeEnrolled, [Validators.required])
@@ -70,9 +74,32 @@ export class LinkageReferralComponent implements OnInit {
 
         // Fetch previous referral if it exists
         this.getClientReferral();
+        // Fetch previous tracing if it exists
+        this.getClientPreviousTracing();
+
 
         this.getTracingOptions();
         this.getReferralReasons();
+    }
+
+    getClientPreviousTracing() {
+        const personId = JSON.parse(localStorage.getItem('personId'));
+        this._linkageReferralService.getClientPreviousTracing(personId).subscribe(
+            (res) => {
+                console.log(res);
+                for (let i = 0; i < res.length; i++) {
+                    console.log(res[i]);
+                    this.tracing.tracingDate = res[i].tracingDate;
+                    this.tracing.outcome = res[i].tracingOutcome;
+                    this.tracing.mode = res[i].tracingMode;
+                    this.tracingMergeArray.push(this.tracing);
+                    this.tracing = new Tracing();
+                }
+            },
+            (error) => {
+                this.snotifyService.error('Failed to fetch previous tracing', 'Referral', this.notificationService.getConfig());
+            }
+        );
     }
 
     getClientReferral() {
@@ -96,7 +123,7 @@ export class LinkageReferralComponent implements OnInit {
                 }
             },
             (error) => {
-
+                this.snotifyService.error('Failed to fetch previous referral', 'Referral', this.notificationService.getConfig());
             }
         );
     }
@@ -126,6 +153,11 @@ export class LinkageReferralComponent implements OnInit {
                 this.tracing.mode = data.mode;
 
                 this.tracingArray.push(this.tracing);
+                const newValue = new Tracing();
+                newValue.mode = data.mode.displayName;
+                newValue.tracingDate = data.tracingDate;
+                newValue.outcome = data.outcome.displayName;
+                this.tracingMergeArray.push(newValue);
                 this.tracing = new Tracing();
             }
         );

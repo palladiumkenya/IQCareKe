@@ -30,7 +30,7 @@ namespace BusinessProcess.CCC.Screening
             using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 var ps = unitOfWork.PatientScreeningRepository.FindBy(
-                    x => x.PatientId == u.PatientId & !x.DeleteFlag)
+                    x => x.Id == u.Id)
                     .FirstOrDefault();
                 if (ps != null)
                 {
@@ -82,6 +82,16 @@ namespace BusinessProcess.CCC.Screening
             }
         }
 
+        public List<PatientScreening> GetPatientScreening(int patientId, DateTime visitDate, int screeningCategoryId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var screeningList = unitOfWork.PatientScreeningRepository.FindBy(x => x.PatientId == patientId & x.VisitDate == visitDate && x.ScreeningCategoryId == screeningCategoryId & !x.DeleteFlag).ToList();
+                unitOfWork.Dispose();
+                return screeningList;
+            }
+        }
+
         public int CheckIfPatientScreeningExists(int patientId)
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
@@ -98,6 +108,17 @@ namespace BusinessProcess.CCC.Screening
             using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 var PS = unitOfWork.PatientScreeningRepository.FindBy(x => x.PatientId == patientId & x.ScreeningTypeId == screenTypeId & x.ScreeningCategoryId == screeningCategoryId & !x.DeleteFlag)
+                      .Select(x => x.Id)
+                      .FirstOrDefault();
+                unitOfWork.Dispose();
+                return Convert.ToInt32(PS);
+            }
+        }
+
+        public int CheckIfPatientScreeningExists(int patientId, DateTime visitDate, int screeningCategoryId, int screeningTypeId ) {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var PS = unitOfWork.PatientScreeningRepository.FindBy(x => x.PatientId == patientId & x.VisitDate == visitDate & x.ScreeningCategoryId == screeningCategoryId & x.ScreeningTypeId == screeningTypeId & !x.DeleteFlag)
                       .Select(x => x.Id)
                       .FirstOrDefault();
                 unitOfWork.Dispose();

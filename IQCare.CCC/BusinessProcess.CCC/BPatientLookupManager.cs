@@ -121,7 +121,12 @@ namespace BusinessProcess.CCC
 
                     //expresionFinal = PredicateBuilder.And(expresionFinal, expressionPatientStatus);
                     Expression<Func<PatientLookup, bool>> expressionPatientStatusEnrolled =
-                                    c => c.PatientStatus.ToLower().Contains("active") || c.PatientStatus.ToLower().Contains("death") || c.PatientStatus.ToLower().Contains("losttofollowup") || c.PatientStatus.ToLower().Contains("transfer out") || c.PatientStatus.ToLower().Contains("hiv negative");
+                                    c => c.PatientStatus.ToLower().Contains("active") || 
+                                    c.PatientStatus.ToLower().Contains("death") || 
+                                    c.PatientStatus.ToLower().Contains("losttofollowup") || 
+                                    c.PatientStatus.ToLower().Contains("transfer out") || 
+                                    c.PatientStatus.ToLower().Contains("confirmed hiv negative") ||
+                                    c.PatientStatus.ToLower().Contains("hiv negative");
                     expresionFinal = PredicateBuilder.And(expresionFinal, expressionPatientStatusEnrolled);
                     patientLookups = unitOfWork.PatientLookupRepository.Filter(expresionFinal).Take(PredicateBuilder.MaxRecord).ToList();
 

@@ -44,6 +44,7 @@ namespace IQCare.Web.CCC.WebService
         public string cccReferalNumber { get; set; }
         public DateTime? cccReferalDate { get; set; }
     }
+
     /// <summary>
     /// Summary description for PatientService
     /// </summary>
@@ -69,6 +70,7 @@ namespace IQCare.Web.CCC.WebService
             {
                 PatientEncounterManager patientEncounterManager=new PatientEncounterManager();
                 int facilityId = Convert.ToInt32(Session["AppPosID"]);
+                int createdBy = Session["AppUserID"] != null ? Convert.ToInt32(Session["AppUserID"]) : 0;
 
                 PatientVital patientVital = new PatientVital()
                 {
@@ -89,8 +91,7 @@ namespace IQCare.Web.CCC.WebService
                     BMIZ = bmiz,
                     WeightForAge = weightForAge,
                     WeightForHeight = weightForHeight,
-                    //AgeforZ = ageforZ,
-                    NursesComments = nursesComments
+                    CreatedBy = createdBy
                 };
                 var vital = new PatientVitalsManager();
                 Result = vital.AddPatientVitals(patientVital, facilityId);
@@ -112,13 +113,59 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string AddPatientScreening(int patientId, int patientMasterVisitid,DateTime visitDate, int screeningTypeId, int screeningDone, DateTime screeningDate, int screeningCategoryId, int screeningValueId, string comment, int userId)
+        public string AddPatientScreening(int patientId, int patientMasterVisitid,DateTime visitDate, int screeningTypeId, bool screeningDone, DateTime screeningDate, int screeningCategoryId, int screeningValueId, string comment, int userId)
         {
             try
             {
                 var screening=new PatientScreeningManager();
                 Result = screening.AddPatientScreening(patientId, patientMasterVisitid,visitDate,screeningTypeId,screeningDone, screeningDate,screeningCategoryId, screeningValueId,comment, userId);
                 Msg = (Result > 0) ? "Patient Screening Added Successfully" : "";
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message;
+            }
+            return Msg;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string AddPatientScreening(string screeningResponseString, int userId)
+        {
+            try
+            {
+                var screeningResponses = new JavaScriptSerializer().Deserialize<List<PatientScreening>>(screeningResponseString);
+                var screening = new PatientScreeningManager();
+                foreach (PatientScreening patientScreening in screeningResponses)
+                {
+                    patientScreening.Id = screening.CheckIfPatientScreeningExists((Int32)patientScreening.PatientId, (DateTime)patientScreening.VisitDate, patientScreening.ScreeningCategoryId, (Int32)patientScreening.ScreeningTypeId);
+                    if ( patientScreening.Id <= 0)
+                    {
+                        Result = screening.AddPatientScreening(patientScreening.PatientId, patientScreening.PatientMasterVisitId, (DateTime)patientScreening.VisitDate, (Int32)patientScreening.ScreeningTypeId, (bool)patientScreening.ScreeningDone, (DateTime)patientScreening.ScreeningDate, patientScreening.ScreeningCategoryId, patientScreening.ScreeningValueId, patientScreening.Comment, userId);
+                    }
+                    else {
+                        Result = screening.UpdatePatientScreening(patientScreening.PatientId, (DateTime)patientScreening.VisitDate, (Int32)patientScreening.ScreeningTypeId, (bool)patientScreening.ScreeningDone, (DateTime)patientScreening.ScreeningDate, patientScreening.ScreeningCategoryId, patientScreening.ScreeningValueId, patientScreening.Comment);
+                    }
+                }
+                Msg = (Result > 0) ? "Patient Screening Updated Successfully" : "";
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message;
+            }
+            return Msg;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string GetPatientScreening(int patientId, DateTime visitDate, int screeningcategoryId)
+        {
+            try
+            {
+                var screening = new PatientScreeningManager();
+                
+                var results = screening.GetPatientScreening(patientId, visitDate, screeningcategoryId);
+
+                Msg = new JavaScriptSerializer().Serialize(results);
+
             }
             catch (Exception e)
             {

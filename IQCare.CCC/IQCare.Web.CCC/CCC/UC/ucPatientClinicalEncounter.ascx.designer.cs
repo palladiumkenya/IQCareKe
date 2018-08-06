@@ -1012,6 +1012,15 @@ namespace IQCare.Web.CCC.UC {
         protected global::IQCare.Web.CCC.UC.ucPatientLabs ucPatientLabs;
         
         /// <summary>
+        /// ucGenderBasedViolenceAssessment control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::IQCare.Web.CCC.UC.ucGenderBasedViolenceAssessment ucGenderBasedViolenceAssessment;
+        
+        /// <summary>
         /// AppointmentDate control.
         /// </summary>
         /// <remarks>
