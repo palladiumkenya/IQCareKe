@@ -12,6 +12,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Entities.CCC.Screening;
+using IQCare.CCC.UILogic.Encounter;
+using IQCare.CCC.UILogic.Screening;
 
 namespace IQCare.Web.CCC.UC
 {
@@ -33,6 +36,11 @@ namespace IQCare.Web.CCC.UC
         public string AppointmentId;
         public Boolean IsEditAppointment = false;
         public int IsEditAppointmentId = 0;
+        public RadioButtonList rbList;
+        public TextBox notesTb;
+        public int NotesId;
+        public int userId;
+        public int screenTypeId;
 
         protected int UserId
         {
@@ -66,6 +74,7 @@ namespace IQCare.Web.CCC.UC
             age = Convert.ToInt32(HttpContext.Current.Session["Age"]);
             PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
             PatientMasterVisitId = Convert.ToInt32(Request.QueryString["visitId"] != null ? Request.QueryString["visitId"] : HttpContext.Current.Session["PatientMasterVisitId"]);
+            userId = Convert.ToInt32(Session["AppUserId"]);
             if (Request.QueryString["visitId"] != null)
             {
                 Session["ExistingRecordPatientMasterVisitID"] = Request.QueryString["visitId"].ToString();
@@ -164,6 +173,10 @@ namespace IQCare.Web.CCC.UC
                 lookUp.populateDDL(ddlAllergySeverity, "ADRSeverity");
                 lookUp.populateDDL(stabilityStatus, "StabilityAssessment");
                 //lookUp.populateDDL(WHOStage, "WHOStage");
+                //Patient Nutrition assessment notes and screening
+                getPatientNotesandScreening();
+                populatePNS();
+                getPNSData();
 
                 var patientVitals = new PatientVitalsManager();
                 PatientVital patientTriage = patientVitals.GetByPatientId(Convert.ToInt32(Session["PatientPK"].ToString()));
@@ -197,7 +210,88 @@ namespace IQCare.Web.CCC.UC
             Control SocialHoistoryCtrl = Page.LoadControl("~/CCC/UC/ucSocialHistory.ascx");
             SocialHistoryPH.Controls.Add(SocialHoistoryCtrl);
         }
+        private void populatePNS()
+        {
+            LookupLogic lookUp = new LookupLogic();
+            LookupItemView[] questionsList = lookUp.getQuestions("NutritionAssessment").ToArray();
+            int i = 0;
+            foreach (var value in questionsList)
+            {
+                i = i + 1;
+                screenTypeId = value.MasterId;
+                string radioItems = "";
+                int notesValue = 0;
+                LookupItemView[] itemList = lookUp.getQuestions(value.ItemName).ToArray();
+                if (itemList.Any())
+                {
+                    foreach (var items in itemList)
+                    {
+                        if (items.ItemName == "Notes")
+                        {
+                            notesValue = items.ItemId;
+                        }
+                        else
+                        {
+                            radioItems = items.ItemName;
+                        }
+                    }
+                }
+                PHNutritionScreeningNotes.Controls.Add(new LiteralControl("<div class='col-md-12' id='" + value.ItemName + "'>"));
+                //Rdaios start
+                if (radioItems != "")
+                {
+                    PHNutritionScreeningNotes.Controls.Add(new LiteralControl("<div class='col-md-8 text-left'>"));
+                    PHNutritionScreeningNotes.Controls.Add(new LiteralControl("<label>" + value.ItemDisplayName + "" + "</label>"));
+                    PHNutritionScreeningNotes.Controls.Add(new LiteralControl("</div>"));
+                    PHNutritionScreeningNotes.Controls.Add(new LiteralControl("<div class='col-md-4 text-right'>"));
+                    rbList = new RadioButtonList();
+                    rbList.ID = "nutritionarb" + value.ItemId.ToString();
+                    rbList.RepeatColumns = 2;
+                    rbList.ClientIDMode = System.Web.UI.ClientIDMode.Static;
+                    rbList.CssClass = "narbList";
+                    lookUp.populateRBL(rbList, radioItems);
+                    PHNutritionScreeningNotes.Controls.Add(rbList);
+                    PHNutritionScreeningNotes.Controls.Add(new LiteralControl("</div>"));
+                }
+                else
+                {
+                    PHNutritionScreeningNotes.Controls.Add(new LiteralControl("<div class='col-md-12 text-left'>"));
+                    PHNutritionScreeningNotes.Controls.Add(new LiteralControl("<label>" + value.ItemDisplayName + "" + radioItems + "</label>"));
+                    PHNutritionScreeningNotes.Controls.Add(new LiteralControl("</div>"));
+                }
 
+                //Radios end
+                //notes start
+                if (notesValue > 0)
+                {
+                    if (radioItems == "GeneralYesNo")
+                    {
+                        PHNutritionScreeningNotes.Controls.Add(new LiteralControl("<div class='col-md-12 text-left notessection'>"));
+                    }
+                    else
+                    {
+                        PHNutritionScreeningNotes.Controls.Add(new LiteralControl("<div class='col-md-12 text-left'>"));
+                    }
+
+                    NotesId = value.ItemId;
+                    notesTb = new TextBox();
+                    notesTb.TextMode = TextBoxMode.MultiLine;
+                    notesTb.CssClass = "form-control input-sm";
+                    notesTb.ClientIDMode = System.Web.UI.ClientIDMode.Static;
+                    notesTb.ID = "nutritionatb" + value.ItemId.ToString();
+                    notesTb.Rows = 3;
+                    PHNutritionScreeningNotes.Controls.Add(notesTb);
+                    PHNutritionScreeningNotes.Controls.Add(new LiteralControl("</div>"));
+                }
+                //notes end
+                PHNutritionScreeningNotes.Controls.Add(new LiteralControl("</div>"));
+                var lastItem = questionsList.Last();
+                if (!value.Equals(lastItem))
+                {
+                    PHNutritionScreeningNotes.Controls.Add(new LiteralControl("<hr />"));
+                }
+            }
+        }
         private void loadPatientEncounter()
         {
             Entities.CCC.Encounter.PatientEncounter.PresentingComplaintsEntity pce = new Entities.CCC.Encounter.PatientEncounter.PresentingComplaintsEntity();
@@ -349,6 +443,49 @@ namespace IQCare.Web.CCC.UC
             Page.ClientScript.RegisterStartupScript(this.GetType(), "IcfChange", "IcfChange();", true);
             Page.ClientScript.RegisterStartupScript(this.GetType(), "IcfActionChange", "IcfActionChange();", true);
             
+        }
+        public void getPNSData()
+        {
+            var PCN = new PatientClinicalNotesLogic();
+            List<PatientClinicalNotes> notesList = PCN.getPatientClinicalNotes(PatientId);
+            if (notesList.Any())
+            {
+                foreach (var value in notesList)
+                {
+                    //RefId = Convert.ToInt32(value.NotesCategoryId);
+                    TextBox ntb = (TextBox)PHNutritionScreeningNotes.FindControl("nutritionatb" + value.NotesCategoryId.ToString());
+                    if (ntb != null)
+                    {
+                        ntb.Text = value.ClinicalNotes;
+                    }
+                }
+            }
+
+            var PSM = new PatientScreeningManager();
+            List<PatientScreening> screeningList = PSM.GetPatientScreening(PatientId);
+            if (screeningList != null)
+            {
+                foreach (var value in screeningList)
+                {
+                    //RefId = Convert.ToInt32(value.ScreeningTypeId);
+                    RadioButtonList rbl = (RadioButtonList)PHNutritionScreeningNotes.FindControl("nutritionarb" + value.ScreeningCategoryId.ToString());
+                    if (rbl != null)
+                    {
+                        rbl.SelectedValue = value.ScreeningValueId.ToString();
+                    }
+                }
+            }
+        }
+        public void getPatientNotesandScreening()
+        {
+            var PCN = new PatientClinicalNotesLogic();
+            var PSM = new PatientScreeningManager();
+            //get screening data
+            PatientScreening[] patientScreeningData = PSM.GetPatientScreening(PatientId).ToArray();
+            Session["patientScreeningData"] = patientScreeningData;
+            //get notes data
+            PatientClinicalNotes[] patientNotesData = PCN.getPatientClinicalNotes(PatientId).ToArray();
+            Session["patientNotesData"] = patientNotesData;
         }
     }
 }

@@ -5,8 +5,10 @@
 <%@ Register TagPrefix="uc" TagName="tnPsychosocialCircumstances" Src="~/CCC/UC/Adherence/ucPsychosocialCircumstances.ascx" %>
 <%@ Register TagPrefix="uc" TagName="tnScreening" Src="~/CCC/UC/Adherence/ucScreening.ascx" %>
 <%@ Register TagPrefix="uc" TagName="tnReferralsandNetworks" Src="~/CCC/UC/Adherence/ucReferralsandNetworks.ascx" %>
+<%@ OutputCache duration="86400" varybyparam="none" %>
 <style>
         .control-label{text-align: left !important;}
+        .adherencebarriersloading{position: absolute;width: 100%;height: 100%;z-index:999;background: rgba(204, 204, 204, 0.5);}
     </style>
     <div class="col-md-12" style="padding-top: 20px">
         <div class="col-md-12">
@@ -66,22 +68,25 @@
 					    </button>
 				    </div>
                 </div>
-                
+                <div class="adherencebarriersloading"><img src="../../Images/PEPloading.gif" /></div>
             </div>
         </div>
     </div>
-    <script type="text/javascript">
-        jQuery(function ($) {
-            $('#abmyWizard').wizard();
+<script type="text/javascript">
+    jQuery(function ($) {
+        $('#abmyWizard').wizard();
+        $('#abmyWizard').find('#dsSectionOne').toggleClass('complete', true);
+        $('#abmyWizard').find('#dsSectionTwo').toggleClass('complete', true);
+        $('#abmyWizard').find('#dsSectionThree').toggleClass('complete', true);
+        $('#abmyWizard').find('#dsSectionFour').toggleClass('complete', true);
+        $('#abmyWizard').on('changed.fu.wizard', function (evt, data) {
             $('#abmyWizard').find('#dsSectionOne').toggleClass('complete', true);
             $('#abmyWizard').find('#dsSectionTwo').toggleClass('complete', true);
             $('#abmyWizard').find('#dsSectionThree').toggleClass('complete', true);
             $('#abmyWizard').find('#dsSectionFour').toggleClass('complete', true);
-            $('#abmyWizard').on('changed.fu.wizard', function (evt, data) {
-                $('#abmyWizard').find('#dsSectionOne').toggleClass('complete', true);
-                $('#abmyWizard').find('#dsSectionTwo').toggleClass('complete', true);
-                $('#abmyWizard').find('#dsSectionThree').toggleClass('complete', true);
-                $('#abmyWizard').find('#dsSectionFour').toggleClass('complete', true);
-            });
         });
-    </script>
+    });
+    //$("#loadAdherenceBarriers").click(function () {
+    //    $(".adherencebarriersloading").show();
+    //});
+</script>

@@ -11,6 +11,9 @@ using Entities.CCC.Screening;
 using Entities.CCC.Encounter;
 using IQCare.CCC.UILogic.Encounter;
 using Entities.CCC.Appointment;
+using System.Web.Script.Serialization;
+using System.IO;
+
 namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
 {
     public partial class ucSession1 : System.Web.UI.UserControl
@@ -52,7 +55,7 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
                 populateEmotionalBarriers();
                 populateSocioEconomicBarriers();
                 populateReferrals();
-                getSessionData(PatientId,PatientMasterVisitId);
+                getSessionData(PatientId, PatientMasterVisitId);
             }
         }
         protected void getAdherenceCtrls()
@@ -82,12 +85,24 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
             appointmentDateTb.ID = "session1tb" + LookupLogic.GetLookupItemId("Session1FollowupDate");
             PHFollowupDate.Controls.Add(appointmentDateTb);
         }
-        public void populateMMAS()
+        private void populateMMAS()
         {
             LookupLogic lookUp = new LookupLogic();
             LookupItemView[] questionsList = lookUp.getQuestions("MMAS4").ToArray();
+            LookupItemView[] questionsArray;
+            //string jsondata = new JavaScriptSerializer().Serialize(questionsList);
+            //string path = Server.MapPath("~/CCC/Data/");
+            //System.IO.File.WriteAllText(path + "output.json", jsondata);
+            string path = Server.MapPath("~/CCC/Data/output.json");
             int i = 0;
-            foreach (var value in questionsList)
+            using (StreamReader r = new StreamReader(path))
+            {
+                string json = r.ReadToEnd();
+                JavaScriptSerializer ser = new JavaScriptSerializer();
+                questionsArray = ser.Deserialize<LookupItemView[]>(json);
+                //List<Item> items = JsonConvert.DeserializeObject<List<Item>>(json);
+            }
+            foreach (var value in questionsArray)
             {
                 i = i + 1;
                 screenTypeId = value.MasterId;
@@ -108,7 +123,7 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
                     PHMMAS4.Controls.Add(new LiteralControl("</div>"));
                     PHMMAS4.Controls.Add(new LiteralControl("<div class='col-md-4 text-right'>"));
                     rbList = new RadioButtonList();
-                    rbList.ID = "session1rb"+value.ItemId.ToString();
+                    rbList.ID = "session1rb" + value.ItemId.ToString();
                     rbList.RepeatColumns = 2;
                     rbList.ClientIDMode = System.Web.UI.ClientIDMode.Static;
                     rbList.CssClass = "mmrbList";
@@ -117,7 +132,7 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
                     PHMMAS4.Controls.Add(new LiteralControl("</div>"));
                 }
                 PHMMAS4.Controls.Add(new LiteralControl("</div>"));
-                var lastItem = questionsList.Last();
+                var lastItem = questionsArray.Last();
                 if (!value.Equals(lastItem))
                 {
                     PHMMAS4.Controls.Add(new LiteralControl("<hr />"));
@@ -151,7 +166,7 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
                         PHMMAS8.Controls.Add(new LiteralControl("</div>"));
                         PHMMAS8.Controls.Add(new LiteralControl("<div class='col-md-8 text-right'>"));
                         rbList = new RadioButtonList();
-                        rbList.ID = "session1rb"+value.ItemId.ToString();
+                        rbList.ID = "session1rb" + value.ItemId.ToString();
                         rbList.RepeatColumns = 5;
                         rbList.ClientIDMode = System.Web.UI.ClientIDMode.Static;
                         rbList.CssClass = "mmrbList";
@@ -166,7 +181,7 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
                         PHMMAS8.Controls.Add(new LiteralControl("</div>"));
                         PHMMAS8.Controls.Add(new LiteralControl("<div class='col-md-4 text-right'>"));
                         rbList = new RadioButtonList();
-                        rbList.ID = "session1rb"+value.ItemId.ToString();
+                        rbList.ID = "session1rb" + value.ItemId.ToString();
                         rbList.RepeatColumns = 2;
                         rbList.ClientIDMode = System.Web.UI.ClientIDMode.Static;
                         rbList.CssClass = "mmrbList";
@@ -530,7 +545,8 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
         protected void getSessionData(int patientId, int patientMasterVisitId)
         {
             var PCN = new PatientClinicalNotesLogic();
-            PatientClinicalNotes[] notesList = PCN.getPatientClinicalNotes(PatientId).ToArray();
+            //PatientClinicalNotes[] notesList = PCN.getPatientClinicalNotes(PatientId).ToArray();
+            PatientClinicalNotes[] notesList = (PatientClinicalNotes[])Session["PatientNotesData"];
             if (notesList.Any())
             {
                 foreach (var value in notesList)
@@ -544,17 +560,21 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
                     if(LookupLogic.GetLookupItemId("Session1FollowupDate") == value.NotesCategoryId.ToString())
                     {
                         PatientAppointmentManager appointmentmgr = new PatientAppointmentManager();
-                        List<PatientAppointment> paList = appointmentmgr.GetByDate(Convert.ToDateTime(value.ClinicalNotes));
-                        foreach (var pavalue in paList)
+                        if(value.ClinicalNotes != "")
                         {
-                            appointmentId = pavalue.Id;
+                            List<PatientAppointment> paList = appointmentmgr.GetByDate(Convert.ToDateTime(value.ClinicalNotes));
+                            foreach (var pavalue in paList)
+                            {
+                                appointmentId = pavalue.Id;
+                            }
                         }
+                        
                     }
                 }
             }
 
             var PSM = new PatientScreeningManager();
-            PatientScreening[] screeningList = PSM.GetPatientScreening(PatientId).ToArray();
+            PatientScreening[] screeningList = (PatientScreening[])Session["PatientScreeningData"];
             if (screeningList != null)
             {
                 foreach (var value in screeningList)

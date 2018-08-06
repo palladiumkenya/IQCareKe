@@ -1,4 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucReferralsandNetworks.ascx.cs" Inherits="IQCare.Web.CCC.UC.Adherence.ucReferralsandNetworks" %>
+<%@ OutputCache duration="86400" varybyparam="none" %>
 <div class="col-md-12 form-group">
 	<div class="col-md-12">
 		<div class="panel panel-info">
@@ -71,7 +72,48 @@
             toastr.success("Referrals and Networks Saved");
         }
     }
-
+    $(document).ready(function () {
+        $.ajax({
+            type: "POST",
+            url: "../WebService/PatientClinicalNotesService.asmx/getPatientNotes",
+            data: "{'PatientId': '" + patientId + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            cache: false,
+            success: function (response) {
+                //alert(JSON.stringify(response));
+                $.each(JSON.parse(response.d), function (index, value) {
+                    inputnotes = this.ClinicalNotes;
+                    if ($("#" + this.NotesCategoryId).length > 0) {
+                        $("#" + this.NotesCategoryId).val(inputnotes);
+                    }
+                });
+            },
+            error: function (response) {
+                toastr.error("Notes could not be loaded");
+            }
+        });
+        $.ajax({
+            type: "POST",
+            url: "../WebService/PatientScreeningService.asmx/getPatientScreening",
+            data: "{'PatientId': '" + patientId + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            cache: false,
+            success: function (response) {
+                $.each(JSON.parse(response.d), function (index, value) {
+                    if ($("#" + this.ScreeningCategoryId).length > 0) {
+                        var radioBtns = "#" + this.ScreeningCategoryId;
+                        $(radioBtns + " input:radio[value='" + this.ScreeningValueId + "']").attr("checked", true);
+                    }
+                });
+                $(".adherencebarriersloading").hide();
+            },
+            error: function (response) {
+                toastr.error("Screening could  not be loaded");
+            }
+        });
+    });
     jQuery(function ($) {
         var refId = <%=RefId%>;
         if (refId > 0) {

@@ -2,7 +2,8 @@
 using System.Web.Services;
 using IQCare.CCC.UILogic.Encounter;
 using IQCare.CCC.UILogic.Screening;
-
+using System.Web.Script.Serialization;
+using Entities.CCC.Screening;
 namespace IQCare.Web.CCC.WebService
 {
     /// <summary>
@@ -34,6 +35,14 @@ namespace IQCare.Web.CCC.WebService
                 Msg = e.Message;
             }
             return Msg;
+        }
+        [WebMethod(EnableSession = true)]
+        public string getPatientScreening(int PatientId)
+        {
+            PatientScreening[] patientScreeningData = (PatientScreening[])Session["patientScreeningData"];
+            string jsonScreeningObject = "[]";
+            jsonScreeningObject = new JavaScriptSerializer().Serialize(patientScreeningData);
+            return jsonScreeningObject;
         }
     }
 }

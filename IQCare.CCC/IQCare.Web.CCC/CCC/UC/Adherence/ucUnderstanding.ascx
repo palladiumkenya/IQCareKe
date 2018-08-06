@@ -1,4 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucUnderstanding.ascx.cs" Inherits="IQCare.Web.CCC.UC.Adherence.ucUnderstanding" %>
+<%@ OutputCache duration="86400" varybyparam="none" %>
 <div class="col-md-12 form-group">
 	<div class="col-md-12">
 		<div class="panel panel-info">
@@ -25,7 +26,6 @@
     function addUpdateUHScreeningData() {
         var error = 0;
         $("#UnderstandingHIVInfection input[type=radio]:checked").each(function () {
-            alert("Saving");
             var screeningValue = $(this).val();
             var screeningCategory = $(this).closest("table").attr('id');
             var screeningType = <%=screenTypeId%>;
@@ -45,13 +45,32 @@
                     error = 1;
                 }
             });
-            alert("Done");
         });
         if (error == 0) {
             toastr.success("Understanding of HIV infection and ART Saved");
         }
     }
-
+    $(document).ready(function () {
+        $.ajax({
+            type: "POST",
+            url: "../WebService/PatientScreeningService.asmx/getPatientScreening",
+            data: "{'PatientId': '" + patientId + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            cache: false,
+            success: function (response) {
+                $.each(JSON.parse(response.d), function (index, value) {
+                    if ($("#" + this.ScreeningCategoryId).length > 0) {
+                        var radioBtns = "#" + this.ScreeningCategoryId;
+                        $(radioBtns + " input:radio[value='" + this.ScreeningValueId + "']").attr("checked", true);
+                    }
+                });
+            },
+            error: function (response) {
+                toastr.error("Screening could  not be loaded");
+            }
+        });
+    });
     jQuery(function ($) {
         var uId = <%=understandingId%>;
         if (uId > 0) {

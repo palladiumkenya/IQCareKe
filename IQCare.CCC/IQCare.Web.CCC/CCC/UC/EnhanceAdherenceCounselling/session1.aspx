@@ -1,4 +1,5 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucSession1.ascx.cs" Inherits="IQCare.Web.CCC.UC.EnhanceAdherenceCounselling.ucSession1" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="session1.aspx.cs" Inherits="IQCare.Web.CCC.UC.EnhanceAdherenceCounselling.session1" %>
+<%@ OutputCache duration="86400" varybyparam="none" %>
 <style>
     .mmrbList{float: right;}
     .mmas4-results{margin-bottom: 30px;}
@@ -6,7 +7,9 @@
     .rbList{float: right;}
     .rbList input{margin-left: 5px;}
     .session1notessection{display: none;}
+    .session1loading{position: absolute;width: 100%;height: 100%;margin-left:-15px;z-index:999;background: rgba(204, 204, 204, 0.5);display: none;}
 </style>
+<form runat="server">
 <div id="session1container">
     <div class="col-md-12 form-group">
 	    <div class="col-md-12">
@@ -148,8 +151,8 @@
 	    </div>
     </div>
 </div>
-<!-- Modal -->
-
+<div class="session1loading"><img src="../../Images/PEPloading.gif" /></div>
+</form>
 <script type="text/javascript">
     $(".filldate").datetimepicker({
         format: 'DD-MMM-YYYY',
@@ -272,6 +275,21 @@
         }
 
     }
+    function getMmas4Rating(mmas4Total) {
+        $.ajax({
+            type: "POST",
+            url: "../WebService/PatientClinicalNotesService.asmx/getMmasRating",
+            data: "{'MmasScore': '" + mmas4Total + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                $("#<%=mmas4TbRating.ClientID%>").val(response.d);
+            },
+            error: function (response) {
+                toastr.error("Error Selecting MMAS4 Rating");
+            }
+        });
+    }
     function getMmas8Rating(mmas8TotalScore) {
         $.ajax({
             type: "POST",
@@ -303,6 +321,67 @@
         });
     }
     $(document).ready(function () {
+        //$('#session1statusmodal').modal('toggle');
+        //$('#session1statusmodal').modal('show');
+        $('.session1loading').show();
+        $.ajax({
+            type: "POST",
+            url: "../WebService/PatientClinicalNotesService.asmx/getPatientNotes",
+            data: "{'PatientId': '" + patientId + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            cache: false,
+            success: function (response) {
+                //alert(JSON.stringify(response));
+                $.each(JSON.parse(response.d), function (index, value) {
+                    inputnotes = this.ClinicalNotes;
+                    if ($("#session1tb" + this.NotesCategoryId).length > 0) {
+                        $("#session1tb" + this.NotesCategoryId).val(inputnotes);
+                    }
+                });
+            },
+            error: function (response) {
+                toastr.error("Notes could not be loaded");
+            }
+        });
+        $.ajax({
+            type: "POST",
+            url: "../WebService/PatientScreeningService.asmx/getPatientScreening",
+            data: "{'PatientId': '" + patientId + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            cache: false,
+            success: function (response) {
+                //alert(JSON.stringify(response));
+                $.each(JSON.parse(response.d), function (index, value) {
+                    if ($("#session1rb" + this.ScreeningCategoryId).length > 0) {
+                        $("input:radio[name='session1rb" + this.ScreeningCategoryId + "'][value='" + this.ScreeningValueId + "']").attr("checked", true);
+                    }
+                });
+                checkButtonsOnCtrls();
+            },
+            error: function (response) {
+                toastr.error("Notes could not be loaded");
+            }
+        });
+       
+        //get notes
+        $("#btnReset").click(function () {
+            //resetFields();
+        });
+        $("#btnCancel").click(function () {
+            window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>';
+        });
+
+        $("#btnOk").click(function () {
+            $('#AlertModal').modal('hide');
+        });
+
+        $("#btnDismiss").click(function () {
+            //resetFields();
+        });
+    });
+    function checkButtonsOnCtrls() {
         var mmas4Total = 0;
         $(".session1mmascontainer .mmas4container input[type=radio]:checked").each(function () {
             var selectedValue = $(this).val();
@@ -329,21 +408,9 @@
             var parentPanel = $(this).parent().closest('.row').attr('id');
             showhidenotes(parentPanel, selectedValue, rbName);
         });
-        $("#btnReset").click(function () {
-            //resetFields();
-        });
-        $("#btnCancel").click(function () {
-            window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>';
-        });
-
-        $("#btnOk").click(function () {
-            $('#AlertModal').modal('hide');
-        });
-
-        $("#btnDismiss").click(function () {
-            //resetFields();
-        });
-    });
+        $('.session1loading').hide();
+        //$('#session1statusmodal').modal('hide');
+    }
     function showhidenotes(parentPanel, selectedValue, rbName) {
         var radioButtons = $("#socioeconomicbarrierssection input[name='" + rbName + "']");
         var selectedIndex = radioButtons.index(radioButtons.filter(':checked'));
@@ -399,7 +466,6 @@
             success: function (response) {
                 if (response.d != null) {
                     toastr.error("Appointment already exists on the selected day");
-                    return false;
                 }
                 else {
                     addPatientAppointment();
@@ -538,4 +604,21 @@
             toastr.success("Session 1 Saved");
         }
     }
+    $(window).ready(function () {
+        <%--var patientNotes = '<%=Session["patientNotesDataObject"]%>';
+        $.each(JSON.parse(patientNotes), function (index, value) {
+            inputnotes = this.ClinicalNotes;
+            if ($("#session1tb" + this.NotesCategoryId).length > 0) {
+                $("#session1tb" + this.NotesCategoryId).val(inputnotes);
+            }
+        });
+        //get screening
+        var patientScreening = '<%=Session["patientScreeningDataObject"]%>';
+        $.each(JSON.parse(patientScreening), function (index, value) {
+            if ($("#session1rb" + this.ScreeningCategoryId).length > 0) {
+                $("input:radio[name='session1rb" + this.ScreeningCategoryId + "'][value='" + this.ScreeningValueId + "']").attr("checked", true);
+            }
+        });--%>
+        
+    });
 </script>

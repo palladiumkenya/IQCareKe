@@ -3,6 +3,7 @@
 <%@ Register TagPrefix="uc" TagName="tnCAGEAIDScreening" Src="~/CCC/UC/Depression/ucCAGEAID.ascx" %>
 <%@ Register TagPrefix="uc" TagName="tnCRAFFTScreening" Src="~/CCC/UC/Depression/ucCRAFFT.ascx" %>
 <%@ Register TagPrefix="uc" TagName="tnGBVScreening" Src="~/CCC/UC/Depression/ucGBVScreening.ascx" %>
+<%@ Register TagPrefix="uc" TagName="tnDisclosure" Src="~/CCC/UC/Depression/ucDisclosure.ascx" %>
 <form runat="server">
     <div class="col-md-12" style="padding-top: 20px">
         <div class="col-md-12">
@@ -21,6 +22,10 @@
 						    <span class="badge"></span>Gender Based Violence Screening
 							<span class="chevron"></span>
 					    </li>
+                        <li data-step="4" id="disclosuredatastep" data-name="template" class="active complete">
+						    <span class="badge"></span>Disclosure Screening
+							<span class="chevron"></span>
+					    </li>
 				    </ul>
                 </div>
                 <div class="step-content">
@@ -37,6 +42,11 @@
                     <div class="step-pane active sample-pane" runat="server" id="scdatastep3" data-parsley-validate="true" data-show-errors="true" data-step="3">
                         <div class="col-md-12 form-group">
                             <uc:tnGBVScreening ID="GBVScreeningPanel" runat="server" />
+                        </div>
+                    </div>
+                    <div class="step-pane active sample-pane" runat="server" id="scdatastep4" data-parsley-validate="true" data-show-errors="true" data-step="4">
+                        <div class="col-md-12 form-group">
+                            <uc:tnDisclosure ID="DisclosurePanel" runat="server" />
                         </div>
                     </div>
                     <div id="prevNextButton" class="actions">
@@ -61,10 +71,12 @@
             $('#scmyWizard').find('#depressiondatastep').toggleClass('complete', true);
             $('#scmyWizard').find('#alcoholdatastep').toggleClass('complete', true);
             $('#scmyWizard').find('#<%=gbvdatastep.ClientID%>').toggleClass('complete', true);
+            $('#scmyWizard').find('#disclosuredatastep').toggleClass('complete', true);
             $('#scmyWizard').on('changed.fu.wizard', function (evt, data) {
                 $('#scmyWizard').find('#depressiondatastep').toggleClass('complete', true);
                 $('#scmyWizard').find('#alcoholdatastep').toggleClass('complete', true);
                 $('#scmyWizard').find('#<%=gbvdatastep.ClientID%>').toggleClass('complete', true);
+                $('#scmyWizard').find('#disclosuredatastep').toggleClass('complete', true);
             });
         });
     </script>

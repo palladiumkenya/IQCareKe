@@ -14,7 +14,7 @@ using Entities.CCC.Appointment;
 
 namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
 {
-    public partial class ucSession2 : System.Web.UI.UserControl
+    public partial class session3 : System.Web.UI.Page
     {
         public int PatientId, PatientMasterVisitId, userId, NotesId, screenTypeId;
         public RadioButtonList rbList;
@@ -48,13 +48,12 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
                 populateAdherenceReviews();
                 getAdherenceCtrls();
                 getScoreCtrls();
-                getSession2Data(PatientId, PatientMasterVisitId);
             }
         }
         protected void populateReferrals()
         {
             LookupLogic lookUp = new LookupLogic();
-            List<LookupItemView> questionsList = lookUp.getQuestions("Session2ReferralsNetworks");
+            List<LookupItemView> questionsList = lookUp.getQuestions("Session3ReferralsNetworks");
             LookupItemView[] questionsArray = questionsList.ToArray();
             int i = 0;
             foreach (var value in questionsArray)
@@ -63,7 +62,7 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
                 screenTypeId = value.MasterId;
                 string radioItems = "";
                 int notesValue = 0;
-                LookupItemView[] itemList = lookUp.getQuestions(value.ItemName).ToArray();
+                List<LookupItemView> itemList = lookUp.getQuestions(value.ItemName);
                 if (itemList.Any())
                 {
                     foreach (var items in itemList)
@@ -87,7 +86,7 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
                     PHReferralsandNetworks.Controls.Add(new LiteralControl("</div>"));
                     PHReferralsandNetworks.Controls.Add(new LiteralControl("<div class='col-md-4 text-right'>"));
                     rbList = new RadioButtonList();
-                    rbList.ID = "session2rb"+value.ItemId.ToString();
+                    rbList.ID = "session3rb" + value.ItemId.ToString();
                     rbList.RepeatColumns = 2;
                     rbList.ClientIDMode = System.Web.UI.ClientIDMode.Static;
                     rbList.CssClass = "mmrbList";
@@ -120,7 +119,7 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
                     notesTb.TextMode = TextBoxMode.MultiLine;
                     notesTb.CssClass = "form-control input-sm";
                     notesTb.ClientIDMode = System.Web.UI.ClientIDMode.Static;
-                    notesTb.ID = "session2tb"+value.ItemId.ToString();
+                    notesTb.ID = "session3tb" + value.ItemId.ToString();
                     notesTb.Rows = 3;
                     PHReferralsandNetworks.Controls.Add(notesTb);
                     PHReferralsandNetworks.Controls.Add(new LiteralControl("</div>"));
@@ -137,17 +136,19 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
         public void populateMMAS()
         {
             LookupLogic lookUp = new LookupLogic();
-            LookupItemView[] questionsList = lookUp.getQuestions("Session2MMAS4").ToArray();
+            List<LookupItemView> questionsList = lookUp.getQuestions("Session3MMAS4");
+            LookupItemView[] questionsArray = questionsList.ToArray();
             int i = 0;
-            foreach (var value in questionsList)
+            foreach (var value in questionsArray)
             {
                 i = i + 1;
                 screenTypeId = value.MasterId;
                 string radioItems = "";
                 List<LookupItemView> itemList = lookUp.getQuestions(value.ItemName);
-                if (itemList.Any())
+                LookupItemView[] itemArray = itemList.ToArray();
+                if (itemArray.Any())
                 {
-                    foreach (var items in itemList)
+                    foreach (var items in itemArray)
                     {
                         radioItems = items.ItemName;
                     }
@@ -160,7 +161,7 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
                     PHMMAS4.Controls.Add(new LiteralControl("</div>"));
                     PHMMAS4.Controls.Add(new LiteralControl("<div class='col-md-4 text-right'>"));
                     rbList = new RadioButtonList();
-                    rbList.ID = "session2rb"+value.ItemId.ToString();
+                    rbList.ID = "session3rb" + value.ItemId.ToString();
                     rbList.RepeatColumns = 2;
                     rbList.ClientIDMode = System.Web.UI.ClientIDMode.Static;
                     rbList.CssClass = "mmrbList";
@@ -177,14 +178,15 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
 
             }
 
-            LookupItemView[] mmas8QuestionsList = lookUp.getQuestions("Session2MMAS8").ToArray();
-            foreach (var value in mmas8QuestionsList)
+            List<LookupItemView> mmas8QuestionsList = lookUp.getQuestions("Session3MMAS8");
+            LookupItemView[] mmas8QuestionsArray = mmas8QuestionsList.ToArray();
+            foreach (var value in mmas8QuestionsArray)
             {
                 i = i + 1;
-                var lastItem = mmas8QuestionsList.Last();
+                var lastItem = mmas8QuestionsArray.Last();
                 screenTypeId = value.MasterId;
                 string radioItems = "";
-                LookupItemView[] itemList = lookUp.getQuestions(value.ItemName).ToArray();
+                List<LookupItemView> itemList = lookUp.getQuestions(value.ItemName);
                 if (itemList.Any())
                 {
                     foreach (var items in itemList)
@@ -203,7 +205,7 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
                         PHMMAS8.Controls.Add(new LiteralControl("</div>"));
                         PHMMAS8.Controls.Add(new LiteralControl("<div class='col-md-8 text-right'>"));
                         rbList = new RadioButtonList();
-                        rbList.ID = "session2rb"+value.ItemId.ToString();
+                        rbList.ID = "session3rb" + value.ItemId.ToString();
                         rbList.RepeatColumns = 5;
                         rbList.ClientIDMode = System.Web.UI.ClientIDMode.Static;
                         rbList.CssClass = "mmrbList";
@@ -218,7 +220,7 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
                         PHMMAS8.Controls.Add(new LiteralControl("</div>"));
                         PHMMAS8.Controls.Add(new LiteralControl("<div class='col-md-4 text-right'>"));
                         rbList = new RadioButtonList();
-                        rbList.ID = "session2rb"+value.ItemId.ToString();
+                        rbList.ID = "session3rb" + value.ItemId.ToString();
                         rbList.RepeatColumns = 2;
                         rbList.ClientIDMode = System.Web.UI.ClientIDMode.Static;
                         rbList.CssClass = "mmrbList";
@@ -238,18 +240,20 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
         protected void populateAdherenceReviews()
         {
             LookupLogic lookUp = new LookupLogic();
-            LookupItemView[] questionsList = lookUp.getQuestions("Session2AdherenceReviews").ToArray();
+            List<LookupItemView> questionsList = lookUp.getQuestions("Session3AdherenceReviews");
+            LookupItemView[] questionsArray = questionsList.ToArray();
             int i = 0;
-            foreach (var value in questionsList)
+            foreach (var value in questionsArray)
             {
                 i = i + 1;
                 screenTypeId = value.MasterId;
                 string radioItems = "";
                 int notesValue = 0;
-                LookupItemView[] itemList = lookUp.getQuestions(value.ItemName).ToArray();
-                if (itemList.Any())
+                List<LookupItemView> itemList = lookUp.getQuestions(value.ItemName);
+                LookupItemView[] itemArray = itemList.ToArray();
+                if (itemArray.Any())
                 {
-                    foreach (var items in itemList)
+                    foreach (var items in itemArray)
                     {
                         if (items.ItemName == "Notes")
                         {
@@ -270,7 +274,7 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
                     PHAdherenceReview.Controls.Add(new LiteralControl("</div>"));
                     PHAdherenceReview.Controls.Add(new LiteralControl("<div class='col-md-4 text-right'>"));
                     rbList = new RadioButtonList();
-                    rbList.ID = "session2rb"+value.ItemId.ToString();
+                    rbList.ID = "session3rb" + value.ItemId.ToString();
                     rbList.RepeatColumns = 2;
                     rbList.ClientIDMode = System.Web.UI.ClientIDMode.Static;
                     rbList.CssClass = "mmrbList";
@@ -303,7 +307,7 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
                     notesTb.TextMode = TextBoxMode.MultiLine;
                     notesTb.CssClass = "form-control input-sm";
                     notesTb.ClientIDMode = System.Web.UI.ClientIDMode.Static;
-                    notesTb.ID = "session2tb"+value.ItemId.ToString();
+                    notesTb.ID = "session3tb" + value.ItemId.ToString();
                     notesTb.Rows = 3;
                     PHAdherenceReview.Controls.Add(notesTb);
                     PHAdherenceReview.Controls.Add(new LiteralControl("</div>"));
@@ -325,7 +329,7 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
             pillAdherenceTb = new TextBox();
             pillAdherenceTb.CssClass = "form-control input-sm";
             pillAdherenceTb.ClientIDMode = System.Web.UI.ClientIDMode.Static;
-            pillAdherenceTb.ID = "session2tb" + LookupLogic.GetLookupItemId("Session2PillAdherenceQ1");
+            pillAdherenceTb.ID = "session3tb" + LookupLogic.GetLookupItemId("Session3PillAdherenceQ1");
             PHPillCount.Controls.Add(pillAdherenceTb);
             PHPillCount.Controls.Add(new LiteralControl("</div>"));
             //RISK
@@ -334,14 +338,14 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
             dateFilledTb = new TextBox();
             dateFilledTb.CssClass = "form-control input-sm filldate";
             dateFilledTb.ClientIDMode = System.Web.UI.ClientIDMode.Static;
-            dateFilledTb.ID = "session2tb" + LookupLogic.GetLookupItemId("Session2PillAdherenceQ2");
+            dateFilledTb.ID = "session3tb" + LookupLogic.GetLookupItemId("Session3PillAdherenceQ2");
             PHDateFilled.Controls.Add(dateFilledTb);
             PHDateFilled.Controls.Add(new LiteralControl("</div>"));
             //Follow up date
             appointmentDateTb = new TextBox();
             appointmentDateTb.CssClass = "form-control input-sm";
             appointmentDateTb.ClientIDMode = System.Web.UI.ClientIDMode.Static;
-            appointmentDateTb.ID = "session2tb" + LookupLogic.GetLookupItemId("Session2FollowupDate");
+            appointmentDateTb.ID = "session3tb" + LookupLogic.GetLookupItemId("Session3FollowupDate");
             PHFollowupDate.Controls.Add(appointmentDateTb);
         }
         public void getScoreCtrls()
@@ -352,7 +356,7 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
             mmas4TbScore = new TextBox();
             mmas4TbScore.CssClass = "form-control input-sm";
             mmas4TbScore.ClientIDMode = System.Web.UI.ClientIDMode.Static;
-            mmas4TbScore.ID = "session2tb" + LookupLogic.GetLookupItemId("Session2mmas4Score");
+            mmas4TbScore.ID = "session3tb" + LookupLogic.GetLookupItemId("Session3mmas4Score");
             mmas4TbScore.Enabled = false;
             PHMMAS4Scores.Controls.Add(mmas4TbScore);
             PHMMAS4Scores.Controls.Add(new LiteralControl("<span class='input-group-addon'>/ 4</span>"));
@@ -363,7 +367,7 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
             mmas4TbRating = new TextBox();
             mmas4TbRating.CssClass = "form-control input-sm";
             mmas4TbRating.ClientIDMode = System.Web.UI.ClientIDMode.Static;
-            mmas4TbRating.ID = "session2tb" + LookupLogic.GetLookupItemId("Session2mmas4Adherence");
+            mmas4TbRating.ID = "session3tb" + LookupLogic.GetLookupItemId("Session3mmas4Adherence");
             mmas4TbRating.Enabled = false;
             PHMMAS4Rating.Controls.Add(mmas4TbRating);
             PHMMAS4Rating.Controls.Add(new LiteralControl("</div>"));
@@ -374,7 +378,7 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
             mmas8TbScore = new TextBox();
             mmas8TbScore.CssClass = "form-control input-sm";
             mmas8TbScore.ClientIDMode = System.Web.UI.ClientIDMode.Static;
-            mmas8TbScore.ID = "session2tb" + LookupLogic.GetLookupItemId("Session2mmas8Score");
+            mmas8TbScore.ID = "session3tb" + LookupLogic.GetLookupItemId("Session3mmas8Score");
             mmas8TbScore.Enabled = false;
             PHMMAS8Scores.Controls.Add(mmas8TbScore);
             PHMMAS8Scores.Controls.Add(new LiteralControl("<span class='input-group-addon'>/ 8</span>"));
@@ -385,7 +389,7 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
             mmas8TbRating = new TextBox();
             mmas8TbRating.CssClass = "form-control input-sm";
             mmas8TbRating.ClientIDMode = System.Web.UI.ClientIDMode.Static;
-            mmas8TbRating.ID = "session2tb" + LookupLogic.GetLookupItemId("Session2mmas8Adherence");
+            mmas8TbRating.ID = "session3tb" + LookupLogic.GetLookupItemId("Session3mmas8Adherence");
             mmas8TbRating.Enabled = false;
             PHMMAS8Rating.Controls.Add(mmas8TbRating);
             PHMMAS8Rating.Controls.Add(new LiteralControl("</div>"));
@@ -395,51 +399,10 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
             mmas8TbRecommendation = new TextBox();
             mmas8TbRecommendation.CssClass = "form-control input-sm";
             mmas8TbRecommendation.ClientIDMode = System.Web.UI.ClientIDMode.Static;
-            mmas8TbRecommendation.ID = "session2tb" + LookupLogic.GetLookupItemId("Session2mmas8Recommendation");
+            mmas8TbRecommendation.ID = "session3tb" + LookupLogic.GetLookupItemId("Session3mmas8Recommendation");
             mmas8TbRecommendation.Enabled = false;
             PHMMASRecommendation.Controls.Add(mmas8TbRecommendation);
             PHMMASRecommendation.Controls.Add(new LiteralControl("</div>"));
-        }
-        protected void getSession2Data(int patientId, int patientMasterVisitId)
-        {
-            var PCN = new PatientClinicalNotesLogic();
-            PatientClinicalNotes[] notesList = (PatientClinicalNotes[])Session["PatientNotesData"];
-            if (notesList.Any())
-            {
-                foreach (var value in notesList)
-                {
-                    //PCId = Convert.ToInt32(value.NotesCategoryId);
-                    TextBox ntb = (TextBox)FindControl("session2tb" + value.NotesCategoryId.ToString());
-                    if (ntb != null)
-                    {
-                        ntb.Text = value.ClinicalNotes;
-                    }
-                    if (LookupLogic.GetLookupItemId("Session2FollowupDate") == value.NotesCategoryId.ToString())
-                    {
-                        PatientAppointmentManager appointmentmgr = new PatientAppointmentManager();
-                        List<PatientAppointment> paList = appointmentmgr.GetByDate(Convert.ToDateTime(value.ClinicalNotes));
-                        foreach (var pavalue in paList)
-                        {
-                            appointmentId = pavalue.Id;
-                        }
-                    }
-                }
-            }
-
-            var PSM = new PatientScreeningManager();
-            PatientScreening[] screeningList = (PatientScreening[])Session["PatientScreeningData"];
-            if (screeningList != null)
-            {
-                foreach (var value in screeningList)
-                {
-                    //PCId = Convert.ToInt32(value.ScreeningTypeId);
-                    RadioButtonList rbl = (RadioButtonList)FindControl("session2rb" + value.ScreeningCategoryId.ToString());
-                    if (rbl != null)
-                    {
-                        rbl.SelectedValue = value.ScreeningValueId.ToString();
-                    }
-                }
-            }
         }
     }
 }

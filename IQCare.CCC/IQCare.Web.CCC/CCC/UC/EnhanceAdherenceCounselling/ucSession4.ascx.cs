@@ -405,8 +405,8 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
         protected void getSession4Data(int patientId, int patientMasterVisitId)
         {
             var PCN = new PatientClinicalNotesLogic();
-            List<PatientClinicalNotes> notesList = PCN.getPatientClinicalNotes(PatientId);
-            PatientClinicalNotes[] notesArray = notesList.ToArray();
+            //List<PatientClinicalNotes> notesList = PCN.getPatientClinicalNotes(PatientId);
+            PatientClinicalNotes[] notesArray = (PatientClinicalNotes[])Session["PatientNotesData"];
             if (notesArray.Any())
             {
                 foreach (var value in notesArray)
@@ -430,8 +430,8 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
             }
 
             var PSM = new PatientScreeningManager();
-            List<PatientScreening> screeningList = PSM.GetPatientScreening(PatientId);
-            PatientScreening[] screeningArray = screeningList.ToArray();
+            //List<PatientScreening> screeningList = PSM.GetPatientScreening(PatientId);
+            PatientScreening[] screeningArray = (PatientScreening[])Session["PatientScreeningData"];
             if (screeningArray != null)
             {
                 foreach (var value in screeningArray)

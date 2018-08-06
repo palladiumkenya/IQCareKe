@@ -146,5 +146,13 @@ namespace IQCare.Web.CCC.WebService
             }
             return mmasRecommendation;
         }
+        [WebMethod(EnableSession = true)]
+        public string getPatientNotes(int PatientId)
+        {
+            PatientClinicalNotes[] patientNotesData = (PatientClinicalNotes[])Session["patientNotesData"];
+            string jsonNotesObject = "[]";
+            jsonNotesObject = new JavaScriptSerializer().Serialize(patientNotesData);
+            return jsonNotesObject;
+        }
     }
 }

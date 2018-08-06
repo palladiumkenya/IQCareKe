@@ -6,8 +6,10 @@
 <%@ Register TagPrefix="uc" TagName="tnScreening" Src="~/CCC/UC/Adherence/ucScreening.ascx" %>
 <%@ Register TagPrefix="uc" TagName="tnReferralsandNetworks" Src="~/CCC/UC/Adherence/ucReferralsandNetworks.ascx" %>
 <style>
-        .control-label{text-align: left !important;}
-    </style>
+    .control-label{text-align: left !important;}
+    .section1loading, .section2loading, .section3loading, .section4loading{position: absolute;width: 100%;height: 100%;margin-left:-15px;z-index:999;background: rgba(204, 204, 204, 0.5);display: none;}
+    .adherencebarriersloading{position: absolute;width: 100%;height: 100%;margin-left:-15px;z-index:999;background: rgba(204, 204, 204, 0.5);display: none;}
+</style>
 <form runat="server">
     <div class="col-md-12" style="padding-top: 20px">
         <div class="col-md-12">
@@ -38,22 +40,26 @@
                         <div class="col-md-12 form-group">
                             <uc:tnHIVAwareness ID="HIVAwareness" runat="server" />
                             <uc:tnUnderstanding ID="Understanding" runat="server" />
+                            <div class="section1loading"><img src="../../Images/PEPloading.gif" /></div>
                         </div>
                     </div>
                     <div class="step-pane active sample-pane" id="abdatastep2" data-parsley-validate="true" data-show-errors="true" data-step="2">
                         <div class="col-md-12 form-group">
                             <uc:tnDailyRoutine ID="DailyRoutine" runat="server" />
+                            <div class="section2loading"><img src="../../Images/PEPloading.gif" /></div>
                         </div>
                     </div>
                     <div class="step-pane active sample-pane" id="abdatastep3" data-parsley-validate="true" data-show-errors="true" data-step="3">
                         <div class="col-md-12 form-group">
                             <uc:tnPsychosocialCircumstances ID="PsychosocialCircumstances" runat="server" />
+                            <div class="section3loading"><img src="../../Images/PEPloading.gif" /></div>
                         </div>
                     </div>
                     <div class="step-pane active sample-pane" id="abdatastep4" data-parsley-validate="true" data-show-errors="true" data-step="4">
                         <div class="col-md-12 form-group">
                             <uc:tnScreening ID="Screening" runat="server" />
                             <uc:tnReferralsandNetworks ID="ReferralsandNetworks" runat="server" />
+                            <div class="section4loading"><img src="../../Images/PEPloading.gif" /></div>
                         </div>
                     </div>
                     <div id="prevNextButton" class="actions">
@@ -85,5 +91,8 @@
                 $('#abmyWizard').find('#dsSectionThree').toggleClass('complete', true);
                 $('#abmyWizard').find('#dsSectionFour').toggleClass('complete', true);
             });
+        });
+        $("#loadAdherenceBarriers").click(function () {
+            $(".adherencebarriersloading").show();
         });
     </script>
