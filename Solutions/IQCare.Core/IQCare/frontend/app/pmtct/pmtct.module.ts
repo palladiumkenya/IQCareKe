@@ -17,41 +17,42 @@ import {
     MatGridListModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule,
     MatNativeDateModule, MatPaginatorModule, MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatRippleModule,
     MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule,
-    MatSortModule, MatStepperModule, MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule, 
+    MatSortModule, MatStepperModule, MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule,
 } from '@angular/material';
 import { AncComponent } from './anc/anc.component';
 import { PreventiveServicesComponent } from './preventive-services/preventive-services.component';
 import { PartnerTestingComponent } from './partner-testing/partner-testing.component';
 import { ReferralsComponent } from './referrals/referrals.component';
 import { NextAppointmentComponent } from './next-appointment/next-appointment.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
     imports: [
         CommonModule,
         PmtctRoutingModule,
-        CommonModule, HttpClientModule,  MatDatepickerModule, MatFormFieldModule,
+        CommonModule, HttpClientModule, MatDatepickerModule, MatFormFieldModule,
         MatNativeDateModule, MatInputModule, MatDatepickerModule, MatFormFieldModule, MatNativeDateModule,
         MatTableModule, MatAutocompleteModule, MatButtonModule, MatButtonToggleModule, MatCardModule,
         MatCheckboxModule, MatChipsModule, MatDatepickerModule, MatDialogModule, MatDividerModule, MatExpansionModule,
         MatGridListModule, MatIconModule, MatListModule, MatMenuModule, MatNativeDateModule, MatPaginatorModule,
         MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatSliderModule,
         MatSlideToggleModule, MatSnackBarModule, MatSortModule, MatStepperModule, MatTableModule, MatTabsModule,
-        MatToolbarModule, MatTooltipModule, ReactiveFormsModule, MatInputModule
+        MatToolbarModule, MatTooltipModule, ReactiveFormsModule, MatInputModule, SharedModule
     ],
     declarations: [
-             ProfileComponent, 
-             PatientEducationExaminationComponent,
-             AntenatalProfileComponent,
-             HivStatusComponent,
-             ClientMonitoringComponent,
-             HaartProphylaxisComponent,
-             VisitDetailsComponent,
-             AncComponent,
-             PreventiveServicesComponent,
-             PartnerTestingComponent,
-             ReferralsComponent,
-             NextAppointmentComponent
-            ]
+        ProfileComponent,
+        PatientEducationExaminationComponent,
+        AntenatalProfileComponent,
+        HivStatusComponent,
+        ClientMonitoringComponent,
+        HaartProphylaxisComponent,
+        VisitDetailsComponent,
+        AncComponent,
+        PreventiveServicesComponent,
+        PartnerTestingComponent,
+        ReferralsComponent,
+        NextAppointmentComponent
+    ]
 })
 export class PmtctModule { }
