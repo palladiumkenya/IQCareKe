@@ -8,6 +8,11 @@ using Interface.CCC.Lookup;
 using System.Collections.Generic;
 using Entities.CCC.Visit;
 using Entities.CCC.Lookup;
+using System.Web.Script.Serialization;
+using System.IO;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
+using System.Collections;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -99,6 +104,38 @@ namespace IQCare.Web.CCC.WebService
 
             string jsonObject = LookupLogic.LookupExtruderCompleteLabs(patientId);
             return jsonObject;
+        }
+        [WebMethod(EnableSession = true)]
+        public ArrayList ExtruderSpecificResults()
+        {
+            string jsonObject = LookupLogic.LookupExtruderCompleteLabs(patientId);
+            var serializer = new JavaScriptSerializer();
+            dynamic result = serializer.DeserializeObject(jsonObject);
+            var objs = JsonConvert.DeserializeObject<List<SpecificResults>>(jsonObject);
+            ArrayList rows = new ArrayList();
+            foreach (SpecificResults item in objs)
+                {
+                string id = item.id.ToString();
+                string LabName = item.LabName.ToString();
+                string VisitID = item.PatientMasterVisitid.ToString();
+                string SampleDate = item.SampleDate.ToString();
+                string ResultsValues = item.ResultValues.ToString();
+                string[] i = new string[5] {"",VisitID, SampleDate, LabName, ResultsValues};
+                  rows.Add(i);
+                
+            }
+
+            return rows;
+           // return jsonObject;
+
+        }
+        public class SpecificResults
+        {
+            public int id { get; set; }
+            public string LabName { get; set; }
+            public string PatientMasterVisitid { get; set; }
+            public DateTime SampleDate { get; set; }
+            public string ResultValues { get; set; }
         }
         [WebMethod(EnableSession = true)]
         public string GetLookupPendingLabsList()

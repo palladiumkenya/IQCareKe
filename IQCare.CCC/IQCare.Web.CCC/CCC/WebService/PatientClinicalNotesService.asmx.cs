@@ -92,6 +92,24 @@ namespace IQCare.Web.CCC.WebService
             }
             return recommendedManagement;
         }
-        
+        [WebMethod]
+        public string getAlcoholRiskNotes(int alcoholScore)
+        {
+            string depressionSeverity = "";
+            string jsonObject = "[]";
+            jsonObject = LookupLogic.GetLookupItemByName("AlcoholRiskLevel");
+            JavaScriptSerializer ser = new JavaScriptSerializer();
+            List<LookupItemView> lookupList = ser.Deserialize<List<LookupItemView>>(jsonObject);
+            foreach (var value in lookupList)
+            {
+                if (Convert.ToInt32(value.OrdRank) == alcoholScore)
+                {
+                    depressionSeverity = value.DisplayName;
+                    break;
+                }
+            }
+            return depressionSeverity;
+        }
+
     }
 }

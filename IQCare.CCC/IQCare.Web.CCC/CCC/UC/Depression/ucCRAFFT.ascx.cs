@@ -33,13 +33,12 @@ namespace IQCare.Web.CCC.UC.Depression
             {
                 //Alcohol Frequency
                 getScreeningCTRLs();
-                getScreeningData(PatientId);
                 //Alcohol Screening
                 getScoreCTRLs();
-                getScoreData(PatientId);
                 //crafft Notes
                 getNotesCTRLs();
-                getNotesData(PatientId);
+                //All Data
+                getSCRAFFTData(PatientId);
             }
         }
 
@@ -73,10 +72,6 @@ namespace IQCare.Web.CCC.UC.Depression
                 }
             }
         }
-        public void getScreeningData(int PatientId)
-        {
-
-        }
         public void getScoreCTRLs()
         {
             LookupLogic lookUp = new LookupLogic();
@@ -92,7 +87,7 @@ namespace IQCare.Web.CCC.UC.Depression
                 PHCRAFFTAlcoholScreening.Controls.Add(new LiteralControl("</div>"));
                 PHCRAFFTAlcoholScreening.Controls.Add(new LiteralControl("<div class='col-md-2 text-right'>"));
                 rbList = new RadioButtonList();
-                rbList.ID = "cagesm" + value.ItemId.ToString();
+                rbList.ID = "crafft" + value.ItemId.ToString();
                 rbList.RepeatColumns = 4;
                 rbList.ClientIDMode = System.Web.UI.ClientIDMode.Static;
                 rbList.CssClass = "crafftrbList";
@@ -130,7 +125,7 @@ namespace IQCare.Web.CCC.UC.Depression
             tbCrafftScore = new TextBox();
             tbCrafftScore.CssClass = "form-control input-sm";
             tbCrafftScore.ClientIDMode = System.Web.UI.ClientIDMode.Static;
-            tbCrafftScore.ID = LookupLogic.GetLookupItemId("AlcoholScore");
+            tbCrafftScore.ID = "crafft"+LookupLogic.GetLookupItemId("AlcoholScore");
             tbCrafftScore.Enabled = false;
             PHCRAFFTScore.Controls.Add(tbCrafftScore);
             PHCRAFFTScore.Controls.Add(new LiteralControl("<span class='input-group-addon'>/ 6</span>"));
@@ -141,14 +136,10 @@ namespace IQCare.Web.CCC.UC.Depression
             tbCrafftRisk = new TextBox();
             tbCrafftRisk.CssClass = "form-control input-sm";
             tbCrafftRisk.ClientIDMode = System.Web.UI.ClientIDMode.Static;
-            tbCrafftRisk.ID = LookupLogic.GetLookupItemId("AlcoholRiskLevel");
+            tbCrafftRisk.ID = "crafft" + LookupLogic.GetLookupItemId("AlcoholRiskLevel");
             tbCrafftRisk.Enabled = false;
             PHCrafftRisk.Controls.Add(tbCrafftRisk);
             PHCrafftRisk.Controls.Add(new LiteralControl("</div>"));
-        }
-        public void getScoreData(int PatientId)
-        {
-
         }
         public void getNotesCTRLs()
         {
@@ -166,9 +157,11 @@ namespace IQCare.Web.CCC.UC.Depression
                     notesTb = new TextBox();
                     notesTb.TextMode = TextBoxMode.MultiLine;
                     notesTb.CssClass = "form-control input-sm";
+                    notesTb.ClientIDMode = System.Web.UI.ClientIDMode.Static;
                     notesTb.ID = "crafft" + value.ItemId.ToString();
                     notesTb.Rows = 3;
                     PHCRAFFTNotes.Controls.Add(notesTb);
+                    break;
                 }
             }
         }
@@ -181,6 +174,36 @@ namespace IQCare.Web.CCC.UC.Depression
                 foreach (var value in socialNotesList)
                 {
                     TextBox ntb = (TextBox)PHCRAFFTNotes.FindControl("crafft" + value.NotesCategoryId.ToString());
+                    if (ntb != null)
+                    {
+                        ntb.Text = value.ClinicalNotes;
+                    }
+                }
+            }
+        }
+        public void getSCRAFFTData(int PatientId)
+        {
+            var PSM = new PatientScreeningManager();
+            List<PatientScreening> screeningList = PSM.GetPatientScreening(PatientId);
+            if (screeningList != null)
+            {
+                foreach (var value in screeningList)
+                {
+                    screenTypeId = Convert.ToInt32(value.ScreeningTypeId);
+                    RadioButtonList rblPC1Qs = (RadioButtonList)PHCRAFFTFrequency.FindControl("crafft" + value.ScreeningCategoryId.ToString());
+                    if (rblPC1Qs != null)
+                    {
+                        rblPC1Qs.SelectedValue = value.ScreeningValueId.ToString();
+                    }
+                }
+            }
+            var PCN = new PatientClinicalNotesLogic();
+            List<PatientClinicalNotes> notesList = PCN.getPatientClinicalNotes(PatientId);
+            if (notesList.Any())
+            {
+                foreach (var value in notesList)
+                {
+                    TextBox ntb = (TextBox)PHCRAFFTAlcoholScreening.FindControl("crafft" + value.NotesCategoryId.ToString());
                     if (ntb != null)
                     {
                         ntb.Text = value.ClinicalNotes;

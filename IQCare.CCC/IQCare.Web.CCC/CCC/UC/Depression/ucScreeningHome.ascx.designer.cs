@@ -13,6 +13,15 @@ namespace IQCare.Web.CCC.UC.Depression {
     public partial class ucScreeningHome {
         
         /// <summary>
+        /// gbvdatastep control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl gbvdatastep;
+        
+        /// <summary>
         /// DepressionScreeningPanel control.
         /// </summary>
         /// <remarks>
@@ -29,6 +38,15 @@ namespace IQCare.Web.CCC.UC.Depression {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.PlaceHolder PHAlcoholSection;
+        
+        /// <summary>
+        /// scdatastep3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl scdatastep3;
         
         /// <summary>
         /// GBVScreeningPanel control.

@@ -119,6 +119,7 @@
     <Compile Include="BPersonContactManager.cs" />
     <Compile Include="BPersonRelationshipManager.cs" />
     <Compile Include="BTannersStaging.cs" />
+    <Compile Include="ClinicalSummary\BClinicalSummary.cs" />
     <Compile Include="Encounters\BNeonatalHistory.cs" />
     <Compile Include="Encounters\BPatientClinicalNotes.cs" />
     <Compile Include="Encounters\BSocialHistory.cs" />
@@ -131,6 +132,7 @@
     <Compile Include="Enrollment\BPatientReEnrollment.cs" />
     <Compile Include="Enrollment\BPersonIdentifier.cs" />
     <Compile Include="Enrollment\BServiceAreaIdentifiers.cs" />
+    <Compile Include="HIVEducation\BHIVEducation.cs" />
     <Compile Include="Interoperability\BDrugPrescriptionManager.cs" />
     <Compile Include="Interoperability\BIlMessengerManager.cs" />
     <Compile Include="Interoperability\BIlStatisticsManager.cs" />

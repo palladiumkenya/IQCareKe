@@ -26,6 +26,7 @@ namespace IQCare.Web.CCC.UC.Depression
         {
             age = Convert.ToInt32(HttpContext.Current.Session["Age"]);
             PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
+            gender = HttpContext.Current.Session["Gender"].ToString();
             PatientMasterVisitId = Convert.ToInt32(Request.QueryString["visitId"] != null ? Request.QueryString["visitId"] : HttpContext.Current.Session["PatientMasterVisitId"]);
             if (age >= 9 && age <= 19)
             {
@@ -36,6 +37,11 @@ namespace IQCare.Web.CCC.UC.Depression
             {
                 Control cageControl = Page.LoadControl("~/CCC/UC/Depression/ucCAGEAID.ascx");
                 PHAlcoholSection.Controls.Add(cageControl);
+            }
+            if(gender == "Male")
+            {
+                gbvdatastep.Visible = false;
+                scdatastep3.Visible = false;
             }
         }
     }

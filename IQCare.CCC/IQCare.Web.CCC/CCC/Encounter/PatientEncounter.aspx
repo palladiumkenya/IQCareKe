@@ -24,6 +24,9 @@
             <li role="presentation"><a href="#vlTracker" aria-controls="vlTracker" role="tab" data-toggle="tab"><i class="fa fa-line-chart fa-lg" aria-hidden="true"></i> Viraload Tracker</a></li>
             <li role="presentation"><a href="#adherencebarriers" aria-controls="adherencebarriers" role="tab" data-toggle="tab"><i class="fa fa-exclamation-triangle fa-lg" aria-hidden="true"></i> Barriers to Adherence</a></li>
             <li role="presentation"><a href="#healthscreening" aria-controls="healthscreening" role="tab" data-toggle="tab"><i class="fa fa-stethoscope fa-lg" aria-hidden="true"></i> Assessments</a></li>
+            <li role="presentation"><a href="#EnhanceAdherence" aria-controls="EnhanceAdherence" role="tab" data-toggle="tab"><i class="fa fa-stethoscope fa-lg" aria-hidden="true"></i> Enhance Adherence Counselling</a></li>
+            <li role="presentation"><a href="#Summary" aria-controls="Test Summary" role="tab" data-toggle="tab"><i class="fa fa-tint fa-lg" aria-hidden="true"></i>Test Summary</a></li>
+     
             <%--<li role="presentation"><a href="#Laboratory" aria-controls="Laboratory" role="tab" data-toggle="tab"><i class="fa fa-flask fa-lg" aria-hidden="true"></i>Laboratory</a></li>
             <li role="presentation"><a href="#Pharmacy" aria-controls="Pharmacy" role="tab" data-toggle="tab"><i class="fa fa-tint fa-lg" aria-hidden="true"></i>Pharmacy</a></li>--%>
         </ul>
@@ -109,6 +112,9 @@
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="healthscreening">
                     <uc:ucHealthScreening runat="server" id="ucHealthScreening" />
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="EnhanceAdherence">
+                   <%-- <uc:ucEnhanceAdherence runat="server" id="ucEnhanceAdherence" />--%>
                 </div>
         </div>
     </div>

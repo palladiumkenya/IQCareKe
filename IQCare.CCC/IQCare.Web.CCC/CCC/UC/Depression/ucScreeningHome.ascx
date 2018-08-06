@@ -16,7 +16,7 @@
 						    <span class="badge"></span>Alcohol and Drug Use Screening
 							<span class="chevron"></span>
 					    </li>
-                        <li data-step="3" id="gbvdatastep" data-name="template" class="active complete">
+                        <li data-step="3" runat="server" id="gbvdatastep" data-name="template" class="active complete">
 						    <span class="badge"></span>Gender Based Violence Screening
 							<span class="chevron"></span>
 					    </li>
@@ -33,7 +33,7 @@
                             <asp:PlaceHolder ID="PHAlcoholSection" runat="server"></asp:PlaceHolder>
                         </div>
                     </div>
-                    <div class="step-pane active sample-pane" id="scdatastep3" data-parsley-validate="true" data-show-errors="true" data-step="3">
+                    <div class="step-pane active sample-pane" runat="server" id="scdatastep3" data-parsley-validate="true" data-show-errors="true" data-step="3">
                         <div class="col-md-12 form-group">
                             <uc:tnGBVScreening ID="GBVScreeningPanel" runat="server" />
                         </div>
@@ -58,11 +58,11 @@
             $('#scmyWizard').wizard();
             $('#scmyWizard').find('#depressiondatastep').toggleClass('complete', true);
             $('#scmyWizard').find('#alcoholdatastep').toggleClass('complete', true);
-            $('#scmyWizard').find('#gbvdatastep').toggleClass('complete', true);
+            $('#scmyWizard').find('#<%=gbvdatastep.ClientID%>').toggleClass('complete', true);
             $('#scmyWizard').on('changed.fu.wizard', function (evt, data) {
                 $('#scmyWizard').find('#depressiondatastep').toggleClass('complete', true);
                 $('#scmyWizard').find('#alcoholdatastep').toggleClass('complete', true);
-                $('#scmyWizard').find('#gbvdatastep').toggleClass('complete', true);
+                $('#scmyWizard').find('#<%=gbvdatastep.ClientID%>').toggleClass('complete', true);
             });
         });
     </script>

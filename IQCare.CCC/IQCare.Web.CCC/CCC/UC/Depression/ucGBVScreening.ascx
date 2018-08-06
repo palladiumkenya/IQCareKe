@@ -24,3 +24,45 @@
 		</div>
     </div>
 </div>
+<script type="text/javascript">
+    var currentStep;
+    $("#scmyWizard").on("actionclicked.fu.wizard", function (evt, data) {
+        currentStep = data.step;
+        if (currentStep == 3) {
+            addUpdateFBVScreeningData();
+        }
+    });
+    function addUpdateFBVScreeningData()
+    {
+        var error = 0;
+        $("#gbvscreening .gbvrbList").each(function () {
+            var screeningValue = 0;
+            var screeningType = <%=screenTypeId%>;
+            var patientId = <%=PatientId%>;
+            var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            var userId = <%=userId%>;
+            var screeningCategory = $(this).attr('id').replace('gbv', '');
+            var rdIdValue = $(this).attr('id');
+            var checkedValue = $('#' + rdIdValue + ' input[type=radio]:checked').val();
+            if (typeof checkedValue != 'undefined') {
+                screeningValue = checkedValue;
+            }
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientScreeningService.asmx/AddUpdateScreeningData",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','screeningType':'" + screeningType + "','screeningCategory':'" + screeningCategory + "','screeningValue':'" + screeningValue + "','userId':'" + userId + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    error = 0;
+                },
+                error: function (response) {
+                    error = 1;
+                }
+            });
+        });
+        if (error == 0) {
+            toastr.success("GBV Screening Saved");
+        }
+    }
+</script>

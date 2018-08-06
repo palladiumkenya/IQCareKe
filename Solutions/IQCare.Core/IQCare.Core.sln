@@ -35,8 +35,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQCare.Library", "IQCare.Library\IQCare.Library.csproj", "{06FA84C3-3212-44C1-AFE9-A58F827D345B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCareRecords.Common.BusinessProcess", "IQCareRecords.Common.BusinessProcess\IQCareRecords.Common.BusinessProcess.csproj", "{A5FFB4E0-5755-402E-917C-926C32FB8F5C}"
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQCare.Library", "IQCare.Library\IQCare.Library.csproj", "{06FA84C3-3212-44C1-AFE9-A58F827D345B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQCareRecords.Common.BusinessProcess", "IQCareRecords.Common.BusinessProcess\IQCareRecords.Common.BusinessProcess.csproj", "{A5FFB4E0-5755-402E-917C-926C32FB8F5C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
