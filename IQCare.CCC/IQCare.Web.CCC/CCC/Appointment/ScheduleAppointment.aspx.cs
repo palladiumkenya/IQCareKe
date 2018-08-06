@@ -12,8 +12,6 @@ using Entities.CCC.Appointment;
 using Interface.CCC;
 using IQCare.CCC.UILogic;
 using System.Data;
-using Entities.CCC.Appointment;
-using IQCare.CCC.UILogic;
 
 namespace IQCare.Web.CCC.Appointment
 {

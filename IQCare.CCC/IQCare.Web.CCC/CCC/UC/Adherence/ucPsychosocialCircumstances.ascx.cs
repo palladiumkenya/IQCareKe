@@ -27,7 +27,7 @@ namespace IQCare.Web.CCC.UC.Adherence
             if (!IsPostBack)
             {
                 populateQuestions();
-                getPsychosocialCircumstances(PatientId,PatientMasterVisitId);
+                //getPsychosocialCircumstances(PatientId,PatientMasterVisitId);
             }
         }
         protected void populateQuestions()

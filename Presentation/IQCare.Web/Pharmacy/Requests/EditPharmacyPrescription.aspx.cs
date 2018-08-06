@@ -3291,8 +3291,11 @@ namespace IQCare.Web.Pharmacy.Requests
                 lblPrintPrescription.Visible = true;
                 lblPrintPrescription.EnableViewState = false;
                 theheaderPnl.Controls.Add(lblPrintPrescription);
-
-                MstPanel.Controls.Add(theheaderPnl);
+                try
+                {
+                    MstPanel.Controls.Add(theheaderPnl);
+                }
+                catch { }
                 #endregion "ARV Medication"
             }
             Control thedrgCntrl = FindControlRecursive(MstPanel, "pnl_" + drugId);
@@ -5853,15 +5856,13 @@ namespace IQCare.Web.Pharmacy.Requests
                 txtYr.Attributes.Add("readonly", "true");
                 txtMon.Attributes.Add("readonly", "true");
                 txtDOB.Attributes.Add("readonly", "true");
-                int patientId = Convert.ToInt32(Session["PatientId"]);
-
-                if (theExistDS.Tables.Count > 0)
-                    ddlTreatment.SelectedValue = theExistDS.Tables[0].Rows[0]["ProgId"].ToString();
+                int patientId = Convert.ToInt32(Session["PatientId"]);              
 
                 this.EditOrderId = Convert.ToInt32(Session["PatientVisitId"]);
                
                     GetExistPediatricFields();
-                
+                 if (theExistDS.Tables.Count > 0)
+                    ddlTreatment.SelectedValue = theExistDS.Tables[0].Rows[0]["ProgId"].ToString();
             }
             catch (Exception er)
             {

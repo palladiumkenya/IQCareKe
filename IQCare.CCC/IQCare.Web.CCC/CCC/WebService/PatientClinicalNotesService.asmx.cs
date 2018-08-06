@@ -110,6 +110,49 @@ namespace IQCare.Web.CCC.WebService
             }
             return depressionSeverity;
         }
-
+        [WebMethod]
+        public string getMmasRating(string MmasScore)
+        {
+            string mmasRating = "";
+            string jsonObject = "[]";
+            jsonObject = LookupLogic.GetLookupItemByName("MmasRating");
+            JavaScriptSerializer ser = new JavaScriptSerializer();
+            List<LookupItemView> lookupList = ser.Deserialize<List<LookupItemView>>(jsonObject);
+            foreach (var value in lookupList)
+            {
+                if (value.OrdRank.ToString() == MmasScore)
+                {
+                    mmasRating = value.DisplayName;
+                    break;
+                }
+            }
+            return mmasRating;
+        }
+        [WebMethod]
+        public string getMmasRecommendation(string MmasScore)
+        {
+            string mmasRecommendation = "";
+            string jsonObject = "[]";
+            jsonObject = LookupLogic.GetLookupItemByName("MmasRecommendation");
+            JavaScriptSerializer ser = new JavaScriptSerializer();
+            List<LookupItemView> lookupList = ser.Deserialize<List<LookupItemView>>(jsonObject);
+            foreach (var value in lookupList)
+            {
+                if (value.OrdRank.ToString() == MmasScore)
+                {
+                    mmasRecommendation = value.DisplayName;
+                    break;
+                }
+            }
+            return mmasRecommendation;
+        }
+        [WebMethod(EnableSession = true)]
+        public string getPatientNotes(int PatientId)
+        {
+            PatientClinicalNotes[] patientNotesData = (PatientClinicalNotes[])Session["patientNotesData"];
+            string jsonNotesObject = "[]";
+            jsonNotesObject = new JavaScriptSerializer().Serialize(patientNotesData);
+            return jsonNotesObject;
+        }
     }
 }

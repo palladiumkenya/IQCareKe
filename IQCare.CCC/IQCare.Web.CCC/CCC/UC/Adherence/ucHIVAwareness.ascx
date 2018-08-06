@@ -1,4 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucHIVAwareness.ascx.cs" Inherits="IQCare.Web.CCC.UC.Adherence.ucHIVAwareness" %>
+<%@ OutputCache duration="86400" varybyparam="none" %>
 <div class="col-md-12 form-group">
 	<div class="col-md-12">
 		<div class="panel panel-info">
@@ -15,52 +16,71 @@
 	</div>
 </div>
 <script type="text/javascript">
-    $("#myWizard").on("actionclicked.fu.wizard", function (evt, data) {
-        var currentStep = data.step;
-        if (currentStep == 1) {
-            addUpdateHIVAwarenessScreeningData();
-        }
-    });
+        $("#abmyWizard").on("actionclicked.fu.wizard", function (evt, data) {
+            var currentStep = data.step;
+            if (currentStep == 1) {
+                addUpdateHIVAwarenessScreeningData();
+            }
+        });
 
-    function addUpdateHIVAwarenessScreeningData()
-    {
-        var error = 0;
-        $("#HIVStatusScreening input[type=radio]:checked").each(function () {
-            alert("Saving");
-            var screeningValue = $(this).val();
-            var screeningCategory = $(this).closest("table").attr('id');
-            var screeningType = <%=screenTypeId%>;
-            var patientId = <%=PatientId%>;
-            var patientMasterVisitId = <%=PatientMasterVisitId%>;
-            var userId = <%=userId%>;
+        function addUpdateHIVAwarenessScreeningData()
+        {
+            var error = 0;
+            $("#HIVStatusScreening input[type=radio]:checked").each(function () {
+                var screeningValue = $(this).val();
+                var screeningCategory = $(this).closest("table").attr('id');
+                var screeningType = <%=screenTypeId%>;
+                var patientId = <%=PatientId%>;
+                var patientMasterVisitId = <%=PatientMasterVisitId%>;
+                var userId = <%=userId%>;
+                $.ajax({
+                    type: "POST",
+                    url: "../WebService/PatientScreeningService.asmx/AddUpdateScreeningData",
+                    data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','screeningType':'" + screeningType + "','screeningCategory':'" + screeningCategory + "','screeningValue':'" + screeningValue + "','userId':'" + userId + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        error = 0;
+                    },
+                    error: function (response) {
+                        error = 1;
+                    }
+                });
+            });
+            if (error == 0) {
+                toastr.success("Awareness of HIV Status Saved");
+            }
+        }
+        $(document).ready(function () {
+            $('.awarenessloading').show();
             $.ajax({
                 type: "POST",
-                url: "../WebService/PatientScreeningService.asmx/AddUpdateScreeningData",
-                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','screeningType':'" + screeningType + "','screeningCategory':'" + screeningCategory + "','screeningValue':'" + screeningValue + "','userId':'" + userId + "'}",
+                url: "../WebService/PatientScreeningService.asmx/getPatientScreening",
+                data: "{'PatientId': '" + patientId + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
+                cache: false,
                 success: function (response) {
-                    error = 0;
+                    $.each(JSON.parse(response.d), function (index, value) {
+                        if ($("#awareness" + this.ScreeningCategoryId).length > 0) {
+                            var radioBtns = "#awareness" + this.ScreeningCategoryId;
+                            $(radioBtns+" input:radio[value='" + this.ScreeningValueId + "']").attr("checked", true);
+                        }
+                    });
                 },
                 error: function (response) {
-                    error = 1;
+                    toastr.error("Screening could  not be loaded");
                 }
             });
-            alert("Done");
         });
-        if (error == 0) {
-            toastr.success("Awareness of HIV Status Saved");
-        }
-    }
-
-    jQuery(function ($) {
-        var HIVStatusId = <%=HIVStatusId%>;
-        if (HIVStatusId > 0) {
-            $('#myWizard').wizard();
-            $('#myWizard').find('#dsSectionOne').toggleClass('complete', true);
-            $('#myWizard').on('changed.fu.wizard', function (evt, data) {
-                $('#myWizard').find('#dsSectionOne').toggleClass('complete', true);
-            });
-        }
-    });
+        jQuery(function ($) {
+            var HIVStatusId = <%=HIVStatusId%>;
+            if (HIVStatusId > 0) {
+                $('#abmyWizard').wizard();
+                $('#abmyWizard').find('#dsSectionOne').toggleClass('complete', true);
+                $('#abmyWizard').on('changed.fu.wizard', function (evt, data) {
+                    $('#abmyWizard').find('#dsSectionOne').toggleClass('complete', true);
+                });
+            }
+        });
 </script>

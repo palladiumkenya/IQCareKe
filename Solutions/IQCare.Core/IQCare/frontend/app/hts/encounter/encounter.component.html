@@ -36,7 +36,7 @@
                                             </mat-form-field>
 
                                             <mat-form-field>
-                                                <mat-select placeholder="Ever Tested?" name="everTested" id="everTested" required formControlName="EverTested" (change)="everTestedChanged()" required>
+                                                <mat-select placeholder="Ever Tested?" name="everTested" id="everTested" required formControlName="EverTested" (selectionChange)="everTestedChanged()" required>
                                                     <mat-option value=""></mat-option>
                                                     <mat-option *ngFor="let entryPoint of yesNoOptions" [value]="entryPoint.itemId">{{entryPoint.itemName}}</mat-option>
                                                 </mat-select>
@@ -63,7 +63,7 @@
                                             </mat-form-field>
 
                                             <mat-form-field>
-                                                <mat-select placeholder="Has Any Disability" id="hasDisability" required name="hasDisability" formControlName="HasDisability" (change)="hasDisabilityChanged()" required>
+                                                <mat-select placeholder="Has Any Disability" id="hasDisability" required name="hasDisability" formControlName="HasDisability" (selectionChange)="hasDisabilityChanged()" required>
                                                     <mat-option value=""></mat-option>
                                                     <mat-option *ngFor="let entryPoint of yesNoOptions" [value]="entryPoint.itemId">{{entryPoint.itemName}}</mat-option>
                                                 </mat-select>
@@ -79,7 +79,7 @@
 
                                         <div class="col-lg-3 col-md-3 col-sm-3">
                                             <mat-form-field>
-                                                <mat-select placeholder="Consent" name="consent" id="consent" required formControlName="Consent" (change)="onConsentChanged()" required>
+                                                <mat-select placeholder="Consent" name="consent" id="consent" required formControlName="Consent" (selectionChange)="onConsentChanged()" required>
                                                     <mat-option value=""></mat-option>
                                                     <mat-option *ngFor="let entryPoint of yesNoOptions" [value]="entryPoint.itemId">{{entryPoint.itemName}}</mat-option>
                                                 </mat-select>

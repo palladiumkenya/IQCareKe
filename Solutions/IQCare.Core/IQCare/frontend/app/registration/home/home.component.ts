@@ -1,6 +1,6 @@
 import {Component, NgZone, OnInit} from '@angular/core';
 import {EncounterService} from '../../hts/_services/encounter.service';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {DataSource} from '@angular/cdk/collections';
 import * as Consent from '../../shared/reducers/app.states';
 import {select, Store} from '@ngrx/store';

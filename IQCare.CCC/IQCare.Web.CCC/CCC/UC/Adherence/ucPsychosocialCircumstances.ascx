@@ -1,4 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucPsychosocialCircumstances.ascx.cs" Inherits="IQCare.Web.CCC.UC.Adherence.ucPsychosocialCircumstances" %>
+<%@ OutputCache duration="86400" varybyparam="none" %>
 <style>
     .notessection{display: none;}
 </style>
@@ -19,7 +20,7 @@
 </div>
 <script type="text/javascript">
     var currentStep;
-    $("#myWizard").on("actionclicked.fu.wizard", function (evt, data) {
+    $("#abmyWizard").on("actionclicked.fu.wizard", function (evt, data) {
         currentStep = data.step;
         if (currentStep == 3) {
             addUpdatePCScreeningData();
@@ -88,7 +89,7 @@
 
     function showhidenotes(parentPanel, selectedValue, rbName)
     {
-        var radioButtons = $("input[name='" + rbName + "']");
+        var radioButtons = $("#psychosocialcircumstancessection input[name='" + rbName + "']");
         var selectedIndex = radioButtons.index(radioButtons.filter(':checked'));
         if (selectedIndex == 0)
         {
@@ -101,20 +102,61 @@
     }
 
     $(document).ready(function () {
-        $("#datastep3 input[type=radio]:checked").each(function () {
+        $.ajax({
+            type: "POST",
+            url: "../WebService/PatientClinicalNotesService.asmx/getPatientNotes",
+            data: "{'PatientId': '" + patientId + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            cache: false,
+            success: function (response) {
+                //alert(JSON.stringify(response));
+                $.each(JSON.parse(response.d), function (index, value) {
+                    inputnotes = this.ClinicalNotes;
+                    if ($("#notes" + this.NotesCategoryId).length > 0) {
+                        $("#notes" + this.NotesCategoryId).val(inputnotes);
+                    }
+                });
+            },
+            error: function (response) {
+                toastr.error("Notes could not be loaded");
+            }
+        });
+        $.ajax({
+            type: "POST",
+            url: "../WebService/PatientScreeningService.asmx/getPatientScreening",
+            data: "{'PatientId': '" + patientId + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            cache: false,
+            success: function (response) {
+                $.each(JSON.parse(response.d), function (index, value) {
+                    if ($("#" + this.ScreeningCategoryId).length > 0) {
+                        var radioBtns = "#" + this.ScreeningCategoryId;
+                        $(radioBtns + " input:radio[value='" + this.ScreeningValueId + "']").attr("checked", true);
+                    }
+                });
+                checkPCButtonsOnCtrls();
+            },
+            error: function (response) {
+                toastr.error("Screening could  not be loaded");
+            }
+        }); 
+    });
+    function checkPCButtonsOnCtrls() {
+        $("#abdatastep3 input[type=radio]:checked").each(function () {
             var selectedValue = $(this).val();
             var rbName = $(this).attr('name');
             var parentPanel = $(this).parent().closest('.row').attr('id');
             showhidenotes(parentPanel, selectedValue, rbName);
         });
-    });
-
+    }
     jQuery(function ($) {
         var PCId = <%=PCId%>;        if (PCId > 0) {
-            $('#myWizard').wizard();
-            $('#myWizard').find('#dsSectionThree').toggleClass('complete', true);
-            $('#myWizard').on('changed.fu.wizard', function (evt, data) {
-                $('#myWizard').find('#dsSectionThree').toggleClass('complete', true);
+            $('#abmyWizard').wizard();
+            $('#abmyWizard').find('#dsSectionThree').toggleClass('complete', true);
+            $('#abmyWizard').on('changed.fu.wizard', function (evt, data) {
+                $('#abmyWizard').find('#dsSectionThree').toggleClass('complete', true);
             });
         }
     });

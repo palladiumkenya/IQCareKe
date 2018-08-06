@@ -24,7 +24,7 @@ namespace IQCare.Web.CCC.UC.Adherence
             if (!IsPostBack)
             {
                 displayQuestions();
-                getHIVAwareness(PatientId, PatientMasterVisitId);
+                //getHIVAwareness(PatientId, PatientMasterVisitId);
             }
         }
 
@@ -43,7 +43,7 @@ namespace IQCare.Web.CCC.UC.Adherence
                 QuestionsPlaceholder.Controls.Add(new LiteralControl("</div>"));
                 QuestionsPlaceholder.Controls.Add(new LiteralControl("<div class='col-md-2 text-right'>"));
                 rbList = new RadioButtonList();
-                rbList.ID = value.ItemId.ToString();
+                rbList.ID = "awareness"+value.ItemId.ToString();
                 rbList.RepeatColumns = 4;
                 rbList.ClientIDMode = System.Web.UI.ClientIDMode.Static;
                 rbList.CssClass = "rbList";

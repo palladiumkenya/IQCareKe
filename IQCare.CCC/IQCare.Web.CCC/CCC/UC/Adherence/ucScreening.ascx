@@ -1,5 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucScreening.ascx.cs" Inherits="IQCare.Web.CCC.UC.Adherence.ucScreening" %>
 <%@ Register TagPrefix="uc" TagName="tnDepressionScreening" Src="~/CCC/UC/Depression/ucUpdateDepressionScreening.ascx" %>
+<%@ OutputCache duration="86400" varybyparam="none" %>
 <style>
     .modal-dialog {width: 80%;margin: 30px auto;}
     .modal-body{height: 500px;overflow-y: scroll;}
@@ -68,67 +69,28 @@
     </div>
 </div>
 <script type="text/javascript">
-    $("#scmyWizard").on("actionclicked.fu.wizard", function (evt, data) {
-        var currentStep = data.step;
-        if (currentStep == 4) {
-            var ScreenId = <%=ScreenId%>;
-            if (ScreenId > 0) {
-                updateAdherenceScreen(ScreenId);
+    $(document).ready(function () {
+        $.ajax({
+            type: "POST",
+            url: "../WebService/PatientClinicalNotesService.asmx/getPatientNotes",
+            data: "{'PatientId': '" + patientId + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            cache: false,
+            success: function (response) {
+                //alert(JSON.stringify(response));
+                $.each(JSON.parse(response.d), function (index, value) {
+                    inputnotes = this.ClinicalNotes;
+                    if ($("#sc" + this.NotesCategoryId).length > 0) {
+                        $("#sc" + this.NotesCategoryId).val(inputnotes);
+                    }
+                });
+            },
+            error: function (response) {
+                toastr.error("Notes could not be loaded");
             }
-            else {
-                addAdherenceScreen();
-            }
-        }
+        });
     });
-
-    function updateAdherenceScreen(ScreenId)
-    {
-        <%--var ScreenId = ScreenId;
-        var patientId = <%=PatientId%>;
-        var userId = <%=userId%>;
-        var patientMasterVisitId = <%=PatientMasterVisitId%>;
-        var total = $("#<%=tbTotal.ClientID%>").val();
-        var depressionSeverity = $("#<%=tbDepressionSeverity.ClientID%>").val();
-        var recommendedManagement = $("#<%=tbRecommendedManagement.ClientID%>").val();
-        $.ajax({
-            type: "POST",
-            url: "../WebService/AdherenceService.asmx/addAdherenceScreen",
-            data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','createdBy':'" + userId + "','total': '" + total + "'," +
-            "'depressionSeverity': '" + depressionSeverity + "','recommendedManagement':'" + recommendedManagement + "','ScreeningId':'" + ScreenId + "'}",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (response) {
-                toastr.success(response.d, "Depression screen updated");
-            },
-            error: function (response) {
-                toastr.error("Depression screen not updated");
-            }
-        });--%>
-    }
-
-    function addAdherenceScreen() {
-        <%--var patientId = <%=PatientId%>;
-        var userId = <%=userId%>;
-        var patientMasterVisitId = <%=PatientMasterVisitId%>;
-        var total = $("#<%=tbTotal.ClientID%>").val();
-        var depressionSeverity = $("#<%=tbDepressionSeverity.ClientID%>").val();
-        var recommendedManagement = $("#<%=tbRecommendedManagement.ClientID%>").val();
-        $.ajax({
-            type: "POST",
-            url: "../WebService/AdherenceService.asmx/addAdherenceScreen",
-            data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','createdBy':'" + userId + "','total': '" + total + "'," +
-            "'depressionSeverity': '" + depressionSeverity + "','recommendedManagement':'" + recommendedManagement + "'}",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (response) {
-                toastr.success(response.d, "Depression screen saved");
-            },
-            error: function (response) {
-                toastr.error(JSON.stringify(response));
-            }
-        });--%>
-    }
-
     jQuery(function ($) {
         var ScreenId = <%=ScreenId%>;
         if (ScreenId > 0) {

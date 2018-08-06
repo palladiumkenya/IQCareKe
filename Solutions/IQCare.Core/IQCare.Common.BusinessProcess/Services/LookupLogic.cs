@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using IQCare.Common.Core.Models;
@@ -16,12 +17,27 @@ namespace IQCare.Common.BusinessProcess.Services
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
 
-        public async Task<string> GetLookupNameById(int itemId)
+        public async Task<List<LookupItemView>> GetLookupNameByGroupNameItemId(int itemId, string masterName)
+        {
+            try
+            {
+                var result = await _unitOfWork.Repository<LookupItemView>()
+                    .Get(x => x.ItemId == itemId && x.MasterName == masterName).ToListAsync();
+                return result;
+            }
+            catch (Exception e)
+            {
+                Log.Error(e.Message);
+                throw e;
+            }
+        }
+
+        public async Task<List<string>> GetLookupNameById(int itemId)
         {
             try
             {
                 var result = await _unitOfWork.Repository<LookupItemView>().Get(x => x.ItemId == itemId)
-                    .Select(y => y.ItemName).FirstOrDefaultAsync();
+                    .Select(y => y.ItemName).ToListAsync();
 
                 return result;
             }

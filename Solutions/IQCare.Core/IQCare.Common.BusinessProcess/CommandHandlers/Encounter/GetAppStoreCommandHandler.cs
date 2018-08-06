@@ -41,19 +41,19 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Encounter
                         expressionFinal = PredicateBuilder.And(expressionFinal, expressionPersonId);
                     }
 
-                    if (request.PatientMasterVisitId != null)
-                    {
-                        Expression<Func<AppStateStore, bool>> expressionPatientMasterVisitId = c => c.PatientMasterVisitId == request.PatientMasterVisitId || c.PatientMasterVisitId == null;
+                    //if (request.PatientMasterVisitId != null)
+                    //{
+                    //    Expression<Func<AppStateStore, bool>> expressionPatientMasterVisitId = c => c.PatientMasterVisitId == request.PatientMasterVisitId || c.PatientMasterVisitId == null;
 
-                        expressionFinal = PredicateBuilder.And(expressionFinal, expressionPatientMasterVisitId);
-                    }
+                    //    expressionFinal = PredicateBuilder.And(expressionFinal, expressionPatientMasterVisitId);
+                    //}
 
-                    if (request.EncounterId != null)
-                    {
-                        Expression<Func<AppStateStore, bool>> expressionEncounterId = c => c.EncounterId == request.EncounterId || c.EncounterId == null;
+                    //if (request.EncounterId != null)
+                    //{
+                    //    Expression<Func<AppStateStore, bool>> expressionEncounterId = c => c.EncounterId == request.EncounterId || c.EncounterId == null;
 
-                        expressionFinal = PredicateBuilder.And(expressionFinal, expressionEncounterId);
-                    }
+                    //    expressionFinal = PredicateBuilder.And(expressionFinal, expressionEncounterId);
+                    //}
 
                     var result = await _unitOfWork.Repository<AppStateStore>().Get(expressionFinal).Include(b=>b.AppStateStoreObjects).ToListAsync();
 

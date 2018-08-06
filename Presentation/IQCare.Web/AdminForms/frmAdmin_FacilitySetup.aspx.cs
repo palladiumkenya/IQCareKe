@@ -66,18 +66,18 @@ namespace IQCare.Web.Admin
                 return false;
             }
 
-            if (txtcountryno.Text.Trim() == "")
-            {
-                MsgBuilder theBuilder = new MsgBuilder();
-                theBuilder.DataElements["Control"] = "Country No";
-                IQCareMsgBox.Show("BlankTextBox", theBuilder, this);
-                txtcountryno.Focus();
-                return false;
-            }
+            //if (txtcountryno.Text.Trim() == "")
+            //{
+            //    MsgBuilder theBuilder = new MsgBuilder();
+            //    theBuilder.DataElements["Control"] = "Country No";
+            //    IQCareMsgBox.Show("BlankTextBox", theBuilder, this);
+            //    txtcountryno.Focus();
+            //    return false;
+            //}
             if (txtLPTF.Text.Trim() == "")
             {
                 MsgBuilder theBuilder = new MsgBuilder();
-                theBuilder.DataElements["Control"] = "Facility No";
+                theBuilder.DataElements["Control"] = "MFL Code";
                 IQCareMsgBox.Show("BlankTextBox", theBuilder, this);
                 txtLPTF.Focus();
                 return false;
@@ -312,7 +312,7 @@ namespace IQCare.Web.Admin
             txtNationalId.Attributes.Add("onKeyup", "chkNumeric('" + txtNationalId.ClientID + "')");
 
             txtfacilityname.Text = "";
-            txtcountryno.Text = "";
+           // txtcountryno.Text = "";
             txtLPTF.Text = "";
             txtSatelliteID.Text = "";
             txtGrace.Text = "";

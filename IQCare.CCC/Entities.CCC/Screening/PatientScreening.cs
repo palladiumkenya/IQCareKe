@@ -20,7 +20,7 @@ namespace Entities.CCC.Screening
         public virtual PatientMasterVisit PatientMasterVisit { get; set; }
         public DateTime? VisitDate { get; set; }
         public int? ScreeningTypeId { get; set; }
-        public bool ScreeningDone { get; set; }
+        public bool? ScreeningDone { get; set; }
         public DateTime? ScreeningDate { get; set; }
         public int? ScreeningCategoryId { get; set; }
         public int   ScreeningValueId { get; set; }

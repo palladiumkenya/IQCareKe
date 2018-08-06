@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/IQCare.master" AutoEventWireup="True"
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/IQCare.master" AutoEventWireup="True" ValidateRequest="false"
     Inherits="IQCare.Web.Pharmacy.Requests.EditPharmacyPrescription" CodeBehind="EditPharmacyPrescription.aspx.cs" %>
 
 <%@ MasterType VirtualPath="~/MasterPage/IQCare.master" %>

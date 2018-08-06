@@ -4,7 +4,6 @@ using IQCare.SharedKernel.Model;
 
 namespace IQCare.HTS.Core.Model
 {
-    [Table("HtsEncounter")]
     public class HtsEncounter 
     {
         public int Id { get; set; }

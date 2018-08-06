@@ -26,7 +26,7 @@ namespace IQCare.Web.CCC.UC.Adherence
             if (!IsPostBack)
             {
                 populateQuestions();
-                getDailyRoutine(PatientId, PatientMasterVisitId);
+                //getDailyRoutine(PatientId, PatientMasterVisitId);
             }
         }
         protected void populateQuestions()

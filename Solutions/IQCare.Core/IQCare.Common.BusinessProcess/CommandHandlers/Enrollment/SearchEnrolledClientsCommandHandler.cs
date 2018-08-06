@@ -25,7 +25,7 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Enrollment
             {
                 StringBuilder sql = new StringBuilder();
                 sql.Append("exec pr_OpenDecryptedSession; ");
-                sql.Append("SELECT TOP 10 * FROM Api_PatientsView WHERE (ServiceAreaId = 2 OR ServiceAreaId IS NULL) ");
+                sql.Append("SELECT TOP 10 * FROM Api_PatientsView WHERE (DeleteFlag = 0 AND (ServiceAreaId = 2 OR ServiceAreaId IS NULL)) ");
                 if(!string.IsNullOrWhiteSpace(request.identificationNumber))
                     sql.Append($" AND IdentifierValue like \'%{request.identificationNumber}%\'");
                 if (!string.IsNullOrWhiteSpace(request.firstName))

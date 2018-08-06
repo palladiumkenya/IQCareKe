@@ -242,7 +242,6 @@
     </div>
 
     <script type="text/javascript">
-        //$("#<%=AppointmentDate.ClientID%>").val("09-JUN-2018");
         $("#PersonAppointmentDate").datetimepicker({
             defaultDate: $("#<%=AppointmentDate.ClientID%>").val(),
             format: 'DD-MMM-YYYY',
@@ -258,46 +257,6 @@
             }
             AppointmentCount();
         });
-        //$('#PersonAppointmentDate').datepicker({
-        //    allowPastDates: false,
-        //    Date: 0,
-        //    momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
-        //});
-
-
-
-        $(document).ready(function () {
-
-          //  $("#<%=AppointmentDate.ClientID%>").val("09-JUN-2018");
-            $("#PersonAppointmentDate").datetimepicker({
-                defaultDate:$("#<%=AppointmentDate.ClientID%>").val(),
-                format: 'DD-MMM-YYYY',
-                allowInputToggle: true,
-                useCurrent: false
-            }).on("dp.change", function (selectedDate) {
-                var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
-                var appDate = $("#<%=AppointmentDate.ClientID%>").val();
-                if (moment('' + appDate + '').isAfter(futureDate)) {
-                    toastr.error("Appointment date cannot be set to over 7 months");
-                    $("#<%=AppointmentDate.ClientID%>").val("");
-                    return false;
-                }
-                AppointmentCount();
-            });
-
-        
-
-        <%--$("#AppointmentDate").change(function () {
-            alert("Appointment Date Changed");
-            var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
-            var appDate = $("#<%=AppointmentDate.ClientID%>").val();
-            if (moment('' + appDate + '').isAfter(futureDate)) {
-                toastr.error("Appointment date cannot be set to over 7 months");
-                $("#<%=AppointmentDate.ClientID%>").val("");
-                return false;
-            }
-            AppointmentCount();
-        });--%>
 
         $(document).ready(function () {
             $("#AppointmentDate").val("");
@@ -414,11 +373,7 @@
                         else
                         {
                             addPatientAppointment();
-                        }
-                        } else {
-                            addPatientAppointment();
-                        }
-                       
+                        } 
                     },
                     error: function (msg) {
                         //alert(msg.responseText);
@@ -466,7 +421,7 @@
             var patientMasterVisitId = <%=PatientMasterVisitId%>;
             var userId = <%=UserId%>;
             var appointmentid = <%=AppointmentId%>
-                $.ajax({
+            $.ajax({
                     type: "POST",
                     url: "../WebService/PatientService.asmx/UpdatePatientAppointment",
                     data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','appointmentDate': '" + appointmentDate + "','description': '" + description + "','reasonId': '" + reason + "','serviceAreaId': '" + serviceArea + "','statusId': '" + status + "','differentiatedCareId': '" + differentiatedCareId + "','userId':'" + userId + "','appointmentId':'" + appointmentid+"'}",
@@ -480,10 +435,10 @@
                 error: function (response) {
                     toastr.error(response.d, "Appointment not saved");
                 }
-                });
+            });
         }
 
-        function updateAppointment() {
+        <%--function updateAppointment() {
             var serviceArea = $("#<%=ServiceArea.ClientID%>").val();
             var reason = $("#<%=Reason.ClientID%>").val();
             var description = $("#<%=description.ClientID%>").val();
@@ -510,7 +465,7 @@
                     toastr.error(response.d, "Appointment not saved");
                 }
             });
-        }
+        }--%>
 
         function resetFields(parameters) {
             var appointmentid = <%=AppointmentId%>;

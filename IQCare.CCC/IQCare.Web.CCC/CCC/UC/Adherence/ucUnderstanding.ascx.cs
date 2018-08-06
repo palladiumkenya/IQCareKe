@@ -23,7 +23,7 @@ namespace IQCare.Web.CCC.UC.Adherence
             if (!IsPostBack)
             {
                 populateQuestions();
-                getUnderstanding(PatientId, PatientMasterVisitId);
+                //getUnderstanding(PatientId, PatientMasterVisitId);
             }
         }
 

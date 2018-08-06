@@ -308,7 +308,14 @@
             <div class="col-md-12"><hr></div>
         </div>
 
-        <div class="col-md-4"></div>
+        <div class="col-md-4 col-xs-12" style="padding-top:2%">
+            <div class="col-md-12 label label-primary">
+                <label class="label label-primary fa fa-exclamation-circle fa-2x pull-left">Interoperability Layer Stats</label>
+            </div>
+            <div class="col-md-12" style="padding-bottom:2%"></div>
+            <div class="col-md-12" id="interoperabilityLayerMessageStats" runat="server"></div>
+        </div>
+
         <div class="col-md-4"></div>
     </div>
     

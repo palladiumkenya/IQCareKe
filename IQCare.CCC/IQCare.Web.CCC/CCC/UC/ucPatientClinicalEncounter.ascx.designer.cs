@@ -94,6 +94,15 @@ namespace IQCare.Web.CCC.UC {
         protected global::System.Web.UI.WebControls.DropDownList nutritionscreeningstatus;
         
         /// <summary>
+        /// PHNutritionScreeningNotes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder PHNutritionScreeningNotes;
+        
+        /// <summary>
         /// rdAnyComplaintsYes control.
         /// </summary>
         /// <remarks>
@@ -1001,6 +1010,15 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::IQCare.Web.CCC.UC.ucPatientLabs ucPatientLabs;
+        
+        /// <summary>
+        /// ucGenderBasedViolenceAssessment control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::IQCare.Web.CCC.UC.ucGenderBasedViolenceAssessment ucGenderBasedViolenceAssessment;
         
         /// <summary>
         /// AppointmentDate control.
