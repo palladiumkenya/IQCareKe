@@ -21,6 +21,7 @@ export class LinkageComponent implements OnInit {
         public zone: NgZone,
         private snotifyService: SnotifyService,
         private notificationService: NotificationService) { }
+
     ngOnInit() {
         this.linkage = new Linkage();
 

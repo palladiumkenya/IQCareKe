@@ -29,11 +29,20 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.PersonCommand
                     var registeredPerson = await registerPersonService.GetPerson(request.PersonId);
                     var gender = await _unitOfWork.Repository<LookupItemView>().Get(x => x.ItemId == registeredPerson.Sex && x.MasterName == "Gender")
                         .ToListAsync();
-                    var maritalStatusName = await _unitOfWork.Repository<LookupItemView>()
-                        .Get(x => x.ItemId == 58 && x.MasterName == "MaritalStatus").ToListAsync();
+                    var maritalStatus = await registerPersonService.GetPersonMaritalStatus(request.PersonId);
+                    var maritalStatusName = "Single";
+                    if (maritalStatus.Count > 0)
+                    {
+                        var matList = await _unitOfWork.Repository<LookupItemView>()
+                            .Get(x => x.ItemId == maritalStatus[0].MaritalStatusId && x.MasterName == "MaritalStatus").ToListAsync();
+                        if (matList.Count > 0)
+                        {
+                            maritalStatusName = matList[0].ItemName;
+                        }
+                    }
 
                     var mstResult = await registerPersonService.InsertIntoBlueCard(registeredPerson.FirstName, registeredPerson.LastName,
-                        registeredPerson.LastName, DateTime.Now, maritalStatusName[0].ItemName, "", "", gender[0].ItemName, "EXACT", registeredPerson.DateOfBirth, request.UserId);
+                        registeredPerson.LastName, request.EnrollmentDate, maritalStatusName, "", "", gender[0].ItemName, "EXACT", registeredPerson.DateOfBirth, request.UserId);
 
                     var patient = await registerPersonService.AddPatient(request.PersonId, request.UserId, mstResult[0].Ptn_Pk);
                     
