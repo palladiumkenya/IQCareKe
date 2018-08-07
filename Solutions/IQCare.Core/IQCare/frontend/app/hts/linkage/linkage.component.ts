@@ -13,6 +13,7 @@ import { NotificationService } from '../../shared/_services/notification.service
 export class LinkageComponent implements OnInit {
     linkage: Linkage;
     isEdit: boolean = false;
+    private cccPattern = /^((?!(0))[0-9]{10})$/;
 
     constructor(private linkageService: LinkageReferralService,
         private router: Router,
@@ -20,6 +21,7 @@ export class LinkageComponent implements OnInit {
         public zone: NgZone,
         private snotifyService: SnotifyService,
         private notificationService: NotificationService) { }
+
     ngOnInit() {
         this.linkage = new Linkage();
 
