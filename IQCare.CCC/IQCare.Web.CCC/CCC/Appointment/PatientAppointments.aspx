@@ -13,7 +13,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-maxlength/1.7.0/bootstrap-maxlength.min.js"></script>
 
     <script type="text/javascript">
-        $(document).ready(function () { $("[name='switch-size']").bootstrapSwitch(); });
+        //$(document).ready(function () { $("[name='switch-size']").bootstrapSwitch(); });
     </script>
 
     <%--    <div class="col-md-12">

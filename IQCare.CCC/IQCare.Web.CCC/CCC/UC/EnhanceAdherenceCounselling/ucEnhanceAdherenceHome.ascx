@@ -1,5 +1,4 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucEnhanceAdherenceHome.ascx.cs" Inherits="IQCare.Web.CCC.UC.EnhanceAdherenceCounselling.ucEnhanceAdherenceHome" %>
-<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucEnhanceAdherenceHome.ascx.cs" Inherits="IQCare.Web.CCC.UC.EnhanceAdherenceCounselling.ucEnhanceAdherenceHome" %>
 <style>
     .control-label{text-align: left !important;}
 </style>
@@ -121,6 +120,11 @@
             $('#eahmyWizard').find('#eahSectionFour').toggleClass('complete', true);
             $('#eahmyWizard').find('#eahSectionFive').toggleClass('complete', true);
         });
+    });
+    $(document).ready(function () {
+        $(this).scrollTop(0);
+        $("#sessiononedata .loading").show();
+        $("#sessiononedata").load("../UC/EnhanceAdherenceCounselling/session1.aspx");
     });
     $("#loadEnhanceAdherence").click(function () {
         $("#sessiononedata .loading").show();

@@ -4613,7 +4613,6 @@
             toastr.success("Nutrition Assessment Saved");
         }
     }
-    }
 
     function GetGBVScreeningStatus() {
         var patientId ="<%=PatientId%>";

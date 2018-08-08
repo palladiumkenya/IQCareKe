@@ -493,6 +493,11 @@ namespace IQCare.CCC.UILogic
                             theFrmRoot.NavigateUrl = "../Adherence/AdherenceBarriers.aspx?visitId=" + theDR["visitID"].ToString();
                             theFrmRoot.ImageUrl = "~/images/15px-Yes_check.svg.png";
                         }
+                        if (theDR["VisitName"].ToString() == "Enhance Adherence Counselling")
+                        {
+                            theFrmRoot.NavigateUrl = "PatientEncounter.aspx?visitId=" + theDR["visitID"].ToString()+ "#EnhanceAdherence";
+                            theFrmRoot.ImageUrl = "~/images/15px-Yes_check.svg.png";
+                        }
                         if (theDR["VisitName"].ToString() == "Triage")
                         {
                             theFrmRoot.NavigateUrl = "VitalSigns.aspx?visitId=" + theDR["visitID"].ToString();
@@ -704,6 +709,23 @@ namespace IQCare.CCC.UILogic
             {
                 throw;
             }
+        }
+        public int savePatientEncounter(int patientID, int patientMasterVisitID, string EncounterType, int ServiceAreaId, int userId)
+        {
+            int val = 0;
+            IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
+            PatientEncounterManager patientEncounterManager = new PatientEncounterManager();
+            encounterTypeId = patientEncounterManager.GetPatientEncounterId("EncounterType", EncounterType.ToLower());
+            var foundEncounter = patientEncounterManager.GetEncounterIfExists(Convert.ToInt32(patientID), Convert.ToInt32(patientMasterVisitID), Convert.ToInt32(encounterTypeId));
+            if (foundEncounter != null)
+            {
+                result = foundEncounter.Id;
+            }
+            else
+            {
+                result = patientEncounterManager.AddpatientEncounter(Convert.ToInt32(patientID),Convert.ToInt32(patientMasterVisitID), encounterTypeId, 203,userId);
+            }
+            return (result > 0) ? val : 0;
         }
     }
 }

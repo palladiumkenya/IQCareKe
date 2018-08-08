@@ -158,6 +158,8 @@
     <Content Include="CCC\UC\EnhanceAdherenceCounselling\ucSession4.ascx" />
     <Content Include="CCC\UC\EnhanceAdherenceCounselling\ucViralLoad.ascx" />
     <Content Include="CCC\UC\EnhanceAdherenceCounselling\viralload.aspx" />
+    <Content Include="CCC\UC\ucCaseSummary.ascx" />
+    <Content Include="CCC\UC\ucEvaluation.ascx" />
     <Content Include="CCC\UC\ucExtruder.ascx" />
     <Content Include="CCC\UC\ucFemaleVitals.ascx" />
     <Content Include="CCC\UC\ucGenderBasedViolenceAssessment.ascx" />
@@ -642,6 +644,20 @@
     </Compile>
     <Compile Include="CCC\UC\EnhanceAdherenceCounselling\viralload.aspx.designer.cs">
       <DependentUpon>viralload.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\ucCaseSummary.ascx.cs">
+      <DependentUpon>ucCaseSummary.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucCaseSummary.ascx.designer.cs">
+      <DependentUpon>ucCaseSummary.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\ucEvaluation.ascx.cs">
+      <DependentUpon>ucEvaluation.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucEvaluation.ascx.designer.cs">
+      <DependentUpon>ucEvaluation.ascx</DependentUpon>
     </Compile>
     <Compile Include="CCC\UC\ucExtruder.ascx.cs">
       <DependentUpon>ucExtruder.ascx</DependentUpon>
