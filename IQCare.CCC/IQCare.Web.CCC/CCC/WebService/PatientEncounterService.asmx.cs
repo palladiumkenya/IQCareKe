@@ -1091,5 +1091,23 @@ namespace IQCare.Web.CCC.WebService
             }
             return Msg;
         }
+        [WebMethod]
+        public string savePatientEncounter(int PatientID, int PatientMasterVisitID, string EncounterType, int ServiceAreaId, int UserId)
+        {
+            try
+            {
+                PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+                Result = patientEncounter.savePatientEncounter(PatientID,PatientMasterVisitID,EncounterType,ServiceAreaId,UserId);
+                if (Result > 0)
+                {
+                    Msg = "Saved";
+                }
+            }
+            catch(Exception e)
+            {
+                Msg = e.Message;
+            }
+            return Msg;
+        }
     }
 }
