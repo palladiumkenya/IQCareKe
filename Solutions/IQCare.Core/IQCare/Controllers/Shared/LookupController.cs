@@ -34,6 +34,19 @@ namespace IQCare.Controllers.Common
             return BadRequest(results);
         }
 
+        [HttpGet("GetbyGroupName/{groupName}")]
+        public async Task<IActionResult> GetbyGroupName(string groupName)
+        {
+            var results = await _mediator.Send(new GetOptionsByGroupNameCommand { GroupName = groupName },
+                HttpContext.RequestAborted);
+            
+            if (results.IsValid)
+                return Ok( results.Value);
+
+            return BadRequest(results);
+        }
+
+
         [HttpGet("htsOptions")]
         public async Task<IActionResult> Get()
         {

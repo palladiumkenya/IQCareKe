@@ -39,19 +39,29 @@ namespace IQCare.PMTCT.Infrastructure
         }
 
         public void Save()
-        {
-            throw new System.NotImplementedException();
-        }
+            => _context.SaveChanges();
 
-        public Task SaveAsync()
-        {
-            throw new System.NotImplementedException();
-        }
+        public async Task SaveAsync()
+            => await _context.SaveChangesAsync();
 
         public DbContext Context { get { return _context; } }
+
         public IRepository<T> Repository<T>() where T : class
         {
-            throw new System.NotImplementedException();
+            if (repositories == null)
+                repositories = new Hashtable();
+
+            var type = typeof(T).Name;
+
+            if (!repositories.ContainsKey(type))
+            {
+                var repositoryType = typeof(PmtctRepository<>);
+                var repositoryInstance = Activator.CreateInstance(repositoryType.MakeGenericType(typeof(T)), _context);
+                repositories.Add(type, repositoryInstance);
+            }
+
+            return (IRepository<T>)repositories[type];
         }
+
     }
 }
