@@ -48,7 +48,9 @@ namespace DataAccess.CCC.Repository
         private IPatientOvcStatusRepository _patientOvcStatusRepository;
         private IPatientPopulationRepository _patientPopulationRepository;
         private IPatientTreatmentSupporterRepository _patientTreatmentSupporterRepository;
-
+        private IPatientSexualHistoryRepository _patientSexualHistoryRepository;
+        private IPatientHighRiskRepository _patientHighRiskRepository;
+        private IPatientPartnersRepository _patientPartnersRepository;
         /* Patient Interface */
         private IPatientVitalsRepository _patientVitalsRepository;
 
@@ -300,7 +302,33 @@ namespace DataAccess.CCC.Repository
                        (_patientServiceEnrollmentLookupRepository = new PatientServiceEnrollmentLookupRepository((LookupContext) _context));
             }
         }
+        public IPatientSexualHistoryRepository PatientSexualHistoryRepository
+        {
+            get
+            {
+                return _patientSexualHistoryRepository ??
+                       (_patientSexualHistoryRepository =
+                           new PatientSexualHistoryRepository((GreencardContext)_context));
+            }
+        }
 
+        public IPatientPartnersRepository PatientPartnersRepository
+        {
+            get
+            {
+                return _patientPartnersRepository ??
+                    (_patientPartnersRepository = new PatientPartnersRepository((GreencardContext)_context));
+            }
+        }
+
+        public IPatientHighRiskRepository PatientHighRiskRepository
+        {
+            get
+            {
+                return _patientHighRiskRepository ??
+                    (_patientHighRiskRepository = new PatientHighRiskRepository((GreencardContext)_context));
+            }
+        }
         public IPatientTreatmentSupporterLookupRepository PatientTreatmentSupporterLookupRepository
         {
             get

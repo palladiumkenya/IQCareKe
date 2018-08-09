@@ -75,7 +75,38 @@ namespace IQCare.CCC.UILogic.Screening
                 throw;
             }
         }
+        public PatientScreening GetCurrentPatientScreening(int patientId, int patientmastervisitid)
+        {
+            try
+            {
+              
+               var psc = _patientScreening.GetCurrentPatientScreening(patientId,patientmastervisitid);
+                
+                return psc;
+             
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
+
+        }
+
+        public int UpdateCurrentPatientScreening(PatientScreening psc)
+        {
+            try
+            {
+               
+
+                return _patientScreening.UpdatePatientScreening(psc);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public int UpdatePatientScreening(int id,DateTime visitDate ,int screeningTypeId, int screeningDone, DateTime screeningDate, int screeningCategoryId, int screeningValueId, string comment)
         {
             try

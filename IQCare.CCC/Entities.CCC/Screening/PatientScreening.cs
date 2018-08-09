@@ -22,7 +22,7 @@ namespace Entities.CCC.Screening
         public int? ScreeningTypeId { get; set; }
         public int? ScreeningDone { get; set; }
         public DateTime? ScreeningDate { get; set; }
-        public int ScreeningCategoryId { get; set; }
+        public int? ScreeningCategoryId { get; set; }
         public int   ScreeningValueId { get; set; }
         public string Comment { get; set; }
     }

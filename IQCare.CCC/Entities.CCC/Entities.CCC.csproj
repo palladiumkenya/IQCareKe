@@ -95,6 +95,9 @@
     <Compile Include="Encounter\PatientFamilyPlanningMethod.cs" />
     <Compile Include="Baseline\PatientHivTesting.cs" />
     <Compile Include="Baseline\PatientFamilyTesting.cs" />
+    <Compile Include="Encounter\PatientHighRisk.cs" />
+    <Compile Include="Encounter\PatientPartner.cs" />
+    <Compile Include="Encounter\PatientSexualHistory.cs" />
     <Compile Include="IL\ILMessageStats.cs" />
     <Compile Include="IL\ILMessageViewer.cs" />
     <Compile Include="IL\IlMessengerLog.cs" />

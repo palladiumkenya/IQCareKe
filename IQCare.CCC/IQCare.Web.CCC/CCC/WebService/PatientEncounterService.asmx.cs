@@ -18,6 +18,8 @@ using IQCare.CCC.UILogic.Triage;
 using AutoMapper;
 using IQCare.Events;
 using Entities.CCC.Lookup;
+using IQCare.CCC.UILogic.Screening;
+using Entities.CCC.Screening;
 
 //using static Entities.CCC.Encounter.PatientEncounter;
 
@@ -39,7 +41,7 @@ namespace IQCare.Web.CCC.WebService
 
     public class PatientEncounterService : System.Web.Services.WebService
     {
-
+       
         public class OIData
         {
             public int OI { get; set; }
@@ -49,8 +51,54 @@ namespace IQCare.Web.CCC.WebService
 
             public bool DeleteFlag { get; set; }
         }
+
+        public class SexualHistoryOutcome
+        {
+            public List<SexualHistory> list { get; set; }
+
+            public string sexuallyactive { get; set; }
+
+            public string numberofpartners { get; set; }
+
+            public List<LookupItemView> sexualorient { get; set; }
+            public List<LookupItemView> gender { get; set; }
+
+            public List<LookupItemView> hivstatus { get; set; }
+
+        }
+        public class Output
+        {
+            public List<SexualHistory> list { get; set; }
+            public string msg { get; set; }
+        }
+
+        public class HighRisk
+        {
+            public int Id { get; set; }
+            public string value { get; set; }
+        }
+
+
+        public class SexualHistory
+        {
+            public string uniqueid { get; set; }
+            public string id { get; set; }
+            public string PartnerStatus { get; set; }
+            public string Gender { get; set; }
+
+            public bool DeleteFlag { get; set; }
+            public string SexualOrientation { get; set; }
+            public List<HighRisk> Highrisk { get; set; }
+
+            
+        }
         private string Msg { get; set; }
         private int Result { get; set; }
+       public  string numberofpartners;
+        public int count = 1;
+
+        public  string ItemDisplayName;
+       public  string sexuallyactive;
         private readonly IPatientMasterVisitManager _visitManager = (IPatientMasterVisitManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientmasterVisit, BusinessProcess.CCC");
         [WebMethod(EnableSession = true)]
         public int savePatientEncounterPresentingComplaints(string VisitDate, string VisitScheduled, string VisitBy, string anyComplaints, string Complaints, int TBScreening, int NutritionalStatus, string adverseEvent, string presentingComplaints)
@@ -101,7 +149,416 @@ namespace IQCare.Web.CCC.WebService
             ArrayList arrayList = new ArrayList(list);
             return arrayList;
         }
+        [WebMethod(EnableSession =true)]
+        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
+        public string GetSexualHistory()
+        {
+            PatientHighRiskManager hr = new PatientHighRiskManager();
+            PatientSexualHistoryManager psh = new PatientSexualHistoryManager();
+            PatientPartnersManager partman = new PatientPartnersManager();
+            int patientId = Convert.ToInt32(Session["PatientPK"].ToString());
+            int userId = Convert.ToInt32(Session["AppUserId"]);
+            int patientMasterVisitId = Convert.ToInt32(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString());
+           
+            PatientScreeningManager pscreen = new PatientScreeningManager();
+            List<SexualHistory> sexuallist = new List<SexualHistory>();
+            PatientScreening psc=  pscreen.GetCurrentPatientScreening(patientId, patientMasterVisitId);
+            List<PatientSexualHistory> patienthistory = psh.GetPatientSexualHistoryList(patientId, patientMasterVisitId);
+           
+            
 
+            PatientPartner pat = partman.GetPatientPartner(patientId, patientMasterVisitId);
+            if (pat != null)
+            {
+                 numberofpartners= pat.NoofPartners.ToString();
+            }
+            if (psc != null)
+            {
+                int? screeningTypeId = psc.ScreeningTypeId;
+            }
+            List<LookupItemView> lSexualOrientation = LookupLogic.GetLookItemByGroup("SexualOrientation");
+            List<LookupItemView> lGender = LookupLogic.GetLookItemByGroup("Gender");
+            List<LookupItemView> lHivStatus = LookupLogic.GetLookItemByGroup("HivStatus");
+            List<LookupItemView> lsexual = LookupLogic.GetLookItemByGroup("SexualScreening");
+            if (psc != null)
+            {
+                LookupItemView lookupview = lsexual.Find(x => x.ItemId == psc.ScreeningValueId);
+                string sexualactive = lookupview.ItemName;
+
+                if (sexualactive.ToString().ToLower() == "yes")
+                {
+                    sexuallyactive = "yes";
+
+                }
+                else if (sexualactive.ToString().ToLower() == "no")
+                {
+                    sexuallyactive = "no";
+                }
+            }
+            SexualHistoryOutcome shc = new SexualHistoryOutcome();
+            if (patienthistory != null)
+            {
+                
+                foreach (PatientSexualHistory psexual in patienthistory)
+                {
+                    SexualHistory sh = new SexualHistory();
+
+                    sh.id = psexual.Id.ToString();
+                  
+
+
+                    sh.uniqueid = count.ToString();
+                    sh.SexualOrientation = psexual.PatientSexualOrientation.ToString();
+                    sh.PartnerStatus = psexual.PartnerHivStatus.ToString();
+                    sh.Gender = psexual.PartnerGender.ToString();
+                    sh.DeleteFlag = psexual.DeleteFlag;
+                    List<HighRisk> htr = new List<HighRisk>();
+                    List<PatientHighRisk> hrs = hr.GetPatientHighRiskList(patientId, patientMasterVisitId, psexual.Id);
+                    foreach (PatientHighRisk hhr in hrs)
+                    {
+                        HighRisk highr = new HighRisk();
+                        if (hhr.HighRisk > 0)
+                        {
+                            highr.Id = hhr.HighRisk;
+                        }
+                        else
+                        {
+                            highr.Id = 0;
+                        }
+                        List<LookupItemView> lv = LookupLogic.GetLookItemByGroup("HighRisk");
+
+                        LookupItemView ltv = lv.Find(x => x.ItemId == hhr.HighRisk);
+                        if (ltv != null)
+                        {
+                            highr.value = ltv.ItemDisplayName;
+                        }
+                        else
+                        {
+                            highr.value = "null";
+                        }
+                        
+                        htr.Add(highr);
+                        sh.Highrisk = htr;
+                        
+                    }
+                    sexuallist.Add(sh);
+                    count = ++count;
+                   
+                 
+
+                }
+                
+               
+            }
+            shc.list = sexuallist;
+            shc.sexualorient = lSexualOrientation;
+            shc.hivstatus = lHivStatus;
+            shc.gender = lGender;
+            shc.numberofpartners = numberofpartners;
+            shc.sexuallyactive = sexuallyactive;
+            return new JavaScriptSerializer().Serialize(shc);
+
+
+        }
+
+        [WebMethod(EnableSession =true)]
+        public string SaveSexualHistory(string data,string sexuallyactive,string partnersno)
+        {
+            string Msg="";
+            PatientHighRiskManager hr = new PatientHighRiskManager();
+            PatientSexualHistoryManager psh = new PatientSexualHistoryManager();
+            PatientPartnersManager partman = new PatientPartnersManager();
+            JavaScriptSerializer json = new JavaScriptSerializer();
+            List<SexualHistory> sexualhist = json.Deserialize<List<SexualHistory>>(data);
+            string SexActive = sexuallyactive;
+            string numberofpartners = partnersno.ToString();
+
+            int patientId = Convert.ToInt32(Session["PatientPK"].ToString());
+            int userId = Convert.ToInt32(Session["AppUserId"]);
+            int patientMasterVisitId = Convert.ToInt32(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString());
+            int partnerid;
+            
+            if (SexActive.ToLower() == "yes")
+            {
+                ItemDisplayName = "yes";
+            }
+            else if(SexActive.ToLower() == "no")
+            {
+                ItemDisplayName = "no";
+            }
+
+            
+                List<LookupItemView> lv=LookupLogic.GetLookItemByGroup("SexualScreening");
+                LookupItemView itemview = new LookupItemView();
+                 itemview= lv.Find(x => x.DisplayName.ToLower() == ItemDisplayName.ToLower());
+                var MasterId = itemview.MasterId;
+                var ItemId = itemview.ItemId;
+                PatientScreeningManager pmscreen = new PatientScreeningManager();
+               PatientScreening psc= pmscreen.GetCurrentPatientScreening(patientId, patientMasterVisitId);
+                if (psc != null)
+                {
+                    psc.ScreeningValueId = ItemId;
+                psc.ScreeningDate = DateTime.Now;
+                    psc.VisitDate = DateTime.Now;
+                psc.ScreeningCategoryId = MasterId;
+                psc.ScreeningTypeId = MasterId;
+                    
+                   var  updatescreen= pmscreen.UpdateCurrentPatientScreening(psc);
+               if(updatescreen > 0)
+                {
+                    Msg += "The sexually active is updated successfully";
+                }
+                }
+                else
+                {
+
+                    PatientScreening pscadd = new PatientScreening();
+                    pscadd.PatientId = patientId;
+                    pscadd.PatientMasterVisitId = patientMasterVisitId;
+                    pscadd.ScreeningCategoryId = MasterId;
+                    pscadd.ScreeningTypeId = MasterId;
+                    pscadd.ScreeningValueId = ItemId;
+                    pscadd.ScreeningDone = 1;
+                pscadd.ScreeningDate = DateTime.Now;
+                pscadd.VisitDate = DateTime.Now;
+                    int  result=  pmscreen.AddPatientScreening(pscadd.PatientId, pscadd.PatientMasterVisitId,
+                    Convert.ToDateTime(pscadd.VisitDate), Convert.ToInt32(pscadd.ScreeningTypeId)
+                    , Convert.ToInt32(pscadd.ScreeningDone),Convert.ToDateTime(pscadd.ScreeningDate), 
+                    Convert.ToInt32(pscadd.ScreeningCategoryId)
+                    , pscadd.ScreeningValueId, pscadd.Comment, userId);
+                  if(result> 0)
+                {
+                    Msg += "The sexually active is added successfully";
+                }
+                }
+
+
+
+            int partners = Convert.ToInt32(numberofpartners);
+            if (!String.IsNullOrEmpty(numberofpartners))
+            {
+                if (partners > 0)
+                {
+                    PatientPartner pat = new PatientPartner();
+                    pat = partman.GetPatientPartner(patientId, patientMasterVisitId);
+                    if (pat != null)
+                    {
+                        pat.NoofPartners = Convert.ToInt32(numberofpartners);
+                        pat.UpdateDate = Convert.ToDateTime(DateTime.Now);
+                        pat.CreatedBy = userId;
+                      
+                        PatientPartner part = partman.UpdatePatientPartner(pat);
+                        if (part != null)
+                        {
+                            Msg += "Number of partners  in last  6 months has been updated";
+                        }
+                    }
+                    else
+                    {
+
+                        PatientPartner padd = new PatientPartner();
+                        padd.PatientId = patientId;
+                        padd.PatientMasterVisitId = patientMasterVisitId;
+                        padd.NoofPartners = Convert.ToInt32(numberofpartners);
+                        padd.CreateDate = Convert.ToDateTime(DateTime.Now);
+                        padd.CreatedBy = userId;
+                        PatientPartner padded = partman.addPatientPartner(padd);
+                        if (padded != null)
+                        {
+                            Msg += "Number of partners  in last  6 months has been added";
+                        }
+
+                    }
+                }
+                else
+                {
+                    PatientPartner pat = new PatientPartner();
+                    pat = partman.GetPatientPartner(patientId, patientMasterVisitId);
+                    if (pat != null)
+                    {
+                      
+                        pat.UpdateDate = Convert.ToDateTime(DateTime.Now);
+                        pat.CreatedBy = userId;
+                        pat.DeleteFlag = true;
+                        PatientPartner patupd = partman.UpdatePatientPartner(pat);
+                        if (patupd != null)
+                        {
+                            Msg += "Number of partners  in last  6 months has been updated";
+                        }
+                    }
+                }
+          
+            }
+            if (sexualhist !=null)
+            {
+                foreach(SexualHistory sx in sexualhist)
+                {
+                    if(Convert.ToInt32(sx.id) > 0)
+                    {
+                        PatientSexualHistory psexual = new PatientSexualHistory();
+                       psexual=psh.GetPatientSexualHistory(patientId, patientMasterVisitId, Convert.ToInt32(sx.id));
+                        if(psexual !=null)
+                        {
+                            psexual.PartnerGender =Convert.ToInt32(sx.Gender);
+                            psexual.PartnerHivStatus = Convert.ToInt32(sx.PartnerStatus);
+                            psexual.PatientSexualOrientation = Convert.ToInt32(sx.SexualOrientation);
+                            psexual.UpdateDate = Convert.ToDateTime(DateTime.Today);
+                            psexual.CreatedBy = userId;
+                            psexual.DeleteFlag = sx.DeleteFlag;
+                            PatientSexualHistory updatedsexual = new PatientSexualHistory();
+                            updatedsexual= psh.UpdatePatientSexualHistory(psexual);
+                            if (updatedsexual != null)
+                            {
+                                partnerid = updatedsexual.Id;
+                               
+                                Msg += "Sexual History of Patient Successfully updated";
+
+                                if (partnerid > 0)
+                                {
+                                    PatientHighRisk phr = new PatientHighRisk();
+
+                                    foreach (HighRisk highr in sx.Highrisk)
+                                    {
+                                        if (highr.value != null || highr.value == "null")
+                                        {
+                                            phr = hr.GetPatientHighRisks(patientId, patientMasterVisitId, partnerid, highr.Id);
+
+                                            if (phr != null)
+                                            {
+                                                phr.HighRisk = Convert.ToInt32(highr.Id);
+                                                phr.PartnerId = partnerid;
+                                                phr.PatientMasterVisitId = patientMasterVisitId;
+                                                phr.PatientId = patientId;
+                                                phr.CreatedBy = userId;
+                                                phr.DeleteFlag = sx.DeleteFlag;
+                                                PatientHighRisk pupdaterisk = new PatientHighRisk();
+                                                pupdaterisk = hr.UpdatePatientHighRisk(phr);
+                                                if (pupdaterisk != null)
+                                                {
+                                                    Msg += "Patient Risk Behaviour is updated";
+                                                }
+                                            }
+
+                                            else
+                                            {
+                                                PatientHighRisk paddh = new PatientHighRisk();
+                                                paddh.HighRisk = Convert.ToInt32(highr.Id);
+                                                paddh.PartnerId = partnerid;
+                                                paddh.PatientMasterVisitId = patientMasterVisitId;
+                                                paddh.PatientId = patientId;
+                                                paddh.CreatedBy = userId;
+                                                paddh.CreateDate = Convert.ToDateTime(DateTime.Today);
+
+
+                                                PatientHighRisk paddrisk = new PatientHighRisk();
+
+                                                paddrisk = hr.addPatientHighRisk(paddh);
+                                               
+                                                if (paddrisk != null)
+                                                {
+                                                    Msg += "Patient Risk Behaviour is added";
+                                                }
+                                            }
+
+
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        }
+                        
+
+                    
+                    else
+                    {
+                        PatientSexualHistory psex = new PatientSexualHistory();
+                        psex.PartnerGender = Convert.ToInt32(sx.Gender);
+                        psex.PartnerHivStatus = Convert.ToInt32(sx.PartnerStatus);
+                        psex.PatientSexualOrientation = Convert.ToInt32(sx.SexualOrientation);
+                        psex.CreateDate=Convert.ToDateTime(DateTime.Today);
+                        psex.CreatedBy = userId;
+                        psex.PatientId = patientId;
+                        psex.PatientMasterVisitId = patientMasterVisitId;
+                        PatientSexualHistory psexualadd = new PatientSexualHistory();
+                        psexualadd = psh.AddPatientSexualHistory(psex);
+                        if(psexualadd !=null)
+                        {
+                            partnerid = psexualadd.Id;
+                            sx.id= Convert.ToString(partnerid);
+                            Msg += "Sexual History of Patient Successfully added";
+                            if (psexualadd.Id > 0)
+                            {
+                                PatientHighRisk phr = new PatientHighRisk();
+
+                                foreach (HighRisk highr in sx.Highrisk)
+                                {
+                                    if (highr.value != null || highr.value == "null")
+                                    {
+                                        phr = hr.GetPatientHighRisks(patientId, patientMasterVisitId, psexualadd.Id, highr.Id);
+
+                                        if (phr != null)
+                                        {
+                                            phr.HighRisk = Convert.ToInt32(highr.Id);
+                                            phr.PartnerId = psexualadd.Id;
+                                            phr.PatientMasterVisitId = patientMasterVisitId;
+                                            phr.PatientId = patientId;
+                                            phr.CreatedBy = userId;
+
+                                            PatientHighRisk pupdaterisk = new PatientHighRisk();
+                                            pupdaterisk = hr.UpdatePatientHighRisk(phr);
+                                            if(pupdaterisk !=null)
+                                            {
+                                                Msg += "Patient Risk Behaviour is updated";
+                                            }
+                                        }
+
+                                        else
+                                        {
+                                            PatientHighRisk paddh = new PatientHighRisk();
+                                            paddh.HighRisk = Convert.ToInt32(highr.Id);
+                                            paddh.PartnerId = psexualadd.Id;
+                                            paddh.PatientMasterVisitId = patientMasterVisitId;
+                                            paddh.PatientId = patientId;
+                                            paddh.CreatedBy = userId;
+                                            paddh.CreateDate = Convert.ToDateTime(DateTime.Today);
+
+
+                                            PatientHighRisk paddrisk = new PatientHighRisk();
+
+                                          
+                                            paddrisk = hr.addPatientHighRisk(paddh);
+                                            if (paddrisk != null)
+                                            {
+                                                Msg += "Patient Risk Behaviour is added";
+                                            }
+                                        }
+
+                                       
+                                   }
+                               }
+                            }
+                        }
+                        
+
+                    }
+
+                   
+
+
+                }
+
+                
+            }
+
+            Output res = new Output();
+            res.list = sexualhist;
+            res.msg = Msg;
+            return new JavaScriptSerializer().Serialize(res);
+          
+
+
+        }
 
         [WebMethod(EnableSession = true)]
         public void SavePatientOI(string data)

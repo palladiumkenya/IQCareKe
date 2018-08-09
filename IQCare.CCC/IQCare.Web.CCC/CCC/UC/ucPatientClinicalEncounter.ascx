@@ -1027,7 +1027,109 @@
 
 								</div>
 							</div>
+                            <div id="divSexualHistory" class="panel panel-info">
+                            <div class="panel-body"> 
+        
+                               <div class="col-md-12 form-group">
+								<label class="control-label pull-left">Sexual History</label>
+								</div>
+                                 <div class="col-md-12 ">
+                                     <div class="col-md-12">
+                                     <div class="col-md-8">
+                                        <label for="input-type" class="custom-control-label pull-left">Sexually Active in the past 6 months?</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                         <label class="pull-left" style="padding-right: 10px">
+                                            <input type="radio" class="custom-control-input" name="optSexualHistory" value="No" id="radiono" >No
+                                        </label>
+                    
+                                        <label class="pull-left" style="padding-right: 10px">
+                                        <input type="radio" class="custom-control-input" name="optSexualHistory"  value="Yes" id="radioyes">Yes
+                                        </label>
+                                    </div>
+                                   </div>
+           
+                                    
+                                     <div class="col-md-4 sexhistory" >
+											<div class="col-md-12">
+												<label class="control-label pull-left">
+                                                  # Partners in the past 6 Months </label>
+                          
+											</div>
+											<div class="col-md-12">
+												 <input class="form-control input-sm" id="txtPartners" type="number" 
+                                                   runat="server" clientidmode="Static"  min="0"  disabled />
+											</div>
+									</div>
+                                     <div class="col-md-4  sexhistory" >
+											<div class="col-md-12">
+												<label class="control-label pull-left">Partner's Status</label>
+											</div>
+											<div class="col-md-12">
+												<asp:DropDownList ID="ddlPartnerStatus" runat="server" CssClass="form-control input-sm" ClientIDMode="Static"></asp:DropDownList>
+											</div>
+									</div>
+                                     <div class="col-md-4 sexhistory" >
+											<div class="col-md-12">
+												<label class="control-label pull-left">Partner's Gender </label>
+											</div>
+											<div class="col-md-12">
+												<asp:DropDownList ID="ddlPartnerGender" runat="server" CssClass="form-control input-sm" ClientIDMode="Static"></asp:DropDownList>
+											</div>
+									</div>
 
+                                     <div class="col-md-4 sexhistory">
+											<div class="col-md-12">
+												<label class="control-label pull-left">Sexual Orientation</label>
+											</div>
+											<div class="col-md-12">
+												<asp:DropDownList ID="ddlSexualOrientation" runat="server" CssClass="form-control input-sm" ClientIDMode="Static"></asp:DropDownList>
+											</div>
+									 </div>
+                                     <div class="col-md-12 sexhistory">
+                                         <div class="col-md-12">
+                                            <label class="control-label pull-left">High Risk Behaviour</label>
+											</div>
+											<div class="col-md-12">
+                                                <select class="form-control select2" multiple="multiple"  data-placeholder="Select" id="ddlHighRiskBehaviour"" style="width: 100%;">
+                                                </select>
+											</div>
+                                     </div>
+                                     <div class="col-md-12 sexhistory">
+
+                                      </div>
+                                     <div class="col-md-12 sexhistory">
+                                        
+								          <div class="col-md-12">
+												<button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddSexualHist" onclick="addSexualHistory()">Add</button>
+											</div>
+										</div>
+                                     <div class="col-md-12 form-group sexhistory">
+										<div class="panel panel-primary">
+											<div class="panel-heading">SexualHistory</div>
+											<div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden;">
+												<table id="dtlSexualHistory" class="table table-bordered table-striped" width="100%">
+													<thead>
+														<tr>
+                                                            <th >#</th>
+															<th><span class="text-primary">PartnerStatus</span></th>
+															<th><span class="text-primary">ParterGender</span></th>
+															<th><span class="text-primary">SexualOrientation</span></th>
+															<th><span class="text-primary">High Risk Behaviour</span></th>
+														    
+                                                            <th>Action</th>
+														</tr>
+													</thead>
+                                                    <tbody>
+                                                    </tbody>
+												</table>
+
+											</div>
+										</div>
+									</div>
+                                 </div>
+                            </div>
+                            </div>
 							<div id="divAntigenToday" class="panel panel-info">
 
 								<div class="panel-body">
@@ -2213,7 +2315,7 @@
     var Age = "<%=age%>";
 	var DateOfEnrollment = "<%=DateOfEnrollment%>";
 	var isNoneChecked = false;
-
+    var count;
     var isEditAppointment = "<%=IsEditAppointment%>";
     var isEditAppointmentId="<%=IsEditAppointmentId%>";
     var arrWHoStage = [];
@@ -2225,7 +2327,10 @@
     var selectedstage = "";
     var OIdata = [];
     var PatientOIData = [];
-
+    var arrHighRisk = [];
+    var arrSexualHistory = [];
+    var arrTextSexualHistory = [];
+    var noofpartners = 0;
 	document.getElementById('txtPresentingComplaintsID').style.display = 'none';
 	document.getElementById('txtAllergyId').style.display = 'none';
 	document.getElementById('txtReactionTypeID').style.display = 'none';
@@ -2235,47 +2340,47 @@
 	document.getElementById('adverseEventId').style.display = 'none';
 
 
-	$(document).ready(function () {
-		var encounterExists = "<%=PatientEncounterExists%>";
-       
-		$('.errorBlock1').hide();
-		$('.errorBlock2').hide();
-		$('.errorBlock3').hide();
-		$('.errorBlock4').hide();
+    $(document).ready(function () {
+        var encounterExists = "<%=PatientEncounterExists%>";
 
-		$('.errorBlock5').hide();
-		$('.errorBlock6').hide();
-		$('.errorBlock7').hide();
-		$('.errorBlock8').hide();
-		$('.errorBlock').hide();
+        $('.errorBlock1').hide();
+        $('.errorBlock2').hide();
+        $('.errorBlock3').hide();
+        $('.errorBlock4').hide();
 
-		if (($("#cough").val() === 'True') || ($("#fever").val() === 'True') || ($("#weightLoss").val() === 'True') || ($("#nightSweats").val() === 'True')) {
-			$("#IcfActionForm").show();
-		} else {
-			$("#IcfActionForm").hide();
-		}
-		/*$("#IcfActionForm").hide();*/
-		//$("#IptForm").hide();
-		//$("#IcfForm").hide();
-		//$("#IptClientWorkupForm").hide();
-		//$("#IptDetailsForm").hide();
-		//$("#IptOutcomeDetailsForm").hide();
-		//$("#onIpt").prop("disabled", true);
-		$("#MMAS8").hide();
-		//  $("#EverBeenOnIpt").prop("disabled", true);
-		//showHideFPControls();
-		loadPresentingComplaints();
-		loadAdverseEvents();
-		loadAllergies();
-		loadAllergyReactions();
+        $('.errorBlock5').hide();
+        $('.errorBlock6').hide();
+        $('.errorBlock7').hide();
+        $('.errorBlock8').hide();
+        $('.errorBlock').hide();
+
+        if (($("#cough").val() === 'True') || ($("#fever").val() === 'True') || ($("#weightLoss").val() === 'True') || ($("#nightSweats").val() === 'True')) {
+            $("#IcfActionForm").show();
+        } else {
+            $("#IcfActionForm").hide();
+        }
+        /*$("#IcfActionForm").hide();*/
+        //$("#IptForm").hide();
+        //$("#IcfForm").hide();
+        //$("#IptClientWorkupForm").hide();
+        //$("#IptDetailsForm").hide();
+        //$("#IptOutcomeDetailsForm").hide();
+        //$("#onIpt").prop("disabled", true);
+        $("#MMAS8").hide();
+        //  $("#EverBeenOnIpt").prop("disabled", true);
+        //showHideFPControls();
+        loadPresentingComplaints();
+        loadAdverseEvents();
+        loadAllergies();
+        loadAllergyReactions();
         loadDiagnosis();
-         showHidePresentingComplaintsDivs();
-		showHideAdverseEventsDivs();
-		showHideSystemsOkayDivs();
-		showHideVisitByTS();
-		GetPatientExaminationTypeID();
-
-
+        showHidePresentingComplaintsDivs();
+        showHideAdverseEventsDivs();
+        showHideSystemsOkayDivs();
+        showHideVisitByTS();
+        GetPatientExaminationTypeID();
+        loadHighRiskBehavior('HighRisk');
+        GetPatientSexualHistory();
 
         var WhoStage1 = 'WHOStageIConditions';
         var WhoStage2 = 'WHOStageIIConditions';
@@ -2298,30 +2403,30 @@
 
 
         selectedstage = $("#WHOStage option:selected").text();
-		// Manage adverse Events
-		$("#divAdverseEventOther").hide("fast");
-		$("#adverseEvent").focusout(function () {
-				if (adverseEventName === 'Other Specify') {
-					$("#divAdverseEventOther").show("fast");
-				} else {
-					$("#divAdverseEventOther").hide("fast"); 
-				}
-			});
-        
+        // Manage adverse Events
+        $("#divAdverseEventOther").hide("fast");
+        $("#adverseEvent").focusout(function () {
+            if (adverseEventName === 'Other Specify') {
+                $("#divAdverseEventOther").show("fast");
+            } else {
+                $("#divAdverseEventOther").hide("fast");
+            }
+        });
 
+        $("#ddlHighRiskBehaviour").select2();
 
-		//Show the AdverseEventModal Windows
-		function loadAdverseEventOutcome() {
-			$("#AdverseEventOutcomeModel").modal('show');
-		}
+        //Show the AdverseEventModal Windows
+        function loadAdverseEventOutcome() {
+            $("#AdverseEventOutcomeModel").modal('show');
+        }
 
-		//outcome date
-		$('#outcomeDate').datepicker({
-			allowPastDates: true,
-			restricted: [{ from: tomorrow, to: Infinity }],
-			momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
-			//restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
-		});
+        //outcome date
+        $('#outcomeDate').datepicker({
+            allowPastDates: true,
+            restricted: [{ from: tomorrow, to: Infinity }],
+            momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+            //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+        });
 
         /** stability assessment 
          * /
@@ -2372,10 +2477,10 @@
 
                     var radioAgeYes = document.getElementById("AgeYes");
                     var radioAgeNo = document.getElementById("AgeNo");
-                    
+
                     var radioHealthcareConcernsYes = document.getElementById("HealthcareConcernsYes");
                     var radioHealthcareConcernsNo = document.getElementById("HealthcareConcernsNo");
-        
+
                     if (serverData[0][0] == 1)
                         radioArtRegimenYes.checked = true;
                     else
@@ -2405,8 +2510,8 @@
                         radioAgeYes.checked = true;
                     else
                         radioAgeNo.checked = true;
-                    
-                    
+
+
                 },
                 error: function (response) {
                     toastr
@@ -2415,114 +2520,114 @@
             });
         })
 
-		//populate options for ADverEvents;
-		var mastrName = 'AdverseEventOutcome';
+        //populate options for ADverEvents;
+        var mastrName = 'AdverseEventOutcome';
 
-		$.ajax({
-			type: "POST",
-			url: "../WebService/LookupService.asmx/GetLookUpItemViewByMasterName",
-			data: "{'masterName':'" + mastrName + "'}",
-			contentType: "application/json; charset=utf-8",
-			dataType: "json",
-			success: function (response) {
-				var itemList = JSON.parse(response.d);
+        $.ajax({
+            type: "POST",
+            url: "../WebService/LookupService.asmx/GetLookUpItemViewByMasterName",
+            data: "{'masterName':'" + mastrName + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                var itemList = JSON.parse(response.d);
 
-				$("#EventOutcome").find('option').remove().end();
-				$("#EventOutcome")
-					.append('<option value="0">Select</option>');
-				$.each(itemList,
-					function (index, itemList) {
-						$("#EventOutcome")
-							.append('<option value="' +
-								itemList.ItemId +
-								'">' +
-								itemList.ItemName +
-								"(" +
-								itemList.ItemDisplayName +
-								")" +
-								'</option>');
-					});
-			},
-			error: function (response) {
-				toastr
-					.error("Error in Fetching Adverse Event Outcome List " + response.d);
-			}
-		});
+                $("#EventOutcome").find('option').remove().end();
+                $("#EventOutcome")
+                    .append('<option value="0">Select</option>');
+                $.each(itemList,
+                    function (index, itemList) {
+                        $("#EventOutcome")
+                            .append('<option value="' +
+                            itemList.ItemId +
+                            '">' +
+                            itemList.ItemName +
+                            "(" +
+                            itemList.ItemDisplayName +
+                            ")" +
+                            '</option>');
+                    });
+            },
+            error: function (response) {
+                toastr
+                    .error("Error in Fetching Adverse Event Outcome List " + response.d);
+            }
+        });
 
-		//set nutrition status
+        //set nutrition status
 
-		if (Age > 15) {
-			var txtBmi = $("#<%=txtBMI.ClientID%>").val();
-			if (txtBmi > 0 && txtBmi < 16) {
-				$("#nutritionscreeningstatus option").filter(function() {
-					return $(this).text() === 'Severe Acute Malnutrition';
-				}).prop('selected', true);
-			} else if (txtBmi >= 16 && txtBmi < 18.5) {
-				$("#nutritionscreeningstatus option").filter(function() {
-					return $(this).text() === 'Moderate Acute Malnutrition';
-				}).prop('selected', true);
-			} else if (txtBmi >= 18.5 && txtBmi < 25) {
-				$("#nutritionscreeningstatus option").filter(function() { return $(this).text() === 'Normal'; })
-					.prop('selected', true);
-			} else if (txtBmi >= 25) {
-				$("#nutritionscreeningstatus option")
-					.filter(function() { return $(this).text() === 'Overweight/Obese'; }).prop('selected', true);
-			}
-		} else {
-			var txtBMIZ = $("#<%=txtBMIZ.ClientID%>").val();
-			console.log(txtBMIZ);
-			if ((txtBMIZ == "4 (Overweight)") || (txtBMIZ === "3 (Overweight)") || (txtBMIZ === "2 (Overweight)") || (txtBMIZ === "1 (Overweight)")) {
-				$("#nutritionscreeningstatus option").filter(function() { return $(this).text() === 'Overweight/Obese'; }).prop('selected', true);
-			}else if ((txtBMIZ === "0 (Normal)")) {
-				$("#nutritionscreeningstatus option").filter(function() { return $(this).text() === 'Normal'; }).prop('selected', true);
-			}else if ((txtBMIZ === "-1 (Mild)") || (txtBMIZ == "-2 (Moderate)")) {
-				$("#nutritionscreeningstatus option").filter(function() { return $(this).text() === 'Moderate Acute Malnutrition'; }).prop('selected', true); 
-			}else if ((txtBMIZ === "-3 (Severe)") || (txtBMIZ === "-4 (Severe)")) {
-				$("#nutritionscreeningstatus option").filter(function() { return $(this).text() === 'Severe Acute Malnutrition'; }).prop('selected', true);
-			}
-		}
+        if (Age > 15) {
+            var txtBmi = $("#<%=txtBMI.ClientID%>").val();
+            if (txtBmi > 0 && txtBmi < 16) {
+                $("#nutritionscreeningstatus option").filter(function () {
+                    return $(this).text() === 'Severe Acute Malnutrition';
+                }).prop('selected', true);
+            } else if (txtBmi >= 16 && txtBmi < 18.5) {
+                $("#nutritionscreeningstatus option").filter(function () {
+                    return $(this).text() === 'Moderate Acute Malnutrition';
+                }).prop('selected', true);
+            } else if (txtBmi >= 18.5 && txtBmi < 25) {
+                $("#nutritionscreeningstatus option").filter(function () { return $(this).text() === 'Normal'; })
+                    .prop('selected', true);
+            } else if (txtBmi >= 25) {
+                $("#nutritionscreeningstatus option")
+                    .filter(function () { return $(this).text() === 'Overweight/Obese'; }).prop('selected', true);
+            }
+        } else {
+            var txtBMIZ = $("#<%=txtBMIZ.ClientID%>").val();
+            console.log(txtBMIZ);
+            if ((txtBMIZ == "4 (Overweight)") || (txtBMIZ === "3 (Overweight)") || (txtBMIZ === "2 (Overweight)") || (txtBMIZ === "1 (Overweight)")) {
+                $("#nutritionscreeningstatus option").filter(function () { return $(this).text() === 'Overweight/Obese'; }).prop('selected', true);
+            } else if ((txtBMIZ === "0 (Normal)")) {
+                $("#nutritionscreeningstatus option").filter(function () { return $(this).text() === 'Normal'; }).prop('selected', true);
+            } else if ((txtBMIZ === "-1 (Mild)") || (txtBMIZ == "-2 (Moderate)")) {
+                $("#nutritionscreeningstatus option").filter(function () { return $(this).text() === 'Moderate Acute Malnutrition'; }).prop('selected', true);
+            } else if ((txtBMIZ === "-3 (Severe)") || (txtBMIZ === "-4 (Severe)")) {
+                $("#nutritionscreeningstatus option").filter(function () { return $(this).text() === 'Severe Acute Malnutrition'; }).prop('selected', true);
+            }
+        }
 
-		//set IPT weight
-		var weightVal = <%=Weight%>;
-		$("#weight").val(weightVal);
+        //set IPT weight
+        var weightVal = <%=Weight%>;
+        $("#weight").val(weightVal);
 
-		if (Age > 14) {
-			document.getElementById('divAntigenToday').style.display = 'none';
-		}
-		else {
-			document.getElementById('divAntigenToday').style.display = 'block';
-		}
+        if (Age > 14) {
+            document.getElementById('divAntigenToday').style.display = 'none';
+        }
+        else {
+            document.getElementById('divAntigenToday').style.display = 'block';
+        }
 
 
-		var getVisitDateVal = "<%= this.visitdateval %>";
-		var getFemaleLMPVal = "<%= this.LMPval %>";
-		var getEDDPVal = "<%= this.EDDval %>";
-		var getNxtAppDateVal = "<%= this.nxtAppDateval %>";
+        var getVisitDateVal = "<%= this.visitdateval %>";
+        var getFemaleLMPVal = "<%= this.LMPval %>";
+        var getEDDPVal = "<%= this.EDDval %>";
+        var getNxtAppDateVal = "<%= this.nxtAppDateval %>";
 
-		if (getVisitDateVal === '' || getVisitDateVal === '01-Jan-1900')
-			getVisitDateVal = 0;
+        if (getVisitDateVal === '' || getVisitDateVal === '01-Jan-1900')
+            getVisitDateVal = 0;
 
-		if (getFemaleLMPVal === '' || getFemaleLMPVal === '01-Jan-1900')
-			getFemaleLMPVal = 0;
+        if (getFemaleLMPVal === '' || getFemaleLMPVal === '01-Jan-1900')
+            getFemaleLMPVal = 0;
 
-		if (getEDDPVal === '' || getEDDPVal === '01-Jan-1900')
-			getEDDPVal = 0;
+        if (getEDDPVal === '' || getEDDPVal === '01-Jan-1900')
+            getEDDPVal = 0;
 
-		if (getNxtAppDateVal === '' || getVisitDateVal === '01-Jan-1900')
-			getNxtAppDateVal = 0;
-		//Date processing
-		var today = new Date();
-		var tomorrow = new Date();
-		tomorrow.setDate(today.getDate() + 1);
+        if (getNxtAppDateVal === '' || getVisitDateVal === '01-Jan-1900')
+            getNxtAppDateVal = 0;
+        //Date processing
+        var today = new Date();
+        var tomorrow = new Date();
+        tomorrow.setDate(today.getDate() + 1);
 
-		var minDate = moment(today).add(-1, 'hours');
+        var minDate = moment(today).add(-1, 'hours');
 
-		$('#DateOfVisit').datepicker({
-			allowPastDates: true,
-			date: getVisitDateVal,
-			restricted: [{ from: tomorrow, to: Infinity }],
-			momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
-			//restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+        $('#DateOfVisit').datepicker({
+            allowPastDates: true,
+            date: getVisitDateVal,
+            restricted: [{ from: tomorrow, to: Infinity }],
+            momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+            //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
         });
 
         $('#DateOfVisit').on('changed.fu.datepicker dateClicked.fu.datepicker', function (event, date) {
@@ -2543,104 +2648,119 @@
 
 
 
-		$("#prescribeDrugs").click(function () {
-			$("#btnClosePrecriptionModal").show("fast");
-			$("#btnClosePrecription").hide("fast");
-		});
-
-		$("#btnOrderLabTests").click(function () {
-			$("#btnCloseLabOrderModal").show("fast");
-			$("#btnCloseLabOrder").hide("fast");
-		});
-
-		$('#PCDateOfOnset').datepicker({
-			allowPastDates: true,
-			momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' },
-			date: 0,
-			restricted: [{ from: tomorrow, to: Infinity }]
-			//restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
-		});
-		$('#OnsetDate').datepicker({
-			allowPastDates: true,
-			momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' },
-			restricted: [{ from: tomorrow, to: Infinity }],
-			//restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
-		});
-
-		//$('#ChronicIllnessOnsetDate').datepicker({
-		//    allowPastDates: true,
-		//    momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' },
-		//    date: 0,
-		//    restricted: [{ from: tomorrow, to: Infinity }],
-		//    //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
-		//});
-
-		$("#ChronicIllnessOnsetDate").datetimepicker({
-			format: 'DD-MMM-YYYY',
-			allowInputToggle: true,
-			useCurrent: false
-		});
-
-		$('#FemaleLMP').datepicker({
-			allowPastDates: true,
-			date: getFemaleLMPVal,
-			restricted: [{ from: tomorrow, to: Infinity }],
-			momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
-
-			//restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
-		});
-		$('#EDCD').datepicker({
-			allowPastDates: true,
-			date: getEDDPVal,
-			momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
-			//restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
-		});
-		$('#AllergyDate').datepicker({
-			allowPastDates: true,
-			date: 0,
-			restricted: [{ from: tomorrow, to: Infinity }],
-			momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
-			//restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
-		});
-		$('#AntigenDate').datepicker({
-			allowPastDates: true,
-			momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
-			//restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
-		});
-		$('#vaccineDate').datepicker({
-			allowPastDates: true,
-			date: 0,
-			restricted: [{ from: tomorrow, to: Infinity }],
-			momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
-			//restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
-		});
-
-		//$('#PersonAppointmentDate').datepicker({
-		//    allowPastDates: false,
-		//    momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
-		//});
-
-		$("#PersonAppointmentDateD").datetimepicker({
-			format: 'DD-MMM-YYYY',
-			allowInputToggle: true,
-			useCurrent: false,
-			minDate: minDate
+        $("#prescribeDrugs").click(function () {
+            $("#btnClosePrecriptionModal").show("fast");
+            $("#btnClosePrecription").hide("fast");
         });
 
-	    $("#<%=AppointmentDate.ClientID%>").val(moment(NextAppointmentDate).format('DD-MMM-YYYY'));
+        $("#btnOrderLabTests").click(function () {
+            $("#btnCloseLabOrderModal").show("fast");
+            $("#btnCloseLabOrder").hide("fast");
+        });
 
-		
-       
-		$("#AppointmentDate").change(function () {
-			var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
-			var appDate = $("#<%=AppointmentDate.ClientID%>").val();
-			if (moment('' + appDate + '').isAfter(futureDate)) {
-				toastr.error("Appointment date cannot be set to over 7 months");
-				$("#<%=AppointmentDate.ClientID%>").val("");
-				return false;
-			}
-			appointmentCount();
-		});
+        $('#PCDateOfOnset').datepicker({
+            allowPastDates: true,
+            momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' },
+            date: 0,
+            restricted: [{ from: tomorrow, to: Infinity }]
+            //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+        });
+        $('#OnsetDate').datepicker({
+            allowPastDates: true,
+            momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' },
+            restricted: [{ from: tomorrow, to: Infinity }],
+            //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+        });
+
+        //$('#ChronicIllnessOnsetDate').datepicker({
+        //    allowPastDates: true,
+        //    momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' },
+        //    date: 0,
+        //    restricted: [{ from: tomorrow, to: Infinity }],
+        //    //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+        //});
+
+        $("#ChronicIllnessOnsetDate").datetimepicker({
+            format: 'DD-MMM-YYYY',
+            allowInputToggle: true,
+            useCurrent: false
+        });
+
+        $('#FemaleLMP').datepicker({
+            allowPastDates: true,
+            date: getFemaleLMPVal,
+            restricted: [{ from: tomorrow, to: Infinity }],
+            momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+
+            //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+        });
+        $('#EDCD').datepicker({
+            allowPastDates: true,
+            date: getEDDPVal,
+            momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+            //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+        });
+        $('#AllergyDate').datepicker({
+            allowPastDates: true,
+            date: 0,
+            restricted: [{ from: tomorrow, to: Infinity }],
+            momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+            //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+        });
+        $('#AntigenDate').datepicker({
+            allowPastDates: true,
+            momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+            //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+        });
+        $('#vaccineDate').datepicker({
+            allowPastDates: true,
+            date: 0,
+            restricted: [{ from: tomorrow, to: Infinity }],
+            momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+            //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+        });
+
+        //$('#PersonAppointmentDate').datepicker({
+        //    allowPastDates: false,
+        //    momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+
+        //});
+
+        $(".sexhistory").hide();
+
+
+        $('input:radio[name=optSexualHistory]').change(function () {
+            if (this.value == 'No') {
+
+                $(".sexhistory").hide();
+
+            }
+            else if (this.value == 'Yes') {
+
+                $(".sexhistory").show();
+            }
+        });
+        $("#PersonAppointmentDateD").datetimepicker({
+            format: 'DD-MMM-YYYY',
+            allowInputToggle: true,
+            useCurrent: false,
+            minDate: minDate
+        });
+
+        $("#<%=AppointmentDate.ClientID%>").val(moment(NextAppointmentDate).format('DD-MMM-YYYY'));
+
+
+
+        $("#AppointmentDate").change(function () {
+            var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
+            var appDate = $("#<%=AppointmentDate.ClientID%>").val();
+            if (moment('' + appDate + '').isAfter(futureDate)) {
+                toastr.error("Appointment date cannot be set to over 7 months");
+                $("#<%=AppointmentDate.ClientID%>").val("");
+                return false;
+            }
+            appointmentCount();
+        });
 
 		<%--$('#PersonAppointmentDate').on('changed.fu.datepicker dateClicked.fu.datepicker', function (event, date) {
 			var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
@@ -2653,10 +2773,10 @@
 			appointmentCount();
 		});--%>
 
-	    /* limit future dates viralload baseline date*/
-	    $("#DateOfVisit").on('changed.fu.datepicker dateClicked.fu.datepicker',function(event, date) {
+        /* limit future dates viralload baseline date*/
+        $("#DateOfVisit").on('changed.fu.datepicker dateClicked.fu.datepicker', function (event, date) {
             var dlDate = $('#DateOfVisit').datepicker('getDate');
-	        //alert(dlDate);
+            //alert(dlDate);
 
             //var beforeEnrollment = moment(dlDate).isBefore(DateOfEnrollment);
             //if (beforeEnrollment) {
@@ -2664,807 +2784,1036 @@
             //    //        $("#TreatmeantInitiationBaselineViralloadDate").val('');
             //           return false;
             //}
-	        //var futureDate = moment(dlDate).isAfter(today);
-	        //    if (futureDate) {
-	        //        toastr.error("Future dates NOT allowed on Baseline ViralLoad Entries");
-	        //        $("#TreatmeantInitiationBaselineViralloadDate").val('');
-	        //        return false;
-	        //    }
-	        //    var dhid = $("#DHID").datepicker('getDate');
-	        //    if (moment(dlDate).isBefore(dhid)) {
-	        //        $("#TreatmeantInitiationBaselineViralloadDate").val('');
-	        //        toastr.error("Baseline Viral Load date CANNOT be ealier than HIV Diagnosis Date");
-	        //        return false;
-	        //    }
-	    });
+            //var futureDate = moment(dlDate).isAfter(today);
+            //    if (futureDate) {
+            //        toastr.error("Future dates NOT allowed on Baseline ViralLoad Entries");
+            //        $("#TreatmeantInitiationBaselineViralloadDate").val('');
+            //        return false;
+            //    }
+            //    var dhid = $("#DHID").datepicker('getDate');
+            //    if (moment(dlDate).isBefore(dhid)) {
+            //        $("#TreatmeantInitiationBaselineViralloadDate").val('');
+            //        toastr.error("Baseline Viral Load date CANNOT be ealier than HIV Diagnosis Date");
+            //        return false;
+            //    }
+        });
 
 
-		$('#PersonAppointmentDateD').datetimepicker().on('dp.change',function(e) {
-			var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
-			var appDate = $("#<%=AppointmentDate.ClientID%>").val();
-			if (moment('' + appDate + '').isAfter(futureDate)) {
-				toastr.error("Appointment date cannot be set to over 7 months");
-				$("#<%=AppointmentDate.ClientID%>").val("");
-				return false;
-			}
-			appointmentCount();
-		});
+        $('#PersonAppointmentDateD').datetimepicker().on('dp.change', function (e) {
+            var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
+            var appDate = $("#<%=AppointmentDate.ClientID%>").val();
+            if (moment('' + appDate + '').isAfter(futureDate)) {
+                toastr.error("Appointment date cannot be set to over 7 months");
+                $("#<%=AppointmentDate.ClientID%>").val("");
+                return false;
+            }
+            appointmentCount();
+        });
 
 
-		$('#PCDateOfOnset').on('changed.fu.datepicker dateClicked.fu.datepicker', function (event, date) {
-			presentingComplaintsDateChange();
-		});
+        $('#PCDateOfOnset').on('changed.fu.datepicker dateClicked.fu.datepicker', function (event, date) {
+            presentingComplaintsDateChange();
+        });
 
-		////////////////////////////////////////////////////////////////////////////////////////////
-		//Gender validations
-		var male = "Male";
+        ////////////////////////////////////////////////////////////////////////////////////////////
+        //Gender validations
+        var male = "Male";
 
-		var advEventsTable = $('#dtlAdverseEvents').DataTable({
-			ajax: {
-				type: "POST",
-				url: "../WebService/PatientEncounterService.asmx/GetAdverseEvents",
-				dataSrc: 'd',
-				contentType: "application/json; charset=utf-8",
-				dataType: "json"
-			},
-			paging: false,
-			searching: false,
-			info: false,
-			ordering: false,
-			columnDefs: [
-				{
-					"targets": [0], "visible": false, "searchable": false
-					
-				},
-				{
-					"targets": [1], "visible": false, "searchable": false
-				}
-			]
-		});
+        var advEventsTable = $('#dtlAdverseEvents').DataTable({
+            ajax: {
+                type: "POST",
+                url: "../WebService/PatientEncounterService.asmx/GetAdverseEvents",
+                dataSrc: 'd',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
+            },
+            paging: false,
+            searching: false,
+            info: false,
+            ordering: false,
+            columnDefs: [
+                {
+                    "targets": [0], "visible": false, "searchable": false
 
-		$("#btnSaveChangesOutcome").on('click',
-			function() {
-				var adverseEvent = '';
-				var adverseEventId = 0;
-				var outcomeId = $("#EventOutcome").val();
-				var outcomeDate = moment($("#outcomeDate").datepicker('getDate')).format('DD-MMM-YYYY');
+                },
+                {
+                    "targets": [1], "visible": false, "searchable": false
+                }
+            ]
+        });
 
-
-
-				//$("#dtlAdverseEventsBdy tr").each(function () {
-				//    alert($(this).find("td").eq(2).html());
-				//});
-
-				//var ae = $("#adverseEventLable").text();
-				//alert(ae);
-				//adverseEvent = $("#dtlAdverseEvents tr").find('td').eq(0).html();
-				adverseEvent = $("#adverseEventLable").text();
-
-				$.ajax({
-					type: "POST",
-					url: "../WebService/LookupService.asmx/GetLookupItemId",
-					data: "{'lookupItemName':'" + adverseEvent + "'}",
-					contentType: "application/json; charset=utf-8",
-					dataType: "json",
-					success: function (response) {
-
-						$.ajax({
-							type: "POST",
-							url: "../WebService/PatientadverseEventOutcome.asmx/AddAdverseEventOutcome",
-							data: "{'patientId':'" + PatientId + "','patientMasterVisitId':'" + PatientMasterVisitId + "','adverseEventId':'" + response.d + "','outcomeId':'" + outcomeId + "','outcomeDate':'" + outcomeDate + "'}",
-							contentType: "application/json; charset=utf-8",
-							dataType: "json",
-							success: function (response) {
-								toastr.success(response.d);
-								$('.modal').on('hidden.bs.modal', function (e) {
-									$(this).removeData();
-								});
-								//$("#adverseEventsTable").refresh();
-								//window.location.reload();
-							},
-							error: function (response) {
-								toastr
-									.error("Error saving adverseEvent Outcome(s) " + response.d);
-								$("#AdverseEventOutcomeModal .close").click();
-							}
-						});
-					},
-					error: function (response) {
-						toastr
-							.error("Error in fetching itemId " + response.d);
-					}
-				}); 
-			});
-
-
-		var chronicTable = $('#dtlChronicIllness').DataTable({
-			ajax: {
-				type: "POST",
-				url: "../WebService/PatientEncounterService.asmx/GetChronicIllness",
-				dataSrc: 'd',
-				contentType: "application/json; charset=utf-8",
-				dataType: "json"
-			},
-			paging: false,
-			searching: false,
-			info: false,
-			ordering: false,
-			columnDefs: [
-				{
-					"targets": [0],
-					"visible": false,
-					"searchable": false
-				}
-			]
-		});
-
-		var allergyTable = $('#dtlAllergy').DataTable({
-			ajax: {
-				type: "POST",
-				url: "../WebService/PatientEncounterService.asmx/GetAllergies",
-				dataSrc: 'd',
-				contentType: "application/json; charset=utf-8",
-				dataType: "json"
-			},
-			paging: false,
-			searching: false,
-			info: false,
-			ordering: false,
-			columnDefs: [
-				{
-					"targets": [0],
-					"visible": false,
-					"searchable": false
-				},
-				{
-					"targets": [1],
-					"visible": false,
-					"searchable": false
-				},
-				{
-					"targets": [2],
-					"visible": false,
-					"searchable": false
-				}
-			]
-		});
-
-		var vaccineTable = $('#dtlVaccines').DataTable({
-			ajax: {
-				type: "POST",
-				url: "../WebService/PatientEncounterService.asmx/GetVaccines",
-				dataSrc: 'd',
-				contentType: "application/json; charset=utf-8",
-				dataType: "json"
-			},
-			paging: false,
-			searching: false,
-			info: false,
-			ordering: false,
-			columnDefs: [
-				{
-					"targets": [0],
-					"visible": false,
-					"searchable": false
-				},
-				{
-					"targets": [1],
-					"visible": false,
-					"searchable": false
-				}
-			]
-		});
-
-		var examTable = $('#dtlPhysicalExam').DataTable({
-			ajax: {
-				type: "POST",
-				url: "../WebService/PatientEncounterService.asmx/GetPhysicalExam",
-				dataSrc: 'd',
-				contentType: "application/json; charset=utf-8",
-				dataType: "json"
-			},
-			paging: false,
-			searching: false,
-			info: false,
-			ordering: false,
-			columnDefs: [
-				{
-					"targets": [0],
-					"visible": false,
-					"searchable": false
-				},
-				{
-					"targets": [1],
-					"visible": false,
-					"searchable": false
-				},
-				{
-					"targets": [2],
-					"visible": false,
-					"searchable": false
-				}
-			]
-		});
-
-		var diagnosisTable = $('#dtlDiagnosis').DataTable({
-			ajax: {
-				type: "POST",
-				url: "../WebService/PatientEncounterService.asmx/GetDiagnosis",
-				dataSrc: 'd',
-				contentType: "application/json; charset=utf-8",
-				dataType: "json"
-			},
-			paging: false,
-			searching: false,
-			info: false,
-			ordering: false,
-			columnDefs: [
-				{
-					"targets": [0],
-					"visible": false,
-					"searchable": false
-				}
-			]
-		});
-
-
-		var presentingComplaintsTable = $('#dtlPresentingComplaints').DataTable({
-			ajax: {
-				type: "POST",
-				url: "../WebService/PatientEncounterService.asmx/LoadComplaints",
-				dataSrc: 'd',
-				contentType: "application/json; charset=utf-8",
-				dataType: "json"
-			},
-			paging: false,
-			searching: false,
-			info: false,
-			ordering: false,
-			columnDefs: [
-				{
-					"targets": [0],
-					"visible": false,
-					"searchable": false
-				}
-			]
-		});
-
-		var index;
-
-		$("#dtlAdverseEvents").on('click',
-			'.btnDelete',
-			function () {
-				advEventsTable
-					.row($(this).parents('tr'))
-					.remove()
-					.draw();
-				window.location.href = '<%=ResolveClientUrl("~/CCC/Encounter/PatientEncounter.aspx") %>';
-
-				var index = reactionEventList.indexOf($(this).parents('tr').find('td:eq(0)').text());
-				if (index > -1) {
-					reactionEventList.splice(index, 1);
-				}
-
-				//$(this).closest('tr').remove();
-				//var y = $(this).closest('tr').find('td').eq(0).html();
-				//index = arrAdverseEventUI.findIndex(x => x.adverseEvent == y);
-				//if (index > -1) {
-				//    arrAdverseEventUI.splice(index, 1);
-				//}
-			});
-
-		////dtlChronicIllness
-		$("#dtlChronicIllness").on('click',
-			'.btnDelete',
-			function () {
-				chronicTable
-					.row($(this).parents('tr'))
-					.remove()
-					.draw();
-
-				var index = chronicIllnessList.indexOf($(this).parents('tr').find('td:eq(0)').text());
-				if (index > -1) {
-					chronicIllnessList.splice(index, 1);
-				}
-
-			});
-
-		////dtlAllergy
-		$("#dtlAllergy").on('click',
-			'.btnDelete',
-			function () {
-				allergyTable
-					.row($(this).parents('tr'))
-					.remove()
-					.draw();
-
-				var index = AllergyList.indexOf($(this).parents('tr').find('td:eq(0)').text());
-				if (index > -1) {
-					AllergyList.splice(index, 1);
-				}
-
-			});
-
-		////dtlVaccines
-		$("#dtlVaccines").on('click',
-			'.btnDelete',
-			function () {
-				vaccineTable
-					.row($(this).parents('tr'))
-					.remove()
-					.draw();
-
-				var index = vaccineList.indexOf($(this).parents('tr').find('td:eq(0)').text());
-				if (index > -1) {
-					vaccineList.splice(index, 1);
-				}
-
-				var index1 = vaccineStageList.indexOf($(this).parents('tr').find('td:eq(1)').text());
-				if (index1 > -1) {
-					vaccineStageList.splice(index1, 1);
-				}
-
-			});
-
-
-		////dtlPhysicalExam
-		$("#dtlPhysicalExam").on('click',
-			'.btnDelete',
-			function () {
-				examTable
-					.row($(this).parents('tr'))
-					.remove()
-					.draw();
-
-				var index = physicalExamList.indexOf($(this).parents('tr').find('td:eq(1)').text());
-				if (index > -1) {
-					physicalExamList.splice(index, 1);
-				}
-
-			});
-
-		////dtlDiagnosis
-		$("#dtlDiagnosis").on('click',
-			'.btnDelete',
-			function () {
-				diagnosisTable
-					.row($(this).parents('tr'))
-					.remove()
-					.draw();
-				var index = diagnosisList.indexOf($(this).parents('tr').find('td:eq(0)').text());
-				if (index >= -1) {
-					diagnosisList.splice(index, 1);
-				}
-
-			});
-
-		////dtlPresentingComplaints
-		$("#dtlPresentingComplaints").on('click',
-			'.btnDelete',
-			function () {
-				presentingComplaintsTable
-					.row($(this).parents('tr'))
-					.remove()
-					.draw();
-
-				var index = PresentingComplaintsList.indexOf($(this).parents('tr').find('td:eq(0)').text());
-				if (index > -1) {
-					PresentingComplaintsList.splice(index, 1);
-				}
-
-			});
-
-		///////////////////////////////////////////////////////////////////////////////////////////////////
-
-		//Save patient IPT client workup
-		$("#btnSaveIptWorkup").click(function () {
-			addPatientIptWorkup();
-			$('#IptClientWorkupModal').modal('hide');
-		});
-
-		//Save patient IPT Details
-		$("#btnSaveIptDetails").click(function () {
-			if ($('#IptFormDetails').parsley().validate()) {
-				var dob = $("#IptDateCollected").val();
-				if (moment('' + dob + '').isAfter()) {
-					toastr.error("Date collected cannot be a future date.");
-					return false;
-				}
-				else {
-					addIpt();
-					$('#IptDetailsModal').modal('hide');
-				}
-			} else {
-				return false;
-			}
-		});
-
-		//Save patient IPT Outcome
-		$("#btnSaveIptOutcome").click(function () {
-			addPatientIptOutcome();
-			$('#IptOutcomeModal').modal('hide');
-		});
+        $("#btnSaveChangesOutcome").on('click',
+            function () {
+                var adverseEvent = '';
+                var adverseEventId = 0;
+                var outcomeId = $("#EventOutcome").val();
+                var outcomeDate = moment($("#outcomeDate").datepicker('getDate')).format('DD-MMM-YYYY');
 
 
 
-		//$('#myWizard').wizard();
-		$("#myWizard")
-			.on("actionclicked.fu.wizard", function (evt, data) {
-				var currentStep = data.step;
-				var nextStep = 0;
-				var previousStep = 0;
-				var totalError = 0;
-				var stepError = 0;
-				/*var form = $("form[name='form1']");*/
+                //$("#dtlAdverseEventsBdy tr").each(function () {
+                //    alert($(this).find("td").eq(2).html());
+                //});
 
-				if (data.direction === 'next')
-					nextStep = currentStep += 1;
-				else
-					previousStep = nextStep -= 1;
-				if (data.step === 1) {
-					if (data.direction === 'previous') {
-						return;
-					}
-					$("#peripheralNeoropathy").prop('required', false);
-					$("#rash").prop('required', false);
-					$("#hepatotoxicity").prop('required', false);
-					$("#adheranceMeasurement").prop('required', false);
+                //var ae = $("#adverseEventLable").text();
+                //alert(ae);
+                //adverseEvent = $("#dtlAdverseEvents tr").find('td').eq(0).html();
+                adverseEvent = $("#adverseEventLable").text();
 
-					if (($("#cough").val() === 'True') || ($("#fever").val() === 'True') || ($("#weightLoss").val() === 'True') || ($("#nightSweats").val() === 'True')) {
-						$("#sputum").prop('required', true);
-						$("#geneXpert").prop('required', true);
-						$("#chest").prop('required', true);
-						$("#antiTb").prop('required', true);
-						$("#contactsInvitation").prop('required', true);
-						$("#iptEvaluation").prop('required', true);
-					}
+                $.ajax({
+                    type: "POST",
+                    url: "../WebService/LookupService.asmx/GetLookupItemId",
+                    data: "{'lookupItemName':'" + adverseEvent + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
 
-					/* add constraints based on age*/
-					if ($('#datastep1').parsley().validate()) {
-                        if (($("#tbInfected").val() === 'True') && ($("#onIpt").val() === 'False') && ($("#EverBeenOnIpt").val() === 'True'))
-	                    {
+                        $.ajax({
+                            type: "POST",
+                            url: "../WebService/PatientadverseEventOutcome.asmx/AddAdverseEventOutcome",
+                            data: "{'patientId':'" + PatientId + "','patientMasterVisitId':'" + PatientMasterVisitId + "','adverseEventId':'" + response.d + "','outcomeId':'" + outcomeId + "','outcomeDate':'" + outcomeDate + "'}",
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (response) {
+                                toastr.success(response.d);
+                                $('.modal').on('hidden.bs.modal', function (e) {
+                                    $(this).removeData();
+                                });
+                                //$("#adverseEventsTable").refresh();
+                                //window.location.reload();
+                            },
+                            error: function (response) {
+                                toastr
+                                    .error("Error saving adverseEvent Outcome(s) " + response.d);
+                                $("#AdverseEventOutcomeModal .close").click();
+                            }
+                        });
+                    },
+                    error: function (response) {
+                        toastr
+                            .error("Error in fetching itemId " + response.d);
+                    }
+                });
+            });
 
-                        }else
-	                        {
-                                addPatientIcf();
-	                        }
 
-					    
-						if (($("#cough").val() === 'True') || ($("#fever").val() === 'True') || ($("#weightLoss").val() === 'True') || ($("#nightSweats").val() === 'True')) {
-							addPatientIcfAction();
-						}
-						savePatientEncounterPresentingComplaint();
-					} else {
-						stepError = $('.parsley-error').length === 0;
-						totalError += stepError;
-						evt.preventDefault();
-					}
-				}
-				else if (data.step === 2) {
-					if (data.direction === 'previous') {
-						return;
-					} else {
-						savePatientEncounterChronicIllness();
-					}
-					//if ($("#datastep2").parsley().validate()) {
+        var chronicTable = $('#dtlChronicIllness').DataTable({
+            ajax: {
+                type: "POST",
+                url: "../WebService/PatientEncounterService.asmx/GetChronicIllness",
+                dataSrc: 'd',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
+            },
+            paging: false,
+            searching: false,
+            info: false,
+            ordering: false,
+            columnDefs: [
+                {
+                    "targets": [0],
+                    "visible": false,
+                    "searchable": false
+                }
+            ]
+        });
 
-					//} else {
-					//    stepError = $('.parsley-error').length === 0;
-					//    totalError += stepError;
-					//    evt.preventDefault();
-					//}
-				}
-				else if (data.step === 3) {
+        var allergyTable = $('#dtlAllergy').DataTable({
+            ajax: {
+                type: "POST",
+                url: "../WebService/PatientEncounterService.asmx/GetAllergies",
+                dataSrc: 'd',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
+            },
+            paging: false,
+            searching: false,
+            info: false,
+            ordering: false,
+            columnDefs: [
+                {
+                    "targets": [0],
+                    "visible": false,
+                    "searchable": false
+                },
+                {
+                    "targets": [1],
+                    "visible": false,
+                    "searchable": false
+                },
+                {
+                    "targets": [2],
+                    "visible": false,
+                    "searchable": false
+                }
+            ]
+        });
+
+        var vaccineTable = $('#dtlVaccines').DataTable({
+            ajax: {
+                type: "POST",
+                url: "../WebService/PatientEncounterService.asmx/GetVaccines",
+                dataSrc: 'd',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
+            },
+            paging: false,
+            searching: false,
+            info: false,
+            ordering: false,
+            columnDefs: [
+                {
+                    "targets": [0],
+                    "visible": false,
+                    "searchable": false
+                },
+                {
+                    "targets": [1],
+                    "visible": false,
+                    "searchable": false
+                }
+            ]
+        });
+
+        var examTable = $('#dtlPhysicalExam').DataTable({
+            ajax: {
+                type: "POST",
+                url: "../WebService/PatientEncounterService.asmx/GetPhysicalExam",
+                dataSrc: 'd',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
+            },
+            paging: false,
+            searching: false,
+            info: false,
+            ordering: false,
+            columnDefs: [
+                {
+                    "targets": [0],
+                    "visible": false,
+                    "searchable": false
+                },
+                {
+                    "targets": [1],
+                    "visible": false,
+                    "searchable": false
+                },
+                {
+                    "targets": [2],
+                    "visible": false,
+                    "searchable": false
+                }
+            ]
+        });
+
+        var diagnosisTable = $('#dtlDiagnosis').DataTable({
+            ajax: {
+                type: "POST",
+                url: "../WebService/PatientEncounterService.asmx/GetDiagnosis",
+                dataSrc: 'd',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
+            },
+            paging: false,
+            searching: false,
+            info: false,
+            ordering: false,
+            columnDefs: [
+                {
+                    "targets": [0],
+                    "visible": false,
+                    "searchable": false
+                }
+            ]
+        });
+
+
+        var presentingComplaintsTable = $('#dtlPresentingComplaints').DataTable({
+            ajax: {
+                type: "POST",
+                url: "../WebService/PatientEncounterService.asmx/LoadComplaints",
+                dataSrc: 'd',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
+            },
+            paging: false,
+            searching: false,
+            info: false,
+            ordering: false,
+            columnDefs: [
+                {
+                    "targets": [0],
+                    "visible": false,
+                    "searchable": false
+                }
+            ]
+        });
+
+        var index;
+
+        $("#dtlAdverseEvents").on('click',
+            '.btnDelete',
+            function () {
+                advEventsTable
+                    .row($(this).parents('tr'))
+                    .remove()
+                    .draw();
+                window.location.href = '<%=ResolveClientUrl("~/CCC/Encounter/PatientEncounter.aspx") %>';
+
+                var index = reactionEventList.indexOf($(this).parents('tr').find('td:eq(0)').text());
+                if (index > -1) {
+                    reactionEventList.splice(index, 1);
+                }
+
+                //$(this).closest('tr').remove();
+                //var y = $(this).closest('tr').find('td').eq(0).html();
+                //index = arrAdverseEventUI.findIndex(x => x.adverseEvent == y);
+                //if (index > -1) {
+                //    arrAdverseEventUI.splice(index, 1);
+                //}
+            });
+
+        ////dtlChronicIllness
+        $("#dtlChronicIllness").on('click',
+            '.btnDelete',
+            function () {
+                chronicTable
+                    .row($(this).parents('tr'))
+                    .remove()
+                    .draw();
+
+                var index = chronicIllnessList.indexOf($(this).parents('tr').find('td:eq(0)').text());
+                if (index > -1) {
+                    chronicIllnessList.splice(index, 1);
+                }
+
+            });
+        $('#dtlSexualHistory').on('click', '.btnSexualHistoryDelete', function () {
+
+            var index = $(this).closest('tr').find('td:eq(0)').text();
+
+            $(this).closest('tr').remove();
+            if (index > -1) {
+                var value = index - 1
+                if (arrSexualHistory[value].id > 0) {
+                    //  arrSexualHistory.splice(value, 1);
+                    arrTextSexualHistory.splice(value, 1);
+                    arrSexualHistory[value].DeleteFlag = true;
+                }
+                else {
+                    arrTextSexualHistory.splice(value, 1);
+                    arrSexualHistory.splice(value, 1);
+                }
+            }
+
+            if (!(arrTextSexualHistory == null)) {
+                noofpartners = noofpartners - 1;
+                $('#txtPartners').val(noofpartners);
+            }
+            else {
+                $('#txtPartners').val("");
+            }
+
+        });
+        ////dtlAllergy
+        $("#dtlAllergy").on('click',
+            '.btnDelete',
+            function () {
+                allergyTable
+                    .row($(this).parents('tr'))
+                    .remove()
+                    .draw();
+
+                var index = AllergyList.indexOf($(this).parents('tr').find('td:eq(0)').text());
+                if (index > -1) {
+                    AllergyList.splice(index, 1);
+                }
+
+            });
+
+        ////dtlVaccines
+        $("#dtlVaccines").on('click',
+            '.btnDelete',
+            function () {
+                vaccineTable
+                    .row($(this).parents('tr'))
+                    .remove()
+                    .draw();
+
+                var index = vaccineList.indexOf($(this).parents('tr').find('td:eq(0)').text());
+                if (index > -1) {
+                    vaccineList.splice(index, 1);
+                }
+
+                var index1 = vaccineStageList.indexOf($(this).parents('tr').find('td:eq(1)').text());
+                if (index1 > -1) {
+                    vaccineStageList.splice(index1, 1);
+                }
+
+            });
+
+
+        ////dtlPhysicalExam
+        $("#dtlPhysicalExam").on('click',
+            '.btnDelete',
+            function () {
+                examTable
+                    .row($(this).parents('tr'))
+                    .remove()
+                    .draw();
+
+                var index = physicalExamList.indexOf($(this).parents('tr').find('td:eq(1)').text());
+                if (index > -1) {
+                    physicalExamList.splice(index, 1);
+                }
+
+            });
+
+
+        ////dtlDiagnosis
+        $("#dtlDiagnosis").on('click',
+            '.btnDelete',
+            function () {
+                diagnosisTable
+                    .row($(this).parents('tr'))
+                    .remove()
+                    .draw();
+                var index = diagnosisList.indexOf($(this).parents('tr').find('td:eq(0)').text());
+                if (index >= -1) {
+                    diagnosisList.splice(index, 1);
+                }
+
+            });
+
+        ////dtlPresentingComplaints
+        $("#dtlPresentingComplaints").on('click',
+            '.btnDelete',
+            function () {
+                presentingComplaintsTable
+                    .row($(this).parents('tr'))
+                    .remove()
+                    .draw();
+
+                var index = PresentingComplaintsList.indexOf($(this).parents('tr').find('td:eq(0)').text());
+                if (index > -1) {
+                    PresentingComplaintsList.splice(index, 1);
+                }
+
+            });
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////
+
+        //Save patient IPT client workup
+        $("#btnSaveIptWorkup").click(function () {
+            addPatientIptWorkup();
+            $('#IptClientWorkupModal').modal('hide');
+        });
+
+        //Save patient IPT Details
+        $("#btnSaveIptDetails").click(function () {
+            if ($('#IptFormDetails').parsley().validate()) {
+                var dob = $("#IptDateCollected").val();
+                if (moment('' + dob + '').isAfter()) {
+                    toastr.error("Date collected cannot be a future date.");
+                    return false;
+                }
+                else {
+                    addIpt();
+                    $('#IptDetailsModal').modal('hide');
+                }
+            } else {
+                return false;
+            }
+        });
+
+        //Save patient IPT Outcome
+        $("#btnSaveIptOutcome").click(function () {
+            addPatientIptOutcome();
+            $('#IptOutcomeModal').modal('hide');
+        });
+
+
+
+        //$('#myWizard').wizard();
+        $("#myWizard")
+            .on("actionclicked.fu.wizard", function (evt, data) {
+                var currentStep = data.step;
+                var nextStep = 0;
+                var previousStep = 0;
+                var totalError = 0;
+                var stepError = 0;
+                /*var form = $("form[name='form1']");*/
+
+                if (data.direction === 'next')
+                    nextStep = currentStep += 1;
+                else
+                    previousStep = nextStep -= 1;
+                if (data.step === 1) {
                     if (data.direction === 'previous') {
-                       
-                    
+                        return;
+                    }
+                    $("#peripheralNeoropathy").prop('required', false);
+                    $("#rash").prop('required', false);
+                    $("#hepatotoxicity").prop('required', false);
+                    $("#adheranceMeasurement").prop('required', false);
 
-                          
-                     return;
-					} else {
-						$('#datastep3').parsley().destroy();
-						$("#<%=ddlExaminationType.ClientID%>").attr('disabled', 'disabled');
-						$('#datastep3').parsley({
-							excluded:
-								"input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
-						});
+                    if (($("#cough").val() === 'True') || ($("#fever").val() === 'True') || ($("#weightLoss").val() === 'True') || ($("#nightSweats").val() === 'True')) {
+                        $("#sputum").prop('required', true);
+                        $("#geneXpert").prop('required', true);
+                        $("#chest").prop('required', true);
+                        $("#antiTb").prop('required', true);
+                        $("#contactsInvitation").prop('required', true);
+                        $("#iptEvaluation").prop('required', true);
+                    }
 
-						if ($('input[name="ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$systemsOkay"]:checked').length >0) {
-							$('.errorBlock').hide();
-						} else {
-							$('.errorBlock').show();
-							return false;
-						}
+                    /* add constraints based on age*/
+                    if ($('#datastep1').parsley().validate()) {
+                        if (($("#tbInfected").val() === 'True') && ($("#onIpt").val() === 'False') && ($("#EverBeenOnIpt").val() === 'True')) {
 
-						if ($('#datastep3').parsley().validate()) {
-							$("#<%=ddlExaminationType.ClientID%>").prop('disabled', false);
+                        } else {
+                            addPatientIcf();
+                        }
+
+
+                        if (($("#cough").val() === 'True') || ($("#fever").val() === 'True') || ($("#weightLoss").val() === 'True') || ($("#nightSweats").val() === 'True')) {
+                            addPatientIcfAction();
+                        }
+                        savePatientEncounterPresentingComplaint();
+                    } else {
+                        stepError = $('.parsley-error').length === 0;
+                        totalError += stepError;
+                        evt.preventDefault();
+                    }
+                }
+                else if (data.step === 2) {
+                    if (data.direction === 'previous') {
+                        return;
+                    } else {
+                        savePatientEncounterChronicIllness();
+                        saveSexualHistory();
+                    }
+                    //if ($("#datastep2").parsley().validate()) {
+
+                    //} else {
+                    //    stepError = $('.parsley-error').length === 0;
+                    //    totalError += stepError;
+                    //    evt.preventDefault();
+                    //}
+                }
+                else if (data.step === 3) {
+                    if (data.direction === 'previous') {
+
+
+
+
+                        return;
+                    } else {
+                        $('#datastep3').parsley().destroy();
+                        $("#<%=ddlExaminationType.ClientID%>").attr('disabled', 'disabled');
+                        $('#datastep3').parsley({
+                            excluded:
+                            "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
+                        });
+
+                        if ($('input[name="ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$systemsOkay"]:checked').length > 0) {
+                            $('.errorBlock').hide();
+                        } else {
+                            $('.errorBlock').show();
+                            return false;
+                        }
+
+                        if ($('#datastep3').parsley().validate()) {
+                            $("#<%=ddlExaminationType.ClientID%>").prop('disabled', false);
                             $.when(savePatientPhysicalExams(evt)).then(
                                 function () {
                                     setTimeout(function () {
                                         saveWhoStage();
                                         savePatientOIS();
-                                       
-                                    }, 5000);
-                               
-							});
-						} else {
-							stepError = $('.parsley-error').length === 0;
-							totalError += stepError;
-							evt.preventDefault();
-						}
-					}
-					//if ($("#datastep3").parsley().validate()) {
 
-					//} else {
-					//    stepError = $('.parsley-error').length === 0;
-					//    totalError += stepError;
-					//    evt.preventDefault();
-					//}
-				}
-				else if (data.step === 4) {
+                                    }, 5000);
+
+                                });
+                        } else {
+                            stepError = $('.parsley-error').length === 0;
+                            totalError += stepError;
+                            evt.preventDefault();
+                        }
+                    }
+                    //if ($("#datastep3").parsley().validate()) {
+
+                    //} else {
+                    //    stepError = $('.parsley-error').length === 0;
+                    //    totalError += stepError;
+                    //    evt.preventDefault();
+                    //}
+                }
+                else if (data.step === 4) {
                     if (data.direction === 'previous') {
                         GetPatientOIS();
-						return;
-					} else {
-						//savePatientPatientManagement();
-						if ($('#AppointmentForm').parsley().validate()) {
-							var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
-							var appDate = $("#<%=AppointmentDate.ClientID%>").val();
-							if (moment('' + appDate + '').isAfter(futureDate)) {
-								toastr.error("Appointment date cannot be set to over 7 months");
-								return false;
-							}
-							//save patient management
-							$.when(savePatientPatientManagement()).then(function() {
-								setTimeout(function() {
-										window.location
-											.href =
-											'<%=ResolveClientUrl( "~/CCC/Patient/PatientHome.aspx")%>';
-									},
-									2000);
-							});
+                        return;
+                    } else {
+                        //savePatientPatientManagement();
+                        if ($('#AppointmentForm').parsley().validate()) {
+                            var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
+                            var appDate = $("#<%=AppointmentDate.ClientID%>").val();
+                            if (moment('' + appDate + '').isAfter(futureDate)) {
+                                toastr.error("Appointment date cannot be set to over 7 months");
+                                return false;
+                            }
+                            //save patient management
+                            $.when(savePatientPatientManagement()).then(function () {
+                                setTimeout(function () {
+                                    window.location
+                                        .href =
+                                        '<%=ResolveClientUrl( "~/CCC/Patient/PatientHome.aspx")%>';
+                                },
+                                    2000);
+                            });
 
-							//save appointment
-							checkExistingAppointment();
-						} else {
-							stepError = $('.parsley-error').length === 0;
-							totalError += stepError;
-							evt.preventDefault();
-						}
-					}
+                            //save appointment
+                            checkExistingAppointment();
+                        } else {
+                            stepError = $('.parsley-error').length === 0;
+                            totalError += stepError;
+                            evt.preventDefault();
+                        }
+                    }
 
-				}
-			})
-			.on("changed.fu.wizard",
-			function () {
+                }
+            })
+            .on("changed.fu.wizard",
+            function () {
 
-			})
-			.on('stepclicked.fu.wizard',
-			function () {
+            })
+            .on('stepclicked.fu.wizard',
+            function () {
 
-			})
-			.on('finished.fu.wizard',
-			function (e) {
+            })
+            .on('finished.fu.wizard',
+            function (e) {
 
-			});
+            });
 
-		function savePatientEncounterPresentingComplaint() {
-			var visitDate = $("#<%=VisitDate.ClientID%>").val();
-			var visitScheduled = $("input[name$=Scheduled]:checked").val();
+        function savePatientEncounterPresentingComplaint() {
+            var visitDate = $("#<%=VisitDate.ClientID%>").val();
+            var visitScheduled = $("input[name$=Scheduled]:checked").val();
 
-			var visitBy = $("#<%=ddlVisitBy.ClientID%>").find(":selected").val();
-			var anyComplaints = $("input[name$=anyComplaints]:checked").val();
-			var adverseEvents = $("input[name$=adverseEvents]:checked").val();
-			var complaints = $("#<%=complaints.ClientID%>").val();
-			var tbscreening = $("#<%=tbscreeningstatus.ClientID%>").find(":selected").val();
-			var nutritionscreening = $("#<%=nutritionscreeningstatus.ClientID%>").find(":selected").val();
-			
-
-			/////////////////////////////////////////////////////
-			if (anyComplaints === 1) {
-				if (!presentingComplaintsTable.data().any()) {
-					toastr.error("Presenting Complaints", "Presenting complaints missing.");
-					evt.preventDefault();
-				}
-			}
-
-			if (adverseEvents === 1) {
-				if (!advEventsTable.data().any()) {
-					toastr.error("Adverse Event(s)", "Adverse Event(s) missing.");
-					evt.preventDefault();
-				}
-			}
-
-			
-			///////////////////////////////////////////////////////
-			var rowCount = $('#dtlAdverseEvents tbody tr').length;
-			var adverseEventsArray = new Array();
-			try {
-				for (var i = 0; i < rowCount; i++) {
-					adverseEventsArray[i] = {
-						//"adverseSeverityID": advEventsTable.row(i).data()[0],
-						//"adverseEvetId":adverseEvent,
-						//"adverseEvent": advEventsTable.row(i).data()[1],
-						//"medicineCausingAE": advEventsTable.row(i).data()[2],
-						//"adverseSeverity": advEventsTable.row(i).data()[3],
-						//"adverseAction": advEventsTable.row(i).data()[4]
-
-						"adverseSeverityID": advEventsTable.row(i).data()[0],
-						"adverseEventId": advEventsTable.row(i).data()[1],
-						"adverseEvent": advEventsTable.row(i).data()[2],
-						"medicineCausingAE": advEventsTable.row(i).data()[3],
-						"adverseSeverity": advEventsTable.row(i).data()[4],
-						"adverseAction": advEventsTable.row(i).data()[5]
-					}
-				}
-			}
-			catch (ex) { }
+            var visitBy = $("#<%=ddlVisitBy.ClientID%>").find(":selected").val();
+            var anyComplaints = $("input[name$=anyComplaints]:checked").val();
+            var adverseEvents = $("input[name$=adverseEvents]:checked").val();
+            var complaints = $("#<%=complaints.ClientID%>").val();
+            var tbscreening = $("#<%=tbscreeningstatus.ClientID%>").find(":selected").val();
+            var nutritionscreening = $("#<%=nutritionscreeningstatus.ClientID%>").find(":selected").val();
 
 
+            /////////////////////////////////////////////////////
+            if (anyComplaints === 1) {
+                if (!presentingComplaintsTable.data().any()) {
+                    toastr.error("Presenting Complaints", "Presenting complaints missing.");
+                    evt.preventDefault();
+                }
+            }
 
-			var rowCount = $('#dtlPresentingComplaints tbody tr').length;
-			var presentingComplaintsArray = new Array();
-			try {
-				for (var i = 0; i < rowCount; i++) {
-					presentingComplaintsArray[i] = {
-						"presentingComplaintID": presentingComplaintsTable.row(i).data()[0],
-						"presentingComplaint": presentingComplaintsTable.row(i).data()[1],
-						"onsetDate": presentingComplaintsTable.row(i).data()[2]
-					}
-				}
-			}
-			catch (ex) { }
+            if (adverseEvents === 1) {
+                if (!advEventsTable.data().any()) {
+                    toastr.error("Adverse Event(s)", "Adverse Event(s) missing.");
+                    evt.preventDefault();
+                }
+            }
 
 
-			$.ajax({
-				type: "POST",
-				url: "../WebService/PatientEncounterService.asmx/savePatientEncounterPresentingComplaints",
-				data: "{'VisitDate':'" + visitDate + "','VisitScheduled':'" + visitScheduled + "','VisitBy':'" + visitBy + "','anyComplaints':'" + anyComplaints + "','Complaints':'" + complaints + "','TBScreening':'" + tbscreening + "','NutritionalStatus':'" + nutritionscreening + "','adverseEvent':'" + JSON.stringify(adverseEventsArray) + "','presentingComplaints':'" + JSON.stringify(presentingComplaintsArray) + "'}",
-				contentType: "application/json; charset=utf-8",
-				dataType: "json",
-				success: function (response) {
+            ///////////////////////////////////////////////////////
+            var rowCount = $('#dtlAdverseEvents tbody tr').length;
+            var adverseEventsArray = new Array();
+            try {
+                for (var i = 0; i < rowCount; i++) {
+                    adverseEventsArray[i] = {
+                        //"adverseSeverityID": advEventsTable.row(i).data()[0],
+                        //"adverseEvetId":adverseEvent,
+                        //"adverseEvent": advEventsTable.row(i).data()[1],
+                        //"medicineCausingAE": advEventsTable.row(i).data()[2],
+                        //"adverseSeverity": advEventsTable.row(i).data()[3],
+                        //"adverseAction": advEventsTable.row(i).data()[4]
 
-					console.log(response.d);
-					if (response.d > 0)
-
-						toastr.success(response.d, "Presenting Complaints");
-					else
-
-						toastr.error(response.d, "Error occured while saving Presenting Complaints");
-				},
-				error: function (response) {
-
-					toastr.error(response.d, "Error occured while saving Presenting Complaints");
-				}
-			});
-		}
+                        "adverseSeverityID": advEventsTable.row(i).data()[0],
+                        "adverseEventId": advEventsTable.row(i).data()[1],
+                        "adverseEvent": advEventsTable.row(i).data()[2],
+                        "medicineCausingAE": advEventsTable.row(i).data()[3],
+                        "adverseSeverity": advEventsTable.row(i).data()[4],
+                        "adverseAction": advEventsTable.row(i).data()[5]
+                    }
+                }
+            }
+            catch (ex) { }
 
 
 
-		function savePatientEncounterChronicIllness() {
-			var rowCount = $('#dtlChronicIllness tbody tr').length;
-			var chronicIllnessArray = new Array();
-			try {
-				var active = 0;
-				for (var i = 0; i < rowCount; i++) {
-
-					if ($('#chkChronic' + chronicTable.row(i).data()[0] + '').is(":checked"))
-						active = 1;
-					else
-						active = 0;
-
-					chronicIllnessArray[i] = {
-						"chronicIllnessID": chronicTable.row(i).data()[0],
-						"chronicIllness": chronicTable.row(i).data()[1],
-						"treatment": chronicTable.row(i).data()[2],
-						"dose": chronicTable.row(i).data()[3],
-						"OnsetDate": chronicTable.row(i).data()[4],
-						"Active": active
-						//"Active": chronicTable.row(i).checkboxes.selected()[5]
-					}
-				}
-			}
-			catch (ex) { }
-			///////////////////////////////////////////
-			//var chronicIllnessTable = new Array();
-			//$("#dtlChronicIllness tr").each(function (row, tr) {
-			//    chronicIllnessTable[row] = {
-			//        "chronicIllness": $(tr).find('td:eq(0)').text(),
-			//        "treatment": $(tr).find('td:eq(1)').text(),
-			//        "dose": $(tr).find('td:eq(2)').text(),
-			//        "duration": $(tr).find('td:eq(3)').text()
-			//    }
-			//});
-			///////////////////////////////////////////////////////
-			var rowCount = $('#dtlAllergy tbody tr').length;
-			var AllergyArray = new Array();
-			try {
-				for (var i = 0; i < rowCount; i++) {
-					AllergyArray[i] = {
-						"allergyID": allergyTable.row(i).data()[0],
-						"reactionID": allergyTable.row(i).data()[1],
-						"severityID": allergyTable.row(i).data()[2],
-						"allergy": allergyTable.row(i).data()[3],
-						"reaction": allergyTable.row(i).data()[4],
-						"severity": allergyTable.row(i).data()[5],
-						"onsetDate": allergyTable.row(i).data()[6]
-					}
-				}
-			}
-			catch (ex) { }
-			///////////////////////////////////////////////////////
-			var rowCount = $('#dtlVaccines tbody tr').length;
-			var vaccineArray = new Array();
-			try {
-				for (var i = 0; i < rowCount; i++) {
-					vaccineArray[i] = {
-						"vaccineID": vaccineTable.row(i).data()[0],
-						"vaccineStageID": vaccineTable.row(i).data()[1],
-						"vaccine": vaccineTable.row(i).data()[2],
-						"vaccineStage": vaccineTable.row(i).data()[3],
-						"vaccineDate": vaccineTable.row(i).data()[4],
-
-					}
-				}
-			}
-			catch (ex) { }
+            var rowCount = $('#dtlPresentingComplaints tbody tr').length;
+            var presentingComplaintsArray = new Array();
+            try {
+                for (var i = 0; i < rowCount; i++) {
+                    presentingComplaintsArray[i] = {
+                        "presentingComplaintID": presentingComplaintsTable.row(i).data()[0],
+                        "presentingComplaint": presentingComplaintsTable.row(i).data()[1],
+                        "onsetDate": presentingComplaintsTable.row(i).data()[2]
+                    }
+                }
+            }
+            catch (ex) { }
 
 
-			$.ajax({
-				type: "POST",
-				url: "../WebService/PatientEncounterService.asmx/savePatientEncounterChronicIllness",
-				data: "{'chronicIllness':'" + JSON.stringify(chronicIllnessArray) + "','vaccines':'" + JSON.stringify(vaccineArray) + "','allergies':'" + JSON.stringify(AllergyArray) + "'}",
-				contentType: "application/json; charset=utf-8",
-				dataType: "json",
-				success: function (response) {
-					toastr.success(response.d, "Chronic Illness");
-				},
-				error: function (response) {
-					toastr.error(response.d, "Chronic Illness Error");
-				}
-			});
-		}
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientEncounterService.asmx/savePatientEncounterPresentingComplaints",
+                data: "{'VisitDate':'" + visitDate + "','VisitScheduled':'" + visitScheduled + "','VisitBy':'" + visitBy + "','anyComplaints':'" + anyComplaints + "','Complaints':'" + complaints + "','TBScreening':'" + tbscreening + "','NutritionalStatus':'" + nutritionscreening + "','adverseEvent':'" + JSON.stringify(adverseEventsArray) + "','presentingComplaints':'" + JSON.stringify(presentingComplaintsArray) + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
 
-		function savePatientPhysicalExams(evt) {
-			var rowCount = $('#dtlPhysicalExam tbody tr').length;
-			var generalExamination = getCheckBoxListItemsChecked('<%= cblGeneralExamination.ClientID %>');
-			if (generalExamination == "") {
-				toastr.error(generalExamination, "Please check at least one General Examination.");
-				evt.preventDefault();
-				return false;
-			}
-			var physicalExamArray = new Array();
-			try {
-				for (var i = 0; i < rowCount; i++) {
-					physicalExamArray[i] = {
-						"reviewOfSystemsID": examTable.row(i).data()[0],
-						"systemTypeID": examTable.row(i).data()[1],
-						"findingID": examTable.row(i).data()[2],
-						"systemTypeText": examTable.row(i).data()[3],
-						"findingIDText": examTable.row(i).data()[4],
-						"findingsNotes": examTable.row(i).data()[5]
-					}
-				}
-			}
-			catch (ex) { }
+                    console.log(response.d);
+                    if (response.d > 0)
 
-			//console.log(physicalExamArray);
-			//return false;
-			$.ajax({
-				type: "POST",
-				url: "../WebService/PatientEncounterService.asmx/savePatientPhysicalExam",
-				data: "{'physicalExam':'" + JSON.stringify(physicalExamArray) + "','generalExam':'" + generalExamination + "'}",
-				contentType: "application/json; charset=utf-8",
-				dataType: "json",
-				success: function (response) {
-					toastr.success(response.d, "Physical Exam");
-				},
-				error: function (response) {
-					toastr.error(response.d, "Physical Exam Error");
-				}
-			});
-		}
+                        toastr.success(response.d, "Presenting Complaints");
+                    else
 
+                        toastr.error(response.d, "Error occured while saving Presenting Complaints");
+                },
+                error: function (response) {
+
+                    toastr.error(response.d, "Error occured while saving Presenting Complaints");
+                }
+            });
+        }
+
+
+
+        function savePatientEncounterChronicIllness() {
+            var rowCount = $('#dtlChronicIllness tbody tr').length;
+            var chronicIllnessArray = new Array();
+            try {
+                var active = 0;
+                for (var i = 0; i < rowCount; i++) {
+
+                    if ($('#chkChronic' + chronicTable.row(i).data()[0] + '').is(":checked"))
+                        active = 1;
+                    else
+                        active = 0;
+
+                    chronicIllnessArray[i] = {
+                        "chronicIllnessID": chronicTable.row(i).data()[0],
+                        "chronicIllness": chronicTable.row(i).data()[1],
+                        "treatment": chronicTable.row(i).data()[2],
+                        "dose": chronicTable.row(i).data()[3],
+                        "OnsetDate": chronicTable.row(i).data()[4],
+                        "Active": active
+                        //"Active": chronicTable.row(i).checkboxes.selected()[5]
+                    }
+                }
+            }
+            catch (ex) { }
+            ///////////////////////////////////////////
+            //var chronicIllnessTable = new Array();
+            //$("#dtlChronicIllness tr").each(function (row, tr) {
+            //    chronicIllnessTable[row] = {
+            //        "chronicIllness": $(tr).find('td:eq(0)').text(),
+            //        "treatment": $(tr).find('td:eq(1)').text(),
+            //        "dose": $(tr).find('td:eq(2)').text(),
+            //        "duration": $(tr).find('td:eq(3)').text()
+            //    }
+            //});
+            ///////////////////////////////////////////////////////
+            var rowCount = $('#dtlAllergy tbody tr').length;
+            var AllergyArray = new Array();
+            try {
+                for (var i = 0; i < rowCount; i++) {
+                    AllergyArray[i] = {
+                        "allergyID": allergyTable.row(i).data()[0],
+                        "reactionID": allergyTable.row(i).data()[1],
+                        "severityID": allergyTable.row(i).data()[2],
+                        "allergy": allergyTable.row(i).data()[3],
+                        "reaction": allergyTable.row(i).data()[4],
+                        "severity": allergyTable.row(i).data()[5],
+                        "onsetDate": allergyTable.row(i).data()[6]
+                    }
+                }
+            }
+            catch (ex) { }
+            ///////////////////////////////////////////////////////
+            var rowCount = $('#dtlVaccines tbody tr').length;
+            var vaccineArray = new Array();
+            try {
+                for (var i = 0; i < rowCount; i++) {
+                    vaccineArray[i] = {
+                        "vaccineID": vaccineTable.row(i).data()[0],
+                        "vaccineStageID": vaccineTable.row(i).data()[1],
+                        "vaccine": vaccineTable.row(i).data()[2],
+                        "vaccineStage": vaccineTable.row(i).data()[3],
+                        "vaccineDate": vaccineTable.row(i).data()[4],
+
+                    }
+                }
+            }
+            catch (ex) { }
+
+
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientEncounterService.asmx/savePatientEncounterChronicIllness",
+                data: "{'chronicIllness':'" + JSON.stringify(chronicIllnessArray) + "','vaccines':'" + JSON.stringify(vaccineArray) + "','allergies':'" + JSON.stringify(AllergyArray) + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    toastr.success(response.d, "Chronic Illness");
+                },
+                error: function (response) {
+                    toastr.error(response.d, "Chronic Illness Error");
+                }
+            });
+        }
+
+        function savePatientPhysicalExams(evt) {
+            var rowCount = $('#dtlPhysicalExam tbody tr').length;
+            var generalExamination = getCheckBoxListItemsChecked('<%= cblGeneralExamination.ClientID %>');
+            if (generalExamination == "") {
+                toastr.error(generalExamination, "Please check at least one General Examination.");
+                evt.preventDefault();
+                return false;
+            }
+            var physicalExamArray = new Array();
+            try {
+                for (var i = 0; i < rowCount; i++) {
+                    physicalExamArray[i] = {
+                        "reviewOfSystemsID": examTable.row(i).data()[0],
+                        "systemTypeID": examTable.row(i).data()[1],
+                        "findingID": examTable.row(i).data()[2],
+                        "systemTypeText": examTable.row(i).data()[3],
+                        "findingIDText": examTable.row(i).data()[4],
+                        "findingsNotes": examTable.row(i).data()[5]
+                    }
+                }
+            }
+            catch (ex) { }
+
+            //console.log(physicalExamArray);
+            //return false;
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientEncounterService.asmx/savePatientPhysicalExam",
+                data: "{'physicalExam':'" + JSON.stringify(physicalExamArray) + "','generalExam':'" + generalExamination + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    toastr.success(response.d, "Physical Exam");
+                },
+                error: function (response) {
+                    toastr.error(response.d, "Physical Exam Error");
+                }
+            });
+        }
+        function GetPatientSexualHistory() {
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientEncounterService.asmx/GetSexualHistory",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+
+                    var ArrayResults = [];
+                    
+                    ArrayResults = JSON.parse(response.d);
+                  
+                        if (!(ArrayResults.sexuallyactive == "" || ArrayResults.sexuallyactive == null || ArrayResults.sexuallyactive == 'undefined' || ArrayResults.sexuallyactive == 0)) {
+
+                            if (ArrayResults.sexuallyactive.toString() == "yes") {
+                                var value = "Yes";
+                                $("input[name=optSexualHistory][value=" + value + "]").prop('checked', true);
+                                $(".sexhistory").show();
+                            }
+                            else if (ArrayResults.sexuallyactive.toString() == "no") {
+                                var value = "No";
+                                $("input[name=optSexualHistory][value=" + value + "]").prop('checked', true);
+                                $(".sexhistory").hide();
+                            }
+
+                    }
+
+               
+                    if (!(ArrayResults.list == null)) {
+                        if (ArrayResults.list.length > 0) {
+                            for (var i = 0; i < ArrayResults.list.length; i++) {
+
+                                var arrHRB = [];
+                                var selectedhistory = {
+                                    count: 0,
+                                    PartnerStatus: "",
+                                    Gender: "",
+                                    SexualOrientation: "",
+                                    HighRisk: arrHRB
+                                }
+                                var history = {
+                                    uniqueid: 0,
+                                    id: 0,
+                                    PartnerStatus: 0,
+                                    Gender: 0,
+                                    SexualOrientation: 0,
+                                    DeleteFlag: false,
+                                    HighRisk: arrHRB
+                                }
+
+                                history.id = ArrayResults.list[i].id;
+                                history.uniqueid = ArrayResults.list[i].uniqueid;
+                                history.PartnerStatus = ArrayResults.list[i].PartnerStatus;
+                                history.Gender = ArrayResults.list[i].Gender;
+                                history.SexualOrientation = ArrayResults.list[i].SexualOrientation;
+                                for (var t = 0; t < ArrayResults.list[i].Highrisk.length; t++) {
+                                    var id = ArrayResults.list[i].Highrisk[t].Id;
+                                    var value = ArrayResults.list[i].Highrisk[t].value;
+                                    arrHRB.push({ id: id, value: value });
+                                    
+                                }
+                              
+                                history.HighRisk = arrHRB;
+                                
+                            
+                                arrSexualHistory.push(history);
+                                var count = history.uniqueid;
+                                selectedhistory.count = count;
+
+                                if (!(ArrayResults.list[i].PartnerStatus == "" || ArrayResults.list[i].PartnerStatus == null || ArrayResults.list[i].PartnerStatus == 'undefined' || ArrayResults.list[i].PartnerStatus == 0)) {
+                                    var Status = ArrayResults.hivstatus.find(t => t.ItemId == ArrayResults.list[i].PartnerStatus);
+                                    selectedhistory.PartnerStatus = Status.ItemDisplayName;
+                                }
+                                else {
+
+                                    selectedhistory.PartnerStatus = "";
+                                }
+
+                                if (!(ArrayResults.list[i].Gender == "" || ArrayResults.list[i].Gender == null || ArrayResults.list[i].Gender == 'undefined' || ArrayResults.list[i].Gender == 0)) {
+
+                                    var Gender = ArrayResults.gender.find(t => t.ItemId == ArrayResults.list[i].Gender);
+                                    selectedhistory.Gender = Gender.ItemDisplayName;
+                                }
+                                else {
+                                    selectedhistory.Gender = "";
+                                }
+
+                                if (!(ArrayResults.list[i].SexualOrientation == "" || ArrayResults.list[i].SexualOrientation == null || ArrayResults.list[i].SexualOrientation == 'undefined' || ArrayResults.list[i].SexualOrientation == 0)) {
+                                    var SexualOrientation = ArrayResults.sexualorient.find(t => t.ItemId == ArrayResults.list[i].SexualOrientation);
+                                    selectedhistory.SexualOrientation = SexualOrientation.ItemDisplayName;
+                                }
+                                else {
+                                    selectedhistory.SexualOrientation = "";
+                                }
+
+                                
+                                selectedhistory.HighRisk = arrHRB;
+                                arrTextSexualHistory.push(selectedhistory);
+
+
+                            }
+
+
+                        }
+                    }
+
+
+                   
+                    if (arrTextSexualHistory.length > 0) {
+
+
+                        for (var t = 0; t < arrTextSexualHistory.length; t++) {
+
+                            var str = arrTextSexualHistory[t].HighRisk.map(function (elem) {
+                                return elem.value;
+                            }).join(",");
+
+                            console.log(arrTextSexualHistory[t].count);
+                            var table = "<tr><td align='left'  >" +
+                                arrTextSexualHistory[t].count +
+                                "</td><td align='left'>" +
+                                arrTextSexualHistory[t].PartnerStatus
+                                +
+                                "</td><td align='left'>" +
+                                arrTextSexualHistory[t].Gender
+                                +
+                                "</td><td align='left'>" +
+                                arrTextSexualHistory[t].SexualOrientation
+                                +
+                                "</td><td align='left' >" +
+                                str +
+                                "</td><td align='right'><button type='button' class='btnSexualHistoryDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button></td></tr>";
+                            $("#dtlSexualHistory>tbody:first").append('' + table + '');
+                        }
+                    }
+
+
+                    if (!(ArrayResults.numberofpartners == "" || ArrayResults.numberofpartners == null || ArrayResults.numberofpartners == 'undefined' )) {
+                        if (ArrayResults.numberofpartners == arrSexualHistory.length || ArrayResults.numberofpartners > arrSexualHistory.length)
+                        {
+                            noofpartners = ArrayResults.numberofpartners;
+                        $('#txtPartners').val(noofpartners);
+                    }
+                    else {
+                        noofpartners = arrSexualHistory.length;
+                        $('#txtPartners').val(noofpartners);
+                    }
+                }
+                
+                },
+                error: function (response) {
+
+                    toastr.error(response.d, "Error Loading the Patient OIS");
+                }
+
+
+            });
+
+        }
+
+
+
+        function saveSexualHistory() {
+            var SexuallyActive = $("input[name='optSexualHistory']:checked").val();
+           
+            var t=0;
+            //for (var i= 0; i < arrSexualHistory.length;i++)
+            //{
+            //    t = i + 1;
+            //    if (arrSexualHistory[i].uniqueid == 0) {
+            //        arrSexualHistory[i].uniqueid = t;
+            //    } 
+                        
+            // }
+           var NoofPartners = $('#txtPartners').val().toString();
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientEncounterService.asmx/SaveSexualHistory",
+                data: "{'data': '" + JSON.stringify(arrSexualHistory) + "','sexuallyactive':'" + SexuallyActive +"','partnersno':'"+NoofPartners+"' }",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    toastr.success(response.d, "Save Patient Sexual History");
+                
+                    var ArrayResults = [];
+                    ArrayResults = JSON.parse(response.d);
+                    for (var t = 0; t < arrSexualHistory.length; t++) {
+                        for (var i = 0; i < ArrayResults.list.length; i++) {
+
+                            if (ArrayResults.list[i].uniqueid == arrSexualHistory[i].uniqueid) {
+                                arrSexualHistory[i].id = ArrayResults.list[i].id;
+                            }
+
+                        }
+                    }
+                    console.log(arrSexualHistory.msg);
+
+
+                },
+                error: function (response) {
+                    toastr.error(response.d, "Save Patient Sexual History");
+                }
+        });
+        }
 
        
 		function saveWhoStage() {
@@ -4564,7 +4913,231 @@
 			}
 		});
     }
+    function addSexualHistory() {
+        var arrHRB = [];
 
+        arrHRB = GetHighRiskBehaviour();
+
+        
+
+
+
+        var ddlPartnerStatus = $("#ddlPartnerStatus").val();
+
+        if (ddlPartnerStatus == "" || ddlPartnerStatus == null || ddlPartnerStatus == 'undefined' || ddlPartnerStatus == 0) {
+            toastr.error("Error", "Please enter Partner Status");
+            return false;
+        }
+        else {
+            var partnerStatus = $("#ddlPartnerStatus").find('option:selected').text();
+            if (ddlPartnerStatus == null) {
+                ddlPartnerStatus = 0;
+            }
+        }
+
+        var ddlPartnerGender = $("#ddlPartnerGender").val();
+        if (ddlPartnerGender == "" || ddlPartnerGender == null || ddlPartnerGender == 'undefined' || ddlPartnerGender == 0) {
+
+            toastr.error("Error", "Please enter Partner Gender");
+            return false;
+        }
+        else {
+            var GenderText = $('#ddlPartnerGender').find('option:selected').text();
+            if (ddlPartnerGender == null) {
+                ddlPartnerGender = 0;
+            }
+        }
+        var ddlSexualOrientation = $("#ddlSexualOrientation").val();
+        if (ddlSexualOrientation == "" || ddlSexualOrientation == null || ddlSexualOrientation == 'undefined' || ddlSexualOrientation == 0) {
+            toastr.error("Error", "Please enter Partner Sexual Orientation");
+            return false;
+        }
+        else {
+            var SexualOrientation = $("#ddlSexualOrientation").find('option:selected').text();
+            if (ddlSexualOrientation == null) {
+                ddlSexualOrientation = 0;
+            }
+        }
+        var selectedhistory = {
+            count: "0",
+            PartnerStatus: partnerStatus,
+            Gender: GenderText,
+            SexualOrientation: SexualOrientation,
+            HighRisk: arrHRB
+        }
+        var history = {
+            uniqueid: 0,
+            id:0,
+            PartnerStatus: ddlPartnerStatus,
+            Gender: ddlPartnerGender,
+            SexualOrientation: ddlSexualOrientation,
+            DeleteFlag :false,
+            HighRisk: arrHRB
+        }
+        var res = 0;
+        var hist = 0;
+        console.log('History')
+
+        //console.log(history);
+       // console.log(selectedhistory);
+     //   console.log(arrHRB);
+        if (arrSexualHistory.length > 0) {
+            hist = arrSexualHistory.length;
+            hist = hist + 1;
+            history.uniqueid = hist.toString();
+        }
+        else {
+
+            hist = hist + 1;
+            history.uniqueid=hist.toString();
+         
+
+        }
+        arrSexualHistory.push(history);
+        if (arrTextSexualHistory.length > 0) {
+            res = arrTextSexualHistory.length;
+            res = res + 1;
+        
+            noofpartners = parseInt(noofpartners) + 1;
+            selectedhistory.count = res.toString();
+        }
+        else {
+            
+            res = res + 1;
+            
+     
+            noofpartners = parseInt(noofpartners) + 1;
+            selectedhistory.count =res.toString();
+        }
+        arrTextSexualHistory.push(selectedhistory);
+        console.log(arrTextSexualHistory);
+        if (!(arrTextSexualHistory == null)) {
+
+            $('#txtPartners').val(noofpartners.toString());
+        }
+        else {
+            $('#txtPartners').val("");
+        }
+        $("#dtlSexualHistory>tbody:first").empty();
+        if (!(selectedhistory == null)) {
+            var i;
+            var t;
+            var str = "";
+           
+            for (i = 0; i < arrTextSexualHistory.length; i++) {
+               
+               
+                console.log(arrTextSexualHistory[i].Gender);
+
+                console.log(arrTextSexualHistory[i].HighRisk)
+               str= arrTextSexualHistory[i].HighRisk.map(function (elem) {
+                    return elem.value;
+                }).join(",");
+                //for (t = 0; t < arrTextSexualHistory[i].HighRisk.length; t++) {
+                //    console.log(arrTextSexualHistory[i].HighRisk[t].value);
+                //    var value;
+                //    if (!(arrTextSexualHistory[i].HighRisk[t].value == null || arrTextSexualHistory[i].HighRisk[t].value == "")) {
+
+                //        str =  arrTextSexualHistory[i].HighRisk[t].value;
+                //        str += ",";
+                //    }
+
+                //}
+
+               var table = "<tr><td align='left'  >" +
+                   arrTextSexualHistory[i].count +
+                    "</td><td align='left'>" +
+                    arrTextSexualHistory[i].PartnerStatus
+                    +
+                    "</td><td align='left'>" +
+                    arrTextSexualHistory[i].Gender
+                    +
+                    "</td><td align='left'>" +
+                    arrTextSexualHistory[i].SexualOrientation
+                    +
+                    "</td><td align='left' >" +
+                    str +
+                    "</td><td align='right'><button type='button' class='btnSexualHistoryDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button></td></tr>";
+                $("#dtlSexualHistory>tbody:first").append('' + table + '');
+
+            }
+
+          
+
+        }
+
+
+        $("#ddlPartnerStatus").val(0);
+        $("#ddlPartnerGender").val("");
+        $("#ddlSexualOrientation").val(0);
+        $("#ddlHighRiskBehaviour").select2("val", "0");
+    }
+        
+   
+   
+    function loadHighRiskBehavior(MasterName) {
+        $.ajax({
+            type: "POST",
+            url: "../WebService/LookupService.asmx/GetLookUpItemViewByMasterName",
+            data: "{'masterName':'" + MasterName + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+
+                var itemList = JSON.parse(response.d);
+                BindHighRiskBehavior(itemList);
+
+            },
+            error: function (response) {
+
+                toastr.error(response.d, "Error occured while presenting HighRiskBehaviour");
+            }
+        });
+    }
+
+    function BindHighRiskBehavior(itemList) {
+       // data = [];
+        $.each(itemList, function (index, value) {
+            arrHighRisk.push({ id: value.ItemId, text: value.ItemDisplayName });
+        });
+        
+
+        $("#ddlHighRiskBehaviour").select2({
+            placeholder: {
+                id: '0', // the value of the option
+                text: 'Select an option'
+            },
+            allowClear: true,
+            width: 'resolve',
+            data: arrHighRisk
+        });
+        $("#ddlHighRiskBehaviour").select2("val", "0");
+        $("#ddlHighRiskBehaviour").trigger('change.select2');
+    }
+    function GetHighRiskBehaviour() {
+        var ddlHighRiskBehaviour = $("#ddlHighRiskBehaviour").select2("val");
+        var arrHRB = [];
+        if (ddlHighRiskBehaviour !== null) {
+            if (ddlHighRiskBehaviour.length > 0) {
+                if (jQuery.isEmptyObject(ddlHighRiskBehaviour) == false) {
+                    $.each(ddlHighRiskBehaviour, function (index, arrD) {
+                        if (jQuery.isEmptyObject(arrD) == false) {
+                            var Risk = arrHighRisk.find(s => s.id == arrD);
+                            arrHRB.push({ id: arrD ,value:Risk.text});
+                        }
+                    });
+                }
+            }
+            else {
+                arrHRB.push({ id: 0,value:'null' });
+            }
+        }
+        else {
+            arrHRB.push({ id: 0,value:'null' });
+        }
+
+        return arrHRB;
+    }
 
     function loadWhoStageOIS(WhoStage,id,title) {
       

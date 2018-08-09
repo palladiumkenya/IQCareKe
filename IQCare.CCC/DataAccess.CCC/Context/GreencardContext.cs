@@ -108,6 +108,11 @@ namespace DataAccess.CCC.Context
 
         public DbSet<PatientOI> PatientOIs { get; set; }
 
+        public DbSet<PatientHighRisk> PatientHighRisks { get; set; }
+
+        public DbSet<PatientSexualHistory> PatientSexualHistories { get; set; }
+
+        public DbSet<PatientPartner> PatientPartners { get; set; }
         //Appointment and Labs
         public DbSet<PatientAppointment> PatientAppointments { get; set; }
         public DbSet<AppointmentSummary> AppointmentSummary { get; set; }
