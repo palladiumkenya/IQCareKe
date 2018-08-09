@@ -8,7 +8,7 @@ export class Person {
     dateOfBirth: string;
     ageYears: number;
     ageMonths: number;
-    dobPrecision: boolean;
+    dobPrecision: number;
     maritalStatus: number;
     educationLevel: number;
     occupation: number;

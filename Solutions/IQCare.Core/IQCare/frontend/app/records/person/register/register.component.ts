@@ -7,6 +7,7 @@ import { FormGroup, FormBuilder, AbstractControl } from '../../../../../node_mod
 import { Person } from '../../_models/person';
 import { ClientContact } from '../../_models/clientcontact';
 import { NextOfKin } from '../../_models/nextofkin';
+import { MatDatepickerInputEvent } from '../../../../../node_modules/@angular/material';
 
 @Component({
     selector: 'app-register',
@@ -27,7 +28,6 @@ export class RegisterComponent implements OnInit {
     clientContact: ClientContact;
     emergencyContact: EmergencyContact;
     nextOfKin: NextOfKin;
-
 
     constructor(private _formBuilder: FormBuilder) { }
 
@@ -89,4 +89,33 @@ export class RegisterComponent implements OnInit {
         });
     }
 
+    onDate(event: MatDatepickerInputEvent<Date>) {
+        console.log(`${event.value}`);
+        this.getAge(event.value);
+    }
+
+    getAge(dob: Date): any {
+        console.log(dob);
+        const today = new Date();
+
+        let age = today.getFullYear() - dob.getFullYear();
+        let ageMonths = today.getMonth() - dob.getMonth();
+        if (ageMonths < 0 || (ageMonths === 0 && today.getDate() < dob.getDate())) {
+            age--;
+        }
+
+        if (ageMonths < 0) {
+            ageMonths = 12 - (-ageMonths + 1);
+        }
+
+        this.formArray['controls'][0]['controls']['AgeYears'].setValue(age);
+        this.formArray['controls'][0]['controls']['AgeMonths'].setValue(ageMonths);
+        this.formArray['controls'][0]['controls']['DobPrecision'].setValue(1);
+        // this.formGroup.controls.formArray['controls'][0]['controls']['DobPrecision'].setValue(1);
+        // this.formArray.controls[0]
+        // console.log();
+
+        console.log(this.formGroup.controls.formArray['controls'][0]['controls']['DobPrecision']);
+        // console.log('age years ', age, 'agemonths ', ageMonths);
+    }
 }
