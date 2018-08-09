@@ -5,11 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MediatR" Version="5.1.0" />
-    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="5.1.0" />
+    <PackageReference Include="MediatR" Version="4.1.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="4.1.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\IQCare.Common.Services\IQCare.Common.Services.csproj" />
     <ProjectReference Include="..\IQCare.Library\IQCare.Library.csproj" />
     <ProjectReference Include="..\IQCare.PMTCT.Core\IQCare.PMTCT.Core.csproj" />
     <ProjectReference Include="..\IQCare.PMTCT.Infrastructure\IQCare.PMTCT.Infrastructure.csproj" />

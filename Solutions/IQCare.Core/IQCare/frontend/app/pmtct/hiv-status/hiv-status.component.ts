@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {  FormBuilder, FormGroup, Validators  } from '@angular/forms';
+export interface Topic {
+    value: number;
+    viewValue: string;
+  }
 
 @Component({
   selector: 'app-hiv-status',
@@ -8,6 +12,34 @@ import {  FormBuilder, FormGroup, Validators  } from '@angular/forms';
 })
 
 export class HivStatusComponent implements OnInit {
+
+    hivTestings: Topic[] = [
+        {value: 1, viewValue: 'Initial'},
+        {value: 2, viewValue: 'Retest;'}
+    ];
+
+    Tests: Topic[] = [
+        {value: 1, viewValue: 'HIV Test-1'},
+        {value: 2, viewValue: 'HIV Test-2;'}
+    ];
+
+    KitNames: Topic[] = [
+        {value: 1, viewValue: 'Determine'},
+        {value: 2, viewValue: 'First Response'},
+        {value: 3, viewValue: 'Other'}
+    ];
+
+    testResults: Topic[] = [
+        {value: 1, viewValue: 'Negative'},
+        {value: 2, viewValue: 'Positive'},
+        {value: 3, viewValue: 'Invalid'}
+    ];
+
+    finalResults: Topic[] = [
+        {value: 1, viewValue: 'Negative'},
+        {value: 2, viewValue: 'Positive'},
+        {value: 3, viewValue: 'Inconclusive'}
+    ];
 
     HIVStatusFormGroup: FormGroup;
   constructor() { }
