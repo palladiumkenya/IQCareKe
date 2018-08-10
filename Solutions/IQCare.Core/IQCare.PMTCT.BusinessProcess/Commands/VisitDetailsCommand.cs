@@ -1,6 +1,5 @@
 ﻿using System;
 using IQCare.Library;
-using IQCare.PMTCT.Core;
 using MediatR;
 
 namespace IQCare.PMTCT.BusinessProcess.Commands
@@ -8,9 +7,10 @@ namespace IQCare.PMTCT.BusinessProcess.Commands
     public class VisitDetailsCommand : IRequest<Result<VisitDetailsCommandResult>>
     {
         public int PatientId { get; set; }
+        public int ServiceAreaId { get; set; }
         public DateTime VisitDate { get; set; }
         public int VisitNumber { get; set; }
-        public int? VisitType { get; set; }
+        public int VisitType { get; set; }
         public DateTime Lmp { get; set; }
         public DateTime Edd { get; set; }
         public int Gestation { get; set; }
@@ -24,5 +24,7 @@ namespace IQCare.PMTCT.BusinessProcess.Commands
     {
         public int PatientMasterVisitId { get; set; }
         public int PregancyId { get; set; }
+        public int ProfileId { get; set; }
+        public int PatientEncounterId { get; set; }
     }
 }

@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace IQCare.PMTCT.Infrastructure.Mapping
 {
-    public class PatientCounsellingMapping:IEntityTypeConfiguration<PatientCounselling>
+    public class PatientCounsellingMapping:IEntityTypeConfiguration<PatientEducation>
     {
-        public void Configure(EntityTypeBuilder<PatientCounselling> builder)
+        public void Configure(EntityTypeBuilder<PatientEducation> builder)
         {
             builder.ToTable("PatientCounselling")
                 .HasKey(c => c.Id);

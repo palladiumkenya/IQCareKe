@@ -1,11 +1,10 @@
 ﻿using IQCare.Common.Core.Models;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace IQCare.PMTCT.Core.Models
 {
-    public class PatientCounselling
+    public class PatientEducation
     {
         [Key]
         public int Id { get; set; }

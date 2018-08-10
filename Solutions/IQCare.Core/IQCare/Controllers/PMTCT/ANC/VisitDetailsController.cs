@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using IQCare.Common.BusinessProcess.Commands.Encounter;
+using IQCare.Common.BusinessProcess.Commands.PatientMasterVisit;
+using IQCare.HTS.BusinessProcess.Commands;
 using IQCare.PMTCT.BusinessProcess.Commands;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IQCare.Controllers.PMTCT.ANC
@@ -21,17 +21,30 @@ namespace IQCare.Controllers.PMTCT.ANC
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody]VisitDetailsCommand visitDetailsCommand)
+        public async Task<IActionResult> Post([FromBody] VisitDetailsCommand visitDetailsCommand )
         {
-            var response = await _mediator.Send(visitDetailsCommand, Request.HttpContext.RequestAborted);
+            var response = await _mediator.Send(new VisitDetailsCommand
+            {
+                PatientId = visitDetailsCommand.PatientId,
+                ServiceAreaId = visitDetailsCommand.ServiceAreaId,
+                VisitDate = visitDetailsCommand.VisitDate,
+                VisitType = visitDetailsCommand.VisitType,
+                VisitNumber= visitDetailsCommand.VisitNumber,
+                Lmp=visitDetailsCommand.Lmp ,
+                Edd= visitDetailsCommand.Edd,
+                Gestation=visitDetailsCommand.Gestation,
+                AgeAtMenarche= visitDetailsCommand.AgeAtMenarche ,
+                ParityOne=visitDetailsCommand.ParityOne,
+                ParityTwo=visitDetailsCommand.ParityTwo,
+                Gravidae= visitDetailsCommand.Gravidae ,
+            }, Request.HttpContext.RequestAborted);
+
             if (response.IsValid)
             {
                 return Ok(response.Value);
             }
-            else
-            {
-                return BadRequest(response);
-            }
+            return BadRequest(response);
+
         }
     }
 }
