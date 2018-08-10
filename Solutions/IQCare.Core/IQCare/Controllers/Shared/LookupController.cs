@@ -95,9 +95,8 @@ namespace IQCare.Controllers.Common
             if (results.IsValid)
                 return Ok(results.Value);
             return BadRequest(results);
+        }
 
-       
-       }
         [HttpGet("getEducation")]
         public async Task<IActionResult> GetRegConsentEducationOptions()
         {
@@ -106,7 +105,6 @@ namespace IQCare.Controllers.Common
             if (results.IsValid)
                 return Ok(results.Value);
             return BadRequest(results);
-
         }
 
         [HttpGet("getRegConsentOptions")]
@@ -117,7 +115,6 @@ namespace IQCare.Controllers.Common
             if (results.IsValid)
                 return Ok(results.Value);
             return BadRequest(results);
-
         }
          
         [HttpGet("getMaritalStatusOptions")]
@@ -245,32 +242,6 @@ namespace IQCare.Controllers.Common
             return BadRequest(results);
 
         }
-
-
-        [HttpGet("getSubCountylist")]
-        public async Task<IActionResult> GetSubCountyList(string countyid, string subcountyid)
-        {
-            var results = await _mediator.Send(new GetSubCountiesCommand() { CountyId = countyid, SubcountyId = subcountyid }, HttpContext.RequestAborted);
-            if (results.IsValid)
-                return Ok(results.Value);
-            return BadRequest(results);
-
-        }
-
-
-        [HttpGet("getWardlist")]
-        public async Task<IActionResult> GetWardList(string countyid, string subcountyid)
-        {
-            var results = await _mediator.Send(new GetWardCommand() { CountyId = countyid, SubcountyId = subcountyid }, HttpContext.RequestAborted);
-            if (results.IsValid)
-                return Ok(results.Value);
-            return BadRequest(results);
-
-        }
-
-
-
-
     }
 
         //[HttpGet("getFacility/{mflCode}")]

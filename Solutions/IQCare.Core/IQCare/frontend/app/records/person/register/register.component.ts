@@ -1,3 +1,5 @@
+import { County } from './../../_models/county';
+import { SnotifyService } from 'ng-snotify';
 import { EmergencyContact } from './../../_models/emergencycontact';
 import { ClientAddress } from './../../_models/clientaddress';
 import { Validators } from '@angular/forms';
@@ -8,6 +10,10 @@ import { Person } from '../../_models/person';
 import { ClientContact } from '../../_models/clientcontact';
 import { NextOfKin } from '../../_models/nextofkin';
 import { MatDatepickerInputEvent } from '../../../../../node_modules/@angular/material';
+import * as moment from 'moment';
+import { NotificationService } from '../../../shared/_services/notification.service';
+import { ActivatedRoute } from '../../../../../node_modules/@angular/router';
+import { CountyService } from '../../_services/county.service';
 
 @Component({
     selector: 'app-register',
@@ -28,8 +34,19 @@ export class RegisterComponent implements OnInit {
     clientContact: ClientContact;
     emergencyContact: EmergencyContact;
     nextOfKin: NextOfKin;
+    maxDate: Date;
 
-    constructor(private _formBuilder: FormBuilder) { }
+    counties: County[];
+    subCounties: County[];
+    wards: County[];
+
+    constructor(private _formBuilder: FormBuilder,
+        private snotifyService: SnotifyService,
+        private notificationService: NotificationService,
+        private route: ActivatedRoute,
+        private countyService: CountyService) {
+        this.maxDate = new Date();
+    }
 
     ngOnInit() {
         this.person = new Person();
@@ -87,10 +104,14 @@ export class RegisterComponent implements OnInit {
                 })
             ])
         });
+
+        this.route.data.subscribe((res) => {
+            const { countiesArray } = res;
+            this.counties = countiesArray;
+        });
     }
 
     onDate(event: MatDatepickerInputEvent<Date>) {
-        console.log(`${event.value}`);
         this.getAge(event.value);
     }
 
@@ -111,11 +132,53 @@ export class RegisterComponent implements OnInit {
         this.formArray['controls'][0]['controls']['AgeYears'].setValue(age);
         this.formArray['controls'][0]['controls']['AgeMonths'].setValue(ageMonths);
         this.formArray['controls'][0]['controls']['DobPrecision'].setValue(1);
-        // this.formGroup.controls.formArray['controls'][0]['controls']['DobPrecision'].setValue(1);
-        // this.formArray.controls[0]
-        // console.log();
+    }
 
-        console.log(this.formGroup.controls.formArray['controls'][0]['controls']['DobPrecision']);
-        // console.log('age years ', age, 'agemonths ', ageMonths);
+    estimateDob() {
+        const ageYears = this.formGroup.value.formArray[0]['AgeYears'];
+        const ageMonths = this.formGroup.value.formArray[0]['AgeMonths'];
+        if (!ageYears) {
+            this.snotifyService.error('Please enter (age years)', 'Registration', this.notificationService.getConfig());
+        }
+
+        if (ageYears < 0) {
+            this.snotifyService.error('Age in years should not be negative', 'Registration', this.notificationService.getConfig());
+            this.formArray['controls'][0]['controls']['AgeYears'].setValue('');
+            return;
+        }
+
+        if (ageMonths < 0) {
+            this.snotifyService.error('Age in months should not be negative', 'Registration', this.notificationService.getConfig());
+            this.formArray['controls'][0]['controls']['AgeMonths'].setValue('');
+            return;
+        }
+
+        const today = new Date();
+        today.setDate(15);
+        today.setMonth(5);
+
+        const estDob = moment(today.toISOString());
+        let dob = estDob.add((ageYears * -1), 'years');
+        if (ageMonths) {
+            dob = estDob.add(ageMonths, 'months');
+        }
+
+        this.formArray['controls'][0]['controls']['DateOfBirth'].setValue(moment(dob).toDate());
+        this.formArray['controls'][0]['controls']['DobPrecision'].setValue(0);
+    }
+
+    onCountyChange() {
+        const county = this.formGroup.value.formArray[1]['County'];
+        this.countyService.getSubCounties(county).subscribe((res) => {
+            this.subCounties = res;
+            this.wards = [];
+        });
+    }
+
+    onSubCountyChange() {
+        const subCountyId = this.formGroup.value.formArray[1]['SubCounty'];
+        this.countyService.getWards(subCountyId).subscribe((res) => {
+            this.wards = res;
+        });
     }
 }

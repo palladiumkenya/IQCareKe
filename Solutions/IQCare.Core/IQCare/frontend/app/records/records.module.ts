@@ -1,3 +1,4 @@
+import { CountyResolver } from './_services/county.resolver';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -18,6 +19,7 @@ import { RecordsRoutingModule } from './records-routing.module';
 import { SearchComponent } from './search/search.component';
 import { RegisterComponent } from './person/register/register.component';
 import { SharedModule } from '../shared/shared.module';
+import { CountyService } from './_services/county.service';
 
 @NgModule({
     imports: [
@@ -38,6 +40,10 @@ import { SharedModule } from '../shared/shared.module';
         MatSnackBarModule, MatStepperModule, MatTabsModule, MatToolbarModule, MatTooltipModule,
         SharedModule
     ],
-    declarations: [SearchComponent, RegisterComponent]
+    declarations: [SearchComponent, RegisterComponent],
+    providers: [
+        CountyResolver,
+        CountyService
+    ]
 })
 export class RecordsModule { }
