@@ -1,3 +1,4 @@
+import { CountyResolver } from './_services/county.resolver';
 import { RegisterComponent } from './person/register/register.component';
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -14,7 +15,10 @@ const routes: Routes = [
         children: [
             {
                 path: '',
-                component: RegisterComponent
+                component: RegisterComponent,
+                resolve: {
+                    countiesArray: CountyResolver
+                }
             }
         ]
     }
