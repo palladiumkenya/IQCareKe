@@ -9,7 +9,9 @@ using System.Collections.Generic;
 using System.Web;
 using System.Web.UI.WebControls;
 using Entities.CCC.Appointment;
+using Interface.CCC;
 using IQCare.CCC.UILogic;
+using System.Data;
 
 namespace IQCare.Web.CCC.Appointment
 {

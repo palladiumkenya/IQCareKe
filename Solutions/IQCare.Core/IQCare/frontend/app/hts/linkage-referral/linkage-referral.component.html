@@ -64,11 +64,11 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let trace of tracingArray; let index = index;">
+                                        <tr *ngFor="let trace of tracingMergeArray; let index = index;">
                                             <td>{{ index }}</td>
                                             <td>{{ trace.tracingDate | date: 'dd-MMM-yyyy' }}</td>
-                                            <td>{{ trace.mode.displayName }}</td>
-                                            <td>{{ trace.outcome.displayName }}</td>
+                                            <td>{{ trace.mode }}</td>
+                                            <td>{{ trace.outcome }}</td>
                                         </tr>
                                     </tbody>
                                 </table>

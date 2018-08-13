@@ -46,6 +46,7 @@ namespace IQCare.Web.CCC.WebService
         public string cccReferalNumber { get; set; }
         public DateTime? cccReferalDate { get; set; }
     }
+
     /// <summary>
     /// Summary description for PatientService
     /// </summary>
@@ -64,7 +65,8 @@ namespace IQCare.Web.CCC.WebService
         [WebMethod(EnableSession = true)]
         public string AddpatientVitals(int patientId, int bpSystolic, int bpDiastolic, decimal heartRate, decimal height,
             decimal muac, int patientMasterVisitId, decimal respiratoryRate, decimal spo2, decimal tempreture,
-            decimal weight, decimal bmi, decimal headCircumference,string bmiz,string weightForAge,string weightForHeight,DateTime visitDate)
+            decimal weight, decimal bmi, decimal headCircumference,string bmiz,string weightForAge,string weightForHeight,DateTime visitDate,
+            decimal ageforZ, string nursesComments)
         {
             try
             {
@@ -113,13 +115,59 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string AddPatientScreening(int patientId, int patientMasterVisitid,DateTime visitDate, int screeningTypeId, int screeningDone, DateTime screeningDate, int screeningCategoryId, int screeningValueId, string comment, int userId)
+        public string AddPatientScreening(int patientId, int patientMasterVisitid,DateTime visitDate, int screeningTypeId, bool screeningDone, DateTime screeningDate, int screeningCategoryId, int screeningValueId, string comment, int userId)
         {
             try
             {
                 var screening=new PatientScreeningManager();
                 Result = screening.AddPatientScreening(patientId, patientMasterVisitid,visitDate,screeningTypeId,screeningDone, screeningDate,screeningCategoryId, screeningValueId,comment, userId);
                 Msg = (Result > 0) ? "Patient Screening Added Successfully" : "";
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message;
+            }
+            return Msg;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string AddPatientScreening(string screeningResponseString, int userId)
+        {
+            try
+            {
+                var screeningResponses = new JavaScriptSerializer().Deserialize<List<PatientScreening>>(screeningResponseString);
+                var screening = new PatientScreeningManager();
+                foreach (PatientScreening patientScreening in screeningResponses)
+                {
+                    patientScreening.Id = screening.CheckIfPatientScreeningExists((Int32)patientScreening.PatientId, (DateTime)patientScreening.VisitDate, (Int32)patientScreening.ScreeningCategoryId, (Int32)patientScreening.ScreeningTypeId);
+                    if ( patientScreening.Id <= 0)
+                    {
+                        Result = screening.AddPatientScreening(patientScreening.PatientId, patientScreening.PatientMasterVisitId, (DateTime)patientScreening.VisitDate, (Int32)patientScreening.ScreeningTypeId, (bool)patientScreening.ScreeningDone, (DateTime)patientScreening.ScreeningDate, (Int32)patientScreening.ScreeningCategoryId, patientScreening.ScreeningValueId, patientScreening.Comment, userId);
+                    }
+                    else {
+                        Result = screening.UpdatePatientScreening(patientScreening.PatientId, (DateTime)patientScreening.VisitDate, (Int32)patientScreening.ScreeningTypeId, (bool)patientScreening.ScreeningDone, (DateTime)patientScreening.ScreeningDate, (Int32)patientScreening.ScreeningCategoryId, patientScreening.ScreeningValueId, patientScreening.Comment);
+                    }
+                }
+                Msg = (Result > 0) ? "Patient Screening Updated Successfully" : "";
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message;
+            }
+            return Msg;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string GetPatientScreening(int patientId, DateTime visitDate, int screeningcategoryId)
+        {
+            try
+            {
+                var screening = new PatientScreeningManager();
+                
+                var results = screening.GetPatientScreening(patientId, visitDate, screeningcategoryId);
+
+                Msg = new JavaScriptSerializer().Serialize(results);
+
             }
             catch (Exception e)
             {
@@ -1017,9 +1065,9 @@ namespace IQCare.Web.CCC.WebService
             string reason = "";
             string serviceArea = "";
             string differentiatedCare = "";
-            string editAppointment = "<a href='ScheduleAppointment.aspx?appointmentid=" + appointmentid + "' type='button' class='btn btn-success fa fa-pencil-square btn-fill' > Edit</a>";
+            string editAppointment = "<a href='ScheduleAppointment.aspx?appointmentid="+appointmentid+"' type='button' class='btn btn-success fa fa-pencil-square btn-fill' > Edit</a>";
             string deleteAppointment = "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>";
-            List<LookupItemView> statuses = mgr.GetLookItemByGroup("AppointmentStatus");
+            List <LookupItemView> statuses = mgr.GetLookItemByGroup("AppointmentStatus");
             var s = statuses.FirstOrDefault(n => n.ItemId == a.StatusId);
             if (s != null)
             {

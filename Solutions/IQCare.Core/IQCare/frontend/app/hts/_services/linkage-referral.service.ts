@@ -2,9 +2,9 @@ import { Store } from '@ngrx/store';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import 'rxjs/add/observable/throw';
+
 import { Referral } from '../_models/referral';
 import { Tracing } from '../_models/tracing';
 import { Linkage } from '../_models/linkage';
@@ -60,10 +60,24 @@ export class LinkageReferralService {
         );
     }
 
+    public getPersonLinkage(personId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/Linkage/GetPersonLinkage/' + personId).pipe(
+            tap((getPersonLinkage) => this.errorHandler.log(`fetched client linkage`)),
+            catchError(this.errorHandler.handleError<any[]>('getPersonLinkage'))
+        );
+    }
+
     public getClientReferral(personId: number): Observable<any[]> {
         return this.http.get<any[]>(this.API_URL + this.url + '/getClientReferral/' + personId).pipe(
             tap((getClientReferral) => this.errorHandler.log(`fetched client referral`)),
             catchError(this.errorHandler.handleError<any[]>('getClientReferral'))
+        );
+    }
+
+    public getClientPreviousTracing(personId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/hts/Tracing/GetPersonTracingList/' + personId).pipe(
+            tap((getClientPreviousTracing) => this.errorHandler.log(`fetched client previous referral`)),
+            catchError(this.errorHandler.handleError<any[]>('getClientPreviousTracing'))
         );
     }
 

@@ -14,6 +14,13 @@ import {OppConsentResolver} from './services/recordsregistration.resolver';
 import { ProfileComponent } from './profile/profile.component';
 import { SearchComponent } from './search/search.component';
 import { NgModule } from '@angular/core';
+import { RecordsRegisterComponent } from './register/register.component';
+import { RegistrationResolver } from './services/recordsregistration.resolver';
+import { EducationOppConsentResolver } from './services/recordsregistration.resolver';
+import { ConsentTypeResolver } from './services/recordsregistration.resolver';
+import { IdentifierTypeResolver } from './services/recordsregistration.resolver';
+
+
 const routes: Routes = [
     {
         path: '',
@@ -63,6 +70,18 @@ const routes: Routes = [
             ConsentType: ConsentTypeResolver,
             IdentifyerType: IdentifierTypeResolver,
             maritalstatusresolve: MaritalStatusResolver
+        }
+        
+    },
+    {
+        path: 'registerclient',
+        component: RecordsRegisterComponent,
+        pathMatch: 'full',
+        resolve: {
+            options: RegistrationResolver,
+            EducOppConsent: EducationOppConsentResolver,
+            ConsentType: ConsentTypeResolver,
+            IdentifyerType: IdentifierTypeResolver
         }
         
     }

@@ -35,6 +35,14 @@ import { SearchComponent } from './search/search.component';
 import { ProfileComponent } from './profile/profile.component';
 import { GetPersonDetailsResolver } from './services/recordsregistration.resolver';
 import { FieldErrorDisplayComponent } from './errors/field-error-display.component';
+import { RegistrationService } from './services/RecordsRegistrationService';
+import { RecordsRegisterComponent } from'./register/register.component';
+import { RegistrationResolver } from './services/recordsregistration.resolver';
+import { EducationOppConsentResolver } from './services/recordsregistration.resolver';
+import { ConsentTypeResolver } from './services/recordsregistration.resolver';
+import { IdentifierTypeResolver } from './services/recordsregistration.resolver';
+
+
 @NgModule({
     imports: [CommonModule, RecordsRoutingModule, ReactiveFormsModule, FormsModule,
         HttpClientModule, MatDatepickerModule, MatFormFieldModule, MatNativeDateModule,
@@ -46,11 +54,11 @@ import { FieldErrorDisplayComponent } from './errors/field-error-display.compone
         MatSidenavModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule,
         MatSortModule, MatStepperModule, MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule
     ],
-    declarations: [RecordsHomeComponent, RecordsNavComponent, FieldErrorDisplayComponent ,RecordsRegisterComponent, SearchComponent, ProfileComponent
+    declarations: [RecordsHomeComponent, RecordsNavComponent, RecordsRegisterComponent
 
     ],
 
-    providers: [RegistrationService, NavigationService, SearchService, GetPersonDetailsResolver,RelationshipResolver,OccupationResolver,GenderResolver,OppEducationResolver,OppConsentResolver,ConsentTypeResolver,ConsentTypeResolver,IdentifierTypeResolver,MaritalStatusResolver]
+    providers: [RegistrationService,RegistrationResolver,EducationOppConsentResolver,ConsentTypeResolver,IdentifierTypeResolver]
 })
 
 export class RecordModule {}

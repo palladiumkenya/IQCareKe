@@ -681,3 +681,144 @@
         </div>
     </div>
   </div>
+<div class="ibox">
+    <div class="ibox-title">
+        <h5>Registration</h5>
+    </div>
+    <div class="ibox-content">
+        <div class="row">
+            <div class="col-md-2">
+                <Record-nav></Record-nav>
+            </div>
+
+            <div class="col-md-10 animated fadeIn">
+                <div class="panel panel-default">
+                    <div class="panel-heading">REGISTER PATIENT</div>
+                    <div class="panel-body">
+                        <form [formGroup]="formGroup">
+                            <mat-horizontal-stepper #stepper="matHorizontalStepper" formArrayName="formArray" [linear]="isLinear">
+                                <mat-step formGroupName="0" [stepControl]="formArray.get([0])">
+                                    <ng-template matStepLabel>Patient Profile</ng-template>
+                                    <div layout="row">
+                                        <mat-input-container flex="50" class="flex-50">
+                                          
+                                                <input tabindex="1" placeholder="Registation Date" matInput [matDatepicker]="myRegistrationDatepicker" [max]="maxDate" formControlName="RegistrationDate" required>
+                                                <mat-datepicker-toggle matSuffix [for]="myRegistrationDatepicker"></mat-datepicker-toggle>
+                                                <mat-datepicker #myRegistrationDatepicker name="RegistrationDate" ngDefaultControl (selectedChanged)="onDate($event)"></mat-datepicker>
+                                            
+                                        </mat-input-container>
+
+                                    </div>
+                                    <div layout="row">
+                                        <mat-input-container class="flex-50">
+                                            <mat-form-field>
+                                                <input matInput placeholder="First Name" formControlName="FirstName" id="firstName" tabindex="2" required />
+                                            </mat-form-field>
+                                        </mat-input-container>
+                                        <mat-input-container class="flex-50">
+                                            <mat-form-field>
+                                                <input matInput placeholder="Middle Name" formcontrolName="MiddleName" tabindex="3" />
+                                            </mat-form-field>
+                                        </mat-input-container>
+                                    </div>
+                                    <div layout="row">
+                                        <mat-input-container class="flex-50">
+                                            <mat-form-field>
+                                                <input matInput placeholder="Last Name" formControlName="LastName" required tabindex="4">
+                                            </mat-form-field>
+                                        </mat-input-container>
+                                        <mat-input-container class="flex-50">
+                                            <mat-form-field>
+                                                <mat-select placeholder="Gender" formControlName="Sex" tabindex="5">
+                                                    <mat-option></mat-option>
+                                                    <mat-option *ngFor="let gen of gender" [value]="gen.itemId">{{gen.itemName}}</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                            <mat-error *ngIf="!formGroup.controls['formArray']['controls'][0].controls.Sex.valid">Please select Gender</mat-error>
+                                        </mat-input-container>
+
+                                    </div>
+                                    <div layout="row">
+                                        <mat-input-container class="flex-50">
+                                           
+                                                <input tabindex="6" placeholder="Date Of Birth" matInput [matDatepicker]="myDatepicker" [max]="maxDate" formControlName="DateOfBirth" required>
+                                                <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+                                                <mat-datepicker #myDatepicker name="DateOfBirth" ngDefaultControl (selectedChanged)="onDate($event)"></mat-datepicker>
+                                           
+                                        </mat-input-container>
+
+                                        <mat-input-container class="flex-50">
+                                          
+                                                <input matInput placeholder="Age(Years)" tabindex="7" type="number" formControlName="personAge" id="personAge" name="personAge" (change)="estimateDob()" required>
+                                           
+                                        </mat-input-container>
+
+                                        <mat-input-container class="flex-50">
+                                           
+                                                <input matInput placeholder="Age(Month)" tabindex="8" type="number" formControlName="personMonth" id="personMonth" name="personMonth" (change)="estimateDob()" required>
+                                            
+                                        </mat-input-container>
+                                        <mat-input-container class="flex-50">
+                                            <mat-radio-button value="1" tabindex="9" required>Estimated</mat-radio-button>
+                                        </mat-input-container>
+                                    </div>
+                                    <div layout="row">
+                                        <mat-input-container class="flex-50">
+                                            
+                                                <mat-select placeholder="Marital Status" formControlName="MaritalStatus" tabindex="12">
+                                                    <mat-option></mat-option>
+                                                    <mat-option *ngFor="let maritalStatus of maritalstatuses" [value]="maritalStatus.itemId">{{maritalStatus.itemName}}</mat-option>
+                                                </mat-select>
+                                         
+                                        </mat-input-container>
+                                        <mat-input-container class="flex-50">
+                                        
+                                                <mat-select placeholder="Patient Educationallevel" formControlName="Educationallevel" tabindex="10">
+                                                    <mat-option></mat-option>
+                                                    <mat-option *ngFor="let education of educationallevel" [value]="education.itemId">{{education.itemName}}</mat-option>
+                                                </mat-select>
+                                          
+                                        </mat-input-container>
+                                        <mat-input-container class="flex-50">
+                                           
+                                                <mat-select placeholder="Patient Occupation" formControlName="Occupation" tabindex="11">
+                                                    <mat-option></mat-option>
+                                                    <mat-option *ngFor="let occ of occupations" [value]="occ.itemId">{{occ.itemName}}</mat-option>
+                                                </mat-select>
+                                           
+                                        </mat-input-container>
+                                    </div>
+
+
+                                    <div layout="row">
+                                        <mat-input-container class="flex-50">
+                                       
+                                                <mat-select placeholder="Identifyer Type" formControlName="IdentifyerType" tabindex="13">
+                                                    <mat-option></mat-option>
+                                                    <mat-option *ngFor="let Identifyer of IdentifyerTypes" [value]="Identifyer.id">{{Identifyer.displayName}}</mat-option>
+                                                </mat-select>
+                                          
+                                        </mat-input-container>
+                                        <mat-input-container class="flex-50">
+                                           
+                                                <input matInput placeholder="Identifyer Number" formControlName="IdentifyerNumber" required tabindex="14">
+                                         
+                                        </mat-input-container>
+
+                                    </div>
+
+
+
+
+
+
+
+                                </mat-step>
+                            </mat-horizontal-stepper>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>

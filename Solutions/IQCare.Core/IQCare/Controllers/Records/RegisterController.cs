@@ -175,8 +175,14 @@ namespace IQCare.Controllers.Records
             {
                 PersonId=personId
             });
+       [HttpPost("AddPersonContact")]
+        public async Task<IActionResult> Post([FromBody] AddUpdatePersonContactCommand addUpdatePersonContactCommand)
+        {
+            var response = await _mediator.Send(addUpdatePersonContactCommand, Request.HttpContext.RequestAborted);
             if (response.IsValid)
+            {
                 return Ok(response.Value);
+            }
             return BadRequest(response);
 
         }

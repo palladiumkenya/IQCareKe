@@ -7,9 +7,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace IQCare.Common.Infrastructure.Mapping
 {
-    public class PersonOccupationMapping : IEntityTypeConfiguration<PersonOccupation>
+    class PersonOccupationMapping : IEntityTypeConfiguration<PersonOccupation>
     {
-        void IEntityTypeConfiguration<PersonOccupation>.Configure(EntityTypeBuilder<PersonOccupation> builder)
+        public void Configure(EntityTypeBuilder<PersonOccupation> builder)
         {
             builder.ToTable("PersonOccupation")
                 .HasKey(c => c.Id);

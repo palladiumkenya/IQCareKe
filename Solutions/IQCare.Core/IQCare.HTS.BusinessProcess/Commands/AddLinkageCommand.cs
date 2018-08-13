@@ -14,6 +14,8 @@ namespace IQCare.HTS.BusinessProcess.Commands
         public string CCCNumber { get; set; }
         public string Remarks { get; set; }
         public int UserId { get; set; }
+        public bool IsEdit { get; set; } = false;
+        public int? Id { get; set; }
     }
 
     public class AddLinkageResponse

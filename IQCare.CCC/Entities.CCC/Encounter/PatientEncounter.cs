@@ -99,6 +99,7 @@ namespace Entities.CCC.Encounter
             public string[] phdp { get; set; }
             public string[] generalExams { get; set; }
             public string WhoStage { get; set; }
+            public string appointmentId { get; set; }
             public string appointmentServiceArea { get; set; }
             public string appointmentReason { get; set; }
             public string appointmentDesc { get; set; }

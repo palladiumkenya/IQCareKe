@@ -48,7 +48,35 @@
             var arrayAppointments = [];
 
             $.ajax(
-                {
+            {
+                //type: "POST",
+                //url: "../WebService/PatientService.asmx/GetPatientAppointments",
+                //data: "{'patientId':'" + patientId + "'}",
+                //contentType: "application/json; charset=utf-8",
+                //dataType: "json",
+                //cache: false,
+                //success: function (response) {
+                //    var itemList = response.d;
+                //    //console.log(itemList);
+                //    for (var i = 0, len = itemList.length; i < len; i++) {
+                //        //console.log(itemList[i]);
+                //        arrayAppointments.push(
+                //            [
+                //                i+1,
+                //                moment(itemList[i].AppointmentDate).format('DD-MMM-YYYY'),
+                //                itemList[i].ServiceArea,
+                //                itemList[i].Reason,
+                //                itemList[i].DifferentiatedCare,
+                //                itemList[i].Status,
+                //                itemList[i].EditAppointment,
+                //                itemList[i].DeleteAppointment,
+                //                itemList[i].AppointmentId
+                //            ]
+                //        );
+                //    }
+                //    initialiseDataTable(arrayAppointments);
+                //},
+                //{
                     type: "POST",
                     url: "../WebService/PatientService.asmx/GetPatientAppointments",
                     data: "{'patientId':'" + patientId + "'}",
@@ -82,7 +110,17 @@
                     }
                 });
 
+            var appointmentsTable;
             function initialiseDataTable(data) {
+                 //$("#tblAppointment").dataTable().fnDestroy();
+                 //tableAppointments = $('#tblAppointment').DataTable({
+                 //    "columnDefs": [
+                 //        {
+                 //            "targets": [8],
+                 //            "visible": false,
+                 //            "searchable": false
+                 //        }
+                 //    ],
                 $("#tblAppointment").dataTable().fnDestroy();
                 tableAppointments = $('#tblAppointment').DataTable({
                     "columnDefs": [
@@ -149,5 +187,36 @@
             });
         }
 
+        $("#tblAppointment").on('click', '.btnDelete', function () {
+            var AppointmentId = tableAppointments.row($(this).parents('tr')).data()["8"];
+            DeleteAppointment(AppointmentId);
+            tableAppointments.row($(this).parents('tr'))
+            .remove()
+            .draw();
+                
+            var index = reactionEventList.indexOf($(this).parents('tr').find('td:eq(0)').text());
+            if (index > -1) {
+                reactionEventList.splice(index, 1);
+            }
+        });
+
+        <%--function DeleteAppointment(appointmentid){
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientService.asmx/DeleteAppointment",
+                data: "{'AppointmentId': '" + appointmentid + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    toastr.success(response.d, "Appointment Deleted successfully");
+                    //resetFields();
+                    //setTimeout(function () { window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>'; }, 2500);
+                    },
+                error: function (response) {
+                    alert(JSON.stringify(response));
+                        toastr.error(response.d, "Appointment not deleted");
+                    }
+            });
+        }--%>
     </script>
 </asp:Content>

@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs/Observable';
-import {of} from 'rxjs/observable/of';
-import 'rxjs/add/observable/throw';
+import {Observable, of} from 'rxjs';
+
 import {catchError, tap} from 'rxjs/operators';
 import {Enrollment} from '../_models/enrollment';
 import {Person} from '../_models/person';

@@ -100,7 +100,7 @@ namespace IQCare.WebApi.Logic.MessageHandler
                 MessageType = messageType
             };
 
-            switch (messageType)
+            switch (messageType.Trim())
             {
                 case "ADT^A04":
                     HandleNewClientRegistration(apiInbox);
@@ -110,7 +110,7 @@ namespace IQCare.WebApi.Logic.MessageHandler
                     HandleUpdatedClientInformation(apiInbox);
                     break;
 
-                case "RDE^001 ":
+                case "RDE^001":
                     HandleDrugPrescriptionRaised(apiInbox);
                     break;
 
