@@ -297,9 +297,6 @@ namespace IQCare.CCC.UILogic
             }
             return jsonObject;
         }
-
-
-
         public static int GetLookUpMasterId(string masterName)
         {
             int masterId;
@@ -308,7 +305,6 @@ namespace IQCare.CCC.UILogic
 
             return masterId;
         }
-
         public static string GetLookupItemId(string lookupItemName)
         {
             

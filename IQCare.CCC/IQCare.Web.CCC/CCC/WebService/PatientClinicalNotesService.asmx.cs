@@ -42,7 +42,24 @@ namespace IQCare.Web.CCC.WebService
             }
             return Msg;
         }
-
+        [WebMethod(EnableSession = true)]
+        public string addPatientClinicalNotesByVisitId(int patientId, int patientMasterVisitId, int serviceAreaId, int notesCategoryId, string clinicalNotes, int userId)
+        {
+            try
+            {
+                var PCN = new PatientClinicalNotesLogic();
+                Result = PCN.addPatientClinicalNotesByVisitId(Convert.ToInt32(Session["PatientPK"]), patientMasterVisitId, serviceAreaId, notesCategoryId, clinicalNotes, userId);
+                if (Result > 0)
+                {
+                    Msg = "Notes Added";
+                }
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message;
+            }
+            return Msg;
+        }
         [WebMethod]
         public List<PatientClinicalNotes> getPatientClinicalNotesByCategory(int patientId,int notesCategoryId)
         {
@@ -150,6 +167,16 @@ namespace IQCare.Web.CCC.WebService
         public string getPatientNotes(int PatientId)
         {
             PatientClinicalNotes[] patientNotesData = (PatientClinicalNotes[])Session["patientNotesData"];
+            string jsonNotesObject = "[]";
+            jsonNotesObject = new JavaScriptSerializer().Serialize(patientNotesData);
+            return jsonNotesObject;
+        }
+        [WebMethod(EnableSession = true)]
+        public string getPatientNotesByVisitId(int PatientId, int PatientMasterVisitId)
+        {
+            var PCN = new PatientClinicalNotesLogic();
+            //PatientClinicalNotes[] patientNotesData = (PatientClinicalNotes[])Session["patientNotesData"];
+            PatientClinicalNotes[] patientNotesData = PCN.getPatientClinicalNotesByVisitId(PatientId,PatientMasterVisitId).ToArray();
             string jsonNotesObject = "[]";
             jsonNotesObject = new JavaScriptSerializer().Serialize(patientNotesData);
             return jsonNotesObject;
