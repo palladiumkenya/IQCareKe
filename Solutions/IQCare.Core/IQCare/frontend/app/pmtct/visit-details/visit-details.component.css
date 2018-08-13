@@ -14,3 +14,8 @@
 .mat-card {
     background-color: #dff9fb;
 }
+
+.button-row button,
+.button-row a {
+    margin-right: 8px;
+}
