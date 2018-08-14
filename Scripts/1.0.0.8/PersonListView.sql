@@ -19,6 +19,7 @@ CAST(DECRYPTBYKEY(P.MidName) AS VARCHAR(50)) AS MiddleName,
 CAST(DECRYPTBYKEY(P.LastName) AS VARCHAR(50)) AS LastName,
 CAST(DECRYPTBYKEY(P.FirstName) AS VARCHAR(50)) + ' ' + CAST(DECRYPTBYKEY(P.MidName) AS VARCHAR(50)) + ' ' + CAST(DECRYPTBYKEY(P.LastName) AS VARCHAR(50)) AS FullName,
 P.Sex,
+ Gender = (SELECT TOP 1 ItemName FROM LookupItemView WHERE ItemId = P.Sex AND MasterName = 'Gender'),
 P.DeleteFlag,
 P.DateOfBirth,
 PI.IdentifierValue

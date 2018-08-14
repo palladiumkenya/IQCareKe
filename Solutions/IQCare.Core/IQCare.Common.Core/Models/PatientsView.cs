@@ -31,9 +31,9 @@ namespace IQCare.Common.Core.Models
      public string Age { get; set; }
      public int AgeNumber;
 
-        public void CalculateYourAge()
+     /*   public void CalculateYourAge()
         {
-            if (this.DateOfBirth.HasValue)
+            if (this.DateOfBirth)
             {
                 DateTime DateOfBirth = this.DateOfBirth.Value;
 
@@ -68,7 +68,7 @@ namespace IQCare.Common.Core.Models
                         this.AgeNumber = Years;
                 }
             }
-        }
+        }*/
     }
 
 }
