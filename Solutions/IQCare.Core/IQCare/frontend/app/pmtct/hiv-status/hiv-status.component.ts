@@ -42,9 +42,16 @@ export class HivStatusComponent implements OnInit {
     ];
 
     HIVStatusFormGroup: FormGroup;
-  constructor() { }
+  constructor(private _formBuilder: FormBuilder) { }
 
   ngOnInit() {
+
+      this.HIVStatusFormGroup = this._formBuilder.group({
+          testingDone: ['', Validators.required],
+          hivTest: ['', Validators.required],
+          kitName: ['', Validators.required],
+          testResult: ['', Validators.required]
+      });
   }
 
 }

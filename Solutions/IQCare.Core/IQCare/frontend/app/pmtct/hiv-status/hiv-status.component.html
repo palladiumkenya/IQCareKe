@@ -12,9 +12,10 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="col-md-4">
+
                                         <mat-form-field class="col-md-12">
-                                            <mat-select placeholder="Select Result">
-                                                <mat-option formControlName="hivTestingDone" placeholder="HIV testing done during this visit" *ngFor="let hivTesting of hivTestings"
+                                            <mat-select formControlName="testingDone" placeholder="HIV testing done during this visit">
+                                                <mat-option placeholder="HIV testing done during this visit" *ngFor="let hivTesting of hivTestings"
                                                     [value]="hivTesting.value">
                                                     {{hivTesting.viewValue}}
                                                 </mat-option>
@@ -26,57 +27,78 @@
                                 <div class="col-md-12">
 
                                     <div class="col-lg-4 col-md-4 col-xs-12 col-sm-6">
+
                                         <mat-form-field class="col-md-12">
-                                            <mat-select placeholder="Select Result">
-                                                <mat-option formControlName="test" placeholder="Test" *ngFor="let Test of Tests" [value]="Test.value">
+                                            <mat-select formControlname="hivTest" placeholder="Select Result" required>
+                                                <mat-option  placeholder="Test" *ngFor="let Test of Tests" [value]="Test.value">
                                                     {{Test.viewValue}}
                                                 </mat-option>
                                             </mat-select>
                                         </mat-form-field>
                                     </div>
-                                    <div class="col-lg-4 col-md-4 col-xs-12 col-sm-6"></div>
+
                                     <div class="col-lg-4 col-md-4 col-xs-12 col-sm-6">
-                                        <h5>Kit Name ?</h5>
-                                        <mat-radio-group aria-required="true" formControlName="kitName" placeholder="Kit Name" aria-required="true">
-                                            <mat-radio-button class="col-md-12" value="1">Yes</mat-radio-button>
-                                            <mat-radio-button class="col-md-12" value="2">No</mat-radio-button>
-                                        </mat-radio-group>
-                                    </div>
-                                </div>
 
-                                <div class="col-md-12">
-                                    <div class="col-lg-4 col-md-4 col-xs-12 col-sm-6">
                                         <mat-form-field class="col-md-12">
-
-                                        </mat-form-field>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-xs-12 col-sm-6"></div>
-                                    <div class="col-lg-4 col-md-4 col-xs-12 col-sm-6"></div>
-                                </div>
-
-                                <div class="col-md-12">
-                                    <div class="col-lg-3 col-md-4 col-xs-12 col-sm-6"></div>
-                                    <div class="col-lg-3 col-md-4 col-xs-12 col-sm-6"></div>
-                                    <div class="col-lg-3 col-md-4 col-xs-12 col-sm-6"></div>
-                                    <div class="col-lg-3 col-md-4 col-xs-12 col-sm-6"></div>
-                                </div>
-
-
-                                <div class="col-md-12">
-
-                                    <div class="col-md-10 cl-xs-12">
-                                        <mat-form-field class="col-md-12">
-                                            <mat-select placeholder="Patient Counselled On ?" formControlName="counselledOn" required>
-                                                <mat-option id="slctTopic" *ngFor="let testResult of testResults" [value]="testResult.value">
-                                                    {{testResult.viewValue}}
+                                            <mat-select formControlname="kitName" placeholder="Select Kit used" required>
+                                                <mat-option  placeholder="Test" *ngFor="let Test of Tests" [value]="Test.value">
+                                                    {{Test.viewValue}}
                                                 </mat-option>
                                             </mat-select>
                                         </mat-form-field>
                                     </div>
-                                    <div class="col-md-2 cl-xs-12">
-                                        <button mat-button id="btnAdd" class="btn btn-primary "> Add Lesson</button>
+                                    <div class="col-lg-4 col-md-4 col-xs-12 col-sm-6">
+                                        <div class="col-lg-4 col-md-4 col-xs-12 col-sm-6">
+                                            <mat-form-field class="col-md-12">
+                                                <input class="col-md-12" matInput placeholder="Lot No" value="" required>
+                                            </mat-form-field>
+                                        </div>
+
                                     </div>
                                 </div>
+                                <div class="col-md-12">
+                                    <div class="col-lg-4 col-md-4 col-xs-12 col-sm-6">
+                                        <mat-form-field class="col-md-12">
+                                            <input id="expiryDate" matInput [matDatepicker]="expiryDate" formControlname="expiryDate" placeholder="expiry Date" required>
+                                            <mat-datepicker-toggle matSuffix [for]="expiryDate"></mat-datepicker-toggle>
+                                            <mat-datepicker #expiryDate></mat-datepicker>
+                                        </mat-form-field>
+                                    </div>
+
+
+                                    <div class="col-lg-4 col-md-4 col-xs-12 col-sm-6">
+
+                                        <mat-form-field class="col-md-12">
+                                            <mat-select formControlname="testResult" placeholder="test Result" required>
+                                                <mat-option  placeholder="Test" *ngFor="let Test of Tests" [value]="Test.value">
+                                                    {{Test.viewValue}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-xs-12 col-sm-6">
+                                        <mat-form-field class="col-md-12">
+                                            <mat-select formControlname="finalResult" placeholder="final Result" required>
+                                                <mat-option  placeholder="Test" *ngFor="let Test of Tests" [value]="Test.value">
+                                                    {{Test.viewValue}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="col-lg-4 col-md-4 col-xs-12 col-sm-6">
+                                        <mat-form-field class="col-md-12">
+                                            <input id="nextAppointmentDate" matInput [matDatepicker]="nextAppointmentDate" formControlname="nextAppointmentDate" placeholder="Next Appointment Date" required>
+                                            <mat-datepicker-toggle matSuffix [for]="nextAppointmentDate"></mat-datepicker-toggle>
+                                            <mat-datepicker #nextAppointmentDate></mat-datepicker>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-xs-12 col-sm-6"></div>
+                                    <div class="col-lg-4 col-md-4 col-xs-12 col-sm-6"></div>
+                                </div>
+
 
                                 <div class="col-md-12">
                                     <div class="col-md-12">

@@ -14,47 +14,104 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="encounter.component.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/hts/encounter/encounter.component.ts">
+      <file leaf-file-name="patient-education-examination.component.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/pmtct/patient-education-examination/patient-education-examination.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="23" selection-start-line="23" selection-end-line="23" selection-end-column="23" />
+            <state relative-caret-position="561">
+              <caret line="54" column="23" lean-forward="true" selection-start-line="54" selection-start-column="23" selection-end-line="54" selection-end-column="23" />
+              <folding>
+                <element signature="e#0#50#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="encounter.service.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/hts/_services/encounter.service.ts">
+      <file leaf-file-name="antenatal-profile.component.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/pmtct/antenatal-profile/antenatal-profile.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" selection-start-line="3" selection-end-line="4" selection-end-column="49" />
+            <state relative-caret-position="601">
+              <caret line="36" column="7" lean-forward="true" selection-start-line="34" selection-start-column="3" selection-end-line="36" selection-end-column="7" />
+              <folding>
+                <element signature="e#0#50#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LookupItemView.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/shared/_models/LookupItemView.ts">
+      <file leaf-file-name="antenatal-profile.component.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/pmtct/antenatal-profile/antenatal-profile.component.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" selection-start-line="10" selection-end-line="10" />
+            <state>
+              <caret selection-end-column="96" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="styles.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/styles.css">
+      <file leaf-file-name="visit-details.component.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/pmtct/visit-details/visit-details.component.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="20" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
+            <state>
+              <caret selection-end-line="21" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="package.json" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/../package.json">
+      <file leaf-file-name="hiv-status.component.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/pmtct/hiv-status/hiv-status.component.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="363">
-              <caret line="32" column="19" selection-start-line="32" selection-start-column="19" selection-end-line="32" selection-end-column="19" />
+            <state relative-caret-position="357">
+              <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="hiv-status.component.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/pmtct/hiv-status/hiv-status.component.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="232">
+              <caret line="83" column="61" lean-forward="true" selection-start-line="83" selection-start-column="61" selection-end-line="83" selection-end-column="61" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="visit-details.component.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/pmtct/visit-details/visit-details.component.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="289">
+              <caret line="53" column="73" lean-forward="true" selection-start-line="49" selection-start-column="56" selection-end-line="53" selection-end-column="73" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="anc.component.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/pmtct/anc/anc.component.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="8" column="45" lean-forward="true" selection-start-line="8" selection-start-column="45" selection-end-line="8" selection-end-column="45" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="hiv-status.component.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/pmtct/hiv-status/hiv-status.component.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="442">
+              <caret line="26" column="6" selection-start-line="26" selection-start-column="6" selection-end-line="26" selection-end-column="6" />
+              <folding>
+                <element signature="e#0#50#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="patient-education-examination.component.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/pmtct/patient-education-examination/patient-education-examination.component.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="456">
+              <caret line="27" column="42" lean-forward="true" selection-start-line="27" selection-start-column="42" selection-end-line="27" selection-end-column="42" />
+              <folding>
+                <element signature="n#style#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#form#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -85,6 +142,14 @@
         <option value="$PROJECT_DIR$/app/shared/_models/Options.ts" />
         <option value="$PROJECT_DIR$/app/pmtct/visit-details/visit-details.component.ts" />
         <option value="$PROJECT_DIR$/app/pmtct/visit-details/visit-details.component.html" />
+        <option value="$PROJECT_DIR$/app/pmtct/antenatal-profile/antenatal-profile.component.ts" />
+        <option value="$PROJECT_DIR$/app/pmtct/hiv-status/hiv-status.component.ts" />
+        <option value="$PROJECT_DIR$/app/pmtct/anc/anc.component.html" />
+        <option value="$PROJECT_DIR$/app/pmtct/patient-education-examination/patient-education-examination.component.html" />
+        <option value="$PROJECT_DIR$/app/pmtct/patient-education-examination/patient-education-examination.component.ts" />
+        <option value="$PROJECT_DIR$/app/pmtct/antenatal-profile/antenatal-profile.component.html" />
+        <option value="$PROJECT_DIR$/app/pmtct/hiv-status/hiv-status.component.css" />
+        <option value="$PROJECT_DIR$/app/pmtct/hiv-status/hiv-status.component.html" />
       </list>
     </option>
   </component>
@@ -94,9 +159,10 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="width" value="1940" />
-    <option name="height" value="1100" />
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="x" value="-7" />
+    <option name="width" value="1720" />
+    <option name="height" value="1047" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -111,6 +177,52 @@
               <item name="frontend" type="b2602c69:ProjectViewProjectNode" />
               <item name="frontend" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="frontend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="frontend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="pmtct" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="frontend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="pmtct" type="462c0819:PsiDirectoryNode" />
+              <item name="anc" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="frontend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="pmtct" type="462c0819:PsiDirectoryNode" />
+              <item name="antenatal-profile" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="frontend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="pmtct" type="462c0819:PsiDirectoryNode" />
+              <item name="hiv-status" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="frontend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="pmtct" type="462c0819:PsiDirectoryNode" />
+              <item name="patient-education-examination" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="frontend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="pmtct" type="462c0819:PsiDirectoryNode" />
+              <item name="visit-details" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -120,7 +232,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.prettier" value="true" />
     <property name="node.js.path.for.package.prettier" value="project" />
     <property name="node.js.selected.package.prettier" value="" />
@@ -157,24 +269,26 @@
       <workItem from="1533908324642" duration="39000" />
       <workItem from="1534144987051" duration="465000" />
       <workItem from="1534146471154" duration="15000" />
+      <workItem from="1534158072393" duration="10134000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23495000" />
+    <option name="totallyTimeSpent" value="33629000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1940" height="1100" extended-state="0" />
+    <frame x="-7" y="0" width="1720" height="1047" extended-state="1" />
+    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TypeScript" order="7" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.10654885" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18779343" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.23045686" />
+      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.24356224" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -192,66 +306,12 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/styles.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="20" lean-forward="true" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="31" column="19" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/hts/encounter/encounter.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="23" selection-start-line="23" selection-end-line="23" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/hts/_services/encounter.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" selection-start-line="3" selection-end-line="4" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/shared/_models/LookupItemView.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/hts/encounter/encounter.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/hts/_services/encounter.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" selection-start-line="3" selection-end-line="4" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/shared/_services/lookup-item.service.ts" />
-    <entry file="file://$PROJECT_DIR$/app/shared/_models/LookupItemView.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/pmtct/visit-details/visit-details.component.html" />
-    <entry file="file://$PROJECT_DIR$/app/pmtct/preventive-services/preventive-services.component.html" />
     <entry file="file://$PROJECT_DIR$/app/pmtct/preventive-services/preventive-services.component.ts" />
     <entry file="file://$PROJECT_DIR$/app/pmtct/visit-details/visit-details.component.ts" />
     <entry file="file://$PROJECT_DIR$/app/shared/clientbrief/clientbrief.component.ts">
@@ -413,13 +473,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/shared/_services/lookup-item.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="31" column="10" lean-forward="true" selection-start-line="31" selection-start-column="10" selection-end-line="31" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/pmtct/preventive-services/preventive-services.component.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="578">
@@ -448,20 +501,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/pmtct/visit-details/visit-details.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="64" column="37" lean-forward="true" selection-start-line="64" selection-start-column="37" selection-end-line="64" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/pmtct/visit-details/visit-details.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="36" column="34" lean-forward="true" selection-start-line="36" selection-start-column="34" selection-end-line="36" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/styles.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -471,8 +510,129 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="32" column="19" selection-start-line="32" selection-start-column="19" selection-end-line="32" selection-end-column="19" />
+        <state relative-caret-position="864">
+          <caret line="59" column="26" lean-forward="true" selection-start-line="59" selection-start-column="26" selection-end-line="59" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/app.module.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#58#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/pmtct/pmtct.module.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="822">
+          <caret line="52" column="32" lean-forward="true" selection-start-line="52" selection-start-column="32" selection-end-line="52" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#53#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/shared/_services/lookup-item.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="27" column="11" selection-start-line="27" selection-start-column="11" selection-end-line="27" selection-end-column="11" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/pmtct/visit-details/visit-details.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="19" column="1" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#57#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/pmtct/antenatal-profile/antenatal-profile.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="601">
+          <caret line="36" column="7" lean-forward="true" selection-start-line="34" selection-start-column="3" selection-end-line="36" selection-end-column="7" />
+          <folding>
+            <element signature="e#0#50#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/pmtct/visit-details/visit-details.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="53" column="73" lean-forward="true" selection-start-line="49" selection-start-column="56" selection-end-line="53" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/pmtct/anc/anc.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="45" lean-forward="true" selection-start-line="8" selection-start-column="45" selection-end-line="8" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/pmtct/patient-education-examination/patient-education-examination.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="27" column="42" lean-forward="true" selection-start-line="27" selection-start-column="42" selection-end-line="27" selection-end-column="42" />
+          <folding>
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#form#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/pmtct/hiv-status/hiv-status.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="26" column="6" selection-start-line="26" selection-start-column="6" selection-end-line="26" selection-end-column="6" />
+          <folding>
+            <element signature="e#0#50#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/pmtct/patient-education-examination/patient-education-examination.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="54" column="23" lean-forward="true" selection-start-line="54" selection-start-column="23" selection-end-line="54" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#50#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/pmtct/antenatal-profile/antenatal-profile.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-column="96" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/pmtct/visit-details/visit-details.component.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/pmtct/hiv-status/hiv-status.component.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/pmtct/hiv-status/hiv-status.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="83" column="61" lean-forward="true" selection-start-line="83" selection-start-column="61" selection-end-line="83" selection-end-column="61" />
         </state>
       </provider>
     </entry>
