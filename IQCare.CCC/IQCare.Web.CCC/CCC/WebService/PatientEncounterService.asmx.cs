@@ -319,12 +319,12 @@ namespace IQCare.Web.CCC.WebService
                     pscadd.ScreeningCategoryId = MasterId;
                     pscadd.ScreeningTypeId = MasterId;
                     pscadd.ScreeningValueId = ItemId;
-                    pscadd.ScreeningDone = 1;
+                    pscadd.ScreeningDone = true;
                 pscadd.ScreeningDate = DateTime.Now;
                 pscadd.VisitDate = DateTime.Now;
                     int  result=  pmscreen.AddPatientScreening(pscadd.PatientId, pscadd.PatientMasterVisitId,
                     Convert.ToDateTime(pscadd.VisitDate), Convert.ToInt32(pscadd.ScreeningTypeId)
-                    , Convert.ToInt32(pscadd.ScreeningDone),Convert.ToDateTime(pscadd.ScreeningDate), 
+                    , pscadd.ScreeningDone,Convert.ToDateTime(pscadd.ScreeningDate), 
                     Convert.ToInt32(pscadd.ScreeningCategoryId)
                     , pscadd.ScreeningValueId, pscadd.Comment, userId);
                   if(result> 0)

@@ -1115,10 +1115,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\Interface.Security.dll</HintPath>
     </Reference>
-    <Reference Include="IQCare.CCC.UILogic, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\References\IQCare.CCC.UILogic.dll</HintPath>
-    </Reference>
     <Reference Include="IQCare.Events">
       <HintPath>..\..\References\IQCare.Events.dll</HintPath>
     </Reference>
@@ -1168,7 +1164,12 @@
       <HintPath>..\..\Library\Telerik.Web.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\IQCare.CCC.UILogic\IQCare.CCC.UILogic.csproj">
+      <Project>{8eee6ba8-b2c9-4643-bd59-3deb13567695}</Project>
+      <Name>IQCare.CCC.UILogic</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
