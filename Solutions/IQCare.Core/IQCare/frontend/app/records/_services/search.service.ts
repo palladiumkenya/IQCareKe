@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { ErrorHandlerService } from '../../shared/_services/errorhandler.service';
-import { tap, catchError } from '../../../../node_modules/rxjs/operators';
-import { Observable } from '../../../../node_modules/rxjs';
+import { tap, catchError } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { Search } from '../_models/search';
 
 const httpOptions = {
@@ -23,7 +23,9 @@ export class SearchService {
     searchClient(clientSearch: Search): Observable<any[]> {
 
         return this.http.get<any[]>(this.API_URL + '/records/api/Register/searchpersonlist'
-            + '?IdentifierValue=' + clientSearch.identifierValue + '&FullName=' + clientSearch.fullName).pipe(
+            + '?IdentifierValue=' + clientSearch.identifierValue + '&FirstName=' + clientSearch.firstName +
+            '&MiddleName=' + clientSearch.middleName + '&LastName=' + clientSearch.lastName +
+            '&MobileNumber=' + clientSearch.mobileNumber).pipe(
                 tap((searchClient: any) => this.errorHandler.log(`search client`)),
                 catchError(this.errorHandler.handleError<any>('searchClient'))
             );

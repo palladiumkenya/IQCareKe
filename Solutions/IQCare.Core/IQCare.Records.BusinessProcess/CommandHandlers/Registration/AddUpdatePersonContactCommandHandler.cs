@@ -13,65 +13,34 @@ namespace IQCareRecords.Common.BusinessProcess.CommandHandlers.Registration
 {
     public class AddUpdatePersonContactCommandHandler : IRequestHandler<AddUpdatePersonContactCommand, Result<AddUpdatePersonContactResponse>>
     {
-        public int res;
-        public string msg;
-
         private readonly ICommonUnitOfWork _unitOfWork;
         public AddUpdatePersonContactCommandHandler(ICommonUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
+
         public async Task<Result<AddUpdatePersonContactResponse>> Handle(AddUpdatePersonContactCommand request, CancellationToken cancellationToken)
         {
             try
             {
-                RegisterPersonService rs = new RegisterPersonService(_unitOfWork);
-                if(request.PersonId > 0)
+                RegisterPersonService registerPersonService = new RegisterPersonService(_unitOfWork);
+                PersonContact personContact = await registerPersonService.GetPersonContactByPersonId(request.PersonId);
+                if (personContact != null)
                 {
-                    PersonContact pc = new PersonContact();
-                     pc = await rs.GetPersonContactByPersonId(request.PersonId);
-                    if (pc != null)
-                    {
-                        pc.MobileNumber = request.MobileNumber;
-                        pc.AlternativeNumber = request.AlternativeNumber;
-                        pc.EmailAddress = request.EmailAddress;
-                        pc.PersonId = request.PersonId;
-
-                        //var personcontact = await rs.UpdatePersonContact(pc.PersonId, pc.MobileNumber, pc.AlternativeNumber, pc.Id);
-                        //if(personcontact !=null)
-                        //{
-                        //    res = personcontact.Id;
-                        //    msg += "Person Contact Updated Successfully";
-                        //}
-                    }
-                    else
-                    {
-                        var personcontact = await rs.addPersonContact(request.PersonId, request.PhysicalAddress, request.MobileNumber, request.AlternativeNumber, request.EmailAddress, request.UserId);
-                        if (personcontact != null)
-                        {
-                            res = personcontact.Id;
-                            msg += "Person Contact Added Successfully";
-                        }
-                    }
-
-
+                    await registerPersonService.UpdatePersonContact(request.PersonId, request.PhysicalAddress,
+                        request.MobileNumber, request.EmailAddress, request.AlternativeNumber);
                 }
                 else
                 {
-                  var personcontact=  await rs.addPersonContact(request.PersonId,request.PhysicalAddress,request.MobileNumber,request.AlternativeNumber,request.EmailAddress,request.UserId);
-                      if(personcontact !=null)
-                    {
-                        res = personcontact.Id;
-                        msg += "Person Contact Added Successfully";
-                    }
+                    personContact = await registerPersonService.addPersonContact(request.PersonId,
+                        request.PhysicalAddress, request.MobileNumber, request.AlternativeNumber, request.EmailAddress,
+                        request.UserId);
                 }
-
 
                 return Result<AddUpdatePersonContactResponse>.Valid(new AddUpdatePersonContactResponse()
                 {
-                    PersonContactId=res,
-                    Message = msg
-
+                    PersonContactId=personContact.Id,
+                    Message = "Person Contact Successful"
                 });
 
             }

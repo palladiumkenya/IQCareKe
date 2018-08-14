@@ -1,14 +1,12 @@
 ﻿using IQCare.Common.BusinessProcess.Commands;
 using IQCare.Common.BusinessProcess.Commands.ClientLookup;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Net.Http;
-using System.Threading.Tasks;
 using IQCare.Common.BusinessProcess.Commands.Enrollment;
 using IQCare.Common.BusinessProcess.Commands.Partners;
 using IQCare.Common.BusinessProcess.Commands.PersonCommand;
-using Remotion.Linq.Parsing.Structure.IntermediateModel;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
 
 namespace IQCare.Controllers.Registration
 {

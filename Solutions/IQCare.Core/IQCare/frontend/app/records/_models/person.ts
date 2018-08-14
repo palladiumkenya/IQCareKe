@@ -14,4 +14,6 @@ export class Person {
     occupation: number;
     identifierType: number;
     identifierNumber: number;
+    personId?: number;
+    createdBy?: number;
 }

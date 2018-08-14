@@ -1,3 +1,5 @@
+import { PersonRegistrationService } from './_services/person-registration.service';
+import { OccupationResolver } from './_services/occupation.resolver';
 import { CountyResolver } from './_services/county.resolver';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -20,6 +22,10 @@ import { SearchComponent } from './search/search.component';
 import { RegisterComponent } from './person/register/register.component';
 import { SharedModule } from '../shared/shared.module';
 import { CountyService } from './_services/county.service';
+import { RecordsService } from './_services/records.service';
+import { GenderResolver } from './_services/gender.resolver';
+import { MaritalStatusResolver } from './_services/maritalstatus.resolver';
+import { EducationLevelResolver } from './_services/educationallevel.resolver';
 
 @NgModule({
     imports: [
@@ -43,7 +49,13 @@ import { CountyService } from './_services/county.service';
     declarations: [SearchComponent, RegisterComponent],
     providers: [
         CountyResolver,
-        CountyService
+        CountyService,
+        GenderResolver,
+        RecordsService,
+        MaritalStatusResolver,
+        EducationLevelResolver,
+        OccupationResolver,
+        PersonRegistrationService
     ]
 })
 export class RecordsModule { }

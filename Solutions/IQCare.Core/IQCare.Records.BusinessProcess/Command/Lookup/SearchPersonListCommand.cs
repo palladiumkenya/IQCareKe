@@ -14,6 +14,7 @@ namespace IQCare.Records.BusinessProcess.Command.Lookup
         public string lastName { get; set; }
         public DateTime? BirthDate { get; set; }
         public string FullName { get; set; }
+        public string MobileNumber { get; set; }
     }
 
     public class SearchPersonListResponse
@@ -28,5 +29,6 @@ namespace IQCare.Records.BusinessProcess.Command.Lookup
         public string MiddleName { get; set; }
         public string LastName { get; set; }
         public string FullName { get; set; }
+        public string MobileNumber { get; set; }
     }
 }

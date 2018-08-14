@@ -1,6 +1,6 @@
 export class ClientContact {
-    mobileNumber: number;
-    alternativeMobileNumber: number;
-    email: string;
-    emergencyContactInClinic: boolean;
+    MobileNumber: number;
+    AlternativeMobileNumber: number;
+    EmailAddress: string;
+    EmergencyContactInClinic: boolean;
 }

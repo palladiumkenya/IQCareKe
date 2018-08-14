@@ -1,7 +1,8 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, NgZone } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { Search } from '../_models/search';
 import { SearchService } from '../_services/search.service';
+import { Router, ActivatedRoute } from '../../../../node_modules/@angular/router';
 
 @Component({
     selector: 'app-search',
@@ -11,11 +12,14 @@ import { SearchService } from '../_services/search.service';
 export class SearchComponent implements OnInit, AfterViewInit {
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
-    displayedColumns = ['identifierValue', 'firstName', 'middleName', 'lastName', 'dateOfBirth'];
+    displayedColumns = ['identifierValue', 'firstName', 'middleName', 'lastName', 'dateOfBirth', 'gender'];
     dataSource = new MatTableDataSource();
     clientSearch: Search;
 
-    constructor(private searchService: SearchService) {
+    constructor(private searchService: SearchService,
+        private router: Router,
+        private route: ActivatedRoute,
+        public zone: NgZone) {
         this.clientSearch = new Search();
     }
 
@@ -43,5 +47,11 @@ export class SearchComponent implements OnInit, AfterViewInit {
                 console.log('error');
             }
         );
+    }
+
+    getSelectedRow(row: any) {
+        console.log(row);
+        const personId = row['id'];
+        this.zone.run(() => { this.router.navigate(['/registration/home'], { relativeTo: this.route }); });
     }
 }

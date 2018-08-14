@@ -1,7 +1,7 @@
 export class ClientAddress {
-    county: number;
-    subCounty: number;
-    ward: number;
-    nearestHealthCenter: string;
-    landmark: string;
+    County: number;
+    SubCounty: number;
+    Ward: number;
+    NearestHealthCenter: string;
+    Landmark: string;
 }

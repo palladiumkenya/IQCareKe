@@ -642,13 +642,18 @@ namespace IQCare.Common.BusinessProcess.Services
             }
         }
 
-        public async Task<PersonContact> UpdatePersonContact(int personId, string physicalAddress, string mobileNumber)
+        public async Task<PersonContact> UpdatePersonContact(int personId, string physicalAddress, string mobileNumber, string emailAddress = "", string alternativeNumber = "")
         {
             try
             {
                 StringBuilder sql = new StringBuilder();
                 sql.Append("exec pr_OpenDecryptedSession;");
-                sql.Append($"UPDATE PersonContact SET PhysicalAddress = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{physicalAddress}'), MobileNumber = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{mobileNumber}') WHERE PersonId = {personId} AND DeleteFlag = 0;");
+                sql.Append($"UPDATE PersonContact SET PhysicalAddress = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{physicalAddress}'), " +
+                           $"MobileNumber = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{mobileNumber}')" +
+                           $"AlternativeNumber = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{alternativeNumber}')" +
+                           $"EmailAddress = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{emailAddress}')" +
+                           $" WHERE PersonId = {personId} AND DeleteFlag = 0;");
+
                 sql.Append($"SELECT [Id] ,[PersonId], CAST(DECRYPTBYKEY([PhysicalAddress]) AS VARCHAR(50)) [PhysicalAddress]," +
                            $"CAST(DECRYPTBYKEY([MobileNumber]) AS VARCHAR(50)) [MobileNumber]," +
                            $"CAST(DECRYPTBYKEY([AlternativeNumber]) AS VARCHAR(50)) [AlternativeNumber]," +
