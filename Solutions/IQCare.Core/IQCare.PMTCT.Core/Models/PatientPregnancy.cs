@@ -4,7 +4,7 @@ using IQCare.Common.Core.Models;
 
 namespace IQCare.PMTCT.Core.Models
 {
-    public class Pregnancy
+    public class PatientPregnancy
     {
         [Key]
         public int Id { get; set; }
