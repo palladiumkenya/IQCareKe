@@ -1,7 +1,7 @@
 import { CountyService } from './county.service';
 import { Observable } from 'rxjs';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { Injectable } from '../../../../node_modules/@angular/core';
+import { Injectable } from '@angular/core';
 import { County } from '../_models/county';
 
 @Injectable()

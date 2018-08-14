@@ -1,19 +1,22 @@
-import { County } from './../../_models/county';
+import { forkJoin } from 'rxjs';
+import { LookupItemView } from './../../../shared/_models/LookupItemView';
+import { County } from '../../_models/county';
 import { SnotifyService } from 'ng-snotify';
-import { EmergencyContact } from './../../_models/emergencycontact';
-import { ClientAddress } from './../../_models/clientaddress';
+import { EmergencyContact } from '../../_models/emergencycontact';
+import { ClientAddress } from '../../_models/clientaddress';
 import { Validators } from '@angular/forms';
 import { FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, AbstractControl } from '../../../../../node_modules/@angular/forms';
+import { FormGroup, FormBuilder, AbstractControl } from '@angular/forms';
 import { Person } from '../../_models/person';
 import { ClientContact } from '../../_models/clientcontact';
 import { NextOfKin } from '../../_models/nextofkin';
-import { MatDatepickerInputEvent } from '../../../../../node_modules/@angular/material';
+import { MatDatepickerInputEvent } from '@angular/material';
 import * as moment from 'moment';
 import { NotificationService } from '../../../shared/_services/notification.service';
-import { ActivatedRoute } from '../../../../../node_modules/@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { CountyService } from '../../_services/county.service';
+import { PersonRegistrationService } from '../../_services/person-registration.service';
 
 @Component({
     selector: 'app-register',
@@ -24,7 +27,7 @@ export class RegisterComponent implements OnInit {
     /**
      * Component variables
      */
-    isLinear = false;
+    isLinear = true;
     formGroup: FormGroup;
     /** Returns a FormArray with the name 'formArray'. */
     get formArray(): AbstractControl | null { return this.formGroup.get('formArray'); }
@@ -39,12 +42,17 @@ export class RegisterComponent implements OnInit {
     counties: County[];
     subCounties: County[];
     wards: County[];
+    gender: LookupItemView[];
+    maritalStatus: LookupItemView[];
+    educationLevel: LookupItemView[];
+    occupation: LookupItemView[];
 
     constructor(private _formBuilder: FormBuilder,
         private snotifyService: SnotifyService,
         private notificationService: NotificationService,
         private route: ActivatedRoute,
-        private countyService: CountyService) {
+        private countyService: CountyService,
+        private personRegistration: PersonRegistrationService) {
         this.maxDate = new Date();
     }
 
@@ -68,23 +76,23 @@ export class RegisterComponent implements OnInit {
                     AgeMonths: new FormControl(this.person.ageMonths, [Validators.required]),
                     DobPrecision: new FormControl(this.person.dobPrecision, [Validators.required]),
                     MaritalStatus: new FormControl(this.person.maritalStatus, [Validators.required]),
-                    EducationLevel: new FormControl(this.person.educationLevel, [Validators.required]),
-                    Occupation: new FormControl(this.person.occupation, [Validators.required]),
-                    IdentifierType: new FormControl(this.person.identifierType, [Validators.required]),
-                    IdentifierNumber: new FormControl(this.person.identifierNumber, [Validators.required])
+                    EducationLevel: new FormControl(this.person.educationLevel),
+                    Occupation: new FormControl(this.person.occupation),
+                    IdentifierType: new FormControl(this.person.identifierType),
+                    IdentifierNumber: new FormControl(this.person.identifierNumber)
                 }),
                 this._formBuilder.group({
-                    County: new FormControl(this.clientAddress.county, [Validators.required]),
-                    SubCounty: new FormControl(this.clientAddress.subCounty, [Validators.required]),
-                    Ward: new FormControl(this.clientAddress.ward, [Validators.required]),
-                    NearestHealthCenter: new FormControl(this.clientAddress.nearestHealthCenter, [Validators.required]),
-                    Landmark: new FormControl(this.clientAddress.landmark, [Validators.required])
+                    County: new FormControl(this.clientAddress.County, [Validators.required]),
+                    SubCounty: new FormControl(this.clientAddress.SubCounty, [Validators.required]),
+                    Ward: new FormControl(this.clientAddress.Ward, [Validators.required]),
+                    NearestHealthCenter: new FormControl(this.clientAddress.NearestHealthCenter, [Validators.required]),
+                    Landmark: new FormControl(this.clientAddress.Landmark, [Validators.required])
                 }),
                 this._formBuilder.group({
-                    MobileNumber: new FormControl(this.clientContact.mobileNumber),
-                    AlternativeMobileNumber: new FormControl(this.clientContact.alternativeMobileNumber),
-                    EmailAddress: new FormControl(this.clientContact.email),
-                    EmergencyContactInClinic: new FormControl(this.clientContact.emergencyContactInClinic, [Validators.required]),
+                    MobileNumber: new FormControl(this.clientContact.MobileNumber),
+                    AlternativeMobileNumber: new FormControl(this.clientContact.AlternativeMobileNumber),
+                    EmailAddress: new FormControl(this.clientContact.EmailAddress),
+                    EmergencyContactInClinic: new FormControl(this.clientContact.EmergencyContactInClinic, [Validators.required]),
                     EmergencyContactFirstName: new FormControl(this.emergencyContact.firstName),
                     EmergencyContactMiddleName: new FormControl(this.emergencyContact.middleName),
                     EmergencyContactLastName: new FormControl(this.emergencyContact.lastName),
@@ -106,8 +114,13 @@ export class RegisterComponent implements OnInit {
         });
 
         this.route.data.subscribe((res) => {
-            const { countiesArray } = res;
+            // console.log(res);
+            const { countiesArray, genderArray, maritalStatusArray, educationLevelArray, occupationArray } = res;
             this.counties = countiesArray;
+            this.gender = genderArray;
+            this.maritalStatus = maritalStatusArray;
+            this.educationLevel = educationLevelArray;
+            this.occupation = occupationArray;
         });
     }
 
@@ -180,5 +193,53 @@ export class RegisterComponent implements OnInit {
         this.countyService.getWards(subCountyId).subscribe((res) => {
             this.wards = res;
         });
+    }
+
+    onSubmitForm() {
+        console.log(`here`);
+        console.log(this.formArray.value);
+        console.log(this.formGroup.valid);
+        if (this.formGroup.valid) {
+            this.person = { ...this.formArray.value[0] };
+            this.clientAddress = { ...this.formArray.value[1] };
+            this.clientContact = { ...this.formArray.value[2] };
+
+
+            this.person.personId = 0;
+            this.person.createdBy = 1;
+            console.log(this.person);
+            console.log(this.clientAddress);
+            console.log(this.clientContact);
+
+            this.personRegistration.registerPerson(this.person).subscribe(
+                (response) => {
+                    console.log(response);
+                    const { personId } = response;
+                    console.log(personId);
+
+                    const personContact = this.personRegistration.addPersonContact(personId, this.person.createdBy, this.clientContact);
+                    const personAddress = this.personRegistration.addPersonAddress(personId, this.person.createdBy, this.clientAddress);
+                    const personMaritalStatus = this.personRegistration.addPersonMaritalStatus(personId,
+                        this.person.createdBy, this.person.maritalStatus);
+
+                    forkJoin([personContact, personAddress, personMaritalStatus]).subscribe(
+                        (forkRes) => {
+                            console.log(forkRes);
+                        },
+                        (forkError) => {
+                            console.log(forkError);
+                        },
+                        () => {
+                            console.log(`complete`);
+                        }
+                    );
+                },
+                (error) => {
+                    console.log(error);
+                }
+            );
+        } else {
+            return;
+        }
     }
 }

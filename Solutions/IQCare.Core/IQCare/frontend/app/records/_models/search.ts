@@ -4,4 +4,5 @@ export class Search {
     lastName: string = '';
     identifierValue: string = '';
     fullName: string = '';
+    mobileNumber: string = '';
 }

@@ -32,8 +32,14 @@ namespace IQCare.Records.BusinessProcess.CommandHandlers.Lookup
                 sql.Append("exec pr_OpenDecryptedSession;");
                 sql.Append("Select  top 100.* from PersonListView where (DeleteFlag=0 or DeleteFlag is null) ");
 
-                if (!string.IsNullOrWhiteSpace(request.FullName))
-                    sql.Append($" AND FullName like \'%{request.FullName}%\'");
+                if (!string.IsNullOrWhiteSpace(request.firstName))
+                    sql.Append($" AND FirstName like \'%{request.firstName}%\'");
+
+                if (!string.IsNullOrWhiteSpace(request.middleName))
+                    sql.Append($" AND MiddleName like \'%{request.middleName}%\'");
+
+                if (!string.IsNullOrWhiteSpace(request.lastName))
+                    sql.Append($" AND LastName like \'%{request.lastName}%\'");
 
                 if (!string.IsNullOrWhiteSpace(request.identificationNumber))
                     sql.Append($" AND IdentifierValue like \'%{request.identificationNumber}%\'");

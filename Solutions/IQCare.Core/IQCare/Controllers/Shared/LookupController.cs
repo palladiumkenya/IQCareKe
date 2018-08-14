@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using IQCare.Common.BusinessProcess.Commands.Lookup;
 using IQCare.Common.BusinessProcess.Interfaces;
+using IQCare.Records.BusinessProcess.Command.Lookup;
 using IQCareRecords.Common.BusinessProcess.Command;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -149,11 +150,10 @@ namespace IQCare.Controllers.Common
             return BadRequest(results);
         }
 
-        [HttpGet("getGenderOptions")]
-        public async Task<IActionResult> GetGenderOptions()
+        [HttpGet("GetOptionsByMasterName/{masterName}")]
+        public async Task<IActionResult> GetOptionsByMasterName(string masterName)
         {
-            string options =  "Gender";
-            var results = await _mediator.Send(new GetOptionsByGroupNameCommand { GroupName = options },
+            var results = await _mediator.Send(new GetOptionsByMasterNameCommand { MasterName = masterName },
                 HttpContext.RequestAborted);
 
             if (results.IsValid)

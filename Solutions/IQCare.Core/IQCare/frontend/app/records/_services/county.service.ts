@@ -1,10 +1,10 @@
-import { ErrorHandlerService } from './../../shared/_services/errorhandler.service';
+import { ErrorHandlerService } from '../../shared/_services/errorhandler.service';
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient } from '../../../../node_modules/@angular/common/http';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { Observable } from '../../../../node_modules/rxjs';
+import { Observable } from 'rxjs';
 import { County } from '../_models/county';
-import { tap, catchError } from '../../../../node_modules/rxjs/operators';
+import { tap, catchError } from 'rxjs/operators';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

@@ -23,5 +23,6 @@ namespace IQCareRecords.Common.BusinessProcess.Command
     public class AddUpdatePersonLocationResponse
     {
         public string Message { get; set; }
+        public int PersonLocationId { get; set; }
     }
 }

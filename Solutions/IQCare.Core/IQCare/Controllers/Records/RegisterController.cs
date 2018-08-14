@@ -8,6 +8,7 @@ using IQCareRecords.Common.BusinessProcess.Command;
 using IQCare.Common.BusinessProcess.Commands.Partners;
 using IQCare.Records.BusinessProcess.Command;
 using IQCare.Records.BusinessProcess.Command.Lookup;
+using IQCare.Records.BusinessProcess.Command.Registration;
 
 namespace IQCare.Controllers.Records
 {
@@ -21,6 +22,7 @@ namespace IQCare.Controllers.Records
         {
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
+
         [HttpPost("addPerson")]
         public async Task<IActionResult> Post([FromBody] PersonRegistrationCommand registerPersonCommand)
         {
@@ -89,6 +91,16 @@ namespace IQCare.Controllers.Records
             return BadRequest(response);
         }
 
+        [HttpPost("addPersonMaritalStatus")]
+        public async Task<IActionResult> Post([FromBody] AddPersonMaritalStatusCommand personMaritalStatusCommand)
+        {
+            var response = await _mediator.Send(personMaritalStatusCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+
         [HttpPost("addPersonEmergencyContact")]
         public async Task<IActionResult> Post([FromBody] PersonEmergencyContactCommand personEmergencyContactCommand)
         {
@@ -116,7 +128,10 @@ namespace IQCare.Controllers.Records
             var response = await _mediator.Send(new SearchPersonListCommand
             {
                 identificationNumber = searchQuery.IdentifierValue,
-                FullName = searchQuery.FullName
+                firstName = searchQuery.FirstName,
+                middleName = searchQuery.MiddleName,
+                lastName = searchQuery.LastName,
+                MobileNumber = searchQuery.MobileNumber
             });
 
             if (response.IsValid)

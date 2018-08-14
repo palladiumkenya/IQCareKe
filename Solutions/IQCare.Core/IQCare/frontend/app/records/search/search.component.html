@@ -19,12 +19,40 @@
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="fullName">Full Name</label>
-                                        <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Full Name" tabindex="2" [(ngModel)]="clientSearch.fullName"
+                                        <label for="firstName">First Name</label>
+                                        <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name" tabindex="2" [(ngModel)]="clientSearch.firstName"
+                                            #fullName="ngModel" (keyup)="OnKeyUp($event)">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="firstName">Middle Name</label>
+                                        <input type="text" class="form-control" id="middleName" name="middleName" placeholder="Middle Name" tabindex="3" [(ngModel)]="clientSearch.middleName"
+                                            #fullName="ngModel" (keyup)="OnKeyUp($event)">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="fullName">Last Name</label>
+                                        <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last Name" tabindex="4" [(ngModel)]="clientSearch.lastName"
                                             #fullName="ngModel" (keyup)="OnKeyUp($event)">
                                     </div>
                                 </div>
                             </div>
+
+                            <!--<div>&nbsp;</div>
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="identifierNumber">Mobile Number</label>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="mobileNumber" name="mobileNumber" placeholder="Mobile Number" tabindex="5" [(ngModel)]="clientSearch.mobileNumber"
+                                            #identifierValue="ngModel" (keyup)="OnKeyUp($event)">
+                                    </div>
+                                </div>
+                            </div>-->
                         </form>
                     </div>
 
@@ -65,8 +93,14 @@
                                 <td mat-cell *matCellDef="let element"> {{element.dateOfBirth | date: 'dd-MMM-yyyy'}} </td>
                             </ng-container>
 
+                            <!-- Gender Column -->
+                            <ng-container matColumnDef="gender">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
+                                <td mat-cell *matCellDef="let element"> {{ element.gender }} </td>
+                            </ng-container>
+
                             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="getSelectedRow(row)"></tr>
                         </table>
 
                         <mat-paginator [length]="5" [pageSize]="5" [pageSizeOptions]="[3, 5, 10, 20]" [showFirstLastButtons]="true">
