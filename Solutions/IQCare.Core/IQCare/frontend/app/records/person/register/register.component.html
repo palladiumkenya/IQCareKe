@@ -218,12 +218,20 @@
                                     </div>
                                     <div class="widget-body">
                                         <div class="row">
-                                            <label class="col-lg-3 col-sm-3 col-xs-12">Registered in Clinic?</label>
+                                            <!--<label class="col-lg-2 col-sm-2 col-xs-12">Registered in Clinic?</label>-->
                                             <div class="col-lg-3 col-sm-3 col-xs-12">
-                                                <mat-radio-group formControlName="EmergencyContactInClinic">
+                                                <!--<mat-radio-group formControlName="EmergencyContactInClinic">
                                                     <mat-radio-button [value]="1" required>Yes</mat-radio-button>
                                                     <mat-radio-button [value]="2" required>No</mat-radio-button>
-                                                </mat-radio-group>
+                                                </mat-radio-group>-->
+
+                                                <mat-form-field>
+                                                    <mat-select placeholder="Registered in Clinic?" formControlName="EmergencyContactInClinic">
+                                                        <mat-option></mat-option>
+                                                        <mat-option [value]="1">Yes</mat-option>
+                                                        <mat-option [value]="2">No</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
                                             </div>
                                         </div>
 

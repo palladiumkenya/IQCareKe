@@ -38,8 +38,8 @@ namespace IQCare.Records.BusinessProcess.CommandHandlers
                 if (request.PersonId > 0)
                 {
                     persondetail = await rs.GetPerson(id);
-                    personEducation = await rs.GetCurrentPersonEducation(id);
-                    personocc = await rs.GetCurrentOccupation(id);
+                    //personEducation = await rs.GetCurrentPersonEducation(id);
+                    //personocc = await rs.GetCurrentOccupation(id);
                     personmarital = await rs.GetFirstPatientMaritalStatus(id);
                     personlocation = await rs.GetCurrentPersonLocation(id);
                     personcontact = await rs.GetCurrentPersonContact(id);

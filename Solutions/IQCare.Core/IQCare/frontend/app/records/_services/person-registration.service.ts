@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '../../../../node_modules/@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { ErrorHandlerService } from '../../shared/_services/errorhandler.service';
-import { Observable } from '../../../../node_modules/rxjs';
+import { Observable, of } from '../../../../node_modules/rxjs';
 import { tap, catchError } from '../../../../node_modules/rxjs/operators';
 import { ClientContact } from '../_models/clientcontact';
 
@@ -42,6 +42,10 @@ export class PersonRegistrationService {
             'UserId': userId
         };
 
+        if ((!clientContact.MobileNumber) && (!clientContact.AlternativeMobileNumber) && (!clientContact.EmailAddress)) {
+            return of([]);
+        }
+
         return this.http.post<any>(this.API_URL + '/records/api/Register/addPersonContact', JSON.stringify(Indata), httpOptions).pipe(
             tap((addPersonContact: any) => this.errorHandler.log(`add person contact`)),
             catchError(this.errorHandler.handleError<any>('addPersonContact'))
@@ -73,8 +77,43 @@ export class PersonRegistrationService {
         };
 
         return this.http.post<any>(this.API_URL + '/records/api/Register/addPersonMaritalStatus', JSON.stringify(Indata), httpOptions).pipe(
-            tap((addPersonMaritalStatus: any) => this.errorHandler.log(`add person marital status`)),
+            tap((addPersonMaritalStatus: any) => this.errorHandler.log(`added person marital status`)),
             catchError(this.errorHandler.handleError<any>('addPersonMaritalStatus'))
+        );
+    }
+
+    public addPersonEducationLevel(personId: number, userId: number, educationLevelId: number): Observable<any> {
+        if (!educationLevelId) {
+            return of([]);
+        }
+
+        const Indata = {
+            'PersonId': personId,
+            'EducationalLevel': educationLevelId,
+            'UserId': userId
+        };
+
+        return this.http.post<any>(this.API_URL + '/records/api/Register/addPersonEducationalLevel',
+            JSON.stringify(Indata), httpOptions).pipe(
+                tap((addPersonEducationLevel: any) => this.errorHandler.log(`added person education level`)),
+                catchError(this.errorHandler.handleError<any>('addPersonEducationLevel'))
+            );
+    }
+
+    public addPersonOccupation(personId: number, userId: number, occupationId: number): Observable<any> {
+        if (!occupationId) {
+            return of([]);
+        }
+
+        const Indata = {
+            'PersonId': personId,
+            'Occupation': occupationId,
+            'UserId': userId
+        };
+
+        return this.http.post<any>(this.API_URL + '/records/api/Register/addPersonOccupation', JSON.stringify(Indata), httpOptions).pipe(
+            tap((addPersonOccupation: any) => this.errorHandler.log(`added person occupation`)),
+            catchError(this.errorHandler.handleError<any>('addPersonOccupation'))
         );
     }
 }

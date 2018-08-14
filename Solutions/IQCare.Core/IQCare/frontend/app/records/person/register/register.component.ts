@@ -76,8 +76,8 @@ export class RegisterComponent implements OnInit {
                     AgeMonths: new FormControl(this.person.ageMonths, [Validators.required]),
                     DobPrecision: new FormControl(this.person.dobPrecision, [Validators.required]),
                     MaritalStatus: new FormControl(this.person.maritalStatus, [Validators.required]),
-                    EducationLevel: new FormControl(this.person.educationLevel),
-                    Occupation: new FormControl(this.person.occupation),
+                    EducationLevel: new FormControl(this.person.EducationLevel),
+                    Occupation: new FormControl(this.person.Occupation),
                     IdentifierType: new FormControl(this.person.identifierType),
                     IdentifierNumber: new FormControl(this.person.identifierNumber)
                 }),
@@ -196,7 +196,6 @@ export class RegisterComponent implements OnInit {
     }
 
     onSubmitForm() {
-        console.log(`here`);
         console.log(this.formArray.value);
         console.log(this.formGroup.valid);
         if (this.formGroup.valid) {
@@ -217,12 +216,21 @@ export class RegisterComponent implements OnInit {
                     const { personId } = response;
                     console.log(personId);
 
+                    // Add Contact
                     const personContact = this.personRegistration.addPersonContact(personId, this.person.createdBy, this.clientContact);
+                    // Add Address
                     const personAddress = this.personRegistration.addPersonAddress(personId, this.person.createdBy, this.clientAddress);
+                    // Add Marital Status
                     const personMaritalStatus = this.personRegistration.addPersonMaritalStatus(personId,
                         this.person.createdBy, this.person.maritalStatus);
+                    // Add Education Level
+                    const personEducationLevel = this.personRegistration.addPersonEducationLevel(personId,
+                        this.person.createdBy, this.person.EducationLevel);
+                    // Add Occupation
+                    const personOccupation = this.personRegistration.addPersonOccupation(personId,
+                        this.person.createdBy, this.person.Occupation);
 
-                    forkJoin([personContact, personAddress, personMaritalStatus]).subscribe(
+                    forkJoin([personContact, personAddress, personMaritalStatus, personEducationLevel, personOccupation]).subscribe(
                         (forkRes) => {
                             console.log(forkRes);
                         },

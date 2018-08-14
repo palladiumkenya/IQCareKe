@@ -23,33 +23,6 @@ namespace IQCare.Common.BusinessProcess.Services
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
 
-        public async Task<PersonEducation> GetCurrentPersonEducation(int personId)
-        {
-            try
-            {
-                PersonEducation pe = await _unitOfWork.Repository<PersonEducation>().Get(x => x.PersonId == personId && x.DeleteFlag == false).OrderByDescending(x => x.Id).Take(1).FirstOrDefaultAsync();
-                return pe;
-            }
-            catch (Exception e)
-            {
-                throw e;
-
-            }
-        }
-
-        public async Task<PersonOccupation> GetCurrentOccupation(int personId)
-        {
-            try
-            {
-                var occupation = await _unitOfWork.Repository<PersonOccupation>().Get(x => x.PersonId == personId && x.DeleteFlag == false).OrderByDescending(o => o.CreateDate).FirstOrDefaultAsync();
-                return occupation;
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-        }
-
         public async Task<PersonMaritalStatus> GetFirstPatientMaritalStatus(int personId)
         {
             try
@@ -346,22 +319,6 @@ namespace IQCare.Common.BusinessProcess.Services
             }
         }
 
-        public async Task<PersonEducation> AddPersonEducation(PersonEducation pm)
-        {
-            try
-            {
-                await _unitOfWork.Repository<PersonEducation>().AddAsync(pm);
-                await _unitOfWork.SaveAsync();
-                return pm;
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-
-        }
-
         public async Task<PersonRelationship> addPersonRelationship(int personId, int patientId, int relationshipTypeId, int userId)
         {
             try
@@ -421,25 +378,7 @@ namespace IQCare.Common.BusinessProcess.Services
             {
                 Log.Error(e.Message);
                 throw e;
-
             }
-        }
-
-        public async Task<PersonEducation> UpdatePersonEducation(PersonEducation pm)
-        {
-
-            try
-            {
-
-                _unitOfWork.Repository<PersonEducation>().Update(pm);
-                await _unitOfWork.SaveAsync();
-                return pm;
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
         }
 
         public async Task<AfyaMobileInbox> UpdateAfyaMobileInbox(int id, string afyamobileId = null, bool processed = false, DateTime? dateProcessed = null, string logMessage = null)

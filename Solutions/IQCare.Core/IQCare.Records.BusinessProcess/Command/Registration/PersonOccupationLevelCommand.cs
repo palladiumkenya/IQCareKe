@@ -15,5 +15,6 @@ namespace IQCareRecords.Common.BusinessProcess.Command
    public class AddPersonOccupationLevelResponse
     {
         public string Message { get; set; }
+        public int OccupationId { get; set; }
     }
 }

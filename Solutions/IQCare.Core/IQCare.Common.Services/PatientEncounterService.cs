@@ -12,7 +12,7 @@ namespace IQCare.Common.Services
 
         public PatientEncounterService(ICommonUnitOfWork commonUnitOfWork)
         {
-           this. _commonUnitOfWork = commonUnitOfWork ?? throw new ArgumentNullException(nameof(commonUnitOfWork)); ;
+           this. _commonUnitOfWork = commonUnitOfWork ?? throw new ArgumentNullException(nameof(commonUnitOfWork));
         }
 
         public async Task<PatientEncounter> Add(int patientId,int encounterTypeId,int  patientMasterVisitId, DateTime encounterStartTime,DateTime encounterEndTime,int serviceAreaId)
