@@ -220,13 +220,8 @@
                                         <div class="row">
                                             <!--<label class="col-lg-2 col-sm-2 col-xs-12">Registered in Clinic?</label>-->
                                             <div class="col-lg-3 col-sm-3 col-xs-12">
-                                                <!--<mat-radio-group formControlName="EmergencyContactInClinic">
-                                                    <mat-radio-button [value]="1" required>Yes</mat-radio-button>
-                                                    <mat-radio-button [value]="2" required>No</mat-radio-button>
-                                                </mat-radio-group>-->
-
                                                 <mat-form-field>
-                                                    <mat-select placeholder="Registered in Clinic?" formControlName="EmergencyContactInClinic">
+                                                    <mat-select placeholder="Registered in Clinic?" formControlName="EmergencyContactInClinic" (selectionChange)="onRegisteredInClinic()">
                                                         <mat-option></mat-option>
                                                         <mat-option [value]="1">Yes</mat-option>
                                                         <mat-option [value]="2">No</mat-option>
@@ -237,7 +232,7 @@
 
                                         <div>&nbsp;</div>
 
-                                        <div class="row">
+                                        <div class="row" *ngIf="registerEmergencyContact">
                                             <div class="col-lg-3 col-sm-3 col-xs-12">
                                                 <mat-form-field>
                                                     <input matInput placeholder="Emergency Contact FirstName" formControlName="EmergencyContactFirstName" id="emergencyContactFirstName"
@@ -260,22 +255,22 @@
                                             </div>
 
                                             <div class="col-lg-3 col-sm-3 col-xs-12">
-                                                <label>Gender </label>
-                                                <div>
-                                                    <mat-radio-group formControlName="EmergencyContactSex">
-                                                        <mat-radio-button value="0" required>Male</mat-radio-button>
-                                                        <mat-radio-button value="1" required>Female</mat-radio-button>
-                                                    </mat-radio-group>
-                                                </div>
+                                                <mat-form-field>
+                                                    <mat-select placeholder="Gender" formControlName="EmergencyContactSex">
+                                                        <mat-option></mat-option>
+                                                        <mat-option *ngFor="let option of gender" [value]="option.itemId">{{option.itemName}}</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
                                             </div>
                                         </div>
 
-                                        <div class="row">
+                                        <div class="row" *ngIf="registerEmergencyContact">
                                             <div class="col-lg-3 col-sm-3 col-xs-12">
                                                 <mat-form-field>
                                                     <mat-select placeholder="Emergency Contact Relationship" formControlName="EmergencyContactRelationship" id="emergencyContactRelationship"
                                                         name="emergencyContactRelationship">
                                                         <mat-option></mat-option>
+                                                        <mat-option *ngFor="let option of relationship" [value]="option.itemId">{{option.itemName}}</mat-option>
                                                     </mat-select>
                                                 </mat-form-field>
                                             </div>

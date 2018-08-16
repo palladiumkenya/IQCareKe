@@ -45,25 +45,26 @@ go
 
 
 
-if not exists(select * from LookupItem where Name like '%NotDocumented%')
-BEGIN
-insert into LookupItem(Name,DisplayName,DeleteFlag)
-values('NotDocumented','Not Documented','0')
-END
-go
-if  exists(select * from LookupItem where Name like 'NotDocumented%')
-BEGIN
-if not Exists (select * from LookupMasterItem  lmi inner join LookupMaster lm on lm.Id=lmi.LookupMasterId
-inner join LookupItem lit on lit.Id=lmi.LookupItemId where 
-lit.Name='NotDocumented' and lm.Name='PatientType')
-BEGIN
-insert into LookupMasterItem 
-select lm.Id,lit.Id,lit.DisplayName,'4.00' as OrdRank from LookupMaster lm,LookupItem lit
-where lm.Name='PatientType' and lit.Name='NotDocumented'
-END
-END
+--if not exists(select * from LookupItem where Name like '%NotDocumented%')
+--BEGIN
+--insert into LookupItem(Name,DisplayName,DeleteFlag)
+--values('NotDocumented','Not Documented','0')
+--END
+--go
 
-go
+--if  exists(select * from LookupItem where Name like 'NotDocumented%')
+--BEGIN
+--if not Exists (select * from LookupMasterItem  lmi inner join LookupMaster lm on lm.Id=lmi.LookupMasterId
+--inner join LookupItem lit on lit.Id=lmi.LookupItemId where 
+--lit.Name='NotDocumented' and lm.Name='PatientType')
+--BEGIN
+--insert into LookupMasterItem 
+--select lm.Id,lit.Id,lit.DisplayName,'4.00' as OrdRank from LookupMaster lm,LookupItem lit
+--where lm.Name='PatientType' and lit.Name='NotDocumented'
+--END
+--END
+
+--go
 
 if not exists(select * from LookupItem where Name like 'None%')
 BEGIN

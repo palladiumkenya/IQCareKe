@@ -7,6 +7,7 @@ import { ErrorHandlerService } from '../../shared/_services/errorhandler.service
 import { Observable, of } from '../../../../node_modules/rxjs';
 import { tap, catchError } from '../../../../node_modules/rxjs/operators';
 import { ClientContact } from '../_models/clientcontact';
+import { EmergencyContact } from '../_models/emergencycontact';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -114,6 +115,22 @@ export class PersonRegistrationService {
         return this.http.post<any>(this.API_URL + '/records/api/Register/addPersonOccupation', JSON.stringify(Indata), httpOptions).pipe(
             tap((addPersonOccupation: any) => this.errorHandler.log(`added person occupation`)),
             catchError(this.errorHandler.handleError<any>('addPersonOccupation'))
+        );
+    }
+
+    public registerPersonEmergencyContact(personId: number, emergencyContact: EmergencyContact): Observable<any> {
+        const Indata = {
+            'PersonId': personId,
+            'firstname': emergencyContact.EmergencyContactFirstName,
+            'middlename': emergencyContact.EmergencyContactMiddleName,
+            'lastname': emergencyContact.EmergencyContactLastName,
+            'gender': emergencyContact.EmergencyContactSex,
+            'MobileContact': emergencyContact.EmergencyContactMobileNumber
+        };
+
+        return this.http.post<any>(this.API_URL + '', JSON.stringify(''), httpOptions).pipe(
+            tap((registerPersonEmergencyContact: any) => this.errorHandler.log(`register person emergency contact`)),
+            catchError(this.errorHandler.handleError<any>('registerPersonEmergencyContact'))
         );
     }
 }

@@ -7,6 +7,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { SearchComponent } from './search/search.component';
 import { EducationLevelResolver } from './_services/educationallevel.resolver';
 import { OccupationResolver } from './_services/occupation.resolver';
+import { RelationshipResolver } from './_services/relationship.resolver';
 
 const routes: Routes = [
     {
@@ -25,7 +26,8 @@ const routes: Routes = [
                     genderArray: GenderResolver,
                     maritalStatusArray: MaritalStatusResolver,
                     educationLevelArray: EducationLevelResolver,
-                    occupationArray: OccupationResolver
+                    occupationArray: OccupationResolver,
+                    relationshipArray: RelationshipResolver
                 }
             }
         ]

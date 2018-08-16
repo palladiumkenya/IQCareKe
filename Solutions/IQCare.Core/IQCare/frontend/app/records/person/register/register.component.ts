@@ -28,6 +28,7 @@ export class RegisterComponent implements OnInit {
      * Component variables
      */
     isLinear = true;
+    registerEmergencyContact: boolean = false;
     formGroup: FormGroup;
     /** Returns a FormArray with the name 'formArray'. */
     get formArray(): AbstractControl | null { return this.formGroup.get('formArray'); }
@@ -46,6 +47,7 @@ export class RegisterComponent implements OnInit {
     maritalStatus: LookupItemView[];
     educationLevel: LookupItemView[];
     occupation: LookupItemView[];
+    relationship: LookupItemView[];
 
     constructor(private _formBuilder: FormBuilder,
         private snotifyService: SnotifyService,
@@ -92,13 +94,14 @@ export class RegisterComponent implements OnInit {
                     MobileNumber: new FormControl(this.clientContact.MobileNumber),
                     AlternativeMobileNumber: new FormControl(this.clientContact.AlternativeMobileNumber),
                     EmailAddress: new FormControl(this.clientContact.EmailAddress),
-                    EmergencyContactInClinic: new FormControl(this.clientContact.EmergencyContactInClinic, [Validators.required]),
-                    EmergencyContactFirstName: new FormControl(this.emergencyContact.firstName),
-                    EmergencyContactMiddleName: new FormControl(this.emergencyContact.middleName),
-                    EmergencyContactLastName: new FormControl(this.emergencyContact.lastName),
-                    EmergencyContactSex: new FormControl(this.emergencyContact.sex),
-                    EmergencyContactRelationship: new FormControl(this.emergencyContact.emergencyContactRelationship),
-                    EmergencyContactMobileNumber: new FormControl(this.emergencyContact.emergencyContactRelationship)
+                    EmergencyContactInClinic: new FormControl(this.clientContact.EmergencyContactInClinic),
+                    EmergencyContactFirstName: new FormControl(this.emergencyContact.EmergencyContactFirstName, [Validators.required]),
+                    EmergencyContactMiddleName: new FormControl(this.emergencyContact.EmergencyContactMiddleName),
+                    EmergencyContactLastName: new FormControl(this.emergencyContact.EmergencyContactLastName, [Validators.required]),
+                    EmergencyContactSex: new FormControl(this.emergencyContact.EmergencyContactSex, [Validators.required]),
+                    EmergencyContactRelationship: new FormControl(this.emergencyContact.EmergencyContactRelationship,
+                        [Validators.required]),
+                    EmergencyContactMobileNumber: new FormControl(this.emergencyContact.EmergencyContactMobileNumber)
                 }),
                 this._formBuilder.group({
                     NextOfKinFirstName: new FormControl(this.nextOfKin.firstName),
@@ -115,12 +118,13 @@ export class RegisterComponent implements OnInit {
 
         this.route.data.subscribe((res) => {
             // console.log(res);
-            const { countiesArray, genderArray, maritalStatusArray, educationLevelArray, occupationArray } = res;
+            const { countiesArray, genderArray, maritalStatusArray, educationLevelArray, occupationArray, relationshipArray } = res;
             this.counties = countiesArray;
             this.gender = genderArray;
             this.maritalStatus = maritalStatusArray;
             this.educationLevel = educationLevelArray;
             this.occupation = occupationArray;
+            this.relationship = relationshipArray;
         });
     }
 
@@ -195,6 +199,25 @@ export class RegisterComponent implements OnInit {
         });
     }
 
+    onRegisteredInClinic() {
+        const isEmergencyContactRegisteredInClinic = this.formArray.value[2]['EmergencyContactInClinic'];
+        if (!isEmergencyContactRegisteredInClinic || isEmergencyContactRegisteredInClinic == 1) {
+            this.registerEmergencyContact = false;
+            // console.log(this.formGroup.controls['formArray']['controls'][2]['EmergencyContactFirstName'].disable({ onlySelf: true }));
+            // this.formTesting.controls.acceptedPartnerListing.disable({ onlySelf: true });
+            this.formGroup.controls['formArray']['controls'][2]['controls'].EmergencyContactFirstName.disable({ onlySelf: true });
+            this.formGroup.controls['formArray']['controls'][2]['controls'].EmergencyContactLastName.disable({ onlySelf: true });
+            this.formGroup.controls['formArray']['controls'][2]['controls'].EmergencyContactSex.disable({ onlySelf: true });
+            this.formGroup.controls['formArray']['controls'][2]['controls'].EmergencyContactRelationship.disable({ onlySelf: true });
+        } else if (isEmergencyContactRegisteredInClinic == 2) {
+            this.registerEmergencyContact = true;
+            this.formGroup.controls['formArray']['controls'][2]['controls'].EmergencyContactFirstName.enable({ onlySelf: false });
+            this.formGroup.controls['formArray']['controls'][2]['controls'].EmergencyContactLastName.enable({ onlySelf: false });
+            this.formGroup.controls['formArray']['controls'][2]['controls'].EmergencyContactSex.enable({ onlySelf: false });
+            this.formGroup.controls['formArray']['controls'][2]['controls'].EmergencyContactRelationship.enable({ onlySelf: false });
+        }
+    }
+
     onSubmitForm() {
         console.log(this.formArray.value);
         console.log(this.formGroup.valid);
@@ -202,6 +225,8 @@ export class RegisterComponent implements OnInit {
             this.person = { ...this.formArray.value[0] };
             this.clientAddress = { ...this.formArray.value[1] };
             this.clientContact = { ...this.formArray.value[2] };
+            this.emergencyContact = { ...this.formArray.value[2] };
+
 
 
             this.person.personId = 0;
@@ -209,6 +234,8 @@ export class RegisterComponent implements OnInit {
             console.log(this.person);
             console.log(this.clientAddress);
             console.log(this.clientContact);
+            console.log(this.emergencyContact);
+            return;
 
             this.personRegistration.registerPerson(this.person).subscribe(
                 (response) => {
@@ -229,18 +256,21 @@ export class RegisterComponent implements OnInit {
                     // Add Occupation
                     const personOccupation = this.personRegistration.addPersonOccupation(personId,
                         this.person.createdBy, this.person.Occupation);
+                    // Add Emergency Contact
+                    const personEmergencyContact = this.personRegistration.registerPersonEmergencyContact(personId);
 
-                    forkJoin([personContact, personAddress, personMaritalStatus, personEducationLevel, personOccupation]).subscribe(
-                        (forkRes) => {
-                            console.log(forkRes);
-                        },
-                        (forkError) => {
-                            console.log(forkError);
-                        },
-                        () => {
-                            console.log(`complete`);
-                        }
-                    );
+                    forkJoin([personContact, personAddress, personMaritalStatus,
+                        personEducationLevel, personOccupation, personEmergencyContact]).subscribe(
+                            (forkRes) => {
+                                console.log(forkRes);
+                            },
+                            (forkError) => {
+                                console.log(forkError);
+                            },
+                            () => {
+                                console.log(`complete`);
+                            }
+                        );
                 },
                 (error) => {
                     console.log(error);

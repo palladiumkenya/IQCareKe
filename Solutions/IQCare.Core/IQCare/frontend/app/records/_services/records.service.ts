@@ -45,4 +45,11 @@ export class RecordsService {
             catchError(this.errorHandler.handleError<any[]>('getOccupationOptions'))
         );
     }
+
+    public getRelationshipOptions(): Observable<LookupItemView[]> {
+        return this.http.get<LookupItemView[]>(this.API_URL + '/api/Lookup/GetOptionsByMasterName/' + 'Relationship').pipe(
+            tap(getRelationshipOptions => this.errorHandler.log('get relationship options')),
+            catchError(this.errorHandler.handleError<any[]>('getRelationshipOptions'))
+        );
+    }
 }
