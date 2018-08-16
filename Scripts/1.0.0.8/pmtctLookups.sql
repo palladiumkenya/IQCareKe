@@ -93,4 +93,12 @@ BEGIN
 END
 
 
----Birth Plans, Danger Signs, Family Planning, HIV, Supplemental Feeding, Breast Care, Infant Feeding, Insecticide Treated Nets
+IF NOT EXISTS(SELECT * FROM Lookupmaster WHERE Name='ancExamination')
+BEGIN
+	INSERT INTO Lookupmaster (Name,DisplayName,DeleteFlag) VALUES('ancExamination','ancExamination',0);
+END
+
+IF NOT EXISTS(SELECT * FROM LookupItem WHERE Name='ancExamination')
+BEGIN
+	INSERT INTO LookupItem (Name,DisplayName,DeleteFlag) VALUES('ancExamination','ancExamination',0);
+END
