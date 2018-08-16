@@ -8,10 +8,10 @@ using MediatR;
 
 namespace IQCare.Common.BusinessProcess.CommandHandlers.Encounter
 {
-    public class AddEncounterVisitCommandHandler : IRequestHandler<AddEncounterVisitCommand, Result<AddEncounterVisitResponse>>
+    public class AddEncounterVisitCommandHand : IRequestHandler<AddEncounterVisitCommand, Result<AddEncounterVisitResponse>>
     {
         private readonly ICommonUnitOfWork _unitOfWork;
-        public AddEncounterVisitCommandHandler(ICommonUnitOfWork unitOfWork)
+        public AddEncounterVisitCommandHand(ICommonUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }

@@ -13,7 +13,7 @@ END
 -- counselled on Topic
 IF NOT EXISTS(SELECT * FROM LookupMaster WHERE Name='counselledOn')
 BEGIN
-	INSERT INTO LookupItem (Name,DisplayName,DeleteFlag) VALUES('counselledOn','counselledOn',0);
+	INSERT INTO LookupMaster(Name,DisplayName,DeleteFlag) VALUES('counselledOn','counselledOn',0);
 END
 
 IF NOT EXISTS(SELECT * FROM LookupItem WHERE Name='Birth Plans')
@@ -93,4 +93,4 @@ BEGIN
 END
 
 
-- --Birth Plans, Danger Signs, Family Planning, HIV, Supplemental Feeding, Breast Care, Infant Feeding, Insecticide Treated Nets
+---Birth Plans, Danger Signs, Family Planning, HIV, Supplemental Feeding, Breast Care, Infant Feeding, Insecticide Treated Nets
