@@ -173,9 +173,9 @@
                                         </mat-form-field>
 
                                         <mat-form-field>
-                                            <textarea matInput placeholder="Remarks" id="remarks" name="remarks" rows="5" formControlName="finalResultsRemarks" required></textarea>
+                                            <input matInput placeholder="Remarks" id="finalResultsRemarks" name="finalResultsRemarks" rows="5" formControlName="finalResultsRemarks"
+                                            />
                                         </mat-form-field>
-                                        <mat-error *ngIf="!formTesting.controls['finalResultsRemarks'].valid">Please add remarks</mat-error>
                                     </div>
                                 </div>
 
