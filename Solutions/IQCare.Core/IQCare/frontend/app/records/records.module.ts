@@ -26,6 +26,7 @@ import { RecordsService } from './_services/records.service';
 import { GenderResolver } from './_services/gender.resolver';
 import { MaritalStatusResolver } from './_services/maritalstatus.resolver';
 import { EducationLevelResolver } from './_services/educationallevel.resolver';
+import { RelationshipResolver } from './_services/relationship.resolver';
 
 @NgModule({
     imports: [
@@ -55,7 +56,8 @@ import { EducationLevelResolver } from './_services/educationallevel.resolver';
         MaritalStatusResolver,
         EducationLevelResolver,
         OccupationResolver,
-        PersonRegistrationService
+        PersonRegistrationService,
+        RelationshipResolver
     ]
 })
 export class RecordsModule { }

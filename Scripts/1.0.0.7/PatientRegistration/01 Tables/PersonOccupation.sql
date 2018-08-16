@@ -38,11 +38,17 @@ GO
 SET ANSI_PADDING OFF
 GO
 
-ALTER TABLE [dbo].[PersonOccupation]  WITH CHECK ADD  CONSTRAINT [FK_PersonOccupation_Person] FOREIGN KEY([PersonId])
-REFERENCES [dbo].[Person] ([Id])
+IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS WHERE CONSTRAINT_NAME ='FK_PersonOccupation_Person')
+BEGIN
+	ALTER TABLE [dbo].[PersonOccupation]  WITH CHECK ADD  CONSTRAINT [FK_PersonOccupation_Person] FOREIGN KEY([PersonId])
+	REFERENCES [dbo].[Person] ([Id])
+END
 GO
 
-ALTER TABLE [dbo].[PersonOccupation] CHECK CONSTRAINT [FK_PersonOccupation_Person]
+IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE CONSTRAINT_NAME='FK_PersonOccupation_Person')
+BEGIN
+	ALTER TABLE [dbo].[PersonOccupation] CHECK CONSTRAINT [FK_PersonOccupation_Person]
+END
 GO
 
 

@@ -8,11 +8,7 @@ namespace IQCareRecords.Common.BusinessProcess.Command
 {
     public class PersonEmergencyContactCommand : IRequest<Result<AddPersonEmergencyContactResponse>>
     {
-
         public List<EmergencyContact> emergencycontacts;
-
-       
-
     }
 
     public class EmergencyContact

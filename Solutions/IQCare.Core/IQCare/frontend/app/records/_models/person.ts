@@ -10,8 +10,8 @@ export class Person {
     ageMonths: number;
     dobPrecision: number;
     maritalStatus: number;
-    educationLevel: number;
-    occupation: number;
+    EducationLevel: number;
+    Occupation: number;
     identifierType: number;
     identifierNumber: number;
     personId?: number;
