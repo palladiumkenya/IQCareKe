@@ -31,13 +31,13 @@ namespace IQCare.Web.CCC.UC {
         protected global::System.Web.UI.WebControls.DropDownList ddlCounsellingTopic;
         
         /// <summary>
-        /// txtPrescriptionDate control.
+        /// HIVEducationDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPrescriptionDate;
+        protected global::System.Web.UI.WebControls.TextBox HIVEducationDate;
         
         /// <summary>
         /// txtComments control.

@@ -29,7 +29,7 @@ namespace IQCare.Web.CCC.WebService
         {
             LookupLogic lookUp = new LookupLogic();
             DropDownList dll = new DropDownList();
-            lookUp.populateDDL(dll, "ProgressionRX");
+            lookUp.populateDDL(dll, counsellingtopics);
             // String rows = "Rugute";
             //counsellingtopics = "1";
             //HIVEducationLogic hivEducation = new HIVEducationLogic();
