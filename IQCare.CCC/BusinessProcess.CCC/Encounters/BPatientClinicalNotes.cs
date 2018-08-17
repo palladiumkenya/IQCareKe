@@ -62,6 +62,25 @@ namespace BusinessProcess.CCC.Encounters
                 return Convert.ToInt32(PCN);
             }
         }
-
+        public int checkPatientNotesifExistingByVisitId(int patientId, int patientMasterVisitId, int categoryId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var PCN = unitOfWork.PatientClinicalNotesRepository.FindBy(x => x.PatientId == patientId & x.PatientMasterVisitId==patientMasterVisitId & x.NotesCategoryId == categoryId)
+                      .Select(x => x.Id)
+                      .FirstOrDefault();
+                unitOfWork.Dispose();
+                return Convert.ToInt32(PCN);
+            }
+        }
+        public List<PatientClinicalNotes> getPatientClinicalNotesByVisitId(int patientId, int PatientMasterVisitId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var clinicalNotes = unitOfWork.PatientClinicalNotesRepository.getPatientClinicalNotesByVisitId(patientId, PatientMasterVisitId);
+                unitOfWork.Dispose();
+                return clinicalNotes.ToList();
+            }
+        }
     }
 }

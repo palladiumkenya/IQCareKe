@@ -14,5 +14,7 @@ namespace Interface.CCC.Encounter
         List<PatientClinicalNotes> getPatientClinicalNotes(int patientId);
         List<PatientClinicalNotes> getPatientClinicalNotesByCategory(int patientId, int categoryId);
         int checkPatientNotesifExisting(int patientId, int categoryId);
+        int checkPatientNotesifExistingByVisitId(int patientId, int patientMasterVisitId, int categoryId);
+        List<PatientClinicalNotes> getPatientClinicalNotesByVisitId(int patientId,int patientMasterVisitId);
     }
 }

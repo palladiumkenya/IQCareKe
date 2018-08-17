@@ -52,6 +52,7 @@
     <Content Include="CCC\Adherence\AdherenceBarriers.aspx" />
     <Content Include="CCC\Appointment\ScheduleAppointment.aspx" />
     <Content Include="CCC\Appointment\PatientAppointments.aspx" />
+    <Content Include="CCC\ClinicalSummary\ClinicalSummary.aspx" />
     <Content Include="CCC\Data\States.xml" />
     <Content Include="CCC\Depression\DepressionScreening.aspx" />
     <Content Include="CCC\Encounter\ArtDistributionForm.aspx" />
@@ -59,6 +60,7 @@
     <Content Include="CCC\Encounter\LabOrder.aspx" />
     <Content Include="CCC\Encounter\PharmacyPrescription.aspx" />
     <Content Include="CCC\IL\MessageViewer.aspx" />
+    <Content Include="CCC\FollowupEducation\frmFollowUpEducation.aspx" />
     <Content Include="CCC\Patient\PatientCareEnded.aspx" />
     <Content Include="CCC\Patient\PatientConsent.aspx" />
     <Content Include="CCC\Scripts\css\bootstrap-datetimepicker.css" />
@@ -156,10 +158,14 @@
     <Content Include="CCC\UC\EnhanceAdherenceCounselling\ucSession4.ascx" />
     <Content Include="CCC\UC\EnhanceAdherenceCounselling\ucViralLoad.ascx" />
     <Content Include="CCC\UC\EnhanceAdherenceCounselling\viralload.aspx" />
+    <Content Include="CCC\UC\ucCaseSummary.ascx" />
+    <Content Include="CCC\UC\ucEvaluation.ascx" />
     <Content Include="CCC\UC\ucExtruder.ascx" />
     <Content Include="CCC\UC\ucFamilyFinder.ascx" />
     <Content Include="CCC\UC\ucFemaleVitals.ascx" />
     <Content Include="CCC\UC\ucGenderBasedViolenceAssessment.ascx" />
+    <Content Include="CCC\UC\ucFollowupEducation.ascx" />
+    <Content Include="CCC\UC\ucICF.ascx" />
     <Content Include="CCC\UC\ucIpt.ascx" />
     <Content Include="CCC\UC\ucIptClientWorkup.ascx" />
     <Content Include="CCC\UC\ucIptOutcome.ascx" />
@@ -183,6 +189,8 @@
     <Content Include="CCC\WebService\EnhanceAdherenceService.asmx" />
     <Content Include="CCC\WebService\EnrollmentService.asmx" />
     <Content Include="CCC\WebService\FacilityService.asmx" />
+    <Content Include="CCC\WebService\FollowupEducationService.asmx" />
+    <Content Include="CCC\WebService\HIVEducationService.asmx" />
     <Content Include="CCC\WebService\LabService.asmx" />
     <Content Include="CCC\WebService\NeonatalEncounterService.asmx" />
     <Content Include="CCC\WebService\OneTimeEventsTrackerService.asmx" />
@@ -438,6 +446,13 @@
     <Compile Include="CCC\Appointment\PatientAppointments.aspx.designer.cs">
       <DependentUpon>PatientAppointments.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CCC\ClinicalSummary\ClinicalSummary.aspx.cs">
+      <DependentUpon>ClinicalSummary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\ClinicalSummary\ClinicalSummary.aspx.designer.cs">
+      <DependentUpon>ClinicalSummary.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CCC\Depression\DepressionScreening.aspx.cs">
       <DependentUpon>DepressionScreening.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -500,6 +515,13 @@
     </Compile>
     <Compile Include="CCC\Enrollment\ServiceEnrollment.aspx.designer.cs">
       <DependentUpon>ServiceEnrollment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\FollowupEducation\frmFollowUpEducation.aspx.cs">
+      <DependentUpon>frmFollowUpEducation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\FollowupEducation\frmFollowUpEducation.aspx.designer.cs">
+      <DependentUpon>frmFollowUpEducation.aspx</DependentUpon>
     </Compile>
     <Compile Include="CCC\Greencard.Master.cs">
       <DependentUpon>Greencard.Master</DependentUpon>
@@ -802,6 +824,20 @@
     <Compile Include="CCC\UC\EnhanceAdherenceCounselling\viralload.aspx.designer.cs">
       <DependentUpon>viralload.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CCC\UC\ucCaseSummary.ascx.cs">
+      <DependentUpon>ucCaseSummary.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucCaseSummary.ascx.designer.cs">
+      <DependentUpon>ucCaseSummary.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\ucEvaluation.ascx.cs">
+      <DependentUpon>ucEvaluation.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucEvaluation.ascx.designer.cs">
+      <DependentUpon>ucEvaluation.ascx</DependentUpon>
+    </Compile>
     <Compile Include="CCC\UC\ucExtruder.ascx.cs">
       <DependentUpon>ucExtruder.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -829,6 +865,20 @@
     </Compile>
     <Compile Include="CCC\UC\ucGenderBasedViolenceAssessment.ascx.designer.cs">
       <DependentUpon>ucGenderBasedViolenceAssessment.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\ucFollowupEducation.ascx.cs">
+      <DependentUpon>ucFollowupEducation.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucFollowupEducation.ascx.designer.cs">
+      <DependentUpon>ucFollowupEducation.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\ucICF.ascx.cs">
+      <DependentUpon>ucICF.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucICF.ascx.designer.cs">
+      <DependentUpon>ucICF.ascx</DependentUpon>
     </Compile>
     <Compile Include="CCC\UC\ucIpt.ascx.cs">
       <DependentUpon>ucIpt.ascx</DependentUpon>
@@ -973,6 +1023,14 @@
     </Compile>
     <Compile Include="CCC\WebService\FacilityService.asmx.cs">
       <DependentUpon>FacilityService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CCC\WebService\FollowupEducationService.asmx.cs">
+      <DependentUpon>FollowupEducationService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CCC\WebService\HIVEducationService.asmx.cs">
+      <DependentUpon>HIVEducationService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CCC\WebService\LabService.asmx.cs">
@@ -1134,6 +1192,7 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\Solutions\IQCare.CCC\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />

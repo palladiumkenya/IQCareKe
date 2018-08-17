@@ -83,6 +83,53 @@ namespace IQCare.CCC.UILogic.Screening
                 throw;
             }
         }
+        public int AddUpdatePatientScreeningByVisitId(int patientId, int patientMasterVisitId, int screeningType, int screeningCategory, int screeningValue, int userId)
+        {
+            try
+            {
+                //(screening>0) ? update:add
+                int screeningResult = _patientScreening.checkScreeningByVisitId(patientId, patientMasterVisitId, screeningType, screeningCategory);
+                if (screeningResult > 0)
+                {
+                    var PS = new PatientScreening()
+                    {
+                        PatientId = patientId,
+                        PatientMasterVisitId = patientMasterVisitId,
+                        VisitDate = DateTime.Today,
+                        ScreeningTypeId = screeningType,
+                        ScreeningDone = true,
+                        ScreeningDate = DateTime.Today,
+                        ScreeningCategoryId = screeningCategory,
+                        ScreeningValueId = screeningValue,
+                        Comment = null,
+                        CreatedBy = userId,
+                        Id = screeningResult
+                    };
+                    return _patientScreening.updatePatientScreeningById(PS);
+                }
+                else
+                {
+                    var PS = new PatientScreening()
+                    {
+                        PatientId = patientId,
+                        PatientMasterVisitId = patientMasterVisitId,
+                        VisitDate = DateTime.Today,
+                        ScreeningTypeId = screeningType,
+                        ScreeningDone = true,
+                        ScreeningDate = DateTime.Today,
+                        ScreeningCategoryId = screeningCategory,
+                        ScreeningValueId = screeningValue,
+                        Comment = null,
+                        CreatedBy = userId
+                    };
+                    return _patientScreening.AddPatientScreening(PS);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public int CheckIfPatientScreeningExists(int patientId)
         {
             try
@@ -199,6 +246,30 @@ namespace IQCare.CCC.UILogic.Screening
                 };
 
                 return _patientScreening.UpdatePatientScreening(PS);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public List<PatientScreening> GetPatientScreeningByVisitId(int patientId, int patientMasterVisitId)
+        {
+            try
+            {
+                return _patientScreening.GetPatientScreeningByVisitId(patientId, patientMasterVisitId);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public List<PatientScreening> GetPatientScreeningStatus(int patientId, int statusId)
+        {
+            try
+            {
+                return _patientScreening.GetPatientScreeningStatus(patientId, statusId);
             }
             catch (Exception)
             {

@@ -111,6 +111,7 @@
 						        <%--<asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="txtFollowupDate" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>--%>
 					        </div>
 				        </div>
+                        <asp:HiddenField ID="S4AppointmentId" runat="server" />
 				    </div>
 			    </div>
 		    </div>
@@ -270,10 +271,12 @@
         if (currentStep == 4) {
             addUpdateSession4Data();
             addUpdateSession4Appointment();
+            $("#sessionviralloaddata .loading").show();
+            $("#sessionviralloaddata").load("../UC/EnhanceAdherenceCounselling/viralload.aspx");
         }
     });
     function addUpdateSession4Appointment() {
-        var appointmentid = <%=appointmentId%>;
+        var appointmentid = $("#<%=S4AppointmentId.ClientID%>").val();
             var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
             var appDate = $("#<%=appointmentDateTb.ClientID%>").val();
         if (moment('' + appDate + '').isAfter(futureDate)) {
@@ -285,7 +288,7 @@
                 updateS4Appointment();
             }
             else {
-                checkExistingS4Appointment();
+                addPatientS4Appointment();
             }
         }
     }
@@ -328,7 +331,7 @@
         var patientId = <%=PatientId%>;
         var patientMasterVisitId = <%=PatientMasterVisitId%>;
         var userId = <%=userId%>;
-        var appointmentid = <%=appointmentId%>;
+        var appointmentid = $("#<%=S4AppointmentId.ClientID%>").val();
         $.ajax({
             type: "POST",
             url: "../WebService/PatientService.asmx/UpdatePatientAppointment",
@@ -450,8 +453,8 @@
         $('.session4loading').show();
         $.ajax({
             type: "POST",
-            url: "../WebService/PatientClinicalNotesService.asmx/getPatientNotes",
-            data: "{'PatientId': '" + patientId + "'}",
+            url: "../WebService/PatientScreeningService.asmx/getScreeningByIdandMasterVisit",
+            data: "{'PatientId': '" + patientId + "','PatientMasterVisitId':'" + PatientMasterVisitId + "'}",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             cache: false,
@@ -463,6 +466,8 @@
                         $("#session4tb" + this.NotesCategoryId).val(inputnotes);
                     }
                 });
+                var s4fd = $('input[type="text"].s4followupdateinput').val();
+                gets3AppointmentId(s4fd);
             },
             error: function (response) {
                 toastr.error("Notes could not be loaded");
@@ -470,8 +475,8 @@
         });
         $.ajax({
             type: "POST",
-            url: "../WebService/PatientScreeningService.asmx/getPatientScreening",
-            data: "{'PatientId': '" + patientId + "'}",
+            url: "../WebService/PatientScreeningService.asmx/getScreeningByIdandMasterVisit",
+            data: "{'PatientId': '" + patientId + "','PatientMasterVisitId':'" + PatientMasterVisitId + "'}",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             cache: false,
@@ -489,6 +494,31 @@
             }
         });
     });
+    function gets4AppointmentId(s4fd) {
+        var PatientMasterVisitId = GetURLParameter('visitId');
+        $.ajax({
+            type: "POST",
+            url: "../WebService/PatientService.asmx/getAppointmentId",
+            data: "{'PatientMasterVisitId':'" + PatientMasterVisitId + "','date':'" + s4fd + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            cache: false,
+            success: function (response) {
+                if (response.d != null) {
+                    $.each(JSON.parse(response.d), function (index, value) {
+                        $("#<%=S4AppointmentId.ClientID%>").val(this.Id);
+                    });
+
+                }
+                else {
+                    addUpdateSession4Appointment();
+                }
+            },
+            error: function (response) {
+                toastr.error("Screening could not be loaded");
+            }
+        });
+    }
     function checkSession4ButtonsOnCtrls() {
         var mmas4Total = 0;
         $(".session4mmascontainer .mmas4container input[type=radio]:checked").each(function () {

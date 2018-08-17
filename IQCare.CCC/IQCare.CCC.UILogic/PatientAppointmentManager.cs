@@ -105,6 +105,11 @@ namespace IQCare.CCC.UILogic
             var appointment = _appointment.GetByDate(date);
             return appointment;
         }
+        public List<PatientAppointment> GetAppointmentId(int PatientId, int PatientMasterVisitId, DateTime date)
+        {
+            var appointment = _appointment.GetAppointmentId(PatientId, PatientMasterVisitId, date);
+            return appointment;
+        }
 
         public List<AppointmentSummary>GetAppointmentSummaryByDate(DateTime date)
         {

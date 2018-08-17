@@ -1,8 +1,8 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucTannerStaging.ascx.cs" Inherits="IQCare.Web.CCC.UC.ucTannerStaging" %>
 <!-- Tanner Staging --->
-<div class="panel panel-info">
+<div class="panel panel-info" id="tannersstagingcontainer">
 	<div class="panel-body">
-        <div class="col-md-12 form-group">
+        <div class="col-md-12 form-group" id="tannersstagingrecord">
 		    <div id="recordTannersStaging">
                 <asp:PlaceHolder ID="PHTannersStaging" runat="server"></asp:PlaceHolder>
             </div>
@@ -13,7 +13,7 @@
                 <div class="milestone-link pull-right"><a target="_blank" href="../../Content/resources/Tanners.pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Tanner Staging Guide</a></div>
 		    </div>
 
-		    <div class="col-md-12 form-group">
+		    <div class="col-md-12 form-group" id="tannersstagingform">
 			    <div class="col-md-3 form-group">
 				    <div class="col-md-12">
                         <label for="txtTannerStagingDate" class="control-label pull-left">Date</label>
@@ -57,7 +57,7 @@
                 </div>
 		    </div>
 
-		    <div class="col-md-12 form-group">
+		    <div class="col-md-12 form-group" id="tannerstable">
 			    <div class="panel panel-primary">
 				    <div class="panel-heading">Tanners Staging</div>
 				    <div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden;">
@@ -231,7 +231,23 @@
     }
 
     $(document).ready(function () {
-        showHideTannersPanel();
+        var patientAge = <%=age%>;
+        var screeningDone = <%=tannersScreeningValue%>;
+        if (age < 9) {
+            $("#tannersstagingcontainer").hide();
+        }
+        else if (age > 19) {
+            if (screeningDone > 0) {
+                $("#tannersstagingrecord").hide();
+                $("#tannersstagingform").hide();
+            }
+            else {
+                $("#tannersstagingcontainer").hide();
+            }
+        }
+        else {
+            showHideTannersPanel();
+        }
     });
 
     $("input[name='<%=rbList.UniqueID%>']").change(function () {

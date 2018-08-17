@@ -145,6 +145,7 @@
 						        <%--<asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="txtFollowupDate" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>--%>
 					        </div>
 				        </div>
+                        <asp:HiddenField ID="AppointmentId" runat="server" />
 				    </div>
 			    </div>
 		    </div>
@@ -321,49 +322,58 @@
         });
     }
     $(document).ready(function () {
-        //$('#session1statusmodal').modal('toggle');
-        //$('#session1statusmodal').modal('show');
+        var PatientMasterVisitId = GetURLParameter('visitId');
+        var pagehash = window.location.hash;
         $('.session1loading').show();
-        $.ajax({
-            type: "POST",
-            url: "../WebService/PatientClinicalNotesService.asmx/getPatientNotes",
-            data: "{'PatientId': '" + patientId + "'}",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            cache: false,
-            success: function (response) {
-                //alert(JSON.stringify(response));
-                $.each(JSON.parse(response.d), function (index, value) {
-                    inputnotes = this.ClinicalNotes;
-                    if ($("#session1tb" + this.NotesCategoryId).length > 0) {
-                        $("#session1tb" + this.NotesCategoryId).val(inputnotes);
-                    }
-                });
-            },
-            error: function (response) {
-                toastr.error("Notes could not be loaded");
-            }
-        });
-        $.ajax({
-            type: "POST",
-            url: "../WebService/PatientScreeningService.asmx/getPatientScreening",
-            data: "{'PatientId': '" + patientId + "'}",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            cache: false,
-            success: function (response) {
-                //alert(JSON.stringify(response));
-                $.each(JSON.parse(response.d), function (index, value) {
-                    if ($("#session1rb" + this.ScreeningCategoryId).length > 0) {
-                        $("input:radio[name='session1rb" + this.ScreeningCategoryId + "'][value='" + this.ScreeningValueId + "']").attr("checked", true);
-                    }
-                });
-                checkButtonsOnCtrls();
-            },
-            error: function (response) {
-                toastr.error("Notes could not be loaded");
-            }
-        });
+        if (PatientMasterVisitId > 0 && pagehash != "") {
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientClinicalNotesService.asmx/getPatientNotesByVisitId",
+                data: "{'PatientId': '" + patientId + "','PatientMasterVisitId':'" + PatientMasterVisitId + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                cache: false,
+                success: function (response) {
+                    $.each(JSON.parse(response.d), function (index, value) {
+                        inputnotes = this.ClinicalNotes;
+                        if ($("#session1tb" + this.NotesCategoryId).length > 0) {
+                            $("#session1tb" + this.NotesCategoryId).val(inputnotes);
+                        }
+                    });
+                    var sfd = $('input[type="text"].sessiononefollowdate').val();
+                    getAppointmentId(sfd);
+                },
+                error: function (response) {
+                    toastr.error("Notes could not be loaded");
+                }
+            });
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientScreeningService.asmx/getScreeningByIdandMasterVisit",
+                data: "{'PatientId': '" + patientId + "','PatientMasterVisitId':'" + PatientMasterVisitId + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                cache: false,
+                success: function (response) {
+                    $.each(JSON.parse(response.d), function (index, value) {
+                        if ($("#session1rb" + this.ScreeningCategoryId).length > 0) {
+                            $("input:radio[name='session1rb" + this.ScreeningCategoryId + "'][value='" + this.ScreeningValueId + "']").attr("checked", true);
+                        }
+                    });
+                    checkButtonsOnCtrls();
+                },
+                error: function (response) {
+                    toastr.error("Screening could not be loaded");
+                }
+            });
+            //$("#sessiononedata .FollowupDate input[type='text']").on("change", function () {
+            //    alert("cahneged");
+            //});
+        }
+        else {
+            //check if there is an ongoing Enhance Adherence Counselling. If there is an ongoing counselling, redirect to an ongoing adherence else return false
+            checkScreeningStatus();
+        }
        
         //get notes
         $("#btnReset").click(function () {
@@ -381,6 +391,87 @@
             //resetFields();
         });
     });
+
+    function getAppointmentId(sfd) {
+        var appdate = $("input:text").val();
+        var PatientMasterVisitId = GetURLParameter('visitId');
+        <%--var AppointmentDate = $("#<%=AppointmentId.ClientID%>").val();--%>
+        //alert("Date" + AppointmentDate);
+        $.ajax({
+            type: "POST",
+            url: "../WebService/PatientService.asmx/getAppointmentId",
+            data: "{'PatientMasterVisitId':'" + PatientMasterVisitId + "','date':'" + sfd +"'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            cache: false,
+            success: function (response) {
+                //store appointment id
+                if (response.d != null) {
+                    $.each(JSON.parse(response.d), function (index, value) {
+                        $("#<%=AppointmentId.ClientID%>").val(this.Id);
+                    });
+                    
+                }
+                else {
+                    addPatientAppointment();
+                }
+                //alert("sfd"+sfd);
+                //alert(JSON.stringify(response.d));
+            },
+            error: function (response) {
+                toastr.error("Screening could not be loaded");
+            }
+        });
+    }
+    function checkScreeningStatus() {
+        $.ajax({
+            type: "POST",
+            url: "../WebService/PatientScreeningService.asmx/getScreeningByStatus",
+            data: "{'Status': 'Ongoing'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            cache: false,
+            success: function (response) {
+                if (JSON.parse(response.d) != "") {
+                    $.each(JSON.parse(response.d), function (index, value) {
+                        if (this.PatientMasterVisitId > 0) {
+                            toastr.info("Please wait, redirecting to ongoing Enhance Adherence Councelling");
+                            $("#sessiononedata .loading").show();
+                            window.location.replace("../Encounter/PatientEncounter.aspx?visitId=" + this.PatientMasterVisitId + "#EnhanceAdherence");
+                        }
+                        else {
+                            addEnhanceAdherenceEncounter();
+                            addCancellingStatus();
+                        }
+                    });
+                }
+                else {
+                    addEnhanceAdherenceEncounter();
+                    addCancellingStatus();
+                }
+                checkButtonsOnCtrls();
+            },
+            error: function (response) {
+                toastr.error("Screening could not be loaded");
+            }
+        });
+    }
+    function addCancellingStatus() {
+        $.ajax({
+            type: "POST",
+            url: "../WebService/PatientScreeningService.asmx/AddCancellingStatus",
+            data: "{'status':'Ongoing'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                toastr.info("New Enhance Adherence Councelling Created");
+                checkScreeningStatus();
+            },
+            error: function (response) {
+                toastr.error(response.d, "Error creating new adherence councelling");
+            }
+        });
+    }
     function checkButtonsOnCtrls() {
         var mmas4Total = 0;
         $(".session1mmascontainer .mmas4container input[type=radio]:checked").each(function () {
@@ -409,6 +500,9 @@
             showhidenotes(parentPanel, selectedValue, rbName);
         });
         $('.session1loading').hide();
+        $('html, body').animate({
+            scrollTop: $('body').offset().top - 20 //#DIV_ID is an example. Use the id of your destination on the page
+        }, 'fast');
         //$('#session1statusmodal').modal('hide');
     }
     function showhidenotes(parentPanel, selectedValue, rbName) {
@@ -422,17 +516,52 @@
         }
 
     }
-
+    function GetURLParameter(sParam)
+    {
+        var sPageURL = window.location.search.substring(1);
+        var sURLVariables = sPageURL.split('&');
+        for (var i = 0; i < sURLVariables.length; i++)
+        {
+            var sParameterName = sURLVariables[i].split('=');
+            if (sParameterName[0] == sParam)
+            {
+                return sParameterName[1];
+            }
+        }
+    }
     //Save Data
     $("#eahmyWizard").on("actionclicked.fu.wizard", function (evt, data) {
         var currentStep = data.step;
         if (currentStep == 1) {
+            var patientMasterVisitId = GetURLParameter('visitId');
             addUpdateSession1Data();
             addUpdateSession1Appointment();
+            $("#sessiontwodata .loading").show();
+            $("#sessiontwodata").load("../UC/EnhanceAdherenceCounselling/session2.aspx");
         }
     });
+    function addEnhanceAdherenceEncounter() {
+        var serviceArea = <%=serviceAreaId%>;
+        var EncounterType = "EnhanceAdherence";
+        var patientId = <%=PatientId%>;
+        var patientMasterVisitId = GetURLParameter('visitId');
+        var userId = <%=userId%>;
+        $.ajax({
+            type: "POST",
+            url: "../WebService/PatientEncounterService.asmx/savePatientEncounter",
+            data: "{'PatientID': '" + patientId + "','PatientMasterVisitID': '" + patientMasterVisitId + "','EncounterType': '" + EncounterType + "','ServiceAreaId': '" + serviceArea + "','UserId': '" + userId + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                toastr.success(response.d, "Encounter Saved");
+            },
+            error: function (response) {
+                toastr.error(response.d, "Encounter not saved");
+            }
+        });
+    }
     function addUpdateSession1Appointment() {
-        var appointmentid = <%=appointmentId%>;
+        var appointmentid = $("#<%=AppointmentId.ClientID%>").val();
         var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
         var appDate = $("#<%=appointmentDateTb.ClientID%>").val();
         if (moment('' + appDate + '').isAfter(futureDate)) {
@@ -444,7 +573,7 @@
                 updateAppointment();
             }
             else {
-                checkExistingAppointment();
+                addPatientAppointment();
             }
         } 
     }
@@ -453,7 +582,7 @@
         var appointmentDate = $("#<%=appointmentDateTb.ClientID%>").val();
         var serviceArea = <%=serviceAreaId%>;
         var reason = <%=reasonId%>;
-        var differentiatedCare = <%=differentiatedCareId%>
+        var differentiatedCare = <%=differentiatedCareId%>;
         jQuery.support.cors = true;
         $.ajax({
             type: "POST",
@@ -484,9 +613,9 @@
         var differentiatedCareId = <%=differentiatedCareId%>;
         var appointmentDate = $("#<%=appointmentDateTb.ClientID%>").val();
         var patientId = <%=PatientId%>;
-        var patientMasterVisitId = <%=PatientMasterVisitId%>;
+        var patientMasterVisitId = GetURLParameter('visitId');
         var userId = <%=userId%>;
-        var appointmentid = <%=appointmentId%>;
+        var appointmentid = $("#<%=AppointmentId.ClientID%>").val();
         $.ajax({
             type: "POST",
             url: "../WebService/PatientService.asmx/UpdatePatientAppointment",
@@ -510,7 +639,7 @@
         var differentiatedCareId = <%=differentiatedCareId%>;
         var appointmentDate = $("#<%=appointmentDateTb.ClientID%>").val();
         var patientId = <%=PatientId%>;
-        var patientMasterVisitId = <%=PatientMasterVisitId%>;
+        var patientMasterVisitId = GetURLParameter('visitId');
         var userId = <%=userId%>;
         $.ajax({
             type: "POST",
@@ -532,7 +661,7 @@
             var screeningValue = 0;
             var screeningType = <%=screenTypeId%>;
             var patientId = <%=PatientId%>;
-            var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            var patientMasterVisitId = GetURLParameter('visitId');
             var userId = <%=userId%>;
             var screeningCategory = $(this).attr('id').replace('session1rb', '');
             var rdIdValue = $(this).attr('id');
@@ -542,7 +671,7 @@
             }
             $.ajax({
                 type: "POST",
-                url: "../WebService/PatientScreeningService.asmx/AddUpdateScreeningData",
+                url: "../WebService/PatientScreeningService.asmx/AddUpdateScreeningDataByVisitId",
                 data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','screeningType':'" + screeningType + "','screeningCategory':'" + screeningCategory + "','screeningValue':'" + screeningValue + "','userId':'" + userId + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -557,14 +686,14 @@
         $("#eahdatastep1 input[type=text]").each(function () {
             var categoryId = ($(this).attr('id')).replace('session1tb', '');
             var patientId = <%=PatientId%>;
-            var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            var patientMasterVisitId = GetURLParameter('visitId');
             var clinicalNotes = $(this).val();
             var serviceAreaId = 203;
             var userId = <%=userId%>;
             if (categoryId > 1) {
                 $.ajax({
                     type: "POST",
-                    url: "../WebService/PatientClinicalNotesService.asmx/addPatientClinicalNotes",
+                    url: "../WebService/PatientClinicalNotesService.asmx/addPatientClinicalNotesByVisitId",
                     data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','serviceAreaId':'" + serviceAreaId + "','notesCategoryId':'" + categoryId + "','clinicalNotes':'" + clinicalNotes + "','userId':'" + userId + "'}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
@@ -580,14 +709,14 @@
         $("#eahdatastep1 textarea").each(function () {
             var categoryId = ($(this).attr('id')).replace('session1tb', '');
             var patientId = <%=PatientId%>;
-            var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            var patientMasterVisitId = GetURLParameter('visitId');
             var clinicalNotes = $(this).val();
             var serviceAreaId = 203;
             var userId = <%=userId%>;
             if (categoryId > 1) {
                 $.ajax({
                     type: "POST",
-                    url: "../WebService/PatientClinicalNotesService.asmx/addPatientClinicalNotes",
+                    url: "../WebService/PatientClinicalNotesService.asmx/addPatientClinicalNotesByVisitId",
                     data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','serviceAreaId':'" + serviceAreaId + "','notesCategoryId':'" + categoryId + "','clinicalNotes':'" + clinicalNotes + "','userId':'" + userId + "'}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",

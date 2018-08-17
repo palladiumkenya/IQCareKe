@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucSocialHistory.ascx.cs" Inherits="IQCare.Web.CCC.UC.ucSocialHistory" %>
 <style>
     .rbList td { text-align: left;}
-}
+    #socialhistoryquestions table{float: left !important;}
 </style>
 <div class="panel panel-info">
 	<div class="panel-body">

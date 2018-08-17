@@ -1810,5 +1810,23 @@ namespace IQCare.Web.CCC.WebService
             }
             return Msg;
         }
+        [WebMethod(EnableSession = true)]
+        public string savePatientEncounter(int PatientID, int PatientMasterVisitID, string EncounterType, int ServiceAreaId, int UserId)
+        {
+            try
+            {
+                PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+                Result = patientEncounter.savePatientEncounter(Convert.ToInt32(Session["PatientPK"]), Convert.ToInt32(Session["PatientMasterVisitId"]), EncounterType,ServiceAreaId, Convert.ToInt32(Session["AppUserId"]));
+                if (Result > 0)
+                {
+                    Msg = "Saved";
+                }
+            }
+            catch(Exception e)
+            {
+                Msg = e.Message;
+            }
+            return Msg;
+        }
     }
 }
