@@ -3836,7 +3836,7 @@
             var anyComplaints = $("input[name$=anyComplaints]:checked").val();
             var adverseEvents = $("input[name$=adverseEvents]:checked").val();
             var complaints = $("#<%=complaints.ClientID%>").val();
-            var tbscreening = $("#<%=tbscreeningstatus.ClientID%>").find(":selected").val();
+            var tbscreening = $("#<%=ddlICFTBScreeningOutcome.ClientID%>").find(":selected").val();
             var nutritionscreening = $("#<%=nutritionscreeningstatus.ClientID%>").find(":selected").val();
 
 
