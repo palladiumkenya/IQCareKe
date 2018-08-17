@@ -255,7 +255,7 @@ namespace IQCare.HTS.BusinessProcess.Services
             try
             {
                 var htsTestings = await _htsunitOfWork.Repository<Core.Model.Testing>()
-                    .Get(x => x.HtsEncounterId == htsEncounterId && x.TestRound == testRound).ToListAsync();
+                    .Get(x => x.HtsEncounterId == htsEncounterId && x.TestRound == testRound && x.DeleteFlag == false).ToListAsync();
 
                 foreach (var htsTesting in htsTestings)
                 {
