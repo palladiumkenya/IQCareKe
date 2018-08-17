@@ -11,6 +11,7 @@ namespace IQCare.Common.Core.Models
 
         public int EducationLevel { get; set; }
 
+        public bool Active { get; set; }
 
         public bool DeleteFlag { get; set; }
         public int CreatedBy { get; set; }

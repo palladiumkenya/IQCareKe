@@ -24,11 +24,13 @@ using Entities.CCC.Encounter;
 using Entities.CCC.Enrollment;
 using IQCare.CCC.UILogic.Enrollment;
 using IQCare.CCC.UILogic.Visit;
+using Entities.Common;
 
 namespace IQCare.Web.CCC.WebService
 {
     public class FamilyMembers
     {
+        public string RelationshipPersonId { get; set; }
         public string firstName { get; set; }
         public string middleName { get; set; }
         public string lastName { get; set; }
@@ -210,7 +212,8 @@ namespace IQCare.Web.CCC.WebService
         [WebMethod(EnableSession = true)]
         public string AddPatientFamilyTesting(string familyMembers)
         {
-            int patientId; int patientMasterVisitId; string firstName; string middleName; string lastName; int sex; string dob; int relationshipId; int baselineHivStatusId; string baselineHivStatusDate; /*string hivTestingresultId;*/ string hivTestingresultDate; bool cccreferal; string cccReferalNumber;  int userId;
+            string relationshipPersonId; int patientId; int patientMasterVisitId; string firstName; string middleName; string lastName; int sex; string dob; int relationshipId; int baselineHivStatusId; string baselineHivStatusDate;
+            /*string hivTestingresultId;*/ string hivTestingresultDate; bool cccreferal; string cccReferalNumber;  int userId;
             DateTime? linkageDate;
             bool dobPrecision;
 
@@ -223,14 +226,21 @@ namespace IQCare.Web.CCC.WebService
                 patientId = int.Parse(HttpContext.Current.Session["PatientPK"].ToString());
                 patientMasterVisitId = int.Parse(Session["PatientMasterVisitId"].ToString());
                 userId = Convert.ToInt32(Session["AppUserId"]);
-
+                relationshipPersonId = GlobalObject.unescape(familyMembrs[i].RelationshipPersonId);
                 firstName = GlobalObject.unescape(familyMembrs[i].firstName);
                 middleName = GlobalObject.unescape(familyMembrs[i].middleName);
                 lastName = GlobalObject.unescape(familyMembrs[i].lastName);
                 int hivresultId = familyMembrs[i].hivTestingresultId == "" ? 0 : Convert.ToInt32(familyMembrs[i].hivTestingresultId);
                 sex = familyMembrs[i].sex;
                 dob = familyMembrs[i].dob;
-                dobPrecision = Convert.ToBoolean(familyMembrs[i].dobPrecision);
+                if (familyMembrs[i].dobPrecision == "" || familyMembrs[i].dobPrecision == null)
+                {
+                    dobPrecision = false;
+                }
+                else
+                {
+                    dobPrecision = Convert.ToBoolean(familyMembrs[i].dobPrecision);
+                }
                 relationshipId = familyMembrs[i].relationshipId;
                 baselineHivStatusId = familyMembrs[i].baselineHivStatusId;
                 baselineHivStatusDate = familyMembrs[i].baselineHivStatusDate;
@@ -275,7 +285,14 @@ namespace IQCare.Web.CCC.WebService
                                     x.RelationshipId == relationshipId);
                     if (!fam.Any())
                     {
-                        Result = testing.AddPatientFamilyTestings(patientFamilyTesting, userId);
+                        if (relationshipPersonId != null || Convert.ToInt32(relationshipPersonId) > 0)
+                        {
+                            Result = testing.AddPatientFamilyTestingsExisting(patientFamilyTesting, userId, Convert.ToInt32(relationshipPersonId));
+                        }
+                        else
+                        {
+                            Result = testing.AddPatientFamilyTestings(patientFamilyTesting, userId);
+                        }
                         if (Result > 0)
                         {
                             Msg = "Patient family testing Added Successfully!";
@@ -491,6 +508,362 @@ namespace IQCare.Web.CCC.WebService
             }
             return appointmentDisplay;
         }
+        [WebMethod(EnableSession =true)]
+        public string GetPatientBaselineandHivTesting(int personId,int patientId)
+        {
+            string output=null;
+            string CCCNumb="";
+            try
+            {
+
+                PatientManager patientmanager = new PatientManager();
+
+
+                int Currentpatient = int.Parse(HttpContext.Current.Session["PatientPK"].ToString());
+                int CurrentPersonId = patientmanager.GetPersonId(Currentpatient);
+
+                if (CurrentPersonId == personId)
+                {
+
+                    string result = "self";
+                    output = new JavaScriptSerializer().Serialize(result);
+                }
+                else
+                {
+                    PersonRelationshipManager rlm = new PersonRelationshipManager();
+                    
+                    PersonLookUpManager personlookup = new PersonLookUpManager();
+                    PatientHivTestingManager pht = new PatientHivTestingManager();
+                    PatientLinkageManager plm = new PatientLinkageManager();
+                    List<PersonRelationship> relations = new List<PersonRelationship>();
+                    List<PatientHivTesting> patientshivtest = new List<PatientHivTesting>();
+                    List<PatientLinkage> patientslinkage = new List<PatientLinkage>();
+                    PersonLookUp person = new PersonLookUp();
+                    person = personlookup.GetPersonById(personId);
+                    PatientLookupManager patientlookupman = new PatientLookupManager();
+                    PatientLookup patientlook = new PatientLookup();
+                    patientlook = patientlookupman.GetPatientByPersonId(person.Id);
+                    if(patientlook !=null)
+                    {
+                        IdentifierManager im = new IdentifierManager();
+                        Identifier id = new Identifier();
+                        id=im.GetIdentifierByCode("CCCNumber");
+                        PatientIdentifierManager pim = new PatientIdentifierManager();
+                        PatientManager pm = new PatientManager();
+                        if (patientlook.TransferIn == true)
+                        {
+                            PatientTransferInmanager pt = new PatientTransferInmanager();
+                            List<PatientTransferIn> pti = pt.GetPatientTransferIns(patientlook.Id);
+                            string mflcode = pti.Where(t => t != null && t.DeleteFlag == false).OrderByDescending(t => t.CreateDate).Select(t => t.MflCode).FirstOrDefault().ToString();
+
+                            if (patientlook.EnrollmentNumber.Length < 5)
+                            {
+                                string CCCnum = string.Format("{0}-{1}", mflcode, patientlook.EnrollmentNumber);
+                                CCCNumb = CCCnum;
+                            }
+
+                        }
+                        else
+                        {
+                            if (patientlook.EnrollmentNumber.Length < 5)
+                            {
+                                string CCCnum = string.Format("{0}-{1}", patientlook.FacilityId, patientlook.EnrollmentNumber);
+                                CCCNumb = CCCnum;
+
+                            }
+                            else
+                            {
+                                CCCNumb = patientlook.EnrollmentNumber;
+                            }
+                        }
+
+                       // PatientEntity prl = new PatientEntity();
+                        // prl = pm.GetPatientEntityByPersonId(personId);
+
+                       // List<PatientEntityIdentifier> pid = new List<PatientEntityIdentifier>();
+
+                            // pid=pim.GetPatientEntityIdentifiersByPatientId(prl.Id, id.Id);
+                         // string CCCNumber = pid.Where(t => t != null && t.PatientId == prl.Id && t.DeleteFlag == false).OrderByDescending(t => t.CreateDate).Select(t=>t.IdentifierValue).FirstOrDefault();
+
+                       /// CCCNumb = CCCNumber;
+                    }
+                    PersonRelationship rl = new PersonRelationship();
+                    rl = rlm.GetSpecificRelationship(Currentpatient, personId);
+                    relations.Add(rl);
+                    PatientHivTesting ph = new PatientHivTesting();
+                    ph = pht.GetPatientHivTesting(personId);
+                    PatientLinkage patientl = new PatientLinkage();
+                    patientl = plm.GetPatientLinkage(personId);
+                    patientshivtest.Add(ph);
+                    patientslinkage.Add(patientl);
+                    Dictionary<string, string> dic = new Dictionary<string, string>();
+                    if (CCCNumb != null)
+                    {
+                        dic.Add("CCCNumber", CCCNumb);
+                    }
+                    else
+                    {
+                        dic.Add("CCCNumber", "0");
+                    }
+                    if (patientlook != null) { 
+                        dic.Add("EnrollmentNumber", patientlook.EnrollmentNumber);
+                     }
+                     else
+                        {
+                         dic.Add("EnrollmentNumber", "0");
+                     }
+                    dic.Add("PersonId", person.Id.ToString());
+                    dic.Add("FirstName", person.FirstName);
+                    dic.Add("MiddleName", person.MiddleName);
+                    dic.Add("DOB", patientlook.DateOfBirth.ToString());
+                    dic.Add("LastName", person.LastName);
+                    dic.Add("gender", person.Sex.ToString());
+                    dic.Add("DobPrecision", patientlook.DobPrecision.ToString());
+                    dic.Add("Relationshiptype", relations.Where(t => t != null && t.PersonId == Convert.ToInt32(personId)).Select(t => t.RelationshipTypeId.ToString()).DefaultIfEmpty(null).FirstOrDefault());
+                    dic.Add("BaselineResult", relations.Where(t => t != null && t.PersonId == Convert.ToInt32(personId)).Select(t => t.BaselineResult.ToString()).DefaultIfEmpty(null).FirstOrDefault());
+                    dic.Add("BaselineDate", relations.Where(t => t != null && t.PersonId == Convert.ToInt32(personId)).Select(t => t.BaselineDate.ToString()).DefaultIfEmpty(null).FirstOrDefault());
+                    dic.Add("HivTestingResult", patientshivtest.Where(t => t != null && t.PersonId == Convert.ToInt32(personId)).Select(t => t.TestingResult.ToString()).DefaultIfEmpty(null).FirstOrDefault());
+                    dic.Add("HivTestingDate", patientshivtest.Where(t => t != null && t.PersonId == Convert.ToInt32(personId)).Select(t => t.TestingDate.ToString()).DefaultIfEmpty(null).FirstOrDefault());
+                    dic.Add("ReferredToCare", patientshivtest.Where(t => t != null && t.PersonId == Convert.ToInt32(personId)).Select(t => t.ReferredToCare.ToString()).DefaultIfEmpty(null).FirstOrDefault());
+                    dic.Add("LinkageDate", patientslinkage.Where(t => t != null && t.PersonId == Convert.ToInt32(personId)).Select(t => t.LinkageDate.ToString()).DefaultIfEmpty(null).FirstOrDefault());
+
+                    var data = dic.ToArray();
+
+                    output = new JavaScriptSerializer().Serialize(data);
+                }
+            }
+            catch (Exception e)
+            {
+                //Dispose();
+                output = e.Message;
+            }
+            finally
+            {
+                Dispose();
+            }
+            return output;
+        }
+        
+
+        [WebMethod(EnableSession = true)]
+        public string GetPatientSearchList(List<Data> dataPayLoad)
+        {
+            String output = null;
+            int filteredRecords = 0;
+            int totalCount = 0;
+
+           int  Currentpatient = int.Parse(HttpContext.Current.Session["PatientPK"].ToString());
+            PersonRelationshipManager rlm = new PersonRelationshipManager();
+
+            PatientHivTestingManager pht = new PatientHivTestingManager();
+            PatientLinkageManager plm = new PatientLinkageManager();
+
+            var jsonData = new List<PatientLookup>();
+
+            try
+            {
+                string patientId = "";
+                string firstName = null;
+                string middleName = null;
+                string lastName = null;
+                string isEnrolled = null;
+
+                PatientLookupManager patientLookup = new PatientLookupManager();
+
+
+                patientId = dataPayLoad.FirstOrDefault(x => x.name == "patientId").value;
+                firstName = Convert.ToString(dataPayLoad.FirstOrDefault(x => x.name == "firstName").value);
+                middleName = Convert.ToString(dataPayLoad.FirstOrDefault(x => x.name == "middleName").value);
+                lastName = Convert.ToString(dataPayLoad.FirstOrDefault(x => x.name == "lastName").value);
+                isEnrolled = Convert.ToString(dataPayLoad.FirstOrDefault(x => x.name == "isEnrolled").value);
+
+                //patientId = patientId != "" ? patientId : 0;
+
+                if (patientId != "" || !string.IsNullOrWhiteSpace(firstName) || !string.IsNullOrWhiteSpace(middleName) || !string.IsNullOrWhiteSpace(lastName))
+                {
+                    jsonData = patientLookup.GetPatientSearchListPayload(patientId, isEnrolled, firstName, middleName, lastName);
+                }
+                else
+                {
+                    jsonData = patientLookup.GetPatientSearchListPayload(isEnrolled);
+                }
+
+                if (jsonData.Count > 0)
+                {
+                    var sEcho = Convert.ToInt32(dataPayLoad.FirstOrDefault(x => x.name == "sEcho").value);
+                    var displayLength = Convert.ToInt32(dataPayLoad.FirstOrDefault(x => x.name == "iDisplayLength").value);
+                    var displayStart = Convert.ToInt32(dataPayLoad.FirstOrDefault(x => x.name == "iDisplayStart").value);
+
+
+                    // var dateOfBirth = Convert.ToDateTime(dataPayLoad.FirstOrDefault(x => x.name == "DateOfBirth").value);
+                    // var gender = Convert.ToInt32(dataPayLoad.FirstOrDefault(x => x.name == "gender").value);
+                    var facility = Convert.ToInt32(dataPayLoad.FirstOrDefault(x => x.name == "facility").value);
+
+                    var sortCol = Convert.ToInt32(dataPayLoad.FirstOrDefault(x => x.name == "iSortCol_0").value);
+                    string sortDir = dataPayLoad.FirstOrDefault(x => x.name == "sSortDir_0").value;
+                    string searchString = dataPayLoad.FirstOrDefault(x => x.name == "sSearch").value;
+
+
+                    //if (!string.IsNullOrWhiteSpace(patientId))
+                    //{
+                    //    //jsonData = jsonData.Where(x => x.EnrollmentNumber == patientId).ToList();
+                    //    jsonData = jsonData.Where(x => x.EnrollmentNumber.Contains(patientId)).ToList();
+                    //}
+
+                    //if (!string.IsNullOrWhiteSpace(firstName))
+                    //{
+                    //    jsonData =
+                    //        jsonData.Where(x => x.FirstName.ToLower().Contains(firstName.ToLower()))
+                    //            .ToList();
+                    //}
+                    //if (!string.IsNullOrWhiteSpace(lastName))
+                    //{
+                    //    jsonData =
+                    //        jsonData.Where(x => x.LastName.ToLower().Contains(lastName.ToLower()))
+                    //            .ToList();
+                    //}
+                    //if (!string.IsNullOrWhiteSpace(middleName))
+                    //{
+                    //    jsonData =
+                    //        jsonData.Where(x => x.MiddleName.ToLower().Contains(middleName.ToLower()))
+                    //            .ToList();
+                    //}
+
+                    /*-- order columns based on payload received -- */
+                    switch (sortCol)
+                    {
+                        case 0:
+                            jsonData = (sortDir == "desc")
+                                ? jsonData = jsonData.OrderByDescending(x => x.Id).ToList()
+                                : jsonData.OrderBy(x => x.Id).ToList();
+
+                            break;
+                        case 1:
+                            jsonData = (sortDir == "desc")
+                                ? jsonData = jsonData.OrderByDescending(x => x.EnrollmentNumber).ToList()
+                                : jsonData.OrderBy(x => x.EnrollmentNumber).ToList();
+                            break;
+                        case 2:
+                            jsonData = (sortDir == "desc")
+                                ? jsonData = jsonData.OrderByDescending(x => x.FirstName).ToList()
+                                : jsonData.OrderBy(x => x.FirstName).ToList();
+                            break;
+                        case 3:
+                            jsonData = (sortDir == "desc")
+                                ? jsonData = jsonData.OrderByDescending(x => x.MiddleName).ToList()
+                                : jsonData.OrderBy(x => x.MiddleName).ToList();
+                            break;
+                        case 4:
+                            jsonData = (sortDir == "desc")
+                                ? jsonData.OrderBy(x => x.LastName).ToList()
+                                : jsonData = jsonData.OrderByDescending(x => x.LastName).ToList();
+                            break;
+                        case 5:
+                            jsonData = (sortDir == "desc")
+                                ? jsonData.OrderBy(x => x.DateOfBirth).ToList()
+                                : jsonData = jsonData.OrderByDescending(x => x.DateOfBirth).ToList();
+                            break;
+                        case 6:
+                            jsonData = (sortDir == "desc")
+                                ? jsonData.OrderBy(x => LookupLogic.GetLookupNameById(x.Sex)).ToList()
+                                : jsonData =
+                                    jsonData.OrderByDescending(x => LookupLogic.GetLookupNameById(x.Sex)).ToList();
+                            break;
+                        case 7:
+                            jsonData = (sortDir == "desc")
+                                ? jsonData = jsonData.OrderByDescending(x => x.EnrollmentDate).ToList()
+                                : jsonData.OrderBy(x => x.EnrollmentDate).ToList();
+                            break;
+                        case 8:
+                            break;
+                    }
+
+                    /*-- implement search -- */
+                    if (searchString.Length > 0 || !string.IsNullOrWhiteSpace(searchString))
+                    {
+                        jsonData = jsonData.Where(x => x.EnrollmentNumber.Equals(searchString) ||
+                                                       x.FirstName
+                                                           .ToLower()
+                                                           .Contains(searchString.ToLower()) ||
+                                                       x.MiddleName
+                                                           .ToLower()
+                                                           .Contains(searchString.ToLower()) ||
+                                                       x.LastName
+                                                           .ToLower()
+                                                           .Contains(searchString.ToLower()) ||
+                                                       LookupLogic.GetLookupNameById(x.Sex)
+                                                           .Contains(searchString.ToLower()) ||
+                                                       x.EnrollmentNumber.Contains(searchString.ToString()) ||
+                                                       x.MobileNumber.Contains(searchString)
+                            )
+                            .ToList();
+                        filteredRecords = jsonData.Count();
+                    }
+                    else
+                    {
+                        filteredRecords = jsonData.Count();
+                    }
+
+                    /*---- Perform paging based on request */
+                    //  var skip = (displayLength * displayStart);
+                    // var ableToSkip = skip < displayLength;
+                    //string patientStatus;
+                    totalCount = jsonData.Count();
+                    jsonData = jsonData.Skip(displayStart).Take(displayLength).ToList();
+                   
+
+           
+                    var json = new
+                    {
+                        draw = sEcho,
+                        recordsTotal = totalCount,
+                        recordsFiltered = filteredRecords,
+
+                      
+                        data = jsonData.Select(x => new string[]
+                        {
+
+//(isEnrolled=="notEnrolledClients")? x.PersonId.ToString(): x.Id.ToString(),
+                            (isEnrolled=="notEnrolledClients")? "0": x.Id.ToString(),
+                            x.EnrollmentNumber.ToString(),
+                            x.FirstName,
+                            x.MiddleName,
+                            x.LastName,
+                            x.DateOfBirth.ToString("dd-MMM-yyyy"),
+                            LookupLogic.GetLookupNameById(x.Sex),
+                           
+                    //x.RegistrationDate.ToString("dd-MMM-yyyy"),
+                    (isEnrolled=="notEnrolledClients")? Convert.ToDateTime(x.RegistrationDate).ToString("dd-MMM-yyyy") : x.EnrollmentDate.ToString("dd-MMM-yyyy"),
+                            x.PatientStatus.ToString(),
+                              x.PersonId.ToString()
+                             //relations.Where(t=>t!=null &&t.PersonId==Convert.ToInt32(x.PersonId)).Select(t=>t.RelationshipTypeId.ToString()).DefaultIfEmpty("null").FirstOrDefault(),
+                             //relations.Where(t=>t!=null && t.PersonId==Convert.ToInt32(x.PersonId)).Select(t=>t.BaselineResult.ToString()).DefaultIfEmpty("null").FirstOrDefault(),
+                             //relations.Where(t=>t!=null &&t.PersonId==Convert.ToInt32(x.PersonId)).Select(t=>t.BaselineDate.ToString()).DefaultIfEmpty("null").FirstOrDefault(),
+                             //patientshivtest.Where(t=>t!=null &&t.PersonId==Convert.ToInt32(x.PersonId)).Select(t=>t.TestingResult.ToString()).DefaultIfEmpty("null").FirstOrDefault(),
+                             //patientshivtest.Where(t=>t!=null &&t.PersonId==Convert.ToInt32(x.PersonId)).Select(t=>t.TestingDate.ToString()).DefaultIfEmpty("null").FirstOrDefault(),
+                             // patientshivtest.Where(t=>t!=null &&t.PersonId==Convert.ToInt32(x.PersonId)).Select(t=>t.ReferredToCare.ToString()).DefaultIfEmpty("null").FirstOrDefault(),
+                             //patientslinkage.Where(t=>t!=null &&t.PersonId==Convert.ToInt32(x.PersonId)).Select(t=>t.LinkageDate.ToString()).DefaultIfEmpty("null").FirstOrDefault(),
+                          
+                            //,utility.Decrypt(x.MobileNumber)
+                        })
+                    };
+
+                    //output = JsonConvert.SerializeObject(json);
+                    output = new JavaScriptSerializer().Serialize(json);
+                }
+            }
+            catch (Exception e)
+            {
+                //Dispose();
+                output = e.Message;
+            }
+            finally
+            {
+                Dispose();
+            }
+            return output;
+        }
+
 
         [WebMethod]
         public List<PatientFamilyDisplay> GetFamilyTestings(string patientId)

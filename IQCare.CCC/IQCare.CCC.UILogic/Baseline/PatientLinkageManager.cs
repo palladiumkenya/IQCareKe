@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Application.Presentation;
+using Entities.CCC.Baseline;
 using Interface.CCC.Baseline;
 
 namespace IQCare.CCC.UILogic.Baseline
@@ -15,6 +16,13 @@ namespace IQCare.CCC.UILogic.Baseline
         public bool CccNumberExists(string cccNumber)
         {
             return _mgr.CccNumberExists(cccNumber);
+        }
+
+
+        public PatientLinkage GetPatientLinkage(int personId)
+        {
+
+            return _mgr.GetPatientLinkage(personId).FirstOrDefault();
         }
     }
 }

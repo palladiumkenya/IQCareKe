@@ -501,6 +501,19 @@ namespace IQCare.CCC.UILogic
             }
         }
 
+        public static List<LookupItemView> GetLookItemByGroup(string groupname)
+        {
+            try
+            {
+                ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager,BusinessProcess.CCC");
+                return lookupManager.GetLookItemByGroup(groupname);
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
         public PatientLookup GetPatientById(int patientId)
 
         {

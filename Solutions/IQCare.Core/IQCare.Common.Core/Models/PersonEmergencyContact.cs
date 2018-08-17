@@ -14,10 +14,13 @@ namespace IQCare.Common.Core.Models
 
         public string MobileContact { get; set; }
 
+        public int? ContactType { get; set; }
         public bool DeleteFlag { get; set; }
         public int CreatedBy { get; set; }
         public DateTime CreateDate { get; set; }
         public string AuditData { get; set; }
+
+        public bool? RegisteredToClinic { get; set; }
     }
 
 }

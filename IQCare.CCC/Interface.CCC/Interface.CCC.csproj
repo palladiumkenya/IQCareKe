@@ -73,9 +73,13 @@
     <Compile Include="Encounter\INeonatalHistory.cs" />
     <Compile Include="Encounter\IPatientAdherenceAssessessment.cs" />
     <Compile Include="Encounter\IPatientCareEnding.cs" />
+    <Compile Include="Encounter\IPatientHighRiskManager.cs" />
     <Compile Include="Encounter\IPatientClinicalNotes.cs" />
     <Compile Include="Encounter\IPatientLabDetails.cs" />
     <Compile Include="Encounter\IPatientLabOrder.cs" />
+    <Compile Include="Encounter\IPatientOIManager.cs" />
+    <Compile Include="Encounter\IPatientPartners.cs" />
+    <Compile Include="Encounter\IPatientSexualHistoryManager.cs" />
     <Compile Include="Encounter\IPatientWhoStageManager.cs" />
     <Compile Include="Encounter\ISocialHistory.cs" />
     <Compile Include="Enrollment\IHivReConfirmatoryTestManager.cs" />

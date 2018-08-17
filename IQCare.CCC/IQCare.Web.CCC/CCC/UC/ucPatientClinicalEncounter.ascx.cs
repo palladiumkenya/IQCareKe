@@ -182,12 +182,28 @@ namespace IQCare.Web.CCC.UC
                 lookUp.populateDDL(ctxAdherance, "CTXAdherence");
                 lookUp.populateDDL(ddlAllergySeverity, "ADRSeverity");
                 lookUp.populateDDL(stabilityStatus, "StabilityAssessment");
+                lookUp.populateDDL(ddlPartnerStatus, "HivStatus");
+                lookUp.populateDDL(ddlPartnerGender, "Gender");
+                lookUp.populateDDL(ddlSexualOrientation, "SexualOrientation");
+
+                var ddlHighRiskBehaviour = this.FindControl("ddlHighRiskBehaviour") as System.Web.UI.HtmlControls.HtmlSelect;
+               // lookUp.populateDDL(ddlHighRiskBehaviour, "HighRisk");
                 //lookUp.populateDDL(WHOStage, "WHOStage");
                 //Patient Nutrition assessment notes and screening
                 getPatientNotesandScreening();
                 populatePNS();
                 getPNSData();
 
+                //List<LookupItemView> highriskorientation = mgr.GetLookItemByGroup("HighRisk");
+                //if (highriskorientation != null && highriskorientation.Count > 0)
+                //{
+                //    DifferentiatedCare.Items.Add(new ListItem("select", "0"));
+                //    foreach (var k in highriskorientation)
+                //    {
+                //        ddlHighRiskBehaviour.Items.Add(new ListItem(k.ItemDisplayName, k.ItemId.ToString()));
+                //    }
+                //}
+                //ddlHighRiskBehaviour.Attributes["multiple"] = "multiple";
                 var patientVitals = new PatientVitalsManager();
                 PatientVital patientTriage = patientVitals.GetByPatientId(Convert.ToInt32(Session["PatientPK"].ToString()));
                 if (patientTriage != null)
