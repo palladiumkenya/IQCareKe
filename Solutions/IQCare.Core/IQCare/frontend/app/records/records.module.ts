@@ -27,6 +27,7 @@ import { GenderResolver } from './_services/gender.resolver';
 import { MaritalStatusResolver } from './_services/maritalstatus.resolver';
 import { EducationLevelResolver } from './_services/educationallevel.resolver';
 import { RelationshipResolver } from './_services/relationship.resolver';
+import { ViewComponent } from './person/view/view.component';
 
 @NgModule({
     imports: [
@@ -47,7 +48,7 @@ import { RelationshipResolver } from './_services/relationship.resolver';
         MatSnackBarModule, MatStepperModule, MatTabsModule, MatToolbarModule, MatTooltipModule,
         SharedModule
     ],
-    declarations: [SearchComponent, RegisterComponent],
+    declarations: [SearchComponent, RegisterComponent, ViewComponent],
     providers: [
         CountyResolver,
         CountyService,
