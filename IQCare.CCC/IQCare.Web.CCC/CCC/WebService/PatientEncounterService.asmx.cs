@@ -21,6 +21,8 @@ using Entities.CCC.Lookup;
 using System.Linq;
 using IQCare.CCC.UILogic.Screening;
 using Entities.CCC.Screening;
+using IQCare.CCC.UILogic.Visit;
+
 
 //using static Entities.CCC.Encounter.PatientEncounter;
 
@@ -73,6 +75,27 @@ namespace IQCare.Web.CCC.WebService
             public string msg { get; set; }
         }
 
+        public class PreviousHistoryOutcome
+        {
+            public List<HistoryOutcome> Orientation { get; set; }
+
+            public List<HistoryOutcome> Gender { get; set; }
+
+            public List<HistoryOutcome> HivStatus { get; set; }
+            public int noofpartners { get; set; }
+
+            public DateTime? VisitDate { get; set; }
+        }
+        public class HistoryOutcome
+        {
+
+            public int MasterId { get; set; }
+            public string MasterName { get; set; }
+            public string ItemValue { get; set; }
+
+            public int value { get; set; }
+
+        }
         public class HighRisk
         {
             public int Id { get; set; }
@@ -150,6 +173,135 @@ namespace IQCare.Web.CCC.WebService
             ArrayList arrayList = new ArrayList(list);
             return arrayList;
         }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
+        public string GetPreviousSexualHistory()
+        {
+            PatientHighRiskManager hr = new PatientHighRiskManager();
+            PatientSexualHistoryManager psh = new PatientSexualHistoryManager();
+            PatientPartnersManager partman = new PatientPartnersManager();
+            PatientMasterVisitManager pmv = new PatientMasterVisitManager();
+            int patientId = Convert.ToInt32(Session["PatientPK"].ToString());
+
+
+            int userId = Convert.ToInt32(Session["AppUserId"]);
+            int patientMasterVisitId = Convert.ToInt32(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString());
+            List<Entities.CCC.Visit.PatientMasterVisit> pmastervisit = pmv.GetPatientVisits(patientId);
+            Entities.CCC.Visit.PatientMasterVisit pmlist = pmastervisit.FindAll(x => x.Id != patientMasterVisitId && x.Id < patientMasterVisitId).OrderByDescending(x => x.Id).FirstOrDefault();
+           int  PreviousMasterVisitId = pmlist.Id;
+
+            DateTime? patientvisitdate = pmlist.VisitDate;
+            PatientPartner pat = partman.GetPatientPartner(patientId, PreviousMasterVisitId);
+
+            List<PatientSexualHistory> patienthistory = psh.GetPatientSexualHistoryList(patientId, PreviousMasterVisitId);
+           
+            if (pat != null)
+            {
+                numberofpartners = pat.NoofPartners.ToString();
+            }
+            List<HistoryOutcome> Orient = new List<HistoryOutcome>();
+            List<HistoryOutcome> Gen = new List<HistoryOutcome>();
+            List<HistoryOutcome> hst = new List<HistoryOutcome>();
+            List<LookupItemView> lSexualOrientation = LookupLogic.GetLookItemByGroup("SexualOrientation");
+            List<LookupItemView> lGender = LookupLogic.GetLookItemByGroup("Gender");
+            List<LookupItemView> lHivStatus = LookupLogic.GetLookItemByGroup("HivStatus");
+            if (patienthistory.Count > 0)
+            {
+                foreach (LookupItemView lt in lSexualOrientation)
+                {
+                    List<PatientSexualHistory> list = patienthistory.Where(x => x.PatientSexualOrientation == lt.ItemId).ToList();
+                    if (list != null && list.Count > 0)
+                    {
+                        int value = list.Count;
+                        string itemDisplay = lt.ItemName;
+                        HistoryOutcome ho = new HistoryOutcome();
+                        ho.ItemValue = itemDisplay;
+                        ho.value = value;
+                        ho.MasterId = lt.MasterId;
+                        ho.MasterName = lt.MasterName;
+                        Orient.Add(ho);
+
+                    }
+
+                    else
+                    {
+                        Orient = null;
+                    }
+
+                }
+
+                foreach (LookupItemView lt in lGender)
+                {
+                    List<PatientSexualHistory> list = patienthistory.Where(x => x.PartnerGender == lt.ItemId).ToList();
+                    if (list != null && list.Count > 0)
+                    {
+                        int value = list.Count;
+                        string itemDisplay = lt.ItemName;
+                        HistoryOutcome ho = new HistoryOutcome();
+                        ho.ItemValue = itemDisplay;
+                        ho.value = value;
+                        ho.MasterId = lt.MasterId;
+                        ho.MasterName = lt.MasterName;
+                        Gen.Add(ho);
+
+                    }
+
+                    else
+                    {
+                        Gen = null;
+                    }
+
+                }
+
+                foreach (LookupItemView lt in lHivStatus)
+                {
+                    List<PatientSexualHistory> list = patienthistory.Where(x => x.PartnerHivStatus == lt.ItemId).ToList();
+                    if (list != null && list.Count > 0)
+                    {
+                        int value = list.Count;
+                        string itemDisplay = lt.ItemName;
+                        HistoryOutcome ho = new HistoryOutcome();
+                        ho.ItemValue = itemDisplay;
+                        ho.value = value;
+                        hst.Add(ho);
+
+                    }
+                    else
+                    {
+                        hst = null;
+                    }
+
+
+                }
+            }
+           
+            PreviousHistoryOutcome pho = new PreviousHistoryOutcome();
+
+            if (numberofpartners == null)
+            {
+                if (patienthistory != null && patienthistory.Count > 0)
+                {
+                    numberofpartners = patienthistory.Count.ToString();
+                }
+            }
+            else
+            {
+
+                numberofpartners = "0";
+            }
+
+          
+            pho.noofpartners = Convert.ToInt32(numberofpartners);
+            pho.Gender = Gen;
+            pho.Orientation = Orient;
+            pho.HivStatus = hst;
+            pho.VisitDate = patientvisitdate;
+            return new JavaScriptSerializer().Serialize(pho);
+
+
+        }
+
         [WebMethod(EnableSession =true)]
         [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
         public string GetSexualHistory()
@@ -157,10 +309,17 @@ namespace IQCare.Web.CCC.WebService
             PatientHighRiskManager hr = new PatientHighRiskManager();
             PatientSexualHistoryManager psh = new PatientSexualHistoryManager();
             PatientPartnersManager partman = new PatientPartnersManager();
+            
+            
+            
             int patientId = Convert.ToInt32(Session["PatientPK"].ToString());
+        
+
             int userId = Convert.ToInt32(Session["AppUserId"]);
             int patientMasterVisitId = Convert.ToInt32(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString());
+          
            
+
             PatientScreeningManager pscreen = new PatientScreeningManager();
             List<SexualHistory> sexuallist = new List<SexualHistory>();
             PatientScreening psc=  pscreen.GetCurrentPatientScreening(patientId, patientMasterVisitId);
@@ -335,9 +494,10 @@ namespace IQCare.Web.CCC.WebService
 
 
 
-            int partners = Convert.ToInt32(numberofpartners);
+           
             if (!String.IsNullOrEmpty(numberofpartners))
             {
+                int partners = Convert.ToInt32(numberofpartners);
                 if (partners > 0)
                 {
                     PatientPartner pat = new PatientPartner();
@@ -389,6 +549,25 @@ namespace IQCare.Web.CCC.WebService
                     }
                 }
           
+            }
+            else
+            {
+                PatientPartner pat = new PatientPartner();
+                pat = partman.GetPatientPartner(patientId, patientMasterVisitId);
+                if (pat != null)
+                {
+
+                    pat.UpdateDate = Convert.ToDateTime(DateTime.Now);
+                    pat.CreatedBy = userId;
+                    pat.DeleteFlag = true;
+                    PatientPartner patupd = partman.UpdatePatientPartner(pat);
+                    if (patupd != null)
+                    {
+                        Msg += "Number of partners  in last  6 months has been updated";
+                    }
+                }
+
+
             }
             if (sexualhist !=null)
             {

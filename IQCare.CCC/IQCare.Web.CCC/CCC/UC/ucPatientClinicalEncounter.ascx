@@ -1059,12 +1059,53 @@
 
 								</div>
 							</div>
+                            <div id="divPreviousSexualHistory" class="panel panel-info">
+                                 <div class="panel-body"> 
+                                                 <div class="col-md-12 form-group">
+								
+                                <label class="control-label pull-left">Previous Sexual History for Last Visit</label>
+							     
+                               
+                                </div>
+                                <div class="col-md-12" >
+                                    <div class="col-md-4"><label class="control-label  pull-left text-primary">*Visit Date</label></div>  
+												 
+                                   <div class="col-md-4"><input class="form-control input-sm" id="txtSexualHistoryVisitDate" type="text" 
+                                                   runat="server" clientidmode="Static"  min="0"  disabled />
+                                    </div>
+							     </div>
+                                <div class="col-md-12 " id="PreviousSexualOutcome">
+                                    <label class="control-label pull-left">No History</label>
+                                </div>
+                                <div class="col-md-12 " id="PreviousSexualHistory">
+                                     <div class="mt-2 col-md-12 form-group " style="margin-top:20px;">
+										<div class="panel panel-primary">
+											<div class="panel-heading">Sexual History Summary</div>
+												<div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden;">
+												<table id="dtlPreviousHistory" class="table table-condensed table-bordered auto" width="100%">
+													
+                                                   
+												</table>
+
+											</div>
+										</div>
+									</div>
+
+                                 </div>
+                                </div>
+                            </div>
                             <div id="divSexualHistory" class="panel panel-info">
                             <div class="panel-body"> 
         
                                <div class="col-md-12 form-group">
-								<label class="control-label pull-left">Sexual History</label>
-								</div>
+								
+                                <label class="control-label pull-left">Sexual History</label>
+							     
+                               
+                                </div>
+                                
+                                
+                                 
                                  <div class="col-md-12 ">
                                      <div class="col-md-12">
                                      <div class="col-md-8">
@@ -1118,25 +1159,25 @@
 												<asp:DropDownList ID="ddlSexualOrientation" runat="server" CssClass="form-control input-sm" ClientIDMode="Static"></asp:DropDownList>
 											</div>
 									 </div>
-                                     <div class="col-md-12 sexhistory">
+                                     <div class=" col-md-12 sexhistory" >
                                          <div class="col-md-12">
-                                            <label class="control-label pull-left">High Risk Behaviour</label>
-											</div>
-											<div class="col-md-12">
-                                                <select class="form-control select2" multiple="multiple"  data-placeholder="Select" id="ddlHighRiskBehaviour"" style="width: 100%;">
+                                          <label class="control-label pull-left">High Risk Behaviour</label>
+									     </div>
+										<div class="col-md-12">
+                                                <div class="col-md-9">
+                                                <select class="form-control select2" multiple="multiple"  data-placeholder="Select" id="ddlHighRiskBehaviour" style="width: 100%;">
                                                 </select>
-											</div>
-                                     </div>
-                                     <div class="col-md-12 sexhistory">
 
-                                      </div>
-                                     <div class="col-md-12 sexhistory">
-                                        
-								          <div class="col-md-12">
+                                                </div>
+
+                                                 <div class="col-md-3">
 												<button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddSexualHist" onclick="addSexualHistory()">Add</button>
 											</div>
 										</div>
-                                     <div class="col-md-12 form-group sexhistory">
+                                     </div>
+                                 
+                                     
+                                     <div class="mt-2 col-md-12 form-group sexhistory" style="margin-top:20px;">
 										<div class="panel panel-primary">
 											<div class="panel-heading">SexualHistory</div>
 											<div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden;">
@@ -2433,6 +2474,8 @@
         //$("#IptOutcomeDetailsForm").hide();
         //$("#onIpt").prop("disabled", true);
         $("#MMAS8").hide();
+
+        
         //  $("#EverBeenOnIpt").prop("disabled", true);
         //showHideFPControls();
         loadPresentingComplaints();
@@ -2447,7 +2490,7 @@
         GetPatientExaminationTypeID();
         loadHighRiskBehavior('HighRisk');
         GetPatientSexualHistory();
-
+        GetPreviousSexualHistory();
         var WhoStage1 = 'WHOStageIConditions';
         var WhoStage2 = 'WHOStageIIConditions';
         var WhoStage3 = 'WHOStageIIIConditions';
@@ -2830,6 +2873,46 @@
             if (this.value == 'No') {
 
                 $(".sexhistory").hide();
+
+                
+                if (arrTextSexualHistory.length > 0) {
+                    index = arrTextSexualHistory.length;
+                    if (parseInt(noofpartners) > 0) {
+                        if (noofpartners >= index) {
+                            noofpartners = parseInt(noofpartners) - parseInt(index);
+                            $('#txtPartners').val(noofpartners);
+                        }
+                        else {
+                            $('#txtPartners').val("");
+                        }
+
+                    }
+                    else {
+                        $('#txtPartners').val("");
+                    }
+                
+                    for (var i = arrSexualHistory.length - 1; i >= 0;i-=1) {
+                        
+                        if (arrSexualHistory[i].id > 0 ) {
+                            
+
+                            
+
+                            arrSexualHistory[i].DeleteFlag = true;
+                          
+                        }
+                        else {
+                       
+                            
+                            arrSexualHistory.splice(i, 1);
+                            
+                        }
+                    }
+                    arrTextSexualHistory.length = 0;
+                }
+               
+                $("#dtlSexualHistory>tbody:first").empty();
+                
 
             }
             else if (this.value == 'Yes') {
@@ -3373,24 +3456,7 @@
 						evt.preventDefault();
 					}
 				}
-				else if (data.step === 2) {
-					if (data.direction === 'previous') {
-						return;
-					} else {
-						savePatientEncounterChronicIllness();
-					}
-					//if ($("#datastep2").parsley().validate()) {
-
-                        if (($("#cough").val() === 'True') || ($("#fever").val() === 'True') || ($("#weightLoss").val() === 'True') || ($("#nightSweats").val() === 'True')) {
-                            addPatientIcfAction();
-                        }
-                        savePatientEncounterPresentingComplaint();
-                    } else {
-                        stepError = $('.parsley-error').length === 0;
-                        totalError += stepError;
-                        evt.preventDefault();
-                    }
-                }
+				
                 else if (data.step === 2) {
                     if (data.direction === 'previous') {
                         return;
@@ -3716,6 +3782,131 @@
                 }
             });
         }
+        function GetPreviousSexualHistory() {
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientEncounterService.asmx/GetPreviousSexualHistory",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var ArrayResults = [];
+                    var strTable = "";
+                    ArrayResults = JSON.parse(response.d);
+                    $("#PreviousSexualHistory").show();
+                    
+                       
+                    if (!(ArrayResults.Gender == null || ArrayResults.Orientation == null || ArrayResults.HivStatus == null || ArrayResults.VisitDate == null || ArrayResults.noofpartners == null  ||ArrayResults.noofpartners== 0)) {
+                        $("#PreviousSexualHistory").show();
+
+                    
+                  
+
+
+                    if (!(ArrayResults.VisitDate == null)) {
+                        var visitdate = new Date();
+                        visitdate = moment(ArrayResults.VisitDate).format('YYYY-MM-DD');
+                        $("#txtSexualHistoryVisitDate").val(visitdate.toString());
+                    }
+
+                    if (!(ArrayResults.Gender == null || ArrayResults.Orientation == null || ArrayResults.HivStatus == null)) {
+
+                        if (!(ArrayResults.noofpartners == null)) {
+                            if (!(ArrayResults.noofpartners == undefined)) {
+                                strTable += "<tr><th td align='left' class='col_sm-1'>Partners</th></tr>";
+                                strTable += "<tr>";
+                                strTable += "<td  align='left'>";
+                                strTable += "Number of Partners"
+                                strTable += "</td>"
+                                strTable += "<td  align='left'>";
+                                strTable += ArrayResults.noofpartners;
+                                strTable += "</td>"
+                                strTable += "</tr>";
+
+                            }
+                        }
+                        if (!(ArrayResults.Gender == null)) {
+
+                            if (ArrayResults.Gender.length > 0) {
+                                strTable += "<tr><th td align='left'>Gender</th></tr>"
+                                for (var i = 0; i < ArrayResults.Gender.length; i++) {
+                                    if (!(ArrayResults.Gender[i].value == 0)) {
+                                        strTable += "<tr>";
+                                        strTable += "<td align='left'>";
+                                        strTable += ArrayResults.Gender[i].ItemValue;
+                                        strTable += "</td>"
+                                        strTable += "<td align='left'>";
+                                        strTable += ArrayResults.Gender[i].value;
+                                        strTable += "</td>"
+                                        strTable += "</tr>";
+                                    }
+                                }
+                            }
+
+
+                        }
+                        if (!(ArrayResults.HivStatus == null)) {
+
+                            if (ArrayResults.HivStatus.length > 0) {
+
+                                strTable += "<tr><th  align='left' >HIVStatus</th></tr>"
+                                for (var i = 0; i < ArrayResults.HivStatus.length; i++) {
+                                    if (!(ArrayResults.HivStatus[i].value == 0)) {
+                                        strTable += "<tr>";
+                                        strTable += "<td align='left' style='width:20%'>";
+                                        strTable += ArrayResults.HivStatus[i].ItemValue;
+                                        strTable += "</td>"
+                                        strTable += "<td align='left' style='width:20%'>"
+                                        strTable += ArrayResults.HivStatus[i].value;
+                                        strTable += "</td>"
+                                        strTable += "</tr>";
+                                    }
+                                }
+                            }
+
+
+                        }
+                        if (!(ArrayResults.Orientation == null)) {
+
+                            if (ArrayResults.Orientation.length > 0) {
+                                strTable += "<tr><th align='left'>Orientation</th></tr>"
+                                for (var i = 0; i < ArrayResults.Orientation.length; i++) {
+                                    if (!(ArrayResults.Orientation[i].value == 0)) {
+                                        strTable += "<tr>";
+                                        strTable += "<td align='left'>";
+                                        strTable += ArrayResults.Orientation[i].ItemValue;
+                                        strTable += "</td>"
+                                        strTable += "<td align='left'>";
+                                        strTable += ArrayResults.Orientation[i].value;
+                                        strTable += "</td>"
+                                        strTable += "</tr>";
+                                    }
+                                }
+                            }
+
+
+                        }
+                        $("#PreviousSexualOutcome").hide();
+                        $("#PreviousSexualHistory").show();
+                        $("#dtlPreviousHistory").append('' + strTable  + '');
+
+
+                    }
+                    }
+
+                    else {
+                        $("#PreviousSexualHistory").hide();
+                        $("#PreviousSexualOutcome").show();
+                    }
+                },
+                error: function (response) {
+
+                    toastr.error(response.d, "Error Loading the Patient OIS");
+                }
+
+
+            });
+
+        }
         function GetPatientSexualHistory() {
             $.ajax({
                 type: "POST",
@@ -3898,7 +4089,7 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
-                    toastr.success(response.d, "Save Patient Sexual History");
+                    toastr.success( "Save Patient Sexual History");
                 
                     var ArrayResults = [];
                     ArrayResults = JSON.parse(response.d);
@@ -3911,7 +4102,7 @@
 
                         }
                     }
-                    console.log(arrSexualHistory.msg);
+                    
 
 
                 },
@@ -5248,8 +5439,8 @@
             }
         });
     }
-		});
-	}
+	
+	
     function saveNutritionAssessment()
     {
         $("#nutritionscreeningsection .narbList").each(function () {
@@ -5305,7 +5496,7 @@
             toastr.success("Nutrition Assessment Saved");
         }
     }
-    }
+    
 
     function GetGBVScreeningStatus() {
         var patientId ="<%=PatientId%>";
@@ -5601,7 +5792,8 @@
 
                 showClear: true,
                 showClose: true,
-                inline: true
+               
+               inline: true
             }).css({
                 'position': 'resolute', 'z-index': '4000', 'overflow': 'hidden'
             });

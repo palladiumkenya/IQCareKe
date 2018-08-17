@@ -29,7 +29,7 @@ namespace BusinessProcess.CCC
             using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 var PatientPartner = unitOfWork.PatientPartnersRepository.FindBy(
-                    x => x.PatientId == patientId && x.PatientMasterVisitId == patientMasterVisitId ).FirstOrDefault();
+                    x => x.PatientId == patientId && x.PatientMasterVisitId == patientMasterVisitId && !x.DeleteFlag ).FirstOrDefault();
                 unitOfWork.Dispose();
                 return PatientPartner;
             }
@@ -39,7 +39,7 @@ namespace BusinessProcess.CCC
             using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 var OI = unitOfWork.PatientPartnersRepository.FindBy(
-                    x => x.PatientId == patientId && x.PatientMasterVisitId == patientMasterVisitId).ToList();
+                    x => x.PatientId == patientId && x.PatientMasterVisitId == patientMasterVisitId && !x.DeleteFlag).ToList();
                 unitOfWork.Dispose();
                 return OI.ToList();
             }
