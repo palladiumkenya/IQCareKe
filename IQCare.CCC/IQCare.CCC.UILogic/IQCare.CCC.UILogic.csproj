@@ -108,6 +108,7 @@
     <Compile Include="Adherence\AdherenceLogic.cs" />
     <Compile Include="assessment\PatientPsychosocialCriteriaManager.cs" />
     <Compile Include="assessment\PatientSupportSystemCriteriaManager.cs" />
+    <Compile Include="Baseline\PatientHivTestingManager.cs" />
     <Compile Include="Baseline\INHProphylaxisManager.cs" />
     <Compile Include="Baseline\PatientBaselineAssessmentManager.cs" />
     <Compile Include="Baseline\PatientArvHistoryManager.cs" />
@@ -167,11 +168,15 @@
     <Compile Include="PatientConsentManager.cs" />
     <Compile Include="PatientEncounterLogic.cs" />
     <Compile Include="PatientDisclosureManager.cs" />
+    <Compile Include="PatientHighRiskManager.cs" />
     <Compile Include="PatientLookupManager.cs" />
     <Compile Include="PatientManager.cs" />
     <Compile Include="PatientNeonatalManager.cs" />
+    <Compile Include="PatientOIManager.cs" />
+    <Compile Include="PatientPartnersManager.cs" />
     <Compile Include="PatientPopulationManager.cs" />
     <Compile Include="PatientServiceEnrollmentLookupManager.cs" />
+    <Compile Include="PatientSexualHistoryManager.cs" />
     <Compile Include="PatientStabilitySummaryManager.cs" />
     <Compile Include="PatientTreatmentSupporterLookupManager.cs" />
     <Compile Include="PatientTreatmentSupporterManager.cs" />

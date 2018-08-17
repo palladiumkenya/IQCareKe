@@ -157,121 +157,157 @@ namespace IQCare.Web.CCC.UC {
         protected global::System.Web.UI.HtmlControls.HtmlTextArea complaints;
         
         /// <summary>
-        /// tbInfected control.
+        /// ddlOnAntiTBDrugs control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList tbInfected;
+        protected global::System.Web.UI.WebControls.DropDownList ddlOnAntiTBDrugs;
         
         /// <summary>
-        /// onIpt control.
+        /// ddlICFCough control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList onIpt;
+        protected global::System.Web.UI.WebControls.DropDownList ddlICFCough;
         
         /// <summary>
-        /// EverBeenOnIpt control.
+        /// ddlICFFever control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList EverBeenOnIpt;
+        protected global::System.Web.UI.WebControls.DropDownList ddlICFFever;
         
         /// <summary>
-        /// cough control.
+        /// ddlICFWeight control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList cough;
+        protected global::System.Web.UI.WebControls.DropDownList ddlICFWeight;
         
         /// <summary>
-        /// fever control.
+        /// ddlICFNightSweats control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList fever;
+        protected global::System.Web.UI.WebControls.DropDownList ddlICFNightSweats;
         
         /// <summary>
-        /// weightLoss control.
+        /// ddlSputumSmear control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList weightLoss;
+        protected global::System.Web.UI.WebControls.DropDownList ddlSputumSmear;
         
         /// <summary>
-        /// nightSweats control.
+        /// ddlGeneXpert control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList nightSweats;
+        protected global::System.Web.UI.WebControls.DropDownList ddlGeneXpert;
         
         /// <summary>
-        /// sputum control.
+        /// ddlChestXray control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList sputum;
+        protected global::System.Web.UI.WebControls.DropDownList ddlChestXray;
         
         /// <summary>
-        /// geneXpert control.
+        /// ddlStartAntiTB control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList geneXpert;
+        protected global::System.Web.UI.WebControls.DropDownList ddlStartAntiTB;
         
         /// <summary>
-        /// chest control.
+        /// ddlInvitationofContacts control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList chest;
+        protected global::System.Web.UI.WebControls.DropDownList ddlInvitationofContacts;
         
         /// <summary>
-        /// antiTb control.
+        /// ddlEvaluatedforIPT control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList antiTb;
+        protected global::System.Web.UI.WebControls.DropDownList ddlEvaluatedforIPT;
         
         /// <summary>
-        /// contactsInvitation control.
+        /// tbTBRXStartDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList contactsInvitation;
+        protected global::System.Web.UI.WebControls.TextBox tbTBRXStartDate;
         
         /// <summary>
-        /// iptEvaluation control.
+        /// tbTBRXEndDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList iptEvaluation;
+        protected global::System.Web.UI.WebControls.TextBox tbTBRXEndDate;
+        
+        /// <summary>
+        /// ddlICFRegimen control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlICFRegimen;
+        
+        /// <summary>
+        /// ddlICFTBScreeningOutcome control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlICFTBScreeningOutcome;
+        
+        /// <summary>
+        /// ddlICFCurrentlyOnIPT control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlICFCurrentlyOnIPT;
+        
+        /// <summary>
+        /// ddlICFStartIPT control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlICFStartIPT;
         
         /// <summary>
         /// IptCw control.
@@ -299,15 +335,6 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::IQCare.Web.CCC.UC.ucIptOutcome IptOutcomeForm;
-        
-        /// <summary>
-        /// tbscreeningstatus control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList tbscreeningstatus;
         
         /// <summary>
         /// rdAnyAdverseEventsYes control.
@@ -488,6 +515,51 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtAllergyDate;
+        
+        /// <summary>
+        /// txtSexualHistoryVisitDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtSexualHistoryVisitDate;
+        
+        /// <summary>
+        /// txtPartners control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtPartners;
+        
+        /// <summary>
+        /// ddlPartnerStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlPartnerStatus;
+        
+        /// <summary>
+        /// ddlPartnerGender control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlPartnerGender;
+        
+        /// <summary>
+        /// ddlSexualOrientation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlSexualOrientation;
         
         /// <summary>
         /// ddlVaccine control.

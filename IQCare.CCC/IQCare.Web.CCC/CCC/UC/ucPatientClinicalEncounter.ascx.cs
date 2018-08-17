@@ -166,7 +166,7 @@ namespace IQCare.Web.CCC.UC
             if (!IsPostBack)
             {
                 LookupLogic lookUp = new LookupLogic();
-                lookUp.populateDDL(tbscreeningstatus, "TBStatus");
+                //lookUp.populateDDL(tbscreeningstatus, "TBStatus");
                 lookUp.populateDDL(nutritionscreeningstatus, "NutritionStatus");
                 lookUp.populateDDL(AdverseEventAction, "AdverseEventsActions");
                 lookUp.populateDDL(ddlAdverseEventSeverity, "ADRSeverity");
@@ -182,12 +182,44 @@ namespace IQCare.Web.CCC.UC
                 lookUp.populateDDL(ctxAdherance, "CTXAdherence");
                 lookUp.populateDDL(ddlAllergySeverity, "ADRSeverity");
                 lookUp.populateDDL(stabilityStatus, "StabilityAssessment");
+                lookUp.populateDDL(ddlPartnerStatus, "HivStatus");
+                lookUp.populateDDL(ddlPartnerGender, "Gender");
+                lookUp.populateDDL(ddlSexualOrientation, "SexualOrientation");
+
+                var ddlHighRiskBehaviour = this.FindControl("ddlHighRiskBehaviour") as System.Web.UI.HtmlControls.HtmlSelect;
+               // lookUp.populateDDL(ddlHighRiskBehaviour, "HighRisk");
                 //lookUp.populateDDL(WHOStage, "WHOStage");
                 //Patient Nutrition assessment notes and screening
+                lookUp.populateDDL(ddlOnAntiTBDrugs, "GeneralYesNo");
+                lookUp.populateDDL(ddlICFCough, "GeneralYesNo");
+                lookUp.populateDDL(ddlICFFever, "GeneralYesNo");
+                lookUp.populateDDL(ddlICFWeight, "GeneralYesNo");
+                lookUp.populateDDL(ddlICFNightSweats, "GeneralYesNo");
+                lookUp.populateDDL(ddlICFRegimen, "TBRegimen");
+                lookUp.populateDDL(ddlICFCurrentlyOnIPT, "GeneralYesNo");
+                lookUp.populateDDL(ddlICFStartIPT, "GeneralYesNo");
+                lookUp.populateDDL(ddlICFTBScreeningOutcome, "TBFindings");
+
+                lookUp.populateDDL(ddlSputumSmear, "SputumSmear");
+                lookUp.populateDDL(ddlGeneXpert, "GeneExpert");
+                lookUp.populateDDL(ddlChestXray, "ChestXray");
+                lookUp.populateDDL(ddlStartAntiTB, "GeneralYesNo");
+                lookUp.populateDDL(ddlInvitationofContacts, "GeneralYesNo");
+                lookUp.populateDDL(ddlEvaluatedforIPT, "GeneralYesNo");
                 getPatientNotesandScreening();
                 populatePNS();
                 getPNSData();
 
+                //List<LookupItemView> highriskorientation = mgr.GetLookItemByGroup("HighRisk");
+                //if (highriskorientation != null && highriskorientation.Count > 0)
+                //{
+                //    DifferentiatedCare.Items.Add(new ListItem("select", "0"));
+                //    foreach (var k in highriskorientation)
+                //    {
+                //        ddlHighRiskBehaviour.Items.Add(new ListItem(k.ItemDisplayName, k.ItemId.ToString()));
+                //    }
+                //}
+                //ddlHighRiskBehaviour.Attributes["multiple"] = "multiple";
                 var patientVitals = new PatientVitalsManager();
                 PatientVital patientTriage = patientVitals.GetByPatientId(Convert.ToInt32(Session["PatientPK"].ToString()));
                 if (patientTriage != null)
@@ -202,20 +234,14 @@ namespace IQCare.Web.CCC.UC
 
                 //if (Convert.ToInt32(Session["PatientMasterVisitId"]) > 0)
                 loadPatientEncounter();
-                
-            }
-            if (age < 5)
-            {
-                Control NeonatalHistoryCtrl = Page.LoadControl("~/CCC/UC/ucNeonatalHistory.ascx");
-                //divControls.Controls.Clear();
-                NeonatalHistoryPH.Controls.Add(NeonatalHistoryCtrl);
+
             }
 
-            if (age>=9 && age<= 19)
-            {
-                Control TannerStagingCtrl = Page.LoadControl("~/CCC/UC/ucTannerStaging.ascx");
-                TannersStagingPH.Controls.Add(TannerStagingCtrl);
-            }
+            Control NeonatalHistoryCtrl = Page.LoadControl("~/CCC/UC/ucNeonatalHistory.ascx");
+            NeonatalHistoryPH.Controls.Add(NeonatalHistoryCtrl);
+
+            Control TannerStagingCtrl = Page.LoadControl("~/CCC/UC/ucTannerStaging.ascx");
+            TannersStagingPH.Controls.Add(TannerStagingCtrl);
 
             Control SocialHoistoryCtrl = Page.LoadControl("~/CCC/UC/ucSocialHistory.ascx");
             SocialHistoryPH.Controls.Add(SocialHoistoryCtrl);
@@ -313,6 +339,7 @@ namespace IQCare.Web.CCC.UC
             DataTable theDT = patientEncounter.loadPatientEncounterPhysicalExam(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString(), Session["PatientPK"].ToString());
             DataTable theDTAdverse = patientEncounter.loadPatientEncounterAdverseEvents(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString(), Session["PatientPK"].ToString());
             bool isOnEdit = false;
+            LookupLogic lookUp = new LookupLogic();
 
             /////PRESENTING COMPLAINTS
             visitdateval = pce.visitDate;
@@ -343,21 +370,35 @@ namespace IQCare.Web.CCC.UC
                 rdAnyComplaintsNo.Checked = true;
 
             complaints.Value = pce.complaints;
-            tbInfected.SelectedValue = pce.OnAntiTB;
-            onIpt.SelectedValue = pce.OnIPT;
-            EverBeenOnIpt.SelectedValue = pce.EverBeenOnIPT;
+            //ICF Updates
+            //Tb outcome
+            ddlOnAntiTBDrugs.SelectedValue = getSelectedValue(pce.OnAntiTB);
+            //On IPT
+            ddlICFCurrentlyOnIPT.SelectedValue = getSelectedValue(pce.OnIPT);
+            //start IPT
+            ddlICFStartIPT.SelectedValue = getSelectedValue(pce.EverBeenOnIPT);
 
-            cough.SelectedValue = pce.Cough;
-            fever.SelectedValue = pce.Fever;
-            weightLoss.SelectedValue = pce.NoticeableWeightLoss;
-            nightSweats.SelectedValue = pce.NightSweats;
+            //Cough
+            ddlICFCough.SelectedValue = getSelectedValue(pce.Cough);
+            //fever
+            ddlICFFever.SelectedValue = getSelectedValue(pce.Fever);
+            //weight
+            ddlICFWeight.SelectedValue = getSelectedValue(pce.NoticeableWeightLoss); 
+            //night sweats
+            ddlICFNightSweats.SelectedValue = getSelectedValue(pce.NightSweats); 
 
-            sputum.SelectedValue = pce.SputumSmear;
-            geneXpert.SelectedValue = pce.geneXpert;
-            chest.SelectedValue = pce.ChestXray;
-            antiTb.SelectedValue = pce.startAntiTB;
-            contactsInvitation.SelectedValue = pce.InvitationOfContacts;
-            iptEvaluation.SelectedValue = pce.EvaluatedForIPT;
+            //sputum
+            ddlSputumSmear.SelectedValue = pce.SputumSmear;
+            //gene expert
+            ddlGeneXpert.SelectedValue = pce.geneXpert;
+            //chest
+            ddlChestXray.SelectedValue = pce.ChestXray;
+            //anti tb
+            ddlStartAntiTB.SelectedValue = getSelectedValue(pce.startAntiTB); 
+            //contacts invitatio
+            ddlInvitationofContacts.SelectedValue = getSelectedValue(pce.InvitationOfContacts);
+            //ipt evaluation
+            ddlEvaluatedforIPT.SelectedValue = getSelectedValue(pce.EvaluatedForIPT);
 
             IptCw.IPTurineColour.SelectedValue = pce.YellowColouredUrine;
             IptCw.IPTNumbness.SelectedValue = pce.Numbness;
@@ -367,8 +408,8 @@ namespace IQCare.Web.CCC.UC
             IptCw.IPTStartIPT.SelectedValue = pce.startIPT;
             IptCw.StartDateIPT.Text = pce.IPTStartDate;
 
-
-            tbscreeningstatus.SelectedValue = pce.tbScreening;
+            //tb outcome
+            ddlICFTBScreeningOutcome.SelectedValue = pce.tbScreening;
             nutritionscreeningstatus.SelectedValue = pce.nutritionStatus;
             txtWorkPlan.Text = pce.WorkPlan;
             foreach (ListItem item in cblGeneralExamination.Items)
@@ -382,7 +423,7 @@ namespace IQCare.Web.CCC.UC
                 }
             }
 
-            
+
 
             ////PATIENT MANAGEMENT
             foreach (ListItem item in cblPHDP.Items)
@@ -413,7 +454,7 @@ namespace IQCare.Web.CCC.UC
             {
                 rdAnyAdverseEventsYes.Checked = true;
             }
-            else if(theDTAdverse.Rows.Count == 0 && isOnEdit)
+            else if (theDTAdverse.Rows.Count == 0 && isOnEdit)
             {
                 rdAnyAdverseEventsNo.Checked = true;
             }
@@ -429,8 +470,8 @@ namespace IQCare.Web.CCC.UC
             ServiceArea.SelectedValue = pce.appointmentServiceArea;
             Reason.SelectedValue = pce.appointmentReason;
             DifferentiatedCare.SelectedValue = pce.nextAppointmentType;
-            description.Text = pce.appointmentDesc; 
-           IsEditAppointment= (pce.nextAppointmentType != null);
+            description.Text = pce.appointmentDesc;
+            IsEditAppointment = (pce.nextAppointmentType != null);
             // IsEditAppointmentId=(pce.)
             //status.SelectedValue = pce.appontmentStatus;
             if (IsEditAppointment)
@@ -452,7 +493,23 @@ namespace IQCare.Web.CCC.UC
             Page.ClientScript.RegisterStartupScript(this.GetType(), "tbInfectedYesNo", "tbInfectedChange();", true);
             Page.ClientScript.RegisterStartupScript(this.GetType(), "IcfChange", "IcfChange();", true);
             Page.ClientScript.RegisterStartupScript(this.GetType(), "IcfActionChange", "IcfActionChange();", true);
-            
+
+        }
+        public string getSelectedValue(string dbresult){
+            string selectedValue = "";
+            if (dbresult == "True")
+            {
+                selectedValue = LookupLogic.GetLookupItemId("Yes");
+            }
+            else if (dbresult == "False")
+            {
+                selectedValue = LookupLogic.GetLookupItemId("No");
+            }
+            else
+            {
+                selectedValue = "0";
+            }
+            return selectedValue;
         }
         public void getPNSData()
         {

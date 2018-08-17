@@ -56,6 +56,7 @@ namespace DataAccess.CCC.Interface
         IPatientLabTrackerRepository PatientLabTrackerRepository { get; }
         IPatientLabDetailsRepository PatientLabDetailsRepository { get; }
 
+        IPatientOIRepository PatientOIRepository { get; }
         /* Enrollment */
         IPatientEnrollmentRepository PatientEnrollmentRepository { get; }
         IPatientEntryPointRepository PatientEntryPointRepository { get; }

@@ -122,9 +122,12 @@
         });
     });
     $(document).ready(function () {
-        $(this).scrollTop(0);
-        $("#sessiononedata .loading").show();
-        $("#sessiononedata").load("../UC/EnhanceAdherenceCounselling/session1.aspx");
+        var pagehash = window.location.hash;
+        if (pagehash == '#EnhanceAdherence') {
+            $(this).scrollTop(0);
+            $("#sessiononedata .loading").show();
+            $("#sessiononedata").load("../UC/EnhanceAdherenceCounselling/session1.aspx");
+        }
     });
     $("#loadEnhanceAdherence").click(function () {
         $("#sessiononedata .loading").show();

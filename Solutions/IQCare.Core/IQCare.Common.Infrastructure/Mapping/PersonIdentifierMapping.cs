@@ -6,7 +6,7 @@ namespace IQCare.Common.Infrastructure.Mapping
 {
     public class PersonIdentifierMapping : IEntityTypeConfiguration<PersonIdentifier>
     {
-        public void Configure(EntityTypeBuilder<PersonIdentifier> builder)
+        void IEntityTypeConfiguration<PersonIdentifier>.Configure(EntityTypeBuilder<PersonIdentifier> builder)
         {
             builder.ToTable("PersonIdentifier")
                 .HasKey(c => c.Id);

@@ -26,9 +26,26 @@
         var currentStep = data.step;
         alert(currentStep);
         if (currentStep == 5) {
+            updateCancellingStatus();
             addUpdateViralLoadData();
         }
     });
+    function updateCancellingStatus() {
+        $.ajax({
+            type: "POST",
+            url: "../WebService/PatientScreeningService.asmx/AddCancellingStatus",
+            data: "{'status':'Complete'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                toastr.info("Ongoing adherence councelling closed");
+                checkScreeningStatus();
+            },
+            error: function (response) {
+                toastr.error(response.d, "Error closing ongoing adherence councelling");
+            }
+        });
+    }
     function addUpdateViralLoadData() {
         var error = 0;
         $("#eahdatastep5 .endvlrbList").each(function () {

@@ -297,9 +297,6 @@ namespace IQCare.CCC.UILogic
             }
             return jsonObject;
         }
-
-
-
         public static int GetLookUpMasterId(string masterName)
         {
             int masterId;
@@ -308,7 +305,6 @@ namespace IQCare.CCC.UILogic
 
             return masterId;
         }
-
         public static string GetLookupItemId(string lookupItemName)
         {
             
@@ -496,6 +492,19 @@ namespace IQCare.CCC.UILogic
                 return lookupManager.GetCountyDetailsByWardName(wardName);
             }
             catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        public static List<LookupItemView> GetLookItemByGroup(string groupname)
+        {
+            try
+            {
+                ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager,BusinessProcess.CCC");
+                return lookupManager.GetLookItemByGroup(groupname);
+            }
+            catch(Exception e)
             {
                 throw new Exception(e.Message);
             }

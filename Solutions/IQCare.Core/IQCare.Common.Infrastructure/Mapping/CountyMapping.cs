@@ -8,7 +8,7 @@ namespace IQCare.Common.Infrastructure.Mapping
     {
         public void Configure(EntityTypeBuilder<County> builder)
         {
-            builder.ToTable("County").HasKey(c => c.Id);
+            builder.ToTable("County").HasKey(c => c.CountyId);
         }
     }
 }
