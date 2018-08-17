@@ -3,7 +3,7 @@
     #ICFScreeningSection, #TuberclosisTreatmentPanel, #IPTPanel, #tbScreeningOutcomePanel, #ICFActionTakenPanel{display: none;}
 </style>
 <div class="clearfix"></div>
-<div class="icfwrap" style="border: 1px solid red;">
+<div class="icfwrap">
     <%--ICF - Intensified Case Finding--%>
     <div class="col-md-12 form-group" id="ICFPanel">
 	    <div class="col-md-12">
@@ -292,10 +292,12 @@
         var objectsToHide = [];
         var objectsToShow = [];
         var sectionsToReset = [];
+        var tbScreenScore = 0;
         if (selectedIndex == 1) {
             objectsToShow = ["tbScreeningOutcomePanel"];
             objectsToHide = ['ICFScreeningSection', 'TubeclosisTreatmentPanel', 'IPTPanel', 'ICFActionTakenPanel'];
-            sectionsToReset = ['ICFScreeningSection', 'TubeclosisTreatmentPanel', 'IPTPanel', 'ICFActionTakenPanel']
+            sectionsToReset = ['ICFScreeningSection', 'TubeclosisTreatmentPanel', 'IPTPanel', 'ICFActionTakenPanel'];
+            tbScreenScore = 4;
         }
         else if (selectedIndex == 2) {
             objectsToShow = ['ICFScreeningSection','IPTPanel'];
@@ -309,6 +311,7 @@
         }
         showHideCtrls(objectsToHide, objectsToShow); 
         sectionReset(sectionsToReset);
+        getTBOutcome(tbScreenScore);
     });
     //ICF Screening selection change
     $("#ICFScreeningSection select").change(function (evt, data) {

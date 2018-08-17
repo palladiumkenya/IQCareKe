@@ -22,30 +22,38 @@ namespace IQCare.Web.CCC.WebService
         private int Result { get; set; }
 
         [WebMethod(EnableSession = true)]
-        public string AddPatientIcf(int patientId, int patientMasterVisitId, int cough, int fever, int nightSweats, int weightLoss, int onAntiTbDrugs, int onIpt, bool everBeenOnIpt)
+        public string AddPatientIcf(int patientId, int patientMasterVisitId, int cough, int fever, int nightSweats, int weightLoss, int onAntiTbDrugs, int onIpt, int everBeenOnIpt)
         {
             LookupLogic lookUp = new LookupLogic();
             //cough
             bool? _cough = null;
-            if (lookUp.GetLookupItemNameById(cough) == "yes") { _cough = true; } else if(lookUp.GetLookupItemNameById(cough) == "No") { _cough = false; }
+            if (lookUp.GetLookupItemNameById(cough) == "Yes") { _cough = true; } else if(lookUp.GetLookupItemNameById(cough) == "No") { _cough = false; }
             //fever
             bool? _fever = null;
-            if (lookUp.GetLookupItemNameById(fever) == "yes") { _fever = true; } else if (lookUp.GetLookupItemNameById(fever) == "No") { _fever = false; }
+            if (lookUp.GetLookupItemNameById(fever) == "Yes") { _fever = true; } else if (lookUp.GetLookupItemNameById(fever) == "No") { _fever = false; }
             //night sweat
             bool? _nightSweat = null;
-            if (lookUp.GetLookupItemNameById(nightSweats) == "yes") { _nightSweat = true; } else if (lookUp.GetLookupItemNameById(nightSweats) == "No") { _nightSweat = false; }
+            if (lookUp.GetLookupItemNameById(nightSweats) == "Yes") { _nightSweat = true; } else if (lookUp.GetLookupItemNameById(nightSweats) == "No") { _nightSweat = false; }
             //weight loss
             bool? _WeightLoss = null;
-            if (lookUp.GetLookupItemNameById(weightLoss) == "yes") { _WeightLoss = true; } else if (lookUp.GetLookupItemNameById(weightLoss) == "No") { _WeightLoss = false; }
+            if (lookUp.GetLookupItemNameById(weightLoss) == "Yes") { _WeightLoss = true; } else if (lookUp.GetLookupItemNameById(weightLoss) == "No") { _WeightLoss = false; }
             //onAntiTBdrugs
             bool _onAntiTbDrugs = false;
-            if (lookUp.GetLookupItemNameById(onAntiTbDrugs) == "yes") { _onAntiTbDrugs = true; } else if (lookUp.GetLookupItemNameById(onAntiTbDrugs) == "No") { _onAntiTbDrugs = false; }
+            string passedValue = lookUp.GetLookupItemNameById(onAntiTbDrugs);
+            if (passedValue == "Yes")
+            {
+                _onAntiTbDrugs = true;
+            }
+            else if (lookUp.GetLookupItemNameById(onAntiTbDrugs) == "No")
+            {
+                _onAntiTbDrugs = false;
+            }
             //onIPT
             bool _onIpt = false;
-            if (lookUp.GetLookupItemNameById(onIpt) == "yes") { _onIpt = true; } else if (lookUp.GetLookupItemNameById(onIpt) == "No") { _onIpt = false; }
+            if (lookUp.GetLookupItemNameById(onIpt) == "Yes") { _onIpt = true; } else if (lookUp.GetLookupItemNameById(onIpt) == "No") { _onIpt = false; }
             //everBeenOnIpt
             bool? _everBeenOnIpt = null;
-            if (lookUp.GetLookupItemNameById(onIpt) == "yes") { _everBeenOnIpt = true; } else if (lookUp.GetLookupItemNameById(onIpt) == "No") { _everBeenOnIpt = false; }
+            if (lookUp.GetLookupItemNameById(everBeenOnIpt) == "Yes") { _everBeenOnIpt = true; } else if (lookUp.GetLookupItemNameById(everBeenOnIpt) == "No") { _everBeenOnIpt = false; }
             PatientIcf patientIcf = new PatientIcf()
             {
                 PatientId = patientId,
@@ -128,17 +136,24 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string AddPatientIcfAction(int patientId, int patientMasterVisitId, string chestXray, bool evaluatedForIpt, bool invitationOfContacts, string sputumSmear, bool startAntiTb, string geneXpert)
+        public string AddPatientIcfAction(int patientId, int patientMasterVisitId, string chestXray, int evaluatedForIpt, int invitationOfContacts, string sputumSmear, int startAntiTb, string geneXpert)
         {
+            LookupLogic lookUp = new LookupLogic();
+            bool _evaluatedForIpt = false;
+            if (lookUp.GetLookupItemNameById(evaluatedForIpt) == "yes") { _evaluatedForIpt = true; } else if (lookUp.GetLookupItemNameById(evaluatedForIpt) == "No") { _evaluatedForIpt = false; }
+            bool _invitationOfContacts = false;
+            if (lookUp.GetLookupItemNameById(invitationOfContacts) == "yes") { _invitationOfContacts = true; } else if (lookUp.GetLookupItemNameById(invitationOfContacts) == "No") { _invitationOfContacts = false; }
+            bool _startAntiTb = false;
+            if (lookUp.GetLookupItemNameById(startAntiTb) == "yes") { _startAntiTb = true; } else if (lookUp.GetLookupItemNameById(startAntiTb) == "No") { _startAntiTb = false; }
             PatientIcfAction patientIcfAction = new PatientIcfAction()
             {
                 PatientId = patientId,
                 PatientMasterVisitId = patientMasterVisitId,
                 ChestXray = (IcfRadiologyOptions)Convert.ToInt32(chestXray),
-                EvaluatedForIpt = evaluatedForIpt,
-                InvitationOfContacts = invitationOfContacts,
+                EvaluatedForIpt = _evaluatedForIpt,
+                InvitationOfContacts = _invitationOfContacts,
                 SputumSmear = (IcfTestOptions)Convert.ToInt32(sputumSmear),
-                StartAntiTb = startAntiTb,
+                StartAntiTb = _startAntiTb,
                 GeneXpert = (IcfTestOptions)Convert.ToInt32(geneXpert)
             };
             try

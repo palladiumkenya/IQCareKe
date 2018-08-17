@@ -361,7 +361,7 @@
 						</div>
                         <div class="icfiptwrap">
                             <div class="clearfix"></div>
-                                <div class="icfwrap" style="border: 1px solid red;">
+                                <div class="icfwrap">
                                     <%--ICF - Intensified Case Finding--%>
                                     <div class="col-md-12 form-group" id="ICFPanel">
 	                                    <div class="col-md-12">
@@ -389,7 +389,7 @@
 							                                    <label class="control-label pull-left input-sm" for="ddlICFCough">Cough</label>
 						                                    </div>
 						                                    <div class="col-md-12">
-							                                    <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ddlICFCough" ClientIDMode="Static" data-parsley-min="1" data-parsley-min-message="Value Required" />
+							                                    <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ddlICFCough" ClientIDMode="Static" />
 						                                    </div>
 					                                    </div>
                                                         <div class="col-md-3  form-group">
@@ -397,7 +397,7 @@
 							                                    <label class="control-label pull-left input-sm" for="ddlICFFever">Fever</label>
 						                                    </div>
 						                                    <div class="col-md-12">
-							                                    <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ddlICFFever" ClientIDMode="Static" data-parsley-min="1" data-parsley-min-message="Value Required" />
+							                                    <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ddlICFFever" ClientIDMode="Static" />
 						                                    </div>
 					                                    </div>
                                                         <div class="col-md-3  form-group">
@@ -405,7 +405,7 @@
 							                                    <label class="control-label pull-left input-sm" for="ddlICFWeight">Noticeable Weight Loss</label>
 						                                    </div>
 						                                    <div class="col-md-12">
-							                                    <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ddlICFWeight" ClientIDMode="Static" data-parsley-min="1" data-parsley-min-message="Value Required" />
+							                                    <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ddlICFWeight" ClientIDMode="Static" />
 						                                    </div>
 					                                    </div>
                                                         <div class="col-md-3  form-group">
@@ -413,7 +413,7 @@
 							                                    <label class="control-label pull-left input-sm" for="ddlICFNightSweats">Night Sweats</label>
 						                                    </div>
 						                                    <div class="col-md-12">
-							                                    <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ddlICFNightSweats" ClientIDMode="Static" data-parsley-min="1" data-parsley-min-message="Value Required" />
+							                                    <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ddlICFNightSweats" ClientIDMode="Static" />
 						                                    </div>
 					                                    </div>
                                                     </div>
@@ -438,7 +438,7 @@
 							                                    <label class="control-label pull-left input-sm" for="ddlICFRegimen">Sputum Smear</label>
 						                                    </div>
 						                                    <div class="col-md-12">
-							                                    <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ddlSputumSmear" ClientIDMode="Static" data-parsley-min="1" data-parsley-min-message="Value Required" />
+							                                    <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ddlSputumSmear" ClientIDMode="Static" />
 						                                    </div>
                                                         </div>
                                                         <div class="col-md-4">
@@ -446,7 +446,7 @@
 							                                    <label class="control-label pull-left input-sm" for="ddlICFRegimen">Gene Xpert</label>
 						                                    </div>
 						                                    <div class="col-md-12">
-							                                    <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ddlGeneXpert" ClientIDMode="Static" data-parsley-min="1" data-parsley-min-message="Value Required" />
+							                                    <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ddlGeneXpert" ClientIDMode="Static"/>
 						                                    </div>
                                                         </div>
                                                         <div class="col-md-4">
@@ -454,7 +454,7 @@
 							                                    <label class="control-label pull-left input-sm" for="ddlICFRegimen">Chest X-Ray</label>
 						                                    </div>
 						                                    <div class="col-md-12">
-							                                    <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ddlChestXray" ClientIDMode="Static" data-parsley-min="1" data-parsley-min-message="Value Required" />
+							                                    <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ddlChestXray" ClientIDMode="Static"  />
 						                                    </div>
                                                         </div>
                                                     </div>
@@ -464,7 +464,7 @@
 							                                    <label class="control-label pull-left input-sm" for="ddlICFRegimen">Start Anti-TB</label>
 						                                    </div>
 						                                    <div class="col-md-12">
-							                                    <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ddlStartAntiTB" ClientIDMode="Static" data-parsley-min="1" data-parsley-min-message="Value Required" />
+							                                    <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ddlStartAntiTB" ClientIDMode="Static" />
 						                                    </div>
                                                         </div>
                                                         <div class="col-md-4">
@@ -472,7 +472,7 @@
 							                                    <label class="control-label pull-left input-sm" for="ddlICFRegimen">Invitation of Contacts</label>
 						                                    </div>
 						                                    <div class="col-md-12">
-							                                    <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ddlInvitationofContacts" ClientIDMode="Static" data-parsley-min="1" data-parsley-min-message="Value Required" />
+							                                    <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ddlInvitationofContacts" ClientIDMode="Static" />
 						                                    </div>
                                                         </div>
                                                         <div class="col-md-4">
@@ -480,7 +480,7 @@
 							                                    <label class="control-label pull-left input-sm" for="ddlICFRegimen">Evaluated for IPT</label>
 						                                    </div>
 						                                    <div class="col-md-12">
-							                                    <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ddlEvaluatedforIPT" ClientIDMode="Static" data-parsley-min="1" data-parsley-min-message="Value Required" />
+							                                    <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ddlEvaluatedforIPT" ClientIDMode="Static" />
 						                                    </div>
                                                         </div>
                                                     </div>
@@ -508,7 +508,7 @@
 						                                                <span class="input-group-addon">
 							                                                <span class="glyphicon glyphicon-calendar"></span>
 						                                                </span>
-						                                                <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="tbTBRXStartDate" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
+						                                                <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="tbTBRXStartDate" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
 					                                                </div>
 						                                        </div>
 					                                        </div>
@@ -521,7 +521,7 @@
 						                                                <span class="input-group-addon">
 							                                                <span class="glyphicon glyphicon-calendar"></span>
 						                                                </span>
-						                                                <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="tbTBRXEndDate" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
+						                                                <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="tbTBRXEndDate" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
 					                                                </div>
 						                                        </div>
 					                                        </div>
@@ -530,7 +530,7 @@
 							                                        <label class="control-label pull-left input-sm" for="ddlICFRegimen">Regimen</label>
 						                                        </div>
 						                                        <div class="col-md-12">
-							                                        <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ddlICFRegimen" ClientIDMode="Static" data-parsley-min="1" data-parsley-min-message="Value Required" />
+							                                        <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ddlICFRegimen" ClientIDMode="Static"/>
 						                                        </div>
 					                                        </div>
                                                         </div>
@@ -554,7 +554,7 @@
 							                                    <label class="control-label pull-left input-sm" for="ddlICFTBScreeningOutcome">Outcome</label>
 						                                    </div>
 						                                    <div class="col-md-12">
-							                                    <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ddlICFTBScreeningOutcome" ClientIDMode="Static" data-parsley-min="1" data-parsley-min-message="Value Required" />
+							                                    <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ddlICFTBScreeningOutcome" ClientIDMode="Static" />
 						                                    </div>
                                                         </div>
                                                     </div>
@@ -578,7 +578,7 @@
 							                                        <label class="control-label pull-left input-sm" for="ddlICFCurrentlyOnIPT">Currrently on IPT?</label>
 						                                        </div>
 						                                        <div class="col-md-12">
-							                                        <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ddlICFCurrentlyOnIPT" ClientIDMode="Static" data-parsley-min="1" data-parsley-min-message="Value Required" />
+							                                        <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ddlICFCurrentlyOnIPT" ClientIDMode="Static" />
 						                                        </div>
                                                             </div>
                                                             <div class="col-md-6 text-center">
@@ -586,7 +586,7 @@
 							                                        <label class="control-label pull-left input-sm" for="ddlICFStartIPT">Start IPT?</label>
 						                                        </div>
 						                                        <div class="col-md-12">
-							                                        <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ddlICFStartIPT" ClientIDMode="Static" data-parsley-min="1" data-parsley-min-message="Value Required" />
+							                                        <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ddlICFStartIPT" ClientIDMode="Static"/>
 						                                        </div>
                                                             </div>
                                                             <div class="clearfix"></div>
@@ -3326,31 +3326,34 @@
 					$("#peripheralNeoropathy").prop('required', false);
 					$("#rash").prop('required', false);
 					$("#hepatotoxicity").prop('required', false);
-					$("#adheranceMeasurement").prop('required', false);
+                    $("#adheranceMeasurement").prop('required', false);
+                    $("#antiTb").prop('required', true);
 
-					if (($("#cough").val() === 'True') || ($("#fever").val() === 'True') || ($("#weightLoss").val() === 'True') || ($("#nightSweats").val() === 'True')) {
-						$("#sputum").prop('required', true);
-						$("#geneXpert").prop('required', true);
-						$("#chest").prop('required', true);
-						$("#antiTb").prop('required', true);
-						$("#contactsInvitation").prop('required', true);
-						$("#iptEvaluation").prop('required', true);
-					}
+					//if (($("#cough").val() === 'True') || ($("#fever").val() === 'True') || ($("#weightLoss").val() === 'True') || ($("#nightSweats").val() === 'True')) {
+					//	//$("#sputum").prop('required', true);
+					//	//$("#geneXpert").prop('required', true);
+					//	//$("#chest").prop('required', true);
+					//	$("#antiTb").prop('required', true);
+					//	//$("#contactsInvitation").prop('required', true);
+					//	//$("#iptEvaluation").prop('required', true);
+					//}
 
 					/* add constraints based on age*/
 					if ($('#datastep1').parsley().validate()) {
-                        if (($("#tbInfected").val() === 'True') && ($("#onIpt").val() === 'False') && ($("#EverBeenOnIpt").val() === 'True'))
-	                    {
+      //                  if (($("#tbInfected").val() === 'True') && ($("#onIpt").val() === 'False') && ($("#EverBeenOnIpt").val() === 'True'))
+	     //               {
 
-                        }else
-	                        {
-                                addPatientIcf();
-	                        }
+      //                  }else
+	     //                   {
+      //                          addPatientIcf();
+	     //                   }
 
 					    
-						if (($("#cough").val() === 'True') || ($("#fever").val() === 'True') || ($("#weightLoss").val() === 'True') || ($("#nightSweats").val() === 'True')) {
-							addPatientIcfAction();
-                        }
+						//if (($("#cough").val() === 'True') || ($("#fever").val() === 'True') || ($("#weightLoss").val() === 'True') || ($("#nightSweats").val() === 'True')) {
+						//	addPatientIcfAction();
+      //                  }
+                        addPatientIcf();
+                        addPatientIcfAction();
                         saveNutritionAssessment();
 						savePatientEncounterPresentingComplaint();
 					} else {
@@ -3743,7 +3746,8 @@
 				success: function (response) {
 					toastr.success(response.d, "Patient ICF saved successfully");
 				},
-				error: function (response) {
+                error: function (response) {
+                    alert(JSON.stringify(response));
 					toastr.error(response.d, "Patient ICF not saved");
 				}
 			});
@@ -3767,7 +3771,8 @@
 				success: function (response) {
 					toastr.success(response.d, "Patient ICF Action saved successfully");
 				},
-				error: function (response) {
+                error: function (response) {
+                    alert(JSON.stringify(response));
 					toastr.error(response.d, "Patient ICF Action not saved");
 				}
 			});
@@ -4942,10 +4947,12 @@
         var objectsToHide = [];
         var objectsToShow = [];
         var sectionsToReset = [];
+        var tbScreenScore = 0;
         if (selectedIndex == 1) {
             objectsToShow = ["tbScreeningOutcomePanel"];
             objectsToHide = ['ICFScreeningSection', 'TubeclosisTreatmentPanel', 'IPTPanel', 'ICFActionTakenPanel'];
-            sectionsToReset = ['ICFScreeningSection', 'TubeclosisTreatmentPanel', 'IPTPanel', 'ICFActionTakenPanel']
+            sectionsToReset = ['ICFScreeningSection', 'TubeclosisTreatmentPanel', 'IPTPanel', 'ICFActionTakenPanel'];
+            tbScreenScore = 4;
         }
         else if (selectedIndex == 2) {
             objectsToShow = ['ICFScreeningSection', 'IPTPanel'];
@@ -4959,6 +4966,7 @@
         }
         showHideCtrls(objectsToHide, objectsToShow);
         sectionReset(sectionsToReset);
+        getTBOutcome(tbScreenScore);
     });
     //ICF Screening selection change
     $("#ICFScreeningSection select").change(function (evt, data) {

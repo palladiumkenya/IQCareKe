@@ -218,9 +218,9 @@ namespace IQCare.Web.CCC.UC
 
                 //if (Convert.ToInt32(Session["PatientMasterVisitId"]) > 0)
                 loadPatientEncounter();
-                
+
             }
-            
+
             Control NeonatalHistoryCtrl = Page.LoadControl("~/CCC/UC/ucNeonatalHistory.ascx");
             NeonatalHistoryPH.Controls.Add(NeonatalHistoryCtrl);
 
@@ -356,20 +356,20 @@ namespace IQCare.Web.CCC.UC
             complaints.Value = pce.complaints;
             //ICF Updates
             //Tb outcome
-            ddlOnAntiTBDrugs.SelectedValue = (pce.OnAntiTB == "0") ? LookupLogic.GetLookupItemId("yes") : LookupLogic.GetLookupItemId("No");
+            ddlOnAntiTBDrugs.SelectedValue = getSelectedValue(pce.OnAntiTB);
             //On IPT
-            ddlICFCurrentlyOnIPT.SelectedValue = (pce.OnIPT == "0") ? LookupLogic.GetLookupItemId("yes") : LookupLogic.GetLookupItemId("No");
+            ddlICFCurrentlyOnIPT.SelectedValue = getSelectedValue(pce.OnIPT);
             //start IPT
-            ddlICFStartIPT.SelectedValue = (pce.EverBeenOnIPT == "0") ? LookupLogic.GetLookupItemId("yes") : LookupLogic.GetLookupItemId("No");
+            ddlICFStartIPT.SelectedValue = getSelectedValue(pce.EverBeenOnIPT);
 
             //Cough
-            ddlICFCough.SelectedValue = (pce.Cough == "0") ? LookupLogic.GetLookupItemId("yes") : LookupLogic.GetLookupItemId("No");
+            ddlICFCough.SelectedValue = getSelectedValue(pce.Cough);
             //fever
-            ddlICFFever.SelectedValue = (pce.Fever == "0") ? LookupLogic.GetLookupItemId("yes") : LookupLogic.GetLookupItemId("No"); 
+            ddlICFFever.SelectedValue = getSelectedValue(pce.Fever);
             //weight
-            ddlICFWeight.SelectedValue = (pce.NoticeableWeightLoss == "0") ? LookupLogic.GetLookupItemId("yes") : LookupLogic.GetLookupItemId("No");
+            ddlICFWeight.SelectedValue = getSelectedValue(pce.NoticeableWeightLoss); 
             //night sweats
-            ddlICFNightSweats.SelectedValue = (pce.NightSweats == "0") ? LookupLogic.GetLookupItemId("yes") : LookupLogic.GetLookupItemId("No");
+            ddlICFNightSweats.SelectedValue = getSelectedValue(pce.NightSweats); 
 
             //sputum
             ddlSputumSmear.SelectedValue = pce.SputumSmear;
@@ -378,11 +378,11 @@ namespace IQCare.Web.CCC.UC
             //chest
             ddlChestXray.SelectedValue = pce.ChestXray;
             //anti tb
-            ddlStartAntiTB.SelectedValue = (pce.startAntiTB == "0") ? LookupLogic.GetLookupItemId("yes") : LookupLogic.GetLookupItemId("No");
+            ddlStartAntiTB.SelectedValue = getSelectedValue(pce.startAntiTB); 
             //contacts invitatio
-            ddlInvitationofContacts.SelectedValue = (pce.InvitationOfContacts == "0") ? LookupLogic.GetLookupItemId("yes") : LookupLogic.GetLookupItemId("No");
+            ddlInvitationofContacts.SelectedValue = getSelectedValue(pce.InvitationOfContacts);
             //ipt evaluation
-            ddlEvaluatedforIPT.SelectedValue = (pce.EvaluatedForIPT == "0") ? LookupLogic.GetLookupItemId("yes") : LookupLogic.GetLookupItemId("No");
+            ddlEvaluatedforIPT.SelectedValue = getSelectedValue(pce.EvaluatedForIPT);
 
             IptCw.IPTurineColour.SelectedValue = pce.YellowColouredUrine;
             IptCw.IPTNumbness.SelectedValue = pce.Numbness;
@@ -407,7 +407,7 @@ namespace IQCare.Web.CCC.UC
                 }
             }
 
-            
+
 
             ////PATIENT MANAGEMENT
             foreach (ListItem item in cblPHDP.Items)
@@ -438,7 +438,7 @@ namespace IQCare.Web.CCC.UC
             {
                 rdAnyAdverseEventsYes.Checked = true;
             }
-            else if(theDTAdverse.Rows.Count == 0 && isOnEdit)
+            else if (theDTAdverse.Rows.Count == 0 && isOnEdit)
             {
                 rdAnyAdverseEventsNo.Checked = true;
             }
@@ -454,8 +454,8 @@ namespace IQCare.Web.CCC.UC
             ServiceArea.SelectedValue = pce.appointmentServiceArea;
             Reason.SelectedValue = pce.appointmentReason;
             DifferentiatedCare.SelectedValue = pce.nextAppointmentType;
-            description.Text = pce.appointmentDesc; 
-           IsEditAppointment= (pce.nextAppointmentType != null);
+            description.Text = pce.appointmentDesc;
+            IsEditAppointment = (pce.nextAppointmentType != null);
             // IsEditAppointmentId=(pce.)
             //status.SelectedValue = pce.appontmentStatus;
             if (IsEditAppointment)
@@ -477,7 +477,23 @@ namespace IQCare.Web.CCC.UC
             Page.ClientScript.RegisterStartupScript(this.GetType(), "tbInfectedYesNo", "tbInfectedChange();", true);
             Page.ClientScript.RegisterStartupScript(this.GetType(), "IcfChange", "IcfChange();", true);
             Page.ClientScript.RegisterStartupScript(this.GetType(), "IcfActionChange", "IcfActionChange();", true);
-            
+
+        }
+        public string getSelectedValue(string dbresult){
+            string selectedValue = "";
+            if (dbresult == "True")
+            {
+                selectedValue = LookupLogic.GetLookupItemId("Yes");
+            }
+            else if (dbresult == "False")
+            {
+                selectedValue = LookupLogic.GetLookupItemId("No");
+            }
+            else
+            {
+                selectedValue = "0";
+            }
+            return selectedValue;
         }
         public void getPNSData()
         {
