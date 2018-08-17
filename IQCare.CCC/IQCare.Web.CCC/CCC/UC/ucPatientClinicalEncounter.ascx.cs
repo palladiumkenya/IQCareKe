@@ -166,7 +166,7 @@ namespace IQCare.Web.CCC.UC
             if (!IsPostBack)
             {
                 LookupLogic lookUp = new LookupLogic();
-                lookUp.populateDDL(tbscreeningstatus, "TBStatus");
+                //lookUp.populateDDL(tbscreeningstatus, "TBStatus");
                 lookUp.populateDDL(nutritionscreeningstatus, "NutritionStatus");
                 lookUp.populateDDL(AdverseEventAction, "AdverseEventsActions");
                 lookUp.populateDDL(ddlAdverseEventSeverity, "ADRSeverity");
@@ -184,6 +184,23 @@ namespace IQCare.Web.CCC.UC
                 lookUp.populateDDL(stabilityStatus, "StabilityAssessment");
                 //lookUp.populateDDL(WHOStage, "WHOStage");
                 //Patient Nutrition assessment notes and screening
+                lookUp.populateDDL(ddlOnAntiTBDrugs, "GeneralYesNo");
+                lookUp.populateDDL(ddlICFCough, "GeneralYesNo");
+                lookUp.populateDDL(ddlICFFever, "GeneralYesNo");
+                lookUp.populateDDL(ddlICFWeight, "GeneralYesNo");
+                lookUp.populateDDL(ddlICFNightSweats, "GeneralYesNo");
+                lookUp.populateDDL(ddlICFRegimen, "TBRegimen");
+                lookUp.populateDDL(ddlICFCurrentlyOnIPT, "GeneralYesNo");
+                lookUp.populateDDL(ddlICFStartIPT, "GeneralYesNo");
+                lookUp.populateDDL(ddlICFTBScreeningOutcome, "TBFindings");
+
+                lookUp.populateDDL(ddlSputumSmear, "SputumSmear");
+                lookUp.populateDDL(ddlGeneXpert, "GeneExpert");
+                lookUp.populateDDL(ddlChestXray, "ChestXray");
+                lookUp.populateDDL(ddlStartAntiTB, "GeneralYesNo");
+                lookUp.populateDDL(ddlInvitationofContacts, "GeneralYesNo");
+                lookUp.populateDDL(ddlEvaluatedforIPT, "GeneralYesNo");
+
                 getPatientNotesandScreening();
                 populatePNS();
                 getPNSData();
@@ -204,18 +221,12 @@ namespace IQCare.Web.CCC.UC
                 loadPatientEncounter();
                 
             }
-            if (age < 5)
-            {
-                Control NeonatalHistoryCtrl = Page.LoadControl("~/CCC/UC/ucNeonatalHistory.ascx");
-                //divControls.Controls.Clear();
-                NeonatalHistoryPH.Controls.Add(NeonatalHistoryCtrl);
-            }
+            
+            Control NeonatalHistoryCtrl = Page.LoadControl("~/CCC/UC/ucNeonatalHistory.ascx");
+            NeonatalHistoryPH.Controls.Add(NeonatalHistoryCtrl);
 
-            if (age>=9 && age<= 19)
-            {
-                Control TannerStagingCtrl = Page.LoadControl("~/CCC/UC/ucTannerStaging.ascx");
-                TannersStagingPH.Controls.Add(TannerStagingCtrl);
-            }
+            Control TannerStagingCtrl = Page.LoadControl("~/CCC/UC/ucTannerStaging.ascx");
+            TannersStagingPH.Controls.Add(TannerStagingCtrl);
 
             Control SocialHoistoryCtrl = Page.LoadControl("~/CCC/UC/ucSocialHistory.ascx");
             SocialHistoryPH.Controls.Add(SocialHoistoryCtrl);
@@ -343,21 +354,21 @@ namespace IQCare.Web.CCC.UC
                 rdAnyComplaintsNo.Checked = true;
 
             complaints.Value = pce.complaints;
-            tbInfected.SelectedValue = pce.OnAntiTB;
-            onIpt.SelectedValue = pce.OnIPT;
-            EverBeenOnIpt.SelectedValue = pce.EverBeenOnIPT;
+            //tbInfected.SelectedValue = pce.OnAntiTB;
+            //onIpt.SelectedValue = pce.OnIPT;
+            //EverBeenOnIpt.SelectedValue = pce.EverBeenOnIPT;
 
-            cough.SelectedValue = pce.Cough;
-            fever.SelectedValue = pce.Fever;
-            weightLoss.SelectedValue = pce.NoticeableWeightLoss;
-            nightSweats.SelectedValue = pce.NightSweats;
+            //cough.SelectedValue = pce.Cough;
+            //fever.SelectedValue = pce.Fever;
+            //weightLoss.SelectedValue = pce.NoticeableWeightLoss;
+            //nightSweats.SelectedValue = pce.NightSweats;
 
-            sputum.SelectedValue = pce.SputumSmear;
-            geneXpert.SelectedValue = pce.geneXpert;
-            chest.SelectedValue = pce.ChestXray;
-            antiTb.SelectedValue = pce.startAntiTB;
-            contactsInvitation.SelectedValue = pce.InvitationOfContacts;
-            iptEvaluation.SelectedValue = pce.EvaluatedForIPT;
+            //sputum.SelectedValue = pce.SputumSmear;
+            //geneXpert.SelectedValue = pce.geneXpert;
+            //chest.SelectedValue = pce.ChestXray;
+            //antiTb.SelectedValue = pce.startAntiTB;
+            //contactsInvitation.SelectedValue = pce.InvitationOfContacts;
+            //iptEvaluation.SelectedValue = pce.EvaluatedForIPT;
 
             IptCw.IPTurineColour.SelectedValue = pce.YellowColouredUrine;
             IptCw.IPTNumbness.SelectedValue = pce.Numbness;
@@ -368,7 +379,7 @@ namespace IQCare.Web.CCC.UC
             IptCw.StartDateIPT.Text = pce.IPTStartDate;
 
 
-            tbscreeningstatus.SelectedValue = pce.tbScreening;
+            //tbscreeningstatus.SelectedValue = pce.tbScreening;
             nutritionscreeningstatus.SelectedValue = pce.nutritionStatus;
             txtWorkPlan.Text = pce.WorkPlan;
             foreach (ListItem item in cblGeneralExamination.Items)

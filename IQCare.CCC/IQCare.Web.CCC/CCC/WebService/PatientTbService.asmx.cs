@@ -3,6 +3,8 @@ using IQCare.CCC.UILogic.Tb;
 using System;
 using System.Linq;
 using System.Web.Services;
+using IQCare.CCC.UILogic;
+using Entities.CCC.Lookup;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -20,18 +22,30 @@ namespace IQCare.Web.CCC.WebService
         private int Result { get; set; }
 
         [WebMethod(EnableSession = true)]
-        public string AddPatientIcf(int patientId, int patientMasterVisitId, string cough, string fever, string nightSweats, string weightLoss, bool onAntiTbDrugs, bool onIpt, bool everBeenOnIpt)
+        public string AddPatientIcf(int patientId, int patientMasterVisitId, int cough, int fever, int nightSweats, int weightLoss, int onAntiTbDrugs, int onIpt, bool everBeenOnIpt)
         {
+            LookupLogic lookUp = new LookupLogic();
+            //cough
             bool? _cough = null;
-            if (cough.Trim().ToLower() == "true") { _cough = true; } else if(cough.Trim().ToLower() == "false") { _cough = false; }
+            if (lookUp.GetLookupItemNameById(cough) == "yes") { _cough = true; } else if(lookUp.GetLookupItemNameById(cough) == "No") { _cough = false; }
+            //fever
             bool? _fever = null;
-            if (fever.Trim().ToLower() == "true") { _fever = true; } else if (fever.Trim().ToLower() == "false") { _fever = false; }
-
+            if (lookUp.GetLookupItemNameById(fever) == "yes") { _fever = true; } else if (lookUp.GetLookupItemNameById(fever) == "No") { _fever = false; }
+            //night sweat
             bool? _nightSweat = null;
-            if (nightSweats.Trim().ToLower() == "true") { _nightSweat = true; } else if (nightSweats.Trim().ToLower() == "false") { _nightSweat = false; }
-
+            if (lookUp.GetLookupItemNameById(nightSweats) == "yes") { _nightSweat = true; } else if (lookUp.GetLookupItemNameById(nightSweats) == "No") { _nightSweat = false; }
+            //weight loss
             bool? _WeightLoss = null;
-            if (weightLoss.Trim().ToLower() == "true") { _WeightLoss = true; } else if (weightLoss.Trim().ToLower() == "false") { _WeightLoss = false; }
+            if (lookUp.GetLookupItemNameById(weightLoss) == "yes") { _WeightLoss = true; } else if (lookUp.GetLookupItemNameById(weightLoss) == "No") { _WeightLoss = false; }
+            //onAntiTBdrugs
+            bool _onAntiTbDrugs = false;
+            if (lookUp.GetLookupItemNameById(onAntiTbDrugs) == "yes") { _onAntiTbDrugs = true; } else if (lookUp.GetLookupItemNameById(onAntiTbDrugs) == "No") { _onAntiTbDrugs = false; }
+            //onIPT
+            bool _onIpt = false;
+            if (lookUp.GetLookupItemNameById(onIpt) == "yes") { _onIpt = true; } else if (lookUp.GetLookupItemNameById(onIpt) == "No") { _onIpt = false; }
+            //everBeenOnIpt
+            bool? _everBeenOnIpt = null;
+            if (lookUp.GetLookupItemNameById(onIpt) == "yes") { _everBeenOnIpt = true; } else if (lookUp.GetLookupItemNameById(onIpt) == "No") { _everBeenOnIpt = false; }
             PatientIcf patientIcf = new PatientIcf()
             {
                 PatientId = patientId,
@@ -40,9 +54,9 @@ namespace IQCare.Web.CCC.WebService
                 Fever = _fever,
                 NightSweats = _nightSweat,
                 WeightLoss = _WeightLoss,
-                OnIpt = onIpt,
-                OnAntiTbDrugs = onAntiTbDrugs,
-                EverBeenOnIpt = everBeenOnIpt
+                OnIpt = _onIpt,
+                OnAntiTbDrugs = _onAntiTbDrugs,
+                EverBeenOnIpt = _everBeenOnIpt
             };
             try
             {

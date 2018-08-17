@@ -5,9 +5,9 @@
     .text-center{text-align: center !important;}
 </style>
 <!--- Milestones Panel --->
-<div class="panel panel-info">
+<div class="panel panel-info" id="neonatalcontainer">
 	<div class="panel-body">
-        <div class="col-md-12 form-group">
+        <div class="col-md-12 form-group" id="neonatalrecord">
             <div id="recordNeonatalHistory">
                 <asp:PlaceHolder ID="PHNeonatalHistory" runat="server"></asp:PlaceHolder>
             </div>
@@ -18,69 +18,70 @@
 			        <label class="control-label pull-left">Milestones</label>
                     <div class="milestone-link pull-right"><a target="_blank" href="../../Content/resources/Milestones.pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Milestone Guides</a></div>
 		        </div>
-                <div class="col-md-12 form-group">
-			        <div class="col-md-3 form-group">
-				        <div class="col-md-12">
-                            <label for="txtMilestoneAssessed" class="control-label pull-left">Milestone Assessed</label>
-				        </div>
-				        <div class="col-md-12">
-					        <asp:DropDownList runat="server" ID="ddlMilestoneAssessed" CssClass="form-control input-sm" ClientIDMode="Static" />
-				        </div>
-			        </div>
+                <div id="neonatalform">
+                    <div class="col-md-12 form-group">
+			            <div class="col-md-3 form-group">
+				            <div class="col-md-12">
+                                <label for="txtMilestoneAssessed" class="control-label pull-left">Milestone Assessed</label>
+				            </div>
+				            <div class="col-md-12">
+					            <asp:DropDownList runat="server" ID="ddlMilestoneAssessed" CssClass="form-control input-sm" ClientIDMode="Static" />
+				            </div>
+			            </div>
 										
-			        <div class="col-md-3 form-group">
-				        <div class="col-md-12">
-					        <label class="control-label pull-left" for="txtMilestoneOnsetDate">Onset Date</label>
-				        </div>
-				        <div class="col-md-12">
-					        <div class='input-group date' id='MilestoneOnsetDate'>
-						        <span class="input-group-addon">
-							        <span class="glyphicon glyphicon-calendar"></span>
-						        </span>
-						        <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="txtMilestoneOnsetDate" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
-					        </div>
-				        </div>
-			        </div>
+			            <div class="col-md-3 form-group">
+				            <div class="col-md-12">
+					            <label class="control-label pull-left" for="txtMilestoneOnsetDate">Onset Date</label>
+				            </div>
+				            <div class="col-md-12">
+					            <div class='input-group date' id='MilestoneOnsetDate'>
+						            <span class="input-group-addon">
+							            <span class="glyphicon glyphicon-calendar"></span>
+						            </span>
+						            <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="txtMilestoneOnsetDate" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
+					            </div>
+				            </div>
+			            </div>
 
-			        <div class="col-md-1 form-group">
-				        <div class="col-md-12">
-					        <label class="control-label pull-left" for="cbMilestoneAchieved">Achieved</label>
-				        </div>
-				        <div class="col-md-12">
-					        <asp:CheckBox CssClass="pull-left" ClientIDMode="Static" ID="cbMilestoneAchieved" runat="server" value="1"/>
-				        </div>
-			        </div>
+			            <div class="col-md-1 form-group">
+				            <div class="col-md-12">
+					            <label class="control-label pull-left" for="cbMilestoneAchieved">Achieved</label>
+				            </div>
+				            <div class="col-md-12">
+					            <asp:CheckBox CssClass="pull-left" ClientIDMode="Static" ID="cbMilestoneAchieved" runat="server" value="1"/>
+				            </div>
+			            </div>
 
-			        <div class="col-md-2 form-group">
-				        <div class="col-md-12">
-					        <label class="control-label pull-left">Status</label>
-				        </div>
-				        <div class="col-md-12">
-					        <asp:DropDownList runat="server" ID="ddlMilestoneStatus" CssClass="form-control input-sm" ClientIDMode="Static" />
-				        </div>
-			        </div>
+			            <div class="col-md-2 form-group">
+				            <div class="col-md-12">
+					            <label class="control-label pull-left">Status</label>
+				            </div>
+				            <div class="col-md-12">
+					            <asp:DropDownList runat="server" ID="ddlMilestoneStatus" CssClass="form-control input-sm" ClientIDMode="Static" />
+				            </div>
+			            </div>
 										
 
-			        <div class="col-md-3">
-				        <div class="col-md-12">
-					        <label class="control-label pull-left">Comment</label>
-				        </div>
-				        <div class="col-md-12">
-					        <asp:TextBox runat="server" ID="txtMilestoneComment" CssClass="form-control input-sm" ClientIDMode="Static" />
-				        </div>
-			        </div>
-		        </div>
+			            <div class="col-md-3">
+				            <div class="col-md-12">
+					            <label class="control-label pull-left">Comment</label>
+				            </div>
+				            <div class="col-md-12">
+					            <asp:TextBox runat="server" ID="txtMilestoneComment" CssClass="form-control input-sm" ClientIDMode="Static" />
+				            </div>
+			            </div>
+		            </div>
 
-                <div class="col-md-12 form-group">
-			        <div class="col-md-12 text-center">
-				        <label class="control-label"><span class="fa fa-cog">Action</span></label>
-			        </div>
-			        <div class="col-md-4 col-centered">
-				        <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddMilestones" onclick="AddNeonatalMilestones();">Add</button>
-			        </div>
+                    <div class="col-md-12 form-group">
+			            <div class="col-md-12 text-center">
+				            <label class="control-label"><span class="fa fa-cog">Action</span></label>
+			            </div>
+			            <div class="col-md-4 col-centered">
+				            <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddMilestones" onclick="AddNeonatalMilestones();">Add</button>
+			            </div>
+                    </div>
                 </div>
-
-		        <div class="col-md-12 form-group">
+		        <div class="col-md-12 form-group" id="neonataltable">
 			        <div class="panel panel-primary">
 				        <div class="panel-heading">Milestones Assessed</div>
 				        <div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden;">
@@ -108,7 +109,7 @@
 			        <label class="control-label pull-left">Immunization History</label>
 		        </div>
 
-		        <div class="col-md-12 form-group">
+		        <div class="col-md-12 form-group" id="immunizationform">
 			        <div class="col-md-3 form-group">
 				        <div class="col-md-12">
                             <label for="txtMilestoneAssessed" class="control-label pull-left">Period</label>
@@ -481,7 +482,22 @@
         });
     }
     $(document).ready(function () {
-       showHideNeonatalHistoryPanel();
+        var patientAge = <%=age%>;
+        var screeningDone = <%=screeningValue%>;
+        if (patientAge > 5) {
+            if (screeningDone > 0) {
+                alert(screeningDone);
+                $("#neonatalrecord").hide();
+                $("#neonatalform").hide();
+                $("#immunizationform").hide();
+            }
+            else {
+                $("#neonatalcontainer").hide();
+            }
+        }
+        else {
+            showHideNeonatalHistoryPanel();
+        }
     });
 
     $("input[name = '<%=rbList.UniqueID %>']").change(function () {
