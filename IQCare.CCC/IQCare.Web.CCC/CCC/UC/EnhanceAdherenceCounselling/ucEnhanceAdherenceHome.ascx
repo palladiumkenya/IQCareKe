@@ -121,6 +121,11 @@
             $('#eahmyWizard').find('#eahSectionFive').toggleClass('complete', true);
         });
     });
+    $(document).ready(function () {
+        $(this).scrollTop(0);
+        $("#sessiononedata .loading").show();
+        $("#sessiononedata").load("../UC/EnhanceAdherenceCounselling/session1.aspx");
+    });
     $("#loadEnhanceAdherence").click(function () {
         $("#sessiononedata .loading").show();
         $("#sessiononedata").load("../UC/EnhanceAdherenceCounselling/session1.aspx");

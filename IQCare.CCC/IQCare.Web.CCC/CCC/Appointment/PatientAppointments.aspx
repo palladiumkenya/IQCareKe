@@ -4,6 +4,17 @@
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
+     <script src="<%=ResolveUrl("~/Incl/Common.js") %>?n=<%=string.Format("{0:yyyyMMddhhmmss}",DateTime.Now)%>"
+        type="text/javascript"></script>
+    <script src="<%=ResolveUrl("~/Incl/Constants.js") %>?n=<%=string.Format("{0:yyyyMMddhhmmss}",DateTime.Now)%>"
+        type="text/javascript"></script>
+    <script src="<%=ResolveUrl("~/Incl/ClinicalSummary.js") %>?n=<%=string.Format("{0:yyyyMMddhhmmss}",DateTime.Now)%>"
+        type="text/javascript"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-maxlength/1.7.0/bootstrap-maxlength.min.js"></script>
+
+    <script type="text/javascript">
+        //$(document).ready(function () { $("[name='switch-size']").bootstrapSwitch(); });
+    </script>
 
     <%--    <div class="col-md-12">
         <span id="Span1" class="text-capitalize pull-left glyphicon-text-size= fa-2x" runat="server">

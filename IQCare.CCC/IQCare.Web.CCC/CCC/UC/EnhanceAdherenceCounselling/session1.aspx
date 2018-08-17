@@ -409,6 +409,9 @@
             showhidenotes(parentPanel, selectedValue, rbName);
         });
         $('.session1loading').hide();
+        $('html, body').animate({
+            scrollTop: $('body').offset().top - 20 //#DIV_ID is an example. Use the id of your destination on the page
+        }, 'fast');
         //$('#session1statusmodal').modal('hide');
     }
     function showhidenotes(parentPanel, selectedValue, rbName) {
@@ -427,10 +430,31 @@
     $("#eahmyWizard").on("actionclicked.fu.wizard", function (evt, data) {
         var currentStep = data.step;
         if (currentStep == 1) {
+            addEnhanceAdherenceEncounter();
             addUpdateSession1Data();
             addUpdateSession1Appointment();
         }
     });
+    function addEnhanceAdherenceEncounter() {
+        var serviceArea = <%=serviceAreaId%>;
+        var EncounterType = "EnhanceAdherence";
+        var patientId = <%=PatientId%>;
+        var patientMasterVisitId = <%=PatientMasterVisitId%>;
+        var userId = <%=userId%>;
+        $.ajax({
+            type: "POST",
+            url: "../WebService/PatientEncounterService.asmx/savePatientEncounter",
+            data: "{'PatientID': '" + patientId + "','PatientMasterVisitID': '" + patientMasterVisitId + "','EncounterType': '" + EncounterType + "','ServiceAreaId': '" + serviceArea + "','UserId': '" + userId + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                toastr.success(response.d, "Encounter Saved");
+            },
+            error: function (response) {
+                toastr.error(response.d, "Encounter not saved");
+            }
+        });
+    }
     function addUpdateSession1Appointment() {
         var appointmentid = <%=appointmentId%>;
         var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');

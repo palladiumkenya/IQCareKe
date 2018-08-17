@@ -6,9 +6,9 @@ CD /D %BATDIR%
 echo %BATDIR%
 Set /p Server= Enter Server name e.g \sqlexpress : || Set Server=.\SQLExpress 
 Set /p Username= Enter username with permission to create/drop db || Set Username=sa
-Set /p Password= Enter the password  || Set Password=NothingPut
+Set /p Password= Enter the password  || Set Password=12345
 if %Password%==NothingPut goto sub_pass
-Set /p Database= Enter the database Name  || Set Database=NoDB
+Set /p Database= Enter the database Name  || Set Database=IQCare_LVCT_356
 if %Database%==NoDB goto sub_db
 
 set log=Installer.log

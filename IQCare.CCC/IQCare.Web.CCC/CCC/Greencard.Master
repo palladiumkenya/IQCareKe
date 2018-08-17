@@ -199,9 +199,6 @@
 							  <a  href='<%=ResolveClientUrl("~/CCC/Patient/PatientHome.aspx") %>' class="list-group-item" id="menuPatientHome" >
 									<span class="fa fa-home fa-2x pull-left text-info"></span> <strong class="text-info">Patient Home</strong>
 								</a>
-							  
-							 
-
 <%--                              <asp:LinkButton ID="LinkButton1" runat="server" OnClick="New_Encounter_Click" CssClass="list-group-item">
 								  <span class="fa fa-arrow-circle-o-right fa-2x pull-left text-info"></span>Start Encounter</asp:LinkButton>--%>
 							  
@@ -219,6 +216,12 @@
 
 							   <asp:LinkButton ID="menuNewEncounter" ClientIDMode="Static" runat="server" OnClick="New_Encounter_Click" CssClass="list-group-item">
 								  <span class="fa fa-user-md fa-2x pull-left text-info"></span><strong class="text-info">New Clinical Encounter</strong></asp:LinkButton>
+
+                             <asp:LinkButton ID="menuClinicalSummary" ClientIDMode="Static" runat="server" OnClick="Clinical_Summary_Click" CssClass="list-group-item">
+								  <span class="fa fa-bars fa-2x pull-left text-info"></span><strong class="text-info">Clinical Summary</strong></asp:LinkButton>
+
+                             <asp:LinkButton ID="menuFollowupEducation" ClientIDMode="Static" runat="server" OnClick="Follow_Up_Click" CssClass="list-group-item">
+								  <span class="fa fa-book fa-2x pull-left text-info"></span><strong class="text-info">Follow-up Education</strong></asp:LinkButton>
                              
                                <asp:LinkButton ID="menuPharmacyPrescription" ClientIDMode="Static" runat="server" CssClass="list-group-item" OnClick="menuPharmacyPrescription_Click">
 								  <span class="fa fa-tint fa-2x pull-left text-info"></span><strong class="text-info">Pharmacy</strong></asp:LinkButton>
@@ -523,6 +526,8 @@
                 $("#menuPatientVitals").hide();
                 $("#menuArtDistribution").hide();
                 $("#menuAdherenceBarriers").hide();
+                $("#menuClinicalSummary").hide();
+                $("#menuFollowupEducation").hide();
 			  // $("#LinkButton2").show();
 				//$("#menuStartEncounter").show();
                 $('#<%=lblRegistration.ClientID%>').text("Register Patient");
@@ -547,7 +552,8 @@
 				$("#menuPharmacyPrescription").show();
                 $("#menuLabOrder").show();
                 $("#menuAdherenceBarriers").show();
-				
+                $("#menuClinicalSummary").show();
+                $("#menuFollowupEducation").show();
 				$("#menuStartEncounter").hide();
 				startEncounter = 1;
 				stopEncounter = 0;
@@ -585,6 +591,8 @@
 			    $("#LinkButton2").hide();
                 $("#menuStartEncounter").hide();
                 $("#menuAdherenceBarriers").hide();
+                $("#menuClinicalSummary").hide();
+                $("#menuFollowupEducation").hide();
                 $('#<%=lblRegistration.ClientID%>').text("Register Patient");
             }
 
