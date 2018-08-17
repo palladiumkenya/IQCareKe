@@ -200,7 +200,6 @@ namespace IQCare.Web.CCC.UC
                 lookUp.populateDDL(ddlStartAntiTB, "GeneralYesNo");
                 lookUp.populateDDL(ddlInvitationofContacts, "GeneralYesNo");
                 lookUp.populateDDL(ddlEvaluatedforIPT, "GeneralYesNo");
-
                 getPatientNotesandScreening();
                 populatePNS();
                 getPNSData();
@@ -324,6 +323,7 @@ namespace IQCare.Web.CCC.UC
             DataTable theDT = patientEncounter.loadPatientEncounterPhysicalExam(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString(), Session["PatientPK"].ToString());
             DataTable theDTAdverse = patientEncounter.loadPatientEncounterAdverseEvents(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString(), Session["PatientPK"].ToString());
             bool isOnEdit = false;
+            LookupLogic lookUp = new LookupLogic();
 
             /////PRESENTING COMPLAINTS
             visitdateval = pce.visitDate;
@@ -354,21 +354,35 @@ namespace IQCare.Web.CCC.UC
                 rdAnyComplaintsNo.Checked = true;
 
             complaints.Value = pce.complaints;
-            //tbInfected.SelectedValue = pce.OnAntiTB;
-            //onIpt.SelectedValue = pce.OnIPT;
-            //EverBeenOnIpt.SelectedValue = pce.EverBeenOnIPT;
+            //ICF Updates
+            //Tb outcome
+            ddlOnAntiTBDrugs.SelectedValue = (pce.OnAntiTB == "0") ? LookupLogic.GetLookupItemId("yes") : LookupLogic.GetLookupItemId("No");
+            //On IPT
+            ddlICFCurrentlyOnIPT.SelectedValue = (pce.OnIPT == "0") ? LookupLogic.GetLookupItemId("yes") : LookupLogic.GetLookupItemId("No");
+            //start IPT
+            ddlICFStartIPT.SelectedValue = (pce.EverBeenOnIPT == "0") ? LookupLogic.GetLookupItemId("yes") : LookupLogic.GetLookupItemId("No");
 
-            //cough.SelectedValue = pce.Cough;
-            //fever.SelectedValue = pce.Fever;
-            //weightLoss.SelectedValue = pce.NoticeableWeightLoss;
-            //nightSweats.SelectedValue = pce.NightSweats;
+            //Cough
+            ddlICFCough.SelectedValue = (pce.Cough == "0") ? LookupLogic.GetLookupItemId("yes") : LookupLogic.GetLookupItemId("No");
+            //fever
+            ddlICFFever.SelectedValue = (pce.Fever == "0") ? LookupLogic.GetLookupItemId("yes") : LookupLogic.GetLookupItemId("No"); 
+            //weight
+            ddlICFWeight.SelectedValue = (pce.NoticeableWeightLoss == "0") ? LookupLogic.GetLookupItemId("yes") : LookupLogic.GetLookupItemId("No");
+            //night sweats
+            ddlICFNightSweats.SelectedValue = (pce.NightSweats == "0") ? LookupLogic.GetLookupItemId("yes") : LookupLogic.GetLookupItemId("No");
 
-            //sputum.SelectedValue = pce.SputumSmear;
-            //geneXpert.SelectedValue = pce.geneXpert;
-            //chest.SelectedValue = pce.ChestXray;
-            //antiTb.SelectedValue = pce.startAntiTB;
-            //contactsInvitation.SelectedValue = pce.InvitationOfContacts;
-            //iptEvaluation.SelectedValue = pce.EvaluatedForIPT;
+            //sputum
+            ddlSputumSmear.SelectedValue = pce.SputumSmear;
+            //gene expert
+            ddlGeneXpert.SelectedValue = pce.geneXpert;
+            //chest
+            ddlChestXray.SelectedValue = pce.ChestXray;
+            //anti tb
+            ddlStartAntiTB.SelectedValue = (pce.startAntiTB == "0") ? LookupLogic.GetLookupItemId("yes") : LookupLogic.GetLookupItemId("No");
+            //contacts invitatio
+            ddlInvitationofContacts.SelectedValue = (pce.InvitationOfContacts == "0") ? LookupLogic.GetLookupItemId("yes") : LookupLogic.GetLookupItemId("No");
+            //ipt evaluation
+            ddlEvaluatedforIPT.SelectedValue = (pce.EvaluatedForIPT == "0") ? LookupLogic.GetLookupItemId("yes") : LookupLogic.GetLookupItemId("No");
 
             IptCw.IPTurineColour.SelectedValue = pce.YellowColouredUrine;
             IptCw.IPTNumbness.SelectedValue = pce.Numbness;
@@ -378,8 +392,8 @@ namespace IQCare.Web.CCC.UC
             IptCw.IPTStartIPT.SelectedValue = pce.startIPT;
             IptCw.StartDateIPT.Text = pce.IPTStartDate;
 
-
-            //tbscreeningstatus.SelectedValue = pce.tbScreening;
+            //tb outcome
+            ddlICFTBScreeningOutcome.SelectedValue = pce.tbScreening;
             nutritionscreeningstatus.SelectedValue = pce.nutritionStatus;
             txtWorkPlan.Text = pce.WorkPlan;
             foreach (ListItem item in cblGeneralExamination.Items)
