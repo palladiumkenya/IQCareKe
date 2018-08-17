@@ -85,6 +85,7 @@ namespace DataAccess.CCC.Context
         public DbSet<PatientTreatmentInitiation> PatientTreatmentInitiations { get; set; }
 
 
+
         //Encounter
         public DbSet<ComplaintsHistory> ComplaintsHistory { get; set; }
         public DbSet<PatientAdherenceOutcome> PatientAdherenceOutcome { get; set; }
@@ -109,6 +110,13 @@ namespace DataAccess.CCC.Context
         public DbSet<PatientLinkage> PatientLinkages { get; set; }
         public DbSet<PatientWhoStage> PatientWhoStages { get; set; }
 
+        public DbSet<PatientOI> PatientOIs { get; set; }
+
+        public DbSet<PatientHighRisk> PatientHighRisks { get; set; }
+
+        public DbSet<PatientSexualHistory> PatientSexualHistories { get; set; }
+
+        public DbSet<PatientPartner> PatientPartners { get; set; }
         //Appointment and Labs
         public DbSet<PatientAppointment> PatientAppointments { get; set; }
         public DbSet<AppointmentSummary> AppointmentSummary { get; set; }

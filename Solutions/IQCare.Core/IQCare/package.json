@@ -28,6 +28,7 @@
     "@angular/router": "^6.0.9",
     "@ngrx/store": "^6.0.1",
     "classlist.js": "^1.1.20150312",
+    "compression": "^1.7.2",
     "core-js": "^2.4.1",
     "material-icons": "^0.2.3",
     "moment": "^2.21.0",

@@ -78,5 +78,54 @@ namespace IQCare.Common.BusinessProcess.Services
                 return 0;
             }
         }
+
+        public async Task<List<SubCountyLookup>> GetSubCountyList(int CountyId)
+        {
+            try
+            {
+                var result = await _unitOfWork.Repository<SubCountyLookup>().Get(x => x.CountyId == CountyId).ToListAsync();
+                return result.ToList();
+            }
+            catch(Exception e)
+            {
+                Log.Error(e.Message);
+                throw;
+
+            }
+        }
+
+
+        public async Task<List<WardLookup>> GetWardList(int subcountyId)
+        {
+            try
+            {
+                var result = await _unitOfWork.Repository<WardLookup>().Get(x => x.SubCountyId==subcountyId).ToListAsync();
+                return result;
+            }
+            catch (Exception e)
+            {
+                Log.Error(e.Message);
+                throw;
+
+            }
+        }
+        public async Task<List<CountyLookup>> GetCountyList()
+        {
+            try
+            {
+                var result = await _unitOfWork.Repository<CountyLookup>().GetAllAsync();
+                return result.ToList();
+            }
+            catch (Exception e)
+            {
+                Log.Error(e.Message);
+                throw;
+
+            }
+        }
+
+
+
+
     }
 }

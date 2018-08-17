@@ -106,10 +106,14 @@
     <Compile Include="BPatientCategorization.cs" />
     <Compile Include="BPatientConsent.cs" />
     <Compile Include="BPatientEncounter.cs" />
+    <Compile Include="BPatientHighRiskManager.cs" />
     <Compile Include="BPatientLookupManager.cs" />
     <Compile Include="BPatientNeonatal.cs" />
+    <Compile Include="BPatientOIManager.cs" />
+    <Compile Include="BPatientPartners.cs" />
     <Compile Include="BPatientPharmacy.cs" />
     <Compile Include="BPatientPopulationManager.cs" />
+    <Compile Include="BPatientSexualHistoryManager.cs" />
     <Compile Include="BPatientTreatmentSupporterManager.cs" />
     <Compile Include="BPatientVitals.cs" />
     <Compile Include="BPatientWhoStageManager.cs" />

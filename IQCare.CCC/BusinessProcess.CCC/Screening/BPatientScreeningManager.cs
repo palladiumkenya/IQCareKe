@@ -72,6 +72,16 @@ namespace BusinessProcess.CCC.Screening
             }
         }
 
+        public PatientScreening GetCurrentPatientScreening(int patientId,int patientmastervisitid)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var screeningList = unitOfWork.PatientScreeningRepository.FindBy(x => x.PatientId == patientId  & x.PatientMasterVisitId==patientmastervisitid & !x.DeleteFlag).FirstOrDefault();
+                unitOfWork.Dispose();
+                return screeningList;
+            }
+
+        }
         public List<PatientScreening> GetPatientScreening(int patientId)
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))

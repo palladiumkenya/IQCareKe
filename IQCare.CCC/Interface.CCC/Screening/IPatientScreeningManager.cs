@@ -9,6 +9,7 @@ namespace Interface.CCC.Screening
         int AddPatientScreening(PatientScreening a);
         int UpdatePatientScreening(PatientScreening u);
         int DeletePatientScreening(int Id);
+        PatientScreening GetCurrentPatientScreening(int patientId, int patientmastervisitid);
         List<PatientScreening> GetPatientScreening(int patientId);
         List<PatientScreening> GetPatientScreening(int patientId, DateTime visitdate, int screeningCategoryId);
         int CheckIfPatientScreeningExists(int patientId);

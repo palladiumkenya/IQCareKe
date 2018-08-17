@@ -1,0 +1,52 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+}
+
+* .example-container > * {
+    width: 100%;
+}
+
+.mat-form-field {
+    display: block;
+}
+
+table.speaker-list {
+    table-layout: fixed;
+}
+
+.mat-card {
+    background-color: #dff9fb;
+}
+
+.mat-input-placeholder {
+    font-size: 5em;
+}
+
+.top-buffer {
+    margin-top: 20px;
+}
+
+.anyClass {
+    height: 150px;
+    overflow-x: scroll;
+}
+
+.table td, th {
+    text-align: center;
+}
+
+
+  .table-responsive {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+       
+    }
+
+ .table-bordered {
+        border: 0;
+    }
+
+    

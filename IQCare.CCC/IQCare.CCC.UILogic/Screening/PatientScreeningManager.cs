@@ -11,7 +11,7 @@ namespace IQCare.CCC.UILogic.Screening
         private IPatientScreeningManager _patientScreening = (IPatientScreeningManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Screening.BPatientScreeningManager, BusinessProcess.CCC");
 
 
-        public int AddPatientScreening(int patientId,int patientMasterVisitid,DateTime visitDate,int screeningTypeId,bool screeningDone,DateTime screeningDate,int screeningCategoryId,int screeningValueId,string comment,int userId)
+        public int AddPatientScreening(int patientId,int patientMasterVisitid,DateTime visitDate,int screeningTypeId,bool? screeningDone,DateTime screeningDate,int screeningCategoryId,int screeningValueId,string comment,int userId)
         {
             try
             {
@@ -21,7 +21,7 @@ namespace IQCare.CCC.UILogic.Screening
                     PatientMasterVisitId = patientMasterVisitid,
                     VisitDate = visitDate,
                     ScreeningTypeId = screeningTypeId,
-                    ScreeningDone = Convert.ToBoolean(screeningDone),
+                    ScreeningDone = screeningDone,
                     ScreeningDate = screeningDate,
                     ScreeningCategoryId = screeningCategoryId,
                     ScreeningValueId = screeningValueId,
@@ -181,6 +181,39 @@ namespace IQCare.CCC.UILogic.Screening
                 throw;
             }
         }
+        public PatientScreening GetCurrentPatientScreening(int patientId, int patientmastervisitid)
+        {
+            try
+            {
+              
+               var psc = _patientScreening.GetCurrentPatientScreening(patientId,patientmastervisitid);
+                
+                return psc;
+             
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+        public int UpdateCurrentPatientScreening(PatientScreening psc)
+        {
+            try
+            {
+               
+
+                return _patientScreening.UpdatePatientScreening(psc);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+       
 
         public List<PatientScreening> GetPatientScreening(int patientId, DateTime visitDate, int screeningCategoryId)
         {
@@ -195,6 +228,7 @@ namespace IQCare.CCC.UILogic.Screening
             }
         }
 
+       
         public int UpdatePatientScreening(int id,DateTime visitDate ,int screeningTypeId, bool screeningDone, DateTime screeningDate, int screeningCategoryId, int screeningValueId, string comment)
         {
             try
