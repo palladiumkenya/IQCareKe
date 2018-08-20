@@ -168,24 +168,18 @@ namespace IQCare.Controllers.Records
                 return Ok(response.Value);
             return BadRequest(response);
         }
-        [HttpGet("GetPersonDetails")]
         public async Task<IActionResult> GetPersonDetails(int personId)
         {
             var response = await _mediator.Send(new GetPersonDetailsCommand
             {
-                PersonId=personId
+                PersonId = personId
             });
-       [HttpPost("AddPersonContact")]
-        public async Task<IActionResult> Post([FromBody] AddUpdatePersonContactCommand addUpdatePersonContactCommand)
-        {
-            var response = await _mediator.Send(addUpdatePersonContactCommand, Request.HttpContext.RequestAborted);
             if (response.IsValid)
-            {
                 return Ok(response.Value);
-            }
             return BadRequest(response);
 
         }
+        
 
     }
 }

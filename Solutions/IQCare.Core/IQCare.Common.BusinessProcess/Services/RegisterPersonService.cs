@@ -499,6 +499,48 @@ namespace IQCare.Common.BusinessProcess.Services
             }
         }
 
+
+        public async Task<PersonIdentifier> UpdatePersonIdentifier(PersonIdentifier pmi)
+        {
+            try {
+                _unitOfWork.Repository<PersonIdentifier>().Update(pmi);
+                await _unitOfWork.SaveAsync();
+                return pmi;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        public async Task<PersonIdentifier> GetCurrentPersonIdentifier(int identifierId, int PersonId)
+        {
+            try
+            {
+
+                var identifier = await _unitOfWork.Repository<PersonIdentifier>().Get(x => x.IdentifierId == identifierId && x.PersonId == PersonId && !x.DeleteFlag).OrderByDescending(x => x.CreateDate).FirstOrDefaultAsync();
+                return identifier;
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+    
+        public async Task<PersonIdentifier> GetCurrentPersonIdentifier(int personId)
+        {
+            try
+            {
+                var identifier = await _unitOfWork.Repository<PersonIdentifier>().Get(x=>x.PersonId == personId && !x.DeleteFlag).OrderByDescending(x => x.CreateDate).FirstOrDefaultAsync();
+                return identifier; 
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+        }
+       
         public async Task<PersonIdentifier> addPersonIdentifiers(int personId, int identifierId, string identifierValue, int userId)
         {
             try
@@ -735,6 +777,50 @@ namespace IQCare.Common.BusinessProcess.Services
 
                     var patientInsert = await _unitOfWork.Repository<Patient>().FromSql(sqlPatient);
 
+
+                return patientInsert.FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public async Task<Patient> AddPatient(int personID, int userId, int ptn_pk, string facilityId = "")
+        {
+            try
+            {
+                var facility = await _unitOfWork.Repository<Facility>().Get(x => x.DeleteFlag == 0).FirstOrDefaultAsync();
+                var patientType = await _unitOfWork.Repository<LookupItemView>()
+                    .Get(x => x.MasterName == "PatientType" && x.ItemName == "New").FirstOrDefaultAsync();
+
+                var patient = await this.GetPatientByPersonId(personID);
+                if (patient == null)
+                {
+                    var person = await this.GetPerson(personID);
+                    DateTime dateOfBirth = DateTime.Now;
+                    if (person != null)
+                    {
+                        dateOfBirth = person.DateOfBirth;
+                    }
+
+                    if (string.IsNullOrWhiteSpace(facilityId))
+                    {
+                        facilityId = facility.PosID;
+                    }
+
+                    var sqlPatient = "exec pr_OpenDecryptedSession;" +
+                                     "Insert Into  Patient(ptn_pk,PersonId,PatientIndex,PatientType,FacilityId,Active,DateOfBirth,NationalId,DeleteFlag,CreatedBy,CreateDate,AuditData,DobPrecision)" +
+                                     $"Values({ptn_pk}, {personID}, {DateTime.Now.Year + '-' + personID}, '{patientType.ItemId}', '{facilityId}', 1," +
+                                     $"'{dateOfBirth.ToString("yyyy-MM-dd")}', ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '99999999'), 0, '{userId}', GETDATE()," +
+                                     $"NULL, 1);" +
+                                     $"SELECT [Id],[ptn_pk],[PersonId],[PatientIndex],[PatientType],[FacilityId],[Active],[DateOfBirth]," +
+                                     $"[DobPrecision],CAST(DECRYPTBYKEY(NationalId) AS VARCHAR(50)) [NationalId],[DeleteFlag],[CreatedBy]," +
+                                     $"[CreateDate],[AuditData],[RegistrationDate] FROM [dbo].[Patient] WHERE Id = SCOPE_IDENTITY();" +
+                                     $"exec [dbo].[pr_CloseDecryptedSession];";
+
+                    var patientInsert = await _unitOfWork.Repository<Patient>().FromSql(sqlPatient);
+
                     return patientInsert.FirstOrDefault();
                 }
                 else
@@ -747,6 +833,43 @@ namespace IQCare.Common.BusinessProcess.Services
                 throw e;
             }
         }
+
+
+        public async Task<Patient> AddPatient(int personID, DateTime dateOfBirth, int userId, string facilityId = "")
+        {
+            try
+            {
+                var facility = await _unitOfWork.Repository<Facility>().Get(x => x.DeleteFlag == 0).FirstOrDefaultAsync();
+                var patientType = await _unitOfWork.Repository<LookupItemView>()
+                    .Get(x => x.MasterName == "PatientType" && x.ItemName == "New").FirstOrDefaultAsync();
+
+                if (string.IsNullOrWhiteSpace(facilityId))
+                {
+                    facilityId = facility.PosID;
+                }
+
+
+                var sqlPatient = "exec pr_OpenDecryptedSession;" +
+                                 "Insert Into  Patient(ptn_pk,PersonId,PatientIndex,PatientType,FacilityId,Active,DateOfBirth,NationalId,DeleteFlag,CreatedBy,CreateDate,AuditData,DobPrecision)" +
+                                 $"Values(0, {personID}, {DateTime.Now.Year + '-' + personID}, '{patientType.ItemId}', '{facilityId}', 1," +
+                                 $"'{dateOfBirth.ToString("yyyy-MM-dd")}', ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '99999999'), 0, '{userId}', GETDATE()," +
+                                 $"NULL, 1);" +
+                                 $"SELECT [Id],[ptn_pk],[PersonId],[PatientIndex],[PatientType],[FacilityId],[Active],[DateOfBirth]," +
+                                 $"[DobPrecision],CAST(DECRYPTBYKEY(NationalId) AS VARCHAR(50)) [NationalId],[DeleteFlag],[CreatedBy]," +
+                                 $"[CreateDate],[AuditData],[RegistrationDate] FROM [dbo].[Patient] WHERE Id = SCOPE_IDENTITY();" +
+                                 $"exec [dbo].[pr_CloseDecryptedSession];";
+
+                var patientInsert = await _unitOfWork.Repository<Patient>().FromSql(sqlPatient);
+
+                return patientInsert.FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                Log.Error(e.Message);
+                throw e;
+            }
+        }
+
 
         public async Task<Patient> AddPatient(int personID, int userId, string facilityId = "")
         {
@@ -912,5 +1035,396 @@ namespace IQCare.Common.BusinessProcess.Services
                 throw e;
             }
         }
+
+        public async Task<List<PersonEmergencyContact>> GetListEmergencyContacts(int PersonId)
+        {
+
+            try
+            {
+                StringBuilder sql = new StringBuilder();
+                sql.Append("exec pr_OpenDecryptedSession;");
+                sql.Append($"Select[Id, PersonId, EmeregencyContactPersonId, CAST(DECRYPTBYKEY(MobileContact) as Varchar(100)) as MobileContact, DeleteFlag,ContactType, CreatedBy, CreateDate, AuditData" +
+                           $" FROM [dbo].[PersonEmergencyContact] WHERE DeleteFlag='0' and PersonId = '{PersonId}';");
+                sql.Append("exec [dbo].[pr_CloseDecryptedSession];");
+                var pec = await _unitOfWork.Repository<PersonEmergencyContact>().FromSql(sql.ToString());
+                return pec;
+            }
+            catch(Exception e)
+            {
+                Log.Error(e.Message);
+                throw e;
+
+            }
+
+
+        }
+        public async Task<PersonEmergencyContact> GetSpecificEmergencyContacts(int EmergencyContactPersonId, int PersonId)
+        {
+
+            try
+            {
+                StringBuilder sql = new StringBuilder();
+                sql.Append("exec pr_OpenDecryptedSession;");
+                sql.Append($"Select  * FROM [dbo].[PersonEmergencyContact] pm inner join [dbo].[LookupItemView] lm on pm.ContactType=lm.ItemId WHERE pm.DeleteFlag='0' and lm.itemName='Emergency' and pm.EmergencyContactPersonId='{EmergencyContactPersonId}' and  pm.PersonId = '{PersonId}';");
+                sql.Append("exec [dbo].[pr_CloseDecryptedSession];");
+                var pec = await _unitOfWork.Repository<PersonEmergencyContact>().FromSql(sql.ToString());
+                return pec.FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                Log.Error(e.Message);
+                throw e;
+
+            }
+
+
+        }
+
+        public async Task<PersonEmergencyContact> GetNextofkinEmergencyContacts(int EmergencyContactPersonId,int PersonId)
+        {
+
+            try
+            {
+                StringBuilder sql = new StringBuilder();
+                sql.Append("exec pr_OpenDecryptedSession;");
+                sql.Append($"Select  * FROM [dbo].[PersonEmergencyContact] pm inner join [dbo].[LookupItemView] lm on pm.ContactType=lm.ItemId WHERE pm.DeleteFlag='0' and lm.itemName='NextofKin' and pm.EmergencyContactPersonId='{EmergencyContactPersonId}' and  pm.PersonId = '{PersonId}';");
+                sql.Append("exec [dbo].[pr_CloseDecryptedSession];");
+                var pec = await _unitOfWork.Repository<PersonEmergencyContact>().FromSql(sql.ToString());
+                return pec.FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                Log.Error(e.Message);
+                throw e;
+
+            }
+
+
+        }
+        public async Task<int> UpdatePersonEmergencyContact(PersonEmergencyContact pmc)
+        {
+            try
+            {
+                SqlParameter personIdParameter = new SqlParameter("personIdParameter", SqlDbType.Int);
+                personIdParameter.Value = pmc.PersonId;
+                SqlParameter EmergencyContactPersonIdParameter = new SqlParameter("EmergencyContactPersonIdParameter", SqlDbType.Int);
+                EmergencyContactPersonIdParameter.Value = pmc.EmergencyContactPersonId;
+                SqlParameter MobileContactParameter = new SqlParameter("MobileContactParameter", SqlDbType.VarBinary);
+                MobileContactParameter.Value = Encoding.ASCII.GetBytes(pmc.MobileContact.ToString());
+                SqlParameter userId = new SqlParameter("CreatedBy", SqlDbType.Int);
+                userId.Value = pmc.CreatedBy;
+                SqlParameter DeleteFlag = new SqlParameter("DeleteFlag", SqlDbType.Bit);
+                if (pmc.DeleteFlag == true)
+                {
+                    DeleteFlag.Value = 1;
+                }
+                else if (pmc.DeleteFlag == false)
+                {
+                    DeleteFlag.Value = 0;
+                }
+                SqlParameter ContactType = new SqlParameter("ContactType", SqlDbType.Int);
+                ContactType.Value = pmc.ContactType;
+
+                SqlParameter RegisteredToClinic = new SqlParameter("RegisteredToClinic", SqlDbType.Bit);
+                if (pmc.RegisteredToClinic == true)
+                {
+                    RegisteredToClinic.Value = 1;
+                }
+                else if(pmc.RegisteredToClinic==false)
+                {
+                    RegisteredToClinic.Value = 0;
+                }
+
+                await  _unitOfWork.Repository<PersonEmergencyContact>().FromSql("exec PersonEmergencyContact_Update @personIdParameter,@EmergencyContactPersonIdParameter,@MobileContactParameter,@CreatedBy,@DeleteFlag,@ContactType,@RegisteredToClinic",
+                    personIdParameter,EmergencyContactPersonIdParameter,MobileContactParameter,userId,DeleteFlag,ContactType,RegisteredToClinic
+                    );
+               int res= await _unitOfWork.SaveChangesAsync();
+
+                return res;
+                    
+            }
+            catch(Exception e)
+            {
+                Log.Error(e.Message);
+                throw e;
+
+            }
+        }
+
+        public async Task<PersonEmergencyContact> GetCurrentLatestEmergencyContact(int personId)
+        {
+            try {
+
+                var pme = await _unitOfWork.Repository<PersonEmergencyContact>().Get(x => x.PersonId == personId & x.DeleteFlag == false).OrderByDescending(x => x.Id).FirstOrDefaultAsync();
+                return pme;
+            }
+            catch (Exception e)
+            {
+                Log.Error(e.Message);
+                throw e;
+                   
+            }
+        }
+
+        public async Task<PersonLocation> GetCurrentPersonLocation(int personId)
+        {
+            try
+            {
+                var pme = await _unitOfWork.Repository<PersonLocation>().Get(x => x.PersonId == personId & x.DeleteFlag == false).OrderByDescending(x => x.Id).FirstOrDefaultAsync();
+                return pme;
+            }
+            catch(Exception e)
+            {
+                Log.Error(e.Message);
+                throw e;
+                   
+            }
+        }
+
+        public async Task<int> UpdatePersonLocation(PersonLocation location)
+        {
+            try
+            {
+                
+               _unitOfWork.Repository<PersonLocation>().Update(location);
+                int res = await _unitOfWork.SaveChangesAsync();
+
+                return res;
+                
+            }
+            catch(Exception e)
+            {
+                Log.Error(e.Message);
+                throw e;
+            }
+        }
+        public async Task<int> UpdatePersonContact(PersonContact p)
+        {
+            try
+            {
+                SqlParameter personIdParameter = new SqlParameter("personIdParameter", SqlDbType.Int);
+                personIdParameter.Value = p.PersonId;
+
+                SqlParameter physicalAdressParameter = new SqlParameter("physicalAddressParameter", SqlDbType.VarBinary);
+                physicalAdressParameter.Value = Encoding.ASCII.GetBytes(p.PhysicalAddress);
+
+                SqlParameter mobileNumberParameter = new SqlParameter("mobileNumberParameter", SqlDbType.VarBinary);
+                mobileNumberParameter.Value = Encoding.ASCII.GetBytes(p.MobileNumber);
+
+                SqlParameter alternativeNumberParameter = new SqlParameter("alternativeNumberParameter",
+                    SqlDbType.VarBinary);
+                alternativeNumberParameter.Value = Encoding.ASCII.GetBytes(p.AlternativeNumber);
+
+                SqlParameter emailAddressParameter = new SqlParameter("emailAddressParameter", SqlDbType.VarBinary);
+                emailAddressParameter.Value = Encoding.ASCII.GetBytes(p.EmailAddress);
+
+                SqlParameter id = new SqlParameter("Id", SqlDbType.Int);
+                id.Value = p.Id;
+
+                await _unitOfWork.Repository<PersonContact>().FromSql("exec PersonContact_Update @personIdParameter, @physicalAddressParameter, @mobileNumberParameter, @alternativeNumberParameter, @emailAddressParameter, @Id",
+                    personIdParameter, physicalAdressParameter, mobileNumberParameter, alternativeNumberParameter,
+                    emailAddressParameter, id);
+                int res = await _unitOfWork.SaveChangesAsync();
+                return res;
+
+            }
+            catch(Exception ex)
+            {
+                Log.Error(ex.Message);
+                throw ex;
+            }
+            
+        }
+
+        public async Task<PersonContactView> GetCurrentPersonContact (int PersonId)
+        {
+            try
+            {
+                StringBuilder sql = new StringBuilder();
+                sql.Append("exec pr_OpenDecryptedSession;");
+                sql.Append(
+                 "SELECT top 1.*   FROM [dbo].[PersonContactView] WHERE " +
+                 "(DeleteFlag is null or DeleteFlag=0) and " +
+                 "PersonId ="+PersonId+"  order by CreateDate desc;" );
+                sql.Append("exec [dbo].[pr_CloseDecryptedSession];");
+
+                var personcontactview = await _unitOfWork.Repository<PersonContactView>().FromSql(sql.ToString());
+
+                return personcontactview.FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                Log.Error(e.Message);
+                throw e;
+
+            }
+        }
+
+        public async Task<List<PersonEmergencyView>> GetCurrentPersonEmergency(int PersonId)
+        {
+            try
+            {
+                StringBuilder sql = new StringBuilder();
+                sql.Append("exec pr_OpenDecryptedSession;");
+                sql.Append("select * from [dbo].[PersonEmergencyView] where Deleteflag=0 and PersonId =" + PersonId + " Order by CreateDate desc;");
+                sql.Append("exec [dbo].[pr_CloseDecryptedSession];");
+
+                var personemergencyview = await _unitOfWork.Repository<PersonEmergencyView>().FromSql(sql.ToString());
+
+                return personemergencyview.ToList();
+            }
+            catch(Exception e)
+            {
+                Log.Error(e.Message);
+                throw e;
+
+            }
+
+        }
+
+        public async Task<PersonConsent> GetCurrentPersonConsent (int EmergencyContactId,int PersonId)
+        {
+            try
+            {
+                var consent = await _unitOfWork.Repository<PersonConsent>().Get(x => x.EmergencyContactId == EmergencyContactId && x.PersonId == PersonId && !x.DeleteFlag).OrderByDescending(x=>x.CreateDate).FirstOrDefaultAsync();
+                return consent;
+            }
+            catch(Exception e)
+            {
+                Log.Error(e.Message);
+                throw e;
+            }
+
+        }
+
+
+
+        
+
+        public async Task<PersonRelationship>   GetCurrentRelationShip(int PersonId,int RelatedToPersonId)
+        {
+            try
+            {
+                var pme = await _unitOfWork.Repository<PersonRelationship>().Get(x => x.PersonId == RelatedToPersonId && x.IndexPersonId == PersonId && !x.DeleteFlag).OrderByDescending(x => x.Id).FirstOrDefaultAsync();
+                return pme;
+            }
+            catch(Exception e)
+            {
+                Log.Error(e.Message);
+                throw e;
+            }
+            
+        }
+
+        public async Task<PersonRelationship> AddPersonRelationship(int PersonId,int RelatedToPersonId,int RelationshipType,int Createdby)
+        {
+            try
+            {
+                PersonRelationship pl = new PersonRelationship();
+                pl.PersonId = RelatedToPersonId;
+                pl.RelationshipTypeId = RelationshipType;
+                pl.IndexPersonId = PersonId;
+                pl.CreateDate = DateTime.Now;
+                pl.DeleteFlag = false;
+                pl.CreatedBy = Createdby;
+
+
+                await _unitOfWork.Repository<PersonRelationship>().AddAsync(pl);
+                await _unitOfWork.SaveAsync();
+
+                return pl;
+            }
+            catch (Exception e)
+            {
+                Log.Error(e.Message);
+                throw e;
+
+            }
+
+        }
+
+     
+        public async Task<PersonConsent> AddPersonConsent(PersonConsent pmc)
+        {
+            try
+            {
+                var sql = "Insert Into PersonConsent(PersonId, EmergencyContactId,ConsentType,ConsentDate,ConsentValue,ConsentReason,Active,DeleteFlag,CreateDate,CreatedBy)" +
+                    $"Values( '{pmc.PersonId}', '{pmc.EmergencyContactId}'," +
+                    $"'{pmc.ConsentType}', '{pmc.ConsentDate}', '{pmc.ConsentValue}', '{pmc.ConsentReason}'," +
+                    $"1,0,GETDATE(), '{pmc.CreatedBy}');" +
+                    "SELECT Id,PersonId, EmergencyContactId,ConsentType,ConsentDate" +
+                    ",ConsentValue,ConsentReason,Active,DeleteFlag,CreateDate,CreatedBy,AuditData " +
+                    "FROM [dbo].[PersonConsent] WHERE Id = SCOPE_IDENTITY();";
+                    
+
+                var personConsent = await _unitOfWork.Repository<PersonConsent>().FromSql(sql);
+
+                return personConsent.FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                Log.Error(e.Message);
+                throw e;
+            }
+
+        }
+
+        public async Task<int> UpdatePersonConsent(PersonConsent pmc)
+        {
+            try
+            {
+                _unitOfWork.Repository<PersonConsent>().Update(pmc);
+                int res=await _unitOfWork.SaveChangesAsync();
+                return res;
+            }
+            catch(Exception e)
+            {
+                Log.Error(e.Message);
+                throw e;
+            }
+        }
+
+       public async Task<PersonEmergencyContact> AddPersonEmergencyContact(PersonEmergencyContact pmc)
+        {
+            try
+            {
+                SqlParameter personIdParameter = new SqlParameter("personIdParameter", SqlDbType.Int);
+                personIdParameter.Value = pmc.PersonId;
+                SqlParameter EmergencyContactPersonIdParameter = new SqlParameter("EmergencyContactPersonIdParameter", SqlDbType.Int);
+                EmergencyContactPersonIdParameter.Value = pmc.EmergencyContactPersonId;
+                SqlParameter MobileContactParameter = new SqlParameter("MobileContactParameter", SqlDbType.VarBinary);
+                MobileContactParameter.Value = Encoding.ASCII.GetBytes(pmc.MobileContact);
+                SqlParameter userId = new SqlParameter("UserId", SqlDbType.Int);
+                userId.Value = pmc.CreatedBy;
+                SqlParameter ContactType = new SqlParameter("ContactType", SqlDbType.Int);
+                ContactType.Value = pmc.ContactType;
+                SqlParameter RegisteredToClinic = new SqlParameter("RegisteredToClinic", SqlDbType.Bit);
+
+                if (pmc.RegisteredToClinic == true)
+                {
+                    RegisteredToClinic.Value = 1;
+                }
+                else if (pmc.RegisteredToClinic == false)
+                {
+                    RegisteredToClinic.Value = 0;
+                }
+                
+                  await _unitOfWork.Repository<PersonEmergencyContact>().ExecWithStoreProcedureAsync("PersonEmergencyContact_Insert @personIdParameter,@EmergencyContactPersonIdParameter,@MobileContactParameter,@UserId,@ContactType,@RegisteredToClinic",
+                     personIdParameter,EmergencyContactPersonIdParameter,MobileContactParameter,userId,ContactType,RegisteredToClinic);
+                 await _unitOfWork.SaveChangesAsync();
+                return pmc;
+            }
+            catch (Exception e)
+            {
+                Log.Error(e.Message);
+                throw e;
+
+            }
+        }
+       
+
+       
+
+  
     }
 }

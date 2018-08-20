@@ -4553,7 +4553,24 @@
 			});
         }
         function addPatientTBRx() {
-
+            var patientId = <%=PatientId%>;
+            var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            var TBRxStartDate = $("#<%=tbTBRXStartDate.ClientID%>").val();
+            var TBRxEndDate = $("#<%=tbTBRXEndDate.ClientID%>").val();
+            var TBRxRegimen = $("#<%=ddlICFRegimen.ClientID%>").val();
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientTbService.asmx/AddPatienTBRx",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','TBRxStartDate': '" + TBRxStartDate + "','TBRxEndDate': '" + TBRxEndDate + "','TBRxRegimen':'" + TBRxRegimen +"'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    toastr.success(response.d, "Patient TBRx saved successfully");
+                },
+                error: function (response) {
+                    toastr.error(response.d, "Patient TBRx not saved");
+                }
+            });
         }
 
 
@@ -5963,7 +5980,6 @@
         var todayDate = new Date();
         var tbrxStartDate = $("#tbTBRXStartDate").val();
         var tbrxEndDate = $("#tbTBRXEndDate").val();
-        alert(todayDate);
         if (selectedIndex >= 1 && tbrxStartDate != "") {
             if (new Date(tbrxStartDate) <= new Date(todayDate) && new Date(tbrxEndDate) >= new Date(todayDate)) {
                 tbScreenScore = 4;

@@ -193,6 +193,7 @@
     <Compile Include="Tb\PatientIpt.cs" />
     <Compile Include="Tb\PatientIptOutcome.cs" />
     <Compile Include="Tb\PatientIptWorkup.cs" />
+    <Compile Include="Tb\PatientTBRx.cs" />
     <Compile Include="Triage\PatientAdverseEvent.cs" />
     <Compile Include="Triage\PatientAdverseEventOutcome.cs" />
     <Compile Include="Triage\PatientAllergy.cs" />

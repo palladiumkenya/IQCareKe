@@ -15,7 +15,7 @@ using IQCareRecords.Common.BusinessProcess;
 using Microsoft.AspNetCore.Http;
 using System.Web;
 using Microsoft.AspNetCore.Hosting.Internal;
-using IQCare.Helpers;
+
 
 using Microsoft.Extensions.PlatformAbstractions;
 
