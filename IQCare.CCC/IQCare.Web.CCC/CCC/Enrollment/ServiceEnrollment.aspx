@@ -331,17 +331,17 @@
                 var identifiers = {};
                 $.each(fields, function (index, value) {
                     fieldName = $("#" + value.Code).val();
-                    if (value.Prefix != null) {
+                    if (value.Prefix != null && value.Prefix != "mfl_code") {
                         prefix = $("#" + value.Prefix).val();
                         fieldName = prefix + "-" + fieldName;
                     }
                     identifiers[value.ID] = fieldName;
                 });
 
-                if (patType == "Transit" && (code == prefix)) {
+                /*if (patType == "Transit" && (code == prefix)) {
                     toastr.error("You selected the home facility for a transit patient", "Patient Enrollment");
                     return false;
-                }
+                }*/
 
                 var reconfirmatoryTest = $("#ReconfirmatoryTest").val();
                 var resultReConfirmatoryTest = $("#ResultReConfirmatoryTest").val();
@@ -395,17 +395,18 @@
                 var identifiers = {};
                 $.each(fields, function (index, value) {
                     fieldName = $("#" + value.Code).val();
-                    if (value.Prefix != null) {
+
+                    if (value.Prefix != null && value.Prefix != "mfl_code") {
                         prefix = $("#" + value.Prefix).val();
                         fieldName = prefix + "-" + fieldName;
                     }
                     identifiers[value.ID] = fieldName;
                 });
 
-                if (patType == "Transit" && (code == prefix)) {
+                /*if (patType == "Transit" && (code == prefix)) {
                     toastr.error("You selected the home facility for a transit patient", "Patient Enrollment");
                     return false;
-                }
+                }*/
 
                 var reconfirmatoryTest = $("#ReconfirmatoryTest").val();
                 var resultReConfirmatoryTest = $("#ResultReConfirmatoryTest").val();
@@ -503,7 +504,7 @@
             $.when(createDynamicElements()).then(function () {
                 setTimeout(function () {
                     if (patType == "New") {
-                        $('#mfl_code').append($('<option></option>'));
+                        /*$('#mfl_code').append($('<option></option>'));
 
                         $('#mfl_code').append($('<option>',
                             {
@@ -513,12 +514,12 @@
 
                         $("#mfl_code").val(code).trigger("change");
                         $("#mfl_code").prop('disabled', true);
-
+                        */
                         getPatientEnrollmentDetails();
                     } else {
-                        $.when(getFacilitiesList()).then(function() {
+                        //$.when(getFacilitiesList()).then(function() {
                             getPatientEnrollmentDetails();
-                        });
+                        //});
                     }
                 },1000);
             });
@@ -569,13 +570,13 @@
                             table += "<select disabled id=" + messageResponse[i].ID + " class='form-control'><option value=" + messageResponse[i].ID + ">" + messageResponse[i].IdentifierName + "</option></select>";
                             table += "</td>";
 
-                            if (messageResponse[i].Prefix != null) {
+                            if (messageResponse[i].Prefix != null && messageResponse[i].Prefix != "mfl_code") {
                                 table += "<td>";
                                 table += "<label align='center'>" + messageResponse[i].Prefix + " :</label>";
                                 table += "</td>";
 
 
-                                if (messageResponse[i].Required == true) {
+                                if (messageResponse[i].Required == true && messageResponse[i].Prefix != "mfl_code") {
                                     table += "<td>";
                                     if (messageResponse[i].Prefix == "mfl_code") {
                                         table += "<select id=" + messageResponse[i].Prefix + " class='form-control' data-parsley-required='true' data-parsley-min='1'></select>";
@@ -586,7 +587,7 @@
                                 } else {
                                     table += "<td>";
                                     if (messageResponse[i].Prefix == "mfl_code") {
-                                        table += "<select id=" + messageResponse[i].Prefix + " class='form-control' data-parsley-min='1'></select>";
+                                        //table += "<select id=" + messageResponse[i].Prefix + " class='form-control' data-parsley-min='1'></select>";
                                     } else {
                                         table += "<input type='text' id=" + messageResponse[i].Prefix + " class='form-control' data-parsley-type='digits' />  ";
                                     }                                   
@@ -602,9 +603,9 @@
                             if (messageResponse[i].DataType == "Numeric") {
                                 table += "<td>";
                                 if (messageResponse[i].Required == true) {
-                                    table += "<input type='text' id=" + messageResponse[i].Code + " class='form-control' data-parsley-type='digits' data-parsley-required='true' data-parsley-length='[5, 5]' />";
+                                    table += "<input type='text' id=" + messageResponse[i].Code + " class='form-control' data-parsley-type='digits' data-parsley-trigger='keyup' data-parsley-pattern-message='Please enter a valid 10 digit number' data-parsley-pattern='/^((?!(0))[0-9]{10})$/' data-parsley-required='true' data-parsley-length='[10, 10]' />";
                                 } else {
-                                    table += "<input type='text' id=" + messageResponse[i].Code + " class='form-control' data-parsley-type='digits' data-parsley-length='[5, 5]' />";
+                                    table += "<input type='text' id=" + messageResponse[i].Code + " class='form-control' data-parsley-type='digits' data-parsley-trigger='keyup' data-parsley-pattern-message='Please enter a valid 10 digit number' data-parsley-pattern='/^((?!(0))[0-9]{10})$/'  data-parsley-length='[10, 10]' />";
                                 }
                                 
                                 table += "</td>";

@@ -27,7 +27,8 @@
 
                                         <div class="form-group">
                                             <label>Health Worker *</label>
-                                            <input id="healthWorker" name="healthWorker" type="text" class="form-control required" [(ngModel)]="linkage.healthworker" #healthworker="ngModel">
+                                            <input id="healthWorker" name="healthWorker" type="text" class="form-control required" [(ngModel)]="linkage.healthworker"
+                                                #healthworker="ngModel">
                                             <div *ngIf="healthworker.errors && (healthworker.dirty || healthworker.touched)" class="alert alert-danger">
                                                 <div [hidden]="!healthworker.errors.required">
                                                     Linkage health worker is required!
@@ -51,7 +52,8 @@
                                             <label>Date Enrolled *</label>
                                             <div>
                                                 <mat-form-field>
-                                                    <input matInput [matDatepicker]="myDatepicker" (click)="myDatepicker.open()" id="dateEnrolled" name="dateEnrolled" [(ngModel)]="linkage.dateEnrolled" #dateEnrolled="ngModel">
+                                                    <input matInput [matDatepicker]="myDatepicker" (click)="myDatepicker.open()" id="dateEnrolled" name="dateEnrolled" [(ngModel)]="linkage.dateEnrolled"
+                                                        #dateEnrolled="ngModel">
                                                     <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
                                                     <mat-datepicker #myDatepicker></mat-datepicker>
                                                 </mat-form-field>
@@ -66,10 +68,14 @@
 
                                         <div class="form-group">
                                             <label>CCC Number *</label>
-                                            <input id="cccNumber" name="cccNumber" type="text" class="form-control required" [(ngModel)]="linkage.cccNumber" #cccNumber="ngModel">
+                                            <input id="cccNumber" name="cccNumber" type="text" class="form-control required" [pattern]="cccPattern" [(ngModel)]="linkage.cccNumber"
+                                                #cccNumber="ngModel">
                                             <div *ngIf="cccNumber.errors && (cccNumber.dirty || cccNumber.touched)" class="alert alert-danger">
                                                 <div [hidden]="!cccNumber.errors.required">
-                                                    Linkage CCC Number worker is required!
+                                                    Linkage CCC Number is required!
+                                                </div>
+                                                <div [hidden]="!cccNumber.errors.pattern">
+                                                    Invalid CCC format!
                                                 </div>
                                             </div>
                                         </div>
