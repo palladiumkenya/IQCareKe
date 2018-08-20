@@ -4,14 +4,12 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace IQCare.Common.BusinessProcess.CommandHandlers.Encounter
 {
-  public  class GetPatientPhysicalExaminationHandler : IRequestHandler<GetPatientPhysicalExaminationCommand, Result<GetPatientPhysicamExamResponse>>
+    public  class GetPatientPhysicalExaminationHandler : IRequestHandler<GetPatientPhysicalExaminationCommand, Result<GetPatientPhysicamExamResponse>>
     {
         private readonly ICommonUnitOfWork _unitOfWork;
 

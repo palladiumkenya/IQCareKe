@@ -17,7 +17,7 @@
       <file leaf-file-name="search.component.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/records/search/search.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="864">
+            <state relative-caret-position="850">
               <caret line="54" column="85" selection-start-line="54" selection-start-column="85" selection-end-line="54" selection-end-column="85" />
               <folding>
                 <element signature="e#0#84#0" expanded="true" />
@@ -38,7 +38,7 @@
       <file leaf-file-name="person-home.component.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/dashboard/person-home/person-home.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="765">
+            <state relative-caret-position="663">
               <caret line="45" column="21" lean-forward="true" selection-start-line="45" selection-start-column="21" selection-end-line="45" selection-end-column="21" />
               <folding>
                 <element signature="e#0#50#0" expanded="true" />
@@ -50,7 +50,7 @@
       <file leaf-file-name="person-home.service.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/dashboard/services/person-home.service.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
+            <state relative-caret-position="170">
               <caret line="17" column="42" lean-forward="true" selection-start-line="17" selection-start-column="42" selection-end-line="17" selection-end-column="42" />
               <folding>
                 <element signature="e#0#43#0" expanded="true" />
@@ -80,7 +80,7 @@
       <file leaf-file-name="visit-details.component.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/pmtct/visit-details/visit-details.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
+            <state relative-caret-position="272">
               <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
               <folding>
                 <element signature="e#0#57#0" expanded="true" />
@@ -92,7 +92,7 @@
       <file leaf-file-name="dashboard.module.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/dashboard/dashboard.module.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
+            <state relative-caret-position="255">
               <caret line="20" column="32" selection-start-line="20" selection-start-column="32" selection-end-line="21" />
               <folding>
                 <element signature="e#0#68#0" expanded="true" />
@@ -104,8 +104,8 @@
       <file leaf-file-name="person-home.component.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/dashboard/person-home/person-home.component.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="646">
-              <caret line="38" column="86" lean-forward="true" selection-start-line="38" selection-start-column="86" selection-end-line="38" selection-end-column="86" />
+            <state relative-caret-position="623">
+              <caret line="38" column="86" selection-start-line="38" selection-start-column="86" selection-end-line="38" selection-end-column="86" />
             </state>
           </provider>
         </entry>
@@ -113,7 +113,7 @@
       <file leaf-file-name="hts.module.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/hts/hts.module.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="669">
+            <state relative-caret-position="663">
               <caret line="82" column="27" selection-start-line="82" selection-start-column="8" selection-end-line="82" selection-end-column="27" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
@@ -183,6 +183,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -299,7 +300,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -342,21 +342,20 @@
       <workItem from="1534144987051" duration="465000" />
       <workItem from="1534146471154" duration="15000" />
       <workItem from="1534158072393" duration="18324000" />
+      <workItem from="1534438973501" duration="13000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41819000" />
+    <option name="totallyTimeSpent" value="41832000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="1720" height="1047" extended-state="0" />
     <layout>
-      <window_info anchor="bottom" id="TypeScript" order="7" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18779343" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32974634" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -367,8 +366,10 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="TypeScript" order="7" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32974634" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -383,6 +384,13 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/app/dashboard/person-home/person-home.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="38" column="86" lean-forward="true" selection-start-line="38" selection-start-column="86" selection-end-line="38" selection-end-column="86" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/shared/_models/Lookups.ts" />
     <entry file="file://$PROJECT_DIR$/app/hts/encounter/encounter.component.ts">
       <provider selected="true" editor-type-id="text-editor">
@@ -544,21 +552,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/app.module.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#58#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/pmtct/pmtct.module.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="822">
           <caret line="52" column="32" lean-forward="true" selection-start-line="52" selection-start-column="32" selection-end-line="52" selection-end-column="32" />
-          <folding>
-            <element signature="e#0#53#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -566,9 +565,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="601">
           <caret line="36" column="7" selection-start-line="34" selection-start-column="3" selection-end-line="36" selection-end-column="7" />
-          <folding>
-            <element signature="e#0#50#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -590,9 +586,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="456">
           <caret line="27" column="42" selection-start-line="27" selection-start-column="42" selection-end-line="27" selection-end-column="42" />
-          <folding>
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#form#0;n#!!top" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -600,9 +593,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
           <caret line="26" column="6" selection-start-line="26" selection-start-column="6" selection-end-line="26" selection-end-column="6" />
-          <folding>
-            <element signature="e#0#50#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -610,9 +600,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="561">
           <caret line="54" column="23" selection-start-line="54" selection-start-column="23" selection-end-line="54" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#50#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -624,15 +611,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/hts/_services/family.service.spec.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#56#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/records/_models/person.ts">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/records/_models/personView.ts">
@@ -665,7 +643,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/records/search/search.component.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="864">
+        <state relative-caret-position="850">
           <caret line="54" column="85" selection-start-line="54" selection-start-column="85" selection-end-line="54" selection-end-column="85" />
           <folding>
             <element signature="e#0#84#0" expanded="true" />
@@ -677,9 +655,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="459">
           <caret line="27" selection-start-line="27" selection-end-line="32" selection-end-column="5" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -699,7 +674,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/pmtct/visit-details/visit-details.component.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
+        <state relative-caret-position="272">
           <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
           <folding>
             <element signature="e#0#57#0" expanded="true" />
@@ -709,7 +684,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/hts/hts.module.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="669">
+        <state relative-caret-position="663">
           <caret line="82" column="27" selection-start-line="82" selection-start-column="8" selection-end-line="82" selection-end-column="27" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
@@ -719,7 +694,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/dashboard/dashboard.module.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
+        <state relative-caret-position="255">
           <caret line="20" column="32" selection-start-line="20" selection-start-column="32" selection-end-line="21" />
           <folding>
             <element signature="e#0#68#0" expanded="true" />
@@ -729,7 +704,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/dashboard/services/person-home.service.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
+        <state relative-caret-position="170">
           <caret line="17" column="42" lean-forward="true" selection-start-line="17" selection-start-column="42" selection-end-line="17" selection-end-column="42" />
           <folding>
             <element signature="e#0#43#0" expanded="true" />
@@ -739,7 +714,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/dashboard/person-home/person-home.component.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
+        <state relative-caret-position="663">
           <caret line="45" column="21" lean-forward="true" selection-start-line="45" selection-start-column="21" selection-end-line="45" selection-end-column="21" />
           <folding>
             <element signature="e#0#50#0" expanded="true" />
@@ -749,8 +724,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/dashboard/person-home/person-home.component.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="38" column="86" lean-forward="true" selection-start-line="38" selection-start-column="86" selection-end-line="38" selection-end-column="86" />
+        <state relative-caret-position="623">
+          <caret line="38" column="86" selection-start-line="38" selection-start-column="86" selection-end-line="38" selection-end-column="86" />
         </state>
       </provider>
     </entry>
