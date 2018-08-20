@@ -1,3 +1,4 @@
+import { ViewComponent } from './person/view/view.component';
 import { MaritalStatusResolver } from './_services/maritalstatus.resolver';
 import { GenderResolver } from './_services/gender.resolver';
 import { CountyResolver } from './_services/county.resolver';
@@ -29,6 +30,10 @@ const routes: Routes = [
                     occupationArray: OccupationResolver,
                     relationshipArray: RelationshipResolver
                 }
+            },
+            {
+                path: 'view',
+                component: ViewComponent
             }
         ]
     }

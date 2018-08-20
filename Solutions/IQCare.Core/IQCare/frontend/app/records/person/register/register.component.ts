@@ -257,7 +257,7 @@ export class RegisterComponent implements OnInit {
                     const personOccupation = this.personRegistration.addPersonOccupation(personId,
                         this.person.createdBy, this.person.Occupation);
                     // Add Emergency Contact
-                    const personEmergencyContact = this.personRegistration.registerPersonEmergencyContact(personId);
+                    const personEmergencyContact = this.personRegistration.registerPersonEmergencyContact(personId, this.emergencyContact);
 
                     forkJoin([personContact, personAddress, personMaritalStatus,
                         personEducationLevel, personOccupation, personEmergencyContact]).subscribe(
