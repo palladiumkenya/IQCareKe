@@ -127,15 +127,7 @@ xcopy /d %BATDIR%\Library\EntityFramework.SqlServer.dll %BATDIR%\package\web\bin
 @echo "********** Building IQCare API **********" >> %log%
 @echo ********** Building IQCare API **********
 
-dotnet publish Solutions/IQCare.Core/IQCare/IQCare.csproj -o ../../../package/api
 
-@echo ********** END OF BUILINDING IQCare API ********** >> %log%
-
-@echo ********** END OF BUILINDING FRONTEND ********** >> %log%
-
-cd Solutions/IQCare.Core/IQCare
-
-ng build --base-href "/frontend/" --prod
 
 pause
 
