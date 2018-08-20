@@ -35,6 +35,8 @@ namespace Entities.CCC.Triage
         public string WeightForHeight { get; set; }
         public string WeightForAge { get; set; }
         public DateTime? VisitDate { get; set; }
+        //public decimal AgeforZ { get; set; }
+        //public string NursesComments { get; set; }
      }
 
 }

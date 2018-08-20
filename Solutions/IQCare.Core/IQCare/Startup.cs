@@ -11,6 +11,13 @@ using Microsoft.Extensions.DependencyInjection;
 using System.IO;
 using System.Reflection;
 using IQCare.Helpers;
+using IQCareRecords.Common.BusinessProcess;
+using Microsoft.AspNetCore.Http;
+using System.Web;
+using Microsoft.AspNetCore.Hosting.Internal;
+using IQCare.Helpers;
+
+using Microsoft.Extensions.PlatformAbstractions;
 
 namespace IQCare
 {
@@ -48,6 +55,7 @@ namespace IQCare
             {
                 assemblies.Add(Assembly.Load(assemblyName));
             }
+           
             services.AddMediatR(assemblies);
             services.AddMvc()
                 .AddMvcOptions(o => o.OutputFormatters.Add(new XmlDataContractSerializerOutputFormatter()))

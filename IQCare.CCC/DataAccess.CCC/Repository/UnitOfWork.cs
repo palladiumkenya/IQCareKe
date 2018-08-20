@@ -32,6 +32,8 @@ using DataAccess.CCC.Repository.assessment;
 using DataAccess.CCC.Repository.IL;
 using DataAccess.CCC.Repository.Interoperability;
 using DataAccess.CCC.Repository.Pharmacy;
+using DataAccess.CCC.Interface.Adherence;
+using DataAccess.CCC.Repository.Adherence;
 
 namespace DataAccess.CCC.Repository
 {
@@ -48,13 +50,16 @@ namespace DataAccess.CCC.Repository
         private IPatientOvcStatusRepository _patientOvcStatusRepository;
         private IPatientPopulationRepository _patientPopulationRepository;
         private IPatientTreatmentSupporterRepository _patientTreatmentSupporterRepository;
-
+        private IPatientSexualHistoryRepository _patientSexualHistoryRepository;
+        private IPatientHighRiskRepository _patientHighRiskRepository;
+        private IPatientPartnersRepository _patientPartnersRepository;
         /* Patient Interface */
         private IPatientVitalsRepository _patientVitalsRepository;
 
         /* Modules */
         private IModuleRepository _moduleRepository;
 
+        private IPatientOIRepository _patientOIRepository;
         /* lookupContext */
         private ILookupItemRepository _lookupItemRepository;
         private ILookupRepository _lookupRepository;
@@ -136,6 +141,7 @@ namespace DataAccess.CCC.Repository
         /*Encounter*/
         private IPatientCareEndingRepository _patientCareEndingRepository;
         private IPatientAdherenceAssessmentRepository _patientAdherenceAssessmentRepository;
+        private ISocialHistoryRepository _socialHistoryRepository;
 
         /*Consent*/
         private IPatientConsentRepository _patientConsentRepository;
@@ -168,6 +174,26 @@ namespace DataAccess.CCC.Repository
         private IPharmacyOrderRepository _pharmacyOrderRepository;
         private IDrugRepository _drugRepository;
 
+        //Neonatal
+        private IPatientNeonatalRepository _patientNeonatalRepository;
+        private IImmunizationHistoryRepository _immunizationHistoryRepository;
+        private ITannersStagingRepository _tannersStagingRepository;
+        private IRecordTannersStagingRepository _recordTannersStagingRepository;
+        private NeonatalRepository _neonatalRepository;
+        private MilestonesRepository _milestonesRepository;
+
+        //Adherence
+        private IAdherenceRepository _adherenceRepository;
+        private IAdherenceScreeningRepository _adherenceScreeningRepository;
+        private IAdherencePsychosocialRepository _adherencePsychosocialRepository;
+        private IAdherenceDailyRoutineRepository _adherenceDailyRoutineRepository;
+        private IAdherenceHIVInfectionRepository _adherenceHIVInfectionRepository;
+        private IAdherenceReferralsRepository _adherenceReferralsRepository;
+
+        //Notes
+        private IPatientClinicalNotesRepository _patientClinicalNotesRepository;
+        
+
         public UnitOfWork(BaseContext context)
         {
             if (context == null)
@@ -187,6 +213,14 @@ namespace DataAccess.CCC.Repository
             }
         }
 
+        public IPatientOIRepository PatientOIRepository
+        {
+            get
+            {
+                return _patientOIRepository ??
+                 (_patientOIRepository = new PatientOIRepository((GreencardContext)_context));
+            }
+        }
      
         public ILookupRepository LookupRepository
         {
@@ -291,7 +325,33 @@ namespace DataAccess.CCC.Repository
                        (_patientServiceEnrollmentLookupRepository = new PatientServiceEnrollmentLookupRepository((LookupContext) _context));
             }
         }
+        public IPatientSexualHistoryRepository PatientSexualHistoryRepository
+        {
+            get
+            {
+                return _patientSexualHistoryRepository ??
+                       (_patientSexualHistoryRepository =
+                           new PatientSexualHistoryRepository((GreencardContext)_context));
+            }
+        }
 
+        public IPatientPartnersRepository PatientPartnersRepository
+        {
+            get
+            {
+                return _patientPartnersRepository ??
+                    (_patientPartnersRepository = new PatientPartnersRepository((GreencardContext)_context));
+            }
+        }
+
+        public IPatientHighRiskRepository PatientHighRiskRepository
+        {
+            get
+            {
+                return _patientHighRiskRepository ??
+                    (_patientHighRiskRepository = new PatientHighRiskRepository((GreencardContext)_context));
+            }
+        }
         public IPatientTreatmentSupporterLookupRepository PatientTreatmentSupporterLookupRepository
         {
             get
@@ -836,6 +896,70 @@ namespace DataAccess.CCC.Repository
                 return _patientAdverseEventOutcomeRepository ?? (_patientAdverseEventOutcomeRepository = new PatientAdverseEventOutcomeRepository((GreencardContext)_context));
             }
         }
+
+        public IPatientNeonatalRepository PatientNeonatalRepository
+        {
+            get { return _patientNeonatalRepository ?? (_patientNeonatalRepository = new PatientNeonatalRepository((GreencardContext)_context)); }
+        }
+        public IMilestonesRepository MilestonesRepository
+        {
+            get { return _milestonesRepository ?? (_milestonesRepository = new MilestonesRepository((GreencardContext)_context)); }
+        }
+        public IImmunizationHistoryRepository ImmunizationHistoryRepository
+        {
+            get { return _immunizationHistoryRepository ?? (_immunizationHistoryRepository = new ImmunizationHistoryRepository((GreencardContext)_context)); }
+        }
+
+        public ITannersStagingRepository TannersStagingRepository
+        {
+            get { return _tannersStagingRepository ?? (_tannersStagingRepository= new TannersStagingRepository((GreencardContext)_context)); }
+        }
+        public IRecordTannersStagingRepository RecordTannersStagingRepository
+        {
+            get { return _recordTannersStagingRepository ?? (_recordTannersStagingRepository = new RecordTannersStagingRepository((GreencardContext)_context)); }
+        }
+
+        public ISocialHistoryRepository SocialHistoryRepository
+        {
+            get
+            {
+                return _socialHistoryRepository ??(_socialHistoryRepository = new SocialHistoryRepository((GreencardContext)_context));
+            }
+        }
+        public INeonatalRepository NeonatalRepository
+        {
+            get { return _neonatalRepository ?? (_neonatalRepository = new NeonatalRepository((GreencardContext)_context)); }
+        }
+
+        public IAdherenceRepository AdherenceRepository
+        {
+            get { return _adherenceRepository ?? (_adherenceRepository = new AdherenceRepository((GreencardContext)_context)); }
+        }
+        public IAdherenceScreeningRepository AdherenceScreeningRepository
+        {
+            get { return _adherenceScreeningRepository ?? (_adherenceScreeningRepository = new AdherenceScreeningRepository((GreencardContext)_context)); }
+        }
+        public IAdherencePsychosocialRepository AdherencePsychosocialRepository
+        {
+            get { return _adherencePsychosocialRepository ?? (_adherencePsychosocialRepository = new AdherencePsychosocialRepository((GreencardContext)_context)); }
+        }
+        public IAdherenceDailyRoutineRepository AdherenceDailyRoutineRepository
+        {
+            get { return _adherenceDailyRoutineRepository ?? (_adherenceDailyRoutineRepository = new AdherenceDailyRoutineRepository((GreencardContext)_context)); }
+        }
+        public IAdherenceHIVInfectionRepository AdherenceHIVInfectionRepository
+        {
+            get { return _adherenceHIVInfectionRepository ?? (_adherenceHIVInfectionRepository = new AdherenceHIVInfectionRepository((GreencardContext)_context)); }
+        }
+        public IAdherenceReferralsRepository AdherenceReferralsRepository
+        {
+            get { return _adherenceReferralsRepository ?? (_adherenceReferralsRepository = new AdherenceReferralsRepository((GreencardContext)_context)); }
+        }
+        public IPatientClinicalNotesRepository PatientClinicalNotesRepository
+        {
+            get { return _patientClinicalNotesRepository ?? (_patientClinicalNotesRepository = new PatientClinicalNotesRepository((GreencardContext)_context)); }
+        }
+
 
         public ILookupItemRepository LookupItemRepository => _lookupItemRepository ?? (_lookupItemRepository = new LookupItemRepository((LookupContext)_context));
 

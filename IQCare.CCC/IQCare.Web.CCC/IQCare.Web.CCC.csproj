@@ -49,14 +49,18 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="CCC\Adherence\AdherenceBarriers.aspx" />
     <Content Include="CCC\Appointment\ScheduleAppointment.aspx" />
     <Content Include="CCC\Appointment\PatientAppointments.aspx" />
+    <Content Include="CCC\ClinicalSummary\ClinicalSummary.aspx" />
     <Content Include="CCC\Data\States.xml" />
+    <Content Include="CCC\Depression\DepressionScreening.aspx" />
     <Content Include="CCC\Encounter\ArtDistributionForm.aspx" />
     <Content Include="CCC\Encounter\EncounterHistory.aspx" />
     <Content Include="CCC\Encounter\LabOrder.aspx" />
     <Content Include="CCC\Encounter\PharmacyPrescription.aspx" />
     <Content Include="CCC\IL\MessageViewer.aspx" />
+    <Content Include="CCC\FollowupEducation\frmFollowUpEducation.aspx" />
     <Content Include="CCC\Patient\PatientCareEnded.aspx" />
     <Content Include="CCC\Patient\PatientConsent.aspx" />
     <Content Include="CCC\Scripts\css\bootstrap-datetimepicker.css" />
@@ -124,12 +128,48 @@
     <Content Include="CCC\Scripts\js\jquery-ui-1.8.custom.min.js" />
     <Content Include="CCC\Scripts\js\linegraph1.js" />
     <Content Include="CCC\Scripts\js\PatientRegistration.js" />
+    <Content Include="CCC\UC\Adherence\AdherenceBarriersHome.aspx" />
+    <Content Include="CCC\UC\Adherence\ucAdherenceBarriersHome.ascx" />
+    <Content Include="CCC\UC\Adherence\ucDailyRoutine.ascx" />
+    <Content Include="CCC\UC\Adherence\ucHIVAwareness.ascx" />
+    <Content Include="CCC\UC\Adherence\ucPsychosocialCircumstances.ascx" />
+    <Content Include="CCC\UC\Adherence\ucReferralsandNetworks.ascx" />
+    <Content Include="CCC\UC\Adherence\ucScreening.ascx" />
+    <Content Include="CCC\UC\Adherence\ucUnderstanding.ascx" />
+    <Content Include="CCC\UC\Depression\ScreeningHome.aspx" />
+    <Content Include="CCC\UC\Depression\ucCAGEAID.ascx" />
+    <Content Include="CCC\UC\Depression\ucCRAFFT.ascx" />
+    <Content Include="CCC\UC\Depression\ucDepressionScreening.ascx" />
+    <Content Include="CCC\UC\Depression\ucDisclosure.ascx" />
+    <Content Include="CCC\UC\Depression\ucGBVScreening.ascx" />
+    <Content Include="CCC\UC\Depression\ucScreeningHome.ascx" />
+    <Content Include="CCC\UC\Depression\ucUpdateDepressionScreening.ascx" />
+    <Content Include="CCC\UC\EnhanceAdherenceCounselling\EnhanceAdherenceHome.aspx" />
+    <Content Include="CCC\UC\EnhanceAdherenceCounselling\session1.aspx" />
+    <Content Include="CCC\UC\EnhanceAdherenceCounselling\session2.aspx" />
+    <Content Include="CCC\UC\EnhanceAdherenceCounselling\session3.aspx" />
+    <Content Include="CCC\UC\EnhanceAdherenceCounselling\session4.aspx" />
+    <Content Include="CCC\UC\EnhanceAdherenceCounselling\ucEndSessionViralLoad.ascx" />
+    <Content Include="CCC\UC\EnhanceAdherenceCounselling\ucEnhanceAdherenceHome.ascx" />
+    <Content Include="CCC\UC\EnhanceAdherenceCounselling\ucMMAS4.ascx" />
+    <Content Include="CCC\UC\EnhanceAdherenceCounselling\ucSession1.ascx" />
+    <Content Include="CCC\UC\EnhanceAdherenceCounselling\ucSession2.ascx" />
+    <Content Include="CCC\UC\EnhanceAdherenceCounselling\ucSession3.ascx" />
+    <Content Include="CCC\UC\EnhanceAdherenceCounselling\ucSession4.ascx" />
+    <Content Include="CCC\UC\EnhanceAdherenceCounselling\ucViralLoad.ascx" />
+    <Content Include="CCC\UC\EnhanceAdherenceCounselling\viralload.aspx" />
+    <Content Include="CCC\UC\ucCaseSummary.ascx" />
+    <Content Include="CCC\UC\ucEvaluation.ascx" />
     <Content Include="CCC\UC\ucExtruder.ascx" />
+    <Content Include="CCC\UC\ucFamilyFinder.ascx" />
     <Content Include="CCC\UC\ucFemaleVitals.ascx" />
     <Content Include="CCC\UC\ucGenderBasedViolenceAssessment.ascx" />
+    <Content Include="CCC\UC\ucFollowupEducation.ascx" />
+    <Content Include="CCC\UC\ucICF.ascx" />
     <Content Include="CCC\UC\ucIpt.ascx" />
     <Content Include="CCC\UC\ucIptClientWorkup.ascx" />
     <Content Include="CCC\UC\ucIptOutcome.ascx" />
+    <Content Include="CCC\UC\ucNeonatalHistory.ascx" />
     <Content Include="CCC\UC\ucPatientBrief.ascx" />
     <Content Include="CCC\UC\ucPatientClinicalEncounter.ascx" />
     <Content Include="CCC\UC\ucPatientDetails.ascx" />
@@ -141,17 +181,27 @@
     <Content Include="CCC\UC\ucPatientVitalsExtruder.ascx" />
     <Content Include="CCC\UC\ucPatientWorkPlan.ascx" />
     <Content Include="CCC\UC\ucPharmacyPrescription.ascx" />
+    <Content Include="CCC\UC\ucSocialHistory.ascx" />
+    <Content Include="CCC\UC\ucTannerStaging.ascx" />
     <Content Include="CCC\UC\ucVisitDetails.ascx" />
+    <Content Include="CCC\WebService\AdherenceService.asmx" />
+    <Content Include="CCC\WebService\DepressionScreeningService.asmx" />
+    <Content Include="CCC\WebService\EnhanceAdherenceService.asmx" />
     <Content Include="CCC\WebService\EnrollmentService.asmx" />
     <Content Include="CCC\WebService\FacilityService.asmx" />
+    <Content Include="CCC\WebService\FollowupEducationService.asmx" />
+    <Content Include="CCC\WebService\HIVEducationService.asmx" />
     <Content Include="CCC\WebService\LabService.asmx" />
+    <Content Include="CCC\WebService\NeonatalEncounterService.asmx" />
     <Content Include="CCC\WebService\OneTimeEventsTrackerService.asmx" />
     <Content Include="CCC\WebService\PatientAdverseEventOutcome.asmx" />
     <Content Include="CCC\WebService\PatientBaselineService.asmx" />
+    <Content Include="CCC\WebService\PatientClinicalNotesService.asmx" />
     <Content Include="CCC\WebService\PatientEncounterService.asmx" />
     <Content Include="CCC\WebService\PatientLookupService.asmx" />
     <Content Include="CCC\WebService\PatientMasterVisitService.asmx" />
     <Content Include="CCC\WebService\PatientReEnrollment.asmx" />
+    <Content Include="CCC\WebService\PatientScreeningService.asmx" />
     <Content Include="CCC\WebService\PatientService.asmx" />
     <Content Include="CCC\WebService\PatientSummaryService.asmx" />
     <Content Include="CCC\WebService\PatientTbService.asmx" />
@@ -160,6 +210,184 @@
     <Content Include="CCC\WebService\PersonService.asmx" />
     <Content Include="CCC\WebService\LookupService.asmx" />
     <Content Include="CCC\WebService\FemaleVitalsWebservice.asmx" />
+    <Content Include="Content\bootstrap-datepicker.css" />
+    <Content Include="Content\bootstrap-datepicker.min.css" />
+    <Content Include="Content\bootstrap-datepicker.standalone.css" />
+    <Content Include="Content\bootstrap-datepicker.standalone.min.css" />
+    <Content Include="Content\bootstrap-datepicker3.css" />
+    <Content Include="Content\bootstrap-datepicker3.min.css" />
+    <Content Include="Content\bootstrap-datepicker3.standalone.css" />
+    <Content Include="Content\bootstrap-datepicker3.standalone.min.css" />
+    <Content Include="Content\css\awesomplete.css" />
+    <Content Include="Content\css\bootstrap-callout.css" />
+    <Content Include="Content\css\bootstrap-theme.css" />
+    <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\css\bootstrap.vertical-tabs.css" />
+    <Content Include="Content\css\datepicker.css" />
+    <Content Include="Content\css\daterangepicker.css" />
+    <Content Include="Content\css\font-awesome.css" />
+    <Content Include="Content\css\iqcare.ke-font.css" />
+    <Content Include="Content\css\jquery.validate.css" />
+    <Content Include="Content\css\parsley.css" />
+    <Content Include="Content\datatables\css\datatables.css" />
+    <Content Include="Content\datatables\css\dataTables.jqueryui.css" />
+    <Content Include="Content\datatables\css\dataTables.jqueryui.min.css" />
+    <Content Include="Content\datatables\css\dataTables.material.css" />
+    <Content Include="Content\datatables\css\dataTables.material.min.css" />
+    <Content Include="Content\datatables\css\dataTables.semanticui.css" />
+    <Content Include="Content\datatables\css\dataTables.semanticui.min.css" />
+    <Content Include="Content\datatables\css\dataTables.uikit.css" />
+    <Content Include="Content\datatables\css\dataTables.uikit.min.css" />
+    <Content Include="Content\datatables\css\jquery.dataTables.css" />
+    <Content Include="Content\datatables\images\favicon.ico" />
+    <Content Include="Content\datatables\images\sort_asc.png" />
+    <Content Include="Content\datatables\images\sort_asc_disabled.png" />
+    <Content Include="Content\datatables\images\sort_both.png" />
+    <Content Include="Content\datatables\images\sort_desc.png" />
+    <Content Include="Content\datatables\images\sort_desc_disabled.png" />
+    <Content Include="Content\datatables\js\dataTables.jqueryui.js" />
+    <Content Include="Content\datatables\js\datatables.js" />
+    <Content Include="Content\datatables\js\jquery.dataTables.js" />
+    <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\fonts\icomoon.svg" />
+    <Content Include="Content\fuelux\css\fuelux.css" />
+    <Content Include="Content\fuelux\css\fuelux.min.css" />
+    <Content Include="Content\fuelux\fonts\fuelux.svg" />
+    <Content Include="Content\fuelux\js\fuelux.js" />
+    <Content Include="Content\fuelux\js\fuelux.min.js" />
+    <Content Include="Content\fuelux\js\npm.js" />
+    <Content Include="Content\img\iqSolutions.png" />
+    <Content Include="Content\js\awesomplete.js" />
+    <Content Include="Content\js\bootstrap-datepicker.js" />
+    <Content Include="Content\js\bootstrap.js" />
+    <Content Include="Content\js\highcharts.js" />
+    <Content Include="Content\js\jquery.validate.js" />
+    <Content Include="Content\js\moment.js" />
+    <Content Include="Content\js\parsley-fields-comparison-validators.js" />
+    <Content Include="Content\js\parsley.js" />
+    <Content Include="Content\js\vl_linegraph.js" />
+    <Content Include="Content\noty\css\animate.css" />
+    <Content Include="Content\noty\css\buttons.css" />
+    <Content Include="Content\noty\js\jquery.noty.packaged.js" />
+    <Content Include="Content\pace\css\pace.css" />
+    <Content Include="Content\pace\js\pace.js" />
+    <Content Include="Content\toast\css\toastr.css" />
+    <Content Include="Content\toast\js\toastr.js" />
+    <Content Include="Scripts\bootstrap-datepicker.js" />
+    <Content Include="Scripts\bootstrap-datepicker.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\css\bootstrap-theme.css.map" />
+    <Content Include="Content\css\bootstrap.css.map" />
+    <Content Include="Content\css\datepicker.less" />
+    <Content Include="Content\datatables\images\Sorting icons.psd" />
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\fonts\icomoon.eot" />
+    <Content Include="Content\fonts\icomoon.ttf" />
+    <Content Include="Content\fonts\icomoon.woff" />
+    <Content Include="Content\fuelux\css\fuelux.css.map" />
+    <Content Include="Content\fuelux\fonts\fuelux.eot" />
+    <Content Include="Content\fuelux\fonts\fuelux.ttf" />
+    <Content Include="Content\fuelux\fonts\fuelux.woff" />
+    <Content Include="Content\bootstrap-datepicker3.standalone.css.map" />
+    <Content Include="Content\bootstrap-datepicker3.css.map" />
+    <Content Include="Content\bootstrap-datepicker.standalone.css.map" />
+    <Content Include="Content\bootstrap-datepicker.css.map" />
+    <None Include="Scripts\jquery-1.9.1-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.9.1.js" />
+    <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker-en-CA.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.ar-tn.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.ar.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.az.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.bg.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.bn.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.br.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.bs.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.ca.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.cs.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.cy.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.da.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.de.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.el.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.en-AU.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.en-GB.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.en-IE.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.en-NZ.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.en-ZA.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.eo.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.es.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.et.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.eu.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.fa.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.fi.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.fo.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.fr-CH.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.fr.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.gl.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.he.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.hi.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.hr.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.hu.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.hy.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.id.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.is.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.it-CH.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.it.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.ja.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.ka.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.kh.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.kk.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.km.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.ko.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.kr.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.lt.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.lv.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.me.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.mk.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.mn.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.ms.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.nb.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.nl-BE.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.nl.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.no.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.oc.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.pl.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.pt-BR.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.pt.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.ro.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.rs-latin.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.rs.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.ru.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.si.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.sk.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.sl.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.sq.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.sr-latin.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.sr.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.sv.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.sw.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.ta.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.tg.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.th.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.tr.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.uk.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.uz-cyrl.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.uz-latn.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.vi.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.zh-CN.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.zh-TW.min.js" />
+    <Content Include="CCC\WebService\SocialHistoryService.asmx" />
+    <Content Include="CCC\WebService\TannersStagingService.asmx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -188,6 +416,7 @@
     <Content Include="CCC\Scripts\font\robot\Roboto-Thin.woff" />
     <Content Include="CCC\Scripts\font\robot\Roboto-Thin.woff2" />
     <Content Include="CCC\Scripts\sass\mdb.scss" />
+    <Content Include="Scripts\jquery-1.9.1.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -196,6 +425,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CCC\Adherence\AdherenceBarriers.aspx.cs">
+      <DependentUpon>AdherenceBarriers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\Adherence\AdherenceBarriers.aspx.designer.cs">
+      <DependentUpon>AdherenceBarriers.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CCC\Appointment\ScheduleAppointment.aspx.cs">
       <DependentUpon>ScheduleAppointment.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -209,6 +445,20 @@
     </Compile>
     <Compile Include="CCC\Appointment\PatientAppointments.aspx.designer.cs">
       <DependentUpon>PatientAppointments.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\ClinicalSummary\ClinicalSummary.aspx.cs">
+      <DependentUpon>ClinicalSummary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\ClinicalSummary\ClinicalSummary.aspx.designer.cs">
+      <DependentUpon>ClinicalSummary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\Depression\DepressionScreening.aspx.cs">
+      <DependentUpon>DepressionScreening.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\Depression\DepressionScreening.aspx.designer.cs">
+      <DependentUpon>DepressionScreening.aspx</DependentUpon>
     </Compile>
     <Compile Include="CCC\Encounter\ArtDistributionForm.aspx.cs">
       <DependentUpon>ArtDistributionForm.aspx</DependentUpon>
@@ -265,6 +515,13 @@
     </Compile>
     <Compile Include="CCC\Enrollment\ServiceEnrollment.aspx.designer.cs">
       <DependentUpon>ServiceEnrollment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\FollowupEducation\frmFollowUpEducation.aspx.cs">
+      <DependentUpon>frmFollowUpEducation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\FollowupEducation\frmFollowUpEducation.aspx.designer.cs">
+      <DependentUpon>frmFollowUpEducation.aspx</DependentUpon>
     </Compile>
     <Compile Include="CCC\Greencard.Master.cs">
       <DependentUpon>Greencard.Master</DependentUpon>
@@ -357,12 +614,243 @@
     <Compile Include="CCC\OneTimeEvents\OneTimeEventsTracker.aspx.designer.cs">
       <DependentUpon>OneTimeEventsTracker.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CCC\UC\Adherence\AdherenceBarriersHome.aspx.cs">
+      <DependentUpon>AdherenceBarriersHome.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\Adherence\AdherenceBarriersHome.aspx.designer.cs">
+      <DependentUpon>AdherenceBarriersHome.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\Adherence\ucAdherenceBarriersHome.ascx.cs">
+      <DependentUpon>ucAdherenceBarriersHome.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\Adherence\ucAdherenceBarriersHome.ascx.designer.cs">
+      <DependentUpon>ucAdherenceBarriersHome.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\Adherence\ucDailyRoutine.ascx.cs">
+      <DependentUpon>ucDailyRoutine.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\Adherence\ucDailyRoutine.ascx.designer.cs">
+      <DependentUpon>ucDailyRoutine.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\Adherence\ucHIVAwareness.ascx.cs">
+      <DependentUpon>ucHIVAwareness.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\Adherence\ucHIVAwareness.ascx.designer.cs">
+      <DependentUpon>ucHIVAwareness.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\Adherence\ucPsychosocialCircumstances.ascx.cs">
+      <DependentUpon>ucPsychosocialCircumstances.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\Adherence\ucPsychosocialCircumstances.ascx.designer.cs">
+      <DependentUpon>ucPsychosocialCircumstances.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\Adherence\ucReferralsandNetworks.ascx.cs">
+      <DependentUpon>ucReferralsandNetworks.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\Adherence\ucReferralsandNetworks.ascx.designer.cs">
+      <DependentUpon>ucReferralsandNetworks.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\Adherence\ucScreening.ascx.cs">
+      <DependentUpon>ucScreening.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\Adherence\ucScreening.ascx.designer.cs">
+      <DependentUpon>ucScreening.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\Adherence\ucUnderstanding.ascx.cs">
+      <DependentUpon>ucUnderstanding.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\Adherence\ucUnderstanding.ascx.designer.cs">
+      <DependentUpon>ucUnderstanding.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\Depression\ScreeningHome.aspx.cs">
+      <DependentUpon>ScreeningHome.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\Depression\ScreeningHome.aspx.designer.cs">
+      <DependentUpon>ScreeningHome.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\Depression\ucCAGEAID.ascx.cs">
+      <DependentUpon>ucCAGEAID.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\Depression\ucCAGEAID.ascx.designer.cs">
+      <DependentUpon>ucCAGEAID.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\Depression\ucCRAFFT.ascx.cs">
+      <DependentUpon>ucCRAFFT.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\Depression\ucCRAFFT.ascx.designer.cs">
+      <DependentUpon>ucCRAFFT.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\Depression\ucDepressionScreening.ascx.cs">
+      <DependentUpon>ucDepressionScreening.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\Depression\ucDepressionScreening.ascx.designer.cs">
+      <DependentUpon>ucDepressionScreening.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\Depression\ucDisclosure.ascx.cs">
+      <DependentUpon>ucDisclosure.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\Depression\ucDisclosure.ascx.designer.cs">
+      <DependentUpon>ucDisclosure.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\Depression\ucGBVScreening.ascx.cs">
+      <DependentUpon>ucGBVScreening.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\Depression\ucGBVScreening.ascx.designer.cs">
+      <DependentUpon>ucGBVScreening.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\Depression\ucScreeningHome.ascx.cs">
+      <DependentUpon>ucScreeningHome.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\Depression\ucScreeningHome.ascx.designer.cs">
+      <DependentUpon>ucScreeningHome.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\Depression\ucUpdateDepressionScreening.ascx.cs">
+      <DependentUpon>ucUpdateDepressionScreening.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\Depression\ucUpdateDepressionScreening.ascx.designer.cs">
+      <DependentUpon>ucUpdateDepressionScreening.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\EnhanceAdherenceHome.aspx.cs">
+      <DependentUpon>EnhanceAdherenceHome.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\EnhanceAdherenceHome.aspx.designer.cs">
+      <DependentUpon>EnhanceAdherenceHome.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\session1.aspx.cs">
+      <DependentUpon>session1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\session1.aspx.designer.cs">
+      <DependentUpon>session1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\session2.aspx.cs">
+      <DependentUpon>session2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\session2.aspx.designer.cs">
+      <DependentUpon>session2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\session3.aspx.cs">
+      <DependentUpon>session3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\session3.aspx.designer.cs">
+      <DependentUpon>session3.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\session4.aspx.cs">
+      <DependentUpon>session4.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\session4.aspx.designer.cs">
+      <DependentUpon>session4.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\ucEndSessionViralLoad.ascx.cs">
+      <DependentUpon>ucEndSessionViralLoad.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\ucEndSessionViralLoad.ascx.designer.cs">
+      <DependentUpon>ucEndSessionViralLoad.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\ucEnhanceAdherenceHome.ascx.cs">
+      <DependentUpon>ucEnhanceAdherenceHome.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\ucEnhanceAdherenceHome.ascx.designer.cs">
+      <DependentUpon>ucEnhanceAdherenceHome.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\ucMMAS4.ascx.cs">
+      <DependentUpon>ucMMAS4.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\ucMMAS4.ascx.designer.cs">
+      <DependentUpon>ucMMAS4.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\ucSession1.ascx.cs">
+      <DependentUpon>ucSession1.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\ucSession1.ascx.designer.cs">
+      <DependentUpon>ucSession1.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\ucSession2.ascx.cs">
+      <DependentUpon>ucSession2.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\ucSession2.ascx.designer.cs">
+      <DependentUpon>ucSession2.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\ucSession3.ascx.cs">
+      <DependentUpon>ucSession3.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\ucSession3.ascx.designer.cs">
+      <DependentUpon>ucSession3.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\ucSession4.ascx.cs">
+      <DependentUpon>ucSession4.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\ucSession4.ascx.designer.cs">
+      <DependentUpon>ucSession4.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\ucViralLoad.ascx.cs">
+      <DependentUpon>ucViralLoad.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\ucViralLoad.ascx.designer.cs">
+      <DependentUpon>ucViralLoad.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\viralload.aspx.cs">
+      <DependentUpon>viralload.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\EnhanceAdherenceCounselling\viralload.aspx.designer.cs">
+      <DependentUpon>viralload.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\ucCaseSummary.ascx.cs">
+      <DependentUpon>ucCaseSummary.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucCaseSummary.ascx.designer.cs">
+      <DependentUpon>ucCaseSummary.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\ucEvaluation.ascx.cs">
+      <DependentUpon>ucEvaluation.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucEvaluation.ascx.designer.cs">
+      <DependentUpon>ucEvaluation.ascx</DependentUpon>
+    </Compile>
     <Compile Include="CCC\UC\ucExtruder.ascx.cs">
       <DependentUpon>ucExtruder.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CCC\UC\ucExtruder.ascx.designer.cs">
       <DependentUpon>ucExtruder.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\ucFamilyFinder.ascx.cs">
+      <DependentUpon>ucFamilyFinder.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucFamilyFinder.ascx.designer.cs">
+      <DependentUpon>ucFamilyFinder.ascx</DependentUpon>
     </Compile>
     <Compile Include="CCC\UC\ucFemaleVitals.ascx.cs">
       <DependentUpon>ucFemaleVitals.ascx</DependentUpon>
@@ -377,6 +865,20 @@
     </Compile>
     <Compile Include="CCC\UC\ucGenderBasedViolenceAssessment.ascx.designer.cs">
       <DependentUpon>ucGenderBasedViolenceAssessment.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\ucFollowupEducation.ascx.cs">
+      <DependentUpon>ucFollowupEducation.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucFollowupEducation.ascx.designer.cs">
+      <DependentUpon>ucFollowupEducation.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\ucICF.ascx.cs">
+      <DependentUpon>ucICF.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucICF.ascx.designer.cs">
+      <DependentUpon>ucICF.ascx</DependentUpon>
     </Compile>
     <Compile Include="CCC\UC\ucIpt.ascx.cs">
       <DependentUpon>ucIpt.ascx</DependentUpon>
@@ -398,6 +900,13 @@
     </Compile>
     <Compile Include="CCC\UC\ucIptOutcome.ascx.designer.cs">
       <DependentUpon>ucIptOutcome.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\ucNeonatalHistory.ascx.cs">
+      <DependentUpon>ucNeonatalHistory.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucNeonatalHistory.ascx.designer.cs">
+      <DependentUpon>ucNeonatalHistory.ascx</DependentUpon>
     </Compile>
     <Compile Include="CCC\UC\ucPatientBrief.ascx.cs">
       <DependentUpon>ucPatientBrief.ascx</DependentUpon>
@@ -476,12 +985,38 @@
     <Compile Include="CCC\UC\ucPharmacyPrescription.ascx.designer.cs">
       <DependentUpon>ucPharmacyPrescription.ascx</DependentUpon>
     </Compile>
+    <Compile Include="CCC\UC\ucSocialHistory.ascx.cs">
+      <DependentUpon>ucSocialHistory.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucSocialHistory.ascx.designer.cs">
+      <DependentUpon>ucSocialHistory.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\ucTannerStaging.ascx.cs">
+      <DependentUpon>ucTannerStaging.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucTannerStaging.ascx.designer.cs">
+      <DependentUpon>ucTannerStaging.ascx</DependentUpon>
+    </Compile>
     <Compile Include="CCC\UC\ucVisitDetails.ascx.cs">
       <DependentUpon>ucVisitDetails.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CCC\UC\ucVisitDetails.ascx.designer.cs">
       <DependentUpon>ucVisitDetails.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\WebService\AdherenceService.asmx.cs">
+      <DependentUpon>AdherenceService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CCC\WebService\DepressionScreeningService.asmx.cs">
+      <DependentUpon>DepressionScreeningService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CCC\WebService\EnhanceAdherenceService.asmx.cs">
+      <DependentUpon>EnhanceAdherenceService.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="CCC\WebService\EnrollmentService.asmx.cs">
       <DependentUpon>EnrollmentService.asmx</DependentUpon>
@@ -490,11 +1025,23 @@
       <DependentUpon>FacilityService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="CCC\WebService\FollowupEducationService.asmx.cs">
+      <DependentUpon>FollowupEducationService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CCC\WebService\HIVEducationService.asmx.cs">
+      <DependentUpon>HIVEducationService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CCC\WebService\LabService.asmx.cs">
       <DependentUpon>LabService.asmx</DependentUpon>
     </Compile>
     <Compile Include="CCC\WebService\LookupService.asmx.cs">
       <DependentUpon>LookupService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CCC\WebService\NeonatalEncounterService.asmx.cs">
+      <DependentUpon>NeonatalEncounterService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CCC\WebService\OneTimeEventsTrackerService.asmx.cs">
@@ -506,6 +1053,10 @@
     </Compile>
     <Compile Include="CCC\WebService\PatientBaselineService.asmx.cs">
       <DependentUpon>PatientBaselineService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CCC\WebService\PatientClinicalNotesService.asmx.cs">
+      <DependentUpon>PatientClinicalNotesService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CCC\WebService\PatientEncounterService.asmx.cs">
@@ -521,6 +1072,10 @@
     </Compile>
     <Compile Include="CCC\WebService\PatientReEnrollment.asmx.cs">
       <DependentUpon>PatientReEnrollment.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CCC\WebService\PatientScreeningService.asmx.cs">
+      <DependentUpon>PatientScreeningService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CCC\WebService\PatientService.asmx.cs">
@@ -546,6 +1101,14 @@
     </Compile>
     <Compile Include="CCC\WebService\FemaleVitalsWebservice.asmx.cs">
       <DependentUpon>FemaleVitalsWebservice.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CCC\WebService\SocialHistoryService.asmx.cs">
+      <DependentUpon>SocialHistoryService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CCC\WebService\TannersStagingService.asmx.cs">
+      <DependentUpon>TannersStagingService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -610,10 +1173,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\Interface.Security.dll</HintPath>
     </Reference>
-    <Reference Include="IQCare.CCC.UILogic, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\References\IQCare.CCC.UILogic.dll</HintPath>
-    </Reference>
     <Reference Include="IQCare.Events">
       <HintPath>..\..\References\IQCare.Events.dll</HintPath>
     </Reference>
@@ -633,6 +1192,7 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\Solutions\IQCare.CCC\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
@@ -662,6 +1222,12 @@
     <Reference Include="Telerik.Web.UI">
       <HintPath>..\..\Library\Telerik.Web.UI.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IQCare.CCC.UILogic\IQCare.CCC.UILogic.csproj">
+      <Project>{8eee6ba8-b2c9-4643-bd59-3deb13567695}</Project>
+      <Name>IQCare.CCC.UILogic</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

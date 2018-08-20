@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adherence\IAdherence.cs" />
     <Compile Include="assessment\IPatientPsychosocialCriteriamanager.cs" />
     <Compile Include="assessment\IPatientSupportSystemsCriteriaManager.cs" />
     <Compile Include="Baseline\IINHProphylaxisManager.cs" />
@@ -69,11 +70,19 @@
     <Compile Include="Baseline\IPatientVaccinationManager.cs" />
     <Compile Include="Baseline\IPatientHivEnrolmetBaselineManager.cs" />
     <Compile Include="Baseline\IPatientTranfersInManager.cs" />
+    <Compile Include="ClinicalSummary\IClinicalSummaryForm.cs" />
+    <Compile Include="Encounter\INeonatalHistory.cs" />
     <Compile Include="Encounter\IPatientAdherenceAssessessment.cs" />
     <Compile Include="Encounter\IPatientCareEnding.cs" />
+    <Compile Include="Encounter\IPatientHighRiskManager.cs" />
+    <Compile Include="Encounter\IPatientClinicalNotes.cs" />
     <Compile Include="Encounter\IPatientLabDetails.cs" />
     <Compile Include="Encounter\IPatientLabOrder.cs" />
+    <Compile Include="Encounter\IPatientOIManager.cs" />
+    <Compile Include="Encounter\IPatientPartners.cs" />
+    <Compile Include="Encounter\IPatientSexualHistoryManager.cs" />
     <Compile Include="Encounter\IPatientWhoStageManager.cs" />
+    <Compile Include="Encounter\ISocialHistory.cs" />
     <Compile Include="Enrollment\IHivReConfirmatoryTestManager.cs" />
     <Compile Include="Enrollment\IIdentifiersManager.cs" />
     <Compile Include="Enrollment\IPatientArvDistributionManager.cs" />
@@ -83,7 +92,8 @@
     <Compile Include="Enrollment\IPatientReEnrollmentManager.cs" />
     <Compile Include="Enrollment\IPersonIdentifierManager.cs" />
     <Compile Include="Enrollment\IServiceAreaIdentifiers.cs" />
-    <Compile Include="IMst_PatientInsert.cs" />
+    <Compile Include="HIVEducation\IHIVEducation.cs" />
+    <Compile Include="Visit\IMst_PatientInsert.cs" />
     <Compile Include="Interoperability\IDrugPrescriptionManager.cs" />
     <Compile Include="Interoperability\iILMessageStatsManager.cs" />
     <Compile Include="Interoperability\IIlMessengerManager.cs" />
@@ -100,6 +110,7 @@
     <Compile Include="IPatientCategorizationmanager.cs" />
     <Compile Include="IPatientConsent.cs" />
     <Compile Include="IPatientMaritalStatusManager.cs" />
+    <Compile Include="IPatientNeonatal.cs" />
     <Compile Include="IPatientOVCStatusmanager.cs" />
     <Compile Include="IPatientPharmacy.cs" />
     <Compile Include="IPatientPopuationManager.cs" />
@@ -110,6 +121,7 @@
     <Compile Include="IPersonLocationManager.cs" />
     <Compile Include="IPersonManager.cs" />
     <Compile Include="IPersonRelationshipManager.cs" />
+    <Compile Include="ITannersStaging.cs" />
     <Compile Include="Lookup\IFacilityList.cs" />
     <Compile Include="Lookup\ILookupManager.cs" />
     <Compile Include="Lookup\IPatientBaselineLookupManager.cs" />

@@ -19,6 +19,7 @@ using Microsoft.JScript;
 using Convert = System.Convert;
 using Interface.CCC.Patient;
 using Application.Presentation;
+using Entities.CCC.Appointment;
 
 namespace IQCare.Web.CCC.WebService
 {
