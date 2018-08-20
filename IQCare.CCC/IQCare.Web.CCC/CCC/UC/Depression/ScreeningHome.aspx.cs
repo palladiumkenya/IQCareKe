@@ -40,7 +40,7 @@ namespace IQCare.Web.CCC.UC.Depression
             }
             if (gender == "Male")
             {
-                gbvdatastep.Visible = false;
+                //gbvdatastep.Visible = false;
                 scdatastep3.Visible = false;
             }
         }

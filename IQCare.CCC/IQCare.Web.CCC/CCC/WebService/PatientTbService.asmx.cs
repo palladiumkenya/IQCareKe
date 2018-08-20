@@ -255,5 +255,26 @@ namespace IQCare.Web.CCC.WebService
             }
             return Msg;
         }
+        [WebMethod(EnableSession = true)]
+        public string AddPatienTBRx(int patientId, int patientMasterVisitId,DateTime TBRxStartDate, DateTime TBRxEndDate, int TBRxRegimen)
+        {
+            PatientTBRx patientTBRX = new PatientTBRx()
+            {
+                PatientId = patientId,
+                PatientMasterVisitId = patientMasterVisitId,
+                TBRxStartDate = TBRxStartDate,
+                TBRxEndDate = TBRxEndDate,
+                RegimenId = TBRxRegimen
+            };
+            try
+            {
+
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message;
+            }
+            return Msg;
+        }
     }
 }
