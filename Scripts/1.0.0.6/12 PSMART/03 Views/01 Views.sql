@@ -224,7 +224,7 @@ SELECT
 	  END
 	   [ID],
 	  'GODS_NUMBER' [IDENTIFIER_TYPE],
-	  (SELECT Top 1 PosID FROM mst_Facility WHERE DeleteFlag=0) [ASSIGNING_FACILITY] ,
+	   (SELECT isnull(i.AssigningFacility,99999) FROM patientIdentifier i WHERE i.PatientId=p.Id) [ASSIGNING_FACILITY]  ,
 	  'MPI' [ASSIGNING_AUTHORITY]
 FROM    
       dbo.psmart_HTSList H
@@ -300,7 +300,7 @@ AS
 		END [CardSerialNumber],
 		'CARD_SERIAL_NUMBER' [IDENTIFIER_TYPE],
 	    'CARD_REGISTRY' [ASSIGNING_AUTHORITY],
-	    (SELECT Top 1 PosID FROM mst_Facility WHERE DeleteFlag=0) [ASSIGNING_FACILITY],
+	    (SELECT isnull(i.AssigningFacility,99999) FROM patientIdentifier i WHERE i.PatientId=L.PatientId) [ASSIGNING_FACILITY],
 				CASE WHEN L.CardSerialNumber IS NULL THEN '' --(SELECT i.IdentifierValue FROM patientIdentifier i WHERE i.PatientId=L.PatientId AND i.IdentifierTypeId IN(SELECT top 1 Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER')) IS NULL THEN ''
 		ELSE
 			L.CardSerialNumber-- (SELECT i.IdentifierValue FROM patientIdentifier i WHERE i.PatientId=L.PatientId AND i.IdentifierTypeId IN(SELECT top 1 Id FROM Identifiers WHERE Code='CARD_SERIAL_NUMBER'))
@@ -456,7 +456,8 @@ SELECT
 	'' IDENTIFIER_TYPE,
 	--'CCC'  ASSIGNING_AUTHORITY,
 	'' ASSIGNING_AUTHORITY,
-	'' ASSIGNING_FACILITY -- (SELECT top 1 NationalId FROM mst_Facility WHERE DeleteFlag=0) ASSIGNING_FACILITY
+	-- '' ASSIGNING_FACILITY -- (SELECT top 1 NationalId FROM mst_Facility WHERE DeleteFlag=0) ASSIGNING_FACILITY
+	 (SELECT isnull(i.AssigningFacility,99999) FROM patientIdentifier i WHERE i.PatientId=L.PatientId) [ASSIGNING_FACILITY]
 FROM 
 PersonRelationship R
 INNER JOIN 

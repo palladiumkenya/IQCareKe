@@ -1761,7 +1761,6 @@
 				$("#<%=FacilityMFLCode.ClientID%>").prop('disabled', true);
 				$("#<%=TransferFromCounty.ClientID%>").prop('disabled', true);
 				$("#<%=transferInNotes.ClientID%>").prop('disabled', true);
-
 			}
 
 			function noneChecked() {
@@ -1815,6 +1814,7 @@
                     dataType: "json",
                     success: function (response) {
                         $("#DARTI").datepicker('setDate', moment(response.d).format('DD-MMM-YYYY'));
+                       
                     },
                     error: function (xhr, errorType, exception) {
                         var jsonError = jQuery.parseJSON(xhr.responseText);
@@ -1844,7 +1844,7 @@
 									$("#TIDate")
 										.datepicker('setDate', moment(obj.TransferInDate).format('DD-MMM-YYYY'));
 									$("#TIARTStartDate")
-										.datepicker('setDate', moment(obj.TreatmentStartDate).format('DD-MMM-YYYY'));
+										.datepicker('setDate', moment(obj.ARTInitiationDate).format('DD-MMM-YYYY'));
 
 									/* HIV DIAGNOSIS */
                                     if (obj.HivDiagnosisDate) {

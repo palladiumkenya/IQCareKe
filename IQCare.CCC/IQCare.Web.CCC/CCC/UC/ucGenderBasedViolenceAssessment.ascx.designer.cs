@@ -7,63 +7,54 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace IQCare.Web.CCC.Encounter {
+namespace IQCare.Web.CCC.UC {
     
     
-    public partial class VitalSigns {
+    public partial class ucGenderBasedViolenceAssessment {
         
         /// <summary>
-        /// PatientSummary control.
+        /// tblGbvScreeningQuestions control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::IQCare.Web.CCC.UC.ucPatientBrief PatientSummary;
+        protected global::System.Web.UI.HtmlControls.HtmlTable tblGbvScreeningQuestions;
         
         /// <summary>
-        /// ptnVitalSummary control.
+        /// btnSaveGBVAssessment control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::IQCare.Web.CCC.UC.ucPatientTriageSummary ptnVitalSummary;
+        protected global::System.Web.UI.WebControls.LinkButton btnSaveGBVAssessment;
         
         /// <summary>
-        /// ptnVitalSigns control.
+        /// btnResetGbvAssessment control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::IQCare.Web.CCC.UC.ucPatientTriage ptnVitalSigns;
+        protected global::System.Web.UI.WebControls.LinkButton btnResetGbvAssessment;
         
         /// <summary>
-        /// ptnFemaleVitals control.
+        /// btnCancelGbvAssessment control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::IQCare.Web.CCC.UC.ucFemaleVitals ptnFemaleVitals;
+        protected global::System.Web.UI.WebControls.LinkButton btnCancelGbvAssessment;
         
         /// <summary>
-        /// ptnGenderBasedViolenceAssessment control.
+        /// btnCancelGbvAssessmentModal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::IQCare.Web.CCC.UC.ucGenderBasedViolenceAssessment ptnGenderBasedViolenceAssessment;
-        
-        /// <summary>
-        /// ucExtruder control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::IQCare.Web.CCC.UC.ucExtruder ucExtruder;
+        protected global::System.Web.UI.WebControls.LinkButton btnCancelGbvAssessmentModal;
     }
 }

@@ -55,7 +55,7 @@ export class EnrollmentComponent implements OnInit {
         this.enrollment.CreatedBy = this.createdBy;
         this.enrollment.DateOfEnrollment = this.enrollment.RegistrationDate;
 
-        this.registrationService.addPatient(this.personId, this.createdBy).subscribe((res) => {
+        this.registrationService.addPatient(this.personId, this.createdBy, this.enrollment.DateOfEnrollment).subscribe((res) => {
             console.log(res);
             this.enrollment.PatientId = res['patientId'];
             localStorage.setItem('patientId', res['patientId']);

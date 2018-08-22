@@ -132,7 +132,7 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string AddPatientScreening(int patientId, int patientMasterVisitid, DateTime visitDate, int screeningTypeId, int screeningDone, DateTime screeningDate, int screeningCategoryId, int screeningValueId, string comment, int userId)
+        public string AddPatientScreening(int patientId, int patientMasterVisitid, DateTime visitDate, int screeningTypeId, bool screeningDone, DateTime screeningDate, int screeningCategoryId, int screeningValueId, string comment, int userId)
         {
             try
             {
