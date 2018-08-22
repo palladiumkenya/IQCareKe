@@ -68,7 +68,7 @@
         
            var valSelected = $("#<%=ddlCounsellingType.ClientID%>").find(":selected").text();
 
-          //  alert(valSelected);
+            alert(valSelected);
            
           valSelected = valSelected.replace(/\s/g, '');
 
