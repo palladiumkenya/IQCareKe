@@ -605,6 +605,10 @@ namespace IQCare.Common.BusinessProcess.Services
         {
             try
             {
+                firstName = string.IsNullOrWhiteSpace(firstName) ? "" : firstName.Replace("'", "''");
+                midName = string.IsNullOrWhiteSpace(midName) ? "" : midName.Replace("'", "''");
+                lastName = string.IsNullOrWhiteSpace(lastName) ? "" : lastName.Replace("'", "''");
+
                 LookupLogic lookupLogic = new LookupLogic(_unitOfWork);
                 Facility facility = await _unitOfWork.Repository<Facility>().Get(x => x.DeleteFlag == 0).FirstOrDefaultAsync();
                 var referralId = await lookupLogic.GetDecodeIdByName("VCT", 17);
@@ -630,9 +634,9 @@ namespace IQCare.Common.BusinessProcess.Services
                 sql.Append("exec pr_OpenDecryptedSession;");
                 sql.Append("Insert Into mst_Patient(FirstName, LastName, MiddleName, LocationID, PatientEnrollmentID, ReferredFrom, RegistrationDate, Sex, DOB, DobPrecision, MaritalStatus, Address, Phone, UserID, PosId, Status, DeleteFlag, CreateDate,MovedToPatientTable)");
                 sql.Append("Values(");
-                sql.Append($"ENCRYPTBYKEY(KEY_GUID('Key_CTC'),'{firstName.Replace("'", "''")}'),");
-                sql.Append($"ENCRYPTBYKEY(KEY_GUID('Key_CTC'),'{lastName.Replace("'", "''")}'),");
-                sql.Append($"ENCRYPTBYKEY(KEY_GUID('Key_CTC'),'{midName.Replace("'", "''")}'),");
+                sql.Append($"ENCRYPTBYKEY(KEY_GUID('Key_CTC'),'{firstName}'),");
+                sql.Append($"ENCRYPTBYKEY(KEY_GUID('Key_CTC'),'{lastName}'),");
+                sql.Append($"ENCRYPTBYKEY(KEY_GUID('Key_CTC'),'{midName}'),");
                 sql.Append($"'{facility.FacilityID}',");
                 sql.Append("' ',");
                 sql.Append($"'{referralId}',");
@@ -867,10 +871,14 @@ namespace IQCare.Common.BusinessProcess.Services
             try
             {
                 StringBuilder sql = new StringBuilder();
+                firstName = string.IsNullOrWhiteSpace(firstName) ? "" : firstName.Replace("'", "''");
+                middleName = string.IsNullOrWhiteSpace(middleName) ? "" : middleName.Replace("'", "''");
+                lastName = string.IsNullOrWhiteSpace(lastName) ? "" : lastName.Replace("'", "''");
+
                 sql.Append("exec pr_OpenDecryptedSession;");
-                sql.Append($"UPDATE Person SET FirstName = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{firstName.Replace("'", "''")}'), " +
-                           $"MidName = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{middleName.Replace("'", "''")}'), " +
-                           $"LastName = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{lastName.Replace("'", "''")}'), " +
+                sql.Append($"UPDATE Person SET FirstName = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{firstName}'), " +
+                           $"MidName = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{middleName}'), " +
+                           $"LastName = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{lastName}'), " +
                            $"Sex = {sex}, DateOfBirth = '{dateOfBirth.ToString("yyyy-MM-dd")}', " +
                            $"DobPrecision = 1 WHERE Id = {personId}; ");
                 sql.Append($"SELECT [Id] , CAST(DECRYPTBYKEY(FirstName) AS VARCHAR(50)) [FirstName] ,CAST(DECRYPTBYKEY(MidName) AS VARCHAR(50)) MidName" +
@@ -891,11 +899,15 @@ namespace IQCare.Common.BusinessProcess.Services
         {
             try
             {
+                firstName = string.IsNullOrWhiteSpace(firstName) ? "" : firstName.Replace("'", "''");
+                middleName = string.IsNullOrWhiteSpace(middleName) ? "" : middleName.Replace("'", "''");
+                lastName = string.IsNullOrWhiteSpace(lastName) ? "" : lastName.Replace("'", "''");
+
                 var sql =
                     "exec pr_OpenDecryptedSession;" +
                     "Insert Into Person(FirstName, MidName,LastName,Sex,DateOfBirth,DobPrecision,Active,DeleteFlag,CreateDate,CreatedBy)" +
-                    $"Values(ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{firstName.Replace("'", "''")}'), ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{middleName.Replace("'", "''")}')," +
-                    $"ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{lastName.Replace("'", "''")}'), {sex}, '{dateOfBirth.ToString("yyyy-MM-dd")}', 1," +
+                    $"Values(ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{firstName}'), ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{middleName}')," +
+                    $"ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{lastName}'), {sex}, '{dateOfBirth.ToString("yyyy-MM-dd")}', 1," +
                     $"1,0,GETDATE(), '{createdBy}');" +
                     "SELECT [Id] , CAST(DECRYPTBYKEY(FirstName) AS VARCHAR(50)) [FirstName] ,CAST(DECRYPTBYKEY(MidName) AS VARCHAR(50)) MidName" +
                     ",CAST(DECRYPTBYKEY(LastName) AS VARCHAR(50)) [LastName] ,[Sex] ,[Active] ,[DeleteFlag] ,[CreateDate] " +
