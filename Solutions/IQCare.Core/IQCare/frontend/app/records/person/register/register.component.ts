@@ -235,7 +235,6 @@ export class RegisterComponent implements OnInit {
             console.log(this.clientAddress);
             console.log(this.clientContact);
             console.log(this.emergencyContact);
-            return;
 
             this.personRegistration.registerPerson(this.person).subscribe(
                 (response) => {

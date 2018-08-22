@@ -176,7 +176,8 @@ namespace IQCare.Controllers.Records
                 return Ok(response.Value);
             return BadRequest(response);
         }
-        [HttpGet("GetPersonDetails")]
+
+        [HttpGet("GetPersonDetails/{personId}")]
         public async Task<IActionResult> GetPersonDetails(int personId)
         {
             var response = await _mediator.Send(new GetPersonDetailsCommand
