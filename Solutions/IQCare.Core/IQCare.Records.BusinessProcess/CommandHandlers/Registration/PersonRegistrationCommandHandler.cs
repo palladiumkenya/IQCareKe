@@ -33,7 +33,7 @@ namespace IQCareRecords.Common.BusinessProcess.CommandHandlers
                     {
                         person = await registerPersonService.RegisterPerson(request.Person.FirstName, request.Person.MiddleName,
                             request.Person.LastName, request.Person.Sex, request.Person.DateOfBirth,
-                            request.Person.CreatedBy);
+                            request.Person.CreatedBy, request.Person.RegistrationDate);
                     }
                     else
                     {

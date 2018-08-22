@@ -116,6 +116,11 @@ export class RegisterComponent implements OnInit {
             ])
         });
 
+        this.formGroup.controls['formArray']['controls'][2]['controls'].EmergencyContactFirstName.disable({ onlySelf: true });
+        this.formGroup.controls['formArray']['controls'][2]['controls'].EmergencyContactLastName.disable({ onlySelf: true });
+        this.formGroup.controls['formArray']['controls'][2]['controls'].EmergencyContactSex.disable({ onlySelf: true });
+        this.formGroup.controls['formArray']['controls'][2]['controls'].EmergencyContactRelationship.disable({ onlySelf: true });
+
         this.route.data.subscribe((res) => {
             // console.log(res);
             const { countiesArray, genderArray, maritalStatusArray, educationLevelArray, occupationArray, relationshipArray } = res;
