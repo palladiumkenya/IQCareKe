@@ -28,16 +28,16 @@
                     </div>
                     
                     
-                    <div id="prevNextButton" class="actions">
-					   <%-- <button type="button" class="btn btn-default btn-prev">
+                   <%-- <div id="prevNextButton" class="actions">
+					    <button type="button" class="btn btn-default btn-prev">
 						    <span class="glyphicon glyphicon-arrow-left"></span>
                             Prev
-					    </button>--%>
+					    </button>
 					    <button type="button" class="btn btn-primary btn-next" data-last="Complete">
 						    Next
-						   <%-- <span class="glyphicon glyphicon-arrow-right"></span>--%>
+						   <%-- <span class="glyphicon glyphicon-arrow-right"></span>
 					    </button>
-				    </div>
+				    </div>--%>
                 </div>
                 
             </div>

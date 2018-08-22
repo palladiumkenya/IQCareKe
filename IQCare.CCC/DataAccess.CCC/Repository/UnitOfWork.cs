@@ -34,6 +34,8 @@ using DataAccess.CCC.Repository.Interoperability;
 using DataAccess.CCC.Repository.Pharmacy;
 using DataAccess.CCC.Interface.Adherence;
 using DataAccess.CCC.Repository.Adherence;
+using DataAccess.CCC.Interface.HIVEducation;
+using DataAccess.CCC.Repository.HIVEducation;
 
 namespace DataAccess.CCC.Repository
 {
@@ -192,7 +194,10 @@ namespace DataAccess.CCC.Repository
 
         //Notes
         private IPatientClinicalNotesRepository _patientClinicalNotesRepository;
-        
+
+        //HIV Followup Education
+        private IHIVEducationRepository _patientHIVEducationRepository;
+
 
         public UnitOfWork(BaseContext context)
         {
@@ -960,8 +965,14 @@ namespace DataAccess.CCC.Repository
             get { return _patientClinicalNotesRepository ?? (_patientClinicalNotesRepository = new PatientClinicalNotesRepository((GreencardContext)_context)); }
         }
 
+        public IHIVEducationRepository PatientHIVEducationFollowupRepository
+        {
+            get { return _patientHIVEducationRepository ?? (_patientHIVEducationRepository = new PatientHIVEducationFollowupRepository((GreencardContext)_context)); }
+        }
 
         public ILookupItemRepository LookupItemRepository => _lookupItemRepository ?? (_lookupItemRepository = new LookupItemRepository((LookupContext)_context));
+
+        public object HIVEducationFollowup { get; set; }
 
         // public IPatientAdverseEventOutcomeRepository PatientAdverseEventOutcomeRepository => throw new NotImplementedException();
 

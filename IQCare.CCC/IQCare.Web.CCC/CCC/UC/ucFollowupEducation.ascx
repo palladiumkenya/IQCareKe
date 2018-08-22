@@ -43,18 +43,28 @@
                                                 <div class="col-md-6"><label class="control-label pull-left">Comments</label></div>
                                                 <div class="col-md-6 pull-right">
                                                    
-                                                    <asp:TextBox class="form-control input-sm" runat="server" id="txtComments" ClientIDMode="Static" TextMode="MultiLine"  />
+                                                    <asp:TextBox class="form-control input-sm" runat="server" id="txtComments" ClientIDMode="Static" TextMode="MultiLine" required="required" />
                                                 </div>                    
                                             </div>  
 
 				        
                </div>
+                 <button type="button" id="submitdata" class="btn btn-primary btn-next" data-last="Complete"/>
 			</div>
 		</div>
 	</div>
 </div>
 </div>
 <script>
+    $("#submitdata").click(function () {
+       
+       // var visitDate = <%=HIVEducationDate.Text%>;
+        var comment = document.getElementById('<%= txtComments.ClientID %>').text
+         alert(comment);
+       
+        
+    });
+       
    
     $("#HIVEDUDate").datetimepicker({
             defaultDate: $("#<%=HIVEducationDate.ClientID%>").val(),
@@ -68,7 +78,7 @@
         
            var valSelected = $("#<%=ddlCounsellingType.ClientID%>").find(":selected").text();
 
-            alert(valSelected);
+          //  alert(valSelected);
            
           valSelected = valSelected.replace(/\s/g, '');
 
@@ -88,5 +98,44 @@
                   }
                }
            });
-       }
+    }
+
+   
+   <%-- $("#datastep1").on("actionclicked.fu.wizard", function (evt, data) {
+        var currentStep = data.step;
+        if (currentStep == 2) {
+            var error = 0;
+          
+                var categoryId = $(this).attr('id');
+                alert(categoryId);
+                var patientId = '7832';
+                var visitDate = <%=HIVEducationDate.Text%>;
+                var CouncellingTypeId = '';
+                var CouncellingType = '';
+                var CouncellingTopicId = '';
+                var CouncellingTopic= '';
+                var  CouncellingTopicOther = '';
+                var clinicalNotes = $(this).val();
+                var serviceAreaId = 203;
+                var comments = <%=txtComments.Text%>;
+                var other = "other";
+                $.ajax({
+                    type: "POST",
+                    url: "../WebService/PatientClinicalNotesService.asmx/addPatientClinicalNotes",
+                    data: "{'patientId': '" + patientId + "','visitDate': '" + visitDate + "','CouncellingTypeId':'" + serviceAreaId + "','CouncellingType':'" + categoryId + "','CouncellingTopicId':'" + clinicalNotes + "','CouncellingTopic':'" + userId + "','Comments':'" + userId + "','CouncellingTopicOther':'" + userId + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        error = 0;
+                    },
+                    error: function (response) {
+                        error = 1;
+                    }
+                });
+            
+            if (error == 0) {
+                toastr.success("HIV Followup Education saved successfully");
+            }
+        }
+    });--%>
 </script>
