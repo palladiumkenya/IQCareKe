@@ -11,7 +11,7 @@ namespace IQCare.PMTCT.BusinessProcess.Commands.PreventiveServices
 
     public class EditPreventiveServiceCommandResult
     {
-        public int PreventiServiceId { get; set; }
+        public int PreventiveServiceId { get; set; }
     }
 
 }
