@@ -22,5 +22,6 @@ namespace IQCare.HTS.Core.Model
         public bool DeleteFlag { get; set; }
         [XmlIgnore]
         public string AuditData { get; set; }
+        public string OtherFacility { get; set; }
     }
 }

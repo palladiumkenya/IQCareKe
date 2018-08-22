@@ -9,6 +9,7 @@ using IQCare.Common.Infrastructure;
 using IQCare.HTS.Core.Model;
 using IQCare.HTS.Infrastructure;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 namespace IQCare.HTS.BusinessProcess.Services
 {
@@ -148,7 +149,37 @@ namespace IQCare.HTS.BusinessProcess.Services
             }
         }
 
-        public async Task<Referral> AddReferral(int personId, int fromFacilityId, int serviceAreaId, int referredTo, int referralReason, int userId, DateTime dateToBeEnrolled)
+        public async Task<List<Referral>> GetReferralByPersonId(int personId)
+        {
+            try
+            {
+                var result = await _htsunitOfWork.Repository<Referral>()
+                    .Get(x => x.PersonId == personId && x.DeleteFlag == false).ToListAsync();
+                return result;
+            }
+            catch (Exception e)
+            {
+                Log.Error(e.Message + " " + e.InnerException);
+                throw e;
+            }
+        }
+
+        public async Task<Referral> UpdateReferral(Referral referral)
+        {
+            try
+            {
+                _htsunitOfWork.Repository<Referral>().Update(referral);
+                await _htsunitOfWork.SaveAsync();
+                return referral;
+            }
+            catch (Exception e)
+            {
+                Log.Error(e.Message + " " + e.InnerException);
+                throw e;
+            }
+        }
+
+        public async Task<Referral> AddReferral(int personId, int fromFacilityId, int serviceAreaId, int referredTo, int referralReason, int userId, DateTime dateToBeEnrolled, string otherFacility)
         {
             try
             {
@@ -165,7 +196,8 @@ namespace IQCare.HTS.BusinessProcess.Services
                     CreatedBy = userId,
                     ExpectedDate = dateToBeEnrolled,
                     CreateDate = DateTime.Now,
-                    DeleteFlag = false
+                    DeleteFlag = false,
+                    OtherFacility = otherFacility
                 };
 
                 await _htsunitOfWork.Repository<Referral>().AddAsync(referral);
@@ -627,8 +659,7 @@ namespace IQCare.HTS.BusinessProcess.Services
         {
             try
             {
-                var facility = await _unitOfWork.Repository<FacilityList>()
-                    .Get(x => x.Name.ToLower().Contains(facilityName.ToLower())).ToListAsync();
+                var facility = await _unitOfWork.Repository<FacilityList>().Get(x => x.Name.ToLower().Equals(facilityName.ToLower())).ToListAsync();
 
                 return facility;
             }

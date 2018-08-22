@@ -342,11 +342,45 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                                     .Get(x => x.MasterName == "ReferralReason" &&
                                                               x.ItemName == "CCCEnrollment").ToListAsync();
                                                 var searchFacility = await encounterTestingService.SearchFacility(facilityReferred);
-
+                                                var previousReferrals = await encounterTestingService.GetReferralByPersonId(identifiers[0].PersonId);
                                                 if (searchFacility.Count > 0)
                                                 {
-                                                    await encounterTestingService.AddReferral(identifiers[0].PersonId, facility[0].FacilityID, 2, Convert.ToInt32(searchFacility[0].MFLCode),
-                                                        referralReason[0].ItemId, userId, dateToBeEnrolled);
+                                                    if (previousReferrals.Count > 0)
+                                                    {
+                                                        previousReferrals[0].ToFacility =
+                                                            Convert.ToInt32(searchFacility[0].MFLCode);
+                                                        previousReferrals[0].OtherFacility = "";
+                                                        previousReferrals[0].ExpectedDate = dateToBeEnrolled;
+
+                                                        await encounterTestingService.UpdateReferral(
+                                                            previousReferrals[0]);
+                                                    }
+                                                    else
+                                                    {
+                                                        await encounterTestingService.AddReferral(identifiers[0].PersonId,
+                                                            facility[0].FacilityID, 2,
+                                                            Convert.ToInt32(searchFacility[0].MFLCode),
+                                                            referralReason[0].ItemId, userId, dateToBeEnrolled, "");
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    if (previousReferrals.Count > 0)
+                                                    {
+                                                        previousReferrals[0].ToFacility =
+                                                            Convert.ToInt32(searchFacility[0].MFLCode);
+                                                        previousReferrals[0].OtherFacility = "";
+                                                        previousReferrals[0].ExpectedDate = dateToBeEnrolled;
+
+                                                        await encounterTestingService.UpdateReferral(
+                                                            previousReferrals[0]);
+                                                    }
+                                                    else
+                                                    {
+                                                        await encounterTestingService.AddReferral(identifiers[0].PersonId,
+                                                            facility[0].FacilityID, 2, 99999,
+                                                            referralReason[0].ItemId, userId, dateToBeEnrolled, facilityReferred);
+                                                    }
                                                 }
                                             }
                                         }
@@ -454,11 +488,42 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                         .Get(x => x.MasterName == "ReferralReason" &&
                                                   x.ItemName == "CCCEnrollment").ToListAsync();
                                     var searchFacility = await encounterTestingService.SearchFacility(facilityReferred);
-
+                                    var previousReferrals = await encounterTestingService.GetReferralByPersonId(identifiers[0].PersonId);
                                     if (searchFacility.Count > 0)
                                     {
-                                        await encounterTestingService.AddReferral(identifiers[0].PersonId, facility[0].FacilityID, 2, Convert.ToInt32(searchFacility[0].MFLCode),
-                                            referralReason[0].ItemId, userId, dateToBeEnrolled);
+                                        if (previousReferrals.Count > 0)
+                                        {
+                                            previousReferrals[0].ToFacility =
+                                                Convert.ToInt32(searchFacility[0].MFLCode);
+                                            previousReferrals[0].OtherFacility = "";
+                                            previousReferrals[0].ExpectedDate = dateToBeEnrolled;
+
+                                            await encounterTestingService.UpdateReferral(previousReferrals[0]);
+                                        }
+                                        else
+                                        {
+                                            await encounterTestingService.AddReferral(identifiers[0].PersonId,
+                                                facility[0].FacilityID, 2, Convert.ToInt32(searchFacility[0].MFLCode),
+                                                referralReason[0].ItemId, userId, dateToBeEnrolled, "");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (previousReferrals.Count > 0)
+                                        {
+                                            previousReferrals[0].ToFacility =
+                                                Convert.ToInt32(searchFacility[0].MFLCode);
+                                            previousReferrals[0].OtherFacility = "";
+                                            previousReferrals[0].ExpectedDate = dateToBeEnrolled;
+
+                                            await encounterTestingService.UpdateReferral(previousReferrals[0]);
+                                        }
+                                        else
+                                        {
+                                            await encounterTestingService.AddReferral(identifiers[0].PersonId,
+                                                facility[0].FacilityID, 2, Convert.ToInt32(searchFacility[0].MFLCode),
+                                                referralReason[0].ItemId, userId, dateToBeEnrolled, facilityReferred);
+                                        }
                                     }
                                 }
                             }
@@ -657,13 +722,41 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                                       x.ItemName == "CCCEnrollment").ToListAsync();
 
                                         var searchFacility = await encounterTestingService.SearchFacility(facilityReferred);
-
+                                        var previousReferrals = await encounterTestingService.GetReferralByPersonId(identifiers[0].PersonId);
                                         if (searchFacility.Count > 0)
                                         {
-                                            await encounterTestingService.AddReferral(identifiers[0].PersonId,
-                                                facility[0].FacilityID, 2,
-                                                Convert.ToInt32(searchFacility[0].MFLCode),
-                                                referralReason[0].ItemId, userId, dateToBeEnrolled);
+                                            if (previousReferrals.Count > 0)
+                                            {
+                                                previousReferrals[0].ToFacility = Convert.ToInt32(searchFacility[0].MFLCode);
+                                                previousReferrals[0].OtherFacility = "";
+                                                previousReferrals[0].ExpectedDate = dateToBeEnrolled;
+
+                                                await encounterTestingService.UpdateReferral(previousReferrals[0]);
+                                            }
+                                            else
+                                            {
+                                                await encounterTestingService.AddReferral(identifiers[0].PersonId,
+                                                    facility[0].FacilityID, 2,
+                                                    Convert.ToInt32(searchFacility[0].MFLCode),
+                                                    referralReason[0].ItemId, userId, dateToBeEnrolled, "");
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (previousReferrals.Count > 0)
+                                            {
+                                                previousReferrals[0].ToFacility = 99999;
+                                                previousReferrals[0].OtherFacility = "";
+                                                previousReferrals[0].ExpectedDate = dateToBeEnrolled;
+
+                                                await encounterTestingService.UpdateReferral(previousReferrals[0]);
+                                            }
+                                            else
+                                            {
+                                                await encounterTestingService.AddReferral(identifiers[0].PersonId,
+                                                    facility[0].FacilityID, 2, 99999,
+                                                    referralReason[0].ItemId, userId, dateToBeEnrolled, facilityReferred);
+                                            }
                                         }
                                     }
                                 }
