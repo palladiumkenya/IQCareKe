@@ -40,9 +40,12 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.PersonCommand
                             maritalStatusName = matList[0].ItemName;
                         }
                     }
+                    DateTime dob = DateTime.Now;
+                    if (registeredPerson.DateOfBirth.HasValue)
+                        dob = registeredPerson.DateOfBirth.Value;
 
                     var mstResult = await registerPersonService.InsertIntoBlueCard(registeredPerson.FirstName, registeredPerson.LastName,
-                        registeredPerson.LastName, request.EnrollmentDate, maritalStatusName, "", "", gender[0].ItemName, "EXACT", registeredPerson.DateOfBirth, request.UserId);
+                        registeredPerson.LastName, request.EnrollmentDate, maritalStatusName, "", "", gender[0].ItemName, "EXACT", dob, request.UserId);
 
                     var patient = await registerPersonService.AddPatient(request.PersonId, request.UserId, mstResult[0].Ptn_Pk);
                     
