@@ -440,14 +440,12 @@
                             window.location.replace("../Encounter/PatientEncounter.aspx?visitId=" + this.PatientMasterVisitId + "#EnhanceAdherence");
                         }
                         else {
-                            alert("add 1");
                             addEnhanceAdherenceEncounter();
                             addCancellingStatus();
                         }
                     });
                 }
                 else {
-                    alert("add 2");
                     addEnhanceAdherenceEncounter();
                     addCancellingStatus();
                 }
