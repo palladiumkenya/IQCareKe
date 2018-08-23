@@ -117,7 +117,7 @@
 		</div>
 	</div>
 </div>
-<div class="session2loading"><img src="../../Images/PEPloading.gif" /></div>
+<div class="session2loading"><img src="../../Content/Img/PEPloading.gif" /></div>
 </form>
 <script type="text/javascript">
     $(".filldate").datetimepicker({

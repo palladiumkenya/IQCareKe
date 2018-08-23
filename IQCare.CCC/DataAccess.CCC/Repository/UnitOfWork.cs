@@ -152,6 +152,7 @@ namespace DataAccess.CCC.Repository
         private IPatientIptRepository _patientIptRepository;
         private IPatientIptOutcomeRepository _patientIptOutcomeRepository;
         private IPatientIptWorkupRepository _patientIptWorkupRepository;
+        private IPatientTBRxRepository _patientTBRxRepository;
 
         /*Patient categorization*/
         private IPatientCategorizationRepository _patientCategorizationRepository;
@@ -742,6 +743,10 @@ namespace DataAccess.CCC.Repository
         public IPatientIptWorkupRepository PatientIptWorkupRepository
         {
             get { return _patientIptWorkupRepository ?? (_patientIptWorkupRepository = new PatientIptWorkupRepository((GreencardContext)_context)); }
+        }
+        public IPatientTBRxRepository PatientTBRxRepository
+        {
+            get { return _patientTBRxRepository ?? (_patientTBRxRepository = new PatientTBRxRepository((GreencardContext)_context)); }
         }
 
         public IPatientFamilyPlanningRepository PatientFamilyPlanningRepository

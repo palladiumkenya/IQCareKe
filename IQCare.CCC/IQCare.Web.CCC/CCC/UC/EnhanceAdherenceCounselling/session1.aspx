@@ -152,7 +152,7 @@
 	    </div>
     </div>
 </div>
-<div class="session1loading"><img src="../../Images/PEPloading.gif" /></div>
+<div class="session1loading"><img src="../../Content/Img/PEPloading.gif" /></div>
 </form>
 <script type="text/javascript">
     $(".filldate").datetimepicker({
@@ -440,12 +440,14 @@
                             window.location.replace("../Encounter/PatientEncounter.aspx?visitId=" + this.PatientMasterVisitId + "#EnhanceAdherence");
                         }
                         else {
+                            alert("add 1");
                             addEnhanceAdherenceEncounter();
                             addCancellingStatus();
                         }
                     });
                 }
                 else {
+                    alert("add 2");
                     addEnhanceAdherenceEncounter();
                     addCancellingStatus();
                 }
@@ -543,20 +545,18 @@
     function addEnhanceAdherenceEncounter() {
         var serviceArea = <%=serviceAreaId%>;
         var EncounterType = "EnhanceAdherence";
-        var patientId = <%=PatientId%>;
-        var patientMasterVisitId = GetURLParameter('visitId');
         var userId = <%=userId%>;
         $.ajax({
             type: "POST",
             url: "../WebService/PatientEncounterService.asmx/savePatientEncounter",
-            data: "{'PatientID': '" + patientId + "','PatientMasterVisitID': '" + patientMasterVisitId + "','EncounterType': '" + EncounterType + "','ServiceAreaId': '" + serviceArea + "','UserId': '" + userId + "'}",
+            data: "{'EncounterType': '" + EncounterType + "','ServiceAreaId': '" + serviceArea + "','UserId': '" + userId + "'}",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (response) {
                 toastr.success(response.d, "Encounter Saved");
             },
             error: function (response) {
-                toastr.error(response.d, "Encounter not saved");
+                toastr.error(response.d, JSON.stringify(response));
             }
         });
     }

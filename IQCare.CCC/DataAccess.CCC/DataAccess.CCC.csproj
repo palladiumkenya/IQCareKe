@@ -168,6 +168,7 @@
     <Compile Include="Interface\Patient\IPatientConsentRepository.cs" />
     <Compile Include="Interface\person\IPatientTreatmentSupporterRepository.cs" />
     <Compile Include="Interface\Patient\IPatientRepository.cs" />
+    <Compile Include="Interface\Tb\IPatientTBRxRepository.cs" />
     <Compile Include="Interface\Triage\IPatientAdverseEventOutcomeRepository.cs" />
     <Compile Include="Interface\Triage\IPatientFamilyPlanningMethodRepository.cs" />
     <Compile Include="Interface\Triage\IPatientFamilyPlanningRepository.cs" />
@@ -297,6 +298,7 @@
     <Compile Include="Repository\Pharmacy\PatientPharmacyDispenseRepository.cs" />
     <Compile Include="Repository\Pharmacy\PharmacyOrderRepository.cs" />
     <Compile Include="Repository\Screening\PatientScreeningRepository.cs" />
+    <Compile Include="Repository\Tb\PatientTBRxRepository.cs" />
     <Compile Include="Repository\Triage\PatientAdverseEventOutcomeRepository.cs" />
     <Compile Include="Repository\Triage\PatientFamilyPlanningMethodRepsotory.cs" />
     <Compile Include="Repository\Triage\PatientFamilyPlanningRepository.cs" />

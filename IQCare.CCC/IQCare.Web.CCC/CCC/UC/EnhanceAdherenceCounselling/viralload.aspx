@@ -19,7 +19,7 @@
 		    </div>
 	    </div>
     </div>
-    <div class="viralloadloading"><img src="../../Images/PEPloading.gif" /></div>
+    <div class="viralloadloading"><img src="../../Content/Img/PEPloading.gif" /></div>
 </form>
 <script type="text/javascript">
     $("#eahmyWizard").on("actionclicked.fu.wizard", function (evt, data) {

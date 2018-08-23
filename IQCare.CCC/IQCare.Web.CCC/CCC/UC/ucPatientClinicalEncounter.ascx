@@ -5855,7 +5855,7 @@
             objectsToShow = ["tbScreeningOutcomePanel"];
             objectsToHide = ['ICFScreeningSection', 'TubeclosisTreatmentPanel', 'IPTPanel', 'ICFActionTakenPanel'];
             sectionsToReset = ['ICFScreeningSection', 'TubeclosisTreatmentPanel', 'IPTPanel', 'ICFActionTakenPanel'];
-            tbScreenScore = 4;
+            tbScreenScore = 3;
         }
         else if (selectedIndex == 2) {
             objectsToShow = ['ICFScreeningSection', 'IPTPanel'];
