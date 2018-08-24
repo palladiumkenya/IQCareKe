@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IQCare.PMTCT.Infrastructure
 {
-    public interface IPmtctUnitOfWork : IDisposable
+    public interface ICommonUnitOfWork : IDisposable
     {
         void Save();
         Task SaveAsync();

@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import {LookupItemService} from '../../shared/_services/lookup-item.service';
+import {Subscription} from 'rxjs/index';
+import {SnotifyService} from 'ng-snotify';
+import {NotificationService} from '../../shared/_services/notification.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export interface Options {
   value: string;
   viewValue: string;
@@ -11,46 +16,56 @@ export interface Options {
 })
 export class ClientMonitoringComponent implements OnInit {
 
-  whostages: Options[] = [
-    {value: '0', viewValue: 'Select'},
-    {value: '1', viewValue: 'WHO stage1'},
-    {value: '2', viewValue: 'WHO stage2'},
-    {value: '3', viewValue: 'WHO stage3'}
-  ];
+    private lookupItemView$: Subscription;
+    public TBOptions: any[] = [];
+    public WHOStagOptions: any[] = [];
+    public YesNoNa: any[] = [];
+    public CaCxMethods: any[] = [];
+    public CacxResults: any[] = [];
+    public YesNos: any[] = [];
+    public clientMonitoringFormGroup: FormGroup;
 
-  sampleTakens: Options[] = [
-    {value: '0', viewValue: 'Select'},
-    {value: '1', viewValue: 'YES'},
-    {value: '2', viewValue: 'NO'},
-    {value: '3', viewValue: 'N/A'}
-  ];
-
-  tbs: Options[] = [
-    {value: '0', viewValue: 'Select'},
-    {value: '0', viewValue: 'Pr TB  = Presumed TB'},
-    {value: '0', viewValue: 'No TB  = Negative TB screen'},
-    {value: '0', viewValue: 'INH    = Client was screened negative & started INH'},
-    {value: '0', viewValue: 'TB Rx  = Client on TB treatment'},
-    {value: '0', viewValue: 'Not Done'}
-  ];
-
-  caMethods: Options[] = [
-    {value: '0', viewValue: 'Select'},
-    {value: '0', viewValue: 'VILI'},  
-    {value: '0', viewValue: 'VIA'},
-    {value: '0', viewValue: 'Not Done'}
-  ];
-
-caResults: Options[]  = [
-  {value: '0', viewValue: 'Normal'},
-  {value: '0', viewValue: 'Suspected'},
-  {value: '0', viewValue: 'Confirmed'},
-  {value: '0', viewValue: 'N/A'}
-];
-
-  constructor() { }
+  constructor(private fb: FormBuilder , private lookupItemService: LookupItemService, private snotifyService: SnotifyService,
+              private notificationService: NotificationService) { }
 
   ngOnInit() {
+      this.clientMonitoringFormGroup = this.fb.group({
+          WhoStage: ['', Validators.required],
+          viralLoadSampleTaken: ['', Validators.required],
+          screenedForTB: ['', Validators.required],
+          cacxScreeningDone: ['', Validators.required],
+          cacxMethod: ['', Validators.required],
+          cacxResult: ['', Validators.required],
+          cacxComments: ['', Validators.required]
+
+      });
+      this.getLookupItems('TBScreeningPMTCT', this.TBOptions);
+      this.getLookupItems('WHOStage', this.WHOStagOptions);
+      this.getLookupItems('YesNoNA', this.YesNoNa);
+      this.getLookupItems('CacxMethod', this.CaCxMethods);
+      this.getLookupItems('CacxResult', this.CacxResults);
+      this.getLookupItems('YesNo', this.YesNos);
+
   }
+
+    public getLookupItems(groupName: string , _options: any[]) {
+        this.lookupItemView$ = this.lookupItemService.getByGroupName(groupName)
+            .subscribe(
+                p => {
+                    const options = p['lookupItems'];
+                    console.log(options);
+                    for (let i = 0; i < options.length; i++) {
+                        _options.push({ 'itemId': options[i]['itemId'], 'itemName': options[i]['itemName']});
+                    }
+                },
+                (err) => {
+                    console.log(err);
+                    this.snotifyService.error('Error editing encounter ' + err, 'Encounter', this.notificationService.getConfig());
+                },
+                () => {
+                    console.log(this.lookupItemView$);
+                });
+    }
+    
 
 }

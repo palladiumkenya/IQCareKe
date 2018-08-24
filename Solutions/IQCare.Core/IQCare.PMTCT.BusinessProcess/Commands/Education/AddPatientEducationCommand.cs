@@ -1,7 +1,6 @@
 ﻿using IQCare.Library;
 using IQCare.PMTCT.Core.Models;
 using MediatR;
-using System.Collections.Generic;
 
 namespace IQCare.PMTCT.BusinessProcess.Commands.Education
 {
@@ -12,7 +11,7 @@ namespace IQCare.PMTCT.BusinessProcess.Commands.Education
 
     public class AddPatientEducationCommandResult
     {
-        public List<PatientEducation> PatientCounsellingId { get; set; }
+        public int PatientCounsellingId { get; set; }
     }
 
 }

@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace IQCare.Common.BusinessProcess.CommandHandlers.Encounter
 {
-    class AddPatientPhysicalExaminationHandler : IRequestHandler<AddPatientPhysicalExaminationCommand, Result<AddPatientPhysicalExamResponse>>
+    public class AddPatientPhysicalExamniationCommandHandler : IRequestHandler<AddPatientPhysicalExaminationCommand, Result<AddPatientPhysicalExamResponse>>
     {
         private readonly ICommonUnitOfWork _unitOfWork;
 
-        public AddPatientPhysicalExaminationHandler(ICommonUnitOfWork unitOfWork)
+        public AddPatientPhysicalExamniationCommandHandler(ICommonUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
@@ -25,23 +25,19 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Encounter
                 {
                     PatientPhysicalExamination patientPhysicalExamination = new PatientPhysicalExamination()
                     {
-                        PatientId=request.PatientPhysicalExamination.PatientId,
-                        PatientMasterVisitId=request.PatientPhysicalExamination.PatientMasterVisitId,
-                        ExamId=request.PatientPhysicalExamination.ExamId,
-                        ExaminationTypeId=request.PatientPhysicalExamination.ExaminationTypeId,
-                        FindingId=request.PatientPhysicalExamination.FindingId,
-                        FindingsNotes=request.PatientPhysicalExamination.FindingsNotes
+                        PatientId = request.PatientPhysicalExamination.PatientId,
+                        PatientMasterVisitId =request.PatientPhysicalExamination.PatientMasterVisitId,
+                        ExamId =request.PatientPhysicalExamination.ExamId,
+                        ExaminationTypeId =request.PatientPhysicalExamination .ExaminationTypeId,
+                        FindingId = (request.PatientPhysicalExamination.FindingId == null) ? request.PatientPhysicalExamination.FindingId : 0,
+                        FindingsNotes = (request.PatientPhysicalExamination.FindingsNotes == null) ? request.PatientPhysicalExamination.FindingsNotes : ""
                     };
 
                     await _unitOfWork.Repository<PatientPhysicalExamination>().AddAsync(patientPhysicalExamination);
-                    int result= await  _unitOfWork.SaveChangesAsync();
+                    await _unitOfWork.SaveAsync();
 
-                    _unitOfWork.Dispose();
-
-                    return Result<AddPatientPhysicalExamResponse>.Valid(new AddPatientPhysicalExamResponse()
-                    {
-                        PatientPhysicalExamId=result
-                    
+                   return  Result<AddPatientPhysicalExamResponse>.Valid(new AddPatientPhysicalExamResponse() {
+                        PatientPhysicalExamId = 1
                     });
                 }
                 catch (Exception e)

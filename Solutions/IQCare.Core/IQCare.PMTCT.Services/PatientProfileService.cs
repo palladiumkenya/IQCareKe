@@ -9,9 +9,9 @@ namespace IQCare.PMTCT.Services
 {
     public class PatientProfileService
     {
-        public readonly IPmtctUnitOfWork _PmtctUnitOfWork;
+        public readonly ICommonUnitOfWork _PmtctUnitOfWork;
 
-        public PatientProfileService(IPmtctUnitOfWork pmtctUnitOfWork)
+        public PatientProfileService(ICommonUnitOfWork pmtctUnitOfWork)
         {
             _PmtctUnitOfWork = pmtctUnitOfWork;
         }

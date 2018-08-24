@@ -6,14 +6,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IQCare.PMTCT.Infrastructure
 {
-    public class PmtctUnitOfWork :IPmtctUnitOfWork
+    public class IPmtctUnitOfWork :ICommonUnitOfWork
     {
         private readonly PmtctDbContext _context;
         private Hashtable repositories;
         // Flag: Has Dispose already been called?
         private bool disposed = false;
 
-        public PmtctUnitOfWork(PmtctDbContext context)
+        public IPmtctUnitOfWork(PmtctDbContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }

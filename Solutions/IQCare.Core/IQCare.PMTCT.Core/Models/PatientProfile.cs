@@ -9,10 +9,10 @@ namespace IQCare.PMTCT.Core.Models
         public int Id { get; set; }
         public int PatientId { get; set; }
         public int PatientMasterVisitId { get; set; }
+        public Decimal AgeMenarche { get; set; }
         public int PregnancyId { get; set; }
         public int VisitNumber { get; set; }
         public int VisitType { get; set; }
-        public int? CounselledOn { get; set; }
         public int? TreatedForSyphilis { get; set; }
         public int? CreatedBy { get; set; }
         public int DeleteFlag{get; set; }

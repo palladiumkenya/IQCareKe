@@ -15,6 +15,7 @@
     <ProjectReference Include="..\IQCare.Common.Core\IQCare.Common.Core.csproj" />
     <ProjectReference Include="..\IQCare.Common.Infrastructure\IQCare.Common.Infrastructure.csproj" />
     <ProjectReference Include="..\IQCare.Library\IQCare.Library.csproj" />
+    <ProjectReference Include="..\IQCare.PMTCT.Infrastructure\IQCare.PMTCT.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

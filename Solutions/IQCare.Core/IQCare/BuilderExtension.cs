@@ -40,10 +40,14 @@ namespace IQCare
 
         public static IServiceCollection AddPmtctDatabase(this IServiceCollection services, IConfiguration configuration)
         {
-            var dbConnectionString = configuration.GetConnectionString("IQCareConnection");
-            services.AddDbContext<PmtctDbContext>(b => b.UseSqlServer(dbConnectionString));
+            //var dbConnectionString = configuration.GetConnectionString("IQCareConnection");
+            //services.AddDbContext<PmtctDbContext>(b => b.UseSqlServer(dbConnectionString));
+            //services.AddScoped(typeof(IPmtctRepository<>), typeof(PmtctRepository<>));
+            //services.AddScoped<IPmtctUnitOfWork>(c => new PmtctUnitOfWork(c.GetRequiredService<PmtctDbContext>()));
+
+            services.AddDbContext<PmtctDbContext>(b => b.UseSqlServer(_connectionString));
             services.AddScoped(typeof(IPmtctRepository<>), typeof(PmtctRepository<>));
-            services.AddScoped<IPmtctUnitOfWork>(c => new PmtctUnitOfWork(c.GetRequiredService<PmtctDbContext>()));
+            services.AddScoped<PMTCT.Infrastructure.ICommonUnitOfWork>(c => new IPmtctUnitOfWork(c.GetRequiredService<PmtctDbContext>()));
 
             return services;
         }
@@ -57,7 +61,7 @@ namespace IQCare
 
             services.AddDbContext<CommonDbContext>(b => b.UseSqlServer(_connectionString));
             services.AddScoped(typeof(ICommonRepository<>), typeof(CommonRepository<>));
-            services.AddScoped<ICommonUnitOfWork>(c => new CommonUnitOfWork(c.GetRequiredService<CommonDbContext>()));
+            services.AddScoped<Common.Infrastructure.ICommonUnitOfWork>(c => new CommonUnitOfWork(c.GetRequiredService<CommonDbContext>()));
 
             return services;
         }
