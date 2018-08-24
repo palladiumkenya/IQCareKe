@@ -1,5 +1,6 @@
 ﻿IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[PersonListView]'))
 DROP VIEW [dbo].[PersonListView]
+GO
 
 
 SET ANSI_NULLS ON

@@ -9,6 +9,8 @@ import { SearchComponent } from './search/search.component';
 import { EducationLevelResolver } from './_services/educationallevel.resolver';
 import { OccupationResolver } from './_services/occupation.resolver';
 import { RelationshipResolver } from './_services/relationship.resolver';
+import { ConsentSmsResolver } from './_services/consentsms.resolver';
+import { ContactCategoryResolver } from './_services/contactcategory.resolver';
 
 const routes: Routes = [
     {
@@ -28,12 +30,28 @@ const routes: Routes = [
                     maritalStatusArray: MaritalStatusResolver,
                     educationLevelArray: EducationLevelResolver,
                     occupationArray: OccupationResolver,
-                    relationshipArray: RelationshipResolver
+                    relationshipArray: RelationshipResolver,
+                    consentSmsArray: ConsentSmsResolver,
+                    contactCategoryArray: ContactCategoryResolver
                 }
             },
             {
                 path: 'view/:id',
                 component: ViewComponent
+            },
+            {
+                path: 'update/:id',
+                component: RegisterComponent,
+                resolve: {
+                    countiesArray: CountyResolver,
+                    genderArray: GenderResolver,
+                    maritalStatusArray: MaritalStatusResolver,
+                    educationLevelArray: EducationLevelResolver,
+                    occupationArray: OccupationResolver,
+                    relationshipArray: RelationshipResolver,
+                    consentSmsArray: ConsentSmsResolver,
+                    contactCategoryArray: ContactCategoryResolver
+                }
             }
         ]
     }

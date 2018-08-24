@@ -13,5 +13,6 @@ namespace IQCare.Common.Core.Models
         public DateTime CreateDate { get; set; }
         public string AuditData { get; set; }
         public int ContactCategory { get; set; }
+        public int ContactRelationship { get; set; }
     }
 }

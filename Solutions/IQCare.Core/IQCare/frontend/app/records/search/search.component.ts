@@ -40,7 +40,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
     doSearch() {
         this.searchService.searchClient(this.clientSearch).subscribe(
             (res) => {
-                console.log(res);
+                console.log(res['personSearch']);
                 this.dataSource.data = res['personSearch'];
             },
             (error) => {
@@ -52,6 +52,6 @@ export class SearchComponent implements OnInit, AfterViewInit {
     getSelectedRow(row: any) {
         console.log(row);
         const personId = row['id'];
-        this.zone.run(() => { this.router.navigate(['/dashboard/personhome/'+personId], { relativeTo: this.route }); });
+        this.zone.run(() => { this.router.navigate(['/dashboard/personhome/' + personId], { relativeTo: this.route }); });
     }
 }

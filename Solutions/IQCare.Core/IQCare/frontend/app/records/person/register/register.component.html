@@ -138,7 +138,7 @@
                             </mat-step>
 
                             <mat-step formGroupName="1" [stepControl]="formArray.get([1])">
-                                <ng-template matStepLabel>Client Address</ng-template>
+                                <ng-template matStepLabel>Client Location</ng-template>
                                 <div class="row">
                                     <div class="col-lg-3 col-sm-3 col-xs-12">
                                         <mat-form-field>
@@ -190,7 +190,7 @@
                             </mat-step>
 
                             <mat-step formGroupName="2" [stepControl]="formArray.get([2])">
-                                <ng-template matStepLabel>Contacts & Emergency Contacts</ng-template>
+                                <ng-template matStepLabel>Client Address</ng-template>
                                 <div class="row">
                                     <div class="col-lg-3 col-sm-3 col-xs-12">
                                         <mat-form-field>
@@ -212,81 +212,6 @@
                                     </div>
                                 </div>
 
-                                <div class="widget">
-                                    <div class="widget-header bordered-bottom bordered-palegreen">
-                                        <span class="widget-caption">Emergency Contact</span>
-                                    </div>
-                                    <div class="widget-body">
-                                        <div class="row">
-                                            <!--<label class="col-lg-2 col-sm-2 col-xs-12">Registered in Clinic?</label>-->
-                                            <div class="col-lg-3 col-sm-3 col-xs-12">
-                                                <mat-form-field>
-                                                    <mat-select placeholder="Registered in Clinic?" formControlName="EmergencyContactInClinic" (selectionChange)="onRegisteredInClinic()">
-                                                        <mat-option></mat-option>
-                                                        <mat-option [value]="1">Yes</mat-option>
-                                                        <mat-option [value]="2">No</mat-option>
-                                                    </mat-select>
-                                                </mat-form-field>
-                                            </div>
-                                        </div>
-
-                                        <div>&nbsp;</div>
-
-                                        <div class="row" *ngIf="registerEmergencyContact">
-                                            <div class="col-lg-3 col-sm-3 col-xs-12">
-                                                <mat-form-field>
-                                                    <input matInput placeholder="Emergency Contact FirstName" formControlName="EmergencyContactFirstName" id="emergencyContactFirstName"
-                                                        name="emergencyContactFirstName">
-                                                </mat-form-field>
-                                            </div>
-
-                                            <div class="col-lg-3 col-sm-3 col-xs-12">
-                                                <mat-form-field>
-                                                    <input matInput placeholder="Emergency Contact MiddleName" formControlName="EmergencyContactMiddleName" id="emergencyContactMiddleName"
-                                                        name="emergencyContactMiddleName">
-                                                </mat-form-field>
-                                            </div>
-
-                                            <div class="col-lg-3 col-sm-3 col-xs-12">
-                                                <mat-form-field>
-                                                    <input matInput placeholder="Emergency Contact LastName" formControlName="EmergencyContactLastName" id="emergencyContactLastName"
-                                                        name="emergencyContactLastName">
-                                                </mat-form-field>
-                                            </div>
-
-                                            <div class="col-lg-3 col-sm-3 col-xs-12">
-                                                <mat-form-field>
-                                                    <mat-select placeholder="Gender" formControlName="EmergencyContactSex">
-                                                        <mat-option></mat-option>
-                                                        <mat-option *ngFor="let option of gender" [value]="option.itemId">{{option.itemName}}</mat-option>
-                                                    </mat-select>
-                                                </mat-form-field>
-                                            </div>
-                                        </div>
-
-                                        <div class="row" *ngIf="registerEmergencyContact">
-                                            <div class="col-lg-3 col-sm-3 col-xs-12">
-                                                <mat-form-field>
-                                                    <mat-select placeholder="Emergency Contact Relationship" formControlName="EmergencyContactRelationship" id="emergencyContactRelationship"
-                                                        name="emergencyContactRelationship">
-                                                        <mat-option></mat-option>
-                                                        <mat-option *ngFor="let option of relationship" [value]="option.itemId">{{option.itemName}}</mat-option>
-                                                    </mat-select>
-                                                </mat-form-field>
-                                            </div>
-
-
-                                            <div class="col-lg-3 col-sm-3 col-xs-12">
-                                                <mat-form-field>
-                                                    <input matInput placeholder="Emergency Contact Mobile No." formControlName="EmergencyContactMobileNumber" id="emergencyContactMobileNumber"
-                                                        name="emergencyContactMobileNumber">
-                                                </mat-form-field>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
                                 <div class="row">
                                     <button mat-raised-button color="accent" matStepperPrevious type="button">Back</button>
                                     &nbsp;&nbsp;
@@ -295,78 +220,73 @@
                             </mat-step>
 
                             <mat-step formGroupName="3" [stepControl]="formArray.get([3])">
-                                <ng-template matStepLabel>Next Of Kin</ng-template>
+                                <ng-template matStepLabel>Next Of Kin & Emergency Contact</ng-template>
+
+                                <div class="row top-buffer ">
+                                    <button (click)="addRow()" class="btn btn-primary col-md-3">Add Next of Kin or Emergency
+                                        Contact
+                                    </button>
+                                </div>
+
+                                <div class="row">&nbsp;</div>
+                                <div class="row">&nbsp;</div>
 
                                 <div class="row">
-                                    <div class="col-lg-3 col-sm-3 col-xs-12">
-                                        <mat-form-field>
-                                            <input matInput placeholder="Kin's FirstName" formControlName="NextOfKinFirstName" id="nextOfKinFirstName" name="nextOfKinFirstName">
-                                        </mat-form-field>
-                                    </div>
-
-                                    <div class="col-lg-3 col-sm-3 col-xs-12">
-                                        <mat-form-field>
-                                            <input matInput placeholder="Kin's MiddleName" formControlName="NextOfKinMiddleName" id="nextOfKinMiddleName" name="nextOfKinMiddleName">
-                                        </mat-form-field>
-                                    </div>
-
-                                    <div class="col-lg-3 col-sm-3 col-xs-12">
-                                        <mat-form-field>
-                                            <input matInput placeholder="Kin's LastName" formControlName="NextOfKinLastName" id="nextOfKinLastName" name="nextOfKinLastName">
-                                        </mat-form-field>
-                                    </div>
-
-                                    <div class="col-lg-3 col-sm-3 col-xs-12">
-                                        <label>Gender</label>
-                                        <div>
-                                            <mat-radio-group formControlName="NextOfKinSex">
-                                                <mat-radio-button value="0" required>Male</mat-radio-button>
-                                                <mat-radio-button value="1" required>Female</mat-radio-button>
-                                            </mat-radio-group>
-                                        </div>
+                                    <div class="example-container mat-elevation-z8">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">First Name</th>
+                                                    <th scope="col">Middle Name</th>
+                                                    <th scope="col">Last Name</th>
+                                                    <th scope="col">Gender</th>
+                                                    <th scope="col">Contact Category</th>
+                                                    <th scope="col">Relationship</th>
+                                                    <th scope="col">Mobile Number</th>
+                                                    <th scope="col">Consent</th>
+                                                    <th scope="col">&nbsp;</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let data of dataSource; let index = index;">
+                                                    <td>{{ index }}</td>
+                                                    <td>{{ data.firstName }}</td>
+                                                    <td>{{ data.middleName }}</td>
+                                                    <td>{{ data.lastName }}</td>
+                                                    <td>{{ data.gender['itemName'] }}</td>
+                                                    <td>{{ data.contactcategory['itemName'] }}</td>
+                                                    <td>{{ data.relationship['itemName'] }}</td>
+                                                    <td>{{ data.phoneno }}</td>
+                                                    <td>{{ data.consent['itemName'] }}</td>
+                                                    <td>
+                                                        <i style="cursor: pointer;" class="material-icons" (click)="deleteContact(data, index, $event);">
+                                                            delete
+                                                        </i>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-lg-3 col-sm-3 col-xs-12">
-                                        <mat-form-field>
-                                            <mat-select placeholder="Kin's Relationship" formControlName="NextOfKinRelationship" id="nextOfKinRelationship" name="nextOfKinRelationship">
-                                                <mat-option></mat-option>
-                                            </mat-select>
-                                        </mat-form-field>
-                                    </div>
-
-                                    <div class="col-lg-3 col-sm-3 col-xs-12">
-                                        <mat-form-field>
-                                            <input matInput placeholder="Mobile No." formControlName="NextOfKinMobileNumber" id="nextOfKinMobileNumber" name="nextOfKinMobileNumber">
-                                        </mat-form-field>
-                                    </div>
-
-                                    <div class="col-lg-3 col-sm-3 col-xs-12">
-                                        <mat-form-field>
-                                            <mat-select placeholder="Consent to Calls/SMS to this contact in case of emergencies" formControlName="NextOfKinConsent"
-                                                id="nextOfKinConsent" name="nextOfKinConsent">
-                                                <mat-option></mat-option>
-                                            </mat-select>
-                                        </mat-form-field>
-                                    </div>
-
-                                    <div class="col-lg-3 col-sm-3 col-xs-12">
-                                        <mat-form-field>
-                                            <input matInput placeholder="Consent Decline Reason" formControlName="NextOfKinConsentDeclineReason" id="nextOfKinConsentDeclineReason"
-                                                name="nextOfKinConsentDeclineReason">
-                                        </mat-form-field>
-                                    </div>
-                                </div>
+                                <div class="row">&nbsp;</div>
+                                <div class="row">&nbsp;</div>
+                                <div class="row">&nbsp;</div>
+                                <div class="row">&nbsp;</div>
 
                                 <div class="row">
                                     <button mat-raised-button color="accent" matStepperPrevious type="button">Back</button>
                                     &nbsp;&nbsp;
-                                    <button mat-raised-button color="primary" type="submit" (click)="onSubmitForm()">Register and Continue</button>
+                                    <button mat-raised-button color="primary" type="submit" (click)="onSubmitForm()">Register
+                                        and Continue</button>
                                     &nbsp;&nbsp;
-                                    <button mat-raised-button color="primary" type="submit" (click)="onSubmitForm()">Save and Register New</button>
+                                    <button mat-raised-button color="primary" type="submit" (click)="onSubmitForm()">Save
+                                        and Register New</button>
                                     &nbsp;&nbsp;
-                                    <button mat-raised-button color="primary" type="submit" (click)="onSubmitForm()">Close Registration</button>
+                                    <button mat-raised-button color="primary" type="submit" (click)="onSubmitForm()">Close
+                                        Registration
+                                    </button>
                                 </div>
                             </mat-step>
                         </mat-horizontal-stepper>

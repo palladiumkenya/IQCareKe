@@ -9,6 +9,7 @@ using IQCare.Common.Core.Models;
 using IQCare.Common.Infrastructure;
 using IQCare.Common.BusinessProcess.Services;
 using IQCare.Common.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace IQCareRecords.Common.BusinessProcess.CommandHandlers.Registration
 {
@@ -25,13 +26,31 @@ namespace IQCareRecords.Common.BusinessProcess.CommandHandlers.Registration
             {
                 RegisterPersonService registerPersonService = new RegisterPersonService(_unitOfWork);
                 PersonContactsService personContactsService = new PersonContactsService(_unitOfWork);
-                //await registerPersonService.RegisterPerson(request.Emergencycontact.Firstname,
-                //    request.Emergencycontact.Middlename, request.Emergencycontact.Lastname,
-                //    request.Emergencycontact.Gender, "", request.Emergencycontact.CreatedBy, DateTime.Now);
 
-                //await personContactsService.Add(request.Emergencycontact.PersonId, request.Emergencycontact.EmergencyContactPersonId, request.Emergencycontact.CreatedBy, 1);
+                for (int i = 0; i < request.Emergencycontact.Count; i++)
+                {
+                    //add new person 
+                    var contactPerson = await registerPersonService.RegisterPerson(request.Emergencycontact[i].Firstname, request.Emergencycontact[i].Middlename,
+                        request.Emergencycontact[i].Lastname, request.Emergencycontact[i].Gender, request.Emergencycontact[i].CreatedBy, null, DateTime.Now);
 
-                return Result<AddPersonEmergencyContactResponse>.Valid(new AddPersonEmergencyContactResponse(){});
+                    //make the person an emergency contact
+                    await personContactsService.Add(request.Emergencycontact[i].PersonId, contactPerson.Id,
+                        request.Emergencycontact[i].CreatedBy, request.Emergencycontact[i].ContactCategory,
+                        request.Emergencycontact[i].RelationshipType);
+
+                    //add the person mobile contact
+                    await registerPersonService.addPersonContact(contactPerson.Id, "", request.Emergencycontact[i].MobileContact,
+                        "", "", request.Emergencycontact[i].CreatedBy);
+
+                    //add person consent to sms
+
+                }
+
+                return Result<AddPersonEmergencyContactResponse>.Valid(new AddPersonEmergencyContactResponse()
+                {
+                    Message = "Successfully registered emergency contact",
+                    PersonEmergencyContactId = 1
+                });
             }
             catch (Exception e)
             {

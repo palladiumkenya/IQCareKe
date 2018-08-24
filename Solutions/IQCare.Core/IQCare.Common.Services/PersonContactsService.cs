@@ -15,7 +15,7 @@ namespace IQCare.Common.Services
             _commonUnitOfWork = commonUnitOfWork ?? throw new ArgumentNullException(nameof(commonUnitOfWork));
         }
 
-        public async Task<PersonTreatmentSupporter> Add(int personId, int contactId, int userId, int contactCategory)
+        public async Task<PersonTreatmentSupporter> Add(int personId, int contactId, int userId, int contactCategory, int contactRelationship)
         {
             try
             {
@@ -26,7 +26,8 @@ namespace IQCare.Common.Services
                     CreatedBy = userId,
                     CreateDate = DateTime.Now,
                     DeleteFlag = false,
-                    ContactCategory = contactCategory
+                    ContactCategory = contactCategory,
+                    ContactRelationship = contactRelationship
                 };
 
                 await _commonUnitOfWork.Repository<PersonTreatmentSupporter>().AddAsync(personTreatmentSupporter);

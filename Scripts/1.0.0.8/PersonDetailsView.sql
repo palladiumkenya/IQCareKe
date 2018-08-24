@@ -30,7 +30,17 @@ P.DateOfBirth,
 P.DobPrecision,
 CAST(DECRYPTBYKEY(PC.MobileNumber) AS VARCHAR(50)) AS MobileNumber,
 CAST(DECRYPTBYKEY(PC.AlternativeNumber) AS VARCHAR(50)) AS AlternativeNumber,
-CAST(DECRYPTBYKEY(PC.EmailAddress) AS VARCHAR(50)) AS EmailAddress
+CAST(DECRYPTBYKEY(PC.EmailAddress) AS VARCHAR(50)) AS EmailAddress,
+
+P.RegistrationDate,
+P.Sex,
+PM.MaritalStatusId,
+PE.EducationLevel EducationLevelId,
+PO.Occupation OccupationId,
+CountyId = (SELECT TOP 1 CountyId FROM County WHERE WardId = PL.Ward),
+SubCountyId = (SELECT TOP 1 SubcountyId FROM County WHERE WardId = PL.Ward),
+PL.Ward WardId
+
 FROM  dbo.Person AS P
 LEFT JOIN Patient PT ON PT.PersonId = P.Id
 LEFT JOIN PatientMaritalStatus PM ON PM.PersonId = P.Id

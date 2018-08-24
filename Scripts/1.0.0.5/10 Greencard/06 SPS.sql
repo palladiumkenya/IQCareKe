@@ -192,7 +192,7 @@ P.MovedToPatientTable,row_number() Over(Partition by B.ptn_pk order by B.Id Asc)
 	UPDATE A Set patientId = tp.OriginalPatientId From [dbo].PregnancyIndicator A Inner Join #TPatient TP On A.PatientId=TP.patientId
 	UPDATE A Set patientId = tp.OriginalPatientId From [dbo].PregnancyLog A Inner Join #TPatient TP On A.PatientId=TP.patientId
 	UPDATE A Set patientId = tp.OriginalPatientId From [dbo].PresentingComplaints A Inner Join #TPatient TP On A.PatientId=TP.patientId
-	UPDATE A Set patientId = tp.OriginalPatientId From [dbo].Referrals A Inner Join #TPatient TP On A.PatientId=TP.patientId
+	--UPDATE A Set patientId = tp.OriginalPatientId From [dbo].Referrals A Inner Join #TPatient TP On A.PatientId=TP.patientId
 
 	UPDATE A Set patientId = tp.OriginalPatientId From [dbo].Vaccination A Inner Join #TPatient TP On A.PatientId=TP.patientId
 	UPDATE A Set patientId = tp.OriginalPatientId From [dbo].TreatmentEventTracker A Inner Join #TPatient TP On A.PatientId=TP.patientId

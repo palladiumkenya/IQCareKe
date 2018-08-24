@@ -129,7 +129,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                             else
                             {
                                 var person = await registerPersonService.RegisterPerson(firstName, middleName, lastName,
-                                    sex, dateOfBirth, userId);
+                                    sex, userId, dateOfBirth);
                             }
 
                             var patient = await registerPersonService.GetPatientByPersonId(identifiers[0].PersonId);
@@ -535,7 +535,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         {
                             // Add Person
                             var person = await registerPersonService.RegisterPerson(firstName, middleName, lastName, sex,
-                                dateOfBirth, userId);
+                                userId, dateOfBirth);
                             //Add Person to mst_patient
                             var mstResult = await registerPersonService.InsertIntoBlueCard(firstName, lastName,
                                 middleName, dateEnrollment, maritalStatusName, physicalAddress, mobileNumber, gender, dobPrecision, dateOfBirth, userId);

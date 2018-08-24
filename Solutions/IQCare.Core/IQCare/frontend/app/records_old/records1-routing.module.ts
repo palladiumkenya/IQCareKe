@@ -55,17 +55,7 @@ const routes: Routes = [
         path: 'registerclient',
         component: RecordsRegisterComponent,
         pathMatch: 'full',
-        resolve: {
-            persondetailsresolve: GetPersonDetailsResolver,
-            rel: RelationshipResolver,
-            occ: OccupationResolver,
-            gen: GenderResolver,
-            Consent: OppConsentResolver,
-            Educ: OppEducationResolver,
-            ConsentType: ConsentTypeResolver,
-            IdentifyerType: IdentifierTypeResolver,
-            maritalstatusresolve: MaritalStatusResolver
-        }
+
 
     }
 

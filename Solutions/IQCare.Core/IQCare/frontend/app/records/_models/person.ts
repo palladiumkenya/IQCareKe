@@ -16,4 +16,5 @@ export class Person {
     identifierNumber: number;
     personId?: number;
     createdBy?: number;
+    id?: number;
 }

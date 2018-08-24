@@ -47,7 +47,7 @@ export class RecordsService {
     }
 
     public getRelationshipOptions(): Observable<LookupItemView[]> {
-        return this.http.get<LookupItemView[]>(this.API_URL + '/api/Lookup/GetOptionsByMasterName/' + 'Relationship').pipe(
+        return this.http.get<LookupItemView[]>(this.API_URL + '/api/Lookup/GetOptionsByMasterName/' + 'KinRelationship').pipe(
             tap(getRelationshipOptions => this.errorHandler.log('get relationship options')),
             catchError(this.errorHandler.handleError<any[]>('getRelationshipOptions'))
         );
@@ -57,6 +57,20 @@ export class RecordsService {
         return this.http.get<any>(this.API_URL + '/records/api/Register/GetPersonDetails/' + personId).pipe(
             tap(getPersonDetails => this.errorHandler.log('get person details')),
             catchError(this.errorHandler.handleError<any[]>('getPersonDetails'))
+        );
+    }
+
+    public getConsentToSms(): Observable<any> {
+        return this.http.get<any>(this.API_URL + '/api/Lookup/GetOptionsByMasterName/' + 'ConsentOptions').pipe(
+            tap(getConsentToSms => this.errorHandler.log('get consent to sms options')),
+            catchError(this.errorHandler.handleError<any[]>('getConsentToSms'))
+        );
+    }
+
+    public getContactCategory(): Observable<any> {
+        return this.http.get<any>(this.API_URL + '/api/Lookup/GetOptionsByMasterName/' + 'ContactCategory').pipe(
+            tap(getContactCategory => this.errorHandler.log('get contact categories options')),
+            catchError(this.errorHandler.handleError<any[]>('getContactCategory'))
         );
     }
 }

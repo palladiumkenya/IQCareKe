@@ -190,5 +190,16 @@ namespace IQCare.Controllers.Records
 
         }
 
+        [HttpGet("GetPersonKinContacts/{personId}")]
+        public async Task<IActionResult> GetPersonKinContacts(int personId)
+        {
+            var response = await _mediator.Send(new GetPersonKinContactsCommand()
+            {
+                PersonId = personId
+            }, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
     }
 }

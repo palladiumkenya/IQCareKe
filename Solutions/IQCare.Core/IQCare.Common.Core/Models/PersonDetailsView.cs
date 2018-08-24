@@ -22,5 +22,14 @@ namespace IQCare.Common.Core.Models
         public string MobileNumber { get; set; }
         public string AlternativeNumber { get; set; }
         public string EmailAddress { get; set; }
+
+        public int? Sex { get; set; }
+        public int? MaritalStatusId { get; set; }
+        public int? EducationLevelId { get; set; }
+        public int? OccupationId { get; set; }
+        public int? CountyId { get; set; }
+        public int? SubCountyId { get; set; }
+        public int? WardId { get; set; }
+        public DateTime? RegistrationDate { get; set; }
     }
 }

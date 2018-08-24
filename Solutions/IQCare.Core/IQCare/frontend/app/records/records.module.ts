@@ -28,6 +28,9 @@ import { MaritalStatusResolver } from './_services/maritalstatus.resolver';
 import { EducationLevelResolver } from './_services/educationallevel.resolver';
 import { RelationshipResolver } from './_services/relationship.resolver';
 import { ViewComponent } from './person/view/view.component';
+import { ConsentSmsResolver } from './_services/consentsms.resolver';
+import { ContactCategoryResolver } from './_services/contactcategory.resolver';
+import { PersoncontactsComponent } from './person/personcontacts/personcontacts.component';
 
 @NgModule({
     imports: [
@@ -48,7 +51,7 @@ import { ViewComponent } from './person/view/view.component';
         MatSnackBarModule, MatStepperModule, MatTabsModule, MatToolbarModule, MatTooltipModule,
         SharedModule
     ],
-    declarations: [SearchComponent, RegisterComponent, ViewComponent],
+    declarations: [SearchComponent, RegisterComponent, ViewComponent, PersoncontactsComponent],
     providers: [
         CountyResolver,
         CountyService,
@@ -58,7 +61,12 @@ import { ViewComponent } from './person/view/view.component';
         EducationLevelResolver,
         OccupationResolver,
         PersonRegistrationService,
-        RelationshipResolver
+        RelationshipResolver,
+        ConsentSmsResolver,
+        ContactCategoryResolver
+    ],
+    entryComponents: [
+        PersoncontactsComponent
     ]
 })
 export class RecordsModule { }

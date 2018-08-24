@@ -178,7 +178,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                             else
                             {
                                 //Register family
-                                var person = await registerPersonService.RegisterPerson(firstName, middleName, lastName, sex, dateOfBirth, providerId);
+                                var person = await registerPersonService.RegisterPerson(firstName, middleName, lastName, sex, providerId, dateOfBirth);
                                 //Add afyamobile Id as an Id of the family
                                 var personIdentifier = await registerPersonService.addPersonIdentifiers(person.Id, 10, afyaMobileId, providerId);
                                 //Add family marital status

@@ -1,22 +1,24 @@
 import { forkJoin } from 'rxjs';
 import { LookupItemView } from './../../../shared/_models/LookupItemView';
 import { County } from '../../_models/county';
-import { SnotifyService } from 'ng-snotify';
+import { SnotifyService, SnotifyPosition } from 'ng-snotify';
 import { EmergencyContact } from '../../_models/emergencycontact';
 import { ClientAddress } from '../../_models/clientaddress';
 import { Validators } from '@angular/forms';
 import { FormControl } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { FormGroup, FormBuilder, AbstractControl } from '@angular/forms';
 import { Person } from '../../_models/person';
 import { ClientContact } from '../../_models/clientcontact';
 import { NextOfKin } from '../../_models/nextofkin';
-import { MatDatepickerInputEvent } from '@angular/material';
+import { MatDatepickerInputEvent, MatDialogConfig, MatDialog, MatTableDataSource } from '@angular/material';
 import * as moment from 'moment';
 import { NotificationService } from '../../../shared/_services/notification.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CountyService } from '../../_services/county.service';
 import { PersonRegistrationService } from '../../_services/person-registration.service';
+import { PersoncontactsComponent } from '../personcontacts/personcontacts.component';
+import { RecordsService } from '../../_services/records.service';
 
 @Component({
     selector: 'app-register',
@@ -27,7 +29,7 @@ export class RegisterComponent implements OnInit {
     /**
      * Component variables
      */
-    isLinear = true;
+    isLinear = false;
     registerEmergencyContact: boolean = false;
     formGroup: FormGroup;
     /** Returns a FormArray with the name 'formArray'. */
@@ -36,7 +38,6 @@ export class RegisterComponent implements OnInit {
     person: Person;
     clientAddress: ClientAddress;
     clientContact: ClientContact;
-    emergencyContact: EmergencyContact;
     nextOfKin: NextOfKin;
     maxDate: Date;
 
@@ -48,13 +49,23 @@ export class RegisterComponent implements OnInit {
     educationLevel: LookupItemView[];
     occupation: LookupItemView[];
     relationship: LookupItemView[];
+    consentSms: LookupItemView[];
+    contactCategory: LookupItemView[];
+
+    dataSource: any[];
+    newContacts: any[];
+    id: number;
 
     constructor(private _formBuilder: FormBuilder,
         private snotifyService: SnotifyService,
         private notificationService: NotificationService,
         private route: ActivatedRoute,
         private countyService: CountyService,
-        private personRegistration: PersonRegistrationService) {
+        private personRegistration: PersonRegistrationService,
+        private dialog: MatDialog,
+        private recordsService: RecordsService,
+        public zone: NgZone,
+        private router: Router) {
         this.maxDate = new Date();
     }
 
@@ -62,8 +73,9 @@ export class RegisterComponent implements OnInit {
         this.person = new Person();
         this.clientAddress = new ClientAddress();
         this.clientContact = new ClientContact();
-        this.emergencyContact = new EmergencyContact();
         this.nextOfKin = new NextOfKin();
+        this.dataSource = [];
+        this.newContacts = [];
 
         this.formGroup = this._formBuilder.group({
             formArray: this._formBuilder.array([
@@ -94,43 +106,103 @@ export class RegisterComponent implements OnInit {
                     MobileNumber: new FormControl(this.clientContact.MobileNumber),
                     AlternativeMobileNumber: new FormControl(this.clientContact.AlternativeMobileNumber),
                     EmailAddress: new FormControl(this.clientContact.EmailAddress),
-                    EmergencyContactInClinic: new FormControl(this.clientContact.EmergencyContactInClinic),
-                    EmergencyContactFirstName: new FormControl(this.emergencyContact.EmergencyContactFirstName, [Validators.required]),
-                    EmergencyContactMiddleName: new FormControl(this.emergencyContact.EmergencyContactMiddleName),
-                    EmergencyContactLastName: new FormControl(this.emergencyContact.EmergencyContactLastName, [Validators.required]),
-                    EmergencyContactSex: new FormControl(this.emergencyContact.EmergencyContactSex, [Validators.required]),
-                    EmergencyContactRelationship: new FormControl(this.emergencyContact.EmergencyContactRelationship,
-                        [Validators.required]),
-                    EmergencyContactMobileNumber: new FormControl(this.emergencyContact.EmergencyContactMobileNumber)
                 }),
                 this._formBuilder.group({
-                    NextOfKinFirstName: new FormControl(this.nextOfKin.firstName),
-                    NextOfKinMiddleName: new FormControl(this.nextOfKin.middleName),
-                    NextOfKinLastName: new FormControl(this.nextOfKin.lastName),
-                    NextOfKinSex: new FormControl(this.nextOfKin.sex),
-                    NextOfKinRelationship: new FormControl(this.nextOfKin.kinContactRelationship),
-                    NextOfKinMobileNumber: new FormControl(this.nextOfKin.kinContactRelationship),
-                    NextOfKinConsent: new FormControl(this.nextOfKin.kinConsentToSMS),
-                    NextOfKinConsentDeclineReason: new FormControl(this.nextOfKin.consentDeclineReason)
                 })
             ])
         });
 
-        this.formGroup.controls['formArray']['controls'][2]['controls'].EmergencyContactFirstName.disable({ onlySelf: true });
-        this.formGroup.controls['formArray']['controls'][2]['controls'].EmergencyContactLastName.disable({ onlySelf: true });
-        this.formGroup.controls['formArray']['controls'][2]['controls'].EmergencyContactSex.disable({ onlySelf: true });
-        this.formGroup.controls['formArray']['controls'][2]['controls'].EmergencyContactRelationship.disable({ onlySelf: true });
-
         this.route.data.subscribe((res) => {
             // console.log(res);
-            const { countiesArray, genderArray, maritalStatusArray, educationLevelArray, occupationArray, relationshipArray } = res;
+            const { countiesArray, genderArray, maritalStatusArray, educationLevelArray,
+                occupationArray, relationshipArray, consentSmsArray, contactCategoryArray } = res;
             this.counties = countiesArray;
             this.gender = genderArray;
             this.maritalStatus = maritalStatusArray;
             this.educationLevel = educationLevelArray;
             this.occupation = occupationArray;
             this.relationship = relationshipArray;
+            this.consentSms = consentSmsArray;
+            this.contactCategory = contactCategoryArray;
         });
+
+        this.route.params.subscribe(params => {
+            this.id = params['id'];
+        });
+
+        if (this.id) {
+            this.getPersonDetails(this.id);
+        }
+    }
+    getPersonDetails(id: number): any {
+        console.log('edit person');
+        this.recordsService.getPersonDetails(id).subscribe(
+            (result) => {
+                console.log(result);
+                const {
+                    alternativeNumber, county, countyId, dateOfBirth, dobPrecision, educationLevel, educationLevelId,
+                    emailAddress, firstName, gender, lastName, maritalStatus, maritalStatusId, middleName,
+                    mobileNumber, nearestHealthCentre, occupation, occupationId, registrationDate, sex,
+                    subCounty, subCountyId, village, ward, wardId } = result[0];
+
+
+                let exact = null;
+                if (dobPrecision && dobPrecision == true) {
+                    exact = 1;
+                } else if (dobPrecision == false) {
+                    exact = 0;
+                }
+
+                // first tab wizard
+                this.formGroup.controls['formArray']['controls'][0]['controls'].FirstName.setValue(firstName);
+                this.formGroup.controls['formArray']['controls'][0]['controls'].MiddleName.setValue(middleName);
+                this.formGroup.controls['formArray']['controls'][0]['controls'].LastName.setValue(lastName);
+                this.formGroup.controls['formArray']['controls'][0]['controls'].Sex.setValue(sex);
+                this.formGroup.controls['formArray']['controls'][0]['controls'].RegistrationDate.setValue(registrationDate);
+                this.formGroup.controls['formArray']['controls'][0]['controls'].DateOfBirth.setValue(dateOfBirth);
+                this.formGroup.controls['formArray']['controls'][0]['controls'].DobPrecision.setValue(exact);
+                this.formGroup.controls['formArray']['controls'][0]['controls'].MaritalStatus.setValue(maritalStatusId);
+                this.formGroup.controls['formArray']['controls'][0]['controls'].EducationLevel.setValue(educationLevelId);
+                this.formGroup.controls['formArray']['controls'][0]['controls'].Occupation.setValue(occupationId);
+                this.getAge(new Date(dateOfBirth));
+
+                // second tab wizard
+                this.formGroup.controls['formArray']['controls'][1]['controls'].County.setValue(countyId);
+                this.countyService.getSubCounties(countyId).subscribe((res) => {
+                    this.subCounties = res;
+                    this.formGroup.controls['formArray']['controls'][1]['controls'].SubCounty.setValue(subCountyId);
+                });
+                this.countyService.getWards(subCountyId).subscribe((res) => {
+                    this.wards = res;
+                    this.formGroup.controls['formArray']['controls'][1]['controls'].Ward.setValue(wardId);
+                });
+                this.formGroup.controls['formArray']['controls'][1]['controls'].NearestHealthCenter.setValue(nearestHealthCentre);
+                this.formGroup.controls['formArray']['controls'][1]['controls'].Landmark.setValue(village);
+
+                // third tab wizard
+                this.formGroup.controls['formArray']['controls'][2]['controls'].MobileNumber.setValue(mobileNumber);
+                this.formGroup.controls['formArray']['controls'][2]['controls'].AlternativeMobileNumber.setValue(alternativeNumber);
+                this.formGroup.controls['formArray']['controls'][2]['controls'].EmailAddress.setValue(emailAddress);
+            }
+        );
+
+        this.personRegistration.getPersonKinContacts(id).subscribe(
+            (res) => {
+                console.log(res);
+                for (let i = 0; i < res.length; i++) {
+                    /*this.dataSource.push({
+                        'firstName': res.firstName,
+                        'middleName': res.middleName,
+                        'lastName': res.lastName,
+                        'gender': null,
+                        'contactcategory': null,
+                        'relationship': null,
+                        'phoneno': res.MobileNo,
+                        'consent': null
+                    });*/
+                }
+            }
+        );
     }
 
     onDate(event: MatDatepickerInputEvent<Date>) {
@@ -153,7 +225,9 @@ export class RegisterComponent implements OnInit {
 
         this.formArray['controls'][0]['controls']['AgeYears'].setValue(age);
         this.formArray['controls'][0]['controls']['AgeMonths'].setValue(ageMonths);
-        this.formArray['controls'][0]['controls']['DobPrecision'].setValue(1);
+        if (!this.id) {
+            this.formArray['controls'][0]['controls']['DobPrecision'].setValue(1);
+        }
     }
 
     estimateDob() {
@@ -204,7 +278,7 @@ export class RegisterComponent implements OnInit {
         });
     }
 
-    onRegisteredInClinic() {
+    /*onRegisteredInClinic() {
         const isEmergencyContactRegisteredInClinic = this.formArray.value[2]['EmergencyContactInClinic'];
         if (!isEmergencyContactRegisteredInClinic || isEmergencyContactRegisteredInClinic == 1) {
             this.registerEmergencyContact = false;
@@ -221,7 +295,7 @@ export class RegisterComponent implements OnInit {
             this.formGroup.controls['formArray']['controls'][2]['controls'].EmergencyContactSex.enable({ onlySelf: false });
             this.formGroup.controls['formArray']['controls'][2]['controls'].EmergencyContactRelationship.enable({ onlySelf: false });
         }
-    }
+    }*/
 
     onSubmitForm() {
         console.log(this.formArray.value);
@@ -230,16 +304,17 @@ export class RegisterComponent implements OnInit {
             this.person = { ...this.formArray.value[0] };
             this.clientAddress = { ...this.formArray.value[1] };
             this.clientContact = { ...this.formArray.value[2] };
-            this.emergencyContact = { ...this.formArray.value[2] };
-
-
 
             this.person.personId = 0;
             this.person.createdBy = 1;
             console.log(this.person);
             console.log(this.clientAddress);
             console.log(this.clientContact);
-            console.log(this.emergencyContact);
+
+            if (this.id) {
+                // set person id for update
+                this.person.id = this.id;
+            }
 
             this.personRegistration.registerPerson(this.person).subscribe(
                 (response) => {
@@ -253,7 +328,7 @@ export class RegisterComponent implements OnInit {
                     const personAddress = this.personRegistration.addPersonAddress(personId, this.person.createdBy, this.clientAddress);
                     // Add Marital Status
                     const personMaritalStatus = this.personRegistration.addPersonMaritalStatus(personId,
-                        this.person.createdBy, this.person.maritalStatus);
+                        this.person.createdBy, this.person['MaritalStatus']);
                     // Add Education Level
                     const personEducationLevel = this.personRegistration.addPersonEducationLevel(personId,
                         this.person.createdBy, this.person.EducationLevel);
@@ -261,7 +336,8 @@ export class RegisterComponent implements OnInit {
                     const personOccupation = this.personRegistration.addPersonOccupation(personId,
                         this.person.createdBy, this.person.Occupation);
                     // Add Emergency Contact
-                    const personEmergencyContact = this.personRegistration.registerPersonEmergencyContact(personId, this.emergencyContact);
+                    const personEmergencyContact = this.personRegistration.registerPersonEmergencyContact(personId,
+                        this.person.createdBy, this.newContacts);
 
                     forkJoin([personContact, personAddress, personMaritalStatus,
                         personEducationLevel, personOccupation, personEmergencyContact]).subscribe(
@@ -269,19 +345,105 @@ export class RegisterComponent implements OnInit {
                                 console.log(forkRes);
                             },
                             (forkError) => {
-                                console.log(forkError);
+                                this.snotifyService.error('Error creating person ' + forkError, 'Person Registration',
+                                    this.notificationService.getConfig());
                             },
                             () => {
-                                console.log(`complete`);
+                                this.zone.run(() => {
+                                    this.router.navigate(['/dashboard/personhome/' + personId],
+                                        { relativeTo: this.route });
+                                });
+                                this.snotifyService.success('Successfully Registered Person', 'Person Registration',
+                                    this.notificationService.getConfig());
                             }
                         );
                 },
                 (error) => {
-                    console.log(error);
+                    this.snotifyService.error('Error creating person ' + error, 'Person Registration',
+                        this.notificationService.getConfig());
                 }
             );
         } else {
             return;
         }
+    }
+
+    addRow() {
+        const dialogConfig = new MatDialogConfig();
+
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.height = '90%';
+        dialogConfig.width = '80%';
+
+        dialogConfig.data = {
+            gender: this.gender,
+            relationship: this.relationship,
+            consentSms: this.consentSms,
+            contactCategory: this.contactCategory
+        };
+
+        const dialogRef = this.dialog.open(PersoncontactsComponent, dialogConfig);
+
+        dialogRef.afterClosed().subscribe(
+            data => {
+                if (!data) {
+                    return;
+                }
+
+                console.log(data);
+
+                this.dataSource.push(
+                    {
+                        'firstName': data.firstName,
+                        'middleName': data.middleName,
+                        'lastName': data.lastName,
+                        'gender': data.sex,
+                        'contactcategory': data.kinContactType,
+                        'relationship': data.kinContactRelationship,
+                        'phoneno': data.kinMobileNumber,
+                        'consent': data.kinConsentToSMS
+                    }
+                );
+
+                this.newContacts.push({
+                    'firstName': data.firstName,
+                    'middleName': data.middleName,
+                    'lastName': data.lastName,
+                    'gender': data.sex,
+                    'contactcategory': data.kinContactType,
+                    'relationship': data.kinContactRelationship,
+                    'phoneno': data.kinMobileNumber,
+                    'consent': data.kinConsentToSMS,
+                    'consentDecline': data.consentDeclineReason
+                });
+            }
+        );
+    }
+
+    deleteContact(data: any, index: number, event: any) {
+        const result = this.snotifyService.confirm('Are you sure you want to delete?', 'Contacts', {
+            closeOnClick: true,
+            position: SnotifyPosition.centerCenter,
+            buttons: [
+                {
+                    text: 'Yes', action: () => {
+                        const contactsFiltered = this.newContacts.filter((obj) => {
+                            return obj.firstName !== data.firstName
+                                && obj.lastName !== data.lastName
+                                && obj.gender.itemId !== data.gender.itemId
+                                && obj.relationship.itemId !== data.relationship.itemId
+                                && obj.contactcategory !== data.contactcategory.itemId;
+                        });
+
+                        this.newContacts = contactsFiltered;
+                        this.dataSource.splice(index, 1);
+
+                        console.log(this.newContacts);
+                    }, bold: false
+                },
+                { text: 'No', action: () => console.log('Clicked: No') }
+            ]
+        });
     }
 }

@@ -118,19 +118,43 @@ export class PersonRegistrationService {
         );
     }
 
-    public registerPersonEmergencyContact(personId: number, emergencyContact: EmergencyContact): Observable<any> {
+    public registerPersonEmergencyContact(personId: number, userId: number, contactKin: any[]): Observable<any> {
+        if (contactKin.length == 0) {
+            return of([]);
+        }
+
+        const contacts = [];
+        for (let i = 0; i < contactKin.length; i++) {
+            contacts.push({
+                'PersonId': personId,
+                'firstname': contactKin[i]['firstName'],
+                'middlename': contactKin[i]['middleName'],
+                'lastname': contactKin[i]['lastName'],
+                'gender': contactKin[i]['gender']['itemId'],
+                'MobileContact': contactKin[i]['phoneno'],
+                'CreatedBy': userId,
+                'RelationshipType': contactKin[i]['relationship']['itemId'],
+                'contactcategory': contactKin[i]['contactcategory']['itemId'],
+                'consent': contactKin[i]['consent']['itemId'],
+                'consentDecline': contactKin[i]['consentDecline']
+            });
+        }
+
         const Indata = {
-            'PersonId': personId,
-            'firstname': emergencyContact.EmergencyContactFirstName,
-            'middlename': emergencyContact.EmergencyContactMiddleName,
-            'lastname': emergencyContact.EmergencyContactLastName,
-            'gender': emergencyContact.EmergencyContactSex,
-            'MobileContact': emergencyContact.EmergencyContactMobileNumber
+            'Emergencycontact': contacts
         };
 
-        return this.http.post<any>(this.API_URL + '', JSON.stringify(''), httpOptions).pipe(
-            tap((registerPersonEmergencyContact: any) => this.errorHandler.log(`register person emergency contact`)),
-            catchError(this.errorHandler.handleError<any>('registerPersonEmergencyContact'))
+        return this.http.post<any>(this.API_URL + '/records/api/Register/addPersonEmergencyContact',
+            JSON.stringify(Indata), httpOptions).pipe(
+                tap((registerPersonEmergencyContact: any) => this.errorHandler.log(`register person emergency contact`)),
+                catchError(this.errorHandler.handleError<any>('registerPersonEmergencyContact'))
+            );
+    }
+
+    public getPersonKinContacts(personId: number): Observable<any> {
+        return this.http.get<any>(this.API_URL + '/records/api/Register/GetPersonKinContacts/' + personId).pipe(
+            tap(getPersonKinContacts => this.errorHandler.log('get kin contacts')),
+            catchError(this.errorHandler.handleError<any[]>('getPersonKinContacts'))
         );
     }
 }

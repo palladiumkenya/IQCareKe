@@ -588,8 +588,8 @@ namespace IQCare.Common.BusinessProcess.Services
                 StringBuilder sql = new StringBuilder();
                 sql.Append("exec pr_OpenDecryptedSession;");
                 sql.Append($"UPDATE PersonContact SET PhysicalAddress = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{physicalAddress}'), " +
-                           $"MobileNumber = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{mobileNumber}')" +
-                           $"AlternativeNumber = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{alternativeNumber}')" +
+                           $"MobileNumber = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{mobileNumber}')," +
+                           $"AlternativeNumber = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{alternativeNumber}')," +
                            $"EmailAddress = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{emailAddress}')" +
                            $" WHERE PersonId = {personId} AND DeleteFlag = 0;");
 
@@ -1231,7 +1231,7 @@ namespace IQCare.Common.BusinessProcess.Services
             }
         }
 
-        public async Task<Person> UpdatePerson(int personId, string firstName, string middleName, string lastName, int sex, DateTime dateOfBirth)
+        public async Task<Person> UpdatePerson(int personId, string firstName, string middleName, string lastName, int sex, DateTime dateOfBirth, DateTime? registrationDate = null, bool dobPrecision = true)
         {
             try
             {
@@ -1245,7 +1245,7 @@ namespace IQCare.Common.BusinessProcess.Services
                            $"MidName = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{middleName}'), " +
                            $"LastName = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{lastName}'), " +
                            $"Sex = {sex}, DateOfBirth = '{dateOfBirth.ToString("yyyy-MM-dd")}', " +
-                           $"DobPrecision = 1 WHERE Id = {personId}; ");
+                           $"RegistrationDate = '{registrationDate}', [DobPrecision] = '{dobPrecision}' WHERE Id = {personId}; ");
                 sql.Append($"SELECT [Id] , CAST(DECRYPTBYKEY(FirstName) AS VARCHAR(50)) [FirstName] ,CAST(DECRYPTBYKEY(MidName) AS VARCHAR(50)) MidName" +
                            $",CAST(DECRYPTBYKEY(LastName) AS VARCHAR(50)) [LastName] ,[Sex] ,[Active] ,[DeleteFlag] ,[CreateDate] " +
                            $",[CreatedBy] ,[AuditData] ,[DateOfBirth] ,[DobPrecision], RegistrationDate FROM Person WHERE Id = '{personId}';");
@@ -1260,19 +1260,20 @@ namespace IQCare.Common.BusinessProcess.Services
             }
         }
 
-        public async Task<Person> RegisterPerson(string firstName, string middleName, string lastName, int sex, DateTime dateOfBirth, int createdBy, DateTime? registrationDate = null)
+        public async Task<Person> RegisterPerson(string firstName, string middleName, string lastName, int sex, int createdBy, DateTime? dateOfBirth, DateTime? registrationDate = null)
         {
             try
             {
                 firstName = string.IsNullOrWhiteSpace(firstName) ? "" : firstName.Replace("'", "''");
                 middleName = string.IsNullOrWhiteSpace(middleName) ? "" : middleName.Replace("'", "''");
                 lastName = string.IsNullOrWhiteSpace(lastName) ? "" : lastName.Replace("'", "''");
+                string dob = dateOfBirth.HasValue ? dateOfBirth.Value.ToString("yyyy-MM-dd") : null;
 
                 var sql =
                     "exec pr_OpenDecryptedSession;" +
                     "Insert Into Person(FirstName, MidName,LastName,Sex,DateOfBirth,DobPrecision,Active,DeleteFlag,CreateDate,CreatedBy, RegistrationDate)" +
                     $"Values(ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{firstName}'), ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{middleName}')," +
-                    $"ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{lastName}'), {sex}, '{dateOfBirth.ToString("yyyy-MM-dd")}', 1," +
+                    $"ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{lastName}'), {sex}, '{dob}', 1," +
                     $"1,0,GETDATE(), '{createdBy}', '{registrationDate}');" +
                     "SELECT [Id] , CAST(DECRYPTBYKEY(FirstName) AS VARCHAR(50)) [FirstName] ,CAST(DECRYPTBYKEY(MidName) AS VARCHAR(50)) MidName" +
                     ",CAST(DECRYPTBYKEY(LastName) AS VARCHAR(50)) [LastName] ,[Sex] ,[Active] ,[DeleteFlag] ,[CreateDate] " +

@@ -28,7 +28,7 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers
             {
                 RegisterPersonService registerPersonService = new RegisterPersonService(_unitOfWork);
                 var result = await registerPersonService.RegisterPerson(request.Person.FirstName, request.Person.MiddleName,
-                    request.Person.LastName, request.Person.Sex, request.Person.DateOfBirth, request.Person.CreatedBy);
+                    request.Person.LastName, request.Person.Sex, request.Person.CreatedBy, request.Person.DateOfBirth);
 
                 _unitOfWork.Dispose();
 

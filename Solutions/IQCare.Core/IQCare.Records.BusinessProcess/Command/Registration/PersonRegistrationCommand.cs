@@ -17,10 +17,10 @@ namespace IQCareRecords.Common.BusinessProcess.Command
         public string LastName { get; set; }
         public DateTime DateOfBirth { get; set; }
         public int Sex { get; set; }
-        public int PersonId { get; set; }
         public int CreatedBy { get; set; }
         public bool DobPrecision { get; set; }
         public DateTime RegistrationDate { get; set; }
+        public int? Id { get; set; }
     }
 
     public class PersonRegistrationResponse

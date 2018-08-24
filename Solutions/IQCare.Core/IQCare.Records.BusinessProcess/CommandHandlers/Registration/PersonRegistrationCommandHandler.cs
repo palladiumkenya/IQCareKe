@@ -29,15 +29,17 @@ namespace IQCareRecords.Common.BusinessProcess.CommandHandlers
                 {
                     Person person = new Person();
                     RegisterPersonService registerPersonService = new RegisterPersonService(_unitOfWork);
-                    if (request.Person.PersonId == 0)
+                    if (!request.Person.Id.HasValue)
                     {
                         person = await registerPersonService.RegisterPerson(request.Person.FirstName, request.Person.MiddleName,
-                            request.Person.LastName, request.Person.Sex, request.Person.DateOfBirth,
-                            request.Person.CreatedBy, request.Person.RegistrationDate);
+                            request.Person.LastName, request.Person.Sex, request.Person.CreatedBy, request.Person.DateOfBirth,
+                            request.Person.RegistrationDate);
                     }
                     else
                     {
-
+                        person = await registerPersonService.UpdatePerson(request.Person.Id.Value,
+                            request.Person.FirstName, request.Person.MiddleName, request.Person.LastName,
+                            request.Person.Sex, request.Person.DateOfBirth, request.Person.RegistrationDate, request.Person.DobPrecision);
                     }
 
                     _unitOfWork.Dispose();
