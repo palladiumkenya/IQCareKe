@@ -24,7 +24,7 @@ namespace IQCare.Web.CCC.UC
             if (!IsPostBack)
             {
                 LookupLogic lookUp = new LookupLogic();
-                lookUp.populateDDL(ddlCounsellingType, "FollowupEducation");
+                lookUp.populateDDL(ddlCounsellingType, "CounsellingTypes");
             }
         }
 

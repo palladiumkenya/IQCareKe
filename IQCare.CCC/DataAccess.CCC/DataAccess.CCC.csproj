@@ -117,6 +117,7 @@
     <Compile Include="Interface\enrollment\IPatientReEnrollmentRepository.cs" />
     <Compile Include="Interface\enrollment\IPersonIdentifierRepository.cs" />
     <Compile Include="Interface\enrollment\IServiceAreaIdentifiersRepository.cs" />
+    <Compile Include="Interface\HIVEducation\IHIVEducationRepository.cs" />
     <Compile Include="Interface\IL\iILMessageStatsRepository.cs" />
     <Compile Include="Interface\IL\iILMessageViewerRepository.cs" />
     <Compile Include="Interface\IL\IIlMessengerRepository.cs" />
@@ -231,6 +232,7 @@
     <Compile Include="Repository\Enrollment\PatientReEnrollmentRepository.cs" />
     <Compile Include="Repository\Enrollment\PersonIdentifierRepository.cs" />
     <Compile Include="Repository\Enrollment\ServiceAreaIdentifiersRepository.cs" />
+    <Compile Include="Repository\HIVEducation\PatientHIVEducationFollowupRepository.cs" />
     <Compile Include="Repository\IL\ILMessageStatsRepository.cs" />
     <Compile Include="Repository\IL\ILMessageViewerRepository.cs" />
     <Compile Include="Repository\IL\IlMessengerRepository.cs" />
