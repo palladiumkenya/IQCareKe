@@ -1,4 +1,4 @@
-<form class="form-group" novalidate (ngSubmit)="test()" [formGroup]="visitDetailsFormGroup">
+<form class="form-group" novalidate  [formGroup]="visitDetailsFormGroup">
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="row">
@@ -48,28 +48,31 @@
                                                 <div class="row">
                                                     <div class="col-md-4">
                                                         <mat-form-field class="col-md-8">
-                                                            <input id="dateLMP" matInput [matDatepicker]="dateLMP" formControlname="dateLMP" placeholder="LMP">
-                                                            <mat-datepicker-toggle matSuffix [for]="dateLMP"></mat-datepicker-toggle>
-                                                            <mat-datepicker #dateLMP></mat-datepicker>
+                                                            <input matInput [matDatepicker]="picker2" formControlName="dateLMP" (dateChange)="onLMPDateChange()" placeholder="LMP">
+                                                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                                            <mat-datepicker #picker2></mat-datepicker>
+
+
+
                                                         </mat-form-field>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <mat-form-field class="col-md-8">
-                                                            <input id="dateEDD" matInput [matDatepicker]="dateEDD" formControlName="dateEDD" placeholder="EDD" required>
-                                                            <mat-datepicker-toggle matSuffix [for]="dateEDD"></mat-datepicker-toggle>
-                                                            <mat-datepicker #dateEDD></mat-datepicker>
+                                                            <input matInput [matDatepicker]="picker1" formControlName="dateEDD" placeholder="EDD" required>
+                                                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                                            <mat-datepicker #picker1></mat-datepicker>
                                                         </mat-form-field>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <div class="col-md-2 col-lg-4 col-xs-12">
 
                                                             <mat-form-field class=" col-lg-12 col-xs-12">
-                                                                <input matInput formControlname="gestation" placeholder="gestation" value="0" required>
+                                                                <input matInput formControlName="gestation" placeholder="gestation (weeks)" value="0" required>
                                                             </mat-form-field>
                                                         </div>
                                                         <div class="col-lg-8 col-xs-12">
                                                             <mat-form-field class=" col-lg-12 col-xs-12">
-                                                                <input matInput formControlname="ageAtMenarche" placeholder="Age at Menarche" value="0" required>
+                                                                <input matInput formControlName="ageAtMenarche" placeholder="Age at Menarche" value="0" required>
                                                             </mat-form-field>
                                                         </div>
                                                     </div>
@@ -79,13 +82,13 @@
 
                                                     <div class="col-md-4">
                                                         <mat-form-field class="col-md-8">
-                                                            <input matInput formControlName="parityOne" class="red" placeholder="parity 1" value="0" required>
+                                                            <input matInput formControlName="parityOne" class="red" placeholder="parity 1" value="" required>
                                                         </mat-form-field>
                                                     </div>
 
                                                     <div class="col-md-4">
                                                         <mat-form-field class="col-md-8">
-                                                            <input matInput formControlName="parityTwo" placeholder="parity 2" value="0" required>
+                                                            <input type="number " matInput formControlName="parityTwo" (change)="onParityTwoChange()" placeholder="parity 2" value="" required>
                                                         </mat-form-field>
                                                     </div>
 
@@ -117,6 +120,6 @@
         </div>
     </div>
     <div>
-        <button mat-raised-button color="accent"  matStepperNext [disabled]="!visitDetailsFormGroup.valid" (click)="test2()">Next</button>
+        <button mat-raised-button color="accent"  matStepperNext [disabled]="!visitDetailsFormGroup.valid" (click)="moveNextStep()">Next</button>
     </div>
 </form>

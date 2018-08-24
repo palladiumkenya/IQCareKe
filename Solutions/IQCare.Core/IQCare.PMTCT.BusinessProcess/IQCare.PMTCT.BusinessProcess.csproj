@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="CommandHandlers\Education\" />
+    <Folder Include="Commands\NewFolder\" />
   </ItemGroup>
 
 </Project>

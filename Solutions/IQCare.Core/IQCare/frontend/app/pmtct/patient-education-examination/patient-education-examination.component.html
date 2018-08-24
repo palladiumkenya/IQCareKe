@@ -19,15 +19,7 @@
 
                                 <div class="col-md-12" style="margin-top:10px">
 
-                                    <div class="col-lg-4 col-md-3 col-sm-6 col-xs-12">
-                                        <mat-form-field class="col-md-12">
-                                            <input id="topicDate" matInput [matDatepicker]="topicDate" formControlname="topicDate" placeholder="Next Appointment Date">
-                                            <mat-datepicker-toggle matSuffix [for]="topicDate"></mat-datepicker-toggle>
-                                            <mat-datepicker #topicDate></mat-datepicker>
-                                        </mat-form-field>
-                                    </div>
-
-                                    <div class="col-lg-4 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="col-lg-6 col-md-3 col-sm-6 col-xs-12">
                                         <mat-form-field class="col-md-12">
                                             <mat-select placeholder="Patient Counselled On ?" formControlName="counselledOn" required multiple>
                                                 <mat-option *ngFor="let topic of topics" [value]="topic.itemId">
@@ -36,8 +28,17 @@
                                             </mat-select>
                                         </mat-form-field>
                                     </div>
+                                    <div class="col-lg-4 col-md-3 col-sm-6 col-xs-12">
+                                        <mat-form-field class="col-md-12">
+                                            <input id="topicDate" matInput [matDatepicker]="topicDate" formControlname="counsellingDate" placeholder="Date Counselled">
+                                            <mat-datepicker-toggle matSuffix [for]="topicDate"></mat-datepicker-toggle>
+                                            <mat-datepicker #topicDate></mat-datepicker>
+                                        </mat-form-field>
+                                    </div>
 
-                                    <div class="col-lg-4 col-md-3 col-sm-6 col-xs-12"></div>
+                                    <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
+                                        <button mat-raised-button color="primary"> Add Topic</button>
+                                    </div>
                                 </div>
 
 

@@ -10,6 +10,6 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Encounter
     }
     public class AddPatientPhysicalExamResponse
     {
-        public int PatientPhysicalExamIdd { get; set; }
+        public int PatientPhysicalExamId { get; set; }
     }
 }

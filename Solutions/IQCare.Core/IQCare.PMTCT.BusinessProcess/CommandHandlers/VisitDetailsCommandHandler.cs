@@ -18,11 +18,11 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
 {
     public class VisitDetailsCommandHandler : IRequestHandler<VisitDetailsCommand, Library.Result<VisitDetailsCommandResult>>
     {
-        private readonly IPmtctUnitOfWork _pmtctUnitOfWork;
-        private readonly ICommonUnitOfWork _commonUnitOfWork;
+        private readonly Infrastructure.ICommonUnitOfWork _pmtctUnitOfWork;
+        private readonly Common.Infrastructure.ICommonUnitOfWork _commonUnitOfWork;
         private int visitCount=0;
 
-        public VisitDetailsCommandHandler(IPmtctUnitOfWork pmtctUnitOfWork, ICommonUnitOfWork commonUnitOfWork)
+        public VisitDetailsCommandHandler(Infrastructure.ICommonUnitOfWork pmtctUnitOfWork, Common.Infrastructure.ICommonUnitOfWork commonUnitOfWork)
         {
             _pmtctUnitOfWork = pmtctUnitOfWork ?? throw new ArgumentNullException(nameof(pmtctUnitOfWork));
             _commonUnitOfWork = commonUnitOfWork ?? throw new ArgumentNullException(nameof(commonUnitOfWork));
@@ -51,7 +51,7 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
 
                     // Get anc-encounter Id:
                     LookupLogic lookupLogic = new LookupLogic(_commonUnitOfWork);
-                    int encounterTypeId = await lookupLogic .GetLookupIdbyName("anc-encounter");
+                    int encounterTypeId = await lookupLogic.GetLookupIdbyName("anc-encounter");
 
                     PatientEncounterService patientEncounterService = new PatientEncounterService(_commonUnitOfWork);
                     PatientEncounter patientEncounter = new PatientEncounter()
@@ -80,6 +80,7 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
                     {
                         PatientId=request.PatientId,
                         PatientMasterVisitId=patientMasterVisit.Id,
+                        AgeMenarche=request.AgeAtMenarche,
                         PregnancyId=pregnancy.Id,
                         VisitNumber=visitCount,
                         VisitType= request.VisitType

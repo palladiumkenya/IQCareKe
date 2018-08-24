@@ -10,9 +10,9 @@ namespace IQCare.PMTCT.Services
 {
     public class VisitDetailsService
     {
-        public IPmtctUnitOfWork PmtctUnitOfWork;
+        public ICommonUnitOfWork PmtctUnitOfWork;
 
-        public VisitDetailsService(IPmtctUnitOfWork pmtctUnitOfWork)
+        public VisitDetailsService(ICommonUnitOfWork pmtctUnitOfWork)
         {
             PmtctUnitOfWork = pmtctUnitOfWork;
         }
@@ -140,7 +140,7 @@ namespace IQCare.PMTCT.Services
                     PregnancyId = patientProfile.PregnancyId,
                     VisitNumber = patientProfile.VisitNumber,
                     VisitType = patientProfile.VisitType,
-                    CounselledOn = patientProfile.CounselledOn,
+                   // CounselledOn = patientProfile.CounselledOn,
                     TreatedForSyphilis = patientProfile.TreatedForSyphilis
                 };
                 PmtctUnitOfWork.Repository<PatientProfile>().Update(patientProfile_);

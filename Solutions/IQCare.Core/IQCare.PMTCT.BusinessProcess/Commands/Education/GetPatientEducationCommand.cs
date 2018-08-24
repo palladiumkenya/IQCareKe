@@ -5,13 +5,9 @@ using System.Collections.Generic;
 
 namespace IQCare.PMTCT.BusinessProcess.Commands.Education
 {
-    public class GetPatientEducationCommand:IRequest<Result<GetPatientEducationCommandResult>>
+    public class GetPatientEducationCommand:IRequest<Result<List<PatientEducation>>>
     {
         public int PatientId { get; set; }
     }
 
-    public class GetPatientEducationCommandResult
-    {
-        public List<PatientEducation> patientEducations;
-    }
 }

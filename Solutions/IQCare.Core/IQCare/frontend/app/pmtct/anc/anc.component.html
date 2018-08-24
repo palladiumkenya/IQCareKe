@@ -13,7 +13,7 @@
                                     <mat-step >
                                       
                                         <ng-template matStepLabel>ANC Visit Details</ng-template>
-                                        <app-visit-details></app-visit-details>
+                                        <app-visit-details (visitDetails)="visitDetails" (nextStep)="onSaveVisitDetails($event)"></app-visit-details>
                                         
                                     </mat-step>
                                     <mat-step>                                     
@@ -27,7 +27,7 @@
                                     </mat-step>
                                     <mat-step>
                                     <ng-template matStepLabel>Client Monitoring & HAART </ng-template>
-
+                                    <app-client-monitoring></app-client-monitoring>
 
                                 </mat-step>
                                     <mat-step>
