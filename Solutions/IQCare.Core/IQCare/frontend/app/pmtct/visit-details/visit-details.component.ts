@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {Subscription} from 'rxjs';
-import {LookupItemService} from "../../shared/_services/lookup-item.service";
-import {NotificationService} from "../../shared/_services/notification.service";
+import {LookupItemService} from '../../shared/_services/lookup-item.service';
+import {NotificationService} from '../../shared/_services/notification.service';
 import { SnotifyService } from 'ng-snotify';
-import {LookupItemView} from "../../shared/_models/LookupItemView";
-import {Lookups} from "../../shared/_models/Lookups";
+import {LookupItemView} from '../../shared/_models/LookupItemView';
+import {Lookups} from '../../shared/_models/Lookups';
 
 @Component({
   selector: 'app-visit-details',
@@ -17,8 +17,8 @@ export class VisitDetailsComponent implements OnInit {
     isLinear: true;
     entryPoints: any[];
     lookupItemView$: Subscription;
-    public ancVisitTypes: any[]=[];
-    constructor(private fb: FormBuilder,private _lookupItemService: LookupItemService,
+    public ancVisitTypes: any[] = [];
+    constructor(private fb: FormBuilder, private _lookupItemService: LookupItemService,
     private snotifyService: SnotifyService,
     private notificationService: NotificationService) {
 
@@ -55,8 +55,8 @@ export class VisitDetailsComponent implements OnInit {
                         }
                     }
                     console.log(options);
-                    for(let i=0; i<options.length; i++){
-                        this.ancVisitTypes.push({"itemId":options[i]['itemId'],"itemName": options[i]['itemName']});
+                    for (let i = 0; i < options.length; i++) {
+                        this.ancVisitTypes.push({ 'itemId': options[i]['itemId'], 'itemName': options[i]['itemName']});
                     }
                     console.log(options[0]['itemName']);
                     console.log(this.ancVisitTypes);
@@ -73,7 +73,10 @@ export class VisitDetailsComponent implements OnInit {
   test(lmp: Date) {
   }
 
-  test2() {
-    console.log(this.visitDetailsFormGroup.value);
+  submit() {
+    if (this.visitDetailsFormGroup.valid) {
+       const visitDetails = JSON.stringify(this.visitDetailsFormGroup.value);
+        console.log(this.visitDetailsFormGroup.value);
+      }
   }
 }

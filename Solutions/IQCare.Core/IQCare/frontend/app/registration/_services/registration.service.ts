@@ -1,6 +1,6 @@
 
-import {of as observableOf,  Observable } from 'rxjs';
-import { PersonDetails } from '../_models/persondetails';
+import { of as observableOf, Observable } from 'rxjs';
+import { PersonDetails } from './../_models/persondetails';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -86,10 +86,11 @@ export class RegistrationService {
         );
     }
 
-    public addPatient(personId: number, userId: number): Observable<any> {
+    public addPatient(personId: number, userId: number, enrollmentDate: string): Observable<any> {
         const Indata = {
             PersonId: personId,
-            UserId: userId
+            UserId: userId,
+            EnrollmentDate: enrollmentDate
         };
 
         return this.http.post<any>(this.API_URL + this._url + '/addPatient', JSON.stringify(Indata), httpOptions).pipe(

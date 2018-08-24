@@ -27,6 +27,12 @@
 
                                 <div class="col-lg-3 col-md-3 col-sm-3">
                                     <mat-form-field>
+                                        <input matInput placeholder="Other Facility" formControlName="otherFacility">
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-sm-3">
+                                    <mat-form-field>
                                         <input matInput [matDatepicker]="myDatepicker" placeholder="Date To Be Enrolled" (click)="myDatepicker.open()" name="dateToBeEnrolled"
                                             formControlName="dateToBeEnrolled" required>
                                         <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>

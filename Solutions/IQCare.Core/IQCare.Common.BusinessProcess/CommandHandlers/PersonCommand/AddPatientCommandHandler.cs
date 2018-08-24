@@ -6,6 +6,7 @@ using IQCare.Common.BusinessProcess.Services;
 using IQCare.Common.Core.Models;
 using IQCare.Common.Infrastructure;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace IQCare.Common.BusinessProcess.CommandHandlers.PersonCommand
 {
@@ -24,7 +25,30 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.PersonCommand
                 using (_unitOfWork)
                 {
                     RegisterPersonService registerPersonService = new RegisterPersonService(_unitOfWork);
-                    var patient = await registerPersonService.AddPatient(request.PersonId, request.UserId);
+
+                    var registeredPerson = await registerPersonService.GetPerson(request.PersonId);
+                    var gender = await _unitOfWork.Repository<LookupItemView>().Get(x => x.ItemId == registeredPerson.Sex && x.MasterName == "Gender")
+                        .ToListAsync();
+                    var maritalStatus = await registerPersonService.GetPersonMaritalStatus(request.PersonId);
+                    var maritalStatusName = "Single";
+                    if (maritalStatus.Count > 0)
+                    {
+                        var matList = await _unitOfWork.Repository<LookupItemView>()
+                            .Get(x => x.ItemId == maritalStatus[0].MaritalStatusId && x.MasterName == "MaritalStatus").ToListAsync();
+                        if (matList.Count > 0)
+                        {
+                            maritalStatusName = matList[0].ItemName;
+                        }
+                    }
+                    DateTime dob = DateTime.Now;
+                    if (registeredPerson.DateOfBirth.HasValue)
+                        dob = registeredPerson.DateOfBirth.Value;
+
+                    var mstResult = await registerPersonService.InsertIntoBlueCard(registeredPerson.FirstName, registeredPerson.LastName,
+                        registeredPerson.LastName, request.EnrollmentDate, maritalStatusName, "", "", gender[0].ItemName, "EXACT", dob, request.UserId);
+
+                    var patient = await registerPersonService.AddPatient(request.PersonId, request.UserId, mstResult[0].Ptn_Pk);
+                    
 
                     return Result<AddPatientResponse>.Valid(new AddPatientResponse()
                     {

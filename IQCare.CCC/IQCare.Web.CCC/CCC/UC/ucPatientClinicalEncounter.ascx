@@ -5,6 +5,8 @@
 <%@ Register Src="~/CCC/UC/ucIptOutcome.ascx" TagPrefix="uc" TagName="IptOutcome" %>
 <%@ Register Src="~/CCC/UC/ucPharmacyPrescription.ascx" TagPrefix="uc" TagName="ucPharmacyPrescription" %>
 <%@ Register Src="~/CCC/UC/ucPatientLabs.ascx" TagPrefix="uc" TagName="ucPatientLabs" %>
+<%@ Register Src="~/CCC/UC/ucGenderBasedViolenceAssessment.ascx" TagPrefix="uc" TagName="ucGenderBasedViolenceAssessment" %>
+
 
 
 <div class="col-md-12" style="padding-top: 20px">
@@ -994,7 +996,7 @@
 
 										<div class="col-md-1">
 											<div class="col-md-12">
-												<label  class="control-label pull-left"><span class="fa fa-cog">Action</span></label>
+												<label class="control-label pull-left"><span class="fa fa-cog">Action</span></label>
 											</div>
 											<div class="col-md-4">
 												<button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddAllergy" onclick="AddAllergy();">Add</button>
@@ -1302,98 +1304,8 @@
 							</div>
 							
 							<div class="panel panel-primary">
-                                <div class="panel-heading">WHO Staging</div>
 								<div class="panel-body">
 									<div class="col-md-12 form-group">
-                                        <div class="col-md-12">
-                                         <div class="nav-tabs-custom">
-                                          <ul class="nav nav-tabs">
-                                            <li class="active"><a href="#Wtab_S1" data-toggle="tab">Stage 1</a></li>
-                                            <li><a href="#Wtab_S2" data-toggle="tab">Stage 2</a></li>
-                                            <li><a href="#Wtab_S3" data-toggle="tab">Stage 3</a></li>
-                                            <li><a href="#Wtab_S4" data-toggle="tab">Stage 4</a></li>
-                                         </ul>
-                                        <div class="tab-content">
-                                         <div class="tab-pane active" id="Wtab_S1">
-                                             <div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden;">
-                                            <table id="dtlStageI" class="table table-bordered table-striped">
-                                              <thead>
-                                                <tr>
-                                                    <th style="width: 20px;">
-                                                    </th>
-                                                    <th style="width: 300px;">
-                                                        WHO Stage I Conditions
-                                                    </th>
-                                                    <th style="width: 30px;">
-                                                        Current
-                                                    </th>
-                                                   
-                                                </tr>
-                                            </thead>
-                                            </table>
-                                        </div>
-                                         </div>
-                                         <div class="tab-pane " id="Wtab_S2">
-                                             <div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden;">
-                                            <table id="dtlStageII" class="table table-bordered table-striped">
-                                              <thead>
-                                                <tr>
-                                                    <th style="width: 20px;">
-                                                    </th>
-                                                    <th style="width: 300px;">
-                                                        WHO Stage II Conditions
-                                                    </th>
-                                                    <th style="width: 30px;">
-                                                        Current
-                                                    </th>
-                                                
-                                                </tr>
-                                            </thead>
-                                            </table>
-                                         </div>
-                                          </div>
-                                         <div class="tab-pane " id="Wtab_S3">
-                                             <div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden;">
-                                            <table id="dtlStageIII" class="table table-bordered table-striped">
-                                              <thead>
-                                                <tr>
-                                                    <th style="width: 20px;">
-                                                    </th>
-                                                    <th style="width: 300px;">
-                                                        WHO Stage III Conditions
-                                                    </th>
-                                                    <th style="width: 30px;">
-                                                        Current
-                                                    </th>
-                                                    
-                                                </tr>
-                                            </thead>
-                                            </table>
-                                              </div>
-                                         </div>
-                                         <div class="tab-pane" id="Wtab_S4">
-                                             <div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden;">
-                                            <table id="dtlStageIV" class="table table-bordered table-striped" >
-                                              <thead>
-                                                <tr>
-                                                    <th style="width: 20px;">
-                                                    </th>
-                                                    <th style="width: 300px;">
-                                                        WHO Stage IV Conditions
-                                                    </th>
-                                                    <th style="width: 30px;">
-                                                        Current
-                                                    </th>
-                                                   
-                                                </tr>
-                                            </thead>
-                                            </table>
-                                         </div>
-                                         </div>
-                                        </div>
-                                         </div>
-                                        </div>
-                                      
 										<div class="col-md-4">
 											<label class="control-label  pull-left text-primary">*WHO Stage</label>
 										</div>
@@ -1463,6 +1375,24 @@
 							</div>
 						</div>
 					</div>
+
+					<div class="col-md-12">
+						<div class="col-md-2">
+							<button type="button" id="btnGbvAsessment" name="btnGbvAsessment" class="btn btn-info btn-sm pull-left" data-toggle="modal" data-target="#gbvAssessmentModal">GBV Assessment</button>
+						</div>
+
+						<div class="col-md-5">
+							<div class="col-md-12 form-group">
+								<div class="col-md-6">
+									<label class="control-label pull-left">GBV Assessment done?</label>
+								</div>
+								<div class="col-md-6">
+                                    <label class="control-label pull-left" id="lblGbvAssessmentDone">Yes/No</label>
+								</div>
+							</div>
+						</div>
+					</div>
+
 					<div class="col-md-12">
 						<hr />
 					</div>
@@ -1796,7 +1726,7 @@
 														<div class="col-md-4">
 															<div class="col-md-12">
 																<label class="pull-left" style="padding-right: 10px">
-																	<input id="OiYes" type="radio" name="ActiveOis" value="true" clientidmode="Static"  runat="server" />Yes
+																	<input id="OiYes" type="radio" name="ActiveOis" value="true" clientidmode="Static" runat="server" />Yes
 																</label>
 																<label class="pull-left" style="padding-right: 10px">
 																	<input id="OiNo" type="radio" name="ActiveOis" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
@@ -1958,7 +1888,20 @@
 							</div>
 						</div>
 
-						<div class="col-md-12">
+                        <div id="gbvAssessmentModal" class="modal fade" role="dialog" data-parsley-validate="true" data-show-errors="true" style="width: 100%">
+                            <div class="modal-dialog" style="width: 100%">
+                                <!-- Modal content-->
+                                <div class="modal-content" style="width: 100%">
+                                    <div class="modal-body" style="width: 100%">
+                                        <div class="row">
+                                            <uc:ucGenderBasedViolenceAssessment runat="server" ID="ucGenderBasedViolenceAssessment" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
 							<hr />
 						</div>
 
@@ -2213,17 +2156,12 @@
     var Age = "<%=age%>";
 	var DateOfEnrollment = "<%=DateOfEnrollment%>";
 	var isNoneChecked = false;
-    var arrWHoStage = [];
 
     var isEditAppointment = "<%=IsEditAppointment%>";
     var isEditAppointmentId="<%=IsEditAppointmentId%>";
 	var PatientId = "<%=PtnId%>";
 	var PatientMasterVisitId = "<%=PmVisitId%>";
 	var adverseEventName = "";
-    var adverseEventId = 0;
-    var selectedstage="";
-    var OIdata = [];
-    var PatientOIData = [];
     var adverseEventId = 0;
     var NextAppointmentDate = "<%=NextAppointmentDate%>";
 	//alert(NextAppointmentDate);
@@ -2241,7 +2179,7 @@
 
 	$(document).ready(function () {
 		var encounterExists = "<%=PatientEncounterExists%>";
-       
+
 		$('.errorBlock1').hide();
 		$('.errorBlock2').hide();
 		$('.errorBlock3').hide();
@@ -2272,38 +2210,11 @@
 		loadAdverseEvents();
 		loadAllergies();
 		loadAllergyReactions();
-        loadDiagnosis();
-         showHidePresentingComplaintsDivs();
+		loadDiagnosis();
+		showHidePresentingComplaintsDivs();
 		showHideAdverseEventsDivs();
 		showHideSystemsOkayDivs();
 		showHideVisitByTS();
-        GetPatientExaminationTypeID
-        var WhoStage1 = 'WHOStageIConditions';
-        var WhoStage2 = 'WHOStageIIConditions';
-        var WhoStage3 = 'WHOStageIIIConditions';
-        var WhoStage4 = 'WHOStageIVConditions';
-        loadWhoStageOIS(WhoStage1, "#dtlStageI","1");
-        loadWhoStageOIS(WhoStage2,"#dtlStageII","2");
-        loadWhoStageOIS(WhoStage3,"#dtlStageIII","3");
-        loadWhoStageOIS(WhoStage4, "#dtlStageIV", "4");
-        GetPatientOIS();
-   
-        $(document).on('change', 'input[type=checkbox].flat-red', function (e) {
-            if (this.checked) {
-                WhoStageCheckBoxClick(this, false);
-            }
-            else {
-                WhoStageCheckBoxClick(this, true);
-            }
-        });
-   
-        
-        selectedstage=$("#WHOStage option:selected").text();
-        
-        
-        
-        
-      
         GetPatientExaminationTypeID();
 
 	    var PresentingComplaintsList = new Array();
@@ -2363,8 +2274,6 @@
 					$("#divAdverseEventOther").hide("fast"); 
 				}
 			});
-        
-
 
 		//Show the AdverseEventModal Windows
 		function loadAdverseEventOutcome() {
@@ -2681,8 +2590,6 @@
 			allowInputToggle: true,
 			useCurrent: false,
 			minDate: minDate
-		});
-       
         });
 
 	    $("#<%=AppointmentDate.ClientID%>").val(moment(NextAppointmentDate).format('DD-MMM-YYYY'));
@@ -3211,12 +3118,8 @@
 					//}
 				}
 				else if (data.step === 3) {
-                    if (data.direction === 'previous') {
-                       
-                    
-
-                          
-                     return;
+					if (data.direction === 'previous') {
+						return;
 					} else {
 						$('#datastep3').parsley().destroy();
 						$("#<%=ddlExaminationType.ClientID%>").attr('disabled', 'disabled');
@@ -3234,14 +3137,8 @@
 
 						if ($('#datastep3').parsley().validate()) {
 							$("#<%=ddlExaminationType.ClientID%>").prop('disabled', false);
-                            $.when(savePatientPhysicalExams(evt)).then(
-                                function () {
-                                    setTimeout(function () {
-                                        saveWhoStage();
-                                        savePatientOIS();
-                                       
-                                    }, 5000);
-                               
+							$.when(savePatientPhysicalExams(evt)).then(function () {
+								setTimeout(function () { saveWhoStage(); },2000);
 							});
 						} else {
 							stepError = $('.parsley-error').length === 0;
@@ -3258,8 +3155,7 @@
 					//}
 				}
 				else if (data.step === 4) {
-                    if (data.direction === 'previous') {
-                        GetPatientOIS();
+					if (data.direction === 'previous') {
 						return;
 					} else {
 						//savePatientPatientManagement();
@@ -3521,8 +3417,6 @@
 			});
 		}
 
-
-       
 		function saveWhoStage() {
 			var whostage = $("#<%=WHOStage.ClientID%>").val();
 
@@ -4057,7 +3951,7 @@
 				cache: false,
 				success: function (response) {
 					if (response.d != null) {
-                        if (isEditAppointment) {
+                        if (isEditAppointment == 'True') {
 
                         } else {
 					        toastr.error("Appointment already exists");
@@ -4065,7 +3959,7 @@
                         }
 
                     }
-                    if (isEditAppointment) {
+                    if (isEditAppointment == 'True') {
                         EditPatientAppointment();
                     } else {
                         addPatientAppointment();
@@ -4455,7 +4349,6 @@
 		});
 	}
 
-    
 	function showHidePresentingComplaintsDivs() {
 		var anyComplaints = $("input[name$=anyComplaints]:checked").val();
 		if (anyComplaints ==1) {
@@ -4619,444 +4512,36 @@
 		});
     }
 
+    function GetGBVScreeningStatus() {
+        var patientId ="<%=PatientId%>";
+        var visitDate = moment("<%=visitdateval%>");
+        var screeningCategoryId = "<%=GbvScreeningCategoryId%>";
 
-    function loadWhoStageOIS(WhoStage,id,title) {
-      
-        
-        
+        if (visitDate.isValid()) {
+            visitDate = visitDate.format('YYYY-MM-DD');
 
-        $.ajax({
-            type: "POST",
-            url: "../WebService/LookupService.asmx/GetLookUpItemViewByMasterName",
-            data: "{'masterName':'" + WhoStage + "'}",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (response) {
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientService.asmx/getPatientScreening",
+                data: "{'patientId':'" + patientId + "', 'visitDate': '" + visitDate + "', 'screeningcategoryId': '" + screeningCategoryId + "'}",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
 
-                var itemList = JSON.parse(response.d);
-                console.log(itemList,WhoStage);
-                toastr.success(response.d, "WHOStageConditions");
-                BindWhoStage(itemList,WhoStage,id,title);
+                success: function (response) {
+                    var itemList = JSON.parse(response.d);
 
-            },
-            error: function (response) {
+                    $("#lblGbvAssessmentDone").text(itemList.length > 0 ? 'Yes' : 'No');
 
-                toastr.error(response.d, "Error occured while presenting staging");
-            }
-        });
-    }
-    function GetPatientOIS() {
-        $.ajax({
-            type: "POST",
-            url: "../WebService/PatientEncounterService.asmx/GetPatientOIs",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (response) {
-                var obj = response.d;
-                PatientOIData = obj;
-            
-                AssignTableData("dtlStageI", obj);
-                AssignTableData("dtlStageII", obj);
-                AssignTableData("dtlStageIII", obj);
-                AssignTableData("dtlStageIV", obj);
-            },
-            error: function (response) {
-
-                toastr.error(response.d, "Error Loading the Patient OIS");
-            }
-
-
-        });
-            
-    }
-
-    function savePatientOIS() {
-        OIdata.length = 0;
-      
-
-        GetPatientOIList("dtlStageI");
-       GetPatientOIList("dtlStageII");
-        GetPatientOIList("dtlStageIII");
-        GetPatientOIList("dtlStageIV");
-
-
-
-        $.ajax({
-            type: "POST",
-            url: "../WebService/PatientEncounterService.asmx/SavePatientOI",
-            data: "{'data':'" + JSON.stringify(OIdata) + "'}",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (response) {
-                toastr.success(response.d, "Save Patient OIS");
-            },
-            error: function (response) {
-                toastr.error(response.d, "Save Patient OIS Error");
-            }
-        });
-
-        }
-          
-            
-   
-
-    function GetPatientOIList(dataTableName) {
-
-
-      
-        var rows = $("#" + dataTableName).dataTable().fnGetNodes();
-        for (var i = 0; i < rows.length; i++) {
-
-            // Get HTML of 3rd column (for example)
-            var col0 = $(rows[i]).find("td:eq(0)").html();
-            var hidV = $(col0).attr("value");
-            var chkVal = $("#chkAchieved" + hidV).prop('checked');
-            var current = $("#dtCurrent" + hidV).val();
-            var col2 = $(rows[i]).find("td:eq(2)").html();
-            var col3 = $(rows[i]).find("td:eq(3)").html()
-            for (var t = 0; t <PatientOIData.length; t++) {
-                if (PatientOIData[t].OIId == hidV && PatientOIData[t].DeleteFlag == false) {
-                 var dt = new Array();
-                 if (chkVal == false) {
-                     dt = {
-                         "OI": hidV,
-                         "Checked": chkVal,
-                         "Current": current,
-                         "DeleteFlag": true
-                     }
-                     OIdata.push(dt);
-                 }
-                 }
                 }
+            });
+        } else {
 
-
-            if (chkVal === true) {
-                var data = new Array();
-                data = {
-                    "OI": hidV,
-                    "Checked": chkVal,
-                    "Current": current,
-                    "DeleteFlag": false
-                }
-                OIdata.push(data);
-            }
+            $("#lblGbvAssessmentDone").text('No');
 
         }
     }
-        function AssignTableData(dataTableName, obj) {
-            var dtData = obj;
-            var rows = $("#" + dataTableName).dataTable().fnGetNodes();
-            for (var i = 0; i < rows.length; i++) {
 
-                // Get HTML of 3rd column (for example)
-                var col0 = $(rows[i]).find("td:eq(0)").html();
-                var hidV = $(col0).attr("value");
-                var chkVal = $("#chkAchieved" + hidV).prop('checked');
-                var col2 = $(rows[i]).find("td:eq(2)").html();
-                var col3 = $(rows[i]).find("td:eq(3)").html();
-
-                for (var t = 0; t < dtData.length; t++) {
-                    if (dtData[t].OIId == hidV && dtData[t].DeleteFlag == false) {
-                        // var filterDate = $.grep(dtData[t], function (e) { return e.OIId == hidV && e.Deleteflag == false; });
-                        // if (jQuery.isEmptyObject(filterDate) == false) {
-                        $("#chkAchieved" + hidV).prop('checked', true);
-
-                        CheckDatenAssign(dtData[t].Current, "dtCurrent" + hidV, false);
-                        // }
-                    }
-                }
-            }
-        }
-
-
-        function CheckDatenAssign(dtVal, ctrl, IsDisableCheck) {
-            var parsedDate;
-            var jsDate;
-            if (IsDisableCheck) {
-                if (dtVal != null) {
-                    parsedDate = new Date(parseInt(dtVal.substr(6)));
-                    jsDate = new Date(parsedDate); //Date object
-                    //console.log(jsDate);
-                    // $("#" + ctrl).datepicker('setDate', jsDate);
-                    $("#" + ctrl).datetimepicker({
-                        format: 'YYYY-MM-DD',
-                        date: jsDate,
-                        calendarWeeks: true,
-
-
-                        showClose: true,
-                        showClear: true,
-
-                        inline: true,
-                        hide: true,
-                   
-                    });
-
-
-                    $("#" + ctrl).data("DateTimePicker").hide();
-                    $("#" + ctrl).prop('disabled', true);
-                }
-                else {
-                    $("#" + ctrl).prop('disabled', false);
-                }
-            }
-            else {
-                if (dtVal != null) {
-                    parsedDate = new Date(parseInt(dtVal.substr(6)));
-                    jsDate = new Date(parsedDate); //Date object
-                    //console.log(jsDate);
-                    // $("#" + ctrl).datepicker('setDate', jsDate);
-
-                    $("#" + ctrl).datetimepicker({
-                        format: 'YYYY-MM-DD',
-                        date: jsDate,
-                        calendarWeeks: true,
-
-                        showClose: true,
-                        showClear: true,
-
-                        inline:true,
-                        hide: true,
-                       
-                        
-                    });
-
-                    $("#" + ctrl).data("DateTimePicker").hide();
-                }
-            }
-        }
-        function GetDatePicker() {
-
-
-            // console.log(event.target);
-            //console.log(event.target.value);
-            //DD-MM-YYYY
-
-            $("#" + event.target.id).datetimepicker({
-                format: 'YYYY-MM-DD',
-
-                calendarWeeks: true,
-
-                showClear: true,
-                showClose: true,
-                inline: true
-            }).css({
-                'position': 'resolute', 'z-index': '4000', 'overflow': 'hidden'
-            });
-
-            $("#" + event.target.id).focus(function () {
-                $("#" + event.target.id).datetimepicker({
-                    format: 'YYYY-MM-DD',
-
-                    calendarWeeks: true,
-
-                    showClose: true,
-                    showClear: true,
-
-                    inline: true
-                }).css({ 'position': 'resolute', 'z-index': '4000', 'overflow': 'hidden' });;
-            });
-
-            $("#" + event.target.id).click(function () {
-                $("#" + event.target.id).datetimepicker({
-                    format: 'YYYY-MM-DD',
-
-                    calendarWeeks: true,
-
-                    showClear: true,
-                    showClose: true,
-
-                    inline: true
-                }).css({ 'position': 'resolute', 'z-index': '4000', 'overflow': 'hidden' });
-            });
-            //$('#ui-datepicker-div').show();
-
-
-
-
-
-
-        }
-
-        function BindWhoStage(itemlist, masterName, id, title) {
-            var collections = itemlist
-
-            data = $.grep(collections, function (e) { return e.MasterName == masterName });
-            if (jQuery.isEmptyObject(data) == false) {
-
-                $(id).dataTable().fnDestroy();
-
-                $(id).DataTable({
-                    "aaData": data,
-                    "bSort": false,
-                    "bPaginate": false,
-                    "bFilter": false,
-                    "bInfo": false,
-                    "autoWidth": false,
-                    "aoColumns": [
-                        {
-
-                            bSortable: false,
-                            mRender: function (data, type, full) {
-
-
-                                var str = $('<input>').attr({ type: 'checkbox', id: 'hidRowId', value: full["ItemId"], runat: "server" }).append('<input >').attr({ type: 'checkbox', name: 'chkAchieved', title: title, id: 'chkAchieved' + full["ItemId"] }).addClass("flat-red").prop('outerHTML');
-
-                                return str;
-
-
-
-
-                            }
-                        },
-                        {
-                            bSortable: false,
-                            mRender: function (data, type, full) {
-
-                                return full["ItemDisplayName"];
-                            }
-                        },
-                        {
-                            bSortable: false,
-                            mRender: function (data, type, full) {
-                                var str = "<input type=\"text\"  class=\"form-control  \" id=\"dtCurrent" + full["ItemId"] + "\" placeholder=\"Current\"  onfocus=\"GetDatePicker()\"  data-provide=\"datepicker\" >";
-                                return str;
-                            }
-                        }
-
-                    ]
-                });
-
-            }
-        }
-
-
-
-
-
-        function WhoStageCheckBoxClick(ctrlName, isDelete) {
-
-            if (!(selectedstage === "undefined" || selectedstage === null || selectedstage === "")) {
-                {
-                    if (selectedstage === "Stage4") {
-
-                        var chk = $.grep(arrWHoStage, function (e) { return e == "4"; });
-
-                        if (jQuery.isEmptyObject(chk) == true) {
-                            arrWHoStage.push('4');
-                        }
-                    }
-                    else if (selectedstage === "Stage3") {
-                        var chk = $.grep(arrWHoStage, function (e) { return e == "3"; });
-
-                        if (jQuery.isEmptyObject(chk) == true) {
-                            arrWHoStage.push('3');
-                        }
-                    }
-                    else if (selectedstage === "Stage2") {
-                        var chk = $.grep(arrWHoStage, function (e) { return e == "2"; });
-
-                        if (jQuery.isEmptyObject(chk) == true) {
-                            arrWHoStage.push('2');
-                        }
-                    }
-                    else if (selectedstage === "Stage1") {
-                        var chk = $.grep(arrWHoStage, function (e) { return e == "1"; });
-
-                        if (jQuery.isEmptyObject(chk) == true) {
-                            arrWHoStage.push('1');
-                        }
-                    }
-
-                }
-            }
-
-            var chk = $.grep(arrWHoStage, function (e) { return e == ctrlName.title; });
-
-            if (jQuery.isEmptyObject(chk) == true) {
-                arrWHoStage.push(ctrlName.title);
-            }
-
-
-            if (isDelete) {
-                var cName = "WHOStage";
-                if (ctrlName.title == "1") {
-                    cName = "dtlStageI";
-                }
-                else if (ctrlName.title == "2") {
-                    cName = "dtlStageII";
-                }
-                else if (ctrlName.title == "3") {
-                    cName = "dtlStageIII";
-                }
-                else if (ctrlName.title == "4") {
-                    cName = "dtlStageIV";
-                }
-
-                var isExists = false;
-                var rows = $("#" + cName).dataTable().fnGetNodes();
-                for (var i = 0; i < rows.length; i++) {
-                    // Get HTML of 3rd column (for example)
-                    var col0 = $(rows[i]).find("td:eq(0)").html();
-                    var hidV = $(col0).attr("value");
-                    var chkVal = $("#chkAchieved" + hidV).prop('checked');
-                    var col2 = $(rows[i]).find("td:eq(2)").html();
-                    var col3 = $(rows[i]).find("td:eq(3)").html();
-
-                    if (chkVal) {
-                        isExists = true;
-                    }
-                }
-
-                if (!isExists) {
-                    arrWHoStage = jQuery.grep(arrWHoStage, function (value) {
-                        return value != ctrlName.title;
-                    });
-                }
-
-            }
-
-            if (arrWHoStage.length == 0) {
-                if (!(selectedstage === "undefined" || selectedstage === null || selectedstage === "")) {
-                    $("#WHOStage option").each(function () {
-                        this.selected = $(this).text() == selectedstage;
-                    });
-
-                }
-                else {
-                    $("#WHOStage option").each(function () {
-                        this.selected = $(this).text() == "select";
-
-                    });
-                }
-            }
-            if (arrWHoStage.length > 0) {
-
-                var maxValue = Math.max.apply(Math, arrWHoStage);
-
-                var value = "Stage" + maxValue;
-                $("#WHOStage option").each(function () {
-                    this.selected = $(this).text() == value;
-                });
-
-
-
-            }
-
-        }
-
-
-    
-
-
-
-    
-
-
-   
-
-
-    
+    GetGBVScreeningStatus();
 
 </script>
 

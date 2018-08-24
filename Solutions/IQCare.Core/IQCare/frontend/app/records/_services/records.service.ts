@@ -52,4 +52,11 @@ export class RecordsService {
             catchError(this.errorHandler.handleError<any[]>('getRelationshipOptions'))
         );
     }
+
+    public getPersonDetails(personId: number): Observable<any> {
+        return this.http.get<any>(this.API_URL + '/records/api/Register/GetPersonDetails/' + personId).pipe(
+            tap(getPersonDetails => this.errorHandler.log('get person details')),
+            catchError(this.errorHandler.handleError<any[]>('getPersonDetails'))
+        );
+    }
 }

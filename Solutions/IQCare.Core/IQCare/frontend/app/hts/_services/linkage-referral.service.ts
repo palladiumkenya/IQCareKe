@@ -103,7 +103,8 @@ export class LinkageReferralService {
             PersonId: referral.personId,
             FromFacilityId: referral.facilityId,
             Tracing: trace,
-            IsEdit: isEdit
+            IsEdit: isEdit,
+            OtherFacility: referral.otherFacility
         };
 
         return this.http.post(this.API_URL + this.url, JSON.stringify(Indata), httpOptions).pipe(

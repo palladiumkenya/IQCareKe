@@ -77,26 +77,26 @@ namespace IQCare.Common.BusinessProcess.Services
             }
         }
 
-        public async Task<List<PersonEmergencyView>> GetCurrentPersonEmergency(int PersonId)
-        {
-            try
-            {
-                StringBuilder sql = new StringBuilder();
-                sql.Append("exec pr_OpenDecryptedSession;");
-                sql.Append("select * from [dbo].[PersonEmergencyView] where Deleteflag=0 and PersonId =" + PersonId + " Order by CreateDate desc;");
-                sql.Append("exec [dbo].[pr_CloseDecryptedSession];");
+        //public async Task<List<PersonEmergencyView>> GetCurrentPersonEmergency(int PersonId)
+        //{
+        //    try
+        //    {
+        //        StringBuilder sql = new StringBuilder();
+        //        sql.Append("exec pr_OpenDecryptedSession;");
+        //        sql.Append("select * from [dbo].[PersonEmergencyView] where Deleteflag=0 and PersonId =" + PersonId + " Order by CreateDate desc;");
+        //        sql.Append("exec [dbo].[pr_CloseDecryptedSession];");
 
-                var personemergencyview = await _unitOfWork.Repository<PersonEmergencyView>().FromSql(sql.ToString());
+        //        var personemergencyview = await _unitOfWork.Repository<PersonEmergencyView>().FromSql(sql.ToString());
 
-                return personemergencyview.ToList();
-            }
-            catch (Exception e)
-            {
-                Log.Error(e.Message);
-                throw e;
-            }
+        //        return personemergencyview.ToList();
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Log.Error(e.Message);
+        //        throw e;
+        //    }
 
-        }
+        //}
 
         public async Task<PersonIdentifier> GetCurrentPersonIdentifier(int personId)
         {
@@ -344,42 +344,42 @@ namespace IQCare.Common.BusinessProcess.Services
             }
         }
 
-        public async Task<PersonEmergencyContact> AddPersonEmergencyContact(PersonEmergencyContact pmc)
-        {
-            try
-            {
-                SqlParameter personIdParameter = new SqlParameter("personIdParameter", SqlDbType.Int);
-                personIdParameter.Value = pmc.PersonId;
-                SqlParameter EmergencyContactPersonIdParameter = new SqlParameter("EmergencyContactPersonIdParameter", SqlDbType.Int);
-                EmergencyContactPersonIdParameter.Value = pmc.EmergencyContactPersonId;
-                SqlParameter MobileContactParameter = new SqlParameter("MobileContactParameter", SqlDbType.VarBinary);
-                MobileContactParameter.Value = Encoding.ASCII.GetBytes(pmc.MobileContact);
-                SqlParameter userId = new SqlParameter("UserId", SqlDbType.Int);
-                userId.Value = pmc.CreatedBy;
-                SqlParameter ContactType = new SqlParameter("ContactType", SqlDbType.Int);
-                ContactType.Value = pmc.ContactType;
-                SqlParameter RegisteredToClinic = new SqlParameter("RegisteredToClinic", SqlDbType.Bit);
+        //public async Task<PersonEmergencyContact> AddPersonEmergencyContact(PersonEmergencyContact pmc)
+        //{
+        //    try
+        //    {
+        //        SqlParameter personIdParameter = new SqlParameter("personIdParameter", SqlDbType.Int);
+        //        personIdParameter.Value = pmc.PersonId;
+        //        SqlParameter EmergencyContactPersonIdParameter = new SqlParameter("EmergencyContactPersonIdParameter", SqlDbType.Int);
+        //        EmergencyContactPersonIdParameter.Value = pmc.EmergencyContactPersonId;
+        //        SqlParameter MobileContactParameter = new SqlParameter("MobileContactParameter", SqlDbType.VarBinary);
+        //        MobileContactParameter.Value = Encoding.ASCII.GetBytes(pmc.MobileContact);
+        //        SqlParameter userId = new SqlParameter("UserId", SqlDbType.Int);
+        //        userId.Value = pmc.CreatedBy;
+        //        SqlParameter ContactType = new SqlParameter("ContactType", SqlDbType.Int);
+        //        ContactType.Value = pmc.ContactType;
+        //        SqlParameter RegisteredToClinic = new SqlParameter("RegisteredToClinic", SqlDbType.Bit);
 
-                if (pmc.RegisteredToClinic == true)
-                {
-                    RegisteredToClinic.Value = 1;
-                }
-                else if (pmc.RegisteredToClinic == false)
-                {
-                    RegisteredToClinic.Value = 0;
-                }
+        //        if (pmc.RegisteredToClinic == true)
+        //        {
+        //            RegisteredToClinic.Value = 1;
+        //        }
+        //        else if (pmc.RegisteredToClinic == false)
+        //        {
+        //            RegisteredToClinic.Value = 0;
+        //        }
 
-                await _unitOfWork.Repository<PersonEmergencyContact>().ExecWithStoreProcedureAsync("PersonEmergencyContact_Insert @personIdParameter,@EmergencyContactPersonIdParameter,@MobileContactParameter,@UserId,@ContactType,@RegisteredToClinic",
-                   personIdParameter, EmergencyContactPersonIdParameter, MobileContactParameter, userId, ContactType, RegisteredToClinic);
-                await _unitOfWork.SaveChangesAsync();
-                return pmc;
-            }
-            catch (Exception e)
-            {
-                Log.Error(e.Message);
-                throw e;
-            }
-        }
+        //        await _unitOfWork.Repository<PersonEmergencyContact>().ExecWithStoreProcedureAsync("PersonEmergencyContact_Insert @personIdParameter,@EmergencyContactPersonIdParameter,@MobileContactParameter,@UserId,@ContactType,@RegisteredToClinic",
+        //           personIdParameter, EmergencyContactPersonIdParameter, MobileContactParameter, userId, ContactType, RegisteredToClinic);
+        //        await _unitOfWork.SaveChangesAsync();
+        //        return pmc;
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Log.Error(e.Message);
+        //        throw e;
+        //    }
+        //}
 
         public async Task<AfyaMobileInbox> UpdateAfyaMobileInbox(int id, string afyamobileId = null, bool processed = false, DateTime? dateProcessed = null, string logMessage = null)
         {
@@ -661,7 +661,7 @@ namespace IQCare.Common.BusinessProcess.Services
             try
             {
                 var personPopulations = await _unitOfWork.Repository<PersonPopulation>()
-                    .Get(x => x.PersonId == personId).ToListAsync();
+                    .Get(x => x.PersonId == personId && x.DeleteFlag == false).ToListAsync();
                 foreach (var population in personPopulations)
                 {
                     population.DeleteFlag = true;
@@ -970,6 +970,10 @@ namespace IQCare.Common.BusinessProcess.Services
         {
             try
             {
+                firstName = string.IsNullOrWhiteSpace(firstName) ? "" : firstName.Replace("'", "''");
+                midName = string.IsNullOrWhiteSpace(midName) ? "" : midName.Replace("'", "''");
+                lastName = string.IsNullOrWhiteSpace(lastName) ? "" : lastName.Replace("'", "''");
+
                 LookupLogic lookupLogic = new LookupLogic(_unitOfWork);
                 Facility facility = await _unitOfWork.Repository<Facility>().Get(x => x.DeleteFlag == 0).FirstOrDefaultAsync();
                 var referralId = await lookupLogic.GetDecodeIdByName("VCT", 17);
@@ -1037,6 +1041,8 @@ namespace IQCare.Common.BusinessProcess.Services
             }
             catch (Exception e)
             {
+                Log.Error(e.Message);
+                Log.Error(e.InnerException.ToString());
                 throw e;
             }
         }
@@ -1212,7 +1218,7 @@ namespace IQCare.Common.BusinessProcess.Services
                 sql.Append("exec pr_OpenDecryptedSession;");
                 sql.Append($"SELECT [Id] , CAST(DECRYPTBYKEY(FirstName) AS VARCHAR(50)) [FirstName] ,CAST(DECRYPTBYKEY(MidName) AS VARCHAR(50)) MidName" +
                            $",CAST(DECRYPTBYKEY(LastName) AS VARCHAR(50)) [LastName] ,[Sex] ,[Active] ,[DeleteFlag] ,[CreateDate] " +
-                           $",[CreatedBy] ,[AuditData] ,[DateOfBirth] ,[DobPrecision] FROM [dbo].[Person] WHERE Id = '{personId}';");
+                           $",[CreatedBy] ,[AuditData] ,[DateOfBirth] ,[DobPrecision], RegistrationDate FROM [dbo].[Person] WHERE Id = '{personId}';");
                 sql.Append("exec [dbo].[pr_CloseDecryptedSession];");
 
                 var person = await _unitOfWork.Repository<Person>().FromSql(sql.ToString());
@@ -1230,14 +1236,19 @@ namespace IQCare.Common.BusinessProcess.Services
             try
             {
                 StringBuilder sql = new StringBuilder();
+                firstName = string.IsNullOrWhiteSpace(firstName) ? "" : firstName.Replace("'", "''");
+                middleName = string.IsNullOrWhiteSpace(middleName) ? "" : middleName.Replace("'", "''");
+                lastName = string.IsNullOrWhiteSpace(lastName) ? "" : lastName.Replace("'", "''");
+
                 sql.Append("exec pr_OpenDecryptedSession;");
                 sql.Append($"UPDATE Person SET FirstName = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{firstName}'), " +
                            $"MidName = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{middleName}'), " +
                            $"LastName = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{lastName}'), " +
-                           $"Sex = {sex}, DateOfBirth = '{dateOfBirth.ToString("yyyy-MM-dd")}' WHERE Id = {personId}; ");
+                           $"Sex = {sex}, DateOfBirth = '{dateOfBirth.ToString("yyyy-MM-dd")}', " +
+                           $"DobPrecision = 1 WHERE Id = {personId}; ");
                 sql.Append($"SELECT [Id] , CAST(DECRYPTBYKEY(FirstName) AS VARCHAR(50)) [FirstName] ,CAST(DECRYPTBYKEY(MidName) AS VARCHAR(50)) MidName" +
                            $",CAST(DECRYPTBYKEY(LastName) AS VARCHAR(50)) [LastName] ,[Sex] ,[Active] ,[DeleteFlag] ,[CreateDate] " +
-                           $",[CreatedBy] ,[AuditData] ,[DateOfBirth] ,[DobPrecision] FROM Person WHERE Id = '{personId}';");
+                           $",[CreatedBy] ,[AuditData] ,[DateOfBirth] ,[DobPrecision], RegistrationDate FROM Person WHERE Id = '{personId}';");
                 sql.Append("exec [dbo].[pr_CloseDecryptedSession];");
 
                 var personInsert = await _unitOfWork.Repository<Person>().FromSql(sql.ToString());
@@ -1249,19 +1260,23 @@ namespace IQCare.Common.BusinessProcess.Services
             }
         }
 
-        public async Task<Person> RegisterPerson(string firstName, string middleName, string lastName, int sex, DateTime dateOfBirth, int createdBy)
+        public async Task<Person> RegisterPerson(string firstName, string middleName, string lastName, int sex, DateTime dateOfBirth, int createdBy, DateTime? registrationDate = null)
         {
             try
             {
+                firstName = string.IsNullOrWhiteSpace(firstName) ? "" : firstName.Replace("'", "''");
+                middleName = string.IsNullOrWhiteSpace(middleName) ? "" : middleName.Replace("'", "''");
+                lastName = string.IsNullOrWhiteSpace(lastName) ? "" : lastName.Replace("'", "''");
+
                 var sql =
                     "exec pr_OpenDecryptedSession;" +
-                    "Insert Into Person(FirstName, MidName,LastName,Sex,DateOfBirth,DobPrecision,Active,DeleteFlag,CreateDate,CreatedBy)" +
+                    "Insert Into Person(FirstName, MidName,LastName,Sex,DateOfBirth,DobPrecision,Active,DeleteFlag,CreateDate,CreatedBy, RegistrationDate)" +
                     $"Values(ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{firstName}'), ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{middleName}')," +
                     $"ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{lastName}'), {sex}, '{dateOfBirth.ToString("yyyy-MM-dd")}', 1," +
-                    $"1,0,GETDATE(), '{createdBy}');" +
+                    $"1,0,GETDATE(), '{createdBy}', '{registrationDate}');" +
                     "SELECT [Id] , CAST(DECRYPTBYKEY(FirstName) AS VARCHAR(50)) [FirstName] ,CAST(DECRYPTBYKEY(MidName) AS VARCHAR(50)) MidName" +
                     ",CAST(DECRYPTBYKEY(LastName) AS VARCHAR(50)) [LastName] ,[Sex] ,[Active] ,[DeleteFlag] ,[CreateDate] " +
-                    ",[CreatedBy] ,[AuditData] ,[DateOfBirth] ,[DobPrecision] FROM [dbo].[Person] WHERE Id = SCOPE_IDENTITY();" +
+                    ",[CreatedBy] ,[AuditData] ,[DateOfBirth] ,[DobPrecision], RegistrationDate FROM [dbo].[Person] WHERE Id = SCOPE_IDENTITY();" +
                     "exec [dbo].[pr_CloseDecryptedSession];";
 
                 var personInsert = await _unitOfWork.Repository<Person>().FromSql(sql);

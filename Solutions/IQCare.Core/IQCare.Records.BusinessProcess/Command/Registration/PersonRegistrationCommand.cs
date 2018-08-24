@@ -20,6 +20,7 @@ namespace IQCareRecords.Common.BusinessProcess.Command
         public int PersonId { get; set; }
         public int CreatedBy { get; set; }
         public bool DobPrecision { get; set; }
+        public DateTime RegistrationDate { get; set; }
     }
 
     public class PersonRegistrationResponse
