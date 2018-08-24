@@ -49,6 +49,15 @@ namespace IQCare.Web.CCC.Encounter {
         protected global::IQCare.Web.CCC.UC.ucFemaleVitals ptnFemaleVitals;
         
         /// <summary>
+        /// ptnGenderBasedViolenceAssessment control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::IQCare.Web.CCC.UC.ucGenderBasedViolenceAssessment ptnGenderBasedViolenceAssessment;
+        
+        /// <summary>
         /// ucExtruder control.
         /// </summary>
         /// <remarks>

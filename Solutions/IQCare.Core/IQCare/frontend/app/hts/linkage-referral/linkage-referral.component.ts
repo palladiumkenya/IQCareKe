@@ -69,7 +69,8 @@ export class LinkageReferralComponent implements OnInit {
         this.tracingMergeArray = [];
 
         this.form = this._formBuilder.group({
-            dateToBeEnrolled: new FormControl(this.referral.dateToBeEnrolled, [Validators.required])
+            dateToBeEnrolled: new FormControl(this.referral.dateToBeEnrolled, [Validators.required]),
+            otherFacility: new FormControl(this.referral.otherFacility)
         });
 
         // Fetch previous referral if it exists
@@ -108,6 +109,7 @@ export class LinkageReferralComponent implements OnInit {
             (res) => {
                 if (res.length > 0) {
                     this.form.controls.dateToBeEnrolled.setValue(res[0]['referralDate']);
+                    this.form.controls.otherFacility.setValue(res[0]['otherFacility']);
                     this._linkageReferralService.getFacility(res[0]['toFacility']).subscribe(
                         (result) => {
                             if (result.length > 0) {
@@ -201,6 +203,8 @@ export class LinkageReferralComponent implements OnInit {
             return;
         }
 
+        console.log('valid');
+
         if (!this.myControl.value || !this.myControl.value.hasOwnProperty('mflCode')) {
             this.snotifyService.error('Please select a valid facility', 'Referral', this.notificationService.getConfig());
             return;
@@ -212,6 +216,7 @@ export class LinkageReferralComponent implements OnInit {
         this.referral.serviceAreaId = 2;
         this.referral.referredTo = this.myControl.value.mflCode;
         this.referral.dateToBeEnrolled = this.form.value.dateToBeEnrolled;
+        this.referral.otherFacility = this.form.value.otherFacility;
 
         const optionSelected = this.referralReasons.filter(function (obj) {
             return obj.itemName == 'CCCEnrollment';

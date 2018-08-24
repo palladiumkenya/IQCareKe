@@ -126,6 +126,7 @@
     <Content Include="CCC\Scripts\js\PatientRegistration.js" />
     <Content Include="CCC\UC\ucExtruder.ascx" />
     <Content Include="CCC\UC\ucFemaleVitals.ascx" />
+    <Content Include="CCC\UC\ucGenderBasedViolenceAssessment.ascx" />
     <Content Include="CCC\UC\ucIpt.ascx" />
     <Content Include="CCC\UC\ucIptClientWorkup.ascx" />
     <Content Include="CCC\UC\ucIptOutcome.ascx" />
@@ -546,6 +547,13 @@
     </Compile>
     <Compile Include="CCC\UC\ucFemaleVitals.ascx.designer.cs">
       <DependentUpon>ucFemaleVitals.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\ucGenderBasedViolenceAssessment.ascx.cs">
+      <DependentUpon>ucGenderBasedViolenceAssessment.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucGenderBasedViolenceAssessment.ascx.designer.cs">
+      <DependentUpon>ucGenderBasedViolenceAssessment.ascx</DependentUpon>
     </Compile>
     <Compile Include="CCC\UC\ucIpt.ascx.cs">
       <DependentUpon>ucIpt.ascx</DependentUpon>

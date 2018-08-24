@@ -9,72 +9,33 @@ using IQCare.Records.BusinessProcess.Command;
 using MediatR;
 using System.Threading.Tasks;
 using System.Threading;
+using IQCare.Common.Services;
+using Serilog;
 
 namespace IQCare.Records.BusinessProcess.CommandHandlers
 {
-  public  class GetPersonDetailsCommandHandler:IRequestHandler<GetPersonDetailsCommand,Result<GetPersonDetailsResponse>>
+    public  class GetPersonDetailsCommandHandler:IRequestHandler<GetPersonDetailsCommand,Result<List<PersonDetailsView>>>
     {
         private readonly ICommonUnitOfWork _unitOfWork;
-        Person persondetail = new Person();
-        PersonEducation personEducation = new PersonEducation();
-        PersonOccupation personocc = new PersonOccupation();
-        PersonMaritalStatus personmarital = new PersonMaritalStatus();
-        PersonLocation personlocation = new PersonLocation();
-        PersonContactView personcontact = new PersonContactView();
-        List<PersonEmergencyView> personemerg = new List<PersonEmergencyView>();
-        PersonIdentifier pid = new PersonIdentifier();
-        Patient pt = new Patient();
+
         public GetPersonDetailsCommandHandler(ICommonUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
 
-        public async Task<Result<GetPersonDetailsResponse>> Handle(GetPersonDetailsCommand request,CancellationToken cancellationToken)
+        public async Task<Result<List<PersonDetailsView>>> Handle(GetPersonDetailsCommand request,CancellationToken cancellationToken)
         {
             try
             {
-                RegisterPersonService rs = new RegisterPersonService(_unitOfWork);
-                int id = request.PersonId;
-                if (request.PersonId > 0)
-                {
-                    persondetail = await rs.GetPerson(id);
-                    //personEducation = await rs.GetCurrentPersonEducation(id);
-                    //personocc = await rs.GetCurrentOccupation(id);
-                    personmarital = await rs.GetFirstPatientMaritalStatus(id);
-                    personlocation = await rs.GetCurrentPersonLocation(id);
-                    personcontact = await rs.GetCurrentPersonContact(id);
-                    personemerg = await rs.GetCurrentPersonEmergency(id);
-                    pid = await rs.GetCurrentPersonIdentifier(id);
-                    pt = await rs.GetPatientByPersonId(id);
-                }
+                PersonDetailsViewService personDetailsViewService = new PersonDetailsViewService(_unitOfWork);
+                var personDetail = await personDetailsViewService.GetPersonDetails(request.PersonId);
 
-
-                _unitOfWork.Dispose();
-
-
-                return Result<GetPersonDetailsResponse>.Valid(new GetPersonDetailsResponse()
-                {
-
-                    personDetail = persondetail,
-                    personEducation = personEducation,
-                    personOccupation = personocc,
-                    personMaritalStatus = personmarital,
-                    personLocation = personlocation,
-                    personContact = personcontact,
-                    PersonEmergencyView = personemerg,
-                    personIdentifier = pid,
-                    patient = pt
-
-                });
-
+                return Result<List<PersonDetailsView>>.Valid(personDetail);
             }
             catch(Exception ex)
             {
-
-
-
-                return Result<GetPersonDetailsResponse>.Invalid(ex.Message);
-
+                Log.Error(ex.Message + " " + ex.InnerException);
+                return Result<List<PersonDetailsView>>.Invalid(ex.Message);
             }
         }
     }

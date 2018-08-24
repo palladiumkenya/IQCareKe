@@ -7,4 +7,5 @@ export class Referral {
     facilityId: number;
     userId: number;
     referralReason: number;
+    otherFacility: string;
 }

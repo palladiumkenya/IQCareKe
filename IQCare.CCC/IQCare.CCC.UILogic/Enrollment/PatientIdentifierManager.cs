@@ -16,7 +16,7 @@ namespace IQCare.CCC.UILogic.Enrollment
     {
         IPatientIdentifierManager _mgr = (IPatientIdentifierManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Enrollment.BPatientIdentifier, BusinessProcess.CCC");
 
-        public int addPatientIdentifier(int patientId, int patientEnrollmentId, int identifierId, string enrollmentNo, int facilityId, bool sendEvent = true)
+        public int addPatientIdentifier(int patientId, int patientEnrollmentId, int identifierId, string enrollmentNo, int facilityId, string assigningFacility, bool sendEvent = true)
         {
             try
             {
@@ -25,7 +25,8 @@ namespace IQCare.CCC.UILogic.Enrollment
                     PatientId = patientId,
                     PatientEnrollmentId = patientEnrollmentId,
                     IdentifierTypeId = identifierId,
-                    IdentifierValue = enrollmentNo
+                    IdentifierValue = enrollmentNo,
+                    AssigningFacility = assigningFacility
                 };
 
                 int returnValue = _mgr.AddPatientIdentifier(patientidentifier);
