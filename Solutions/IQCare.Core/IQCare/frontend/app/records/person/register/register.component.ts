@@ -134,6 +134,7 @@ export class RegisterComponent implements OnInit {
             this.getPersonDetails(this.id);
         }
     }
+
     getPersonDetails(id: number): any {
         console.log('edit person');
         this.recordsService.getPersonDetails(id).subscribe(
@@ -188,18 +189,19 @@ export class RegisterComponent implements OnInit {
 
         this.personRegistration.getPersonKinContacts(id).subscribe(
             (res) => {
-                console.log(res);
                 for (let i = 0; i < res.length; i++) {
-                    /*this.dataSource.push({
-                        'firstName': res.firstName,
-                        'middleName': res.middleName,
-                        'lastName': res.lastName,
-                        'gender': null,
-                        'contactcategory': null,
-                        'relationship': null,
-                        'phoneno': res.MobileNo,
-                        'consent': null
-                    });*/
+                    // console.log(res[i]);
+                    this.dataSource.push({
+                        'firstName': res[i].firstName,
+                        'middleName': res[i].middleName,
+                        'lastName': res[i].lastName,
+                        'gender': res[i].genderList[0],
+                        'contactcategory': res[i].contactCategoryList[0],
+                        'relationship': res[i].contactRelationshipList[0],
+                        'phoneno': res[i].mobileNo,
+                        'consent': null,
+                        'disabled': 'none'
+                    });
                 }
             }
         );
@@ -297,7 +299,7 @@ export class RegisterComponent implements OnInit {
         }
     }*/
 
-    onSubmitForm() {
+    onSubmitForm(tabIndex: number) {
         console.log(this.formArray.value);
         console.log(this.formGroup.valid);
         if (this.formGroup.valid) {
@@ -349,12 +351,19 @@ export class RegisterComponent implements OnInit {
                                     this.notificationService.getConfig());
                             },
                             () => {
-                                this.zone.run(() => {
-                                    this.router.navigate(['/dashboard/personhome/' + personId],
-                                        { relativeTo: this.route });
-                                });
                                 this.snotifyService.success('Successfully Registered Person', 'Person Registration',
                                     this.notificationService.getConfig());
+
+                                if (tabIndex == 1) {
+                                    this.zone.run(() => {
+                                        this.router.navigate(['/dashboard/personhome/' + personId],
+                                            { relativeTo: this.route });
+                                    });
+                                } else if (tabIndex == 2) {
+                                    this.zone.run(() => {
+                                        this.router.navigate(['/record/person/'], { relativeTo: this.route });
+                                    });
+                                }
                             }
                         );
                 },
@@ -366,6 +375,10 @@ export class RegisterComponent implements OnInit {
         } else {
             return;
         }
+    }
+
+    closeForm() {
+        this.router.navigate(['/dashboard'], { relativeTo: this.route });
     }
 
     addRow() {
@@ -402,7 +415,8 @@ export class RegisterComponent implements OnInit {
                         'contactcategory': data.kinContactType,
                         'relationship': data.kinContactRelationship,
                         'phoneno': data.kinMobileNumber,
-                        'consent': data.kinConsentToSMS
+                        'consent': data.kinConsentToSMS,
+                        'disabled': 'all'
                     }
                 );
 

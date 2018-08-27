@@ -254,13 +254,14 @@
                                                     <td>{{ data.firstName }}</td>
                                                     <td>{{ data.middleName }}</td>
                                                     <td>{{ data.lastName }}</td>
-                                                    <td>{{ data.gender['itemName'] }}</td>
-                                                    <td>{{ data.contactcategory['itemName'] }}</td>
-                                                    <td>{{ data.relationship['itemName'] }}</td>
+                                                    <td>{{ data.gender ? data.gender['itemName'] : "" }}</td>
+                                                    <td>{{ data.contactcategory ? data.contactcategory['itemName'] : "" }}</td>
+                                                    <td>{{ data.relationship ? data.relationship['itemName'] : "" }}</td>
                                                     <td>{{ data.phoneno }}</td>
-                                                    <td>{{ data.consent['itemName'] }}</td>
-                                                    <td>
-                                                        <i style="cursor: pointer;" class="material-icons" (click)="deleteContact(data, index, $event);">
+                                                    <td>{{ data.consent ? data.consent['itemName'] : "" }}</td>
+                                                    <td [style.pointer-events]="data.disabled">
+                                                        <i style="cursor: pointer;" class="material-icons" (click)="deleteContact(data,
+                                                        index, $event);">
                                                             delete
                                                         </i>
                                                     </td>
@@ -275,17 +276,16 @@
                                 <div class="row">&nbsp;</div>
                                 <div class="row">&nbsp;</div>
 
-                                <div class="row">
-                                    <button mat-raised-button color="accent" matStepperPrevious type="button">Back</button>
+                                <div class="row ">
+                                    <button mat-raised-button color="accent" matStepperPrevious type="button ">Back</button>
                                     &nbsp;&nbsp;
-                                    <button mat-raised-button color="primary" type="submit" (click)="onSubmitForm()">Register
+                                    <button mat-raised-button color="primary" type="submit" (click)="onSubmitForm(1)">Register
                                         and Continue</button>
                                     &nbsp;&nbsp;
-                                    <button mat-raised-button color="primary" type="submit" (click)="onSubmitForm()">Save
+                                    <button mat-raised-button color="primary" type="submit" (click)="onSubmitForm(2)">Save
                                         and Register New</button>
                                     &nbsp;&nbsp;
-                                    <button mat-raised-button color="primary" type="submit" (click)="onSubmitForm()">Close
-                                        Registration
+                                    <button mat-raised-button color="primary" type="submit" (click)="closeForm()">Close Registration
                                     </button>
                                 </div>
                             </mat-step>

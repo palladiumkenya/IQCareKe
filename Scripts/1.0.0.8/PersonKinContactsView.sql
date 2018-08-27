@@ -15,14 +15,20 @@ PTS.Id,
 PTS.PersonId, 
 PTS.SupporterId, 
 PTS.DeleteFlag, 
-PTS.ContactCategory, 
+CASE (PTS.ContactCategory)
+	WHEN 1
+		THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName = 'ContactCategory' AND ItemName = 'TreatmentSupporter')
+	ELSE
+		PTS.ContactCategory			
+END AS ContactCategory, 
 PTS.ContactRelationship, 
 CAST(DECRYPTBYKEY(P.FirstName) AS VARCHAR(50)) FirstName,
 CAST(DECRYPTBYKEY(P.MidName) AS VARCHAR(50)) MiddleName,
 CAST(DECRYPTBYKEY(p.LastName) AS VARCHAR(50)) LastName,
-CAST(DECRYPTBYKEY(PC.mobileNo) AS VARCHAR(50)) MobileNo   
+P.Sex,
+CAST(DECRYPTBYKEY(PC.MobileNumber) AS VARCHAR(50)) MobileNo   
 FROM dbo.PatientTreatmentSupporter PTS
-LEFT JOIN dbo.PatientContact PC ON PTS.Id = PC.id 
+LEFT JOIN dbo.PersonContact PC ON PTS.SupporterId = PC.PersonId
 LEFT JOIN dbo.Person P ON PTS.SupporterId = P.Id
 
 GO
