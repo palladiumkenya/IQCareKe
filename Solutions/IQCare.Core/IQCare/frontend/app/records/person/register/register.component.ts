@@ -29,7 +29,7 @@ export class RegisterComponent implements OnInit {
     /**
      * Component variables
      */
-    isLinear = false;
+    isLinear = true;
     registerEmergencyContact: boolean = false;
     formGroup: FormGroup;
     /** Returns a FormArray with the name 'formArray'. */
