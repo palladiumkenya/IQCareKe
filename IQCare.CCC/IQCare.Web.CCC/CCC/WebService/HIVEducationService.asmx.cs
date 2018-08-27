@@ -26,13 +26,18 @@ namespace IQCare.Web.CCC.WebService
         public ArrayList GetCounsellingTopics(string counsellingtopics)
         {
             String TopicName = "";
-            if(counsellingtopics== "Progression, RX")
+            if(counsellingtopics== "Progression,RX")
             {
                 TopicName = "ProgressionRX";
             }
-            else if(counsellingtopics == "Basic Prevention Disclosure Education")
+            else if(counsellingtopics == "BasicPreventionDisclosureEducation")
             {
                 TopicName = "BasicPreventionDisclosureEducation";
+               
+            }
+            else
+            {
+                TopicName = counsellingtopics.Replace(@",", "");
             }
 
             LookupLogic lookUp = new LookupLogic();
@@ -42,7 +47,7 @@ namespace IQCare.Web.CCC.WebService
             int x = dll.Items.Count;
             if (x > 0)
             {
-                for (int k = 0; k < x - 1; k++)
+                for (int k = 0; k <= x -1; k++)
                 {
                     string[] i = new string[2] { dll.Items[k].Value.ToString(), dll.Items[k].Text.ToString() };
                     rows.Add(i);

@@ -137,7 +137,7 @@ namespace IQCare.Controllers.Common
                 return Ok(results.Value);
             return BadRequest(results);
 
-        }
+        //}
         [HttpGet("getRelOptions")]
         public async Task<IActionResult> GetRelationshipOptions()
         {
@@ -225,46 +225,46 @@ namespace IQCare.Controllers.Common
         }
 
 
-        [HttpGet("getConsentType")]
-        public async Task<IActionResult> GetConsentOptions()
-        {
-            var results = await _mediator.Send(new GetConsentTypeCommand() { ItemName = "ConsentToSendSMS" }, HttpContext.RequestAborted);
-            if (results.IsValid)
-                return Ok(results.Value);
-            return BadRequest(results);
-        }
+        //[HttpGet("getConsentType")]
+        //public async Task<IActionResult> GetConsentOptions()
+        //{
+        //    var results = await _mediator.Send(new GetConsentTypeCommand() { ItemName = "ConsentToSendSMS" }, HttpContext.RequestAborted);
+        //    if (results.IsValid)
+        //        return Ok(results.Value);
+        //    return BadRequest(results);
+        //}
 
-        [HttpGet("getCountylist")]
-        public async Task<IActionResult> GetCountyList(string countyid,string subcountyid)
-        {
-            var results = await _mediator.Send(new GetCountiesCommand() { CountyId = countyid, SubcountyId = subcountyid }, HttpContext.RequestAborted);
-            if (results.IsValid)
-                return Ok(results.Value);
-            return BadRequest(results);
+        //[HttpGet("getCountylist")]
+        //public async Task<IActionResult> GetCountyList(string countyid,string subcountyid)
+        //{
+        //    var results = await _mediator.Send(new GetCountiesCommand() { CountyId = countyid, SubcountyId = subcountyid }, HttpContext.RequestAborted);
+        //    if (results.IsValid)
+        //        return Ok(results.Value);
+        //    return BadRequest(results);
 
-        }
-
-
-        [HttpGet("getSubCountylist")]
-        public async Task<IActionResult> GetSubCountyList(string countyid, string subcountyid)
-        {
-            var results = await _mediator.Send(new GetSubCountiesCommand() { CountyId = countyid, SubcountyId = subcountyid }, HttpContext.RequestAborted);
-            if (results.IsValid)
-                return Ok(results.Value);
-            return BadRequest(results);
-
-        }
+        //}
 
 
-        [HttpGet("getWardlist")]
-        public async Task<IActionResult> GetWardList(string countyid, string subcountyid)
-        {
-            var results = await _mediator.Send(new GetWardCommand() { CountyId = countyid, SubcountyId = subcountyid }, HttpContext.RequestAborted);
-            if (results.IsValid)
-                return Ok(results.Value);
-            return BadRequest(results);
+        //[HttpGet("getSubCountylist")]
+        //public async Task<IActionResult> GetSubCountyList(string countyid, string subcountyid)
+        //{
+        //    var results = await _mediator.Send(new GetSubCountiesCommand() { CountyId = countyid, SubcountyId = subcountyid }, HttpContext.RequestAborted);
+        //    if (results.IsValid)
+        //        return Ok(results.Value);
+        //    return BadRequest(results);
 
-        }
+        //}
+
+
+        //[HttpGet("getWardlist")]
+        //public async Task<IActionResult> GetWardList(string countyid, string subcountyid)
+        //{
+        //    var results = await _mediator.Send(new GetWardCommand() { CountyId = countyid, SubcountyId = subcountyid }, HttpContext.RequestAborted);
+        //    if (results.IsValid)
+        //        return Ok(results.Value);
+        //    return BadRequest(results);
+
+        //}
 
 
 
@@ -274,14 +274,14 @@ namespace IQCare.Controllers.Common
             
             
 
-        [HttpGet("getFacility/{mflCode}")]
-        public async Task<IActionResult> GetFacility(string mflCode)
-        {
-            var response = await _mediator.Send(new GetFacilityCommand() {MflCode = mflCode},
-                Request.HttpContext.RequestAborted);
-            if (response.IsValid)
-                return Ok(response.Value);
-            return BadRequest(response);
-        }
+        //[HttpGet("getFacility/{mflCode}")]
+        //public async Task<IActionResult> GetFacility(string mflCode)
+        //{
+        //    var response = await _mediator.Send(new GetFacilityCommand() {MflCode = mflCode},
+        //        Request.HttpContext.RequestAborted);
+        //    if (response.IsValid)
+        //        return Ok(response.Value);
+        //    return BadRequest(response);
+        //}
     } 
 }

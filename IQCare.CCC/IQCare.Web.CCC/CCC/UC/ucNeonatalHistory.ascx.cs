@@ -33,6 +33,7 @@ namespace IQCare.Web.CCC.UC
         public RadioButtonList rbList;
         public TextBox notesTb;
         public int screenTypeId = 0;
+        public int screeningValue = 0;
 
         protected int UserId
         {
@@ -74,6 +75,7 @@ namespace IQCare.Web.CCC.UC
             List<PatientScreening> screeningList = PSM.GetPatientScreening(PatientId);
             if (screeningList != null)
             {
+                screeningValue = 1;
                 foreach (var value in screeningList)
                 {
                     RadioButtonList rbl = (RadioButtonList)PHNeonatalHistory.FindControl(value.ScreeningCategoryId.ToString());
@@ -87,6 +89,7 @@ namespace IQCare.Web.CCC.UC
             List<PatientClinicalNotes> neonatalNotesList = PCN.getPatientClinicalNotesById(PatientId, Convert.ToInt32(LookupLogic.GetLookupItemId("NeonatalNotes")));
             if(neonatalNotesList.Any())
             {
+                screeningValue = 1;
                 foreach (var value in neonatalNotesList)
                 {
                     TextBox ntb = (TextBox)PHNeonatalHistoryNotes.FindControl(value.NotesCategoryId.ToString());

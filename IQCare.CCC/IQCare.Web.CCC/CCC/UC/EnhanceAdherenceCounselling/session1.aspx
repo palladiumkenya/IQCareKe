@@ -323,8 +323,9 @@
     }
     $(document).ready(function () {
         var PatientMasterVisitId = GetURLParameter('visitId');
+        var pagehash = window.location.hash;
         $('.session1loading').show();
-        if (PatientMasterVisitId > 0) {
+        if (PatientMasterVisitId > 0 && pagehash != "") {
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientClinicalNotesService.asmx/getPatientNotesByVisitId",

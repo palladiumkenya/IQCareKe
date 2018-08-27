@@ -165,6 +165,7 @@
     <Content Include="CCC\UC\ucFemaleVitals.ascx" />
     <Content Include="CCC\UC\ucGenderBasedViolenceAssessment.ascx" />
     <Content Include="CCC\UC\ucFollowupEducation.ascx" />
+    <Content Include="CCC\UC\ucICF.ascx" />
     <Content Include="CCC\UC\ucIpt.ascx" />
     <Content Include="CCC\UC\ucIptClientWorkup.ascx" />
     <Content Include="CCC\UC\ucIptOutcome.ascx" />
@@ -871,6 +872,13 @@
     </Compile>
     <Compile Include="CCC\UC\ucFollowupEducation.ascx.designer.cs">
       <DependentUpon>ucFollowupEducation.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\ucICF.ascx.cs">
+      <DependentUpon>ucICF.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucICF.ascx.designer.cs">
+      <DependentUpon>ucICF.ascx</DependentUpon>
     </Compile>
     <Compile Include="CCC\UC\ucIpt.ascx.cs">
       <DependentUpon>ucIpt.ascx</DependentUpon>

@@ -13,9 +13,7 @@
 					<label class="control-label pull-left"><span class="text-primary">SEXUAL AND GENDER BASE VIOLENCE</span></label>
 				</div>
 				<div class="col-md-12 form-group">
-					<label class="control-label pull-left"><span>Many people do not realize that violnce can lead to all kinds of health problems. Because violence is
-                        so common in many women's livs, and because there is help available for women being abused, we now ask all female patients about their experinces
-                        with violence.</span></label>
+					<label class="control-label pull-left"><span>This form should be used at every visit to screen patients for Gender Based Violence for all patients accessing care at this facility</span></label>
 				</div>
 				<div class="col-md-12 form-group" id="gbvquestionscontainer">
                     <asp:PlaceHolder ID="PHgbvquestions" runat="server"></asp:PlaceHolder>
