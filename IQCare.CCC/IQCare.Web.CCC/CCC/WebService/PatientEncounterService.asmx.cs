@@ -184,14 +184,23 @@ namespace IQCare.Web.CCC.WebService
             PatientMasterVisitManager pmv = new PatientMasterVisitManager();
             int patientId = Convert.ToInt32(Session["PatientPK"].ToString());
 
-
+            int PreviousMasterVisitId;
+            DateTime? patientvisitdate;
             int userId = Convert.ToInt32(Session["AppUserId"]);
             int patientMasterVisitId = Convert.ToInt32(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString());
             List<Entities.CCC.Visit.PatientMasterVisit> pmastervisit = pmv.GetPatientVisits(patientId);
             Entities.CCC.Visit.PatientMasterVisit pmlist = pmastervisit.FindAll(x => x.Id != patientMasterVisitId && x.Id < patientMasterVisitId).OrderByDescending(x => x.Id).FirstOrDefault();
-           int  PreviousMasterVisitId = pmlist.Id;
-
-            DateTime? patientvisitdate = pmlist.VisitDate;
+            if (pmlist != null)
+            {
+                PreviousMasterVisitId = pmlist.Id;
+             patientvisitdate = pmlist.VisitDate;
+            }
+            else
+            {
+                PreviousMasterVisitId = 0;
+                patientvisitdate = new DateTime();
+            }
+     
             PatientPartner pat = partman.GetPatientPartner(patientId, PreviousMasterVisitId);
 
             List<PatientSexualHistory> patienthistory = psh.GetPatientSexualHistoryList(patientId, PreviousMasterVisitId);
@@ -343,16 +352,19 @@ namespace IQCare.Web.CCC.WebService
             if (psc != null)
             {
                 LookupItemView lookupview = lsexual.Find(x => x.ItemId == psc.ScreeningValueId);
-                string sexualactive = lookupview.ItemName;
-
-                if (sexualactive.ToString().ToLower() == "yes")
+                if (lookupview != null)
                 {
-                    sexuallyactive = "yes";
+                    string sexualactive = lookupview.ItemName;
 
-                }
-                else if (sexualactive.ToString().ToLower() == "no")
-                {
-                    sexuallyactive = "no";
+                    if (sexualactive.ToString().ToLower() == "yes")
+                    {
+                        sexuallyactive = "yes";
+
+                    }
+                    else if (sexualactive.ToString().ToLower() == "no")
+                    {
+                        sexuallyactive = "no";
+                    }
                 }
             }
             SexualHistoryOutcome shc = new SexualHistoryOutcome();
