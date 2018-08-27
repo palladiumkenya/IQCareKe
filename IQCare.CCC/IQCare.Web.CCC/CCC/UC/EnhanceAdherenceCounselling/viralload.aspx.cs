@@ -18,6 +18,10 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
         public int PatientId, PatientMasterVisitId, userId, NotesId, screenTypeId;
         public RadioButtonList rbList;
         public TextBox notesTb;
+        public string serviceAreaId;
+        public string reasonId;
+        public string differentiatedCareId;
+        public string followupStatusId;
         protected void Page_Load(object sender, EventArgs e)
         {
             PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);

@@ -215,7 +215,7 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
             PHDateFilled.Controls.Add(new LiteralControl("</div>"));
             //Follow up date
             appointmentDateTb = new TextBox();
-            appointmentDateTb.CssClass = "form-control input-sm";
+            appointmentDateTb.CssClass = "form-control input-sm sessiononefollowdate";
             appointmentDateTb.ClientIDMode = System.Web.UI.ClientIDMode.Static;
             appointmentDateTb.ID = "session1tb" + LookupLogic.GetLookupItemId("Session1FollowupDate");
             PHFollowupDate.Controls.Add(appointmentDateTb);

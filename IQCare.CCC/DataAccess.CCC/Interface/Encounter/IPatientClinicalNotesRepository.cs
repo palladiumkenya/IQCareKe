@@ -11,5 +11,6 @@ namespace DataAccess.CCC.Interface.Encounter
         List<PatientClinicalNotes> getPatientClinicalNotes(int patientId);
         List<PatientClinicalNotes> getPatientClinicalNotesByCategory(int patientId, int categoryId);
         int updatePatientClinicalNotes(PatientClinicalNotes PCN);
+        List<PatientClinicalNotes> getPatientClinicalNotesByVisitId(int patientId, int PatientMasterVisitId);
     }
 }

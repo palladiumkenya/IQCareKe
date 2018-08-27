@@ -39,5 +39,11 @@ namespace DataAccess.CCC.Repository.Encounter
             notesRepository.updatePatientClinicalNotes(PCN);
             return PCN.Id;
         }
+        public List<PatientClinicalNotes> getPatientClinicalNotesByVisitId(int patientId, int PatientMasterVisitId)
+        {
+            IPatientClinicalNotesRepository notesRepository = new PatientClinicalNotesRepository();
+            var notesList = notesRepository.GetAll().Where(x => x.PatientId == patientId & x.PatientMasterVisitId == PatientMasterVisitId);
+            return notesList.ToList();
+        }
     }
 }

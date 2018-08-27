@@ -111,6 +111,7 @@
 						        <%--<asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="txtFollowupDate" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>--%>
 					        </div>
 				        </div>
+                        <asp:HiddenField ID="S3AppointmentId" runat="server" />
 				    </div>
 			    </div>
 		    </div>
@@ -270,10 +271,12 @@
         if (currentStep == 3) {
             addUpdateSession3Data();
             addUpdateSession3Appointment();
+            $("#sessionfourdata .loading").show();
+            $("#sessionfourdata").load("../UC/EnhanceAdherenceCounselling/session4.aspx");
         }
     });
     function addUpdateSession3Appointment() {
-        var appointmentid = <%=appointmentId%>;
+        var appointmentid = $("#<%=S3AppointmentId.ClientID%>").val();
         var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
         var appDate = $("#<%=appointmentDateTb.ClientID%>").val();
         if (moment('' + appDate + '').isAfter(futureDate)) {
@@ -285,7 +288,7 @@
                 updateS3Appointment();
             }
             else {
-                checkExistingS3Appointment();
+                addPatientS3Appointment();
             }
         }
     }
@@ -328,7 +331,7 @@
         var patientId = <%=PatientId%>;
         var patientMasterVisitId = <%=PatientMasterVisitId%>;
         var userId = <%=userId%>;
-        var appointmentid = <%=appointmentId%>;
+        var appointmentid = $("#<%=S3AppointmentId.ClientID%>").val();
         $.ajax({
             type: "POST",
             url: "../WebService/PatientService.asmx/UpdatePatientAppointment",
@@ -447,11 +450,12 @@
         }
     }
     $(document).ready(function () {
+        var PatientMasterVisitId = GetURLParameter('visitId');
         $('.session3loading').show();
         $.ajax({
             type: "POST",
-            url: "../WebService/PatientClinicalNotesService.asmx/getPatientNotes",
-            data: "{'PatientId': '" + patientId + "'}",
+            url: "../WebService/PatientClinicalNotesService.asmx/getPatientNotesByVisitId",
+            data: "{'PatientId': '" + patientId + "','PatientMasterVisitId':'" + PatientMasterVisitId + "'}",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             cache: false,
@@ -463,6 +467,8 @@
                         $("#session3tb" + this.NotesCategoryId).val(inputnotes);
                     }
                 });
+                var s3fd = $('input[type="text"].s3followupdateinput').val();
+                gets3AppointmentId(s3fd);
             },
             error: function (response) {
                 toastr.error("Notes could not be loaded");
@@ -470,8 +476,8 @@
         });
         $.ajax({
             type: "POST",
-            url: "../WebService/PatientScreeningService.asmx/getPatientScreening",
-            data: "{'PatientId': '" + patientId + "'}",
+            url: "../WebService/PatientScreeningService.asmx/getScreeningByIdandMasterVisit",
+            data: "{'PatientId': '" + patientId + "','PatientMasterVisitId':'" + PatientMasterVisitId + "'}",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             cache: false,
@@ -490,6 +496,31 @@
         });
         
     });
+    function gets3AppointmentId(s3fd) {
+        var PatientMasterVisitId = GetURLParameter('visitId');
+        $.ajax({
+            type: "POST",
+            url: "../WebService/PatientService.asmx/getAppointmentId",
+            data: "{'PatientMasterVisitId':'" + PatientMasterVisitId + "','date':'" + s3fd + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            cache: false,
+            success: function (response) {
+                if (response.d != null) {
+                    $.each(JSON.parse(response.d), function (index, value) {
+                        $("#<%=S3AppointmentId.ClientID%>").val(this.Id);
+                    });
+
+                }
+                else {
+                    addUpdateSession3Appointment();
+                }
+            },
+            error: function (response) {
+                toastr.error("Screening could not be loaded");
+            }
+        });
+    }
     function checkSession3ButtonsOnCtrls() {
         var mmas4Total = 0;
         $(".session3mmascontainer .mmas4container input[type=radio]:checked").each(function () {

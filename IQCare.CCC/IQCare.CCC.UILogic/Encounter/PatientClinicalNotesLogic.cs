@@ -49,6 +49,46 @@ namespace IQCare.CCC.UILogic.Encounter
                 throw;
             }
         }
+        public int addPatientClinicalNotesByVisitId(int patientId, int patientMasterVisitId, int serviceAreaId, int notesCategoryId, string clinicalNotes, int userId)
+        {
+            try
+            {
+                int notesId = _patientNotes.checkPatientNotesifExistingByVisitId(patientId, patientMasterVisitId, notesCategoryId);
+                if (notesId > 0)
+                {
+                    var PCN = new PatientClinicalNotes()
+                    {
+                        PatientId = patientId,
+                        PatientMasterVisitId = patientMasterVisitId,
+                        ServiceAreaId = serviceAreaId,
+                        ClinicalNotes = clinicalNotes,
+                        CreatedBy = userId,
+                        //VersionStamp = DateTime.Now,
+                        NotesCategoryId = notesCategoryId,
+                        Id = notesId
+                    };
+                    return _patientNotes.UpdatePatientClinicalNotes(PCN);
+                }
+                else
+                {
+                    var PCN = new PatientClinicalNotes()
+                    {
+                        PatientId = patientId,
+                        PatientMasterVisitId = patientMasterVisitId,
+                        ServiceAreaId = serviceAreaId,
+                        ClinicalNotes = clinicalNotes,
+                        CreatedBy = userId,
+                        //VersionStamp = DateTime.UtcNow,
+                        NotesCategoryId = notesCategoryId
+                    };
+                    return _patientNotes.AddPatientClinicalNotes(PCN);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public List<PatientClinicalNotes> getPatientClinicalNotesById(int PatientID, int categoryID)
         {
             List<PatientClinicalNotes> notesList = new List<PatientClinicalNotes>();
@@ -69,6 +109,19 @@ namespace IQCare.CCC.UILogic.Encounter
             try
             {
                 notesList = _patientNotes.getPatientClinicalNotes(PatientID);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return notesList;
+        }
+        public List<PatientClinicalNotes> getPatientClinicalNotesByVisitId(int PatientId, int PatientMasterVisitId)
+        {
+            List<PatientClinicalNotes> notesList = new List<PatientClinicalNotes>();
+            try
+            {
+                notesList = _patientNotes.getPatientClinicalNotesByVisitId(PatientId, PatientMasterVisitId);
             }
             catch (Exception)
             {

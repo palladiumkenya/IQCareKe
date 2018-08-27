@@ -906,7 +906,16 @@ namespace IQCare.Web.CCC.WebService
             }
             return count;
         }
-
+        [WebMethod(EnableSession = true)]
+        public string getAppointmentId(int PatientMasterVisitId, DateTime date)
+        {
+            var appointmentManager = new PatientAppointmentManager();
+            PatientAppointment[] pAppointment = appointmentManager.GetAppointmentId(Convert.ToInt32(Session["PatientPK"]),PatientMasterVisitId, date).ToArray();
+            //PatientClinicalNotes[] patientNotesData = PCN.getPatientClinicalNotesByVisitId(PatientId, PatientMasterVisitId).ToArray();
+            string jsonNotesObject = "[]";
+            jsonNotesObject = new JavaScriptSerializer().Serialize(pAppointment);
+            return jsonNotesObject;
+        }
         [WebMethod]
         public List<PatientConsentDisplay> GetpatientConsent(string patientId)
         {
