@@ -157,4 +157,25 @@ export class PersonRegistrationService {
             catchError(this.errorHandler.handleError<any[]>('getPersonKinContacts'))
         );
     }
+
+    public addPersonIdentifiers(personId: number, userId: number, identifierId: number, identifierValue: string): Observable<any> {
+        const Indata = {
+            'PersonId': personId,
+            'IdentifierId': identifierId,
+            'IdentifierValue': identifierValue,
+            'UserId': userId
+        };
+
+        return this.http.post<any>(this.API_URL + '/records/api/Register/addPersonIdentifier', JSON.stringify(Indata), httpOptions).pipe(
+            tap((addPersonIdentifiers: any) => this.errorHandler.log(`add person identifiers`)),
+            catchError(this.errorHandler.handleError<any>('addPersonIdentifiers'))
+        );
+    }
+
+    getPersonIdentifiers(id: number): Observable<any> {
+        return this.http.get<any>(this.API_URL + '/records/api/Register/GetPersonIdentifiers/' + id).pipe(
+            tap(getPersonIdentifiers => this.errorHandler.log(`get person identifiers`)),
+            catchError(this.errorHandler.handleError<any[]>('getPersonIdentifiers'))
+        );
+    }
 }

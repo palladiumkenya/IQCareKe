@@ -31,6 +31,7 @@ import { ViewComponent } from './person/view/view.component';
 import { ConsentSmsResolver } from './_services/consentsms.resolver';
 import { ContactCategoryResolver } from './_services/contactcategory.resolver';
 import { PersoncontactsComponent } from './person/personcontacts/personcontacts.component';
+import { PersonIdentifiersResolver } from './_services/personidentifiers.resolver';
 
 @NgModule({
     imports: [
@@ -63,7 +64,8 @@ import { PersoncontactsComponent } from './person/personcontacts/personcontacts.
         PersonRegistrationService,
         RelationshipResolver,
         ConsentSmsResolver,
-        ContactCategoryResolver
+        ContactCategoryResolver,
+        PersonIdentifiersResolver
     ],
     entryComponents: [
         PersoncontactsComponent

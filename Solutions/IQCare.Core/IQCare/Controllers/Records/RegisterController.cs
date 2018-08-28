@@ -201,5 +201,18 @@ namespace IQCare.Controllers.Records
                 return Ok(response.Value);
             return BadRequest(response);
         }
+
+        [HttpGet("GetPersonIdentifiers/{personId}")]
+        public async Task<IActionResult> GetPersonIdentifiers(int personId)
+        {
+            var response = await _mediator.Send(new GetPersonIdentifiersCommand()
+            {
+                PersonId = personId
+            }, Request.HttpContext.RequestAborted);
+
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
     }
 }

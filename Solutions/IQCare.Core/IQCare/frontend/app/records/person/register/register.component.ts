@@ -51,6 +51,7 @@ export class RegisterComponent implements OnInit {
     relationship: LookupItemView[];
     consentSms: LookupItemView[];
     contactCategory: LookupItemView[];
+    personIdentifiers: any[];
 
     dataSource: any[];
     newContacts: any[];
@@ -92,8 +93,8 @@ export class RegisterComponent implements OnInit {
                     MaritalStatus: new FormControl(this.person.maritalStatus, [Validators.required]),
                     EducationLevel: new FormControl(this.person.EducationLevel),
                     Occupation: new FormControl(this.person.Occupation),
-                    IdentifierType: new FormControl(this.person.identifierType),
-                    IdentifierNumber: new FormControl(this.person.identifierNumber)
+                    IdentifierType: new FormControl(this.person.IdentifierType),
+                    IdentifierNumber: new FormControl(this.person.IdentifierNumber, [Validators.required])
                 }),
                 this._formBuilder.group({
                     County: new FormControl(this.clientAddress.County, [Validators.required]),
@@ -112,10 +113,13 @@ export class RegisterComponent implements OnInit {
             ])
         });
 
+        this.formGroup.controls['formArray']['controls'][0]['controls']['IdentifierNumber'].disable({ onlySelf: true });
+
         this.route.data.subscribe((res) => {
             // console.log(res);
             const { countiesArray, genderArray, maritalStatusArray, educationLevelArray,
-                occupationArray, relationshipArray, consentSmsArray, contactCategoryArray } = res;
+                occupationArray, relationshipArray, consentSmsArray, contactCategoryArray,
+                personIdentifiersArray } = res;
             this.counties = countiesArray;
             this.gender = genderArray;
             this.maritalStatus = maritalStatusArray;
@@ -124,6 +128,8 @@ export class RegisterComponent implements OnInit {
             this.relationship = relationshipArray;
             this.consentSms = consentSmsArray;
             this.contactCategory = contactCategoryArray;
+            this.personIdentifiers = personIdentifiersArray['identifers'];
+            console.log(personIdentifiersArray['identifers']);
         });
 
         this.route.params.subscribe(params => {
@@ -202,6 +208,17 @@ export class RegisterComponent implements OnInit {
                         'consent': null,
                         'disabled': 'none'
                     });
+                }
+            }
+        );
+
+        this.personRegistration.getPersonIdentifiers(id).subscribe(
+            (res) => {
+                console.log(res);
+                if (res.length > 0) {
+                    this.formGroup.controls['formArray']['controls'][0]['controls'].IdentifierType.setValue(res[0]['identifierId']);
+                    this.formGroup.controls['formArray']['controls'][0]['controls'].IdentifierNumber.setValue(res[0]['identifierValue']);
+                    this.formGroup.controls['formArray']['controls'][0]['controls']['IdentifierNumber'].enable({ onlySelf: false });
                 }
             }
         );
@@ -340,9 +357,13 @@ export class RegisterComponent implements OnInit {
                     // Add Emergency Contact
                     const personEmergencyContact = this.personRegistration.registerPersonEmergencyContact(personId,
                         this.person.createdBy, this.newContacts);
+                    // Add Person Identifiers
+                    const personIdentifiersAdd = this.personRegistration.addPersonIdentifiers(personId, this.person.createdBy,
+                        this.person.IdentifierType, this.person.IdentifierNumber);
 
                     forkJoin([personContact, personAddress, personMaritalStatus,
-                        personEducationLevel, personOccupation, personEmergencyContact]).subscribe(
+                        personEducationLevel, personOccupation, personEmergencyContact,
+                        personIdentifiersAdd]).subscribe(
                             (forkRes) => {
                                 console.log(forkRes);
                             },
@@ -459,5 +480,15 @@ export class RegisterComponent implements OnInit {
                 { text: 'No', action: () => console.log('Clicked: No') }
             ]
         });
+    }
+
+    onIdentifierTypeChange() {
+        console.log(`here`);
+        if (this.formArray.value[0]['IdentifierType']) {
+            this.formGroup.controls['formArray']['controls'][0]['controls']['IdentifierNumber'].enable({ onlySelf: false });
+        } else {
+            this.formGroup.controls['formArray']['controls'][0]['controls']['IdentifierNumber'].disable({ onlySelf: true });
+            this.formGroup.controls['formArray']['controls'][0]['controls']['IdentifierNumber'].setValue('');
+        }
     }
 }

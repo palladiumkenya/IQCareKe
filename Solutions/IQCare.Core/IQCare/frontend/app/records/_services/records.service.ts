@@ -73,4 +73,11 @@ export class RecordsService {
             catchError(this.errorHandler.handleError<any[]>('getContactCategory'))
         );
     }
+
+    public getPersonIdentifiers(): Observable<any> {
+        return this.http.get<any>(this.API_URL + '/api/Lookup/getIdentifyerTypes').pipe(
+            tap(getPersonIdentifiers => this.errorHandler.log('get person identifiers options')),
+            catchError(this.errorHandler.handleError<any[]>('getPersonIdentifiers'))
+        );
+    }
 }

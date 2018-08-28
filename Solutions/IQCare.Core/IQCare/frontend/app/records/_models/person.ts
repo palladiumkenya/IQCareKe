@@ -12,8 +12,8 @@ export class Person {
     maritalStatus: number;
     EducationLevel: number;
     Occupation: number;
-    identifierType: number;
-    identifierNumber: number;
+    IdentifierType: number;
+    IdentifierNumber: string;
     personId?: number;
     createdBy?: number;
     id?: number;
