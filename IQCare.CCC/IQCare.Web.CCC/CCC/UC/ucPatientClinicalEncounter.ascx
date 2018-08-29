@@ -581,7 +581,7 @@
 							                                        <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ddlICFCurrentlyOnIPT" ClientIDMode="Static" />
 						                                        </div>
                                                             </div>
-                                                            <div class="col-md-6 text-center">
+                                                            <div class="col-md-6 text-center" id="startIptSection">
                                                                 <div class="col-md-12">
 							                                        <label class="control-label pull-left input-sm" for="ddlICFStartIPT">Start IPT?</label>
 						                                        </div>
@@ -2706,7 +2706,6 @@
 
     $(document).ready(function () {
         var encounterExists = "<%=PatientEncounterExists%>";
-
         $('.errorBlock1').hide();
         $('.errorBlock2').hide();
         $('.errorBlock3').hide();
@@ -4911,6 +4910,159 @@
 			});
 		}
 
+        getStatusCtrls();
+        ICFStatusCtrls();
+        ICFAsctionStatusCtrls();
+        RegimenStatusCtrls();
+
+        function getStatusCtrls() {
+            var selectedIndex = ($("#ddlOnAntiTBDrugs").prop('selectedIndex'));
+            var objectsToHide = [];
+            var objectsToShow = [];
+            var sectionsToReset = [];
+            var tbScreenScore = 0;
+            if (selectedIndex == 1) {
+                objectsToShow = ["tbScreeningOutcomePanel"];
+                objectsToHide = ['ICFScreeningSection', 'TubeclosisTreatmentPanel', 'IPTPanel', 'ICFActionTakenPanel'];
+                sectionsToReset = ['ICFScreeningSection', 'TubeclosisTreatmentPanel', 'IPTPanel', 'ICFActionTakenPanel'];
+                tbScreenScore = 3;
+            }
+            else if (selectedIndex == 2) {
+                objectsToShow = ['ICFScreeningSection', 'IPTPanel'];
+                objectsToHide = ['tbScreeningOutcomePanel'];
+                sectionsToReset = ['tbScreeningOutcomePanel'];
+            }
+            else {
+                sectionsToReset = ['ICFScreeningSection', 'TubeclosisTreatmentPanel', 'IPTPanel', 'ICFActionTakenPanel', 'tbScreeningOutcomePanel'];
+                objectsToHide = ['ICFScreeningSection', 'TubeclosisTreatmentPanel', 'IPTPanel', 'ICFActionTakenPanel', 'tbScreeningOutcomePanel'];
+                objectsToShow = [];
+            }
+            showHideCtrls(objectsToHide, objectsToShow);
+            sectionReset(sectionsToReset);
+            getTBOutcome(tbScreenScore);
+        }
+
+        function ICFStatusCtrls() {
+            var totalIndex = 0;
+            var objectsToHide = [];
+            var objectsToShow = [];
+            var sectionsToReset = [];
+            $("#ICFScreeningSection select").each(function () {
+                var selectedIndex = ($(this).prop('selectedIndex'));
+                if (selectedIndex == 1) {
+                    totalIndex = totalIndex + 1;
+                }
+                else {
+                    totalIndex = totalIndex + 0;
+                }
+            });
+            if (totalIndex >= 1) {
+                objectsToShow = ['ICFActionTakenPanel'];
+                objectsToHide = [];
+            }
+            else {
+                objectsToShow = [];
+                objectsToHide = ['ICFActionTakenPanel'];
+                sectionsToReset = ['ICFActionTakenPanel'];
+                //Reset action taken controls
+                $("#ICFActionTakenPanel select").each(function () {
+                    $(this).prop('selectedIndex', 0);
+                });
+            }
+            showHideCtrls(objectsToHide, objectsToShow);
+            sectionReset(sectionsToReset);
+        }
+        //ICF Action Screening Section Selection Change
+        function ICFAsctionStatusCtrls(){
+            var IPTScore = 0;
+            var TBScreeningScore = 0;
+            var TBTreatmentScore = 0;
+            var TBOutcomeScore = 0;
+            var tbScreenScore = 0;
+            var objectsToHide = [];
+            var objectsToShow = [];
+            var sectionsToReset = [];
+            var objectsToDisable = [];
+            var objectsToEnable = [];
+            $("#ICFActionScreeningSection select").each(function () {
+                var selectedIndex = ($(this).prop('selectedIndex'));
+                if (selectedIndex == 1) {
+                    TBOutcomeScore = TBOutcomeScore + 1;
+                    IPTScore = IPTScore + 0;
+                    TBTreatmentScore = TBTreatmentScore + 0;
+                }
+                else if (selectedIndex == 2) {
+                    TBOutcomeScore = TBOutcomeScore + 0;
+                    IPTScore = IPTScore + 0;
+                    TBTreatmentScore = TBTreatmentScore + 1;
+                }
+                else if (selectedIndex == 3) {
+                    TBOutcomeScore = TBOutcomeScore + 0;
+                    IPTScore = IPTScore + 1;
+                    TBTreatmentScore = TBTreatmentScore + 0;
+                }
+                else if (selectedIndex == 4) {
+                    TBOutcomeScore = TBOutcomeScore + 0;
+                    IPTScore = IPTScore + 1;
+                    TBTreatmentScore = TBTreatmentScore + 0;
+                }
+                else {
+                    TBOutcomeScore = TBOutcomeScore + 0;
+                    IPTScore = IPTScore + 0;
+                    TBTreatmentScore = TBTreatmentScore + 0;
+                }
+            });
+            if (TBTreatmentScore >= 1) {
+                objectsToDisable = ['btnAddIptWorkUp2', 'btnAddIpt2'];
+                objectsToShow = ['TuberclosisTreatmentPanel', 'tbScreeningOutcomePanel'];
+                tbScreenScore = 2;
+            }
+            else {
+                if (TBOutcomeScore >= 1) {
+                    objectsToDisable = ['btnAddIptWorkUp2', 'btnAddIpt2'];
+                    objectsToHide = ['TuberclosisTreatmentPanel'];
+                    objectsToShow = ['tbScreeningOutcomePanel'];
+                    tbScreenScore = 2;
+                }
+                else {
+                    if (IPTScore >= 1) {
+                        objectsToEnable = ['btnAddIptWorkUp2', 'btnAddIpt2'];
+                        objectsToHide = ['TuberclosisTreatmentPanel'];
+                        objectsToShow = ['tbScreeningOutcomePanel'];
+                        tbScreenScore = 1;
+                    }
+                    else {
+                        objectsToEnable = ['btnAddIptWorkUp2', 'btnAddIpt2'];
+                        objectsToHide = ['TuberclosisTreatmentPanel'];
+                        tbScreenScore = 0;
+                    }
+                }
+            }
+            showHideCtrls(objectsToHide, objectsToShow);
+            sectionReset(sectionsToReset);
+            disableEnableCtrls(objectsToDisable, objectsToEnable);
+            getTBOutcome(tbScreenScore);
+        }
+        //start TBRx
+       function RegimenStatusCtrls() {
+            var tbScreenScore = 0;
+            var selectedIndex = ($("#ddlICFRegimen").prop('selectedIndex'));
+            var todayDate = new Date();
+            var tbrxStartDate = $("#tbTBRXStartDate").val();
+            var tbrxEndDate = $("#tbTBRXEndDate").val();
+            if (selectedIndex >= 1 && tbrxStartDate != "") {
+                if (new Date(tbrxStartDate) <= new Date(todayDate) && new Date(tbrxEndDate) >= new Date(todayDate)) {
+                    tbScreenScore = 4;
+                }
+                else {
+                    tbScreenScore = 2;
+                }
+            }
+            else {
+                tbScreenScore = 2;
+            }
+            getTBOutcome(tbScreenScore);
+        }
 	});
 
 
@@ -5978,7 +6130,7 @@
         var tbScreenScore = 0;
         var selectedIndex = ($(this).prop('selectedIndex'));
         var todayDate = new Date();
-        var tbrxStartDate = $("#tbTBRXStartDate").val();
+        var tbrxStartDate = $("#tTBRXStartDate").val();
         var tbrxEndDate = $("#tbTBRXEndDate").val();
         if (selectedIndex >= 1 && tbrxStartDate != "") {
             if (new Date(tbrxStartDate) <= new Date(todayDate) && new Date(tbrxEndDate) >= new Date(todayDate)) {
@@ -5993,6 +6145,49 @@
         }
         getTBOutcome(tbScreenScore);
     }); 
+    $("#ddlICFCurrentlyOnIPT").change(function (evt, data) {
+        var objectsToHide = [];
+        var objectsToShow = [];
+        var sectionsToReset = [];
+        var objectsToDisable = [];
+        var objectsToEnable = [];
+        var selectedIndex = ($(this).prop('selectedIndex'));
+        if (selectedIndex == 1) {
+            objectsToDisable = ['btnAddIptWorkUp2'];
+            objectsToHide = ['startIptSection'];
+            objectsToEnable = ['btnAddIpt2', 'btnAddIptOutcome2'];
+        }
+        else if (selectedIndex == 2) {
+            objectsToDisable = ['btnAddIptWorkUp2', 'btnAddIpt2', 'btnAddIptOutcome2'];
+            objectsToShow = ['startIptSection'];
+        }
+        else {
+            objectsToDisable = ['btnAddIptWorkUp2', 'btnAddIpt2', 'btnAddIptOutcome2'];
+            objectsToHide = ['startIptSection'];
+        }
+        disableEnableCtrls(objectsToDisable, objectsToEnable);
+        showHideCtrls(objectsToHide, objectsToShow);
+    }); 
+    $("#ddlICFStartIPT").change(function (evt, data) {
+        var objectsToHide = [];
+        var objectsToShow = [];
+        var sectionsToReset = [];
+        var objectsToDisable = [];
+        var objectsToEnable = [];
+        var selectedIndex = ($(this).prop('selectedIndex'));
+        if (selectedIndex == 1) {
+            objectsToDisable = ['btnAddIpt2', 'btnAddIptOutcome2'];
+            objectsToEnable = ['btnAddIptWorkUp2'];
+        }
+        else if (selectedIndex == 2) {
+            objectsToDisable = ['btnAddIptWorkUp2', 'btnAddIpt2', 'btnAddIptOutcome2'];
+        }
+        else {
+            objectsToDisable = ['btnAddIptWorkUp2', 'btnAddIpt2', 'btnAddIptOutcome2'];
+        }
+        disableEnableCtrls(objectsToDisable, objectsToEnable);
+        showHideCtrls(objectsToHide, objectsToShow);
+    });
     function BindHighRiskBehavior(itemList) {
        // data = [];
         $.each(itemList, function (index, value) {
@@ -6462,19 +6657,5 @@
             }
 
         }
-
-
-    
-
-
-
-    
-
-
-   
-
-
-    
-
 </script>
 
