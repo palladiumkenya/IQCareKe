@@ -374,9 +374,11 @@ namespace IQCare.Web.CCC.WebService
                     }
                 }
 
-                string[] i = new string[13] { row["Drug_Pk"].ToString(), row["batchId"].ToString(),
-                    row["FrequencyID"].ToString(),row["abbr"].ToString(),row["DrugName"].ToString(),
-                    row["batchName"].ToString(),row["dose"].ToString(),row["freq"].ToString(),
+                string[] i = new string[14] { row["Drug_Pk"].ToString(), row["batchId"].ToString(),
+                    //row["FrequencyID"].ToString(),
+                    row["abbr"].ToString(),row["DrugName"].ToString(),
+                    row["batchName"].ToString(),row["MorningDose"].ToString(),row["MiddayDose"].ToString(),
+                    row["EveningDose"].ToString(), row["NightDose"].ToString(),
                     row["duration"].ToString(),row["OrderedQuantity"].ToString(),row["DispensedQuantity"].ToString(),
                     row["prophylaxis"].ToString(), remove
                      };
