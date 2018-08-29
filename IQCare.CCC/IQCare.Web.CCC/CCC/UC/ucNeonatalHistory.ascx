@@ -486,7 +486,6 @@
         var screeningDone = <%=screeningValue%>;
         if (patientAge > 5) {
             if (screeningDone > 0) {
-                alert(screeningDone);
                 $("#neonatalrecord").hide();
                 $("#neonatalform").hide();
                 $("#immunizationform").hide();

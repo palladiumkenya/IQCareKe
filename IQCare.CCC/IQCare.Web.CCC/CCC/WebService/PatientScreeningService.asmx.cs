@@ -78,7 +78,8 @@ namespace IQCare.Web.CCC.WebService
         {
             var PSM = new PatientScreeningManager();
             int statusId = Convert.ToInt32(LookupLogic.GetLookupItemId(Status));
-            PatientScreening[] patientScreeningData = PSM.GetPatientScreeningStatus(Convert.ToInt32(Session["PatientPK"]), statusId).ToArray();
+            int patientId = Convert.ToInt32(Session["PatientPK"]);
+            PatientScreening[] patientScreeningData = PSM.GetPatientScreeningStatus(patientId, statusId).ToArray();
             string jsonScreeningObject = "[]";
             jsonScreeningObject = new JavaScriptSerializer().Serialize(patientScreeningData);
             return jsonScreeningObject;

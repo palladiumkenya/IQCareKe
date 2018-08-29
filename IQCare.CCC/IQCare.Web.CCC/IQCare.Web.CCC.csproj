@@ -258,6 +258,7 @@
     <Content Include="Content\fuelux\js\fuelux.min.js" />
     <Content Include="Content\fuelux\js\npm.js" />
     <Content Include="Content\img\iqSolutions.png" />
+    <Content Include="Content\img\PEPloading.gif" />
     <Content Include="Content\js\awesomplete.js" />
     <Content Include="Content\js\bootstrap-datepicker.js" />
     <Content Include="Content\js\bootstrap.js" />
@@ -302,6 +303,8 @@
     <Content Include="Content\bootstrap-datepicker3.css.map" />
     <Content Include="Content\bootstrap-datepicker.standalone.css.map" />
     <Content Include="Content\bootstrap-datepicker.css.map" />
+    <Content Include="Content\resources\Milestones.pdf" />
+    <Content Include="Content\resources\Tanners.pdf" />
     <None Include="Scripts\jquery-1.9.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />

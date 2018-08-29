@@ -40,26 +40,26 @@
                         <div class="col-md-12 form-group">
                             <uc:tnHIVAwareness ID="HIVAwareness" runat="server" />
                             <uc:tnUnderstanding ID="Understanding" runat="server" />
-                            <div class="section1loading"><img src="../../Images/PEPloading.gif" /></div>
+                            <div class="section1loading"><img src="../../Content/Img/PEPloading.gif" /></div>
                         </div>
                     </div>
                     <div class="step-pane active sample-pane" id="abdatastep2" data-parsley-validate="true" data-show-errors="true" data-step="2">
                         <div class="col-md-12 form-group">
                             <uc:tnDailyRoutine ID="DailyRoutine" runat="server" />
-                            <div class="section2loading"><img src="../../Images/PEPloading.gif" /></div>
+                            <div class="section2loading"><img src="../../Content/Img/PEPloading.gif" /></div>
                         </div>
                     </div>
                     <div class="step-pane active sample-pane" id="abdatastep3" data-parsley-validate="true" data-show-errors="true" data-step="3">
                         <div class="col-md-12 form-group">
                             <uc:tnPsychosocialCircumstances ID="PsychosocialCircumstances" runat="server" />
-                            <div class="section3loading"><img src="../../Images/PEPloading.gif" /></div>
+                            <div class="section3loading"><img src="../../Content/Img/PEPloading.gif" /></div>
                         </div>
                     </div>
                     <div class="step-pane active sample-pane" id="abdatastep4" data-parsley-validate="true" data-show-errors="true" data-step="4">
                         <div class="col-md-12 form-group">
                             <uc:tnScreening ID="Screening" runat="server" />
                             <uc:tnReferralsandNetworks ID="ReferralsandNetworks" runat="server" />
-                            <div class="section4loading"><img src="../../Images/PEPloading.gif" /></div>
+                            <div class="section4loading"><img src="../../Content/Img/PEPloading.gif" /></div>
                         </div>
                     </div>
                     <div id="prevNextButton" class="actions">

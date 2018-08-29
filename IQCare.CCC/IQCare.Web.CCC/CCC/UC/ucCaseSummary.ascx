@@ -29,8 +29,8 @@
 			                        <table id="dtlLabResults" class="table table-bordered table-striped" style="width: 100%">
 				                        <thead>
 					                        <tr>
-                                                <th><span class="text-primary">Date</span></th>
-						                        <th><span class="text-primary">VisitID</span></th>
+                                               <th><span class="text-primary">Date</span></th>
+						                       <%-- <th><span class="text-primary">VisitID</span></th>--%>
 						                        <th><span class="text-primary">Date</span></th>
 						                        <th><span class="text-primary">Investigation(s)</span></th>
 						                        <th><span class="text-primary">Results</span></th>
@@ -190,7 +190,7 @@
     });
 
     $(document).ready(function () {
-         alert("Page iko ready sasa");
+        // alert("Page iko ready sasa");
        // $.hivce.loader('show');
         //GetClinicalSummaryData();
         var previousTriage = $('#dtlPreviousTriage').DataTable({

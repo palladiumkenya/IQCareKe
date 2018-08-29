@@ -34,6 +34,8 @@ using DataAccess.CCC.Repository.Interoperability;
 using DataAccess.CCC.Repository.Pharmacy;
 using DataAccess.CCC.Interface.Adherence;
 using DataAccess.CCC.Repository.Adherence;
+using DataAccess.CCC.Interface.HIVEducation;
+using DataAccess.CCC.Repository.HIVEducation;
 
 namespace DataAccess.CCC.Repository
 {
@@ -152,6 +154,7 @@ namespace DataAccess.CCC.Repository
         private IPatientIptRepository _patientIptRepository;
         private IPatientIptOutcomeRepository _patientIptOutcomeRepository;
         private IPatientIptWorkupRepository _patientIptWorkupRepository;
+        private IPatientTBRxRepository _patientTBRxRepository;
 
         /*Patient categorization*/
         private IPatientCategorizationRepository _patientCategorizationRepository;
@@ -192,7 +195,10 @@ namespace DataAccess.CCC.Repository
 
         //Notes
         private IPatientClinicalNotesRepository _patientClinicalNotesRepository;
-        
+
+        //HIV Followup Education
+        private IHIVEducationRepository _patientHIVEducationRepository;
+
 
         public UnitOfWork(BaseContext context)
         {
@@ -743,6 +749,10 @@ namespace DataAccess.CCC.Repository
         {
             get { return _patientIptWorkupRepository ?? (_patientIptWorkupRepository = new PatientIptWorkupRepository((GreencardContext)_context)); }
         }
+        public IPatientTBRxRepository PatientTBRxRepository
+        {
+            get { return _patientTBRxRepository ?? (_patientTBRxRepository = new PatientTBRxRepository((GreencardContext)_context)); }
+        }
 
         public IPatientFamilyPlanningRepository PatientFamilyPlanningRepository
         {
@@ -960,8 +970,14 @@ namespace DataAccess.CCC.Repository
             get { return _patientClinicalNotesRepository ?? (_patientClinicalNotesRepository = new PatientClinicalNotesRepository((GreencardContext)_context)); }
         }
 
+        public IHIVEducationRepository PatientHIVEducationFollowupRepository
+        {
+            get { return _patientHIVEducationRepository ?? (_patientHIVEducationRepository = new PatientHIVEducationFollowupRepository((GreencardContext)_context)); }
+        }
 
         public ILookupItemRepository LookupItemRepository => _lookupItemRepository ?? (_lookupItemRepository = new LookupItemRepository((LookupContext)_context));
+
+        public object HIVEducationFollowup { get; set; }
 
         // public IPatientAdverseEventOutcomeRepository PatientAdverseEventOutcomeRepository => throw new NotImplementedException();
 

@@ -221,7 +221,7 @@
 										<div class="col-md-12"><label for="personAge" class="control-label pull-left">Age(years)</label></div>
 										<div class="col-md-12">
 											<asp:TextBox runat="server" ID="personAge" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="0" required="true" min="0"></asp:TextBox>
-											<asp:HiddenField ID="dobPrecision" runat="server" ClientIDMode="Static" />
+											<asp:HiddenField ID="dobPrecision" runat="server" ClientIDMode="Static" value="true"/>
 										</div>
 									</div>
 									

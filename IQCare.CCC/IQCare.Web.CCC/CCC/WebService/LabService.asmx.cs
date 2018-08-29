@@ -120,7 +120,7 @@ namespace IQCare.Web.CCC.WebService
                 string VisitID = item.PatientMasterVisitid.ToString();
                 string SampleDate = item.SampleDate.ToString();
                 string ResultsValues = item.ResultValues.ToString();
-                string[] i = new string[5] {"",VisitID, SampleDate, LabName, ResultsValues};
+                string[] i = new string[4] {"", SampleDate, LabName, ResultsValues};
                   rows.Add(i);
                 
             }
