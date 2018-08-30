@@ -77,40 +77,6 @@ namespace IQCare.Common.BusinessProcess.Services
             }
         }
 
-        //public async Task<List<PersonEmergencyView>> GetCurrentPersonEmergency(int PersonId)
-        //{
-        //    try
-        //    {
-        //        StringBuilder sql = new StringBuilder();
-        //        sql.Append("exec pr_OpenDecryptedSession;");
-        //        sql.Append("select * from [dbo].[PersonEmergencyView] where Deleteflag=0 and PersonId =" + PersonId + " Order by CreateDate desc;");
-        //        sql.Append("exec [dbo].[pr_CloseDecryptedSession];");
-
-        //        var personemergencyview = await _unitOfWork.Repository<PersonEmergencyView>().FromSql(sql.ToString());
-
-        //        return personemergencyview.ToList();
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Log.Error(e.Message);
-        //        throw e;
-        //    }
-
-        //}
-
-        public async Task<PersonIdentifier> GetCurrentPersonIdentifier(int personId)
-        {
-            try
-            {
-                var identifier = await _unitOfWork.Repository<PersonIdentifier>().Get(x => x.PersonId == personId && !x.DeleteFlag).OrderByDescending(x => x.CreateDate).FirstOrDefaultAsync();
-                return identifier;
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-        }
-
         public async Task<List<Identifier>> GetPersonIdentifierType(string codeName)
         {
             try

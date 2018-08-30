@@ -8,6 +8,8 @@ using IQCare.Common.Infrastructure;
 using System.Threading.Tasks;
 using System.Threading;
 using IQCare.Common.BusinessProcess.Services;
+using IQCare.Common.Services;
+using Serilog;
 
 namespace IQCareRecords.Common.BusinessProcess.CommandHandlers
 {
@@ -19,60 +21,32 @@ namespace IQCareRecords.Common.BusinessProcess.CommandHandlers
             _unitOfWork=unitOfWork?? throw new ArgumentNullException(nameof(unitOfWork));
         }
 
-       
-        public string msg;
         public async Task<Result<AddPersonIdentifierResponse>> Handle (PersonIdentifierCommand request,CancellationToken cancellationToken)
         {
             try
-
             {
 
-                RegisterPersonService rs = new RegisterPersonService(_unitOfWork);
-                if(request.PersonId> 0)
+                RegisterPersonService registerPersonService = new RegisterPersonService(_unitOfWork);
+                PersonIdentifiersService personIdentifiersService = new PersonIdentifiersService(_unitOfWork);
+                var personIdentifierTypeList = await personIdentifiersService.GetPersonIdentifierByType(request.IdentifierId, request.PersonId);
+                if (personIdentifierTypeList.Count > 0)
                 {
-                    //PersonIdentifier pidm = new PersonIdentifier();
-                    // pidm =await rs.GetCurrentPersonIdentifier(request.IdentifierId,request.PersonId);
-
-                    //if(pidm !=null)
-                    //{
-                    //    //pidm.DeleteFlag = true;
-                    //   //var pdm = await Task.Run(() => rs.UpdatePersonIdentifier(pidm));
-                    //    pidm.IdentifierId = request.IdentifierId;
-                    //    pidm.IdentifierValue = request.IdentifierValue;
-                    //    var finalupdate=await Task.Run(() => rs.UpdatePersonIdentifier(pidm));
-                    //    //var  finalupdate = await rs.addPersonIdentifiers(request.PersonId, request.IdentifierId, request.IdentifierValue, request.UserId);
-                    //    if (finalupdate !=null)
-                    //    {
-                    //        if(finalupdate.Id > 0)
-                    //        {
-                    //            msg += "PersonIdentifier updated successfully";
-                    //        }
-                    //    }
-                    //}
-
-                    //else
-                    //{
-                    //   var finalIdent = await rs.addPersonIdentifiers(request.PersonId, request.IdentifierId, request.IdentifierValue, request.UserId);
-                    //    if (finalIdent != null)
-                    //    {
-                    //        if (finalIdent.Id > 0)
-                    //        {
-                    //            msg += "PersonIdentifierType added successfully";
-                    //        }
-                    //    }
-                    //}
+                    personIdentifierTypeList[0].IdentifierValue = request.IdentifierValue;
+                    await personIdentifiersService.UpdatePersonIdentifierType(personIdentifierTypeList[0]);
                 }
-
-
+                else
+                {
+                    await personIdentifiersService.AddPersonIdentifierType(request.PersonId, request.IdentifierId, request.IdentifierValue, request.UserId);
+                }
+                
                 return Result<AddPersonIdentifierResponse>.Valid(new AddPersonIdentifierResponse()
-                    {
-                    Message = msg
+                {
+                    Message = "Successfully add person identifier"
                 });
-
-
             }
             catch(Exception e)
             {
+                Log.Error(e.Message + " " + e.InnerException);
                 return Result<AddPersonIdentifierResponse>.Invalid(e.Message);
             }
         }

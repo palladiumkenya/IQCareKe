@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using IQCare.Common.Core.Models;
 using IQCare.Common.Infrastructure;
-using IQCare.Library;
 using IQCare.Records.BusinessProcess.Command.Registration;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -12,7 +12,7 @@ using PersonKinContactsView = IQCare.Common.Core.Models.PersonKinContactsView;
 
 namespace IQCare.Records.BusinessProcess.CommandHandlers.Registration
 {
-    public class GetPersonKinContactsCommandHandler : IRequestHandler<GetPersonKinContactsCommand, Result<List<PersonKinContactsView>>>
+    public class GetPersonKinContactsCommandHandler : IRequestHandler<GetPersonKinContactsCommand, Library.Result<List<PersonKinContactsView>>>
     {
         private readonly ICommonUnitOfWork _unitOfWork;
         public GetPersonKinContactsCommandHandler(ICommonUnitOfWork unitOfWork)
@@ -20,7 +20,7 @@ namespace IQCare.Records.BusinessProcess.CommandHandlers.Registration
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
 
-        public async Task<Result<List<PersonKinContactsView>>> Handle(GetPersonKinContactsCommand request, CancellationToken cancellationToken)
+        public async Task<Library.Result<List<PersonKinContactsView>>> Handle(GetPersonKinContactsCommand request, CancellationToken cancellationToken)
         {
             using (_unitOfWork)
             {
@@ -32,11 +32,32 @@ namespace IQCare.Records.BusinessProcess.CommandHandlers.Registration
                     sql.Append("exec [dbo].[pr_CloseDecryptedSession];");
 
                     var result = await _unitOfWork.Repository<PersonKinContactsView>().FromSql(sql.ToString());
-                    return Result<List<PersonKinContactsView>>.Valid(result);
+                    for (int i = 0; i < result.Count; i++)
+                    {
+                        var genderList = await _unitOfWork.Repository<LookupItemView>()
+                            .Get(x => x.ItemId == result[i].Sex && x.MasterName == "Gender").ToListAsync();
+
+                        var contactCategoryList = await _unitOfWork.Repository<LookupItemView>().Get(x =>
+                            x.ItemId == result[i].ContactCategory && x.MasterName == "ContactCategory").ToListAsync();
+
+                        List<LookupItemView> contactRelationshipList = new List<LookupItemView>();
+                        if (result[i].ContactRelationship.HasValue && result[i].ContactRelationship.Value > 0)
+                        {
+                            contactRelationshipList = await _unitOfWork.Repository<LookupItemView>().Get(x =>
+                                    x.ItemId == result[i].ContactRelationship.Value && x.MasterName == "KinRelationship")
+                                .ToListAsync();
+                        }
+
+                        result[i].GenderList = genderList;
+                        result[i].ContactCategoryList = contactCategoryList;
+                        result[i].ContactRelationshipList = contactRelationshipList;
+                    }
+
+                    return Library.Result<List<PersonKinContactsView>>.Valid(result);
                 }
                 catch (Exception e)
                 {
-                    return Result<List<PersonKinContactsView>>.Invalid(e.Message);
+                    return Library.Result<List<PersonKinContactsView>>.Invalid(e.Message);
                 }
             }
         }

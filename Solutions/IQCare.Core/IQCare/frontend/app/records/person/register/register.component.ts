@@ -29,7 +29,7 @@ export class RegisterComponent implements OnInit {
     /**
      * Component variables
      */
-    isLinear = false;
+    isLinear = true;
     registerEmergencyContact: boolean = false;
     formGroup: FormGroup;
     /** Returns a FormArray with the name 'formArray'. */
@@ -51,6 +51,7 @@ export class RegisterComponent implements OnInit {
     relationship: LookupItemView[];
     consentSms: LookupItemView[];
     contactCategory: LookupItemView[];
+    personIdentifiers: any[];
 
     dataSource: any[];
     newContacts: any[];
@@ -92,8 +93,8 @@ export class RegisterComponent implements OnInit {
                     MaritalStatus: new FormControl(this.person.maritalStatus, [Validators.required]),
                     EducationLevel: new FormControl(this.person.EducationLevel),
                     Occupation: new FormControl(this.person.Occupation),
-                    IdentifierType: new FormControl(this.person.identifierType),
-                    IdentifierNumber: new FormControl(this.person.identifierNumber)
+                    IdentifierType: new FormControl(this.person.IdentifierType),
+                    IdentifierNumber: new FormControl(this.person.IdentifierNumber, [Validators.required])
                 }),
                 this._formBuilder.group({
                     County: new FormControl(this.clientAddress.County, [Validators.required]),
@@ -112,10 +113,13 @@ export class RegisterComponent implements OnInit {
             ])
         });
 
+        this.formGroup.controls['formArray']['controls'][0]['controls']['IdentifierNumber'].disable({ onlySelf: true });
+
         this.route.data.subscribe((res) => {
             // console.log(res);
             const { countiesArray, genderArray, maritalStatusArray, educationLevelArray,
-                occupationArray, relationshipArray, consentSmsArray, contactCategoryArray } = res;
+                occupationArray, relationshipArray, consentSmsArray, contactCategoryArray,
+                personIdentifiersArray } = res;
             this.counties = countiesArray;
             this.gender = genderArray;
             this.maritalStatus = maritalStatusArray;
@@ -124,6 +128,8 @@ export class RegisterComponent implements OnInit {
             this.relationship = relationshipArray;
             this.consentSms = consentSmsArray;
             this.contactCategory = contactCategoryArray;
+            this.personIdentifiers = personIdentifiersArray['identifers'];
+            console.log(personIdentifiersArray['identifers']);
         });
 
         this.route.params.subscribe(params => {
@@ -134,6 +140,7 @@ export class RegisterComponent implements OnInit {
             this.getPersonDetails(this.id);
         }
     }
+
     getPersonDetails(id: number): any {
         console.log('edit person');
         this.recordsService.getPersonDetails(id).subscribe(
@@ -188,18 +195,30 @@ export class RegisterComponent implements OnInit {
 
         this.personRegistration.getPersonKinContacts(id).subscribe(
             (res) => {
-                console.log(res);
                 for (let i = 0; i < res.length; i++) {
-                    /*this.dataSource.push({
-                        'firstName': res.firstName,
-                        'middleName': res.middleName,
-                        'lastName': res.lastName,
-                        'gender': null,
-                        'contactcategory': null,
-                        'relationship': null,
-                        'phoneno': res.MobileNo,
-                        'consent': null
-                    });*/
+                    // console.log(res[i]);
+                    this.dataSource.push({
+                        'firstName': res[i].firstName,
+                        'middleName': res[i].middleName,
+                        'lastName': res[i].lastName,
+                        'gender': res[i].genderList[0],
+                        'contactcategory': res[i].contactCategoryList[0],
+                        'relationship': res[i].contactRelationshipList[0],
+                        'phoneno': res[i].mobileNo,
+                        'consent': null,
+                        'disabled': 'none'
+                    });
+                }
+            }
+        );
+
+        this.personRegistration.getPersonIdentifiers(id).subscribe(
+            (res) => {
+                console.log(res);
+                if (res.length > 0) {
+                    this.formGroup.controls['formArray']['controls'][0]['controls'].IdentifierType.setValue(res[0]['identifierId']);
+                    this.formGroup.controls['formArray']['controls'][0]['controls'].IdentifierNumber.setValue(res[0]['identifierValue']);
+                    this.formGroup.controls['formArray']['controls'][0]['controls']['IdentifierNumber'].enable({ onlySelf: false });
                 }
             }
         );
@@ -297,7 +316,7 @@ export class RegisterComponent implements OnInit {
         }
     }*/
 
-    onSubmitForm() {
+    onSubmitForm(tabIndex: number) {
         console.log(this.formArray.value);
         console.log(this.formGroup.valid);
         if (this.formGroup.valid) {
@@ -338,9 +357,13 @@ export class RegisterComponent implements OnInit {
                     // Add Emergency Contact
                     const personEmergencyContact = this.personRegistration.registerPersonEmergencyContact(personId,
                         this.person.createdBy, this.newContacts);
+                    // Add Person Identifiers
+                    const personIdentifiersAdd = this.personRegistration.addPersonIdentifiers(personId, this.person.createdBy,
+                        this.person.IdentifierType, this.person.IdentifierNumber);
 
                     forkJoin([personContact, personAddress, personMaritalStatus,
-                        personEducationLevel, personOccupation, personEmergencyContact]).subscribe(
+                        personEducationLevel, personOccupation, personEmergencyContact,
+                        personIdentifiersAdd]).subscribe(
                             (forkRes) => {
                                 console.log(forkRes);
                             },
@@ -349,12 +372,19 @@ export class RegisterComponent implements OnInit {
                                     this.notificationService.getConfig());
                             },
                             () => {
-                                this.zone.run(() => {
-                                    this.router.navigate(['/dashboard/personhome/' + personId],
-                                        { relativeTo: this.route });
-                                });
                                 this.snotifyService.success('Successfully Registered Person', 'Person Registration',
                                     this.notificationService.getConfig());
+
+                                if (tabIndex == 1) {
+                                    this.zone.run(() => {
+                                        this.router.navigate(['/dashboard/personhome/' + personId],
+                                            { relativeTo: this.route });
+                                    });
+                                } else if (tabIndex == 2) {
+                                    this.zone.run(() => {
+                                        this.router.navigate(['/record/person/'], { relativeTo: this.route });
+                                    });
+                                }
                             }
                         );
                 },
@@ -366,6 +396,10 @@ export class RegisterComponent implements OnInit {
         } else {
             return;
         }
+    }
+
+    closeForm() {
+        this.router.navigate(['/dashboard'], { relativeTo: this.route });
     }
 
     addRow() {
@@ -402,7 +436,8 @@ export class RegisterComponent implements OnInit {
                         'contactcategory': data.kinContactType,
                         'relationship': data.kinContactRelationship,
                         'phoneno': data.kinMobileNumber,
-                        'consent': data.kinConsentToSMS
+                        'consent': data.kinConsentToSMS,
+                        'disabled': 'all'
                     }
                 );
 
@@ -445,5 +480,15 @@ export class RegisterComponent implements OnInit {
                 { text: 'No', action: () => console.log('Clicked: No') }
             ]
         });
+    }
+
+    onIdentifierTypeChange() {
+        console.log(`here`);
+        if (this.formArray.value[0]['IdentifierType']) {
+            this.formGroup.controls['formArray']['controls'][0]['controls']['IdentifierNumber'].enable({ onlySelf: false });
+        } else {
+            this.formGroup.controls['formArray']['controls'][0]['controls']['IdentifierNumber'].disable({ onlySelf: true });
+            this.formGroup.controls['formArray']['controls'][0]['controls']['IdentifierNumber'].setValue('');
+        }
     }
 }

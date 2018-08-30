@@ -11,6 +11,7 @@ import { OccupationResolver } from './_services/occupation.resolver';
 import { RelationshipResolver } from './_services/relationship.resolver';
 import { ConsentSmsResolver } from './_services/consentsms.resolver';
 import { ContactCategoryResolver } from './_services/contactcategory.resolver';
+import { PersonIdentifiersResolver } from './_services/personidentifiers.resolver';
 
 const routes: Routes = [
     {
@@ -32,7 +33,8 @@ const routes: Routes = [
                     occupationArray: OccupationResolver,
                     relationshipArray: RelationshipResolver,
                     consentSmsArray: ConsentSmsResolver,
-                    contactCategoryArray: ContactCategoryResolver
+                    contactCategoryArray: ContactCategoryResolver,
+                    personIdentifiersArray: PersonIdentifiersResolver
                 }
             },
             {
@@ -50,7 +52,8 @@ const routes: Routes = [
                     occupationArray: OccupationResolver,
                     relationshipArray: RelationshipResolver,
                     consentSmsArray: ConsentSmsResolver,
-                    contactCategoryArray: ContactCategoryResolver
+                    contactCategoryArray: ContactCategoryResolver,
+                    personIdentifiersArray: PersonIdentifiersResolver
                 }
             }
         ]

@@ -1,4 +1,6 @@
-﻿namespace IQCare.Common.Core.Models
+﻿using System.Collections.Generic;
+
+namespace IQCare.Common.Core.Models
 {
     public class PersonKinContactsView
     {
@@ -18,7 +20,16 @@
 
         public string LastName { get; set; }
 
+        public int Sex { get; set; }
+
         public string MobileNo { get; set; }
+
         public bool DeleteFlag { get; set; }
+
+        public List<LookupItemView> GenderList;
+
+        public List<LookupItemView> ContactCategoryList;
+
+        public List<LookupItemView> ContactRelationshipList;
     }
 }

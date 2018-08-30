@@ -25,11 +25,7 @@ const routes: Routes = [
         loadChildren: '../records/records.module#RecordsModule'
     },
     {
-        path: 'recordold',
-        loadChildren: '../records_old/records_.module#RecordModule'
-    },
-    {
-        path: 'pmtct', 
+        path: 'pmtct',
         loadChildren: '../pmtct/pmtct.module#PmtctModule'
     },
     {
