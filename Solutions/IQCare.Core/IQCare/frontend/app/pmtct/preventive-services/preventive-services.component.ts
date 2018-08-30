@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {LookupItemService} from '../../shared/_services/lookup-item.service';
+import {SnotifyService} from 'ng-snotify';
+import {NotificationService} from '../../shared/_services/notification.service';
+import {Subscription} from 'rxjs/index';
 export interface Options {
   value: string;
   viewValue: string;
@@ -10,25 +15,48 @@ export interface Options {
   styleUrls: ['./preventive-services.component.css']
 })
 export class PreventiveServicesComponent implements OnInit {
-  services: Options[] = [
-    {value: '0', viewValue: 'Tetanus Toxoid 1'},
-    {value: '0', viewValue: 'Tetanus Toxoid 2'},
-    {value: '0', viewValue: 'Tetanus Toxoid 3'},
-    {value: '0', viewValue: 'Tetanus Toxoid 4'},
-    {value: '0', viewValue: 'Tetanus Toxoid 5'},
-    {value: '0', viewValue: 'Malaria Prophylaxis (IPTp1)'},
-    {value: '0', viewValue: 'Malaria Prophylaxis (IPTp2)'},
-    {value: '0', viewValue: 'Malaria Prophylaxis (IPTp3)'},
-    {value: '0', viewValue: 'Dewormed'},
-    {value: '0', viewValue: 'Vitamins'},
-    {value: '0', viewValue: 'Calcium'},
-    {value: '0', viewValue: 'Iron'},
-    {value: '0', viewValue: 'Folate'}
-  ];
+  public PreventiveServicesFormGroup: FormGroup;
+    lookupItemView$: Subscription;
+    services: any[] = [];
+    public yesnos: any[] = [];
 
-  constructor() { }
+
+  constructor(private _formBuilder: FormBuilder, private _lookupItemService: LookupItemService,
+              private  snotifyService: SnotifyService,
+              private notificationService: NotificationService) { }
 
   ngOnInit() {
+    this.PreventiveServicesFormGroup = this._formBuilder.group({
+        preventiveServices: ['', Validators.required],
+        dateGiven: ['', Validators.required],
+        comments: ['', Validators.required],
+        nextSchedule: ['', Validators.required],
+        insecticideTreatedNet: ['', Validators.required],
+        insecticideGivenNet: ['', Validators.required],
+        antenatalExercise: ['', Validators.required],
+        insecticideGivenDate: ['', Validators.required],
+    });
+    this.getLookupItems('PreventiveService', this.services);
+     this.getLookupItems('YesNo', this.yesnos);
   }
+
+    public getLookupItems(groupName: string , _options: any[]) {
+        this.lookupItemView$ = this._lookupItemService.getByGroupName(groupName)
+            .subscribe(
+                p => {
+                    const options = p['lookupItems'];
+                    console.log(options);
+                    for (let i = 0; i < options.length; i++) {
+                        _options.push({ 'itemId': options[i]['itemId'], 'itemName': options[i]['itemName']});
+                    }
+                },
+                (err) => {
+                    console.log(err);
+                    this.snotifyService.error('Error editing encounter ' + err, 'Encounter', this.notificationService.getConfig());
+                },
+                () => {
+                    console.log(this.lookupItemView$);
+                });
+    }
 
 }

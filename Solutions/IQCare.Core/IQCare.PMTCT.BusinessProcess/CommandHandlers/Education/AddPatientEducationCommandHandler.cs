@@ -16,7 +16,7 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.Education
 
         public AddPatientEducationCommandHandler(IPmtctUnitOfWork unitOfWork)
         {
-            _unitOfWork = unitOfWork;
+            _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork)); 
         }
         public async Task<Result<AddPatientEducationCommandResult>> Handle(AddPatientEducationCommand request, CancellationToken cancellationToken)
         {

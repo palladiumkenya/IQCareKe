@@ -1,43 +1,43 @@
-<div class="row">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <div class="row">
-            <div class="col-lg-12 col-md-3 col-sm-6 col-xs-12">
-                <div class="widget">
-                    <div class="widget-header bordered-bottom bordered-blue">
-                        <span class="widget-caption">
-                            <i class="typcn typcn-keyboard"></i> Next Appointment </span>
-                    </div>
-                    <div class="widget-body">
+<form class="form-group" novalidate [formGroup]="NextAppointmentFormGroup" style="margin-top: 10px">
                         <div class="row">
-                            <div class="col-md-2 col-xs-12 col-sm-4">
-                                <mat-radio-group>
-                                    <h5>Scheduled an Appointment</h5>
-                                    <mat-radio-button class="col-m-12" value="1">Yes</mat-radio-button>
-                                    <mat-radio-button class="col-md-12" value="2">No</mat-radio-button>
-                                </mat-radio-group>
+
+                           <div class="col-md-12">
+                               <div class="form-title">
+                                   <span class="primary">Patient Next Appointment </span>
+                               </div>
+                           </div>
+
+
+                            <div class="col-md-4 col-sm-12 col-xs-12">
+                                <mat-form-field class="col-md-12">
+                                    <mat-select placeholder="Scheduled an Appointment" formControlName="scheduledAppointment" required >
+                                        <mat-option *ngFor="let yesno of yesnos" [value]="yesno.itemId">
+                                            {{yesno.itemName}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
                             </div>
-                            <div class="col-md-2 col-xs-12 col-sm-4">
-                                <button mat-raised-button class="primary"> End Encounter</button>
-                            </div>
-                            <div class="col-md-4 col-xs-12 col-sm-4">
+
+                            <div class="col-md-4 col-xs-12 col-sm-12">
                                 <mat-form-field class="col-md-8">
-                                    <input id="nextAppointmentDate" matInput [matDatepicker]="nextAppointmentDate" placeholder="Next appointment Date">
+                                    <input  formControlName="nextAppointmentDate" matInput [matDatepicker]="nextAppointmentDate" placeholder="Next appointment Date">
                                     <mat-datepicker-toggle matSuffix [for]="nextAppointmentDate"></mat-datepicker-toggle>
                                     <mat-datepicker #nextAppointmentDate></mat-datepicker>
                                 </mat-form-field>
                             </div>
-                            <div class="col-md-4 col-xs-12 col-sm-4"></div>
+                            <div class="col-md-2 col-xs-12 col-sm-4"></div>
+
+                            <div class="col-md-2 col-xs-12 col-sm-4">
+                                <button mat-raised-button class="mat-accent"> End Encounter</button>
+                            </div>
+
+
                         </div>
                         <div class="row">
                             <div class="col-md-12">
                                  <mat-form-field class="col-md-12">
-                                  <textarea matInput placeholder="Service Remarks" required></textarea>
+                                  <textarea formControlName="serviceRemarks" matInput placeholder="Service Remarks" required></textarea>
                               </mat-form-field>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+</form>

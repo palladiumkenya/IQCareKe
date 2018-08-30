@@ -18,7 +18,7 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.PreventiveServices
 
         public addPatientPreventiveServicesCommandHandler(ICommonUnitOfWork pmtctUnitOfWork)
         {
-            _pmtctUnitOfWork = pmtctUnitOfWork;  
+            _pmtctUnitOfWork = pmtctUnitOfWork ?? throw new ArgumentNullException(nameof(pmtctUnitOfWork));
         }
         public async Task<Result<AddPatientPreventiveServiceCommandResponse>> Handle(PatientPreventiveServiceCommand request, CancellationToken cancellationToken)
         {

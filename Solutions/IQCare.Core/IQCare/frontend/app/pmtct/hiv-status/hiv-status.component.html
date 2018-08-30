@@ -1,14 +1,10 @@
 <form class="form-group" novalidate  [formGroup]="HIVStatusFormGroup">
     <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="row">
-                <div class="col-lg-12 col-md-3 col-sm-6 col-xs-12">
-                    <div class="widget">
-                        <div class="widget-header bordered-bottom bordered-blue">
-                            <span class="widget-caption">
-                                <i class="typcn typcn-keyboard"></i> HIV Status </span>
-                        </div>
-                        <div class="widget-body">
+        <div class="col-md-12">
+            <div class="form-title">
+                <span class="mat-accent"> HIV status </span>
+            </div>
+        </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="col-md-4">
@@ -109,19 +105,15 @@
 
                             </div>
 
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div>
-                                        <button class="primary" mat-button matStepperPrevious>Back</button>
-                                        <button class="primary" mat-button matStepperNext>Next</button>
-                                    </div>
-                                </div>
-                            </div>
-
                         </div>
-                    </div>
-                </div>
-            </div>
+
+</form>
+<div class="row">
+    <div class="col-md-12">
+        <div>
+            <button mat-raised-button  class="mat-primary" mat-button matStepperNext style="margin-right:5px">Next</button>
+            <button mat-raised-button class="mat-accent" matStepperPrevious>Previous</button>
+
         </div>
     </div>
-</form>
+</div>

@@ -1,37 +1,32 @@
-<div class="row">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <div class="row">
-            <div class="col-lg-12 col-md-3 col-sm-6 col-xs-12">
-                <div class="widget">
-                    <div class="widget-header bordered-bottom bordered-blue">
-                        <span class="widget-caption">
-                            <i class="typcn typcn-keyboard"></i> HAART & Prophyylaxis </span>
-                    </div>
-                    <div class="widget-body">
-                        <div class="row">
-                                <div class="col-md-4">
-                                        <mat-form-field class="col-md-12">
-                                                <mat-select  placeholder="Preventive Service">
-                                                  <mat-option id="slctTopic" *ngFor="let fromsFacilitie of fromsFacilities" [value]="fromsFacilitie.value">
-                                                    {{fromsFacilitie.viewValue}}
+<form class="form-group" novalidate [formGroup]="ReferralFormGroup">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-title">
+                <span class="primary">Patient Refferals </span>
+            </div>
+        </div>
+
+
+
+                                <div class="col-md-4 col-xs-12 col-sm-12">
+                                        <mat-form-field >
+                                                <mat-select formControlName="referredFrom"  placeholder="Reffered from ">
+                                                  <mat-option  *ngFor="let referral of referrals" [value]="referral.itemId">
+                                                    {{referral.itemName}}
                                                   </mat-option>
                                                 </mat-select>
                                               </mat-form-field>
                                 </div>
-                                <div class="col-md-4">
-                                        <mat-form-field class="col-md-12">
-                                                <mat-select  placeholder="Preventive Service">
-                                                  <mat-option id="slctTopic" *ngFor="let toFacilitie of toFacilities" [value]="toFacilitie.value">
-                                                    {{toFacilitie.viewValue}}
+                                <div class="col-md-4 col-xs-12 col-sm-12">
+                                        <mat-form-field >
+                                                <mat-select formControlName="referredTo"  placeholder="Preventive Service">
+                                                  <mat-option  *ngFor="let referral of referrals" [value]="referral.itemId">
+                                                    {{referral.itemName}}
                                                   </mat-option>
                                                 </mat-select>
                                               </mat-form-field>
                                 </div>
                                 <div class="col-md-4"></div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
+</form>

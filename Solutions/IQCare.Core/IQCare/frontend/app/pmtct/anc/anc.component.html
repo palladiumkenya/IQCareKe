@@ -31,17 +31,21 @@
 
                                 </mat-step>
                                     <mat-step>
-                                        <ng-template matStepLabel>Preventive Sservices & Partner Testing</ng-template>
-
+                                        <ng-template matStepLabel>Preventive Services & Partner Testing</ng-template>
+                                        <app-haart-prophylaxis></app-haart-prophylaxis>
+                                        <app-preventive-services></app-preventive-services>
 
                                     </mat-step>
 
                                     <mat-step>
                                       <ng-template matStepLabel>Refferals</ng-template>
-                                      You are now done.
+                                      <app-referrals></app-referrals>
+
+                                        <app-next-appointment></app-next-appointment>
                                       <div>
-                                        <button mat-raised-button matStepperPrevious>Back</button>
-                                        <button mat-raised-button (click)="stepper.reset()">Reset</button>
+                                        <button mat-raised-button class="mat-warn" matStepperPrevious style="margin-right: 5px">Back</button>
+                                        <button mat-raised-button class="mat-accent" (click)="stepper.reset()" style="margin-right: 5px">Reset Encounter</button>
+                                          <button mat-raised-button class="mat-primary" (click)="stepper.reset()">Complete Encounter</button>
                                       </div>
                                     </mat-step>
                                   </mat-horizontal-stepper>

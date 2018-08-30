@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\IQCare.Common.Infrastructure\IQCare.Common.Infrastructure.csproj" />
     <ProjectReference Include="..\IQCare.PMTCT.Infrastructure\IQCare.PMTCT.Infrastructure.csproj" />
   </ItemGroup>
 

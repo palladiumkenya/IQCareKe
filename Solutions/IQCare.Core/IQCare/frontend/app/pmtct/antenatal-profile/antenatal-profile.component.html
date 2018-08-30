@@ -40,17 +40,21 @@
 
                                                             </div>
                                                         </div>
-                                                        <div class="row" style="margin-top:10px">
-                                                                <div class="col-md-12">
-                                                                        <div class="col-md-12">
-                                                                            <h5><strong>Treated for Syphilis ?</strong></h5>
-                                                                                <mat-radio-group aria-required="true" formControlName="treatedSyphilis" aria-required="true">
-                                                                                    <mat-radio-button class="col-md-12" *ngFor="let yesno of yesnos" value="yesno.itemId">{{yesno.itemName}}</mat-radio-button>
-
-                                                                                </mat-radio-group>
-                                                                        </div>
-                                                                </div>
+                                                        <div class="row" style="margin-top: 10px">
+                                                            <div class="col-lg-4 col-md-3 col-sm-6 col-xs-12">
+                                                                <mat-form-field class="col-md-12 col-xs-12 col-sm-6">
+                                                                    <mat-select placeholder="Treated for Syphilis ?" formControlName="treatedSyphilis" required>
+                                                                        <mat-option [value]="0">Select</mat-option>
+                                                                        <mat-option *ngFor="let yesno of yesnos" [value]="yesno.itemId">
+                                                                            {{yesno.itemName}}
+                                                                        </mat-option>
+                                                                    </mat-select>
+                                                                </mat-form-field>
                                                             </div>
+                                                            <div class="col-lg-8"></div>
+                                                        </div>
+
+
 
 
                             

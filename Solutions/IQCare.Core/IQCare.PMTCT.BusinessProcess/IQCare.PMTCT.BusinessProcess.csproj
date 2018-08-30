@@ -24,8 +24,4 @@
     </Reference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Commands\NewFolder\" />
-  </ItemGroup>
-
 </Project>
