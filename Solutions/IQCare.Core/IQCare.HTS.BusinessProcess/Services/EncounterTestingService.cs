@@ -89,7 +89,36 @@ namespace IQCare.HTS.BusinessProcess.Services
             }
         }
 
-        public async Task<PatientLinkage> addLinkage(int personId, DateTime dateEnrolled, string cccNumber, string facility, int userId, string healthWorker, string carde)
+        public async Task UpdatePersonLinkage(PatientLinkage patientLinkage)
+        {
+            try
+            {
+                _htsunitOfWork.Repository<PatientLinkage>().Update(patientLinkage);
+                await _htsunitOfWork.SaveAsync();
+            }
+            catch (Exception e)
+            {
+                Log.Error(e.Message + " " + e.InnerException);
+                throw e;
+            }
+        }
+
+        public async Task<List<PatientLinkage>> GetPersonLinkage(int personId)
+        {
+            try
+            {
+                var result = await _htsunitOfWork.Repository<PatientLinkage>()
+                    .Get(x => x.DeleteFlag == false && x.PersonId == personId).ToListAsync();
+                return result;
+            }
+            catch (Exception e)
+            {
+                Log.Error(e.Message + " " + e.InnerException);
+                throw e;
+            }
+        }
+
+        public async Task<PatientLinkage> AddLinkage(int personId, DateTime dateEnrolled, string cccNumber, string facility, int userId, string healthWorker, string carde, string remarks, DateTime? artstartdate = null)
         {
             try
             {
@@ -104,7 +133,9 @@ namespace IQCare.HTS.BusinessProcess.Services
                     CreatedBy = userId,
                     CreateDate = DateTime.Now,
                     HealthWorker = healthWorker,
-                    Cadre = carde
+                    Cadre = carde,
+                    Comments = remarks,
+                    ArtStartDate = artstartdate
                 };
 
                 await _htsunitOfWork.Repository<PatientLinkage>().AddAsync(patientLinkage);
