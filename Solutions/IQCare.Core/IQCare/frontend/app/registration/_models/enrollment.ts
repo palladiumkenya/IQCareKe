@@ -6,4 +6,5 @@ export class Enrollment {
     PersonId: number;
     CreatedBy: number;
     RegistrationDate: string;
+    PosId: string;
 }

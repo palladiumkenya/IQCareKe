@@ -601,7 +601,7 @@ namespace IQCare.Common.BusinessProcess.Services
 
 
         public async Task<List<MstPatient>> InsertIntoBlueCard(string firstName, string lastName, string midName, DateTime dateOfEnrollment, 
-            string maritalStatusName, string physicalAddress, string mobileNumber, string sex, string isDobPrecision, DateTime dob, int createdBy)
+            string maritalStatusName, string physicalAddress, string mobileNumber, string sex, string isDobPrecision, DateTime dob, int createdBy, string posId)
         {
             try
             {
@@ -610,7 +610,12 @@ namespace IQCare.Common.BusinessProcess.Services
                 lastName = string.IsNullOrWhiteSpace(lastName) ? "" : lastName.Replace("'", "''");
 
                 LookupLogic lookupLogic = new LookupLogic(_unitOfWork);
-                Facility facility = await _unitOfWork.Repository<Facility>().Get(x => x.DeleteFlag == 0).FirstOrDefaultAsync();
+                Facility facility = await _unitOfWork.Repository<Facility>().Get(x => x.PosID == posId).FirstOrDefaultAsync();
+                if (facility == null)
+                {
+                    facility = await _unitOfWork.Repository<Facility>().Get(x => x.DeleteFlag == 0).FirstOrDefaultAsync();
+                }
+
                 var referralId = await lookupLogic.GetDecodeIdByName("VCT", 17);
 
                 var maritalStatusId = await lookupLogic.GetDecodeIdByName(maritalStatusName, 17);
