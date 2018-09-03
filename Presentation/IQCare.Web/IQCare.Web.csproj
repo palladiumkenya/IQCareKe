@@ -240,9 +240,17 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="Telerik.Web.Design, Version=2013.3.1114.40, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Telerik.Web.Design.dll</HintPath>
+    </Reference>
     <Reference Include="Telerik.Web.UI, Version=2014.1.225.40, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Library\Telerik.Web.UI.dll</HintPath>
+      <HintPath>..\..\References\Telerik.Web.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Web.UI.Skins, Version=2014.1.225.40, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Telerik.Web.UI.Skins.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -303,6 +311,7 @@
     <Content Include="AdminForms\frmAdmin_VillageChairperson.aspx" />
     <Content Include="AdminForms\frmConfig_Customfields.aspx" />
     <Content Include="ClinicalForms\FindPatient.aspx" />
+    <Content Include="Content\bootstrap\bootbox.js" />
     <Content Include="Content\css\awesomplete.css" />
     <Content Include="Content\css\bootstrap-callout.css" />
     <Content Include="Content\css\datepicker.css" />
@@ -343,22 +352,35 @@
     <Content Include="Content\toast\js\toastr.js" />
     <Content Include="favicon.ico" />
     <Content Include="frmFacilityHome.aspx" />
+    <Content Include="frmFindAddCustom.aspx" />
     <Content Include="Home\Default.aspx" />
     <Content Include="hts\Home.aspx" />
+    <Content Include="Images\arrow-dn.gif" />
+    <Content Include="Images\arrow-up.gif" />
+    <Content Include="Images\closeButton1.png" />
+    <Content Include="Images\evening1.jpg" />
     <Content Include="Images\iq_logo_small.gif" />
     <Content Include="Images\kenya1.png" />
     <Content Include="Images\kenya_small.png" />
     <Content Include="Images\logo.png" />
     <Content Include="Images\mb_hand.gif" />
+    <Content Include="Images\midday1.jpg" />
+    <Content Include="Images\morning1.jpg" />
+    <Content Include="Images\night2.jpg" />
     <Content Include="MasterPage\levelTwoNavigationUserControl.ascx" />
     <Content Include="Patient\AddTechnicalArea.aspx" />
     <Content Include="Patient\FindAdd.aspx" />
     <Content Include="Patient\Registration.aspx" />
     <Content Include="Pharmacy\Requests\EditPharmacyPrescription.aspx" />
+    <Content Include="PMSCM\frmPharmacyDispense_FindPatient.aspx" />
+    <Content Include="PMSCM\frmPharmacyDispense_PatientOrder.aspx" />
+    <Content Include="PMSCM\frmPharmacy_Dashboard.aspx" />
+    <Content Include="PMSCM\PharmacyDashboard.aspx" />
     <Content Include="Statistics\Facility.aspx" />
     <Content Include="Statistics\HEI.aspx" />
     <Content Include="Statistics\HivCare.aspx" />
     <Content Include="Statistics\PMTCT.aspx" />
+    <Content Include="UC\UserControl_Loading.ascx" />
     <Content Include="WardAdmission\Home.aspx" />
     <Content Include="WardAdmission\NewAdmission.aspx" />
     <Content Include="clientaccesspolicy.xml" />
@@ -2181,6 +2203,13 @@
     <Compile Include="frmFacilityHome.aspx.designer.cs">
       <DependentUpon>frmFacilityHome.aspx</DependentUpon>
     </Compile>
+    <Compile Include="frmFindAddCustom.aspx.cs">
+      <DependentUpon>frmFindAddCustom.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmFindAddCustom.aspx.designer.cs">
+      <DependentUpon>frmFindAddCustom.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -2348,6 +2377,34 @@
       <DependentUpon>EditPharmacyPrescription.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="PMSCM\frmPharmacyDispense_FindPatient.aspx.cs">
+      <DependentUpon>frmPharmacyDispense_FindPatient.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PMSCM\frmPharmacyDispense_FindPatient.aspx.designer.cs">
+      <DependentUpon>frmPharmacyDispense_FindPatient.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PMSCM\frmPharmacyDispense_PatientOrder.aspx.cs">
+      <DependentUpon>frmPharmacyDispense_PatientOrder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PMSCM\frmPharmacyDispense_PatientOrder.aspx.designer.cs">
+      <DependentUpon>frmPharmacyDispense_PatientOrder.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PMSCM\frmPharmacy_Dashboard.aspx.cs">
+      <DependentUpon>frmPharmacy_Dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PMSCM\frmPharmacy_Dashboard.aspx.designer.cs">
+      <DependentUpon>frmPharmacy_Dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PMSCM\PharmacyDashboard.aspx.cs">
+      <DependentUpon>PharmacyDashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PMSCM\PharmacyDashboard.aspx.designer.cs">
+      <DependentUpon>PharmacyDashboard.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ProgressControl.ascx.designer.cs">
       <DependentUpon>ProgressControl.ascx</DependentUpon>
     </Compile>
@@ -2474,6 +2531,13 @@
     </Compile>
     <Compile Include="Statistics\PMTCT.aspx.designer.cs">
       <DependentUpon>PMTCT.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UC\UserControl_Loading.ascx.cs">
+      <DependentUpon>UserControl_Loading.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UC\UserControl_Loading.ascx.designer.cs">
+      <DependentUpon>UserControl_Loading.ascx</DependentUpon>
     </Compile>
     <Compile Include="WardAdmission\AdmitPatient.ascx.designer.cs">
       <DependentUpon>AdmitPatient.ascx</DependentUpon>

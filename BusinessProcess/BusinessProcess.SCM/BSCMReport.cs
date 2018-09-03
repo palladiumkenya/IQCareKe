@@ -176,5 +176,29 @@ namespace BusinessProcess.SCM
             }
             
         }
+
+        public DataSet PharmacyDashBoard(int StoreId)
+        {
+            lock (this)
+            {
+                try
+                {
+                    ClsUtility.Init_Hashtable();
+                    ClsObject objPOdetails = new ClsObject();
+                    ClsUtility.AddParameters("@StoreId", SqlDbType.Int, StoreId.ToString());
+                    return (DataSet)objPOdetails.ReturnObject(ClsUtility.theParams, "pr_SCM_GetDashBoardDetails", ClsUtility.ObjectEnum.DataSet);
+                }
+                catch
+                {
+                    throw;
+                }
+                finally
+                {
+                    if (this.Connection != null)
+                        DataMgr.ReleaseConnection(this.Connection);
+                }
+            }
+        }
+
     }
 }
