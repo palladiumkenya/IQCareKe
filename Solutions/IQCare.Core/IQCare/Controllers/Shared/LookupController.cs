@@ -131,12 +131,12 @@ namespace IQCare.Controllers.Common
         [HttpGet("getContactType")]
         public async Task<IActionResult> GetContactType()
         {
-            string[] options = new string[] {"PersonContactType"};
+            string[] options = new string[] { "PersonContactType" };
             var results = await _mediator.Send(new GetRegistrationOptionsCommand { RegistrationOptions = options }, HttpContext.RequestAborted);
             if (results.IsValid)
                 return Ok(results.Value);
             return BadRequest(results);
-
+        }
         //}
         [HttpGet("getRelOptions")]
         public async Task<IActionResult> GetRelationshipOptions()

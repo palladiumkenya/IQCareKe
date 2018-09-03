@@ -116,6 +116,9 @@
     <Reference Include="Entities.Queue">
       <HintPath>..\..\References\Entities.Queue.dll</HintPath>
     </Reference>
+    <Reference Include="Entity.WebApi">
+      <HintPath>..\..\References\Entity.WebApi.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Library\EntityFramework.dll</HintPath>
@@ -162,6 +165,9 @@
     </Reference>
     <Reference Include="IQCare.CustomConfig, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\References\IQCare.CustomConfig.dll</HintPath>
+    </Reference>
+    <Reference Include="IQCare.Events">
+      <HintPath>..\..\References\IQCare.Events.dll</HintPath>
     </Reference>
     <Reference Include="IQCare.IQControl, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\References\IQCare.IQControl.dll</HintPath>

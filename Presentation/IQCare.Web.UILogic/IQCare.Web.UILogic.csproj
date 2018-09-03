@@ -58,6 +58,10 @@
     </Reference>
     <Reference Include="Interface.PatientCore, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Interface.Security, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="IQCare.Events, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\IQCare.Events.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
