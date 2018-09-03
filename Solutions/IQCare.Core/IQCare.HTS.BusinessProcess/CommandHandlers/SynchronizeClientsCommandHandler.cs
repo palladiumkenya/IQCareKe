@@ -55,6 +55,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                     }
                 }
                 var afyaMobileMessage = await registerPersonService.AddAfyaMobileInbox(DateTime.Now, afyaMobileId, JsonConvert.SerializeObject(request), false);
+
                 try
                 {
                     var facilityId = request.MESSAGE_HEADER.SENDING_FACILITY;
@@ -141,7 +142,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                             {
                                 //Add Person to mst_patient
                                 var mstResult = await registerPersonService.InsertIntoBlueCard(firstName, lastName,
-                                    middleName, dateEnrollment, maritalStatusName, physicalAddress, mobileNumber, gender, dobPrecision, dateOfBirth, userId);
+                                    middleName, dateEnrollment, maritalStatusName, physicalAddress, mobileNumber, gender, dobPrecision, dateOfBirth, userId, facilityId);
                                 if (mstResult.Count > 0)
                                 {
                                     patient = await registerPersonService.AddPatient(identifiers[0].PersonId, userId, facilityId);
@@ -585,7 +586,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                 dateOfBirth, userId);
                             //Add Person to mst_patient
                             var mstResult = await registerPersonService.InsertIntoBlueCard(firstName, lastName,
-                                middleName, dateEnrollment, maritalStatusName, physicalAddress, mobileNumber, gender, dobPrecision, dateOfBirth, userId);
+                                middleName, dateEnrollment, maritalStatusName, physicalAddress, mobileNumber, gender, dobPrecision, dateOfBirth, userId, facilityId);
                             if (mstResult.Count > 0)
                             {
                                 //Add PersonIdentifiers
