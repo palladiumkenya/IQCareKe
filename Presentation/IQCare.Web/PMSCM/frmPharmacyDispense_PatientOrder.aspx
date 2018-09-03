@@ -779,25 +779,25 @@
                                                                                             <asp:Label ID="lblExpiryDate" runat="server" Width="100%" Text='<%# Bind("ExpiryDate") %>'></asp:Label>
                                                                                         </ItemTemplate>
                                                                                     </asp:TemplateField>
-                                                                                    <asp:TemplateField HeaderText="Morning" HeaderImageUrl="~/Images/morning1.jpg" HeaderStyle-Width="80px">
+                                                                                    <asp:TemplateField HeaderText="Morning" HeaderImageUrl="~/Images/sunrise.png" HeaderStyle-Width="80px">
                                                                                         <ItemTemplate>
                                                                                             <asp:TextBox ID="txtMorning" runat="server" Width="100%" Text='<%# Bind("Morning") %>'
                                                                                                 onkeyup="chkDecimal('<%=txtMorning.ClientID%>')" class="form-control"></asp:TextBox>
                                                                                         </ItemTemplate>
                                                                                     </asp:TemplateField>
-                                                                                    <asp:TemplateField HeaderText="Midday" HeaderImageUrl="~/Images/midday1.jpg" HeaderStyle-Width="80px">
+                                                                                    <asp:TemplateField HeaderText="Midday" HeaderImageUrl="~/Images/lunch.png" HeaderStyle-Width="80px">
                                                                                         <ItemTemplate>
                                                                                             <asp:TextBox ID="txtMidday" runat="server" Width="100%" Text='<%# Bind("Midday") %>'
                                                                                                 class="form-control"></asp:TextBox>
                                                                                         </ItemTemplate>
                                                                                     </asp:TemplateField>
-                                                                                    <asp:TemplateField HeaderText="Evening" HeaderImageUrl="~/Images/evening1.jpg" HeaderStyle-Width="80px">
+                                                                                    <asp:TemplateField HeaderText="Evening" HeaderImageUrl="~/Images/sunset.png" HeaderStyle-Width="80px">
                                                                                         <ItemTemplate>
                                                                                             <asp:TextBox ID="txtEvening" runat="server" Width="100%" Text='<%# Bind("Evening") %>'
                                                                                                 class="form-control"></asp:TextBox>
                                                                                         </ItemTemplate>
                                                                                     </asp:TemplateField>
-                                                                                    <asp:TemplateField HeaderText="Night" HeaderImageUrl="~/Images/night2.jpg" HeaderStyle-Width="80px">
+                                                                                    <asp:TemplateField HeaderText="Night" HeaderImageUrl="~/Images/night.png" HeaderStyle-Width="80px">
                                                                                         <ItemTemplate>
                                                                                             <asp:TextBox ID="txtNight" runat="server" Width="100%" Text='<%# Bind("Night") %>'
                                                                                                 class="form-control"></asp:TextBox>
