@@ -282,15 +282,15 @@
                                     <div class="row">
                                         <div class="col-xs-7">
                                             <div class="row">
-                                                <div class="col-md-4 col-sm-12 col-xs-12 form-group">
+                                                <div class="col-md-4 col-sm-12 col-xs-12 form-group text-left" >
                                                     <label for="inputEmail3" class="control-label">
                                                         Start Weight (kg)</label>
                                                 </div>
-                                                <div class="col-md-4 col-sm-12 col-xs-12 form-group">
+                                                <div class="col-md-4 col-sm-12 col-xs-12 form-group text-left">
                                                     <label for="inputEmail3" class="control-label">
                                                         Start Height (cm)</label>
                                                 </div>
-                                                <div class="col-md-4 col-sm-12 col-xs-12 form-group">
+                                                <div class="col-md-4 col-sm-12 col-xs-12 form-group text-left">
                                                     <label for="inputEmail3" class="control-label">
                                                         Start BSA</label>
                                                 </div>
@@ -307,15 +307,15 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-4 col-sm-12 col-xs-12 form-group">
+                                                <div class="col-md-4 col-sm-12 col-xs-12 form-group text-left">
                                                     <label for="inputEmail3" class="control-label">
                                                         Current Weight (kg)</label>
                                                 </div>
-                                                <div class="col-md-4 col-sm-12 col-xs-12 form-group">
+                                                <div class="col-md-4 col-sm-12 col-xs-12 form-group text-left">
                                                     <label for="inputEmail3" class="control-label">
                                                         Current Height (cm)</label>
                                                 </div>
-                                                <div class="col-md-4 col-sm-12 col-xs-12 form-group">
+                                                <div class="col-md-4 col-sm-12 col-xs-12 form-group text-left">
                                                     <label for="inputEmail3" class="control-label">
                                                         Current BSA</label>
                                                 </div>
@@ -333,15 +333,15 @@
                                             </div>
                                             <hr />
                                             <div class="row">
-                                                <div class="col-md-4 col-sm-12 col-xs-12 form-group">
+                                                <div class="col-md-4 col-sm-12 col-xs-12 form-group text-left">
                                                     <label for="inputEmail3" class="control-label">
                                                         Start regimen at this facility</label>
                                                 </div>
-                                                <div class="col-md-4 col-sm-12 col-xs-12 form-group">
+                                                <div class="col-md-4 col-sm-12 col-xs-12 form-group text-left">
                                                     <label for="inputEmail3" class="control-label">
                                                         Start Regimen Line</label>
                                                 </div>
-                                                <div class="col-md-4 col-sm-12 col-xs-12 form-group">
+                                                <div class="col-md-4 col-sm-12 col-xs-12 form-group text-left">
                                                     <label for="inputEmail3" class="control-label">
                                                         Start Regimen Date</label>
                                                 </div>
@@ -358,15 +358,15 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-4 col-sm-12 col-xs-12 form-group">
+                                                <div class="col-md-4 col-sm-12 col-xs-12 form-group text-left">
                                                     <label for="inputEmail3" class="control-label">
                                                         Last Regimen</label>
                                                 </div>
-                                                <div class="col-md-4 col-sm-12 col-xs-12 form-group">
+                                                <div class="col-md-4 col-sm-12 col-xs-12 form-group text-left">
                                                     <label for="inputEmail3" class="control-label">
                                                         Last Regimen Line</label>
                                                 </div>
-                                                <div class="col-md-4 col-sm-12 col-xs-12 form-group">
+                                                <div class="col-md-4 col-sm-12 col-xs-12 form-group text-left">
                                                     <label for="inputEmail3" class="control-label">
                                                     </label>
                                                 </div>
@@ -386,11 +386,11 @@
                                         <%--Col 2 Start--%>
                                         <div class="col-xs-5">
                                             <div class="row">
-                                                <div class="col-md-4 col-sm-12 col-xs-12 form-group">
+                                                <div class="col-md-4 col-sm-12 col-xs-12 form-group text-left">
                                                     <label for="inputEmail3" class="control-label">
                                                         On TB Treatment</label>
                                                 </div>
-                                                <div class="col-md-4 col-sm-12 col-xs-12 form-group">
+                                                <div class="col-md-4 col-sm-12 col-xs-12 form-group text-left">
                                                     <label for="inputEmail3" class="control-label">
                                                         <asp:Label ID="lblIPTStartDate" runat="server" Font-Bold="True" Text="IPT Start Date:"></asp:Label>
                                                     </label>
@@ -421,7 +421,7 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-4 col-sm-12 col-xs-12 form-group">
+                                                <div class="col-md-4 col-sm-12 col-xs-12 form-group text-left">
                                                     <label for="inputEmail3" class="control-label">
                                                         <asp:Label ID="lblIPTEndDate" runat="server" Font-Bold="True" Text="IPT End Date"></asp:Label>
                                                     </label>
@@ -439,6 +439,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            
                                             <hr />
                                             <div class="row">
                                                 <div class="col-md-4 col-sm-12 col-xs-12 form-group">
@@ -451,7 +452,7 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-2 col-sm-12 col-xs-12 form-group">
+                                                <div class="col-md-2 col-sm-12 col-xs-12 form-group text-left">
                                                     <label for="inputEmail3" class="control-label">
                                                         Previous Appointment</label>
                                                 </div>
@@ -465,14 +466,14 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-2 col-sm-12 col-xs-12 form-group">
+                                                <div class="col-md-2 col-sm-12 col-xs-12 form-group text-left">
                                                     <label for="inputEmail3" class="control-label">
                                                         Days to Next appointment</label>
                                                 </div>
                                                 <div class="col-md-3 col-sm-12 col-xs-12 form-group" style="margin-left: 5px;">
                                                     <asp:TextBox ID="txtDaysToNextAppt" runat="server" Width="65px" CssClass="form-control"></asp:TextBox>
                                                 </div>
-                                                <div class="col-md-3 col-sm-12 col-xs-12 form-group">
+                                                <div class="col-md-4 col-sm-12 col-xs-12 form-group">
                                                     <div style="width: 100%; margin: 0px auto;">
                                                         <div style="float: left">
                                                             <asp:TextBox ID="txtNextApptDate" runat="server" Width="108px" CssClass="form-control"></asp:TextBox></div>
@@ -492,20 +493,7 @@
                                     <div class="row">
                                         <div class="col-xs-6">
                                             <div class="row">
-                                                <div class="col-md-4 col-sm-12 col-xs-12 form-group">
-                                                    <label for="inputEmail3" class="control-label">
-                                                        Treatment Plan</label>
-                                                </div>
-                                                <div class="col-md-6 col-sm-12 col-xs-12 form-group">
-                                                    <asp:DropDownList ID="ddlTreatmentPlan" runat="server" Width="99%" Enabled="True"
-                                                        CssClass="form-control">
-                                                    </asp:DropDownList>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-6">
-                                            <div class="row">
-                                                <div class="col-md-4 col-sm-12 col-xs-12 form-group">
+                                                <div class="col-md-4 col-sm-12 col-xs-12 form-group text-left">
                                                     <label for="inputEmail3" class="control-label">
                                                         WHO Stage</label>
                                                 </div>
@@ -514,6 +502,9 @@
                                                     </asp:DropDownList>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            
                                         </div>
                                     </div>
                                 </asp:Panel>
@@ -524,22 +515,22 @@
                             </div>
                             <hr />
                             <div class="row">
-                                <div class="col-xs-6">
+                                <div class="col-xs-4">
                                     <div class="row">
-                                        <div class="col-md-4 col-sm-12 col-xs-12 form-group">
+                                        <div class="col-md-6 col-sm-12 col-xs-12 form-group text-left">
                                             <label for="inputEmail3" class="control-label">
                                                 Patient Classification</label>
                                         </div>
                                         <div class="col-md-6 col-sm-12 col-xs-12 form-group">
-                                            <asp:DropDownList ID="ddlPtnClassification" ClientIDMode="Static" runat="server"
-                                                Width="99%" Enabled="True" CssClass="form-control">
+                                            <asp:DropDownList ID="ddlPtnClassification" ClientIDMode="Static" runat="server" Width="95%"
+                                                Enabled="True" CssClass="form-control">
                                             </asp:DropDownList>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-xs-6">
+                                <div class="col-xs-4">
                                     <div class="row">
-                                        <div class="col-md-4 col-sm-12 col-xs-12 form-group">
+                                        <div class="col-md-6 col-sm-12 col-xs-12 form-group text-left">
                                             <label for="inputEmail3" class="control-label">
                                                 Differenciated Care</label>
                                         </div>
@@ -550,40 +541,77 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-2 col-sm-12 col-xs-12 form-group">
-                                    <label for="inputEmail3" class="control-label">
-                                        Treatment Program</label>
-                                </div>
-                                <div class="col-md-3 col-sm-12 col-xs-12 form-group">
-                                    <asp:DropDownList ID="ddlTreatmentProg" runat="server" Width="95%" CssClass="form-control">
-                                    </asp:DropDownList>
-                                </div>
-                                <div class="col-md-2 col-sm-12 col-xs-12 form-group">
-                                    <label for="inputEmail3" class="control-label">
-                                        <asp:Label ID="lblregimenCode" runat="server" Text="Regimen Code:" CssClass="required"
-                                            Style="visibility: hidden;"></asp:Label>
-                                    </label>
-                                </div>
-                                <div class="col-md-3 col-sm-12 col-xs-12 form-group">
-                                    <asp:DropDownList ID="ddlRegimenCode" runat="server" Width="95%" OnSelectedIndexChanged="ddlRegimenCode_SelectedIndexChanged"
-                                        AutoPostBack="true" CssClass="form-control" Style="visibility: hidden;" EnableViewState="true">
-                                    </asp:DropDownList>
-                                    <asp:HiddenField ID="hdnregimenCode" runat="server" Value="hidden" />
+                                <div class="col-xs-4">
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12 col-xs-12 form-group text-left">
+                                            <label for="inputEmail3" class="control-label">
+                                                Treatment Plan</label>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 col-xs-12 form-group">
+                                            <asp:DropDownList ID="ddlTreatmentPlan" runat="server" Width="95%" Enabled="True"
+                                                CssClass="form-control">
+                                            </asp:DropDownList>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-2 col-sm-12 col-xs-12 form-group">
-                                    <label for="inputEmail3" class="control-label required">
-                                        <asp:Label ID="lblregimenLine" runat="server" Text="Regimen Line:" Style="visibility: hidden;"></asp:Label>
-                                    </label>
+                                <div class="col-xs-4">
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12 col-xs-12 form-group text-left">
+                                            <label for="inputEmail3" class="control-label">
+                                                Treatment Program</label>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 col-xs-12 form-group">
+                                            <asp:DropDownList ID="ddlTreatmentProg" runat="server" Width="95%" CssClass="form-control">
+                                            </asp:DropDownList>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-md-3 col-sm-12 col-xs-12 form-group">
-                                    <asp:DropDownList ID="ddlregimenLine" runat="server" Width="95%" CssClass="form-control"
-                                        Style="visibility: hidden;">
-                                    </asp:DropDownList>
-                                    <asp:HiddenField ID="hdnregimenLine" runat="server" Value="hidden" />
+                                <div class="col-xs-4">
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12 col-xs-12 form-group text-left">
+                                            <label for="inputEmail3" class="control-label required">
+                                                <asp:Label ID="lblregimenLine" runat="server" Text="Regimen Line:" Style="visibility: hidden;"></asp:Label>
+                                            </label>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 col-xs-12 form-group">
+                                            <asp:DropDownList ID="ddlregimenLine" runat="server" Width="95%" CssClass="form-control"
+                                                Style="visibility: hidden;">
+                                            </asp:DropDownList>
+                                            <asp:HiddenField ID="hdnregimenLine" runat="server" Value="hidden" />
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-xs-4">
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12 col-xs-12 form-group text-left">
+                                            <label for="inputEmail3" class="control-label">
+                                                <asp:Label ID="lblregimenCode" runat="server" Text="Regimen Code:" CssClass="required"
+                                                    Style="visibility: hidden;"></asp:Label>
+                                            </label>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 col-xs-12 form-group">
+                                            <asp:DropDownList ID="ddlRegimenCode" runat="server" Width="95%" OnSelectedIndexChanged="ddlRegimenCode_SelectedIndexChanged"
+                                                AutoPostBack="true" CssClass="form-control" Style="visibility: hidden;" EnableViewState="true">
+                                            </asp:DropDownList>
+                                            <asp:HiddenField ID="hdnregimenCode" runat="server" Value="hidden" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    
+                                </div>
+                                <div class="col-xs-4">
+                                    <div class="row">
+                                    </div>
+                                </div>
+                                <div class="col-xs-4">
+                                    <div class="row">
+                                    </div>
                                 </div>
                             </div>
                             <hr />
@@ -687,7 +715,7 @@
                                                         <div class="col-md-4 col-sm-12 col-xs-12 form-group">
                                                             <asp:TextBox ID="txtDrug" runat="server" Width="100%" OnTextChanged="txtDrug_TextChanged"
                                                                 AutoPostBack="True" class="form-control"></asp:TextBox>
-                                                            <asp:Panel ID="divwidth" runat="server" ScrollBars="Vertical" Height="200px" />
+                                                            <asp:Panel ID="divwidth" runat="server" ScrollBars="Vertical" Height="200px" Style="z-index:99" />
                                                         </div>
                                                         <div class="col-md-2 col-sm-12 col-xs-12 form-group" align="left">
                                                             <asp:CheckBox ID="chkAvailDrugs" runat="server" Text="Available Only" TextAlign="Right"

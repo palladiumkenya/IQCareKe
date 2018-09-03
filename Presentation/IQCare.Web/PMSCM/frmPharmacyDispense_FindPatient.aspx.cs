@@ -64,9 +64,10 @@ namespace IQCare.Web.PMSCM
            //(Master.FindControl("pnlExtruder") as Panel).Visible = false;
            //(Master.FindControl("level2Navigation") as Control).Visible = true;
            //(Master.FindControl("levelTwoNavigationUserControl1").FindControl("patientLevelMenu") as Menu).Visible = false;
-           //(Master.FindControl("levelTwoNavigationUserControl1").FindControl("PharmacyDispensingMenu") as Menu).Visible = true;
+           (Master.FindControl("levelOneNavigationUserControl1").FindControl("PharmacyDispensingMenu") as Menu).Visible = true;
+           (Master.FindControl("levelTwoNavigationUserControl1").FindControl("thePnlIdent") as Panel).Visible = false;
 
-           Session["PatientId"] = 0;
+            Session["PatientId"] = 0;
            Session["TechnicalAreaId"] = 201; // 206;        
            ViewState["Facility"] = null;
            if (!IsPostBack)

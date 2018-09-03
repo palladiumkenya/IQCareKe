@@ -268,13 +268,15 @@ namespace IQCare.Web.PMSCM
                 Control myControl1 = (Master.FindControl("mainMaster") as Control);
 
                 (Master.FindControl("levelTwoNavigationUserControl1").FindControl("patientLevelMenu") as Menu).Visible = true;
+                
                 //(Master.FindControl("levelTwoNavigationUserControl1").FindControl("PharmacyDispensingMenu") as Menu).Visible = false;
 
             }
             else //Pharmacy
             {
                 (Master.FindControl("levelTwoNavigationUserControl1").FindControl("patientLevelMenu") as Menu).Visible = false;
-                //(Master.FindControl("levelTwoNavigationUserControl1").FindControl("PharmacyDispensingMenu") as Menu).Visible = true;
+                (Master.FindControl("levelOneNavigationUserControl1").FindControl("PharmacyDispensingMenu") as Menu).Visible = true;
+                (Master.FindControl("levelTwoNavigationUserControl1").FindControl("thePnlIdent") as Panel).Visible = false;
                 //(Master.FindControl("facilityBanner") as Control).Visible = false;
                 //(Master.FindControl("patientBanner") as Control).Visible = false;
                 //(Master.FindControl("username1") as Control).Visible = false;

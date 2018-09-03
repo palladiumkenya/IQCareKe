@@ -292,15 +292,6 @@ namespace IQCare.Web.PMSCM {
         protected global::System.Web.UI.WebControls.TextBox txtNextApptDate;
         
         /// <summary>
-        /// ddlTreatmentPlan control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlTreatmentPlan;
-        
-        /// <summary>
         /// ddlWHOStage control.
         /// </summary>
         /// <remarks>
@@ -346,6 +337,15 @@ namespace IQCare.Web.PMSCM {
         protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkDifferenciatedCare;
         
         /// <summary>
+        /// ddlTreatmentPlan control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlTreatmentPlan;
+        
+        /// <summary>
         /// ddlTreatmentProg control.
         /// </summary>
         /// <remarks>
@@ -353,33 +353,6 @@ namespace IQCare.Web.PMSCM {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlTreatmentProg;
-        
-        /// <summary>
-        /// lblregimenCode control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblregimenCode;
-        
-        /// <summary>
-        /// ddlRegimenCode control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlRegimenCode;
-        
-        /// <summary>
-        /// hdnregimenCode control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdnregimenCode;
         
         /// <summary>
         /// lblregimenLine control.
@@ -407,6 +380,33 @@ namespace IQCare.Web.PMSCM {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hdnregimenLine;
+        
+        /// <summary>
+        /// lblregimenCode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblregimenCode;
+        
+        /// <summary>
+        /// ddlRegimenCode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlRegimenCode;
+        
+        /// <summary>
+        /// hdnregimenCode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnregimenCode;
         
         /// <summary>
         /// lblDispensingStoreLabel control.

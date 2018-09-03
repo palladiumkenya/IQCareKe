@@ -110,12 +110,17 @@ namespace IQCare.Web.Home
                 }
                 else if (landScape.ClickAction == RedirectAction.ModuleAction)
                 {
-                    string folderName = landScape.ServiceAreaName.Replace(" ", string.Empty);
+                    string folderName = landScape.ServiceAreaName.Replace(" ", string.Empty).Replace("/", string.Empty);
                     if (System.IO.File.Exists(Server.MapPath(string.Format("~/{0}/Home.aspx", folderName))))
                     {
                         Guid g = Guid.NewGuid();
                         row["ResourceUrl"] = string.Format("../{1}/Home.aspx?key={0}", g.ToString(), folderName);
 
+                    }
+                    else if(System.IO.File.Exists(Server.MapPath(string.Format("~/{0}/frmPharmacy_Dashboard.aspx", folderName))))
+                    {
+                        Guid g = Guid.NewGuid();
+                        row["ResourceUrl"] = string.Format("../{1}/frmPharmacy_Dashboard.aspx?key={0}", g.ToString(), folderName);
                     }
                     else { row["ResourceUrl"] = ""; }
                 }
