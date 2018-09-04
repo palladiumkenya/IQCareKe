@@ -15,5 +15,6 @@ namespace IQCare.Common.BusinessProcess.Commands.PersonCommand
         public bool IsPartner { get; set; }
         public int? PatientId { get; set; }
         public int CreatedBy { get; set; }
+        public int PosId { get; set; }
     }
 }

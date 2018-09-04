@@ -29,9 +29,15 @@ namespace IQCareRecords.Common.BusinessProcess.CommandHandlers.Registration
 
                 for (int i = 0; i < request.Emergencycontact.Count; i++)
                 {
+                    Facility clientFacility = await _unitOfWork.Repository<Facility>().Get(x => x.PosID == request.Emergencycontact[i].PosId.ToString()).FirstOrDefaultAsync();
+                    if (clientFacility == null)
+                    {
+                        clientFacility = await _unitOfWork.Repository<Facility>().Get(x => x.DeleteFlag == 0).FirstOrDefaultAsync();
+                    }
+
                     //add new person 
                     var contactPerson = await registerPersonService.RegisterPerson(request.Emergencycontact[i].Firstname, request.Emergencycontact[i].Middlename,
-                        request.Emergencycontact[i].Lastname, request.Emergencycontact[i].Gender, request.Emergencycontact[i].CreatedBy, null, DateTime.Now);
+                        request.Emergencycontact[i].Lastname, request.Emergencycontact[i].Gender, request.Emergencycontact[i].CreatedBy, clientFacility.FacilityID, null, DateTime.Now);
 
                     //make the person an emergency contact
                     await personContactsService.Add(request.Emergencycontact[i].PersonId, contactPerson.Id,

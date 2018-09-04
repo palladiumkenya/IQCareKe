@@ -115,22 +115,27 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                             }
                         }
 
-                        //var afyaMobileMessage = await registerPersonService.AddAfyaMobileInbox(DateTime.Now, afyaMobileId, JsonConvert.SerializeObject(request), false);
+                        Facility clientFacility = await _unitOfWork.Repository<Facility>().Get(x => x.PosID == facilityId).FirstOrDefaultAsync();
+                        if (clientFacility == null)
+                        {
+                            clientFacility = await _unitOfWork.Repository<Facility>().Get(x => x.DeleteFlag == 0).FirstOrDefaultAsync();
+                        }
 
                         //check if person already exists
                         var identifiers = await registerPersonService.getPersonIdentifiers(afyaMobileId, 10);
                         if (identifiers.Count > 0)
                         {
                             var registeredPerson = await registerPersonService.GetPerson(identifiers[0].PersonId);
+
                             if (registeredPerson != null)
                             {
                                 var updatedPerson = await registerPersonService.UpdatePerson(identifiers[0].PersonId,
-                                    firstName, middleName, lastName, sex, dateOfBirth);
+                                    firstName, middleName, lastName, sex, dateOfBirth, clientFacility.FacilityID);
                             }
                             else
                             {
                                 var person = await registerPersonService.RegisterPerson(firstName, middleName, lastName,
-                                    sex, userId, dateOfBirth);
+                                    sex, userId, clientFacility.FacilityID, dateOfBirth);
                             }
 
                             var patient = await registerPersonService.GetPatientByPersonId(identifiers[0].PersonId);
@@ -583,7 +588,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         {
                             // Add Person
                             var person = await registerPersonService.RegisterPerson(firstName, middleName, lastName, sex,
-                                userId, dateOfBirth);
+                                userId, clientFacility.FacilityID, dateOfBirth);
                             //Add Person to mst_patient
                             var mstResult = await registerPersonService.InsertIntoBlueCard(firstName, lastName,
                                 middleName, dateEnrollment, maritalStatusName, physicalAddress, mobileNumber, gender, dobPrecision, dateOfBirth, userId, facilityId);
