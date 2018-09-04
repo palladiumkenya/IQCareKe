@@ -1,5 +1,4 @@
-USE [IQCare_LVCT_356]
-GO
+
 
 /****** Object:  StoredProcedure [dbo].[PatientTreatmentSupporter_Update]    Script Date: 5/7/2018 8:30:19 AM ******/
 SET ANSI_NULLS ON
@@ -40,6 +39,7 @@ END
 
 
 
-GO
+
+
 
 

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -778,49 +780,6 @@ namespace IQCare.Common.BusinessProcess.Services
                     var patientInsert = await _unitOfWork.Repository<Patient>().FromSql(sqlPatient);
 
 
-                return patientInsert.FirstOrDefault();
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-        }
-
-        public async Task<Patient> AddPatient(int personID, int userId, int ptn_pk, string facilityId = "")
-        {
-            try
-            {
-                var facility = await _unitOfWork.Repository<Facility>().Get(x => x.DeleteFlag == 0).FirstOrDefaultAsync();
-                var patientType = await _unitOfWork.Repository<LookupItemView>()
-                    .Get(x => x.MasterName == "PatientType" && x.ItemName == "New").FirstOrDefaultAsync();
-
-                var patient = await this.GetPatientByPersonId(personID);
-                if (patient == null)
-                {
-                    var person = await this.GetPerson(personID);
-                    DateTime dateOfBirth = DateTime.Now;
-                    if (person != null)
-                    {
-                        dateOfBirth = person.DateOfBirth;
-                    }
-
-                    if (string.IsNullOrWhiteSpace(facilityId))
-                    {
-                        facilityId = facility.PosID;
-                    }
-
-                    var sqlPatient = "exec pr_OpenDecryptedSession;" +
-                                     "Insert Into  Patient(ptn_pk,PersonId,PatientIndex,PatientType,FacilityId,Active,DateOfBirth,NationalId,DeleteFlag,CreatedBy,CreateDate,AuditData,DobPrecision)" +
-                                     $"Values({ptn_pk}, {personID}, {DateTime.Now.Year + '-' + personID}, '{patientType.ItemId}', '{facilityId}', 1," +
-                                     $"'{dateOfBirth.ToString("yyyy-MM-dd")}', ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '99999999'), 0, '{userId}', GETDATE()," +
-                                     $"NULL, 1);" +
-                                     $"SELECT [Id],[ptn_pk],[PersonId],[PatientIndex],[PatientType],[FacilityId],[Active],[DateOfBirth]," +
-                                     $"[DobPrecision],CAST(DECRYPTBYKEY(NationalId) AS VARCHAR(50)) [NationalId],[DeleteFlag],[CreatedBy]," +
-                                     $"[CreateDate],[AuditData],[RegistrationDate] FROM [dbo].[Patient] WHERE Id = SCOPE_IDENTITY();" +
-                                     $"exec [dbo].[pr_CloseDecryptedSession];";
-
-                    var patientInsert = await _unitOfWork.Repository<Patient>().FromSql(sqlPatient);
-
                     return patientInsert.FirstOrDefault();
                 }
                 else
@@ -834,7 +793,7 @@ namespace IQCare.Common.BusinessProcess.Services
             }
         }
 
-
+        
         public async Task<Patient> AddPatient(int personID, DateTime dateOfBirth, int userId, string facilityId = "")
         {
             try

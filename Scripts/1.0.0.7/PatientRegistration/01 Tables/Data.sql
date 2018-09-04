@@ -488,7 +488,7 @@ END
 go
 
 
-if not exists(select * from ServiceArea% where Name like '%Registration%')
+if not exists(select * from ServiceArea where Name like '%Registration%')
 BEGIN
 insert into ServiceArea(Name,Code,DisplayName,CreatedBy,CreateDate,DeleteFlag)
 values('Registration','REG','Registration',1,GetDate(),0)

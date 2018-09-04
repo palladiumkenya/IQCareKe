@@ -55,10 +55,12 @@ namespace IQCare.Web.Patient
         {
             if (patientId > 0)
             {
+             
                 btncontinue.Enabled = CurrentSession.Current.HasFunctionRight("PATIENT_REGISTRATION", FunctionAccess.Add);
             }
             else
             {
+                
                 btncontinue.Enabled = CurrentSession.Current.HasFunctionRight("PATIENT_REGISTRATION", FunctionAccess.Update);
             }
             if (this.IsPostBack == true)

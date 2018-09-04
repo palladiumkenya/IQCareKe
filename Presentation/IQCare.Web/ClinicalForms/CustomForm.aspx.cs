@@ -5698,6 +5698,7 @@ namespace IQCare.Web.Clinical
             int patientId = Convert.ToInt32(Session["PatientId"]);
             ICustomForm MgrBindValue = (ICustomForm)ObjectFactory.CreateInstance(objFactoryParameter);
             StringBuilder StrLab = new StringBuilder();
+          
             StrLab.Append("select a.LabID,a.LocationID,a.OrderedByName,a.OrderedByDate,a.ReportedByName,");
             StrLab.Append("a.ReportedByDate,a.CheckedByName,a.CheckedByDate,a.PreClinicLabDate, a.LabPeriod,");
             StrLab.Append("b.LabTestID,b.ParameterID[SubTestId],b.TestResults,b.TestResults1,b.TestResultId,b.Financed,");
@@ -5707,7 +5708,8 @@ namespace IQCare.Web.Clinical
             StrLab.Append(" left outer join lnk_labValue f  on  f.UnitId=b.units and f.SubTestId=b.ParameterId,");
             StrLab.Append("lnk_testParameter c, mst_labtest d where a.labid = b.labid and a.labid=");
             StrLab.Append("(Select LabID from Ord_PatientLabOrder where VisitId='" + visitId + "')");
-            StrLab.Append(" and b.parameterid = c.subtestid and c.testid=d.labtestid");
+            StrLab.Append(" and b.parameterid = c.subtestid and c.testid=d.labtestid   ");
+
             DataSet theDSLab = MgrBindValue.Common_GetSaveUpdate(StrLab.ToString());
 
             DataTable dtLabs = new DataTable();
@@ -5969,7 +5971,7 @@ namespace IQCare.Web.Clinical
                 DIVCustomItem.Controls.Add(new LiteralControl("</td>"));
                 DIVCustomItem.Controls.Add(new LiteralControl("<td style='width:60%' align='left'>"));
                 TextBox theSingleDecimalAuto = new TextBox();
-                theSingleDecimalAuto.ID = "TXTAuto-" + fieldName + "-" + fieldName + "-" + fieldId + "-" + tabId;
+                theSingleDecimalAuto.ID = "TXTAuto-" + fieldName + "-" + tableName + "-" + fieldId + "-" + tabId;
 
                 // theSingleDecimalAuto.Width = 180;
                 theSingleDecimalAuto.MaxLength = 10;
@@ -6606,7 +6608,7 @@ namespace IQCare.Web.Clinical
                 theBusinessRuleDV.RowFilter = "BusRuleId=17 and FieldId = " + fieldId.ToString();
                 if (theBusinessRuleDV.Count > 0)
                     theAutoPopulate = true;
-                if (controlReferenceId == "TXT_SINGLE_LINE") ///SingleLine Text Box
+                if (controlReferenceId == "TXT_SINGLE_LINE" ) ///SingleLine Text Box
                 {
                     this.CreateSingleLineField(controlId, fieldName, fieldId, fieldLabel, tableName, tabId, theEnable, theAutoPopulate);
                 }
@@ -6680,6 +6682,10 @@ namespace IQCare.Web.Clinical
                     {
                         this.CreateDiseaseSymptomField(controlId, fieldName, fieldId, fieldLabel, tableName, tabId, theEnable, codeId, bindSource);
                     }
+                }
+                else if(controlReferenceId=="BUTTON")
+                {
+                    this.CreateButtonField(fieldName, fieldId, fieldLabel, tableName, tabId, theEnable);
                 }
                 else if (controlReferenceId == "ICD10_FIELD")
                 {
@@ -6781,11 +6787,48 @@ namespace IQCare.Web.Clinical
                 LabDataBinding();
             }
 
+         
+        }
+
+        private void CreateButtonField(string fieldName, string fieldId, string fieldLabel, string tableName, string tabId, bool theEnable)
+        {
+
+            DIVCustomItem.Controls.Add(new LiteralControl("<table width='100%'>"));
+            DIVCustomItem.Controls.Add(new LiteralControl("<tr>"));
+            DIVCustomItem.Controls.Add(new LiteralControl("<td style='width:100%' align='left'>"));
+            DIVCustomItem.Controls.Add(new LiteralControl("<label align='left' id='lbl" + fieldLabel + "-" + fieldId + "'>" + fieldLabel + ":</label>"));
+            DIVCustomItem.Controls.Add(new LiteralControl("</td>"));
+            DIVCustomItem.Controls.Add(new LiteralControl("</tr>"));
+            DIVCustomItem.Controls.Add(new LiteralControl("<tr>"));
+            DIVCustomItem.Controls.Add(new LiteralControl("<td style='width:100%' align='center'>"));
+            
+            Button theBtn = new Button();
+            theBtn.Width = 100;
+            theBtn.ID = "BtnFrm-" + fieldName + "-" + tableName + "-" + fieldId + "-" + tabId;
+            theBtn.Text = "" + fieldName + "";
+            theBtn.CssClass = "btn btn-primary";
+            theBtn.Style.Add("height", "30px");
+            theBtn.Style.Add("width", "13%");
+            theBtn.Style.Add("text-align", "left");
+            theBtn.Enabled = theEnable;
+            DataView theDV = new DataView((DataTable)ViewState["BusRule"]);
+            theDV.RowFilter = "FieldId=" + fieldId + "";
+            DataView theDVPublish = new DataView((DataTable)ViewState["BusRulePublish"]);
+            theDVPublish.RowFilter = "FeatureID=" + Convert.ToInt32(theDV.ToTable().Rows[0]["Value"]) + "";
+            if (Convert.ToInt32(theDVPublish.ToTable().Rows[0]["Published"]) == 1)
+            {
+                theBtn.Attributes.Add("onclick", "javascript:alert('Please publish this form in order to open'); return false");
+            }
+            else
+            {
+                theBtn.Attributes.Add("onclick", "javascript:OpenDynamicForm('" + Convert.ToInt32(theDV.ToTable().Rows[0]["Value"]) + "', '" + Convert.ToInt32(Session["PatientId"]) + "'); return false");
+            }
+            DIVCustomItem.Controls.Add(theBtn);
             DIVCustomItem.Controls.Add(new LiteralControl("</td>"));
             DIVCustomItem.Controls.Add(new LiteralControl("</tr>"));
             DIVCustomItem.Controls.Add(new LiteralControl("</table>"));
-        }
 
+        }
         private void CreateTimeField(string fieldName, string fieldId, string fieldLabel, string tableName, string tabId, bool theEnable)
         {
             DIVCustomItem.Controls.Add(new LiteralControl("<table width='100%'>"));
@@ -8044,6 +8087,7 @@ namespace IQCare.Web.Clinical
                                     if (td == 1)
                                         DIVCustomItem.Controls.Add(new LiteralControl("<tr>"));
 
+                                 
                                     if (((Convert.ToInt32(fieldRow["Controlid"]) == 9) && (Convert.ToInt32(Session["busRulChk"]) == 1))
                                         || (Convert.ToInt32(fieldRow["Controlid"]) == 11)
                                         || (Convert.ToInt32(fieldRow["Controlid"]) == 12)
@@ -8075,6 +8119,30 @@ namespace IQCare.Web.Clinical
                                     else
                                     {
                                         if ((Convert.ToString(fieldRow["ReferenceId"]) == "TXT_MULTILINE" && (spanfieldflag == true)) || (Convert.ToString(fieldRow["ReferenceId"]) == "TXT_MULTILINE_LARGE"))
+                                        {
+                                            if (td == 1)
+                                            {
+                                                DIVCustomItem.Controls.Add(new LiteralControl("<td class='border center pad5 whitebg' colspan='2' style='width: 100%'>"));
+                                                //  LoadFieldTypeControl(fieldRow["Controlid"].ToString(), fieldRow["FieldName"].ToString(), fieldRow["FieldID"].ToString(), fieldRow["CodeID"].ToString(), fieldRow["FieldLabel"].ToString(), fieldRow["PDFTableName"].ToString(), fieldRow["TabId"].ToString(), fieldRow["BindSource"].ToString(), true);
+                                                this.LoadFieldTypeControl(controlId, controlReferenceId, fieldName, fieldId, fieldLabel, codeId, bindCategory, bindSource, tableName, tabId, true);
+                                                DIVCustomItem.Controls.Add(new LiteralControl("</td>"));
+                                                td = 1;
+                                            }
+                                            else
+                                            {
+                                                DIVCustomItem.Controls.Add(new LiteralControl("<td class='border center pad5 whitebg' style='width: 50%'>"));
+                                                DIVCustomItem.Controls.Add(new LiteralControl("</td>"));
+                                                DIVCustomItem.Controls.Add(new LiteralControl("</tr>"));
+                                                DIVCustomItem.Controls.Add(new LiteralControl("<tr>"));
+                                                DIVCustomItem.Controls.Add(new LiteralControl("<td class='border center pad5 whitebg' colspan='2' style='width: 100%'>"));
+                                                // LoadFieldTypeControl(fieldRow["Controlid"].ToString(), fieldRow["FieldName"].ToString(), fieldRow["FieldID"].ToString(), fieldRow["CodeID"].ToString(), fieldRow["FieldLabel"].ToString(), fieldRow["PDFTableName"].ToString(), fieldRow["TabId"].ToString(), fieldRow["BindSource"].ToString(), true);
+                                                this.LoadFieldTypeControl(controlId, controlReferenceId, fieldName, fieldId, fieldLabel, codeId, bindCategory, bindSource, tableName, tabId, true);
+                                                DIVCustomItem.Controls.Add(new LiteralControl("</td>"));
+                                                DIVCustomItem.Controls.Add(new LiteralControl("</tr>"));
+                                                td = 1;
+                                            }
+                                        }
+                                        else if ((Convert.ToInt32(fieldRow["ControlId"]) == 8) && (spanfieldflag == true))
                                         {
                                             if (td == 1)
                                             {
@@ -10781,22 +10849,35 @@ namespace IQCare.Web.Clinical
                 }
                 SbUpdateParam.Append(sbInsertGridView);
             }
-            # endregion
+            #endregion
 
-            SbUpdateParam.Append(" Delete from dbo.dtl_PatientLabResults where LabID = (Select LabID from dbo.ord_PatientLabOrder");
-            SbUpdateParam.Append(" where ptn_pk=" + patientId + " and VisitID=" + visitId + " and LocationID=" + locationId + ") and TabId=" + tabId + "");
+            SbUpdateParam.Append(" Delete from dbo.dtl_LabOrderTestResult where LabOrderId = (Select plo.LabID from dbo.ord_PatientLabOrder plo inner join  dtl_PatientLabResults plr on plr.LabID =plo.LabID  ");
+            SbUpdateParam.Append(" where plo.ptn_pk=" + patientId + " and plo.VisitID=" + visitId + " and plo.LocationID=" + locationId + " and plr.TabId=" + tabId + ")");
+           // SbUpdateParam.Append(" Delete from dbo.dtl_PatientLabResults where LabID = (Select LabID from dbo.ord_PatientLabOrder");
+           // SbUpdateParam.Append(" where ptn_pk=" + patientId + " and VisitID=" + visitId + " and LocationID=" + locationId + ") and TabId=" + tabId + "");
             SbUpdateParam.Append(" Delete from dbo.Dtl_PatientBillTransaction where LabID = (Select LabID from dbo.ord_PatientLabOrder");
-            SbUpdateParam.Append(" where ptn_pk=" + patientId + " and VisitID=" + visitId + " and LocationID=" + locationId + ");");
+            SbUpdateParam.Append(" where ptn_pk=" + patientId + " and VisitID=" + visitId + " and LocationID=" + locationId + ");   ");
             if (ds.Tables[0].Rows.Count > 0)
             {
+
+
                 SbUpdateParam.Append(" if not exists(Select * from [ord_PatientLabOrder] where ptn_pk=" + patientId + "");
                 SbUpdateParam.Append(" and VisitID=" + visitId + " and LocationID=" + locationId + ")");
                 SbUpdateParam.Append(" Begin");
-                SbUpdateParam.Append(" Insert into [ord_PatientLabOrder](ptn_pk, VisitID, LocationID, OrderedbyName, OrderedbyDate, ReportedbyName, ReportedbyDate, UserID, CreateDate)");
+                SbUpdateParam.Append(" Insert into [ord_LabOrder](ptn_pk, VisitID, LocationID, Orderedby, OrderedDate,  UserID, CreateDate)");
                 SbUpdateParam.Append(" Values(" + patientId + "," + visitId + "," + locationId + "," + ddSignature.SelectedValue + ", '" + txtvisitDate.Text + "',");
-                SbUpdateParam.Append("" + Signature + ", '" + txtvisitDate.Text + "'," + Session["AppUserId"] + ", getdate())");
+                SbUpdateParam.Append("" + Session["AppUserId"] + ", getdate())");
                 SbUpdateParam.Append(" End");
+                //SbUpdateParam.Append(" Select LocationID, LabID[LabID],UserID from ord_PatientLabOrder where VisitID=" + visitId + "");
+                //SbUpdateParam.Append(" if not exists(Select * from [ord_PatientLabOrder] where ptn_pk=" + patientId + "");
+                //SbUpdateParam.Append(" and VisitID=" + visitId + " and LocationID=" + locationId + ")");
+                //SbUpdateParam.Append(" Begin");
+                //SbUpdateParam.Append(" Insert into [ord_PatientLabOrder](ptn_pk, VisitID, LocationID, OrderedbyName, OrderedbyDate, ReportedbyName, ReportedbyDate, UserID, CreateDate)");
+                //SbUpdateParam.Append(" Values(" + patientId + "," + visitId + "," + locationId + "," + ddSignature.SelectedValue + ", '" + txtvisitDate.Text + "',");
+                //SbUpdateParam.Append("" + Signature + ", '" + txtvisitDate.Text + "'," + Session["AppUserId"] + ", getdate())");
+                //SbUpdateParam.Append(" End");
                 SbUpdateParam.Append(" Select LocationID, LabID[LabID],UserID from ord_PatientLabOrder where VisitID=" + visitId + "");
+             
             }
             else { SbUpdateParam.Append(" Select '00000'[LabID]"); }
 

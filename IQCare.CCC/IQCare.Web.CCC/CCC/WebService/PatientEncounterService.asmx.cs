@@ -193,15 +193,15 @@ namespace IQCare.Web.CCC.WebService
             if (pmlist != null)
             {
                 PreviousMasterVisitId = pmlist.Id;
-                patientvisitdate = pmlist.VisitDate;
+             patientvisitdate = pmlist.VisitDate;
             }
             else
             {
-                 PreviousMasterVisitId = 0;
+                PreviousMasterVisitId = 0;
                 patientvisitdate = new DateTime();
             }
-                
-                PatientPartner pat = partman.GetPatientPartner(patientId, PreviousMasterVisitId);
+     
+            PatientPartner pat = partman.GetPatientPartner(patientId, PreviousMasterVisitId);
 
                 List<PatientSexualHistory> patienthistory = psh.GetPatientSexualHistoryList(patientId, PreviousMasterVisitId);
             
