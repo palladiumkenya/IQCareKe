@@ -226,8 +226,9 @@
                            <img src="<%= Page.ResolveClientUrl("~/Images/FGI.jpg") %>" class="img-responsive img-rounded"  alt="Palladium Group"/>
                       </div> 
                         <div class="col-md-4">
-                            <img id="img1" class="img-responsive" alt="International Quality Care"
-                            src="<%= Page.ResolveClientUrl("~/Images/iq_logo_small.gif") %>" border="0" />
+                            <img id="img1" class="img-responsive" alt="International Quality Care" 
+                                src="<%=ResolveUrl("~/Images/iq_logo_small.gif") %>" border="0" />
+                            
                       </div>
                       <div class="col-md-2 text-left text-primary ">
                        <br /> <h4></h4>
