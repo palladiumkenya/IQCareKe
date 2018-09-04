@@ -46,7 +46,7 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
                         PatientMasterVisitId = request.PatientMasterVisitId,
                         ExamId = breastExamId,
                         ExaminationTypeId = examinationTypeId,
-                        FindingId = request.BreastExam
+                        FindingId = request.BreastExamDone
                     };
 
                     int breastExamResult = await _service.AddPatientPhysicalExamination(breastExam);
@@ -58,14 +58,14 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
                         PatientMasterVisitId = request.PatientMasterVisitId,
                         ExamId = syphillisExamId,
                         ExaminationTypeId = examinationTypeId,
-                        FindingId = request.Syphillis
+                        FindingId = request.TreatedSyphilis
                     };
 
                     int syphillisResultId = await _service.AddPatientPhysicalExamination(syphillisExam);
 
                     List<PatientEducation> patientCounselling = new List<PatientEducation>();
 
-                    foreach (var item in request.patientEducation)
+                    foreach (var item in request.CounsellingTopics)
                     {
                         PatientEducation data = new PatientEducation
                         {

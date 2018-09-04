@@ -113,7 +113,7 @@
                                                 </mat-form-field>
                                             </div>
                                             <div class="col-md-2 col-xs-12 col-sm-6">
-                                                <button mat-raised-button color="primary"> Add Illness </button>
+                                                <button mat-raised-button class="mat-primary" (click)="AddOtherIllness()"> Add Illness </button>
                                             </div>
                                         </div>
 
@@ -121,3 +121,11 @@
 
 </div>
 </form>
+<div class="row">
+    <div class="col-md-12">
+        <div>
+            <button mat-raised-button  class="mat-primary" mat-button matStepperNext style="margin-right:5px" (click)="moveNextStep()">Next</button>
+            <button mat-raised-button class="mat-accent"  matStepperPrevious>Previous</button>
+        </div>
+    </div>
+</div>

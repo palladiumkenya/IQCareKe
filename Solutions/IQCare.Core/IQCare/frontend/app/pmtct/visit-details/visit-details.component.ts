@@ -82,7 +82,7 @@ export class VisitDetailsComponent implements OnInit, OnChanges {
                     for (let i = 0; i < options.length; i++) {
                         this.ancVisitTypes.push({ 'itemId': options[i]['itemId'], 'itemName': options[i]['itemName']});
                     }
-                    console.log(options[0]['itemName']);
+                    // console.log(options[0]['itemName']);
                     console.log(this.ancVisitTypes);
                 },
                 (err) => {

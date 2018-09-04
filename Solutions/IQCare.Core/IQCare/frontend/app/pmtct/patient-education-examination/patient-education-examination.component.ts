@@ -1,30 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {  FormBuilder, FormGroup, Validators  } from '@angular/forms';
 import {LookupItemService} from '../../shared/_services/lookup-item.service';
 import {Subscription} from 'rxjs';
 import {NotificationService} from '../../shared/_services/notification.service';
 import { SnotifyService } from 'ng-snotify';
+import {PatientEducationCommand} from '../_models/PatientEducationCommand';
+import {PatientEducationEmitter} from '../emitters/PatientEducationEmitter';
+import {VisitDetails} from '../_models/visitDetails';
 
-export interface Topic {
-  value: string;
-  viewValue: string;
-}
 
-export interface PatientEducation {
-    position: number;
-    dateDone: string;
+
+export interface PeriodicElement {
+    topicId: number;
     topic: string;
+    onSetDate: string;
 }
 
-const PatientEducation_Data: PatientEducation[] = [
-    {position: 1, dateDone: '11/11/2017', topic: 'Birth plans'}
-] ;
+const ELEMENT_DATA: PeriodicElement[] = [
+    {topicId: 1, topic: 'sex', onSetDate: 'Hydrogen'},
+    {topicId: 2, topic: 'church', onSetDate: 'Helium'}
+];
+
+
 
 @Component({
   selector: 'app-patient-education-examination',
   templateUrl: './patient-education-examination.component.html',
   styleUrls: ['./patient-education-examination.component.css']
 })
+
+
 
 export class PatientEducationExaminationComponent implements OnInit {
     PatientEducationFormGroup: FormGroup;
@@ -33,10 +38,16 @@ export class PatientEducationExaminationComponent implements OnInit {
     lookupItemView$: Subscription;
     LookupItems$: Subscription;
     public topics: any[] = [];
+    public testResults: any[] = [];
 
+    public patientEducationEmitterData: PatientEducationEmitter;
 
-  displayedColumns: string[] = ['position', 'dateDone', 'topic'];
-    dataSource = PatientEducation_Data;
+    public counselling_data: any[] = [];
+    @Output() nextStep = new EventEmitter <PatientEducationEmitter> ();
+    @Input() patientEducationData: PatientEducationCommand;
+
+    displayedColumns: string[] = ['topicId', 'topic', 'onSetDate'];
+    dataSource = ELEMENT_DATA;
 
   constructor(private _formBuilder: FormBuilder, private _lookupItemService: LookupItemService,
               private  snotifyService: SnotifyService,
@@ -47,10 +58,12 @@ export class PatientEducationExaminationComponent implements OnInit {
         breastExamDone: ['', Validators.required],
         counsellingDate: ['', Validators.required],
         counselledOn: ['', Validators.required],
-        topicDate: ['', Validators.required]
+        topicDate: ['', Validators.required],
+        treatedSyphilis: ['', Validators.required]
     });
      this.getLookupOptions('counselledOn', this.topics);
      this.getLookupOptions('yesno', this.yesnos);
+      this.getLookupOptions('HivTestingResult', this.testResults);
   }
 
    /* public getCounsellingTopics(groupName: string) {
@@ -90,5 +103,27 @@ export class PatientEducationExaminationComponent implements OnInit {
               });
     }
 
+    public moveNextStep() {
+        console.log(this.PatientEducationFormGroup.value);
 
+        this.patientEducationEmitterData = {
+            breastExamDone : parseInt(this.PatientEducationFormGroup.controls['breastExamDone'].value, 10),
+            treatedSyphilis: parseInt(this.PatientEducationFormGroup.controls['treatedSyphilis'].value, 10 ),
+            counsellingTopics: this.counselling_data
+        };
+
+        console.log(this.patientEducationEmitterData);
+        this.nextStep.emit(this.patientEducationEmitterData);
+    }
+
+    public addTopics() {
+       const topicId = parseInt(this.PatientEducationFormGroup.controls['counselledOn'].value, 10 );
+        if (!this.counselling_data.filter(x => x.counsellingtopicId === topicId)) {
+            this.counselling_data.push({
+                patientId: localStorage.getItem('PatientId'),
+                PatientMasterVisitId: localStorage.getItem('PatientMasterId'),
+                counsellingTopicId: parseInt(this.PatientEducationFormGroup.controls['counselledOn'].value, 10 ),
+                CounsellingDate: this.PatientEducationFormGroup.controls['counsellingDate'].value});
+        }
+    }
 }

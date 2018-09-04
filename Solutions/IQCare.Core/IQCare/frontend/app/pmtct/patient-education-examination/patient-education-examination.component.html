@@ -42,27 +42,86 @@
                                             <mat-datepicker #topicDate></mat-datepicker>
                                         </mat-form-field>
                                     </div>
-
+                                 <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12"></div>
                                     <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
-                                        <button mat-raised-button color="primary"><span class="fa fa-plus-circle"> Add Topic</span> </button>
+                                        <button mat-raised-button color="primary"><span class="fa fa-plus-circle" (click)="addTopics()"> Add Topic</span> </button>
                                     </div>
                               </div>
 
+                                <div class="row">
+                                    <div class="col-lg-12 col-xs-12 col-sm-12">
+                                        <div class="col-lg-12">
+                                            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%;">
+
+                                                <!--- Note that these columns can be defined in any order.
+                                                      The actual rendered columns are set as a property on the row definition" -->
 
 
+                                                <!-- Position Column -->
+                                                <ng-container matColumnDef="topicId">
+                                                    <th mat-header-cell *matHeaderCellDef> No. </th>
+                                                    <td mat-cell *matCellDef="let element"> {{element.topicId}} </td>
+                                                </ng-container>
+
+                                                <!-- Position Column -->
+                                                <ng-container matColumnDef="topic">
+                                                    <th mat-header-cell *matHeaderCellDef> Counselling Topic. </th>
+                                                    <td mat-cell *matCellDef="let element"> {{element.topic}} </td>
+                                                </ng-container>
+
+                                                <!-- Name Column -->
+                                                <ng-container matColumnDef="onSetDate">
+                                                    <th mat-header-cell *matHeaderCellDef> Counselling Date </th>
+                                                    <td mat-cell *matCellDef="let element"> {{element.onSetDate}} </td>
+                                                </ng-container>
+
+
+
+
+                                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="col-md-12">
                                     <app-antenatal-profile></app-antenatal-profile>
+                                </div>
 
+                                <div class="row" style="margin-top: 10px">
+                                    <div class="col-lg-4 col-md-3 col-sm-6 col-xs-12">
+                                        <mat-form-field class="col-md-12 col-xs-12 col-sm-6">
+                                            <mat-select placeholder="Treated for Syphilis ?" formControlName="treatedSyphilis" required>
+                                                <mat-option [value]="0">Select</mat-option>
+                                                <mat-option *ngFor="let yesno of yesnos" [value]="yesno.itemId">
+                                                    {{yesno.itemName}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-xs-12 col-sm-6">
 
+                                        <mat-form-field class="col-md-12">
+                                            <mat-select formControlname="testResult" placeholder="*Before  first ANC  visit  " required>
+                                                <mat-option  placeholder="Test" *ngFor="let testResult of testResults" [value]="testResult.itemId">
+                                                    {{testResult.itemName}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
 
-
-
+                                    <div class="col-lg-4"></div>
+                                </div>
 
     </div>
 </form>
 <div class="row">
     <div class="col-md-12">
         <div>
-            <button mat-raised-button class="mat-accent"  matStepperNext style="margin-right:5px">Next</button>
+            <button mat-raised-button class="mat-accent"  matStepperNext style="margin-right:5px" [disabled]="!PatientEducationFormGroup.valid" (click)="moveNextStep()">Next</button>
             <button mat-raised-button class="mat-primary" matStepperPrevious>Previous</button>
 
         </div>

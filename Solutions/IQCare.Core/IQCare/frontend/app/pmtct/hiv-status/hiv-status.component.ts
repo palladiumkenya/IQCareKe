@@ -1,5 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {  FormBuilder, FormGroup, Validators  } from '@angular/forms';
+import {Subscription} from 'rxjs/index';
+import {NotificationService} from '../../shared/_services/notification.service';
+import {LookupItemService} from '../../shared/_services/lookup-item.service';
+import {SnotifyService} from 'ng-snotify';
+import {PatientEducationEmitter} from '../emitters/PatientEducationEmitter';
+import {PatientEducationCommand} from '../_models/PatientEducationCommand';
+import {HIVTestingEmitter} from '../emitters/HIVTestingEmitter';
 export interface Topic {
     value: number;
     viewValue: string;
@@ -13,36 +20,19 @@ export interface Topic {
 
 export class HivStatusComponent implements OnInit {
 
-    hivTestings: Topic[] = [
-        {value: 1, viewValue: 'Initial'},
-        {value: 2, viewValue: 'Retest;'}
-    ];
-
-    Tests: Topic[] = [
-        {value: 1, viewValue: 'HIV Test-1'},
-        {value: 2, viewValue: 'HIV Test-2;'}
-    ];
-
-    KitNames: Topic[] = [
-        {value: 1, viewValue: 'Determine'},
-        {value: 2, viewValue: 'First Response'},
-        {value: 3, viewValue: 'Other'}
-    ];
-
-    testResults: Topic[] = [
-        {value: 1, viewValue: 'Negative'},
-        {value: 2, viewValue: 'Positive'},
-        {value: 3, viewValue: 'Invalid'}
-    ];
-
-    finalResults: Topic[] = [
-        {value: 1, viewValue: 'Negative'},
-        {value: 2, viewValue: 'Positive'},
-        {value: 3, viewValue: 'Inconclusive'}
-    ];
+    LookupItems$: Subscription;
+    public testVisits: any[] = [];
+    public kits: any[] = [];
+    public tests: any [] = [];
+    public testResults: any[] = [];
+    public finalResults: any[] = [];
+    lookupItemView$: Subscription;
+    @Output() nextStep = new EventEmitter <HIVTestingEmitter> ();
+    @Input() hivTestingData: HIVTestingEmitter;
 
     HIVStatusFormGroup: FormGroup;
-  constructor(private _formBuilder: FormBuilder) { }
+  constructor(private _formBuilder: FormBuilder, private _lookupItemService: LookupItemService,
+              private notificationService: NotificationService, private snotifyService: SnotifyService) { }
 
   ngOnInit() {
 
@@ -50,8 +40,52 @@ export class HivStatusComponent implements OnInit {
           testingDone: ['', Validators.required],
           hivTest: ['', Validators.required],
           kitName: ['', Validators.required],
-          testResult: ['', Validators.required]
+          testResult: ['', Validators.required],
+          lotNumber: ['', Validators.required],
+          expiryDate: ['', Validators.required],
+          nextAppointmentDate: ['', Validators.required]
       });
+
+      this.getLookupOptions('PMTCTHIVTestVisit', this.testVisits);
+      this.getLookupOptions('HIVTestKits', this.kits);
+      this.getLookupOptions('PMTCTHIVTests', this.tests);
+      this.getLookupOptions('HivTestingResult', this.testResults);
+      this.getLookupOptions('HIVFinalResults', this.finalResults);
   }
+
+    public  getLookupOptions(groupName: string, masterName: any[]) {
+        this.LookupItems$ = this._lookupItemService.getByGroupName(groupName)
+            .subscribe(
+                p => {
+                    const lookupOptions =  p['lookupItems'];
+                    for (let i = 0; i < lookupOptions.length; i++) {
+                        masterName.push({'itemId': lookupOptions[i]['itemId'], 'itemName': lookupOptions[i]['itemName']});
+                    }
+                },
+                (err) => {
+                    console.log(err);
+                    this.snotifyService.error('Error fetching lookups' + err, 'Encounter', this.notificationService.getConfig());
+                },
+                () => {
+                    console.log(this.lookupItemView$);
+                });
+    }
+
+    public moveNextStep() {
+        console.log(this.HIVStatusFormGroup.value);
+
+        this.hivTestingData = {
+            hivTest : parseInt(this.HIVStatusFormGroup.controls['hivTest'].value, 10),
+            testingDone: parseInt(this.HIVStatusFormGroup.controls['testingDone'].value, 10 ),
+            testResult: parseInt(this.HIVStatusFormGroup.controls['testResult'].value, 10),
+            kitName: parseInt(this.HIVStatusFormGroup.controls['kitName'].value, 10),
+            lotNumber: this.HIVStatusFormGroup.controls['lotNumber'].value,
+            nextAppointmentDate: this.HIVStatusFormGroup.controls['nextAppointmentDate'].value,
+            expiryDate: this.HIVStatusFormGroup.controls['expiryDate'].value,
+        };
+
+        console.log(this.hivTestingData);
+        this.nextStep.emit(this.hivTestingData);
+    }
 
 }

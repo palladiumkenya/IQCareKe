@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {LookupItemService} from '../../shared/_services/lookup-item.service';
 import {SnotifyService} from 'ng-snotify';
 import {NotificationService} from '../../shared/_services/notification.service';
 import {Subscription} from 'rxjs/index';
+import {ClientMonitoringEmitter} from '../emitters/ClientMonitoringEmitter';
+import {PreventiveEmitter} from '../emitters/PreventiveEmitter';
+import {PreventiveServiceEmitter} from '../emitters/PreventiveServiceEmitter';
 export interface Options {
   value: string;
   viewValue: string;
@@ -19,6 +22,12 @@ export class PreventiveServicesComponent implements OnInit {
     lookupItemView$: Subscription;
     services: any[] = [];
     public yesnos: any[] = [];
+    public YesNoNas: any[] = [];
+    public FinalResults: any[] = [];
+    @Output() nextStep = new EventEmitter <PreventiveServiceEmitter> ();
+    @Input() preventiveServices: PreventiveServiceEmitter;
+    public preventiveServicesData: PreventiveServiceEmitter;
+    public serviceData: PreventiveEmitter[] = [];
 
 
   constructor(private _formBuilder: FormBuilder, private _lookupItemService: LookupItemService,
@@ -32,12 +41,16 @@ export class PreventiveServicesComponent implements OnInit {
         comments: ['', Validators.required],
         nextSchedule: ['', Validators.required],
         insecticideTreatedNet: ['', Validators.required],
-        insecticideGivenNet: ['', Validators.required],
+        insecticideTreatedNetGivenDate: ['', Validators.required],
         antenatalExercise: ['', Validators.required],
         insecticideGivenDate: ['', Validators.required],
+        PartnerTestingVisit: ['', Validators.required],
+        finalHIVResult: ['', Validators.required]
     });
     this.getLookupItems('PreventiveService', this.services);
      this.getLookupItems('YesNo', this.yesnos);
+      this.getLookupItems('HIVFinalResultsPMTCT', this.FinalResults);
+      this.getLookupItems('YesNoNa', this.YesNoNas);
   }
 
     public getLookupItems(groupName: string , _options: any[]) {
@@ -59,4 +72,19 @@ export class PreventiveServicesComponent implements OnInit {
                 });
     }
 
+    public moveNextStep() {
+        console.log(this.PreventiveServicesFormGroup.value);
+
+        this.preventiveServicesData = {
+            preventiveService: this.serviceData,
+            insecticideTreatedNet: parseInt(this.PreventiveServicesFormGroup.controls['insecticideTreatedNet'].value, 10),
+            insecticideTreatedNetGivenDate: this.PreventiveServicesFormGroup.controls['insecticideTreatedNetGivenDate'].value,
+            antenatalExercise: parseInt(this.PreventiveServicesFormGroup.controls['antenatalExercise'].value, 10 ),
+          //  insecticideGivenDate: this.PreventiveServicesFormGroup.controls['insecticideGivenDate'].value,
+            PartnerTestingVisit: parseInt(this.PreventiveServicesFormGroup.controls['PartnerTestingVisit'].value, 10 ),
+            finalHIVResult: parseInt(this.PreventiveServicesFormGroup.controls['finalHIVResult'].value, 10 ),
+        };
+        console.log(this.preventiveServicesData);
+        this.nextStep.emit(this.preventiveServicesData);
+    }
 }
