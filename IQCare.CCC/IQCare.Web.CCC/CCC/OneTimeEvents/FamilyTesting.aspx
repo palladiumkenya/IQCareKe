@@ -60,14 +60,14 @@
                         </div>
                         <div class="col-md-12 form-group">
                             <div class="col-md-6">
-                                <label class="required control-label pull-left">Date of Birth</label>
+                                <label class="control-label pull-left">Date of Birth</label>
                             </div>
                             <div class="col-md-6">
                                 <div class='input-group date' id='PersonDOBdatepicker'>
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
-                                    <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="Dob" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>        
+                                    <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="Dob" data-parsley-required="false" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>        
                                 </div>
                             </div>
                         </div>
@@ -77,7 +77,7 @@
                                 <label class="control-label pull-left">Age(Years)</label>
                             </div>
                             <div class="col-md-6">
-                                <asp:TextBox ID="personAge" runat="server" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="0" required="true" min="0"></asp:TextBox>
+                                <asp:TextBox ID="personAge" runat="server" ClientIDMode="Static" CssClass="form-control input-sm"  placeholder="0"></asp:TextBox>
                                 <asp:HiddenField ID="dobPrecision" runat="server" ClientIDMode="Static" />
                             </div>
                         </div>
@@ -799,10 +799,11 @@
                     var previousDate = moment().subtract(1, 'days').format('DD-MMM-YYYY');
                     var adult = moment().subtract(10, 'years').format('DD-MMM-YYYY');
                     var cccReferalDate = $("#CCCReferalDate").val();
-
-                    var today = new Date();
-                    var birthDate = new Date(dob);
-                    var age = today.getFullYear() - birthDate.getFullYear();
+                    if (dob != "") {
+                        var today = new Date();
+                        var birthDate = new Date(dob);
+                        var age = today.getFullYear() - birthDate.getFullYear();
+                    }
                     var cccNumberFound = null;
                     var count = 0;
 
@@ -824,14 +825,15 @@
                         toastr.error("Never Tested should not follow baseline(Tested Negative/Tested Positive).");
                         return false;
                     }
-
-                    if (moment('' + dob + '').isAfter()) {
-                        toastr.error("Date of birth cannot be a future date.");
-                        return false;
-                    }
-                    if (moment('' + dob + '').isAfter(previousDate)) {
-                        toastr.error("Date of birth cannot be today.");
-                        return false;
+                    if (dob != "") {
+                        if (moment('' + dob + '').isAfter()) {
+                            toastr.error("Date of birth cannot be a future date.");
+                            return false;
+                        }
+                        if (moment('' + dob + '').isAfter(previousDate)) {
+                            toastr.error("Date of birth cannot be today.");
+                            return false;
+                        }
                     }
                     if (moment('' + baselineHivStatusDate + '').isAfter()) {
                         toastr.error("Baseline HIV status date cannot be a future date.");
@@ -852,26 +854,29 @@
                         toastr.error("HIV testing result date invalid.");
                         return false;
                     }
-                    if (moment('' + baselineHivStatusDate + '').isBefore(dob)) {
-                        toastr.error("Baseline HIV status date cannot be before the date of birth.");
-                        return false;
-                    } 
-                    if (moment('' + hivTestingresultDate + '').isBefore(baselineHivStatusDate)) {
-                        toastr.error("Baseline HIV testing date cannot be after HIV testing result date.");
+                    if (dob != "") {
+                        if (moment('' + baselineHivStatusDate + '').isBefore(dob)) {
+                            toastr.error("Baseline HIV status date cannot be before the date of birth.");
+                            return false;
+                        }
+                        if (moment('' + hivTestingresultDate + '').isBefore(baselineHivStatusDate)) {
+                            toastr.error("Baseline HIV testing date cannot be after HIV testing result date.");
+                            return false;
+                        }
+                        if (moment('' + hivTestingresultDate + '').isBefore(dob)) {
+                            toastr.error("HIV testing result date cannot be before the date of birth.");
+                            return false;
+                        }
+                         if ((moment('' + dob + '').isAfter(adult)) && (($("#Relationship :selected").text() === "Spouse")||($("#Relationship :selected").text() === "Partner")))  {
+                        toastr.error("A child cannot have a spouse or partner.");
                         return false;
                     }
-                    if (moment('' + hivTestingresultDate + '').isBefore(dob)) {
-                        toastr.error("HIV testing result date cannot be before the date of birth.");
-                        return false;
                     }
                     if (moment('' + baselineHivStatusDate + '').isAfter(hivTestingresultDate)) {
                         toastr.error("Baseline HIV status date cannot be greater than HIV testing result date.");
                         return false;
                     }
-                    if ((moment('' + dob + '').isAfter(adult)) && (($("#Relationship :selected").text() === "Spouse")||($("#Relationship :selected").text() === "Partner")))  {
-                        toastr.error("A child cannot have a spouse or partner.");
-                        return false;
-                    }
+                   
                     var fam = familyMembers.filter(function(el) {
                         return (el.firstName === firstName) &&
                             (el.middleName === middleName) &&
