@@ -325,7 +325,9 @@ export class RegisterComponent implements OnInit {
             this.clientContact = { ...this.formArray.value[2] };
 
             this.person.personId = 0;
-            this.person.createdBy = 1;
+            this.person.createdBy = JSON.parse(localStorage.getItem('appUserId'));
+            this.person.FacilityId = JSON.parse(localStorage.getItem('appPosID'));
+
             console.log(this.person);
             console.log(this.clientAddress);
             console.log(this.clientContact);

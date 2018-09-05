@@ -55,6 +55,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                     }
                 }
                 var afyaMobileMessage = await registerPersonService.AddAfyaMobileInbox(DateTime.Now, afyaMobileId, JsonConvert.SerializeObject(request), false);
+
                 try
                 {
                     var facilityId = request.MESSAGE_HEADER.SENDING_FACILITY;
@@ -114,22 +115,27 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                             }
                         }
 
-                        //var afyaMobileMessage = await registerPersonService.AddAfyaMobileInbox(DateTime.Now, afyaMobileId, JsonConvert.SerializeObject(request), false);
+                        Facility clientFacility = await _unitOfWork.Repository<Facility>().Get(x => x.PosID == facilityId).FirstOrDefaultAsync();
+                        if (clientFacility == null)
+                        {
+                            clientFacility = await _unitOfWork.Repository<Facility>().Get(x => x.DeleteFlag == 0).FirstOrDefaultAsync();
+                        }
 
                         //check if person already exists
                         var identifiers = await registerPersonService.getPersonIdentifiers(afyaMobileId, 10);
                         if (identifiers.Count > 0)
                         {
                             var registeredPerson = await registerPersonService.GetPerson(identifiers[0].PersonId);
+
                             if (registeredPerson != null)
                             {
                                 var updatedPerson = await registerPersonService.UpdatePerson(identifiers[0].PersonId,
-                                    firstName, middleName, lastName, sex, dateOfBirth);
+                                    firstName, middleName, lastName, sex, dateOfBirth, clientFacility.FacilityID);
                             }
                             else
                             {
                                 var person = await registerPersonService.RegisterPerson(firstName, middleName, lastName,
-                                    sex, userId, dateOfBirth);
+                                    sex, userId, clientFacility.FacilityID, dateOfBirth);
                             }
 
                             var patient = await registerPersonService.GetPatientByPersonId(identifiers[0].PersonId);
@@ -141,7 +147,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                             {
                                 //Add Person to mst_patient
                                 var mstResult = await registerPersonService.InsertIntoBlueCard(firstName, lastName,
-                                    middleName, dateEnrollment, maritalStatusName, physicalAddress, mobileNumber, gender, dobPrecision, dateOfBirth, userId);
+                                    middleName, dateEnrollment, maritalStatusName, physicalAddress, mobileNumber, gender, dobPrecision, dateOfBirth, userId, facilityId);
                                 if (mstResult.Count > 0)
                                 {
                                     patient = await registerPersonService.AddPatient(identifiers[0].PersonId, userId, facilityId);
@@ -323,10 +329,34 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                             string linkageFacility = request.CLIENTS[i].ENCOUNTER.LINKAGE.FACILITY;
                                             string healthWorker = request.CLIENTS[i].ENCOUNTER.LINKAGE.HEALTH_WORKER;
                                             string carde = request.CLIENTS[i].ENCOUNTER.LINKAGE.CARDE;
+                                            string ARTStartDate = request.CLIENTS[i].ENCOUNTER.LINKAGE.ARTStartDate;
+                                            string remarks = request.CLIENTS[i].ENCOUNTER.LINKAGE.REMARKS;
 
-                                            //add Client Linkage
-                                            var clientLinkage = await encounterTestingService.addLinkage(identifiers[0].PersonId, dateLinkageEnrolled,
-                                                linkageCCCNumber, linkageFacility, providerId, healthWorker, carde);
+                                            DateTime? artstartDate = null;
+                                            if (!string.IsNullOrWhiteSpace(ARTStartDate))
+                                            {
+                                                artstartDate = DateTime.ParseExact(ARTStartDate, "yyyyMMdd", null);
+                                            }
+
+                                            var previousLinkage = await encounterTestingService.GetPersonLinkage(identifiers[0].PersonId);
+                                            if (previousLinkage.Count > 0)
+                                            {
+                                                previousLinkage[0].ArtStartDate = artstartDate;
+                                                previousLinkage[0].LinkageDate = dateLinkageEnrolled;
+                                                previousLinkage[0].CCCNumber = linkageCCCNumber;
+                                                previousLinkage[0].Facility = linkageFacility;
+                                                previousLinkage[0].HealthWorker = healthWorker;
+                                                previousLinkage[0].Cadre = carde;
+                                                previousLinkage[0].Comments = remarks;
+
+                                                await encounterTestingService.UpdatePersonLinkage(previousLinkage[0]);
+                                            }
+                                            else
+                                            {
+                                                //add Client Linkage
+                                                var clientLinkage = await encounterTestingService.AddLinkage(identifiers[0].PersonId, dateLinkageEnrolled,
+                                                    linkageCCCNumber, linkageFacility, providerId, healthWorker, carde, remarks, artstartDate);
+                                            }
                                         }
 
                                         if (request.CLIENTS[i].ENCOUNTER != null && request.CLIENTS[i].ENCOUNTER.REFERRAL != null)
@@ -468,10 +498,33 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                 string linkageFacility = request.CLIENTS[i].ENCOUNTER.LINKAGE.FACILITY;
                                 string healthWorker = request.CLIENTS[i].ENCOUNTER.LINKAGE.HEALTH_WORKER;
                                 string carde = request.CLIENTS[i].ENCOUNTER.LINKAGE.CARDE;
+                                string ARTStartDate = request.CLIENTS[i].ENCOUNTER.LINKAGE.ARTStartDate;
+                                string remarks = request.CLIENTS[i].ENCOUNTER.LINKAGE.REMARKS;
 
-                                //add Client Linkage
-                                var clientLinkage = await encounterTestingService.addLinkage(identifiers[0].PersonId, dateLinkageEnrolled,
-                                    linkageCCCNumber, linkageFacility, userId, healthWorker, carde);
+                                DateTime? artstartDate = null;
+                                if (!string.IsNullOrWhiteSpace(ARTStartDate))
+                                {
+                                    artstartDate = DateTime.ParseExact(ARTStartDate, "yyyyMMdd", null);
+                                }
+                                var previousLinkage = await encounterTestingService.GetPersonLinkage(identifiers[0].PersonId);
+                                if (previousLinkage.Count > 0)
+                                {
+                                    previousLinkage[0].ArtStartDate = artstartDate;
+                                    previousLinkage[0].LinkageDate = dateLinkageEnrolled;
+                                    previousLinkage[0].CCCNumber = linkageCCCNumber;
+                                    previousLinkage[0].Facility = linkageFacility;
+                                    previousLinkage[0].HealthWorker = healthWorker;
+                                    previousLinkage[0].Cadre = carde;
+                                    previousLinkage[0].Comments = remarks;
+
+                                    await encounterTestingService.UpdatePersonLinkage(previousLinkage[0]);
+                                }
+                                else
+                                {
+                                    //add Client Linkage
+                                    var clientLinkage = await encounterTestingService.AddLinkage(identifiers[0].PersonId, dateLinkageEnrolled,
+                                        linkageCCCNumber, linkageFacility, userId, healthWorker, carde, remarks, artstartDate);
+                                }
                             }
 
                             //check for referral
@@ -535,10 +588,10 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         {
                             // Add Person
                             var person = await registerPersonService.RegisterPerson(firstName, middleName, lastName, sex,
-                                userId, dateOfBirth);
+                                userId, clientFacility.FacilityID, dateOfBirth);
                             //Add Person to mst_patient
                             var mstResult = await registerPersonService.InsertIntoBlueCard(firstName, lastName,
-                                middleName, dateEnrollment, maritalStatusName, physicalAddress, mobileNumber, gender, dobPrecision, dateOfBirth, userId);
+                                middleName, dateEnrollment, maritalStatusName, physicalAddress, mobileNumber, gender, dobPrecision, dateOfBirth, userId, facilityId);
                             if (mstResult.Count > 0)
                             {
                                 //Add PersonIdentifiers
@@ -701,10 +754,34 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                     string linkageFacility = request.CLIENTS[i].ENCOUNTER.LINKAGE.FACILITY;
                                     string healthWorker = request.CLIENTS[i].ENCOUNTER.LINKAGE.HEALTH_WORKER;
                                     string carde = request.CLIENTS[i].ENCOUNTER.LINKAGE.CARDE;
+                                    string ARTStartDate = request.CLIENTS[i].ENCOUNTER.LINKAGE.ARTStartDate;
+                                    string remarks = request.CLIENTS[i].ENCOUNTER.LINKAGE.REMARKS;
 
-                                    //add Client Linkage
-                                    var clientLinkage = await encounterTestingService.addLinkage(person.Id, dateLinkageEnrolled,
-                                        linkageCCCNumber, linkageFacility, userId, healthWorker, carde);
+                                    DateTime? artstartDate = null;
+                                    if (!string.IsNullOrWhiteSpace(ARTStartDate))
+                                    {
+                                        artstartDate = DateTime.ParseExact(ARTStartDate, "yyyyMMdd", null);
+                                    }
+
+                                    var previousLinkage = await encounterTestingService.GetPersonLinkage(person.Id);
+                                    if (previousLinkage.Count > 0)
+                                    {
+                                        previousLinkage[0].ArtStartDate = artstartDate;
+                                        previousLinkage[0].LinkageDate = dateLinkageEnrolled;
+                                        previousLinkage[0].CCCNumber = linkageCCCNumber;
+                                        previousLinkage[0].Facility = linkageFacility;
+                                        previousLinkage[0].HealthWorker = healthWorker;
+                                        previousLinkage[0].Cadre = carde;
+                                        previousLinkage[0].Comments = remarks;
+
+                                        await encounterTestingService.UpdatePersonLinkage(previousLinkage[0]);
+                                    }
+                                    else
+                                    {
+                                        //add Client Linkage
+                                        var clientLinkage = await encounterTestingService.AddLinkage(person.Id, dateLinkageEnrolled,
+                                            linkageCCCNumber, linkageFacility, userId, healthWorker, carde, remarks, artstartDate);
+                                    }
                                 }
 
                                 //check for referral

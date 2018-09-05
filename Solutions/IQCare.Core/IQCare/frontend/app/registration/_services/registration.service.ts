@@ -86,11 +86,12 @@ export class RegistrationService {
         );
     }
 
-    public addPatient(personId: number, userId: number, enrollmentDate: string): Observable<any> {
+    public addPatient(personId: number, userId: number, enrollmentDate: string, posId: string): Observable<any> {
         const Indata = {
             PersonId: personId,
             UserId: userId,
-            EnrollmentDate: enrollmentDate
+            EnrollmentDate: enrollmentDate,
+            PosId: posId
         };
 
         return this.http.post<any>(this.API_URL + this._url + '/addPatient', JSON.stringify(Indata), httpOptions).pipe(

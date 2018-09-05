@@ -35,11 +35,36 @@ namespace IQCare.Web.Admin
             (Master.FindControl("levelOneNavigationUserControl1").FindControl("lblRoot") as Label).Visible = false;
             (Master.FindControl("levelOneNavigationUserControl1").FindControl("lblheader") as Label).Text = "Back up/Restore";
 
-            txtbakuppath.Text = Session["BackupDrive"].ToString() + "\\IQCareDBBackup";
+
 
             if (IsPostBack == false)
             {
+                txtbakuppath.Text = Session["BackupDrive"].ToString() + "\\IQCareDBBackup";
                 txtbakuppath.Attributes.Add("readonly", "true");
+                IQCareUtils theUtil = new IQCareUtils();
+                DataTable theDT = theUtil.CreateTimeTable(15);
+                DataRow theDR = theDT.NewRow();
+                theDR[0] = "0";
+                theDR[1] = "Select";
+                theDT.Rows.InsertAt(theDR, 0);
+                ddBackupTime.DataSource = theDT;
+                ddBackupTime.DataTextField = "Time";
+                ddBackupTime.DataValueField = "Id";
+                ddBackupTime.DataBind();
+                ddBackupDrive.SelectedValue = "Select";
+
+                IFacilitySetup BackupManger = (IFacilitySetup)ObjectFactory.CreateInstance("BusinessProcess.Administration.BFacility, BusinessProcess.Administration");
+                theDT = BackupManger.GetBackupSetup();
+                if (theDT.Rows[0].IsNull("BackupTime") != true)
+                {
+                    ddBackupTime.SelectedValue = ((DateTime)theDT.Rows[0]["BackupTime"]).TimeOfDay.ToString();
+
+                }
+                if (theDT.Rows[0].IsNull("BackupDrive") != true)
+                {
+                    txtbakuppath.Text = theDT.Rows[0]["BackupDrive"].ToString() + "\\IQCareDBBackup";
+                    ddBackupDrive.SelectedValue = theDT.Rows[0]["BackupDrive"].ToString();
+                }
             }
             if (Application["BackupSetFile"] != null)
             {
@@ -50,24 +75,7 @@ namespace IQCare.Web.Admin
                 Application.Remove("Position");
             }
 
-            IQCareUtils theUtil = new IQCareUtils();
-            DataTable theDT = theUtil.CreateTimeTable(15);
-            DataRow theDR = theDT.NewRow();
-            theDR[0] = "0";
-            theDR[1] = "Select";
-            theDT.Rows.InsertAt(theDR, 0);
-            ddBackupTime.DataSource = theDT;
-            ddBackupTime.DataTextField = "Time";
-            ddBackupTime.DataValueField = "Id";
-            ddBackupTime.DataBind();
-            ddBackupDrive.SelectedValue = "Select";
 
-            IFacilitySetup BackupManger = (IFacilitySetup)ObjectFactory.CreateInstance("BusinessProcess.Administration.BFacility, BusinessProcess.Administration");
-            theDT = BackupManger.GetBackupSetup();
-            if (theDT.Rows[0].IsNull("BackupTime") != true)
-                ddBackupTime.SelectedValue = ((DateTime)theDT.Rows[0]["BackupTime"]).TimeOfDay.ToString();
-
-            ddBackupDrive.SelectedValue = theDT.Rows[0]["BackupDrive"].ToString();
 
         }
 
@@ -124,7 +132,7 @@ namespace IQCare.Web.Admin
                 else
                 {
                     IQCareMsgBox.NotifyAction("Your are not authorized to restore database", "Database Restore", true, this, "");
-                    HttpContext.Current.ApplicationInstance.CompleteRequest();                    
+                    HttpContext.Current.ApplicationInstance.CompleteRequest();
                     Response.Redirect("~/frmLogOff.aspx", false);
                 }
             }
@@ -132,7 +140,7 @@ namespace IQCare.Web.Admin
             {
                 //MsgBuilder theBuilder = new MsgBuilder();
                 //theBuilder.DataElements["MessageText"] = err.Message.ToString();
-                IQCareMsgBox.NotifyAction(err.Message, "Database Restore",true,this,"");
+                IQCareMsgBox.NotifyAction(err.Message, "Database Restore", true, this, "");
 
             }
         }
@@ -152,13 +160,16 @@ namespace IQCare.Web.Admin
                 {
                     IQCareUtils theUtils = new IQCareUtils();
                     DateTime theTime;
-                    if (ddBackupTime.SelectedValue != "0")
-                        theTime = Convert.ToDateTime(ddBackupTime.SelectedItem.ToString());
+                    string timeStr = Request.Form[ddBackupTime.UniqueID].ToString();
+                    string driveStr = Request.Form[ddBackupDrive.UniqueID].ToString();
+
+                    if (timeStr != "0" || timeStr != "")
+                        theTime = Convert.ToDateTime(timeStr);
                     else
                         theTime = Convert.ToDateTime("1900-01-01");
-
+                    Session["BackupDrive"] = driveStr;
                     IFacilitySetup BackupManger = (IFacilitySetup)ObjectFactory.CreateInstance("BusinessProcess.Administration.BFacility, BusinessProcess.Administration");
-                    int noRows = BackupManger.SaveBackupSetup(ddBackupDrive.SelectedItem.ToString(), theTime);
+                    int noRows = BackupManger.SaveBackupSetup(driveStr, theTime);
                     BackupManger = null;
                     //IQCareMsgBox.Show("BackupSetupSave", this);
                     IQCareMsgBox.NotifyAction("Backup Setup Updated Successfully", "Database Backup Setup", false, this, "window.location.href='../AdminForms/frmDBBackup.aspx'");

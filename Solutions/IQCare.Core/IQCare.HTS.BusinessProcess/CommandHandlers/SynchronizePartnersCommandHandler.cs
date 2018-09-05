@@ -72,6 +72,12 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                             .LANDMARK;
                         int relationshipType = request.PARTNERS[i].PATIENT_IDENTIFICATION.RELATIONSHIP_TYPE;
 
+                        Facility clientFacility = await _unitOfWork.Repository<Facility>().Get(x => x.PosID == facilityId).FirstOrDefaultAsync();
+                        if (clientFacility == null)
+                        {
+                            clientFacility = await _unitOfWork.Repository<Facility>().Get(x => x.DeleteFlag == 0).FirstOrDefaultAsync();
+                        }
+
                         var indexClientIdentifiers = await registerPersonService.getPersonIdentifiers(indexClientAfyaMobileId, 10);
                         if (indexClientIdentifiers.Count > 0)
                         {
@@ -81,7 +87,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                             var partnetPersonIdentifiers = await registerPersonService.getPersonIdentifiers(afyaMobileId, 10);
                             if (partnetPersonIdentifiers.Count > 0)
                             {
-                                await registerPersonService.UpdatePerson(partnetPersonIdentifiers[0].PersonId,firstName, middleName, lastName, sex, dateOfBirth);
+                                await registerPersonService.UpdatePerson(partnetPersonIdentifiers[0].PersonId,firstName, middleName, lastName, sex, dateOfBirth, clientFacility.FacilityID);
                                 //update maritalstatus id
                                 await registerPersonService.UpdateMaritalStatus(partnetPersonIdentifiers[0].PersonId, maritalStatusId);
                                 if(!string.IsNullOrWhiteSpace(mobileNumber))
@@ -254,7 +260,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                             else
                             {
                                 //Register Partner
-                                var person = await registerPersonService.RegisterPerson(firstName, middleName, lastName, sex, providerId, dateOfBirth);
+                                var person = await registerPersonService.RegisterPerson(firstName, middleName, lastName, sex, providerId, clientFacility.FacilityID, dateOfBirth);
                                 //Add afyamobile Id as an Id of the partner
                                 var personIdentifier = await registerPersonService.addPersonIdentifiers(person.Id, 10, afyaMobileId, providerId);
                                 //Add partner marital status

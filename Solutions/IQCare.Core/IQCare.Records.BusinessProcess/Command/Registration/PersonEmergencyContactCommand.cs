@@ -27,6 +27,7 @@ namespace IQCareRecords.Common.BusinessProcess.Command
         public int Consent { get; set; }
 
         public string ConsentDecline { get; set; }
+        public int PosId { get; set; }
     }
 
     public class AddPersonEmergencyContactResponse
