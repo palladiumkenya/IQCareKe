@@ -17,5 +17,5 @@ export class Person {
     personId?: number;
     createdBy?: number;
     id?: number;
-    FacilityId: number;
+    PosId: number;
 }

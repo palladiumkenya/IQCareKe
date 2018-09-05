@@ -159,6 +159,10 @@ export class PersonRegistrationService {
     }
 
     public addPersonIdentifiers(personId: number, userId: number, identifierId: number, identifierValue: string): Observable<any> {
+        if (identifierId == null || identifierValue == null) {
+            return of([]);
+        }
+
         const Indata = {
             'PersonId': personId,
             'IdentifierId': identifierId,
