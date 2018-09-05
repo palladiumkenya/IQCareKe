@@ -7,7 +7,7 @@ namespace IQCare.PMTCT.Core.Models
    public class PatientDrugAdministration
     {
       public int Id { get; set; }
-        public int PatientId { get; set; }
+      public int PatientId { get; set; }
       public int ProfileId { get; set; }
       public int  PatientMasterVisitId { get; set; }
       public int DrugAdministered { get; set; }

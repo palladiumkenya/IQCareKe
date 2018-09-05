@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {LookupItemService} from '../../shared/_services/lookup-item.service';
 import {SnotifyService} from 'ng-snotify';
 import {NotificationService} from '../../shared/_services/notification.service';
 import {Subscription} from 'rxjs/index';
+import {ClientMonitoringEmitter} from '../emitters/ClientMonitoringEmitter';
+import {HAARTProphylaxisEmitter} from '../emitters/HAARTProphylaxisEmitter';
+import {OtherIllnessesEmitter} from '../emitters/OtherIllnessesEmitter';
+import {ActivatedRoute} from '@angular/router';
 export interface Options {
   value: string;
   viewValue: string;
@@ -21,12 +25,26 @@ export class HaartProphylaxisComponent implements OnInit {
     public chronics: any[] = [];
     public YesNos: any[] = [];
     lookupItemView$: Subscription;
-    LookupItems$: Subscription;
+    @Output() nextStep = new EventEmitter <HAARTProphylaxisEmitter> ();
+    @Input() HaartProphylaxis: ClientMonitoringEmitter;
+    public HaartProphylaxisData: HAARTProphylaxisEmitter;
+    public otherIllness: OtherIllnessesEmitter[] = [];
 
-  constructor(private _formBuilder: FormBuilder, private _lookupItemService: LookupItemService, private  snotifyService: SnotifyService,
+    public personId: number;
+    public patientMasterVisitId: number;
+
+  constructor(private route: ActivatedRoute, private _formBuilder: FormBuilder, private _lookupItemService: LookupItemService,
+              private  snotifyService: SnotifyService,
               private notificationService: NotificationService) { }
 
   ngOnInit() {
+
+      this.route.params.subscribe(params => {
+          this.personId = params['id'];
+      });
+      this.route.params.subscribe(params => {
+          this.patientMasterVisitId = params['visitId'];
+      });
 
       this.HaartProphylaxisFormGroup = this._formBuilder.group({
           onArvBeforeANCVisit: ['', Validators.required],
@@ -62,6 +80,38 @@ export class HaartProphylaxisComponent implements OnInit {
                 () => {
                     console.log(this.lookupItemView$);
                 });
+    }
+
+    public moveNextStep() {
+        console.log(this.HaartProphylaxisFormGroup.value);
+
+        this.HaartProphylaxisData = {
+            onArvBeforeANCVisit : parseInt(this.HaartProphylaxisFormGroup.controls['onArvBeforeANCVisit'].value, 10),
+            startedHaartANC: parseInt(this.HaartProphylaxisFormGroup.controls['startedHaartANC'].value, 10 ),
+            cotrimoxazole: parseInt(this.HaartProphylaxisFormGroup.controls['cotrimoxazole'].value, 10 ),
+            aztFortheBaby: parseInt(this.HaartProphylaxisFormGroup.controls['aztFortheBaby'].value, 10 ),
+            nvpForBaby: parseInt(this.HaartProphylaxisFormGroup.controls['nvpForBaby'].value, 10 ),
+            illness: parseInt(this.HaartProphylaxisFormGroup.controls['illness'].value, 10 ),
+            otherIllness: this.otherIllness
+        };
+        console.log(this.HaartProphylaxisData);
+        this.nextStep.emit(this.HaartProphylaxisData);
+    }
+
+    public AddOtherIllness() {
+      const illness = this.HaartProphylaxisFormGroup.controls['illness'].value.itemName;
+      const illnessId =    parseInt(this.HaartProphylaxisFormGroup.controls['illness'].value.itemId, 10 );
+
+      if (!this.otherIllness.filter(x => x.otherIllness === parseInt(this.HaartProphylaxisFormGroup.controls['illness'].value, 10 ))) {
+            this.otherIllness.push({
+                PatientId: this.personId,
+                PatientmasterVisitId: this.patientMasterVisitId,
+                otherIllness: illnessId,
+                illnessId: illness ,
+                onSetDate: this.HaartProphylaxisFormGroup.controls['onSetDate'].value,
+                currentTreatment: this.HaartProphylaxisFormGroup.controls['currentTreatment'].value,
+                dose: this.HaartProphylaxisFormGroup.controls['dose'].value});
+        }
     }
 
 }

@@ -11,9 +11,9 @@
 
                                         <mat-form-field class="col-md-12">
                                             <mat-select formControlName="testingDone" placeholder="HIV testing done during this visit">
-                                                <mat-option placeholder="HIV testing done during this visit" *ngFor="let hivTesting of hivTestings"
-                                                    [value]="hivTesting.value">
-                                                    {{hivTesting.viewValue}}
+                                                <mat-option placeholder="HIV testing done during this visit" *ngFor="let testVisit of testVisits"
+                                                    [value]="testVisit.itemId">
+                                                    {{testVisit.itemName}}
                                                 </mat-option>
                                             </mat-select>
                                         </mat-form-field>
@@ -26,8 +26,8 @@
 
                                         <mat-form-field class="col-md-12">
                                             <mat-select formControlname="hivTest" placeholder="Select Result" required>
-                                                <mat-option  placeholder="Test" *ngFor="let Test of Tests" [value]="Test.value">
-                                                    {{Test.viewValue}}
+                                                <mat-option  placeholder="Test" *ngFor="let test of tests" [value]="test.itemId">
+                                                    {{test.itemName}}
                                                 </mat-option>
                                             </mat-select>
                                         </mat-form-field>
@@ -37,8 +37,8 @@
 
                                         <mat-form-field class="col-md-12">
                                             <mat-select formControlname="kitName" placeholder="Select Kit used" required>
-                                                <mat-option  placeholder="Test" *ngFor="let Test of Tests" [value]="Test.value">
-                                                    {{Test.viewValue}}
+                                                <mat-option  placeholder="Test" *ngFor="let kit of kits" [value]="kit.itemId">
+                                                    {{kit.itemName}}
                                                 </mat-option>
                                             </mat-select>
                                         </mat-form-field>
@@ -46,7 +46,7 @@
                                     <div class="col-lg-4 col-md-4 col-xs-12 col-sm-6">
                                         <div class="col-lg-4 col-md-4 col-xs-12 col-sm-6">
                                             <mat-form-field class="col-md-12">
-                                                <input class="col-md-12" matInput placeholder="Lot No" value="" required>
+                                                <input class="col-md-12" formControlName="lotNumber" matInput placeholder="Lot No" value="" required>
                                             </mat-form-field>
                                         </div>
 
@@ -55,7 +55,7 @@
                                 <div class="col-md-12">
                                     <div class="col-lg-4 col-md-4 col-xs-12 col-sm-6">
                                         <mat-form-field class="col-md-12">
-                                            <input id="expiryDate" matInput [matDatepicker]="expiryDate" formControlname="expiryDate" placeholder="expiry Date" required>
+                                            <input formControlName="expiryDate" id="expiryDate" matInput [matDatepicker]="expiryDate" formControlname="expiryDate" placeholder="expiry Date" required>
                                             <mat-datepicker-toggle matSuffix [for]="expiryDate"></mat-datepicker-toggle>
                                             <mat-datepicker #expiryDate></mat-datepicker>
                                         </mat-form-field>
@@ -66,8 +66,8 @@
 
                                         <mat-form-field class="col-md-12">
                                             <mat-select formControlname="testResult" placeholder="test Result" required>
-                                                <mat-option  placeholder="Test" *ngFor="let Test of Tests" [value]="Test.value">
-                                                    {{Test.viewValue}}
+                                                <mat-option  placeholder="Test" *ngFor="let testResult of testResults" [value]="testResult.itemId">
+                                                    {{testResult.itemName}}
                                                 </mat-option>
                                             </mat-select>
                                         </mat-form-field>
@@ -75,8 +75,8 @@
                                     <div class="col-lg-4 col-md-4 col-xs-12 col-sm-6">
                                         <mat-form-field class="col-md-12">
                                             <mat-select formControlname="finalResult" placeholder="final Result" required>
-                                                <mat-option  placeholder="Test" *ngFor="let Test of Tests" [value]="Test.value">
-                                                    {{Test.viewValue}}
+                                                <mat-option  placeholder="Test" *ngFor="let finalResult of finalResults" [value]="finalResult.itemId">
+                                                    {{finalResult.itemName}}
                                                 </mat-option>
                                             </mat-select>
                                         </mat-form-field>
@@ -86,7 +86,7 @@
                                 <div class="col-md-12">
                                     <div class="col-lg-4 col-md-4 col-xs-12 col-sm-6">
                                         <mat-form-field class="col-md-12">
-                                            <input id="nextAppointmentDate" matInput [matDatepicker]="nextAppointmentDate" formControlname="nextAppointmentDate" placeholder="Next Appointment Date" required>
+                                            <input formControlName="nextAppointmentDate" id="nextAppointmentDate" matInput [matDatepicker]="nextAppointmentDate" formControlname="nextAppointmentDate" placeholder="Next Appointment Date" required>
                                             <mat-datepicker-toggle matSuffix [for]="nextAppointmentDate"></mat-datepicker-toggle>
                                             <mat-datepicker #nextAppointmentDate></mat-datepicker>
                                         </mat-form-field>
@@ -94,7 +94,6 @@
                                     <div class="col-lg-4 col-md-4 col-xs-12 col-sm-6"></div>
                                     <div class="col-lg-4 col-md-4 col-xs-12 col-sm-6"></div>
                                 </div>
-
 
                                 <div class="col-md-12">
                                     <div class="col-md-12">

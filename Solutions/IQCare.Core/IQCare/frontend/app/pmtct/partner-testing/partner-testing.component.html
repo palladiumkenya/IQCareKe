@@ -1,37 +1,39 @@
-<div class="row">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <div class="row">
-            <div class="col-lg-12 col-md-3 col-sm-6 col-xs-12">
-                <div class="widget">
-                    <div class="widget-header bordered-bottom bordered-blue">
-                        <span class="widget-caption">
-                            <i class="typcn typcn-keyboard"></i> HAART & Prophyylaxis </span>
-                    </div>
-                    <div class="widget-body">
+<form class="form-group" novalidate [formGroup]="PartnerTestingFormGroup">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-title">
+                <span class="mat-accent"> Partner Testing </span>
+            </div>
+        </div>
                         <div class="row">
                             <div class="col-md-4">
                                     <mat-form-field class="col-md-12">
-                                            <mat-select  placeholder="Preventive Service">
-                                              <mat-option id="slctTopic" *ngFor="let service of services" [value]="service.value">
-                                                {{service.viewValue}}
+                                            <mat-select formControlName="PartnerTestingVisit"  placeholder="Partner Tested during this visit">
+                                              <mat-option  *ngFor="let YesNoNa of YesNoNas" [value]="YesNoNa.itemId">
+                                                {{YesNoNa.itemName}}
                                               </mat-option>
                                             </mat-select>
                                           </mat-form-field>
                             </div>
                             <div class="col-md-4">
                                     <mat-form-field class="col-md-12">
-                                            <mat-select  placeholder="Preventive Service">
-                                              <mat-option id="slctTopic" *ngFor="let partner of partners" [value]="partners.value">
-                                                {{partners.viewValue}}
+                                            <mat-select formControlName="finalHIVResult"  placeholder="Final HIV Result for Partner">
+                                              <mat-option *ngFor="let FinalResult of FinalResults" [value]="FinalResult.itemId">
+                                                {{FinalResult.itemName}}
                                               </mat-option>
                                             </mat-select>
                                           </mat-form-field>
                             </div>
                             <div class="col-md-4"></div>
                         </div>                     
-                    </div>
-                </div>
-            </div>
+    </div>
+</form>
+<div class="row">
+    <div class="col-md-12">
+        <div>
+            <button mat-raised-button color="accent" class="primary" mat-button matStepperNext style="margin-right:5px"><span class="fa fa-arrow-circle-o-right"> Next</span> </button>
+            <button mat-raised-button color="primary" matStepperPrevious><span class="fa fa-arrow-circle-o-left"> Previous</span> </button>
+
         </div>
     </div>
 </div>

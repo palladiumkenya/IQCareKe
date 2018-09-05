@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {LookupItemService} from '../../shared/_services/lookup-item.service';
 import {Subscription} from 'rxjs/index';
 import {SnotifyService} from 'ng-snotify';
 import {NotificationService} from '../../shared/_services/notification.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {HIVTestingEmitter} from '../emitters/HIVTestingEmitter';
+import {ClientMonitoringEmitter} from '../emitters/ClientMonitoringEmitter';
 export interface Options {
   value: string;
   viewValue: string;
@@ -24,6 +26,9 @@ export class ClientMonitoringComponent implements OnInit {
     public CacxResults: any[] = [];
     public YesNos: any[] = [];
     public clientMonitoringFormGroup: FormGroup;
+    @Output() nextStep = new EventEmitter <ClientMonitoringEmitter> ();
+    @Input() clientMonitoring: ClientMonitoringEmitter;
+    public clientMonitoringData: ClientMonitoringEmitter;
 
   constructor(private fb: FormBuilder , private lookupItemService: LookupItemService, private snotifyService: SnotifyService,
               private notificationService: NotificationService) { }
@@ -48,6 +53,10 @@ export class ClientMonitoringComponent implements OnInit {
 
   }
 
+  public testingFunc() {
+        console.log('');
+    }
+
     public getLookupItems(groupName: string , _options: any[]) {
         this.lookupItemView$ = this.lookupItemService.getByGroupName(groupName)
             .subscribe(
@@ -66,6 +75,21 @@ export class ClientMonitoringComponent implements OnInit {
                     console.log(this.lookupItemView$);
                 });
     }
-    
+
+    public moveNextStep() {
+        console.log(this.clientMonitoringFormGroup.value);
+
+        this.clientMonitoringData = {
+            WhoStage : parseInt(this.clientMonitoringFormGroup.controls['WhoStage'].value, 10),
+            viralLoadSampleTaken: parseInt(this.clientMonitoringFormGroup.controls['viralLoadSampleTaken'].value, 10 ),
+            screenedForTB: parseInt(this.clientMonitoringFormGroup.controls['screenedForTB'].value, 10 ),
+            cacxScreeningDone: parseInt(this.clientMonitoringFormGroup.controls['cacxScreeningDone'].value, 10 ),
+            cacxMethod: parseInt(this.clientMonitoringFormGroup.controls['cacxMethod'].value, 10 ),
+            cacxResult: parseInt(this.clientMonitoringFormGroup.controls['cacxResult'].value, 10 ),
+            cacxComments: this.clientMonitoringFormGroup.controls['cacxComments'].value,
+        };
+        console.log(this.clientMonitoringData);
+        this.nextStep.emit(this.clientMonitoringData);
+    }
 
 }

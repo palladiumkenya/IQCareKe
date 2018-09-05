@@ -18,7 +18,7 @@
                                     </mat-step>
                                     <mat-step>                                     
                                         <ng-template matStepLabel>Education & Profile</ng-template>
-                                        <app-patient-education-examination></app-patient-education-examination>                               
+                                        <app-patient-education-examination (nextStep)="onSavePatientEducation($event)"></app-patient-education-examination>
                                     </mat-step>
                                     <mat-step>
                                            <ng-template matStepLabel>HIV Status </ng-template>
@@ -26,22 +26,23 @@
                                             <app-hiv-status></app-hiv-status>
                                     </mat-step>
                                     <mat-step>
-                                    <ng-template matStepLabel>Client Monitoring & HAART </ng-template>
-                                    <app-client-monitoring></app-client-monitoring>
+                                    <ng-template matStepLabel> Client Monitoring </ng-template>
+                                        <app-client-monitoring (nextStep)="onSaveClientMonitoring($event)"></app-client-monitoring>
 
-                                </mat-step>
+
+                                    </mat-step>
+                                    <mat-step>
+                                        <ng-template matStepLabel>HAART & Prophylaxis</ng-template>
+                                        <app-haart-prophylaxis (nextStep)="onSaveHaartProphylaxis($event)"></app-haart-prophylaxis>
+                                    </mat-step>
                                     <mat-step>
                                         <ng-template matStepLabel>Preventive Services & Partner Testing</ng-template>
-                                        <app-haart-prophylaxis></app-haart-prophylaxis>
-                                        <app-preventive-services></app-preventive-services>
-
+                                        <app-preventive-services (nextStep)="onSavePreventiveService($event)" ></app-preventive-services>
                                     </mat-step>
 
                                     <mat-step>
                                       <ng-template matStepLabel>Refferals</ng-template>
-                                      <app-referrals></app-referrals>
-
-                                        <app-next-appointment></app-next-appointment>
+                                      <app-referrals (nextStep)="onSaveReferralAppointment($event)"></app-referrals>
                                       <div>
                                         <button mat-raised-button class="mat-warn" matStepperPrevious style="margin-right: 5px">Back</button>
                                         <button mat-raised-button class="mat-accent" (click)="stepper.reset()" style="margin-right: 5px">Reset Encounter</button>

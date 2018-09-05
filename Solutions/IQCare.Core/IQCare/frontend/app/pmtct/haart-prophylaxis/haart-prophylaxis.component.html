@@ -89,7 +89,7 @@
                                                 <mat-form-field class="col-md-12">
                                                     <mat-select formControlName="illness"  placeholder="Select Illness" required minlength="0">
                                                         <mat-option value="0"> Select </mat-option>
-                                                        <mat-option *ngFor="let chronic of chronics" [value]="chronic.itemId" >
+                                                        <mat-option *ngFor="let chronic of chronics" [value]="chronic" >
                                                         {{chronic.itemName}}
                                                       </mat-option>
                                                     </mat-select>
@@ -113,11 +113,50 @@
                                                 </mat-form-field>
                                             </div>
                                             <div class="col-md-2 col-xs-12 col-sm-6">
-                                                <button mat-raised-button color="primary"> Add Illness </button>
+                                                <button mat-raised-button class="mat-primary" (click)="AddOtherIllness()"> Add Illness </button>
                                             </div>
                                         </div>
+
+                            <div class="row">
+                                    <div class="col-lg-12 col-xs-12">
+                                        <table style="margin:1%"  class="table table-responsive table-condensed table-bordered">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col" width="5%"># Count</th>
+                                                <th scope="col">Illness</th>
+                                                <th scope="col">On Set Date</th>
+                                                <th scope="col">Current Treatment</th>
+                                                <th scope="col">Dose</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr *ngFor="let item_data of otherIllness; let index = index">
+                                                <td>{{index+1}}</td>
+                                                <td>{{item_data.illnessId}}</td>
+                                                <td>{{item_data.onSetDate}}</td>
+                                                <td>{{item_data.currentTreatment}}</td>
+                                                <td>{{item_data.dose}}</td>
+                                                <td>
+                                                    <i style="cursor: pointer;" class="danger material-icons" >
+                                                        delete
+                                                    </i>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                            </div>
 
                         </div>
 
 </div>
 </form>
+<div class="row">
+    <div class="col-md-12">
+        <div>
+            <button mat-raised-button  class="mat-primary" mat-button matStepperNext style="margin-right:5px" (click)="moveNextStep()">Next</button>
+            <button mat-raised-button class="mat-accent"  matStepperPrevious>Previous</button>
+        </div>
+    </div>
+</div>
