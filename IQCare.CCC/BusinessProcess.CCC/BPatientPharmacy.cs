@@ -65,8 +65,13 @@ namespace BusinessProcess.CCC
                         ClsUtility.AddParameters("@ptn_pharmacy_pk", SqlDbType.Int, ptn_pharmacy_pk);
                         ClsUtility.AddParameters("@DrugId", SqlDbType.Int, drg.DrugId);
                         ClsUtility.AddParameters("@BatchId", SqlDbType.Int, drg.BatchId);
-                        ClsUtility.AddParameters("@FreqId", SqlDbType.VarChar, drg.FreqId);
-                        ClsUtility.AddParameters("@Dose", SqlDbType.VarChar, drg.Dose);
+                        //ClsUtility.AddParameters("@FreqId", SqlDbType.VarChar, drg.FreqId);
+                        //ClsUtility.AddParameters("@Dose", SqlDbType.VarChar, drg.Dose);
+                        ClsUtility.AddParameters("@Morning", SqlDbType.VarChar, drg.Morning == "" ? "0" : drg.Morning);
+                        ClsUtility.AddParameters("@Midday", SqlDbType.VarChar, drg.Midday == "" ? "0" : drg.Midday);
+                        ClsUtility.AddParameters("@Evening", SqlDbType.VarChar, drg.Evening == "" ? "0" : drg.Evening);
+                        ClsUtility.AddParameters("@Night", SqlDbType.VarChar, drg.Night == "" ? "0" : drg.Night);
+
                         ClsUtility.AddParameters("@Duration", SqlDbType.VarChar, drg.Duration);
                         ClsUtility.AddParameters("@qtyPres", SqlDbType.VarChar, drg.qtyPres);
                         ClsUtility.AddParameters("@qtyDisp", SqlDbType.VarChar, drg.qtyDisp);

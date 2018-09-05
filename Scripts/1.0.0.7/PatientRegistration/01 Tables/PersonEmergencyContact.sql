@@ -34,14 +34,14 @@ CREATE TABLE [dbo].[PersonEmergencyContact](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 
-GO
+
 
 SET ANSI_PADDING OFF
-GO
+
 
 ALTER TABLE [dbo].[PersonEmergencyContact]  WITH CHECK ADD  CONSTRAINT [FK_PersonEmergencyContact_Person] FOREIGN KEY([PersonId])
 REFERENCES [dbo].[Person] ([Id])
-GO
+
 
 ALTER TABLE [dbo].[PersonEmergencyContact] CHECK CONSTRAINT [FK_PersonEmergencyContact_Person]
 

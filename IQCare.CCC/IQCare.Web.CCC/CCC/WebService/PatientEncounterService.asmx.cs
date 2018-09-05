@@ -193,15 +193,15 @@ namespace IQCare.Web.CCC.WebService
             if (pmlist != null)
             {
                 PreviousMasterVisitId = pmlist.Id;
-                patientvisitdate = pmlist.VisitDate;
+             patientvisitdate = pmlist.VisitDate;
             }
             else
             {
-                 PreviousMasterVisitId = 0;
+                PreviousMasterVisitId = 0;
                 patientvisitdate = new DateTime();
             }
-                
-                PatientPartner pat = partman.GetPatientPartner(patientId, PreviousMasterVisitId);
+     
+            PatientPartner pat = partman.GetPatientPartner(patientId, PreviousMasterVisitId);
 
                 List<PatientSexualHistory> patienthistory = psh.GetPatientSexualHistoryList(patientId, PreviousMasterVisitId);
             
@@ -1111,9 +1111,11 @@ namespace IQCare.Web.CCC.WebService
                     }
                 }
 
-                string[] i = new string[13] { row["Drug_Pk"].ToString(), row["batchId"].ToString(),
-                    row["FrequencyID"].ToString(),row["abbr"].ToString(),row["DrugName"].ToString(),
-                    row["batchName"].ToString(),row["dose"].ToString(),row["freq"].ToString(),
+                string[] i = new string[14] { row["Drug_Pk"].ToString(), row["batchId"].ToString(),
+                    //row["FrequencyID"].ToString(),
+                    row["abbr"].ToString(),row["DrugName"].ToString(),
+                    row["batchName"].ToString(),row["MorningDose"].ToString(),row["MiddayDose"].ToString(),
+                    row["EveningDose"].ToString(), row["NightDose"].ToString(),
                     row["duration"].ToString(),row["OrderedQuantity"].ToString(),row["DispensedQuantity"].ToString(),
                     row["prophylaxis"].ToString(), remove
                      };
