@@ -99,11 +99,15 @@ export class HaartProphylaxisComponent implements OnInit {
     }
 
     public AddOtherIllness() {
-        if (!this.otherIllness.filter(x => x.otherIllness === parseInt(this.HaartProphylaxisFormGroup.controls['illness'].value, 10 ))) {
+      const illness = this.HaartProphylaxisFormGroup.controls['illness'].value.itemName;
+      const illnessId =    parseInt(this.HaartProphylaxisFormGroup.controls['illness'].value.itemId, 10 );
+
+      if (!this.otherIllness.filter(x => x.otherIllness === parseInt(this.HaartProphylaxisFormGroup.controls['illness'].value, 10 ))) {
             this.otherIllness.push({
                 PatientId: this.personId,
                 PatientmasterVisitId: this.patientMasterVisitId,
-                otherIllness: parseInt(this.HaartProphylaxisFormGroup.controls['illness'].value, 10 ),
+                otherIllness: illnessId,
+                illnessId: illness ,
                 onSetDate: this.HaartProphylaxisFormGroup.controls['onSetDate'].value,
                 currentTreatment: this.HaartProphylaxisFormGroup.controls['currentTreatment'].value,
                 dose: this.HaartProphylaxisFormGroup.controls['dose'].value});

@@ -7,6 +7,8 @@ import { SnotifyService } from 'ng-snotify';
 import {PatientEducationCommand} from '../_models/PatientEducationCommand';
 import {PatientEducationEmitter} from '../emitters/PatientEducationEmitter';
 import {VisitDetails} from '../_models/visitDetails';
+import {PatientEducation} from '../_models/PatientEducation';
+import {CounsellingTopicsEmitters} from '../emitters/counsellingTopicsEmitters';
 
 
 
@@ -42,7 +44,7 @@ export class PatientEducationExaminationComponent implements OnInit {
 
     public patientEducationEmitterData: PatientEducationEmitter;
 
-    public counselling_data: any[] = [];
+    public counselling_data: CounsellingTopicsEmitters[] = [];
     @Output() nextStep = new EventEmitter <PatientEducationEmitter> ();
     @Input() patientEducationData: PatientEducationCommand;
 
@@ -64,26 +66,9 @@ export class PatientEducationExaminationComponent implements OnInit {
      this.getLookupOptions('counselledOn', this.topics);
      this.getLookupOptions('yesno', this.yesnos);
       this.getLookupOptions('HivTestingResult', this.testResults);
+
+      console.log(this.counselling_data + ' hu');
   }
-
-   /* public getCounsellingTopics(groupName: string) {
-        this.lookupItemView$ = this._lookupItemService.getByGroupName(groupName)
-            .subscribe(
-                p => {
-                    const options = p['lookupItems'];
-
-                    for(let i=0; i<options.length; i++){
-                        this.topics.push({"itemId":options[i]['itemId'],"itemName": options[i]['itemName']});
-                    }
-                },
-                (err) => {
-                    console.log(err);
-                    this.snotifyService.error('Error editing encounter ' + err, 'Encounter', this.notificationService.getConfig());
-                },
-                () => {
-                    console.log(this.lookupItemView$);
-                });
-    }*/
 
     public  getLookupOptions(groupName: string, masterName: any[]) {
       this.LookupItems$ = this._lookupItemService.getByGroupName(groupName)
@@ -117,13 +102,24 @@ export class PatientEducationExaminationComponent implements OnInit {
     }
 
     public addTopics() {
-       const topicId = parseInt(this.PatientEducationFormGroup.controls['counselledOn'].value, 10 );
-        if (!this.counselling_data.filter(x => x.counsellingtopicId === topicId)) {
+
+        const topic = this.PatientEducationFormGroup.controls['counselledOn'].value.itemName;
+        const topicId = this.PatientEducationFormGroup.controls['counselledOn'].value.itemId;
+
+        console.log(this.counselling_data + ' hu');
+
+        if (this.counselling_data.filter(x => x.counsellingTopic === topic ).length > 0) {
+            this.snotifyService.warning('' + topic + ' exists', 'Counselling', this.notificationService.getConfig());
+        } else {
             this.counselling_data.push({
-                patientId: localStorage.getItem('PatientId'),
-                PatientMasterVisitId: localStorage.getItem('PatientMasterId'),
-                counsellingTopicId: parseInt(this.PatientEducationFormGroup.controls['counselledOn'].value, 10 ),
-                CounsellingDate: this.PatientEducationFormGroup.controls['counsellingDate'].value});
+                counselledOn: parseInt(topicId, 10 ),
+                counsellingTopic: topic,
+                topicDate: this.PatientEducationFormGroup.controls['counsellingDate'].value});
         }
+        console.log(this.counselling_data);
+    }
+
+    public  removeRow(idx) {
+      this.counselling_data.splice(idx, 1);
     }
 }
