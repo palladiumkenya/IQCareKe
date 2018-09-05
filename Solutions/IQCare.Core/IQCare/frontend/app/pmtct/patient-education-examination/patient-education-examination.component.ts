@@ -60,8 +60,8 @@ export class PatientEducationExaminationComponent implements OnInit {
         breastExamDone: ['', Validators.required],
         counsellingDate: ['', Validators.required],
         counselledOn: ['', Validators.required],
-        topicDate: ['', Validators.required],
-        treatedSyphilis: ['', Validators.required]
+        treatedSyphilis: ['', Validators.required],
+        testResult: ['', Validators.required]
     });
      this.getLookupOptions('counselledOn', this.topics);
      this.getLookupOptions('yesno', this.yesnos);
