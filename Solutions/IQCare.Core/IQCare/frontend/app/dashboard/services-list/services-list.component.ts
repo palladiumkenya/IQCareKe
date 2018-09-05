@@ -11,6 +11,7 @@ export class ServicesListComponent implements OnInit {
     @Input('personId') personId: number;
     @Input('services') services: any[];
     enrolledServices: any[];
+    hasItems: boolean = false;
 
     constructor(private personhomeservice: PersonHomeService,
         public zone: NgZone,
@@ -25,6 +26,9 @@ export class ServicesListComponent implements OnInit {
     getPersonEnrolledServices(personId: number) {
         this.personhomeservice.getPersonEnrolledServices(personId).subscribe((res) => {
             this.enrolledServices = res['personEnrollmentList'];
+            if (this.enrolledServices.length > 0) {
+                this.hasItems = true;
+            }
             console.log(this.enrolledServices);
         });
     }

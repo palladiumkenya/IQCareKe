@@ -1,4 +1,4 @@
-<div class="col-lg-4 col-sm-4 col-xs-12" *ngFor="let service of services; let k = index">
+<div class="col-lg-4 col-sm-4 col-xs-12" *ngFor="let service of services;">
     <div class="databox databox-xlg radius-bordered databox-shadowed databox-graded">
         <div class="databox-left bg-pink">
             <div class="databox-piechart">
@@ -9,48 +9,55 @@
                 </div>
             </div>
         </div>
-        <ng-container *ngFor="let enrolledServices of enrolledServices;">
-            <ng-container *ngIf="enrolledServices.serviceAreaId == service.id; else templateName">
-                <div class="databox-right bordered-thick bordered-warning">
-                    <div class="databox-row row-3 bordered-bottom bordered-platinum">
-                        <span class="databox-text darkgray padding-10">
-                            <strong>ENROLLMENT DATE: {{ enrolledServices.enrollmentDate | date: 'dd-MMM-yyyy' }}</strong>
-                        </span>
+        <ng-container *ngIf="hasItems; else templateName">
+            <ng-container *ngFor="let enrolledservice of enrolledServices; let j = index;">
+                <ng-container *ngIf="enrolledservice.serviceAreaId == service.id; else templateName">
+                    <div class="databox-right bordered-thick bordered-warning">
+                        <div class="databox-row row-3 bordered-bottom bordered-platinum">
+                            <span class="databox-text darkgray padding-10">
+                                <strong>ENROLLMENT DATE: {{ enrolledservice.enrollmentDate | date: 'dd-MMM-yyyy' }}</strong>
+                            </span>
+                        </div>
+                        <div class="databox-row row-3 bordered-bottom bordered-platinum">
+                            <span class="databox-text darkgray padding-10">RETURNING USERS</span>
+                        </div>
+                        <div class="databox-row row-3">
+                            <span class="databox-text darkgray padding-10">NEW USERS</span>
+                        </div>
                     </div>
-                    <div class="databox-row row-3 bordered-bottom bordered-platinum">
-                        <span class="databox-text darkgray padding-10">RETURNING USERS</span>
-                    </div>
-                    <div class="databox-row row-3">
-                        <span class="databox-text darkgray padding-10">NEW USERS</span>
-                    </div>
-                </div>
+                </ng-container>
             </ng-container>
-            <ng-template #templateName>
-                <div class="databox-right bordered-thick bordered-warning">
-                    <div class="databox-row row-3 bordered-bottom bordered-platinum">
-                        <span class="databox-text darkgray padding-10">NOT ENROLLED</span>
-                    </div>
-                    <div class="databox-row row-3 bordered-bottom bordered-platinum">
-                        <span class="databox-text darkgray padding-10">
-                            <div class="padding-bottom-20 text-align-right">
-                                <a class="btn btn-sm btn-primary" style="width:100%;" (click)="enrollToService(service.id)">
-                                    Enroll
-                                </a>
-                            </div>
-                        </span>
-                    </div>
-                    <div class="databox-row row-3 bordered-platinum">
-                        <span class="databox-text darkgray padding-10">
-                            <div class="padding-bottom-20 text-align-right">
-                                <a class="btn btn-sm btn-success" style="width:100%;" (click)="newEncounter(service.id)">
-                                    New Encounter
-                                </a>
-                            </div>
-                        </span>
-                    </div>
-                </div>
-            </ng-template>
         </ng-container>
+        <ng-template #templateName>
+            <div class="databox-right bordered-thick bordered-warning">
+                <div class="databox-row row-3 bordered-bottom bordered-platinum">
+                    <span class="databox-text darkgray padding-10">NOT ENROLLED</span>
+                </div>
+                <div class="databox-row row-3 bordered-bottom bordered-platinum">
+                    <span class="databox-text darkgray padding-10">
+                        <div class="padding-bottom-20 text-align-right">
+                            <a class="btn btn-sm btn-primary" style="width:100%;" (click)="enrollToService(service.id)">
+                                Enroll
+                            </a>
+                        </div>
+                    </span>
+                </div>
+                <div class="databox-row row-3 bordered-platinum">
+                    <span class="databox-text darkgray padding-10">
+                        <div class="padding-bottom-20 text-align-right">
+                            <a class="btn btn-sm btn-success" style="width:100%;" (click)="newEncounter(service.id)">
+                                New Encounter
+                            </a>
+                        </div>
+                    </span>
+                </div>
+            </div>
+        </ng-template>
     </div>
     <br/>
+</div>
+
+
+<div>
+    <!--<div>{{ 'here '+ enrolledServices.length }}</div>-->
 </div>
