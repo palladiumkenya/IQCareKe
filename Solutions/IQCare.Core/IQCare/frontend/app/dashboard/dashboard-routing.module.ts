@@ -1,4 +1,5 @@
-
+import { ServicesResolver } from './services/services.resolver';
+import { EnrollmentComponent } from './enrollment/enrollment.component';
 import { PersonHomeComponent } from './person-home/person-home.component';
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -13,7 +14,14 @@ const routes: Routes = [
     {
         path: 'personhome/:id',
         component: PersonHomeComponent,
-        pathMatch: 'full',
+        resolve: {
+            servicesArray: ServicesResolver
+        }
+    },
+    {
+        path: 'enrollment/:id/:serviceId',
+        component: EnrollmentComponent,
+        pathMatch: 'full'
     }
 ];
 

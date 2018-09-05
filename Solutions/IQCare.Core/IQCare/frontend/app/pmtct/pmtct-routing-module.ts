@@ -15,29 +15,29 @@ const routes: Routes = [
         pathMatch: 'full',
     },
     {
-        path: 'anc',
+        path: 'anc/:patientId/:patientMasterVisitId/:serviceAreaId',
         component: AncComponent,
-        pathMatch:  'full',
+        pathMatch: 'full',
     },
     {
         path: 'pex',
         component: PatientEducationExaminationComponent,
-        pathMatch:  'full', 
+        pathMatch: 'full',
     },
     {
         path: 'cm',
         component: ClientMonitoringComponent,
-        pathMatch:  'full',   
+        pathMatch: 'full',
     },
     {
         path: 'haart',
         component: HaartProphylaxisComponent,
-        pathMatch:  'full',   
+        pathMatch: 'full',
     },
     {
         path: 'ps',
         component: PreventiveServicesComponent,
-        pathMatch:  'full',   
+        pathMatch: 'full',
     }
 ];
 

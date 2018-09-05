@@ -72,6 +72,19 @@ namespace IQCare.Controllers.Shared
             return BadRequest(results);
         }
 
+        [HttpGet("GetEnrolledServicesByPersonId/{personId}")]
+        public async Task<IActionResult> GetEnrolledServicesByPersonId(int personId)
+        {
+            var results = await _mediator.Send(new GetEnrolledServicesCommand()
+            {
+                PersonId = personId
+            }, Request.HttpContext.RequestAborted);
+
+            if (results.IsValid)
+                return Ok(results.Value);
+            return BadRequest(results);
+        }
+
 
         // POST: api/PatientServices
         [HttpPost]
