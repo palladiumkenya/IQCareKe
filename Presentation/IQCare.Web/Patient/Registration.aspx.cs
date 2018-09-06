@@ -634,10 +634,11 @@ namespace IQCare.Web.Patient
 
                    
                     this.RenderLabel(label, fieldId, column);
-                    PnlDynamicElements.Controls.Add(new LiteralControl("<div class=\"radio col-md-12 pull-left\" style=\"padding: 0px;text-align:left;vertical-align:middle;margin:0\">"));
+                    PnlDynamicElements.Controls.Add(new LiteralControl("<div class=\"radio col-md-12 pull-left radioyesno\"  style=\"padding: 0px;text-align:left;vertical-align:middle;margin:0\">"));
                     HtmlInputRadioButton theYesNoRadio1 = new HtmlInputRadioButton();
                     theYesNoRadio1.ID = "RADIO1-" + column + "-" + table + "-" + fieldId;
                     theYesNoRadio1.Value = "Yes";
+                    
                     theYesNoRadio1.Name = "" + column + "";
                    // theYesNoRadio1.Attributes.Add("class", "form-control input-sm");
                     if (theConditional == true && theEnable == true)
@@ -645,10 +646,13 @@ namespace IQCare.Web.Patient
                     else
                         theYesNoRadio1.Attributes.Add("onclick", "down(this);");
                     theYesNoRadio1.Attributes.Add("onfocus", "up(this)");
+                    theYesNoRadio1.Style.Add("clip", "unset");
+                    theYesNoRadio1.Style.Add("height", "auto");
+                    theYesNoRadio1.Style.Add("width", "auto");
 
-                     PnlDynamicElements.Controls.Add(new LiteralControl("<label class=\"radio-inline\">"));
+                    PnlDynamicElements.Controls.Add(new LiteralControl("<label>"));
                     PnlDynamicElements.Controls.Add(theYesNoRadio1);
-                    PnlDynamicElements.Controls.Add(new LiteralControl("Yes "));
+                    PnlDynamicElements.Controls.Add(new LiteralControl("<span class='control-label' style='padding-left: 20px'>Yes</span>"));
                     PnlDynamicElements.Controls.Add(new LiteralControl("</label>"));
                     theYesNoRadio1.Visible = theEnable;
                     ApplyBusinessRules(theYesNoRadio1, controlId, theEnable);
@@ -665,6 +669,9 @@ namespace IQCare.Web.Patient
                     HtmlInputRadioButton theYesNoRadio2 = new HtmlInputRadioButton();
                     theYesNoRadio2.ID = "RADIO2-" + column + "-" + table + "-" + fieldId;
                     theYesNoRadio2.Value = "No";
+                    theYesNoRadio2.Style.Add("clip", "unset");
+                    theYesNoRadio2.Style.Add("height", "auto");
+                    theYesNoRadio2.Style.Add("width", "auto");
                     theYesNoRadio2.Name = "" + column + "";
                    // theYesNoRadio2.Attributes.Add("class", "form-control input-sm");
                     if (theConditional == true && theEnable == true)
@@ -672,9 +679,9 @@ namespace IQCare.Web.Patient
                     else
                         theYesNoRadio2.Attributes.Add("onclick", "down(this);");
                     theYesNoRadio2.Attributes.Add("onchange", "up(this)");
-                    PnlDynamicElements.Controls.Add(new LiteralControl("<label class=\"radio-inline\">")); 
+                    PnlDynamicElements.Controls.Add(new LiteralControl("<label>")); 
                     PnlDynamicElements.Controls.Add(theYesNoRadio2);
-                    PnlDynamicElements.Controls.Add(new LiteralControl("No ")); 
+                    PnlDynamicElements.Controls.Add(new LiteralControl("<span class='control-label' style='padding-left: 20px'>No</span>")); 
                     PnlDynamicElements.Controls.Add(new LiteralControl("</label>"));
                     ApplyBusinessRules(theYesNoRadio2, controlId, theEnable);
                     theYesNoRadio2.Visible = theEnable;
