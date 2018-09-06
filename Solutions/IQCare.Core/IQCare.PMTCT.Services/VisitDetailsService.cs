@@ -1,28 +1,28 @@
 ﻿using IQCare.PMTCT.Core.Models;
-using IQCare.PMTCT.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using IQCare.PMTCT.Infrastructure;
 
 namespace IQCare.PMTCT.Services
 {
     public class VisitDetailsService
     {
-        public ICommonUnitOfWork PmtctUnitOfWork;
+        private readonly IPmtctUnitOfWork _unitOfWork;
 
-        public VisitDetailsService(ICommonUnitOfWork pmtctUnitOfWork)
+        public VisitDetailsService(IPmtctUnitOfWork unitOfWork)
         {
-            PmtctUnitOfWork = pmtctUnitOfWork;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<PatientPregnancy> AddPatientPregnancy(PatientPregnancy patientPregnancy)
         {
             try
             {
-                await PmtctUnitOfWork.Repository<PatientPregnancy>().AddAsync(patientPregnancy);
-                await PmtctUnitOfWork.SaveAsync();
+                await _unitOfWork.Repository<PatientPregnancy>().AddAsync(patientPregnancy);
+                await _unitOfWork.SaveAsync();
                 return patientPregnancy;
             }catch(Exception e)
             {
@@ -35,15 +35,15 @@ namespace IQCare.PMTCT.Services
         {
             try
             {
-                PatientPregnancy _patientPregnancy = PmtctUnitOfWork.Repository<PatientPregnancy>().FindById(patientPregnancy.Id);
+                PatientPregnancy _patientPregnancy = _unitOfWork.Repository<PatientPregnancy>().FindById(patientPregnancy.Id);
                 _patientPregnancy.Lmp = patientPregnancy.Lmp;
                 _patientPregnancy.Edd = patientPregnancy.Edd;
                 _patientPregnancy.DateOfOutcome = patientPregnancy.DateOfOutcome;
                 _patientPregnancy.Parity = patientPregnancy.Parity;
                 _patientPregnancy.Gravidae = patientPregnancy.Parity;
-                
-                 PmtctUnitOfWork.Repository<PatientPregnancy>().Update(_patientPregnancy);
-                await PmtctUnitOfWork.SaveAsync();
+
+                _unitOfWork.Repository<PatientPregnancy>().Update(_patientPregnancy);
+                await _unitOfWork.SaveAsync();
                 return patientPregnancy;
             }
             catch (Exception e)
@@ -57,7 +57,7 @@ namespace IQCare.PMTCT.Services
         {
             try
             {
-                PatientPregnancy _patientPregnancy = await PmtctUnitOfWork.Repository<PatientPregnancy>().Get(x => x.PatientId == PatientId).FirstOrDefaultAsync();
+                PatientPregnancy _patientPregnancy = await _unitOfWork.Repository<PatientPregnancy>().Get(x => x.PatientId == PatientId).FirstOrDefaultAsync();
                 return _patientPregnancy;
             }
             catch (Exception e)
@@ -71,8 +71,8 @@ namespace IQCare.PMTCT.Services
         {
             try
             {
-                await PmtctUnitOfWork.Repository<PatientEducation>().AddAsync(patientEducation);
-                await PmtctUnitOfWork.SaveAsync();
+                await _unitOfWork.Repository<PatientEducation>().AddAsync(patientEducation);
+                await _unitOfWork.SaveAsync();
                 return patientEducation;
             }
             catch (Exception e)
@@ -86,12 +86,12 @@ namespace IQCare.PMTCT.Services
         {
             try
             {
-                PatientEducation _patientEducation = PmtctUnitOfWork.Repository<PatientEducation>().FindById(patientEducation.Id);
+                PatientEducation _patientEducation = _unitOfWork.Repository<PatientEducation>().FindById(patientEducation.Id);
                 _patientEducation.CounsellingDate = patientEducation.CounsellingDate;
                 _patientEducation.CounsellingTopicId = patientEducation.CounsellingTopicId;
-                
-                PmtctUnitOfWork.Repository<PatientEducation>().Update(patientEducation);
-                await PmtctUnitOfWork.SaveAsync();
+
+                _unitOfWork.Repository<PatientEducation>().Update(patientEducation);
+                await _unitOfWork.SaveAsync();
                 return patientEducation;
             }
             catch (Exception e)
@@ -105,7 +105,7 @@ namespace IQCare.PMTCT.Services
         {
             try
             {
-               List<PatientEducation>  patientEducation = await PmtctUnitOfWork.Repository<PatientEducation>().Get(x => x.PatientId == PatientId).ToListAsync();
+               List<PatientEducation>  patientEducation = await _unitOfWork.Repository<PatientEducation>().Get(x => x.PatientId == PatientId).ToListAsync();
                 return patientEducation;
             }
             catch (Exception e)
@@ -119,8 +119,8 @@ namespace IQCare.PMTCT.Services
         {
             try
             {
-              await  PmtctUnitOfWork.Repository<PatientProfile>().AddAsync(patientProfile);
-                await PmtctUnitOfWork.SaveAsync();
+              await _unitOfWork.Repository<PatientProfile>().AddAsync(patientProfile);
+                await _unitOfWork.SaveAsync();
                 return patientProfile;
             }
             catch (Exception e)
@@ -134,7 +134,7 @@ namespace IQCare.PMTCT.Services
         {
             try
             {
-                var _patientProfile = PmtctUnitOfWork.Repository<PatientProfile>().FindById(patientProfile.Id);
+                var _patientProfile = _unitOfWork.Repository<PatientProfile>().FindById(patientProfile.Id);
                 PatientProfile patientProfile_ = new PatientProfile()
                 {
                     PregnancyId = patientProfile.PregnancyId,
@@ -143,8 +143,8 @@ namespace IQCare.PMTCT.Services
                    // CounselledOn = patientProfile.CounselledOn,
                     TreatedForSyphilis = patientProfile.TreatedForSyphilis
                 };
-                PmtctUnitOfWork.Repository<PatientProfile>().Update(patientProfile_);
-                await PmtctUnitOfWork.SaveAsync();
+                _unitOfWork.Repository<PatientProfile>().Update(patientProfile_);
+                await _unitOfWork.SaveAsync();
                 return patientProfile;
             }
             catch (Exception e)
@@ -158,7 +158,7 @@ namespace IQCare.PMTCT.Services
         {
             try
             {
-                var profile = await PmtctUnitOfWork.Repository<PatientProfile>().Get(x => x.PatientId == PatientId && x.DeleteFlag == 0).ToListAsync();
+                var profile = await _unitOfWork.Repository<PatientProfile>().Get(x => x.PatientId == PatientId && x.DeleteFlag == 0).ToListAsync();
                 return profile;
             }
             catch (Exception e)

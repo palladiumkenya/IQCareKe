@@ -13,9 +13,9 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.pregnancy
 {
     public class GetPregnancyCommandHandler: IRequestHandler<GetPregnancyCommand,Result<PatientPregnancy>>
     {
-        private readonly ICommonUnitOfWork _unitOfWork;
+        private readonly IPmtctUnitOfWork _unitOfWork;
 
-        public GetPregnancyCommandHandler(ICommonUnitOfWork unitOfWork)
+        public GetPregnancyCommandHandler(IPmtctUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }

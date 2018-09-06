@@ -9,6 +9,7 @@ namespace IQCare.Common.Services
     public class PatientMasterVisitService
     {
         private readonly ICommonUnitOfWork _commonUnitOfWork;
+
         public PatientMasterVisitService(ICommonUnitOfWork commonUnitOfWork)
         {
             this._commonUnitOfWork = commonUnitOfWork ?? throw new ArgumentNullException(nameof(commonUnitOfWork));
@@ -17,6 +18,7 @@ namespace IQCare.Common.Services
         public async Task<PatientMasterVisit> Add(int patientId, int serviceId, DateTime start, int createdBy, DateTime? visitDate, DateTime? end, int? visitScheduled, int? visitBy, int? visitType, int? status)
         {
             try
+
             {
                 PatientMasterVisit patientMasterVisit = new PatientMasterVisit()
                 {

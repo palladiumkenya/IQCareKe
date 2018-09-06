@@ -9,6 +9,7 @@ import * as moment from 'moment';
 import {PatientProfile} from '../_models/patientProfile';
 import {VisitDetailsService} from '../_services/visit-details.service';
 import {PatientPregnancy} from '../_models/PatientPregnancy';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-visit-details',
@@ -26,13 +27,17 @@ export class VisitDetailsComponent implements OnInit, OnChanges {
     patientProfile: PatientProfile;
     pregnancyProfile: PatientPregnancy;
     visitDetails: VisitDetails;
-    private personId: number;
-    private patientId: number;
+    public personId: number;
+    public patientId: number;
+    public serviceAreaId: number;
+    public patientMasterVisitId: number;
+    public UserId: number;
+
     public ancVisitTypes: any[] = [];
     @Output() nextStep = new EventEmitter<VisitDetails>(); 
     @Input() visitProtocol: VisitDetails;
     
-    constructor(private fb: FormBuilder, private _lookupItemService: LookupItemService,
+    constructor(private route: ActivatedRoute, private fb: FormBuilder, private _lookupItemService: LookupItemService,
     private snotifyService: SnotifyService,
     private notificationService: NotificationService, private visitDetailsService: VisitDetailsService) {
 
@@ -56,14 +61,31 @@ export class VisitDetailsComponent implements OnInit, OnChanges {
         parityTwo: ['', Validators.required],
         gravidae: ['', Validators.required]
     });
-      this.personId = JSON.parse(localStorage.getItem('personId'));
-      this.patientId = (JSON.parse(localStorage.getItem('patientId'))) ? JSON.parse(localStorage.getItem('patientId')) : 0;
+      this.route.params.subscribe(params => {
+          this.personId = params['id'];
+      });
+      this.route.params.subscribe(params => {
+          this.patientId = params['serviceAreaId'];
+      });
+      this.route.params.subscribe(params => {
+          this.patientId = params['patientId'];
+      });
+      this.route.params.subscribe(params => {
+          this.patientMasterVisitId = params['patientMasterVisitId'];
+      });
+
+      this.UserId = JSON.parse(localStorage.getItem('appUserId'));
+
+    //  this.personId = JSON.parse(localStorage.getItem('personId'));
+     // this.patientId = (JSON.parse(localStorage.getItem('patientId'))) ? JSON.parse(localStorage.getItem('patientId')) : 0;
      // this.linkage.userId = JSON.parse(localStorage.getItem('appUserId'));
     this.getANCVisits('ANCVisitType');
       this.visitDetailsFormGroup.controls['gravidae'].disable({ onlySelf: true });
     
     // getANCProfile
      this. getAncInitialProfileVisitDetails(this.patientId);
+     this.getAncInitialProfileVisitDetails(this.patientId);
+     this.getPregnancyProfile(this.patientId);
 
   }
 
@@ -155,7 +177,7 @@ export class VisitDetailsComponent implements OnInit, OnChanges {
       console.log(this.visitDetailsFormGroup.value);
 
       this.visitDetails = {
-          PatientId: 9,
+          PatientId: this.patientId,
           ServiceAreaId: 3,
           VisitDate: this.visitDetailsFormGroup.controls['visitDate'].value,
           VisitType: this.visitDetailsFormGroup.controls['ancVisitType'].value,
@@ -167,6 +189,7 @@ export class VisitDetailsComponent implements OnInit, OnChanges {
           ParityOne: parseInt(this.visitDetailsFormGroup.controls['parityOne'].value, 10),
           ParityTwo: parseInt( this.visitDetailsFormGroup.controls['parityTwo'].value, 10),
           Gravidae: this.visitDetailsFormGroup.controls['gravidae'].value,
+          UserId: (this.UserId) ? this.UserId : 1,
      };
       //  this.nextStep.emit(this.visitDetailsFormGroup.value);
       console.log(this.visitDetails);
@@ -195,7 +218,7 @@ export class VisitDetailsComponent implements OnInit, OnChanges {
         const parityOne: number = this.visitDetailsFormGroup.controls['parityOne'].value;
         const parityTwo: number = this.visitDetailsFormGroup.controls['parityTwo'].value;
         const gravidae: number = parseInt(parityOne.toString(), 10 ) + parseInt(String(parityTwo), 10);
-        this.visitDetailsFormGroup.controls['gravidae'].setValue(gravidae + 1);
+        this.visitDetailsFormGroup.controls['gravidae'].setValue(gravidae + parseInt('1', 10));
         this.visitDetailsFormGroup.controls['gravidae'].disable({ onlySelf: true });
 
     }

@@ -20,5 +20,7 @@ namespace IQCare.PMTCT.Core.Models
         public DateTime? DateOfOutcome { get; set; }
         public Patient Patient { get; set; }
         public PatientMasterVisit PatientMasterVisit { get; set; }
+        public int CreatedBy { get; set; }
+        public DateTime CreateDate { get; set; }
     }
 }

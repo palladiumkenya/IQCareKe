@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\IQCare.Common.Infrastructure\IQCare.Common.Infrastructure.csproj" />
     <ProjectReference Include="..\IQCare.PMTCT.Infrastructure\IQCare.PMTCT.Infrastructure.csproj" />
   </ItemGroup>

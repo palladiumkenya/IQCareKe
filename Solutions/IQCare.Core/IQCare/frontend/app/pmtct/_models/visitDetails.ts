@@ -11,4 +11,5 @@ export interface VisitDetails {
       ParityOne?: number;
       ParityTwo?: number;
       Gravidae?: number;
+      UserId?: number;
 }

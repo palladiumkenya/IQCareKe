@@ -13,9 +13,9 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.Profile
 {
     public class GetANCInitialProfileCommandHandler:IRequestHandler<GetANCInitialProfileCommand,Result<PatientProfile>>
     {
-        private readonly ICommonUnitOfWork _unitOfWork;
+        private readonly IPmtctUnitOfWork _unitOfWork;
 
-        public GetANCInitialProfileCommandHandler(ICommonUnitOfWork unitOfWork)
+        public GetANCInitialProfileCommandHandler(IPmtctUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
