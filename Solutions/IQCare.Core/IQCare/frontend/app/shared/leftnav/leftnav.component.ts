@@ -52,4 +52,8 @@ export class LeftnavComponent implements OnInit {
     ngOnInit() {
         this.personId = JSON.parse(localStorage.getItem('personId'));
     }
+
+    goToLiveHapi() {
+        // window.open(window.location.hostname + ':4747/dashboard');
+    }
 }

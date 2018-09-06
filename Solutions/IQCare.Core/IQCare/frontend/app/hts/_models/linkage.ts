@@ -9,4 +9,5 @@ export class Linkage {
     userId: number;
     id?: number;
     IsEdit?: boolean;
+    artstartdate: string;
 }

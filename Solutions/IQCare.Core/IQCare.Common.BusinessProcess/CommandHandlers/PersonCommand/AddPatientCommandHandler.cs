@@ -42,7 +42,7 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.PersonCommand
                     }
 
                     var mstResult = await registerPersonService.InsertIntoBlueCard(registeredPerson.FirstName, registeredPerson.LastName,
-                        registeredPerson.LastName, request.EnrollmentDate, maritalStatusName, "", "", gender[0].ItemName, "EXACT", registeredPerson.DateOfBirth, request.UserId);
+                        registeredPerson.LastName, request.EnrollmentDate, maritalStatusName, "", "", gender[0].ItemName, "EXACT", registeredPerson.DateOfBirth, request.UserId, request.PosId);
 
                     var patient = await registerPersonService.AddPatient(request.PersonId, request.UserId, mstResult[0].Ptn_Pk);
                     

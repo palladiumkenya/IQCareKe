@@ -35,6 +35,8 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         patientLinkage.Facility = request.Facility;
                         patientLinkage.HealthWorker = request.HealthWorker;
                         patientLinkage.Cadre = request.Carde;
+                        patientLinkage.ArtStartDate = request.Artstartdate;
+                        patientLinkage.Comments = request.Remarks;
 
                         _unitOfWork.Repository<PatientLinkage>().Update(patientLinkage);
                         await _unitOfWork.SaveAsync();
@@ -55,8 +57,10 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         CreatedBy = request.UserId,
                         CreateDate = DateTime.Now,
                         HealthWorker = request.HealthWorker,
-                        Cadre = request.Carde
-                    };
+                        Cadre = request.Carde,
+                        ArtStartDate = request.Artstartdate,
+                        Comments = request.Remarks
+                };
 
                     await _unitOfWork.Repository<PatientLinkage>().AddAsync(patientLinkage);
                     await _unitOfWork.SaveAsync();

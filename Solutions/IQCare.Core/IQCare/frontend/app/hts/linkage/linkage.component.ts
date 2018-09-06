@@ -58,6 +58,9 @@ export class LinkageComponent implements OnInit {
                     this.linkage.facility = res[i].facility;
                     this.linkage.healthworker = res[i].healthWorker;
                     this.linkage.id = res[i].id;
+                    this.linkage.artstartdate = res[i].artStartDate;
+                    this.linkage.remarks = res[i].comments;
+
 
                     this.isEdit = true;
                     // this.linkage.remarks = res[i].cadre;

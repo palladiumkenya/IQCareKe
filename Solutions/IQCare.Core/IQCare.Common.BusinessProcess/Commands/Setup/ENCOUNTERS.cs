@@ -22,6 +22,7 @@ namespace IQCare.Common.BusinessProcess.Commands.Setup
         public string DATE_ENROLLED { get; set; }
         public string CCC_NUMBER { get; set; }
         public string REMARKS { get; set; }
+        public string ARTStartDate { get; set; }
     }
 
     public class NewTracing

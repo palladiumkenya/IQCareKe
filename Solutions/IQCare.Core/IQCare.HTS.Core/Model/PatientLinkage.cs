@@ -17,5 +17,7 @@ namespace IQCare.HTS.Core.Model
         public string AuditData { get; set; }
         public string HealthWorker { get; set; }
         public string Cadre { get; set; }
+        public DateTime? ArtStartDate { get; set; }
+        public string Comments { get; set; }
     }
 }
