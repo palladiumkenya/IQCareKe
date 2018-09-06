@@ -168,7 +168,7 @@ namespace IQCare.Web.Patient
                      //   DataTable dt = dsPatient.Tables[0];
                         for (int i = 0; i < dt.Rows.Count; i++)
                         {
-                            objBilder.Append("<tr>");
+                            objBilder.Append("<tr style='background-color:#e1e1e1'>");
                             //objBilder.Append("<td class='smallerlabel'>" + dsPatient.Tables[0].Rows[i]["PatientRegistrationID"].ToString() + "</td>");
                             objBilder.Append("<td class='smallerlabel'>" + dt.Rows[i]["PatientFacilityId"].ToString() + "</td>");
                             objBilder.Append("<td class='smallerlabel'>" + dt.Rows[i]["firstname"].ToString() + "</td>");
