@@ -20,6 +20,6 @@ namespace IQCare.Common.Core.Models
         public DateTime? DateOfBirth { get; set; }
         public bool? DobPrecision { get; set; }
         public DateTime? RegistrationDate { get; set; }
-        public int FacilityId { get; set; }
+        public int? FacilityId { get; set; }
     }
 }

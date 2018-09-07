@@ -242,6 +242,19 @@ namespace IQCare.Controllers.Common
             return BadRequest(results);
 
         }
+
+        [HttpGet("GetServiceAreaIdentifiers/{serviceAreaId}")]
+        public async Task<IActionResult> Get(int serviceAreaId)
+        {
+            var response = await _mediator.Send(new GetServiceAreaIdentifiersCommand()
+            {
+                ServiceAreaId = serviceAreaId
+            }, Request.HttpContext.RequestAborted);
+
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
     }
 
         //[HttpGet("getFacility/{mflCode}")]
