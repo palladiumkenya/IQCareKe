@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, NgZone } from '@angular/core';
 import { PersonHomeService } from '../services/person-home.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import {PatientView} from '../_model/PatientView';
 
 @Component({
     selector: 'app-services-list',
@@ -12,7 +13,8 @@ export class ServicesListComponent implements OnInit {
     @Input('services') services: any[];
     enrolledServices: any[];
     hasItems: boolean = false;
-
+    public patientId: number;
+    public Patient: PatientView = {};
     constructor(private personhomeservice: PersonHomeService,
         public zone: NgZone,
         private router: Router,
@@ -21,6 +23,10 @@ export class ServicesListComponent implements OnInit {
 
     ngOnInit() {
         this.getPersonEnrolledServices(this.personId);
+        this.getPatientByPersonId(this.personId);
+        this.route.params.subscribe(params => {
+            this.patientId = params['serviceAreaId'];
+        });
     }
 
     getPersonEnrolledServices(personId: number) {
@@ -33,6 +39,15 @@ export class ServicesListComponent implements OnInit {
         });
     }
 
+    getPatientByPersonId(personId: number) {
+        this.personhomeservice.getPatientByPersonId(personId).subscribe((res) => {
+         this.Patient = res;
+         console.log(this.Patient);
+         console.log('patentId:' + this.Patient.patientId);
+         if (this.Patient.patientId > 0) { this.hasItems = true; }
+        });
+    }
+
     enrollToService(serviceId: number) {
         this.zone.run(() => {
             this.router.navigate(['/dashboard/enrollment/' + this.personId + '/' + serviceId],
@@ -42,7 +57,8 @@ export class ServicesListComponent implements OnInit {
 
     newEncounter(serviceId: number) {
         this.zone.run(() => {
-            this.router.navigate(['/pmtct/anc/' + 5 + '/5/' + serviceId], { relativeTo: this.route });
+            this.router.navigate(['/pmtct/anc/' + this.Patient.patientId ],
+                { relativeTo: this.route });
         });
     }
 }

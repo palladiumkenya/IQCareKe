@@ -47,7 +47,7 @@ namespace IQCare
 
             services.AddDbContext<PmtctDbContext>(b => b.UseSqlServer(_connectionString));
             services.AddScoped(typeof(IPmtctRepository<>), typeof(PmtctRepository<>));
-            services.AddScoped<PMTCT.Infrastructure.ICommonUnitOfWork>(c => new IPmtctUnitOfWork(c.GetRequiredService<PmtctDbContext>()));
+            services.AddScoped<PMTCT.Infrastructure.IPmtctUnitOfWork>(c => new PmtctUnitOfWork(c.GetRequiredService<PmtctDbContext>()));
 
             return services;
         }

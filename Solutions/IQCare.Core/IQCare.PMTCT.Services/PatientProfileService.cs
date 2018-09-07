@@ -9,9 +9,9 @@ namespace IQCare.PMTCT.Services
 {
     public class PatientProfileService
     {
-        public readonly ICommonUnitOfWork _PmtctUnitOfWork;
+        public readonly IPmtctUnitOfWork _PmtctUnitOfWork;
 
-        public PatientProfileService(ICommonUnitOfWork pmtctUnitOfWork)
+        public PatientProfileService(IPmtctUnitOfWork pmtctUnitOfWork)
         {
             _PmtctUnitOfWork = pmtctUnitOfWork;
         }
@@ -73,7 +73,7 @@ namespace IQCare.PMTCT.Services
                 PatientProfile patientProfile = _PmtctUnitOfWork.Repository<PatientProfile>().FindById(Id);
                 if(null!=patientProfile)
                 {
-                    patientProfile.DeleteFlag = 1;
+                    patientProfile.DeleteFlag = false;
                 }
                 _PmtctUnitOfWork.Repository<PatientProfile>().Update(patientProfile);
                 await _PmtctUnitOfWork.SaveAsync();

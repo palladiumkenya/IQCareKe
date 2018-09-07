@@ -9,6 +9,8 @@ import {ClientMonitoringCommand} from '../_models/ClientMonitoringCommand';
 import {HaartProphylaxisCommand} from '../_models/HaartProphylaxisCommand';
 import {ReferralAppointmentCommandService} from './referral-appointment-command.service';
 import {PatientPreventiveService} from '../_models/PatientPreventiveService';
+import {PatientProfile} from '../_models/patientProfile';
+import {Profile} from 'selenium-webdriver/firefox';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -26,6 +28,9 @@ export class AncService {
     private _url_haart = 'api/HaartProphylaxis/';
     private _url_ref = 'api/ReferralAppointment/';
     private _url_pre = 'api/PreventiveService/';
+    private _url_visit = 'api/VisitDetails/';
+
+    public profile: PatientProfile = {};
 
 
   constructor(private http: HttpClient,
@@ -65,11 +70,5 @@ export class AncService {
             catchError(this.errorHandler.handleError<any>('PreventiveServiceController', ), )
         );
     }
-
-
-
-
-
-
 }
 

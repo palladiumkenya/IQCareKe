@@ -14,9 +14,9 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.PreventiveServices
 {
     public class addPatientPreventiveServicesCommandHandler : IRequestHandler<PatientPreventiveServiceCommand, Result<AddPatientPreventiveServiceCommandResponse>>
     {
-       private readonly ICommonUnitOfWork _pmtctUnitOfWork;
+       private readonly IPmtctUnitOfWork _pmtctUnitOfWork;
 
-        public addPatientPreventiveServicesCommandHandler(ICommonUnitOfWork pmtctUnitOfWork)
+        public addPatientPreventiveServicesCommandHandler(IPmtctUnitOfWork pmtctUnitOfWork)
         {
             _pmtctUnitOfWork = pmtctUnitOfWork ?? throw new ArgumentNullException(nameof(pmtctUnitOfWork));
         }

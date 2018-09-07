@@ -13,9 +13,9 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.Profile
 {
     public class GetANCInitialProfileCommandHandler:IRequestHandler<GetANCInitialProfileCommand,Result<PatientProfile>>
     {
-        private readonly ICommonUnitOfWork _unitOfWork;
+        private readonly IPmtctUnitOfWork _unitOfWork;
 
-        public GetANCInitialProfileCommandHandler(ICommonUnitOfWork unitOfWork)
+        public GetANCInitialProfileCommandHandler(IPmtctUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
@@ -26,7 +26,7 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.Profile
             {
                 try
                 {
-                    PatientProfile result =  _unitOfWork.Repository<PatientProfile>().Get(x => x.PatientId == request.PatientId).OrderBy(x=>x.Id).FirstOrDefault();
+                    PatientProfile result =  _unitOfWork.Repository<PatientProfile>().Get(x => x.PatientId == request.PatientId & x.PregnancyId==request.PregnancyId & !x.DeleteFlag).OrderBy(x=>x.Id).FirstOrDefault();
                     if(result==null)
                     {
                         result = new PatientProfile();

@@ -10,5 +10,6 @@ namespace IQCare.PMTCT.BusinessProcess.Commands.Profile
   public  class GetANCInitialProfileCommand :IRequest<Result<PatientProfile>>
     {
         public int PatientId { get; set; }
+        public int PregnancyId { get; set; }
     }
 }
