@@ -73,7 +73,7 @@ namespace IQCare.PMTCT.Services
                 PatientProfile patientProfile = _PmtctUnitOfWork.Repository<PatientProfile>().FindById(Id);
                 if(null!=patientProfile)
                 {
-                    patientProfile.DeleteFlag = 1;
+                    patientProfile.DeleteFlag = false;
                 }
                 _PmtctUnitOfWork.Repository<PatientProfile>().Update(patientProfile);
                 await _PmtctUnitOfWork.SaveAsync();

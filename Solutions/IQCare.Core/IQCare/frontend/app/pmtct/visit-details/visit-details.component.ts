@@ -10,6 +10,7 @@ import {PatientProfile} from '../_models/patientProfile';
 import {VisitDetailsService} from '../_services/visit-details.service';
 import {PatientPregnancy} from '../_models/PatientPregnancy';
 import {ActivatedRoute} from '@angular/router';
+import {PregnancyViewModel} from '../_models/viewModel/PregnancyViewModel';
 
 @Component({
   selector: 'app-visit-details',
@@ -25,13 +26,14 @@ export class VisitDetailsComponent implements OnInit, OnChanges {
     Ancprofile$: Subscription;
     pregnancy$: Subscription;
     patientProfile: PatientProfile;
-    pregnancyProfile: PatientPregnancy;
+    pregnancyProfile: PregnancyViewModel;
     visitDetails: VisitDetails;
     public personId: number;
     public patientId: number;
     public serviceAreaId: number;
     public patientMasterVisitId: number;
     public UserId: number;
+    public pregnancyId: number;
 
     public ancVisitTypes: any[] = [];
     @Output() nextStep = new EventEmitter<VisitDetails>(); 
@@ -83,9 +85,7 @@ export class VisitDetailsComponent implements OnInit, OnChanges {
       this.visitDetailsFormGroup.controls['gravidae'].disable({ onlySelf: true });
     
     // getANCProfile
-     this. getAncInitialProfileVisitDetails(this.patientId);
-     this.getAncInitialProfileVisitDetails(this.patientId);
-     this.getPregnancyProfile(this.patientId);
+      this.getPregnancyProfile(this.patientId);
 
   }
 
@@ -116,8 +116,8 @@ export class VisitDetailsComponent implements OnInit, OnChanges {
                 });
     }
     
-    public getAncInitialProfileVisitDetails(patientId: number) {
-        this.Ancprofile$ = this.visitDetailsService.getAncInitialProfile(patientId)
+    public getAncInitialProfileVisitDetails(patientId: number, pregnancyId: number) {
+        this.Ancprofile$ = this.visitDetailsService.getAncInitialProfile(patientId, pregnancyId)
             .subscribe(
                 p => {
                     this.patientProfile = (p) ? p : this.patientProfile;
@@ -127,7 +127,7 @@ export class VisitDetailsComponent implements OnInit, OnChanges {
                 this.snotifyService.error('Error editing encounter ' + error, 'Encounter', this.notificationService.getConfig());
                 },
             () => {
-                    if (!this.patientProfile) {
+                    if (this.patientProfile) {
                         this.visitDetailsFormGroup.controls['ancVisitType'].setValue(this.patientProfile.VisitType);
                         this.visitDetailsFormGroup.controls['ancVisitType'].disable({ onlySelf: true });
                         this.visitDetailsFormGroup.controls['ancVisitNumber'].setValue(this.patientProfile.VisitNumber + 1);
@@ -147,7 +147,17 @@ export class VisitDetailsComponent implements OnInit, OnChanges {
         this.pregnancy$ = this.visitDetailsService.getPregnancyProfile(patientId)
             .subscribe(
                 p => {
-                    this.pregnancyProfile = (p) ? p : this.pregnancyProfile;
+                   // this.pregnancyProfile = (p) ? p : this.pregnancyProfile;
+                    this.pregnancyProfile = {
+                        Id: p.id,
+                        patientId: p.patientId,
+                        patientMasterVisitId: p.patientMasterVisitId,
+                        lmp: p.lmp,
+                        edd: p.edd,
+                        parity: p.parity,
+                        parity2: p.parity2
+                    } as PregnancyViewModel;
+                    this.pregnancyId = parseInt(p.id.toString(), 10);
                 },
                 (error)  => {
                     console.log(error);
@@ -155,12 +165,17 @@ export class VisitDetailsComponent implements OnInit, OnChanges {
                         this.notificationService.getConfig());
                },
                 () => {
-                    if (!this.pregnancyProfile) {
+                    console.log('pregnancy values');
+                    console.log(this.pregnancyProfile);
+                    if (this.pregnancyProfile) {
                         this.visitDetailsFormGroup.controls['dateLMP'].setValue(this.pregnancyProfile.lmp);
                         this.visitDetailsFormGroup.controls['dateEDD'].setValue(this.pregnancyProfile.edd);
                         this.visitDetailsFormGroup.controls['parityOne'].setValue(this.pregnancyProfile.parity);
                         this.visitDetailsFormGroup.controls['parityTwo'].setValue(this.pregnancyProfile.parity);
                         this.visitDetailsFormGroup.controls['gravidae'].setValue(this.pregnancyProfile.gravidae);
+                        this.visitDetailsFormGroup.controls['gestation'].setValue(this.pregnancyProfile.gestation);
+                       // this.visitDetailsFormGroup.controls['ageAtMenarche'].setValue(this.pregnancyProfile.ag);
+
 
                         // disable the fields:
                         this.visitDetailsFormGroup.controls['dateLMP'].disable({ onlySelf: true });
@@ -168,8 +183,10 @@ export class VisitDetailsComponent implements OnInit, OnChanges {
                         this.visitDetailsFormGroup.controls['parityOne'].disable({ onlySelf: true });
                         this.visitDetailsFormGroup.controls['parityTwo'].disable({ onlySelf: true });
                         this.visitDetailsFormGroup.controls['ancVisitType'].disable({ onlySelf: true });
+                        this.visitDetailsFormGroup.controls['gravidae'].disable({ onlySelf: true });
+                        this.visitDetailsFormGroup.controls['gestation'].setValue(this.pregnancyProfile.gestation);
                     }
-
+                    this. getAncInitialProfileVisitDetails(this.patientId, this.pregnancyProfile.Id);
             });
     }
 

@@ -9,5 +9,4 @@ export interface PatientProfile {
     TreatedForSyphilis?: number;
     DeleteFlag?: number;
     CreatedBy?: number;
-    AuditData?: string;
 }

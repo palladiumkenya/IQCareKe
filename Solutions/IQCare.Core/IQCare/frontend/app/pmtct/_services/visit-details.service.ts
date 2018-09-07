@@ -28,8 +28,8 @@ export class VisitDetailsService {
         );
     }
 
-    public getAncInitialProfile(patientId: number): Observable<PatientProfile> {
-      return this.http.get<PatientProfile>(this.API_URL + '' + this._url + 'GetPregnancyProfile/' + patientId).pipe(
+    public getAncInitialProfile(patientId: number, pregnancyId): Observable<PatientProfile> {
+      return this.http.get<PatientProfile>(this.API_URL + '' + this._url + 'GetAncProfile/' + patientId + '/' + pregnancyId).pipe(
           tap(getAncInitialProfile => this.errorHandler.log('Error in fetching anc visit details')),
           catchError(this.errorHandler.handleError<PatientProfile>('getANCInitialProfile'))
       );

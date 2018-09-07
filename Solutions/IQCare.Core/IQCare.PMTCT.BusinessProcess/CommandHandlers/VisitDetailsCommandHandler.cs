@@ -31,6 +31,8 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
         {
             using (_commonUnitOfWork)
             {
+                int profileId = 0;
+
                 try
                 {
 
@@ -89,13 +91,14 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
                         };
 
                           var profile = visitDetailsService.AddPatientProfile(patientProfile);
+                        profileId = profile.Id;
                     }
 
                     return Library.Result<VisitDetailsCommandResult>.Valid(new VisitDetailsCommandResult()
                     {
                         PatientMasterVisitId =  patientMasterVisit.Id,
                         PregancyId =pregnancy.Id,
-                        ProfileId=profile.Id,
+                        ProfileId=profileId,
                         PatientEncounterId=encounter.Id
                     });
                 }

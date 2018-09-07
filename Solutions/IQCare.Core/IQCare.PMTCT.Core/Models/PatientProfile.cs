@@ -15,7 +15,7 @@ namespace IQCare.PMTCT.Core.Models
         public int VisitType { get; set; }
         public int? TreatedForSyphilis { get; set; }
         public int? CreatedBy { get; set; }
-        public int DeleteFlag{get; set; }
+        public Boolean DeleteFlag{get; set; }
         public DateTime CreateDate { get; set;} 
         
     }

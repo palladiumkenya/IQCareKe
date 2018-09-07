@@ -158,7 +158,7 @@ namespace IQCare.PMTCT.Services
         {
             try
             {
-                var profile = await _unitOfWork.Repository<PatientProfile>().Get(x => x.PatientId == PatientId && x.DeleteFlag == 0).ToListAsync();
+                var profile = await _unitOfWork.Repository<PatientProfile>().Get(x => x.PatientId == PatientId && !x.DeleteFlag).ToListAsync();
                 return profile;
             }
             catch (Exception e)

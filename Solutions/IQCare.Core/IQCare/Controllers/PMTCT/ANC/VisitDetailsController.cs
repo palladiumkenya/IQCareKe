@@ -49,10 +49,10 @@ namespace IQCare.Controllers.PMTCT.ANC
 
         }
 
-        [HttpGet("GetAncProfile/{patientId}")]
-        public async Task<IActionResult>GetANcProfile(int patientId)
+        [HttpGet("GetAncProfile/{patientId}/{pregnancyId}")]
+        public async Task<IActionResult>GetANcProfile(int patientId,int pregnancyId)
         {
-            var results = await _mediator.Send(new GetANCInitialProfileCommand() { PatientId = patientId }, HttpContext.RequestAborted);
+            var results = await _mediator.Send(new GetANCInitialProfileCommand() { PatientId = patientId,PregnancyId = pregnancyId}, HttpContext.RequestAborted);
             if (results.IsValid)
                 return Ok(results.Value);
             return BadRequest(results);

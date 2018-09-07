@@ -48,7 +48,7 @@ namespace IQCare.PMTCT.Services
             try
             {
                 PatientProfile patientProfile = await _unitOfWork.Repository<PatientProfile>()
-                    .Get(x => x.PatientId == patientId &&  x.DeleteFlag==0).FirstOrDefaultAsync();
+                    .Get(x => x.PatientId == patientId &&  !x.DeleteFlag).FirstOrDefaultAsync();
                 return patientProfile;
             }
             catch (Exception e)
@@ -63,7 +63,7 @@ namespace IQCare.PMTCT.Services
             try
             {
                 List<PatientProfile> patientProfile = await _unitOfWork.Repository<PatientProfile>()
-                    .Get(x => x.PatientId == patientId && x.DeleteFlag == 0).ToListAsync();
+                    .Get(x => x.PatientId == patientId && !x.DeleteFlag).ToListAsync();
                 return patientProfile;
             }
             catch (Exception e)
