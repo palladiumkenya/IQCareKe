@@ -6645,7 +6645,7 @@ namespace IQCare.Web.Clinical
                 }
                 else if (controlReferenceId == "SELECT_LIST_MULTI")
                 {
-                    if (bindSource == "" || bindCategory == "")
+                    if (String.IsNullOrEmpty(bindSource) && String.IsNullOrEmpty(bindCategory))
                     {
 
                         this.CreateMissingFieldAlert(fieldId, fieldName, tabId, "");
