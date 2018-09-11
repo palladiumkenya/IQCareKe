@@ -63,7 +63,7 @@ namespace IQCare.Controllers.Common
             return BadRequest(results);
         }
 
-        [HttpGet("optionsByGroupandItemName")]
+        [HttpGet("optionsByGroupandItemName/{groupName}/{itemName}")]
         public async Task<IActionResult> Get(string groupName, string itemName)
         {
             var results =

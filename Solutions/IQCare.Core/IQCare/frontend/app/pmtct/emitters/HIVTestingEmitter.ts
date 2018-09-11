@@ -6,4 +6,5 @@ export interface HIVTestingEmitter {
     lotNumber?: string;
     expiryDate?: Date;
     nextAppointmentDate?: Date;
+    finalResult?: number;
 }

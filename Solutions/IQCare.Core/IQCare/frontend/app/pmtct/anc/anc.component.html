@@ -1,59 +1,73 @@
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <div class="row"> 
+        <div class="row">
             <div class="col-lg-12 col-sm-6 col-xs-12">
                 <div class="widget">
                     <div class="widget-header bordered-bottom bordered-sky">
                         <span class="widget-caption"> PMTCT | ANC WORKFLOW </span>
-                    </div><!--Widget Header-->
+                    </div>
+                    <!--Widget Header-->
                     <div class="widget-body">
                         <div class="row">
                             <div class="col-md-12">
                                 <mat-horizontal-stepper [linear]="isLinear" #stepper>
-                                    <mat-step matTooltip="test tooltip" >
-                                      
-                                        <ng-template matStepLabel><span matTooltip="ANC Visit Details">Visit Details</span> </ng-template>
+                                    <mat-step matTooltip="test tooltip">
+
+                                        <ng-template matStepLabel><span matTooltip="ANC Visit Details">Visit Details</span>
+                                        </ng-template>
                                         <app-visit-details (visitDetails)="visitDetails" (nextStep)="onSaveVisitDetails($event)"></app-visit-details>
-                                        
+
                                     </mat-step>
-                                    <mat-step>                                     
-                                        <ng-template matStepLabel> <span matTooltip="Patient Education & Mother Profile">Counselling</span> </ng-template>
+                                    <mat-step>
+                                        <ng-template matStepLabel> <span matTooltip="Patient Education & Mother Profile">Counselling</span>
+                                        </ng-template>
                                         <app-patient-education-examination (nextStep)="onSavePatientEducation($event)"></app-patient-education-examination>
                                     </mat-step>
                                     <mat-step>
-                                           <ng-template matStepLabel><span matTooltip="Patient HIV Status ">HIV Status </span> </ng-template>
-                                            
-                                            <app-hiv-status></app-hiv-status>
+                                        <ng-template matStepLabel><span matTooltip="Patient HIV Status ">HIV Status </span></ng-template>
+                                        <app-hiv-status (nextStep)="onSaveHivStatus($event)"></app-hiv-status>
                                     </mat-step>
                                     <mat-step>
-                                    <ng-template matStepLabel><span matTooltip="Client Monitoring & CaCx Screening">Client Monitoring</span>  </ng-template>
+                                        <ng-template matStepLabel><span matTooltip="Client Monitoring & CaCx Screening">Client
+                                                Monitoring
+                                            </span> </ng-template>
                                         <app-client-monitoring (nextStep)="onSaveClientMonitoring($event)"></app-client-monitoring>
 
 
                                     </mat-step>
                                     <mat-step>
-                                        <ng-template matStepLabel><span matTooltip="HAART Prophylaxis & Other Conditions">HAART | Prophylaxis</span> </ng-template>
+                                        <ng-template matStepLabel><span matTooltip="HAART Prophylaxis & Other Conditions">HAART
+                                                | Prophylaxis</span> </ng-template>
                                         <app-haart-prophylaxis (nextStep)="onSaveHaartProphylaxis($event)"></app-haart-prophylaxis>
                                     </mat-step>
                                     <mat-step>
-                                        <ng-template matStepLabel><span matTooltip="Preventive Services & Partner Testing">Preventive Services</span> </ng-template>
-                                        <app-preventive-services (nextStep)="onSavePreventiveService($event)" ></app-preventive-services>
+                                        <ng-template matStepLabel><span matTooltip="Preventive Services & Partner Testing">Preventive
+                                                Services
+                                            </span> </ng-template>
+                                        <app-preventive-services (nextStep)="onSavePreventiveService($event)"></app-preventive-services>
                                     </mat-step>
 
                                     <mat-step>
-                                      <ng-template matStepLabel><span matTooltip="Referrals & Next Appointment">Referrals</span> </ng-template>
-                                      <app-referrals (nextStep)="onSaveReferralAppointment($event)"></app-referrals>
-                                      <div>
-                                        <button mat-raised-button class="mat-warn" matStepperPrevious style="margin-right: 5px">Back</button>
-                                        <button mat-raised-button class="mat-accent" (click)="stepper.reset()" style="margin-right: 5px">Reset Encounter</button>
-                                          <button mat-raised-button class="mat-primary" (click)="stepper.reset()">Complete Encounter</button>
-                                      </div>
+                                        <ng-template matStepLabel><span matTooltip="Referrals & Next Appointment">Referrals</span>
+                                        </ng-template>
+                                        <app-referrals (nextStep)="onSaveReferralAppointment($event)"></app-referrals>
+                                        <div>
+                                            <button mat-raised-button class="mat-warn" matStepperPrevious style="margin-right: 5px">Back</button>
+                                            <button mat-raised-button class="mat-accent" (click)="stepper.reset()" style="margin-right: 5px">Reset
+                                                Encounter
+                                            </button>
+                                            <button mat-raised-button class="mat-primary" (click)="stepper.reset()">Complete
+                                                Encounter
+                                            </button>
+                                        </div>
                                     </mat-step>
-                                  </mat-horizontal-stepper>
+                                </mat-horizontal-stepper>
                             </div>
-                        </div>                                            
-                    </div><!--Widget Body-->
-                </div><!--Widget-->
+                        </div>
+                    </div>
+                    <!--Widget Body-->
+                </div>
+                <!--Widget-->
             </div>
         </div>
     </div>

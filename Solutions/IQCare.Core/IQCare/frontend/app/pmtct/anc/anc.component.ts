@@ -4,30 +4,31 @@ import { SnotifyService } from 'ng-snotify';
 import { ActivatedRoute } from '@angular/router';
 import { VisitDetails } from './../_models/visitDetails';
 import { VisitDetailsService } from '../_services/visit-details.service';
-import {PatientEducationEmitter} from '../emitters/PatientEducationEmitter';
-import {PatientEducationCommand} from '../_models/PatientEducationCommand';
-import {PreventiveService} from '../_models/PreventiveService';
-import {Subscription} from 'rxjs/index';
-import {ClientMonitoringCommand} from '../_models/ClientMonitoringCommand';
-import {ClientMonitoringEmitter} from '../emitters/ClientMonitoringEmitter';
-import {AncService} from '../_services/anc.service';
-import {HAARTProphylaxisEmitter} from '../emitters/HAARTProphylaxisEmitter';
-import {HaartProphylaxisCommand} from '../_models/HaartProphylaxisCommand';
-import {PatientDrugAdministration} from '../_models/PatientDrugAdministration';
-import {ReferralsEmitter} from '../emitters/ReferralsEmitter';
-import {PatientReferral} from '../_models/PatientReferral';
-import {ReferralAppointmentCommand} from '../_models/ReferralAppointmentCommand';
-import {PatientAppointmet} from '../_models/PatientAppointmet';
-import {PreventiveServiceEmitter} from '../emitters/PreventiveServiceEmitter';
-import {PatientPreventiveService} from '../_models/PatientPreventiveService';
-import {PatientPregnancy} from '../_models/PatientPregnancy';
-import {PatientProfile} from '../_models/patientProfile';
-import {PregnancyViewModel} from '../_models/viewModel/PregnancyViewModel';
+import { PatientEducationEmitter } from '../emitters/PatientEducationEmitter';
+import { PatientEducationCommand } from '../_models/PatientEducationCommand';
+import { PreventiveService } from '../_models/PreventiveService';
+import { Subscription } from 'rxjs/index';
+import { ClientMonitoringCommand } from '../_models/ClientMonitoringCommand';
+import { ClientMonitoringEmitter } from '../emitters/ClientMonitoringEmitter';
+import { AncService } from '../_services/anc.service';
+import { HAARTProphylaxisEmitter } from '../emitters/HAARTProphylaxisEmitter';
+import { HaartProphylaxisCommand } from '../_models/HaartProphylaxisCommand';
+import { PatientDrugAdministration } from '../_models/PatientDrugAdministration';
+import { ReferralsEmitter } from '../emitters/ReferralsEmitter';
+import { PatientReferral } from '../_models/PatientReferral';
+import { ReferralAppointmentCommand } from '../_models/ReferralAppointmentCommand';
+import { PatientAppointmet } from '../_models/PatientAppointmet';
+import { PreventiveServiceEmitter } from '../emitters/PreventiveServiceEmitter';
+import { PatientPreventiveService } from '../_models/PatientPreventiveService';
+import { PatientPregnancy } from '../_models/PatientPregnancy';
+import { PatientProfile } from '../_models/patientProfile';
+import { PregnancyViewModel } from '../_models/viewModel/PregnancyViewModel';
+import { HIVTestingEmitter } from '../emitters/HIVTestingEmitter';
 
 @Component({
-  selector: 'app-anc',
-  templateUrl: './anc.component.html',
-  styleUrls: ['./anc.component.css']
+    selector: 'app-anc',
+    templateUrl: './anc.component.html',
+    styleUrls: ['./anc.component.css']
 })
 export class AncComponent implements OnInit, OnDestroy {
 
@@ -40,8 +41,10 @@ export class AncComponent implements OnInit, OnDestroy {
     public patientId: number;
     public serviceAreaId: number;
     public patientMasterVisitId: number;
+    public userId: number;
+    public visitDate: Date;
 
-    public saveVisitDetails$ ;
+    public saveVisitDetails$;
     public savePatientEducation$: Subscription;
     public saveClientMonitoring$: Subscription;
     public saveHaartProphylaxis$: Subscription;
@@ -51,135 +54,147 @@ export class AncComponent implements OnInit, OnDestroy {
     public getPatientProfile$: Subscription;
 
     public pregnancy: PregnancyViewModel = {};
-    public profile: PatientProfile  = {};
+    public profile: PatientProfile = {};
 
 
-    constructor(private route: ActivatedRoute,  private visitDetailsService: VisitDetailsService, private snotifyService: SnotifyService,
-        private notificationService: NotificationService, private ancService: AncService) {}
+    constructor(private route: ActivatedRoute, private visitDetailsService: VisitDetailsService,
+        private snotifyService: SnotifyService,
+        private notificationService: NotificationService, private ancService: AncService) {
+        this.userId = JSON.parse(localStorage.getItem('appUserId'));
+    }
 
-  ngOnInit() {
-      this.route.params.subscribe(params => {
-          this.personId = params['id'];
-      });
-      this.route.params.subscribe(params => {
-          this.patientId = params['serviceAreaId'];
-      });
-      this.route.params.subscribe(params => {
-          this.patientId = params['patientId'];
-      });
-      this.route.params.subscribe(params => {
-          this.patientMasterVisitId = params['patientMasterVisitId'];
-      });
-  }
+    ngOnInit() {
+        this.route.params.subscribe(params => {
+            this.personId = params['id'];
+        });
+        this.route.params.subscribe(params => {
+            this.serviceAreaId = params['serviceAreaId'];
+        });
+        this.route.params.subscribe(params => {
+            this.patientId = params['patientId'];
+        });
+        this.route.params.subscribe(params => {
+            this.patientMasterVisitId = params['patientMasterVisitId'];
+        });
+    }
 
 
-  public onSaveVisitDetails(data: VisitDetails): void  {
+    public onSaveVisitDetails(data: VisitDetails): void {
+        this.visitDate = data.VisitDate;
 
-    this.saveVisitDetails$ = this.visitDetailsService.savePatientDetails(data)
-          .subscribe(
-              p => {
-                  console.log(p);
-                  this.snotifyService.success('Visit Details Added Successfully' + p);
-              },
-              (err) => {
-                  console.log(err);
-                  this.snotifyService.error('Error Adding VisitDetails' + err, 'VisitDetails service',
-                   this.notificationService.getConfig());
-              },
-              () => {
-                  console.log(this.saveVisitDetails$);
-              });
-  }
+        this.saveVisitDetails$ = this.visitDetailsService.savePatientDetails(data)
+            .subscribe(
+                p => {
+                    console.log(p);
+                    this.snotifyService.success('Visit Details Added Successfully' + p);
+                },
+                (err) => {
+                    console.log(err);
+                    this.snotifyService.error('Error Adding VisitDetails' + err, 'VisitDetails service',
+                        this.notificationService.getConfig());
+                },
+                () => {
+                    console.log(this.saveVisitDetails$);
+                });
+    }
 
-  public onSavePatientEducation(data: PatientEducationEmitter): void {
+    public onSavePatientEducation(data: PatientEducationEmitter): void {
 
-      const patientEducation = {
-          BreastExamDone: data.breastExamDone,
-          TreatedSyphilis: data.treatedSyphilis,
-          CounsellingTopics: data.counsellingTopics
-      } as PatientEducationCommand;
+        const patientEducation = {
+            BreastExamDone: data.breastExamDone,
+            TreatedSyphilis: data.treatedSyphilis,
+            CounsellingTopics: data.counsellingTopics
+        } as PatientEducationCommand;
 
-      this.savePatientEducation$ = this.ancService.savePatientEducation(patientEducation)
-          .subscribe(
-              p => {
-                  console.log(p);
-                  this.snotifyService.success('Patient Education Added Successfully' + p);
-              },
-              (err) => {
-                  console.log(err);
-                  this.snotifyService.error('Error Adding PatientEducation' + err, 'ANC service',
-                      this.notificationService.getConfig());
-              },
-              () => {
-                  console.log(this.savePatientEducation$);
-              });
-  }
+        this.savePatientEducation$ = this.ancService.savePatientEducation(patientEducation)
+            .subscribe(
+                p => {
+                    console.log(p);
+                    this.snotifyService.success('Patient Education Added Successfully' + p);
+                },
+                (err) => {
+                    console.log(err);
+                    this.snotifyService.error('Error Adding PatientEducation' + err, 'ANC service',
+                        this.notificationService.getConfig());
+                },
+                () => {
+                    console.log(this.savePatientEducation$);
+                });
+    }
 
-  public onSaveClientMonitoring(data: ClientMonitoringEmitter): void {
-    const clientMonitoring = {
-        PatientId: this.patientId,
-        PatientmasterVisitId: this.patientMasterVisitId,
-        FacilityId: 0,
-        ServiceAreaId: this.serviceAreaId,
-        ScreeningTypeId: 0,
-        ScreeningDone: data.cacxScreeningDone,
-        ScreeningDate: new Date(),
-        ScreeningTB: data.screenedForTB,
-        CaCxMethod: data.cacxMethod,
-        CaCxResult: data.cacxResult,
-        Comments: data.cacxComments.toString(),
-    } as ClientMonitoringCommand;
+    public onSaveClientMonitoring(data: ClientMonitoringEmitter): void {
+        const clientMonitoring = {
+            PatientId: this.patientId,
+            PatientmasterVisitId: this.patientMasterVisitId,
+            FacilityId: 0,
+            ServiceAreaId: this.serviceAreaId,
+            ScreeningTypeId: 0,
+            ScreeningDone: data.cacxScreeningDone,
+            ScreeningDate: new Date(),
+            ScreeningTB: data.screenedForTB,
+            CaCxMethod: data.cacxMethod,
+            CaCxResult: data.cacxResult,
+            Comments: data.cacxComments.toString(),
+        } as ClientMonitoringCommand;
 
-      this.saveClientMonitoring$ = this.ancService.saveClientMonitoring(clientMonitoring)
-          .subscribe(
-              p => {
-                  console.log(p);
-                  this.snotifyService.success('Client Monitoring Added Successfully' + p);
-              },
-              (err) => {
-                  console.log(err);
-                  this.snotifyService.error('Error Adding client monitoring' + err, 'ANC service',
-                      this.notificationService.getConfig());
-              },
-              () => {
-                  console.log(this.saveClientMonitoring$);
-              });
-  }
+        this.saveClientMonitoring$ = this.ancService.saveClientMonitoring(clientMonitoring)
+            .subscribe(
+                p => {
+                    console.log(p);
+                    this.snotifyService.success('Client Monitoring Added Successfully' + p);
+                },
+                (err) => {
+                    console.log(err);
+                    this.snotifyService.error('Error Adding client monitoring' + err, 'ANC service',
+                        this.notificationService.getConfig());
+                },
+                () => {
+                    console.log(this.saveClientMonitoring$);
+                });
+    }
 
-  public onSaveHaartProphylaxis(data: HAARTProphylaxisEmitter) {
+    public onSaveHaartProphylaxis(data: HAARTProphylaxisEmitter) {
 
-      this.patientDrug.push(
-          {PatientId: this.patientId, PatientMasterVisitId: this.patientMasterVisitId, DrugAdministered: data.nvpForBaby,
-              Value: data.nvpForBaby, DeleteFlag: 0, Description: '', Id: 0, ProfileId: 0},
-          {PatientId: this.patientId, PatientMasterVisitId: this.patientMasterVisitId, DrugAdministered: data.aztFortheBaby,
-              Value: data.aztFortheBaby, DeleteFlag: 0, Description: '', Id: 0, ProfileId: 0},
-          {PatientId: this.patientId, PatientMasterVisitId: this.patientMasterVisitId, DrugAdministered: data.cotrimoxazole,
-              Value: data.cotrimoxazole, DeleteFlag: 0, Description: '', Id: 0, ProfileId: 0},
-          {PatientId: this.patientId, PatientMasterVisitId: this.patientMasterVisitId, DrugAdministered: data.onArvBeforeANCVisit,
-              Value: data.onArvBeforeANCVisit, DeleteFlag: 0, Description: '', Id: 0, ProfileId: 0}
-              );
-     const haartProphylaxis = {
-         PatientChronicIllnesses: data.otherIllness,
-         PatientDrugAdministration: this.patientDrug
-     } as HaartProphylaxisCommand;
+        this.patientDrug.push(
+            {
+                PatientId: this.patientId, PatientMasterVisitId: this.patientMasterVisitId, DrugAdministered: data.nvpForBaby,
+                Value: data.nvpForBaby, DeleteFlag: 0, Description: '', Id: 0, ProfileId: 0
+            },
+            {
+                PatientId: this.patientId, PatientMasterVisitId: this.patientMasterVisitId, DrugAdministered: data.aztFortheBaby,
+                Value: data.aztFortheBaby, DeleteFlag: 0, Description: '', Id: 0, ProfileId: 0
+            },
+            {
+                PatientId: this.patientId, PatientMasterVisitId: this.patientMasterVisitId, DrugAdministered: data.cotrimoxazole,
+                Value: data.cotrimoxazole, DeleteFlag: 0, Description: '', Id: 0, ProfileId: 0
+            },
+            {
+                PatientId: this.patientId, PatientMasterVisitId: this.patientMasterVisitId, DrugAdministered: data.onArvBeforeANCVisit,
+                Value: data.onArvBeforeANCVisit, DeleteFlag: 0, Description: '', Id: 0, ProfileId: 0
+            }
+        );
+        const haartProphylaxis = {
+            PatientChronicIllnesses: data.otherIllness,
+            PatientDrugAdministration: this.patientDrug
+        } as HaartProphylaxisCommand;
 
-      this.saveHaartProphylaxis$ = this.ancService.saveHaartProphylaxis(haartProphylaxis)
-          .subscribe(
-              p => {
-                  console.log(p);
-                  this.snotifyService.success('Haart Prophylaxis Added Successfully' + p);
-              },
-              (err) => {
-                  console.log(err);
-                  this.snotifyService.error('Error Adding Haart Prophylaxis' + err, 'ANC service',
-                      this.notificationService.getConfig());
-              },
-              () => {
-                  console.log(this.saveHaartProphylaxis$);
-              });
-  }
+        this.saveHaartProphylaxis$ = this.ancService.saveHaartProphylaxis(haartProphylaxis)
+            .subscribe(
+                p => {
+                    console.log(p);
+                    this.snotifyService.success('Haart Prophylaxis Added Successfully' + p);
+                },
+                (err) => {
+                    console.log(err);
+                    this.snotifyService.error('Error Adding Haart Prophylaxis' + err, 'ANC service',
+                        this.notificationService.getConfig());
+                },
+                () => {
+                    console.log(this.saveHaartProphylaxis$);
+                });
+    }
 
-  public onSavePreventiveService(data: PreventiveServiceEmitter) {
+    public onSavePreventiveService(data: PreventiveServiceEmitter) {
 
         const preventiveService = {
             preventiveService: data.preventiveService,
@@ -190,67 +205,67 @@ export class AncComponent implements OnInit, OnDestroy {
             InsecticideTreatedNet: data.insecticideTreatedNet
         } as PatientPreventiveService;
 
-      this.savePreventiveService$ = this.ancService.savePreventiveServices(preventiveService)
-          .subscribe(
-              p => {
-                  console.log(p);
-                  this.snotifyService.success('Preventive Service Added Successfully' + p);
-              },
-              (err) => {
-                  console.log(err);
-                  this.snotifyService.error('Error Adding Preventive Service' + err, 'ANC service',
-                      this.notificationService.getConfig());
-              },
-              () => {
-                  console.log(this.savePreventiveService$);
-              });
-  }
+        this.savePreventiveService$ = this.ancService.savePreventiveServices(preventiveService)
+            .subscribe(
+                p => {
+                    console.log(p);
+                    this.snotifyService.success('Preventive Service Added Successfully' + p);
+                },
+                (err) => {
+                    console.log(err);
+                    this.snotifyService.error('Error Adding Preventive Service' + err, 'ANC service',
+                        this.notificationService.getConfig());
+                },
+                () => {
+                    console.log(this.savePreventiveService$);
+                });
+    }
 
-  public onSaveReferralAppointment(data: ReferralsEmitter) {
-    const patientRef = {
-        PatientId: this.patientId,
-        PatientMasterVisitId: this.patientMasterVisitId,
-        ReferredFrom: data.referredFrom,
-        ReferredTo: data.referredTo,
-        ReferralReason: 'n/a' ,
-        ReferralDate: new Date(),
-        RefferedBY: 0,
-        DeleteFlag: 0
-    } as PatientReferral;
+    public onSaveReferralAppointment(data: ReferralsEmitter) {
+        const patientRef = {
+            PatientId: this.patientId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            ReferredFrom: data.referredFrom,
+            ReferredTo: data.referredTo,
+            ReferralReason: 'n/a',
+            ReferralDate: new Date(),
+            RefferedBY: 0,
+            DeleteFlag: 0
+        } as PatientReferral;
 
-    const appointment = {
-    PatientId: this.patientId,
-        PatientMasterVisitId: this.patientMasterVisitId,
-        AppointmentDate: new Date(data.nextAppointmentDate),
-        ReasonId: 0,
-        Description: data.serviceRemarks.toString(),
-        StatusId: 0,
-        DifferentiatedCareId: 0,
-        DeleteFlag: 0
-    } as PatientAppointmet;
+        const appointment = {
+            PatientId: this.patientId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            AppointmentDate: new Date(data.nextAppointmentDate),
+            ReasonId: 0,
+            Description: data.serviceRemarks.toString(),
+            StatusId: 0,
+            DifferentiatedCareId: 0,
+            DeleteFlag: 0
+        } as PatientAppointmet;
 
         const referral = {
-           PatientReferral: patientRef,
-           PatientAppointment:   appointment
-    } as ReferralAppointmentCommand;
+            PatientReferral: patientRef,
+            PatientAppointment: appointment
+        } as ReferralAppointmentCommand;
 
-      this.saveReferralAppointment$ = this.ancService.saveReferralAppointment(referral)
-          .subscribe(
-              p => {
-                  console.log(p);
-                  this.snotifyService.success('Referral Appointment Added Successfully' + p);
-              },
-              (err) => {
-                  console.log(err);
-                  this.snotifyService.error('Error Adding Referral Appointment' + err, 'ANC service',
-                      this.notificationService.getConfig());
-              },
-              () => {
-                  console.log(this.saveReferralAppointment$);
-              });
-  }
+        this.saveReferralAppointment$ = this.ancService.saveReferralAppointment(referral)
+            .subscribe(
+                p => {
+                    console.log(p);
+                    this.snotifyService.success('Referral Appointment Added Successfully' + p);
+                },
+                (err) => {
+                    console.log(err);
+                    this.snotifyService.error('Error Adding Referral Appointment' + err, 'ANC service',
+                        this.notificationService.getConfig());
+                },
+                () => {
+                    console.log(this.saveReferralAppointment$);
+                });
+    }
 
- public  getPatientPregnanc(patientId: number) {
+    public getPatientPregnanc(patientId: number) {
         this.getPatientPregnancy$ = this.visitDetailsService.getPregnancyProfile(this.patientId)
             .subscribe(
                 p => {
@@ -263,8 +278,36 @@ export class AncComponent implements OnInit, OnDestroy {
                     console.log(this.pregnancy);
                 }
             );
-}
- // getPatientProfile();
+    }
+
+    public onSaveHivStatus(data: HIVTestingEmitter) {
+        console.log(data);
+        const htsAncEncounter = {
+            'PersonId': this.personId,
+            'ProviderId': this.userId,
+            'PatientEncounterID': 0,
+            'PatientId': this.patientId,
+            'EverTested': '',
+            'MonthsSinceLastTest': '',
+            'MonthSinceSelfTest': '',
+            'TestedAs': '',
+            'TestingStrategy': '',
+            'EncounterRemarks': '',
+            'TestEntryPoint': '',
+            'Consent': '',
+            'EverSelfTested': '',
+            'GeoLocation': '',
+            'HasDisability': '',
+            'Disabilities': [],
+            'TbScreening': '',
+            'ServiceAreaId': this.serviceAreaId,
+            'EncounterTypeId': '',
+            'EncounterDate': this.visitDate,
+            'EncounterType': data.testingDone
+        };
+        this.ancService.saveHivStatus(htsAncEncounter).subscribe();
+    }
+    // getPatientProfile();
 
 
     ngOnDestroy(): void {
@@ -272,8 +315,8 @@ export class AncComponent implements OnInit, OnDestroy {
             this.saveVisitDetails$.unsubscribe();
             this.saveClientMonitoring$.unsubscribe();
             this.savePatientEducation$.unsubscribe();
-            this. saveReferralAppointment$.unsubscribe();
-            this. savePreventiveService$.unsubscribe();
+            this.saveReferralAppointment$.unsubscribe();
+            this.savePreventiveService$.unsubscribe();
         }
     }
 }
