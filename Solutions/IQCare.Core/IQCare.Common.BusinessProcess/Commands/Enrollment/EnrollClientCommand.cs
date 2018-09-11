@@ -1,10 +1,11 @@
 ﻿using System;
-using IQCare.Common.Core.Models;
+using System.Collections.Generic;
+using IQCare.Library;
 using MediatR;
 
 namespace IQCare.Common.BusinessProcess.Commands.Enrollment
 {
-    public class EnrollClientCommand : IRequest<Result<EnrollClientResponse>>
+    public class EnrollClientCommand : IRequest<Core.Models.Result<EnrollClientResponse>>
     {
         public ClientEnrollment ClientEnrollment { get; set; }
     }
@@ -12,8 +13,9 @@ namespace IQCare.Common.BusinessProcess.Commands.Enrollment
     public class ClientEnrollment
     {
         public DateTime DateOfEnrollment { get; set; }
+        public List<ServiceIdentifiersList> ServiceIdentifiersList { get; set; }
         public int ServiceAreaId { get; set; }
-        public string EnrollmentNo { get; set; }
+        //public string EnrollmentNo { get; set; }
         public int PatientId { get; set; }
         public int PersonId { get; set; }
         public int CreatedBy { get; set; }
@@ -22,7 +24,8 @@ namespace IQCare.Common.BusinessProcess.Commands.Enrollment
 
     public class EnrollClientResponse
     {
-        public int IdentifierId { get; set; }
-        public string IdentifierValue { get; set; }
+        public string Message { get; set; }
+        //public int IdentifierId { get; set; }
+        //public string IdentifierValue { get; set; }
     }
 }

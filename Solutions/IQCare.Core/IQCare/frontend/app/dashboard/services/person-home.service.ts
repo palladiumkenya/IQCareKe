@@ -41,4 +41,20 @@ export class PersonHomeService {
             catchError(this.errorHandler.handleError<any>('getPersonEnrolledServices'))
         );
     }
+
+    public getServiceAreaIdentifiers(serviceAreaId: number): Observable<any> {
+        return this.http.get<any>(this.API_URL + '/api/Lookup/GetServiceAreaIdentifiers/' + serviceAreaId).pipe(
+            tap(getServiceAreaIdentifiers => this.errorHandler.log(`get service area identifiers`)),
+            catchError(this.errorHandler.handleError<any>('getServiceAreaIdentifiers'))
+        );
+    }
+
+    public getPatientTypes(): Observable<any[]> {
+        const options = JSON.stringify(['PatientType']);
+
+        return this.http.post<any[]>(this.API_URL + '/api/Lookup/getCustomOptions', options, httpOptions).pipe(
+            tap(getPatientType => this.errorHandler.log('fetched patien type options')),
+            catchError(this.errorHandler.handleError<any[]>('getPatientType'))
+        );
+    }
 }

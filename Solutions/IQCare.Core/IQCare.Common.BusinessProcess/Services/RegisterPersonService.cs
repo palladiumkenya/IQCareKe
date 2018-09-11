@@ -9,6 +9,7 @@ using IQCare.Common.BusinessProcess.Commands.Enrollment;
 using IQCare.Common.BusinessProcess.Commands.PersonCommand;
 using IQCare.Common.Core.Models;
 using IQCare.Common.Infrastructure;
+using IQCare.Library;
 using Microsoft.EntityFrameworkCore;
 using Remotion.Linq.Parsing.Structure.IntermediateModel;
 using Serilog;
@@ -855,6 +856,87 @@ namespace IQCare.Common.BusinessProcess.Services
             }
         }
 
+        public async Task DynamicEnrollment(int patientId, int serviceAreaId, int createdBy, DateTime dateOfEnrollment, List<ServiceIdentifiersList> serviceIdentifiersList)
+        {
+            try
+            {
+                for (int i = 0; i < serviceIdentifiersList.Count; i++)
+                {
+                    var previouslyIdentifiers = await _unitOfWork.Repository<PatientIdentifier>().Get(y =>
+                        y.IdentifierValue == serviceIdentifiersList[i].IdentifierValue &&
+                        y.IdentifierTypeId == serviceIdentifiersList[i].IdentifierId).ToListAsync();
+
+                    if (previouslyIdentifiers.Count > 0)
+                    {
+                        var exception = new Exception("No: " + serviceIdentifiersList[i].IdentifierValue + " already exists");
+                        throw exception;
+                    }
+                }
+
+
+                var enrollmentVisitType = await _unitOfWork.Repository<LookupItemView>().Get(x => x.MasterName == "VisitType" && x.ItemName == "Enrollment").FirstOrDefaultAsync();
+                int? visitType = enrollmentVisitType != null ? enrollmentVisitType.ItemId : 0;
+                var patientMasterVisit = new PatientMasterVisit()
+                {
+                    PatientId = patientId,
+                    ServiceId = serviceAreaId,
+                    Start = DateTime.Now,
+                    End = null,
+                    Active = false,
+                    VisitDate = DateTime.Now,
+                    VisitType = visitType,
+                    Status = 1,
+                    CreateDate = DateTime.Now,
+                    DeleteFlag = false,
+                    CreatedBy = createdBy
+                };
+
+
+                await _unitOfWork.Repository<PatientMasterVisit>().AddAsync(patientMasterVisit);
+                await _unitOfWork.SaveAsync();
+
+                var patientEnrollment = new PatientEnrollment()
+                {
+                    PatientId = patientId,
+                    ServiceAreaId = serviceAreaId,
+                    EnrollmentDate = dateOfEnrollment,
+                    EnrollmentStatusId = 0,
+                    TransferIn = false,
+                    CareEnded = false,
+                    DeleteFlag = false,
+                    CreatedBy = createdBy,
+                    CreateDate = DateTime.Now
+                };
+
+
+                await _unitOfWork.Repository<PatientEnrollment>().AddAsync(patientEnrollment);
+                await _unitOfWork.SaveAsync();
+
+                if (serviceIdentifiersList.Any())
+                {
+                    List<PatientIdentifier> patientIdentifierList = new List<PatientIdentifier>();
+                    serviceIdentifiersList.ForEach(x => patientIdentifierList.Add(new PatientIdentifier()
+                    {
+                        PatientId = patientId,
+                        PatientEnrollmentId = patientEnrollment.Id,
+                        IdentifierTypeId = x.IdentifierId,
+                        IdentifierValue = x.IdentifierValue,
+                        DeleteFlag = false,
+                        CreatedBy = createdBy,
+                        CreateDate = DateTime.Now,
+                        Active = true
+                    }));
+                    await _unitOfWork.Repository<PatientIdentifier>().AddRangeAsync(patientIdentifierList);
+                    await _unitOfWork.SaveAsync();
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Error(e.Message + " " + e.InnerException);
+                throw e;
+            }
+        }
+
         public async Task<PatientIdentifier> EnrollPatient(string enrollmentNo, int patientId, int serviceAreaId, int createdBy, DateTime dateOfEnrollment)
         {
             try
@@ -900,7 +982,6 @@ namespace IQCare.Common.BusinessProcess.Services
                     DeleteFlag = false,
                     CreatedBy = createdBy,
                     CreateDate = DateTime.Now
-
                 };
 
                 await _unitOfWork.Repository<PatientEnrollment>().AddAsync(patientEnrollment);
@@ -1189,7 +1270,7 @@ namespace IQCare.Common.BusinessProcess.Services
                 sql.Append("exec pr_OpenDecryptedSession;");
                 sql.Append($"SELECT [Id] , CAST(DECRYPTBYKEY(FirstName) AS VARCHAR(50)) [FirstName] ,CAST(DECRYPTBYKEY(MidName) AS VARCHAR(50)) MidName" +
                            $",CAST(DECRYPTBYKEY(LastName) AS VARCHAR(50)) [LastName] ,[Sex] ,[Active] ,[DeleteFlag] ,[CreateDate] " +
-                           $",[CreatedBy] ,[AuditData] ,[DateOfBirth] ,[DobPrecision], RegistrationDate FROM [dbo].[Person] WHERE Id = '{personId}';");
+                           $",[CreatedBy] ,[AuditData] ,[DateOfBirth] ,[DobPrecision], RegistrationDate, [FacilityId] FROM [dbo].[Person] WHERE Id = '{personId}';");
                 sql.Append("exec [dbo].[pr_CloseDecryptedSession];");
 
                 var person = await _unitOfWork.Repository<Person>().FromSql(sql.ToString());
