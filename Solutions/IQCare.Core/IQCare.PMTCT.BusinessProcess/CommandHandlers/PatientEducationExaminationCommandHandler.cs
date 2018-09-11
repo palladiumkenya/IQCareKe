@@ -20,7 +20,7 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
     {
         private readonly ICommonUnitOfWork _commonUnitOfWork;
         private readonly IPmtctUnitOfWork _unitOfWork;
-
+        public int result = 0;
 
         public PatientEducationExaminationCommandHandler(ICommonUnitOfWork commonUnitOfWork, IPmtctUnitOfWork unitOfWork)
         {
