@@ -4,26 +4,24 @@ import { SnotifyService } from 'ng-snotify';
 import { ActivatedRoute } from '@angular/router';
 import { VisitDetails } from './../_models/visitDetails';
 import { VisitDetailsService } from '../_services/visit-details.service';
-import { PatientEducationEmitter } from '../emitters/PatientEducationEmitter';
-import { PatientEducationCommand } from '../_models/PatientEducationCommand';
-import { PreventiveService } from '../_models/PreventiveService';
-import { Subscription } from 'rxjs/index';
-import { ClientMonitoringCommand } from '../_models/ClientMonitoringCommand';
-import { ClientMonitoringEmitter } from '../emitters/ClientMonitoringEmitter';
-import { AncService } from '../_services/anc.service';
-import { HAARTProphylaxisEmitter } from '../emitters/HAARTProphylaxisEmitter';
-import { HaartProphylaxisCommand } from '../_models/HaartProphylaxisCommand';
-import { PatientDrugAdministration } from '../_models/PatientDrugAdministration';
-import { ReferralsEmitter } from '../emitters/ReferralsEmitter';
-import { PatientReferral } from '../_models/PatientReferral';
-import { ReferralAppointmentCommand } from '../_models/ReferralAppointmentCommand';
-import { PatientAppointmet } from '../_models/PatientAppointmet';
-import { PreventiveServiceEmitter } from '../emitters/PreventiveServiceEmitter';
-import { PatientPreventiveService } from '../_models/PatientPreventiveService';
-import { PatientPregnancy } from '../_models/PatientPregnancy';
-import { PatientProfile } from '../_models/patientProfile';
-import { PregnancyViewModel } from '../_models/viewModel/PregnancyViewModel';
-import { HIVTestingEmitter } from '../emitters/HIVTestingEmitter';
+import {PatientEducationEmitter} from '../emitters/PatientEducationEmitter';
+import {PatientEducationCommand} from '../_models/PatientEducationCommand';
+import {PreventiveService} from '../_models/PreventiveService';
+import {Subscription} from 'rxjs/index';
+import {ClientMonitoringCommand} from '../_models/ClientMonitoringCommand';
+import {ClientMonitoringEmitter} from '../emitters/ClientMonitoringEmitter';
+import {AncService} from '../_services/anc.service';
+import {HAARTProphylaxisEmitter} from '../emitters/HAARTProphylaxisEmitter';
+import {HaartProphylaxisCommand} from '../_models/HaartProphylaxisCommand';
+import {PatientDrugAdministration} from '../_models/PatientDrugAdministration';
+import {ReferralsEmitter} from '../emitters/ReferralsEmitter';
+import {PatientReferral} from '../_models/PatientReferral';
+import {ReferralAppointmentCommand} from '../_models/ReferralAppointmentCommand';
+import {PatientAppointmet} from '../_models/PatientAppointmet';
+import {PreventiveServiceEmitter} from '../emitters/PreventiveServiceEmitter';
+import {PatientPreventiveService} from '../_models/PatientPreventiveService';
+import {PatientProfile} from '../_models/patientProfile';
+import {PregnancyViewModel} from '../_models/viewModel/PregnancyViewModel';
 
 @Component({
     selector: 'app-anc',
@@ -100,11 +98,15 @@ export class AncComponent implements OnInit, OnDestroy {
 
     public onSavePatientEducation(data: PatientEducationEmitter): void {
 
-        const patientEducation = {
-            BreastExamDone: data.breastExamDone,
-            TreatedSyphilis: data.treatedSyphilis,
-            CounsellingTopics: data.counsellingTopics
-        } as PatientEducationCommand;
+        console.log('testing counselling');
+      console.log(data);
+
+      const patientEducation = {
+          BreastExamDone: data.breastExamDone,
+          TreatedSyphilis: data.treatedSyphilis,
+          CreateBy: (this.userId < 1) ? 1 : this.userId,
+          CounsellingTopics: data.counsellingTopics,
+      } as PatientEducationCommand;
 
         this.savePatientEducation$ = this.ancService.savePatientEducation(patientEducation)
             .subscribe(
@@ -122,36 +124,42 @@ export class AncComponent implements OnInit, OnDestroy {
                 });
     }
 
-    public onSaveClientMonitoring(data: ClientMonitoringEmitter): void {
-        const clientMonitoring = {
-            PatientId: this.patientId,
-            PatientmasterVisitId: this.patientMasterVisitId,
-            FacilityId: 0,
-            ServiceAreaId: this.serviceAreaId,
-            ScreeningTypeId: 0,
-            ScreeningDone: data.cacxScreeningDone,
-            ScreeningDate: new Date(),
-            ScreeningTB: data.screenedForTB,
-            CaCxMethod: data.cacxMethod,
-            CaCxResult: data.cacxResult,
-            Comments: data.cacxComments.toString(),
-        } as ClientMonitoringCommand;
+  public onSaveClientMonitoring(data: ClientMonitoringEmitter): void {
+    const clientMonitoring = {
+        PatientId: parseInt(this.patientId.toString(), 10),
+       // PatientmasterVisitId: this.patientMasterVisitId,
+        PatientMasterVisitId: 21,
+        FacilityId: 755,
+        WhoStage: parseInt(data.WhoStage.toString(), 10),
+        ServiceAreaId: 3,
+        ScreeningTypeId: 0,
+        ScreeningDone: Boolean(data.cacxScreeningDone) ,
+        ScreeningDate: new Date(),
+        ScreeningTB: parseInt(data.screenedForTB.toString(), 10),
+        CaCxMethod: parseInt(data.cacxMethod.toString(), 10),
+        CaCxResult: parseInt(data.cacxResult.toString(), 10),
+        Comments: data.cacxComments.toString(),
+        ClinicalNotes: data.cacxComments.toString(),
+        CreatedBy: (this.userId < 1) ? 1 : this.userId
+    } as ClientMonitoringCommand;
 
-        this.saveClientMonitoring$ = this.ancService.saveClientMonitoring(clientMonitoring)
-            .subscribe(
-                p => {
-                    console.log(p);
-                    this.snotifyService.success('Client Monitoring Added Successfully' + p);
-                },
-                (err) => {
-                    console.log(err);
-                    this.snotifyService.error('Error Adding client monitoring' + err, 'ANC service',
-                        this.notificationService.getConfig());
-                },
-                () => {
-                    console.log(this.saveClientMonitoring$);
-                });
-    }
+    console.log(clientMonitoring);
+
+      this.saveClientMonitoring$ = this.ancService.saveClientMonitoring(clientMonitoring)
+          .subscribe(
+              p => {
+                  console.log(p);
+                  this.snotifyService.success('Client Monitoring Added Successfully' + p);
+              },
+              (err) => {
+                  console.log(err);
+                  this.snotifyService.error('Error Adding client monitoring' + err, 'ANC service',
+                      this.notificationService.getConfig());
+              },
+              () => {
+                  console.log(this.saveClientMonitoring$);
+              });
+  }
 
     public onSaveHaartProphylaxis(data: HAARTProphylaxisEmitter) {
 

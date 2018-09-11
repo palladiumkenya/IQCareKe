@@ -2,9 +2,9 @@ export interface PatientProfile {
     Id?: number;
     PatientId?: number;
     PatientMasterVisitId?: number;
-    AgeMenarche?: number;
+    ageMenarche?: number;
     PregnancyId?: number;
-    VisitNumber?: number;
+    visitNumber?: number;
     VisitType?: number;
     TreatedForSyphilis?: number;
     DeleteFlag?: number;

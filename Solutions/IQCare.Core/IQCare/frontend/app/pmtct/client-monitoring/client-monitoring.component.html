@@ -10,9 +10,9 @@
 
               <div class="col-lg-4 col-sm-6 col-xs-12">
                   <mat-form-field class="col-md-12">
-                      <mat-select formControlName="WhoStage"   placeholder="WHO Stage">
+                      <mat-select formControlName="WhoStage"   placeholder="WHO Stage" minlength="1" required>
                           <mat-option value="0">Select</mat-option>
-                          <mat-option  *ngFor="let WHOStagOption of WHOStagOptions" [value]="WHOStagOption.itemId" required>
+                          <mat-option  *ngFor="let WHOStagOption of WHOStagOptions" [value]="WHOStagOption.itemId" >
                               {{WHOStagOption.itemName}}
                           </mat-option>
                       </mat-select>
@@ -20,9 +20,9 @@
               </div>
               <div class="col-lg-4 col-sm-6 col-xs-12">
                   <mat-form-field class="col-md-12">
-                      <mat-select formControlName="viralLoadSampleTaken"  placeholder="Viral Load Sample taken?">
+                      <mat-select formControlName="viralLoadSampleTaken"  placeholder="Viral Load Sample taken?" minlength="1" required>
                           <mat-option value="0">Select</mat-option>
-                          <mat-option  *ngFor="let item of YesNoNa" [value]="item.itemId " required>
+                          <mat-option  *ngFor="let item of YesNoNa" [value]="item.itemId " >
                               {{item.itemName}}
                           </mat-option>
                       </mat-select>
@@ -30,9 +30,9 @@
               </div>
               <div class="col-lg-4 col-sm-6 col-xs-12">
                   <mat-form-field class="col-md-12">
-                      <mat-select formControlName="screenedForTB"  placeholder="*Screened for TB">
+                      <mat-select formControlName="screenedForTB"  placeholder="*Screened for TB" minlength="1" required>
                           <mat-option value="0">Select</mat-option>
-                          <mat-option  *ngFor="let TBOption of TBOptions" [value]="TBOption.itemId" required>
+                          <mat-option  *ngFor="let TBOption of TBOptions" [value]="TBOption.itemId" >
                               {{TBOption.itemName}}
                           </mat-option>
                       </mat-select>
@@ -43,9 +43,9 @@
           <div class="row">
               <div class="col-lg-4 col-xs-12 col-sm-6">
                   <mat-form-field class="col-md-12">
-                      <mat-select formControlName="cacxScreeningDone"  placeholder="Cervical Cancer Screened during this visit">
+                      <mat-select formControlName="cacxScreeningDone"  placeholder="Cervical Cancer Screened during this visit" required minlength="0">
                           <mat-option value="0">Select</mat-option>
-                          <mat-option  *ngFor="let yesno of YesNos" [value]="yesno.itemId" required>
+                          <mat-option  *ngFor="let yesno of YesNos" [value]="yesno.itemId" >
                               {{yesno.itemName}}
                           </mat-option>
                       </mat-select>
@@ -53,9 +53,9 @@
               </div>
               <div class="col-lg-4 col-xs-12 col-sm-6">
                   <mat-form-field class="col-md-12">
-                      <mat-select formControlName="cacxMethod"  placeholder="Select Method">
+                      <mat-select formControlName="cacxMethod"  placeholder="Select Method" required minlength="0">
                           <mat-option value="0">Select</mat-option>
-                          <mat-option   *ngFor="let CaCxMethod of CaCxMethods" [value]="CaCxMethod.itemId" required>
+                          <mat-option   *ngFor="let CaCxMethod of CaCxMethods" [value]="CaCxMethod.itemId" >
                               {{CaCxMethod.itemName}}
                           </mat-option>
                       </mat-select>
@@ -63,9 +63,9 @@
               </div>
               <div class="col-lg-4 col-xs-12 col-sm-6">
                   <mat-form-field class="col-md-12">
-                      <mat-select formControlName="cacxResult"  placeholder="Select Result">
+                      <mat-select formControlName="cacxResult"  placeholder="Select Result" required minlength="0">
                           <mat-option value="0">Select</mat-option>
-                          <mat-option  *ngFor="let CacxResult of CacxResults" [value]="CacxResult.itemId" required>
+                          <mat-option  *ngFor="let CacxResult of CacxResults" [value]="CacxResult.itemId" >
                               {{CacxResult.itemName}}
                           </mat-option>
                       </mat-select>

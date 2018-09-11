@@ -8,6 +8,7 @@ using IQCare.PMTCT.BusinessProcess.Commands.Profile;
 using System.Threading.Tasks;
 using Serilog;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.Profile
 {
@@ -26,7 +27,7 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.Profile
             {
                 try
                 {
-                    PatientProfile result =  _unitOfWork.Repository<PatientProfile>().Get(x => x.PatientId == request.PatientId & x.PregnancyId==request.PregnancyId & !x.DeleteFlag).OrderBy(x=>x.Id).FirstOrDefault();
+                    PatientProfile result =await  _unitOfWork.Repository<PatientProfile>().Get(x => x.PatientId == request.PatientId & x.PregnancyId==request.PregnancyId & !x.DeleteFlag).OrderBy(x=>x.Id).FirstOrDefaultAsync();
                     if(result==null)
                     {
                         result = new PatientProfile();

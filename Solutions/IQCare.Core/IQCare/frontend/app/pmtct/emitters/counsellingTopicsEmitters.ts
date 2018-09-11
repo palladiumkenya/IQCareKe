@@ -1,7 +1,10 @@
 export interface CounsellingTopicsEmitters {
-    PatientId?: number;
-    PatientMasterVisitId?: number;
+    id?: number;
+    patientId?: number;
+    patientMasterVisitId?: number;
     counselledOn ?: number;
+    counsellingTopicId?: number;
     counsellingTopic?: string;
-    topicDate?: Date;
+    CounsellingDate?: Date;
+    description?: string;
 }

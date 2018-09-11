@@ -10,5 +10,6 @@ namespace IQCare.PMTCT.Core.Models
         public int PatientId { get; set; }
         public int PatientMasterVisitId {get;set;}
         public int WHOStage { get; set; }
+
     }
 }

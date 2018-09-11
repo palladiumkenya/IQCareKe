@@ -6,11 +6,12 @@ export interface ClientMonitoringCommand {
     ServiceAreaId?: number;
     ClinicalNotes?: string;
     ScreeningTypeId?: number;
-    ScreeningDone?: number;
+    ScreeningDone?: boolean;
     ScreeningDate?: Date;
     ScreeningTB?: number;
     CaCxMethod?: number;
     CaCxResult?: number;
     Comments?: string;
+    CreatedBy?: number;
 
 }

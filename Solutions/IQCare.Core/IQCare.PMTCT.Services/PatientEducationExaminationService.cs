@@ -1,10 +1,9 @@
-﻿using IQCare.Common.Core.Models;
+﻿
 using IQCare.PMTCT.Core.Models;
 using IQCare.PMTCT.Infrastructure;
 using Serilog;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using IQCare.Common.Infrastructure;
 using Microsoft.EntityFrameworkCore;
@@ -22,21 +21,22 @@ namespace IQCare.PMTCT.Services
             _commonUnitOfWork = commonUnitOfWork;
         }
 
-        public async Task<int> AddPatientPhysicalExamination(PatientPhysicalExamination patientPhysicalExamination)
+        public async Task<int> AddPatientPhysicalExamination(PhysicalExamination physicalExamination)
         {
             try
             {
-                PatientPhysicalExamination data = new PatientPhysicalExamination()
+                PhysicalExamination data = new PhysicalExamination()
                 {
-                    PatientId = patientPhysicalExamination.PatientId,
-                    PatientMasterVisitId = patientPhysicalExamination.PatientMasterVisitId,
-                    ExamId = patientPhysicalExamination.ExamId,
-                    ExaminationTypeId = patientPhysicalExamination.ExaminationTypeId,
-                    FindingId = patientPhysicalExamination.FindingId,
-                    FindingsNotes = patientPhysicalExamination.FindingsNotes
+                    PatientId = physicalExamination.PatientId,
+                    PatientMasterVisitId = physicalExamination.PatientMasterVisitId,
+                    ExamId = physicalExamination.ExamId,
+                    ExaminationTypeId = physicalExamination.ExaminationTypeId,
+                    FindingId = physicalExamination.FindingId,
+                    FindingsNotes = physicalExamination.FindingsNotes,
+                    CreateDate = DateTime.Now
                 };
-                await _commonUnitOfWork.Repository<PatientPhysicalExamination>().AddAsync(data);
-                 await _commonUnitOfWork.SaveAsync();
+                await _unitOfWork.Repository<PhysicalExamination>().AddAsync(data);
+                await _unitOfWork.SaveAsync();
                 return 1;
             }
             catch (Exception e)
@@ -46,11 +46,11 @@ namespace IQCare.PMTCT.Services
             }
         }
 
-        public async Task<PatientPhysicalExamination> GetPatientPhysicalExamination(int patientId,int examId)
+        public async Task<PhysicalExamination> GetPatientPhysicalExamination(int patientId,int examId)
         {
             try
             {
-                var result = await _commonUnitOfWork.Repository<PatientPhysicalExamination>().FindAsync(x => x.ExamId == examId && x.PatientId == patientId);
+                var result = await _unitOfWork.Repository<PhysicalExamination>().FindAsync(x => x.ExamId == examId && x.PatientId == patientId);
                 return result;
             }
             catch (Exception e)

@@ -7,7 +7,7 @@ using System.Text;
 
 namespace IQCare.Common.Infrastructure.Mapping
 {
-    class LookupItemMapping : IEntityTypeConfiguration<LookupItem>
+   public class LookupItemMapping : IEntityTypeConfiguration<LookupItem>
     {
 
         public void Configure(EntityTypeBuilder<LookupItem> builder)

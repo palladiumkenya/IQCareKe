@@ -3,6 +3,7 @@ export interface PatientEducation {
     PatientId?: number;
     PatientMasterVisitId?: number;
     CounsellingTopicId?: number;
-    CounsellingDate?: string;
-    Description: string;
+    CounsellingTopic?: string;
+    CounsellingDate?: Date;
+    description: string;
 }

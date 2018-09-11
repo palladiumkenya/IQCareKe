@@ -16,6 +16,8 @@ namespace IQCare.PMTCT.Core.Models
         public int ScreeningCategoryId { get; set; }
         public int ScreeningValueId { get; set; }
         public string Comment { get; set; }
+        public DateTime CreateDate { get; set; }
+        public int CreatedBy { get; set; }
         public PatientMasterVisit PatientMasterVisit { get; set; }
         public Patient Patient { get; set; }
     }

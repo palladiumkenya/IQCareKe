@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.PreventiveServices
 {
@@ -27,7 +28,7 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.PreventiveServices
             {
                 try
                 {
-                    List<PreventiveService> result = _unitOfWork.Repository<PreventiveService>().Get(x => x.PatientId == request.PatientId).ToList();
+                    List<PreventiveService> result = await _unitOfWork.Repository<PreventiveService>().Get(x => x.PatientId == request.PatientId).ToListAsync();
                     return Result<List<PreventiveService>>.Valid(result);
                 }
                 catch (Exception e)

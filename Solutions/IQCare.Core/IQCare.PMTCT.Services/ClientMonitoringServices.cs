@@ -23,7 +23,7 @@ namespace IQCare.PMTCT.Services
             {
                 await _unitOfWork.Repository<PatientClinicalNotes>().AddAsync(patientClinicalNotes);
                 await _unitOfWork.SaveAsync();
-                return 1;
+                return patientClinicalNotes.Id;
             }
             catch (Exception e)
             {
@@ -39,7 +39,7 @@ namespace IQCare.PMTCT.Services
                 await _unitOfWork.Repository<PatientScreening>().AddAsync(patientScreening);
                 await _unitOfWork.SaveAsync();
 
-                return 1;
+                return patientScreening.Id;
             }
             catch (Exception e)
             {
@@ -54,7 +54,7 @@ namespace IQCare.PMTCT.Services
             {
                 await  _unitOfWork.Repository<PatientWHOStage>().AddAsync(patientWHOStage);
                 await _unitOfWork.SaveAsync();
-                return 1;
+                return patientWHOStage.Id;
             }
             catch (Exception e)
             {

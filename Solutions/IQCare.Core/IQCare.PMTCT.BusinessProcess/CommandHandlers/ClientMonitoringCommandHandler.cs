@@ -1,5 +1,5 @@
 ﻿
-using IQCare.Library;
+
 using IQCare.PMTCT.BusinessProcess.Commands;
 using IQCare.PMTCT.Core.Models;
 using IQCare.PMTCT.Infrastructure;
@@ -12,6 +12,8 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using IQCare.Common.Infrastructure;
+using IQCare.Library;
+using IQCare.PMTCT.Services;
 
 namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
 {
@@ -19,14 +21,12 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
     {
         private readonly ICommonUnitOfWork _commonUnitOfWork;
         private readonly IPmtctUnitOfWork _unitOfWork;
-        private IClientMonitoringService _clientMonitoringService;
         private int results = 0;
 
-        public ClientMonitoringCommandHandler(ICommonUnitOfWork commonUnitOfWork,   IPmtctUnitOfWork unitOfWork, IClientMonitoringService clientMonitoringService)
+        public ClientMonitoringCommandHandler(ICommonUnitOfWork commonUnitOfWork,   IPmtctUnitOfWork unitOfWork)
         {
             _commonUnitOfWork = commonUnitOfWork ?? throw new ArgumentNullException(nameof(commonUnitOfWork));
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
-            _clientMonitoringService = clientMonitoringService;
         }
 
         public async Task<Result<ClientMonitoringCommandResponse>> Handle(ClientMonitoringCommand request, CancellationToken cancellationToken)
@@ -35,19 +35,22 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
             {
                 try
                 {
-                    PatientWHOStage patientWHOStage = new PatientWHOStage()
+                    ClientMonitoringServices clientMonitoringService= new ClientMonitoringServices(_unitOfWork);
+
+                    PatientWHOStage patientWhoStage = new PatientWHOStage()
                     {
                         PatientId=request.PatientId,
                         PatientMasterVisitId=request.PatientMasterVisitId,
                         WHOStage=request.WhoStage
+                        
                     };
 
-                   int patientWhoStageResult= await _clientMonitoringService.AddPatientWhoStage(patientWHOStage);
+                   int patientWhoStageResult= await clientMonitoringService.AddPatientWhoStage(patientWhoStage);
 
                     int cacxTypeId = await _commonUnitOfWork.Repository<Common.Core.Models.LookupItemView>().Get(x => x.MasterName == "CaCxScreening").Select(x => x.MasterId).FirstOrDefaultAsync();
-                    int TbscreeningTypeId = await _commonUnitOfWork.Repository<Common.Core.Models.LookupItemView>().Get(x => x.MasterName == "TBScreeningPMTCT").Select(x => x.MasterId).FirstOrDefaultAsync();
+                    int tbscreeningTypeId = await _commonUnitOfWork.Repository<Common.Core.Models.LookupItemView>().Get(x => x.MasterName == "TBScreeningPMTCT").Select(x => x.MasterId).FirstOrDefaultAsync();
                     int cacxCategoryId = await _commonUnitOfWork.Repository<Common.Core.Models.LookupItem>().Get(x => x.Name == "CaCxMethod").Select(x => x.Id).FirstOrDefaultAsync();
-                    int tbScreeningcaegoryId = await _unitOfWork.Repository<Common.Core.Models.LookupItem>().Get(x => x.Name == "TBScreening").Select(x => x.Id).FirstOrDefaultAsync();
+                    int tbScreeningcaegoryId = await _commonUnitOfWork.Repository<Common.Core.Models.LookupItem>().Get(x => x.Name == "TBScreening").Select(x => x.Id).FirstOrDefaultAsync();
 
                     // CACXMethod       
                     PatientScreening patientScreeningCaCxMethod = new PatientScreening()
@@ -57,35 +60,43 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
                         ScreeningTypeId= cacxTypeId,
                         ScreeningValueId=request.cacxResult,
                         ScreeningDone=true,
-                        ScreeningDate=DateTime.Today,
-                        ScreeningCategoryId= cacxCategoryId
+                        ScreeningDate=DateTime.Now,
+                        ScreeningCategoryId= cacxCategoryId,
+                        Comment = request.Comments,
+                        CreateDate = DateTime.Now,
+                        CreatedBy = request.CreatedBy
                     };
 
-                    //TB Screeniing
+                    //TB Screening
                     PatientScreening patientScreeningTb = new PatientScreening()
                     {
                         PatientId = request.PatientId,
                         PatientMasterVisitId = request.PatientMasterVisitId,
-                        ScreeningTypeId = TbscreeningTypeId,
+                        ScreeningTypeId = tbscreeningTypeId,
                         ScreeningValueId=request.screenedTB,
                         ScreeningDone = true,
-                        ScreeningDate = DateTime.Today,
-                        ScreeningCategoryId = tbScreeningcaegoryId
+                        ScreeningDate = DateTime.Now,
+                        ScreeningCategoryId = tbScreeningcaegoryId,
+                        CreateDate = DateTime.Now,
+                        CreatedBy = request.CreatedBy
                     };
 
 
-                    int PatientScreeningResult = await _clientMonitoringService.AddPatientScreening(patientScreeningCaCxMethod);
-                    await _clientMonitoringService.AddPatientScreening(patientScreeningTb);
+                    int PatientScreeningResult = await clientMonitoringService.AddPatientScreening(patientScreeningCaCxMethod);
+                    await clientMonitoringService.AddPatientScreening(patientScreeningTb);
 
                     PatientClinicalNotes patientClinicalNotes = new PatientClinicalNotes()
                     {
                         PatientId = request.PatientId,
                         PatientMasterVisitId = request.PatientMasterVisitId,
                         ServiceAreaId = request.ServiceAreaId,
-                        ClinicalNotes = request.ClinicalNotes
+                        ClinicalNotes = request.ClinicalNotes,
+                        CreateDate = DateTime.Now,
+                        CreatedBy = request.CreatedBy
+                    
                     };
 
-                    int clinicalNotesId =await _clientMonitoringService.AddPatientClinicalNotes(patientClinicalNotes);
+                    int clinicalNotesId =await clientMonitoringService.AddPatientClinicalNotes(patientClinicalNotes);
 
                     if(clinicalNotesId>0 & PatientScreeningResult>0 & patientWhoStageResult > 0)
                     {

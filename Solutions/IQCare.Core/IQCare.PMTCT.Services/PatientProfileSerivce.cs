@@ -13,6 +13,11 @@ namespace IQCare.PMTCT.Services
    public class PatientProfileSerivce : IPatientProfileService
    {
        private readonly IPmtctUnitOfWork _unitOfWork;
+
+       public PatientProfileSerivce(IPmtctUnitOfWork unitOfWork)
+       {
+           _unitOfWork = unitOfWork;
+       }
         public async Task<PatientProfile> AddPatientProfile(PatientProfile patientProfile)
         {
             try

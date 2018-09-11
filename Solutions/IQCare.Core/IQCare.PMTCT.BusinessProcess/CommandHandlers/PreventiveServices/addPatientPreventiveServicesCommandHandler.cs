@@ -12,11 +12,11 @@ using System.Threading.Tasks;
 
 namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.PreventiveServices
 {
-    public class addPatientPreventiveServicesCommandHandler : IRequestHandler<PatientPreventiveServiceCommand, Result<AddPatientPreventiveServiceCommandResponse>>
+    public class AddPatientPreventiveServicesCommandHandler : IRequestHandler<PatientPreventiveServiceCommand, Result<AddPatientPreventiveServiceCommandResponse>>
     {
        private readonly IPmtctUnitOfWork _pmtctUnitOfWork;
 
-        public addPatientPreventiveServicesCommandHandler(IPmtctUnitOfWork pmtctUnitOfWork)
+        public AddPatientPreventiveServicesCommandHandler(IPmtctUnitOfWork pmtctUnitOfWork)
         {
             _pmtctUnitOfWork = pmtctUnitOfWork ?? throw new ArgumentNullException(nameof(pmtctUnitOfWork));
         }
