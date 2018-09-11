@@ -11,6 +11,7 @@ namespace IQCare.PMTCT.BusinessProcess.Commands
         public int PatientMasterVisitId { get; set; }
         public int BreastExamDone { get; set; }
         public int TreatedSyphilis { get; set; }
+        public int CreatedBy { get; set; }
         public List<PatientEducation> CounsellingTopics;
     }
 

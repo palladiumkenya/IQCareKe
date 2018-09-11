@@ -7,13 +7,13 @@ using Serilog;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using IQCare.PMTCT.Services;
 
 namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
 {
     public class ReferralAppointmentCommandHandler : IRequestHandler<ReferralAppointmentServiceCommand, Result<ReferralAppointmentCommandResponse>>
     {
         private readonly IPmtctUnitOfWork _unitOfWork;
-        private IReferralAppointmentService _service;
         private int result = 0;
 
         public ReferralAppointmentCommandHandler(IPmtctUnitOfWork unitOfWork)
@@ -27,6 +27,7 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
             {
                 try
                 {
+                    ReferralAppointmentService _service=new ReferralAppointmentService(_unitOfWork);
                    int result1= await _service.AddPatientAppointment(request.patientAppointment);
                    int result2= await _service.AddPatientReferral(request.patientReferral);
                     if(result1>0 & result2>0)

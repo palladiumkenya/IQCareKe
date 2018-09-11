@@ -6,8 +6,6 @@ import {NotificationService} from '../../shared/_services/notification.service';
 import { SnotifyService } from 'ng-snotify';
 import {PatientEducationCommand} from '../_models/PatientEducationCommand';
 import {PatientEducationEmitter} from '../emitters/PatientEducationEmitter';
-import {VisitDetails} from '../_models/visitDetails';
-import {PatientEducation} from '../_models/PatientEducation';
 import {CounsellingTopicsEmitters} from '../emitters/counsellingTopicsEmitters';
 
 
@@ -41,6 +39,7 @@ export class PatientEducationExaminationComponent implements OnInit {
     LookupItems$: Subscription;
     public topics: any[] = [];
     public testResults: any[] = [];
+    public userId: number;
 
     public patientEducationEmitterData: PatientEducationEmitter;
 
@@ -63,6 +62,7 @@ export class PatientEducationExaminationComponent implements OnInit {
         treatedSyphilis: ['', Validators.required],
         testResult: ['', Validators.required]
     });
+      this.userId = JSON.parse(localStorage.getItem('appUserId'));
      this.getLookupOptions('counselledOn', this.topics);
      this.getLookupOptions('yesno', this.yesnos);
       this.getLookupOptions('HivTestingResult', this.testResults);
@@ -114,7 +114,9 @@ export class PatientEducationExaminationComponent implements OnInit {
             this.counselling_data.push({
                 counselledOn: parseInt(topicId, 10 ),
                 counsellingTopic: topic,
-                topicDate: this.PatientEducationFormGroup.controls['counsellingDate'].value});
+                counsellingTopicId: topicId,
+                description: 'n/a',
+                CounsellingDate: this.PatientEducationFormGroup.controls['counsellingDate'].value});
         }
         console.log(this.counselling_data);
     }

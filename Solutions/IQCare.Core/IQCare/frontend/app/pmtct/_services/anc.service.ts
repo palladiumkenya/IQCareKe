@@ -23,12 +23,12 @@ const httpOptions = {
 export class AncService {
     private API_URL = environment.API_URL;
     private _url = '/api/anc/';
-    private _url_pedc = 'api/PatientEducationExamination/';
-    private _url_cm = 'api/ClientMonitoring/';
-    private _url_haart = 'api/HaartProphylaxis/';
-    private _url_ref = 'api/ReferralAppointment/';
-    private _url_pre = 'api/PreventiveService/';
-    private _url_visit = 'api/VisitDetails/';
+    private _url_pedc = '/api/PatientEducationExamination/';
+    private _url_cm = '/api/ClientMonitoring/';
+    private _url_haart = '/api/HaartProphylaxis/';
+    private _url_ref = '/api/ReferralAppointment/';
+    private _url_pre = '/api/PreventiveService/';
+    private _url_visit = '/api/VisitDetails/';
 
     public profile: PatientProfile = {};
 
@@ -37,8 +37,9 @@ export class AncService {
               private errorHandler: ErrorHandlerService) { }
 
     public savePatientEducation(patientEducationCommand: PatientEducationCommand): Observable<PatientEducationCommand> {
-        return this.http.post<any>(this.API_URL + '' + this._url_pedc, JSON.stringify(patientEducationCommand), httpOptions).pipe(
-            tap(savePatientEducation => this.errorHandler.log('Error posting patientEducationCOmmand')),
+        return this.http.post<any>(this.API_URL + '' + this._url_pedc, JSON.stringify(patientEducationCommand),
+            httpOptions).pipe(
+            tap(savePatientEducation => this.errorHandler.log('Error posting patientEducationCommand')),
             catchError(this.errorHandler.handleError<any>('PatientEducationExaminationController', ), )
         );
     }
@@ -46,7 +47,7 @@ export class AncService {
     public saveClientMonitoring(clientMonitoringCommand: ClientMonitoringCommand): Observable<ClientMonitoringCommand> {
         return this.http.post<any>(this.API_URL + '' + this._url_cm, JSON.stringify(clientMonitoringCommand), httpOptions).pipe(
             tap(saveClientMonitoring => this.errorHandler.log('Error posting client monitoring Command')),
-            catchError(this.errorHandler.handleError<any>('ClientMonitoringController', ), )
+            catchError(this.errorHandler.handleError<any>('ClientMonitoringController' + this.API_URL + '' + this._url_pedc), )
         );
     }
 

@@ -41,8 +41,10 @@ namespace IQCare.Controllers.PMTCT.ANC
         {
             var response = await _mediator.Send(new PatientEducationExaminationCommand
             {
-                PatientId = serviceCommand.PatientId,
-                PatientMasterVisitId= serviceCommand.PatientMasterVisitId,
+               // PatientId = serviceCommand.PatientId,
+                PatientId = 5,
+                //PatientMasterVisitId= serviceCommand.PatientMasterVisitId,
+                PatientMasterVisitId = 21,
                 BreastExamDone= serviceCommand.BreastExamDone,
                 TreatedSyphilis= serviceCommand.TreatedSyphilis,
                 CounsellingTopics= serviceCommand.CounsellingTopics,

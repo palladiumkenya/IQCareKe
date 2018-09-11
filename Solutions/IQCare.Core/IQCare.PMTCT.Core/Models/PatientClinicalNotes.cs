@@ -13,6 +13,8 @@ namespace IQCare.PMTCT.Core.Models
         public int? ServiceAreaId { get; set; }
         public string ClinicalNotes { get; set; }
         public int DeleteFlag { get; set; }
+        public DateTime CreateDate { get; set; }
+        public int CreatedBy { get; set; }
 
     }
 }

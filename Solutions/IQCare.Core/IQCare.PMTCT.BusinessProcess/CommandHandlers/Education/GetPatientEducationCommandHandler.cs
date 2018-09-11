@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.Education
 {
@@ -27,7 +28,7 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.Education
             {
                 try
                 {
-                    var result = _unitOfWork.Repository<PatientEducation>().Get(x => x.PatientId == request.PatientId).ToList();
+                    var result =await _unitOfWork.Repository<PatientEducation>().Get(x => x.PatientId == request.PatientId).ToListAsync();
                     return Result<List<PatientEducation>>.Valid(result);
                 }
                 catch (Exception e)

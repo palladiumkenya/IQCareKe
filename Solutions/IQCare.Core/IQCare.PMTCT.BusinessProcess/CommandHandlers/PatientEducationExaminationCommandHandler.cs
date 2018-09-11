@@ -1,6 +1,4 @@
-﻿
-
-using IQCare.Common.Core.Models;
+﻿using IQCare.Common.Core.Models;
 using IQCare.PMTCT.BusinessProcess.Commands;
 using IQCare.PMTCT.Core.Models;
 using IQCare.PMTCT.Infrastructure;
@@ -22,7 +20,7 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
     {
         private readonly ICommonUnitOfWork _commonUnitOfWork;
         private readonly IPmtctUnitOfWork _unitOfWork;
-        private int result = 0;
+
 
         public PatientEducationExaminationCommandHandler(ICommonUnitOfWork commonUnitOfWork, IPmtctUnitOfWork unitOfWork)
         {
@@ -38,28 +36,30 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
                 {
                     PatientEducationExaminationService _service = new PatientEducationExaminationService(_unitOfWork, _commonUnitOfWork);
 
-                    var breastExamId =await  _commonUnitOfWork.Repository<LookupItemView>().Get(x => x.ItemName == "Breast Exam").Select(x => x.ItemId).FirstOrDefaultAsync();
+                    var breastExamId =await  _commonUnitOfWork.Repository<LookupItem>().Get(x => x.Name == "Breast Exam").Select(x => x.Id).FirstOrDefaultAsync();
                     var examinationTypeId =await  _commonUnitOfWork.Repository<LookupItemView>().Get(x => x.MasterName == "GeneralExamination").Select(x => x.MasterId).FirstOrDefaultAsync();
 
-                    PatientPhysicalExamination breastExam = new PatientPhysicalExamination()
+                    PhysicalExamination breastExam = new PhysicalExamination()
                     {
                         PatientId = request.PatientId,
                         PatientMasterVisitId = request.PatientMasterVisitId,
                         ExamId = breastExamId,
                         ExaminationTypeId = examinationTypeId,
-                        FindingId = request.BreastExamDone
+                        FindingId = request.BreastExamDone,
+                        CreateDate = DateTime.Now
                     };
 
                     int breastExamResult = await _service.AddPatientPhysicalExamination(breastExam);
 
-                    var syphillisExamId = await _commonUnitOfWork.Repository<LookupItemView>().Get(x => x.ItemName == "Treated Syphilis").Select(x => x.ItemId).FirstOrDefaultAsync();
-                    PatientPhysicalExamination syphillisExam = new PatientPhysicalExamination()
+                    var syphillisExamId = await _commonUnitOfWork.Repository<LookupItem>().Get(x => x.Name == "Treated Syphilis").Select(x => x.Id).FirstOrDefaultAsync();
+                    PhysicalExamination syphillisExam = new PhysicalExamination()
                     {
                         PatientId = request.PatientId,
                         PatientMasterVisitId = request.PatientMasterVisitId,
                         ExamId = syphillisExamId,
                         ExaminationTypeId = examinationTypeId,
-                        FindingId = request.TreatedSyphilis
+                        FindingId = request.TreatedSyphilis,
+                        CreateDate = DateTime.Now
                     };
 
                     int syphillisResultId = await _service.AddPatientPhysicalExamination(syphillisExam);
@@ -70,11 +70,14 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
                     {
                         PatientEducation data = new PatientEducation
                         {
-                            PatientId = item.PatientId,
-                            PatientMasterVisitId = item.PatientMasterVisitId,
+                            PatientId = request.PatientId,
+                            PatientMasterVisitId = request.PatientMasterVisitId,
                             CounsellingTopicId = item.CounsellingTopicId,
                             CounsellingDate = item.CounsellingDate,
-                            Description = item.Description
+                            Description = item.Description,
+                            CreateDate = DateTime.Now,
+                            CreatedBy = request.CreatedBy
+                           
                         };
                         patientCounselling.Add(data);
                     }

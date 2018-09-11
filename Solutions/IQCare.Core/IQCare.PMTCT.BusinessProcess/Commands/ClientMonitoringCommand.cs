@@ -21,6 +21,7 @@ namespace IQCare.PMTCT.BusinessProcess.Commands
         public int cacxMethod { get; set; }
         public int cacxResult { get; set; }
         public string Comments { get; set; }
+        public int CreatedBy { get; set; }
     }
 
     public class ClientMonitoringCommandResponse

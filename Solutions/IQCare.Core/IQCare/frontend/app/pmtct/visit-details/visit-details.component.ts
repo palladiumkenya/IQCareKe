@@ -28,6 +28,7 @@ export class VisitDetailsComponent implements OnInit, OnChanges {
     patientProfile: PatientProfile;
     pregnancyProfile: PregnancyViewModel;
     visitDetails: VisitDetails;
+    public visitNumber: number;
     public personId: number;
     public patientId: number;
     public serviceAreaId: number;
@@ -56,7 +57,7 @@ export class VisitDetailsComponent implements OnInit, OnChanges {
         ancVisitType: ['', Validators.required],
         dateLMP: ['', Validators.required],
         dateEDD: ['', Validators.required],
-        ancVisitNumber: ['', Validators.required],
+        ancVisitNumber: ['0', Validators.required],
         gestation: ['', Validators.required],
         ageAtMenarche: ['', Validators.required],
         parityOne: ['', Validators.required],
@@ -127,16 +128,20 @@ export class VisitDetailsComponent implements OnInit, OnChanges {
                 this.snotifyService.error('Error editing encounter ' + error, 'Encounter', this.notificationService.getConfig());
                 },
             () => {
+                   this.visitNumber = this.patientProfile.visitNumber;
+                   this.visitNumber = this.visitNumber += 1;
+                    // this.visitDetailsFormGroup.controls['ancVisitType'].disable({ onlySelf: false });
                     if (this.patientProfile) {
                         this.visitDetailsFormGroup.controls['ancVisitType'].setValue(this.patientProfile.VisitType);
-                        this.visitDetailsFormGroup.controls['ancVisitType'].disable({ onlySelf: true });
-                        this.visitDetailsFormGroup.controls['ancVisitNumber'].setValue(this.patientProfile.VisitNumber + 1);
+
+                        this.visitDetailsFormGroup.controls['ancVisitNumber'].patchValue(this.visitNumber);
                         this.visitDetailsFormGroup.controls['ancVisitNumber'].disable({ onlySelf: true });
-                        this.visitDetailsFormGroup.controls['ageAtMenarche'].setValue(this.patientProfile.AgeMenarche);
+                        this.visitDetailsFormGroup.controls['ageAtMenarche'].setValue(this.patientProfile.ageMenarche);
                         this.visitDetailsFormGroup.controls['ageAtMenarche'].disable({ onlySelf: true });
+                       //  this.visitDetailsFormGroup.controls['ancVisitType'].disable({ onlySelf: false });
                     } else {
                         this.visitDetailsFormGroup.controls['ancVisitType'].setValue(1724);
-                        this.visitDetailsFormGroup.controls['ancVisitType'].disable({ onlySelf: true });
+                       // this.visitDetailsFormGroup.controls['ancVisitType'].disable({ onlySelf: true });
                         this.visitDetailsFormGroup.controls['ancVisitNumber'].setValue(1);
                         this.visitDetailsFormGroup.controls['ancVisitNumber'].disable({ onlySelf: true });
                     }
@@ -155,7 +160,9 @@ export class VisitDetailsComponent implements OnInit, OnChanges {
                         lmp: p.lmp,
                         edd: p.edd,
                         parity: p.parity,
-                        parity2: p.parity2
+                        parity2: p.parity2,
+                        gravidae: p.gravidae,
+                        gestation: p.gestation
                     } as PregnancyViewModel;
                     this.pregnancyId = parseInt(p.id.toString(), 10);
                 },
@@ -172,8 +179,8 @@ export class VisitDetailsComponent implements OnInit, OnChanges {
                         this.visitDetailsFormGroup.controls['dateEDD'].setValue(this.pregnancyProfile.edd);
                         this.visitDetailsFormGroup.controls['parityOne'].setValue(this.pregnancyProfile.parity);
                         this.visitDetailsFormGroup.controls['parityTwo'].setValue(this.pregnancyProfile.parity);
-                        this.visitDetailsFormGroup.controls['gravidae'].setValue(this.pregnancyProfile.gravidae);
-                        this.visitDetailsFormGroup.controls['gestation'].setValue(this.pregnancyProfile.gestation);
+                        this.visitDetailsFormGroup.controls['gravidae'].patchValue(this.pregnancyProfile.gravidae);
+                        this.visitDetailsFormGroup.controls['gestation'].patchValue(this.pregnancyProfile.gestation);
                        // this.visitDetailsFormGroup.controls['ageAtMenarche'].setValue(this.pregnancyProfile.ag);
 
 
@@ -182,7 +189,7 @@ export class VisitDetailsComponent implements OnInit, OnChanges {
                         this.visitDetailsFormGroup.controls['dateEDD'].disable({ onlySelf: true });
                         this.visitDetailsFormGroup.controls['parityOne'].disable({ onlySelf: true });
                         this.visitDetailsFormGroup.controls['parityTwo'].disable({ onlySelf: true });
-                        this.visitDetailsFormGroup.controls['ancVisitType'].disable({ onlySelf: true });
+                       // this.visitDetailsFormGroup.controls['ancVisitType'].disable({ onlySelf: true });
                         this.visitDetailsFormGroup.controls['gravidae'].disable({ onlySelf: true });
                         this.visitDetailsFormGroup.controls['gestation'].setValue(this.pregnancyProfile.gestation);
                     }

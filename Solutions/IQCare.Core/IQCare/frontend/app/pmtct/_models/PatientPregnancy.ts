@@ -5,7 +5,7 @@ export interface PatientPregnancy {
     lmp?: Date;
     edd?: Date;
     gravidae?: number;
-    Gestation: number;
+    gestation: number;
     parity?: number;
     parity2?: number;
     outcome: number;

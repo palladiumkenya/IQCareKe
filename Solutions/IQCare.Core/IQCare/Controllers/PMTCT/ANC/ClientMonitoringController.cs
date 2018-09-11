@@ -16,6 +16,11 @@ namespace IQCare.Controllers.PMTCT.ANC
     {
         private readonly IMediator _mediator;
 
+        public ClientMonitoringController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
+
         // GET: api/<controller>
         [HttpGet]
         public IEnumerable<string> Get()

@@ -5,5 +5,6 @@ export interface PatientEducationCommand {
     PatientMasterVisitId?: number;
     BreastExamDone?: number;
     TreatedSyphilis?: number;
+    CreateBy?: number;
     CounsellingTopics?: PatientEducation[];
 }

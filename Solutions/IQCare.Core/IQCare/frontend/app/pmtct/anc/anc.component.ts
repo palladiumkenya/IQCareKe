@@ -20,7 +20,6 @@ import {ReferralAppointmentCommand} from '../_models/ReferralAppointmentCommand'
 import {PatientAppointmet} from '../_models/PatientAppointmet';
 import {PreventiveServiceEmitter} from '../emitters/PreventiveServiceEmitter';
 import {PatientPreventiveService} from '../_models/PatientPreventiveService';
-import {PatientPregnancy} from '../_models/PatientPregnancy';
 import {PatientProfile} from '../_models/patientProfile';
 import {PregnancyViewModel} from '../_models/viewModel/PregnancyViewModel';
 
@@ -40,6 +39,7 @@ export class AncComponent implements OnInit, OnDestroy {
     public patientId: number;
     public serviceAreaId: number;
     public patientMasterVisitId: number;
+    public userId: number;
 
     public saveVisitDetails$ ;
     public savePatientEducation$: Subscription;
@@ -70,6 +70,7 @@ export class AncComponent implements OnInit, OnDestroy {
       this.route.params.subscribe(params => {
           this.patientMasterVisitId = params['patientMasterVisitId'];
       });
+      this.userId = JSON.parse(localStorage.getItem('appUserId'));
   }
 
 
@@ -93,10 +94,14 @@ export class AncComponent implements OnInit, OnDestroy {
 
   public onSavePatientEducation(data: PatientEducationEmitter): void {
 
+        console.log('testing counselling');
+      console.log(data);
+
       const patientEducation = {
           BreastExamDone: data.breastExamDone,
           TreatedSyphilis: data.treatedSyphilis,
-          CounsellingTopics: data.counsellingTopics
+          CreateBy: (this.userId < 1) ? 1 : this.userId,
+          CounsellingTopics: data.counsellingTopics,
       } as PatientEducationCommand;
 
       this.savePatientEducation$ = this.ancService.savePatientEducation(patientEducation)
@@ -117,18 +122,24 @@ export class AncComponent implements OnInit, OnDestroy {
 
   public onSaveClientMonitoring(data: ClientMonitoringEmitter): void {
     const clientMonitoring = {
-        PatientId: this.patientId,
-        PatientmasterVisitId: this.patientMasterVisitId,
-        FacilityId: 0,
-        ServiceAreaId: this.serviceAreaId,
+        PatientId: parseInt(this.patientId.toString(), 10),
+       // PatientmasterVisitId: this.patientMasterVisitId,
+        PatientMasterVisitId: 21,
+        FacilityId: 755,
+        WhoStage: parseInt(data.WhoStage.toString(), 10),
+        ServiceAreaId: 3,
         ScreeningTypeId: 0,
-        ScreeningDone: data.cacxScreeningDone,
+        ScreeningDone: Boolean(data.cacxScreeningDone) ,
         ScreeningDate: new Date(),
-        ScreeningTB: data.screenedForTB,
-        CaCxMethod: data.cacxMethod,
-        CaCxResult: data.cacxResult,
+        ScreeningTB: parseInt(data.screenedForTB.toString(), 10),
+        CaCxMethod: parseInt(data.cacxMethod.toString(), 10),
+        CaCxResult: parseInt(data.cacxResult.toString(), 10),
         Comments: data.cacxComments.toString(),
+        ClinicalNotes: data.cacxComments.toString(),
+        CreatedBy: (this.userId < 1) ? 1 : this.userId
     } as ClientMonitoringCommand;
+
+    console.log(clientMonitoring);
 
       this.saveClientMonitoring$ = this.ancService.saveClientMonitoring(clientMonitoring)
           .subscribe(
