@@ -26,9 +26,9 @@ import { ReferralsComponent } from './referrals/referrals.component';
 import { NextAppointmentComponent } from './next-appointment/next-appointment.component';
 import { SharedModule } from '../shared/shared.module';
 import { HeiComponent } from './hei/hei.component';
-import { HeiVisitDetailsComponent } from './hei-visit-details/hei-visit-details.component';
-import { ImmunizationHistoryComponent } from './immunization-history/immunization-history.component';
-import { MilestonesComponent } from './milestones/milestones.component';
+import { HeiVisitDetailsComponent } from './hei/hei-visit-details/hei-visit-details.component';
+import { ImmunizationHistoryComponent } from './hei/immunization-history/immunization-history.component';
+import { MilestonesComponent } from './hei/milestones/milestones.component';
 
 
 @NgModule({

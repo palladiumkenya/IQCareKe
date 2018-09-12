@@ -57,9 +57,11 @@ export class AncComponent implements OnInit, OnDestroy {
     public profile: PatientProfile = {};
 
 
-    constructor(private route: ActivatedRoute, private visitDetailsService: VisitDetailsService,
+    constructor(private route: ActivatedRoute,
+        private visitDetailsService: VisitDetailsService,
         private snotifyService: SnotifyService,
-        private notificationService: NotificationService, private ancService: AncService) {
+        private notificationService: NotificationService,
+        private ancService: AncService) {
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
     }
 
