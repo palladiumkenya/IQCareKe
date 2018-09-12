@@ -10,9 +10,8 @@
                 <div class="col-md-4">
                     <mat-form-field class="col-md-12">
                         <mat-select formControlName="testingDone" placeholder="HIV testing done during this visit">
-                            <mat-option placeholder="HIV testing done during this visit" *ngFor="let testVisit of testVisits" [value]="testVisit.itemId">
-                                {{testVisit.itemName}}
-                            </mat-option>
+                            <mat-option [value]="1" id="initial">Initial Test</mat-option>
+                            <mat-option [value]="2" id="repeat">Repeat Test</mat-option>
                         </mat-select>
                     </mat-form-field>
                 </div>
@@ -23,7 +22,7 @@
                 <div class="col-lg-4 col-md-4 col-xs-12 col-sm-6">
                     <mat-form-field class="col-md-12">
                         <mat-select placeholder="Select Result" name="hivTest" id="hivTest" formControlName="hivTest" required>
-                            <mat-option *ngFor="let testOption of tests" [value]="testOption.itemId">{{testOption.itemName}}</mat-option>
+                            <mat-option *ngFor="let testOption of tests" [value]="testOption">{{testOption.itemName}}</mat-option>
                         </mat-select>
                     </mat-form-field>
                 </div>
@@ -44,7 +43,7 @@
             <div class="col-md-12">
                 <div class="col-lg-4 col-md-4 col-xs-12 col-sm-6">
                     <mat-form-field class="col-md-12">
-                        <input formControlName="expiryDate" id="expiryDate" matInput [matDatepicker]="expiryDate" formControlname="expiryDate" placeholder="expiry Date"
+                        <input formControlName="expiryDate" id="expiryDate" matInput [matDatepicker]="expiryDate" formControlname="expiryDate" placeholder="Expiry Date"
                             required>
                         <mat-datepicker-toggle matSuffix [for]="expiryDate"></mat-datepicker-toggle>
                         <mat-datepicker #expiryDate></mat-datepicker>

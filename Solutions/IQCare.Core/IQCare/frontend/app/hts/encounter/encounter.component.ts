@@ -206,6 +206,7 @@ export class EncounterComponent implements OnInit {
     addNewEncounter() {
         const isConsented = this.encounter.Consent;
         const testedAs = this.encounter.TestedAs;
+        this.encounter.PatientMasterVisitId = 0;
 
         this._encounterService.addEncounter(this.encounter).subscribe(data => {
             console.log(data);
