@@ -9,6 +9,7 @@ namespace IQCare.PMTCT.BusinessProcess.Commands
     {
         public List<PatientDrugAdministration> PatientDrugAdministration;
         public List<PatientChronicIllness> PatientChronicIllnesses;
+        public int OtherIllness { get; set; }
     }
 
     public class HaartProphylaxisResponse

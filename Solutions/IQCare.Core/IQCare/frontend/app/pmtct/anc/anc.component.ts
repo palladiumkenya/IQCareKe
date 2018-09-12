@@ -183,8 +183,9 @@ export class AncComponent implements OnInit, OnDestroy {
             }
         );
         const haartProphylaxis = {
-            PatientChronicIllnesses: data.otherIllness,
-            PatientDrugAdministration: this.patientDrug
+            PatientChronicIllnesses: data.chronicIllness,
+            PatientDrugAdministration: this.patientDrug,
+            OtherIllness: data.otherIllness
         } as HaartProphylaxisCommand;
 
         this.saveHaartProphylaxis$ = this.ancService.saveHaartProphylaxis(haartProphylaxis)

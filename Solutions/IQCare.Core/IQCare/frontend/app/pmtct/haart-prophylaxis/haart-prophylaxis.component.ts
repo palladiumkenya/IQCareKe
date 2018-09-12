@@ -6,8 +6,9 @@ import {NotificationService} from '../../shared/_services/notification.service';
 import {Subscription} from 'rxjs/index';
 import {ClientMonitoringEmitter} from '../emitters/ClientMonitoringEmitter';
 import {HAARTProphylaxisEmitter} from '../emitters/HAARTProphylaxisEmitter';
-import {OtherIllnessesEmitter} from '../emitters/OtherIllnessesEmitter';
 import {ActivatedRoute} from '@angular/router';
+import {ChronicIllnessEmitter} from '../emitters/ChronicIllnessEmitter';
+import {PatientChronicIllness} from '../_models/PatientChronicIllness';
 export interface Options {
   value: string;
   viewValue: string;
@@ -28,7 +29,8 @@ export class HaartProphylaxisComponent implements OnInit {
     @Output() nextStep = new EventEmitter <HAARTProphylaxisEmitter> ();
     @Input() HaartProphylaxis: ClientMonitoringEmitter;
     public HaartProphylaxisData: HAARTProphylaxisEmitter;
-    public otherIllness: OtherIllnessesEmitter[] = [];
+    public chronicIllness: ChronicIllnessEmitter[] = [];
+    public patientchronicIllnessData: PatientChronicIllness[] = [];
 
     public personId: number;
     public patientMasterVisitId: number;
@@ -85,6 +87,19 @@ export class HaartProphylaxisComponent implements OnInit {
     public moveNextStep() {
         console.log(this.HaartProphylaxisFormGroup.value);
 
+        for (let i = 0; i < this.chronicIllness.length; i++) {
+            this.patientchronicIllnessData .push(
+                { Id: 0,
+                    PatientId: 5,
+                    PatientMasterVisitId: 12,
+                    ChronicIllness: this.chronicIllness[i]['chronicIllnessId'],
+                    Treatment: this.chronicIllness[i]['currentTreatment'],
+                    Dose: parseInt(this.chronicIllness[i]['dose'].toString(), 10),
+                    DeleteFlag: 0,
+                    OnsetDate : new Date(this.chronicIllness[i]['onsetDate']) ,
+                    Active: false
+            });
+        }
         this.HaartProphylaxisData = {
             onArvBeforeANCVisit : parseInt(this.HaartProphylaxisFormGroup.controls['onArvBeforeANCVisit'].value, 10),
             startedHaartANC: parseInt(this.HaartProphylaxisFormGroup.controls['startedHaartANC'].value, 10 ),
@@ -92,7 +107,8 @@ export class HaartProphylaxisComponent implements OnInit {
             aztFortheBaby: parseInt(this.HaartProphylaxisFormGroup.controls['aztFortheBaby'].value, 10 ),
             nvpForBaby: parseInt(this.HaartProphylaxisFormGroup.controls['nvpForBaby'].value, 10 ),
             illness: parseInt(this.HaartProphylaxisFormGroup.controls['illness'].value, 10 ),
-            otherIllness: this.otherIllness
+            otherIllness: parseInt(this.HaartProphylaxisFormGroup.controls['otherIllness'].value, 10 ),
+            chronicIllness: this.patientchronicIllnessData
         };
         console.log(this.HaartProphylaxisData);
         this.nextStep.emit(this.HaartProphylaxisData);
@@ -102,16 +118,18 @@ export class HaartProphylaxisComponent implements OnInit {
       const illness = this.HaartProphylaxisFormGroup.controls['illness'].value.itemName;
       const illnessId =    parseInt(this.HaartProphylaxisFormGroup.controls['illness'].value.itemId, 10 );
 
-      if (!this.otherIllness.filter(x => x.otherIllness === parseInt(this.HaartProphylaxisFormGroup.controls['illness'].value, 10 ))) {
-            this.otherIllness.push({
-                PatientId: this.personId,
-                PatientmasterVisitId: this.patientMasterVisitId,
-                otherIllness: illnessId,
-                illnessId: illness ,
+        if (this.chronicIllness.filter(x => x.chronicIllness === illness ).length > 0) {
+            this.snotifyService.warning('' + illness + ' exists', 'Counselling', this.notificationService.getConfig());
+        } else {
+            this.chronicIllness.push({
+                chronicIllness: illness,
+                chronicIllnessId: illnessId,
                 onSetDate: this.HaartProphylaxisFormGroup.controls['onSetDate'].value,
                 currentTreatment: this.HaartProphylaxisFormGroup.controls['currentTreatment'].value,
-                dose: this.HaartProphylaxisFormGroup.controls['dose'].value});
+                dose: parseInt(this.HaartProphylaxisFormGroup.controls['dose'].value.toString(), 10)
+            });
         }
+        console.log(this.chronicIllness);
     }
 
 }

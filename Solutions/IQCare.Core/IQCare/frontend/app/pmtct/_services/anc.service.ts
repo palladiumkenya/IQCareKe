@@ -52,7 +52,7 @@ export class AncService {
     }
 
     public saveHaartProphylaxis(haartProphylaxisCommand: HaartProphylaxisCommand): Observable<HaartProphylaxisCommand> {
-        return this.http.post<any>(this.API_URL + '' + this._url_cm, JSON.stringify(haartProphylaxisCommand), httpOptions).pipe(
+        return this.http.post<any>(this.API_URL + '' + this._url_haart, JSON.stringify(haartProphylaxisCommand), httpOptions).pipe(
             tap(saveHaartProphylaxis => this.errorHandler.log('Error posting HaartProphylaxis Command')),
             catchError(this.errorHandler.handleError<any>('HaartProphylaxisController'))
         );

@@ -25,6 +25,10 @@ import { PartnerTestingComponent } from './partner-testing/partner-testing.compo
 import { ReferralsComponent } from './referrals/referrals.component';
 import { NextAppointmentComponent } from './next-appointment/next-appointment.component';
 import { SharedModule } from '../shared/shared.module';
+import { HeiComponent } from './hei/hei.component';
+import { HeiVisitDetailsComponent } from './hei-visit-details/hei-visit-details.component';
+import { ImmunizationHistoryComponent } from './immunization-history/immunization-history.component';
+import { MilestonesComponent } from './milestones/milestones.component';
 
 
 @NgModule({
@@ -52,7 +56,11 @@ import { SharedModule } from '../shared/shared.module';
         PreventiveServicesComponent,
         PartnerTestingComponent,
         ReferralsComponent,
-        NextAppointmentComponent
+        NextAppointmentComponent,
+        HeiComponent,
+        HeiVisitDetailsComponent,
+        ImmunizationHistoryComponent,
+        MilestonesComponent
     ]
 })
 export class PmtctModule { }

@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using IQCare.Common.Infrastructure;
+using IQCare.PMTCT.Services;
 
 namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
 {
@@ -17,20 +18,20 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
     {
         private readonly ICommonUnitOfWork _commonUnitOfWork;
         private readonly IPmtctUnitOfWork _unitOfWork;
-        public IHaartProphylaxisService _service;
         private int result=0;
 
-        public HaartProphylaxisCommandHandler(ICommonUnitOfWork commonUnitOfWork, IPmtctUnitOfWork unitOfWork, IHaartProphylaxisService service)
+        public HaartProphylaxisCommandHandler(ICommonUnitOfWork commonUnitOfWork, IPmtctUnitOfWork unitOfWork)
         {
             _commonUnitOfWork = commonUnitOfWork;
             _unitOfWork = unitOfWork;
-            _service = service;
         }
 
         public async Task<Result<HaartProphylaxisResponse>> Handle(HaartProphylaxisCommand request, CancellationToken cancellationToken)
         {
             using (_unitOfWork)
             {
+                HaartProphylaxisService _service=new HaartProphylaxisService(_unitOfWork);
+
                 try
                 {
                     List<PatientDrugAdministration> patientDrugAdministion_data = new List<PatientDrugAdministration>();

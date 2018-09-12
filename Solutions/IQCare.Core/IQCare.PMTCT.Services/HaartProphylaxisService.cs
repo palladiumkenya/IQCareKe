@@ -17,11 +17,11 @@ namespace IQCare.PMTCT.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<int> AddPatientChronicIllness(List<PatientChronicIllness> patientChronicIllnesses)
+        public async  Task<int> AddPatientChronicIllness(List<PatientChronicIllness> patientChronicIllnesses)
         {
             try
             {
-                await _unitOfWork.Repository<PatientChronicIllness>().AddRangeAsync(patientChronicIllnesses);
+               await  _unitOfWork.Repository<PatientChronicIllness>().AddRangeAsync(patientChronicIllnesses);
                 await _unitOfWork.SaveAsync();
                 return 1;
             }

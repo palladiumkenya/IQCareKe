@@ -1,4 +1,4 @@
-import {OtherIllnessesEmitter} from './OtherIllnessesEmitter';
+import {PatientChronicIllness} from '../_models/PatientChronicIllness';
 
 export interface HAARTProphylaxisEmitter {
     onArvBeforeANCVisit?: number;
@@ -7,5 +7,6 @@ export interface HAARTProphylaxisEmitter {
     aztFortheBaby?: number;
     nvpForBaby?: number;
     illness?: number;
-    otherIllness: OtherIllnessesEmitter[];
+    chronicIllness: PatientChronicIllness[];
+    otherIllness?: number;
 }

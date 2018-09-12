@@ -42,7 +42,8 @@ namespace IQCare.Controllers.PMTCT.ANC
             var response = await _mediator.Send(new HaartProphylaxisCommand
             {
                 PatientDrugAdministration = serviceCommand.PatientDrugAdministration,
-                PatientChronicIllnesses = serviceCommand.PatientChronicIllnesses
+                PatientChronicIllnesses = serviceCommand.PatientChronicIllnesses,
+                OtherIllness = serviceCommand.OtherIllness
             }, Request.HttpContext.RequestAborted);
 
             if (response.IsValid)

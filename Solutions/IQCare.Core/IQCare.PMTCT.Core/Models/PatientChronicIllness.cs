@@ -15,6 +15,6 @@ namespace IQCare.PMTCT.Core.Models
       public int Duration { get; set; }
       public int DeleteFlag { get; set; }
       public DateTime OnsetDate { get; set; }
-      public Boolean active { get; set; }
+      public Boolean Active { get; set; }
     }
 }
