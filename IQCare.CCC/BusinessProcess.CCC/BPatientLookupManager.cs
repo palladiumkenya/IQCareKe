@@ -421,5 +421,15 @@ namespace BusinessProcess.CCC
                 return context.PersonExtLookup.Where(x => x.PersonId == personId).First();
             }
         }
+
+        public PatientLookup GetPatientByNormalizedCccNumber(string normalizedCccNumber)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                PatientLookup patientLookup = unitOfWork.PatientLookupRepository.FindBy(x => x.EnrollmentNumberNormalized.Equals(normalizedCccNumber)).FirstOrDefault();
+                unitOfWork.Dispose();
+                return patientLookup;
+            }
+        }
     }
 }
