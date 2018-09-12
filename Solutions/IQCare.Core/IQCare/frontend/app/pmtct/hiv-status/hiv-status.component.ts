@@ -7,6 +7,7 @@ import { SnotifyService } from 'ng-snotify';
 import { PatientEducationEmitter } from '../emitters/PatientEducationEmitter';
 import { PatientEducationCommand } from '../_models/PatientEducationCommand';
 import { HIVTestingEmitter } from '../emitters/HIVTestingEmitter';
+import { VisitDetailsService } from '../_services/visit-details.service';
 export interface Topic {
     value: number;
     viewValue: string;
@@ -26,13 +27,17 @@ export class HivStatusComponent implements OnInit {
     public tests: any[] = [];
     public testResults: any[] = [];
     public finalResults: any[] = [];
+    public consentOption: number;
+    public ancTestEntryPoint: number;
+
     lookupItemView$: Subscription;
     @Output() nextStep = new EventEmitter<HIVTestingEmitter>();
     @Input() hivTestingData: HIVTestingEmitter;
 
     HIVStatusFormGroup: FormGroup;
     constructor(private _formBuilder: FormBuilder, private _lookupItemService: LookupItemService,
-        private notificationService: NotificationService, private snotifyService: SnotifyService) { }
+        private notificationService: NotificationService, private snotifyService: SnotifyService,
+        private visitDetailsService: VisitDetailsService) { }
 
     ngOnInit() {
 
@@ -50,8 +55,23 @@ export class HivStatusComponent implements OnInit {
         this.getLookupOptions('PMTCTHIVTestVisit', this.testVisits);
         this.getLookupOptions('HIVTestKits', this.kits);
         this.getLookupOptions('PMTCTHIVTests', this.tests);
-        this.getLookupOptions('HivTestingResult', this.testResults);
+        this.getLookupOptions('HIVResults', this.testResults);
         this.getLookupOptions('HIVFinalResults', this.finalResults);
+        this.visitDetailsService.getConsentOptions().subscribe(
+            (result) => {
+                console.log(result);
+                const { itemId } = result;
+                this.consentOption = itemId;
+            }
+        );
+
+        this.visitDetailsService.getTestEntryPointANC().subscribe(
+            (result) => {
+                console.log(result);
+                const { itemId } = result;
+                this.ancTestEntryPoint = itemId;
+            }
+        );
     }
 
     public getLookupOptions(groupName: string, masterName: any[]) {
@@ -75,17 +95,18 @@ export class HivStatusComponent implements OnInit {
     public moveNextStep() {
         console.log(this.HIVStatusFormGroup.value);
         this.hivTestingData = {
-            hivTest: parseInt(this.HIVStatusFormGroup.controls['hivTest'].value, 10),
+            hivTest: this.HIVStatusFormGroup.controls['hivTest'].value,
             testingDone: parseInt(this.HIVStatusFormGroup.controls['testingDone'].value, 10),
             testResult: parseInt(this.HIVStatusFormGroup.controls['testResult'].value, 10),
             kitName: parseInt(this.HIVStatusFormGroup.controls['kitName'].value, 10),
             lotNumber: this.HIVStatusFormGroup.controls['lotNumber'].value,
             nextAppointmentDate: this.HIVStatusFormGroup.controls['nextAppointmentDate'].value,
             expiryDate: this.HIVStatusFormGroup.controls['expiryDate'].value,
-            finalResult: this.HIVStatusFormGroup.controls['finalResult'].value
+            finalResult: this.HIVStatusFormGroup.controls['finalResult'].value,
+            consentOption: this.consentOption,
+            ancTestEntryPoint: this.ancTestEntryPoint
         };
 
-        console.log(this.hivTestingData);
         this.nextStep.emit(this.hivTestingData);
     }
 

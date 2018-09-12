@@ -50,7 +50,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-ALTER VIEW [dbo].[PersonIdentifierView]
+CREATE VIEW [dbo].[PersonIdentifierView]
 AS
 SELECT        p.Id,p.Id as PersonId, CAST(DECRYPTBYKEY(p.FirstName) AS VARCHAR(50)) AS FirstName, CAST(DECRYPTBYKEY(p.MidName) AS VARCHAR(50)) AS MiddleName, CAST(DECRYPTBYKEY(p.LastName) AS VARCHAR(50)) AS LastName, 
                          p.Sex, p.Active, p.DeleteFlag, p.CreateDate, p.CreatedBy, p.AuditData, p.DateOfBirth, p.DobPrecision,lpidt.PersonIdentifierType,lpidt.PersonIdentifier,lpidt.PersonIdentifierValue,

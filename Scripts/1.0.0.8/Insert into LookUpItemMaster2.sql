@@ -1,3 +1,28 @@
+
+IF NOT EXISTS(SELECT * FROM LookupMaster WHERE Name='ANCVisitType')
+BEGIN
+INSERT INTO LookupMaster(Name,DisplayName,DeleteFlag)VALUES('ANCVisitType','ANCVisitType',0)
+END
+
+IF NOT EXISTS(SELECT * FROM LookupItem WHERE Name='Follow Up ANC visit')
+BEGIN 
+INSERT INTO LookupItem(Name,DeleteFlag,DisplayName)VALUES('Follow Up ANC visit',0,'Follow Up ANC visit')
+END
+IF NOT EXISTS(SELECT * FROM LookupItem WHERE Name='Initial ANC Visit')
+BEGIN
+INSERT INTO LookupItem(Name,DeleteFlag,DisplayName)VALUES('Initial ANC Visit',0,'Initial ANC Visit')
+END
+
+IF NOT EXISTS(SELECT * FROM LookupItemView WHERE MasterName='ANCVisitType' AND ItemName='Follow Up ANC visit')
+BEGIN
+INSERT INTO LookupMasterItem(LookupMasterId,LookupItemId,DisplayName,OrdRank)VALUES((SELECT top 1 Id FROM LookupMaster WHERE Name='ANCVisitType'),(SELECT top 1 Id FROM LookupItem WHERE Name='Follow Up ANC visit'),'Follow Up ANC visit',2)
+END
+
+IF NOT EXISTS(SELECT * FROM LookupItemView WHERE MasterName='ANCVisitType' AND ItemName='Initial ANC Visit')
+BEGIN
+INSERT INTO LookupMasterItem(LookupMasterId,LookupItemId,DisplayName,OrdRank)VALUES((SELECT top 1 Id FROM LookupMaster WHERE Name='ANCVisitType'),(SELECT top 1 Id FROM LookupItem WHERE Name='Initial ANC Visit'),'Initial ANC Visit',1)
+END
+
 -------CacxMethod
 IF NOT EXISTS(SELECT * FROM LookupItem WHERE Name='CaCxMethod')
 BEGIN
@@ -307,7 +332,7 @@ BEGIN
 	INSERT INTO LookupMasterItem(LookupMasterId,LookupItemId,DisplayName,OrdRank) VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='PMTCTHIVTests'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='HIV Test-1'),'HIV Test-1',1)
 END
 
-IF NOT EXISTS(SELECT * FROM LookupItemView WHERE MasterName='PMTCTHIVTests' AND ItemName='')
+IF NOT EXISTS(SELECT * FROM LookupItemView WHERE MasterName='PMTCTHIVTests' AND ItemName='HIV Test-2')
 BEGIN
 	INSERT INTO LookupMasterItem(LookupMasterId,LookupItemId,DisplayName,OrdRank) VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='PMTCTHIVTests'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='HIV Test-2'),'HIV Test-2',2)
 END
@@ -329,11 +354,12 @@ END
 
 IF NOT EXISTS(SELECT * FROM LookupItemView WHERE MasterName='PMTCTHIVTestVisit' AND ItemName='Initial')
 BEGIN
-	INSERT INTO LookupMasterItem(LookupMasterId,LookupItemId,DisplayName,OrdRank) VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='PMTCTHIVTests'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Initial'),'Initial',1)
+	INSERT INTO LookupMasterItem(LookupMasterId,LookupItemId,DisplayName,OrdRank) VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='PMTCTHIVTestVisit'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Initial'),'Initial',1)
 END
 
 IF NOT EXISTS(SELECT * FROM LookupItemView WHERE MasterName='PMTCTHIVTestVisit' AND ItemName='Retest')
 BEGIN
-	INSERT INTO LookupMasterItem(LookupMasterId,LookupItemId,DisplayName,OrdRank) VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='PMTCTHIVTests'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Retest'),'Retest',2)
+	INSERT INTO LookupMasterItem(LookupMasterId,LookupItemId,DisplayName,OrdRank) VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='PMTCTHIVTestVisit'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Retest'),'Retest',2)
 END
+
 

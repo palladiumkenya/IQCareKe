@@ -40,6 +40,7 @@ export class AncComponent implements OnInit, OnDestroy {
     public patientId: number;
     public serviceAreaId: number;
     public patientMasterVisitId: number;
+    public patientEncounterId: number;
     public userId: number;
     public visitDate: Date;
 
@@ -66,15 +67,17 @@ export class AncComponent implements OnInit, OnDestroy {
         this.route.params.subscribe(params => {
             this.personId = params['id'];
         });
+
         this.route.params.subscribe(params => {
             this.serviceAreaId = params['serviceAreaId'];
         });
+
         this.route.params.subscribe(params => {
             this.patientId = params['patientId'];
         });
-        this.route.params.subscribe(params => {
+        /*this.route.params.subscribe(params => {
             this.patientMasterVisitId = params['patientMasterVisitId'];
-        });
+        });*/
     }
 
 
@@ -85,6 +88,10 @@ export class AncComponent implements OnInit, OnDestroy {
             .subscribe(
                 p => {
                     console.log(p);
+                    const { patientMasterVisitId, pregancyId, profileId, patientEncounterId } = p;
+                    this.patientMasterVisitId = patientMasterVisitId;
+                    this.patientEncounterId = patientEncounterId;
+
                     this.snotifyService.success('Visit Details Added Successfully' + p);
                 },
                 (err) => {
@@ -291,11 +298,14 @@ export class AncComponent implements OnInit, OnDestroy {
     }
 
     public onSaveHivStatus(data: HIVTestingEmitter) {
-        console.log(data);
+        this.personId = 1;
+        this.serviceAreaId = 3;
+
         const htsAncEncounter = {
             'PersonId': this.personId,
             'ProviderId': this.userId,
-            'PatientEncounterID': 0,
+            'PatientEncounterID': this.patientEncounterId,
+            'PatientMasterVisitId': this.patientMasterVisitId,
             'PatientId': this.patientId,
             'EverTested': '',
             'MonthsSinceLastTest': '',
@@ -303,19 +313,67 @@ export class AncComponent implements OnInit, OnDestroy {
             'TestedAs': '',
             'TestingStrategy': '',
             'EncounterRemarks': '',
-            'TestEntryPoint': '',
-            'Consent': '',
+            'TestEntryPoint': data.ancTestEntryPoint,
+            'Consent': data.consentOption,
             'EverSelfTested': '',
             'GeoLocation': '',
             'HasDisability': '',
             'Disabilities': [],
             'TbScreening': '',
             'ServiceAreaId': this.serviceAreaId,
-            'EncounterTypeId': '',
+            'EncounterTypeId': '1',
             'EncounterDate': this.visitDate,
             'EncounterType': data.testingDone
         };
-        this.ancService.saveHivStatus(htsAncEncounter).subscribe();
+
+        this.ancService.saveHivStatus(htsAncEncounter).subscribe(
+            (result) => {
+                const { htsEncounterId } = result;
+                const hivKitResults = [];
+                let testRound;
+                if (data.hivTest['itemName'] == 'HIV Test-1') {
+                    testRound = 1;
+                } else if (data.hivTest['itemName'] == 'HIV Test-2') {
+                    testRound = 2;
+                }
+
+                hivKitResults.push({
+                    'KitId': data.kitName,
+                    'KitLotNumber': data.lotNumber,
+                    'ExpiryDate': data.expiryDate,
+                    'Outcome': data.testResult,
+                    'TestRound': testRound
+                });
+
+                const finalResultsBody = {
+                    'FinalResultHiv1': data.testResult,
+                    'FinalResultHiv2': '',
+                    'FinalResult': data.finalResult,
+                    'FinalResultGiven': data.consentOption,
+                    'AcceptedPartnerListing': data.consentOption,
+                    'FinalResultsRemarks': ''
+                };
+
+                this.ancService.saveHivResults(
+                    this.serviceAreaId,
+                    this.patientMasterVisitId,
+                    this.patientId,
+                    this.userId,
+                    htsEncounterId,
+                    hivKitResults,
+                    finalResultsBody).subscribe(
+                        (res) => {
+                            console.log(`final` + res);
+                        }
+                    );
+            },
+            (error) => {
+
+            },
+            () => {
+
+            }
+        );
     }
     // getPatientProfile();
 
