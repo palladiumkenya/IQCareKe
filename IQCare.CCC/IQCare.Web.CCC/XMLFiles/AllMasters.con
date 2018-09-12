@@ -118094,6 +118094,11 @@
     <DeleteFlag>false</DeleteFlag>
   </Mst_Module>
   <Mst_Module>
+    <ModuleID>201</ModuleID>
+    <ModuleName>PM/SCM</ModuleName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Module>
+  <Mst_Module>
     <ModuleID>202</ModuleID>
     <ModuleName>HIV Care/ART Card (UG)</ModuleName>
     <DeleteFlag>false</DeleteFlag>

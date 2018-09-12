@@ -322,7 +322,7 @@
 													<label class="control-label pull-left"></label>
 												</div>
 												<div class="col-md-12">
-													<button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddPresentingComplaints">Add</button>
+													<button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddPresentingComplaints" onclick="AddPresentingComplaints()">Add</button>
 												</div>
 											</div>
 										</div>
