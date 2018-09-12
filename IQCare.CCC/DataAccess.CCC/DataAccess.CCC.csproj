@@ -117,6 +117,7 @@
     <Compile Include="Interface\enrollment\IPatientReEnrollmentRepository.cs" />
     <Compile Include="Interface\enrollment\IPersonIdentifierRepository.cs" />
     <Compile Include="Interface\enrollment\IServiceAreaIdentifiersRepository.cs" />
+    <Compile Include="Interface\HIVEducation\IHIVEducationRepository.cs" />
     <Compile Include="Interface\IL\iILMessageStatsRepository.cs" />
     <Compile Include="Interface\IL\iILMessageViewerRepository.cs" />
     <Compile Include="Interface\IL\IIlMessengerRepository.cs" />
@@ -168,6 +169,7 @@
     <Compile Include="Interface\Patient\IPatientConsentRepository.cs" />
     <Compile Include="Interface\person\IPatientTreatmentSupporterRepository.cs" />
     <Compile Include="Interface\Patient\IPatientRepository.cs" />
+    <Compile Include="Interface\Tb\IPatientTBRxRepository.cs" />
     <Compile Include="Interface\Triage\IPatientAdverseEventOutcomeRepository.cs" />
     <Compile Include="Interface\Triage\IPatientFamilyPlanningMethodRepository.cs" />
     <Compile Include="Interface\Triage\IPatientFamilyPlanningRepository.cs" />
@@ -230,6 +232,7 @@
     <Compile Include="Repository\Enrollment\PatientReEnrollmentRepository.cs" />
     <Compile Include="Repository\Enrollment\PersonIdentifierRepository.cs" />
     <Compile Include="Repository\Enrollment\ServiceAreaIdentifiersRepository.cs" />
+    <Compile Include="Repository\HIVEducation\PatientHIVEducationFollowupRepository.cs" />
     <Compile Include="Repository\IL\ILMessageStatsRepository.cs" />
     <Compile Include="Repository\IL\ILMessageViewerRepository.cs" />
     <Compile Include="Repository\IL\IlMessengerRepository.cs" />
@@ -297,6 +300,7 @@
     <Compile Include="Repository\Pharmacy\PatientPharmacyDispenseRepository.cs" />
     <Compile Include="Repository\Pharmacy\PharmacyOrderRepository.cs" />
     <Compile Include="Repository\Screening\PatientScreeningRepository.cs" />
+    <Compile Include="Repository\Tb\PatientTBRxRepository.cs" />
     <Compile Include="Repository\Triage\PatientAdverseEventOutcomeRepository.cs" />
     <Compile Include="Repository\Triage\PatientFamilyPlanningMethodRepsotory.cs" />
     <Compile Include="Repository\Triage\PatientFamilyPlanningRepository.cs" />

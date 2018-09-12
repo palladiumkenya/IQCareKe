@@ -203,8 +203,8 @@ namespace IQCare.Web.CCC.WebService
      
             PatientPartner pat = partman.GetPatientPartner(patientId, PreviousMasterVisitId);
 
-            List<PatientSexualHistory> patienthistory = psh.GetPatientSexualHistoryList(patientId, PreviousMasterVisitId);
-           
+                List<PatientSexualHistory> patienthistory = psh.GetPatientSexualHistoryList(patientId, PreviousMasterVisitId);
+            
             if (pat != null)
             {
                 numberofpartners = pat.NoofPartners.ToString();
@@ -1111,9 +1111,11 @@ namespace IQCare.Web.CCC.WebService
                     }
                 }
 
-                string[] i = new string[13] { row["Drug_Pk"].ToString(), row["batchId"].ToString(),
-                    row["FrequencyID"].ToString(),row["abbr"].ToString(),row["DrugName"].ToString(),
-                    row["batchName"].ToString(),row["dose"].ToString(),row["freq"].ToString(),
+                string[] i = new string[14] { row["Drug_Pk"].ToString(), row["batchId"].ToString(),
+                    //row["FrequencyID"].ToString(),
+                    row["abbr"].ToString(),row["DrugName"].ToString(),
+                    row["batchName"].ToString(),row["MorningDose"].ToString(),row["MiddayDose"].ToString(),
+                    row["EveningDose"].ToString(), row["NightDose"].ToString(),
                     row["duration"].ToString(),row["OrderedQuantity"].ToString(),row["DispensedQuantity"].ToString(),
                     row["prophylaxis"].ToString(), remove
                      };
@@ -1823,7 +1825,7 @@ namespace IQCare.Web.CCC.WebService
             return Msg;
         }
         [WebMethod(EnableSession = true)]
-        public string savePatientEncounter(int PatientID, int PatientMasterVisitID, string EncounterType, int ServiceAreaId, int UserId)
+        public string savePatientEncounter(string EncounterType, int ServiceAreaId, int UserId)
         {
             try
             {

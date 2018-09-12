@@ -488,9 +488,14 @@ function AddDrugPrescription() {
     var drugName = $("#txtDrugs").val();
     var batchId = $('#ddlBatch').find(":selected").val();
     var batchText = $('#ddlBatch').find(":selected").text();
-    var dose = $("#txtDose").val();
-    var freqId = $('#ddlFreq').find(":selected").val();
-    var freqTxt = $('#ddlFreq').find(":selected").text();
+    //var dose = $("#txtDose").val();
+    //var freqId = $('#ddlFreq').find(":selected").val();
+    //var freqTxt = $('#ddlFreq').find(":selected").text();
+    var morning = $("#txtMorning").val();
+    var midday = $("#txtMidday").val();
+    var evening = $("#txtEvening").val();
+    var night = $("#txtNight").val();
+    
     var duration = $("#txtDuration").val();
     var quantityPres = $("#txtQuantityPres").val();
     var quantityDisp = $("#txtQuantityDisp").val();
@@ -517,13 +522,17 @@ function AddDrugPrescription() {
         return false;
     }
 
-    if (dose === "" || dose === "0") {
-        toastr.error("Error", "Please enter the dose");
-        return false;
-    }
+    //if (dose === "" || dose === "0") {
+    //    toastr.error("Error", "Please enter the dose");
+    //    return false;
+    //}
 
-    if (freqId === "0") {
-        toastr.error("Error", "Please enter the frequency");
+    //if (freqId === "0") {
+    //    toastr.error("Error", "Please enter the frequency");
+    //    return false;
+    //}
+    if ((parseInt(morning) || 0) + (parseInt(midday) || 0) + (parseInt(evening) || 0) + (parseInt(night) || 0) === 0) {
+        toastr.error("Error", "Please enter the dose");
         return false;
     }
 
@@ -552,8 +561,14 @@ function AddDrugPrescription() {
 
         arrDrugPrescriptionUI = [];
 
+        //arrDrugPrescriptionUI.push([
+        //    drugId, batchId, freqId, drugAbbr, drugName, batchText, dose, freqTxt, duration, quantityPres, quantityDisp,
+        //    prophylaxis,
+        //    "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"
+        //]);
+
         arrDrugPrescriptionUI.push([
-            drugId, batchId, freqId, drugAbbr, drugName, batchText, dose, freqTxt, duration, quantityPres, quantityDisp,
+            drugId, batchId, drugAbbr, drugName, batchText, morning, midday, evening, night, duration, quantityPres, quantityDisp,
             prophylaxis,
             "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"
         ]);
@@ -562,8 +577,10 @@ function AddDrugPrescription() {
 
         $("#txtDrugs").val("");
         $("#ddlBatch").val("");
-        $("#txtDose").val("");
-        $('#ddlFreq').val("0");
+        $("#txtMorning").val("0");
+        $('#ddlMidday').val("0");
+        $('#ddlEvening').val("0");
+        $('#ddlNight').val("0");
         $("#txtDuration").val("0");
         $("#txtQuantityPres").val("0");
         $("#txtQuantityDisp").val("0");

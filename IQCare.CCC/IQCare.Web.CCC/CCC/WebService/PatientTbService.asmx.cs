@@ -268,7 +268,21 @@ namespace IQCare.Web.CCC.WebService
             };
             try
             {
-
+                var TBRx = new PatientTBRxManager();
+                var x = TBRx.GetByPatientId(patientId).FirstOrDefault(n => n.PatientMasterVisitId == patientMasterVisitId);
+                if (x == null)
+                {
+                    Result = TBRx.AddPatientTBRx(patientTBRX);
+                }
+                else
+                {
+                    patientTBRX.Id = x.Id;
+                    Result = TBRx.UpdatePatientTBRx(patientTBRX);
+                }
+                if (Result > 0)
+                {
+                    Msg = "Patient TBRx saved successfully!";
+                }
             }
             catch (Exception e)
             {

@@ -99,7 +99,7 @@
             </div>
         </div>
     </div>
-    <div class="adherencebarriersloading"><img src="../../Images/PEPloading.gif" /></div>
+    <div class="adherencebarriersloading"><img src="../../Content/Img/PEPloading.gif" /></div>
 </form>
 
 <script type="text/javascript">

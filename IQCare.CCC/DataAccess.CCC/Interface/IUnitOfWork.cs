@@ -14,6 +14,7 @@ using DataAccess.CCC.Interface.assessment;
 using DataAccess.CCC.Interface.IL;
 using DataAccess.CCC.Interface.Interoperability;
 using DataAccess.CCC.Interface.Pharmacy;
+//using DataAccess.CCC.Interface.HIVEducation;
 //using DataAccess.CCC.Interface.Neonatal;
 
 namespace DataAccess.CCC.Interface
@@ -119,6 +120,9 @@ namespace DataAccess.CCC.Interface
         IPatientNeonatalRepository PatientNeonatalRepository { get; }
         IImmunizationHistoryRepository ImmunizationHistoryRepository { get; }
         ITannersStagingRepository TannersStagingRepository { get; }
+
+        //HIV Followup Education
+       // IHIVEducationRepository PatientHIVFollowupEducation { get; }
 
     }
 }

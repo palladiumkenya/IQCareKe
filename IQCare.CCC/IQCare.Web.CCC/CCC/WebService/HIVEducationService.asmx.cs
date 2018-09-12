@@ -1,4 +1,5 @@
 ﻿using IQCare.CCC.UILogic;
+using IQCare.CCC.UILogic.HIVEducation;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace IQCare.Web.CCC.WebService
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
-     [System.Web.Script.Services.ScriptService]
+    [System.Web.Script.Services.ScriptService]
     public class HIVEducationService1 : System.Web.Services.WebService
     {
 
@@ -26,14 +27,14 @@ namespace IQCare.Web.CCC.WebService
         public ArrayList GetCounsellingTopics(string counsellingtopics)
         {
             String TopicName = "";
-            if(counsellingtopics== "Progression,RX")
+            if (counsellingtopics == "Progression,RX")
             {
                 TopicName = "ProgressionRX";
             }
-            else if(counsellingtopics == "BasicPreventionDisclosureEducation")
+            else if (counsellingtopics == "BasicPreventionDisclosureEducation")
             {
                 TopicName = "BasicPreventionDisclosureEducation";
-               
+
             }
             else
             {
@@ -47,7 +48,7 @@ namespace IQCare.Web.CCC.WebService
             int x = dll.Items.Count;
             if (x > 0)
             {
-                for (int k = 0; k <= x -1; k++)
+                for (int k = 0; k <= x - 1; k++)
                 {
                     string[] i = new string[2] { dll.Items[k].Value.ToString(), dll.Items[k].Text.ToString() };
                     rows.Add(i);
@@ -57,5 +58,26 @@ namespace IQCare.Web.CCC.WebService
             return rows;
 
         }
+        private string Msg { get; set; }
+        private int Result { get; set; }
+        [WebMethod]
+        public string addHIVEDucation(int patientId, DateTime visitdate, int councellingTypeId, string councellingType, int councellingTopicId, string councellingTopic, string comments, string other)
+        {
+            try
+            {
+                var HEF = new HIVEducationLogic();
+                Result = HEF.AddPatientHIVEducation(patientId, visitdate, councellingTypeId, councellingType, councellingTopicId, councellingTopic, comments, other);
+                if (Result > 0)
+                {
+                    Msg = "Notes Added";
+                }
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message;
+            }
+            return Msg;
+        }
     }
-}
+
+    }
