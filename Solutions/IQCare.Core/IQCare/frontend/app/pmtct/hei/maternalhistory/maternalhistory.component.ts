@@ -9,10 +9,12 @@ import { SnotifyService } from 'ng-snotify';
     styleUrls: ['./maternalhistory.component.css']
 })
 export class MaternalhistoryComponent implements OnInit {
-    @Input('maternalhistoryoptions') maternalhistoryoptions: any;
-
     MaternalHistoryForm: FormGroup;
+    motherstateOptions: any[] = [];
+    motherreceivedrugsOptions: any[] = [];
+    heimotherregimenOptions: any[] = [];
 
+    @Input('maternalhistoryOptions') maternalhistoryOptions: any;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     constructor(private _formBuilder: FormBuilder,
@@ -32,6 +34,12 @@ export class MaternalhistoryComponent implements OnInit {
             pmtctheimotherdrugsatinfantenrollment: new FormControl('', [Validators.required]),
         });
 
+        const { motherstateOptions, motherreceivedrugsOptions, heimotherregimenOptions } = this.maternalhistoryOptions[0];
+        this.motherstateOptions = motherstateOptions;
+        this.motherreceivedrugsOptions = motherreceivedrugsOptions;
+        this.heimotherregimenOptions = heimotherregimenOptions;
+
+        console.log(this.heimotherregimenOptions);
 
         this.notify.emit(this.MaternalHistoryForm);
     }
