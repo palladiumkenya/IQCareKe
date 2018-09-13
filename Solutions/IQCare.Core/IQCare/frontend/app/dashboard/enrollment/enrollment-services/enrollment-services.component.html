@@ -27,7 +27,7 @@
                                 </div>
                             </div>
 
-                            <div class="row" formArrayName="identifiers" *ngFor="let item of formGroup.get('identifiers').controls; let i = index;">
+                            <div class="row" formArrayName="identifiers" *ngFor="let item of formGroup.get('identifiers')['controls']; let i = index;">
                                 <div class="col-lg-6 col-sm-6 col-xs-12" [formGroupName]="i">
                                     <mat-form-field>
                                         <input matInput placeholder="{{formGroup.controls.identifiers.controls[i].controls.displayName.value}}" id="{{formGroup.controls.identifiers.controls[i].controls.identifierId.value}}"

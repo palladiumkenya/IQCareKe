@@ -18,6 +18,7 @@ export class EnrollmentServicesComponent implements OnInit {
     userId: number;
     posId: string;
     patientId: number;
+    maxDate: Date;
 
     patientTypeOptions: any;
 
@@ -30,6 +31,7 @@ export class EnrollmentServicesComponent implements OnInit {
         public zone: NgZone) {
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
         this.posId = localStorage.getItem('appPosID');
+        this.maxDate = new Date();
     }
 
     ngOnInit() {
