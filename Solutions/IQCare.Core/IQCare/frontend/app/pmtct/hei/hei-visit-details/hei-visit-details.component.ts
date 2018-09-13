@@ -1,5 +1,5 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { SnotifyService } from 'ng-snotify';
 import { Subscription } from 'rxjs/index';
 import { LookupItemService } from '../../../shared/_services/lookup-item.service';
@@ -23,10 +23,10 @@ export class HeiVisitDetailsComponent implements OnInit {
         private notificationService: NotificationService) { }
 
     ngOnInit() {
-       /* this.HeiVisitDetailsFormGroup = this._formBuilder.group({
-            visitType: ['', Validators.required],
-            visitDate: ['', Validators.required]
-        }); */
+        /* this.HeiVisitDetailsFormGroup = this._formBuilder.group({
+             visitType: ['', Validators.required],
+             visitDate: ['', Validators.required]
+         }); */
 
         this.HeiVisitDetailsFormGroup = this._formBuilder.group({
             visitType: new FormControl('', [Validators.required]),
