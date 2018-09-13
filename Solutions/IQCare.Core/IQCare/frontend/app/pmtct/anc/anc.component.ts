@@ -69,7 +69,7 @@ export class AncComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.route.params.subscribe(params => {
-            this.personId = params['id'];
+            this.personId = params['personId'];
         });
 
         this.route.params.subscribe(params => {
@@ -323,9 +323,6 @@ export class AncComponent implements OnInit, OnDestroy {
     }
 
     public onSaveHivStatus(data: HIVTestingEmitter) {
-        this.personId = 1;
-        this.serviceAreaId = 3;
-
         const htsAncEncounter = {
             'PersonId': this.personId,
             'ProviderId': this.userId,

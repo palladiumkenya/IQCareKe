@@ -19,7 +19,7 @@ const routes: Routes = [
         pathMatch: 'full',
     },
     {
-        path: 'anc/:patientId',
+        path: 'anc/:patientId/:personId/:serviceAreaId',
         component: AncComponent,
         pathMatch: 'full',
     },
