@@ -12,14 +12,11 @@ import { PlaceOfDeliveryResolver } from './_services/placeofdelivery.resolver';
 import { DeliveryModeResolver } from './_services/deliverymode.resolver';
 import { ARVProphylaxisResolver } from './_services/arvprophylaxis.resolver';
 import { MotherStateResolver } from './_services/motherstate.resolver';
-<<<<<<< HEAD
 import { MotherReceiveDrugsResolver } from './_services/motherreceivedrugs.resolver';
 import { HeiMotherRegimenResolver } from './_services/heimotherregimen.resolver';
 import { YesNoResolver } from './_services/yesno.resolver';
 import { MotherDrugsAtInfantEnrollmentResolver } from './_services/motherdrugsatinfantenrollment.resolver';
-=======
 import { InfantFeedingOptionsResolver } from './_services/infant-feeding-options.resolver.service';
->>>>>>> Added frontend UI for infant-feeding component
 
 const routes: Routes = [
     {
@@ -61,14 +58,11 @@ const routes: Routes = [
             deliveryModeOptions: DeliveryModeResolver,
             arvprophylaxisOptions: ARVProphylaxisResolver,
             motherstateOptions: MotherStateResolver,
-<<<<<<< HEAD
             motherreceivedrugsOptions: MotherReceiveDrugsResolver,
             heimotherregimenOptions: HeiMotherRegimenResolver,
             yesnoOptions: YesNoResolver,
-            motherdrugsatinfantenrollmentOptions: MotherDrugsAtInfantEnrollmentResolver
-=======
+            motherdrugsatinfantenrollmentOptions: MotherDrugsAtInfantEnrollmentResolver,
             infantFeedingOptions: InfantFeedingOptionsResolver
->>>>>>> Added frontend UI for infant-feeding component
         }
     }
 ];

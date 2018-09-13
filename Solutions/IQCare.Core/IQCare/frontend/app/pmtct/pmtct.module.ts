@@ -35,14 +35,11 @@ import { ImmunizationHistoryComponent } from './hei/immunization-history/immuniz
 import { MilestonesComponent } from './hei/milestones/milestones.component';
 import { DeliveryComponent } from './hei/delivery/delivery.component';
 import { MaternalhistoryComponent } from './hei/maternalhistory/maternalhistory.component';
-<<<<<<< HEAD
 import { MotherReceiveDrugsResolver } from './_services/motherreceivedrugs.resolver';
 import { HeiMotherRegimenResolver } from './_services/heimotherregimen.resolver';
 import { YesNoResolver } from './_services/yesno.resolver';
 import { MotherDrugsAtInfantEnrollmentResolver } from './_services/motherdrugsatinfantenrollment.resolver';
-=======
 import { InfantFeedingComponent } from './hei/infant-feeding/infant-feeding.component';
->>>>>>> Added frontend UI for infant-feeding component
 
 
 @NgModule({

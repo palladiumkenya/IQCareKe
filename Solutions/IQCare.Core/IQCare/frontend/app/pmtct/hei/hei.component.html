@@ -34,7 +34,7 @@
 
                                         <!-- add Maternity History Component to Stepper -->
                                         <app-maternalhistory (notify)="onMatHistoryNotify($event)"
-                                            [maternalhistoryOptions]="maternalhistoryOptions">
+                                                             [maternalhistoryOptions]="maternalhistoryOptions">
                                         </app-maternalhistory>
 
                                         <div>
@@ -88,6 +88,22 @@
                                             <span matTooltip="Maternal Viral Load">Maternal Viral Load</span>
                                         </ng-template>
                                     </mat-step>
+
+                                    <mat-step [completed]="false" [stepControl]="formGroupInfantFeeding">
+                                        <ng-template matStepLabel>
+                                            <span matTooltip="Infant Feeding">Infant Feeding</span>
+                                        </ng-template>
+
+                                        <app-infant-feeding (notify)="onInfantFeedingNotify($event)"
+                                                            [infantFeedingOptions]="infantFeedingOptions">
+                                        </app-infant-feeding>
+                                        <div>
+                                            <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
+                                            &nbsp;&nbsp;
+                                            <button mat-raised-button color="accent" matStepperNext type="button">Next</button>
+                                        </div>
+                                    </mat-step>
+
                                 </mat-horizontal-stepper>
                             </div>
                         </div>

@@ -24,12 +24,9 @@ export class HeiComponent implements OnInit {
 
     isLinear: boolean = true;
     deliveryMatFormGroup: FormArray;
-<<<<<<< HEAD
     visitDetailsFormGroup: FormArray;
 
-=======
     infantFeedingFormGroup: FormGroup;
->>>>>>> Added frontend UI for infant-feeding component
 
     constructor(private route: ActivatedRoute) {
         this.deliveryMatFormGroup = new FormArray([]);
@@ -44,7 +41,6 @@ export class HeiComponent implements OnInit {
         );
 
         this.route.data.subscribe((res) => {
-<<<<<<< HEAD
             const {
                 placeofdeliveryOptions,
                 deliveryModeOptions,
@@ -53,23 +49,18 @@ export class HeiComponent implements OnInit {
                 motherreceivedrugsOptions,
                 heimotherregimenOptions,
                 yesnoOptions,
-                motherdrugsatinfantenrollmentOptions
+                motherdrugsatinfantenrollmentOptions,
+                infantFeedingOptions
             } = res;
-=======
-            const { placeofdeliveryOptions, deliveryModeOptions, arvprophylaxisOptions, motherstateOptions, infantFeedingOptions } = res;
->>>>>>> Added frontend UI for infant-feeding component
             this.placeofdeliveryOptions = placeofdeliveryOptions['lookupItems'];
             this.deliveryModeOptions = deliveryModeOptions['lookupItems'];
             this.arvprophylaxisOptions = arvprophylaxisOptions['lookupItems'];
             this.motherstateOptions = motherstateOptions['lookupItems'];
-<<<<<<< HEAD
             this.motherreceivedrugsOptions = motherreceivedrugsOptions['lookupItems'];
             this.heimotherregimenOptions = heimotherregimenOptions['lookupItems'];
             this.yesnoOptions = yesnoOptions['lookupItems'];
             this.motherdrugsatinfantenrollmentOptions = motherdrugsatinfantenrollmentOptions['lookupItems'];
-=======
             this.infantFeedingOptions = infantFeedingOptions['lookupItems'];
->>>>>>> Added frontend UI for infant-feeding component
         });
 
         this.deliveryOptions.push({
@@ -95,14 +86,11 @@ export class HeiComponent implements OnInit {
         this.deliveryMatFormGroup.push(formGroup);
     }
 
-<<<<<<< HEAD
     onVisitDetailsNotify(formGroup: FormGroup): void {
         this.visitDetailsFormGroup.push(formGroup);
     }
-=======
     onInfantFeedingNotify(formGroup: FormGroup): void {
         this.infantFeedingFormGroup = formGroup;
     }
 
->>>>>>> Added frontend UI for infant-feeding component
 }
