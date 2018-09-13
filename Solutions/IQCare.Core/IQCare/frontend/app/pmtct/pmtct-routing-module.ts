@@ -14,6 +14,8 @@ import { ARVProphylaxisResolver } from './_services/arvprophylaxis.resolver';
 import { MotherStateResolver } from './_services/motherstate.resolver';
 import { MotherReceiveDrugsResolver } from './_services/motherreceivedrugs.resolver';
 import { HeiMotherRegimenResolver } from './_services/heimotherregimen.resolver';
+import { YesNoResolver } from './_services/yesno.resolver';
+import { MotherDrugsAtInfantEnrollmentResolver } from './_services/motherdrugsatinfantenrollment.resolver';
 
 const routes: Routes = [
     {
@@ -56,7 +58,9 @@ const routes: Routes = [
             arvprophylaxisOptions: ARVProphylaxisResolver,
             motherstateOptions: MotherStateResolver,
             motherreceivedrugsOptions: MotherReceiveDrugsResolver,
-            heimotherregimenOptions: HeiMotherRegimenResolver
+            heimotherregimenOptions: HeiMotherRegimenResolver,
+            yesnoOptions: YesNoResolver,
+            motherdrugsatinfantenrollmentOptions: MotherDrugsAtInfantEnrollmentResolver
         }
     }
 ];

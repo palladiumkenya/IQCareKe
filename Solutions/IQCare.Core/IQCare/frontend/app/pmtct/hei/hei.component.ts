@@ -13,6 +13,8 @@ export class HeiComponent implements OnInit {
     maternalhistoryOptions: any[] = [];
     motherreceivedrugsOptions: any[] = [];
     heimotherregimenOptions: any[] = [];
+    yesnoOptions: any[] = [];
+    motherdrugsatinfantenrollmentOptions: any[] = [];
 
     deliveryModeOptions: LookupItemView[] = [];
     arvprophylaxisOptions: LookupItemView[] = [];
@@ -43,7 +45,9 @@ export class HeiComponent implements OnInit {
                 arvprophylaxisOptions,
                 motherstateOptions,
                 motherreceivedrugsOptions,
-                heimotherregimenOptions
+                heimotherregimenOptions,
+                yesnoOptions,
+                motherdrugsatinfantenrollmentOptions
             } = res;
             this.placeofdeliveryOptions = placeofdeliveryOptions['lookupItems'];
             this.deliveryModeOptions = deliveryModeOptions['lookupItems'];
@@ -51,6 +55,8 @@ export class HeiComponent implements OnInit {
             this.motherstateOptions = motherstateOptions['lookupItems'];
             this.motherreceivedrugsOptions = motherreceivedrugsOptions['lookupItems'];
             this.heimotherregimenOptions = heimotherregimenOptions['lookupItems'];
+            this.yesnoOptions = yesnoOptions['lookupItems'];
+            this.motherdrugsatinfantenrollmentOptions = motherdrugsatinfantenrollmentOptions['lookupItems'];
         });
 
         this.deliveryOptions.push({
@@ -62,7 +68,9 @@ export class HeiComponent implements OnInit {
         this.maternalhistoryOptions.push({
             'motherstateOptions': this.motherstateOptions,
             'motherreceivedrugsOptions': this.motherreceivedrugsOptions,
-            'heimotherregimenOptions': this.heimotherregimenOptions
+            'heimotherregimenOptions': this.heimotherregimenOptions,
+            'yesnoOptions': this.yesnoOptions,
+            'motherdrugsatinfantenrollmentOptions': this.motherdrugsatinfantenrollmentOptions
         });
     }
 

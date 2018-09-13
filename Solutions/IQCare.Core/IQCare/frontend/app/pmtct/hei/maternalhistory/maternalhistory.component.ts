@@ -13,6 +13,8 @@ export class MaternalhistoryComponent implements OnInit {
     motherstateOptions: any[] = [];
     motherreceivedrugsOptions: any[] = [];
     heimotherregimenOptions: any[] = [];
+    yesnoOptions: any[] = [];
+    motherdrugsatinfantenrollmentOptions: any[] = [];
 
     @Input('maternalhistoryOptions') maternalhistoryOptions: any;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
@@ -34,13 +36,40 @@ export class MaternalhistoryComponent implements OnInit {
             pmtctheimotherdrugsatinfantenrollment: new FormControl('', [Validators.required]),
         });
 
-        const { motherstateOptions, motherreceivedrugsOptions, heimotherregimenOptions } = this.maternalhistoryOptions[0];
+        const {
+            motherstateOptions,
+            motherreceivedrugsOptions,
+            heimotherregimenOptions,
+            yesnoOptions,
+            motherdrugsatinfantenrollmentOptions } = this.maternalhistoryOptions[0];
         this.motherstateOptions = motherstateOptions;
         this.motherreceivedrugsOptions = motherreceivedrugsOptions;
         this.heimotherregimenOptions = heimotherregimenOptions;
-
-        console.log(this.heimotherregimenOptions);
+        this.yesnoOptions = yesnoOptions;
+        this.motherdrugsatinfantenrollmentOptions = motherdrugsatinfantenrollmentOptions;
 
         this.notify.emit(this.MaternalHistoryForm);
+    }
+
+    onMotherReceivedDrugsChange(event) {
+        if (event.isUserInput && event.source.selected && event.source.viewValue == 'Other') {
+            this.MaternalHistoryForm.controls['otherspecify'].enable({ onlySelf: false });
+        } else if (event.source.selected) {
+            this.MaternalHistoryForm.controls['otherspecify'].disable({ onlySelf: true });
+        }
+
+        if (event.isUserInput && event.source.selected && event.source.viewValue == 'HAART') {
+            this.MaternalHistoryForm.controls['pmtctheimotherregimen'].enable({ onlySelf: false });
+        } else if (event.source.selected) {
+            this.MaternalHistoryForm.controls['pmtctheimotherregimen'].disable();
+        }
+    }
+
+    onMotherOnArtAtInfantEnrollmentChange(event) {
+        if (event.isUserInput && event.source.selected && event.source.viewValue == 'Yes') {
+            this.MaternalHistoryForm.controls['pmtctheimotherdrugsatinfantenrollment'].enable({ onlySelf: false });
+        } else if (event.source.selected) {
+            this.MaternalHistoryForm.controls['pmtctheimotherdrugsatinfantenrollment'].disable();
+        }
     }
 }

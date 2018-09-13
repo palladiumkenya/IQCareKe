@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 import { LookupItemService } from '../../shared/_services/lookup-item.service';
 
 @Injectable()
-export class MotherStateResolver implements Resolve<Observable<LookupItemView[]>> {
+export class YesNoResolver implements Resolve<Observable<LookupItemView[]>> {
     /**
      *
      */
@@ -17,6 +17,6 @@ export class MotherStateResolver implements Resolve<Observable<LookupItemView[]>
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
     ): Observable<LookupItemView[]> {
-        return this._lookupItemService.getByGroupName('MotherState');
+        return this._lookupItemService.getByGroupName('YesNo');
     }
 }

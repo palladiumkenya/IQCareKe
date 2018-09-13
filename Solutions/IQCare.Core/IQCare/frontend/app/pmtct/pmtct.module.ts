@@ -37,6 +37,8 @@ import { DeliveryComponent } from './hei/delivery/delivery.component';
 import { MaternalhistoryComponent } from './hei/maternalhistory/maternalhistory.component';
 import { MotherReceiveDrugsResolver } from './_services/motherreceivedrugs.resolver';
 import { HeiMotherRegimenResolver } from './_services/heimotherregimen.resolver';
+import { YesNoResolver } from './_services/yesno.resolver';
+import { MotherDrugsAtInfantEnrollmentResolver } from './_services/motherdrugsatinfantenrollment.resolver';
 
 
 @NgModule({
@@ -78,7 +80,9 @@ import { HeiMotherRegimenResolver } from './_services/heimotherregimen.resolver'
         ARVProphylaxisResolver,
         MotherStateResolver,
         MotherReceiveDrugsResolver,
-        HeiMotherRegimenResolver
+        HeiMotherRegimenResolver,
+        YesNoResolver,
+        MotherDrugsAtInfantEnrollmentResolver
     ]
 })
 export class PmtctModule { }
