@@ -45,7 +45,7 @@ const routes: Routes = [
         pathMatch: 'full',
     },
     {
-        path: 'hei/:patientId/:personId',
+        path: 'hei/:patientId/:personId/:serviceAreaId',
         component: HeiComponent,
         pathMatch: 'full',
         resolve: {

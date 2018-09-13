@@ -3,6 +3,8 @@ import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { Search } from '../_models/search';
 import { SearchService } from '../_services/search.service';
 import { Router, ActivatedRoute } from '../../../../node_modules/@angular/router';
+import { SnotifyService } from 'ng-snotify';
+import { NotificationService } from '../../shared/_services/notification.service';
 
 @Component({
     selector: 'app-search',
@@ -19,7 +21,9 @@ export class SearchComponent implements OnInit, AfterViewInit {
     constructor(private searchService: SearchService,
         private router: Router,
         private route: ActivatedRoute,
-        public zone: NgZone) {
+        public zone: NgZone,
+        private snotifyService: SnotifyService,
+        private notificationService: NotificationService) {
         this.clientSearch = new Search();
     }
 
@@ -40,11 +44,12 @@ export class SearchComponent implements OnInit, AfterViewInit {
     doSearch() {
         this.searchService.searchClient(this.clientSearch).subscribe(
             (res) => {
-                console.log(res['personSearch']);
+                // console.log(res['personSearch']);
                 this.dataSource.data = res['personSearch'];
             },
             (error) => {
-                console.log('error');
+                console.error(error);
+                this.snotifyService.error('Error searching ' + error, 'SEARCH', this.notificationService.getConfig());
             }
         );
     }

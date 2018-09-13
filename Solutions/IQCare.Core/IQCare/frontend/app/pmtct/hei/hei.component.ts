@@ -12,12 +12,14 @@ export class HeiComponent implements OnInit {
     deliveryOptions: any[] = [];
     maternalhistoryoptions: any[] = [];
 
-    deliveryModeOptions: any[] = [];
-    arvprophylaxisOptions: any[] = [];
-    placeofdeliveryOptions: LookupItemView[];
+    deliveryModeOptions: LookupItemView[] = [];
+    arvprophylaxisOptions: LookupItemView[] = [];
+    placeofdeliveryOptions: LookupItemView[] = [];
+    motherstateOptions: LookupItemView[] = [];
 
     isLinear: boolean = true;
     deliveryMatFormGroup: FormArray;
+
 
     constructor(private route: ActivatedRoute) {
         this.deliveryMatFormGroup = new FormArray([]);
@@ -31,16 +33,18 @@ export class HeiComponent implements OnInit {
         );
 
         this.route.data.subscribe((res) => {
-            const { placeofdeliveryOptions, deliveryModeOptions, arvprophylaxisOptions } = res;
+            const { placeofdeliveryOptions, deliveryModeOptions, arvprophylaxisOptions, motherstateOptions } = res;
             this.placeofdeliveryOptions = placeofdeliveryOptions['lookupItems'];
             this.deliveryModeOptions = deliveryModeOptions['lookupItems'];
             this.arvprophylaxisOptions = arvprophylaxisOptions['lookupItems'];
+            this.motherstateOptions = motherstateOptions['lookupItems'];
         });
 
         this.deliveryOptions.push({
             'placeofdeliveryOptions': this.placeofdeliveryOptions,
             'deliveryModeOptions': this.deliveryModeOptions,
-            'arvprophylaxisOptions': this.arvprophylaxisOptions
+            'arvprophylaxisOptions': this.arvprophylaxisOptions,
+            'motherstateOptions': this.motherstateOptions
         });
 
         console.log(this.deliveryMatFormGroup);
