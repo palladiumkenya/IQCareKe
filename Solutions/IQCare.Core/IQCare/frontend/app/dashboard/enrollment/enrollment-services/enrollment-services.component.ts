@@ -1,6 +1,6 @@
 import { PersonHomeService } from './../../services/person-home.service';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, NgZone } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
 import { RegistrationService } from '../../../registration/_services/registration.service';
 import { EnrollmentService } from '../../../registration/_services/enrollment.service';
@@ -25,7 +25,9 @@ export class EnrollmentServicesComponent implements OnInit {
         private fb: FormBuilder,
         private personHomeService: PersonHomeService,
         private registrationService: RegistrationService,
-        private enrollmentService: EnrollmentService) {
+        private enrollmentService: EnrollmentService,
+        private router: Router,
+        public zone: NgZone) {
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
         this.posId = localStorage.getItem('appPosID');
     }
@@ -100,6 +102,9 @@ export class EnrollmentServicesComponent implements OnInit {
                     this.enrollmentService.enrollClient(enrollment).subscribe(
                         (response) => {
                             console.log(response);
+                            this.zone.run(() => {
+                                this.router.navigate(['/dashboard/personhome/' + this.personId], { relativeTo: this.route });
+                            });
                         }
                     );
                 }

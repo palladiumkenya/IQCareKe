@@ -1,3 +1,4 @@
+import { MotherStateResolver } from './_services/motherstate.resolver';
 import { ARVProphylaxisResolver } from './_services/arvprophylaxis.resolver';
 import { DeliveryModeResolver } from './_services/deliverymode.resolver';
 import { PlaceOfDeliveryResolver } from './_services/placeofdelivery.resolver';
@@ -72,7 +73,8 @@ import { MaternalhistoryComponent } from './hei/maternalhistory/maternalhistory.
     providers: [
         PlaceOfDeliveryResolver,
         DeliveryModeResolver,
-        ARVProphylaxisResolver
+        ARVProphylaxisResolver,
+        MotherStateResolver
     ]
 })
 export class PmtctModule { }
