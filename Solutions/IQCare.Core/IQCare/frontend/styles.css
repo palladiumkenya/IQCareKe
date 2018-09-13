@@ -6,3 +6,8 @@
 .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label:not(.mat-empty):not(.mat-form-field-empty) {
 	font-size: 18px;
 }
+
+.mat-form-field-label {
+    color: #202021 !important;
+    font-weight: bold !important;
+}

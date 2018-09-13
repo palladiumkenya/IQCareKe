@@ -1,3 +1,6 @@
+import { ARVProphylaxisResolver } from './_services/arvprophylaxis.resolver';
+import { DeliveryModeResolver } from './_services/deliverymode.resolver';
+import { PlaceOfDeliveryResolver } from './_services/placeofdelivery.resolver';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -29,6 +32,8 @@ import { HeiComponent } from './hei/hei.component';
 import { HeiVisitDetailsComponent } from './hei/hei-visit-details/hei-visit-details.component';
 import { ImmunizationHistoryComponent } from './hei/immunization-history/immunization-history.component';
 import { MilestonesComponent } from './hei/milestones/milestones.component';
+import { DeliveryComponent } from './hei/delivery/delivery.component';
+import { MaternalhistoryComponent } from './hei/maternalhistory/maternalhistory.component';
 
 
 @NgModule({
@@ -60,7 +65,14 @@ import { MilestonesComponent } from './hei/milestones/milestones.component';
         HeiComponent,
         HeiVisitDetailsComponent,
         ImmunizationHistoryComponent,
-        MilestonesComponent
+        MilestonesComponent,
+        DeliveryComponent,
+        MaternalhistoryComponent
+    ],
+    providers: [
+        PlaceOfDeliveryResolver,
+        DeliveryModeResolver,
+        ARVProphylaxisResolver
     ]
 })
 export class PmtctModule { }

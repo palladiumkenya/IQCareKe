@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { LookupItemView } from '../../shared/_models/LookupItemView';
+import { FormGroup, FormArray } from '@angular/forms';
 
 @Component({
     selector: 'app-hei',
@@ -7,8 +9,19 @@ import { ActivatedRoute } from '@angular/router';
     styleUrls: ['./hei.component.css']
 })
 export class HeiComponent implements OnInit {
+    deliveryOptions: any[] = [];
+    maternalhistoryoptions: any[] = [];
 
-    constructor(private route: ActivatedRoute) { }
+    deliveryModeOptions: any[] = [];
+    arvprophylaxisOptions: any[] = [];
+    placeofdeliveryOptions: LookupItemView[];
+
+    isLinear: boolean = true;
+    deliveryMatFormGroup: FormArray;
+
+    constructor(private route: ActivatedRoute) {
+        this.deliveryMatFormGroup = new FormArray([]);
+    }
 
     ngOnInit() {
         this.route.params.subscribe(
@@ -16,6 +29,29 @@ export class HeiComponent implements OnInit {
                 console.log(params);
             }
         );
+
+        this.route.data.subscribe((res) => {
+            const { placeofdeliveryOptions, deliveryModeOptions, arvprophylaxisOptions } = res;
+            this.placeofdeliveryOptions = placeofdeliveryOptions['lookupItems'];
+            this.deliveryModeOptions = deliveryModeOptions['lookupItems'];
+            this.arvprophylaxisOptions = arvprophylaxisOptions['lookupItems'];
+        });
+
+        this.deliveryOptions.push({
+            'placeofdeliveryOptions': this.placeofdeliveryOptions,
+            'deliveryModeOptions': this.deliveryModeOptions,
+            'arvprophylaxisOptions': this.arvprophylaxisOptions
+        });
+
+        console.log(this.deliveryMatFormGroup);
+        console.log(this.deliveryMatFormGroup.value);
     }
 
+    onNotify(formGroup: FormGroup): void {
+        this.deliveryMatFormGroup.push(formGroup);
+    }
+
+    onMatHistoryNotify(formGroup: FormGroup): void {
+        this.deliveryMatFormGroup.push(formGroup);
+    }
 }
