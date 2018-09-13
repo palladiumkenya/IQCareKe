@@ -59,7 +59,6 @@ export class HivStatusComponent implements OnInit {
         this.getLookupOptions('HIVFinalResults', this.finalResults);
         this.visitDetailsService.getConsentOptions().subscribe(
             (result) => {
-                console.log(result);
                 const { itemId } = result;
                 this.consentOption = itemId;
             }
@@ -67,7 +66,6 @@ export class HivStatusComponent implements OnInit {
 
         this.visitDetailsService.getTestEntryPointANC().subscribe(
             (result) => {
-                console.log(result);
                 const { itemId } = result;
                 this.ancTestEntryPoint = itemId;
             }

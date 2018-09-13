@@ -1,3 +1,66 @@
-<p>
-  hei works!
-</p>
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="row">
+            <div class="col-lg-12 col-sm-6 col-xs-12">
+                <div class="widget">
+                    <div class="widget-header bordered-bottom bordered-sky">
+                        <span class="widget-caption"> PMTCT | HEI WORKFLOW </span>
+                    </div>
+                    <!--Widget Header-->
+                    <div class="widget-body">
+                        <div class="row">
+                            <div class="col-lg-12 col-sm-6 col-xs-12">
+                                <mat-horizontal-stepper [linear]="isLinear" #stepper>
+
+                                    <mat-step [completed]="true" [stepControl]="formGroup1">
+                                        <ng-template matStepLabel>
+                                            <span matTooltip="Visit Details">Visit Details</span>
+                                        </ng-template>
+                                        <app-hei-visit-details></app-hei-visit-details>
+                                    </mat-step>
+
+                                    <mat-step [completed]="false" [stepControl]="deliveryMatFormGroup">
+                                        <ng-template matStepLabel>
+                                            <span matTooltip="Delivery & Maternal History">Delivery & Mat History</span>
+                                        </ng-template>
+                                        <app-delivery (notify)="onNotify($event)" [deliveryOptions]="deliveryOptions"></app-delivery>
+                                        <app-maternalhistory (notify)="onMatHistoryNotify($event)" [maternalhistoryoptions]="maternalhistoryoptions">
+                                        </app-maternalhistory>
+                                    </mat-step>
+
+                                    <mat-step [completed]="true" [stepControl]="formGroup3">
+                                        <ng-template matStepLabel>
+                                            <span matTooltip="Immunization History">Immunization</span>
+                                        </ng-template>
+                                    </mat-step>
+
+
+                                    <mat-step [completed]="true" [stepControl]="formGroup3">
+                                        <ng-template matStepLabel>
+                                            <span matTooltip="Milestones">Milestones</span>
+                                        </ng-template>
+                                    </mat-step>
+
+
+                                    <mat-step [completed]="true" [stepControl]="formGroup5">
+                                        <ng-template matStepLabel>
+                                            <span matTooltip="HIV Testing">HIV Testing</span>
+                                        </ng-template>
+                                    </mat-step>
+
+
+                                    <mat-step [completed]="true" [stepControl]="formGroup6">
+                                        <ng-template matStepLabel>
+                                            <span matTooltip="Maternal Viral Load">Maternal Viral Load</span>
+                                        </ng-template>
+                                    </mat-step>
+
+                                </mat-horizontal-stepper>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
