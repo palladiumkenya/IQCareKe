@@ -19,10 +19,12 @@ export class HeiComponent implements OnInit {
 
     isLinear: boolean = true;
     deliveryMatFormGroup: FormArray;
+    visitDetailsFormGroup: FormArray;
 
 
     constructor(private route: ActivatedRoute) {
         this.deliveryMatFormGroup = new FormArray([]);
+        this.visitDetailsFormGroup = new FormArray([]);
     }
 
     ngOnInit() {
@@ -57,5 +59,9 @@ export class HeiComponent implements OnInit {
 
     onMatHistoryNotify(formGroup: FormGroup): void {
         this.deliveryMatFormGroup.push(formGroup);
+    }
+
+    onVisitDetailsNotify(formGroup: FormGroup): void {
+        this.visitDetailsFormGroup.push(formGroup);
     }
 }

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { SnotifyService } from 'ng-snotify';
 import { Subscription } from 'rxjs/index';
 import { LookupItemService } from '../../../shared/_services/lookup-item.service';
@@ -15,6 +15,7 @@ export class HeiVisitDetailsComponent implements OnInit {
     public HeiVisitDetailsFormGroup: FormGroup;
     public lookupItems$: Subscription;
     public visitTypes: any[] = [];
+    @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     constructor(private _formBuilder: FormBuilder,
         private _lookupItemService: LookupItemService,
@@ -22,11 +23,20 @@ export class HeiVisitDetailsComponent implements OnInit {
         private notificationService: NotificationService) { }
 
     ngOnInit() {
-        this.HeiVisitDetailsFormGroup = this._formBuilder.group({
+       /* this.HeiVisitDetailsFormGroup = this._formBuilder.group({
             visitType: ['', Validators.required],
             visitDate: ['', Validators.required]
+        }); */
+
+        this.HeiVisitDetailsFormGroup = this._formBuilder.group({
+            visitType: new FormControl('', [Validators.required]),
+            visitDate: new FormControl('', [Validators.required]),
+            cohort: new FormControl('', [Validators.required])
         });
+
         this.getLookupItems('ANCVisitType', this.visitTypes);
+
+        this.notify.emit(this.HeiVisitDetailsFormGroup);
     }
 
     public getLookupItems(groupName: string, _options: any[]) {
