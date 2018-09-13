@@ -13,8 +13,9 @@ namespace IQCare.PMTCT.Core.Models
         public int PreventiveServiceId { get; set; }
         public DateTime? PreventiveServiceDate { get; set; }
         public string Description { get; set; }
-        public DateTime NextSchedule { get; set; }
+        public DateTime? NextSchedule { get; set; }
         public Patient Patient { get; set; }
         public PatientMasterVisit PatientMasterVisit { get; set; }
+        public int CreatedBy { get; set; }
     }
 }

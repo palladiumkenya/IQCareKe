@@ -7,6 +7,7 @@ using IQCare.Library;
 using IQCare.PMTCT.BusinessProcess.Commands;
 using IQCare.PMTCT.Core.Models;
 using IQCare.PMTCT.Infrastructure;
+using IQCare.PMTCT.Services;
 using IQCare.PMTCT.Services.Interface;
 using MediatR;
 
@@ -16,26 +17,26 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
     public class PatientPreventiveServiceCommandHandler : IRequestHandler<PatientPreventiveServiceCommand, Result<PatientPreventiveServiceResponse>>
     {
         private readonly IPmtctUnitOfWork _unitOfWork;
-        private readonly IPatientPreventiveService _service;
         public int Result = 0;
 
-        public PatientPreventiveServiceCommandHandler(IPmtctUnitOfWork unitOfWork, IPatientPreventiveService service)
+        public PatientPreventiveServiceCommandHandler(IPmtctUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            _service = service;
         }
 
         public async Task<Result<PatientPreventiveServiceResponse>> Handle(PatientPreventiveServiceCommand request, CancellationToken cancellationToken)
         {
             using (_unitOfWork)
             {
+                PatientPreventiveService _service=new PatientPreventiveService(_unitOfWork);
                 PatientPartnerTesting partnerTesting= new PatientPartnerTesting()
                 {
                     PatientId = request.PreventiveService[0].PatientId,
                     PatientMasterVisitId = request.PreventiveService[0].PatientMasterVisitId,
                     PartnerTested = request.PartnerTestingVisit,
                     PartnerHivResult = request.FinalHIVResult,
-                    DeleteFlag = 0
+                    DeleteFlag = 0,
+                    CreatedBy = request.CreatedBy
                     
                 };
                 Result = await _service.AddPatientParterTesting(partnerTesting);
@@ -48,7 +49,8 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
                     PatientMasterVisitId = request.PreventiveService[0].PatientMasterVisitId,
                     PreventiveServiceId = request.InsecticideTreatedNet,
                     PreventiveServiceDate = request.InsecticideGivenDate,
-                    Description = ""
+                    Description = "",
+                    CreatedBy = request.CreatedBy
                 };
 
                 PreventiveService exercise =new PreventiveService()
@@ -56,8 +58,9 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
                     PatientId = request.PreventiveService[0].PatientId,
                     PatientMasterVisitId = request.PreventiveService[0].PatientMasterVisitId,
                     PreventiveServiceId = request.AntenatalExercise,
-                    PreventiveServiceDate = DateTime.Today,
-                    Description = ""
+                    PreventiveServiceDate = DateTime.Now,
+                    Description = "",
+                    CreatedBy = request.CreatedBy
                 };
 
                 preventiveServices.Add(insecticideNet);
@@ -68,18 +71,20 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
 
                 foreach (var data in request.PreventiveService)
                 {
-                    if (data.NextSchedule.Day>0)
+                    if (data.NextSchedule.HasValue)
                     {
                         PatientAppointment appointment=new PatientAppointment()
                         {
                             PatientId = data.PatientId,
                             PatientMasterVisitId = data.PatientMasterVisitId,
                             ServiceAreaId = 3,
-                            AppointmentDate = data.NextSchedule,
+                            AppointmentDate = data.NextSchedule.Value,
                             ReasonId = 0,
                             Description = "ANC Preventive Services Schedule",
                             StatusId = 0,
-                            DifferentiatedCareId = 0
+                            DifferentiatedCareId = 0,
+                            CreatedBy = request.CreatedBy
+                            
                         };
                     }
                 }

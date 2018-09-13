@@ -34,6 +34,7 @@ export class HaartProphylaxisComponent implements OnInit {
 
     public personId: number;
     public patientMasterVisitId: number;
+    public userId: number;
 
   constructor(private route: ActivatedRoute, private _formBuilder: FormBuilder, private _lookupItemService: LookupItemService,
               private  snotifyService: SnotifyService,
@@ -47,6 +48,10 @@ export class HaartProphylaxisComponent implements OnInit {
       this.route.params.subscribe(params => {
           this.patientMasterVisitId = params['visitId'];
       });
+
+      this.userId = this.userId = JSON.parse(localStorage.getItem('appUserId'));
+
+
 
       this.HaartProphylaxisFormGroup = this._formBuilder.group({
           onArvBeforeANCVisit: ['', Validators.required],
@@ -96,10 +101,13 @@ export class HaartProphylaxisComponent implements OnInit {
                     Treatment: this.chronicIllness[i]['currentTreatment'],
                     Dose: parseInt(this.chronicIllness[i]['dose'].toString(), 10),
                     DeleteFlag: 0,
-                    OnsetDate : new Date(this.chronicIllness[i]['onsetDate']) ,
-                    Active: false
+                    OnsetDate : this.chronicIllness[i]['onSetDate']  ,
+                    Active: false,
+                    CreateBy: this.userId
             });
         }
+
+
         this.HaartProphylaxisData = {
             onArvBeforeANCVisit : parseInt(this.HaartProphylaxisFormGroup.controls['onArvBeforeANCVisit'].value, 10),
             startedHaartANC: parseInt(this.HaartProphylaxisFormGroup.controls['startedHaartANC'].value, 10 ),
@@ -124,7 +132,7 @@ export class HaartProphylaxisComponent implements OnInit {
             this.chronicIllness.push({
                 chronicIllness: illness,
                 chronicIllnessId: illnessId,
-                onSetDate: this.HaartProphylaxisFormGroup.controls['onSetDate'].value,
+                onSetDate: this.HaartProphylaxisFormGroup.controls['onSetDate'].value ,
                 currentTreatment: this.HaartProphylaxisFormGroup.controls['currentTreatment'].value,
                 dose: parseInt(this.HaartProphylaxisFormGroup.controls['dose'].value.toString(), 10)
             });

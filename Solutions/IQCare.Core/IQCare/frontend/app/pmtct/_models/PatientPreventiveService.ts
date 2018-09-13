@@ -7,4 +7,5 @@ export interface PatientPreventiveService {
     AntenatalExercise?: number;
     PartnerTestingVisit?: number;
     FinalHIVResult?: number;
+    CreatedBy?: number;
 }

@@ -8,7 +8,7 @@ namespace IQCare.PMTCT.Infrastructure.Mapping
     {
         public void Configure(EntityTypeBuilder<PreventiveService> builder)
         {
-            builder.ToTable("PatientPreventiveService")
+            builder.ToTable("PatientPreventiveServices")
                 .HasKey(c => c.Id);
         }
     }

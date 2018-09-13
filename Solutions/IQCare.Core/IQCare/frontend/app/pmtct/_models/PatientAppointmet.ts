@@ -10,4 +10,5 @@ export interface PatientAppointmet {
     StatusDate?: Date;
     DifferentiatedCareId?: number;
     DeleteFlag?: number;
+    CreatedBy?: number;
 }

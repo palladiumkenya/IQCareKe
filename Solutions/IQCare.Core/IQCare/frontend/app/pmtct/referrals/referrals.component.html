@@ -58,9 +58,9 @@
                 </div>
                 <div class="col-md-2 col-xs-12 col-sm-4"></div>
 
-                <div class="col-md-2 col-xs-12 col-sm-4">
+               <!-- <div class="col-md-2 col-xs-12 col-sm-4">
                     <button mat-raised-button class="mat-accent"> End Encounter</button>
-                </div>
+                </div> -->
             </div>
 
 
@@ -74,10 +74,19 @@
         </div>
 
 </form>
+
 <div class="row">
+    <div>
+        <button mat-raised-button class="mat-warn" matStepperPrevious style="margin-right: 5px">Back</button>
+        <button mat-raised-button class="mat-primary" (click)="moveNextStep()">Complete
+            Encounter
+        </button>
+    </div>
+</div>
+<!--<div class="row">
     <div class="col-md-12">
         <div>
             <button mat-raised-button  class="mat-primary" mat-button matStepperNext style="margin-right:5px" (click)="moveNextStep()">Check </button>
         </div>
     </div>
-</div>
+</div> -->

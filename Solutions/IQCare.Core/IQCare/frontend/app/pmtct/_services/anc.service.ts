@@ -27,7 +27,7 @@ export class AncService {
     private _url_cm = '/api/ClientMonitoring/';
     private _url_haart = '/api/HaartProphylaxis/';
     private _url_ref = '/api/ReferralAppointment/';
-    private _url_pre = '/api/PreventiveService/';
+    private _url_pre = '/api/ANCPreventivervice/';
     private _url_visit = '/api/VisitDetails/';
 
     public profile: PatientProfile = {};
@@ -66,7 +66,7 @@ export class AncService {
     }
 
     public savePreventiveServices(patientPreventiveService: PatientPreventiveService): Observable<PatientPreventiveService> {
-        return this.http.post<any>(this.API_URL + '' + this._url_ref, JSON.stringify(patientPreventiveService), httpOptions).pipe(
+        return this.http.post<any>(this.API_URL + '' + this._url_pre, JSON.stringify(patientPreventiveService), httpOptions).pipe(
             tap(savePreventiveServices => this.errorHandler.log('Error posting Preventive Service Command')),
             catchError(this.errorHandler.handleError<any>('PreventiveServiceController'))
         );

@@ -8,4 +8,5 @@ export interface PatientReferral {
     ReferralDate?: Date;
     RefferedBY?: number;
     DeleteFlag?: number;
+    CreateBy?: number;
 }

@@ -102,3 +102,57 @@ IF NOT EXISTS(SELECT * FROM LookupItem WHERE Name='ancExamination')
 BEGIN
 	INSERT INTO LookupItem (Name,DisplayName,DeleteFlag) VALUES('ancExamination','ancExamination',0);
 END
+IF NOT EXISTS(SELECT * FROM LookupItem WHERE Name='HIVFinalResultsPMTCT')
+BEGIN
+	INSERT INTO LookupItem (Name,DisplayName,DeleteFlag) VALUES('HIVFinalResultsPMTCT','HIVFinalResultsPMTCT',0);
+END
+
+IF NOT EXISTS(SELECT * FROM LookupItemView WHERE ItemName='Positive' AND MasterName='HIVFinalResultsPMTCT')
+BEGIN
+	INSERT INTO LookupMasterItem(LookupMasterId,LookupItemId,DisplayName,OrdRank) VALUES((SELECT top 1 Id FROM LookupMaster WHERE Name='HIVFinalResultsPMTCT'),(SELECT top 1 Id FROM LookupItem WHERE Name='Positive'),'Positive',1)
+END
+
+IF NOT EXISTS(SELECT * FROM LookupItemView WHERE ItemName='Negative' AND MasterName='HIVFinalResultsPMTCT')
+BEGIN
+	INSERT INTO LookupMasterItem(LookupMasterId,LookupItemId,DisplayName,OrdRank) VALUES((SELECT top 1 Id FROM LookupMaster WHERE Name='HIVFinalResultsPMTCT'),(SELECT top 1 Id FROM LookupItem WHERE Name='Negative'),'Negative',2)
+END
+
+IF NOT EXISTS(SELECT * FROM LookupItemView WHERE ItemName='Known Positive' AND MasterName='HIVFinalResultsPMTCT')
+BEGIN
+	INSERT INTO LookupMasterItem(LookupMasterId,LookupItemId,DisplayName,OrdRank) VALUES((SELECT top 1 Id FROM LookupMaster WHERE Name='HIVFinalResultsPMTCT'),(SELECT top 1 Id FROM LookupItem WHERE Name='Known Positive'),'Known Positive',3)
+END
+
+IF NOT EXISTS(SELECT * FROM LookupItemView WHERE ItemName='N/A' AND MasterName='HIVFinalResultsPMTCT')
+BEGIN
+	INSERT INTO LookupMasterItem(LookupMasterId,LookupItemId,DisplayName,OrdRank) VALUES((SELECT top 1 Id FROM LookupMaster WHERE Name='HIVFinalResultsPMTCT'),(SELECT top 1 Id FROM LookupItem WHERE Name='N/A'),'N/A',3)
+END
+
+IF NOT EXISTS(SELECT * FROM LookupMaster WHERE Name='pmtctReferrals')
+BEGIN
+	INSERT INTO LookupItem (Name,DisplayName,DeleteFlag) VALUES('pmtctReferrals','pmtctReferrals',0);
+END
+
+IF NOT EXISTS(SELECT * FROM LookupItemView WHERE ItemName='Another Health Facility' AND MasterName='pmtctReferrals')
+BEGIN
+	INSERT INTO LookupMasterItem(LookupMasterId,LookupItemId,DisplayName,OrdRank) VALUES((SELECT top 1 Id FROM LookupMaster WHERE Name='pmtctReferrals'),(SELECT top 1 Id FROM LookupItem WHERE Name='Another Health Facility'),'Another Health Facility',1)
+END
+
+IF NOT EXISTS(SELECT * FROM LookupItemView WHERE ItemName='Community Unit' AND MasterName='pmtctReferrals')
+BEGIN
+	INSERT INTO LookupMasterItem(LookupMasterId,LookupItemId,DisplayName,OrdRank) VALUES((SELECT top 1 Id FROM LookupMaster WHERE Name='pmtctReferrals'),(SELECT top 1 Id FROM LookupItem WHERE Name='Community Unit'),'Community Unit',2)
+END
+
+IF NOT EXISTS(SELECT * FROM LookupItemView WHERE ItemName='N/A' AND MasterName='pmtctReferrals')
+BEGIN
+	INSERT INTO LookupMasterItem(LookupMasterId,LookupItemId,DisplayName,OrdRank) VALUES((SELECT top 1 Id FROM LookupMaster WHERE Name='pmtctReferrals'),(SELECT top 1 Id FROM LookupItem WHERE Name='N/A'),'N/A',3)
+END
+
+IF NOT EXISTS(SELECT * FROM LookupItemView WHERE ItemName='N/A' AND MasterName='pmtctReferrals')
+BEGIN
+	INSERT INTO LookupMasterItem(LookupMasterId,LookupItemId,DisplayName,OrdRank) VALUES((SELECT top 1 Id FROM LookupMaster WHERE Name='pmtctReferrals'),(SELECT top 1 Id FROM LookupItem WHERE Name='N/A'),'N/A',3)
+END
+
+IF NOT EXISTS(SELECT * FROM LookupItem WHERE Name='ANC Follow-up')
+BEGIN
+	INSERT INTO LookupItem (Name,DisplayName,DeleteFlag) VALUES('ANC Follow-up','ANC Follow-up',0);
+END
