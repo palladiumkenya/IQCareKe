@@ -34,6 +34,8 @@ export class HaartProphylaxisComponent implements OnInit {
 
     public personId: number;
     public patientMasterVisitId: number;
+    public serviceAreaId: number;
+    public patientId: number;
     public userId: number;
 
   constructor(private route: ActivatedRoute, private _formBuilder: FormBuilder, private _lookupItemService: LookupItemService,
@@ -43,10 +45,15 @@ export class HaartProphylaxisComponent implements OnInit {
   ngOnInit() {
 
       this.route.params.subscribe(params => {
-          this.personId = params['id'];
+          this.personId = params['personId'];
       });
+
       this.route.params.subscribe(params => {
-          this.patientMasterVisitId = params['visitId'];
+          this.serviceAreaId = params['serviceAreaId'];
+      });
+
+      this.route.params.subscribe(params => {
+          this.patientId = params['patientId'];
       });
 
       this.userId = this.userId = JSON.parse(localStorage.getItem('appUserId'));
@@ -95,8 +102,8 @@ export class HaartProphylaxisComponent implements OnInit {
         for (let i = 0; i < this.chronicIllness.length; i++) {
             this.patientchronicIllnessData .push(
                 { Id: 0,
-                    PatientId: 5,
-                    PatientMasterVisitId: 12,
+                    PatientId: parseInt(this.patientId.toString(), 10),
+                    PatientMasterVisitId: parseInt(this.patientMasterVisitId.toString(), 10),
                     ChronicIllness: this.chronicIllness[i]['chronicIllnessId'],
                     Treatment: this.chronicIllness[i]['currentTreatment'],
                     Dose: parseInt(this.chronicIllness[i]['dose'].toString(), 10),

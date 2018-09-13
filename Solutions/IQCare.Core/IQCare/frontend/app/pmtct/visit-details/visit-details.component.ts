@@ -65,17 +65,17 @@ export class VisitDetailsComponent implements OnInit, OnChanges {
         gravidae: ['', Validators.required]
     });
       this.route.params.subscribe(params => {
-          this.personId = params['id'];
+          this.personId = params['personId'];
       });
+
       this.route.params.subscribe(params => {
-          this.patientId = params['serviceAreaId'];
+          this.serviceAreaId = params['serviceAreaId'];
       });
+
       this.route.params.subscribe(params => {
           this.patientId = params['patientId'];
       });
-      this.route.params.subscribe(params => {
-          this.patientMasterVisitId = params['patientMasterVisitId'];
-      });
+
 
       this.UserId = JSON.parse(localStorage.getItem('appUserId'));
 
@@ -202,7 +202,7 @@ export class VisitDetailsComponent implements OnInit, OnChanges {
 
       this.visitDetails = {
           PatientId: this.patientId,
-          ServiceAreaId: 3,
+          ServiceAreaId: this.serviceAreaId,
           VisitDate: this.visitDetailsFormGroup.controls['visitDate'].value,
           VisitType: this.visitDetailsFormGroup.controls['ancVisitType'].value,
           VisitNumber: parseInt(this.visitDetailsFormGroup.controls['ancVisitNumber'].value, 10),

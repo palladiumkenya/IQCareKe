@@ -140,7 +140,7 @@ export class AncComponent implements OnInit, OnDestroy {
         const clientMonitoring = {
             PatientId: parseInt(this.patientId.toString(), 10),
             // PatientmasterVisitId: this.patientMasterVisitId,
-            PatientMasterVisitId: 21,
+            PatientMasterVisitId: parseInt(this.patientMasterVisitId.toString(), 10),
             FacilityId: 755,
             WhoStage: parseInt(data.WhoStage.toString(), 10),
             ServiceAreaId: 3,
@@ -177,16 +177,20 @@ export class AncComponent implements OnInit, OnDestroy {
 
         this.patientDrug.push(
             {
-                PatientId: parseInt(this.patientId.toString(), 10), PatientMasterVisitId: 12, DrugAdministered: data.nvpForBaby,
+                PatientId: parseInt(this.patientId.toString(), 10),
+                PatientMasterVisitId: parseInt(this.patientMasterVisitId.toString() , 10),
+                DrugAdministered: data.nvpForBaby,
                 Value: data.nvpForBaby, DeleteFlag: 0, Description: '', Id: 0, CreatedBy: this.userId
             },
             {
-                PatientId: parseInt(this.patientId.toString(), 10), PatientMasterVisitId: 12,
+                PatientId: parseInt(this.patientId.toString(), 10),
+                PatientMasterVisitId: parseInt(this.patientMasterVisitId.toString() , 10),
                 DrugAdministered: data.aztFortheBaby,
                 Value: data.aztFortheBaby, DeleteFlag: 0, Description: '', Id: 0, CreatedBy: this.userId
             },
             {
-                PatientId: parseInt(this.patientId.toString(), 10), PatientMasterVisitId: 12,
+                PatientId: parseInt(this.patientId.toString(), 10),
+                PatientMasterVisitId: parseInt(this.patientMasterVisitId.toString() , 10),
                 Value: data.onArvBeforeANCVisit, DeleteFlag: 0, Description: '', Id: 0, CreatedBy: this.userId
             }
         );
@@ -221,8 +225,8 @@ export class AncComponent implements OnInit, OnDestroy {
             this.preventiveServiceData.push(
                 {
                     Id: 0,
-                    PatientId: 5,
-                    PatientMasterVisitId: 12,
+                    PatientId: parseInt(this.patientId.toString(), 10),
+                    PatientMasterVisitId: parseInt(this.patientMasterVisitId.toString() , 10),
                     PreventiveServiceId: data.preventiveService[i]['preventiveServiceId'],
                     PreventiveServiceDate: data.preventiveService[i]['dateGiven'],
                     Description: data.preventiveService[i]['comments'],
@@ -260,7 +264,7 @@ export class AncComponent implements OnInit, OnDestroy {
     public onSaveReferralAppointment(data: ReferralsEmitter) {
         const patientRef = {
             PatientId: parseInt(this.patientId.toString(), 10),
-            PatientMasterVisitId: 12,
+            PatientMasterVisitId: parseInt(this.patientMasterVisitId.toString() , 10),
             ReferredFrom: data.referredFrom,
             ReferredTo: data.referredTo,
             ReferralReason: 'n/a',
@@ -272,7 +276,7 @@ export class AncComponent implements OnInit, OnDestroy {
 
         const appointment = {
             PatientId: parseInt(this.patientId.toString(), 10),
-            PatientMasterVisitId: 12,
+            PatientMasterVisitId: parseInt(this.patientMasterVisitId.toString() , 10),
             AppointmentDate: new Date(data.nextAppointmentDate),
             ReasonId: 0,
             Description: data.serviceRemarks.toString(),
