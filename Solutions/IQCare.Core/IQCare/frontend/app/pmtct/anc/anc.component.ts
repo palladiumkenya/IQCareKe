@@ -58,8 +58,7 @@ export class AncComponent implements OnInit, OnDestroy {
     public profile: PatientProfile = {};
 
 
-    constructor(private route: ActivatedRoute,
-        private visitDetailsService: VisitDetailsService,
+    constructor(private route: ActivatedRoute, private visitDetailsService: VisitDetailsService,
         private snotifyService: SnotifyService,
         public zone: NgZone,
         private router: Router,
