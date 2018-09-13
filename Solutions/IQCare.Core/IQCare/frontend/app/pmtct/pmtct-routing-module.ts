@@ -1,3 +1,4 @@
+import { HeiComponent } from './hei/hei.component';
 import { PreventiveServicesComponent } from './preventive-services/preventive-services.component';
 import { HaartProphylaxisComponent } from './haart-prophylaxis/haart-prophylaxis.component';
 import { ClientMonitoringComponent } from './client-monitoring/client-monitoring.component';
@@ -38,6 +39,11 @@ const routes: Routes = [
         path: 'ps',
         component: PreventiveServicesComponent,
         pathMatch: 'full',
+    },
+    {
+        path: 'hei/:patientId/:personId',
+        component: HeiComponent,
+        pathMatch: 'full'
     }
 ];
 
