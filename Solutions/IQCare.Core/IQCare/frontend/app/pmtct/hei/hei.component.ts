@@ -10,7 +10,9 @@ import { FormGroup, FormArray } from '@angular/forms';
 })
 export class HeiComponent implements OnInit {
     deliveryOptions: any[] = [];
-    maternalhistoryoptions: any[] = [];
+    maternalhistoryOptions: any[] = [];
+    motherreceivedrugsOptions: any[] = [];
+    heimotherregimenOptions: any[] = [];
 
     deliveryModeOptions: LookupItemView[] = [];
     arvprophylaxisOptions: LookupItemView[] = [];
@@ -33,25 +35,36 @@ export class HeiComponent implements OnInit {
         );
 
         this.route.data.subscribe((res) => {
-            const { placeofdeliveryOptions, deliveryModeOptions, arvprophylaxisOptions, motherstateOptions } = res;
+            const {
+                placeofdeliveryOptions,
+                deliveryModeOptions,
+                arvprophylaxisOptions,
+                motherstateOptions,
+                motherreceivedrugsOptions,
+                heimotherregimenOptions
+            } = res;
             this.placeofdeliveryOptions = placeofdeliveryOptions['lookupItems'];
             this.deliveryModeOptions = deliveryModeOptions['lookupItems'];
             this.arvprophylaxisOptions = arvprophylaxisOptions['lookupItems'];
             this.motherstateOptions = motherstateOptions['lookupItems'];
+            this.motherreceivedrugsOptions = motherreceivedrugsOptions['lookupItems'];
+            this.heimotherregimenOptions = heimotherregimenOptions['lookupItems'];
         });
 
         this.deliveryOptions.push({
             'placeofdeliveryOptions': this.placeofdeliveryOptions,
             'deliveryModeOptions': this.deliveryModeOptions,
-            'arvprophylaxisOptions': this.arvprophylaxisOptions,
-            'motherstateOptions': this.motherstateOptions
+            'arvprophylaxisOptions': this.arvprophylaxisOptions
         });
 
-        console.log(this.deliveryMatFormGroup);
-        console.log(this.deliveryMatFormGroup.value);
+        this.maternalhistoryOptions.push({
+            'motherstateOptions': this.motherstateOptions,
+            'motherreceivedrugsOptions': this.motherreceivedrugsOptions,
+            'heimotherregimenOptions': this.heimotherregimenOptions
+        });
     }
 
-    onNotify(formGroup: FormGroup): void {
+    onDeliveryNotify(formGroup: FormGroup): void {
         this.deliveryMatFormGroup.push(formGroup);
     }
 

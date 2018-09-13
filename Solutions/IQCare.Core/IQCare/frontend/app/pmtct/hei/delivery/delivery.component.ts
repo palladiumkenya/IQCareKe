@@ -17,7 +17,6 @@ export class DeliveryComponent implements OnInit {
     arvprophylaxisOptions: any[] = [];
 
     @Input('deliveryOptions') deliveryOptions: any;
-
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     constructor(private _formBuilder: FormBuilder,

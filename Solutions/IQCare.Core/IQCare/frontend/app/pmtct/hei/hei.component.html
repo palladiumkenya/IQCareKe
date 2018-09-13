@@ -27,9 +27,14 @@
                                         <ng-template matStepLabel>
                                             <span matTooltip="Delivery & Maternal History">Delivery & Mat History</span>
                                         </ng-template>
-                                        <app-delivery (notify)="onNotify($event)" [deliveryOptions]="deliveryOptions"></app-delivery>
+
+                                        <!-- add Delivery Component to Stepper -->
+                                        <app-delivery (notify)="onDeliveryNotify($event)" [deliveryOptions]="deliveryOptions">
+                                        </app-delivery>
+
+                                        <!-- add Maternity History Component to Stepper -->
                                         <app-maternalhistory (notify)="onMatHistoryNotify($event)"
-                                            [maternalhistoryoptions]="maternalhistoryoptions">
+                                            [maternalhistoryOptions]="maternalhistoryOptions">
                                         </app-maternalhistory>
 
                                         <div>

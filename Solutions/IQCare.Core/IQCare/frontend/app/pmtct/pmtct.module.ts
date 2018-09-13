@@ -35,6 +35,8 @@ import { ImmunizationHistoryComponent } from './hei/immunization-history/immuniz
 import { MilestonesComponent } from './hei/milestones/milestones.component';
 import { DeliveryComponent } from './hei/delivery/delivery.component';
 import { MaternalhistoryComponent } from './hei/maternalhistory/maternalhistory.component';
+import { MotherReceiveDrugsResolver } from './_services/motherreceivedrugs.resolver';
+import { HeiMotherRegimenResolver } from './_services/heimotherregimen.resolver';
 
 
 @NgModule({
@@ -74,7 +76,9 @@ import { MaternalhistoryComponent } from './hei/maternalhistory/maternalhistory.
         PlaceOfDeliveryResolver,
         DeliveryModeResolver,
         ARVProphylaxisResolver,
-        MotherStateResolver
+        MotherStateResolver,
+        MotherReceiveDrugsResolver,
+        HeiMotherRegimenResolver
     ]
 })
 export class PmtctModule { }
