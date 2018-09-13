@@ -31,7 +31,7 @@ export class HeiVisitDetailsComponent implements OnInit {
         this.HeiVisitDetailsFormGroup = this._formBuilder.group({
             visitType: new FormControl('', [Validators.required]),
             visitDate: new FormControl('', [Validators.required]),
-            cohort: new FormControl('', [Validators.required])
+            cohort: new FormControl('')
         });
 
         this.getLookupItems('ANCVisitType', this.visitTypes);
