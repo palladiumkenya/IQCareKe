@@ -14,6 +14,7 @@ namespace IQCare.PMTCT.BusinessProcess.Commands
        public int AntenatalExercise { get; set; }
         public int PartnerTestingVisit { get; set; }
         public int FinalHIVResult { get; set; }
+       public int CreatedBy { get; set; }
     }
 
     public class PatientPreventiveServiceResponse{

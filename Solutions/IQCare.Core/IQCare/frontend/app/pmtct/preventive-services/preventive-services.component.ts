@@ -83,8 +83,32 @@ export class PreventiveServicesComponent implements OnInit {
           //  insecticideGivenDate: this.PreventiveServicesFormGroup.controls['insecticideGivenDate'].value,
             PartnerTestingVisit: parseInt(this.PreventiveServicesFormGroup.controls['PartnerTestingVisit'].value, 10 ),
             finalHIVResult: parseInt(this.PreventiveServicesFormGroup.controls['finalHIVResult'].value, 10 ),
+
         };
         console.log(this.preventiveServicesData);
         this.nextStep.emit(this.preventiveServicesData);
+    }
+
+    public addTopics() {
+
+        const service = this.PreventiveServicesFormGroup.controls['preventiveServices'].value.itemName;
+        const serviceId = this.PreventiveServicesFormGroup.controls['preventiveServices'].value.itemId;
+
+
+        if (this.serviceData.filter(x => x.preventiveService === service ).length > 0) {
+            this.snotifyService.warning('' + service + ' exists', 'preventive Service', this.notificationService.getConfig());
+        } else {
+            this.serviceData.push({
+                preventiveService: service,
+                preventiveServiceId: serviceId,
+                dateGiven: this.PreventiveServicesFormGroup.controls['dateGiven'].value,
+                comments: this.PreventiveServicesFormGroup.controls['comments'].value,
+                nextSchedule: this.PreventiveServicesFormGroup.controls['nextSchedule'].value});
+        }
+        console.log(this.serviceData);
+    }
+
+    public  removeRow(idx) {
+        this.serviceData.splice(idx, 1);
     }
 }

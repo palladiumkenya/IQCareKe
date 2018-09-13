@@ -9,4 +9,5 @@ export interface PatientChronicIllness {
     DeleteFlag?: number;
     OnsetDate?: Date;
     Active?: boolean;
+    CreateBy?: number;
 }

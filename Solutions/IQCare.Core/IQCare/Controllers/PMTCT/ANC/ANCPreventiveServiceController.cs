@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using IQCare.PMTCT.BusinessProcess.Commands;
-using IQCare.PMTCT.Core.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,15 +10,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace IQCare.Controllers.PMTCT.ANC
 {
-   
-
-    [Produces("application/json")]
-    [Route("api/ReferralAppointment")]
-    public class ReferralAppointmentController : Controller
+    [Route("api/[controller]")]
+    [Route("api/ANCPreventivervice")]
+    public class ANCPreventiveServiceController : Controller
     {
-        private readonly IMediator _mediator;
+        private IMediator _mediator;
 
-        public ReferralAppointmentController(IMediator mediator)
+        public ANCPreventiveServiceController(IMediator mediator)
         {
             _mediator = mediator;
         }
@@ -39,14 +36,16 @@ namespace IQCare.Controllers.PMTCT.ANC
 
         // POST api/<controller>
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] ReferralAppointmentServiceCommand referralCommand)
+        public async Task<IActionResult> Post([FromBody]PatientPreventiveServiceCommand patientPreventive)
         {
-            
-            var response = await _mediator.Send(new ReferralAppointmentServiceCommand
+            var response = await _mediator.Send(new PatientPreventiveServiceCommand
             {
-                PatientReferral=referralCommand.PatientReferral,
-                PatientAppointment= referralCommand.PatientAppointment,
-                CreatedBy = referralCommand.CreatedBy,
+                 InsecticideGivenDate= patientPreventive.InsecticideGivenDate,
+                InsecticideTreatedNet = patientPreventive.InsecticideTreatedNet,
+                AntenatalExercise = patientPreventive.AntenatalExercise,
+                PartnerTestingVisit = patientPreventive.PartnerTestingVisit,
+                FinalHIVResult = patientPreventive.FinalHIVResult,
+                PreventiveService = patientPreventive.PreventiveService,
             }, Request.HttpContext.RequestAborted);
 
             if (response.IsValid)

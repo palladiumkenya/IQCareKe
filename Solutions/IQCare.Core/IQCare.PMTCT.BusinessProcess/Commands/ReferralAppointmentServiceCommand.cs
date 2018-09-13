@@ -7,8 +7,9 @@ namespace IQCare.PMTCT.BusinessProcess.Commands
 
     public class ReferralAppointmentServiceCommand: IRequest<Result<ReferralAppointmentCommandResponse>>
     {
-       public PatientReferral patientReferral;
-        public PatientAppointment patientAppointment;
+       public PatientReferral PatientReferral;
+        public PatientAppointment PatientAppointment;
+        public int CreatedBy { get; set; }
     }
 
     public class ReferralAppointmentCommandResponse

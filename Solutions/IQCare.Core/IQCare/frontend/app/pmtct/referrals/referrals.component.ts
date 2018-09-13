@@ -64,7 +64,9 @@ export class ReferralsComponent implements OnInit {
             referredTo: parseInt(this.ReferralFormGroup.controls['referredTo'].value, 10 ),
             nextAppointmentDate: this.ReferralFormGroup.controls['nextAppointmentDate'].value,
             scheduledAppointment: parseInt(this.ReferralFormGroup.controls['scheduledAppointment'].value, 10),
-            serviceRemarks: this.ReferralFormGroup.controls['serviceRemarks'].value
+            serviceRemarks: this.ReferralFormGroup.controls['serviceRemarks'].value,
+
+
         };
         console.log(this.referralData);
         this.nextStep.emit(this.referralData);

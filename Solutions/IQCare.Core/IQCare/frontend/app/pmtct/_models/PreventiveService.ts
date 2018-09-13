@@ -3,7 +3,7 @@ export interface PreventiveService {
     PatientId?: number;
     PatientMasterVisitId?: number;
     PreventiveServiceId?: number;
-    PreventiveServiceDate?: number;
+    PreventiveServiceDate?: Date;
     Description?: string;
     NextSchedule?: Date;
     

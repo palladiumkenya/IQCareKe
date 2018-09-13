@@ -1,5 +1,6 @@
 export interface PreventiveEmitter {
-    preventiveServices?: number;
+    preventiveServiceId?: number;
+    preventiveService?: string;
     dateGiven?: Date;
     comments?: string;
     nextSchedule?: Date;

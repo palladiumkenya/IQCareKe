@@ -15,12 +15,12 @@ using Serilog;
 namespace IQCare.Controllers.PMTCT.ANC
 {
     [Route("api/[controller]")]
-    [Route("api/PreventiveService")]
-    public class PreventiveServiceController : Controller
+    [Route("api/PatientService")]
+    public class PatientServiceController : Controller
     {
         private readonly IMediator _mediator;
 
-        public PreventiveServiceController(IMediator mediator)
+        public PatientServiceController(IMediator mediator)
         {
             _mediator = mediator;
         }
@@ -39,7 +39,7 @@ namespace IQCare.Controllers.PMTCT.ANC
         }
 
         // POST api/<controller>
-        [HttpPost("PatientPreventiveService")]
+        [HttpPost]
         public async Task<IActionResult> Post([FromBody] PatientPreventiveServiceCommand patientPreventive)
         {
             var response = await _mediator.Send(new PatientPreventiveServiceCommand
@@ -59,21 +59,6 @@ namespace IQCare.Controllers.PMTCT.ANC
             return BadRequest(response);
         }
 
-        [HttpPost("Test")]
-        public async Task<IActionResult> Post([FromBody] HaartProphylaxisCommand serviceCommand)
-        {
-            var response = await _mediator.Send(new HaartProphylaxisCommand
-            {
-                PatientDrugAdministration = serviceCommand.PatientDrugAdministration,
-                PatientChronicIllnesses = serviceCommand.PatientChronicIllnesses
-            }, Request.HttpContext.RequestAborted);
-
-            if (response.IsValid)
-            {
-                return Ok(response.Value);
-            }
-            return BadRequest(response);
-        }
 
         // PUT api/<controller>/5
         [HttpPut("{id}")]

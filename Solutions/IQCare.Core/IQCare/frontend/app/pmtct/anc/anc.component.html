@@ -51,15 +51,7 @@
                                         <ng-template matStepLabel><span matTooltip="Referrals & Next Appointment">Referrals</span>
                                         </ng-template>
                                         <app-referrals (nextStep)="onSaveReferralAppointment($event)"></app-referrals>
-                                        <div>
-                                            <button mat-raised-button class="mat-warn" matStepperPrevious style="margin-right: 5px">Back</button>
-                                            <button mat-raised-button class="mat-accent" (click)="stepper.reset()" style="margin-right: 5px">Reset
-                                                Encounter
-                                            </button>
-                                            <button mat-raised-button class="mat-primary" (click)="stepper.reset()">Complete
-                                                Encounter
-                                            </button>
-                                        </div>
+
                                     </mat-step>
                                 </mat-horizontal-stepper>
                             </div>

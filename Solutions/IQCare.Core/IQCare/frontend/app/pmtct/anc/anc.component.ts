@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {Component, OnInit, OnDestroy, NgZone} from '@angular/core';
 import { NotificationService } from './../../shared/_services/notification.service';
 import { SnotifyService } from 'ng-snotify';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { VisitDetails } from './../_models/visitDetails';
 import { VisitDetailsService } from '../_services/visit-details.service';
 import { PatientEducationEmitter } from '../emitters/PatientEducationEmitter';
@@ -35,6 +35,7 @@ export class AncComponent implements OnInit, OnDestroy {
     visitDetails: VisitDetails;
     topics: PreventiveService[];
     patientDrug: PatientDrugAdministration[] = [];
+    public preventiveServiceData: PreventiveService[] = [];
 
     public personId: number;
     public patientId: number;
@@ -60,6 +61,9 @@ export class AncComponent implements OnInit, OnDestroy {
     constructor(private route: ActivatedRoute,
         private visitDetailsService: VisitDetailsService,
         private snotifyService: SnotifyService,
+        private notificationService: NotificationService, private ancService: AncService,
+        public zone: NgZone,
+        private router: Router) {
         private notificationService: NotificationService,
         private ancService: AncService) {
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
@@ -175,28 +179,26 @@ export class AncComponent implements OnInit, OnDestroy {
 
         this.patientDrug.push(
             {
-                PatientId: this.patientId, PatientMasterVisitId: this.patientMasterVisitId, DrugAdministered: data.nvpForBaby,
-                Value: data.nvpForBaby, DeleteFlag: 0, Description: '', Id: 0, ProfileId: 0
+                PatientId: parseInt( this.patientId.toString() , 10) , PatientMasterVisitId: 12, DrugAdministered: data.nvpForBaby,
+                Value: data.nvpForBaby, DeleteFlag: 0, Description: '', Id: 0,  CreatedBy: this.userId
             },
             {
-                PatientId: this.patientId, PatientMasterVisitId: this.patientMasterVisitId, DrugAdministered: data.aztFortheBaby,
-                Value: data.aztFortheBaby, DeleteFlag: 0, Description: '', Id: 0, ProfileId: 0
+                PatientId: parseInt( this.patientId.toString() , 10) , PatientMasterVisitId: 12,
+                DrugAdministered: data.aztFortheBaby,
+                Value: data.aztFortheBaby, DeleteFlag: 0, Description: '', Id: 0,  CreatedBy: this.userId
             },
             {
-                PatientId: this.patientId, PatientMasterVisitId: this.patientMasterVisitId, DrugAdministered: data.cotrimoxazole,
-                Value: data.cotrimoxazole, DeleteFlag: 0, Description: '', Id: 0, ProfileId: 0
-            },
-            {
-                PatientId: this.patientId, PatientMasterVisitId: this.patientMasterVisitId, DrugAdministered: data.onArvBeforeANCVisit,
-                Value: data.onArvBeforeANCVisit, DeleteFlag: 0, Description: '', Id: 0, ProfileId: 0
+                PatientId: parseInt( this.patientId.toString() , 10) , PatientMasterVisitId: 12,
+                Value: data.onArvBeforeANCVisit, DeleteFlag: 0, Description: '', Id: 0, CreatedBy: this.userId
             }
         );
         const haartProphylaxis = {
-            PatientChronicIllnesses: data.chronicIllness,
             PatientDrugAdministration: this.patientDrug,
+            PatientChronicIllnesses: data.chronicIllness,
             OtherIllness: data.otherIllness
         } as HaartProphylaxisCommand;
-
+        console.log('final output');
+        console.log(haartProphylaxis);
         this.saveHaartProphylaxis$ = this.ancService.saveHaartProphylaxis(haartProphylaxis)
             .subscribe(
                 p => {
@@ -215,15 +217,32 @@ export class AncComponent implements OnInit, OnDestroy {
 
     public onSavePreventiveService(data: PreventiveServiceEmitter) {
 
+        console.log('test data')
+        console.log(data);
+        for (let i = 0; i < data.preventiveService.length; i++) {
+           this.preventiveServiceData.push(
+               {
+                   Id: 0,
+                   PatientId: 5,
+                   PatientMasterVisitId: 12,
+                   PreventiveServiceId: data.preventiveService[i]['preventiveServiceId'],
+                   PreventiveServiceDate: data.preventiveService[i]['dateGiven'],
+                   Description: data.preventiveService[i]['comments'],
+                   NextSchedule: data.preventiveService[i]['nextSchedule']
+               });
+        }
+
         const preventiveService = {
-            preventiveService: data.preventiveService,
-            InsecticideGivenDate: new Date(data.insecticideGivenDate),
+            preventiveService: this.preventiveServiceData,
+            InsecticideGivenDate: new Date(data.insecticideTreatedNetGivenDate),
             AntenatalExercise: data.antenatalExercise,
             PartnerTestingVisit: data.antenatalExercise,
             FinalHIVResult: data.finalHIVResult,
-            InsecticideTreatedNet: data.insecticideTreatedNet
+            InsecticideTreatedNet: data.insecticideTreatedNet,
+            CreatedBy: this.userId
         } as PatientPreventiveService;
-
+        console.log('preventive services');
+console.log(preventiveService);
         this.savePreventiveService$ = this.ancService.savePreventiveServices(preventiveService)
             .subscribe(
                 p => {
@@ -242,25 +261,27 @@ export class AncComponent implements OnInit, OnDestroy {
 
     public onSaveReferralAppointment(data: ReferralsEmitter) {
         const patientRef = {
-            PatientId: this.patientId,
-            PatientMasterVisitId: this.patientMasterVisitId,
+            PatientId: parseInt(this.patientId.toString(), 10),
+            PatientMasterVisitId: 12,
             ReferredFrom: data.referredFrom,
             ReferredTo: data.referredTo,
             ReferralReason: 'n/a',
             ReferralDate: new Date(),
-            RefferedBY: 0,
-            DeleteFlag: 0
+            RefferedBY: this.userId,
+            DeleteFlag: 0,
+            CreateBy: this.userId
         } as PatientReferral;
 
         const appointment = {
-            PatientId: this.patientId,
-            PatientMasterVisitId: this.patientMasterVisitId,
+            PatientId: parseInt(this.patientId.toString(), 10),
+            PatientMasterVisitId: 12,
             AppointmentDate: new Date(data.nextAppointmentDate),
             ReasonId: 0,
             Description: data.serviceRemarks.toString(),
             StatusId: 0,
             DifferentiatedCareId: 0,
-            DeleteFlag: 0
+            DeleteFlag: 0,
+            CreatedBy: this.userId
         } as PatientAppointmet;
 
         const referral = {
@@ -281,6 +302,10 @@ export class AncComponent implements OnInit, OnDestroy {
                 },
                 () => {
                     console.log(this.saveReferralAppointment$);
+                    this.zone.run(() => {
+                        this.router.navigate(['/dashboard/personhome/' + this.patientId],
+                            { relativeTo: this.route });
+                    });
                 });
     }
 
