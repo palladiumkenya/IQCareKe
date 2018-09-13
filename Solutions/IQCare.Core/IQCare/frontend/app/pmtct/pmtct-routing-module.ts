@@ -11,6 +11,7 @@ import { VisitDetailsComponent } from './visit-details/visit-details.component';
 import { PlaceOfDeliveryResolver } from './_services/placeofdelivery.resolver';
 import { DeliveryModeResolver } from './_services/deliverymode.resolver';
 import { ARVProphylaxisResolver } from './_services/arvprophylaxis.resolver';
+import { MotherStateResolver } from './_services/motherstate.resolver';
 
 const routes: Routes = [
     {
@@ -50,7 +51,8 @@ const routes: Routes = [
         resolve: {
             placeofdeliveryOptions: PlaceOfDeliveryResolver,
             deliveryModeOptions: DeliveryModeResolver,
-            arvprophylaxisOptions: ARVProphylaxisResolver
+            arvprophylaxisOptions: ARVProphylaxisResolver,
+            motherstateOptions: MotherStateResolver
         }
     }
 ];

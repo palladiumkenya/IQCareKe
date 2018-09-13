@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, NgZone } from '@angular/core';
 import { PersonHomeService } from '../services/person-home.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import {PatientView} from '../_model/PatientView';
+import { PatientView } from '../_model/PatientView';
 
 @Component({
     selector: 'app-services-list',
@@ -24,9 +24,11 @@ export class ServicesListComponent implements OnInit {
     ngOnInit() {
         this.getPersonEnrolledServices(this.personId);
         this.getPatientByPersonId(this.personId);
-        this.route.params.subscribe(params => {
+
+        /*this.route.params.subscribe(params => {
+            console.log(params);
             this.patientId = params['serviceAreaId'];
-        });
+        });*/
     }
 
     getPersonEnrolledServices(personId: number) {
@@ -41,10 +43,13 @@ export class ServicesListComponent implements OnInit {
 
     getPatientByPersonId(personId: number) {
         this.personhomeservice.getPatientByPersonId(personId).subscribe((res) => {
-         this.Patient = res;
-         console.log(this.Patient);
-         console.log('patentId:' + this.Patient.patientId);
-         if (this.Patient.patientId > 0) { this.hasItems = true; }
+            this.Patient = res;
+            console.log(this.Patient);
+            console.log('patentId:' + this.Patient.patientId);
+            if (this.Patient.patientId > 0) {
+                this.hasItems = true;
+                this.patientId = this.Patient.patientId;
+            }
         });
     }
 
@@ -57,7 +62,8 @@ export class ServicesListComponent implements OnInit {
 
     newEncounter(serviceId: number) {
         this.zone.run(() => {
-            this.router.navigate(['/pmtct/anc/' + this.Patient.patientId ],
+            // :patientId/:personId/:serviceAreaId
+            this.router.navigate(['/pmtct/anc/' + this.Patient.patientId + '/' + this.personId + '/' + serviceId],
                 { relativeTo: this.route });
         });
     }
