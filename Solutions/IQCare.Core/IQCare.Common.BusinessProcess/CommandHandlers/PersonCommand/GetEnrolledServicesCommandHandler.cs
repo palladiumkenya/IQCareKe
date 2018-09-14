@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using IQCare.Common.BusinessProcess.Commands.PersonCommand;
@@ -28,15 +29,24 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.PersonCommand
                 {
                     RegisterPersonService registerPersonService = new RegisterPersonService(_unitOfWork);
                     List<PatientEnrollment> result = new List<PatientEnrollment>();
+                    List<PatientIdentifier> patientIdentifiers = new List<PatientIdentifier>();
+                    List<Identifier> identifiers = new List<Identifier>();
+
                     var patient = await registerPersonService.GetPatientByPersonId(request.PersonId);
                     if (patient != null)
                     {
                         result = await _unitOfWork.Repository<PatientEnrollment>().Get(x => x.PatientId == patient.Id).ToListAsync();
+                        patientIdentifiers = await _unitOfWork.Repository<PatientIdentifier>().Get(x => x.PatientId == patient.Id).ToListAsync();
                     }
+
+                    var allIdentifiers = await _unitOfWork.Repository<Identifier>().GetAllAsync();
+                    identifiers = allIdentifiers.ToList();
 
                     return Library.Result<EnrolledServicesResponse>.Valid(new EnrolledServicesResponse()
                     {
-                        PersonEnrollmentList = result
+                        PersonEnrollmentList = result,
+                        PatientIdentifiers = patientIdentifiers,
+                        Identifiers = identifiers
                     });
                 }
                 catch (Exception e)

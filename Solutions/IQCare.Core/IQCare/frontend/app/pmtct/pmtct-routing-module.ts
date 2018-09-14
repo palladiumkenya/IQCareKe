@@ -1,3 +1,4 @@
+import { PrimaryCareGiverResolver } from './_services/primarycaregiver.resolver';
 import { HeiComponent } from './hei/hei.component';
 import { PreventiveServicesComponent } from './preventive-services/preventive-services.component';
 import { HaartProphylaxisComponent } from './haart-prophylaxis/haart-prophylaxis.component';
@@ -16,6 +17,7 @@ import { MotherReceiveDrugsResolver } from './_services/motherreceivedrugs.resol
 import { HeiMotherRegimenResolver } from './_services/heimotherregimen.resolver';
 import { YesNoResolver } from './_services/yesno.resolver';
 import { MotherDrugsAtInfantEnrollmentResolver } from './_services/motherdrugsatinfantenrollment.resolver';
+import { InfantFeedingOptionsResolver } from './_services/infant-feeding-options.resolver.service';
 
 const routes: Routes = [
     {
@@ -60,7 +62,9 @@ const routes: Routes = [
             motherreceivedrugsOptions: MotherReceiveDrugsResolver,
             heimotherregimenOptions: HeiMotherRegimenResolver,
             yesnoOptions: YesNoResolver,
-            motherdrugsatinfantenrollmentOptions: MotherDrugsAtInfantEnrollmentResolver
+            primarycaregiverOptions: PrimaryCareGiverResolver
+            motherdrugsatinfantenrollmentOptions: MotherDrugsAtInfantEnrollmentResolver,
+            infantFeedingOptions: InfantFeedingOptionsResolver
         }
     }
 ];

@@ -10,11 +10,13 @@ import { SnotifyService } from 'ng-snotify';
 })
 export class MaternalhistoryComponent implements OnInit {
     MaternalHistoryForm: FormGroup;
+
     motherstateOptions: any[] = [];
     motherreceivedrugsOptions: any[] = [];
     heimotherregimenOptions: any[] = [];
     yesnoOptions: any[] = [];
     motherdrugsatinfantenrollmentOptions: any[] = [];
+    primarycaregiverOptions: any[] = [];
 
     @Input('maternalhistoryOptions') maternalhistoryOptions: any;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
@@ -27,6 +29,7 @@ export class MaternalhistoryComponent implements OnInit {
         this.MaternalHistoryForm = this._formBuilder.group({
             motherregisteredinclinic: new FormControl('', [Validators.required]),
             stateofmother: new FormControl('', [Validators.required]),
+            primarycaregiver: new FormControl('', [Validators.required]),
             nameofmother: new FormControl('', [Validators.required]),
             cccno: new FormControl('', [Validators.required]),
             pmtctheimotherreceivedrugs: new FormControl('', [Validators.required]),
@@ -41,12 +44,14 @@ export class MaternalhistoryComponent implements OnInit {
             motherreceivedrugsOptions,
             heimotherregimenOptions,
             yesnoOptions,
-            motherdrugsatinfantenrollmentOptions } = this.maternalhistoryOptions[0];
+            motherdrugsatinfantenrollmentOptions,
+            primarycaregiverOptions } = this.maternalhistoryOptions[0];
         this.motherstateOptions = motherstateOptions;
         this.motherreceivedrugsOptions = motherreceivedrugsOptions;
         this.heimotherregimenOptions = heimotherregimenOptions;
         this.yesnoOptions = yesnoOptions;
         this.motherdrugsatinfantenrollmentOptions = motherdrugsatinfantenrollmentOptions;
+        this.primarycaregiverOptions = primarycaregiverOptions;
 
         this.notify.emit(this.MaternalHistoryForm);
     }
