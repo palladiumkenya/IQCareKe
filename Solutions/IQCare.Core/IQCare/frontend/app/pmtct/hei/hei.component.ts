@@ -23,11 +23,13 @@ export class HeiComponent implements OnInit {
     arvprophylaxisOptions: LookupItemView[] = [];
     placeofdeliveryOptions: LookupItemView[] = [];
     motherstateOptions: LookupItemView[] = [];
+    infantFeedingOptions: LookupItemView[] = [];
 
     isLinear: boolean = true;
     deliveryMatFormGroup: FormArray;
     visitDetailsFormGroup: FormArray;
 
+    infantFeedingFormGroup: FormGroup;
 
     constructor(private route: ActivatedRoute) {
         this.deliveryMatFormGroup = new FormArray([]);
@@ -50,8 +52,9 @@ export class HeiComponent implements OnInit {
                 motherreceivedrugsOptions,
                 heimotherregimenOptions,
                 yesnoOptions,
-                motherdrugsatinfantenrollmentOptions,
                 primarycaregiverOptions
+                motherdrugsatinfantenrollmentOptions,
+                infantFeedingOptions
             } = res;
             this.placeofdeliveryOptions = placeofdeliveryOptions['lookupItems'];
             this.deliveryModeOptions = deliveryModeOptions['lookupItems'];
@@ -62,6 +65,7 @@ export class HeiComponent implements OnInit {
             this.yesnoOptions = yesnoOptions['lookupItems'];
             this.motherdrugsatinfantenrollmentOptions = motherdrugsatinfantenrollmentOptions['lookupItems'];
             this.primarycaregiverOptions = primarycaregiverOptions['lookupItems'];
+            this.infantFeedingOptions = infantFeedingOptions['lookupItems'];
         });
 
         this.deliveryOptions.push({
@@ -95,4 +99,8 @@ export class HeiComponent implements OnInit {
     onVisitDetailsNotify(formGroup: FormGroup): void {
         this.visitDetailsFormGroup.push(formGroup);
     }
+    onInfantFeedingNotify(formGroup: FormGroup): void {
+        this.infantFeedingFormGroup = formGroup;
+    }
+
 }
