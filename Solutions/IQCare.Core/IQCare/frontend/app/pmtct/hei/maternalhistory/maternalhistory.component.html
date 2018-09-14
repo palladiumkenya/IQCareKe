@@ -30,6 +30,18 @@
                     </mat-select>
                 </mat-form-field>
             </div>
+
+            <div class="col-lg-4 col-sm-4 col-xs-12">
+                <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                    <mat-label>Primary Care Giver</mat-label>
+                    <mat-select formControlName="primarycaregiver" required>
+                        <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let primarycaregiverOption of primarycaregiverOptions" [value]="primarycaregiverOption.itemId">
+                            {{ primarycaregiverOption.itemName }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
         </div>
 
         <div class="col-lg-12 col-sm-12 col-xs-12">

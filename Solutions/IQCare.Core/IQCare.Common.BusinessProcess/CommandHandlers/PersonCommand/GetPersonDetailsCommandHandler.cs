@@ -27,7 +27,7 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.PersonCommand
                 {
                     StringBuilder sql = new StringBuilder();
                     sql.Append("exec pr_OpenDecryptedSession;");
-                    sql.Append($"SELECT * FROM Api_PatientsView WHERE PersonId = {request.PersonId};");
+                    sql.Append($"SELECT TOP 1 * FROM Api_PatientsView WHERE PersonId = {request.PersonId};");
                     sql.Append("exec [dbo].[pr_CloseDecryptedSession];");
 
                     var result = await _unitOfWork.Repository<PatientLookupView>().FromSql(sql.ToString());

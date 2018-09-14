@@ -85,10 +85,12 @@ export class EnrollmentServicesComponent implements OnInit {
 
             const enrollment = new Enrollment();
             for (let i = 0; i < identifiers.length; i++) {
-                enrollment.ServiceIdentifiersList.push({
-                    'IdentifierId': identifiers[i]['identifierId'],
-                    'IdentifierValue': identifiers[i]['name']
-                });
+                if (identifiers[i]['name'] != null || identifiers[i]['name'] != '') {
+                    enrollment.ServiceIdentifiersList.push({
+                        'IdentifierId': identifiers[i]['identifierId'],
+                        'IdentifierValue': identifiers[i]['name']
+                    });
+                }
             }
             enrollment.DateOfEnrollment = EnrollmentDate;
             enrollment.ServiceAreaId = this.serviceId;

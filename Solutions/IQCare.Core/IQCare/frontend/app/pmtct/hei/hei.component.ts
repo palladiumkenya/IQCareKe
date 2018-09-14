@@ -11,10 +11,13 @@ import { FormGroup, FormArray } from '@angular/forms';
 export class HeiComponent implements OnInit {
     deliveryOptions: any[] = [];
     maternalhistoryOptions: any[] = [];
+    hivtestingOptions: any[] = [];
+
     motherreceivedrugsOptions: any[] = [];
     heimotherregimenOptions: any[] = [];
     yesnoOptions: any[] = [];
     motherdrugsatinfantenrollmentOptions: any[] = [];
+    primarycaregiverOptions: any[] = [];
 
     deliveryModeOptions: LookupItemView[] = [];
     arvprophylaxisOptions: LookupItemView[] = [];
@@ -47,7 +50,8 @@ export class HeiComponent implements OnInit {
                 motherreceivedrugsOptions,
                 heimotherregimenOptions,
                 yesnoOptions,
-                motherdrugsatinfantenrollmentOptions
+                motherdrugsatinfantenrollmentOptions,
+                primarycaregiverOptions
             } = res;
             this.placeofdeliveryOptions = placeofdeliveryOptions['lookupItems'];
             this.deliveryModeOptions = deliveryModeOptions['lookupItems'];
@@ -57,6 +61,7 @@ export class HeiComponent implements OnInit {
             this.heimotherregimenOptions = heimotherregimenOptions['lookupItems'];
             this.yesnoOptions = yesnoOptions['lookupItems'];
             this.motherdrugsatinfantenrollmentOptions = motherdrugsatinfantenrollmentOptions['lookupItems'];
+            this.primarycaregiverOptions = primarycaregiverOptions['lookupItems'];
         });
 
         this.deliveryOptions.push({
@@ -70,7 +75,12 @@ export class HeiComponent implements OnInit {
             'motherreceivedrugsOptions': this.motherreceivedrugsOptions,
             'heimotherregimenOptions': this.heimotherregimenOptions,
             'yesnoOptions': this.yesnoOptions,
-            'motherdrugsatinfantenrollmentOptions': this.motherdrugsatinfantenrollmentOptions
+            'motherdrugsatinfantenrollmentOptions': this.motherdrugsatinfantenrollmentOptions,
+            'primarycaregiverOptions': this.primarycaregiverOptions
+        });
+
+        this.hivtestingOptions.push({
+
         });
     }
 

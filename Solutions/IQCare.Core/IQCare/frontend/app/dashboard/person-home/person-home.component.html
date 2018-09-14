@@ -8,7 +8,7 @@
                 <div class="col-lg-3 col-sm-3 col-xs-12 profile-info">
                     <div class="header-fullname"><strong>{{person.lastName}},{{person.midName}} {{person.firstName}}</strong></div>
                     <div class="stats-title">
-                             <span class="">{{person.patientType}} Patient</span>
+                        <span class="">{{person.patientType}} Patient</span>
                     </div>
                     <!--<div class="header-information">
 
@@ -79,7 +79,8 @@
 
                                                         <div class="col-lg-8 col-sm-8 col-xs-8 text-align-left padding-10">
                                                             <span class="databox-header carbon no-margin">ART SUMMARIES</span>
-                                                            <span class="databox-text lightcarbon no-margin blue"> TDF/3TC/EFV
+                                                            <span class="databox-text lightcarbon no-margin blue">
+                                                                TDF/3TC/EFV
                                                                 | 7th-June-2017 </span>
                                                         </div>
                                                     </div>
@@ -163,8 +164,10 @@
                                                 <div class="databox">
                                                     <div class="databox-left bg-white">
                                                         <div class="databox-sparkline">
-                                                            <span data-sparkline="bar" data-height="40px" data-width="100%" data-barcolor="#57b5e3" data-negbarcolor="#a0d468" data-zerocolor="#d73d32"
-                                                                data-barwidth="5px" data-barspacing="1px">
+                                                            <span data-sparkline="bar" data-height="40px" data-width="100%"
+                                                                data-barcolor="#57b5e3" data-negbarcolor="#a0d468"
+                                                                data-zerocolor="#d73d32" data-barwidth="5px"
+                                                                data-barspacing="1px">
                                                                 5,6,7,2,0,-4,-2,4
                                                             </span>
                                                         </div>
@@ -183,7 +186,7 @@
                                         </div>
                                         <h6 class="row-title before-yellow">Enrollment Summary</h6>
                                         <div class="row">
-                                            <app-services-list [personId]="personId" [services]="services"></app-services-list>
+                                            <app-services-list [personId]="personId" [services]="services" [person]="person"></app-services-list>
                                         </div>
                                     </div>
                                 </div>
@@ -244,7 +247,8 @@
                                                 </p>
                                             </div>
                                             <div class="timeline-body">
-                                                <p>Outdoor visit at California State Route 85 with John Boltana &amp; Harry
+                                                <p>Outdoor visit at California State Route 85 with John Boltana &amp;
+                                                    Harry
                                                     Piterson regarding to setup a new show room.</p>
                                                 <p>
                                                     <i class="orange fa fa-exclamation"></i> New task added for <span><a
@@ -280,10 +284,12 @@
                                             </div>
                                             <div class="timeline-body">
                                                 <p>
-                                                    Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem
+                                                    Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus.
+                                                    Maecenas tempus, tellus eget condimentum rhoncus, sem
                                                     quam semper libero, sem neque sed ipsum.
                                                 </p>
-                                                Tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit
+                                                Tellus eget condimentum rhoncus, sem quam semper libero, sit amet
+                                                adipiscing sem neque sed ipsum. Nam quam nunc, blandit
                                             </div>
                                         </div>
                                     </li>
@@ -374,8 +380,10 @@
                                                 <div class="tl-wide text-center" style="padding: 5px; margin-top:10px; margin-bottom: 10px;">
                                                     <img src="assets/img/temp1.png" alt="" style="max-height: 158px;max-width: 100%;">
                                                 </div>
-                                                <i class="text-muted text-sm">Lorem ipsum dolor sit amet, consectetur adipisicing
-                                                    elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</i>
+                                                <i class="text-muted text-sm">Lorem ipsum dolor sit amet, consectetur
+                                                    adipisicing
+                                                    elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                                                    aliqua.</i>
                                             </div>
                                         </div>
                                     </li>
@@ -408,7 +416,8 @@
                                             </div>
                                             <div class="contact-info">
                                                 <p>
-                                                    Address<br> Department 98<br> 44-46 Morningside Road<br> Toronto, Canada
+                                                    Address<br> Department 98<br> 44-46 Morningside Road<br> Toronto,
+                                                    Canada
                                                 </p>
                                                 <p>
                                                     Office<br> 44-46 Morningside Road<br> Toronto, Canada

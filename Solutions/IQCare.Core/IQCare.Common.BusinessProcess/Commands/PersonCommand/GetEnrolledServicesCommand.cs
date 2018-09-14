@@ -12,5 +12,7 @@ namespace IQCare.Common.BusinessProcess.Commands.PersonCommand
     public class EnrolledServicesResponse
     {
         public List<PatientEnrollment> PersonEnrollmentList { get; set; }
+        public List<PatientIdentifier> PatientIdentifiers { get; set; }
+        public List<Identifier> Identifiers { get; set; }
     }
 }

@@ -23,3 +23,12 @@ BEGIN
 	VALUES(5, N'Maternity', N'Maternity', N'Maternity', 1, GETDATE(), 0);
 	SET IDENTITY_INSERT [dbo].[ServiceArea] OFF
 END
+
+
+IF NOT EXISTS(SELECT 1 FROM [dbo].[ServiceArea] WHERE Name = 'HEI')
+BEGIN
+	SET IDENTITY_INSERT [dbo].[ServiceArea] ON
+	INSERT INTO [dbo].[ServiceArea]([Id],[Name],[Code],[DisplayName],[CreatedBy],[CreateDate],[DeleteFlag])
+	VALUES(6, N'HEI', N'HEI', N'HIV EXPOSED INFANTS', 1, GETDATE(), 0);
+	SET IDENTITY_INSERT [dbo].[ServiceArea] OFF
+END

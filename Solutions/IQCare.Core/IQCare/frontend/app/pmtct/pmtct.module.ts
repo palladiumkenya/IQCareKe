@@ -1,3 +1,4 @@
+import { PrimaryCareGiverResolver } from './_services/primarycaregiver.resolver';
 import { MotherStateResolver } from './_services/motherstate.resolver';
 import { ARVProphylaxisResolver } from './_services/arvprophylaxis.resolver';
 import { DeliveryModeResolver } from './_services/deliverymode.resolver';
@@ -39,6 +40,7 @@ import { MotherReceiveDrugsResolver } from './_services/motherreceivedrugs.resol
 import { HeiMotherRegimenResolver } from './_services/heimotherregimen.resolver';
 import { YesNoResolver } from './_services/yesno.resolver';
 import { MotherDrugsAtInfantEnrollmentResolver } from './_services/motherdrugsatinfantenrollment.resolver';
+import { HeiHivtestingComponent } from './hei/hei-hivtesting/hei-hivtesting.component';
 
 
 @NgModule({
@@ -72,7 +74,8 @@ import { MotherDrugsAtInfantEnrollmentResolver } from './_services/motherdrugsat
         ImmunizationHistoryComponent,
         MilestonesComponent,
         DeliveryComponent,
-        MaternalhistoryComponent
+        MaternalhistoryComponent,
+        HeiHivtestingComponent
     ],
     providers: [
         PlaceOfDeliveryResolver,
@@ -82,7 +85,8 @@ import { MotherDrugsAtInfantEnrollmentResolver } from './_services/motherdrugsat
         MotherReceiveDrugsResolver,
         HeiMotherRegimenResolver,
         YesNoResolver,
-        MotherDrugsAtInfantEnrollmentResolver
+        MotherDrugsAtInfantEnrollmentResolver,
+        PrimaryCareGiverResolver
     ]
 })
 export class PmtctModule { }
