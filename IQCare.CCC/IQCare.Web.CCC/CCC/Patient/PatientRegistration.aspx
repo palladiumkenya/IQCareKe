@@ -293,7 +293,7 @@
 						</div>
 
 							<div class="col-md-12 form-group">
-								<div class="col-md-3">
+								<div class="col-md-3" id="idnumbersection">
 									<div class="col-md-12"><label for="NationalId" class="control-label pull-left">ID Number</label></div>
 									<div class="col-md-12">
 										<asp:TextBox type="text" runat="server" id="NationalId" class="form-control input-sm" placeholder="national id no.." ClientIDMode="Static" data-parsley-length="[7,8]"  />
@@ -600,7 +600,20 @@
 				$("#<%=GurdianMName.ClientID%>").attr('disabled', 'disbaled');
 				$("#<%=GurdianLName.ClientID%>").attr('disabled', 'disbaled');
 				$("#<%=GuardianGender.ClientID%>").attr('disabled', 'disbaled');
-				$("#<%=MaritalStatusId.ClientID%>").attr('disabled', 'disabled');
+                $("#<%=MaritalStatusId.ClientID%>").attr('disabled', 'disabled');
+
+                var patientage = <%=age%>;
+                hideunhideID(patientage);
+
+                function hideunhideID(patientage) {
+                    if (patientage >= 18) {
+                        $('#idnumbersection').show();
+                    }
+                    else {
+                        $('#idnumbersection').hide();
+                    }
+                }
+                if (patientage )
 
 				$('#MyDateOfBirth').datepicker({
 						date:null,
@@ -613,7 +626,7 @@
 					var x = $('#MyDateOfBirth').datepicker('getDate');
 					var age = getAge(x);
 					console.log(age);
-
+                    hideunhideID(age);
 					if (age < 0) {
 						$("#PersonDoB").val("");
 						toastr.error("Patient Date of Birth should not be in the future", "Person Age");
@@ -877,7 +890,8 @@
 					var today = new Date();
 					var birthDate = new Date(dateString);
 					var age = today.getFullYear() - birthDate.getFullYear();
-					var m = today.getMonth() - birthDate.getMonth();
+                    var m = today.getMonth() - birthDate.getMonth();
+                    hideunhideID(patientage);
 					if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) 
 					{
 						age--;
@@ -1617,7 +1631,8 @@
 						$("#<%=GurdianLName.ClientID%>").prop('disabled', true);
 						$("#<%=GuardianGender.ClientID%>").prop('disabled',true);
 						$("#<%=MaritalStatusId.ClientID%>").prop('disabled', false);
-						$("#<%=ISGuardian.ClientID%>").prop('disabled', true);
+                        $("#<%=ISGuardian.ClientID%>").prop('disabled', true);
+                        $("#idnumbersection").show();
 
 						if (patientType == "Transit") {
 							$("#<%=MaritalStatusId.ClientID%>").prop('disabled', true);
@@ -1644,8 +1659,8 @@
 						
 						$("#<%=ISGuardian.ClientID%>").prop('disabled', false);
 
-						$('#PopulationType_1').prop('disabled', true);
-
+                        $('#PopulationType_1').prop('disabled', true);
+                        $("#idnumbersection").hide();
 						$("#<%=KeyPopulationCategoryId.ClientID%>").find('option').remove().end();
 						$("#<%=KeyPopulationCategoryId.ClientID%>").append('<option value="0">N/A</option>');
 						$("#<%=KeyPopulationCategoryId.ClientID%>").prop('disabled', true);
@@ -1802,6 +1817,8 @@
 				}
 
 		});
+
+
 	</script>
 </asp:Content>
 

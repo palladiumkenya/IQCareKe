@@ -374,9 +374,11 @@
                 <xs:element name="Id" type="xs:int" minOccurs="0" />
                 <xs:element name="Name" type="xs:string" minOccurs="0" />
                 <xs:element name="RegimenCode" type="xs:string" minOccurs="0" />
-                <xs:element name="Stage" type="xs:int" minOccurs="0" />
-                <xs:element name="SRNo" type="xs:int" minOccurs="0" />
+                <xs:element name="Stage" type="xs:string" minOccurs="0" />
+                <xs:element name="SRNo" type="xs:string" minOccurs="0" />
                 <xs:element name="DeleteFlag" type="xs:int" minOccurs="0" />
+                <xs:element name="Purpose" type="xs:string" minOccurs="0" />
+                <xs:element name="RegimenLineID" type="xs:int" minOccurs="0" />
               </xs:sequence>
             </xs:complexType>
           </xs:element>
@@ -113592,426 +113594,568 @@
     <Name>AF4B - ABC + 3TC + EFV</Name>
     <RegimenCode>AF4B</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>222</Purpose>
+    <RegimenLineID>1</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>2</Id>
     <Name>AF4A - ABC + 3TC + NVP</Name>
     <RegimenCode>AF4A</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>222</Purpose>
+    <RegimenLineID>1</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>3</Id>
     <Name>AF1B - AZT + 3TC + EFV</Name>
     <RegimenCode>AF1B</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>222</Purpose>
+    <RegimenLineID>1</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>4</Id>
     <Name>AF1A - AZT + 3TC + NVP</Name>
     <RegimenCode>AF1A</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>222</Purpose>
+    <RegimenLineID>1</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>5</Id>
     <Name>AF3B - d4T + 3TC + EFV</Name>
     <RegimenCode>AF3B</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>222</Purpose>
+    <RegimenLineID>1</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>6</Id>
     <Name>AF3A - d4T + 3TC + NVP</Name>
     <RegimenCode>AF3A</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>222</Purpose>
+    <RegimenLineID>1</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>7</Id>
     <Name>AF2B - TDF + 3TC + EFV</Name>
     <RegimenCode>AF2B</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>222</Purpose>
+    <RegimenLineID>1</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>8</Id>
     <Name>AF2A - TDF + 3TC + NVP</Name>
     <RegimenCode>AF2A</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>222</Purpose>
+    <RegimenLineID>1</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>9</Id>
     <Name>AF5X - other Adult 1st line</Name>
     <RegimenCode>AF5X</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>222</Purpose>
+    <RegimenLineID>1</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>10</Id>
     <Name>AS5B - ABC + 3TC + ATV/r</Name>
     <RegimenCode>AS5B</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>222</Purpose>
+    <RegimenLineID>3</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>11</Id>
     <Name>AS5A - ABC + 3TC + LPV/r</Name>
     <RegimenCode>AS5A</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>222</Purpose>
+    <RegimenLineID>3</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>12</Id>
     <Name>AS1B - AZT + 3TC + ATV/r</Name>
     <RegimenCode>AS1B</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>222</Purpose>
+    <RegimenLineID>3</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>13</Id>
     <Name>AS1A - AZT + 3TC + LPV/r</Name>
     <RegimenCode>AS1A</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>222</Purpose>
+    <RegimenLineID>3</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>14</Id>
     <Name>AS2C - TDF + 3TC + ATV/r</Name>
     <RegimenCode>AS2C</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>222</Purpose>
+    <RegimenLineID>3</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>15</Id>
     <Name>AS2A - TDF + 3TC + LPV/r</Name>
     <RegimenCode>AS2A</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>222</Purpose>
+    <RegimenLineID>3</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>16</Id>
     <Name>AS6X - other Adult 2nd line</Name>
     <RegimenCode>AS6X</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>222</Purpose>
+    <RegimenLineID>3</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>17</Id>
     <Name>AT2A - ETV + 3TC + DRV + RTV</Name>
     <RegimenCode>AT2A</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>222</Purpose>
+    <RegimenLineID>5</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>18</Id>
     <Name>AT1A - RAL + 3TC + DRV + RTV</Name>
     <RegimenCode>AT1A</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>222</Purpose>
+    <RegimenLineID>5</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>19</Id>
     <Name>AT1B - RAL + 3TC + DRV + RTV + AZT</Name>
     <RegimenCode>AT1B</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>222</Purpose>
+    <RegimenLineID>5</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>20</Id>
     <Name>AT1C - RAL + 3TC + DRV + RTV + TDF</Name>
     <RegimenCode>AT1C</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>222</Purpose>
+    <RegimenLineID>5</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>21</Id>
     <Name>AT2X - other Adult 3rd line</Name>
     <RegimenCode>AT2X</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>222</Purpose>
+    <RegimenLineID>5</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>22</Id>
     <Name>CF2E - ABC + 3TC + ATV/r</Name>
     <RegimenCode>CF2E</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>222</Purpose>
+    <RegimenLineID>1</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>23</Id>
     <Name>CF2B - ABC + 3TC + EFV</Name>
     <RegimenCode>CF2B</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>222</Purpose>
+    <RegimenLineID>1</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>24</Id>
     <Name>CF2D - ABC + 3TC + LPV/r</Name>
     <RegimenCode>CF2D</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>222</Purpose>
+    <RegimenLineID>1</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>25</Id>
     <Name>CF2A - ABC + 3TC + NVP</Name>
     <RegimenCode>CF2A</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>222</Purpose>
+    <RegimenLineID>1</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>26</Id>
     <Name>CF1D - AZT + 3TC + ATV/r</Name>
     <RegimenCode>CF1D</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>222</Purpose>
+    <RegimenLineID>1</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>27</Id>
     <Name>CF1B - AZT + 3TC + EFV</Name>
     <RegimenCode>CF1B</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>222</Purpose>
+    <RegimenLineID>1</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>28</Id>
     <Name>CF1C - AZT + 3TC + LPV/r</Name>
     <RegimenCode>CF1C</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>222</Purpose>
+    <RegimenLineID>1</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>29</Id>
     <Name>CF1A - AZT + 3TC + NVP</Name>
     <RegimenCode>CF1A</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>222</Purpose>
+    <RegimenLineID>1</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>30</Id>
     <Name>CF3B - d4T + 3TC + EFV for children weighing &gt;=  25kg</Name>
     <RegimenCode>CF3B</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>222</Purpose>
+    <RegimenLineID>1</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>31</Id>
     <Name>CF3A - d4T + 3TC + NVP for children weighing &gt;=  25kg</Name>
     <RegimenCode>CF3A</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>222</Purpose>
+    <RegimenLineID>1</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>32</Id>
     <Name>CF4D - TDF + 3TC + ATV/r</Name>
     <RegimenCode>CF4D</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>222</Purpose>
+    <RegimenLineID>1</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>33</Id>
     <Name>CF4B - TDF + 3TC + EFV</Name>
     <RegimenCode>CF4B</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>222</Purpose>
+    <RegimenLineID>1</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>34</Id>
     <Name>CF4C - TDF + 3TC + LPV/r</Name>
     <RegimenCode>CF4C</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>222</Purpose>
+    <RegimenLineID>1</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>35</Id>
     <Name>CF4A - TDF + 3TC + NVP</Name>
     <RegimenCode>CF4A</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>222</Purpose>
+    <RegimenLineID>1</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>36</Id>
     <Name>CF5X - other Paediatric 1st line</Name>
     <RegimenCode>CF5X</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>222</Purpose>
+    <RegimenLineID>1</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>37</Id>
     <Name>CS2C - ABC + 3TC + ATV/r</Name>
     <RegimenCode>CS2C</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>222</Purpose>
+    <RegimenLineID>3</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>38</Id>
     <Name>CS2A - ABC + 3TC + LPV/r</Name>
     <RegimenCode>CS2A</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>222</Purpose>
+    <RegimenLineID>3</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>39</Id>
     <Name>CS1B - AZT + 3TC + ATV/r</Name>
     <RegimenCode>CS1B</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>222</Purpose>
+    <RegimenLineID>3</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>40</Id>
     <Name>CS1A - AZT + 3TC + LPV/r</Name>
     <RegimenCode>CS1A</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>222</Purpose>
+    <RegimenLineID>3</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>41</Id>
     <Name>CS4X - other Paediatric 2nd line</Name>
     <RegimenCode>CS4X</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>222</Purpose>
+    <RegimenLineID>3</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>42</Id>
     <Name>CT2A - ETV + 3TC + DRV + RTV</Name>
     <RegimenCode>CT2A</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>222</Purpose>
+    <RegimenLineID>5</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>43</Id>
     <Name>CT1A - RAL + 3TC + DRV + RTV</Name>
     <RegimenCode>CT1A</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>222</Purpose>
+    <RegimenLineID>5</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>44</Id>
     <Name>CT1C - RAL + 3TC + DRV + RTV + ABC</Name>
     <RegimenCode>CT1C</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>222</Purpose>
+    <RegimenLineID>5</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>45</Id>
     <Name>CT1B - RAL + 3TC + DRV + RTV + AZT</Name>
     <RegimenCode>CT1B</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>222</Purpose>
+    <RegimenLineID>5</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>46</Id>
     <Name>CT3X - other Paediatric 3rd line</Name>
     <RegimenCode>CT3X</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>222</Purpose>
+    <RegimenLineID>5</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>47</Id>
     <Name>PA4X - other PEP regimens - Adults</Name>
     <RegimenCode>PA4X</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>224</Purpose>
+    <RegimenLineID>6</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>48</Id>
     <Name>PA1C - AZT + 3TC + ATV/r</Name>
     <RegimenCode>PA1C</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>224</Purpose>
+    <RegimenLineID>6</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>49</Id>
     <Name>PA1B - AZT + 3TC + LPV/r</Name>
     <RegimenCode>PA1B</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>224</Purpose>
+    <RegimenLineID>6</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>50</Id>
     <Name>PA3C - TDF + 3TC + ATV/r</Name>
     <RegimenCode>PA3C</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>224</Purpose>
+    <RegimenLineID>6</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>51</Id>
     <Name>PA3B - TDF + 3TC + LPV/r</Name>
     <RegimenCode>PA3B</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>224</Purpose>
+    <RegimenLineID>6</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>52</Id>
     <Name>PC3A - ABC + 3TC + LPV/r</Name>
     <RegimenCode>PC3A</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>224</Purpose>
+    <RegimenLineID>6</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>53</Id>
     <Name>PC4X - other PEP regimens - Children</Name>
     <RegimenCode>PC4X</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>224</Purpose>
+    <RegimenLineID>6</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>54</Id>
     <Name>PC1A - AZT + 3TC + LPV/r</Name>
     <RegimenCode>PC1A</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>224</Purpose>
+    <RegimenLineID>6</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>55</Id>
     <Name>PM1X - other PMTCT regimens - Women</Name>
     <RegimenCode>PM1X</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>223</Purpose>
+    <RegimenLineID>7</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>56</Id>
     <Name>PM10 - AZT + 3TC + ATV/r</Name>
     <RegimenCode>PM10</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>223</Purpose>
+    <RegimenLineID>7</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>57</Id>
     <Name>PM4 - AZT + 3TC + EFV</Name>
     <RegimenCode>PM4</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>223</Purpose>
+    <RegimenLineID>7</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>58</Id>
     <Name>PM5 - AZT + 3TC + LPV/r</Name>
     <RegimenCode>PM5</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>223</Purpose>
+    <RegimenLineID>7</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>59</Id>
     <Name>PM3 - AZT + 3TC + NVP</Name>
     <RegimenCode>PM3</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>223</Purpose>
+    <RegimenLineID>7</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>60</Id>
     <Name>PM1 - AZT from 14Wks to Delivery + NVP stat + AZT stat + 3TC BD during labour; then AZT/3TC 1 Wk post-partum</Name>
     <RegimenCode>PM1</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>223</Purpose>
+    <RegimenLineID>7</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>61</Id>
     <Name>PM2 - NVP stat + AZT stat + 3TC BD during labour; then AZT/3TC 1wk post-partum</Name>
     <RegimenCode>PM2</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>223</Purpose>
+    <RegimenLineID>7</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>62</Id>
     <Name>PM11 - TDF + 3TC + ATV/r</Name>
     <RegimenCode>PM11</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>223</Purpose>
+    <RegimenLineID>7</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>63</Id>
     <Name>PM9 - TDF + 3TC + EFV</Name>
     <RegimenCode>PM9</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>223</Purpose>
+    <RegimenLineID>7</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>64</Id>
     <Name>PM7 - TDF + 3TC + LPV/r</Name>
     <RegimenCode>PM7</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>223</Purpose>
+    <RegimenLineID>7</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>65</Id>
     <Name>PM6 - TDF + 3TC + NVP</Name>
     <RegimenCode>PM6</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>223</Purpose>
+    <RegimenLineID>7</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>66</Id>
     <Name>PC5 - 3TC Liquid BD</Name>
     <RegimenCode>PC5</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>223</Purpose>
+    <RegimenLineID>7</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>67</Id>
     <Name>PC1X - other PMTCT regimens - Infants</Name>
     <RegimenCode>PC1X</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>223</Purpose>
+    <RegimenLineID>7</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>68</Id>
     <Name>PC4 - AZT Liquid BD for 6 weeks </Name>
     <RegimenCode>PC4</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>223</Purpose>
+    <RegimenLineID>7</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>69</Id>
     <Name>PC6 - NVP Liquid OD for 12 weeks </Name>
     <RegimenCode>PC6</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>223</Purpose>
+    <RegimenLineID>7</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>70</Id>
     <Name>PC2 - NVP OD for Breastfeeding Infants until 1 week after complete cessation of Breastfeeding </Name>
     <RegimenCode>PC2</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>223</Purpose>
+    <RegimenLineID>7</RegimenLineID>
   </Mst_Regimen>
   <Mst_Regimen>
     <Id>71</Id>
     <Name>PC1 - NVP OD up to 6 weeks of age </Name>
     <RegimenCode>PC1</RegimenCode>
     <DeleteFlag>0</DeleteFlag>
+    <Purpose>223</Purpose>
+    <RegimenLineID>7</RegimenLineID>
   </Mst_Regimen>
   <Mst_CouncellingType>
     <Id>2</Id>

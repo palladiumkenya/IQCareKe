@@ -850,12 +850,21 @@
 								</div>
 							</div>
 
-							<div class="col-md-2 col-xs-12">
+                            <div class="col-md-2 col-xs-12">
+								<div class="col-md-12 col-xs-12 col-sm-12">
+									<label class="control-label pull-left">HBV Infected </label>
+								</div>
+								<div class="col-md-12">
+									<asp:RadioButtonList id="BVCoInfection" runat="server" RepeatDirection="Horizontal">
+                                    </asp:RadioButtonList>
+								</div>
+							</div>
+							<%--<div class="col-md-2 col-xs-12">
 								<label class="checkbox-custom checkbox-inline highlight" data-initialize="checkbox" id="lblBVCoInfection">
 									<input class="sr-only" type="checkbox" id="BVCoInfection" value="true">
 									<span class="checkbox-label">HBV Infected</span>
 								</label>
-							</div>
+							</div>--%>
 
 <%--                            <div class="col-md-2 col-xs-12">
 								<label class="checkbox-custom checkbox-inline highlight" data-initialize="checkbox" id="lblPregnancy">

@@ -58,6 +58,9 @@ namespace IQCare.Web.CCC.OneTimeEvents
         {
             if (!IsPostBack)
             {
+                LookupLogic lookUp = new LookupLogic();
+                lookUp.populateRBL(BVCoInfection, "GeneralYesNo");
+
                 ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
                 IPatientVitals patientVitals = (IPatientVitals)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientVitals, BusinessProcess.CCC");
 
