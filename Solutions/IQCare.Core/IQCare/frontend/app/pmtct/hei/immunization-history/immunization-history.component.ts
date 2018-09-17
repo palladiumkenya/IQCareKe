@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { SnotifyService } from 'ng-snotify';
 import { Subscription } from 'rxjs/index';
 import { LookupItemService } from '../../../shared/_services/lookup-item.service';
@@ -14,6 +14,11 @@ export class ImmunizationHistoryComponent implements OnInit {
 
     public ImmunizationHistoryFormGroup: FormGroup;
     public lookupItems$: Subscription;
+    public periods: any[] = [];
+    public vaccines: any[] = [];
+
+    @Input('immunizationOptions') immunizationOptions: any;
+    @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     constructor(private _formBuilder: FormBuilder,
         private _lookupItemService: LookupItemService,
@@ -23,26 +28,14 @@ export class ImmunizationHistoryComponent implements OnInit {
     ngOnInit() {
 
         this.ImmunizationHistoryFormGroup = this._formBuilder.group({
-            breastExamDone: ['', Validators.required]
+            period: new FormControl('', [Validators.required]),
+            immunizationGiven: new FormControl('', [Validators.required]),
+            dateImmunized: new FormControl('', [Validators.required]),
+            nextSchedule: new FormControl('', [Validators.required])
         });
+
+        this.notify.emit(this.ImmunizationHistoryFormGroup);
     }
 
-    public getLookupOptions(groupName: string, masterName: any[]) {
-        this.lookupItems$ = this._lookupItemService.getByGroupName(groupName)
-            .subscribe(
-                p => {
-                    const lookupOptions = p['lookupItems'];
-                    for (let i = 0; i < lookupOptions.length; i++) {
-                        masterName.push({ 'itemId': lookupOptions[i]['itemId'], 'itemName': lookupOptions[i]['itemName'] });
-                    }
-                },
-                (err) => {
-                    console.log(err);
-                    this.snotifyService.error('Error fetching lookups' + err, 'Encounter', this.notificationService.getConfig());
-                },
-                () => {
-                    console.log(this.lookupItems$);
-                });
-    }
 
 }

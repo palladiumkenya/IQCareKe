@@ -28,12 +28,16 @@ export class HeiComponent implements OnInit {
     isLinear: boolean = true;
     deliveryMatFormGroup: FormArray;
     visitDetailsFormGroup: FormArray;
+    immunizationHistoryFormGroup: FormArray;
+    milestonesFormGroup: FormArray;
 
     infantFeedingFormGroup: FormGroup;
 
     constructor(private route: ActivatedRoute) {
         this.deliveryMatFormGroup = new FormArray([]);
         this.visitDetailsFormGroup = new FormArray([]);
+        this.immunizationHistoryFormGroup = new FormArray([]);
+        this.milestonesFormGroup = new FormArray([]);
     }
 
     ngOnInit() {
@@ -56,6 +60,8 @@ export class HeiComponent implements OnInit {
                 motherdrugsatinfantenrollmentOptions,
                 infantFeedingOptions
             } = res;
+            console.log('test options');
+            console.log(res);
             this.placeofdeliveryOptions = placeofdeliveryOptions['lookupItems'];
             this.deliveryModeOptions = deliveryModeOptions['lookupItems'];
             this.arvprophylaxisOptions = arvprophylaxisOptions['lookupItems'];
@@ -105,5 +111,13 @@ export class HeiComponent implements OnInit {
 
     onCompleteEncounter() {
         console.log(this.deliveryMatFormGroup.value);
+    }
+
+    onMilestonesNotify(formGroup: FormGroup): void {
+        this.milestonesFormGroup.push(formGroup);
+    }
+
+    onImmunizationHistory(formGroup: FormGroup): void {
+        this.immunizationHistoryFormGroup.push(formGroup);
     }
 }

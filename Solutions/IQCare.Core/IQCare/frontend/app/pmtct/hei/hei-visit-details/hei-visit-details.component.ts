@@ -23,10 +23,6 @@ export class HeiVisitDetailsComponent implements OnInit {
         private notificationService: NotificationService) { }
 
     ngOnInit() {
-        /* this.HeiVisitDetailsFormGroup = this._formBuilder.group({
-             visitType: ['', Validators.required],
-             visitDate: ['', Validators.required]
-         }); */
 
         this.HeiVisitDetailsFormGroup = this._formBuilder.group({
             visitType: new FormControl('', [Validators.required]),
