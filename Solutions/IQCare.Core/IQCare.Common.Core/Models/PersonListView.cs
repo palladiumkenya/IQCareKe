@@ -17,5 +17,6 @@ namespace IQCare.Common.Core.Models
         public bool DeleteFlag { get; set; }
         public string IdentifierValue { get; set; }
         public DateTime? DateOfBirth { get; set; }
+        public string MobileNumber { get; set; }
     }
 }
