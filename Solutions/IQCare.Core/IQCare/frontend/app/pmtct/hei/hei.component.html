@@ -34,7 +34,7 @@
 
                                         <!-- add Maternity History Component to Stepper -->
                                         <app-maternalhistory (notify)="onMatHistoryNotify($event)"
-                                                             [maternalhistoryOptions]="maternalhistoryOptions">
+                                            [maternalhistoryOptions]="maternalhistoryOptions">
                                         </app-maternalhistory>
 
                                         <div>
@@ -75,8 +75,8 @@
                                             <span matTooltip="HIV Testing">HIV Testing</span>
                                         </ng-template>
 
-                                        <!-- add HEI HIV testing -->
-                                        <app-hei-hivtesting></app-hei-hivtesting>
+                                        <!-- add HEI HIV testing 
+                                        <app-hei-hivtesting></app-hei-hivtesting>-->
 
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
@@ -92,18 +92,33 @@
                                         </ng-template>
                                     </mat-step>
 
-                                    <mat-step [completed]="false" [stepControl]="formGroupInfantFeeding">
+                                    <mat-step [completed]="true" [stepControl]="formGroupInfantFeeding">
                                         <ng-template matStepLabel>
                                             <span matTooltip="Infant Feeding">Infant Feeding</span>
                                         </ng-template>
 
                                         <app-infant-feeding (notify)="onInfantFeedingNotify($event)"
-                                                            [infantFeedingOptions]="infantFeedingOptions">
+                                            [infantFeedingOptions]="infantFeedingOptions">
                                         </app-infant-feeding>
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
                                             &nbsp;&nbsp;
                                             <button mat-raised-button color="accent" matStepperNext type="button">Next</button>
+                                        </div>
+                                    </mat-step>
+
+                                    <mat-step [completed]="false" [stepControl]="">
+                                        <ng-template matStepLabel>
+                                            <span matTooltip="Infant Feeding">Infant Feeding</span>
+                                        </ng-template>
+
+                                        <div>
+                                            <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
+                                            &nbsp;&nbsp;
+                                            <button mat-raised-button color="accent" (click)="onCompleteEncounter()"
+                                                type="button">
+                                                Complete Ecounter
+                                            </button>
                                         </div>
                                     </mat-step>
 

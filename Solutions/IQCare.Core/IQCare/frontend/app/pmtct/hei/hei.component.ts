@@ -52,7 +52,7 @@ export class HeiComponent implements OnInit {
                 motherreceivedrugsOptions,
                 heimotherregimenOptions,
                 yesnoOptions,
-                primarycaregiverOptions
+                primarycaregiverOptions,
                 motherdrugsatinfantenrollmentOptions,
                 infantFeedingOptions
             } = res;
@@ -103,4 +103,7 @@ export class HeiComponent implements OnInit {
         this.infantFeedingFormGroup = formGroup;
     }
 
+    onCompleteEncounter() {
+        console.log(this.deliveryMatFormGroup.value);
+    }
 }

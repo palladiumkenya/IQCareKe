@@ -63,9 +63,16 @@ export class ServicesListComponent implements OnInit {
                     break;
                 case 'HEI':
                     this.zone.run(() => {
-                        // :patientId/:personId/:serviceAreaId
                         this.router.navigate(['/pmtct/hei/' + this.patientId + '/' + this.personId + '/' + serviceId],
                             { relativeTo: this.route });
+                    });
+                    break;
+                case 'HTS':
+                    this.zone.run(() => {
+                        localStorage.setItem('personId', this.personId.toString());
+                        localStorage.setItem('patientId', this.patientId.toString());
+                        localStorage.setItem('serviceAreaId', serviceId.toString());
+                        this.router.navigate(['/registration/home/'], { relativeTo: this.route });
                     });
                     break;
             }
@@ -107,7 +114,6 @@ export class ServicesListComponent implements OnInit {
                     break;
             }
         }
-        console.log(this.person);
         return isEligible;
     }
 

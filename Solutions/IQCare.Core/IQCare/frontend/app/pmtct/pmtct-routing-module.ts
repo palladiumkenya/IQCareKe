@@ -62,7 +62,7 @@ const routes: Routes = [
             motherreceivedrugsOptions: MotherReceiveDrugsResolver,
             heimotherregimenOptions: HeiMotherRegimenResolver,
             yesnoOptions: YesNoResolver,
-            primarycaregiverOptions: PrimaryCareGiverResolver
+            primarycaregiverOptions: PrimaryCareGiverResolver,
             motherdrugsatinfantenrollmentOptions: MotherDrugsAtInfantEnrollmentResolver,
             infantFeedingOptions: InfantFeedingOptionsResolver
         }
