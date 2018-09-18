@@ -17,7 +17,9 @@ export class InfantFeedingOptionsResolver implements Resolve<Observable<LookupIt
 
     public resolve(
         route: ActivatedRouteSnapshot,
-        state: RouterStateSnapshot): Observable<LookupItemView[]> | Observable<Observable<LookupItemView[]>> | Promise<Observable<LookupItemView[]>> {
+        state: RouterStateSnapshot): Observable<LookupItemView[]> 
+        | Observable<Observable<LookupItemView[]>> 
+        | Promise<Observable<LookupItemView[]>> {
         return this._lookupItemService.getByGroupName('InfantFeeding');
     }
 

@@ -18,6 +18,7 @@ import { HeiMotherRegimenResolver } from './_services/heimotherregimen.resolver'
 import { YesNoResolver } from './_services/yesno.resolver';
 import { MotherDrugsAtInfantEnrollmentResolver } from './_services/motherdrugsatinfantenrollment.resolver';
 import { InfantFeedingOptionsResolver } from './_services/infant-feeding-options.resolver.service';
+import { HeiOutcomeOptionsResolver } from './_services/hei-outcome-options.resolver.service';
 
 const routes: Routes = [
     {
@@ -64,7 +65,8 @@ const routes: Routes = [
             yesnoOptions: YesNoResolver,
             primarycaregiverOptions: PrimaryCareGiverResolver,
             motherdrugsatinfantenrollmentOptions: MotherDrugsAtInfantEnrollmentResolver,
-            infantFeedingOptions: InfantFeedingOptionsResolver
+            infantFeedingOptions: InfantFeedingOptionsResolver,
+            heiOutcomeOptions: HeiOutcomeOptionsResolver
         }
     }
 ];

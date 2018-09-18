@@ -11,9 +11,9 @@ import { SnotifyService } from 'ng-snotify';
 })
 
 export class InfantFeedingComponent implements OnInit {
-    @Input('infantFeedingOptions') infantFeedingOptions: any[] = [];
+    @Input() infantFeedingOptions: any[] = [];
 
-    InfantFeedingForm: FormGroup;
+    InfantFeedingFormGroup: FormGroup;
 
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
@@ -23,12 +23,11 @@ export class InfantFeedingComponent implements OnInit {
         private snotifyService: SnotifyService) { }
 
   ngOnInit() {
-      this.InfantFeedingForm = this._formBuilder.group({
+      this.InfantFeedingFormGroup = this._formBuilder.group({
           infantFeedingOptions: new FormControl('', [Validators.required]),
       });
 
-      this.notify.emit(this.InfantFeedingForm);
-
+      this.notify.emit(this.InfantFeedingFormGroup);
   }
 
 }

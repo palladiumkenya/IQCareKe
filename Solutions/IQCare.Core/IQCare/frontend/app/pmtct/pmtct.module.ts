@@ -42,6 +42,8 @@ import { YesNoResolver } from './_services/yesno.resolver';
 import { MotherDrugsAtInfantEnrollmentResolver } from './_services/motherdrugsatinfantenrollment.resolver';
 import { HeiHivtestingComponent } from './hei/hei-hivtesting/hei-hivtesting.component';
 import { InfantFeedingComponent } from './hei/infant-feeding/infant-feeding.component';
+import { HeiOutcomeComponent } from './hei/hei-outcome/hei-outcome.component';
+import { HeiOutcomeOptionsResolver } from './_services/hei-outcome-options.resolver.service';
 
 
 @NgModule({
@@ -76,7 +78,6 @@ import { InfantFeedingComponent } from './hei/infant-feeding/infant-feeding.comp
         MilestonesComponent,
         DeliveryComponent,
         MaternalhistoryComponent,
-        HeiHivtestingComponent,
         InfantFeedingComponent
     ],
     providers: [
@@ -87,8 +88,7 @@ import { InfantFeedingComponent } from './hei/infant-feeding/infant-feeding.comp
         MotherReceiveDrugsResolver,
         HeiMotherRegimenResolver,
         YesNoResolver,
-        MotherDrugsAtInfantEnrollmentResolver,
-        PrimaryCareGiverResolver
+        MotherDrugsAtInfantEnrollmentResolver
     ]
 })
 export class PmtctModule { }
