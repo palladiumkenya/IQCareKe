@@ -78,7 +78,8 @@ import { HeiOutcomeOptionsResolver } from './_services/hei-outcome-options.resol
         MilestonesComponent,
         DeliveryComponent,
         MaternalhistoryComponent,
-        InfantFeedingComponent
+        InfantFeedingComponent,
+        HeiOutcomeComponent
     ],
     providers: [
         PlaceOfDeliveryResolver,
@@ -88,7 +89,8 @@ import { HeiOutcomeOptionsResolver } from './_services/hei-outcome-options.resol
         MotherReceiveDrugsResolver,
         HeiMotherRegimenResolver,
         YesNoResolver,
-        MotherDrugsAtInfantEnrollmentResolver
+        MotherDrugsAtInfantEnrollmentResolver,
+        PrimaryCareGiverResolver
     ]
 })
 export class PmtctModule { }
