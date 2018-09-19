@@ -44,11 +44,11 @@
                                         </div>
                                     </mat-step>
 
-                                    <mat-step [completed]="false" [stepControl]="immunizationHistoryFormGroup">
+                                    <mat-step [completed]="true" [stepControl]="immunizationHistoryFormGroup">
                                         <ng-template matStepLabel>
                                             <span matTooltip="Immunization History">Immunization</span>
                                         </ng-template>
-                                        <app-immunization-history (notify)="onImmunizationHistory($event)"></app-immunization-history>
+                                        <!--<app-immunization-history (notify)="onImmunizationHistory($event)"></app-immunization-history>-->
 
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
@@ -58,11 +58,11 @@
                                     </mat-step>
 
 
-                                    <mat-step [completed]="false" [stepControl]="milestonesFormGroup">
+                                    <mat-step [completed]="true" [stepControl]="milestonesFormGroup">
                                         <ng-template matStepLabel>
                                             <span matTooltip="Milestones">Milestones</span>
                                         </ng-template>
-                                        <app-milestones (notify)="onMilestonesNotify($event)"></app-milestones>
+                                        <!--<app-milestones (notify)="onMilestonesNotify($event)"></app-milestones>-->
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
                                             &nbsp;&nbsp;

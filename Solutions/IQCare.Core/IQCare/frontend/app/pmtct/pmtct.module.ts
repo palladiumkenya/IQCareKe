@@ -42,6 +42,8 @@ import { YesNoResolver } from './_services/yesno.resolver';
 import { MotherDrugsAtInfantEnrollmentResolver } from './_services/motherdrugsatinfantenrollment.resolver';
 import { HeiHivtestingComponent } from './hei/hei-hivtesting/hei-hivtesting.component';
 import { InfantFeedingComponent } from './hei/infant-feeding/infant-feeding.component';
+import { InlineSearchComponent } from '../records/inline-search/inline-search.component';
+import { RecordsModule } from '../records/records.module';
 
 
 @NgModule({
@@ -55,7 +57,7 @@ import { InfantFeedingComponent } from './hei/infant-feeding/infant-feeding.comp
         MatGridListModule, MatIconModule, MatListModule, MatMenuModule, MatNativeDateModule, MatPaginatorModule,
         MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatSliderModule,
         MatSlideToggleModule, MatSnackBarModule, MatSortModule, MatStepperModule, MatTableModule, MatTabsModule,
-        MatToolbarModule, MatTooltipModule, ReactiveFormsModule, MatInputModule, SharedModule
+        MatToolbarModule, MatTooltipModule, ReactiveFormsModule, MatInputModule, SharedModule, RecordsModule
     ],
     declarations: [
         ProfileComponent,
@@ -89,6 +91,9 @@ import { InfantFeedingComponent } from './hei/infant-feeding/infant-feeding.comp
         YesNoResolver,
         MotherDrugsAtInfantEnrollmentResolver,
         PrimaryCareGiverResolver
+    ],
+    entryComponents: [
+
     ]
 })
 export class PmtctModule { }

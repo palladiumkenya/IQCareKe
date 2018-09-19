@@ -111,6 +111,7 @@ export class HeiComponent implements OnInit {
 
     onCompleteEncounter() {
         console.log(this.deliveryMatFormGroup.value);
+        console.log(this.visitDetailsFormGroup.value);
     }
 
     onMilestonesNotify(formGroup: FormGroup): void {
