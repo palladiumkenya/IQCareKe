@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { InfantFeedingOptions.ResolverService } from './infant-feeding-options.resolver.service';
+import { InfantFeedingOptionsResolver } from './infant-feeding-options.resolver.service';
 
-describe('InfantFeedingOptions.ResolverService', () => {
+describe('InfantFeedingOptionsResolver', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: InfantFeedingOptions.ResolverService = TestBed.get(InfantFeedingOptions.ResolverService);
+    const service: InfantFeedingOptionsResolver = TestBed.get(InfantFeedingOptionsResolver);
     expect(service).toBeTruthy();
   });
 });

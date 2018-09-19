@@ -11,7 +11,7 @@
                         <div class="row">
                             <div class="col-lg-12 col-sm-6 col-xs-12">
                                 <mat-horizontal-stepper [linear]="isLinear" #stepper>
-
+        
                                     <mat-step [completed]="false" [stepControl]="visitDetailsFormGroup">
                                         <ng-template matStepLabel>
                                             <span matTooltip="Visit Details">Visit Details</span>
@@ -121,6 +121,21 @@
                                                 Complete Ecounter
                                             </button>
                                         </div>
+                                    </mat-step>
+
+                                    <mat-step [completed]="false" [stepControl]="formGroupNextappointment">
+                                            <ng-template matStepLabel>
+                                                    <span matTooltip="Next Appointment">Next Appointment</span>
+                                            </ng-template>
+                                            <app-hei-outcome (notify)="onHeiOutcomeNotify($event)"
+                                                    [heiOutcomeOptions]="heiOutcomeOptions">
+                                            </app-hei-outcome>
+                                            <app-next-appointment (notify)="onNextAppointmentNotify($event)"></app-next-appointment>
+                                            <div>
+                                                <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
+                                                &nbsp;&nbsp;
+                                                <button mat-raised-button color="accent" matStepperNext type="button">Next</button>
+                                            </div>    
                                     </mat-step>
 
                                 </mat-horizontal-stepper>

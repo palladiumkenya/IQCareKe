@@ -44,6 +44,8 @@ import { HeiHivtestingComponent } from './hei/hei-hivtesting/hei-hivtesting.comp
 import { InfantFeedingComponent } from './hei/infant-feeding/infant-feeding.component';
 import { InlineSearchComponent } from '../records/inline-search/inline-search.component';
 import { RecordsModule } from '../records/records.module';
+import { HeiOutcomeComponent } from './hei/hei-outcome/hei-outcome.component';
+import { HeiOutcomeOptionsResolver } from './_services/hei-outcome-options.resolver.service';
 
 
 @NgModule({
@@ -78,8 +80,8 @@ import { RecordsModule } from '../records/records.module';
         MilestonesComponent,
         DeliveryComponent,
         MaternalhistoryComponent,
-        HeiHivtestingComponent,
-        InfantFeedingComponent
+        InfantFeedingComponent,
+        HeiOutcomeComponent
     ],
     providers: [
         PlaceOfDeliveryResolver,

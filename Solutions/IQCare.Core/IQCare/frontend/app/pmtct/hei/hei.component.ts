@@ -24,20 +24,19 @@ export class HeiComponent implements OnInit {
     placeofdeliveryOptions: LookupItemView[] = [];
     motherstateOptions: LookupItemView[] = [];
     infantFeedingOptions: LookupItemView[] = [];
+    heiOutcomeOptions: LookupItemView[] = [];
 
     isLinear: boolean = true;
     deliveryMatFormGroup: FormArray;
     visitDetailsFormGroup: FormArray;
-    immunizationHistoryFormGroup: FormArray;
-    milestonesFormGroup: FormArray;
 
     infantFeedingFormGroup: FormGroup;
+    heiOutcomeFormGroup: FormGroup;
+    // nextAppointmentFormGroup: FormGroup;
 
     constructor(private route: ActivatedRoute) {
         this.deliveryMatFormGroup = new FormArray([]);
         this.visitDetailsFormGroup = new FormArray([]);
-        this.immunizationHistoryFormGroup = new FormArray([]);
-        this.milestonesFormGroup = new FormArray([]);
     }
 
     ngOnInit() {
@@ -58,7 +57,8 @@ export class HeiComponent implements OnInit {
                 yesnoOptions,
                 primarycaregiverOptions,
                 motherdrugsatinfantenrollmentOptions,
-                infantFeedingOptions
+                infantFeedingOptions,
+                heiOutcomeOptions
             } = res;
             console.log('test options');
             console.log(res);
@@ -72,6 +72,7 @@ export class HeiComponent implements OnInit {
             this.motherdrugsatinfantenrollmentOptions = motherdrugsatinfantenrollmentOptions['lookupItems'];
             this.primarycaregiverOptions = primarycaregiverOptions['lookupItems'];
             this.infantFeedingOptions = infantFeedingOptions['lookupItems'];
+            this.heiOutcomeOptions = heiOutcomeOptions['lookupItems'];
         });
 
         this.deliveryOptions.push({
@@ -92,6 +93,7 @@ export class HeiComponent implements OnInit {
         this.hivtestingOptions.push({
 
         });
+
     }
 
     onDeliveryNotify(formGroup: FormGroup): void {
