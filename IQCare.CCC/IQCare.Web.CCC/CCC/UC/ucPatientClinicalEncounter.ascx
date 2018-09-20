@@ -1442,9 +1442,9 @@
 													<thead>
 														<tr>
                                                             <th >#</th>
-															<th><span class="text-primary">PartnerStatus</span></th>
-															<th><span class="text-primary">ParterGender</span></th>
-															<th><span class="text-primary">SexualOrientation</span></th>
+															<th><span class="text-primary">Partner Status</span></th>
+															<th><span class="text-primary">Partner Gender</span></th>
+															<th><span class="text-primary">Sexual Orientation</span></th>
 															<th><span class="text-primary">High Risk Behaviour</span></th>
 														    
                                                             <th>Action</th>

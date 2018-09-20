@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Web;
+using System.Web.Services;
 using System.Collections.Generic;
 using System.Web.UI.WebControls;
 using Application.Presentation;
@@ -53,13 +55,21 @@ namespace IQCare.Web.CCC.OneTimeEvents
                 return pgstatus.CheckIfPatientPregnancyExisists(PatientId);
             }
         }
-       
+
+        public int age;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
+                age = Convert.ToInt32(HttpContext.Current.Session["Age"]);
                 LookupLogic lookUp = new LookupLogic();
                 lookUp.populateRBL(BVCoInfection, "GeneralYesNo");
+                /**BVCoInfection.CssClass = "BVCoInfectioninput";**/
+
+                foreach (ListItem item in BVCoInfection.Items)
+                {
+                    item.Attributes.Add("class", "BVCoInfectioninput");
+                }
 
                 ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
                 IPatientVitals patientVitals = (IPatientVitals)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientVitals, BusinessProcess.CCC");

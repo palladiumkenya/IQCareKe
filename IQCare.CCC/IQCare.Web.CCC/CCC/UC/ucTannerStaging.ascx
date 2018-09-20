@@ -107,7 +107,27 @@
                 url: "../WebService/TannersStagingService.asmx/LoadTannersStaging",
                 dataSrc: 'd',
                 contentType: "application/json; charset=utf-8",
-                dataType: "json"
+                dataType: "json",
+                success: function (response) {
+                    if (age < 9) {
+                        $("#tannersstagingcontainer").hide();
+                    }
+                    else if (age > 19) {
+                        if (response.d != "") {
+                            $("#tannersstagingrecord").hide();
+                            $("#tannersstagingform").hide();
+                        }
+                        else {
+                            $("#tannersstagingcontainer").hide();
+                        }
+                    }
+                    else {
+                        showHideTannersPanel();
+                    }
+                },
+                error: function (response) {
+                    $("#tannersstagingcontainer").hide();
+                }
             },
             destroy: true,
             paging: false,
@@ -233,21 +253,7 @@
     $(document).ready(function () {
         var patientAge = <%=age%>;
         var screeningDone = <%=tannersScreeningValue%>;
-        if (age < 9) {
-            $("#tannersstagingcontainer").hide();
-        }
-        else if (age > 19) {
-            if (screeningDone > 0) {
-                $("#tannersstagingrecord").hide();
-                $("#tannersstagingform").hide();
-            }
-            else {
-                $("#tannersstagingcontainer").hide();
-            }
-        }
-        else {
-            showHideTannersPanel();
-        }
+        
     });
 
     $("input[name='<%=rbList.UniqueID%>']").change(function () {

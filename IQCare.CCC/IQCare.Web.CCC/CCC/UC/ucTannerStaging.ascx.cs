@@ -77,9 +77,10 @@ namespace IQCare.Web.CCC.UC
             List<PatientScreening> screeningList = PSM.GetPatientScreening(PatientId);
             if (screeningList != null)
             {
-                tannersScreeningValue = 1;
+                
                 foreach (var value in screeningList)
                 {
+                    tannersScreeningValue = tannersScreeningValue + 1;
                     RadioButtonList rbl = (RadioButtonList)PHTannersStaging.FindControl(value.ScreeningCategoryId.ToString());
                     if (rbl != null)
                     {

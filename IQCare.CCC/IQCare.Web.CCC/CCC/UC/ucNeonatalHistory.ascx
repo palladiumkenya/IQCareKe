@@ -484,8 +484,9 @@
     $(document).ready(function () {
         var patientAge = <%=age%>;
         var screeningDone = <%=screeningValue%>;
+        var immscreeningvalue = <%=immscreeningvalue%>;
         if (patientAge > 5) {
-            if (screeningDone > 0) {
+            if (immscreeningvalue > 0) {
                 $("#neonatalrecord").hide();
                 $("#neonatalform").hide();
                 $("#immunizationform").hide();
