@@ -379,7 +379,7 @@ ARTRefillModel int;
 
 ALTER TABLE Mst_ItemMaster
 ADD QtyUnitDisp int,
-syrup int,
+--syrup int,
 MorDose int,
 MidDose int,
 EvenDose int,

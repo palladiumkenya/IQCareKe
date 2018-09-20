@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\Solutions\Presentation\packages\MSBuild.Microsoft.VisualStudio.Web.targets.14.0.0.3\build\MSBuild.Microsoft.VisualStudio.Web.targets.props" Condition="Exists('..\..\Solutions\Presentation\packages\MSBuild.Microsoft.VisualStudio.Web.targets.14.0.0.3\build\MSBuild.Microsoft.VisualStudio.Web.targets.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -30,6 +31,9 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <DockerComposeProjectPath>..\..\Solutions\Presentation\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -50,6 +54,10 @@
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <Prefer32Bit>false</Prefer32Bit>
+    <FilesToIncludeForPublish>OnlyFilesToRunTheApp</FilesToIncludeForPublish>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Ajax">
@@ -321,7 +329,10 @@
     <Content Include="Content\css\awesomplete.css" />
     <Content Include="Content\css\bootstrap-callout.css" />
     <Content Include="Content\css\datepicker.css" />
+    <Content Include="Content\css\grid.css" />
     <Content Include="Content\css\iqcare.ke-font.css" />
+    <Content Include="Content\css\round.css" />
+    <Content Include="Content\css\sprite.png" />
     <Content Include="Content\datatables\css\datatables.css" />
     <Content Include="Content\datatables\css\dataTables.jqueryui.css" />
     <Content Include="Content\datatables\css\jquery.dataTables.css" />
@@ -371,9 +382,11 @@
     <Content Include="Patient\FindAdd.aspx" />
     <Content Include="Patient\Registration.aspx" />
     <Content Include="Pharmacy\Requests\EditPharmacyPrescription.aspx" />
+    <Content Include="PMSCM\frmAllergy.aspx" />
     <Content Include="PMSCM\frmPharmacyDispense_FindPatient.aspx" />
     <Content Include="PMSCM\frmPharmacyDispense_PatientOrder.aspx" />
     <Content Include="PMSCM\frmPharmacy_Dashboard.aspx" />
+    <Content Include="PMSCM\frmPharmacy_DrugHistory.aspx" />
     <Content Include="PMSCM\PharmacyDashboard.aspx" />
     <Content Include="Statistics\Facility.aspx" />
     <Content Include="Statistics\HEI.aspx" />
@@ -2376,6 +2389,13 @@
       <DependentUpon>EditPharmacyPrescription.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="PMSCM\frmAllergy.aspx.cs">
+      <DependentUpon>frmAllergy.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PMSCM\frmAllergy.aspx.designer.cs">
+      <DependentUpon>frmAllergy.aspx</DependentUpon>
+    </Compile>
     <Compile Include="PMSCM\frmPharmacyDispense_FindPatient.aspx.cs">
       <DependentUpon>frmPharmacyDispense_FindPatient.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2396,6 +2416,13 @@
     </Compile>
     <Compile Include="PMSCM\frmPharmacy_Dashboard.aspx.designer.cs">
       <DependentUpon>frmPharmacy_Dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PMSCM\frmPharmacy_DrugHistory.aspx.cs">
+      <DependentUpon>frmPharmacy_DrugHistory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PMSCM\frmPharmacy_DrugHistory.aspx.designer.cs">
+      <DependentUpon>frmPharmacy_DrugHistory.aspx</DependentUpon>
     </Compile>
     <Compile Include="PMSCM\PharmacyDashboard.aspx.cs">
       <DependentUpon>PharmacyDashboard.aspx</DependentUpon>
@@ -3198,8 +3225,10 @@
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
+  <Target Name="GatherAllFilesToPublish">
+  </Target>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="true" />
   <ProjectExtensions>
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
@@ -3214,6 +3243,9 @@
           <CustomServerUrl>
           </CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+          <servers defaultServer="SelfHostServer">
+            <server name="SelfHostServer" exePath="" cmdArgs="" url="http://localhost:1155/" workingDir="" />
+          </servers>
         </WebProjectProperties>
       </FlavorProperties>
     </VisualStudio>
@@ -3230,5 +3262,11 @@
     <Copy SourceFiles="@(DocFileItem)" DestinationFiles="@(FinalDocFile->'$(RefDir)%(FileName)%(Extension)')" SkipUnchangedFiles="true" Condition="'$(_DocumentationFileProduced)'=='true'" />
     <Copy SourceFiles="@(IntermediateSatelliteAssembliesWithTargetPath)" DestinationFiles="@(IntermediateSatelliteAssembliesWithTargetPath->'$(RefDir)%(Culture)\$(TargetName).resources.dll')" SkipUnchangedFiles="true" />
     <Copy SourceFiles="@(Content)" DestinationFiles="@(Content-> '$(RedDir)%(RelativeDir)%(FileName)%(Extension)')" />
+  </Target>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\Solutions\Presentation\packages\MSBuild.Microsoft.VisualStudio.Web.targets.14.0.0.3\build\MSBuild.Microsoft.VisualStudio.Web.targets.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\Solutions\Presentation\packages\MSBuild.Microsoft.VisualStudio.Web.targets.14.0.0.3\build\MSBuild.Microsoft.VisualStudio.Web.targets.props'))" />
   </Target>
 </Project>

@@ -730,6 +730,21 @@ namespace BusinessProcess.SCM
             return (DataSet)theManager.ReturnObject(ClsUtility.theParams, "pr_SCM_SaveUpdateHivTreatementPharmacyField_Futures", ClsUtility.ObjectEnum.DataSet);
         }
 
+        public DataSet GetAllergyData(int PatientID)
+        {
+            ClsUtility.Init_Hashtable();
+            ClsUtility.AddParameters("@Ptn_Pk", SqlDbType.Int, PatientID.ToString());
+            ClsObject theManager = new ClsObject();
+            return (DataSet)theManager.ReturnObject(ClsUtility.theParams, "pr_Clinical_GetAllergy", ClsUtility.ObjectEnum.DataSet);
+        }
+        public DataSet GetPharmacyDrugHistory_Web(int PatientID)
+        {
+            ClsUtility.Init_Hashtable();
+            ClsUtility.AddParameters("@Ptn_Pk", SqlDbType.Int, PatientID.ToString());
+            ClsObject theManager = new ClsObject();
+            return (DataSet)theManager.ReturnObject(ClsUtility.theParams, "pr_SCM_GetPharmacyDrugHistory_Web", ClsUtility.ObjectEnum.DataSet);
+        }
+
         public DataSet GetPriorPrescription(Int32 thePatientId)
         {
             lock (this)

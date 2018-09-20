@@ -125,9 +125,27 @@ namespace IQCare.Web.PMSCM
             try
             {
                 DataSet XMLDS = new DataSet();
+                DataView theDV;
                 XMLDS.ReadXml(MapPath("..\\XMLFiles\\AllMasters.con"));
 
-                DataView theDV = new DataView(XMLDS.Tables["Mst_Store"]);
+                if (XMLDS == null)
+                {
+                    IMasterList thePharmacyManager1 = (IMasterList)ObjectFactory.CreateInstance("BusinessProcess.SCM.BMasterList, BusinessProcess.SCM");
+                    XMLDS = thePharmacyManager1.GetStoreDetail();
+                    theDV = new DataView(XMLDS.Tables[0]);
+                }
+                else if ((XMLDS != null) && (XMLDS.Tables.Count < 0))
+                   {
+                    IMasterList thePharmacyManager1 = (IMasterList)ObjectFactory.CreateInstance("BusinessProcess.SCM.BMasterList, BusinessProcess.SCM");
+                    XMLDS = thePharmacyManager1.GetStoreDetail();
+                    theDV = new DataView(XMLDS.Tables[0]);
+
+                }
+                else
+                {
+
+                      theDV =new DataView( XMLDS.Tables["Mst_Store"]);
+                }
                 theDV.RowFilter = "(DeleteFlag =0 or DeleteFlag is null)";
                 theDV.Sort = "Name ASC";
                 DataTable theStoreDT = theDV.ToTable();
