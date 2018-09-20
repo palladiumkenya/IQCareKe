@@ -28,6 +28,7 @@ export class ClientMonitoringComponent implements OnInit {
     public clientMonitoringFormGroup: FormGroup;
     @Output() nextStep = new EventEmitter <ClientMonitoringEmitter> ();
     @Input() clientMonitoring: ClientMonitoringEmitter;
+    @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
     public clientMonitoringData: ClientMonitoringEmitter;
 
   constructor(private fb: FormBuilder , private lookupItemService: LookupItemService, private snotifyService: SnotifyService,
@@ -90,6 +91,7 @@ export class ClientMonitoringComponent implements OnInit {
         };
         console.log(this.clientMonitoringData);
         this.nextStep.emit(this.clientMonitoringData);
+        this.notify.emit(this.clientMonitoringFormGroup);
     }
 
 }

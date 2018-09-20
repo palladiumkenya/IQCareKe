@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LookupItemView } from '../../shared/_models/LookupItemView';
 import { FormGroup, FormArray } from '@angular/forms';
+import {LongDateFormatKey} from 'moment';
 
 @Component({
     selector: 'app-hei',
@@ -18,12 +19,18 @@ export class HeiComponent implements OnInit {
     yesnoOptions: any[] = [];
     motherdrugsatinfantenrollmentOptions: any[] = [];
     primarycaregiverOptions: any[] = [];
+    immunizationHistoryOptions: any[] = [];
+    milestoneOptions: any[] = [];
 
     deliveryModeOptions: LookupItemView[] = [];
     arvprophylaxisOptions: LookupItemView[] = [];
     placeofdeliveryOptions: LookupItemView[] = [];
     motherstateOptions: LookupItemView[] = [];
     infantFeedingOptions: LookupItemView[] = [];
+    immunizationPeriodOptions: LookupItemView[] = [];
+    immunizationGivenOptions: LookupItemView[] = [];
+    milestoneAssessedOptions: LookupItemView[] = [];
+    milestoneStatusOptions: LookupItemView[] = [];
 
     isLinear: boolean = true;
     deliveryMatFormGroup: FormArray;
@@ -56,9 +63,13 @@ export class HeiComponent implements OnInit {
                 motherreceivedrugsOptions,
                 heimotherregimenOptions,
                 yesnoOptions,
-                primarycaregiverOptions
+                primarycaregiverOptions,
                 motherdrugsatinfantenrollmentOptions,
-                infantFeedingOptions
+                infantFeedingOptions,
+                immunizationPeriodOptions,
+                immunizationGivenOptions,
+                milestoneAssessedOptions,
+                milestoneStatusOptions
             } = res;
             console.log('test options');
             console.log(res);
@@ -72,6 +83,10 @@ export class HeiComponent implements OnInit {
             this.motherdrugsatinfantenrollmentOptions = motherdrugsatinfantenrollmentOptions['lookupItems'];
             this.primarycaregiverOptions = primarycaregiverOptions['lookupItems'];
             this.infantFeedingOptions = infantFeedingOptions['lookupItems'];
+            this.immunizationPeriodOptions = immunizationPeriodOptions['lookupItems'];
+            this.immunizationGivenOptions = immunizationGivenOptions['lookupItems'];
+            this.milestoneAssessedOptions = milestoneAssessedOptions['lookupItems'];
+            this.milestoneStatusOptions = milestoneStatusOptions['lookupItems'];
         });
 
         this.deliveryOptions.push({
@@ -87,6 +102,18 @@ export class HeiComponent implements OnInit {
             'yesnoOptions': this.yesnoOptions,
             'motherdrugsatinfantenrollmentOptions': this.motherdrugsatinfantenrollmentOptions,
             'primarycaregiverOptions': this.primarycaregiverOptions
+        });
+
+        this.immunizationHistoryOptions.push({
+            'immunizationPeriod' : this.immunizationPeriodOptions,
+            'immunizationGiven': this.immunizationGivenOptions
+
+        });
+
+        this.milestoneOptions.push({
+            'assessed' : this.milestoneAssessedOptions,
+            'status': this.milestoneStatusOptions,
+            'yesnoOption': this.yesnoOptions
         });
 
         this.hivtestingOptions.push({

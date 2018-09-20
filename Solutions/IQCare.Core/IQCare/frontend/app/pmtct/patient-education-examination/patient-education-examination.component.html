@@ -70,7 +70,7 @@
                     <tr *ngFor="let item_data of counselling_data; let index = index">
                         <td>{{ index+1 }}</td>
                         <td>{{ item_data.counsellingTopic}}</td>
-                        <td>{{ item_data.topicDate | date: 'dd-MMM-yyyy' }}</td>
+                        <td>{{ item_data.CounsellingDate | date: 'dd-MMM-yyyy' }}</td>
                         <td>
                             <i style="cursor: pointer;" class="danger material-icons" (click)="removeRow(index)">
                                 delete

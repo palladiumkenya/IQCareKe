@@ -4,8 +4,6 @@ import { Subscription } from 'rxjs/index';
 import { NotificationService } from '../../shared/_services/notification.service';
 import { LookupItemService } from '../../shared/_services/lookup-item.service';
 import { SnotifyService } from 'ng-snotify';
-import { PatientEducationEmitter } from '../emitters/PatientEducationEmitter';
-import { PatientEducationCommand } from '../_models/PatientEducationCommand';
 import { HIVTestingEmitter } from '../emitters/HIVTestingEmitter';
 import { VisitDetailsService } from '../_services/visit-details.service';
 export interface Topic {
@@ -32,6 +30,7 @@ export class HivStatusComponent implements OnInit {
 
     lookupItemView$: Subscription;
     @Output() nextStep = new EventEmitter<HIVTestingEmitter>();
+    @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
     @Input() hivTestingData: HIVTestingEmitter;
 
     HIVStatusFormGroup: FormGroup;
@@ -70,6 +69,7 @@ export class HivStatusComponent implements OnInit {
                 this.ancTestEntryPoint = itemId;
             }
         );
+        this.notify.emit(this.HIVStatusFormGroup);
     }
 
     public getLookupOptions(groupName: string, masterName: any[]) {
@@ -106,6 +106,7 @@ export class HivStatusComponent implements OnInit {
         };
 
         this.nextStep.emit(this.hivTestingData);
+        this.notify.emit(this.HIVStatusFormGroup);
     }
 
 }

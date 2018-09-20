@@ -26,6 +26,7 @@ export class PreventiveServicesComponent implements OnInit {
     public FinalResults: any[] = [];
     @Output() nextStep = new EventEmitter <PreventiveServiceEmitter> ();
     @Input() preventiveServices: PreventiveServiceEmitter;
+    @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
     public preventiveServicesData: PreventiveServiceEmitter;
     public serviceData: PreventiveEmitter[] = [];
 
@@ -87,6 +88,7 @@ export class PreventiveServicesComponent implements OnInit {
         };
         console.log(this.preventiveServicesData);
         this.nextStep.emit(this.preventiveServicesData);
+        this.notify.emit(this.PreventiveServicesFormGroup);
     }
 
     public addTopics() {

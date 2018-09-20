@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace IQCare.PMTCT.Infrastructure.Mapping
 {
-    public class PregnancyMapping :IEntityTypeConfiguration<PatientPregnancy>
+    public class PatientPregnancyMapping :IEntityTypeConfiguration<PatientPregnancy>
     {
         public void Configure(EntityTypeBuilder<PatientPregnancy> builder)
         {

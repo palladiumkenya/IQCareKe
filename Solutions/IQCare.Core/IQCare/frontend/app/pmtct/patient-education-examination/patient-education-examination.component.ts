@@ -45,6 +45,7 @@ export class PatientEducationExaminationComponent implements OnInit {
 
     public counselling_data: CounsellingTopicsEmitters[] = [];
     @Output() nextStep = new EventEmitter <PatientEducationEmitter> ();
+    @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
     @Input() patientEducationData: PatientEducationCommand;
 
     displayedColumns: string[] = ['topicId', 'topic', 'onSetDate'];
@@ -63,11 +64,13 @@ export class PatientEducationExaminationComponent implements OnInit {
         testResult: ['', Validators.required]
     });
       this.userId = JSON.parse(localStorage.getItem('appUserId'));
-     this.getLookupOptions('counselledOn', this.topics);
-     this.getLookupOptions('yesno', this.yesnos);
+      this.getLookupOptions('counselledOn', this.topics);
+      this.getLookupOptions('yesno', this.yesnos);
       this.getLookupOptions('HivTestingResult', this.testResults);
 
       console.log(this.counselling_data + ' hu');
+      this.nextStep.emit(this.patientEducationEmitterData);
+      this.notify.emit(this.PatientEducationFormGroup);
   }
 
     public  getLookupOptions(groupName: string, masterName: any[]) {

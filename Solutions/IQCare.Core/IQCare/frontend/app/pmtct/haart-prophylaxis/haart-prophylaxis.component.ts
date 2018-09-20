@@ -28,6 +28,7 @@ export class HaartProphylaxisComponent implements OnInit {
     lookupItemView$: Subscription;
     @Output() nextStep = new EventEmitter <HAARTProphylaxisEmitter> ();
     @Input() HaartProphylaxis: ClientMonitoringEmitter;
+    @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
     public HaartProphylaxisData: HAARTProphylaxisEmitter;
     public chronicIllness: ChronicIllnessEmitter[] = [];
     public patientchronicIllnessData: PatientChronicIllness[] = [];
@@ -127,6 +128,7 @@ export class HaartProphylaxisComponent implements OnInit {
         };
         console.log(this.HaartProphylaxisData);
         this.nextStep.emit(this.HaartProphylaxisData);
+        this.notify.emit(this.HaartProphylaxisFormGroup);
     }
 
     public AddOtherIllness() {

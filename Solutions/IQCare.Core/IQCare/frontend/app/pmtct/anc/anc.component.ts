@@ -23,6 +23,7 @@ import { PatientPreventiveService } from '../_models/PatientPreventiveService';
 import { PatientProfile } from '../_models/patientProfile';
 import { PregnancyViewModel } from '../_models/viewModel/PregnancyViewModel';
 import { HIVTestingEmitter } from '../emitters/HIVTestingEmitter';
+import { FormGroup} from '@angular/forms';
 
 @Component({
     selector: 'app-anc',
@@ -31,7 +32,7 @@ import { HIVTestingEmitter } from '../emitters/HIVTestingEmitter';
 })
 export class AncComponent implements OnInit, OnDestroy {
 
-    isLinear: true;
+    isLinear: boolean = true;
     visitDetails: VisitDetails;
     topics: PreventiveService[];
     patientDrug: PatientDrugAdministration[] = [];
@@ -52,10 +53,17 @@ export class AncComponent implements OnInit, OnDestroy {
     public saveReferralAppointment$: Subscription;
     public savePreventiveService$: Subscription;
     public getPatientPregnancy$: Subscription;
-    public getPatientProfile$: Subscription;
 
     public pregnancy: PregnancyViewModel = {};
     public profile: PatientProfile = {};
+
+    VisitDetailsMatFormGroup: FormGroup;
+    PatientEducationMatFormGroup: FormGroup;
+    HivStatusMatFormGroup: FormGroup;
+    ClientMonitoringMatFormGroup: FormGroup;
+    HaartProphylaxisMatFormGroup: FormGroup;
+    PreventiveServiceMatFormGroup: FormGroup;
+    ReferralMatFormGroup: FormGroup;
 
 
     constructor(private route: ActivatedRoute, private visitDetailsService: VisitDetailsService,
@@ -87,6 +95,7 @@ export class AncComponent implements OnInit, OnDestroy {
 
     public onSaveVisitDetails(data: VisitDetails): void {
         this.visitDate = data.VisitDate;
+       // console.log(this.VisitDetailsMatFormGroup.value);
 
         this.saveVisitDetails$ = this.visitDetailsService.savePatientDetails(data)
             .subscribe(
@@ -219,7 +228,7 @@ export class AncComponent implements OnInit, OnDestroy {
 
     public onSavePreventiveService(data: PreventiveServiceEmitter) {
 
-        console.log('test data')
+        console.log('test data');
         console.log(data);
         for (let i = 0; i < data.preventiveService.length; i++) {
             this.preventiveServiceData.push(
@@ -401,8 +410,30 @@ export class AncComponent implements OnInit, OnDestroy {
             }
         );
     }
-    // getPatientProfile();
 
+    onVisitDetailsNotify(formGroup: FormGroup): void {
+        this.VisitDetailsMatFormGroup = formGroup;
+    }
+
+    onPatientEducationNotify(formGroup: FormGroup): void {
+        this.PatientEducationMatFormGroup = formGroup;
+    }
+    onHivStatusNotify(formGroup: FormGroup): void {
+        this.HivStatusMatFormGroup = formGroup;
+    }
+    onClientMonitoringNotify(formGroup: FormGroup): void {
+        this.ClientMonitoringMatFormGroup = formGroup;
+    }
+    onHaartProphylaxisNotify(formGroup: FormGroup): void {
+        this.HaartProphylaxisMatFormGroup = formGroup;
+    }
+
+    onPreventiveServiceNotify(formGroup: FormGroup): void {
+        this.PreventiveServiceMatFormGroup = formGroup;
+    }
+    onReferralNotify(formGroup: FormGroup): void {
+        this.ReferralMatFormGroup = formGroup;
+    }
 
     ngOnDestroy(): void {
         if (this.saveVisitDetails$) {

@@ -39,6 +39,7 @@ export class VisitDetailsComponent implements OnInit, OnChanges {
     public ancVisitTypes: any[] = [];
     @Output() nextStep = new EventEmitter<VisitDetails>(); 
     @Input() visitProtocol: VisitDetails;
+    @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
     
     constructor(private route: ActivatedRoute, private fb: FormBuilder, private _lookupItemService: LookupItemService,
     private snotifyService: SnotifyService,
@@ -87,6 +88,7 @@ export class VisitDetailsComponent implements OnInit, OnChanges {
     
     // getANCProfile
       this.getPregnancyProfile(this.patientId);
+      this.notify.emit(this.visitDetailsFormGroup);
 
   }
 
@@ -131,14 +133,14 @@ export class VisitDetailsComponent implements OnInit, OnChanges {
                    this.visitNumber = this.patientProfile.visitNumber;
                    this.visitNumber = this.visitNumber += 1;
                     // this.visitDetailsFormGroup.controls['ancVisitType'].disable({ onlySelf: false });
-                    if (this.patientProfile) {
+                    if (this.patientProfile.visitNumber >= 1) {
                         this.visitDetailsFormGroup.controls['ancVisitType'].setValue(this.patientProfile.VisitType);
 
                         this.visitDetailsFormGroup.controls['ancVisitNumber'].patchValue(this.visitNumber);
                         this.visitDetailsFormGroup.controls['ancVisitNumber'].disable({ onlySelf: true });
                         this.visitDetailsFormGroup.controls['ageAtMenarche'].setValue(this.patientProfile.ageMenarche);
                         this.visitDetailsFormGroup.controls['ageAtMenarche'].disable({ onlySelf: true });
-                       //  this.visitDetailsFormGroup.controls['ancVisitType'].disable({ onlySelf: false });
+                         this.visitDetailsFormGroup.controls['gestation'].disable({ onlySelf: false });
                     } else {
                         this.visitDetailsFormGroup.controls['ancVisitType'].setValue(1724);
                        // this.visitDetailsFormGroup.controls['ancVisitType'].disable({ onlySelf: true });
@@ -218,6 +220,7 @@ export class VisitDetailsComponent implements OnInit, OnChanges {
       //  this.nextStep.emit(this.visitDetailsFormGroup.value);
       console.log(this.visitDetails);
       this.nextStep.emit(this.visitDetails);
+      this.notify.emit(this.visitDetailsFormGroup);
     }
 
     public onLMPDateChange() {

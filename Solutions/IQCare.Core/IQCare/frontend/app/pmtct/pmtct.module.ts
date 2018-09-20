@@ -42,6 +42,7 @@ import { YesNoResolver } from './_services/yesno.resolver';
 import { MotherDrugsAtInfantEnrollmentResolver } from './_services/motherdrugsatinfantenrollment.resolver';
 import { HeiHivtestingComponent } from './hei/hei-hivtesting/hei-hivtesting.component';
 import { InfantFeedingComponent } from './hei/infant-feeding/infant-feeding.component';
+import { TbAssessmentComponent } from './hei/tb-assessment/tb-assessment.component';
 
 
 @NgModule({
@@ -77,7 +78,8 @@ import { InfantFeedingComponent } from './hei/infant-feeding/infant-feeding.comp
         DeliveryComponent,
         MaternalhistoryComponent,
         HeiHivtestingComponent,
-        InfantFeedingComponent
+        InfantFeedingComponent,
+        TbAssessmentComponent
     ],
     providers: [
         PlaceOfDeliveryResolver,

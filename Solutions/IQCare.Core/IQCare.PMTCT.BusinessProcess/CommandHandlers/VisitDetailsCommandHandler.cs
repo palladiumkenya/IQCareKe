@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using IQCare.Common.BusinessProcess.Commands.Appointment;
 using IQCare.Common.BusinessProcess.Services;
 using IQCare.Common.Services;
 using IQCare.PMTCT.BusinessProcess.Commands;
@@ -20,6 +21,9 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
         private readonly ICommonUnitOfWork _commonUnitOfWork;
         private readonly IPmtctUnitOfWork _unitOfWork;
         public int visitCount=0;
+        public int VisitNumber = 0;
+        public PatientPregnancy Pregnancy;
+        public int PregnancyId { get; set; }
 
         public VisitDetailsCommandHandler(ICommonUnitOfWork commonUnitOfWork, IPmtctUnitOfWork unitOfWork)
         {
@@ -35,12 +39,19 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
 
                 try
                 {
+                    VisitNumber = request.VisitNumber;
 
-                    // PatientMasterVisit
+                    
                     PatientMasterVisitService patientMasterVisitService = new PatientMasterVisitService(_commonUnitOfWork);
+                    LookupLogic lookupLogic = new LookupLogic(_commonUnitOfWork);
+                    VisitDetailsService visitDetailsService = new VisitDetailsService(_unitOfWork);
+                    PatientEncounterService patientEncounterService = new PatientEncounterService(_commonUnitOfWork);
+                    PregnancyServices patientPregnancyServices =new PregnancyServices(_unitOfWork);
+
+
                     var patientMasterVisit = await patientMasterVisitService.Add(request.PatientId, 1,DateTime.Today, 0,request.VisitDate, request.VisitDate, 0,0,request.VisitType,0);
 
-                    //PatientPregnancy
+
                     PatientPregnancy patientPregnancy = new PatientPregnancy()
                     {
                         PatientId = request.PatientId,
@@ -55,49 +66,53 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
                         CreateDate = DateTime.Now                                          
                     };
 
-                    // Get anc-encounter Id:
-                    LookupLogic lookupLogic = new LookupLogic(_commonUnitOfWork);
-                    int encounterTypeId = await lookupLogic.GetLookupIdbyName("anc-encounter");
-
-                    PatientEncounterService patientEncounterService = new PatientEncounterService(_commonUnitOfWork);
-
+                    
+                    int encounterTypeId = await lookupLogic.GetLookupIdbyName("anc-encounter");                   
                     var encounter = await patientEncounterService.Add(request.PatientId, encounterTypeId, patientMasterVisit.Id, DateTime.Now, DateTime.Now, request.ServiceAreaId,request.UserId);
 
-                    VisitDetailsService visitDetailsService = new VisitDetailsService(_unitOfWork);
-                    ////PatientProfileService patientProfileService= new PatientProfileService(_unitOfWork);
-                    var pregnancy = await visitDetailsService.AddPatientPregnancy(patientPregnancy);
-
-                    ////patientProfile
-                    var visits = await visitDetailsService.GetPatientProfile(request.PatientId);
-                    if (visits.Count() > 0)
+                    if (VisitNumber <= 1)
                     {
-                        
-                        visitCount += visits.Count();
+                         this.Pregnancy = await visitDetailsService.AddPatientPregnancy(patientPregnancy);
+                         this.PregnancyId = 0;
                     }
                     else
                     {
-                       this.visitCount= 1+ visits.Count();
+                        PatientPregnancy pregnancyData =  patientPregnancyServices.GetActivePregnancy(request.PatientId);
+                        this.PregnancyId = pregnancyData.Id;
+                    }
+                   
+                    var visits = await visitDetailsService.GetPatientProfile(request.PatientId);
+
+
+                    if (this.VisitNumber <=1)
+                    {
+
+                        this.VisitNumber += 1;
+                    }
+
 
                         PatientProfile patientProfile = new PatientProfile()
                         {
                             PatientId = request.PatientId,
                             PatientMasterVisitId = patientMasterVisit.Id,
                             AgeMenarche = request.AgeAtMenarche,
-                            PregnancyId = pregnancy.Id,
-                            VisitNumber = this.visitCount,
+                            PregnancyId = this.PregnancyId,
+                            VisitNumber = this.VisitNumber,
                             VisitType = request.VisitType,
-                            CreatedBy = request.UserId,
+                            CreatedBy = (request.UserId<1)?1:request.UserId,
                             CreateDate = DateTime.Now
                         };
 
                           var profile = visitDetailsService.AddPatientProfile(patientProfile);
                         profileId = profile.Id;
-                    }
+                    
+
+
 
                     return Library.Result<VisitDetailsCommandResult>.Valid(new VisitDetailsCommandResult()
                     {
                         PatientMasterVisitId =  patientMasterVisit.Id,
-                        PregancyId =pregnancy.Id,
+                        PregancyId = (this.VisitNumber>=1)?this.PregnancyId:this.Pregnancy.Id,
                         ProfileId=profileId,
                         PatientEncounterId=encounter.Id
                     });
