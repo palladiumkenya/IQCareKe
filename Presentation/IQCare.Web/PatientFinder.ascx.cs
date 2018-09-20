@@ -948,7 +948,8 @@ namespace IQCare.Web
             string url;
             base.Session["PTServLines"] = null;
             url = string.Format("{0}&sts={1}", "~/Patient/Registration.aspx?name=Add", 0);
-            Response.Redirect(url);
+            Response.Redirect(url,false);
+            Context.ApplicationInstance.CompleteRequest();
         }
 
         /// <summary>

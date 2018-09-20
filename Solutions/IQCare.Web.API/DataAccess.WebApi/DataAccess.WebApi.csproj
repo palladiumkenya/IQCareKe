@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{88FAAEFB-FF2F-46CF-98ED-62AB2704A12F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DataAccess.WebApi</RootNamespace>
+    <AssemblyName>DataAccess.WebApi</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\References\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DataAccess.Base, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\DataAccess.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="DataAccess.Context, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\DataAccess.Context.dll</HintPath>
+    </Reference>
+    <Reference Include="Entities.CCC, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\Entities.CCC.dll</HintPath>
+    </Reference>
+    <Reference Include="Entities.PSmart, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\Entities.PSmart.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApiContext.cs" />
+    <Compile Include="Interface\IApiInboxRepository.cs" />
+    <Compile Include="Interface\IApiInteropSystemsRepository.cs" />
+    <Compile Include="Interface\IApiOutboxRepository.cs" />
+    <Compile Include="Interface\ICardDetailsRepository.cs" />
+    <Compile Include="Interface\IExternalPatientIdRepository.cs" />
+    <Compile Include="Interface\IFamilyInfoRepository.cs" />
+    <Compile Include="Interface\IHivTestRepository.cs" />
+    <Compile Include="Interface\IHivTestTrackerRepository.cs" />
+    <Compile Include="Interface\IImmunizationRepository.cs" />
+    <Compile Include="Interface\IImmunizationTrackerRepository.cs" />
+    <Compile Include="Interface\IInternalPatientIdRepository.cs" />
+    <Compile Include="Interface\IMotherDetailsRepository.cs" />
+    <Compile Include="Interface\IMotherDetailsViewRepository.cs" />
+    <Compile Include="Interface\IMotherIdentifierRepository.cs" />
+    <Compile Include="Interface\IMotherNameRepository.cs" />
+    <Compile Include="Interface\IMstPatientReposiroty.cs" />
+    <Compile Include="Interface\INextOfKinRepository.cs" />
+    <Compile Include="Interface\INokNameRepository.cs" />
+    <Compile Include="Interface\IPatientAddressRepository.cs" />
+    <Compile Include="Interface\IPatientIdentificationRepository.cs" />
+    <Compile Include="Interface\IPatientNameRepository.cs" />
+    <Compile Include="Interface\IPatientProgramStartRepository.cs" />
+    <Compile Include="Interface\IPhysicalAddressRepository.cs" />
+    <Compile Include="Interface\IProviderDetailsRepository.cs" />
+    <Compile Include="Interface\IPSmartAuthRepository.cs" />
+    <Compile Include="Interface\IPsmartStoreRepository.cs" />
+    <Compile Include="Interface\IShrRepository.cs" />
+    <Compile Include="Interface\ISmartCardPatientListRepository.cs" />
+    <Compile Include="Interface\IUnitOfWork.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PsmartContext.cs" />
+    <Compile Include="Repository\ApiInboxRepository.cs" />
+    <Compile Include="Repository\ApiInteropSystemRepository.cs" />
+    <Compile Include="Repository\ApiOutboxRepository.cs" />
+    <Compile Include="Repository\CardDetailsRepository.cs" />
+    <Compile Include="Repository\ExternalPatientIdRepository.cs" />
+    <Compile Include="Repository\FamilyInfoRepository.cs" />
+    <Compile Include="Repository\HivTestRepository.cs" />
+    <Compile Include="Repository\HivTestTrackerRepository.cs" />
+    <Compile Include="Repository\ImmunizationRepository.cs" />
+    <Compile Include="Repository\ImmunizationTrackerRepository.cs" />
+    <Compile Include="Repository\InternalPatientIdRepository.cs" />
+    <Compile Include="Repository\MotherDetailsRepository.cs" />
+    <Compile Include="Repository\MotherDetailsViewRepository.cs" />
+    <Compile Include="Repository\MotherIdentifierRepository.cs" />
+    <Compile Include="Repository\MotherNameRepository.cs" />
+    <Compile Include="Repository\MstPatientRepository.cs" />
+    <Compile Include="Repository\NextOfKinRepository.cs" />
+    <Compile Include="Repository\NokNameRepository.cs" />
+    <Compile Include="Repository\PatientAddressRepository.cs" />
+    <Compile Include="Repository\PatientIdentificationRepository.cs" />
+    <Compile Include="Repository\PatientNameRepository.cs" />
+    <Compile Include="Repository\PatientPhysicalAddressRepository.cs" />
+    <Compile Include="Repository\PatientProgramStartRepository.cs" />
+    <Compile Include="Repository\ProviderDetailsRepository.cs" />
+    <Compile Include="Repository\PSmartAuthRepository.cs" />
+    <Compile Include="Repository\PsmartRepository.cs" />
+    <Compile Include="Repository\ShrRepository.cs" />
+    <Compile Include="Repository\SmartCardPatientListRepository.cs" />
+    <Compile Include="Repository\UnitOfWork.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Entity.WebApi\Entity.WebApi.csproj">
+      <Project>{062E43AE-C832-49DE-8ACC-4FFC9ABB4073}</Project>
+      <Name>Entity.WebApi</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

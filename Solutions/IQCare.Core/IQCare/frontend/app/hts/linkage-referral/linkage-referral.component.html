@@ -1,0 +1,102 @@
+<div class="ibox">
+    <div class="ibox-title">
+        <app-clientbrief></app-clientbrief>
+    </div>
+    <div class="ibox-content">
+        <div class="row">
+            <div class="col-md-2 col-lg-2 col-sm-2">
+                <app-leftnav></app-leftnav>
+            </div>
+
+            <div class="col-md-10 col-lg-10 col-sm-10 animated fadeIn">
+                <div class="panel panel-default">
+                    <div class="panel-heading">REFERRAL & TRACING</div>
+                    <div class="panel-body">
+                        <form [formGroup]="form">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-3">
+                                    <mat-form-field>
+                                        <input type="text" placeholder="Referred To" matInput [formControl]="myControl" [matAutocomplete]="auto">
+                                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                                            <mat-option *ngFor="let facility of filteredOptions" [value]="facility">
+                                                {{ facility.name }}
+                                            </mat-option>
+                                        </mat-autocomplete>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-sm-3">
+                                    <mat-form-field>
+                                        <input matInput placeholder="Other Facility" formControlName="otherFacility">
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-sm-3">
+                                    <mat-form-field>
+                                        <input matInput [matDatepicker]="myDatepicker" placeholder="Date To Be Enrolled" (click)="myDatepicker.open()" name="dateToBeEnrolled"
+                                            formControlName="dateToBeEnrolled" required>
+                                        <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+                                        <mat-datepicker #myDatepicker></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-lg-12">
+                                    &nbsp;
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-4">
+                                    <div class="button-row">
+                                        <a mat-raised-button color="accent" (click)="newTrace()">
+                                            <i class="fa fa-plus"></i>
+                                            <span>Add Trace</span>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <br/>
+                                <br/>
+
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Tracing Date</th>
+                                            <th scope="col">Mode</th>
+                                            <th scope="col">Outcome</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let trace of tracingMergeArray; let index = index;">
+                                            <td>{{ index }}</td>
+                                            <td>{{ trace.tracingDate | date: 'dd-MMM-yyyy' }}</td>
+                                            <td>{{ trace.mode }}</td>
+                                            <td>{{ trace.outcome }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-lg-12">
+                                    &nbsp;
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-4">
+                                    <button mat-raised-button color="primary" (click)="onSubmitForm()">
+                                        <strong>Save Changes</strong>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -88,7 +88,7 @@ namespace Entities.Pharmacy
         [Column("OrderedByDate")]
         public DateTime PrescriptionDate { get; set; }
           [Column("DispensedByDate")]
-        public DateTime DispensedDate { get; set; }
+        public DateTime? DispensedDate { get; set; }
         /// <summary>
         /// Gets or sets the create date.
         /// </summary>

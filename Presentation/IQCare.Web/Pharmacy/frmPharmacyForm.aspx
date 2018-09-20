@@ -649,8 +649,7 @@
                                                 runat="server" Text="OK " OnClick="btnOk_Click" />
                                             <asp:Button ID="btnPrint" CssClass="btn btn-info" Text="Print Pharmacy Form" runat="server"
                                                 OnClientClick="WindowPrint()" />
-                                            <%--                                            <asp:Button ID="btnPresPrint" CssClass="btn btn-info" Text="Save and Print Prescription"
-                                                runat="server" OnClick="btnPresPrint_Click" />--%>
+                                         
                                             <asp:Button ID="btncancel" CssClass="btn btn-danger" runat="server" Text="Close"
                                                 OnClick="btncancel_Click" />
                                         </td>

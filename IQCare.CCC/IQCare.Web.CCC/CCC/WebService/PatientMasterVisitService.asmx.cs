@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Web.Script.Serialization;
 using System.Web.Services;
 using IQCare.CCC.UILogic;
 using IQCare.CCC.UILogic.Visit;
-using Newtonsoft.Json;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -71,7 +72,8 @@ namespace IQCare.Web.CCC.WebService
             {
                 int patientId = Convert.ToInt32(Session["PatientPK"]);
                 PatientCareEndingManager patientCareEnding=new PatientCareEndingManager();
-                _jsonMessage = JsonConvert.SerializeObject(patientCareEnding.GetPatientCareEndings(patientId));
+                //_jsonMessage = JsonConvert.SerializeObject(patientCareEnding.GetPatientCareEndings(patientId));
+                _jsonMessage = new JavaScriptSerializer().Serialize(patientCareEnding.GetPatientCareEndings(patientId));
             }
             catch (Exception e)
             {
@@ -79,5 +81,21 @@ namespace IQCare.Web.CCC.WebService
             }
             return _jsonMessage;
         }
+
+        [WebMethod(EnableSession = true)]
+        public string GetVisitById(int visitId)
+        {
+            try
+            {
+                PatientMasterVisitManager patientMasterVisitManager = new PatientMasterVisitManager();
+                _jsonMessage = new JavaScriptSerializer().Serialize(patientMasterVisitManager.GetVisitById(visitId));
+            }
+            catch (Exception e)
+            {
+                _jsonMessage = e.Message;
+            }
+            return _jsonMessage;
+        }
+        
     }
 }

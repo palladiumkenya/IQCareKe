@@ -6,6 +6,7 @@ using DataAccess.CCC.Context;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using Interface.CCC.Lookup;
 
 namespace BusinessProcess.CCC.Enrollment
 {
@@ -106,6 +107,18 @@ namespace BusinessProcess.CCC.Enrollment
                     .FindBy(x => x.PatientId == patientId && x.IdentifierTypeId == identifierTypeId).ToList();
                 unitOfWork.Dispose();
                 return patientIdentifiers;
+            }
+        }
+
+        public PatientEntityIdentifier GetPatientByCardSerialNumber(string cardSerialNumber)
+        {
+             
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var patientIdentifier = unitOfWork.PatientIdentifierRepository
+                    .FindBy(x => x.IdentifierValue == cardSerialNumber).FirstOrDefault();
+                unitOfWork.Dispose();
+                return patientIdentifier;
             }
         }
     }

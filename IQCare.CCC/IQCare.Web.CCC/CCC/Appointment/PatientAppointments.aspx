@@ -15,21 +15,25 @@
                 <label class="control-label pull-left text-info">Patient Appointment Summary </label>
 
             </div>
-            <table class="table table-hover" id="tblAppointment" clientidmode="Static" runat="server">
-                <thead>
-                    <tr class="active">
-                        <th><span class="text-primary" aria-hidden="true">#</span></th>
-                        <th><span class="text-primary" aria-hidden="true">Appointment Date</span> </th>
-                        <th><span class="text-primary" aria-hidden="true">Service Area</span> </th>
-                        <th><span class="text-primary" aria-hidden="true">Reason</span> </th>
-                        <th><span class="text-primary" aria-hidden="true">Description</span> </th>
-                        <th><span class="text-primary" aria-hidden="true">Differetiated Care</span> </th>
-                        <th><span class="text-primary" aria-hidden="true">Status</span> </th>
-                    </tr>
+            
+            <table class="table table-hover" id="tblAppointment">
+                <thead class="thead-default">
+                <tr>
+                    <th><span class="text-primary" aria-hidden="true">#</span></th>
+                    <th><span class="text-primary" aria-hidden="true">Appointment Date</span> </th>
+                    <th><span class="text-primary" aria-hidden="true">Service Area</span> </th>
+                    <th><span class="text-primary" aria-hidden="true">Reason</span> </th>
+                    <th><span class="text-primary" aria-hidden="true">Differetiated Care</span> </th>
+                    <th><span class="text-primary" aria-hidden="true">Status</span> </th>
+                    <th><span class="text-primary" aria-hidden="true">Edit</span> </th>
+                    <th><span class="text-primary" aria-hidden="true">Delete</span> </th>
+                    <th><span class="text-primary" aria-hidden="true">AppointmentId</span> </th>
+                </tr>
+
                 </thead>
-                <tbody>
-                </tbody>
+
             </table>
+
         </div>
         <div class="col-md-12">
                 <asp:LinkButton runat="server" ID="AddAppointment" ClientIDMode="Static" OnClientClick="return false" CssClass=" btn btn-info btn-lg fa fa-plus-circle"> Add Appointment</asp:LinkButton>
@@ -38,44 +42,112 @@
         <IQ:ucExtruder runat="server" ID="ucExtruder" />
     </div>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             var patientId = "<%=PatientId%>";
             jQuery.support.cors = true;
+            var arrayAppointments = [];
+
             $.ajax(
-            {
-                type: "POST",
-                url: "../WebService/PatientService.asmx/GetPatientAppointments",
-                data: "{'patientId':'" + patientId + "'}",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                cache: false,
-                success: function (response) {
-                    var itemList = response.d;
-                    var table = '';
-                    itemList.forEach(function (item, i) {
-                        n = i + 1;
-                        table += '<tr><td style="text-align: left">' + n + '</td><td style="text-align: left">' + moment(item.AppointmentDate).format('DD-MMM-YYYY') + '</td><td style="text-align: left">' + item.ServiceArea + '</td><td style="text-align: left">' + item.Reason + '</td><td style="text-align: left">' + item.Description + '</td><td style="text-align: left">' + item.DifferentiatedCare + '</td><td style="text-align: left">' + item.Status + '</td></tr>';
-                    });
+                {
+                    type: "POST",
+                    url: "../WebService/PatientService.asmx/GetPatientAppointments",
+                    data: "{'patientId':'" + patientId + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    cache: false,
+                    success: function(response) {
+                        var itemList = response.d;
+                        //console.log(itemList);
+                        for (var i = 0, len = itemList.length; i < len; i++) {
+                            //console.log(itemList[i]);
+                            arrayAppointments.push(
+                                [
+                                    i,
+                                    moment(itemList[i].AppointmentDate).format('DD-MMM-YYYY'),
+                                    itemList[i].ServiceArea,
+                                    itemList[i].Reason,
+                                    itemList[i].DifferentiatedCare,
+                                    itemList[i].Status,
+                                    itemList[i].EditAppointment,
+                                    itemList[i].DeleteAppointment,
+                                    itemList[i].AppointmentId
+                                ]
+                            );
+                        }
+                        initialiseDataTable(arrayAppointments);
+                    },
 
-                    $('#tblAppointment').append(table);
+                    error: function(msg) {
+                        //alert(msg.responseText);
+                    }
+                });
 
-                },
+            function initialiseDataTable(data) {
+                $("#tblAppointment").dataTable().fnDestroy();
+                tableAppointments = $('#tblAppointment').DataTable({
+                    "columnDefs": [
+                        {
+                            "targets": [8],
+                            "visible": false,
+                            "searchable": false
+                        }
+                    ],
+                    "aaData": data,
+                    paging: true,
+                    searching: true
+                });
+            }
 
-                error: function (msg) {
-                    //alert(msg.responseText);
-                }
-            });
-            $("#btnClose").click(function () {
+
+            $("#btnClose").click(function() {
                 window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>';
             });
 
-            $("#AddAppointment").click(function () {
+            $("#AddAppointment").click(function() {
                 setTimeout(function() {
                         window.location.href = '<%=ResolveClientUrl("~/CCC/Appointment/ScheduleAppointment.aspx") %>';
                     },
                     2000);
             });
-        })
+        });
+
+        $("#tblAppointment").on('click', '.btnDelete', function () {
+            var AppointmentId = tableAppointments.row($(this).parents('tr')).data()["8"];
+            //var AppintmentDate = tableAppointments.row($(this).parents('tr')).data()["7"];
+            //var ServiceArea = tableAppointments.row($(this).parents('tr')).data()["7"];
+            //var Reason = tableAppointments.row($(this).parents('tr')).data()["7"];
+            //var DifferentialCare = tableAppointments.row($(this).parents('tr')).data()["7"];
+            //var DeleteFlag = tableAppointments.row($(this).parents('tr')).data()["7"];
+            //alert(datas);
+            DeleteAppointment(AppointmentId);
+            tableAppointments.row($(this).parents('tr'))
+                .remove()
+                .draw();
+                
+            var index = reactionEventList.indexOf($(this).parents('tr').find('td:eq(0)').text());
+            if (index > -1) {
+                reactionEventList.splice(index, 1);
+            }
+        });
+
+        function DeleteAppointment(appointmentid){
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientService.asmx/DeleteAppointment",
+                data: "{'AppointmentId': '" + appointmentid + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    toastr.success(response.d, "Appointment Deleted successfully");
+                    //resetFields();
+                    <%--//setTimeout(function () { window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>'; }, 2500);--%>
+                },
+                error: function (response) {
+                    alert(JSON.stringify(response));
+                    toastr.error(response.d, "Appointment not deleted");
+                }
+            });
+        }
 
     </script>
 </asp:Content>

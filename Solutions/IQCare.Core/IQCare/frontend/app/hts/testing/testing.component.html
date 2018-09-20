@@ -1,0 +1,194 @@
+<div class="ibox">
+    <div class="ibox-title">
+        <app-clientbrief></app-clientbrief>
+    </div>
+    <div class="ibox-content">
+        <div class="row">
+            <div class="col-lg-2 col-md-2 col-sm-2">
+                <app-leftnav></app-leftnav>
+            </div>
+
+            <div class="col-md-10 col-lg-10 col-sm-10 animated fadeIn">
+                <div class="panel panel-default">
+                    <div class="panel-heading">HTS TESTING</div>
+                    <div class="panel-body">
+                        <h2>TESTING</h2>
+                        <div class="row">
+                            <div class="tabs-container">
+                                <ul class="nav nav-tabs">
+                                    <li class="active">
+                                        <a data-toggle="tab" href="#tab-1">Screening Test</a>
+                                    </li>
+                                    <li class="">
+                                        <a data-toggle="tab" href="#tab-2">Confirmatory Test</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div id="tab-1" class="tab-pane active">
+                                        <div class="panel-body">
+
+                                            <button mat-raised-button color="primary" *ngIf="testButton1" type="button" (click)="openDialog('Screening Test')">
+                                                <i class="fa fa-plus"></i>
+                                                ADD SCREENING
+                                            </button>
+
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">#</th>
+                                                        <th scope="col">HIV Result</th>
+                                                        <th scope="col">Kit Name</th>
+                                                        <th scope="col">Lot Number</th>
+                                                        <th scope="col">Expiry Date</th>
+                                                        <th scope="col">&nbsp;</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let hivResult of hivResults1; let index = index">
+                                                        <td>{{ index }}</td>
+                                                        <td>{{ hivResult['hivResult']['itemName'] }}</td>
+                                                        <td>{{ hivResult.kitName.itemName }}</td>
+                                                        <td>{{ hivResult['lotNumber'] }}</td>
+                                                        <td>{{ hivResult['expiryDate'] | date: 'dd-MMM-yyyy' }}</td>
+                                                        <td>
+                                                            <i style="cursor: pointer;" class="material-icons" (click)="deleteTest(hivResult, 1, index, $event);">
+                                                                delete
+                                                            </i>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div id="tab-2" class="tab-pane">
+                                        <div class="panel-body">
+                                            <button mat-raised-button color="primary" *ngIf="testButton2" type="button" (click)="openDialog('Confirmatory Test')">
+                                                <i class="fa fa-plus"></i>
+                                                ADD CONFIRMATORY
+                                            </button>
+
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">#</th>
+                                                        <th scope="col">HIV Result</th>
+                                                        <th scope="col">Kit Name</th>
+                                                        <th scope="col">Lot Number</th>
+                                                        <th scope="col">Expiry Date</th>
+                                                        <th scope="col">&nbsp;</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let hivResult of hivResults2; let index = index;">
+                                                        <td>{{ index }}</td>
+                                                        <td>{{ hivResult['hivResult']['itemName'] }}</td>
+                                                        <td>{{ hivResult.kitName.itemName }}</td>
+                                                        <td>{{ hivResult['lotNumber'] }}</td>
+                                                        <td>{{ hivResult['expiryDate'] | date: 'dd-MMM-yyyy' }}</td>
+                                                        <td>
+                                                            <i style="cursor: pointer;" class="material-icons" (click)="deleteTest(hivResult, 2, index, $event);">
+                                                                delete
+                                                            </i>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <p>
+                                &nbsp;
+                                <br/>
+                                <br/>
+                                <br/>
+                            </p>
+                        </div>
+
+                        <form [formGroup]="formTesting">
+                            <fieldset>
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                        <mat-form-field appNoneEvents>
+                                            <mat-select placeholder="Screening Test Result" name="finalResultHiv1" id="finalResultHiv1" formControlName="finalResultHiv1"
+                                                required>
+                                                <mat-option value=""></mat-option>
+                                                <mat-option *ngFor="let option of hivResultsOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <mat-form-field>
+                                            <mat-select placeholder="Final Result Given?" name="finalResultGiven" id="finalResultGiven" formControlName="finalResultGiven"
+                                                (selectionChange)="onFinalResultsGivenChange()" required>
+                                                <mat-option value=""></mat-option>
+                                                <mat-option *ngFor="let option of yesNoOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+
+
+                                        <mat-form-field>
+                                            <mat-select placeholder="Accepted to partner listing" name="acceptedPartnerListing" id="acceptedPartnerListing" (selectionChange)="onAcceptedPartnerListingChange()"
+                                                formControlName="acceptedPartnerListing" required>
+                                                <mat-option value=""></mat-option>
+                                                <mat-option *ngFor="let option of yesNoNA" [value]="option.itemId">{{option.itemName}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                        <mat-form-field appNoneEvents>
+                                            <mat-select placeholder="Confirmatory Test Result" name="finalResultHiv2" id="finalResultHiv2" formControlName="finalResultHiv2"
+                                                required>
+                                                <mat-option value=""></mat-option>
+                                                <mat-option *ngFor="let option of hivResultsOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <mat-form-field>
+                                            <mat-select placeholder="Couple Discordant" name="coupleDiscordant" id="coupleDiscordant" formControlName="coupleDiscordant"
+                                                required>
+                                                <mat-option value=""></mat-option>
+                                                <mat-option *ngFor="let option of yesNoNA" [value]="option.itemId">{{option.itemName}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <mat-form-field>
+                                            <mat-select placeholder="Reasons for decline to partner listing" name="reasonsDeclinePartnerListing" id="reasonsDeclinePartnerListing"
+                                                formControlName="reasonsDeclinePartnerListing" required>
+                                                <mat-option value=""></mat-option>
+                                                <mat-option *ngFor="let option of reasonsDeclined" [value]="option.itemId">{{option.itemName}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                        <mat-form-field appNoneEvents>
+                                            <mat-select placeholder="Final Result" name="finalResult" id="finalResult" formControlName="finalResult" required>
+                                                <mat-option value=""></mat-option>
+                                                <mat-option *ngFor="let option of hivFinalResultsOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <mat-form-field>
+                                            <input matInput placeholder="Remarks" id="finalResultsRemarks" name="finalResultsRemarks" rows="5" formControlName="finalResultsRemarks"
+                                            />
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+
+                                <div class="pull-right example-container row">
+                                    <button mat-raised-button color="primary" (click)="onSubmit()">
+                                        <strong>Save Changes</strong>
+                                    </button>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

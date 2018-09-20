@@ -1,0 +1,43 @@
+<h2 mat-dialog-title>{{title}}</h2>
+
+<mat-divider></mat-divider>
+<br>
+
+<form [formGroup]="form">
+    <mat-dialog-content>
+        <mat-form-field>
+            <mat-select placeholder="Kit Name" formControlName="kitName" required>
+                <mat-option value=""></mat-option>
+                <mat-option *ngFor="let option of hivTestKits" [value]="option">{{option.itemName}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="!form.controls['kitName'].valid">Please select Kit Name</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput placeholder="Lot Number" type="text" id="lotNumber" name="lotNumber" formControlName="lotNumber" required>
+            <mat-error *ngIf="!form.controls['lotNumber'].valid">Please select a lot number</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput [min]="minDate" placeholder="Expiry Date" required [matDatepicker]="expiryDatepicker" (click)="expiryDatepicker.open()"
+                id="expiryDatepicker" name="expiryDatepicker" formControlName="expiryDate" required>
+            <mat-datepicker-toggle matSuffix [for]="expiryDatepicker"></mat-datepicker-toggle>
+            <mat-datepicker #expiryDatepicker></mat-datepicker>
+            <mat-error *ngIf="!form.controls['expiryDate'].valid">Please select an Expiry Date</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-select placeholder="HIV Result" formControlName="hivResult" required>
+                <mat-option value=""></mat-option>
+                <mat-option *ngFor="let option of hivResultsOptions" [value]="option">{{option.itemName}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="!form.controls['hivResult'].valid">Please select Hiv Result</mat-error>
+        </mat-form-field>
+
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+        <button class="mat-raised-button" (click)="close()">Close</button>
+        <button class="mat-raised-button mat-primary" (click)="save()">Save</button>
+    </mat-dialog-actions>
+</form>

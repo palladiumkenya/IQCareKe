@@ -70,7 +70,7 @@
                     <!-- .col-md-6-->
                     <div class="col-md-6">
                         <form id="signIn" enableviewstate="true" runat="server" defaultbutton="btnLogin"
-                        defaultfocus="txtuname" data-parsley-validate>
+                        defaultfocus="txtuname" data-parsley-validate="true">
                         <asp:ScriptManager ID="mst" runat="server" EnablePageMethods="true" ScriptMode="Auto"
                             OnAsyncPostBackError="ActionScriptManager_AsyncPostBackError">
                         </asp:ScriptManager>
@@ -196,6 +196,7 @@
         $(document)
         .ready(function () {
             $("#signIn").parsley();
+            localStorage.clear();
         });
    
     </script>

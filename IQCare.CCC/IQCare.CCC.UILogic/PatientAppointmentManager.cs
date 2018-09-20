@@ -3,6 +3,8 @@ using Entities.CCC.Appointment;
 using Interface.CCC;
 using System;
 using System.Collections.Generic;
+using IQCare.Events;
+using IQCare.Web.UILogic;
 
 namespace IQCare.CCC.UILogic
 {
@@ -10,8 +12,13 @@ namespace IQCare.CCC.UILogic
     {
         private IPatientAppointment _appointment = (IPatientAppointment)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientAppointment, BusinessProcess.CCC");
 
-        public int AddPatientAppointments(PatientAppointment p)
+        public int AddPatientAppointments(PatientAppointment p, bool sendEvent = true)
         {
+            try
+            {
+                if (p.CreatedBy == 0) { p.CreatedBy = SessionManager.UserId; }
+            }
+            catch { }
             PatientAppointment appointment = new PatientAppointment()
             {
                 PatientId = p.PatientId,
@@ -23,8 +30,26 @@ namespace IQCare.CCC.UILogic
                 ServiceAreaId = p.ServiceAreaId,
                 StatusId = p.StatusId,
                 StatusDate = DateTime.Now,
+                CreatedBy = p.CreatedBy
             };
-            return _appointment.AddPatientAppointments(appointment);
+
+            int returnVal = _appointment.AddPatientAppointments(appointment);
+            if (returnVal > 0 && sendEvent)
+            {
+                PatientLookupManager patientLookup = new PatientLookupManager();
+                var patient = patientLookup.GetPatientDetailSummary(p.PatientId);
+                MessageEventArgs args = new MessageEventArgs()
+                {
+                    FacilityId = patient.FacilityId,
+                    EntityId = returnVal,
+                    PatientId = appointment.PatientId,
+                    MessageType = MessageType.AppointmentScheduling,
+                    EventOccurred = "Patient Appointment Scheduled"
+                };
+
+                Publisher.RaiseEventAsync(this, args).ConfigureAwait(false);
+            }
+            return returnVal;
         }
 
         public PatientAppointment GetPatientAppointment(int id)
@@ -56,7 +81,8 @@ namespace IQCare.CCC.UILogic
                 ReasonId = p.ReasonId,
                 ServiceAreaId = p.ServiceAreaId,
                 StatusId = p.StatusId,
-                StatusDate = DateTime.Now,
+                //StatusDate = DateTime.Now,
+                Id = p.Id
             };
             return _appointment.UpdatePatientAppointments(appointment);
         }

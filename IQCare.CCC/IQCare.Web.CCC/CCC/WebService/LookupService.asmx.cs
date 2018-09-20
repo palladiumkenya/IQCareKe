@@ -3,9 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Web.Services;
 using Application.Presentation;
+using Entities.CCC.IL;
 using Entities.CCC.Lookup;
 using Interface.CCC.Lookup;
 using IQCare.CCC.UILogic;
+using IQCare.CCC.UILogic.Interoperability;
 using Microsoft.JScript;
 
 
@@ -195,7 +197,7 @@ namespace IQCare.Web.CCC.WebService
                     ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
             try
             {
-                return mgr.GetLookItemByGroup("KeyPopulation");
+                return mgr.GetLookItemByGroup(groupName);
             }
             catch (Exception e)
             {
@@ -214,6 +216,21 @@ namespace IQCare.Web.CCC.WebService
             catch (Exception e)
             {
                 throw new Exception(e.Message);
+            }
+        }
+
+        [WebMethod]
+        public List<ILMessageViewer> GetMessages(string messageType)
+        {
+            try
+            {
+                IlStatisticsManager ilStatisticsManager = new IlStatisticsManager();
+                var result = ilStatisticsManager.GetMessages(messageType, false);
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw e;
             }
         }
     }

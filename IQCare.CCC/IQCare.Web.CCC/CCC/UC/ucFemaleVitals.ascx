@@ -56,7 +56,7 @@
                                <span class="input-group-addon">
                                    <span class="glyphicon glyphicon-calendar"></span>
                                </span>
-                               <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="lmp" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>        
+                               <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="lmp" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>        
                            </div>
                        </div>
                    </div>
@@ -496,11 +496,11 @@
              var cacxId = $("#<%=cacxscreening.ClientID%>").find(":selected").val();
 
              var screeningTypeId = 44;
-             var screeningDone = 1;
+             var screeningDone = true;
              $.ajax({
                  type: "POST",
                  url: "../WebService/FemaleVitalsWebservice.asmx/AddPatientScreening",
-                 data: "{'patientId':'" + patientId + "','patientMasterVisitid':'" + patientMasterVisitId + "','visitDate':'" + visitDate + "','screeningTypeId':'" + screeningTypeId + "', 'screeningDone':'" + screeningDone + "', 'screeningDate':'15-Jun-1900', 'screeningCategoryId':'0', 'screeningValueId':'" + cacxId + "','comment':'null','userId':'0'}",
+                 data: "{'patientId':'" + patientId + "','patientMasterVisitid':'" + patientMasterVisitId + "','visitDate':'" + visitDate + "','screeningTypeId':'" + screeningTypeId + "', 'screeningDone':" + screeningDone + ", 'screeningDate':'15-Jun-1900', 'screeningCategoryId':'0', 'screeningValueId':'" + cacxId + "','comment':'null','userId':'0'}",
                  contentType: "application/json; charset=utf-8",
                  dataType: "json",
                  success: function (response) {
@@ -517,11 +517,11 @@
 
              var stiId = $("#<%=stiScreening.ClientID%>").find(":selected").val();
              var screeningTypeId = 45;
-             var screeningDone = 1;
+             var screeningDone = true;
              $.ajax({
                  type: "POST",
                  url: "../WebService/FemaleVitalsWebservice.asmx/AddPatientScreening",
-                 data: "{'patientId':'" + patientId + "','patientMasterVisitid':'" + patientMasterVisitId + "','visitDate':'" + visitDate + "','screeningTypeId':'" + screeningTypeId + "', 'screeningDone':'" + screeningDone + "', 'screeningDate':'15-Jun-1900', 'screeningCategoryId':'0', 'screeningValueId':'" + stiId + "','comment':'null','userId':'0'}",
+                 data: "{'patientId':'" + patientId + "','patientMasterVisitid':'" + patientMasterVisitId + "','visitDate':'" + visitDate + "','screeningTypeId':'" + screeningTypeId + "', 'screeningDone':" + screeningDone + ", 'screeningDate':'15-Jun-1900', 'screeningCategoryId':'0', 'screeningValueId':'" + stiId + "','comment':'null','userId':'0'}",
                  contentType: "application/json; charset=utf-8",
                  dataType: "json",
                  success: function (response) {
@@ -538,11 +538,11 @@
 
              var stiNotificationId = $("#<%=stiPartnerNotification.ClientID%>").find(":selected").val();
              var screeningTypeId = 87;
-             var screeningDone = 1;
+             var screeningDone = true;
              $.ajax({
                  type: "POST",
                  url: "../WebService/FemaleVitalsWebservice.asmx/AddPatientScreening",
-                 data: "{'patientId':'" + patientId + "','patientMasterVisitid':'" + patientMasterVisitId + "','visitDate':'" + visitDate + "','screeningTypeId':'" + screeningTypeId + "', 'screeningDone':'" + screeningDone + "', 'screeningDate':'15-Jun-1900', 'screeningCategoryId':'0', 'screeningValueId':'" + stiNotificationId + "','comment':'null','userId':'0'}",
+                 data: "{'patientId':'" + patientId + "','patientMasterVisitid':'" + patientMasterVisitId + "','visitDate':'" + visitDate + "','screeningTypeId':'" + screeningTypeId + "', 'screeningDone':" + screeningDone + ", 'screeningDate':'15-Jun-1900', 'screeningCategoryId':'0', 'screeningValueId':'" + stiNotificationId + "','comment':'null','userId':'0'}",
                  contentType: "application/json; charset=utf-8",
                  dataType: "json",
                  success: function (response) {

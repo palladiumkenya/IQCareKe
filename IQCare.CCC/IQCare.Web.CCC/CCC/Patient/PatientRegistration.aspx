@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CCC/Greencard.Master" AutoEventWireup="true" CodeBehind="PatientRegistration.aspx.cs" Inherits="IQCare.Web.CCC.Patient.PatientRegistration" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
-	<div class="=col-md-12 col-sm-12 col-xs-12">
+    <div class="=col-md-12 col-sm-12 col-xs-12">
 		
 		<div class="col-md-12">
 			 <div class="bs-callout bs-callout-danger hidden">
@@ -21,22 +21,22 @@
 			<div class="wizard" data-initialize="wizard" id="myWizard">
 				 <div class="steps-container">
 					  <ul class="steps">
-						  <li data-step="1" data-name="profile" class="active">
+						  <li data-step="1" data-target="#step1" data-name="profile" class="active">
 							  <span class="badge">1</span>Patient Profile
 							  <span class="chevron"></span>
 						  </li>
 
-						  <li data-step="2" data-name="location">
+						  <li data-step="2" data-target="#step2" data-name="location">
 							  <span class="badge">2</span>Patient Location
 							  <span class="chevron"></span>
 						  </li>
 
-						  <li data-step="3" data-name="contacts">
+						  <li data-step="3" data-target="#step3" data-name="contacts">
 							  <span class="badge">3</span>Patient Contacts
 							  <span class="chevron"></span>
 						  </li>
 
-						  <li data-step="4" data-name="socialstatus">
+						  <li data-step="4" data-target="#step4" data-name="socialstatus">
 							  <span class="badge">4</span>Patient Population
 							  <span class="chevron"></span>
 						  </li>
@@ -414,7 +414,7 @@
 							   </div>
 							   
 							   <div class="col-md-3">
-									<div class="col-md-12"><label class="required control-label pull-left">Nearest Health Centre</label></div>
+									<div class="col-md-12"><label class="required control-label pull-left">Nearest Health Facility</label></div>
 									<div class="col-md-12">
 										 <asp:TextBox runat="server" ID="NearestHealthCentre" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="nearest health centre" data-parsley-required="true" data-parsley-length="[2,30]" ></asp:TextBox>
 									</div>
@@ -589,7 +589,9 @@
 
 				var personAge = 0;
 				var userId=<%=UserId%>;
-				var personId = 0;
+                var personId = 0;
+
+		        var editPersonId = 0;
 
 				/*----- make readonly by default ----- */
 				$("#<%=ChildOrphan.ClientID%>").attr('disabled', 'disbaled');
@@ -626,7 +628,8 @@
 					personAgeRule();
 					duplicateCheck();
 					$("#dobPrecision").val("true");
-					PageMethods.SetDobPrecisionSession(true);
+                    PageMethods.SetDobPrecisionSession(true);
+                    
 				});
 
 				$('#<%=countyId.ClientID%>').on("change", function() {
@@ -650,11 +653,25 @@
 				});
 
 				$('#btnWizardPrev').on('click', function () {
-					$('#myWizard').wizard('previous');
+					//$('#myWizard').wizard('previous');
 				});
 				$('#btnWizardNext').on('click', function () {
 					$('#myWizard').wizard('next');
-				});
+                });
+
+                var wizardSteps = $('#myWizard>.steps>li').length;
+
+		        $('#myWizard').on('changed.fu.wizard', function (evt, item) {
+		            //var firstStep = (item.step === 1);
+		            //var lastStep = (item.step === wizardSteps);
+              //      console.log(item.step);
+		            //// update next button text if last step
+		            //var nextText = (lastStep) ? 'Save & Continue' : 'Next';
+              //      $('#btnWizardNext').text(nextText);
+
+		            //// disable back button if first step
+              //      $('#btnWizardPrev').attr('disabled', firstStep);
+		        });
 
 				//$('#keyPopulationCategories').multiselect();
 
@@ -781,7 +798,8 @@
 								});
 								if ($("#datastep4").parsley().validate()) {
 
-									var patientTypePopulationType = $('#<%= PopulationType.ClientID %> input:checked')
+                                   
+								    var patientTypePopulationType = $('#<%= PopulationType.ClientID %> input:checked')
 										.val();
 
 									var checked_radio = $("[id*=PopulationType] input:checked");
@@ -1158,10 +1176,10 @@
 							var itemList = JSON.parse(response.d);
 							$("#<%=KeyPopulationCategoryId.ClientID%>").find('option').remove().end();
 							$.each(itemList, function (index, itemList) {
-								if (itemList.ItemDisplayName == "Female Sex Worker" && sex == "Male") {
+								if (itemList.ItemDisplayName === "Female Sex Worker" && sex === "Male") {
 									
 								}
-								else if (itemList.ItemDisplayName == "Men having Sex with Men" && sex == "Female") {
+								else if (itemList.ItemDisplayName === "Men having Sex with Men" && sex === "Female") {
 
 								} else {
 									$("#<%=KeyPopulationCategoryId.ClientID%>").append('<option value="' + itemList.ItemId + '">' + itemList.ItemDisplayName + ' (' + itemList.ItemName + ')</option>');
@@ -1211,9 +1229,67 @@
 					}
 				}*/
 
-				var PatientId = '<%=Session["PatientEditId"]%>';
+                var PatientId = '<%=Session["PatientEditId"]%>';
 
-				//console.log(PatientId);
+                var editPersonId = '<%=Session["editPersonId"]%>';
+
+		        if (editPersonId > 0) {
+
+		            $.ajax({
+		                type: "POST",
+		                url: "../WebService/PersonService.asmx/GetPersonNoEnrolledDetails",
+		                data: "{'personId':'" + editPersonId + "'}",
+		                contentType: "application/json; charset=utf-8",
+		                dataType: "json",
+		                success: function(response) {
+		                    var personDetails = JSON.parse(response.d);
+		                     $("#personFname").val(personDetails.FirstName);
+		                    $("#personMName").val(personDetails.MiddleName);
+                            $("#personLName").val(personDetails.LastName);
+		                    $('input[name=PatientTypeId][value=' + personDetails.patientType + ']').attr('checked', true);
+                            $("#Gender").val(personDetails.Sex);
+                           
+
+                            if (moment('1900-06-15').isSame(personDetails.DoB)) {
+                                $("#DateOfEnrollment").val("");
+                            } else {
+                                $('#MyDateOfBirth').datepicker('setDate', moment(personDetails.DoB).format('DD-MMM-YYYY'));
+                                $("#personAge").val(personDetails.Age);
+                            }
+
+		                    var RBID = '<%=PatientTypeId.ClientID %>';
+		                    var RB1 = document.getElementById(RBID);
+		                    var radio = RB1.getElementsByTagName("input");
+ 
+		                    for (var i = 0; i < radio.length; i++) {
+		                        //radio[i].disabled = true;
+		                        if (radio[i].value == personDetails.PatientType) {
+		                            radio[i].checked = true;
+		                        }
+                            }
+                            $("#MaritalStatusId").val(personDetails.MaritalStatus);
+                            
+                            $("#<%=dobPrecision.ClientID%>").val(personDetails.DateOfBirthPrecision);
+
+		                    var RBID = '<%=PopulationType.ClientID %>';
+		                    var RB1 = document.getElementById(RBID);
+		                    var radio = RB1.getElementsByTagName("input");
+ 
+		                    for (var i = 0; i < radio.length; i++) {
+		                        if (radio[i].value == personDetails.KeyPopName) {
+		                            radio[i].checked = true;
+		                        }
+		                    }
+		                    
+		                },
+		                error: function(response) {
+		                    generate('error', response.d);
+		                }
+
+		            });
+		        }
+
+		        //console.log(PatientId);
 
 				if (PatientId > 0) {
 					$.ajax({
@@ -1223,7 +1299,8 @@
 						contentType: "application/json; charset=utf-8",
 						dataType: "json",
 						success: function (response) {
-							var patientDetails = JSON.parse(response.d);
+                            var patientDetails = JSON.parse(response.d);
+						    //alert(response.d);
 							console.log(patientDetails);
 							/*Patient Type*/
 							//console.log(patientDetails.PatientType);
@@ -1233,7 +1310,7 @@
 							var radio = RB1.getElementsByTagName("input");
  
 							for (var i = 0; i < radio.length; i++) {
-								radio[i].disabled = true;
+								//radio[i].disabled = true;
 								if (radio[i].value == patientDetails.PatientType) {
 									radio[i].checked = true;
 								}
@@ -1244,10 +1321,10 @@
 							$("#personMName").val(patientDetails.MiddleName);
 							$("#personLName").val(patientDetails.LastName);
 							$("#Gender").val(patientDetails.Gender);
-							$("#Gender").prop('disabled', true);
+							//$("#Gender").prop('disabled', true);
 							
 							/*Social Status*/
-							$('#MyDateOfBirth').datepicker('setDate', patientDetails.PersonDoB);
+							$('#MyDateOfBirth').datepicker('setDate',patientDetails.PersonDoB);
 							$("#<%=dobPrecision.ClientID%>").val(patientDetails.DateOfBirthPrecision);
 							$("#ChildOrphan").val(patientDetails.ChildOrphan);
 							$("#Inschool").val(patientDetails.Inschool);
@@ -1306,7 +1383,7 @@
 							$("#ctl00_IQCareContentPlaceHolder_TSContacts").val(patientDetails.ISContacts);
 							/*Key Population*/
 							//$('input[name="Population"]').value = patientDetails.population;
-							console.log(patientDetails.population);
+							//console.log(patientDetails.population);
 
 							/*if (patientDetails.population == "General Population") {
 								var d = document.getElementById("GenPopulation");
@@ -1337,7 +1414,9 @@
 								$("#<%=KeyPopulationCategoryId.ClientID%>").find('option').remove().end();
 								$("#<%=KeyPopulationCategoryId.ClientID%>").append('<option value="0">N/A</option>');
 								$("#<%=KeyPopulationCategoryId.ClientID%>").prop('disabled', true);
-							} else {
+                            }
+
+							else {
 								setTimeout(function(){
 									$("#KeyPopulationCategoryId").val(patientDetails.PopulationCategoryId).trigger("change");
 								}, 2000);                               
@@ -1411,13 +1490,13 @@
 				});
 
 				function duplicateCheck() {
-					var personFname = $("#<%=personFname.ClientID%>").val();
-					var personMName = $("#<%=personMName.ClientID%>").val();
-					var personLName = $("#<%=personLName.ClientID%>").val();
-					var dateOfBirth = $('#MyDateOfBirth').datepicker('getDate');
+					var personFname = escape($("#<%=personFname.ClientID%>").val().trim());
+					var personMName = escape($("#<%=personMName.ClientID%>").val().trim());
+					var personLName =escape ($("#<%=personLName.ClientID%>").val().trim());
+					var dateOfBirth = escape($('#MyDateOfBirth').datepicker('getDate'));
 					var PatientId = '<%=Session["PatientEditId"]%>';
 					//console.log(PatientId);
-
+                    var sex =  $("#<%=Gender.ClientID%>").find(":selected").val().trim();
 					var dob = moment(dateOfBirth).format('DD-MMM-YYYY');
 					//console.log(dob);
 
@@ -1425,13 +1504,18 @@
 					//console.log(personMName);
 					//console.log(personLName);
 
-					if ((PatientId == "" || PatientId == 0) && (personFname != null && personFname != "") && (personLName != null && personLName != "")) {
+                    if ((PatientId == "" || PatientId == 0)
+                        && (personFname != null && personFname != "")
+                        && (personLName != null && personLName != "")
+                        &&(sex !=null && sex!="" && sex!="0")
+                    )
+                    {
 
 						$.ajax({
 							type: "POST",
 							url: "../WebService/PersonService.asmx/GetPatientSearchresults",
 							contentType: "application/json; charset=utf-8",
-							data: "{'firstName': '" + personFname + "', 'middleName': '"+ personMName +"', 'lastName':'" + personLName + "','dob':'" + dob + "'}",
+							data: "{'firstName': '" + personFname + "', 'middleName': '"+ personMName +"', 'lastName':'" + personLName + "','dob':'" + dob + "','sex':'"+sex+"'}",
 							dataType: "json",
 							success: function (response) {
 								var patientDetails = JSON.parse(response.d);
@@ -1488,6 +1572,11 @@
 				{
 					personAge = $("#personAge").val();
 					//var patientType = $("#PatientTypeId").find(":selected").text();
+
+
+                    if (personAge < 15) { //if person age is less than 15 set key pop value to default
+
+                    }
 
 					var checked_radio = $("[id*=PatientTypeId] input:checked");
 					var patientType = checked_radio.closest("td").find("label").html();
@@ -1610,8 +1699,9 @@
 					//console.log("here");
 					//console.log(_fp);
 					//return false;
+				    var isEnrolled = 'notEnrolledClients';
 					if (Object.keys(_fp).length > 0) {
-						if (_fp["IsPatient"] == 1) {
+						if (_fp["IsPatient"] === 1) {
 							$.when(setPatientIdSession(_fp["PatientId"])).then(function () {
 								setTimeout(function () {
 									window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientHome.aspx")%>';
@@ -1620,10 +1710,26 @@
 						} else {
 							var personId = _fp["PersonId"];
 							getPatientTypeId("PatientType", "New");
+						    $.ajax({
+						        type: "POST",
+						        url: "patientRegistration.aspx/RedirectToRegistrationEdit", //Pagename/Functionname
+						        contentType: "application/json;charset=utf-8",
+						        data: "{'personId':'" + personId + "','isEnrolled':'"+ isEnrolled +"'}",//data
+						        dataType: "json",
+						        success: function (data) {
+						            if (data.d === "success") {
+						                setTimeout(function () { window.location.href = "./patientRegistration.aspx" }, 500);
+						            }
+						        },
+						        error: function (result) {
 
-							$.ajax({
+						            alert("error");
+						        }
+						    });
+
+							<%--$.ajax({
 								type: "POST",
-								url: "../WebService/PersonService.asmx/SetSession",
+								url: "../WebService/PatientRegistration.asmx/RedirectToRegistrationEdit",
 								contentType: "application/json; charset=utf-8",
 								data: "{'personId': '" + personId + "'}",
 								dataType: "json",
@@ -1633,7 +1739,7 @@
 								error: function (response) {
 									generate('error', response.d);
 								}
-							});
+							});--%>
 						}
 					} else {
 						toastr.error("Please Select one person from the list", "Patient Duplicates");

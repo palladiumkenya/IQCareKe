@@ -1,11 +1,8 @@
-﻿using System;
+﻿using Entities.Common;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
-using Entities.Common;
 
 namespace IQCare.CCC.UILogic.AuditDataUtility
 {

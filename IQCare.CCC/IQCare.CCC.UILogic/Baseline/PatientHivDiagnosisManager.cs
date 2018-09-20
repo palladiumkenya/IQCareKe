@@ -12,7 +12,7 @@ namespace IQCare.CCC.UILogic.Baseline
         private int _recordId=0;
         private int _result = 0;
 
-        public int ManagePatientHivDiagnosis(int id,int patientId,int patientMasterVisitId,DateTime hivDiagnosisDate,DateTime enrollmentDate,int enrollmentWhoStage,string artInitiationDate,int userId)
+        public int ManagePatientHivDiagnosis(int id,int patientId,int patientMasterVisitId,DateTime hivDiagnosisDate,DateTime enrollmentDate,int enrollmentWhoStage,string artInitiationDate,int userId, int historyARTUse)
         {
             _recordId = _patientHivDiagnosisManager.CheckIfDiagnosisExists(patientId);
 
@@ -28,14 +28,15 @@ namespace IQCare.CCC.UILogic.Baseline
 
             var patienHivDiagnosisInsert = new PatientHivDiagnosis
             {
-                Id=0,
-				PatientId = patientId,
+                Id = 0,
+                PatientId = patientId,
                 PatientMasterVisitId = patientMasterVisitId,
                 HivDiagnosisDate = hivDiagnosisDate,
                 EnrollmentDate = enrollmentDate,
                 EnrollmentWhoStage = enrollmentWhoStage,
                 ArtInitiationDate = artDate,
-                CreatedBy = userId
+                CreatedBy = userId,
+                HistoryARTUse = historyARTUse
             };
 
             //if (artDate.HasValue) patienHivDiagnosisInsert.ArtInitiationDate = artDate.Value;

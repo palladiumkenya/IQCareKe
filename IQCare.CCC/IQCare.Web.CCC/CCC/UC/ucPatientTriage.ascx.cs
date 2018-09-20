@@ -4,6 +4,7 @@ using System.Web.UI;
 using Application.Presentation;
 using Entities.CCC.Visit;
 using Interface.CCC.Visit;
+using IQCare.CCC.UILogic;
 using IQCare.CCC.UILogic.Triage;
 
 
@@ -33,6 +34,10 @@ namespace IQCare.Web.CCC.UC
         {
             get { return Convert.ToInt32(Session["Age"]); }
         }
+        protected string DateOfEnrollment
+        {
+            get { return Session["DateOfEnrollment"].ToString(); }
+        }
 
         protected int PregnancyStatus
         {
@@ -53,6 +58,10 @@ namespace IQCare.Web.CCC.UC
                     Active = true,
                 };
             }
+
+            PatientLookupManager patientLookupManager=new PatientLookupManager();
+            var patientDetails = patientLookupManager.GetPatientDetailSummary(PatientId);
+            Session["DateOfEnrollment"] = patientDetails.EnrollmentDate;
         }
     }
 }

@@ -39,6 +39,7 @@ namespace BusinessProcess.CCC.Baseline
                     patientDiagnosis.EnrollmentDate = patientHivDiagnosis.EnrollmentDate;
                     patientDiagnosis.EnrollmentWhoStage = patientHivDiagnosis.EnrollmentWhoStage;
                     patientDiagnosis.HivDiagnosisDate = patientHivDiagnosis.HivDiagnosisDate;
+                    patientDiagnosis.HistoryARTUse = patientHivDiagnosis.HistoryARTUse;
                     unitOfWork.PatientDiagnosisHivHistoryRepository.Update(patientDiagnosis);
                     Result = unitOfWork.Complete();
                 }

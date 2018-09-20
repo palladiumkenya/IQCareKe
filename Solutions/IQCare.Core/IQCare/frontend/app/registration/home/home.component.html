@@ -1,0 +1,97 @@
+<div class="ibox">
+    <div class="ibox-title">
+        <app-clientbrief></app-clientbrief>
+    </div>
+    <div class="ibox-content">
+        <div class="col-md-2 col-lg-2 col-sm-2">
+            <app-leftnav></app-leftnav>
+        </div>
+        <div class="col-md-10 col-lg-10 col-sm-10 animated fadeIn">
+            <div class="panel panel-default">
+                <div class="panel-heading">HOME</div>
+                <div class="panel-body">
+                    <div class="example-container mat-elevation-z8">
+                        <mat-table #table [dataSource]="dataSource">
+
+                            <!--- Note that these columns can be defined in any order.
+                            The actual rendered columns are set as a property on the row definition" -->
+
+                            <!-- Encounter Date Column -->
+                            <ng-container matColumnDef="encounterDate">
+                                <mat-header-cell *matHeaderCellDef> Encounter Date </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{element.encounterDate | date: 'dd-MMM-yyyy' }} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="testType">
+                                <mat-header-cell *matHeaderCellDef> Test Type </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{element.testType }} </mat-cell>
+                            </ng-container>
+
+                            <!-- Provider Column -->
+                            <ng-container matColumnDef="provider">
+                                <mat-header-cell *matHeaderCellDef> Provider </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{element.provider}} </mat-cell>
+                            </ng-container>
+
+                            <!-- Screening Test Column -->
+                            <ng-container matColumnDef="resultOne">
+                                <mat-header-cell *matHeaderCellDef> Screening Test </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{element.resultOne}} </mat-cell>
+                            </ng-container>
+
+                            <!-- Confirmatory Test Column -->
+                            <ng-container matColumnDef="resultTwo">
+                                <mat-header-cell *matHeaderCellDef> Confirmatory Test </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{element.resultTwo}} </mat-cell>
+                            </ng-container>
+
+                            <!-- Final Result Column -->
+                            <ng-container matColumnDef="finalResult">
+                                <mat-header-cell *matHeaderCellDef> Final Result </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{element.finalResult }} </mat-cell>
+                            </ng-container>
+
+                            <!-- Consent To Testing Column -->
+                            <ng-container matColumnDef="consent">
+                                <mat-header-cell *matHeaderCellDef> Consent To Testing </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{element.consent }} </mat-cell>
+                            </ng-container>
+
+                            <!-- Partner Listing Consent Column -->
+                            <ng-container matColumnDef="partnerListingConsent">
+                                <mat-header-cell *matHeaderCellDef> Partner Listing Consent </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{element.partnerListingConsent }} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="edit">
+                                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                                <mat-cell style="cursor: pointer;"  *matCellDef="let element">
+                                    <mat-icon (click)="onEdit(element)"><i className="material-icons">mode_edit</i></mat-icon>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <mat-icon (click)="onView(element)"><i className="material-icons">remove_red_eye</i></mat-icon>
+                                </mat-cell>
+                            </ng-container>
+
+                            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                        </mat-table>
+                    </div>
+
+                    <div>
+                        &nbsp;
+                    </div>
+
+                    <div class="button-row pull-right">
+                        <a mat-raised-button color="accent" routerLink="/hts">
+                            <i class="fa fa-plus"></i>
+                            <span *ngIf="!isPositive">New HTS Encounter</span>
+                            <span *ngIf="isPositive">Repeat Test</span>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

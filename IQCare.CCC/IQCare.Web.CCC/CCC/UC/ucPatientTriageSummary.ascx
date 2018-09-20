@@ -13,8 +13,8 @@
                             <td><asp:Label runat="server" ID="lblDatetaken" CssClass="pull-left "> #</asp:Label></td>
                             <td>Age:</td>
                             <td><asp:Label runat="server" ID="lblAge" CssClass="text-info pull-left"> 0 Years</asp:Label></td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
+                            <td>MUAC</td>
+                            <td><asp:Label runat="server" ID="lblMuac" CssClass="text-info pull-left"> 0 cms</asp:Label></td>
                         </tr>
                         <tr>
                             <td>Temperature:</td> 
@@ -64,12 +64,15 @@
         </div>
     </div>
     <div class="col-md-12 col-xs-12 col-sm-12">
-        <div class="col-md-6">&nbsp;</div>
+        <div class="col-md-3">&nbsp;</div>
         <div class="col-md-3">
             <asp:LinkButton runat="server" ID="btnLoadTriage" CssClass="btn btn-info fa fa-plus-circle btn-lg" ClientIDMode="Static" OnClientClick="return false;"> Add Patient Vitals</asp:LinkButton>
         </div>
         <div class="col-md-3" id="divBtnVitals">
             <asp:LinkButton runat="server" ID="btnFemalVitals" CssClass="btn btn-success  fa fa-refresh btn-lg " ClientIDMode="Static" OnClientClick="return false;"> Female Patient Followup </asp:LinkButton>
+        </div>
+        <div class="col-md-3" id="divBtnGBVAssessment">
+            <asp:LinkButton runat="server" ID="btnGBVAssessment" CssClass="btn btn-success  fa fa-list btn-lg " ClientIDMode="Static" OnClientClick="return false;"> GBV Assessment </asp:LinkButton>
         </div>
     </div>
 </div>
@@ -85,15 +88,37 @@
         var diaPercentage = ((diastolic / total) * 100);
         var systoPercentage = (systolic / total) * 100;
 
-        $("#pgDiastolic").css('width', diaPercentage + '%').attr('aria-valuenow', diastolic);
-        $("#bgSystolic").css('width', systoPercentage + '%').attr('aria-valuenow', systolic);
+        
+        //systolic >90 and <120 and diastolic >60 and <=80 Normal - green 
+        //systolic >120 and <140  and diastolic >80 and <90 Pre-High Blood pressure -Yellow 
+       
+        //systolic >140 and diastolic >90 -High Blood Pressure Red 
 
-  
+        if (systolic > 0 && diastolic > 0) {
+            var bpColorCode = "";
+            var bpstatus = "";
+            //systolic <90 and diastolic <=60 -LOW | color code Blue
+            if (systolic < 120 && diastolic < 80) { bpColorCode = '#8FBC8F'; bpstatus = 'Normal' }
+            if (systolic >= 120 && systolic < 129 && diastolic < 80) { bpColorCode = '#B8860B'; bpstatus = 'Elevated' }
+            if (systolic >= 130 && systolic < 139 && diastolic > 80 && diastolic < 89) { bpColorCode = '#FF8C00'; bpstatus = 'Hypertension STAGE 1' }
+            if (systolic > 140 && diastolic > 90) { bpColorCode = '#8B0000'; bpstatus = 'Hypertension STAGE 2' }
+            if (systolic > 180 && diastolic > 120) { bpColorCode = '#DC143C'; bpstatus = 'Hypertension CRISIS' }
+
+            $("#pgDiastolic").css('width', diaPercentage + '%').attr('aria-valuenow', diastolic);
+            $("#pgDiastolic").css('background', bpColorCode);
+            $("#bgSystolic").css('width', systoPercentage + '%').attr('aria-valuenow', systolic);
+            $("#bgSystolic").css('background', '' + bpColorCode + '');
+         
+        }
+
+
+
+
         //if (patientGender === 'Male') { $("#btnFemalVitals").prop("disabled",false); }
         //else if (patientGender === 'Female') {
         //     $("#btnFemalVitals").prop("disabled",true);
         //}
-       // alert(patientGender);
+        // alert(patientGender);
 
 
         //$("#btnFemalVitals").click(function() {

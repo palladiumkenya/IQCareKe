@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{62A2C82B-D183-4989-930A-E0451600A100}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>IQCare.WebApi.Logic</RootNamespace>
+    <AssemblyName>IQCare.WebApi.Logic</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TrunkDir>..\..\..\</TrunkDir>
+    <WebDir Condition=" '$(WebDir)' == '' ">$(TrunkDir)package\web\bin\</WebDir>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\References\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ADODB, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\..\..\References\ADODB.dll</HintPath>
+    </Reference>
+    <Reference Include="Application.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\Application.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Application.Presentation">
+      <HintPath>..\..\..\References\Application.Presentation.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper">
+      <HintPath>..\..\..\Library\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Entities.Administration, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\Entities.Administration.dll</HintPath>
+    </Reference>
+    <Reference Include="Entities.CCC, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <Reference Include="Entities.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <Reference Include="Entities.PatientCore, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\Entities.PatientCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Entities.PSmart, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\Entities.PSmart.dll</HintPath>
+    </Reference>
+    <Reference Include="Entities.Queue, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\Entities.Queue.dll</HintPath>
+    </Reference>
+    <Reference Include="Entity.WebApi, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\Entity.WebApi.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\..\References\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\..\..\References\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Interface.Clinical, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\Interface.Clinical.dll</HintPath>
+    </Reference>
+    <Reference Include="Interface.FormBuilder, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\Interface.FormBuilder.dll</HintPath>
+    </Reference>
+    <Reference Include="Interface.PatientCore, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\Interface.PatientCore.dll</HintPath>
+    </Reference>
+    <Reference Include="IQCare.CCC.UILogic, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\IQCare.CCC.UILogic.dll</HintPath>
+    </Reference>
+    <Reference Include="IQCare.DTO, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\IQCare.DTO.dll</HintPath>
+    </Reference>
+    <Reference Include="IQCare.Events, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\IQCare.Events.dll</HintPath>
+    </Reference>
+    <Reference Include="IQCare.Web.UILogic, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\IQCare.Web.UILogic.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApiInboxManager.cs" />
+    <Compile Include="ApiInteropManager.cs" />
+    <Compile Include="ApiOutboxmanager.cs" />
+    <Compile Include="Helpers\AppSettings.cs" />
+    <Compile Include="Helpers\IQConfig.cs" />
+    <Compile Include="MappingEntities\drugs\COMMONORDERDETAILS.cs" />
+    <Compile Include="MappingEntities\drugs\CommonOrderDetailsEntity.cs" />
+    <Compile Include="MappingEntities\drugs\IdentificationEntity.cs" />
+    <Compile Include="MappingEntities\drugs\MessageHeaderEntity.cs" />
+    <Compile Include="MappingEntities\drugs\ORDERINGPHYSICIAN.cs" />
+    <Compile Include="MappingEntities\drugs\OrderingPhysicianEntity.cs" />
+    <Compile Include="MappingEntities\drugs\PatientIdentificationEntity.cs" />
+    <Compile Include="MappingEntities\drugs\PHARMACYENCODEDORDER.cs" />
+    <Compile Include="MappingEntities\drugs\PharmacyEncorderOrderEntity.cs" />
+    <Compile Include="MappingEntities\drugs\PLACERORDERNUMBER.cs" />
+    <Compile Include="MappingEntities\drugs\PlacerOrderNumberEntity.cs" />
+    <Compile Include="MappingEntities\ObservationResultEntity.cs" />
+    <Compile Include="MappingEntities\PatientAppointmentEntity.cs" />
+    <Compile Include="MappingEntities\PharmacyDispenseEntity.cs" />
+    <Compile Include="MappingEntities\PSmart\ClientShr.cs" />
+    <Compile Include="MessageHandler\IIncomingMessageService.cs" />
+    <Compile Include="MessageHandler\IncomingMessageService.cs" />
+    <Compile Include="MessageHandler\IOutgoingMessageService.cs" />
+    <Compile Include="MessageHandler\OutgoingMessageService.cs" />
+    <Compile Include="DtoMapping\DtoMapper.cs" />
+    <Compile Include="DtoMapping\IDtoMapper.cs" />
+    <Compile Include="EntityMapper\IJsonEntityMapper.cs" />
+    <Compile Include="EntityMapper\JsonEntityMapper.cs" />
+    <Compile Include="MappingEntities\CommonJsonEntity.cs" />
+    <Compile Include="MappingEntities\DrugPrescriptionEntity.cs" />
+    <Compile Include="MappingEntities\PatientRegistrationEntity.cs" />
+    <Compile Include="MappingEntities\ViralLoadResultEntity.cs" />
+    <Compile Include="MessageHandler\PSmartMesssageService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PSmart\FamilyInfoManager.cs" />
+    <Compile Include="PSmart\HivTestTrackerManager.cs" />
+    <Compile Include="PSmart\ImmunizationTrackerManager.cs" />
+    <Compile Include="PSmart\IPSmartAuthRequest.cs" />
+    <Compile Include="PSmart\IRequest.cs" />
+    <Compile Include="PSmart\MstPatientManager.cs" />
+    <Compile Include="PSmart\PSmartAuthManager.cs" />
+    <Compile Include="PSmart\PsmartMotherDetailsViewManager.cs" />
+    <Compile Include="PSmart\PSmartPatientProgramStartManager.cs" />
+    <Compile Include="PSmart\PsmartShrCardSerialManager.cs" />
+    <Compile Include="PSmart\PsmartShrManager.cs" />
+    <Compile Include="PSmart\PsmartStoreManager.cs" />
+    <Compile Include="PSmart\ShrApiManager.cs" />
+    <Compile Include="PSmart\SmartcardPatientListManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Interface.WebApi\Interface.WebApi.csproj">
+      <Project>{13CA40EB-1DB9-43C8-A1FA-CB6580D27DC3}</Project>
+      <Name>Interface.WebApi</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="AfterBuild">
+    <Copy SourceFiles="@(IntermediateAssembly)" DestinationFolder="$(WebDir)" SkipUnchangedFiles="false" />
+    <Copy SourceFiles="@(DocFileItem)" DestinationFiles="@(FinalDocFile->'$(RedDir)%(FileName)%(Extension)')" SkipUnchangedFiles="true" Condition="'$(_DocumentationFileProduced)'=='true'" />
+    <Copy SourceFiles="@(IntermediateSatelliteAssembliesWithTargetPath)" DestinationFiles="@(IntermediateSatelliteAssembliesWithTargetPath->'$(RedDir)%(Culture)\$(TargetName).resources.dll')" SkipUnchangedFiles="true" />
+  </Target>
+</Project>

@@ -11,8 +11,8 @@ namespace Entities.CCC.Baseline
         public string MiddleName { get; set; }
         public string LastName { get; set; }
         public int Sex { get; set; }
-        public DateTime DateOfBirth { get; set; }
-        public bool DobPrecision { get; set; }
+        public DateTime? DateOfBirth { get; set; }
+        public bool? DobPrecision { get; set; }
         public int RelationshipId { get; set; }
         public int? BaseLineHivStatusId { get; set; }
         public DateTime ? BaselineHivStatusDate { get; set; }

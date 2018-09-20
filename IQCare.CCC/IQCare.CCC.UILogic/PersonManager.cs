@@ -13,7 +13,7 @@ namespace IQCare.CCC.UILogic
         readonly TextInfo _textInfo = new CultureInfo("en-US", false).TextInfo;
         IPersonManager _mgr =  (IPersonManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPersonManager, BusinessProcess.CCC");
 
-        public int AddPersonUiLogic(string firstName, string midName, string lastName, int gender, int userId)
+       /* public int AddPersonUiLogic(string firstName, string midName, string lastName, int gender, int userId)
         {
             int retval;
 
@@ -41,8 +41,8 @@ namespace IQCare.CCC.UILogic
 
             return retval;
         }
-
-        public int AddPersonUiLogic(string firstName, string midName, string lastName, int gender, int userId, DateTime dateOfBirth, bool dobPrecision)
+        */
+        public int AddPersonUiLogic(string firstName, string midName, string lastName, int gender, int userId, DateTime? dateOfBirth = null, bool? dobPrecision=null)
         {
             int retval;
 
@@ -60,6 +60,7 @@ namespace IQCare.CCC.UILogic
                     //NationalId = util.Encrypt(nationalId),
                     CreatedBy = userId
                 };
+              
                 retval = _mgr.AddPerson(p);
                 //HttpContext.Current.Session["PersonId"] = p.Id;
             }

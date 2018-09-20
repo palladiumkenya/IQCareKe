@@ -14,9 +14,11 @@ using System.Web.Services.Protocols;
 using Application.Common;
 using Entities.CCC.Lookup;
 using IQCare.CCC.UILogic.Enrollment;
+using IQCare.Events;
 using Microsoft.JScript;
-using Newtonsoft.Json;
 using Convert = System.Convert;
+using Interface.CCC.Patient;
+using Application.Presentation;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -70,6 +72,28 @@ namespace IQCare.Web.CCC.WebService
         public string PatientTypeString { get; set; }
         public string EntryPoint { get; set; }
 
+        public string GetAge(DateTime DateOfBirth)
+        {
+            TimeSpan age = DateTime.Now - DateOfBirth;
+            int Year = DateTime.Now.Year - DateOfBirth.Year;
+            if (DateOfBirth.AddYears(Year) > DateTime.Now) Year--;
+
+            return Year.ToString();
+        }
+    }
+
+    public class PersonNotEnrolled
+    {
+        public string FirstName { get; set; }
+        public string MiddleName { get; set; }
+        public string LastName { get; set; }
+        public string PatientType { get; set; }
+        public Decimal Age { get; set; }
+        public int Sex { get; set; }
+        public int MaritalStatus { get; set; }
+        public DateTime DoB { get; set; }
+        public bool DateOfBirthPrecision { get; set; }
+        public string KeyPopName { get; set; }
         public string GetAge(DateTime DateOfBirth)
         {
             TimeSpan age = DateTime.Now - DateOfBirth;
@@ -139,6 +163,13 @@ namespace IQCare.Web.CCC.WebService
                     Session["PersonId"] = personId;
 
                     Msg = "<p>Person Updated successfully</p>";
+
+                    //update patientType
+                    if((patientid != null && int.Parse(patientid) > 0))
+                    {
+                        IPatientManager _mgr = (IPatientManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Patient.BPatient, BusinessProcess.CCC");
+                        _mgr.UpdatePatientType(Convert.ToInt32(patientid), Convert.ToInt32(patientType));
+                    }
 
                     //PersonId = Convert.ToInt32(Session["PersonId"]);
 
@@ -389,10 +420,11 @@ namespace IQCare.Web.CCC.WebService
                 if (PersonId > 0 || PatientId > 0)
                 {
                     var personLocation = new PersonLocationManager();
+                    var patientLogic = new PatientLookupManager();
+                    var patient = patientLogic.GetPatientDetailSummary(PatientId);
+
                     if (PersonId == 0)
                     {
-                        var patientLogic = new PatientLookupManager();
-                        var patient = patientLogic.GetPatientDetailSummary(PatientId);
                         PersonId = patient.PersonId;
                     }
                     
@@ -419,6 +451,20 @@ namespace IQCare.Web.CCC.WebService
                         {
                             Msg += "<p>Current Person Location Addedd successfully during !</p>";
                         }
+                    }
+
+                    if (PatientId > 0)
+                    {
+                        MessageEventArgs args = new MessageEventArgs()
+                        {
+                            PatientId = PatientId,
+                            EntityId = PatientId,
+                            MessageType = MessageType.UpdatedClientInformation,
+                            EventOccurred = "Patient Enrolled Identifier = ",
+                            FacilityId = patient.FacilityId
+                        };
+
+                        Publisher.RaiseEventAsync(this, args).ConfigureAwait(false);
                     }
                 }
                 else
@@ -451,11 +497,11 @@ namespace IQCare.Web.CCC.WebService
                     PersonId = Convert.ToInt32(Session["PersonId"]);
                     var personContact = new PersonContactManager();
                     var personContactLookUp = new PersonContactLookUpManager();
+                    var patientLogic = new PatientLookupManager();
+                    var patient = patientLogic.GetPatientDetailSummary(int.Parse(patientid));
 
                     if (PersonId == 0)
                     {
-                        var patientLogic = new PatientLookupManager();
-                        var patient = patientLogic.GetPatientDetailSummary(int.Parse(patientid));
                         PersonId = patient.PersonId;
                     }
 
@@ -494,6 +540,17 @@ namespace IQCare.Web.CCC.WebService
                         }
 
                     }
+
+                    MessageEventArgs args = new MessageEventArgs()
+                    {
+                        PatientId = int.Parse(patientid),
+                        EntityId = int.Parse(patientid),
+                        MessageType = MessageType.UpdatedClientInformation,
+                        EventOccurred = "Patient Enrolled Identifier = ",
+                        FacilityId = patient.FacilityId
+                    };
+
+                    Publisher.RaiseEventAsync(this, args).ConfigureAwait(false);
                 }
                 else
                 {
@@ -692,7 +749,9 @@ namespace IQCare.Web.CCC.WebService
                     PersonId = patient.PersonId;
                 }
 
-                var popCatgs = JsonConvert.DeserializeObject<IEnumerable<object>>(populationCategory);
+                
+                //var popCatgs = JsonConvert.DeserializeObject<IEnumerable<object>>(populationCategory);
+                var popCatgs = new JavaScriptSerializer().Deserialize<IEnumerable<object>>(populationCategory);
 
                 var personPoulation = new PatientPopulationManager();
                 var population = personPoulation.GetCurrentPatientPopulations(PersonId);
@@ -786,6 +845,53 @@ namespace IQCare.Web.CCC.WebService
                 Msg = e.Message;
             }
             return Msg;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string GetPersonNoEnrolledDetails(int personId)
+        {
+            Session["PersonId"] = personId;
+            try
+            {
+                PersonNotEnrolled notEnrolled=new PersonNotEnrolled();
+                var patientLookUpManager = new PatientLookupManager();
+                var lkMgr = new LookupLogic();
+                var personMgr = new PersonLookUpManager();
+                var mstatus=new PersonMaritalStatusManager();
+                var keyPopulationManager = new PatientPopulationManager();
+                var personNotEnrolled = personMgr.GetPersonById(personId);
+                var maritalStatus = mstatus.GetCurrentPatientMaritalStatus(personId);
+                var KeyPop = keyPopulationManager.GetCurrentPatientPopulations(personId);
+                int patientType = 261;
+                var ptype = lkMgr.GetItemIdByGroupAndItemName("PatientType", "New").FirstOrDefault();
+                if(ptype != null)
+                {
+                    patientType = ptype.ItemId;
+                }
+
+                DateTime? dob = personNotEnrolled.DateOfBirth.HasValue? personNotEnrolled.DateOfBirth.Value : new DateTime(1900, 6, 15);
+
+                PersonNotEnrolled personNotEnrolledData = new PersonNotEnrolled()
+                {
+                    FirstName = personNotEnrolled.FirstName,
+                    MiddleName = personNotEnrolled.MiddleName,
+                    LastName = personNotEnrolled.LastName,
+                    PatientType = patientType.ToString(),
+                    DoB = dob.Value,
+                    Sex = personNotEnrolled.Sex,
+                    MaritalStatus = (null==maritalStatus)?0: maritalStatus.MaritalStatusId,
+                    Age = Convert.ToDecimal(notEnrolled.GetAge(dob.Value)),
+                    DateOfBirthPrecision = true,
+                    KeyPopName = (KeyPop.Count>0)? KeyPop[0].PopulationType:""
+                };
+                Session["editPersonId"] = 0;
+                return new JavaScriptSerializer().Serialize(personNotEnrolledData);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw new Exception(e.Message);
+            }
         }
 
         [WebMethod(EnableSession = true)]
@@ -986,18 +1092,24 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string GetPatientSearchresults(string firstName,string middleName,string lastName, string dob)
+        public string GetPatientSearchresults(string firstName,string middleName,string lastName, string dob,string sex)
         {
             try
             {
                 var personLookUpManager = new PersonLookUpManager();
                 //var dobb = "";
+           
+                if (dob != "Invalid Date" && firstName != "" && lastName != "" && sex!="0")
+                {
+                    firstName = GlobalObject.unescape(firstName);
+                    middleName = GlobalObject.unescape(middleName);
+                    lastName = GlobalObject.unescape(lastName);
+                    dob = GlobalObject.unescape(dob);
+                    var results = personLookUpManager.GetPersonSearchResults(firstName, middleName, lastName, dob,int.Parse(sex));
+                    var patientLookup = new PatientLookupManager();
 
-                var results = personLookUpManager.GetPersonSearchResults(firstName, middleName, lastName, dob);
-                var patientLookup = new PatientLookupManager();
-                
-                var newresults = results.Select(x => new string[]
-                   {
+                    var newresults = results.Select(x => new string[]
+                       {
                         x.Id.ToString(),
                         (x.FirstName),
                         (x.MiddleName),
@@ -1006,9 +1118,10 @@ namespace IQCare.Web.CCC.WebService
                         LookupLogic.GetLookupNameById(x.Sex),
                         patientLookup.IsPatientExists(x.Id).ToString(),
                         patientLookup.PatientId(x.Id).ToString()
-                   });
-
-                return new JavaScriptSerializer().Serialize(newresults);
+                       });
+                    return new JavaScriptSerializer().Serialize(newresults);
+                }
+                return string.Empty;
             }
             catch (Exception e)
             {

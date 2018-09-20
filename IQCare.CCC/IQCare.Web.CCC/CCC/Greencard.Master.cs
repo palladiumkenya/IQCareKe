@@ -201,6 +201,7 @@ namespace IQCare.Web.CCC
 
         protected void menuMoH257_Click(object sender, EventArgs e)
         {
+            Session["PatientInformation"] = null;
             Session["urlOrigin"] = "greencard";
             Response.Redirect("~/ClinicalForms/frmPatient_History.aspx");
         }

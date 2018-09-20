@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>IQCare.Web</RootNamespace>
     <AssemblyName>IQCare.Web.CCC</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <TrunkDir>..\..\</TrunkDir>
     <RedDir Condition=" '$(RedDir)' == '' ">$(TrunkDir)package\web\</RedDir>
@@ -56,6 +56,7 @@
     <Content Include="CCC\Encounter\EncounterHistory.aspx" />
     <Content Include="CCC\Encounter\LabOrder.aspx" />
     <Content Include="CCC\Encounter\PharmacyPrescription.aspx" />
+    <Content Include="CCC\IL\MessageViewer.aspx" />
     <Content Include="CCC\Patient\PatientCareEnded.aspx" />
     <Content Include="CCC\Patient\PatientConsent.aspx" />
     <Content Include="CCC\Scripts\css\bootstrap-datetimepicker.css" />
@@ -125,6 +126,7 @@
     <Content Include="CCC\Scripts\js\PatientRegistration.js" />
     <Content Include="CCC\UC\ucExtruder.ascx" />
     <Content Include="CCC\UC\ucFemaleVitals.ascx" />
+    <Content Include="CCC\UC\ucGenderBasedViolenceAssessment.ascx" />
     <Content Include="CCC\UC\ucIpt.ascx" />
     <Content Include="CCC\UC\ucIptClientWorkup.ascx" />
     <Content Include="CCC\UC\ucIptOutcome.ascx" />
@@ -162,7 +164,9 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="CCC\Greencard.Master" />
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="CCC\Scripts\font\robot\Roboto-Bold.eot" />
     <Content Include="CCC\Scripts\font\robot\Roboto-Bold.ttf" />
     <Content Include="CCC\Scripts\font\robot\Roboto-Bold.woff" />
@@ -276,6 +280,13 @@
     <Compile Include="CCC\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CCC\IL\MessageViewer.aspx.cs">
+      <DependentUpon>MessageViewer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\IL\MessageViewer.aspx.designer.cs">
+      <DependentUpon>MessageViewer.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CCC\Patient\PatientCareEnded.aspx.cs">
       <DependentUpon>PatientCareEnded.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -359,6 +370,13 @@
     </Compile>
     <Compile Include="CCC\UC\ucFemaleVitals.ascx.designer.cs">
       <DependentUpon>ucFemaleVitals.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\ucGenderBasedViolenceAssessment.ascx.cs">
+      <DependentUpon>ucGenderBasedViolenceAssessment.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucGenderBasedViolenceAssessment.ascx.designer.cs">
+      <DependentUpon>ucGenderBasedViolenceAssessment.ascx</DependentUpon>
     </Compile>
     <Compile Include="CCC\UC\ucIpt.ascx.cs">
       <DependentUpon>ucIpt.ascx</DependentUpon>
@@ -545,19 +563,12 @@
       <HintPath>..\..\References\Application.Presentation.dll</HintPath>
     </Reference>
     <Reference Include="AutoMapper">
-      <HintPath>..\..\References\AutoMapper.dll</HintPath>
+      <HintPath>..\..\Library\AutoMapper.dll</HintPath>
     </Reference>
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
       <HintPath>..\..\Solutions\IQCare.CCC\packages\CrystalDecisions.CrystalReports.Engine.1.0.0\lib\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
     </Reference>
     <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="DataAccess.CCC, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\References\DataAccess.CCC.dll</HintPath>
-    </Reference>
-    <Reference Include="DataAccess.Context">
-      <HintPath>..\..\References\DataAccess.Context.dll</HintPath>
-    </Reference>
     <Reference Include="Entities.Administration">
       <HintPath>..\..\References\Entities.Administration.dll</HintPath>
     </Reference>
@@ -603,6 +614,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\IQCare.CCC.UILogic.dll</HintPath>
     </Reference>
+    <Reference Include="IQCare.Events">
+      <HintPath>..\..\References\IQCare.Events.dll</HintPath>
+    </Reference>
     <Reference Include="IQCare.Web, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\IQCare.Web.dll</HintPath>
@@ -616,39 +630,38 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.JScript" />
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Library\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\Solutions\IQCare.CCC\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting">
+      <HintPath>..\..\Library\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest" />
     <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http">
+      <HintPath>..\..\Solutions\IQCare.CCC\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <HintPath>..\..\Library\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost">
+      <HintPath>..\..\Library\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="Telerik.Web.Design">
-      <HintPath>..\..\Library\Telerik.Web.Design.dll</HintPath>
-    </Reference>
     <Reference Include="Telerik.Web.UI">
       <HintPath>..\..\Library\Telerik.Web.UI.dll</HintPath>
     </Reference>
-    <Reference Include="Telerik.Web.UI.Skins">
-      <HintPath>..\..\Library\Telerik.Web.UI.Skins.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BusinessProcess.CCC\BusinessProcess.CCC.csproj">
-      <Project>{5C3B0D75-6637-49B9-B801-1358B7E55A10}</Project>
-      <Name>BusinessProcess.CCC</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

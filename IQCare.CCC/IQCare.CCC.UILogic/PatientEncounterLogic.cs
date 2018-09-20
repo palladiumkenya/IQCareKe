@@ -1,29 +1,56 @@
 ﻿using Application.Presentation;
 using Interface.CCC;
+using IQCare.CCC.UILogic.Visit;
+using IQCare.Events;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Script.Serialization;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 using static Entities.CCC.Encounter.PatientEncounter;
 
 namespace IQCare.CCC.UILogic
 {
+
+
     public class PatientEncounterLogic
     {
+         private int result = 0;
+       // private int encounterId = 0;
+        private int encounterTypeId = 0;
+
         public int savePatientEncounterPresentingComplaints(string patientMasterVisitID, string patientID, string serviceID, string VisitDate, string VisitScheduled, string VisitBy, string anyComplaints, string Complaints, int TBScreening, int NutritionalStatus, int userId, string adverseEvent, string presentingComplaints)
         {
             IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
+            PatientEncounterManager patientEncounterManager=new PatientEncounterManager();
+
             JavaScriptSerializer parser = new JavaScriptSerializer();
+
             var advEvent = parser.Deserialize<List<AdverseEvents>>(adverseEvent);
             var pComplaints = parser.Deserialize<List<PresentingComplaints>>(presentingComplaints);
             int val = patientEncounter.savePresentingComplaints(patientMasterVisitID, patientID, serviceID,VisitDate,VisitScheduled,VisitBy, anyComplaints, Complaints, TBScreening, NutritionalStatus, userId, advEvent, pComplaints);
-            return val;
+
+            //Set the Visit Encounter Here
+            //TODO: ALWAYS CHECK IF AN ENCOUNTER EXITS BEFRE ADDING:
+            encounterTypeId = patientEncounterManager.GetPatientEncounterId("EncounterType", "ccc-encounter".ToLower());
+            var foundEncounter= patientEncounterManager.GetEncounterIfExists(Convert.ToInt32(patientID),Convert.ToInt32(patientMasterVisitID),Convert.ToInt32(encounterTypeId));
+            if (foundEncounter != null)
+            {
+                result = foundEncounter.Id;
+            }
+            else
+            {
+                if (val > 0)
+                {
+                    result = patientEncounterManager.AddpatientEncounter(Convert.ToInt32(patientID),
+                        Convert.ToInt32(patientMasterVisitID),
+                        patientEncounterManager.GetPatientEncounterId("EncounterType", "ccc-encounter".ToLower()), 203,
+                        userId);
+                }
+            }           
+            return (result > 0) ? val : 0;
         }
 
         public int savePatientEncounterTS(string patientMasterVisitID, string patientID, string serviceID, string VisitDate, string VisitScheduled, string VisitBy, int userId)
@@ -172,12 +199,19 @@ namespace IQCare.CCC.UILogic
 
         public string getPharmacyDrugMultiplier(string frequencyID)
         {
-            IPatientPharmacy patientEncounter = (IPatientPharmacy)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientPharmacy, BusinessProcess.CCC");
-            List<DrugFrequency> drg = patientEncounter.getPharmacyDrugFrequency();
+            try
+            {
+                IPatientPharmacy patientEncounter = (IPatientPharmacy)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientPharmacy, BusinessProcess.CCC");
+                List<DrugFrequency> drg = patientEncounter.getPharmacyDrugFrequency();
 
-            List<DrugFrequency>  filteredList = drg.Where(x => x.id == frequencyID).ToList();
+                List<DrugFrequency> filteredList = drg.Where(x => x.id == frequencyID).ToList();
 
-            return filteredList[0].multiplier;
+                return filteredList[0].multiplier;
+            }
+            catch
+            {
+                return "0";
+            }
         }
 
         public List<PharmacyFields> getPharmacyFields(string PatientMasterVisitID)
@@ -203,13 +237,61 @@ namespace IQCare.CCC.UILogic
             }
         }
 
+        public PatientCategorizationParameters getPatientDSDParameters(string patientId)
+        {
+            IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
+            PatientCategorizationParameters categorizationParameters = new PatientCategorizationParameters();
+            DataSet theDS = patientEncounter.getPatientDSDParameters(patientId);
+
+            if(theDS.Tables[0].Rows.Count > 0)
+                categorizationParameters.age = Convert.ToDouble(theDS.Tables[0].Rows[0][0].ToString());
+                
+
+            if (theDS.Tables[1].Rows.Count > 0)
+                categorizationParameters.BMI = Convert.ToDouble(theDS.Tables[1].Rows[0][0].ToString());
+
+            if(theDS.Tables[2].Rows.Count > 0)
+            {
+                if (theDS.Tables[2].Rows[0][2].ToString() == "" && theDS.Tables[2].Rows[0][3].ToString() == "True")
+                    categorizationParameters.VL = 50; //undetectable
+                else if (theDS.Tables[2].Rows[0][2].ToString() != "")
+                    categorizationParameters.VL = Convert.ToDouble(theDS.Tables[2].Rows[0][2].ToString());
+                else
+                    categorizationParameters.VL = 1001;
+            }
+            else
+            {
+                categorizationParameters.VL = 1001;
+            }
+
+
+            if (theDS.Tables[3].Rows.Count > 0)
+                categorizationParameters.SameRegimen12Months = Convert.ToInt32(theDS.Tables[3].Rows[0][0].ToString());
+
+            if (theDS.Tables[4].Rows.Count > 0 && theDS.Tables[4].Rows[0][0].ToString() != "")
+                categorizationParameters.Completed6MonthsIPT = Convert.ToDouble(theDS.Tables[4].Rows[0][0].ToString());
+
+            categorizationParameters.ActiveOIs = theDS.Tables[5].Rows.Count;
+
+            return categorizationParameters;
+        }
+
+        public int isVisitScheduled(string patientId)
+        {
+            IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
+            DataTable theDT = patientEncounter.isVisitScheduled(patientId);
+            return theDT.Rows.Count;
+        }
+
         public int saveUpdatePharmacy(string PatientMasterVisitID, string PatientId, string LocationID, string OrderedBy,
             string UserID, string DispensedBy, string RegimenLine, string ModuleID, string pmscmFlag, string prescription,
             string TreatmentProgram, string PeriodTaken, string TreatmentPlan, string TreatmentPlanReason, string Regimen,
             string regimenText, string prescriptionDate, string dispensedDate)
         {
             IPatientPharmacy patientEncounter = (IPatientPharmacy)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientPharmacy, BusinessProcess.CCC");
+            PatientEncounterManager patientEncounterManager=new PatientEncounterManager();
             JavaScriptSerializer parser = new JavaScriptSerializer();
+            int val=0;
             var drugPrescription = parser.Deserialize<List<DrugPrescription>>(prescription);
 
             string RegimenType = "";
@@ -223,11 +305,32 @@ namespace IQCare.CCC.UILogic
               
             }
 
-            return patientEncounter.saveUpdatePharmacy(PatientMasterVisitID, PatientId, LocationID, OrderedBy,
+            result= patientEncounter.saveUpdatePharmacy(PatientMasterVisitID, PatientId, LocationID, OrderedBy,
                 UserID, RegimenType.TrimEnd('/'), DispensedBy, RegimenLine, ModuleID, drugPrescription, pmscmFlag,
                 TreatmentProgram, PeriodTaken, TreatmentPlan, TreatmentPlanReason, Regimen, prescriptionDate,
                 dispensedDate);
 
+            //--  Raise event if result is>0 for sharing with IL
+
+            if (result > 0)
+            {
+                MessageEventArgs arg=new MessageEventArgs()
+                {
+                    PatientId = Convert.ToInt32(PatientId),
+                    EntityId = result, // the orderId
+                    EventOccurred = "Prescription Raised",
+                    MessageType = MessageType.DrugPrescriptionRaised,
+                    FacilityId =0,
+                    PatientMasterVisitId = Convert.ToInt32(PatientMasterVisitID) 
+                };
+                Publisher.RaiseEventAsync(this, arg).ConfigureAwait(false); // --
+            }
+            if (result > 0)
+            {
+               val= patientEncounterManager.AddpatientEncounter(Convert.ToInt32(PatientId),Convert.ToInt32(PatientMasterVisitID), patientEncounterManager.GetPatientEncounterId("EncounterType", "Pharmacy-encounter".ToLower()),204, Convert.ToInt32(UserID));
+            }
+            return (val > 0) ? result : 0;
+           // return result;
         }
 
         public void EncounterHistory(TreeView TreeViewEncounterHistory, string patientID)
@@ -370,9 +473,14 @@ namespace IQCare.CCC.UILogic
                         //    }
                         //}
 
-                        if (theDR["VisitName"].ToString() == "Encounter")
+                        if ((theDR["VisitName"].ToString() == "CCC") || (theDR["VisitName"].ToString() == "ccc-encounter"))
                         {
                             theFrmRoot.NavigateUrl = "PatientEncounter.aspx?visitId=" + theDR["visitID"].ToString();
+                            theFrmRoot.ImageUrl = "~/images/15px-Yes_check.svg.png";
+                        }
+                        if (theDR["VisitName"].ToString() == "Triage")
+                        {
+                            theFrmRoot.NavigateUrl = "VitalSigns.aspx?visitId=" + theDR["visitID"].ToString();
                             theFrmRoot.ImageUrl = "~/images/15px-Yes_check.svg.png";
                         }
                         else if(theDR["VisitName"].ToString() == "Pharmacy")
@@ -388,7 +496,7 @@ namespace IQCare.CCC.UILogic
                                 theFrmRoot.ImageUrl = "~/images/caution.png";
                             }
                         }
-                        else if (theDR["VisitName"].ToString() == "Lab Order")
+                        else if (theDR["VisitName"].ToString() == "Lab")
                         {
                             theFrmRoot.NavigateUrl = "LabOrder.aspx?visitId=" + theDR["visitID"].ToString();
                             if (theDR["status"].ToString() == "Complete")
@@ -496,6 +604,17 @@ namespace IQCare.CCC.UILogic
 
             /////////////////////////////////////////////////////////////
 
+        }
+
+        public void GenerateExcel(string category)
+        {
+            //IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
+            //DataTable theDT = patientEncounter.GenerateExcelDifferentiatedCare(category);
+
+            //System.IO.Directory.CreateDirectory(@"C:\Reports");
+            //Excel.ExcelUtlity obj = new Excel.ExcelUtlity();
+            //obj.WriteDataTableToExcel(theDT, "Sheet1", "C:\\Reports\\" + (category.Replace("(","")).Replace(")","") + "_" + (DateTime.Now.ToString("dd/MM/yyyy").Replace("/","_")).Replace(":","_") + ".xlsx", "Details");
+            //obj.openExcel("C:\\Reports\\" + (category.Replace("(", "")).Replace(")", "") + "_" + (DateTime.Now.ToString("dd/MM/yyyy").Replace("/","_")).Replace(":","_") + ".xlsx");
         }
     }
 }

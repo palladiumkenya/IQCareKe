@@ -9,5 +9,6 @@ namespace Interface.CCC.Lookup
     public interface IPersonGreenCardLookupManager
     {
         List<PersonGreenCardLookup> GetPtnPkByPersonId(int personId);
+        PersonGreenCardLookup AddPersonToBlueCardLookup(PersonGreenCardLookup personGreenCardLookup);
     }
 }

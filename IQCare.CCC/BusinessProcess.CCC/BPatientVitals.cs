@@ -5,6 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using DataAccess.CCC.Context;
 using DataAccess.CCC.Repository;
+using DataAccess.Entity;
+using DataAccess.Common;
+using System.Data;
+using System;
 
 namespace BusinessProcess.CCC
 {
@@ -20,7 +24,7 @@ namespace BusinessProcess.CCC
                 unitOfWork.PatientVitalsRepository.Add(p);
                 _result = unitOfWork.Complete();
                 unitOfWork.Dispose();
-                return _result;
+                return p.Id;
             }
      
         }
@@ -92,7 +96,18 @@ namespace BusinessProcess.CCC
                 unitOfWork.Dispose();
                 return vital;
             }
-      
+        }
+
+        public PatientVital GetByPatientVisitId(int patientVisitId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                PatientVital vital = unitOfWork.PatientVitalsRepository.FindBy(x => x.PatientMasterVisitId == patientVisitId & !x.DeleteFlag)
+                                            .OrderByDescending(x => x.Id)
+                                            .FirstOrDefault();
+                unitOfWork.Dispose();
+                return vital;
+            }
         }
 
         public List<PatientVital> GetCurrentPatientVital(int patientId)
@@ -105,6 +120,34 @@ namespace BusinessProcess.CCC
                                 .ToList();
                 unitOfWork.Dispose();
                 return vitals;
+            }
+        }
+
+        public List<PatientVital> GetAllPatientVitals(int patientId)
+        {
+            lock (this)
+            {
+                ClsObject PatientEncounter = new ClsObject();
+                ClsUtility.Init_Hashtable();
+                ClsUtility.AddParameters("@PatientId", SqlDbType.Int, patientId.ToString());
+
+                DataTable theDT = (DataTable)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_getAllPatientVitals", ClsUtility.ObjectEnum.DataTable);
+
+                List<PatientVital> list = new List<PatientVital>();
+
+                for (int i = 0; i < theDT.Rows.Count; i++)
+                {
+                    PatientVital pv = new PatientVital();
+                    pv.PatientId = Convert.ToInt32(theDT.Rows[i]["patientid"]);
+                    pv.Height = Convert.ToDecimal(theDT.Rows[i]["height"]);
+                    pv.Weight = Convert.ToDecimal(theDT.Rows[i]["weight"]);
+                    pv.BMI = Convert.ToDecimal(theDT.Rows[i]["bmi"]);
+                    pv.CreateDate = Convert.ToDateTime(theDT.Rows[i]["createdate"]);
+                    
+                    list.Add(pv);
+                }
+
+                return list;
             }
         }
 

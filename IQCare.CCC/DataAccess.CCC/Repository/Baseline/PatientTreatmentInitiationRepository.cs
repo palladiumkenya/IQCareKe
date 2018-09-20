@@ -2,7 +2,6 @@
 using DataAccess.CCC.Interface.Baseline;
 using DataAccess.Context;
 using Entities.CCC.Baseline;
-using Interface.CCC;
 
 namespace DataAccess.CCC.Repository.Baseline
 {

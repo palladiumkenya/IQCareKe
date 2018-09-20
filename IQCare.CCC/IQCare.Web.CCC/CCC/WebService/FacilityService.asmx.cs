@@ -45,7 +45,7 @@ namespace IQCare.Web.CCC.WebService
                     statistics.MetAppointments = apps.Met;
                     statistics.MissedAppointments = apps.Missed + apps.PreviouslyMissed;
                 }
-                statistics.WalkIns = masterVisit.GetByDate(date).Count(n => n.VisitScheduled == 0); ;
+                statistics.WalkIns = masterVisit.GetByDate(date).Count(n => n.VisitScheduled == 0); 
             }
             catch (Exception e)
             {

@@ -35,9 +35,7 @@ namespace DataAccess.CCC.Repository.Lookup
            
             var complete = "Complete";
             var myList = completelabsrepository.FindBy(
-                x =>
-                x.PatientId == patientId &               
-                x.Results == complete);
+                x =>  x.PatientId == patientId && (x.Results.ToLower().Trim() == complete || x.Results.ToLower().Trim() == "completed"));
 
             myList = myList.OrderByDescending(x => x.Id).Take(5);
 
@@ -66,8 +64,7 @@ namespace DataAccess.CCC.Repository.Lookup
 
             var myList = previouslabsrepository.FindBy(
                 x =>
-                x.PatientId == patientId &
-                x.Results == pending);
+                x.PatientId == patientId &&              x.Results == pending);
             var list = myList.GroupBy(x => x.Id).Select(x => x.First());
             return list.Distinct().ToList();
         }
@@ -80,9 +77,7 @@ namespace DataAccess.CCC.Repository.Lookup
             var complete = "Complete";
             var myList = previouslabsrepository.FindBy(
                 x =>
-                x.PatientId == patientId &
-                //x.LabName != vl &
-                x.Results == complete);
+                x.PatientId == patientId && (x.Results.ToLower().Trim() == complete || x.Results.ToLower().Trim() == "completed"));
             var list = myList.GroupBy(x => x.Id).Select(x => x.First()).OrderBy(x => x.Id);
             return list.Distinct().ToList();
         }
@@ -93,7 +88,7 @@ namespace DataAccess.CCC.Repository.Lookup
            var pending = "Pending";
            var myList = pendinglabsrepository.FindBy(
                 x =>
-                  x.PatientId == patientId &
+                  x.PatientId == patientId &&
                   x.Results == pending);
             var list = myList.GroupBy(x => x.Id).Select(x => x.First()).OrderBy(x => x.Id);
             return list.Distinct().ToList();
@@ -105,7 +100,7 @@ namespace DataAccess.CCC.Repository.Lookup
             var complete = "Complete";
 
             var myList = previouslabsvl.FindBy(x => x.PatientId == patientId);
-            var list = myList.GroupBy(x => x.Id).Select(x => x.First()).OrderBy(x => x.Id).Where(x => x.LabName == vl).Where(x => x.Results == complete);
+            var list = myList.GroupBy(x => x.Id).Select(x => x.First()).OrderBy(x => x.Id).Where(x => x.LabName == vl).Where(x => (x.Results.ToLower().Trim() == complete || x.Results.ToLower().Trim() == "completed"));
             return list.Distinct().ToList();
         }
 

@@ -2,6 +2,7 @@
 using Entities.CCC.Tb;
 using Interface.CCC.Tb;
 using System.Collections.Generic;
+using IQCare.Web.UILogic;
 
 namespace IQCare.CCC.UILogic.Tb
 {
@@ -21,7 +22,8 @@ namespace IQCare.CCC.UILogic.Tb
                 YellowColouredUrine = p.YellowColouredUrine,
                 YellownessOfEyes = p.YellownessOfEyes,
                 IptStartDate = p.IptStartDate,
-                StartIpt = p.StartIpt
+                StartIpt = p.StartIpt,
+                CreatedBy = SessionManager.UserId
             };
             return _patientIptWorkup.AddPatientIptWorkup(patientIptWorkup);
         }
@@ -50,7 +52,8 @@ namespace IQCare.CCC.UILogic.Tb
                 YellowColouredUrine = p.YellowColouredUrine,
                 YellownessOfEyes = p.YellownessOfEyes,
                 IptStartDate = p.IptStartDate,
-                StartIpt = p.StartIpt
+                StartIpt = p.StartIpt,
+                CreatedBy = SessionManager.UserId
             };
             return _patientIptWorkup.UpdatePatientIptWorkup(patientIptWorkup);
         }

@@ -413,7 +413,19 @@ namespace IQCare.CCC.UILogic
                 throw;
             }
         }
-
+        public LookupFacility GetFacility(string mflCode)
+        {
+            try
+            {
+                ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager,BusinessProcess.CCC");
+                return lookupManager.GetFacility(mflCode.Trim());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
         public static string GetCountyByCountyId(int countyId)
         {
             try
@@ -453,6 +465,19 @@ namespace IQCare.CCC.UILogic
             {
                 Console.WriteLine(e);
                 throw;
+            }
+        }
+
+        public LookupCounty GetCountyDetailsByWardName(string wardName)
+        {
+            try
+            {
+                ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager,BusinessProcess.CCC");
+                return lookupManager.GetCountyDetailsByWardName(wardName);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
             }
         }
 
@@ -513,6 +538,19 @@ namespace IQCare.CCC.UILogic
             string masterName = lookupManager.GetLookUpMasterNameFromId(masterId);
 
             return masterName;
+        }
+
+        public string GetLookupItemNameByMasterNameItemId(int itemId, string masterName)
+        {
+            try
+            {
+                ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager,BusinessProcess.CCC");
+                return lookupManager.GetLookupItemNameByMasterNameItemId(itemId, masterName);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
     }
 }

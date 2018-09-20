@@ -8,6 +8,19 @@ using Entities.CCC.Lookup;
 
 namespace DataAccess.CCC.Repository.Lookup
 {
+    public class LookupItemRepository:BaseRepository<LookupItem>, ILookupItemRepository
+    {
+        private readonly LookupContext _context;
+
+        public LookupItemRepository() : this(new LookupContext())
+        {
+        }
+
+        public LookupItemRepository(LookupContext context) : base(context)
+        {
+            _context = context;
+        }
+    }
     public class LookupRepository :BaseRepository<LookupItemView>,ILookupRepository
     {
         private readonly LookupContext _context;
@@ -53,6 +66,19 @@ namespace DataAccess.CCC.Repository.Lookup
             //var genderType = lookupGender.FindBy(x => x.ItemId == genderId).FirstOrDefault();
             return genderType;
 
+        }
+    }
+    public class PersonExtRepository : BaseRepository<PersonExtLookup>, IRepository<PersonExtLookup>
+    {
+        private readonly LookupContext _context;
+
+        public PersonExtRepository() : this(new LookupContext())
+        {
+        }
+
+        public PersonExtRepository(LookupContext context) : base(context)
+        {
+            _context = context;
         }
     }
 }

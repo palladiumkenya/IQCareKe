@@ -3,10 +3,13 @@ using Entities.CCC.Lookup;
 using Entities.CCC.Visit;
 using Interface.CCC.Lookup;
 using Interface.CCC.Visit;
+using IQCare.Web.UILogic;
 using System;
 using System.Collections.Generic;
 using System.Web;
 using System.Web.UI.WebControls;
+using Entities.CCC.Appointment;
+using IQCare.CCC.UILogic;
 
 namespace IQCare.Web.CCC.Appointment
 {
@@ -14,7 +17,10 @@ namespace IQCare.Web.CCC.Appointment
     {
         public int PatientId;
         public int PatientMasterVisitId;
-        
+        public int UserId;
+        public int AppointmentId;
+        public string UpdateAppointmentDate;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             this.GetSessionDetails();
@@ -65,12 +71,33 @@ namespace IQCare.Web.CCC.Appointment
                 }
             }
 
+            if (Request.QueryString["appointmentid"] != null)
+            {
+                AutoFillAppointments(Convert.ToInt32(Request.QueryString["appointmentid"]));
+                AppointmentId = Convert.ToInt32(Request.QueryString["appointmentid"]);
+            }
+
         }
 
         private void GetSessionDetails()
         {
             PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
             PatientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientMasterVisitId"]);
+            UserId = SessionManager.UserId;
+        }
+
+        private void AutoFillAppointments(int AppointmentId)
+        {
+            PatientAppointmentManager appointmentmgr = new PatientAppointmentManager();
+            PatientAppointment pa = appointmentmgr.GetPatientAppointment(AppointmentId);
+            AppointmentDate.Text = pa.AppointmentDate.ToString("dd-MMM-yyy");
+            //AppointmentDate.Text = "";
+            ServiceArea.SelectedValue = pa.ServiceAreaId.ToString();
+            Reason.SelectedValue = pa.ReasonId.ToString();
+            DifferentiatedCare.SelectedValue = pa.DifferentiatedCareId.ToString();
+            description.Text = pa.Description.ToString();
+            status.SelectedValue = pa.StatusId.ToString();
+            UpdateAppointmentDate = pa.AppointmentDate.ToString("dd-MMM-yyy");
         }
     }
 }

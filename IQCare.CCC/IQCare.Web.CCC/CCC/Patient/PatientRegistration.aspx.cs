@@ -7,6 +7,7 @@ using Application.Presentation;
 using Entities.CCC.Lookup;
 using Interface.CCC.Lookup;
 using System.Web.UI;
+using IQCare.Web.UILogic;
 
 namespace IQCare.Web.CCC.Patient
 {
@@ -17,7 +18,7 @@ namespace IQCare.Web.CCC.Patient
             get { return Convert.ToInt32(Session["AppUserId"]); }
         }
 
-        public int PersonId { get; set; }      
+        public int PersonId { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -28,6 +29,8 @@ namespace IQCare.Web.CCC.Patient
             Session["PersonContactId"] = 0;
             Session["PersonTreatmentSupporterId"] = 0;
             Session["DobPrecision"] = false;
+
+
 
             if (!IsPostBack)
             {
@@ -114,11 +117,14 @@ namespace IQCare.Web.CCC.Patient
                         PopulationType.Items.Add(new ListItem(item.DisplayName, item.ItemId.ToString()));
                     }
                 }
+
+                Session["PersonId"] = 0;
             }
         }
 
         protected void countyId_SelectedIndexChanged(object sender, EventArgs e)
         {
+           
             //ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
             //List<LookupCounty> lookupCounties = lookupManager.GetLookupSubcounty(countyId.SelectedItem.Text);
             //if (lookupCounties != null && lookupCounties.Count > 0)
@@ -128,6 +134,13 @@ namespace IQCare.Web.CCC.Patient
             //        SubcountyId.Items.Add(new ListItem(items.SubcountyName, items.SubcountyId.ToString()));
             //    }
             //}
+        }
+        
+        [WebMethod(EnableSession = true)]
+        public static string RedirectToRegistrationEdit(string personId,string isEnrolled)
+        {
+            HttpContext.Current.Session["editPersonId"] = Convert.ToInt32(personId);
+            return "success";
         }
 
         protected void WardId_SelectedIndexChanged(object sender, EventArgs e)

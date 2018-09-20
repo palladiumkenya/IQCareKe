@@ -28,9 +28,15 @@
                                     <label class="control-label pull-left">Date</label>
                                 </div>
                                 <div class="col-md-12">
-                                    <div class="datepicker fuelux form-group" id="PersonAppointmentDate">
+                                    <div class='input-group date' id='PersonAppointmentDate'>
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                        <asp:TextBox runat="server"  CssClass="form-control input-sm" ID="AppointmentDate" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')" required ="True" data-parsley-min-message="Input the appointment date"></asp:TextBox>
+                                    </div>
+                                   <%-- <div class="datepicker fuelux form-group" id="PersonAppointmentDate">
                                         <div class="input-group">
-                                            <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="AppointmentDate" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"  required ="True" data-parsley-min-message="Input the appointment date"></asp:TextBox>
+                                            <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="AppointmentDate" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')" required="True" data-parsley-min-message="Input the appointment date"></asp:TextBox>
                                             <div class="input-group-btn">
                                                 <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -118,8 +124,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
+                                    </div>--%>
+                                </div> 
+
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -127,7 +134,7 @@
                                 <label class="control-label pull-left">Service Area</label>
                             </div>
                             <div class="col-md-12 pull-right">
-                                <asp:DropDownList runat="server" ID="ServiceArea" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1" data-parsley-min-message="Select the service area"/>
+                                <asp:DropDownList runat="server" ID="ServiceArea" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1" data-parsley-min-message="Select the service area" />
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -136,7 +143,7 @@
                                     <label for="reason" class="control-label pull-left">Reason</label>
                                 </div>
                                 <div class="col-md-12">
-                                    <asp:DropDownList runat="server" ID="Reason" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1" data-parsley-min-message="Select the reason"/>
+                                    <asp:DropDownList runat="server" ID="Reason" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1" data-parsley-min-message="Select the reason" />
                                 </div>
                             </div>
                         </div>
@@ -148,7 +155,7 @@
                                     <label for="reason" class="control-label pull-left">Differentiated Care</label>
                                 </div>
                                 <div class="col-md-12">
-                                    <asp:DropDownList runat="server" ID="DifferentiatedCare" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1" data-parsley-min-message="Select differentiated care"/>
+                                    <asp:DropDownList runat="server" ID="DifferentiatedCare" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1" data-parsley-min-message="Select differentiated care" />
                                 </div>
                             </div>
                         </div>
@@ -158,7 +165,7 @@
                                     <label for="description" class="control-label pull-left">Description</label>
                                 </div>
                                 <div class="col-md-12">
-                                    <asp:TextBox runat="server" ID="description" CssClass="form-control input-sm" ClientIDMode="Static" minlength="5" data-parsley-minlength-message="Description cannot be less than 5 characters"/>
+                                    <asp:TextBox runat="server" ID="description" CssClass="form-control input-sm" ClientIDMode="Static" minlength="5" data-parsley-minlength-message="Description cannot be less than 5 characters" />
                                 </div>
                             </div>
                         </div>
@@ -224,15 +231,36 @@
     </div>
 
     <script type="text/javascript">
-        $('#PersonAppointmentDate').datepicker({
-            allowPastDates: false,
-            Date: 0,
-            momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
-        });
+        //$('#PersonAppointmentDate').datepicker({
+        //    allowPastDates: false,
+        //    Date: 0,
+        //    momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+        //});
+
+
 
         $(document).ready(function () {
+
+          //  $("#<%=AppointmentDate.ClientID%>").val("09-JUN-2018");
+            $("#PersonAppointmentDate").datetimepicker({
+                defaultDate:$("#<%=AppointmentDate.ClientID%>").val(),
+                format: 'DD-MMM-YYYY',
+                allowInputToggle: true,
+                useCurrent: false
+            }).on("dp.change", function (selectedDate) {
+                var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
+                var appDate = $("#<%=AppointmentDate.ClientID%>").val();
+                if (moment('' + appDate + '').isAfter(futureDate)) {
+                    toastr.error("Appointment date cannot be set to over 7 months");
+                    $("#<%=AppointmentDate.ClientID%>").val("");
+                    return false;
+                }
+                AppointmentCount();
+            });
+
             $("#AppointmentDate").val("");
             $("#btnSaveAppointment").click(function () {
+                var appointmentid = <%=AppointmentId%>;
                 if ($('#AppointmentForm').parsley().validate()) {
                     var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
                     var appDate = $("#<%=AppointmentDate.ClientID%>").val();
@@ -240,9 +268,13 @@
                         toastr.error("Appointment date cannot be set to over 7 months");
                         return false;
                     }
+                   // checkExistingAppointment();
+                }
+                if (appointmentid > 0) {
+                    updateAppointment();
+                }
+                else {
                     checkExistingAppointment();
-                } else {
-                    return false;
                 }
             });
             $("#btnReset").click(function () {
@@ -262,7 +294,7 @@
 
         });
 
-        $("#AppointmentDate").change(function () {
+<%--        $("#AppointmentDate").change(function () {
             var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
             var appDate = $("#<%=AppointmentDate.ClientID%>").val();
             if (moment('' + appDate + '').isAfter(futureDate)) {
@@ -271,9 +303,9 @@
                 return false;
             }
             AppointmentCount();
-        });
+        });--%>
 
-        $('#PersonAppointmentDate').on('changed.fu.datepicker dateClicked.fu.datepicker', function(event,date) {
+<%--        $('#PersonAppointmentDate').on('changed.fu.datepicker dateClicked.fu.datepicker', function (event, date) {
             var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
             var appDate = $("#<%=AppointmentDate.ClientID%>").val();
             if (moment('' + appDate + '').isAfter(futureDate)) {
@@ -282,30 +314,30 @@
                 return false;
             }
             AppointmentCount();
-        });
+        });--%>
 
         function AppointmentCount() {
             jQuery.support.cors = true;
             var date = $("#<%=AppointmentDate.ClientID%>").val();
             $.ajax(
-            {
-                type: "POST",
-                url: "../WebService/PatientService.asmx/GetPatientAppointmentCount",
-                data: "{'date':'" + date + "'}",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                cache: false,
-                success: function(response) {
-                    var count = response.d;
-                    var message = count + " appointment(s) scheduled on " + date;
-                    document.getElementById("ModalMessage").innerHTML = message;
-                    $('#AlertModal').modal('show');
-                },
+                {
+                    type: "POST",
+                    url: "../WebService/PatientService.asmx/GetPatientAppointmentCount",
+                    data: "{'date':'" + date + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    cache: false,
+                    success: function (response) {
+                        var count = response.d;
+                        var message = count + " appointment(s) scheduled on " + date;
+                        document.getElementById("ModalMessage").innerHTML = message;
+                        $('#AlertModal').modal('show');
+                    },
 
-                error: function(msg) {
-                    //alert(msg.responseText);
-                }
-            });
+                    error: function (msg) {
+                        //alert(msg.responseText);
+                    }
+                });
         }
 
         function checkExistingAppointment() {
@@ -315,25 +347,27 @@
             var reason = $("#<%=Reason.ClientID%>").val();
             jQuery.support.cors = true;
             $.ajax(
-            {
-                type: "POST",
-                url: "../WebService/PatientService.asmx/GetExistingPatientAppointment",
-                data: "{'patientId':'" + patientId + "','appointmentDate': '" + appointmentDate + "','serviceAreaId': '" + serviceArea + "','reasonId': '" + reason + "'}",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                async:false,
-                cache: false,
-                success: function (response) {
-                    if (response.d != null) {
-                        toastr.error("Appointment already exists");
-                        return false;
+                {
+                    type: "POST",
+                    url: "../WebService/PatientService.asmx/GetExistingPatientAppointment",
+                    data: "{'patientId':'" + patientId + "','appointmentDate': '" + appointmentDate + "','serviceAreaId': '" + serviceArea + "','reasonId': '" + reason + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: false,
+                    cache: false,
+                    success: function (response) {
+                        if (response.d != null) {
+                            toastr.error("Appointment already exists");
+                            return false;
+                        } else {
+                            addPatientAppointment();
+                        }
+                       
+                    },
+                    error: function (msg) {
+                        //alert(msg.responseText);
                     }
-                    addPatientAppointment();
-                },
-                error: function (msg) {
-                    //alert(msg.responseText);
-                }
-            });
+                });
         }
 
         function addPatientAppointment() {
@@ -346,16 +380,46 @@
             var appointmentDate = $("#<%=AppointmentDate.ClientID%>").val();
             var patientId = <%=PatientId%>;
             var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            var userId = <%=UserId%>;
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientService.asmx/AddPatientAppointment",
-                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','appointmentDate': '" + appointmentDate + "','description': '" + description + "','reasonId': '" + reason + "','serviceAreaId': '" + serviceArea + "','statusId': '" + status + "','differentiatedCareId': '" + differentiatedCareId + "'}",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','appointmentDate': '" + appointmentDate + "','description': '" + description + "','reasonId': '" + reason + "','serviceAreaId': '" + serviceArea + "','statusId': '" + status + "','differentiatedCareId': '" + differentiatedCareId + "','userId':'" + userId + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
                     toastr.success(response.d, "Appointment saved successfully");
                     resetFields();
-                    setTimeout(function() { window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>'; }, 2500);
+                    setTimeout(function () { window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>'; }, 2500);
+                },
+                error: function (response) {
+                    toastr.error(response.d, "Appointment not saved");
+                }
+            });
+        }
+
+        function updateAppointment() {
+            var serviceArea = $("#<%=ServiceArea.ClientID%>").val();
+            var reason = $("#<%=Reason.ClientID%>").val();
+            var description = $("#<%=description.ClientID%>").val();
+            var status = $("#<%=status.ClientID%>").val();
+            var differentiatedCareId = $("#<%=DifferentiatedCare.ClientID%>").val();
+            /*if (status === '') { status = null }*/
+            var appointmentDate = $("#<%=AppointmentDate.ClientID%>").val();
+            var patientId = <%=PatientId%>;
+            var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            var userId = <%=UserId%>;
+            var appointmentid = <%=AppointmentId%>;
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientService.asmx/UpdatePatientAppointment",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','appointmentDate': '" + appointmentDate + "','description': '" + description + "','reasonId': '" + reason + "','serviceAreaId': '" + serviceArea + "','statusId': '" + status + "','differentiatedCareId': '" + differentiatedCareId + "','userId':'" + userId + "','appointmentId':'" + appointmentid+"'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    toastr.success(response.d, "Appointment saved successfully");
+                    resetFields();
+                    setTimeout(function () { window.location.href = '<%=ResolveClientUrl("~/CCC/Appointment/patientAppointments.aspx") %>'; }, 2500);
                 },
                 error: function (response) {
                     toastr.error(response.d, "Appointment not saved");

@@ -10,8 +10,10 @@ using DataAccess.CCC.Interface.visit;
 using DataAccess.CCC.Interface.Triage;
 using DataAccess.CCC.Interface.Encounter;
 using DataAccess.CCC.Repository.person;
-using Interface.CCC.Lookup;
 using DataAccess.CCC.Interface.assessment;
+using DataAccess.CCC.Interface.IL;
+using DataAccess.CCC.Interface.Interoperability;
+using DataAccess.CCC.Interface.Pharmacy;
 
 namespace DataAccess.CCC.Interface
 {
@@ -22,6 +24,7 @@ namespace DataAccess.CCC.Interface
         IModuleRepository ModuleRepository { get; }
 
         /* LookupContext */
+        ILookupItemRepository LookupItemRepository { get; }
         ILookupRepository LookupRepository { get; }
         ILookupMasterRepository LookupMasterRepository { get; }
         IPatientLookupRepository PatientLookupRepository { get; }
@@ -32,6 +35,9 @@ namespace DataAccess.CCC.Interface
         IPatientTreatmentTrackerLookupRepository PatientTreatmentTrackerLookupRepository { get; } 
         IFacilityListRepository FacilityListRepository { get; }
         //ILookupPatientRegimenMap LookupPatientRegimenMapRepository { get; }
+        IIlStatisticsRepository IlStatisticsRepository { get; }
+        IIlMessengerRepository IlMessengerRepository { get; }
+        IPersonExtendedLookupRepository PersonExtendedLookupRepository { get; }
 
         /* person and patient */
         IPersonRepository PersonRepository { get; }
@@ -96,6 +102,16 @@ namespace DataAccess.CCC.Interface
         /* Patient ART Preparation */
         IPatientPsychosocialCriteriaRepository PatientPsychosocialCriteriaRepository { get; }
         IPatientSupportSystemCriteriaRepository PatientSupportSystemCriteriaRepository { get;}
+
+        // interoperability
+        IPatientMessageRepository PatientMessageRepository { get; }
+        IDrugPrescriptionMessageRepository DrugPrescriptionMessageRepository { get; }
+        IViralLoadMessageRepository ViralLoadMessageRepository { get; }
+
+        //pharmacy
+        IPatientPharmacyDispenseRepository PatientPharmacyDispenseRepository { get; }
+        IPharmacyOrderRepository PharmacyOrderRepository { get; }
+        IDrugRepository DrugRepository { get; }
 
     }
 }

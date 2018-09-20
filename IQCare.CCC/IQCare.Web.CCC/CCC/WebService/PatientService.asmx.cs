@@ -2,8 +2,10 @@
 using Entities.CCC.Appointment;
 using Entities.CCC.Lookup;
 using Entities.CCC.Triage;
+using Entities.CCC.Visit;
 using Interface.CCC.Lookup;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Services;
@@ -16,12 +18,12 @@ using IQCare.CCC.UILogic.Baseline;
 using IQCare.CCC.UILogic.Screening;
 using Microsoft.JScript;
 using Convert = System.Convert;
-using Newtonsoft.Json;
 using System.Web;
 using System.Web.Script.Serialization;
 using Entities.CCC.Encounter;
 using Entities.CCC.Enrollment;
 using IQCare.CCC.UILogic.Enrollment;
+using IQCare.CCC.UILogic.Visit;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -42,6 +44,7 @@ namespace IQCare.Web.CCC.WebService
         public string cccReferalNumber { get; set; }
         public DateTime? cccReferalDate { get; set; }
     }
+
     /// <summary>
     /// Summary description for PatientService
     /// </summary>
@@ -54,14 +57,20 @@ namespace IQCare.Web.CCC.WebService
     {
         private string Msg { get; set; }
         private int Result { get; set; }
+        string appointmentid;
 
-        [WebMethod]
+
+        [WebMethod(EnableSession = true)]
         public string AddpatientVitals(int patientId, int bpSystolic, int bpDiastolic, decimal heartRate, decimal height,
             decimal muac, int patientMasterVisitId, decimal respiratoryRate, decimal spo2, decimal tempreture,
             decimal weight, decimal bmi, decimal headCircumference,string bmiz,string weightForAge,string weightForHeight,DateTime visitDate)
         {
             try
             {
+                PatientEncounterManager patientEncounterManager=new PatientEncounterManager();
+                int facilityId = Convert.ToInt32(Session["AppPosID"]);
+                int createdBy = Session["AppUserID"] != null ? Convert.ToInt32(Session["AppUserID"]) : 0;
+
                 PatientVital patientVital = new PatientVital()
                 {
                     PatientId = patientId,
@@ -81,12 +90,18 @@ namespace IQCare.Web.CCC.WebService
                     BMIZ = bmiz,
                     WeightForAge = weightForAge,
                     WeightForHeight = weightForHeight,
+                    CreatedBy = createdBy
                 };
                 var vital = new PatientVitalsManager();
-                Result = vital.AddPatientVitals(patientVital);
+                Result = vital.AddPatientVitals(patientVital, facilityId);
+                int userId = Convert.ToInt32(Session["AppUserId"]);
+
                 if (Result > 0)
                 {
-                    Msg = "Patient Vitals Added Successfully!";
+                    Result = patientEncounterManager.AddpatientEncounter(patientId,patientMasterVisitId,patientEncounterManager.GetPatientEncounterId("EncounterType", "Triage-encounter".ToLower()),204, userId);
+                    
+                    if (Result > 0) { Msg = "Patient Vitals Added Successfully!"; }
+
                 }
             }
             catch (Exception e)
@@ -97,7 +112,7 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string AddPatientScreening(int patientId, int patientMasterVisitid,DateTime visitDate, int screeningTypeId, int screeningDone, DateTime screeningDate, int screeningCategoryId, int screeningValueId, string comment, int userId)
+        public string AddPatientScreening(int patientId, int patientMasterVisitid,DateTime visitDate, int screeningTypeId, bool screeningDone, DateTime screeningDate, int screeningCategoryId, int screeningValueId, string comment, int userId)
         {
             try
             {
@@ -112,9 +127,56 @@ namespace IQCare.Web.CCC.WebService
             return Msg;
         }
 
-        [WebMethod]
-        public string AddPatientAppointment(int patientId, int patientMasterVisitId, DateTime appointmentDate, string description, int reasonId, int serviceAreaId, int statusId, int differentiatedCareId)
+        [WebMethod(EnableSession = true)]
+        public string AddPatientScreening(string screeningResponseString, int userId)
         {
+            try
+            {
+                var screeningResponses = new JavaScriptSerializer().Deserialize<List<PatientScreening>>(screeningResponseString);
+                var screening = new PatientScreeningManager();
+                foreach (PatientScreening patientScreening in screeningResponses)
+                {
+                    patientScreening.Id = screening.CheckIfPatientScreeningExists((Int32)patientScreening.PatientId, (DateTime)patientScreening.VisitDate, patientScreening.ScreeningCategoryId, (Int32)patientScreening.ScreeningTypeId);
+                    if ( patientScreening.Id <= 0)
+                    {
+                        Result = screening.AddPatientScreening(patientScreening.PatientId, patientScreening.PatientMasterVisitId, (DateTime)patientScreening.VisitDate, (Int32)patientScreening.ScreeningTypeId, (bool)patientScreening.ScreeningDone, (DateTime)patientScreening.ScreeningDate, patientScreening.ScreeningCategoryId, patientScreening.ScreeningValueId, patientScreening.Comment, userId);
+                    }
+                    else {
+                        Result = screening.UpdatePatientScreening(patientScreening.PatientId, (DateTime)patientScreening.VisitDate, (Int32)patientScreening.ScreeningTypeId, (bool)patientScreening.ScreeningDone, (DateTime)patientScreening.ScreeningDate, patientScreening.ScreeningCategoryId, patientScreening.ScreeningValueId, patientScreening.Comment);
+                    }
+                }
+                Msg = (Result > 0) ? "Patient Screening Updated Successfully" : "";
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message;
+            }
+            return Msg;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string GetPatientScreening(int patientId, DateTime visitDate, int screeningcategoryId)
+        {
+            try
+            {
+                var screening = new PatientScreeningManager();
+                
+                var results = screening.GetPatientScreening(patientId, visitDate, screeningcategoryId);
+
+                Msg = new JavaScriptSerializer().Serialize(results);
+
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message;
+            }
+            return Msg;
+        }
+
+        [WebMethod]
+        public string AddPatientAppointment(int patientId, int patientMasterVisitId, DateTime appointmentDate, string description, int reasonId, int serviceAreaId, int statusId, int differentiatedCareId, int userId)
+        {
+            
             PatientAppointment patientAppointment = new PatientAppointment()
             {
                 PatientId = patientId,
@@ -125,6 +187,8 @@ namespace IQCare.Web.CCC.WebService
                 ReasonId = reasonId,
                 ServiceAreaId = serviceAreaId,
                 StatusId = statusId,
+                CreatedBy = userId,
+                CreateDate = DateTime.Now
             };
             try
             {
@@ -147,9 +211,11 @@ namespace IQCare.Web.CCC.WebService
         {
             int patientId; int patientMasterVisitId; string firstName; string middleName; string lastName; int sex; string dob; int relationshipId; int baselineHivStatusId; string baselineHivStatusDate; /*string hivTestingresultId;*/ string hivTestingresultDate; bool cccreferal; string cccReferalNumber;  int userId;
             DateTime? linkageDate;
-            bool dobPrecision;
+            bool? dobPrecision = null;
 
-            FamilyMembers[] familyMembrs = JsonConvert.DeserializeObject<FamilyMembers[]>(familyMembers);
+            //FamilyMembers[] familyMembrs = JsonConvert.DeserializeObject<FamilyMembers[]>(familyMembers);
+            FamilyMembers[] familyMembrs = new JavaScriptSerializer().Deserialize<FamilyMembers[]>(familyMembers);
+
             int count = familyMembrs.Length;
             for(int i=0; i < count; i++)
             {
@@ -163,7 +229,15 @@ namespace IQCare.Web.CCC.WebService
                 int hivresultId = familyMembrs[i].hivTestingresultId == "" ? 0 : Convert.ToInt32(familyMembrs[i].hivTestingresultId);
                 sex = familyMembrs[i].sex;
                 dob = familyMembrs[i].dob;
-                dobPrecision = Convert.ToBoolean(familyMembrs[i].dobPrecision);
+                DateTime? dateOfBirth = null;
+                if (dob != "")
+                {
+                    dateOfBirth = DateTime.Parse(dob);
+                }
+                if (familyMembrs[i].dobPrecision != "")
+                {
+                    dobPrecision = Convert.ToBoolean(familyMembrs[i].dobPrecision);
+                }
                 relationshipId = familyMembrs[i].relationshipId;
                 baselineHivStatusId = familyMembrs[i].baselineHivStatusId;
                 baselineHivStatusDate = familyMembrs[i].baselineHivStatusDate;
@@ -180,7 +254,7 @@ namespace IQCare.Web.CCC.WebService
                     MiddleName = middleName,
                     LastName = lastName,
                     Sex = sex,
-                    DateOfBirth = DateTime.Parse(dob),
+                    DateOfBirth = dateOfBirth,
                     DobPrecision = dobPrecision,
                     RelationshipId = relationshipId,
                     BaseLineHivStatusId = baselineHivStatusId,
@@ -365,9 +439,10 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod]
-        public List<PatientAppointmentDisplay> GetPatientAppointments(string patientId)
+        public IEnumerable<PatientAppointmentDisplay> GetPatientAppointments(string patientId)
         {
             List<PatientAppointmentDisplay> appointmentsDisplay = new List<PatientAppointmentDisplay>();
+            IEnumerable<PatientAppointmentDisplay> listAppointments = new List<PatientAppointmentDisplay>();
             var appointments = new List<PatientAppointment>();
             var bluecardAppointments = new List<BlueCardAppointment>();
             try
@@ -387,14 +462,15 @@ namespace IQCare.Web.CCC.WebService
                     PatientAppointmentDisplay appointmentDisplay = MapBluecardappointments(appointment);
                     appointmentsDisplay.Add(appointmentDisplay);
                 }
-                appointmentsDisplay.OrderByDescending(n => n.AppointmentDate);
+
+                listAppointments = appointmentsDisplay.OrderByDescending(n => n.AppointmentDate);
 
             }
             catch (Exception e)
             {
                 Msg = e.Message;
             }
-            return appointmentsDisplay;
+            return listAppointments;
         }
 
         [WebMethod]
@@ -406,7 +482,7 @@ namespace IQCare.Web.CCC.WebService
             {
                 var patientAppointment = new PatientAppointmentManager();
                 int id = Convert.ToInt32(patientId);
-                appointment = patientAppointment.GetByPatientId(id).FirstOrDefault(n=>n.AppointmentDate.Date==appointmentDate.Date && n.ServiceAreaId==serviceAreaId && n.ReasonId==reasonId);
+                appointment = patientAppointment.GetByPatientId(id).FirstOrDefault(n => n.AppointmentDate.Date == appointmentDate.Date && n.ServiceAreaId == serviceAreaId && n.ReasonId == reasonId);
                 if (appointment != null)
                 {
                     appointmentDisplay = Mapappointments(appointment);
@@ -618,11 +694,14 @@ namespace IQCare.Web.CCC.WebService
         private PatientAppointmentDisplay Mapappointments(PatientAppointment a)
         {
             ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+            appointmentid = a.Id.ToString();
             string status = "";
             string reason = "";
             string serviceArea = "";
             string differentiatedCare = "";
-            List <LookupItemView> statuses = mgr.GetLookItemByGroup("AppointmentStatus");
+            string editAppointment = "<a href='ScheduleAppointment.aspx?appointmentid=" + appointmentid + "' type='button' class='btn btn-success fa fa-pencil-square btn-fill' > Edit</a>";
+            string deleteAppointment = "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>";
+            List<LookupItemView> statuses = mgr.GetLookItemByGroup("AppointmentStatus");
             var s = statuses.FirstOrDefault(n => n.ItemId == a.StatusId);
             if (s != null)
             {
@@ -653,12 +732,105 @@ namespace IQCare.Web.CCC.WebService
                 AppointmentDate = a.AppointmentDate,
                 Description = a.Description,
                 Status = status,
-                DifferentiatedCare = differentiatedCare
+                DifferentiatedCare = differentiatedCare,
+                EditAppointment = editAppointment,
+                DeleteAppointment = deleteAppointment,
+                AppointmentId = appointmentid
             };
 
             return appointment;
+
+            //ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+            //string status = "";
+            //string reason = "";
+            //string serviceArea = "";
+            //string differentiatedCare = "";
+            //List <LookupItemView> statuses = mgr.GetLookItemByGroup("AppointmentStatus");
+            //var s = statuses.FirstOrDefault(n => n.ItemId == a.StatusId);
+            //if (s != null)
+            //{
+            //    status = s.ItemDisplayName;
+            //}
+            //List<LookupItemView> reasons = mgr.GetLookItemByGroup("AppointmentReason");
+            //var r = reasons.FirstOrDefault(n => n.ItemId == a.ReasonId);
+            //if (r != null)
+            //{
+            //    reason = r.ItemDisplayName;
+            //}
+            //List<LookupItemView> areas = mgr.GetLookItemByGroup("ServiceArea");
+            //var sa = areas.FirstOrDefault(n => n.ItemId == a.ServiceAreaId);
+            //if (sa != null)
+            //{
+            //    serviceArea = sa.ItemDisplayName;
+            //}
+            //List<LookupItemView> care = mgr.GetLookItemByGroup("DifferentiatedCare");
+            //var dc = care.FirstOrDefault(n => n.ItemId == a.DifferentiatedCareId);
+            //if (dc != null)
+            //{
+            //    differentiatedCare = dc.ItemDisplayName;
+            //}
+            //PatientAppointmentDisplay appointment = new PatientAppointmentDisplay()
+            //{
+            //    ServiceArea = serviceArea,
+            //    Reason = reason,
+            //    AppointmentDate = a.AppointmentDate,
+            //    Description = a.Description,
+            //    Status = status,
+            //    DifferentiatedCare = differentiatedCare
+            //};
+
+            //return appointment;
         }
 
+        [WebMethod]
+        public string DeleteAppointment(int AppointmentId)
+        {
+            try
+            {
+                var appointment = new PatientAppointmentManager();
+                appointment.DeletePatientAppointments(AppointmentId);
+                Msg = "Appointment Deleted Successfully!";
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message;
+            }
+            return Msg;
+        }
+
+        [WebMethod]
+        public string UpdatePatientAppointment(int patientId, int patientMasterVisitId, DateTime appointmentDate, string description, int reasonId, int serviceAreaId, int statusId, int differentiatedCareId, int userId, int appointmentId)
+        {
+
+            PatientAppointment patientAppointment = new PatientAppointment()
+            {
+                PatientId = patientId,
+                PatientMasterVisitId = patientMasterVisitId,
+                AppointmentDate = appointmentDate,
+                Description = description,
+                DifferentiatedCareId = differentiatedCareId,
+                ReasonId = reasonId,
+                ServiceAreaId = serviceAreaId,
+                StatusId = statusId,
+                CreatedBy = userId,
+                CreateDate = DateTime.Now,
+                Id = appointmentId
+            };
+            try
+            {
+                var appointment = new PatientAppointmentManager();
+                Result = appointment.UpdatePatientAppointments(patientAppointment);
+                if (Result > 0)
+                {
+                    Msg = "Patient appointment Updated Successfully!";
+                }
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message;
+            }
+            return Msg;
+        }
         private PatientAppointmentDisplay MapBluecardappointments(BlueCardAppointment bluecardAppointment)
         {
             ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
@@ -695,14 +867,19 @@ namespace IQCare.Web.CCC.WebService
         }
     }
 
+
+
     public class PatientAppointmentDisplay
     {
+        public string AppointmentId { get; set; }
         public string ServiceArea { get; set; }
         public DateTime AppointmentDate { get; set; }
         public string Reason { get; set; }
         public string DifferentiatedCare { get; set; }
         public string Description { get; set; }
         public string Status { get; set; }
+        public string EditAppointment { get; set; }
+        public string DeleteAppointment { get; set; }
     }
 
     public class PatientFamilyDisplay
@@ -711,8 +888,8 @@ namespace IQCare.Web.CCC.WebService
         public string MiddleName { get; set; }
         public string LastName { get; set; }
         public string Relationship { get; set; }
-        public DateTime DateOfBirth { get; set; }
-        public bool DobPrecision { get; set; }
+        public DateTime? DateOfBirth { get; set; }
+        public bool? DobPrecision { get; set; }
         public string Sex { get; set; }
         public string BaseLineHivStatus { get; set; }
         public DateTime ? BaseLineHivStatusDate { get; set; }

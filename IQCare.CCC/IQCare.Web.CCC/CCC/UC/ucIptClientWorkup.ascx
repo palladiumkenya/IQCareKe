@@ -73,14 +73,14 @@
                 </asp:DropDownList>
             </div>
         </div>
-        <div class="col-md-12 form-group" clientidmode="Static" id="DateForm">
+        <div class="col-md-12 form-group" id="DateForm">
             <div class="col-md-12">
                 <label class="control-label pull-left">Date IPT Started</label>
             </div>
         <div class="col-md-12">
             <div class="datepicker fuelux form-group" id="iptDateStarted">
                 <div class="input-group">
-                    <asp:TextBox ID="iptStartDate" runat="server" class="form-control input-sm"></asp:TextBox>
+                    <asp:TextBox ID="IPTStartDate" runat="server" class="form-control input-sm" ClientIDMode="Static" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
                     <%--<input class="form-control input-sm" id="VisitDate" type="text" runat="server" data-parsley-required="true" />--%>
                     <div class="input-group-btn">
                         <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
@@ -177,11 +177,19 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+
+        var iptStrtDt = "<%= this.StartIPTDate %>";
+        
+        if (iptStrtDt === '' || iptStrtDt === '01-Jan-1900')
+            iptStrtDt = 0;
+
         $('#iptDateStarted').datepicker({
             allowPastDates: true,
+            date: iptStrtDt,
             momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+            
         });
-        $("#<%=iptStartDate.ClientID%>").val("");
+        <%--$("#<%=IPTStartDate.ClientID%>").val("");--%>
         showStartDate();
     });
 

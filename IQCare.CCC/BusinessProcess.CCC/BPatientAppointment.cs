@@ -15,22 +15,22 @@ namespace BusinessProcess.CCC
 
         public int AddPatientAppointments(PatientAppointment p)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                _unitOfWork.PatientAppointmentRepository.Add(p);
-                _result = _unitOfWork.Complete();
-                _unitOfWork.Dispose();
-                return _result;
+                unitOfWork.PatientAppointmentRepository.Add(p);
+                _result = unitOfWork.Complete();
+                unitOfWork.Dispose();
+                return p.Id;
             }
    
         }
 
         public PatientAppointment GetPatientAppointments(int id)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                PatientAppointment appointment = _unitOfWork.PatientAppointmentRepository.GetById(id);
-                _unitOfWork.Dispose();
+                PatientAppointment appointment = unitOfWork.PatientAppointmentRepository.GetById(id);
+                unitOfWork.Dispose();
                 return appointment;
             }
           
@@ -38,10 +38,10 @@ namespace BusinessProcess.CCC
 
         public List<BlueCardAppointment> GetBluecardPatientAppointmentsBypatientId(int patientId)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                List<BlueCardAppointment> appointments = _unitOfWork.BluecardAppointmentRepository.GetBluecardPatientAppointmentsBypatientId(patientId);
-                _unitOfWork.Dispose();
+                List<BlueCardAppointment> appointments = unitOfWork.BluecardAppointmentRepository.GetBluecardPatientAppointmentsBypatientId(patientId);
+                unitOfWork.Dispose();
                 return appointments;
             }
 
@@ -49,23 +49,23 @@ namespace BusinessProcess.CCC
 
         public void DeletePatientAppointments(int id)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                PatientAppointment appointment = _unitOfWork.PatientAppointmentRepository.GetById(id);
-                _unitOfWork.PatientAppointmentRepository.Remove(appointment);
-                _unitOfWork.Complete();
-                _unitOfWork.Dispose();
+                PatientAppointment appointment = unitOfWork.PatientAppointmentRepository.GetById(id);
+                unitOfWork.PatientAppointmentRepository.Remove(appointment);
+                unitOfWork.Complete();
+                unitOfWork.Dispose();
             }
         
         }
 
         public int UpdatePatientAppointments(PatientAppointment p)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                _unitOfWork.PatientAppointmentRepository.Update(p);
-                _result = _unitOfWork.Complete();
-                _unitOfWork.Dispose();
+                unitOfWork.PatientAppointmentRepository.Update(p);
+                _result = unitOfWork.Complete();
+                unitOfWork.Dispose();
                 return _result;
             }
         
@@ -73,11 +73,11 @@ namespace BusinessProcess.CCC
 
         public List<PatientAppointment> GetByPatientId(int patientId)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 List<PatientAppointment> appointments =
-                       _unitOfWork.PatientAppointmentRepository.GetByPatientId(patientId);
-                _unitOfWork.Dispose();
+                       unitOfWork.PatientAppointmentRepository.GetByPatientId(patientId);
+                unitOfWork.Dispose();
                 return appointments;
             }
 
@@ -85,10 +85,10 @@ namespace BusinessProcess.CCC
 
         public List<PatientAppointment> GetByDate(DateTime date)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                List<PatientAppointment> appointments = _unitOfWork.PatientAppointmentRepository.GetByDate(date);
-                _unitOfWork.Dispose();
+                List<PatientAppointment> appointments = unitOfWork.PatientAppointmentRepository.GetByDate(date);
+                unitOfWork.Dispose();
                 return appointments;
             }
           
@@ -96,21 +96,21 @@ namespace BusinessProcess.CCC
 
         public List<PatientAppointment> GetByDateRange(DateTime startDate, DateTime endDate)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 List<PatientAppointment> appointments =
-                        _unitOfWork.PatientAppointmentRepository.GetByDateRange(startDate, endDate);
-                _unitOfWork.Dispose();
+                        unitOfWork.PatientAppointmentRepository.GetByDateRange(startDate, endDate);
+                unitOfWork.Dispose();
                 return appointments;
             }
         }
 
         public List<AppointmentSummary> GetAppointmentSummaryByDate(DateTime date)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                List<AppointmentSummary> summary = _unitOfWork.PatientAppointmentRepository.GetAppointmentSummaryByDate(date);
-                _unitOfWork.Dispose();
+                List<AppointmentSummary> summary = unitOfWork.PatientAppointmentRepository.GetAppointmentSummaryByDate(date);
+                unitOfWork.Dispose();
                 return summary;
             }
         }

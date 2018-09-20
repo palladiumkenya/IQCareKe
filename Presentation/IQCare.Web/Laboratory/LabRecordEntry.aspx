@@ -119,7 +119,7 @@
                                 <tr>
                                     <td colspan="2" align="left">
                                         <div class="pad5">
-                                           <div class="col-md-12"> <label class=" required control-label pull-left" for="textSelectLab"> Select Lab:</label></div>
+                                           <div class="col-md-12"> <label class=" required control-label pull-left" for="textSelectLab"> Select Lab Test:</label></div>
                                            <div class="col-md-12"><asp:TextBox ID="textSelectLab" CssClass="form-control input-sm"  runat="server" AutoPostBack="true" AutoComplete="off"
                                                   OnTextChanged="LabNameChanged" ></asp:TextBox>
                                             <div id="divwidth" style="z-index:5000"></div>

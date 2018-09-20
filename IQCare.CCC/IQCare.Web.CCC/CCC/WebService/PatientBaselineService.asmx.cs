@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Web;
+using System.Web.Script.Serialization;
 using System.Web.Services;
 using IQCare.CCC.UILogic.Baseline;
-using Newtonsoft.Json;
 using IQCare.CCC.UILogic;
 using IQCare.CCC.UILogic.Enrollment;
 
@@ -55,12 +55,12 @@ namespace IQCare.Web.CCC.WebService
 
         [WebMethod(EnableSession = true)]
         public string ManagePatientHivDiagnosis(int id,int patientId, int patientMasterVisitId, DateTime hivDiagnosisDate,
-            DateTime enrollmentDate, int enrollmentWhoStage, string artInitiationStr, int userId)
+            DateTime enrollmentDate, int enrollmentWhoStage, string artInitiationStr, int userId, int historyARTUse)
         {
             try
             {
                 var patientHivDiagnosis = new PatientHivDiagnosisManager(); 
-                _result = patientHivDiagnosis.ManagePatientHivDiagnosis(0, patientId, patientMasterVisitId, hivDiagnosisDate,enrollmentDate, enrollmentWhoStage, artInitiationStr, userId);
+                _result = patientHivDiagnosis.ManagePatientHivDiagnosis(0, patientId, patientMasterVisitId, hivDiagnosisDate,enrollmentDate, enrollmentWhoStage, artInitiationStr, userId, historyARTUse);
                 if (_result > 0)
                 {
                     _jsonMessage = "Patient HIV Diagnosis Complete!";
@@ -79,7 +79,9 @@ namespace IQCare.Web.CCC.WebService
         {
             try
             {
-                dynamic artuse = JsonConvert.DeserializeObject(artuseStrings);
+                //dynamic artuse = JsonConvert.DeserializeObject(artuseStrings);
+                dynamic artuse = new JavaScriptSerializer().DeserializeObject(artuseStrings);
+
 
                 var patientHivHistory=new PatientArvHistoryManager();
                 if (id < 1)
@@ -215,7 +217,8 @@ namespace IQCare.Web.CCC.WebService
             {
                 var patientBaseline=new PatientBaselineLookupManager();
                 var patientBaselineObject = patientBaseline.GetPatientBaseline(patientId);
-                _jsonMessage = JsonConvert.SerializeObject(patientBaselineObject);
+                //_jsonMessage = JsonConvert.SerializeObject(patientBaselineObject);
+                _jsonMessage = new JavaScriptSerializer().Serialize(patientBaselineObject);
             }
             catch (Exception e)
             {
@@ -299,7 +302,8 @@ namespace IQCare.Web.CCC.WebService
             try
             {
                 var patientBaseline = new PatientBaselineLookupManager();
-                _jsonMessage = JsonConvert.SerializeObject(patientBaseline.GetPatientBaseline(patientId));
+                //_jsonMessage = JsonConvert.SerializeObject(patientBaseline.GetPatientBaseline(patientId));
+                _jsonMessage = new JavaScriptSerializer().Serialize(patientBaseline.GetPatientBaseline(patientId));
             }
             catch (Exception e)
             {
@@ -316,7 +320,8 @@ namespace IQCare.Web.CCC.WebService
             {
                 var patientArvHistory = new PatientArvHistoryManager();
                 var arvHistory = patientArvHistory.GetPatientArtUseHistory(patientId);
-                _jsonMessage = JsonConvert.SerializeObject(arvHistory);
+                //_jsonMessage = JsonConvert.SerializeObject(arvHistory);
+                _jsonMessage = new JavaScriptSerializer().Serialize(arvHistory);
             }
             catch (Exception e)
             {
@@ -332,7 +337,8 @@ namespace IQCare.Web.CCC.WebService
             try
             {
                 var vitalsBaseline=new PatientVitalsManager();
-                _jsonMessage = JsonConvert.SerializeObject(vitalsBaseline.GetPatientVitalsBaseline(patientId));
+                //_jsonMessage = JsonConvert.SerializeObject(vitalsBaseline.GetPatientVitalsBaseline(patientId));
+                _jsonMessage = new JavaScriptSerializer().Serialize(vitalsBaseline.GetPatientVitalsBaseline(patientId));
             }
             catch (Exception e)
             {

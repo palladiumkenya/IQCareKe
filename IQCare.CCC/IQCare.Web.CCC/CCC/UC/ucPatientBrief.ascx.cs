@@ -5,6 +5,7 @@ using System;
 using System.Web;
 using Application.Presentation;
 using Interface.CCC;
+using System.Data;
 
 namespace IQCare.Web.CCC.UC
 {
@@ -24,6 +25,7 @@ namespace IQCare.Web.CCC.UC
             string categorization = "Not done";
 
             int patientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
+            int personId = Convert.ToInt32(HttpContext.Current.Session["personId"]);
             
             //if (Request.QueryString["patient"] != null)
             //{
@@ -36,7 +38,8 @@ namespace IQCare.Web.CCC.UC
             //IPatientLookupmanager patientLookupmanager = (IPatientLookupmanager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientLookupManager, BusinessProcess.CCC");
 
            // List<PatientLookup> patientLookups = patientLookupmanager.GetPatientDetailsLookup(patientId);
-            PatientLookup thisPatient = pMgr.GetPatientDetailSummary(patientId);
+
+            PatientLookup thisPatient = pMgr.GetPatientDetailSummaryBrief(patientId,personId);
             pMgr = null;
             if (null != thisPatient)
             {
@@ -81,7 +84,11 @@ namespace IQCare.Web.CCC.UC
                 //    Session["Gender"] = _lookupManager.GetLookupNameFromId(x.Sex).ToLower();
                 //}
                 //todo patientManagershould have the lookups resolved
-                lblPatientType.Text = LookupLogic.GetLookupNameById(thisPatient.PatientType).ToUpper();
+                var patType = LookupLogic.GetLookupNameById(thisPatient.PatientType);
+                if (patType != null)
+                {
+                    lblPatientType.Text = patType.ToUpper();
+                }
                 // _lookupManager.GetLookupNameFromId(thisPatient.PatientType).ToUpper();
 
                 //lblDOB.Text = thisPatient.DateOfBirth.ToString("dd-MMM-yyyy");
@@ -109,9 +116,10 @@ namespace IQCare.Web.CCC.UC
                 // lblCCCReg.Text = x.EnrollmentNumber;
                 lblCCCRegNo.Text = thisPatient.EnrollmentNumber;
                 lblEnrollmentDate.Text = "" + thisPatient.EnrollmentDate.ToString("dd-MMM-yyyy");
+                Session["DateOfEnrollment"] = thisPatient.EnrollmentDate.ToString("dd-MMM-yyyy");
 
                 //SET TB STATUS
-                if(thisPatient.TBStatus<1)
+                if (thisPatient.TBStatus<1)
                 {
                     lbltbstatus.Text = "<span class='fa fa-info-circle text-danger'> " + TBStatus + "<span>";
                 }
@@ -120,13 +128,13 @@ namespace IQCare.Web.CCC.UC
                     TBStatus= LookupLogic.GetLookupNameById(thisPatient.TBStatus).ToString().ToUpper();
                     switch(TBStatus)
                     {
-                        case "TBRx":
+                        case "TBRX":
                             lbltbstatus.Text = "<span class='label label-danger'>"+TBStatus+"</span>";
                             break;
                         case "INH":
                             lbltbstatus.Text = "<span class='label label-warning'>" + TBStatus + "</span>";
                             break;
-                        case "PrTB":
+                        case "PRTB":
                             lbltbstatus.Text = "<span class='label label-warning'>" + TBStatus + "</span>";
                             break;
                         default:
@@ -142,45 +150,61 @@ namespace IQCare.Web.CCC.UC
                 }
                 else
                 {
-                    NutritionStatus = LookupLogic.GetLookupNameById(thisPatient.NutritionStatus).ToString().ToUpper();
-                    lblnutritionstatus.Text = "<span class='label label-success'>" + NutritionStatus + "</span>";
-                    //switch(NutritionStatus)
-                    //{
-                    //    case "O":
-                    //        lblnutritionstatus.Text= "<span class='label label-warning'> Obese </span>";
-                    //        break;
-                    //    case "MAM":
-                    //          lblnutritionstatus.Text = "<span class='label label-warning'>" + NutritionStatus + "</span>";
-                    //        break;
-                    //    case "SAM":
-                    //        lblnutritionstatus.Text = "<span class='label label-danger'>" + NutritionStatus + "</span>";
-                    //        break;
-                    //    default:
-                    //        lblnutritionstatus.Text = "<span class='label label-success'>" + NutritionStatus + "</span>";
-                    //        break;
-                    //}
-                }
-
-                // SET categorization:
-                if (thisPatient.categorization < 1)
-                {
-                    lblcategorization.Text = "<span class='label label-danger'>Unstable</span>";
-                }
-                else
-                {
-                    //categorization= LookupLogic.GetLookupNameById(thisPatient.categorization).ToString().ToUpper();
-                    categorization = thisPatient.categorization.ToString();
-                    switch (categorization)
+                    string nutrition = LookupLogic.GetLookupNameById(thisPatient.NutritionStatus);
+                    if (!string.IsNullOrWhiteSpace(nutrition))
                     {
-                        case "1":
-                            lblcategorization.Text = "<span class='label label-success'>Stable</span>";
+                        NutritionStatus = nutrition.ToUpper();
+                    }
+                    
+                    //lblnutritionstatus.Text = "<span class='label label-success'>" + NutritionStatus + "</span>";
+                    switch (NutritionStatus)
+                    {
+                        case "OBESE":
+                            lblnutritionstatus.Text = "<span class='label label-warning'>" + NutritionStatus + "</span>";
                             break;
-                        case "2":
-                            lblcategorization.Text = "<span class='label label-danger'>Unstable</span>";
+                        case "MAM":
+                            lblnutritionstatus.Text = "<span class='label label-warning'>" + NutritionStatus + "</span>";
+                            break;
+                        case "SAM":
+                            lblnutritionstatus.Text = "<span class='label label-danger'>" + NutritionStatus + "</span>";
+                            break;
+                        default:
+                            lblnutritionstatus.Text = "<span class='label label-success'>" + NutritionStatus + "</span>";
                             break;
                     }
                 }
 
+                // SET categorization:
+                if ((DateTime.Now - thisPatient.EnrollmentDate).TotalDays < 365 )
+                {
+                    IPatientEncounter patientCat = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
+                    DataTable theDT = patientCat.patientCategorizationAtEnrollment(HttpContext.Current.Session["PatientPK"].ToString());
+                    if(theDT.Rows.Count > 0)
+                        lblcategorization.Text = "<span class='label " + theDT.Rows[0][1].ToString() + "'>" + theDT.Rows[0][0].ToString() + "</span>";
+                    else
+                        lblcategorization.Text = "<span class='label label-danger'>Unstable</span>";
+                }
+                else
+                {
+                    if (thisPatient.categorization < 1)
+                    {
+                        lblcategorization.Text = "<span class='label label-danger'>Unstable</span>";
+                    }
+                    else
+                    {
+                        //categorization= LookupLogic.GetLookupNameById(thisPatient.categorization).ToString().ToUpper();
+                        categorization = thisPatient.categorization.ToString();
+                        switch (categorization)
+                        {
+                            case "1":
+                                lblcategorization.Text = "<span class='label label-success'>Stable</span>";
+                                break;
+                            case "2":
+                                lblcategorization.Text = "<span class='label label-danger'>Unstable</span>";
+                                break;
+                        }
+                    }
+                }
 
             }
 

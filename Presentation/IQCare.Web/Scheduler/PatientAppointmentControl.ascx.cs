@@ -521,7 +521,9 @@ namespace IQCare.Web.Scheduler
                 {
                     throw new Exception("Appointment date cannot be blank");
                 }
-                if (appointmentDate < DateTime.Now) throw new Exception("Appointment date cannot be after today");
+                int dateResult = DateTime.Compare(appointmentDate, DateTime.Now);
+
+                if (dateResult <= 0) throw new Exception("Appointment Date should only be scheduled in the future.");
 
                
                 IAppointment objMgr = (IAppointment)ObjectFactory.CreateInstance("BusinessProcess.Scheduler.BAppointment, BusinessProcess.Scheduler");

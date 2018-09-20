@@ -20,16 +20,26 @@ namespace IQCare.Web.CCC.WebService
         private int Result { get; set; }
 
         [WebMethod(EnableSession = true)]
-        public string AddPatientIcf(int patientId, int patientMasterVisitId, bool cough, bool fever, bool nightSweats, bool weightLoss, bool onAntiTbDrugs, bool onIpt, bool everBeenOnIpt)
+        public string AddPatientIcf(int patientId, int patientMasterVisitId, string cough, string fever, string nightSweats, string weightLoss, bool onAntiTbDrugs, bool onIpt, bool everBeenOnIpt)
         {
+            bool? _cough = null;
+            if (cough.Trim().ToLower() == "true") { _cough = true; } else if(cough.Trim().ToLower() == "false") { _cough = false; }
+            bool? _fever = null;
+            if (fever.Trim().ToLower() == "true") { _fever = true; } else if (fever.Trim().ToLower() == "false") { _fever = false; }
+
+            bool? _nightSweat = null;
+            if (nightSweats.Trim().ToLower() == "true") { _nightSweat = true; } else if (nightSweats.Trim().ToLower() == "false") { _nightSweat = false; }
+
+            bool? _WeightLoss = null;
+            if (weightLoss.Trim().ToLower() == "true") { _WeightLoss = true; } else if (weightLoss.Trim().ToLower() == "false") { _WeightLoss = false; }
             PatientIcf patientIcf = new PatientIcf()
             {
                 PatientId = patientId,
                 PatientMasterVisitId = patientMasterVisitId,
-                Cough = cough,
-                Fever = fever,
-                NightSweats = nightSweats,
-                WeightLoss = weightLoss,
+                Cough = _cough,
+                Fever = _fever,
+                NightSweats = _nightSweat,
+                WeightLoss = _WeightLoss,
                 OnIpt = onIpt,
                 OnAntiTbDrugs = onAntiTbDrugs,
                 EverBeenOnIpt = everBeenOnIpt
@@ -60,13 +70,13 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string AddIpt(int patientId, int patientMasterVisitId, int weight, DateTime iptDueDate, DateTime iptDateCollected, bool hepatotoxicity, bool peripheralneoropathy, bool rash, int adheranceMeasurement, string hepatotoxicityAction, string peripheralneoropathyAction, string rashAction, string adheranceMeasurementAction)
+        public string AddIpt(int patientId, int patientMasterVisitId, decimal weight, DateTime iptDueDate, DateTime iptDateCollected, bool hepatotoxicity, bool peripheralneoropathy, bool rash, int adheranceMeasurement, string hepatotoxicityAction, string peripheralneoropathyAction, string rashAction, string adheranceMeasurementAction)
         {
             PatientIpt patientIpt = new PatientIpt()
             {
                 PatientId = patientId,
                 PatientMasterVisitId = patientMasterVisitId,
-                Weight = weight,
+                Weight = Convert.ToInt32(weight),
                 AdheranceMeasurement = adheranceMeasurement,
                 Hepatotoxicity = hepatotoxicity,
                 IptDateCollected = iptDateCollected,

@@ -223,7 +223,7 @@ namespace BusinessProcess.CCC
             using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
                 var item =
-                    unitOfWork.LookupRepository.FindBy(x => x.MasterName == groupName && x.ItemName == itemName)
+                    unitOfWork.LookupRepository.FindBy(x => x.MasterName.ToLower() == groupName.ToLower() && x.ItemName.ToLower() == itemName.ToLower())
                         .ToList();
                 unitOfWork.Dispose();
                 return item;
@@ -241,6 +241,16 @@ namespace BusinessProcess.CCC
             }
         }
 
+        public LookupFacility GetFacility(string mflCode)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                var item = unitOfWork.LookupFacilityRepository.GetFacilityByMflCode(mflCode);
+                //.FindBy(f => f.MFLCode == mflCode && f.DeleteFlag == 0).FirstOrDefault(); ;
+                unitOfWork.Dispose();
+                return item;
+            }
+        }
         public LookupItemView GetPatientGender(int genderId)
 
         {
@@ -353,6 +363,12 @@ namespace BusinessProcess.CCC
         {
             LookupCountyRepository lookupCountyRepository = new LookupCountyRepository();
             return lookupCountyRepository.GetWardNameByWardId(wardId);
+        }
+
+        public LookupCounty GetCountyDetailsByWardName(string wardName)
+        {
+            LookupCountyRepository lookupCountyRepository = new LookupCountyRepository();
+            return lookupCountyRepository.GetCountyDetailsByWardName(wardName);
         }
 
         public List<PatientLabTracker> GetVlPendingCount(int facilityId)
@@ -478,14 +494,15 @@ namespace BusinessProcess.CCC
             }
         }
 
+        public string GetLookupItemNameByMasterNameItemId(int itemId, string masterName)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                var p = unitOfWork.LookupRepository.FindBy(x => x.ItemId == itemId && x.MasterName == masterName).FirstOrDefault();
+                unitOfWork.Dispose();
+                return p.ItemName;
+            }
+        }
 
-        //    public LookupPatientAdherence GetPatientAdherence(int patientId)
-        //    {
-        //        PatientLookupAdherenceRepository patientAdherence = new PatientLookupAdherenceRepository();
-
-
-
-        //    }
-        //}
     }
 }

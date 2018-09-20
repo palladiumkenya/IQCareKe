@@ -32,6 +32,16 @@ namespace BusinessProcess.CCC
             }
         }
 
+        public PatientWhoStage GetWhoStageById(int entityId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var whoStage = unitOfWork.PatientWhoStageRepository.GetById(entityId);
+                unitOfWork.Dispose();
+                return whoStage;
+            }
+        }
+
         public int UpdatePatientWhoStage(PatientWhoStage patientWhoStage)
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))

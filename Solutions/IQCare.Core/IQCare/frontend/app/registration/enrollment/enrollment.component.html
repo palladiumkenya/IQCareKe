@@ -1,0 +1,74 @@
+<div class="ibox">
+    <div class="ibox-title">
+        <h5>ENROLLMENT</h5>
+    </div>
+    <div class="ibox-content">
+        <div class="row">
+            <div class="col-md-2">
+                <app-leftnav></app-leftnav>
+            </div>
+            <div class="col-md-10 animated fadeIn">
+                <div class="panel panel-default">
+                    <div class="panel-heading">ENROLLMENT</div>
+                    <div class="panel-body">
+                        <form id="form" action="#" class="wizard-big" #enrollmentForm="ngForm" (ngSubmit)="onSubmit()">
+                            <fieldset>
+                                <div class="example-container">
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-3 col-sm-3">
+                                            <div class="form-group">
+                                                <mat-form-field>
+                                                    <mat-select placeholder="Service" autofocus id="service" name="service" tabindex="1" [(ngModel)]="enrollment.ServiceAreaId" #ServiceAreaId="ngModel">
+                                                        <mat-option value="2">{{appPosID}} - {{facilityName}} HTS Facility</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <mat-form-field>
+                                                    <input matInput placeholder="Serial" id="enrollmentNo" name="enrollmentNo" tabindex="3" [(ngModel)]="enrollment.EnrollmentNo" #EnrollmentNo="ngModel">
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-3 col-md-3 col-sm-3">
+                                            <!--<div class="form-group">
+                                                <div>
+                                                    <mat-form-field>
+                                                        <input tabindex="2" [max]="maxDate" matInput placeholder="Enrollment Date" [matDatepicker]="myDatepicker" (click)="myDatepicker.open()" id="enrollmentDate" name="enrollmentDate" [(ngModel)]="enrollment.DateOfEnrollment" #DateOfEnrollment="ngModel" data-parsley-required="true">
+                                                        <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+                                                        <mat-datepicker #myDatepicker></mat-datepicker>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>-->
+
+                                            <div class="form-group">
+                                                <div>
+                                                    <mat-form-field>
+                                                        <input tabindex="4" [max]="maxDate" matInput placeholder="Registration Date" [matDatepicker]="registrationDateDatepicker" (click)="registrationDateDatepicker.open()" id="registrationDate" name="registrationDate" [(ngModel)]="enrollment.RegistrationDate" #RegistrationDate="ngModel" data-parsley-required="true">
+                                                        <mat-datepicker-toggle matSuffix [for]="registrationDateDatepicker"></mat-datepicker-toggle>
+                                                        <mat-datepicker #registrationDateDatepicker></mat-datepicker>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-3 col-sm-3">
+                                            <div class="form-group">
+                                                <button class="btn btn-primary m-t-n-xs" value="submit" type="submit" [disabled]="!enrollmentForm.form.valid">
+                                                    <strong>Save and Continue</strong>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

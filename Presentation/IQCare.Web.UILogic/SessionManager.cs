@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -44,7 +45,7 @@ namespace IQCare.Web.UILogic
                 return manager;
             }
         }
-  
+     
         /// <summary>
         /// Gets or sets the patient identifier.  assgined ptn_pk from mst_Patient
         /// </summary>
@@ -73,6 +74,20 @@ namespace IQCare.Web.UILogic
         /// The location identifier.
         /// </value>
         public static int FacilityId { get { return Instance._facilityId; } set { Instance._facilityId = value; } }
+        public static string TechnicalAreaName
+        {
+            get { return Instance._technicalAreaName; }
+            set { Instance._technicalAreaName = value; }
+        }
+
+        public static string TechnicalAreaId
+        {
+            get { return Instance._technicalAreaId; }
+            set { Instance._technicalAreaId = value; }
+        }
+
+        //Session["TechnicalAreaName"] = Request.QueryString["srvNm"];
+        //Session["TechnicalAreaId"] = Request.QueryString["mod"]
         /// <summary>
         /// Gets or sets the service area identifier. Module user is accessing
         /// </summary>
@@ -101,10 +116,13 @@ namespace IQCare.Web.UILogic
         private int _moduleId;
         private int _systemId;
         private CurrentSession _cUser;
+        private string _technicalAreaName;
+        private string _technicalAreaId;
+
         public static void Dispose()
         {
             //Cleanup this object so that GC can reclaim space
-           HttpContext.Current.Session.Remove(SESSION_MANAGER);
+            HttpContext.Current.Session.Remove(SESSION_MANAGER);
         }
     }
 }

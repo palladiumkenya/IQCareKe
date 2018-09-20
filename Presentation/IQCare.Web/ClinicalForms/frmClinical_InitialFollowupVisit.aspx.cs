@@ -1459,10 +1459,21 @@ namespace IQCare.Web.Clinical
             patientID = Convert.ToInt32(Session["PatientId"].ToString());
             locationID = Convert.ToInt32(Session["AppLocationId"].ToString());
             gender = Session["PatientSex"].ToString();
+            if (null != (Session["patientageinyearmonth"]))
+            {
+                age = Convert.ToDouble(Session["patientageinyearmonth"].ToString());
+            }
 
-            age = Convert.ToDouble(Session["patientageinyearmonth"].ToString());
-            ageInYear = (int)Convert.ToDouble(Session["PatientAge"].ToString());
-            ageInMonth = Convert.ToInt32(Session["PatientAge"].ToString().Substring(Session["PatientAge"].ToString().IndexOf(".") + 1));
+            if (null != (Session["PatientAge"]))
+            {
+                ageInYear = (int)Convert.ToDouble(Session["PatientAge"].ToString());
+            }
+
+            if (null!= (Session["PatientAge"]))
+            {
+                ageInMonth = Convert.ToInt32(Session["PatientAge"].ToString().Substring(Session["PatientAge"].ToString().IndexOf(".") + 1));
+            }
+          
 
             //Header Texts
             (Master.FindControl("levelOneNavigationUserControl1").FindControl("lblRoot") as Label).Text = "Clinical Forms >> ";

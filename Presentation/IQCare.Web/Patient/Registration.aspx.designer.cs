@@ -103,6 +103,24 @@ namespace IQCare.Web.Patient {
         protected global::System.Web.UI.WebControls.DropDownList ddgender;
         
         /// <summary>
+        /// ddmaritalStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddmaritalStatus;
+        
+        /// <summary>
+        /// txtRegDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtRegDate;
+        
+        /// <summary>
         /// TxtDOB control.
         /// </summary>
         /// <remarks>
@@ -155,24 +173,6 @@ namespace IQCare.Web.Patient {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btncalculate_DOB;
-        
-        /// <summary>
-        /// ddmaritalStatus control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddmaritalStatus;
-        
-        /// <summary>
-        /// txtRegDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtRegDate;
         
         /// <summary>
         /// PnlDynamicElements control.

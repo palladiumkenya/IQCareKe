@@ -3,6 +3,7 @@ using System;
 using System.IO;
 using System.IO.Compression;
 using System.Web;
+using System.Web.Http;
 using System.Web.SessionState;
 using System.Web.UI;
 
@@ -10,10 +11,11 @@ namespace IQCare.Web
 {
     public class Global : HttpApplication
     {
-
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         protected void Application_Start(object sender, EventArgs e)
         {
-
+            GlobalConfiguration.Configure(WebApiConfig.Register);
+            log.Debug("iq started");
         }
 
         protected void Session_Start(object sender, EventArgs e)
@@ -61,7 +63,10 @@ namespace IQCare.Web
             base.Response.Clear();
             //handle endless loop ERR_TOO_MANY_REDIRECTS
             if (!HttpContext.Current.Request.Path.EndsWith("Error.aspx", StringComparison.InvariantCultureIgnoreCase))
-                base.Response.Redirect("~/Error.aspx");
+            {
+                base.Response.Redirect("~/Error.aspx",false);
+                Context.ApplicationInstance.CompleteRequest();
+            }
 
 
         }
@@ -95,13 +100,14 @@ namespace IQCare.Web
             {
                 if (app.Context.CurrentHandler is Page)
                 {
-                    if (CurrentSession.Current == null || Session["AppUserId"] == null)
+                    if( (CurrentSession.Current == null || Session["AppUserId"] == null)&& SystemSetting.CurrentSystem.Configured)
                     {
 
                         if (!Context.Request.Url.AbsoluteUri.ToLower().Contains("frmlogin.aspx"))
                         {
                             // redirect to your login page
-                            Context.Response.Redirect("~/frmLogin.aspx");
+                            Context.Response.Redirect("~/frmLogin.aspx",false);
+                            Context.ApplicationInstance.CompleteRequest();
                         }
                     }
                 }

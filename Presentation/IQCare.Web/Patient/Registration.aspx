@@ -181,8 +181,7 @@
     </script>
     <div class="row">
         <span class="text-capitalize pull-left glyphicon-text-size= fa-2x" id="tHeading"
-            runat="server"><i class="fa fa-cubes fa-2x" aria-hidden="true"></i><span class="text-info">
-                Patient Registration</span></span>
+            runat="server"><i class="fa fa-cubes fa-2x" aria-hidden="true"></i><span class="text-info">Patient Registration</span></span>
     </div>
     <hr />
     <div class="row">
@@ -194,8 +193,7 @@
                 <asp:Panel class="border center formbg" ID="panelStatic" Width="100%" runat="server"
                     Style="margin-top: 0; padding-top: 0px">
                     <div class="popupWindow center formbg" id='search_popup' onclick="javascript:getReadyToMove('search_popup', event);"
-                        style="display: none; padding: 5px; z-index: 1000; filter: alpha(opacity=60);
-                        opacity: 0.6; -moz-opacity: 0.8; background-color: Black">
+                        style="display: none; padding: 5px; z-index: 1000; filter: alpha(opacity=60); opacity: 0.6; -moz-opacity: 0.8; background-color: Black">
                         <table cellspacing="0" cellpadding="0" style="width: 100%" border="0">
                             <tr bgcolor="#666699">
                                 <td align="right">
@@ -210,8 +208,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="alert">
-                                    Please check for duplicates
+                                <td class="alert">Please check for duplicates
                                 </td>
                             </tr>
                         </table>
@@ -284,83 +281,6 @@
                                 </div>
                                 <!-- .form-group-->
                             </div>
-                            <!-- .col-md-3-->
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label id="lblDOB" class="required control-label pull-left" for="DOB">
-                                        <span class="text-danger">*</span> Date of Birth:<small class="text-muted"> [DD-MMM-YYYY]</small></label>
-                                    <div class="col-md-11" style="padding-right: 0px; padding-left: 0px">
-                                        <asp:TextBox ID="TxtDOB" CssClass=" form-control input-sm" MaxLength="11" runat="server"
-                                            onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"
-                                            onfocus="javascript:vDateType='3'"></asp:TextBox>
-                                    </div>
-                                    <br />
-                                    <div class="col-md-1" style="padding-left: 0px">
-                                        <img onclick="w_displayDatePicker('<%= TxtDOB.ClientID %>');" height="22" alt="Date Helper"
-                                            hspace="3" src="../Images/cal_icon.gif" width="20" border="0" style="z-index: auto" /></div>
-                                </div>
-                                <!-- .fomr-group-->
-                            </div>
-                            <!-- .col-md-3-->
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <br />
-                                    <%--<span class="control-label pull-left text-bold" style="padding-right:20px">DD-MMM-YYYY </span>--%>
-                                    <input id="rbtndobPrecExact" onmouseup="up(this);" onfocus="up(this);" onclick="down(this)"
-                                        type="radio" class="pull-left" value="1" name="dobPrecision" runat="server" />
-                                    <span class="control-label pull-left" style="padding-left: 10px; padding-right: 10px">
-                                        Exact </span>
-                                    <input id="rbtndobPrecEstimated" onmouseup="up(this);" onfocus="up(this);" onclick="down(this)"
-                                        type="radio" value="0" name="dobPrecision" runat="server" class="pull-left" />
-                                    <span class="control-label pull-left " style="padding-left: 10px">Estimated</span>
-                                </div>
-                            </div>
-                            <!-- .col-md-3-->
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <%--                                <label class=" required control-label" for="Age">
-                                    Age:</label><br />
-                                <div class="col-md-4" style="padding-left: 0px">
-                                    <asp:TextBox ID="txtageCurrentYears" CssClass="form-control pull-left" MaxLength="2"
-                                        runat="server"></asp:TextBox></div>
-                                <div class="col-md-1">
-                                    <span class="control-label">yrs</span></div>
-                                <div class="col-md-3">
-                                    <asp:TextBox ID="txtageCurrentMonths" MaxLength="2" ReadOnly="true" runat="server"
-                                        CssClass="form-control"></asp:TextBox></div>
-                                <div class="col-md-1">
-                                    <span class="control-label">mths</span></div>
-                                <div class="col-md-4">
-                                    <asp:Button ID="btncalculate_DOB" CssClass="btn btn-info" runat="server" Text="Calculate DOB"
-                                        OnClick="btncalculate_DOB_Click" /></div>--%>
-                                    <div class="form-group">
-                                        <div class="col-md-12">
-                                            <label class="required control-label pull-left" for="Age">
-                                                Age:</label></div>
-                                        <div class="col-md-3" style="padding-right: 0px">
-                                            <asp:TextBox ID="txtageCurrentYears" CssClass="form-control pull-left" MaxLength="2"
-                                                runat="server"></asp:TextBox></div>
-                                        <div class="col-md-1" style="padding-left: 1%">
-                                            <span class="control-label"><strong>Yrs</strong></span></div>
-                                        <div class="col-md-2" style="padding-right: 1%; padding-left: 1%">
-                                            <asp:TextBox ID="txtageCurrentMonths" MaxLength="2" ReadOnly="true" runat="server"
-                                                CssClass="form-control"></asp:TextBox></div>
-                                        <div class="col-md-1" style="padding-left: 1%">
-                                            <span class="control-label"><strong>mths</strong></span></div>
-                                        <div class="col-md-4" style="padding-left: 5%">
-                                            <asp:Button ID="btncalculate_DOB" CssClass="btn btn-info" runat="server" Text="Calculate DOB"
-                                                OnClick="btncalculate_DOB_Click" /></div>
-                                        <div class="col-md-2">
-                                        </div>
-                                    </div>
-                                    <!-- .form-group -->
-                                </div>
-                                <!-- .form-group -->
-                            </div>
-                            <!-- .col-md-3-->
-                        </div>
-                        <!-- .row -->
-                        <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label class="control-label pull-left" for="maritalstatus">
@@ -389,10 +309,75 @@
                                 </div>
                                 <!-- .form-group -->
                             </div>
-                            <!-- .col-md-3 -->
+
+                        </div>
+                        <!-- .row -->
+                        <div class="row">
+                            <!-- .col-md-3-->
                             <div class="col-md-3">
+                                <div class="form-group">
+                                    <label id="lblDOB" class="required control-label pull-left" for="DOB">
+                                        <span class="text-danger">*</span> Date of Birth:<small class="text-muted"> [DD-MMM-YYYY]</small></label>
+                                    <div class="col-md-11" style="padding-right: 0px; padding-left: 0px">
+                                        <asp:TextBox ID="TxtDOB" CssClass=" form-control input-sm" MaxLength="11" runat="server"
+                                            onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"
+                                            onfocus="javascript:vDateType='3'"></asp:TextBox>
+                                    </div>
+                                    <br />
+                                    <div class="col-md-1" style="padding-left: 0px">
+                                        <img onclick="w_displayDatePicker('<%= TxtDOB.ClientID %>');" height="22" alt="Date Helper"
+                                            hspace="3" src="../Images/cal_icon.gif" width="20" border="0" style="z-index: auto" />
+                                    </div>
+                                </div>
+                                <!-- .fomr-group-->
                             </div>
-                            <!-- .col-md-3 -->
+                            <!-- .col-md-3-->
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <br />
+                                    <%--<span class="control-label pull-left text-bold" style="padding-right:20px">DD-MMM-YYYY </span>--%>
+                                    <input id="rbtndobPrecExact" onmouseup="up(this);" onfocus="up(this);" onclick="down(this)"
+                                        type="radio" class="pull-left" value="1" name="dobPrecision" runat="server" />
+                                    <span class="control-label pull-left" style="padding-left: 10px; padding-right: 10px">Exact </span>
+                                    <input id="rbtndobPrecEstimated" onmouseup="up(this);" onfocus="up(this);" onclick="down(this)"
+                                        type="radio" value="0" name="dobPrecision" runat="server" class="pull-left" />
+                                    <span class="control-label pull-left " style="padding-left: 10px">Estimated</span>
+                                </div>
+                            </div>
+                            <!-- .col-md-3-->
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <label class="required control-label pull-left" for="Age">
+                                                Age:</label>
+                                        </div>
+                                        <div class="col-md-3" style="padding-right: 0px">
+                                            <asp:TextBox ID="txtageCurrentYears" CssClass="form-control pull-left" MaxLength="2"
+                                                runat="server"></asp:TextBox>
+                                        </div>
+                                        <div class="col-md-1" style="padding-left: 1%">
+                                            <span class="control-label"><strong>Yrs</strong></span>
+                                        </div>
+                                        <div class="col-md-2" style="padding-right: 1%; padding-left: 1%">
+                                            <asp:TextBox ID="txtageCurrentMonths" MaxLength="2" ReadOnly="true" runat="server"
+                                                CssClass="form-control"></asp:TextBox>
+                                        </div>
+                                        <div class="col-md-1" style="padding-left: 1%">
+                                            <span class="control-label"><strong>mths</strong></span>
+                                        </div>
+                                        <div class="col-md-4" style="padding-left: 5%">
+                                            <asp:Button ID="btncalculate_DOB" CssClass="btn btn-info" runat="server" Text="Calculate DOB"
+                                                OnClick="btncalculate_DOB_Click" />
+                                        </div>
+                                        <div class="col-md-2">
+                                        </div>
+                                    </div>
+                                    <!-- .form-group -->
+                                </div>
+                                <!-- .form-group -->
+                            </div>
+                            <!-- .col-md-3-->
                         </div>
                         <!-- .row-->
                     </div>

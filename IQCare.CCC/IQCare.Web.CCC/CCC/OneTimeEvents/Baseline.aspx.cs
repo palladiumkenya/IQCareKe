@@ -141,8 +141,8 @@ namespace IQCare.Web.CCC.OneTimeEvents
                 }
 
                 ARTUseHistory.Items.Add(new ListItem("select", ""));
-                ARTUseHistory.Items.Add(new ListItem("Yes", "True"));
-                ARTUseHistory.Items.Add(new ListItem("No", "False"));
+                ARTUseHistory.Items.Add(new ListItem("Yes", "1"));
+                ARTUseHistory.Items.Add(new ListItem("No", "0"));
 
             }
         }

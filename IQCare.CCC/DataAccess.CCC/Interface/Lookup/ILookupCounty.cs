@@ -16,5 +16,6 @@ namespace DataAccess.CCC.Interface.Lookup
        string GetCountyByCountyId(int countyId);
        string GetSubCountyNameBySubCountyId(int subCountyId);
        string GetWardNameByWardId(int wardId);
+       LookupCounty GetCountyDetailsByWardName(string wardName);
    }
 }
