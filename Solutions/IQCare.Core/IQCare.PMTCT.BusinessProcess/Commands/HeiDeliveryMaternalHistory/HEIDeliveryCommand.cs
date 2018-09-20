@@ -9,9 +9,12 @@ namespace IQCare.PMTCT.BusinessProcess.Commands.HeiDeliveryMaternalHistory
         public int ModeOfDelivery { get; set; }
         public float BirthWeight { get; set; }
         public int ProphylaxisReceived { get; set; }
+        public int PatientId { get; set; }
+        public int PatientMasterVisitId { get; set; }
     }
 
     public class AddHeiDeliveryCommandResponse
     {
+        public int HeiEncounterId { get; set; }
     }
 }

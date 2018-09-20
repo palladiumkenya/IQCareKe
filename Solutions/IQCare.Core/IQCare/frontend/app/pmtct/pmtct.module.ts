@@ -1,3 +1,4 @@
+import { HeiService } from './_services/hei.service';
 import { PrimaryCareGiverResolver } from './_services/primarycaregiver.resolver';
 import { MotherStateResolver } from './_services/motherstate.resolver';
 import { ARVProphylaxisResolver } from './_services/arvprophylaxis.resolver';
@@ -92,7 +93,8 @@ import { HeiOutcomeOptionsResolver } from './_services/hei-outcome-options.resol
         HeiMotherRegimenResolver,
         YesNoResolver,
         MotherDrugsAtInfantEnrollmentResolver,
-        PrimaryCareGiverResolver
+        PrimaryCareGiverResolver,
+        HeiService
     ],
     entryComponents: [
 

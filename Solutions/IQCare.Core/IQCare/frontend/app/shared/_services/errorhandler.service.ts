@@ -1,12 +1,12 @@
 
-import {throwError as observableThrowError, Observable} from 'rxjs';
+import { throwError as observableThrowError, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 
 @Injectable()
 export class ErrorHandlerService {
     constructor() { }
 
-    public handleError<T> (operation = 'operation', result?: T) {
+    public handleError<T>(operation = 'operation', result?: T) {
         return (error: any): Observable<T> => {
 
             // TODO: send the error to remote logging infrastructure
@@ -24,6 +24,7 @@ export class ErrorHandlerService {
 
     /** Log a HeroService message with the MessageService */
     public log(message: string) {
-        console.log(message);
+        // tslint:disable-next-line:no-console
+        console.info(message);
     }
 }
