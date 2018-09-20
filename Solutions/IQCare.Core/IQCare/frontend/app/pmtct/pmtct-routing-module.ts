@@ -22,6 +22,7 @@ import {ImmunizationPeriodOptionsResolverService} from './_services/immunization
 import {ImmunizationGivenOptionsResolverService} from './_services/immunization-given-options-resolver.service';
 import {MilestonesAssessedOptionsResolverService} from './_services/milestones-assessed-options-resolver.service';
 import {MilestonesStatusOptionsResolverService} from './_services/milestones-status-options-resolver.service';
+import { HeiOutcomeOptionsResolver } from './_services/hei-outcome-options.resolver.service';
 
 
 const routes: Routes = [
@@ -74,6 +75,8 @@ const routes: Routes = [
             immunizationGivenOptions: ImmunizationGivenOptionsResolverService,
             milestoneAssessedOptions: MilestonesAssessedOptionsResolverService,
             milestoneStatusOptions: MilestonesStatusOptionsResolverService
+            infantFeedingOptions: InfantFeedingOptionsResolver,
+            heiOutcomeOptions: HeiOutcomeOptionsResolver
         }
     }
 ];

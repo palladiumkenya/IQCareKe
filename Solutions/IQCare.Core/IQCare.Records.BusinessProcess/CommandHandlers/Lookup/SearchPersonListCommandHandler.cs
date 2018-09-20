@@ -43,6 +43,8 @@ namespace IQCare.Records.BusinessProcess.CommandHandlers.Lookup
 
                 if (!string.IsNullOrWhiteSpace(request.identificationNumber))
                     sql.Append($" AND IdentifierValue like \'%{request.identificationNumber}%\'");
+                if (!string.IsNullOrWhiteSpace(request.MobileNumber))
+                    sql.Append($" AND MobileNumber like \'%{request.MobileNumber}%\'");
 
                 sql.Append(";exec [dbo].[pr_CloseDecryptedSession];");
                 var result = await _unitOfWork.Repository<PersonListView>().FromSql(sql.ToString());

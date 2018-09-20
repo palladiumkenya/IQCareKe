@@ -2,6 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { NotificationService } from '../../../shared/_services/notification.service';
 import { SnotifyService } from 'ng-snotify';
+import { MatDialogConfig, MatDialog } from '@angular/material';
+import { InlineSearchComponent } from '../../../records/inline-search/inline-search.component';
 
 @Component({
     selector: 'app-maternalhistory',
@@ -18,12 +20,15 @@ export class MaternalhistoryComponent implements OnInit {
     motherdrugsatinfantenrollmentOptions: any[] = [];
     primarycaregiverOptions: any[] = [];
 
+    isMotherRegistered: boolean = false;
+
     @Input('maternalhistoryOptions') maternalhistoryOptions: any;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     constructor(private _formBuilder: FormBuilder,
         private notificationService: NotificationService,
-        private snotifyService: SnotifyService) { }
+        private snotifyService: SnotifyService,
+        private dialog: MatDialog) { }
 
     ngOnInit() {
         this.MaternalHistoryForm = this._formBuilder.group({
@@ -76,5 +81,42 @@ export class MaternalhistoryComponent implements OnInit {
         } else if (event.source.selected) {
             this.MaternalHistoryForm.controls['pmtctheimotherdrugsatinfantenrollment'].disable();
         }
+    }
+
+    onMotherRegisteredInClinicChange(event) {
+        if (event.isUserInput && event.source.selected && event.source.viewValue == 'Yes') {
+            this.isMotherRegistered = true;
+            // this.MaternalHistoryForm.controls.nameofmother.disable({ onlySelf: true });
+        } else if (event.isUserInput && event.source.selected && event.source.viewValue == 'No') {
+            // this.MaternalHistoryForm.controls.nameofmother.enable({ onlySelf: false });
+            this.isMotherRegistered = false;
+        }
+    }
+
+    openDialog() {
+        const dialogConfig = new MatDialogConfig();
+
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.height = '85%';
+        dialogConfig.width = '80%';
+
+        dialogConfig.data = {
+        };
+
+
+        const dialogRef = this.dialog.open(InlineSearchComponent, dialogConfig);
+
+
+        dialogRef.afterClosed().subscribe(
+            data => {
+                if (!data) {
+                    return;
+                }
+
+                const mothernames = data[0]['firstName'] + ' ' + data[0]['middleName'] + ' ' + data[0]['lastName'];
+                this.MaternalHistoryForm.controls.nameofmother.setValue(mothernames);
+            }
+        );
     }
 }

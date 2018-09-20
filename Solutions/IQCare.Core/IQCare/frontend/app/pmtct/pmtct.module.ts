@@ -1,3 +1,4 @@
+import { HeiService } from './_services/hei.service';
 import { PrimaryCareGiverResolver } from './_services/primarycaregiver.resolver';
 import { MotherStateResolver } from './_services/motherstate.resolver';
 import { ARVProphylaxisResolver } from './_services/arvprophylaxis.resolver';
@@ -43,6 +44,10 @@ import { MotherDrugsAtInfantEnrollmentResolver } from './_services/motherdrugsat
 import { HeiHivtestingComponent } from './hei/hei-hivtesting/hei-hivtesting.component';
 import { InfantFeedingComponent } from './hei/infant-feeding/infant-feeding.component';
 import { TbAssessmentComponent } from './hei/tb-assessment/tb-assessment.component';
+import { InlineSearchComponent } from '../records/inline-search/inline-search.component';
+import { RecordsModule } from '../records/records.module';
+import { HeiOutcomeComponent } from './hei/hei-outcome/hei-outcome.component';
+import { HeiOutcomeOptionsResolver } from './_services/hei-outcome-options.resolver.service';
 
 
 @NgModule({
@@ -56,7 +61,7 @@ import { TbAssessmentComponent } from './hei/tb-assessment/tb-assessment.compone
         MatGridListModule, MatIconModule, MatListModule, MatMenuModule, MatNativeDateModule, MatPaginatorModule,
         MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatSliderModule,
         MatSlideToggleModule, MatSnackBarModule, MatSortModule, MatStepperModule, MatTableModule, MatTabsModule,
-        MatToolbarModule, MatTooltipModule, ReactiveFormsModule, MatInputModule, SharedModule
+        MatToolbarModule, MatTooltipModule, ReactiveFormsModule, MatInputModule, SharedModule, RecordsModule
     ],
     declarations: [
         ProfileComponent,
@@ -80,6 +85,8 @@ import { TbAssessmentComponent } from './hei/tb-assessment/tb-assessment.compone
         HeiHivtestingComponent,
         InfantFeedingComponent,
         TbAssessmentComponent
+        InfantFeedingComponent,
+        HeiOutcomeComponent
     ],
     providers: [
         PlaceOfDeliveryResolver,
@@ -90,7 +97,11 @@ import { TbAssessmentComponent } from './hei/tb-assessment/tb-assessment.compone
         HeiMotherRegimenResolver,
         YesNoResolver,
         MotherDrugsAtInfantEnrollmentResolver,
-        PrimaryCareGiverResolver
+        PrimaryCareGiverResolver,
+        HeiService
+    ],
+    entryComponents: [
+
     ]
 })
 export class PmtctModule { }

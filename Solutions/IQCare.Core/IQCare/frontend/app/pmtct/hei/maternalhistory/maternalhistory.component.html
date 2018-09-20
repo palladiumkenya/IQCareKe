@@ -12,8 +12,9 @@
                     <mat-label>Mother Registered at this clinic</mat-label>
                     <mat-select formControlName="motherregisteredinclinic" required>
                         <mat-option [value]=""></mat-option>
-                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId">
-                            {{yesnoOption.itemName}}
+                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId"
+                            (onSelectionChange)="onMotherRegisteredInClinicChange($event)">
+                            {{ yesnoOption.itemName }}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
@@ -42,6 +43,16 @@
                     </mat-select>
                 </mat-form-field>
             </div>
+        </div>
+
+        <div class="col-lg-12 col-sm-12 col-xs-12">
+            <div class="col-lg-4 col-sm-4 col-xs-12">
+                <button mat-raised-button color="primary" type="button" class="col-lg-4 col-sm-4 col-xs-12" *ngIf="isMotherRegistered"
+                    (click)="openDialog()">
+                    Find Mother
+                </button>
+            </div>
+
         </div>
 
         <div class="col-lg-12 col-sm-12 col-xs-12">

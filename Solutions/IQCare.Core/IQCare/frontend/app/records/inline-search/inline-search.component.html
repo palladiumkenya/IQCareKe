@@ -1,0 +1,102 @@
+<h2 mat-dialog-title>{{title}}</h2>
+
+<mat-divider></mat-divider>
+<br>
+
+<form [formGroup]="form">
+    <mat-dialog-content>
+        <div class="row">
+            <div class="col-lg-3 col-sm-3 col-xs-12">
+                <mat-form-field>
+                    <input matInput placeholder="FirstName" formControlName="firstName" id="firstName" name="firstName">
+                </mat-form-field>
+            </div>
+
+            <div class="col-lg-3 col-sm-3 col-xs-12">
+                <mat-form-field>
+                    <input matInput placeholder="Middle Name" formControlName="middleName" id="middleName" name="middleName">
+                </mat-form-field>
+            </div>
+
+
+            <div class="col-lg-3 col-sm-3 col-xs-12">
+                <mat-form-field>
+                    <input matInput placeholder="Last Name" formControlName="lastName" id="lastName" name="lastName">
+                </mat-form-field>
+            </div>
+
+            <div class="col-lg-3 col-sm-3 col-xs-12">
+                <button mat-raised-button color="primary" type="button" (click)="findPerson()">
+                    Find Person
+                </button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="example-container mat-elevation-z8">
+                <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                    <!--- Note that these columns can be defined in any order.
+                              The actual rendered columns are set as a property on the row definition" -->
+
+                    <ng-container matColumnDef="select">
+                        <th mat-header-cell *matHeaderCellDef>
+                            <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
+                                [indeterminate]="selection.hasValue() && !isAllSelected()">
+                            </mat-checkbox>
+                        </th>
+                        <td mat-cell *matCellDef="let row">
+                            <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                                [checked]="selection.isSelected(row)">
+                            </mat-checkbox>
+                        </td>
+                    </ng-container>
+
+                    <!-- Position Column -->
+                    <ng-container matColumnDef="firstName">
+                        <th mat-header-cell *matHeaderCellDef> First Name </th>
+                        <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+                    </ng-container>
+
+                    <!-- middleName Column -->
+                    <ng-container matColumnDef="middleName">
+                        <th mat-header-cell *matHeaderCellDef> Middle Name </th>
+                        <td mat-cell *matCellDef="let element"> {{element.middleName}} </td>
+                    </ng-container>
+
+                    <!-- lastName Column -->
+                    <ng-container matColumnDef="lastName">
+                        <th mat-header-cell *matHeaderCellDef> Last Name </th>
+                        <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+                    </ng-container>
+
+                    <!-- dateOfBirth Column -->
+                    <ng-container matColumnDef="dateOfBirth">
+                        <th mat-header-cell *matHeaderCellDef> Date Of Birth </th>
+                        <td mat-cell *matCellDef="let element"> {{element.dateOfBirth | date: 'dd-MMM-yyyy' }} </td>
+                    </ng-container>
+
+                    <!-- gender Column -->
+                    <ng-container matColumnDef="gender">
+                        <th mat-header-cell *matHeaderCellDef> Gender </th>
+                        <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+
+                <mat-paginator [length]="5" [pageSize]="5" [pageSizeOptions]="[3, 5, 10, 20]" [showFirstLastButtons]="true">
+                </mat-paginator>
+            </div>
+        </div>
+        <div class="row">&nbsp;&nbsp;</div>
+        <div class="row">
+            <div class="col-lg-3 col-sm-3 col-xs-12">
+                <button mat-raised-button color="primary" type="button" (click)="getSelectedPerson()">
+                    Save Selected Person
+                </button>
+            </div>
+        </div>
+    </mat-dialog-content>
+</form>

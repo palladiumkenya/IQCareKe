@@ -129,7 +129,7 @@ export class RegisterComponent implements OnInit {
             this.consentSms = consentSmsArray;
             this.contactCategory = contactCategoryArray;
             this.personIdentifiers = personIdentifiersArray['identifers'];
-            console.log(personIdentifiersArray['identifers']);
+            // console.log(personIdentifiersArray['identifers']);
         });
 
         this.route.params.subscribe(params => {
@@ -229,7 +229,6 @@ export class RegisterComponent implements OnInit {
     }
 
     getAge(dob: Date): any {
-        console.log(dob);
         const today = new Date();
 
         let age = today.getFullYear() - dob.getFullYear();
@@ -485,7 +484,6 @@ export class RegisterComponent implements OnInit {
     }
 
     onIdentifierTypeChange() {
-        console.log(`here`);
         if (this.formArray.value[0]['IdentifierType']) {
             this.formGroup.controls['formArray']['controls'][0]['controls']['IdentifierNumber'].enable({ onlySelf: false });
         } else {

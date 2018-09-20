@@ -32,6 +32,7 @@ import { ConsentSmsResolver } from './_services/consentsms.resolver';
 import { ContactCategoryResolver } from './_services/contactcategory.resolver';
 import { PersoncontactsComponent } from './person/personcontacts/personcontacts.component';
 import { PersonIdentifiersResolver } from './_services/personidentifiers.resolver';
+import { InlineSearchComponent } from './inline-search/inline-search.component';
 
 @NgModule({
     imports: [
@@ -52,7 +53,7 @@ import { PersonIdentifiersResolver } from './_services/personidentifiers.resolve
         MatSnackBarModule, MatStepperModule, MatTabsModule, MatToolbarModule, MatTooltipModule,
         SharedModule
     ],
-    declarations: [SearchComponent, RegisterComponent, ViewComponent, PersoncontactsComponent],
+    declarations: [SearchComponent, RegisterComponent, ViewComponent, PersoncontactsComponent, InlineSearchComponent],
     providers: [
         CountyResolver,
         CountyService,
@@ -68,7 +69,11 @@ import { PersonIdentifiersResolver } from './_services/personidentifiers.resolve
         PersonIdentifiersResolver
     ],
     entryComponents: [
-        PersoncontactsComponent
+        PersoncontactsComponent,
+        InlineSearchComponent
+    ],
+    exports: [
+        InlineSearchComponent
     ]
 })
 export class RecordsModule { }

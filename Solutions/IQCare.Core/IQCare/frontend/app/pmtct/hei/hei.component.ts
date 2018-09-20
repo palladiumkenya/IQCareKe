@@ -1,3 +1,4 @@
+import { HeiService } from './../_services/hei.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LookupItemView } from '../../shared/_models/LookupItemView';
@@ -10,6 +11,11 @@ import {LongDateFormatKey} from 'moment';
     styleUrls: ['./hei.component.css']
 })
 export class HeiComponent implements OnInit {
+    patientId: number;
+    personId: number;
+    serviceAreaId: number;
+    patientMasterVisitId: number;
+
     deliveryOptions: any[] = [];
     maternalhistoryOptions: any[] = [];
     hivtestingOptions: any[] = [];
@@ -31,26 +37,30 @@ export class HeiComponent implements OnInit {
     immunizationGivenOptions: LookupItemView[] = [];
     milestoneAssessedOptions: LookupItemView[] = [];
     milestoneStatusOptions: LookupItemView[] = [];
+    heiOutcomeOptions: LookupItemView[] = [];
 
     isLinear: boolean = true;
     deliveryMatFormGroup: FormArray;
     visitDetailsFormGroup: FormArray;
-    immunizationHistoryFormGroup: FormArray;
-    milestonesFormGroup: FormArray;
 
     infantFeedingFormGroup: FormGroup;
+    heiOutcomeFormGroup: FormGroup;
+    // nextAppointmentFormGroup: FormGroup;
 
-    constructor(private route: ActivatedRoute) {
+    constructor(private route: ActivatedRoute,
+        private heiService: HeiService) {
         this.deliveryMatFormGroup = new FormArray([]);
         this.visitDetailsFormGroup = new FormArray([]);
-        this.immunizationHistoryFormGroup = new FormArray([]);
-        this.milestonesFormGroup = new FormArray([]);
     }
 
     ngOnInit() {
         this.route.params.subscribe(
             (params) => {
                 console.log(params);
+                const { patientId, personId, serviceAreaId } = params;
+                this.patientId = patientId;
+                this.personId = personId;
+                this.serviceAreaId = serviceAreaId;
             }
         );
 
@@ -70,6 +80,8 @@ export class HeiComponent implements OnInit {
                 immunizationGivenOptions,
                 milestoneAssessedOptions,
                 milestoneStatusOptions
+                infantFeedingOptions,
+                heiOutcomeOptions
             } = res;
             console.log('test options');
             console.log(res);
@@ -87,6 +99,7 @@ export class HeiComponent implements OnInit {
             this.immunizationGivenOptions = immunizationGivenOptions['lookupItems'];
             this.milestoneAssessedOptions = milestoneAssessedOptions['lookupItems'];
             this.milestoneStatusOptions = milestoneStatusOptions['lookupItems'];
+            this.heiOutcomeOptions = heiOutcomeOptions['lookupItems'];
         });
 
         this.deliveryOptions.push({
@@ -119,6 +132,7 @@ export class HeiComponent implements OnInit {
         this.hivtestingOptions.push({
 
         });
+
     }
 
     onDeliveryNotify(formGroup: FormGroup): void {
@@ -136,12 +150,23 @@ export class HeiComponent implements OnInit {
         this.infantFeedingFormGroup = formGroup;
     }
 
-
     onMilestonesNotify(formGroup: FormGroup): void {
-        this.milestonesFormGroup.push(formGroup);
+        // this.milestonesFormGroup.push(formGroup);
     }
 
     onImmunizationHistory(formGroup: FormGroup): void {
-        this.immunizationHistoryFormGroup.push(formGroup);
+        // this.immunizationHistoryFormGroup.push(formGroup);
+    }
+
+    onCompleteEncounter() {
+        console.log(this.deliveryMatFormGroup.value);
+        console.log(this.visitDetailsFormGroup.value);
+
+        this.heiService.saveHieDelivery(this.patientId, this.patientMasterVisitId, this.deliveryMatFormGroup.value[0])
+            .subscribe(
+                (result) => {
+
+                }
+            );
     }
 }

@@ -1,7 +1,12 @@
-table {
-	width: 100%;
+.mat-form-field{
+    display: block;
 }
-  
+
+table {
+    width: 100%;
+}
+
+
 th.mat-sort-header-sorted {
 	color: black;
 }
@@ -31,7 +36,4 @@ th.mat-sort-header-sorted {
 .element-row:not(.expanded):hover {
     background: #f5f5f5;
 }
-
-.element-row.expanded {
-    border-bottom-color: transparent;
-}
+  
